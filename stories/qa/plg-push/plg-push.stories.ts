@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { PLGPushComponent } from '@lucca-front/ng/plg-push';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'plg-push-stories',

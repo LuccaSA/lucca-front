@@ -31,4 +31,8 @@
 		clear: 'Clear this field',
 		togglePasswordVisibility: 'Show password',
 	},
+	pl: {
+		clear: 'Wyczyść to pole',
+		togglePasswordVisibility: 'Wyświetl hasło',
+	},
 };

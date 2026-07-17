@@ -1,5 +1,5 @@
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 interface Story {}
 

@@ -363,6 +363,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				}
 				break;
 			default:
+				// Let the browser handle modifier chords like Ctrl/Cmd+V (paste) or Ctrl/Cmd+C (copy)
+				// instead of treating the chord's letter (e.g. the "v" of Ctrl+V) as typeahead input.
+				// AltGr (Ctrl+Alt on Windows) is excluded so accented/special characters still work.
+				if (($event.ctrlKey || $event.metaKey) && !$event.altKey) {
+					return;
+				}
 				// For any other key, forward it to the panel if it's open
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);

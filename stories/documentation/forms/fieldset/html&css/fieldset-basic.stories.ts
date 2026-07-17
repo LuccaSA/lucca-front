@@ -1,6 +1,6 @@
 import { FIELDSET_SIZE } from '@lucca-front/ng/forms';
-import { Meta, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface FieldsetBasicStory {
 	horizontal: boolean;

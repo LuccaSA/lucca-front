@@ -23,4 +23,7 @@
 	en: {
 		close: 'Close',
 	},
+	pl: {
+		close: 'Zamknij',
+	},
 };

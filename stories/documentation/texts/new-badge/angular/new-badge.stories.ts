@@ -1,5 +1,5 @@
 import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Texts/NewBadge/Angular/Basic',

@@ -1,7 +1,7 @@
 import { CLEAR_SIZE, ClearComponent } from '@lucca-front/ng/clear';
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Clear/Angular/Basic',
@@ -50,6 +50,9 @@ export const Template: StoryObj = {
 		},
 		hidden: {
 			description: 'Masque le bouton.',
+		},
+		onClear: {
+			description: 'Événement déclenché lors du clic sur le bouton.',
 		},
 	},
 	args: {

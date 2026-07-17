@@ -1,6 +1,8 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LU_BOX_TRANSLATIONS } from './box.translate';
 
 @Component({
 	selector: 'lu-box',
@@ -17,6 +19,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	},
 })
 export class BoxComponent {
+	readonly intl = input(...intlInputOptions(LU_BOX_TRANSLATIONS));
+
 	readonly toggle = input(false, { transform: booleanAttribute });
 
 	readonly neutral = input(false, { transform: booleanAttribute });

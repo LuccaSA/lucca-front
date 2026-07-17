@@ -1,9 +1,9 @@
-@let layoutfixed =
+@let layoutFixed =
 	{
-		layoutFixedAtMediaMinS: true,
+		layoutFixedAtMediaMinM: true,
 	};
 
-<table>
+<table class="demo-QAtable">
 	<tbody>
 		<tr>
 			<td></td>
@@ -17,28 +17,28 @@
 					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 						<tfoot class="dataTable-foot">
 							<tr class="dataTable-foot-row">
-								<td class="dataTable-foot-row-cell">Text</td>
-								<td class="dataTable-foot-row-cell">Text</td>
-								<td class="dataTable-foot-row-cell">Text</td>
+								<th class="dataTable-foot-row-cell">header</th>
+								<td class="dataTable-foot-row-cell">cell</td>
+								<td class="dataTable-foot-row-cell">cell</td>
 							</tr>
 						</tfoot>
 					</table>
@@ -64,12 +64,14 @@
 							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
+					</tbody>
+					<tfoot luDataTableFoot>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
-					</tbody>
+					</tfoot>
 				</lu-data-table>
 			</td>
 		</tr>
@@ -82,7 +84,7 @@
 							<tr class="dataTable-head-row">
 								<th class="dataTable-head-row-cell">
 									<button type="button" class="tableSortable button">
-										Label
+										header
 										<span class="tableSortable-arrows">
 											<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 											<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -91,7 +93,7 @@
 								</th>
 								<th class="dataTable-head-row-cell" aria-sort="ascending">
 									<button type="button" class="tableSortable button">
-										Label
+										header
 										<span class="tableSortable-arrows">
 											<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 											<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -100,7 +102,7 @@
 								</th>
 								<th class="dataTable-head-row-cell" aria-sort="descending">
 									<button type="button" class="tableSortable button">
-										Label
+										header
 										<span class="tableSortable-arrows">
 											<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 											<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -111,16 +113,23 @@
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
+						<tfoot class="dataTable-foot">
+							<tr class="dataTable-foot-row">
+								<th class="dataTable-foot-row-cell">header</th>
+								<td class="dataTable-foot-row-cell">cell</td>
+								<td class="dataTable-foot-row-cell">cell</td>
+							</tr>
+						</tfoot>
 					</table>
 				</div>
 			</td>
@@ -144,39 +153,48 @@
 							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
+					</tbody>
+					<tfoot luDataTableFoot>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
-					</tbody>
+					</tfoot>
 				</lu-data-table>
 			</td>
 		</tr>
 		<tr>
-			<td>Horizontal alignment</td>
+			<td>Horizontal Alignment</td>
 			<td>
 				<div class="dataTableWrapper">
 					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell mod-alignCenter">Label</th>
-								<th class="dataTable-head-row-cell mod-alignRight">Label</th>
+								<th class="dataTable-head-row-cell mod-alignLeft">header</th>
+								<th class="dataTable-head-row-cell mod-alignCenter">header</th>
+								<th class="dataTable-head-row-cell mod-alignRight">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell mod-alignCenter">Text</td>
-								<td class="dataTable-body-row-cell mod-alignRight">Text</td>
+								<th class="dataTable-body-row-cell mod-alignLeft">header</th>
+								<td class="dataTable-body-row-cell mod-alignCenter">cell</td>
+								<td class="dataTable-body-row-cell mod-alignRight">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell mod-alignCenter">Text</td>
-								<td class="dataTable-body-row-cell mod-alignRight">Text</td>
+								<th class="dataTable-body-row-cell mod-alignLeft">header</th>
+								<td class="dataTable-body-row-cell mod-alignCenter">cell</td>
+								<td class="dataTable-body-row-cell mod-alignRight">cell</td>
 							</tr>
 						</tbody>
+						<tfoot class="dataTable-foot">
+							<tr class="dataTable-foot-row">
+								<th class="dataTable-foot-row-cell mod-alignLeft">header</th>
+								<td class="dataTable-foot-row-cell mod-alignCenter">cell</td>
+								<td class="dataTable-foot-row-cell mod-alignRight">cell</td>
+							</tr>
+						</tfoot>
 					</table>
 				</div>
 			</td>
@@ -184,86 +202,186 @@
 				<lu-data-table>
 					<thead luDataTableHead>
 						<tr luDataTableRow>
-							<th luDataTableCell>header</th>
-							<th luDataTableCell>header</th>
+							<th luDataTableCell [align]="'left'">header</th>
+							<th luDataTableCell [align]="'center'">header</th>
 							<th luDataTableCell [align]="'end'">header</th>
 						</tr>
 					</thead>
 					<tbody luDataTableBody>
 						<tr luDataTableRow>
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
+							<th luDataTableCell [align]="'left'">header</th>
+							<td luDataTableCell [align]="'center'">cell</td>
 							<td luDataTableCell [align]="'end'">cell</td>
 						</tr>
 						<tr luDataTableRow>
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="'end'">cell</td>
-						</tr>
-						<tr luDataTableRow>
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
+							<th luDataTableCell [align]="'left'">header</th>
+							<td luDataTableCell [align]="'center'">cell</td>
 							<td luDataTableCell [align]="'end'">cell</td>
 						</tr>
 					</tbody>
+					<tfoot luDataTableFoot>
+						<tr luDataTableRow>
+							<th luDataTableCell [align]="'left'">header</th>
+							<td luDataTableCell [align]="'center'">cell</td>
+							<td luDataTableCell [align]="'end'">cell</td>
+						</tr>
+					</tfoot>
 				</lu-data-table>
 			</td>
 		</tr>
 		<tr>
-			<td>Vertical alignment</td>
+			<td>Vertical Alignment</td>
 			<td>
 				<div class="dataTableWrapper">
-					<table class="dataTable mod-alignTop">
+					<table class="dataTable mod-verticalAlignTop">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text<br />Text</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text<br />Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell<br />cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
+						<tfoot class="dataTable-foot">
+							<tr class="dataTable-foot-row">
+								<th class="dataTable-foot-row-cell">header</th>
+								<td class="dataTable-foot-row-cell">cell<br />cell</td>
+								<td class="dataTable-foot-row-cell">cell</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div class="dataTableWrapper">
+					<table class="dataTable mod-verticalAlignMiddle">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell<br />cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+						</tbody>
+						<tfoot class="dataTable-foot">
+							<tr class="dataTable-foot-row">
+								<th class="dataTable-foot-row-cell">header</th>
+								<td class="dataTable-foot-row-cell">cell<br />cell</td>
+								<td class="dataTable-foot-row-cell">cell</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div class="dataTableWrapper">
+					<table class="dataTable mod-verticalAlignBottom">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell<br />cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+						</tbody>
+						<tfoot class="dataTable-foot">
+							<tr class="dataTable-foot-row">
+								<th class="dataTable-foot-row-cell">header</th>
+								<td class="dataTable-foot-row-cell">cell<br />cell</td>
+								<td class="dataTable-foot-row-cell">cell</td>
+							</tr>
+						</tfoot>
 					</table>
 				</div>
 			</td>
 			<td>
-				<lu-data-table>
+				<lu-data-table verticalAlign="top">
 					<thead luDataTableHead>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
-							<th luDataTableCell [align]="'start'">header</th>
+							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
 					<tbody luDataTableBody>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell<br />cell</td>
 							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="'start'">cell</td>
-						</tr>
-						<tr luDataTableRow>
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="'start'">cell</td>
-						</tr>
-						<tr luDataTableRow>
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="'start'">cell</td>
 						</tr>
 					</tbody>
+					<tfoot luDataTableFoot>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell<br />cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tfoot>
+				</lu-data-table>
+				<lu-data-table verticalAlign="middle">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell<br />cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+					<tfoot luDataTableFoot>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell<br />cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tfoot>
+				</lu-data-table>
+				<lu-data-table verticalAlign="bottom">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell<br />cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+					<tfoot luDataTableFoot>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell<br />cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tfoot>
 				</lu-data-table>
 			</td>
 		</tr>
 		<tr>
-			<td>SelectableLines</td>
+			<td>Selectable Lines</td>
 			<td>
 				<form action="#">
 					<div class="dataTableWrapper">
@@ -275,11 +393,11 @@
 											<input type="checkbox" class="checkboxField-input" id="CBall" />
 											<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 										</span>
-										<label class="pr-u-mask" for="CBall">Label</label>
+										<label class="pr-u-mask" for="CBall">Sélectionner toutes les lignes</label>
 									</th>
-									<th class="dataTable-head-row-cell">Label</th>
-									<th class="dataTable-head-row-cell">Label</th>
-									<th class="dataTable-head-row-cell">Label</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
 								</tr>
 							</thead>
 							<tbody class="dataTable-body">
@@ -289,11 +407,11 @@
 											<input type="checkbox" class="checkboxField-input" id="CB1" checked />
 											<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 										</span>
-										<label class="pr-u-mask" for="CB1">Label</label>
+										<label class="pr-u-mask" for="CB1">Sélectionner cette ligne</label>
 									</td>
-									<td class="dataTable-body-row-cell">Text</td>
-									<td class="dataTable-body-row-cell">Text</td>
-									<td class="dataTable-body-row-cell">Text</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 								<tr class="dataTable-body-row mod-selectable">
 									<td class="dataTable-body-row-cell">
@@ -301,11 +419,11 @@
 											<input type="checkbox" class="checkboxField-input" id="CB2" />
 											<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 										</span>
-										<label class="pr-u-mask" for="CB2">Label</label>
+										<label class="pr-u-mask" for="CB2">Sélectionner cette ligne</label>
 									</td>
-									<td class="dataTable-body-row-cell">Text</td>
-									<td class="dataTable-body-row-cell">Text</td>
-									<td class="dataTable-body-row-cell">Text</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 							</tbody>
 						</table>
@@ -318,15 +436,18 @@
 						<tr luDataTableRow selectedLabel="Sélectionner toutes les lignes">
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
 					<tbody luDataTableBody>
-						<tr luDataTableRow selectedLabel="Sélectionner cette ligne">
+						<tr luDataTableRow selectedLabel="Sélectionner cette ligne" [selected]="true">
 							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
 						<tr luDataTableRow selectedLabel="Sélectionner cette ligne">
 							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
 					</tbody>
@@ -341,20 +462,20 @@
 						<table class="dataTable">
 							<thead class="dataTable-head">
 								<tr class="dataTable-head-row">
-									<th class="dataTable-head-row-cell">Label</th>
-									<th class="dataTable-head-row-cell mod-alignRight">Label</th>
-									<th class="dataTable-head-row-cell mod-alignRight">Label</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
 								</tr>
 							</thead>
 							<tbody class="dataTable-body">
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Text</td>
+									<th class="dataTable-body-row-cell">header</th>
 									<td class="dataTable-body-row-cell mod-alignRight mod-editable">
 										<div class="form-field">
 											<label class="formLabel pr-u-mask" id="IDlabel0" for="ID0">Label</label>
-											<div class="textField mod-valueAlignRight">
+											<div class="textField">
 												<div class="textField-input">
-													<input value="Label" type="text" id="ID0" class="textField-input-value" aria-labelledby="IDlabel0" />
+													<input type="text" id="ID0" class="textField-input-value" aria-labelledby="IDlabel0" />
 												</div>
 											</div>
 										</div>
@@ -362,25 +483,22 @@
 									<td class="dataTable-body-row-cell mod-alignRight mod-editable">
 										<div class="form-field">
 											<label class="formLabel pr-u-mask" id="IDlabel1" for="ID1">Label</label>
-											<div class="textField mod-valueAlignRight">
+											<div class="textField">
 												<div class="textField-input">
-													<input value="Label" type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1 IDsuffix1" />
+													<input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1 IDsuffix1" />
 												</div>
-												<span class="textField-suffix" id="IDsuffix1">
-													<span class="textField-label-suffix-item">€</span>
-												</span>
 											</div>
 										</div>
 									</td>
 								</tr>
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Text</td>
+									<th class="dataTable-body-row-cell">header</th>
 									<td class="dataTable-body-row-cell mod-alignRight mod-editable">
 										<div class="form-field">
 											<label class="formLabel pr-u-mask" id="IDlabel2" for="ID2">Label</label>
-											<div class="textField mod-valueAlignRight">
+											<div class="textField">
 												<div class="textField-input">
-													<input value="Label" type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" />
+													<input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" />
 												</div>
 											</div>
 										</div>
@@ -388,13 +506,10 @@
 									<td class="dataTable-body-row-cell mod-alignRight mod-editable">
 										<div class="form-field">
 											<label class="formLabel pr-u-mask" id="IDlabel3" for="ID3">Label</label>
-											<div class="textField mod-valueAlignRight">
+											<div class="textField">
 												<div class="textField-input">
-													<input value="Label" type="text" id="ID3" class="textField-input-value" aria-labelledby="IDlabel3 IDsuffix3" />
+													<input type="text" id="ID3" class="textField-input-value" aria-labelledby="IDlabel3 IDsuffix3" />
 												</div>
-												<span class="textField-suffix" id="IDsuffix3">
-													<span class="textField-label-suffix-item">€</span>
-												</span>
 											</div>
 										</div>
 									</td>
@@ -410,15 +525,135 @@
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
 					<tbody luDataTableBody>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
+							<td luDataTableCell editable>
+								<lu-form-field label="Label" hiddenLabel>
+									<lu-text-input type="text" [(ngModel)]="example" />
+								</lu-form-field>
+							</td>
+							<td luDataTableCell editable>
+								<lu-form-field label="Label" hiddenLabel>
+									<lu-text-input type="text" [(ngModel)]="example" />
+								</lu-form-field>
+							</td>
 						</tr>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
+							<td luDataTableCell editable>
+								<lu-form-field label="Label" hiddenLabel>
+									<lu-text-input type="text" [(ngModel)]="example" />
+								</lu-form-field>
+							</td>
+							<td luDataTableCell editable>
+								<lu-form-field label="Label" hiddenLabel>
+									<lu-text-input type="text" [(ngModel)]="example" />
+								</lu-form-field>
+							</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
+		</tr>
+		<tr>
+			<td>Editable and border</td>
+			<td>
+				<form action="#">
+					<div class="dataTableWrapper">
+						<table class="dataTable mod-cellBorder">
+							<thead class="dataTable-head">
+								<tr class="dataTable-head-row">
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
+								</tr>
+							</thead>
+							<tbody class="dataTable-body">
+								<tr class="dataTable-body-row">
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell mod-alignRight mod-editable">
+										<div class="form-field">
+											<label class="formLabel pr-u-mask" id="IDlabel0" for="ID0">Label</label>
+											<div class="textField">
+												<div class="textField-input">
+													<input type="text" id="ID0" class="textField-input-value" aria-labelledby="IDlabel0" />
+												</div>
+											</div>
+										</div>
+									</td>
+									<td class="dataTable-body-row-cell mod-alignRight mod-editable">
+										<div class="form-field">
+											<label class="formLabel pr-u-mask" id="IDlabel1" for="ID1">Label</label>
+											<div class="textField">
+												<div class="textField-input">
+													<input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1 IDsuffix1" />
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr class="dataTable-body-row">
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell mod-alignRight mod-editable">
+										<div class="form-field">
+											<label class="formLabel pr-u-mask" id="IDlabel2" for="ID2">Label</label>
+											<div class="textField">
+												<div class="textField-input">
+													<input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" />
+												</div>
+											</div>
+										</div>
+									</td>
+									<td class="dataTable-body-row-cell mod-alignRight mod-editable">
+										<div class="form-field">
+											<label class="formLabel pr-u-mask" id="IDlabel3" for="ID3">Label</label>
+											<div class="textField">
+												<div class="textField-input">
+													<input type="text" id="ID3" class="textField-input-value" aria-labelledby="IDlabel3 IDsuffix3" />
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</form>
+			</td>
+			<td>
+				<lu-data-table cellBorder>
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell editable>
+								<lu-form-field label="Label" hiddenLabel>
+									<lu-text-input type="text" [(ngModel)]="example" />
+								</lu-form-field>
+							</td>
+							<td luDataTableCell editable>
+								<lu-form-field label="Label" hiddenLabel>
+									<lu-text-input type="text" [(ngModel)]="example" />
+								</lu-form-field>
+							</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell editable>
+								<lu-form-field label="Label" hiddenLabel>
+									<lu-text-input type="text" [(ngModel)]="example" />
+								</lu-form-field>
+							</td>
 							<td luDataTableCell editable>
 								<lu-form-field label="Label" hiddenLabel>
 									<lu-text-input type="text" [(ngModel)]="example" />
@@ -436,9 +671,9 @@
 					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
@@ -449,11 +684,11 @@
 											<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
 											><span class="pr-u-mask">Afficher 2 lignes supplémentaires</span>
 										</button>
-										Text
+										cell
 									</div>
 								</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
 								<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 2'">
@@ -462,16 +697,16 @@
 											<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
 											><span class="pr-u-mask">Afficher 1 ligne supplémentaire</span>
 										</button>
-										Text
+										cell
 									</div>
 								</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row is-collapsed">
-								<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 2'">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 2'">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 						<tbody class="dataTable-body">
@@ -482,16 +717,16 @@
 											<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
 											><span class="pr-u-mask">Afficher 1 ligne supplémentaire</span>
 										</button>
-										Text
+										cell
 									</div>
 								</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 1'">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 1'">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 					</table>
@@ -506,9 +741,9 @@
 					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
@@ -519,20 +754,20 @@
 											<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
 											><span class="pr-u-mask">Afficher 2 lignes supplémentaires</span>
 										</button>
-										<span class="dataTable-body-row-cell-expand-label">Text</span>
+										<span class="dataTable-body-row-cell-expand-label">group</span>
 										<span class="numericBadge">7</span>
 									</div>
 								</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 						<tbody class="dataTable-body">
@@ -543,20 +778,20 @@
 											<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
 											><span class="pr-u-mask">Afficher 2 lignes supplémentaires</span>
 										</button>
-										<span class="dataTable-body-row-cell-expand-label">Text</span>
+										<span class="dataTable-body-row-cell-expand-label">group</span>
 										<span class="numericBadge">7</span>
 									</div>
 								</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 					</table>
@@ -568,22 +803,37 @@
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
-					<tbody luDataTableBody groupButtonAlt="Afficher X lignes supplémentaires" [group]="samplePortalContent">
+					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires" [group]="samplePortalContent">
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires" expanded [group]="samplePortalContent">
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
 					</tbody>
 				</lu-data-table>
 				<ng-template #samplePortalContent>
-					Group
-					<lu-numeric-badge [value]="2" />
+					group
+					<lu-numeric-badge [value]="7" />
 				</ng-template>
 			</td>
 		</tr>
@@ -594,28 +844,28 @@
 					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 						<tfoot class="dataTable-foot">
 							<tr class="dataTable-foot-row">
-								<th class="dataTable-foot-row-cell">Text</th>
-								<th class="dataTable-foot-row-cell">Text</th>
-								<th class="dataTable-foot-row-cell">Text</th>
+								<th class="dataTable-foot-row-cell">header</th>
+								<th class="dataTable-foot-row-cell">cell</th>
+								<th class="dataTable-foot-row-cell">cell</th>
 							</tr>
 						</tfoot>
 					</table>
@@ -627,12 +877,145 @@
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
 					<tbody luDataTableBody>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+					<tfoot luDataTableFoot>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tfoot>
+				</lu-data-table>
+			</td>
+		</tr>
+		<tr>
+			<td>Cell Border</td>
+			<td>
+				<div class="dataTableWrapper">
+					<table class="dataTable mod-cellBorder">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell" rowspan="2">header</th>
+								<th class="dataTable-head-row-cell" colspan="2">header</th>
+							</tr>
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell" rowspan="2">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="dataTableWrapper" [attr.style]="'block-size: 10rem'">
+					<table class="dataTable mod-cellBorder mod-stickyHeader">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell" rowspan="2">header</th>
+								<th class="dataTable-head-row-cell" colspan="2">header</th>
+							</tr>
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell" rowspan="2">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</td>
+			<td>
+				<lu-data-table cellBorder>
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell rowspan="2">header</th>
+							<th luDataTableCell colspan="2">header</th>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell rowspan="2">cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+				<lu-data-table cellBorder [attr.style]="'block-size: 10rem'">
+					<thead luDataTableHead sticky>
+						<tr luDataTableRow>
+							<th luDataTableCell rowspan="2">header</th>
+							<th luDataTableCell colspan="2">header</th>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell rowspan="2">cell</td>
 						</tr>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
@@ -643,94 +1026,21 @@
 			</td>
 		</tr>
 		<tr>
-			<td>CellBorder</td>
-			<td>
-				<div class="dataTableWrapper">
-					<table class="dataTable mod-cellBorder">
-						<thead class="dataTable-head">
-							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell" rowspan="2">Label</th>
-								<th class="dataTable-head-row-cell" colspan="2">Label</th>
-							</tr>
-							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-							</tr>
-						</thead>
-						<tbody class="dataTable-body">
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell" rowspan="2">Text</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="dataTableWrapper" style="block-size: 10rem">
-					<table class="dataTable mod-cellBorder mod-stickyHeader">
-						<thead class="dataTable-head">
-							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell" rowspan="2">Label</th>
-								<th class="dataTable-head-row-cell" colspan="2">Label</th>
-							</tr>
-							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-							</tr>
-						</thead>
-						<tbody class="dataTable-body">
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell" rowspan="2">Text</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Text</td>
-								<td class="dataTable-body-row-cell">Text</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</td>
-			<td></td>
-		</tr>
-		<tr>
 			<td>Actions</td>
 			<td>
 				<div class="dataTableWrapper">
 					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label<br />Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell mod-actions">
-									<button class="button" type="button">
-										<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="pr-u-mask">Edit</span>
-									</button>
-									<button type="button" class="button mod-critical">
-										<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="pr-u-mask">Delete</span>
-									</button>
-								</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 								<td class="dataTable-body-row-cell mod-actions">
 									<button type="button" class="button">
 										<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="pr-u-mask">Edit</span>
@@ -741,8 +1051,8 @@
 								</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 								<td class="dataTable-body-row-cell mod-actions">
 									<button type="button" class="button">
 										<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="pr-u-mask">Edit</span>
@@ -762,11 +1072,13 @@
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
 					<tbody luDataTableBody>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
 							<td luDataTableCell actions>
 								<button type="button" luButton>
 									<lu-icon icon="officePen" alt="Edit" />
@@ -779,25 +1091,32 @@
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
+							<td luDataTableCell actions>
+								<button type="button" luButton>
+									<lu-icon icon="officePen" alt="Edit" />
+								</button>
+								<button type="button" luButton>
+									<lu-icon icon="trashDelete" alt="Delete" />
+								</button>
+							</td>
 						</tr>
 					</tbody>
 				</lu-data-table>
 			</td>
 		</tr>
 		<tr>
-			<td>VariousContents</td>
+			<td>Various Contents</td>
 			<td>
 				<div class="dataTableWrapper">
 					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
-							<tr class="dataTable-body-row"></tr>
 							<tr class="dataTable-body-row">
 								<td class="dataTable-body-row-cell"><span class="statusBadge">Status</span></td>
 								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
@@ -817,21 +1136,221 @@
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
 					<tbody luDataTableBody>
 						<tr luDataTableRow>
 							<th luDataTableCell><span class="statusBadge">Status</span></th>
 							<td luDataTableCell>
+								<span class="tag">Tag</span>
+							</td>
+							<td luDataTableCell>
 								<span class="avatar mod-XS">
 									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
 								</span>
 							</td>
 						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
+		</tr>
+		<tr>
+			<td>Various Contents and<br />Vertical Alignment</td>
+			<td>
+				<div class="dataTableWrapper">
+					<table class="dataTable mod-verticalAlignTop">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<td class="dataTable-body-row-cell">header<br />header</td>
+								<td class="dataTable-body-row-cell"><span class="statusBadge">Status</span></td>
+								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
+								<td class="dataTable-body-row-cell">
+									<span class="avatar mod-XS">
+										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="dataTableWrapper">
+					<table class="dataTable mod-verticalAlignMiddle">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<td class="dataTable-body-row-cell">header<br />header</td>
+								<td class="dataTable-body-row-cell"><span class="statusBadge">Status</span></td>
+								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
+								<td class="dataTable-body-row-cell">
+									<span class="avatar mod-XS">
+										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="dataTableWrapper">
+					<table class="dataTable mod-verticalAlignBottom">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<td class="dataTable-body-row-cell">header<br />header</td>
+								<td class="dataTable-body-row-cell"><span class="statusBadge">Status</span></td>
+								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
+								<td class="dataTable-body-row-cell">
+									<span class="avatar mod-XS">
+										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</td>
+			<td>
+				<lu-data-table verticalAlign="top">
+					<thead luDataTableHead>
 						<tr luDataTableRow>
-							<th luDataTableCell><span class="statusBadge">Status</span></th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header<br />header</th>
+							<td luDataTableCell><span class="statusBadge">Status</span></td>
 							<td luDataTableCell>
 								<span class="tag">Tag</span>
+							</td>
+							<td luDataTableCell>
+								<span class="avatar mod-XS">
+									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+				<lu-data-table verticalAlign="middle">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header<br />header</th>
+							<td luDataTableCell><span class="statusBadge">Status</span></td>
+							<td luDataTableCell>
+								<span class="tag">Tag</span>
+							</td>
+							<td luDataTableCell>
+								<span class="avatar mod-XS">
+									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+				<lu-data-table verticalAlign="bottom">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header<br />header</th>
+							<td luDataTableCell><span class="statusBadge">Status</span></td>
+							<td luDataTableCell>
+								<span class="tag">Tag</span>
+							</td>
+							<td luDataTableCell>
+								<span class="avatar mod-XS">
+									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
+		</tr>
+		<tr>
+			<td>Various Contents and<br />Horizontal Alignment</td>
+			<td>
+				<div class="dataTableWrapper">
+					<table class="dataTable">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell mod-alignStart">header</th>
+								<th class="dataTable-head-row-cell mod-alignCenter">header</th>
+								<th class="dataTable-head-row-cell mod-alignEnd">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<td class="dataTable-body-row-cell mod-alignStart"><span class="statusBadge">Status</span></td>
+								<td class="dataTable-body-row-cell mod-alignCenter"><span class="tag">Tag</span></td>
+								<td class="dataTable-body-row-cell mod-alignEnd">
+									<span class="avatar mod-XS">
+										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</td>
+			<td>
+				<lu-data-table>
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell [align]="'start'">header</th>
+							<th luDataTableCell [align]="'center'">header</th>
+							<th luDataTableCell [align]="'end'">header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<td luDataTableCell [align]="'start'"><span class="statusBadge">Status</span></td>
+							<td luDataTableCell [align]="'center'">
+								<span class="tag">Tag</span>
+							</td>
+							<td luDataTableCell [align]="'end'">
+								<span class="avatar mod-XS">
+									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+								</span>
 							</td>
 						</tr>
 					</tbody>
@@ -846,21 +1365,21 @@
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
 								<th class="dataTable-head-row-cell mod-draggable" aria-hidden="true"></th>
-								<th class="dataTable-head-row-cell">Sortable column</th>
-								<th class="dataTable-head-row-cell">Sortable column</th>
-								<th class="dataTable-head-row-cell">Sortable column</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
-							<tr class="dataTable-body-row mod-draggable cdk-drag-placeholder">
-								<td class="dataTable-body-row-cell" aria-hidden="true">
+							<tr class="dataTable-body-row mod-draggable">
+								<td class="dataTable-body-row-cell">
 									<span class="button dataTable-body-row-cell-drag">
 										<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
 									</span>
 								</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row mod-draggable">
 								<td class="dataTable-body-row-cell" aria-hidden="true">
@@ -868,9 +1387,9 @@
 										<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
 									</span>
 								</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row mod-draggable">
 								<td class="dataTable-body-row-cell" aria-hidden="true">
@@ -878,70 +1397,98 @@
 										<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
 									</span>
 								</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<tr class="dataTable-body-row mod-draggable cdk-drag-preview" aria-hidden="true" style="inline-size: 937px; block-size: 44px">
-					<td class="dataTable-body-row-cell">
-						<span class="button dataTable-body-row-cell-drag">
-							<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
-						</span>
-					</td>
-					<td class="dataTable-body-row-cell">Table cell</td>
-					<td class="dataTable-body-row-cell">Table cell</td>
-					<td class="dataTable-body-row-cell">Table cell</td>
-				</tr>
 			</td>
 			<td>
-				<!-- TODO add when draggable merged in dataTable -->
+				<lu-data-table drag>
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody cdkDropList (cdkDropListDropped)="drop($event)">
+						<tr luDataTableRow draggable cdkDrag>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow draggable cdkDrag>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow draggable cdkDrag>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
 			</td>
 		</tr>
 		<tr>
-			<td>Fixedcolumns</td>
+			<td>Fixed Columns</td>
 			<td>
 				<div class="dataTableWrapper">
 					<table class="dataTable mod-layoutFixed">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 10rem'">Fixed 8rem column</th>
-								<th class="dataTable-head-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 12rem'">Fixed 12rem column</th>
-								<th class="dataTable-head-row-cell">Label</th>
+								<th class="dataTable-head-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 8rem'">header</th>
+								<th class="dataTable-head-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 4rem'">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</td>
 			<td>
-				<lu-data-table>
+				<lu-data-table layoutFixed>
 					<thead luDataTableHead>
 						<tr luDataTableRow>
-							<th luDataTableCell fixedWidth="10rem">header header header</th>
-							<th luDataTableCell fixedWidth="12rem">header</th>
+							<th luDataTableCell fixedWidth="8rem">header</th>
+							<th luDataTableCell fixedWidth="4rem">header</th>
+							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
 					<tbody luDataTableBody>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
 						</tr>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
 					</tbody>
@@ -949,37 +1496,43 @@
 			</td>
 		</tr>
 		<tr>
-			<td>FixedColumnsResp</td>
+			<td>Fixed Columns Responsive</td>
 			<td>
 				<div class="dataTableWrapper">
 					<table class="dataTable mod-layoutFixedAtMediaMinM">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 10rem'">Fixed 10rem column</th>
-								<th class="dataTable-head-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 12rem'">Fixed 12rem column</th>
-								<th class="dataTable-head-row-cell">Label</th>
+								<th class="dataTable-head-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 8rem'">header</th>
+								<th class="dataTable-head-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 4rem'">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
-								<td class="dataTable-body-row-cell">Table cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</td>
 			<td>
-				<lu-data-table [responsive]="layoutfixed">
+				<lu-data-table [responsive]="layoutFixed">
 					<thead luDataTableHead>
 						<tr luDataTableRow>
-							<th luDataTableCell>header header header</th>
+							<th luDataTableCell fixedWidth="8rem">header</th>
+							<th luDataTableCell fixedWidth="4rem">header</th>
 							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
@@ -987,9 +1540,16 @@
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
 						</tr>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
 					</tbody>
@@ -997,46 +1557,42 @@
 			</td>
 		</tr>
 		<tr>
-			<td>StickyHeader</td>
+			<td>Sticky Header</td>
 			<td>
-				<div class="dataTableWrapper" style="block-size: 10rem">
+				<div class="dataTableWrapper" [attr.style]="'block-size: 8rem'">
 					<table class="dataTable mod-stickyHeader">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</td>
 			<td>
-				<lu-data-table>
+				<lu-data-table [attr.style]="'block-size: 8rem'">
 					<thead luDataTableHead sticky>
 						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
 						</tr>
@@ -1045,9 +1601,16 @@
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
 						</tr>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
 							<td luDataTableCell>cell</td>
 						</tr>
 					</tbody>
@@ -1056,11 +1619,59 @@
 		</tr>
 		<tr>
 			<td>Pagination</td>
-			<td></td>
+			<td>
+				<div class="dataTableWrapper">
+					<table class="dataTable">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="dataTableWrapper-pagination">
+						<nav role="navigation" class="pagination">
+							<div class="pagination-count">
+								<span class="pr-u-mask">Results from 1 to 20 out of 27</span>
+								<span aria-hidden="true">1 – 20 out of 27</span>
+							</div>
+							<div class="pagination-scrolling">
+								<button type="button" class="button mod-S mod-onlyIcon mod-iconOnLeft mod-ghost" disabled>
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span>
+									<span class="pr-u-mask">Previous</span>
+								</button>
+								<button type="button" class="button mod-S mod-onlyIcon mod-iconOnLeft mod-ghost">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span>
+									<span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</td>
 			<td>
 				<lu-data-table>
 					<thead luDataTableHead>
 						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
 						</tr>
@@ -1069,10 +1680,17 @@
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
 						</tr>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
 						</tr>
 					</tbody>
 					<lu-pagination dataTablePagination from="1" to="20" itemsCount="27" isFirstPage />
@@ -1080,621 +1698,506 @@
 			</td>
 		</tr>
 		<tr>
-			<td>FirstStickyCol</td>
+			<td>First Sticky Column</td>
 			<td>
-				<div class="dataTableWrapper" style="inline-size: 30rem">
+				<div class="dataTableWrapper" [attr.style]="'inline-size: 12rem'">
 					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
+								<th class="dataTable-head-row-cell mod-stickyColumn">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<!-- First and last sticky column with sticky header -->
-				<div class="dataTableWrapper" style="inline-size: 30rem; height: 10rem">
-					<table class="dataTable mod-stickyHeader">
-						<thead class="dataTable-head">
-							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
-							</tr>
-						</thead>
-						<tbody class="dataTable-body">
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-data-table stickyColsStart="1" [attr.style]="'inline-size: 12rem'">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
 		</tr>
 		<tr>
-			<td>MultipleStickyCol</td>
+			<td>First and Last Sticky Column</td>
 			<td>
-				<div class="dataTableWrapper" style="inline-size: 30rem">
-					<table class="dataTable mod-layoutFixed" [attr.style]="'--dataTable-layoutFixed-width: 5.5rem'">
+				<div class="dataTableWrapper" [attr.style]="'inline-size: 12rem'">
+					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
-								<th class="dataTable-head-row-cell mod-stickyColumn" style="left: 5.5rem">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell">Head cell</th>
-								<th class="dataTable-head-row-cell mod-stickyColumn" style="right: 5.5rem">Head cell</th>
-								<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
+								<th class="dataTable-head-row-cell mod-stickyColumn">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell mod-stickyColumn">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn" style="left: 5.5rem">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn" style="right: 5.5rem">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn" style="left: 5.5rem">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn" style="right: 5.5rem">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn">cell</td>
 							</tr>
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn" style="left: 5.5rem">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn" style="right: 5.5rem">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn" style="left: 5.5rem">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn" style="right: 5.5rem">Body cell</td>
-								<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn">cell</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-data-table stickyColsStart="1" stickyColsEnd="1" [attr.style]="'inline-size: 12rem'">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
 		</tr>
 		<tr>
-			<td>VerticalOverflow</td>
+			<td>Multiple Sticky Column</td>
 			<td>
-				<div class="dataTableWrapper" style="block-size: 10rem">
+				<div class="dataTableWrapper" [attr.style]="'inline-size: 12rem'">
+					<table class="dataTable mod-layoutFixed">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell mod-stickyColumn" [attr.style]="'--dataTable-layoutFixed-width: 5rem'">header</th>
+								<th
+									class="dataTable-head-row-cell mod-stickyColumn"
+									[attr.style]="'--dataTable-layoutFixed-width: 5rem; inset-inline-start: 5rem'"
+								>
+									header
+								</th>
+								<th class="dataTable-head-row-cell" [attr.style]="'--dataTable-layoutFixed-width: 5rem'">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn" [attr.style]="'inset-inline-start: 5rem'">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn" [attr.style]="'inset-inline-start: 5rem'">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+								<td class="dataTable-body-row-cell mod-stickyColumn" [attr.style]="'inset-inline-start: 5rem'">cell</td>
+								<td class="dataTable-body-row-cell">cell</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</td>
+			<td>
+				<lu-data-table layoutFixed stickyColsStart="2" [attr.style]="'inline-size: 12rem'">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell fixedWidth="5rem">header</th>
+							<th luDataTableCell fixedWidth="5rem">header</th>
+							<th luDataTableCell fixedWidth="5rem">header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
+		</tr>
+		<tr>
+			<td>Vertical overflow</td>
+			<td>
+				<div class="dataTableWrapper" [attr.style]="'block-size: 7rem'">
 					<div class="dataTableShadows">
-						<table class="dataTable mod-rowsOverflow -is-firstRowVisible -is-lastRowVisible">
+						<table class="dataTable mod-rowsOverflow">
 							<thead class="dataTable-head">
 								<tr class="dataTable-head-row">
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
 								</tr>
 							</thead>
 							<tbody class="dataTable-body">
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-								</tr>
-								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-data-table [attr.style]="'block-size: 7rem'">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
 		</tr>
 		<tr>
-			<td>HorizontalOverflow</td>
+			<td>Horizontal Overflow</td>
 			<td>
-				<div class="dataTableWrapper" style="inline-size: 30rem">
+				<div class="dataTableWrapper" [attr.style]="'inline-size: 12rem'">
 					<div class="dataTableShadows">
-						<table class="dataTable mod-columnsOverflow -is-firstColumnVisible -is-lastColumnVisible">
+						<table class="dataTable mod-columnsOverflow">
 							<thead class="dataTable-head">
 								<tr class="dataTable-head-row">
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
 								</tr>
 							</thead>
 							<tbody class="dataTable-body">
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-								</tr>
-								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-								</tr>
-								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-data-table [attr.style]="'inline-size: 12rem'">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
 		</tr>
 		<tr>
 			<td>Overflow</td>
 			<td>
-				<div class="dataTableWrapper" style="inline-size: 30rem; height: 10rem">
+				<div class="dataTableWrapper" [attr.style]="'inline-size: 12rem; block-size: 7rem'">
 					<div class="dataTableShadows">
-						<table
-							class="dataTable mod-columnsOverflow mod-rowsOverflow -is-firstColumnVisible -is-firstRowVisible -is-lastColumnVisible -is-lastRowVisible"
-						>
+						<table class="dataTable">
 							<thead class="dataTable-head">
 								<tr class="dataTable-head-row">
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell">header</th>
 								</tr>
 							</thead>
 							<tbody class="dataTable-body">
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-								</tr>
-								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-								</tr>
-								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
+									<th class="dataTable-body-row-cell">header</th>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell">cell</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>OverflowSticky</td>
 			<td>
-				<div class="dataTableWrapper" style="inline-size: 30rem; height: 15rem">
+				<lu-data-table [attr.style]="'inline-size: 12rem; block-size: 7rem'">
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
+		</tr>
+		<tr>
+			<td>Overflow Sticky</td>
+			<td>
+				<div class="dataTableWrapper" [attr.style]="'inline-size: 12rem; block-size: 7rem'">
 					<div class="dataTableShadows">
-						<table
-							class="dataTable mod-columnsOverflow mod-cellBorder mod-rowsOverflow mod-stickyHeader -is-firstColumnVisible -is-firstRowVisible -is-lastColumnVisible -is-lastRowVisible"
-						>
-							<thead class="dataTable-head">
+						<table class="dataTable is-firstColumnVisible is-firstRowVisible is-lastColumnVisible">
+							<thead class="dataTable-head mod-sticky">
 								<tr class="dataTable-head-row">
-									<th class="dataTable-head-row-cell mod-stickyColumn" rowspan="2">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell" colspan="2">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
-								</tr>
-								<tr class="dataTable-head-row">
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell">Head cell</th>
-									<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
+									<th class="dataTable-head-row-cell mod-stickyColumn">header</th>
+									<th class="dataTable-head-row-cell">header</th>
+									<th class="dataTable-head-row-cell mod-stickyColumn">header</th>
 								</tr>
 							</thead>
 							<tbody class="dataTable-body">
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+									<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell mod-stickyColumn">cell</td>
 								</tr>
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+									<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell mod-stickyColumn">cell</td>
 								</tr>
 								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								</tr>
-								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-								</tr>
-								<tr class="dataTable-body-row">
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell">Body cell</td>
-									<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+									<td class="dataTable-body-row-cell mod-stickyColumn">header</td>
+									<td class="dataTable-body-row-cell">cell</td>
+									<td class="dataTable-body-row-cell mod-stickyColumn">cell</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-data-table stickyColsStart="1" stickyColsEnd="1" [attr.style]="'inline-size: 12rem; block-size: 7rem'">
+					<thead luDataTableHead sticky>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell>cell</td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
 		</tr>
 		<tr>
-			<td>All</td>
+			<td>Empty</td>
 			<td>
 				<div class="dataTableWrapper">
-					<table class="dataTable mod-alignTop">
+					<table class="dataTable">
 						<thead class="dataTable-head">
 							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell mod-alignRight">Label</th>
-								<th class="dataTable-head-row-cell">Label</th>
-								<th class="dataTable-head-row-cell mod-alignRight">Label</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
 							</tr>
 						</thead>
 						<tbody class="dataTable-body">
 							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Content</td>
-								<td class="dataTable-body-row-cell"><lu-tag label="Tag" /></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><lu-tag label="Tag" /></td>
-								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><span class="tag">Tag</span></td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Content<br />Content</td>
-								<td class="dataTable-body-row-cell"><lu-tag label="Tag" /></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><lu-tag label="Tag" /></td>
-								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><span class="tag">Tag</span></td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Content</td>
-								<td class="dataTable-body-row-cell"><lu-status-badge label="Status" /></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><lu-status-badge label="Status" /></td>
-								<td class="dataTable-body-row-cell"><div class="statusBadge">Status</div></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><div class="statusBadge">Status</div></td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Content<br />Content</td>
-								<td class="dataTable-body-row-cell"><lu-status-badge label="Status" /></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><lu-status-badge label="Status" /></td>
-								<td class="dataTable-body-row-cell"><div class="statusBadge">Status</div></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><div class="statusBadge">Status</div></td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Content</td>
-								<td class="dataTable-body-row-cell"><lu-user-picture size="XS" /></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><lu-user-picture size="XS" /></td>
-								<td class="dataTable-body-row-cell">
-									<div class="avatar mod-XS">
-										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-									</div>
-								</td>
-								<td class="dataTable-body-row-cell mod-alignRight">
-									<div class="avatar mod-XS">
-										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-									</div>
-								</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Content<br />Content</td>
-								<td class="dataTable-body-row-cell"><lu-user-picture size="XS" /></td>
-								<td class="dataTable-body-row-cell mod-alignRight"><lu-user-picture size="XS" /></td>
-								<td class="dataTable-body-row-cell">
-									<div class="avatar mod-XS">
-										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-									</div>
-								</td>
-								<td class="dataTable-body-row-cell mod-alignRight">
-									<div class="avatar mod-XS">
-										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-									</div>
-								</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Content</td>
-								<td class="dataTable-body-row-cell">
-									<ul class="avatarWrapper mod-XS">
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-									</ul>
-								</td>
-								<td class="dataTable-body-row-cell mod-alignRight">
-									<ul class="avatarWrapper mod-XS">
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-									</ul>
-								</td>
-								<td class="dataTable-body-row-cell">
-									<ul class="avatarWrapper mod-XS">
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+								<td colspan="3" class="dataTable-body-row-cell">
+									<section class="emptyState">
+										<div class="emptyState-container">
+											<div class="emptyState-content">
+												<div class="emptyState-content-icon">
+													<div aria-hidden="true" class="bubbleIllustration mod-L">
+														<svg fill="none" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
+															<path
+																d="m7.58697 8.51901c13.85013-18.62671 30.99923-2.27581 36.38083 7.16399 5.3831 9.4385 10.9889 34.5952-24.4368 32.1506-20.245731-1.3949-25.78518-20.696-11.94403-39.31459z"
+																fill="var(--palettes-200, var(--palettes-product-200, #ffccb3))"
+															></path>
+															<path
+																d="m16.3864 28.1207-3.6142 3.6142 2.89 2.89 3.6142-3.6142z"
+																fill="var(--palettes-700, var(--palettes-product-700, #e06029))"
+															></path>
+															<path
+																d="m9.40101 40.4088-2.40997-2.41c-.66709-.6671-.66709-1.7429 0-2.41l3.61266-3.6126c.667-.6671 1.7428-.6671 2.4099 0l2.41 2.41c.6671.6671.6671 1.7429 0 2.41l-3.6126 3.6126c-.6671.6671-1.7429.6671-2.40999 0z"
+																fill="var(--palettes-brand-600, #ff7b3d)"
+															></path>
+															<path
+																d="m39.2181 20.9552c0 7.0561-5.722 12.7733-12.7734 12.7733s-12.7733-5.7172-12.7733-12.7733 5.7219-12.77338 12.7733-12.77338 12.7734 5.72198 12.7734 12.77338z"
+																fill="var(--palettes-500, var(--palettes-product-500, #ff9361))"
+															></path>
+															<path
+																d="m36.78 20.9552c0 5.7078-4.6274 10.3351-10.3352 10.3351s-10.3352-4.6273-10.3352-10.3351c0-5.7079 4.6274-10.3352 10.3352-10.3352s10.3352 4.6273 10.3352 10.3352z"
+																fill="#fff"
+															></path>
+															<path
+																class="bubbleIllustration-action"
+																d="M45.8311 42.7307C45.5891 44.4976 44.542 45.5949 42.735 45.8312C41.7443 45.9606 40.4889 46 39.0028 46C37.5167 46 36.267 45.9381 35.2706 45.8312C33.5537 45.6455 32.3603 44.5707 32.1745 42.7363C32.0675 41.6841 32 40.3899 32 38.9494C32 37.5088 32.045 36.2822 32.1689 35.2637C32.3828 33.5193 33.4524 32.3432 35.2762 32.1632C36.2782 32.0619 37.5336 32 38.9972 32C40.4608 32 41.7161 32.045 42.7238 32.1632C44.5195 32.3658 45.5891 33.5418 45.8311 35.2637C45.9719 36.2765 46 37.5314 46 38.9494C46 40.3674 45.9719 41.6953 45.8311 42.7363"
+																fill="var(--palettes-brand-600, #ff7b3d)"
+															></path>
+															<path
+																class="bubbleIllustration-action"
+																d="M39.5 36.5C39.5 36.2239 39.2761 36 39 36C38.7239 36 38.5 36.2239 38.5 36.5V38.5H36.5C36.2239 38.5 36 38.7239 36 39C36 39.2761 36.2239 39.5 36.5 39.5H38.5V41.5C38.5 41.7761 38.7239 42 39 42C39.2761 42 39.5 41.7761 39.5 41.5V39.5H41.5C41.7761 39.5 42 39.2761 42 39C42 38.7239 41.7761 38.5 41.5 38.5H39.5V36.5Z"
+																fill="#FFF"
+															></path>
+														</svg>
+													</div>
+												</div>
+												<div class="emptyState-content-text">
+													<h3 class="emptyState-content-heading">Empty State</h3>
+													<p class="emptyState-content-description">Flatus obsequiorum potest inanes pomerium.</p>
+												</div>
 											</div>
-										</li>
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-									</ul>
-								</td>
-								<td class="dataTable-body-row-cell mod-alignRight">
-									<ul class="avatarWrapper mod-XS">
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-									</ul>
-								</td>
-							</tr>
-							<tr class="dataTable-body-row">
-								<td class="dataTable-body-row-cell">Content<br />Content</td>
-								<td class="dataTable-body-row-cell">
-									<ul class="avatarWrapper mod-XS">
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-									</ul>
-								</td>
-								<td class="dataTable-body-row-cell mod-alignRight">
-									<ul class="avatarWrapper mod-XS">
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-										<li class="avatarWrapper-item"><lu-user-picture /></li>
-									</ul>
-								</td>
-								<td class="dataTable-body-row-cell">
-									<ul class="avatarWrapper mod-XS">
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-									</ul>
-								</td>
-								<td class="dataTable-body-row-cell mod-alignRight">
-									<ul class="avatarWrapper mod-XS">
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-										<li class="avatarWrapper-item">
-											<div class="avatar">
-												<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-											</div>
-										</li>
-									</ul>
+										</div>
+									</section>
 								</td>
 							</tr>
 						</tbody>
@@ -1702,94 +2205,27 @@
 				</div>
 			</td>
 			<td>
-				<lu-data-table layoutFixed hover cellBorder selectable verticalAlign="top" nested>
-					<thead luDataTableHead sticky>
-						<tr luDataTableRow selectedLabel="Sélectionner toutes les lignes">
+				<lu-data-table empty>
+					<thead luDataTableHead>
+						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
 							<th luDataTableCell>header</th>
-							<th luDataTableCell>header</th>
-							<th luDataTableCell>header</th>
-							<th luDataTableCell fixedWidth="6rem" sort="ascending" [align]="start">header</th>
 						</tr>
 					</thead>
-					<tbody luDataTableBody groupButtonAlt="Afficher X lignes supplémentaires" [group]="samplePortalContent" [expanded]="true">
-						<tr luDataTableRow selectedLabel="Sélectionner cette ligne">
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="start">cell</td>
-						</tr>
-						<tr luDataTableRow selectedLabel="Sélectionner cette ligne">
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="start">cell</td>
-						</tr>
-						<tr luDataTableRow selectedLabel="Sélectionner cette ligne">
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="start">cell</td>
-						</tr>
-						<tr luDataTableRow selectedLabel="Sélectionner cette ligne">
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="start">cell</td>
-						</tr>
-						<tr luDataTableRow selectedLabel="Sélectionner cette ligne">
-							<th luDataTableCell>header<br />header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="start" actions>
-								<button type="button" luButton>
-									<lu-icon icon="officePen" alt="Edit" />
-								</button>
-								<button type="button" luButton>
-									<lu-icon icon="trashDelete" alt="Delete" />
-								</button>
-							</td>
-						</tr>
-						<tr luDataTableRow selectedLabel="Sélectionner cette ligne" [selected]="true" disabled>
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="start" editable>
-								<lu-form-field label="Label" hiddenLabel>
-									<lu-text-input type="text" [(ngModel)]="example" />
-								</lu-form-field>
-							</td>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell colspan="3">
+								<lu-empty-state-section
+									hx="3"
+									illustration="magnifyingGlass"
+									heading="Empty State"
+									description="Flatus obsequiorum potest inanes pomerium."
+								/>
+							</th>
 						</tr>
 					</tbody>
-					<tfoot luDataTableFoot>
-						<tr luDataTableRow selectedLabel="Sélectionner cette ligne">
-							<th luDataTableCell>header</th>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell>cell</td>
-							<td luDataTableCell [align]="start">cell</td>
-						</tr>
-					</tfoot>
-					<lu-pagination dataTablePagination from="1" to="20" itemsCount="27" isFirstPage />
 				</lu-data-table>
-				<ng-template #samplePortalContent>
-					Group
-					<lu-numeric-badge [value]="6" />
-				</ng-template>
 			</td>
 		</tr>
 	</tbody>

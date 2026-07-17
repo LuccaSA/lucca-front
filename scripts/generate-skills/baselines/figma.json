@@ -1,0 +1,1757 @@
+{
+	"6854:42773": {
+		"componentName": "pr-Button",
+		"properties": {
+			"textValue": null,
+			"iconValue": null,
+			"size": [
+				"M",
+				"S",
+				"XS"
+			],
+			"type": [
+				"filled",
+				"ghost",
+				"outlined"
+			],
+			"style": [
+				"default",
+				"left icon",
+				"Disclosure",
+				"Counter",
+				"Icon only"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"active",
+				"loading",
+				"disabled",
+				"success"
+			],
+			"palette": [
+				"product",
+				"neutral",
+				"critical",
+				"AI",
+				"AI-invert"
+			],
+			"critical": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"32845:165556": {
+		"componentName": "pr-ButtonGroup",
+		"properties": {
+			"type": [
+				"filled",
+				"outlined"
+			],
+			"palette": [
+				"product",
+				"neutral"
+			],
+			"number": [
+				"2",
+				"3",
+				"4"
+			]
+		}
+	},
+	"29773:198942": {
+		"componentName": "pr-AppLayout (1600)",
+		"properties": {
+			"Footer": null,
+			"navSide": null,
+			"Sidebar": null
+		}
+	},
+	"21818:96550": {
+		"componentName": "pr-AppLayout (360)",
+		"properties": {}
+	},
+	"3107:7885": {
+		"componentName": "pr-Avatar",
+		"properties": {
+			"size": [
+				"XS",
+				"S",
+				"M",
+				"L",
+				"XL",
+				"2XL",
+				"3XL"
+			],
+			"identity": [
+				"None",
+				"[ES] Cabrero Lucia",
+				"[ES] Cortes Mateo",
+				"[ES] Delgado Juan",
+				"[ES] Fernández Carmen",
+				"[ES] Pérez Sofia",
+				"[ES] Suarez Gabriela",
+				"[FR] Alibert Chloé",
+				"[FR] Archer Marie-Françoise",
+				"[FR] Bart Maurice",
+				"[FR] Beaulinette Antoine",
+				"[FR] Bragoulet Marie",
+				"[FR] Bresnier Valentin",
+				"[FR] Clisson Brigitte",
+				"[FR] Flantier Noël",
+				"[FR] Geste Florence",
+				"[FR] Hernandez Daniel",
+				"[FR] Pichou Olivier",
+				"[FR] Épineau Cécile",
+				"[UK] Benton Peter",
+				"[UK] Berry Jessica",
+				"[UK] Brown Chloe",
+				"[UK] Cox Adam",
+				"[UK] Doherty Alexander",
+				"[UK] Douglas Rebecca"
+			],
+			"placeholder": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"21429:36994": {
+		"componentName": "pr-AvatarWrapper",
+		"properties": {
+			"more": null,
+			"sizes": [
+				"L",
+				"M",
+				"S",
+				"XS",
+				"XL"
+			]
+		}
+	},
+	"3104:299": {
+		"componentName": "pr-Breadcrumbs",
+		"properties": {
+			"depth": [
+				"1",
+				"2",
+				"3",
+				"4"
+			]
+		}
+	},
+	"24071:83910": {
+		"componentName": "pr-Calendar",
+		"properties": {
+			"type": [
+				"day",
+				"month",
+				"year"
+			]
+		}
+	},
+	"5882:32057": {
+		"componentName": "pr-Callout",
+		"properties": {
+			"icon": null,
+			"heading": null,
+			"removable": null,
+			"actions": null,
+			"actionsInline": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"palette": [
+				"success",
+				"warning",
+				"critical",
+				"product",
+				"neutral",
+				"AI"
+			]
+		}
+	},
+	"14686:61370": {
+		"componentName": "pr-CalloutDisclosure",
+		"properties": {
+			"size": [
+				"M",
+				"S"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus"
+			],
+			"palette": [
+				"success",
+				"warning",
+				"critical",
+				"product",
+				"neutral"
+			],
+			"open": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"14695:2444": {
+		"componentName": "pr-CalloutPopover",
+		"properties": {
+			"popoverBottom": null,
+			"popoverTop": null,
+			"labelValue": null,
+			"label": null,
+			"size": [
+				"M",
+				"S",
+				"XS"
+			],
+			"palette": [
+				"success",
+				"warning",
+				"critical",
+				"product",
+				"neutral"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus"
+			]
+		}
+	},
+	"20037:372": {
+		"componentName": "pr-Checkbox",
+		"properties": {
+			"inlineMessage": null,
+			"label": null,
+			"checklist": [
+				"false",
+				"true"
+			],
+			"size": [
+				"M",
+				"S"
+			],
+			"checked": [
+				"false",
+				"true",
+				"mixed"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"active",
+				"disabled"
+			],
+			"error": [
+				"false",
+				"true"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"20185:80419": {
+		"componentName": "pr-CheckboxFieldset",
+		"properties": {
+			"inlineMessage": null,
+			"checklist": [
+				"false",
+				"true"
+			],
+			"size": [
+				"M",
+				"S"
+			],
+			"alignment": [
+				"vertical",
+				"horizontal"
+			],
+			"error": [
+				"false",
+				"true"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"3098:3077": {
+		"componentName": "pr-Chip",
+		"properties": {
+			"label": null,
+			"icon": null,
+			"iconValue": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"product": [
+				"true",
+				"false"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"active",
+				"disabled"
+			],
+			"feedback": [
+				"–",
+				"warning",
+				"critical"
+			],
+			"unkillable": [
+				"true",
+				"false"
+			]
+		}
+	},
+	"5748:32069": {
+		"componentName": "pr-Clear",
+		"properties": {
+			"size": [
+				"M",
+				"S"
+			],
+			"palette": [
+				"neutral",
+				"product"
+			],
+			"inverted": [
+				"false",
+				"true"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"active",
+				"disabled"
+			]
+		}
+	},
+	"18702:2533": {
+		"componentName": "pr-Comment",
+		"properties": {
+			"readMore": null,
+			"avatar": null,
+			"label": null,
+			"↪️ userName": null,
+			"↪️ date": null,
+			"↪️ dot": null,
+			"commentSlot": null,
+			"slotContent": null,
+			"align": [
+				"left",
+				"right"
+			],
+			"size": [
+				"M",
+				"S"
+			]
+		}
+	},
+	"34358:99807": {
+		"componentName": "pr-DataPresentation",
+		"properties": {
+			"value": null,
+			"label": null
+		}
+	},
+	"23373:9022": {
+		"componentName": "pr-DataTable",
+		"properties": {
+			"Content": null,
+			"Pagination": null,
+			"Overflow": null,
+			"↪️ Left overflow": null,
+			"↪️ Right overflow": null,
+			"Fullscreen button": null
+		}
+	},
+	"6119:38876": {
+		"componentName": "pr-DatePicker",
+		"properties": {
+			"label": null,
+			"inlineMessage": null,
+			"clearable": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"mode": [
+				"day",
+				"month",
+				"year"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"disabled / readonly"
+			],
+			"content": [
+				"filled",
+				"placeholder"
+			],
+			"feedback": [
+				"–",
+				"critical",
+				"warning",
+				"success"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"24071:83969": {
+		"componentName": "pr-DateRangePicker",
+		"properties": {
+			"label": null,
+			"inlineMessage": null,
+			"clearable": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"mode": [
+				"days",
+				"months",
+				"years"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focusStart",
+				"focusEnd",
+				"disabled / readonly"
+			],
+			"content": [
+				"filled",
+				"placeholder"
+			],
+			"feedback": [
+				"–",
+				"critical",
+				"warning",
+				"success"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"5640:31604": {
+		"componentName": "pr-Dialog",
+		"properties": {
+			"💀  dialogContent": null,
+			"backdrop": null,
+			"fancyIllustration": null,
+			"description": null,
+			"listing": null,
+			"🎉  dialogContent": null,
+			"fancyContent": null,
+			"size": [
+				"XS",
+				"S",
+				"M",
+				"L",
+				"XL",
+				"XXL",
+				"maxContent",
+				"fullScreen"
+			],
+			"mode": [
+				"default",
+				"drawer",
+				"drawer-from-bottom",
+				"fancy"
+			],
+			"stacked": [
+				"none",
+				"level 1",
+				"level 2"
+			]
+		}
+	},
+	"28382:11798": {
+		"componentName": "ConfirmationDialog",
+		"properties": {
+			"criticity": [
+				"low",
+				"high",
+				"higher"
+			]
+		}
+	},
+	"28382:11460": {
+		"componentName": "DeleteDialog",
+		"properties": {
+			"criticity": [
+				"low",
+				"high",
+				"higher"
+			]
+		}
+	},
+	"28385:12057": {
+		"componentName": "ExitDialog",
+		"properties": {
+			"type": [
+				"default"
+			]
+		}
+	},
+	"8487:40717": {
+		"componentName": "pr-Divider",
+		"properties": {
+			"style": [
+				"Horizontal",
+				"Horizontal - Content",
+				"Vertical"
+			]
+		}
+	},
+	"26837:32810": {
+		"componentName": "pr-DropdownMenu",
+		"properties": {}
+	},
+	"8221:36924": {
+		"componentName": "pr-DurationPicker",
+		"properties": {
+			"displayArrows": null,
+			"label": null,
+			"inlineMessage": null,
+			"hideZeroValue": null,
+			"type": [
+				"hours",
+				"🚧 days"
+			],
+			"size": [
+				"S",
+				"M"
+			],
+			"state": [
+				"default",
+				"Hover",
+				"focusHours",
+				"focusMinutes",
+				"focusDay",
+				"disabled / readonly"
+			],
+			"content": [
+				"filled",
+				"empty"
+			],
+			"error": [
+				"false",
+				"true"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"21818:76675": {
+		"componentName": "pr-EmptyStateSection",
+		"properties": {
+			"actions": null,
+			"center": [
+				"false",
+				"true"
+			],
+			"type": [
+				"default",
+				"emptySearch",
+				"error",
+				"success"
+			]
+		}
+	},
+	"25658:1086": {
+		"componentName": "pr-FancyBox",
+		"properties": {
+			"backgroundLeftContent": null,
+			"foregroundRightContent": null,
+			"foregroundLeft": null,
+			"foregroundLeftContent": null,
+			"backgroundgRightContent": null,
+			"foregroundRight": null,
+			"content": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"responsive": [
+				"False",
+				"True"
+			]
+		}
+	},
+	"35511:3867": {
+		"componentName": "pr-Fieldset",
+		"properties": {
+			"fieldsetContent": null,
+			"helper": null,
+			"fieldsetTitle": null,
+			"expandable": null,
+			"withAction": null,
+			"deletable": null,
+			"draggable": [
+				"true",
+				"false"
+			]
+		}
+	},
+	"28445:189464": {
+		"componentName": "pr-FileEntry",
+		"properties": {
+			"downloadable": null,
+			"deletable": null,
+			"editable": null,
+			"displayFileName": null,
+			"fileType": null,
+			"media": [
+				"false",
+				"true"
+			],
+			"size": [
+				"M",
+				"S"
+			],
+			"state": [
+				"default",
+				"uploading",
+				"error"
+			]
+		}
+	},
+	"28445:192983": {
+		"componentName": "pr-FileUpload",
+		"properties": {
+			"label": null,
+			"inlineMessage": null,
+			"tagAI": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"multiple": [
+				"false",
+				"true"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"fileHover",
+				"loading"
+			],
+			"file": [
+				"false",
+				"true"
+			],
+			"critical": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"26824:221177": {
+		"componentName": "pr-FilterBar",
+		"properties": {
+			"actions": null,
+			"search": null,
+			"filtersButton": null,
+			"applyButton": null,
+			"results": null,
+			"type": [
+				"full",
+				"viewsOnly",
+				"filterPillsOnly",
+				"rightAlignViews"
+			]
+		}
+	},
+	"26824:178929": {
+		"componentName": "pr-FilterPill",
+		"properties": {
+			"label": null,
+			"clearable": null,
+			"type": [
+				"simpleSelect",
+				"multiplteSelect",
+				"datePicker",
+				"dateRangePicker",
+				"checkbox",
+				"filter button"
+			],
+			"state": [
+				"default",
+				"hover",
+				"active",
+				"focus",
+				"opened",
+				"typing",
+				"disabled"
+			],
+			"content": [
+				"empty",
+				"filled",
+				"multiSelectfilled"
+			]
+		}
+	},
+	"8394:35779": {
+		"componentName": "pr-Footer",
+		"properties": {
+			"↪️ Slot content": null,
+			"💀 leftContent": null,
+			"tinyCallout": null,
+			"leftButton": null,
+			"cancelButton": null,
+			"filledButton": null,
+			"firstOutlinedButton": null,
+			"secondOutlinedButton": null,
+			"total": null,
+			"leftContent": null,
+			"forceNarrow": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"28461:196506": {
+		"componentName": "pr-FormField",
+		"properties": {
+			"input": null
+		}
+	},
+	"16861:2802": {
+		"componentName": "pr-Gauge",
+		"properties": {
+			"palette": [
+				"product",
+				"success",
+				"warning",
+				"critical",
+				"neutral"
+			],
+			"thin": [
+				"false",
+				"true"
+			],
+			"circular": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"28445:184862": {
+		"componentName": "pr-HighlightData",
+		"properties": {
+			"action": null,
+			"subtext": null,
+			"rightContent": null,
+			"size": [
+				"M",
+				"S",
+				"XS"
+			],
+			"theme": [
+				"dark",
+				"light",
+				"white"
+			],
+			"valueFirst": [
+				"false",
+				"true"
+			],
+			"palette": [
+				"product",
+				"success",
+				"warning",
+				"critical"
+			]
+		}
+	},
+	"3104:226": {
+		"componentName": "pr-HorizontalNavigation",
+		"properties": {
+			"border": null,
+			"listContent": null,
+			"size": [
+				"M",
+				"S"
+			]
+		}
+	},
+	"34358:9707": {
+		"componentName": "pr-Icon",
+		"properties": {
+			"icon": null,
+			"size": [
+				"XXL",
+				"XL",
+				"L",
+				"M",
+				"S",
+				"XS",
+				"XXS"
+			]
+		}
+	},
+	"19654:99228": {
+		"componentName": "pr-IndexTable",
+		"properties": {
+			"Overflow": null,
+			"↪️ Left overflow": null,
+			"↪️ Right overflow": null,
+			"Content": null,
+			"Pagination": null
+		}
+	},
+	"5743:32741": {
+		"componentName": "pr-InlineMessage",
+		"properties": {
+			"value": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"type": [
+				"critical",
+				"default",
+				"success",
+				"warning"
+			]
+		}
+	},
+	"29856:17750": {
+		"componentName": "pr-InputFramed",
+		"properties": {
+			"inlineMessage": null,
+			"label": null,
+			"size": [
+				"M",
+				"L"
+			],
+			"checkbox": [
+				"true",
+				"false"
+			],
+			"grid": [
+				"false",
+				"true"
+			],
+			"critical": [
+				"false",
+				"true"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"3082:283": {
+		"componentName": "pr-Link",
+		"properties": {
+			"external": null,
+			"label": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"decoration": [
+				"false",
+				"true"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"visited",
+				"disabled"
+			],
+			"palette": [
+				"product",
+				"neutral"
+			]
+		}
+	},
+	"28118:159096": {
+		"componentName": "pr-Listing",
+		"properties": {
+			"title": null,
+			"list": null,
+			"inline": [
+				"false",
+				"true"
+			],
+			"type": [
+				"default",
+				"ordered",
+				"orderedFancy",
+				"checklist",
+				"icons"
+			],
+			"size": [
+				"M",
+				"S"
+			]
+		}
+	},
+	"6311:39280": {
+		"componentName": "pr-Loading",
+		"properties": {
+			"palette": [
+				"product",
+				"neutral"
+			],
+			"size": [
+				"M",
+				"S",
+				"XS"
+			]
+		}
+	},
+	"29907:397": {
+		"componentName": "pr-MobilePush",
+		"properties": {
+			"badgeAlignment": [
+				"right",
+				"bottom"
+			]
+		}
+	},
+	"8399:38417": {
+		"componentName": "pr-MobileNavigation",
+		"properties": {
+			"tabs": [
+				"2",
+				"3",
+				"4",
+				"5"
+			]
+		}
+	},
+	"16134:2827": {
+		"componentName": "pr-Select",
+		"properties": {
+			"label": null,
+			"inlineMessage": null,
+			"hasClearer": null,
+			"color": null,
+			"icon": null,
+			"avatar": null,
+			"multi": [
+				"false",
+				"true"
+			],
+			"size": [
+				"M",
+				"S"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"typing",
+				"disabled / readonly"
+			],
+			"content": [
+				"filled",
+				"placeholder"
+			],
+			"feedback": [
+				"–",
+				"critical",
+				"warning",
+				"success"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"23179:39143": {
+		"componentName": "pr-MultilanguageTextfield",
+		"properties": {
+			"label": null,
+			"inlineMessage": null,
+			"openOnFocus": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"state": [
+				"default",
+				"hoverInput",
+				"hoverIcon",
+				"focusInput",
+				"focusIcon",
+				"focusPopover",
+				"disabled / readonly"
+			],
+			"content": [
+				"filled",
+				"placeholder",
+				"empty"
+			],
+			"feedback": [
+				"–",
+				"critical",
+				"warning",
+				"success"
+			],
+			"presentation": [
+				"false",
+				"true"
+			],
+			"hasNoInvariant": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"8174:35724": {
+		"componentName": "pr-NewBadge",
+		"properties": {
+			"label": null
+		}
+	},
+	"3200:26461": {
+		"componentName": "pr-NumericBadge",
+		"properties": {
+			"value": null,
+			"size": [
+				"M",
+				"S",
+				"XS"
+			],
+			"palette": [
+				"product",
+				"neutral",
+				"brand"
+			],
+			"disabled": [
+				"false",
+				"true"
+			],
+			"loading": [
+				"true",
+				"false"
+			]
+		}
+	},
+	"23985:434": {
+		"componentName": "pr-PageHeader",
+		"properties": {
+			"titleActions": null,
+			"actions": null,
+			"backAction": null,
+			"navigation": null,
+			"💀 timeline [DEPRECATED]": null,
+			"description": null,
+			"descriptionContent": null,
+			"trailing": null,
+			"trailingContent": null,
+			"breadcrumbs": null,
+			"leading": null,
+			"leadingContent": null,
+			"Screen size": [
+				"M",
+				"S"
+			]
+		}
+	},
+	"6671:42932": {
+		"componentName": "pr-Pagination",
+		"properties": {}
+	},
+	"18201:22261": {
+		"componentName": "pr-PhoneNumberField",
+		"properties": {
+			"hasClearer": null,
+			"label": null,
+			"inlineMessage": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"state": [
+				"default",
+				"disabled / readonly",
+				"focusInput",
+				"focusSelect",
+				"hoverInput",
+				"hoverSelect"
+			],
+			"content": [
+				"filled",
+				"placeholder"
+			],
+			"feedback": [
+				"–",
+				"critical",
+				"warning",
+				"success"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"22031:14975": {
+		"componentName": "pr-PLGPush",
+		"properties": {
+			"heading": null,
+			"removable": null
+		}
+	},
+	"5742:31562": {
+		"componentName": "pr-Popover",
+		"properties": {
+			"Slot content": null,
+			"Scroll": null
+		}
+	},
+	"16861:21023": {
+		"componentName": "pr-ProgressBar",
+		"properties": {
+			"state": [
+				"default",
+				"success",
+				"error"
+			]
+		}
+	},
+	"20115:1600": {
+		"componentName": "pr-Radio",
+		"properties": {
+			"inlineMessage": null,
+			"label": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"checked": [
+				"false",
+				"true"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"active",
+				"disable"
+			],
+			"error": [
+				"false",
+				"true"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"20185:81361": {
+		"componentName": "pr-RadioFieldset",
+		"properties": {
+			"inlineMessage": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"alignment": [
+				"vertical",
+				"horizontal"
+			],
+			"error": [
+				"false",
+				"true"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"27984:1100": {
+		"componentName": "pr-ReadMore",
+		"properties": {
+			"size": [
+				"M",
+				"S"
+			],
+			"surface": [
+				"default",
+				"raised",
+				"sunken"
+			]
+		}
+	},
+	"33038:16815": {
+		"componentName": "pr-ResourceCard (v21.0)",
+		"properties": {
+			"status": null,
+			"actions": null,
+			"draggable": null,
+			"numericBadge": null,
+			"💀 slotContent [DELETE IT]": null,
+			"tag": null,
+			"infos": null,
+			"heading": null,
+			"content": null,
+			"metadata": null,
+			"slotContent": null,
+			"slot": null,
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"active",
+				"disabled"
+			],
+			"size": [
+				"M",
+				"S"
+			],
+			"grid": [
+				"true",
+				"false"
+			],
+			"illustration": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"33040:2908": {
+		"componentName": "pr-ResourceCardWrapper (v21.0)",
+		"properties": {
+			"fakeCard": null,
+			"addResource": null,
+			"grid": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"6946:36398": {
+		"componentName": "pr-RichTextfield",
+		"properties": {
+			"label": null,
+			"inlineMessage": null,
+			"overflow": null,
+			"tag": null,
+			"textContent": null,
+			"readMore": null,
+			"toolbar": null,
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"disabled / readonly"
+			],
+			"content": [
+				"filled",
+				"empty"
+			],
+			"error": [
+				"false",
+				"true"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"3200:27007": {
+		"componentName": "Scrollbar",
+		"properties": {
+			"type": [
+				"Mac",
+				"PC"
+			],
+			"direction": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	},
+	"17121:6916": {
+		"componentName": "pr-SegmentedControl",
+		"properties": {
+			"size": [
+				"M",
+				"S"
+			],
+			"number": [
+				"2",
+				"3",
+				"4",
+				"5"
+			],
+			"selectedItem": [
+				"1st",
+				"2nd",
+				"3rd",
+				"4th",
+				"5th"
+			]
+		}
+	},
+	"19475:8986": {
+		"componentName": "pr-SkeletonItem",
+		"properties": {
+			"type": [
+				"heading-1",
+				"heading-2",
+				"heading-3",
+				"heading-4",
+				"body-M",
+				"body-S",
+				"body-XS",
+				"Circle",
+				"Square"
+			],
+			"dark": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"21713:46941": {
+		"componentName": "size=M",
+		"properties": {}
+	},
+	"21713:46919": {
+		"componentName": "pr-SkeletonField (v18.1)",
+		"properties": {}
+	},
+	"21713:46912": {
+		"componentName": "pr-SkeletonHeader (v18.1)",
+		"properties": {}
+	},
+	"6174:37769": {
+		"componentName": "pr-SortableList",
+		"properties": {
+			"size": [
+				"M",
+				"S"
+			]
+		}
+	},
+	"6141:36860": {
+		"componentName": "pr-StatusBadge",
+		"properties": {
+			"label": null,
+			"palette": [
+				"critical",
+				"neutral",
+				"product",
+				"success",
+				"warning"
+			],
+			"size": [
+				"M",
+				"L"
+			]
+		}
+	},
+	"13369:11929": {
+		"componentName": "pr-DotBadge",
+		"properties": {
+			"size": [
+				"M",
+				"S",
+				"XS"
+			]
+		}
+	},
+	"20183:78344": {
+		"componentName": "pr-Switch",
+		"properties": {
+			"inlineMessage": null,
+			"label": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"checked": [
+				"false",
+				"true"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"active",
+				"disabled / readonly"
+			]
+		}
+	},
+	"7765:34927": {
+		"componentName": "pr-Tag",
+		"properties": {
+			"label": null,
+			"iconValue": null,
+			"icon": null,
+			"size": [
+				"S",
+				"M",
+				"L"
+			],
+			"outlined": [
+				"false",
+				"true"
+			],
+			"palette": [
+				"neutral",
+				"product",
+				"kiwi",
+				"lime",
+				"cucumber",
+				"mint",
+				"glacier",
+				"lagoon",
+				"blueberry",
+				"lavender",
+				"grape",
+				"watermelon",
+				"pumpkin",
+				"pineapple",
+				"success",
+				"warning",
+				"critical",
+				"AI"
+			]
+		}
+	},
+	"30462:137476": {
+		"componentName": "pr-TextFlow",
+		"properties": {
+			"content": null
+		}
+	},
+	"6119:39816": {
+		"componentName": "pr-Textarea",
+		"properties": {
+			"label": null,
+			"inlineMessage": null,
+			"counter": null,
+			"overflow": null,
+			"readMore": null,
+			"size": [
+				"M",
+				"S",
+				"XS"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"disabled / readonly"
+			],
+			"content": [
+				"filled",
+				"empty"
+			],
+			"feedback": [
+				"–",
+				"critical",
+				"warning",
+				"success"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"6119:36364": {
+		"componentName": "pr-Textfield",
+		"properties": {
+			"label": null,
+			"inlineMessage": null,
+			"suffix": null,
+			"prefix": null,
+			"counter": null,
+			"hasClearer": null,
+			"icon": null,
+			"iconValue": null,
+			"spinButtons": null,
+			"countryCode": null,
+			"button": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"state": [
+				"default",
+				"hover",
+				"focus",
+				"disabled / readonly"
+			],
+			"content": [
+				"filled",
+				"placeholder",
+				"empty"
+			],
+			"feedback": [
+				"–",
+				"critical",
+				"warning",
+				"success"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"6053:35161": {
+		"componentName": "pr-UserTile",
+		"properties": {
+			"text": null,
+			"subtext": null,
+			"userNameValue": null,
+			"subtextValue": null,
+			"size": [
+				"L",
+				"M",
+				"S",
+				"XS"
+			]
+		}
+	},
+	"20952:3023": {
+		"componentName": "pr-TimePicker",
+		"properties": {
+			"label": null,
+			"displayArrows": null,
+			"inlineMessage": null,
+			"forceMeridiemDisplay": null,
+			"size": [
+				"M",
+				"S"
+			],
+			"state": [
+				"default",
+				"disabled / readonly",
+				"focusAMPM",
+				"focusHours",
+				"focusMinutes",
+				"hover"
+			],
+			"content": [
+				"filled",
+				"empty"
+			],
+			"error": [
+				"false",
+				"true"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"6238:37988": {
+		"componentName": "pr-TimelineHorizontal",
+		"properties": {
+			"Size": [
+				"Default",
+				"Small"
+			]
+		}
+	},
+	"3746:26392": {
+		"componentName": "pr-TimelineVertical",
+		"properties": {
+			"Helper text": null,
+			"Slot content": null,
+			"Title value": null,
+			"↪️ Helper text value": null,
+			"Size": [
+				"M",
+				"S"
+			]
+		}
+	},
+	"3101:970": {
+		"componentName": "pr-Toast",
+		"properties": {
+			"title": null,
+			"cancelButton": null,
+			"killButton": null,
+			"palette": [
+				"critical",
+				"success",
+				"warning",
+				"product"
+			]
+		}
+	},
+	"5639:31388": {
+		"componentName": "pr-Tooltip",
+		"properties": {}
+	},
+	"18202:1181": {
+		"componentName": "pr-UserPopover",
+		"properties": {}
+	},
+	"13580:1866": {
+		"componentName": "pr-VerticalNavigation",
+		"properties": {}
+	},
+	"34491:9435": {
+		"componentName": "pr-BubbleIcon",
+		"properties": {
+			"icon": null,
+			"direction": [
+				"left",
+				"right",
+				"top",
+				"bottom"
+			],
+			"palette": [
+				"blueberry",
+				"critical",
+				"cucumber",
+				"glacier",
+				"grape",
+				"kiwi",
+				"lagoon",
+				"lavender",
+				"lime",
+				"mint",
+				"neutral",
+				"pineapple",
+				"product",
+				"pumpkin",
+				"success",
+				"warning",
+				"watermelon"
+			],
+			"size": [
+				"S",
+				"M",
+				"L",
+				"XS"
+			]
+		}
+	},
+	"34491:9993": {
+		"componentName": "pr-BubbleIllustration",
+		"properties": {
+			"illustration": null,
+			"action": null,
+			"type": [
+				"default",
+				"partyPopper",
+				"award",
+				"thumbUp",
+				"warning",
+				"emptySearch",
+				"error"
+			]
+		}
+	},
+	"34491:7795": {
+		"componentName": "pr-ColorPicker",
+		"properties": {
+			"inlineMessage": null,
+			"label": null,
+			"hasClearer": null,
+			"compact": [
+				"false",
+				"true"
+			],
+			"size": [
+				"M",
+				"S"
+			],
+			"state": [
+				"default",
+				"disabled / readonly",
+				"focus",
+				"hover"
+			],
+			"content": [
+				"filled",
+				"empty"
+			],
+			"presentation": [
+				"false",
+				"true"
+			]
+		}
+	},
+	"6053:34947": {
+		"componentName": "pr-SoftwareIcon",
+		"properties": {
+			"icon": [
+				"absences",
+				"timesheet",
+				"projects",
+				"office",
+				"shifts",
+				"performance",
+				"engagement",
+				"training",
+				"recruitment",
+				"mood",
+				"employee-administration",
+				"shared-documents",
+				"analytics",
+				"faces",
+				"business-expenses",
+				"invoices",
+				"payment-methods",
+				"accounting-assistant",
+				"certified-einvoicing-platform",
+				"compensation",
+				"payslip",
+				"benefits",
+				"payroll-assistant",
+				"administration",
+				"cloud-control",
+				"lucca",
+				"sandbox",
+				"clientCenter",
+				"store",
+				"calendar",
+				"ask-lucca",
+				"ask-salesforce"
+			],
+			"disabled": [
+				"true",
+				"false"
+			]
+		}
+	}
+}

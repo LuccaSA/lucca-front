@@ -3,10 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { clearInputs, expectNgModelDisplay, mapInputs, repeatKeyboardUserEvent, waitForAngular } from 'stories/helpers/test';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { createTestStory } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { clearInputs, expectNgModelDisplay, mapInputs, repeatKeyboardUserEvent, waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 import { generateInputs } from '../../../../helpers/stories';
 
@@ -139,7 +139,7 @@ const basePlay = async ({ canvasElement, step, context }) => {
 		await userEvent.click(startHours);
 		await waitForAngular();
 		await expect(startHours).toHaveFocus();
-		await userEvent.type(startHours, '09:00');
+		await userEvent.type(startHours, '9');
 		await waitForAngular();
 		await expectNgModelDisplay(context.canvasElement, '{ "start": "09:00:00" }');
 
@@ -147,7 +147,7 @@ const basePlay = async ({ canvasElement, step, context }) => {
 		await userEvent.click(endHours);
 		await waitForAngular();
 		await expect(endHours).toHaveFocus();
-		await userEvent.type(endHours, '10:00');
+		await userEvent.type(endHours, '10');
 		await waitForAngular();
 		await expectNgModelDisplay(context.canvasElement, '{ "start": "09:00:00", "end": "10:00:00" }');
 	});
