@@ -57,9 +57,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 		// to avoid stale params when selection triggers an immediate clue reset
 		return of({
 			...this.filters(),
-			...(clue
-				? { search: applySearchDelimiter(clue, this.searchDelimiter()), sort: 'name' }
-				: { sort: 'legalunit.name,name' }),
+			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()), sort: 'name' } : { sort: 'legalunit.name,name' }),
 			...(this.operationIds() ? { operations: this.operationIds()!.join(',') } : {}),
 			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()!.join(',') } : {}),
 			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
