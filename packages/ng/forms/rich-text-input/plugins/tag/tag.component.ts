@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChild, viewChildren, ViewContainerRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -39,6 +39,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 	readonly focusIndex = signal<number>(0);
 
 	readonly focusableElements = viewChildren('focusable', { read: ElementRef });
+	readonly addTagButton = viewChild('addButton', { read: ElementRef });
 	readonly primaryTags = computed(() => this.tags().filter((t) => !t.secondary));
 	readonly secondaryTags = computed(() => this.tags().filter((t) => t.secondary));
 	readonly filteredSecondaryTags = computed(() => {
