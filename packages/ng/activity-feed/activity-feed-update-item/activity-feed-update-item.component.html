@@ -1,0 +1,11 @@
+<div class="activityFeed-content-update-item-object">
+	{{ label() }}
+	{{ colonDisplay() }}
+</div>
+<div class="activityFeed-content-update-item-before">
+	<ng-content select="[activityFeedUpdateBefore]" />
+</div>
+<lu-icon class="activityFeed-content-update-item-icon" size="XS" icon="arrowRight" [alt]="intl().replaceByAlt" />
+<div class="activityFeed-content-update-item-after">
+	<ng-content select="[activityFeedUpdateAfter]" />
+</div>

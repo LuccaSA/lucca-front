@@ -1,3 +1,4 @@
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -6,11 +7,10 @@ import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-fr
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
-import { waitForAngular } from '../../../../../helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
+import { HiddenArgType } from '../../../../../helpers/common-arg-types';
+import { createTestStory, generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions } from '../../../../../helpers/stories';
+import { waitForAngular } from '../../../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
@@ -81,7 +81,6 @@ export default {
 		},
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
-		previousPage: HiddenArgType,
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
 		optionTpl: HiddenArgType,
@@ -90,7 +89,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }> = {
+export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }, SelectCommonAliasInput>> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
 		return {

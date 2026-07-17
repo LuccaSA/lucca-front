@@ -3,6 +3,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, computed, Destroy
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { isNotNil } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ReplaySubject } from 'rxjs';
 import { BaseDataTableCell } from '../base-data-table-cell';
@@ -42,14 +43,14 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
-	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 	#destroyRef = inject(DestroyRef);
 
-	sort = model<DataTableSort | null>(null);
-	fixedWidth = input<string | null>(null);
-	inlineSize = input<string | null>(null);
+	readonly sort = model<DataTableSort | null>(null);
+	readonly fixedWidth = input<string | null>(null);
+	readonly inlineSize = input<string | null>(null);
 
-	insetInlineStart = computed(() => {
+	readonly insetInlineStart = computed(() => {
 		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
 		if (isFirstOrLastCol || !this.isStickyStart() || !this.headRef) {
 			return '';
@@ -59,12 +60,12 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 				.cols()
 				.slice(0, this.position())
 				.reduce((acc, col) => {
-					return acc + col.inlineSizePx();
+					return acc + (col.inlineSizePx() ?? 0);
 				}, 0) + 'px'
 		);
 	});
 
-	insetInlineEnd = computed(() => {
+	readonly insetInlineEnd = computed(() => {
 		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
 		if (isFirstOrLastCol || !this.isStickyEnd() || !this.headRef) {
 			return '';
@@ -72,16 +73,16 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		return (
 			this.headRef
 				.cols()
-				.slice(this.position() + 1)
+				.slice((this.position() ?? 0) + 1)
 				.reduce((acc, col) => {
-					return acc + col.inlineSizePx();
+					return acc + (col.inlineSizePx() ?? 0);
 				}, 0) + 'px'
 		);
 	});
 
-	#inlineSizePx$ = new ReplaySubject<number>();
+	readonly #inlineSizePx$ = new ReplaySubject<number>();
 
-	inlineSizePx = toSignal(this.#inlineSizePx$);
+	readonly inlineSizePx = toSignal(this.#inlineSizePx$);
 
 	ngAfterContentInit(): void {
 		const observer = new ResizeObserver(() => this.#inlineSizePx$.next(this.elementRef.nativeElement.clientWidth));
@@ -90,8 +91,9 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	}
 
 	toggleSort(): void {
-		if (this.sort()) {
-			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort()) + 1) % SORT_VALUES.length]);
+		const sort = this.sort();
+		if (isNotNil(sort)) {
+			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(sort) + 1) % SORT_VALUES.length]);
 		}
 	}
 }

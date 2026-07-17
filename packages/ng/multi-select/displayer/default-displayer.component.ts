@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, input, OnInit, ViewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, Injector, input, OnInit, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ChipComponent } from '@lucca-front/ng/chip';
@@ -48,34 +48,35 @@ let nextID = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
-	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
-	intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
+	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 
 	valueID = `value-${++nextID}`;
 
 	protected destroyRef = inject(DestroyRef);
+	readonly #injector = inject(Injector);
 
-	@ViewChild('inputElement')
-	inputElementRef: ElementRef<HTMLInputElement>;
+	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
 	get value(): T[] {
 		return this.select.value || [];
 	}
 
-	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
+	readonly context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
-	displayedOptions$ = this.context.option$.pipe(
+	readonly displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
-			if (this.select.maxValuesShown) {
-				return (options || []).slice(0, this.select.maxValuesShown);
+			const maxValuesShown = this.select.maxValuesShown();
+			if (maxValuesShown) {
+				return (options || []).slice(0, maxValuesShown);
 			}
 			return options;
 		}),
 	);
 
-	overflowOptions$ = this.context.option$.pipe(
+	readonly overflowOptions$ = this.context.option$.pipe(
 		map((options) => {
-			return Math.max(0, (options || []).length - this.select.maxValuesShown);
+			return Math.max(0, (options || []).length - this.select.maxValuesShown());
 		}),
 	);
 
@@ -88,23 +89,26 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			this.value.filter((o) => o !== option),
 			true,
 		);
-		setTimeout(() => {
-			this.select.panelRef?.updatePosition();
-			this.select.updatePosition();
-			this.inputElementRef.nativeElement.focus();
-			this.select.panelRef?.updateSelectedOptions(this.value);
-		});
+		afterNextRender(
+			() => {
+				this.select.panelRef?.updatePosition();
+				this.select.updatePosition();
+				this.inputElementRef()?.nativeElement.focus();
+				this.select.panelRef?.updateSelectedOptions(this.value);
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	inputBackspace(): void {
-		if (this.value.length > 0 && this.inputElementRef.nativeElement.value.length === 0) {
+		if (this.value.length > 0 && this.inputElementRef()?.nativeElement.value.length === 0) {
 			this.unselectOption(this.value[this.value.length - 1]);
 			this.select.panelRef?.updateSelectedOptions(this.value);
 		}
 	}
 
 	inputSpace(event: Event): void {
-		if (this.inputElementRef.nativeElement.value?.length === 0) {
+		if (this.inputElementRef()?.nativeElement.value?.length === 0) {
 			event.preventDefault();
 			this.select.panelRef?.selectCurrentlyHighlightedValue();
 		}
@@ -114,15 +118,17 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: true }) => {
 			// Everytime we want to focus, we need to reset the input
 			// This is done when a value is selected and when panel is opened.
-			if (!data?.keepClue) {
-				this.inputElementRef.nativeElement.value = '';
+			if (!data?.keepClue && this.inputElementRef()?.nativeElement) {
+				this.inputElementRef()!.nativeElement.value = '';
 				this.select.clueChanged('');
 			}
 
-			this.inputElementRef.nativeElement.focus();
+			this.inputElementRef()?.nativeElement.focus();
 		});
 		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-			this.inputElementRef.nativeElement.value = '';
+			if (this.inputElementRef()?.nativeElement) {
+				this.inputElementRef()!.nativeElement.value = '';
+			}
 		});
 	}
 }

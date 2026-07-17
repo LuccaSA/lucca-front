@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, viewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementRef, inject, Injector, input, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
@@ -49,17 +49,18 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly disabled = toSignal(this.select.disabled$);
 
 	readonly inputElementRef = viewChild.required<LuMultiSelectDisplayerInputDirective<TValue>, ElementRef<HTMLInputElement>>(LuMultiSelectDisplayerInputDirective, { read: ElementRef });
+	readonly #injector = inject(Injector);
 
 	unselectOption(option: TValue, $event: Event): void {
 		$event.stopPropagation();
 		$event.preventDefault();
-		this.select.updateValue(
-			this.select.value.filter((o) => o !== option),
-			true,
+		this.select.updateValue(this.select.value?.filter((o) => o !== option) ?? [], true);
+		afterNextRender(
+			() => {
+				this.select.panelRef?.updatePosition();
+				this.inputElementRef().nativeElement.focus();
+			},
+			{ injector: this.#injector },
 		);
-		setTimeout(() => {
-			this.select.panelRef?.updatePosition();
-			this.inputElementRef().nativeElement.focus();
-		});
 	}
 }

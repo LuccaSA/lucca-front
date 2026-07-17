@@ -24,32 +24,32 @@ export class SortableListItemComponent {
 	/**
 	 * Changes the text displayed by the sortable list item
 	 */
-	label = input.required<PortalContent>();
+	readonly label = input.required<PortalContent>();
 
 	/**
 	 * Adds descriptive help text below the label
 	 */
-	helperMessage = input<string>();
+	readonly helperMessage = input<string>();
 
 	/**
 	 * Sortable list item can be clickable
 	 */
-	clickable = input(false, { transform: booleanAttribute });
+	readonly clickable = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Disabled the possibility to clear the sortable list item
 	 */
-	unclearable = input(false, { transform: booleanAttribute });
+	readonly unclearable = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Sortable list item can be draggable
 	 */
-	drag = input(false, { transform: booleanAttribute });
+	readonly drag = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Applies small size to segmented control tabs
 	 */
-	small = input(false, { transform: booleanAttribute });
+	readonly small = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Emit event when click on clear

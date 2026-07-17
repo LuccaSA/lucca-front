@@ -36,14 +36,14 @@ import { LuRouterLink } from './lu-router-link';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
-	intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
-	routerLink = inject(LuRouterLink);
+	readonly intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
+	readonly routerLink = inject(LuRouterLink);
 	#injector = inject(Injector);
 	#elementRef = inject(ElementRef);
-	router = inject(Router);
-	location = inject(Location);
-	insideIndexTable = inject(LU_INDEX_TABLE_INSTANCE, { optional: true });
-	insideDataTable = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
+	readonly router = inject(Router);
+	readonly location = inject(Location);
+	readonly insideIndexTable = inject(LU_INDEX_TABLE_INSTANCE, { optional: true });
+	readonly insideDataTable = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
 	/**
 	 * Target page address. Use only for external links or pages not recognized by the router.

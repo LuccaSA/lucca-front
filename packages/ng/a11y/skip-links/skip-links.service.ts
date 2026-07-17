@@ -3,9 +3,9 @@ import { LuSkipLink } from './skip-link';
 
 @Injectable({ providedIn: 'root' })
 export class SkipLinksService {
-	#links = signal<LuSkipLink[]>([]);
+	readonly #links = signal<LuSkipLink[]>([]);
 
-	links = computed(() => {
+	readonly links = computed(() => {
 		return [...this.#links()].sort((a, b) => {
 			const pos = a.host.compareDocumentPosition(b.host);
 			if (pos & Node.DOCUMENT_POSITION_PRECEDING) return 1;

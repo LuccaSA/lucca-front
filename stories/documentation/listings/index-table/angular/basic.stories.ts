@@ -23,25 +23,6 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 import { HiddenArgType } from '@/helpers/common-arg-types';
 import { setStoryOptions } from '@/helpers/stories';
 
-interface BasicStory {
-	action: string;
-	pagination: boolean;
-	selectable: boolean;
-	stack: number;
-	group: boolean;
-	groupButtonAlt: string;
-	expanded: boolean;
-	footer: boolean;
-	intermediateFooter: boolean;
-	allowSelection: boolean;
-	allowAction: boolean;
-	hiddenLabel: boolean;
-	sort: string;
-	align: string;
-	layoutFixed: boolean;
-	empty: boolean;
-}
-
 export default {
 	title: 'Documentation/Listings/Index Table/Angular/Basic',
 	argTypes: {
@@ -54,6 +35,13 @@ export default {
 		},
 		selectable: {
 			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+		},
+		mixed: {
+			if: { arg: 'selectable', truthy: true },
+			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
+		},
+		disabled: {
+			if: { arg: 'selectable', truthy: true },
 		},
 		action: {
 			options: ['link', 'button', 'user', 'file'],
@@ -136,62 +124,83 @@ export default {
 			providers: [provideAnimations(), provideHttpClient()],
 		}),
 	],
-} as Meta;
+	render: (args, { argTypes }) => {
+		const {
+			stack,
+			selectable,
+			mixed,
+			disabled,
+			group,
+			allowAction,
+			allowSelection,
+			groupButtonAlt,
+			intermediateFooter,
+			action,
+			hiddenLabel,
+			sort,
+			align,
+			expanded,
+			pagination,
+			layoutFixed,
+			empty,
+			footer,
+		} = args;
 
-function getTemplate(args: BasicStory): string {
-	const stackParam = args.stack >= 2 ? ` stack="${args.stack}"` : ``;
-	const selectableAttr = args.selectable ? ` selectable` : ``;
-	const selectableParam = args.selectable ? ` selectedLabel="Sélectionner cette ligne"` : ``;
-	const selectableAllParam = args.selectable ? ` selectedLabel="Sélectionner toutes les lignes"` : ``;
-	const groupAttr = args.group ? ` [group]="samplePortalContent"` : ``;
-	const allowSelectionAttr = args.allowSelection ? ` allowTextSelection` : ``;
-	const allowActionTpl = args.allowAction ? `<a href="#">Content</a>` : `Content`;
-	const intermediateFooterAttr = args.intermediateFooter ? ` tfoot` : ``;
-	const hiddenLabelAttr = args.hiddenLabel ? ` hiddenLabel` : ``;
-	const sortAttr = args.sort ? ` sort="${args.sort}"` : ``;
-	const alignAttr = args.align ? ` align="${args.align}"` : ``;
-	const groupExpandedAttr = args.expanded && args.group ? ` [expanded]="true"` : ``;
-	const groupButtonAltAttr = args.group ? ` groupButtonAlt="${args.groupButtonAlt}"` : ``;
-	const layoutFixedAttr = args.layoutFixed ? ` layoutFixed` : ``;
-	const emptyAttr = args.empty ? ` empty` : ``;
-	const footerTpl = args.footer
-		? `
+		const stackParam = stack >= 2 ? ` stack="${stack}"` : ``;
+		const selectableAttr = selectable ? ` selectable` : ``;
+		const disabledAttr = disabled ? ` disabled` : ``;
+		const mixedAttr = mixed ? ` mixed` : ``;
+		const selectableParam = selectable ? ` selectedLabel="Sélectionner cette ligne"` : ``;
+		const selectableAllParam = selectable ? ` selectedLabel="Sélectionner toutes les lignes"` : ``;
+		const groupAttr = group ? ` [group]="samplePortalContent"` : ``;
+		const allowSelectionAttr = allowSelection ? ` allowTextSelection` : ``;
+		const allowActionTpl = allowAction ? `<a href="#">Content</a>` : `Content`;
+		const intermediateFooterAttr = intermediateFooter ? ` tfoot` : ``;
+		const hiddenLabelAttr = hiddenLabel ? ` hiddenLabel` : ``;
+		const sortAttr = sort ? ` sort="${sort}"` : ``;
+		const alignAttr = align ? ` align="${align}"` : ``;
+		const groupExpandedAttr = expanded && group ? ` [expanded]="true"` : ``;
+		const groupButtonAltAttr = group ? ` groupButtonAlt="${groupButtonAlt}"` : ``;
+		const layoutFixedAttr = layoutFixed ? ` layoutFixed` : ``;
+		const emptyAttr = empty ? ` empty` : ``;
+		const footerTpl = footer
+			? `
 	<tfoot luIndexTableFoot>
 		<tr luIndexTableRow>
 			<td colspan="3" luIndexTableCell>Content</td>
 		</tr>
 	</tfoot>`
-		: ``;
-	const paginationTpl = args.pagination
-		? `
+			: ``;
+		const paginationTpl = pagination
+			? `
 	<lu-pagination indexTablePagination from="1" to="20" itemsCount="27" isFirstPage />`
-		: ``;
-	let actionTpl = ``;
-	switch (args.action) {
-		case 'button':
-			actionTpl = `
+			: ``;
+		let actionTpl = ``;
+		switch (action) {
+			case 'button':
+				actionTpl = `
 				<button luIndexTableAction type="button">button</button>
 			`;
-			break;
-		case 'user':
-			actionTpl = `
+				break;
+			case 'user':
+				actionTpl = `
 				<button luIndexTableAction type="button" class="pr-u-mask">{{ bob | luUserDisplay:'lf' }}</button>
 				<button class="userPopover_trigger" [luUserPopover]="bob">user</button>
 			`;
-			break;
-		case 'file':
-			actionTpl = `
+				break;
+			case 'file':
+				actionTpl = `
 				<label luIndexTableAction for="myInput">file</label>
 				<input luIndexTableAction id="myInput" type="file" />
 			`;
-			break;
-		default:
-			actionTpl = `
+				break;
+			default:
+				actionTpl = `
 				<a luIndexTableAction href="#">link</a>
 			`;
-	}
-	const tbodyTpl = args.empty
-		? `<tr luIndexTableRow>
+		}
+		const tbodyTpl = empty
+			? `<tr luIndexTableRow>
 			<th luIndexTableCell colspan="3">
 				<lu-empty-state-section
 					hx="3"
@@ -201,12 +210,12 @@ function getTemplate(args: BasicStory): string {
 				/>
 			</th>
 		</tr>`
-		: `<tr luIndexTableRow${selectableParam}${stackParam}>
+			: `<tr luIndexTableRow${selectableParam}${stackParam}>
 			<th luIndexTableCell>${actionTpl}</th>
 			<td luIndexTableCell>Content</td>
 			<td luIndexTableCell>Content</td>
 		</tr>
-		<tr luIndexTableRow${selectableParam}>
+		<tr luIndexTableRow${selectableParam}${disabledAttr}>
 			<td luIndexTableCell colspan="3"${alignAttr}${intermediateFooterAttr}>Content</td>
 		</tr>
 		<tr luIndexTableRow${selectableParam}>
@@ -214,17 +223,18 @@ function getTemplate(args: BasicStory): string {
 			<td luIndexTableCell${allowSelectionAttr}>${allowActionTpl}</td>
 			<td luIndexTableCell>Content Content Content</td>
 		</tr>`;
-	const samplePortalContentTpl = args.group
-		? `
+		const samplePortalContentTpl = group
+			? `
 <ng-template #samplePortalContent>
 	Group label
 	<lu-numeric-badge [value]="8" />
 </ng-template>`
-		: ``;
+			: ``;
 
-	return `<lu-index-table${selectableAttr}${layoutFixedAttr}${emptyAttr}>
+		return {
+			template: `<lu-index-table${selectableAttr}${layoutFixedAttr}${emptyAttr}>
 	<thead luIndexTableHead>
-		<tr luIndexTableRow${selectableAllParam}>
+		<tr luIndexTableRow${selectableAllParam}${mixedAttr}>
 			<th luIndexTableCell>Label</th>
 			<th luIndexTableCell${hiddenLabelAttr}>Label</th>
 			<th luIndexTableCell${alignAttr}${sortAttr}>Label</th>
@@ -234,19 +244,18 @@ function getTemplate(args: BasicStory): string {
 		${tbodyTpl}
 	</tbody>${footerTpl}${paginationTpl}
 </lu-index-table>${samplePortalContentTpl}
-`;
-}
+`,
+		};
+	},
+} as Meta;
 
-const Template = (args: BasicStory) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const Basic: StoryObj<BasicStory> = {
+export const Basic: StoryObj = {
 	args: {
 		empty: false,
 		layoutFixed: false,
 		selectable: false,
+		disabled: false,
+		mixed: false,
 
 		sort: '',
 		align: '',
@@ -266,5 +275,4 @@ export const Basic: StoryObj<BasicStory> = {
 		footer: false,
 		pagination: false,
 	},
-	render: Template,
 };

@@ -1,6 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component, Directive, forwardRef, viewChild } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { skip } from 'rxjs';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { MAGIC_DEBOUNCE_DURATION } from '../api/api.directive';
@@ -31,8 +33,8 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LuUsersDirectiveHostComponent {
-	simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
-	usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
+	readonly simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
+	readonly usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
 }
 
 const CURRENT_USER_ID = 12;
@@ -74,6 +76,35 @@ describe('LuCoreSelectUsersDirective', () => {
 		// Assert (Me + Initial list)
 		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
 		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,20`);
+		httpTestingController.verify();
+	}));
+
+	it('should still load first page when the me request fails', fakeAsync(() => {
+		// Arrange
+		usersDirective.setPageSize(3);
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+
+		const page1 = [createUser(1), createUser(2), createUser(3)];
+
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		// Act
+		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		meReq.flush(null, { status: 500, statusText: 'Server Error' });
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		const page1Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,3`);
+		page1Req.flush(usersResponse(page1));
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		// Assert
+		let options: readonly LuCoreSelectUser[] = [];
+		options = simpleSelect.dataSourceOptions();
+
+		expect(options).toEqual(page1);
 		httpTestingController.verify();
 	}));
 
@@ -138,10 +169,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert (Page 1)
-		let options: readonly LuCoreSelectUser[];
-		simpleSelect.options$.subscribe((o) => (options = o));
-
-		expect(options).toEqual([meUser, ...page1]);
+		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, ...page1]);
 
 		// Act (Page 2)
 		simpleSelect.nextPage$.next();
@@ -154,7 +182,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert (Page 2)
-		expect(options).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
+		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
 		httpTestingController.verify();
 	}));
 
@@ -183,7 +211,11 @@ describe('LuCoreSelectUsersDirective', () => {
 
 		// Act
 		const options: Array<readonly LuCoreSelectUser[]> = [];
-		simpleSelect.options$.subscribe((o) => options.push(o));
+		TestBed.runInInjectionContext(() =>
+			toObservable(simpleSelect.dataSourceOptions)
+				.pipe(skip(1))
+				.subscribe((o) => options.push(o)),
+		);
 
 		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
 		meReq.flush(usersResponse([meUser]));
@@ -209,7 +241,7 @@ describe('LuCoreSelectUsersDirective', () => {
 });
 
 function createUser(id: number, lastName = 'test ' + id, firstName = 'test ' + id): LuCoreSelectUser {
-	return { id, firstName, lastName, picture: null };
+	return { id, firstName, lastName };
 }
 
 function usersResponse(users: LuCoreSelectUser[]) {

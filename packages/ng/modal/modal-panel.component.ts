@@ -1,9 +1,9 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Directive, DoCheck, ElementRef, Injector, OnDestroy, Renderer2, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, DoCheck, ElementRef, Injector, OnDestroy, Renderer2, Type, viewChild, ViewContainerRef } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Observable, ReplaySubject, Subject, Subscription, isObservable, of, timer } from 'rxjs';
+import { isObservable, Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
 import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { LuModalClasses } from './modal-config.model';
 import { ALuModalRef } from './modal-ref.model';
@@ -14,18 +14,17 @@ let modalId = 0;
 
 @Directive()
 export abstract class ALuModalPanelComponent<T extends ILuModalContent> implements OnDestroy, DoCheck {
-	@ViewChild('container', { read: ViewContainerRef, static: true })
-	protected _containerRef: ViewContainerRef;
+	protected readonly _containerRef = viewChild.required('container', { read: ViewContainerRef });
 	protected _componentInstance: ILuModalContent;
-	protected doCheck$ = new ReplaySubject<void>(1);
+	protected readonly doCheck$ = new ReplaySubject<void>(1);
 
 	public intl = getIntl(LU_MODAL_TRANSLATIONS);
-	protected title$ = this.listenComponentValue(() => this._componentInstance.title);
-	protected submitLabel$ = this.listenComponentValue(() => this._componentInstance.submitLabel || this.intl.submit);
-	protected cancelLabel$ = this.listenComponentValue(() => this._componentInstance.cancelLabel || this.intl.cancel);
-	protected submitCounter$ = this.listenComponentValue(() => this._componentInstance.submitCounter);
-	protected submitDisabled$ = this.listenComponentValue(() => this._componentInstance.submitDisabled);
-	protected hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
+	protected readonly title$ = this.listenComponentValue(() => this._componentInstance.title);
+	protected readonly submitLabel$ = this.listenComponentValue(() => this._componentInstance.submitLabel || this.intl.submit);
+	protected readonly cancelLabel$ = this.listenComponentValue(() => this._componentInstance.cancelLabel || this.intl.cancel);
+	protected readonly submitCounter$ = this.listenComponentValue(() => this._componentInstance.submitCounter);
+	protected readonly submitDisabled$ = this.listenComponentValue(() => this._componentInstance.submitDisabled);
+	protected readonly hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
 
 	protected closeLabel = this.intl.close;
 
@@ -36,8 +35,8 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 		return this._componentInstance.submitPalette || 'product';
 	}
 
-	submitClass$ = new Subject();
-	error$ = new Subject();
+	readonly submitClass$ = new Subject();
+	readonly error$ = new Subject();
 
 	public readonly modalId = modalId++;
 
@@ -56,7 +55,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 		this.doCheck$.next();
 	}
 	attachInnerComponent(componentType: Type<T>, injector: Injector) {
-		const ref = this._containerRef.createComponent(componentType, { injector });
+		const ref = this._containerRef().createComponent(componentType, { injector });
 		this._componentInstance = ref.instance;
 		return ref;
 	}
@@ -70,7 +69,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	submit() {
 		this.error$.next(undefined);
 		this.submitClass$.next('is-loading');
-		const result$ = this._componentInstance.submitAction();
+		const result$ = this._componentInstance.submitAction?.();
 		if (result$ instanceof Observable) {
 			this._subs.add(
 				result$

@@ -155,7 +155,6 @@ export const coreSelectStory = {
 		overlayConfig: HiddenArgType,
 		page: HiddenArgType,
 		placeholder: HiddenArgType,
-		previousPage: HiddenArgType,
 		valueTpl: HiddenArgType,
 	},
 } satisfies StoryObj<LuCoreSelectInputStoryComponent>;

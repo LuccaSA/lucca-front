@@ -67,6 +67,10 @@ export default {
 			if: { arg: 'selectable', truthy: true },
 			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes.',
 		},
+		mixed: {
+			if: { arg: 'selectable', truthy: true },
+			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
+		},
 		disabled: {
 			if: { arg: 'selectable', truthy: true },
 		},
@@ -194,6 +198,7 @@ export default {
 			cellBorder,
 			inlineSize,
 			inlineSizeValue,
+			mixed,
 			selectable,
 			lines,
 			nested,
@@ -216,6 +221,7 @@ export default {
 		const selectedAttr = selected ? ` [selected]="true"` : ``;
 		const selectableLabelAttr = selectable ? ` selectedLabel="${selectedLabel}"` : ``;
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
+		const mixedAttr = mixed ? ` mixed` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
 		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" [group]="samplePortalContent"` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
@@ -310,7 +316,7 @@ export default {
 			props: { example: text },
 			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}${draggable}${emptyAttr}>
 	<thead luDataTableHead>
-		<tr luDataTableRow${selectableLabelHeadAttr}>
+		<tr luDataTableRow${selectableLabelHeadAttr}${mixedAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
 			<th luDataTableCell${inlineSizeAttr}${sortAttr}${alignAttr}>${textHeader}</th>
 		</tr>
@@ -340,6 +346,7 @@ export const Basic: StoryObj = {
 		inlineSizeValue: '6rem',
 		selectable: false,
 		selected: false,
+		mixed: false,
 		disabled: false,
 		selectedLabel: 'Sélectionner cette ligne',
 		selectedLabelHead: 'Sélectionner toutes les lignes',

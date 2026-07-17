@@ -133,9 +133,13 @@ describe('LuMultiSelectInputComponent', () => {
 
 				const { componentInstance } = fixture;
 				selectAllDirective = fixture.componentRef.injector.get<LuMultiSelectWithSelectAllDirective<TestEntity>>(LuMultiSelectWithSelectAllDirective);
-				componentInstance.registerOnChange((value) => emittedSelectValues.push(value));
+				componentInstance.registerOnChange((value) => {
+					if (value !== null) {
+						emittedSelectValues.push(value);
+					}
+				});
 
-				componentInstance.options = options;
+				componentInstance.options.set(options);
 
 				fixture.componentRef.setInput('totalCount', options.length);
 				fixture.componentRef.setInput('withSelectAllDisplayerLabel', 'Displayer Label');

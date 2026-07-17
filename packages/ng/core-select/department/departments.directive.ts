@@ -65,7 +65,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 			);
 	}
 
-	trim(options: TreeNode<T>[], clue: string): TreeNode<T>[] {
+	trim(options: readonly TreeNode<T>[], clue: string): TreeNode<T>[] {
 		return options
 			.map((option) => {
 				if (option.node.name.toLowerCase().includes(clue.toLowerCase())) {

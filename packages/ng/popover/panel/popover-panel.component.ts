@@ -1,7 +1,9 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, input, OnDestroy, TemplateRef, viewChild } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
+import { isNotNil, syncInputSignal, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { luTransformPopover } from '../animation/index';
 import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './popover-panel.model';
 
@@ -20,49 +22,28 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	protected _templateContext: unknown;
 
 	/** Template to Use for the popover */
-	get template(): TemplateRef<unknown> {
-		return this._template;
-	}
-	@Input()
-	set template(value: TemplateRef<unknown>) {
-		this._template = value;
-	}
+	readonly template = input<TemplateRef<unknown>>();
 
 	/** Template context to use for the popover when created using a template */
-	get templateContext(): unknown {
-		return this._templateContext;
-	}
-	@Input('template-context')
-	set templateContext(value: unknown) {
-		this._templateContext = value;
-	}
+	readonly templateContext = input<unknown>(undefined, { alias: 'template-context' });
 
 	/**
 	 * Popover container close on click
 	 * default: false
 	 */
-	@Input('close-on-click')
-	set inputCloseOnClick(v: boolean) {
-		this.closeOnClick = v;
-	}
+	readonly inputCloseOnClick = input<boolean>(false, { alias: 'close-on-click' });
 
 	/**
 	 * Popover focus trap using cdkTrapFocus
 	 * default: false
 	 */
-	@Input('trap-focus')
-	set inputTrapFocus(v: boolean) {
-		this.trapFocus = v;
-	}
+	readonly inputTrapFocus = input<boolean>(false, { alias: 'trap-focus' });
 
 	/**
 	 * Popover scrollStrategy
 	 * default: reposition
 	 */
-	@Input('scroll-strategy')
-	set inputScrollStrategy(v: LuPopoverScrollStrategy) {
-		this.scrollStrategy = v;
-	}
+	readonly inputScrollStrategy = input<LuPopoverScrollStrategy>('reposition', { alias: 'scroll-strategy' });
 
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
@@ -70,34 +51,45 @@ export class LuPopoverPanelComponent extends ALuPopoverPanel implements ILuPopov
 	 * to style the containing popover from outside the component.
 	 * @param classes list of class names
 	 */
-	@Input('panel-classes')
-	set inputPanelClasses(classes: string) {
-		this.panelClasses = classes;
-	}
+	readonly inputPanelClasses = input<string>('', { alias: 'panel-classes' });
+
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container. Otherwise, it's difficult
 	 * to style the containing popover from outside the component.
 	 * @param classes list of class names
 	 */
-	@Input('content-classes')
-	set inputContentClasses(classes: string) {
-		this.contentClasses = classes;
-	}
+	readonly inputContentClasses = input<string>('', { alias: 'content-classes' });
+
+	override readonly close = new EventEmitter<void>();
+	override readonly open = new EventEmitter<void>();
+	override readonly hovered = new EventEmitter<boolean>();
 
 	/** Event emitted when the popover is closed. */
-	// eslint-disable-next-line @angular-eslint/no-output-native
-	@Output() override close = new EventEmitter<void>();
-	@Output() override open = new EventEmitter<void>();
-	@Output() override hovered = new EventEmitter<boolean>();
+	protected readonly closeOutput = outputFromObservable(this.close, { alias: 'close' });
+	/** Event emitted when the popover is open. */
+	protected readonly openOutput = outputFromObservable(this.open, { alias: 'open' });
+	/** Event emitted when the popover is hovered. */
+	protected readonly hoveredOutput = outputFromObservable(this.hovered, { alias: 'hovered' });
 
-	@ViewChild(TemplateRef, { static: true })
-	set vcTemplateRef(tr: TemplateRef<unknown>) {
-		this.templateRef = tr;
-	}
+	readonly vcTemplateRef = viewChild(TemplateRef);
 
 	constructor() {
 		super();
+
+		syncInputSignal(this.template, (template) => (this._template = template));
+		syncInputSignal(this.templateContext, (templateContext) => (this._templateContext = templateContext));
+		syncInputSignal(this.inputCloseOnClick, (closeOnClick) => (this.closeOnClick = closeOnClick));
+		syncInputSignal(this.inputTrapFocus, (trapFocus) => (this.trapFocus = trapFocus));
+		syncInputSignal(this.inputScrollStrategy, (scrollStrategy) => (this.scrollStrategy = scrollStrategy));
+		syncInputSignal(this.inputPanelClasses, (panelClasses) => (this.panelClasses = panelClasses));
+		syncInputSignal(this.inputContentClasses, (contentClasses) => (this.contentClasses = contentClasses));
+
+		ɵeffectWithDeps([this.vcTemplateRef], (vcTemplateRef) => {
+			if (isNotNil(vcTemplateRef)) {
+				this.templateRef = vcTemplateRef;
+			}
+		});
 	}
 
 	ngOnDestroy() {

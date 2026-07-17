@@ -47,7 +47,7 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	#onChange?: (value: TimeRangePickerRange | null) => void;
 	#onTouched?: () => void;
-	#disabledState = signal(false);
+	readonly #disabledState = signal(false);
 
 	readonly inputFocused = signal(false);
 
@@ -69,7 +69,7 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	readonly step = input<ISO8601Duration | null>(null);
 
-	keyPressed = signal(false);
+	readonly keyPressed = signal(false);
 
 	readonly startValue = computed(() => this.value()?.start ?? DEFAULT_TIME_VALUE);
 	readonly endValue = computed(() => this.value()?.end ?? DEFAULT_TIME_VALUE);

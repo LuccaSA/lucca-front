@@ -18,6 +18,10 @@ export function setStoryOptions<T extends string | number>(list: readonly T[]): 
 	return hasEmpty ? [...list] : ['', ...list];
 }
 
+export type InputAlias<T, A extends Partial<Record<keyof T, string>>> = Omit<T, keyof A | A[keyof A]> & { [K in keyof A as A[K]]: T[K & keyof T] };
+
+export type SelectCommonAliasInput = { clearableInput: 'clearable'; loadingInput: 'loading' };
+
 export function generateMarkdownCodeBlock(lang: string, code: string): string {
 	return `
 \`\`\`${lang}
@@ -93,6 +97,8 @@ export function cleanupTemplate(template: string): string {
 		.replace(/ {2,}/gm, ' ');
 }
 
+// TODO SIGNAL
+// if name end with Input remove Input to have correct input name no alias || type generic pour appliquer les alias
 export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTypes, disableBooleanAttributes = false): string {
 	return Object.entries(inputs).reduce((acc, [name, value]) => {
 		const argType = argTypes[name];

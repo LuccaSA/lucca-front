@@ -77,7 +77,8 @@ export default {
 		const stickyColsStartAttr = stickyColsStart > 0 ? ` stickyColsStart="${stickyColsStart}"` : ``;
 		const stickyColsEndAttr = stickyColsEnd > 0 ? ` stickyColsEnd="${stickyColsEnd}"` : ``;
 
-		let colsContent = `<td luDataTableCell>${text}</td>`;
+		let colsContent = `
+			<td luDataTableCell>${text}</td>`;
 		let colsHeaderContent = `
 			<th luDataTableCell>${textHeader}</th>`;
 		let linesContent = ``;
