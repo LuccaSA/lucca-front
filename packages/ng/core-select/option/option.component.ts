@@ -1,9 +1,9 @@
-import { afterNextRender, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, Injector, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, Injector, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
 import { intlInputOptions, isNil, luBooleanAttribute, luOptionalNumberAttribute, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn } from 'rxjs';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';
-import { GroupTemplateLocation } from '../panel/panel.utils';
+import { GroupTemplateLocation, scrollIntoViewOnceReady } from '../panel/panel.utils';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
 import { LuOptionContext, LuOptionGrouping, SELECT_ID } from '../select.model';
 import { LuOptionGroupPipe } from './group.pipe';
@@ -63,13 +63,9 @@ export class LuOptionComponent<T> implements OnInit {
 	constructor() {
 		ɵeffectWithDeps([this.selectableItem.isHighlighted], (isHighlighted, onCleanup) => {
 			if (isHighlighted && !untracked(this.#panelRef.pointerNavigation)) {
-				const ref = afterNextRender(
-					() => {
-						this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions());
-					},
-					{ injector: this.#injector },
-				);
-				onCleanup(() => ref.destroy());
+				// Wait for the panel layout to settle (opening animation) before scrolling,
+				// otherwise the browser computes a bogus scroll position.
+				onCleanup(scrollIntoViewOnceReady(this.elementRef.nativeElement, this.#injector, () => this.scrollIntoViewOptions()));
 			}
 		});
 
