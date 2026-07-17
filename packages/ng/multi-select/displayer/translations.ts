@@ -47,4 +47,10 @@
 		showResultsDetails: 'Show details',
 		removeOption: 'Remove option',
 	},
+	pl: {
+		otherResult: 'inny wynik',
+		otherResults: 'inne wyniki',
+		showResultsDetails: 'Zobacz szczegóły',
+		removeOption: 'Usuń opcję',
+	},
 };

@@ -15,7 +15,7 @@ import {
 	TextInputComponent,
 } from '@lucca-front/ng/forms';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 const PALETTE: ColorOption[] = [
 	{ index: 0, background: '#E53935', name: 'Crimson' },

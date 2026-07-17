@@ -27,6 +27,7 @@ demo/ng
 
 # storybook
 .storybook/documentation.json
+documentation.json
 storybook-static
 
 # compodoc
@@ -45,6 +46,8 @@ compodoc-static
 
 # skills generator — local credentials
 scripts/generate-skills/generate-skills-config.json
+# skills generator — transient fetch-failure manifest (ZH/Figma), used by --retry-failed
+.github/skills/_fetch-failures.json
 
 # Playwright
 /test-results/

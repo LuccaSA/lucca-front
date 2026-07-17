@@ -1,4 +1,4 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -16,9 +16,10 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { required, ...fieldArgs } = args;
+		const { required, label, ...fieldArgs } = args;
 		return {
 			props: {
+				label,
 				form: new FormGroup({
 					example: new FormControl(null, [Validators.required]),
 				}),
@@ -31,7 +32,7 @@ export default {
 @if(timer$ | async){
 
 <form [formGroup]="form">
-	<lu-form-field ${generateInputs(fieldArgs, argTypes)}>
+	<lu-form-field [label]="label" ${generateInputs(fieldArgs, argTypes)}>
 		<div class="textField">
 			<div class="textField-input">
 				<textarea

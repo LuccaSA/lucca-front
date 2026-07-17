@@ -2,7 +2,7 @@ import { IconsList } from '@/stories/icons-list';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'icon-basic-stories',

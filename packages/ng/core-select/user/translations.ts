@@ -31,4 +31,8 @@
 		me: 'Me:',
 		includeFormerEmployees: 'Include former employees',
 	},
+	pl: {
+		me: 'Ja:',
+		includeFormerEmployees: 'Uwzględnienie pracowników, którzy odeszli',
+	},
 };

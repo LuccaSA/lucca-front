@@ -71,4 +71,13 @@
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-pt.svg',
 		newTab: 'Abrir num novo separador',
 	},
+	pl: {
+		urlAppStore: 'https://apps.apple.com/fr/app/lucca/id1575212411',
+		urlGooglePlay: 'https://play.google.com/store/apps/details/Timmi?id=net.ilucca.timmi_pwa.twa',
+		altGooglePlay: 'Dostępne w Google Play',
+		altAppStore: 'Pobierz z App Store',
+		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-fr.svg',
+		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-fr.svg',
+		newTab: 'Otwórz w nowej karcie',
+	},
 };

@@ -15,7 +15,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'tr-component',
@@ -33,7 +33,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 		<td luDataTableCell>cell</td>
 	</tr>`,
 })
-export class TrComponent {}
+class TrComponent {}
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Inject',

@@ -27,5 +27,7 @@ export const HIGHLIGHT_DATA_ILLUSTRATION = [
 	'polaroid-female',
 	'polaroid-male',
 	'polaroids',
+	'post-it-success',
+	'post-it-warning',
 ] as const;
 export type HighlightDataIllustration = (typeof HIGHLIGHT_DATA_ILLUSTRATION)[number] | 'manifying-glass';

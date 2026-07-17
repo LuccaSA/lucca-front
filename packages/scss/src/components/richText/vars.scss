@@ -9,6 +9,6 @@
 	// with css vars deprecated before values
 	--components-richTextField-content-resize: var(--components-richTextField-resize, vertical);
 	--components-richTextField-content-height: var(--components-richTextField-height, calc(3lh + var(--pr-t-spacings-200)));
-	--components-richTextField-content-minHeight: var(--components-richTextField-minHeigh, calc(2lh + var(--pr-t-spacings-200)));
+	--components-richTextField-content-minHeight: var(--components-richTextField-minHeight, calc(2lh + var(--pr-t-spacings-200)));
 	--components-richTextField-content-maxHeight: var(--components-richTextField-maxHeight, 90dvb);
 }

@@ -1,11 +1,10 @@
+import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CALLOUT_HX, CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, userEvent, within } from 'storybook/test';
 
 export default {
@@ -90,7 +89,9 @@ export default {
 			description: '[v21.4] Applique un niveau sémantique au titre.',
 			if: { arg: 'heading', truthy: true },
 		},
-		removedChange: HiddenArgType,
+		removedChange: {
+			description: 'Événement déclenché lors de l’activation du bouton de suppression.',
+		},
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
 			control: {

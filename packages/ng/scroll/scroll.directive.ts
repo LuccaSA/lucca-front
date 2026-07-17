@@ -1,5 +1,6 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Directive, ElementRef, input, OnInit, output } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, input, OnInit, output } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ILuScrollable } from './scroll.model';
@@ -22,6 +23,8 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 	readonly onScrollLeft = output<Event>();
 	readonly onScrollRight = output<Event>();
 
+	#destroyRef = inject(DestroyRef);
+
 	#scrollSubject = new Subject<Event>();
 	readonly #scroll$ = this.#scrollSubject.asObservable().pipe(debounceTime(this.debounceTime()));
 
@@ -30,7 +33,7 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 	}
 
 	ngOnInit(): void {
-		this.#scroll$.subscribe((scrollEvent) => this.emitScrollEvents(scrollEvent));
+		this.#scroll$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((scrollEvent) => this.emitScrollEvents(scrollEvent));
 	}
 	private emitScrollEvents($event: Event) {
 		this.onScroll.emit($event);

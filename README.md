@@ -7,12 +7,13 @@
 Lucca Front is a modular framework for developing web applications by [lucca](http://www.lucca.fr).
 It uses sub-packages architecture with unified versioning, à la [angular](https://github.com/angular/angular).
 
-## Lucca Front contains 4 packages
+## Lucca Front contains 5 packages
 
 - a set of icons [@lucca-front/icons](packages/icons/README.md)
 - a SCSS framework [@lucca-front/scss](packages/scss/README.md)
 - a library of lucca components [@lucca-front/ng](packages/ng/README.md)
 - a library of design system components [@lucca-front/prisme](packages/prisme/README.md)
+- a shareable stylelint configuration [@lucca/stylelint-config-prisme](packages/stylelint-config/README.md)
 
 Angular package depends on the SCSS one which depends itself on Icons.
 
@@ -88,6 +89,27 @@ In angular.json, we suggest to add a couple of entries to your paths:
   },
 },
 ```
+
+## Linting your styles
+
+`@lucca/stylelint-config-prisme` is a shareable [Stylelint](https://stylelint.io/) configuration. It lints your code with the standard CSS & SCSS rules, adapts some of them for Lucca Front specifics, and warns about deprecated LF features (errors for deleted ones).
+
+Install it as a dev dependency:
+
+```
+npm i --save-dev stylelint @lucca/stylelint-config-prisme
+```
+
+Then extend it in a _stylelint.config.js_ file at your project root:
+
+```js
+module.exports = {
+  extends: ['@lucca/stylelint-config-prisme'],
+  rules: {},
+};
+```
+
+For CI, editor integration (VS Code, WebStorm), overrides, and troubleshooting, see the [stylelint-config package documentation](packages/stylelint-config/README.md).
 
 ## How to update
 
