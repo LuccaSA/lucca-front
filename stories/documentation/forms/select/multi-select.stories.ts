@@ -578,6 +578,70 @@ export const Establishment = generateStory({
 	},
 });
 
+export const EstablishmentTEST = createTestStory(Establishment, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('combobox');
+	let initialCount = 0;
+
+	await step('Open panel and load initial options', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		initialCount = options.length;
+		await expect(initialCount).toBeGreaterThan(1);
+	});
+
+	await step('Search filters the options through the API', async () => {
+		await userEvent.type(input, 'Marseille');
+		// Wait for the debounced API call to filter the options
+		await waitFor(async () => {
+			const options = await within(screen.getByRole('listbox')).findAllByRole('option');
+			expect(options.length).toBeLessThan(initialCount);
+		});
+		const options = await within(screen.getByRole('listbox')).findAllByRole('option');
+		await expect(options[0]).toHaveTextContent('Marseille');
+	});
+
+	await step('Selecting an option clears the search and restores the full list', async () => {
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		await userEvent.click(options[0]);
+		await waitForAngular();
+		// The search input must be cleared…
+		await expect(input).toHaveValue('');
+		// …and the panel must show the unfiltered list again
+		// (regression: the panel used to keep showing only the filtered results)
+		await waitFor(async () => {
+			const refreshedOptions = await within(screen.getByRole('listbox')).findAllByRole('option');
+			expect(refreshedOptions.length).toBe(initialCount);
+		});
+	});
+
+	await step('Keyboard: search then Enter also restores the full list', async () => {
+		await expect(input).toHaveFocus();
+		await userEvent.type(input, 'Marseille');
+		await waitFor(async () => {
+			const options = await within(screen.getByRole('listbox')).findAllByRole('option');
+			expect(options.length).toBeLessThan(initialCount);
+		});
+		// Enter toggles the highlighted option (unselects the one picked above)
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(input).toHaveValue('');
+		await waitFor(async () => {
+			const refreshedOptions = await within(screen.getByRole('listbox')).findAllByRole('option');
+			expect(refreshedOptions.length).toBe(initialCount);
+		});
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => {
+			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+		});
+	});
+});
+
 export const Department = generateStory({
 	name: 'Departement Select',
 	description: 'Pour saisir un département, il suffit d’utiliser la directive `departments`',
