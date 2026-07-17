@@ -93,6 +93,21 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	protected readonly clue = toSignal(this.clue$);
 
+	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
+		// Use the clue parameter directly instead of reading from the async signal
+		// to avoid stale params when selection triggers an immediate clue reset
+		return of({
+			fields: this.#userFields,
+			...this.filters(),
+			...(this.orderBy() ? { orderBy: this.orderBy() } : {}),
+			...(clue ? { clue: applySearchDelimiter(clue, this.searchDelimiter()) } : {}),
+			...(this.operationIds() ? { operations: this.operationIds()!.join(',') } : {}),
+			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()!.join(',') } : {}),
+			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
+			...(this.includeFormerEmployees() ? { formerEmployees: this.includeFormerEmployees() } : {}),
+		});
+	}
+
 	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const orderBy = this.orderBy();

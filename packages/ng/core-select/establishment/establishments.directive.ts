@@ -4,7 +4,7 @@ import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-i
 import { luNullableNumberAttribute } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, filter, map, switchMap } from 'rxjs';
+import { Observable, debounceTime, filter, map, of, switchMap } from 'rxjs';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuCoreSelectEstablishment } from './models';
@@ -50,6 +50,20 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 				selector: (option) => option.legalUnitId,
 				content: LuEstablishmentGroupingComponent,
 			});
+		});
+	}
+
+	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
+		// Use the clue parameter directly instead of reading from the async signal
+		// to avoid stale params when selection triggers an immediate clue reset
+		return of({
+			...this.filters(),
+			...(clue
+				? { search: applySearchDelimiter(clue, this.searchDelimiter()), sort: 'name' }
+				: { sort: 'legalunit.name,name' }),
+			...(this.operationIds() ? { operations: this.operationIds()!.join(',') } : {}),
+			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()!.join(',') } : {}),
+			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
 		});
 	}
 
