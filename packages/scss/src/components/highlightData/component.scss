@@ -55,7 +55,7 @@
 				--commons-text-link-hover: var(--palettes-800, var(--palettes-product-800));
 			}
 
-			.button {
+			.button.mod-outlined {
 				@include color.palette('neutral');
 			}
 		}

@@ -14,16 +14,17 @@
 	<lu-icon icon="formatLink" [alt]="intl().linksLabel" />
 </button>
 
-<ng-template #linkNodeTemplate let-href="href" let-title="title" let-target="target" let-isAutoLink="isAutoLink">
+<ng-template #linkNodeTemplate let-href="href" let-title="title" let-isAutoLink="isAutoLink">
 	<a
+		luLink
+		[external]="!isEditable()"
 		[href]="href"
 		[attr.title]="title"
-		[attr.target]="target"
 		[luPopover2]="popover"
 		[luPopoverDisabled]="!isEditable()"
-		rel="noopener noreferrer"
 		#trigger="luPopover2"
-	></a>
+	>
+	</a>
 	<ng-template #popover>
 		<div class="popover-contentOptional linkPopover">
 			<a [href]="href" luLink external class="pr-u-ellipsis">{{ href }}</a>

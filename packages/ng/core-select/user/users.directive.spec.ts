@@ -27,10 +27,11 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 @Component({
 	selector: 'lu-users-directive-host',
 	imports: [LuSimpleSelectInputComponent, TestUsersDirective],
-	template: `<lu-simple-select luTestUsers />`,
+	template: `<lu-simple-select luTestUsers [filters]="filters" />`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LuUsersDirectiveHostComponent {
+	filters: Record<string, string | number | boolean> = {};
 	simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
 	usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
 }
@@ -155,6 +156,24 @@ describe('LuCoreSelectUsersDirective', () => {
 
 		// Assert (Page 2)
 		expect(options).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
+		httpTestingController.verify();
+	}));
+
+	it('should not forward `filters` to the "me" lookup request', fakeAsync(() => {
+		// Arrange
+		fixture.componentInstance.filters = { foo: 'bar' };
+		fixture.detectChanges();
+
+		// Act
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		// Assert
+		// The "me" lookup is a lookup by id and must NOT carry the search filters (`foo=bar`)
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		// The search list, on the other hand, does carry the filters
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&foo=bar&paging=0,20`);
 		httpTestingController.verify();
 	}));
 
