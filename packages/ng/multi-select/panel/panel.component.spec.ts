@@ -72,7 +72,7 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 	}));
 
 	it('should toggle the clicked option in the emitted value', fakeAsync(() => {
-		const onChange = jest.fn();
+		const onChange = vi.fn();
 		component.registerOnChange(onChange);
 		openPanel();
 
