@@ -1,1 +1,11 @@
 @use '@lucca-front/scss/src/components/chip';
+
+.richTextInputTag-addTag {
+	display: inline-flex;
+}
+
+.richTextInputTag-addTag-select {
+	visibility: hidden;
+	height: 0;
+	width: 0;
+}
