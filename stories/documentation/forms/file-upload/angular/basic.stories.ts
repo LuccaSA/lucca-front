@@ -302,12 +302,13 @@ export const Multi = {
 export const Single = {
 	render: (args, { argTypes }) => {
 		const multi = Multi.render(args, { argTypes });
-		const { media, size, displayFileName, accept, ...mainArgs } = args;
-		const mediaParam = media ? ` media` : ``;
-		const displayFileNameParam = displayFileName && media ? ` displayFileName` : ``;
+		const { size, displayFileName, accept, ...mainArgs } = args;
+
+		// En Single, le FileEntry est toujours en taille L ; l'aperçu média n'existe qu'à size="L".
+		const isLarge = !!size;
+		const entryAttrs = `size="L"${isLarge ? ` media` : ``}${isLarge && displayFileName ? ` displayFileName` : ``}`;
 		const sizeLFileUploadParam = size ? ` size="L"` : ``;
-		const sizeLFileEntryParam = media ? `` : sizeLFileUploadParam;
-		const fileEntry = `<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />`;
+		const fileEntry = `<lu-file-entry ${entryAttrs} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />`;
 		if (args.AItag) {
 			return {
 				props: { ...multi.props, accept },
@@ -336,6 +337,10 @@ export const Single = {
 			};
 		}
 	},
+	argTypes: {
+		// En Single, le mode media découle de la taille : le contrôle n'a pas lieu d'être.
+		media: { table: { disable: true } },
+	},
 	args: {
 		accept: [
 			{
@@ -345,7 +350,6 @@ export const Single = {
 		],
 		fileMaxSize: 5000000,
 		illustration: 'invoice',
-		media: false,
 		displayFileName: false,
 		structure: false,
 		buttonFilled: false,
