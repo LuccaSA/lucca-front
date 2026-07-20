@@ -1,6 +1,5 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { NumberFormatInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
@@ -14,7 +13,7 @@ export default {
 	title: 'Documentation/Forms/Fields/NumberFormatField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, StoryModelDisplayComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -138,7 +137,7 @@ export const Basic: StoryObj<
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},
@@ -183,7 +182,7 @@ export const WithCurrency: StoryObj<
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},
@@ -229,7 +228,7 @@ export const WithUnitKm: StoryObj<
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},
@@ -275,7 +274,7 @@ export const WithPercent: StoryObj<
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},

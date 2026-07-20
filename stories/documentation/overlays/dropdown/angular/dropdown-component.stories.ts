@@ -1,5 +1,4 @@
 import { Component as AngularComponent } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDropdownModule } from '@lucca-front/ng/dropdown';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
@@ -15,7 +14,7 @@ class DropdownComponentStories {
 export default {
 	title: 'Documentation/Overlays/Dropdown/Angular/Component',
 	component: DropdownComponentStories,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [applicationConfig({ providers: [] })],
 } as Meta;
 
 const Template = (args: DropdownComponentStories) => ({

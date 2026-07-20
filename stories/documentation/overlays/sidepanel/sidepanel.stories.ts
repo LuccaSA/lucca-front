@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuModalContent, LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
@@ -88,7 +87,7 @@ class SidepanelStory {
 export default {
 	title: 'Documentation/Overlays/Sidepanel',
 	component: SidepanelStory,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [applicationConfig({ providers: [] })],
 } as Meta;
 
 const Template = (args: SidepanelStory) => ({

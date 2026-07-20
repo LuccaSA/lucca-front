@@ -1,5 +1,4 @@
 import { provideHttpClient } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DropdownActionComponent, DropdownGroupComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -62,7 +61,7 @@ export default {
 			],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient()],
+			providers: [provideHttpClient()],
 		}),
 	],
 } as Meta;

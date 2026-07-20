@@ -1,23 +1,24 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { luFadeAnimationFactory } from '@lucca-front/ng/animations';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { LuFadeAnimation } from '@lucca-front/ng/animations';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'story-fade-animation',
-	template: `<div class="grid">
-		<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
-			<h3 class="pr-u-margin0">
-				Fade
-				<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
-			</h3>
-			@if (!fading) {
-				<div class="animated-block" [@fadeAnimation]>Fade</div>
-			}
+	standalone: true,
+	imports: [LuFadeAnimation],
+	template: `
+		<div class="grid mod-auto">
+			<div class="grid-column ng-demo-block">
+				<h3 class="pr-u-margin0">
+					Fade <button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
+				</h3>
+				@if (!fading) {
+					<div class="animated-block" luFadeAnimation>Fade in / out</div>
+				}
+			</div>
 		</div>
-	</div>`,
+	`,
 	styleUrl: './animations.scss',
-	animations: [luFadeAnimationFactory()],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FadeAnimationStory {
@@ -27,47 +28,27 @@ class FadeAnimationStory {
 export default {
 	title: 'Documentation/Toolbox/Animations/Fade',
 	component: FadeAnimationStory,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
-
-const template = (args: FadeAnimationStory) => ({
-	props: args,
-});
 
 export const Fade: StoryObj<FadeAnimationStory> = {
 	args: {},
-	render: template,
+	render: (args) => ({ props: args }),
 };
 
 const code = `
-/* 1. Appeler provideAnimations */
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { LuFadeAnimation } from '@lucca-front/ng/animations';
 
-@NgModule({
-	providers: [provideAnimations()]
-})
-class AppModule {}
-
-/* 2. Utiliser luFadeAnimationFactory() */
 @Component({
 	selector: 'story-fade-animation',
+	imports: [LuFadeAnimation],
 	template: \`
-		<div class="grid">
-			<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
-				<h3 class="pr-u-margin0">
-					Fade
-					<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
-				</h3>
-				@if (!fading) {
-					<div class="animated-block" [@fadeAnimation]>Fade</div>
-				}
-			</div>
-		</div>\`,
-	styleUrl: './animations.scss',
-	animations: [luFadeAnimationFactory()],
+		@if (visible) {
+			<div luFadeAnimation>Fade in / out</div>
+		}
+	\`,
 })
 class FadeAnimationStory {
-	fading = false;
+	visible = true;
 }`;
 
 Fade.parameters = {
@@ -76,6 +57,70 @@ Fade.parameters = {
 			language: 'ts',
 			type: 'code',
 			code,
+		},
+	},
+};
+
+// Composition via `hostDirectives`. `LuFadeAnimation` has no input, so nothing to expose.
+@Component({
+	selector: 'fade-card',
+	standalone: true,
+	hostDirectives: [LuFadeAnimation],
+	template: `<ng-content />`,
+	styles: `:host { display: block; }`,
+})
+class FadeCard {}
+
+@Component({
+	selector: 'story-fade-host-directive',
+	standalone: true,
+	imports: [FadeCard],
+	template: `
+		<div class="grid mod-auto">
+			<div class="grid-column ng-demo-block">
+				<h3 class="pr-u-margin0">
+					hostDirectives <button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
+				</h3>
+				@if (!fading) {
+					<fade-card class="animated-block">Fade in / out</fade-card>
+				}
+			</div>
+		</div>
+	`,
+	styleUrl: './animations.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FadeHostDirectiveStory {
+	fading = false;
+}
+
+export const HostDirective: StoryObj<FadeHostDirectiveStory> = {
+	args: {},
+	render: (args) => ({ props: args, moduleMetadata: { imports: [FadeHostDirectiveStory] }, template: `<story-fade-host-directive />` }),
+};
+
+const hostDirectiveCode = `
+import { LuFadeAnimation } from '@lucca-front/ng/animations';
+
+// LuFadeAnimation has no input, so hostDirectives composition needs no input mapping.
+@Component({
+	selector: 'fade-card',
+	hostDirectives: [LuFadeAnimation],
+	template: \`<ng-content />\`,
+})
+class FadeCard {}
+
+// Usage
+@if (visible) {
+	<fade-card>Fade in / out</fade-card>
+}`;
+
+HostDirective.parameters = {
+	docs: {
+		source: {
+			language: 'ts',
+			type: 'code',
+			code: hostDirectiveCode,
 		},
 	},
 };

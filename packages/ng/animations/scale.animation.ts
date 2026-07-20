@@ -1,5 +1,10 @@
 import { animate, AnimationMetadata, style, transition } from '@angular/animations';
 
+/**
+ * @deprecated Relies on `@angular/animations`, which is no longer a hard dependency of Lucca Front.
+ * Use the {@link LuScaleAnimation} directive instead, which is based on the native `animate.enter` /
+ * `animate.leave` API. This function will be removed in v23 (December 2026 / January 2027).
+ */
 export function luScalingAnimation(inTiming: string, outTiming: string): AnimationMetadata[] {
 	return [
 		transition('void => left', [

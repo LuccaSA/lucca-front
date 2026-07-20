@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, ELuDateGranularity, LuStringDateAdapter } from '@lucca-front/ng/core';
 import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
@@ -25,11 +24,10 @@ De plus, \`provideAnimations\` est également requis.
 ${generateMarkdownCodeBlock(
 	'ts',
 	`
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
 
 @NgModule({
-	providers: [provideAnimations(), { provide: ALuDateAdapter, useClass: LuStringDateAdapter }]
+	providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }]
 })
 class MyModule {}
 `,
@@ -150,7 +148,7 @@ const meta: Meta<StoryComponent> = {
 			imports: [LuDateSelectInputComponent, FormsModule, LuInputDisplayerDirective],
 			providers: [{ provide: ALuDateAdapter, useClass: LuStringDateAdapter }],
 		}),
-		applicationConfig({ providers: [provideAnimations()] }),
+		applicationConfig({ providers: [] }),
 	],
 	args: {
 		granularity: ELuDateGranularity.day,

@@ -1,6 +1,5 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { interval, map } from 'rxjs';
@@ -163,7 +162,7 @@ class TooltipStory {
 export default {
 	title: 'Documentation/Overlays/Tooltip/Ellipsis tests',
 	component: TooltipStory,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [applicationConfig({ providers: [] })],
 } as Meta;
 
 const template = (args: TooltipStory) => ({

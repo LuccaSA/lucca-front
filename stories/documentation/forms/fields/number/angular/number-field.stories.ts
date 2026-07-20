@@ -1,5 +1,4 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { NumberInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
@@ -13,7 +12,7 @@ export default {
 	title: 'Documentation/Forms/Fields/NumberField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -97,7 +96,7 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},
@@ -147,7 +146,7 @@ export const WithPrefixAndSuffix: StoryObj<
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberInputComponent, FormFieldComponent, FormsModule],
 			},
 		};
 	},

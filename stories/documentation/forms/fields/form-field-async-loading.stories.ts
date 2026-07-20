@@ -1,6 +1,5 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { generateInputs } from '../../../helpers/stories';
 import { interval, timer } from 'rxjs';
@@ -12,7 +11,7 @@ export default {
 	component: FormFieldComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [FormFieldComponent, InputDirective, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, AsyncPipe],
+			imports: [FormFieldComponent, InputDirective, FormsModule, ReactiveFormsModule, AsyncPipe],
 		}),
 	],
 	render: (args, { argTypes }) => {

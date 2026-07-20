@@ -1,6 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
@@ -47,7 +46,7 @@ class DepartmentStory {
 export default {
 	title: 'Documentation/Forms/DepartmentSelect',
 	component: DepartmentStory,
-	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
+	decorators: [applicationConfig({ providers: [provideHttpClient()] })],
 } as Meta;
 
 export const Select: StoryObj<DepartmentStory> = {

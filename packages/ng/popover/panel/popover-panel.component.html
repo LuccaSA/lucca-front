@@ -9,7 +9,7 @@
 		(mousedown)="onMouseDown()"
 		[attr.id]="panelId"
 		[attr.aria-labelledby]="triggerId"
-		[@transformPopover]="'enter'"
+		animate.enter="lu-popover-enter"
 	>
 		<div class="lu-popover-content" [class]="contentClassesMap" [cdkTrapFocus]="trapFocus">
 			<ng-content /><ng-container *ngTemplateOutlet="template(); context: templateContext()" />

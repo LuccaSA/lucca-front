@@ -49,6 +49,9 @@
     "@ngx-formly/core": "^6.3.11"
   },
   "peerDependenciesMeta": {
+    "@angular/animations": {
+      "optional": true
+    },
     "lexical": {
       "optional": true
     },

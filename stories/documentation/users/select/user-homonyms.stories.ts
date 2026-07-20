@@ -1,7 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuApiPagedSearcherComponent } from '@lucca-front/ng/api';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionItemComponent, LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
@@ -32,7 +31,7 @@ class UserHomonymsStory {}
 export default {
 	title: 'Documentation/Users/Select/Homonymes',
 	component: UserHomonymsStory,
-	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
+	decorators: [applicationConfig({ providers: [provideHttpClient()] })],
 } as Meta;
 
 const template = (args: UserHomonymsStory) => ({

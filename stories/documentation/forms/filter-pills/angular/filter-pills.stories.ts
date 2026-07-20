@@ -2,7 +2,6 @@ import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/s
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
@@ -42,7 +41,7 @@ export default {
 			],
 		}),
 		applicationConfig({
-			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideAnimations(), provideHttpClient()],
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideHttpClient()],
 		}),
 	],
 	argTypes: {
