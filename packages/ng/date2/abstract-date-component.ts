@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
-import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
@@ -19,19 +19,19 @@ export abstract class AbstractDateComponent {
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	protected dateFormat = getDateFormat(this.locale);
 	protected separator = getSeparator(this.locale);
-	protected readonly dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
+	protected dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
 
 	intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.locale, { month: 'numeric', year: 'numeric' });
 	intlDateTimeFormatYear = new Intl.DateTimeFormat(this.locale, { year: 'numeric' });
 
-	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
+	intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
-	onTouched?: () => void;
-	readonly disabled = signal<boolean>(false);
+	readonly disabled = input(false, { transform: booleanAttribute });
+
+	readonly touch = output<void>();
 
 	readonly format = input<DateFormat>(DATE_FORMAT.DATE);
-	protected readonly inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
 
 	readonly ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
 	readonly hideToday = input(false, { transform: booleanAttribute });
@@ -44,17 +44,17 @@ export abstract class AbstractDateComponent {
 
 	readonly getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 
-	readonly min = input(new Date('1/1/1000'), {
-		transform: transformDateInputToDate,
+	readonly min = input<Date | undefined, Date | string | null | undefined>(new Date('1/1/1000'), {
+		transform: (value) => (isNil(value) ? undefined : transformDateInputToDate(value)),
 	});
-	readonly max = input(null, {
-		transform: transformDateInputToDate,
+	readonly max = input<Date | undefined, Date | string | null | undefined>(undefined, {
+		transform: (value) => (isNil(value) ? undefined : transformDateInputToDate(value)),
 	});
 	readonly focusedDate = input(null, {
 		transform: transformDateInputToDate,
 	});
 
-	readonly calendarMode = model<CalendarMode | null>(null);
+	calendarMode = model<CalendarMode>();
 
 	readonly panelOpened = output<void>();
 
@@ -62,9 +62,9 @@ export abstract class AbstractDateComponent {
 
 	readonly dateFormatLocalized = computed(() => getLocalizedDateFormat(this.locale, this.mode()));
 
-	protected readonly currentDate = signal(new Date());
+	protected currentDate = signal(new Date());
 
-	protected readonly tabbableDate = signal<Date | null>(null);
+	protected tabbableDate = signal<Date | null>(null);
 
 	protected constructor() {
 		effect(() => {
@@ -80,42 +80,41 @@ export abstract class AbstractDateComponent {
 	}
 
 	isAfterMin(date: Date, mode: CalendarMode): boolean {
-		const min = this.min();
-		if (!min) {
+		if (!this.min()) {
 			return true;
 		}
 
 		switch (mode) {
 			case 'day':
-				return min.getTime() <= date.getTime();
+				return this.min().getTime() <= date.getTime();
 			case 'month':
-				return isBefore(startOfMonth(min), startOfMonth(date)) || isSameMonth(min, date);
+				return isBefore(startOfMonth(this.min()), startOfMonth(date)) || isSameMonth(this.min(), date);
 			case 'year':
-				return min.getFullYear() <= date.getFullYear();
+				return this.min().getFullYear() <= date.getFullYear();
 			default:
 				return true;
 		}
 	}
 
 	isBeforeMax(date: Date, mode: CalendarMode): boolean {
-		const max = this.max();
-		if (max) {
-			switch (mode) {
-				case 'day':
-					return max.getTime() >= date.getTime();
-				case 'month':
-					return isAfter(startOfMonth(max), startOfMonth(date)) || isSameMonth(max, date);
-				case 'year':
-					return max.getFullYear() >= date.getFullYear();
-				default:
-					return true;
-			}
+		if (!this.max()) {
+			return true;
 		}
-		return true;
+
+		switch (mode) {
+			case 'day':
+				return this.max().getTime() >= date.getTime();
+			case 'month':
+				return isAfter(startOfMonth(this.max()), startOfMonth(date)) || isSameMonth(this.max(), date);
+			case 'year':
+				return this.max().getFullYear() >= date.getFullYear();
+			default:
+				return true;
+		}
 	}
 
-	isValidDate(date: Date | null | undefined): date is Date {
-		return isNotNil(date) && !isNaN(date.getTime());
+	isValidDate(date: Date): boolean {
+		return !!date && !isNaN(date.getTime());
 	}
 
 	prev(mode: CalendarMode) {
@@ -126,27 +125,19 @@ export abstract class AbstractDateComponent {
 		this.move(1, mode);
 	}
 
-	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
-	}
-
-	setDisabledState?(isDisabled: boolean): void {
-		this.disabled.set(isDisabled);
-	}
-
 	move(direction: 1 | -1, mode: CalendarMode): void {
 		switch (mode) {
 			case 'year':
 				this.currentDate.set(addYears(this.currentDate(), direction * 10));
-				this.tabbableDate.set(addYears(this.tabbableDate() ?? 0, direction * 10));
+				this.tabbableDate.set(addYears(this.tabbableDate(), direction * 10));
 				break;
 			case 'month':
 				this.currentDate.set(addYears(this.currentDate(), direction));
-				this.tabbableDate.set(addYears(this.tabbableDate() ?? 0, direction));
+				this.tabbableDate.set(addYears(this.tabbableDate(), direction));
 				break;
 			case 'day':
 				this.currentDate.set(addMonths(this.currentDate(), direction));
-				this.tabbableDate.set(addMonths(this.tabbableDate() ?? 0, direction));
+				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
 				break;
 		}
 	}

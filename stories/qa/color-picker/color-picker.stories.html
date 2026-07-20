@@ -9,12 +9,12 @@
 			<td>Default</td>
 			<td>
 				<lu-form-field label="Couleur" inlineMessage="Helper text">
-					<lu-color-input [colors]="colorDecoratives500" [ngModel]="null" />
+					<lu-color-input [colors]="colorDecoratives500" [value]="null" />
 				</lu-form-field>
 			</td>
 			<td>
 				<lu-form-field label="Couleur" inlineMessage="Helper text">
-					<lu-color-input compact [colors]="colorDecoratives500" [ngModel]="null" />
+					<lu-color-input compact [colors]="colorDecoratives500" [value]="null" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -22,12 +22,12 @@
 			<td>Selected</td>
 			<td>
 				<lu-form-field label="Couleur" inlineMessage="Helper text">
-					<lu-color-input [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+					<lu-color-input [colors]="colorDecoratives500" [(value)]="selectedColor" />
 				</lu-form-field>
 			</td>
 			<td>
 				<lu-form-field label="Couleur" inlineMessage="Helper text">
-					<lu-color-input compact [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+					<lu-color-input compact [colors]="colorDecoratives500" [(value)]="selectedColor" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -35,12 +35,12 @@
 			<td>Clearable</td>
 			<td>
 				<lu-form-field label="Couleur">
-					<lu-color-input clearable [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+					<lu-color-input clearable [colors]="colorDecoratives500" [(value)]="selectedColor" />
 				</lu-form-field>
 			</td>
 			<td>
 				<lu-form-field label="Couleur">
-					<lu-color-input clearable compact [colors]="colorDecoratives500" [(ngModel)]="selectedColor" />
+					<lu-color-input clearable compact [colors]="colorDecoratives500" [(value)]="selectedColor" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -48,12 +48,12 @@
 			<td>Borders</td>
 			<td>
 				<lu-form-field label="Couleur">
-					<lu-color-input [colors]="colorDecoratives50" [ngModel]="selectedBorderColor" />
+					<lu-color-input [colors]="colorDecoratives50" [value]="selectedBorderColor" />
 				</lu-form-field>
 			</td>
 			<td>
 				<lu-form-field label="Couleur">
-					<lu-color-input compact [colors]="colorDecoratives50" [(ngModel)]="selectedBorderColor" />
+					<lu-color-input compact [colors]="colorDecoratives50" [(value)]="selectedBorderColor" />
 				</lu-form-field>
 			</td>
 		</tr>

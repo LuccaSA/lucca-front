@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -237,7 +236,6 @@ const PRODUCT_OPTIONS: Array<{ value: string; name: string }> = [
 	selector: 'tokens-explorer-stories',
 	templateUrl: './tokens-explorer.stories.html',
 	imports: [
-		FormsModule,
 		FormFieldComponent,
 		TextInputComponent,
 		SegmentedControlComponent,

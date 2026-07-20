@@ -1,15 +1,15 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
-	afterNextRender,
 	booleanAttribute,
-	ChangeDetectorRef,
 	computed,
 	Directive,
 	ElementRef,
+	EventEmitter,
+	HostBinding,
+	HostListener,
 	inject,
-	Injector,
 	input,
-	linkedSignal,
+	Input,
 	model,
 	OnDestroy,
 	OnInit,
@@ -18,19 +18,18 @@ import {
 	signal,
 	TemplateRef,
 	Type,
-	viewChild,
+	ViewChild,
 } from '@angular/core';
-import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor } from '@angular/forms';
-import { isNotNil, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { outputFromObservable, toSignal } from '@angular/core/rxjs-interop';
+import type { FormValueControl } from '@angular/forms/signals';
+import { PortalContent } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
-import { LuSimpleSelectDefaultOptionComponent } from '../option';
+import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
+import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
-import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource, SelectDataSourceParams } from '../select.model';
+import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LuCoreSelectLabel } from '../select.translate';
 import { TreeNode } from './model';
-import { buildOptionsFromDataSource } from './select-input.utils';
 import { TreeGenerator } from './tree-generator';
 
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
@@ -40,17 +39,10 @@ export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option)
 	host: {
 		'[class.colorPicker]': 'colorPicker()',
 		'[class.mod-compact]': 'compact()',
-		'[class.is-clearable]': 'isClearable()',
-		'[class.is-selected]': 'isSelectedClass',
-		'[class.is-searchFilled]': 'isSearchFilledClass',
-		'[class.mod-noClueIcon]': 'isNoClueIconClass',
-		'(click)': 'onClickOpenPanel($event)',
-		'(keydown)': 'onKeyDownNavigation($event)',
 	},
 })
-export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
+export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, FormValueControl<TValue | null>, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
-	protected changeDetectorRef = inject(ChangeDetectorRef);
 	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
 
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
@@ -63,51 +55,73 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected updatePositionFn?: () => void;
 	public filterPillMode = false;
 
-	public readonly ignorePresentation = input(false, { transform: booleanAttribute });
+	public ignorePresentation = input(false, { transform: booleanAttribute });
 
 	public selectParent$?: Subject<void>;
 	public selectChildren$?: Subject<void>;
 
-	public readonly panelClosed = output<void>();
-	public readonly panelOpened = output<void>();
+	public panelClosed = output<void>();
+	public panelOpened = output<void>();
 
-	public readonly highlightedOption = output<TOption>();
+	public highlightedOption = output<TOption>();
 
-	private readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+	@ViewChild('inputElement')
+	private inputElementRef: ElementRef<HTMLInputElement>;
 
-	readonly disabled$ = new BehaviorSubject(false);
-	readonly filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
+	public placeholder$ = new BehaviorSubject('');
 
-	readonly prefix = input<PortalContent | null>(null);
+	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly filterPillDisabled = this.disabled;
 
-	readonly placeholder = input<string>();
+	prefix = input<PortalContent | null>(null);
 
-	readonly clearableInput = input<boolean | null>(null, { transform: booleanAttribute, alias: 'clearable' });
+	@Input()
+	set placeholder(value: string) {
+		this.placeholder$.next(value);
+	}
 
-	readonly isClearable = computed(() => this.clearableInput() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
-	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
+	@Input({ transform: booleanAttribute })
+	@HostBinding('class.is-clearable')
+	set clearable(value: boolean) {
+		this.#inputClearable.set(value);
+	}
+	get clearable(): boolean {
+		return this.#clearable();
+	}
+	#clearable = computed(() => this.#inputClearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	#defaultFilterPillClearable = signal<boolean | null>(null);
+	#inputClearable = signal<boolean | null>(null);
 	#defaultClearable = false;
 
 	get searchable(): boolean {
 		return this.clueChange$.observed;
 	}
 
-	protected readonly computedAddOptionLabel = computed(() => this.addOptionLabelInput() ?? this.intl().addOption);
+	#addOptionLabelInput = signal<PortalContent | null>(null);
+	protected computedAddOptionLabel = computed(() => this.#addOptionLabelInput() ?? this.intl().addOption);
 
-	readonly addOptionLabelInput = input<PortalContent | null>(null, { alias: 'addOptionLabel' });
+	@Input()
+	set addOptionLabel(label: PortalContent) {
+		this.#addOptionLabelInput.set(label);
+	}
 
 	get addOptionLabel(): PortalContent {
 		return this.computedAddOptionLabel();
 	}
 
-	readonly addOptionStrategy = input<CoreSelectAddOptionStrategy>('never');
+	@Input()
+	set addOptionStrategy(strategy: CoreSelectAddOptionStrategy) {
+		this.addOptionStrategy$.next(strategy);
+	}
 
+	@HostBinding('class.is-selected')
 	protected get isSelectedClass(): boolean {
 		return this.hasValue();
 	}
 
+	@HostBinding('class.is-searchFilled')
 	protected get isSearchFilledClass(): boolean {
-		return (this.clue?.length ?? 0) > 0;
+		return (this.clue()?.length ?? 0) > 0;
 	}
 
 	protected abstract hasValue(): boolean;
@@ -116,55 +130,66 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.isPanelOpen$.value;
 	}
 
-	readonly isPanelOpen$ = new BehaviorSubject(false);
+	public isPanelOpen$ = new BehaviorSubject(false);
 
 	// TODO Might be temporary, check after merging signalize PR
-	readonly panelOpenSignal = toSignal(this.isPanelOpen$);
+	public panelOpenSignal = toSignal(this.isPanelOpen$);
 
-	readonly activeDescendant$ = new BehaviorSubject('');
-
-	protected manualOptions$ = new ReplaySubject<readonly TOption[]>(1);
+	public activeDescendant$ = new BehaviorSubject('');
 
 	get ariaControls(): string {
 		return this.overlayContainerRef.id;
 	}
 
-	readonly overlayConfig = input<OverlayConfig>({ hasBackdrop: true, backdropClass: 'cdk-overlay-transparent-backdrop' });
+	@Input()
+	overlayConfig?: OverlayConfig = {
+		hasBackdrop: true,
+		backdropClass: 'cdk-overlay-transparent-backdrop',
+	};
 
-	readonly loadingInput = input<boolean>(false, { alias: 'loading' });
+	@Input() set loading(value: boolean) {
+		if (value !== this.loading) {
+			this.loading$.next(value);
+		}
+	}
 
-	readonly optionsInput = input<readonly TOption[] | null>(null, { alias: 'options' });
+	@Input() set options(options: readonly TOption[]) {
+		this.options$.next(options);
+		if (this.panelRef) {
+			// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
+			// which is before the panel size has been modified by the arrival of the new options
+			setTimeout(() => {
+				this.panelRef?.updatePosition();
+				this.updatePositionFn?.();
+				// If no fixes are found, last resort fix is here
+				// window.dispatchEvent(new Event('resize'));
+			});
+		}
+	}
 
-	readonly optionComparerInput = input<LuOptionComparer<TOption>>(coreSelectDefaultOptionComparer, { alias: 'optionComparer' });
+	@Input() optionComparer: LuOptionComparer<TOption> = coreSelectDefaultOptionComparer;
+	@Input() optionKey: (option: TOption) => unknown = coreSelectDefaultOptionKey;
 
-	readonly optionKeyInput = input<(option: TOption) => unknown>(coreSelectDefaultOptionKey, { alias: 'optionKey' });
+	noClueIcon = input(false, { transform: booleanAttribute });
+	inputTabindex = input<number>(0);
 
-	readonly noClueIcon = input(false, { transform: booleanAttribute });
+	compact = input(false, { transform: booleanAttribute });
 
-	readonly inputTabindex = input<number>(0);
+	colorPicker = input(false, { transform: booleanAttribute });
 
-	readonly compact = input(false, { transform: booleanAttribute });
-
-	readonly colorPicker = input(false, { transform: booleanAttribute });
-
+	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
 		return this.noClueIcon();
 	}
 
-	readonly options = linkedSignal(() => this.optionsInput());
-	readonly loading = linkedSignal(() => this.loadingInput());
-	readonly clearable = linkedSignal(() => this.clearableInput());
-	readonly optionComparer = linkedSignal(() => this.optionComparerInput());
-	readonly optionKey = linkedSignal(() => this.optionKeyInput());
+	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
+	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
+	panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+	panelFooterTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
 
-	readonly optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
-	readonly valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
-	readonly panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
-	readonly panelFooterTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
-	readonly displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
-
-	readonly groupingSignal = signal<LuOptionGrouping<TOption, unknown> | undefined>(undefined);
+	groupingSignal = signal<LuOptionGrouping<TOption, unknown> | undefined>(undefined);
 
 	/**
 	 * @deprecated use groupingSignal
@@ -181,33 +206,24 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
-	readonly clueChange$ = new Subject<string>();
+	clueChange$ = new Subject<string>();
 	clueChange = outputFromObservable(this.clueChange$);
-	readonly nextPage$ = new Subject<void>();
+	nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
-	readonly addOption = output<string>();
+	previousPage = output<void>();
+	addOption = output<string>();
+	readonly touch = output<void>();
 
-	public readonly valueSignal = signal<TValue | null>(null);
-	readonly isFilterPillEmpty = computed(() => this.valueSignal() === null);
-	readonly isFilterPillClearable = computed(() => this.isClearable());
+	readonly value = model<TValue | null>(null);
+	isFilterPillEmpty = computed(() => this.value() === null);
+	isFilterPillClearable = computed(() => this.#clearable());
 
-	public get value(): TValue | null {
-		return this._value;
-	}
-
-	protected set value(value: TValue | null) {
-		// TODO remove once migrated to signal, but there's an override
-		this._value = value;
-		this.valueSignal.set(value);
-		this.changeDetectorRef.markForCheck();
-	}
-
-	public get inputPlaceholder(): string | null | undefined {
-		return this.value ? null : this.placeholder();
+	public get inputPlaceholder(): string | null {
+		return this.value() ? null : this.placeholder$.value;
 	}
 
 	public clueChanged(clue: string, skipPanelOpen = false): void {
-		this.clue = clue;
+		this.clue.set(clue);
 
 		if (!skipPanelOpen && !this.isPanelOpen) {
 			this.openPanel(clue);
@@ -217,66 +233,28 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	protected _value: TValue | null = null;
-
-	private getDefaultDataSource(): SelectDataSource<TOption> {
-		let emittedKeys = new Set<unknown>();
-
-		return {
-			getOptions: (_params: SelectDataSourceParams) => {
-				let lastEmittedThisPage: readonly TOption[] = [];
-				return this.manualOptions$.pipe(
-					tap((options) => (lastEmittedThisPage = options)),
-					takeUntil(this.nextPage$),
-					finalize(() => (emittedKeys = new Set(lastEmittedThisPage.map((p) => this.optionKey()(p))))),
-					map((options) => options.filter((c) => !emittedKeys.has(this.optionKey()(c)))),
-				);
-			},
-			reset() {
-				emittedKeys.clear();
-			},
-		};
-	}
-
-	readonly dataSource = model<SelectDataSource<TOption, unknown>>(this.getDefaultDataSource());
-
-	readonly dataSourceOptions = toSignal(
-		toObservable(this.dataSource).pipe(
-			switchMap((ds) =>
-				buildOptionsFromDataSource(ds, {
-					nextPage$: this.nextPage$,
-					clue$: this.clue$,
-					isPanelOpen$: this.isPanelOpen$,
-					setLoading: (v) => this.loading.set(v),
-				}),
-			),
-		),
-		{ initialValue: [] as readonly TOption[] },
-	);
-	clue: string | null = null;
+	options$ = new ReplaySubject<readonly TOption[]>(1);
+	loading$ = new BehaviorSubject(false);
+	readonly clue = signal<string | null>(null);
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
-	readonly clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
+	clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue())));
 
-	readonly shouldDisplayAddOption = toSignal(
-		toObservable(this.addOptionStrategy).pipe(
-			switchMap((strategy) => {
-				switch (strategy) {
-					case 'always':
-						return of(true);
-					case 'never':
-						return of(false);
-					case 'if-empty-clue':
-						return this.clue$.pipe(map((clue) => !clue));
-					case 'if-not-empty-clue':
-						return this.clue$.pipe(map((clue) => !!clue));
-				}
-			}),
-		),
+	addOptionStrategy$ = new BehaviorSubject<CoreSelectAddOptionStrategy>('never');
+	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(
+		switchMap((strategy) => {
+			switch (strategy) {
+				case 'always':
+					return of(true);
+				case 'never':
+					return of(false);
+				case 'if-empty-clue':
+					return this.clue$.pipe(map((clue) => !clue));
+				case 'if-not-empty-clue':
+					return this.clue$.pipe(map((clue) => !!clue));
+			}
+		}),
 	);
-
-	protected onChange?: (value: TValue | null) => void;
-	protected onTouched?: () => void;
 
 	public get panelRef(): LuSelectPanelRef<TOption, TValue> | undefined {
 		return this._panelRef;
@@ -284,37 +262,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected _panelRef?: LuSelectPanelRef<TOption, TValue>;
 
-	protected readonly destroyed$ = new Subject<void>();
-
-	private readonly injector = inject(Injector);
+	protected destroyed$ = new Subject<void>();
 
 	constructor() {
 		if (this.filterPillHost) {
 			this.filterPillHost.registerInput(this);
 		}
-
-		ɵeffectWithDeps([this.options], (options) => {
-			if (isNotNil(options)) {
-				this.manualOptions$.next(options);
-			}
-		});
-
-		// When options arrive asynchronously via a dataSource, dataSourceOptions changes but options doesn't.
-		// We need to reposition the panel after the DOM updates in both cases.
-		ɵeffectWithDeps([this.dataSourceOptions], (_options, onCleanup) => {
-			if (isNotNil(this.panelRef)) {
-				const ref = afterNextRender(
-					() => {
-						this.panelRef?.updatePosition();
-						this.updatePositionFn?.();
-					},
-					{ injector: this.injector },
-				);
-				onCleanup(() => ref.destroy());
-			}
-		});
 	}
 
+	@HostListener('click', ['$event'])
 	onClickOpenPanel($event: Event) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
@@ -323,6 +279,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
+	@HostListener('keydown', ['$event'])
 	onKeyDownNavigation(event: Event): void {
 		const $event = event as KeyboardEvent;
 		switch ($event.key) {
@@ -353,7 +310,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			case 'ArrowDown':
 			case 'ArrowUp':
 				// Initial space should just open the panel, not trigger a clue change
-				if (!this.clue && $event.key === ' ') {
+				if (!this.clue() && $event.key === ' ') {
 					$event.preventDefault();
 				}
 				if (this.isPanelOpen) {
@@ -363,12 +320,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				}
 				break;
 			default:
-				// Let the browser handle modifier chords like Ctrl/Cmd+V (paste) or Ctrl/Cmd+C (copy)
-				// instead of treating the chord's letter (e.g. the "v" of Ctrl+V) as typeahead input.
-				// AltGr (Ctrl+Alt on Windows) is excluded so accented/special characters still work.
-				if (($event.ctrlKey || $event.metaKey) && !$event.altKey) {
-					return;
-				}
 				// For any other key, forward it to the panel if it's open
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);
@@ -379,21 +330,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	registerOnChange(onChange: (value: TValue | null) => void): void {
-		this.onChange = onChange;
-	}
-
-	registerOnTouched(onTouched: () => void): void {
-		this.onTouched = onTouched;
-	}
-
-	setDisabledState(isDisabled: boolean): void {
-		this.disabled$.next(isDisabled);
-		this.changeDetectorRef.markForCheck();
-	}
-
 	ngOnDestroy(): void {
 		this.closePanel();
+		this.destroyed$.next();
+		this.destroyed$.complete();
 	}
 
 	ngOnInit(): void {
@@ -407,11 +347,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			event.stopPropagation();
 		}
 		this.updateValue(null, true);
-		this.inputElementRef()?.nativeElement.focus();
+		this.inputElementRef.nativeElement.focus();
 	}
 
 	openPanel(clue: string = ''): void {
-		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value) {
+		if (this.filterPillMode || this.isPanelOpen || this.disabled()) {
 			return;
 		}
 
@@ -431,11 +371,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				return;
 			}
 
-			const isSearchable = this.searchable;
 			this.isPanelOpen$.next(true);
 			this.panelOpened.emit();
 
-			if (isSearchable) {
+			if (this.searchable) {
 				this.clueChanged(clue);
 			}
 
@@ -445,7 +384,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	emitAddOption(): void {
-		this.addOption.emit(this.clue ?? '');
+		this.addOption.emit(this.clue() ?? '');
 		this.panelRef?.close();
 	}
 
@@ -457,39 +396,36 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 
 		this.panelRef.valueChanged.subscribe((value) => this.updateValue(value));
-		this.panelRef.nextPage.subscribe(() => this.nextPage$.next());
+
+		this.#pageChanged(this.panelRef.nextPage).subscribe(() => this.nextPage$.next());
+		this.#pageChanged(this.panelRef.previousPage).subscribe(() => this.previousPage.emit());
 
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
 			this.activeDescendant$.next(optionId);
-			this.changeDetectorRef.markForCheck();
 		});
 		this.panelRef.closed.subscribe(() => this.closePanel());
 	}
 
 	focusInput(): void {
-		if (this.inputElementRef()) {
-			this.inputElementRef()?.nativeElement.focus();
+		if (this.inputElementRef) {
+			this.inputElementRef.nativeElement.focus();
 		}
 	}
 
 	protected emptyClue(): void {
-		if (this.clue) {
-			this.clue = null;
-			this.changeDetectorRef.markForCheck();
+		if (this.clue()) {
+			this.clue.set(null);
 		}
 	}
 
 	public closePanel(): void {
-		this.dataSource().reset?.();
-
 		if (!this.isPanelOpen) {
 			return;
 		}
 		this.panelClosed.emit();
 		this.emptyClue();
 		this.activeDescendant$.next('');
-		this.changeDetectorRef.markForCheck();
-		this.onTouched?.();
+		this.touch.emit();
 		if (!this.filterPillMode) {
 			this.isPanelOpen$.next(false);
 			this.panelRef?.close();
@@ -499,18 +435,22 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.afterCloseFn?.();
 	}
 
-	public writeValue(value: TValue | null): void {
-		this.value = value;
+	public setValue(value: TValue | null): void {
+		this.value.set(value);
 	}
 
 	public updateValue(value: TValue | null, skipPanelOpen = false, noClear = false): void {
-		this.value = value;
+		this.setValue(value);
 		if (!noClear) {
 			this.emptyClue();
 			this.clueChanged('', skipPanelOpen);
 		}
-		this.onChange?.(value);
-		this.onTouched?.();
+		this.touch.emit();
+	}
+
+	// Ensure nextPage/previousPage does not emit too often
+	#pageChanged(pageEmitter: EventEmitter<void>): Observable<void> {
+		return this.options$.pipe(switchMap(() => pageEmitter.pipe(take(1))));
 	}
 
 	// Filter pill interface

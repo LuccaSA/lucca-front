@@ -1,4 +1,4 @@
-import { computed, Directive, effect, forwardRef, inject, input, signal } from '@angular/core';
+import { computed, Directive, effect, forwardRef, inject, input, ModelSignal, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { isNil } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
@@ -34,7 +34,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
-	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$, { initialValue: 0 });
+	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
 	readonly clueChange = toSignal(this.select.clueChange$);
 
 	// only show panel header when no clue && values not empty
@@ -60,12 +60,15 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		return mode === 'all' || mode === 'none' ? { mode } : { mode, values: this.#values() };
 	});
 
-	// Keep the original registerOnChange / writeValue / clearValye methods
-	readonly #selectRegisterOnChange = this.select.registerOnChange.bind(this.select) as LuMultiSelectInputComponent<TValue>['registerOnChange'];
-	readonly #selectWriteValue = this.select.writeValue.bind(this.select) as LuMultiSelectInputComponent<TValue>['writeValue'];
+	// Keep the original clearValue method
 	readonly #selectClearValue = this.select.clearValue.bind(this.select) as LuMultiSelectInputComponent<TValue>['clearValue'];
 
-	#onChange?: (values: LuMultiSelection<TValue>) => void;
+	// Replaces the select's internal value, which holds the LuMultiSelection form value instead of the selected options
+	readonly #selectValues = signal<TValue[]>([]);
+
+	get #selectionModel(): ModelSignal<LuMultiSelection<TValue> | null> {
+		return this.select.value as unknown as ModelSignal<LuMultiSelection<TValue> | null>;
+	}
 
 	constructor() {
 		super();
@@ -74,24 +77,29 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			if (this.#showPanelHeader()) {
 				this.select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
 			} else {
-				this.select.panelHeaderTpl.set(undefined);
+				this.select.panelHeaderTpl.set(null);
 			}
 		});
 
-		(this.select as { registerOnChange: (fn: (value: TValue[] | LuMultiSelection<TValue>) => void) => void }).registerOnChange = (fn) => this.registerOnChange(fn);
-		this.select.writeValue = (value) => this.writeValue(value);
+		this.select.setValue = (values: TValue[] | null) => this.#setValue(values ?? []);
 		this.select.clearValue = ($event) => this.clearValue($event);
+		this.select.selectedOptions = this.#selectValues.asReadonly();
+
+		effect(() => {
+			const selection = this.#selectionModel();
+			untracked(() => this.#applySelection(selection));
+		});
 
 		this.select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
 		this.select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
 		this.select.hasValue = () => this.#hasValue();
 		this.select.isFilterPillEmpty = computed(() => !this.#hasValue());
 		this.select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include');
-		this.select.valueLength = computed(() => this.displayerCount() ?? 0);
+		this.select.valueLength = this.displayerCount;
 	}
 
 	setSelectAll(selectAll: boolean): void {
-		this.#selectWriteValue([]);
+		this.#selectValues.set([]);
 
 		if (this.#values().length) {
 			this.#values.set([]);
@@ -102,7 +110,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		}
 
 		this.#mode.set(selectAll ? 'all' : 'none');
-		this.#onChange?.(this.#selectAllValue());
+		this.#selectionModel.set(this.#selectAllValue());
 	}
 
 	override isSelected(option: TValue, selectedOptions: TValue[], optionComparer: LuOptionComparer<TValue>): boolean {
@@ -131,23 +139,20 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		}
 	}
 
-	registerOnChange(fn: (value: TValue[] | LuMultiSelection<TValue>) => void): void {
-		this.#onChange = fn;
+	#setValue(values: TValue[]): void {
+		this.#selectValues.set(values);
+		this.#values.set(values);
+		const oldMode = this.#mode();
+		this.#mode.set(this.#getNextMode(oldMode, values));
+		this.#selectionModel.set(this.#selectAllValue());
 
-		this.#selectRegisterOnChange((values: TValue[]) => {
-			this.#values.set(values);
-			const oldMode = this.#mode();
-			this.#mode.set(this.#getNextMode(oldMode, values));
-			this.#onChange?.(this.#selectAllValue());
-
-			// When all values are selected/unselected one by one, we should reset internal select value to avoid weird behavior when selecting/unselecting after that
-			if (values.length && (this.#mode() === 'all' || this.#mode() === 'none')) {
-				this.#selectWriteValue([]);
-			}
-		});
+		// When all values are selected/unselected one by one, we should reset internal select value to avoid weird behavior when selecting/unselecting after that
+		if (values.length && (this.#mode() === 'all' || this.#mode() === 'none')) {
+			this.#selectValues.set([]);
+		}
 	}
 
-	writeValue(value: TValue[] | LuMultiSelection<TValue>): void {
+	#applySelection(value: TValue[] | LuMultiSelection<TValue> | null): void {
 		if (Array.isArray(value)) {
 			throw new Error('MultiSelectWithSelectAllDirective does not support array values. The form value or ngModel must be a LuMultiSelection<TValue>.');
 		}
@@ -163,12 +168,12 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			mode = value.mode;
 		}
 
-		this.#selectWriteValue(values);
+		this.#selectValues.set(values);
 		this.#mode.set(mode);
 		this.#values.set(values);
 	}
 
-	clearValue($event?: Event): void {
+	clearValue($event: Event): void {
 		this.#mode.set('none');
 		this.#selectClearValue($event);
 	}

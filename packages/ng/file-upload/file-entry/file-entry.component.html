@@ -119,8 +119,8 @@
 					hasClearer
 					searchIcon="searchMagnifyingGlass"
 					type="password"
-					[ngModel]="password()"
-					(ngModelChange)="passwordChange$.next($event)"
+					[value]="password()"
+					(valueChange)="passwordChange$.next($event)"
 				/>
 				<button class="fileEntry_box-field-button" luButton type="button">{{ intl().confirmPassword }}</button>
 			</div>

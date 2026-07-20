@@ -1,6 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions, IntlParamsPipe, isNotNil } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
@@ -20,7 +19,7 @@ import { FileEntrySize, FileEntryState } from './file-entry.type';
 	templateUrl: './file-entry.component.html',
 	styleUrl: './file-entry.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, ButtonComponent, InlineMessageComponent, DividerComponent, FormFieldComponent, TextInputComponent, FormsModule, IntlParamsPipe, LuTooltipTriggerDirective],
+	imports: [IconComponent, ButtonComponent, InlineMessageComponent, DividerComponent, FormFieldComponent, TextInputComponent, IntlParamsPipe, LuTooltipTriggerDirective],
 	host: {
 		class: 'pr-u-displayContents',
 	},

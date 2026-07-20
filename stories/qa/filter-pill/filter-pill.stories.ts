@@ -1,14 +1,14 @@
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department'; // v20.2
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
+import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
@@ -22,11 +22,12 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 		CheckboxInputComponent,
 		LuSimpleSelectInputComponent,
 		LuMultiSelectInputComponent,
+		LuMultiSelectWithSelectAllDirective,
+		LuCoreSelectTotalCountDirective,
 		DateInputComponent,
 		DateRangeInputComponent,
 		LuCoreSelectDepartmentsDirective,
 		TreeSelectDirective,
-		FormsModule,
 		FilterLegumesPipe,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,

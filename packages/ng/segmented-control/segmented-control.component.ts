@@ -1,6 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { injectNgControl, NoopValueAccessorDirective } from '@lucca-front/ng/forms';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, model, output, ViewEncapsulation } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
 import { LU_SEGMENTEDCONTROL_INSTANCE } from './segmented-control.token';
 
 let nextId = 0;
@@ -10,9 +9,7 @@ let nextId = 0;
 	template: '<ng-content />',
 	styleUrl: './segmented-control.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [ReactiveFormsModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	hostDirectives: [NoopValueAccessorDirective],
 	host: {
 		role: 'presentation',
 		class: 'segmentedControl',
@@ -26,8 +23,12 @@ let nextId = 0;
 		},
 	],
 })
-export class SegmentedControlComponent {
-	ngControl = injectNgControl();
+export class SegmentedControlComponent<T = unknown> implements FormValueControl<T | null> {
+	readonly value = model<T | null>(null);
+
+	readonly disabled = input(false, { transform: booleanAttribute });
+
+	readonly touch = output<void>();
 
 	/**
 	 * Applies small size to segmented control
@@ -40,4 +41,6 @@ export class SegmentedControlComponent {
 	readonly vertical = input(false, { transform: booleanAttribute });
 
 	readonly id = `segmentedControl${nextId++}`;
+
+	readonly name = input<string>(this.id);
 }

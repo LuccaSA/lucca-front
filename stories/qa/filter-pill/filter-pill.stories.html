@@ -11,11 +11,13 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Inclure les collaborateurs partis">
-						<lu-checkbox-input [ngModel]="false" />
+						<lu-checkbox-input [checked]="false" />
 					</lu-filter-pill>
 					<lu-filter-pill label="With Select all" name="legume">
 						<lu-multi-select
-							[ngModel]="{ mode: 'none' }"
+							[value]="$any({ mode: 'none' })"
+							withSelectAll
+							withSelectAllDisplayerLabel="légumes"
 							clearable="false"
 							[options]="legumes | filterLegumes: clue"
 							[totalCount]="legumes.length"
@@ -24,17 +26,17 @@
 						/>
 					</lu-filter-pill>
 					<lu-filter-pill label="Département" name="department">
-						<lu-simple-select [ngModel]="null" clearable="false" departments />
+						<lu-simple-select [value]="null" clearable="false" departments />
 					</lu-filter-pill>
 					<lu-filter-pill label="Départements" name="departments">
-						<lu-multi-select [ngModel]="[]" clearable="false" filterPillLabelPlural="départements" departments />
+						<lu-multi-select [value]="[]" clearable="false" filterPillLabelPlural="départements" departments />
 					</lu-filter-pill>
 					<lu-filter-pill label="Tree simple">
-						<lu-simple-select [ngModel]="null" clearable="false" [treeSelect]="groupingFn" [options]="legumes" />
+						<lu-simple-select [value]="null" clearable="false" [treeSelect]="groupingFn" [options]="legumes" />
 					</lu-filter-pill>
 					<lu-filter-pill label="Tree multi">
 						<lu-multi-select
-							[ngModel]="[]"
+							[value]="[]"
 							clearable="false"
 							filterPillLabelPlural="légumes"
 							[treeSelect]="groupingFn"
@@ -42,10 +44,10 @@
 						/>
 					</lu-filter-pill>
 					<lu-filter-pill label="Date de début">
-						<lu-date-input [ngModel]="null" clearable="false" />
+						<lu-date-input [value]="null" clearable="false" />
 					</lu-filter-pill>
 					<lu-filter-pill label="Période">
-						<lu-date-range-input [ngModel]="null" clearable="false" [(ngModel)]="dateRange" />
+						<lu-date-range-input clearable="false" [(value)]="dateRange" />
 					</lu-filter-pill>
 				</div>
 			</td>

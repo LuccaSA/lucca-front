@@ -1,12 +1,6 @@
 <div class="tokensExplorer">
 	<lu-filter-bar>
-		<lu-segmented-control
-			*luFilterPillAddonBefore
-			class="filterBar-segmentedControl"
-			[ngModel]="category()"
-			(ngModelChange)="category.set($event)"
-			[ngModelOptions]="{ standalone: true }"
-		>
+		<lu-segmented-control *luFilterPillAddonBefore class="filterBar-segmentedControl" [value]="category()" (valueChange)="category.set($event)">
 			@for (option of categoryOptions; track option.value) {
 				<ng-template #label>{{ option.label }} <lu-numeric-badge [value]="option.count" /></ng-template>
 				<lu-segmented-control-filter [label]="label" [value]="option.value" />
@@ -14,23 +8,11 @@
 		</lu-segmented-control>
 
 		<lu-filter-pill label="Produit">
-			<lu-simple-select
-				[ngModel]="product()"
-				(ngModelChange)="product.set($event)"
-				[ngModelOptions]="{ standalone: true }"
-				[options]="productOptions"
-			/>
+			<lu-simple-select [value]="product()" (valueChange)="product.set($event)" [options]="productOptions" />
 		</lu-filter-pill>
 
 		<lu-form-field label="Rechercher un token" hiddenLabel>
-			<lu-text-input
-				[ngModel]="search()"
-				(ngModelChange)="search.set($event ?? '')"
-				[ngModelOptions]="{ standalone: true }"
-				placeholder="Rechercher…"
-				hasSearchIcon
-				hasClearer
-			/>
+			<lu-text-input [value]="search()" (valueChange)="search.set($event ?? '')" placeholder="Rechercher…" hasSearchIcon hasClearer />
 		</lu-form-field>
 
 		<span *luFilterPillAddonAfter class="tokensExplorer-results">{{ filteredTokens().length }} résultat(s)</span>

@@ -7,7 +7,9 @@
 	[panelFooterTpl]="footer"
 	[compact]="compact()"
 	[clearable]="clearable()"
-	[formControl]="ngControl.control"
+	[(value)]="value"
+	[disabled]="disabled()"
+	(touch)="touch.emit()"
 	[options]="filteredColors()"
 	(clueChange)="clue.set($event)"
 	(highlightedOption)="keyboardHighlighted.set($event.name)"
@@ -37,7 +39,7 @@
 </lu-simple-select>
 
 <ng-container *luPresentationDisplayDefault>
-	@if (ngControl?.control?.value) {
+	@if (value()) {
 		@let color = currentColorPresentation();
 		<lu-color [borderColor]="color.borderColor" [value]="color.background">{{ color.name }}</lu-color>
 	} @else {

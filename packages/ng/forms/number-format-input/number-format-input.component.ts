@@ -1,15 +1,13 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NumberFormat, NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
-import { startWith } from 'rxjs/operators';
 import { FormFieldIdDirective } from '../form-field-id.directive';
-import { injectNgControl } from '../inject-ng-control';
-import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { TextInputAddon } from '../text-input/text-input-addon';
 import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.translate';
 
@@ -17,18 +15,24 @@ import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.transla
 	selector: 'lu-number-format-input',
 	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective, NgTemplateOutlet, ClearComponent, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './number-format-input.component.html',
-	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NumberFormatInputComponent implements AfterViewInit {
+export class NumberFormatInputComponent implements FormValueControl<number | null> {
 	#locale = inject(LOCALE_ID);
-	#destroyRef = inject(DestroyRef);
 
-	ngControl = injectNgControl();
+	readonly value = model<number | null>(null);
 
-	ngAfterViewInit(): void {
-		this.ngControl?.valueChanges?.pipe(takeUntilDestroyed(this.#destroyRef), startWith(this.ngControl.value)).subscribe((value) => this.#suffixPrefixValue.set(value as number));
+	readonly disabled = input(false, { transform: booleanAttribute });
+
+	readonly touch = output<void>();
+
+	protected readonly formControl = new FormControl<number | null>(null);
+
+	constructor() {
+		effect(() => this.formControl.setValue(this.value(), { emitEvent: false }));
+		this.formControl.valueChanges.pipe(takeUntilDestroyed()).subscribe((v) => this.value.set(v ?? null));
+		effect(() => (this.disabled() ? this.formControl.disable({ emitEvent: false }) : this.formControl.enable({ emitEvent: false })));
 	}
 
 	readonly formatStyle = input<NumberFormatStyle>('decimal');
@@ -57,16 +61,14 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	readonly valueAlignRight = input(false, { transform: booleanAttribute });
 
-	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
-
-	readonly #suffixPrefixValue = signal(1);
+	inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
 	readonly #numberFormat = computed(() => new NumberFormat(this.formatOptions()));
 	readonly prefixAddon = computed(() => {
 		if (this.useAutoPrefixSuffix() === false) {
 			return this.prefix();
 		}
-		const content = this.#numberFormat().getPrefix(this.#suffixPrefixValue());
+		const content = this.#numberFormat().getPrefix(this.value());
 		if (content == null || content.trim() === '') {
 			return undefined;
 		}
@@ -79,7 +81,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 		if (this.useAutoPrefixSuffix() === false) {
 			return this.suffix();
 		}
-		const content = this.#numberFormat().getSuffix(this.#suffixPrefixValue());
+		const content = this.#numberFormat().getSuffix(this.value());
 		if (content == null || content.trim() === '') {
 			return undefined;
 		}
@@ -103,12 +105,12 @@ export class NumberFormatInputComponent implements AfterViewInit {
 			}) satisfies NumberFormatOptions,
 	);
 
-	readonly formattedValue = computed(() => this.#numberFormat().getBlurFormat(this.#suffixPrefixValue()));
+	readonly formattedValue = computed(() => this.#numberFormat().getBlurFormat(this.value()));
 
 	readonly intl = input(...intlInputOptions(LU_NUMBERFORMATFIELD_TRANSLATIONS));
 
 	clearValue(): void {
-		this.ngControl.reset();
+		this.value.set(null);
 		this.inputElementRef()?.nativeElement.focus();
 	}
 }

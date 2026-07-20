@@ -10,7 +10,7 @@ export type TestEntity = { id: number; name: string };
 type LuSelectInputComponentTestSuiteConfig<TValue> = {
 	getFixture: () => ComponentFixture<ALuSelectInputComponent<TestEntity, TValue>>;
 	exampleValue: TValue;
-	emptyValue: TValue | null;
+	emptyValue: TValue;
 	clearerSelector: string;
 };
 
@@ -90,8 +90,8 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 
 	it('should not open the panel when clicking the clearer', () => {
 		// Arrange
-		component.clearable.set(true);
-		component.writeValue(config.exampleValue);
+		component.clearable = true;
+		component.setValue(config.exampleValue);
 		fixture.detectChanges();
 
 		const clearer = nativeElement.querySelector(config.clearerSelector);
@@ -105,7 +105,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 
 		// Assert
 		expect(component.isPanelOpen).toBe(false);
-		expect(component.value).toEqual(config.emptyValue);
+		expect(component.value()).toEqual(config.emptyValue);
 	});
 
 	it.each(['ArrowLeft', 'ArrowRight', 'Backspace', 'Meta'])('should not open the panel when sending not a letter events (%s)', (key) => {
@@ -126,7 +126,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		expect(component.filterPillDisabled?.()).toBe(false);
 
 		// Act
-		component.setDisabledState(true);
+		fixture.componentRef.setInput('disabled', true);
 
 		// Assert
 		expect(component.filterPillDisabled?.()).toBe(true);

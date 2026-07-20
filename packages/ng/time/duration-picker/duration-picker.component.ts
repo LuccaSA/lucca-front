@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, signal, ViewEncapsulation } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, model, output, signal, ViewEncapsulation } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
+import { intlInputOptions, isNil, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Duration } from '../core/date-primitives';
 import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isISO8601Duration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
@@ -18,19 +18,13 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 	styleUrl: './duration-picker.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => DurationPickerComponent),
-			multi: true,
-		},
-	],
 })
-export class DurationPickerComponent extends BasePickerComponent {
+export class DurationPickerComponent extends BasePickerComponent implements FormValueControl<ISO8601Duration | null> {
 	readonly intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
-	readonly value = model<ISO8601Duration>('PT0S');
-	readonly max = input<ISO8601Duration>('PT99H');
+	value = model<ISO8601Duration | null>('PT0S');
+	readonly #duration = computed(() => this.value() ?? 'PT0S');
+	readonly max = input<ISO8601Duration | undefined>('PT99H');
 
 	readonly displayArrows = input(false, { transform: booleanAttribute });
 
@@ -40,14 +34,14 @@ export class DurationPickerComponent extends BasePickerComponent {
 
 	readonly durationChange = output<DurationChangeEvent>();
 
-	readonly keyPressed = signal(false);
+	keyPressed = signal(false);
 
-	protected readonly hours = computed(() => getHoursPartFromDuration(this.value()));
-	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.value()));
+	protected readonly hours = computed(() => getHoursPartFromDuration(this.#duration()));
+	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.#duration()));
 	protected readonly shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
 
 	protected readonly maxDigits = computed(() => {
-		const maxISO = isoDurationToSeconds(this.max());
+		const maxISO = isoDurationToSeconds(this.max() ?? 'PT99H');
 		const maxHour = maxISO / 3600;
 		const maxHourDigits = maxHour.toString().length;
 		return maxHourDigits;
@@ -68,20 +62,18 @@ export class DurationPickerComponent extends BasePickerComponent {
 			'pr-u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
-	protected readonly separator = computed(() => this.intl().timePickerTimeSeparator);
+	protected separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
-	writeValue(value: ISO8601Duration): void {
-		this.value.set(value || 'PT0S');
-		if (value) {
-			this.hoursPart()?.isValueSet.set(true);
-			this.minutesPart()?.isValueSet.set(true);
-		}
-	}
-
-	setDisabledState?(isDisabled: boolean): void {
-		this.disabled.set(isDisabled);
+	constructor() {
+		super();
+		ɵeffectWithDeps([this.value, this.hoursPart, this.minutesPart], (value, hoursPart, minutesPart) => {
+			if (isNotNil(value) && value !== 'PT0S') {
+				hoursPart?.isValueSet.set(true);
+				minutesPart?.isValueSet.set(true);
+			}
+		});
 	}
 
 	protected hoursInputHandler(value: number | '––'): void {
@@ -110,10 +102,10 @@ export class DurationPickerComponent extends BasePickerComponent {
 	}
 
 	protected pasteHandler(event: ClipboardEvent): void {
-		let value: ISO8601Duration | null = null;
 		event.preventDefault();
 		const pastedValue = event.clipboardData?.getData('text/plain');
 		if (isNotNil(pastedValue)) {
+			let value: ISO8601Duration;
 			// If it's an iso duration, handle as-is
 			if (isISO8601Duration(pastedValue)) {
 				value = pastedValue;
@@ -133,7 +125,6 @@ export class DurationPickerComponent extends BasePickerComponent {
 					value,
 				});
 				this.value.set(value);
-				this.onChange?.(value);
 			}
 		}
 	}
@@ -175,19 +166,21 @@ export class DurationPickerComponent extends BasePickerComponent {
 		this.hoursPart()?.isValueSet.set(true);
 		this.minutesPart()?.isValueSet.set(true);
 
+		const maxDuration = this.max() ?? 'PT99H';
+
 		if (hoursPart < 0) {
 			if (hoursPart === -1) {
-				hoursPart = getHoursPartFromDuration(this.max());
+				hoursPart = getHoursPartFromDuration(maxDuration);
 			}
-			if (isoDurationToSeconds(createDurationFromHoursAndMinutes(hoursPart, minutesPart)) > isoDurationToSeconds(this.max())) {
+			if (isoDurationToSeconds(createDurationFromHoursAndMinutes(hoursPart, minutesPart)) > isoDurationToSeconds(maxDuration)) {
 				// If current value with minutes is > max, decrement hours again
 				hoursPart--;
 			}
-		} else if (hoursPart > getHoursPartFromDuration(this.max())) {
+		} else if (hoursPart > getHoursPartFromDuration(maxDuration)) {
 			hoursPart = 0;
 		}
 
-		const max = isoDurationToSeconds(this.max());
+		const max = isoDurationToSeconds(maxDuration);
 
 		const candidateTimeAsSeconds = hoursPart * 3600 + minutesPart * 60;
 
@@ -198,7 +191,6 @@ export class DurationPickerComponent extends BasePickerComponent {
 		const result = createDurationFromHoursAndMinutes(hoursPart, minutes);
 
 		this.value.set(result);
-		this.onChange?.(result);
 		this.durationChange.emit({
 			...protoEvent,
 			value: result,

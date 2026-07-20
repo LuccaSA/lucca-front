@@ -1,9 +1,9 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions, isNotNil, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills';
 import { InputDirective, PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -39,11 +39,6 @@ let nextID = 0;
 	],
 	providers: [
 		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
-			multi: true,
-		},
-		{
 			provide: ALuSelectInputComponent,
 			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
 		},
@@ -56,26 +51,26 @@ let nextID = 0;
 	],
 	encapsulation: ViewEncapsulation.None,
 })
-export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> implements ControlValueAccessor {
-	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
+export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> {
+	intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
 
 	valueID = `value-${++nextID}`;
 
-	readonly autocomplete = input<AutoFill>('off');
+	autocomplete = input<AutoFill>('off');
 
-	readonly impersonation = input(false, { transform: booleanAttribute });
+	impersonation = input(false, { transform: booleanAttribute });
 
-	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
+	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
 	protected panelRefFactory = inject(LuSimpleSelectPanelRefFactory);
 
 	protected buildPanelRef(): LuSelectPanelRef<T, T> {
-		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig());
+		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig);
 	}
 
 	inputSpace(event: Event): void {
 		if (this.filterPillMode || this.impersonation()) {
-			if (this.clue?.length === 0) {
+			if (this.clue()?.length === 0) {
 				event.preventDefault();
 				this.panelRef?.selectCurrentlyHighlightedValue();
 			}
@@ -83,14 +78,11 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	}
 
 	protected hasValue(): boolean {
-		return isNotNil(this.value);
+		return this.value() !== null && this.value() !== undefined;
 	}
 
 	override enableFilterPillMode() {
-		const host = this.filterPillPanelAnchorRef();
-		if (host) {
-			this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, host);
-		}
+		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
 		super.enableFilterPillMode();
 	}
 }

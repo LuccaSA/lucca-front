@@ -1,46 +1,33 @@
-import { ChangeDetectionStrategy, Component, computed, input, model, viewChild } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, output, viewChild } from '@angular/core';
 import { BasePickerSize } from './base-picker.type';
-import { ISO8601Duration, ISO8601Time } from './date-primitives';
+import { ISO8601Duration } from './date-primitives';
 import { TimePickerPartComponent } from './time-picker-part.component';
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: '',
 })
-export abstract class BasePickerComponent implements ControlValueAccessor {
-	onChange: (value: ISO8601Time | ISO8601Duration) => void;
-	onTouched: () => void;
+export abstract class BasePickerComponent {
+	step = input<ISO8601Duration>(null);
 
-	readonly step = input<ISO8601Duration | null>(null);
+	disabled = input(false, { transform: booleanAttribute });
 
-	readonly disabled = model(false);
+	size = input<BasePickerSize>();
 
-	readonly size = input<BasePickerSize>();
+	readonly touch = output<void>();
 
-	readonly hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
+	hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
 
-	readonly minutesPart = viewChild<TimePickerPartComponent>('minutesPart');
+	minutesPart = viewChild<TimePickerPartComponent>('minutesPart');
 
-	protected readonly hoursIncrement = computed(() => this.getHoursIncrement());
-	protected readonly minutesIncrement = computed(() => this.getMinutesIncrement());
-
-	registerOnChange(fn: () => void): void {
-		this.onChange = fn;
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
-	}
-
-	abstract writeValue(value: ISO8601Time | ISO8601Duration): void;
+	protected hoursIncrement = computed(() => this.getHoursIncrement());
+	protected minutesIncrement = computed(() => this.getMinutesIncrement());
 
 	abstract getHoursIncrement(): number;
 
-	abstract getMinutesIncrement(): number | null;
+	abstract getMinutesIncrement(): number;
 
 	protected focusPart(type: 'hours' | 'minutes') {
-		this.onTouched?.();
 		if (type === 'hours') {
 			if (this.hoursIncrement() === 0) {
 				return;

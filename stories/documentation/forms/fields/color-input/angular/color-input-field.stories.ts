@@ -1,5 +1,4 @@
 import { colorDecoratives500 } from '@/stories/forms/select/select.utils';
-import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -15,7 +14,7 @@ export default {
 	title: 'Documentation/Forms/Fields/Color Picker/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [ColorInputComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, StoryModelDisplayComponent],
+			imports: [ColorInputComponent, BrowserAnimationsModule, LuOptionDirective, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -83,11 +82,11 @@ export const Basic: StoryObj<ColorInputComponent & FormFieldComponent & { requir
 				},
 				argTypes,
 			)}>
-	<lu-color-input [(ngModel)]="example" [colors]="colors"${generateInputs(inputArgs, argTypes)} />
+	<lu-color-input [(value)]="example" [colors]="colors"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
-				imports: [ColorInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [ColorInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},

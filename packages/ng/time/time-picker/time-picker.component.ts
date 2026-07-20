@@ -1,5 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, LOCALE_ID, model, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, LOCALE_ID, model, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import { intlInputOptions, isNil, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Time } from '../core/date-primitives';
@@ -30,15 +31,8 @@ let nextId = 0;
 	styleUrl: './time-picker.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => TimePickerComponent),
-			multi: true,
-		},
-	],
 })
-export class TimePickerComponent extends BasePickerComponent {
+export class TimePickerComponent extends BasePickerComponent implements FormValueControl<ISO8601Time | null> {
 	#timeRangePicker = inject(LU_TIME_RANGE_PICKER_INSTANCE, { optional: true });
 	readonly intl = input(...intlInputOptions(LU_TIME_PICKER_TRANSLATIONS));
 	protected localeId = inject(LOCALE_ID);
@@ -49,15 +43,17 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly postMeridiemRef = viewChild<ElementRef<HTMLInputElement>>('postMeridiemRef');
 
-	readonly value = model<ISO8601Time>(DEFAULT_MIN_TIME);
+	value = model<ISO8601Time | null>(DEFAULT_MIN_TIME);
 
-	readonly max = input<ISO8601Time>(MAX_TIME);
+	readonly #time = computed(() => this.value() ?? DEFAULT_MIN_TIME);
+
+	readonly max = input<ISO8601Time | undefined>(MAX_TIME);
 
 	readonly displayArrows = input(false, { transform: booleanAttribute });
 
 	readonly forceMeridiemDisplay = input<boolean | null>(null);
 
-	readonly keyPressed = signal(false);
+	keyPressed = signal(false);
 
 	readonly enableMeridiemDisplay = computed(() => {
 		if (this.forceMeridiemDisplay() !== null) {
@@ -79,15 +75,14 @@ export class TimePickerComponent extends BasePickerComponent {
 	readonly prevPicker = output<void>();
 	readonly nextPicker = output<void>();
 	readonly nonDigitKeyPressed = output<void>();
-	readonly touched = output<void>();
 
-	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay() ?? false));
-	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
+	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.#time(), this.enableMeridiemDisplay()));
+	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.#time()));
 
-	protected readonly hours = computed(() => getHoursPartFromIsoTime(this.value()));
+	protected readonly hours = computed(() => getHoursPartFromIsoTime(this.#time()));
 	// Empty must stay '––', not 0, or typing "0" is a deduped no-op.
-	protected readonly hoursInputValue = computed<number | '––'>(() => getHoursDisplayPartFromIsoTime(this.value()));
-	protected readonly minutes = computed(() => getMinutesPartFromIsoTime(this.value()));
+	protected readonly hoursInputValue = computed<number | '––'>(() => getHoursDisplayPartFromIsoTime(this.#time()));
+	protected readonly minutes = computed(() => getMinutesPartFromIsoTime(this.#time()));
 	protected readonly pickerClasses = computed(() => {
 		return {
 			timePicker: true,
@@ -97,7 +92,7 @@ export class TimePickerComponent extends BasePickerComponent {
 			'pr-u-animatedShake': this.keyPressed() && isNil(this.#timeRangePicker),
 		};
 	});
-	protected readonly separator = computed(() => this.intl().timePickerTimeSeparator);
+	protected separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
@@ -132,18 +127,6 @@ export class TimePickerComponent extends BasePickerComponent {
 		} else {
 			super.focusPart(type);
 		}
-	}
-
-	writeValue(value: ISO8601Time): void {
-		this.value.set(value || DEFAULT_MIN_TIME);
-		if (value) {
-			this.hoursPart()?.isValueSet.set(true);
-			this.minutesPart()?.isValueSet.set(true);
-		}
-	}
-
-	setDisabledState?(isDisabled: boolean): void {
-		this.disabled.set(isDisabled);
 	}
 
 	protected hoursInputHandler(value: number | '––'): void {
@@ -185,7 +168,6 @@ export class TimePickerComponent extends BasePickerComponent {
 					value,
 				});
 				this.value.set(value);
-				this.onChange?.(value);
 			} catch {
 				// do nothing
 			}
@@ -229,7 +211,7 @@ export class TimePickerComponent extends BasePickerComponent {
 		this.hoursPart()?.isValueSet.set(true);
 		this.minutesPart()?.isValueSet.set(true);
 
-		const max = isoTimeToSeconds(this.max());
+		const max = isoTimeToSeconds(this.max() ?? MAX_TIME);
 
 		const candidateTimeAsSeconds = hoursPart * 3600 + minutesPart * 60;
 
@@ -241,7 +223,6 @@ export class TimePickerComponent extends BasePickerComponent {
 		const result = createIsoTimeFromHoursAndMinutes(hours, minutes);
 
 		this.value.set(result);
-		this.onChange?.(result);
 		this.timeChange.emit({
 			...protoEvent,
 			value: result,
@@ -285,8 +266,8 @@ export class TimePickerComponent extends BasePickerComponent {
 	}
 
 	switchMeridiem(newValue: 'AM' | 'PM') {
-		let hours = getHoursPartFromIsoTime(this.value());
-		const minutes = getMinutesPartFromIsoTime(this.value());
+		let hours = getHoursPartFromIsoTime(this.#time());
+		const minutes = getMinutesPartFromIsoTime(this.#time());
 		if (newValue === 'PM') {
 			hours = circularize(hours + 12, 23);
 		} else {

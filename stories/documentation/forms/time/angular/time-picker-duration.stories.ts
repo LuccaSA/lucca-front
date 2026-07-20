@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
@@ -11,7 +10,7 @@ export default {
 	title: 'Documentation/Forms/Time/Angular/Duration',
 	decorators: [
 		moduleMetadata({
-			imports: [DurationPickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [DurationPickerComponent, FormFieldComponent, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -106,7 +105,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 				},
 				argTypes,
 			)}>
-	<lu-duration-picker label="${label}"${generateInputs(inputArgs, argTypes)} [(ngModel)]="example" />
+	<lu-duration-picker label="${label}"${generateInputs(inputArgs, argTypes)} [(value)]="example" />
 </lu-form-field>
 
 <pr-story-model-display>{{ example }}</pr-story-model-display>`,

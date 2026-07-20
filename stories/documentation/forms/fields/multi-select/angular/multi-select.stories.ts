@@ -1,22 +1,24 @@
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
-import { FormsModule } from '@angular/forms';
+import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
+import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { form, FormField, required } from '@angular/forms/signals';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { createTestStory, generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions } from '../../../../../helpers/stories';
+import { createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
 import { waitForAngular } from '../../../../../helpers/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [LuMultiSelectInputComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe, StoryModelDisplayComponent],
+			imports: [LuMultiSelectInputComponent, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -73,14 +75,9 @@ export default {
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 		},
-		onOpen: {
-			description: "Événement déclenché à l'ouverture du panneau de sélection.",
-		},
-		onClose: {
-			description: 'Événement déclenché à la fermeture du panneau de sélection.',
-		},
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
+		previousPage: HiddenArgType,
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
 		optionTpl: HiddenArgType,
@@ -89,7 +86,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }, SelectCommonAliasInput>> = {
+export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
 		return {
@@ -107,11 +104,11 @@ export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & F
 				},
 				argTypes,
 			)}>
-	<lu-multi-select [(ngModel)]="example" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event"${generateInputs(inputArgs, argTypes)} />
+	<lu-multi-select [(value)]="example" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
-				imports: [LuMultiSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [LuMultiSelectInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -128,6 +125,40 @@ export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & F
 		keepSearchAfterSelection: false,
 		presentation: false,
 	},
+};
+
+@Component({
+	selector: 'multi-select-signal-forms-story',
+	imports: [LuMultiSelectInputComponent, FormFieldComponent, FormField, StoryModelDisplayComponent, JsonPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Légumes" inlineMessage="Requis">
+			<lu-multi-select [formField]="form.legumes" [options]="options" />
+		</lu-form-field>
+		<pr-story-model-display>{{ form().value() | json }}</pr-story-model-display>
+	`,
+})
+class MultiSelectSignalFormsStory {
+	readonly options = allLegumes;
+	readonly model = signal<{ legumes: ILegume[] }>({ legumes: [] });
+	readonly form = form(this.model, (p) => {
+		required(p.legumes);
+	});
+}
+
+export const SignalForms: StoryObj = {
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Pilotage par signal forms : `lu-multi-select` implémente `FormValueControl` (valeur typée, ici `ILegume[]`) et se branche sur un champ via la directive `[formField]`. La validation (`required`…) est déclarée dans le schema du `form()`.',
+			},
+		},
+	},
+	render: () => ({
+		moduleMetadata: { imports: [MultiSelectSignalFormsStory] },
+		template: `<multi-select-signal-forms-story />`,
+	}),
 };
 
 export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
