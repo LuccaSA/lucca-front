@@ -154,7 +154,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 						s.delete(groupKey);
 						return s;
 					});
-					this.#applyGroupToggle(allGroupOptions, allGroupOptions);
+					const notSelectedOptions = allGroupOptions.filter((o) => !this.selectedOptions.some((so) => this.optionComparer()(so, o)));
+					this.#applyGroupToggle(notSelectedOptions, allGroupOptions);
 				})
 				.catch(() => {
 					this.groupLoadingKeys.update((keys) => {
