@@ -97,14 +97,22 @@
 	}
 
 	@layer mods {
-		&.is-hovered,
-		&:hover {
+		&.is-hovered {
 			@include hover;
 		}
 
 		&:active {
 			@include active;
 		}
+	}
+}
+
+// In presentation mode the hover state is driven exclusively by the is-hovered class
+// (bound to isHighlighted by the parent lu-select-option), so native :hover must not apply
+// to avoid two items appearing highlighted simultaneously during mixed keyboard/mouse navigation.
+.listboxOption:not([presentation]) > .listboxOption-content:hover {
+	@layer mods {
+		@include hover;
 	}
 }
 
