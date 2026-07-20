@@ -51,7 +51,7 @@
 							[groupTemplateLocation]="groupTemplateLocation()"
 							[groupIndex]="groupIndex"
 							[grouping]="grouping()"
-							[scrollIntoViewOptions]="{ block: 'center' }"
+							[scrollIntoViewOptions]="{ block: 'nearest' }"
 							[isSelected]="option | luIsOptionSelected: optionComparer() : selected()"
 							[class.withAddOption]="shouldDisplayAddOption()"
 							(selected)="panelRef.emitValue(option)"
