@@ -345,6 +345,7 @@ export const Single = {
 		],
 		fileMaxSize: 5000000,
 		illustration: 'invoice',
+		media: false,
 		displayFileName: false,
 		structure: false,
 		buttonFilled: false,
