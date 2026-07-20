@@ -12,7 +12,7 @@ La branche par défaut est **`master`** : elle reçoit principalement les PR de 
 
 ```bash
 npm start                    # Serveur Storybook (port 6006) — le principal moyen de lancer les composants
-npm test                     # Vitest, tous les specs (les specs schematics sont exclus)
+npm test                     # Vitest, tous les specs (projet `lucca-front` + projet `schematics`)
 npx vitest run packages/ng/button/button.spec.ts   # un seul fichier de test
 npx vitest run -t "nom du test"                     # un seul test par son nom
 npm run test:eslint-plugin   # tests du plugin ESLint local (workspace dédié)
@@ -36,7 +36,7 @@ Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss �
 
 `packages/stylelint-config` (`@lucca/stylelint-config-prisme`) est une config Stylelint partageable, référencée en dépendance `file:`.
 
-`packages/ng/schematics` contient les migrations `ng add`/`ng update`. Ses specs sont exclus du run Vitest principal.
+`packages/ng/schematics` contient les migrations `ng add`/`ng update`. Ses specs tournent dans un projet Vitest dédié (`schematics`, config `vitest.schematics.config.ts` + setup `vitest.schematics-setup.ts`) : environnement Node avec un loader ts-node, car `SchematicTestRunner` charge les factories via un `require` CommonJS natif hors du pipeline Vite. Ils sont inclus dans `npm test`.
 
 ### Conventions composants
 

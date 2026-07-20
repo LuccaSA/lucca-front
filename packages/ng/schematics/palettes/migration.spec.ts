@@ -15,7 +15,7 @@ describe('Palettes Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'palettes', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'palettes', { skipInstall: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);
@@ -39,7 +39,7 @@ describe('Palettes Migration', () => {
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');
 
 		// Act
-		await runSchematic('collection', collectionPath, 'palettes', { skipInstallation: true }, tree);
+		await runSchematic('collection', collectionPath, 'palettes', { skipInstall: true }, tree);
 
 		// Assert
 		tree.visit((p, entry) => {

@@ -15,7 +15,7 @@ describe('Component path Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'component-path', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'component-path', { skipInstall: true }, tree);
 		} catch (error) {
 			//eslint-disable-next-line no-console
 			console.log(error);
@@ -40,7 +40,7 @@ describe('Component path Migration', () => {
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');
 
 		// Act
-		await runSchematic('collection', collectionPath, 'component-path', { skipInstallation: true }, tree);
+		await runSchematic('collection', collectionPath, 'component-path', { skipInstall: true }, tree);
 
 		// Assert
 		tree.visit((p, entry) => {
