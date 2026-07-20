@@ -1,6 +1,5 @@
 //FIXME
-/* eslint-disable @angular-eslint/no-output-on-prefix */
-/* eslint-disable @angular-eslint/no-output-native */
+
 import { A11yModule } from '@angular/cdk/a11y';
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, input, TemplateRef, viewChild } from '@angular/core';
 import { outputFromObservable } from '@angular/core/rxjs-interop';

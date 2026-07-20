@@ -24,8 +24,8 @@
   "homepage": "https://github.com/LuccaSA/lucca-front#readme",
   "peerDependencies": {
     "@stylistic/stylelint-config": "^5.0.0",
-    "@stylistic/stylelint-plugin": "^5.2.0",
-    "stylelint": "^17.14.0",
+    "@stylistic/stylelint-plugin": "^5.2.1",
+    "stylelint": "^17.14.1",
     "stylelint-config-standard-scss": "^17.0.0"
   }
 }
