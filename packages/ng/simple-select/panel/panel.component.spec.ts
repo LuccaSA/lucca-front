@@ -109,7 +109,7 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 	}));
 
 	it('should render the add option as a listbox option outside the listbox, visible even when empty', fakeAsync(() => {
-		const onAddOption = jest.fn();
+		const onAddOption = vi.fn();
 		component.addOption.subscribe(onAddOption);
 		fixture.componentRef.setInput('addOptionStrategy', 'always');
 		openPanel([]);
@@ -150,7 +150,7 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 	}));
 
 	it('should emit the clicked option as new value', fakeAsync(() => {
-		const onChange = jest.fn();
+		const onChange = vi.fn();
 		component.registerOnChange(onChange);
 		openPanel();
 
