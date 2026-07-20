@@ -23,6 +23,7 @@ export default defineConfig({
 		include: ['packages/**/schematics/**/*.spec.ts'],
 		exclude: ['**/node_modules/**'],
 		setupFiles: [join(__dirname, 'vitest.schematics-setup.ts')],
+		globalSetup: [join(__dirname, 'vitest.schematics-global-setup.ts')],
 		env: { TZ: 'UTC' },
 	},
 });
