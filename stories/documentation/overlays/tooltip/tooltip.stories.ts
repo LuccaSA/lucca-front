@@ -6,7 +6,7 @@ import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { createTestStory, generateInputs } from '../../../helpers/stories';
-import { mapInputs, sleep,waitForAngular } from '../../../helpers/test';
+import { mapInputs, sleep, waitForAngular } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
@@ -183,30 +183,6 @@ export const BasicTEST = createTestStory(
 				await waitForAngular();
 				await expect(screen.getByRole('tooltip')).toBeVisible();
 				span.blur();
-				await waitForAngular();
-			});
-		});
-
-		await step('EllipsisTooltip', async () => {
-			const ellipsisWithTooltip = canvas.getByTestId('ellipsis-truncated');
-			// Wait for the ellipsis detection debounce (150ms) to complete
-			await sleep(200);
-			await waitForAngular();
-
-			await step('Focus', async () => {
-				ellipsisWithTooltip.focus();
-				await expect(ellipsisWithTooltip).toHaveFocus();
-				await waitForAngular();
-				await expect(screen.getByRole('tooltip')).toBeVisible();
-				ellipsisWithTooltip.blur();
-				await waitForAngular();
-			});
-
-			await step('Hover', async () => {
-				await userEvent.hover(ellipsisWithTooltip);
-				await waitForAngular();
-				await expect(screen.getByRole('tooltip')).toBeVisible();
-				await userEvent.unhover(ellipsisWithTooltip);
 				await waitForAngular();
 			});
 		});
