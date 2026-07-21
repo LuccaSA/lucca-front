@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
 import { ListboxState } from './listbox.type';
 import { OptionComponent } from './option/option.component';
@@ -44,4 +44,6 @@ export class ListboxComponent {
 	readonly statusMsg = input<string | null>(null);
 
 	readonly listboxId = `listbox${nextId++}`;
+
+	readonly skeletonWidth = computed(() => (this.state() === 'loading' ? `${Math.floor(Math.random() * 60 + 20)}%` : null));
 }
