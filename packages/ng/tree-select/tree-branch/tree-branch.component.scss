@@ -56,7 +56,7 @@
 }
 
 @layer mods {
-	.lu-picker-panel.lu-option-picker-panel.mod-multiple {
+	.lu-option-picker-panel.mod-multiple {
 		lu-tree-branch {
 			lu-select-option {
 				@include nestedMulti($level: 1);

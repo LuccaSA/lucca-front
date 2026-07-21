@@ -1,4 +1,3 @@
-import { A11yModule } from '@angular/cdk/a11y';
 import { NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -7,6 +6,7 @@ import { PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
+	LuSelectPanelLayoutComponent,
 	LuSelectPanelRef,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
@@ -35,7 +35,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 		'(document:mousemove)': 'onMousemove()',
 	},
 	imports: [
-		A11yModule,
+		LuSelectPanelLayoutComponent,
 		FormsModule,
 		NgTemplateOutlet,
 		ɵLuOptionGroupPipe,

@@ -1,4 +1,3 @@
-import { A11yModule } from '@angular/cdk/a11y';
 import { NgTemplateOutlet } from '@angular/common';
 import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -8,6 +7,7 @@ import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
 	LuIsOptionSelectedPipe,
+	LuSelectPanelLayoutComponent,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
 	TreeDisplayPipe,
@@ -35,7 +35,7 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 		'(document:mousemove)': 'onMousemove()',
 	},
 	imports: [
-		A11yModule,
+		LuSelectPanelLayoutComponent,
 		FormsModule,
 		LuIsOptionSelectedPipe,
 		ɵLuOptionComponent,
