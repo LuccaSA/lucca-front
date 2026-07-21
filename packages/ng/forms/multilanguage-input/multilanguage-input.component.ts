@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { intlInputOptions, IntlParamsPipe, luBooleanAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -60,9 +60,9 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	readonly autocomplete = input<AutoFill>('off');
 
-	readonly hasNoInvariant = input(false, { transform: booleanAttribute });
+	readonly hasNoInvariant = input(false, { transform: luBooleanAttribute });
 
-	readonly hasAIButtons = input(false, { transform: booleanAttribute });
+	readonly hasAIButtons = input(false, { transform: luBooleanAttribute });
 
 	readonly displayLocale = input('');
 

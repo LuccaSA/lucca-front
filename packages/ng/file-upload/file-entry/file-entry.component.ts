@@ -35,7 +35,7 @@ export class FileEntryComponent {
 
 	readonly displayFileName = input(false, { transform: luBooleanAttribute });
 
-	readonly structure = input(false, { transform: booleanAttribute });
+	readonly structure = input(false, { transform: luBooleanAttribute });
 
 	readonly inlineMessageError = input<string | null>(null);
 
@@ -47,7 +47,7 @@ export class FileEntryComponent {
 
 	readonly downloadURL = input('');
 
-	readonly openInNewTab = input(false, { transform: booleanAttribute });
+	readonly openInNewTab = input(false, { transform: luBooleanAttribute });
 
 	readonly password = input('');
 	readonly passwordChange$ = new Subject<string>();
