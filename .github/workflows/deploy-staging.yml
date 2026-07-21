@@ -47,11 +47,14 @@ jobs:
           fi
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 24.15.0
 
       - run: npm ci
+      # Generate the LLM API surface (llms-full.txt + deprecations.json) into
+      # .storybook/public/ so build-storybook ships them at the preview path.
+      - run: npm run docs:api
       - run: npm run build-storybook
       - name: Install rclone
         run: |
@@ -75,7 +78,7 @@ jobs:
           rclone sync ./storybook-static/ "r2:${R2_BUCKET}/${{steps.vars.outputs.deploy-path}}" --fast-list --checksum --transfers 8 --checkers 8
       - name: Comment PR with preview URL
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7.0.1
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
             const body = `🚀 Storybook preview deployed: ${process.env.R2_PUBLIC_DOMAIN}/${{steps.vars.outputs.deploy-path}}/index.html`;

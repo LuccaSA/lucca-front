@@ -24,6 +24,15 @@ export default mergeConfig(createBaseConfig(__dirname), {
 			// Schematics project: runs the `ng add`/`ng update` migration specs in a
 			// Node environment with a ts-node loader (see vitest.schematics.config.ts).
 			'./vitest.schematics.config.ts',
+			{
+				// Scripts project: offline build tooling (the LLM API-surface generator)
+				// as plain ESM on Node — no Angular compiler, no browser environment.
+				test: {
+					name: 'scripts',
+					include: ['scripts/**/*.test.mjs'],
+					environment: 'node',
+				},
+			},
 		],
 	},
 });

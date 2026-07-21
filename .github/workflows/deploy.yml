@@ -37,9 +37,9 @@ jobs:
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
-          fetch-tags: true        # ensure refs/tags/* are available for tag detection below
+          fetch-tags: true # ensure refs/tags/* are available for tag detection below
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 24.15.0
 
@@ -75,6 +75,9 @@ jobs:
           echo "Ref: ${RAW}    Primary: ${PRIMARY}    Alias: ${ALIAS:-<none>}"
 
       - run: npm ci
+      # Generate the LLM API surface (llms-full.txt + deprecations.json) into
+      # .storybook/public/ so build-storybook ships them at <ref>/storybook/.
+      - run: npm run docs:api
       - run: npm run build-storybook
 
       - name: Install rclone

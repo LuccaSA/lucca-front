@@ -30,6 +30,10 @@ demo/ng
 documentation.json
 storybook-static
 
+# generated LLM API surface (built by `npm run docs:api`, shipped via staticDirs)
+.storybook/public/llms-full.txt
+.storybook/public/deprecations.json
+
 # compodoc
 compodoc-static
 
