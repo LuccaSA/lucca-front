@@ -10,22 +10,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
-import {
-	afterRenderEffect,
-	computed,
-	DestroyRef,
-	Directive,
-	effect,
-	EffectRef,
-	ElementRef,
-	inject,
-	Injector,
-	input,
-	linkedSignal,
-	OnDestroy,
-	Renderer2,
-	signal,
-} from '@angular/core';
+import { afterRenderEffect, computed, DestroyRef, Directive, effect, EffectRef, ElementRef, inject, Injector, input, linkedSignal, OnDestroy, Renderer2, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { getPushPanelViewportMargin, isNil, isNotNil, luBooleanAttribute, luNumberAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';

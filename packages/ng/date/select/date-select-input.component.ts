@@ -39,7 +39,6 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 
 	readonly startOn = input<D>();
 
-
 	protected _startOn: D = this._adapter.forgeToday();
 
 	get format(): string {
