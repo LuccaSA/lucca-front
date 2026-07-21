@@ -64,9 +64,9 @@ export class LuUserPictureComponent {
 
 	readonly AI = input(false, { transform: luBooleanAttribute });
 
-	readonly placeholder = input(false, { transform: booleanAttribute });
+	readonly placeholder = input(false, { transform: luBooleanAttribute });
 
-	readonly softRounded = input(false, { transform: booleanAttribute });
+	readonly softRounded = input(false, { transform: luBooleanAttribute });
 
 	readonly size = input<UserPictureSize>('M');
 
