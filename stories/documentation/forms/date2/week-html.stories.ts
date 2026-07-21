@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/angular';
+import { Meta } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Forms/Date2/Calendar/HTML',
