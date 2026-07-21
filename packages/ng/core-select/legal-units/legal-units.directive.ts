@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, OnInit, booleanAttribute, computed, forwardRef, inject, input, signal } from '@angular/core';
+import { Directive, OnInit, computed, forwardRef, inject, input, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { luBooleanAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { Observable, debounceTime, map, switchMap } from 'rxjs';
@@ -31,7 +31,7 @@ export class LuCoreSelectLegalUnitsDirective<T extends LuCoreSelectLegalUnit = L
 	readonly filters = input<Record<string, string | number | boolean> | null>(null);
 	readonly uniqueOperationIds = input<readonly number[] | null>(null);
 	readonly searchDelimiter = input<string>(' ');
-	readonly enableArchivedLegalUnits = input(false, { transform: booleanAttribute });
+	readonly enableArchivedLegalUnits = input(false, { transform: luBooleanAttribute });
 
 	readonly includeArchivedLegalUnits = signal(false);
 

@@ -38,7 +38,7 @@ export class ButtonComponent {
 	/**
 	 * Disables the Button. Also applied automatically when `state` is `loading`
 	 */
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
 
 	/**
 	 * Indicates an action with significant or irreversible consequences on hover and focus. Only compatible with outlined and ghost

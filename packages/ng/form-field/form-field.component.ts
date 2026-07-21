@@ -1,7 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -268,7 +267,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	#isInputRequired(): boolean {
 		const hasRequiredFormControl = this.ownControls().some((c) => c.control?.hasValidator(Validators.required));
-		const hasRequiredNgModel = this.ownRequiredValidators().some((c) => booleanAttribute(c.required));
+		const hasRequiredNgModel = this.ownRequiredValidators().some((c) => luBooleanAttribute(c.required));
 		const hasRequiredFormField = this.ownFormFields().some((c) => c.state().required());
 		return hasRequiredFormField || hasRequiredNgModel || hasRequiredFormControl;
 	}

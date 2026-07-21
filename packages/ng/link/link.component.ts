@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, ElementRef, inject, Injector, input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, effect, ElementRef, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
 import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LU_INDEX_TABLE_INSTANCE } from '@lucca-front/ng/index-table';
@@ -73,7 +73,7 @@ export class LinkComponent {
 	/**
 	 * External icon only visible on hover/focus
 	 */
-	readonly hiddenIcon = input(false, { transform: booleanAttribute });
+	readonly hiddenIcon = input(false, { transform: luBooleanAttribute });
 
 	hrefBackup: string;
 
