@@ -151,6 +151,19 @@ describe('renderComponentOrDirective', () => {
 		expect(out).not.toContain('ngOnInit'); // lifecycle filtered out
 		expect(out).not.toContain('internal'); // private (modifierKind 123) filtered out
 	});
+
+	it('drops members with no name instead of crashing the sort (Compodoc emits nameless entries)', () => {
+		const withNameless = {
+			name: 'LuNamelessComponent',
+			inputsClass: [{ name: 'valid', type: 'string' }, { type: 'number' }],
+			outputsClass: [{}],
+			methodsClass: [{ modifierKind: [] }, { name: 'run', modifierKind: [], args: [] }],
+		};
+		let render;
+		expect(() => (render = renderComponentOrDirective({ entity: withNameless }))).not.toThrow();
+		expect(render).toContain('| `valid` |');
+		expect(render).toContain('`run()`');
+	});
 });
 
 describe('renderFunction / renderInterface / renderTypeAlias / renderVariable', () => {

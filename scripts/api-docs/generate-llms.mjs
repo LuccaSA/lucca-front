@@ -253,6 +253,7 @@ const NG_LIFECYCLE = new Set([
 /** @param {any[] | undefined} methods */
 function publicMethods(methods) {
 	return (methods || [])
+		.filter((m) => m?.name)
 		.filter((m) => !NG_LIFECYCLE.has(m.name))
 		.filter((m) => {
 			const mods = m.modifierKind || [];
@@ -260,6 +261,16 @@ function publicMethods(methods) {
 			return !mods.includes(123) && !mods.includes(124);
 		})
 		.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * Members carrying a name, alpha-sorted. Compodoc occasionally emits a member
+ * with no `name` (e.g. an unresolved signal input); such entries cannot be
+ * documented and are dropped rather than crashing the sort.
+ * @param {any[] | undefined} arr
+ */
+function sortedByName(arr) {
+	return [...(arr || [])].filter((x) => x?.name).sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /** @param {string | undefined} type */
@@ -282,7 +293,7 @@ export function renderComponentOrDirective({ entity }) {
 	if (desc) lines.push(desc, '');
 	if (entity.selector) lines.push(`**Selector:** \`${entity.selector}\``, '');
 
-	const inputs = [...(entity.inputsClass || [])].sort((a, b) => a.name.localeCompare(b.name));
+	const inputs = sortedByName(entity.inputsClass);
 	if (inputs.length) {
 		lines.push('### Inputs', '', '| Input | Type | Default | Required | Description |', '| --- | --- | --- | --- | --- |');
 		for (const i of inputs) {
@@ -293,7 +304,7 @@ export function renderComponentOrDirective({ entity }) {
 		lines.push('');
 	}
 
-	const outputs = [...(entity.outputsClass || [])].sort((a, b) => a.name.localeCompare(b.name));
+	const outputs = sortedByName(entity.outputsClass);
 	if (outputs.length) {
 		lines.push('### Outputs', '', '| Output | Type | Description |', '| --- | --- | --- |');
 		for (const o of outputs) {
@@ -330,7 +341,7 @@ export function renderInterface({ entity }) {
 	const lines = [`## ${entity.name}`, ''];
 	const desc = cleanBlock(entity.rawdescription || entity.description);
 	if (desc) lines.push(desc, '');
-	const props = [...(entity.properties || [])].sort((a, b) => a.name.localeCompare(b.name));
+	const props = sortedByName(entity.properties);
 	if (props.length) {
 		lines.push('| Property | Type | Description |', '| --- | --- | --- |');
 		for (const p of props) {
@@ -358,7 +369,7 @@ export function renderEnumeration({ entity }) {
 	const lines = [`## ${entity.name}`, ''];
 	const desc = cleanBlock(entity.rawdescription || entity.description);
 	if (desc) lines.push(desc, '');
-	const members = [...(entity.childs || entity.members || [])].sort((a, b) => a.name.localeCompare(b.name));
+	const members = sortedByName(entity.childs || entity.members);
 	if (members.length) {
 		lines.push('| Member | Value |', '| --- | --- |');
 		for (const m of members) lines.push(`| \`${m.name}\` | ${m.value != null ? `\`${m.value}\`` : '—'} |`);

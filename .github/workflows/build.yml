@@ -23,7 +23,7 @@ jobs:
       - run: npm run build --if-present
       - run: npm run ci-test
       - run: npm run lint
-      # LLM API-surface coverage gate: extract the public API via Compodoc, then
-      # fail if JSDoc-description coverage regresses below the ratchet floor.
-      - run: npm run docs:api-json
+      # LLM API surface: extract via Compodoc and generate the artifacts (fails
+      # the PR if generation breaks), then gate on JSDoc-description coverage.
+      - run: npm run docs:api
       - run: npm run docs:api-coverage
