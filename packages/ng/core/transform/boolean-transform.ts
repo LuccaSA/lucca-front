@@ -6,9 +6,9 @@ import { booleanAttribute } from '@angular/core';
  * @param value The value to transform, can be a boolean or a string representation of a boolean.
  * @returns The transformed boolean value.
  */
-export function luBooleanAttribute(value: boolean | `${boolean}`): boolean;
-export function luBooleanAttribute<T extends boolean>(value: T | `${T}`): T;
-export function luBooleanAttribute(value: boolean | `${boolean}`): boolean {
+export function luBooleanAttribute(value: boolean | `${boolean}` | ''): boolean;
+export function luBooleanAttribute<T extends boolean>(value: T | `${T}` | ''): T;
+export function luBooleanAttribute(value: boolean | `${boolean}` | ''): boolean {
 	return booleanAttribute(value);
 }
 
@@ -18,9 +18,9 @@ export function luBooleanAttribute(value: boolean | `${boolean}`): boolean {
  * @param value The value to transform, can be a boolean, a string representation of a boolean, null or a string representation of null.
  * @returns The transformed boolean value or null.
  */
-export function luNullableBooleanAttribute(value: boolean | `${boolean}` | null | `${null}`): boolean | null;
-export function luNullableBooleanAttribute<T extends boolean>(value: T | `${T}` | null | `${null}`): T | null;
-export function luNullableBooleanAttribute(value: boolean | `${boolean}` | null | `${null}`): boolean | null {
+export function luNullableBooleanAttribute(value: boolean | `${boolean}` | '' | null | `${null}`): boolean | null;
+export function luNullableBooleanAttribute<T extends boolean>(value: T | `${T}` | '' | null | `${null}`): T | null;
+export function luNullableBooleanAttribute(value: boolean | `${boolean}` | '' | null | `${null}`): boolean | null {
 	if (value === null || value === 'null') {
 		return null;
 	}
@@ -34,9 +34,9 @@ export function luNullableBooleanAttribute(value: boolean | `${boolean}` | null 
  * @param value The value to transform, can be a boolean, a string representation of a boolean, undefined or a string representation of undefined.
  * @returns The transformed boolean value or undefined.
  */
-export function luOptionalBooleanAttribute(value: boolean | `${boolean}` | undefined | `${undefined}`): boolean | undefined;
-export function luOptionalBooleanAttribute<T extends boolean>(value: T | `${T}` | undefined | `${undefined}`): T | undefined;
-export function luOptionalBooleanAttribute(value: boolean | `${boolean}` | undefined | `${undefined}`): boolean | undefined {
+export function luOptionalBooleanAttribute(value: boolean | `${boolean}` | '' | undefined | `${undefined}`): boolean | undefined;
+export function luOptionalBooleanAttribute<T extends boolean>(value: T | `${T}` | '' | undefined | `${undefined}`): T | undefined;
+export function luOptionalBooleanAttribute(value: boolean | `${boolean}` | '' | undefined | `${undefined}`): boolean | undefined {
 	if (value === undefined || value === 'undefined') {
 		return undefined;
 	}
@@ -49,9 +49,9 @@ export function luOptionalBooleanAttribute(value: boolean | `${boolean}` | undef
  * @param value The value to transform.
  * @returns The transformed boolean value, null or undefined.
  */
-export function luOptionalNullableBooleanAttribute(value: boolean | `${boolean}` | null | `${null}` | undefined | `${undefined}`): boolean | null | undefined;
-export function luOptionalNullableBooleanAttribute<T extends boolean>(value: T | `${T}` | null | `${null}` | undefined | `${undefined}`): T | null | undefined;
-export function luOptionalNullableBooleanAttribute(value: boolean | `${boolean}` | null | `${null}` | undefined | `${undefined}`): boolean | null | undefined {
+export function luOptionalNullableBooleanAttribute(value: boolean | `${boolean}` | '' | null | `${null}` | undefined | `${undefined}`): boolean | null | undefined;
+export function luOptionalNullableBooleanAttribute<T extends boolean>(value: T | `${T}` | '' | null | `${null}` | undefined | `${undefined}`): T | null | undefined;
+export function luOptionalNullableBooleanAttribute(value: boolean | `${boolean}` | '' | null | `${null}` | undefined | `${undefined}`): boolean | null | undefined {
 	if (value === null || value === 'null') {
 		return null;
 	}
