@@ -26,7 +26,7 @@ import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillIn
 import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { addDays, parse, startOfDay, startOfWeek } from 'date-fns';
+import { addDays, getWeek, parse, setDay, setWeek, startOfDay, startOfWeek } from 'date-fns';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -73,6 +73,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	#injector = inject(Injector);
 	ngControl: NgControl; // Initialized in ngOnInit
+	weekParsingRegexp = /(\d{1,2})\D*(\d{4})?/;
 
 	// CVA stuff
 	#onChange?: (value: Date | null) => void;
@@ -116,7 +117,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	readonly displayValue = computed(() => {
 		const textInput = this.userTextInput();
 		if (textInput !== 'ɵ') {
-			const parsedInput = parse(textInput, this.dateFormatWithMode(), startOfDay(new Date()));
+			const parsedInput = this.parseValue(textInput);
 			if (this.isValidDate(parsedInput) && this.inputFocused()) {
 				return textInput;
 			}
@@ -126,9 +127,10 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			let formatter: Intl.DateTimeFormat;
 			switch (this.mode()) {
 				case 'day':
-				case 'week':
 					formatter = this.intlDateTimeFormat;
 					break;
+				case 'week':
+					return `${this.intl().weekPrefix}${getWeek(selectedDate)}/${selectedDate.getFullYear()}`;
 				case 'month':
 					formatter = this.intlDateTimeFormatMonth;
 					break;
@@ -204,13 +206,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				return;
 			}
 			if (inputValue.length > 0) {
-				let parsed: Date | null;
-				try {
-					parsed = parse(inputValue, this.dateFormatWithMode(), startOfDay(new Date()));
-				} catch {
-					/* not a correct date */
-					parsed = null;
-				}
+				const parsed: Date | null = this.parseValue(inputValue);
 				if (parsed instanceof Date && parsed.getFullYear() > 999) {
 					const normalized = this.#normalizeDate(parsed);
 					this.selectedDate.set(normalized);
@@ -260,6 +256,31 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				);
 			}
 		});
+	}
+
+	parseValue(inputValue: string): Date | null {
+		if (this.mode() === 'week') {
+			let parsed: Date | null = startOfDay(new Date());
+			const regexpResult = this.weekParsingRegexp.exec(inputValue);
+			if (regexpResult) {
+				parsed = setWeek(parsed, +regexpResult[1]);
+				parsed = setDay(parsed, 3);
+				// If we have a year, use it, otherwise use current year
+				if (regexpResult[2]) {
+					parsed.setFullYear(+regexpResult[2]);
+				}
+				return parsed;
+			} else {
+				return null;
+			}
+		} else {
+			try {
+				return parse(inputValue, this.dateFormatWithMode(), startOfDay(new Date()));
+			} catch {
+				/* not a correct date */
+				return null;
+			}
+		}
 	}
 
 	ngOnInit() {
