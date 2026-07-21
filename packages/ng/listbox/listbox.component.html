@@ -5,7 +5,8 @@
 @if (state() === "empty") {
 	<lu-listbox-option empty>{{ statusMsg() }}</lu-listbox-option>
 } @else if (state() === "loading") {
-	<lu-listbox-option presentation>
-		<lu-loading class="listboxOption-content-loading">{{ statusMsg() }}</lu-loading>
+	<lu-listbox-option presentation class="skeleton is-loading" inert="inert">
+		<span class="skeleton-item" style="--components-skeleton-text-width: 60%"></span>
 	</lu-listbox-option>
+	<span class="pr-u-mask">{{ statusMsg() }}</span>
 }

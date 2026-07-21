@@ -1,6 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
-import { LoadingComponent } from '@lucca-front/ng/loading';
 import { ListboxState } from './listbox.type';
 import { OptionComponent } from './option/option.component';
 import { LISTBOX_INSTANCE } from './tokens';
@@ -20,7 +19,7 @@ let nextId = 0;
 		'[attr.aria-busy]': 'state() === "loading"',
 		'[attr.aria-describedby]': 'state() === "empty" ? listboxId : null',
 	},
-	imports: [OptionComponent, LoadingComponent],
+	imports: [OptionComponent],
 	providers: [{ provide: LISTBOX_INSTANCE, useExisting: forwardRef(() => ListboxComponent) }],
 })
 export class ListboxComponent {
