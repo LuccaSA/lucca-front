@@ -74,6 +74,10 @@
 		--components-listboxOption-content-cursor: default;
 		--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
 	}
+
+	.listboxOption-content-checkboxField {
+		display: none;
+	}
 }
 
 @mixin empty {
