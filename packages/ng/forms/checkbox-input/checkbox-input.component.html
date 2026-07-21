@@ -16,8 +16,8 @@
 	<button
 		type="button"
 		class="filterPill mod-checkbox"
-		[attr.aria-pressed]="ngControl.control.value"
-		[attr.disabled]="ngControl.control.disabled ? 'disabled' : null"
+		[attr.aria-pressed]="checkboxValue()"
+		[attr.disabled]="isCheckboxDisabled() ? 'disabled' : null"
 		(click)="ngControl.control.setValue(!ngControl.control.value)"
 		#button
 	>
