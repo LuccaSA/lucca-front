@@ -1,12 +1,14 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, Signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, Injector, input, OnInit, signal, Signal, ViewEncapsulation } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
+import { getIntl } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { map } from 'rxjs';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { CHECKBOX_INPUT_TRANSLATIONS } from './checkbox-input.translate';
-import { getIntl } from '@lucca-front/ng/core';
 
 let nextId = 0;
 
@@ -29,7 +31,8 @@ let nextId = 0;
 		'[class.mod-checklist]': 'checklist()',
 	},
 })
-export class CheckboxInputComponent implements FilterPillInputComponent {
+export class CheckboxInputComponent implements FilterPillInputComponent, OnInit {
+	#injector = inject(Injector);
 	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 	parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
@@ -53,10 +56,25 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 
 	ngControl = injectNgControl();
 
+	/**
+	 * Reactive mirrors of the control's value/disabled state, so the filter pill button
+	 * (rendered with OnPush) reflects programmatic changes such as a form reset without
+	 * needing a DOM event to trigger change detection. Initialized in `ngOnInit` because
+	 * `ngControl.control` is only wired once the control directive's `ngOnChanges` has run.
+	 */
+	protected checkboxValue: Signal<boolean>;
+	protected isCheckboxDisabled: Signal<boolean>;
+
 	constructor() {
 		if (this.formField) {
 			this.formField.layout.set('checkable');
 		}
+	}
+
+	ngOnInit(): void {
+		const control = this.ngControl.control;
+		this.checkboxValue = toSignal(control.valueChanges.pipe(map((value) => !!value)), { initialValue: !!control.value, injector: this.#injector });
+		this.isCheckboxDisabled = toSignal(control.statusChanges.pipe(map(() => control.disabled)), { initialValue: control.disabled, injector: this.#injector });
 	}
 
 	clearFilterPillValue(): void {
