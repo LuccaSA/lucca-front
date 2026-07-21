@@ -4,9 +4,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { createTestStory, generateInputs } from '../../../helpers/stories';
-import { mapInputs, sleep } from '../../../helpers/test';
+import { mapInputs, sleep, waitForAngular } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
@@ -125,3 +125,82 @@ export const Basic: StoryObj<LuTooltipTriggerDirective> = {
 		luTooltipPosition: 'above',
 	},
 };
+
+export const BasicTEST = createTestStory(
+	{
+		...Basic,
+		args: {
+			...Basic.args,
+			luTooltipEnterDelay: 0,
+			luTooltipLeaveDelay: 0,
+		},
+	},
+	async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const inputs = canvas.getAllByRole('button');
+
+		// Map inputs to named references
+		const { button, span } = mapInputs(inputs, {
+			button: 0,
+			span: 1,
+		});
+
+		await step('ButtonTooltip', async () => {
+			await step('Focus', async () => {
+				button.focus();
+				await expect(button).toHaveFocus();
+				await waitFor(
+					() => {
+						expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+					},
+					{ timeout: 1000 },
+				);
+				button.blur();
+				await waitForAngular();
+			});
+
+			await step('Hover', async () => {
+				await userEvent.hover(button);
+				await waitFor(
+					() => {
+						expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+					},
+					{ timeout: 1000 },
+				);
+			});
+
+			await step('Unhover', async () => {
+				await userEvent.unhover(button);
+				await waitForAngular();
+				await expect(screen.queryByRole('tooltip')).toBeNull();
+			});
+		});
+
+		await step('SpanTooltip', async () => {
+			await step('Focus', async () => {
+				span.focus();
+				await expect(span).toHaveFocus();
+				await waitForAngular();
+				await expect(screen.getByRole('tooltip')).toBeVisible();
+				span.blur();
+				await waitForAngular();
+			});
+		});
+
+		await step('IconTooltip', async () => {
+			const icon = canvas.getByTestId('icon-tooltip');
+
+			await step('Hover', async () => {
+				await userEvent.hover(icon);
+				await waitForAngular();
+				await expect(screen.getByRole('tooltip')).toBeVisible();
+			});
+
+			await step('Unhover', async () => {
+				await userEvent.unhover(icon);
+				await waitForAngular();
+				await expect(screen.queryByRole('tooltip')).toBeNull();
+			});
+		});
+	},
+);

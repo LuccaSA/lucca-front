@@ -1,6 +1,7 @@
 <lu-select-option
 	luCoreSelectPanelElement
 	#rootOption="luCoreSelectPanelElement"
+	[listbox]="listbox()"
 	[style.--components-treeBranch-level]="depth()"
 	[option]="branch().node"
 	[optionTpl]="optionTpl()"
@@ -16,6 +17,7 @@
 @for (child of branch().children; track $index) {
 	<lu-tree-branch
 		[depth]="depth() + 1"
+		[listbox]="listbox()"
 		[branch]="child"
 		[optionTpl]="optionTpl()"
 		[optionIndex]="optionIndex() + '-' + $index"

@@ -10,7 +10,8 @@
 		&.mod-add {
 			@include add;
 
-			&:hover {
+			&:hover,
+			&:has(> .listboxOption-content.is-hovered) {
 				@include addHover;
 			}
 
@@ -53,7 +54,8 @@
 		}
 
 		&[aria-selected='true'],
-		&[aria-checked='true'] {
+		&[aria-checked='true'],
+		&.is-selected {
 			> .listboxOption-content {
 				@include selected;
 
@@ -68,7 +70,8 @@
 			}
 		}
 
-		&[aria-disabled='true'] {
+		&[aria-disabled='true'],
+		&.is-disabled {
 			> .listboxOption-content {
 				@include disabled;
 
@@ -78,7 +81,8 @@
 			}
 
 			&[aria-selected='true'],
-			&[aria-checked='true'] {
+			&[aria-checked='true'],
+			&.is-selected {
 				> .listboxOption-content {
 					@include selectedDisabled;
 				}
@@ -93,14 +97,22 @@
 	}
 
 	@layer mods {
-		&.is-hovered,
-		&:hover {
+		&.is-hovered {
 			@include hover;
 		}
 
 		&:active {
 			@include active;
 		}
+	}
+}
+
+// In presentation mode the hover state is driven exclusively by the is-hovered class
+// (bound to isHighlighted by the parent lu-select-option), so native :hover must not apply
+// to avoid two items appearing highlighted simultaneously during mixed keyboard/mouse navigation.
+.listboxOption:not([presentation]) > .listboxOption-content:hover {
+	@layer mods {
+		@include hover;
 	}
 }
 
@@ -134,7 +146,8 @@
 
 				.listboxOption {
 					&:hover,
-					&.is-hovered {
+					&.is-hovered,
+					&:has(> .listboxOption-content.is-hovered) {
 						@include multipleHover;
 					}
 
@@ -143,7 +156,8 @@
 					}
 
 					&[aria-selected='true'],
-					&[aria-checked='true'] {
+					&[aria-checked='true'],
+					&.is-selected {
 						> .listboxOption-content {
 							@include multipleSelected;
 
@@ -173,13 +187,15 @@
 						}
 					}
 
-					&[aria-disabled='true'], {
+					&[aria-disabled='true'],
+					&.is-disabled {
 						> .listboxOption-content {
 							@include multipleDisabled;
 						}
 
 						&[aria-selected='true'],
-						&[aria-checked='true'] {
+						&[aria-checked='true'],
+						&.is-selected {
 							> .listboxOption-content {
 								@include multipleSelectedDisabled;
 							}
