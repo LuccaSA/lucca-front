@@ -1,5 +1,5 @@
 import { ComponentRef, Directive, EmbeddedViewRef, inject, Injector, input, OnDestroy, TemplateRef, Type, ViewContainerRef } from '@angular/core';
-import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuOptionContext } from '../select.model';
 import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
 
@@ -16,7 +16,7 @@ export class LuOptionOutletDirective<T> implements OnDestroy {
 
 	readonly luOptionOutletValue = input<T | undefined>();
 
-	readonly luOptionShowNull = input<boolean>(false);
+	readonly luOptionShowNull = input(false, { transform: luBooleanAttribute });
 
 	private viewContainerRef = inject(ViewContainerRef);
 	private injector = inject(Injector);

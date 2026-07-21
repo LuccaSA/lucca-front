@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, model, output, untracked, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, model, output, untracked, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
@@ -9,7 +9,7 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { ILuUser, LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { IconComponent } from '@lucca/prisme/icon';
 import { LU_IMPERSONATION_TRANSLATIONS } from './impersonation.translate';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-impersonation',
@@ -33,7 +33,7 @@ export class ImpersonationComponent {
 
 	readonly selectedUser = model<ILuUser>();
 
-	readonly enableFormerEmployees = input(false, { transform: booleanAttribute });
+	readonly enableFormerEmployees = input(false, { transform: luBooleanAttribute });
 
 	readonly isNotMe = computed(() => this.selectedUser()?.id !== this.currentUserId);
 	readonly clear = output<void>();

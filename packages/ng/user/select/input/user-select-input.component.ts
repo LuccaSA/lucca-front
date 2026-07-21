@@ -2,6 +2,7 @@ import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, input, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
+import { booleanAttribute } from '@angular/core';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
@@ -55,8 +56,8 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	@Input() orderBy: string;
 	@Input() appInstanceId: number | string;
 	@Input() operations: number[];
-	@Input() enableFormerEmployees = false;
-	@Input() disablePrincipal = false;
+	@Input({ transform: booleanAttribute }) enableFormerEmployees = false;
+	@Input({ transform: booleanAttribute }) disablePrincipal = false;
 
 	clue = '';
 

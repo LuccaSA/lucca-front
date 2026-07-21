@@ -2,7 +2,6 @@
 import { Overlay } from '@angular/cdk/overlay';
 import {
 	AfterViewInit,
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
@@ -21,7 +20,7 @@ import {
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ALuClear, ILuClear } from '@lucca-front/ng/clear';
-import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
@@ -47,7 +46,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 
 	tabindex = 0;
 
-	readonly pickerOverlap = input(false, { transform: booleanAttribute });
+	readonly pickerOverlap = input(false, { transform: luBooleanAttribute });
 
 	readonly placeholderInput = input<string>('', { alias: 'placeholder' });
 

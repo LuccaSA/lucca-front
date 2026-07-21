@@ -2,7 +2,6 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -21,7 +20,7 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { isNil, isNotNil, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, isNotNil, luBooleanAttribute, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -83,9 +82,9 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly placeholder = input<string>();
 
-	readonly disableOverflow = input(false, { transform: booleanAttribute });
-	readonly hideOverflow = input(false, { transform: booleanAttribute });
-	readonly widthAuto = input(false, { transform: booleanAttribute });
+	readonly disableOverflow = input(false, { transform: luBooleanAttribute });
+	readonly hideOverflow = input(false, { transform: luBooleanAttribute });
+	readonly widthAuto = input(false, { transform: luBooleanAttribute });
 
 	readonly filterPillDisabled = signal(false);
 

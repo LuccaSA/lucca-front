@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
-import { intlInputOptions, isNil, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
+import { intlInputOptions, isNil, luBooleanAttribute, luOptionalNumberAttribute, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn } from 'rxjs';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';
@@ -34,13 +34,13 @@ export class LuOptionComponent<T> implements OnInit {
 
 	readonly grouping = input<LuOptionGrouping<T, unknown>>();
 
-	readonly hasChildren = input(false, { transform: booleanAttribute });
+	readonly hasChildren = input(false, { transform: luBooleanAttribute });
 
 	readonly onlyParent = output<void>();
 
 	readonly onlyChildren = output<void>();
 
-	readonly groupIndex = input<number>();
+	readonly groupIndex = input(undefined, { transform: luOptionalNumberAttribute });
 
 	public readonly optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 

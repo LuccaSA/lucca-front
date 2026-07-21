@@ -1,6 +1,6 @@
 import { NgStyle } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, ViewEncapsulation } from '@angular/core';
-import { isNotNilOrEmptyString } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, ViewEncapsulation } from '@angular/core';
+import { isNotNilOrEmptyString, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
 import { UserPictureSize } from './user-picture.type';
 
@@ -62,11 +62,11 @@ export class LuUserPictureComponent {
 
 	readonly user = input<LuUserPictureUserInput>();
 
-	readonly AI = input(false, { transform: booleanAttribute });
+	readonly AI = input(false, { transform: luBooleanAttribute });
 
-	readonly placeholder = input(false, { transform: booleanAttribute });
+	readonly placeholder = input(false, { transform: luBooleanAttribute });
 
-	readonly softRounded = input(false, { transform: booleanAttribute });
+	readonly softRounded = input(false, { transform: luBooleanAttribute });
 
 	readonly size = input<UserPictureSize>('M');
 

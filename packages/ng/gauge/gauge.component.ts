@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { LuClass, Palette } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, LuClass, luNumberAttribute, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-gauge',
@@ -15,27 +15,27 @@ export class GaugeComponent {
 	/**
 	 * The progress of the gauge from 0 to 100
 	 */
-	readonly value = input(0, { transform: numberAttribute });
+	readonly value = input(0, { transform: luNumberAttribute });
 
 	/**
 	 * Make the gauge finer
 	 */
-	readonly thin = input(false, { transform: booleanAttribute });
+	readonly thin = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Display gaugue in circular
 	 */
-	readonly circular = input(false, { transform: booleanAttribute });
+	readonly circular = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Animate the gauge component
 	 */
-	readonly animated = input(false, { transform: booleanAttribute });
+	readonly animated = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Disabled alt display (overrides alt value)
 	 */
-	readonly noAlt = input(false, { transform: booleanAttribute });
+	readonly noAlt = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Which palette should be used for the entire gauge.
@@ -51,7 +51,7 @@ export class GaugeComponent {
 	/**
 	 * Which size should the gauge be? widht & height
 	 */
-	readonly size = input(40, { transform: numberAttribute });
+	readonly size = input(40, { transform: luNumberAttribute });
 
 	readonly thickness = computed(() => (this.thin() ? 4 : 8));
 

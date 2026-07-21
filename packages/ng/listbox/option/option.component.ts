@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, Directive, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, Directive, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LISTBOX_INSTANCE, OPTION_INSTANCE } from '../tokens';
 
@@ -33,19 +34,19 @@ export class OptionComponent {
 	#listboxRef = inject(LISTBOX_INSTANCE);
 	#parentOptionRef = inject(OPTION_INSTANCE, { skipSelf: true, optional: true });
 
-	readonly checked = input(false, { transform: booleanAttribute });
+	readonly checked = input(false, { transform: luBooleanAttribute });
 
-	readonly mixed = input(false, { transform: booleanAttribute });
+	readonly mixed = input(false, { transform: luBooleanAttribute });
 
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
-	readonly hovered = input(false, { transform: booleanAttribute });
+	readonly hovered = input(false, { transform: luBooleanAttribute });
 
-	readonly add = input(false, { transform: booleanAttribute });
+	readonly add = input(false, { transform: luBooleanAttribute });
 
-	readonly group = input(false, { transform: booleanAttribute });
+	readonly group = input(false, { transform: luBooleanAttribute });
 
-	readonly select = input(false, { transform: booleanAttribute });
+	readonly select = input(false, { transform: luBooleanAttribute });
 
 	readonly selectAll = input<'string' | null>();
 

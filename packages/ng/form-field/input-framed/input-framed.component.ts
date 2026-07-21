@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
-import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { InputFramedSize } from './input-framed.type';
 import { INPUT_FRAMED_INSTANCE } from './input-framed.token';
 
@@ -18,6 +18,6 @@ import { INPUT_FRAMED_INSTANCE } from './input-framed.token';
 })
 export class InputFramedComponent {
 	readonly framedPortal = input<PortalContent | null>(null);
-	readonly center = input(false, { transform: booleanAttribute });
+	readonly center = input(false, { transform: luBooleanAttribute });
 	readonly size = input<InputFramedSize | null>(null);
 }

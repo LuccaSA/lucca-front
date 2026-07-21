@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { ResourceCardSize } from '../resource-card.type';
 import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token';
 
@@ -20,9 +21,9 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token
 	],
 })
 export class ResourceCardWrapperComponent {
-	readonly grid = input(false, { transform: booleanAttribute });
+	readonly grid = input(false, { transform: luBooleanAttribute });
 
-	readonly draggable = input(false, { transform: booleanAttribute });
+	readonly draggable = input(false, { transform: luBooleanAttribute });
 
 	readonly size = input<ResourceCardSize | null>(null);
 }

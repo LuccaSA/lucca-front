@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -30,12 +30,12 @@ export class ChipComponent {
 	/**
 	 * Add an ellipsis if the text is too long
 	 */
-	readonly withEllipsis = input(false, { transform: booleanAttribute });
+	readonly withEllipsis = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Makes the chip non-removable
 	 */
-	readonly unkillable = input(false, { transform: booleanAttribute });
+	readonly unkillable = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Which palette should be used for the entire chip.
@@ -46,7 +46,7 @@ export class ChipComponent {
 	/**
 	 * Disabled the chip
 	 */
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Which size should the chip be? Defaults or small
