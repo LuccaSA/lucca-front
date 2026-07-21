@@ -9,6 +9,7 @@
 		<lu-icon icon="mathsPlus" />
 	}
 	<ng-content />
+	<ng-content select="[group-action]" />
 	@if (selectAll()) {
 		<lu-listbox-option select>{{ selectAll() }}</lu-listbox-option>
 	}

@@ -9,3 +9,34 @@
 		margin: 0;
 	}
 }
+
+.listboxOption[role="group"] {
+	@layer components {
+		display: flex;
+		flex-direction: column;
+		gap: var(--pr-t-spacings-50);
+
+		&:not(:hover, :has(.is-highlighted)) {
+			.link {
+				opacity: 0.0001;
+			}
+		}
+
+		> .listboxOption-content {
+			font: var(--pr-t-font-body-S);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+			padding-block: var(--components-options-item-padding-vertical);
+			padding-inline: var(--components-options-item-padding-horizontal);
+			color: var(--palettes-neutral-600);
+			position: sticky;
+			inset-block-start: 0;
+			background-color: var(--pr-t-elevation-surface-raised);
+			z-index: 1;
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			justify-content: space-between;
+			// Mask background options scrolling behind
+			box-shadow: calc(var(--pr-t-spacings-50) * -0.5) calc(var(--pr-t-spacings-50) * -0.5) 0 2px var(--pr-t-elevation-surface-raised);
+		}
+	}
+}
