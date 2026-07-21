@@ -143,7 +143,7 @@ describe('DateInputComponent', () => {
 		});
 
 		it('should not emit when typing another day of the already selected week', () => {
-			const valueChanges = jest.fn();
+			const valueChanges = vi.fn();
 			const formControl = new FormControl<Date | null>(new Date(2024, 9, 16));
 			formControl.valueChanges.subscribe(valueChanges);
 
