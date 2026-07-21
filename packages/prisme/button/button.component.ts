@@ -33,27 +33,27 @@ export class ButtonComponent {
 	/**
 	 * Apply block display
 	 */
-	readonly block = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
+	readonly block = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * Disables the Button. Also applied automatically when `state` is `loading`
 	 */
-	readonly disabled = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
+	readonly disabled = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * Indicates an action with significant or irreversible consequences on hover and focus. Only compatible with outlined and ghost
 	 */
-	readonly critical = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
+	readonly critical = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * @deprecated use `critical` input instead
 	 */
-	readonly delete = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
+	readonly delete = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * Indicates the presence of a menu
 	 */
-	readonly disclosure = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
+	readonly disclosure = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * Applies a color palette to the Button
