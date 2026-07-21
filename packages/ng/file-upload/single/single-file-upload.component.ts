@@ -3,6 +3,7 @@ import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration
 import { IntlParamsPipe, luBooleanAttribute } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.component';
+import { FileEntry } from '../file-upload-entry';
 
 @Component({
 	selector: 'lu-single-file-upload',
