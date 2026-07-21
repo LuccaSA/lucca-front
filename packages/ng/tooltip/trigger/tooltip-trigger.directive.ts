@@ -96,8 +96,9 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	// guards the one-time setup of the persistent resize/mutation observers
 	#measurementObserversArmed = false;
 
-	// the IntersectionObserver callback can fire after the view is destroyed; avoid touching
-	// the destroyed injector (NG0911) when that happens
+	// the IntersectionObserver callback and a debounced 'open' action (see openTooltip) can
+	// fire after the view is destroyed; avoid touching the destroyed injector (NG0911) or
+	// recreating the overlay when that happens
 	#destroyed = false;
 
 	// written only from the `read` phase of the afterRenderEffect below
@@ -321,7 +322,11 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	}
 
 	private openTooltip(): void {
-		if (this.overlayRef?.hasAttached()) {
+		// A pending debounced 'open' is flushed when `toObservable(#realAction)` completes on
+		// destroy (`debounce` re-emits the held value on completion), i.e. AFTER ngOnDestroy has
+		// disposed the overlay. Opening then would recreate an overlay anchored to a detached
+		// host — pinned to the viewport's top-left corner — that nothing would ever dispose.
+		if (this.#destroyed || this.overlayRef?.hasAttached()) {
 			return;
 		}
 		const position = this.legacyPositionBuilder();
