@@ -77,8 +77,6 @@
 
 			@include reset.list;
 
-			padding: var(--components-listboxOptionWrapper-padding);
-
 			.listboxOptionWrapper {
 				--components-listboxOptionWrapper-overflow: visible;
 			}

@@ -45,7 +45,7 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 		expect(listbox.classList).toContain('mod-multiple');
 
 		// The role moved from the scroll container to the listbox itself
-		const pickerContent = overlayContainerElement.querySelector('.lu-picker-content')!;
+		const pickerContent = overlayContainerElement.querySelector('.lu-select-panel-layout-content')!;
 		expect(pickerContent.hasAttribute('role')).toBe(false);
 
 		expect(overlayContainerElement.querySelectorAll('lu-select-option').length).toBe(3);
