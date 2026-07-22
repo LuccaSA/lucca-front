@@ -182,7 +182,7 @@
 }
 
 @mixin weekFocusVisible {
-	@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-structure), $offset: -3px);
+	@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-structure), $offset: -2px);
 }
 
 @mixin weekSelectedFocusVisible {
@@ -217,7 +217,7 @@
 }
 
 @mixin weekHover {
-	@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-structure), $offset: -3px);
+	@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-structure), $offset: -2px);
 
 	&,
 	.calendar-table-body-row-cell-action {
