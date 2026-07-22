@@ -1,0 +1,9 @@
+{
+	"extends": "../../tsconfig.spec.json",
+	"compilerOptions": {
+		"outDir": "../../out-tsc/spec",
+		"rootDir": "../..",
+		"isolatedModules": false
+	},
+	"include": ["**/*.spec.ts", "../../vitest.setup.ts", "../../vitest-matchers.d.ts"]
+}

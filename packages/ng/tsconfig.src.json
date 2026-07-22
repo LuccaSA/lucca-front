@@ -1,0 +1,20 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"declaration": true,
+		"stripInternal": true,
+		"emitDecoratorMetadata": false,
+		"outDir": "../build",
+		"rootDirs": ["."],
+		"skipLibCheck": true,
+		// Surfaces null-safety errors in the IDE and ESLint; disabled in tsconfig.lib.prod.json until the codebase is compliant
+		"strictNullChecks": true
+	},
+	"exclude": ["**/*.spec.ts"],
+	"angularCompilerOptions": {
+		"preserveSymlinks": true,
+		"annotateForClosureCompiler": false,
+		"strictMetadataEmit": true,
+		"skipTemplateCodegen": true
+	}
+}
