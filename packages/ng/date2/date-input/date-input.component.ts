@@ -130,7 +130,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 					formatter = this.intlDateTimeFormat;
 					break;
 				case 'week':
-					return `${this.intl().weekPrefix}${getWeek(selectedDate)}/${selectedDate.getFullYear()}`;
+					return `${this.intl().weekPrefix}${getWeek(selectedDate, this.weekOptions)}/${selectedDate.getFullYear()}`;
 				case 'month':
 					formatter = this.intlDateTimeFormatMonth;
 					break;
@@ -267,7 +267,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				if (regexpResult[2]) {
 					parsed.setFullYear(+regexpResult[2]);
 				}
-				parsed = setWeek(parsed, +regexpResult[1]);
+				parsed = setWeek(parsed, +regexpResult[1], this.weekOptions);
 				parsed = setDay(parsed, 3);
 				return parsed;
 			} else {

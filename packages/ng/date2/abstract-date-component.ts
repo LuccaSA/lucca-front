@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
 import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
-import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
+import { addMonths, addYears, FirstWeekContainsDateOptions, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
 import { WEEK_INFO } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
@@ -19,8 +19,8 @@ export abstract class AbstractDateComponent {
 	protected locale = inject(LOCALE_ID);
 	#weekInfo = inject(WEEK_INFO);
 
-	protected get weekOptions(): WeekOptions {
-		return { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
+	protected get weekOptions(): WeekOptions & FirstWeekContainsDateOptions {
+		return { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo), firstWeekContainsDate: 4 };
 	}
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	protected dateFormat = getDateFormat(this.locale);
