@@ -181,8 +181,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	};
 
 	readonly calendarRanges = computed(() => {
-		if (this.selectedRange()) {
-			return [this.selectedRange(), ...this.ranges()];
+		const selectedRange = this.selectedRange();
+		if (selectedRange) {
+			return [selectedRange, ...this.ranges()];
 		}
 		return this.ranges();
 	});

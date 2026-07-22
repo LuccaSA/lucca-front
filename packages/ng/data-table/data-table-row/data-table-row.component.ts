@@ -23,8 +23,8 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 		'[class.dataTable-body-row]': 'bodyRef !== null',
 		'[class.dataTable-head-row]': 'headRef !== null',
 		'[class.dataTable-foot-row]': 'footRef !== null',
-		'[class.mod-selectable]': 'tableRef.selectable() ?? false',
-		'[class.mod-draggable]': 'tableRef.drag() ?? false',
+		'[class.mod-selectable]': 'tableRef?.selectable() ?? false',
+		'[class.mod-draggable]': 'tableRef?.drag() ?? false',
 	},
 	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet, IconComponent, CdkDragHandle],
 	providers: [

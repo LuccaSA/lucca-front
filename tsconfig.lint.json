@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "strictNullChecks": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "types": ["vitest/globals", "vitest/importMeta", "vite/client", "node", "vitest"],

@@ -1,4 +1,4 @@
-@if (tableRef.drag()) {
+@if (tableRef?.drag()) {
 	<td class="dataTable-body-row-cell" aria-hidden="true">
 		@if (bodyRef) {
 			<span class="button dataTable-body-row-cell-drag" cdkDragHandle>
@@ -8,7 +8,7 @@
 	</td>
 }
 
-@if (tableRef.selectable()) {
+@if (tableRef?.selectable()) {
 	@if (headRef) {
 		<th class="dataTable-head-row-cell" scope="col"><ng-container *ngTemplateOutlet="input" /></th>
 	} @else {
@@ -21,7 +21,7 @@
 
 <ng-template #input>
 	@if (!footRef && selectedLabel()) {
-		<lu-form-field [label]="selectedLabel()" hiddenLabel>
+		<lu-form-field [label]="selectedLabel() ?? ''" hiddenLabel>
 			<lu-checkbox-input [(ngModel)]="selected" [disabled]="disabled()" [mixed]="mixed()" />
 		</lu-form-field>
 	}

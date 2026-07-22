@@ -18,7 +18,9 @@
 				(keydown.home)="$event.preventDefault(); first()"
 				(keydown.end)="$event.preventDefault(); last()"
 			>
-				<ng-container *luPortal="panel.label()" />
+				@if (panel.label(); as label) {
+					<ng-container *luPortal="label" />
+				}
 			</button>
 		</li>
 	}

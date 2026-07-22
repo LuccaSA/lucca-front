@@ -1,7 +1,9 @@
 <fieldset class="dateRangeField-fieldset">
 	<legend>
 		<span class="pr-u-mask">
-			<ng-container *luPortal="label()" />
+			@if (label(); as label) {
+				<ng-container *luPortal="label" />
+			}
 		</span>
 	</legend>
 	<div class="dateRangeField-fieldset-textField textField" #popoverAnchor>
@@ -84,7 +86,7 @@
 
 <ng-template #calendar>
 	<div class="calendarShortcutsOptional">
-		@if (shortcuts()?.length > 0) {
+		@if ((shortcuts()?.length ?? 0) > 0) {
 			<ul
 				class="calendarShortcuts"
 				[class.mod-day]="mode() === 'day'"
@@ -118,7 +120,7 @@
 					[date]="currentDate()"
 					(dateChange)="currentDateChangeFromCalendar($event)"
 					[tabbableDate]="tabbableDate()"
-					(tabbableDateChange)="tabbableDateChange($event, 0)"
+					(tabbableDateChange)="$event && tabbableDateChange($event, 0)"
 					[getCellInfo]="combinedGetCellInfo"
 					[(dateHovered)]="dateHovered"
 					[ranges]="calendarRanges()"
@@ -136,7 +138,7 @@
 						[date]="currentRightDate()"
 						(dateChange)="currentDateChangeFromCalendar($event)"
 						[tabbableDate]="tabbableDate()"
-						(tabbableDateChange)="tabbableDateChange($event, 1)"
+						(tabbableDateChange)="$event && tabbableDateChange($event, 1)"
 						[getCellInfo]="combinedGetCellInfo"
 						[(dateHovered)]="dateHovered"
 						[ranges]="calendarRanges()"

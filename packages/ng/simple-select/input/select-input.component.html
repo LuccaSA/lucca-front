@@ -1,7 +1,7 @@
 <div class="simpleSelect-field">
 	<span class="simpleSelect-field-prefix">
-		@if (prefix()) {
-			<ng-container *luPortal="prefix()" />
+		@if (prefix(); as prefix) {
+			<ng-container *luPortal="prefix" />
 		}
 	</span>
 	<input
@@ -17,7 +17,7 @@
 		(ngModelChange)="clueChanged($event)"
 		[ngModelOptions]="{ standalone: true }"
 		[readonly]="!searchable"
-		[disabled]="disabled$ | async"
+		[disabled]="(disabled$ | async) ?? false"
 		(keyup.space)="inputSpace($event)"
 		luInput
 		#inputElement

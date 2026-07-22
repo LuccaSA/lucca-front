@@ -30,7 +30,7 @@ export interface CalendarMonthInfo {
 	long: string;
 	isCurrent: boolean;
 	status: CellStatus;
-	rangeInfo: RangeInfo;
+	rangeInfo: RangeInfo | null;
 	classes: Record<string, boolean>;
 }
 
@@ -39,6 +39,6 @@ export interface CalendarYearInfo {
 	name: string;
 	isCurrent: boolean;
 	status: CellStatus;
-	rangeInfo: RangeInfo;
+	rangeInfo: RangeInfo | null;
 	classes: Record<string, boolean>;
 }

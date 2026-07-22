@@ -215,7 +215,7 @@ export class Calendar2Component implements OnInit {
 			})
 			.reduce<CalendarMonthInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);
-				all[ch] = [...(all[ch] || []), one as CalendarMonthInfo];
+				all[ch] = [...(all[ch] || []), one];
 				return all;
 			}, []);
 	});
@@ -231,7 +231,7 @@ export class Calendar2Component implements OnInit {
 					...this.dateToCellInfo(year),
 					name: this.#intlDateYear.format(year),
 					isCurrent: isSameYear(new Date(), year),
-				} as CalendarYearInfo;
+				};
 			})
 			.reduce<CalendarYearInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);
