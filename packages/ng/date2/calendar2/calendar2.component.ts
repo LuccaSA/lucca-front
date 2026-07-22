@@ -340,7 +340,13 @@ export class Calendar2Component implements OnInit {
 		const isFirstDayOfMonth = isDayMode && rangeInfo && isSameDay(startOfMonth(date), rangeInfo.range.start);
 
 		// Is this the current period? Will match if same day as today, or same month in month display, or same year if year display
-		const isCurrent = comparePeriods(this.displayMode(), new Date(), date, this.#weekOptions) && !this.hideToday();
+
+		let isCurrent: boolean;
+		if (this.displayMode() == 'week') {
+			isCurrent = comparePeriods('day', new Date(), date, this.#weekOptions) && !this.hideToday();
+		} else {
+			isCurrent = comparePeriods(this.displayMode(), new Date(), date, this.#weekOptions) && !this.hideToday();
+		}
 
 		// Are we currently in a range that's being created (start date selected, end date is being hovered)
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
