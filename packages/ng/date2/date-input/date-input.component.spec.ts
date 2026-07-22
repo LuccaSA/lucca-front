@@ -132,26 +132,14 @@ describe('DateInputComponent', () => {
 			weekFixture.detectChanges();
 		}
 
-		it('should normalize a typed date to the start of its week', () => {
+		it('should handle typed in week number', () => {
 			const formControl = new FormControl<Date | null>(null);
 			const input = createWeekHost(formControl);
 
-			// Wednesday, October 16th 2024 → week starts on Monday, October 14th in fr-FR
-			typeInWeekElement('16/10/2024', input);
+			// Week 30 2026 => Should be July, Thursday 23rd 2026
+			typeInWeekElement('30 2026', input);
 
-			expect(formControl.value).toEqual(new Date(2024, 9, 14));
-		});
-
-		it('should not emit when typing another day of the already selected week', () => {
-			const valueChanges = vi.fn();
-			const formControl = new FormControl<Date | null>(new Date(2024, 9, 16));
-			formControl.valueChanges.subscribe(valueChanges);
-
-			const input = createWeekHost(formControl);
-			// Friday of the same week as the initial Wednesday
-			typeInWeekElement('18/10/2024', input);
-
-			expect(valueChanges).not.toHaveBeenCalled();
+			expect(formControl.value).toEqual(new Date(2026, 6, 23));
 		});
 
 		it('should flag min error when the start of the selected week is before min', () => {
