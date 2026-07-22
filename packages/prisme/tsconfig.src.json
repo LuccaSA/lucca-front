@@ -10,7 +10,7 @@
 		// Surfaces null-safety errors in the IDE and ESLint; disabled in tsconfig.lib.prod.json until the codebase is compliant
 		"strictNullChecks": true
 	},
-	"exclude": ["**/*.spec.ts"],
+	"exclude": ["**/*.spec.ts", "**/*.spec.*.ts"],
 	"angularCompilerOptions": {
 		"preserveSymlinks": true,
 		"annotateForClosureCompiler": false,

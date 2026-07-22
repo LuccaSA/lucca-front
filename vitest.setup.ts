@@ -6,7 +6,7 @@ import '@angular/compiler';
 import { setupTestBed } from '@analogjs/vitest-angular/setup-testbed';
 import '@testing-library/jest-dom/vitest';
 import { toHaveNoViolations } from 'jest-axe';
-import { afterEach, vi } from 'vitest';
+import { afterEach, expect, vi } from 'vitest';
 
 setupTestBed({ zoneless: false });
 

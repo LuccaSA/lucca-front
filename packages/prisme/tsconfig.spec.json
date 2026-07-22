@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"outDir": "../../out-tsc/spec",
 		"rootDir": "../..",
-		"isolatedModules": false
+		"isolatedModules": false,
+		"strictNullChecks": true
 	},
-	"include": ["**/*.spec.ts", "../../vitest.setup.ts", "../../vitest-matchers.d.ts"]
+	"include": ["**/*.spec.ts", "**/*.spec.*.ts", "../../vitest.setup.ts", "../../vitest-matchers.d.ts"]
 }
