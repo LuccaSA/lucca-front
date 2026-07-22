@@ -135,7 +135,7 @@ function getMessage(objectData) {
  * @param {String} objectData
  * @return {'warning'|'error'}
  */
-function getSeverity(objectData) {
+export function getSeverity(objectData) {
 	if (!currentLFVersion) {
 		return 'warning';
 	}
