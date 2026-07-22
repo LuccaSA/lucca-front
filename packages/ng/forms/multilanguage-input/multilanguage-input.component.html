@@ -51,10 +51,9 @@
 							<ng-template #prefixLang>
 								<div class="textField-prefix-lang">
 									@if (formFieldRef.isInputRequired()) {
-										{{ row.cultureCodeDisplay || row.cultureCode.slice(0, 2).toUpperCase()
-										}}<sup class="formLabel-required" aria-hidden="true">*</sup>
+										{{ row.cultureCode.slice(0, 2).toUpperCase() }}<sup class="formLabel-required" aria-hidden="true">*</sup>
 									} @else {
-										{{ row.cultureCodeDisplay || row.cultureCode.slice(0, 2).toUpperCase() }}
+										{{ row.cultureCode.slice(0, 2).toUpperCase() }}
 									}
 								</div>
 							</ng-template>
