@@ -263,12 +263,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			let parsed: Date | null = startOfDay(new Date());
 			const regexpResult = this.weekParsingRegexp.exec(inputValue);
 			if (regexpResult) {
-				parsed = setWeek(parsed, +regexpResult[1]);
-				parsed = setDay(parsed, 3);
 				// If we have a year, use it, otherwise use current year
 				if (regexpResult[2]) {
 					parsed.setFullYear(+regexpResult[2]);
 				}
+				parsed = setWeek(parsed, +regexpResult[1]);
+				parsed = setDay(parsed, 3);
 				return parsed;
 			} else {
 				return null;
