@@ -57,16 +57,21 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	protected buildOptions(): Observable<TOption[]> {
 		// Prevent a double call to getOptions when the clue is changed while the panel is closed
 		const clueIsPendingDebounce$ = merge(this.select.clueChange$.pipe(map(() => true)), this.clue$.pipe(map(() => false))).pipe(distinctUntilChanged());
-		const isOpen$ = combineLatest([this.select.isPanelOpen$, clueIsPendingDebounce$]).pipe(
+		const isOpen$ = combineLatest([
+			this.select.isPanelOpen$.pipe(
+				tap((isOpen) => {
+					// Start the loader synchronously on opening to avoid a short display of the "no result"
+					// message: the first fetch only starts on the next tick (debounced open, async params$)
+					if (isOpen) {
+						this.select.loading = true;
+					}
+				}),
+			),
+			clueIsPendingDebounce$,
+		]).pipe(
 			debounceTime(0),
 			startWith([false, false]),
 			pairwise(),
-			tap(([[wasOpen], [isOpen, clueIsPendingDebounce]]) => {
-				// Start the loader as soon as the panel is opened to avoid a short display of the "no result" message
-				if (!wasOpen && isOpen && clueIsPendingDebounce) {
-					this.select.loading = true;
-				}
-			}),
 			map(([[wasOpen], [isOpen, clueIsPendingDebounce]]) => (isOpen && !wasOpen ? !clueIsPendingDebounce : isOpen)),
 			distinctUntilChanged(),
 		);
