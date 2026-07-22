@@ -531,7 +531,7 @@ export const EstablishmentCustom = generateStory({
 		👉👉👉 <span translate="no">{{ establishment.name }}</span> 👈👈👈
 	</ng-container>
 	<ng-container *luOption="let establishment; select: establishmentsRef.select">
-		<span translate="no">{{ establishment.name }}</span> <span class="pr-u-textLight">(Random {{ establishment.myCustomProperty }})</span>
+		<span><span translate="no">{{ establishment.name }}</span> <span class="pr-u-textLight">(Random {{ establishment.myCustomProperty }})</span></span>
 	</ng-container>
 </lu-simple-select>`,
 	neededImports: {
