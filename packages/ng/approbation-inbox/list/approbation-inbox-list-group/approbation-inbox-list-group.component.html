@@ -1,0 +1,28 @@
+<div class="approbationInbox-list-content-groupOptional-header">
+	@if (selectable()) {
+		<lu-form-field
+			[label]="intl().selectGroup | intlParams: { label: label() }"
+			hiddenLabel
+			class="approbationInbox-list-content-groupOptional-header-formfieldOptional"
+		>
+			<lu-checkbox-input
+				[ngModel]="allChecked()"
+				[ngModelOptions]="{ standalone: true }"
+				[mixed]="groupMixed()"
+				(ngModelChange)="onGroupChange($event)"
+			/>
+		</lu-form-field>
+	}
+	<button
+		type="button"
+		[attr.aria-expanded]="expanded()"
+		(click)="expandedToggle()"
+		class="approbationInbox-list-content-groupOptional-header-action"
+	>
+		<lu-icon icon="arrowChevronBottom" size="XS" class="approbationInbox-list-content-groupOptional-header-action-icon" />
+		{{ label() }}
+	</button>
+</div>
+<ul class="approbationInbox-list-content-groupOptional-content">
+	<ng-content />
+</ul>

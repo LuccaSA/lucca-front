@@ -1,0 +1,119 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.approbationInbox-detail,
+.approbationInbox-list {
+	@layer components {
+		@include vars;
+	}
+}
+
+.approbationInbox-list {
+	@layer components {
+		@include component;
+
+		.mainLayout-sidebar:has(&) {
+			@include mainLayoutSidebar;
+
+			@include media.max('M') {
+				@include mainLayoutSidebarMediaMaxM;
+			}
+		}
+	}
+}
+
+.approbationInbox-detail {
+	@layer components {
+		@include vars;
+	}
+
+	@layer mods {
+		&:has(.approbationInbox-detail-header-main-infos-description:empty),
+		&:not(:has(.approbationInbox-detail-header-main-infos-description)) {
+			@include noDescription;
+		}
+
+		&.mod-insideDialog {
+			@include insideDialog;
+		}
+
+		&:not(.mod-insideDialog) {
+			@include media.max('M') {
+				@include outsideDialogMediaMaxM;
+			}
+		}
+
+		&:not(:has(.approbationInbox-detail-header)) {
+			&:has(.approbationInbox-detail-main:empty) {
+				@include empty;
+			}
+		}
+
+		@include media.max('L') {
+			@include detailMediaMaxL;
+		}
+	}
+}
+
+.approbationInbox-list-content-items-item {
+	@layer mods {
+		&:has(.checkboxField-input:checked) {
+			@include selected;
+		}
+	}
+}
+
+.approbationInbox-list-content-items-item {
+	@layer mods {
+		&:has(.approbationInbox-list-content-items-item-content-action[aria-current='page']),
+		&:has(.approbationInbox-list-content-items-item-content-action.is-current) {
+			@include current;
+		}
+	}
+}
+
+.approbationInbox-list-content-items-item-content {
+	@layer mods {
+		&:has(.approbationInbox-list-content-items-item-content-action:focus-visible) {
+			@include focusVisible;
+		}
+	}
+}
+
+.approbationInbox-detail-main-block:last-child {
+	@layer mods {
+		@include blockLastChild;
+	}
+}
+
+.approbationInbox-list {
+	@layer mods {
+		@include media.min('S') {
+			@include listMediaMinS;
+		}
+
+		@include media.min('M') {
+			@include listMediaMinM;
+		}
+
+		@include media.min('L') {
+			@include listMediaMinL;
+		}
+
+		@include media.max('M') {
+			@include listMediaMaxM;
+		}
+
+		@include media.max('S') {
+			@include listMediaMaxM;
+		}
+	}
+}
+
+.approbationInbox-list-content-items-item-content-info {
+	@layer mods {
+		&.mod-center {
+			@include center;
+		}
+	}
+}
