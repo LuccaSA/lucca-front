@@ -75,7 +75,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
-	displayRow = computed(() => {
+	displayRow = computed<MultilanguageTranslation>(() => {
 		if (this.hasNoInvariant()) {
 			return this.model().find((row) => row.cultureCode === this.displayLocale()) || { value: '', required: false, cultureCode: this.displayLocale() };
 		} else {
@@ -84,7 +84,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	});
 
 	cultureCodeDisplay = computed(() => {
-		return this.displayLocale().split('-')[0]?.toUpperCase();
+		return this.displayRow().cultureCodeDisplay || this.displayLocale().split('-')[0]?.toUpperCase();
 	});
 
 	panelInputs = computed(() => {
