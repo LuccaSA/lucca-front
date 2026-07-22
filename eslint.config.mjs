@@ -7,7 +7,6 @@ import localRules from './packages/eslint-plugin/index.ts';
 import prettier from 'eslint-plugin-prettier/recommended';
 import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
-import tsParser from '@typescript-eslint/parser';
 
 export default defineConfig(
 	{
@@ -35,14 +34,8 @@ export default defineConfig(
 		processor: angular.processInlineTemplates,
 		languageOptions: {
 			parserOptions: {
-				project: [
-					'tsconfig.json',
-					'packages/ng/tsconfig.json',
-					'packages/prisme/tsconfig.json',
-					'packages/eslint-plugin/tsconfig.json',
-					'.storybook/tsconfig.json',
-				],
-				createDefaultProgram: true,
+				projectService: true,
+				tsconfigRootDir: import.meta.dirname,
 			},
 		},
 		rules: {
@@ -140,18 +133,6 @@ export default defineConfig(
 	},
 	{
 		files: ['**/*.ts'],
-		languageOptions: {
-			parser: tsParser,
-			parserOptions: {
-				project: [
-					'tsconfig.lint.json',
-					'packages/ng/tsconfig.lint.json',
-					'packages/prisme/tsconfig.lint.json',
-					'packages/eslint-plugin/tsconfig.json',
-					'.storybook/tsconfig.lint.json',
-				],
-			},
-		},
 		plugins: {
 			'@lucca-front': localRules,
 		},
