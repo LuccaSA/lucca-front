@@ -1,7 +1,11 @@
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateInputComponent } from './date-input.component';
+
+registerLocaleData(localeFr, 'fr-FR');
 
 @Component({
 	template: `<lu-date-input [formControl]="formControl" />`,
@@ -10,6 +14,16 @@ import { DateInputComponent } from './date-input.component';
 })
 class HostComponent {
 	formControl = new FormControl<Date | null>(null);
+}
+
+@Component({
+	template: `<lu-date-input [formControl]="formControl" mode="week" [min]="min" />`,
+	imports: [FormsModule, ReactiveFormsModule, DateInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class WeekHostComponent {
+	formControl = new FormControl<Date | null>(null);
+	min: Date | null = null;
 }
 
 describe('DateInputComponent', () => {
@@ -94,4 +108,53 @@ describe('DateInputComponent', () => {
 		tick();
 		expect(valueChanges).toHaveBeenCalledTimes(0);
 	}));
+
+	describe('week mode', () => {
+		let weekFixture: ComponentFixture<WeekHostComponent>;
+
+		function createWeekHost(formControl: FormControl<Date | null>, min: Date | null = null): HTMLInputElement {
+			TestBed.configureTestingModule({
+				imports: [WeekHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+
+			weekFixture = TestBed.createComponent(WeekHostComponent);
+			weekFixture.componentInstance.formControl = formControl;
+			weekFixture.componentInstance.min = min;
+			weekFixture.detectChanges();
+
+			return (weekFixture.nativeElement as HTMLElement).querySelector('[data-testid="lu-date-input"]') as HTMLInputElement;
+		}
+
+		function typeInWeekElement(value: string, input: HTMLInputElement): void {
+			input.value = value;
+			input.dispatchEvent(new Event('input'));
+			weekFixture.detectChanges();
+		}
+
+		it('should handle typed in week number', () => {
+			const formControl = new FormControl<Date | null>(null);
+			const input = createWeekHost(formControl);
+
+			// Week 30 2026 => Should be July, Thursday 23rd 2026
+			typeInWeekElement('30 2026', input);
+
+			expect(formControl.value).toEqual(new Date(2026, 6, 23));
+		});
+
+		it('should flag min error when the start of the selected week is before min', () => {
+			// Value is Wednesday, min is the same Wednesday: the emitted value (Monday) would be before min
+			const formControl = new FormControl<Date | null>(new Date(2024, 9, 16));
+			createWeekHost(formControl, new Date(2024, 9, 16));
+
+			expect(formControl.errors).toEqual({ min: true });
+		});
+
+		it('should accept a week whose start is after min', () => {
+			const formControl = new FormControl<Date | null>(new Date(2024, 9, 16));
+			createWeekHost(formControl, new Date(2024, 9, 14));
+
+			expect(formControl.errors).toBeNull();
+		});
+	});
 });

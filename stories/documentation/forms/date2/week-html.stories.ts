@@ -14,6 +14,7 @@ export default {
 	<table role="grid" aria-labelledby="calendar-name" class="calendar-table">
 		<thead class="calendar-table-head">
 			<tr class="calendar-table-head-row">
+				<th scope="col" class="calendar-table-head-row-cell"><span class="pr-u-mask">Numéro de semaine</span></th>
 				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="l"></span><span class="pr-u-mask">lundi</span></th>
 				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="m"></span><span class="pr-u-mask">mardi</span></th>
 				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="m"></span><span class="pr-u-mask">mercredi</span></th>
@@ -25,195 +26,220 @@ export default {
 		</thead>
 		<tbody class="calendar-table-body">
 			<tr class="calendar-table-body-row">
-				<td class="calendar-table-body-row-cell is-overflow" aria-selected="false">
+				<th scope="row" class="calendar-table-body-row-cell">
 					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+						<span class="calendar-table-body-row-cell-action-week">40</span>
+					</button>
+				</th>
+				<td class="calendar-table-body-row-cell is-overflow" aria-selected="false">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						30
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						1
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						2
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						3
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						4
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell is-daysOff" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						5
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell is-daysOff" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						6
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
 				</td>
 			</tr>
 			<tr class="calendar-table-body-row">
-				<td class="calendar-table-body-row-cell" aria-selected="false">
+				<th scope="row" class="calendar-table-body-row-cell">
 					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+						<span class="calendar-table-body-row-cell-action-week">41</span>
+					</button>
+				</th>
+				<td class="calendar-table-body-row-cell" aria-selected="false">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						7
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						8
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						9
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						10
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						11
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell is-daysOff" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						12
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell is-daysOff" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						13
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
 				</td>
 			</tr>
 			<tr class="calendar-table-body-row">
-				<td class="calendar-table-body-row-cell" aria-selected="false">
+				<th scope="row" class="calendar-table-body-row-cell" aria-selected="false">
 					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+						<span class="calendar-table-body-row-cell-action-week">42</span>
+					</button>
+				</th>
+				<td class="calendar-table-body-row-cell">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						14
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						15
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-selected is-start" aria-selected="true">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						16
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-selected" aria-selected="true">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						17
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-selected" aria-selected="true">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell is-current">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						18
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-selected is-end is-daysOff" aria-selected="true">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell is-daysOff">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						19
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-daysOff" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell is-daysOff">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						20
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
 				</td>
 			</tr>
 			<tr class="calendar-table-body-row">
-				<td class="calendar-table-body-row-cell" aria-selected="false">
+				<th scope="row" class="calendar-table-body-row-cell">
 					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+						<span class="calendar-table-body-row-cell-action-week">43</span>
+					</button>
+				</th>
+				<td class="calendar-table-body-row-cell" aria-selected="false">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						21
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						22
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						23
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						24
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-current" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="0">
+				<td class="calendar-table-body-row-cell" aria-selected="false">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						25 <span class="pr-u-mask">(aujourd’hui)</span>
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell is-daysOff" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						26
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell is-daysOff" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						27
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
 				</td>
 			</tr>
 			<tr class="calendar-table-body-row">
-				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<th scope="row" class="calendar-table-body-row-cell is-selected is-start" aria-selected="true">
+					<button type="button" class="calendar-table-body-row-cell-action">
+						<span class="calendar-table-body-row-cell-action-week">44</span>
+					</button>
+				</th>
+				<td class="calendar-table-body-row-cell is-selected" aria-selected="true">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						28
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell is-selected" aria-selected="true">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						29
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell is-selected" aria-selected="true">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						30
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell is-selected" aria-selected="true">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						31
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-overflow" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell is-selected is-overflow" aria-selected="true">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						1
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-daysOff is-overflow" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell is-selected is-daysOff is-overflow" aria-selected="true">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						2
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-daysOff is-overflow" aria-selected="false">
-					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
+				<td class="calendar-table-body-row-cell is-selected is-end is-daysOff is-overflow" aria-selected="true">
+					<button type="button" class="calendar-table-body-row-cell-action mod-week" tabindex="-1">
 						3
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
 					</button>
@@ -246,4 +272,4 @@ export default {
 	},
 } as Meta;
 
-export const Basic = {};
+export const Week = {};
