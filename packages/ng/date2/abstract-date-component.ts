@@ -66,7 +66,7 @@ export abstract class AbstractDateComponent {
 
 	readonly panelClosed = output<void>();
 
-	readonly dateFormatLocalized = computed(() => getLocalizedDateFormat(this.locale, this.mode()));
+	readonly dateFormatLocalized = computed(() => getLocalizedDateFormat(this.locale, this.mode(), this.intl().weekPrefix));
 
 	protected readonly currentDate = signal(new Date());
 
