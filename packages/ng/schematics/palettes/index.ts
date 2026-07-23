@@ -1,5 +1,5 @@
 import type { Rule } from '@angular-devkit/schematics';
-import { CssMapper, currentSchematicContext, SchematicContextOpts } from '../lib';
+import { CssMapper, currentSchematicContext, migrateFile, replaceComponentInput, SchematicContextOpts, updateAngularTemplate } from '../lib';
 
 // Nx need to see "@angular-devkit/schematics" in order to run this migration correctly (see https://github.com/nrwl/nx/blob/d9fed4b832bf01d1b9a44ae9e486a5e5cd2d2253/packages/nx/src/command-line/migrate/migrate.ts#L1729-L1738)
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -68,5 +68,17 @@ export default (options?: SchematicContextOpts): Rule => {
 				}
 			}
 		).run();
+
+		// The `lu-icon` component `color` input is not a CSS class, so it isn't handled by CssMapper.
+		// Deprecated `primary`/`secondary` values → `product` (handles both `color="primary"` and `[color]="'primary'"`).
+		tree.visit((path, entry) => {
+			if (path.includes('node_modules') || !entry) {
+				return;
+			}
+
+			migrateFile(path, entry, tree, (content) =>
+				updateAngularTemplate(path, content, (template) => replaceComponentInput('lu-icon', 'color', { primary: 'product', secondary: 'product' }, template)),
+			);
+		});
 	};
 };
