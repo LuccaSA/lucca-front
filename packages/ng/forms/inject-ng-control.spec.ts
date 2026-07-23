@@ -155,18 +155,18 @@ describe('injectNgControl', () => {
 		}
 
 		const { fixture, host } = createHost(FormFieldValidityHost);
-		const control = host.customControl().ngControl.control;
+		const control = host.customControl()?.ngControl.control;
 
 		// Assert: a valid field leaves the control VALID (regression: setErrors([]) used to force INVALID)
-		expect(control.valid).toBe(true);
-		expect(control.errors).toBeNull();
+		expect(control?.valid).toBe(true);
+		expect(control?.errors).toBeNull();
 
 		// Act: clear the field so the required validator fails
 		host.value.set('');
 		fixture.detectChanges();
 
 		// Assert: the error is mirrored as a keyed ValidationErrors object, not a raw array
-		expect(control.invalid).toBe(true);
-		expect(control.errors).toEqual({ required: 'Required' });
+		expect(control?.invalid).toBe(true);
+		expect(control?.errors).toEqual({ required: 'Required' });
 	});
 });

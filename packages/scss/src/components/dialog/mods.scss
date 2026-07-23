@@ -34,7 +34,7 @@
 	--components-dialog-maxHeight: none;
 	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
 	--components-dialog-height: calc(100% - var(--pr-t-spacings-100) * 2);
-	--components-dialog-maxWidth: calc(100vw - var(--pr-t-spacings-200) - var(--commons-pushPanel-inlineSize));
+	--components-dialog-maxWidth: calc(100vi - var(--pr-t-spacings-200) - var(--commons-pushPanel-inlineSize));
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
 	--components-dialog-inset: var(--pr-t-spacings-100) calc(var(--pr-t-spacings-100) + var(--commons-pushPanel-inlineSize)) var(--pr-t-spacings-100) auto;
 	--components-dialog-translateX: var(--components-dialog-translate);
@@ -46,7 +46,8 @@
 
 @mixin fromBottom {
 	--components-dialog-animationOpening: slideFromBottom;
-	--components-dialog-maxHeight: calc(100dvh - var(--pr-t-spacings-200));
+	--components-dialog-maxHeight: calc(100dvb - var(--pr-t-spacings-200));
+	// stylelint-disable-next-line unit-layout-mappings -- Physical fallback: browsers without `dvb` do not support `vb` either.
 	--components-dialog-maxHeightFallback: calc(100vh - var(--pr-t-spacings-200));
 	--components-dialog-maxWidth: none;
 	--components-dialog-inset: auto calc(var(--pr-t-spacings-100) + var(--commons-pushPanel-inlineSize)) var(--pr-t-spacings-100) var(--pr-t-spacings-100);

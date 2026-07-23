@@ -26,7 +26,7 @@
 	translate: var(--components-dialog-translateX) var(--components-dialog-translateY);
 	scale: var(--components-dialog-scale);
 
-	@supports not (height: 1dvh) {
+	@supports not (height: 1dvb) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
 	}
 

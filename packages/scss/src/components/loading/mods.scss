@@ -39,6 +39,7 @@
 	@include popin;
 
 	// legacy, approximate centering
+	// stylelint-disable-next-line unit-layout-mappings -- translateY is physical; pair it with physical vh.
 	--components-loading-transform: translateY(35vh);
 }
 
@@ -47,6 +48,7 @@
 
 	// legacy, approximate centering
 	--components-loading-margin: 0 auto;
+	// stylelint-disable-next-line unit-layout-mappings -- translateY is physical; pair it with physical vh.
 	--components-loading-transform: translateY(35vh);
 }
 

@@ -39,11 +39,12 @@
     "test-storybook": "npx vitest --config .storybook/vitest.config.ts --project=storybook",
     "test-storybook:coverage": "test-storybook --url http://localhost:6006 --coverage",
     "lint": "npm run lint:es && npm run lint:style",
-    "lint:fix": "npm run lint:es -- --fix && npm run lint:style -- --fix && npm run nglint:fix",
+    "lint:fix": "npm run lint:es -- --fix && npm run lint:style:fix && npm run lint:ng:fix",
     "lint:es": "eslint --quiet packages/",
+    "lint:ng": "ng lint --quiet",
+    "lint:ng:fix": "npm run lint:ng -- --fix",
     "lint:style": "stylelint \"packages/**/*.scss\" --report-needless-disables --report-unscoped-disables --report-invalid-scope-disables",
-    "nglint": "ng lint --quiet",
-    "nglint:fix": "npm run nglint -- --fix",
+    "lint:style:fix": "npm run lint:style -- --fix",
     "icons:update": "node ./packages/icons/update-icons.js",
     "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts"
@@ -111,6 +112,7 @@
     "@typescript-eslint/parser": "~8.59.4",
     "@typescript-eslint/rule-tester": "~8.59.4",
     "@typescript-eslint/utils": "~8.59.4",
+    "@vitest/browser-playwright": "4.1.9",
     "@vitest/coverage-v8": "^4.1.9",
     "@vitest/ui": "^4.1.9",
     "angular-eslint": "~22.0.0",
@@ -132,6 +134,7 @@
     "mini-css-extract-plugin": "^2.10.0",
     "msw": "^2.14.6",
     "ng-packagr": "^22.0.0",
+    "playwright": "^1.61.1",
     "postcss": "8.5.10",
     "postcss-scss": "^4.0.6",
     "postcss-selector-parser": "7.1.0",
@@ -141,14 +144,11 @@
     "sass-embedded": "^1.100.0",
     "storybook": "~10.5.3",
     "stylelint": "^17.14.1",
-    "stylelint-scss": "^7.2.0",
     "ts-node": "~10.9.1",
     "typescript": "6.0.3",
     "typescript-eslint": "~8.59.4",
     "vite": "8.0.6",
-    "vitest": "^4.1.9",
-    "playwright": "^1.61.1",
-    "@vitest/browser-playwright": "4.1.9"
+    "vitest": "^4.1.9"
   },
   "volta": {
     "node": "24.15.0"
