@@ -1,5 +1,14 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.selector('.menu', $replacement: '.horizontalNavigation', $scope: 'component:horizontalNavigation');
+@include deprecated.selector('.menu-list', $replacement: '.horizontalNavigation-list', $scope: 'component:horizontalNavigation');
+@include deprecated.selector('.menu-list-item-action', $replacement: '.horizontalNavigation-list-item-action', $scope: 'component:horizontalNavigation');
+@include deprecated.selector('.menu-link', $note: 'Legacy .menu-* selector; use the .horizontalNavigation-* equivalent.', $scope: 'component:horizontalNavigation');
+@include deprecated.selector('.menu-containerOptional', $note: 'Legacy .menu-* selector; use the .horizontalNavigation-* equivalent.', $scope: 'component:horizontalNavigation');
+@include deprecated.selector('.menu-link-placeholder', $note: 'Legacy .menu-* selector; use the .horizontalNavigation-* equivalent.', $scope: 'component:horizontalNavigation');
+@include deprecated.selector('.disabled', $replacement: '.is-disabled', $scope: 'component:horizontalNavigation');
 
 // stylelint-disable-next-line selector-disallowed-list -- .menu is deprecated
 .menu,

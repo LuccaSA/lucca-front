@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
 
 .section {
 	@layer components {
@@ -8,7 +9,8 @@
 	}
 
 	@layer mods {
-		// .mod-grey is deprecated
+		@include deprecated.selector('.section.mod-grey', $replacement: '.section.mod-neutral', $scope: 'component:section');
+
 		&.mod-neutral,
 		&.mod-grey {
 			@include neutral;

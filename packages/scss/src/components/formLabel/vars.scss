@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/deprecated';
+
 @mixin vars {
 	--components-formLabel-font: var(--pr-t-font-body-M);
 	--components-formLabel-color: var(--pr-t-color-text);
@@ -8,7 +10,9 @@
 	--components-formLabel-width: fit-content;
 	--components-formLabel-cursor: default;
 
-	// Deprecated
+	@include deprecated.cssVariable('--components-formLabel-fontSize', $replacement: '--components-formLabel-font', $scope: 'component:formLabel');
 	--components-formLabel-fontSize: var(--pr-t-font-body-M-fontSize);
+
+	@include deprecated.cssVariable('--components-formLabel-lineHeight', $replacement: '--components-formLabel-font', $scope: 'component:formLabel');
 	--components-formLabel-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

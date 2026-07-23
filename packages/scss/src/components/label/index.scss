@@ -1,4 +1,7 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.selector('.label', $note: 'The .label component is deprecated.', $scope: 'component:label');
 
 // stylelint-disable-next-line selector-disallowed-list -- .label is deprecated
 .label {

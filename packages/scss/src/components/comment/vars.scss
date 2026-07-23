@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/deprecated';
+
 @mixin vars {
 	--components-comment-max-width: 66ch;
 	--components-comment-text-font: var(--pr-t-font-body-M);
@@ -9,7 +11,9 @@
 	--components-comment-align: start;
 	--components-comment-border-radius: var(--pr-t-border-radius-small) var(--pr-t-border-radius-default) var(--pr-t-border-radius-default);
 
-	// Deprecated
+	@include deprecated.cssVariable('--components-comment-text-fontSize', $replacement: '--components-comment-text-font', $scope: 'component:comment');
 	--components-comment-text-fontSize: var(--pr-t-font-body-M-fontSize);
+
+	@include deprecated.cssVariable('--components-comment-text-lineHeight', $replacement: '--components-comment-text-font', $scope: 'component:comment');
 	--components-comment-text-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

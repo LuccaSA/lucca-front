@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/deprecated';
+
 @mixin vars {
 	--component-textField-font: var(--pr-t-font-body-M);
 	--component-textField-placeholder: var(--pr-t-color-input-text-placeholder);
@@ -15,7 +17,9 @@
 	--component-textField-borderRadius: var(--pr-t-border-radius-input);
 	--component-textField-width: auto;
 
-	// Deprecated
+	@include deprecated.cssVariable('--component-textField-fontSize', $replacement: '--component-textField-font', $scope: 'component:textField');
 	--component-textField-fontSize: var(--pr-t-font-body-M-fontSize);
+
+	@include deprecated.cssVariable('--component-textField-lineHeight', $replacement: '--component-textField-font', $scope: 'component:textField');
 	--component-textField-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

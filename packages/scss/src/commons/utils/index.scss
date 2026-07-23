@@ -1,6 +1,8 @@
 @use 'sass:list';
+@use 'sass:map';
 
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/deprecated';
 @use '@lucca-front/icons/src/commons/core' as transform;
 @use '@lucca-front/scss/src/commons/core';
 
@@ -406,19 +408,22 @@
 		@extend %clearfix;
 	}
 
-	// clear is deprecated
+	@include deprecated.class('pr-u-clear', $replacement: 'pr-u-clearBoth', $scope: 'commons/utils');
+
 	.pr-u-clearBoth,
 	.pr-u-clear {
 		@extend %clearBoth;
 	}
 
-	// clearLeft is deprecated
+	@include deprecated.class('pr-u-clearLeft', $replacement: 'pr-u-clearInlineStart', $scope: 'commons/utils');
+
 	.pr-u-clearInlineStart,
 	.pr-u-clearLeft {
 		@extend %clearInlineStart;
 	}
 
-	// clearRight is deprecated
+	@include deprecated.class('pr-u-clearRight', $replacement: 'pr-u-clearInlineEnd', $scope: 'commons/utils');
+
 	.pr-u-clearInlineEnd,
 	.pr-u-clearRight {
 		@extend %clearInlineEnd;
@@ -460,13 +465,15 @@
 		@extend %h4;
 	}
 
+	@include deprecated.class('pr-u-h5', $note: 'Use pr-u-h1 through pr-u-h4 or body utilities instead.', $scope: 'commons/utils');
+
 	.pr-u-h5 {
-		// Deprecated
 		@extend %h5;
 	}
 
+	@include deprecated.class('pr-u-h6', $note: 'Use pr-u-h1 through pr-u-h4 or body utilities instead.', $scope: 'commons/utils');
+
 	.pr-u-h6 {
-		// Deprecated
 		@extend %h6;
 	}
 
@@ -482,33 +489,39 @@
 		@extend %bodyXS;
 	}
 
-	// textLeft is deprecated
+	@include deprecated.class('pr-u-textLeft', $replacement: 'pr-u-textAlignStart', $scope: 'commons/utils');
+
 	.pr-u-textLeft {
 		@extend %textLeft;
 	}
 
-	// textRight is deprecated
+	@include deprecated.class('pr-u-textRight', $replacement: 'pr-u-textAlignEnd', $scope: 'commons/utils');
+
 	.pr-u-textRight {
 		@extend %textRight;
 	}
 
-	// textCenter is deprecated
+	@include deprecated.class('pr-u-textCenter', $replacement: 'pr-u-textAlignCenter', $scope: 'commons/utils');
+
 	.pr-u-textCenter {
 		@extend %textCenter;
 	}
 
-	// textLight is deprecated
+	@include deprecated.class('pr-u-textLight', $scope: 'commons/utils');
+
 	.pr-u-textLight {
 		@extend %textLight;
 	}
 
-	// textPlaceholder is deprecated
+	@include deprecated.class('pr-u-textPlaceholder', $replacement: 'pr-u-colorInputTextPlaceholder', $scope: 'commons/utils');
+
 	.pr-u-textPlaceholder,
 	.pr-u-colorInputTextPlaceholder {
 		@extend %textPlaceholder;
 	}
 
-	// textDefault is deprecated
+	@include deprecated.class('pr-u-textDefault', $scope: 'commons/utils');
+
 	.pr-u-textDefault {
 		@extend %textDefault;
 	}
@@ -545,7 +558,7 @@
 		@extend %placeItemsCenter;
 	}
 
-	@include core.classes('float', core.$float);
+	@include core.classes('float', core.$float, $deprecated: core.$floatDeprecated);
 	@include core.classes('vertical-align', core.$verticalAlign);
 	@include core.classes('white-space', core.$whiteSpace);
 	@include core.classes('display', core.$displays);
@@ -576,7 +589,7 @@
 	@include core.classes('font-style', core.$fontStyle);
 	@include core.classes('pointer-events', core.$pointerEvents);
 	@include core.classes('cursor', core.$cursor);
-	@include core.classes('text-align', core.$textAlign);
+	@include core.classes('text-align', core.$textAlign, $deprecated: core.$textAlignDeprecated);
 	@include core.classes('text-decoration', core.$decoration);
 	@include core.classes('overflow', core.$overflow);
 
@@ -642,13 +655,17 @@
 
 	@each $direction in core.$boxDirection {
 		@if $direction == '' {
-			// insetReset is deprecated
+			@include deprecated.class('pr-u-insetReset', $replacement: 'pr-u-inset0', $scope: 'commons/utils');
+
 			.pr-u-inset0,
 			.pr-u-insetReset {
 				@extend %inset0;
 			}
 		} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
-			// Reset is deprecated
+			$logical: map.get(core.$physicalDirectionToLogical, $direction);
+
+			@include deprecated.class('pr-u-#{$direction}0', $replacement: 'pr-u-inset#{transform.capitalize(transform.camelize($logical))}0', $scope: 'commons/utils');
+			@include deprecated.class('pr-u-#{$direction}Reset', $replacement: 'pr-u-inset#{transform.capitalize(transform.camelize($logical))}0', $scope: 'commons/utils');
 			.pr-u-#{$direction}0,
 			.pr-u-#{$direction}Reset {
 				#{$direction}: 0 !important;
@@ -673,6 +690,48 @@
 	// Deprecated .u- utilities
 	// Delete when all utilities are prefixed in .pr-u-
 	@if config.$deprecatedUtilityPrefix {
+		// The whole u- prefix is deprecated in favour of pr-u-. Register the hand-written
+		// members here (loop-generated ones register inside their loops below). Emits no CSS.
+		@each $uName, $replacement in (
+			'u-animated': 'pr-u-animated',
+			'u-mask': 'pr-u-mask',
+			'u-clearfix': 'pr-u-clearfix',
+			'u-clearBoth': 'pr-u-clearBoth',
+			'u-clear': 'pr-u-clearBoth',
+			'u-clearInlineStart': 'pr-u-clearInlineStart',
+			'u-clearLeft': 'pr-u-clearInlineStart',
+			'u-clearInlineEnd': 'pr-u-clearInlineEnd',
+			'u-clearRight': 'pr-u-clearInlineEnd',
+			'u-listReset': 'pr-u-listReset',
+			'u-descriptionListReset': 'pr-u-descriptionListReset',
+			'u-summaryReset': 'pr-u-summaryReset',
+			'u-buttonReset': 'pr-u-buttonReset',
+			'u-ellipsis': 'pr-u-ellipsis',
+			'u-h1': 'pr-u-h1',
+			'u-h2': 'pr-u-h2',
+			'u-h3': 'pr-u-h3',
+			'u-h4': 'pr-u-h4',
+			'u-h5': null,
+			'u-h6': null,
+			'u-bodyM': 'pr-u-bodyM',
+			'u-bodyS': 'pr-u-bodyS',
+			'u-bodyXS': 'pr-u-bodyXS',
+			'u-textLeft': 'pr-u-textAlignStart',
+			'u-textRight': 'pr-u-textAlignEnd',
+			'u-textCenter': 'pr-u-textAlignCenter',
+			'u-textLight': null,
+			'u-textPlaceholder': 'pr-u-colorInputTextPlaceholder',
+			'u-textDefault': null,
+			'u-fontWeightRegular': 'pr-u-fontWeightRegular',
+			'u-fontWeightSemiBold': 'pr-u-fontWeightSemiBold',
+			'u-noSpinButtons': 'pr-u-noSpinButtons',
+			'u-fontFamily': 'pr-u-fontFamily',
+			'u-fontFamilyCursive': 'pr-u-fontFamilyCursive',
+			'u-fontFamilyBrand': 'pr-u-fontFamilyBrand'
+		) {
+			@include deprecated.class($uName, $replacement: $replacement, $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+		}
+
 		[class*='u-animated'] {
 			@extend %animatedAll;
 		}
@@ -819,6 +878,8 @@
 
 		@each $display in core.$displays {
 			@if $display != 'none' {
+				@include deprecated.class('u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))}', $replacement: 'pr-u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))}', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+
 				.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
 					@extend %displayNone;
 				}
@@ -827,13 +888,18 @@
 
 		@each $direction in core.$boxDirection {
 			@if $direction == '' {
-				// insetReset is deprecated
+				@include deprecated.class('u-inset0', $replacement: 'pr-u-inset0', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+				@include deprecated.class('u-insetReset', $replacement: 'pr-u-inset0', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+
 				.u-inset0,
 				.u-insetReset {
 					@extend %inset0;
 				}
 			} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
-				// Reset is deprecated
+				$logical: map.get(core.$physicalDirectionToLogical, $direction);
+
+				@include deprecated.class('u-#{$direction}0', $replacement: 'pr-u-inset#{transform.capitalize(transform.camelize($logical))}0', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+				@include deprecated.class('u-#{$direction}Reset', $replacement: 'pr-u-inset#{transform.capitalize(transform.camelize($logical))}0', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
 				.u-#{$direction}0,
 				.u-#{$direction}Reset {
 					#{$direction}: 0 !important;
@@ -841,6 +907,8 @@
 			} @else {
 				@each $boxModel in core.$boxModel {
 					@if $boxModel != 'border' {
+						@include deprecated.class('u-#{$boxModel}#{transform.capitalize($direction)}0', $replacement: 'pr-u-#{$boxModel}#{transform.capitalize($direction)}0', $note: 'The u- prefix is deprecated.', $scope: 'commons/utils');
+
 						.u-#{$boxModel}#{transform.capitalize($direction)}0 {
 							#{$boxModel}-#{$direction}: 0 !important;
 						}

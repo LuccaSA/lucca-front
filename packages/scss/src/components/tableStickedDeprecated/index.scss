@@ -1,6 +1,9 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.selector('.table.mod-stickyColumn', $note: 'Entire tableStickedDeprecated component is deprecated, including all its descendant selectors.', $scope: 'component:tableStickedDeprecated');
 
 .table {
 	@layer components {

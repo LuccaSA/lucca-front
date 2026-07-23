@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
 
 .gauge {
 	@layer components {
@@ -15,7 +16,8 @@
 			@include circular;
 		}
 
-		// .mod-vertical is deprecated
+		@include deprecated.selector('.mod-vertical', $note: 'The vertical gauge variant is deprecated.', $scope: 'component:gauge');
+
 		&.mod-vertical {
 			@include vertical;
 

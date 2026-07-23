@@ -2,6 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/deprecated';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
@@ -200,7 +201,8 @@
 			margin: var(--pr-t-spacings-50);
 		}
 
-		// .indexTable-body-row-cell-action is deprecated
+		@include deprecated.selector('.indexTable-body-row-cell-action', $note: 'The indexTable row cell action selector is deprecated.', $scope: 'component:indexTable');
+
 		.indexTable-body-row-cell-action {
 			@include a11y.mask;
 		}
