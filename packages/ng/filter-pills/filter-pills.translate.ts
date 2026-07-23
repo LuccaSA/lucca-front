@@ -10,6 +10,10 @@ export interface LuFilterPillsLabel {
 	clear: string;
 	placeholder: string;
 	additionalFilters: string;
+	selectView: string;
+	viewOptions: string;
+	renameView: string;
+	deleteView: string;
 }
 
 export const luFilterPillsTranslations: LuTranslation<LuFilterPillsLabel> = Translations;
