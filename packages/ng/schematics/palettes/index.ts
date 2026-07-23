@@ -14,16 +14,20 @@ export default (options?: SchematicContextOpts): Rule => {
 			tree,
 			{
 				classes: {
-					'palette-grey': 'palette-neutral',
-					'palette-primary': 'palette-product',
-					'palette-secondary': 'palette-product',
-					'palette-lucca': 'palette-brand',
+					// Palette classes (Button, Callout, Gauge, Clear, Numeric Badge, Status Badge, …)
+					'palette-{palette}': 'palette-{palette}',
+					// Component color modifier (Box, Card, Section) — only `grey` existed
+					'mod-grey': 'mod-neutral',
+					// Icon color classes — only `primary`/`secondary` existed
+					'icon-color-primary': 'icon-color-product',
+					'icon-color-secondary': 'icon-color-product',
+					// Text color utilities generated from the palette list
+					'u-text{Palette}': 'u-text{Palette}',
+					'pr-u-text{Palette}': 'pr-u-text{Palette}',
+					'pr-u-colorText{Palette}': 'pr-u-colorText{Palette}',
 				},
 				variables: {
-					'--palettes-grey-{val}': `--palettes-neutral-{val}`,
-					'--palettes-primary-{val}': `--palettes-product-{val}`,
-					'--palettes-secondary-{val}': `--palettes-product-{val}`,
-					'--palettes-lucca-{val}': `--palettes-brand-{val}`,
+					'--palettes-{palette}-{val}': `--palettes-{palette}-{val}`,
 					'--colors-grey-{val}': `--palettes-neutral-{val}`,
 					'--colors-white-color': '--palettes-neutral-0',
 					'--colors-black-color': '--palettes-neutral-900',
@@ -42,6 +46,13 @@ export default (options?: SchematicContextOpts): Rule => {
 				mixins: {}
 			},
 			{
+				// Deprecated palette -> new palette (used by both classes and CSS vars)
+				palette: {
+					grey: 'neutral',
+					primary: 'product',
+					secondary: 'product',
+					lucca: 'brand',
+				},
 				val: {
 					25: '25',
 					50: '50',
