@@ -15,7 +15,7 @@ import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@luc
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { IconComponent } from '@lucca/prisme/icon';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
