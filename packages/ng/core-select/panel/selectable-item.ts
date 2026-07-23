@@ -81,9 +81,12 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 		}
 
 		// Tree options nest their children inside their own host, so the event bubbles through every
-		// ancestor option. mouseover (unlike mouseenter) re-fires as the pointer moves, so only the
-		// option whose own row is directly under the pointer must become the active/hovered one.
-		if ((event.target as HTMLElement).closest('[luCoreSelectPanelElement]') !== this.elementRef.nativeElement) {
+		// ancestor option. mouseover (unlike mouseenter) re-fires as the pointer moves, so activate
+		// only the option whose own row is directly under the pointer. Keying off the row — and not
+		// the host — mirrors the native `.listboxOption-content:hover`: the gap between nested options
+		// lives in the wrapper, not in any row, so hovering it must not highlight the parent.
+		const row = (event.target as HTMLElement).closest('.listboxOption-content');
+		if (!row || row.closest('[luCoreSelectPanelElement]') !== this.elementRef.nativeElement) {
 			return;
 		}
 
