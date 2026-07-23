@@ -3,7 +3,7 @@ import { Directive, OnInit, computed, forwardRef, inject, input } from '@angular
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, map, switchMap } from 'rxjs';
+import { Observable, debounceTime, map, of, switchMap } from 'rxjs';
 import { LuCoreSelectOccupationCategory } from './models';
 
 @Directive({
@@ -30,6 +30,15 @@ export class LuCoreSelectOccupationCategoriesDirective<T extends LuCoreSelectOcc
 	readonly searchDelimiter = input<string>(' ');
 
 	protected readonly clue = toSignal(this.clue$);
+
+	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
+		// Use the clue parameter directly instead of reading from the async signal
+		// to avoid stale params when selection triggers an immediate clue reset
+		return of({
+			...this.filters(),
+			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()), sort: 'name' } : { sort: 'name' }),
+		});
+	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
 		return this.httpClient

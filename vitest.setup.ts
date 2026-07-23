@@ -17,7 +17,12 @@ afterEach(() => {
 	vi.restoreAllMocks();
 });
 
-Element.prototype.scrollIntoView = () => {};
+// happy-dom doesn't implement scrollIntoView: stub it for unit tests only.
+// In vitest browser mode (storybook tests) the native implementation must be kept,
+// otherwise scroll-related behaviors can't be tested at all.
+if (!('__vitest_browser__' in globalThis)) {
+	Element.prototype.scrollIntoView = () => {};
+}
 
 const originalError = console.error;
 const hideCssParseError = (...args: unknown[]) => {

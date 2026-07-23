@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, Injector } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
+import { ɵCoreSelectPanelElement, ɵscrollIntoViewOnceReady } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
@@ -33,14 +33,15 @@ export class LuMultiSelectAllHeaderComponent {
 	readonly isSelected = computed(() => this.selectAllContext.mode() === 'all' || this.mixed());
 	readonly #selectableItem = inject(ɵCoreSelectPanelElement);
 	readonly #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	readonly #injector = inject(Injector);
 
 	constructor() {
 		this.#selectableItem.id.set(`multi-select-select-all`);
-		effect(() => {
+		effect((onCleanup) => {
 			if (this.#selectableItem.isHighlighted()) {
-				setTimeout(() => {
-					this.#elementRef.nativeElement.scrollIntoView();
-				}, 50);
+				// Wait for the panel layout to settle (opening animation) before scrolling,
+				// otherwise the browser computes a bogus scroll position.
+				onCleanup(ɵscrollIntoViewOnceReady(this.#elementRef.nativeElement, this.#injector));
 			}
 			if (this.isSelected()) {
 				this.#selectableItem.isSelected.set(true);

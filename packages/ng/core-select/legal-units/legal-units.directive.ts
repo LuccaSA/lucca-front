@@ -4,7 +4,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, map, switchMap } from 'rxjs';
+import { Observable, debounceTime, map, of, switchMap } from 'rxjs';
 import { ARCHIVED_LEGAL_UNITS_CONTEXT, LuCoreSelectArchivedLegalUnitsComponent } from './archived-legal-units.component';
 import { LuCoreSelectLegalUnit } from './models';
 
@@ -40,6 +40,18 @@ export class LuCoreSelectLegalUnitsDirective<T extends LuCoreSelectLegalUnit = L
 	constructor() {
 		super();
 		ɵeffectWithDeps([this.enableArchivedLegalUnits], (enableArchivedLegalUnits) => this.select.panelHeaderTpl.set(enableArchivedLegalUnits ? LuCoreSelectArchivedLegalUnitsComponent : undefined));
+	}
+
+	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
+		// Use the clue parameter directly instead of reading from the async signal
+		// to avoid stale params when selection triggers an immediate clue reset
+		return of({
+			...this.filters(),
+			sort: 'name',
+			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()) } : {}),
+			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()!.join(',') } : {}),
+			...(this.includeArchivedLegalUnits() ? { isArchived: true } : {}),
+		});
 	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
