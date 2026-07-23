@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LuOptionGroupDirective, SelectDataSource, SelectDataSourceParams } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { delay, Observable, of } from 'rxjs';
 import { allLegumes, colorNameByColor, ILegume, LegumeColor } from '../../documentation/forms/select/select.utils';
 

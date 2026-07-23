@@ -1,5 +1,5 @@
 import { SkeletonCardComponent } from '@lucca-front/ng/skeleton';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Loaders/Skeleton/Skeleton Card',

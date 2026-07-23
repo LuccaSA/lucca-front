@@ -4,7 +4,7 @@ export function getDateFormat(locale: string, mode: CalendarMode = 'day'): strin
 	return new Intl.DateTimeFormat(locale)
 		.formatToParts(new Date('01/01/2024'))
 		.reduce((acc, part) => {
-			if (part.type === 'day' && mode === 'day') {
+			if (part.type === 'day' && (mode === 'day' || mode === 'week')) {
 				return `${acc}${'d'.repeat(part.value.length)}`;
 			}
 			if (part.type === 'month' && mode !== 'year') {
@@ -26,7 +26,7 @@ export function getSeparator(locale: string): string {
 }
 
 // Warning: it works on Latin languages, but deserves to be tested on non-Latin languages
-export function getLocalizedDateFormat(locale: string, period: CalendarMode = 'day'): string {
+export function getLocalizedDateFormat(locale: string, period: CalendarMode = 'day', weekPrefix: string = 'W'): string {
 	const letterLocalizedForDay = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).formatToParts(100, 'day')[2]['value'].charAt(1).toUpperCase();
 	const letterLocalizedForMonth = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).formatToParts(100, 'month')[2]['value'].charAt(1).toUpperCase();
 	const letterLocalizedForYear = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).formatToParts(100, 'year')[2]['value'].charAt(1).toUpperCase();
@@ -35,15 +35,17 @@ export function getLocalizedDateFormat(locale: string, period: CalendarMode = 'd
 		year: 'numeric',
 	};
 
-	if (period === 'month' || period === 'day') {
+	if (period === 'month' || period === 'day' || period === 'week') {
 		intlConfig.month = 'numeric';
 	}
 
-	if (period === 'day') {
+	if (period === 'day' || period === 'week') {
 		intlConfig.day = 'numeric';
 	}
 
-	return new Intl.DateTimeFormat(locale, intlConfig).formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
+	const intlDateFormat = new Intl.DateTimeFormat(locale, intlConfig);
+	let separator: string = '';
+	const format = intlDateFormat.formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
 		switch (part.type) {
 			case 'day':
 				return `${acc}${letterLocalizedForDay.repeat(part.value.length)}`;
@@ -52,8 +54,15 @@ export function getLocalizedDateFormat(locale: string, period: CalendarMode = 'd
 			case 'year':
 				return `${acc}${letterLocalizedForYear.repeat(part.value.length)}`;
 			case 'literal':
+				separator = part.value;
 				return `${acc}${part.value}`;
 		}
 		return acc;
 	}, '');
+
+	if (period === 'week') {
+		return `${weekPrefix}${separator}${letterLocalizedForYear.repeat(4)}`;
+	}
+
+	return format;
 }

@@ -2,6 +2,10 @@
 	--components-dateField-maxWidth: var(--components-dateField-maxWidthDay);
 }
 
+@mixin week {
+	--components-dateField-maxWidth: var(--components-dateField-maxWidthWeek);
+}
+
 @mixin month {
 	--components-dateField-maxWidth: var(--components-dateField-maxWidthMonth);
 }
@@ -12,6 +16,10 @@
 
 @mixin dayS {
 	--components-dateField-maxWidth: var(--components-dateField-maxWidthDayS);
+}
+
+@mixin weekS {
+	--components-dateField-maxWidth: var(--components-dateField-maxWidthWeekS);
 }
 
 @mixin monthS {

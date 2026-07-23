@@ -26,7 +26,7 @@ import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillIn
 import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { isSameDay, parse, startOfDay } from 'date-fns';
+import { addDays, getWeek, parse, setDay, setWeek, startOfDay, startOfWeek } from 'date-fns';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -73,6 +73,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	#injector = inject(Injector);
 	ngControl: NgControl; // Initialized in ngOnInit
+	weekParsingRegexp = /(\d{1,2})\D*(\d{4})?/;
 
 	// CVA stuff
 	#onChange?: (value: Date | null) => void;
@@ -116,7 +117,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	readonly displayValue = computed(() => {
 		const textInput = this.userTextInput();
 		if (textInput !== 'ɵ') {
-			const parsedInput = parse(textInput, this.dateFormatWithMode(), startOfDay(new Date()));
+			const parsedInput = this.parseValue(textInput);
 			if (this.isValidDate(parsedInput) && this.inputFocused()) {
 				return textInput;
 			}
@@ -128,6 +129,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				case 'day':
 					formatter = this.intlDateTimeFormat;
 					break;
+				case 'week':
+					return `${this.intl().weekPrefix}${getWeek(selectedDate, this.weekOptions)}/${selectedDate.getFullYear()}`;
 				case 'month':
 					formatter = this.intlDateTimeFormatMonth;
 					break;
@@ -153,7 +156,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		return {
 			classes: [...(infoFromInput?.classes || [])],
 			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
-			selected: isNotNil(selectedDate) && this.calendarMode() === mode && comparePeriods(mode, date, selectedDate),
+			selected: isNotNil(selectedDate) && this.calendarMode() === mode && comparePeriods(mode, date, selectedDate, this.weekOptions),
 			label: infoFromInput?.label,
 		};
 	};
@@ -203,17 +206,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				return;
 			}
 			if (inputValue.length > 0) {
-				let parsed: Date | null;
-				try {
-					parsed = parse(inputValue, this.dateFormatWithMode(), startOfDay(new Date()));
-				} catch {
-					/* not a correct date */
-					parsed = null;
-				}
+				const parsed: Date | null = this.parseValue(inputValue);
 				if (parsed instanceof Date && parsed.getFullYear() > 999) {
-					this.selectedDate.set(startOfDay(parsed));
-					this.currentDate.set(startOfDay(parsed));
-					this.tabbableDate.set(startOfDay(parsed));
+					const normalized = this.#normalizeDate(parsed);
+					this.selectedDate.set(normalized);
+					this.currentDate.set(normalized);
+					this.tabbableDate.set(normalized);
 				} else if (!this.isFilterPill) {
 					this.selectedDate.set(parsed);
 				}
@@ -232,6 +230,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		effect(() => {
 			this.#luClass.setState({
 				'mod-day': this.mode() === 'day',
+				'mod-week': this.mode() === 'week',
 				'mod-month': this.mode() === 'month',
 				'mod-year': this.mode() === 'year',
 			});
@@ -244,7 +243,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
-			if (tabbableDate && !comparePeriods(calendarMode ?? null, tabbableDate, this.currentDate())) {
+			if (tabbableDate && !comparePeriods(calendarMode ?? null, tabbableDate, this.currentDate(), this.weekOptions)) {
 				this.currentDate.set(startOfPeriod(calendarMode ?? null, tabbableDate));
 			}
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
@@ -259,12 +258,45 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		});
 	}
 
+	parseValue(inputValue: string): Date | null {
+		if (this.mode() === 'week') {
+			let parsed: Date | null = startOfDay(new Date());
+			const regexpResult = this.weekParsingRegexp.exec(inputValue);
+			if (regexpResult) {
+				// If we have a year, use it, otherwise use current year
+				if (regexpResult[2]) {
+					parsed.setFullYear(+regexpResult[2]);
+				}
+				parsed = setWeek(parsed, +regexpResult[1], this.weekOptions);
+				parsed = setDay(parsed, 3);
+				return parsed;
+			} else {
+				return null;
+			}
+		} else {
+			try {
+				return parse(inputValue, this.dateFormatWithMode(), startOfDay(new Date()));
+			} catch {
+				/* not a correct date */
+				return null;
+			}
+		}
+	}
+
 	ngOnInit() {
 		this.ngControl = this.#injector.get(NgControl);
 	}
 
+	// The value is a Date in every mode, but two dates are "the same value" only if they belong
+	// to the same period for the current mode (same week in week mode, same day in day mode, etc.)
 	#safeCompareDate(a: Date | null, b: Date | null): boolean {
-		return a === b || (!!a && !!b && isSameDay(a, b));
+		return a === b || (!!a && !!b && comparePeriods(this.mode(), a, b, this.weekOptions));
+	}
+
+	// The emitted value is always the start of the period matching the current mode:
+	// start of day, or start of week in week mode.
+	#normalizeDate(date: Date): Date {
+		return this.mode() === 'week' ? addDays(startOfWeek(date, this.weekOptions), 3) : startOfDay(date);
 	}
 
 	registerFilterPillClosePopover(closeFn: () => void): void {
@@ -352,16 +384,16 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		}
 
 		const _date = transformDateInputToDate(date);
+		const normalized = isNotNil(_date) ? this.#normalizeDate(_date) : null;
 
 		if (this.initialValue() === undefined) {
-			this.initialValue.set(_date);
+			this.initialValue.set(normalized);
 		}
 
-		if (isNotNil(date) && isNotNil(_date)) {
-			const start = startOfDay(_date);
-			this.dateFromWriteValue.set(start);
-			this.selectedDate.set(start);
-			this.currentDate.set(start);
+		if (isNotNil(date) && isNotNil(normalized)) {
+			this.dateFromWriteValue.set(normalized);
+			this.selectedDate.set(normalized);
+			this.currentDate.set(normalized);
 		} else {
 			this.reset();
 		}
@@ -397,9 +429,10 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	}
 
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
-		this.selectedDate.set(date);
-		this.currentDate.set(date);
-		this.tabbableDate.set(date);
+		const normalized = this.#normalizeDate(date);
+		this.selectedDate.set(normalized);
+		this.currentDate.set(normalized);
+		this.tabbableDate.set(normalized);
 		if (!this.isFilterPill) {
 			popoverRef.close();
 			this.inputRef()?.nativeElement.focus();
