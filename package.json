@@ -109,9 +109,9 @@
     "@typescript-eslint/parser": "~8.59.4",
     "@typescript-eslint/rule-tester": "~8.59.4",
     "@typescript-eslint/utils": "~8.59.4",
-    "@vitest/browser-playwright": "4.1.9",
-    "@vitest/coverage-v8": "^4.1.9",
-    "@vitest/ui": "^4.1.9",
+    "@vitest/browser-playwright": "4.1.10",
+    "@vitest/coverage-v8": "^4.1.10",
+    "@vitest/ui": "^4.1.10",
     "angular-eslint": "~22.0.0",
     "autoprefixer": "^10.4.14",
     "eslint": "~9.28.0",
@@ -145,7 +145,7 @@
     "typescript": "6.0.3",
     "typescript-eslint": "~8.59.4",
     "vite": "8.1.5",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.10"
   },
   "volta": {
     "node": "24.15.0"
