@@ -5,7 +5,7 @@
 	[contentTabIndex]="0"
 	(scrolled)="onScroll($event)"
 >
-	<lu-listbox multiple class="lu-picker-content-option" [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
+	<lu-listbox multiple [tree]="!!treeGenerator" [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
 		<!-- The header is projected inside the listbox because it can contain selectable elements
 		(e.g. the select-all checkbox) that are referenced by aria-activedescendant -->
 		<ng-container ngProjectAs="[listbox-header]">
@@ -54,7 +54,6 @@
 			@if (treeGenerator) {
 				@for (branch of options | luTreeDisplay: treeGenerator; let index = $index; track optionKey()(branch.node)) {
 					<lu-tree-branch
-						listbox
 						[branch]="branch"
 						[optionTpl]="optionTpl()"
 						[selectedOptions]="selectedOptions"
@@ -68,7 +67,6 @@
 			} @else {
 				@for (option of options; track optionKey()(option); let index = $index) {
 					<lu-select-option
-						listbox
 						luCoreSelectPanelElement
 						[option]="option"
 						[optionTpl]="optionTpl()"

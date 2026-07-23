@@ -138,15 +138,20 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 		const hosts = overlayContainerElement.querySelectorAll('lu-select-option');
 		expect(hosts.length).toBe(3);
 		hosts.forEach((host) => {
-			expect(host.getAttribute('role')).toBe('option');
+			// Inside a tree listbox each option host carries the treeitem role
+			expect(host.getAttribute('role')).toBe('treeitem');
 			expect(host.querySelector('lu-listbox-option')).toBeTruthy();
 			expect(host.querySelector('.optionItem-value')).toBeNull();
 		});
 
-		// Nested branches keep the depth variable driving the listbox content indentation
+		// The parent branch nests its children inside a listbox group wrapper; the listbox itself
+		// derives the indentation from the DOM nesting of these wrappers
+		const wrapper = overlayContainerElement.querySelector<HTMLElement>('lu-tree-branch .listboxOptionWrapper[role="group"]')!;
+		expect(wrapper).toBeTruthy();
+		expect(wrapper.querySelectorAll('lu-tree-branch').length).toBe(2);
+
 		const nested = overlayContainerElement.querySelectorAll('lu-tree-branch lu-tree-branch lu-select-option');
 		expect(nested.length).toBe(2);
-		expect((nested[0] as HTMLElement).style.getPropertyValue('--components-treeBranch-level')).toBe('2');
 	}));
 
 	it('should emit the clicked option as new value', fakeAsync(() => {
