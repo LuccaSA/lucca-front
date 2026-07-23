@@ -24,7 +24,7 @@
 			display: block;
 			scroll-margin: var(--pr-t-spacings-50);
 
-			.listboxOption[role="group"] & {
+			.listboxOption[role='group'] & {
 				scroll-margin-block-start: var(--pr-t-spacings-400);
 			}
 		}
