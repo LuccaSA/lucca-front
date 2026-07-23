@@ -1,0 +1,60 @@
+<button
+	type="button"
+	luButton="outlined"
+	size="S"
+	disclosure
+	[attr.aria-expanded]="opened()"
+	[luDropdown]="viewsDropdown"
+	(luDropdownOnOpen)="opened.set(true)"
+	(luDropdownOnClose)="opened.set(false)"
+>
+	{{ selectedLabel() ?? intl().selectView }}
+	<lu-icon icon="arrowChevronBottom" />
+</button>
+
+<ng-template #viewsDropdown>
+	<lu-dropdown-menu>
+		@for (view of views(); track optionKey()(view)) {
+			<lu-dropdown-item>
+				<button lu-dropdown-action type="button" (click)="selectView(view)">
+					<lu-icon
+						icon="tick"
+						size="S"
+						[style.visibility]="isSelected(view) ? 'visible' : 'hidden'"
+						[attr.aria-hidden]="!isSelected(view)"
+					/>
+					{{ viewLabel()(view) }}
+				</button>
+
+				<button
+					type="button"
+					size="XS"
+					luButton="ghost"
+					disclosure
+					aria-expanded="false"
+					[attr.aria-label]="intl().viewOptions"
+					[luDropdown]="optionsDropdown"
+				>
+					<lu-icon icon="menuDots" [alt]="intl().viewOptions" />
+				</button>
+
+				<ng-template #optionsDropdown>
+					<lu-dropdown-menu>
+						<lu-dropdown-item>
+							<button lu-dropdown-action type="button" (click)="renameView.emit(view)">
+								<lu-icon icon="edit" />
+								{{ intl().renameView }}
+							</button>
+						</lu-dropdown-item>
+						<lu-dropdown-item>
+							<button lu-dropdown-action type="button" critical (click)="deleteView.emit(view)">
+								<lu-icon icon="trash" />
+								{{ intl().deleteView }}
+							</button>
+						</lu-dropdown-item>
+					</lu-dropdown-menu>
+				</ng-template>
+			</lu-dropdown-item>
+		}
+	</lu-dropdown-menu>
+</ng-template>
