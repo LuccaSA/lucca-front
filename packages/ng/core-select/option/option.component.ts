@@ -1,5 +1,20 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, contentChild, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	contentChild,
+	ElementRef,
+	inject,
+	input,
+	OnInit,
+	output,
+	TemplateRef,
+	Type,
+	untracked,
+	viewChild,
+} from '@angular/core';
 import { intlInputOptions, isNil, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { OptionComponent as ListboxOptionComponent, Treeitem } from '@lucca-front/ng/listbox';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
