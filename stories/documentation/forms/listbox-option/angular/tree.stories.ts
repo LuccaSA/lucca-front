@@ -3,11 +3,6 @@ import { ListboxComponent, OptionComponent, Treeitem } from '@lucca-front/ng/lis
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
 import { cleanupTemplate } from '@/helpers/stories';
 
-interface OptionBasicStory {
-	multiple: boolean;
-	deepNesting: boolean;
-}
-
 export default {
 	title: 'Documentation/Forms/Listbox Option/Angular/Tree',
 	decorators: [
@@ -20,8 +15,8 @@ export default {
 			description: 'Ajoute une checkbox à l’option.',
 		},
 	},
-	render: (args: OptionBasicStory) => {
-		const multiple = args.multiple ? ` multiple` : ``;
+	render: (args) => {
+		const multiple = args['multiple'] ? ` multiple` : ``;
 		return {
 			template: cleanupTemplate(`<lu-listbox tree${multiple}>
 	<lu-listbox-option>option 1</lu-listbox-option>

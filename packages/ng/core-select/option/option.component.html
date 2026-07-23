@@ -1,16 +1,16 @@
-@if (listbox()) {
-	<lu-listbox-option
-		presentation
-		[checked]="selectableItem.isSelected()"
-		[hovered]="selectableItem.isHighlighted()"
-		[disabled]="selectableItem.disabled"
-		(click)="selectOption($event)"
-	>
-		<ng-container [ngTemplateOutlet]="optionContent" />
-	</lu-listbox-option>
-} @else {
-	<div class="optionItem-value" [class.is-disabled]="selectableItem.disabled" (click)="selectOption($event)">
-		<ng-container [ngTemplateOutlet]="optionContent" />
+<lu-listbox-option
+	presentation
+	[checked]="selectableItem.isSelected()"
+	[hovered]="selectableItem.isHighlighted()"
+	[disabled]="selectableItem.disabled"
+	(click)="selectOption($event)"
+>
+	<ng-container [ngTemplateOutlet]="optionContent" />
+</lu-listbox-option>
+@if (treeitemContent()) {
+	<!-- The listbox derives the indentation level from the DOM nesting of these wrappers -->
+	<div class="listboxOptionWrapper" role="group">
+		<ng-content select="[treeitem]" />
 	</div>
 }
 

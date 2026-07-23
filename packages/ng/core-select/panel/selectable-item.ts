@@ -1,5 +1,6 @@
 import { Highlightable } from '@angular/cdk/a11y';
 import { computed, Directive, ElementRef, inject, input, linkedSignal, model, OnDestroy, output, signal, untracked } from '@angular/core';
+import { LISTBOX_INSTANCE } from '@lucca-front/ng/listbox';
 import { ALuSelectInputComponent } from '../input/select-input.component';
 import { CoreSelectKeyManager } from './key-manager';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
@@ -11,8 +12,8 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 		'[attr.id]': 'idAttribute()',
 		'[attr.aria-selected]': 'isSelected()',
 		'[class.is-highlighted]': 'isHighlighted()',
-		'(mouseenter)': 'onMouseEnter()',
-		role: 'option',
+		'(mouseover)': 'onMouseOver($event)',
+		'[attr.role]': 'role()',
 	},
 })
 export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
@@ -20,8 +21,13 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
 	readonly #keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager, { optional: true });
+	// Optional: an option can live outside a lu-listbox (e.g. the sticky "add option" row).
+	readonly #listboxRef = inject(LISTBOX_INSTANCE, { optional: true });
 
 	readonly #selectRef = inject<ALuSelectInputComponent<T, T>>(ALuSelectInputComponent);
+
+	// Inside a tree listbox the semantics are carried by this host, so it must expose treeitem.
+	readonly role = computed(() => (this.#listboxRef?.tree() ? 'treeitem' : 'option'));
 
 	readonly id = signal<string>('');
 
@@ -69,8 +75,15 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 		this.isHighlighted.set(false);
 	}
 
-	onMouseEnter(): void {
+	onMouseOver(event: MouseEvent): void {
 		if (!this.#keyManager || this.disabled || !untracked(this.#panelRef.pointerNavigation)) {
+			return;
+		}
+
+		// Tree options nest their children inside their own host, so the event bubbles through every
+		// ancestor option. mouseover (unlike mouseenter) re-fires as the pointer moves, so only the
+		// option whose own row is directly under the pointer must become the active/hovered one.
+		if ((event.target as HTMLElement).closest('[luCoreSelectPanelElement]') !== this.elementRef.nativeElement) {
 			return;
 		}
 

@@ -1,31 +1,32 @@
 <lu-select-option
 	luCoreSelectPanelElement
 	#rootOption="luCoreSelectPanelElement"
-	[listbox]="listbox()"
-	[style.--components-treeBranch-level]="depth()"
 	[option]="branch().node"
 	[optionTpl]="optionTpl()"
 	[optionIndex]="optionIndex()"
 	[scrollIntoViewOptions]="{ block: 'nearest' }"
 	[isSelected]="branch().node | luIsOptionSelected: optionComparer() : selectedOptions()"
 	(selected)="toggle(branch())"
-	(click)="toggle(branch())"
+	(click)="toggle(branch(), $event)"
 	(onlyParent)="toggleOne.emit(branch().node)"
 	(onlyChildren)="selectOnlyChildren(branch())"
 	[hasChildren]="!simpleMode() && branch().children?.length > 0"
-/>
-@for (child of branch().children; track $index) {
-	<lu-tree-branch
-		[depth]="depth() + 1"
-		[listbox]="listbox()"
-		[branch]="child"
-		[optionTpl]="optionTpl()"
-		[optionIndex]="optionIndex() + '-' + $index"
-		[optionComparer]="optionComparer()"
-		[selectedOptions]="selectedOptions()"
-		[simpleMode]="simpleMode()"
-		(toggleOne)="toggleOne.emit($event)"
-		(selectMany)="selectMany.emit($event)"
-		(unselectMany)="unselectMany.emit($event)"
-	/>
-}
+>
+	@if (branch().children?.length) {
+		<ng-container treeitem>
+			@for (child of branch().children; track $index) {
+				<lu-tree-branch
+					[branch]="child"
+					[optionTpl]="optionTpl()"
+					[optionIndex]="optionIndex() + '-' + $index"
+					[optionComparer]="optionComparer()"
+					[selectedOptions]="selectedOptions()"
+					[simpleMode]="simpleMode()"
+					(toggleOne)="toggleOne.emit($event)"
+					(selectMany)="selectMany.emit($event)"
+					(unselectMany)="unselectMany.emit($event)"
+				/>
+			}
+		</ng-container>
+	}
+</lu-select-option>

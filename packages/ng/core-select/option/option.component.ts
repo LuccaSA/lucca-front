@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, contentChild, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
 import { intlInputOptions, isNil, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
+import { OptionComponent as ListboxOptionComponent, Treeitem } from '@lucca-front/ng/listbox';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn } from 'rxjs';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';
@@ -19,9 +19,6 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	selector: 'lu-select-option',
 	templateUrl: './option.component.html',
 	styleUrl: './option.component.scss',
-	host: {
-		'[class.optionItem]': '!listbox()',
-	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective, NgTemplateOutlet, ListboxOptionComponent],
 })
@@ -29,13 +26,6 @@ export class LuOptionComponent<T> implements OnInit {
 	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
 	protected selectableItem = inject(CoreSelectPanelElement);
 	readonly intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
-
-	/**
-	 * When true, the option renders a presentation-mode `lu-listbox-option` instead of the
-	 * legacy `optionItem` markup. The host element keeps the option semantics (role, id,
-	 * aria-selected) through the `luCoreSelectPanelElement` directive.
-	 */
-	readonly listbox = input(false, { transform: booleanAttribute });
 
 	readonly optionTpl = input<TemplateRef<LuOptionContext<T>> | Type<unknown>>();
 
@@ -56,6 +46,13 @@ export class LuOptionComponent<T> implements OnInit {
 	readonly scrollIntoViewOptions = input<ScrollIntoViewOptions>({});
 
 	readonly groupTemplateLocation = input<GroupTemplateLocation>();
+
+	/**
+	 * Present only when the consumer projects nested `[treeitem]` content (tree selects).
+	 * Detected here — and not on the inner `lu-listbox-option` — because Angular content
+	 * queries do not traverse the `ng-content` re-projection boundary.
+	 */
+	readonly treeitemContent = contentChild(Treeitem);
 
 	readonly optionContext = viewChild(LU_OPTION_CONTEXT);
 
