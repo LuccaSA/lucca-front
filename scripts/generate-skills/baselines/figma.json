@@ -492,6 +492,11 @@
 	"28382:11798": {
 		"componentName": "ConfirmationDialog",
 		"properties": {
+			"type": [
+				"confirmation",
+				"delete",
+				"exit"
+			],
 			"criticity": [
 				"low",
 				"high",
@@ -1077,6 +1082,7 @@
 			"breadcrumbs": null,
 			"leading": null,
 			"leadingContent": null,
+			"impersonation": null,
 			"Screen size": [
 				"M",
 				"S"

@@ -1,94 +1,237 @@
 /**
- * Aggregate "all versions" skill writer.
+ * Aggregate "all versions" skill writer — one content folder per MAJOR.
  *
- * Assembles `lucca-front/lucca-front-all/` — a single skill bundling every generated version's
- * `references/` tree under `references/<version>/`, plus **one** router `SKILL.md` at the root that:
- *   1. detects the project's @lucca-front/ng version (node_modules, then package.json),
- *   2. composes paths into the matching `references/<version>/…` subtree (as the legacy skill did).
+ * Assembles `lucca-front/lucca-front-all/` for machine-wide installs (several repos on different
+ * versions). Layout per major:
  *
- * Only each version's `references/` is copied — **not** its per-version SKILL.md. A single
- * description lives at the root, so nothing duplicates or competes in the agent's skill list.
+ * lucca-front-all/
+ * ├── SKILL.md                      ← single router: detects the project's version
+ * └── references/
+ *     └── <major>/                  e.g. 21/
+ *         ├── components/ documentation/ tools/ types/ migrations.md
+ *         │                         ← BASE = full references/ of the major's NEWEST minor
+ *         ├── fixes/                ← the base minor's per-patch fixes
+ *         └── minors/<M-m>/         ← OVERRIDES for each OLDER minor:
+ *             ├── _manifest.md      ← latest patch, URL rule, components added/removed later
+ *             ├── fixes/            ← that minor's per-patch fixes
+ *             └── …                 ← full files at the minor's state, ONLY where they differ
+ *                                     substantially from the base (versioned URLs normalized)
  *
- * Two distribution targets, one source tree:
- *   - global (machine-wide) install → install `lucca-front-all`, any repo gets its right version;
- *   - per-repo install → install one/two `lucca-front-<M>-<m>-<p>` directly (leaner fetch).
+ * Override principle (fidelity first): an agent on an older minor always reads EXACT content for
+ * its version — the override file if present, the base file otherwise. No diff reconstruction.
  *
- * The whole `references/` subtree is moved as a block, so intra-references relative links
- * (e.g. a component's `../../types/<Type>.md`) stay valid under `references/<version>/`.
+ * Excluded from overrides (cumulative supersets, entries labeled per version — the base file
+ * covers the older minor's content in full): `*.changelog.md` and `migrations.md`. The router
+ * instructs to ignore entries newer than the project's version.
+ *
+ * Only versioned Storybook URLs are normalized before comparison (decided 2026-07-10): any other
+ * difference — typography included — is substantial and produces an override.
  */
 
 import fs from 'fs';
 import path from 'path';
-import { DocumentationMap, VersionConfig } from '../types';
+import { DocumentationMap } from '../types';
+import { MinorResolution } from '../version-config';
 import { versionRoot } from './skill-writer';
 
 const SKILLS_BASE = 'lucca-front';
 const AGGREGATE_NAME = 'lucca-front-all';
 
-/** Dotted version key used as the references subfolder (not an APM leaf → dots are fine). */
-function dotted(v: VersionConfig): string {
-	return `${v.major}.${v.minor}.${v.patch}`;
-}
-
 /**
- * Lists the version strings ("21.2.4") whose per-version skill folder exists on disk.
+ * Lists the minor strings ("21.2") whose per-minor skill folder exists on disk.
  * Used to rebuild the aggregate from whatever is present (e.g. after a replay run that
- * only touched a subset of versions).
+ * only touched a subset of minors).
  */
 export function listGeneratedVersionStrings(skillsDir: string): string[] {
 	const base = path.resolve(skillsDir, SKILLS_BASE);
 	if (!fs.existsSync(base)) return [];
 	const out: string[] = [];
 	for (const d of fs.readdirSync(base, { withFileTypes: true })) {
-		const m = d.isDirectory() && d.name.match(/^lucca-front-(\d+)-(\d+)-(\d+)$/);
-		if (m) out.push(`${m[1]}.${m[2]}.${m[3]}`);
+		const m = d.isDirectory() && d.name.match(/^lucca-front-(\d+)-(\d+)$/);
+		if (m) out.push(`${m[1]}.${m[2]}`);
 	}
 	return out.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 }
 
+/** Normalizes patch-versioned Storybook URLs so they don't count as a substantial difference. */
+function normalizeVersionedUrls(content: string): string {
+	return content.replace(/lucca-front\.lucca\.io\/v\d+\.\d+\.\d+\//g, 'lucca-front.lucca.io/vX/');
+}
+
+/** Cumulative-superset files: fully covered by the base's copy (entries labeled per version). */
+function isCumulativeSuperset(relPath: string): boolean {
+	return relPath === 'migrations.md' || relPath.endsWith('.changelog.md');
+}
+
+/** Recursively lists file paths (relative) under `dir`. */
+function walkFiles(dir: string, prefix = ''): string[] {
+	const out: string[] = [];
+	for (const d of fs.readdirSync(dir, { withFileTypes: true })) {
+		const rel = prefix ? `${prefix}/${d.name}` : d.name;
+		if (d.isDirectory()) out.push(...walkFiles(path.join(dir, d.name), rel));
+		else out.push(rel);
+	}
+	return out;
+}
+
 /**
- * Builds the aggregate skill from the per-version folders already on disk.
- * Returns the SKILL.md path and the number of bundled versions.
+ * Builds the aggregate skill from the per-minor folders already on disk.
+ * Returns the SKILL.md path and the number of bundled minors.
  */
-export function writeAggregateSkill(skillsDir: string, versions: VersionConfig[]): { skillPath: string; versionCount: number } {
+export function writeAggregateSkill(skillsDir: string, minors: MinorResolution[]): { skillPath: string; versionCount: number } {
 	const base = path.resolve(skillsDir, SKILLS_BASE);
 	const aggRoot = path.join(base, AGGREGATE_NAME);
 
-	// Fresh assembly: drop any stale copy so removed versions don't linger.
+	// Fresh assembly: drop any stale copy so removed minors don't linger.
 	fs.rmSync(aggRoot, { recursive: true, force: true });
 	fs.mkdirSync(path.join(aggRoot, 'references'), { recursive: true });
 
-	// Newest-first, deduped, only versions whose folder actually exists on disk.
-	const bundled = [...versions]
-		.sort((a, b) => (a.major !== b.major ? b.major - a.major : a.minor !== b.minor ? b.minor - a.minor : b.patch - a.patch))
-		.filter((v, i, arr) => arr.findIndex((x) => x.major === v.major && x.minor === v.minor && x.patch === v.patch) === i)
-		.filter((v) => fs.existsSync(path.join(versionRoot(skillsDir, v), 'references')));
+	// Newest-first, deduped, only minors whose folder actually exists on disk.
+	const bundled = [...minors]
+		.sort((a, b) => (a.version.major !== b.version.major ? b.version.major - a.version.major : b.version.minor - a.version.minor))
+		.filter((m, i, arr) => arr.findIndex((x) => x.minorKey === m.minorKey) === i)
+		.filter((m) => fs.existsSync(path.join(versionRoot(skillsDir, m.version), 'references')));
 
-	for (const v of bundled) {
-		const srcRefs = path.join(versionRoot(skillsDir, v), 'references');
-		const destRefs = path.join(aggRoot, 'references', dotted(v));
-		// Copy only references/ — the per-version SKILL.md is intentionally left behind.
-		fs.cpSync(srcRefs, destRefs, { recursive: true });
+	// Group by major, newest minor first inside each group.
+	const byMajor = new Map<number, MinorResolution[]>();
+	for (const m of bundled) {
+		const list = byMajor.get(m.version.major) ?? [];
+		list.push(m);
+		byMajor.set(m.version.major, list);
 	}
 
-	const componentSlugs = unionComponentSlugs(aggRoot, bundled);
+	const majorInfos: MajorInfo[] = [];
+	for (const [major, group] of byMajor) {
+		majorInfos.push(writeMajor(skillsDir, aggRoot, major, group));
+	}
+	majorInfos.sort((a, b) => b.major - a.major);
+
+	const componentSlugs = unionComponentSlugs(aggRoot, majorInfos);
 	const docLines = renderDocLines();
 
 	const skillPath = path.join(aggRoot, 'SKILL.md');
-	fs.writeFileSync(skillPath, renderRouter(bundled, componentSlugs, docLines), 'utf-8');
+	fs.writeFileSync(skillPath, renderRouter(majorInfos, componentSlugs, docLines), 'utf-8');
 
 	return { skillPath, versionCount: bundled.length };
 }
 
-/** Union of component slugs across all bundled versions (a slug counts if it has `<slug>.md`). */
-function unionComponentSlugs(aggRoot: string, versions: VersionConfig[]): string[] {
+interface MajorInfo {
+	major: number;
+	/** Newest minor of the major — the base content of references/<major>/. */
+	baseMinor: MinorResolution;
+	/** Older minors, newest first — each has an override folder minors/<M-m>/. */
+	olderMinors: MinorResolution[];
+}
+
+/** Assembles references/<major>/ : base minor in full + one override folder per older minor. */
+function writeMajor(skillsDir: string, aggRoot: string, major: number, group: MinorResolution[]): MajorInfo {
+	const [baseMinor, ...olderMinors] = group; // group is newest-first
+	const majorDir = path.join(aggRoot, 'references', String(major));
+
+	// Base = the newest minor's references, copied as a block (intra-references links stay valid).
+	const baseRefs = path.join(versionRoot(skillsDir, baseMinor.version), 'references');
+	fs.cpSync(baseRefs, majorDir, { recursive: true });
+
+	// Base minor's fixes.
+	const baseFixes = path.join(versionRoot(skillsDir, baseMinor.version), 'fixes');
+	if (fs.existsSync(baseFixes)) fs.cpSync(baseFixes, path.join(majorDir, 'fixes'), { recursive: true });
+
+	// Older minors → override folders.
+	const baseFiles = new Set(walkFiles(majorDir));
+	for (const minor of olderMinors) {
+		const minorRefs = path.join(versionRoot(skillsDir, minor.version), 'references');
+		const overrideDir = path.join(majorDir, 'minors', minor.minorKey.replace(/\./g, '-'));
+
+		let overrideCount = 0;
+		const removedLater: string[] = [];
+		for (const rel of walkFiles(minorRefs)) {
+			if (isCumulativeSuperset(rel)) continue; // base copy covers it in full
+
+			const minorFile = path.join(minorRefs, rel);
+			const baseFile = path.join(majorDir, rel);
+			if (!baseFiles.has(rel)) {
+				// Present in this minor, absent from the base → removed in a later minor. Keep in full.
+				removedLater.push(rel);
+			} else {
+				const a = normalizeVersionedUrls(fs.readFileSync(minorFile, 'utf-8'));
+				const b = normalizeVersionedUrls(fs.readFileSync(baseFile, 'utf-8'));
+				if (a === b) continue;
+			}
+			fs.mkdirSync(path.dirname(path.join(overrideDir, rel)), { recursive: true });
+			fs.copyFileSync(minorFile, path.join(overrideDir, rel));
+			overrideCount++;
+		}
+
+		// This minor's fixes.
+		const minorFixes = path.join(versionRoot(skillsDir, minor.version), 'fixes');
+		if (fs.existsSync(minorFixes)) fs.cpSync(minorFixes, path.join(overrideDir, 'fixes'), { recursive: true });
+
+		// Components added after this minor = component dirs in base, absent from the minor.
+		const addedLater = listComponentDirs(majorDir).filter((slug) => !fs.existsSync(path.join(minorRefs, 'components', slug)));
+
+		fs.mkdirSync(overrideDir, { recursive: true });
+		fs.writeFileSync(
+			path.join(overrideDir, '_manifest.md'),
+			renderMinorManifest(minor, baseMinor, overrideCount, addedLater, removedLater),
+			'utf-8',
+		);
+	}
+
+	return { major, baseMinor, olderMinors };
+}
+
+function listComponentDirs(majorDir: string): string[] {
+	const compDir = path.join(majorDir, 'components');
+	if (!fs.existsSync(compDir)) return [];
+	return fs
+		.readdirSync(compDir, { withFileTypes: true })
+		.filter((d) => d.isDirectory())
+		.map((d) => d.name)
+		.sort((a, b) => a.localeCompare(b));
+}
+
+function renderMinorManifest(
+	minor: MinorResolution,
+	baseMinor: MinorResolution,
+	overrideCount: number,
+	addedLater: string[],
+	removedLater: string[],
+): string {
+	const latestPatch = minor.version.tag.replace(/^v/, '');
+	const basePatch = baseMinor.version.tag.replace(/^v/, '');
+
+	let md = `# Overrides ${minor.minorKey} (vs base ${baseMinor.minorKey})\n\n`;
+	md += `- **Dernier patch publié de cette mineure** : \`${latestPatch}\` (patchs : ${minor.patchTags.map((t) => t.replace(/^v/, '')).join(', ')})\n`;
+	md += `- **Storybook exact** : https://lucca-front.lucca.io/${minor.version.tag}/storybook\n`;
+	md += `- **Fichiers overrides** : ${overrideCount} — pour tout chemin, lire d'abord ce dossier, sinon la base \`../../\`.\n`;
+	md += `- **Règle URL** : dans les fichiers lus depuis la base, remplacer \`v${basePatch}\` par \`v${latestPatch}\` dans les URLs Storybook.\n`;
+	md += `- **Changelogs & migrations** : lire ceux de la base (cumulatifs, entrées étiquetées par version) en **ignorant les entrées postérieures à \`${latestPatch}\`**.\n`;
+
+	if (addedLater.length > 0) {
+		md += `\n## Composants absents de ${minor.minorKey} (ajoutés dans une mineure ultérieure — ne pas utiliser)\n\n`;
+		md += addedLater.map((s) => `- ${s}`).join('\n') + '\n';
+	}
+	if (removedLater.length > 0) {
+		md += `\n## Fichiers retirés après ${minor.minorKey} (présents ici en intégralité)\n\n`;
+		md += removedLater.map((s) => `- ${s}`).join('\n') + '\n';
+	}
+	return md;
+}
+
+/** Union of component slugs: every major's base components + override component dirs. */
+function unionComponentSlugs(aggRoot: string, majorInfos: MajorInfo[]): string[] {
 	const slugs = new Set<string>();
-	for (const v of versions) {
-		const compDir = path.join(aggRoot, 'references', dotted(v), 'components');
-		if (!fs.existsSync(compDir)) continue;
-		for (const d of fs.readdirSync(compDir, { withFileTypes: true })) {
-			if (d.isDirectory() && fs.existsSync(path.join(compDir, d.name, `${d.name}.md`))) {
-				slugs.add(d.name);
+	for (const info of majorInfos) {
+		const majorDir = path.join(aggRoot, 'references', String(info.major));
+		for (const slug of listComponentDirs(majorDir)) slugs.add(slug);
+		const minorsDir = path.join(majorDir, 'minors');
+		if (!fs.existsSync(minorsDir)) continue;
+		for (const d of fs.readdirSync(minorsDir, { withFileTypes: true })) {
+			if (!d.isDirectory()) continue;
+			const compDir = path.join(minorsDir, d.name, 'components');
+			if (!fs.existsSync(compDir)) continue;
+			for (const c of fs.readdirSync(compDir, { withFileTypes: true })) {
+				if (c.isDirectory()) slugs.add(c.name);
 			}
 		}
 	}
@@ -125,10 +268,19 @@ function renderDocLines(): string {
 	return out;
 }
 
-function renderRouter(versions: VersionConfig[], componentSlugs: string[], docLines: string): string {
-	const available = versions.map((v) => dotted(v)).join(', ');
-	const newest = versions[0] ? dotted(versions[0]) : '21.2.4';
+function renderRouter(majorInfos: MajorInfo[], componentSlugs: string[], docLines: string): string {
 	const componentList = componentSlugs.map((s) => `- ${s}`).join('\n') + '\n';
+
+	const availableLines = majorInfos
+		.map((info) => {
+			const older = info.olderMinors.map((m) => `${m.minorKey} → \`minors/${m.minorKey.replace(/\./g, '-')}/\``).join(', ');
+			return `- **Majeure ${info.major}** (\`./references/${info.major}/\`) : base = ${info.baseMinor.minorKey} (contenu du patch ${info.baseMinor.version.tag.replace(/^v/, '')})${older ? ` ; overrides : ${older}` : ''}`;
+		})
+		.join('\n');
+
+	const newestInfo = majorInfos[0];
+	const exMajor = newestInfo ? String(newestInfo.major) : '21';
+	const exOlder = newestInfo?.olderMinors[0];
 
 	return `---
 name: ${AGGREGATE_NAME}
@@ -139,61 +291,66 @@ description: >
 
 # Design System Prisme — Lucca Front (toutes versions)
 
-**RÈGLE** : Avant toute génération ou modification de code impliquant \`lu-*\`, \`luX\` ou \`pr-*\`, détecte la version du projet (§1) puis consulte la documentation **de cette version**. Sans cette consultation, toute réponse est invalide.
+**RÈGLE** : Avant toute génération ou modification de code impliquant \`lu-*\`, \`luX\` ou \`pr-*\`, détecte la version du projet (§1) puis consulte la documentation **de cette version** en suivant la résolution §2. Sans cette consultation, toute réponse est invalide.
 
 ## 1. Version
 
 1. Lis la version de \`@lucca-front/ng\` installée :
-   - en priorité \`node_modules/@lucca-front/ng/package.json\` → champ \`version\` (version résolue exacte) ;
+   - en priorité \`node_modules/@lucca-front/ng/package.json\` → champ \`version\` (version résolue exacte, ex: \`21.2.1\`) ;
    - à défaut, la dépendance \`@lucca-front/ng\` (ou \`@lucca-front/scss\`) dans le \`package.json\` du projet (ex: \`^21.2.1\` → \`21.2.1\`).
-2. Le segment de version est ce numéro (ex: \`21.2.1\`). Tous les chemins ci-dessous en dépendent.
-3. Si la version exacte est absente de la liste, prends le **plus haut patch disponible ≤** la version installée, **dans la même mineure**.
+2. Décompose : **majeure** (\`21\`), **mineure** (\`21.2\`), **patch** (\`21.2.1\`).
 
-**Versions disponibles** : ${available || '(aucune)'}
+${availableLines || '- (aucune version générée)'}
 
 Si la version ne peut pas être déterminée → **s'arrêter et demander à l'utilisateur**. Ne jamais supposer une version par défaut.
 
-## 2. Chemins
+**Contrôle de cohérence (anti-péremption).** La version détectée doit être couverte par la liste ci-dessus. Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais, ne code pas :
 
-Compose le chemin à partir du slug du composant et de la version détectée (\`<version>\` = ex: \`21.2.1\`).
-**Ne devine jamais un chemin** : seuls les fichiers réellement présents font foi. Si un chemin composé n'existe pas, vérifie le slug (§6) et la version (§1) — un composant peut ne pas exister dans toutes les versions.
+- la **majeure** détectée n'apparaît pas ci-dessus (ex: projet monté en majeure supérieure alors que la skill n'a pas été mise à jour) ;
+- la **mineure** détectée est plus récente que la base de sa majeure (mineure publiée après cette skill → non documentée) ;
+- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son \`_manifest.md\` → skill périmée, l'API réelle peut différer).
 
-### Composant \`<slug>\`
+## 2. Résolution des chemins
+
+Le dossier \`./references/<majeure>/\` contient la documentation complète de la **base** (la mineure la plus récente de la majeure). Les mineures antérieures sont des dossiers d'**overrides** : \`./references/<majeure>/minors/<M-m>/\`.
+
+### Projet sur la mineure de base
+
+Lis directement \`./references/<majeure>/<chemin>\` (table des chemins §3).
+
+### Projet sur une mineure antérieure
+
+1. Lis \`./references/<majeure>/minors/<M-m>/_manifest.md\` (dernier patch de la mineure, règle URL, composants à ne pas utiliser).
+2. Pour **chaque fichier** : lis d'abord \`./references/<majeure>/minors/<M-m>/<chemin>\` ; s'il n'existe pas, lis \`./references/<majeure>/<chemin>\` (contenu identique pour cette mineure, aux URLs Storybook près — appliquer la règle URL du manifeste).
+3. **Changelogs (\`<slug>.changelog.md\`) et \`migrations.md\`** : toujours ceux de la base — cumulatifs, entrées étiquetées par version. **Ignore les entrées postérieures à la version du projet.**
+4. **Ne jamais utiliser** un composant listé « absent de cette mineure » dans le manifeste.
+
+### Patch antérieur au dernier patch de la mineure
+
+La doc reflète le **dernier patch publié** de la mineure. Si le patch du projet est antérieur, les correctifs livrés entre les deux sont décrits dans \`fixes/<M-m-p>.md\` (dans \`./references/<majeure>/fixes/\` pour la base, dans \`minors/<M-m>/fixes/\` pour une mineure antérieure) — ils ne sont **pas** dans le code du projet.
+
+## 3. Chemins (relatifs à \`./references/<majeure>/\` ou à \`minors/<M-m>/\` selon §2)
 
 | Fichier | Chemin |
 |---------|--------|
-| API Angular | \`./references/<version>/components/<slug>/<slug>.md\` |
-| Exemples (Angular + HTML) | \`./references/<version>/components/<slug>/<slug>.component.md\` |
-| Design (do/don't, usage) | \`./references/<version>/components/<slug>/design/_index.md\` |
-| Figma (variantes, node IDs) | \`./references/<version>/components/<slug>/<slug>.figma.md\` |
-| Changelog | \`./references/<version>/components/<slug>/<slug>.changelog.md\` |
+| API Angular | \`components/<slug>/<slug>.md\` |
+| Exemples (Angular + HTML) | \`components/<slug>/<slug>.component.md\` |
+| Design (do/don't, usage) | \`components/<slug>/design/_index.md\` |
+| Figma (variantes, node IDs) | \`components/<slug>/<slug>.figma.md\` |
+| Changelog | \`components/<slug>/<slug>.changelog.md\` |
+| Types partagés | \`types/<TypeName>.md\` |
+| Documentation transverse | \`documentation/<dossier>/<slug>.md\` |
+| Outils | \`tools/<slug>.md\` (animations, mixins, numbers, scrollbox, utilitaires, angular-api) |
+| Migrations | \`migrations.md\` |
+| Correctifs de patch | \`fixes/<M-m-p>.md\` |
 
-### Types partagés
-
-Certaines propriétés d'API référencent un type énuméré documenté à part (ex: \`LuccaIcon\`, \`BubbleIllustration\`) :
-
-\`./references/<version>/types/<TypeName>.md\`
-
-Le lien exact (nom et chemin du type) est donné dans la section « Type definitions » du fichier API du composant. Tous les composants n'ont pas de types partagés.
-
-### Documentation transverse
-
-\`./references/<version>/documentation/<dossier>/<slug>.md\`
-
-### Outils
-
-\`./references/<version>/tools/<slug>.md\`
-Slugs : animations, mixins, numbers, scrollbox, utilitaires
-
-### Migrations (montée de version)
-
-\`./references/<version>/migrations.md\` — codemods de migration (\`ng generate @lucca-front/ng:<nom>\`) cumulatifs jusqu'à cette version, avec leur version d'introduction.
+**Ne devine jamais un chemin** : seuls les fichiers réellement présents font foi. Si un chemin composé n'existe pas, vérifie le slug (§6) et la résolution (§2) — un composant peut ne pas exister dans toutes les versions.
 
 ### Exemple
 
-Projet en \`${newest}\`, bouton → API : \`./references/${newest}/components/button/button.md\`, Figma : \`./references/${newest}/components/button/button.figma.md\`
+${exOlder ? `Projet en \`${exOlder.version.tag.replace(/^v/, '')}\` (mineure ${exOlder.minorKey}, base = ${newestInfo.baseMinor.minorKey}), bouton → \`./references/${exMajor}/minors/${exOlder.minorKey.replace(/\./g, '-')}/components/button/button.md\` s'il existe, sinon \`./references/${exMajor}/components/button/button.md\`.` : `Projet en \`${newestInfo ? newestInfo.baseMinor.version.tag.replace(/^v/, '') : '21.3.0'}\`, bouton → \`./references/${exMajor}/components/button/button.md\`.`}
 
-## 3. Quand consulter quoi
+## 4. Quand consulter quoi
 
 | Cas d'usage | Consulter |
 |-------------|-----------|
@@ -205,24 +362,16 @@ Projet en \`${newest}\`, bouton → API : \`./references/${newest}/components/bu
 | Design patterns | Patterns (dossier \`patterns/\`) |
 | Tokens CSS | Tokens (dossier \`tokens/\`) |
 | Mixins / animations SCSS | Outils (dossier \`tools/\`) |
-| Composant déprécié | \`./references/<version>/documentation/deprecated/deprecated.md\` |
-| Monter de version | \`./references/<version>/migrations.md\` + le \`<slug>.changelog.md\` de chaque composant touché |
+| Composant déprécié | \`documentation/deprecated/deprecated.md\` |
+| Monter de version | \`migrations.md\` + le \`<slug>.changelog.md\` de chaque composant touché |
+| Projet sur un patch antérieur au dernier de sa mineure | \`fixes/<M-m-p>.md\` |
 
-## 4. Workflow Code
+## 5. Workflows
 
-1. Détecte la version (§1).
-2. Lis l'API du composant (\`<slug>.md\`) — selectors, inputs, types exacts.
-3. Consulte les exemples (\`<slug>.component.md\`).
-4. Vérifie le changelog si comportement inattendu.
-
+**Code** : détecte la version (§1) → résous les chemins (§2) → API (\`<slug>.md\`) → exemples (\`<slug>.component.md\`) → changelog si comportement inattendu.
 ⚠️ Ne te fie **jamais** à ta mémoire pour les noms de propriétés ou types. Seul le \`.md\` fait foi.
 
-## 5. Workflow Code → Figma
-
-1. Lis le fichier Figma (\`<slug>.figma.md\`) — variantes, node IDs, liens Figma.
-2. Utilise les **noms Figma** (pas Angular) pour les propriétés. Ils peuvent différer.
-3. Pour les guidelines visuelles → \`design/_index.md\`.
-
+**Code → Figma** : \`<slug>.figma.md\` (variantes, node IDs — utilise les noms **Figma**, pas Angular) → \`design/_index.md\` pour les guidelines visuelles.
 ⚠️ Les \`.figma.md\` reflètent l'état actuel de Figma.
 
 ## 6. Composants
@@ -233,7 +382,7 @@ ${componentList}## 7. Documentation transverse
 
 ${docLines || '_(aucune documentation générée)_'}## 8. Composants dépréciés
 
-Consulte \`./references/<version>/documentation/deprecated/deprecated.md\` avant d'utiliser un composant inconnu.
+Consulte \`documentation/deprecated/deprecated.md\` (résolution §2) avant d'utiliser un composant inconnu.
 Ne génère **jamais** de code utilisant un composant déprécié — propose son remplacement.
 `;
 }

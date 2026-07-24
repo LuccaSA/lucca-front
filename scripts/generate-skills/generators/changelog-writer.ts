@@ -21,7 +21,8 @@ import { resolveVersion, listStableTags, compareTags } from '../version-config';
 /** Run-level cache: each (ngPackage, selectors, tag) API is extracted once, reused across target versions. */
 const apiCache = new Map<string, PackageAPI | null>();
 
-function getApi(ngPackage: string, tag: string, selectorFilter?: string[]): PackageAPI | null {
+/** Extracts (with run-level cache) a package's API at a git tag. Shared with fixes-writer. */
+export function getApiAtTag(ngPackage: string, tag: string, selectorFilter?: string[]): PackageAPI | null {
 	const key = `${ngPackage}|${(selectorFilter ?? []).join(',')}@${tag}`;
 	const cached = apiCache.get(key);
 	if (cached !== undefined) return cached;
@@ -63,7 +64,7 @@ export function buildComponentChangelog(input: ChangelogInput): string | null {
 		let prevApi: PackageAPI | null = null;
 		let seen = false;
 		for (const tag of tags) {
-			const api = getApi(ngPackage, tag, ngSelectors);
+			const api = getApiAtTag(ngPackage, tag, ngSelectors);
 			if (!api && !seen) continue; // component not introduced yet at this tag
 
 			const delta = diffPackageApi(prevApi, api);

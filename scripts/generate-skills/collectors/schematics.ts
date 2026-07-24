@@ -31,8 +31,8 @@ const NON_MIGRATION = new Set(['ng-add']);
 /** Run-level cache: each tag's collection is read/parsed once. */
 const collectionCache = new Map<string, Map<string, string>>();
 
-/** Returns a map of codemod name → description at a tag (migrations only), or empty if absent. */
-function collectionAt(tag: string): Map<string, string> {
+/** Returns a map of codemod name → description at a tag (migrations only), or empty if absent. Shared with fixes-writer. */
+export function collectionAt(tag: string): Map<string, string> {
 	const cached = collectionCache.get(tag);
 	if (cached) return cached;
 
