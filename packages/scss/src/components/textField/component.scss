@@ -132,6 +132,7 @@
 
 		.textField-prefix-lang {
 			min-inline-size: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
+			padding-inline-end: var(--pr-t-spacings-100);
 			position: relative;
 
 			&::after {
