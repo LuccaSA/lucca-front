@@ -18,9 +18,6 @@
       "Bash(npm run lint:fix:*)",
       "Bash(npm run lint:es:*)",
       "Bash(npm run lint:style:*)",
-      "Bash(npm run icons:update:*)",
-      "Bash(npm run i18n:update:*)",
-      "Bash(npm run skills:generate:*)",
       "Bash(npx vitest run:*)",
       "Bash(npx vitest:*)"
     ]
