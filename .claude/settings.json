@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npm run build:ng:*)",
+      "Bash(npm run build:prisme:*)",
+      "Bash(npm run build:remaining:*)",
+      "Bash(npm run build-compodoc:*)",
+      "Bash(npm run build-storybook:*)",
+      "Bash(npm run start:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run test:eslint-plugin:*)",
+      "Bash(npm run test-storybook:*)",
+      "Bash(npm run test-storybook:coverage:*)",
+      "Bash(npm run jenkins-test:*)",
+      "Bash(npm run ci-test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run lint:fix:*)",
+      "Bash(npm run lint:es:*)",
+      "Bash(npm run lint:style:*)",
+      "Bash(npm run icons:update:*)",
+      "Bash(npm run i18n:update:*)",
+      "Bash(npm run skills:generate:*)",
+      "Bash(npx vitest run:*)",
+      "Bash(npx vitest:*)"
+    ]
+  }
+}
