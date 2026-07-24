@@ -1,0 +1,22 @@
+{
+  "Palettes": {
+    "description": "Résiduel palettes non couvert par le schematic ng g @lucca-front/ng:palettes : CSS vars *-rgb (--colors-grey|neutral-400|900-rgb, --colors-white-rgb) à remplacer par --palettes-neutral-* avec color.transparentize si opacité rgba. Note : l'input <lu-icon color=\"primary|secondary\"> → product est désormais géré par le schematic.",
+    "category": "Breaking22"
+  },
+  "FileUpload": {
+    "description": "SingleFileUpload perd l'input [entry] : gérer FileEntry via lu-file-entry côté parent. Nouvelle taille par défaut (la plus petite) pour lu-single-file-upload et lu-multi-file-upload : ajouter size=\"L\" pour conserver l'ancien rendu.",
+    "category": "Breaking22"
+  },
+  "ActivityFeed": {
+    "description": "lu-activity-feed-update gagne un niveau intermédiaire lu-activity-feed-update-item qui porte le label et le contenu projeté (slots activityFeedUpdateBefore/activityFeedUpdateAfter).",
+    "category": "Breaking22"
+  },
+  "SelectListBox": {
+    "description": "Le panel des Select (lu-simple-select, lu-multi-select) passe au composant ListBox. Remplacement auto sauf override SCSS de .optionItem : .optionItem-value → .listboxOption-content.",
+    "category": "Breaking22"
+  },
+  "StrictSignals": {
+    "description": "Modernisation LF 22 : signaux (ref.value → ref.value(), viewChild() signal), inputs readonly (model()/two-way au lieu de mutation), ngOnChanges → computed()/effect(), tableaux d'entrée ReadonlyArray à cloner, activation des flags strict empilés un à la fois.",
+    "category": "Breaking22"
+  }
+}

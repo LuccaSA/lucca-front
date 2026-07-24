@@ -9,3 +9,21 @@
 
 <!-- Class bound attribute -->
 <span [class.palette-neutral]="!showDetails"></span>
+
+<!-- Component color modifier -->
+<div class="box mod-neutral"></div>
+
+<!-- Icon color classes -->
+<span class="icon-color-product"></span>
+<span class="icon-color-product"></span>
+
+<!-- lu-icon color input -->
+<lu-icon color="product" />
+<lu-icon color="product" />
+<lu-icon [color]="'product'" />
+<lu-icon [color]="condition ? 'product' : 'product'" />
+
+<!-- Text color utilities -->
+<p class="u-textProduct u-textNeutral"></p>
+<p class="pr-u-textProduct pr-u-textBrand"></p>
+<p class="pr-u-colorTextProduct"></p>
