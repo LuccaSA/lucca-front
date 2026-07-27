@@ -155,6 +155,7 @@
 
 @mixin withHorizontalNavigation {
 	--components-dialog-insideContent-overflow: none;
+	--components-dialog-insideContent-flexGrow: 1;
 	--components-dialog-inside-header-boxShadow: none;
 	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200) 0;
 }
