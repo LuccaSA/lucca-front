@@ -31,14 +31,14 @@ Ces vars **ne sont pas** dans le schematic car leur remplacement dépend de l'us
 | `--colors-neutral-900-rgb` | `--palettes-neutral-900` |
 | `--colors-white-rgb` | `--palettes-neutral-0` |
 
-**Règle** : les nouvelles vars ne sont plus au format RGB. Si l'ancienne var servait à appliquer une opacité via `rgba(...)`, il faut passer par `color.transparentize`.
+**Règle** : les nouvelles vars sont maintenant au format hexadécimal (ex: `#123456(78)?`). Si l'ancienne var servait à appliquer une opacité via `rgba(...)`, il faut passer par `color.transparentize`.
 
 ```scss
 // Avant — opacité appliquée via la version -rgb
 background-color: rgba(var(--colors-grey-900-rgb), 0.5);
 
 // Après — transparentize sur la palette
-@use 'sass:color';
+@use '@lucca-front/scss/src/commons/utils/color';
 background-color: color.transparentize(var(--palettes-neutral-900), 0.5);
 ```
 
@@ -51,6 +51,8 @@ color: var(--palettes-neutral-400);
 ```
 
 Ne jamais remplacer aveuglément : inspecter s'il y a un `rgba`/opacité autour.
+
+⚠️ **Un oubli est silencieux** : Sass n'évalue pas les `var()` (valeur « spéciale »), donc `rgb(var(--palettes-neutral-400))` compile sans aucune erreur. C'est le navigateur qui invalide la déclaration au runtime — la couleur disparaît sans message. Il faut donc vérifier manuellement qu'il ne reste aucun `rgb()`/`rgba()` enveloppant une var `--palettes-*`.
 
 ## 2. `<lu-icon color>` (✅ automatisé)
 
@@ -65,4 +67,4 @@ Aucune action manuelle requise. Simplement vérifier après coup qu'il ne reste 
 
 ## 3. `.mod-grey` (rappel)
 
-Le schematic remplace `.mod-grey` → `.mod-neutral`. À valider surtout quand la classe est associée à `.box`, `.box-arrow`, `.card`, `.section`.
+Le schematic remplace `.mod-grey` → `.mod-neutral`. À valider systématiquement.

@@ -57,7 +57,7 @@ Scanner le projet migré pour détecter les éléments non pris en charge par le
 
 Traiter les cas de [Palettes.md](./references/Palettes.md) :
 
-- **Vars `*-rgb`** : remplacer par la palette neutre correspondante, en enveloppant avec `color.transparentize` **si et seulement si** une opacité était appliquée via `rgba(...)`. Ne pas remplacer aveuglément.
+- **Vars `*-rgb`** : remplacer par la palette neutre correspondante, en enveloppant avec `color.transparentize` **si et seulement si** une opacité était appliquée via `rgba(...)`. Ne **jamais** remplacer aveuglément.
 
 (`<lu-icon color="primary|secondary">` est désormais géré par le schematic — rien à faire manuellement.)
 
@@ -86,7 +86,13 @@ Voir [StrictSignals.md](./references/StrictSignals.md).
 ## Étape 6 — Validation
 
 1. Lancer `ng build` (ou `tsc --noEmit`) pour vérifier la compilation.
-2. Vérifier qu'il ne reste aucune palette/var dépréciée : rechercher `palette-grey|palette-primary|palette-secondary|palette-lucca`, `--palettes-grey|--palettes-primary|--palettes-secondary|--palettes-lucca`, `--colors-`, `color="primary"|color="secondary"` sur `lu-icon`.
+2. Vérifier qu'il ne reste aucune palette/var dépréciée. Rechercher :
+	- `palette-grey|palette-primary|palette-secondary|palette-lucca`
+	- `--palettes-grey|--palettes-primary|--palettes-secondary|--palettes-lucca`
+	- `--colors-`
+	- `mod-grey`
+	- `rgba?\(\s*var\(--palettes-` — **bug silencieux** : compile sans erreur, la couleur disparaît au runtime
+	- sur `lu-icon` : `color="primary"|color="secondary"`
 3. Vérifier visuellement les composants restructurés (FileUpload, ActivityFeed, Select).
 
 ---

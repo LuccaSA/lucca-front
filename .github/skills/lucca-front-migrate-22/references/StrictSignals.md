@@ -12,7 +12,7 @@ Les schematics Angular officiels s'occupent du code du consommateur.
 
 | Situation (avant) | À faire (22) |
 |---|---|
-| Lire une prop de composant en TS (`@ViewChild(Lu*)` → `ref.value`) | La prop est un signal : `ref.value()` avec parenthèses. Idem pour une template ref exportée (`#x="luX"` → `x.value()`, y compris dans le template). |
+| Lire une prop de composant en TS (`@ViewChild(Lu*)` → `ref.value`) | La prop est un signal : `ref.value()` avec parenthèses. Idem pour un template ref exportée (`#x="luX"` → `x.value()`, y compris dans le template). |
 | Écrire un input par code (`ref.value = …`) | Interdit (input `readonly`) : passer par un `model()` / two-way, ou remonter l'état côté parent. |
 | Récupérer une ref (`this.x`) | `viewChild()` renvoie un signal : `this.x()` (disponible après le 1er change detection). |
 | Réagir à un changement d'input via `ngOnChanges` | Remplacer par `computed()` / `effect()`. |

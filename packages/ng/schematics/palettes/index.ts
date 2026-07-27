@@ -22,7 +22,7 @@ export default (options?: SchematicContextOpts): Rule => {
 					'icon-color-primary': 'icon-color-product',
 					'icon-color-secondary': 'icon-color-product',
 					// Text color utilities generated from the palette list
-					'u-text{Palette}': 'u-text{Palette}',
+					'u-text{Palette}': 'pr-u-text{Palette}',
 					'pr-u-text{Palette}': 'pr-u-text{Palette}',
 					'pr-u-colorText{Palette}': 'pr-u-colorText{Palette}',
 				},

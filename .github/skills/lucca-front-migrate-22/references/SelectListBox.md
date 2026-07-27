@@ -8,7 +8,7 @@ Le remplacement du panel est fait automatiquement par LF (côté composant). **A
 
 ## Ce qui peut casser (⚠️ contextuel)
 
-Les projets qui **overrident** la classe `.optionItem` et ses enfants verront des régressions, car ces classes n'existent plus dans le panel ListBox.
+Les projets qui **surchargent** la classe `.optionItem` et ses enfants verront des régressions, car ces classes n'existent plus dans le panel ListBox.
 
 Cas le plus courant :
 
