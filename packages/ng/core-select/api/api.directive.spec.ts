@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Observable, map, of } from 'rxjs';
+import { Observable, delay, map, of } from 'rxjs';
 import type { MockInstance } from 'vitest';
 import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
@@ -89,6 +89,31 @@ describe('ALuCoreSelectApiDirective', () => {
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({}, 0);
+	}));
+
+	it('should start the loader as soon as the panel opens', fakeAsync(() => {
+		fixture.detectChanges(); // run ngOnInit first: the directive must observe the panel state before the assertion below
+		tick(); // Component initialization uses a setTimeout :see_no_evil:
+		getOptionsSpy.mockReturnValue(of([{ id: 1, name: 'test' }]).pipe(delay(300)));
+
+		// Capture the loading state at the exact moment the panel opens: if the loader is off
+		// at that point, the "no result" empty state flashes until the first fetch starts
+		let loadingWhenPanelOpens: boolean | undefined;
+		select.isPanelOpen$.subscribe((isOpen) => {
+			if (isOpen) {
+				loadingWhenPanelOpens = select.loading$.value;
+			}
+		});
+
+		select.openPanel();
+		fixture.detectChanges();
+		tick(); // openPanel defers its work in a setTimeout
+
+		expect(loadingWhenPanelOpens).toBe(true);
+
+		tick(300);
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+		expect(select.loading$.value).toBe(false);
 	}));
 
 	it('should query options once when searching while the select is closed', fakeAsync(() => {
