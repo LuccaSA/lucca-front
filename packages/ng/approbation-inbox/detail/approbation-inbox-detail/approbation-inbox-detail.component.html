@@ -1,7 +1,13 @@
 <lu-container class="approbationInbox-detail-container">
-	<ng-content select="[approbationInboxDetailHeader]" />
+	<ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+	<ng-template #headerTpl>
+		<ng-content select="[approbationInboxDetailHeader]" />
+	</ng-template>
 	<div class="approbationInbox-detail-main">
-		<ng-content />
+		<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+		<ng-template #contentTpl>
+			<ng-content />
+		</ng-template>
 	</div>
 	<div class="approbationInbox-detail-empty">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 150 150">

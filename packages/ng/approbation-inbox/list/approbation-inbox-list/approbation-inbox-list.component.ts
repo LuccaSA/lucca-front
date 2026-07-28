@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { generateId, getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, PortalContent, PortalDirective } from '@lucca-front/ng/core';
@@ -8,6 +8,8 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { LU_APPROBATION_INBOX_LIST_TRANSLATIONS } from './approbation-inbox-list.translate';
+import { ApprobationInboxDetailComponent } from '../../detail/approbation-inbox-detail/approbation-inbox-detail.component';
+import { APPROBATION_INBOX_LIST_INSTANCE } from './token';
 
 interface SelectableItem {
 	checked: WritableSignal<boolean>;
@@ -24,6 +26,12 @@ interface SelectableItem {
 		role: 'region',
 		'[attr.aria-labelledby]': 'titleId',
 	},
+	providers: [
+		{
+			provide: APPROBATION_INBOX_LIST_INSTANCE,
+			useExisting: forwardRef(() => ApprobationInboxListComponent),
+		},
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxListComponent {
@@ -37,6 +45,7 @@ export class ApprobationInboxListComponent {
 	readonly submitLabel = input.required<string>();
 	readonly forwardLabel = input.required<string>();
 	readonly selectable = input(false, { transform: booleanAttribute });
+	readonly detailsComponent = input.required<ApprobationInboxDetailComponent>();
 
 	readonly emptyIllustration = input<BubbleIllustration | string>('magnifyingGlass');
 	readonly emptyLabel = input.required<string>();

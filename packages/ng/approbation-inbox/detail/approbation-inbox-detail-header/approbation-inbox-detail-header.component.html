@@ -15,10 +15,18 @@
 			</div>
 		}
 	</div>
-	<div class="approbationInbox-detail-header-main-actions">
-		<ng-content select="[approbationInboxDetailActions]" />
-		<span class="approbationInbox-detail-header-main-actions-more">
-			<ng-content select="[approbationInboxDetailActionsMore]" />
-		</span>
-	</div>
+	@if (!dialogRef) {
+		<div class="approbationInbox-detail-header-main-actions">
+			<ng-container *ngTemplateOutlet="actionsTpl" />
+			<ng-template #actionsTpl>
+				<ng-content select="[approbationInboxDetailActions]" />
+			</ng-template>
+			<span class="approbationInbox-detail-header-main-actions-more">
+				<ng-container *ngTemplateOutlet="actionsMoreTpl" />
+				<ng-template #actionsMoreTpl>
+					<ng-content select="[approbationInboxDetailActionsMore]" />
+				</ng-template>
+			</span>
+		</div>
+	}
 </div>

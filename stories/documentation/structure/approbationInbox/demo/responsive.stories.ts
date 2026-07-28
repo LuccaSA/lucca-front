@@ -119,7 +119,7 @@ export default {
 			template: `
 		<main role="main" class="mainLayout mod-wideM">
 			<div class="mainLayout-sidebar">
-				<lu-approbation-inbox-list label="Test" submitLabel="Approuver les objets" forwardLabel="Transférer les objets" selectable noResultLabel="Votre recherche ne donne aucun résultat.">
+				<lu-approbation-inbox-list label="Test" submitLabel="Approuver les objets" forwardLabel="Transférer les objets" selectable noResultLabel="Votre recherche ne donne aucun résultat." [detailsComponent]="detailComponentRef">
 					<lu-filter-bar approbationInboxListFilterBar>
 						<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
 							<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
@@ -164,7 +164,7 @@ export default {
 			</div>
 			<div class="mainLayout-content">
 				<div class="mainLayout-content-inside">
-					<lu-approbation-inbox-detail>
+					<lu-approbation-inbox-detail #detailComponentRef>
 						<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Lorem ispum dolor Lorem ispum dolor Lorem ispum dolor Lorem ispum dolor" delegation="Délégué par Marie Bragoulet">
 							<lu-user-picture approbationInboxDetailIllustration />
 							<lu-listing inline divider>
@@ -172,8 +172,8 @@ export default {
 								<lu-listing-item>Dolor sit amet</lu-listing-item>
 							</lu-listing>
 							<ng-container approbationInboxDetailActions>
-								<button luButton type="button">Approuver</button>
-								<button luButton type="button">Refuser</button>
+								<button luButton type="button" luDialogClose>Approuver</button>
+								<button luButton type="button" luDialogDismiss>Refuser</button>
 							</ng-container>
 							<ng-container approbationInboxDetailActionsMore>
 								<button luButton type="button" [luDropdown]="dropdownOtherOptions">

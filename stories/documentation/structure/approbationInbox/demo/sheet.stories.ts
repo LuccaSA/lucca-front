@@ -97,7 +97,7 @@ export default {
 	<lu-dialog #dialog>
 		<form luForm>
 			<lu-dialog-header>
-				<h1>Abscence à approuver</h1>
+				<h1>Absence à approuver</h1>
 			</lu-dialog-header>
 			<lu-dialog-content>
 				<lu-approbation-inbox-detail><!-- TODO inbox: template -->
