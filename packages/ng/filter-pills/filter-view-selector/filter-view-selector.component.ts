@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, input, model, output, signal, ViewEncapsulation } from '@angular/core';
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { ChangeDetectionStrategy, Component, computed, input, model, output, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions } from '@lucca-front/ng/core';
-import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
+import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 
 // Same convention as `lu-select` (see @lucca-front/ng/core-select). Duplicated locally because core-select
@@ -11,9 +13,11 @@ export type LuOptionComparer<T> = (a: T, b: T) => boolean;
 export const filterViewDefaultOptionComparer: LuOptionComparer<unknown> = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 export const filterViewDefaultOptionKey: (option: unknown) => unknown = (option) => option;
 
+let nextId = 0;
+
 @Component({
 	selector: 'lu-filter-view-selector',
-	imports: [ButtonComponent, IconComponent, LuDropdownTriggerDirective, DropdownMenuComponent, DropdownItemComponent, DropdownActionComponent],
+	imports: [ButtonComponent, IconComponent, PopoverDirective, FormLabelComponent],
 	templateUrl: './filter-view-selector.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -45,7 +49,14 @@ export class FilterViewSelectorComponent<T> {
 	/** Emitted when the user asks to delete a view. */
 	readonly deleteView = output<T>();
 
-	protected readonly opened = signal(false);
+	/** Aligns the popover under the trigger, like the filter pills do. */
+	protected readonly popoverPositions: ConnectionPositionPair[] = [
+		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -4, 0),
+		new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -4, 0),
+	];
+
+	/** Shared `name` so all the radios of a given selector belong to the same group. */
+	protected readonly groupName = `filterViewSelector-${nextId++}`;
 
 	protected readonly selectedLabel = computed(() => {
 		const selected = this.selectedView();
@@ -58,6 +69,14 @@ export class FilterViewSelectorComponent<T> {
 			return false;
 		}
 		return this.optionComparer()(selected, view);
+	}
+
+	protected inputId(index: number): string {
+		return `${this.groupName}-${index}`;
+	}
+
+	protected viewOptionsLabel(view: T): string {
+		return `${this.intl().viewOptions} : ${this.viewLabel()(view)}`;
 	}
 
 	protected selectView(view: T): void {
