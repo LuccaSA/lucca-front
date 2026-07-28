@@ -130,8 +130,9 @@ export class LinkComponent {
 				? routerLinkCommands
 				: this.router.createUrlTree(Array.isArray(routerLinkCommands) ? routerLinkCommands : [routerLinkCommands], {
 						// Resolve relative commands against the current route, like Angular's `RouterLink` does.
-						// The explicit `relativeTo` input wins if provided, otherwise fall back to the injected `ActivatedRoute`.
-						relativeTo: this.routerLink.relativeTo ?? this.#activatedRoute,
+						// An explicit `relativeTo` wins, including `null` which means "resolve from the root";
+						// only `undefined` falls back to the injected `ActivatedRoute`.
+						relativeTo: this.routerLink.relativeTo === undefined ? this.#activatedRoute : this.routerLink.relativeTo,
 						queryParams: this.routerLink.queryParams,
 						fragment: this.routerLink.fragment,
 						queryParamsHandling: this.routerLink.queryParamsHandling,
