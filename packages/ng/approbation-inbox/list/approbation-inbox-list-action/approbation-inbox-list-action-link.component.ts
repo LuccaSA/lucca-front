@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { injectMediaMinBreakpoint } from '@lucca-front/ng/core';
 import { LuDialogService, provideLuDialog } from '@lucca-front/ng/dialog';
 import { ApprobationInboxDetailDialogComponent } from '../../detail/approbation-inbox-detail-dialog/approbation-inbox-detail-dialog.component';

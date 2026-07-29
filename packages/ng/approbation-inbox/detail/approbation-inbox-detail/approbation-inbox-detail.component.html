@@ -1,10 +1,10 @@
 <lu-container class="approbationInbox-detail-container">
-	<ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+	<ng-container *ngTemplateOutlet="headerTpl" />
 	<ng-template #headerTpl>
 		<ng-content select="[approbationInboxDetailHeader]" />
 	</ng-template>
 	<div class="approbationInbox-detail-main">
-		<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+		<ng-container *ngTemplateOutlet="contentTpl" />
 		<ng-template #contentTpl>
 			<ng-content />
 		</ng-template>

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, injectDialogData } from '@lucca-front/ng/dialog';
 import { ApprobationInboxDetailComponent } from '../approbation-inbox-detail/approbation-inbox-detail.component';
 import { NgTemplateOutlet } from '@angular/common';
-import { ContainerComponent } from '../../../container/container.component';
+import { ContainerComponent } from '@lucca-front/ng/container';
 
 @Component({
 	selector: 'lu-approbation-inbox-detail-dialog',

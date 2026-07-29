@@ -4,18 +4,18 @@
 		<div class="approbationInbox-detail mod-insideDialog">
 			<lu-container class="approbationInbox-detail-container">
 				<div class="approbationInbox-detail-header">
-					<ng-container *ngTemplateOutlet="dialogData.detailsRef.header()"></ng-container>
+					<ng-container *ngTemplateOutlet="dialogData.detailsRef.header()" />
 				</div>
 				<div class="approbationInbox-detail-main">
-					<ng-container *ngTemplateOutlet="dialogData.detailsRef.content()"></ng-container>
+					<ng-container *ngTemplateOutlet="dialogData.detailsRef.content()" />
 				</div>
 			</lu-container>
 		</div>
 	</lu-dialog-content>
 	<lu-dialog-footer>
 		<div class="footer-actions">
-			<ng-container *ngTemplateOutlet="dialogData.detailsRef.headerRef().actions()"></ng-container>
-			<ng-container *ngTemplateOutlet="dialogData.detailsRef.headerRef().actionsMore()"></ng-container>
+			<ng-container *ngTemplateOutlet="dialogData.detailsRef.headerRef().actions()" />
+			<ng-container *ngTemplateOutlet="dialogData.detailsRef.headerRef().actionsMore()" />
 		</div>
 	</lu-dialog-footer>
 </lu-dialog>

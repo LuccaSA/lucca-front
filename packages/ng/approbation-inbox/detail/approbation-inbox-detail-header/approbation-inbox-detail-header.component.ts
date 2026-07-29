@@ -3,7 +3,7 @@ import { generateId } from '@lucca-front/ng/core';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { NgTemplateOutlet } from '@angular/common';
-import { LuDialogRef } from '../../../dialog/model';
+import { LuDialogRef } from '@lucca-front/ng/dialog';
 
 @Component({
 	selector: 'lu-approbation-inbox-detail-header',
