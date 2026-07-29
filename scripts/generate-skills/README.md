@@ -180,6 +180,10 @@ Le fichier principal `button.md` contient l'import, le basic usage, la table d'A
 
 Un tag git sans release npm (ex : `v21.1.5`, `v21.2.3`) ne doit produire **ni skill, ni fixe, ni entrée de changelog** : ses changements sont attribués au patch publié suivant. La liste est maintenue dans `UNPUBLISHED_TAGS` (`version-config.ts`) — à compléter si un futur tag n'atteint jamais npm.
 
+### Mineures techniques (pas de skill dédiée)
+
+Une **mineure technique** est une release npm publiée dont le seul objet est la compatibilité framework (ex : `21.4.0` = support Angular 22 avant la majeure 22.0) : aucun changement d'API, de codemod ni de documentation. Le cas revient avant chaque majeure. Plutôt que de dupliquer ~440 fichiers identiques (et de gérer un ID de release ZH qui peut ne pas exister), la table `TECHNICAL_MINORS` (`version-config.ts`) la déclare couverte par une mineure documentée : le SKILL.md de la mineure de couverture et le routeur de l'agrégat l'annoncent explicitement (le garde-fou de cohérence laisse passer le patch `.0`, et **uniquement lui**). `--version <mineure technique>` est refusé. Si un patch ultérieur sort (ex : `21.4.1`), soit générer une vraie skill (retirer l'entrée de la table), soit étendre l'entrée en connaissance de cause.
+
 ## Architecture du pipeline
 
 ```

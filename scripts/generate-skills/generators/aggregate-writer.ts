@@ -34,7 +34,7 @@
 import fs from 'fs';
 import path from 'path';
 import { DocumentationMap } from '../types';
-import { MinorResolution } from '../version-config';
+import { MinorResolution, technicalMinorsCoveredBy } from '../version-config';
 import { versionRoot } from './skill-writer';
 
 const SKILLS_BASE = 'lucca-front';
@@ -296,9 +296,15 @@ function renderRouter(majorInfos: MajorInfo[], componentSlugs: string[], docLine
 	const availableLines = majorInfos
 		.map((info) => {
 			const older = info.olderMinors.map((m) => `${m.minorKey} → \`minors/${m.minorKey.replace(/\./g, '-')}/\``).join(', ');
-			return `- **Majeure ${info.major}** (\`./references/${info.major}/\`) : base = ${info.baseMinor.minorKey} (contenu du patch ${info.baseMinor.version.tag.replace(/^v/, '')})${older ? ` ; overrides : ${older}` : ''}`;
+			// Technical minors (framework-compat releases, no content of their own) covered by one
+			// of this major's documented minors — resolved as their covering minor, patch .0 only.
+			const techs = [info.baseMinor, ...info.olderMinors]
+				.flatMap((m) => technicalMinorsCoveredBy(m.minorKey).map((t) => `${t.minorKey} (${t.reason}) → lire comme ${t.coveredBy}, patch \`.0\` uniquement`))
+				.join(', ');
+			return `- **Majeure ${info.major}** (\`./references/${info.major}/\`) : base = ${info.baseMinor.minorKey} (contenu du patch ${info.baseMinor.version.tag.replace(/^v/, '')})${older ? ` ; overrides : ${older}` : ''}${techs ? ` ; mineures techniques : ${techs}` : ''}`;
 		})
 		.join('\n');
+	const hasTechMinors = majorInfos.some((info) => [info.baseMinor, ...info.olderMinors].some((m) => technicalMinorsCoveredBy(m.minorKey).length > 0));
 
 	const newestInfo = majorInfos[0];
 	const exMajor = newestInfo ? String(newestInfo.major) : '21';
@@ -329,8 +335,8 @@ Si la version ne peut pas être déterminée → **s'arrêter et demander à l'u
 **Contrôle de cohérence (anti-péremption).** La version détectée doit être couverte par la liste ci-dessus. Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais, ne code pas :
 
 - la **majeure** détectée n'apparaît pas ci-dessus (ex: projet monté en majeure supérieure alors que la skill n'a pas été mise à jour) ;
-- la **mineure** détectée est plus récente que la base de sa majeure (mineure publiée après cette skill → non documentée) ;
-- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son \`_manifest.md\` → skill périmée, l'API réelle peut différer).
+- la **mineure** détectée est plus récente que la base de sa majeure${hasTechMinors ? ' **et** n\'est pas une mineure technique listée ci-dessus' : ''} (mineure publiée après cette skill → non documentée) ;
+- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son \`_manifest.md\`${hasTechMinors ? ' ; \`.0\` pour une mineure technique' : ''} → skill périmée, l'API réelle peut différer).
 
 ## 2. Résolution des chemins
 
@@ -350,6 +356,15 @@ Lis directement \`./references/<majeure>/<chemin>\` (table des chemins §3).
 ### Patch antérieur au dernier patch de la mineure
 
 La doc reflète le **dernier patch publié** de la mineure. Si le patch du projet est antérieur, les correctifs livrés entre les deux sont décrits dans \`fixes/<M-m-p>.md\` (dans \`./references/<majeure>/fixes/\` pour la base, dans \`minors/<M-m>/fixes/\` pour une mineure antérieure) — ils ne sont **pas** dans le code du projet.
+${
+	hasTechMinors
+		? `
+### Projet sur une mineure technique
+
+Une mineure listée « technique » en §1 est une release de pure compatibilité framework : aucun changement d'API, de codemod ni de documentation. Traite le projet **comme s'il était sur sa mineure de couverture** et applique la résolution ci-dessus (ex: projet en \`21.4.0\` → documentation de \`21.3\`). **Seul le patch \`.0\` est couvert** — un patch ultérieur → arrête-toi et demande à l'utilisateur.
+`
+		: ''
+}
 
 ## 3. Chemins (relatifs à \`./references/<majeure>/\` ou à \`minors/<M-m>/\` selon §2)
 

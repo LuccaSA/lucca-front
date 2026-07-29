@@ -20,9 +20,11 @@ Cette skill couvre **Lucca Front 21.3.x** (patchs publiés : 21.3.0, 21.3.1). La
 
 La documentation `references/` reflète le **dernier patch publié : 21.3.1**. Si le patch du projet est **antérieur**, les correctifs livrés après sa version sont décrits dans `fixes/` (voir §2) — ils ne sont **pas** dans son code : consulte tous les `fixes/<M-m-p>.md` de version **strictement supérieure** au patch installé et ignore ces changements.
 
+**Mineures techniques couvertes par cette skill.** La mineure `21.4` est une release purement technique (compatibilité Angular 22) : aucun changement d'API, de codemod ni de documentation — un projet en `21.4.0` utilise cette documentation (référence 21.3, dernier patch 21.3.1). **Seul le patch `21.4.0` est couvert** : un patch ultérieur (ex: `21.4.1`) porterait des correctifs non documentés ici.
+
 **Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
 
-- la **mineure** détectée n'est pas `21.3` (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
+- la **mineure** détectée n'est pas `21.3` ni l'une des mineures techniques couvertes ci-dessus (patch `.0` uniquement) (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
 - le **patch** détecté est **postérieur** à 21.3.1 (dernier patch connu de cette skill → skill périmée, l'API réelle peut différer) ;
 - le patch (ou la version `@lucca-front/ng`) **ne peut pas être déterminé**.
 

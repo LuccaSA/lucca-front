@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { DocumentationMap, VersionConfig } from '../types';
+import { technicalMinorsCoveredBy } from '../version-config';
 import { versionRoot, versionFolder } from './skill-writer';
 
 /**
@@ -21,6 +22,20 @@ export function writeToc(skillsDir: string, version: VersionConfig, patchTags: s
 	const skillName = versionFolder(version);
 	const patchList = patchTags.map((t) => t.replace(/^v/, ''));
 	const fixPatches = patchList.slice(1); // every published patch > x.y.0 has a fix file
+
+	// Technical minors covered by this skill (framework-compat releases with no change of their
+	// own, e.g. 21.4 = Angular 22 support) — declared so the coherence guard lets them through.
+	const techMinors = technicalMinorsCoveredBy(minorVersion);
+	const techBlock =
+		techMinors.length > 0
+			? `\n**Mineures techniques couvertes par cette skill.** ${techMinors
+					.map(
+						(t) =>
+							`La mineure \`${t.minorKey}\` est une release purement technique (${t.reason}) : aucun changement d'API, de codemod ni de documentation — un projet en \`${t.minorKey}.0\` utilise cette documentation (référence ${minorVersion}, dernier patch ${latestPatch}). **Seul le patch \`${t.minorKey}.0\` est couvert** : un patch ultérieur (ex: \`${t.minorKey}.1\`) porterait des correctifs non documentés ici.`,
+					)
+					.join('\n')}\n`
+			: '';
+	const techGuardSuffix = techMinors.length > 0 ? ` ni l'une des mineures techniques couvertes ci-dessus (patch \`.0\` uniquement)` : '';
 
 	// ── Build component list: flat, alphabetical, sourced from generated folders ──
 	const componentsDir = path.join(root, 'references', 'components');
@@ -86,10 +101,10 @@ Cette skill couvre **Lucca Front ${minorVersion}.x** (patchs publiés : ${patchL
 2. à défaut, la dépendance \`@lucca-front/ng\` (ou \`@lucca-front/scss\`) dans le \`package.json\` du projet (ex: \`^${latestPatch}\` → \`${latestPatch}\`).
 
 La documentation \`references/\` reflète le **dernier patch publié : ${latestPatch}**. Si le patch du projet est **antérieur**, les correctifs livrés après sa version sont décrits dans \`fixes/\` (voir §2) — ils ne sont **pas** dans son code : consulte tous les \`fixes/<M-m-p>.md\` de version **strictement supérieure** au patch installé et ignore ces changements.
-
+${techBlock}
 **Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
 
-- la **mineure** détectée n'est pas \`${minorVersion}\` (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
+- la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
 - le **patch** détecté est **postérieur** à ${latestPatch} (dernier patch connu de cette skill → skill périmée, l'API réelle peut différer) ;
 - le patch (ou la version \`@lucca-front/ng\`) **ne peut pas être déterminé**.
 

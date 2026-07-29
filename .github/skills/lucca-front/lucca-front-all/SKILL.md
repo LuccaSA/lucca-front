@@ -16,15 +16,15 @@ description: >
    - à défaut, la dépendance `@lucca-front/ng` (ou `@lucca-front/scss`) dans le `package.json` du projet (ex: `^21.2.1` → `21.2.1`).
 2. Décompose : **majeure** (`21`), **mineure** (`21.2`), **patch** (`21.2.1`).
 
-- **Majeure 21** (`./references/21/`) : base = 21.3 (contenu du patch 21.3.1) ; overrides : 21.2 → `minors/21-2/`, 21.1 → `minors/21-1/`, 21.0 → `minors/21-0/`
+- **Majeure 21** (`./references/21/`) : base = 21.3 (contenu du patch 21.3.1) ; overrides : 21.2 → `minors/21-2/`, 21.1 → `minors/21-1/`, 21.0 → `minors/21-0/` ; mineures techniques : 21.4 (compatibilité Angular 22) → lire comme 21.3, patch `.0` uniquement
 
 Si la version ne peut pas être déterminée → **s'arrêter et demander à l'utilisateur**. Ne jamais supposer une version par défaut.
 
 **Contrôle de cohérence (anti-péremption).** La version détectée doit être couverte par la liste ci-dessus. Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais, ne code pas :
 
 - la **majeure** détectée n'apparaît pas ci-dessus (ex: projet monté en majeure supérieure alors que la skill n'a pas été mise à jour) ;
-- la **mineure** détectée est plus récente que la base de sa majeure (mineure publiée après cette skill → non documentée) ;
-- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son `_manifest.md` → skill périmée, l'API réelle peut différer).
+- la **mineure** détectée est plus récente que la base de sa majeure **et** n'est pas une mineure technique listée ci-dessus (mineure publiée après cette skill → non documentée) ;
+- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son `_manifest.md` ; `.0` pour une mineure technique → skill périmée, l'API réelle peut différer).
 
 ## 2. Résolution des chemins
 
@@ -44,6 +44,11 @@ Lis directement `./references/<majeure>/<chemin>` (table des chemins §3).
 ### Patch antérieur au dernier patch de la mineure
 
 La doc reflète le **dernier patch publié** de la mineure. Si le patch du projet est antérieur, les correctifs livrés entre les deux sont décrits dans `fixes/<M-m-p>.md` (dans `./references/<majeure>/fixes/` pour la base, dans `minors/<M-m>/fixes/` pour une mineure antérieure) — ils ne sont **pas** dans le code du projet.
+
+### Projet sur une mineure technique
+
+Une mineure listée « technique » en §1 est une release de pure compatibilité framework : aucun changement d'API, de codemod ni de documentation. Traite le projet **comme s'il était sur sa mineure de couverture** et applique la résolution ci-dessus (ex: projet en `21.4.0` → documentation de `21.3`). **Seul le patch `.0` est couvert** — un patch ultérieur → arrête-toi et demande à l'utilisateur.
+
 
 ## 3. Chemins (relatifs à `./references/<majeure>/` ou à `minors/<M-m>/` selon §2)
 

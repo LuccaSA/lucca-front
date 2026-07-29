@@ -186,6 +186,43 @@ const stableTagCache = new Map<number, string[]>();
  */
 const UNPUBLISHED_TAGS = new Set(['v21.1.5', 'v21.2.3']);
 
+// ─── Technical minors (no skill of their own) ────────────────────────────────
+//
+// A technical minor is a published npm release whose ONLY purpose is framework compatibility
+// (e.g. 21.4.0 = Angular 22 support before the 22.0 major): no API change, no codemod, no
+// documentation change. The pattern recurs before every major. Generating a full skill for it
+// would duplicate ~440 identical files (and require a ZH release ID that may not even exist).
+//
+// Instead, the covering minor's SKILL.md and the aggregate router declare it explicitly: the
+// coherence guard lets a project on `<minor>.0` through and reads the covering minor's docs.
+// ONLY the `.0` patch is covered — a later patch (e.g. 21.4.1) would carry unknown fixes, so
+// the guard still stops there. If that happens: either generate a real skill for the minor
+// (remove it from this table), or extend the entry knowingly.
+//
+// Key format: "major.minor" (the technical minor) → its covering minor + human-readable reason.
+export interface TechnicalMinorInfo {
+	/** The documented minor whose skill covers this technical release (e.g. "21.3"). */
+	coveredBy: string;
+	/** Short reason shown in the generated SKILL.md (e.g. "compatibilité Angular 22"). */
+	reason: string;
+}
+
+const TECHNICAL_MINORS: Record<string, TechnicalMinorInfo> = {
+	'21.4': { coveredBy: '21.3', reason: 'compatibilité Angular 22' },
+};
+
+/** Info of a technical minor ("21.4"), or null if the minor is a regular documented one. */
+export function getTechnicalMinor(minorKey: string): TechnicalMinorInfo | null {
+	return TECHNICAL_MINORS[minorKey] ?? null;
+}
+
+/** Technical minors covered by a given documented minor ("21.3" → [{ minorKey: "21.4", … }]). */
+export function technicalMinorsCoveredBy(minorKey: string): Array<TechnicalMinorInfo & { minorKey: string }> {
+	return Object.entries(TECHNICAL_MINORS)
+		.filter(([, info]) => info.coveredBy === minorKey)
+		.map(([key, info]) => ({ minorKey: key, ...info }));
+}
+
 /**
  * Lists the **stable, published** release git tags for a major (e.g. v21.0.0 … v21.2.4), ascending.
  * Excludes pre-releases (-rc, -experimental, -split, …) and phantom tags never published to npm

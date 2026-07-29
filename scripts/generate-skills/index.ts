@@ -75,7 +75,7 @@ import { writeFixes } from './generators/fixes-writer';
 import { writeVersionChangelog } from './generators/version-diff-writer';
 import { writeAggregateSkill, listGeneratedVersionStrings } from './generators/aggregate-writer';
 import { ensureZhReleaseIds } from './zh-release-guard';
-import { MinorResolution, parseVersion, resolveMinorVersion } from './version-config';
+import { MinorResolution, getTechnicalMinor, parseVersion, resolveMinorVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
 import { collectSchematics } from './collectors/schematics';
@@ -270,6 +270,13 @@ async function main(): Promise<void> {
 	for (const v of flags.versions) {
 		if (parseVersion(v)) {
 			console.error(`❌ --version ${v} : le pipeline génère par mineure. Utilise --version ${v.split('.').slice(0, 2).join('.')} (le contenu reflète le dernier patch publié, les patchs sont couverts par fixes/).`);
+			process.exit(1);
+		}
+		const tech = getTechnicalMinor(v.replace(/^v/, ''));
+		if (tech) {
+			console.error(
+				`❌ --version ${v} : mineure technique (${tech.reason}) couverte par la skill ${tech.coveredBy} — aucune skill à générer (cf. TECHNICAL_MINORS dans version-config.ts). Si cette mineure porte désormais de vrais changements, retire-la de la table avant de la générer.`,
+			);
 			process.exit(1);
 		}
 	}
