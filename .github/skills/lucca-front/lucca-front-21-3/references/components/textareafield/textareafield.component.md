@@ -6,12 +6,46 @@
 
 Component selector : `lu-textarea-input`
 
-| Example | File |
-|---------|------|
-| Field | [angular-field.md](./stories/angular-field.md) |
+### Field
+
+```js
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { TextareaInputComponent } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Field | [html-field.md](./stories/html-field.md) |
+### Field
+
+```css
+@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/formLabel';
+@forward '@lucca-front/scss/src/components/inlineMessage';
+@forward '@lucca-front/scss/src/components/textField';
+```
+
+```html
+<div class="form-field">
+	<label class="formLabel" id="IDlabel" for="ID">Label</label>
+	<div class="textField">
+		<div class="textField-input">
+			<textarea
+				rows="3"
+				id="ID"
+				class="textField-input-value"
+				aria-labelledby="IDlabel"
+				aria-describedby="IDmessage"
+				placeholder="Placeholder"
+				aria-invalid="false"
+			></textarea>
+		</div>
+	</div>
+	<div class="inlineMessage" id="IDmessage">
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
+</div>
+```

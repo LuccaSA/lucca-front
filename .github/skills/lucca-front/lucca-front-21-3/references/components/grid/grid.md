@@ -47,4 +47,19 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 
 ## Related files
 
-- 📋 [Changelog](./grid.changelog.md)
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.3.0
+
+`GridColumnComponent` :
+  ~ `align` : 'start' | 'center' | 'end' | 'auto' | null → GridColumnAlignment | null
+  ~ `justify` : 'start' | 'center' | 'end' | 'auto' | null → GridColumnAlignment | null
+  ~ `responsive` : ResponsiveConfig<'row' | 'column' | 'rowspan' | 'colspan', number> → ResponsiveConfig<GridColumnResponsive, number>
+`GridComponent` :
+  ~ `mode` : 'form' | 'auto' | ResponsiveProperty<'auto'> | null → GridMode | null
+
+### 21.0.0
+
+Composant introduit (`GridColumnComponent`, `GridComponent`).

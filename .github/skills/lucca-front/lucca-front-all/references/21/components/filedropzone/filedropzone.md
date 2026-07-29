@@ -23,4 +23,11 @@ import { FileDropzoneComponent } from '@lucca-front/ng/file-upload';
 - 📝 [Code & implementation](./filedropzone.component.md)
 
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-file-filedropzone-angular-basic--docs)
-- 📋 [Changelog](./filedropzone.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`FileDropzoneComponent`).

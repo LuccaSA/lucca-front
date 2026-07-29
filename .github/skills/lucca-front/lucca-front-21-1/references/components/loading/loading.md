@@ -30,7 +30,18 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 ## Related files
 
 - 📝 [Code & implementation](./loading.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./loading.design.md)
 - 🎯 [Figma design tokens](./loading.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.4/storybook/?path=/docs/documentation-loaders-loading-angular-basic--docs)
-- 📋 [Changelog](./loading.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.4`. Les versions sans changement d'API sont omises.
+
+### 21.0.1
+
+~ `template` : 'popin' | 'drawer' | 'fullpage' | null → DisplayMode | null
+
+### 21.0.0
+
+Composant introduit (`LoadingComponent`).

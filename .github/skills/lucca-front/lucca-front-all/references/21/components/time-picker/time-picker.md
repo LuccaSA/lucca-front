@@ -46,7 +46,24 @@ import { TimePickerComponent } from '@lucca-front/ng/time';
 
 ## Related files
 
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./time-picker.design.md)
 - 🎯 [Figma design tokens](./time-picker.figma.md)
 
-- 📋 [Changelog](./time-picker.changelog.md)
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.3.0
+
++ (output) `prevPicker` : void
++ (output) `nextPicker` : void
++ (output) `nonDigitKeyPressed` : void
++ (output) `touched` : void
+
+### 21.1.0
+
++ `intl` : unknown
+
+### 21.0.0
+
+Composant introduit (`TimePickerComponent`).

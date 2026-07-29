@@ -118,7 +118,20 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 ## Related files
 
 - 📝 [Code & implementation](./index-table.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./index-table.design.md)
 - 🎯 [Figma design tokens](./index-table.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
-- 📋 [Changelog](./index-table.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.3.0
+
+`IndexTableRowCellHeaderComponent` :
+  ~ (model) `sort` : null | 'none' | 'ascending' | 'descending' → IndexTableSort | null
++ token `LU_INDEX_TABLE_INSTANCE` : IndexTableComponent
+
+### 21.0.0
+
+Composant introduit (`IndexTableActionFileComponent`, `IndexTableActionComponent`, `IndexTableBodyComponent`, `IndexTableRowCellHeaderComponent`, `IndexTableRowCellComponent`, `IndexTableFootComponent`, `IndexTableHeadComponent`, `IndexTableRowComponent`, `IndexTableComponent`).

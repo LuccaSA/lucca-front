@@ -36,7 +36,18 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 ## Related files
 
 - 📝 [Code & implementation](./plg-push.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./plg-push.design.md)
 - 🎯 [Figma design tokens](./plg-push.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-feedback-plg-push-angular-basic--docs)
-- 📋 [Changelog](./plg-push.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.1.0
+
++ `intl` : unknown
+
+### 21.0.0
+
+Composant introduit (`PLGPushComponent`).

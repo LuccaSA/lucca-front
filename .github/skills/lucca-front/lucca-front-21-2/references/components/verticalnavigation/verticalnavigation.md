@@ -76,4 +76,11 @@ import { VerticalNavigationLinkComponent, VerticalNavigationComponent, VerticalN
 
 - 🎯 [Figma design tokens](./verticalnavigation.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-navigation-verticalnavigation-angular-disabled--docs)
-- 📋 [Changelog](./verticalnavigation.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`VerticalNavigationLinkComponent`, `VerticalNavigationComponent`, `VerticalNavigationGroupComponent`, `VerticalNavigationItemComponent`).

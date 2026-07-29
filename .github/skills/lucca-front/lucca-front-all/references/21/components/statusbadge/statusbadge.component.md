@@ -6,16 +6,51 @@
 
 Component selector : `lu-status-badge`
 
-| Example | File |
-|---------|------|
-| Badge angular | [angular-badge-angular.md](./stories/angular-badge-angular.md) |
+### Badge angular
+
+```js
+import { STATUS_BADGE_SIZE, StatusBadgeComponent } from '@lucca-front/ng/status-badge';
+import { PALETTE } from '@lucca/prisme/core';
+```
+
+```html
+<lu-status-badge label="Status" />
+```
 
 ## HTML/CSS
 
 Classe CSS : `.statusBadge`
 
-| Example | File |
-|---------|------|
-| Badge basic | [html-badge-basic.md](./stories/html-badge-basic.md) |
-| Badge palettes | [html-badge-palettes.md](./stories/html-badge-palettes.md) |
-| Badge size | [html-badge-size.md](./stories/html-badge-size.md) |
+### Badge basic
+
+```css
+@forward '@lucca-front/scss/src/components/status-badge';
+```
+
+```html
+<div class="statusBadge">Status</div>
+```
+
+### Badge palettes
+
+```css
+@forward '@lucca-front/scss/src/components/status-badge';
+```
+
+```html
+<div class="statusBadge palette-product">Status</div>
+<div class="statusBadge palette-neutral">Status</div>
+<div class="statusBadge palette-success">Status</div>
+<div class="statusBadge palette-warning">Status</div>
+<div class="statusBadge palette-error">Status</div>
+```
+
+### Badge size
+
+```css
+@forward '@lucca-front/scss/src/components/status-badge';
+```
+
+```html
+<div class="statusBadge mod-L">Status</div>
+```

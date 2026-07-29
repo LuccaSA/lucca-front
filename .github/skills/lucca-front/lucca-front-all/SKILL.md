@@ -38,7 +38,7 @@ Lis directement `./references/<majeure>/<chemin>` (table des chemins §3).
 
 1. Lis `./references/<majeure>/minors/<M-m>/_manifest.md` (dernier patch de la mineure, règle URL, composants à ne pas utiliser).
 2. Pour **chaque fichier** : lis d'abord `./references/<majeure>/minors/<M-m>/<chemin>` ; s'il n'existe pas, lis `./references/<majeure>/<chemin>` (contenu identique pour cette mineure, aux URLs Storybook près — appliquer la règle URL du manifeste).
-3. **Changelogs (`<slug>.changelog.md`) et `migrations.md`** : toujours ceux de la base — cumulatifs, entrées étiquetées par version. **Ignore les entrées postérieures à la version du projet.**
+3. **Changelog et migrations** : la section `## Changelog` (fin du `<slug>.md`) et `migrations.md` sont cumulatifs, entrées étiquetées par version — pour l'historique complet, lis toujours ceux de la **base** et **ignore les entrées postérieures à la version du projet**.
 4. **Ne jamais utiliser** un composant listé « absent de cette mineure » dans le manifeste.
 
 ### Patch antérieur au dernier patch de la mineure
@@ -49,11 +49,10 @@ La doc reflète le **dernier patch publié** de la mineure. Si le patch du proje
 
 | Fichier | Chemin |
 |---------|--------|
-| API Angular | `components/<slug>/<slug>.md` |
-| Exemples (Angular + HTML) | `components/<slug>/<slug>.component.md` |
-| Design (do/don't, usage) | `components/<slug>/design/_index.md` |
+| API Angular + Changelog (section `## Changelog` en fin de fichier) | `components/<slug>/<slug>.md` |
+| Exemples (Angular + HTML, stories incluses) | `components/<slug>/<slug>.component.md` |
+| Design (do/don't, usage) | `components/<slug>/<slug>.design.md` |
 | Figma (variantes, node IDs) | `components/<slug>/<slug>.figma.md` |
-| Changelog | `components/<slug>/<slug>.changelog.md` |
 | Types partagés | `types/<TypeName>.md` |
 | Documentation transverse | `documentation/<dossier>/<slug>.md` |
 | Outils | `tools/<slug>.md` (animations, mixins, numbers, scrollbox, utilitaires, angular-api) |
@@ -70,24 +69,24 @@ Projet en `21.2.5` (mineure 21.2, base = 21.3), bouton → `./references/21/mino
 
 | Cas d'usage | Consulter |
 |-------------|-----------|
-| Écrire du code Angular | API (.md) → Exemples (.component.md) → Changelog |
+| Écrire du code Angular | API (.md) → Exemples (.component.md) → section `## Changelog` du .md |
 | Intégrer depuis maquette Figma | Figma (.figma.md) → Tokens → Guidelines dev UI |
-| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (design/_index.md) |
+| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (`<slug>.design.md`) |
 | Review de code | API → Guidelines dev UI → Contenu (si textes) → Patterns (si UX) |
 | Conventions de rédaction | Contenu (dossier `content/`) |
 | Design patterns | Patterns (dossier `patterns/`) |
 | Tokens CSS | Tokens (dossier `tokens/`) |
 | Mixins / animations SCSS | Outils (dossier `tools/`) |
 | Composant déprécié | `documentation/deprecated/deprecated.md` |
-| Monter de version | `migrations.md` + le `<slug>.changelog.md` de chaque composant touché |
+| Monter de version | `migrations.md` + la section `## Changelog` du `<slug>.md` de chaque composant touché (celui de la base, cf. §2) |
 | Projet sur un patch antérieur au dernier de sa mineure | `fixes/<M-m-p>.md` |
 
 ## 5. Workflows
 
-**Code** : détecte la version (§1) → résous les chemins (§2) → API (`<slug>.md`) → exemples (`<slug>.component.md`) → changelog si comportement inattendu.
+**Code** : détecte la version (§1) → résous les chemins (§2) → API (`<slug>.md`) → exemples (`<slug>.component.md`, chaque story est une section `###`) → section `## Changelog` si comportement inattendu.
 ⚠️ Ne te fie **jamais** à ta mémoire pour les noms de propriétés ou types. Seul le `.md` fait foi.
 
-**Code → Figma** : `<slug>.figma.md` (variantes, node IDs — utilise les noms **Figma**, pas Angular) → `design/_index.md` pour les guidelines visuelles.
+**Code → Figma** : `<slug>.figma.md` (variantes, node IDs — utilise les noms **Figma**, pas Angular) → `<slug>.design.md` pour les guidelines visuelles.
 ⚠️ Les `.figma.md` reflètent l'état actuel de Figma.
 
 ## 6. Composants

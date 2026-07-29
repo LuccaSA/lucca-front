@@ -10,10 +10,6 @@ Le niveau de friction lors de la suppression doit être proportionnel à l’imp
 
 Si l’objet peut être recréé rapidement, aucune confirmation n’est requise. L’utilisateur peut supprimer directement sans être interrompu.
 
-### Confirmation en contexte
-
-Lorsque la création de l’objet nécessite plus de temps, une confirmation en contexte est nécessaire. Cela permet à l’utilisateur de valider l’action sans être interrompu de son flux de travail. Au clic sur l’action de suppression, un Popover apparaît pour demander confirmation.
-
 ### Interruption avec une Dialog
 
 Pour les suppressions dont l’impact est plus important, une Dialog interrompt l’utilisateur. Cela ajoute une friction supplémentaire, l’obligeant à valider explicitement l’action avant de continuer.
@@ -38,8 +34,6 @@ Dans certains contexte, il est préférable de mettre en retrait l’action de s
 
 Dans un Footer, l’action de destruction doit être systématiquement isolée à l'extrême gauche. Cette rupture d'alignement sert de garde-fou visuel et physique (Fitts's Law) pour prévenir toute perte de donnée accidentelle.
 
-- **Do** : Utilisons le bouton Outlined en palette Critical pour les boutons de suppression et les boutons de confirmation de suppression.
-- **Don't** : N’utilisons pas le bouton Filled en couleur Critical pour les actions de suppression.
 - **Do** : Utilisons le bouton Filled en couleur Critical pour les actions de confirmation de suppression.
 - **Don't** : N’utilisons pas le bouton Filled en couleur Product pour les actions de confirmation critiques.
 

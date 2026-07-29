@@ -6,9 +6,15 @@
 
 Component selector : `lu-clear`
 
-| Example | File |
-|---------|------|
-| Clear | [angular-clear.md](./stories/angular-clear.md) |
+### Clear
+
+```js
+import { ClearComponent } from '@lucca-front/ng/clear';
+```
+
+```html
+<lu-clear>Clear</lu-clear>
+```
 
 ## HTML/CSS
 
@@ -16,6 +22,14 @@ Le clear est construit avec un faux lien car il se retrouve parfois imbriqué da
 
 Son ancre ne doit pas être activée et on assure ainsi la navigation clavier.
 
-| Example | File |
-|---------|------|
-| Clear | [html-clear.md](./stories/html-clear.md) |
+### Clear
+
+```css
+@forward '@lucca-front/scss/src/components/clear';
+```
+
+```html
+<button class="clear">
+	<span class="pr-u-mask">Clear</span>
+</button>
+```

@@ -32,7 +32,19 @@ import { LuSimpleSelectInputComponent, LuSelectPanelComponent } from '@lucca-fro
 ## Related files
 
 - 📝 [Code & implementation](./simple-select.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./simple-select.design.md)
 - 🎯 [Figma design tokens](./simple-select.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.4/storybook/?path=/docs/documentation-forms-fields-simple-select-angular--docs)
-- 📋 [Changelog](./simple-select.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.4`. Les versions sans changement d'API sont omises.
+
+### 21.1.0
+
+`LuSimpleSelectInputComponent` :
+  + `intl` : unknown
+
+### 21.0.0
+
+Composant introduit (`LuSimpleSelectInputComponent`, `LuSelectPanelComponent`).

@@ -6,12 +6,28 @@
 
 Component selector : `lu-data-presentation`
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { DataPresentationComponent } from '@lucca-front/ng/form-field';
+```
+
+```html
+<lu-data-presentation label="label">Value</lu-data-presentation>
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/form-field';
+@forward '@lucca-front/scss/src/components/presentation';
+```
+
+```html
+<dl class="presentation">
+	<dt class="presentation-term">label</dt>
+	<dd class="presentation-definition">Value</dd>
+</dl>
+```

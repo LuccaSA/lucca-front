@@ -49,7 +49,14 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 ## Related files
 
 - 📝 [Code & implementation](./comment.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./comment.design.md)
 - 🎯 [Figma design tokens](./comment.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.4/storybook/?path=/docs/documentation-texts-comment-angular-ai--docs)
-- 📋 [Changelog](./comment.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.4`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`CommentBlockComponent`, `CommentChatComponent`, `CommentComponent`).

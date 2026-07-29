@@ -8,6 +8,8 @@ Les toasts servent à afficher une information ou un callback dans un coin de l'
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Toasts | [html-toasts.md](./stories/html-toasts.md) |
+### Toasts
+
+```css
+@forward '@lucca-front/scss/src/components/toast';
+```

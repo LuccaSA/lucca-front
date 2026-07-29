@@ -33,7 +33,29 @@ import { MultilanguageInputComponent } from '@lucca-front/ng/forms';
 ## Related files
 
 - 📝 [Code & implementation](./multilanguagefield.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./multilanguagefield.design.md)
 - 🎯 [Figma design tokens](./multilanguagefield.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-forms-fields-multilanguagefield-angular--docs)
-- 📋 [Changelog](./multilanguagefield.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.3.0
+
++ `hasNoInvariant` : boolean
++ `hasAIButtons` : boolean
++ `displayLocale` : string
++ (output) `translateWithAI` : string
+
+### 21.1.0
+
++ `intl` : unknown
+
+### 21.0.3
+
++ `autocomplete` : AutoFill
+
+### 21.0.0
+
+Composant introduit (`MultilanguageInputComponent`).

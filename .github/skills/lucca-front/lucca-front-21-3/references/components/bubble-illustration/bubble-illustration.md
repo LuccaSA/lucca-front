@@ -28,7 +28,22 @@ import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration
 ## Related files
 
 - 📝 [Code & implementation](./bubble-illustration.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./bubble-illustration.design.md)
 - 🎯 [Figma design tokens](./bubble-illustration.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-structure-bubble-illustration-angular-basic--docs)
-- 📋 [Changelog](./bubble-illustration.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.1.4
+
+~ `size` : 'S' | 'L' | '' → 'S' | 'M' | 'L', défaut '' → 'M'
+
+### 21.1.1
+
+~ `illustration` : BubbleIllustration → BubbleIllustration | string
+
+### 21.1.0
+
+Composant introduit (`BubbleIllustrationComponent`).

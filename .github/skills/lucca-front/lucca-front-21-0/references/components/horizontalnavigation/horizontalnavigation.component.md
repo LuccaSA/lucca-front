@@ -4,9 +4,28 @@
 
 ## Angular
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { provideRouter } from '@angular/router';
+import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+```
+
+```html
+<lu-horizontal-navigation>
+	<a
+		*luHorizontalNavigationLink
+		class="horizontalNavigation-list-item-action"
+		routerLink="/"
+		ariaCurrentWhenActive="page"
+	>
+		Page 1
+	</a>
+	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#2" aria-current="page">Page 2</a>
+	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action is-disabled">Page 3</a>
+</lu-horizontal-navigation>
+```
 
 ## HTML/CSS
 
@@ -19,6 +38,24 @@ Ma navigation :
 
 Dans le composant :
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/horizontal-navigation';
+```
+
+```html
+<div class="horizontalNavigation">
+	<ul class="horizontalNavigation-list">
+		<li class="horizontalNavigation-list-item">
+			<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">Page 1</a>
+		</li>
+		<li class="horizontalNavigation-list-item">
+			<a href="#" class="horizontalNavigation-list-item-action">Page 2</a>
+		</li>
+		<li class="horizontalNavigation-list-item">
+			<a href="#" class="horizontalNavigation-list-item-action">Page 3</a>
+		</li>
+	</ul>
+</div>
+```

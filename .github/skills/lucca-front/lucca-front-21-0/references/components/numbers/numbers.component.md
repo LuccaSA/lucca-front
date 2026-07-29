@@ -4,6 +4,4 @@
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Numbers | [html-numbers.md](./stories/html-numbers.md) |
+### Numbers

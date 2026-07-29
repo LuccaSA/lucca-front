@@ -30,7 +30,14 @@ import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 ## Related files
 
 - 📝 [Code & implementation](./fancybox.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./fancybox.design.md)
 - 🎯 [Figma design tokens](./fancybox.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.4/storybook/?path=/docs/documentation-structure-fancybox-angular-basic--docs)
-- 📋 [Changelog](./fancybox.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.4`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`FancyBoxComponent`).

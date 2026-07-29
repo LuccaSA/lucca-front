@@ -24,7 +24,14 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 ## Related files
 
 - 📝 [Code & implementation](./statusbadge.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./statusbadge.design.md)
 - 🎯 [Figma design tokens](./statusbadge.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-texts-statusbadge-angular--docs)
-- 📋 [Changelog](./statusbadge.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`StatusBadgeComponent`).

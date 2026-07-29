@@ -8,14 +8,115 @@ Le drag and drop est porté par Angular CDK [drag-drop](https://angular.dev/guid
 
 Component selector : `lu-sortable-list`
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
-| Draggable | [angular-draggable.md](./stories/angular-draggable.md) |
+### Basic
+
+```js
+import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
+```
+
+### Draggable
+
+```js
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| List | [html-list.md](./stories/html-list.md) |
-| List basic | [html-list-basic.md](./stories/html-list-basic.md) |
+### List
+
+```css
+@forward '@lucca-front/scss/src/components/sortable-list';
+@forward '@lucca-front/scss/src/components/button';
+@forward '@lucca-front/scss/src/components/clear';
+```
+
+```html
+<ul class="sortableList">
+	<li class="sortableList-item">
+		<span class="sortableList-item-handler button">
+			<span class="lucca-icon icon-drag" aria-hidden="true"></span>
+			<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>
+		</span>
+		<div class="sortableList-item-content">
+			<p class="sortableList-item-content-description">Label</p>
+			<p class="sortableList-item-content-helper">Helper message</p>
+		</div>
+		<button class="clear sortableList-clear" type="button">
+			<span class="pr-u-mask">Delete</span>
+		</button>
+	</li>
+	<li class="sortableList-item">
+		<span class="sortableList-item-handler button">
+			<span class="lucca-icon icon-drag" aria-hidden="true"></span>
+			<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>
+		</span>
+		<div class="sortableList-item-content">
+			<p class="sortableList-item-content-description">Label</p>
+			<p class="sortableList-item-content-helper">Helper message</p>
+		</div>
+		<button class="clear sortableList-clear" type="button">
+			<span class="pr-u-mask">Delete</span>
+		</button>
+	</li>
+	<li class="sortableList-item">
+		<span class="sortableList-item-handler button">
+			<span class="lucca-icon icon-drag" aria-hidden="true"></span>
+			<span class="pr-u-mask">Position 1. Utilisez les touches directionnelles pour réordonner</span>
+		</span>
+		<div class="sortableList-item-content">
+			<p class="sortableList-item-content-description">Label</p>
+			<p class="sortableList-item-content-helper">Helper message</p>
+		</div>
+		<button class="clear sortableList-clear" type="button">
+			<span class="pr-u-mask">Delete</span>
+		</button>
+	</li>
+</ul>
+```
+
+### List basic
+
+```css
+@forward '@lucca-front/scss/src/components/sortable-list';
+@forward '@lucca-front/scss/src/components/clear';
+```
+
+```html
+<ul class="sortableList">
+	<li class="sortableList-item">
+		<div class="sortableList-item-handler"></div>
+		<div class="sortableList-item-content">
+			<p class="sortableList-item-content-description">Label</p>
+			<p class="sortableList-item-content-helper">Helper message</p>
+		</div>
+		<button class="clear sortableList-clear" type="button">
+			<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+			<span class="pr-u-mask">Delete</span>
+		</button>
+	</li>
+	<li class="sortableList-item">
+		<div class="sortableList-item-handler"></div>
+		<div class="sortableList-item-content">
+			<p class="sortableList-item-content-description">Label</p>
+			<p class="sortableList-item-content-helper">Helper message</p>
+		</div>
+		<button class="clear sortableList-clear" type="button">
+			<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+			<span class="pr-u-mask">Delete</span>
+		</button>
+	</li>
+	<li class="sortableList-item">
+		<div class="sortableList-item-handler"></div>
+		<div class="sortableList-item-content">
+			<p class="sortableList-item-content-description">Label</p>
+			<p class="sortableList-item-content-helper">Helper message</p>
+		</div>
+		<button class="clear sortableList-clear" type="button">
+			<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+			<span class="pr-u-mask">Delete</span>
+		</button>
+	</li>
+</ul>
+```

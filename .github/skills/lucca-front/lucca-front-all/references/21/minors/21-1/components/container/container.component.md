@@ -6,12 +6,20 @@
 
 Component selector : `lu-container`
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { ContainerComponent } from '@lucca-front/ng/container';
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/container';
+```
+
+```html
+<div class="container">Ce container est responsive et sert à placer le contenu de votre page.</div>
+```

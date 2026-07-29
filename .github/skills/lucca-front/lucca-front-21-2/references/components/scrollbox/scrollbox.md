@@ -21,7 +21,14 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 ## Related files
 
 - 📝 [Code & implementation](./scrollbox.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./scrollbox.design.md)
 - 🎯 [Figma design tokens](./scrollbox.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-structure-scrollbox--docs)
-- 📋 [Changelog](./scrollbox.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`ScrollBoxComponent`).

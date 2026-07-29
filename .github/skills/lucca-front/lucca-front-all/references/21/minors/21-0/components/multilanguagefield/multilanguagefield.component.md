@@ -8,6 +8,12 @@
 
 Pour qu'une locale apparaisse dans le panneau du composant, elles doivent être initialisées à vide dans le `ngModel`. Exemple :
 
-| Example | File |
-|---------|------|
-| Multilanguagefield | [angular-multilanguagefield.md](./stories/angular-multilanguagefield.md) |
+### Multilanguagefield
+
+```js
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
+import { LOCALE_ID } from '@angular/core';
+```

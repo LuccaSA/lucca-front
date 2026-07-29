@@ -8,6 +8,12 @@
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Picker angular | [html-picker-angular.md](./stories/html-picker-angular.md) |
+### Picker angular
+
+Component selector : `lu-duration-picker`
+
+```css
+@forward '@lucca-front/scss/src/components/time';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { DurationPickerComponent } from '@lucca-front/ng/time';
+```

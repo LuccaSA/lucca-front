@@ -6,15 +6,86 @@
 
 Component selector : `lu-checkbox-input`
 
-| Example | File |
-|---------|------|
-| Filter pill | [angular-filter-pill.md](./stories/angular-filter-pill.md) |
+### Filter pill
+
+```js
+import { FormsModule } from '@angular/forms';
+import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+```
+
+```html
+<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
+	<lu-checkbox-input [(ngModel)]="checkboxValue" />
+</lu-filter-pill>
+
+<pr-story-model-display>{{ checkboxValue }}</pr-story-model-display>
+```
 
 ## HTML/CSS
 
 Classe CSS : `.checkboxField`
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
-| Basic | [html-basic.md](./stories/html-basic.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/checkboxField';
+@forward '@lucca-front/scss/src/components/formLabel';
+@forward '@lucca-front/scss/src/components/inlineMessage';
+```
+
+```html
+<div class="form-field pr-u-marginBlockEnd200">
+	<label class="formLabel" for="field1">
+		Label @if (required) {
+		<sup class="formLabel-required" aria-hidden="true">*</sup>
+		} @if (help) {
+		<span class="formLabel-info">
+			<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+			<span class="pr-u-mask">?</span>
+		</span>
+		}
+	</label>
+	<span class="checkboxField">
+		<input
+			type="checkbox"
+			class="checkboxField-input"
+			id="field1"
+			aria-labelledby="field1label"
+			aria-describedby="field1message"
+		/>
+		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+	</span>
+	@if (message) {
+	<div class="inlineMessage" id="field1message">
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
+	}
+</div>
+```
+
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/filterPill';
+```
+
+```html
+<button type="button" class="filterPill mod-checkbox">
+	<span class="filterPill-checkbox">
+		<span class="filterPill-checkbox-input"></span>
+		<span class="filterPill-checkbox-icon" aria-hidden="true">
+			<span class="filterPill-checkbox-icon-check"></span>
+		</span>
+	</span>
+	<span class="filterPill-label" luTooltip="Lorem ipsum dolor" luTooltipWhenEllipsis>
+		Lorem ipsum dolor
+		<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="Lorem ipsum dolor"></span>
+	</span>
+</button>
+```

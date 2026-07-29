@@ -69,7 +69,22 @@ import { FilterPillComponent, FilterBarComponent, FilterPillAddonBeforeDirective
 ## Related files
 
 - 📝 [Code & implementation](./filterpills.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./filterpills.design.md)
 - 🎯 [Figma design tokens](./filterpills.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-forms-filterspills-filterpills-angular--docs)
-- 📋 [Changelog](./filterpills.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.1.0
+
+`FilterPillComponent` :
+  + `intl` : unknown
+  ~ `placeholder` : string → string | null, défaut this.intl.placeholder → null
+`FilterBarComponent` :
+  + `intl` : unknown
+
+### 21.0.0
+
+Composant introduit (`FilterPillComponent`, `FilterBarComponent`, `FilterPillAddonBeforeDirective`, `FilterPillAddonAfterDirective`, `FilterPillDisplayerDirective`, `FilterPillLabelDirective`).

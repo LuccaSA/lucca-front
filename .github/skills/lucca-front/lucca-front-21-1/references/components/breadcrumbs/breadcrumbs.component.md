@@ -6,13 +6,52 @@
 
 Component selector : `lu-breadcrumbs`
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
+```
+
+```html
+<lu-breadcrumbs>
+	<a *luBreadcrumbsLink routerLink="/" ariaCurrentWhenActive="page">You</a>
+	<a *luBreadcrumbsLink ariaCurrentWhenActive="page" href="#2">are</a>
+	<a *luBreadcrumbsLink aria-current="page">here</a>
+</lu-breadcrumbs>
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
-| Compact | [html-compact.md](./stories/html-compact.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/breadcrumbs';
+```
+
+```html
+<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
+	<p id="breadcrumbs-title" class="pr-u-mask">Breadcrumbs</p>
+	<ol class="breadcrumbs-list">
+		<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">You</a></li>
+		<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">are</a></li>
+		<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">here</span></li>
+	</ol>
+</nav>
+```
+
+### Compact
+
+```css
+@forward '@lucca-front/scss/src/components/breadcrumbs';
+```
+
+```html
+<nav role="presentation" class="breadcrumbs mod-compact">
+	<ol class="breadcrumbs-list">
+		<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">Previous page</a></li>
+		<li class="breadcrumbs-list-item">
+			<span aria-current="page" class="breadcrumbs-list-item-action">Current page</span>
+		</li>
+	</ol>
+</nav>
+```

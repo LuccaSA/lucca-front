@@ -113,7 +113,29 @@ import { ClearFormatComponent, HeadingsComponent, LinkComponent, ListStyleToolba
 ## Related files
 
 - 📝 [Code & implementation](./richtextinput.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./richtextinput.design.md)
 - 🎯 [Figma design tokens](./richtextinput.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.4/storybook/?path=/docs/documentation-forms-fields-richtextinput-angular--docs)
-- 📋 [Changelog](./richtextinput.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.4`. Les versions sans changement d'API sont omises.
+
+### 21.1.0
+
+`ClearFormatComponent` :
+  + `intl` : unknown
+`HeadingsComponent` :
+  + `intl` : unknown
+`LinkComponent` :
+  + `intl` : unknown
+`ListStyleToolbarComponent` :
+  + `intl` : unknown
+`RichTextPluginTagComponent` :
+  + `intl` : unknown
+`TextStyleToolbarComponent` :
+  + `intl` : unknown
+
+### 21.0.0
+
+Composant introduit (`ClearFormatComponent`, `HeadingsComponent`, `LinkComponent`, `ListStyleToolbarComponent`, `RichTextPluginTagComponent`, `TextStyleComponent`, `TextStyleToolbarComponent`, `RichTextInputToolbarComponent`, `RichTextInputComponent`).

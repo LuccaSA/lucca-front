@@ -44,4 +44,15 @@ import { ListboxComponent, Treeitem, OptionComponent } from '@lucca-front/ng/lis
 
 ## Related files
 
-- 📋 [Changelog](./listbox.changelog.md)
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.3.0
+
+`ListboxComponent` :
+  ~ `state` : 'loading' | 'empty' | null → ListboxState | null
+
+### 21.0.0
+
+Composant introduit (`ListboxComponent`, `Treeitem`, `OptionComponent`).

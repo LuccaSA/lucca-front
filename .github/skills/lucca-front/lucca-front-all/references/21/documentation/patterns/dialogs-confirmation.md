@@ -8,7 +8,7 @@ Les Dialogs de suppression ou de désactivation sont utilisées lorsque l’util
 
 Leur rôle est d’éviter les erreurs en rendant l’intention explicite et en informant clairement des conséquences.
 
-Le contenu s'adapte au niveau de criticité de l'action et de ses conséquences :
+Le contenu s'adapte au niveau de criticité de l'action et de ses conséquences.
 
 ## Contenu et rédaction
 
@@ -55,16 +55,44 @@ L’objectif est d’éviter toute **perte involontaire de données**, en inform
 
 ## Contenu et rédaction
 
-* **Titre :** « Quitter sans enregistrer ? »
-* **Description :** « Si vous quittez, les modifications non enregistrées seront supprimées. »
-* **Boutons :** « Quitter sans enregistrer » / « Reprendre les modifications »
+Le contenu de la Dialog dépend du contexte et notamment du type de parcours de création, comme exposé dans la guideline dédiée.
 
-### Bonnes pratiques de rédaction
+### Sans action de diffusion
 
-* Écrivons le titre sous forme de question commençant par « **Quitter** ». Pourquoi ?
-    * Une question interpelle davantage qu'une phrase affirmative.
-    * Une question encourage l'utilisateur à comprendre l'enjeu du son choix.
-* Dans la description, utilisons le conditionnel (« Si... ») et le futur de l'indicatif, pour expliquer les conséquences de l'action. Cela rassure l'utilisateur sur le fait que l'action n'a pas encore été effectuée.
+Dans un parcours sans action finale de diffusion, la ressource n'existe pas en base de données tant que l'étape ultime n'est pas validée. Quitter le parcours entraîne donc la perte définitive du travail en cours.
+
+Quand l'utilisateur tente de sortir (via la croix de fermeture, un clic en dehors de la Dialog, ou le bouton « Annuler »), le déclenchement de la Dialog de confirmation dépend de l'état du formulaire :
+
+* si le **formulaire est modifié** (au moins un champ rempli), il est impératif d’afficher une Dialog de confirmation,
+* si le **formulaire est vide**, il faut fermer immédiatement le parcours pour éviter une friction inutile.
+
+Le contenu de la Dialog reprend ce qui est mentionné dans la guideline sur les Dialog de confirmation :
+
+| Élément | Standard |
+| --- | --- |
+| Titre de la Dialog | « **Quitter sans enregistrer ?** » |
+| Description | «  **Si vous quittez ce parcours, les modifications non enregistrées seront définitivement perdues.** » |
+|   |   |
+| Bouton principal | «  **Quitter sans enregistrer** » en `filled` |
+| Bouton secondaire | « **Reprendre les modifications** » en `outlined` et palette `neutral` |
+
+### Avec action de diffusion
+
+Dans un parcours avec action de diffusion, la ressource a déjà été initialisée et existe en base de données. L’enregistrement se fait quand on passe à l’étape suivante.
+
+Un bouton « **Continuer plus tard** » est proposé à chaque étape pour permettre à l’utilisateur de quitter le parcours, tout en sauvegardant l’état actuel de la saisie. Il n’est pas nécessaire d’afficher une Dialog de confirmation dans ce contexte.
+
+Si l'utilisateur tente de sortir (via la croix de fermeture, un clic en dehors de la Dialog), le déclenchement de la Dialog de confirmation dépend de l'état du formulaire :
+
+* si le **formulaire est modifié**, il est impératif d’afficher une Dialog de confirmation,
+* si le **formulaire n’est pas modifié**, il faut fermer immédiatement le parcours pour éviter une friction inutile.
+
+| Élément | Standard |
+| --- | --- |
+| Titre de la Dialog | « **Enregistrer et quitter ?** » |
+| Description | «  **Si vous quittez ce parcours, les modifications non enregistrées seront définitivement perdues.** » |
+| Bouton principal | «  **Enregistrer et quitter** » en `filled` |
+| Bouton secondaire | « **Reprendre les modifications** » en `outlined` et palette `neutral` |
 
 # Validation
 

@@ -10,12 +10,208 @@
 
 Une filter pill optionnelle doit obligatoirement contenir un attribut `name` (dont la valeur est libre) afin de pouvoir être affichée.
 
-| Example | File |
-|---------|------|
-| Bar | [angular-bar.md](./stories/angular-bar.md) |
+### Bar
+
+```js
+import { provideHttpClient } from '@angular/common/http';
+import { LOCALE_ID } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { DividerComponent } from '@lucca-front/ng/divider';
+import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+```
+
+```html
+<lu-filter-bar>
+	<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
+		<ng-template #label0>
+			Tous
+			<lu-numeric-badge [value]="12" />
+		</ng-template>
+		<ng-template #label1>
+			En cours d’approbation
+			<lu-numeric-badge [value]="5" />
+		</ng-template>
+		<ng-template #label2>
+			Approuvés
+			<lu-numeric-badge [value]="3" />
+		</ng-template>
+		<ng-template #label3>
+			Clos
+			<lu-numeric-badge [value]="4" />
+		</ng-template>
+		<lu-segmented-control-filter [label]="label0" value="0" />
+		<lu-segmented-control-filter [label]="label1" value="1" />
+		<lu-segmented-control-filter [label]="label2" value="2" />
+		<lu-segmented-control-filter [label]="label3" value="3" />
+	</lu-segmented-control>
+	<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
+		<lu-checkbox-input [ngModel]="false" />
+	</lu-filter-pill>
+	<lu-filter-pill label="Date de début" optional name="startingDate">
+		<lu-date-input [(ngModel)]="example1" />
+	</lu-filter-pill>
+	<lu-filter-pill label="Période">
+		<lu-date-range-input [(ngModel)]="examplePeriod" />
+	</lu-filter-pill>
+	<lu-filter-pill label="Multi ApiV4" optional name="multiv4">
+		<lu-multi-select
+			[ngModel]="[]"
+			apiV4="/organization/structure/api/establishments"
+			filterPillLabelPlural="établissements"
+		/>
+	</lu-filter-pill>
+	<lu-form-field label="Test" hiddenLabel>
+		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+	</lu-form-field>
+	<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
+</lu-filter-bar>
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Bar | [html-bar.md](./stories/html-bar.md) |
+### Bar
+
+```css
+@forward '@lucca-front/scss/src/components/filter-pills';
+@forward '@lucca-front/scss/src/components/clear';
+@forward '@lucca-front/scss/src/components/filterBar';
+@forward '@lucca-front/scss/src/components/filterPill';
+@forward '@lucca-front/scss/src/components/numericBadge';
+@forward '@lucca-front/scss/src/components/segmentedControl';
+```
+
+```html
+<form>
+	<div class="filterBar" [ngModel]="group" [ngModelOptions]="{ standalone: true }">
+		<lu-scroll-box class="filterBar-scrollBox">
+			<div class="filterBar-scrollBox-group">
+				<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
+					<li class="segmentedControl-item">
+						<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
+						<label for="tab1" class="segmentedControl-item-action">Tous</label>
+					</li>
+					<li class="segmentedControl-item">
+						<input type="radio" class="segmentedControl-item-input" name="tab" id="tab2" />
+						<label for="tab2" class="segmentedControl-item-action">
+							En cours d’approbation @if (withNumericBadge) {
+							<span class="numericBadge">8</span>
+							}
+						</label>
+					</li>
+					<li class="segmentedControl-item">
+						<input type="radio" class="segmentedControl-item-input" name="tab" id="tab3" />
+						<label for="tab3" class="segmentedControl-item-action">
+							Approuvés @if (withNumericBadge) {
+							<span class="numericBadge">88</span>
+							}
+						</label>
+					</li>
+					<li class="segmentedControl-item">
+						<input type="radio" class="segmentedControl-item-input" name="tab" id="tab4" />
+						<label for="tab4" class="segmentedControl-item-action">Clos</label>
+					</li>
+				</ul>
+
+				<lu-divider class="filterBar-divider" />
+
+				<button
+					class="filterPill mod-button"
+					type="button"
+					luTooltip="Filtres supplémentaires"
+					luTooltipOnlyForDisplay
+					[luPopover2]="contentOptions"
+				>
+					<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires" />
+				</button>
+
+				<div class="filterPill">
+					<label
+						for="input1"
+						class="filterPill-label"
+						luTooltip="Inclure les collaborateurs partis"
+						luTooltipWhenEllipsis="true"
+					>
+						Inclure les collaborateurs partis
+						<span
+							class="filterPill-label-placeholder"
+							aria-hidden="true"
+							data-content-before="Inclure les collaborateurs partis"
+						></span>
+					</label>
+					<span class="filterPill-checkbox">
+						<input type="checkbox" id="input1" class="filterPill-checkbox-input" />
+						<span class="filterPill-checkbox-icon" aria-hidden="true">
+							<span class="filterPill-checkbox-icon-check"></span>
+						</span>
+					</span>
+				</div>
+
+				<div class="filterPill is-filled">
+					<label for="input1" class="filterPill-label" luTooltip="Département" luTooltipWhenEllipsis="true">
+						Équipe :
+					</label>
+					<button
+						class="filterPill-combobox"
+						type="button"
+						id="input1"
+						role="combobox"
+						aria-expanded="false"
+						luTooltipWhenEllipsis="true"
+					>
+						Finance
+					</button>
+					<button type="button" class="filterPill-clear clear"><span class="pr-u-mask">Vider ce champ</span></button>
+					<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
+						<lu-icon icon="arrowChevronBottom" size="S" />
+					</button>
+				</div>
+
+				<lu-filter-pill label="Échéance">
+					<lu-date-input [ngModel]="example6" [ngModelOptions]="{ standalone: true }" />
+				</lu-filter-pill>
+
+				<lu-form-field label="Test" hiddenLabel>
+					<lu-text-input [ngModel]="example10" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+				</lu-form-field>
+
+				<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>
+			</div>
+			<div class="filterBar-scrollBox-export">
+				<button type="submit" size="S" luButton="outlined">Exporter</button>
+			</div>
+		</lu-scroll-box>
+	</div>
+</form>
+
+<ng-template #contentOptions>
+	<form class="filterPill_popover-content popover-contentOptional">
+		<lu-form-field
+			label="Inclure les collaborateurs partis"
+			class="filterPill_popover-content-formField mod-selectOption"
+		>
+			<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{ standalone: true }" />
+		</lu-form-field>
+		<lu-form-field label="Équipe" class="filterPill_popover-content-formField mod-selectOption">
+			<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{ standalone: true }" />
+		</lu-form-field>
+		<lu-form-field label="Statut" class="filterPill_popover-content-formField mod-selectOption">
+			<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{ standalone: true }" />
+		</lu-form-field>
+		<lu-form-field label="Échéance" class="filterPill_popover-content-formField mod-selectOption">
+			<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{ standalone: true }" />
+		</lu-form-field>
+		<lu-form-field label="Fréquence de facturation" class="filterPill_popover-content-formField mod-selectOption">
+			<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{ standalone: true }" />
+		</lu-form-field>
+	</form>
+</ng-template>
+```

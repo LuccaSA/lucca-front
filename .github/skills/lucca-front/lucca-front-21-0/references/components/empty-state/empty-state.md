@@ -30,7 +30,14 @@ import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 ## Related files
 
 - 📝 [Code & implementation](./empty-state.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./empty-state.design.md)
 - 🎯 [Figma design tokens](./empty-state.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.0.5/storybook/?path=/docs/documentation-feedback-empty-state-angular-page--docs)
-- 📋 [Changelog](./empty-state.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.0.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`EmptyStatePageComponent`).

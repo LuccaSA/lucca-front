@@ -18,6 +18,7 @@
 | `textContent` | INSTANCE_SWAP | — |
 | `readMore` | BOOLEAN | — |
 | `toolbar` | BOOLEAN | — |
+| `addButton` | BOOLEAN | — |
 | `state` | VARIANT | `default` · `hover` · `focus` · `disabled / readonly` |
 | `content` | VARIANT | `filled` · `empty` |
 | `error` | VARIANT | `false` · `true` |

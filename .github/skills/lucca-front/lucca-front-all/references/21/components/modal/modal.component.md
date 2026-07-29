@@ -10,6 +10,13 @@
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Modal | [html-modal.md](./stories/html-modal.md) |
+### Modal
+
+```css
+@forward '@lucca-front/scss/src/components/modal';
+```
+
+```html
+<lu-toasts [sources]="[]" />
+<button type="button" luButton (click)="openModal()">Open</button>
+```

@@ -4,13 +4,45 @@
 
 ## Angular
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { ContainerComponent } from '@lucca-front/ng/container';
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Container | [html-container.md](./stories/html-container.md) |
-| Basic | [html-basic.md](./stories/html-basic.md) |
+### Container
+
+```css
+@forward '@lucca-front/scss/src/components/container';
+@forward '@lucca-front/scss/src/components/horizontalNavigation';
+```
+
+```html
+<div class="horizontalNavigation">
+	<div class="horizontalNavigation-containerOptional">
+		<ul class="horizontalNavigation-list">
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">Page 1</a>
+			</li>
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">Page 2</a>
+			</li>
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">Page 3</a>
+			</li>
+		</ul>
+	</div>
+</div>
+```
+
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/container';
+```
+
+```html
+<div class="container">Ce container est responsive et sert à placer le contenu de votre page.</div>
+```

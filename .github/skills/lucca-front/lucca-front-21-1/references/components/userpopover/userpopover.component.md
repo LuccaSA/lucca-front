@@ -39,6 +39,14 @@ Il est possible de fournir un autre service qui implémente l'interface `ILuUser
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Popover | [html-popover.md](./stories/html-popover.md) |
+### Popover
+
+```css
+@forward '@lucca-front/scss/src/components/user-popover';
+```
+
+```html
+<button type="button" class="userPopover_trigger" [luUserPopover]="finn" translate="no">
+	{{ finn | luUserDisplay : 'lf' }}
+</button>
+```

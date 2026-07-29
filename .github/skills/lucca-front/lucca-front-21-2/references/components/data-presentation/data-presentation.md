@@ -39,4 +39,15 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 
 - 🎯 [Figma design tokens](./data-presentation.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-forms-data-presentation-angular-basic--docs)
-- 📋 [Changelog](./data-presentation.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.2.4
+
++ `size` : 'S' | null
+
+### 21.1.0
+
+Composant introduit (`DataPresentationComponent`).

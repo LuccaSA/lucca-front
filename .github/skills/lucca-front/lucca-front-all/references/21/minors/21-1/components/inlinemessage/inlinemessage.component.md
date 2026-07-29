@@ -6,14 +6,55 @@
 
 Component selector : `lu-inline-message`
 
-| Example | File |
-|---------|------|
-| Message basic | [angular-message-basic.md](./stories/angular-message-basic.md) |
+### Message basic
+
+```js
+import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Message basic | [html-message-basic.md](./stories/html-message-basic.md) |
-| Message size | [html-message-size.md](./stories/html-message-size.md) |
-| Message states | [html-message-states.md](./stories/html-message-states.md) |
+### Message basic
+
+```css
+@forward '@lucca-front/scss/src/components/inline-message';
+```
+
+```html
+<div class="inlineMessage">
+	<p class="inlineMessage-content">Inline message</p>
+</div>
+```
+
+### Message size
+
+```css
+@forward '@lucca-front/scss/src/components/inline-message';
+```
+
+```html
+<div class="inlineMessage mod-S">
+	<p class="inlineMessage-content">Inline message</p>
+</div>
+```
+
+### Message states
+
+```css
+@forward '@lucca-front/scss/src/components/inline-message';
+```
+
+```html
+<div class="inlineMessage is-success">
+	<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+	<p class="inlineMessage-content">Inline message</p>
+</div>
+<div class="inlineMessage is-warning">
+	<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+	<p class="inlineMessage-content">Inline message</p>
+</div>
+<div class="inlineMessage is-error">
+	<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+	<p class="inlineMessage-content">Inline message</p>
+</div>
+```

@@ -10,13 +10,21 @@
 | **Langue de rédaction** | Il s'agit de la langue principale utilisée pour créer le contenu initial. Cette langue sert de référentiel unique pour toutes les traductions générées. |
 | **Invariant** | C’est une donnée qui n’est pas associé à une langue. Cependant, elle sert de référence, elle est considéré comme la langue par défaut (fallback). |
 
-## Paramètres d'utilisation des langues
+## Définition des langues
+
+### Format du code langue
+
+Dans le cadre du pattern de traduction de formulaires, il est fortement recommandé de présenter les langues via leur code court (`FR`, `EN`, `DE`) ou leur nom complet (`Français`, `Anglais`).
+
+L'utilisation du code étendu incluant la culture ou la locale (ex. `fr-FR`, `fr-CH`) n'est pas recommandée dans ce contexte. L'absence de déclinaison régionale répond d'abord à un besoin de simplification pour l'administrateur : sur des formulaires complexes, une seule version par langue principale suffit généralement et évite d'alourdir inutilement le travail de gestion.
+
+### Paramètres d'utilisation des langues
 
 Afin de faciliter la création d'objets multilingues, nous permettons à l'utilisateur de définir des paramètres d’utilisation des langues au sein de chaque logiciel. Ils permettent de définir comment seront utilisées les langues supportées par Lucca pour la création et la consultation de ces objets.
 
 Ceux-ci sont appliqués automatiquement à chaque nouvelle ressource, garantissant ainsi une cohérence globale et un gain de temps significatif. Ces réglages sont regroupés au sein d'une page **Langues** dédié dans la configuration du logiciel et dispensent l'utilisateur de configurations répétitives à chaque création d'objet.
 
-### Anatomie
+#### Anatomie
 
 Les paramètres sont **initialisés automatiquement par le système lors du déploiement**, avant même que l'utilisateur ne consulte la page. Pour pré-remplir ces configurations, le système s'appuie sur :
 
@@ -29,7 +37,7 @@ La définition d'une langue de fallback dans les paramètres exclut l'usage d'in
 
 Les paramètres généraux de langues s'appliquent à l'ensemble des utilisateurs de l'instance. Toutefois, comme les utilisateurs ne parlent pas tous la même langue, la langue de rédaction ne peut pas être définie comme un paramètre général. Elle doit rester propre à chaque utilisateur pour s'adapter à sa langue de travail.
 
-### Comportement
+#### Comportement
 
 Les langues disponibles sont classées par ordre alphabétique. Seules les langues préalablement sélectionnées dans la liste des langues disponibles peuvent être choisies comme langue de fallback.
 

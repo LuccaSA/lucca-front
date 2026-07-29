@@ -107,4 +107,18 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 - 📝 [Code & implementation](./date.component.md)
 
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-forms-filterspills-date-angular--docs)
-- 📋 [Changelog](./date.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.1.0
+
+`LuCalendarInputComponent` :
+  + `intl` : unknown
+`LuDateInputDirective` :
+  + `intl` : unknown
+
+### 21.0.0
+
+Composant introduit (`LuCalendarInputComponent`, `LuDateInputDirective`, `LuDatePickerComponent`, `LuDateSelectInputComponent`).

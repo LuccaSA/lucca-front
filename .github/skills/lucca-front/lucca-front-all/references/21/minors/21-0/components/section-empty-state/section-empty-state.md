@@ -25,6 +25,12 @@ import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 
 ## Related files
 
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./section-empty-state.design.md)
 
-- 📋 [Changelog](./section-empty-state.changelog.md)
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.0.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`EmptyStateSectionComponent`).

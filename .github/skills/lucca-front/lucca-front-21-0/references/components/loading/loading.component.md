@@ -4,9 +4,11 @@
 
 ## Angular
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { LoadingComponent } from '@lucca-front/ng/loading';
+```
 
 ## HTML/CSS
 
@@ -14,6 +16,12 @@ La classe `mod-fullPage` permettent de centrer un loading dans une page entière
 
 Les classes `mod-popin` et `mod-drawer` permettent de centrer un loading dans une fenêtre de dialogue en version classique ou drawer.
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/loading';
+```
+
+```html
+<div class="loading"></div>
+```

@@ -42,7 +42,17 @@ import { DurationPickerComponent } from '@lucca-front/ng/time';
 
 ## Related files
 
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./duration-picker.design.md)
 - 🎯 [Figma design tokens](./duration-picker.figma.md)
 
-- 📋 [Changelog](./duration-picker.changelog.md)
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.1.0
+
++ `intl` : unknown
+
+### 21.0.0
+
+Composant introduit (`DurationPickerComponent`).

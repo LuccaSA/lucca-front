@@ -8,14 +8,22 @@ Mots-clés : nouveau, nouveauté
 
 Component selector : `lu-new-badge`
 
-| Example | File |
-|---------|------|
-| Badge | [angular-badge.md](./stories/angular-badge.md) |
+### Badge
+
+```js
+import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
+```
 
 ## HTML/CSS
 
 Classe CSS : `.newBadge`
 
-| Example | File |
-|---------|------|
-| Badge | [html-badge.md](./stories/html-badge.md) |
+### Badge
+
+```css
+@forward '@lucca-front/scss/src/components/new-badge';
+```
+
+```html
+<span class="newBadge">New</span>
+```

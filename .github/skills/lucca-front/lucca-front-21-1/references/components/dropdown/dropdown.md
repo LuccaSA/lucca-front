@@ -98,7 +98,14 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 ## Related files
 
 - 📝 [Code & implementation](./dropdown.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./dropdown.design.md)
 - 🎯 [Figma design tokens](./dropdown.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.4/storybook/?path=/docs/documentation-overlays-dropdown-angular-basic--docs)
-- 📋 [Changelog](./dropdown.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.4`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`DropdownActionComponent`, `DropdownDividerComponent`, `DropdownGroupComponent`, `DropdownItemComponent`, `DropdownMenuComponent`, `LuDropdownItemDirective`, `LuDropdownPanelComponent`, `LuDropdownTriggerDirective`).

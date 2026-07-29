@@ -6,15 +6,56 @@
 
 Component selector : `lu-numeric-badge`
 
-| Example | File |
-|---------|------|
-| Badge | [angular-badge.md](./stories/angular-badge.md) |
+### Badge
+
+```js
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+```
+
+```html
+<lu-numeric-badge maxValue="999" [value]="7" />
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Badge basic | [html-badge-basic.md](./stories/html-badge-basic.md) |
-| Badge loading | [html-badge-loading.md](./stories/html-badge-loading.md) |
-| Badge palette | [html-badge-palette.md](./stories/html-badge-palette.md) |
-| Badge size | [html-badge-size.md](./stories/html-badge-size.md) |
+### Badge basic
+
+```css
+@forward '@lucca-front/scss/src/components/numeric-badge';
+```
+
+```html
+<span class="numericBadge">7</span>
+```
+
+### Badge loading
+
+```css
+@forward '@lucca-front/scss/src/components/numeric-badge';
+```
+
+```html
+<span class="numericBadge is-loading" aria-hidden="true">7</span>
+```
+
+### Badge palette
+
+```css
+@forward '@lucca-front/scss/src/components/numeric-badge';
+```
+
+```html
+<span class="numericBadge palette-product">7</span>
+```
+
+### Badge size
+
+```css
+@forward '@lucca-front/scss/src/components/numeric-badge';
+```
+
+```html
+<span class="numericBadge">7</span>
+<span class="numericBadge mod-S">7</span>
+<span class="numericBadge mod-XS">7</span>
+```

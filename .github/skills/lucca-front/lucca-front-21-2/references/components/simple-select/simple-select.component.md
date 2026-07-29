@@ -18,6 +18,22 @@ Dans le cas d'une personnalisation de l'option et/ou de la valeur affichée, il 
 
 Dans le cas d'un appel API ne rentrant pas dans le moule habituel, il est nécessaire de créer votre propre directive en s'aidant de `ALuCoreSelectApiDirective` :
 
-| Example | File |
-|---------|------|
-| Select | [angular-select.md](./stories/angular-select.md) |
+### Select
+
+```js
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+```
+
+```html
+<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+	<lu-simple-select
+		placeholder="Placeholder"
+		clearable
+		[options]="legumes | filterLegumes: clue"
+		(clueChange)="clue = $event"
+		[(ngModel)]="example"
+	></lu-simple-select>
+</lu-form-field>
+<pr-story-model-display>{{ example | json }}</pr-story-model-display>
+```

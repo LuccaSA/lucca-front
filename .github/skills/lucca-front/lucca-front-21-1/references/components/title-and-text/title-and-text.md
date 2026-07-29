@@ -2,6 +2,4 @@
 
 ## Related files
 
-- 🎨 [Design guidelines](./design/_index.md)
-
-- 📋 [Changelog](./title-and-text.changelog.md)
+- 🎨 [Design guidelines](./title-and-text.design.md)

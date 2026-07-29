@@ -4,12 +4,22 @@
 
 ## Angular
 
-| Example | File |
-|---------|------|
-| Code | [angular-code.md](./stories/angular-code.md) |
+### Code
+
+```js
+import { CodeComponent } from '@lucca-front/ng/code';
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Code | [html-code.md](./stories/html-code.md) |
+### Code
+
+```css
+@forward '@lucca-front/scss/src/components/code';
+```
+
+```html
+Lorem
+<code class="code">ipsum dolor sit</code>
+amet
+```

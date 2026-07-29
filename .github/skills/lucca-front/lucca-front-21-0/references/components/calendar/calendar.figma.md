@@ -11,4 +11,4 @@
 
 | Property | Type | Values |
 |----------|------|--------|
-| `type` | VARIANT | `day` · `month` · `year` |
+| `type` | VARIANT | `day` · `week` · `month` · `year` |

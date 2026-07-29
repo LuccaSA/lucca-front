@@ -4,6 +4,12 @@
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/animations';
+```
+
+```html
+<div class="demo"></div>
+```

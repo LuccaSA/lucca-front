@@ -40,7 +40,24 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 ## Related files
 
 - 📝 [Code & implementation](./tooltip.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./tooltip.design.md)
 - 🎯 [Figma design tokens](./tooltip.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-overlays-tooltip-html-css--docs)
-- 📋 [Changelog](./tooltip.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.2.5
+
+`LuTooltipTriggerDirective` :
+  ~ `luTooltipAnchor` : FlexibleConnectedPositionStrategyOrigin → FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined
+
+### 21.1.0
+
+`LuTooltipTriggerDirective` :
+  ~ `luTooltip` : défaut ∅ → ''
+
+### 21.0.0
+
+Composant introduit (`LuTooltipPanelComponent`, `LuTooltipTriggerDirective`).

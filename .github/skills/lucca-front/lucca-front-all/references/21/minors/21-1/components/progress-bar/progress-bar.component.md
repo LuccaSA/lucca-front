@@ -6,12 +6,23 @@
 
 Component selector : `lu-progress-bar`
 
-| Example | File |
-|---------|------|
-| Bar | [angular-bar.md](./stories/angular-bar.md) |
+### Bar
+
+```js
+import { ProgressBarComponent } from '@lucca-front/ng/progress-bar';
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Bar | [html-bar.md](./stories/html-bar.md) |
+### Bar
+
+```css
+@forward '@lucca-front/scss/src/components/progress-bar';
+@forward '@lucca-front/scss/src/components/progress';
+```
+
+```html
+<div class="progress">
+	<div class="progress-bar" [attr.style]="'width:' + width + '%'"></div>
+</div>
+```

@@ -42,7 +42,14 @@ import { CalloutDisclosureComponent } from '@lucca-front/ng/callout';
 ## Related files
 
 - 📝 [Code & implementation](./callout-disclosure.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./callout-disclosure.design.md)
 - 🎯 [Figma design tokens](./callout-disclosure.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.4/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular--docs)
-- 📋 [Changelog](./callout-disclosure.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.4`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`CalloutDisclosureComponent`).

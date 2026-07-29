@@ -14,7 +14,7 @@
 | `label` | BOOLEAN | — |
 | `inlineMessage` | BOOLEAN | — |
 | `tagAI` | BOOLEAN | — |
-| `size` | VARIANT | `M` · `S` |
+| `size` | VARIANT | `M` · `L` |
 | `multiple` | VARIANT | `false` · `true` |
 | `state` | VARIANT | `default` · `hover` · `focus` · `fileHover` · `loading` |
 | `file` | VARIANT | `false` · `true` |

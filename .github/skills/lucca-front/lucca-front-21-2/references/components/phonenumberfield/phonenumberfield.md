@@ -37,7 +37,14 @@ import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-in
 ## Related files
 
 - 📝 [Code & implementation](./phonenumberfield.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./phonenumberfield.design.md)
 - 🎯 [Figma design tokens](./phonenumberfield.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-forms-fields-phonenumberfield-angular--docs)
-- 📋 [Changelog](./phonenumberfield.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`PhoneNumberInputComponent`).

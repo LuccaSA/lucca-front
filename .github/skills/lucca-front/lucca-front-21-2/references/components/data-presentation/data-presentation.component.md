@@ -8,13 +8,42 @@ Mots-clés : donnée, lecture seule, readonly
 
 Component selector : `lu-data-presentation`
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { DataPresentationComponent } from '@lucca-front/ng/form-field';
+```
+
+```html
+<lu-data-presentation label="Label">Value</lu-data-presentation>
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
-| Size | [html-size.md](./stories/html-size.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/form-field';
+@forward '@lucca-front/scss/src/components/presentation';
+```
+
+```html
+<dl class="presentation">
+	<dt class="presentation-term">Label</dt>
+	<dd class="presentation-definition">Value</dd>
+</dl>
+```
+
+### Size
+
+```css
+@forward '@lucca-front/scss/src/components/form-field';
+@forward '@lucca-front/scss/src/components/presentation';
+```
+
+```html
+<dl class="presentation mod-S">
+	<dt class="presentation-term">Label</dt>
+	<dd class="presentation-definition">Value</dd>
+</dl>
+```

@@ -39,7 +39,14 @@ import { RadioGroupInputComponent, RadioComponent } from '@lucca-front/ng/forms'
 ## Related files
 
 - 📝 [Code & implementation](./radiofield.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./radiofield.design.md)
 - 🎯 [Figma design tokens](./radiofield.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-forms-fields-radiofield-angular--docs)
-- 📋 [Changelog](./radiofield.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`RadioGroupInputComponent`, `RadioComponent`).

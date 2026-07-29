@@ -23,4 +23,11 @@ import { CodeComponent } from '@lucca-front/ng/code';
 - 📝 [Code & implementation](./code.component.md)
 
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-texts-code-angular-basic--docs)
-- 📋 [Changelog](./code.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`CodeComponent`).

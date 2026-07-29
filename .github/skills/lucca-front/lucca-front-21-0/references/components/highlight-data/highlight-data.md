@@ -36,7 +36,14 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 ## Related files
 
 - 📝 [Code & implementation](./highlight-data.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./highlight-data.design.md)
 - 🎯 [Figma design tokens](./highlight-data.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.0.5/storybook/?path=/docs/documentation-structure-highlight-data-angular-basic--docs)
-- 📋 [Changelog](./highlight-data.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.0.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`HighlightDataComponent`).

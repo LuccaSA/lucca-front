@@ -24,14 +24,26 @@ Si App Layout importe des webComponents (comme Lucca Banner), il est nécessaire
 
 Angular repose actuellement sur `window.scrollTo()` pour accéder au contenu cible d'une ancre. Le scroll d'App layout n'étant pas positionné sur le `body`, il est nécessaire de surcharger ce comportement pour retrouver le fonctionnement natif.
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
+```
 
 ## HTML/CSS
 
 L'ajout manuel d'un ID `main-content` sur `<lu-main-layout>` est nécessaire afin de s'assurer du bon fonctionnement de Skip links.
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/app-layout';
+```
+
+```html
+<div class="appLayout">
+	<div class="appLayout-banner">banner</div>
+	<div class="appLayout-navSide">navSide</div>
+	<div class="appLayout-main">main</div>
+</div>
+```

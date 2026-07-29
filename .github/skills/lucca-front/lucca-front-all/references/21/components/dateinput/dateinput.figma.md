@@ -15,7 +15,7 @@
 | `inlineMessage` | BOOLEAN | — |
 | `clearable` | BOOLEAN | — |
 | `size` | VARIANT | `M` · `S` |
-| `mode` | VARIANT | `day` · `month` · `year` |
+| `mode` | VARIANT | `day` · `week` · `month` · `year` |
 | `state` | VARIANT | `default` · `hover` · `focus` · `disabled / readonly` |
 | `content` | VARIANT | `filled` · `placeholder` |
 | `feedback` | VARIANT | `–` · `critical` · `warning` · `success` |

@@ -16,4 +16,6 @@
 | `filtersButton` | BOOLEAN | — |
 | `applyButton` | BOOLEAN | — |
 | `results` | BOOLEAN | — |
+| `folder` | BOOLEAN | — |
+| `segmentedControl` | BOOLEAN | — |
 | `type` | VARIANT | `full` · `viewsOnly` · `filterPillsOnly` · `rightAlignViews` |

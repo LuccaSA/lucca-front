@@ -40,7 +40,14 @@ import { ProgressStepperStepComponent, ProgressStepperComponent } from '@lucca-f
 ## Related files
 
 - 📝 [Code & implementation](./progress-stepper.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./progress-stepper.design.md)
 
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-progress-stepper-angular-basic--docs)
-- 📋 [Changelog](./progress-stepper.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.2.0
+
+Composant introduit (`ProgressStepperStepComponent`, `ProgressStepperComponent`).

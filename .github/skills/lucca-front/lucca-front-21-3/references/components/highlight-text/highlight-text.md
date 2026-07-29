@@ -27,4 +27,11 @@ import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 - 📝 [Code & implementation](./highlight-text.component.md)
 
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-texts-highlight-text-angular-basic--docs)
-- 📋 [Changelog](./highlight-text.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.3.0
+
+Composant introduit (`HighlightTextComponent`).

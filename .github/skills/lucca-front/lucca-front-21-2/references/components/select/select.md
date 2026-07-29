@@ -24,4 +24,11 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 - 📝 [Code & implementation](./select.component.md)
 
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-forms-api-select--docs)
-- 📋 [Changelog](./select.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`LuSelectInputComponent`).

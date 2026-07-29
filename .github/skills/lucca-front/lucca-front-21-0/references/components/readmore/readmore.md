@@ -28,4 +28,11 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 
 - 🎯 [Figma design tokens](./readmore.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.0.5/storybook/?path=/docs/documentation-texts-readmore-angular-ai--docs)
-- 📋 [Changelog](./readmore.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.0.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`ReadMoreComponent`).

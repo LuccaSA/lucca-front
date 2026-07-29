@@ -36,7 +36,49 @@ import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 ## Related files
 
 - 📝 [Code & implementation](./software-icon.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./software-icon.design.md)
 - 🎯 [Figma design tokens](./software-icon.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.4/storybook/?path=/docs/documentation-structure-software-icon-angular-basic--docs)
-- 📋 [Changelog](./software-icon.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.4`. Les versions sans changement d'API sont omises.
+
+### 21.1.4
+
+~ `icon` : // Time and Activities
+	'absences' | 'timesheet' | 'office' | 'projects' | 'shifts' | // Talent Management
+	'performance' | 'engagement' | 'training' | 'recruitment' | 'mood' | // Employee Administration
+	'analytics' | 'employee-administration' | 'shared-documents' | 'faces' | // Spend Management
+	'business-expenses' | 'invoices' | 'payment-methods' | 'accounting-assistant' | // Compensation and Benefits
+	'compensation' | 'payslip' | 'benefits' | 'payroll-assistant' | // Lucca
+
+	'administration' | 'cloud-control' | 'lucca' → // Time and Activities
+	'absences' | 'timesheet' | 'office' | 'projects' | 'shifts' | // Talent Management
+	'performance' | 'engagement' | 'training' | 'recruitment' | 'mood' | // Employee Administration
+	'analytics' | 'employee-administration' | 'shared-documents' | 'faces' | // Spend Management
+	'business-expenses' | 'invoices' | 'payment-methods' | 'accounting-assistant' | 'certified-einvoicing-platform' | // Compensation and Benefits
+	'compensation' | 'payslip' | 'benefits' | 'payroll-assistant' | // Lucca
+
+	'administration' | 'cloud-control' | 'lucca'
+
+### 21.1.1
+
+~ `icon` : // Time and Activities
+	'absences' | 'timesheet' | 'office' | 'projects' | 'planning' | // Talent Management
+	'perfomance' | 'engagement' | 'training' | 'recruitment' | // Employee Administration
+	'analytics' | 'employee-administration' | 'shared-documents' | // Spend Management
+	'business-expenses' | 'invoices' | 'payment-methods' | 'accounting-assistant' | // Compensation and Benefits
+	'compensation' | 'payslip' | 'benefits' | 'payroll-assistant' | // Lucca
+	'mood' | 'faces' | 'administration' | 'cloud-control' | 'lucca' → // Time and Activities
+	'absences' | 'timesheet' | 'office' | 'projects' | 'shifts' | // Talent Management
+	'performance' | 'engagement' | 'training' | 'recruitment' | 'mood' | // Employee Administration
+	'analytics' | 'employee-administration' | 'shared-documents' | 'faces' | // Spend Management
+	'business-expenses' | 'invoices' | 'payment-methods' | 'accounting-assistant' | // Compensation and Benefits
+	'compensation' | 'payslip' | 'benefits' | 'payroll-assistant' | // Lucca
+
+	'administration' | 'cloud-control' | 'lucca'
+
+### 21.1.0
+
+Composant introduit (`SoftwareIconComponent`).

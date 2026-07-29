@@ -4,6 +4,13 @@
 
 ## Angular
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { provideHttpClient } from '@angular/common/http';
+import { FileDropzoneComponent } from '@lucca-front/ng/file-upload';
+```
+
+```html
+<lu-file-dropzone />
+```

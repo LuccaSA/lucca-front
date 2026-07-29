@@ -13,6 +13,6 @@
 |----------|------|--------|
 | `label` | TEXT | — |
 | `clearable` | BOOLEAN | — |
-| `type` | VARIANT | `simpleSelect` · `multiplteSelect` · `datePicker` · `dateRangePicker` · `checkbox` · `filter button` |
+| `type` | VARIANT | `simpleSelect` · `multiplteSelect` · `datePicker` · `dateRangePicker` · `checkbox` · `filter button` · `folder` |
 | `state` | VARIANT | `default` · `hover` · `active` · `focus` · `opened` · `typing` · `disabled` |
 | `content` | VARIANT | `empty` · `filled` · `multiSelectfilled` |

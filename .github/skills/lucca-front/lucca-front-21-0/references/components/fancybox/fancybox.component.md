@@ -4,12 +4,41 @@
 
 ## Angular
 
-| Example | File |
-|---------|------|
-| Box basic | [angular-box-basic.md](./stories/angular-box-basic.md) |
+### Box basic
+
+```js
+import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
+```
+
+```html
+<lu-fancy-box
+	backgroundLeft="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg"
+	backgroundRight="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg"
+	foreground="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg"
+>
+	Content
+</lu-fancy-box>
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Box basic | [html-box-basic.md](./stories/html-box-basic.md) |
+### Box basic
+
+```css
+@forward '@lucca-front/scss/src/components/fancy-box';
+```
+
+```html
+<div
+	class="fancyBox"
+	[attr.style]="'
+	--components-fancyBox-background-left: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg);
+	--components-fancyBox-background-right: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg);
+	--components-fancyBox-foreground: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg);'"
+>
+	<div class="fancyBox-content">
+		Fancy box content
+		<div class="fancyBox-content-foreground"></div>
+	</div>
+</div>
+```

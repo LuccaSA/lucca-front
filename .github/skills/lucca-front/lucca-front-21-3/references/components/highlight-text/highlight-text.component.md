@@ -4,14 +4,44 @@
 
 ## Angular
 
-| Example | File |
-|---------|------|
-| Text | [angular-text.md](./stories/angular-text.md) |
+### Text
+
+```js
+import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Text palettes | [html-text-palettes.md](./stories/html-text-palettes.md) |
-| Text sizes | [html-text-sizes.md](./stories/html-text-sizes.md) |
-| Text | [html-text.md](./stories/html-text.md) |
+### Text palettes
+
+```css
+@forward '@lucca-front/scss/src/components/highlight-text';
+```
+
+### Text sizes
+
+```css
+@forward '@lucca-front/scss/src/components/highlight-text';
+```
+
+```html
+<div style="font: var(--pr-t-font-heading-1)">
+	Lorem
+	<strong class="highlightText">ipsum</strong>
+	dolor
+</div>
+```
+
+### Text
+
+```css
+@forward '@lucca-front/scss/src/components/highlight-text';
+```
+
+```html
+<h1>
+	Lorem
+	<strong class="highlightText">ipsum</strong>
+	dolor
+</h1>
+```

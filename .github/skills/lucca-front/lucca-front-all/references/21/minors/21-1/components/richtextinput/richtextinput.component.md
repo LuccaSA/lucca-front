@@ -98,6 +98,10 @@ Attention: si l'outil s'abonne à des évènements Lexical, il est faut penser �
 
 Il est possible d'ajouter des formateurs personnalisés pour le `lu-rich-text-input`. Pour cela, il faut créer une classe qui implémente l'interface `RichTextFormatter`.
 
-| Example | File |
-|---------|------|
-| Text input | [angular-text-input.md](./stories/angular-text-input.md) |
+### Text input
+
+```js
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { RichTextInputComponent, RichTextInputToolbarComponent } from '@lucca-front/ng/forms/rich-text-input';
+import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-textplain-text';
+```

@@ -32,7 +32,14 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 ## Related files
 
 - 📝 [Code & implementation](./clear.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./clear.design.md)
 - 🎯 [Figma design tokens](./clear.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.0.5/storybook/?path=/docs/documentation-texts-clear-angular-basic--docs)
-- 📋 [Changelog](./clear.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.0.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`ClearComponent`).

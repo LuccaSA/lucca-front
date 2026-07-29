@@ -37,4 +37,11 @@ import { FormLabelComponent } from '@lucca-front/ng/form-label';
 - 📝 [Code & implementation](./form-label.component.md)
 
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-forms-form-label-angular-basic--docs)
-- 📋 [Changelog](./form-label.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.2.0
+
+Composant introduit (`FormLabelComponent`).

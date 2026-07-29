@@ -34,11 +34,12 @@ Compose le chemin du fichier à partir du slug du composant. **Ne devine jamais 
 
 | Fichier | Chemin |
 |---------|--------|
-| API Angular | `./references/components/<slug>/<slug>.md` |
-| Exemples (Angular + HTML) | `./references/components/<slug>/<slug>.component.md` |
-| Design (do/don't, usage) | `./references/components/<slug>/design/_index.md` |
+| API Angular + Changelog | `./references/components/<slug>/<slug>.md` |
+| Exemples (Angular + HTML, stories incluses) | `./references/components/<slug>/<slug>.component.md` |
+| Design (do/don't, usage) | `./references/components/<slug>/<slug>.design.md` |
 | Figma (variantes, node IDs) | `./references/components/<slug>/<slug>.figma.md` |
-| Changelog | `./references/components/<slug>/<slug>.changelog.md` |
+
+Le changelog du composant est la **dernière section `## Changelog`** du fichier API `<slug>.md` (diff structurel cumulatif + notes de release).
 
 ### Types partagés
 
@@ -75,23 +76,23 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 
 | Cas d'usage | Consulter |
 |-------------|-----------|
-| Écrire du code Angular | API (.md) → Exemples (.component.md) → Changelog |
+| Écrire du code Angular | API (.md) → Exemples (.component.md) → section `## Changelog` du .md |
 | Intégrer depuis maquette Figma | Figma (.figma.md) → Tokens → Guidelines dev UI |
-| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (design/_index.md) |
+| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (`<slug>.design.md`) |
 | Review de code | API → Guidelines dev UI → Contenu (si textes) → Patterns (si UX) |
 | Conventions de rédaction | Contenu (dossier `content/`) |
 | Design patterns | Patterns (dossier `patterns/`) |
 | Tokens CSS | Tokens (dossier `tokens/`) |
 | Mixins / animations SCSS | Outils (dossier `tools/`) |
 | Composant déprécié | `./references/documentation/deprecated/deprecated.md` |
-| Monter de version | `./references/migrations.md` + le `<slug>.changelog.md` de chaque composant touché |
+| Monter de version | `./references/migrations.md` + la section `## Changelog` du `<slug>.md` de chaque composant touché |
 | Projet sur un patch antérieur à 21.1.4 / comportement inattendu sur un patch | `./fixes/<M-m-p>.md` |
 
 ## 4. Workflow Code
 
 1. Lis l'API du composant (`<slug>.md`) — selectors, inputs, types exacts.
-2. Consulte les exemples (`<slug>.component.md`).
-3. Vérifie le changelog si comportement inattendu.
+2. Consulte les exemples (`<slug>.component.md`) — chaque story est une section `###`.
+3. Vérifie la section `## Changelog` (fin du `<slug>.md`) si comportement inattendu.
 
 ⚠️ Ne te fie **jamais** à ta mémoire pour les noms de propriétés ou types. Seul le `.md` fait foi.
 
@@ -99,7 +100,7 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 
 1. Lis le fichier Figma (`<slug>.figma.md`) — variantes, node IDs, liens Figma.
 2. Utilise les **noms Figma** (pas Angular) pour les propriétés. Ils peuvent différer.
-3. Pour les guidelines visuelles → `design/_index.md`.
+3. Pour les guidelines visuelles → `<slug>.design.md`.
 
 ⚠️ Les `.figma.md` reflètent l'état actuel de Figma.
 

@@ -5,4 +5,3 @@
 - 📝 [Code & implementation](./numbers.component.md)
 
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-toolbox-numbers-basic--docs)
-- 📋 [Changelog](./numbers.changelog.md)

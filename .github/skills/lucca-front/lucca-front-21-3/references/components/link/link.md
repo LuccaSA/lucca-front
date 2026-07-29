@@ -37,7 +37,25 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 ## Related files
 
 - 📝 [Code & implementation](./link.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./link.design.md)
 - 🎯 [Figma design tokens](./link.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
-- 📋 [Changelog](./link.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.3.0
+
+`LinkComponent` :
+  + `hiddenIcon` : boolean
++ token `LU_LINK_INSTANCE` : boolean
+
+### 21.1.0
+
+`LinkComponent` :
+  + `intl` : unknown
+
+### 21.0.0
+
+Composant introduit (`LinkComponent`, `LuRouterLink`).

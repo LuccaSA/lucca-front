@@ -95,7 +95,30 @@ import { DialogContentComponent, DialogFooterComponent, DialogHeaderAction, Dial
 ## Related files
 
 - 📝 [Code & implementation](./dialog.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./dialog.design.md)
 - 🎯 [Figma design tokens](./dialog.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-overlays-dialog-basic--docs)
-- 📋 [Changelog](./dialog.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.2.4
+
++ directive `DialogHeaderSubtitle` ([dialogHeaderSubtitle])
+
+### 21.2.0
+
+`DialogComponent` :
+  + `fancyIllustration` : 'approval' | 'checklist' | 'email' | 'install' | 'mapping' | 'save' | 'users' | 'welcome' | 'payment-card'
+  + `fancyIllustrationUrl` : string | null
+
+### 21.1.0
+
+`DialogHeaderComponent` :
+  + `intl` : unknown
++ provider `provideDialogRoutingReuseStrategy` : (): EnvironmentProviders
+
+### 21.0.0
+
+Composant introduit (`DialogContentComponent`, `DialogFooterComponent`, `DialogHeaderAction`, `DialogHeaderComponent`, `DialogRoutingContainerComponent`, `DialogComponent`, `DialogCloseDirective`, `DialogDismissDirective`, `DialogOpenDirective`).

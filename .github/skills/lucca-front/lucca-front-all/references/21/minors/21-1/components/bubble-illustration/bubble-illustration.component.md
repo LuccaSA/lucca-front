@@ -6,12 +6,24 @@
 
 Component selector : `lu-bubble-illustration`
 
-| Example | File |
-|---------|------|
-| Basic | [angular-basic.md](./stories/angular-basic.md) |
+### Basic
+
+```js
+import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
+```
 
 ## HTML/CSS
 
-| Example | File |
-|---------|------|
-| Basic | [html-basic.md](./stories/html-basic.md) |
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/bubble-illustration';
+```
+
+```html
+<div
+	class="bubbleIllustration"
+	aria-hidden="true"
+	[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/anniversary.svg' | luSafeExternalSvg"
+></div>
+```

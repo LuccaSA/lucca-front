@@ -52,4 +52,11 @@ import { SortableListItemComponent, SortableListComponent } from '@lucca-front/n
 
 - 🎯 [Figma design tokens](./sortable-list.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-listings-sortable-list-angular-basic--docs)
-- 📋 [Changelog](./sortable-list.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`SortableListItemComponent`, `SortableListComponent`).

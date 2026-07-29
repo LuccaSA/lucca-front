@@ -32,7 +32,14 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 ## Related files
 
 - 📝 [Code & implementation](./footer.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./footer.design.md)
 - 🎯 [Figma design tokens](./footer.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.1.4/storybook/?path=/docs/documentation-structure-cards-footer--docs)
-- 📋 [Changelog](./footer.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.1.4`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`FooterComponent`).

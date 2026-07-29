@@ -113,7 +113,14 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 ## Related files
 
 - 📝 [Code & implementation](./data-table.component.md)
-- 🎨 [Design guidelines](./design/_index.md)
+- 🎨 [Design guidelines](./data-table.design.md)
 - 🎯 [Figma design tokens](./data-table.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.0.5/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
-- 📋 [Changelog](./data-table.changelog.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.0.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`DataTableBodyComponent`, `DataTableRowCellHeaderComponent`, `DataTableRowCellComponent`, `DataTableFootComponent`, `DataTableHeadComponent`, `DataTableRowComponent`, `DataTableComponent`).
