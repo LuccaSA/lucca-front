@@ -9,13 +9,15 @@ Ce skill guide la migration d'un projet **consommateur** de `@lucca-front/ng` de
 
 Principe directeur : **les schematics font le mécanique, ce skill fait le résiduel contextuel.** Ne jamais réimplémenter à la main ce qu'un schematic couvre déjà — lancer le schematic, puis traiter uniquement ce qu'il laisse.
 
+Utiliser `TodoWrite` pour suivre les étapes 0 à 7 ci-dessous comme une todo list : chaque étape devient une tâche, marquée `completed` au fur et à mesure — cette migration touche plusieurs fichiers sur plusieurs passes et ne doit pas perdre le fil en cours de route.
+
 ---
 
 ## Étape 0 — Pré-requis : vérifier la version Angular du projet
 
 Cette migration (Lucca Front 22.x ↔ Angular 22) suppose que le projet consommateur est **déjà sur Angular 22**. Avant de lancer quoi que ce soit :
 
-1. Vérifier la version installée d'`@angular/core` dans le `package.json` du projet (ou via `mcp__angular-cli__list_projects` / `ng version`).
+1. Vérifier la version installée d'`@angular/core` : lire le `package.json` du projet, ou passer par `mcp__angular-cli__list_projects` (découverte du workspace) puis `mcp__angular-cli__get_best_practices` si des questions de compatibilité Angular 22 se posent en cours de route.
 2. Si le projet est sur une version d'Angular **antérieure à 22** : **arrêter immédiatement le skill, ne pas exécuter la suite.**
 	- Ne lancer aucun schematic (ni `@lucca-front/ng:palettes`, ni les schematics Angular type `signal-input-migration`) — ils ne sont pas garantis compatibles et pourraient corrompre le projet.
 	- Informer l'utilisateur que ce skill ne s'applique pas tant que le projet n'est pas sur Angular 22, et lui conseiller de traiter d'abord, de son côté, la migration Angular vers la version 22 (`ng update @angular/core@22 @angular/cli@22`).
@@ -26,7 +28,7 @@ Cette migration (Lucca Front 22.x ↔ Angular 22) suppose que le projet consomma
 
 ## Étape 1 — Orchestration des schematics (à faire en premier)
 
-Lancer les schematics officiels **avant** toute retouche manuelle. Ils couvrent le gros du remplacement palettes de façon fiable et testée.
+Lancer les schematics officiels **avant** toute retouche manuelle, via l'outil Bash. Ils couvrent le gros du remplacement palettes de façon fiable et testée.
 
 ```bash
 # Palettes : classes .palette-*, .mod-grey, .icon-color-*, utilitaires u-text*/pr-u-*,
@@ -46,7 +48,7 @@ Une fois les schematics passés, il reste les cas ci-dessous que les schematics 
 
 ## Étape 2 — Analyse du résiduel
 
-Scanner le projet migré pour détecter les éléments non pris en charge par le schematic `palettes`, et les refactos de composants :
+Scanner le projet migré pour détecter les éléments non pris en charge par le schematic `palettes`, et les refactos de composants. Privilégier `Grep`/`Glob` pour des recherches ciblées ; pour un projet volumineux ou une recherche exploratoire (motifs multiples, conventions de nommage variées), déléguer le scan à un agent `Explore` plutôt que d'enchaîner les recherches une par une.
 
 1. Chercher dans les `.scss`/`.css` les CSS vars `*-rgb` résiduelles.
 2. Chercher dans les templates les composants `<lu-icon>` avec input `color`.
@@ -63,9 +65,9 @@ Scanner le projet migré pour détecter les éléments non pris en charge par le
 | `lu-single-file-upload` / `lu-multi-file-upload` sans `size` | [FileUpload.md](./references/FileUpload.md) | ✅ Ajouter `size="L"` systématiquement |
 | `lu-single-file-upload` / `lu-multi-file-upload` avec `size="S"` | [FileUpload.md](./references/FileUpload.md) | ✅ Supprimer `size="S"` (devenu redondant) |
 | `<lu-activity-feed-update>` avec contenu direct | [ActivityFeed.md](./references/ActivityFeed.md) | ✅ Ajout d'un niveau |
-| Mutation d'une prop reçue en `readonly` (réassignation, `.push()`/`.sort()`, champ imbriqué) | [StrictSignals.md](./references/StrictSignals.md) | ⚠️ À mettre en valeur — jugement requis, pas toujours bloqué à la compilation |
+| Mutation d'une prop reçue en `readonly` (`.push()`/`.sort()`, champ imbriqué, `Object.assign`) | [Readonly.md](./references/Readonly.md) | ⚠️ À mettre en valeur — jugement requis, **pas bloqué à la compilation** |
 | Override SCSS de `.optionItem` / `.optionItem-value` | [SelectListBox.md](./references/SelectListBox.md) | ⚠️ Contextuel |
-| Accès TS aux composants LF / refs / mutation d'inputs / `ngOnChanges` | [StrictSignals.md](./references/StrictSignals.md) | ⚠️ Jugement requis |
+| Accès TS aux composants LF / refs / mutation d'inputs / `ngOnChanges` | [Signal.md](./references/Signal.md) | ⚠️ Jugement requis |
 | Classes héritant de LF (`ALuInput`, `ALuSelectInputComponent`, `ILuDateAdapter`…), `.instance` de dialog, `state="null"` sur `lu-progress-bar` | [Strict.md](./references/Strict.md) | ❌ Manuel |
 | Réassignation d'une propriété d'un composant LF (`select.options$ = …`, `ref.optionTpl = …`, mock d'une ref en test) | [Readonly.md](./references/Readonly.md) | ❌ Manuel |
 | Lecture/écriture TS d'un input LF (`select.options = …`, `ref.inputPlaceholder`, `searcher.searchInput.nativeElement`, `url$.next()`) | [Signal.md](./references/Signal.md) | ❌ Manuel |
@@ -94,19 +96,18 @@ Appliquer chaque migration en suivant son fichier de référence :
 
 ## Étape 5 — Modernisation strict / readonly / signaux
 
-Voir [StrictSignals.md](./references/StrictSignals.md).
-
 - **Usage standard** (bindings dans le template) : montée quasi transparente, les schematics Angular s'en chargent.
-- **Usage détourné** (accès TS, refs, mutation d'inputs) : ajustements ciblés (signaux à invoquer avec `()`, `viewChild()` signal, `computed()`/`effect()` au lieu de `ngOnChanges`, clonage des tableaux/objets d'entrée).
+- **Usage détourné** (accès TS, refs, pilotage impératif, sous-classement) : trois références selon l'axe, ci-dessous.
 - **Strict / API nullable** : les `.d.ts` de LF 22 sont émis avec `strictNullChecks` → [Strict.md](./references/Strict.md) (signatures élargies, ordre d'activation des flags, **changements de comportement silencieux** qui ne produisent aucune erreur de compilation).
 - **Propriétés `readonly`** : les propriétés de classe LF ne sont plus réassignables → [Readonly.md](./references/Readonly.md) (ce qui casse, les remèdes, et le critère pour retirer un `readonly` côté LF).
 - **Inputs / outputs / refs en signaux** : inventaire des membres convertis, renommés ou supprimés par entrypoint → [Signal.md](./references/Signal.md).
+- Si un blocage nécessite un arbitrage qui dépasse le résiduel documenté (ex. retirer un `readonly` côté composant LF), ne pas trancher seul : utiliser `AskUserQuestion` pour présenter les options à l'utilisateur plutôt que de contourner localement (`as any`, etc.).
 
 ---
 
 ## Étape 6 — Validation
 
-1. Lancer `ng build` (ou `tsc --noEmit`) pour vérifier la compilation.
+1. Lancer `ng build` (ou `tsc --noEmit`) via Bash pour vérifier la compilation.
 2. Consulter les `scripts` du `package.json` du projet consommateur et lancer ceux pertinents pour valider la migration (build, lint, tests unitaires, tests e2e/Storybook…) — ne pas se limiter à `ng build` si d'autres commandes de vérification existent.
 
 ---

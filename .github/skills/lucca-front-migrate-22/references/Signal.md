@@ -3,7 +3,9 @@
 > Source : PR **#4737 « core(signal): last module's »** (`e2f0f90d8`, 101 fichiers) — dernier lot de migration : `@Input()` et setters d'input → `input()`, `@Output()` → `output()` / `outputFromObservable()`, `@ViewChild`/`@ContentChild` → `viewChild()` / `contentChild()`, `@HostBinding`/`@HostListener` → métadonnée `host: {}`, et introduction de `syncInputSignal()`.
 > Périmètre : **impact côté projet consommateur**.
 
-Les règles générales de manipulation d'un signal (invoquer avec `()`, `viewChild()` disponible après le 1er change detection, `model()` pour un two-way) sont dans [StrictSignals.md](./StrictSignals.md). Ce fichier liste **ce qui a changé, où**, et les motifs qui ne compilent plus.
+**Usage standard, rien à faire** : si le projet ne fait que binder dans le template (`[input]="…"`, `(outputChange)="…"`, `#ref` pour le layout), la montée est transparente — le template fonctionne à l'identique et les outputs se souscrivent comme avant. Ce fichier ne concerne que l'**usage détourné** : accès TS aux composants LF, refs de vue, pilotage impératif, sous-classement.
+
+Rappels sur les signaux : un signal se lit en l'**invoquant** (`ref.x()`) — y compris pour un template ref exportée (`#x="luX"` → `x.value()`, dans le template aussi) ; un `viewChild()` n'a de valeur qu'**après le premier change detection** ; un `InputSignal` ne s'assigne pas (passer par un `model()` / two-way ou un `linkedSignal` exposé, cf. §4).
 
 ---
 
@@ -48,6 +50,8 @@ Les valeurs par défaut des `input()` ont été alignées sur celles des classes
 | **Ref de vue** : `ref.searchInput.nativeElement`, `ref.content` | `ref.searchInput()?.nativeElement` (§6) |
 | **Output devenu `output()`** : `searcher.clueChange.pipe(…)` | `OutputEmitterRef` n'est pas un `Observable` : utiliser `.subscribe()`, ou `outputToObservable()` pour retrouver un flux |
 | **Input devenu requis** : `<ng-template luOptionGroup>` sans `[luOptionGroupBy]` | Erreur **runtime** `NG0950`, pas une erreur de compilation (§7) |
+| **Réagir à un changement d'input via `ngOnChanges`** dans une sous-classe | Un `input()` ne déclenche plus `ngOnChanges` : remplacer par `computed()` / `effect()` (ou `ɵeffectWithDeps` / `syncInputSignal` pour alimenter une propriété plaine) |
+| **Muter un tableau/objet passé en entrée** : `items.push()`, `items.sort()` en place | Les entrées sont typées `ReadonlyArray` : cloner (`[...items].sort()`) et gérer la source de vérité en amont |
 
 ---
 

@@ -26,9 +26,5 @@
   "Strict": {
     "description": "strictNullChecks activé sur les .d.ts publiés (PR #4497 « strict them all ») : value/CVA des inputs et selects en T | null, LuDialogRef.instance en C | null, popup/modal onOpen/onClose en D | undefined, ILuDateAdapter.parse en D | undefined, inputs élargis (progress-bar state=\"null\" ne compile plus, form-field width, segmented-control-tabs active, fancy-box foreground, time step), PortalDirective<T extends object>, plus une liste de changements de comportement silencieux (canClose avalé, setValue(null) ignoré, date invalide non écrite, popover garde muette).",
     "category": "Breaking22"
-  },
-  "StrictSignals": {
-    "description": "Modernisation LF 22, mécanique signaux uniquement : ref.value → ref.value(), viewChild() signal, InputSignal non assignable (model()/two-way), ngOnChanges → computed()/effect(), tableaux d'entrée ReadonlyArray à cloner. La nullabilité de l'API et les flags strict sont dans Strict ; les propriétés de classe non réassignables dans Readonly.",
-    "category": "Breaking22"
   }
 }
