@@ -7,6 +7,8 @@ description: "Skill de migration vers Lucca Front 22 (breaking release). Charge 
 
 Ce skill guide la migration d'un projet **consommateur** de `@lucca-front/ng` de la version **21.x** vers **22.x** (release breaking).
 
+**Périmètre — l'objectif unique est que le code existant continue de fonctionner comme avant.** C'est une migration à iso-comportement et iso-rendu : on rétablit ce que la montée en LF 22 a cassé, rien de plus. Tout le reste est hors périmètre — pas de modernisation d'un code qui marche, pas de refacto d'opportunité, pas d'amélioration au passage, pas de nouvelle fonctionnalité. Si un besoin de ce type apparaît, le signaler dans le rapport final au lieu de le faire.
+
 Principe directeur : **les schematics font le mécanique, ce skill fait le résiduel contextuel.** Ne jamais réimplémenter à la main ce qu'un schematic couvre déjà — lancer le schematic, puis traiter uniquement ce qu'il laisse.
 
 Utiliser `TodoWrite` pour suivre les étapes 0 à 7 ci-dessous comme une todo list : chaque étape devient une tâche, marquée `completed` au fur et à mesure — cette migration touche plusieurs fichiers sur plusieurs passes et ne doit pas perdre le fil en cours de route.
@@ -94,21 +96,31 @@ Appliquer chaque migration en suivant son fichier de référence :
 
 ---
 
-## Étape 5 — Modernisation strict / readonly / signaux
+## Étape 5 — Adaptation strict / readonly / signaux (pilotée par les erreurs)
 
-- **Usage standard** (bindings dans le template) : montée quasi transparente, les schematics Angular s'en chargent.
-- **Usage détourné** (accès TS, refs, pilotage impératif, sous-classement) : trois références selon l'axe, ci-dessous.
-- **Strict / API nullable** : les `.d.ts` de LF 22 sont émis avec `strictNullChecks` → [Strict.md](./references/Strict.md) (signatures élargies, ordre d'activation des flags, **changements de comportement silencieux** qui ne produisent aucune erreur de compilation).
-- **Propriétés `readonly`** : les propriétés de classe LF ne sont plus réassignables → [Readonly.md](./references/Readonly.md) (ce qui casse, les remèdes, et le critère pour retirer un `readonly` côté LF).
-- **Inputs / outputs / refs en signaux** : inventaire des membres convertis, renommés ou supprimés par entrypoint → [Signal.md](./references/Signal.md).
-- Si un blocage nécessite un arbitrage qui dépasse le résiduel documenté (ex. retirer un `readonly` côté composant LF), ne pas trancher seul : utiliser `AskUserQuestion` pour présenter les options à l'utilisateur plutôt que de contourner localement (`as any`, etc.).
+**Règle de cette étape : ne modifier du code que si c'est nécessaire et bloquant.** « Bloquant » = une erreur de **build** (`ng build` / `tsc --noEmit`) ou de **lint** causée par la montée en LF 22. Le but n'est pas de moderniser le code vers les signaux, c'est de le remettre en état de marche à iso-comportement : un appel impératif qui compile toujours reste tel quel, même s'il existe désormais une écriture plus idiomatique.
+
+Marche à suivre :
+
+1. **Lancer le build (et le lint) d'abord**, avant toute retouche — c'est lui qui définit la liste de travail. Voir Étape 6 pour les commandes.
+2. **Pour chaque erreur remontée**, identifier l'axe et n'ouvrir que la référence correspondante :
+	- **Strict / API nullable** — les `.d.ts` de LF 22 sont émis avec `strictNullChecks` → [Strict.md](./references/Strict.md) (signatures élargies, ordre d'activation des flags).
+	- **Propriétés `readonly`** — les propriétés de classe LF ne sont plus réassignables → [Readonly.md](./references/Readonly.md).
+	- **Inputs / outputs / refs en signaux** — inventaire des membres convertis, renommés ou supprimés par entrypoint → [Signal.md](./references/Signal.md).
+3. **Corriger au plus juste** : la modification minimale qui lève l'erreur, dans le fichier qui la porte. Ne pas élargir au reste du fichier ni aux fichiers voisins qui compilent.
+4. **Ne pas contourner** : jamais de `as any`, `!`, `@ts-ignore` ni de `eslint-disable` pour faire taire une erreur. Si le blocage nécessite un arbitrage qui dépasse le résiduel documenté (ex. retirer un `readonly` côté composant LF), utiliser `AskUserQuestion` pour présenter les options plutôt que de trancher seul.
+
+**Ce qui ne casse pas le build ne se corrige pas ici, mais se signale** à l'Étape 7 — c'est le cas des pièges silencieux : mutations d'un objet/tableau reçu (`.push()`, `.sort()`, champ imbriqué, `Object.assign`) et changements de comportement liés à `strictNullChecks` qui ne produisent **aucune** erreur de compilation. Les lister comme « à vérifier manuellement », avec fichier et ligne, sans y toucher.
+
+L'usage standard (bindings dans le template) est quasi transparent : les schematics Angular s'en chargent, il n'y a normalement rien à faire à la main.
 
 ---
 
 ## Étape 6 — Validation
 
-1. Lancer `ng build` (ou `tsc --noEmit`) via Bash pour vérifier la compilation.
+1. Lancer `ng build` (ou `tsc --noEmit`) via Bash pour vérifier la compilation. C'est aussi la commande qui alimente l'Étape 5 : boucler Étape 5 → Étape 6 jusqu'à ce qu'il ne reste plus d'erreur imputable à LF 22.
 2. Consulter les `scripts` du `package.json` du projet consommateur et lancer ceux pertinents pour valider la migration (build, lint, tests unitaires, tests e2e/Storybook…) — ne pas se limiter à `ng build` si d'autres commandes de vérification existent.
+3. Distinguer, dans les erreurs restantes, celles **causées par la montée LF 22** (à corriger) de celles **préexistantes** (à signaler à l'Étape 7, sans les corriger — hors périmètre).
 
 ---
 
@@ -119,4 +131,7 @@ Produire un rapport structuré :
 - **Migrations automatiques** (schematics lancés, fichiers modifiés) — et, si le schematic `palettes` a été refusé à l'Étape 1, le rappeler explicitement comme reste à faire dans une PR dédiée.
 - **Migrations manuelles réalisées** (résiduel palettes, refactos composants).
 - **Cas nécessitant une décision humaine** : `*-rgb` avec opacité, overrides `.optionItem` complexes, usages détournés en TS.
+- **Pièges silencieux à vérifier manuellement** (détectés mais volontairement non corrigés, car non bloquants) : mutations d'un objet/tableau reçu, changements de comportement liés à `strictNullChecks` — avec fichier et ligne.
+- **Erreurs préexistantes** rencontrées au build/lint mais non imputables à LF 22 : listées, non corrigées.
+- **Pistes hors périmètre** repérées en chemin (modernisation, refacto, dette) : listées comme suggestions pour plus tard, jamais appliquées dans cette migration.
 - **Récapitulatif** : nombre d'occurrences par catégorie, fichiers touchés.
