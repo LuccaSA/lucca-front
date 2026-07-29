@@ -6,10 +6,9 @@
 {{{overviewContent}}}
 
 {{/if}}
-## Sections
-
-| Section | Description | File |
-|---------|-------------|------|
 {{#each sections}}
-| {{title}} | {{#if description}}{{description}}{{else}}—{{/if}} | [{{fileSlug}}.md](./{{fileSlug}}.md) |
+# {{title}}
+
+{{{content}}}
+
 {{/each}}

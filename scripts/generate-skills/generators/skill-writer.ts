@@ -11,12 +11,10 @@ const SKILLS_BASE = 'lucca-front';
  * ├── SKILL.md
  * ├── references/                        ← content of the LATEST published patch of the minor
  * │   ├── components/<slug>/
- * │   │   ├── <slug>.md
- * │   │   ├── <slug>.component.md
- * │   │   ├── <slug>.figma.md
- * │   │   ├── <slug>.changelog.md
- * │   │   ├── design/{_index.md, <section>.md}
- * │   │   └── stories/<fileSlug>.md
+ * │   │   ├── <slug>.md                  (API + trailing ## Changelog section)
+ * │   │   ├── <slug>.component.md        (implementation notes + every story inline)
+ * │   │   ├── <slug>.design.md           (all ZH design sections inline)
+ * │   │   └── <slug>.figma.md
  * │   ├── types/<TypeName>.md
  * │   ├── documentation/<category>/<file>.md
  * │   ├── tools/<file>.md
@@ -44,8 +42,9 @@ export function versionRoot(skillsDir: string, version: VersionConfig): string {
 }
 
 /**
- * Cleans the component's multi-file subdirectories (design/, stories/, examples/) before a
- * fresh generation, to prevent stale files (e.g. code sections moved to stories).
+ * Cleans stale component files before a fresh generation: legacy multi-file subdirectories
+ * (design/, stories/, examples/ — pre-merge layout) and per-run optional files that would
+ * otherwise linger when their source disappears (<slug>.design.md, legacy <slug>.changelog.md).
  */
 export function cleanVersionDirectory(skillsDir: string, slug: string, version: VersionConfig): void {
 	validateSlug(slug);
@@ -55,6 +54,10 @@ export function cleanVersionDirectory(skillsDir: string, slug: string, version: 
 		if (fs.existsSync(dir)) {
 			fs.rmSync(dir, { recursive: true });
 		}
+	}
+	for (const file of [`${slug}.design.md`, `${slug}.changelog.md`]) {
+		const p = path.join(compDir, file);
+		if (fs.existsSync(p)) fs.rmSync(p);
 	}
 }
 
@@ -68,51 +71,21 @@ export function writeVersionedSkill(skillsDir: string, slug: string, version: Ve
 }
 
 /**
- * Writes the design index.
- * Output: <version>/references/components/<slug>/design/_index.md
+ * Writes the merged design guidelines file.
+ * Output: <version>/references/components/<slug>/<slug>.design.md
  */
-export function writeDesignIndex(skillsDir: string, slug: string, version: VersionConfig, content: string): WriteResult {
+export function writeDesign(skillsDir: string, slug: string, version: VersionConfig, content: string): WriteResult {
 	validateSlug(slug);
-	const designDir = path.join(componentBaseDir(skillsDir, version, slug), 'design');
-	return writeFile(designDir, '_index.md', content);
+	return writeFile(componentBaseDir(skillsDir, version, slug), `${slug}.design.md`, content);
 }
 
 /**
- * Writes an individual design section file.
- * Output: <version>/references/components/<slug>/design/<sectionSlug>.md
- */
-export function writeDesignSection(skillsDir: string, slug: string, version: VersionConfig, sectionSlug: string, content: string): WriteResult {
-	validateSlug(slug);
-	const designDir = path.join(componentBaseDir(skillsDir, version, slug), 'design');
-	return writeFile(designDir, `${sectionSlug}.md`, content);
-}
-
-/**
- * Writes the component page (implementation notes + stories listing).
+ * Writes the component page (implementation notes + every story inline).
  * Output: <version>/references/components/<slug>/<slug>.component.md
  */
 export function writeComponentPage(skillsDir: string, slug: string, version: VersionConfig, content: string): WriteResult {
 	validateSlug(slug);
 	return writeFile(componentBaseDir(skillsDir, version, slug), `${slug}.component.md`, content);
-}
-
-/**
- * Writes an individual story file.
- * Output: <version>/references/components/<slug>/stories/<fileSlug>.md
- */
-export function writeStory(skillsDir: string, slug: string, version: VersionConfig, fileSlug: string, content: string): WriteResult {
-	validateSlug(slug);
-	const storiesDir = path.join(componentBaseDir(skillsDir, version, slug), 'stories');
-	return writeFile(storiesDir, `${fileSlug}.md`, content);
-}
-
-/**
- * Writes the changelog markdown, per component.
- * Output: <version>/references/components/<slug>/<slug>.changelog.md
- */
-export function writeChangelog(skillsDir: string, slug: string, version: VersionConfig, content: string): WriteResult {
-	validateSlug(slug);
-	return writeFile(componentBaseDir(skillsDir, version, slug), `${slug}.changelog.md`, content);
 }
 
 /**

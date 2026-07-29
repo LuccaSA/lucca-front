@@ -21,8 +21,11 @@
  * its version — the override file if present, the base file otherwise. No diff reconstruction.
  *
  * Excluded from overrides (cumulative supersets, entries labeled per version — the base file
- * covers the older minor's content in full): `*.changelog.md` and `migrations.md`. The router
- * instructs to ignore entries newer than the project's version.
+ * covers the older minor's content in full): `migrations.md`, and the trailing `## Changelog`
+ * section of component API files (`components/<slug>/<slug>.md`), which is stripped from both
+ * sides before comparison. The router instructs to ignore entries newer than the project's
+ * version. An API override, when produced, still carries its full file — changelog included,
+ * frozen at the minor's state.
  *
  * Only versioned Storybook URLs are normalized before comparison (decided 2026-07-10): any other
  * difference — typography included — is substantial and produces an override.
@@ -60,7 +63,22 @@ function normalizeVersionedUrls(content: string): string {
 
 /** Cumulative-superset files: fully covered by the base's copy (entries labeled per version). */
 function isCumulativeSuperset(relPath: string): boolean {
-	return relPath === 'migrations.md' || relPath.endsWith('.changelog.md');
+	return relPath === 'migrations.md';
+}
+
+/** Whether `relPath` is a component API file (components/<slug>/<slug>.md). */
+function isComponentApiFile(relPath: string): boolean {
+	const m = relPath.match(/^components\/([^/]+)\/([^/]+)\.md$/);
+	return !!m && m[1] === m[2];
+}
+
+/**
+ * Strips the trailing `## Changelog` section of a component API file — cumulative content
+ * (entries labeled per version) that must not count as a substantial difference.
+ */
+function stripTrailingChangelog(content: string): string {
+	const idx = content.indexOf('\n## Changelog\n');
+	return idx === -1 ? content : content.slice(0, idx);
 }
 
 /** Recursively lists file paths (relative) under `dir`. */
@@ -153,8 +171,12 @@ function writeMajor(skillsDir: string, aggRoot: string, major: number, group: Mi
 				// Present in this minor, absent from the base → removed in a later minor. Keep in full.
 				removedLater.push(rel);
 			} else {
-				const a = normalizeVersionedUrls(fs.readFileSync(minorFile, 'utf-8'));
-				const b = normalizeVersionedUrls(fs.readFileSync(baseFile, 'utf-8'));
+				let a = normalizeVersionedUrls(fs.readFileSync(minorFile, 'utf-8'));
+				let b = normalizeVersionedUrls(fs.readFileSync(baseFile, 'utf-8'));
+				if (isComponentApiFile(rel)) {
+					a = stripTrailingChangelog(a);
+					b = stripTrailingChangelog(b);
+				}
 				if (a === b) continue;
 			}
 			fs.mkdirSync(path.dirname(path.join(overrideDir, rel)), { recursive: true });
@@ -205,7 +227,7 @@ function renderMinorManifest(
 	md += `- **Storybook exact** : https://lucca-front.lucca.io/${minor.version.tag}/storybook\n`;
 	md += `- **Fichiers overrides** : ${overrideCount} — pour tout chemin, lire d'abord ce dossier, sinon la base \`../../\`.\n`;
 	md += `- **Règle URL** : dans les fichiers lus depuis la base, remplacer \`v${basePatch}\` par \`v${latestPatch}\` dans les URLs Storybook.\n`;
-	md += `- **Changelogs & migrations** : lire ceux de la base (cumulatifs, entrées étiquetées par version) en **ignorant les entrées postérieures à \`${latestPatch}\`**.\n`;
+	md += `- **Changelogs & migrations** : lire la section \`## Changelog\` du \`<slug>.md\` de la **base** et le \`migrations.md\` de la base (cumulatifs, entrées étiquetées par version) en **ignorant les entrées postérieures à \`${latestPatch}\`**.\n`;
 
 	if (addedLater.length > 0) {
 		md += `\n## Composants absents de ${minor.minorKey} (ajoutés dans une mineure ultérieure — ne pas utiliser)\n\n`;
@@ -322,7 +344,7 @@ Lis directement \`./references/<majeure>/<chemin>\` (table des chemins §3).
 
 1. Lis \`./references/<majeure>/minors/<M-m>/_manifest.md\` (dernier patch de la mineure, règle URL, composants à ne pas utiliser).
 2. Pour **chaque fichier** : lis d'abord \`./references/<majeure>/minors/<M-m>/<chemin>\` ; s'il n'existe pas, lis \`./references/<majeure>/<chemin>\` (contenu identique pour cette mineure, aux URLs Storybook près — appliquer la règle URL du manifeste).
-3. **Changelogs (\`<slug>.changelog.md\`) et \`migrations.md\`** : toujours ceux de la base — cumulatifs, entrées étiquetées par version. **Ignore les entrées postérieures à la version du projet.**
+3. **Changelog et migrations** : la section \`## Changelog\` (fin du \`<slug>.md\`) et \`migrations.md\` sont cumulatifs, entrées étiquetées par version — pour l'historique complet, lis toujours ceux de la **base** et **ignore les entrées postérieures à la version du projet**.
 4. **Ne jamais utiliser** un composant listé « absent de cette mineure » dans le manifeste.
 
 ### Patch antérieur au dernier patch de la mineure
@@ -333,11 +355,10 @@ La doc reflète le **dernier patch publié** de la mineure. Si le patch du proje
 
 | Fichier | Chemin |
 |---------|--------|
-| API Angular | \`components/<slug>/<slug>.md\` |
-| Exemples (Angular + HTML) | \`components/<slug>/<slug>.component.md\` |
-| Design (do/don't, usage) | \`components/<slug>/design/_index.md\` |
+| API Angular + Changelog (section \`## Changelog\` en fin de fichier) | \`components/<slug>/<slug>.md\` |
+| Exemples (Angular + HTML, stories incluses) | \`components/<slug>/<slug>.component.md\` |
+| Design (do/don't, usage) | \`components/<slug>/<slug>.design.md\` |
 | Figma (variantes, node IDs) | \`components/<slug>/<slug>.figma.md\` |
-| Changelog | \`components/<slug>/<slug>.changelog.md\` |
 | Types partagés | \`types/<TypeName>.md\` |
 | Documentation transverse | \`documentation/<dossier>/<slug>.md\` |
 | Outils | \`tools/<slug>.md\` (animations, mixins, numbers, scrollbox, utilitaires, angular-api) |
@@ -354,24 +375,24 @@ ${exOlder ? `Projet en \`${exOlder.version.tag.replace(/^v/, '')}\` (mineure ${e
 
 | Cas d'usage | Consulter |
 |-------------|-----------|
-| Écrire du code Angular | API (.md) → Exemples (.component.md) → Changelog |
+| Écrire du code Angular | API (.md) → Exemples (.component.md) → section \`## Changelog\` du .md |
 | Intégrer depuis maquette Figma | Figma (.figma.md) → Tokens → Guidelines dev UI |
-| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (design/_index.md) |
+| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (\`<slug>.design.md\`) |
 | Review de code | API → Guidelines dev UI → Contenu (si textes) → Patterns (si UX) |
 | Conventions de rédaction | Contenu (dossier \`content/\`) |
 | Design patterns | Patterns (dossier \`patterns/\`) |
 | Tokens CSS | Tokens (dossier \`tokens/\`) |
 | Mixins / animations SCSS | Outils (dossier \`tools/\`) |
 | Composant déprécié | \`documentation/deprecated/deprecated.md\` |
-| Monter de version | \`migrations.md\` + le \`<slug>.changelog.md\` de chaque composant touché |
+| Monter de version | \`migrations.md\` + la section \`## Changelog\` du \`<slug>.md\` de chaque composant touché (celui de la base, cf. §2) |
 | Projet sur un patch antérieur au dernier de sa mineure | \`fixes/<M-m-p>.md\` |
 
 ## 5. Workflows
 
-**Code** : détecte la version (§1) → résous les chemins (§2) → API (\`<slug>.md\`) → exemples (\`<slug>.component.md\`) → changelog si comportement inattendu.
+**Code** : détecte la version (§1) → résous les chemins (§2) → API (\`<slug>.md\`) → exemples (\`<slug>.component.md\`, chaque story est une section \`###\`) → section \`## Changelog\` si comportement inattendu.
 ⚠️ Ne te fie **jamais** à ta mémoire pour les noms de propriétés ou types. Seul le \`.md\` fait foi.
 
-**Code → Figma** : \`<slug>.figma.md\` (variantes, node IDs — utilise les noms **Figma**, pas Angular) → \`design/_index.md\` pour les guidelines visuelles.
+**Code → Figma** : \`<slug>.figma.md\` (variantes, node IDs — utilise les noms **Figma**, pas Angular) → \`<slug>.design.md\` pour les guidelines visuelles.
 ⚠️ Les \`.figma.md\` reflètent l'état actuel de Figma.
 
 ## 6. Composants

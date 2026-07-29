@@ -4,7 +4,7 @@ Pipeline **déterministe** (zéro IA) qui génère la documentation des composan
 
 Chaque **mineure** produit une **skill self-contained** sous `.github/skills/lucca-front/lucca-front-<M>-<m>/` : un `SKILL.md`, les fichiers `references/` du **dernier patch publié** de la mineure, et un dossier `fixes/` avec un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories — **aucune information patch-level n'est perdue**). Le nom du dossier (tirets, pas de point) = `name:` du SKILL.md = dossier d'install (leaf), sans collision entre mineures.
 
-Une passe finale assemble une skill **agrégat** `lucca-front-all/` : **un seul** `SKILL.md` routeur + **un dossier de contenu par majeure** sous `references/<majeure>/` — la mineure la plus récente en intégralité (base), les mineures antérieures en dossiers d'**overrides** `minors/<M-m>/` (fichiers complets à l'état de la mineure, uniquement ceux qui diffèrent substantiellement de la base ; URLs Storybook versionnées normalisées avant comparaison ; `*.changelog.md` et `migrations.md` exclus car cumulatifs — la base les couvre, entrées étiquetées par version). Le routeur détecte la version de `@lucca-front/ng` (node_modules puis `package.json`) et résout : override s'il existe, base sinon. Deux usages couverts :
+Une passe finale assemble une skill **agrégat** `lucca-front-all/` : **un seul** `SKILL.md` routeur + **un dossier de contenu par majeure** sous `references/<majeure>/` — la mineure la plus récente en intégralité (base), les mineures antérieures en dossiers d'**overrides** `minors/<M-m>/` (fichiers complets à l'état de la mineure, uniquement ceux qui diffèrent substantiellement de la base ; URLs Storybook versionnées normalisées avant comparaison ; `migrations.md` exclu et section `## Changelog` des `<slug>.md` ignorée dans la comparaison car cumulatifs — la base les couvre, entrées étiquetées par version). Le routeur détecte la version de `@lucca-front/ng` (node_modules puis `package.json`) et résout : override s'il existe, base sinon. Deux usages couverts :
 
 - **install global** (machine) : installer `lucca-front-all` → n'importe quel repo obtient la bonne version automatiquement ;
 - **install par repo** : installer une/deux `lucca-front-<M>-<m>` précises (fetch plus léger, mineure figée).
@@ -150,12 +150,10 @@ Layout **flat self-contained par mineure** (aucun segment de version interne) :
 │   └── references/                   # Contenu du DERNIER patch publié de la mineure
 │       ├── components/
 │       │   └── button/
-│       │       ├── button.md         # API Angular (~30 lignes) + liens
-│       │       ├── button.component.md
-│       │       ├── button.figma.md   # Tokens Figma
-│       │       ├── button.changelog.md  # Diff structurel cumulatif + prose ZH
-│       │       ├── design/{_index.md, design.md, content.md}
-│       │       └── stories/{angular-basic.md, html-size.md, …}
+│       │       ├── button.md         # API Angular + liens + section ## Changelog (diff structurel cumulatif + prose ZH)
+│       │       ├── button.component.md  # Notes d'implémentation + toutes les stories inline (### <nom>)
+│       │       ├── button.design.md  # Guidelines design ZH fusionnées (overview + sections)
+│       │       └── button.figma.md   # Tokens Figma
 │       ├── types/<TypeName>.md       # Types énumérés partagés (ex: LuccaIcon)
 │       ├── documentation/            # Doc transverse
 │       │   ├── tokens/  content/  guidelines/  patterns/
@@ -166,7 +164,7 @@ Layout **flat self-contained par mineure** (aucun segment de version interne) :
     └── …
 ```
 
-Le fichier principal `button.md` contient uniquement l'import, le basic usage, la table d'API et les liens vers les sous-fichiers. Cela minimise la consommation de tokens quand l'agent n'a besoin que de l'API. Les `.changelog.md` / `.figma.md` / `migrations.md` / `fixes/*.md` sont lazy-loaded (lus seulement au besoin).
+Le fichier principal `button.md` contient l'import, le basic usage, la table d'API, les liens vers les fichiers frères, et se termine par la section `## Changelog` (toujours en **dernière position** — l'agrégat et le diff de review s'appuient dessus pour l'ignorer dans les comparaisons). Les `.component.md` / `.design.md` / `.figma.md` / `migrations.md` / `fixes/*.md` sont lazy-loaded (lus seulement au besoin) ; chaque fichier reste sous ~80 Ko, lisible en une passe.
 
 ### Fixes par patch (aucune perte d'information)
 
@@ -222,10 +220,10 @@ scripts/generate-skills/
 │   └── aggregate-writer.ts           # lucca-front-all : base par majeure + overrides par mineure
 │
 └── templates/
-    ├── component.hbs                 # API Angular + liens
-    ├── design-index.hbs / design-section.hbs
-    ├── component-page.hbs            # Page implémentation (notes + stories)
-    ├── example.hbs                   # Un story individuel
+    ├── component.hbs                 # API Angular + liens + section ## Changelog
+    ├── design.hbs                    # Guidelines design fusionnées (overview + sections)
+    ├── component-page.hbs            # Page implémentation (notes + stories inline)
+    ├── story-body.hbs                # Partial : une story (utilisé par component-page)
     ├── type-definition.hbs           # Type énuméré partagé
     ├── changelog.hbs                 # Prose ZH (couche "notes de release")
     └── component-figma.hbs           # Tokens Figma

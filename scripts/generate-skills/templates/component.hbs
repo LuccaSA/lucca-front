@@ -128,7 +128,12 @@ import { {{#each api.apis}}{{className}}{{#unless @last}}, {{/unless}}{{/each}} 
 ## Related files
 
 {{#if hasExamples}}- 📝 [Code & implementation](./{{slug}}.component.md){{/if}}
-{{#if hasDesign}}- 🎨 [Design guidelines](./design/_index.md){{/if}}
+{{#if hasDesign}}- 🎨 [Design guidelines](./{{slug}}.design.md){{/if}}
 {{#if hasFigma}}- 🎯 [Figma design tokens](./{{slug}}.figma.md){{/if}}
 {{#if storybook}}{{#if storybook.docsEntry}}- 📖 [Storybook documentation]({{storybook.docsEntry.url}}){{/if}}{{/if}}
-{{#if hasChangelog}}- 📋 [Changelog](./{{slug}}.changelog.md){{/if}}
+{{#if changelog}}
+
+## Changelog
+
+{{{changelog}}}
+{{/if}}

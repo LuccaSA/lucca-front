@@ -51,10 +51,8 @@ import {
 	renderComponentMd,
 	splitDesignSections,
 	extractZhStoryNotes,
-	renderDesignIndexMd,
-	renderDesignSectionMd,
+	renderDesignMd,
 	renderComponentPageMd,
-	renderStoryMd,
 	renderChangelogMd,
 	renderFigmaMd,
 	collectSharedTypeDefs,
@@ -63,11 +61,8 @@ import {
 import {
 	writeVersionedSkill,
 	cleanVersionDirectory,
-	writeDesignIndex,
-	writeDesignSection,
+	writeDesign,
 	writeComponentPage,
-	writeStory,
-	writeChangelog,
 	writeFigmaSkill,
 	figmaSkillExists,
 	writeVersionManifest,
@@ -765,44 +760,30 @@ async function processVersion(
 				zhProse: renderChangelogMd(data),
 			});
 
-			// Main API reference. hasFigma: tokens fetched this run, or a .figma.md kept from a
-			// previous run (figma skipped/unavailable) — the link must survive either way.
+			// Main API reference — the changelog (structural API diff + ZH prose layer) is embedded
+			// as its trailing ## Changelog section. hasFigma: tokens fetched this run, or a .figma.md
+			// kept from a previous run (figma skipped/unavailable) — the link must survive either way.
 			const hasFigma = figmaTokens !== null || figmaSkillExists(config.output.skillsDir, slug, version);
-			const mdContent = renderComponentMd(data, { hasDesign, hasChangelog: clMd !== null, hasFigma });
+			const mdContent = renderComponentMd(data, { hasDesign, changelog: clMd, hasFigma });
 			const result = writeVersionedSkill(config.output.skillsDir, slug, version, mdContent);
 
-			// Design guidelines (designResult computed above)
+			// Design guidelines, merged into a single <slug>.design.md (designResult computed above)
 			let codeSections: DesignSection[] = [];
 			if (designResult) {
 				codeSections = designResult.codeSections;
 				if (designResult.designSections.length > 0) {
-					const indexMd = renderDesignIndexMd(slug, designResult.designSections, designResult.overviewContent, entry.zeroheightPagePath ?? '');
-					writeDesignIndex(config.output.skillsDir, slug, version, indexMd);
-					for (const section of designResult.designSections) {
-						const sectionMd = renderDesignSectionMd(slug, section);
-						writeDesignSection(config.output.skillsDir, slug, version, section.fileSlug, sectionMd);
-					}
+					const designMd = renderDesignMd(slug, designResult.designSections, designResult.overviewContent, entry.zeroheightPagePath ?? '');
+					writeDesign(config.output.skillsDir, slug, version, designMd);
 				}
 			}
 
-			// Component page + individual stories (merged with ZH code sections)
-			const componentPageMd = renderComponentPageMd(data, codeSections);
+			// Component page — ZH code-section notes + every story inline
+			const scssImport = entry.ngPackage
+				? `@forward '@lucca-front/scss/src/components/${entry.ngPackage}';`
+				: '';
+			const componentPageMd = renderComponentPageMd(data, codeSections, scssImport);
 			if (componentPageMd) {
 				writeComponentPage(config.output.skillsDir, slug, version, componentPageMd);
-				if (storyExamples) {
-					const scssImport = entry.ngPackage
-						? `@forward '@lucca-front/scss/src/components/${entry.ngPackage}';`
-						: '';
-					for (const ex of storyExamples) {
-						const storyMd = renderStoryMd(slug, ex, scssImport);
-						writeStory(config.output.skillsDir, slug, version, ex.fileSlug, storyMd);
-					}
-				}
-			}
-
-			// Changelog — structural API diff (cumulative, from git tags) + optional ZH prose layer
-			if (clMd) {
-				writeChangelog(config.output.skillsDir, slug, version, clMd);
 			}
 
 			// Figma skill

@@ -67,8 +67,8 @@ function listFiles(dir: string, base: string = dir): string[] {
 function normalizeForComparison(content: string): string {
 	return content
 		// Neutralize bare version tokens (e.g. "v21.2.3", "21.2.3", "18.2.0-alpha") so a file isn't
-		// reported "modified" solely because its header label references the target version — this is
-		// the dominant noise (every <slug>.changelog.md header + SKILL.md §1). Real content/API diffs
+		// reported "modified" solely because a label references the target version — the dominant
+		// noise (SKILL.md §1, Storybook URLs, changelog intro lines). Real content/API diffs
 		// (new changelog sections, added inputs…) still show because their lines genuinely differ.
 		.replace(/v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.]+)?/g, '__VER__')
 		.replace(/\/v\/\d+\//g, '/v/__RELEASE__/')
@@ -172,6 +172,23 @@ function computeInlineDiff(contentA: string, contentB: string): string {
 	return formatUnifiedDiff(buildDiffOps(normA, normB, rawA, rawB));
 }
 
+/** Whether `rel` is a component API file (references/components/<slug>/<slug>.md). */
+function isComponentApiRel(rel: string): boolean {
+	const parts = rel.split(path.sep);
+	return parts.length === 4 && parts[0] === 'references' && parts[1] === 'components' && parts[3] === `${parts[2]}.md`;
+}
+
+/**
+ * Strips the trailing `## Changelog` section of a component API file before diffing: it is a
+ * derived/cumulative artifact (a real API change already shows in the file's API tables) carrying
+ * its own noise (version labels, non-deterministic ZH prose layer). Reviewing it here is
+ * redundant and misleading.
+ */
+function stripTrailingChangelog(content: string): string {
+	const idx = content.indexOf('\n## Changelog\n');
+	return idx === -1 ? content : content.slice(0, idx);
+}
+
 function countLines(filePath: string): number {
 	try {
 		return fs.readFileSync(filePath, 'utf-8').split('\n').length;
@@ -196,8 +213,12 @@ function diffDirectories(dirA: string, dirB: string): FileDiff[] {
 		} else if (inA && !inB) {
 			diffs.push({ relativePath: file, status: 'removed', linesBefore: countLines(path.join(dirA, file)) });
 		} else {
-			const contentA = fs.readFileSync(path.join(dirA, file), 'utf-8');
-			const contentB = fs.readFileSync(path.join(dirB, file), 'utf-8');
+			let contentA = fs.readFileSync(path.join(dirA, file), 'utf-8');
+			let contentB = fs.readFileSync(path.join(dirB, file), 'utf-8');
+			if (isComponentApiRel(file)) {
+				contentA = stripTrailingChangelog(contentA);
+				contentB = stripTrailingChangelog(contentB);
+			}
 			if (normalizeForComparison(contentA) !== normalizeForComparison(contentB)) {
 				diffs.push({
 					relativePath: file,
@@ -348,11 +369,11 @@ export function writeVersionChangelog(skillsDir: string, version: VersionConfig)
 		return outPath;
 	}
 
-	// Exclude per-component changelog files from the review diff: they are derived/cumulative
-	// artifacts (a real API change already shows in <slug>.md), and they carry their own noise
-	// (version label in the header, non-deterministic ZH prose layer). Reviewing them here is
-	// redundant and misleading. fixes/ are excluded too: two minors have entirely different fix
-	// sets by construction — they are reviewed as their own files in the PR.
+	// The per-component changelog (trailing ## Changelog section of <slug>.md) is stripped before
+	// comparison — see stripTrailingChangelog. Legacy `*.changelog.md` files are still filtered so
+	// a diff against a pre-merge-layout tree isn't flooded by their removals. fixes/ are excluded
+	// too: two minors have entirely different fix sets by construction — they are reviewed as
+	// their own files in the PR.
 	const diffs = diffDirectories(prevRoot, currRoot).filter(
 		(d) => !d.relativePath.endsWith('.changelog.md') && !d.relativePath.startsWith(`fixes${path.sep}`),
 	);
@@ -380,7 +401,7 @@ export function writeVersionChangelog(skillsDir: string, version: VersionConfig)
 	const trulyRemoved = removed.filter((d) => !renamedFrom.has(d.relativePath));
 	const shrunken = modified.filter(
 		(d) =>
-			(d.relativePath.includes(`${path.sep}design${path.sep}`) || d.relativePath.includes(`${path.sep}documentation${path.sep}`)) &&
+			(d.relativePath.endsWith('.design.md') || d.relativePath.includes(`${path.sep}documentation${path.sep}`)) &&
 			(d.linesAfter ?? 0) < (d.linesBefore ?? 0),
 	);
 	if (trulyRemoved.length > 0 || shrunken.length > 0) {
