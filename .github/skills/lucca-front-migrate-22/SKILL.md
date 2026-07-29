@@ -11,6 +11,19 @@ Principe directeur : **les schematics font le mécanique, ce skill fait le rési
 
 ---
 
+## Étape 0 — Pré-requis : vérifier la version Angular du projet
+
+Cette migration (Lucca Front 22.x ↔ Angular 22) suppose que le projet consommateur est **déjà sur Angular 22**. Avant de lancer quoi que ce soit :
+
+1. Vérifier la version installée d'`@angular/core` dans le `package.json` du projet (ou via `mcp__angular-cli__list_projects` / `ng version`).
+2. Si le projet est sur une version d'Angular **antérieure à 22** : **arrêter immédiatement le skill, ne pas exécuter la suite.**
+	- Ne lancer aucun schematic (ni `@lucca-front/ng:palettes`, ni les schematics Angular type `signal-input-migration`) — ils ne sont pas garantis compatibles et pourraient corrompre le projet.
+	- Informer l'utilisateur que ce skill ne s'applique pas tant que le projet n'est pas sur Angular 22, et lui conseiller de traiter d'abord, de son côté, la migration Angular vers la version 22 (`ng update @angular/core@22 @angular/cli@22`).
+	- Ne pas proposer d'assister sur cette migration Angular dans le cadre de ce skill — ce n'est pas son périmètre. Inviter l'utilisateur à relancer ce skill une fois la migration Angular 22 effectuée.
+3. Si le projet est déjà sur Angular 22, poursuivre normalement à l'Étape 1.
+
+---
+
 ## Étape 1 — Orchestration des schematics (à faire en premier)
 
 Lancer les schematics officiels **avant** toute retouche manuelle. Ils couvrent le gros du remplacement palettes de façon fiable et testée.
@@ -39,6 +52,7 @@ Scanner le projet migré pour détecter les éléments non pris en charge par le
 2. Chercher dans les templates les composants `<lu-icon>` avec input `color`.
 3. Chercher les usages des composants impactés (`lu-single-file-upload`, `lu-multi-file-upload`, `lu-activity-feed-update`, `lu-simple-select`, `lu-multi-select`).
 4. Chercher les overrides SCSS de `.optionItem` et enfants.
+5. Chercher en TS les mutations d'inputs/refs de composants LF (réassignation, méthode mutante sur tableau/objet, mutation d'un champ imbriqué) — y compris les cas que le compilateur ne bloque pas.
 
 ### Table de détection
 
@@ -46,8 +60,10 @@ Scanner le projet migré pour détecter les éléments non pris en charge par le
 |---|---|---|
 | `--colors-grey-400-rgb`, `--colors-grey-900-rgb`, `--colors-neutral-400-rgb`, `--colors-neutral-900-rgb`, `--colors-white-rgb` | [Palettes.md](./references/Palettes.md) | ⚠️ Contextuel (opacité) |
 | `<lu-single-file-upload [entry]="…">` | [FileUpload.md](./references/FileUpload.md) | ⚠️ Restructuration template |
-| `lu-single-file-upload` / `lu-multi-file-upload` sans `size` | [FileUpload.md](./references/FileUpload.md) | ✅ Décision explicite requise |
+| `lu-single-file-upload` / `lu-multi-file-upload` sans `size` | [FileUpload.md](./references/FileUpload.md) | ✅ Ajouter `size="L"` systématiquement |
+| `lu-single-file-upload` / `lu-multi-file-upload` avec `size="S"` | [FileUpload.md](./references/FileUpload.md) | ✅ Supprimer `size="S"` (devenu redondant) |
 | `<lu-activity-feed-update>` avec contenu direct | [ActivityFeed.md](./references/ActivityFeed.md) | ✅ Ajout d'un niveau |
+| Mutation d'une prop reçue en `readonly` (réassignation, `.push()`/`.sort()`, champ imbriqué) | [StrictSignals.md](./references/StrictSignals.md) | ⚠️ À mettre en valeur — jugement requis, pas toujours bloqué à la compilation |
 | Override SCSS de `.optionItem` / `.optionItem-value` | [SelectListBox.md](./references/SelectListBox.md) | ⚠️ Contextuel |
 | Accès TS aux composants LF / refs / mutation d'inputs / `ngOnChanges` | [StrictSignals.md](./references/StrictSignals.md) | ⚠️ Jugement requis |
 
@@ -86,14 +102,7 @@ Voir [StrictSignals.md](./references/StrictSignals.md).
 ## Étape 6 — Validation
 
 1. Lancer `ng build` (ou `tsc --noEmit`) pour vérifier la compilation.
-2. Vérifier qu'il ne reste aucune palette/var dépréciée. Rechercher :
-	- `palette-grey|palette-primary|palette-secondary|palette-lucca`
-	- `--palettes-grey|--palettes-primary|--palettes-secondary|--palettes-lucca`
-	- `--colors-`
-	- `mod-grey`
-	- `rgba?\(\s*var\(--palettes-` — **bug silencieux** : compile sans erreur, la couleur disparaît au runtime
-	- sur `lu-icon` : `color="primary"|color="secondary"`
-3. Vérifier visuellement les composants restructurés (FileUpload, ActivityFeed, Select).
+2. Consulter les `scripts` du `package.json` du projet consommateur et lancer ceux pertinents pour valider la migration (build, lint, tests unitaires, tests e2e/Storybook…) — ne pas se limiter à `ng build` si d'autres commandes de vérification existent.
 
 ---
 
@@ -103,5 +112,5 @@ Produire un rapport structuré :
 
 - **Migrations automatiques** (schematics lancés, fichiers modifiés).
 - **Migrations manuelles réalisées** (résiduel palettes, refactos composants).
-- **Cas nécessitant une décision humaine** : taille par défaut FileUpload à confirmer, `*-rgb` avec opacité, overrides `.optionItem` complexes, usages détournés en TS.
+- **Cas nécessitant une décision humaine** : `*-rgb` avec opacité, overrides `.optionItem` complexes, usages détournés en TS.
 - **Récapitulatif** : nombre d'occurrences par catégorie, fichiers touchés.

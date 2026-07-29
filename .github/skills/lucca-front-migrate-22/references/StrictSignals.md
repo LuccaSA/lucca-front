@@ -18,6 +18,10 @@ Les schematics Angular officiels s'occupent du code du consommateur.
 | Réagir à un changement d'input via `ngOnChanges` | Remplacer par `computed()` / `effect()`. |
 | Muter un tableau/objet passé en entrée (`items.push()`, `.sort()` en place) | Ne compile plus (`ReadonlyArray`) : cloner (`[...items].sort()`) et gérer la source de vérité en amont. |
 
+> ⚠️ **À mettre en valeur systématiquement** : toute mutation d'une propriété reçue via un input `readonly` (réassignation, méthode mutante sur un tableau/objet, mutation d'un champ imbriqué) doit être signalée explicitement dans le rapport de migration, même quand le compilateur ne bloque pas le cas (ex. mutation d'un champ imbriqué d'un objet, ou objet non typé `Readonly<T>` en profondeur). Ces mutations silencieuses cassent l'hypothèse d'immutabilité des inputs signal et peuvent introduire des bugs de détection de changement difficiles à diagnostiquer après coup.
+>
+> **En dernier recours**, si la restructuration côté consommateur (passer par un `model()`/two-way, remonter l'état côté parent, cloner avant mutation) n'est pas viable, il reste possible de demander à l'équipe **lucca-front** de retirer le `readonly` sur l'input concerné côté composant — via une issue/PR sur le repo LF. Ce n'est toutefois pas une décision à prendre unilatéralement côté consommateur : documenter le blocage rencontré et l'escalader à l'équipe LF plutôt que de contourner localement (`as any`, etc.).
+
 ## Mode strict
 
 Activer les flags **empilés, un à la fois** — jamais d'un bloc :
