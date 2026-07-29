@@ -17,7 +17,7 @@ import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
-import { generateInputs } from 'stories/helpers/stories';
+import { generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/List',
