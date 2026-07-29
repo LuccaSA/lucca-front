@@ -1,0 +1,9 @@
+<div
+	class="lu-select-panel-layout-content"
+	[class.is-loading]="loading()"
+	[attr.tabindex]="contentTabIndex()"
+	[cdkTrapFocus]="trapFocus()"
+	(scroll)="scrolled.emit($event)"
+>
+	<ng-content />
+</div>

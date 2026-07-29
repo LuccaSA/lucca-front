@@ -1,4 +1,3 @@
-import { A11yModule } from '@angular/cdk/a11y';
 import { NgTemplateOutlet } from '@angular/common';
 import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -8,6 +7,7 @@ import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
 	LuIsOptionSelectedPipe,
+	LuSelectPanelLayoutComponent,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
 	TreeDisplayPipe,
@@ -16,7 +16,7 @@ import {
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { ListboxComponent, ListboxState, OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY, firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -35,7 +35,7 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 		'(document:mousemove)': 'onMousemove()',
 	},
 	imports: [
-		A11yModule,
+		LuSelectPanelLayoutComponent,
 		FormsModule,
 		LuIsOptionSelectedPipe,
 		ɵLuOptionComponent,
@@ -44,7 +44,8 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 		PortalDirective,
 		LuOptionsGroupContextPipe,
 		ɵCoreSelectPanelElement,
-		IconComponent,
+		ListboxComponent,
+		ListboxOptionComponent,
 		TreeDisplayPipe,
 		TreeBranchComponent,
 	],
@@ -106,6 +107,16 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 
 	readonly groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.searchable);
 
+	// Loading takes precedence over empty so the "no result" message never flashes during a fetch
+	readonly listboxState = computed<ListboxState | null>(() => (this.loading() ? 'loading' : this.dataSourceOptions().length === 0 ? 'empty' : null));
+
+	readonly listboxStatusMsg = computed(() => {
+		if (this.loading()) {
+			return this.intl().loading;
+		}
+		return this.clue().length ? this.intl().emptyResults : this.intl().emptyOptions;
+	});
+
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
 			return;
@@ -143,7 +154,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 						s.delete(groupKey);
 						return s;
 					});
-					this.#applyGroupToggle(allGroupOptions, allGroupOptions);
+					const notSelectedOptions = allGroupOptions.filter((o) => !this.selectedOptions.some((so) => this.optionComparer()(so, o)));
+					this.#applyGroupToggle(notSelectedOptions, allGroupOptions);
 				})
 				.catch(() => {
 					this.groupLoadingKeys.update((keys) => {

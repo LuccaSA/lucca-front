@@ -39,11 +39,9 @@
     "test-storybook": "npx vitest --config .storybook/vitest.config.ts --project=storybook",
     "test-storybook:coverage": "test-storybook --url http://localhost:6006 --coverage",
     "lint": "npm run lint:es && npm run lint:style",
-    "lint:fix": "npm run lint:es -- --fix && npm run lint:style -- --fix && npm run nglint:fix",
+    "lint:fix": "npm run lint:es -- --fix && npm run lint:style -- --fix",
     "lint:es": "eslint --quiet packages/",
     "lint:style": "stylelint \"packages/**/*.scss\" --report-needless-disables --report-unscoped-disables --report-invalid-scope-disables",
-    "nglint": "ng lint --quiet",
-    "nglint:fix": "npm run nglint -- --fix",
     "icons:update": "node ./packages/icons/update-icons.js",
     "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts"
