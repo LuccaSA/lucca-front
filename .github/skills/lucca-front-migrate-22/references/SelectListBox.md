@@ -16,10 +16,12 @@ Cas le plus courant :
 |---|---|
 | `.optionItem-value` | `.listboxOption-content` |
 
-## Migration
+## Détection — ne rien modifier automatiquement
+
+Les surcharges SCSS du panel sont **hors périmètre de la migration automatique** : ne modifier aucun sélecteur, même quand un équivalent est documenté. Le rendu du panel dépend de la structure DOM réelle et du reste de la feuille de style du projet — seul le développeur peut valider le remplacement.
 
 1. Rechercher dans les SCSS/CSS du projet les sélecteurs ciblant `.optionItem` et ses enfants (`.optionItem-value`, etc.).
-2. Remplacer `.optionItem-value` par `.listboxOption-content`.
-3. Pour les autres enfants de `.optionItem` sans équivalent documenté : inspecter le DOM réel du panel ListBox et signaler l'override comme nécessitant une reprise manuelle (ne pas deviner le nom de classe).
+2. **Lister chaque occurrence dans le rapport de migration** (fichier, ligne, sélecteur), avec l'équivalent connu à titre indicatif (`.optionItem-value` → `.listboxOption-content`) et « équivalent non documenté » pour les autres.
+3. Laisser l'utilisateur trancher et appliquer les changements.
 
-> Ne jamais inventer un nom de classe ListBox : si l'équivalent n'est pas documenté ici, signaler et laisser le développeur trancher.
+> Ne jamais inventer un nom de classe ListBox : si l'équivalent n'est pas documenté ici, le signaler tel quel.

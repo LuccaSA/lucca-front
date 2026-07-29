@@ -64,8 +64,9 @@ Scanner le projet migré pour détecter les éléments non pris en charge par le
 | `lu-single-file-upload` / `lu-multi-file-upload` avec `size="S"` | [FileUpload.md](./references/FileUpload.md) | ✅ Supprimer `size="S"` (devenu redondant) |
 | `<lu-activity-feed-update>` avec contenu direct | [ActivityFeed.md](./references/ActivityFeed.md) | ✅ Ajout d'un niveau |
 | Mutation d'une prop reçue en `readonly` (réassignation, `.push()`/`.sort()`, champ imbriqué) | [StrictSignals.md](./references/StrictSignals.md) | ⚠️ À mettre en valeur — jugement requis, pas toujours bloqué à la compilation |
-| Override SCSS de `.optionItem` / `.optionItem-value` | [SelectListBox.md](./references/SelectListBox.md) | ⚠️ Contextuel |
+| Override SCSS de `.optionItem` / `.optionItem-value` | [SelectListBox.md](./references/SelectListBox.md) | ❌ Jamais automatique — à lister dans le rapport |
 | Accès TS aux composants LF / refs / mutation d'inputs / `ngOnChanges` | [StrictSignals.md](./references/StrictSignals.md) | ⚠️ Jugement requis |
+| `$palettesDeprecated` dans un `@use ... config with (...)` du consommateur | [Palettes.md](./references/Palettes.md) | ✅ Supprimer la déclaration |
 | Classes héritant de LF (`ALuInput`, `ALuSelectInputComponent`, `ILuDateAdapter`…), `.instance` de dialog, `state="null"` sur `lu-progress-bar` | [Strict.md](./references/Strict.md) | ❌ Manuel |
 | Réassignation d'une propriété d'un composant LF (`select.options$ = …`, `ref.optionTpl = …`, mock d'une ref en test) | [Readonly.md](./references/Readonly.md) | ❌ Manuel |
 
@@ -76,6 +77,7 @@ Scanner le projet migré pour détecter les éléments non pris en charge par le
 Traiter les cas de [Palettes.md](./references/Palettes.md) :
 
 - **Vars `*-rgb`** : remplacer par la palette neutre correspondante, en enveloppant avec `color.transparentize` **si et seulement si** une opacité était appliquée via `rgba(...)`. Ne **jamais** remplacer aveuglément.
+- **`$palettesDeprecated`** : la variable n'existe plus en 22.0 — supprimer sa déclaration partout où le consommateur la configure, sinon le SCSS ne compile plus. Voir [Palettes.md](./references/Palettes.md#4-palettesdeprecated--suppression-sèche).
 
 (`<lu-icon color="primary|secondary">` est désormais géré par le schematic — rien à faire manuellement.)
 
@@ -87,7 +89,7 @@ Appliquer chaque migration en suivant son fichier de référence :
 
 - [FileUpload.md](./references/FileUpload.md) — `SingleFileUpload` (gestion de `FileEntry` via `lu-file-entry`) + nouvelle taille par défaut.
 - [ActivityFeed.md](./references/ActivityFeed.md) — niveau intermédiaire `lu-activity-feed-update-item`.
-- [SelectListBox.md](./references/SelectListBox.md) — panel des Select passé à `ListBox`, overrides `.optionItem*`.
+- [SelectListBox.md](./references/SelectListBox.md) — panel des Select passé à `ListBox`. Le panel est migré par LF ; les overrides `.optionItem*` du projet ne sont **pas** à modifier — seulement à relever dans le rapport.
 
 ---
 
@@ -106,6 +108,7 @@ Voir [StrictSignals.md](./references/StrictSignals.md).
 
 1. Lancer `ng build` (ou `tsc --noEmit`) pour vérifier la compilation.
 2. Consulter les `scripts` du `package.json` du projet consommateur et lancer ceux pertinents pour valider la migration (build, lint, tests unitaires, tests e2e/Storybook…) — ne pas se limiter à `ng build` si d'autres commandes de vérification existent.
+3. Vérifier qu'il ne reste aucun usage des palettes dépréciées (`.palette-grey|primary|secondary|lucca`, `--palettes-grey|primary|secondary|lucca-*`, `--colors-grey|white|black`, `.mod-grey`) : ces usages ne cassent pas le build, ils perdent leur couleur au runtime, et rien ne permet de réactiver les palettes supprimées.
 
 ---
 
@@ -115,5 +118,5 @@ Produire un rapport structuré :
 
 - **Migrations automatiques** (schematics lancés, fichiers modifiés).
 - **Migrations manuelles réalisées** (résiduel palettes, refactos composants).
-- **Cas nécessitant une décision humaine** : `*-rgb` avec opacité, overrides `.optionItem` complexes, usages détournés en TS.
+- **Cas laissés à l'utilisateur** : `*-rgb` avec opacité, usages détournés en TS, et **tous** les overrides SCSS `.optionItem*` — les lister un par un (fichier, ligne, sélecteur, équivalent connu ou « non documenté ») sans les avoir modifiés.
 - **Récapitulatif** : nombre d'occurrences par catégorie, fichiers touchés.
