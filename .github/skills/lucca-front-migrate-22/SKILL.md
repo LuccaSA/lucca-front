@@ -7,7 +7,11 @@ description: "Skill de migration vers Lucca Front 22 (breaking release). Charge 
 
 Ce skill guide la migration d'un projet **consommateur** de `@lucca-front/ng` de la version **21.x** vers **22.x** (release breaking).
 
+**Périmètre — l'objectif unique est que le code existant continue de fonctionner comme avant.** C'est une migration à iso-comportement et iso-rendu : on rétablit ce que la montée en LF 22 a cassé, rien de plus. Tout le reste est hors périmètre — pas de modernisation d'un code qui marche, pas de refacto d'opportunité, pas d'amélioration au passage, pas de nouvelle fonctionnalité. Si un besoin de ce type apparaît, le signaler dans le rapport final au lieu de le faire.
+
 Principe directeur : **les schematics font le mécanique, ce skill fait le résiduel contextuel.** Ne jamais réimplémenter à la main ce qu'un schematic couvre déjà — lancer le schematic, puis traiter uniquement ce qu'il laisse.
+
+Utiliser `TodoWrite` pour suivre les étapes 0 à 7 ci-dessous comme une todo list : chaque étape devient une tâche, marquée `completed` au fur et à mesure — cette migration touche plusieurs fichiers sur plusieurs passes et ne doit pas perdre le fil en cours de route.
 
 ---
 
@@ -15,7 +19,7 @@ Principe directeur : **les schematics font le mécanique, ce skill fait le rési
 
 Cette migration (Lucca Front 22.x ↔ Angular 22) suppose que le projet consommateur est **déjà sur Angular 22**. Avant de lancer quoi que ce soit :
 
-1. Vérifier la version installée d'`@angular/core` dans le `package.json` du projet (ou via `mcp__angular-cli__list_projects` / `ng version`).
+1. Vérifier la version installée d'`@angular/core` : lire le `package.json` du projet, ou passer par `mcp__angular-cli__list_projects` (découverte du workspace) puis `mcp__angular-cli__get_best_practices` si des questions de compatibilité Angular 22 se posent en cours de route.
 2. Si le projet est sur une version d'Angular **antérieure à 22** : **arrêter immédiatement le skill, ne pas exécuter la suite.**
 	- Ne lancer aucun schematic (ni `@lucca-front/ng:palettes`, ni les schematics Angular type `signal-input-migration`) — ils ne sont pas garantis compatibles et pourraient corrompre le projet.
 	- Informer l'utilisateur que ce skill ne s'applique pas tant que le projet n'est pas sur Angular 22, et lui conseiller de traiter d'abord, de son côté, la migration Angular vers la version 22 (`ng update @angular/core@22 @angular/cli@22`).
@@ -24,21 +28,27 @@ Cette migration (Lucca Front 22.x ↔ Angular 22) suppose que le projet consomma
 
 ---
 
-## Étape 1 — Orchestration des schematics (à faire en premier)
+## Étape 1 — Orchestration des schematics (optionnelle, mais à faire en premier si retenue)
 
-Lancer les schematics officiels **avant** toute retouche manuelle. Ils couvrent le gros du remplacement palettes de façon fiable et testée.
+Les schematics couvrent le gros du remplacement palettes de façon fiable et testée. Mais **ne pas les lancer d'office** : certaines équipes préfèrent isoler ce diff (souvent volumineux et purement mécanique) dans une **PR dédiée**, séparée du reste de la migration.
 
-```bash
-# Palettes : classes .palette-*, .mod-grey, .icon-color-*, utilitaires u-text*/pr-u-*,
-# et CSS vars --palettes-* / --colors-grey|white|black. HTML + SCSS.
-ng g @lucca-front/ng:palettes
-```
+**Demander donc explicitement à l'utilisateur** — via `AskUserQuestion` — s'il veut que le schematic `palettes` soit joué maintenant. Dans la question, préciser :
 
-Puis, si le projet monte aussi la modernisation Angular (voir Étape 5), les schematics Angular officiels dans **cet ordre** :
+- que LF 22 **remplace des palettes** : `.palette-grey` → `.palette-neutral`, `.palette-primary`/`.palette-secondary` → `.palette-product`, `.palette-lucca` → `.palette-brand`, ainsi que les CSS vars `--palettes-*` / `--colors-grey|white|black` correspondantes, les utilitaires `u-text*`/`pr-u-*`, `.mod-grey`, `.icon-color-*` et l'input `<lu-icon color="primary|secondary">` ;
+- que le schematic modifie HTML + SCSS + templates sur potentiellement beaucoup de fichiers ;
+- les deux réponses possibles : **Oui** (lancer maintenant) / **Non** (laisser pour une PR à part).
 
-```
-signal-input-migration → signal-queries-migration → output-migration → cleanup-unused-imports
-```
+Selon la réponse :
+
+- **Oui** → lancer le schematic via l'outil Bash, puis poursuivre :
+
+  ```bash
+  # Palettes : classes .palette-*, .mod-grey, .icon-color-*, utilitaires u-text*/pr-u-*,
+  # et CSS vars --palettes-* / --colors-grey|white|black. HTML + SCSS.
+  ng g @lucca-front/ng:palettes
+  ```
+
+- **Non** → **ne rien lancer**, ne pas refaire à la main le travail du schematic, et **passer directement à l'Étape 2**. Signaler dans le rapport final (Étape 7) que le remplacement des palettes reste à faire dans une PR dédiée via `ng g @lucca-front/ng:palettes`.
 
 Une fois les schematics passés, il reste les cas ci-dessous que les schematics **ne couvrent pas**.
 
@@ -46,29 +56,24 @@ Une fois les schematics passés, il reste les cas ci-dessous que les schematics 
 
 ## Étape 2 — Analyse du résiduel
 
-Scanner le projet migré pour détecter les éléments non pris en charge par le schematic `palettes`, et les refactos de composants :
+**Étape de détection uniquement : ne rien corriger ici.** Le but est de faire *un seul* passage de recherche sur le projet, puis de router chaque occurrence vers l'étape qui la traite — et de savoir à l'avance quelles étapes sont vides (à marquer `completed` sans les ouvrir).
 
-1. Chercher dans les `.scss`/`.css` les CSS vars `*-rgb` résiduelles.
-2. Chercher dans les templates les composants `<lu-icon>` avec input `color`.
-3. Chercher les usages des composants impactés (`lu-single-file-upload`, `lu-multi-file-upload`, `lu-activity-feed-update`, `lu-simple-select`, `lu-multi-select`).
-4. Chercher les overrides SCSS de `.optionItem` et enfants.
-5. Chercher en TS les mutations d'inputs/refs de composants LF (réassignation, méthode mutante sur tableau/objet, mutation d'un champ imbriqué) — y compris les cas que le compilateur ne bloque pas.
+Privilégier `Grep`/`Glob` pour des recherches ciblées ; pour un projet volumineux ou une recherche exploratoire (motifs multiples, conventions de nommage variées), déléguer le scan à un agent `Explore` plutôt que d'enchaîner les recherches une par une.
 
-### Table de détection
+### Table de routage
 
-| Détecté | Référence | Automatisable ? |
-|---|---|---|
-| `--colors-grey-400-rgb`, `--colors-grey-900-rgb`, `--colors-neutral-400-rgb`, `--colors-neutral-900-rgb`, `--colors-white-rgb` | [Palettes.md](./references/Palettes.md) | ⚠️ Contextuel (opacité) |
-| `<lu-single-file-upload [entry]="…">` | [FileUpload.md](./references/FileUpload.md) | ⚠️ Restructuration template |
-| `lu-single-file-upload` / `lu-multi-file-upload` sans `size` | [FileUpload.md](./references/FileUpload.md) | ✅ Ajouter `size="L"` systématiquement |
-| `lu-single-file-upload` / `lu-multi-file-upload` avec `size="S"` | [FileUpload.md](./references/FileUpload.md) | ✅ Supprimer `size="S"` (devenu redondant) |
-| `<lu-activity-feed-update>` avec contenu direct | [ActivityFeed.md](./references/ActivityFeed.md) | ✅ Ajout d'un niveau |
-| Mutation d'une prop reçue en `readonly` (réassignation, `.push()`/`.sort()`, champ imbriqué) | [StrictSignals.md](./references/StrictSignals.md) | ⚠️ À mettre en valeur — jugement requis, pas toujours bloqué à la compilation |
-| Override SCSS de `.optionItem` / `.optionItem-value` | [SelectListBox.md](./references/SelectListBox.md) | ❌ Jamais automatique — à lister dans le rapport |
-| Accès TS aux composants LF / refs / mutation d'inputs / `ngOnChanges` | [StrictSignals.md](./references/StrictSignals.md) | ⚠️ Jugement requis |
-| `$palettesDeprecated` dans un `@use ... config with (...)` du consommateur | [Palettes.md](./references/Palettes.md) | ✅ Supprimer la déclaration |
-| Classes héritant de LF (`ALuInput`, `ALuSelectInputComponent`, `ILuDateAdapter`…), `.instance` de dialog, `state="null"` sur `lu-progress-bar` | [Strict.md](./references/Strict.md) | ❌ Manuel |
-| Réassignation d'une propriété d'un composant LF (`select.options$ = …`, `ref.optionTpl = …`, mock d'une ref en test) | [Readonly.md](./references/Readonly.md) | ❌ Manuel |
+| Motif détecté | Traité à l'étape |
+|---|---|
+| CSS vars `*-rgb` résiduelles dans les `.scss`/`.css` (`--colors-grey-*-rgb`, `--colors-neutral-*-rgb`, `--colors-white-rgb`) | Étape 3 |
+| `$palettesDeprecated` dans un `@use ... config with (...)` du consommateur | Étape 3 |
+| `<lu-icon>` avec input `color` — **à ne chercher que si le schematic `palettes` a été refusé à l'Étape 1** (sinon déjà traité) | Étape 3 |
+| Usages de `lu-single-file-upload` / `lu-multi-file-upload` | Étape 4 |
+| Usages de `lu-activity-feed-update` | Étape 4 |
+| Usages de `lu-simple-select` / `lu-multi-select`, et overrides SCSS de `.optionItem` et enfants | Étape 4 |
+| Accès TS aux composants/refs LF : réassignation de propriété, lecture/écriture d'un input, `ngOnChanges`, mutation d'un tableau/objet reçu (`.push()`/`.sort()`, champ imbriqué, `Object.assign`) — y compris les cas que le compilateur ne bloque pas | Étape 5 |
+| Classes héritant de LF (`ALuInput`, `ALuSelectInputComponent`, `ILuDateAdapter`…), `.instance` de dialog, `state="null"` sur `lu-progress-bar` | Étape 5 |
+
+Restituer le résultat du scan sous forme de comptage par ligne (occurrences + fichiers) avant d'attaquer l'Étape 3 : c'est ce comptage qui alimente le rapport final (Étape 7).
 
 ---
 
@@ -79,7 +84,7 @@ Traiter les cas de [Palettes.md](./references/Palettes.md) :
 - **Vars `*-rgb`** : remplacer par la palette neutre correspondante, en enveloppant avec `color.transparentize` **si et seulement si** une opacité était appliquée via `rgba(...)`. Ne **jamais** remplacer aveuglément.
 - **`$palettesDeprecated`** : la variable n'existe plus en 22.0 — supprimer sa déclaration partout où le consommateur la configure, sinon le SCSS ne compile plus. Voir [Palettes.md](./references/Palettes.md#4-palettesdeprecated--suppression-sèche).
 
-(`<lu-icon color="primary|secondary">` est désormais géré par le schematic — rien à faire manuellement.)
+- **`<lu-icon color="primary|secondary">`** : rien à faire si le schematic `palettes` a été lancé (il le couvre, statique et bound). S'il a été refusé à l'Étape 1, **ne pas le migrer à la main** : ce cas fait partie du périmètre de la PR dédiée aux palettes.
 
 ---
 
@@ -93,22 +98,32 @@ Appliquer chaque migration en suivant son fichier de référence :
 
 ---
 
-## Étape 5 — Modernisation strict / readonly / signaux
+## Étape 5 — Adaptation strict / readonly / signaux (pilotée par les erreurs)
 
-Voir [StrictSignals.md](./references/StrictSignals.md).
+**Règle de cette étape : ne modifier du code que si c'est nécessaire et bloquant.** « Bloquant » = une erreur de **build** (`ng build` / `tsc --noEmit`) ou de **lint** causée par la montée en LF 22. Le but n'est pas de moderniser le code vers les signaux, c'est de le remettre en état de marche à iso-comportement : un appel impératif qui compile toujours reste tel quel, même s'il existe désormais une écriture plus idiomatique.
 
-- **Usage standard** (bindings dans le template) : montée quasi transparente, les schematics Angular s'en chargent.
-- **Usage détourné** (accès TS, refs, mutation d'inputs) : ajustements ciblés (signaux à invoquer avec `()`, `viewChild()` signal, `computed()`/`effect()` au lieu de `ngOnChanges`, clonage des tableaux/objets d'entrée).
-- **Strict / API nullable** : les `.d.ts` de LF 22 sont émis avec `strictNullChecks` → [Strict.md](./references/Strict.md) (signatures élargies, ordre d'activation des flags, **changements de comportement silencieux** qui ne produisent aucune erreur de compilation).
-- **Propriétés `readonly`** : les propriétés de classe LF ne sont plus réassignables → [Readonly.md](./references/Readonly.md) (ce qui casse, les remèdes, et le critère pour retirer un `readonly` côté LF).
+Marche à suivre :
+
+1. **Lancer le build (et le lint) d'abord**, avant toute retouche — c'est lui qui définit la liste de travail. Voir Étape 6 pour les commandes.
+2. **Pour chaque erreur remontée**, identifier l'axe et n'ouvrir que la référence correspondante :
+	- **Strict / API nullable** — les `.d.ts` de LF 22 sont émis avec `strictNullChecks` → [Strict.md](./references/Strict.md) (signatures élargies, ordre d'activation des flags).
+	- **Propriétés `readonly`** — les propriétés de classe LF ne sont plus réassignables → [Readonly.md](./references/Readonly.md).
+	- **Inputs / outputs / refs en signaux** — inventaire des membres convertis, renommés ou supprimés par entrypoint → [Signal.md](./references/Signal.md).
+3. **Corriger au plus juste** : la modification minimale qui lève l'erreur, dans le fichier qui la porte. Ne pas élargir au reste du fichier ni aux fichiers voisins qui compilent.
+4. **Ne pas contourner** : jamais de `as any`, `!`, `@ts-ignore` ni de `eslint-disable` pour faire taire une erreur. Si le blocage nécessite un arbitrage qui dépasse le résiduel documenté (ex. retirer un `readonly` côté composant LF), utiliser `AskUserQuestion` pour présenter les options plutôt que de trancher seul.
+
+**Ce qui ne casse pas le build ne se corrige pas ici, mais se signale** à l'Étape 7 — c'est le cas des pièges silencieux : mutations d'un objet/tableau reçu (`.push()`, `.sort()`, champ imbriqué, `Object.assign`) et changements de comportement liés à `strictNullChecks` qui ne produisent **aucune** erreur de compilation. Les lister comme « à vérifier manuellement », avec fichier et ligne, sans y toucher.
+
+L'usage standard (bindings dans le template) est quasi transparent : les schematics Angular s'en chargent, il n'y a normalement rien à faire à la main.
 
 ---
 
 ## Étape 6 — Validation
 
-1. Lancer `ng build` (ou `tsc --noEmit`) pour vérifier la compilation.
+1. Lancer `ng build` (ou `tsc --noEmit`) via Bash pour vérifier la compilation. C'est aussi la commande qui alimente l'Étape 5 : boucler Étape 5 → Étape 6 jusqu'à ce qu'il ne reste plus d'erreur imputable à LF 22.
 2. Consulter les `scripts` du `package.json` du projet consommateur et lancer ceux pertinents pour valider la migration (build, lint, tests unitaires, tests e2e/Storybook…) — ne pas se limiter à `ng build` si d'autres commandes de vérification existent.
-3. Vérifier qu'il ne reste aucun usage des palettes dépréciées (`.palette-grey|primary|secondary|lucca`, `--palettes-grey|primary|secondary|lucca-*`, `--colors-grey|white|black`, `.mod-grey`) : ces usages ne cassent pas le build, ils perdent leur couleur au runtime, et rien ne permet de réactiver les palettes supprimées.
+3. Distinguer, dans les erreurs restantes, celles **causées par la montée LF 22** (à corriger) de celles **préexistantes** (à signaler à l'Étape 7, sans les corriger — hors périmètre).
+4. Si le schematic `palettes` a été lancé à l'Étape 1, vérifier qu'il ne reste aucun usage des palettes dépréciées (`.palette-grey|primary|secondary|lucca`, `--palettes-grey|primary|secondary|lucca-*`, `--colors-grey|white|black`, `.mod-grey`) : ces usages ne cassent pas le build, ils perdent leur couleur au runtime, et rien ne permet de réactiver les palettes supprimées.
 
 ---
 
@@ -116,7 +131,10 @@ Voir [StrictSignals.md](./references/StrictSignals.md).
 
 Produire un rapport structuré :
 
-- **Migrations automatiques** (schematics lancés, fichiers modifiés).
+- **Migrations automatiques** (schematics lancés, fichiers modifiés) — et, si le schematic `palettes` a été refusé à l'Étape 1, le rappeler explicitement comme reste à faire dans une PR dédiée.
 - **Migrations manuelles réalisées** (résiduel palettes, refactos composants).
 - **Cas laissés à l'utilisateur** : `*-rgb` avec opacité, usages détournés en TS, et **tous** les overrides SCSS `.optionItem*` — les lister un par un (fichier, ligne, sélecteur, équivalent connu ou « non documenté ») sans les avoir modifiés.
+- **Pièges silencieux à vérifier manuellement** (détectés mais volontairement non corrigés, car non bloquants) : mutations d'un objet/tableau reçu, changements de comportement liés à `strictNullChecks` — avec fichier et ligne.
+- **Erreurs préexistantes** rencontrées au build/lint mais non imputables à LF 22 : listées, non corrigées.
+- **Pistes hors périmètre** repérées en chemin (modernisation, refacto, dette) : listées comme suggestions pour plus tard, jamais appliquées dans cette migration.
 - **Récapitulatif** : nombre d'occurrences par catégorie, fichiers touchés.
