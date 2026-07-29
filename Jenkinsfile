@@ -25,7 +25,7 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 			npmScript(script: 'build')
 			def shouldRunE2E = isPR || isMaster
 			loggableStage('e2e', !shouldRunE2E) {
-				publishE2e(loggableStageName: 'e2e', slnFilepath: 'e2e/LuccaFront.e2e.sln', framework: "net6.0")
+				publishE2e(loggableStageName: 'e2e', slnFilepath: 'e2e/LuccaFront.e2e.sln', framework: "net8.0")
 				archiveElements(e2e: true)
 			}
 		}
