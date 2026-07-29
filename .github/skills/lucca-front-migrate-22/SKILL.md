@@ -50,6 +50,7 @@ Scanner le projet migré pour détecter les éléments non pris en charge par le
 | `<lu-activity-feed-update>` avec contenu direct | [ActivityFeed.md](./references/ActivityFeed.md) | ✅ Ajout d'un niveau |
 | Override SCSS de `.optionItem` / `.optionItem-value` | [SelectListBox.md](./references/SelectListBox.md) | ⚠️ Contextuel |
 | Accès TS aux composants LF / refs / mutation d'inputs / `ngOnChanges` | [StrictSignals.md](./references/StrictSignals.md) | ⚠️ Jugement requis |
+| Classes héritant de LF (`ALuInput`, `ALuSelectInputComponent`, `ILuDateAdapter`…), `.instance` de dialog, `state="null"` sur `lu-progress-bar` | [Strict.md](./references/Strict.md) | ❌ Manuel |
 
 ---
 
@@ -79,7 +80,7 @@ Voir [StrictSignals.md](./references/StrictSignals.md).
 
 - **Usage standard** (bindings dans le template) : montée quasi transparente, les schematics Angular s'en chargent.
 - **Usage détourné** (accès TS, refs, mutation d'inputs) : ajustements ciblés (signaux à invoquer avec `()`, inputs readonly, `viewChild()` signal, `computed()`/`effect()` au lieu de `ngOnChanges`, clonage des tableaux/objets d'entrée).
-- **Strict** : activer les flags empilés **un à la fois** (`noImplicitAny` → `strictNullChecks` → `strictTemplates`), jamais d'un bloc.
+- **Strict / API nullable** : les `.d.ts` de LF 22 sont émis avec `strictNullChecks` → [Strict.md](./references/Strict.md) (signatures élargies, ordre d'activation des flags, **changements de comportement silencieux** qui ne produisent aucune erreur de compilation).
 
 ---
 
