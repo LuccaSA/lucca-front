@@ -54,29 +54,23 @@ Une fois les schematics passés, il reste les cas ci-dessous que les schematics 
 
 ## Étape 2 — Analyse du résiduel
 
-Scanner le projet migré pour détecter les éléments non pris en charge par le schematic `palettes`, et les refactos de composants. Privilégier `Grep`/`Glob` pour des recherches ciblées ; pour un projet volumineux ou une recherche exploratoire (motifs multiples, conventions de nommage variées), déléguer le scan à un agent `Explore` plutôt que d'enchaîner les recherches une par une.
+**Étape de détection uniquement : ne rien corriger ici.** Le but est de faire *un seul* passage de recherche sur le projet, puis de router chaque occurrence vers l'étape qui la traite — et de savoir à l'avance quelles étapes sont vides (à marquer `completed` sans les ouvrir).
 
-1. Chercher dans les `.scss`/`.css` les CSS vars `*-rgb` résiduelles.
-2. Chercher dans les templates les composants `<lu-icon>` avec input `color`.
-3. Chercher les usages des composants impactés (`lu-single-file-upload`, `lu-multi-file-upload`, `lu-activity-feed-update`, `lu-simple-select`, `lu-multi-select`).
-4. Chercher les overrides SCSS de `.optionItem` et enfants.
-5. Chercher en TS les mutations d'inputs/refs de composants LF (réassignation, méthode mutante sur tableau/objet, mutation d'un champ imbriqué) — y compris les cas que le compilateur ne bloque pas.
+Privilégier `Grep`/`Glob` pour des recherches ciblées ; pour un projet volumineux ou une recherche exploratoire (motifs multiples, conventions de nommage variées), déléguer le scan à un agent `Explore` plutôt que d'enchaîner les recherches une par une.
 
-### Table de détection
+### Table de routage
 
-| Détecté | Référence | Automatisable ? |
-|---|---|---|
-| `--colors-grey-400-rgb`, `--colors-grey-900-rgb`, `--colors-neutral-400-rgb`, `--colors-neutral-900-rgb`, `--colors-white-rgb` | [Palettes.md](./references/Palettes.md) | ⚠️ Contextuel (opacité) |
-| `<lu-single-file-upload [entry]="…">` | [FileUpload.md](./references/FileUpload.md) | ⚠️ Restructuration template |
-| `lu-single-file-upload` / `lu-multi-file-upload` sans `size` | [FileUpload.md](./references/FileUpload.md) | ✅ Ajouter `size="L"` systématiquement |
-| `lu-single-file-upload` / `lu-multi-file-upload` avec `size="S"` | [FileUpload.md](./references/FileUpload.md) | ✅ Supprimer `size="S"` (devenu redondant) |
-| `<lu-activity-feed-update>` avec contenu direct | [ActivityFeed.md](./references/ActivityFeed.md) | ✅ Ajout d'un niveau |
-| Mutation d'une prop reçue en `readonly` (`.push()`/`.sort()`, champ imbriqué, `Object.assign`) | [Readonly.md](./references/Readonly.md) | ⚠️ À mettre en valeur — jugement requis, **pas bloqué à la compilation** |
-| Override SCSS de `.optionItem` / `.optionItem-value` | [SelectListBox.md](./references/SelectListBox.md) | ⚠️ Contextuel |
-| Accès TS aux composants LF / refs / mutation d'inputs / `ngOnChanges` | [Signal.md](./references/Signal.md) | ⚠️ Jugement requis |
-| Classes héritant de LF (`ALuInput`, `ALuSelectInputComponent`, `ILuDateAdapter`…), `.instance` de dialog, `state="null"` sur `lu-progress-bar` | [Strict.md](./references/Strict.md) | ❌ Manuel |
-| Réassignation d'une propriété d'un composant LF (`select.options$ = …`, `ref.optionTpl = …`, mock d'une ref en test) | [Readonly.md](./references/Readonly.md) | ❌ Manuel |
-| Lecture/écriture TS d'un input LF (`select.options = …`, `ref.inputPlaceholder`, `searcher.searchInput.nativeElement`, `url$.next()`) | [Signal.md](./references/Signal.md) | ❌ Manuel |
+| Motif détecté | Traité à l'étape |
+|---|---|
+| CSS vars `*-rgb` résiduelles dans les `.scss`/`.css` (`--colors-grey-*-rgb`, `--colors-neutral-*-rgb`, `--colors-white-rgb`) | Étape 3 |
+| `<lu-icon>` avec input `color` — **à ne chercher que si le schematic `palettes` a été refusé à l'Étape 1** (sinon déjà traité) | Étape 3 |
+| Usages de `lu-single-file-upload` / `lu-multi-file-upload` | Étape 4 |
+| Usages de `lu-activity-feed-update` | Étape 4 |
+| Usages de `lu-simple-select` / `lu-multi-select`, et overrides SCSS de `.optionItem` et enfants | Étape 4 |
+| Accès TS aux composants/refs LF : réassignation de propriété, lecture/écriture d'un input, `ngOnChanges`, mutation d'un tableau/objet reçu (`.push()`/`.sort()`, champ imbriqué, `Object.assign`) — y compris les cas que le compilateur ne bloque pas | Étape 5 |
+| Classes héritant de LF (`ALuInput`, `ALuSelectInputComponent`, `ILuDateAdapter`…), `.instance` de dialog, `state="null"` sur `lu-progress-bar` | Étape 5 |
+
+Restituer le résultat du scan sous forme de comptage par ligne (occurrences + fichiers) avant d'attaquer l'Étape 3 : c'est ce comptage qui alimente le rapport final (Étape 7).
 
 ---
 
@@ -86,7 +80,7 @@ Traiter les cas de [Palettes.md](./references/Palettes.md) :
 
 - **Vars `*-rgb`** : remplacer par la palette neutre correspondante, en enveloppant avec `color.transparentize` **si et seulement si** une opacité était appliquée via `rgba(...)`. Ne **jamais** remplacer aveuglément.
 
-(`<lu-icon color="primary|secondary">` est désormais géré par le schematic — rien à faire manuellement.)
+- **`<lu-icon color="primary|secondary">`** : rien à faire si le schematic `palettes` a été lancé (il le couvre, statique et bound). S'il a été refusé à l'Étape 1, **ne pas le migrer à la main** : ce cas fait partie du périmètre de la PR dédiée aux palettes.
 
 ---
 
