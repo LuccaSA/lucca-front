@@ -2,7 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@an
 import { SkeletonButtonSize } from './skeleton-button.type';
 
 @Component({
-	selector: 'lu-skeleton-button',
+	selector: 'lu-skeleton-button,pr-skeleton-button',
 	templateUrl: './skeleton-button.component.html',
 	styleUrl: './skeleton-button.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

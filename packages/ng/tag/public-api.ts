@@ -1,2 +1,1 @@
-export * from './tag.type';
-export * from './tag.component';
+export * from '@lucca/prisme/tag';

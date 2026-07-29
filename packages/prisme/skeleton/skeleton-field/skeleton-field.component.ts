@@ -1,7 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
 
 @Component({
-	selector: 'lu-skeleton-field',
+	selector: 'lu-skeleton-field,pr-skeleton-field',
 	templateUrl: './skeleton-field.component.html',
 	styleUrl: './skeleton-field.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,15 +1,15 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass, Palette, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { PrClass, Palette, ɵeffectWithDeps } from '@lucca/prisme/core';
+import { LuTooltipModule } from '@lucca/prisme/tooltip';
 import { NumericBadgeSize } from './numeric-badge.type';
 
 @Component({
-	selector: 'lu-numeric-badge',
+	selector: 'lu-numeric-badge,pr-numeric-badge',
 	templateUrl: './numeric-badge.component.html',
 	styleUrl: './numeric-badge.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [LuTooltipModule],
-	providers: [LuClass],
+	providers: [PrClass],
 	host: {
 		class: 'numericBadge',
 		'[class.is-loading]': 'loading()',
@@ -18,7 +18,7 @@ import { NumericBadgeSize } from './numeric-badge.type';
 	encapsulation: ViewEncapsulation.None,
 })
 export class NumericBadgeComponent {
-	#luClass = inject(LuClass);
+	#luClass = inject(PrClass);
 
 	/**
 	 * The value to display, number or string contains number only.

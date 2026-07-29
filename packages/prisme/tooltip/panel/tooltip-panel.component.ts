@@ -4,7 +4,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 
 @Component({
-	selector: 'lu-tooltip-panel',
+	selector: 'lu-tooltip-panel,pr-tooltip-panel',
 	templateUrl: './tooltip-panel.component.html',
 	styleUrl: './tooltip-panel.component.scss',
 	host: {

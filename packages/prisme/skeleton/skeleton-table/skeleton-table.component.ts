@@ -2,19 +2,18 @@ import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { SkeletonColsAlign } from '../skeleton.type';
 
+export type ColAlignTable = 'start' | 'center' | 'end';
+
 @Component({
-	selector: 'lu-skeleton-index-table',
-	templateUrl: './skeleton-index-table.component.html',
-	styleUrl: './skeleton-index-table.component.scss',
+	selector: 'lu-skeleton-table,pr-skeleton-table',
+	templateUrl: './skeleton-table.component.html',
+	styleUrl: './skeleton-table.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [NgTemplateOutlet],
-	host: {
-		class: 'skeleton is-loading',
-	},
 })
-export class SkeletonIndexTableComponent {
+export class SkeletonTableComponent {
 	/**
-	 * Skeleton only show in index table body
+	 * Skeleton only show in table body
 	 */
 	readonly tableBodyOnly = input(false, { transform: booleanAttribute });
 
@@ -30,8 +29,8 @@ export class SkeletonIndexTableComponent {
 	 */
 	readonly rows = input<number>(8);
 
-	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));
+	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 
 	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 }

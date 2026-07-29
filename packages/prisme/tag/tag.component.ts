@@ -1,13 +1,12 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LuccaIcon } from '@lucca-front/icons';
-import { DecorativePalette, Palette } from '@lucca-front/ng/core';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { DecorativePalette, Palette } from '@lucca/prisme/core';
+import { IconComponent, LuccaIcon } from '@lucca/prisme/icon';
+import { LuTooltipModule } from '@lucca/prisme/tooltip';
 import { TagSize } from './tag.type';
 
 @Component({
-	selector: 'lu-tag',
+	selector: 'lu-tag,pr-tag',
 	templateUrl: './tag.component.html',
 	styleUrl: './tag.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

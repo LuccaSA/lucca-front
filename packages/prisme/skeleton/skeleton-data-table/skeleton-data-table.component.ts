@@ -2,20 +2,18 @@ import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { SkeletonColsAlign } from '../skeleton.type';
 
-export type ColAlignTable = 'start' | 'center' | 'end';
-
 @Component({
-	selector: 'lu-skeleton-table',
-	templateUrl: './skeleton-table.component.html',
-	styleUrl: './skeleton-table.component.scss',
+	selector: 'lu-skeleton-data-table,pr-skeleton-data-table',
+	templateUrl: './skeleton-data-table.component.html',
+	styleUrl: './skeleton-data-table.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [NgTemplateOutlet],
 })
-export class SkeletonTableComponent {
+export class SkeletonDataTableComponent {
 	/**
-	 * Skeleton only show in table body
+	 * Skeleton only show in data table body
 	 */
-	readonly tableBodyOnly = input(false, { transform: booleanAttribute });
+	readonly dataTableBodyOnly = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Defines the number of cols (5 by default)
