@@ -15,6 +15,10 @@
     "description": "Le panel des Select (lu-simple-select, lu-multi-select) passe au composant ListBox. Remplacement auto sauf override SCSS de .optionItem : .optionItem-value → .listboxOption-content.",
     "category": "Breaking22"
   },
+  "Signal": {
+    "description": "PR #4737 : derniers @Input()/@Output()/@ViewChild migrés vers input()/output()/viewChild() + syncInputSignal(). Les alias de template et les propriétés plaines sont préservés, mais côté TS : inputs à invoquer avec (), propriétés renommées (inputPlaceholder→placeholderInput, inputMultiple→multipleInput, inputDisabled→disabledInput, overlapInput→pickerOverlap), membres supprimés (placeholder$, isDisabled), Subjects devenus observables dérivés (url$, fields$, loading$ : plus de .next()), pilotage d'un select via linkedSignal .set() (options/loading/optionComparer/optionKey), clueChange en output(), et inputs devenus requis (luOptionGroupBy, apiV3) qui échouent en NG0950 au runtime et non au build.",
+    "category": "Breaking22"
+  },
   "Readonly": {
     "description": "PR #4718 : ~360 propriétés de classe passées en readonly + règle ESLint @angular-eslint/prefer-signals (preferReadonlySignalProperties). readonly bloque la réassignation, pas la mutation (.next()/.set() OK) et une sous-classe qui redéclare la propriété compile → surface de casse étroite, aucun changement runtime. Ce qui casse est le pilotage depuis l'extérieur (réassignation d'un flux, d'un template, d'une ref — y compris les mocks de refs en test). Contient le critère pour retirer un readonly côté LF (précédent interne : LuMultiSelectInputComponent redéclare isFilterPillEmpty sans readonly pour que withSelectAll puisse la réassigner).",
     "category": "Breaking22"

@@ -34,7 +34,7 @@ Sur ~360 propriétés marquées `readonly`, la grande majorité sont des `input(
 
 | Fichier / classe | Propriétés |
 |---|---|
-| `ALuSelectInputComponent` (`core-select`) | `options$`, `loading$`, `disabled$`, `placeholder$`, `isPanelOpen$`, `clueChange$`, `clue$`, `nextPage$`, `activeDescendant$`, `addOptionStrategy$` |
+| `ALuSelectInputComponent` (`core-select`) | `disabled$`, `isPanelOpen$`, `clueChange$`, `clue$`, `nextPage$`, `activeDescendant$` |
 | `LuMultiSelectInputComponent` | `selectParent$`, `selectChildren$` (`override readonly`) |
 | `ALuPopupRef` / `ILuPopupRef` | `onOpen`, `onClose`, `onDismiss`, `onBackdropClick` |
 | Opérateurs d'options (`option`, `api/select`) | `outOptions$`, `paging$`, `clue$`, `displayPlaceholder$` |
