@@ -26,21 +26,27 @@ Cette migration (Lucca Front 22.x ↔ Angular 22) suppose que le projet consomma
 
 ---
 
-## Étape 1 — Orchestration des schematics (à faire en premier)
+## Étape 1 — Orchestration des schematics (optionnelle, mais à faire en premier si retenue)
 
-Lancer les schematics officiels **avant** toute retouche manuelle, via l'outil Bash. Ils couvrent le gros du remplacement palettes de façon fiable et testée.
+Les schematics couvrent le gros du remplacement palettes de façon fiable et testée. Mais **ne pas les lancer d'office** : certaines équipes préfèrent isoler ce diff (souvent volumineux et purement mécanique) dans une **PR dédiée**, séparée du reste de la migration.
 
-```bash
-# Palettes : classes .palette-*, .mod-grey, .icon-color-*, utilitaires u-text*/pr-u-*,
-# et CSS vars --palettes-* / --colors-grey|white|black. HTML + SCSS.
-ng g @lucca-front/ng:palettes
-```
+**Demander donc explicitement à l'utilisateur** — via `AskUserQuestion` — s'il veut que le schematic `palettes` soit joué maintenant. Dans la question, préciser :
 
-Puis, si le projet monte aussi la modernisation Angular (voir Étape 5), les schematics Angular officiels dans **cet ordre** :
+- que LF 22 **remplace des palettes** : `.palette-grey` → `.palette-neutral`, `.palette-primary`/`.palette-secondary` → `.palette-product`, `.palette-lucca` → `.palette-brand`, ainsi que les CSS vars `--palettes-*` / `--colors-grey|white|black` correspondantes, les utilitaires `u-text*`/`pr-u-*`, `.mod-grey`, `.icon-color-*` et l'input `<lu-icon color="primary|secondary">` ;
+- que le schematic modifie HTML + SCSS + templates sur potentiellement beaucoup de fichiers ;
+- les deux réponses possibles : **Oui** (lancer maintenant) / **Non** (laisser pour une PR à part).
 
-```
-signal-input-migration → signal-queries-migration → output-migration → cleanup-unused-imports
-```
+Selon la réponse :
+
+- **Oui** → lancer le schematic via l'outil Bash, puis poursuivre :
+
+  ```bash
+  # Palettes : classes .palette-*, .mod-grey, .icon-color-*, utilitaires u-text*/pr-u-*,
+  # et CSS vars --palettes-* / --colors-grey|white|black. HTML + SCSS.
+  ng g @lucca-front/ng:palettes
+  ```
+
+- **Non** → **ne rien lancer**, ne pas refaire à la main le travail du schematic, et **passer directement à l'Étape 2**. Signaler dans le rapport final (Étape 7) que le remplacement des palettes reste à faire dans une PR dédiée via `ng g @lucca-front/ng:palettes`.
 
 Une fois les schematics passés, il reste les cas ci-dessous que les schematics **ne couvrent pas**.
 
@@ -116,7 +122,7 @@ Appliquer chaque migration en suivant son fichier de référence :
 
 Produire un rapport structuré :
 
-- **Migrations automatiques** (schematics lancés, fichiers modifiés).
+- **Migrations automatiques** (schematics lancés, fichiers modifiés) — et, si le schematic `palettes` a été refusé à l'Étape 1, le rappeler explicitement comme reste à faire dans une PR dédiée.
 - **Migrations manuelles réalisées** (résiduel palettes, refactos composants).
 - **Cas nécessitant une décision humaine** : `*-rgb` avec opacité, overrides `.optionItem` complexes, usages détournés en TS.
 - **Récapitulatif** : nombre d'occurrences par catégorie, fichiers touchés.
