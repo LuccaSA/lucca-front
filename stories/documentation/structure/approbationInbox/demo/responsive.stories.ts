@@ -26,7 +26,7 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 interface MainLayoutHTMLBasicStory {
 	header: boolean;

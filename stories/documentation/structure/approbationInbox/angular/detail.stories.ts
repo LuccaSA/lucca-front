@@ -5,7 +5,7 @@ import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing'
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
