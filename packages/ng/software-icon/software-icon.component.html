@@ -7,4 +7,8 @@
 	[class.mod-L]="size() === 'L'"
 	aria-hidden="true"
 	[innerHtml]="iconUrl() | luSafeExternalSvg"
+	[luTooltip]="iconAlt()"
+	luTooltipOnlyForDisplay
+	[luTooltipDisabled]="!this.withTooltip() && !this.wrapper"
 ></div>
+<span class="pr-u-mask" translate="no">{{ iconAlt() }}</span>

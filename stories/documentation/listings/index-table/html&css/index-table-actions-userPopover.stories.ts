@@ -1,9 +1,9 @@
-import { bob } from '@/stories/users/user.mocks';
+import { finn } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface IndexTableActionsUserPopoverCellStory {}
 
@@ -53,6 +53,6 @@ const Template = (args: IndexTableActionsUserPopoverCellStory) => ({
 });
 
 export const UserPopover: StoryObj<IndexTableActionsUserPopoverCellStory> = {
-	args: { bob },
+	args: { bob: finn },
 	render: Template,
 };

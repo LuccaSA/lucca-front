@@ -8,6 +8,7 @@ import { LuDialogConfig } from '../model';
 	providers: [provideLuDialog()],
 	host: {
 		'(click)': 'click()',
+		'[attr.aria-haspopup]': '"dialog"',
 	},
 })
 export class DialogOpenDirective {

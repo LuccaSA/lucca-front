@@ -1,31 +1,62 @@
+import { JsonPipe } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideRouter } from '@angular/router';
 import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
+import { generateInputs } from '@/helpers/stories';
+
+const me = { id: 66, picture: null, department: { id: 3, name: 'Commercial' }, firstName: 'Pierre', lastName: 'Durand' };
 
 export default {
 	title: 'Documentation/Structure/PageHeader/Angular/Basic',
 	argTypes: {
 		label: {
-			description: 'PortalContent',
+			description: 'Titre du composant. [PortalContent]',
 		},
 		description: {
-			description: 'PortalContent',
+			description: 'Description du composant. [PortalContent]',
 		},
 		container: {
 			description: '[v20.1] Applique un container autour du contenu de Page Header.',
 		},
 		sticky: {
 			description: '[v21.2] Applique un comportement sticky au Page Header quand celui ci n’est pas géré par le Main Layout',
+		},
+		breadcrumbs: {
+			description: 'Exemple avec fil d’Ariane.',
+		},
+		actions: {
+			description: 'Exemple avec des actions générales.',
+		},
+		titleActions: {
+			description: 'Exemple avec des actions spécifiques au titre.',
+		},
+		navigation: {
+			description: 'Exemple avec une navigation horizontale.',
+		},
+		backAction: {
+			description: 'Exemple avec une action de retour en arrière.',
+		},
+		leading: {
+			description: 'Ajout d’un slot avant le titre.',
+		},
+		trailing: {
+			if: { arg: 'trailingWithImpersonation', truthy: false },
+			description: 'Ajout d’un slot après le titre.',
+		},
+		trailingWithImpersonation: {
+			description: 'Utilisation du slot après le titre pour passer l’impersonation',
 		},
 	},
 	decorators: [
@@ -43,14 +74,17 @@ export default {
 				HorizontalNavigationLinkDirective,
 				BreadcrumbsComponent,
 				BreadcrumbsLinkDirective,
+				ImpersonationComponent,
+				JsonPipe,
 			],
 		}),
+
 		applicationConfig({
-			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
+			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }]), provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)],
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { breadcrumbs, actions, navigation, backAction, titleActions, leading, trailing, ...otherArgs } = args;
+		const { breadcrumbs, actions, navigation, backAction, titleActions, leading, trailing, trailingWithImpersonation, ...otherArgs } = args;
 		const titleActionsContainer = titleActions
 			? `
 	<ng-container pageHeaderTitleActions>
@@ -107,14 +141,21 @@ export default {
 			? `
 	<ng-container pageHeaderLeading>${leading}</ng-container>`
 			: ``;
-		const trailingContainer = trailing
-			? `
-	<ng-container pageHeaderTrailing>${trailing}</ng-container>`
-			: ``;
-		if (breadcrumbsContainer || backActionContainer || leadingContainer || titleActionsContainer || trailingContainer || actionsContainer || navigationContainer) {
+		const trailingContainer =
+			trailing || trailingWithImpersonation
+				? `
+	<ng-container pageHeaderTrailing>
+	${trailingWithImpersonation ? `	<lu-impersonation [(selectedUser)]="example" (clear)="example = me" />` : trailing}
+	</ng-container>`
+				: ``;
+		if (breadcrumbsContainer || backActionContainer || leadingContainer || titleActionsContainer || trailingContainer || trailingWithImpersonation || actionsContainer || navigationContainer) {
 			return {
 				template: `<lu-page-header${generateInputs(otherArgs, argTypes)}>${breadcrumbsContainer}${backActionContainer}${leadingContainer}${titleActionsContainer}${trailingContainer}${actionsContainer}${navigationContainer}
 </lu-page-header>`,
+				props: {
+					example: me,
+					me,
+				},
 			};
 		} else {
 			return {
@@ -135,7 +176,8 @@ export const Basic = {
 		backAction: false,
 		container: false,
 		sticky: false,
-		leading: '',
+		trailingWithImpersonation: false,
 		trailing: '',
+		leading: '',
 	},
 };

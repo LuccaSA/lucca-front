@@ -5,11 +5,8 @@ import {
 	Component,
 	computed,
 	forwardRef,
-	HostBinding,
-	HostListener,
 	inject,
 	input,
-	Input,
 	model,
 	numberAttribute,
 	OnDestroy,
@@ -29,6 +26,7 @@ import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, 
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { IconComponent } from '@lucca/prisme/icon';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
@@ -50,6 +48,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		PresentationDisplayDirective,
 		CommonModule,
 		ɵPresentationDisplayDefaultDirective,
+		IconComponent,
 	],
 	providers: [
 		{
@@ -70,43 +69,45 @@ import { LuMultiSelectPanelRef } from './panel.model';
 	],
 	host: {
 		class: 'multiSelect',
+		'[class.mod-filterPill]': 'filterPillClass',
+		'(keydown.control.enter)': 'selectParentOnly()',
+		'(keydown.shift.enter)': 'selectChildrenOnly()',
 	},
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy, OnInit {
-	intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_MULTI_SELECT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_MULTI_SELECT_TRANSLATIONS));
 
 	showColon: false;
 
-	valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
+	readonly valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
-	@Input({ transform: numberAttribute })
-	maxValuesShown = 500;
+	readonly maxValuesShown = input(500, { transform: numberAttribute });
 
-	@Input({ transform: booleanAttribute })
-	keepSearchAfterSelection = false;
+	readonly keepSearchAfterSelection = input(false, { transform: booleanAttribute });
 
-	@Input()
-	filterPillLabelPlural: string;
+	readonly filterPillLabelPlural = input<string>();
 
-	override selectParent$ = new Subject<void>();
-	override selectChildren$ = new Subject<void>();
+	override readonly selectParent$ = new Subject<void>();
+	override readonly selectChildren$ = new Subject<void>();
 
-	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {
 		return this.filterPillMode;
 	}
 
-	hideCombobox = computed(() => (this.valueSignal()?.length ?? 0) > 1);
+	readonly hideCombobox = computed(() => (this.valueSignal()?.length ?? 0) > 1);
 
-	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
+	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	override isFilterPillEmpty = computed(() => {
 		const valueSignal = this.valueSignal();
 		return !valueSignal || valueSignal.length === 0;
 	});
 
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
 	override _value: T[] = [];
 
@@ -127,12 +128,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	public readonly emptyClue$ = new Subject<void>();
 
-	@HostListener('keydown.control.enter')
 	public selectParentOnly() {
 		this.selectParent$.next();
 	}
 
-	@HostListener('keydown.shift.enter')
 	public selectChildrenOnly() {
 		this.selectChildren$.next();
 	}
@@ -151,7 +150,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	public override updateValue(value: T[], skipFocus = false): void {
-		super.updateValue(value, skipFocus, this.keepSearchAfterSelection);
+		super.updateValue(value, skipFocus, this.keepSearchAfterSelection());
 		if (!skipFocus) {
 			this.focusInput();
 		}
@@ -162,7 +161,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	protected override buildPanelRef(): LuMultiSelectPanelRef<T> {
-		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig);
+		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig());
 	}
 
 	protected override bindInputToPanelRefEvents(): void {

@@ -1,6 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
+	DATA_TABLE_ALIGN,
+	DATA_TABLE_SORT,
+	DATA_TABLE_VERTICAL_ALIGN,
 	DataTableBodyComponent,
 	DataTableComponent,
 	DataTableFootComponent,
@@ -9,35 +12,40 @@ import {
 	DataTableRowCellHeaderComponent,
 	DataTableRowComponent,
 } from '@lucca-front/ng/data-table';
+import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { setStoryOptions } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Basic',
 	argTypes: {
+		empty: {
+			description: 'Affiche un empty state à la place des lignes de tableau.',
+		},
 		sort: {
-			options: ['', 'none', 'ascending', 'descending'],
+			options: setStoryOptions(DATA_TABLE_SORT),
 			control: {
 				type: 'select',
 			},
-			description: "Définit l'état de tri d'une cellule d'en-tête.",
+			description: 'Définit l’état de tri d’une cellule d’en-tête.',
 		},
 		align: {
-			options: ['', 'start', 'center', 'end'],
+			options: setStoryOptions(DATA_TABLE_ALIGN),
 			control: {
 				type: 'select',
 			},
 			description: 'Aligne le contenu des cellules horizontalement.',
 		},
 		verticalAlign: {
-			options: ['', 'top', 'middle', 'bottom'],
+			options: setStoryOptions(DATA_TABLE_VERTICAL_ALIGN),
 			control: {
 				type: 'select',
 			},
@@ -45,19 +53,23 @@ export default {
 		},
 		inlineSize: {
 			if: { arg: 'layoutFixed', truthy: true },
-			description: "Modifie la largeur d'une colonne lorsque <code>layoutFixed</code> est activé.",
+			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
 		},
 		selected: {
 			if: { arg: 'selectable', truthy: true },
-			description: "Applique l'état actif à une ligne sélectionnable.",
+			description: 'Applique l’état actif à une ligne sélectionnable.',
 		},
 		selectedLabel: {
 			if: { arg: 'selectable', truthy: true },
-			description: "Texte alternatif restitué à la sélection d'une ligne.",
+			description: 'Texte alternatif restitué à la sélection d’une ligne.',
 		},
 		selectedLabelHead: {
 			if: { arg: 'selectable', truthy: true },
-			description: "Texte alternatif restitué à la sélection de l'ensemble des lignes.",
+			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes.',
+		},
+		mixed: {
+			if: { arg: 'selectable', truthy: true },
+			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
 		},
 		disabled: {
 			if: { arg: 'selectable', truthy: true },
@@ -67,7 +79,7 @@ export default {
 		},
 		groupButtonAlt: {
 			if: { arg: 'group', truthy: true },
-			description: "Texte alternatif restitué au focus de l'action sur le groupe.",
+			description: 'Texte alternatif restitué au focus de l’action sur le groupe.',
 		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
@@ -104,7 +116,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Applique une largeur fixe aux colonnes. La largeur d'une colonne peut être redéfinie via <code>fixedWidth</code>.",
+			description: 'Applique une largeur fixe aux colonnes. La largeur d’une colonne peut être redéfinie via <code>fixedWidth</code>.',
 		},
 		selectable: {
 			control: {
@@ -122,19 +134,19 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Ajoute un champ de saisi dans une cellule.',
+			description: 'Ajoute un champ de saisie dans une cellule.',
 		},
 		nested: {
 			control: {
 				type: 'boolean',
 			},
-			description: "Réduit le <code>border-radius</code> du tableau pour l'imbriquer dans un composant structure.",
+			description: 'Réduit le <code>border-radius</code> du tableau pour l’imbriquer dans un composant structure.',
 		},
 		actions: {
 			control: {
 				type: 'boolean',
 			},
-			description: "Ajoute des actions rapides à droite d'une ligne.",
+			description: 'Ajoute des actions rapides à droite d’une ligne.',
 		},
 		pagination: {
 			control: {
@@ -158,6 +170,7 @@ export default {
 				TextInputComponent,
 				FormsModule,
 				ButtonComponent,
+				EmptyStateSectionComponent,
 				IconComponent,
 				PaginationComponent,
 				StoryModelDisplayComponent,
@@ -170,6 +183,7 @@ export default {
 			cols,
 			actions,
 			editable,
+			empty,
 			verticalAlign,
 			align,
 			group,
@@ -184,6 +198,7 @@ export default {
 			cellBorder,
 			inlineSize,
 			inlineSizeValue,
+			mixed,
 			selectable,
 			lines,
 			nested,
@@ -206,9 +221,11 @@ export default {
 		const selectedAttr = selected ? ` [selected]="true"` : ``;
 		const selectableLabelAttr = selectable ? ` selectedLabel="${selectedLabel}"` : ``;
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
+		const mixedAttr = mixed ? ` mixed` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
 		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" [group]="samplePortalContent"` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
+		const emptyAttr = empty ? ` empty` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
 		const verticalAlignAttr = verticalAlign ? ` verticalAlign="${verticalAlign}"` : ``;
 		const editableAttr = editable ? ` editable` : ``;
@@ -275,25 +292,37 @@ export default {
 	</tfoot>`
 			: ``;
 		const modelEditableDisplayer = editable ? `<pr-story-model-display>{{ example }}</pr-story-model-display>` : ``;
-
-		return {
-			props: { example: text },
-			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}${draggable}>
-	<thead luDataTableHead>
-		<tr luDataTableRow${selectableLabelHeadAttr}>
-			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
-			<th luDataTableCell${inlineSizeAttr}${sortAttr}${alignAttr}>${textHeader}</th>
-		</tr>
-	</thead>
-	<tbody luDataTableBody${groupAttr}${expandedAttr}>${linesContent}
-		<tr luDataTableRow${selectableLabelAttr}>
+		const tbodyTpl = emptyAttr
+			? `<tr luDataTableRow>
+			<th luDataTableCell colspan="${cols}">
+				<lu-empty-state-section
+					hx="3"
+					illustration="magnifyingGlass"
+					heading="Empty State"
+					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
+				/>
+			</th>
+		</tr>`
+			: `${linesContent}<tr luDataTableRow${selectableLabelAttr}>
 			<th luDataTableCell>${textHeader}${verticalAlignContent}</th>${colsContent}
 			<td luDataTableCell${actionsAttr}>${actionsContent}</td>
 		</tr>
 		<tr luDataTableRow${selectableLabelAttr}${selectedAttr}${disabledAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsContent}
 			<td luDataTableCell${editableAttr}>${editableContent}</td>
+		</tr>`;
+
+		return {
+			props: { example: text },
+			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}${draggable}${emptyAttr}>
+	<thead luDataTableHead>
+		<tr luDataTableRow${selectableLabelHeadAttr}${mixedAttr}>
+			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
+			<th luDataTableCell${inlineSizeAttr}${sortAttr}${alignAttr}>${textHeader}</th>
 		</tr>
+	</thead>
+	<tbody luDataTableBody${groupAttr}${expandedAttr}>
+		${tbodyTpl}
 	</tbody>${tfootTpl}${paginationTpl}
 </lu-data-table>
 ${samplePortalContentTpl}${modelEditableDisplayer}`,
@@ -307,6 +336,7 @@ export const Basic: StoryObj = {
 		lines: 2,
 		tfoot: false,
 		align: undefined,
+		empty: false,
 		verticalAlign: undefined,
 		sort: undefined,
 		hover: false,
@@ -316,6 +346,7 @@ export const Basic: StoryObj = {
 		inlineSizeValue: '6rem',
 		selectable: false,
 		selected: false,
+		mixed: false,
 		disabled: false,
 		selectedLabel: 'Sélectionner cette ligne',
 		selectedLabelHead: 'Sélectionner toutes les lignes',

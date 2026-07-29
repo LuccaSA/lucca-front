@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface OverflowHorizontalStory {}
 
@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: OverflowHorizontalStory): string {
-	return `<div class="dataTableWrapper" style="width: 30rem">
+	return `<div class="dataTableWrapper" style="inline-size: 30rem">
 	<div class="dataTableShadows">
 		<table class="dataTable mod-columnsOverflow -is-firstColumnVisible -is-lastColumnVisible">
 			<thead class="dataTable-head">

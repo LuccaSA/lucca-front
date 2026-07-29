@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface TableOfContentBasicStory {
 	disabled: boolean;
@@ -11,7 +11,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Désactive le lien d'un des éléments.",
+			description: 'Désactive le lien d’un des éléments.',
 		},
 	},
 } as Meta;

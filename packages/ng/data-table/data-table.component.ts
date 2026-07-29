@@ -6,6 +6,7 @@ import {
 	computed,
 	contentChild,
 	contentChildren,
+	DestroyRef,
 	ElementRef,
 	forwardRef,
 	inject,
@@ -20,6 +21,7 @@ import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
 import { DataTableRowComponent } from './data-table-row/data-table-row.component';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
+import { DataTableVerticalAlign } from './data-table.type';
 
 @Component({
 	selector: 'lu-data-table',
@@ -42,7 +44,8 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 })
 export class DataTableComponent implements OnInit {
 	#elementRef = inject<ElementRef<Element>>(ElementRef);
-	tableRef = viewChild<ElementRef<Element>>('tableRef');
+	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
+	#destroyRef = inject(DestroyRef);
 
 	readonly hover = input(false, { transform: booleanAttribute });
 	readonly selectable = input(false, { transform: booleanAttribute });
@@ -54,7 +57,7 @@ export class DataTableComponent implements OnInit {
 
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
-	readonly verticalAlign = input<null | 'top' | 'middle' | 'bottom'>(null);
+	readonly verticalAlign = input<DataTableVerticalAlign | null>(null);
 
 	readonly rows = contentChildren(DataTableRowComponent, { descendants: true });
 	readonly header = contentChild(DataTableHeadComponent, { descendants: true });
@@ -64,14 +67,14 @@ export class DataTableComponent implements OnInit {
 	readonly stickyColsStart = input(0, { transform: numberAttribute });
 	readonly stickyColsEnd = input(0, { transform: numberAttribute });
 
-	firstColumnVisibleAfterColsStart = signal(true);
-	lastColumnVisibleBeforeColsEnd = signal(false);
+	readonly firstColumnVisibleAfterColsStart = signal(true);
+	readonly lastColumnVisibleBeforeColsEnd = signal(false);
 
-	firstColumnVisible = signal(true);
-	lastColumnVisible = signal(false);
+	readonly firstColumnVisible = signal(true);
+	readonly lastColumnVisible = signal(false);
 
-	firstRowVisible = signal(true);
-	lastRowVisible = signal(false);
+	readonly firstRowVisible = signal(true);
+	readonly lastRowVisible = signal(false);
 
 	readonly cols = computed(() => this.header()?.cols());
 
@@ -125,9 +128,9 @@ export class DataTableComponent implements OnInit {
 	ngOnInit(): void {
 		const tableElement = this.tableRef()?.nativeElement;
 		if (tableElement) {
-			new ResizeObserver(() => {
-				this.scroll();
-			}).observe(tableElement);
+			const observer = new ResizeObserver(() => this.scroll());
+			observer.observe(this.tableRef().nativeElement);
+			this.#destroyRef.onDestroy(() => observer.disconnect());
 		}
 	}
 }

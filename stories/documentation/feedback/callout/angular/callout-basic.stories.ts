@@ -1,9 +1,11 @@
+import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CALLOUT_HX, CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { generateInputs } from 'stories/helpers/stories';
+import { PALETTE } from '@lucca/prisme/core';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Feedback/Callout/Angular/Basic',
@@ -43,7 +45,7 @@ export default {
 			description: 'Masque le callout.',
 		},
 		palette: {
-			options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
@@ -51,25 +53,25 @@ export default {
 			if: { arg: 'AI', truthy: false },
 		},
 		icon: {
-			options: [null, 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp', 'weatherStars', 'officePenStar'],
+			options: ['', 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp', 'weatherStars', 'officePenStar'],
 			control: {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au callout.',
 		},
 		iconAlt: {
-			description: "Information de l'icône restituée par le lecteur d'écran.",
+			description: 'Information de l’icône restituée par le lecteur d’écran.',
 			type: 'string',
 		},
 		state: {
-			options: [null, 'success', 'warning', 'error'],
+			options: setStoryOptions(CalloutStates),
 			description: 'État du callout.',
 			control: {
 				type: 'select',
 			},
 		},
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(CALLOUT_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -77,17 +79,19 @@ export default {
 		},
 		heading: {
 			type: 'string',
-			description: 'Ajoute un titre au callout.',
+			description: 'Ajoute un titre au callout. [PortalContent]',
 		},
 		hx: {
-			options: [null, 1, 2, 3, 4, 5, 6],
+			options: setStoryOptions(CALLOUT_HX),
 			control: {
 				type: 'select',
 			},
-			description: '[v21.4] Optional',
+			description: '[v21.4] Applique un niveau sémantique au titre.',
 			if: { arg: 'heading', truthy: true },
 		},
-		removedChange: HiddenArgType,
+		removedChange: {
+			description: 'Événement déclenché lors de l’activation du bouton de suppression.',
+		},
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
 			control: {
@@ -95,7 +99,7 @@ export default {
 			},
 		},
 		actions: {
-			description: "[v20.3] Ajoute une liste d'actions sous la description.",
+			description: '[v20.3] Ajoute une liste d’actions sous la description.',
 		},
 		actionsInline: {
 			if: { arg: 'actions', truthy: true },
@@ -107,9 +111,6 @@ export default {
 export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsInline: boolean }> = {
 	args: {
 		heading: '',
-		hx: null,
-		state: null,
-		icon: null,
 		palette: 'none',
 		removable: false,
 		removed: false,
@@ -118,3 +119,26 @@ export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsIn
 		actionsInline: false,
 	},
 };
+
+export const TemplateTEST = createTestStory({ ...Template, args: { ...Template.args, removable: true } }, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const callout = canvasElement.querySelector('lu-callout');
+		await expect(callout).toBeInTheDocument();
+		await expect(canvas.getByText('Feedback description')).toBeVisible();
+	});
+
+	await step('Vérifie le bouton de fermeture (removable)', async () => {
+		const closeButton = canvas.getByRole('button');
+		await expect(closeButton).toBeVisible();
+	});
+
+	await step('Interaction souris - fermeture du callout', async () => {
+		const closeButton = canvas.getByRole('button');
+		await userEvent.click(closeButton);
+		await waitForAngular();
+		await expect(canvasElement.querySelector('.callout')).not.toBeInTheDocument();
+	});
+});

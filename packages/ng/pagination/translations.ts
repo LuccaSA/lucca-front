@@ -47,4 +47,10 @@
 		next: 'Seguinte',
 		resultsA11y: 'Resultados de {{from}} a {{to}} {{itemsCount}}',
 	},
+	pl: {
+		results: '{{from}} – {{to}} na stronie {{itemsCount}}',
+		previous: 'Poprzedni',
+		next: 'Dalej',
+		resultsA11y: 'Wyniki z {{from}} do {{to}} na stronie {{itemsCount}}',
+	},
 };

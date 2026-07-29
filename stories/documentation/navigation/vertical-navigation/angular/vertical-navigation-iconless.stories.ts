@@ -1,5 +1,5 @@
 import { VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 interface VerticalNavigationIconlessStory {
 	iconless: boolean;
@@ -34,7 +34,8 @@ export default {
 		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 3</a>
 		</lu-vertical-navigation-item>
-	</lu-vertical-navigation-group>`,
+	</lu-vertical-navigation-group>
+</lu-vertical-navigation>`,
 		};
 	},
 } as Meta;

@@ -2,13 +2,14 @@ import { AsyncPipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { cleanupTemplate, createTestStory, generateInputs } from 'stories/helpers/stories';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { waitForAngular } from 'stories/helpers/test';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 export default {
@@ -26,7 +27,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -43,7 +44,7 @@ export default {
 			description: 'Ajoute un tag après le label du champ.',
 		},
 		size: {
-			options: ['M', 'S', 'XS'],
+			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
 				type: 'select',
 			},
@@ -56,11 +57,11 @@ export default {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		type: {
 			options: ['text', 'email', 'password', 'url'],
@@ -70,17 +71,17 @@ export default {
 			},
 		},
 		valueAlignRight: {
-			description: '[v18.1] Aligne la valeur du champ à droite.',
+			description: 'Aligne la valeur du champ à droite.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		autocomplete: {
 			type: 'string',
 			description: 'Modifie le comportement autocomplete du champ.',
 		},
 		width: {
-			options: [null, 20, 30, 40, 50, 60],
+			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
@@ -90,10 +91,10 @@ export default {
 			description: '[v20.3] Indique que la valeur du champ a été générée par IA.',
 		},
 		iconAIalt: {
-			description: "Information restituée par le lecteur d'écran.",
+			description: 'Information restituée par le lecteur d’écran.',
 		},
 		iconAItooltip: {
-			description: "Ajoute une info-bulle à l'icône AI.",
+			description: 'Ajoute une info-bulle à l’icône AI.',
 		},
 		hasClearer: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
@@ -102,7 +103,7 @@ export default {
 			description: 'Affiche une icône de recherche.',
 		},
 		searchIcon: {
-			description: "Modifie l'icône (loupe par défaut)",
+			description: 'Modifie l’icône (loupe par défaut)',
 		},
 		disabled: {
 			description: 'Désactive le champ.',
@@ -111,7 +112,7 @@ export default {
 			description: 'Applique un placeholder au champ.',
 		},
 		counter: {
-			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limité via formControl.',
+			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limitée via formControl.',
 		},
 		presentation: {
 			description: 'Affiche une version présentation, en lecture seule, de la valeur',
@@ -384,6 +385,34 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 		iconAItooltip: 'Donnée remplie automatiquement',
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const input = canvas.getByRole('textbox');
+		await expect(input).toBeVisible();
+		await expect(input).toHaveValue('Example value');
+	});
+
+	await step('Interaction souris - saisir du texte', async () => {
+		const input = canvas.getByRole('textbox');
+		await userEvent.clear(input);
+		await userEvent.type(input, 'Nouveau texte');
+		await waitForAngular();
+		await expect(input).toHaveValue('Nouveau texte');
+	});
+
+	await step('Interaction clavier - focus et saisie', async () => {
+		const input = canvas.getByRole('textbox');
+		await userEvent.clear(input);
+		input.focus();
+		await userEvent.keyboard('Texte clavier');
+		await waitForAngular();
+		await expect(input).toHaveValue('Texte clavier');
+	});
+});
 
 export const BasicPasswordVisibilityTEST = createTestStory(PasswordVisiblity, async (context) => {
 	const canvas = within(context.canvasElement);

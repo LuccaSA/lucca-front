@@ -1,6 +1,6 @@
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { cleanupTemplate } from '@/helpers/stories';
 
 interface SortableListBasicStories {
 	label: string;
@@ -17,19 +17,20 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le texte principal d'un élément de liste.",
+			description: 'Modifie le texte principal d’un élément de liste. [PortalContent]',
 		},
 		helperMessage: {
 			control: {
 				type: 'text',
 			},
-			description: "Ajoute un texte secondaire à l'élément de liste.",
+			description: 'Ajoute un texte secondaire à l’élément de liste.',
 		},
 		small: {
 			control: 'boolean',
 			description: 'Modifie la taille du composant.',
 		},
 		clickable: {
+			control: 'boolean',
 			description: 'Rend les lignes cliquables.',
 		},
 		unclearable: {

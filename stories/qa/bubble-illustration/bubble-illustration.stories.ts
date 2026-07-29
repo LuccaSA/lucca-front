@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BubbleIllustrationComponent, BubbleIllustrationList } from '@lucca-front/ng/bubble-illustration';
-import { Meta, StoryObj } from '@storybook/angular';
-import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
+import { BUBBLE_ILLUSTRATION, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { PaletteAllArgType } from '@/helpers/common-arg-types';
 
 @Component({
 	selector: 'bubble-illustration-stories',
@@ -11,7 +11,7 @@ import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
 })
 class BubbleIllustrationStory {
 	paletteOptions = PaletteAllArgType.options;
-	bubbleIllustrationsList = BubbleIllustrationList;
+	bubbleIllustrationsList = BUBBLE_ILLUSTRATION;
 }
 
 export default {

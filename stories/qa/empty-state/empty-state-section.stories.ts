@@ -1,13 +1,14 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'empty-state-section-stories',
 	templateUrl: './empty-state-section.stories.html',
-	imports: [LuSafeExternalSvgPipe, EmptyStateSectionComponent],
+	imports: [LuSafeExternalSvgPipe, EmptyStateSectionComponent, ButtonComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class EmptyStateSectionStory {}

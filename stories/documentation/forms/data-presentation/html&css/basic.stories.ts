@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Forms/Data Presentation/HTML&CSS/Basic',
@@ -6,7 +6,7 @@ export default {
 
 function getTemplate(): string {
 	return `<dl class="presentation">
-	<dt class="presentation-term">label</dt>
+	<dt class="presentation-term">Label</dt>
 	<dd class="presentation-definition">Value</dd>
 </dl>`;
 }

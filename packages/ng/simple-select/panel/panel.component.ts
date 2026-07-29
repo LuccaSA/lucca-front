@@ -1,18 +1,16 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
-	LuOptionGroup,
 	LuSelectPanelRef,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
 	TreeDisplayPipe,
-	TreeNode,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
 	ɵLuOptionComponent,
@@ -33,10 +31,11 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		'[class.colorPanel]': 'colorPanel()',
+		'(document:keydown)': 'onKeydown()',
+		'(document:mousemove)': 'onMousemove()',
 	},
 	imports: [
 		A11yModule,
-		AsyncPipe,
 		FormsModule,
 		NgTemplateOutlet,
 		ɵLuOptionGroupPipe,
@@ -62,40 +61,41 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	public selectId = inject(SELECT_ID);
 	public intl = this.selectInput.intl;
 
-	options$ = this.selectInput.options$;
-	grouping = this.selectInput.groupingSignal;
+	readonly dataSourceOptions = this.selectInput.dataSourceOptions;
+	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
-	loading$ = this.selectInput.loading$;
+	readonly loading = this.selectInput.loading;
 	searchable = this.selectInput.searchable;
-	optionComparer = this.selectInput.optionComparer;
-	optionKey = this.selectInput.optionKey;
+	readonly optionComparer = this.selectInput.optionComparer;
+	readonly optionKey = this.selectInput.optionKey;
 	colorPanel = this.selectInput.colorPicker;
 
-	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
-	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
-	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
-
 	initialValue: T | null = this.selectInput.value;
-	optionTpl = this.selectInput.optionTpl;
+	readonly optionTpl = this.selectInput.optionTpl;
 
-	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	readonly pointerNavigation = signal(false);
 
-	public keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+	onKeydown(): void {
+		this.pointerNavigation.set(false);
+	}
 
-	public selected = computed(() => this.selectInput.valueSignal());
+	onMousemove(): void {
+		this.pointerNavigation.set(true);
+	}
 
-	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
-	public clueChange$ = this.selectInput.clue$.pipe(map((clue) => clue ?? ''));
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
-	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
+	public readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+
+	public readonly selected = computed(() => this.selectInput.valueSignal());
+
+	readonly hasGrouping = computed(() => !!this.grouping());
+	public readonly clue = toSignal(this.selectInput.clue$.pipe(map((clue) => clue ?? '')), { initialValue: '' });
+	public shouldDisplayAddOption = this.selectInput.shouldDisplayAddOption;
+	public groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.searchable);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
 			return;
-		}
-
-		if (evt.target.scrollTop === 0) {
-			this.panelRef.previousPage.emit();
 		}
 
 		if (evt.target.scrollHeight - evt.target.scrollTop - evt.target.clientHeight < 1) {
@@ -106,8 +106,8 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	ngAfterViewInit(): void {
 		this.keyManager.init({
 			queryList: this.options,
-			options$: this.options$,
-			optionComparer: this.optionComparer,
+			options: this.dataSourceOptions,
+			optionComparer: this.optionComparer(),
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
 			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});

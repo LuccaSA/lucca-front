@@ -38,8 +38,8 @@ function getDisplayTexts(fixture: ComponentFixture<unknown>): { hours: string; m
 	const inputs = (fixture.nativeElement as HTMLElement).querySelectorAll(classSpan);
 	expect(inputs.length).toBeGreaterThanOrEqual(2);
 	return {
-		hours: inputs[0].textContent ?? '',
-		minutes: inputs[1].textContent ?? '',
+		hours: inputs[0].getAttribute('data-content-before')!,
+		minutes: inputs[1].getAttribute('data-content-before')!,
 	};
 }
 
@@ -101,6 +101,24 @@ describe('TimePickerComponent', () => {
 
 		const { hours, minutes } = getDisplayTexts(fixture);
 		expect(hours).toBe('5');
+		expect(minutes).toBe('00');
+	});
+
+	it('should register typing 0 in hours when the value is empty', async () => {
+		const fixture = TestBed.createComponent(TimePickerNgModelTestComponent);
+		fixture.detectChanges();
+		await fixture.whenStable();
+
+		expect(getDisplayTexts(fixture).hours).toBe('––');
+
+		const hoursInput = (fixture.nativeElement as HTMLElement).querySelectorAll('.timePicker-fieldset-group-textfield-input')[0] as HTMLInputElement;
+		hoursInput.value = '0';
+		hoursInput.dispatchEvent(new InputEvent('input', { data: '0', inputType: 'insertText', bubbles: true }));
+		fixture.detectChanges();
+
+		const { hours, minutes } = getDisplayTexts(fixture);
+		// 12-hour test locale: midnight (hours 0) displays as 12, proving the 0 registered.
+		expect(hours).toBe('12');
 		expect(minutes).toBe('00');
 	});
 });

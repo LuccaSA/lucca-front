@@ -1,5 +1,5 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
@@ -25,21 +25,26 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	extends ALuSelectInputComponent<T, LuOptionPickerAdvancedComponent<T, ILuOptionItem<T>>>
 	implements ControlValueAccessor, AfterViewInit
 {
-	@Input() standard: 'v3' | 'v4' = 'v3';
-	@Input() api: string;
+	readonly standard = input<'v3' | 'v4'>('v3');
+
+	readonly api = input<string>();
+
 	/**
 	 * only works with standard="v3"
 	 */
-	@Input() fields: string;
-	@Input() filters: string[];
+	readonly fields = input<string>();
+
+	readonly filters = input<string[]>();
+
 	/**
 	 * only works with standard="v3", otherwise use sort
 	 */
-	@Input() orderBy: string;
+	readonly orderBy = input<string>();
+
 	/**
 	 * only works with standard="v4", otherwise use orderBy
 	 */
-	@Input() sort: string;
+	readonly sort = input<string>();
 
 	byId: LuOptionComparer<T> = (option1: T, option2: T) => option1 && option2 && option1.id === option2.id;
 	constructor(

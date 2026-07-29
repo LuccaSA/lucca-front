@@ -8,7 +8,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiDisplayerDirective, LuMultiSelectCounterDisplayerComponent, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 @Component({

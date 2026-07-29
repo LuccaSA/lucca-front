@@ -14,7 +14,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Overflow',
@@ -28,11 +28,11 @@ export default {
 			control: { type: 'range', min: 2, max: 8 },
 		},
 		stickyColsStart: {
-			description: "Nombre de colonnes figées depuis la gauche. Non compatible avec l'usage de colspan.",
+			description: 'Nombre de colonnes figées depuis la gauche. Non compatible avec l’usage de colspan.',
 			control: { type: 'range', min: 0, max: 4 },
 		},
 		stickyColsEnd: {
-			description: "Nombre de colonnes figées depuis la droite. Non compatible avec l'usage de colspan.",
+			description: 'Nombre de colonnes figées depuis la droite. Non compatible avec l’usage de colspan.',
 			control: { type: 'range', min: 0, max: 4 },
 		},
 		noOverflow: {
@@ -77,7 +77,8 @@ export default {
 		const stickyColsStartAttr = stickyColsStart > 0 ? ` stickyColsStart="${stickyColsStart}"` : ``;
 		const stickyColsEndAttr = stickyColsEnd > 0 ? ` stickyColsEnd="${stickyColsEnd}"` : ``;
 
-		let colsContent = `<td luDataTableCell>${text}</td>`;
+		let colsContent = `
+			<td luDataTableCell>${text}</td>`;
 		let colsHeaderContent = `
 			<th luDataTableCell>${textHeader}</th>`;
 		let linesContent = ``;

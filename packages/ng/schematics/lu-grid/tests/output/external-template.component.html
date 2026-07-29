@@ -1,0 +1,39 @@
+<lu-grid>
+	<lu-grid-column colspan="6"><div class="gridDemo">col</div></lu-grid-column>
+	<lu-grid-column colspan="6"><div class="gridDemo">col</div></lu-grid-column>
+</lu-grid>
+<lu-grid mode="auto">
+	<lu-grid-column><div class="gridDemo">auto</div></lu-grid-column>
+	<lu-grid-column><div class="gridDemo">auto</div></lu-grid-column>
+</lu-grid>
+<lu-grid columns="4">
+	<lu-grid-column column="2"><div class="gridDemo">col 2</div></lu-grid-column>
+	<lu-grid-column column="3"><div class="gridDemo">col 3</div></lu-grid-column>
+	<lu-grid-column column="1"><div class="gridDemo">col 1</div></lu-grid-column>
+	<lu-grid-column><div class="gridDemo">col</div></lu-grid-column>
+</lu-grid>
+<lu-grid columns="1">
+	<lu-grid-column justify="start"><div class="gridDemo"></div></lu-grid-column>
+	<lu-grid-column justify="center"><div class="gridDemo"></div></lu-grid-column>
+	<lu-grid-column justify="end"><div class="gridDemo"></div></lu-grid-column>
+</lu-grid>
+<lu-grid>
+	<lu-grid-column colspan="12" [responsive]="{ colspanAtMediaMinXS: 4 }"><div class="gridDemo">col</div></lu-grid-column>
+	<lu-grid-column colspan="12" [responsive]="{ colspanAtMediaMinXS: 8 }"><div class="gridDemo">col</div></lu-grid-column>
+</lu-grid>
+<lu-grid>
+	<lu-grid-column colspan="12" [responsive]="{ colspanAtMediaMinS: 6, colspanAtMediaMinM: 3 }"><div class="gridDemo">col</div></lu-grid-column>
+	<lu-grid-column colspan="12" [responsive]="{ colspanAtMediaMinS: 6, colspanAtMediaMinM: 3 }"><div class="gridDemo">col</div></lu-grid-column>
+</lu-grid>
+<div class="grid-wrapper">
+	<lu-grid>
+		<lu-grid-column colspan="6"><div class="gridDemo">nested</div></lu-grid-column>
+	</lu-grid>
+</div>
+<lu-grid class="mod-custom-mod">
+	<lu-grid-column colspan="6" style="color: red"><div class="gridDemo">extra styles</div></lu-grid-column>
+</lu-grid>
+<lu-grid mode="form">
+	<lu-grid-column colspan="6"><div class="gridDemo">form mode</div></lu-grid-column>
+</lu-grid>
+<form class="grid">form</form>

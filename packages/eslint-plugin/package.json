@@ -1,12 +1,17 @@
 {
   "name": "@lucca-front/eslint-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git",
+    "directory": "packages/eslint-plugin"
+  },
   "version": "1.0.0",
   "type": "module",
   "description": "Custom ESLint rules for Lucca Front",
   "exports": "./index.ts",
   "scripts": {
-    "test": "jest --config jest.config.js",
-    "test:watch": "jest --config jest.config.js --watch"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [
     "eslint",

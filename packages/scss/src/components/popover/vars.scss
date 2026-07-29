@@ -1,3 +1,5 @@
 @mixin vars {
 	--components-popover-padding: var(--pr-t-spacings-100);
+	--components-popover-content-maxBlockSize: 9999px;
+	--components-popover-content-maxInlineSize: 9999px;
 }

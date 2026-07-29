@@ -12,7 +12,8 @@
 	"exclude": [
 		"**/test.ts",
 		"**/*.spec.ts",
-		"./setup-jest.ts",
+		"./vitest.setup.ts",
+		"./vitest.pre-setup.ts",
 		".storybook",
 		"to-migrate"
 	]

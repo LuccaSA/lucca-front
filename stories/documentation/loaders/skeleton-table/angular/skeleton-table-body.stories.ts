@@ -1,5 +1,5 @@
 import { SkeletonTableComponent } from '@lucca-front/ng/skeleton';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface SkeletonTableStory {}
 

@@ -35,7 +35,7 @@ export function registerHeadingsSelectionChange(editor: LexicalEditor, onselecti
 				const node = getSelectedNode(selection);
 				const element = $getNearestNodeOfType(node, HeadingNode);
 				const type = element ? element.getTag() : 'paragraph';
-				onselectionchange(type as CommandPayloadType<typeof FORMAT_HEADINGS>);
+				onselectionchange(type);
 			}
 			return false;
 		},

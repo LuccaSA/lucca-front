@@ -31,4 +31,8 @@
 		placeholderDescription: 'Your search did not produce any results.',
 		placeholderAction: 'Clear search',
 	},
+	pl: {
+		placeholderDescription: 'Brak wyników wyszukiwania',
+		placeholderAction: 'Puste wyszukiwanie',
+	},
 };

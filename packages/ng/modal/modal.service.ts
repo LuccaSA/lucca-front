@@ -35,7 +35,7 @@ export class LuModal {
 	legacyOpen<T extends ILuModalContent, D>(component: ComponentType<T>, data: D | undefined = undefined, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
 		const extendedConfig = { ...this._config, ...config } as LuModalConfig;
 		const ref = this._factory.forge<T, LuModalConfig, D>(component, extendedConfig);
-		ref.open(data as D);
+		ref.open(data);
 		return ref;
 	}
 }

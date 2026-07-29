@@ -23,10 +23,16 @@
 					@include filterPillDisplayerFocused;
 				}
 			}
+
+			&.is-selected {
+				@include filterPillSelected;
+			}
 		}
 
-		&.is-selected {
-			@include selected;
+		&:not(.mod-filterPill) {
+			&.is-selected {
+				@include selected;
+			}
 		}
 
 		&:has(.multipleSelect-displayer-search:focus-visible) {

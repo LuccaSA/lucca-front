@@ -1,10 +1,13 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { RADIO_GROUP_INPUT_SIZE, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/RadioField/Angular',
@@ -15,21 +18,21 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['M', 'S'],
+			options: setStoryOptions(RADIO_GROUP_INPUT_SIZE),
 			control: {
 				type: 'select',
 			},
 			description: 'Modifie la taille du radio.',
 		},
 		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
+			options: setStoryOptions(INLINE_MESSAGE_STATE),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'état de l'inline message.",
+			description: 'Modifie l’état de l’inline message.',
 		},
 		hiddenLabel: {
-			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
@@ -39,7 +42,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: "Modifie le label de l'input.",
+			description: 'Modifie le label de l’input.',
 		},
 		required: {
 			control: {
@@ -104,3 +107,30 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 		presentation: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Vérifie le rendu initial', async () => {
+		const radios = canvas.getAllByRole('radio');
+		await expect(radios.length).toBeGreaterThanOrEqual(2);
+		await expect(radios[0]).toBeChecked();
+	});
+
+	await step('Interaction souris - sélectionner option B', async () => {
+		const radios = canvas.getAllByRole('radio');
+		await userEvent.click(radios[1]);
+		await waitForAngular();
+		await expect(radios[1]).toBeChecked();
+		await expect(radios[0]).not.toBeChecked();
+	});
+
+	await step('Interaction clavier - naviguer avec les flèches', async () => {
+		const radios = canvas.getAllByRole('radio');
+		radios[1].focus();
+		await userEvent.keyboard('{ArrowUp}');
+		await waitForAngular();
+		await expect(radios[0]).toBeChecked();
+	});
+});

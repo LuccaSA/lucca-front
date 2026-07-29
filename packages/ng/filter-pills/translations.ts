@@ -39,4 +39,9 @@
 		placeholder: 'No value selected',
 		additionalFilters: 'Additional filters',
 	},
+	pl: {
+		clear: 'Wyczyść to pole',
+		placeholder: 'Nie wybrano żadnej wartości',
+		additionalFilters: 'Dodatkowe filtry',
+	},
 };

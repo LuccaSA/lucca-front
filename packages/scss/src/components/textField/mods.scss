@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
+@use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
@@ -89,4 +90,26 @@
 	--component-textField-width: 15rem;
 
 	@include S;
+}
+
+@mixin multilanguage {
+	.textField-input-affix-toggle {
+		@include button.outlined;
+		@include button.S;
+
+		pointer-events: auto;
+		padding: var(--pr-t-spacings-50);
+		color: var(--palettes-product-700);
+
+		&:hover {
+			--components-button-backgroundColor: var(--palettes-product-50);
+			--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-product-300);
+		}
+	}
+}
+
+@mixin multilanguageS {
+	.textField-input-affix-toggle {
+		@include button.XS;
+	}
 }

@@ -9,8 +9,8 @@ import {
 	DataTableRowCellHeaderComponent,
 	DataTableRowComponent,
 } from '@lucca-front/ng/data-table';
-import { Meta, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType } from '@/helpers/common-arg-types';
 
 @Component({
 	selector: 'data-table-draggable-stories',
@@ -51,7 +51,7 @@ export default {
 			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
 		},
 		drop: {
-			description: 'Evénement déclanché au drop.',
+			description: 'Evénement déclenché au drop.',
 		},
 		listItem: HiddenArgType,
 	},

@@ -3,8 +3,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, ELuDateGranularity, LuStringDateAdapter } from '@lucca-front/ng/core';
 import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular-vite';
+import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
 
 type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: string; secondSelectedDate: string };
 
@@ -103,7 +103,7 @@ export const DualSelect = generateStory({
 
 export const SelectWithDisplayer = generateStory({
 	name: 'SelectWithDisplayer',
-	description: "Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
+	description: 'Il est possible de modifier l’affichage de la valeur courant à l’aide d’un `luDisplayer` personnalisé.',
 	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate">
@@ -120,7 +120,7 @@ export const SelectWithDisplayer = generateStory({
 
 export const SelectMonthWithDisplayer = generateStory({
 	name: 'SelectMonthWithDisplayer',
-	description: "Il est possible de modifier l'affichage de la valeur courant à l'aide d'un `luDisplayer` personnalisé.",
+	description: 'Il est possible de modifier l’affichage de la valeur courant à l’aide d’un `luDisplayer` personnalisé.',
 	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate" [granularity]="granularity">

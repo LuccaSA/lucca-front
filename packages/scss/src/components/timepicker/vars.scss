@@ -5,10 +5,13 @@
 	--components-timepicker-font: var(--pr-t-font-body-M);
 	--components-timepicker-input-height: 2rem;
 	--components-timepicker-input-minInlineSize: 0.5rem;
-	--components-timepicker-input-padding-inline: var(--pr-t-spacings-100);
+	--components-timepicker-input-padding-inline: var(--components-timepicker-start) var(--components-timepicker-end);
 	--components-timepicker-input-padding-block: var(--pr-t-spacings-50);
 	--components-timepicker-padding: 0;
-	--components-timepicker-display-padding-inline: var(--pr-t-spacings-50);
-	--components-timepicker-display-padding-block: var(--pr-t-spacings-100);
+	--components-timepicker-display-inset-inline: var(--components-timepicker-input-padding-inline);
+	--components-timepicker-display-inset-block: var(--components-timepicker-input-padding-block);
 	--components-timepicker-separator-left: 2.375rem;
+
+	--components-timepicker-start: var(--pr-t-spacings-50);
+	--components-timepicker-end: var(--pr-t-spacings-100);
 }

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Inject, Input, OnInit, Optional, Self, SkipSelf } from '@angular/core';
-import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Inject, input, OnInit, Optional, Self, SkipSelf } from '@angular/core';
+import { ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber, syncInputSignal } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator } from '@lucca-front/ng/option';
 import { ILuApiItem } from '../../api.model';
 import { ALuApiService, LuApiHybridService } from '../../service/index';
@@ -35,6 +35,16 @@ export class LuApiPagerComponent<T extends ILuApiItem = ILuApiItem>
 	extends ALuApiOptionPager<T, LuApiHybridService<T>>
 	implements ILuOptionOperator<T>, OnInit, ILuOnScrollBottomSubscriber, ILuOnOpenSubscriber
 {
+	readonly standard = input<'v3' | 'v4'>();
+
+	readonly api = input<string>();
+
+	readonly fields = input<string>();
+
+	readonly filters = input<string[]>();
+
+	readonly orderBy = input<string>();
+
 	constructor(
 		@Inject(ALuApiService)
 		@Optional()
@@ -43,22 +53,12 @@ export class LuApiPagerComponent<T extends ILuApiItem = ILuApiItem>
 		@Inject(ALuApiService) @Self() selfService: LuApiHybridService<T>,
 	) {
 		super(hostService || selfService);
-	}
 
-	@Input() set standard(standard: 'v3' | 'v4') {
-		this._service.standard = standard;
-	}
-	@Input() set api(api: string) {
-		this._service.api = api;
-	}
-	@Input() set fields(fields: string) {
-		this._service.fields = fields;
-	}
-	@Input() set filters(filters: string[]) {
-		this._service.filters = filters;
-	}
-	@Input() set orderBy(orderBy: string) {
-		this._service.orderBy = orderBy;
+		syncInputSignal(this.standard, (standard) => (this._service.standard = standard));
+		syncInputSignal(this.api, (api) => (this._service.api = api));
+		syncInputSignal(this.fields, (fields) => (this._service.fields = fields));
+		syncInputSignal(this.filters, (filters) => (this._service.filters = filters));
+		syncInputSignal(this.orderBy, (orderBy) => (this._service.orderBy = orderBy));
 	}
 
 	ngOnInit() {

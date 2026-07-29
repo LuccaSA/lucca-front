@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ContainerSize } from './container.type';
 
 @Component({
 	selector: 'lu-container',
@@ -16,7 +17,7 @@ export class ContainerComponent {
 
 	readonly overflow = input(false, { transform: booleanAttribute });
 
-	readonly max = input<null | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL'>(null);
+	readonly max = input<ContainerSize | null>(null);
 
 	readonly classesConfig = computed(() => ({
 		['mod-center']: this.center(),

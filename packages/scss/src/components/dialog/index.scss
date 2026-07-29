@@ -37,8 +37,10 @@
 			@include XXL;
 		}
 
-		&.mod-neutralBackground {
-			@include neutralBackground;
+		// neutralBackground is deprecated
+		&.mod-neutralBackground,
+		&.mod-surfaceDefault {
+			@include surfaceDefault;
 		}
 
 		&:where(.mod-drawer) {
@@ -60,6 +62,10 @@
 
 		&:has(.dialog-inside-header-actionOptional:not(:empty)) {
 			@include withAction;
+		}
+
+		&:has(.horizontalNavigation) {
+			@include withHorizontalNavigation;
 		}
 
 		&.mod-fancy {

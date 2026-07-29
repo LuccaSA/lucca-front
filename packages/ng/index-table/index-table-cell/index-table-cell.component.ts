@@ -29,10 +29,10 @@ import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableRowCellComponent extends BaseIndexTableCell {
-	allowTextSelection = input(false, { transform: booleanAttribute });
-	tfoot = input(false, { transform: booleanAttribute });
+	readonly allowTextSelection = input(false, { transform: booleanAttribute });
+	readonly tfoot = input(false, { transform: booleanAttribute });
 
-	actions = computed(() => {
+	readonly actions = computed(() => {
 		return this.tableRef.header()?.cols()[this.position()].actions();
 	});
 }

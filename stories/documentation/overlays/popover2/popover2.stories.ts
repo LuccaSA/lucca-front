@@ -4,8 +4,8 @@ import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { waitForAngular } from 'stories/helpers/test';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
 import { cleanupTemplate, createTestStory, generateInputs } from '../../../helpers/stories';
@@ -26,7 +26,7 @@ export default {
 		luPopoverTrigger: {
 			control: 'select',
 			options: ['click', 'click+hover', 'hover+focus'],
-			description: "Méthode d'ouverture du popover.",
+			description: 'Méthode d’ouverture du popover.',
 		},
 		luPopoverPosition: {
 			control: 'select',
@@ -50,6 +50,14 @@ export default {
 		luPopoverNoCloseButton: {
 			description: 'Masque le bouton de fermeture du popover visible à la navigation clavier.',
 		},
+		luPopoverMaxBlockSize: {
+			control: 'text',
+			description: 'Modifie la hauteur max de la popover.',
+		},
+		luPopoverMaxInlineSize: {
+			control: 'text',
+			description: 'Modifie la largeur max de la popover.',
+		},
 	},
 } as Meta;
 
@@ -69,6 +77,20 @@ export const Basic: StoryObj<PopoverDirective> = {
 			<lu-divider />
 			<lu-listing checklist palette="success">
 				<lu-listing-item>item item item item item item item item item item item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
 				<lu-listing-item>item</lu-listing-item>
 				<lu-listing-item>item</lu-listing-item>
 			</lu-listing>
@@ -91,9 +113,11 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverTrigger: 'click',
 		luPopoverCloseDelay: 300,
 		luPopoverOpenDelay: 300,
-		luPopoverDisabled: false,
+		luPopoverDisabledInput: false,
 		luPopoverPosition: 'above',
-		luPopoverNoCloseButton: false,
+		luPopoverNoCloseButtonInput: false,
+		luPopoverMaxBlockSize: '',
+		luPopoverMaxInlineSize: '',
 	},
 };
 export const CustomPosition: StoryObj<PopoverDirective> = {
@@ -177,9 +201,9 @@ export const CustomPosition: StoryObj<PopoverDirective> = {
 		luPopoverTrigger: 'click',
 		luPopoverCloseDelay: 300,
 		luPopoverOpenDelay: 300,
-		luPopoverDisabled: false,
+		luPopoverDisabledInput: false,
 		luPopoverPosition: 'above',
-		luPopoverNoCloseButton: false,
+		luPopoverNoCloseButtonInput: false,
 		overlayScrollStrategy: 'reposition',
 	},
 };

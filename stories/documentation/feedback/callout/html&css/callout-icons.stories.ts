@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface CalloutIconStory {
 	s: boolean;
@@ -27,7 +27,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône du callout.",
+			description: 'Modifie l’icône du callout.',
 		},
 	},
 } as Meta;

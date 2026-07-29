@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { CalloutState } from './callout-state';
+import { CalloutState } from './callout.type';
 import { getCalloutIcon } from './callout.utils';
 
 /**

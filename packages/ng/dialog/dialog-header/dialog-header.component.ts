@@ -1,5 +1,5 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, input, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, Injector, input, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -13,6 +13,12 @@ let nextId = 0;
 	selector: '[dialogHeaderAction]',
 })
 export class DialogHeaderAction {}
+
+@Directive({
+	// eslint-disable-next-line @angular-eslint/directive-selector
+	selector: '[dialogHeaderSubtitle]',
+})
+export class DialogHeaderSubtitle {}
 
 @Component({
 	selector: 'lu-dialog-header',
@@ -28,30 +34,35 @@ export class DialogHeaderAction {}
 export class DialogHeaderComponent implements OnInit {
 	#ref = inject(LuDialogRef);
 
-	intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
 
 	dismissible = !this.#ref.config.alert;
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#renderer = inject(Renderer2);
+	#injector = inject(Injector);
 
 	close(): void {
 		this.#ref.dismiss();
 	}
 
-	optionalAction = contentChild(DialogHeaderAction);
+	readonly optionalAction = contentChild(DialogHeaderAction);
+
+	readonly optionalSubtitle = contentChild(DialogHeaderSubtitle);
 
 	ngOnInit(): void {
-		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.
-		setTimeout(() => {
-			const header = this.#elementRef.nativeElement.querySelector('h1');
-			const id = header?.id || `lu-dialog-header-${nextId++}`;
-			if (header) {
-				this.#renderer.setAttribute(header, 'id', id);
-				this.#renderer.addClass(header, 'dialog-inside-header-container-title');
-			}
-			(this.#ref.cdkRef.containerInstance as CdkDialogContainer)?._addAriaLabelledBy(id);
-		});
+		afterNextRender(
+			() => {
+				const header = this.#elementRef.nativeElement.querySelector('h1');
+				const id = header?.id || `lu-dialog-header-${nextId++}`;
+				if (header) {
+					this.#renderer.setAttribute(header, 'id', id);
+					this.#renderer.addClass(header, 'dialog-inside-header-container-title');
+				}
+				(this.#ref.cdkRef.containerInstance as CdkDialogContainer)?._addAriaLabelledBy(id);
+			},
+			{ injector: this.#injector },
+		);
 	}
 }

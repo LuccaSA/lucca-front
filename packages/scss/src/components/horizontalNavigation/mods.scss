@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin header {
 	--components-horizontalNavigation-listPadding: 0 var(--pr-t-spacings-500);
@@ -104,5 +105,18 @@
 					var(--components-horizontalNavigation-listItemActionPaddingInline) + var(--pr-t-spacings-100) + var(--pr-t-spacings-25)
 				);
 		}
+	}
+}
+
+@mixin insideDialog {
+	--components-horizontalNavigation-containerOptional-padding: 0 var(--components-dialog-insideContent-paddingInline);
+}
+
+@mixin insideDialogPanel {
+	--components-horizontalNavigation-panel-display: flex;
+	--components-horizontalNavigation-panel-overflow: auto;
+
+	&:focus-visible {
+		@include a11y.focusVisible($offset: -4px, $borderRadius: var(--pr-t-border-radius-structure));
 	}
 }

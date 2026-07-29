@@ -1,6 +1,15 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<div class="form-field">
@@ -99,6 +108,20 @@
 					</div>
 				</div>
 			</td>
+			<td>
+				<lu-form-field label="Label" inlineMessage="Helper text" required tooltip="Tooltip">
+					<lu-checkbox-input ngModel />
+				</lu-form-field>
+				<lu-form-field label="Label" inlineMessage="Helper text" required tooltip="Tooltip">
+					<lu-checkbox-input [ngModel]="true" />
+				</lu-form-field>
+				<lu-form-field label="Label" inlineMessage="Helper text" required tooltip="Tooltip">
+					<lu-checkbox-input [ngModel]="true" mixed />
+				</lu-form-field>
+				<lu-form-field label="Label" inlineMessage="Helper text" required tooltip="Tooltip">
+					<lu-checkbox-input ngModel mixed />
+				</lu-form-field>
+			</td>
 		</tr>
 		<tr>
 			<td>Small</td>
@@ -148,6 +171,14 @@
 						<p class="inlineMessage-content">Helper text</p>
 					</div>
 				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" inlineMessage="Helper text" required tooltip="Tooltip" size="S">
+					<lu-checkbox-input ngModel />
+				</lu-form-field>
+				<lu-form-field label="Label" inlineMessage="Helper text" required tooltip="Tooltip" size="S">
+					<lu-checkbox-input [ngModel]="true" />
+				</lu-form-field>
 			</td>
 		</tr>
 		<tr>
@@ -227,6 +258,17 @@
 					</div>
 				</div>
 			</td>
+			<td>
+				<lu-form-field label="Label" inlineMessage="Helper text" required tooltip="Tooltip">
+					<lu-checkbox-input ngModel disabled />
+				</lu-form-field>
+				<lu-form-field label="Label" inlineMessage="Helper text" required tooltip="Tooltip">
+					<lu-checkbox-input [ngModel]="true" disabled />
+				</lu-form-field>
+				<lu-form-field label="Label" inlineMessage="Helper text" required tooltip="Tooltip">
+					<lu-checkbox-input [ngModel]="true" mixed disabled />
+				</lu-form-field>
+			</td>
 		</tr>
 		<tr>
 			<td>Invalid</td>
@@ -280,6 +322,7 @@
 					</div>
 				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Checklist</td>
@@ -315,6 +358,20 @@
 						<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 					</span>
 				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-checkbox-input ngModel checklist />
+				</lu-form-field>
+				<lu-form-field label="Label">
+					<lu-checkbox-input [ngModel]="true" checklist />
+				</lu-form-field>
+				<lu-form-field label="Label">
+					<lu-checkbox-input ngModel checklist disabled />
+				</lu-form-field>
+				<lu-form-field label="Label">
+					<lu-checkbox-input [ngModel]="true" checklist disabled />
+				</lu-form-field>
 			</td>
 		</tr>
 	</tbody>

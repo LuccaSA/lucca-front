@@ -5,6 +5,16 @@
 		max-block-size: 20rem;
 		max-inline-size: 100%;
 		overflow: auto;
+
+		.multilanguage_popover-content-button {
+			padding: var(--pr-t-spacings-50);
+		}
+
+		.textField:not(:focus-within, :hover) {
+			.multilanguage_popover-content-button {
+				@include a11y.mask;
+			}
+		}
 	}
 
 	@layer mods {

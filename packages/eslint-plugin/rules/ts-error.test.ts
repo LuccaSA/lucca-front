@@ -36,7 +36,7 @@ const ruleTester = new RuleTester({
 		},
 	},
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-} as any);
+});
 
 ruleTester.run(RULE_NAME, rule, {
 	valid: [

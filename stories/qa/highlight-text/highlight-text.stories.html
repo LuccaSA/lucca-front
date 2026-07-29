@@ -1,0 +1,62 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>lorem <strong class="highlightText">ipsum</strong> dolor</td>
+			<td>lorem <lu-highlight-text>ipsum</lu-highlight-text> dolor</td>
+		</tr>
+		<tr>
+			<td>Sizes</td>
+			<td>
+				<h1>lorem <strong class="highlightText">ipsum</strong> dolor</h1>
+				<h2>lorem <strong class="highlightText">ipsum</strong> dolor</h2>
+				<h3>lorem <strong class="highlightText">ipsum</strong> dolor</h3>
+				<h4>lorem <strong class="highlightText">ipsum</strong> dolor</h4>
+				<h5>lorem <strong class="highlightText">ipsum</strong> dolor</h5>
+				<h6>lorem <strong class="highlightText">ipsum</strong> dolor</h6>
+			</td>
+			<td>
+				<h1>lorem <lu-highlight-text>ipsum</lu-highlight-text> dolor</h1>
+				<h2>lorem <lu-highlight-text>ipsum</lu-highlight-text> dolor</h2>
+				<h3>lorem <lu-highlight-text>ipsum</lu-highlight-text> dolor</h3>
+				<h4>lorem <lu-highlight-text>ipsum</lu-highlight-text> dolor</h4>
+				<h5>lorem <lu-highlight-text>ipsum</lu-highlight-text> dolor</h5>
+				<h6>lorem <lu-highlight-text>ipsum</lu-highlight-text> dolor</h6>
+			</td>
+		</tr>
+		<tr>
+			<td>Line break</td>
+			<td>
+				lorem <strong class="highlightText">ipsum dolor<br />sit</strong> amet
+			</td>
+			<td>
+				lorem <lu-highlight-text>ipsum dolor<br />sit</lu-highlight-text> amet
+			</td>
+		</tr>
+		<tr>
+			<td>Palettes</td>
+			<td>
+				@for (palette of paletteOptions; track palette) {
+					lorem <strong class="highlightText" [class]="`palette-${palette}`">ipsum</strong> dolor<br />
+				}
+			</td>
+			<td>
+				@for (palette of paletteOptions; track palette) {
+					lorem <lu-highlight-text [palette]="palette">ipsum</lu-highlight-text> dolor<br />
+				}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

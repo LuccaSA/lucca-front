@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, model, viewChild } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { BasePickerSize } from './base-picker.type';
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
 import { TimePickerPartComponent } from './time-picker-part.component';
 
@@ -11,18 +12,18 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 	onChange: (value: ISO8601Time | ISO8601Duration) => void;
 	onTouched: () => void;
 
-	step = input<ISO8601Duration | null>(null);
+	readonly step = input<ISO8601Duration | null>(null);
 
-	disabled = model(false);
+	readonly disabled = model(false);
 
-	size = input<'S' | 'M'>();
+	readonly size = input<BasePickerSize>();
 
-	hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
+	readonly hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
 
-	minutesPart = viewChild<TimePickerPartComponent>('minutesPart');
+	readonly minutesPart = viewChild<TimePickerPartComponent>('minutesPart');
 
-	protected hoursIncrement = computed(() => this.getHoursIncrement());
-	protected minutesIncrement = computed(() => this.getMinutesIncrement());
+	protected readonly hoursIncrement = computed(() => this.getHoursIncrement());
+	protected readonly minutesIncrement = computed(() => this.getMinutesIncrement());
 
 	registerOnChange(fn: () => void): void {
 		this.onChange = fn;

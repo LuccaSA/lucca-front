@@ -1,0 +1,7 @@
+{
+	"_doc": "Config locale (copier en generate-skills-config.json, gitignored). Si ce fichier est absent, la variable d'environnement FIGMA_TOKEN est utilisée.",
+	"_how_to_get_token": "Figma → Profil → Settings → Security → Personal access tokens (lecture seule suffit)",
+	"figma": {
+		"token": "figd_YOUR_FIGMA_TOKEN_HERE"
+	}
+}

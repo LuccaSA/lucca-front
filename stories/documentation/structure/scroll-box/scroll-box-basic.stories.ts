@@ -1,5 +1,5 @@
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface ScrollBoxBasicStory {}
 
@@ -53,7 +53,7 @@ function getTemplate(args: ScrollBoxBasicStory): string {
 	</lu-scroll-box>
 </div>
 <lu-scroll-box>
-	<div style="width: 200vw" class="box">box</div>
+	<div style="inline-size: 200vw" class="box">box</div>
 </lu-scroll-box>
 <lu-scroll-box>
 	<div class="box">box</div>
@@ -75,7 +75,7 @@ const Template = (args: ScrollBoxBasicStory) => ({
 		.resize {
 			resize: horizontal;
 			overflow: scroll;
-			width: fit-content;
+			inline-size: fit-content;
 		}
 	`,
 	],

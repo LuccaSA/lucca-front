@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'palettes-products-stories',
@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 	styles: [
 		`
 			.demo-QAtable {
-				width: 100%;
+				inline-size: 100%;
 				table-layout: fixed;
 
 				.palette {

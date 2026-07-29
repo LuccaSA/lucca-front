@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { interval, map } from 'rxjs';
 
 @Component({
@@ -86,11 +86,11 @@ import { interval, map } from 'rxjs';
 			}
 
 			.paddingRight {
-				padding-right: 50px;
+				padding-inline-end: 50px;
 			}
 
 			.paddingLeft {
-				padding-left: 50px;
+				padding-inline-start: 50px;
 			}
 
 			.borderRight {

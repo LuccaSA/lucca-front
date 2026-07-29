@@ -1,6 +1,7 @@
 import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, ElementRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
+import { getPushPanelViewportMargin } from '@lucca-front/ng/core';
 import { addAttributesOnCdkContainer, LuSelectPanelRef, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 import { takeUntil } from 'rxjs';
 import { LuSelectPanelComponent } from '../panel';
@@ -121,7 +122,7 @@ export class LuSimpleSelectPanelRefFactory {
 		const overlayConfig: OverlayConfig = overlayConfigOverride || {};
 		overlayConfig.positionStrategy = this.positionBuilder
 			.flexibleConnectedTo(this.elementRef)
-			.withViewportMargin(8)
+			.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement, 8))
 			.withPositions([
 				{
 					originX: 'start',

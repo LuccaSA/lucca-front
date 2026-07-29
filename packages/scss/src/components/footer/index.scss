@@ -1,5 +1,7 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/function';
+@use '@lucca-front/scss/src/commons/config';
 
 .footer {
 	@layer components {
@@ -53,6 +55,12 @@
 
 		&:has(.footer-containerOptional) {
 			@include withContainer;
+		}
+
+		@each $breakpoint, $value in config.$breakpoints {
+			.footer-containerOptional.mod-containerMax#{$breakpoint} {
+				@include withContainerMax(function.pxToRem($value));
+			}
 		}
 	}
 }

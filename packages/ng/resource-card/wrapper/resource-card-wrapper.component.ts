@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { ResourceCardSize } from '../resource-card.type';
 import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token';
 
 @Component({
@@ -23,5 +24,5 @@ export class ResourceCardWrapperComponent {
 
 	readonly draggable = input(false, { transform: booleanAttribute });
 
-	readonly size = input<'S' | null>(null);
+	readonly size = input<ResourceCardSize | null>(null);
 }

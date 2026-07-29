@@ -1,7 +1,7 @@
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 interface MainLayoutAngularBasicStory {
 	header: boolean;
@@ -36,7 +36,7 @@ export default {
 		},
 		repeatContent: {
 			control: { type: 'range', min: 1, max: 10 },
-			description: "[Story] Modifie le nombre d'éléments <lu-main-layout-block>",
+			description: '[Story] Modifie le nombre d’éléments <lu-main-layout-block>',
 		},
 		repeatOverflow: {
 			control: { type: 'range', min: 1, max: 10 },

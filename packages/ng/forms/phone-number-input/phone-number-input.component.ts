@@ -5,6 +5,7 @@ import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-fr
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/mobile/examples';
+import { PhoneNumberInputAutocomplete } from './phone-number-input.type';
 import { CountryCode, E164Number } from './types';
 import { PhoneNumberValidators } from './validators';
 
@@ -64,7 +65,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	readonly label = input<string>();
 
-	readonly autocomplete = input<'off' | 'tel'>();
+	readonly autocomplete = input<PhoneNumberInputAutocomplete>();
 
 	/**
 	 * Which countries should be shown? Defaults to empty array which means all of them.
@@ -105,9 +106,9 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		return this.prefixEntries.filter((e) => whitelist.includes(e.country));
 	});
 
-	query = signal('');
+	readonly query = signal('');
 
-	protected prefixesDisplay = computed(() => {
+	protected readonly prefixesDisplay = computed(() => {
 		const query = this.query();
 		if (query === '') {
 			return this.#prefixEntries();
@@ -117,17 +118,17 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		});
 	});
 
-	countryCodeSelected = signal<CountryCode | undefined>(undefined);
+	readonly countryCodeSelected = signal<CountryCode | undefined>(undefined);
 
-	countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
+	readonly countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
 
-	placeholder = computed(() => {
+	readonly placeholder = computed(() => {
 		const countryCode = this.countryCode();
 		const exampleNumber = this.noAutoPlaceholder() === false && countryCode ? getExampleNumber(countryCode, examples) : undefined;
 		return exampleNumber?.formatNational() ?? '';
 	});
 
-	displayedNumber = signal<string | undefined>(undefined);
+	readonly displayedNumber = signal<string | undefined>(undefined);
 
 	readonly prefixEntry = computed(() => this.#prefixEntries().find((p) => p.country === this.countryCode()));
 

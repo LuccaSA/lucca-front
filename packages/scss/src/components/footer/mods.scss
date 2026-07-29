@@ -10,17 +10,11 @@
 	--components-footer-actions-margin: 0;
 }
 
-@mixin fancy {
-	--components-footer-actions-margin: 0;
-	--components-footer-boxShadow: none;
-	--components-footer-paddingBlock: 0 var(--pr-t-spacings-150);
-	--components-footer-overflow: visible;
-}
-
 @mixin insideDialog {
 	--components-footer-paddingInline: var(--pr-t-spacings-300);
 	--commons-container-padding: 0;
 	--components-footer-overflow: hidden;
+	--components-footer-isolation: isolate;
 }
 
 @mixin wide {
@@ -29,4 +23,8 @@
 
 @mixin withContainer {
 	--components-footer-paddingInline: 0;
+}
+
+@mixin withContainerMax($breakpoint) {
+	--components-footer-container-maxInlineSize: #{$breakpoint};
 }

@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 import { FileEntry } from '../file-upload-entry';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatFileSize } from '../formatter';
+import { FileEntrySize, FileEntryState } from './file-entry.type';
 
 @Component({
 	selector: 'lu-file-entry',
@@ -30,22 +31,26 @@ export class FileEntryComponent {
 
 	readonly intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
 
-	readonly state = input<'success' | 'loading' | 'error' | 'default'>('default');
+	readonly state = input<FileEntryState>('default');
 
 	readonly displayFileName = input(false, { transform: booleanAttribute });
+
+	readonly structure = input(false, { transform: booleanAttribute });
 
 	readonly inlineMessageError = input<string | null>(null);
 
 	readonly entry = input.required<FileEntry>();
 
-	readonly size = input<'S' | null>(null);
+	readonly size = input<FileEntrySize | null>(null);
 
 	readonly iconOverride = input('');
 
 	readonly downloadURL = input('');
 
+	readonly openInNewTab = input(false, { transform: booleanAttribute });
+
 	readonly password = input('');
-	passwordChange$ = new Subject<string>();
+	readonly passwordChange$ = new Subject<string>();
 	passwordChange = outputFromObservable(this.passwordChange$);
 
 	get withPassword() {
@@ -54,7 +59,7 @@ export class FileEntryComponent {
 
 	readonly media = input(false, { transform: booleanAttribute });
 
-	deleteFile$ = new Subject<void>();
+	readonly deleteFile$ = new Subject<void>();
 
 	deleteFile = outputFromObservable(this.deleteFile$);
 
@@ -64,7 +69,7 @@ export class FileEntryComponent {
 
 	readonly fileName = computed(() => this.entry().name);
 	readonly fileType = computed<string>(() => this.entry().type ?? '');
-	readonly fileSize = computed<number>(() => this.entry().size ?? 0);
+	readonly fileSize = computed<number | null>(() => this.entry().size ?? null);
 
 	readonly fileSizeDisplay = computed(() => {
 		const fileSize = this.fileSize();
@@ -111,11 +116,11 @@ export class FileEntryComponent {
 			}
 		}
 
-		if (!this.media() && this.size() === null) {
+		if (!this.media() && this.size() === 'L') {
 			return null;
 		}
 
-		if (this.size() === 'S' && !this.media()) {
+		if (this.size() === null && !this.media()) {
 			return this.fileTypeDisplay() + fileSize;
 		}
 

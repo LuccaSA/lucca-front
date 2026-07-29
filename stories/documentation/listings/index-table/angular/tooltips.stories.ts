@@ -1,4 +1,4 @@
-import { bob } from '@/stories/users/user.mocks';
+import { finn } from '@/stories/users/user.mocks';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import {
@@ -12,8 +12,8 @@ import {
 	IndexTableRowComponent,
 } from '@lucca-front/ng/index-table';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType } from '@/helpers/common-arg-types';
 
 interface BasicStory {}
 
@@ -100,6 +100,6 @@ const Template = (args: BasicStory) => ({
 });
 
 export const Basic: StoryObj<BasicStory> = {
-	args: { bob },
+	args: { bob: finn },
 	render: Template,
 };

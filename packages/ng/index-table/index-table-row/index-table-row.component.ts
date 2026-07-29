@@ -1,8 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { LuTooltipAnchorRef } from '@lucca-front/ng/tooltip';
 import { LU_INDEX_TABLE_BODY_INSTANCE } from '../index-table-body/index-table-body.token';
 import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 import { LU_INDEX_TABLE_FOOT_INSTANCE } from '../index-table-foot/index-table-foot.token';
@@ -33,17 +34,24 @@ import { LU_INDEX_TABLE_ROW_INSTANCE } from './index-table-row.token';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IndexTableRowComponent {
-	bodyRef = inject(LU_INDEX_TABLE_BODY_INSTANCE, { optional: true });
-	headRef = inject(LU_INDEX_TABLE_HEAD_INSTANCE, { optional: true });
-	footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
+export class IndexTableRowComponent implements LuTooltipAnchorRef {
+	readonly #elementRef = inject<ElementRef<HTMLTableRowElement>>(ElementRef);
+
+	readonly bodyRef = inject(LU_INDEX_TABLE_BODY_INSTANCE, { optional: true });
+	readonly headRef = inject(LU_INDEX_TABLE_HEAD_INSTANCE, { optional: true });
+	readonly footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
 
 	public readonly cells = contentChildren(LU_INDEX_TABLE_CELL_INSTANCE);
 
 	protected tableRef = inject(LU_INDEX_TABLE_INSTANCE);
 
-	selected = model<boolean>(false);
-	selectedLabel = input<string | null>(null);
-	disabled = input(false, { transform: booleanAttribute });
-	stack = input(1, { transform: numberAttribute });
+	getElementRef(): ElementRef<HTMLTableRowElement> {
+		return this.#elementRef;
+	}
+
+	readonly selected = model<boolean>(false);
+	readonly selectedLabel = input<string | null>(null);
+	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly mixed = input(false, { transform: booleanAttribute });
+	readonly stack = input(1, { transform: numberAttribute });
 }

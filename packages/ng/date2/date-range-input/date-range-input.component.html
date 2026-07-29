@@ -167,13 +167,13 @@
 </ng-container>
 
 <ng-container *luPresentationDisplayDefault>
-	<span class="pr-u-mask">{{ intl().from }}</span>
+	{{ intl().from }}
 	@if (startLabel()) {
 		{{ startLabel() }}
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}
-	<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
+	{{ intl().to }}
 	@if (endLabel()) {
 		{{ endLabel() }}
 	} @else {

@@ -28,11 +28,18 @@
 	}
 
 	@at-root ($atRoot) {
+		.horizontalNavigationWrapper {
+			grid-area: overflow;
+			min-block-size: 0;
+			display: flex;
+			flex-direction: column;
+		}
+
 		// stylelint-disable-next-line selector-disallowed-list -- .menu-containerOptional is deprecated
 		.menu-containerOptional,
 		.horizontalNavigation-containerOptional {
 			max-inline-size: var(--commons-container-maxWidth);
-			padding: var(--commons-container-padding);
+			padding: var(--components-horizontalNavigation-containerOptional-padding);
 		}
 
 		// stylelint-disable-next-line selector-disallowed-list -- .menu-list is deprecated
@@ -136,6 +143,21 @@
 				block-size: 0;
 				overflow: hidden;
 				font-weight: var(--pr-t-font-fontWeight-semibold);
+			}
+		}
+
+		.horizontalNavigation_panel {
+			display: var(--components-horizontalNavigation-panel-display);
+			overflow: var(--components-horizontalNavigation-panel-overflow);
+			min-height: 0;
+			flex-direction: column;
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: -2px, $borderRadius: var(--pr-t-border-radius-small));
+			}
+
+			&:not(.is-active) {
+				display: none;
 			}
 		}
 	}

@@ -13,10 +13,6 @@
 @if (counterMax() > 0) {
 	<span class="formLabel-counter" [attr.id]="counterId()" aria-live="polite">
 		<span aria-hidden="true">{{ counterStatus() }}/{{ counterMax() }}</span>
-		<span class="pr-u-mask">{{
-			counterStatus() <= 1
-				? (intl().counterAlt.one | intlParams: { counterStatus: counterStatus(), counterMax: counterMax() })
-				: (intl().counterAlt.other | intlParams: { counterStatus: counterStatus(), counterMax: counterMax() })
-		}}</span>
+		<span class="pr-u-mask">{{ counterAltLabel() | intlParams: { counterStatus: counterStatus(), counterMax: counterMax() } }}</span>
 	</span>
 }

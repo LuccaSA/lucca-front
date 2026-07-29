@@ -42,8 +42,16 @@
 
 @mixin selected {
 	.multipleSelect-displayer-search {
-		&[readonly],
-		&:not(:focus) {
+		&:not(:focus),
+		&[readonly] {
+			@include a11y.mask;
+		}
+	}
+}
+
+@mixin filterPillSelected {
+	.multipleSelect-displayer-search {
+		&[readonly] {
 			@include a11y.mask;
 		}
 	}

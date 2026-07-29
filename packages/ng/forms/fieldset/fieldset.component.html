@@ -4,6 +4,7 @@
 	[class.mod-expandable]="expandable()"
 	[class.mod-horizontal]="horizontal()"
 	[class.mod-S]="size() === 'S'"
+	[class.mod-hiddenLegend]="hiddenLegend()"
 >
 	<legend class="fieldset-title">
 		@if (expandable()) {
@@ -15,7 +16,7 @@
 				(click)="expanded.set(!expanded())"
 			>
 				<ng-container *ngTemplateOutlet="titleContent" />
-				<lu-icon icon="arrowChevronBottom" />
+				<span luButton="ghost" size="S"><lu-icon icon="arrowChevronBottom" /></span>
 			</button>
 		} @else if (action()) {
 			<span class="fieldset-title-content">

@@ -17,8 +17,8 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType } from '@/helpers/common-arg-types';
 
 interface BasicStory {
 	layoutFixed: boolean;
@@ -33,7 +33,7 @@ export default {
 			description: 'Applique une largeur fixe aux colonnes.',
 		},
 		dropdown: {
-			description: "Remplace les boutons d'action par un menu déroulant.",
+			description: 'Remplace les boutons d’action par un menu déroulant.',
 		},
 	},
 	decorators: [

@@ -23,7 +23,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 				<div *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user"></div>
 			}
 			@if (user.additionalInformation) {
-				<div class="lu-select-additionalInformation">({{ user.additionalInformation }})</div>
+				<div class="option-additional">{{ user.additionalInformation }}</div>
 			}
 		}
 
@@ -31,24 +31,15 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 			<span translate="no">{{ user | luUserDisplay: userDirective.displayFormat() }}</span>
 		</ng-template>
 	`,
-	styles: [
-		`
-			.lu-select-additionalInformation {
-				font-size: 80%;
-				font-style: italic;
-				margin-block-start: -0.25em;
-			}
-		`,
-	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserOptionComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectWithAdditionnalInformation<LuCoreSelectUser>>>(LU_OPTION_CONTEXT);
 	protected userDirective = inject(LuCoreSelectUsersDirective);
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
-	protected hasEmptyClue$ = this.userDirective.select.clueChange$.pipe(
+	protected readonly hasEmptyClue$ = this.userDirective.select.clueChange$.pipe(
 		startWith(this.userDirective.select.clue),
 		map((clue) => !clue),
 	);
-	protected customUserOptionTpl = this.userDirective.customUserOptionTpl;
+	protected readonly customUserOptionTpl = this.userDirective.customUserOptionTpl;
 }

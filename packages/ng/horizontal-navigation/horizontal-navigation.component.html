@@ -1,17 +1,51 @@
-@if (container()) {
-	<div class="horizontalNavigation-containerOptional">
+<div
+	class="horizontalNavigation"
+	[class]="paletteClass()"
+	[class.mod-noBorder]="noBorder()"
+	[class.mod-S]="size() === `S`"
+	[class.mod-vertical]="vertical()"
+>
+	@if (container() || this.dialogRef !== null) {
+		<div class="horizontalNavigation-containerOptional">
+			<ng-container *ngTemplateOutlet="horizontalNavigationList" />
+		</div>
+	} @else {
 		<ng-container *ngTemplateOutlet="horizontalNavigationList" />
-	</div>
-} @else {
-	<ng-container *ngTemplateOutlet="horizontalNavigationList" />
+	}
+</div>
+
+@if (isTablist()) {
+	<ng-content />
 }
 
 <ng-template #horizontalNavigationList>
-	<ul class="horizontalNavigation-list">
-		@for (link of links(); track $index) {
-			<li class="horizontalNavigation-list-item">
-				<ng-container *ngTemplateOutlet="link.template" />
-			</li>
+	<ul class="horizontalNavigation-list" [attr.role]="isTablist() ? 'tablist' : null">
+		@if (isTablist()) {
+			@for (tab of tabs(); track $index) {
+				<li class="horizontalNavigation-list-item">
+					<button
+						#tabButton
+						[attr.tabindex]="selectedIndex() !== $index ? '-1' : null"
+						[attr.aria-selected]="selectedIndex() === $index"
+						[attr.disabled]="tab.disabled() ? 'disabled' : null"
+						aria-controls="panel-{{ tab.index() }}"
+						id="tab-{{ tab.index() }}"
+						(keydown)="changeTab($event, $index)"
+						(click)="navigateToTabByIndex($index)"
+						role="tab"
+						type="button"
+						class="horizontalNavigation-list-item-action"
+					>
+						<ng-container *luPortal="tab.label()" />
+					</button>
+				</li>
+			}
+		} @else {
+			@for (link of links(); track $index) {
+				<li class="horizontalNavigation-list-item">
+					<ng-container *ngTemplateOutlet="link.template" />
+				</li>
+			}
 		}
 	</ul>
 </ng-template>

@@ -5,8 +5,8 @@ import { isNotNil } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { ILuDepartment } from '@lucca-front/ng/department';
-import { combineLatest, map, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { combineLatest, map, Observable, of } from 'rxjs';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 
 @Directive({
@@ -25,12 +25,13 @@ import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepartment> extends ALuCoreSelectApiDirective<TreeNode<T>> implements OnInit, CoreSelectApiTotalCountProvider {
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/departments/tree');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	operationIds = input<readonly number[] | null>(null);
-	uniqueOperationIds = input<readonly number[] | null>(null);
-	appInstanceId = input<number | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/departments/tree');
+	readonly countUrl = input<string>('/organization/structure/api/departments');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly operationIds = input<readonly number[] | null>(null);
+	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	readonly appInstanceId = input<number | null>(null);
+	readonly searchDelimiter = input<string>(' ');
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
@@ -42,6 +43,14 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 				return this.trim(data, clue);
 			}),
 		);
+	}
+
+	protected override getOptionsPage(params: Record<string, string | number | boolean> | null, page: number): Observable<{ items: TreeNode<T>[]; isLastPage: boolean }> {
+		if (page > 0) {
+			return of({ items: [], isLastPage: true });
+		}
+
+		return super.getOptionsPage(params, page).pipe(map((result) => ({ ...result, isLastPage: true })));
 	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null): Observable<TreeNode<T>[]> {
@@ -56,7 +65,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 			);
 	}
 
-	trim(options: TreeNode<T>[], clue: string): TreeNode<T>[] {
+	trim(options: readonly TreeNode<T>[], clue: string): TreeNode<T>[] {
 		return options
 			.map((option) => {
 				if (option.node.name.toLowerCase().includes(clue.toLowerCase())) {
@@ -71,7 +80,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 			.filter(isNotNil);
 	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const operationIds = this.operationIds();
 			const uniqueOperationIds = this.uniqueOperationIds();
@@ -85,11 +94,18 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		}),
 	);
 
-	public totalCount$ = this.select.options$.pipe(
-		filter((opts) => opts.length > 0),
-		map((opts) => {
-			return opts.map((branch) => this.flattenTree(branch)).flat().length;
-		}),
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.countUrl(), filters: this.filters() }))).pipe(
+		debounceTime(250),
+		switchMap(({ url, filters }) =>
+			this.httpClient.get<{ count: number }>(url, {
+				params: {
+					...filters,
+					limit: 0,
+					['fields.root']: 'count',
+				},
+			}),
+		),
+		map((res) => res?.count ?? 0),
 	);
 
 	protected flattenTree(branch: TreeNode<T>): T[] {

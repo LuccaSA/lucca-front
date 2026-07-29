@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuToastInput, LuToastType, LuToastsComponent, LuToastsService, defaultToastDuration } from '@lucca-front/ng/toast';
-import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
+import { defaultToastDuration, LuToastInput, LuToastsComponent, LuToastsService, LuToastType } from '@lucca-front/ng/toast';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -46,6 +46,10 @@ class ToastsStory implements OnInit, OnDestroy {
 		this.error$.next(this.getRandomMessage());
 	}
 
+	onClickButtonInsideToast() {
+		this.createToast('Info');
+	}
+
 	private getRandomMessage(): string {
 		const toastsValues = [
 			'Lorem ipsum',
@@ -64,10 +68,6 @@ class ToastsStory implements OnInit, OnDestroy {
 		const random = Math.floor(Math.random() * toastsValues.length);
 		return toastsValues[random];
 	}
-
-	onClickButtonInsideToast() {
-		this.createToast('Info');
-	}
 }
 
 export default {
@@ -81,7 +81,7 @@ const template = (args: ToastsStory) => ({
 });
 
 const code = `
-/* Ajouter l'encre <lu-toasts /> dans le app.component.html */
+/* Ajouter l'encre <lu-toasts /> dans app.component.html, en dessous de <lu-app-layout />, afin que les toasts soient affichés au-dessus de tous les overlays (voir la structure complète sur la page AppLayout).*/
 <lu-toasts [bottom]="true" [sources]="[]" />
 
 /* Ajouter un toast avec la méthode addToast(..) du LuToastsService */

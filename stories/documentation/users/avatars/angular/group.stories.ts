@@ -1,13 +1,42 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
-import { Meta, StoryObj } from '@storybook/angular';
-import { squidwards } from '../../user.mocks';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { jake } from '../../user.mocks';
 
 @Component({
 	selector: 'avatar-stories',
 	imports: [LuUserPictureModule],
+	styles: [
+		`
+			:host {
+				display: flex;
+				flex-direction: column;
+				gap: var(--pr-t-spacings-400);
+			}
+		`,
+	],
 	template: `
 		<ul class="avatarWrapper" [class]="sizes()">
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
 			<li class="avatarWrapper-item" translate="no">
 				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
 				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
@@ -31,6 +60,26 @@ import { squidwards } from '../../user.mocks';
 		</ul>
 
 		<ul class="avatarWrapper" [class]="sizes()">
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+			</li>
 			<li class="avatarWrapper-item" translate="no">
 				<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
 				<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
@@ -88,9 +137,70 @@ import { squidwards } from '../../user.mocks';
 					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
 		</ul>
 
 		<ul class="avatarWrapper" [class]="sizes()">
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
+
+			<li class="avatarWrapper-item" translate="no">
+				<a href="#" class="avatarWrapper-item-action">
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
+					<span class="pr-u-mask">{{ user.firstName }} {{ user.lastName }}</span>
+				</a>
+			</li>
 			<li class="avatarWrapper-item" translate="no">
 				<a href="#" class="avatarWrapper-item-action">
 					<lu-user-picture aria-hidden="true" class="avatar" [user]="user" />
@@ -130,7 +240,7 @@ import { squidwards } from '../../user.mocks';
 class AvatarStory {
 	sizes = input<string>();
 
-	user = squidwards;
+	user = jake;
 }
 
 export default {

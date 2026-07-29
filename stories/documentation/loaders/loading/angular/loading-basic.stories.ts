@@ -1,6 +1,6 @@
 import { LoadingComponent } from '@lucca-front/ng/loading';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { cleanupTemplate } from '@/helpers/stories';
 
 interface LoadingsBasicStory {
 	label: string;
@@ -17,6 +17,9 @@ export default {
 		label: {
 			description: '[Story] Modifie le texte affiché par le composant.',
 			control: 'text',
+		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écrans.',
 		},
 		L: {
 			description: 'Applique la taille L au loading. Applique également automatiquement le mode block.',

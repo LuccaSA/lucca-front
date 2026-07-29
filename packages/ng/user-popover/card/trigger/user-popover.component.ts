@@ -4,6 +4,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
+import { SkeletonUserPopoverComponent } from '@lucca-front/ng/skeleton';
 import { ILuUser } from '@lucca-front/ng/user';
 import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -18,7 +19,7 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 	selector: 'lu-user-popover-content',
 	templateUrl: './user-popover.component.html',
 	styleUrl: './user-popover.component.scss',
-	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent],
+	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, SkeletonUserPopoverComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserPopoverComponent {
@@ -28,13 +29,13 @@ export class LuUserPopoverComponent {
 
 	#service = inject(LuUserPopoverStore);
 
-	intl = input(...intlInputOptions(LU_POPUP_EMPLOYEE_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_POPUP_EMPLOYEE_TRANSLATIONS));
 
-	#errorImage$ = new BehaviorSubject<boolean>(false);
+	readonly #errorImage$ = new BehaviorSubject<boolean>(false);
 
 	skeletonWidths = [this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent()];
 
-	public employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
+	public readonly employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
 		switchMap((user) =>
 			this.#service.get(user.id).pipe(
 				catchError(() =>
@@ -51,7 +52,7 @@ export class LuUserPopoverComponent {
 		shareReplay(1),
 	);
 
-	public userPictureDisplay$ = combineLatest([this.employee$, this.#errorImage$]).pipe(
+	public readonly userPictureDisplay$ = combineLatest([this.employee$, this.#errorImage$]).pipe(
 		map(([employee, isError]) => {
 			if (employee.pictureHref && !isError) {
 				return 'img';
@@ -61,9 +62,9 @@ export class LuUserPopoverComponent {
 		}),
 	);
 
-	public userPictureHref$ = this.employee$.pipe(map((employee) => employee.pictureHref));
+	public readonly userPictureHref$ = this.employee$.pipe(map((employee) => employee.pictureHref));
 
-	public userInitials$ = this.employee$.pipe(
+	public readonly userInitials$ = this.employee$.pipe(
 		map((employee) => {
 			const initials = `${employee.firstName[0]}${employee.lastName[0]}`;
 

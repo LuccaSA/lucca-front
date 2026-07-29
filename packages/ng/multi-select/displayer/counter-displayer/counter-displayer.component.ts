@@ -1,8 +1,9 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, input, OnInit, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ChipComponent } from '@lucca-front/ng/chip';
+import { isNotNil, syncInputSignal } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
@@ -23,7 +24,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 						</lu-chip>
 					}
 					@if (selectedOptions?.length > 1) {
-						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ selectedOptions?.length }} {{ label }}</lu-chip>
+						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ selectedOptions?.length }} {{ label() }}</lu-chip>
 					}
 				</div>
 			}
@@ -33,41 +34,48 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
-	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
-	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
+	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
 	protected destroyRef = inject(DestroyRef);
 
-	@ViewChild('inputElement')
-	inputElementRef: ElementRef<HTMLInputElement>;
+	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
 	get value(): T[] {
 		return this.select.value || [];
 	}
 
-	selectedOptions$ = new BehaviorSubject<T[]>([]);
+	readonly selectedOptions$ = new BehaviorSubject<T[]>([]);
 
-	@Input()
-	set selected(options: T[]) {
-		this.selectedOptions$.next(options);
-		this.context.option$.next(options);
+	readonly selected = input<T[]>([]);
+
+	readonly label = input.required<string>();
+
+	constructor() {
+		syncInputSignal(this.selected, (options) => {
+			this.selectedOptions$.next(options);
+			this.context.option$.next(options);
+		});
 	}
-
-	@Input({ required: true })
-	label: string;
 
 	ngOnInit(): void {
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: true }) => {
 			// Everytime we want to focus, we need to reset the input
 			// This is done when a value is selected and when panel is opened.
-			if (!data?.keepClue) {
-				this.inputElementRef.nativeElement.value = '';
-				this.select.clueChanged('');
+			const inputElementRef = this.inputElementRef();
+			if (isNotNil(inputElementRef)) {
+				if (!data?.keepClue) {
+					inputElementRef.nativeElement.value = '';
+					this.select.clueChanged('');
+				}
+				inputElementRef.nativeElement.focus();
 			}
-			this.inputElementRef.nativeElement.focus();
 		});
 		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-			this.inputElementRef.nativeElement.value = '';
+			const inputElementRef = this.inputElementRef();
+			if (isNotNil(inputElementRef)) {
+				inputElementRef.nativeElement.value = '';
+			}
 		});
 	}
 }

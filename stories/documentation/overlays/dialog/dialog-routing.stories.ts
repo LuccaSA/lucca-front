@@ -18,12 +18,13 @@ import {
 	injectDialogRef,
 	provideDialogRoutingReuseStrategy,
 } from '@lucca-front/ng/dialog';
+import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LinkComponent } from '@lucca-front/ng/link';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { map } from 'rxjs';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 @Injectable()
 class DataProvider {
 	dummy = signal(42);
@@ -77,10 +78,11 @@ class DismissedComponent {}
 		CheckboxInputComponent,
 		FormsModule,
 		StoryModelDisplayComponent,
+		FormComponent,
 	],
 	template: `
 		<lu-dialog>
-			<form class="dialog-inside-formOptional">
+			<form luForm>
 				<lu-dialog-header>
 					<h1>Dialog opened by route</h1>
 				</lu-dialog-header>

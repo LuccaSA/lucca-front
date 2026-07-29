@@ -1,7 +1,7 @@
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Performance',

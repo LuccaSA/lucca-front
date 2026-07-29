@@ -1,6 +1,6 @@
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette } from '@lucca-front/ng/core';
-import { CalloutState, CalloutStateMap } from './callout-state';
+import { CalloutState, CalloutStateMap } from './callout.type';
 
 /**
  * Get icon for callout

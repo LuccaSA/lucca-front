@@ -12,4 +12,5 @@ import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 export class DataPresentationComponent {
 	readonly label = input.required<PortalContent>();
 	readonly noValue = input(false, { transform: booleanAttribute });
+	readonly size = input<'S' | null>(null);
 }

@@ -1,6 +1,6 @@
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { cleanupTemplate, generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Grids/Angular/Responsive',
@@ -25,7 +25,7 @@ export default {
 				type: 'select',
 			},
 			options: [
-				null,
+				'',
 				'autoAtMediaMinXXXS',
 				'autoAtMediaMinXXS',
 				'autoAtMediaMinXS',
@@ -43,7 +43,7 @@ export default {
 				type: 'select',
 			},
 			options: [
-				null,
+				'',
 				'autoAtContainerMinXXXS',
 				'autoAtContainerMinXXS',
 				'autoAtContainerMinXS',
@@ -71,7 +71,7 @@ export default {
 	render: ({ repeatCols, container, responsiveMediaConfig, responsiveContainerConfig, modeMedia, modeContainer, mode, ...args }, { argTypes }) => {
 		const content = `col`;
 		const cols = `\n <lu-grid-column>${content}</lu-grid-column>`.repeat(repeatCols);
-		const modeArg = container ? (modeContainer === null ? `` : ` mode="${modeContainer}"`) : modeMedia === null ? `` : ` mode="${modeMedia}"`;
+		const modeArg = container ? (!modeContainer ? `` : ` mode="${modeContainer}"`) : !modeMedia ? `` : ` mode="${modeMedia}"`;
 		const containerArg = container ? ` container` : ``;
 		const responsiveConfig = container ? responsiveContainerConfig : responsiveMediaConfig;
 		const responsiveInline = container ? `{ columnAtContainerMinS: 1, rowAtContainerMinS: 1 }` : `{ columnAtMediaMinS: 1, rowAtMediaMinS: 1 }`;
@@ -123,8 +123,6 @@ export const Basic: StoryObj<
 		columns: 6,
 		repeatCols: 10,
 		container: false,
-		modeMedia: null,
-		modeContainer: null,
 		responsiveMediaConfig: `@let responsiveSample = {
 	colspanAtMediaMinXXS: 3,
 	rowAtMediaMinXXS: 2,

@@ -1,6 +1,7 @@
 export * from './angular-component-ast';
 export * from './angular-template';
 export * from './component-mapper';
+export * from './deprecated-mapper';
 export * from './css-mapper';
 export * from './file-update';
 export * from './html-ast';

@@ -15,7 +15,8 @@
 	--components-filterPill-toggle-rotation: 0deg;
 	--components-filterPill-toggle-iconColor: var(--palettes-neutral-600);
 	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor);
-	--components-filterPill-display: flex;
 	--components-filterPill-arrowColor: var(--palettes-product-700);
 	--components-filterPill-label-maxInlineSize: none;
+	--components-filterPill-toggle-marginInlineStart: var(--pr-t-spacings-50);
+	--components-filterPillWrapper-display: block;
 }

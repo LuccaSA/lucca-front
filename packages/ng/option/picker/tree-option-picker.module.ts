@@ -7,7 +7,7 @@ import { LuTreeOptionPickerAdvancedComponent } from './tree-option-picker-advanc
 import { LuTreeOptionPickerComponent } from './tree-option-picker.component';
 
 /**
- * @deprecated
+ * @deprecated use `LuTreeOptionPickerComponent, LuTreeOptionPickerAdvancedComponent` instead
  */
 @NgModule({
 	imports: [CommonModule, OverlayModule, LuScrollDirective, A11yModule, LuTreeOptionPickerAdvancedComponent, LuTreeOptionPickerComponent],

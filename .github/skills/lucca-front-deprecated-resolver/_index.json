@@ -1,0 +1,102 @@
+{
+  "LuApiModule": {
+    "description": "NgModules dépréciés LuApiModule, LuApiSelectModule, LuApiSelectInputModule, LuApiSearcherModule. Remplacer par imports standalone : LuApiFeederComponent, LuApiPagedSearcherComponent, LuApiSearcherComponent, LuApiPagerComponent, LuApiSelectInputComponent.",
+    "category": "Deprecated"
+  },
+  "LuDateModule": {
+    "description": "NgModules dépréciés LuDateModule, LuDatePickerModule, LuDateSelectInputModule, LuDateAdapterModule. Remplacer par : LuCalendarInputComponent, LuDatePickerComponent, LuDateInputDirective, LuDateAdapterPipe, LuDateSelectInputComponent.",
+    "category": "Deprecated"
+  },
+  "LuDropdownModule": {
+    "description": "NgModules dépréciés LuDropdownModule, LuDropdownPanelModule, LuDropdownItemModule, LuDropdownTriggerModule. LuDropdownPanelComponent (lu-dropdown) déprécié. Input luDropdownAlignment déprécié → customPositions.",
+    "category": "Deprecated"
+  },
+  "LuSelectModule": {
+    "description": "LuSelectModule, LuSelectInputModule, LuSelectInputComponent (lu-select) dépréciés. Migrer vers lu-simple-select ou lu-multi-select.",
+    "category": "Deprecated"
+  },
+  "LuSidepanelModule": {
+    "description": "LuSidepanelModule, LuSidepanel service, LU_SIDEPANEL_DATA, ILuSidepanelRef, ALuSidepanelRef dépréciés. Utiliser LuModal avec mode sidepanel.",
+    "category": "Deprecated"
+  },
+  "LuDepartmentModule": {
+    "description": "LuDepartmentModule, LuDepartmentSelectModule, LuDepartmentSelectInputModule, LuDepartmentSelectInputComponent (lu-department-select), LuDepartmentFeederComponent, LuDepartmentV3Service dépréciés.",
+    "category": "Deprecated"
+  },
+  "LuEstablishmentModule": {
+    "description": "LuEstablishmentModule, LuEstablishmentSelectModule, LuEstablishmentSelectInputModule, LuEstablishmentSelectInputComponent (lu-establishment-select) dépréciés. Migrer vers SimpleSelect/MultipleSelect avec directives establishments.",
+    "category": "Deprecated"
+  },
+  "LuUserModule": {
+    "description": "LuUserModule, LuUserSelectModule, LuUserSelectInputModule, LuUserDisplayModule, LuUserPictureModule, LuUserTileModule, LuUserMeOptionModule, LuUserSearcherModule, LuUserSelectInputComponent (lu-user-select) dépréciés.",
+    "category": "Deprecated"
+  },
+  "LuOptionModule": {
+    "description": "NgModules dépréciés du système option : LuOptionModule, LuOptionItemModule, LuOptionPickerModule, LuOptionFeederModule, LuOptionPagerModule, LuOptionSearcherModule, LuOptionSelectAllModule, LuForOptionsModule, LuTreeOptionModule et variantes tree. Composants picker dépréciés.",
+    "category": "Deprecated"
+  },
+  "LuModalModule": {
+    "description": "NgModules dépréciés LuModalModule, LuPopupModule, LuPopoverModule, LuPopoverPanelModule. Remplacer par imports/providers directs.",
+    "category": "Deprecated"
+  },
+  "LuTooltipModule": {
+    "description": "NgModules dépréciés LuTooltipModule, LuTooltipTriggerModule. Remplacer par LuTooltipTriggerDirective, LuTooltipPanelComponent.",
+    "category": "Deprecated"
+  },
+  "LuInputModule": {
+    "description": "NgModules dépréciés LuInputModule, LuInputClearerModule, LuInputDisplayerModule. LuInputClearerComponent (lu-input-clearer) → ClearComponent (lu-clear).",
+    "category": "Deprecated"
+  },
+  "LuTitleModule": {
+    "description": "LuTitleModule, LuTitleService, LuTitleStrategy (classe), APP_TITLE dépréciés. Migrer vers provideLuTitleStrategy().",
+    "category": "Deprecated"
+  },
+  "NgModulesSimples": {
+    "description": "NgModules dépréciés simples : LuToastsModule → LuToastsComponent, LuNumberModule → LuNumberPipe, LuScrollModule → LuScrollDirective, LuSafeContentModule → LuSafeHtmlPipe, LuFormlyModule → provideLuFormly().",
+    "category": "Deprecated"
+  },
+  "DividerComponent": {
+    "description": "Input déprécié withRole sur lu-divider. Supprimer l'attribut.",
+    "category": "Deprecated"
+  },
+  "ButtonComponent": {
+    "description": "Input déprécié delete sur [luButton]. Remplacer par critical.",
+    "category": "Deprecated"
+  },
+  "LoadingComponent": {
+    "description": "Valeur dépréciée 'fullpage' pour l'input type de lu-loading. Remplacer par 'fullPage'.",
+    "category": "Deprecated"
+  },
+  "EmptyStateSectionComponent": {
+    "description": "Input déprécié icon sur lu-empty-state-section. Remplacer par illustration et/ou action.",
+    "category": "Deprecated"
+  },
+  "BaseFileUploadComponent": {
+    "description": "Valeur dépréciée 'paper' pour l'input illustration des composants file upload. Remplacer par 'invoice'.",
+    "category": "Deprecated"
+  },
+  "HighlightDataComponent": {
+    "description": "Valeur dépréciée 'manifying-glass' (faute de frappe) pour l'icône de lu-highlight-data. Remplacer par 'magnifying-glass'.",
+    "category": "Deprecated"
+  },
+  "CoreSelectInputComponent": {
+    "description": "Propriété dépréciée grouping (getter/setter) sur les composants select. Remplacer par groupingSignal (Signal).",
+    "category": "Deprecated"
+  },
+  "TranslationModel": {
+    "description": "Interface dépréciée ILuTranslation<T>. Remplacer par LuTranslation<T> depuis @lucca-front/ng/core.",
+    "category": "Deprecated"
+  },
+  "SimpleSelectApiAliases": {
+    "description": "Aliases dépréciés LuSimpleSelectApiV4Directive et ALuSimpleSelectApiDirective depuis @lucca-front/ng/simple-select. Utiliser LuCoreSelectApiV4Directive et ALuCoreSelectApiDirective depuis @lucca-front/ng/core-select/api.",
+    "category": "Deprecated"
+  },
+  "UserPopoverProviders": {
+    "description": "Token USER_POPOVER_IS_ACTIVATED et fonction provideLuUserPopover() dépréciés. Supprimer ces providers.",
+    "category": "Deprecated"
+  },
+  "DialogRoutingComponent": {
+    "description": "Surcharge générique defaultOnClosedFn<C>() dépréciée. Utiliser la version non générique defaultOnClosedFn().",
+    "category": "Deprecated"
+  }
+}

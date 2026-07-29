@@ -3,6 +3,7 @@ export * from './dialog-footer/dialog-footer.component';
 export * from './dialog-header/dialog-header.component';
 export * from './dialog-header/dialog-header.translate';
 export * from './dialog-routing';
+export * from './dialog.type';
 export * from './dialog.providers';
 export * from './dialog.service';
 export * from './dialog/dialog.component';

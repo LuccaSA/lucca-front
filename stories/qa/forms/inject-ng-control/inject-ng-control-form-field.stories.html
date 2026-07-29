@@ -1,0 +1,159 @@
+<table class="demo-QAtable">
+	<thead>
+		<tr>
+			<th>Component</th>
+			<th>Default</th>
+			<th>With value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<!-- lu-text-input -->
+		<tr>
+			<td>lu-text-input</td>
+			<td>
+				<lu-form-field label="Recipe title">
+					<lu-text-input placeholder="e.g. Ratatouille" [formField]="recipeForm.title" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Recipe title">
+					<lu-text-input [formField]="recipeForm.title" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-textarea-input -->
+		<tr>
+			<td>lu-textarea-input</td>
+			<td>
+				<lu-form-field label="Chef's notes">
+					<lu-textarea-input placeholder="Add any extra tips…" [formField]="recipeForm.notes" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Chef's notes">
+					<lu-textarea-input [formField]="recipeForm.notes" [rows]="4" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-number-input -->
+		<tr>
+			<td>lu-number-input</td>
+			<td>
+				<lu-form-field label="Servings">
+					<lu-number-input placeholder="0" [formField]="recipeForm.servings" [min]="1" [max]="99" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Servings">
+					<lu-number-input [formField]="recipeForm.servings" [suffix]="{ label: 'persons' }" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-number-format-input -->
+		<tr>
+			<td>lu-number-format-input</td>
+			<td>
+				<lu-form-field label="Estimated cost">
+					<lu-number-format-input formatStyle="currency" currency="EUR" placeholder="0.00" [formField]="recipeForm.price" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Estimated cost">
+					<lu-number-format-input formatStyle="currency" currency="EUR" [formField]="recipeForm.price" [hasClearer]="true" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-checkbox-input -->
+		<tr>
+			<td>lu-checkbox-input</td>
+			<td>
+				<lu-form-field label="Vegetarian">
+					<lu-checkbox-input [formField]="recipeForm.vegetarian" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Vegetarian">
+					<lu-checkbox-input [formField]="recipeForm.vegetarian" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-switch-input -->
+		<tr>
+			<td>lu-switch-input</td>
+			<td>
+				<lu-form-field label="Published">
+					<lu-switch-input [formField]="recipeForm.published" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Published">
+					<lu-switch-input [formField]="recipeForm.published" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-radio-group-input -->
+		<tr>
+			<td>lu-radio-group-input</td>
+			<td>
+				<lu-form-field label="Season">
+					<lu-radio-group-input [formField]="recipeForm.season">
+						@for (s of seasons; track s.value) {
+							<lu-radio [value]="s.value">{{ s.label }}</lu-radio>
+						}
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Season">
+					<lu-radio-group-input [formField]="recipeForm.season" [framed]="true">
+						@for (s of seasons; track s.value) {
+							<lu-radio [value]="s.value">{{ s.label }}</lu-radio>
+						}
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-color-input -->
+		<tr>
+			<td>lu-color-input</td>
+			<td>
+				<lu-form-field label="Label color">
+					<!-- <lu-color-input [colors]="palette" [formField]="recipeForm.color" /> -->
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-segmented-control -->
+		<tr>
+			<td>lu-segmented-control</td>
+			<td>
+				<lu-form-field label="Difficulty">
+					<lu-segmented-control [formField]="recipeForm.difficulty">
+						<lu-segmented-control-filter value="easy">Easy</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="medium">Medium</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="hard">Hard</lu-segmented-control-filter>
+					</lu-segmented-control>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Difficulty">
+					<lu-segmented-control [formField]="recipeForm.difficulty" [small]="true">
+						<lu-segmented-control-filter value="easy">Easy</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="medium">Medium</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="hard">Hard</lu-segmented-control-filter>
+					</lu-segmented-control>
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

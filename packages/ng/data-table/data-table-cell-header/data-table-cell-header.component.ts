@@ -1,12 +1,16 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { isNotNil } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ReplaySubject } from 'rxjs';
 import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
+import { DataTableSort } from '../data-table.type';
+
+const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -39,14 +43,16 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellHeaderComponent extends BaseDataTableCell implements AfterContentInit {
-	elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
+	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
+	#destroyRef = inject(DestroyRef);
 
-	sort = model<null | 'none' | 'ascending' | 'descending'>(null);
-	fixedWidth = input<string | null>(null);
-	inlineSize = input<string | null>(null);
+	readonly sort = model<DataTableSort | null>(null);
+	readonly fixedWidth = input<string | null>(null);
+	readonly inlineSize = input<string | null>(null);
 
-	insetInlineStart = computed(() => {
-		if (!this.isStickyStart() || !this.headRef) {
+	readonly insetInlineStart = computed(() => {
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol || !this.isStickyStart() || !this.headRef) {
 			return '';
 		}
 		return (
@@ -59,8 +65,9 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		);
 	});
 
-	insetInlineEnd = computed(() => {
-		if (!this.isStickyEnd() || !this.headRef) {
+	readonly insetInlineEnd = computed(() => {
+		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
+		if (isFirstOrLastCol || !this.isStickyEnd() || !this.headRef) {
 			return '';
 		}
 		return (
@@ -73,13 +80,20 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 		);
 	});
 
-	#inlineSizePx$ = new ReplaySubject<number>();
+	readonly #inlineSizePx$ = new ReplaySubject<number>();
 
-	inlineSizePx = toSignal(this.#inlineSizePx$);
+	readonly inlineSizePx = toSignal(this.#inlineSizePx$);
 
 	ngAfterContentInit(): void {
-		new ResizeObserver(() => {
-			this.#inlineSizePx$.next(this.elementRef.nativeElement.clientWidth);
-		}).observe(this.elementRef.nativeElement);
+		const observer = new ResizeObserver(() => this.#inlineSizePx$.next(this.elementRef.nativeElement.clientWidth));
+		observer.observe(this.elementRef.nativeElement);
+		this.#destroyRef.onDestroy(() => observer.disconnect());
+	}
+
+	toggleSort(): void {
+		const sort = this.sort();
+		if (isNotNil(sort)) {
+			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(sort) + 1) % SORT_VALUES.length]);
+		}
 	}
 }

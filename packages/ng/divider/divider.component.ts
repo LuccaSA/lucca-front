@@ -1,5 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnChanges, viewChild, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
+import { DividerSize } from './divider.type';
 
 @Component({
 	selector: 'lu-divider',
@@ -17,7 +18,7 @@ import { LuClass } from '@lucca-front/ng/core';
 export class DividerComponent implements OnChanges {
 	#luClass = inject(LuClass);
 
-	@ViewChild('content') content: ElementRef;
+	readonly content = viewChild<ElementRef>('content');
 
 	/**
 	 * Allows rendering the Divider as a native separator
@@ -30,7 +31,7 @@ export class DividerComponent implements OnChanges {
 	/**
 	 * Which size should the chip be? Defaults or small
 	 */
-	readonly size = input<'M' | 'S' | null>(null);
+	readonly size = input<DividerSize | null>(null);
 
 	/**
 	 * @deprecated

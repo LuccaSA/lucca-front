@@ -1,8 +1,8 @@
 import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-front/ng/button';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { expect, within } from 'storybook/test';
 import { BasicTEST as ButtonBasic } from './button-basic.stories';
 
@@ -42,7 +42,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			},
 		},
 		state: {
-			description: "Modifie l'état du bouton.",
+			description: 'Modifie l’état du bouton.',
 			options: setStoryOptions(BUTTON_STATE),
 			control: {
 				type: 'select',
@@ -52,7 +52,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
 		},
 		disclosure: {
-			description: "Indique le présence d'un menu.",
+			description: 'Indique la présence d’un menu.',
 		},
 		delete: {
 			description: '[Deprecated] Remplacé par <code>critical</code>.',

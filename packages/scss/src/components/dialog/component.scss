@@ -34,7 +34,7 @@
 
 	@at-root ($atRoot) {
 		.dialog-inside {
-			&:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form) {
+			&:has(> .dialog-inside-formOptional, > .dialog-formOptional, > .dialog-form) {
 				display: contents;
 
 				.dialog-formOptional, // stylelint-disable-line selector-disallowed-list -- .dialog-formOptional is deprecated
@@ -62,7 +62,7 @@
 				}
 			}
 
-			&:not(:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form)) {
+			&:not(:has(> .dialog-inside-formOptional, > .dialog-formOptional, > .dialog-form)) {
 				display: grid;
 				grid-template-areas:
 					'header  '
@@ -108,7 +108,7 @@
 		}
 
 		.dialog-inside-header-actionOptional {
-			margin-right: calc(var(--pr-t-spacings-100) * -1);
+			margin-inline-end: calc(var(--pr-t-spacings-100) * -1);
 
 			&:empty {
 				display: none;
@@ -117,6 +117,7 @@
 
 		.dialog-inside-footer {
 			grid-area: footer;
+			margin-block: var(--components-dialog-inside-footer-marginBlock);
 
 			&.footer {
 				@include footer.insideDialog;
@@ -125,12 +126,13 @@
 
 		.dialog-inside-header {
 			display: grid;
+			margin-block: var(--components-dialog-inside-header-marginBlock);
 			padding-block: var(--components-dialog-inside-header-paddingBlock);
 			padding-inline: var(--components-dialog-inside-header-paddingInline);
 			grid-template-areas: var(--components-dialog-insideHeaderAreas);
 			grid-template-columns: var(--components-dialog-insideHeaderColumns);
 			box-shadow: var(--components-dialog-inside-header-boxShadow);
-			gap: var(--pr-t-spacings-200);
+			gap: 0 var(--pr-t-spacings-200);
 			position: var(--components-dialog-inside-header-position);
 			z-index: 1;
 			grid-area: header;
@@ -142,12 +144,21 @@
 			inset-inline-end: var(--components-dialog-inside-header-button-insetInlineEnd);
 		}
 
+		.dialog-inside-header-content {
+			grid-area: content;
+
+			&:empty {
+				display: none;
+			}
+		}
+
 		.dialog-inside-content {
 			background-color: var(--components-dialog-insideContent-background);
 			padding-block: var(--components-dialog-insideContent-paddingBlock);
-			padding-inline: var(--pr-t-spacings-300);
+			padding-inline: var(--components-dialog-insideContent-paddingInline);
 			grid-area: overflow;
-			overflow: auto;
+			overflow: var(--components-dialog-insideContent-overflow);
+			display: block;
 			outline: none;
 		}
 
@@ -161,6 +172,12 @@
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
 			overflow-wrap: anywhere;
+		}
+
+		.dialog-inside-header-container-subtitle {
+			font: var(--pr-t-font-body-S);
+			color: var(--palettes-neutral-700);
+			text-align: var(--components-dialog-insideHeaderTitleAlign);
 		}
 
 		.dialog_backdrop {

@@ -263,11 +263,15 @@
 				margin-inline-end: var(--pr-t-spacings-100);
 			}
 		}
-	}
 
-	.indexTableWrapper-pagination {
-		&:empty {
-			display: none;
+		.indexTableWrapper-pagination {
+			position: sticky;
+			inset-inline-end: 0;
+			align-self: flex-end;
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 

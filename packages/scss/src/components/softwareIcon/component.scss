@@ -1,17 +1,79 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	display: inline-block;
+	display: var(--components-softwareIcon-display);
 	inline-size: var(--components-softwareIcon-size);
 	block-size: var(--components-softwareIcon-size);
+	z-index: var(--components-softwareIcon-zIndex);
+	position: relative;
+	transform: scale(var(--components-softwareIcon-transformScale));
+	transition-property: transform;
+	transition-duration: var(--commons-animations-durations-fast);
 
-	svg {
-		display: block;
-		inline-size: 100%;
-		block-size: 100%;
+	&:focus-visible {
+		outline: none;
 	}
 
 	@at-root ($atRoot) {
+		.softwareIcon-illustration {
+			overflow: visible;
+		}
 
+		.softwareIcon-illustration-bubble {
+			stroke: var(--components-softwareIcon-illustration-bubble-stroke);
+			stroke-width: var(--components-softwareIcon-illustration-bubble-strokeWidth);
+		}
+
+		.softwareIconWrapper {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: var(--pr-t-spacings-25) 0;
+			padding-inline-start: calc(var(--components-softwareIconWrapper-list-item-marginInlineStart) * -1);
+		}
+
+		.softwareIconWrapper-list {
+			@include reset.list;
+
+			display: contents;
+		}
+
+		.softwareIconWrapper-list-item {
+			margin-inline-start: var(--components-softwareIconWrapper-list-item-marginInlineStart);
+		}
+
+		.softwareIconWrapper-action {
+			@include reset.button;
+
+			border-radius: 68% 35% 45% 55% / 40% 40% 64% 60%;
+			background-color: var(--palettes-neutral-200);
+			inline-size: var(--components-softwareIcon-size);
+			block-size: var(--components-softwareIcon-size);
+			transform: scale(var(--components-softwareIcon-transformScale));
+			transition-property: transform;
+			transition-duration: var(--commons-animations-durations-fast);
+			box-shadow: 0 0 0 var(--components-softwareIcon-action-boxShadowSpread) var(--palettes-neutral-0);
+			margin-inline-start: var(--components-softwareIconWrapper-list-item-marginInlineStart);
+		}
+
+		.softwareIconWrapper-action-more {
+			display: grid;
+			place-items: center;
+			font-family: var(--pr-t-font-family-brand);
+			font-size: var(--components-softwareIconWrapper-action-more-fontSize);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+		}
+
+		.softwareIconWrapper_popover {
+			@include reset.list;
+
+			display: grid;
+			max-inline-size: calc((var(--components-softwareIcon-size) * 8) + (var(--pr-t-spacings-50) * 7));
+			box-sizing: content-box;
+			gap: var(--pr-t-spacings-50);
+			grid-template-columns: repeat(auto-fit, minmax(var(--components-softwareIcon-size), 1fr));
+		}
 	}
 }

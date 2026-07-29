@@ -46,7 +46,7 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 	 */
 	readonly vertical = input(false, { transform: booleanAttribute });
 
-	active = model<T | null>(null);
+	readonly active = model<T | null>(null);
 
 	readonly id = `segmentedControl${nextId++}`;
 
@@ -69,6 +69,14 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 			newIndex = 0;
 		}
 		this.setActiveTab(newIndex);
+	}
+
+	first() {
+		this.setActiveTab(0);
+	}
+
+	last() {
+		this.setActiveTab(this.tabs().length - 1);
 	}
 
 	setActiveTab(index: number) {

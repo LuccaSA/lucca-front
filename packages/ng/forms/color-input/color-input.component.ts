@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, Signal, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, HostListener, input, Signal, signal, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColorComponent } from '@lucca-front/ng/color';
@@ -22,20 +22,27 @@ import { LU_COLOR_TRANSLATIONS } from './color.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorInputComponent {
-	intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
 
-	mouseHighlighted = signal<string>('');
-	keyboardHighlighted = signal<string>('');
-	highlighted = computed(() => this.mouseHighlighted() || this.keyboardHighlighted());
+	readonly pointerNavigation = signal(false);
+	readonly mouseHighlighted = signal<string>('');
+	readonly keyboardHighlighted = signal<string>('');
+	readonly highlighted = computed(() => {
+		if (!this.pointerNavigation()) {
+			return this.keyboardHighlighted();
+		}
 
-	clue = signal<string>('');
-	colors = input.required<ColorOption[]>();
-	clearable = input(false, { transform: booleanAttribute });
-	compact = input(false, { transform: booleanAttribute });
+		return this.mouseHighlighted() || this.keyboardHighlighted();
+	});
+
+	readonly clue = signal<string>('');
+	readonly colors = input.required<ColorOption[]>();
+	readonly clearable = input(false, { transform: booleanAttribute });
+	readonly compact = input(false, { transform: booleanAttribute });
 
 	ngControl = injectNgControl();
 
-	currentColorPresentation: Signal<ColorOption | null>;
+	readonly currentColorPresentation: Signal<ColorOption | null>;
 
 	constructor() {
 		if (this.ngControl && this.ngControl.valueChanges) {
@@ -46,10 +53,20 @@ export class ColorInputComponent {
 		}
 	}
 
-	filteredColors = computed(() => {
+	readonly filteredColors = computed(() => {
 		if (this.clue()) {
 			return this.colors().filter((color) => color.name.toLowerCase().includes(this.clue().toLowerCase()));
 		}
 		return this.colors();
 	});
+
+	@HostListener('document:keydown')
+	onKeydown(): void {
+		this.pointerNavigation.set(false);
+	}
+
+	@HostListener('document:mousemove')
+	onMousemove(): void {
+		this.pointerNavigation.set(true);
+	}
 }

@@ -3,7 +3,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, Element
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
@@ -16,7 +16,7 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 
 @Component({
 	selector: 'lu-text-input',
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent, ɵPresentationDisplayDefaultDirective],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent, ɵPresentationDisplayDefaultDirective, PortalDirective],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -55,11 +55,11 @@ export class TextInputComponent {
 	// eslint-disable-next-line @angular-eslint/no-output-native
 	readonly blur = output<FocusEvent>();
 
-	protected showPassword = signal<boolean>(false);
+	protected readonly showPassword = signal<boolean>(false);
 
-	protected typeRef = computed(() => (this.showPassword() ? 'text' : this.type()));
+	protected readonly typeRef = computed(() => (this.showPassword() ? 'text' : this.type()));
 
-	protected hasTogglePasswordVisibilityIcon = computed(() => this.type() === 'password');
+	protected readonly hasTogglePasswordVisibilityIcon = computed(() => this.type() === 'password');
 
 	clearValue(): void {
 		this.ngControl.reset();

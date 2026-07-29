@@ -26,9 +26,24 @@ export default (options?: SchematicContextOpts): Rule => {
 					'--palettes-lucca-{val}': `--palettes-brand-{val}`,
 					'--colors-grey-{val}': `--palettes-neutral-{val}`,
 					'--colors-white-color': '--palettes-neutral-0',
-					'--colors-black-color': '--palettes-neutral-900'
+					'--colors-black-color': '--palettes-neutral-900',
+					'--palettes-grey-text': `--palettes-grey-0`,
+					'--palettes-neutral-text': `--palettes-neutral-0`,
+					'--palettes-primary-text': `--palettes-primary-0`,
+					'--palettes-secondary-text': `--palettes-secondary-0`,
+					'--palettes-product-text': `--palettes-product-0`,
+					'--palettes-lucca-text': `--palettes-lucca-0`,
+					'--palettes-brand-text': `--palettes-brand-0`,
+					'--palettes-success-text': `--palettes-success-0`,
+					'--palettes-warning-text': `--palettes-warning-0`,
+					'--palettes-error-text': `--palettes-error-0`,
+					'--palettes-critical-text': `--palettes-critical-0`,
 				},
-				mixins: {}
+				mixins: {},
+				rgbaVariables: {
+					'--colors-grey-{val}-rgb': `--palettes-neutral-{val}`,
+					'--colors-white-rgb': '--palettes-neutral-0',
+				}
 			},
 			{
 				val: {

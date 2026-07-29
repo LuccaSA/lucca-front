@@ -1,5 +1,8 @@
 import { VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 interface VerticalNavigationStories {
 	heading: string;
@@ -12,7 +15,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Titre de la section.',
+			description: 'Titre de la section. [PortalContent]',
 		},
 	},
 	decorators: [

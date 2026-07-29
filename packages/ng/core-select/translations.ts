@@ -23,4 +23,7 @@
 	en: {
 		addOption: 'Add option',
 	},
+	pl: {
+		addOption: 'Dodaj opcję',
+	},
 };

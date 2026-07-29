@@ -16,7 +16,7 @@ export class LuCoreSelectPanelHeaderDirective {
 		});
 	}
 
-	public static ngTemplateContextGuard(_dir: LuCoreSelectPanelHeaderDirective, ctx: unknown): ctx is void {
+	public static ngTemplateContextGuard(_dir: LuCoreSelectPanelHeaderDirective, _ctx: unknown): _ctx is void {
 		return true;
 	}
 }

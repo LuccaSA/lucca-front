@@ -19,6 +19,7 @@ import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuDepartmentFeederComponent } from '../feeder';
 import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-input.translate';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */
@@ -61,7 +62,7 @@ export class LuDepartmentSelectInputComponent<
 	@Input() filters: string[] = [];
 	@Input() uniqueOperation: number;
 
-	public intl = input(...intlInputOptions(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS));
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

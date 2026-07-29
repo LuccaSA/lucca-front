@@ -8,10 +8,10 @@ We need 2 Angular components :
 	<tbody>
 		<tr>
 			<td></td>
-			<td style="width: 50%">
+			<td style="inline-size: 50%">
 				<div class="demo-QAtable-list">HTML</div>
 			</td>
-			<td style="width: 50%">
+			<td style="inline-size: 50%">
 				<div class="demo-QAtable-list">Angular</div>
 			</td>
 		</tr>
@@ -310,6 +310,80 @@ We need 2 Angular components :
 						</lu-vertical-navigation-item>
 						<lu-vertical-navigation-item>
 							<span luVerticalNavigationLink disabled>Item</span>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+				</lu-vertical-navigation>
+			</td>
+		</tr>
+		<tr>
+			<td>Expanded</td>
+			<td>
+				<div class="verticalNavigation mod-iconless">
+					<h3 class="verticalNavigation-sectionTitle">Section title</h3>
+					<ul class="verticalNavigation-list">
+						<li class="verticalNavigation-list-item">
+							<a href="#" class="verticalNavigation-list-item-link">Item</a>
+						</li>
+						<li class="verticalNavigation-list-item">
+							<a href="#" class="verticalNavigation-list-item-link" aria-current="page">Item</a>
+						</li>
+						<li class="verticalNavigation-list-item">
+							<a href="#" class="verticalNavigation-list-item-link">Item</a>
+						</li>
+						<li class="verticalNavigation-list-item">
+							<button type="button" class="verticalNavigation-list-item-link" aria-expanded="true">
+								group<span aria-hidden="true" class="verticalNavigation-list-item-link-arrow lucca-icon icon-arrowChevronBottom"></span>
+							</button>
+							<ul class="verticalNavigation-list mod-child">
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link">Item</a>
+								</li>
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link">Item</a>
+								</li>
+							</ul>
+						</li>
+						<li class="verticalNavigation-list-item">
+							<button type="button" class="verticalNavigation-list-item-link" aria-expanded="false">
+								group<span aria-hidden="true" class="verticalNavigation-list-item-link-arrow lucca-icon icon-arrowChevronBottom"></span>
+							</button>
+							<ul class="verticalNavigation-list mod-child">
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link">Item</a>
+								</li>
+								<li class="verticalNavigation-list-item">
+									<a href="#" class="verticalNavigation-list-item-link">Item</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<lu-vertical-navigation heading="Section title">
+					<lu-vertical-navigation-item>
+						<a luVerticalNavigationLink href="#">Item</a>
+					</lu-vertical-navigation-item>
+					<lu-vertical-navigation-item>
+						<a luVerticalNavigationLink href="#" aria-current="page">Item</a>
+					</lu-vertical-navigation-item>
+					<lu-vertical-navigation-item>
+						<a luVerticalNavigationLink href="#">Item</a>
+					</lu-vertical-navigation-item>
+					<lu-vertical-navigation-group label="group">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-group label="group" [expanded]="false">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
 						</lu-vertical-navigation-item>
 					</lu-vertical-navigation-group>
 				</lu-vertical-navigation>

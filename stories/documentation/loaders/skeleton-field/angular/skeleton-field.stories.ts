@@ -1,5 +1,5 @@
 import { SkeletonFieldComponent } from '@lucca-front/ng/skeleton';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Loaders/Skeleton/Skeleton Field',
@@ -25,6 +25,13 @@ export const Template: StoryObj<SkeletonFieldComponent> = {
 			control: {
 				type: 'number',
 			},
+		},
+		size: {
+			options: ['', 'S', 'XS'],
+			control: {
+				type: 'select',
+			},
+			description: '[v21.2.4] Modifie la taille du composant.',
 		},
 	},
 

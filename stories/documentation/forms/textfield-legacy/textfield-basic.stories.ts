@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface TextfieldBasicStory {
 	display: string;
@@ -40,7 +40,7 @@ export default {
 			},
 		},
 		noLabel: {
-			description: "Une fois combiné à <code>mod-material</code>, permet d'intégrer un champs de saisie dans une phrase.",
+			description: 'Une fois combiné à <code>mod-material</code>, permet d’intégrer un champs de saisie dans une phrase.',
 			control: {
 				type: 'boolean',
 			},

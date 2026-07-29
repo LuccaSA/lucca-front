@@ -1,4 +1,5 @@
-import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, OnInit, Renderer2 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgControl } from '@angular/forms';
 import { isNil } from '@lucca-front/ng/core';
 
@@ -9,6 +10,8 @@ import { isNil } from '@lucca-front/ng/core';
 	selector: '[luInput]',
 })
 export class LuInputDirective implements OnInit {
+	protected _destroyRef = inject(DestroyRef);
+
 	constructor(
 		protected _elementRef: ElementRef,
 		protected _renderer: Renderer2,
@@ -28,7 +31,7 @@ export class LuInputDirective implements OnInit {
 		}
 	}
 	ngOnInit() {
-		this._ngControl.valueChanges?.subscribe((v) => this.applyClasses(v));
+		this._ngControl.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((v) => this.applyClasses(v));
 		const val: unknown = this._ngControl.value;
 		this.applyClasses(val);
 	}

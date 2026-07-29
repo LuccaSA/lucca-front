@@ -14,7 +14,7 @@
 
 @mixin form {
 	--grid-columns: 4;
-	--grid-maxWidth: 50rem;
+	--grid-maxWidth: var(--components-form-maxWidth, 50rem);
 }
 
 @mixin dense {

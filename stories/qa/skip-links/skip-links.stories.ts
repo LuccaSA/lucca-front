@@ -1,9 +1,11 @@
+import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'skip-links-stories',
 	templateUrl: './skip-links.stories.html',
+	imports: [LuSkipLinksComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SkipLinksStory {}

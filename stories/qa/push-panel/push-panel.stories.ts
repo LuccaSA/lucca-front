@@ -1,3 +1,4 @@
+import { allLegumes } from '@/stories/forms/select/select.utils';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
@@ -7,8 +8,12 @@ import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogH
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { SwitchInputComponent } from '@lucca-front/ng/forms';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuToastsComponent, LuToastsService } from '@lucca-front/ng/toast';
-import { Meta } from '@storybook/angular';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'push-panel-stories',
@@ -28,6 +33,10 @@ import { Meta } from '@storybook/angular';
 		FormFieldComponent,
 		SwitchInputComponent,
 		FormsModule,
+		PopoverDirective,
+		LuTooltipTriggerDirective,
+		LuSimpleSelectInputComponent,
+		LuMultiSelectInputComponent,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [
@@ -70,8 +79,8 @@ import { Meta } from '@storybook/angular';
 							content: '';
 							position: absolute;
 							inset-inline-start: var(--pr-t-spacings-100);
-							width: 122px;
-							height: 32px;
+							inline-size: 122px;
+							block-size: 32px;
 							background-color: var(--palettes-neutral-50);
 							border-radius: var(--pr-t-border-radius-50);
 						}
@@ -80,8 +89,8 @@ import { Meta } from '@storybook/angular';
 							content: '';
 							position: absolute;
 							inset-inline-end: var(--pr-t-spacings-100);
-							width: 32px;
-							height: 32px;
+							inline-size: 32px;
+							block-size: 32px;
 							background-color: var(--palettes-neutral-200);
 							border-radius: var(--pr-t-border-radius-full);
 						}
@@ -113,6 +122,10 @@ import { Meta } from '@storybook/angular';
 						--commons-container-maxWidth: 50rem;
 					}
 
+					.connectedOverlays lu-form-field {
+						inline-size: 16rem;
+					}
+
 					.fakeContent {
 						background-color: var(--pr-t-elevation-surface-raised);
 						border: 1px solid var(--palettes-neutral-50);
@@ -132,6 +145,10 @@ import { Meta } from '@storybook/angular';
 })
 class PushPanelStory {
 	private toasts = inject(LuToastsService);
+
+	allLegumes = allLegumes;
+	simpleExample = allLegumes[0];
+	multiExample = allLegumes;
 
 	showPushPanel = false;
 

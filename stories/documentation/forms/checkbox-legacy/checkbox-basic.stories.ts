@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface CheckboxBasicStory {
 	row: boolean;
@@ -17,7 +17,7 @@ export default {
 			},
 		},
 		row: {
-			description: "En dehors d'un <code>.checkboxesfield-input</code>, <code>.mod-inline</code> peut être ajouté sur <code>.Checkbox</code> pour obtenir un affichage horizontal.",
+			description: 'En dehors d’un <code>.checkboxesfield-input</code>, <code>.mod-inline</code> peut être ajouté sur <code>.Checkbox</code> pour obtenir un affichage horizontal.',
 			control: {
 				type: 'boolean',
 			},

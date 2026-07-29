@@ -10,6 +10,7 @@ export interface RangeInfo {
 
 export interface CalendarCellInfo {
 	day: number;
+	week: number;
 	date: Date;
 	status: CellStatus;
 	disabled: boolean;

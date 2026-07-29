@@ -1,6 +1,7 @@
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, isNil } from '@lucca-front/ng/core';
 import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
+import { ReadMoreSurface } from './read-more.type';
 
 @Component({
 	selector: 'lu-read-more',
@@ -11,7 +12,7 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 	host: {
 		class: 'readMore',
 		'[style.--components-readMore-lineClamp]': 'lineClamp()',
-		'[style.--components-readMore-content-lastChild-content]': 'labelReadLess',
+		'[style.--components-readMore-content-lastChild-content]': '`"${labelReadLess()}"`',
 		'[class.is-disabled]': '!expanded() && !isClamped()',
 		'[class.mod-openOnly]': 'openOnly()',
 		'[class.mod-sunken]': 'surface() === `sunken`',
@@ -20,7 +21,7 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 	},
 })
 export class ReadMoreComponent {
-	intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
 
 	/**
 	 * Change the number of lines displayed when collapsed
@@ -40,22 +41,22 @@ export class ReadMoreComponent {
 	/**
 	 * Apply the spacing of the Text Flow component
 	 */
-	readonly surface = input<null | 'sunken' | 'default' | string>(null);
+	readonly surface = input<ReadMoreSurface | string | null>(null);
 
 	/**
 	 * Allow content to be passed via innerHTML
 	 */
 	readonly innerContent = input<null | string>(null);
 
-	labelReadMore = computed(() => this.intl().readMore);
-	labelReadLess = computed(() => this.intl().readLess);
+	readonly labelReadMore = computed(() => this.intl().readMore);
+	readonly labelReadLess = computed(() => this.intl().readLess);
 
-	label = computed(() => (this.expanded() ? this.labelReadLess() : this.labelReadMore()));
+	readonly label = computed(() => (this.expanded() ? this.labelReadLess() : this.labelReadMore()));
 
 	readonly contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 
-	expanded = signal(false);
-	isClamped = signal(false);
+	readonly expanded = signal(false);
+	readonly isClamped = signal(false);
 
 	readonly backgroundColor = computed(() => {
 		if (this.surface() === 'sunken' || this.surface() === 'default' || this.surface() === null) {

@@ -1,4 +1,5 @@
 import { LuccaIcon } from '@lucca-front/icons';
+import { PortalContent } from '@lucca-front/ng/core';
 
 export type TextfieldIconAddon = {
 	icon: LuccaIcon;
@@ -6,7 +7,7 @@ export type TextfieldIconAddon = {
 };
 
 export type TextfieldTextAddon = {
-	content: string;
+	content: PortalContent;
 	ariaLabel: string;
 };
 

@@ -3,5 +3,9 @@
 @layer base {
 	lu-callout {
 		display: block;
+
+		&[hidden] {
+			display: none;
+		}
 	}
 }

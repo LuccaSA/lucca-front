@@ -23,4 +23,7 @@
 	en: {
 		departments: 'departments',
 	},
+	pl: {
+		departments: 'działy',
+	},
 };

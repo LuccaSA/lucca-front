@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface ClearBasicStory {
 	S: boolean;
@@ -40,7 +40,7 @@ export default {
 			},
 		},
 		alt: {
-			description: "Information restituée par le lecteur d'écran.",
+			description: 'Information restituée par le lecteur d’écran.',
 		},
 		hidden: {
 			description: 'Masque le bouton.',

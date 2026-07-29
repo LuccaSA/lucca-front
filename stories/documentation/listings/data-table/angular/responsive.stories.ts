@@ -13,13 +13,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Responsive',
 	argTypes: {
 		inlineSize: {
-			description: "Modifie la largeur d'une colonne lorsque <code>layoutFixed</code> est activé.",
+			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
 		},
 		inlineSizeValue: {
 			if: { arg: 'inlineSize', truthy: true },

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, signal, ViewEncaps
 import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { BubbleIconSize } from './bubble-icon.type';
 
 @Component({
 	selector: 'lu-bubble-icon',
@@ -15,6 +16,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		'[class.mod-right]': 'direction() === 2',
 		'[class.mod-top]': 'direction() === 3',
 		'[class.mod-bottom]': 'direction() === 4',
+		'[class.mod-XS]': 'size() === "XS"',
 		'[class.mod-S]': 'size() === "S"',
 		'[class.mod-L]': 'size() === "L"',
 	},
@@ -24,7 +26,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 export class BubbleIconComponent {
 	readonly icon = input.required<LuccaIcon>();
 	readonly alt = input<string | null>(null);
-	readonly size = input<'S' | 'M' | 'L'>('M');
+	readonly size = input<BubbleIconSize>('M');
 
 	readonly palette = input<Palette | DecorativePalette>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));

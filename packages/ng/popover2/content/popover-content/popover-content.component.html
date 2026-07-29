@@ -1,4 +1,10 @@
-<div class="popover" (cdkObserveContent)="contentChanged()" [debounce]="contentChangedDebounceTime">
+<div
+	class="popover"
+	(cdkObserveContent)="contentChanged()"
+	[debounce]="contentChangedDebounceTime"
+	[style.--components-popover-content-maxBlockSize]="config.maxBlockSize"
+	[style.--components-popover-content-maxInlineSize]="config.maxInlineSize"
+>
 	@if (!config.noCloseButton) {
 		<div>
 			<button type="button" luButton class="popover-close button" (click)="close()">
@@ -7,5 +13,7 @@
 			</button>
 		</div>
 	}
-	<ng-container *luPortal="content" />
+	<div class="popover-content">
+		<ng-container *luPortal="content" />
+	</div>
 </div>

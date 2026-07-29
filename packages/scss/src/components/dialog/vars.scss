@@ -8,13 +8,18 @@
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
 	--components-dialog-inset: 0 var(--commons-pushPanel-inlineSize) 0 0;
 	--components-dialog-animationOpening: scaleIn;
-	--components-dialog-insideHeaderAreas: 'container close';
+	--components-dialog-insideHeaderAreas:
+		'container close'
+		'content content';
 	--components-dialog-insideHeaderTitleAlign: left;
 	--components-dialog-insideHeaderTitlePadding: calc(var(--pr-t-spacings-50) / 2) 0;
 	--components-dialog-insideHeaderButtonDisplay: flex;
 	--components-dialog-insideHeaderLinkDisplay: none;
 	--components-dialog-insideHeaderColumns: 1fr auto;
 	--components-dialog-insideContent-background: transparent;
+	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-300);
+	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-200);
+	--components-dialog-insideContent-overflow: auto;
 	--components-dialog-level: 0;
 	--components-dialog-translate-spacing: var(--pr-t-spacings-500);
 	--components-dialog-translate: calc(var(--components-dialog-translate-spacing) * var(--components-dialog-level) * -1);
@@ -25,7 +30,6 @@
 	--components-dialog-inside-header-position: relative;
 	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200);
 	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-300);
-	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-200);
 	--components-dialog-inside-header-button-position: static;
 	--components-dialog-inside-backgroundImage: none;
 	--components-dialog-minBlockSize: 0px;
@@ -35,4 +39,6 @@
 	--components-dialog-inside-fancyIllustrations-inlineSize: var(--components-dialog-inside-paddingInlineEnd);
 	--components-dialog-inside-header-button-insetBlockStart: var(--pr-t-spacings-200);
 	--components-dialog-inside-header-button-insetInlineEnd: var(--pr-t-spacings-300);
+	--components-dialog-inside-header-marginBlock: 0px;
+	--components-dialog-inside-footer-marginBlock: 0px;
 }

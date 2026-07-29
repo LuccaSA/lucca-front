@@ -61,10 +61,12 @@
 		}
 	}
 
-	[role='listbox'] {
+	.lu-picker-content-option {
+		flex-direction: row;
 		display: flex;
 		flex-wrap: wrap;
 		padding: var(--pr-t-spacings-100);
+		gap: 0;
 	}
 
 	.color {

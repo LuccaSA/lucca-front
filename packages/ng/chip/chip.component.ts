@@ -5,6 +5,7 @@ import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { ChipSize, ChipState } from './chip.type';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 
 @Component({
@@ -50,7 +51,7 @@ export class ChipComponent {
 	/**
 	 * Which size should the chip be? Defaults or small
 	 */
-	readonly size = input<'S' | null>(null);
+	readonly size = input<ChipSize | null>(null);
 
 	/**
 	 * State is a shorthand to set the icon and the palette to the recommended values for the icon and palette based on
@@ -59,7 +60,7 @@ export class ChipComponent {
 	 * If one of the icon or palette inputs are filled along with the state input, their values will have the priority over
 	 * state (so setting state to success and palette to warning will make the palette warning)
 	 */
-	readonly state = input<'warning' | 'critical' | null>(null);
+	readonly state = input<ChipState | null>(null);
 
 	/**
 	 * Which icon should we display in the chip if any?

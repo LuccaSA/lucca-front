@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ILuUser, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, LuUserDisplayModule } from '@lucca-front/ng/user';
-import { Meta, StoryObj } from '@storybook/angular';
-import { bob, patrick, squidwards } from '../user.mocks';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { finn, marceline } from '../user.mocks';
 
 const formatters = {
 	enLongConjFormatter: new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }),
@@ -16,7 +16,7 @@ const formatters = {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DisplayStory {
-	users = input<ILuUser[]>([bob, patrick, squidwards]);
+	users = input<ILuUser[]>([finn, marceline]);
 	displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
 	separator = input<string>(', ');
 	formatter = input<Intl.ListFormat>(formatters.enLongConjFormatter);
@@ -27,7 +27,7 @@ export default {
 	component: DisplayStory,
 	argTypes: {
 		displayFormat: {
-			description: "Format utilisé pour afficher le nom de l'utilisateur.",
+			description: 'Format utilisé pour afficher le nom de l’utilisateur.',
 			options: [...Object.values(LuDisplayFullname), ...Object.values(LuDisplayInitials), ...Object.values(LuDisplayHybrid)],
 			control: {
 				type: 'select',
@@ -43,7 +43,7 @@ export default {
 			control: 'text',
 		},
 		formatter: {
-			description: "Formate la liste d'utilisateurs selon la langue, via `Intl.ListFormat`.",
+			description: 'Formate la liste d’utilisateurs selon la langue, via `Intl.ListFormat`.',
 			options: Object.keys(formatters),
 			mapping: formatters,
 			control: {

@@ -1,8 +1,8 @@
 import { IconsList } from '@/stories/icons-list';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
-import { generateInputs } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
+import { generateInputs } from '@/helpers/stories';
 
 interface ListingBasicStory {
 	checklist: boolean;
@@ -62,14 +62,14 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.)',
+			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.).<br>[v21.2] <code>orderedFancy</code>',
 		},
 		defaultIcon: {
 			options: IconsList.map((i) => i.icon),
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône par défaut.",
+			description: 'Modifie l’icône par défaut.',
 			if: { arg: 'type', eq: 'icons' },
 		},
 		icon: {
@@ -77,7 +77,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
-			description: "Modifie l'icône d'un élément de la liste.",
+			description: 'Modifie l’icône d’un élément de la liste.',
 			if: { arg: 'type', eq: 'icons' },
 		},
 		start: {
@@ -86,7 +86,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		},
 		reversed: {
 			if: { arg: 'type', eq: 'ordered' },
-			description: 'Prédente la liste sous forme décroissante.',
+			description: 'Présente la liste sous forme décroissante.',
 		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,

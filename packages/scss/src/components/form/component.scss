@@ -5,6 +5,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
+	max-inline-size: var(--components-form-maxWidth);
 
 	.divider:not(.mod-vertical) {
 		margin-block: var(--pr-t-spacings-300);
@@ -149,6 +150,11 @@
 					}
 				}
 			}
+		}
+
+		.option-additional {
+			font: var(--pr-t-font-body-S);
+			color: var(--pr-t-color-text-subtle);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface LabelBasicStory {
 	palette: string;
@@ -19,7 +19,7 @@ export default {
 			control: {
 				type: 'radio',
 			},
-			description: "Ne fonctionne qu'avec le mod-number",
+			description: 'Ne fonctionne qu’avec le mod-number',
 		},
 	},
 } as Meta;

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'comment-stories',

@@ -1,29 +1,46 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, input, OnInit, ViewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, Injector, input, OnInit, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { IconComponent } from '@lucca/prisme/icon';
 import { map } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input/select-input.component';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.translate';
 import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directive';
 
+let nextID = 0;
+
 @Component({
 	selector: 'lu-multi-select-default-displayer',
-	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective, ChipComponent],
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective, ChipComponent, IconComponent],
 	template: `
 		<div class="multipleSelect-displayer">
-			<input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
+			<div class="multipleSelect-displayer-suffix">
+				<input [attr.aria-labelledby]="valueID" autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
+				@if (select.filterPillMode) {
+					<lu-icon icon="searchMagnifyingGlass" class="multiSelect-field-icon mod-search" />
+				}
+			</div>
+			<div [attr.id]="valueID" class="pr-u-mask">
+				@for (option of displayedOptions$ | async; track option; let index = $index) {
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />&ngsp;
+				}
+				@if (overflowOptions$ | async; as overflow) {
+					+ {{ overflow }}
+				}
+			</div>
+
 			@for (option of displayedOptions$ | async; track option; let index = $index) {
-				<lu-chip class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
+				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
 					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
 				</lu-chip>
 			}
 			@if (overflowOptions$ | async; as overflow) {
-				<lu-chip class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
+				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" unkillable>+ {{ overflow }}</lu-chip>
 			}
 		</div>
 	`,
@@ -31,32 +48,35 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
-	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
-	intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
+	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
+	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
+
+	valueID = `value-${++nextID}`;
 
 	protected destroyRef = inject(DestroyRef);
+	readonly #injector = inject(Injector);
 
-	@ViewChild('inputElement')
-	inputElementRef: ElementRef<HTMLInputElement>;
+	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
 	get value(): T[] {
 		return this.select.value || [];
 	}
 
-	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
+	readonly context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
-	displayedOptions$ = this.context.option$.pipe(
+	readonly displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
-			if (this.select.maxValuesShown) {
-				return (options || []).slice(0, this.select.maxValuesShown);
+			const maxValuesShown = this.select.maxValuesShown();
+			if (maxValuesShown) {
+				return (options || []).slice(0, maxValuesShown);
 			}
 			return options;
 		}),
 	);
 
-	overflowOptions$ = this.context.option$.pipe(
+	readonly overflowOptions$ = this.context.option$.pipe(
 		map((options) => {
-			return Math.max(0, (options || []).length - this.select.maxValuesShown);
+			return Math.max(0, (options || []).length - this.select.maxValuesShown());
 		}),
 	);
 
@@ -69,23 +89,26 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			this.value.filter((o) => o !== option),
 			true,
 		);
-		setTimeout(() => {
-			this.select.panelRef?.updatePosition();
-			this.select.updatePosition();
-			this.inputElementRef.nativeElement.focus();
-			this.select.panelRef?.updateSelectedOptions(this.value);
-		});
+		afterNextRender(
+			() => {
+				this.select.panelRef?.updatePosition();
+				this.select.updatePosition();
+				this.inputElementRef()?.nativeElement.focus();
+				this.select.panelRef?.updateSelectedOptions(this.value);
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	inputBackspace(): void {
-		if (this.value.length > 0 && this.inputElementRef.nativeElement.value.length === 0) {
+		if (this.value.length > 0 && this.inputElementRef()?.nativeElement.value.length === 0) {
 			this.unselectOption(this.value[this.value.length - 1]);
 			this.select.panelRef?.updateSelectedOptions(this.value);
 		}
 	}
 
 	inputSpace(event: Event): void {
-		if (this.inputElementRef.nativeElement.value?.length === 0) {
+		if (this.inputElementRef()?.nativeElement.value?.length === 0) {
 			event.preventDefault();
 			this.select.panelRef?.selectCurrentlyHighlightedValue();
 		}
@@ -95,15 +118,17 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: true }) => {
 			// Everytime we want to focus, we need to reset the input
 			// This is done when a value is selected and when panel is opened.
-			if (!data?.keepClue) {
-				this.inputElementRef.nativeElement.value = '';
+			if (!data?.keepClue && this.inputElementRef()?.nativeElement) {
+				this.inputElementRef()!.nativeElement.value = '';
 				this.select.clueChanged('');
 			}
 
-			this.inputElementRef.nativeElement.focus();
+			this.inputElementRef()?.nativeElement.focus();
 		});
 		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-			this.inputElementRef.nativeElement.value = '';
+			if (this.inputElementRef()?.nativeElement) {
+				this.inputElementRef()!.nativeElement.value = '';
+			}
 		});
 	}
 }

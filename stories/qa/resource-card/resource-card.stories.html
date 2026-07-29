@@ -1,0 +1,146 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="width: 100%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-resource-card>
+						<a href="#" luResourceCardAction>Titre de la ressource</a>
+					</lu-resource-card>
+					<lu-resource-card>
+						<button type="button" luResourceCardAction>Titre de la ressource</button>
+					</lu-resource-card>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Avec slots</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-resource-card>
+						<a href="#" luResourceCardAction>Titre de la ressource</a>
+						<ng-container resourceCardIllustration>
+							<lu-bubble-icon icon="home" bubbleDirection="left" />
+						</ng-container>
+						<ng-container resourceCardInfos>
+							<span class="chip">Info</span>
+						</ng-container>
+						<ng-container resourceCardContent> Description complémentaire de la ressource avec quelques détails. </ng-container>
+						<ng-container resourceCardAction>
+							<button type="button" class="button mod-onlyIcon mod-ghost">
+								<lu-icon icon="settings" alt="Paramètres" />
+							</button>
+						</ng-container>
+					</lu-resource-card>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Taille S</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-resource-card size="S">
+						<a href="#" luResourceCardAction>Titre de la ressource</a>
+						<ng-container resourceCardIllustration>
+							<lu-bubble-icon icon="home" bubbleDirection="left" size="S" />
+						</ng-container>
+						<ng-container resourceCardInfos>
+							<span class="chip">Info</span>
+						</ng-container>
+						<ng-container resourceCardContent> Description complémentaire de la ressource. </ng-container>
+					</lu-resource-card>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Wrapper liste</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-resource-card-wrapper>
+						<lu-resource-card>
+							<a href="#" luResourceCardAction>Ressource 1</a>
+							<ng-container resourceCardIllustration>
+								<lu-bubble-icon icon="home" bubbleDirection="left" />
+							</ng-container>
+							<ng-container resourceCardContent>Description de la ressource 1.</ng-container>
+						</lu-resource-card>
+						<lu-resource-card>
+							<a href="#" luResourceCardAction>Ressource 2</a>
+							<ng-container resourceCardIllustration>
+								<lu-bubble-icon icon="heart" bubbleDirection="right" palette="kiwi" />
+							</ng-container>
+							<ng-container resourceCardContent>Description de la ressource 2.</ng-container>
+						</lu-resource-card>
+						<lu-resource-card>
+							<a href="#" luResourceCardAction>Ressource 3</a>
+							<ng-container resourceCardIllustration>
+								<lu-bubble-icon icon="star" bubbleDirection="top" palette="pumpkin" />
+							</ng-container>
+							<ng-container resourceCardContent>Description de la ressource 3.</ng-container>
+						</lu-resource-card>
+					</lu-resource-card-wrapper>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Wrapper grille</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-resource-card-wrapper grid>
+						<lu-resource-card>
+							<a href="#" luResourceCardAction>Ressource 1</a>
+							<ng-container resourceCardIllustration>
+								<lu-bubble-icon icon="home" bubbleDirection="left" />
+							</ng-container>
+							<ng-container resourceCardContent>Description de la ressource 1.</ng-container>
+						</lu-resource-card>
+						<lu-resource-card>
+							<a href="#" luResourceCardAction>Ressource 2</a>
+							<ng-container resourceCardIllustration>
+								<lu-bubble-icon icon="heart" bubbleDirection="right" palette="kiwi" />
+							</ng-container>
+							<ng-container resourceCardContent>Description de la ressource 2.</ng-container>
+						</lu-resource-card>
+						<lu-resource-card>
+							<a href="#" luResourceCardAction>Ressource 3</a>
+							<ng-container resourceCardIllustration>
+								<lu-bubble-icon icon="star" bubbleDirection="top" palette="pumpkin" />
+							</ng-container>
+							<ng-container resourceCardContent>Description de la ressource 3.</ng-container>
+						</lu-resource-card>
+					</lu-resource-card-wrapper>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-resource-card>
+						<a href="#" luResourceCardAction disabled>Titre disabled (lien)</a>
+						<ng-container resourceCardIllustration>
+							<lu-bubble-icon icon="home" bubbleDirection="left" />
+						</ng-container>
+						<ng-container resourceCardContent>Description de la ressource.</ng-container>
+					</lu-resource-card>
+					<lu-resource-card>
+						<button type="button" luResourceCardAction disabled>Titre disabled (bouton)</button>
+						<ng-container resourceCardIllustration>
+							<lu-bubble-icon icon="home" bubbleDirection="left" />
+						</ng-container>
+						<ng-container resourceCardContent>Description de la ressource.</ng-container>
+					</lu-resource-card>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

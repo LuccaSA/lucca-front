@@ -17,6 +17,8 @@ export default defineConfig(
 			'**/schematics/**/tests/',
 			'node_modules/',
 			'.angular/',
+			'vitest.config.ts',
+			'vitest.shared-config.ts',
 			// schematics && stories can be strictified
 			'packages/ng/schematics/**/*.ts',
 			'stories/**/*.ts',
@@ -33,7 +35,13 @@ export default defineConfig(
 		processor: angular.processInlineTemplates,
 		languageOptions: {
 			parserOptions: {
-				project: ['tsconfig.json', 'packages/ng/tsconfig.json', '.storybook/tsconfig.json'],
+				project: [
+					'tsconfig.json',
+					'packages/ng/tsconfig.json',
+					'packages/prisme/tsconfig.json',
+					'packages/eslint-plugin/tsconfig.json',
+					'.storybook/tsconfig.json',
+				],
 				createDefaultProgram: true,
 			},
 		},
@@ -69,6 +77,8 @@ export default defineConfig(
 			'@angular-eslint/prefer-inject': 'off',
 			'@angular-eslint/prefer-on-push-component-change-detection': 'error',
 
+			'@angular-eslint/prefer-signals': 'error',
+
 			'@typescript-eslint/explicit-function-return-type': 'off',
 			'@typescript-eslint/explicit-module-boundary-types': 'off', // on aimerait bien dire oui sauf pour void
 			'@typescript-eslint/naming-convention': [
@@ -81,7 +91,7 @@ export default defineConfig(
 			'@typescript-eslint/no-restricted-imports': [
 				'error',
 				{
-					paths: ['rxjs/Rx', '@ngneat/spectator', '@lucca-front/ng'],
+					paths: ['rxjs/Rx', '@lucca-front/ng'],
 					patterns: [
 						{
 							regex: 'dist\/ng',
@@ -135,7 +145,13 @@ export default defineConfig(
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
-				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
+				project: [
+					'tsconfig.lint.json',
+					'packages/ng/tsconfig.lint.json',
+					'packages/prisme/tsconfig.lint.json',
+					'packages/eslint-plugin/tsconfig.json',
+					'.storybook/tsconfig.lint.json',
+				],
 			},
 		},
 		plugins: {
@@ -150,18 +166,14 @@ export default defineConfig(
 		},
 	},
 	{
-		files: ['**/*.ts'],
-		languageOptions: {
-			parser: tsParser,
-			parserOptions: {
-				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
-			},
-		},
-		plugins: {
-			'@lucca-front': localRules,
-		},
+		files: ['**/*.spec.ts', '**/*.spec.*.ts'],
 		rules: {
-			'@lucca-front/ts-error': 'error',
+			'@typescript-eslint/no-unsafe-call': 'off',
+			'@typescript-eslint/no-unsafe-member-access': 'off',
+			'@typescript-eslint/no-unsafe-assignment': 'off',
+			'@typescript-eslint/no-unsafe-return': 'off',
+			'@typescript-eslint/no-unsafe-argument': 'off',
+			'@typescript-eslint/no-unnecessary-type-assertion': 'off',
 		},
 	},
 	{
@@ -199,6 +211,18 @@ export default defineConfig(
 			'@angular-eslint/template/prefer-self-closing-tags': 'off',
 			// TODO A lot of issues currently so a lot of rules are turned off. Would be nice to enable them but requires a lot of fixes
 			'@angular-eslint/template/button-has-type': 'off',
+		},
+	},
+	// Scripts: generate-skills is tooling code, downgrade strict rules to warn
+	{
+		files: ['scripts/generate-skills/**/*.ts'],
+		rules: {
+			'no-console': 'warn',
+			'@typescript-eslint/no-explicit-any': 'warn',
+			'@typescript-eslint/no-unused-vars': 'warn',
+			'@typescript-eslint/no-unsafe-argument': 'warn',
+			'@typescript-eslint/restrict-template-expressions': 'warn',
+			'@typescript-eslint/require-await': 'warn',
 		},
 	},
 	prettier,

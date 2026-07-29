@@ -31,4 +31,8 @@
 		parentOnly: 'Parent only',
 		childrenOnly: 'Children only',
 	},
+	pl: {
+		parentOnly: 'Tylko rodzic',
+		childrenOnly: 'Tylko dzieci',
+	},
 };

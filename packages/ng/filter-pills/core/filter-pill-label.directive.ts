@@ -24,7 +24,7 @@ export class FilterPillLabelDirective {
 		}
 	}
 
-	public static ngTemplateContextGuard(_dir: FilterPillLabelDirective, ctx: unknown): ctx is FilterPillLabelContext {
+	public static ngTemplateContextGuard(_dir: FilterPillLabelDirective, _ctx: unknown): _ctx is FilterPillLabelContext {
 		return true;
 	}
 }

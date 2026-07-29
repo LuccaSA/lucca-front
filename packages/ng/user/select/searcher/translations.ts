@@ -23,4 +23,7 @@
 	en: {
 		includeFormerEmployees: 'Include former employees',
 	},
+	pl: {
+		includeFormerEmployees: 'Uwzględnienie pracowników, którzy odeszli',
+	},
 };

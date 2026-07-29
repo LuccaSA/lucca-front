@@ -23,4 +23,7 @@
 	en: {
 		establishments: 'establishments',
 	},
+	pl: {
+		establishments: 'placówki',
+	},
 };

@@ -7,7 +7,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'page-header-stories',

@@ -6,3 +6,8 @@
 	--components-softwareIcon-disabled-500: var(--palettes-neutral-500);
 	--components-softwareIcon-disabled-600: var(--palettes-neutral-600);
 }
+
+@mixin insideWrapperHover {
+	--components-softwareIcon-transformScale: 1.1;
+	--components-softwareIcon-zIndex: 1;
+}

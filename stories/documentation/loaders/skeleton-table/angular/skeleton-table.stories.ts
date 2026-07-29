@@ -1,5 +1,5 @@
 import { SkeletonTableComponent } from '@lucca-front/ng/skeleton';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Loaders/Skeleton/Skeleton Table',
@@ -23,7 +23,7 @@ export const Template: StoryObj<SkeletonTableComponent> = {
 			},
 		},
 		colsAlign: {
-			description: 'Alignement horizontal du contenu des colonnes.',
+			description: 'Alignement horizontal du contenu des colonnes. La clé correspond au numéro de la colonne (en partant de 0).',
 		},
 	},
 

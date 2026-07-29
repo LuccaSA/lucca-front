@@ -1,44 +1,48 @@
 import { provideHttpClient } from '@angular/common/http';
-import { FileEntryComponent } from '@lucca-front/ng/file-upload';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { FILE_ENTRY_SIZE, FILE_ENTRY_STATE, FileEntryComponent } from '@lucca-front/ng/file-upload';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/File/FileEntry/Angular/Basic',
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: setStoryOptions(FILE_ENTRY_SIZE),
 			control: {
 				type: 'radio',
 			},
 			description: 'Modifie la taille du composant.',
 		},
 		state: {
-			options: [null, 'loading', 'error'],
+			options: setStoryOptions(FILE_ENTRY_STATE),
 			control: {
 				type: 'radio',
 			},
-			description: "Modifie l'état du composant.",
+			description: 'Modifie l’état du composant.',
 		},
 		previewUrl: {
 			if: { arg: 'iconOverride', truthy: false },
-			description: "URL de prévisualisation de l'image uploadée.",
+			description: 'URL de prévisualisation de l’image uploadée.',
 		},
 		displayFileName: {
 			if: { arg: 'media', truthy: true },
-			description: "Affiche le nom du fichier sous l'image en vue <code>media</code>.",
+			description: 'Affiche le nom du fichier sous l’image en vue <code>media</code>.',
 		},
 		media: {
 			description: 'Affiche le fichier avec une mise en forme adaptée aux visuels.',
 		},
 		iconOverride: {
-			description: "Remplace l'icône de format de fichier.",
+			description: 'Remplace l’icône de format de fichier.',
 		},
 		downloadURL: {
 			description: 'URL de téléchargement du fichier.',
 		},
+		openInNewTab: {
+			description: 'Ouvre le fichier dans un nouvel onglet au lieu de le télécharger. Peut varier selon les navigateurs ou les réglages utilisateurs.',
+			if: { arg: 'downloadURL', truthy: true },
+		},
 		inlineMessageError: {
-			description: "Message d'erreur affiché sous le composant.",
+			description: 'Message d’erreur affiché sous le composant.',
 		},
 		deletable: {
 			description: 'Affiche un bouton de suppression.',
@@ -55,11 +59,21 @@ export default {
 		fileType: {
 			description: 'Type MIME du fichier.',
 		},
+		structure: {
+			if: { arg: 'size', truthy: true },
+			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
+		},
 		withFileType: {
 			control: 'boolean',
 		},
 		withFileSize: {
 			control: 'boolean',
+		},
+		deleteFile: {
+			description: 'Événement déclenché lors du clic sur le bouton de suppression du fichier.',
+		},
+		passwordChange: {
+			description: 'Événement déclenché lors de la modification du mot de passe du fichier.',
 		},
 	},
 	decorators: [
@@ -69,13 +83,14 @@ export default {
 		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 	render: (args, { argTypes }) => {
-		const { fileName, fileSize, fileType, deletable, withPassword, ...otherArgs } = args;
+		const { fileName, fileSize, fileType, deletable, withPassword, structure, ...otherArgs } = args;
 
-		const deletableParam = deletable ? `(deleteFile)="deleteFile()"` : ``;
-		const withPasswordParam = withPassword ? `(passwordChange)="passwordChange()"` : ``;
+		const deletableParam = deletable ? ` (deleteFile)="deleteFile()"` : ``;
+		const withPasswordParam = withPassword ? ` (passwordChange)="passwordChange()"` : ``;
+		const structureParam = structure ? ` structure` : ``;
 
 		return {
-			template: `<lu-file-entry ${deletableParam} ${withPasswordParam} [entry]="{
+			template: `<lu-file-entry${structureParam}${deletableParam}${withPasswordParam} [entry]="{
 			name: '${fileName}',
 			size: ${fileSize},
 			type: ${fileType && `'${fileType}'`},
@@ -88,18 +103,19 @@ export const Basic = {
 	args: {
 		media: false,
 		displayFileName: false,
-		size: null,
 		fileSize: 28420,
 		withFileSize: true,
 		fileType: 'image/png',
 		withFileType: true,
 		fileName: 'dummyimage.png',
-		iconOverride: '',
 		previewUrl: 'https://dummyimage.com/500',
+		iconOverride: '',
 		state: null,
 		inlineMessageError: 'Virus détecté dans le fichier.',
 		downloadURL: '',
+		openInNewTab: false,
 		deletable: true,
 		withPassword: false,
+		structure: false,
 	},
 };

@@ -1,0 +1,148 @@
+<table class="demo-QAtable">
+	<thead>
+		<tr>
+			<th>Component</th>
+			<th>Default</th>
+			<th>Disabled</th>
+			<th>With value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<!-- lu-text-input -->
+		<tr>
+			<td>lu-text-input</td>
+			<td>
+				<lu-form-field label="Recipe title">
+					<lu-text-input placeholder="e.g. Ratatouille" [formControl]="textControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-textarea-input -->
+		<tr>
+			<td>lu-textarea-input</td>
+			<td>
+				<lu-form-field label="Chef's notes">
+					<lu-textarea-input placeholder="Add any extra tips…" [formControl]="textareaControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-number-input -->
+		<tr>
+			<td>lu-number-input</td>
+			<td>
+				<lu-form-field label="Servings">
+					<lu-number-input placeholder="0" [formControl]="numberControl" [min]="1" [max]="99" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-number-format-input -->
+		<tr>
+			<td>lu-number-format-input</td>
+			<td>
+				<lu-form-field label="Estimated cost">
+					<lu-number-format-input formatStyle="currency" currency="EUR" placeholder="0.00" [formControl]="numberFormatControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-checkbox-input -->
+		<tr>
+			<td>lu-checkbox-input</td>
+			<td>
+				<lu-form-field label="Vegetarian">
+					<lu-checkbox-input [formControl]="checkboxControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-switch-input -->
+		<tr>
+			<td>lu-switch-input</td>
+			<td>
+				<lu-form-field label="Published">
+					<lu-switch-input [formControl]="switchControl" />
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-radio-group-input -->
+		<tr>
+			<td>lu-radio-group-input</td>
+			<td>
+				<lu-form-field label="Season">
+					<lu-radio-group-input [formControl]="radioControl">
+						@for (s of seasons; track s.value) {
+							<lu-radio [value]="s.value">{{ s.label }}</lu-radio>
+						}
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Season">
+					<lu-radio-group-input [formControl]="radioControl">
+						@for (s of seasons; track s.value) {
+							<lu-radio [value]="s.value" [disabled]="true">{{ s.label }}</lu-radio>
+						}
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Season">
+					<lu-radio-group-input [formControl]="radioControl" [framed]="true">
+						@for (s of seasons; track s.value) {
+							<lu-radio [value]="s.value">{{ s.label }}</lu-radio>
+						}
+					</lu-radio-group-input>
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-color-input -->
+		<tr>
+			<td>lu-color-input</td>
+			<td>
+				<lu-form-field label="Label color">
+					<!-- <lu-color-input [colors]="palette" [formControl]="colorControl" /> -->
+				</lu-form-field>
+			</td>
+		</tr>
+
+		<!-- lu-segmented-control -->
+		<tr>
+			<td>lu-segmented-control</td>
+			<td>
+				<lu-form-field label="Difficulty">
+					<lu-segmented-control [formControl]="segmentedControl">
+						<lu-segmented-control-filter value="easy">Easy</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="medium">Medium</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="hard">Hard</lu-segmented-control-filter>
+					</lu-segmented-control>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Difficulty">
+					<lu-segmented-control [formControl]="segmentedControl">
+						<lu-segmented-control-filter value="easy" [disabled]="true">Easy</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="medium" [disabled]="true">Medium</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="hard" [disabled]="true">Hard</lu-segmented-control-filter>
+					</lu-segmented-control>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Difficulty">
+					<lu-segmented-control [formControl]="segmentedControl" [small]="true">
+						<lu-segmented-control-filter value="easy">Easy</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="medium">Medium</lu-segmented-control-filter>
+						<lu-segmented-control-filter value="hard">Hard</lu-segmented-control-filter>
+					</lu-segmented-control>
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

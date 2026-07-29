@@ -2,6 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, Vi
 import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { InlineMessageState } from './inline-message-state';
+import { InlineMessageSize } from './inline-message.type';
 
 @Component({
 	selector: 'lu-inline-message',
@@ -31,7 +32,7 @@ export class InlineMessageComponent {
 	/**
 	 * Which size should the inline message be? Default, medium or small
 	 */
-	readonly size = input<'S' | 'M'>();
+	readonly size = input<InlineMessageSize>();
 
 	/**
 	 * Defines whether a tooltip is used in the inline message component

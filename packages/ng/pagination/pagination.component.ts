@@ -1,13 +1,15 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, effect, input, output, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
+import { PaginationMod } from './pagination.type';
 
 @Component({
 	selector: 'lu-pagination',
 	templateUrl: './pagination.component.html',
 	styleUrl: './pagination.component.scss',
-	imports: [IconComponent, IntlParamsPipe],
+	imports: [IconComponent, IntlParamsPipe, ButtonComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
@@ -42,7 +44,7 @@ export class PaginationComponent {
 	/**
 	 * Pagination mod (default or compact)
 	 */
-	readonly mod = input<'default' | 'compact'>('default');
+	readonly mod = input<PaginationMod>('default');
 
 	/**
 	 * Emit event when click on previous arrow

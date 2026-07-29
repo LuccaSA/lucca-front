@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface StickyHeaderStory {}
 
@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: StickyHeaderStory): string {
-	return `<div class="dataTableWrapper" style="height: 10rem">
+	return `<div class="dataTableWrapper" style="block-size: 10rem">
 	<table class="dataTable mod-stickyHeader">
 		<thead class="dataTable-head">
 			<tr class="dataTable-head-row">

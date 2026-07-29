@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface TableBasicStory {
 	clickable: boolean;
@@ -41,7 +41,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: "Change l'alignement horizontal d'une cellule",
+			description: 'Change l’alignement horizontal d’une cellule',
 		},
 		borderless: {
 			control: {

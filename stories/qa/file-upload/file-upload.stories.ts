@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'file-upload-stories',
@@ -16,7 +16,7 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 				inline-size: 100%;
 			}
 			.demo-QAtable {
-				width: 100%;
+				inline-size: 100%;
 				table-layout: fixed;
 			}
 		`,

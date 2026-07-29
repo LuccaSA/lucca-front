@@ -3,14 +3,16 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ButtonComponent } from '@lucca/prisme/button';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from '../../../helpers/stories';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { expect, screen, userEvent, within } from 'storybook/test';
+import { createTestStory, generateInputs } from '../../../helpers/stories';
+import { mapInputs, sleep } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
 	argTypes: {
 		luTooltipEnterDelay: {
-			description: "Délai d'apparition du tooltip au survol (en ms).",
+			description: 'Délai d’apparition du tooltip au survol (en ms).',
 			control: { type: 'number' },
 			table: {
 				category: 'inputs',
@@ -43,7 +45,7 @@ export default {
 			},
 		},
 		luTooltipWhenEllipsis: {
-			description: "N'affiche le tooltip que lorsque le contenu de l'élément déclencheur est tronqué par une ellipse.",
+			description: 'N’affiche le tooltip que lorsque le contenu de l’élément déclencheur est tronqué par une ellipse.',
 			control: { type: 'boolean' },
 			table: {
 				category: 'inputs',
@@ -51,7 +53,7 @@ export default {
 			},
 		},
 		luTooltipOnlyForDisplay: {
-			description: "[v18.2] Affiche un tooltip non restituée par les lecteurs d'écran. À utiliser si la réstitution est déjà portée par l'élément déclancheur (ex. une icône avec attribut `alt`)",
+			description: 'Affiche un tooltip non restituée par les lecteurs d’écran. À utiliser si la réstitution est déjà portée par l’élément déclencheur (ex. une icône avec attribut `alt`)',
 		},
 	},
 	decorators: [
@@ -90,20 +92,23 @@ export default {
 >Tooltip au survol</span>
 <h3>Tooltip et ellipse</h3>
 <div
+	data-testid="ellipsis-truncated"
 	class="pr-u-ellipsis"
-	style="width: 10rem;"
+	style="inline-size: 10rem;"
+	tabindex="0"
 	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
 	${generateInputs(args, argTypes)}
 	[luTooltipWhenEllipsis]="true"
 >Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.</div>
 <div
+	data-testid="ellipsis-not-truncated"
 	class="pr-u-ellipsis"
 	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
 	${generateInputs(args, argTypes)}
 	[luTooltipWhenEllipsis]="true"
 >Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>
 <h3>Tooltip et icône (avec alternative)</h3>
-<lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true" />
+<lu-icon data-testid="icon-tooltip" icon="star" alt="Favoris" luTooltip="Favoris" ${inputs} luTooltipOnlyForDisplay="true" />
 
 <h3>Tooltip affiché avec un host séparé</h3>
 <span class="pr-u-marginInlineEnd800" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">

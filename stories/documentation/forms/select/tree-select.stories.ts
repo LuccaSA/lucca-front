@@ -9,7 +9,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { createTestStory } from '../../../helpers/stories';
 import { waitForAngular } from '../../../helpers/test';
@@ -118,7 +118,7 @@ async function checkValues(input: HTMLElement, values: string[]) {
 		await expect(counter).toHaveTextContent(values.length.toString());
 	} else {
 		for (const value of values) {
-			await expect(input.parentElement).toHaveTextContent(value);
+			await expect(input.parentElement.parentElement).toHaveTextContent(value);
 		}
 	}
 }

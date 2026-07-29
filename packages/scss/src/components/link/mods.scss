@@ -17,3 +17,7 @@
 @mixin legacyIcon {
 	--components-link-icon-marginInlineStart: 0.2em;
 }
+
+@mixin hiddenIcon {
+	--components-link-icon-opacity: 0;
+}

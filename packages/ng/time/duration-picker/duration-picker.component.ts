@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, signal, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
@@ -29,7 +29,7 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 export class DurationPickerComponent extends BasePickerComponent {
 	readonly intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
-	value = model<ISO8601Duration>('PT0S');
+	readonly value = model<ISO8601Duration>('PT0S');
 	readonly max = input<ISO8601Duration>('PT99H');
 
 	readonly displayArrows = input(false, { transform: booleanAttribute });
@@ -39,6 +39,8 @@ export class DurationPickerComponent extends BasePickerComponent {
 	readonly hideZeroValue = input(false, { transform: booleanAttribute });
 
 	readonly durationChange = output<DurationChangeEvent>();
+
+	readonly keyPressed = signal(false);
 
 	protected readonly hours = computed(() => getHoursPartFromDuration(this.value()));
 	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.value()));
@@ -57,6 +59,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 			'mod-stepper': this.displayArrows(),
 			'mod-stepperHover': this.displayArrows(),
 			[`mod-${this.size()}`]: Boolean(this.size()),
+			'pr-u-animatedShake': this.keyPressed(),
 		};
 	});
 	protected readonly fieldsetSuffixClasses = computed(() => {
@@ -65,7 +68,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 			'pr-u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
-	protected separator = computed(() => this.intl().timePickerTimeSeparator);
+	protected readonly separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 

@@ -1,7 +1,8 @@
+import { PaletteAllArgType } from '@/helpers/common-arg-types';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { provideRouter } from '@angular/router';
 import { TagComponent } from '@lucca-front/ng/tag';
-import { Meta, StoryObj } from '@storybook/angular';
-import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'tags-stories',
@@ -16,6 +17,11 @@ class TagsStory {
 export default {
 	title: 'QA/Tags',
 	component: TagsStory,
+	decorators: [
+		applicationConfig({
+			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
+		}),
+	],
 } as Meta;
 
 const template = () => ({});

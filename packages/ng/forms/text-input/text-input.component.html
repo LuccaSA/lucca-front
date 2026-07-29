@@ -2,7 +2,7 @@
 	<ng-template #textfieldAddon let-addon="addon" let-type="type">
 		@if (addon.content) {
 			<span class="textField-{{ type }}" luFormFieldId="{{ type }}">
-				<span class="textField-label-{{ type }}-item" aria-hidden="true">{{ addon.content }}</span>
+				<span class="textField-label-{{ type }}-item" aria-hidden="true"><ng-container *luPortal="addon.content" /></span>
 				<span class="pr-u-mask">{{ addon.ariaLabel }}</span>
 			</span>
 		}

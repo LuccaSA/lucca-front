@@ -1,5 +1,6 @@
 import { NgForOf, NgForOfContext } from '@angular/common';
-import { ChangeDetectorRef, Directive, forwardRef, Input, IterableDiffers, OnDestroy, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Directive, forwardRef, input, IterableDiffers, OnDestroy, TemplateRef, TrackByFunction, ViewContainerRef } from '@angular/core';
+import { syncInputSignal } from '@lucca-front/ng/core';
 import { Observable, Subscription } from 'rxjs';
 import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
@@ -25,10 +26,8 @@ export class LuForOptionsDirective<T> extends NgForOf<T> implements ILuOptionOpe
 		);
 		this.outOptions$ = options$;
 	}
-	@Input()
-	set luForOptionsTrackBy(fn: TrackByFunction<T>) {
-		this.ngForTrackBy = fn;
-	}
+
+	readonly luForOptionsTrackBy = input<TrackByFunction<T>>();
 
 	constructor(
 		_viewContainer: ViewContainerRef,
@@ -37,6 +36,8 @@ export class LuForOptionsDirective<T> extends NgForOf<T> implements ILuOptionOpe
 		protected _changeDetectionRef: ChangeDetectorRef,
 	) {
 		super(_viewContainer, _template, _differs);
+
+		syncInputSignal(this.luForOptionsTrackBy, (fn) => (this.ngForTrackBy = fn));
 	}
 
 	ngOnDestroy() {

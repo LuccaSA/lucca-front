@@ -13,22 +13,24 @@
 }
 
 <ng-container *luFilterPillLabel="let label = label">
-	<label class="filterPill-label" [attr.for]="filterPillInputId" luTooltip luTooltipWhenEllipsis="true">
-		{{ label }}
-		<span class="filterPill-label-placeholder" aria-hidden="true" [attr.data-content-before]="label"></span>
-	</label>
-	<span class="filterPill-checkbox">
-		<input
-			type="checkbox"
-			class="filterPill-checkbox-input"
-			luInput
-			[formControl]="ngControl.control"
-			[attr.aria-checked]="mixed() ? 'mixed' : null"
-			[attr.id]="filterPillInputId"
-		/>
-		<span class="filterPill-checkbox-icon" aria-hidden="true">
-			<span class="filterPill-checkbox-icon-check"></span>
+	<button
+		type="button"
+		class="filterPill mod-checkbox"
+		[attr.aria-pressed]="ngControl.control.value"
+		[attr.disabled]="ngControl.control.disabled ? 'disabled' : null"
+		(click)="ngControl.control.setValue(!ngControl.control.value)"
+		#button
+	>
+		<span class="filterPill-checkbox">
+			<span class="filterPill-checkbox-input"></span>
+			<span class="filterPill-checkbox-icon" aria-hidden="true">
+				<span class="filterPill-checkbox-icon-check"></span>
+			</span>
 		</span>
-	</span>
+		<span class="filterPill-label" [luTooltip]="label" luTooltipWhenEllipsis [luTooltipAnchor]="button">
+			{{ label }}
+			<span class="filterPill-label-placeholder" aria-hidden="true" [attr.data-content-before]="label"></span>
+		</span>
+	</button>
 </ng-container>
 <ng-container *luPresentationDisplayDefault>{{ ngControl.value ? intl.yes : intl.no }}</ng-container>

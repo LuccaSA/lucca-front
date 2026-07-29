@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Texts/StatusBadge/HTML&CSS/Sizes',

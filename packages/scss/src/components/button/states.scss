@@ -21,13 +21,17 @@
 
 @mixin loading {
 	--components-button-pointerEvents: none;
-	--components-button-color: transparent;
 	--components-button-userSelect: none;
 	--components-button-boxShadow: none;
 	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
 	--commons-loading-frontground: var(--palettes-50, var(--palettes-product-50));
 
 	@include loading.spinner(var(--pr-t-font-body-M-lineHeight));
+
+	&,
+	&:disabled {
+		--components-button-color: transparent;
+	}
 
 	.numericBadge {
 		@include numericBadge.state;

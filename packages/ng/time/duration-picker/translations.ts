@@ -39,4 +39,9 @@
 		timePickerTimeSeparator: 'h',
 		timePickerMinutes: 'minutes',
 	},
+	pl: {
+		timePickerHours: 'godziny',
+		timePickerTimeSeparator: 'h',
+		timePickerMinutes: 'minuty',
+	},
 };

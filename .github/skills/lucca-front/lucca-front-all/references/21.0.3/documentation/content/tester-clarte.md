@@ -1,0 +1,92 @@
+# Tester clarté et efficacité du contenu
+
+# Content
+
+## Pourquoi ?
+
+Tester le contenu d'une interface auprès des utilisateurs pour viser :
+
+### **1. Une clarté limpide du contenu** 
+
+Identifions les éléments confus et les termes de jargon, garantissant que le contenu est compréhensible pour tous les utilisateurs. 
+
+Nous recommandons de solliciter en priorité des personnes qui ne connaissent pas Lucca. Cf. notre fiche Notion « [Rencontrer des prospects via Tandemz](https://www.notion.so/Rencontrer-des-prospects-via-Tandemz-febaafb5996d46f3a4b98cf7bc7286f6?pvs=4) ».
+
+### **2. Un engagement accru** 
+
+Rendons la navigation plus intuitive pour que les utilisateurs trouvent vite l'information recherchée.
+
+### **3. Une adaptation aux besoins réels de l’utilisateur** 
+
+Product Designers et Product Managers peuvent ainsi produire un parcours éprouvé du point de vue du langage et de l’organisation des informations données. 
+
+### **4. Une anticipation des contenus déclinés** 
+
+Les insights alimentent les contenus marketing, avec des notions et messages clefs, ou tout autre contenu de tonalité différente de celle de l'interface du logiciel.
+
+## Quand ?
+
+**Dès le cadrage d’un projet**. Posons les hypothèses et confrontons-les le plus tôt possible aux utilisateurs. Cf. notre fiche Notion « [Cadrage UX Research](https://www.notion.so/Cadrage-UXR-Nom-du-projet-df52fed6795f4315bcd88652263a8a6a?pvs=21) ».
+
+Avec des contenus testés et éprouvés, nous pouvons **consolider les étapes du user flow et des wireframes.**
+
+Les tests peuvent aussi s’effectuer sur l’existant, **dans le but d’améliorer un parcours, de résoudre une problématique utilisateur et/ou business.**
+
+## Quel besoin pour quel test ?
+
+### **1. S'assurer que l’utilisateur comprend un ou plusieurs éléments**
+
+* **Test Gap-fill sur des écrans ou sur un parcours**
+    * Remplacer chaque mot à tester par des espaces. Nous recommandons de se limiter à 1 seul mot par écran.
+    * Demander au participant de lire le texte, de parcourir l’écran à haute voix et de compléter les espaces vides en devinant les mots manquants.
+
+Le score correspond au pourcentage de fois où le mot a été correctement deviné.
+
+* **Variante : test Skeleton** À l’inverse, faire apparaître seulement un ou plusieurs titres, tout le reste étant “flouté”. Ce test permet de s’intéresser aussi à la hiérarchisation de l’information.
+
+**Durant le test, un·e participant·e peine à trouver, stresse ou “bloque” ?**
+
+Rassurer, évoquer ses tâches quotidiennes pour l’encourager à se livrer.
+
+Ne pas oublier que le silence, les “eeeuh”, les expressions du visages ou les gestes offrent des informations précieuses.
+
+* **Test utilisateur : les questions axées « Contenu » à poser**
+
+**Cf. Notre fiche Notion sur** **[l'animation d'un test utilisateur](https://www.notion.so/Animer-un-test-56745bae8c554d58a02a987a8bcdc704?pvs=21)****.**
+
+* Si vous deviez nommer cette action / cet objet, comment l'appelleriez-vous ?
+* Comment décrivez-vous X avec vos propres mots ?
+    * *Variantes ou relances*
+        * Qu'est-ce que X signifie pour vous ?
+        * Vous avez un nouveau collègue, comment lui décrivez-lui X à l’oral ?
+* De quelles informations avez-vous besoin concernant X / pour effectuer cette action ?
+    * *Variante ou relance*
+        * Que pensez-vous des informations données sur X ?
+        * En ce qui concerne X, qu'est-ce qui est important pour vous ?
+* Si vous sélectionnez X, que vous attendez-vous à voir sur l'écran suivant ?
+    * *Variante ou relance*
+        * Que se passera-t-il si vous cliquez ici ?
+* Avez-vous remarqué ce texte ? Que signifie-t-il ? Et si vous cliquez dessus / survolez le texte ?
+    * *Variantes ou relances*
+        * Comment comprenez-vous ce texte ? Qu’est-ce que vous en retenez ?
+        * Que ressentez-vous devant ce texte, cette page ?
+        * Lorsque vous voyez ce texte, quelles sont vos attentes ? Que pensez-vous qu'il se passera après avoir cliqué sur ce texte ?
+
+### **2. Cibler le bon mot, la bonne hiérarchie d’informations**
+
+* **Test Tri de cartes, pour un menu de navigation ou un ensemble de contenus à organiser :**
+À noter : un tri par cartes fournit une base de hiérarchie d'informations qui doit ensuite être complétée. 
+    * Disposer les cartes de manière aléatoire sur une table ou sur un Figjam (prévoir des cartes vierges pour d'éventuels ajouts). Chaque carte représente une fonctionnalité ou un contenu.
+    * Demander au participant de réaliser un tri, en regroupant les différentes cartes selon des catégories qui leur semblent cohérentes. 
+Deux types de tri peuvent leur être demandés.
+
+| **Tri Ouvert**  | **Tri Fermé** |
+| --- | --- |
+| Les participants créent **leurs propres catégories.** | Les catégories sont **prédéfinies.** |
+| Utile en début de process design. | Utile en phase de design avancé. Les cartes sont à placer dans des rubriques préétablies. |
+
+## Consignons et partageons les résultats
+
+Centralisons les retours dans la page Notion [Vocabulaire Produit Lucca](https://www.notion.so/Vocabulaire-Produit-Lucca-53d4e3f8936f4b2081a5fe215ff8788b?pvs=21) > section “Constat tests U”, afin de viser une totale compréhension de l’intégralité de nos interfaces. *Luccasien·ne, avez-vous des questions, des remarques, un témoignage ?* 
+
+*Envoyez un DM sur Slack à Anne-Laure ou sur #ux-writing.*

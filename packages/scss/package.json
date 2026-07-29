@@ -6,7 +6,8 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+    "url": "git+https://github.com/LuccaSA/lucca-front.git",
+    "directory": "packages/scss"
   },
   "keywords": [
     "lucca",

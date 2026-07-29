@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { DecorativePalette, Palette } from '@lucca/prisme/core';
 import { IconComponent, LuccaIcon } from '@lucca/prisme/icon';
 import { LuTooltipModule } from '@lucca/prisme/tooltip';
+import { TagSize } from './tag.type';
 
 @Component({
 	selector: 'lu-tag,pr-tag',
@@ -21,7 +22,7 @@ export class TagComponent {
 	/**
 	 * Which size should the tag be? Defaults to medium
 	 */
-	readonly size = input<'S' | 'M' | 'L'>('M');
+	readonly size = input<TagSize>('M');
 
 	/**
 	 * Which palette should be used for the entire tag.
