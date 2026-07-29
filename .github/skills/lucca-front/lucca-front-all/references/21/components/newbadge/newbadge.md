@@ -1,0 +1,34 @@
+# newbadge
+
+## Import
+
+```typescript
+import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
+```
+
+## API Reference
+
+### NewBadgeComponent (component)
+
+**Selector:** `lu-new-badge`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `label` | `label` | `string` | — | ✅ | — | Modifie le texte affiché par le composant. |
+
+## Related files
+
+- 📝 [Code & implementation](./newbadge.component.md)
+- 🎨 [Design guidelines](./newbadge.design.md)
+- 🎯 [Figma design tokens](./newbadge.figma.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.3.1/storybook/?path=/docs/documentation-texts-newbadge-angular-basic--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.1`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`NewBadgeComponent`).
