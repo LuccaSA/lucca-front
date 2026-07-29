@@ -15,12 +15,16 @@
     "description": "Le panel des Select (lu-simple-select, lu-multi-select) passe au composant ListBox. Remplacement auto sauf override SCSS de .optionItem : .optionItem-value → .listboxOption-content.",
     "category": "Breaking22"
   },
+  "Readonly": {
+    "description": "PR #4718 : ~360 propriétés de classe passées en readonly + règle ESLint @angular-eslint/prefer-signals (preferReadonlySignalProperties). readonly bloque la réassignation, pas la mutation (.next()/.set() OK) et une sous-classe qui redéclare la propriété compile → surface de casse étroite, aucun changement runtime. Ce qui casse est le pilotage depuis l'extérieur (réassignation d'un flux, d'un template, d'une ref — y compris les mocks de refs en test). Contient le critère pour retirer un readonly côté LF (précédent interne : LuMultiSelectInputComponent redéclare isFilterPillEmpty sans readonly pour que withSelectAll puisse la réassigner).",
+    "category": "Breaking22"
+  },
   "Strict": {
     "description": "strictNullChecks activé sur les .d.ts publiés (PR #4497 « strict them all ») : value/CVA des inputs et selects en T | null, LuDialogRef.instance en C | null, popup/modal onOpen/onClose en D | undefined, ILuDateAdapter.parse en D | undefined, inputs élargis (progress-bar state=\"null\" ne compile plus, form-field width, segmented-control-tabs active, fancy-box foreground, time step), PortalDirective<T extends object>, plus une liste de changements de comportement silencieux (canClose avalé, setValue(null) ignoré, date invalide non écrite, popover garde muette).",
     "category": "Breaking22"
   },
   "StrictSignals": {
-    "description": "Modernisation LF 22, mécanique signaux / readonly uniquement : signaux (ref.value → ref.value(), viewChild() signal), inputs readonly (model()/two-way au lieu de mutation), ngOnChanges → computed()/effect(), tableaux d'entrée ReadonlyArray à cloner. La nullabilité de l'API et les flags strict sont dans Strict.",
+    "description": "Modernisation LF 22, mécanique signaux uniquement : ref.value → ref.value(), viewChild() signal, InputSignal non assignable (model()/two-way), ngOnChanges → computed()/effect(), tableaux d'entrée ReadonlyArray à cloner. La nullabilité de l'API et les flags strict sont dans Strict ; les propriétés de classe non réassignables dans Readonly.",
     "category": "Breaking22"
   }
 }
