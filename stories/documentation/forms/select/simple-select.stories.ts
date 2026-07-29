@@ -1,3 +1,5 @@
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { createTestStory, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
 import { I18nPluralPipe, SlicePipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
@@ -15,16 +17,15 @@ import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-f
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { InputAlias, SelectCommonAliasInput } from '../../../helpers/stories';
 import { waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
@@ -72,7 +73,7 @@ const basePlay = async ({ canvasElement, step }) => {
 		await expect(screen.getByRole('listbox')).toBeVisible();
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
-		await expect(screen.queryByText('listbox')).toBeNull();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
 		await expect(input).toHaveFocus();
 		// await userEvent.keyboard('{Space}');
 		// await waitForAngular();
@@ -93,7 +94,6 @@ export const Basic = generateStory({
 	[clearable]="clearable"
 	[loading]="loading"
 	[(ngModel)]="selectedLegume"
-	noClue
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
@@ -236,9 +236,9 @@ export const WithPagination = generateStory({
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
-	[options]="legumes | slice : 0 : page * 10"
+	[options]="legumes | filterLegumes:clue | slice : 0 : page * 10"
 	(nextPage)="page = page + 1"
-	noClue
+	(clueChange)="clue = $event"
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
@@ -256,7 +256,8 @@ export const WithClearer = generateStory({
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
-	[options]="legumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
 	clearable
 />`,
 	neededImports: {
@@ -284,7 +285,8 @@ export const WithDisabledOptions = generateStory({
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
-	[options]="legumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
 >
 	<ng-container *luOption="let legume; select: selectRef" [luDisabledOption]="legume.index % 2 === 0">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
@@ -546,7 +548,8 @@ export const Tree = generateStory({
 	description: '',
 	template: `<lu-simple-select
 	[treeSelect]="groupingFn"
-	[options]="legumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
 	[(ngModel)]="selectedTree"
 ></lu-simple-select>`,
 	neededImports: {
@@ -603,6 +606,33 @@ export const OccupationCategory = generateStory({
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/occupation-category': ['LuCoreSelectOccupationCategoriesDirective'],
+	},
+});
+
+export const LegalUnits = generateStory({
+	name: 'LegalUnit Select',
+	description: 'Pour saisir une entité légale, il suffit d’utiliser la directive `legalUnits`',
+	template: `<lu-simple-select
+	legalUnits
+	[(ngModel)]="selectedLegalUnit"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/legal-units': ['LuCoreSelectLegalUnitsDirective'],
+	},
+});
+
+export const LegalUnitsWithArchived = generateStory({
+	name: 'LegalUnit Select with Archived',
+	description: 'Utiliser l’input `enableArchivedLegalUnits` pour afficher un bouton dans le panel permettant d’inclure les entités légales archivées.',
+	template: `<lu-simple-select
+	legalUnits
+	[enableArchivedLegalUnits]="true"
+	[(ngModel)]="selectedLegalUnit"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/legal-units': ['LuCoreSelectLegalUnitsDirective', 'LuCoreSelectArchivedLegalUnitsComponent'],
 	},
 });
 
@@ -686,9 +716,10 @@ export const AddOptionTEST = createTestStory(AddOption, async (context) => {
 	await waitForAngular();
 	await expect(screen.getByRole('listbox')).toBeVisible();
 	const panel = within(screen.getByRole('listbox').parentElement);
-	const addOptionButton = panel.getByRole('option', { name: /ajouter un /i });
+	const addOptionButton = await panel.findByRole('option', { name: /ajouter un /i });
 	await userEvent.click(addOptionButton);
-	await expect(+count.innerText).toBe(previousTotal + 1);
+	await waitForAngular();
+	await waitFor(() => expect(+count.innerText).toBe(previousTotal + 1));
 });
 
 export const CustomPanelHeader = generateStory({
@@ -769,6 +800,8 @@ const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAlias
 				LuCoreSelectUsersDirective,
 				LuCoreSelectUserOptionDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectLegalUnitsDirective,
+				LuCoreSelectArchivedLegalUnitsComponent,
 				LuCoreSelectOccupationCategoriesDirective,
 				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,

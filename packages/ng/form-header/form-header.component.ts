@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
 import { FormHeaderHeadingLevel } from './form-header.type';
 
 @Component({
-	selector: 'lu-form-header]',
+	selector: 'lu-form-header',
 	templateUrl: './form-header.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {

@@ -20,6 +20,7 @@ const usersSearchHandler = genericHandler(
 		paging: (p) => p,
 		clue: (clue) => clue.toLowerCase(),
 		id: (ids) => ids.split(',').map((id) => parseInt(id)),
+		fields: (f) => f,
 	},
 	{
 		// Apply filters to items
@@ -28,12 +29,17 @@ const usersSearchHandler = genericHandler(
 		// Then paging/limiting
 		paging: applyV3Paging,
 	},
-	(items) => ({
-		data: {
-			items: items.map((item) => ({ relevance: 1, item })),
-		},
-		count: items.length,
-	}),
+	(items, params) => {
+		if (params.fields === 'collection.count') {
+			return { data: { count: items.length } };
+		}
+		return {
+			data: {
+				items: items.map((item) => ({ relevance: 1, item })),
+			},
+			count: items.length,
+		};
+	},
 );
 
 export const handlers = [
@@ -144,6 +150,14 @@ export const handlers = [
 		return HttpResponse.json({
 			node: null,
 			children: mockDepartmentsTree,
+		});
+	}),
+
+	http.get('/organization/structure/api/departments', async () => {
+		await delay(300);
+		const countNodes = (nodes: { children?: unknown[] }[]): number => nodes.reduce((acc, branch) => acc + 1 + countNodes((branch.children ?? []) as { children?: unknown[] }[]), 0);
+		return HttpResponse.json({
+			count: countNodes(mockDepartmentsTree),
 		});
 	}),
 

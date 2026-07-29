@@ -1,8 +1,8 @@
+import { PaletteAllArgType } from '@/helpers/common-arg-types';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { TagComponent } from '@lucca-front/ng/tag';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
-import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'tags-stories',

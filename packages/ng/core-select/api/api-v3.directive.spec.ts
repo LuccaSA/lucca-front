@@ -1,9 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ILuApiItem } from '@lucca-front/ng/api';
-import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, SelectDataSource, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { LuCoreSelectApiV3Directive } from './api-v3.directive';
@@ -31,17 +31,24 @@ describe('CoreSelectApiV3Directive', () => {
 	let selectMock: LuSimpleSelectInputComponent<ILuApiItem>;
 	let httpTestingController: HttpTestingController;
 	let fixture: ComponentFixture<TestHostComponent>;
+	let capturedDataSource: SelectDataSource<ILuApiItem> | undefined;
 
 	beforeEach(() => {
+		capturedDataSource = undefined;
 		selectMock = {
 			isPanelOpen$: new BehaviorSubject(false),
 			nextPage$: new Subject<void>(),
 			clueChange$: new Subject<string>(),
-			loading$: new BehaviorSubject(false),
-			optionComparer: signal(coreSelectDefaultOptionComparer),
-			optionKey: signal(coreSelectDefaultOptionKey),
-			options: signal([]),
-			loading: signal(false),
+			optionComparer: coreSelectDefaultOptionComparer,
+			optionKey: coreSelectDefaultOptionKey,
+			dataSource: {
+				set: (ds: SelectDataSource<ILuApiItem>) => {
+					capturedDataSource = ds;
+				},
+			},
+			loading: {
+				set: (_v: boolean) => {},
+			},
 		} as unknown as LuSimpleSelectInputComponent<ILuApiItem>;
 
 		TestBed.configureTestingModule({
@@ -69,34 +76,36 @@ describe('CoreSelectApiV3Directive', () => {
 		httpTestingController.verify();
 	}));
 
-	it('should call http.get on open', fakeAsync(() => {
+	it('should call http.get when getOptions is called', fakeAsync(() => {
 		// Arrange
 		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
 
-		// Act
-		selectMock.isPanelOpen$.next(true);
+		// Act — simulate select component calling getOptions
+		capturedDataSource!.getOptions({ clue: '', page: 0 }).subscribe();
 		tick(MAGIC_DEBOUNCE_DURATION);
 
 		// Assert
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=0,20');
 	}));
 
-	it('should call http.get when page changes and aggregate options', fakeAsync(() => {
+	it('should call http.get for next page when getOptions is called with page 1', fakeAsync(() => {
 		// Arrange
 		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
-		selectMock.isPanelOpen$.next(true);
-		tick(MAGIC_DEBOUNCE_DURATION);
 
+		// Act (Page 1)
+		let page0Items: readonly ILuApiItem[] = [];
+		capturedDataSource!.getOptions({ clue: '', page: 0 }).subscribe((items) => (page0Items = items));
+		tick();
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=0,20').flush({
 			data: { items: itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE) },
 		});
 		tick();
 
-		// Act
-		selectMock.nextPage$.next();
-		tick();
+		// Act (Page 2)
+		let page1Items: readonly ILuApiItem[] = [];
+		capturedDataSource!.getOptions({ clue: '', page: 1 }).subscribe((items) => (page1Items = items));
 
 		// Assert
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=20,20').flush({
@@ -104,38 +113,40 @@ describe('CoreSelectApiV3Directive', () => {
 		});
 		tick();
 
-		expect(selectMock.options()).toEqual(itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE * 2));
+		expect([...page0Items, ...page1Items]).toEqual(itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE * 2));
 	}));
 
-	it('should call http.get when clue changes and reset options and page', fakeAsync(() => {
+	it('should reset page when clue changes', fakeAsync(() => {
 		// Arrange
 		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
-		selectMock.isPanelOpen$.next(true);
-		tick(MAGIC_DEBOUNCE_DURATION);
 
+		capturedDataSource!.getOptions({ clue: '', page: 0 }).subscribe();
+		tick();
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=0,20').flush({
 			data: { items: itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE) },
 		});
 		tick();
 
-		selectMock.nextPage$.next();
-		tick();
+		capturedDataSource!.getOptions({ clue: '', page: 1 }).subscribe();
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=20,20').flush({
 			data: { items: itemsMocks.slice(LU_SELECT_MAGIC_PAGE_SIZE, LU_SELECT_MAGIC_PAGE_SIZE * 2) },
 		});
 		tick();
 
-		// Act
+		// Act — clue changes (triggers reset via clueChange$ subscription in directive)
 		selectMock.clueChange$.next('bob');
 		tick(MAGIC_DEBOUNCE_DURATION);
 
-		// Assert
+		// Assert — new query with clue, page 0
+		let bobItems: readonly ILuApiItem[] = [];
+		capturedDataSource!.getOptions({ clue: 'bob', page: 0 }).subscribe((items) => (bobItems = items));
+		tick();
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&name=like,bob&paging=0,20').flush({
 			data: { items: itemsMocks.slice(0, 5) },
 		});
 		tick();
 
-		expect(selectMock.options()).toEqual(itemsMocks.slice(0, 5));
+		expect(bobItems).toEqual(itemsMocks.slice(0, 5));
 	}));
 });

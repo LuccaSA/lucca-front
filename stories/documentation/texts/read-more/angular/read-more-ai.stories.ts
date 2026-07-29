@@ -1,6 +1,6 @@
 import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { TagComponent } from '@lucca-front/ng/tag';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Texts/ReadMore/Angular/AI',

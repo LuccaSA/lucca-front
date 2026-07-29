@@ -100,10 +100,10 @@ function mergeRouteConfig<C>(config1: Partial<DialogRouteConfig<C>> | undefined,
 	const result: Partial<DialogRouteConfig<C>> = { ...config1, ...config2 };
 
 	if (config1 && config2) {
+		const arrayKeys = ['providers', 'canActivate', 'children', 'canDeactivate', 'canLoad', 'canActivateChild'] as const satisfies Array<keyof Route>;
+
 		// If both configs have the same key, we merge the arrays
-		const mergedArrays = (['providers', 'canActivate', 'children', 'canDeactivate', 'canLoad', 'canActivateChild'] as const satisfies Array<keyof Route>).filter(
-			(key) => key in config1 && key in config2,
-		);
+		const mergedArrays = arrayKeys.filter((key) => key in config1 && key in config2);
 
 		for (const key of mergedArrays) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any

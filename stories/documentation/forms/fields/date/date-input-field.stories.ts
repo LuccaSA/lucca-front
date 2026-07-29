@@ -2,7 +2,7 @@ import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '../../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';

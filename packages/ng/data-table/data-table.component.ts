@@ -6,6 +6,7 @@ import {
 	computed,
 	contentChild,
 	contentChildren,
+	DestroyRef,
 	ElementRef,
 	forwardRef,
 	inject,
@@ -44,6 +45,7 @@ import { DataTableVerticalAlign } from './data-table.type';
 export class DataTableComponent implements OnInit {
 	#elementRef = inject<ElementRef<Element>>(ElementRef);
 	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
+	#destroyRef = inject(DestroyRef);
 
 	readonly hover = input(false, { transform: booleanAttribute });
 	readonly selectable = input(false, { transform: booleanAttribute });
@@ -126,9 +128,9 @@ export class DataTableComponent implements OnInit {
 	ngOnInit(): void {
 		const tableElement = this.tableRef()?.nativeElement;
 		if (tableElement) {
-			new ResizeObserver(() => {
-				this.scroll();
-			}).observe(tableElement);
+			const observer = new ResizeObserver(() => this.scroll());
+			observer.observe(this.tableRef().nativeElement);
+			this.#destroyRef.onDestroy(() => observer.disconnect());
 		}
 	}
 }

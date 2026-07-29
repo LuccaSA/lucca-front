@@ -23,4 +23,7 @@
 	pt: {
 		breadcrumbs: 'Trilho de navegação',
 	},
+	pl: {
+		breadcrumbs: 'Ścieżka nawigacyjna',
+	},
 };

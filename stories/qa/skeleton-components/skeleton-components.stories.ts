@@ -38,9 +38,8 @@ import {
 	SkeletonTableComponent,
 	SkeletonUserPopoverComponent,
 } from '@lucca-front/ng/skeleton';
-
 import { ButtonComponent } from '@lucca/prisme/button';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'skeleton-components',

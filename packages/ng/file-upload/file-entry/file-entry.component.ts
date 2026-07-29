@@ -47,6 +47,8 @@ export class FileEntryComponent {
 
 	readonly downloadURL = input('');
 
+	readonly openInNewTab = input(false, { transform: booleanAttribute });
+
 	readonly password = input('');
 	readonly passwordChange$ = new Subject<string>();
 	passwordChange = outputFromObservable(this.passwordChange$);

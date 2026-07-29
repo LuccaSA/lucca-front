@@ -1,6 +1,6 @@
 <div class="richTextField-toolbar-chips" (keydown.arrowleft)="focusTag($event, -1)" (keydown.arrowRight)="focusTag($event, 1)">
 	<span aria-hidden="true">{{ intl().insertTag }}</span>
-	@for (tag of tags(); track tag) {
+	@for (tag of primaryTags(); track tag) {
 		<lu-chip
 			[attr.tabindex]="isDisabled() ? null : $first ? 0 : -1"
 			[disabled]="isDisabled()"
@@ -9,11 +9,47 @@
 			(keyup.enter)="!isDisabled() ? insertTag(tag) : null"
 			class="richTextField-toolbar-chips-chip"
 			palette="product"
-			#tagButton
+			#focusable
 			unkillable
 		>
 			<span class="pr-u-mask">{{ intl().insertTag }}</span>
 			{{ tag.description }}
 		</lu-chip>
+	}
+	@if (secondaryTags().length) {
+		<div class="richTextInputTag-addTag">
+			<lu-filter-pill [label]="intl().selectTag" class="richTextInputTag-addTag-select" tabindex="-1" aria-hidden="true" #filterPillRef>
+				<lu-simple-select
+					[formControl]="selectedTagControl"
+					[options]="filteredSecondaryTags()"
+					[disabled]="isDisabled()"
+					(clueChange)="tagSearch.set($event)"
+					(panelClosed)="addTagButton()?.nativeElement.focus()"
+					size="XS"
+					#tagsSelect
+				>
+					@if (secondaryHasGroup()) {
+						<ng-container *luOptionGroup="let group; by: groupByTagGroup; select: tagsSelect">
+							{{ group.key }}
+						</ng-container>
+					}
+					<ng-container *luOption="let tag; select: tagsSelect">{{ tag.description ?? tag.key }}</ng-container>
+				</lu-simple-select>
+			</lu-filter-pill>
+
+			<button
+				luButton="ghost"
+				type="button"
+				size="XS"
+				(click)="filterPillRef.popoverRef().openPopover(true)"
+				[disabled]="isDisabled()"
+				[attr.tabindex]="isDisabled() ? null : !primaryTags().length ? 0 : -1"
+				#focusable
+				#addButton
+			>
+				<lu-icon icon="mathsPlus" />
+				{{ intl().selectTag }}
+			</button>
+		</div>
 	}
 </div>

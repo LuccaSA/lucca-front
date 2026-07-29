@@ -1,12 +1,13 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
+	afterNextRender,
 	booleanAttribute,
 	ChangeDetectorRef,
 	computed,
 	Directive,
 	ElementRef,
-	EventEmitter,
 	inject,
+	Injector,
 	input,
 	linkedSignal,
 	model,
@@ -23,12 +24,13 @@ import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs
 import { ControlValueAccessor } from '@angular/forms';
 import { isNotNil, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
+import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
-import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
+import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource, SelectDataSourceParams } from '../select.model';
 import { LuCoreSelectLabel } from '../select.translate';
 import { TreeNode } from './model';
+import { buildOptionsFromDataSource } from './select-input.utils';
 import { TreeGenerator } from './tree-generator';
 
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
@@ -121,6 +123,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly activeDescendant$ = new BehaviorSubject('');
 
+	protected manualOptions$ = new ReplaySubject<readonly TOption[]>(1);
+
 	get ariaControls(): string {
 		return this.overlayContainerRef.id;
 	}
@@ -181,7 +185,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clueChange = outputFromObservable(this.clueChange$);
 	readonly nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
-	readonly previousPage = output<void>();
 	readonly addOption = output<string>();
 
 	public readonly valueSignal = signal<TValue | null>(null);
@@ -216,27 +219,60 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected _value: TValue | null = null;
 
-	readonly options$ = new ReplaySubject<readonly TOption[]>(1);
-	readonly loading$ = toObservable(this.loading);
+	private getDefaultDataSource(): SelectDataSource<TOption> {
+		let emittedKeys = new Set<unknown>();
 
+		return {
+			getOptions: (_params: SelectDataSourceParams) => {
+				let lastEmittedThisPage: readonly TOption[] = [];
+				return this.manualOptions$.pipe(
+					tap((options) => (lastEmittedThisPage = options)),
+					takeUntil(this.nextPage$),
+					finalize(() => (emittedKeys = new Set(lastEmittedThisPage.map((p) => this.optionKey()(p))))),
+					map((options) => options.filter((c) => !emittedKeys.has(this.optionKey()(c)))),
+				);
+			},
+			reset() {
+				emittedKeys.clear();
+			},
+		};
+	}
+
+	readonly dataSource = model<SelectDataSource<TOption, unknown>>(this.getDefaultDataSource());
+
+	readonly dataSourceOptions = toSignal(
+		toObservable(this.dataSource).pipe(
+			switchMap((ds) =>
+				buildOptionsFromDataSource(ds, {
+					nextPage$: this.nextPage$,
+					clue$: this.clue$,
+					isPanelOpen$: this.isPanelOpen$,
+					setLoading: (v) => this.loading.set(v),
+				}),
+			),
+		),
+		{ initialValue: [] as readonly TOption[] },
+	);
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
 	readonly clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
 
-	shouldDisplayAddOption$ = toObservable(this.addOptionStrategy).pipe(
-		switchMap((strategy) => {
-			switch (strategy) {
-				case 'always':
-					return of(true);
-				case 'never':
-					return of(false);
-				case 'if-empty-clue':
-					return this.clue$.pipe(map((clue) => !clue));
-				case 'if-not-empty-clue':
-					return this.clue$.pipe(map((clue) => !!clue));
-			}
-		}),
+	readonly shouldDisplayAddOption = toSignal(
+		toObservable(this.addOptionStrategy).pipe(
+			switchMap((strategy) => {
+				switch (strategy) {
+					case 'always':
+						return of(true);
+					case 'never':
+						return of(false);
+					case 'if-empty-clue':
+						return this.clue$.pipe(map((clue) => !clue));
+					case 'if-not-empty-clue':
+						return this.clue$.pipe(map((clue) => !!clue));
+				}
+			}),
+		),
 	);
 
 	protected onChange?: (value: TValue | null) => void;
@@ -250,25 +286,31 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected readonly destroyed$ = new Subject<void>();
 
+	private readonly injector = inject(Injector);
+
 	constructor() {
 		if (this.filterPillHost) {
 			this.filterPillHost.registerInput(this);
 		}
 
-		ɵeffectWithDeps([this.options], (options, onCleanup) => {
+		ɵeffectWithDeps([this.options], (options) => {
 			if (isNotNil(options)) {
-				this.options$.next(options);
-				if (this.panelRef) {
-					// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
-					// which is before the panel size has been modified by the arrival of the new options
-					const timeoutId = setTimeout(() => {
+				this.manualOptions$.next(options);
+			}
+		});
+
+		// When options arrive asynchronously via a dataSource, dataSourceOptions changes but options doesn't.
+		// We need to reposition the panel after the DOM updates in both cases.
+		ɵeffectWithDeps([this.dataSourceOptions], (_options, onCleanup) => {
+			if (isNotNil(this.panelRef)) {
+				const ref = afterNextRender(
+					() => {
 						this.panelRef?.updatePosition();
 						this.updatePositionFn?.();
-						// If no fixes are found, last resort fix is here
-						// window.dispatchEvent(new Event('resize'));
-					});
-					onCleanup(() => clearTimeout(timeoutId));
-				}
+					},
+					{ injector: this.injector },
+				);
+				onCleanup(() => ref.destroy());
 			}
 		});
 	}
@@ -321,6 +363,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				}
 				break;
 			default:
+				// Let the browser handle modifier chords like Ctrl/Cmd+V (paste) or Ctrl/Cmd+C (copy)
+				// instead of treating the chord's letter (e.g. the "v" of Ctrl+V) as typeahead input.
+				// AltGr (Ctrl+Alt on Windows) is excluded so accented/special characters still work.
+				if (($event.ctrlKey || $event.metaKey) && !$event.altKey) {
+					return;
+				}
 				// For any other key, forward it to the panel if it's open
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);
@@ -346,8 +394,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	ngOnDestroy(): void {
 		this.closePanel();
-		this.destroyed$.next();
-		this.destroyed$.complete();
 	}
 
 	ngOnInit(): void {
@@ -385,10 +431,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				return;
 			}
 
+			const isSearchable = this.searchable;
 			this.isPanelOpen$.next(true);
 			this.panelOpened.emit();
 
-			if (this.searchable) {
+			if (isSearchable) {
 				this.clueChanged(clue);
 			}
 
@@ -410,9 +457,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 
 		this.panelRef.valueChanged.subscribe((value) => this.updateValue(value));
-
-		this.#pageChanged(this.panelRef.nextPage).subscribe(() => this.nextPage$.next());
-		this.#pageChanged(this.panelRef.previousPage).subscribe(() => this.previousPage.emit());
+		this.panelRef.nextPage.subscribe(() => this.nextPage$.next());
 
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
 			this.activeDescendant$.next(optionId);
@@ -435,6 +480,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public closePanel(): void {
+		this.dataSource().reset?.();
+
 		if (!this.isPanelOpen) {
 			return;
 		}
@@ -464,11 +511,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 		this.onChange?.(value);
 		this.onTouched?.();
-	}
-
-	// Ensure nextPage/previousPage does not emit too often
-	#pageChanged(pageEmitter: EventEmitter<void>): Observable<void> {
-		return this.options$.pipe(switchMap(() => pageEmitter.pipe(take(1))));
 	}
 
 	// Filter pill interface

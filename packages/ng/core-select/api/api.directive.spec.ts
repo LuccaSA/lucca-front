@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Observable, map, of } from 'rxjs';
+import { NEVER, Observable, map, of } from 'rxjs';
+import type { MockInstance } from 'vitest';
 import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
@@ -16,6 +17,8 @@ interface TestEntity {
 	selector: 'lu-simple-select[testApi]',
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
+	public override totalCount$ = NEVER;
+
 	protected override readonly params$ = this.clue$.pipe(
 		map((clue) => ({
 			...(clue ? { clue } : {}),
@@ -55,7 +58,7 @@ describe('ALuCoreSelectApiDirective', () => {
 	let selectElement: HTMLElement;
 	let select: LuSimpleSelectInputComponent<TestEntity>;
 	let testApi: TestDirective;
-	let getOptionsSpy: jest.SpyInstance<Observable<TestEntity[]>, []>;
+	let getOptionsSpy: MockInstance;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -68,7 +71,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		selectElement = selectDebugElement.nativeElement as HTMLElement;
 		select = selectDebugElement.componentInstance as LuSimpleSelectInputComponent<TestEntity>;
 		testApi = fixture.debugElement.query(By.directive(TestDirective)).injector.get(TestDirective);
-		getOptionsSpy = jest.spyOn(testApi, 'getOptions');
+		getOptionsSpy = vi.spyOn(testApi, 'getOptions');
 	});
 
 	it('should query options when clicking on the select', fakeAsync(() => {
@@ -166,8 +169,8 @@ describe('ALuCoreSelectApiDirective', () => {
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
 
 		let options: readonly TestEntity[] = [];
-		fixture.detectChanges();
-		select.options$.subscribe((o) => (options = o));
+
+		options = select.dataSourceOptions();
 
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },
@@ -183,7 +186,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		tick(); // Component initialization uses a setTimeout :see_no_evil:
 		testApi.setPageSize(2);
 
-		const getPageSpy = jest.spyOn(testApi, 'getOptionsPage');
+		const getPageSpy = vi.spyOn(testApi, 'getOptionsPage');
 		getPageSpy.mockImplementation((_params, page) => {
 			// Emit one list, then the same list with one more item
 			return of(
@@ -212,8 +215,7 @@ describe('ALuCoreSelectApiDirective', () => {
 
 		// Assert
 		let options: readonly TestEntity[] = [];
-		fixture.detectChanges();
-		select.options$.subscribe((o) => (options = o));
+		options = select.dataSourceOptions();
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },
 			{ id: 2, name: 'test 2' },

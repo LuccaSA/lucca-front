@@ -5,4 +5,13 @@
 	-webkit-text-fill-color: var(--palettes-critical-text);
 }
 
+.rgba-vars {
+	background-color: rgba(var(--colors-grey-900-rgb), 0.04);
+	border-color: rgb(var(--colors-grey-400-rgb), 0.5);
+	color: rgb(var(--colors-grey-400-rgb));
+	text-decoration-color: rgb(var(--colors-white-rgb), 0.3);
+	-webkit-text-fill-color: rgba(var(--colors-neutral-400-rgb), 1);
+	color-scheme: var(--palettes-neutral-400);
+}
+
 

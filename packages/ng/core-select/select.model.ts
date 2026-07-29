@@ -2,6 +2,21 @@ import { Injectable, InjectionToken } from '@angular/core';
 import { PortalContent } from '@lucca-front/ng/core';
 import { Observable } from 'rxjs';
 
+export interface SelectDataSourceParams {
+	clue: string;
+	page: number;
+}
+
+export interface SelectDataSource<TOption, TGroup = never> {
+	paramsChange?: Observable<unknown>;
+	/** Optional debounce in ms for clue-based re-queries (useful for API data sources) */
+	clueDebounceMs?: number;
+	getOptions(params: SelectDataSourceParams): Observable<readonly TOption[]>;
+	getTotalCount?(params: SelectDataSourceParams): Observable<number>;
+	getGroupOptions?: [TGroup] extends [never] ? never : (group: TGroup) => Observable<TOption[]>;
+	reset?(): void;
+}
+
 export interface LuOptionContext<T> {
 	$implicit: T;
 }

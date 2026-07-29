@@ -108,6 +108,10 @@
 	--components-dataTable-cell-paddingInlineStart: var(--pr-t-spacings-50);
 }
 
+@mixin cellBorderEditable {
+	--components-dataTable-cell-paddingInlineStart: var(--pr-t-spacings-100);
+}
+
 @mixin actions {
 	padding-block: 0;
 	padding-inline: var(--pr-t-spacings-50);

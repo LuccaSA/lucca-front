@@ -21,7 +21,7 @@ import {
 	ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
+import { getPushPanelViewportMargin, intlInputOptions, isNotNil } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -273,8 +273,12 @@ export class PopoverDirective implements OnDestroy {
 				positionStrategy: this.overlay
 					.position()
 					.flexibleConnectedTo(this.luPopoverAnchor())
+					.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement))
 					.withPositions(this.customPositions() || this.#buildPositions()),
 				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy() ?? 'reposition'](),
+				// No blocking backdrop: outside interactions are handled via outsidePointerEvents() below.
+				hasBackdrop: false,
+				backdropClass: '',
 				disposeOnNavigation: true,
 			});
 			// Close on outside interaction WITHOUT a blocking backdrop that would

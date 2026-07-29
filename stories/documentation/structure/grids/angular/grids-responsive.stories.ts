@@ -1,6 +1,6 @@
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { cleanupTemplate, generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Grids/Angular/Responsive',

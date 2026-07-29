@@ -1,11 +1,17 @@
-import { Config, StorybookDocsEntry, StorybookGroup, StorybookStory } from '../types';
+import { StorybookDocsEntry, StorybookGroup, StorybookStory, VersionConfig } from '../types';
 
-export async function fetchStorybookIndex(config: Config): Promise<Map<string, StorybookGroup>> {
-	console.log('📚 Fetching Storybook index...');
+/**
+ * Fetches the Storybook index.json for a specific version and groups stories by component.
+ *
+ * @param version — Resolved version config with storybookBaseUrl
+ */
+export async function fetchStorybookIndex(version: VersionConfig): Promise<Map<string, StorybookGroup>> {
+	const indexUrl = `${version.storybookBaseUrl}/index.json`;
+	console.log(`📚 Fetching Storybook index for ${version.tag}...`);
 
-	const res = await fetch(config.storybook.indexUrl);
+	const res = await fetch(indexUrl);
 	if (!res.ok) {
-		throw new Error(`Storybook index HTTP ${res.status}: ${config.storybook.indexUrl}`);
+		throw new Error(`Storybook index HTTP ${res.status}: ${indexUrl}`);
 	}
 
 	const data = await res.json();
@@ -13,38 +19,33 @@ export async function fetchStorybookIndex(config: Config): Promise<Map<string, S
 
 	console.log(`  ${entries.length} Storybook entries found`);
 
-	return groupStoriesByComponent(entries, config.storybook.baseUrl);
+	return groupStoriesByComponent(entries, version.storybookBaseUrl);
 }
 
 function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, StorybookGroup> {
 	const groups = new Map<string, StorybookGroup>();
 
 	for (const entry of entries) {
-		const { title, type, id, importPath, componentPath, name } = entry;
+		const { title, type, id, importPath, name } = entry;
 
-		// Documentation stories only (not QA)
 		if (!title?.startsWith('Documentation/')) continue;
 
-		// "Documentation/Actions/Button/Angular/AI"    → segment before "/Angular"
-		// "Documentation/Overlays/Tooltip/Basic"       → segment before the generic suffix (→ "Tooltip")
-		// "Documentation/Forms/Time/Duration Picker/Angular Form" → segment before "Angular Form" (→ "Duration Picker")
-		// "Documentation/Forms/Date/Calendar"          → last segment (→ "Calendar")
 		const parts: string[] = title.split('/');
 		if (parts.length < 3) continue;
 
-		// Generic suffixes indicating the last segment is a variant/framework, not the component name
 		const GENERIC_SUFFIX_RE = /^(basic|html|css|html&css|htmlcss|docs?|vertical|horizontal|progress|dashed|checked|outlined|angular.*)$/i;
 
+		// Find the framework segment index to get the component name before it
 		const angularIdx = parts.indexOf('Angular');
+		const htmlCssIdx = parts.findIndex((p) => /^HTML[&\s]*CSS$/i.test(p));
+		const frameworkIdx = angularIdx > 0 ? angularIdx : htmlCssIdx > 0 ? htmlCssIdx : -1;
+
 		let componentName: string;
-		if (angularIdx > 0) {
-			// Standard case: ".../ComponentName/Angular[/StoryVariant]"
-			componentName = parts[angularIdx - 1].trim();
+		if (frameworkIdx > 0) {
+			componentName = parts[frameworkIdx - 1].trim();
 		} else if (parts.length > 3 && GENERIC_SUFFIX_RE.test(parts[parts.length - 1].trim())) {
-			// Non-standard case: ".../ComponentName/Variant" (Tooltip/Basic, Timelines/Vertical, Duration Picker/Angular Form…)
 			componentName = parts[parts.length - 2].trim();
 		} else {
-			// Docs or single-story: last segment = component name
 			componentName = parts[parts.length - 1].trim();
 		}
 		const key = normalizeName(componentName);
@@ -63,7 +64,6 @@ function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, S
 		const group = groups.get(key)!;
 
 		if (type === 'docs') {
-			// Keep the first docs entry as the canonical URL
 			if (!group.docsEntry) {
 				group.docsEntry = {
 					id,
@@ -78,7 +78,6 @@ function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, S
 				title,
 				url: `${baseUrl}/?path=/story/${id}`,
 				importPath,
-				componentPath,
 				framework: importPath?.includes('/angular/') ? 'angular' : 'html-css',
 			});
 		}
@@ -90,7 +89,7 @@ function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, S
 function normalizeName(name: string): string {
 	return name
 		.toLowerCase()
-		.replace(/^pr-/, '') // in case a story has the pr- prefix
+		.replace(/^pr-/i, '')
 		.replace(/\s*\(v\d+[\d.]*\)\s*/g, '')
 		.replace(/[^\w\s-]/gu, '')
 		.trim()

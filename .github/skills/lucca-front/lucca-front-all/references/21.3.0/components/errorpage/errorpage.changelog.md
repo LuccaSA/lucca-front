@@ -1,0 +1,13 @@
+# errorpage — Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.3.0`. Les versions sans changement d'API sont omises.
+
+## 21.2.0
+
+Composant introduit (`ErrorPageComponent`).
+
+## Notes de release (ZeroHeight)
+
+# errorpage — Changelog
+
+_No changelog available._

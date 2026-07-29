@@ -18,9 +18,9 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory, setStoryOptions } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { createTestStory, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
@@ -270,19 +270,38 @@ export const Fancy: StoryObj = {
 		alert: { table: { disable: true } },
 		autoFocus: { table: { disable: true } },
 		panelClasses: { table: { disable: true } },
+		palette: {
+			options: ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'],
+			control: {
+				type: 'select',
+			},
+			description: 'Applique une palette de couleurs au callout.',
+		},
+		fancyIllustration: {
+			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'mode', eq: 'fancy' },
+			description: 'Modifie l’illustration affichée dans la Fancy dialog.',
+		},
+		fancyIllustrationUrl: {
+			if: { arg: 'mode', eq: 'fancy' },
+			description: 'Surcharge l’illustration avec une URL personnalisée.',
+		},
 	},
 	render: (args) => {
 		const fancyIllustrationParam = args['fancyIllustration'] ? ` fancyIllustration="${args['fancyIllustration']}"` : ``;
 		const fancyIllustrationURLParam = args['fancyIllustrationUrl'] ? ` fancyIllustrationUrl="${args['fancyIllustrationUrl']}"` : ``;
+		const paletteParam = args['palette'] !== 'product' ? ` class="palette-${args['palette']}"` : ``;
 		return {
 			props: {
 				config: args,
 			},
-			template: `
-<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="{mode: 'fancy'}">Open Template-driven Fancy Dialog</button>
+			template: `<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="{mode: 'fancy'}">Open Template-driven Fancy Dialog</button>
 
 <ng-template #dialogTpl>
-	<lu-dialog #dialog${fancyIllustrationParam}${fancyIllustrationURLParam}>
+	<lu-dialog #dialog${fancyIllustrationParam}${fancyIllustrationURLParam}${paletteParam}>
 		<lu-dialog-header>
 			<h1>Félicitations, votre souscription est terminée</h1>
 		</lu-dialog-header>
@@ -298,6 +317,7 @@ export const Fancy: StoryObj = {
 	},
 	args: {
 		size: 'M',
+		mode: 'fancy',
 		fancyIllustration: 'install',
 		fancyIllustrationUrl: '',
 	},

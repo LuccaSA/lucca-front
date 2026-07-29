@@ -65,7 +65,7 @@ export class DeprecatedMapper {
 		private tree: Tree,
 		private mappings: DeprecatedMappings,
 	) {
-		this.allIdentifierMappings = { ...mappings.modules, ...mappings.types };
+		this.allIdentifierMappings = Object.assign(Object.create(null) as Record<string, string>, mappings.modules, mappings.types);
 		this.hasTemplateMigrations = Object.keys(mappings.inputsOutputs).length > 0;
 	}
 

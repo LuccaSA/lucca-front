@@ -2,6 +2,7 @@ import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
+	afterNextRender,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
@@ -146,6 +147,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	protected readonly currentStartDisplayDate = computed(() => {
 		switch (this.mode()) {
 			case 'day':
+			case 'week':
 				return startOfMonth(this.currentDate());
 			case 'month':
 				return startOfYear(this.currentDate());
@@ -157,6 +159,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	protected readonly currentEndDisplayDate = computed(() => {
 		switch (this.mode()) {
 			case 'day':
+			case 'week':
 				return endOfMonth(this.currentRightDate());
 			case 'month':
 				return endOfYear(this.currentRightDate());
@@ -282,9 +285,12 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			}
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
 				this.focusedCalendar()?.blurTabbableDate();
-				setTimeout(() => {
-					this.focusedCalendar()?.focusTabbableDate();
-				});
+				afterNextRender(
+					() => {
+						this.focusedCalendar()?.focusTabbableDate();
+					},
+					{ injector: this.#injector },
+				);
 			}
 		});
 	}
@@ -296,6 +302,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	getNextCalendarDate(date: Date): Date {
 		switch (this.mode()) {
 			case 'day':
+			case 'week':
 				return startOfMonth(addMonths(date, 1));
 			case 'month':
 				return startOfYear(addYears(date, 1));
@@ -349,28 +356,31 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			ref.openPopover(true, true);
 		}
 		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
-		setTimeout(() => {
-			this.focusedCalendarIndex.set(0);
-			const selectedRange = this.selectedRange();
-			if (propertyToFocus && selectedRange && selectedRange[propertyToFocus]) {
-				// Specific case: if range is on a single month, focus on it on left calendar
-				// Same goes for focus on start date, we want it on left panel
-				if (propertyToFocus === 'start' || (selectedRange.end && compareCalendarPeriods(this.mode(), selectedRange.start, selectedRange.end))) {
-					this.currentDate.set(selectedRange[propertyToFocus]);
-					this.tabbableDate.set(selectedRange[propertyToFocus]);
-				} else {
-					// Compute the date to use for proper focus on left panel, minus one calendar on focus date basically
-					const leftPanelFocus = selectedRange.end;
-					if (leftPanelFocus) {
-						this.currentDate.set(leftPanelFocus);
-						this.tabbableDate.set(leftPanelFocus);
+		afterNextRender(
+			() => {
+				this.focusedCalendarIndex.set(0);
+				const selectedRange = this.selectedRange();
+				if (propertyToFocus && selectedRange && selectedRange[propertyToFocus]) {
+					// Specific case: if range is on a single month, focus on it on left calendar
+					// Same goes for focus on start date, we want it on left panel
+					if (propertyToFocus === 'start' || (selectedRange.end && compareCalendarPeriods(this.mode(), selectedRange.start, selectedRange.end))) {
+						this.currentDate.set(selectedRange[propertyToFocus]);
+						this.tabbableDate.set(selectedRange[propertyToFocus]);
+					} else {
+						// Compute the date to use for proper focus on left panel, minus one calendar on focus date basically
+						const leftPanelFocus = selectedRange.end;
+						if (leftPanelFocus) {
+							this.currentDate.set(leftPanelFocus);
+							this.tabbableDate.set(leftPanelFocus);
+						}
 					}
 				}
-			}
-			if (focusTabbableDate) {
-				this.focusedCalendar()?.focusTabbableDate();
-			}
-		});
+				if (focusTabbableDate) {
+					this.focusedCalendar()?.focusTabbableDate();
+				}
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
@@ -500,6 +510,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		switch (this.mode()) {
 			case 'day':
 				return this.intlDateTimeFormat.format(date);
+			case 'week':
+				// TODO
+				return date.toString();
 			case 'month':
 				return this.intlDateTimeFormatMonth.format(date);
 			case 'year':

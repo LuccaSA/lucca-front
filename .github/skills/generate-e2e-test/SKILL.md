@@ -62,8 +62,8 @@ Pour produire un test fiable, identifier :
 ### Structure type
 
 	```typescript
-import { createTestStory } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 export const MyStoryTEST = createTestStory(MyStory, async ({ canvasElement, step }) => {
@@ -146,7 +146,7 @@ await waitForAngular();
 Utiliser le helper `repeatKeyboardUserEvent` de `stories/helpers/test.ts` :
 
 ```typescript
-import { repeatKeyboardUserEvent, waitForAngular } from 'stories/helpers/test';
+import { repeatKeyboardUserEvent, waitForAngular } from '@/helpers/test';
 
 await repeatKeyboardUserEvent('{ArrowUp}', 3);
 await waitForAngular();

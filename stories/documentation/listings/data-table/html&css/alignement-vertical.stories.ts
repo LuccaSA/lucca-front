@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface AlignmentVerticalStory {}
 
 export default {
-	title: 'Documentation/Listings/Data table/HTML&CSS/Vertical alignment',
+	title: 'Documentation/Listings/Data table/HTML&CSS/Vertical Alignment',
 	argTypes: {},
 } as Meta;
 

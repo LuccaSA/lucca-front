@@ -1,6 +1,6 @@
 ﻿export const Translations = {
 	'nl-BE': {
-		timeRangePickerStart: 'start',
+		timeRangePickerStart: 'begin',
 		timeRangePickerEnd: 'einde',
 		timeRangePickerFrom: 'Van',
 		timeRangePickerAt: 'tot',
@@ -12,8 +12,8 @@
 		timeRangePickerAt: 'à',
 	},
 	de: {
-		timeRangePickerStart: 'anfang',
-		timeRangePickerEnd: 'ende',
+		timeRangePickerStart: 'Anfang',
+		timeRangePickerEnd: 'Ende',
 		timeRangePickerFrom: 'Von',
 		timeRangePickerAt: 'an',
 	},
@@ -21,22 +21,22 @@
 		timeRangePickerStart: 'start',
 		timeRangePickerEnd: 'end',
 		timeRangePickerFrom: 'From',
-		timeRangePickerAt: 'to',
+		timeRangePickerAt: 'at',
 	},
 	es: {
-		timeRangePickerStart: 'iniciar',
+		timeRangePickerStart: 'inicio',
 		timeRangePickerEnd: 'fin',
 		timeRangePickerFrom: 'De',
-		timeRangePickerAt: 'en',
+		timeRangePickerAt: 'a',
 	},
 	it: {
 		timeRangePickerStart: 'inizio',
 		timeRangePickerEnd: 'fine',
-		timeRangePickerFrom: 'Di',
-		timeRangePickerAt: 'a',
+		timeRangePickerFrom: 'Da',
+		timeRangePickerAt: 'alle ore',
 	},
 	nl: {
-		timeRangePickerStart: 'start',
+		timeRangePickerStart: 'begin',
 		timeRangePickerEnd: 'einde',
 		timeRangePickerFrom: 'Van',
 		timeRangePickerAt: 'tot',
@@ -46,5 +46,11 @@
 		timeRangePickerEnd: 'fim',
 		timeRangePickerFrom: 'De',
 		timeRangePickerAt: 'à',
+	},
+	pl: {
+		timeRangePickerStart: 'początek',
+		timeRangePickerEnd: 'koniec',
+		timeRangePickerFrom: 'Od',
+		timeRangePickerAt: 'do',
 	},
 };

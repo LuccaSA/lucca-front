@@ -1,7 +1,7 @@
 import { RESOURCE_CARD_SIZE } from '@lucca-front/ng/resource-card';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface ResourceCardHTMLBasicStory {
 	action: boolean;

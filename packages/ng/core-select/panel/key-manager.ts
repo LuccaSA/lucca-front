@@ -1,14 +1,14 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { computed, DestroyRef, EventEmitter, inject, Injectable, Injector, Signal } from '@angular/core';
+import { afterRenderEffect, computed, DestroyRef, EventEmitter, inject, Injectable, Injector, Signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { isNotNil } from '@lucca-front/ng/core';
-import { asyncScheduler, debounceTime, filter, map, Observable, observeOn, take } from 'rxjs';
+import { asyncScheduler, filter, map, Observable, observeOn, take } from 'rxjs';
 import { LuOptionComparer } from '../select.model';
 import { CoreSelectPanelElement } from './selectable-item';
 
 interface CoreSelectKeyManagerOptions<T> {
 	queryList: Signal<readonly CoreSelectPanelElement<T>[]>;
-	options$: Observable<readonly T[]>;
+	options: Signal<readonly T[]>;
 	optionComparer: LuOptionComparer<T>;
 	activeOptionIdChanged$: EventEmitter<string>;
 	clueChange$: Observable<string>;
@@ -120,26 +120,28 @@ export class CoreSelectKeyManager<T> {
 	 * 	- set to first item if search has changed
 	 * 	- set to first item if no active item
 	 */
-	#bindOptionsChange({ options$ }: CoreSelectKeyManagerOptions<T>): void {
+	#bindOptionsChange({ options }: CoreSelectKeyManagerOptions<T>): void {
 		const keyManager = this.#cdkKeyManager;
 		if (!keyManager) {
 			return;
 		}
 
-		options$
-			.pipe(
-				debounceTime(0), // Wait until QueryList is updated
-				takeUntilDestroyed(this.#destroyRef),
-			)
-			.subscribe(() => {
-				if (this.#queryList().length === 0) {
-					keyManager.setActiveItem(-1);
-				} else if (this.#hasSearchChanged) {
-					this.#hasSearchChanged = false;
-					keyManager.setFirstItemActive();
-				} else if (!keyManager.activeItem) {
-					keyManager.setFirstItemActive();
-				}
-			});
+		afterRenderEffect(
+			() => {
+				options(); // Track option change
+
+				untracked(() => {
+					if (this.#queryList().length === 0) {
+						keyManager.setActiveItem(-1);
+					} else if (this.#hasSearchChanged) {
+						this.#hasSearchChanged = false;
+						keyManager.setFirstItemActive();
+					} else if (!keyManager.activeItem) {
+						keyManager.setFirstItemActive();
+					}
+				});
+			},
+			{ injector: this.#injector },
+		);
 	}
 }

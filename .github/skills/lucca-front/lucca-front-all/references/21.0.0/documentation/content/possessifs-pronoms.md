@@ -1,0 +1,48 @@
+# Possessifs et pronoms
+
+# Content
+
+## Nous utilisons en priorité « vous », « votre », « vos ». 
+
+**Nous évitons au maximum « je », « mon », « mes ».** **Et nous ne mélangeons pas** « **je** »**,** « **vous** »**,** « **nous** »**, ou** « **mon, ma, votre, vos** » **dans un même écran ou même parcours.**Nos logiciels parlent à l’utilisateur, pas l’inverse.
+
+Pourquoi ? Pour éviter toute confusion chez les utilisateurs - « *Qui doit faire l’action ? Moi ou mon logiciel ?* »Ce mélange de pronoms personnels et/ou de possessifs peut aussi poser problème dans le processus de [localisation](https://www.notion.so/L10N-Localization-117243852e384afba010b4738f3616bc?pvs=21).
+
+Cette règle nous permet de nous assurer que nous nous adressons **systématiquement à l'utilisateur de la même manière et de maintenir un langage direct.**
+
+| ✅ Do | ❌ Don’t |
+| --- | --- |
+| Retrouvez vos objectifs sur votre page d’objectifs. | Retrouvez vos objectifs dans la page Mes objectifs. |
+| Ne plus recevoir de bulletins de paie en ligne. / Vous souhaitez ne plus recevoir de bulletins de paie en ligne. | Je ne souhaite plus recevoir mes bulletins de paie en ligne. |
+| Complétez la section « Informations générales ». | Nous avons besoin que vous terminiez de remplir la section « Informations générales ». |
+| Consulter la fiche « Contester une facture » | J'y vaisAllons-y !C'est parti |
+| Aucune demande en cours | Je n'ai aucune demande en cours |
+| Consulter les remboursements | Consulter vos remboursementsConsulter mes remboursements |
+| C’est la première fois que vous calculez l’Index d’égalité professionnelle femmes-hommes ? | C’est la première fois que je calcule l’Index d’égalité professionnelle femmes-hommes ? |
+| Créer une autorisation de transfert | Je crée une autorisation de transfert |
+| Règles de calcul | Vos règles de calculMes règles de calcul |
+
+## Exception pour les possessifs « mon », « mes » dans les menus de navigation et les titres liés
+
+« Mon », « ma » ou « mes » sont autorisés **à cette seule condition** :
+
+Lorsque le même objet doit apparaître 2 fois dans un menu de navigation, pour le profil admin, on utilise « mon », « ma » ou « mes » pour désigner un espace personnel de l’admin.**Cette exception se manifeste dans les menus de navigation pour profil admin :**
+
+* 1ère mention de l’objet : **« Mon », « Ma », « Mes » + objet** (exemple : **« Mes factures, « Mes dépenses »**).
+* 2ème mention de l’objet : **« Tous les », « Toutes les » + objet**, ou un intitulé portant sur l’enjeu plus large (exemple : **« Toutes les factures », « Toutes les dépenses »**).
+
+## Un possessif s'impose pour un autre cas ?
+
+Posons-nous les questions suivantes :
+
+* **Qu’est-ce qui justifie l’usage d’un possessif plutôt qu’un mot-clef seul ?** **Est-ce forcément plus clair pour l’utilisateur ?**
+
+*« Ça fait bizarre » n’est pas une justification.* *Allons plus loin en matière de descriptif du problème réel rencontré par l'utilisateur.*
+
+* **Que ressort-il des tests utilisateurs ? Quels sont les retours côté service clients ?**
+
+*L’admin RH comprend-t-il le menu de navigation ?*
+
+*Luccasien·ne, avez-vous des questions, des remarques, un témoignage ?* 
+
+*Envoyez un DM sur Slack à Anne-Laure ou sur #ux-writing.*

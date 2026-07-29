@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Meta } from '@storybook/angular';
+import { Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'popover-stories',

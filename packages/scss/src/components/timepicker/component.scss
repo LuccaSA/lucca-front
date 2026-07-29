@@ -50,15 +50,15 @@
 		}
 
 		.timePicker-fieldset-groupSeparator {
-			pointer-events: none;
 			display: grid;
 			place-items: center;
 			text-align: center;
-			inline-size: var(--pr-t-spacings-200);
-			margin-block: 0;
-			margin-inline: calc(var(--pr-t-spacings-100) * -1);
+			inline-size: fit-content;
+			block-size: calc(var(--components-timepicker-input-height) + var(--components-timepicker-input-padding-block) * 2);
+			margin-inline: calc(var(--pr-t-spacings-25) * -1);
 			position: relative;
 			inset-inline-start: calc(var(--pr-t-spacings-25) * -1);
+			z-index: 1;
 		}
 
 		.timePicker-fieldset-group {

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
@@ -9,7 +9,7 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 	template: ` <lu-pagination [from]="0" [to]="10" [itemsCount]="1000" [intl]="{ results: resultIntl() }" /> `,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IntlStory {
+class IntlStory {
 	resultIntl = input('Dépenses de {{from}} à {{to}} sur {{itemsCount}}');
 }
 

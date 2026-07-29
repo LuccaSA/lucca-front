@@ -34,6 +34,7 @@ export interface ILuRichTextInputLabel {
 	stylesStrikethrough: string;
 
 	insertTag: string;
+	selectTag: string;
 }
 
 export const luRichTextInputTranslations: LuTranslation<ILuRichTextInputLabel> = Translations;

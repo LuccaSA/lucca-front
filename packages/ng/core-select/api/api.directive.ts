@@ -1,6 +1,25 @@
 import { Directive, inject, OnDestroy, OnInit } from '@angular/core';
-import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, LuOptionComparer } from '@lucca-front/ng/core-select';
-import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, LuOptionComparer, SelectDataSource } from '@lucca-front/ng/core-select';
+import {
+	BehaviorSubject,
+	catchError,
+	combineLatest,
+	concatMap,
+	debounceTime,
+	distinctUntilChanged,
+	map,
+	merge,
+	Observable,
+	of,
+	pairwise,
+	scan,
+	startWith,
+	Subject,
+	switchMap,
+	take,
+	takeUntil,
+	tap,
+} from 'rxjs';
 
 export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
 export const MAGIC_DEBOUNCE_DURATION = 250;
@@ -18,7 +37,16 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		startWith(0),
 	);
 
-	protected readonly clue$ = this.select.clueChange$.pipe(debounceTime(this.debounceDuration), startWith(''));
+	/**
+	 * Current clue — updated by clueChange$ subscription (keeps select in searchable mode)
+	 * and by direct getOptions calls from the select component.
+	 */
+	protected readonly currentClue$ = new BehaviorSubject<string>('');
+
+	/**
+	 * Clue observable — no debounce (debounce is now handled by the select component).
+	 */
+	protected readonly clue$ = this.currentClue$.asObservable();
 
 	/**
 	 * Create an object that will be used as params for the api call
@@ -40,6 +68,9 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	 */
 	protected abstract getOptions(params: TParams, page: number): Observable<TOption[]>;
 
+	#lastClue?: string;
+	#lastPage?: number;
+
 	public ngOnInit(): void {
 		if (this.select.optionComparer() === coreSelectDefaultOptionComparer) {
 			this.select.optionComparer.set(this.optionComparer);
@@ -49,10 +80,48 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			this.select.optionKey.set(this.optionKey);
 		}
 
-		this.buildOptions()
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((options) => this.select.options.set(options));
+		// Subscribe to clueChange$ to (1) keep the select in searchable mode and (2) drive currentClue$
+		this.select.clueChange$.pipe(takeUntil(this.destroy$)).subscribe((clue) => {
+			this.currentClue$.next(clue);
+			this.clearLastPageByClue();
+		});
+
+		const dataSource: SelectDataSource<TOption> = {
+			paramsChange: this.params$,
+			clueDebounceMs: this.debounceDuration,
+			getTotalCount: () => this.totalCount$,
+			reset: () => this.clearLastPageByClue(),
+			getOptions: ({ clue, page }) => {
+				const lastPage = clue === this.#lastClue ? this.#lastPage : undefined;
+				if (lastPage !== undefined && page > lastPage) {
+					return of([] as readonly TOption[]);
+				}
+				return this.buildParamsFromClue(clue).pipe(
+					take(1),
+					switchMap((params) =>
+						this.getOptionsPage(params, page).pipe(
+							tap(({ isLastPage }) => {
+								if (isLastPage) {
+									this.#lastClue = clue;
+									this.#lastPage = page;
+								}
+							}),
+							map(({ items }) => items as readonly TOption[]),
+						),
+					),
+				);
+			},
+		};
+
+		this.select.dataSource.set(dataSource);
 	}
+
+	protected buildParamsFromClue(clue: string): Observable<TParams> {
+		this.currentClue$.next(clue);
+		return this.params$.pipe(take(1));
+	}
+
+	public abstract totalCount$: Observable<number>;
 
 	protected buildOptions(): Observable<TOption[]> {
 		// Prevent a double call to getOptions when the clue is changed while the panel is closed
@@ -101,12 +170,14 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		);
 	}
 
-	protected getOptionsPage(params: TParams, page: number): Observable<{ items: TOption[]; isLastPage: boolean }> {
-		this.select.loading.set(true);
+	protected clearLastPageByClue() {
+		this.#lastClue = undefined;
+		this.#lastPage = undefined;
+	}
 
+	protected getOptionsPage(params: TParams, page: number): Observable<{ items: TOption[]; isLastPage: boolean }> {
 		return this.getOptions(params, page).pipe(
 			catchError(() => of([] as TOption[])),
-			tap(() => this.select.loading.set(false)),
 			map((items) => ({ items, isLastPage: items.length < this.pageSize })),
 		);
 	}

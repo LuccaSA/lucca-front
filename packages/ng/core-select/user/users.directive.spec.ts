@@ -1,6 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component, Directive, forwardRef, viewChild } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { skip } from 'rxjs';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { MAGIC_DEBOUNCE_DURATION } from '../api/api.directive';
@@ -100,7 +102,7 @@ describe('LuCoreSelectUsersDirective', () => {
 
 		// Assert
 		let options: readonly LuCoreSelectUser[] = [];
-		simpleSelect.options$.subscribe((o) => (options = o));
+		options = simpleSelect.dataSourceOptions();
 
 		expect(options).toEqual(page1);
 		httpTestingController.verify();
@@ -167,10 +169,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert (Page 1)
-		let options: readonly LuCoreSelectUser[] = [];
-		simpleSelect.options$.subscribe((o) => (options = o));
-
-		expect(options).toEqual([meUser, ...page1]);
+		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, ...page1]);
 
 		// Act (Page 2)
 		simpleSelect.nextPage$.next();
@@ -183,7 +182,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert (Page 2)
-		expect(options).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
+		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
 		httpTestingController.verify();
 	}));
 
@@ -212,7 +211,11 @@ describe('LuCoreSelectUsersDirective', () => {
 
 		// Act
 		const options: Array<readonly LuCoreSelectUser[]> = [];
-		simpleSelect.options$.subscribe((o) => options.push(o));
+		TestBed.runInInjectionContext(() =>
+			toObservable(simpleSelect.dataSourceOptions)
+				.pipe(skip(1))
+				.subscribe((o) => options.push(o)),
+		);
 
 		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
 		meReq.flush(usersResponse([meUser]));

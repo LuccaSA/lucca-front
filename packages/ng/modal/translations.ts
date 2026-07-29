@@ -39,4 +39,9 @@
 		cancel: 'Cancel',
 		close: 'Close',
 	},
+	pl: {
+		submit: 'Ok',
+		cancel: 'Anuluj',
+		close: 'Zamknij',
+	},
 };

@@ -5,7 +5,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { FormHeaderComponent } from '@lucca-front/ng/form-header';
 import { FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Forms/Examples/Angular',

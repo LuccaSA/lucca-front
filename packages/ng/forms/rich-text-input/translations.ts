@@ -22,6 +22,7 @@
 		stylesStrikethrough: 'Doorgehaald',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Invoegen:',
+		selectTag: 'Een tag toevoegen',
 	},
 	fr: {
 		clearFormat: 'Effacer la mise en forme',
@@ -46,6 +47,7 @@
 		stylesStrikethrough: 'Barré',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Insérer :',
+		selectTag: 'Ajouter une balise',
 	},
 	en: {
 		clearFormat: 'Delete formatting',
@@ -70,6 +72,7 @@
 		stylesStrikethrough: 'Strikethrough',
 		linksPlaceholder: 'https://www.SiteName.com',
 		insertTag: 'Insert:',
+		selectTag: 'Add a tag',
 	},
 	de: {
 		clearFormat: 'Formatierung löschen',
@@ -94,6 +97,7 @@
 		stylesStrikethrough: 'Durchgestrichen',
 		linksPlaceholder: 'https://www.NameDerSeite.com',
 		insertTag: 'Einfügen:',
+		selectTag: 'Ein Tag hinzufügen',
 	},
 	it: {
 		clearFormat: 'Cancellare la formattazione',
@@ -118,6 +122,7 @@
 		stylesStrikethrough: 'Barrato',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Inserire:',
+		selectTag: 'Aggiungi un tag',
 	},
 	nl: {
 		clearFormat: 'Opmaak wissen',
@@ -142,6 +147,7 @@
 		stylesStrikethrough: 'Doorgehaald',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Invoegen:',
+		selectTag: 'Een tag toevoegen',
 	},
 	es: {
 		clearFormat: 'Borrar formato',
@@ -166,6 +172,7 @@
 		stylesStrikethrough: 'Tachado',
 		linksPlaceholder: 'https://www.nomDuSite.com',
 		insertTag: 'Introducir:',
+		selectTag: 'Añadir una etiqueta',
 	},
 	pt: {
 		clearFormat: 'Eliminar a formatação',
@@ -190,5 +197,31 @@
 		stylesStrikethrough: 'Barré',
 		linksPlaceholder: 'https://www.nomeDoSitio.com/',
 		insertTag: 'Inserir:',
+		selectTag: 'Adicionar uma etiqueta',
+	},
+	pl: {
+		clearFormat: 'Usuń formatowanie',
+		linksCancel: 'Anuluj',
+		linksDelete: 'Usuń link',
+		linksHref: 'Adres internetowy',
+		linksLabel: 'Link',
+		linksSubmit: 'Potwierdź',
+		listsNumberedLabel: 'Lista numerowana',
+		listsBulletLabel: 'Lista punktowana',
+		headingsLabel: 'Poziom tytułu',
+		headings0: 'Akapit',
+		headings1: 'Nagłówek poziomu 1',
+		headings2: 'Nagłówek poziomu 2',
+		headings3: 'Nagłówek poziomu 3',
+		headings4: 'Nagłówek poziomu 4',
+		headings5: 'Nagłówek poziomu 5',
+		headings6: 'Nagłówek poziomu 6',
+		stylesItalic: 'Kursywa',
+		stylesBold: 'Tłuste',
+		stylesUnderline: 'Podkreślone',
+		stylesStrikethrough: 'Przekreślone',
+		linksPlaceholder: 'https://www.nomDuSite.com',
+		insertTag: 'Wstaw:',
+		selectTag: 'Dodaj tag',
 	},
 };

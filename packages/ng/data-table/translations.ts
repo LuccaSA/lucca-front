@@ -23,4 +23,7 @@
 	pt: {
 		move: 'Mover',
 	},
+	pl: {
+		move: 'Przenieść',
+	},
 };

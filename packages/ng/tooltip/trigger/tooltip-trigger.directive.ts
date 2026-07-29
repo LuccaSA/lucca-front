@@ -30,7 +30,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
-import { isNil, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { getPushPanelViewportMargin, isNil, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { startWith, timer } from 'rxjs';
 import { debounce, filter, map, tap } from 'rxjs/operators';
@@ -438,6 +438,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		return this.#overlay
 			.position()
 			.flexibleConnectedTo(this.#resolveAnchor())
+			.withViewportMargin(getPushPanelViewportMargin(this.#host.nativeElement))
 			.withPositions([
 				{
 					originX: connectionPosition.originX,

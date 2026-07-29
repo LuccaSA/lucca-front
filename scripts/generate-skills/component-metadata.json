@@ -1,0 +1,930 @@
+{
+	"activity-feed": {
+		"zeroheightPagePath": "3541ee"
+	},
+	"animations": {
+		"zeroheightPagePath": "85c178"
+	},
+	"api-select": {
+		"ngPackageOverride": "api",
+		"ngSelectors": [
+			"lu-api-select"
+		]
+	},
+	"app-layout": {
+		"zeroheightPagePath": "2615fa",
+		"figmaNodeIds": [
+			"29773:198942",
+			"21818:96550"
+		],
+		"figmaName": "pr-AppLayout (1600)",
+		"figmaAliases": [
+			"pr-AppLayout (1600)",
+			"pr-AppLayout (360)"
+		]
+	},
+	"avatar": {
+		"zeroheightPagePath": "42b330",
+		"figmaNodeIds": [
+			"3107:7885",
+			"21429:36994"
+		],
+		"figmaName": "pr-Avatar",
+		"figmaAliases": [
+			"pr-Avatar",
+			"pr-AvatarWrapper (v17.3)"
+		],
+		"ngPackageOverride": "user",
+		"ngSelectors": [
+			"lu-user-picture"
+		]
+	},
+	"box": {
+		"zeroheightPagePath": "1926ca"
+	},
+	"breadcrumbs": {
+		"zeroheightPagePath": "691d7f",
+		"figmaNodeIds": [
+			"3104:299"
+		],
+		"figmaName": "pr-Breadcrumbs"
+	},
+	"bubble-icon": {
+		"zeroheightPagePath": "00d34a",
+		"figmaNodeIds": [
+			"34491:9435"
+		],
+		"figmaName": "pr-BubbleIcon"
+	},
+	"bubble-illustration": {
+		"zeroheightPagePath": "30a66f",
+		"figmaNodeIds": [
+			"34491:9993"
+		],
+		"figmaName": "pr-BubbleIllustration"
+	},
+	"button": {
+		"zeroheightPagePath": "098404",
+		"figmaNodeIds": [
+			"6854:42773",
+			"32845:165556"
+		],
+		"figmaName": "pr-Button",
+		"figmaAliases": [
+			"pr-Button",
+			"pr-ButtonGroup"
+		]
+	},
+	"calendar": {
+		"zeroheightPagePath": "76c144",
+		"figmaNodeIds": [
+			"24071:83910"
+		],
+		"figmaName": "pr-Calendar",
+		"ngPackageOverride": "date",
+		"ngSelectors": [
+			"lu-calendar"
+		]
+	},
+	"calendar2": {
+		"ngPackageOverride": "date2",
+		"ngSelectors": [
+			"lu-calendar2"
+		]
+	},
+	"callout": {
+		"zeroheightPagePath": "64c8d8",
+		"figmaNodeIds": [
+			"5882:32057"
+		],
+		"figmaName": "pr-Callout",
+		"ngSelectors": [
+			"lu-callout",
+			"lu-callout-actions",
+			"ul[lu-callout-feedback-list]",
+			"lu-feedback-item-description",
+			"li[lu-callout-feedback-item]"
+		]
+	},
+	"callout-disclosure": {
+		"zeroheightPagePath": "64c8d8",
+		"figmaNodeIds": [
+			"14686:61370"
+		],
+		"figmaName": "pr-CalloutDisclosure",
+		"ngPackageOverride": "callout",
+		"ngSelectors": [
+			"lu-callout-disclosure"
+		]
+	},
+	"callout-popover": {
+		"zeroheightPagePath": "64c8d8",
+		"figmaNodeIds": [
+			"14695:2444"
+		],
+		"figmaName": "pr-CalloutPopover",
+		"ngPackageOverride": "callout",
+		"ngSelectors": [
+			"lu-callout-popover"
+		]
+	},
+	"card": {
+		"zeroheightPagePath": "878482"
+	},
+	"checkbox": {
+		"zeroheightPagePath": "42c88e",
+		"figmaNodeIds": [
+			"20037:372",
+			"20185:80419"
+		],
+		"figmaName": "pr-Checkbox",
+		"figmaAliases": [
+			"pr-Checkbox",
+			"pr-CheckboxFieldset"
+		],
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-checkbox-input"
+		]
+	},
+	"chip": {
+		"zeroheightPagePath": "3960bc",
+		"figmaNodeIds": [
+			"3098:3077"
+		],
+		"figmaName": "pr-Chip"
+	},
+	"clear": {
+		"zeroheightPagePath": "80fb2d",
+		"figmaNodeIds": [
+			"5748:32069"
+		],
+		"figmaName": "pr-Clear"
+	},
+	"code": {
+		"zeroheightPagePath": "85d53c"
+	},
+	"color": {
+		"ngSelectors": [
+			"lu-color"
+		]
+	},
+	"color-input": {
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-color-input"
+		]
+	},
+	"color-picker": {
+		"zeroheightPagePath": "16e1d1",
+		"figmaNodeIds": [
+			"34491:7795"
+		],
+		"figmaName": "pr-ColorPicker"
+	},
+	"colorpicker": {
+		"zeroheightPagePath": "16e1d1",
+		"figmaNodeIds": [
+			"34491:7795"
+		],
+		"figmaName": "pr-ColorPicker"
+	},
+	"comment": {
+		"zeroheightPagePath": "08238a",
+		"figmaNodeIds": [
+			"18702:2533"
+		],
+		"figmaName": "pr-Comment"
+	},
+	"container": {
+		"zeroheightPagePath": "453b4f"
+	},
+	"core-select-department": {
+		"ngPackageOverride": "core-select/department",
+		"ngSelectors": [
+			"lu-simple-select[departments]"
+		]
+	},
+	"core-select-establishment": {
+		"ngPackageOverride": "core-select/establishment",
+		"ngSelectors": [
+			"lu-simple-select[establishments]"
+		]
+	},
+	"core-select-job-qualification": {
+		"ngPackageOverride": "core-select/job-qualification",
+		"ngSelectors": [
+			"lu-simple-select[jobQualifications]"
+		]
+	},
+	"core-select-occupation-category": {
+		"ngPackageOverride": "core-select/occupation-category",
+		"ngSelectors": [
+			"lu-simple-select[occupationCategories]"
+		]
+	},
+	"core-select-user": {
+		"ngPackageOverride": "core-select/user",
+		"ngSelectors": [
+			"lu-simple-select[users]",
+			"[luUserOption]"
+		]
+	},
+	"data-presentation": {
+		"zeroheightPagePath": "02bfb1",
+		"figmaNodeIds": [
+			"34358:99807"
+		],
+		"figmaName": "pr-DataPresentation (v21.1)  🎉",
+		"ngPackageOverride": "form-field",
+		"ngSelectors": [
+			"lu-data-presentation"
+		]
+	},
+	"data-table": {
+		"zeroheightPagePath": "4263a5",
+		"figmaNodeIds": [
+			"23373:9022"
+		],
+		"figmaName": "pr-DataTable"
+	},
+	"dateinput": {
+		"zeroheightPagePath": "87a48d",
+		"figmaNodeIds": [
+			"6119:38876"
+		],
+		"figmaName": "pr-DatePicker",
+		"ngPackageOverride": "date2",
+		"ngSelectors": [
+			"lu-date-input"
+		]
+	},
+	"daterangeinput": {
+		"zeroheightPagePath": "00bf9b",
+		"figmaNodeIds": [
+			"24071:83969"
+		],
+		"figmaName": "pr-DateRangePicker (v19.1)",
+		"ngPackageOverride": "date2",
+		"ngSelectors": [
+			"lu-date-range-input"
+		]
+	},
+	"department-select": {
+		"ngPackageOverride": "department",
+		"ngSelectors": [
+			"lu-department-select"
+		]
+	},
+	"departmentselect": {
+		"ngPackageOverride": "department",
+		"ngSelectors": [
+			"lu-department-select"
+		]
+	},
+	"dialog": {
+		"zeroheightPagePath": "841b0b",
+		"figmaNodeIds": [
+			"5640:31604",
+			"28382:11798",
+			"28382:11460",
+			"28385:12057"
+		],
+		"figmaName": "pr-Dialog",
+		"figmaAliases": [
+			"pr-Dialog",
+			"ConfirmationDialog",
+			"DeleteDialog",
+			"ExitDialog"
+		]
+	},
+	"display-name": {
+		"zeroheightPagePath": "05750c"
+	},
+	"divider": {
+		"zeroheightPagePath": "22632c",
+		"figmaNodeIds": [
+			"8487:40717"
+		],
+		"figmaName": "pr-Divider"
+	},
+	"dropdown": {
+		"zeroheightPagePath": "557682",
+		"figmaNodeIds": [
+			"26837:32810"
+		],
+		"figmaName": "pr-DropdownMenu"
+	},
+	"duration-picker": {
+		"zeroheightPagePath": "2473a1",
+		"figmaNodeIds": [
+			"8221:36924"
+		],
+		"figmaName": "pr-DurationPicker",
+		"ngPackageOverride": "time",
+		"ngSelectors": [
+			"lu-duration-picker"
+		]
+	},
+	"empty-state": {
+		"zeroheightPagePath": "49b0ef",
+		"figmaNodeIds": [
+			"21818:76675"
+		],
+		"figmaName": "pr-EmptyStateFull",
+		"figmaAliases": [
+			"pr-EmptyStateFull",
+			"pr-EmptyStateSection"
+		],
+		"ngSelectors": [
+			"lu-empty-state-page",
+			"lu-empty-state-page-illustration"
+		]
+	},
+	"errorpage": {
+		"zeroheightPagePath": "1622d2"
+	},
+	"establishment-select": {
+		"ngPackageOverride": "establishment",
+		"ngSelectors": [
+			"lu-establishment-select"
+		]
+	},
+	"establishmentselect": {
+		"ngPackageOverride": "establishment",
+		"ngSelectors": [
+			"lu-establishment-select"
+		]
+	},
+	"fancy-dialog": {
+		"zeroheightPagePath": "32b1a9",
+		"ngPackageOverride": "dialog"
+	},
+	"fancybox": {
+		"zeroheightPagePath": "19c95b",
+		"figmaNodeIds": [
+			"25658:1086"
+		],
+		"figmaName": "pr-FancyBox (v19.1)"
+	},
+	"fieldset": {
+		"zeroheightPagePath": "431e99",
+		"figmaNodeIds": [
+			"35511:3867"
+		],
+		"figmaName": "pr-Fieldset",
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-fieldset"
+		]
+	},
+	"file-dropzone": {
+		"ngPackageOverride": "file-upload",
+		"ngSelectors": [
+			"lu-file-dropzone"
+		]
+	},
+	"filedropzone": {
+		"ngPackageOverride": "file-upload",
+		"ngSelectors": [
+			"lu-file-dropzone"
+		]
+	},
+	"fileentry": {
+		"zeroheightPagePath": "8282a5",
+		"figmaNodeIds": [
+			"28445:189464"
+		],
+		"figmaName": "pr-FileEntry (v19.3)",
+		"ngPackageOverride": "file-upload"
+	},
+	"fileupload": {
+		"zeroheightPagePath": "8282a5",
+		"figmaNodeIds": [
+			"28445:192983"
+		],
+		"figmaName": "pr-FileUpload (v19.3)"
+	},
+	"filterbar": {
+		"zeroheightPagePath": "13044b",
+		"figmaNodeIds": [
+			"26824:221177"
+		],
+		"figmaName": "pr-FilterBar (v19.2)",
+		"ngPackageOverride": "filter-pills"
+	},
+	"filterpills": {
+		"zeroheightPagePath": "053be4",
+		"figmaNodeIds": [
+			"26824:178929"
+		],
+		"figmaName": "pr-FilterPill (v19.2)"
+	},
+	"footer": {
+		"zeroheightPagePath": "419504",
+		"figmaNodeIds": [
+			"8394:35779"
+		],
+		"figmaName": "pr-Footer"
+	},
+	"form": {
+		"ngSelectors": [
+			"form[luForm]"
+		]
+	},
+	"form-field": {
+		"zeroheightPagePath": "810797",
+		"figmaNodeIds": [
+			"28461:196506"
+		],
+		"figmaName": "pr-FormField",
+		"ngSelectors": [
+			"lu-form-field",
+			"[luInput]",
+			"[luPresentationDisplay]",
+			"[luPresentationDisplayDefault]"
+		]
+	},
+	"form-header": {
+		"ngSelectors": [
+			"lu-form-header"
+		]
+	},
+	"form-label": {
+		"zeroheightPagePath": "3491a2"
+	},
+	"form-layout": {
+		"zeroheightPagePath": "36780d"
+	},
+	"gauge": {
+		"zeroheightPagePath": "75e507",
+		"figmaNodeIds": [
+			"16861:2802"
+		],
+		"figmaName": "pr-Gauge"
+	},
+	"grid": {
+		"zeroheightPagePath": "955d69"
+	},
+	"highlight-data": {
+		"zeroheightPagePath": "1827fe",
+		"figmaNodeIds": [
+			"28445:184862"
+		],
+		"figmaName": "pr-HighlightData (v19.3)"
+	},
+	"horizontalnavigation": {
+		"zeroheightPagePath": "29aaef",
+		"figmaNodeIds": [
+			"3104:226"
+		],
+		"figmaName": "pr-HorizontalNavigation"
+	},
+	"icons": {
+		"zeroheightPagePath": "9826b3",
+		"figmaNodeIds": [
+			"34358:9707"
+		],
+		"figmaName": "pr-Icon",
+		"ngPackageOverride": "icon"
+	},
+	"index-table": {
+		"zeroheightPagePath": "24fc14",
+		"figmaNodeIds": [
+			"19654:99228"
+		],
+		"figmaName": "pr-IndexTable"
+	},
+	"inlinemessage": {
+		"zeroheightPagePath": "43a580",
+		"figmaNodeIds": [
+			"5743:32741"
+		],
+		"figmaName": "pr-InlineMessage"
+	},
+	"input-framed": {
+		"zeroheightPagePath": "28896d",
+		"figmaNodeIds": [
+			"29856:17750"
+		],
+		"figmaName": "pr-InputFramed (v20.1)",
+		"ngPackageOverride": "form-field",
+		"ngSelectors": [
+			"lu-input-framed"
+		]
+	},
+	"link": {
+		"zeroheightPagePath": "95303b",
+		"figmaNodeIds": [
+			"3082:283"
+		],
+		"figmaName": "pr-Link"
+	},
+	"listbox": {
+		"zeroheightPagePath": "005487"
+	},
+	"listing": {
+		"zeroheightPagePath": "170797",
+		"figmaNodeIds": [
+			"28118:159096"
+		],
+		"figmaName": "pr-Listing (v20.1)  🎉"
+	},
+	"loading": {
+		"zeroheightPagePath": "91e25d",
+		"figmaNodeIds": [
+			"6311:39280"
+		],
+		"figmaName": "pr-Loading"
+	},
+	"mobile-push": {
+		"zeroheightPagePath": "268432",
+		"figmaNodeIds": [
+			"29907:397"
+		],
+		"figmaName": "pr-MobilePush (v20.1)"
+	},
+	"mobileheader": {
+		"zeroheightPagePath": "6771ab"
+	},
+	"mobilenavigation": {
+		"zeroheightPagePath": "337b80",
+		"figmaNodeIds": [
+			"8399:38417"
+		],
+		"figmaName": "pr-MobileNavigation"
+	},
+	"modal": {
+		"zeroheightPagePath": "4068ed"
+	},
+	"multi-select": {
+		"zeroheightPagePath": "927519",
+		"figmaNodeIds": [
+			"16134:2827"
+		],
+		"figmaName": "pr-Select"
+	},
+	"multilanguagefield": {
+		"zeroheightPagePath": "5428d4",
+		"figmaNodeIds": [
+			"23179:39143"
+		],
+		"figmaName": "pr-MultilanguageTextfield",
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-multilanguage-input"
+		]
+	},
+	"newbadge": {
+		"zeroheightPagePath": "36bcdf",
+		"figmaNodeIds": [
+			"8174:35724"
+		],
+		"figmaName": "pr-NewBadge"
+	},
+	"number-format-input": {
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-number-format-input"
+		]
+	},
+	"number-input": {
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-number-input"
+		]
+	},
+	"numbers": {
+		"zeroheightPagePath": "49fa5a"
+	},
+	"numericbadge": {
+		"zeroheightPagePath": "0548ef",
+		"figmaNodeIds": [
+			"3200:26461"
+		],
+		"figmaName": "pr-NumericBadge"
+	},
+	"onboarding-empty-state": {
+		"zeroheightPagePath": "9490c7",
+		"ngPackageOverride": "empty-state",
+		"ngSelectors": [
+			"lu-empty-state-page"
+		]
+	},
+	"pageheader": {
+		"zeroheightPagePath": "6598e9",
+		"figmaNodeIds": [
+			"23985:434"
+		],
+		"figmaName": "pr-PageHeader"
+	},
+	"pagination": {
+		"zeroheightPagePath": "093a9c",
+		"figmaNodeIds": [
+			"6671:42932"
+		],
+		"figmaName": "pr-Pagination"
+	},
+	"phonenumberfield": {
+		"zeroheightPagePath": "896abf",
+		"figmaNodeIds": [
+			"18201:22261"
+		],
+		"figmaName": "pr-PhoneNumberField",
+		"ngPackageOverride": "forms/phone-number-input"
+	},
+	"plg-push": {
+		"zeroheightPagePath": "6035eb",
+		"figmaNodeIds": [
+			"22031:14975"
+		],
+		"figmaName": "pr-PLGPush"
+	},
+	"popover": {
+		"zeroheightPagePath": "129fae",
+		"figmaNodeIds": [
+			"5742:31562"
+		],
+		"figmaName": "pr-Popover"
+	},
+	"progress-bar": {
+		"zeroheightPagePath": "916abd",
+		"figmaNodeIds": [
+			"16861:21023"
+		],
+		"figmaName": "pr-ProgressBar"
+	},
+	"progress-stepper": {
+		"zeroheightPagePath": "8211e2"
+	},
+	"radiofield": {
+		"zeroheightPagePath": "45f82a",
+		"figmaNodeIds": [
+			"20115:1600",
+			"20185:81361"
+		],
+		"figmaName": "pr-Radio",
+		"figmaAliases": [
+			"pr-Radio",
+			"pr-RadioFieldset"
+		],
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-radio-group-input",
+			"lu-radio"
+		]
+	},
+	"readmore": {
+		"zeroheightPagePath": "5054f0",
+		"figmaNodeIds": [
+			"27984:1100"
+		],
+		"figmaName": "pr-ReadMore (v19.3)"
+	},
+	"resource-card": {
+		"zeroheightPagePath": "44a682",
+		"figmaNodeIds": [
+			"33038:16815",
+			"33040:2908"
+		],
+		"figmaName": "pr-ResourceCard (v21.0)  🧪",
+		"figmaAliases": [
+			"pr-ResourceCard (v21.0)  🧪",
+			"pr-ResourceCardWrapper (v21.0)  🧪"
+		]
+	},
+	"richtextinput": {
+		"zeroheightPagePath": "92f33b",
+		"figmaNodeIds": [
+			"6946:36398"
+		],
+		"figmaName": "pr-RichTextfield (v19.3)",
+		"ngPackageOverride": "forms/rich-text-input"
+	},
+	"scroll": {
+		"ngSelectors": [
+			"[luScroll]"
+		]
+	},
+	"scrollbox": {
+		"zeroheightPagePath": "866ad0",
+		"figmaNodeIds": [
+			"3200:27007"
+		],
+		"figmaName": "Scrollbar"
+	},
+	"section": {
+		"zeroheightPagePath": "799d1e"
+	},
+	"section-empty-state": {
+		"zeroheightPagePath": "97ca09",
+		"ngPackageOverride": "empty-state",
+		"ngSelectors": [
+			"lu-empty-state-section"
+		]
+	},
+	"segmented-control-tabs": {
+		"ngSelectors": [
+			"lu-segmented-control-tabs",
+			"lu-segmented-control-tabs-panel"
+		]
+	},
+	"segmentedcontrol": {
+		"zeroheightPagePath": "88f854",
+		"figmaNodeIds": [
+			"17121:6916"
+		],
+		"figmaName": "pr-SegmentedControl"
+	},
+	"select-templating": {
+		"ngPackageOverride": "core-select",
+		"ngSelectors": [
+			"[luOption]",
+			"[luOptionGroup]",
+			"[luDisabledOption]",
+			"[luSelectPanelHeader]",
+			"lu-simple-select[totalCount]",
+			"lu-simple-select[noClue]"
+		]
+	},
+	"side-navigation": {
+		"zeroheightPagePath": "160093"
+	},
+	"simple-select": {
+		"zeroheightPagePath": "587833",
+		"figmaNodeIds": [
+			"16134:2827"
+		],
+		"figmaName": "pr-Select"
+	},
+	"skeleton": {
+		"zeroheightPagePath": "4819e2",
+		"figmaNodeIds": [
+			"19475:8986",
+			"21713:46941",
+			"21713:46919",
+			"21713:46912"
+		],
+		"figmaName": "pr-Skeleton",
+		"figmaAliases": [
+			"pr-Skeleton",
+			"pr-SkeletonButton (v18.1)",
+			"pr-SkeletonFormField (v18.1)",
+			"pr-SkeletonPageHeader (v18.1)"
+		]
+	},
+	"skiplinks": {
+		"zeroheightPagePath": "48aefc",
+		"ngPackageOverride": "a11y"
+	},
+	"software-icon": {
+		"zeroheightPagePath": "37e39b",
+		"figmaNodeIds": [
+			"6053:34947"
+		],
+		"figmaName": "pr-SoftwareIcon"
+	},
+	"sortable-list": {
+		"zeroheightPagePath": "883e34",
+		"figmaNodeIds": [
+			"6174:37769"
+		],
+		"figmaName": "pr-SortableList"
+	},
+	"statusbadge": {
+		"zeroheightPagePath": "425d98",
+		"figmaNodeIds": [
+			"6141:36860",
+			"13369:11929"
+		],
+		"figmaName": "pr-StatusBadge",
+		"figmaAliases": [
+			"pr-StatusBadge",
+			"pr-DotBadge"
+		]
+	},
+	"switchfield": {
+		"zeroheightPagePath": "39c7b7",
+		"figmaNodeIds": [
+			"20183:78344"
+		],
+		"figmaName": "pr-Switch",
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-switch-input"
+		]
+	},
+	"tableofcontent": {
+		"zeroheightPagePath": "05ca4d"
+	},
+	"tags": {
+		"zeroheightPagePath": "6036ad",
+		"figmaNodeIds": [
+			"7765:34927"
+		],
+		"figmaName": "pr-Tag",
+		"ngPackageOverride": "tag"
+	},
+	"text-flow": {
+		"zeroheightPagePath": "51e878",
+		"figmaNodeIds": [
+			"30462:137476"
+		],
+		"figmaName": "pr-TextFlow (v19.2)"
+	},
+	"textareafield": {
+		"zeroheightPagePath": "60990a",
+		"figmaNodeIds": [
+			"6119:39816"
+		],
+		"figmaName": "pr-Textarea",
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-textarea-input"
+		]
+	},
+	"textfield": {
+		"zeroheightPagePath": "459eda",
+		"figmaNodeIds": [
+			"6119:36364"
+		],
+		"figmaName": "pr-Textfield",
+		"ngPackageOverride": "forms",
+		"ngSelectors": [
+			"lu-text-input"
+		]
+	},
+	"tile": {
+		"zeroheightPagePath": "56d611",
+		"figmaNodeIds": [
+			"6053:35161"
+		],
+		"figmaName": "pr-UserTile",
+		"ngPackageOverride": "user",
+		"ngSelectors": [
+			"lu-user-tile"
+		]
+	},
+	"time-picker": {
+		"zeroheightPagePath": "2473a1",
+		"figmaNodeIds": [
+			"20952:3023"
+		],
+		"figmaName": "pr-TimePicker",
+		"ngPackageOverride": "time",
+		"ngSelectors": [
+			"lu-time-picker"
+		]
+	},
+	"timelines": {
+		"zeroheightPagePath": "288e66",
+		"figmaNodeIds": [
+			"6238:37988",
+			"3746:26392"
+		],
+		"figmaName": "pr-TimelineHorizontal",
+		"figmaAliases": [
+			"pr-TimelineHorizontal",
+			"pr-TimelineVertical"
+		]
+	},
+	"title-and-text": {
+		"zeroheightPagePath": "021fef",
+		"ngPackageOverride": "title"
+	},
+	"toasts": {
+		"zeroheightPagePath": "12eaab",
+		"figmaNodeIds": [
+			"3101:970"
+		],
+		"figmaName": "pr-Toast",
+		"ngPackageOverride": "toast"
+	},
+	"tooltip": {
+		"zeroheightPagePath": "9285d2",
+		"figmaNodeIds": [
+			"5639:31388"
+		],
+		"figmaName": "pr-Tooltip"
+	},
+	"user-select": {
+		"ngPackageOverride": "user",
+		"ngSelectors": [
+			"lu-user-select"
+		]
+	},
+	"userpopover": {
+		"zeroheightPagePath": "85b183",
+		"figmaNodeIds": [
+			"18202:1181"
+		],
+		"figmaName": "pr-UserPopover"
+	},
+	"verticalnavigation": {
+		"zeroheightPagePath": "205934",
+		"figmaNodeIds": [
+			"13580:1866"
+		],
+		"figmaName": "pr-VerticalNavigation"
+	}
+}

@@ -31,4 +31,8 @@
 		readMore: 'Read more',
 		readLess: 'Read less',
 	},
+	pl: {
+		readMore: 'Czytaj więcej',
+		readLess: 'Przeczytaj mniej',
+	},
 };

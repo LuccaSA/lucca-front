@@ -1,102 +1,9 @@
+import { TmplAstElement } from '@angular/compiler';
 import { Tree } from '@angular-devkit/schematics';
-import type { TmplAstElement } from '@angular/compiler';
-import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
+import { Change, applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { SourceFile } from 'typescript';
 import { HtmlAst, extractNgTemplatesIncludingHtml, insertAngularImportIfNeeded, insertTSImportIfNeeded, isInterestingNode } from '../lib';
-
-// --- Grid container ---
-
-interface GridInputs {
-	mode?: string;
-	columns?: string;
-	extraClasses?: string;
-}
-
-interface HtmlGrid {
-	node: TmplAstElement;
-	inputs: GridInputs;
-	nodeOffset: number;
-	filePath: string;
-	componentTS: SourceFile;
-}
-
-// --- Grid column ---
-
-interface GridColumnInputs {
-	colspan?: string;
-	rowspan?: string;
-	column?: string;
-	row?: string;
-	justify?: string;
-	align?: string;
-	responsive?: Record<string, string>;
-}
-
-interface HtmlGridColumn {
-	node: TmplAstElement;
-	inputs: GridColumnInputs;
-	remainingStyle?: string;
-	extraClasses?: string;
-	nodeOffset: number;
-	filePath: string;
-	componentTS: SourceFile;
-}
-
-// --- CSS custom properties helpers ---
-
-function parseCssCustomProperties(style: string): Record<string, string> {
-	const result: Record<string, string> = {};
-	style.split(';').map((p) => p.trim()).filter(Boolean).forEach((part) => {
-		const colonIdx = part.indexOf(':');
-		if (colonIdx === -1) {
-			return;
-		}
-		const prop = part.substring(0, colonIdx).trim();
-		const value = part.substring(colonIdx + 1).trim();
-		result[prop] = value;
-	});
-	return result;
-}
-
-// CSS custom properties that map directly to GridColumnComponent inputs
-const GRID_COLUMN_DIRECT_PROPS: Record<string, string> = {
-	'--grid-colspan': 'colspan',
-	'--grid-rowspan': 'rowspan',
-	'--grid-column': 'column',
-	'--grid-row': 'row',
-	'--grid-justify': 'justify',
-	'--grid-align': 'align',
-};
-
-// Prefix for responsive CSS custom properties
-const RESPONSIVE_PREFIX = '--grid-';
-
-function extractGridColumnInputs(style: string): { inputs: GridColumnInputs; remainingStyle: string } {
-	const cssProps = parseCssCustomProperties(style);
-	const inputs: GridColumnInputs = {};
-	const responsive: Record<string, string> = {};
-	const remaining: string[] = [];
-
-	for (const [prop, value] of Object.entries(cssProps)) {
-		if (GRID_COLUMN_DIRECT_PROPS[prop]) {
-			(inputs as Record<string, string>)[GRID_COLUMN_DIRECT_PROPS[prop]] = value;
-		} else if (prop.startsWith(RESPONSIVE_PREFIX) && prop.includes('AtMedia')) {
-			// e.g. --grid-colspanAtMediaMinXS → colspanAtMediaMinXS
-			const key = prop.substring(RESPONSIVE_PREFIX.length);
-			responsive[key] = value;
-		} else if (prop.startsWith('--grid-')) {
-			// Unknown grid property — drop it (it was grid-specific)
-		} else {
-			remaining.push(`${prop}: ${value}`);
-		}
-	}
-
-	if (Object.keys(responsive).length > 0) {
-		inputs.responsive = responsive;
-	}
-
-	return { inputs, remainingStyle: remaining.join('; ') };
-}
+import { GridInputs, HtmlGrid, HtmlGridColumn, extractGridColumnInputs, isNeutralElement, parseCssCustomProperties } from './migration.utils';
 
 // --- Main migration ---
 
@@ -116,7 +23,8 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 	htmlGrids.forEach((grid) => migrateGridNode(grid, templateUpdate));
 	htmlGridColumns.forEach((col) => migrateGridColumnNode(col, templateUpdate));
 
-	const changesToApply = [];
+	const changesToApply: Change[] = [];
+
 	if (htmlGrids.length > 0) {
 		changesToApply.push(
 			insertTSImportIfNeeded(sourceFile, path, 'GridComponent', '@lucca-front/ng/grid'),
@@ -142,7 +50,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function migrateGridNode(grid: HtmlGrid, templateUpdate: any): void {
 	const { node, nodeOffset, inputs } = grid;
-	const divLength = node.name.length; // 'div'
+	const divLength = node.name.length;
 	const classesNode = node.attributes.find((attr) => attr.name === 'class');
 	const styleNode = node.attributes.find((attr) => attr.name === 'style');
 
@@ -201,7 +109,7 @@ function migrateGridNode(grid: HtmlGrid, templateUpdate: any): void {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function migrateGridColumnNode(col: HtmlGridColumn, templateUpdate: any): void {
 	const { node, nodeOffset, inputs, remainingStyle, extraClasses } = col;
-	const divLength = node.name.length; // 'div'
+	const divLength = node.name.length;
 	const classesNode = node.attributes.find((attr) => attr.name === 'class');
 	const styleNode = node.attributes.find((attr) => attr.name === 'style');
 
@@ -268,6 +176,16 @@ function migrateGridColumnNode(col: HtmlGridColumn, templateUpdate: any): void {
 
 // --- Finders ---
 
+function gridHasNonNeutralColumnChildren(node: TmplAstElement): boolean {
+	return node.children.some((child: unknown) => {
+		if (!isInterestingNode(child) || isNeutralElement(child.name)) {
+			return false;
+		}
+		const childClasses = child.attributes.find((attr) => attr.name === 'class')?.value;
+		return !!childClasses?.match(/(^|\s)grid-column(\s|$)/);
+	});
+}
+
 function findHTMLGrids(sourceFile: SourceFile, basePath: string, tree: Tree): HtmlGrid[] {
 	const results: HtmlGrid[] = [];
 	const ngTemplates = extractNgTemplatesIncludingHtml(sourceFile, tree, basePath);
@@ -275,11 +193,14 @@ function findHTMLGrids(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 	ngTemplates.forEach((template) => {
 		const htmlAst = new HtmlAst(template.content);
 		htmlAst.visitNodes((node) => {
-			if (!isInterestingNode(node) || node.name !== 'div') {
+			if (!isInterestingNode(node) || !isNeutralElement(node.name)) {
 				return;
 			}
 			const classes = node.attributes.find((attr) => attr.name === 'class')?.value;
 			if (!classes?.match(/(^|\s)grid(\s|$)/)) {
+				return;
+			}
+			if (gridHasNonNeutralColumnChildren(node)) {
 				return;
 			}
 
@@ -314,12 +235,24 @@ function findHTMLGridColumns(sourceFile: SourceFile, basePath: string, tree: Tre
 
 	ngTemplates.forEach((template) => {
 		const htmlAst = new HtmlAst(template.content);
-		htmlAst.visitNodes((node) => {
+		htmlAst.visitNodes((node, parent) => {
 			if (!isInterestingNode(node)) {
 				return;
 			}
 			const classes = node.attributes.find((attr) => attr.name === 'class')?.value;
 			if (!classes?.match(/(^|\s)grid-column(\s|$)/)) {
+				return;
+			}
+
+			// Only migrate grid-column if its parent grid container is also being migrated
+			if (!isInterestingNode(parent) || !isNeutralElement(parent.name)) {
+				return;
+			}
+			const parentClasses = parent.attributes.find((attr) => attr.name === 'class')?.value;
+			if (!parentClasses?.match(/(^|\s)grid(\s|$)/)) {
+				return;
+			}
+			if (gridHasNonNeutralColumnChildren(parent)) {
 				return;
 			}
 

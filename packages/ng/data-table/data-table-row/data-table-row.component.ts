@@ -49,5 +49,6 @@ export class DataTableRowComponent {
 
 	readonly selected = model<boolean>(false);
 	readonly selectedLabel = input<string | null>(null);
+	readonly mixed = input(false, { transform: booleanAttribute });
 	readonly disabled = input(false, { transform: booleanAttribute });
 }

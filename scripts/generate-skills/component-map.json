@@ -1,468 +1,1073 @@
 {
-  ".AssetsBanner": null,
-  "🎨 TemplateDataTable": {
-    "slug": "template-datatable",
-    "storybook": "Documentation/Listings/Data table/Angular/Basic"
-  },
-  "🎨 TemplateFancyBox": {
-    "slug": "template-fancybox",
-    "storybook": "Documentation/Structure/FancyBox/Angular/Basic"
-  },
-  "🎨 TemplateIndexTable": {
-    "slug": "template-index-table",
-    "storybook": "Documentation/Listings/Index Table/Angular/Basic"
-  },
-  "🎨 TemplateRichTextfield": {
-    "slug": "template-rich-textfield",
-    "storybook": "Documentation/Forms/Fields/RichTextInput/Angular"
-  },
-  "🧩 AssetsDataTable": {
-    "slug": "assets-data-table",
-    "storybook": "Documentation/Listings/Data table/Angular/Basic"
-  },
-  "🧩 AssetsIndexTable": {
-    "slug": "assets-index-table",
-    "storybook": "Documentation/Listings/Index Table/Angular/Basic"
-  },
-  "Assets": null,
-  "AssetsColorPicker": {
-    "slug": "color-picker",
-    "storybook": "Documentation/Forms/Fields/Color Picker"
-  },
-  "AssetsDialogs": {
-    "slug": "dialog",
-    "storybook": "Documentation/Overlays/Dialog/Angular"
-  },
-  "AssetsEmptyStateFull": {
-    "slug": "asset-empty-state-full",
-    "storybook": "Documentation/Feedback/Empty State/Angular"
-  },
-  "AssetsFieldset": {
-    "slug": "fieldset",
-    "storybook": "Documentation/Forms/Fieldset/Angular"
-  },
-  "AssetsFileUpload": {
-    "slug": "fileupload",
-    "storybook": "Documentation/File/FileUpload/Angular"
-  },
-  "AssetsFooter": {
-    "slug": "footer",
-    "storybook": "Documentation/Structure/Footer/Angular"
-  },
-  "AssetsFormLayout": {
-    "slug": "assets-form-layout",
-    "storybook": "Documentation/Forms/Examples/Angular"
-  },
-  "AssetsSelect": [
-    {
-      "slug": "multi-select",
-      "storybook": "Documentation/Forms/Fields/Multi Select/Angular"
-    },
-    {
-      "slug": "simple-select",
-      "storybook": "Documentation/Forms/Fields/Simple Select/Angular"
-    }
-  ],
-  "AssetsTextFlow": {
-    "slug": "text-flow",
-    "storybook": "Documentation/Texts/Text flow/Angular"
-  },
-  "AssetsTimeline": {
-    "slug": "timelines",
-    "storybook": "Documentation/Listings/Timelines"
-  },
-  "ConfirmationDialog": {
-    "slug": "dialog",
-    "storybook": "Documentation/Overlays/Dialog/Angular"
-  },
-  "DeleteDialog": {
-    "slug": "dialog",
-    "storybook": "Documentation/Overlays/Dialog/Angular"
-  },
-  "ExitDialog": {
-    "slug": "dialog",
-    "storybook": "Documentation/Overlays/Dialog/Angular"
-  },
-  "Group 1": null,
-  "MathSymbols  🚧": null,
-  "NavSideItemLarge": null,
-  "NavSideItemMobile": null,
-  "NavSideItemSmall": null,
-  "NavSideNavigationSelect": null,
-  "pr-AppDrawer": null,
-  "pr-AppLayout (1600)": {
-    "slug": "app-layout",
-    "storybook": "Documentation/Structure/App Layout/Angular",
-    "extraStories": ["Documentation/Structure/Main Layout/Angular"]
-  },
-  "pr-AppLayout (360)": {
-    "slug": "app-layout",
-    "storybook": "Documentation/Structure/App Layout/Angular",
-    "extraStories": ["Documentation/Structure/Main Layout/Angular"]
-  },
-  "pr-Avatar": {
-    "slug": "avatar",
-    "storybook": "Documentation/Users/Avatar/Angular"
-  },
-  "pr-AvatarWrapper (v17.3)": {
-    "slug": "avatar",
-    "storybook": "Documentation/Users/Avatar/Angular"
-  },
-  "pr-Banner": null,
-  "pr-Breadcrumbs": {
-    "slug": "breadcrumbs",
-    "storybook": "Documentation/Navigation/Breadcrumbs/Angular"
-  },
-  "pr-BubbleIcon": {
-    "slug": "bubble-icon",
-    "storybook": "Documentation/Structure/Bubble icon/Angular"
-  },
-  "pr-BubbleIllustration": {
-    "slug": "bubble-illustration",
-    "storybook": "Documentation/Structure/Bubble illustration/Angular"
-  },
-  "pr-Button": {
-    "slug": "button",
-    "storybook": "Documentation/Actions/Button/Angular"
-  },
-  "pr-ButtonGroup": {
-    "slug": "button",
-    "storybook": "Documentation/Actions/Button/Angular"
-  },
-  "pr-Calendar": {
-    "slug": "calendar",
-    "storybook": "Documentation/Forms/Date"
-  },
-  "pr-Callout": {
-    "slug": "callout",
-    "storybook": "Documentation/Feedback/Callout/Angular"
-  },
-  "pr-CalloutDisclosure": {
-    "slug": "callout-disclosure",
-    "storybook": "Documentation/Feedback/Callout Disclosure"
-  },
-  "pr-CalloutPopover": {
-    "slug": "callout-popover",
-    "storybook": "Documentation/Feedback/Callout Popover"
-  },
-  "pr-Checkbox": {
-    "slug": "checkbox",
-    "storybook": "Documentation/Forms/FiltersPills/Checkbox"
-  },
-  "pr-CheckboxFieldset": {
-    "slug": "checkbox",
-    "storybook": "Documentation/Forms/FiltersPills/Checkbox"
-  },
-  "pr-Chip": {
-    "slug": "chip",
-    "storybook": "Documentation/Listings/Chip/Angular"
-  },
-  "pr-Clear": {
-    "slug": "clear",
-    "storybook": "Documentation/Texts/Clear/Angular"
-  },
-  "pr-ColorPicker": {
-    "slug": "color-picker",
-    "storybook": "Documentation/Forms/Fields/Color Picker"
-  },
-  "pr-Comment": {
-    "slug": "comment",
-    "storybook": "Documentation/Texts/Comment/Angular"
-  },
-  "pr-CommentChat": null,
-  "pr-DataPresentation (v21.1)  🎉": {
-    "slug": "data-presentation",
-    "storybook": "Documentation/Forms/Data Presentation/Angular"
-  },
-  "pr-DataTable": {
-    "slug": "data-table",
-    "storybook": "Documentation/Listings/Data table/Angular"
-  },
-  "pr-DatePicker": {
-    "slug": "dateinput",
-    "storybook": "Documentation/Forms/Date2/DateInput"
-  },
-  "pr-DateRangePicker (v19.1)": {
-    "slug": "daterangeinput",
-    "storybook": "Documentation/Forms/Date2/DateRangeInput"
-  },
-  "pr-Dialog": {
-    "slug": "dialog",
-    "storybook": "Documentation/Overlays/Dialog/Angular"
-  },
-  "pr-Divider": {
-    "slug": "divider",
-    "storybook": "Documentation/Structure/Divider/Angular"
-  },
-  "pr-DotBadge": {
-    "slug": "statusbadge",
-    "storybook": "Documentation/Texts/StatusBadge"
-  },
-  "pr-DropdownMenu": {
-    "slug": "dropdown",
-    "storybook": "Documentation/Overlays/Dropdown/Angular"
-  },
-  "pr-DurationPicker": {
-    "slug": "duration-picker",
-    "storybook": "Documentation/Forms/Time/Duration Picker"
-  },
-  "pr-EmptyStateFull": {
-    "slug": "empty-state",
-    "storybook": "Documentation/Feedback/Empty State/Angular"
-  },
-  "pr-EmptyStateSection": {
-    "slug": "empty-state",
-    "storybook": "Documentation/Feedback/Empty State/Angular"
-  },
-  "pr-FancyBox (v19.1)": {
-    "slug": "fancybox",
-    "storybook": "Documentation/Structure/FancyBox/Angular"
-  },
-  "pr-Fieldset": {
-    "slug": "fieldset",
-    "storybook": "Documentation/Forms/Fieldset/Angular"
-  },
-  "pr-FileEntry (v19.3)": {
-    "slug": "fileentry",
-    "storybook": "Documentation/File/FileEntry/Angular"
-  },
-  "pr-FileUpload (v19.3)": {
-    "slug": "fileupload",
-    "storybook": "Documentation/File/FileUpload/Angular"
-  },
-  "pr-FilterBar (v19.2)": {
-    "slug": "filterbar",
-    "storybook": "Documentation/Forms/FiltersPills/FilterBar"
-  },
-  "pr-FilterPill (v19.2)": {
-    "slug": "filterpills",
-    "storybook": "Documentation/Forms/FiltersPills/FilterPills"
-  },
-  "pr-Footer": {
-    "slug": "footer",
-    "storybook": "Documentation/Structure/Footer/Angular"
-  },
-  "pr-FormField": {
-    "slug": "form-field",
-    "storybook": "Documentation/Forms/Fields"
-  },
-  "pr-FormLabel": null,
-  "pr-FormLayout": {
-    "slug": "assets-form-layout",
-    "storybook": "Documentation/Forms/Examples/Angular"
-  },
-  "pr-Gauge": {
-    "slug": "gauge",
-    "storybook": "Documentation/Loaders/Gauge/Angular"
-  },
-  "pr-HighlightData (v19.3)": {
-    "slug": "highlight-data",
-    "storybook": "Documentation/Structure/Highlight data/Angular"
-  },
-  "pr-HorizontalNavigation": {
-    "slug": "horizontalnavigation",
-    "storybook": "Documentation/Navigation/HorizontalNavigation"
-  },
-  "pr-Icon": {
-    "slug": "icons",
-    "storybook": "Documentation/Texts/Icons/Angular"
-  },
-  "pr-IndexTable": {
-    "slug": "index-table",
-    "storybook": "Documentation/Listings/Index Table/Angular"
-  },
-  "pr-InlineMessage": {
-    "slug": "inlinemessage",
-    "storybook": "Documentation/Forms/InlineMessage/Angular"
-  },
-  "pr-InputFramed (v20.1)": {
-    "slug": "input-framed",
-    "storybook": "Documentation/Forms/Input Framed/Angular"
-  },
-  "pr-Link": {
-    "slug": "link",
-    "storybook": "Documentation/Actions/Link/Angular"
-  },
-  "pr-Listing (v20.1)  🎉": {
-    "slug": "listing",
-    "storybook": "Documentation/Listings/Listing/Angular"
-  },
-  "pr-Loading": {
-    "slug": "loading",
-    "storybook": "Documentation/Loaders/Loading/Angular"
-  },
-  "pr-LuccaLogo": null,
-  "pr-MobileNavigation": {
-    "slug": "mobilenavigation",
-    "storybook": "Documentation/Navigation/MobileNavigation"
-  },
-  "pr-MobilePush (v20.1)": {
-    "slug": "mobile-push",
-    "storybook": "Documentation/Feedback/Mobile Push/Angular"
-  },
-  "pr-MultilanguageTextfield": {
-    "slug": "multilanguagefield",
-    "storybook": "Documentation/Forms/Fields/MultilanguageField/Angular"
-  },
-  "pr-NewBadge": {
-    "slug": "newbadge",
-    "storybook": "Documentation/Texts/NewBadge/Angular"
-  },
-  "pr-NumericBadge": {
-    "slug": "numericbadge",
-    "storybook": "Documentation/Texts/NumericBadge/Angular"
-  },
-  "pr-PageHeader": {
-    "slug": "pageheader",
-    "storybook": "Documentation/Structure/PageHeader/Angular"
-  },
-  "pr-Pagination": {
-    "slug": "pagination",
-    "storybook": "Documentation/Navigation/Pagination/Angular"
-  },
-  "pr-PhoneNumberField": {
-    "slug": "phonenumberfield",
-    "storybook": "Documentation/Forms/Fields/PhoneNumberField"
-  },
-  "pr-PLGPush": {
-    "slug": "plg-push",
-    "storybook": "Documentation/Feedback/PLG Push/Angular"
-  },
-  "pr-Popover": {
-    "slug": "popover",
-    "storybook": "Documentation/Overlays/Popover"
-  },
-  "pr-ProgressBar": {
-    "slug": "progress-bar",
-    "storybook": "Documentation/Loaders/Progress Bar/Angular"
-  },
-  "pr-Radio": {
-    "slug": "radiofield",
-    "storybook": "Documentation/Forms/Fields/RadioField/Angular"
-  },
-  "pr-RadioFieldset": {
-    "slug": "radiofield",
-    "storybook": "Documentation/Forms/Fields/RadioField/Angular"
-  },
-  "pr-ReadMore (v19.3)": {
-    "slug": "readmore",
-    "storybook": "Documentation/Texts/ReadMore/Angular"
-  },
-  "pr-ResourceCard (v21.0)  🧪": {
-    "slug": "resource-card",
-    "storybook": "Documentation/Structure/Resource Card/Angular"
-  },
-  "pr-ResourceCardWrapper (v21.0)  🧪": {
-    "slug": "resource-card",
-    "storybook": "Documentation/Structure/Resource Card/Angular"
-  },
-  "pr-RichTextfield (v19.3)": {
-    "slug": "richtextinput",
-    "storybook": "Documentation/Forms/Fields/RichTextInput/Angular"
-  },
-  "pr-SegmentedControl": {
-    "slug": "segmentedcontrol",
-    "storybook": "Documentation/Navigation/segmentedControl/Angular"
-  },
-  "pr-Select": [
-    {
-      "slug": "multi-select",
-      "storybook": "Documentation/Forms/Fields/Multi Select/Angular"
-    },
-    {
-      "slug": "simple-select",
-      "storybook": "Documentation/Forms/Fields/Simple Select/Angular"
-    }
-  ],
-  "pr-Skeleton": {
-    "slug": "skeleton",
-    "storybook": "Documentation/Loaders"
-  },
-  "pr-SkeletonButton (v18.1)": {
-    "slug": "skeleton-button",
-    "storybook": "Documentation/Loaders/Skeleton"
-  },
-  "pr-SkeletonFormField (v18.1)": {
-    "slug": "skeleton-field",
-    "storybook": "Documentation/Loaders/Skeleton/Skeleton Field"
-  },
-  "pr-SkeletonPageHeader (v18.1)": {
-    "slug": "skeleton-header",
-    "storybook": "Documentation/Loaders/Skeleton/Skeleton Header"
-  },
-  "pr-SoftwareIcon": {
-    "slug": "software-icon",
-    "storybook": "Documentation/Structure/Software icon/Angular"
-  },
-  "pr-SortableList": {
-    "slug": "sortable-list",
-    "storybook": "Documentation/Listings/Sortable List/Angular"
-  },
-  "pr-StatusBadge": {
-    "slug": "statusbadge",
-    "storybook": "Documentation/Texts/StatusBadge"
-  },
-  "pr-Switch": {
-    "slug": "switchfield",
-    "storybook": "Documentation/Forms/Fields/SwitchField/Angular"
-  },
-  "pr-Tag": {
-    "slug": "tags",
-    "storybook": "Documentation/Texts/Tags/Angular"
-  },
-  "pr-Textarea": {
-    "slug": "textareafield",
-    "storybook": "Documentation/Forms/Fields/TextAreaField/Angular"
-  },
-  "pr-Textfield": {
-    "slug": "textfield",
-    "storybook": "Documentation/Forms/Fields/TextField"
-  },
-  "pr-TextFlow (v19.2)": {
-    "slug": "text-flow",
-    "storybook": "Documentation/Texts/Text flow/Angular"
-  },
-  "pr-TimelineHorizontal": {
-    "slug": "timelines",
-    "storybook": "Documentation/Listings/Timelines"
-  },
-  "pr-TimelineVertical": {
-    "slug": "timelines",
-    "storybook": "Documentation/Listings/Timelines"
-  },
-  "pr-TimePicker": {
-    "slug": "time-picker",
-    "storybook": "Documentation/Forms/Time/Time Picker"
-  },
-  "pr-Toast": {
-    "slug": "toasts",
-    "storybook": "Documentation/Overlays/Toasts"
-  },
-  "pr-Toolbar  🚧": null,
-  "pr-Tooltip": {
-    "slug": "tooltip",
-    "storybook": "Documentation/Overlays/Tooltip"
-  },
-  "pr-UserPopover": {
-    "slug": "user-popover",
-    "storybook": "Documentation/Users/Popover/Angular"
-  },
-  "pr-UserTile": {
-    "slug": "tile",
-    "storybook": "Documentation/Users/Tile/Angular"
-  },
-  "pr-VerticalNavigation": {
-    "slug": "verticalnavigation",
-    "storybook": "Documentation/Navigation/VerticalNavigation/Angular"
-  },
-  "Scrollbar": {
-    "slug": "scrollbox",
-    "storybook": "Documentation/Structure/ScrollBox"
-  },
-  "SectionHeader  🚧": null,
-  "Slot": {
-    "slug": "float",
-    "storybook": "Documentation/Integration/Utilities"
-  },
-  "TemplateMail": null
+	"button": {
+		"storybookSlug": "button",
+		"storybookPath": "Documentation/Actions/Button/Angular",
+		"zeroheightPagePath": "098404",
+		"ngPackage": "button",
+		"figmaName": "pr-Button",
+		"figmaAliases": [
+			"pr-Button",
+			"pr-ButtonGroup"
+		],
+		"figmaNodeIds": [
+			"6854:42773",
+			"32845:165556"
+		],
+		"category": "Actions"
+	},
+	"link": {
+		"storybookSlug": "link",
+		"storybookPath": "Documentation/Actions/Link/Angular",
+		"zeroheightPagePath": "95303b",
+		"ngPackage": "link",
+		"figmaName": "pr-Link",
+		"figmaNodeIds": [
+			"3082:283"
+		],
+		"category": "Actions"
+	},
+	"breadcrumbs": {
+		"storybookSlug": "breadcrumbs",
+		"storybookPath": "Documentation/Navigation/Breadcrumbs/Angular",
+		"zeroheightPagePath": "691d7f",
+		"ngPackage": "breadcrumbs",
+		"figmaName": "pr-Breadcrumbs",
+		"figmaNodeIds": [
+			"3104:299"
+		],
+		"category": "Navigation"
+	},
+	"horizontalnavigation": {
+		"storybookSlug": "horizontalnavigation",
+		"storybookPath": "Documentation/Navigation/HorizontalNavigation",
+		"zeroheightPagePath": "29aaef",
+		"ngPackage": "horizontal-navigation",
+		"figmaName": "pr-HorizontalNavigation",
+		"figmaNodeIds": [
+			"3104:226"
+		],
+		"category": "Navigation"
+	},
+	"pagination": {
+		"storybookSlug": "pagination",
+		"storybookPath": "Documentation/Navigation/Pagination/Angular",
+		"zeroheightPagePath": "093a9c",
+		"ngPackage": "pagination",
+		"figmaName": "pr-Pagination",
+		"figmaNodeIds": [
+			"6671:42932"
+		],
+		"category": "Navigation"
+	},
+	"verticalnavigation": {
+		"storybookSlug": "verticalnavigation",
+		"storybookPath": "Documentation/Navigation/VerticalNavigation/Angular",
+		"zeroheightPagePath": "205934",
+		"ngPackage": "vertical-navigation",
+		"figmaName": "pr-VerticalNavigation",
+		"figmaNodeIds": [
+			"13580:1866"
+		],
+		"category": "Navigation"
+	},
+	"mobilenavigation": {
+		"storybookSlug": "mobilenavigation",
+		"storybookPath": "Documentation/Navigation/MobileNavigation",
+		"zeroheightPagePath": "337b80",
+		"ngPackage": "mobile-push",
+		"figmaName": "pr-MobileNavigation",
+		"figmaNodeIds": [
+			"8399:38417"
+		],
+		"category": "Navigation"
+	},
+	"segmentedcontrol": {
+		"storybookSlug": "segmentedcontrol",
+		"storybookPath": "Documentation/Navigation/segmentedControl/Angular",
+		"zeroheightPagePath": "88f854",
+		"ngPackage": "segmented-control",
+		"figmaName": "pr-SegmentedControl",
+		"figmaNodeIds": [
+			"17121:6916"
+		],
+		"category": "Navigation"
+	},
+	"timelines": {
+		"storybookSlug": "timelines",
+		"storybookPath": "Documentation/Listings/Timelines",
+		"zeroheightPagePath": "288e66",
+		"ngPackage": "time",
+		"figmaName": "pr-TimelineHorizontal",
+		"figmaAliases": [
+			"pr-TimelineHorizontal",
+			"pr-TimelineVertical"
+		],
+		"figmaNodeIds": [
+			"6238:37988",
+			"3746:26392"
+		],
+		"category": "Listings"
+	},
+	"avatar": {
+		"storybookSlug": "avatar",
+		"storybookPath": "Documentation/Users/Avatar/Angular",
+		"zeroheightPagePath": "42b330",
+		"ngPackage": "user",
+		"figmaName": "pr-Avatar",
+		"figmaAliases": [
+			"pr-Avatar",
+			"pr-AvatarWrapper (v17.3)"
+		],
+		"figmaNodeIds": [
+			"3107:7885",
+			"21429:36994"
+		],
+		"category": "Users"
+	},
+	"tile": {
+		"storybookSlug": "tile",
+		"storybookPath": "Documentation/Users/Tile/Angular",
+		"zeroheightPagePath": "56d611",
+		"ngPackage": "user",
+		"figmaName": "pr-UserTile",
+		"figmaNodeIds": [
+			"6053:35161"
+		],
+		"category": "Users"
+	},
+	"user-popover": {
+		"storybookSlug": "user-popover",
+		"storybookPath": "Documentation/Users/Popover/Angular",
+		"zeroheightPagePath": "85b183",
+		"ngPackage": "user-popover",
+		"figmaName": "pr-UserPopover",
+		"figmaNodeIds": [
+			"18202:1181"
+		],
+		"category": "Users"
+	},
+	"callout": {
+		"storybookSlug": "callout",
+		"storybookPath": "Documentation/Feedback/Callout/Angular",
+		"zeroheightPagePath": "64c8d8",
+		"ngPackage": "callout",
+		"figmaName": "pr-Callout",
+		"figmaNodeIds": [
+			"5882:32057"
+		],
+		"category": "Feedback"
+	},
+	"callout-disclosure": {
+		"storybookSlug": "callout-disclosure",
+		"storybookPath": "Documentation/Feedback/Callout Disclosure",
+		"zeroheightPagePath": "64c8d8",
+		"ngPackage": "callout",
+		"figmaName": "pr-CalloutDisclosure",
+		"figmaNodeIds": [
+			"14686:61370"
+		],
+		"category": "Feedback"
+	},
+	"callout-popover": {
+		"storybookSlug": "callout-popover",
+		"storybookPath": "Documentation/Feedback/Callout Popover",
+		"zeroheightPagePath": "64c8d8",
+		"ngPackage": "callout",
+		"figmaName": "pr-CalloutPopover",
+		"figmaNodeIds": [
+			"14695:2444"
+		],
+		"category": "Feedback"
+	},
+	"toasts": {
+		"storybookSlug": "toasts",
+		"storybookPath": "Documentation/Overlays/Toasts",
+		"zeroheightPagePath": "12eaab",
+		"ngPackage": "toast",
+		"figmaName": "pr-Toast",
+		"figmaNodeIds": [
+			"3101:970"
+		],
+		"category": "Feedback"
+	},
+	"empty-state": {
+		"storybookSlug": "empty-state",
+		"storybookPath": "Documentation/Feedback/Empty State/Angular",
+		"zeroheightPagePath": "49b0ef",
+		"ngPackage": "empty-state",
+		"figmaName": "pr-EmptyStateFull",
+		"figmaAliases": [
+			"pr-EmptyStateFull",
+			"pr-EmptyStateSection"
+		],
+		"figmaNodeIds": [
+			"21818:76675"
+		],
+		"category": "Feedback"
+	},
+	"gauge": {
+		"storybookSlug": "gauge",
+		"storybookPath": "Documentation/Loaders/Gauge/Angular",
+		"zeroheightPagePath": "75e507",
+		"ngPackage": "gauge",
+		"figmaName": "pr-Gauge",
+		"figmaNodeIds": [
+			"16861:2802"
+		],
+		"category": "Loaders"
+	},
+	"loading": {
+		"storybookSlug": "loading",
+		"storybookPath": "Documentation/Loaders/Loading/Angular",
+		"zeroheightPagePath": "91e25d",
+		"ngPackage": "loading",
+		"figmaName": "pr-Loading",
+		"figmaNodeIds": [
+			"6311:39280"
+		],
+		"category": "Loaders"
+	},
+	"progress-bar": {
+		"storybookSlug": "progress-bar",
+		"storybookPath": "Documentation/Loaders/Progress Bar/Angular",
+		"zeroheightPagePath": "916abd",
+		"ngPackage": "progress-bar",
+		"figmaName": "pr-ProgressBar",
+		"figmaNodeIds": [
+			"16861:21023"
+		],
+		"category": "Loaders"
+	},
+	"chip": {
+		"storybookSlug": "chip",
+		"storybookPath": "Documentation/Listings/Chip/Angular",
+		"zeroheightPagePath": "3960bc",
+		"ngPackage": "chip",
+		"figmaName": "pr-Chip",
+		"figmaNodeIds": [
+			"3098:3077"
+		],
+		"category": "Listings"
+	},
+	"data-table": {
+		"storybookSlug": "data-table",
+		"storybookPath": "Documentation/Listings/Data table/Angular",
+		"zeroheightPagePath": "4263a5",
+		"ngPackage": "data-table",
+		"figmaName": "pr-DataTable",
+		"figmaNodeIds": [
+			"23373:9022"
+		],
+		"category": "Listings"
+	},
+	"index-table": {
+		"storybookSlug": "index-table",
+		"storybookPath": "Documentation/Listings/Index Table/Angular",
+		"zeroheightPagePath": "24fc14",
+		"ngPackage": "index-table",
+		"figmaName": "pr-IndexTable",
+		"figmaNodeIds": [
+			"19654:99228"
+		],
+		"category": "Listings"
+	},
+	"listing": {
+		"storybookSlug": "listing",
+		"storybookPath": "Documentation/Listings/Listing/Angular",
+		"zeroheightPagePath": "170797",
+		"ngPackage": "listing",
+		"figmaName": "pr-Listing (v20.1)  🎉",
+		"figmaNodeIds": [
+			"28118:159096"
+		],
+		"category": "Listings",
+		"since": "20.1"
+	},
+	"sortable-list": {
+		"storybookSlug": "sortable-list",
+		"storybookPath": "Documentation/Listings/Sortable List/Angular",
+		"zeroheightPagePath": "883e34",
+		"ngPackage": "sortable-list",
+		"figmaName": "pr-SortableList",
+		"figmaNodeIds": [
+			"6174:37769"
+		],
+		"category": "Listings"
+	},
+	"divider": {
+		"storybookSlug": "divider",
+		"storybookPath": "Documentation/Structure/Divider/Angular",
+		"zeroheightPagePath": "22632c",
+		"ngPackage": "divider",
+		"figmaName": "pr-Divider",
+		"figmaNodeIds": [
+			"8487:40717"
+		],
+		"category": "Structure"
+	},
+	"pageheader": {
+		"storybookSlug": "pageheader",
+		"storybookPath": "Documentation/Structure/PageHeader/Angular",
+		"zeroheightPagePath": "6598e9",
+		"ngPackage": "page-header",
+		"figmaName": "pr-PageHeader",
+		"figmaNodeIds": [
+			"23985:434"
+		],
+		"category": "Structure"
+	},
+	"footer": {
+		"storybookSlug": "footer",
+		"storybookPath": "Documentation/Structure/Footer/Angular",
+		"zeroheightPagePath": "419504",
+		"ngPackage": "footer",
+		"figmaName": "pr-Footer",
+		"figmaNodeIds": [
+			"8394:35779"
+		],
+		"category": "Structure"
+	},
+	"fancybox": {
+		"storybookSlug": "fancybox",
+		"storybookPath": "Documentation/Structure/FancyBox/Angular",
+		"zeroheightPagePath": "19c95b",
+		"ngPackage": "fancy-box",
+		"figmaName": "pr-FancyBox (v19.1)",
+		"figmaNodeIds": [
+			"25658:1086"
+		],
+		"category": "Structure",
+		"since": "19.1"
+	},
+	"highlight-data": {
+		"storybookSlug": "highlight-data",
+		"storybookPath": "Documentation/Structure/Highlight data/Angular",
+		"zeroheightPagePath": "1827fe",
+		"ngPackage": "highlight-data",
+		"figmaName": "pr-HighlightData (v19.3)",
+		"figmaNodeIds": [
+			"28445:184862"
+		],
+		"category": "Structure",
+		"since": "19.3"
+	},
+	"app-layout": {
+		"storybookSlug": "app-layout",
+		"storybookPath": "Documentation/Structure/App Layout/Angular",
+		"zeroheightPagePath": "2615fa",
+		"ngPackage": "app-layout",
+		"figmaName": "pr-AppLayout (1600)",
+		"figmaAliases": [
+			"pr-AppLayout (1600)",
+			"pr-AppLayout (360)"
+		],
+		"figmaNodeIds": [
+			"29773:198942",
+			"21818:96550"
+		],
+		"extraStories": [
+			"Documentation/Structure/Main Layout/Angular"
+		],
+		"category": "Structure"
+	},
+	"resource-card": {
+		"storybookSlug": "resource-card",
+		"storybookPath": "Documentation/Structure/Resource Card/Angular",
+		"zeroheightPagePath": "44a682",
+		"ngPackage": "resource-card",
+		"figmaName": "pr-ResourceCard (v21.0)  🧪",
+		"figmaAliases": [
+			"pr-ResourceCard (v21.0)  🧪",
+			"pr-ResourceCardWrapper (v21.0)  🧪"
+		],
+		"figmaNodeIds": [
+			"33038:16815",
+			"33040:2908"
+		],
+		"category": "Structure",
+		"since": "21.0"
+	},
+	"bubble-icon": {
+		"storybookSlug": "bubble-icon",
+		"storybookPath": "Documentation/Structure/Bubble icon/Angular",
+		"zeroheightPagePath": "00d34a",
+		"ngPackage": "bubble-icon",
+		"figmaName": "pr-BubbleIcon",
+		"figmaNodeIds": [
+			"34491:9435"
+		],
+		"category": "Iconography"
+	},
+	"bubble-illustration": {
+		"storybookSlug": "bubble-illustration",
+		"storybookPath": "Documentation/Structure/Bubble illustration/Angular",
+		"zeroheightPagePath": "30a66f",
+		"ngPackage": "bubble-illustration",
+		"figmaName": "pr-BubbleIllustration",
+		"figmaNodeIds": [
+			"34491:9993"
+		],
+		"category": "Iconography"
+	},
+	"icons": {
+		"storybookSlug": "icons",
+		"storybookPath": "Documentation/Texts/Icons/Angular",
+		"zeroheightPagePath": "9826b3",
+		"ngPackage": "icon",
+		"figmaName": "pr-Icon",
+		"figmaNodeIds": [
+			"34358:9707"
+		],
+		"category": "Iconography"
+	},
+	"software-icon": {
+		"storybookSlug": "software-icon",
+		"storybookPath": "Documentation/Structure/Software icon/Angular",
+		"zeroheightPagePath": "37e39b",
+		"ngPackage": "software-icon",
+		"figmaName": "pr-SoftwareIcon",
+		"figmaNodeIds": [
+			"6053:34947"
+		],
+		"category": "Iconography"
+	},
+	"dialog": {
+		"storybookSlug": "dialog",
+		"storybookPath": "Documentation/Overlays/Dialog/Angular",
+		"zeroheightPagePath": "841b0b",
+		"ngPackage": "dialog",
+		"figmaName": "pr-Dialog",
+		"figmaAliases": [
+			"pr-Dialog",
+			"ConfirmationDialog",
+			"DeleteDialog",
+			"ExitDialog"
+		],
+		"figmaNodeIds": [
+			"5640:31604",
+			"28382:11798",
+			"28382:11460",
+			"28385:12057"
+		],
+		"category": "Overlays"
+	},
+	"dropdown": {
+		"storybookSlug": "dropdown",
+		"storybookPath": "Documentation/Overlays/Dropdown/Angular",
+		"zeroheightPagePath": "557682",
+		"ngPackage": "dropdown",
+		"figmaName": "pr-DropdownMenu",
+		"figmaNodeIds": [
+			"26837:32810"
+		],
+		"category": "Overlays"
+	},
+	"tooltip": {
+		"storybookSlug": "tooltip",
+		"storybookPath": "Documentation/Overlays/Tooltip",
+		"zeroheightPagePath": "9285d2",
+		"ngPackage": "tooltip",
+		"figmaName": "pr-Tooltip",
+		"figmaNodeIds": [
+			"5639:31388"
+		],
+		"category": "Overlays"
+	},
+	"popover": {
+		"storybookSlug": "popover",
+		"storybookPath": "Documentation/Overlays/Popover",
+		"zeroheightPagePath": "129fae",
+		"ngPackage": "popover2",
+		"figmaName": "pr-Popover",
+		"figmaNodeIds": [
+			"5742:31562"
+		],
+		"category": "Overlays"
+	},
+	"form-field": {
+		"storybookSlug": "form-field",
+		"storybookPath": "Documentation/Forms/Fields",
+		"zeroheightPagePath": "810797",
+		"ngPackage": "form-field",
+		"figmaName": "pr-FormField",
+		"figmaNodeIds": [
+			"28461:196506"
+		],
+		"category": "Forms"
+	},
+	"textfield": {
+		"storybookSlug": "textfield",
+		"storybookPath": "Documentation/Forms/Fields/TextField",
+		"zeroheightPagePath": "459eda",
+		"ngPackage": "input",
+		"figmaName": "pr-Textfield",
+		"figmaNodeIds": [
+			"6119:36364"
+		],
+		"category": "Forms"
+	},
+	"textareafield": {
+		"storybookSlug": "textareafield",
+		"storybookPath": "Documentation/Forms/Fields/TextAreaField/Angular",
+		"zeroheightPagePath": "60990a",
+		"ngPackage": "input",
+		"figmaName": "pr-Textarea",
+		"figmaNodeIds": [
+			"6119:39816"
+		],
+		"category": "Forms"
+	},
+	"simple-select": {
+		"storybookSlug": "simple-select",
+		"storybookPath": "Documentation/Forms/Fields/Simple Select/Angular",
+		"zeroheightPagePath": "587833",
+		"ngPackage": "simple-select",
+		"figmaName": "pr-Select",
+		"figmaNodeIds": [
+			"16134:2827"
+		],
+		"category": "Forms"
+	},
+	"multi-select": {
+		"storybookSlug": "multi-select",
+		"storybookPath": "Documentation/Forms/Fields/Multi Select/Angular",
+		"zeroheightPagePath": "927519",
+		"ngPackage": "multi-select",
+		"figmaName": "pr-Select",
+		"figmaNodeIds": [
+			"16134:2827"
+		],
+		"category": "Forms"
+	},
+	"checkbox": {
+		"storybookSlug": "checkbox",
+		"storybookPath": "Documentation/Forms/FiltersPills/Checkbox",
+		"zeroheightPagePath": "42c88e",
+		"ngPackage": "form-field",
+		"figmaName": "pr-Checkbox",
+		"figmaAliases": [
+			"pr-Checkbox",
+			"pr-CheckboxFieldset"
+		],
+		"figmaNodeIds": [
+			"20037:372",
+			"20185:80419"
+		],
+		"category": "Forms"
+	},
+	"radiofield": {
+		"storybookSlug": "radiofield",
+		"storybookPath": "Documentation/Forms/Fields/RadioField/Angular",
+		"zeroheightPagePath": "45f82a",
+		"ngPackage": "form-field",
+		"figmaName": "pr-Radio",
+		"figmaAliases": [
+			"pr-Radio",
+			"pr-RadioFieldset"
+		],
+		"figmaNodeIds": [
+			"20115:1600",
+			"20185:81361"
+		],
+		"category": "Forms"
+	},
+	"switchfield": {
+		"storybookSlug": "switchfield",
+		"storybookPath": "Documentation/Forms/Fields/SwitchField/Angular",
+		"zeroheightPagePath": "39c7b7",
+		"ngPackage": "form-field",
+		"figmaName": "pr-Switch",
+		"figmaNodeIds": [
+			"20183:78344"
+		],
+		"category": "Forms"
+	},
+	"dateinput": {
+		"storybookSlug": "dateinput",
+		"storybookPath": "Documentation/Forms/Date2/DateInput",
+		"zeroheightPagePath": "87a48d",
+		"ngPackage": "date2",
+		"figmaName": "pr-DatePicker",
+		"figmaNodeIds": [
+			"6119:38876"
+		],
+		"category": "Forms"
+	},
+	"daterangeinput": {
+		"storybookSlug": "daterangeinput",
+		"storybookPath": "Documentation/Forms/Date2/DateRangeInput",
+		"zeroheightPagePath": "00bf9b",
+		"ngPackage": "date2",
+		"figmaName": "pr-DateRangePicker (v19.1)",
+		"figmaNodeIds": [
+			"24071:83969"
+		],
+		"category": "Forms",
+		"since": "19.1"
+	},
+	"calendar": {
+		"storybookSlug": "calendar",
+		"storybookPath": "Documentation/Forms/Date",
+		"zeroheightPagePath": "76c144",
+		"ngPackage": "date",
+		"figmaName": "pr-Calendar",
+		"figmaNodeIds": [
+			"24071:83910"
+		],
+		"category": "Forms"
+	},
+	"duration-picker": {
+		"storybookSlug": "duration-picker",
+		"storybookPath": "Documentation/Forms/Time/Duration Picker",
+		"zeroheightPagePath": "2473a1",
+		"ngPackage": "time",
+		"figmaName": "pr-DurationPicker",
+		"figmaNodeIds": [
+			"8221:36924"
+		],
+		"category": "Forms"
+	},
+	"time-picker": {
+		"storybookSlug": "time-picker",
+		"storybookPath": "Documentation/Forms/Time/Time Picker",
+		"zeroheightPagePath": "2473a1",
+		"ngPackage": "time",
+		"figmaName": "pr-TimePicker",
+		"figmaNodeIds": [
+			"20952:3023"
+		],
+		"category": "Forms"
+	},
+	"fieldset": {
+		"storybookSlug": "fieldset",
+		"storybookPath": "Documentation/Forms/Fieldset/Angular",
+		"zeroheightPagePath": "431e99",
+		"ngPackage": "form-field",
+		"figmaName": "pr-Fieldset",
+		"figmaNodeIds": [
+			"35511:3867"
+		],
+		"category": "Forms"
+	},
+	"inlinemessage": {
+		"storybookSlug": "inlinemessage",
+		"storybookPath": "Documentation/Forms/InlineMessage/Angular",
+		"zeroheightPagePath": "43a580",
+		"ngPackage": "inline-message",
+		"figmaName": "pr-InlineMessage",
+		"figmaNodeIds": [
+			"5743:32741"
+		],
+		"category": "Forms"
+	},
+	"input-framed": {
+		"storybookSlug": "input-framed",
+		"storybookPath": "Documentation/Forms/Input Framed/Angular",
+		"zeroheightPagePath": "28896d",
+		"ngPackage": "input",
+		"figmaName": "pr-InputFramed (v20.1)",
+		"figmaNodeIds": [
+			"29856:17750"
+		],
+		"category": "Forms",
+		"since": "20.1"
+	},
+	"color-picker": {
+		"storybookSlug": "color-picker",
+		"storybookPath": "Documentation/Forms/Fields/Color Picker",
+		"zeroheightPagePath": "16e1d1",
+		"ngPackage": "color",
+		"figmaName": "pr-ColorPicker",
+		"figmaNodeIds": [
+			"34491:7795"
+		],
+		"category": "Forms"
+	},
+	"multilanguagefield": {
+		"storybookSlug": "multilanguagefield",
+		"storybookPath": "Documentation/Forms/Fields/MultilanguageField/Angular",
+		"zeroheightPagePath": "5428d4",
+		"ngPackage": "input",
+		"figmaName": "pr-MultilanguageTextfield",
+		"figmaNodeIds": [
+			"23179:39143"
+		],
+		"category": "Forms"
+	},
+	"phonenumberfield": {
+		"storybookSlug": "phonenumberfield",
+		"storybookPath": "Documentation/Forms/Fields/PhoneNumberField",
+		"zeroheightPagePath": "896abf",
+		"ngPackage": "input",
+		"figmaName": "pr-PhoneNumberField",
+		"figmaNodeIds": [
+			"18201:22261"
+		],
+		"category": "Forms"
+	},
+	"fileupload": {
+		"storybookSlug": "fileupload",
+		"storybookPath": "Documentation/File/FileUpload/Angular",
+		"zeroheightPagePath": "8282a5",
+		"ngPackage": "file-upload",
+		"figmaName": "pr-FileUpload (v19.3)",
+		"figmaNodeIds": [
+			"28445:192983"
+		],
+		"category": "Forms",
+		"since": "19.3"
+	},
+	"fileentry": {
+		"storybookSlug": "fileentry",
+		"storybookPath": "Documentation/File/FileEntry/Angular",
+		"zeroheightPagePath": "8282a5",
+		"ngPackage": "file-upload",
+		"figmaName": "pr-FileEntry (v19.3)",
+		"figmaNodeIds": [
+			"28445:189464"
+		],
+		"category": "Forms",
+		"since": "19.3"
+	},
+	"richtextinput": {
+		"storybookSlug": "richtextinput",
+		"storybookPath": "Documentation/Forms/Fields/RichTextInput/Angular",
+		"zeroheightPagePath": "92f33b",
+		"ngPackage": "input",
+		"figmaName": "pr-RichTextfield (v19.3)",
+		"figmaNodeIds": [
+			"6946:36398"
+		],
+		"category": "Forms",
+		"since": "19.3"
+	},
+	"data-presentation": {
+		"storybookSlug": "data-presentation",
+		"storybookPath": "Documentation/Forms/Data Presentation/Angular",
+		"zeroheightPagePath": "02bfb1",
+		"ngPackage": "form-field",
+		"figmaName": "pr-DataPresentation (v21.1)  🎉",
+		"figmaNodeIds": [
+			"34358:99807"
+		],
+		"category": "Forms",
+		"since": "21.1"
+	},
+	"filterbar": {
+		"storybookSlug": "filterbar",
+		"storybookPath": "Documentation/Forms/FiltersPills/FilterBar",
+		"zeroheightPagePath": "13044b",
+		"ngPackage": "filter-pills",
+		"figmaName": "pr-FilterBar (v19.2)",
+		"figmaNodeIds": [
+			"26824:221177"
+		],
+		"category": "Forms",
+		"since": "19.2"
+	},
+	"filterpills": {
+		"storybookSlug": "filterpills",
+		"storybookPath": "Documentation/Forms/FiltersPills/FilterPills",
+		"zeroheightPagePath": "053be4",
+		"ngPackage": "filter-pills",
+		"figmaName": "pr-FilterPill (v19.2)",
+		"figmaNodeIds": [
+			"26824:178929"
+		],
+		"category": "Forms",
+		"since": "19.2"
+	},
+	"clear": {
+		"storybookSlug": "clear",
+		"storybookPath": "Documentation/Texts/Clear/Angular",
+		"zeroheightPagePath": "80fb2d",
+		"ngPackage": "clear",
+		"figmaName": "pr-Clear",
+		"figmaNodeIds": [
+			"5748:32069"
+		],
+		"category": "Forms"
+	},
+	"comment": {
+		"storybookSlug": "comment",
+		"storybookPath": "Documentation/Texts/Comment/Angular",
+		"zeroheightPagePath": "08238a",
+		"ngPackage": "comment",
+		"figmaName": "pr-Comment",
+		"figmaNodeIds": [
+			"18702:2533"
+		],
+		"category": "Texts"
+	},
+	"newbadge": {
+		"storybookSlug": "newbadge",
+		"storybookPath": "Documentation/Texts/NewBadge/Angular",
+		"zeroheightPagePath": "36bcdf",
+		"ngPackage": "new-badge",
+		"figmaName": "pr-NewBadge",
+		"figmaNodeIds": [
+			"8174:35724"
+		],
+		"category": "Texts"
+	},
+	"numericbadge": {
+		"storybookSlug": "numericbadge",
+		"storybookPath": "Documentation/Texts/NumericBadge/Angular",
+		"zeroheightPagePath": "0548ef",
+		"ngPackage": "numeric-badge",
+		"figmaName": "pr-NumericBadge",
+		"figmaNodeIds": [
+			"3200:26461"
+		],
+		"category": "Texts"
+	},
+	"statusbadge": {
+		"storybookSlug": "statusbadge",
+		"storybookPath": "Documentation/Texts/StatusBadge",
+		"zeroheightPagePath": "425d98",
+		"ngPackage": "status-badge",
+		"figmaName": "pr-StatusBadge",
+		"figmaAliases": [
+			"pr-StatusBadge",
+			"pr-DotBadge"
+		],
+		"figmaNodeIds": [
+			"6141:36860",
+			"13369:11929"
+		],
+		"category": "Texts"
+	},
+	"tags": {
+		"storybookSlug": "tags",
+		"storybookPath": "Documentation/Texts/Tags/Angular",
+		"zeroheightPagePath": "6036ad",
+		"ngPackage": "tag",
+		"figmaName": "pr-Tag",
+		"figmaNodeIds": [
+			"7765:34927"
+		],
+		"category": "Texts"
+	},
+	"text-flow": {
+		"storybookSlug": "text-flow",
+		"storybookPath": "Documentation/Texts/Text flow/Angular",
+		"zeroheightPagePath": "51e878",
+		"ngPackage": "text-flow",
+		"figmaName": "pr-TextFlow (v19.2)",
+		"figmaNodeIds": [
+			"30462:137476"
+		],
+		"category": "Texts",
+		"since": "19.2"
+	},
+	"readmore": {
+		"storybookSlug": "readmore",
+		"storybookPath": "Documentation/Texts/ReadMore/Angular",
+		"zeroheightPagePath": "5054f0",
+		"ngPackage": "read-more",
+		"figmaName": "pr-ReadMore (v19.3)",
+		"figmaNodeIds": [
+			"27984:1100"
+		],
+		"category": "Texts",
+		"since": "19.3"
+	},
+	"mobile-push": {
+		"storybookSlug": "mobile-push",
+		"storybookPath": "Documentation/Feedback/Mobile Push/Angular",
+		"zeroheightPagePath": "268432",
+		"ngPackage": "mobile-push",
+		"figmaName": "pr-MobilePush (v20.1)",
+		"figmaNodeIds": [
+			"29907:397"
+		],
+		"category": "Feedback",
+		"since": "20.1"
+	},
+	"plg-push": {
+		"storybookSlug": "plg-push",
+		"storybookPath": "Documentation/Feedback/PLG Push/Angular",
+		"zeroheightPagePath": "6035eb",
+		"ngPackage": "plg-push",
+		"figmaName": "pr-PLGPush",
+		"figmaNodeIds": [
+			"22031:14975"
+		],
+		"category": "Feedback"
+	},
+	"skeleton": {
+		"storybookSlug": "skeleton",
+		"storybookPath": "Documentation/Loaders",
+		"zeroheightPagePath": "4819e2",
+		"ngPackage": "skeleton",
+		"figmaName": "pr-Skeleton",
+		"figmaAliases": [
+			"pr-Skeleton",
+			"pr-SkeletonButton (v18.1)",
+			"pr-SkeletonFormField (v18.1)",
+			"pr-SkeletonPageHeader (v18.1)"
+		],
+		"figmaNodeIds": [
+			"19475:8986",
+			"21713:46941",
+			"21713:46919",
+			"21713:46912"
+		],
+		"category": "Loaders"
+	},
+	"scrollbox": {
+		"storybookSlug": "scrollbox",
+		"storybookPath": "Documentation/Structure/ScrollBox",
+		"zeroheightPagePath": "866ad0",
+		"ngPackage": "scroll-box",
+		"figmaName": "Scrollbar",
+		"figmaNodeIds": [
+			"3200:27007"
+		],
+		"category": "Structure"
+	},
+	"box": {
+		"storybookSlug": "box",
+		"storybookPath": "Documentation/Structure/Box/Angular",
+		"zeroheightPagePath": "1926ca",
+		"ngPackage": "box",
+		"category": "Structure"
+	},
+	"card": {
+		"storybookSlug": "cards",
+		"storybookPath": "Documentation/Structure/Cards",
+		"zeroheightPagePath": "878482",
+		"category": "Structure"
+	},
+	"section": {
+		"storybookSlug": "sections",
+		"storybookPath": "Documentation/Structure/Sections",
+		"zeroheightPagePath": "799d1e",
+		"category": "Structure"
+	},
+	"container": {
+		"storybookSlug": "container",
+		"storybookPath": "Documentation/Structure/Container/Angular",
+		"zeroheightPagePath": "453b4f",
+		"ngPackage": "container",
+		"category": "Structure"
+	},
+	"grid": {
+		"storybookSlug": "grids",
+		"storybookPath": "Documentation/Structure/Grids/Angular",
+		"zeroheightPagePath": "955d69",
+		"ngPackage": "grid",
+		"category": "Structure"
+	},
+	"mobile-header": {
+		"storybookSlug": "mobileheader",
+		"storybookPath": "Documentation/Structure/MobileHeader",
+		"zeroheightPagePath": "6771ab",
+		"category": "Structure"
+	},
+	"modal": {
+		"storybookSlug": "modal",
+		"storybookPath": "Documentation/Overlays/Modal",
+		"zeroheightPagePath": "4068ed",
+		"ngPackage": "modal",
+		"category": "Overlays"
+	},
+	"fancy-dialog": {
+		"storybookSlug": "dialog",
+		"storybookPath": "Documentation/Overlays/Dialog",
+		"zeroheightPagePath": "32b1a9",
+		"ngPackage": "dialog",
+		"category": "Overlays"
+	},
+	"form-label": {
+		"storybookSlug": "form-label",
+		"storybookPath": "Documentation/Forms/Form Label/Angular",
+		"zeroheightPagePath": "3491a2",
+		"ngPackage": "form-label",
+		"category": "Formulaires"
+	},
+	"form-layout": {
+		"zeroheightPagePath": "36780d",
+		"category": "Formulaires"
+	},
+	"listbox": {
+		"storybookSlug": "listbox-option",
+		"storybookPath": "Documentation/Forms/Listbox Option/Angular",
+		"zeroheightPagePath": "005487",
+		"ngPackage": "listbox",
+		"category": "Formulaires"
+	},
+	"activity-feed": {
+		"storybookSlug": "activity-feed",
+		"storybookPath": "Documentation/Listings/Activity feed/Angular",
+		"zeroheightPagePath": "3541ee",
+		"ngPackage": "activity-feed",
+		"category": "Listes"
+	},
+	"code": {
+		"storybookSlug": "code",
+		"storybookPath": "Documentation/Texts/Code/Angular",
+		"zeroheightPagePath": "85d53c",
+		"ngPackage": "code",
+		"category": "Textes"
+	},
+	"title-and-text": {
+		"storybookSlug": "text",
+		"storybookPath": "Documentation/Texts/Text",
+		"zeroheightPagePath": "021fef",
+		"ngPackage": "title",
+		"category": "Textes"
+	},
+	"display-name": {
+		"storybookSlug": "display",
+		"storybookPath": "Documentation/Users/Display",
+		"zeroheightPagePath": "05750c",
+		"category": "Users"
+	},
+	"error-page": {
+		"storybookSlug": "errorpage",
+		"storybookPath": "Documentation/Feedback/ErrorPage/Angular",
+		"zeroheightPagePath": "1622d2",
+		"ngPackage": "error-page",
+		"category": "Feedbacks"
+	},
+	"onboarding-empty-state": {
+		"storybookSlug": "empty-state",
+		"storybookPath": "Documentation/Feedback/Empty State/Angular",
+		"zeroheightPagePath": "9490c7",
+		"ngPackage": "empty-state",
+		"category": "Feedbacks"
+	},
+	"section-empty-state": {
+		"storybookSlug": "empty-state",
+		"storybookPath": "Documentation/Feedback/Empty State/Angular",
+		"zeroheightPagePath": "97ca09",
+		"ngPackage": "empty-state",
+		"category": "Feedbacks"
+	},
+	"table-of-content": {
+		"storybookSlug": "tableofcontent",
+		"storybookPath": "Documentation/Navigation/TableOfContent/Angular",
+		"zeroheightPagePath": "05ca4d",
+		"ngPackage": "table-of-content",
+		"category": "Navigation"
+	},
+	"skip-links": {
+		"storybookSlug": "skiplinks",
+		"storybookPath": "Documentation/Navigation/SkipLinks",
+		"zeroheightPagePath": "48aefc",
+		"ngPackage": "a11y",
+		"category": "Navigation"
+	},
+	"progress-stepper": {
+		"storybookSlug": "progress-stepper",
+		"storybookPath": "Documentation/Progress stepper/Angular",
+		"zeroheightPagePath": "8211e2",
+		"ngPackage": "progress-stepper",
+		"category": "Navigation"
+	},
+	"side-navigation": {
+		"zeroheightPagePath": "160093",
+		"category": "Navigation"
+	}
 }

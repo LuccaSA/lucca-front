@@ -1,8 +1,19 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+
 .css-vars {
 	background-color: var(--palettes-neutral-25);
 	color: var(--palettes-product-500);
 	text-decoration-color: var(--palettes-lucca-0);
 	-webkit-text-fill-color: var(--palettes-critical-0);
+}
+
+.rgba-vars {
+	background-color: color.transparentize(var(--palettes-neutral-900), 0.04);
+	border-color: color.transparentize(var(--palettes-neutral-400), 0.5);
+	color: var(--palettes-neutral-400);
+	text-decoration-color: color.transparentize(var(--palettes-neutral-0), 0.3);
+	-webkit-text-fill-color: rgba(var(--colors-neutral-400-rgb), 1);
+	color-scheme: var(--palettes-neutral-400);
 }
 
 
