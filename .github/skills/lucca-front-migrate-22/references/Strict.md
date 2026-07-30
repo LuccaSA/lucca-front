@@ -208,7 +208,7 @@ dialogRef.instance.reload(); // narrowing acquis
 
 ## 7. Checklist de migration côté consommateur
 
-1. **Ne pas activer `strict` d'un bloc.** Empiler les flags un par un : `noImplicitAny` → `strictNullChecks` → `strictTemplates`. Ils font ressortir les `any` implicites (`$event`, items non typés) *puis* les accès nuls sur les APIs LF — les mélanger rend le diagnostic illisible.
+1. **Conserver la configuration TypeScript existante.** Ne pas activer `noImplicitAny`, `strictNullChecks`, `strictTemplates` ou `strict` dans le cadre de cette migration : traiter uniquement les erreurs LF 22 produites avec les flags déjà activés dans le projet. Durcir le `tsconfig` ferait remonter un volume d'erreurs sans rapport avec LF 22, hors périmètre d'une migration à iso-comportement. Si le projet n'est pas strict, les points 2 à 9 ci-dessous ne remonteront quasiment rien — c'est attendu, et le vrai travail est alors le §5 (changements de comportement), à auditer dans tous les cas.
 2. **Recenser les classes qui héritent de LF** — c'est la source des erreurs les plus coûteuses :
    ```bash
    grep -rnE 'extends\s+(ALuInput|ALuSelectInput|ALuSelectInputComponent|ALuDateAdapter|ALuPopupRef|ALuPopoverTrigger|BasePickerComponent|AbstractDateComponent)\b' src/

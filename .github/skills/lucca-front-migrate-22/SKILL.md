@@ -117,7 +117,7 @@ Marche à suivre :
 
 1. **Lancer le build (et le lint) d'abord**, avant toute retouche — c'est lui qui définit la liste de travail. Voir Étape 6 pour les commandes.
 2. **Pour chaque erreur remontée**, identifier l'axe et n'ouvrir que la référence correspondante :
-	- **Strict / API nullable** — les `.d.ts` de LF 22 sont émis avec `strictNullChecks` → [Strict.md](./references/Strict.md) (signatures élargies, ordre d'activation des flags).
+	- **Strict / API nullable** — les `.d.ts` de LF 22 sont émis avec `strictNullChecks` → [Strict.md](./references/Strict.md) (signatures élargies). **Ne jamais durcir le `tsconfig` du projet** (`noImplicitAny`, `strictNullChecks`, `strictTemplates`, `strict`) : on corrige uniquement ce que les flags déjà activés font remonter.
 	- **Propriétés `readonly`** — les propriétés de classe LF ne sont plus réassignables → [Readonly.md](./references/Readonly.md).
 	- **Inputs / outputs / refs en signaux** — inventaire des membres convertis, renommés ou supprimés par entrypoint → [Signal.md](./references/Signal.md).
 3. **Corriger au plus juste** : la modification minimale qui lève l'erreur, dans le fichier qui la porte. Ne pas élargir au reste du fichier ni aux fichiers voisins qui compilent.
