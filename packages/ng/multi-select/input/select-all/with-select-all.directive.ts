@@ -41,12 +41,13 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly singleRemainingOption = computed<TValue | undefined>(() => {
 		const options = this.#options();
 
-		if (this.#mode() !== 'exclude' || options.length !== this.totalCount()) {
+		const excludedValues = this.#values();
+
+		if (this.#mode() !== 'exclude' || options.length !== this.totalCount() || options.length - excludedValues.length !== 1) {
 			return undefined;
 		}
 
-		const remainingOptions = options.filter((option) => !this.#values().some((excluded) => this.select.optionComparer(excluded, option)));
-		return remainingOptions.length === 1 ? remainingOptions[0] : undefined;
+		return options.find((option) => !excludedValues.some((excluded) => this.select.optionComparer(excluded, option)));
 	});
 
 	// only show panel header when no clue && values not empty
