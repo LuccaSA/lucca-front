@@ -3,6 +3,7 @@ import { ComponentFixture, MetadataOverride, TestBed } from '@angular/core/testi
 import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { isNotNil } from '@lucca-front/ng/core';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
+import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { vi } from 'vitest';
 import { TestEntity, runALuSelectInputComponentTestSuite } from '../../core-select/input/select-input.component.spec';
 import { LuMultiSelection } from '../select.model';
@@ -47,6 +48,22 @@ class MultiSelectFormControlHostComponent {
 	options: TestEntity[] = options;
 }
 
+@Component({
+	selector: 'lu-multi-select-filter-pill-host',
+	imports: [FormsModule, FilterPillComponent, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-filter-pill label="Filter">
+			<lu-multi-select [ngModel]="selection" [options]="options" withSelectAll withSelectAllDisplayerLabel="items" [totalCount]="options.length" />
+		</lu-filter-pill>
+	`,
+})
+class MultiSelectFilterPillHostComponent {
+	selection: LuMultiSelection<TestEntity> = { mode: 'none' };
+
+	options: TestEntity[] = options;
+}
+
 describe('LuMultiSelectInputComponent', () => {
 	let fixture: ComponentFixture<LuMultiSelectInputComponent<Entity>>;
 	let searchControl: FormControl;
@@ -55,7 +72,7 @@ describe('LuMultiSelectInputComponent', () => {
 		searchControl = new FormControl();
 
 		TestBed.configureTestingModule({
-			imports: [LuMultiSelectInputComponent, MultiSelectFormControlHostComponent, MultiSelectNgModelHostComponent],
+			imports: [LuMultiSelectInputComponent, MultiSelectFormControlHostComponent, MultiSelectNgModelHostComponent, MultiSelectFilterPillHostComponent],
 			providers: [
 				// The input inside the displayer needs a NgControl
 				{
@@ -383,6 +400,35 @@ describe('LuMultiSelectInputComponent', () => {
 
 				// Assert
 				expect(emittedSelectValues).toEqual([{ mode: 'none' }]);
+			});
+		});
+
+		describe('filter pill single remaining option displayer', () => {
+			async function createFilterPillHost(selection: LuMultiSelection<TestEntity>): Promise<ComponentFixture<MultiSelectFilterPillHostComponent>> {
+				const hostFixture = TestBed.createComponent(MultiSelectFilterPillHostComponent);
+				hostFixture.componentInstance.selection = selection;
+				hostFixture.detectChanges();
+				// NgModel writes the value asynchronously
+				await hostFixture.whenStable();
+				hostFixture.detectChanges();
+				return hostFixture;
+			}
+
+			it('should display the remaining option in the filter pill when a single option remains selected in exclude mode', async () => {
+				// Act
+				const hostFixture = await createFilterPillHost({ mode: 'exclude', values: options.slice(1) });
+
+				// Assert
+				const chip = (hostFixture.nativeElement as HTMLElement).querySelector('.multipleSelect-pill-displayer-chip');
+				expect(chip?.textContent?.trim()).toContain(options[0].name);
+			});
+
+			it('should not display the single option chip in the filter pill when several options remain selected in exclude mode', async () => {
+				// Act
+				const hostFixture = await createFilterPillHost({ mode: 'exclude', values: [options[0]] });
+
+				// Assert
+				expect((hostFixture.nativeElement as HTMLElement).querySelector('.multipleSelect-pill-displayer-chip')).toBeNull();
 			});
 		});
 	});
