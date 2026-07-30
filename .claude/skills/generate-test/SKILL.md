@@ -151,7 +151,7 @@ describe('MyApiService', () => {
 Le pattern canonique du repo est un **host component wrapper** qui pilote la cible via ses inputs et un template, puis on inspecte l'état ou le DOM. Pour les inputs signal, utiliser `fixture.componentRef.setInput('name', value)` — **jamais** en affectant la propriété directement.
 
 ```typescript
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
 import { MyComponent } from './my.component';
@@ -159,11 +159,12 @@ import { MyComponent } from './my.component';
 @Component({
 	selector: 'lu-my-test',
 	imports: [MyComponent],
-	template: `<lu-my [label]="label" />`,
+	template: `<lu-my [label]="label()" />`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {
-	label = 'hello';
+	// input() sur le host : c'est lui que `fixture.componentRef.setInput` pilote
+	label = input('hello');
 	cmp = viewChild.required(MyComponent);
 }
 
@@ -186,7 +187,7 @@ describe(MyComponent.name, () => {
 		// Arrange
 		fixture.detectChanges();
 		// Act
-		fixture.componentRef.setInput('label', 'world'); // si l'input est sur le host, réassigner puis detectChanges
+		fixture.componentRef.setInput('label', 'world'); // input du host, propagé à lu-my via le template
 		fixture.detectChanges();
 		// Assert
 		await vi.waitFor(() => expect((fixture.nativeElement as HTMLElement).textContent).toContain('world'));
@@ -206,7 +207,7 @@ Notes composant :
 - Requêtes DOM : `(fixture.nativeElement as HTMLElement).querySelector('[data-testid="…"]')`, ou `fixture.debugElement.query(By.css(…))`. Préférer les sélecteurs de rôle/`data-testid` aux classes CSS internes.
 - Après une mutation : `fixture.detectChanges()`. Pour l'asynchrone : `await fixture.whenStable()`, `await vi.waitFor(() => …)`, ou `fakeAsync` + `tick()` quand il faut contrôler le temps (timers, debounce). Modèle `fakeAsync` : `packages/ng/date2/date-input/date-input.component.spec.ts`.
 - Formulaires : monter la cible avec un `FormControl` dans le host (`ReactiveFormsModule`) et asserter `formControl.value` / `formControl.errors` (voir `form-field.component.spec.ts`, `date-input.component.spec.ts`).
-- Pour des scénarios orientés interaction/accessibilité, `@testing-library/angular` (`render`, `screen`, `userEvent`) et `jest-axe` (`axe`) sont disponibles (voir `packages/ng/api/api.spec.ts`).
+- Pour des scénarios orientés interaction/accessibilité, `@testing-library/angular` (`render`, `screen`), `@testing-library/user-event` (`userEvent`) et `jest-axe` (`axe`) sont disponibles (voir `packages/ng/api/api.spec.ts`).
 
 ### 6. Directive
 
