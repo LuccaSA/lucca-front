@@ -5,7 +5,7 @@
 	(focus)="focus()"
 	(blur)="blur()"
 	[multiple]="props['multiple']"
-	[placeholder]="props.placeholder"
+	[placeholder]="props.placeholder ?? ''"
 >
 	<ng-container *luDisplayer="let option">
 		<span [class.chip]="props['multiple']" [class.mod-unkillable]="props['multiple']"

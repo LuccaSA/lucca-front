@@ -31,7 +31,7 @@ export class LuInputDirective implements OnInit {
 		}
 	}
 	ngOnInit() {
-		this._ngControl.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((v) => this.applyClasses(v));
+		this._ngControl.valueChanges?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((v) => this.applyClasses(v));
 		const val: unknown = this._ngControl.value;
 		this.applyClasses(val);
 	}

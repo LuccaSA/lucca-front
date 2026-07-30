@@ -14,43 +14,45 @@
 			</div>
 		}
 		<div class="lu-picker-content-option">
-			@if (grouping() && groupTemplateLocation() === "group-header") {
-				@for (group of dataSourceOptions() | luOptionGroup: grouping().selector; track group.key; let groupIndex = $index) {
-					<div class="lu-picker-content-group" role="group" attr.aria-labelledby="lu-select-{{ selectId }}-group-{{ groupIndex }}">
-						@let groupCtx = group.options | luOptionsGroupContext: selectedOptions : optionComparer();
-						<div
-							luCoreSelectPanelElement
-							elementId="lu-select-{{ selectId }}-group-{{ groupIndex }}"
-							class="lu-picker-content-option-group-title"
-							role="presentation"
-							(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
-						>
-							<span #groupingTitleRef>
-								<ng-container *luPortal="grouping().content; context: { $implicit: group }" />
-							</span>
+			@if (grouping(); as grouping) {
+				@if (groupTemplateLocation() === "group-header") {
+					@for (group of dataSourceOptions() | luOptionGroup: grouping.selector; track group.key; let groupIndex = $index) {
+						<div class="lu-picker-content-group" role="group" attr.aria-labelledby="lu-select-{{ selectId }}-group-{{ groupIndex }}">
+							@let groupCtx = group.options | luOptionsGroupContext: selectedOptions : optionComparer();
+							<div
+								luCoreSelectPanelElement
+								elementId="lu-select-{{ selectId }}-group-{{ groupIndex }}"
+								class="lu-picker-content-option-group-title"
+								role="presentation"
+								(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
+							>
+								<span #groupingTitleRef>
+									<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
+								</span>
 
-							@if (someGroupOptionEnabled()(group.options)) {
-								<button
-									type="button"
-									class="link"
-									[disabled]="groupLoadingKeys().has(group.key)"
-									(click)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
-									[id]="selectId + '-group-' + group.key"
-								>
-									@if (groupLoadingKeys().has(group.key)) {
-										<span class="loading"></span>
-									} @else {
-										<span class="pr-u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span
-										>{{ groupCtx.isGroupSelected ? intl().unselectAll : intl().selectAll }}
-									}
-								</button>
-							}
+								@if (someGroupOptionEnabled()(group.options)) {
+									<button
+										type="button"
+										class="link"
+										[disabled]="groupLoadingKeys().has(group.key)"
+										(click)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
+										[id]="selectId + '-group-' + group.key"
+									>
+										@if (groupLoadingKeys().has(group.key)) {
+											<span class="loading"></span>
+										} @else {
+											<span class="pr-u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span
+											>{{ groupCtx.isGroupSelected ? intl().unselectAll : intl().selectAll }}
+										}
+									</button>
+								}
+							</div>
+							<ng-template
+								[ngTemplateOutlet]="optionsList"
+								[ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }"
+							/>
 						</div>
-						<ng-template
-							[ngTemplateOutlet]="optionsList"
-							[ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }"
-						/>
-					</div>
+					}
 				}
 			}
 			@if (!grouping() || groupTemplateLocation() !== "group-header") {

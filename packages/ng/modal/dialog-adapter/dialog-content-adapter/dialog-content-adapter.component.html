@@ -18,7 +18,7 @@
 				>
 					{{ submitLabel$ | async }}
 					@if (hasSubmitCounter$ | async) {
-						<lu-numeric-badge disableTooltip palette="product" [value]="submitCounter$ | async" />
+						<lu-numeric-badge disableTooltip palette="product" [value]="(submitCounter$ | async) ?? 0" />
 					}
 				</button>
 			}

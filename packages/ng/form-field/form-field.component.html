@@ -23,8 +23,8 @@
 			@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 				<lu-inline-message
 					id="{{ id() }}-message"
-					[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
-					[state]="invalidStatus() ? 'error' : inlineMessageState()"
+					[label]="(invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()) ?? ''"
+					[state]="invalidStatus() ? 'error' : (inlineMessageState() ?? undefined)"
 				/>
 			}
 		</fieldset>
@@ -32,8 +32,8 @@
 		@if (presentationMode()) {
 			<dt class="presentation-term">
 				<ng-container *luPortal="label()" />
-				@if (tooltip()) {
-					<lu-icon class="presentation-term-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" />
+				@if (tooltip(); as tooltip) {
+					<lu-icon class="presentation-term-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip" />
 				}
 
 				@if (tag()) {
@@ -65,11 +65,11 @@
 					<ng-container *ngTemplateOutlet="projectionTpl" />
 					<lu-icon
 						class="pr-u-focusVisible pr-u-borderRadiusSmall"
-						[luTooltip]="iconAItooltip()"
+						[luTooltip]="iconAItooltip() ?? ''"
 						size="S"
 						AI
 						icon="weatherStars"
-						[alt]="iconAIalt()"
+						[alt]="iconAIalt() ?? undefined"
 					/>
 				</div>
 			} @else {
@@ -78,8 +78,8 @@
 			@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 				<lu-inline-message
 					id="{{ id() }}-message"
-					[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
-					[state]="invalidStatus() ? 'error' : inlineMessageState()"
+					[label]="(invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()) ?? ''"
+					[state]="invalidStatus() ? 'error' : (inlineMessageState() ?? undefined)"
 				/>
 			}
 		}

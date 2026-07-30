@@ -2,7 +2,7 @@
 	@if (hasNoInvariant()) {
 		<div class="textField-prefix">
 			<div class="textField-prefix-lang">
-				@if (formFieldRef.isInputRequired()) {
+				@if (formFieldRef?.isInputRequired()) {
 					{{ cultureCodeDisplay() }}<sup class="formLabel-required" aria-hidden="true">*</sup>
 				} @else {
 					{{ cultureCodeDisplay() }}
@@ -19,7 +19,7 @@
 			[(ngModel)]="displayRow().value"
 			(ngModelChange)="valueChange()"
 			[ngModelOptions]="{ standalone: true }"
-			(blur)="onTouched?.()"
+			(blur)="onTouched()"
 			(focus)="shouldOpenOnFocus() ? popoverRef.openPopover(true, true, true) : null"
 			[disabled]="disabledInternal()"
 			[autocomplete]="autocomplete()"
@@ -44,14 +44,14 @@
 				<div class="popover-contentOptional multilanguage_popover-content" [style.inlineSize.rem]="getPopoverInlineSizeRem(inputElement)">
 					<div class="pr-u-displayFlex pr-u-gap100 pr-u-flexDirectionColumn">
 						@if (!hasNoInvariant()) {
-							<p class="pr-u-colorTextSubtle" [class]="formFieldSize() === 'S' ? 'pr-u-bodyXS' : 'pr-u-bodyS'">
+							<p class="pr-u-colorTextSubtle" [class]="formFieldSize?.() === 'S' ? 'pr-u-bodyXS' : 'pr-u-bodyS'">
 								{{ intl().invariantInfo }}
 							</p>
 						}
 						@for (row of panelInputs(); track row.cultureCode) {
 							<ng-template #prefixLang>
 								<div class="textField-prefix-lang">
-									@if (formFieldRef.isInputRequired()) {
+									@if (formFieldRef?.isInputRequired()) {
 										{{ row.cultureCode.slice(0, 2).toUpperCase() }}<sup class="formLabel-required" aria-hidden="true">*</sup>
 									} @else {
 										{{ row.cultureCode.slice(0, 2).toUpperCase() }}
@@ -61,7 +61,7 @@
 							<ng-template #aiSuffix>
 								<button
 									type="button"
-									[size]="formFieldSize() === 'S' ? 'XS' : 'S'"
+									[size]="formFieldSize?.() === 'S' ? 'XS' : 'S'"
 									luButton="AI"
 									[luTooltip]="intl().translateWithAI"
 									luTooltipOnlyForDisplay
@@ -73,20 +73,20 @@
 								</button>
 							</ng-template>
 							<lu-form-field
-								[size]="formFieldSize()"
+								[size]="formFieldSize?.() ?? null"
 								[label]="intl().translateTo | intlParams: { lang: getLocaleDisplayName(row.cultureCode) }"
 								hiddenLabel
-								[errorInlineMessage]="formFieldRef.isInputRequired() && !row.value ? intl().requiredError : ''"
+								[errorInlineMessage]="formFieldRef?.isInputRequired() && !row.value ? intl().requiredError : ''"
 							>
 								<lu-text-input
 									[prefix]="{ content: prefixLang, ariaLabel: '' }"
 									[(ngModel)]="row.value"
-									[required]="formFieldRef.isInputRequired()"
+									[required]="formFieldRef?.isInputRequired() ?? false"
 									(ngModelChange)="valueChange()"
 									[ngModelOptions]="{ standalone: true }"
 									[disabled]="disabledInternal()"
 									[autocomplete]="autocomplete()"
-									[suffix]="hasAIButtons() ? { content: aiSuffix, ariaLabel: '' } : null"
+									[suffix]="hasAIButtons() ? { content: aiSuffix, ariaLabel: '' } : undefined"
 								/>
 							</lu-form-field>
 						}

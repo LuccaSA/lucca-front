@@ -10,26 +10,26 @@
 >
 	<div class="emptyState-container">
 		<div class="emptyState-content">
-			@if (icon()) {
-				<div class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon() | luSafeExternalSvg"></div>
+			@if (icon(); as icon) {
+				<div class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
 			}
 			<div class="emptyState-content-text">
-				@if (slotTop()) {
+				@if (slotTop(); as slotTop) {
 					<div>
-						<ng-container *luPortal="slotTop()" />
+						<ng-container *luPortal="slotTop" />
 					</div>
 				}
 				@if (heading()) {
 					<div role="heading" [attr.aria-level]="hx()" class="emptyState-content-heading">{{ heading() }}</div>
 				}
-				@if (description()) {
-					@if (isStringPortalContent(description())) {
+				@if (description(); as description) {
+					@if (isStringPortalContent(description)) {
 						<p class="emptyState-content-description">
-							<ng-container *luPortal="description()" />
+							<ng-container *luPortal="description" />
 						</p>
 					} @else {
 						<div class="emptyState-content-description">
-							<ng-container *luPortal="description()" />
+							<ng-container *luPortal="description" />
 						</div>
 					}
 				}
@@ -38,8 +38,8 @@
 				</div>
 			</div>
 		</div>
-		@if (illustration()) {
-			<div class="emptyState-illustration"><ng-container *luPortal="illustration()" /></div>
+		@if (illustration(); as illustration) {
+			<div class="emptyState-illustration"><ng-container *luPortal="illustration" /></div>
 		}
 	</div>
 </section>

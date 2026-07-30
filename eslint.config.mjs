@@ -147,10 +147,10 @@ export default defineConfig(
 			parserOptions: {
 				project: [
 					'tsconfig.lint.json',
-					'packages/ng/tsconfig.lint.json',
+					'packages/ng/tsconfig.json',
 					'packages/prisme/tsconfig.lint.json',
 					'packages/eslint-plugin/tsconfig.json',
-					'.storybook/tsconfig.lint.json',
+					'.storybook/tsconfig.json',
 				],
 			},
 		},
