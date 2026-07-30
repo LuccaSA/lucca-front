@@ -10,7 +10,7 @@ import { HtmlFormatterDirective } from '@lucca-front/ng/forms/rich-text-input/fo
 import { DEFAULT_MARKDOWN_TRANSFORMERS, MarkdownFormatterDirective, MarkdownFormatterWithTagsDirective, TAGS } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 import { PLAINTEXT_TAGS, PlainTextFormatterWithTagsDirective } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, createTestStory, generateInputs } from '@/helpers/stories';
+import { cleanupTemplate, useControlledStoryModel, createTestStory, generateInputs } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { expectNgModelDisplay, waitForAngular } from '@/helpers/test';
 import { screen, userEvent, within } from 'storybook/test';
@@ -57,15 +57,15 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, presentation, ...inputArgs } = args;
 		return {
-			props: { value, disabled, required },
+			props: { model: useControlledStoryModel(value), disabled, required },
 			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithMarkdownFormatter
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+		[(ngModel)]="model.example" [disabled]="disabled" [required]="required">
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, MarkdownFormatterDirective],
 			},
@@ -87,15 +87,15 @@ export const RequiredWithNoInitialValue: StoryObj<RichTextInputComponent & { val
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, presentation, ...inputArgs } = args;
 		return {
-			props: { value, disabled, required },
+			props: { model: useControlledStoryModel(value), disabled, required },
 			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithMarkdownFormatter
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+		[(ngModel)]="model.example" [disabled]="disabled" [required]="required">
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, MarkdownFormatterDirective],
 			},
@@ -117,11 +117,11 @@ export const WithTagPluginWithNoInitialValue: StoryObj<RichTextInputComponent & 
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, presentation, ...inputArgs } = args;
 		return {
-			props: { value, disabled, required },
+			props: { model: useControlledStoryModel(value), disabled, required },
 			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithHtmlFormatter
 	${generateInputs(inputArgs, argTypes)}
-	[(ngModel)]="value" [disabled]="disabled" [required]="required">
+	[(ngModel)]="model.example" [disabled]="disabled" [required]="required">
 		<lu-rich-text-input-toolbar />
 		<lu-rich-text-plugin-tag [tags]="[
 																		{
@@ -139,7 +139,7 @@ export const WithTagPluginWithNoInitialValue: StoryObj<RichTextInputComponent & 
 																	]" />
 		</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, HtmlFormatterDirective],
 			},
@@ -161,15 +161,15 @@ export const WithHtmlFormatter: StoryObj<RichTextInputComponent & { value: strin
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, presentation, ...inputArgs } = args;
 		return {
-			props: { value, disabled, required },
+			props: { model: useControlledStoryModel(value), disabled, required },
 			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithHtmlFormatter
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+		[(ngModel)]="model.example" [disabled]="disabled" [required]="required">
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, HtmlFormatterDirective],
 			},
@@ -191,11 +191,11 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, presentation, ...inputArgs } = args;
 		return {
-			props: { value, disabled, required },
+			props: { model: useControlledStoryModel(value), disabled, required },
 			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithHtmlFormatter
 	${generateInputs(inputArgs, argTypes)}
-	[(ngModel)]="value" [disabled]="disabled" [required]="required">
+	[(ngModel)]="model.example" [disabled]="disabled" [required]="required">
 		<lu-rich-text-input-toolbar />
 		<lu-rich-text-plugin-tag [tags]="[
 																		{
@@ -213,7 +213,7 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 																	]" />
 		</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, HtmlFormatterDirective],
 			},
@@ -236,11 +236,11 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 		const { value, disabled, required, presentation, ...inputArgs } = args;
 		const transformers = [...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS];
 		return {
-			props: { value, disabled, required, transformers },
+			props: { model: useControlledStoryModel(value), disabled, required, transformers },
 			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithMarkdownTagsFormatter
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+		[(ngModel)]="model.example" [disabled]="disabled" [required]="required">
 			<lu-rich-text-input-toolbar />
 			<lu-rich-text-plugin-tag [tags]="[
 																	{
@@ -258,7 +258,7 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 																]" />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, MarkdownFormatterWithTagsDirective],
 			},
@@ -282,11 +282,11 @@ export const WithTagPluginPlainText: StoryObj<RichTextInputComponent & { value: 
 
 		const transformers = [PLAINTEXT_TAGS];
 		return {
-			props: { value, disabled, required, transformers },
+			props: { model: useControlledStoryModel(value), disabled, required, transformers },
 			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithPlainTextTagsFormatter
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+		[(ngModel)]="model.example" [disabled]="disabled" [required]="required">
 			<lu-rich-text-plugin-tag [tags]="[
 																	{
 																		key: 'tag1',
@@ -303,7 +303,7 @@ export const WithTagPluginPlainText: StoryObj<RichTextInputComponent & { value: 
 																]" />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, PlainTextFormatterWithTagsDirective],
 			},
@@ -327,13 +327,13 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 		const value = valueEn;
 		const transformers = [...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS];
 		return {
-			props: { value, disabled, required, transformers },
-			template: cleanupTemplate(`<button luButton="outlined" size="S" (click)="value='${valueEn}';">EN</button>
-				<button luButton="outlined" size="S" (click)="value='${valueFr}';">FR</button>
+			props: { model: useControlledStoryModel(value), disabled, required, transformers },
+			template: cleanupTemplate(`<button luButton="outlined" size="S" (click)="model.example='${valueEn}';">EN</button>
+				<button luButton="outlined" size="S" (click)="model.example='${valueFr}';">FR</button>
 				<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithMarkdownTagsFormatter
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+		[(ngModel)]="model.example" [disabled]="disabled" [required]="required">
 			<lu-rich-text-input-toolbar />
 			<lu-rich-text-plugin-tag [tags]="[
 																	{
@@ -351,7 +351,7 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 																]"/>
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, MarkdownFormatterWithTagsDirective],
 			},
