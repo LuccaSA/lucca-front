@@ -33,19 +33,15 @@
 @if (!ignorePresentation()) {
 	<ng-container *luPresentationDisplayDefault>
 		@for (v of value; track $index) {
-			@if ($last) {
-				<ng-container *ngTemplateOutlet="noComma; context: { $implicit: v }" />
-			} @else {
-				<ng-container *ngTemplateOutlet="comma; context: { $implicit: v }" />
+			<ng-container *luOptionOutlet="displayerTpl(); value: v" />
+
+			@let separator = presentationSeparators()[$index];
+
+			@if (separator) {
+				<ng-container>{{ separator }}</ng-container>
 			}
 		} @empty {
 			<span aria-hidden="true" data-content-before="–"></span>
 		}
 	</ng-container>
 }
-
-<ng-template #comma let-value><ng-container *luOptionOutlet="displayerTpl(); value: value" />, </ng-template>
-
-<ng-template #noComma let-value>
-	<ng-container *luOptionOutlet="displayerTpl(); value: value" />
-</ng-template>
