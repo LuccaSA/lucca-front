@@ -49,8 +49,8 @@ Les valeurs par défaut des `input()` ont été alignées sur celles des classes
 | **`Subject` devenu observable dérivé** : `this.url$.next(v)`, `select.loading$.value` | La source est maintenant un `input()` : écrire dans l'input, plus dans le flux (§5) |
 | **Ref de vue** : `ref.searchInput.nativeElement`, `ref.content` | `ref.searchInput()?.nativeElement` (§6) |
 | **Output devenu `output()`** : `searcher.clueChange.pipe(…)` | `OutputEmitterRef` n'est pas un `Observable` : utiliser `.subscribe()`, ou `outputToObservable()` pour retrouver un flux |
-| **Input devenu requis** : `<ng-template luOptionGroup>` sans `[luOptionGroupBy]` | Erreur **runtime** `NG0950`, pas une erreur de compilation (§7) |
-| **Réagir à un changement d'input via `ngOnChanges`** dans une sous-classe | Un `input()` ne déclenche plus `ngOnChanges` : remplacer par `computed()` / `effect()` (ou `ɵeffectWithDeps` / `syncInputSignal` pour alimenter une propriété plaine) |
+| **Input devenu requis** : `<ng-template luOptionGroup>` sans `[luOptionGroupBy]` | Erreur **de compilation** du template : `Required input 'selector' from directive LuOptionGroupDirective must be specified` (§7) |
+| **Réagir à un changement d'input via `ngOnChanges`** dans une sous-classe | Les signal inputs continuent d'alimenter `SimpleChanges` : le hook se déclenche toujours. ⚠️ Mais la clé de `SimpleChanges` est le **nom de la propriété TS**, pas l'alias de template : pour tout input renommé au §3 (`loading` → `loadingInput`, `options` → `optionsInput`…), `changes['loading']` ne se déclenche plus — **sans erreur de compilation**. Renommer la clé, ou mieux, remplacer par un `effect()` / `computed()` sur le signal. Rappel : seules les écritures venant du binding passent par `ngOnChanges` — un `.set()` sur un `linkedSignal` (§4) ne déclenche rien. |
 | **Muter un tableau/objet passé en entrée** : `items.push()`, `items.sort()` en place | Les entrées sont typées `ReadonlyArray` : cloner (`[...items].sort()`) et gérer la source de vérité en amont |
 
 ---
@@ -205,19 +205,21 @@ Deux cas de resserrement de visibilité, qui n'ont pas de correction côté cons
 
 ---
 
-## 7. Inputs devenus requis — le piège runtime
+## 7. Inputs devenus requis
 
-Trois inputs sont passés en `input.required()` :
+Trois inputs sont passés en `input.required()`. **Ce que ça donne dépend du sélecteur de la directive**, pas de l'input :
 
-| Directive / composant | Input requis | Alias de template |
-|---|---|---|
-| `LuOptionGroupDirective` | `select` | `luOptionGroupSelect` |
-| `LuOptionGroupDirective` | `selector` | `luOptionGroupBy` |
-| `LuCoreSelectApiV3Directive` | `apiV3` | `apiV3` |
+| Directive / composant | Input requis | Alias de template | Sélecteur | Effet si non fourni |
+|---|---|---|---|---|
+| `LuOptionGroupDirective` | `select` | `luOptionGroupSelect` | `[luOptionGroup]` | **Erreur de compilation** |
+| `LuOptionGroupDirective` | `selector` | `luOptionGroupBy` | `[luOptionGroup]` | **Erreur de compilation** |
+| `LuCoreSelectApiV3Directive` | `apiV3` | `apiV3` | `lu-simple-select[apiV3], lu-multi-select[apiV3]` | **Rien** — la directive n'est pas instanciée |
 
-Un input requis non fourni **ne produit pas d'erreur de compilation** avec `strictTemplates` sur un usage en directive d'attribut : l'échec est un `NG0950` **au runtime**, à la première lecture. Un usage qui s'appuyait sur le caractère optionnel de `luOptionGroupBy` ou de `apiV3` casse donc en exécution, pas au build.
+**`luOptionGroup` : échec au build.** L'attribut nu suffit à faire matcher la directive, donc dès que `<ng-template luOptionGroup>` est écrit, le compilateur de template exige les inputs requis : `Required input 'selector' from directive LuOptionGroupDirective must be specified`. Un usage qui s'appuyait sur le caractère optionnel de `luOptionGroupBy` ne compile plus — c'est visible au build, pas en exécution.
 
-`LuModalPanelComponent._containerRef` utilise `viewChild.required()` — interne, mais même famille d'erreur si le template est surchargé.
+**`apiV3` : pas de piège du tout.** La directive est sélectionnée *par* l'attribut `apiV3`. Sans lui, elle n'est jamais instanciée : rien à requérir, rien qui échoue. Le seul cas à surveiller est un binding présent mais dont la valeur peut être `undefined` (`[apiV3]="maybeUrl"`), qui devient une erreur de type sous `strictTemplates` (§7 « Types resserrés »).
+
+`NG0950` (« Input is required but no value is available yet ») ne concerne qu'un autre scénario : **lire un input requis avant qu'Angular ne l'ait assigné** — initialiseur de champ, constructeur, ou instanciation dynamique via `createComponent()` sans `setInput()`. Même famille pour `LuModalPanelComponent._containerRef` (`viewChild.required()`), lu avant le premier change detection.
 
 ### Types resserrés
 
@@ -247,7 +249,7 @@ Un input requis non fourni **ne produit pas d'erreur de compilation** avec `stri
    Et les usages des flux **supprimés** : `placeholder$`, `options$`, `loading$`, `addOptionStrategy$`, `shouldDisplayAddOption$`.
 5. **Chercher les refs de vue LF utilisées sans appel** (`searchInput`, `content`, `timePickerInput`, `inputElementRef`, `contentProjectionRef`, `optionContext`).
 6. **Chercher les `.pipe()` sur `clueChange`** d'un `LuUserSearcherComponent`.
-7. **Vérifier les usages de `luOptionGroup` et `apiV3`** : les inputs sont requis, l'échec est runtime — un simple build vert ne prouve rien. Exercer les parcours concernés.
+7. **`luOptionGroup`** : les inputs `luOptionGroupSelect` / `luOptionGroupBy` sont requis et la directive matche sur l'attribut nu → le build échoue s'ils manquent, la correction est guidée par le compilateur. Rien à chercher en amont, et **rien à vérifier pour `apiV3`** : sans l'attribut, la directive n'est pas instanciée (§7).
 8. **Vérifier les sous-classes qui redéfinissaient une valeur par défaut** d'une propriété plaine désormais alimentée par `syncInputSignal` (§1).
 
 ---

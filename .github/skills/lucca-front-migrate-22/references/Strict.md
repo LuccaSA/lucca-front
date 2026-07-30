@@ -235,7 +235,7 @@ dialogRef.instance.reload(); // narrowing acquis
    ```
 7. **Chercher les `[(calendarMode)]`** et les `getCellInfo` typés strictement.
 8. **Chercher les `PortalDirective<…>`** paramétrés avec un type primitif.
-9. **Purger les `as any` / `!`** qui masquaient les nullités : ils compilaient avant, ils cachent maintenant les vraies erreurs à corriger.
+9. **Relever les `as any` / `!` existants** qui masquent potentiellement les nullités et les signaler comme pistes hors périmètre, sans les modifier s'ils ne bloquent pas la migration LF 22.
 10. **Rejouer les parcours listés en §5** — aucun de ces changements ne produit d'erreur `tsc`.
 
 ---

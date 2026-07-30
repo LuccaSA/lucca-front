@@ -87,7 +87,7 @@ Plusieurs noms de la liste §2 sont trop courants pour être concluants seuls : 
 
 - Les **tests** qui injectent un mock dans une ref (`component.element = mockElementRef`) : motif le plus probable de casse, et invisible à un `ng build` de production.
 - Le code **non typé** (`as any`, `Object.assign(luRef, {...})`) : contourne `readonly` sans erreur, donc invisible au compilateur comme au `grep`.
-- ⚠️ **Les mutations *au travers* d'une propriété `readonly`** — `.push()` / `.sort()` en place sur un tableau exposé, écriture d'un champ imbriqué (`luRef.config.size = 'L'`), `Object.assign(luRef.state, …)`. Elles **compilent sans le moindre avertissement** (§1) : `readonly` ne protège que la référence, jamais le contenu. Ce sont donc les seules atteintes à l'immuabilité que ni le compilateur ni cette PR ne signalent, alors que ce sont aussi les plus susceptibles de produire un comportement inattendu (LF ne réagit pas à une mutation qu'il n'observe pas). À relever à l'œil lors de l'audit, et à corriger en clonant plutôt qu'en mutant.
+- ⚠️ **Les mutations *au travers* d'une propriété `readonly`** — `.push()` / `.sort()` en place sur un tableau exposé, écriture d'un champ imbriqué (`luRef.config.size = 'L'`), `Object.assign(luRef.state, …)`. Elles **compilent sans le moindre avertissement** (§1) : `readonly` ne protège que la référence, jamais le contenu. Ce sont donc les seules atteintes à l'immuabilité que ni le compilateur ni cette PR ne signalent, alors que ce sont aussi les plus susceptibles de produire un comportement inattendu (LF ne réagit pas à une mutation qu'il n'observe pas). Les relever dans le rapport avec fichier et ligne, sans les corriger dans le cadre de cette migration.
 
 ---
 
