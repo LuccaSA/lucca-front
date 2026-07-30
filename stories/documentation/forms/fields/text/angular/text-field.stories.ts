@@ -7,9 +7,9 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from '@/helpers/common-arg-types';
-import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { waitForAngular } from '@/helpers/test';
+import { updateStoryArgs, waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 export default {
@@ -123,10 +123,9 @@ export default {
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, presentation, ...inputArgs } = args;
+		const model = useStoryModel('Example value');
 		return {
-			props: {
-				example: 'Example value',
-			},
+			props: { model },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -147,10 +146,10 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 			)}>
 	<lu-text-input
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
+		[(ngModel)]="model.example">
 	</lu-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -183,7 +182,9 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 export const IBANFormat: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		const model = useStoryModel('');
 		return {
+			props: { model },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -200,10 +201,10 @@ export const IBANFormat: StoryObj<TextInputComponent & { disabled: boolean; requ
 			)}>
 	<lu-text-input
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example" mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99">
+		[(ngModel)]="model.example" mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99">
 	</lu-text-input>
 </lu-form-field>
-{{example}}`),
+{{ model.example }}`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -237,10 +238,9 @@ export const PasswordVisiblity: StoryObj<
 > = {
 	render: (args, { argTypes }) => {
 		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const model = useStoryModel('');
 		return {
-			props: {
-				example: '',
-			},
+			props: { model },
 			template: `<lu-form-field ${generateInputs(
 				{
 					label,
@@ -255,10 +255,10 @@ export const PasswordVisiblity: StoryObj<
 			)}>
 	<lu-text-input ${generateInputs(inputArgs, argTypes)}
 		type="password"
-		[(ngModel)]="example">
+		[(ngModel)]="model.example">
 	</lu-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`,
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -288,10 +288,12 @@ export const WithPrefixAndSuffix: StoryObj<
 > = {
 	render: (args, { argTypes }) => {
 		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, presentation, ...inputArgs } = args;
+		const model = useStoryModel('42');
 		return {
 			props: {
 				prefix: args.prefix,
 				suffix: args.suffix,
+				model,
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -310,10 +312,10 @@ export const WithPrefixAndSuffix: StoryObj<
 		${generateInputs(inputArgs, argTypes)}
 		[prefix]="prefix"
 		[suffix]="suffix"
-		[(ngModel)]="example">
+		[(ngModel)]="model.example">
 	</lu-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -360,7 +362,9 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 	},
 	render: (args, { argTypes }) => {
 		const { label, iconAItooltip, iconAIalt, ...inputArgs } = args;
+		const model = useStoryModel('');
 		return {
+			props: { model },
 			template: cleanupTemplate(`<lu-form-field AI${generateInputs(
 				{
 					label,
@@ -370,9 +374,9 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 				},
 				argTypes,
 			)}>
-	<lu-text-input [(ngModel)]="example" />
+	<lu-text-input [(ngModel)]="model.example" />
 </lu-form-field>
-<pr-story-model-display>{{example}}</pr-story-model-display>
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>
 `),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
@@ -386,7 +390,7 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 	},
 };
 
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step, id }) => {
 	await waitForAngular();
 	const canvas = within(canvasElement);
 
@@ -411,6 +415,18 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await userEvent.keyboard('Texte clavier');
 		await waitForAngular();
 		await expect(input).toHaveValue('Texte clavier');
+	});
+
+	await step('La valeur saisie survit à un changement de config', async () => {
+		const input = canvas.getByRole('textbox');
+		await userEvent.clear(input);
+		await userEvent.type(input, 'Valeur à conserver');
+		await waitForAngular();
+
+		await updateStoryArgs(id, { size: 'S' });
+		await waitForAngular();
+
+		await expect(canvas.getByRole('textbox')).toHaveValue('Valeur à conserver');
 	});
 });
 
