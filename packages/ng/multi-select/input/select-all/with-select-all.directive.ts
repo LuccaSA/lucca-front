@@ -27,7 +27,20 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
 	readonly intl = this.select.intl;
 
-	readonly displayerLabel = input.required<string>({ alias: 'withSelectAllDisplayerLabel' });
+	/**
+	 * @deprecated use withSelectAllDisplayerLabelFn
+	 */
+	readonly displayerLabel = input<string>(undefined, { alias: 'withSelectAllDisplayerLabel' });
+	readonly displayerLabelFn = input<(count: number) => string>(undefined, { alias: 'withSelectAllDisplayerLabelFn' });
+
+	readonly displayerLabelValue = computed(() => {
+		const label = this.displayerLabelFn();
+		const count = this.displayerCount();
+		if (label) {
+			return label(count);
+		}
+		return `${count} ${this.displayerLabel()}`;
+	});
 
 	readonly #mode = signal<LuMultiSelectionMode>('none');
 	readonly #values = signal<TValue[]>([]);

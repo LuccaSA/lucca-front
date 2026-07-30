@@ -27,7 +27,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
-import { PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Subject } from 'rxjs';
@@ -48,7 +48,6 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		FilterPillDisplayerDirective,
 		FilterPillLabelDirective,
 		ClearComponent,
-		PresentationDisplayDirective,
 		CommonModule,
 		ɵPresentationDisplayDefaultDirective,
 		IconComponent,
@@ -88,8 +87,20 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input({ transform: booleanAttribute })
 	keepSearchAfterSelection = false;
 
-	@Input()
-	filterPillLabelPlural: string;
+	/**
+	 * @deprecated use filterPillLabelPluralFn
+	 */
+	filterPillLabelPlural = input<string>(undefined);
+	filterPillLabelPluralFn = input<(count: number) => string>(undefined);
+
+	filterPillLabelPluralValue = computed(() => {
+		const label = this.filterPillLabelPluralFn();
+		const count = this.valueLength();
+		if (label) {
+			return label(count);
+		}
+		return `${count} ${this.filterPillLabelPlural()}`;
+	});
 
 	override selectParent$ = new Subject<void>();
 	override selectChildren$ = new Subject<void>();
