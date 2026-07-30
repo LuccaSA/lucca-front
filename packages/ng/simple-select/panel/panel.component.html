@@ -31,9 +31,9 @@
 							[branch]="branch"
 							[optionTpl]="optionTpl()"
 							[optionComparer]="optionComparer()"
-							[selectedOptions]="[selected()]"
+							[selectedOptions]="selectedOptions()"
 							[optionIndex]="index"
-							(toggleOne)="$event !== null && panelRef.emitValue($event)"
+							(toggleOne)="panelRef.emitValue($event)"
 							simpleMode
 						/>
 					}

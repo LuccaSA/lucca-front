@@ -88,6 +88,13 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 
 	public readonly selected = computed(() => this.selectInput.valueSignal());
 
+	// Kept free of `null` so it doesn't widen `TreeBranchComponent`'s generic, which would in turn
+	// make its `toggleOne` output nullable and force a guard on `emitValue`.
+	protected readonly selectedOptions = computed(() => {
+		const selected = this.selected();
+		return selected === null ? [] : [selected];
+	});
+
 	readonly hasGrouping = computed(() => !!this.grouping());
 	public readonly clue = toSignal(this.selectInput.clue$.pipe(map((clue) => clue ?? '')), { initialValue: '' });
 	public shouldDisplayAddOption = this.selectInput.shouldDisplayAddOption;

@@ -340,7 +340,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 	}
 
-	tabbableDateChange(date: Date, calendarIndex: number) {
+	tabbableDateChange(date: Date | null, calendarIndex: number) {
 		if (calendarIndex == this.focusedCalendarIndex()) {
 			this.tabbableDate.set(date);
 		}
