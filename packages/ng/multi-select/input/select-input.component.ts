@@ -91,14 +91,6 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input()
 	filterPillLabelPlural: string;
 
-	/**
-	 * Singular counterpart of `filterPillLabelPlural`, displayed when only one option is selected
-	 * but the selected option itself cannot be displayed (e.g. exclude mode with `withSelectAll`).
-	 * Falls back to `filterPillLabelPlural` when not provided.
-	 */
-	@Input()
-	filterPillLabelSingular: string;
-
 	override selectParent$ = new Subject<void>();
 	override selectChildren$ = new Subject<void>();
 
@@ -118,6 +110,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
 	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
+	/** Option rendered by the filter pill single-option displayer; overridden by `withSelectAll` in exclude mode where the remaining option is not part of the value. */
+	public singleOptionForDisplay: Signal<T | undefined> = computed(() => this.valueSignal()?.[0]);
 	override _value: T[] = [];
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {

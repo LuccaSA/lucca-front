@@ -18,12 +18,12 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 			@if (displayerCount() !== null) {
 				<div class="multipleSelect-displayer-filter">
-					@if (displayerCount() === 1 && isIncludeMode()) {
-						<lu-chip withEllipsis (kill)="unselectOption(select.value[0], $event)" class="multipleSelect-displayer-chip" [unkillable]="disabled()">
-							<ng-template *luOptionOutlet="select.displayerTpl(); value: select.value[0]" />
+					@if (displayedSingleOption() !== undefined) {
+						<lu-chip withEllipsis (kill)="unselectOption(displayedSingleOption(), $event)" class="multipleSelect-displayer-chip" [unkillable]="disabled()">
+							<ng-template *luOptionOutlet="select.displayerTpl(); value: displayedSingleOption()" />
 						</lu-chip>
 					} @else {
-						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ displayerCount() }} {{ displayedLabel() }}</lu-chip>
+						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ displayerCount() }} {{ displayerLabel() }}</lu-chip>
 					}
 				</div>
 			}
@@ -43,9 +43,16 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly isFilled = computed(() => this.selectAllContext.mode() !== 'none');
 	readonly isIncludeMode = computed(() => this.selectAllContext.mode() === 'include');
 	readonly displayerLabel = this.selectAllContext.displayerLabel;
-	readonly displayerLabelSingular = this.selectAllContext.displayerLabelSingular;
 	readonly displayerCount = this.selectAllContext.displayerCount;
-	readonly displayedLabel = computed(() => (this.displayerCount() === 1 ? this.displayerLabelSingular() || this.displayerLabel() : this.displayerLabel()));
+
+	/** The only selected option, when it can be displayed: the value itself in include mode, the non-excluded option in exclude mode when computable. */
+	readonly displayedSingleOption = computed<TValue | undefined>(() => {
+		if (this.isIncludeMode()) {
+			return this.displayerCount() === 1 ? this.select.valueSignal()?.[0] : undefined;
+		}
+
+		return this.selectAllContext.singleRemainingOption() as TValue | undefined;
+	});
 
 	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 	readonly disabled = toSignal(this.select.disabled$);
@@ -55,10 +62,9 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	unselectOption(option: TValue, $event: Event): void {
 		$event.stopPropagation();
 		$event.preventDefault();
-		this.select.updateValue(
-			this.select.value.filter((o) => o !== option),
-			true,
-		);
+		// In include mode the value holds the selected options: unselecting removes the option.
+		// In exclude mode it holds the excluded ones: unselecting the remaining option adds it to the exclusions.
+		this.select.updateValue(this.isIncludeMode() ? this.select.value.filter((o) => o !== option) : [...this.select.value, option], true);
 		setTimeout(() => {
 			this.select.panelRef?.updatePosition();
 			this.inputElementRef().nativeElement.focus();

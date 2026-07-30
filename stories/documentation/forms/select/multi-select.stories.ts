@@ -206,7 +206,6 @@ export const SelectAll = generateStory({
 	withSelectAll
 	[totalCount]="legumes.length"
 	withSelectAllDisplayerLabel="légumes"
-	withSelectAllDisplayerLabelSingular="légume"
 	[clearable]="clearable"
 	[loading]="loading"
 	[(ngModel)]="legumeSelection"

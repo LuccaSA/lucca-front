@@ -319,18 +319,20 @@ describe('LuMultiSelectInputComponent', () => {
 			});
 		});
 
-		describe('displayer label', () => {
+		describe('single remaining option displayer', () => {
 			beforeEach(() => {
+				emittedSelectValues = [];
 				fixture = createComponent({
 					add: {
 						hostDirectives: [
 							{ directive: LuCoreSelectTotalCountDirective, inputs: ['totalCount'] },
-							{ directive: LuMultiSelectWithSelectAllDirective, inputs: ['withSelectAllDisplayerLabel', 'withSelectAllDisplayerLabelSingular'] },
+							{ directive: LuMultiSelectWithSelectAllDirective, inputs: ['withSelectAllDisplayerLabel'] },
 						],
 					},
 				});
 
 				selectAllDirective = fixture.componentRef.injector.get<LuMultiSelectWithSelectAllDirective<TestEntity>>(LuMultiSelectWithSelectAllDirective);
+				fixture.componentInstance.registerOnChange((value) => emittedSelectValues.push(value));
 				fixture.componentInstance.options = options;
 
 				fixture.componentRef.setInput('totalCount', options.length);
@@ -343,21 +345,15 @@ describe('LuMultiSelectInputComponent', () => {
 				return (fixture.nativeElement as HTMLElement).querySelector('.multipleSelect-displayer-chip')?.textContent?.trim() ?? '';
 			}
 
-			it('should display the singular label when a single option remains selected in exclude mode', () => {
-				// Arrange
-				fixture.componentRef.setInput('withSelectAllDisplayerLabelSingular', 'item');
-
+			it('should display the remaining option when a single option remains selected in exclude mode', () => {
 				// Act
 				selectAllDirective.writeValue({ mode: 'exclude', values: options.slice(1) });
 
 				// Assert
-				expect(displayerChipText()).toBe('1 item');
+				expect(displayerChipText()).toContain(options[0].name);
 			});
 
-			it('should display the plural label when several options remain selected in exclude mode', () => {
-				// Arrange
-				fixture.componentRef.setInput('withSelectAllDisplayerLabelSingular', 'item');
-
+			it('should display the counter when several options remain selected in exclude mode', () => {
 				// Act
 				selectAllDirective.writeValue({ mode: 'exclude', values: [options[0]] });
 
@@ -365,12 +361,28 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(displayerChipText()).toBe('4 items');
 			});
 
-			it('should fall back to the plural label when no singular label is provided', () => {
+			it('should fall back to the counter when every option is not known locally', () => {
+				// Arrange: one option is not loaded, the remaining option cannot be determined
+				fixture.componentRef.setInput('totalCount', options.length + 1);
+
 				// Act
 				selectAllDirective.writeValue({ mode: 'exclude', values: options.slice(1) });
 
 				// Assert
-				expect(displayerChipText()).toBe('1 items');
+				expect(displayerChipText()).toBe('2 items');
+			});
+
+			it('should emit "none" selection when killing the remaining option chip in exclude mode', () => {
+				// Arrange
+				selectAllDirective.writeValue({ mode: 'exclude', values: options.slice(1) });
+				fixture.detectChanges();
+
+				// Act
+				const killButton = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>('.multipleSelect-displayer-chip .chip-kill');
+				killButton?.click();
+
+				// Assert
+				expect(emittedSelectValues).toEqual([{ mode: 'none' }]);
 			});
 		});
 	});

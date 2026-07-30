@@ -29,13 +29,6 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly displayerLabel = input.required<string>({ alias: 'withSelectAllDisplayerLabel' });
 
-	/**
-	 * Singular counterpart of `withSelectAllDisplayerLabel`, displayed when only one option is selected
-	 * but the selected option itself cannot be displayed (exclude mode).
-	 * Falls back to `withSelectAllDisplayerLabel` when not provided.
-	 */
-	readonly displayerLabelSingular = input<string | undefined>(undefined, { alias: 'withSelectAllDisplayerLabelSingular' });
-
 	readonly #mode = signal<LuMultiSelectionMode>('none');
 	readonly #values = signal<TValue[]>([]);
 
@@ -43,6 +36,23 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly values = this.#values.asReadonly();
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
 	readonly clueChange = toSignal(this.select.clueChange$);
+	readonly #options = toSignal(this.select.options$, { initialValue: [] as readonly TValue[] });
+
+	/**
+	 * The only option still selected in exclude mode, so it can be displayed like in include mode.
+	 * Only computable when every option is known locally (`options.length === totalCount`);
+	 * `undefined` otherwise, in which case displayers fall back to the counter.
+	 */
+	readonly singleRemainingOption = computed<TValue | undefined>(() => {
+		const options = this.#options();
+
+		if (this.#mode() !== 'exclude' || options.length !== this.totalCount()) {
+			return undefined;
+		}
+
+		const remainingOptions = options.filter((option) => !this.#values().some((excluded) => this.select.optionComparer(excluded, option)));
+		return remainingOptions.length === 1 ? remainingOptions[0] : undefined;
+	});
 
 	// only show panel header when no clue && values not empty
 	readonly #showPanelHeader = computed(() => isNil(this.clueChange()) || (this.clueChange()?.length === 0 && this.totalCount() !== 0));
@@ -93,7 +103,8 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
 		this.select.hasValue = () => this.#hasValue();
 		this.select.isFilterPillEmpty = computed(() => !this.#hasValue());
-		this.select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include');
+		this.select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include' || this.singleRemainingOption() !== undefined);
+		this.select.singleOptionForDisplay = computed(() => (this.#mode() === 'include' ? this.select.valueSignal()?.[0] : this.singleRemainingOption()));
 		this.select.valueLength = this.displayerCount;
 	}
 
