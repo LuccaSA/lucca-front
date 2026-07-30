@@ -72,6 +72,17 @@ Privilégier `Grep`/`Glob` pour des recherches ciblées ; pour un projet volumin
 | Accès TS aux composants/refs LF : réassignation de propriété, lecture/écriture d'un input, `ngOnChanges`, mutation d'un tableau/objet reçu (`.push()`/`.sort()`, champ imbriqué, `Object.assign`) — y compris les cas que le compilateur ne bloque pas | Étape 5 |
 | Classes héritant de LF (`ALuInput`, `ALuSelectInputComponent`, `ILuDateAdapter`…), `.instance` de dialog, `state="null"` sur `lu-progress-bar` | Étape 5 |
 
+**Pièges silencieux** — ces motifs ne produisent **aucune** erreur de build : ils sont détectés ici pour être **signalés** (Étape 7), jamais corrigés d'office. Les chercher systématiquement, y compris — et surtout — si le projet consommateur n'est pas en `strictNullChecks` : ces changements sont dans le code compilé de LF 22, pas dans les types, donc le `tsconfig` du projet ne les filtre pas.
+
+| Motif détecté | Changement de comportement (réf. [Strict.md](./references/Strict.md) §5) |
+|---|---|
+| `canClose` (garde de fermeture de dialog) | Appel en `try/catch` et ignoré si `instance === null` → une garde qui lançait pour bloquer ne bloque plus |
+| `setValue(null)` / `setValue(undefined)` sur un select **legacy** (`ALuSelectInput`) | `null`/`undefined` ignorés → reset programmatique sans effet |
+| `luDateInput` / `ILuDateAdapter` / appels à `.parse(` d'un adapter | Saisie non parsable → plus de `setValue` → validation « date invalide » qui ne se déclenche plus |
+| `implements ILuEstablishmentService` / `searchPaged(` | Reçoit `''` au lieu de `null` quand pas de clue → un test `clue === null` part en recherche vide |
+| Lecture TS de `displayFormat()` sur `lu-user-tile`, ou comparaison `=== undefined` sur un input LF lu en TS | Inputs désormais initialisés (`displayFormat` a une valeur par défaut, `_value` vaut `null` et non `undefined`) → détections « non fourni » cassées |
+| `panelHeaderTpl` comparé à `null`, `filterPillDisabled`, `totalCount` lus depuis un signal LF | Valeurs initiales changées (`undefined`, `false`, `0`) → comparaisons `=== null` devenues fausses |
+
 Restituer le résultat du scan sous forme de comptage par ligne (occurrences + fichiers) avant d'attaquer l'Étape 3 : c'est ce comptage qui alimente le rapport final (Étape 7).
 
 ---
@@ -112,6 +123,17 @@ Marche à suivre :
 
 **Ce qui ne casse pas le build ne se corrige pas ici, mais se signale** à l'Étape 7 — c'est le cas des pièges silencieux : mutations d'un objet/tableau reçu (`.push()`, `.sort()`, champ imbriqué, `Object.assign`) et changements de comportement liés à `strictNullChecks` qui ne produisent **aucune** erreur de compilation. Les lister comme « à vérifier manuellement », avec fichier et ligne, sans y toucher.
 
+### Passe finale obligatoire — pièges silencieux
+
+**À faire dans tous les cas, même si le build et le lint sont verts, même si aucune erreur n'a été remontée aux points 1-4 ci-dessus.** Un projet non strict ne verra quasiment aucune erreur TS, mais subit les mêmes changements de comportement : ils viennent du code compilé de LF 22, pas des `.d.ts`. Un build vert n'est donc **pas** une preuve qu'il n'y a rien à signaler.
+
+Ouvrir **[Strict.md](./references/Strict.md) §5** et, pour **chacune** de ses lignes, confirmer si le projet est concerné :
+
+- pour les familles routées à l'Étape 2 (`canClose`, `setValue(null)` legacy, dates invalides, `ILuEstablishmentService`, lectures d'inputs comparées à `undefined`/`null`), reprendre les occurrences déjà comptées ;
+- pour les familles restantes — popover inerte (`ALuPopoverTrigger`), `/me` de `LuCoreSelectUsersDirective`, `NumberFormat` en `percent`, `LuUserDisplayPipe` avec `formatter` absent, `templateErrorExtension` (formly), `TreeNode` sans `children`, `FilterPillComponent`, `withSelectAll` — faire une recherche ciblée à partir du symbole cité dans le tableau.
+
+Chaque ligne du §5 doit finir soit **« concerné, à vérifier manuellement »** (avec fichier + ligne), soit **« non concerné »** (aucune occurrence trouvée). Une ligne non tranchée est un trou dans le rapport, pas une absence de problème.
+
 L'usage standard (bindings dans le template) est quasi transparent : les schematics Angular s'en chargent, il n'y a normalement rien à faire à la main.
 
 ---
@@ -131,7 +153,7 @@ Produire un rapport structuré :
 - **Migrations automatiques** (schematics lancés, fichiers modifiés) — et, si le schematic `palettes` a été refusé à l'Étape 1, le rappeler explicitement comme reste à faire dans une PR dédiée.
 - **Migrations manuelles réalisées** (résiduel palettes, refactos composants).
 - **Cas nécessitant une décision humaine** : `*-rgb` avec opacité, overrides `.optionItem` complexes, usages détournés en TS.
-- **Pièges silencieux à vérifier manuellement** (détectés mais volontairement non corrigés, car non bloquants) : mutations d'un objet/tableau reçu, changements de comportement liés à `strictNullChecks` — avec fichier et ligne.
+- **Pièges silencieux à vérifier manuellement** (détectés mais volontairement non corrigés, car non bloquants) : mutations d'un objet/tableau reçu, changements de comportement liés à `strictNullChecks` — avec fichier et ligne. Cette section est alimentée par la passe finale de l'Étape 5 et **couvre les 13 lignes de [Strict.md](./references/Strict.md) §5** : lister les lignes concernées avec leurs occurrences, puis énumérer les lignes écartées en « non concerné ». Ne jamais rendre cette section vide sans avoir explicitement listé les lignes non concernées — sur un projet non strict, une section vide sans justification signifie que l'audit n'a pas été fait, pas qu'il n'y a rien.
 - **Erreurs préexistantes** rencontrées au build/lint mais non imputables à LF 22 : listées, non corrigées.
 - **Pistes hors périmètre** repérées en chemin (modernisation, refacto, dette) : listées comme suggestions pour plus tard, jamais appliquées dans cette migration.
 - **Récapitulatif** : nombre d'occurrences par catégorie, fichiers touchés.
