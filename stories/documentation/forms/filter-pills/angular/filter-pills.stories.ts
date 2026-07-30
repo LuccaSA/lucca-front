@@ -258,3 +258,33 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await waitForAngular();
 	});
 });
+
+export const ColonSpacingTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	// 1. Wait for Angular to stabilize
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const getPill = () => canvas.getByRole('button', { name: /Legume \(simple\)/ });
+	// On lit le textContent brut (sans normalisation de jest-dom) pour distinguer
+	// l'espace insécable U+00A0 d'une espace classique ou d'une absence d'espace.
+	const labelOf = (pill: HTMLElement) => pill.querySelector('.filterPill-label')?.textContent?.trim() ?? '';
+
+	await step('État initial : pas de deux-points tant que la pill est vide', async () => {
+		await expect(labelOf(getPill())).toBe('Legume (simple)');
+	});
+
+	await step('Sélection d’une option', async () => {
+		await userEvent.click(getPill());
+		await waitForAngular();
+		await userEvent.click(screen.getByRole('combobox'));
+		await waitForAngular();
+		const listbox = within(screen.getByRole('listbox'));
+		const options = await listbox.findAllByRole('option');
+		await userEvent.click(options[0]);
+		await waitForAngular();
+	});
+
+	await step('Le label affiche une espace insécable avant le deux-points (locale fr-FR)', async () => {
+		await expect(labelOf(getPill())).toBe('Legume (simple) :');
+	});
+});
