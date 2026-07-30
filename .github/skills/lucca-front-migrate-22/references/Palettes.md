@@ -68,3 +68,9 @@ Aucune action manuelle requise. Simplement vérifier après coup qu'il ne reste 
 ## 3. `.mod-grey` (rappel)
 
 Le schematic remplace `.mod-grey` → `.mod-neutral`. À valider systématiquement.
+
+## 4. `$palettesDeprecated` (✅ suppression sèche)
+
+La variable n'existe plus en 22.0 : supprimer sa déclaration partout où le consommateur la configure (`@use '@lucca-front/scss/src/commons/config' with (...)`, y compris dans un thème ou un sous-projet). Si c'était la seule entrée, retirer le `with (...)`.
+
+Ne pas la vider (`$palettesDeprecated: ()`) : configurer une variable inexistante échoue aussi. À défaut, Sass casse le build — `This variable was not declared with !default in the @used module.` — contrairement aux classes/vars résiduelles qui perdent juste leur couleur au runtime.

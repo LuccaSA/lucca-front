@@ -20,20 +20,20 @@ Non automatisable proprement : la variable conditionnelle (`fileUpload` ci-dessu
 
 ## 2. Taille par défaut
 
-La taille par défaut de `lu-single-file-upload` **et** `lu-multi-file-upload` est désormais la **plus petite** (auparavant l'équivalent de `L`).
+Avant la 22, seule la valeur `S` existait pour l'input `size` ; sans `size` précisé, le rendu était grand (aucune valeur `L` n'existait pour le désigner explicitement). En 22, l'ancienne `S` devient la taille par défaut — plus besoin de la préciser — et `L` est une nouvelle valeur introduite pour retrouver l'ancien rendu par défaut.
 
 ```html
 <!-- Avant -->
 <lu-single-file-upload size="S" />
-<lu-single-file-upload />          <!-- ancien défaut = grand -->
+<lu-single-file-upload />          <!-- ancien défaut = grand, pas de valeur "L" pour le désigner -->
 
 <!-- Après -->
-<lu-single-file-upload />          <!-- nouveau défaut = petit -->
-<lu-single-file-upload size="L" /> <!-- pour retrouver l'ancien rendu -->
+<lu-single-file-upload />          <!-- size="S" supprimé : c'est le nouveau défaut -->
+<lu-single-file-upload size="L" /> <!-- pour retrouver l'ancien rendu (nouvelle valeur) -->
 ```
 
-**Décision humaine requise** : chaque `lu-single-file-upload`/`lu-multi-file-upload` **sans** `size` explicite change de rendu. Deux options selon l'intention :
-- conserver le rendu actuel → ajouter `size="L"` ;
-- adopter le nouveau défaut → ne rien faire.
+**Appliquer systématiquement** :
+- chaque `lu-single-file-upload`/`lu-multi-file-upload` **sans** `size` explicite doit recevoir `size="L"`, sous peine de changer silencieusement le rendu de l'UI (passage au nouveau défaut petit) ;
+- chaque `lu-single-file-upload`/`lu-multi-file-upload` avec `size="S"` explicite doit voir cet attribut **supprimé**, puisque `S` est désormais la valeur par défaut (attribut redondant).
 
-Signaler chaque occurrence sans `size` plutôt que de trancher automatiquement.
+Ne pas laisser ces décisions à l'utilisateur — les appliquer systématiquement sur chaque occurrence détectée.
