@@ -362,7 +362,7 @@ describe('LuMultiSelectInputComponent', () => {
 			});
 
 			it('should fall back to the counter when every option is not known locally', () => {
-				// Arrange: one option is not loaded, the remaining option cannot be determined
+				// Arrange
 				fixture.componentRef.setInput('totalCount', options.length + 1);
 
 				// Act

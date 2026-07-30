@@ -38,11 +38,6 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly clueChange = toSignal(this.select.clueChange$);
 	readonly #options = toSignal(this.select.options$, { initialValue: [] as readonly TValue[] });
 
-	/**
-	 * The only option still selected in exclude mode, so it can be displayed like in include mode.
-	 * Only computable when every option is known locally (`options.length === totalCount`);
-	 * `undefined` otherwise, in which case displayers fall back to the counter.
-	 */
 	readonly singleRemainingOption = computed<TValue | undefined>(() => {
 		const options = this.#options();
 

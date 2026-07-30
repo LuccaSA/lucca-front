@@ -45,7 +45,6 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly displayerLabel = this.selectAllContext.displayerLabel;
 	readonly displayerCount = this.selectAllContext.displayerCount;
 
-	/** The only selected option, when it can be displayed: the value itself in include mode, the non-excluded option in exclude mode when computable. */
 	readonly displayedSingleOption = computed<TValue | undefined>(() => {
 		if (this.isIncludeMode()) {
 			return this.displayerCount() === 1 ? this.select.valueSignal()?.[0] : undefined;
@@ -62,8 +61,6 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	unselectOption(option: TValue, $event: Event): void {
 		$event.stopPropagation();
 		$event.preventDefault();
-		// In include mode the value holds the selected options: unselecting removes the option.
-		// In exclude mode it holds the excluded ones: unselecting the remaining option adds it to the exclusions.
 		this.select.updateValue(this.isIncludeMode() ? this.select.value.filter((o) => o !== option) : [...this.select.value, option], true);
 		setTimeout(() => {
 			this.select.panelRef?.updatePosition();
