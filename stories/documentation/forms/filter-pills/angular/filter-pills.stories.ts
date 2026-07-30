@@ -293,14 +293,11 @@ const colonSpacingPlay =
 
 export const ColonSpacingTEST = createTestStory(Basic, colonSpacingPlay('Legume (simple) :'));
 
-export const ColonSpacingEnglishTEST = createTestStory(
-	{
-		...Basic,
-		decorators: [
-			applicationConfig({
-				providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
-			}),
-		],
-	},
-	colonSpacingPlay('Legume (simple):'),
-);
+export const ColonSpacingEnglishTEST = {
+	...createTestStory(Basic, colonSpacingPlay('Legume (simple):')),
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
+		}),
+	],
+};
