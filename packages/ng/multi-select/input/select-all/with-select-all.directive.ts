@@ -29,6 +29,13 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly displayerLabel = input.required<string>({ alias: 'withSelectAllDisplayerLabel' });
 
+	/**
+	 * Singular counterpart of `withSelectAllDisplayerLabel`, displayed when only one option is selected
+	 * but the selected option itself cannot be displayed (exclude mode).
+	 * Falls back to `withSelectAllDisplayerLabel` when not provided.
+	 */
+	readonly displayerLabelSingular = input<string | undefined>(undefined, { alias: 'withSelectAllDisplayerLabelSingular' });
+
 	readonly #mode = signal<LuMultiSelectionMode>('none');
 	readonly #values = signal<TValue[]>([]);
 

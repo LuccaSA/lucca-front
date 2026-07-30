@@ -23,7 +23,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 							<ng-template *luOptionOutlet="select.displayerTpl(); value: select.value[0]" />
 						</lu-chip>
 					} @else {
-						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ displayerCount() }} {{ displayerLabel() }}</lu-chip>
+						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ displayerCount() }} {{ displayedLabel() }}</lu-chip>
 					}
 				</div>
 			}
@@ -43,7 +43,9 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly isFilled = computed(() => this.selectAllContext.mode() !== 'none');
 	readonly isIncludeMode = computed(() => this.selectAllContext.mode() === 'include');
 	readonly displayerLabel = this.selectAllContext.displayerLabel;
+	readonly displayerLabelSingular = this.selectAllContext.displayerLabelSingular;
 	readonly displayerCount = this.selectAllContext.displayerCount;
+	readonly displayedLabel = computed(() => (this.displayerCount() === 1 ? this.displayerLabelSingular() || this.displayerLabel() : this.displayerLabel()));
 
 	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 	readonly disabled = toSignal(this.select.disabled$);

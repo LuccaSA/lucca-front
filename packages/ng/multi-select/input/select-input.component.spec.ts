@@ -318,6 +318,61 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(componentInstance.value).toEqual([options[0]]);
 			});
 		});
+
+		describe('displayer label', () => {
+			beforeEach(() => {
+				fixture = createComponent({
+					add: {
+						hostDirectives: [
+							{ directive: LuCoreSelectTotalCountDirective, inputs: ['totalCount'] },
+							{ directive: LuMultiSelectWithSelectAllDirective, inputs: ['withSelectAllDisplayerLabel', 'withSelectAllDisplayerLabelSingular'] },
+						],
+					},
+				});
+
+				selectAllDirective = fixture.componentRef.injector.get<LuMultiSelectWithSelectAllDirective<TestEntity>>(LuMultiSelectWithSelectAllDirective);
+				fixture.componentInstance.options = options;
+
+				fixture.componentRef.setInput('totalCount', options.length);
+				fixture.componentRef.setInput('withSelectAllDisplayerLabel', 'items');
+				fixture.detectChanges();
+			});
+
+			function displayerChipText(): string {
+				fixture.detectChanges();
+				return (fixture.nativeElement as HTMLElement).querySelector('.multipleSelect-displayer-chip')?.textContent?.trim() ?? '';
+			}
+
+			it('should display the singular label when a single option remains selected in exclude mode', () => {
+				// Arrange
+				fixture.componentRef.setInput('withSelectAllDisplayerLabelSingular', 'item');
+
+				// Act
+				selectAllDirective.writeValue({ mode: 'exclude', values: options.slice(1) });
+
+				// Assert
+				expect(displayerChipText()).toBe('1 item');
+			});
+
+			it('should display the plural label when several options remain selected in exclude mode', () => {
+				// Arrange
+				fixture.componentRef.setInput('withSelectAllDisplayerLabelSingular', 'item');
+
+				// Act
+				selectAllDirective.writeValue({ mode: 'exclude', values: [options[0]] });
+
+				// Assert
+				expect(displayerChipText()).toBe('4 items');
+			});
+
+			it('should fall back to the plural label when no singular label is provided', () => {
+				// Act
+				selectAllDirective.writeValue({ mode: 'exclude', values: options.slice(1) });
+
+				// Assert
+				expect(displayerChipText()).toBe('1 items');
+			});
+		});
 	});
 });
 

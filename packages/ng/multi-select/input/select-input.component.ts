@@ -91,6 +91,14 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input()
 	filterPillLabelPlural: string;
 
+	/**
+	 * Singular counterpart of `filterPillLabelPlural`, displayed when only one option is selected
+	 * but the selected option itself cannot be displayed (e.g. exclude mode with `withSelectAll`).
+	 * Falls back to `filterPillLabelPlural` when not provided.
+	 */
+	@Input()
+	filterPillLabelSingular: string;
+
 	override selectParent$ = new Subject<void>();
 	override selectChildren$ = new Subject<void>();
 
