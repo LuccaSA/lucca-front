@@ -9,8 +9,8 @@ import { TimePickerPartComponent } from './time-picker-part.component';
 	template: '',
 })
 export abstract class BasePickerComponent implements ControlValueAccessor {
-	onChange: (value: ISO8601Time | ISO8601Duration) => void;
-	onTouched: () => void;
+	onChange: (value: ISO8601Time | ISO8601Duration) => void = () => {};
+	onTouched: () => void = () => {};
 
 	readonly step = input<ISO8601Duration | null>(null);
 

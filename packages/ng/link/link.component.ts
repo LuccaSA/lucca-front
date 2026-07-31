@@ -111,7 +111,7 @@ export class LinkComponent {
 		// Only non-anchor hosts (e.g. `button[luLink]`) need us to open the window programmatically.
 		if (!this.disabled() && this.routerLinkCommands() && this.external() && !this.#isAnchor()) {
 			const externalUrl = this.#serializeExternalUrl();
-			afterNextRender(() => window.open(externalUrl, '_blank'), { injector: this.#injector });
+			afterNextRender(() => window.open(externalUrl ?? undefined, '_blank'), { injector: this.#injector });
 		}
 	}
 
