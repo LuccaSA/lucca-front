@@ -48,7 +48,7 @@
 	}
 
 	.dateRangeField-fieldset-arrow {
-		left: calc(50% - var(--pr-t-spacings-100) - var(--pr-t-spacings-25));
+		inset-inline-start: calc(50% - var(--pr-t-spacings-100) - var(--pr-t-spacings-25));
 	}
 
 	.dateRangeField-fieldset-textField.textField {
