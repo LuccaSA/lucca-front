@@ -220,7 +220,7 @@ La promotion de `strictNullChecks` dans le `tsconfig.json` de build a nécessit�
 | Symbole | Avant | Après | Nature |
 |---|---|---|---|
 | `ALuModalPanelComponent.submitClass$` | `Subject<unknown>` (`new Subject()`) | **`Subject<string>`** | 🔴 **Resserrement.** `submitClass$.next(autreChose)` ne compile plus dans une classe qui étend `ALuModalPanelComponent`. |
-| `CalendarMonthInfo.rangeInfo` | `RangeInfo` | **`RangeInfo \| null`** | 🔴 Une fonction `getCellInfo` / un template custom qui lit `month.rangeInfo.x` doit garder. |
+| `CalendarMonthInfo.rangeInfo` | `RangeInfo` | **`RangeInfo \| null`** | 🔴 Une fonction `getCellInfo` / un template custom qui lit `month.rangeInfo.x` doit ajouter une garde. |
 | `CalendarYearInfo.rangeInfo` | `RangeInfo` | **`RangeInfo \| null`** | idem (le pendant `CalendarCellInfo.rangeInfo` est déjà listé en §3). |
 | `DateRangeInputComponent.tabbableDateChange(date, calendarIndex)` | `date: Date` | `date: Date \| null` | Élargissement non breaking pour les overrides de méthode. |
 | `LuSimpleSelectInputComponent.autocomplete` | `input<AutoFill>('off')` | `input<AutoFill \| null>('off')` | Élargissement. Binding template inchangé ; la **lecture TS** `select.autocomplete()` rend `AutoFill \| null`. |
