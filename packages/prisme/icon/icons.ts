@@ -45,6 +45,8 @@ export type LuccaIcon =
 	| 'distribute'
 	| 'arrowCornerExpand'
 	| 'arrowCurvedDownRight'
+	| 'arrowUndo'
+	| 'arrowRedo'
 	| 'arrowDownload'
 	| 'download'
 	| 'arrowExternal'

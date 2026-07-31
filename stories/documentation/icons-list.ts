@@ -45,6 +45,8 @@ export const IconsList = [
 	{ icon: 'distribute', deprecated: true },
 	{ icon: 'arrowCornerExpand', deprecated: false },
 	{ icon: 'arrowCurvedDownRight', deprecated: false },
+	{ icon: 'arrowUndo', deprecated: false },
+	{ icon: 'arrowRedo', deprecated: false },
 	{ icon: 'arrowDownload', deprecated: false },
 	{ icon: 'download', deprecated: true },
 	{ icon: 'arrowExternal', deprecated: false },
