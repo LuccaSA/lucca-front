@@ -34,14 +34,17 @@ export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): R
 				path: '',
 				canDeactivate: dialogRouteConfig.canDeactivate
 					?.map((fn) => toCanDeactivateFn(fn))
-					?.map((guard): CanDeactivateFn<C> => (dialogComponentInstance, route, state, nextState) => {
-						// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
-						if (!dialogComponentInstance) {
-							return true;
-						}
+					?.map(
+						(guard): CanDeactivateFn<C> =>
+							(dialogComponentInstance, route, state, nextState) => {
+								// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
+								if (!dialogComponentInstance) {
+									return true;
+								}
 
-						return guard(dialogComponentInstance, route, state, nextState);
-					}),
+								return guard(dialogComponentInstance, route, state, nextState);
+							},
+					),
 			},
 		],
 	};
