@@ -14,7 +14,7 @@ import { Hx, ICON_TO_ILLUSTRATION } from '../empty-state.type';
 export class EmptyStateSectionComponent {
 	/** @deprecated use illustration and action */
 	readonly icon = input<string | null>(null);
-	readonly actionIllustration = computed(() => this.action() || this.icon()?.includes('Action.svg'));
+	readonly actionIllustration = computed(() => this.action() || (this.icon()?.includes('Action.svg') ?? false));
 
 	readonly illustration = input<BubbleIllustration | string | null>(null);
 	readonly action = input(false, { transform: luBooleanAttribute });
