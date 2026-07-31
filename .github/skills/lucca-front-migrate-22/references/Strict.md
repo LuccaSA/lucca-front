@@ -1,6 +1,9 @@
 # Strict — `strictNullChecks` sur l'API publique de `@lucca-front/ng`
 
-> Source : PR **#4497 « [core] strict them all »** (activation de `@lucca-front/ts-error` en `error` + `strictNullChecks` dans les `tsconfig.lint.json`), puis promotion de `strictNullChecks` dans le `tsconfig.json` de build.
+> Sources :
+> - PR **#4497 « [core] strict them all »** — activation de `@lucca-front/ts-error` en `error` + `strictNullChecks` dans les `tsconfig.lint.json`. C'est là que l'essentiel des signatures publiques a bougé (§1 à §4, §6).
+> - PR **#5122 « core(ng): enable strictNullChecks so published types model nullability »** — promotion de `strictNullChecks` dans le `tsconfig.json` de build, donc dans les `.d.ts` **publiés**. Peu de signatures publiques touchées (§7), mais **une trentaine de templates ont été null-narrowés**, ce qui change le DOM rendu dans des cas limites (§8).
+>
 > Périmètre de ce document : **impact côté projet consommateur** de `@lucca-front/ng`, pas le travail interne.
 
 ---
@@ -176,6 +179,10 @@ Les autres lignes du tableau sont des **élargissements** : le binding template 
 | `FilterPillComponent` | `ref.enableFilterPillMode?.()`, `popoverRef()?.close()` | `enableFilterPillMode` devient de fait optionnel pour un input custom en filter-pill |
 | `toSignal(…, { initialValue })` | `filterPillDisabled` → `false` (au lieu de `undefined`), `totalCount` → `0` | Première valeur émise différente ; `valueLength` passe par `?? 0` |
 | `withSelectAll` | `displayerCount: Signal<number \| null>` | Compteur `null` possible côté displayer custom |
+| `BasePickerComponent` (#5122) | `onChange` / `onTouched` initialisés à des no-ops | `if (picker.onChange)` toujours vrai ; picker hors form ne lève plus |
+| `AbstractDateComponent.ranges` (#5122) | les ranges transformés en `null` sont filtrés | Un `[ranges]` partiellement invalide perd des entrées au lieu de propager `null` |
+| `lu-user-tile`, `lu-page-header`, `lu-fieldset`, `lu-color-input`… (#5122) | élément hôte non rendu quand l'entrée est nil | Nœuds DOM disparus → sélecteurs e2e / snapshots / CSS (détail en §8) |
+| `lu-data-table-row`, `multilanguage-input` (#5122) | gardes `?.` sur le parent injecté | Usage hors table / hors `lu-form-field` : rendu dégradé silencieux au lieu d'une erreur |
 
 ---
 
@@ -206,9 +213,55 @@ dialogRef.instance.reload(); // narrowing acquis
 
 ---
 
-## 7. Checklist de migration côté consommateur
+## 7. Signatures publiques modifiées par la PR #5122
 
-1. **Conserver la configuration TypeScript existante.** Ne pas activer `noImplicitAny`, `strictNullChecks`, `strictTemplates` ou `strict` dans le cadre de cette migration : traiter uniquement les erreurs LF 22 produites avec les flags déjà activés dans le projet. Durcir le `tsconfig` ferait remonter un volume d'erreurs sans rapport avec LF 22, hors périmètre d'une migration à iso-comportement. Si le projet n'est pas strict, les points 2 à 9 ci-dessous ne remonteront quasiment rien — c'est attendu, et le vrai travail est alors le §5 (changements de comportement), à auditer dans tous les cas.
+La promotion de `strictNullChecks` dans le `tsconfig.json` de build a nécessité quelques ajustements de types publics supplémentaires. Ils sont peu nombreux mais deux sont de vrais breaking.
+
+| Symbole | Avant | Après | Nature |
+|---|---|---|---|
+| `ALuModalPanelComponent.submitClass$` | `Subject<unknown>` (`new Subject()`) | **`Subject<string>`** | 🔴 **Resserrement.** `submitClass$.next(autreChose)` ne compile plus dans une classe qui étend `ALuModalPanelComponent`. |
+| `CalendarMonthInfo.rangeInfo` | `RangeInfo` | **`RangeInfo \| null`** | 🔴 Une fonction `getCellInfo` / un template custom qui lit `month.rangeInfo.x` doit garder. |
+| `CalendarYearInfo.rangeInfo` | `RangeInfo` | **`RangeInfo \| null`** | idem (le pendant `CalendarCellInfo.rangeInfo` est déjà listé en §3). |
+| `DateRangeInputComponent.tabbableDateChange(date, calendarIndex)` | `date: Date` | `date: Date \| null` | Élargissement — casse un **override** typé `Date` dans une sous-classe. |
+| `LuSimpleSelectInputComponent.autocomplete` | `input<AutoFill>('off')` | `input<AutoFill \| null>('off')` | Élargissement. Binding template inchangé ; la **lecture TS** `select.autocomplete()` rend `AutoFill \| null`. |
+| `CalloutIconPipe.transform(state, icon)` | `(state: CalloutState, icon: LuccaIcon)` | `(state?: CalloutState, icon?: LuccaIcon)` | Élargissement des paramètres, non breaking. |
+| `BasePickerComponent.onChange` / `.onTouched` | déclarés non-optionnels mais **non initialisés** | initialisés à `() => {}` | Voir §5 : plus jamais `undefined`. |
+| `AbstractDateComponent.ranges` (transform) | `v.map(transformDateRangeInputToDateRange)` | `.filter((r): r is DateRange => r !== null)` | Les ranges dont la transformation rend `null` sont désormais **silencieusement retirés** de `ranges()` au lieu d'y figurer comme `null`. |
+
+⚠️ **`BasePickerComponent.onChange` / `onTouched`** (time-picker, duration-picker) : avant, ces callbacks valaient `undefined` tant que Angular n'avait pas appelé `registerOnChange` / `registerOnTouched` (usage hors `formControl`), et les templates les appelaient en `onTouched?.()`. Ils sont maintenant initialisés à des no-ops et appelés en `onTouched()`. Conséquence : un test `if (picker.onChange)` est **toujours vrai**, et un picker utilisé hors form ne lève plus.
+
+---
+
+## 8. Null-narrowing des templates (PR #5122) — DOM et rendu
+
+~30 templates ont été réécrits pour satisfaire `strictNullChecks` (`@if (x(); as x)`, `?.`, `?? ''`). La plupart sont neutres, mais **certains suppriment l'élément hôte quand l'entrée est nil**, alors qu'avant il était rendu vide. Impact : sélecteurs de tests e2e, snapshots, et CSS qui compte sur la présence du nœud.
+
+| Composant | Changement | Ce qui change à l'écran / dans le DOM |
+|---|---|---|
+| `lu-user-tile` | `{{ user() \| luUserDisplay }}` → entouré d'un `@if (user(); as user)` | Sans `[user]`, la `<div class="userTile-content-name">` **n'existe plus** (avant : div présente, texte vide). |
+| `lu-page-header` | `@if (label(); as label)` autour du `<h1>` / du portal | Sans `[label]`, plus de `<h1 class="pageHeader-content-title-content">`. |
+| `lu-fieldset` | `heading` et `helper` entourés d'un `@if` | Wrappers absents au lieu de vides. |
+| `lu-comment` | `authorName` entouré d'un `@if`, `date()?.toISOString()` | `<span class="comment-infos-name">` vide au lieu d'un portal sur `null` ; `datetime` absent si pas de date. |
+| `lu-activity-feed-step` | `@if (user(); as user)`, `@if (label(); as label)`, `preparedDate()?.toISOString()` | idem. |
+| `lu-segmented-control-tabs`, `lu-segmented-control-filter` | `label` entouré d'un `@if` | Onglet / filtre sans label rendu vide plutôt que portal sur `null`. |
+| `lu-color-input` | `@let color = currentColorPresentation()` → `@if (currentColorPresentation(); as color)` | Le `<lu-color>` de la valeur courante **disparaît** quand il n'y a pas de couleur sélectionnée (avant : accès à `color.borderColor` sur `undefined`). |
+| `lu-data-table-body`, `index-table-body` | `@if (group() && groupButtonAlt())` → deux `@if` imbriqués | Comportement identique (la ligne de groupe exige toujours les deux). |
+| `lu-tag`, `lu-chip`, `lu-vertical-navigation*`, `lu-highlight-data`, `lu-empty-state-*`, `lu-input-framed`, `lu-form-label`, `lu-callout*` | `@if (x()) { … x() }` → `@if (x(); as x)` | Neutre — même condition de rendu. |
+| `lu-dialog` (`dialog-content-adapter`) | `[value]="(submitCounter$ \| async) ?? 0"` | Le `lu-numeric-badge` reçoit `0` au lieu de `null` avant la première émission → un badge peut afficher `0` là où il était vide. À vérifier visuellement sur les modales avec compteur de soumission. |
+| `date-input` (date2) | `prev(calendarMode())` → `prev(calendarMode() ?? mode())` | La navigation précédent/suivant utilise désormais `mode()` en repli quand `calendarMode` n'est pas encore posé (avant : appel avec `undefined`). **Correction fonctionnelle.** |
+| `simple-select/panel` | `[selectedOptions]="[selected()]"` → `selectedOptions()` (`[]` si `null`) | Un `optionComparer` custom n'est plus appelé avec `null` côté tree-select. |
+| `multilanguage-input` | `formFieldRef?.` / `formFieldSize?.()` partout, `[required]="… ?? false"` | Le composant tolère l'absence de `lu-form-field` parent au lieu de lever. Rendu dégradé silencieux si le wrapper manque. |
+| `lu-data-table-row` | `tableRef.drag()` → `tableRef?.drag()` (host bindings inclus) | Une row utilisée hors `lu-data-table` ne lève plus : elle se rend sans les classes `mod-selectable` / `mod-draggable`. |
+| `core-select` option « me » | `a && b && hasEmptyClue$ \| async` → `a && b && (hasEmptyClue$ \| async)` | 🐛 **Correction de précédence** : avant, l'`AsyncPipe` recevait le booléen `a && b` et levait `InvalidPipeArgument` quand `displayMeOption()` était faux. |
+| `lu-toast` | `[class]="toast.type ? paletteClassByToastType[toast.type] : null"`, `(toast.duration ?? 0) > 0` | Neutre. |
+| `lu-user-picture` | `[ngStyle]="!AI() && style()"` → `AI() ? null : style()` | Neutre. |
+| `lu-pagination`, `formly/types/*`, `lu-file-entry`, `lu-form-field`, `lu-filter-bar`, `lu-tree-branch`, `lu-number-input`, `lu-radio`, `multi-select`/`simple-select` displayers & panels | `?? ''` / `?? 0` / `?? false` / `?? undefined` sur des bindings, `@if (grouping(); as grouping)` | Neutre — même rendu, mêmes conditions. |
+
+---
+
+## 9. Checklist de migration côté consommateur
+
+1. **Conserver la configuration TypeScript existante.** Ne pas activer `noImplicitAny`, `strictNullChecks`, `strictTemplates` ou `strict` dans le cadre de cette migration : traiter uniquement les erreurs LF 22 produites avec les flags déjà activés dans le projet. Durcir le `tsconfig` ferait remonter un volume d'erreurs sans rapport avec LF 22, hors périmètre d'une migration à iso-comportement. Si le projet n'est pas strict, les points 2 à 9 ci-dessous ne remonteront quasiment rien — c'est attendu, et le vrai travail est alors le §5 et le §8 (changements de comportement et de rendu), à auditer dans tous les cas.
 2. **Recenser les classes qui héritent de LF** — c'est la source des erreurs les plus coûteuses :
    ```bash
    grep -rnE 'extends\s+(ALuInput|ALuSelectInput|ALuSelectInputComponent|ALuDateAdapter|ALuPopupRef|ALuPopoverTrigger|BasePickerComponent|AbstractDateComponent)\b' src/
@@ -235,13 +288,22 @@ dialogRef.instance.reload(); // narrowing acquis
    ```
 7. **Chercher les `[(calendarMode)]`** et les `getCellInfo` typés strictement.
 8. **Chercher les `PortalDirective<…>`** paramétrés avec un type primitif.
-9. **Relever les `as any` / `!` existants** qui masquent potentiellement les nullités et les signaler comme pistes hors périmètre, sans les modifier s'ils ne bloquent pas la migration LF 22.
-10. **Rejouer les parcours listés en §5** — aucun de ces changements ne produit d'erreur `tsc`.
+9. **Auditer les extensions de `ALuModalPanelComponent`** (§7) et les overrides de `tabbableDateChange` :
+   ```bash
+   grep -rn 'submitClass\$' src/
+   grep -rn 'tabbableDateChange' src/
+   ```
+10. **Vérifier les sélecteurs de tests / le CSS qui dépendent d'un nœud désormais conditionnel** (§8) :
+    ```bash
+    grep -rnE 'userTile-content-name|pageHeader-content-title-content' src/ e2e/ cypress/ 2>/dev/null
+    ```
+11. **Relever les `as any` / `!` existants** qui masquent potentiellement les nullités et les signaler comme pistes hors périmètre, sans les modifier s'ils ne bloquent pas la migration LF 22.
+12. **Rejouer les parcours listés en §5 et §8** — aucun de ces changements ne produit d'erreur `tsc`.
 
 ---
 
-## 8. Contexte interne (pour information)
+## 10. Contexte interne (pour information)
 
-- `tsconfig.json` (build) : `strict: false` mais **`strictNullChecks: true`** → c'est ce flag qui se propage dans les `.d.ts` publiés.
+- `tsconfig.json` (build) : `strict: false` mais **`strictNullChecks: true`** → c'est ce flag qui se propage dans les `.d.ts` publiés. Posé par la PR #5122.
 - ESLint : `@lucca-front/ts-error` passe en `error` sur `**/*.ts`, avec `packages/ng/schematics/**` et `stories/**` exclus.
 - **Aucun schematic ne couvre cette migration** : c'est du diagnostic de compilation, pas un codemod. L'aide consiste à lire l'erreur et proposer la garde correcte (`?.`, `??`, `isNotNil`, `assertNotNil`, `@if`) — jamais un `!` posé au hasard.
