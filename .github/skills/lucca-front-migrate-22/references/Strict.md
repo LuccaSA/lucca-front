@@ -222,7 +222,7 @@ La promotion de `strictNullChecks` dans le `tsconfig.json` de build a nécessit�
 | `ALuModalPanelComponent.submitClass$` | `Subject<unknown>` (`new Subject()`) | **`Subject<string>`** | 🔴 **Resserrement.** `submitClass$.next(autreChose)` ne compile plus dans une classe qui étend `ALuModalPanelComponent`. |
 | `CalendarMonthInfo.rangeInfo` | `RangeInfo` | **`RangeInfo \| null`** | 🔴 Une fonction `getCellInfo` / un template custom qui lit `month.rangeInfo.x` doit garder. |
 | `CalendarYearInfo.rangeInfo` | `RangeInfo` | **`RangeInfo \| null`** | idem (le pendant `CalendarCellInfo.rangeInfo` est déjà listé en §3). |
-| `DateRangeInputComponent.tabbableDateChange(date, calendarIndex)` | `date: Date` | `date: Date \| null` | Élargissement — casse un **override** typé `Date` dans une sous-classe. |
+| `DateRangeInputComponent.tabbableDateChange(date, calendarIndex)` | `date: Date` | `date: Date \| null` | Élargissement non breaking pour les overrides de méthode. |
 | `LuSimpleSelectInputComponent.autocomplete` | `input<AutoFill>('off')` | `input<AutoFill \| null>('off')` | Élargissement. Binding template inchangé ; la **lecture TS** `select.autocomplete()` rend `AutoFill \| null`. |
 | `CalloutIconPipe.transform(state, icon)` | `(state: CalloutState, icon: LuccaIcon)` | `(state?: CalloutState, icon?: LuccaIcon)` | Élargissement des paramètres, non breaking. |
 | `BasePickerComponent.onChange` / `.onTouched` | déclarés non-optionnels mais **non initialisés** | initialisés à `() => {}` | Voir §5 : plus jamais `undefined`. |
