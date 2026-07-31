@@ -100,7 +100,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.select.hasValue = () => this.#hasValue();
 		this.select.isFilterPillEmpty = computed(() => !this.#hasValue());
 		this.select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include' || this.singleRemainingOption() !== undefined);
-		this.select.singleOptionForDisplay = computed(() => (this.#mode() === 'include' ? this.select.valueSignal()?.[0] : this.singleRemainingOption()));
+		this.select.singleOptionForDisplay = computed(() => (this.#mode() === 'include' && this.#valuesCount() === 1 ? this.select.valueSignal()?.[0] : this.singleRemainingOption()));
 		this.select.valueLength = this.displayerCount;
 	}
 

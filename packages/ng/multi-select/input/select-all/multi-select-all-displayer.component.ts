@@ -45,13 +45,7 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly displayerLabel = this.selectAllContext.displayerLabel;
 	readonly displayerCount = this.selectAllContext.displayerCount;
 
-	readonly displayedSingleOption = computed<TValue | undefined>(() => {
-		if (this.isIncludeMode()) {
-			return this.displayerCount() === 1 ? this.select.valueSignal()?.[0] : undefined;
-		}
-
-		return this.selectAllContext.singleRemainingOption() as TValue | undefined;
-	});
+	readonly displayedSingleOption = this.select.singleOptionForDisplay;
 
 	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 	readonly disabled = toSignal(this.select.disabled$);

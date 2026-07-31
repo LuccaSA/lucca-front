@@ -7,7 +7,6 @@ export interface LuMultiSelectWithSelectAllContext {
 	mode: Signal<LuMultiSelectionMode>;
 	values: Signal<unknown[]>;
 	displayerLabel: Signal<string>;
-	singleRemainingOption: Signal<unknown | undefined>;
 	totalCount: Signal<number>;
 	displayerCount: Signal<number>;
 	intl: Signal<ILuMultiSelectLabel>;
