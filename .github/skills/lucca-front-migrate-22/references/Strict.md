@@ -243,7 +243,7 @@ La promotion de `strictNullChecks` dans le `tsconfig.json` de build a nécessit�
 | `lu-fieldset` | `heading` et `helper` entourés d'un `@if` | Wrappers absents au lieu de vides. |
 | `lu-comment` | `authorName` entouré d'un `@if`, `date()?.toISOString()` | Sans `authorName`, le `<span class="comment-infos-name">` n'existe plus (avant : span présent avec un portal sur `null`) ; `datetime` est absent si aucune date n'est fournie. |
 | `lu-activity-feed-step` | `@if (user(); as user)`, `@if (label(); as label)`, `preparedDate()?.toISOString()` | idem. |
-| `lu-segmented-control-tabs`, `lu-segmented-control-filter` | `label` entouré d'un `@if` | Onglet / filtre sans label rendu vide plutôt que portal sur `null`. |
+| `lu-segmented-control-tabs`, `lu-segmented-control-filter` | `label` entouré d'un `@if` | Neutre — le portal sur `null` ne rendait déjà aucun contenu et le bouton / label reste présent. |
 | `lu-color-input` | `@let color = currentColorPresentation()` → `@if (currentColorPresentation(); as color)` | Le `<lu-color>` de la valeur courante **disparaît** quand il n'y a pas de couleur sélectionnée (avant : accès à `color.borderColor` sur `undefined`). |
 | `lu-data-table-body`, `index-table-body` | `@if (group() && groupButtonAlt())` → deux `@if` imbriqués | Comportement identique (la ligne de groupe exige toujours les deux). |
 | `lu-tag`, `lu-chip`, `lu-vertical-navigation*`, `lu-highlight-data`, `lu-empty-state-*`, `lu-input-framed`, `lu-form-label`, `lu-callout*` | `@if (x()) { … x() }` → `@if (x(); as x)` | Neutre — même condition de rendu. |
