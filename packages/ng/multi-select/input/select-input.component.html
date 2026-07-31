@@ -24,10 +24,7 @@
 	@if (valueLength() > minCount) {
 		<span class="multipleSelect-pill-displayer-label">{{ valueLength() }} {{ filterPillLabelPlural }}</span>
 	} @else {
-		{{ label }}
-		@if (valueLength() === 1) {
-			{{ colon }}
-		}
+		{{ label }}{{ valueLength() === 1 ? colon : "" }}
 	}
 </ng-container>
 @if (!ignorePresentation()) {
