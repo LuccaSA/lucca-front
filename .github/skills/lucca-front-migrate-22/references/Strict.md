@@ -302,7 +302,7 @@ Environ 30 templates ont été réécrits pour satisfaire `strictNullChecks` (`@
 
 ---
 
-## 10. Contexte interne (pour information)
+## 10. Contexte interne
 
 - `tsconfig.json` (build) : `strict: false` mais **`strictNullChecks: true`** → c'est ce flag qui se propage dans les `.d.ts` publiés. Posé par la PR #5122.
 - ESLint : `@lucca-front/ts-error` passe en `error` sur `**/*.ts`, avec `packages/ng/schematics/**` et `stories/**` exclus.
