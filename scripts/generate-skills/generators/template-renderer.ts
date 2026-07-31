@@ -28,6 +28,9 @@ Handlebars.registerHelper('escapePipe', (str: string) => {
 // Template cache
 const templateCache = new Map<string, HandlebarsTemplateDelegate>();
 
+// Story body partial — shared markup for a story inlined in <slug>.component.md.
+Handlebars.registerPartial('storyBody', fs.readFileSync(path.join(TEMPLATES_DIR, 'story-body.hbs'), 'utf-8'));
+
 function getTemplate(name: string): HandlebarsTemplateDelegate {
 	if (!templateCache.has(name)) {
 		const src = fs.readFileSync(path.join(TEMPLATES_DIR, `${name}.hbs`), 'utf-8');
@@ -39,7 +42,7 @@ function getTemplate(name: string): HandlebarsTemplateDelegate {
 /**
  * Renders the main component skill markdown (API + Basic Usage + links).
  */
-export function renderComponentMd(data: ComponentData, opts?: { hasDesign?: boolean; hasChangelog?: boolean; hasFigma?: boolean }): string {
+export function renderComponentMd(data: ComponentData, opts?: { hasDesign?: boolean; changelog?: string | null; hasFigma?: boolean }): string {
 	const template = getTemplate('component');
 
 	const context = {
@@ -62,9 +65,10 @@ export function renderComponentMd(data: ComponentData, opts?: { hasDesign?: bool
 		// previous run (the caller passes the real value) — a --skip-figma/no-token run must not
 		// silently drop the link.
 		hasFigma: opts?.hasFigma ?? (data.figma != null),
-		// Only emit the Changelog link when the file is actually written (buildComponentChangelog
-		// returns null for CSS-only components with no API history and no ZH prose).
-		hasChangelog: opts?.hasChangelog ?? true,
+		// Section-level changelog content appended as the LAST `## Changelog` section — the
+		// aggregate writer relies on it being last to strip it before override comparison.
+		// null/empty for CSS-only components with no API history and no ZH prose.
+		changelog: opts?.changelog?.trim() || null,
 		expandedTypeDefs: collectExpandedTypeDefs(data),
 	};
 
@@ -154,26 +158,20 @@ export function extractZhStoryNotes(rawZh: string): ZhStoryNote[] {
 }
 
 /**
- * Renders the design index markdown (design/_index.md).
+ * Renders the merged design guidelines markdown (<slug>.design.md) — overview followed by every
+ * design section inline (H1 titles, mirroring the original ZH page structure).
  */
-export function renderDesignIndexMd(slug: string, sections: DesignSection[], overviewContent: string, zhPagePath: string): string {
-	const template = getTemplate('design-index');
+export function renderDesignMd(slug: string, sections: DesignSection[], overviewContent: string, zhPagePath: string): string {
+	const template = getTemplate('design');
 	return cleanOutput(template({ slug, sections, overviewContent: overviewContent || null, zhPagePath }));
 }
 
 /**
- * Renders a single design section file (design/<section>.md).
- */
-export function renderDesignSectionMd(slug: string, section: DesignSection): string {
-	const template = getTemplate('design-section');
-	return cleanOutput(template({ slug, ...section }));
-}
-
-/**
  * Renders the component page markdown (<slug>.component.md).
- * Merges ZH code sections (Angular, HTML) as implementation notes before stories listing.
+ * Merges ZH code sections (Angular, HTML) as implementation notes, then inlines every story
+ * (### <name> under its framework heading) via the storyBody partial.
  */
-export function renderComponentPageMd(data: ComponentData, codeSections: DesignSection[] = []): string | null {
+export function renderComponentPageMd(data: ComponentData, codeSections: DesignSection[] = [], scssImport = ''): string | null {
 	const hasExamples = data.storyExamples && data.storyExamples.length > 0;
 	if (!hasExamples && codeSections.length === 0) return null;
 
@@ -182,8 +180,12 @@ export function renderComponentPageMd(data: ComponentData, codeSections: DesignS
 	const angularSection = codeSections.find((s) => /angular/i.test(s.title));
 	const htmlSection = codeSections.find((s) => /html/i.test(s.title));
 
-	const angularExamples = (data.storyExamples ?? []).filter((e) => e.framework === 'angular');
-	const htmlExamples = (data.storyExamples ?? []).filter((e) => e.framework === 'html-css');
+	const angularExamples = (data.storyExamples ?? [])
+		.filter((e) => e.framework === 'angular')
+		.map((e) => buildStoryContext(data.slug, e, scssImport));
+	const htmlExamples = (data.storyExamples ?? [])
+		.filter((e) => e.framework === 'html-css')
+		.map((e) => buildStoryContext(data.slug, e, scssImport));
 
 	const zhAngularNotes = angularSection ? cleanCodeSectionForExamples(angularSection.content) || null : null;
 	const zhHtmlNotes = htmlSection ? cleanCodeSectionForExamples(htmlSection.content) || null : null;
@@ -203,10 +205,9 @@ export function renderComponentPageMd(data: ComponentData, codeSections: DesignS
 }
 
 /**
- * Renders a single story file.
+ * Builds the rendering context of one story for the storyBody partial.
  */
-export function renderStoryMd(slug: string, example: StoryExample, scssImport?: string): string {
-	const template = getTemplate('example');
+function buildStoryContext(slug: string, example: StoryExample, scssImport?: string): Record<string, unknown> {
 	const isHtml = example.framework === 'html-css';
 
 	// For HTML/CSS stories: merge ZH imports (SCSS) with the base scssImport into a single CSS block
@@ -223,13 +224,12 @@ export function renderStoryMd(slug: string, example: StoryExample, scssImport?: 
 		displayImports = example.zhImports ?? example.imports;
 	}
 
-	const context = {
+	return {
 		slug,
 		...example,
 		displayImports,
 		scssImport: cssImportBlock,
 	};
-	return cleanOutput(template(context));
 }
 
 /**

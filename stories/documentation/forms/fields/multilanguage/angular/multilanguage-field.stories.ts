@@ -7,6 +7,7 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { useState } from 'storybook/preview-api';
 
 export default {
 	title: 'Documentation/Forms/Fields/MultilanguageField/Angular',
@@ -107,26 +108,32 @@ export const Basic: StoryObj<
 > = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, disabled, ...inputArgs } = args;
-		const formControl = new FormControl<MultilanguageTranslation[]>([
-			{
-				cultureCode: 'invariant',
-				value: 'Invariant value',
-			},
-			{
-				cultureCode: 'fr-FR',
-				value: 'Valeur en français',
-			},
-			{
-				cultureCode: 'en-US',
-				value: 'English value',
-			},
-			{
-				cultureCode: 'de-DE',
-				value: "I don't speak German",
-			},
-		]);
+		// Same lifetime as useStoryModel: kept across control changes, rebuilt when the story is remounted.
+		const [formControl] = useState(
+			() =>
+				new FormControl<MultilanguageTranslation[]>([
+					{
+						cultureCode: 'invariant',
+						value: 'Invariant value',
+					},
+					{
+						cultureCode: 'fr-FR',
+						value: 'Valeur en français',
+					},
+					{
+						cultureCode: 'en-US',
+						value: 'English value',
+					},
+					{
+						cultureCode: 'de-DE',
+						value: "I don't speak German",
+					},
+				]),
+		);
 		if (disabled) {
 			formControl.disable();
+		} else {
+			formControl.enable();
 		}
 		return {
 			props: {

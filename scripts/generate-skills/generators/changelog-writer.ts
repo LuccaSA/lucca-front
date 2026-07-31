@@ -6,8 +6,9 @@
  * with no API change are omitted. An optional ZeroHeight prose section is appended as a
  * "release notes" layer.
  *
- * Output is written by skill-writer's `writeChangelog` to:
- *   <version>/references/components/<slug>/<slug>.changelog.md
+ * Output is SECTION-LEVEL markdown (### entries, no H1) embedded by the component template as
+ * the trailing `## Changelog` section of:
+ *   <version>/references/components/<slug>/<slug>.md
  *
  * NOTE: a per-entry commit/compare link (escape hatch) is intentionally deferred — v1 is the
  * structural diff only.
@@ -21,7 +22,8 @@ import { resolveVersion, listStableTags, compareTags } from '../version-config';
 /** Run-level cache: each (ngPackage, selectors, tag) API is extracted once, reused across target versions. */
 const apiCache = new Map<string, PackageAPI | null>();
 
-function getApi(ngPackage: string, tag: string, selectorFilter?: string[]): PackageAPI | null {
+/** Extracts (with run-level cache) a package's API at a git tag. Shared with fixes-writer. */
+export function getApiAtTag(ngPackage: string, tag: string, selectorFilter?: string[]): PackageAPI | null {
 	const key = `${ngPackage}|${(selectorFilter ?? []).join(',')}@${tag}`;
 	const cached = apiCache.get(key);
 	if (cached !== undefined) return cached;
@@ -63,7 +65,7 @@ export function buildComponentChangelog(input: ChangelogInput): string | null {
 		let prevApi: PackageAPI | null = null;
 		let seen = false;
 		for (const tag of tags) {
-			const api = getApi(ngPackage, tag, ngSelectors);
+			const api = getApiAtTag(ngPackage, tag, ngSelectors);
 			if (!api && !seen) continue; // component not introduced yet at this tag
 
 			const delta = diffPackageApi(prevApi, api);
@@ -77,21 +79,24 @@ export function buildComponentChangelog(input: ChangelogInput): string | null {
 
 	if (entries.length === 0 && !(zhProse && zhProse.trim())) return null;
 
-	let md = `# ${slug} — Changelog\n\n`;
+	let md = '';
 
 	if (entries.length > 0) {
 		md += `> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à \`${version.tag}\`. Les versions sans changement d'API sont omises.\n\n`;
 		// Newest first.
 		for (const e of entries.reverse()) {
-			md += `## ${e.version}\n\n${e.lines.join('\n')}\n\n`;
+			md += `### ${e.version}\n\n${e.lines.join('\n')}\n\n`;
 		}
 	} else if (ngPackage) {
 		md += `_Aucun changement d'API détecté sur l'historique stable jusqu'à ${version.tag}._\n\n`;
 	}
 
 	if (zhProse && zhProse.trim()) {
-		md += `## Notes de release (ZeroHeight)\n\n${zhProse.trim()}\n`;
+		// Demote ZH prose headings one level (### x.y.z → #### x.y.z) so they nest under the
+		// "Notes de release" heading instead of reading as structural-diff siblings.
+		const demoted = zhProse.trim().replace(/^(#{1,5})\s/gm, '#$1 ');
+		md += `### Notes de release (ZeroHeight)\n\n${demoted}\n`;
 	}
 
-	return md;
+	return md.trim();
 }
