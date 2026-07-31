@@ -1,7 +1,6 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
 	afterNextRender,
-	booleanAttribute,
 	ChangeDetectorRef,
 	computed,
 	Directive,
@@ -22,7 +21,7 @@ import {
 } from '@angular/core';
 import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { isNotNil, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
@@ -63,7 +62,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected updatePositionFn?: () => void;
 	public filterPillMode = false;
 
-	public readonly ignorePresentation = input(false, { transform: booleanAttribute });
+	public readonly ignorePresentation = input(false, { transform: luBooleanAttribute });
 
 	public selectParent$?: Subject<void>;
 	public selectChildren$?: Subject<void>;
@@ -82,7 +81,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly placeholder = input<string>();
 
-	readonly clearableInput = input<boolean | null>(null, { transform: booleanAttribute, alias: 'clearable' });
+	readonly clearableInput = input<boolean | null>(null, { transform: luBooleanAttribute, alias: 'clearable' });
 
 	readonly isClearable = computed(() => this.clearableInput() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
@@ -139,13 +138,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly optionKeyInput = input<(option: TOption) => unknown>(coreSelectDefaultOptionKey, { alias: 'optionKey' });
 
-	readonly noClueIcon = input(false, { transform: booleanAttribute });
+	readonly noClueIcon = input(false, { transform: luBooleanAttribute });
 
-	readonly inputTabindex = input<number>(0);
+	readonly inputTabindex = input(0, { transform: luNumberAttribute });
 
-	readonly compact = input(false, { transform: booleanAttribute });
+	readonly compact = input(false, { transform: luBooleanAttribute });
 
-	readonly colorPicker = input(false, { transform: booleanAttribute });
+	readonly colorPicker = input(false, { transform: luBooleanAttribute });
 
 	protected get isNoClueIconClass(): boolean {
 		return this.noClueIcon();

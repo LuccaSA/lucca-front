@@ -12,7 +12,7 @@
 					luButton
 					type="button"
 					[palette]="submitPalette"
-					[disabled]="submitDisabled$ | async"
+					[disabled]="(submitDisabled$ | async) ?? false"
 					[class]="submitClass()"
 					(click)="submit()"
 				>

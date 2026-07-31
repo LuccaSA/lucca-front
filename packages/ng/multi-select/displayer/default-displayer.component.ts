@@ -35,7 +35,7 @@ let nextID = 0;
 			</div>
 
 			@for (option of displayedOptions$ | async; track option; let index = $index) {
-				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
+				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="(select.disabled$ | async) ?? false">
 					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
 				</lu-chip>
 			}

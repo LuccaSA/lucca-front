@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, Signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, input, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { getIntl, luBooleanAttribute } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, INPUT_FRAMED_INSTANCE, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -35,12 +35,12 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	readonly formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 	readonly intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
 
-	readonly checklist = input(false, { transform: booleanAttribute });
+	readonly checklist = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Should set aria-checked='mixed' attribute ?
 	 */
-	readonly mixed = input(false, { transform: booleanAttribute });
+	readonly mixed = input(false, { transform: luBooleanAttribute });
 
 	readonly isFilterPill = signal<boolean>(false);
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
