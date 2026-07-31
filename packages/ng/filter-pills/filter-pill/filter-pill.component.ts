@@ -136,7 +136,7 @@ export class FilterPillComponent {
 		if (!this.shouldShowColon()) {
 			return '';
 		}
-		if (this.#locale === 'fr') {
+		if (this.#locale.split('-')[0] === 'fr') {
 			return ' :';
 		}
 		return ':';

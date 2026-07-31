@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "strictNullChecks": true,
-    "types": ["vitest/globals", "vitest/importMeta", "vite/client", "node", "vitest"]
-  },
-  "files": ["../../vitest-matchers.d.ts"],
-  "include": ["**/*.ts"]
-}

@@ -15,7 +15,7 @@ describe('Tokens typo Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'tokens-typo', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'tokens-typo', { skipInstall: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);
@@ -40,7 +40,7 @@ describe('Tokens typo Migration', () => {
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');
 
 		// Act
-		await runSchematic('collection', collectionPath, 'tokens-typo', { skipInstallation: true }, tree);
+		await runSchematic('collection', collectionPath, 'tokens-typo', { skipInstall: true }, tree);
 
 		// Assert
 		tree.visit((p, entry) => {

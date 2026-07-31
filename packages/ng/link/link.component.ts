@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, ElementRef, inject, Injector, input, ViewEncapsulation } from '@angular/core';
-import { Router, UrlTree } from '@angular/router';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { LU_INDEX_TABLE_INSTANCE } from '@lucca-front/ng/index-table';
 
@@ -42,6 +42,7 @@ export class LinkComponent {
 	#elementRef = inject(ElementRef);
 	readonly router = inject(Router);
 	readonly location = inject(Location);
+	readonly #activatedRoute = inject(ActivatedRoute, { optional: true });
 	readonly insideIndexTable = inject(LU_INDEX_TABLE_INSTANCE, { optional: true });
 	readonly insideDataTable = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
@@ -128,12 +129,18 @@ export class LinkComponent {
 			routerLinkCommands instanceof UrlTree
 				? routerLinkCommands
 				: this.router.createUrlTree(Array.isArray(routerLinkCommands) ? routerLinkCommands : [routerLinkCommands], {
+						// Resolve relative commands against the current route, like Angular's `RouterLink` does.
+						// An explicit `relativeTo` wins, including `null` which means "resolve from the root";
+						// only `undefined` falls back to the injected `ActivatedRoute`.
+						relativeTo: this.routerLink.relativeTo === undefined ? this.#activatedRoute : this.routerLink.relativeTo,
 						queryParams: this.routerLink.queryParams,
 						fragment: this.routerLink.fragment,
 						queryParamsHandling: this.routerLink.queryParamsHandling,
 						preserveFragment: this.routerLink.preserveFragment,
 					});
 		const serializedUrl = this.router.serializeUrl(urlTree);
-		return Array.isArray(routerLinkCommands) ? this.location.prepareExternalUrl(serializedUrl) : serializedUrl;
+		// Apply the app's baseHref regardless of the commands' shape (string, array or `UrlTree`):
+		// they all describe an internal route, so the serialized URL must carry the baseHref.
+		return this.location.prepareExternalUrl(serializedUrl);
 	}
 }

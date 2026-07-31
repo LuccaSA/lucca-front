@@ -14,7 +14,7 @@ describe('Empty state title migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'empty-state-heading', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'empty-state-heading', { skipInstall: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);

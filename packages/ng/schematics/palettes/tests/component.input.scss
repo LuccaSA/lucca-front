@@ -5,6 +5,14 @@
 	-webkit-text-fill-color: var(--palettes-critical-text);
 }
 
+.mod-grey,
+.icon-color-primary,
+.icon-color-secondary,
+.u-textPrimary,
+.pr-u-colorTextLucca {
+	color: red;
+}
+
 .rgba-vars {
 	background-color: rgba(var(--colors-grey-900-rgb), 0.04);
 	border-color: rgb(var(--colors-grey-400-rgb), 0.5);

@@ -1,17 +1,11 @@
 {
-	"extends": "../../tsconfig.json",
-	"compilerOptions": {
-		"declaration": true,
-		"stripInternal": true,
-		"emitDecoratorMetadata": false,
-		"outDir": "../build",
-		"rootDirs": ["."],
-		"skipLibCheck": true
-	},
-	"angularCompilerOptions": {
-		"preserveSymlinks": true,
-		"annotateForClosureCompiler": false,
-		"strictMetadataEmit": true,
-		"skipTemplateCodegen": true
-	}
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.src.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }
