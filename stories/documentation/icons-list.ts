@@ -503,6 +503,7 @@ export const IconsList = [
 	{ icon: 'signShieldError', deprecated: false },
 	{ icon: 'signShieldSuccess', deprecated: false },
 	{ icon: 'signShieldWarning', deprecated: false },
+	{ icon: 'signShieldCancel', deprecated: false },
 	{ icon: 'signSimpleChoice', deprecated: false },
 	{ icon: 'signSuccess', deprecated: false },
 	{ icon: 'success', deprecated: true },

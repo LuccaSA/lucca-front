@@ -503,6 +503,7 @@ export type LuccaIcon =
 	| 'signShieldError'
 	| 'signShieldSuccess'
 	| 'signShieldWarning'
+	| 'signShieldCancel'
 	| 'signSimpleChoice'
 	| 'signSuccess'
 	| 'success'
