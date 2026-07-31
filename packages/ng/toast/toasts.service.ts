@@ -4,7 +4,7 @@ import { defaultToastDuration, LuToast, LuToastInput } from './toasts.model';
 
 @Injectable({ providedIn: 'root' })
 export class LuToastsService {
-	public toasts$ = new BehaviorSubject<LuToast[]>([]);
+	public readonly toasts$ = new BehaviorSubject<LuToast[]>([]);
 
 	public addToast(toastInput: LuToastInput): LuToast {
 		const toast = this.getToast(toastInput);

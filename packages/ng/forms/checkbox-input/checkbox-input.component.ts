@@ -32,11 +32,11 @@ let nextId = 0;
 	},
 })
 export class CheckboxInputComponent implements FilterPillInputComponent, OnInit {
-	#injector = inject(Injector);
-	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
-	parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
-	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
-	intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
+	readonly #injector = inject(Injector);
+	readonly framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
+	readonly parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
+	readonly formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
+	readonly intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
 
 	readonly checklist = input(false, { transform: booleanAttribute });
 
@@ -45,14 +45,14 @@ export class CheckboxInputComponent implements FilterPillInputComponent, OnInit 
 	 */
 	readonly mixed = input(false, { transform: booleanAttribute });
 
-	isFilterPill = signal<boolean>(false);
+	readonly isFilterPill = signal<boolean>(false);
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
 
-	filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
-	isFilterPillEmpty: Signal<boolean> = signal(true);
-	isFilterPillClearable: Signal<boolean> = signal(false);
-	hideCombobox: Signal<boolean> = signal(true);
-	showColon: Signal<boolean> = signal(false);
+	readonly filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
+	readonly isFilterPillEmpty: Signal<boolean> = signal(true);
+	readonly isFilterPillClearable: Signal<boolean> = signal(false);
+	readonly hideCombobox: Signal<boolean> = signal(true);
+	readonly showColon: Signal<boolean> = signal(false);
 
 	ngControl = injectNgControl();
 

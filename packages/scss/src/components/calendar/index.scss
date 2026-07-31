@@ -14,6 +14,10 @@
 		&.mod-daysOverflowingHidden {
 			@include daysOverflowingHidden;
 		}
+
+		&:has(.calendar-table-body-row-cell-action-week) {
+			@include week;
+		}
 	}
 }
 
@@ -27,6 +31,50 @@
 		// if rows have three columns (display for months and years)
 		&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {
 			@include third;
+		}
+
+		// if rows have height columns (display for weeks)
+		&:has(.calendar-table-body-row-cell:nth-child(8):last-child) {
+			@include week;
+
+			.calendar-table-body-row-cell {
+				&.is-selected {
+					@include selected;
+					@include weekSelected;
+				}
+			}
+
+			.calendar-table-body-row {
+				&:has(.calendar-table-body-row-cell-action:focus-visible) {
+					@include weekFocusVisible;
+				}
+			}
+
+			.calendar-table-body-row {
+				&:not(:has(.calendar-table-body-row-cell.is-selected), :has(.calendar-table-body-row-cell:nth-child(7):empty)) {
+					&:hover {
+						@include weekHover;
+					}
+
+					&:active {
+						@include weekActive;
+					}
+				}
+
+				&:has(.calendar-table-body-row-cell.is-selected) {
+					&:hover {
+						@include weekSelectedHover;
+					}
+
+					&:active {
+						@include weekSelectedActive;
+					}
+
+					&:has(.calendar-table-body-row-cell-action:focus-visible) {
+						@include weekSelectedFocusVisible;
+					}
+				}
+			}
 		}
 	}
 }

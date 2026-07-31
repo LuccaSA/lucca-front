@@ -37,11 +37,11 @@ export class PopoverLinkNode extends LinkNode {
 
 	override createDOM(config: EditorConfig): HTMLElement {
 		if (this.#viewContainerRef && this.#templateRef) {
-			const context = {
+			const context: LinkTemplateContext = {
 				href: this.sanitizeUrl(this.__url),
-				title: this.__title,
-				target: this.__target,
-				key: this.__key,
+				title: this.__title ?? undefined,
+				target: this.__target ?? undefined,
+				key: this.__key ?? undefined,
 				isAutoLink: false,
 			};
 			// if view already exists, destroy it. Can't reuse it since Lexical injects HTML content inside afterward (link text).

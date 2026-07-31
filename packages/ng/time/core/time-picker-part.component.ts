@@ -1,5 +1,5 @@
 import { formatNumber } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, booleanAttribute, computed, input, model, numberAttribute, output, viewChild } from '@angular/core';
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
@@ -19,7 +19,7 @@ export class TimePickerPartComponent {
 
 	readonly decimalConf = input('2.0-0');
 
-	value: ModelSignal<number | '––'> = model('––');
+	readonly value: ModelSignal<number | '––'> = model('––');
 
 	readonly display = input<number | '––'>();
 
@@ -55,8 +55,8 @@ export class TimePickerPartComponent {
 
 	readonly showZero = input(false, { transform: booleanAttribute });
 
-	digitNumber = model(2);
-	isValueSet = model<boolean>(false);
+	readonly digitNumber = model(2);
+	readonly isValueSet = model<boolean>(false);
 
 	prevRequest = output<void>();
 	nextRequest = output<void>();
@@ -64,9 +64,9 @@ export class TimePickerPartComponent {
 	inputControlClick = output<PickerControlDirection>();
 	touched = output<void>();
 
-	@ViewChild('timePickerInput') timePickerInput?: ElementRef<HTMLInputElement>;
+	readonly timePickerInput = viewChild<ElementRef<HTMLInputElement>>('timePickerInput');
 
-	valueLabel = computed(() => {
+	readonly valueLabel = computed(() => {
 		if (this.hideValue()) {
 			return '  ';
 		}
@@ -198,8 +198,8 @@ export class TimePickerPartComponent {
 	}
 
 	focus(): void {
-		if (this.timePickerInput) {
-			this.timePickerInput.nativeElement.focus();
+		if (this.timePickerInput()) {
+			this.timePickerInput()?.nativeElement.focus();
 		}
 	}
 }

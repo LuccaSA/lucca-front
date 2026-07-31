@@ -16,6 +16,7 @@ import { LuEstablishmentSearcherComponent } from '../searcher';
 import { LuEstablishmentSelectAllComponent } from '../select-all';
 import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.translate';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated prefer SimpleSelect or MultipleSelect with establishments directive
  */
@@ -74,7 +75,7 @@ export class LuEstablishmentSelectInputComponent<
 		return this.isSearching ? 'name' : 'legalunit.name,name';
 	}
 
-	public intl = input(...intlInputOptions(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS));
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

@@ -26,7 +26,7 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 	#destroyRef = inject(DestroyRef);
 
 	#scrollSubject = new Subject<Event>();
-	#scroll$ = this.#scrollSubject.asObservable().pipe(debounceTime(this.debounceTime()));
+	readonly #scroll$ = this.#scrollSubject.asObservable().pipe(debounceTime(this.debounceTime()));
 
 	scroll(event: Event) {
 		this.#scrollSubject.next(event);

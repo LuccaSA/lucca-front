@@ -55,11 +55,11 @@ export class TextInputComponent {
 	// eslint-disable-next-line @angular-eslint/no-output-native
 	readonly blur = output<FocusEvent>();
 
-	protected showPassword = signal<boolean>(false);
+	protected readonly showPassword = signal<boolean>(false);
 
-	protected typeRef = computed(() => (this.showPassword() ? 'text' : this.type()));
+	protected readonly typeRef = computed(() => (this.showPassword() ? 'text' : this.type()));
 
-	protected hasTogglePasswordVisibilityIcon = computed(() => this.type() === 'password');
+	protected readonly hasTogglePasswordVisibilityIcon = computed(() => this.type() === 'password');
 
 	clearValue(): void {
 		this.ngControl.reset();

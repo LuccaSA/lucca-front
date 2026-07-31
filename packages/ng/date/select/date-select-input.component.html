@@ -5,7 +5,7 @@
 	</div>
 </div>
 <div class="lu-select-suffix">
-	<lu-clear [attr.hidden]="hideClearer ? 'hidden' : null" />
+	<lu-clear [attr.hidden]="hideClearer() ? 'hidden' : null" />
 </div>
 <ng-template luDisplayer let-value> {{ value | luDate: format }} </ng-template>
-<lu-date-picker [min]="min" [max]="max" [granularity]="granularity" [startOn]="startOn" />
+<lu-date-picker [min]="min()" [max]="max()" [granularity]="granularity()" [startOn]="startOn()" />

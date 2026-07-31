@@ -20,6 +20,14 @@
 				}
 			}
 
+			&.mod-week {
+				@include week;
+
+				.form-field.mod-S & {
+					@include weekS;
+				}
+			}
+
 			&.mod-month {
 				@include month;
 

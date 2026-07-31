@@ -37,8 +37,10 @@
 			@include XXL;
 		}
 
-		&.mod-neutralBackground {
-			@include neutralBackground;
+		// neutralBackground is deprecated
+		&.mod-neutralBackground,
+		&.mod-surfaceDefault {
+			@include surfaceDefault;
 		}
 
 		&:where(.mod-drawer) {

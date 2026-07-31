@@ -1,17 +1,22 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
-@mixin disablePositioning {
-	--components-fileToolbar-display: contents;
-}
-
-@mixin disablePositioningS {
-	--components-fileToolbar-list-padding: 0;
-}
-
 @mixin button {
 	@include button.ghost;
 	@include button.S;
 
 	--components-button-borderRadius: 4px;
 	--components-button-padding: var(--pr-t-spacings-75);
+
+	&:has(.icon-trashDelete) {
+		@include button.critical;
+	}
+}
+
+@mixin disablePositioning {
+	--components-fileToolbar-display: contents;
+	--components-fileToolbar-list-padding: 0;
+}
+
+@mixin disablePositioningL {
+	--components-fileToolbar-list-padding: var(--pr-t-spacings-50);
 }

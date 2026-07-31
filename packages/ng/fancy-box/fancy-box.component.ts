@@ -19,7 +19,7 @@ export class FancyBoxComponent {
 	/**
 	 * foreground image (URL)
 	 */
-	readonly foreground = input<string>();
+	readonly foreground = input<string | null>(null);
 
 	/**
 	 * Background left image (URL)
@@ -40,7 +40,7 @@ export class FancyBoxComponent {
 	readonly backgroundLeftStyle = computed(() => this.#buildUrl(this.backgroundLeft()));
 	readonly backgroundRightStyle = computed(() => this.#buildUrl(this.backgroundRight()));
 
-	#buildUrl(text: string) {
+	#buildUrl(text: string | null) {
 		return text ? `url(${text})` : ``;
 	}
 }

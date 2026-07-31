@@ -71,7 +71,7 @@ export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 	}
 
 	focus() {
-		this.element().focusInput();
+		this.element()?.focusInput();
 	}
 
 	setDisabledState(isDisabled: boolean) {
