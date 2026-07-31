@@ -1,0 +1,53 @@
+# data-presentation
+
+## Import
+
+```typescript
+import { DataPresentationComponent } from '@lucca-front/ng/form-field';
+```
+
+## Basic Usage
+
+```html
+<lu-data-presentation label="Label">Value</lu-data-presentation>
+```
+
+## API Reference
+
+### DataPresentationComponent (component)
+
+**Selector:** `lu-data-presentation`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `label` | `label` | `PortalContent` | — | ✅ | — | Valeur affichée. [PortalContent] |
+| `noValue` | `noValue` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `size` | `size` | `'S' \| null` | `null` | — | — | Taille du composant. |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `FORM_FIELD_INSTANCE` | `FormFieldComponent` | — |
+| `LU_FORM_FIELD_TRANSLATIONS` | `unknown` | — |
+
+## Related files
+
+- 📝 [Code & implementation](./data-presentation.component.md)
+
+- 🎯 [Figma design tokens](./data-presentation.figma.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-forms-data-presentation-angular-basic--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.2.4
+
++ `size` : 'S' | null
+
+### 21.1.0
+
+Composant introduit (`DataPresentationComponent`).

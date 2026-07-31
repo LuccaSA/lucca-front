@@ -10,8 +10,20 @@ export default mergeConfig(createBaseConfig(__dirname), {
 		tsconfigPaths: true,
 	},
 	test: {
-		name: 'lucca-front',
-		include: ['packages/**/*.spec.ts', 'packages/**/*.spec.*.ts', 'stories/**/*.spec.ts'],
-		exclude: ['**/node_modules/**', '**/schematics/**/*.spec.ts'],
+		projects: [
+			{
+				// Main project: Angular components/specs on happy-dom (inherits the
+				// base plugins, setup files and environment from createBaseConfig).
+				extends: true,
+				test: {
+					name: 'lucca-front',
+					include: ['packages/**/*.spec.ts', 'packages/**/*.spec.*.ts', 'stories/**/*.spec.ts'],
+					exclude: ['**/node_modules/**', '**/schematics/**/*.spec.ts'],
+				},
+			},
+			// Schematics project: runs the `ng add`/`ng update` migration specs in a
+			// Node environment with a ts-node loader (see vitest.schematics.config.ts).
+			'./vitest.schematics.config.ts',
+		],
 	},
 });

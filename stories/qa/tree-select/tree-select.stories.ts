@@ -5,7 +5,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
-import { Meta } from '@storybook/angular';
+import { Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'tree-select-stories',

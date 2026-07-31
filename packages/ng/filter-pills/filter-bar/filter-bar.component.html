@@ -15,7 +15,7 @@
 				luPopoverNoCloseButton
 				[customPositions]="popoverPositions"
 			>
-				<lu-icon class="filterPill-icon" icon="filtersDescending" [attr.alt]="intl().additionalFilters" />
+				<lu-icon class="filterPill-icon" icon="filtersDescending" [alt]="intl().additionalFilters" />
 			</button>
 		}
 
@@ -38,7 +38,7 @@
 					<input
 						type="checkbox"
 						class="checkboxField-input"
-						[name]="pill.name()"
+						[name]="pill.name() ?? ''"
 						[attr.id]="'filterPillOptions' + index"
 						[(ngModel)]="pill.displayed"
 					/>

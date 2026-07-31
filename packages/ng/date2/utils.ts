@@ -1,5 +1,5 @@
 import { isNil } from '@lucca-front/ng/core';
-import { Day, format, isSameDay, isSameMonth, isSameYear, parse, startOfDecade, startOfMonth, startOfYear } from 'date-fns';
+import { Day, FirstWeekContainsDate, format, isSameDay, isSameMonth, isSameWeek, isSameYear, parse, startOfDecade, startOfMonth, startOfYear, WeekOptions } from 'date-fns';
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
@@ -13,26 +13,38 @@ export function getJSFirstDayOfWeek(weekInfo: CalendarWeekInfo): Day {
 	return (weekInfo.firstDay % 7) as Day;
 }
 
+export function getWeekNumberOptions(weekInfo: CalendarWeekInfo): { weekStartsOn: Day; firstWeekContainsDate: FirstWeekContainsDate } {
+	const weekStartsOn = getJSFirstDayOfWeek(weekInfo);
+	// Monday-start locales follow ISO 8601 numbering (the first week of the year is the one containing January 4th),
+	// others (like en-US) number the week containing January 1st as week 1.
+	return { weekStartsOn, firstWeekContainsDate: weekStartsOn === 1 ? 4 : 1 };
+}
+
 const modeToComparator: Record<CalendarMode, (a: Date, b: Date) => boolean> = {
 	day: isSameDay,
+	week: isSameWeek,
 	month: isSameMonth,
 	year: isSameYear,
 };
 
 const modeToCalendarComparator: Record<CalendarMode, (a: Date, b: Date) => boolean> = {
 	day: isSameMonth,
+	week: isSameWeek,
 	month: isSameYear,
 	year: (a, b) => Math.floor(a.getFullYear() / 10) === Math.floor(b.getFullYear() / 10),
 };
 
 const modeToPeriodStart: Record<CalendarMode, (date: Date) => Date> = {
 	day: startOfMonth,
+	week: startOfMonth, // week mode pages by month (the grid shows a full month of weeks)
 	month: startOfYear,
 	year: startOfDecade,
 };
 
-export function comparePeriods(mode: CalendarMode | null, a: Date, b: Date): boolean {
-	return mode ? modeToComparator[mode](a, b) : false;
+export function comparePeriods(mode: CalendarMode | null, a: Date, b: Date, weekOptions?: WeekOptions): boolean {
+	if (!mode) return false;
+	if (mode === 'week') return isSameWeek(a, b, weekOptions);
+	return modeToComparator[mode](a, b);
 }
 
 export function compareCalendarPeriods(mode: CalendarMode, a: Date, b: Date): boolean {

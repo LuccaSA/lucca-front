@@ -1,21 +1,20 @@
 /**
- * Version-level changelog — **human PR-review aid** (NOT consumed by the skill).
+ * Minor-level changelog — **human PR-review aid** (NOT consumed by the skill).
  *
- * Diffs a generated version folder against its predecessor and writes a summary to
- * `lucca-front/changelog/<version>.md`. It helps reviewers confirm what changed between two
- * generated versions when regenerating.
+ * Diffs a generated minor folder against its predecessor MINOR and writes a summary to
+ * `lucca-front/changelog/<minor>.md`. It helps reviewers confirm what changed between two
+ * generated minors when generating a new one. For a re-generation of the SAME minor, git's own
+ * diff of the PR is the review surface (the folder is rewritten in place).
  *
- * Adapted to the flat layout: compares the sibling version folders
- * `lucca-front/<prev>/` vs `lucca-front/<curr>/` (the old layout diffed per-component version
- * subdirs, which no longer exist). Requires the predecessor's folder to be present on disk;
- * run it after all target versions have been generated.
+ * fixes/ files are excluded: two minors have entirely different fix sets by construction —
+ * they are reviewed as their own files in the PR.
  */
 
 import fs from 'fs';
 import path from 'path';
 import { VersionConfig, VersionManifest } from '../types';
 import { versionRoot } from './skill-writer';
-import { resolveVersion } from '../version-config';
+import { resolveMinorVersion } from '../version-config';
 
 const SKILLS_BASE = 'lucca-front';
 
@@ -27,24 +26,20 @@ interface FileDiff {
 	inlineDiff?: string;
 }
 
-/** Finds the previous version from the manifest (highest version strictly lower than current). */
+/** Finds the previous minor from the manifest (highest minor strictly lower than current). */
 function findPreviousVersion(manifest: VersionManifest, current: VersionConfig): string | null {
-	const currentKey = `${current.major}.${current.minor}.${current.patch}`;
-	const sorted = Object.keys(manifest.versions)
+	const currentKey = `${current.major}.${current.minor}`;
+	const sorted = Object.keys(manifest.minors ?? {})
 		.filter((v) => v !== currentKey)
 		.sort((a, b) => {
-			const [aMaj, aMin, aPat] = a.split('.').map(Number);
-			const [bMaj, bMin, bPat] = b.split('.').map(Number);
-			return aMaj !== bMaj ? bMaj - aMaj : aMin !== bMin ? bMin - aMin : bPat - aPat;
+			const [aMaj, aMin] = a.split('.').map(Number);
+			const [bMaj, bMin] = b.split('.').map(Number);
+			return aMaj !== bMaj ? bMaj - aMaj : bMin - aMin;
 		});
 
 	for (const v of sorted) {
-		const [maj, min, pat] = v.split('.').map(Number);
-		if (
-			maj < current.major ||
-			(maj === current.major && min < current.minor) ||
-			(maj === current.major && min === current.minor && pat < current.patch)
-		) {
+		const [maj, min] = v.split('.').map(Number);
+		if (maj < current.major || (maj === current.major && min < current.minor)) {
 			return v;
 		}
 	}
@@ -72,8 +67,8 @@ function listFiles(dir: string, base: string = dir): string[] {
 function normalizeForComparison(content: string): string {
 	return content
 		// Neutralize bare version tokens (e.g. "v21.2.3", "21.2.3", "18.2.0-alpha") so a file isn't
-		// reported "modified" solely because its header label references the target version — this is
-		// the dominant noise (every <slug>.changelog.md header + SKILL.md §1). Real content/API diffs
+		// reported "modified" solely because a label references the target version — the dominant
+		// noise (SKILL.md §1, Storybook URLs, changelog intro lines). Real content/API diffs
 		// (new changelog sections, added inputs…) still show because their lines genuinely differ.
 		.replace(/v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.]+)?/g, '__VER__')
 		.replace(/\/v\/\d+\//g, '/v/__RELEASE__/')
@@ -177,6 +172,23 @@ function computeInlineDiff(contentA: string, contentB: string): string {
 	return formatUnifiedDiff(buildDiffOps(normA, normB, rawA, rawB));
 }
 
+/** Whether `rel` is a component API file (references/components/<slug>/<slug>.md). */
+function isComponentApiRel(rel: string): boolean {
+	const parts = rel.split(path.sep);
+	return parts.length === 4 && parts[0] === 'references' && parts[1] === 'components' && parts[3] === `${parts[2]}.md`;
+}
+
+/**
+ * Strips the trailing `## Changelog` section of a component API file before diffing: it is a
+ * derived/cumulative artifact (a real API change already shows in the file's API tables) carrying
+ * its own noise (version labels, non-deterministic ZH prose layer). Reviewing it here is
+ * redundant and misleading.
+ */
+function stripTrailingChangelog(content: string): string {
+	const idx = content.indexOf('\n## Changelog\n');
+	return idx === -1 ? content : content.slice(0, idx);
+}
+
 function countLines(filePath: string): number {
 	try {
 		return fs.readFileSync(filePath, 'utf-8').split('\n').length;
@@ -201,8 +213,12 @@ function diffDirectories(dirA: string, dirB: string): FileDiff[] {
 		} else if (inA && !inB) {
 			diffs.push({ relativePath: file, status: 'removed', linesBefore: countLines(path.join(dirA, file)) });
 		} else {
-			const contentA = fs.readFileSync(path.join(dirA, file), 'utf-8');
-			const contentB = fs.readFileSync(path.join(dirB, file), 'utf-8');
+			let contentA = fs.readFileSync(path.join(dirA, file), 'utf-8');
+			let contentB = fs.readFileSync(path.join(dirB, file), 'utf-8');
+			if (isComponentApiRel(file)) {
+				contentA = stripTrailingChangelog(contentA);
+				contentB = stripTrailingChangelog(contentB);
+			}
 			if (normalizeForComparison(contentA) !== normalizeForComparison(contentB)) {
 				diffs.push({
 					relativePath: file,
@@ -330,37 +346,40 @@ export function writeVersionChangelog(skillsDir: string, version: VersionConfig)
 		return null;
 	}
 
-	const bareVersion = `${version.major}.${version.minor}.${version.patch}`;
+	const minorKey = `${version.major}.${version.minor}`;
 	const changelogDir = path.join(baseDir, 'changelog');
 	fs.mkdirSync(changelogDir, { recursive: true });
-	const outPath = path.join(changelogDir, `${bareVersion}.md`);
+	const outPath = path.join(changelogDir, `${minorKey}.md`);
 
 	const prevKey = findPreviousVersion(manifest, version);
 	if (!prevKey) {
-		fs.writeFileSync(outPath, `# ${version.tag} — première génération\n\nAucune version précédente dans le manifeste.\n`, 'utf-8');
+		fs.writeFileSync(outPath, `# ${minorKey} — première génération\n\nAucune mineure précédente dans le manifeste.\n`, 'utf-8');
 		return outPath;
 	}
 
 	const currRoot = versionRoot(skillsDir, version);
-	const prevRoot = versionRoot(skillsDir, resolveVersion(prevKey));
+	const prevRoot = versionRoot(skillsDir, resolveMinorVersion(prevKey).version);
 
 	if (!fs.existsSync(prevRoot)) {
 		fs.writeFileSync(
 			outPath,
-			`# ${version.tag} vs v${prevKey}\n\nLe dossier de la version précédente (\`${prevKey}/\`) n'est pas présent sur le disque — diff impossible. Régénère les deux versions pour obtenir le diff de review.\n`,
+			`# ${minorKey} vs ${prevKey}\n\nLe dossier de la mineure précédente (\`${prevKey}\`) n'est pas présent sur le disque — diff impossible. Régénère les deux mineures pour obtenir le diff de review.\n`,
 			'utf-8',
 		);
 		return outPath;
 	}
 
-	// Exclude per-component changelog files from the review diff: they are derived/cumulative
-	// artifacts (a real API change already shows in <slug>.md), and they carry their own noise
-	// (version label in the header, non-deterministic ZH prose layer). Reviewing them here is
-	// redundant and misleading.
-	const diffs = diffDirectories(prevRoot, currRoot).filter((d) => !d.relativePath.endsWith('.changelog.md'));
+	// The per-component changelog (trailing ## Changelog section of <slug>.md) is stripped before
+	// comparison — see stripTrailingChangelog. Legacy `*.changelog.md` files are still filtered so
+	// a diff against a pre-merge-layout tree isn't flooded by their removals. fixes/ are excluded
+	// too: two minors have entirely different fix sets by construction — they are reviewed as
+	// their own files in the PR.
+	const diffs = diffDirectories(prevRoot, currRoot).filter(
+		(d) => !d.relativePath.endsWith('.changelog.md') && !d.relativePath.startsWith(`fixes${path.sep}`),
+	);
 
-	let md = `# ${version.tag} vs v${prevKey}\n\n`;
-	md += `> Aide à la review (non consommé par la skill) : diff des fichiers générés entre les deux versions.\n\n`;
+	let md = `# ${minorKey} (contenu ${version.tag}) vs ${prevKey}\n\n`;
+	md += `> Aide à la review (non consommé par la skill) : diff des fichiers générés entre les deux mineures.\n\n`;
 
 	if (diffs.length === 0) {
 		md += `Aucune différence détectée.\n`;
@@ -382,7 +401,7 @@ export function writeVersionChangelog(skillsDir: string, version: VersionConfig)
 	const trulyRemoved = removed.filter((d) => !renamedFrom.has(d.relativePath));
 	const shrunken = modified.filter(
 		(d) =>
-			(d.relativePath.includes(`${path.sep}design${path.sep}`) || d.relativePath.includes(`${path.sep}documentation${path.sep}`)) &&
+			(d.relativePath.endsWith('.design.md') || d.relativePath.includes(`${path.sep}documentation${path.sep}`)) &&
 			(d.linesAfter ?? 0) < (d.linesBefore ?? 0),
 	);
 	if (trulyRemoved.length > 0 || shrunken.length > 0) {

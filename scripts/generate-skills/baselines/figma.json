@@ -11,15 +11,15 @@
 			],
 			"type": [
 				"filled",
-				"ghost",
-				"outlined"
+				"outlined",
+				"ghost"
 			],
 			"style": [
 				"default",
-				"left icon",
-				"Disclosure",
-				"Counter",
-				"Icon only"
+				"leftIcon",
+				"disclosure",
+				"counter",
+				"icon"
 			],
 			"state": [
 				"default",
@@ -147,6 +147,7 @@
 		"properties": {
 			"type": [
 				"day",
+				"week",
 				"month",
 				"year"
 			]
@@ -204,7 +205,7 @@
 		"properties": {
 			"popoverBottom": null,
 			"popoverTop": null,
-			"labelValue": null,
+			"buttonLabel": null,
 			"label": null,
 			"size": [
 				"M",
@@ -393,6 +394,7 @@
 			],
 			"mode": [
 				"day",
+				"week",
 				"month",
 				"year"
 			],
@@ -492,28 +494,15 @@
 	"28382:11798": {
 		"componentName": "ConfirmationDialog",
 		"properties": {
-			"criticity": [
-				"low",
-				"high",
-				"higher"
-			]
-		}
-	},
-	"28382:11460": {
-		"componentName": "DeleteDialog",
-		"properties": {
-			"criticity": [
-				"low",
-				"high",
-				"higher"
-			]
-		}
-	},
-	"28385:12057": {
-		"componentName": "ExitDialog",
-		"properties": {
 			"type": [
-				"default"
+				"confirmation",
+				"delete",
+				"exit"
+			],
+			"criticity": [
+				"low",
+				"high",
+				"higher"
 			]
 		}
 	},
@@ -650,7 +639,7 @@
 			"tagAI": null,
 			"size": [
 				"M",
-				"S"
+				"L"
 			],
 			"multiple": [
 				"false",
@@ -681,6 +670,8 @@
 			"filtersButton": null,
 			"applyButton": null,
 			"results": null,
+			"folder": null,
+			"segmentedControl": null,
 			"type": [
 				"full",
 				"viewsOnly",
@@ -700,7 +691,8 @@
 				"datePicker",
 				"dateRangePicker",
 				"checkbox",
-				"filter button"
+				"filter button",
+				"folder"
 			],
 			"state": [
 				"default",
@@ -820,11 +812,11 @@
 	"19654:99228": {
 		"componentName": "pr-IndexTable",
 		"properties": {
-			"Overflow": null,
-			"↪️ Left overflow": null,
-			"↪️ Right overflow": null,
-			"Content": null,
-			"Pagination": null
+			"overflow": null,
+			"↪️ leftOverflow": null,
+			"↪️ rightOverflow": null,
+			"tableContent": null,
+			"pagination": null
 		}
 	},
 	"5743:32741": {
@@ -1077,6 +1069,7 @@
 			"breadcrumbs": null,
 			"leading": null,
 			"leadingContent": null,
+			"impersonation": null,
 			"Screen size": [
 				"M",
 				"S"
@@ -1250,11 +1243,13 @@
 	"33040:2908": {
 		"componentName": "pr-ResourceCardWrapper (v21.0)",
 		"properties": {
-			"fakeCard": null,
 			"addResource": null,
-			"grid": [
-				"false",
-				"true"
+			"stackContent": null,
+			"gridContent": null,
+			"type": [
+				"stack",
+				"grid",
+				"🧪 grid [BÊTA]"
 			]
 		}
 	},
@@ -1268,6 +1263,7 @@
 			"textContent": null,
 			"readMore": null,
 			"toolbar": null,
+			"addButton": null,
 			"state": [
 				"default",
 				"hover",

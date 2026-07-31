@@ -9,7 +9,6 @@ import { getDisallowedData, getSeverity } from './packages/stylelint-config/styl
 import prettier from 'eslint-plugin-prettier/recommended';
 import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
-import tsParser from '@typescript-eslint/parser';
 
 // Ready-made deprecated/deleted class rules block, fed the stylelint deprecation list (single source
 // of truth), its message formatter, and its warn-until-deleted severity policy. The plugin's factory
@@ -47,14 +46,8 @@ export default defineConfig(
 		processor: angular.processInlineTemplates,
 		languageOptions: {
 			parserOptions: {
-				project: [
-					'tsconfig.json',
-					'packages/ng/tsconfig.json',
-					'packages/prisme/tsconfig.json',
-					'packages/eslint-plugin/tsconfig.json',
-					'.storybook/tsconfig.json',
-				],
-				createDefaultProgram: true,
+				projectService: true,
+				tsconfigRootDir: import.meta.dirname,
 			},
 		},
 		rules: {
@@ -88,8 +81,6 @@ export default defineConfig(
 			// This one is from Angular 20, we'll remove it eventually but legacy code makes it hard to do
 			'@angular-eslint/prefer-inject': 'off',
 			'@angular-eslint/prefer-on-push-component-change-detection': 'error',
-
-			'@angular-eslint/prefer-signals': 'error',
 
 			'@typescript-eslint/explicit-function-return-type': 'off',
 			'@typescript-eslint/explicit-module-boundary-types': 'off', // on aimerait bien dire oui sauf pour void
@@ -154,18 +145,6 @@ export default defineConfig(
 	},
 	{
 		files: ['**/*.ts'],
-		languageOptions: {
-			parser: tsParser,
-			parserOptions: {
-				project: [
-					'tsconfig.lint.json',
-					'packages/ng/tsconfig.lint.json',
-					'packages/prisme/tsconfig.lint.json',
-					'packages/eslint-plugin/tsconfig.json',
-					'.storybook/tsconfig.lint.json',
-				],
-			},
-		},
 		plugins: {
 			'@lucca-front': localRules,
 		},

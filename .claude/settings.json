@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npm run build:ng:*)",
+      "Bash(npm run build:prisme:*)",
+      "Bash(npm run build:remaining:*)",
+      "Bash(npm run build-compodoc:*)",
+      "Bash(npm run build-storybook:*)",
+      "Bash(npm run start:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run test:eslint-plugin:*)",
+      "Bash(npm run test-storybook:*)",
+      "Bash(npm run test-storybook:coverage:*)",
+      "Bash(npm run jenkins-test:*)",
+      "Bash(npm run ci-test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run lint:fix:*)",
+      "Bash(npm run lint:es:*)",
+      "Bash(npm run lint:style:*)",
+      "Bash(npx vitest run:*)",
+      "Bash(npx vitest:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git blame:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr status:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr diff:*)"
+    ]
+  }
+}

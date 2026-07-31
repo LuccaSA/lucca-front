@@ -7,6 +7,14 @@
 	-webkit-text-fill-color: var(--palettes-critical-0);
 }
 
+.mod-neutral,
+.icon-color-product,
+.icon-color-product,
+.pr-u-textProduct,
+.pr-u-colorTextBrand {
+	color: red;
+}
+
 .rgba-vars {
 	background-color: color.transparentize(var(--palettes-neutral-900), 0.04);
 	border-color: color.transparentize(var(--palettes-neutral-400), 0.5);

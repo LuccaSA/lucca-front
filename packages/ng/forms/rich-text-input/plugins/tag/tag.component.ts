@@ -1,11 +1,19 @@
-import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChild, viewChildren, ViewContainerRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { ChipComponent } from '@lucca-front/ng/chip';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
+import { LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { IconComponent } from '@lucca/prisme/icon';
 import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode, type NodeKey, SKIP_DOM_SELECTION_TAG } from 'lexical';
 import { INITIAL_UPDATE_TAG, RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { $createTagNode, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
+import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 
 const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.size && [...a].every((value) => b.has(value));
 
@@ -14,7 +22,7 @@ const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.s
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './tag.component.html',
 	styleUrl: './tag.component.scss',
-	imports: [ChipComponent],
+	imports: [ButtonComponent, ChipComponent, IconComponent, LuSimpleSelectInputComponent, LuOptionGroupDirective, LuOptionDirective, ReactiveFormsModule, FilterPillComponent],
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,
@@ -30,7 +38,26 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 	readonly isDisabled = signal(false);
 	readonly focusIndex = signal<number>(0);
 
-	readonly focusableElements = viewChildren('tagButton', { read: ElementRef });
+	readonly focusableElements = viewChildren('focusable', { read: ElementRef });
+	readonly addTagButton = viewChild('addButton', { read: ElementRef });
+	readonly primaryTags = computed(() => this.tags().filter((t) => !t.secondary));
+	readonly secondaryTags = computed(() => this.tags().filter((t) => t.secondary));
+	readonly filteredSecondaryTags = computed(() => {
+		const search = this.#normalize(this.tagSearch());
+		return this.secondaryTags().filter((t) => {
+			const description = t.description ? this.#normalize(t.description) : '';
+			return !search || description.includes(search);
+		});
+	});
+	readonly secondaryHasGroup = computed(() => this.secondaryTags().some((s) => isNotNil(s.group)));
+	readonly tagSearch = signal<string>('');
+	readonly selectedTagControl = new FormControl<Tag | null>(null);
+
+	// Anchor the dropdown to the trigger button, opening below it (flipping above if there isn't room).
+	readonly popoverPositions: ConnectionPositionPair[] = [
+		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -4, 0),
+		new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -4, 0),
+	];
 
 	editor: LexicalEditor | null = null;
 
@@ -64,6 +91,13 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 				},
 				{ tag: [SKIP_DOM_SELECTION_TAG, INITIAL_UPDATE_TAG] },
 			);
+		});
+
+		this.selectedTagControl.valueChanges.pipe(takeUntilDestroyed()).subscribe((tag) => {
+			if (tag) {
+				this.selectedTagControl.reset();
+				this.insertTag(tag);
+			}
 		});
 	}
 
@@ -126,5 +160,16 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 
 	ngOnDestroy() {
 		this.#registeredCommands();
+	}
+
+	groupByTagGroup(tag: Tag) {
+		return tag.group;
+	}
+
+	#normalize(str: string): string {
+		return str
+			.normalize('NFD')
+			.replace(/\p{Diacritic}/gu, '')
+			.toLowerCase();
 	}
 }

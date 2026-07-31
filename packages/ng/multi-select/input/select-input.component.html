@@ -14,7 +14,7 @@
 	<div class="multipleSelect-displayer-filter">
 		@if (useSingleOptionDisplayer() && valueLength() === 1) {
 			<div class="multipleSelect-pill-displayer-chip">
-				<ng-container *luOptionOutlet="displayerTpl(); value: value[0]" />
+				<ng-container *luOptionOutlet="displayerTpl(); value: value?.[0]" />
 			</div>
 		}
 	</div>
@@ -24,28 +24,21 @@
 	@if (valueLength() > minCount) {
 		<span class="multipleSelect-pill-displayer-label">{{ valueLength() }}&nbsp;{{ filterPillLabelPlural() }}</span>
 	} @else {
-		{{ label }}
-		@if (valueLength() === 1) {
-			{{ colon }}
-		}
+		{{ label }}{{ valueLength() === 1 ? colon : "" }}
 	}
 </ng-container>
 @if (!ignorePresentation()) {
 	<ng-container *luPresentationDisplayDefault>
 		@for (v of value; track $index) {
-			@if ($last) {
-				<ng-container *ngTemplateOutlet="noComma; context: { $implicit: v }" />
-			} @else {
-				<ng-container *ngTemplateOutlet="comma; context: { $implicit: v }" />
+			<ng-container *luOptionOutlet="displayerTpl(); value: v" />
+
+			@let separator = presentationSeparators()[$index];
+
+			@if (separator) {
+				<ng-container>{{ separator }}</ng-container>
 			}
 		} @empty {
 			<span aria-hidden="true" data-content-before="–"></span>
 		}
 	</ng-container>
 }
-
-<ng-template #comma let-value><ng-container *luOptionOutlet="displayerTpl(); value: value" />, </ng-template>
-
-<ng-template #noComma let-value>
-	<ng-container *luOptionOutlet="displayerTpl(); value: value" />
-</ng-template>

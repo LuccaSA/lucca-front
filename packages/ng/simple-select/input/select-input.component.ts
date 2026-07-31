@@ -61,7 +61,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 
 	valueID = `value-${++nextID}`;
 
-	readonly autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill | null>('off');
 
 	readonly impersonation = input(false, { transform: booleanAttribute });
 

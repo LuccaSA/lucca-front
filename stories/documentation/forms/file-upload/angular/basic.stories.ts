@@ -302,16 +302,25 @@ export const Multi = {
 export const Single = {
 	render: (args, { argTypes }) => {
 		const multi = Multi.render(args, { argTypes });
-		const { accept, ...mainArgs } = args;
+		const { size, displayFileName, accept, ...mainArgs } = args;
+
+		// En Single, le FileEntry est toujours en taille L ; l'aperçu média n'existe qu'à size="L".
+		const isLarge = !!size;
+		const entryAttrs = `size="L"${isLarge ? ` media` : ``}${isLarge && displayFileName ? ` displayFileName` : ``}`;
+		const sizeLFileUploadParam = size ? ` size="L"` : ``;
+		const fileEntry = `<lu-file-entry ${entryAttrs} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />`;
 		if (args.AItag) {
 			return {
 				props: { ...multi.props, accept },
 				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
-	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)">
-		<lu-tag icon="weatherStars" label="Scan intelligent" AI />
-	</lu-single-file-upload>
+	@if (fileUpload) {
+		${fileEntry}
+	} @else {
+		<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])">
+			<lu-tag icon="weatherStars" label="Scan intelligent" AI />
+		</lu-single-file-upload>
+	}
 </lu-form-field>`,
 			};
 		} else {
@@ -319,11 +328,18 @@ export const Single = {
 				props: { ...multi.props, accept },
 				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
-	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+	@if (fileUpload) {
+		${fileEntry}
+	} @else {
+		<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+	}
 </lu-form-field>`,
 			};
 		}
+	},
+	argTypes: {
+		// En Single, le mode media découle de la taille : le contrôle n'a pas lieu d'être.
+		media: { table: { disable: true } },
 	},
 	args: {
 		accept: [
