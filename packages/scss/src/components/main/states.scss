@@ -2,7 +2,7 @@
 
 @mixin notScrollable {
 	@include media.max('S') {
-		block-size: 100vb;
+		block-size: 100vh;
 		overflow: hidden;
 	}
 }

@@ -150,7 +150,7 @@
 			display: var(--components-horizontalNavigation-panel-display);
 			overflow: var(--components-horizontalNavigation-panel-overflow);
 			flex-grow: var(--components-horizontalNavigation-panel-flexGrow);
-			min-block-size: 0;
+			min-height: 0;
 			flex-direction: column;
 
 			&:focus-visible {
