@@ -241,7 +241,7 @@ La promotion de `strictNullChecks` dans le `tsconfig.json` de build a nécessit�
 | `lu-user-tile` | `{{ user() \| luUserDisplay }}` → entouré d'un `@if (user(); as user)` | Sans `[user]`, la `<div class="userTile-content-name">` **n'existe plus** (avant : div présente, texte vide). |
 | `lu-page-header` | `@if (label(); as label)` autour du `<h1>` / du portal | Sans `[label]`, plus de `<h1 class="pageHeader-content-title-content">`. |
 | `lu-fieldset` | `heading` et `helper` entourés d'un `@if` | Wrappers absents au lieu de vides. |
-| `lu-comment` | `authorName` entouré d'un `@if`, `date()?.toISOString()` | `<span class="comment-infos-name">` vide au lieu d'un portal sur `null` ; `datetime` absent si pas de date. |
+| `lu-comment` | `authorName` entouré d'un `@if`, `date()?.toISOString()` | Sans `authorName`, le `<span class="comment-infos-name">` n'existe plus (avant : span présent avec un portal sur `null`) ; `datetime` est absent si aucune date n'est fournie. |
 | `lu-activity-feed-step` | `@if (user(); as user)`, `@if (label(); as label)`, `preparedDate()?.toISOString()` | idem. |
 | `lu-segmented-control-tabs`, `lu-segmented-control-filter` | `label` entouré d'un `@if` | Onglet / filtre sans label rendu vide plutôt que portal sur `null`. |
 | `lu-color-input` | `@let color = currentColorPresentation()` → `@if (currentColorPresentation(); as color)` | Le `<lu-color>` de la valeur courante **disparaît** quand il n'y a pas de couleur sélectionnée (avant : accès à `color.borderColor` sur `undefined`). |
