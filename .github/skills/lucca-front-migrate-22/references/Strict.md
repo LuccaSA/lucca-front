@@ -239,7 +239,7 @@ La promotion de `strictNullChecks` dans le `tsconfig.json` de build a nécessit�
 | Composant | Changement | Ce qui change à l'écran / dans le DOM |
 |---|---|---|
 | `lu-user-tile` | `{{ user() \| luUserDisplay }}` → entouré d'un `@if (user(); as user)` | Sans `[user]`, la `<div class="userTile-content-name">` **n'existe plus** (avant : div présente, texte vide). |
-| `lu-page-header` | `@if (label(); as label)` autour du `<h1>` / du portal | Sans `[label]`, plus de `<h1 class="pageHeader-content-title-content">`. |
+| `lu-page-header` | `@if (label(); as label)` autour du `<h1>` / du portal | Neutre — sans `[label]`, l'ancien template prenait déjà la branche portal, qui ne rendait aucun nœud. |
 | `lu-fieldset` | `heading` et `helper` entourés d'un `@if` | Wrappers absents au lieu de vides. |
 | `lu-comment` | `authorName` entouré d'un `@if`, `date()?.toISOString()` | Sans `authorName`, le `<span class="comment-infos-name">` n'existe plus (avant : span présent avec un portal sur `null`) ; `datetime` est absent si aucune date n'est fournie. |
 | `lu-activity-feed-step` | `@if (user(); as user)`, `@if (label(); as label)`, `preparedDate()?.toISOString()` | idem. |
