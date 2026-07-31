@@ -12,7 +12,7 @@ describe('luButton Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'lu-button', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'lu-button', { skipInstall: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);

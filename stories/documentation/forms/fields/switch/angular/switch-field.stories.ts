@@ -4,7 +4,7 @@ import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field'
 import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
@@ -65,10 +65,9 @@ export default {
 export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, ...inputArgs } = args;
+		const model = useStoryModel(false);
 		return {
-			props: {
-				example: false,
-			},
+			props: { model },
 			template: `<lu-form-field${generateInputs(
 				{
 					label,
@@ -81,9 +80,9 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent & { requi
 				},
 				argTypes,
 			)}>
-	<lu-switch-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-switch-input [(ngModel)]="model.example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`,
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},

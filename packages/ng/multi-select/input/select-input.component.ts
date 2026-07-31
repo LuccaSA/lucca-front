@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -10,6 +10,7 @@ import {
 	inject,
 	input,
 	Input,
+	LOCALE_ID,
 	model,
 	numberAttribute,
 	OnDestroy,
@@ -33,6 +34,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
+import { listSeparators } from '../select.utils';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
 
@@ -49,7 +51,6 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		FilterPillLabelDirective,
 		ClearComponent,
 		PresentationDisplayDirective,
-		CommonModule,
 		ɵPresentationDisplayDefaultDirective,
 		IconComponent,
 	],
@@ -111,6 +112,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
 	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
 	override _value: T[] = [];
+
+	#listFormat = new Intl.ListFormat(inject(LOCALE_ID));
+
+	protected readonly presentationSeparators = computed(() => listSeparators(this.#listFormat, this.valueSignal()?.length ?? 0));
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
 		return this._panelRef;

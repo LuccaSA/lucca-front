@@ -41,7 +41,7 @@
 		/>
 		<div class="textField-input-affix">
 			@if (hasClearer() && inputElement.value) {
-				<lu-clear (click)="clearValue()" class="textField-input-affix-clear">{{ intl().clear }}</lu-clear>
+				<lu-clear (onClear)="clearValue()" class="textField-input-affix-clear">{{ intl().clear }}</lu-clear>
 			}
 			@if (hasSearchIcon()) {
 				<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{ searchIcon() }}"></span>

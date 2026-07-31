@@ -1,0 +1,164 @@
+# Parcours de création de ressource
+
+# Création
+
+## Description du parcours
+
+### Étape d'initialisation
+
+L'étape d'initialisation est **obligatoire** dans ce type de parcours. Elle permet de créer la ressource en base dès le départ, offrant ainsi la possibilité de sauvegarder les données et de reprendre le parcours ultérieurement.
+
+Cette première étape contient **deux à trois champs essentiels** pour identifier la ressource
+
+Si le parcours de création nécessite de traduire le contenu en plusieurs langues, les paramètres des langues sont accessibles depuis cette première étape d’initialisation. Pour en savoir plus, consultez la guideline sur les traductions de formulaire.
+
+#### Contenu et rédaction
+
+| Élément | Contenu |
+| --- | --- |
+| Titre de la Dialog | « **Créer un/une {ressource}** » |
+| Bouton de validation | « **Créer le/la {ressource}** » en `filled`. |
+| Bouton d’annulation | « **Annuler** » |
+
+### Étapes intermédiaires
+
+Une fois la ressource créée via l’étape d’initialisation, l'utilisateur configure progressivement tous les paramètres nécessaires. Le parcours se déroule dans une Dialog latérale (`drawer`) avec un Progress stepper visible indiquant la progression. L’entête de la Dialog reprend le nom de la ressource.
+
+Chaque étape traite un aspect spécifique de la ressource, ce qui permet de focaliser l'attention de l'utilisateur sur un point précis.
+
+Dans ce contexte de création de ressource, la complétion des étapes peut être séquentielle (l’utilisateur doit suivre un ordre définit) ou libre (l’utilisateur peut naviguer entre les étapes à sa guise).
+
+#### Contenu et rédaction
+
+| Élément | Standard |
+| --- | --- |
+| Titre de la Dialog | « **{Nom de la ressource}** » |
+| Bouton précédent | «  **Étape précédente** » en `leftIcon` `outlined`Iavec l'cône `arrow-left` |
+| Bouton de validation | «  **Étape suivante** » en `filled` |
+| Bouton d’enregistrement | « **Continuer plus tard** » en `outlined` et palette `product` |
+
+### Création de ressources enfants
+
+Certaines ressources nécessitent la création de ressources enfants. Cela est possible pour des formulaires long ou en étapes.
+
+Ces ressources enfants sont créées dans une Dialog latérale (`drawer`) superposée, qui vient se placer au-dessus du parcours principal, permettant de garder le contexte en arrière-plan.
+
+La Dialog enfant se ferme après validation, ramenant l'utilisateur à la Dialog parente.
+
+### Étape récapitulative
+
+Cette étape récapitulative est **optionnelle**. L'ajout d'un récapitulatif dépend de la criticité de l'action, ses conséquences en cas d'erreur, la difficulté à corriger et le stress généré pour l'utilisateur.
+
+Une fois toutes les étapes complétées, l'utilisateur accède à un écran présentant l'ensemble des informations saisies avant la validation finale. Cet écran permet de vérifier les paramètres configurés et de les corriger si nécessaire avant de confirmer l'action.
+
+#### Contenu et rédaction
+
+| Élément | Standard |
+| --- | --- |
+| Titre de la Dialog | « **{Nom de la ressource}** » |
+| Bouton précédent | «  **Étape précédente** » en `leftIcon` `outlined`Iavec l'cône `arrow-left` |
+| Bouton d’action final | « **{Infinitif} le/la {ressource}** » en `filled`. |
+| Bouton secondaire | « **Continuer plus tard** » en `outlined` et palette `product` |
+
+## Gestion des erreurs
+
+La gestion des erreurs diffère entre les deux types de complétion.
+
+### Complétion séquentielle
+
+L'utilisateur doit compléter chaque étape dans l'ordre avant de passer à la suivante. La navigation est contrainte : il n'est pas possible d'accéder à l'étape 2 sans avoir validé l'étape 1.
+
+La validation des données est **manuelle** et se fait à chaque changement d’étape. Elle est déclenchée via le bouton permettant de passer à l’étape suivante. Si des erreurs sont détectées lors de la tentative de passage à l'étape suivante, elles sont immédiatement remontées via un Callout popover à l'utilisateur et bloquent la progression tant qu'elles ne sont pas corrigées.
+
+Le composant Progress stepper indique un état « Succès » pour les étapes validées.
+
+### Complétion libre
+
+Dans ce contexte de création de ressource, la complétion des paramètres est guidée mais n’est pas imposée. C’est à dire que l’utilisateur peut naviguer entre les étapes, même si des informations ne sont pas renseignées.
+
+Il est d’ailleurs tout à fait possible que certaines étapes soit déjà considérées comme validées dès le début du parcours car déjà pré-paramétrées, comme pour les mails de notification par exemple. Le composant Progress stepper indique un état “Succès” pour ces étapes.
+
+Dans ce cas, aucune validation n'est effectuée pendant les étapes intermédiaires. Les erreurs sont détectées et bloquantes uniquement au moment de l'action finale (dernière étape du parcours). L’étape récapitulative permet de les exposer à l’utilisateur pour qu’il puisse les corriger.
+
+Exception faite pour certains champs avec un format spécifique imposé (email, url, etc.), les erreurs peuvent être déclenchées au `blur` lorsque le format n'est pas respecté. Cela aide l'utilisateur à corriger immédiatement sans attendre la fin du parcours.
+
+## Enregistrement
+
+Un enregistrement de la ressource est effectué à chaque étape, lorsque l’utilisateur change d’étape, via le bouton « Étape suivante » ou via le Progress stepper. Le bouton « Étape suivante » passe en état `loading` le temps de l'enregistrement.
+
+Un bouton « **Continuer plus tard** » est proposé à chaque étape pour permettre à l’utilisateur de quitter le parcours à tout moment tout en sauvegardant l’état actuel de sa saisie. La ressource reste alors en statut « En cours de création ».
+
+Lorsque l'utilisateur clique sur une ressource « En cours de création », il est automatiquement renvoyé dans le parcours de création (Dialog latérale (`drawer`)) à la **première étape non validée**, avec possibilité de continuer la configuration et de finaliser la diffusion.
+
+## Actions secondaires
+
+Un bouton est toujours présent dans l'entête de la Dialog pour que l'utilisateur puisse accéder à des actions secondaires. C'est à cet endroit qu'il pourra accéder à des actions pour :
+
+* modifier le nom de la ressource,
+* modifier les paramètres de langues,
+* dupliquer la ressource,
+* supprimer la ressource en cours de création.
+
+Des actions spécifiques à la ressource peuvent aussi y trouver place.
+
+# Consultation et modification
+
+## Affichage des ressources
+
+Les ressources sont affichées dans les interfaces via deux composants :
+
+* L'**IndexTable** présente les ressources sous forme de tableau, permettant une comparaison plus simple entre les ressources créée.
+* La **ResourceCard** propose quant à elle un affichage en cartes pour une vue plus visuelle et synthétique.
+
+Le besoin de comparaison constitue un point déterminant dans le choix du composant d'affichage. Lorsque les utilisateurs ont besoin d'effectuer une comparaison multi-critères détaillée, l'IndexTable est recommandée car elle facilite la lecture et la comparaison colonne par colonne. À l'inverse, pour une comparaison visuelle rapide, la ResourceCard est plus appropriée grâce à sa mise en avant des informations clés et un scan visuel plus rapide.
+
+### Ressources en cours de création
+
+Les ressources « En cours de création » doivent toujours être **visibles et facilement identifiables** pour éviter que l'utilisateur ne perde de vue une ressource en cours et ne la recrée par erreur.
+
+La façon de les afficher dépend de leur architecture technique.
+
+#### Bases de données séparées
+
+Lorsque les ressources « En cours de création » et les ressources finalisées ne partagent pas la même base de données, elles sont séparées visuellement sur une même interface.
+
+Elles sont donc organisées en deux sections distinctes : une section dédiée placée en haut de page pour les ressources « En cours de création », suivie de la section principale pour les ressources finalisées.
+
+Les deux types de ressources peuvent utiliser un mode d'affichage différent (ResourceCard ou IndexTable).
+
+- **Do** : Mettons en avant les ressources en cours de création sur la même interface que celles déjà diffusées.
+- **Caution** : Évitons de séparer les ressources « En cours de création » et les ressources finalisées via une navigation horizontale. L’utilisateur peut se demander où sont passées les ressources en cours et vouloir en créer une nouvelle au lieu de reprendre son parcours.
+
+#### Même base de données
+
+Lorsque les ressources en cours et finalisées partagent la même base de données, elles peuvent être mélangées dans un même affichage (IndexTable ou liste de ResourceCard).
+
+Les ressources « En cours de création » doivent impérativement apparaître en premier, en haut de la liste, sans besoin de regroupement.
+
+#### Identification visuelle
+
+Dans tous les cas, chaque ressource « En cours de création » doit être identifiée par un Status badge en couleur `product` visible, situé à la suite du nom de la ressource. Ce badge permet de distinguer rapidement l'état de la ressource.
+
+## Modification d’une ressource
+
+### Ressources en cours de création
+
+Lorsque l'utilisateur clique sur une ressource « En cours de création », il est automatiquement renvoyé dans le parcours de création à la **première étape non validée**, avec possibilité de continuer la configuration et de finaliser la diffusion.
+
+#### Actions génériques
+
+Si des actions génériques comme l’archivage, la duplication ou la suppression sont disponibles, celles-ci sont disponibles directement depuis la liste des ressources, que ce soit via un IndexTable ou des ResourceCard, via un bouton ouvrant un menu contextuel.
+
+L’utilisateur doit aussi pouvoir accéder à ces actions depuis le parcours de création. Un même bouton ouvrant un menu contextuel est disponible depuis l’entête de la Dialog.
+
+### Ressources diffusées
+
+Lorsque le parcours de création est terminé et que la ressource est diffusée, les modifications possibles sont assez limitées car l’impact d’un changement peut-être assez élevé. Il s’agit donc plutôt d’un affichage de consultation que de modification.
+
+La ressource s’affiche en pleine page et peut-être découpée en plusieurs section via une HorizontalNavigation pour simplifier la navigation de l’utilisateur et l’analyse des résultats (campagne d’entretien, résultats d’une enquête, etc.).
+
+#### Actions génériques
+
+Comme pour les ressources en cours de création, les actions génériques sont disponibles directement depuis la liste des ressources via un bouton ouvrant un menu contextuel.
+
+On les retrouve également depuis la page de consultation de la ressource.
