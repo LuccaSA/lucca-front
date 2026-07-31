@@ -234,7 +234,7 @@ La promotion de `strictNullChecks` dans le `tsconfig.json` de build a nécessit�
 
 ## 8. Null-narrowing des templates (PR #5122) — DOM et rendu
 
-~30 templates ont été réécrits pour satisfaire `strictNullChecks` (`@if (x(); as x)`, `?.`, `?? ''`). La plupart sont neutres, mais **certains suppriment l'élément hôte quand l'entrée est nil**, alors qu'avant il était rendu vide. Impact : sélecteurs de tests e2e, snapshots, et CSS qui compte sur la présence du nœud.
+Environ 30 templates ont été réécrits pour satisfaire `strictNullChecks` (`@if (x(); as x)`, `?.`, `?? ''`). La plupart des changements sont neutres, mais certains suppriment des nœuds descendants dans des cas limites, alors qu'ils étaient auparavant rendus vides. Impact : sélecteurs de tests e2e, snapshots et CSS qui dépendent de la présence de ces nœuds.
 
 | Composant | Changement | Ce qui change à l'écran / dans le DOM |
 |---|---|---|
