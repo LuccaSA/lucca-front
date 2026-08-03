@@ -1,4 +1,7 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.selector('.filterBarDeprecated', $note: 'Entire component is deprecated, including all .filterBarDeprecated-* descendants.', $scope: 'component:filterBarDeprecated');
 
 // stylelint-disable selector-disallowed-list -- Selectors are all deprecated.
 .filterBarDeprecated {

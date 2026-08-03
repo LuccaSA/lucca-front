@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
 
 .box {
 	@layer components {
@@ -7,7 +8,8 @@
 	}
 
 	@layer mods {
-		// .mod-grey is deprecated
+		@include deprecated.selector('.box.mod-grey', $replacement: '.box.mod-neutral', $scope: 'component:box');
+
 		&.mod-neutral,
 		&.mod-grey {
 			@include neutral;
@@ -17,7 +19,8 @@
 			@include withArrow;
 		}
 
-		// .mod-toggle is deprecated
+		@include deprecated.selector('.box.mod-toggle', $note: 'The toggle box variant is deprecated.', $scope: 'component:box');
+
 		&.mod-toggle {
 			@include toggle;
 		}

@@ -39,7 +39,7 @@ runTask('Lucca Front compilation', async () => {
 	await runTask('@lucca-front/scss compilation', () => compileScss(lfScssInput, lfScssOutput));
 	await runTask('@lucca-front/scss copy', () => {
 		copyFiles({
-			patterns: ['package.json', 'src/**/*.scss'],
+			patterns: ['package.json', 'src/**/*.scss', 'css-api/deprecations.json'],
 			context: SCSS,
 			output: OUTPUT_SCSS,
 		});
