@@ -24,31 +24,32 @@
 				<span class="filterPill_popover-content-option-input">
 					<input type="radio" [attr.id]="inputId(index)" [attr.name]="groupName" [checked]="isSelected(view)" (change)="selectView(view)" />
 				</span>
-
 				<button
 					type="button"
 					class="filterPill_popover-content-option-actions"
 					size="XS"
 					luButton="ghost"
-					luPopoverNoCloseButton
 					[attr.aria-label]="viewOptionsLabel(view)"
-					[luPopover2]="optionsPopover"
-					[customPositions]="popoverPositions"
+					[luDropdown]="optionsDropdown"
 				>
 					<lu-icon icon="menuDots" [alt]="viewOptionsLabel(view)" />
 				</button>
 
-				<ng-template #optionsPopover>
-					<div class="filterPill_popover-content popover-contentOptional">
-						<button type="button" luButton="text" size="S" (click)="renameView.emit(view)">
-							<lu-icon icon="edit" />
-							{{ intl().renameView }}
-						</button>
-						<button type="button" luButton="text" size="S" critical (click)="deleteView.emit(view)">
-							<lu-icon icon="trash" />
-							{{ intl().deleteView }}
-						</button>
-					</div>
+				<ng-template #optionsDropdown>
+					<lu-dropdown-menu>
+						<lu-dropdown-item>
+							<button type="button" lu-dropdown-action (click)="renameView.emit(view)">
+								<lu-icon icon="edit" />
+								{{ intl().renameView }}
+							</button>
+						</lu-dropdown-item>
+						<lu-dropdown-item>
+							<button type="button" lu-dropdown-action critical (click)="deleteView.emit(view)">
+								<lu-icon icon="trash" />
+								{{ intl().deleteView }}
+							</button>
+						</lu-dropdown-item>
+					</lu-dropdown-menu>
 				</ng-template>
 			</div>
 		}
