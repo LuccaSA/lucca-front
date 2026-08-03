@@ -12,9 +12,9 @@
 <ng-container #filterPillPanelAnchor />
 <ng-container *luFilterPillDisplayer>
 	<div class="multipleSelect-displayer-filter">
-		@if (useSingleOptionDisplayer() && valueLength() === 1) {
+		@if (useSingleOptionDisplayer() && valueLength() === 1 && singleOptionForDisplay() !== undefined) {
 			<div class="multipleSelect-pill-displayer-chip">
-				<ng-container *luOptionOutlet="displayerTpl(); value: value[0]" />
+				<ng-container *luOptionOutlet="displayerTpl(); value: singleOptionForDisplay()" />
 			</div>
 		}
 	</div>
