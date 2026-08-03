@@ -86,7 +86,7 @@ export abstract class AbstractDateComponent {
 
 		switch (mode) {
 			case 'day':
-				return this.min().getTime() <= date.getTime();
+				return startOfDay(this.min()).getTime() <= startOfDay(date).getTime();
 			case 'month':
 				return isBefore(startOfMonth(this.min()), startOfMonth(date)) || isSameMonth(this.min(), date);
 			case 'year':
@@ -103,7 +103,7 @@ export abstract class AbstractDateComponent {
 
 		switch (mode) {
 			case 'day':
-				return this.max().getTime() >= date.getTime();
+				return startOfDay(this.max()).getTime() >= startOfDay(date).getTime();
 			case 'month':
 				return isAfter(startOfMonth(this.max()), startOfMonth(date)) || isSameMonth(this.max(), date);
 			case 'year':
