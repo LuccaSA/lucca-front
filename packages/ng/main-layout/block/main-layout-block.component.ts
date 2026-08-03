@@ -4,7 +4,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	selector: 'lu-main-layout-block',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	template: `<ng-content />`,
+	template: '<ng-content />',
 	host: {
 		class: 'mainLayout-content-inside-block',
 		'[class.mod-overflow]': 'overflow()',

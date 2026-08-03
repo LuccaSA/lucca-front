@@ -147,7 +147,7 @@ export default {
 	argTypes: {
 		panelClasses: HiddenArgType,
 		mode: {
-			options: ['default', 'drawer', 'drawer-from-bottom'],
+			options: ['default', 'drawer', 'drawer-from-bottom', 'sheet', ''],
 			control: {
 				type: 'select',
 			},

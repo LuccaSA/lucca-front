@@ -1,0 +1,32 @@
+<div class="approbationInbox-detail-header-illustration">
+	<ng-content select="[approbationInboxDetailIllustration]" />
+</div>
+<div class="approbationInbox-detail-header-main">
+	<div class="approbationInbox-detail-header-main-infos">
+		<h1 class="approbationInbox-detail-header-main-infos-title" [id]="titleId">
+			<span class="approbationInbox-detail-header-main-infos-title-content" luTooltip luTooltipWhenEllipsis>{{ label() }}</span>
+		</h1>
+		<div class="approbationInbox-detail-header-main-infos-description">
+			<ng-content />
+		</div>
+		@if (delegation()) {
+			<div class="approbationInbox-detail-header-main-delegation">
+				<lu-tag withEllipsis [label]="delegation()" />
+			</div>
+		}
+	</div>
+	@if (!dialogRef) {
+		<div class="approbationInbox-detail-header-main-actions">
+			<ng-container *ngTemplateOutlet="actionsTpl" />
+			<ng-template #actionsTpl>
+				<ng-content select="[approbationInboxDetailActions]" />
+			</ng-template>
+			<span class="approbationInbox-detail-header-main-actions-more">
+				<ng-container *ngTemplateOutlet="actionsMoreTpl" />
+				<ng-template #actionsMoreTpl>
+					<ng-content select="[approbationInboxDetailActionsMore]" />
+				</ng-template>
+			</span>
+		</div>
+	}
+</div>

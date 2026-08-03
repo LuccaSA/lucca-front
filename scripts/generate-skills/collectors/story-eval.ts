@@ -35,7 +35,7 @@ function unquote(value: string): string {
 
 /**
  * Faithful re-implementation of the repo's `generateInputs` helper
- * (stories/helpers/stories.ts), but fed with the component's AST-extracted input
+ * (@/helpers/stories.ts), but fed with the component's AST-extracted input
  * defaults so that default-valued args are correctly omitted — matching what
  * Storybook produces when its argTypes carry the component's default values.
  */
@@ -169,9 +169,7 @@ export function renderStoryTemplates(source: string, defaults: Map<string, strin
 	const mod = evaluateModule(source, defaults);
 	if (!mod) return null;
 
-	const storyExports = Object.entries(mod.exports).filter(
-		([name, val]) => name !== 'default' && !/TEST$/.test(name) && val && typeof val === 'object',
-	);
+	const storyExports = Object.entries(mod.exports).filter(([name, val]) => name !== 'default' && !/TEST$/.test(name) && val && typeof val === 'object');
 
 	const candidates: [string, any][] = storyExports.length > 0 ? storyExports : [['_meta', mod.meta]];
 
