@@ -19,22 +19,15 @@
 <ng-template #viewsPopover>
 	<div class="filterPill_popover-content popover-contentOptional">
 		@for (view of views(); track optionKey()(view); let index = $index) {
-			<div class="form-field mod-selectOption filterPill_popover-content-option">
+			<div class="filterPill_popover-content-option">
 				<label luFormLabel [attr.for]="inputId(index)">{{ viewLabel()(view) }}</label>
-				<span class="radioField">
-					<input
-						type="radio"
-						class="radioField-input"
-						[attr.id]="inputId(index)"
-						[attr.name]="groupName"
-						[checked]="isSelected(view)"
-						(change)="selectView(view)"
-					/>
-					<span class="radioField-icon" aria-hidden="true"><span class="radioField-icon-check"></span></span>
+				<span class="filterPill_popover-content-option-input">
+					<input type="radio" [attr.id]="inputId(index)" [attr.name]="groupName" [checked]="isSelected(view)" (change)="selectView(view)" />
 				</span>
 
 				<button
 					type="button"
+					class="filterPill_popover-content-option-actions"
 					size="XS"
 					luButton="ghost"
 					luPopoverNoCloseButton
