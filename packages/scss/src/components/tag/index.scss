@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/config';
 @use 'exports' as *;
 
 .tag {
@@ -35,6 +36,10 @@
 
 		&:has(.tag-content:focus-visible) {
 			@include focusVisible;
+		}
+
+		&:has(.lucca-icon) {
+			@include withIcon;
 		}
 	}
 }

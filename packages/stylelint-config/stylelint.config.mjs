@@ -11,7 +11,7 @@ export default {
 			files: ['**/*.scss'],
 			rules: {
 				// Disable for now because of bugs with SCSS files.
-				// SEE https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/252
+				// SEE https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/269
 				'no-invalid-position-declaration': null,
 			},
 		},
@@ -23,6 +23,12 @@ export default {
 			},
 		},
 	],
+	languageOptions: {
+		directionality: {
+			block: 'top-to-bottom',
+			inline: 'left-to-right',
+		},
+	},
 	rules: {
 		// SCSS specific
 		// ============================================================================================
@@ -157,6 +163,7 @@ export default {
 				message: (selectorId) => `Expected "${selectorId}" to match pattern #foo(-bar(Baz)*)*`,
 			},
 		],
+		'selector-no-deprecated': true,
 		'selector-pseudo-element-no-unknown': [
 			true,
 			{
@@ -183,6 +190,7 @@ export default {
 				alignQuotes: true,
 			},
 		],
+		'@stylistic/no-multiple-whitespaces': null, // Allow people to align values as they wish.
 		'@stylistic/string-quotes': 'single',
 	},
 };

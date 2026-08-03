@@ -1,10 +1,11 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { isNotNil } from '@lucca-front/ng/core';
 import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body/data-table-body.token';
 import { LU_DATA_TABLE_FOOT_INSTANCE } from './data-table-foot/data-table-foot.token';
 import { LU_DATA_TABLE_HEAD_INSTANCE } from './data-table-head/data-table-head.token';
 import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row/data-table-row.token';
-import { DataTableAlign } from './data-table.type';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
+import { DataTableAlign } from './data-table.type';
 
 @Component({
 	selector: 'lu-base-data-table-cell',
@@ -12,24 +13,26 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export abstract class BaseDataTableCell {
-	tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
-	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
-	headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
-	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
-	rowRef = inject(LU_DATA_TABLE_ROW_INSTANCE, { optional: true });
+	readonly tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
+	readonly bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
+	readonly headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
+	readonly footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
+	readonly rowRef = inject(LU_DATA_TABLE_ROW_INSTANCE, { optional: true });
 
-	editable = input(false, { transform: booleanAttribute });
-	align = input<DataTableAlign | null>(null);
+	readonly editable = input(false, { transform: booleanAttribute });
+	readonly align = input<DataTableAlign | null>(null);
 
-	isStickyStart = computed(() => {
-		return this.position() <= this.tableRef?.stickyColsStart() - 1;
+	readonly isStickyStart = computed(() => {
+		const position = this.position();
+		return isNotNil(position) && isNotNil(this.tableRef) ? position <= this.tableRef.stickyColsStart() - 1 : undefined;
 	});
 
-	isStickyEnd = computed(() => {
-		return this.position() >= this.rowRef?.cells().length - this.tableRef?.stickyColsEnd();
+	readonly isStickyEnd = computed(() => {
+		const position = this.position();
+		return isNotNil(position) && isNotNil(this.tableRef) && isNotNil(this.rowRef) ? position >= this.rowRef.cells().length - this.tableRef.stickyColsEnd() : undefined;
 	});
 
-	position = computed(() => {
+	readonly position = computed(() => {
 		return this.rowRef?.cells().indexOf(this);
 	});
 }

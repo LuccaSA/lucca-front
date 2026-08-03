@@ -8,8 +8,8 @@ import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 	name: 'leaveEndsDisplay',
 })
 export class LeaveEndsDisplayPipe implements PipeTransform {
-	intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);
-	locale = inject(LOCALE_ID);
+	readonly intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);
+	readonly locale = inject(LOCALE_ID);
 	public transform(leaveEndsOn: Date, leaveEndIsFirstHalfDay: boolean): string {
 		if (isToday(leaveEndsOn)) {
 			if (leaveEndIsFirstHalfDay) {

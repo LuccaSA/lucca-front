@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Provider, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, Provider } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from './display-format.model';
 import { luUserDisplay, LuUserDisplayInput, LuUserDisplayPipe } from './user-display.pipe';
@@ -205,6 +205,10 @@ describe(LuUserDisplayPipe.name, () => {
 		it(`should return the right multiple value with specify 'fL' format and formatter`, () => {
 			const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
 			expect(createPipe(`{{ users() | luUserDisplay:{ format: 'fL', formatter: formatter() } }}`, { users, formatter })).toBe('John D., Michael S., and Dwight S.');
+		});
+
+		it(`should return the right multiple value with default separator when formatter is undefined`, () => {
+			expect(createPipe(`{{ users() | luUserDisplay:{ format: 'fL', formatter: undefined } }}`, { users })).toBe('John D., Michael S., Dwight S.');
 		});
 	});
 });

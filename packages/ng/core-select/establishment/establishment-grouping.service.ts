@@ -9,10 +9,10 @@ export class EstablishmentGroupingService {
 	protected legalUnitsUrl = '/organization/structure/api/legal-units';
 
 	protected countParams: HttpParams = new HttpParams().set('fields.root', 'count').set('limit', 0);
-	protected establishmentsCount$ = this.http.get<{ count: number }>(this.establishmentsUrl, { params: this.countParams }).pipe(map((res) => res.count));
-	protected legalUnitsCount$ = this.http.get<{ count: number }>(this.legalUnitsUrl, { params: this.countParams }).pipe(map((res) => res.count));
+	protected readonly establishmentsCount$ = this.http.get<{ count: number }>(this.establishmentsUrl, { params: this.countParams }).pipe(map((res) => res.count));
+	protected readonly legalUnitsCount$ = this.http.get<{ count: number }>(this.legalUnitsUrl, { params: this.countParams }).pipe(map((res) => res.count));
 
-	public useGrouping$ = combineLatest([this.legalUnitsCount$, this.establishmentsCount$]).pipe(
+	public readonly useGrouping$ = combineLatest([this.legalUnitsCount$, this.establishmentsCount$]).pipe(
 		map(([luCount, establishmentCount]) => luCount > 1 && establishmentCount > 1 && luCount !== establishmentCount),
 		shareReplay(),
 	);

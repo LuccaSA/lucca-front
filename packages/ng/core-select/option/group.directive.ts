@@ -1,20 +1,15 @@
-import { Directive, inject, Input, OnInit, TemplateRef } from '@angular/core';
-import { PortalContent } from '@lucca-front/ng/core';
+import { Directive, inject, input, TemplateRef } from '@angular/core';
+import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import type { ALuSelectInputComponent } from '../input';
 import type { LuOptionGroupByContext } from '../select.model';
-
-export interface LuOptionGrouping<TOption, TGroup> {
-	selector: (option: TOption) => TGroup;
-	content: PortalContent<LuOptionGroupByContext<TOption, TGroup>>;
-}
 
 @Directive({
 	selector: '[luOptionGroup]',
 })
-export class LuOptionGroupDirective<TOption, TValue, TGroup> implements LuOptionGrouping<TOption, TGroup>, OnInit {
-	@Input('luOptionGroupSelect') select: ALuSelectInputComponent<TOption, TValue>;
+export class LuOptionGroupDirective<TOption, TValue, TGroup> {
+	readonly select = input.required<ALuSelectInputComponent<TOption, TValue>>({ alias: 'luOptionGroupSelect' });
 
-	@Input('luOptionGroupBy') selector: (option: TOption) => TGroup;
+	readonly selector = input.required<(option: TOption) => TGroup>({ alias: 'luOptionGroupBy' });
 
 	readonly content = inject<TemplateRef<LuOptionGroupByContext<TOption, TGroup>>>(TemplateRef);
 
@@ -22,7 +17,9 @@ export class LuOptionGroupDirective<TOption, TValue, TGroup> implements LuOption
 		return true;
 	}
 
-	public ngOnInit(): void {
-		this.select.groupingSignal.set(this);
+	constructor() {
+		ɵeffectWithDeps([this.select, this.selector], (select, selector) => {
+			select.groupingSignal.set({ selector, content: this.content });
+		});
 	}
 }

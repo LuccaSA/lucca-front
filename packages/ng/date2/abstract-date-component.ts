@@ -1,13 +1,14 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
-import { intlInputOptions } from '@lucca-front/ng/core';
-import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
+import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
+import { addMonths, addYears, FirstWeekContainsDateOptions, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
+import { WEEK_INFO } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
 import { getDateFormat, getLocalizedDateFormat, getSeparator } from './date-format';
 import { LU_DATE2_TRANSLATIONS } from './date2.translate';
 import { Date2ClearBehavior, DATE_FORMAT, DateFormat } from './date2.type';
-import { transformDateInputToDate, transformDateRangeInputToDateRange } from './utils';
+import { getJSFirstDayOfWeek, transformDateInputToDate, transformDateRangeInputToDateRange } from './utils';
 
 @Component({
 	selector: '',
@@ -16,24 +17,31 @@ import { transformDateInputToDate, transformDateRangeInputToDateRange } from './
 })
 export abstract class AbstractDateComponent {
 	protected locale = inject(LOCALE_ID);
+	#weekInfo = inject(WEEK_INFO);
+
+	protected get weekOptions(): WeekOptions & FirstWeekContainsDateOptions {
+		return { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo), firstWeekContainsDate: 4 };
+	}
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	protected dateFormat = getDateFormat(this.locale);
 	protected separator = getSeparator(this.locale);
-	protected dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
+	protected readonly dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
 
 	intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.locale, { month: 'numeric', year: 'numeric' });
 	intlDateTimeFormatYear = new Intl.DateTimeFormat(this.locale, { year: 'numeric' });
 
-	intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
 	onTouched?: () => void;
-	disabled = signal<boolean>(false);
+	readonly disabled = signal<boolean>(false);
 
 	readonly format = input<DateFormat>(DATE_FORMAT.DATE);
-	protected inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
+	protected readonly inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
 
-	readonly ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
+	readonly ranges = input([], {
+		transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange).filter((range): range is DateRange => range !== null),
+	});
 	readonly hideToday = input(false, { transform: booleanAttribute });
 	readonly hasTodayButton = input(false, { transform: booleanAttribute });
 	readonly clearable = input(null, { transform: booleanAttribute });
@@ -54,17 +62,17 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
-	calendarMode = model<CalendarMode>();
+	readonly calendarMode = model<CalendarMode | null>(null);
 
 	readonly panelOpened = output<void>();
 
 	readonly panelClosed = output<void>();
 
-	readonly dateFormatLocalized = computed(() => getLocalizedDateFormat(this.locale, this.mode()));
+	readonly dateFormatLocalized = computed(() => getLocalizedDateFormat(this.locale, this.mode(), this.intl().weekPrefix));
 
-	protected currentDate = signal(new Date());
+	protected readonly currentDate = signal(new Date());
 
-	protected tabbableDate = signal<Date | null>(null);
+	protected readonly tabbableDate = signal<Date | null>(null);
 
 	protected constructor() {
 		effect(() => {
@@ -80,41 +88,48 @@ export abstract class AbstractDateComponent {
 	}
 
 	isAfterMin(date: Date, mode: CalendarMode): boolean {
-		if (!this.min()) {
+		const min = this.min();
+		if (!min) {
 			return true;
 		}
 
 		switch (mode) {
 			case 'day':
-				return this.min().getTime() <= date.getTime();
+				return min.getTime() <= date.getTime();
+			case 'week':
+				// In week mode the emitted value is the start of the week, so min applies to it
+				return startOfWeek(date, this.weekOptions).getTime() >= min.getTime();
 			case 'month':
-				return isBefore(startOfMonth(this.min()), startOfMonth(date)) || isSameMonth(this.min(), date);
+				return isBefore(startOfMonth(min), startOfMonth(date)) || isSameMonth(min, date);
 			case 'year':
-				return this.min().getFullYear() <= date.getFullYear();
+				return min.getFullYear() <= date.getFullYear();
 			default:
 				return true;
 		}
 	}
 
 	isBeforeMax(date: Date, mode: CalendarMode): boolean {
-		if (!this.max()) {
-			return true;
+		const max = this.max();
+		if (max) {
+			switch (mode) {
+				case 'day':
+					return max.getTime() >= date.getTime();
+				case 'week':
+					// In week mode the emitted value is the start of the week, so max applies to it
+					return startOfWeek(date, this.weekOptions).getTime() <= max.getTime();
+				case 'month':
+					return isAfter(startOfMonth(max), startOfMonth(date)) || isSameMonth(max, date);
+				case 'year':
+					return max.getFullYear() >= date.getFullYear();
+				default:
+					return true;
+			}
 		}
-
-		switch (mode) {
-			case 'day':
-				return this.max().getTime() >= date.getTime();
-			case 'month':
-				return isAfter(startOfMonth(this.max()), startOfMonth(date)) || isSameMonth(this.max(), date);
-			case 'year':
-				return this.max().getFullYear() >= date.getFullYear();
-			default:
-				return true;
-		}
+		return true;
 	}
 
-	isValidDate(date: Date): boolean {
-		return !!date && !isNaN(date.getTime());
+	isValidDate(date: Date | null | undefined): date is Date {
+		return isNotNil(date) && !isNaN(date.getTime());
 	}
 
 	prev(mode: CalendarMode) {
@@ -137,15 +152,16 @@ export abstract class AbstractDateComponent {
 		switch (mode) {
 			case 'year':
 				this.currentDate.set(addYears(this.currentDate(), direction * 10));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction * 10));
+				this.tabbableDate.set(addYears(this.tabbableDate() ?? 0, direction * 10));
 				break;
 			case 'month':
 				this.currentDate.set(addYears(this.currentDate(), direction));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction));
+				this.tabbableDate.set(addYears(this.tabbableDate() ?? 0, direction));
 				break;
+			case 'week':
 			case 'day':
 				this.currentDate.set(addMonths(this.currentDate(), direction));
-				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
+				this.tabbableDate.set(addMonths(this.tabbableDate() ?? 0, direction));
 				break;
 		}
 	}

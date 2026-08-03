@@ -43,7 +43,11 @@ export default (options?: SchematicContextOpts): Rule => {
 					'--palettes-error-text': `--palettes-error-0`,
 					'--palettes-critical-text': `--palettes-critical-0`,
 				},
-				mixins: {}
+				mixins: {},
+				rgbaVariables: {
+					'--colors-grey-{val}-rgb': `--palettes-neutral-{val}`,
+					'--colors-white-rgb': '--palettes-neutral-0',
+				}
 			},
 			{
 				// Deprecated palette -> new palette (used by both classes and CSS vars)

@@ -61,7 +61,7 @@ export abstract class ALuDateAdapter<D> implements ILuDateAdapter<D> {
 		return 0;
 	}
 	abstract isParsable(text: string, granularity?: LuDateGranularity): boolean;
-	abstract parse(text: string, granularity?: LuDateGranularity): D;
+	abstract parse(text: string, granularity?: LuDateGranularity): D | undefined;
 	abstract format(d: D, format: string): string;
 	abstract clone(d: D): D;
 

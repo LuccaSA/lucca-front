@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Observable, delay, map, of } from 'rxjs';
+import { NEVER, Observable, delay, map, of } from 'rxjs';
 import type { MockInstance } from 'vitest';
 import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
@@ -17,7 +17,9 @@ interface TestEntity {
 	selector: 'lu-simple-select[testApi]',
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
-	protected override params$ = this.clue$.pipe(
+	public override totalCount$ = NEVER;
+
+	protected override readonly params$ = this.clue$.pipe(
 		map((clue) => ({
 			...(clue ? { clue } : {}),
 		})),
@@ -101,7 +103,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		let loadingWhenPanelOpens: boolean | undefined;
 		select.isPanelOpen$.subscribe((isOpen) => {
 			if (isOpen) {
-				loadingWhenPanelOpens = select.loading$.value;
+				loadingWhenPanelOpens = select.loading();
 			}
 		});
 
@@ -113,7 +115,7 @@ describe('ALuCoreSelectApiDirective', () => {
 
 		tick(300);
 		tick(MAGIC_OPTION_SCROLL_DELAY);
-		expect(select.loading$.value).toBe(false);
+		expect(select.loading()).toBe(false);
 	}));
 
 	it('should query options once when searching while the select is closed', fakeAsync(() => {
@@ -191,9 +193,9 @@ describe('ALuCoreSelectApiDirective', () => {
 		// // Assert
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
 
-		let options: readonly TestEntity[];
+		let options: readonly TestEntity[] = [];
 
-		select.options$.subscribe((o) => (options = o));
+		options = select.dataSourceOptions();
 
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },
@@ -237,8 +239,8 @@ describe('ALuCoreSelectApiDirective', () => {
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert
-		let options: readonly TestEntity[];
-		select.options$.subscribe((o) => (options = o));
+		let options: readonly TestEntity[] = [];
+		options = select.dataSourceOptions();
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },
 			{ id: 2, name: 'test 2' },

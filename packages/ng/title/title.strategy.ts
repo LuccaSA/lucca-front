@@ -33,8 +33,8 @@ export class LuTitleStrategy extends TitleStrategy {
 	private readonly luccaTitle$ = this.#toLuccaTitle$(this.appTitle);
 
 	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>([Lucca]);
-	titleParts$ = this.titlePartsSubject.asObservable();
-	title$ = this.titleParts$.pipe(
+	readonly titleParts$ = this.titlePartsSubject.asObservable();
+	readonly title$ = this.titleParts$.pipe(
 		switchMap((titleParts) => combineLatest(titleParts.map((part) => (typeof part === 'string' ? of(part) : part)))),
 		map((parts) => parts.join(TitleSeparator)),
 		distinctUntilChanged(),

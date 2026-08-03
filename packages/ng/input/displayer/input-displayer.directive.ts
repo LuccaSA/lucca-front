@@ -1,6 +1,7 @@
 import { Directive, forwardRef, Input, TemplateRef, ViewRef } from '@angular/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from './input-displayer.model';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */

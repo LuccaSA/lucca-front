@@ -1,5 +1,5 @@
 <ng-template #radioContent>
-	<label luFormLabel [tag]="tag()" [class.inputFramed-header-label]="framed()" attr.id="{{ id }}-label" attr.for="{{ id }}-input"
+	<label luFormLabel [tag]="tag() ?? null" [class.inputFramed-header-label]="framed()" attr.id="{{ id }}-label" attr.for="{{ id }}-input"
 		><ng-container *ngTemplateOutlet="contentProjection"
 	/></label>
 	<span class="radioField">
@@ -22,15 +22,15 @@
 			<span class="radioField-icon-check"></span>
 		</span>
 	</span>
-	@if (inlineMessage()) {
-		<lu-inline-message [label]="inlineMessage()" id="{{ id }}-message" />
+	@if (inlineMessage(); as inlineMessage) {
+		<lu-inline-message [label]="inlineMessage" id="{{ id }}-message" />
 	}
 	@if (arrow()) {
 		<div class="form-field-arrow{{ arrow() === 'neutral' ? ' mod-neutral' : '' }}"></div>
 	}
 </ng-template>
 @if (framed()) {
-	<lu-input-framed [center]="framedCenter()" [size]="framedSize()" [framedPortal]="framedPortal()">
+	<lu-input-framed [center]="framedCenter()" [size]="framedSize()" [framedPortal]="framedPortal() ?? null">
 		<ng-container *ngTemplateOutlet="radioContent" />
 		<ng-container illustration><ng-content select="[illustration]" /></ng-container>
 		<ng-container info><ng-content select="[info]" /></ng-container>

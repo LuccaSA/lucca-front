@@ -64,7 +64,10 @@ export default (options: SchematicContextOpts): Rule => {
 				'lu-divider': { withRole: '' },
 				'button': { delete: 'critical' },
 				'lu-loading': { type: { fullpage: 'fullPage' } },
-				'lu-single-file-upload': { illustration: { paper: 'invoice' } },
+				'lu-single-file-upload': { illustration: { paper: 'invoice' }, size: { 'S': 'L' } },
+				'lu-multi-file-upload': { size: { 'S': 'L' } },
+				'lu-file-entry': { size: { 'S': 'L' } },
+				'lu-file-dropzone': { size: { 'S': 'L' } },
 				'lu-highlight-data': { icon: { 'manifying-glass': 'magnifying-glass' } },
 			},
 		}).run();
