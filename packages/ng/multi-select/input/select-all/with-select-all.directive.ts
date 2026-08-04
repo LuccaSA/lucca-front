@@ -12,6 +12,7 @@ import { LuMultiSelectWithSelectAllContext, MULTI_SELECT_WITH_SELECT_ALL_CONTEXT
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-multi-select[withSelectAll]',
+	exportAs: 'withSelectAll',
 	providers: [
 		{
 			provide: ɵIsSelectedStrategy,

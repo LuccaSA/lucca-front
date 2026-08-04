@@ -10,7 +10,7 @@
 	<button class="softwareIconWrapper-action" type="button" [luPopover2]="softwareIconWrapperPopover" luPopoverTrigger="click+hover">
 		<div class="softwareIconWrapper-action-more">
 			<span aria-hidden="true" [attr.data-content-before]="'+' + hiddenIcons().length"></span>
-			<span class="pr-u-mask">{{ intl().seeMore | intlParams: { count: hiddenIcons().length } }}</span>
+			<span class="pr-u-mask">{{ seeMoreLabel() | intlParams: { count: hiddenIcons().length } }}</span>
 		</div>
 	</button>
 

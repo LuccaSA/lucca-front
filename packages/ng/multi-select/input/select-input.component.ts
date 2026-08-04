@@ -35,6 +35,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 
 @Component({
 	selector: 'lu-multi-select',
+	exportAs: 'luMultiSelect',
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

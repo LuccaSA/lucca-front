@@ -53,6 +53,22 @@ L'utilisation de `withSelectAll` apporte un certain nombre de changements :
   export type LuMultiSelectionMode = 'include' | 'exclude' | 'none' | 'all';
   ```
 
+#### Label pluriel (langues avec plus de 2 formes, ex. polonais)
+
+`withSelectAllDisplayerLabel` attend une `string` déjà résolue : il ne gère pas lui-même le pluriel. Pour les langues
+CLDR avec plus de deux catégories (`one` / `few` / `many` / `other`, ex. polonais), il faut résoudre le label
+côté host en fonction du compte, via `@lucca/translate`. La directive expose `displayerCount` via
+`exportAs="withSelectAll"` pour permettre ce calcul :
+
+```html
+<lu-multi-select
+  establishments
+  withSelectAll
+  #establishmentsSelectAll="withSelectAll"
+  [withSelectAllDisplayerLabel]="i18n.ESTABLISHMENTS_DISPLAYER_LABEL({ count: establishmentsSelectAll.displayerCount() ?? 0 })"
+/>
+```
+
 ### Exemple : Barre de filtres
 
 On pourra utiliser la fonction `selectionToQueryParams` qui permet de créer un objet utilisable en query params à partir d'une `LuMultiSelection`.

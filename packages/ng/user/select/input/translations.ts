@@ -1,38 +1,38 @@
-﻿export const Translations = {
+export const Translations = {
 	pt: {
-		users: 'utilizadores',
+		users: { other: 'utilizadores' },
 		me: 'Eu:',
 	},
 	'nl-BE': {
-		users: 'gebruikers',
+		users: { other: 'gebruikers' },
 		me: 'Ik:',
 	},
 	nl: {
-		users: 'gebruikers',
+		users: { other: 'gebruikers' },
 		me: 'Ik:',
 	},
 	it: {
-		users: 'utenti',
+		users: { other: 'utenti' },
 		me: 'Io:',
 	},
 	fr: {
-		users: 'utilisateurs',
+		users: { other: 'utilisateurs' },
 		me: 'Moi :',
 	},
 	es: {
-		users: 'usuarios',
+		users: { other: 'usuarios' },
 		me: 'Yo:',
 	},
 	de: {
-		users: 'Benutzer',
+		users: { other: 'Benutzer' },
 		me: 'Ich:',
 	},
 	en: {
-		users: 'users',
+		users: { other: 'users' },
 		me: 'Me:',
 	},
 	pl: {
-		users: 'użytkownicy',
+		users: { few: 'użytkownicy', many: 'użytkowników', other: 'użytkownicy' },
 		me: 'Ja:',
 	},
 };
