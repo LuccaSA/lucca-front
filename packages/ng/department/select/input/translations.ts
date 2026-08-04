@@ -1,29 +1,29 @@
-﻿export const Translations = {
+export const Translations = {
 	pt: {
-		departments: 'departamentos',
+		departments: { other: 'departamentos' },
 	},
 	'nl-BE': {
-		departments: 'afdelingen',
+		departments: { other: 'afdelingen' },
 	},
 	nl: {
-		departments: 'afdelingen',
+		departments: { other: 'afdelingen' },
 	},
 	it: {
-		departments: 'dipartimenti',
+		departments: { other: 'dipartimenti' },
 	},
 	de: {
-		departments: 'Abteilungen',
+		departments: { other: 'Abteilungen' },
 	},
 	fr: {
-		departments: 'départements',
+		departments: { other: 'départements' },
 	},
 	es: {
-		departments: 'departamentos',
+		departments: { other: 'departamentos' },
 	},
 	en: {
-		departments: 'departments',
+		departments: { other: 'departments' },
 	},
 	pl: {
-		departments: 'działy',
+		departments: { few: 'działy', many: 'działów', other: 'działy' },
 	},
 };
