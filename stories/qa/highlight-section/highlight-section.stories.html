@@ -1,0 +1,261 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td style="inline-size: 50%">
+				<div class="highlightSection">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<p class="pr-u-fontWeightSemiBold">23 collaborateurs n’ont pas de profil spécifique.</p>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td style="inline-size: 50%">
+				<lu-highlight-section>
+					<p class="pr-u-fontWeightSemiBold">23 collaborateurs n’ont pas de profil spécifique.</p>
+				</lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Theme light</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<p class="pr-u-fontWeightSemiBold">Thème light</p>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light">
+					<p class="pr-u-fontWeightSemiBold">Thème light</p>
+				</lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Theme dark</td>
+			<td>
+				<div class="highlightSection mod-dark">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<p class="pr-u-fontWeightSemiBold">Thème dark</p>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="dark">
+					<p class="pr-u-fontWeightSemiBold">Thème dark</p>
+				</lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Bubbles both sides</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<p class="pr-u-fontWeightSemiBold">Ornements des deux côtés</p>
+						</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-start"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
+						/>
+						<img
+							alt=""
+							class="highlightSection-bubbles-end"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" [bubble]="1" bubblePosition="both">
+					<p class="pr-u-fontWeightSemiBold">Ornements des deux côtés</p>
+				</lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Bubbles start only</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<p class="pr-u-fontWeightSemiBold">Ornement au début</p>
+						</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-start"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-2.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" [bubble]="2" bubblePosition="start">
+					<p class="pr-u-fontWeightSemiBold">Ornement au début</p>
+				</lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Bubbles end only</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<p class="pr-u-fontWeightSemiBold">Ornement à la fin</p>
+						</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-end"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-2.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" [bubble]="2" bubblePosition="end">
+					<p class="pr-u-fontWeightSemiBold">Ornement à la fin</p>
+				</lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Dark bubbles</td>
+			<td>
+				<div class="highlightSection mod-dark">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<p class="pr-u-fontWeightSemiBold">Ornements adaptés au thème dark</p>
+						</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-start"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-dark-1.svg"
+						/>
+						<img
+							alt=""
+							class="highlightSection-bubbles-end"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-dark-1.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="dark" [bubble]="1">
+					<p class="pr-u-fontWeightSemiBold">Ornements adaptés au thème dark</p>
+				</lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td>
+				<div class="highlightSection mod-light palette-timmi">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<p class="pr-u-fontWeightSemiBold">Palette Timmi</p>
+						</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-end"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/timmi/bubbles-light-1.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" palette="timmi" [bubble]="1" bubblePosition="end">
+					<p class="pr-u-fontWeightSemiBold">Palette Timmi</p>
+				</lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Illustration</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<p class="pr-u-fontWeightSemiBold">Baromètre express</p>
+							<p class="pr-u-bodyS">8 questions | Identifiez rapidement les grandes tendances de votre organisation.</p>
+						</div>
+						<img
+							alt=""
+							class="highlightSection-content-illustration"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/polaroids.svg"
+						/>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-start"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" illustration="polaroids" [bubble]="1" bubblePosition="start">
+					<p class="pr-u-fontWeightSemiBold">Baromètre express</p>
+					<p class="pr-u-bodyS">8 questions | Identifiez rapidement les grandes tendances de votre organisation.</p>
+				</lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Interactive content</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">
+							<div style="align-items: center; display: flex; gap: var(--pr-t-spacings-150); justify-content: space-between">
+								<div>
+									<p class="pr-u-fontWeightSemiBold">23 collaborateurs n’ont pas de profil spécifique.</p>
+									<p class="pr-u-bodyS">En attendant de les associer, vous pouvez choisir un profil existant par défaut.</p>
+								</div>
+								<button class="button mod-outlined" type="button">Choisir un profil par défaut</button>
+							</div>
+						</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-start"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" [bubble]="1" bubblePosition="start">
+					<div style="align-items: center; display: flex; gap: var(--pr-t-spacings-150); justify-content: space-between">
+						<div>
+							<p class="pr-u-fontWeightSemiBold">23 collaborateurs n’ont pas de profil spécifique.</p>
+							<p class="pr-u-bodyS">En attendant de les associer, vous pouvez choisir un profil existant par défaut.</p>
+						</div>
+						<button luButton="outlined" type="button">Choisir un profil par défaut</button>
+					</div>
+				</lu-highlight-section>
+			</td>
+		</tr>
+	</tbody>
+</table>

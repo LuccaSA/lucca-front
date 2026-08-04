@@ -1,0 +1,58 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	background-color: var(--components-highlightSection-background);
+	border-radius: var(--components-highlightSection-borderRadius);
+	display: block;
+	isolation: isolate;
+	overflow: hidden;
+	padding: var(--components-highlightSection-padding);
+	position: relative;
+
+	@at-root ($atRoot) {
+		.highlightSection-content {
+			align-items: flex-start;
+			column-gap: var(--components-highlightSection-gap);
+			display: flex;
+			position: relative;
+			z-index: 2;
+		}
+
+		.highlightSection-content-slot {
+			flex: 1 0 0;
+			min-inline-size: 0;
+		}
+
+		.highlightSection-content-illustration {
+			block-size: var(--components-highlightSection-illustration-blockSize);
+			flex: none;
+			inline-size: var(--components-highlightSection-illustration-inlineSize);
+			object-fit: contain;
+		}
+
+		.highlightSection-bubbles {
+			display: var(--components-highlightSection-bubbles-display);
+			inset: 0;
+			pointer-events: none;
+			position: absolute;
+			z-index: 1;
+		}
+
+		.highlightSection-bubbles-start,
+		.highlightSection-bubbles-end {
+			block-size: var(--components-highlightSection-bubbles-blockSize);
+			inline-size: var(--components-highlightSection-bubbles-inlineSize);
+			inset-block-end: 0;
+			position: absolute;
+		}
+
+		.highlightSection-bubbles-start {
+			inset-inline-start: 0;
+			transform: scaleX(-1);
+		}
+
+		.highlightSection-bubbles-end {
+			inset-inline-end: 0;
+		}
+	}
+}

@@ -1,0 +1,11 @@
+@mixin vars {
+	--components-highlightSection-background: var(--pr-t-elevation-surface-raised);
+	--components-highlightSection-borderRadius: var(--pr-t-border-radius-structure);
+	--components-highlightSection-bubbles-blockSize: 80px;
+	--components-highlightSection-bubbles-display: block;
+	--components-highlightSection-bubbles-inlineSize: 96px;
+	--components-highlightSection-gap: var(--pr-t-spacings-100);
+	--components-highlightSection-illustration-blockSize: 150px;
+	--components-highlightSection-illustration-inlineSize: 140px;
+	--components-highlightSection-padding: var(--pr-t-spacings-200);
+}

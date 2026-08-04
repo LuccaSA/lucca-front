@@ -1,0 +1,11 @@
+@mixin light {
+	--components-highlightSection-background: var(--palettes-50, var(--palettes-product-50));
+}
+
+@mixin dark {
+	--components-highlightSection-background: var(--palettes-100, var(--palettes-product-100));
+}
+
+@mixin narrow {
+	--components-highlightSection-bubbles-display: none;
+}
