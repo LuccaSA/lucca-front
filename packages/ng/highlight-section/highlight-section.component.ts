@@ -3,10 +3,14 @@ import { LuClass } from '@lucca-front/ng/core';
 import { HighlightSectionBubble, HighlightSectionBubblePosition, HighlightSectionIllustration, HighlightSectionPalette, HighlightSectionTheme } from './highlight-section.type';
 
 /**
- * Ornaments and illustrations are shared with the highlight data CDN folder until
- * the highlight section specific assets are published.
+ * Bubble ornaments are shared with the highlight data CDN folder.
  */
 const CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data';
+
+/**
+ * Illustrations have their own dedicated CDN folder.
+ */
+const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section';
 
 @Component({
 	selector: 'lu-highlight-section',
@@ -66,7 +70,7 @@ export class HighlightSectionComponent {
 
 	readonly illustrationSrc = computed(() => {
 		const illustration = this.illustration() ?? '';
-		return illustration.includes('/') ? illustration : `${CDN_PATH}/generic/${illustration}.svg`;
+		return illustration.includes('/') ? illustration : `${ILLUSTRATION_CDN_PATH}/${illustration}.svg`;
 	});
 
 	constructor() {

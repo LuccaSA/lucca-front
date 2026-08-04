@@ -4,6 +4,7 @@ import { HighlightSectionComponent } from './highlight-section.component';
 import { HighlightSectionBubblePosition, HighlightSectionTheme } from './highlight-section.type';
 
 const CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data';
+const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section';
 
 @Component({
 	selector: 'lu-highlight-section-host',
@@ -124,10 +125,10 @@ describe(HighlightSectionComponent.name, () => {
 	});
 
 	it('should resolve a short illustration name against the CDN', () => {
-		host.illustration.set('piggy-bank');
+		host.illustration.set('coffee');
 		fixture.detectChanges();
 
-		expect(query<HTMLImageElement>('.highlightSection-content-illustration')?.getAttribute('src')).toBe(`${CDN_PATH}/generic/piggy-bank.svg`);
+		expect(query<HTMLImageElement>('.highlightSection-content-illustration')?.getAttribute('src')).toBe(`${ILLUSTRATION_CDN_PATH}/coffee.svg`);
 	});
 
 	it('should use the illustration as-is when it is an URL', () => {

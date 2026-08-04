@@ -15,19 +15,19 @@ export const HIGHLIGHT_SECTION_BUBBLE_POSITION = ['start', 'end', 'both'] as con
 export type HighlightSectionBubblePosition = (typeof HIGHLIGHT_SECTION_BUBBLE_POSITION)[number];
 
 export const HIGHLIGHT_SECTION_ILLUSTRATION = [
-	'calculator',
-	'calendar',
-	'cleemy-card',
 	'coffee',
-	'headphone',
-	'mail',
-	'magnifying-glass',
-	'medallon',
-	'piggy-bank',
-	'polaroid-female',
-	'polaroid-male',
-	'polaroids',
-	'post-it-success',
-	'post-it-warning',
+	'cookie',
+	'error',
+	'glasses',
+	'lock',
+	'lucca',
+	'paiement-card',
+	'party-favor',
+	'plant-01',
+	'plant-02',
+	'plug',
+	'pola',
+	'post-its',
+	'tea',
 ] as const;
 export type HighlightSectionIllustration = (typeof HIGHLIGHT_SECTION_ILLUSTRATION)[number];
