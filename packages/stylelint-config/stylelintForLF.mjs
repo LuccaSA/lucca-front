@@ -155,30 +155,18 @@ function getMessage(objectData) {
 		messageLFVersionWarning = ' | LF version not found';
 	}
 
-	if (objectData.versionDeprecated) {
-		let detail = `LF ${objectData.versionDeprecated}`;
+	if (objectData.dateDeprecated) {
+		const daysAgo = Math.ceil((objectData.dateDeprecated.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+		const daysAgoString = new Intl.RelativeTimeFormat().format(daysAgo, 'day');
 
-		if (objectData.dateDeprecated) {
-			const daysAgo = Math.ceil((objectData.dateDeprecated.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-			const daysAgoString = new Intl.RelativeTimeFormat().format(daysAgo, 'day');
-
-			detail = `${detail} (${objectData.dateDeprecated.toLocaleDateString()}, ${daysAgoString})`;
-		}
-
-		messageDeprecated = ` | since ${detail}`;
+		messageDeprecated = ` | since ${objectData.dateDeprecated.toLocaleDateString()} (${daysAgoString}, LF ${objectData.versionDeprecated})`;
 	}
 
-	if (objectData.versionDeleted) {
-		let detail = `LF ${objectData.versionDeleted}`;
+	if (objectData.dateDeleted) {
+		const daysLeft = Math.ceil((objectData.dateDeleted.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+		const dayString = new Intl.RelativeTimeFormat().format(daysLeft, 'day');
 
-		if (objectData.dateDeleted) {
-			const daysLeft = Math.ceil((objectData.dateDeleted.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-			const daysLeftString = new Intl.RelativeTimeFormat().format(daysLeft, 'day');
-
-			detail = `${detail} (${objectData.dateDeleted.toLocaleDateString()}, ${daysLeftString})`;
-		}
-
-		messageDeleted = ` | until ${detail}`;
+		messageDeleted = ` | until ${objectData.dateDeleted.toLocaleDateString()} (${dayString}, LF ${objectData.versionDeleted})`;
 	}
 
 	return `${status}${messageLFVersionWarning}${messageDeprecated}${messageDeleted} | ${pattern}`;
