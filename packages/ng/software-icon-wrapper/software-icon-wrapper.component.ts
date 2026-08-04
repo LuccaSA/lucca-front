@@ -1,8 +1,8 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, numberAttribute, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { LU_SOFTWARE_ICON_WRAPPER } from '@lucca-front/ng/software-icon';
 
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES } from '@lucca-front/ng/core';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.translate';
 
@@ -23,6 +23,10 @@ export class SoftwareIconWrapperComponent {
 	readonly max = input(0, { transform: numberAttribute });
 	readonly size = input<'XS' | 'S' | ''>('');
 	readonly intl = input(...intlInputOptions(LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS));
+
+	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
+
+	readonly seeMoreLabel = computed(() => getIntlPluralLabel(this.pluralRules, this.intl().seeMore, this.hiddenCount()));
 
 	protected readonly items = contentChildren(TemplateRef, { descendants: true });
 
