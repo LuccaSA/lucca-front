@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inject, Input, OnDestroy, Optional, Self } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inject, input, OnDestroy, Optional, Self } from '@angular/core';
+import { syncInputSignal } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ALuOptionSelector, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
 import { Subscription } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
@@ -28,15 +29,9 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 	],
 })
 export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponent<ILuEstablishment> implements OnDestroy {
-	@Input() set filters(filters: string[]) {
-		this._service.filters = filters;
-	}
-	@Input() set appInstanceId(appInstanceId: number) {
-		this._service.appInstanceId = appInstanceId;
-	}
-	@Input() set operations(operations: number[]) {
-		this._service.operations = operations;
-	}
+	readonly filters = input<string[]>();
+	readonly appInstanceId = input<number>();
+	readonly operations = input<number[]>();
 
 	loading = false;
 	private _service: LuEstablishmentService;
@@ -53,6 +48,10 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 	) {
 		super();
 		this._service = customService || defaultService;
+
+		syncInputSignal(this.filters, (filters) => (this._service.filters = filters));
+		syncInputSignal(this.appInstanceId, (appInstanceId) => (this._service.appInstanceId = appInstanceId));
+		syncInputSignal(this.operations, (operations) => (this._service.operations = operations));
 	}
 
 	override selectAll() {

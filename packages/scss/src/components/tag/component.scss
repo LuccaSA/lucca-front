@@ -24,6 +24,12 @@
 	max-inline-size: 100%;
 	position: var(--components-tag-position);
 
+	&::before {
+		content: var(--components-tag-before-content);
+		inline-size: 0;
+		margin-inline-start: calc(var(--components-tag-gap) * -1);
+	}
+
 	&,
 	&:is(a, button) {
 		color: var(--components-tag-color);

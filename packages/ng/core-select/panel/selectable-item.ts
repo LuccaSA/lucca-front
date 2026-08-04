@@ -1,5 +1,5 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { computed, Directive, ElementRef, inject, Input, input, model, OnDestroy, output, signal, untracked } from '@angular/core';
+import { computed, Directive, ElementRef, inject, input, linkedSignal, model, OnDestroy, output, signal, untracked } from '@angular/core';
 import { ALuSelectInputComponent } from '../input/select-input.component';
 import { CoreSelectKeyManager } from './key-manager';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
@@ -23,23 +23,31 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	readonly #selectRef = inject<ALuSelectInputComponent<T, T>>(ALuSelectInputComponent);
 
-	id = signal<string>('');
+	readonly id = signal<string>('');
 
-	elementId = input<string>('');
+	readonly elementId = input<string>('');
 
-	idAttribute = computed(() => this.id() || this.elementId());
+	readonly idAttribute = computed(() => this.id() || this.elementId());
 
-	isSelected = model(false);
+	readonly isSelected = model(false);
 
-	option = input<T>();
+	readonly option = input<T>();
 
-	isHighlighted = signal(false);
+	readonly disabledInput = input<boolean>(false, { alias: 'disabled' });
+
+	readonly disabledRef = linkedSignal(() => this.disabledInput());
+
+	readonly isHighlighted = signal(false);
 
 	selected = output<void>();
 
-	// We have to use input here because this is consumed by ActiveKeyManager, which doesn't use a signal
-	@Input()
-	disabled: boolean;
+	get disabled() {
+		return this.disabledRef();
+	}
+
+	set disabled(disabled: boolean) {
+		this.disabledRef.set(disabled);
+	}
 
 	constructor() {
 		this.#panelRef.options.set([...this.#panelRef.options(), this]);

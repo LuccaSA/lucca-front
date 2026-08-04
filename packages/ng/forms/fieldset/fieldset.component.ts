@@ -24,7 +24,7 @@ export class FieldsetComponent {
 	readonly expandable = input(false, { transform: booleanAttribute });
 	readonly hiddenLegend = input(false, { transform: booleanAttribute });
 
-	expanded = model(false);
+	readonly expanded = model(false);
 
 	id = `fieldsetTitleContent${nextId++}`;
 }

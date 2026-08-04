@@ -18,13 +18,13 @@
 				<ng-container *ngTemplateOutlet="titleContent" />
 				<span luButton="ghost" size="S"><lu-icon icon="arrowChevronBottom" /></span>
 			</button>
-		} @else if (action()) {
+		} @else if (action(); as action) {
 			<span class="fieldset-title-content">
 				<span class="pr-u-displayFlex" [attr.id]="id">
 					<ng-container *ngTemplateOutlet="titleContent" />
 				</span>
 				<div class="fieldset-title-content-action">
-					<ng-container *luPortal="action()" />
+					<ng-container *luPortal="action" />
 				</div>
 			</span>
 		} @else {
@@ -38,9 +38,11 @@
 
 <ng-template #titleContent>
 	<span class="fieldset-title-content-text">
-		<ng-container *luPortal="heading()" />
-		@if (helper()) {
-			<span class="fieldset-title-content-text-helper"><ng-container *luPortal="helper()" /></span>
+		@if (heading(); as heading) {
+			<ng-container *luPortal="heading" />
+		}
+		@if (helper(); as helper) {
+			<span class="fieldset-title-content-text-helper"><ng-container *luPortal="helper" /></span>
 		}
 	</span>
 </ng-template>

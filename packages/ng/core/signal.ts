@@ -1,4 +1,5 @@
-import { CreateEffectOptions, effect, EffectCleanupRegisterFn, EffectRef, Signal, untracked } from '@angular/core';
+import { CreateEffectOptions, effect, EffectCleanupRegisterFn, EffectRef, input, Signal, untracked } from '@angular/core';
+import { isNotNil } from './misc';
 
 type SignalsValue<T> = T extends readonly unknown[] ? TupleOfSignalValues<T> : [RecordOfSignalValues<T>];
 
@@ -22,6 +23,18 @@ export function ɵeffectWithDeps<const T extends EffectWithDepsInput>(
 
 		untracked(() => action(...(deps as SignalsValue<T>), onCleanup));
 	}, options);
+}
+
+/**
+ * Utilitaire pour synchroniser un input signal avec une props via un setter.
+ * Évite la répétition des ɵeffectWithDeps + isNotNil.
+ */
+export function syncInputSignal<T>(signal: ReturnType<typeof input<T>>, setter: (value: T) => void): void {
+	ɵeffectWithDeps([signal], (value) => {
+		if (isNotNil(value)) {
+			setter(value);
+		}
+	});
 }
 
 function readTupleOfSignalValues<T extends readonly Signal<unknown>[]>(signals: T): TupleOfSignalValues<T> {

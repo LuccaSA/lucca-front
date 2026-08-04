@@ -59,6 +59,10 @@ export default {
 		fileType: {
 			description: 'Type MIME du fichier.',
 		},
+		structure: {
+			if: { arg: 'size', truthy: true },
+			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
+		},
 		withFileType: {
 			control: 'boolean',
 		},
@@ -79,13 +83,14 @@ export default {
 		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 	render: (args, { argTypes }) => {
-		const { fileName, fileSize, fileType, deletable, withPassword, ...otherArgs } = args;
+		const { fileName, fileSize, fileType, deletable, withPassword, structure, ...otherArgs } = args;
 
-		const deletableParam = deletable ? `(deleteFile)="deleteFile()"` : ``;
-		const withPasswordParam = withPassword ? `(passwordChange)="passwordChange()"` : ``;
+		const deletableParam = deletable ? ` (deleteFile)="deleteFile()"` : ``;
+		const withPasswordParam = withPassword ? ` (passwordChange)="passwordChange()"` : ``;
+		const structureParam = structure ? ` structure` : ``;
 
 		return {
-			template: `<lu-file-entry ${deletableParam} ${withPasswordParam} [entry]="{
+			template: `<lu-file-entry${structureParam}${deletableParam}${withPasswordParam} [entry]="{
 			name: '${fileName}',
 			size: ${fileSize},
 			type: ${fileType && `'${fileType}'`},
@@ -103,12 +108,14 @@ export const Basic = {
 		fileType: 'image/png',
 		withFileType: true,
 		fileName: 'dummyimage.png',
-		iconOverride: '',
 		previewUrl: 'https://dummyimage.com/500',
+		iconOverride: '',
+		state: null,
 		inlineMessageError: 'Virus détecté dans le fichier.',
 		downloadURL: '',
 		openInNewTab: false,
 		deletable: true,
 		withPassword: false,
+		structure: false,
 	},
 };

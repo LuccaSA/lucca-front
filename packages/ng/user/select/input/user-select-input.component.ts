@@ -13,6 +13,7 @@ import { LuUserMeOptionDirective } from '../me';
 import { LuUserPagedSearcherComponent } from '../searcher';
 import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated prefer SimpleSelect or MultipleSelect with luCustomUsers directive
  */
@@ -49,11 +50,6 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 {
 	searchFormat = LuDisplayFullname.lastfirst;
 
-	@Input('placeholder')
-	override set inputPlaceholder(p: string) {
-		this._placeholder = p;
-	}
-
 	@Input() fields: string;
 	@Input() filters: string[];
 	@Input() orderBy: string;
@@ -66,7 +62,7 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 
 	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
 
-	intl = input(...intlInputOptions(LU_USER_SELECT_INPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_USER_SELECT_INPUT_TRANSLATIONS));
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

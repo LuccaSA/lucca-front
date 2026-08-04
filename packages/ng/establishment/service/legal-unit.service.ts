@@ -7,7 +7,7 @@ import { ILuLegalUnit } from '../establishment.model';
 export class LuLegalUnitService extends LuApiV4Service<ILuLegalUnit> {
 	protected override _api = `/organization/structure/api/legal-units`;
 
-	protected _appInstanceId: number = null;
+	protected _appInstanceId: number | null = null;
 	set appInstanceId(id: number) {
 		this._appInstanceId = id;
 	}
