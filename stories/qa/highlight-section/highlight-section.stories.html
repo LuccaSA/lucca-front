@@ -1,0 +1,187 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td style="inline-size: 50%">
+				<div class="highlightSection">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">Content</div>
+					</div>
+				</div>
+			</td>
+			<td style="inline-size: 50%">
+				<lu-highlight-section> Content </lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Theme light</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">Content</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light"> Content </lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Theme dark</td>
+			<td>
+				<div class="highlightSection mod-dark">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">Content</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="dark"> Content </lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Bubbles both sides</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">Content</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-start"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
+						/>
+						<img
+							alt=""
+							class="highlightSection-bubbles-end"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" [bubble]="1" bubblePosition="both"> Content </lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Bubbles start only</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">Content</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-start"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-2.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" [bubble]="2" bubblePosition="start"> Content </lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Bubbles end only</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">Content</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-end"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-2.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" [bubble]="2" bubblePosition="end"> Content </lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Dark bubbles</td>
+			<td>
+				<div class="highlightSection mod-dark">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">Content</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-start"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-dark-1.svg"
+						/>
+						<img
+							alt=""
+							class="highlightSection-bubbles-end"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-dark-1.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="dark" [bubble]="1"> Content </lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Palette</td>
+			<td>
+				<div class="highlightSection mod-light palette-timmi">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">Content</div>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-end"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/timmi/bubbles-light-1.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" palette="timmi" [bubble]="1" bubblePosition="end"> Content </lu-highlight-section>
+			</td>
+		</tr>
+		<tr>
+			<td>Illustration</td>
+			<td>
+				<div class="highlightSection mod-light">
+					<div class="highlightSection-content">
+						<div class="highlightSection-content-slot">Content</div>
+						<img
+							alt=""
+							class="highlightSection-content-illustration"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/pola.svg"
+						/>
+					</div>
+					<div class="highlightSection-bubbles">
+						<img
+							alt=""
+							class="highlightSection-bubbles-start"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
+						/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-highlight-section theme="light" illustration="pola" [bubble]="1" bubblePosition="start"> Content </lu-highlight-section>
+			</td>
+		</tr>
+	</tbody>
+</table>

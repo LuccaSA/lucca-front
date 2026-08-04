@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.highlightSection {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-light {
+			@include light;
+		}
+
+		&.mod-dark {
+			@include dark;
+		}
+	}
+}

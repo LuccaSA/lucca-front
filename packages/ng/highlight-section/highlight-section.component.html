@@ -1,0 +1,17 @@
+<div class="highlightSection-content">
+	<div class="highlightSection-content-slot"><ng-content /></div>
+	@if (illustration()) {
+		<img alt="" class="highlightSection-content-illustration" [attr.src]="illustrationSrc()" />
+	}
+</div>
+
+@if (bubble()) {
+	<div class="highlightSection-bubbles">
+		@if (bubblePosition() !== "end") {
+			<img alt="" class="highlightSection-bubbles-start" [attr.src]="bubbleSrc()" />
+		}
+		@if (bubblePosition() !== "start") {
+			<img alt="" class="highlightSection-bubbles-end" [attr.src]="bubbleSrc()" />
+		}
+	</div>
+}
