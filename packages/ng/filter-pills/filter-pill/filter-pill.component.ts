@@ -142,7 +142,7 @@ export class FilterPillComponent {
 			const ref = this.inputComponentRef();
 			if (ref) {
 				untracked(() => {
-					ref.enableFilterPillMode();
+					ref.enableFilterPillMode?.();
 					ref.registerFilterPillClosePopover(this.closePopover);
 					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
 				});
