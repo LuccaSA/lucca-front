@@ -9,10 +9,13 @@ import {
 	cleanCell,
 	collectDeprecations,
 	coverageReport,
+	entryPointMeta,
 	renderComponentOrDirective,
+	renderEntrypointDoc,
 	renderFunction,
 	renderInterface,
 	renderLlmsFull,
+	renderLlmsIndex,
 	replacementFrom,
 	selectPublicApi,
 } from './generate-llms.mjs';
@@ -166,12 +169,80 @@ describe('deprecations', () => {
 	});
 });
 
+describe('entryPointMeta', () => {
+	const cases = [
+		{
+			label: 'ng secondary entry point',
+			pkg: { name: '@lucca-front/ng', root: 'packages/ng' },
+			barrel: '/repo/packages/ng/button/public-api.ts',
+			expected: { importPath: '@lucca-front/ng/button', slug: 'ng-button' },
+		},
+		{
+			label: 'prisme entry point',
+			pkg: { name: '@lucca/prisme', root: 'packages/prisme' },
+			barrel: '/repo/packages/prisme/core/public-api.ts',
+			expected: { importPath: '@lucca/prisme/core', slug: 'prisme-core' },
+		},
+		{
+			label: 'nested entry point keeps its whole path',
+			pkg: { name: '@lucca-front/ng', root: 'packages/ng' },
+			barrel: '/repo/packages/ng/forms/date/public-api.ts',
+			expected: { importPath: '@lucca-front/ng/forms/date', slug: 'ng-forms-date' },
+		},
+	];
+	test.each(cases)('$label', ({ pkg, barrel, expected }) => {
+		expect(entryPointMeta(pkg, '/repo', barrel)).toEqual({ ...expected, package: pkg.name, barrel });
+	});
+});
+
+describe('renderEntrypointDoc', () => {
+	const entry = {
+		importPath: '@lucca-front/ng/button',
+		api: { matched: [{ kind: 'component', entity: { name: 'ButtonComponent', rawdescription: 'A button.' } }] },
+	};
+
+	test('emits the import path heading, the import hint and the rendered entities', () => {
+		const out = renderEntrypointDoc(entry);
+		expect(out).toMatch(/^# @lucca-front\/ng\/button — API$/m);
+		expect(out).toMatch(/from '@lucca-front\/ng\/button'/);
+		expect(out).toMatch(/^## ButtonComponent$/m);
+	});
+});
+
+describe('renderLlmsIndex', () => {
+	const out = renderLlmsIndex({
+		baseUrl: 'https://lucca-front.lucca.io/master/storybook',
+		entryPoints: [
+			{ importPath: '@lucca-front/ng/button', slug: 'ng-button', api: { matched: [{ name: 'ButtonComponent' }] } },
+			{ importPath: '@lucca/prisme/core', slug: 'prisme-core', api: { matched: [{ name: 'PALETTE' }] } },
+		],
+		storyCategories: [{ slug: 'stories-actions', category: 'Actions', components: ['Button'] }],
+	});
+
+	test('lists every entry point as an absolute lucca-front.lucca.io link', () => {
+		expect(out).toMatch(/\[@lucca-front\/ng\/button\]\(https:\/\/lucca-front\.lucca\.io\/master\/storybook\/llms\/ng-button\.md\)/);
+		expect(out).toMatch(/\[@lucca\/prisme\/core\]\(https:\/\/lucca-front\.lucca\.io\/master\/storybook\/llms\/prisme-core\.md\)/);
+		expect(out).not.toContain('dd.lucca.tech');
+	});
+
+	test('lists the story categories and the full corpus', () => {
+		expect(out).toMatch(/\[Actions stories\]\(https:\/\/lucca-front\.lucca\.io\/master\/storybook\/llms\/stories-actions\.md\)/);
+		expect(out).toMatch(/llms-full\.txt/);
+	});
+
+	test('points to the Prisme design-system reference on zeroheight', () => {
+		expect(out).toContain('https://prisme.lucca.io');
+	});
+});
+
 describe('renderLlmsFull', () => {
 	const api = { matched: [{ kind: 'component', entity: { name: 'DemoComponent', rawdescription: 'A demo.' } }] };
 
 	test('emits the header with the entry count and the rendered body', () => {
 		const out = renderLlmsFull(api);
-		expect(out).toMatch(/^# @lucca-front\/ng — LLM API reference$/m);
+		expect(out).toMatch(/^# lucca-front — LLM API reference$/m);
+		expect(out).toContain('@lucca-front/ng');
+		expect(out).toContain('@lucca/prisme');
 		expect(out).toMatch(/^Public API entries: 1$/m);
 		expect(out).toMatch(/^## DemoComponent$/m);
 	});

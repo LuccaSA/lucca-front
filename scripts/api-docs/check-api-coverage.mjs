@@ -25,7 +25,7 @@ const { total, documented, coverage, missing } = coverageReport(doc, names);
 const ok = coverage >= MIN_COVERAGE;
 
 console.log(
-	`[${ok ? 'PASS' : 'FAIL'}] ${'@lucca-front/ng'}: ${documented}/${total} public exports documented = ${coverage}% (floor ${MIN_COVERAGE}%)`,
+	`[${ok ? 'PASS' : 'FAIL'}] @lucca-front/ng + @lucca/prisme: ${documented}/${total} public exports documented = ${coverage}% (floor ${MIN_COVERAGE}%)`,
 );
 if (missing.length) {
 	const shown = missing.slice(0, SAMPLE);

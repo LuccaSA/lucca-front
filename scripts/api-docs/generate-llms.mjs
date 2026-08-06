@@ -26,17 +26,30 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { createProject, extractLibraries } from './extract-api.mjs';
+import { extractAllStories, groupByComponent, renderStoriesSection } from './extract-stories.mjs';
 
 const scriptsDir = dirname(fileURLToPath(import.meta.url));
 const workspaceRoot = resolve(scriptsDir, '..', '..');
 
 /** Public-API library metadata. Single npm package, resolved from its entry-point barrels. */
 export const NG_PACKAGE = '@lucca-front/ng';
-/** Directory holding the secondary entry points (each `<name>/public-api.ts`). */
-const NG_ROOT = 'packages/ng';
+/**
+ * The documented packages: each is a set of secondary entry points (one
+ * `<name>/public-api.ts` barrel next to each `ng-package.json`). `@lucca/prisme`
+ * lives in-repo with the same topology — documenting it here also resolves the
+ * `@lucca-front/ng` barrels (button, icon) that re-export it.
+ */
+export const PACKAGES = [
+	{ name: '@lucca-front/ng', root: 'packages/ng' },
+	{ name: '@lucca/prisme', root: 'packages/prisme' },
+];
 /** Generated artifacts (gitignored; shipped via Storybook staticDirs). */
 export const OUT_LLMS = '.storybook/public/llms-full.txt';
 export const OUT_DEPRECATIONS = '.storybook/public/deprecations.json';
+export const OUT_INDEX = '.storybook/public/llms.txt';
+export const OUT_DIR = '.storybook/public/llms';
+/** Canonical public base of the deployed Storybook (per-ref folders; master = latest). */
+export const CANONICAL_BASE_URL = 'https://lucca-front.lucca.io/master/storybook';
 
 // ---------------------------------------------------------------------------
 // Entry-point discovery
@@ -55,17 +68,18 @@ function walkFor(dir, filename, out) {
 }
 
 /**
- * The secondary entry-point barrels of `@lucca-front/ng`: every `public-api.ts`
- * sitting next to an `ng-package.json` (the root ng-package.json's primary
- * `public_api.ts` deliberately exports nothing and is skipped). Alpha-sorted.
+ * The secondary entry-point barrels of one package: every `public-api.ts` sitting
+ * next to an `ng-package.json` (the root ng-package.json's primary `public_api.ts`
+ * deliberately exports nothing and is skipped). Alpha-sorted.
+ * @param {{ name: string, root: string }} pkg
  * @param {string} root
  * @returns {string[]}
  */
-export function findEntryBarrels(root = workspaceRoot) {
-	const ngDir = resolve(root, NG_ROOT);
+export function findEntryBarrels(pkg, root = workspaceRoot) {
+	const pkgDir = resolve(root, pkg.root);
 	const pkgs = [];
-	walkFor(ngDir, 'ng-package.json', pkgs);
-	const rootPkg = resolve(ngDir, 'ng-package.json');
+	walkFor(pkgDir, 'ng-package.json', pkgs);
+	const rootPkg = resolve(pkgDir, 'ng-package.json');
 	return pkgs
 		.filter((p) => resolve(p) !== rootPkg)
 		.map((p) => join(dirname(p), 'public-api.ts'))
@@ -74,15 +88,49 @@ export function findEntryBarrels(root = workspaceRoot) {
 }
 
 /**
- * Extract and merge the whole `@lucca-front/ng` public surface from its entry-point
- * barrels, via the ts-morph front-end. Shared by generation and the coverage gate so
- * both measure the identical surface.
+ * Identity of one entry point: its import path (`@lucca-front/ng/button`) and the
+ * flat slug naming its per-entry-point file (`ng-button` → `llms/ng-button.md`).
+ * The slug is prefixed with the package's last name segment so `ng` and `prisme`
+ * entry points cannot collide.
+ * @param {{ name: string, root: string }} pkg
+ * @param {string} root — workspace root
+ * @param {string} barrel — absolute path to the entry point's `public-api.ts`
+ */
+export function entryPointMeta(pkg, root, barrel) {
+	const relDir = dirname(barrel)
+		.slice(resolve(root, pkg.root).length + 1)
+		.split(/[\\/]/)
+		.join('/');
+	const shortName = pkg.name.split('/').pop();
+	return {
+		package: pkg.name,
+		barrel,
+		importPath: `${pkg.name}/${relDir}`,
+		slug: `${shortName}-${relDir.replace(/\//g, '-')}`,
+	};
+}
+
+/**
+ * Extract every entry point of every documented package, sharing one ts-morph
+ * project. Returns per-entry-point extractions (for the windowed `llms/<slug>.md`
+ * files) alongside the merged whole-surface `doc`/`names` (for llms-full.txt,
+ * coverage and deprecations) so every consumer measures the identical surface.
  * @param {string} root
- * @returns {{ doc: Record<string, any>, names: Set<string> }}
+ * @returns {{ doc: Record<string, any>, names: Set<string>, entryPoints: any[] }}
  */
 export function extractSurface(root = workspaceRoot) {
 	const project = createProject(root);
-	return extractLibraries(project, findEntryBarrels(root));
+	const entryPoints = [];
+	const allBarrels = [];
+	for (const pkg of PACKAGES) {
+		for (const barrel of findEntryBarrels(pkg, root)) {
+			allBarrels.push(barrel);
+			const { doc, names } = extractLibraries(project, [barrel]);
+			entryPoints.push({ ...entryPointMeta(pkg, root, barrel), doc, names });
+		}
+	}
+	const { doc, names } = extractLibraries(project, allBarrels);
+	return { doc, names, entryPoints };
 }
 
 // ---------------------------------------------------------------------------
@@ -502,14 +550,76 @@ export function collectDeprecations(doc, publicNames = new Set()) {
  * @returns {string}
  */
 export function renderLlmsFull(api) {
+	const packages = PACKAGES.map((p) => p.name).join(' and ');
 	const header =
-		`# ${NG_PACKAGE} — LLM API reference\n\n` +
-		`Auto-generated public API surface of ${NG_PACKAGE}, resolved from the library's\n` +
+		`# lucca-front — LLM API reference\n\n` +
+		`Auto-generated public API surface of ${packages}, resolved from the libraries'\n` +
 		`TypeScript source and JSDoc (via the compiler API) and rendered deterministically.\n` +
 		`Do not edit by hand — edit the source code's JSDoc. Regenerated on every docs build.\n\n` +
 		`Public API entries: ${api.matched.length}\n`;
 	const body = api.matched.map((e) => RENDERERS[e.kind](e).trimEnd()).join('\n\n');
 	return `${header}\n${body}\n`;
+}
+
+/**
+ * Render one entry point's windowed API file (`llms/<slug>.md`): the import path,
+ * an import hint, and the entry point's own rendered surface. Deterministic.
+ * @param {{ importPath: string, api: { matched: any[] } }} entry
+ * @returns {string}
+ */
+export function renderEntrypointDoc({ importPath, api }) {
+	const header =
+		`# ${importPath} — API\n\n` +
+		`Auto-generated from the library's TypeScript source and JSDoc. Import from '${importPath}'.\n` +
+		`Public API entries: ${api.matched.length}\n`;
+	const body = api.matched.map((e) => RENDERERS[e.kind](e).trimEnd()).join('\n\n');
+	return `${header}\n${body}\n`;
+}
+
+/**
+ * Render the `llms.txt` index (llmstxt.org shape): one absolute link per
+ * entry-point API file and per story-category file, the full corpus, and the
+ * design-system prose reference on zeroheight. Links are absolute to the
+ * canonical public deploy — never an internal host.
+ * @param {{ baseUrl: string, entryPoints: any[], storyCategories: Array<{ slug: string, category: string, components: string[] }> }} input
+ * @returns {string}
+ */
+export function renderLlmsIndex({ baseUrl, entryPoints, storyCategories }) {
+	const lines = [
+		'# lucca-front',
+		'',
+		"> Lucca's front-end framework: the `@lucca-front/ng` Angular components, the `@lucca/prisme`",
+		'> design-system components, and their Storybook usage examples. Auto-generated on every docs build.',
+		'',
+		'## API reference (one file per entry point)',
+		'',
+	];
+	for (const entry of entryPoints) {
+		const sample = entry.api.matched
+			.slice(0, 3)
+			.map((m) => m.name)
+			.join(', ');
+		lines.push(
+			`- [${entry.importPath}](${baseUrl}/llms/${entry.slug}.md)${sample ? `: ${sample}${entry.api.matched.length > 3 ? ', …' : ''}` : ''}`,
+		);
+	}
+	lines.push('', '## Usage examples (Storybook stories, one file per category)', '');
+	for (const cat of storyCategories) {
+		lines.push(`- [${cat.category} stories](${baseUrl}/llms/${cat.slug}.md): ${cat.components.join(', ')}`);
+	}
+	lines.push(
+		'',
+		'## Full corpus',
+		'',
+		`- [llms-full.txt](${baseUrl}/llms-full.txt): the whole API surface plus every story, in one file`,
+		`- [deprecations.json](${baseUrl}/deprecations.json): every \`@deprecated\` symbol with its replacement hint`,
+		'',
+		'## Design system (prose)',
+		'',
+		'- [Prisme on zeroheight](https://prisme.lucca.io): design guidelines and component usage documentation (not machine-generated)',
+		'',
+	);
+	return lines.join('\n');
 }
 
 /**
@@ -521,28 +631,79 @@ export function renderDeprecations(deprecations) {
 	return `${JSON.stringify({ package: NG_PACKAGE, count: deprecations.length, deprecations }, null, 2)}\n`;
 }
 
+/** Flat file-safe slug for a story category (`Actions` → `stories-actions`). */
+function categorySlug(category) {
+	return `stories-${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+}
+
 /**
- * Generate both artifacts from the extraction. Returns a summary for the CLI.
+ * Group extracted story files per top-level category (`Actions`, `Forms`, …), each
+ * with its component groups — one windowed `llms/stories-<category>.md` per entry.
+ * @param {import('./extract-stories.mjs').StoriesFile[]} storyFiles
+ */
+export function storyCategoriesOf(storyFiles) {
+	const groups = groupByComponent(storyFiles);
+	const categories = new Map();
+	for (const group of groups) {
+		const [category] = group.key.split('/');
+		if (!categories.has(category)) categories.set(category, []);
+		categories.get(category).push(group);
+	}
+	return [...categories.entries()]
+		.map(([category, categoryGroups]) => ({
+			category,
+			slug: categorySlug(category),
+			groups: categoryGroups,
+			components: categoryGroups.map((g) => g.key.split('/').slice(1).join('/') || g.key),
+		}))
+		.sort((a, b) => a.category.localeCompare(b.category));
+}
+
+/**
+ * Generate every artifact from the extraction: llms-full.txt (API + stories),
+ * deprecations.json, one `llms/<slug>.md` per entry point, one
+ * `llms/stories-<category>.md` per story category, and the llms.txt index.
+ * Returns a summary for the CLI and the smoke gate.
  * @param {{ root?: string }} [opts]
  */
 export function generateAll({ root = workspaceRoot } = {}) {
-	const { doc, names } = extractSurface(root);
+	const { doc, names, entryPoints } = extractSurface(root);
 	const api = selectPublicApi(doc, names);
 	const deprecations = collectDeprecations(doc, names);
 
-	const llmsAbs = resolve(root, OUT_LLMS);
-	mkdirSync(dirname(llmsAbs), { recursive: true });
-	writeFileSync(llmsAbs, renderLlmsFull(api));
+	const outDir = resolve(root, OUT_DIR);
+	mkdirSync(outDir, { recursive: true });
 
-	const depAbs = resolve(root, OUT_DEPRECATIONS);
-	mkdirSync(dirname(depAbs), { recursive: true });
-	writeFileSync(depAbs, renderDeprecations(deprecations));
+	// Per-entry-point windowed API files.
+	const entries = entryPoints.map((entry) => ({ ...entry, api: selectPublicApi(entry.doc, entry.names) }));
+	for (const entry of entries) writeFileSync(join(outDir, `${entry.slug}.md`), renderEntrypointDoc(entry));
+
+	// Stories: full section (into llms-full.txt) + per-category windowed files.
+	const storyFiles = extractAllStories(resolve(root, 'stories/documentation'));
+	const templateless = storyFiles.filter((f) => f.title && !f.templates.length).length;
+	const categories = storyCategoriesOf(storyFiles);
+	for (const cat of categories) {
+		const body = renderStoriesSection(cat.groups);
+		writeFileSync(join(outDir, `${cat.slug}.md`), `# ${cat.category} — Storybook usage examples\n\n${body}`);
+	}
+	const storiesSection = `# Storybook usage examples\n\n${renderStoriesSection(groupByComponent(storyFiles))}`;
+
+	writeFileSync(resolve(root, OUT_LLMS), `${renderLlmsFull(api)}\n${storiesSection}`);
+	writeFileSync(resolve(root, OUT_DEPRECATIONS), renderDeprecations(deprecations));
+	writeFileSync(
+		resolve(root, OUT_INDEX),
+		renderLlmsIndex({ baseUrl: CANONICAL_BASE_URL, entryPoints: entries, storyCategories: categories }),
+	);
 
 	return {
 		exported: names.size,
 		documented: api.matched.length,
 		unmatched: api.unmatched.length,
 		deprecations: deprecations.length,
+		entryPointFiles: entries.length,
+		storyCategoryFiles: categories.length,
+		storyFiles: storyFiles.length,
+		templateless,
 	};
 }
 
@@ -551,7 +712,12 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
 	const s = generateAll();
 	console.log(
 		`[llms] ${s.documented}/${s.exported} public exports rendered to ${OUT_LLMS} ` +
-			`(${s.unmatched} names not in the packages/ng extraction), ` +
+			`(${s.unmatched} names not in the extraction), ` +
 			`${s.deprecations} deprecations written to ${OUT_DEPRECATIONS}.`,
+	);
+	console.log(
+		`[llms] ${OUT_DIR}/: ${s.entryPointFiles} entry-point files + ${s.storyCategoryFiles} story-category files ` +
+			`(${s.storyFiles} story files; ${s.templateless} carry no static template — component-rendered stories), ` +
+			`index at ${OUT_INDEX}.`,
 	);
 }
