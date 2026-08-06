@@ -22,7 +22,8 @@ const SAMPLE = 30;
 
 const { doc, names } = extractSurface();
 const { total, documented, coverage, missing } = coverageReport(doc, names);
-const ok = coverage >= MIN_COVERAGE;
+// Exact ratio, not the rounded display value — 4.5% must not pass a 5% floor.
+const ok = documented * 100 >= MIN_COVERAGE * total;
 
 console.log(
 	`[${ok ? 'PASS' : 'FAIL'}] @lucca-front/ng + @lucca/prisme: ${documented}/${total} public exports documented = ${coverage}% (floor ${MIN_COVERAGE}%)`,

@@ -130,6 +130,12 @@ function localDeclarationOf(sourceFile, name) {
 function templatesOf(sourceFile) {
 	const templates = [];
 	sourceFile.forEachDescendant((node) => {
+		// Shorthand `{ template }` — resolve the local `template` variable's literal.
+		if (Node.isShorthandPropertyAssignment(node) && node.getName() === 'template') {
+			const text = literalText(localDeclarationOf(sourceFile, 'template'));
+			if (text && !templates.includes(text)) templates.push(text);
+			return;
+		}
 		if (!Node.isPropertyAssignment(node) || node.getName() !== 'template') return;
 		const init = node.getInitializer();
 		let text = literalText(init);
@@ -163,7 +169,15 @@ export function extractStoriesFile(sourceFile) {
 		// `export const X = {...}` only — `isExported()` is also true for the
 		// `const meta = {...}; export default meta;` idiom, which is the Meta.
 		if (!varDecl.getVariableStatement()?.hasExportKeyword()) continue;
-		const storyObject = asObjectLiteral(varDecl.getInitializer());
+		const init = varDecl.getInitializer();
+		let storyObject = asObjectLiteral(init);
+		if (!storyObject && init && Node.isCallExpression(init)) {
+			// Story factories (`generateStory({...})`) still document a story — only
+			// `createTestStory` wrappers are interaction tests, not documentation.
+			if (init.getExpression().getText() === 'createTestStory') continue;
+			storyObject = asObjectLiteral(init.getArguments()[0]);
+			if (!storyObject) continue;
+		}
 		if (!storyObject) continue;
 		const own = argTypesOf(storyObject);
 		stories.push({ name: varDecl.getName(), argTypes: own.length ? own : metaArgTypes });

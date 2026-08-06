@@ -162,16 +162,78 @@ function safeTypeArguments(prop) {
 	}
 }
 
-/** Component/directive inputs and outputs from Angular signal factories. */
+/**
+ * `@Input`/`@Output` decorator configuration of a class member, or `undefined` when
+ * the decorator is absent. Resolves the public name (`@Input('alias')` or
+ * `@Input({ alias: 'x' })`) and the `required` flag.
+ */
+function decoratorConfig(member, decoratorName) {
+	const decorator = typeof member.getDecorator === 'function' ? member.getDecorator(decoratorName) : undefined;
+	if (!decorator) return undefined;
+	const arg = decorator.getArguments()[0];
+	let alias;
+	let required = false;
+	if (arg && Node.isStringLiteral(arg)) alias = arg.getLiteralValue();
+	if (arg && Node.isObjectLiteralExpression(arg)) {
+		const aliasProp = arg.getProperty('alias');
+		const aliasInit = aliasProp && Node.isPropertyAssignment(aliasProp) ? aliasProp.getInitializer() : undefined;
+		if (aliasInit && Node.isStringLiteral(aliasInit)) alias = aliasInit.getLiteralValue();
+		const requiredProp = arg.getProperty('required');
+		required = !!(requiredProp && Node.isPropertyAssignment(requiredProp) && requiredProp.getInitializer()?.getText() === 'true');
+	}
+	return { alias, required };
+}
+
+/** Payload type of an `@Output() x = new EventEmitter<T>()` property, or `undefined`. */
+function emitterPayload(prop) {
+	const init = prop.getInitializer();
+	if (init && Node.isNewExpression(init)) {
+		const written = init.getTypeArguments()[0]?.getText();
+		if (written) return written;
+	}
+	return prop
+		.getTypeNode()
+		?.getText()
+		.match(/^EventEmitter<([\s\S]+)>$/)?.[1];
+}
+
+/**
+ * Component/directive inputs and outputs — every Angular declaration form: signal
+ * factories (`input()`/`model()`/`output()`), decorators (`@Input`/`@Output` on
+ * properties and setters, aliases resolved to the public name), and
+ * `outputFromObservable()`.
+ */
 function membersOf(classNode) {
 	const inputsClass = [];
 	const outputsClass = [];
 	for (const prop of classNode.getProperties()) {
+		const rawdescription = descriptionOf(prop);
 		const init = prop.getInitializer();
+		const inputDecorator = decoratorConfig(prop, 'Input');
+		const outputDecorator = decoratorConfig(prop, 'Output');
+		if (inputDecorator) {
+			inputsClass.push({
+				name: inputDecorator.alias ?? prop.getName(),
+				type: normalizeType(prop.getTypeNode()?.getText() ?? safeTypeText(prop.getType(), prop)) ?? 'unknown',
+				defaultValue: init?.getText(),
+				required: inputDecorator.required,
+				rawdescription,
+				...memberDeprecation(prop),
+			});
+			continue;
+		}
+		if (outputDecorator) {
+			outputsClass.push({
+				name: outputDecorator.alias ?? prop.getName(),
+				type: normalizeType(emitterPayload(prop)) ?? 'void',
+				rawdescription,
+				...memberDeprecation(prop),
+			});
+			continue;
+		}
 		if (!init || !Node.isCallExpression(init)) continue;
 		const callee = init.getExpression().getText();
 		const writtenType = init.getTypeArguments()[0]?.getText();
-		const rawdescription = descriptionOf(prop);
 		if (INPUT_CALLEES.has(callee)) {
 			const required = callee.endsWith('.required');
 			const initArgs = init.getArguments();
@@ -190,7 +252,26 @@ function membersOf(classNode) {
 				rawdescription,
 				...memberDeprecation(prop),
 			});
+		} else if (callee === 'outputFromObservable') {
+			outputsClass.push({
+				name: prop.getName(),
+				type: normalizeType(writtenType) ?? 'unknown',
+				rawdescription,
+				...memberDeprecation(prop),
+			});
 		}
+	}
+	// `@Input() set x(...)` setters — the decorator's alias (if any) is the public name.
+	for (const setter of classNode.getSetAccessors()) {
+		const inputDecorator = decoratorConfig(setter, 'Input');
+		if (!inputDecorator) continue;
+		inputsClass.push({
+			name: inputDecorator.alias ?? setter.getName(),
+			type: normalizeType(setter.getParameters()[0]?.getTypeNode()?.getText()) ?? 'unknown',
+			required: inputDecorator.required,
+			rawdescription: descriptionOf(setter),
+			...memberDeprecation(setter),
+		});
 	}
 	return { inputsClass, outputsClass };
 }
@@ -200,13 +281,18 @@ function methodsOf(classNode) {
 	const methods = [];
 	for (const method of classNode.getMethods()) {
 		if (method.isStatic() || method.getName().startsWith('#') || method.getScope() !== 'public') continue;
-		methods.push({
-			name: method.getName(),
-			args: paramsOf(method),
-			returnType: normalizeType(method.getReturnTypeNode()?.getText() ?? safeTypeText(method.getReturnType(), method)) ?? 'void',
-			rawdescription: descriptionOf(method),
-			...memberDeprecation(method),
-		});
+		// A method with overload declarations only publishes those: its implementation
+		// signature (usually the widest union) is not callable as written.
+		const signatureNodes = method.getOverloads().length ? method.getOverloads() : [method];
+		for (const node of signatureNodes) {
+			methods.push({
+				name: method.getName(),
+				args: paramsOf(node),
+				returnType: normalizeType(node.getReturnTypeNode()?.getText() ?? safeTypeText(node.getReturnType(), node)) ?? 'void',
+				rawdescription: descriptionOf(node) || descriptionOf(method),
+				...memberDeprecation(node),
+			});
+		}
 	}
 	return methods;
 }

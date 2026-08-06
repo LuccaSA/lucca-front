@@ -170,3 +170,23 @@ describe('renderStoriesSection', () => {
 		expect(renderStoriesSection(groups)).toBe(renderStoriesSection(groups));
 	});
 });
+
+describe('story-factory helper calls', () => {
+	const file = storiesFrom(`
+	  export default { title: 'Documentation/Overlays/Modal' } as Meta;
+	  const template = \`<modal-stories [mode]="mode" />\`;
+	  export const Modal = generateStory({
+	    name: 'Basic',
+	    template,
+	  });
+	  export const ModalTEST = createTestStory(Modal, async () => {});
+	`);
+
+	test('keeps a story built by a non-test factory call, with its export name', () => {
+		expect(file.stories.map((s) => s.name)).toEqual(['Modal']);
+	});
+
+	test('resolves a shorthand template property through the local variable', () => {
+		expect(file.templates).toEqual(['<modal-stories [mode]="mode" />']);
+	});
+});

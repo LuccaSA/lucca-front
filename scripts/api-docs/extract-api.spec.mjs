@@ -202,3 +202,64 @@ describe('determinism', () => {
 		expect(doc.classes.map((c) => c.name)).toEqual(['Apple', 'Mango', 'Zebra']);
 	});
 });
+
+describe('decorator-based inputs and outputs', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      import { Component, Input, Output, EventEmitter } from '@angular/core';
+      import { outputFromObservable } from '@angular/core/rxjs-interop';
+      @Component({ selector: 'lu-legacy', template: '' })
+      export class LegacyComponent {
+        /** Minimum value. */
+        @Input() min?: string;
+        @Input() granularity: string = 'day';
+        @Input({ required: true }) mandatory!: number;
+        @Input('luAlias') set panel(p: number) {}
+        /** Emitted on close. */
+        @Output() closed = new EventEmitter<void>();
+        @Output('luDone') done = new EventEmitter<string>();
+        ridden = outputFromObservable<boolean>(undefined);
+      }
+    `,
+	});
+	const byName = Object.fromEntries(doc.components[0].inputsClass.map((i) => [i.name, i]));
+	const outs = Object.fromEntries(doc.components[0].outputsClass.map((o) => [o.name, o]));
+
+	test('reads @Input() properties: type, default, required flag and description', () => {
+		expect(byName.min).toMatchObject({ type: 'string', required: false, rawdescription: 'Minimum value.' });
+		expect(byName.granularity.defaultValue).toBe("'day'");
+		expect(byName.mandatory.required).toBe(true);
+	});
+
+	test('a decorator alias is the public input name, setters included', () => {
+		expect(byName.luAlias.type).toBe('number');
+		expect(byName.panel).toBeUndefined();
+	});
+
+	test('reads @Output() EventEmitter properties with their payload type and alias', () => {
+		expect(outs.closed).toMatchObject({ type: 'void', rawdescription: 'Emitted on close.' });
+		expect(outs.luDone.type).toBe('string');
+		expect(outs.done).toBeUndefined();
+	});
+
+	test('reads outputFromObservable() with its written payload type', () => {
+		expect(outs.ridden.type).toBe('boolean');
+	});
+});
+
+describe('method overloads', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      export class GroupPipe {
+        transform(value: string): string;
+        transform(value: number): number;
+        transform(value: unknown): unknown { return value; }
+      }
+    `,
+	});
+
+	test('keeps every overload declaration and drops the implementation signature', () => {
+		const transforms = doc.classes[0].methodsClass.filter((m) => m.name === 'transform');
+		expect(transforms.map((m) => m.returnType)).toEqual(['string', 'number']);
+	});
+});

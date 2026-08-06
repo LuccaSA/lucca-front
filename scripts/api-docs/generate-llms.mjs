@@ -628,7 +628,8 @@ export function renderLlmsIndex({ baseUrl, entryPoints, storyCategories }) {
  * @returns {string}
  */
 export function renderDeprecations(deprecations) {
-	return `${JSON.stringify({ package: NG_PACKAGE, count: deprecations.length, deprecations }, null, 2)}\n`;
+	const packages = PACKAGES.map((p) => p.name);
+	return `${JSON.stringify({ packages, count: deprecations.length, deprecations }, null, 2)}\n`;
 }
 
 /** Flat file-safe slug for a story category (`Actions` → `stories-actions`). */
