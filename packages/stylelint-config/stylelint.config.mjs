@@ -136,6 +136,14 @@ export default {
 				severity: (property) => getDisallowedData(LFDeprecatedProperties, property).severity,
 			},
 		],
+		'property-layout-mappings': [
+			'flow-relative',
+			{
+				// overflow-x / overflow-y logical equivalents (overflow-inline / overflow-block)
+				// are not yet Baseline widely available (Chrome 135+, Safari 26+).
+				ignoreProperties: ['overflow-x', 'overflow-y'],
+			},
+		],
 		'property-no-unknown': [
 			true,
 			{
@@ -170,7 +178,9 @@ export default {
 				ignorePseudoElements: ['ng-deep'],
 			},
 		],
+		'unit-layout-mappings': 'flow-relative',
 		'value-keyword-case': null,
+		'value-keyword-layout-mappings': 'flow-relative',
 
 		// Formatting with @stylistic
 		// SEE: https://github.com/stylelint-stylistic/stylelint-stylistic/blob/main/docs/user-guide/rules.md

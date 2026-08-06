@@ -2,8 +2,9 @@
 	--components-dialog-size: 40rem;
 	--components-dialog-width: var(--components-dialog-size);
 	--components-dialog-height: fit-content;
-	--components-dialog-maxWidth: calc(100vw - (var(--pr-t-spacings-200) * 2) - var(--commons-pushPanel-inlineSize));
-	--components-dialog-maxHeight: calc(100dvh - (var(--pr-t-spacings-200) * 2));
+	--components-dialog-maxWidth: calc(100vi - (var(--pr-t-spacings-200) * 2) - var(--commons-pushPanel-inlineSize));
+	--components-dialog-maxHeight: calc(100dvb - (var(--pr-t-spacings-200) * 2));
+	// stylelint-disable-next-line unit-layout-mappings -- Physical fallback: browsers without `dvb` do not support `vb` either.
 	--components-dialog-maxHeightFallback: calc(100vh - (var(--pr-t-spacings-200) * 2));
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
 	--components-dialog-inset: 0 var(--commons-pushPanel-inlineSize) 0 0;
