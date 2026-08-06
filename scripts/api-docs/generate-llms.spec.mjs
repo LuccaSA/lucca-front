@@ -16,6 +16,7 @@ import {
 	renderInterface,
 	renderLlmsFull,
 	renderLlmsIndex,
+	renderPackageLlms,
 	replacementFrom,
 	selectPublicApi,
 } from './generate-llms.mjs';
@@ -232,6 +233,34 @@ describe('renderLlmsIndex', () => {
 
 	test('points to the Prisme design-system reference on zeroheight', () => {
 		expect(out).toContain('https://prisme.lucca.io');
+	});
+});
+
+describe('renderPackageLlms', () => {
+	const out = renderPackageLlms('@lucca-front/ng', [
+		{
+			importPath: '@lucca-front/ng/button',
+			api: { matched: [{ kind: 'component', entity: { name: 'ButtonComponent', rawdescription: 'A button.' } }] },
+		},
+		{
+			importPath: '@lucca-front/ng/callout',
+			api: { matched: [{ kind: 'component', entity: { name: 'CalloutComponent' } }] },
+		},
+	]);
+
+	test('emits the package header with the total entry count', () => {
+		expect(out).toMatch(/^# @lucca-front\/ng — LLM API reference$/m);
+		expect(out).toMatch(/^Public API entries: 2$/m);
+	});
+
+	test('renders one section per entry point with its entities', () => {
+		expect(out).toMatch(/^# @lucca-front\/ng\/button — API$/m);
+		expect(out).toMatch(/^## ButtonComponent$/m);
+		expect(out).toMatch(/^# @lucca-front\/ng\/callout — API$/m);
+	});
+
+	test('is deterministic — identical input yields byte-identical output', () => {
+		expect(renderPackageLlms('@lucca-front/ng', [])).toBe(renderPackageLlms('@lucca-front/ng', []));
 	});
 });
 

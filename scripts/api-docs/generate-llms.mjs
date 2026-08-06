@@ -577,6 +577,27 @@ export function renderEntrypointDoc({ importPath, api }) {
 }
 
 /**
+ * Render one package's self-sufficient corpus, shipped INSIDE the published npm
+ * package (`node_modules/<pkg>/llms-full.txt`): agents read the doc at the exact
+ * installed version, no fetch, no auth. Per the doc-for-LLM epic, the packaged
+ * artifact is the corpus, never the URL index. Deterministic.
+ * @param {string} pkgName
+ * @param {Array<{ importPath: string, api: { matched: any[] } }>} entries
+ * @returns {string}
+ */
+export function renderPackageLlms(pkgName, entries) {
+	const total = entries.reduce((n, e) => n + e.api.matched.length, 0);
+	const header =
+		`# ${pkgName} — LLM API reference\n\n` +
+		`Auto-generated public API surface of ${pkgName} at this published version, resolved\n` +
+		`from the library's TypeScript source and JSDoc. Read it windowed (search the symbol,\n` +
+		`then read around it) — do not load the whole file.\n\n` +
+		`Public API entries: ${total}\n`;
+	const body = entries.map((entry) => renderEntrypointDoc(entry).trimEnd()).join('\n\n');
+	return `${header}\n${body}\n`;
+}
+
+/**
  * Render the `llms.txt` index (llmstxt.org shape): one absolute link per
  * entry-point API file and per story-category file, the full corpus, and the
  * design-system prose reference on zeroheight. Links are absolute to the

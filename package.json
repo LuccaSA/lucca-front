@@ -25,7 +25,7 @@
     "packages/eslint-plugin"
   ],
   "scripts": {
-    "build": "npm run build:ng && npm run build:remaining",
+    "build": "npm run build:ng && npm run build:remaining && npm run docs:llms-pack",
     "build:ng": "npm run build:prisme && ng run ng:build",
     "build:prisme": "ng run prisme:build",
     "build:remaining": "node build.js",
@@ -35,6 +35,7 @@
     "ci-test": "vitest run --reporter=verbose",
     "test": "vitest",
     "docs:llms": "node scripts/api-docs/generate-llms.mjs",
+    "docs:llms-pack": "node scripts/api-docs/generate-package-llms.mjs",
     "docs:api-coverage": "node scripts/api-docs/check-api-coverage.mjs",
     "docs:api-smoke": "node scripts/api-docs/check-llms-surface.mjs",
     "docs:api": "npm run docs:llms && npm run docs:api-smoke",
