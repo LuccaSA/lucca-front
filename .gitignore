@@ -37,7 +37,6 @@ storybook-static
 .storybook/public/deprecations.json
 
 # compodoc
-compodoc-static
 
 /.angular/cache
 

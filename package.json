@@ -34,7 +34,6 @@
     "jenkins-test": "vitest run --reporter=verbose",
     "ci-test": "vitest run --reporter=verbose",
     "test": "vitest",
-    "build-compodoc": "compodoc -p ./tsconfig.compodoc-html.json -d compodoc-static",
     "docs:llms": "node scripts/api-docs/generate-llms.mjs",
     "docs:api-coverage": "node scripts/api-docs/check-api-coverage.mjs",
     "docs:api-smoke": "node scripts/api-docs/check-llms-surface.mjs",
