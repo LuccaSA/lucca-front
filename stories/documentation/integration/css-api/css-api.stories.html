@@ -1,0 +1,107 @@
+<div class="cssApi">
+	<div class="callout mod-S">
+		<div class="callout-content">
+			<div class="callout-content-description">
+				<p>
+					<strong>Beta.</strong> This page is generated from the CSS API manifest shipped inside
+					<code class="code">&#64;lucca-front/scss</code>. Names and values are extracted from the compiled CSS and are accurate.
+					Deprecation data is provisional: it comes from a temporary source, pending the deprecation registry currently being built.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<lu-filter-bar>
+		<lu-segmented-control
+			*luFilterPillAddonBefore
+			class="filterBar-segmentedControl"
+			[ngModel]="kind()"
+			(ngModelChange)="kind.set($event)"
+			[ngModelOptions]="{ standalone: true }"
+		>
+			@for (option of kindOptions; track option.value) {
+				<ng-template #label>{{ option.label }} <lu-numeric-badge [value]="option.count" [maxValue]="9999" /></ng-template>
+				<lu-segmented-control-filter [label]="label" [value]="option.value" />
+			}
+		</lu-segmented-control>
+
+		<lu-filter-pill label="Status">
+			<lu-simple-select
+				[ngModel]="status()"
+				(ngModelChange)="status.set($event)"
+				[ngModelOptions]="{ standalone: true }"
+				[options]="statusOptions"
+			/>
+		</lu-filter-pill>
+
+		<lu-form-field label="Search the CSS API" hiddenLabel>
+			<lu-text-input
+				[ngModel]="search()"
+				(ngModelChange)="search.set($event ?? '')"
+				[ngModelOptions]="{ standalone: true }"
+				placeholder="Search…"
+				hasSearchIcon
+				hasClearer
+			/>
+		</lu-form-field>
+
+		<span *luFilterPillAddonAfter class="cssApi-results">{{ filtered().length }} result(s)</span>
+	</lu-filter-bar>
+
+	@if (filtered().length === 0) {
+		<div class="cssApi-empty">No entry matches your search.</div>
+	} @else {
+		<div class="cssApi-scroll">
+			<table class="table mod-S">
+				<thead class="table-head">
+					<tr class="table-head-row">
+						<th class="table-head-row-cell" scope="col">Name</th>
+						<th class="table-head-row-cell" scope="col">Type</th>
+						<th class="table-head-row-cell" scope="col">Value</th>
+						<th class="table-head-row-cell" scope="col">Replacement</th>
+					</tr>
+				</thead>
+				<tbody class="table-body">
+					@for (entry of filtered(); track entry.kind + entry.name) {
+						<tr class="table-body-row">
+							<td class="table-body-row-cell">
+								<span class="cssApi-name" [class.cssApi-deprecated]="entry.deprecated">{{ entry.name }}</span>
+								@if (entry.import) {
+									<span class="cssApi-meta">&#64;use '{{ entry.import }}'</span>
+								}
+								@if (entry.doc) {
+									<span class="cssApi-meta">{{ entry.doc }}</span>
+								}
+							</td>
+							<td class="table-body-row-cell">
+								<span class="cssApi-kind">{{ label(entry.kind) }}</span>
+								@if (entry.group) {
+									<span class="cssApi-meta">{{ entry.group }}</span>
+								}
+							</td>
+							<td class="table-body-row-cell">
+								<span class="cssApi-value">{{ entry.resolved || entry.value }}</span>
+								@if (entry.variants?.length) {
+									<span class="cssApi-meta">Variants: {{ entry.variants.join(" · ") }}</span>
+								}
+								@if (entry.note) {
+									<span class="cssApi-meta">{{ entry.note }}</span>
+								}
+							</td>
+							<td class="table-body-row-cell">
+								@if (entry.replacement) {
+									<span class="cssApi-name">{{ entry.replacement }}</span>
+								} @else if (entry.deprecated) {
+									<span class="cssApi-meta">—</span>
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	}
+</div>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
