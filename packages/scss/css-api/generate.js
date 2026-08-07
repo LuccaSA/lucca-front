@@ -23,7 +23,7 @@ const sass = require('sass');
 const postcss = require('postcss');
 const valueParser = require('postcss-value-parser');
 
-const { isDeprecatedVariable, classDeprecation } = require('./deprecations');
+const { deprecationFor, KINDS } = require('./deprecation-source');
 
 const MANIFEST_VERSION = 1;
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
@@ -150,6 +150,28 @@ function resolveValue(value, varMap, maxDepth = 10) {
  * @param {import('postcss').Node} node
  * @returns {{ note?: string } | undefined}
  */
+/**
+ * Stamps deprecation metadata onto a manifest entry, if the source reports any.
+ * Every element type goes through here so all three carry the same optional
+ * fields: `deprecated`, `replacement`, `note`.
+ * @param {{ deprecated?: boolean, replacement?: string, note?: string }} entry
+ * @param {'css-variable'|'class'|'mixin'} kind
+ * @param {string} name
+ */
+function applyDeprecation(entry, kind, name) {
+	const dep = deprecationFor(kind, name);
+	if (!dep) {
+		return;
+	}
+	entry.deprecated = true;
+	if (dep.replacement) {
+		entry.replacement = dep.replacement;
+	}
+	if (dep.note) {
+		entry.note = dep.note;
+	}
+}
+
 function readDeprecatedComment(node) {
 	const prev = node.prev();
 	if (prev && prev.type === 'comment') {
@@ -267,6 +289,9 @@ function extractMixins() {
 			if (mixin.doc) {
 				entry.doc = mixin.doc;
 			}
+			// Same optional deprecation fields as variables and utilities. No source
+			// populates them yet — see deprecation-source.js.
+			applyDeprecation(entry, KINDS.MIXIN, `${base}.${mixin.name}`);
 			out.push(entry);
 		}
 	}
@@ -321,9 +346,7 @@ function extract() {
 		}
 
 		const entry = { value: decl.value, category };
-		if (isDeprecatedVariable(decl.prop)) {
-			entry.deprecated = true;
-		}
+		applyDeprecation(entry, KINDS.VARIABLE, decl.prop);
 		const comment = readDeprecatedComment(decl);
 		if (comment) {
 			entry.deprecated = true;
@@ -395,13 +418,7 @@ function extract() {
 			let entry = utilities.get(className);
 			if (!entry) {
 				entry = { css: [] };
-				const dep = classDeprecation(className);
-				if (dep) {
-					entry.deprecated = true;
-					if (dep.replacement) {
-						entry.replacement = dep.replacement;
-					}
-				}
+				applyDeprecation(entry, KINDS.CLASS, className);
 				const comment = readDeprecatedComment(rule);
 				if (comment) {
 					entry.deprecated = true;
@@ -450,27 +467,11 @@ function extract() {
 	}
 
 	// Validate replacements: a `replacement` must point to an existing,
-	// non-deprecated utility. Follow chains (e.g. u-marginTop100 →
+	// non-deprecated entry of the same kind. Follow chains (e.g. u-marginTop100 →
 	// pr-u-marginTop100 → pr-u-marginBlockStart100) so a deprecated hop resolves
 	// to its own modern target. Drop replacements that can't be resolved.
-	for (const [name, entry] of utilities) {
-		if (!entry.replacement) {
-			continue;
-		}
-		const resolved = resolveReplacement(name, entry.replacement, utilities);
-		if (resolved) {
-			entry.replacement = resolved;
-		} else {
-			// Warn only for a genuine miss: a derived target that doesn't exist as
-			// a class (worth investigating). Silently drop when the target exists
-			// but is a deprecated dead-end with no modern twin (expected).
-			if (!utilities.has(entry.replacement)) {
-				// eslint-disable-next-line no-console
-				console.warn(`[css-api] dropping non-existent replacement for ${name}: ${entry.replacement}`);
-			}
-			delete entry.replacement;
-		}
-	}
+	validateReplacements(utilities, 'class');
+	validateReplacements(variables, 'custom property');
 
 	// Resolve var() chains in utility declarations for hover display.
 	for (const [, entry] of utilities) {
@@ -494,24 +495,53 @@ function extract() {
 }
 
 /**
- * Follows a replacement chain to the first existing, non-deprecated utility.
+ * Resolves every `replacement` in a map to a concrete, existing, non-deprecated
+ * target, dropping the ones that dead-end. Shared by utilities and custom
+ * properties so both honour the same contract: if a `replacement` survives into
+ * the manifest, it names something a consumer can actually migrate to.
+ * @param {Map<string, { deprecated?: boolean, replacement?: string }>} entries
+ * @param {string} label element kind, for the warning message
+ */
+function validateReplacements(entries, label) {
+	for (const [name, entry] of entries) {
+		if (!entry.replacement) {
+			continue;
+		}
+		const resolved = resolveReplacement(name, entry.replacement, entries);
+		if (resolved) {
+			entry.replacement = resolved;
+		} else {
+			// Warn only for a genuine miss: a derived target that doesn't exist
+			// (worth investigating). Silently drop when the target exists but is a
+			// deprecated dead-end with no modern twin (expected).
+			if (!entries.has(entry.replacement)) {
+				// eslint-disable-next-line no-console
+				console.warn(`[css-api] dropping non-existent ${label} replacement for ${name}: ${entry.replacement}`);
+			}
+			delete entry.replacement;
+		}
+	}
+}
+
+/**
+ * Follows a replacement chain to the first existing, non-deprecated entry.
  * Returns undefined when the chain dead-ends (missing or only-deprecated).
- * @param {string} from origin class name (to break self-cycles)
+ * @param {string} from origin name (to break self-cycles)
  * @param {string} replacement initial replacement target
- * @param {Map<string, { deprecated?: boolean, replacement?: string }>} utilities
+ * @param {Map<string, { deprecated?: boolean, replacement?: string }>} entries
  * @returns {string | undefined}
  */
-function resolveReplacement(from, replacement, utilities) {
+function resolveReplacement(from, replacement, entries) {
 	const seen = new Set([from]);
 	let target = replacement;
 	while (target && !seen.has(target)) {
 		seen.add(target);
-		const entry = utilities.get(target);
+		const entry = entries.get(target);
 		if (!entry) {
 			return undefined; // target doesn't exist
 		}
 		if (!entry.deprecated) {
-			return target; // reached a modern class
+			return target; // reached a modern entry
 		}
 		target = entry.replacement; // hop to its replacement
 	}
@@ -651,16 +681,6 @@ function selfCheck(manifest) {
 	if (!resolvedBlock || resolvedBlock.resolved.includes('var(')) {
 		errors.push(`pr-u-marginInlineStart100 resolved sentinel failed: ${JSON.stringify(marginInline)}`);
 	}
-	// Every replacement must point to an existing, non-deprecated utility.
-	for (const [name, utility] of Object.entries(manifest.utilities)) {
-		if (utility.replacement) {
-			const target = manifest.utilities[utility.replacement];
-			if (!target || target.deprecated) {
-				errors.push(`${name} has invalid replacement ${utility.replacement}`);
-			}
-		}
-	}
-
 	// Mixins.
 	const mixins = manifest.mixins || [];
 	if (mixins.length < 30) {
@@ -675,6 +695,33 @@ function selfCheck(manifest) {
 	const spinner = mixins.find((m) => m.namespace === 'loading' && m.name === 'spinner');
 	if (!spinner || !spinner.import.endsWith('/commons/utils/loading') || !/\$size/.test(spinner.params)) {
 		errors.push(`loading.spinner mixin sentinel failed: ${JSON.stringify(spinner)}`);
+	}
+
+	// Uniform deprecation contract across all three element types: `replacement`
+	// and `note` only ever appear alongside `deprecated`, and a `replacement`
+	// always names an existing, non-deprecated entry of the same kind. Consumers
+	// rely on this, so a violation must fail the build rather than ship.
+	const surfaces = [
+		{ label: 'variable', entries: Object.entries(manifest.variables) },
+		{ label: 'utility', entries: Object.entries(manifest.utilities) },
+		{ label: 'mixin', entries: mixins.map((m) => [`${m.namespace}.${m.name}`, m]) },
+	];
+	for (const { label, entries } of surfaces) {
+		const byName = new Map(entries);
+		for (const [name, entry] of entries) {
+			if (entry.replacement !== undefined && !entry.deprecated) {
+				errors.push(`${label} ${name} has a replacement but is not deprecated`);
+			}
+			if (entry.note !== undefined && !entry.deprecated) {
+				errors.push(`${label} ${name} has a note but is not deprecated`);
+			}
+			if (entry.replacement !== undefined) {
+				const target = byName.get(entry.replacement);
+				if (!target || target.deprecated) {
+					errors.push(`${label} ${name} has invalid replacement ${entry.replacement}`);
+				}
+			}
+		}
 	}
 
 	if (errors.length) {
