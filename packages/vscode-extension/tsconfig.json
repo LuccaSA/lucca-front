@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    // node16 rather than the classic node10 resolution: TypeScript 6 makes the
+    // latter a hard error. Emits CommonJS (the package has no "type": "module"),
+    // which is what the VS Code extension host loads.
+    "module": "node16",
+    "lib": ["ES2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node16",
+    "outDir": "dist",
+    "rootDir": "src",
+    "sourceMap": true,
+    "declaration": false,
+    "types": ["node", "vscode", "vitest/globals"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["dist", "node_modules"]
+}
