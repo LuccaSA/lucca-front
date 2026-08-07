@@ -5,6 +5,7 @@ const path = require('path');
 const postcss = require('postcss');
 const sass = require('sass');
 const ts = require('typescript');
+const generateCssApi = require('./packages/scss/css-api/generate');
 
 const ROOT = __dirname;
 
@@ -43,6 +44,9 @@ runTask('Lucca Front compilation', async () => {
 			context: SCSS,
 			output: OUTPUT_SCSS,
 		});
+	});
+	await runTask('@lucca-front/scss CSS API manifest', () => {
+		generateCssApi({ output: path.join(OUTPUT_SCSS, 'css-api', 'manifest.json') });
 	});
 
 	/**
