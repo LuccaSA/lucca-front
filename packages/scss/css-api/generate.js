@@ -746,6 +746,9 @@ function generateCssApi({ output }) {
 
 module.exports = generateCssApi;
 
+/** Committed dataset for the Storybook explorer. Refreshed by `npm run css-api`. */
+const STORY_DATA_PATH = path.join(REPO_ROOT, 'stories', 'documentation', 'css-api-manifest.ts');
+
 if (require.main === module) {
 	const output = process.argv[2] || path.join(REPO_ROOT, 'dist', 'scss', 'css-api', 'manifest.json');
 	const manifest = generateCssApi({ output });
@@ -755,4 +758,18 @@ if (require.main === module) {
 	const bytes = fs.statSync(output).size;
 	console.log(`CSS API manifest written to ${output}`);
 	console.log(`  ${varCount} custom properties, ${utilCount} utility classes, ${mixinCount} mixins, ${(bytes / 1024).toFixed(1)} KB`);
+
+	// Only the CLI refreshes the committed story data — `build.js` calls
+	// generateCssApi() directly, and a build must never dirty the working tree.
+	const { writeStoryData } = require('./story-data');
+	writeStoryData(manifest, STORY_DATA_PATH).then(
+		(rows) => {
+			console.log(`Storybook dataset written to ${path.relative(REPO_ROOT, STORY_DATA_PATH)}`);
+			console.log(`  ${rows} entries, ${(fs.statSync(STORY_DATA_PATH).size / 1024).toFixed(1)} KB`);
+		},
+		(error) => {
+			console.error(`Failed to write the Storybook dataset: ${error.message}`);
+			process.exitCode = 1;
+		},
+	);
 }
