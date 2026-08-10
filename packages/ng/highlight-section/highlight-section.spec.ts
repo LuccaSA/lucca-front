@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HighlightSectionComponent } from './highlight-section.component';
-import { HighlightSectionBubblePosition, HighlightSectionTheme } from './highlight-section.type';
+import { HighlightSectionTheme } from './highlight-section.type';
 
-const CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data';
 const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section';
 
 @Component({
@@ -11,7 +10,7 @@ const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/hi
 	imports: [HighlightSectionComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-		<lu-highlight-section [theme]="theme()" [palette]="palette()" [bubble]="bubble()" [bubblePosition]="bubblePosition()" [illustration]="illustration()">
+		<lu-highlight-section [theme]="theme()" [palette]="palette()" [bubbleStart]="bubbleStart()" [bubbleEnd]="bubbleEnd()" [illustration]="illustration()">
 			<p class="projected">Projected content</p>
 		</lu-highlight-section>
 	`,
@@ -19,8 +18,8 @@ const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/hi
 class HostComponent {
 	readonly theme = signal<HighlightSectionTheme>('white');
 	readonly palette = signal<string>('lucca');
-	readonly bubble = signal<number | undefined>(undefined);
-	readonly bubblePosition = signal<HighlightSectionBubblePosition>('both');
+	readonly bubbleStart = signal<number | undefined>(undefined);
+	readonly bubbleEnd = signal<number | undefined>(undefined);
 	readonly illustration = signal<string | undefined>(undefined);
 }
 
@@ -75,49 +74,43 @@ describe(HighlightSectionComponent.name, () => {
 	});
 
 	it('should not render the ornaments layer when no bubble is set', () => {
-		expect(query('.highlightSection-bubbles')).toBeNull();
+		expect(query('.highlightSection-bubbleStart')).toBeNull();
+		expect(query('.highlightSection-bubbleEnd')).toBeNull();
 	});
 
-	it('should render both ornaments by default', () => {
-		host.bubble.set(1);
+	it('should not display any decorations by default', () => {
 		fixture.detectChanges();
 
-		expect(query('.highlightSection-bubbles-start')).not.toBeNull();
-		expect(query('.highlightSection-bubbles-end')).not.toBeNull();
+		expect(query('.highlightSection-bubbleStart')).toBeNull();
+		expect(query('.highlightSection-bubbleEnd')).toBeNull();
 	});
 
-	it.each([
-		['start', true, false],
-		['end', false, true],
-		['both', true, true],
-	] as const)('should render the %s ornament(s)', (bubblePosition, hasStart, hasEnd) => {
-		host.bubble.set(1);
-		host.bubblePosition.set(bubblePosition);
+	it('should render start ornament', () => {
+		host.bubbleStart.set(1);
+
 		fixture.detectChanges();
 
-		expect(!!query('.highlightSection-bubbles-start')).toBe(hasStart);
-		expect(!!query('.highlightSection-bubbles-end')).toBe(hasEnd);
+		expect(query('.highlightSection-bubbleStart')).not.toBeNull();
+		expect(query('.highlightSection-bubbleEnd')).toBeNull();
 	});
 
-	it('should build the ornament URL from the palette, the theme and the bubble number', () => {
-		host.palette.set('cleemy');
-		host.bubble.set(3);
+	it('should render end ornament', () => {
+		host.bubbleEnd.set(2);
+
 		fixture.detectChanges();
 
-		expect(query<HTMLImageElement>('.highlightSection-bubbles-end')?.getAttribute('src')).toBe(`${CDN_PATH}/cleemy/bubbles-light-3.svg`);
-
-		host.theme.set('dark');
-		fixture.detectChanges();
-
-		expect(query<HTMLImageElement>('.highlightSection-bubbles-end')?.getAttribute('src')).toBe(`${CDN_PATH}/cleemy/bubbles-dark-3.svg`);
+		expect(query('.highlightSection-bubbleStart')).toBeNull();
+		expect(query('.highlightSection-bubbleEnd')).not.toBeNull();
 	});
 
-	it('should keep light ornaments for the light theme', () => {
-		host.theme.set('light');
-		host.bubble.set(2);
+	it('should render both ornaments', () => {
+		host.bubbleStart.set(1);
+		host.bubbleEnd.set(2);
+
 		fixture.detectChanges();
 
-		expect(query<HTMLImageElement>('.highlightSection-bubbles-end')?.getAttribute('src')).toBe(`${CDN_PATH}/lucca/bubbles-light-2.svg`);
+		expect(query('.highlightSection-bubbleStart')).not.toBeNull();
+		expect(query('.highlightSection-bubbleEnd')).not.toBeNull();
 	});
 
 	it('should not render the illustration when it is not set', () => {

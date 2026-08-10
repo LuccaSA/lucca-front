@@ -7,23 +7,42 @@ export default {
 	argTypes: {},
 } as Meta;
 
-const bubble = (side: 'start' | 'end') =>
-	`<img alt="" class="highlightSection-bubbles-${side}" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg" />`;
-
-function getSection(label: string, sides: ('start' | 'end')[]): string {
-	const bubbles = sides.length ? `\n	<div class="highlightSection-bubbles">\n		${sides.map(bubble).join('\n		')}\n	</div>` : '';
-
+function getTemplate(args: OrnamentStory): string {
 	return `<div class="highlightSection mod-light">
+	<img alt="" class="highlightSection-bubbleStart" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg" />
+	<img alt="" class="highlightSection-bubbleEnd" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-2.svg" />
 	<div class="highlightSection-content">
 		<div class="highlightSection-content-slot">
-			<p class="pr-u-fontWeightSemiBold">${label}</p>
+			<p class="pr-u-fontWeightSemiBold">Both</p>
 		</div>
-	</div>${bubbles}
-</div>`;
-}
+	</div>
+</div>
 
-function getTemplate(args: OrnamentStory): string {
-	return [getSection('Des deux côtés', ['start', 'end']), getSection('Sans ornement', []), getSection('En bas au début', ['start']), getSection('En bas à la fin', ['end'])].join('\n\n');
+<div class="highlightSection mod-light">
+	<img alt="" class="highlightSection-bubbleStart" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg" />
+	<div class="highlightSection-content">
+		<div class="highlightSection-content-slot">
+			<p class="pr-u-fontWeightSemiBold">Start</p>
+		</div>
+	</div>
+</div>
+
+<div class="highlightSection mod-light">
+	<img alt="" class="highlightSection-bubbleEnd" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-2.svg" />
+	<div class="highlightSection-content">
+		<div class="highlightSection-content-slot">
+			<p class="pr-u-fontWeightSemiBold">End</p>
+		</div>
+	</div>
+</div>
+
+<div class="highlightSection mod-light">
+	<div class="highlightSection-content">
+		<div class="highlightSection-content-slot">
+			<p class="pr-u-fontWeightSemiBold">None</p>
+		</div>
+	</div>
+</div>`;
 }
 
 const Template = (args: OrnamentStory) => ({
@@ -34,7 +53,7 @@ const Template = (args: OrnamentStory) => ({
 		:host {
 			display: flex;
 			flex-direction: column;
-			gap: var(--pr-t-spacings-100);
+			gap: var(--pr-t-spacings-200);
 		}`,
 	],
 });

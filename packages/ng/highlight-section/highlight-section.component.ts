@@ -1,15 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
-import { HighlightSectionBubble, HighlightSectionBubblePosition, HighlightSectionIllustration, HighlightSectionPalette, HighlightSectionTheme } from './highlight-section.type';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { HighlightSectionBubble, HighlightSectionIllustration, HighlightSectionPalette, HighlightSectionTheme } from './highlight-section.type';
 
-/**
- * Bubble ornaments are shared with the highlight data CDN folder.
- */
-const CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data';
-
-/**
- * Illustrations have their own dedicated CDN folder.
- */
 const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section';
 
 @Component({
@@ -19,6 +12,7 @@ const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/hi
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	providers: [LuClass],
+	imports: [LuSafeExternalSvgPipe],
 	host: {
 		class: 'highlightSection',
 		'[class.mod-light]': 'lightClass',
@@ -43,12 +37,8 @@ export class HighlightSectionComponent {
 	 * Define an ornament style based on the CDN image bubble number.
 	 * Ornaments are hidden when this input is not set.
 	 */
-	readonly bubble = input<HighlightSectionBubble | number>();
-
-	/**
-	 * Which side(s) should the ornaments be displayed on? (Both by default)
-	 */
-	readonly bubblePosition = input<HighlightSectionBubblePosition>('both');
+	readonly bubbleStart = input<HighlightSectionBubble | number>();
+	readonly bubbleEnd = input<HighlightSectionBubble | number>();
 
 	/**
 	 * Illustration displayed at the end of the content
@@ -66,7 +56,8 @@ export class HighlightSectionComponent {
 
 	readonly bubbleTheme = computed(() => (this.theme() === 'dark' ? 'dark' : 'light'));
 
-	readonly bubbleSrc = computed(() => `${CDN_PATH}/${this.palette()}/bubbles-${this.bubbleTheme()}-${this.bubble()}.svg`);
+	readonly bubbleStartSrc = computed(() => `${ILLUSTRATION_CDN_PATH}/bubbles-${this.bubbleStart()}.svg`);
+	readonly bubbleEndSrc = computed(() => `${ILLUSTRATION_CDN_PATH}/bubbles-${this.bubbleEnd()}.svg`);
 
 	readonly illustrationSrc = computed(() => {
 		const illustration = this.illustration() ?? '';
