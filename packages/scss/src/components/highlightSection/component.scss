@@ -33,7 +33,7 @@
 			inset-block-end: 0;
 			position: absolute;
 			pointer-events: none;
-			display: flex;
+			display: var(--components-highlightSection-bubbleStartBubbleEnd-display);
 		}
 
 		.highlightSection-bubbleStart {
