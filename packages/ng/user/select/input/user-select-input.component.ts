@@ -1,8 +1,8 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, inject, input, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, input, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { getIntlPluralLabel, intlInputOptions, LOCALE_PLURAL_RULES } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlPluralLabelPipe } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
@@ -34,6 +34,7 @@ import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate
 		LuUserMeOptionDirective,
 		LuForOptionsDirective,
 		LuUserDisplayPipe,
+		IntlPluralLabelPipe,
 	],
 	providers: [
 		LuUserDisplayPipe,
@@ -63,12 +64,6 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
 
 	readonly intl = input(...intlInputOptions(LU_USER_SELECT_INPUT_TRANSLATIONS));
-
-	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
-
-	usersLabel(count: number): string {
-		return getIntlPluralLabel(this.pluralRules, this.intl().users, count);
-	}
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

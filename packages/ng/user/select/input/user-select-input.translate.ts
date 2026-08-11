@@ -7,7 +7,7 @@ export const LU_USER_SELECT_INPUT_TRANSLATIONS = new InjectionToken('LuUserSelec
 });
 
 export interface ILuUserSelectInputLabel {
-	users: LuPluralForms;
+	users: string | LuPluralForms;
 	me: string;
 }
 

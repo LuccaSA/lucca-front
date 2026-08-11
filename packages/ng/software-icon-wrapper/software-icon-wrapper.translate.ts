@@ -7,7 +7,7 @@ export const LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS = new InjectionToken('LuSoftw
 });
 
 export type SoftwareIconWrapperTranslations = {
-	seeMore: LuPluralForms;
+	seeMore: string | LuPluralForms;
 };
 
 export const luSoftwareIconWrapperTranslations: LuTranslation<SoftwareIconWrapperTranslations> = Translations;

@@ -55,18 +55,16 @@ L'utilisation de `withSelectAll` apporte un certain nombre de changements :
 
 #### Label pluriel (langues avec plus de 2 formes, ex. polonais)
 
-`withSelectAllDisplayerLabel` attend une `string` déjà résolue : il ne gère pas lui-même le pluriel. Pour les langues
-CLDR avec plus de deux catégories (`one` / `few` / `many` / `other`, ex. polonais), il faut résoudre le label
-côté host en fonction du compte, via `@lucca/translate`. La directive expose `displayerCount` via
-`exportAs="withSelectAll"` pour permettre ce calcul :
+`withSelectAllDisplayerLabelFn` accepte une fonction `(count: number) => string | LuPluralForms`. Si elle
+retourne un objet `LuPluralForms` (`{ one?, few?, many?, other? }`), la directive résout elle-même la bonne
+forme CLDR en fonction du nombre d'éléments sélectionnés :
 
 ```html
-<lu-multi-select
-  establishments
-  withSelectAll
-  #establishmentsSelectAll="withSelectAll"
-  [withSelectAllDisplayerLabel]="i18n.ESTABLISHMENTS_DISPLAYER_LABEL({ count: establishmentsSelectAll.displayerCount() ?? 0 })"
-/>
+<lu-multi-select establishments withSelectAll [withSelectAllDisplayerLabelFn]="establishmentsDisplayerLabel" />
+```
+
+```ts
+establishmentsDisplayerLabel = (count: number) => this.i18n.ESTABLISHMENTS_DISPLAYER_LABEL;
 ```
 
 ### Exemple : Barre de filtres

@@ -7,7 +7,7 @@ export const LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS = new InjectionToken('LuDep
 });
 
 export interface ILuDepartmentSelectInputLabel {
-	departments: LuPluralForms;
+	departments: string | LuPluralForms;
 }
 
 export const luDepartmentSelectInputTranslations: LuTranslation<ILuDepartmentSelectInputLabel> = Translations;

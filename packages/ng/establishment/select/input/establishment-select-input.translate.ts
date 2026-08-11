@@ -7,7 +7,7 @@ export const LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS = new InjectionToken('Lu
 });
 
 export interface ILuEstablishmentSelectInputLabel {
-	establishments: LuPluralForms;
+	establishments: string | LuPluralForms;
 }
 
 export const luEstablishmentSelectInputTranslations: LuTranslation<ILuEstablishmentSelectInputLabel> = Translations;
