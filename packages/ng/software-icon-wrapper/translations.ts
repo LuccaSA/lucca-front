@@ -9,7 +9,7 @@ export const Translations = {
 		seeMore: { other: 'Ver los {{count}} programas adicionales' },
 	},
 	fr: {
-		seeMore: { other: 'Voir les {{count}} logiciels supplémentaires' },
+		seeMore: { other: 'Voir les {{count}} logiciels supplémentaires' },
 	},
 	it: {
 		seeMore: { other: 'Vedi i {{count}} programmi aggiuntivi' },

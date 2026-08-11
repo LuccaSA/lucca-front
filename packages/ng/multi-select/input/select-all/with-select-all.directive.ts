@@ -1,6 +1,6 @@
 import { computed, Directive, effect, forwardRef, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { isNil } from '@lucca-front/ng/core';
+import { getIntlPluralLabel, isNil, LOCALE_PLURAL_RULES, LuPluralForms } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
 import { LuMultiSelection, LuMultiSelectionMode } from '../../select.model';
@@ -12,7 +12,6 @@ import { LuMultiSelectWithSelectAllContext, MULTI_SELECT_WITH_SELECT_ALL_CONTEXT
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-multi-select[withSelectAll]',
-	exportAs: 'withSelectAll',
 	providers: [
 		{
 			provide: ɵIsSelectedStrategy,
@@ -28,7 +27,14 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
 	readonly intl = this.select.intl;
 
-	readonly displayerLabel = input.required<string>({ alias: 'withSelectAllDisplayerLabel' });
+	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
+
+	readonly displayerLabelInput = input.required<string | LuPluralForms>({ alias: 'withSelectAllDisplayerLabel' });
+
+	readonly displayerLabel = computed(() => {
+		const label = this.displayerLabelInput();
+		return typeof label === 'string' ? label : getIntlPluralLabel(this.pluralRules, label, this.displayerCount() ?? 0);
+	});
 
 	readonly #mode = signal<LuMultiSelectionMode>('none');
 	readonly #values = signal<TValue[]>([]);
