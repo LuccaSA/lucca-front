@@ -182,10 +182,9 @@ Components use the `intlInputOptions()` function to create an `intl` input that:
   [to]="10" 
   [itemsCount]="100" 
   [intl]="{
-    results: 'Page {{from}}-{{to}} / {{itemsCount}}',
+    results: 'Showing {{from}} to {{to}} of {{itemsCount}} items',
     previous: 'Prev',
-    next: 'Next',
-    results: 'Showing {{from}} to {{to}} of {{itemsCount}} items'
+    next: 'Next'
   }" 
 />
 ```
