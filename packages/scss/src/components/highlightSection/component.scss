@@ -25,6 +25,7 @@
 			block-size: var(--components-highlightSection-illustration-blockSize);
 			inline-size: var(--components-highlightSection-illustration-inlineSize);
 			flex-shrink: 0;
+			display: var(--components-highlightSection-content-illustration-display);
 		}
 
 		.highlightSection-bubbleStart,

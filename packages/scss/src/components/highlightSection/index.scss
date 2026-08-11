@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .highlightSection {
 	@layer components {
@@ -13,6 +14,10 @@
 
 		&.mod-dark {
 			@include dark;
+		}
+
+		@include media.max('XS') {
+			@include narrow;
 		}
 	}
 }
