@@ -15,6 +15,7 @@ import { ReadMoreSurface } from './read-more.type';
 		'[style.--components-readMore-content-lastChild-content]': '`"${labelReadLess()}"`',
 		'[class.is-disabled]': '!expanded() && !isClamped()',
 		'[class.mod-openOnly]': 'openOnly()',
+		'[class.mod-preserveLineBreaks]': 'preserveLineBreaks()',
 		'[class.mod-sunken]': 'surface() === `sunken`',
 		'[class.mod-default]': 'surface() === `default`',
 		'[style.--components-readMore-link-backgroudColor]': 'backgroundColor()',
@@ -32,6 +33,12 @@ export class ReadMoreComponent {
 	 * Prevent the component from closing by hiding the "Read less" button
 	 */
 	readonly openOnly = input(false, { transform: booleanAttribute });
+
+	/**
+	 * Display the `\n` of the content as line breaks instead of collapsing them into spaces (`white-space: pre-line`).
+	 * Meant for plain-text content such as a textarea value.
+	 */
+	readonly preserveLineBreaks = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Change the background color under the "Read more / less" button

@@ -28,5 +28,9 @@
 		&.mod-sunken {
 			@include sunken;
 		}
+
+		&.mod-preserveLineBreaks {
+			@include preserveLineBreaks;
+		}
 	}
 }
