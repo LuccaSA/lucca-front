@@ -65,7 +65,7 @@ export class ImpersonationComponent {
 			// Because ref appears only when opening the panel, we're going to call the impersonation opened hook too
 			if (ref) {
 				untracked(() => {
-					ref.enableFilterPillMode();
+					ref.enableFilterPillMode?.();
 					ref.registerFilterPillClosePopover(this.closePopover);
 					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
 					ref.onFilterPillOpened?.();
