@@ -54,6 +54,8 @@ let nextId = 0;
 		'(focus)': 'onFocus()',
 		'(blur)': 'onBlur()',
 		'(keydown.escape)': 'onEscape($event)',
+		'[class]': '"tooltip_trigger"',
+		'[class.is-whenEllipsis]': 'luTooltipWhenEllipsis()',
 	},
 })
 export class LuTooltipTriggerDirective implements OnDestroy {
@@ -185,7 +187,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 				}
 				const host = this.#host.nativeElement;
 				const hostStyle = getComputedStyle(host);
-				if (hostStyle.textOverflow !== 'ellipsis') {
+				// No need to run a test if the element isn't an ellipse
+				// or if its `display` property is set to `inline`
+				// (especially for Safari, which still calculates a width, unlike other browsers)
+				if (hostStyle.textOverflow !== 'ellipsis' || hostStyle.display === 'inline') {
 					return { measure: false } as const;
 				}
 				return { measure: true, host, hostStyle } as const;
