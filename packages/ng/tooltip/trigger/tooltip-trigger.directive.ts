@@ -187,7 +187,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 				}
 				const host = this.#host.nativeElement;
 				const hostStyle = getComputedStyle(host);
-				// No need to run a test if the element isn't an ellipse
+				// No need to run a test if the element is not truncated
 				// or if its `display` property is set to `inline`
 				// (especially for Safari, which still calculates a width, unlike other browsers)
 				if (hostStyle.textOverflow !== 'ellipsis' || hostStyle.display === 'inline') {
