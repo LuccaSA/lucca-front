@@ -27,17 +27,6 @@ import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
-interface MainLayoutHTMLBasicStory {
-	header: boolean;
-	headerSticky: boolean;
-	sidebar: boolean;
-	footer: boolean;
-	footerSticky: boolean;
-	contentOverflowing: boolean;
-	repeatContent: number;
-	repeatOverflow: number;
-}
-
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Layout/Sheet',
 	argTypes: {},
@@ -88,7 +77,7 @@ export default {
 			],
 		}),
 	],
-	render: (args: MainLayoutHTMLBasicStory) => {
+	render: () => {
 		return {
 			template: `<button luButton type="button" [luDialogOpen]="approbationInboxDetailTpl" [luDialogConfig]="{ surfaceDefault: true, size: 'maxContent', mode: 'sheet'}">
 	Approbation inbox details

@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		class: 'approbationInbox-list-content-items-item-content-info-data-subtle',
+		class: 'approbationInbox-list-content-items-item-content-info-rightContent-subtle',
 	},
 })
 export class ApprobationInboxSubtleComponent {}

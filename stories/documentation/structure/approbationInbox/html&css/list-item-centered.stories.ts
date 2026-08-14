@@ -13,7 +13,7 @@ function getTemplate(args: ApprobationInboxListItemStory): string {
 		<li class="approbationInbox-list-content-items-item">
 			<div class="approbationInbox-list-content-items-item-content">
 				<div class="approbationInbox-list-content-items-item-content-info mod-center">
-					<div class="approbationInbox-list-content-items-item-content-info-illustration">
+					<div class="approbationInbox-list-content-items-item-content-info-visual">
 						<div class="avatar mod-M">
 							<div class="avatar-picture" style="background-color: rgb(214, 92, 92)">
 								<span translate="no" class="avatar-picture-initials">VV</span>
@@ -26,29 +26,29 @@ function getTemplate(args: ApprobationInboxListItemStory): string {
 						</div>
 						Metadata
 					</div>
-					<div class="approbationInbox-list-content-items-item-content-info-data">
-						<ul class="approbationInbox-list-content-items-item-content-info-data-icons">
+					<div class="approbationInbox-list-content-items-item-content-info-rightContent">
+						<ul class="approbationInbox-list-content-items-item-content-info-rightContent-icons">
 							<li>
-								<span class="approbationInbox-list-content-items-item-content-info-data-icons-icon">
+								<span class="approbationInbox-list-content-items-item-content-info-rightContent-icons-icon">
 									<span aria-hidden="true" class="lucca-icon icon-formatClipperAttachment mod-XS"></span>
 									<span class="pr-u-mask">Contient une pièce jointe</span>
 								</span>
 							</li>
 							<li>
-								<span class="approbationInbox-list-content-items-item-content-info-data-icons-icon">
+								<span class="approbationInbox-list-content-items-item-content-info-rightContent-icons-icon">
 									<span aria-hidden="true" class="lucca-icon icon-bubbleSpeech mod-XS"></span>
 									<span class="pr-u-mask">Contient un commentaire</span>
 								</span>
 							</li>
 							<li>
-								<span class="approbationInbox-list-content-items-item-content-info-data-icons-icon pr-u-textWarning">
+								<span class="approbationInbox-list-content-items-item-content-info-rightContent-icons-icon pr-u-textWarning">
 									<span aria-hidden="true" class="lucca-icon icon-signWarning mod-XS"></span>
 									<span class="pr-u-mask">Contient un avertissement</span>
 								</span>
 							</li>
 						</ul>
 						Data
-						<div class="approbationInbox-list-content-items-item-content-info-data-subtle">Data</div>
+						<div class="approbationInbox-list-content-items-item-content-info-rightContent-subtle">Data</div>
 					</div>
 				</div>
 			</div>

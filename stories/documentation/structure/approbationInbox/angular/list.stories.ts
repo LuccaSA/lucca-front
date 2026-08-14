@@ -73,11 +73,11 @@ export default {
 		selectable: {
 			description: 'Active la sélection multiple',
 		},
-		data: {
+		rightContent: {
 			description: 'Exemple de données complémentaires.',
 		},
-		illustration: {
-			description: 'Affiche un exemple d’illustration au début d’un élément.',
+		visual: {
+			description: 'Affiche un exemple de visuel au début d’un élément.',
 		},
 		itemLabel: {
 			description: 'Titre de l’élément (aussi reprit dans l’intitulé masqué de sa sélection).',
@@ -88,7 +88,7 @@ export default {
 		icons: {
 			description: 'Icônes affichées dans les données complémentaires.',
 			control: { type: 'object' },
-			if: { arg: 'data', truthy: true },
+			if: { arg: 'rightContent', truthy: true },
 		},
 	},
 	decorators: [
@@ -115,17 +115,17 @@ export default {
 			],
 		}),
 	],
-	render: ({ filterBar, group, groupLabel, illustration, data, center, selected, itemCount, itemLabel, current, icons, ...args }, { argTypes }) => {
+	render: ({ filterBar, group, groupLabel, visual, rightContent, center, selected, itemCount, itemLabel, current, icons, ...args }, { argTypes }) => {
 		const centerParam = center ? ` center` : ``;
 		const selectedParam = selected ? ` [checked]="true"` : ``;
 		const currentParam = current ? ` current` : ``;
-		const startTpl = illustration
+		const startTpl = visual
 			? `
-			<lu-user-picture approbationInboxListItemIllustration />`
+			<lu-user-picture approbationInboxListItemVisual />`
 			: ``;
-		const endTpl = data
+		const endTpl = rightContent
 			? `
-			<ng-container approbationInboxListItemData>
+			<ng-container approbationInboxListItemRightContent>
 				<lu-approbation-inbox-list-icons [icons]="icons" />
 				Data
 				<lu-approbation-inbox-list-subtle>Data</lu-approbation-inbox-list-subtle>
@@ -181,8 +181,8 @@ export const Basic: StoryObj<
 		group: false;
 		groupLabel: string;
 		current: boolean;
-		illustration: boolean;
-		data: boolean;
+		visual: boolean;
+		rightContent: boolean;
 		center: boolean;
 		selected: boolean;
 		itemCount: number;
@@ -201,8 +201,8 @@ export const Basic: StoryObj<
 		groupLabel: 'Group',
 		current: false,
 		itemLabel: 'Title',
-		illustration: false,
-		data: false,
+		visual: false,
+		rightContent: false,
 		icons: [
 			{ icon: 'formatClipperAttachment', alt: 'Contient une pièce jointe' },
 			{ icon: 'bubbleSpeech', alt: 'Contient un commentaire' },

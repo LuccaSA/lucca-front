@@ -9,4 +9,16 @@
 	--components-mainLayout-content-inside-block-firstLastOfType-marginBlock: var(--pr-t-spacings-200);
 	--components-mainLayout-content-inside-header-backgroundColor: transparent;
 	--components-mainLayout-content-inside-footer-backgroundColor: transparent;
+	--components-mainLayout-bubblesStartEndSvgInlineSize: 216px;
+	--components-mainLayout-bubblesEndStartSvgInlineSize: 248px;
+	--components-mainLayout-bubblesStartEndBlockSize: 232px;
+	--components-mainLayout-bubblesEndStartBlockSize: 232px;
+	--components-mainLayout-bubblesStartEndInsetInlineStart:
+		min(
+			calc(100% + var(--commons-container-paddingInline) * 2 - var(--components-mainLayout-bubblesStartEndSvgInlineSize)),
+			calc(var(--commons-container-maxWidth) + var(--commons-container-paddingInline) * 2 - var(--components-mainLayout-bubblesStartEndSvgInlineSize))
+		);
+	--components-mainLayout-bubblesStartEndInlineSize: calc(100% - var(--components-mainLayout-bubblesStartEndInsetInlineStart));
+	--components-mainLayout-bubblesStartEndSvgInsetInlineEnd: -1rem;
+	--components-mainLayout-backgroundImage: none;
 }

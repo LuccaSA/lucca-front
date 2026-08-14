@@ -1,6 +1,7 @@
+import { setStoryOptions } from '@/helpers/stories';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
-import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
+import { MAIN_LAYOUT_ILLUSTRATION_END_START, MAIN_LAYOUT_ILLUSTRATION_START_END, MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 interface MainLayoutAngularInAppLayoutStory {
@@ -12,6 +13,12 @@ interface MainLayoutAngularInAppLayoutStory {
 	contentOverflowing: boolean;
 	repeatContent: number;
 	repeatOverflow: number;
+	bubblesStartEnd: 1 | 2 | 3 | null;
+	bubblesEndStart: 1 | 2 | 3 | null;
+	illustrationStartEnd: string;
+	illustrationEndStart: string;
+	palette: string;
+	responsive: 'wideM' | '';
 }
 
 export default {
@@ -45,6 +52,48 @@ export default {
 		contentOverflowing: {
 			description: 'Permet de rendre un élément <lu-main-layout-block> scrollable horizontalement tout en conservant le comportement du reste du layout.',
 		},
+		bubblesStartEnd: {
+			options: [null, 1, 2, 3],
+			control: {
+				type: 'select',
+			},
+			description: 'Affiche des bulles décoratives dans le coin supérieur gauche.',
+		},
+		bubblesEndStart: {
+			options: [null, 1, 2, 3],
+			control: {
+				type: 'select',
+			},
+			description: 'Affiche des bulles décoratives dans le coin inférieur droit.',
+		},
+		illustrationStartEnd: {
+			options: setStoryOptions(MAIN_LAYOUT_ILLUSTRATION_START_END),
+			control: {
+				type: 'select',
+			},
+			description: 'Affiche une illustration dans le coin supérieur gauche.',
+		},
+		illustrationEndStart: {
+			options: setStoryOptions(MAIN_LAYOUT_ILLUSTRATION_END_START),
+			control: {
+				type: 'select',
+			},
+			description: 'Affiche une illustration dans le coin inférieur droit.',
+		},
+		palette: {
+			options: ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'],
+			control: {
+				type: 'select',
+			},
+			description: 'Applique une palette de couleurs au layout.',
+		},
+		responsive: {
+			options: ['', 'wideM'],
+			control: {
+				type: 'select',
+			},
+			description: 'Modifie le comportement responsive du layout.',
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -72,6 +121,12 @@ export default {
 			: ``;
 		const headerStickyParam = args.headerSticky ? ` headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? ` footerSticky` : ``;
+		const bubblesStartEndParam = args.bubblesStartEnd && !(args.bubblesStartEnd === 1 && args.illustrationStartEnd) ? (args.bubblesStartEnd === 1 ? ` bubblesStartEnd` : ` bubblesStartEnd="${args.bubblesStartEnd}"`) : ``;
+		const bubblesEndStartParam = args.bubblesEndStart && !(args.bubblesEndStart === 1 && args.illustrationEndStart) ? (args.bubblesEndStart === 1 ? ` bubblesEndStart` : ` bubblesEndStart="${args.bubblesEndStart}"`) : ``;
+		const illustrationStartEndParam = args.illustrationStartEnd ? ` illustrationStartEnd="${args.illustrationStartEnd}"` : ``;
+		const illustrationEndStartParam = args.illustrationEndStart ? ` illustrationEndStart="${args.illustrationEndStart}"` : ``;
+		const paletteParam = args.palette && args.palette !== 'none' ? ` palette="${args.palette}"` : ``;
+		const responsiveParam = args.responsive ? ` responsive="${args.responsive}"` : ``;
 		const sidebarContainer = args.sidebar
 			? `
 		<ng-container mainLayoutSidebar>
@@ -212,7 +267,7 @@ export default {
 	<ng-container appLayoutNavSide>
 		navSide
 	</ng-container>
-	<lu-main-layout${headerStickyParam}${footerStickyParam}>${sidebarContainer}${headerContainer}
+	<lu-main-layout${headerStickyParam}${footerStickyParam}${bubblesStartEndParam}${bubblesEndStartParam}${illustrationStartEndParam}${illustrationEndStartParam}${paletteParam}${responsiveParam}>${sidebarContainer}${headerContainer}
 		${content}
 		${footerContainer}
 	</lu-main-layout>
@@ -221,7 +276,7 @@ export default {
 `,
 		};
 	},
-} as Meta;
+} as Meta<MainLayoutAngularInAppLayoutStory>;
 
 export const Basic = {
 	args: {
@@ -233,5 +288,11 @@ export const Basic = {
 		contentOverflowing: false,
 		repeatOverflow: 5,
 		repeatContent: 1,
+		bubblesStartEnd: null,
+		bubblesEndStart: null,
+		illustrationStartEnd: '',
+		illustrationEndStart: '',
+		palette: 'none',
+		responsive: '',
 	},
 };

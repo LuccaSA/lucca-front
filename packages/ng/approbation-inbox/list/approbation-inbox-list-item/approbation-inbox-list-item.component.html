@@ -9,8 +9,8 @@
 }
 <div class="approbationInbox-list-content-items-item-content">
 	<div class="approbationInbox-list-content-items-item-content-info" [class.mod-center]="center()">
-		<div class="approbationInbox-list-content-items-item-content-info-illustration">
-			<ng-content select="[approbationInboxListItemIllustration]" />
+		<div class="approbationInbox-list-content-items-item-content-info-visual">
+			<ng-content select="[approbationInboxListItemVisual]" />
 		</div>
 		<div class="approbationInbox-list-content-items-item-content-info-main">
 			<div class="approbationInbox-list-content-items-item-content-info-main-title" #titleSlot>
@@ -18,6 +18,8 @@
 			</div>
 			<ng-content />
 		</div>
-		<div class="approbationInbox-list-content-items-item-content-info-data"><ng-content select="[approbationInboxListItemData]" /></div>
+		<div class="approbationInbox-list-content-items-item-content-info-rightContent">
+			<ng-content select="[approbationInboxListItemRightContent]" />
+		</div>
 	</div>
 </div>

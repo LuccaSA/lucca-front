@@ -1,9 +1,9 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
 import { generateId } from '@lucca-front/ng/core';
+import { LuDialogRef } from '@lucca-front/ng/dialog';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { NgTemplateOutlet } from '@angular/common';
-import { LuDialogRef } from '@lucca-front/ng/dialog';
 
 @Component({
 	selector: 'lu-approbation-inbox-detail-header',
@@ -22,7 +22,6 @@ export class ApprobationInboxHeaderComponent {
 	readonly delegation = input<string | null>();
 
 	readonly actions = viewChild<TemplateRef<unknown>>('actionsTpl');
-	readonly actionsMore = viewChild<TemplateRef<unknown>>('actionsMoreTpl');
 
 	readonly titleId = `approbationInboxListTitle-${generateId()}`;
 }

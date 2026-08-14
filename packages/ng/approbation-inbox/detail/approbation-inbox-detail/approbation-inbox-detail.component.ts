@@ -1,7 +1,8 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, input, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
-import { ContainerComponent } from '@lucca-front/ng/container';
-import { ApprobationInboxHeaderComponent } from '../approbation-inbox-detail-header/approbation-inbox-detail-header.component';
 import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, inject, input, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
+import { ContainerComponent } from '@lucca-front/ng/container';
+import { LuDialogRef } from '@lucca-front/ng/dialog';
+import { ApprobationInboxHeaderComponent } from '../approbation-inbox-detail-header/approbation-inbox-detail-header.component';
 
 @Component({
 	selector: 'lu-approbation-inbox-detail',
@@ -13,11 +14,14 @@ import { NgTemplateOutlet } from '@angular/common';
 		class: 'approbationInbox-detail',
 		role: 'region',
 		'[attr.aria-labelledby]': 'titleId()',
+		'[class.mod-insideDialog]': 'insideDialog()',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxDetailComponent {
-	readonly insideDialog = input(false, { transform: booleanAttribute });
+	protected readonly dialogRef = inject(LuDialogRef, { optional: true });
+
+	readonly insideDialog = input(this.dialogRef !== null, { transform: booleanAttribute });
 
 	readonly headerRef = contentChild(ApprobationInboxHeaderComponent);
 

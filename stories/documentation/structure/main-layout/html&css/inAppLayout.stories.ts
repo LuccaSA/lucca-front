@@ -202,7 +202,7 @@ export default {
 `,
 		};
 	},
-} as Meta;
+} as Meta<MainLayoutHTMLInAppLayoutStory>;
 
 export const Basic = {
 	args: {

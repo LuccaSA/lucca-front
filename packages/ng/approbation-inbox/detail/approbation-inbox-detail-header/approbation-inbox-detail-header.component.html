@@ -21,12 +21,6 @@
 			<ng-template #actionsTpl>
 				<ng-content select="[approbationInboxDetailActions]" />
 			</ng-template>
-			<span class="approbationInbox-detail-header-main-actions-more">
-				<ng-container *ngTemplateOutlet="actionsMoreTpl" />
-				<ng-template #actionsMoreTpl>
-					<ng-content select="[approbationInboxDetailActionsMore]" />
-				</ng-template>
-			</span>
 		</div>
 	}
 </div>

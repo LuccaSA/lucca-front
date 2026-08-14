@@ -17,6 +17,10 @@
 				@include wide;
 			}
 		}
+
+		@include media.max('S') {
+			@include narrow;
+		}
 	}
 
 	@layer mods {

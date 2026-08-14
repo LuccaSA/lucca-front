@@ -1,3 +1,4 @@
+import { generateInputs } from '@/helpers/stories';
 import { ApprobationInboxDetailComponent, ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderComponent } from '@lucca-front/ng/approbation-inbox';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
@@ -6,7 +7,6 @@ import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/Detail',
@@ -88,7 +88,6 @@ export default {
 			: ``;
 		const moreActionsTpl = moreActions
 			? `
-		<ng-container approbationInboxDetailActionsMore>
 			<button luButton type="button" [luDropdown]="dropdownOtherOptions">
 				<lu-icon icon="menuDots" alt="Autres options" />
 			</button>
@@ -98,8 +97,7 @@ export default {
 					<lu-dropdown-item><button lu-dropdown-action type="button">Ipsum</button></lu-dropdown-item>
 					<lu-dropdown-item><button lu-dropdown-action type="button">Dolor</button></lu-dropdown-item>
 				</lu-dropdown-menu>
-			</ng-template>
-		</ng-container>`
+			</ng-template>`
 			: ``;
 		const headerTpl =
 			blockCount != 0
@@ -107,8 +105,8 @@ export default {
 	<lu-approbation-inbox-detail-header approbationInboxDetailHeader${generateInputs(args, argTypes)}>${headerIllustrationTpl}${headerContentTpl}
 		<ng-container approbationInboxDetailActions>
 			<button luButton type="button">Approuver</button>
-			<button luButton type="button">Refuser</button>
-		</ng-container>${moreActionsTpl}
+			<button luButton type="button">Refuser</button>${moreActionsTpl}
+		</ng-container>
 	</lu-approbation-inbox-detail-header>`
 				: ``;
 		const contentDefaultTpl =

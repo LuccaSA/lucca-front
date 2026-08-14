@@ -137,7 +137,7 @@ export default {
 `,
 		};
 	},
-} as Meta;
+} as Meta<MainLayoutHTMLBasicStory>;
 
 export const Basic = {
 	args: {
