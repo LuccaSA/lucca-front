@@ -54,7 +54,7 @@ let nextId = 0;
 		'(focus)': 'onFocus()',
 		'(blur)': 'onBlur()',
 		'(keydown.escape)': 'onEscape($event)',
-		'[class]': '"tooltip_trigger"',
+		class: 'tooltip_trigger',
 		'[class.is-whenEllipsis]': 'luTooltipWhenEllipsis()',
 	},
 })
