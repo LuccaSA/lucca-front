@@ -33,7 +33,7 @@ export interface SavedView {
 	selector: 'sb-rename-view-dialog',
 	template: `
 		<lu-dialog>
-			<lu-dialog-header>Modifier le nom</lu-dialog-header>
+			<lu-dialog-header><h1>Modifier le nom de la vue</h1></lu-dialog-header>
 			<lu-dialog-content>
 				<lu-form-field label="Nom de la vue">
 					<lu-text-input [ngModel]="view.name" />
@@ -41,7 +41,7 @@ export interface SavedView {
 			</lu-dialog-content>
 			<lu-dialog-footer>
 				<div class="footer-actions">
-					<button type="button" luButton (click)="ref.close()">Modifier le nom</button>
+					<button type="button" luButton (click)="ref.close()">Modifier</button>
 					<button type="button" luButton="ghost" luDialogDismiss>Annuler</button>
 				</div>
 			</lu-dialog-footer>
@@ -63,11 +63,11 @@ export class RenameViewDialogComponent {
 	selector: 'sb-delete-view-dialog',
 	template: `
 		<lu-dialog>
-			<lu-dialog-header>Supprimer la vue ?</lu-dialog-header>
-			<lu-dialog-content>Si vous supprimez cette vue, elle ne sera plus accessible.</lu-dialog-content>
+			<lu-dialog-header><h1>Supprimer la vue ?</h1></lu-dialog-header>
+			<lu-dialog-content></lu-dialog-content>
 			<lu-dialog-footer>
 				<div class="footer-actions">
-					<button type="button" luButton (click)="ref.close()">Supprimer la vue</button>
+					<button type="button" palette="critical" luButton (click)="ref.close()">Supprimer</button>
 					<button type="button" luButton="ghost" luDialogDismiss>Annuler</button>
 				</div>
 			</lu-dialog-footer>
