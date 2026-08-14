@@ -10,8 +10,6 @@
 	--components-readMore-link-insetBlockEnd: 0;
 }
 
-@mixin preserveLineBreaks {
-	.readMore-content {
-		white-space: pre-line;
-	}
+@mixin plainText {
+	--components-readMore-content-whiteSpace: pre-line;
 }
