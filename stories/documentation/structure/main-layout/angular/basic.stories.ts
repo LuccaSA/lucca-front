@@ -65,6 +65,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			if: { arg: 'sidebar', truthy: false },
 			description: 'Affiche des bulles décoratives dans le coin inférieur droit.',
 		},
 		illustrationStartEnd: {
@@ -79,6 +80,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			if: { arg: 'sidebar', truthy: false },
 			description: 'Affiche une illustration dans le coin inférieur droit.',
 		},
 		palette: {
@@ -120,8 +122,10 @@ export default {
 			: ``;
 		const headerStickyParam = args.headerSticky ? ` headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? ` footerSticky` : ``;
-		const bubblesStartEndParam = args.bubblesStartEnd && !(args.bubblesStartEnd === 1 && args.illustrationStartEnd) ? (args.bubblesStartEnd === 1 ? ` bubblesStartEnd` : ` bubblesStartEnd="${args.bubblesStartEnd}"`) : ``;
-		const bubblesEndStartParam = args.bubblesEndStart && !(args.bubblesEndStart === 1 && args.illustrationEndStart) ? (args.bubblesEndStart === 1 ? ` bubblesEndStart` : ` bubblesEndStart="${args.bubblesEndStart}"`) : ``;
+		const bubblesStartEndParam =
+			args.bubblesStartEnd && !(args.bubblesStartEnd === 1 && args.illustrationStartEnd) ? (args.bubblesStartEnd === 1 ? ` bubblesStartEnd` : ` bubblesStartEnd="${args.bubblesStartEnd}"`) : ``;
+		const bubblesEndStartParam =
+			args.bubblesEndStart && !(args.bubblesEndStart === 1 && args.illustrationEndStart) ? (args.bubblesEndStart === 1 ? ` bubblesEndStart` : ` bubblesEndStart="${args.bubblesEndStart}"`) : ``;
 		const illustrationStartEndParam = args.illustrationStartEnd ? ` illustrationStartEnd="${args.illustrationStartEnd}"` : ``;
 		const illustrationEndStartParam = args.illustrationEndStart ? ` illustrationEndStart="${args.illustrationEndStart}"` : ``;
 		const paletteParam = args.palette && args.palette !== 'none' ? ` palette="${args.palette}"` : ``;
@@ -221,7 +225,7 @@ export const Basic = {
 		header: true,
 		headerSticky: false,
 		footer: true,
-		footerSticky: true,
+		footerSticky: false,
 		sidebar: false,
 		contentOverflowing: false,
 		repeatOverflow: 5,

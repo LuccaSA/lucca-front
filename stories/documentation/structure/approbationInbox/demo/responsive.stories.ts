@@ -110,7 +110,7 @@ export default {
 					<div class="banner"></div>
 				</ng-container>
 				<ng-container appLayoutNavSide>
-					<div class="navSide mod-compact"></div>
+					<div class="navSide"></div>
 				</ng-container>
 		<lu-main-layout responsive="wideM" bubblesStartEnd palette="cleemy">
 				<ng-container mainLayoutSidebar>
