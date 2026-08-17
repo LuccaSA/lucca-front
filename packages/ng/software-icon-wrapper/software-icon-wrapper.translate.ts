@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { LuTranslation } from '@lucca-front/ng/core';
+import { LuPluralForms, LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS = new InjectionToken('LuSoftwareIconWrapperTranslations', {
@@ -7,7 +7,7 @@ export const LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS = new InjectionToken('LuSoftw
 });
 
 export type SoftwareIconWrapperTranslations = {
-	seeMore: string;
+	seeMore: LuPluralForms;
 };
 
 export const luSoftwareIconWrapperTranslations: LuTranslation<SoftwareIconWrapperTranslations> = Translations;

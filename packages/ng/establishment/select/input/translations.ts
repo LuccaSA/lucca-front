@@ -1,29 +1,29 @@
-﻿export const Translations = {
+export const Translations = {
 	pt: {
-		establishments: 'estabelecimentos',
+		establishments: { other: 'estabelecimentos' },
 	},
 	'nl-BE': {
-		establishments: 'vestigingen',
+		establishments: { other: 'vestigingen' },
 	},
 	nl: {
-		establishments: 'vestigingen',
+		establishments: { other: 'vestigingen' },
 	},
 	it: {
-		establishments: 'strutture',
+		establishments: { other: 'strutture' },
 	},
 	de: {
-		establishments: 'Betriebe',
+		establishments: { other: 'Betriebe' },
 	},
 	fr: {
-		establishments: 'établissements',
+		establishments: { other: 'établissements' },
 	},
 	es: {
-		establishments: 'establecimientos',
+		establishments: { other: 'establecimientos' },
 	},
 	en: {
-		establishments: 'establishments',
+		establishments: { other: 'establishments' },
 	},
 	pl: {
-		establishments: 'placówki',
+		establishments: { few: 'placówki', many: 'placówek', other: 'placówki' },
 	},
 };
