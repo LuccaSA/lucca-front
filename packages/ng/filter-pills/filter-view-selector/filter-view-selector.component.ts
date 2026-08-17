@@ -1,7 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, computed, input, model, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -18,7 +18,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-filter-view-selector',
-	imports: [ButtonComponent, IconComponent, PopoverDirective, FormLabelComponent, LuDropdownTriggerDirective, DropdownMenuComponent, DropdownItemComponent, DropdownActionComponent],
+	imports: [ButtonComponent, IconComponent, PopoverDirective, FormLabelComponent, LuDropdownTriggerDirective, DropdownMenuComponent, DropdownItemComponent, DropdownActionComponent, IntlParamsPipe],
 	templateUrl: './filter-view-selector.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,

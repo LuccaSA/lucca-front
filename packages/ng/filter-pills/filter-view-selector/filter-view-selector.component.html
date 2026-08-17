@@ -25,15 +25,8 @@
 				<span class="filterPill_popover-content-option-input">
 					<input type="radio" [attr.id]="inputId(index)" [attr.name]="groupName" [checked]="isSelected(view)" (change)="selectView(view)" />
 				</span>
-				<button
-					type="button"
-					class="filterPill_popover-content-option-actions"
-					size="XS"
-					luButton="ghost"
-					[attr.aria-label]="viewOptionsLabel(view)"
-					[luDropdown]="optionsDropdown"
-				>
-					<lu-icon icon="menuDots" [alt]="viewOptionsLabel(view)" />
+				<button type="button" class="filterPill_popover-content-option-actions" size="XS" luButton="ghost" [luDropdown]="optionsDropdown">
+					<lu-icon icon="menuDots" [alt]="intl().viewOptions | intlParams: { viewName: viewLabel()(view) }" />
 				</button>
 
 				<ng-template #optionsDropdown>
