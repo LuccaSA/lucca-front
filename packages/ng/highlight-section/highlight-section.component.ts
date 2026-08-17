@@ -15,8 +15,8 @@ const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/hi
 	imports: [LuSafeExternalSvgPipe],
 	host: {
 		class: 'highlightSection',
-		'[class.mod-light]': 'lightClass',
-		'[class.mod-dark]': 'darkClass',
+		'[class.mod-light]': 'this.theme() === "light"',
+		'[class.mod-dark]': 'this.theme() === "dark"',
 	},
 })
 export class HighlightSectionComponent {
@@ -45,16 +45,6 @@ export class HighlightSectionComponent {
 	 * An URL can be apply for custom images
 	 */
 	readonly illustration = input<HighlightSectionIllustration | string>();
-
-	get lightClass() {
-		return this.theme() === 'light';
-	}
-
-	get darkClass() {
-		return this.theme() === 'dark';
-	}
-
-	readonly bubbleTheme = computed(() => (this.theme() === 'dark' ? 'dark' : 'light'));
 
 	readonly bubbleStartSrc = computed(() => `${ILLUSTRATION_CDN_PATH}/bubbles-${this.bubbleStart()}.svg`);
 	readonly bubbleEndSrc = computed(() => `${ILLUSTRATION_CDN_PATH}/bubbles-${this.bubbleEnd()}.svg`);
