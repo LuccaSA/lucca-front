@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, input, model, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, model, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
@@ -24,10 +24,13 @@ let nextId = 0;
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'filterBar-viewSelector',
+		'(keydown.arrowDown)': 'popoverRef()?.openPopover()',
 	},
 })
 export class FilterViewSelectorComponent<T> {
 	readonly intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
+
+	readonly popoverRef = viewChild(PopoverDirective);
 
 	/** The list of saved views to pick from. */
 	readonly views = input.required<T[]>();
@@ -82,5 +85,6 @@ export class FilterViewSelectorComponent<T> {
 
 	protected selectView(view: T): void {
 		this.selectedView.set(view);
+		this.popoverRef()?.close();
 	}
 }

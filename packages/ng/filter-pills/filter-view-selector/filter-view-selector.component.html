@@ -5,6 +5,7 @@
 	disclosure
 	luPopoverNoCloseButton
 	[luPopover2]="viewsPopover"
+	(keydown.arrowDown)="arrowDown(viewsPopover)"
 	[customPositions]="popoverPositions"
 >
 	@if (selectedLabel(); as label) {
@@ -38,13 +39,13 @@
 				<ng-template #optionsDropdown>
 					<lu-dropdown-menu>
 						<lu-dropdown-item>
-							<button type="button" lu-dropdown-action (click)="renameView.emit(view)">
+							<button type="button" lu-dropdown-action (click)="renameView.emit(view); popoverRef()?.close()">
 								<lu-icon icon="edit" />
 								{{ intl().renameView }}
 							</button>
 						</lu-dropdown-item>
 						<lu-dropdown-item>
-							<button type="button" lu-dropdown-action critical (click)="deleteView.emit(view)">
+							<button type="button" lu-dropdown-action critical (click)="deleteView.emit(view); popoverRef()?.close()">
 								<lu-icon icon="trash" />
 								{{ intl().deleteView }}
 							</button>
