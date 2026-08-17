@@ -64,7 +64,9 @@ export class RenameViewDialogComponent {
 	template: `
 		<lu-dialog>
 			<lu-dialog-header><h1>Supprimer la vue ?</h1></lu-dialog-header>
-			<lu-dialog-content></lu-dialog-content>
+			<lu-dialog-content
+				><p>Si vous supprimez la vue « {{ view.name }} », elle ne sera plus accessible.</p>
+			</lu-dialog-content>
 			<lu-dialog-footer>
 				<div class="footer-actions">
 					<button type="button" palette="critical" luButton (click)="ref.close()">Supprimer</button>
