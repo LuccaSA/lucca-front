@@ -111,6 +111,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
 	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
+	public singleOptionForDisplay: Signal<T | undefined> = computed(() => this.valueSignal()?.[0]);
 	override _value: T[] = [];
 
 	#listFormat = new Intl.ListFormat(inject(LOCALE_ID));
