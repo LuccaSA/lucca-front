@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { HighlightSectionBubble, HighlightSectionIllustration, HighlightSectionPalette, HighlightSectionTheme } from './highlight-section.type';
@@ -17,11 +17,10 @@ const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/hi
 		class: 'highlightSection',
 		'[class.mod-light]': 'this.theme() === "light"',
 		'[class.mod-dark]': 'this.theme() === "dark"',
+		'[class]': '"palette-" + palette()',
 	},
 })
 export class HighlightSectionComponent {
-	#luClass = inject(LuClass);
-
 	/**
 	 * Define a specific theme white light or dark. (White by default)
 	 */
@@ -53,12 +52,4 @@ export class HighlightSectionComponent {
 		const illustration = this.illustration() ?? '';
 		return illustration.includes('/') ? illustration : `${ILLUSTRATION_CDN_PATH}/${illustration}.svg`;
 	});
-
-	constructor() {
-		effect(() => {
-			this.#luClass.setState({
-				[`palette-${this.palette()}`]: !!this.palette(),
-			});
-		});
-	}
 }
