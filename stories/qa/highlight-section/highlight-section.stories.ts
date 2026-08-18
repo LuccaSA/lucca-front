@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { ButtonComponent } from '@lucca-front/ng/button';
 import { HighlightSectionComponent } from '@lucca-front/ng/highlight-section';
-import { LinkComponent } from '@lucca-front/ng/link';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'highlight-section-stories',
 	templateUrl: './highlight-section.stories.html',
-	imports: [HighlightSectionComponent, ButtonComponent, LinkComponent],
+	imports: [HighlightSectionComponent, LuSafeExternalSvgPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HighlightSectionStory {}
