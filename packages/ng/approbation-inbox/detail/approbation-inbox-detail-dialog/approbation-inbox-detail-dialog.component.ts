@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ContainerComponent } from '@lucca-front/ng/container';
 import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, injectDialogData } from '@lucca-front/ng/dialog';
 import { ApprobationInboxDetailComponent } from '../approbation-inbox-detail/approbation-inbox-detail.component';
-import { NgTemplateOutlet } from '@angular/common';
-import { ContainerComponent } from '@lucca-front/ng/container';
 
 @Component({
 	selector: 'lu-approbation-inbox-detail-dialog',
@@ -13,4 +13,6 @@ import { ContainerComponent } from '@lucca-front/ng/container';
 })
 export class ApprobationInboxDetailDialogComponent {
 	dialogData = injectDialogData<{ detailsRef: ApprobationInboxDetailComponent }>();
+
+	readonly heading = input.required<string>();
 }
