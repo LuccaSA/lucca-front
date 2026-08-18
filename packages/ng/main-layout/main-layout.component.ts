@@ -31,9 +31,11 @@ function bubblesCountAttribute(value: unknown): 1 | 2 | 3 | null {
 	],
 })
 export class MainLayoutComponent {
-	readonly domain = 'https://tmp.vincent-valentin.name';
-	readonly path = '/lucca/cdn-main-layout-9/';
+	readonly domain = 'https://cdn.lucca.fr';
+	readonly path = '/transverse/prisme/visuals/main-layout/';
 	readonly extension = '.svg';
+
+	// https://cdn.lucca.fr/transverse/prisme/visuals/main-layout/bubbles/endStart-1.svg
 
 	/**
 	 * Sticks header on the screen

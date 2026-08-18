@@ -88,8 +88,8 @@ export default {
 		},
 	},
 	render: (args: MainLayoutHTMLInAppLayoutStory) => {
-		const domain = 'https://tmp.vincent-valentin.name';
-		const path = '/lucca/cdn-main-layout-9/';
+		const domain = 'https://cdn.lucca.fr';
+		const path = '/transverse/prisme/visuals/main-layout/';
 		const extension = '.svg';
 
 		const illustrationStartEndUrl = args.illustrationStartEnd

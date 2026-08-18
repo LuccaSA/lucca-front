@@ -14,5 +14,5 @@ import { ApprobationInboxDetailComponent } from '../approbation-inbox-detail/app
 export class ApprobationInboxDetailDialogComponent {
 	dialogData = injectDialogData<{ detailsRef: ApprobationInboxDetailComponent }>();
 
-	readonly heading = input.required<string>();
+	readonly label = input.required<string>();
 }
