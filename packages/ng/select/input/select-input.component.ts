@@ -1,6 +1,7 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Overlay } from '@angular/cdk/overlay';
 import {
+	afterNextRender,
 	AfterViewInit,
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -11,6 +12,8 @@ import {
 	ElementRef,
 	EventEmitter,
 	forwardRef,
+	inject,
+	Injector,
 	input,
 	linkedSignal,
 	OnDestroy,
@@ -44,6 +47,7 @@ import { ALuSelectInput } from './select-input.model';
 })
 export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInput<T, TPicker> implements ControlValueAccessor, AfterViewInit, OnDestroy {
 	private readonly _vcDisplayContainer = viewChild('display', { read: ViewContainerRef });
+	readonly #injector = inject(Injector);
 
 	tabindex = 0;
 
@@ -168,12 +172,13 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 		this._picker.setValue(this.value);
 
 		// strange bug where the view renderred in the displayer was only injected after a hover
-		// no matter how many cdr.markforchack i added
-		// but with a timeout it works
-		// shrug emoji
-		setTimeout(() => {
-			this._changeDetectorRef.markForCheck();
-		}, 1);
+		// unless we trigger another change detection cycle right after the first render
+		afterNextRender(
+			() => {
+				this._changeDetectorRef.markForCheck();
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	ngOnDestroy() {

@@ -410,26 +410,18 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.inputElementRef()?.nativeElement.focus();
 	}
 
+	// Re-entrancy guard: opening the panel (focus, clueChanged, overlay creation) can synchronously
+	// trigger openPanel again, which used to cause a double tap.
+	#isOpeningPanel = false;
+
 	openPanel(clue: string = ''): void {
-		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value) {
+		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value || this.#isOpeningPanel) {
 			return;
 		}
 
-		this.focusInput();
-
-		/**
-		 * I know what you're thinking, but let me explain:
-		 *
-		 * When setting isPanelOpen$'s internal value to true and then calling clueChanged,
-		 * it creates a race condition which calls this method again from inside clueChanged's code before
-		 * the change is applied inside the Subject, meaning this is called twice and we get a double tap.
-		 *
-		 * The only easy solution is this (or store yet another boolean like "isOpeningPanel" which is, imo, equally ugly.
-		 */
-		setTimeout(() => {
-			if (this.isPanelOpen) {
-				return;
-			}
+		this.#isOpeningPanel = true;
+		try {
+			this.focusInput();
 
 			const isSearchable = this.searchable;
 			this.isPanelOpen$.next(true);
@@ -441,7 +433,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 			this._panelRef = this.buildPanelRef();
 			this.bindInputToPanelRefEvents();
-		});
+		} finally {
+			this.#isOpeningPanel = false;
+		}
 	}
 
 	emitAddOption(): void {
