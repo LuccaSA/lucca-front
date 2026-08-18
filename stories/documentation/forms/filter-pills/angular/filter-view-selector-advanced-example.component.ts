@@ -2,6 +2,7 @@ import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/s
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import {
 	DialogComponent,
@@ -145,6 +146,7 @@ const emptyState = (): FilterState => ({
 		DateRangeInputComponent,
 		ButtonComponent,
 		LuMultiSelectInputComponent,
+		LuCoreSelectTotalCountDirective,
 		LuSimpleSelectInputComponent,
 		FilterLegumesPipe,
 		FormsModule,
