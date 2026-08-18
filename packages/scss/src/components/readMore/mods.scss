@@ -9,3 +9,7 @@
 @mixin linkReset {
 	--components-readMore-link-insetBlockEnd: 0;
 }
+
+@mixin plainText {
+	--components-readMore-content-whiteSpace: pre-line;
+}

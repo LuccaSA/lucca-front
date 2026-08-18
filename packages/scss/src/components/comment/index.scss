@@ -17,6 +17,10 @@
 			@include noAvatar;
 		}
 
+		&.mod-plainText {
+			@include plainText;
+		}
+
 		&:has(.comment-infos) {
 			@include container.max(25rem, $name: 'comment') {
 				@include narrow;
