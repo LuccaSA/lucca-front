@@ -172,9 +172,14 @@ export class FilterPillComponent {
 		this.inputComponentRef()?.onFilterPillOpened?.();
 	}
 
-	closePopover = () => {
-		this.popoverRef()?.close();
+	popoverClosed(): void {
 		this.inputComponentRef()?.onFilterPillClosed?.();
+	}
+
+	closePopover = () => {
+		// `onFilterPillClosed` is notified by the `luPopoverClosed` binding, which also covers
+		// closes the input never asked for (outside click, Escape handled by the popover)
+		this.popoverRef()?.close();
 	};
 
 	updatePosition = () => {
