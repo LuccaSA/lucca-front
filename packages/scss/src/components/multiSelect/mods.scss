@@ -45,7 +45,7 @@
 	padding: 0;
 	gap: 0;
 	inline-size: 26.5rem;
-	max-inline-size: calc(100vw - 2.5rem);
+	max-inline-size: calc(100vi - 2.5rem);
 
 	.multipleSelect-displayer {
 		box-shadow: 0 0 0 1px var(--components-multiSelect-border-color);
@@ -53,7 +53,7 @@
 		padding: var(--components-multiSelect-padding);
 		z-index: 1;
 		position: relative;
-		max-block-size: min(14rem, 80vh);
+		max-block-size: min(14rem, 80vb);
 		overflow: auto;
 	}
 
