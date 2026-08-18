@@ -27,8 +27,11 @@
 							group-action
 							type="button"
 							class="link"
+							luCoreSelectPanelElement
+							[elementId]="selectId + '-group-' + group.key + '-action'"
 							[disabled]="groupLoadingKeys().has(group.key)"
 							(click)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
+							(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
 						>
 							@if (groupLoadingKeys().has(group.key)) {
 								<span class="loading"></span>

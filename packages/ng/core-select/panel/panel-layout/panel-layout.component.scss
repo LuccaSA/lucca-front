@@ -58,4 +58,13 @@
 	.lu-select-panel-layout-content:focus-within {
 		outline: none;
 	}
+
+	// When the panel is rendered inline inside a hosting popover (filter pill, impersonation),
+	// that popover already provides the floating surface (elevation shadow + scale-in animation).
+	// Drop the panel's own surface chrome to avoid a shadow-inside-a-shadow and a doubled open animation.
+	:where(.mod-filterPill, .mod-impersonation) .lu-select-panel-layout-content {
+		box-shadow: none;
+		border-radius: 0;
+		animation: none;
+	}
 }

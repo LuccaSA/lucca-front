@@ -140,6 +140,12 @@
 		}
 
 		&.mod-multiple {
+			// Grouped options keep the same inline alignment as ungrouped ones (checkbox + label),
+			// so the extra group indentation from `@mixin group` must not apply in multi-select.
+			.listboxOption[role='group'] > .listboxOptionWrapper {
+				--components-listboxOptionWrapper-childrenPaddingInlineStart: var(--pr-t-spacings-100);
+			}
+
 			&,
 			.listboxOptionWrapper {
 				@include multiple;
