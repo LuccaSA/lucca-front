@@ -12,3 +12,22 @@
 		margin-inline: calc(-1 * var(--pr-t-spacings-50));
 	}
 }
+
+@layer mods {
+	// The keyboard/hover highlight class now sits on this component's own host (via the
+	// panel-element host directive), not on an ancestor `.optionItem`, so the shared
+	// `:host-context(.optionItem.is-highlighted)` rule from `optionItemStyle` no longer matches.
+	.optionItem-value {
+		&:hover,
+		:host(.is-highlighted) & {
+			background-color: var(--palettes-neutral-50);
+		}
+
+		&.is-selected {
+			&:hover,
+			:host(.is-highlighted) & {
+				background-color: var(--palettes-100, var(--palettes-product-100));
+			}
+		}
+	}
+}

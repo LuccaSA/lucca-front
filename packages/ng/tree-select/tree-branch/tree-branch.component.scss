@@ -1,5 +1,15 @@
 @layer components {
 	lu-tree-branch {
+		// Keep a uniform vertical rhythm between every row: the option row and the nested
+		// children wrapper are both children of `lu-select-option`, so it must stack them with
+		// the same gap the listbox wrapper uses between siblings (otherwise a parent sits flush
+		// against its first child while siblings are spaced apart).
+		> lu-select-option {
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-50);
+		}
+
 		// The onlyParent/onlyChildren affordances stay hidden until the row is hovered or
 		// keyboard-highlighted. Indentation is handled by the listbox wrapper level, not here.
 		.optionItem-icons {

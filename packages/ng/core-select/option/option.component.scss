@@ -24,6 +24,16 @@
 }
 
 @layer components {
+	// Holds the projected option template as normal block flow (so inline content flows and
+	// block content stacks), while taking the remaining width of the flex `.listboxOption-content`
+	// row next to the checkbox and the tree affordance icons.
+	.optionItem-body {
+		display: block;
+		flex: 1 1 auto;
+		min-inline-size: 0;
+		overflow-wrap: anywhere;
+	}
+
 	.optionItem-icons {
 		display: flex;
 		gap: var(--pr-t-spacings-50);

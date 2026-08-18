@@ -15,15 +15,19 @@
 }
 
 <ng-template #optionContent>
-	<ng-container *luOptionOutlet="optionTpl(); value: selectableItem.option()" />
+	<!-- Normal-flow block so multi-element option templates (e.g. a name over a subtitle) stack
+	instead of being spread across the flex row of `.listboxOption-content`. -->
+	<div class="optionItem-body">
+		<ng-container *luOptionOutlet="optionTpl(); value: selectableItem.option()" />
 
-	@if (groupTemplateLocation() === "option") {
-		@if (grouping(); as grouping) {
-			<div class="optionItem-value-group">
-				<ng-container *luPortal="grouping.content; context: { $implicit: selectableItem.option() | luOptionGroup: grouping.selector }" />
-			</div>
+		@if (groupTemplateLocation() === "option") {
+			@if (grouping(); as grouping) {
+				<div class="optionItem-value-group">
+					<ng-container *luPortal="grouping.content; context: { $implicit: selectableItem.option() | luOptionGroup: grouping.selector }" />
+				</div>
+			}
 		}
-	}
+	</div>
 
 	@if (hasChildren() && !selectableItem.disabled) {
 		<div class="optionItem-icons">
