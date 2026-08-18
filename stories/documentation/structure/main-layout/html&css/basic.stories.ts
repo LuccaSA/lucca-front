@@ -1,4 +1,8 @@
-import { Meta } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
+import { HttpClientModule } from '@angular/common/http';
+import { MAIN_LAYOUT_ILLUSTRATION_END_START, MAIN_LAYOUT_ILLUSTRATION_START_END } from '@lucca-front/ng/main-layout';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 interface MainLayoutHTMLBasicStory {
 	header: boolean;
@@ -9,10 +13,21 @@ interface MainLayoutHTMLBasicStory {
 	contentOverflowing: boolean;
 	repeatContent: number;
 	repeatOverflow: number;
+	bubblesStartEnd: 1 | 2 | 3 | null;
+	bubblesEndStart: 1 | 2 | 3 | null;
+	illustrationStartEnd: string;
+	illustrationEndStart: string;
+	palette: string;
+	responsive: 'wideM' | '';
 }
 
 export default {
 	title: 'Documentation/Structure/Main Layout/HTML&CSS/Basic',
+	decorators: [
+		moduleMetadata({
+			imports: [LuSafeExternalSvgPipe, HttpClientModule],
+		}),
+	],
 	argTypes: {
 		headerSticky: {
 			if: { arg: 'header', truthy: true },
@@ -27,8 +42,106 @@ export default {
 			control: { type: 'range', min: 1, max: 10 },
 			if: { arg: 'contentOverflowing', truthy: true },
 		},
+		bubblesStartEnd: {
+			options: [null, 1, 2, 3],
+			control: {
+				type: 'select',
+			},
+			description: 'Affiche des bulles décoratives dans le coin supérieur gauche.',
+		},
+		bubblesEndStart: {
+			options: [null, 1, 2, 3],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'sidebar', truthy: false },
+			description: 'Affiche des bulles décoratives dans le coin inférieur droit.',
+		},
+		illustrationStartEnd: {
+			options: setStoryOptions(MAIN_LAYOUT_ILLUSTRATION_START_END),
+			control: {
+				type: 'select',
+			},
+			description: 'Affiche une illustration dans le coin supérieur gauche.',
+		},
+		illustrationEndStart: {
+			options: setStoryOptions(MAIN_LAYOUT_ILLUSTRATION_END_START),
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'sidebar', truthy: false },
+			description: 'Affiche une illustration dans le coin inférieur droit.',
+		},
+		palette: {
+			options: ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'],
+			control: {
+				type: 'select',
+			},
+			description: 'Applique une palette de couleurs au layout.',
+		},
+		responsive: {
+			options: ['', 'wideM'],
+			control: {
+				type: 'select',
+			},
+			description: 'Modifie le comportement responsive du layout.',
+		},
 	},
 	render: (args: MainLayoutHTMLBasicStory) => {
+		const domain = 'https://cdn.lucca.fr';
+		const path = '/transverse/prisme/visuals/main-layout/';
+		const extension = '.svg';
+
+		const illustrationStartEndUrl = args.illustrationStartEnd
+			? args.illustrationStartEnd.startsWith('https://') || args.illustrationStartEnd.startsWith('/')
+				? args.illustrationStartEnd
+				: `${domain}${path}illustrations/startEnd/${args.illustrationStartEnd}${extension}`
+			: null;
+		const illustrationEndStartUrl = args.illustrationEndStart
+			? args.illustrationEndStart.startsWith('https://') || args.illustrationEndStart.startsWith('/')
+				? args.illustrationEndStart
+				: `${domain}${path}illustrations/endStart/${args.illustrationEndStart}${extension}`
+			: null;
+
+		const bubblesIllustrationStartEnd = !args.bubblesStartEnd && args.illustrationStartEnd ? 1 : args.bubblesStartEnd;
+		const bubblesIllustrationEndStart = !args.bubblesEndStart && args.illustrationEndStart ? 1 : args.bubblesEndStart;
+
+		const bubblesStartEndContainer =
+			bubblesIllustrationStartEnd || illustrationStartEndUrl
+				? `
+			<div class="mainLayout-bubblesStartEnd">${
+				bubblesIllustrationStartEnd
+					? `
+				<div aria-hidden="true" [innerHtml]="'${domain}${path}bubbles/startEnd-${bubblesIllustrationStartEnd}${extension}' | luSafeExternalSvg"></div>`
+					: ``
+			}${
+				illustrationStartEndUrl
+					? `
+				<img class="mainLayout-bubblesStartEnd-illustration" src="${illustrationStartEndUrl}" alt="" />`
+					: ``
+			}
+			</div>`
+				: ``;
+		const bubblesEndStartContainer =
+			bubblesIllustrationEndStart || illustrationEndStartUrl
+				? `
+			<div class="mainLayout-bubblesEndStart">${
+				bubblesIllustrationEndStart
+					? `
+				<div aria-hidden="true" [innerHtml]="'${domain}${path}bubbles/endStart-${bubblesIllustrationEndStart}${extension}' | luSafeExternalSvg"></div>`
+					: ``
+			}${
+				illustrationEndStartUrl
+					? `
+				<img class="mainLayout-bubblesEndStart-illustration" src="${illustrationEndStartUrl}" alt="" />`
+					: ``
+			}
+			</div>`
+				: ``;
+
+		const paletteClass = args.palette && args.palette !== 'none' ? ` palette-${args.palette}` : ``;
+		const responsiveClass = args.responsive ? ` mod-${args.responsive}` : ``;
+
 		const sidebarContainer = args.sidebar
 			? `
 			<div class="mainLayout-sidebar">sidebar</div>`
@@ -80,6 +193,7 @@ export default {
 		}
 
 		return {
+			props: args,
 			styles: [
 				`
 @layer components {
@@ -128,7 +242,7 @@ export default {
 				`,
 			],
 			template: `
-		<main role="main" class="mainLayout">${sidebarContainer}
+		<main role="main" class="mainLayout${paletteClass}${responsiveClass}">${bubblesStartEndContainer}${bubblesEndStartContainer}${sidebarContainer}
 			<div class="mainLayout-content">
 				<div class="mainLayout-content-inside">${headerContainer}${content}${footerContainer}
 				</div>
@@ -137,17 +251,23 @@ export default {
 `,
 		};
 	},
-} as Meta;
+} as Meta<MainLayoutHTMLBasicStory>;
 
 export const Basic = {
 	args: {
 		header: true,
 		headerSticky: false,
 		footer: true,
-		footerSticky: true,
+		footerSticky: false,
 		sidebar: false,
 		contentOverflowing: false,
 		repeatOverflow: 5,
 		repeatContent: 1,
+		bubblesStartEnd: null,
+		bubblesEndStart: null,
+		illustrationStartEnd: '',
+		illustrationEndStart: '',
+		palette: 'none',
+		responsive: '',
 	},
 };

@@ -22,6 +22,9 @@ export class LuDialogService {
 			case 'fancy':
 				modeClasses = ['mod-fancy'];
 				break;
+			case 'sheet':
+				modeClasses = ['mod-drawer', 'mod-fromBottom', 'mod-sheet'];
+				break;
 			case 'drawer-from-bottom':
 				modeClasses = ['mod-drawer', 'mod-fromBottom'];
 				break;

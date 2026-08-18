@@ -8,9 +8,9 @@ import { LuDialogRef } from '../model';
 	},
 })
 export class DialogDismissDirective {
-	#ref = inject<LuDialogRef>(LuDialogRef);
+	#ref = inject<LuDialogRef>(LuDialogRef, { optional: true });
 
 	close() {
-		this.#ref.dismiss();
+		this.#ref?.dismiss();
 	}
 }

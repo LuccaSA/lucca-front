@@ -48,7 +48,7 @@ export default {
 				examplePeriod: null,
 			},
 			template: `<lu-filter-bar>
-	<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
+	<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
 		<ng-template #label0>Tous <lu-numeric-badge [value]="12" /></ng-template>
 		<ng-template #label1>En cours d’approbation <lu-numeric-badge [value]="5" /></ng-template>
 		<ng-template #label2>Approuvés <lu-numeric-badge [value]="3" /></ng-template>
