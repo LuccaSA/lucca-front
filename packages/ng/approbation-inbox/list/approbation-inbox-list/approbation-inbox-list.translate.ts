@@ -9,6 +9,11 @@ export const LU_APPROBATION_INBOX_LIST_TRANSLATIONS = new InjectionToken('LuAppr
 export interface LuApprobationInboxListTranslations {
 	selectAll: string;
 	selectedCount: LuPluralForms;
+	label: string;
+	submitLabel: string;
+	forwardLabel: string;
+	emptyLabel: string;
+	emptyResetLabel: string;
 }
 
 export const luApprobationInboxListTranslations: LuTranslation<LuApprobationInboxListTranslations> = Translations;

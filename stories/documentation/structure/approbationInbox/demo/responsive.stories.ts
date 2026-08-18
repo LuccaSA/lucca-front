@@ -114,7 +114,7 @@ export default {
 				</ng-container>
 		<lu-main-layout responsive="wideM" bubblesStartEnd palette="cleemy">
 				<ng-container mainLayoutSidebar>
-            <lu-approbation-inbox-list label="Test" submitLabel="Approuver les objets" forwardLabel="Transférer les objets" selectable noResultLabel="Votre recherche ne donne aucun résultat." [detailsComponent]="detailComponentRef">
+            <lu-approbation-inbox-list selectable [detailsComponent]="detailComponentRef">
 					<lu-filter-bar approbationInboxListFilterBar>
 						<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
 							<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
@@ -160,17 +160,17 @@ export default {
         <lu-main-layout-block>
 
 							<lu-approbation-inbox-detail #detailComponentRef>
-						<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Lorem ispum dolor Lorem ispum dolor Lorem ispum dolor Lorem ispum dolor" delegation="Délégué par Marie Bragoulet">
+						<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Request for Approval" delegatedBy="Marie Bragoulet">
 							<lu-user-picture approbationInboxDetailIllustration />
 							<lu-listing inline divider>
 								<lu-listing-item>Lorem ipsum</lu-listing-item>
 								<lu-listing-item>Dolor sit amet</lu-listing-item>
 							</lu-listing>
 							<ng-container approbationInboxDetailActions>
-								<button luButton type="button" luDialogClose>Approuver</button>
-								<button luButton type="button" luDialogDismiss>Refuser</button>
+								<button luButton type="button" luDialogClose>Approve</button>
+								<button luButton type="button" luDialogDismiss>Reject</button>
 								<button luButton type="button" [luDropdown]="dropdownOtherOptions">
-									<lu-icon icon="menuDots" alt="Autres options" />
+									<lu-icon icon="menuDots" alt="Other options" />
 								</button>
 								<ng-template #dropdownOtherOptions>
 									<lu-dropdown-menu>
@@ -199,7 +199,7 @@ export default {
 						<lu-approbation-inbox-detail-main-block label="Sit amet">
 							Dolor sit amet
 						</lu-approbation-inbox-detail-main-block>
-						<lu-approbation-inbox-detail-main-block label="Circuit d’approbation">
+						<lu-approbation-inbox-detail-main-block label="Approval Process">
 							Dolor sit amet
 						</lu-approbation-inbox-detail-main-block>
 					</lu-approbation-inbox-detail>

@@ -25,7 +25,9 @@ export class ApprobationInboxGroupComponent {
 	private readonly list = inject(ApprobationInboxListComponent);
 
 	readonly selectable = computed(() => this.list?.selectable() ?? false);
+
 	readonly label = input.required<string>();
+
 	readonly expanded = model(true);
 
 	readonly items = contentChildren(ApprobationInboxItemComponent);

@@ -86,11 +86,11 @@ export default {
 	<lu-dialog #dialog>
 		<form luForm>
 			<lu-dialog-header>
-				<h1>Absence à approuver</h1>
+				<h1>Request for Approval</h1>
 			</lu-dialog-header>
 			<lu-dialog-content>
 				<lu-approbation-inbox-detail><!-- TODO inbox: template -->
-					<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Lorem ispum dolor" delegation="Délégué par Marie Bragoulet">
+					<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Lorem ispum dolor" delegatedBy="Marie Bragoulet">
 						<lu-user-picture size="L" approbationInboxDetailIllustration />
 						<lu-listing inline divider>
 							<lu-listing-item>Lorem ipsum</lu-listing-item>
@@ -109,17 +109,17 @@ export default {
 					<lu-approbation-inbox-detail-main-block label="Sit amet">
 						Dolor sit amet
 					</lu-approbation-inbox-detail-main-block>
-					<lu-approbation-inbox-detail-main-block label="Circuit d’approbation">
+					<lu-approbation-inbox-detail-main-block label="Approval Process">
 						Dolor sit amet
 					</lu-approbation-inbox-detail-main-block>
 				</lu-approbation-inbox-detail>
 			</lu-dialog-content>
 			<lu-dialog-footer>
 				<div class="footer-actions"><!-- TODO inbox: template -->
-					<button type="submit" luButton luDialogClose>Approuver</button>
-					<button type="button" luButton="outlined" luDialogDismiss>Refuser</button>
+					<button type="submit" luButton luDialogClose>Approve</button>
+					<button type="button" luButton="outlined" luDialogDismiss>Reject</button>
 					<button type="button" luButton="ghost" [luDropdown]="dropdownOtherOptions">
-						<lu-icon icon="menuDots" alt="Autres options" />
+						<lu-icon icon="menuDots" alt="Other options" />
 					</button>
 					<ng-template #dropdownOtherOptions>
 						<lu-dropdown-menu>

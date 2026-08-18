@@ -45,25 +45,6 @@ export default {
 			},
 			if: { arg: 'itemCount', eq: 0 },
 		},
-		emptyLabel: {
-			description: 'Texte affiché lorsque la liste est vide.',
-			if: { arg: 'itemCount', eq: 0 },
-		},
-		emptyResetLabel: {
-			description: 'Texte du bouton de réinitialisation des filtres affiché lorsque la liste est vide.',
-			if: { arg: 'itemCount', eq: 0 },
-		},
-		label: {
-			description: 'Titre de la liste.',
-		},
-		submitLabel: {
-			description: 'Intitulé du bouton de soumission du formulaire.',
-			if: { arg: 'selectable', truthy: true },
-		},
-		forwardLabel: {
-			description: 'Intitulé du bouton de transfert du formulaire.',
-			if: { arg: 'selectable', truthy: true },
-		},
 		current: {
 			description: 'Définit le lien (ou le bouton) comme l’élément courant affiché.',
 		},
@@ -89,6 +70,9 @@ export default {
 			description: 'Icônes affichées dans les données complémentaires.',
 			control: { type: 'object' },
 			if: { arg: 'rightContent', truthy: true },
+		},
+		emptyResetButton: {
+			if: { arg: 'itemCount', eq: 0 },
 		},
 	},
 	decorators: [
@@ -191,12 +175,9 @@ export const Basic: StoryObj<
 	}
 > = {
 	args: {
-		label: 'Lorem ipsum',
 		filterBar: false,
 		selectable: false,
 		selected: false,
-		submitLabel: 'Approve items',
-		forwardLabel: 'Transfer items',
 		group: false,
 		groupLabel: 'Group',
 		current: false,
@@ -211,7 +192,6 @@ export const Basic: StoryObj<
 		center: false,
 		itemCount: 1,
 		emptyIllustration: '',
-		emptyLabel: 'Votre recherche ne donne aucun résultat.',
-		emptyResetLabel: 'Réinitialiser les filtres',
+		emptyResetButton: false,
 	},
 };

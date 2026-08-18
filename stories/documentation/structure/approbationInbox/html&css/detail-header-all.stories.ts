@@ -43,7 +43,7 @@ function getTemplate(args: ApprobationInboxDetailHeaderStory): string {
 				<button type="button" class="button">Refuser</button>
 				<button type="button" class="button mod-onlyIcon mod-iconOnLeft mod-iconOnRight" aria-expanded="false">
 					<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
-					<span class="pr-u-mask">Autres options</span>
+					<span class="pr-u-mask">Other options</span>
 				</button>
 			</div>
 		</div>

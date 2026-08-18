@@ -23,8 +23,8 @@ export default {
 		headerContent: {
 			description: 'Exemple d’informations complémentaires possibles sous le titre de l’en-tête.',
 		},
-		delegation: {
-			description: 'Affiche une étiquette indiquant que l’objet est traité en délégation.',
+		delegatedBy: {
+			description: 'Nom de la personne à l’origine de la délégation si elle à lieu.',
 		},
 		moreActions: {
 			description: 'Affiche un bouton d’actions tertaires sous forme de menu déroulant.',
@@ -89,7 +89,7 @@ export default {
 		const moreActionsTpl = moreActions
 			? `
 			<button luButton type="button" [luDropdown]="dropdownOtherOptions">
-				<lu-icon icon="menuDots" alt="Autres options" />
+				<lu-icon icon="menuDots" alt="Other options" />
 			</button>
 			<ng-template #dropdownOtherOptions>
 				<lu-dropdown-menu>
@@ -104,15 +104,15 @@ export default {
 				? `
 	<lu-approbation-inbox-detail-header approbationInboxDetailHeader${generateInputs(args, argTypes)}>${headerIllustrationTpl}${headerContentTpl}
 		<ng-container approbationInboxDetailActions>
-			<button luButton type="button">Approuver</button>
-			<button luButton type="button">Refuser</button>${moreActionsTpl}
+			<button luButton type="button">Approve</button>
+			<button luButton type="button">Reject</button>${moreActionsTpl}
 		</ng-container>
 	</lu-approbation-inbox-detail-header>`
 				: ``;
 		const contentDefaultTpl =
 			blockCount != 0
 				? `
-	<lu-approbation-inbox-detail-main-block label="Circuit d’approbation">
+	<lu-approbation-inbox-detail-main-block label="Approval Process">
 		Dolor sit amet
 	</lu-approbation-inbox-detail-main-block>`
 				: ``;
@@ -140,7 +140,7 @@ export const Basic: StoryObj<
 		label: 'Title',
 		illustration: false,
 		headerContent: false,
-		delegation: '',
+		delegatedBy: '',
 		moreActions: false,
 		callout: false,
 		calloutLabel: 'Callout feedback description. ',

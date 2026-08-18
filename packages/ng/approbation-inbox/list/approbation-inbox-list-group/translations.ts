@@ -9,7 +9,7 @@ export const Translations = {
 		selectGroup: 'Seleziona "{{label}}"',
 	},
 	fr: {
-		selectGroup: 'Sélectionner « {{label}} »',
+		selectGroup: 'Sélectionner « {{label}} »',
 	},
 	pt: {
 		selectGroup: 'Selecionar "{{label}}"',
