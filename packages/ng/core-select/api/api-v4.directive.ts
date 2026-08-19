@@ -27,18 +27,17 @@ export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSel
 
 	protected readonly clue = toSignal(this.clue$);
 
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const sort = this.sort();
-			const clue = this.clue();
-			const searchDelimiter = this.searchDelimiter();
-			return {
-				...this.filters(),
-				...(sort ? { sort } : {}),
-				...(clue ? { search: applySearchDelimiter(clue, searchDelimiter) } : {}),
-			};
-		}),
-	);
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const sort = this.sort();
+		const clue = this.clue();
+		const searchDelimiter = this.searchDelimiter();
+		return {
+			...this.filters(),
+			...(sort ? { sort } : {}),
+			...(clue ? { search: applySearchDelimiter(clue, searchDelimiter) } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	public readonly totalCount$ = toObservable(computed(() => ({ url: this.apiV4(), filters: this.filters() }))).pipe(
 		debounceTime(250),

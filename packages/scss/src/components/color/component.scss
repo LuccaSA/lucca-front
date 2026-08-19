@@ -54,14 +54,15 @@
 }
 
 @mixin componentPanel($atRoot: namespace.$defaultAtRoot) {
-	.lu-picker-content {
+	.lu-select-panel-layout-content {
 		.cdk-overlay-pane:has(&) {
 			min-inline-size: 0 !important;
 			inline-size: 17rem;
 		}
 	}
 
-	.lu-picker-content-option {
+	// Options are now projected into the listbox wrapper; lay them out as a wrapping swatch grid.
+	.listboxOptionWrapper {
 		flex-direction: row;
 		display: flex;
 		flex-wrap: wrap;

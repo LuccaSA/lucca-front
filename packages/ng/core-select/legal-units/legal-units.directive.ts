@@ -54,20 +54,19 @@ export class LuCoreSelectLegalUnitsDirective<T extends LuCoreSelectLegalUnit = L
 			.pipe(map((res) => res?.items ?? []));
 	}
 
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const uniqueOperationIds = this.uniqueOperationIds();
-			const clue = this.clue();
-			const includeArchivedLegalUnits = this.includeArchivedLegalUnits();
-			return {
-				...this.filters(),
-				sort: 'name',
-				...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()) } : {}),
-				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-				...(includeArchivedLegalUnits ? { isArchived: true } : {}),
-			};
-		}),
-	);
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const clue = this.clue();
+		const includeArchivedLegalUnits = this.includeArchivedLegalUnits();
+		return {
+			...this.filters(),
+			sort: 'name',
+			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()) } : {}),
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(includeArchivedLegalUnits ? { isArchived: true } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	public readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
 		debounceTime(250),

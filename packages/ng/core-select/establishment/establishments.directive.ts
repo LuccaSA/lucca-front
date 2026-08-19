@@ -66,26 +66,25 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 		return this.#groupingService.useGrouping$.pipe(switchMap(() => options$));
 	}
 
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const operationIds = this.operationIds();
-			const uniqueOperationIds = this.uniqueOperationIds();
-			const appInstanceId = this.appInstanceId();
-			const clue = this.clue();
-			const searchDelimiter = this.searchDelimiter();
-			return {
-				...this.filters(),
-				...(clue
-					? // When the clue is not empty, sort establishments by name
-						{ search: applySearchDelimiter(clue, searchDelimiter), sort: 'name' }
-					: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
-						{ sort: 'legalunit.name,name' }),
-				...(operationIds ? { operations: operationIds.join(',') } : {}),
-				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-				...(appInstanceId ? { appInstanceId } : {}),
-			};
-		}),
-	);
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const operationIds = this.operationIds();
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const appInstanceId = this.appInstanceId();
+		const clue = this.clue();
+		const searchDelimiter = this.searchDelimiter();
+		return {
+			...this.filters(),
+			...(clue
+				? // When the clue is not empty, sort establishments by name
+					{ search: applySearchDelimiter(clue, searchDelimiter), sort: 'name' }
+				: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
+					{ sort: 'legalunit.name,name' }),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(appInstanceId ? { appInstanceId } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	public readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
 		debounceTime(250),

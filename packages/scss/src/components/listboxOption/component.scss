@@ -54,6 +54,10 @@
 				pointer-events: none;
 				box-shadow: var(--pr-t-elevation-shadow-overflow);
 			}
+
+			.avatar {
+				margin-inline-end: var(--pr-t-spacings-75);
+			}
 		}
 
 		.listboxOption-content-checkboxField.checkboxField {
@@ -65,7 +69,7 @@
 			list-style-type: none;
 			display: flex;
 			flex-direction: column;
-			gap: var(--pr-t-spacings-25);
+			gap: var(--pr-t-spacings-50);
 			background-color: var(--palettes-neutral-0);
 			position: relative;
 			z-index: 1;
@@ -76,8 +80,6 @@
 			}
 
 			@include reset.list;
-
-			padding: var(--components-listboxOptionWrapper-padding);
 
 			.listboxOptionWrapper {
 				--components-listboxOptionWrapper-overflow: visible;

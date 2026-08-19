@@ -5,7 +5,7 @@ import { isNotNil } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { ILuDepartment } from '@lucca-front/ng/department';
-import { combineLatest, map, Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 
@@ -37,14 +37,6 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		super.ngOnInit();
 	}
 
-	protected override buildOptions(): Observable<TreeNode<T>[]> {
-		return combineLatest([super.buildOptions(), this.clue$]).pipe(
-			map(([data, clue]) => {
-				return this.trim(data, clue);
-			}),
-		);
-	}
-
 	protected override getOptionsPage(params: Record<string, string | number | boolean> | null, page: number): Observable<{ items: TreeNode<T>[]; isLastPage: boolean }> {
 		if (page > 0) {
 			return of({ items: [], isLastPage: true });
@@ -54,15 +46,15 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null): Observable<TreeNode<T>[]> {
+		// The department tree endpoint is not searchable, so we fetch the whole tree and filter it
+		// client-side by the current clue. `currentClue$` is set by `buildParamsFromClue` right before
+		// this call, so it reflects the clue driving this query (empty clue keeps the full tree).
+		const clue = this.currentClue$.value;
 		return this.httpClient
 			.get<{ children?: TreeNode<T>[] }>(this.url(), {
 				params: params ?? {},
 			})
-			.pipe(
-				map((data) => {
-					return data.children ?? [];
-				}),
-			);
+			.pipe(map((data) => this.trim(data.children ?? [], clue)));
 	}
 
 	trim(options: readonly TreeNode<T>[], clue: string): TreeNode<T>[] {
@@ -80,19 +72,18 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 			.filter(isNotNil);
 	}
 
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const operationIds = this.operationIds();
-			const uniqueOperationIds = this.uniqueOperationIds();
-			const appInstanceId = this.appInstanceId();
-			return {
-				...this.filters(),
-				...(operationIds ? { operations: operationIds.join(',') } : {}),
-				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-				...(appInstanceId ? { appInstanceId } : {}),
-			};
-		}),
-	);
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const operationIds = this.operationIds();
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const appInstanceId = this.appInstanceId();
+		return {
+			...this.filters(),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(appInstanceId ? { appInstanceId } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	public readonly totalCount$ = toObservable(computed(() => ({ url: this.countUrl(), filters: this.filters() }))).pipe(
 		debounceTime(250),
