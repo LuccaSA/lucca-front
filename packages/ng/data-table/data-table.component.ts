@@ -129,7 +129,7 @@ export class DataTableComponent implements OnInit {
 		const tableElement = this.tableRef()?.nativeElement;
 		if (tableElement) {
 			const observer = new ResizeObserver(() => this.scroll());
-			observer.observe(this.tableRef().nativeElement);
+			observer.observe(tableElement);
 			this.#destroyRef.onDestroy(() => observer.disconnect());
 		}
 	}

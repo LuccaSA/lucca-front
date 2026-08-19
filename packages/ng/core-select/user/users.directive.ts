@@ -123,7 +123,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 			return {
 				fields: this.#userFields,
-				...this.filters(),
+				// The "me" request is a lookup by id and must not carry the search `filters`:
+				// they target the search API and aren't necessarily supported by the endpoint
+				// resolving the current user (e.g. API v3), which would fail the request.
 				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
 				...(operationIds ? { operations: operationIds.join(',') } : {}),
 				...(appInstanceId ? { appInstanceId } : {}),

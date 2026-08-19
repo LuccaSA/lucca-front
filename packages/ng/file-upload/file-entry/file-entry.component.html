@@ -5,7 +5,7 @@
 		</dt>
 		@if (state() === "error" && inlineMessageError()) {
 			<dd class="fileEntry-inlineMessage">
-				<lu-inline-message withTooltip [label]="inlineMessageError()" [state]="'error'" />
+				<lu-inline-message withTooltip [label]="inlineMessageError() ?? ''" [state]="'error'" />
 			</dd>
 		} @else {
 			<dd class="fileEntry-description">
@@ -19,11 +19,11 @@
 		}
 	}
 	<dd class="fileEntry-status">
-		<div class="fileEntry-status-content" [luTooltip]="tooltip()">
+		<div class="fileEntry-status-content" [luTooltip]="tooltip() ?? ''">
 			@if (state() === "error" && inlineMessageError()) {
 				@if (media()) {
 					<div class="fileEntry-status-content-inside">
-						<lu-inline-message class="fileEntry-status-content-inlineMessage" [label]="inlineMessageError()" [state]="'error'" />
+						<lu-inline-message class="fileEntry-status-content-inlineMessage" [label]="inlineMessageError() ?? ''" [state]="'error'" />
 					</div>
 				} @else {
 					<div class="fileEntry-status-content-inside">

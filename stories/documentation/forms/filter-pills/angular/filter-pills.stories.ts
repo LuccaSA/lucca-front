@@ -13,10 +13,10 @@ import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective } from
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
-import { createTestStory } from '../../../../helpers/stories';
+import { createTestStory } from '@/helpers/stories';
+import { pickDay, waitForAngular } from '@/helpers/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { waitForAngular } from '../../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterPills/Angular',
@@ -134,119 +134,170 @@ export const Basic: StoryObj<FilterPillComponent & { clearable: boolean; filterP
 	},
 };
 
-const CLEAR_BTN_NAME = 'Vider ce champ';
-const getWrapper = (btn: HTMLElement): HTMLElement => btn.closest('.filterPillWrapper') as HTMLElement;
-
 export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	// 1. Wait for Angular to stabilize
 	await waitForAngular();
+
 	const canvas = within(canvasElement);
+	// On cible la pill portée par un simple-select (aucun appel HTTP requis).
+	const getPill = () => canvas.getByRole('button', { name: /Legume \(simple\)/ });
+	// Le bouton de réinitialisation est un frère de la pill dans son wrapper : on scope
+	// la recherche pour éviter les collisions quand plusieurs pills sont renseignées.
+	const getClearer = (pill: HTMLElement) => within(pill.closest('.filterPillWrapper') as HTMLElement).getByRole('button', { name: /Vider ce champ/ });
+	const queryClearer = (pill: HTMLElement) => within(pill.closest('.filterPillWrapper') as HTMLElement).queryByRole('button', { name: /Vider ce champ/ });
 
-	await step('Simple select — set and clear via mouse', async () => {
-		const pillBtn = canvas.getByRole('button', { name: /Legume \(simple\)/ });
-		const wrapper = getWrapper(pillBtn);
-
-		await userEvent.click(pillBtn);
-		await waitForAngular();
-		// Panel opens automatically when filter pill opens
-		await userEvent.click(within(screen.getByRole('listbox')).getAllByRole('option')[0]);
-		await waitForAngular();
-		// Filter pill auto-closes after simple-select picks a value
-
-		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
-		await expect(clearBtn).toBeVisible();
-		await userEvent.click(clearBtn);
-		await waitForAngular();
-		await expect(clearBtn).not.toBeVisible();
+	await step('État initial : la pill est fermée et sans valeur', async () => {
+		const pill = getPill();
+		await expect(pill).toBeVisible();
+		await expect(pill).toHaveAttribute('aria-expanded', 'false');
+		// Aucune valeur sélectionnée → pas de bouton de réinitialisation.
+		await expect(queryClearer(pill)).not.toBeInTheDocument();
 	});
 
-	await step('Simple select — set and clear via keyboard', async () => {
-		const pillBtn = canvas.getByRole('button', { name: /Legume \(simple\)/ });
-		const wrapper = getWrapper(pillBtn);
-
-		pillBtn.focus();
-		await expect(pillBtn).toHaveFocus();
-		await userEvent.keyboard('{Enter}');
+	await step('Ouverture du popover à la souris', async () => {
+		await userEvent.click(getPill());
 		await waitForAngular();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
-
-		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
-		await expect(clearBtn).toBeVisible();
-		clearBtn.focus();
-		await expect(clearBtn).toHaveFocus();
-		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
-		await expect(clearBtn).not.toBeVisible();
+		await expect(getPill()).toHaveAttribute('aria-expanded', 'true');
+		// Le contenu du popover (le select) est rendu dans l'overlay global.
+		await expect(screen.getByRole('combobox')).toBeVisible();
 	});
 
-	await step('Multi select — set and clear via mouse', async () => {
-		const pillBtn = canvas.getByRole('button', { name: /Légume \(multi\)/ });
-		const wrapper = getWrapper(pillBtn);
-
-		await userEvent.click(pillBtn);
+	let selectedOptionText = '';
+	await step('Sélection d’une option', async () => {
+		const combobox = screen.getByRole('combobox');
+		await userEvent.click(combobox);
 		await waitForAngular();
-		// Panel opens automatically; skip select-all option if present
-		const options = within(screen.getByRole('listbox'))
-			.getAllByRole('option')
-			.filter((o) => !o.id.includes('select-all'));
+		const listbox = within(screen.getByRole('listbox'));
+		const options = await listbox.findAllByRole('option');
+		selectedOptionText = options[0].innerText;
 		await userEvent.click(options[0]);
 		await waitForAngular();
-		// Escape closes the select panel, which also closes the filter pill popover
+		// La valeur choisie est reflétée dans la pill et le bouton de réinitialisation apparaît.
+		await expect(getPill()).toHaveTextContent(selectedOptionText);
+		await expect(getClearer(getPill())).toBeVisible();
+	});
+
+	await step('Réinitialisation via le bouton clear', async () => {
+		await userEvent.click(getClearer(getPill()));
+		await waitForAngular();
+		// La valeur est retirée et le bouton de réinitialisation disparaît.
+		await expect(getPill()).not.toHaveTextContent(selectedOptionText);
+		await expect(queryClearer(getPill())).not.toBeInTheDocument();
+	});
+
+	await step('Ouverture et fermeture au clavier', async () => {
+		const pill = getPill();
+		pill.focus();
+		await expect(pill).toHaveFocus();
+		// La flèche bas ouvre le popover.
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(getPill()).toHaveAttribute('aria-expanded', 'true');
+		await expect(screen.getByRole('combobox')).toBeVisible();
+		// Échap referme le popover.
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
-
-		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
-		await expect(clearBtn).toBeVisible();
-		await userEvent.click(clearBtn);
-		await waitForAngular();
-		await expect(clearBtn).not.toBeVisible();
+		await waitFor(() => expect(getPill()).toHaveAttribute('aria-expanded', 'false'));
 	});
 
-	await step('Date — set and clear via mouse', async () => {
-		const pillBtn = canvas.getByRole('button', { name: /Date de début/ });
-		const wrapper = getWrapper(pillBtn);
-
-		await userEvent.click(pillBtn);
+	await step('Coche la checkbox', async () => {
+		// La pill checkbox n'ouvre pas de popover : c'est un bouton bascule (aria-pressed).
+		const pill = canvas.getByRole('button', { name: /Inclure les collaborateurs partis/ });
+		await expect(pill).toHaveAttribute('aria-pressed', 'false');
+		await userEvent.click(pill);
 		await waitForAngular();
-		// Calendar renders inline inside the filter pill popover (no second overlay)
-		const grid = screen.getByRole('grid');
-		const today = new Date();
-		const targetDay = today.getDate() === 15 ? 16 : 15;
-		const calWrapper = grid.closest('.calendarWrapper') as HTMLElement;
-		await userEvent.click(within(calWrapper).getByText(targetDay.toString()));
-		await waitForAngular();
-		// Filter pill auto-closes after date selection
-
-		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
-		await expect(clearBtn).toBeVisible();
-		await userEvent.click(clearBtn);
-		await waitForAngular();
-		await expect(clearBtn).not.toBeVisible();
+		await expect(pill).toHaveAttribute('aria-pressed', 'true');
 	});
 
-	await step('Date range — set and clear via mouse', async () => {
-		const pillBtn = canvas.getByRole('button', { name: /Période/ });
-		const wrapper = getWrapper(pillBtn);
+	await step('Sélectionne plusieurs items dans le multi-select', async () => {
+		const pill = canvas.getByRole('button', { name: /Légume \(multi\)/ });
+		await userEvent.click(pill);
+		await waitForAngular();
+		await userEvent.click(screen.getByRole('combobox'));
+		await waitForAngular();
+		const listbox = within(screen.getByRole('listbox'));
+		// On écarte l'option « tout sélectionner » pour ne cliquer que de vraies options.
+		const options = (await listbox.findAllByRole('option')).filter((option) => !option.id.includes('select-all'));
+		await userEvent.click(options[0]);
+		await userEvent.click(options[1]);
+		await waitForAngular();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		// Une fois renseignée, la pill affiche le label pluriel « légumes » (son nom
+		// accessible change) : on réutilise la référence capturée plus haut.
+		await expect(pill).toHaveTextContent(/légumes/);
+		await expect(getClearer(pill)).toBeVisible();
+	});
 
-		await userEvent.click(pillBtn);
+	await step('Sélectionne une date', async () => {
+		const pill = canvas.getByRole('button', { name: /Date de début/ });
+		await userEvent.click(pill);
 		await waitForAngular();
-		// Two calendar grids render inline; pick start then end in the first grid
-		const today = new Date();
-		const startDay = today.getDate() === 10 ? 11 : 10;
-		const endDay = today.getDate() === 20 ? 21 : 20;
-		const firstGrid = screen.getAllByRole('grid')[0];
-		await userEvent.click(within(firstGrid as HTMLElement).getByText(startDay.toString()));
+		const dateInput = screen.getByTestId('lu-date-input');
+		await pickDay(dateInput, 15);
 		await waitForAngular();
-		await userEvent.click(within(firstGrid as HTMLElement).getByText(endDay.toString()));
+		// Une date choisie → la pill est renseignée et propose une réinitialisation.
+		await expect(getClearer(pill)).toBeVisible();
+		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
-		// Filter pill auto-closes after end date selection
+	});
 
-		const clearBtn = within(wrapper).getByRole('button', { name: CLEAR_BTN_NAME });
-		await expect(clearBtn).toBeVisible();
-		await userEvent.click(clearBtn);
+	await step('Sélectionne une période dans le date range', async () => {
+		const pill = canvas.getByRole('button', { name: /Période/ });
+		await userEvent.click(pill);
 		await waitForAngular();
-		await expect(clearBtn).not.toBeVisible();
+		const startInput = screen.getByLabelText('Start');
+		const endInput = screen.getByLabelText('End');
+		// `multipleGrid` : le date range affiche deux calendriers côte à côte.
+		await pickDay(startInput, 10, true);
+		await pickDay(endInput, 20, true);
+		await waitForAngular();
+		await expect(getClearer(pill)).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
 	});
 });
+
+const colonSpacingPlay =
+	(expectedFilledLabel: string): Parameters<typeof createTestStory>[1] =>
+	async ({ canvasElement, step }) => {
+		// 1. Wait for Angular to stabilize
+		await waitForAngular();
+
+		const canvas = within(canvasElement);
+		const getPill = () => canvas.getByRole('button', { name: /Legume \(simple\)/ });
+		// On lit le textContent brut (sans normalisation de jest-dom) pour distinguer
+		// l'espace insécable U+00A0 d'une espace classique ou d'une absence d'espace.
+		const labelOf = (pill: HTMLElement) => pill.querySelector('.filterPill-label')?.textContent?.trim() ?? '';
+
+		await step('État initial : pas de deux-points tant que la pill est vide', async () => {
+			await expect(labelOf(getPill())).toBe('Legume (simple)');
+		});
+
+		await step('Sélection d’une option', async () => {
+			await userEvent.click(getPill());
+			await waitForAngular();
+			await userEvent.click(screen.getByRole('combobox'));
+			await waitForAngular();
+			const listbox = within(screen.getByRole('listbox'));
+			const options = await listbox.findAllByRole('option');
+			await userEvent.click(options[0]);
+			await waitForAngular();
+		});
+
+		await step('Le label affiche le deux-points attendu pour la locale', async () => {
+			await expect(labelOf(getPill())).toBe(expectedFilledLabel);
+		});
+	};
+
+export const ColonSpacingTEST = createTestStory(Basic, colonSpacingPlay('Legume (simple) :'));
+
+export const ColonSpacingEnglishTEST = {
+	...createTestStory(Basic, colonSpacingPlay('Legume (simple):')),
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
+		}),
+	],
+};

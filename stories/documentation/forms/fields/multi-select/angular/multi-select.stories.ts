@@ -1,5 +1,5 @@
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
+import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
@@ -9,7 +9,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { createTestStory, generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions } from '../../../../../helpers/stories';
+import { createTestStory, generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
 import { waitForAngular } from '../../../../../helpers/test';
 
 export default {
@@ -92,8 +92,9 @@ export default {
 export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }, SelectCommonAliasInput>> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
+		const model = useStoryModel<ILegume[]>([]);
 		return {
-			props: { legumes: allLegumes, example: [] },
+			props: { legumes: allLegumes, model },
 			template: `<lu-form-field ${generateInputs(
 				{
 					label,
@@ -107,9 +108,9 @@ export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & F
 				},
 				argTypes,
 			)}>
-	<lu-multi-select [(ngModel)]="example" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event"${generateInputs(inputArgs, argTypes)} />
+	<lu-multi-select [(ngModel)]="model.example" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
+<pr-story-model-display>{{ model.example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [LuMultiSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
