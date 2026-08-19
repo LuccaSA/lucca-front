@@ -95,13 +95,6 @@
 		}
 	}
 
-	.optionItem-value-group {
-		@layer components {
-			color: var(--palettes-neutral-600);
-			font: var(--pr-t-font-body-S);
-		}
-	}
-
 	:host-context(.lu-select-value) {
 		.optionItem-value {
 			@layer components {

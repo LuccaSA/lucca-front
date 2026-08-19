@@ -93,28 +93,27 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	protected readonly clue = toSignal(this.clue$);
 
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const orderBy = this.orderBy();
-			const clue = this.clue();
-			const operationIds = this.operationIds();
-			const uniqueOperationIds = this.uniqueOperationIds();
-			const appInstanceId = this.appInstanceId();
-			const searchDelimiter = this.searchDelimiter();
-			const formerEmployees = this.includeFormerEmployees();
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const orderBy = this.orderBy();
+		const clue = this.clue();
+		const operationIds = this.operationIds();
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const appInstanceId = this.appInstanceId();
+		const searchDelimiter = this.searchDelimiter();
+		const formerEmployees = this.includeFormerEmployees();
 
-			return {
-				fields: this.#userFields,
-				...this.filters(),
-				...(orderBy ? { orderBy } : {}),
-				...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
-				...(operationIds ? { operations: operationIds.join(',') } : {}),
-				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-				...(appInstanceId ? { appInstanceId } : {}),
-				...(formerEmployees ? { formerEmployees } : {}),
-			};
-		}),
-	);
+		return {
+			fields: this.#userFields,
+			...this.filters(),
+			...(orderBy ? { orderBy } : {}),
+			...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(appInstanceId ? { appInstanceId } : {}),
+			...(formerEmployees ? { formerEmployees } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	protected readonly meParams$ = toObservable(
 		computed(() => {

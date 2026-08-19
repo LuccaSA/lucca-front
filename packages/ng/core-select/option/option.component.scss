@@ -2,27 +2,6 @@
 
 @include definitions.optionItemStyle;
 
-@layer mods {
-	.optionItem-value.is-disabled {
-		color: var(--palettes-neutral-500); // disabled token candidate
-		user-select: none;
-		cursor: default;
-
-		&.is-selected {
-			background-color: var(--commons-disabled-background);
-		}
-
-		&:hover {
-			background-color: inherit;
-		}
-	}
-
-	.optionItem-value:has(.optionItem-icon) {
-		display: flex;
-		justify-content: space-between;
-	}
-}
-
 @layer components {
 	// Holds the projected option template as normal block flow (so inline content flows and
 	// block content stacks), while taking the remaining width of the flex `.listboxOption-content`
@@ -32,6 +11,15 @@
 		flex: 1 1 auto;
 		min-inline-size: 0;
 		overflow-wrap: anywhere;
+	}
+
+	// Inline group label shown on each option while searching a grouped select
+	// (`groupTemplateLocation === "option"`), when group headers collapse. Owned here
+	// because it belongs to this option template's listbox layout, not the legacy
+	// `optionItem` value block it used to live in.
+	.optionItem-value-group {
+		color: var(--palettes-neutral-600);
+		font: var(--pr-t-font-body-S);
 	}
 
 	.optionItem-icons {

@@ -105,7 +105,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	public readonly clue = toSignal(this.selectInput.clue$.pipe(map((clue) => clue ?? '')), { initialValue: '' });
 	public readonly shouldDisplayAddOption = this.selectInput.shouldDisplayAddOption;
 
-	readonly groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.searchable);
+	readonly groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.dataSourceOptions, this.searchable);
 
 	// Loading takes precedence over empty so the "no result" message never flashes during a fetch
 	readonly listboxState = computed<ListboxState | null>(() => (this.loading() ? 'loading' : this.dataSourceOptions().length === 0 ? 'empty' : null));

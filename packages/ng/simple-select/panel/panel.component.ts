@@ -92,7 +92,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	readonly hasGrouping = computed(() => !!this.grouping());
 	public readonly clue = toSignal(this.selectInput.clue$.pipe(map((clue) => clue ?? '')), { initialValue: '' });
 	public shouldDisplayAddOption = this.selectInput.shouldDisplayAddOption;
-	public groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.searchable);
+	public groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.dataSourceOptions, this.searchable);
 
 	// Loading takes precedence over empty so the "no result" message never flashes during a fetch
 	readonly listboxState = computed<ListboxState | null>(() => (this.loading() ? 'loading' : this.dataSourceOptions().length === 0 ? 'empty' : null));
