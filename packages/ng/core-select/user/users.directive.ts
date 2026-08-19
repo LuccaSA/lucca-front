@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, Provider, TemplateRef, Type, booleanAttribute, computed, effect, forwardRef, inject, input, model, signal, untracked } from '@angular/core';
+import { Directive, Provider, TemplateRef, Type, computed, effect, forwardRef, inject, input, model, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNullableNumberAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LuOptionContext, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
@@ -65,9 +65,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	readonly orderBy = input<string | null>(null);
 	readonly operationIds = input<readonly number[] | null>(null);
 	readonly uniqueOperationIds = input<readonly number[] | null>(null);
-	readonly appInstanceId = input<number | null>(null);
-	readonly enableFormerEmployees = input(false, { transform: booleanAttribute });
-	readonly displayMeOption = input(true);
+	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
+	readonly enableFormerEmployees = input(false, { transform: luBooleanAttribute });
+	readonly displayMeOption = input(true, { transform: luBooleanAttribute });
 	readonly customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
 	readonly includeFormerEmployees = signal(false);

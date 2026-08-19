@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { ContainerSize } from './container.type';
 
 @Component({
@@ -13,9 +14,9 @@ import { ContainerSize } from './container.type';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContainerComponent {
-	readonly center = input(false, { transform: booleanAttribute });
+	readonly center = input(false, { transform: luBooleanAttribute });
 
-	readonly overflow = input(false, { transform: booleanAttribute });
+	readonly overflow = input(false, { transform: luBooleanAttribute });
 
 	readonly max = input<ContainerSize | null>(null);
 

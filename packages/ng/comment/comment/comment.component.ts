@@ -1,6 +1,6 @@
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { COMMENT_BLOCK_INSTANCE } from '../token';
 
@@ -52,7 +52,7 @@ export class CommentComponent {
 
 	readonly contentIsHTML = computed(() => !this.contentIsPortal() && /<\/?[a-z][\s\S]*>/i.test(this.content() as string));
 
-	readonly noInfos = input(false, { transform: booleanAttribute });
+	readonly noInfos = input(false, { transform: luBooleanAttribute });
 
 	readonly dateDisplay = computed(() => {
 		const formatted = this.#intlDateTimeFormat.format(this.date());

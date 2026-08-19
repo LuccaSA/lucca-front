@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnChanges, viewChild, ViewEncapsulation } from '@angular/core';
-import { LuClass } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnChanges, viewChild, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, LuClass } from '@lucca-front/ng/core';
 import { DividerSize } from './divider.type';
 
 @Component({
@@ -24,9 +24,9 @@ export class DividerComponent implements OnChanges {
 	 * Allows rendering the Divider as a native separator
 	 * (Any text content it may have will no longer be rendered)
 	 */
-	readonly separatorRole = input(false, { transform: booleanAttribute });
+	readonly separatorRole = input(false, { transform: luBooleanAttribute });
 
-	readonly vertical = input(false, { transform: booleanAttribute });
+	readonly vertical = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Which size should the chip be? Defaults or small
@@ -36,7 +36,7 @@ export class DividerComponent implements OnChanges {
 	/**
 	 * @deprecated
 	 */
-	readonly withRole = input(false, { transform: booleanAttribute });
+	readonly withRole = input(false, { transform: luBooleanAttribute });
 
 	readonly classesConfig = computed(() => ({ [`mod-${this.size()}`]: !!this.size() }));
 
