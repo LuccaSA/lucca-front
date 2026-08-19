@@ -22,7 +22,7 @@ function getTemplate(args: SkeletonTableStory): string {
 			<th class="table-head-row-cell mod-alignRight">Dolor</th>
 		</tr>
 	</thead>
-	<lu-skeleton-table tableBodyOnly [cols]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+	<lu-skeleton-table tableBodyOnly [cols]="3" [colsAlign]="{ '2': 'center', '3': 'end' }" />
 </table>
 	`;
 }
