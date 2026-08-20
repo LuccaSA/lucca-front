@@ -54,7 +54,7 @@ function getTemplate(args: BubbleIllustrationBasicStory): string {
 	const domain = 'https://cdn.lucca.fr';
 	const path = '/transverse/prisme/visuals/bubble-illustration/';
 	const extension = '.svg';
-	return `<div class="bubbleIllustration${palette}${size}${action}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.illustration}${extension}' | luSafeExternalSvg"></div>`;
+	return `<span class="bubbleIllustration${palette}${size}${action}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.illustration}${extension}' | luSafeExternalSvg"></span>`;
 }
 
 const Template = (args: BubbleIllustrationBasicStory) => ({
