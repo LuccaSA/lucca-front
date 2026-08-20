@@ -1,9 +1,8 @@
 /**
  * Generates the CSS API manifest shipped inside `@lucca-front/scss`.
  *
- * A VS Code extension reads this manifest from a consumer's node_modules to
- * offer version-accurate autocomplete / hover / diagnostics for the library's
- * CSS custom properties and `pr-u-*` utility classes.
+ * Consumers read it from their own node_modules, so it describes the CSS API of
+ * the version actually installed. Consumer-agnostic by design.
  *
  * Strategy: compile the full SCSS surface (all product palettes, deprecated
  * `u-*` prefix, cursive font) to expanded CSS, then walk it with PostCSS to
@@ -99,8 +98,8 @@ function hasConditionalAncestor(rule) {
 
 /**
  * Resolves `var()` references against the collected variable map, iteratively,
- * so hover can show a concrete value. Falls back to the `var()` fallback arg
- * when the referenced name is unknown, and gives up after `maxDepth` passes.
+ * down to a concrete value. Falls back to the `var()` fallback arg when the
+ * referenced name is unknown, and gives up after `maxDepth` passes.
  * @param {string} value
  * @param {Map<string, string>} varMap raw values keyed by property name
  * @param {number} maxDepth
@@ -257,7 +256,7 @@ function parseMixins(source) {
 /**
  * Enumerates the consumer-facing mixins in `commons/utils/*.scss`. Each entry
  * carries the `@use` import path and namespace (the file basename) a consumer
- * writes to call it, so the extension can offer completion + auto-import.
+ * writes to call it, so a tool can reproduce the import it needs.
  * @returns {Array<{ name: string, namespace: string, module: string, import: string, params: string, signature: string, doc?: string }>}
  */
 function extractMixins() {
@@ -473,7 +472,7 @@ function extract() {
 	validateReplacements(utilities, 'class');
 	validateReplacements(variables, 'custom property');
 
-	// Resolve var() chains in utility declarations for hover display.
+	// Resolve var() chains in utility declarations to concrete values.
 	for (const [, entry] of utilities) {
 		for (const block of entry.css) {
 			if (block.decls.includes('var(')) {
