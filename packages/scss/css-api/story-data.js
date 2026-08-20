@@ -52,8 +52,8 @@ function toRows(manifest) {
 			compact({
 				kind: 'utility',
 				name,
-				value: base.map(declText).join(' ') || blocks.map(declText).join(' '),
-				resolved: base.some((b) => b.resolved) ? base.map((b) => b.resolved || b.decls).join(' ') : undefined,
+				value: joinBlocks(base) || joinBlocks(blocks),
+				resolved: base.some((b) => b.resolved) ? joinBlocks(base, (b) => b.resolved || b.decls) : undefined,
 				variants: conditional.length ? conditional.map((b) => b.media || b.container) : undefined,
 				deprecated: entry.deprecated,
 				replacement: entry.replacement,
@@ -82,9 +82,22 @@ function toRows(manifest) {
 	return rows;
 }
 
-/** `decls` prefixed with its pseudo-element when the block targets one. */
-function declText(block) {
-	return block.sel ? `${block.sel} { ${block.decls} }` : block.decls;
+/**
+ * Concatenates a utility's blocks into one readable declaration list. `; ` between
+ * declaration lists so a class declaring the same property twice reads as valid CSS
+ * (last one wins, as in the cascade); a plain space around a pseudo-element group,
+ * already delimited by its braces.
+ * @param {object[]} blocks
+ * @param {(block: object) => string} pick which field to read from each block
+ */
+function joinBlocks(blocks, pick = (block) => block.decls) {
+	return blocks.reduce((out, block) => {
+		const text = block.sel ? `${block.sel} { ${pick(block)} }` : pick(block);
+		if (!out) {
+			return text;
+		}
+		return out + (block.sel || out.endsWith('}') ? ' ' : '; ') + text;
+	}, '');
 }
 
 /** Drops undefined/false entries so the committed file carries no empty noise. */
