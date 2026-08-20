@@ -23,13 +23,13 @@ export const Template: StoryObj<SkeletonDataTableComponent> = {
 			},
 		},
 		colsAlign: {
-			description: 'Alignement horizontal du contenu des colonnes. La clé correspond au numéro de la colonne (en partant de 0).',
+			description: 'Alignement horizontal du contenu des colonnes. La clé correspond au numéro de la colonne.',
 		},
 	},
 
 	args: {
 		cols: 5,
 		rows: 8,
-		colsAlign: { '3': 'center', '4': 'end' },
+		colsAlign: { '4': 'center', '5': 'end' },
 	},
 };

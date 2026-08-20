@@ -22,6 +22,9 @@ export class SkeletonTableComponent {
 	 */
 	readonly cols = input<number>(5);
 
+	/**
+	 * Defines the horizontal alignment of the cells content
+	 */
 	readonly colsAlign = input<Record<number, SkeletonColsAlign>>({});
 
 	/**
@@ -29,7 +32,7 @@ export class SkeletonTableComponent {
 	 */
 	readonly rows = input<number>(8);
 
-	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));
+	readonly colsNumber = computed<number[]>(() => Array.from({ length: this.cols() }, (_, index) => index + 1));
 	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 
 	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
