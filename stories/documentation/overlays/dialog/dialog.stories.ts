@@ -90,6 +90,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Permet d’afficher la fenêtre de dialogue en mode drawer.',
+			table: { category: 'inputs' },
 		},
 		autoFocus: {
 			options: ['first-tabbable', 'first-input'],
@@ -97,6 +98,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'XXL', 'maxContent', 'fullScreen'],
@@ -104,13 +106,16 @@ export default {
 				type: 'select',
 			},
 			description: 'Largeur de la fenêtre de dialogue.',
+			table: { category: 'inputs' },
 		},
 		panelClasses: {
 			description: 'Permet d’ajouter des classes CSS au composant. (ex : mod-neutralBackground)',
+			table: { category: 'inputs' },
 		},
 		alert: {
 			description:
 				'Transforme la fenêtre de dialogue en alerte en obligeant l’utilisateur à faire un choix. L’utilisateur ne peut alors plus la fermer en cliquant sur le backdrop ou en appuyant sur la touche Échap.',
+			table: { category: 'inputs' },
 		},
 		fancyIllustration: {
 			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
@@ -119,10 +124,12 @@ export default {
 			},
 			if: { arg: 'mode', eq: 'fancy' },
 			description: 'Modifie l’illustration affichée dans la Fancy dialog.',
+			table: { category: 'inputs' },
 		},
 		fancyIllustrationUrl: {
 			if: { arg: 'mode', eq: 'fancy' },
 			description: 'Surcharge l’illustration avec une URL personnalisée.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;
@@ -269,6 +276,7 @@ export const Fancy: StoryObj = {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au callout.',
+			table: { category: 'inputs' },
 		},
 		fancyIllustration: {
 			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
@@ -277,10 +285,12 @@ export const Fancy: StoryObj = {
 			},
 			if: { arg: 'mode', eq: 'fancy' },
 			description: 'Modifie l’illustration affichée dans la Fancy dialog.',
+			table: { category: 'inputs' },
 		},
 		fancyIllustrationUrl: {
 			if: { arg: 'mode', eq: 'fancy' },
 			description: 'Surcharge l’illustration avec une URL personnalisée.',
+			table: { category: 'inputs' },
 		},
 	},
 	render: (args) => {

@@ -37,8 +37,12 @@ class DataTableDraggableStory {
 		{ id: 3, header: 'Header 3', cell: 'cell 3' },
 	];
 
-	drop(event: CdkDragDrop<string[]>) {
+	// Remplacé par l'action Storybook déclarée dans `argTypes`, d'où le typage en fonction optionnelle.
+	drop?: (event: CdkDragDrop<string[]>) => void;
+
+	onDrop(event: CdkDragDrop<string[]>) {
 		moveItemInArray(this.listItem, event.previousIndex, event.currentIndex);
+		this.drop?.(event);
 	}
 }
 
@@ -49,9 +53,13 @@ export default {
 		selectable: {
 			control: 'boolean',
 			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+			table: { category: 'inputs' },
 		},
 		drop: {
 			description: 'Evénement déclenché au drop.',
+			action: 'drop',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'CdkDragDrop<string[]>' } },
 		},
 		listItem: HiddenArgType,
 	},

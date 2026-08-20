@@ -28,20 +28,24 @@ export default {
 				type: 'text',
 			},
 			description: 'Modifie le label de l’input.',
+			table: { category: 'inputs' },
 		},
 		required: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
+			table: { category: 'inputs' },
 		},
 		tag: {
 			type: 'string',
 			description: 'Ajoute un tag après le label du champ.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
@@ -49,12 +53,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
+			table: { category: 'inputs' },
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
+			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -62,6 +68,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
+			table: { category: 'inputs' },
 		},
 		type: {
 			options: ['text', 'email', 'password', 'url'],
@@ -69,16 +76,20 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		valueAlignRight: {
 			description: 'Aligne la valeur du champ à droite.',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
 		},
 		autocomplete: {
 			type: 'string',
 			description: 'Modifie le comportement autocomplete du champ.',
+			table: { category: 'inputs' },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
@@ -86,36 +97,47 @@ export default {
 				type: 'select',
 			},
 			description: '[v19.2] Applique une largeur fixe au champ.',
+			table: { category: 'inputs' },
 		},
 		AI: {
 			description: '[v20.3] Indique que la valeur du champ a été générée par IA.',
+			table: { category: 'inputs' },
 		},
 		iconAIalt: {
 			description: 'Information restituée par le lecteur d’écran.',
+			table: { category: 'inputs' },
 		},
 		iconAItooltip: {
 			description: 'Ajoute une info-bulle à l’icône AI.',
+			table: { category: 'inputs' },
 		},
 		hasClearer: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
+			table: { category: 'inputs' },
 		},
 		hasSearchIcon: {
 			description: 'Affiche une icône de recherche.',
+			table: { category: 'inputs' },
 		},
 		searchIcon: {
 			description: 'Modifie l’icône (loupe par défaut)',
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			description: 'Désactive le champ.',
+			table: { category: 'inputs' },
 		},
 		placeholder: {
 			description: 'Applique un placeholder au champ.',
+			table: { category: 'inputs' },
 		},
 		counter: {
 			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limitée via formControl.',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: 'Affiche une version présentation, en lecture seule, de la valeur',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

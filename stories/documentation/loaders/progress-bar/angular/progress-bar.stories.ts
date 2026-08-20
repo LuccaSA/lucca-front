@@ -17,12 +17,14 @@ export default {
 				type: 'select',
 			},
 			description: 'État du composant.',
+			table: { category: 'inputs' },
 		},
 		indeterminate: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Affiche un état de chargement sans information de progression.',
+			table: { category: 'inputs' },
 		},
 		value: {
 			control: {
@@ -32,6 +34,7 @@ export default {
 				step: 1,
 			},
 			description: 'Pourcentage de progression.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

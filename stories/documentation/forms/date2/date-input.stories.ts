@@ -23,63 +23,83 @@ export default {
 		min: {
 			control: 'date',
 			description: 'Définit une date minimum de sélection.',
+			table: { category: 'inputs' },
 		},
 		max: {
 			control: 'date',
 			description: 'Définit une date maximum de sélection.',
+			table: { category: 'inputs' },
 		},
 		selected: {
 			control: 'date',
 			description: 'Définit une date sélectionnée.',
+			table: { category: 'inputs' },
 		},
 		hideToday: {
 			control: 'boolean',
 			description: 'Retire la mise en valeur de la date du jour.',
+			table: { category: 'inputs' },
 		},
 		clearable: {
 			control: 'boolean',
 			description: 'Ajoute un bouton de suppression lorsqu’une date est sélectionnée.',
+			table: { category: 'inputs' },
 		},
 		clearBehavior: {
 			control: 'select',
 			options: setStoryOptions(DATE2_CLEAR_BEHAVIOR),
 			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
+			table: { category: 'inputs' },
 		},
 		format: {
 			control: 'select',
 			options: setStoryOptions(DATE_FORMAT_CONST),
 			description: 'Modifie le format de date.',
+			table: { category: 'inputs' },
 		},
 		mode: {
 			control: 'select',
 			options: setStoryOptions(CALENDAR_MODE),
 			description: "Modifie le mode de sélection au mois ou à l'année.",
+			table: { category: 'inputs' },
 		},
 		focusedDate: {
 			control: 'date',
 			description: 'Définit la date préselectionnée à l’ouverture du calendrier.',
+			table: { category: 'inputs' },
 		},
 		widthAuto: {
 			control: 'boolean',
 			description: 'Applique une pleine largeur au composant.',
+			table: { category: 'inputs' },
 		},
 		disableOverflow: {
 			description: 'Empêche la sélection des jours du mois précédent ou suivant visibles sur le mois en cours.',
+			table: { category: 'inputs' },
 		},
 		hideOverflow: {
 			description: 'Masque les jours du mois précédent ou suivant visibles sur le mois en cours.',
+			table: { category: 'inputs' },
 		},
 		hideWeekend: {
 			description: 'Retire l’effet grisé visible sur les jours du isWeekend.',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
 		},
 		panelOpened: {
 			description: "Événement déclenché à l'ouverture du calendrier.",
+			action: 'panelOpened',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		panelClosed: {
 			description: 'Événement déclenché à la fermeture du calendrier.',
+			action: 'panelClosed',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 	},
 	render: (args, { argTypes }) => {
@@ -91,6 +111,7 @@ export default {
 		const focusedDateValue = args['format'] === 'date' ? new Date(args['focusedDate']) : new Date(args['focusedDate'] ?? 0)?.toISOString().substring(0, 10);
 		return {
 			props: {
+				...args,
 				selected: defaultDate,
 				min: args['min'] ? minValue : null,
 				max: args['max'] ? maxValue : null,
@@ -98,7 +119,7 @@ export default {
 			},
 			template: `
 			<lu-form-field label="Date input example" inlineMessage="Inline message example" ${generateInputs({ presentation }, argTypes)}>
-				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="off" ${generateInputs(flags, argTypes)} />
+				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="off" ${generateInputs(flags, argTypes)} (panelOpened)="panelOpened()" (panelClosed)="panelClosed()" />
 			</lu-form-field>
 
 			<pr-story-model-display>{{ selected }}</pr-story-model-display>

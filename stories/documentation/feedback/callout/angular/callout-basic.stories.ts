@@ -31,7 +31,10 @@ export default {
 			: ``;
 
 		return {
-			template: `<lu-callout${headingArg}${hxArg}${paletteArg}${generateInputs(inputs, context.argTypes)}>
+			props: {
+				...args,
+			},
+			template: `<lu-callout${headingArg}${hxArg}${paletteArg}${generateInputs(inputs, context.argTypes)} (removedChange)="removedChange($event)">
 	<p>Feedback description</p>${actionsTemplate}
 </lu-callout>`,
 		};
@@ -39,10 +42,12 @@ export default {
 	argTypes: {
 		removable: {
 			description: 'Ajoute un bouton de suppression au callout.',
+			table: { category: 'inputs' },
 		},
 		removed: {
 			if: { arg: 'removable', truthy: true },
 			description: 'Masque le callout.',
+			table: { category: 'inputs' },
 		},
 		palette: {
 			options: setStoryOptions(PALETTE),
@@ -51,6 +56,7 @@ export default {
 			},
 			description: 'Applique une palette de couleurs au callout.',
 			if: { arg: 'AI', truthy: false },
+			table: { category: 'inputs' },
 		},
 		icon: {
 			options: ['', 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp', 'weatherStars', 'officePenStar'],
@@ -58,10 +64,12 @@ export default {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au callout.',
+			table: { category: 'inputs' },
 		},
 		iconAlt: {
 			description: 'Information de l’icône restituée par le lecteur d’écran.',
 			type: 'string',
+			table: { category: 'inputs' },
 		},
 		state: {
 			options: setStoryOptions(CalloutStates),
@@ -69,6 +77,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(CALLOUT_SIZE),
@@ -76,10 +85,12 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du callout.',
+			table: { category: 'inputs' },
 		},
 		heading: {
 			type: 'string',
 			description: 'Ajoute un titre au callout. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		hx: {
 			options: setStoryOptions(CALLOUT_HX),
@@ -88,22 +99,29 @@ export default {
 			},
 			description: '[v21.4] Applique un niveau sémantique au titre.',
 			if: { arg: 'heading', truthy: true },
+			table: { category: 'inputs' },
 		},
 		removedChange: {
 			description: 'Événement déclenché lors de l’activation du bouton de suppression.',
+			action: 'removedChange',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'boolean' } },
 		},
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 		actions: {
 			description: '[v20.3] Ajoute une liste d’actions sous la description.',
+			table: { category: 'inputs' },
 		},
 		actionsInline: {
 			if: { arg: 'actions', truthy: true },
 			description: '[v20.3] Déplace les actions sur la droite du callout.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;
