@@ -8,6 +8,7 @@ export default {
 	argTypes: {
 		center: {
 			description: 'Centre horizontalement le container.',
+			table: { category: 'inputs' },
 		},
 		overflow: HiddenArgType,
 		max: {
@@ -16,6 +17,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

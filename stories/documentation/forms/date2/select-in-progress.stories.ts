@@ -16,17 +16,27 @@ export default {
 	argTypes: {
 		nextPage: {
 			description: 'Événement déclenché lors de la navigation vers la page suivante du calendrier.',
+			action: 'nextPage',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		previousPage: {
 			description: 'Événement déclenché lors de la navigation vers la page précédente du calendrier.',
+			action: 'previousPage',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		dateClicked: {
 			description: 'Événement déclenché lors du clic sur une date, avec la date en paramètre.',
+			action: 'dateClicked',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'Date' } },
 		},
 	},
 	render: (args, { argTypes }) => {
 		return {
 			props: {
+				...args,
 				date: new Date(),
 				getDayInfo: (date: Date, mode: CalendarMode) => {
 					if (mode === 'day' && date.getDate() < 8) {
@@ -73,7 +83,7 @@ export default {
 			template: `
 				<div class="calendarWrapper">
 					<div class="calendarWrapper-content palette-watermelon">
-						<lu-calendar2 [date]="date" [getCellInfo]="getDayInfo" />
+						<lu-calendar2 [date]="date" [getCellInfo]="getDayInfo" (dateClicked)="dateClicked($event)" (nextPage)="nextPage()" (previousPage)="previousPage()" />
 					</div>
 				</div>
 			`,

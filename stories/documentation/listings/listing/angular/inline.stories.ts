@@ -53,6 +53,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 			description: 'Modifie le type de liste (checklist, icônes, etc.)',
+			table: { category: 'inputs' },
 		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
@@ -63,6 +64,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			},
 			if: { arg: 'type', eq: 'icons' },
 			description: 'Modifie l’icône par défaut.',
+			table: { category: 'inputs' },
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
@@ -71,6 +73,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			},
 			if: { arg: 'type', eq: 'icons' },
 			description: 'Modifie l’icône d’un élément de la liste.',
+			table: { category: 'inputs' },
 		},
 		palette: {
 			PaletteAllArgType,
@@ -79,9 +82,11 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			},
 			if: { arg: 'type', truthy: true },
 			description: 'Modifie la couleur des icônes.',
+			table: { category: 'inputs' },
 		},
 		divider: {
 			description: 'Ajoute un séparateur vertical entre les éléments.',
+			table: { category: 'inputs' },
 		},
 	},
 

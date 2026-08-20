@@ -22,18 +22,21 @@ export default {
 				type: 'text',
 			},
 			description: 'URL de l’image en arrière plan à gauche (200x160).',
+			table: { category: 'inputs' },
 		},
 		backgroundRight: {
 			control: {
 				type: 'text',
 			},
 			description: 'URL de l’image en arrière plan à droite (200x160).',
+			table: { category: 'inputs' },
 		},
 		foreground: {
 			control: {
 				type: 'text',
 			},
 			description: 'URL de l’image au premier plan (200x160).',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(FANCY_BOX_SIZE),
@@ -41,6 +44,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

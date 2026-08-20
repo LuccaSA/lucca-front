@@ -25,34 +25,40 @@ export default {
 			control: {
 				type: 'text',
 			},
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(DIVIDER_SIZE),
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		separatorRole: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Permet de restituer Divider comme un séparateur natif (hr). Son éventuel contenu textuel ne sera alors plus restitué.',
+			table: { category: 'inputs' },
 		},
 		button: {
 			control: {
 				type: 'boolean',
 			},
 			if: { arg: 'icon', truthy: false },
+			table: { category: 'inputs' },
 		},
 		icon: {
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 		vertical: {
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

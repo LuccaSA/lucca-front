@@ -112,12 +112,14 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Permet de définir si la fenêtre de dialogue peut être fermée via les différentes méthodes de fermeture (bouton cancel, clic sur le backdrop, etc.).',
+			table: { category: 'inputs' },
 		},
 		canCloseWithBackdrop: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Permet de définir si la fenêtre de dialogue peut être fermée via un clic sur le backdrop.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

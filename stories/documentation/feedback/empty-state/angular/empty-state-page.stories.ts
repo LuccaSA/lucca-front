@@ -89,6 +89,7 @@ export default {
 			],
 			control: 'select',
 			description: 'Illustration de fond dans le coin supérieur droit.',
+			table: { category: 'inputs' },
 		},
 		topRightForeground: {
 			options: [
@@ -106,6 +107,7 @@ export default {
 			],
 			control: 'select',
 			description: 'Illustration de premier plan dans le coin supérieur droit.',
+			table: { category: 'inputs' },
 		},
 		bottomLeftBackground: {
 			options: [
@@ -127,6 +129,7 @@ export default {
 			],
 			control: 'select',
 			description: 'Illustration de fond dans le coin inférieur gauche.',
+			table: { category: 'inputs' },
 		},
 		bottomLeftForeground: {
 			options: [
@@ -155,6 +158,7 @@ export default {
 			],
 			control: 'select',
 			description: 'Illustration de premier plan dans le coin inférieur gauche.',
+			table: { category: 'inputs' },
 		},
 		icon: {
 			options: ['', 'medal-01', 'post-it-01'],
@@ -162,12 +166,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Affiche une illustration au dessus du titre.',
+			table: { category: 'inputs' },
 		},
 		contentBackgroundColor: {
 			control: {
 				type: 'text',
 			},
 			description: 'Modifie la couleur de fond du contenu (variable CSS, couleur hexadécimale, etc.).',
+			table: { category: 'inputs' },
 		},
 		hx: {
 			control: {
@@ -176,6 +182,7 @@ export default {
 				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
 			},
 			description: 'Niveau de titre (sémantique).',
+			table: { category: 'inputs' },
 		},
 		hxStyle: {
 			control: {
@@ -184,15 +191,19 @@ export default {
 				max: EMPTY_STATE_HX_STYLE.at(EMPTY_STATE_HX_STYLE.length - 1),
 			},
 			description: '[v21.2] Niveau du titre (style).',
+			table: { category: 'inputs' },
 		},
 		heading: {
 			description: 'Titre du composant.',
+			table: { category: 'inputs' },
 		},
 		description: {
 			description: 'Description du composant. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		slotTop: {
 			description: '[v19.3] Ajout d’un slot au dessus du titre. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

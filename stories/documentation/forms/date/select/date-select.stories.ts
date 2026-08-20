@@ -10,12 +10,12 @@ type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: strin
 
 const generateStory = getStoryGenerator<StoryComponent>({
 	argTypes: {
-		selectedDate: { control: { type: 'text' }, table: { type: { summary: 'D' } } },
-		secondSelectedDate: { control: { type: 'text' }, table: { type: { summary: 'D' } } },
-		startOn: { control: { type: 'text' } },
-		min: { control: { type: 'text' } },
-		max: { control: { type: 'text' } },
-		multiple: { control: false },
+		selectedDate: { control: { type: 'text' }, table: { type: { summary: 'D' }, category: 'inputs' } },
+		secondSelectedDate: { control: { type: 'text' }, table: { type: { summary: 'D' }, category: 'inputs' } },
+		startOn: { control: { type: 'text' }, table: { category: 'inputs' } },
+		min: { control: { type: 'text' }, table: { category: 'inputs' } },
+		max: { control: { type: 'text' }, table: { category: 'inputs' } },
+		multiple: { control: false, table: { category: 'inputs' } },
 	},
 });
 

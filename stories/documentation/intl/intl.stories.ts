@@ -34,6 +34,7 @@ export const Basic: StoryObj<IntlStory> = {
 	argTypes: {
 		resultIntl: {
 			control: 'text',
+			table: { category: 'inputs' },
 		},
 	},
 };

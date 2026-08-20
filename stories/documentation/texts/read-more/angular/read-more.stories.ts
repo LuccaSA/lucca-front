@@ -17,6 +17,7 @@ export default {
 				step: 1,
 			},
 			description: 'Modifie le nombre de lignes affichées à l’état replié.',
+			table: { category: 'inputs' },
 		},
 		surface: {
 			options: setStoryOptions([...READ_MORE_SURFACE, ...OTHER_SURFACE_OPTIONS]),
@@ -24,15 +25,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la couleur de fond sous le bouton "Lire plus / moins" ',
+			table: { category: 'inputs' },
 		},
 		textFlow: {
 			description: 'Applique les espacements du composant Text flow',
+			table: { category: 'inputs' },
 		},
 		openOnly: {
 			description: 'Empêche la fermeture du composant en masquant le bouton "Lire moins"',
+			table: { category: 'inputs' },
 		},
 		innerContent: {
 			description: 'Permet de passer le contenu via un innerHTML',
+			table: { category: 'inputs' },
 		},
 		content: {
 			table: { disable: true },
