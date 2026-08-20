@@ -5,10 +5,10 @@
  * Two sources:
  *  - The ZeroHeight "Prisme" design-system site — always linkable, but only at
  *    its root (page IDs are opaque hex, not derivable from a token/class name).
- *  - Storybook autodocs — per-family pages for the ~16 utility families that
- *    have a story. The Storybook host isn't derivable, so it's only used when
- *    the user configures a base URL. Tokens and unmapped utilities (spacing,
- *    gap, flex, …) have no Storybook page.
+ *  - Storybook autodocs — per-family pages for the utility families that have a
+ *    story. The Storybook host isn't derivable, so it's only used when the user
+ *    configures a base URL. Tokens and unmapped utilities (spacing, gap, flex, …)
+ *    have no Storybook page.
  */
 
 /** Canonical human-facing design-system docs (ZeroHeight Prisme). */
@@ -26,12 +26,19 @@ export interface DocLink {
  * gap, flex, alignment, …) intentionally has no Storybook page. Hand-maintained.
  */
 const UTILITY_FAMILY_SLUGS: { test: RegExp; slug: string }[] = [
-	{ test: /^pr-u-(colorText|text[A-Z][a-z]|text(XS|S|M|L|XL|XXL|XXXL)$)/, slug: 'textcolor' },
-	{ test: /^pr-u-body|^pr-u-h[1-6]$|^pr-u-fontWeight|^pr-u-fontFamily/, slug: 'textstyle' },
+	// The only page documenting legacy unprefixed classes; every rule below is pr-u- only.
+	{ test: /^u-border[A-Za-z]*Radius/, slug: 'borderradiusdeprecated' },
+	// font-size + line-height, not colour — must precede the textcolor rule.
+	{ test: /^pr-u-body|^pr-u-text(XS|S|M|L|XL|XXL|XXXL)$/, slug: 'textsize' },
+	{ test: /^pr-u-(colorText|text[A-Z][a-z])/, slug: 'textcolor' },
+	{ test: /^pr-u-h[1-6]$|^pr-u-font(Weight|Family|Style)/, slug: 'textstyle' },
 	{ test: /^pr-u-textAlign|^pr-u-textDecoration|^pr-u-whiteSpace|^pr-u-textLeft$|^pr-u-textRight$|^pr-u-textCenter$/, slug: 'textstyle' },
+	{ test: /^pr-u-(min|max)?(width|height|inlineSize|blockSize)/i, slug: 'sizes' },
 	{ test: /^pr-u-display/, slug: 'display' },
 	{ test: /^pr-u-(flexDirection|justifyContent|alignItems|flexWrap|flex|order|placeItemsCenter)/, slug: 'display' },
 	{ test: /^pr-u-position|^pr-u-(top|bottom|left|right|inset)/, slug: 'position' },
+	// Before the float rule, whose `clear` prefix would otherwise swallow clearfix.
+	{ test: /^pr-u-(listReset|buttonReset|clearfix)/, slug: 'reset' },
 	{ test: /^pr-u-float|^pr-u-clear/, slug: 'float' },
 	{ test: /^pr-u-visibility/, slug: 'visibility' },
 	{ test: /^pr-u-verticalAlign/, slug: 'verticalalign' },
@@ -40,7 +47,6 @@ const UTILITY_FAMILY_SLUGS: { test: RegExp; slug: string }[] = [
 	{ test: /^pr-u-border/, slug: 'border' },
 	{ test: /^pr-u-ellipsis/, slug: 'ellipsis' },
 	{ test: /^pr-u-onlyPrint/, slug: 'print' },
-	{ test: /^pr-u-(listReset|buttonReset|clearfix)/, slug: 'reset' },
 	{ test: /^pr-u-animated/, slug: 'spin' },
 	{ test: /^pr-u-help/, slug: 'help' },
 ];

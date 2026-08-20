@@ -27,6 +27,38 @@ describe('utilityDocLinks', () => {
 		expect(links[1].url).toContain('-borderradius--docs');
 	});
 
+	it('maps font-size classes to textsize, not textcolor', () => {
+		for (const name of ['pr-u-bodyM', 'pr-u-textM', 'pr-u-textXS', 'pr-u-textXXXL']) {
+			expect(utilityDocLinks(name, 'https://d/sb')[1].url).toContain('-textsize--docs');
+		}
+	});
+
+	it('keeps colour classes whose name starts with text on textcolor', () => {
+		for (const name of ['pr-u-textBrand', 'pr-u-textSubtle']) {
+			expect(utilityDocLinks(name, 'https://d/sb')[1].url).toContain('-textcolor--docs');
+		}
+	});
+
+	it('maps the size family, physical and logical alike', () => {
+		for (const name of ['pr-u-width100%', 'pr-u-minWidth0', 'pr-u-heightFitContent', 'pr-u-inlineSize100%', 'pr-u-maxInlineSizeFitContent', 'pr-u-minBlockSize0']) {
+			expect(utilityDocLinks(name, 'https://d/sb')[1].url).toContain('-sizes--docs');
+		}
+	});
+
+	it('maps clearfix to reset, not float', () => {
+		expect(utilityDocLinks('pr-u-clearfix', 'https://d/sb')[1].url).toContain('-reset--docs');
+		expect(utilityDocLinks('pr-u-clearBoth', 'https://d/sb')[1].url).toContain('-float--docs');
+	});
+
+	it('maps the legacy radius twins to their own deprecated page', () => {
+		expect(utilityDocLinks('u-borderRadiusM', 'https://d/sb')[1].url).toContain('-borderradiusdeprecated--docs');
+		expect(utilityDocLinks('u-borderTopLeftRadiusXL', 'https://d/sb')[1].url).toContain('-borderradiusdeprecated--docs');
+	});
+
+	it('maps font-style alongside the rest of the text-style family', () => {
+		expect(utilityDocLinks('pr-u-fontStyleItalic', 'https://d/sb')[1].url).toContain('-textstyle--docs');
+	});
+
 	it('omits the Storybook link for unmapped families (e.g. spacing)', () => {
 		const links = utilityDocLinks('pr-u-marginInlineStart100', 'https://d/sb');
 		expect(links).toHaveLength(1);
