@@ -1,10 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
 import { SkeletonColsAlign } from '../skeleton.type';
 
 @Component({
-	selector: 'lu-skeleton-index-table',
+	selector: 'lu-skeleton-index-table,pr-skeleton-index-table',
 	templateUrl: './skeleton-index-table.component.html',
 	styleUrl: './skeleton-index-table.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,19 +16,19 @@ export class SkeletonIndexTableComponent {
 	/**
 	 * Skeleton only show in index table body
 	 */
-	readonly tableBodyOnly = input(false, { transform: luBooleanAttribute });
+	readonly tableBodyOnly = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Defines the number of cols (5 by default)
 	 */
-	readonly cols = input(5, { transform: luNumberAttribute });
+	readonly cols = input(5, { transform: numberAttribute });
 
 	readonly colsAlign = input<Record<number, SkeletonColsAlign>>({});
 
 	/**
 	 * Defines the number of row (8 by default)
 	 */
-	readonly rows = input(8, { transform: luNumberAttribute });
+	readonly rows = input(8, { transform: numberAttribute });
 
 	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));
