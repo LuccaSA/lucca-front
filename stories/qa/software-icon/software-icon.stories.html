@@ -14,11 +14,11 @@
 			<td>
 				<div class="demo-QAtable-list">
 					@for (softwareIcon of softwareIconList; track softwareIcon) {
-						<div
+						<span
 							class="softwareIcon"
 							aria-hidden="true"
 							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/' + softwareIcon + '.svg' | luSafeExternalSvg"
-						></div>
+						></span>
 					}
 				</div>
 			</td>
@@ -35,11 +35,11 @@
 			<td>
 				<div class="demo-QAtable-list">
 					@for (softwareIcon of softwareIconList; track softwareIcon) {
-						<div
+						<span
 							class="softwareIcon is-disabled"
 							aria-hidden="true"
 							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/' + softwareIcon + '.svg' | luSafeExternalSvg"
-						></div>
+						></span>
 					}
 				</div>
 			</td>
@@ -55,31 +55,31 @@
 			<td>Size</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<div
+					<span
 						class="softwareIcon mod-XXS"
 						aria-hidden="true"
 						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
-					></div>
-					<div
+					></span>
+					<span
 						class="softwareIcon mod-XS"
 						aria-hidden="true"
 						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
-					></div>
-					<div
+					></span>
+					<span
 						class="softwareIcon mod-XS"
 						aria-hidden="true"
 						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
-					></div>
-					<div
+					></span>
+					<span
 						class="softwareIcon"
 						aria-hidden="true"
 						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
-					></div>
-					<div
+					></span>
+					<span
 						class="softwareIcon mod-L"
 						aria-hidden="true"
 						[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
-					></div>
+					></span>
 				</div>
 			</td>
 			<td>
@@ -98,27 +98,27 @@
 				<div class="softwareIconWrapper">
 					<ul class="softwareIconWrapper-list">
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Invoices</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Absences</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Payslip</span>
 						</li>
 					</ul>
@@ -136,19 +136,19 @@
 					<ng-template #softwareIconWrapperPopoverS>
 						<ul class="popover-contentOptional softwareIconWrapper_popover mod-S">
 							<li class="softwareIconWrapper_popover-item">
-								<div
+								<span
 									class="softwareIcon"
 									aria-hidden="true"
 									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
-								></div>
+								></span>
 								<span class="pr-u-mask" translate="no">Benefits</span>
 							</li>
 							<li class="softwareIconWrapper_popover-item">
-								<div
+								<span
 									class="softwareIcon"
 									aria-hidden="true"
 									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
-								></div>
+								></span>
 								<span class="pr-u-mask" translate="no">Office</span>
 							</li>
 						</ul>
@@ -174,27 +174,27 @@
 				<div class="softwareIconWrapper mod-S">
 					<ul class="softwareIconWrapper-list">
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Invoices</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Absences</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Payslip</span>
 						</li>
 					</ul>
@@ -212,19 +212,19 @@
 					<ng-template #softwareIconWrapperPopoverS>
 						<ul class="popover-contentOptional softwareIconWrapper_popover mod-S">
 							<li class="softwareIconWrapper_popover-item">
-								<div
+								<span
 									class="softwareIcon"
 									aria-hidden="true"
 									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
-								></div>
+								></span>
 								<span class="pr-u-mask" translate="no">Benefits</span>
 							</li>
 							<li class="softwareIconWrapper_popover-item">
-								<div
+								<span
 									class="softwareIcon"
 									aria-hidden="true"
 									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
-								></div>
+								></span>
 								<span class="pr-u-mask" translate="no">Office</span>
 							</li>
 						</ul>
@@ -234,27 +234,27 @@
 				<div class="softwareIconWrapper mod-XS">
 					<ul class="softwareIconWrapper-list">
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Invoices</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Absences</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Payslip</span>
 						</li>
 					</ul>
@@ -272,19 +272,19 @@
 					<ng-template #softwareIconWrapperPopoverXS>
 						<ul class="popover-contentOptional softwareIconWrapper_popover mod-XS">
 							<li class="softwareIconWrapper_popover-item">
-								<div
+								<span
 									class="softwareIcon"
 									aria-hidden="true"
 									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
-								></div>
+								></span>
 								<span class="pr-u-mask" translate="no">Benefits</span>
 							</li>
 							<li class="softwareIconWrapper_popover-item">
-								<div
+								<span
 									class="softwareIcon"
 									aria-hidden="true"
 									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
-								></div>
+								></span>
 								<span class="pr-u-mask" translate="no">Office</span>
 							</li>
 						</ul>
@@ -317,75 +317,75 @@
 				<div class="softwareIconWrapper" style="inline-size: 8.875rem">
 					<ul class="softwareIconWrapper-list">
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Invoices</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Absences</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Payslip</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Benefits</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Office</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Invoices</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Absences</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/payslip.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Payslip</span>
 						</li>
 						<li class="softwareIconWrapper-list-item">
-							<div
+							<span
 								class="softwareIcon"
 								aria-hidden="true"
 								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/benefits.svg' | luSafeExternalSvg"
-							></div>
+							></span>
 							<span class="pr-u-mask" translate="no">Benefits</span>
 						</li>
 					</ul>
@@ -403,19 +403,19 @@
 					<ng-template #softwareIconWrapperPopoverLB>
 						<ul class="popover-contentOptional softwareIconWrapper_popover">
 							<li class="softwareIconWrapper_popover-item">
-								<div
+								<span
 									class="softwareIcon"
 									aria-hidden="true"
 									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/office.svg' | luSafeExternalSvg"
-								></div>
+								></span>
 								<span class="pr-u-mask" translate="no">Office</span>
 							</li>
 							<li class="softwareIconWrapper_popover-item">
-								<div
+								<span
 									class="softwareIcon"
 									aria-hidden="true"
 									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/invoices.svg' | luSafeExternalSvg"
-								></div>
+								></span>
 								<span class="pr-u-mask" translate="no">Invoices</span>
 							</li>
 						</ul>

@@ -52,7 +52,7 @@ function getTemplate(args: SoftwareIconBasicStory): string {
 		? `
 	<span class="pr-u-mask">${args.iconAlt}</span>`
 		: ``;
-	return `<div class="softwareIcon${disabled}${size}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.icon}${extension}' | luSafeExternalSvg"></div>${iconAlt}`;
+	return `<span class="softwareIcon${disabled}${size}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.icon}${extension}' | luSafeExternalSvg"></span>${iconAlt}`;
 }
 
 const Template = (args: SoftwareIconBasicStory) => ({
