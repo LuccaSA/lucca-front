@@ -18,10 +18,14 @@ export interface CssApiEntry {
 	/** Media or container queries this utility also has variants for. */
 	variants?: string[];
 	deprecated?: boolean;
-	/** Always names an existing, non-deprecated entry — the generator validates it. */
+	/**
+	 * Migration target. The generator drops any replacement it cannot resolve, so this
+	 * always names an entry in the dataset — but it validates against the deprecation
+	 * source's own beliefs, so a target wrongly believed current survives.
+	 */
 	replacement?: string;
 	note?: string;
-	/** Mixins only: the `@use` path a consumer imports. */
+	/** Mixins only: the `@use` path a consumer imports. Always under `commons/utils`. */
 	import?: string;
 	/** Mixins only: doc comment above the definition. */
 	doc?: string;

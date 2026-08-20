@@ -5,7 +5,17 @@
 				<p>
 					<strong>Beta.</strong> This page is generated from the CSS API manifest shipped inside
 					<code class="code">&#64;lucca-front/scss</code>. Names and values are extracted from the compiled CSS and are accurate.
-					Deprecation data is provisional: it comes from a temporary source, pending the deprecation registry currently being built.
+				</p>
+				<p>
+					The surface is compiled with all product palettes, the deprecated <code class="code">u-</code> prefix and a cursive font family —
+					all off by default, so some entries are absent from a default install. Mixins cover <code class="code">commons/utils</code> only:
+					Sass functions, <code class="code">&#64;lucca-front/icons</code> and the per-component <code class="code">exports</code> mixins
+					are out of scope.
+				</p>
+				<p>
+					Deprecation data is provisional, pending the deprecation registry currently being built. Utility classes are close to complete;
+					custom properties are not — the retired palette families and the legacy
+					<code class="code">--commons-*</code> block are not yet flagged, so treat a missing badge as unknown rather than current.
 				</p>
 			</div>
 		</div>

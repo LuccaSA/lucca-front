@@ -1,14 +1,22 @@
 /**
  * Generates the CSS API manifest shipped inside `@lucca-front/scss`.
  *
- * Consumers read it from their own node_modules, so it describes the CSS API of
- * the version actually installed. Consumer-agnostic by design.
+ * Consumers read it from their own node_modules, so it describes the version
+ * actually installed. Consumer-agnostic by design.
  *
- * Strategy: compile the full SCSS surface (all product palettes, deprecated
- * `u-*` prefix, cursive font) to expanded CSS, then walk it with PostCSS to
+ * Strategy: compile the SCSS surface to expanded CSS, then walk it with PostCSS to
  * enumerate the public custom properties and utility classes. Component-scoped
  * custom properties (`--components-*` / `--component-*`) are excluded: they are
  * internal implementation, not consumer API.
+ *
+ * Two scope limits worth knowing before reading the output:
+ *
+ * - It is the *maximal* surface, not a default install's. `CONFIG` below is
+ *   compiled in and reported as `config` in the manifest, so a consumer can tell
+ *   "not in your build" from "not in Lucca Front".
+ * - `mixins` covers `commons/utils` only — the consumer-facing util modules. Sass
+ *   functions, `@lucca-front/icons`, and the per-component `exports` mixins are
+ *   out of scope, so the list is not the package's whole Sass API.
  *
  * Uses only dependencies already present at the repo root (sass, postcss,
  * postcss-value-parser). No new dependencies.
@@ -28,7 +36,7 @@ const MANIFEST_VERSION = 1;
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 const NODE_MODULES = path.join(REPO_ROOT, 'node_modules');
 
-/** Source folder holding the consumer-facing `@mixin` definitions. */
+/** Source folder holding the consumer-facing `@mixin` definitions. The whole mixin scope. */
 const UTILS_DIR = path.join(REPO_ROOT, 'packages', 'scss', 'src', 'commons', 'utils');
 /** Import-path prefix a consumer writes to `@use` a util module. */
 const MIXIN_IMPORT_BASE = '@lucca-front/scss/src/commons/utils';
@@ -54,15 +62,23 @@ const COMPONENT_VAR_RE = /^--components?-/;
 const UTILITY_SELECTOR_RE = /^(?::root\s+)?\.((?:pr-)?u-(?:[A-Za-z0-9]|\\.)+)((?:::?)[A-Za-z-][\w-]*)?$/;
 
 /**
- * The synthetic entry compiled to expose the entire API surface. Mirrors
- * `.storybook/styles.scss` config plus the deprecated utility prefix so the
- * manifest can flag `u-*` twins.
+ * Config the surface is compiled with, reported as `config` in the manifest. Every
+ * one of these is off or empty by default, so entries owed to them (the `u-*` twins,
+ * the extra product palettes, `--commons-font-family-cursive`) are absent from a
+ * default install.
  */
+const CONFIG = Object.freeze({
+	palettesOtherProduct: 'all',
+	deprecatedUtilityPrefix: true,
+	fontFamilyCursive: 'Caveat',
+});
+
+/** The synthetic entry compiled to expose the API surface. Mirrors `.storybook/styles.scss`. */
 const ENTRY_SCSS = `
 @use '@lucca-front/scss/src/commons/config' with (
-	$palettesOtherProduct: 'all',
-	$deprecatedUtilityPrefix: true,
-	$fontFamilyCursive: 'Caveat'
+	$palettesOtherProduct: '${CONFIG.palettesOtherProduct}',
+	$deprecatedUtilityPrefix: ${CONFIG.deprecatedUtilityPrefix},
+	$fontFamilyCursive: '${CONFIG.fontFamilyCursive}'
 );
 @use '@lucca-front/scss/src/main-all';
 `;
@@ -143,13 +159,6 @@ function resolveValue(value, varMap, maxDepth = 10) {
 }
 
 /**
- * Reads a `/* @deprecated optional note *\/` loud comment immediately preceding
- * a node, if present. Loud comments survive expanded output but are stripped
- * from the shipped compressed CSS.
- * @param {import('postcss').Node} node
- * @returns {{ note?: string } | undefined}
- */
-/**
  * Stamps deprecation metadata onto a manifest entry, if the source reports any.
  * Every element type goes through here so all three carry the same optional
  * fields: `deprecated`, `replacement`, `note`.
@@ -171,6 +180,13 @@ function applyDeprecation(entry, kind, name) {
 	}
 }
 
+/**
+ * Reads a `/* @deprecated optional note *\/` loud comment preceding a node. Available
+ * hook, currently unused: `packages/scss/src` has no loud comments, so every flag in
+ * the manifest comes from deprecation-source.js.
+ * @param {import('postcss').Node} node
+ * @returns {{ note?: string } | undefined}
+ */
 function readDeprecatedComment(node) {
 	const prev = node.prev();
 	if (prev && prev.type === 'comment') {
@@ -487,6 +503,7 @@ function extract() {
 	return {
 		manifestVersion: MANIFEST_VERSION,
 		package: '@lucca-front/scss',
+		config: { ...CONFIG },
 		variables: mapToObject(variables),
 		utilities: mapToObject(utilities),
 		mixins: extractMixins(),
@@ -642,6 +659,16 @@ function selfCheck(manifest) {
 	const componentLeak = varNames.filter((n) => COMPONENT_VAR_RE.test(n));
 	if (componentLeak.length) {
 		errors.push(`Component-scoped vars leaked into manifest (${componentLeak.length}), e.g. ${componentLeak[0]}`);
+	}
+
+	// The reported config must be the one that was compiled: `--commons-font-family-cursive`
+	// only exists when $fontFamilyCursive is set, so it proves the entry took effect.
+	if (!manifest.config || manifest.config.fontFamilyCursive !== CONFIG.fontFamilyCursive) {
+		errors.push(`Manifest does not report the compiled config: ${JSON.stringify(manifest.config)}`);
+	}
+	const cursive = manifest.variables['--commons-font-family-cursive'];
+	if (!cursive || !cursive.value.includes(CONFIG.fontFamilyCursive)) {
+		errors.push(`Compiled config not reflected in the output: ${JSON.stringify(cursive)}`);
 	}
 
 	const categories = new Set(Object.values(manifest.variables).map((v) => v.category));
