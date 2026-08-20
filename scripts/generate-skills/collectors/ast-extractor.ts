@@ -18,7 +18,19 @@
 
 import { execSync } from 'child_process';
 import path from 'path';
-import { ExtractedAPI, ExtractedInput, ExtractedModel, ExtractedOutput, PackageAPI, VersionConfig } from '../types';
+import {
+	DeprecatedModule,
+	ExtractedAPI,
+	ExtractedInput,
+	ExtractedModel,
+	ExtractedOutput,
+	ExtractedPipe,
+	ExtractedProvider,
+	ExtractedService,
+	ExtractedToken,
+	PackageAPI,
+	VersionConfig,
+} from '../types';
 
 const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
 
@@ -32,6 +44,69 @@ const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
  *                          out of a multi-component package (e.g. "lu-text-input" from "forms").
  */
 export function extractPackageAPI(ngPackage: string, version: VersionConfig, silent = false, selectorFilter?: string[]): PackageAPI | null {
+	const collected = collectPackage(ngPackage, version, silent);
+	if (!collected) return null;
+	const { apis } = collected;
+	let { providers, tokens, pipes, services, deprecatedModules } = collected;
+
+	let scoped = apis;
+	if (selectorFilter && selectorFilter.length > 0) {
+		const wanted = new Set(selectorFilter);
+		scoped = apis.filter((a) => a.selectors.some((s) => wanted.has(s)));
+		if (scoped.length === 0) {
+			if (!silent) console.warn(`  ⚠️  selectorFilter [${selectorFilter.join(', ')}] matched no class in ${ngPackage} at ${version.tag}`);
+			return null;
+		}
+
+		// File-affinity scoping: a multi-component package (e.g. "forms") documents each component
+		// separately (selectorFilter). Package-level symbols are attached only to the component(s)
+		// whose class files share a directory lineage with the symbol's file (same dir, ancestor or
+		// descendant) — e.g. forms/rich-text-input/formatters/* attaches to the rich-text component
+		// only, not to every forms component.
+		const classDirs = [...new Set(scoped.map((a) => path.posix.dirname(a.sourceFile ?? '')))].filter(Boolean);
+		const near = (file?: string): boolean => {
+			if (!file) return false;
+			const dir = path.posix.dirname(file);
+			return classDirs.some((cd) => dir === cd || dir.startsWith(`${cd}/`) || cd.startsWith(`${dir}/`));
+		};
+		providers = providers.filter((s) => near(s.sourceFile));
+		tokens = tokens.filter((s) => near(s.sourceFile));
+		pipes = pipes.filter((s) => near(s.sourceFile));
+		services = services.filter((s) => near(s.sourceFile));
+		deprecatedModules = deprecatedModules.filter((s) => near(s.sourceFile));
+	}
+
+	if (scoped.length === 0) return null;
+
+	return { ngPackage, apis: scoped, providers, tokens, pipes, services, deprecatedModules };
+}
+
+/**
+ * Extracts ONLY the package-level symbols (providers, tokens, pipes, services, deprecated
+ * modules) of a package, whether or not it exports components. Used for orphan packages
+ * (no component to attach to → rendered on the generated `tools/angular-api.md` page).
+ */
+export function extractPackageSymbols(
+	ngPackage: string,
+	version: VersionConfig,
+): Pick<PackageAPI, 'providers' | 'tokens' | 'pipes' | 'services' | 'deprecatedModules'> & { hasComponents: boolean } | null {
+	const collected = collectPackage(ngPackage, version, true);
+	if (!collected) return null;
+	const { apis, ...symbols } = collected;
+	return { ...symbols, hasComponents: apis.length > 0 };
+}
+
+interface CollectedPackage {
+	apis: ExtractedAPI[];
+	providers: ExtractedProvider[];
+	tokens: ExtractedToken[];
+	pipes: ExtractedPipe[];
+	services: ExtractedService[];
+	deprecatedModules: DeprecatedModule[];
+}
+
+/** Walks a package's public API files and extracts classes + package-level symbols. */
+function collectPackage(ngPackage: string, version: VersionConfig, silent: boolean): CollectedPackage | null {
 	// Start from the public API entrypoint
 	const publicApiPath = `packages/ng/${ngPackage}/public-api.ts`;
 	const publicApiContent = gitShow(version.tag, publicApiPath);
@@ -49,29 +124,30 @@ export function extractPackageAPI(ngPackage: string, version: VersionConfig, sil
 		return null;
 	}
 
-	// Extract API from each implementation file
+	// Extract API + package-level symbols from each implementation file
 	const apis: ExtractedAPI[] = [];
+	const providers: ExtractedProvider[] = [];
+	const tokens: ExtractedToken[] = [];
+	const pipes: ExtractedPipe[] = [];
+	let services: ExtractedService[] = [];
+	const deprecatedModules: DeprecatedModule[] = [];
 	for (const filePath of implFiles) {
 		const content = gitShow(version.tag, filePath);
 		if (!content) continue;
 
-		const extracted = extractFromFile(content, ngPackage, filePath, version.tag);
-		apis.push(...extracted);
+		apis.push(...extractFromFile(content, ngPackage, filePath, version.tag));
+		providers.push(...extractProviders(content, filePath));
+		tokens.push(...extractTokens(content, filePath));
+		pipes.push(...extractPipes(content, filePath));
+		services.push(...extractServices(content, filePath));
+		deprecatedModules.push(...extractDeprecatedModules(content, filePath));
 	}
 
-	let scoped = apis;
-	if (selectorFilter && selectorFilter.length > 0) {
-		const wanted = new Set(selectorFilter);
-		scoped = apis.filter((a) => a.selectors.some((s) => wanted.has(s)));
-		if (scoped.length === 0) {
-			if (!silent) console.warn(`  ⚠️  selectorFilter [${selectorFilter.join(', ')}] matched no class in ${ngPackage} at ${version.tag}`);
-			return null;
-		}
-	}
+	// Pipes are also matched by the @Injectable service scanner in some codebases — dedup by class.
+	const pipeClasses = new Set(pipes.map((p) => p.className));
+	services = services.filter((s) => !pipeClasses.has(s.className));
 
-	if (scoped.length === 0) return null;
-
-	return { ngPackage, apis: scoped };
+	return { apis, providers, tokens, pipes, services, deprecatedModules };
 }
 
 /**
@@ -159,10 +235,9 @@ function resolveImplementationFiles(publicApiContent: string, ngPackage: string,
 				}
 			}
 
-			// The file itself may contain component/directive classes
-			if (fileContent.includes('@Component') || fileContent.includes('@Directive')) {
-				files.push(resolvedPath);
-			}
+			// The file itself may contain extractable exports (component/directive classes, but
+			// also providers, tokens, pipes, services — the per-kind extractors filter).
+			files.push(resolvedPath);
 		}
 
 		// Also handle direct exports from the public-api.ts itself (wildcard + named re-exports)
@@ -173,9 +248,7 @@ function resolveImplementationFiles(publicApiContent: string, ngPackage: string,
 
 			if (!visited.has(resolved.path)) {
 				visited.add(resolved.path);
-				if (resolved.content.includes('@Component') || resolved.content.includes('@Directive')) {
-					files.push(resolved.path);
-				}
+				files.push(resolved.path);
 				if (resolved.content.includes('export *') || /export\s+(?:type\s+)?\{/.test(resolved.content)) {
 					resolve(resolved.content, resolved.path);
 				}
@@ -239,6 +312,8 @@ function extractFromFile(content: string, ngPackage: string, filePath: string, t
 			models,
 			exportAs: exportAs ?? undefined,
 			standalone,
+			deprecated: jsdocBefore(content, classMatch.index).deprecated,
+			sourceFile: filePath,
 		});
 	}
 
@@ -328,6 +403,8 @@ export interface SignalMember {
 	generic?: string;
 	argsStr: string;
 	isRequired: boolean;
+	/** Index of the member's match in the class body (JSDoc lookup). */
+	declIdx: number;
 }
 
 /**
@@ -368,7 +445,7 @@ function findSignalMembers(classBody: string, fnName: string): SignalMember[] {
 		const closeIdx = readBalancedDelim(classBody, openIdx, '(', ')');
 		if (closeIdx === -1) continue;
 
-		out.push({ propName: m[1], generic, argsStr: classBody.slice(openIdx + 1, closeIdx).trim(), isRequired });
+		out.push({ propName: m[1], generic, argsStr: classBody.slice(openIdx + 1, closeIdx).trim(), isRequired, declIdx: m.index });
 	}
 	return out;
 }
@@ -423,6 +500,7 @@ function extractSignalInputs(classBody: string, typeContext: string): ExtractedI
 			default: defaultVal,
 			transform,
 			source: 'signal',
+			deprecated: jsdocBefore(classBody, member.declIdx).deprecated,
 			expandedValues,
 			expandedTypeName,
 		});
@@ -526,6 +604,7 @@ function extractDecoratorInputs(classBody: string): ExtractedInput[] {
 			default: defaultVal,
 			transform,
 			source: 'decorator',
+			deprecated: jsdocBefore(classBody, markerMatch.index).deprecated,
 		});
 	}
 
@@ -545,6 +624,7 @@ function extractSignalOutputs(classBody: string): ExtractedOutput[] {
 				bindingName: member.propName,
 				type: member.generic || 'void',
 				source: 'signal',
+				deprecated: jsdocBefore(classBody, member.declIdx).deprecated,
 			});
 		}
 	}
@@ -566,6 +646,7 @@ function extractDecoratorOutputs(classBody: string): ExtractedOutput[] {
 			bindingName: match[1] || match[2],
 			type: match[3]?.trim() || 'void',
 			source: 'decorator',
+			deprecated: jsdocBefore(classBody, match.index).deprecated,
 		});
 	}
 
@@ -584,6 +665,7 @@ function extractModels(classBody: string): ExtractedModel[] {
 			bindingName: member.propName,
 			type: member.generic || 'unknown',
 			required: member.isRequired,
+			deprecated: jsdocBefore(classBody, member.declIdx).deprecated,
 		});
 	}
 
@@ -783,6 +865,230 @@ function extractStringUnionValues(unionType: string): string[] | null {
 		return parts.map((p) => p.slice(1, -1));
 	}
 	return null;
+}
+
+// ─── JSDoc (description + @deprecated) ───────────────────────────────────────
+
+/**
+ * Reads the JSDoc block ending immediately before `declIdx` (only whitespace between the two).
+ * Returns the prose summary and the @deprecated message. A bare `@deprecated` tag yields the
+ * message "Déprécié." so `deprecated` is always truthy when the symbol is deprecated.
+ */
+export function jsdocBefore(content: string, declIdx: number): { description?: string; deprecated?: string } {
+	const head = content.slice(0, declIdx).replace(/\s+$/, '');
+	if (!head.endsWith('*/')) return {};
+	const start = head.lastIndexOf('/**');
+	if (start === -1) return {};
+	const lines = head
+		.slice(start + 3, head.length - 2)
+		.split('\n')
+		.map((l) => l.replace(/^\s*\*\s?/, '').trimEnd());
+
+	let deprecated: string | undefined;
+	let inDeprecated = false;
+	const descLines: string[] = [];
+	for (const line of lines) {
+		const t = line.trim();
+		if (t.startsWith('@deprecated')) {
+			inDeprecated = true;
+			deprecated = t.replace(/^@deprecated\s*/, '').trim();
+			continue;
+		}
+		if (t.startsWith('@')) {
+			inDeprecated = false;
+			continue;
+		}
+		if (inDeprecated && t) deprecated = deprecated ? `${deprecated} ${t}` : t;
+		else if (!inDeprecated && t) descLines.push(t);
+	}
+	if (deprecated !== undefined && deprecated === '') deprecated = 'Déprécié.';
+	const description = descLines.join(' ').replace(/\s+/g, ' ').trim() || undefined;
+	return { description, deprecated };
+}
+
+// ─── Package-level symbols: providers, tokens, pipes, services, modules ──────
+
+/** Collapses whitespace in a captured signature fragment (multi-line params → one line). */
+function tidy(s: string): string {
+	return s.replace(/\s+/g, ' ').trim();
+}
+
+/** Reads a balanced `(…)` starting at `openIdx`, returns the inner text and end index, or null. */
+function readParen(content: string, openIdx: number): { inner: string; end: number } | null {
+	const close = readBalancedDelim(content, openIdx, '(', ')');
+	if (close === -1) return null;
+	return { inner: content.slice(openIdx + 1, close), end: close };
+}
+
+/** Reads an optional balanced generic `<…>` at `idx` (after possible spaces). */
+function readGeneric(content: string, idx: number): { generic: string; end: number } | null {
+	const m = /^\s*</.exec(content.slice(idx));
+	if (!m) return null;
+	const ltIdx = idx + m[0].length - 1;
+	const gtIdx = readBalancedDelim(content, ltIdx, '<', '>');
+	if (gtIdx === -1) return null;
+	return { generic: content.slice(ltIdx + 1, gtIdx), end: gtIdx };
+}
+
+/** Return-type annotation between a `)` and the `{` of the body, e.g. ": Provider[]". */
+function readReturnType(content: string, afterParenIdx: number): string | undefined {
+	const m = /^\s*:\s*([^{;]+)\{/.exec(content.slice(afterParenIdx));
+	return m ? tidy(m[1]) : undefined;
+}
+
+/** Exported `provide*()` / `configure*()` functions. */
+export function extractProviders(content: string, sourceFile: string): ExtractedProvider[] {
+	const out: ExtractedProvider[] = [];
+	const re = /export\s+function\s+((?:provide|configure)[A-Z]\w*)/g;
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(content)) !== null) {
+		let i = m.index + m[0].length;
+		const gen = readGeneric(content, i);
+		let generic = '';
+		if (gen) {
+			generic = `<${tidy(gen.generic)}>`;
+			i = gen.end + 1;
+		}
+		const parenMatch = /^\s*\(/.exec(content.slice(i));
+		if (!parenMatch) continue;
+		const paren = readParen(content, i + parenMatch[0].length - 1);
+		if (!paren) continue;
+		const ret = readReturnType(content, paren.end + 1);
+		const jsdoc = jsdocBefore(content, m.index);
+		out.push({
+			name: m[1],
+			signature: `${generic}(${tidy(paren.inner)})${ret ? `: ${ret}` : ''}`,
+			description: jsdoc.description,
+			deprecated: jsdoc.deprecated,
+			sourceFile,
+		});
+	}
+	return out;
+}
+
+/** Exported `InjectionToken` consts. */
+export function extractTokens(content: string, sourceFile: string): ExtractedToken[] {
+	const out: ExtractedToken[] = [];
+	const re = /export\s+const\s+(\w+)\s*(?::\s*[^=\n]+?)?\s*=\s*new\s+InjectionToken\b/g;
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(content)) !== null) {
+		const gen = readGeneric(content, m.index + m[0].length);
+		const jsdoc = jsdocBefore(content, m.index);
+		out.push({
+			name: m[1],
+			type: gen ? tidy(gen.generic) : 'unknown',
+			description: jsdoc.description,
+			deprecated: jsdoc.deprecated,
+			sourceFile,
+		});
+	}
+	return out;
+}
+
+/** Exported `@Pipe` classes (name + transform signature). */
+export function extractPipes(content: string, sourceFile: string): ExtractedPipe[] {
+	const out: ExtractedPipe[] = [];
+	const re = /@Pipe\s*\(\s*\{([\s\S]*?)\}\s*\)\s*export\s+class\s+(\w+)/g;
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(content)) !== null) {
+		const nameMatch = m[1].match(/name\s*:\s*['"`]([^'"`]+)['"`]/);
+		if (!nameMatch) continue;
+		const classBody = extractClassBody(content, m.index + m[0].length);
+		let transformSignature: string | undefined;
+		if (classBody) {
+			// Implementation signature (skips overload declarations — they end with `;`, the body
+			// check below requires `{`). Generics are read balanced (nested `<...>` in defaults).
+			const tm = /(?:^|\n)\s*(?:(?:public|override)\s+)*transform\s*/.exec(classBody);
+			if (tm) {
+				let i = tm.index + tm[0].length;
+				const gen = readGeneric(classBody, i);
+				if (gen) i = gen.end + 1;
+				const pm = /^\s*\(/.exec(classBody.slice(i));
+				const paren = pm ? readParen(classBody, i + pm[0].length - 1) : null;
+				if (paren) {
+					const ret = readReturnType(classBody, paren.end + 1);
+					transformSignature = `(${tidy(paren.inner)})${ret ? `: ${ret}` : ''}`;
+				}
+			}
+		}
+		const jsdoc = jsdocBefore(content, m.index);
+		out.push({
+			name: nameMatch[1],
+			className: m[2],
+			transformSignature,
+			description: jsdoc.description,
+			deprecated: jsdoc.deprecated,
+			sourceFile,
+		});
+	}
+	return out;
+}
+
+/** Angular lifecycle hooks and members that are not part of a service's imperative surface. */
+const NON_API_METHODS = /^(constructor|ng[A-Z]\w*)$/;
+
+/** Exported `@Injectable` services: class + public method signatures. */
+export function extractServices(content: string, sourceFile: string): ExtractedService[] {
+	const out: ExtractedService[] = [];
+	const re = /@Injectable\s*\(([\s\S]*?)\)\s*export\s+(?:abstract\s+)?class\s+(\w+)/g;
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(content)) !== null) {
+		// Skip classes that are actually components/directives/pipes stacked with @Injectable.
+		const between = content.slice(m.index, m.index + m[0].length);
+		if (/@(Component|Directive|Pipe)\b/.test(between)) continue;
+
+		const classBody = extractClassBody(content, m.index + m[0].length);
+		const methods: string[] = [];
+		if (classBody) {
+			// Top-level members only: the repo indents class members with ONE tab. Private/protected
+			// members and lifecycle hooks are not part of the imperative surface. Generics are read
+			// balanced (`open<C, TData = LuDialogData<C>>` nests `<...>`).
+			const methodRe = /\n\t(?:(?:public|override|async)\s+)*([A-Za-z_$][\w$]*)\s*/g;
+			let mm: RegExpExecArray | null;
+			while ((mm = methodRe.exec(classBody)) !== null) {
+				const name = mm[1];
+				if (NON_API_METHODS.test(name) || name === 'if' || name === 'for' || name === 'switch' || name === 'while' || name === 'catch') continue;
+				let i = mm.index + mm[0].length;
+				const gen = readGeneric(classBody, i);
+				if (gen) i = gen.end + 1;
+				const pm = /^\(/.exec(classBody.slice(i));
+				if (!pm) continue;
+				const paren = readParen(classBody, i);
+				if (!paren) continue;
+				// Must be a method body, not a call/overload: a `{` (after optional return type) follows.
+				const after = classBody.slice(paren.end + 1);
+				if (!/^\s*(?::\s*[^{;]+)?\{/.test(after)) continue;
+				const ret = readReturnType(classBody, paren.end + 1);
+				methods.push(`${name}${gen ? `<${tidy(gen.generic)}>` : ''}(${tidy(paren.inner)})${ret ? `: ${ret}` : ''}`);
+			}
+		}
+		const jsdoc = jsdocBefore(content, m.index);
+		out.push({
+			className: m[2],
+			methods,
+			description: jsdoc.description,
+			deprecated: jsdoc.deprecated,
+			sourceFile,
+		});
+	}
+	return out;
+}
+
+/** Exported `@NgModule` classes carrying a @deprecated JSDoc. */
+export function extractDeprecatedModules(content: string, sourceFile: string): DeprecatedModule[] {
+	const out: DeprecatedModule[] = [];
+	const re = /@NgModule\s*\(/g;
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(content)) !== null) {
+		const paren = readParen(content, m.index + m[0].length - 1);
+		if (!paren) continue;
+		const classMatch = /^\s*export\s+class\s+(\w+)/.exec(content.slice(paren.end + 1));
+		if (!classMatch) continue;
+		const jsdoc = jsdocBefore(content, m.index);
+		if (!jsdoc.deprecated) continue;
+		out.push({ className: classMatch[1], deprecated: jsdoc.deprecated, sourceFile });
+	}
+	return out;
 }
 
 function gitShow(tag: string, filePath: string): string | null {

@@ -5,7 +5,7 @@ import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field'
 import { PHONE_NUMBER_INPUT_AUTOCOMPLETE, PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
@@ -25,10 +25,11 @@ export default {
 export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, errorInlineMessage, size, presentation, ...inputArgs } = args;
+		const model = useStoryModel('+12125550199');
 
 		return {
 			props: {
-				example: '+12125550199',
+				model,
 				country: '',
 			},
 			template: cleanupTemplate(`<lu-form-field [rolePresentationLabel]="true" ${generateInputs(
@@ -44,12 +45,12 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 				},
 				argTypes,
 			)}>
-	<lu-phone-number-input label="${label}" [country]="country" [(ngModel)]="example" #result="ngModel" ${generateInputs(inputArgs, argTypes)} />
+	<lu-phone-number-input label="${label}" [country]="country" [(ngModel)]="model.example" #result="ngModel" ${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 @if(result.invalid && result.errors.validPhoneNumber){
   <div>{{result.errors.validPhoneNumber}}</div>
 }
-<pr-story-model-display>{{ example }}</pr-story-model-display>
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>
 `),
 		};
 	},

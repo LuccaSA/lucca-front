@@ -4,7 +4,7 @@ import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field'
 import { TextareaInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { cleanupTemplate, useControlledStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
@@ -93,7 +93,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, value, presentation, ...inputArgs } = args;
 		return {
-			props: { example: value },
+			props: { model: useControlledStoryModel(value) },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -109,7 +109,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 			)}>
 	<lu-textarea-input autoResizeScrollIntoView="${autoResizeScrollIntoView}" autoResize="${autoResize}"
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example" />
+		[(ngModel)]="model.example" />
 </lu-form-field>
 `),
 			moduleMetadata: {

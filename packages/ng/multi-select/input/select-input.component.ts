@@ -10,6 +10,7 @@ import {
 	inject,
 	input,
 	Input,
+	LOCALE_ID,
 	model,
 	numberAttribute,
 	OnDestroy,
@@ -27,12 +28,13 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
-import { PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
+import { listSeparators } from '../select.utils';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
 
@@ -48,7 +50,6 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		FilterPillDisplayerDirective,
 		FilterPillLabelDirective,
 		ClearComponent,
-		PresentationDisplayDirective,
 		CommonModule,
 		ɵPresentationDisplayDefaultDirective,
 		IconComponent,
@@ -88,8 +89,20 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input({ transform: booleanAttribute })
 	keepSearchAfterSelection = false;
 
-	@Input()
-	filterPillLabelPlural: string;
+	/**
+	 * @deprecated use filterPillLabelPluralFn
+	 */
+	filterPillLabelPlural = input<string>(undefined);
+	filterPillLabelPluralFn = input<(count: number) => string>(undefined);
+
+	filterPillLabelPluralValue = computed(() => {
+		const label = this.filterPillLabelPluralFn();
+		const count = this.valueLength();
+		if (label) {
+			return label(count);
+		}
+		return `${count} ${this.filterPillLabelPlural()}`;
+	});
 
 	override selectParent$ = new Subject<void>();
 	override selectChildren$ = new Subject<void>();
@@ -110,7 +123,12 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
 	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
+	public singleOptionForDisplay: Signal<T | undefined> = computed(() => this.valueSignal()?.[0]);
 	override _value: T[] = [];
+
+	#listFormat = new Intl.ListFormat(inject(LOCALE_ID));
+
+	protected readonly presentationSeparators = computed(() => listSeparators(this.#listFormat, this.valueSignal()?.length ?? 0));
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
 		return this._panelRef;

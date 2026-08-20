@@ -1,4 +1,4 @@
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
+import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
@@ -8,7 +8,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
+import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
 import { waitForAngular } from '../../../../../helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
@@ -93,8 +93,9 @@ export default {
 export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
+		const model = useStoryModel<ILegume[]>([]);
 		return {
-			props: { legumes: allLegumes, example: [] },
+			props: { legumes: allLegumes, model },
 			template: `<lu-form-field ${generateInputs(
 				{
 					label,
@@ -108,9 +109,9 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 				},
 				argTypes,
 			)}>
-	<lu-multi-select [(ngModel)]="example" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event"${generateInputs(inputArgs, argTypes)} />
+	<lu-multi-select [(ngModel)]="model.example" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
+<pr-story-model-display>{{ model.example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [LuMultiSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
