@@ -25,4 +25,5 @@
 @mixin varsPanel {
 	--components-horizontalNavigation-panel-display: block;
 	--components-horizontalNavigation-panel-overflow: visible;
+	--components-horizontalNavigation-panel-flexGrow: 0;
 }

@@ -190,11 +190,11 @@ Si l’utilisateur clique à répétition sur un bouton qui entraine une erreur,
 ## Contenus associés
 
 <shortcut_tiles>
-<shortcut_tile url="https://prisme.lucca.io/94310e217/p/833f79" page-id="6380292">
+<shortcut_tile url="https://prisme.lucca.io/94310e217/p/833f79" page-id="8794481">
 **Feedback**
 </shortcut_tile>
 
-<shortcut_tile url="https://prisme.lucca.io/94310e217/p/64c8d8" page-id="2688423">
+<shortcut_tile url="https://prisme.lucca.io/94310e217/p/64c8d8" page-id="8794368">
 **Callout**
 </shortcut_tile>
 

@@ -7,12 +7,19 @@ export default {
 	argTypes: {
 		neutral: {
 			description: 'Applique un fond gris.',
+			table: { category: 'inputs' },
 		},
 		killable: {
 			description: 'Ajoute un bouton de fermeture.',
+			table: { category: 'inputs' },
 		},
 		killed: {
 			description: 'Événement déclenché lorsque la box est fermée.',
+			action: 'killed',
+			// `output()` sans type émet `void` (aucune valeur).
+			// Pour un `output<T>()`, reprendre `T` ici (ex. `'string'`, `'FileList'`…).
+			table: { category: 'outputs', type: { summary: 'void' } },
+			control: false,
 		},
 	},
 	decorators: [
@@ -20,9 +27,13 @@ export default {
 			imports: [BoxComponent],
 		}),
 	],
-	render: ({ ...args }, { argTypes }) => {
+	render: ({ killed, ...args }, { argTypes }) => {
 		return {
-			template: cleanupTemplate(`<lu-box ${generateInputs(args, argTypes)}>Lorem ipsum dolor sit amet</lu-box>`),
+			props: {
+				...args,
+				onKilled: () => killed?.(),
+			},
+			template: cleanupTemplate(`<lu-box ${generateInputs(args, argTypes)} (killed)="onKilled()">Lorem ipsum dolor sit amet</lu-box>`),
 		};
 	},
 } as Meta;

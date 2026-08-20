@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { LU_FORM_INSTANCE } from './form-instance';
 import { LuDialogRef } from '@lucca-front/ng/dialog';
 
@@ -25,7 +26,7 @@ import { LuDialogRef } from '@lucca-front/ng/dialog';
 export class FormComponent {
 	protected readonly dialogRef = inject(LuDialogRef, { optional: true });
 
-	readonly maxWidth = input(false, { transform: booleanAttribute });
+	readonly maxWidth = input(false, { transform: luBooleanAttribute });
 
-	readonly presentation = input(false, { transform: booleanAttribute });
+	readonly presentation = input(false, { transform: luBooleanAttribute });
 }

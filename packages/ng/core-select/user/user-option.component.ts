@@ -13,7 +13,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 	imports: [AsyncPipe, LuUserDisplayPipe, ɵLuOptionOutletDirective],
 	template: `
 		@if (context.option$ | async; as user) {
-			@if (userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async) {
+			@if (userDirective.displayMeOption() && user.id === userDirective.currentUserId && (hasEmptyClue$ | async)) {
 				<div>
 					<strong>{{ intl().me }}</strong
 					>&ngsp;

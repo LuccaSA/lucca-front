@@ -35,7 +35,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 		return this._componentInstance.submitPalette || 'product';
 	}
 
-	readonly submitClass$ = new Subject();
+	readonly submitClass$ = new Subject<string>();
 	readonly error$ = new Subject();
 
 	public readonly modalId = modalId++;

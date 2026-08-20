@@ -1,8 +1,8 @@
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -23,8 +23,8 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 		'[class.dataTable-body-row]': 'bodyRef !== null',
 		'[class.dataTable-head-row]': 'headRef !== null',
 		'[class.dataTable-foot-row]': 'footRef !== null',
-		'[class.mod-selectable]': 'tableRef.selectable() ?? false',
-		'[class.mod-draggable]': 'tableRef.drag() ?? false',
+		'[class.mod-selectable]': 'tableRef?.selectable() ?? false',
+		'[class.mod-draggable]': 'tableRef?.drag() ?? false',
 	},
 	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet, IconComponent, CdkDragHandle],
 	providers: [
@@ -49,6 +49,6 @@ export class DataTableRowComponent {
 
 	readonly selected = model<boolean>(false);
 	readonly selectedLabel = input<string | null>(null);
-	readonly mixed = input(false, { transform: booleanAttribute });
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly mixed = input(false, { transform: luBooleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 }

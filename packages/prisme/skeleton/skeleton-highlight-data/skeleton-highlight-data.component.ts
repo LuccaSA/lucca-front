@@ -10,7 +10,7 @@ export class SkeletonHighlightDataComponent {
 	/**
 	 * Applies dark color for skeleton
 	 */
-	readonly dark = input<boolean, boolean | `${boolean}`>(false, { transform: booleanAttribute });
+	readonly dark = input(false, { transform: booleanAttribute });
 
 	readonly getRandomPercent = (min: number = 25, max: number = 75): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 }

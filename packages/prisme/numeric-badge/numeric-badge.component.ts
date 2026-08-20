@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { PrClass, Palette, ɵeffectWithDeps } from '@lucca/prisme/core';
 import { LuTooltipModule } from '@lucca/prisme/tooltip';
 import { NumericBadgeSize } from './numeric-badge.type';
@@ -43,7 +43,7 @@ export class NumericBadgeComponent {
 	/**
 	 * Indicates the maximum value of number for the numeric badge
 	 */
-	readonly maxValue = input<number>(999);
+	readonly maxValue = input(999, { transform: numberAttribute });
 
 	/**
 	 * Disabled tooltip on numeric badge

@@ -15,7 +15,7 @@ describe('Color Text Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'color-text', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'color-text', { skipInstall: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);
@@ -39,7 +39,7 @@ describe('Color Text Migration', () => {
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');
 
 		// Act
-		await runSchematic('collection', collectionPath, 'color-text', { skipInstallation: true }, tree);
+		await runSchematic('collection', collectionPath, 'color-text', { skipInstall: true }, tree);
 
 		// Assert
 		tree.visit((p, entry) => {

@@ -1,5 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { BaseIndexTableCell } from '../base-index-table-cell';
 import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 
@@ -29,8 +30,8 @@ import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableRowCellComponent extends BaseIndexTableCell {
-	readonly allowTextSelection = input(false, { transform: booleanAttribute });
-	readonly tfoot = input(false, { transform: booleanAttribute });
+	readonly allowTextSelection = input(false, { transform: luBooleanAttribute });
+	readonly tfoot = input(false, { transform: luBooleanAttribute });
 
 	readonly actions = computed(() => {
 		return this.tableRef.header()?.cols()[this.position()].actions();

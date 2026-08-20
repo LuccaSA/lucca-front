@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
 import { SkeletonColsAlign } from '../skeleton.type';
 
 @Component({
@@ -21,14 +21,14 @@ export class SkeletonIndexTableComponent {
 	/**
 	 * Defines the number of cols (5 by default)
 	 */
-	readonly cols = input<number>(5);
+	readonly cols = input(5, { transform: numberAttribute });
 
 	readonly colsAlign = input<Record<number, SkeletonColsAlign>>({});
 
 	/**
 	 * Defines the number of row (8 by default)
 	 */
-	readonly rows = input<number>(8);
+	readonly rows = input(8, { transform: numberAttribute });
 
 	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));

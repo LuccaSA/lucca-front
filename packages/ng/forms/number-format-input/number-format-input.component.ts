@@ -1,9 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, luOptionalNumberAttribute } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NumberFormat, NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
 import { startWith } from 'rxjs/operators';
@@ -33,7 +33,7 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	readonly formatStyle = input<NumberFormatStyle>('decimal');
 
-	readonly useAutoPrefixSuffix = input(false, { transform: booleanAttribute });
+	readonly useAutoPrefixSuffix = input(false, { transform: luBooleanAttribute });
 
 	readonly prefix = input<TextInputAddon | undefined>(undefined);
 
@@ -47,15 +47,15 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	readonly unitDisplay = input<NumberFormatUnitDisplay | undefined>(undefined);
 
-	readonly min = input<number | undefined>(undefined);
+	readonly min = input(undefined, { transform: luOptionalNumberAttribute });
 
-	readonly max = input<number | undefined>(undefined);
+	readonly max = input(undefined, { transform: luOptionalNumberAttribute });
 
 	readonly placeholder = input<string>('');
 
-	readonly hasClearer = input(false, { transform: booleanAttribute });
+	readonly hasClearer = input(false, { transform: luBooleanAttribute });
 
-	readonly valueAlignRight = input(false, { transform: booleanAttribute });
+	readonly valueAlignRight = input(false, { transform: luBooleanAttribute });
 
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 

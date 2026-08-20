@@ -7,7 +7,7 @@ import { ColorInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
+import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
 import { waitForAngular } from '../../../../../helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
@@ -69,8 +69,9 @@ export default {
 export const Basic: StoryObj<ColorInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		const model = useStoryModel<string | null>(null);
 		return {
-			props: { colors: colorDecoratives500, example: null },
+			props: { colors: colorDecoratives500, model },
 			template: `<lu-form-field ${generateInputs(
 				{
 					label,
@@ -83,9 +84,9 @@ export const Basic: StoryObj<ColorInputComponent & FormFieldComponent & { requir
 				},
 				argTypes,
 			)}>
-	<lu-color-input [(ngModel)]="example" [colors]="colors"${generateInputs(inputArgs, argTypes)} />
+	<lu-color-input [(ngModel)]="model.example" [colors]="colors"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
+<pr-story-model-display>{{ model.example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [ColorInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},

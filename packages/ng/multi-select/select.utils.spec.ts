@@ -1,7 +1,20 @@
 import { LuMultiSelection, LuMultiSelectionMode } from './select.model';
-import { selectionToQueryParams } from './select.utils';
+import { listSeparators, selectionToQueryParams } from './select.utils';
 
 describe('multi-select utils', () => {
+	describe('listSeparators', () => {
+		it.each([
+			['fr-FR', 3, [', ', ' et ']],
+			['en-GB', 3, [', ', ' and ']],
+			['fr-FR', 2, [' et ']],
+			['en-GB', 2, [' and ']],
+			['fr-FR', 1, []],
+			['fr-FR', 0, []],
+		])('should return the separators for %s and %i items', (locale, itemCount, expected) => {
+			expect(listSeparators(new Intl.ListFormat(locale), itemCount)).toEqual(expected);
+		});
+	});
+
 	describe('selectionToQueryParams', () => {
 		const selections: Record<LuMultiSelectionMode, LuMultiSelection<{ id: number }>> = {
 			include: {

@@ -41,7 +41,7 @@
 				luButton="ghost"
 				type="button"
 				size="XS"
-				(click)="filterPillRef.popoverRef().openPopover(true)"
+				(click)="filterPillRef.popoverRef()?.openPopover(true)"
 				[disabled]="isDisabled()"
 				[attr.tabindex]="isDisabled() ? null : !primaryTags().length ? 0 : -1"
 				#focusable

@@ -9,6 +9,10 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [
 		`
+			.loading::after,
+			:host ::ng-deep .loading::after {
+				animation-play-state: paused;
+			}
 			:host ::ng-deep .fileEntryDisplayWrapper {
 				inline-size: 100%;
 			}

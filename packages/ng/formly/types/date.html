@@ -4,7 +4,7 @@
 	[formlyAttributes]="field"
 	(focus)="focus()"
 	(blur)="blur()"
-	[placeholder]="props.placeholder"
+	[placeholder]="props.placeholder ?? ''"
 	[min]="props.min"
 	[max]="props.max"
 />

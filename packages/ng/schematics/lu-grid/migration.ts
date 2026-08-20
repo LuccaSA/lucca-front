@@ -186,6 +186,28 @@ function gridHasNonNeutralColumnChildren(node: TmplAstElement): boolean {
 	});
 }
 
+// A grid is migratable only when the migration can be fully carried out. If any
+// class other than `grid`/`mod-auto`/`mod-form` would remain on the element, the
+// migration is considered incomplete: we leave the grid — and therefore its
+// `grid-column` children — untouched for manual review.
+// This is the single source of truth for both grid and grid-column finders so a
+// `grid-column` is never migrated without its parent grid being migrated too.
+function isMigratableGrid(node: unknown): node is TmplAstElement {
+	if (!isInterestingNode(node) || !isNeutralElement(node.name)) {
+		return false;
+	}
+	const classes = node.attributes.find((attr) => attr.name === 'class')?.value;
+	if (!classes?.match(/(^|\s)grid(\s|$)/)) {
+		return false;
+	}
+	if (gridHasNonNeutralColumnChildren(node)) {
+		return false;
+	}
+	// Any leftover class means the migration would keep a `class=` attribute → skip.
+	const extraClasses = classes.split(' ').filter((c) => c && c !== 'grid' && c !== 'mod-auto' && c !== 'mod-form');
+	return extraClasses.length === 0;
+}
+
 function findHTMLGrids(sourceFile: SourceFile, basePath: string, tree: Tree): HtmlGrid[] {
 	const results: HtmlGrid[] = [];
 	const ngTemplates = extractNgTemplatesIncludingHtml(sourceFile, tree, basePath);
@@ -193,16 +215,10 @@ function findHTMLGrids(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 	ngTemplates.forEach((template) => {
 		const htmlAst = new HtmlAst(template.content);
 		htmlAst.visitNodes((node) => {
-			if (!isInterestingNode(node) || !isNeutralElement(node.name)) {
+			if (!isMigratableGrid(node)) {
 				return;
 			}
-			const classes = node.attributes.find((attr) => attr.name === 'class')?.value;
-			if (!classes?.match(/(^|\s)grid(\s|$)/)) {
-				return;
-			}
-			if (gridHasNonNeutralColumnChildren(node)) {
-				return;
-			}
+			const classes = node.attributes.find((attr) => attr.name === 'class')?.value || '';
 
 			const styleAttr = node.attributes.find((attr) => attr.name === 'style')?.value || '';
 			const cssProps = parseCssCustomProperties(styleAttr);
@@ -245,14 +261,7 @@ function findHTMLGridColumns(sourceFile: SourceFile, basePath: string, tree: Tre
 			}
 
 			// Only migrate grid-column if its parent grid container is also being migrated
-			if (!isInterestingNode(parent) || !isNeutralElement(parent.name)) {
-				return;
-			}
-			const parentClasses = parent.attributes.find((attr) => attr.name === 'class')?.value;
-			if (!parentClasses?.match(/(^|\s)grid(\s|$)/)) {
-				return;
-			}
-			if (gridHasNonNeutralColumnChildren(parent)) {
+			if (!isMigratableGrid(parent)) {
 				return;
 			}
 
