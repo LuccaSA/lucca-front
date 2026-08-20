@@ -22,7 +22,17 @@
 
 	@at-root ($atRoot) {
 		.resourceCardWrapper {
-			grid-template-columns: repeat(auto-fill, minmax(var(--components-resourceCardWrapper-gridTemplateColumnsMin), 1fr));
+			grid-template-columns:
+				repeat(
+					auto-fill,
+					minmax(
+						min(
+							var(--components-resourceCardWrapper-gridTemplateColumnsMin),
+							100%
+						),
+						1fr
+					)
+				);
 			display: var(--components-resourceCardWrapper-display);
 			flex-direction: column;
 			gap: var(--pr-t-spacings-100);
