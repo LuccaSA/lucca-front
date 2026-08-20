@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, input, numberAttribute, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
@@ -44,6 +44,9 @@ export class TextInputComponent {
 	readonly prefix = input<TextInputAddon>();
 
 	readonly suffix = input<TextInputAddon>();
+
+	readonly minlength = input<number>(0, { transform: numberAttribute });
+	readonly maxlength = input<number>(0, { transform: numberAttribute });
 
 	/**
 	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
