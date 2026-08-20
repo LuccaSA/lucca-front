@@ -45,15 +45,16 @@ function toRows(manifest) {
 
 	for (const [name, entry] of Object.entries(manifest.utilities)) {
 		const blocks = entry.css || [];
-		// Conditional blocks are surfaced separately as responsive variants.
-		const base = blocks.filter((b) => !b.media && !b.container);
+		// Every block is rendered with its own qualifier: dropping the conditional ones
+		// inverted `pr-u-onlyPrintDisplayBlock`, which reads `display: none` off screen.
+		// `variants` stays as the scannable summary of the queries involved.
 		const conditional = blocks.filter((b) => b.media || b.container);
 		rows.push(
 			compact({
 				kind: 'utility',
 				name,
-				value: joinBlocks(base) || joinBlocks(blocks),
-				resolved: base.some((b) => b.resolved) ? joinBlocks(base, (b) => b.resolved || b.decls) : undefined,
+				value: joinBlocks(blocks),
+				resolved: blocks.some((b) => b.resolved) ? joinBlocks(blocks, (b) => b.resolved || b.decls) : undefined,
 				variants: conditional.length ? conditional.map((b) => b.media || b.container) : undefined,
 				deprecated: entry.deprecated,
 				replacement: entry.replacement,
@@ -83,21 +84,33 @@ function toRows(manifest) {
 }
 
 /**
- * Concatenates a utility's blocks into one readable declaration list. `; ` between
- * declaration lists so a class declaring the same property twice reads as valid CSS
- * (last one wins, as in the cascade); a plain space around a pseudo-element group,
- * already delimited by its braces.
+ * Concatenates a utility's blocks into one readable declaration list. `; ` between bare
+ * declaration lists so a class declaring the same property twice reads as valid CSS (last
+ * one wins, as in the cascade); a plain space around a braced group, already delimited.
  * @param {object[]} blocks
  * @param {(block: object) => string} pick which field to read from each block
  */
 function joinBlocks(blocks, pick = (block) => block.decls) {
 	return blocks.reduce((out, block) => {
-		const text = block.sel ? `${block.sel} { ${pick(block)} }` : pick(block);
+		const text = blockText(block, pick);
 		if (!out) {
 			return text;
 		}
-		return out + (block.sel || out.endsWith('}') ? ' ' : '; ') + text;
+		const braced = Boolean(block.sel || block.media || block.container);
+		return out + (braced || out.endsWith('}') ? ' ' : '; ') + text;
 	}, '');
+}
+
+/** One block as CSS, wrapped in its pseudo-element selector and media/container query. */
+function blockText(block, pick) {
+	const inner = block.sel ? `${block.sel} { ${pick(block)} }` : pick(block);
+	if (block.media) {
+		return `@media ${block.media} { ${inner} }`;
+	}
+	if (block.container) {
+		return `@container ${block.container} { ${inner} }`;
+	}
+	return inner;
 }
 
 /** Drops undefined/false entries so the committed file carries no empty noise. */
