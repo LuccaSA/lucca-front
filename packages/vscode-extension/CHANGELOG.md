@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.0
+
+- **Reads the manifest's `config` block.** The manifest describes the library's maximal surface, not a default install's, so the legacy unprefixed `u-*` twins are no longer offered in completion — they exist only when `@lucca-front/scss` is built with `$deprecatedUtilityPrefix`. They stay recognised, so existing markup still gets hover (now saying as much) and is never flagged unknown.
+- Completion detail names the qualifier a declaration block applies under (`&::before`, `@media`, `@container`). `pr-u-clearfix` no longer reads as if it set `display: table` on the element itself.
+- Deprecated custom properties surface and quick-fix their replacement, as utility classes already did. No manifest populates variable replacements yet — this is ready for when the deprecation registry does.
+- Storybook deep links: font-size classes (`pr-u-bodyM`, `pr-u-textM`…) point at TextSize instead of TextColor, the size family (`pr-u-width100%`, `pr-u-inlineSize100%`…) at Sizes, `pr-u-clearfix` at Reset instead of Float, `pr-u-fontStyle*` at TextStyle, and the legacy radius twins at BorderRadiusDeprecated.
+
 ## 0.5.0
 
 - **Unused `@use` detection**: an `@use` of a `commons/utils` module whose namespace is never referenced is flagged, with a quick fix to remove the import. Deliberately conservative — `@use … as *` and `@forward` are never flagged, since local use cannot be determined.
