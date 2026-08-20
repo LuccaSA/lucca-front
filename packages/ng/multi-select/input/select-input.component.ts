@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -51,7 +51,6 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		FilterPillLabelDirective,
 		ClearComponent,
 		CommonModule,
-		PresentationDisplayDirective,
 		ɵPresentationDisplayDefaultDirective,
 		IconComponent,
 	],
