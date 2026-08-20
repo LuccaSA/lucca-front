@@ -12,8 +12,8 @@ import { HighlightDataBubble, HighlightDataIllustration, HighlightDataPalette, H
 	providers: [LuClass],
 	host: {
 		class: 'highlightData',
-		'[class.mod-light]': 'lightClass',
-		'[class.mod-dark]': 'darkClass',
+		'[class.mod-light]': 'this.theme() === "light"',
+		'[class.mod-dark]': 'this.theme() === "dark"',
 	},
 })
 export class HighlightDataComponent {
@@ -70,14 +70,6 @@ export class HighlightDataComponent {
 	 * Displayed in nested mode
 	 */
 	readonly nested = input(false, { transform: luBooleanAttribute });
-
-	get lightClass() {
-		return this.theme() === 'light';
-	}
-
-	get darkClass() {
-		return this.theme() === 'dark';
-	}
 
 	readonly illustrationSrc = computed(() =>
 		this.illustration()?.includes('/') ? this.illustration() : `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`,
