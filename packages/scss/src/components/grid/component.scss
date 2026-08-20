@@ -29,6 +29,7 @@
 			grid-column-end: span var(--grid-colspan, var(--grid-column-end));
 			grid-row-end: span var(--grid-rowspan, var(--grid-row-end));
 			min-inline-size: 0;
+			text-align: var(--grid-textAlign); // required for Chrome, which interprets the deprecated `align` attribute
 
 			@each $breakpoint, $value in config.$breakpoints {
 				@include media.min($breakpoint) {

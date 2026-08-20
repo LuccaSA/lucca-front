@@ -1,71 +1,162 @@
-@let responsiveSample =
-	{
-		colspanAtMediaMinXXS: 3,
-		rowAtMediaMinXXS: 2,
-		rowspanAtMediaMinXS: 2,
-		columnAtMediaMinS: 2,
-	};
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
 			<td></td>
-			<td>
-				<div class="demo-QAtable-list">HTML</div>
-			</td>
+			<td style="inline-size: 50%">HTML</td>
+			<td style="inline-size: 50%">Angular</td>
 		</tr>
 		<tr>
 			<td>Default</td>
 			<td>
 				<div class="grid">
-					<div class="grid-column" style="--grid-colspan: 6">
-						<div class="gridDemo">--grid-colspan: 6</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
-					<div class="grid-column" style="--grid-colspan: 6">
-						<div class="gridDemo">--grid-colspan: 6</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
-				</div>
-				<div class="grid">
-					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4">
-						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
-					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8">
-						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
-				</div>
-				<div class="grid">
-					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 7">
-						<div class="gridDemo">grid-colspanAtMediaMinS: 7</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
-					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 5">
-						<div class="gridDemo">grid-colspanAtMediaMinS: 5</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
-				</div>
-				<div class="grid">
-					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
-						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
-					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
-						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
-					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
-						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
-					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
-						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
 					</div>
 				</div>
 			</td>
+			<td>
+				<lu-grid>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+				</lu-grid>
+			</td>
 		</tr>
 		<tr>
-			<td>Auto width</td>
+			<td>Columns</td>
+			<td>
+				<div class="grid" style="--grid-columns: 6">
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+					<div class="grid-column">
+						<div class="gridDemo"></div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-grid columns="6">
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+				</lu-grid>
+			</td>
+		</tr>
+		<tr>
+			<td>Mode form</td>
+			<td>
+				<div class="grid mod-form" style="--grid-max-width: 20rem">
+					<div class="grid-column"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+				</div>
+			</td>
+			<td>
+				<lu-grid mode="form" style="--grid-max-width: 20rem">
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+				</lu-grid>
+			</td>
+		</tr>
+		<tr>
+			<td>Mode auto</td>
 			<td>
 				<div class="grid mod-auto">
-					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
-					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
-					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
-					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
-					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
 				</div>
+			</td>
+			<td>
+				<lu-grid mode="auto">
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+				</lu-grid>
 			</td>
 		</tr>
 		<tr>
@@ -81,143 +172,178 @@
 					<div class="grid-column" style="--grid-justify: end"><div class="gridDemo"></div></div>
 				</div>
 			</td>
+			<td>
+				<lu-grid columns="1">
+					<lu-grid-column justify="start"><div class="gridDemo"></div></lu-grid-column>
+				</lu-grid>
+				<lu-grid columns="1">
+					<lu-grid-column justify="center"><div class="gridDemo"></div></lu-grid-column>
+				</lu-grid>
+				<lu-grid columns="1">
+					<lu-grid-column justify="end"><div class="gridDemo"></div></lu-grid-column>
+				</lu-grid>
+			</td>
 		</tr>
 		<tr>
 			<td>Vertical Alignment</td>
 			<td>
-				<div class="grid mod-topAtMediaMinXXXS">
-					<div class="grid-6atMediaMinXXXS"><div class="gridDemo" style="block-size: 100px"></div></div>
-					<div class="grid-6atMediaMinXXXS"><div class="gridDemo"></div></div>
+				<div class="demo-QAtable-list">
+					<div class="pr-u-flexGrow1">
+						<div class="grid mod-auto">
+							<div class="grid-column"><div class="gridDemo" style="block-size: 100px"></div></div>
+							<div class="grid-column" style="--grid-align: start"><div class="gridDemo">start</div></div>
+						</div>
+					</div>
+					<div class="pr-u-flexGrow1">
+						<div class="grid mod-auto">
+							<div class="grid-column"><div class="gridDemo" style="block-size: 100px"></div></div>
+							<div class="grid-column" style="--grid-align: center"><div class="gridDemo">center</div></div>
+						</div>
+					</div>
+					<div class="pr-u-flexGrow1">
+						<div class="grid mod-auto">
+							<div class="grid-column"><div class="gridDemo" style="block-size: 100px"></div></div>
+							<div class="grid-column" style="--grid-align: end"><div class="gridDemo">end</div></div>
+						</div>
+					</div>
 				</div>
-				<div class="grid mod-middleAtMediaMinXXXS">
-					<div class="grid-6atMediaMinXXXS"><div class="gridDemo" style="block-size: 100px"></div></div>
-					<div class="grid-6atMediaMinXXXS"><div class="gridDemo"></div></div>
-				</div>
-				<div class="grid mod-bottomAtMediaMinXXXS">
-					<div class="grid-6atMediaMinXXXS"><div class="gridDemo" style="block-size: 100px"></div></div>
-					<div class="grid-6atMediaMinXXXS"><div class="gridDemo"></div></div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="pr-u-flexGrow1">
+						<lu-grid mode="auto">
+							<lu-grid-column style="block-size: 100px"><div class="gridDemo" style="block-size: 100%"></div></lu-grid-column>
+							<lu-grid-column align="start"><div class="gridDemo">start</div></lu-grid-column>
+						</lu-grid>
+					</div>
+					<div class="pr-u-flexGrow1">
+						<lu-grid mode="auto">
+							<lu-grid-column style="block-size: 100px"><div class="gridDemo" style="block-size: 100%"></div></lu-grid-column>
+							<lu-grid-column align="center"><div class="gridDemo">center</div></lu-grid-column>
+						</lu-grid>
+					</div>
+					<div class="pr-u-flexGrow1">
+						<lu-grid mode="auto">
+							<lu-grid-column style="block-size: 100px"><div class="gridDemo" style="block-size: 100%"></div></lu-grid-column>
+							<lu-grid-column align="end"><div class="gridDemo">end</div></lu-grid-column>
+						</lu-grid>
+					</div>
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>Reorder</td>
 			<td>
-				<div class="grid mod-dense" style="--grid-columns: 4">
-					<div class="grid-column" style="--grid-column: 2"><div class="gridDemo">1 --grid-column: 2</div></div>
-					<div class="grid-column" style="--grid-column: 3"><div class="gridDemo">2 --grid-column: 3</div></div>
-					<div class="grid-column" style="--grid-column: 1"><div class="gridDemo">3 --grid-column: 1</div></div>
-					<div class="grid-column"><div class="gridDemo">4</div></div>
-				</div>
-				<div class="grid mod-dense" style="--grid-columns: 4">
-					<div class="grid-column"><div class="gridDemo">1</div></div>
-					<div class="grid-column" style="--grid-columnAtMediaMinM: 4"><div class="gridDemo">2 --grid-columnAtMediaMinM: 4</div></div>
+				<div class="grid" style="--grid-columns: 4">
+					<div class="grid-column" style="--grid-column: 2"><div class="gridDemo">1</div></div>
+					<div class="grid-column" style="--grid-column: 3"><div class="gridDemo">2</div></div>
 					<div class="grid-column"><div class="gridDemo">3</div></div>
-					<div class="grid-column"><div class="gridDemo">4</div></div>
+					<div class="grid-column" style="--grid-row: 1"><div class="gridDemo">4</div></div>
 				</div>
 			</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td></td>
 			<td>
-				<div class="demo-QAtable-list">Angular</div>
-			</td>
-		</tr>
-		<tr>
-			<td>Default</td>
-			<td>
-				<lu-grid columns="6">
-					<lu-grid-column class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-				</lu-grid>
-				<lu-grid columns="1">
-					<lu-grid-column class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
+				<lu-grid columns="4">
+					<lu-grid-column column="2"><div class="gridDemo">1</div></lu-grid-column>
+					<lu-grid-column column="3"><div class="gridDemo">2</div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo">3</div></lu-grid-column>
+					<lu-grid-column row="1"><div class="gridDemo">4</div></lu-grid-column>
 				</lu-grid>
 			</td>
 		</tr>
 		<tr>
 			<td>Gap</td>
 			<td>
-				<lu-grid columns="2" gap="600">
-					<lu-grid-column class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-				</lu-grid>
-				<lu-grid columns="2" gap="200">
-					<lu-grid-column class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-				</lu-grid>
-				<lu-grid columns="2" gap="400">
-					<lu-grid-column class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-				</lu-grid>
+				<div class="demo-QAtable-list">
+					<div class="pr-u-inlineSize100%">
+						<div class="grid" style="--grid-columns: 2; --grid-gap: var(--pr-t-spacings-25)">
+							<div class="grid-column"><div class="gridDemo"></div></div>
+							<div class="grid-column"><div class="gridDemo"></div></div>
+							<div class="grid-column"><div class="gridDemo"></div></div>
+							<div class="grid-column"><div class="gridDemo"></div></div>
+						</div>
+					</div>
+					<div class="pr-u-inlineSize100%">
+						<div class="grid" style="--grid-columns: 2; --grid-column-gap: var(--pr-t-spacings-25)">
+							<div class="grid-column"><div class="gridDemo"></div></div>
+							<div class="grid-column"><div class="gridDemo"></div></div>
+							<div class="grid-column"><div class="gridDemo"></div></div>
+							<div class="grid-column"><div class="gridDemo"></div></div>
+						</div>
+					</div>
+					<div class="pr-u-inlineSize100%">
+						<div class="grid" style="--grid-columns: 2; --grid-row-gap: var(--pr-t-spacings-25)">
+							<div class="grid-column"><div class="gridDemo"></div></div>
+							<div class="grid-column"><div class="gridDemo"></div></div>
+							<div class="grid-column"><div class="gridDemo"></div></div>
+							<div class="grid-column"><div class="gridDemo"></div></div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="pr-u-inlineSize100%">
+						<lu-grid columns="2" gap="25">
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+						</lu-grid>
+					</div>
+					<div class="pr-u-inlineSize100%">
+						<lu-grid columns="2" columnGap="25">
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+						</lu-grid>
+					</div>
+					<div class="pr-u-inlineSize100%">
+						<lu-grid columns="2" rowGap="25">
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+							<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+						</lu-grid>
+					</div>
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>Colspan</td>
 			<td>
-				<lu-grid columns="2" gap="500" columnGap="0" rowGap="300">
-					<lu-grid-column colspan="3" class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-				</lu-grid>
-				<lu-grid columns="5" gap="500" columnGap="0" rowGap="300">
-					<lu-grid-column colspan="6" rowspan="4" class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
+				<div class="grid" style="--grid-columns: 3">
+					<div class="grid-column" style="--grid-colspan: 3"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+				</div>
+			</td>
+			<td>
+				<lu-grid columns="3">
+					<lu-grid-column colspan="3"><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
 				</lu-grid>
 			</td>
 		</tr>
 		<tr>
-			<td>Justify</td>
+			<td>Rowspan</td>
 			<td>
-				<lu-grid columns="1">
-					<lu-grid-column justify="start" class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-				</lu-grid>
-				<lu-grid columns="1">
-					<lu-grid-column justify="center" class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-				</lu-grid>
-				<lu-grid columns="1">
-					<lu-grid-column justify="end" class="gridDemo">story</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-				</lu-grid>
+				<div class="grid" style="--grid-columns: 3">
+					<div class="grid-column" style="--grid-rowspan: 2"><div class="gridDemo" style="block-size: 100%"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+					<div class="grid-column"><div class="gridDemo"></div></div>
+				</div>
 			</td>
-		</tr>
-		<tr>
-			<td>Responsive</td>
 			<td>
-				<lu-grid columns="6">
-					<lu-grid-column [responsive]="responsiveSample" class="gridDemo">rwd</lu-grid-column>
-					<lu-grid-column [responsive]="{ columnAtMediaMinS: 1, rowAtMediaMinS: 1 }" class="gridDemo">rwd</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
-					<lu-grid-column class="gridDemo">col</lu-grid-column>
+				<lu-grid columns="3">
+					<lu-grid-column rowspan="2"><div class="gridDemo" style="block-size: 100%"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
+					<lu-grid-column><div class="gridDemo"></div></lu-grid-column>
 				</lu-grid>
 			</td>
 		</tr>
