@@ -75,6 +75,9 @@ jobs:
           echo "Ref: ${RAW}    Primary: ${PRIMARY}    Alias: ${ALIAS:-<none>}"
 
       - run: npm ci
+      # The explorer reads the committed dataset, so regenerate it rather than ship it stale.
+      - name: Refresh the CSS API dataset
+        run: npm run css-api
       - run: npm run build-storybook
 
       - name: Install rclone
