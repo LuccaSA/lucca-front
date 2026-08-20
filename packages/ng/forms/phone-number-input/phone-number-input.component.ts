@@ -7,7 +7,7 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/mobile/examples';
 import { PhoneNumberInputAutocomplete } from './phone-number-input.type';
-import { CountryCode, E164Number } from './types';
+import { CountryCode } from './types';
 import { PhoneNumberValidators } from './validators';
 
 interface PrefixEntry {
@@ -17,7 +17,7 @@ interface PrefixEntry {
 }
 
 type ParsePhoneNumberResult = {
-	number: E164Number;
+	number: string;
 	country?: CountryCode;
 	nationalNumber?: string;
 	isValid: boolean;
@@ -34,7 +34,7 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 		};
 	} catch {
 		return {
-			number: phoneNumber as E164Number,
+			number: phoneNumber,
 			nationalNumber: phoneNumber,
 			isValid: false,
 		};
@@ -83,7 +83,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	readonly currentValue = signal<string>('');
 
-	#onChange?: (value: E164Number) => void;
+	#onChange?: (value: string) => void;
 
 	#onTouched?: () => void;
 
@@ -156,7 +156,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		this.formatNationalNumber();
 	}
 
-	registerOnChange(fn: (value: E164Number) => void): void {
+	registerOnChange(fn: (value: string) => void): void {
 		this.#onChange = fn;
 	}
 
@@ -195,7 +195,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 				this.#onChange?.(number);
 				return;
 			} catch {
-				this.#onChange?.(displayedNumber as E164Number);
+				this.#onChange?.(displayedNumber);
 			}
 		}
 	}
