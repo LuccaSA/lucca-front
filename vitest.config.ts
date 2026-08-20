@@ -24,6 +24,9 @@ export default mergeConfig(createBaseConfig(__dirname), {
 			// Schematics project: runs the `ng add`/`ng update` migration specs in a
 			// Node environment with a ts-node loader (see vitest.schematics.config.ts).
 			'./vitest.schematics.config.ts',
+			// VS Code extension project: plain Node unit tests over the extension's
+			// pure logic (see vitest.vscode-extension.config.ts).
+			'./vitest.vscode-extension.config.ts',
 		],
 	},
 });

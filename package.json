@@ -22,7 +22,8 @@
     "packages/scss",
     "packages/prisme",
     "packages/ng",
-    "packages/eslint-plugin"
+    "packages/eslint-plugin",
+    "packages/vscode-extension"
   ],
   "scripts": {
     "build": "npm run build:ng && npm run build:remaining",
@@ -31,6 +32,8 @@
     "build:remaining": "node build.js",
     "start": "ng run ng:storybook",
     "test:eslint-plugin": "npm test -w @lucca-front/eslint-plugin",
+    "test:vscode-extension": "vitest run --project vscode-extension",
+    "build:vscode-extension": "npm run vsix -w lucca-front-intellisense",
     "jenkins-test": "vitest run --reporter=verbose",
     "ci-test": "vitest run --reporter=verbose",
     "test": "vitest",
