@@ -1,20 +1,11 @@
 /**
- * Emits the committed dataset the Storybook CSS API explorer reads.
+ * Emits the committed dataset the Storybook CSS API explorer reads. Committed
+ * rather than imported from `dist/` because the Storybook builds in CI never run
+ * `npm run build` — same reason as `stories/documentation/icons-list.ts`.
  *
- * Why a committed file rather than importing the manifest from `dist/`: the
- * workflows that build Storybook (`deploy`, `deploy-staging`, `e2e-test`) run
- * `npm ci` then `build-storybook` without `npm run build`, and `build.js` wipes
- * `dist/scss` on every run — so `dist/scss/css-api/manifest.json` is not there to
- * import. `stories/documentation/icons-list.ts` solves the same problem the same
- * way, and this follows it.
- *
- * It is a *view* of the manifest, not a copy: one flat row per element, carrying
- * only what the page displays. A pretty-printed copy of the whole manifest would
- * be several hundred KB of mostly-unread nesting; this keeps the committed
- * artifact something a reviewer can read a diff of.
- *
- * The output is formatted with the repo's own Prettier config, so the committed
- * file always satisfies `prettier --check` and the CI drift guard stays stable.
+ * A flat view of the manifest, not a copy: only the fields the page displays, so
+ * the committed artifact stays diff-readable. Prettier-formatted at generation
+ * time so it always satisfies `prettier --check`.
  */
 
 'use strict';
@@ -54,8 +45,7 @@ function toRows(manifest) {
 
 	for (const [name, entry] of Object.entries(manifest.utilities)) {
 		const blocks = entry.css || [];
-		// Base declarations are the unconditional blocks; anything behind a media
-		// or container query is surfaced separately as a responsive variant.
+		// Conditional blocks are surfaced separately as responsive variants.
 		const base = blocks.filter((b) => !b.media && !b.container);
 		const conditional = blocks.filter((b) => b.media || b.container);
 		rows.push(

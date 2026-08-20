@@ -1,23 +1,12 @@
 /**
- * The single seam between the CSS API manifest and whatever supplies deprecation
- * facts. `generate.js` never talks to a deprecation source directly — it asks
- * this module, so the source can be replaced without touching extraction.
+ * The single seam between the manifest and whatever supplies deprecation facts,
+ * so the source can be swapped without touching extraction.
  *
- * TEMPORARY SOURCE. Today this wraps `deprecations.js`, a frozen regex seed that
- * only covers names generated inside SCSS loops (which cannot carry an inline
- * annotation). It knows nothing about lifecycle, and supplies no replacements for
- * custom properties.
- *
- * The structured registry being built on `tech.scss.deprecation.strategy` emits
- * `css-api/deprecations.json`, whose entries are shaped:
- *
- *   { kind, name, replacement, note, since, scope }
- *
- * with `kind` one of 'class' | 'css-variable' | 'selector' | 'sass-api', and
- * `name` a raw identifier that matches manifest keys 1:1 (e.g. `pr-u-borderBottom0`
- * → `pr-u-borderBlockEnd0`). The `kind` values below deliberately mirror that
- * vocabulary, so adopting it means rewriting the body of `deprecationFor()` here
- * — an index lookup over that file — and nothing else in the generator.
+ * TEMPORARY: wraps `deprecations.js`, a frozen regex seed with no lifecycle data
+ * and no replacements for custom properties. `KINDS` mirrors the `kind` vocabulary
+ * of the `deprecations.json` built on tech.scss.deprecation.strategy, whose names
+ * match manifest keys 1:1 — adopting it means rewriting `deprecationFor()` here
+ * and nothing else.
  */
 
 'use strict';

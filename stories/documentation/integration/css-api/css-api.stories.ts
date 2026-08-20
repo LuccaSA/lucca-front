@@ -111,8 +111,7 @@ function countOf(kind: KindFilter): number {
 class CssApiStory {
 	readonly search = signal('');
 	readonly kind = signal<KindFilter>('all');
-	// Holds the option object, not its value: lu-simple-select renders what it is
-	// bound to, so binding the raw string would show "all" in the pill.
+	// The option object, not its value: lu-simple-select renders what it is bound to.
 	readonly status = signal<StatusOption | null>(null);
 
 	readonly statusOptions = STATUS_OPTIONS;

@@ -1,8 +1,6 @@
 /**
- * Shape of the generated CSS API dataset consumed by the explorer story.
- *
- * Hand-written on purpose: `css-api-manifest.ts` next to it is generated and
- * imports this contract, so regenerating the data never rewrites the types.
+ * Shape of the generated CSS API dataset. Hand-written so regenerating
+ * `css-api-manifest.ts` never rewrites the types.
  */
 
 export type CssApiKind = 'variable' | 'utility' | 'mixin';
