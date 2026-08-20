@@ -457,7 +457,7 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedFadeOut',
-		value: 'animation-name: fadeIn animation-direction: reverse',
+		value: 'animation-name: fadeIn; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
@@ -493,27 +493,27 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedScaleOut',
-		value: 'animation-name: scaleIn animation-direction: reverse',
+		value: 'animation-name: scaleIn; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedScaleOutBottom',
-		value: 'animation-name: scaleInBottom animation-direction: reverse',
+		value: 'animation-name: scaleInBottom; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedScaleOutLeft',
-		value: 'animation-name: scaleInLeft animation-direction: reverse',
+		value: 'animation-name: scaleInLeft; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedScaleOutRight',
-		value: 'animation-name: scaleInRight animation-direction: reverse',
+		value: 'animation-name: scaleInRight; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedScaleOutTop',
-		value: 'animation-name: scaleInTop animation-direction: reverse',
+		value: 'animation-name: scaleInTop; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
@@ -548,27 +548,27 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedSlideOut',
-		value: 'animation-name: slideIn animation-direction: reverse',
+		value: 'animation-name: slideIn; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedSlideOutBottom',
-		value: 'animation-name: slideInBottom animation-direction: reverse',
+		value: 'animation-name: slideInBottom; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedSlideOutLeft',
-		value: 'animation-name: slideInLeft animation-direction: reverse',
+		value: 'animation-name: slideInLeft; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedSlideOutRight',
-		value: 'animation-name: slideInRight animation-direction: reverse',
+		value: 'animation-name: slideInRight; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
 		name: 'pr-u-animatedSlideOutTop',
-		value: 'animation-name: slideIn animation-direction: reverse',
+		value: 'animation-name: slideIn; animation-direction: reverse',
 	},
 	{
 		kind: 'utility',
@@ -777,8 +777,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-borderRadiusFull',
-		value: 'border-radius: var(--commons-borderRadius-full) !important border-radius: var(--pr-t-border-radius-full) !important',
-		resolved: 'border-radius: 9999px !important border-radius: 9999px !important',
+		value: 'border-radius: var(--commons-borderRadius-full) !important; border-radius: var(--pr-t-border-radius-full) !important',
+		resolved: 'border-radius: 9999px !important; border-radius: 9999px !important',
 	},
 	{
 		kind: 'utility',
@@ -971,6 +971,8 @@ export const CssApiList: CssApiEntry[] = [
 		kind: 'utility',
 		name: 'pr-u-clear',
 		value: 'clear: both !important',
+		deprecated: true,
+		replacement: 'pr-u-clearBoth',
 	},
 	{
 		kind: 'utility',
@@ -1057,8 +1059,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-colorTextCritical',
-		value: 'color: var(--pr-t-color-text-critical) !important color: var(--palettes-critical-700) !important',
-		resolved: 'color: #da2f2f !important color: #da2f2f !important',
+		value: 'color: var(--pr-t-color-text-critical) !important; color: var(--palettes-critical-700) !important',
+		resolved: 'color: #da2f2f !important; color: #da2f2f !important',
 	},
 	{
 		kind: 'utility',
@@ -1225,8 +1227,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-colorTextSuccess',
-		value: 'color: var(--pr-t-color-text-success) !important color: var(--palettes-success-700) !important',
-		resolved: 'color: #279b42 !important color: #279b42 !important',
+		value: 'color: var(--pr-t-color-text-success) !important; color: var(--palettes-success-700) !important',
+		resolved: 'color: #279b42 !important; color: #279b42 !important',
 	},
 	{
 		kind: 'utility',
@@ -1243,8 +1245,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-colorTextWarning',
-		value: 'color: var(--pr-t-color-text-warning) !important color: var(--palettes-warning-700) !important',
-		resolved: 'color: #f08800 !important color: #f08800 !important',
+		value: 'color: var(--pr-t-color-text-warning) !important; color: var(--palettes-warning-700) !important',
+		resolved: 'color: #f08800 !important; color: #f08800 !important',
 	},
 	{
 		kind: 'utility',
@@ -1726,7 +1728,7 @@ export const CssApiList: CssApiEntry[] = [
 		kind: 'utility',
 		name: 'pr-u-focusVisible',
 		value: ':focus-visible { outline: 2px solid var(--palettes-700, var(--palettes-product-700)); outline-offset: 2px }',
-		resolved: 'outline: 2px solid #da2f2f; outline-offset: 2px',
+		resolved: ':focus-visible { outline: 2px solid #da2f2f; outline-offset: 2px }',
 	},
 	{
 		kind: 'utility',
@@ -1911,12 +1913,14 @@ export const CssApiList: CssApiEntry[] = [
 		name: 'pr-u-h5',
 		value: '--components-title-font: 600 var(--pr-t-font-fontSize-175) / var(--pr-t-font-lineHeight-250) var(--pr-t-font-family); --sizes-verticalPadding: var(--sizes-S-verticalPadding)',
 		resolved: "--components-title-font: 600 0.875rem / 1.25rem 'SourceSans', Tahoma, sans-serif; --sizes-verticalPadding: 0.125rem",
+		deprecated: true,
 	},
 	{
 		kind: 'utility',
 		name: 'pr-u-h6',
 		value: '--components-title-font: 600 var(--pr-t-font-fontSize-150) / var(--pr-t-font-lineHeight-200) var(--pr-t-font-family); --sizes-verticalPadding: var(--sizes-XS-verticalPadding)',
 		resolved: "--components-title-font: 600 0.75rem / 1rem 'SourceSans', Tahoma, sans-serif; --sizes-verticalPadding: 0",
+		deprecated: true,
 	},
 	{
 		kind: 'utility',
@@ -1941,8 +1945,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-inset0',
-		value: 'inset: 0 !important inset: var(--pr-t-spacings-0) !important',
-		resolved: 'inset: 0 !important inset: 0 !important',
+		value: 'inset: 0 !important; inset: var(--pr-t-spacings-0) !important',
+		resolved: 'inset: 0 !important; inset: 0 !important',
 	},
 	{
 		kind: 'utility',
@@ -2025,8 +2029,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-insetBlock0',
-		value: 'inset-block: 0 !important inset-block: var(--pr-t-spacings-0) !important',
-		resolved: 'inset-block: 0 !important inset-block: 0 !important',
+		value: 'inset-block: 0 !important; inset-block: var(--pr-t-spacings-0) !important',
+		resolved: 'inset-block: 0 !important; inset-block: 0 !important',
 	},
 	{
 		kind: 'utility',
@@ -2277,8 +2281,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-insetInline0',
-		value: 'inset-inline: 0 !important inset-inline: var(--pr-t-spacings-0) !important',
-		resolved: 'inset-inline: 0 !important inset-inline: 0 !important',
+		value: 'inset-inline: 0 !important; inset-inline: var(--pr-t-spacings-0) !important',
+		resolved: 'inset-inline: 0 !important; inset-inline: 0 !important',
 	},
 	{
 		kind: 'utility',
@@ -2530,6 +2534,8 @@ export const CssApiList: CssApiEntry[] = [
 		kind: 'utility',
 		name: 'pr-u-insetReset',
 		value: 'inset: 0 !important',
+		deprecated: true,
+		replacement: 'pr-u-inset0',
 	},
 	{
 		kind: 'utility',
@@ -2673,8 +2679,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-marginBlock0',
-		value: 'margin-block: 0 !important margin-block: var(--pr-t-spacings-0) !important',
-		resolved: 'margin-block: 0 !important margin-block: 0 !important',
+		value: 'margin-block: 0 !important; margin-block: var(--pr-t-spacings-0) !important',
+		resolved: 'margin-block: 0 !important; margin-block: 0 !important',
 	},
 	{
 		kind: 'utility',
@@ -3063,8 +3069,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-marginInline0',
-		value: 'margin-inline: 0 !important margin-inline: var(--pr-t-spacings-0) !important',
-		resolved: 'margin-inline: 0 !important margin-inline: 0 !important',
+		value: 'margin-inline: 0 !important; margin-inline: var(--pr-t-spacings-0) !important',
+		resolved: 'margin-inline: 0 !important; margin-inline: 0 !important',
 	},
 	{
 		kind: 'utility',
@@ -3907,8 +3913,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-paddingBlock0',
-		value: 'padding-block: 0 !important padding-block: var(--pr-t-spacings-0) !important',
-		resolved: 'padding-block: 0 !important padding-block: 0 !important',
+		value: 'padding-block: 0 !important; padding-block: var(--pr-t-spacings-0) !important',
+		resolved: 'padding-block: 0 !important; padding-block: 0 !important',
 	},
 	{
 		kind: 'utility',
@@ -4271,8 +4277,8 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'pr-u-paddingInline0',
-		value: 'padding-inline: 0 !important padding-inline: var(--pr-t-spacings-0) !important',
-		resolved: 'padding-inline: 0 !important padding-inline: 0 !important',
+		value: 'padding-inline: 0 !important; padding-inline: var(--pr-t-spacings-0) !important',
+		resolved: 'padding-inline: 0 !important; padding-inline: 0 !important',
 	},
 	{
 		kind: 'utility',
@@ -5607,7 +5613,7 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'u-animatedFadeOut',
-		value: 'animation-name: fadeIn animation-direction: reverse',
+		value: 'animation-name: fadeIn; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedFadeOut',
 	},
@@ -5657,35 +5663,35 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'u-animatedScaleOut',
-		value: 'animation-name: scaleIn animation-direction: reverse',
+		value: 'animation-name: scaleIn; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedScaleOut',
 	},
 	{
 		kind: 'utility',
 		name: 'u-animatedScaleOutBottom',
-		value: 'animation-name: scaleInBottom animation-direction: reverse',
+		value: 'animation-name: scaleInBottom; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedScaleOutBottom',
 	},
 	{
 		kind: 'utility',
 		name: 'u-animatedScaleOutLeft',
-		value: 'animation-name: scaleInLeft animation-direction: reverse',
+		value: 'animation-name: scaleInLeft; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedScaleOutLeft',
 	},
 	{
 		kind: 'utility',
 		name: 'u-animatedScaleOutRight',
-		value: 'animation-name: scaleInRight animation-direction: reverse',
+		value: 'animation-name: scaleInRight; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedScaleOutRight',
 	},
 	{
 		kind: 'utility',
 		name: 'u-animatedScaleOutTop',
-		value: 'animation-name: scaleInTop animation-direction: reverse',
+		value: 'animation-name: scaleInTop; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedScaleOutTop',
 	},
@@ -5734,35 +5740,35 @@ export const CssApiList: CssApiEntry[] = [
 	{
 		kind: 'utility',
 		name: 'u-animatedSlideOut',
-		value: 'animation-name: slideIn animation-direction: reverse',
+		value: 'animation-name: slideIn; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedSlideOut',
 	},
 	{
 		kind: 'utility',
 		name: 'u-animatedSlideOutBottom',
-		value: 'animation-name: slideInBottom animation-direction: reverse',
+		value: 'animation-name: slideInBottom; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedSlideOutBottom',
 	},
 	{
 		kind: 'utility',
 		name: 'u-animatedSlideOutLeft',
-		value: 'animation-name: slideInLeft animation-direction: reverse',
+		value: 'animation-name: slideInLeft; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedSlideOutLeft',
 	},
 	{
 		kind: 'utility',
 		name: 'u-animatedSlideOutRight',
-		value: 'animation-name: slideInRight animation-direction: reverse',
+		value: 'animation-name: slideInRight; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedSlideOutRight',
 	},
 	{
 		kind: 'utility',
 		name: 'u-animatedSlideOutTop',
-		value: 'animation-name: slideIn animation-direction: reverse',
+		value: 'animation-name: slideIn; animation-direction: reverse',
 		deprecated: true,
 		replacement: 'pr-u-animatedSlideOutTop',
 	},
@@ -6084,7 +6090,7 @@ export const CssApiList: CssApiEntry[] = [
 		name: 'u-clear',
 		value: 'clear: both !important',
 		deprecated: true,
-		replacement: 'pr-u-clear',
+		replacement: 'pr-u-clearBoth',
 	},
 	{
 		kind: 'utility',
@@ -6486,7 +6492,6 @@ export const CssApiList: CssApiEntry[] = [
 		value: '--components-title-font: 600 var(--pr-t-font-fontSize-175) / var(--pr-t-font-lineHeight-250) var(--pr-t-font-family); --sizes-verticalPadding: var(--sizes-S-verticalPadding)',
 		resolved: "--components-title-font: 600 0.875rem / 1.25rem 'SourceSans', Tahoma, sans-serif; --sizes-verticalPadding: 0.125rem",
 		deprecated: true,
-		replacement: 'pr-u-h5',
 	},
 	{
 		kind: 'utility',
@@ -6494,7 +6499,6 @@ export const CssApiList: CssApiEntry[] = [
 		value: '--components-title-font: 600 var(--pr-t-font-fontSize-150) / var(--pr-t-font-lineHeight-200) var(--pr-t-font-family); --sizes-verticalPadding: var(--sizes-XS-verticalPadding)',
 		resolved: "--components-title-font: 600 0.75rem / 1rem 'SourceSans', Tahoma, sans-serif; --sizes-verticalPadding: 0",
 		deprecated: true,
-		replacement: 'pr-u-h6',
 	},
 	{
 		kind: 'utility',
@@ -6550,7 +6554,7 @@ export const CssApiList: CssApiEntry[] = [
 		name: 'u-insetReset',
 		value: 'inset: 0 !important',
 		deprecated: true,
-		replacement: 'pr-u-insetReset',
+		replacement: 'pr-u-inset0',
 	},
 	{
 		kind: 'utility',
