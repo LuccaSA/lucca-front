@@ -30,6 +30,9 @@ const STATUS_OPTIONS: StatusOption[] = [
 	{ value: 'deprecated', name: 'Deprecated' },
 ];
 
+/** How many rows the table renders at once. Search to reach the rest. */
+const MAX_ROWS = 100;
+
 function countOf(kind: KindFilter): number {
 	return kind === 'all' ? CssApiList.length : CssApiList.filter((entry) => entry.kind === kind).length;
 }
@@ -64,6 +67,12 @@ function countOf(kind: KindFilter): number {
 				white-space: nowrap;
 			}
 
+			.cssApi-truncated {
+				margin: 0;
+				font: var(--pr-t-font-body-S);
+				color: var(--pr-t-color-text-subtle);
+			}
+
 			.cssApi-empty {
 				padding: var(--pr-t-spacings-400);
 				text-align: center;
@@ -89,7 +98,7 @@ function countOf(kind: KindFilter): number {
 
 			.cssApi-value {
 				font-family: var(--pr-t-font-family-monospace, monospace);
-				font-size: 0.8125rem;
+				font-size: var(--pr-t-font-body-S-fontSize);
 				color: var(--pr-t-color-text-subtle);
 				word-break: break-word;
 			}
@@ -123,7 +132,7 @@ class CssApiStory {
 		{ value: 'mixin', label: 'Mixins', count: countOf('mixin') },
 	];
 
-	readonly filtered = computed<CssApiEntry[]>(() => {
+	readonly matches = computed<CssApiEntry[]>(() => {
 		const search = this.search().trim().toLowerCase();
 		const kind = this.kind();
 		const status = this.status()?.value ?? 'all';
@@ -149,6 +158,12 @@ class CssApiStory {
 			);
 		});
 	});
+
+	/** Capped: rendering all 1755 rows takes ~35s and times out the Storybook test. */
+	readonly visible = computed<CssApiEntry[]>(() => this.matches().slice(0, MAX_ROWS));
+	readonly hidden = computed(() => Math.max(0, this.matches().length - MAX_ROWS));
+
+	protected readonly maxRows = MAX_ROWS;
 
 	protected label(kind: CssApiKind): string {
 		return KIND_LABELS[kind];

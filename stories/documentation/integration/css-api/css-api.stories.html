@@ -55,26 +55,30 @@
 			/>
 		</lu-form-field>
 
-		<span *luFilterPillAddonAfter class="cssApi-results">{{ filtered().length }} result(s)</span>
+		<span *luFilterPillAddonAfter class="cssApi-results">{{ matches().length }} {{ matches().length === 1 ? "result" : "results" }}</span>
 	</lu-filter-bar>
 
-	@if (filtered().length === 0) {
+	@if (matches().length === 0) {
 		<div class="cssApi-empty">No entry matches your search.</div>
 	} @else {
+		@if (hidden() > 0) {
+			<p class="cssApi-truncated">Showing the first {{ maxRows }}. Search or filter to reach the other {{ hidden() }}.</p>
+		}
+
 		<div class="cssApi-scroll">
-			<table class="table mod-S">
-				<thead class="table-head">
-					<tr class="table-head-row">
-						<th class="table-head-row-cell" scope="col">Name</th>
-						<th class="table-head-row-cell" scope="col">Type</th>
-						<th class="table-head-row-cell" scope="col">Value</th>
-						<th class="table-head-row-cell" scope="col">Replacement</th>
+			<table class="indexTable mod-stickyHeader">
+				<thead class="indexTable-head">
+					<tr class="indexTable-head-row">
+						<th class="indexTable-head-row-cell" scope="col">Name</th>
+						<th class="indexTable-head-row-cell" scope="col">Type</th>
+						<th class="indexTable-head-row-cell" scope="col">Value</th>
+						<th class="indexTable-head-row-cell" scope="col">Replacement</th>
 					</tr>
 				</thead>
-				<tbody class="table-body">
-					@for (entry of filtered(); track entry.kind + entry.name) {
-						<tr class="table-body-row">
-							<td class="table-body-row-cell">
+				<tbody class="indexTable-body">
+					@for (entry of visible(); track entry.kind + entry.name) {
+						<tr class="indexTable-body-row">
+							<td class="indexTable-body-row-cell">
 								<span class="cssApi-name" [class.cssApi-deprecated]="entry.deprecated">{{ entry.name }}</span>
 								@if (entry.import) {
 									<span class="cssApi-meta">&#64;use '{{ entry.import }}'</span>
@@ -83,13 +87,13 @@
 									<span class="cssApi-meta">{{ entry.doc }}</span>
 								}
 							</td>
-							<td class="table-body-row-cell">
+							<td class="indexTable-body-row-cell">
 								<span class="cssApi-kind">{{ label(entry.kind) }}</span>
 								@if (entry.group) {
 									<span class="cssApi-meta">{{ entry.group }}</span>
 								}
 							</td>
-							<td class="table-body-row-cell">
+							<td class="indexTable-body-row-cell">
 								<span class="cssApi-value">{{ entry.resolved || entry.value }}</span>
 								@if (entry.variants?.length) {
 									<span class="cssApi-meta">Variants: {{ entry.variants.join(" · ") }}</span>
@@ -98,7 +102,7 @@
 									<span class="cssApi-meta">{{ entry.note }}</span>
 								}
 							</td>
-							<td class="table-body-row-cell">
+							<td class="indexTable-body-row-cell">
 								@if (entry.replacement) {
 									<span class="cssApi-name">{{ entry.replacement }}</span>
 								} @else if (entry.deprecated) {
