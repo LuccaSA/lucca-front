@@ -27,10 +27,11 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 @Component({
 	selector: 'lu-users-directive-host',
 	imports: [LuSimpleSelectInputComponent, TestUsersDirective],
-	template: `<lu-simple-select luTestUsers />`,
+	template: `<lu-simple-select luTestUsers [filters]="filters" />`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LuUsersDirectiveHostComponent {
+	filters: Record<string, string | number | boolean> = {};
 	simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
 	usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
 }
@@ -155,6 +156,82 @@ describe('LuCoreSelectUsersDirective', () => {
 
 		// Assert (Page 2)
 		expect(options).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
+		httpTestingController.verify();
+	}));
+
+	it('should keep the loader on until the "me" lookup answers', fakeAsync(() => {
+		// Arrange
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		const meUser = createUser(CURRENT_USER_ID);
+		const users = [createUser(1), createUser(2)];
+
+		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		const usersReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,20`);
+
+		// Act (the users search answers first, the "me" lookup is still pending)
+		usersReq.flush(usersResponse(users));
+		fixture.detectChanges();
+
+		// Assert: still loading — turning the loader off before the options arrive
+		// would show the "no result" empty state of the panel in the meantime
+		expect(simpleSelect.loading$.value).toBe(true);
+
+		// Act (the "me" lookup answers)
+		meReq.flush(usersResponse([meUser]));
+		fixture.detectChanges();
+
+		// Assert
+		let options: readonly LuCoreSelectUser[];
+		simpleSelect.options$.subscribe((o) => (options = o));
+
+		expect(options).toEqual([meUser, ...users]);
+		expect(simpleSelect.loading$.value).toBe(false);
+		httpTestingController.verify();
+	}));
+
+	it('should display the options without "me" when the "me" lookup fails', fakeAsync(() => {
+		// Arrange
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		const users = [createUser(1), createUser(2)];
+
+		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		const usersReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,20`);
+
+		// Act
+		usersReq.flush(usersResponse(users));
+		meReq.flush('boom', { status: 500, statusText: 'Internal Server Error' });
+		fixture.detectChanges();
+
+		// Assert
+		let options: readonly LuCoreSelectUser[];
+		simpleSelect.options$.subscribe((o) => (options = o));
+
+		expect(options).toEqual(users);
+		expect(simpleSelect.loading$.value).toBe(false);
+		httpTestingController.verify();
+	}));
+
+	it('should not forward `filters` to the "me" lookup request', fakeAsync(() => {
+		// Arrange
+		fixture.componentInstance.filters = { foo: 'bar' };
+		fixture.detectChanges();
+
+		// Act
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		// Assert
+		// The "me" lookup is a lookup by id and must NOT carry the search filters (`foo=bar`)
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		// The search list, on the other hand, does carry the filters
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&foo=bar&paging=0,20`);
 		httpTestingController.verify();
 	}));
 

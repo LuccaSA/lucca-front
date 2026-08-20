@@ -183,7 +183,7 @@ describe('HumanizeUtils', () => {
 			it('should emit immedialty', () => {
 				// Arrange
 				const now = new Date().getTime();
-				const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(now);
+				const nowSpy = vi.spyOn(Date, 'now').mockReturnValue(now);
 				const date = now + 55_000;
 				const relativeTime$ = relativeTimeTimer(date);
 				const emittedValues = signal<LuRelativeTime[]>([]);

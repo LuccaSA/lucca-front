@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FileEntryComponent } from '@lucca-front/ng/file-upload';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'file-entry-stories',
@@ -9,6 +9,10 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [
 		`
+			.loading::after,
+			:host ::ng-deep .loading::after {
+				animation-play-state: paused;
+			}
 			:host ::ng-deep .fileEntryDisplayWrapper {
 				inline-size: 100%;
 			}

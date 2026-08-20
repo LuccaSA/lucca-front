@@ -1,38 +1,56 @@
-import { ChangeDetectionStrategy, Component, inject, Injectable, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Injectable } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, provideRouter, Route, Router, RouterFeatures, RouterOutlet } from '@angular/router';
 import { injectDialogData, LuDialogRef } from '../model';
 
 import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
-import type { LuDialogService } from '../dialog.service';
+import { vi } from 'vitest';
+import { LuDialogService } from '../dialog.service';
 import { dialogLazyRouteFactory, dialogRouteFactory } from './dialog-routing.utils';
 
-let dialogService: LuDialogService;
-let dialogRef: LuDialogRef<unknown, unknown>;
-
-let openDialogs = 0;
-
-jest.mock('../dialog.providers', () => {
-	const { LuDialogService } = jest.requireActual<{ LuDialogService: Type<LuDialogService> }>('../dialog.service');
+const { $dialogService, set$dialogService, $dialogRef, set$dialogRef, $openDialogs, inc$openDialogs, reset$openDialogs } = vi.hoisted(() => {
+	let _dialogService: LuDialogService;
+	let _dialogRef: LuDialogRef<unknown, unknown>;
+	let _openDialogs = 0;
 	return {
-		provideLuDialog: () => ({
-			provide: LuDialogService,
-			useFactory: () => {
-				dialogService = new LuDialogService();
-				const originalOpen = dialogService.open.bind(dialogService) as LuDialogService['open'];
-				jest.spyOn(dialogService, 'open').mockImplementation((config) => {
-					openDialogs++;
-					dialogRef = originalOpen(config);
-					jest.spyOn(dialogRef, 'close');
-					jest.spyOn(dialogRef, 'dismiss');
-					return dialogRef;
-				});
-				return dialogService;
-			},
-		}),
+		$dialogService: () => _dialogService,
+		set$dialogService: (v: LuDialogService) => {
+			_dialogService = v;
+		},
+		$dialogRef: () => _dialogRef,
+		set$dialogRef: (v: LuDialogRef<unknown, unknown>) => {
+			_dialogRef = v;
+		},
+		$openDialogs: () => _openDialogs,
+		inc$openDialogs: () => {
+			_openDialogs++;
+		},
+		reset$openDialogs: () => {
+			_openDialogs = 0;
+		},
 	};
 });
+
+vi.mock('../dialog.providers', () => ({
+	provideLuDialog: () => ({
+		provide: LuDialogService,
+		useFactory: () => {
+			const service = new LuDialogService();
+			set$dialogService(service);
+			const originalOpen = service.open.bind(service) as LuDialogService['open'];
+			vi.spyOn(service, 'open').mockImplementation((config) => {
+				inc$openDialogs();
+				const ref = originalOpen(config)!;
+				set$dialogRef(ref);
+				vi.spyOn(ref, 'close');
+				vi.spyOn(ref, 'dismiss');
+				return ref;
+			});
+			return service;
+		},
+	}),
+}));
 
 interface DialogRoutingTestDialogData {
 	foo: string;
@@ -94,13 +112,18 @@ class AppTestComponent {}
 
 describe('dialog-routing.utils', () => {
 	describe('dialogRouteFactory', () => {
-		const guard1 = jest.fn(() => true);
-		const guard2 = jest.fn(() => true);
+		const guard1 = vi.fn(() => true);
+		const guard2 = vi.fn(() => true);
 
 		beforeEach(() => {
+			vi.useFakeTimers();
 			guard1.mockReset();
 			guard2.mockReset();
-			openDialogs = 0;
+			reset$openDialogs();
+		});
+
+		afterEach(() => {
+			vi.useRealTimers();
 		});
 
 		const addTestRoute = dialogRouteFactory(DialogRoutingTestComponent, {
@@ -122,10 +145,11 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			// Assert
-			expect(dialogService.open).toHaveBeenCalledTimes(1);
-			expect(dialogService.open).toHaveBeenCalledWith(
+			expect($dialogService().open).toHaveBeenCalledTimes(1);
+			expect($dialogService().open).toHaveBeenCalledWith(
 				expect.objectContaining({
 					data: { foo: 'bar' },
 				}),
@@ -145,10 +169,11 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/test/baz');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			// Assert
-			expect(dialogService.open).toHaveBeenCalledTimes(1);
-			expect(dialogService.open).toHaveBeenCalledWith(
+			expect($dialogService().open).toHaveBeenCalledTimes(1);
+			expect($dialogService().open).toHaveBeenCalledWith(
 				expect.objectContaining({
 					data: { foo: 'baz' },
 				}),
@@ -171,10 +196,11 @@ describe('dialog-routing.utils', () => {
 			fixture.detectChanges();
 			data$.next({ foo: 'bar' });
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			// Assert
-			expect(dialogService.open).toHaveBeenCalledTimes(1);
-			expect(dialogService.open).toHaveBeenCalledWith(
+			expect($dialogService().open).toHaveBeenCalledTimes(1);
+			expect($dialogService().open).toHaveBeenCalledWith(
 				expect.objectContaining({
 					data: { foo: 'bar' },
 				}),
@@ -203,8 +229,8 @@ describe('dialog-routing.utils', () => {
 
 		it('should call canDeactivate guards when a navigation occurs', async () => {
 			// Arrange
-			const canDeactivateGuard1 = jest.fn(() => true);
-			const canDeactivateGuard2 = jest.fn(() => true);
+			const canDeactivateGuard1 = vi.fn(() => true);
+			const canDeactivateGuard2 = vi.fn(() => true);
 
 			const route = addTestRoute({
 				path: 'test/:name',
@@ -219,6 +245,7 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			// Navigate away to trigger canDeactivate
 			await router.navigateByUrl('/');
@@ -226,12 +253,12 @@ describe('dialog-routing.utils', () => {
 			// Assert
 			expect(canDeactivateGuard1).toHaveBeenCalledTimes(1);
 			expect(canDeactivateGuard2).toHaveBeenCalledTimes(1);
-			expect(dialogRef.dismiss).toHaveBeenCalledTimes(1);
+			expect($dialogRef().dismiss).toHaveBeenCalledTimes(1);
 		});
 
 		it('should call canDeactivate once when dialog is dismissed', async () => {
 			// Arrange
-			const canDeactivateGuard = jest.fn(() => true);
+			const canDeactivateGuard = vi.fn(() => true);
 
 			const route = addTestRoute({
 				path: 'test/:name',
@@ -246,20 +273,23 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
-			// Navigate away to trigger canDeactivate
-			dialogRef.dismiss();
-			fixture.detectChanges();
+			// Navigate away to trigger canDeactivate - use real timers to avoid infinite timer loop from router navigation
+			vi.useRealTimers();
+			$dialogRef().dismiss();
 			await fixture.whenStable();
 
 			// Assert
-			expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
-			expect(dialogRef.dismiss).toHaveBeenCalledTimes(1);
+			await vi.waitFor(() => {
+				expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
+				expect($dialogRef().dismiss).toHaveBeenCalledTimes(1);
+			});
 		});
 
 		it('should not call canDeactivate when dialog is closed', async () => {
 			// Arrange
-			const canDeactivateGuard = jest.fn(() => true);
+			const canDeactivateGuard = vi.fn(() => true);
 
 			const route = addTestRoute({
 				path: 'test/:name',
@@ -274,20 +304,23 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
-			// Navigate away to trigger canDeactivate
-			dialogRef.close();
-			fixture.detectChanges();
+			// Navigate away to trigger canDeactivate - use real timers to avoid infinite timer loop from router navigation
+			vi.useRealTimers();
+			$dialogRef().close();
 			await fixture.whenStable();
 
 			// Assert
-			expect(canDeactivateGuard).toHaveBeenCalledTimes(0);
-			expect(dialogRef.close).toHaveBeenCalledTimes(1);
+			await vi.waitFor(() => {
+				expect(canDeactivateGuard).toHaveBeenCalledTimes(0);
+				expect($dialogRef().close).toHaveBeenCalledTimes(1);
+			});
 		});
 
 		it('should keep dialog opened when canDeactivate return false', async () => {
 			// Arrange
-			const canDeactivateGuard = jest.fn(() => false);
+			const canDeactivateGuard = vi.fn(() => false);
 
 			const route = addTestRoute({
 				path: 'test/:name',
@@ -302,13 +335,14 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			// Navigate away to trigger canDeactivate
 			await router.navigateByUrl('/');
 
 			// Assert
 			expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
-			expect(dialogRef.dismiss).not.toHaveBeenCalled();
+			expect($dialogRef().dismiss).not.toHaveBeenCalled();
 		});
 
 		it('should support children', async () => {
@@ -342,25 +376,27 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/test');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			// Assert
 			expect(router.url).toBe('/test/child1');
 			expect(fixture.debugElement.parent?.query(By.directive(Child1Component))).toBeTruthy();
 			expect(fixture.debugElement.parent?.query(By.directive(Child2Component))).toBeFalsy();
-			expect(dialogService.open).toHaveBeenCalledTimes(1);
+			expect($dialogService().open).toHaveBeenCalledTimes(1);
 
 			// Act 2
 			await router.navigateByUrl('/test/child2');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			// Assert 2
 			expect(router.url).toBe('/test/child2');
 			expect(fixture.debugElement.parent?.query(By.directive(Child1Component))).toBeFalsy();
 			expect(fixture.debugElement.parent?.query(By.directive(Child2Component))).toBeTruthy();
-			expect(dialogService.open).toHaveBeenCalledTimes(1); // Still 1, dialog not reopened
-			expect(dialogRef.close).not.toHaveBeenCalled();
-			expect(dialogRef.dismiss).not.toHaveBeenCalled();
+			expect($dialogService().open).toHaveBeenCalledTimes(1); // Still 1, dialog not reopened
+			expect($dialogRef().close).not.toHaveBeenCalled();
+			expect($dialogRef().dismiss).not.toHaveBeenCalled();
 		});
 
 		it('should be able to inject parent service', async () => {
@@ -382,11 +418,12 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/parent/test');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			const dialogComponent = fixture.debugElement.parent?.query(By.directive(DialogRoutingTestWithParentDIComponent)).componentInstance as DialogRoutingTestWithParentDIComponent;
 
 			// Assert
-			expect(dialogService.open).toHaveBeenCalledTimes(1);
+			expect($dialogService().open).toHaveBeenCalledTimes(1);
 			expect(dialogComponent).toBeTruthy();
 			expect(dialogComponent.parentService.value).toBe('provided-in-parent');
 			expect(dialogComponent.routeService.value).toBe('provided-in-parent-route');
@@ -411,12 +448,13 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/dialog-parent/dialog-nested');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			const parentDialog = fixture.debugElement.parent?.query(By.directive(ParentComponent));
 			const nestedDialog = fixture.debugElement.parent?.query(By.directive(DialogRoutingTestWithParentDIComponent));
 
 			// Assert
-			expect(openDialogs).toBe(2);
+			expect($openDialogs()).toBe(2);
 			expect(parentDialog).toBeTruthy();
 			expect(nestedDialog).toBeTruthy();
 		});
@@ -434,10 +472,11 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/test/BAZ');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			// Assert
-			expect(dialogService.open).toHaveBeenCalledTimes(1);
-			expect(dialogService.open).toHaveBeenCalledWith(
+			expect($dialogService().open).toHaveBeenCalledTimes(1);
+			expect($dialogService().open).toHaveBeenCalledWith(
 				expect.objectContaining({
 					data: { foo: 'BAZ' },
 				}),
@@ -462,15 +501,17 @@ describe('dialog-routing.utils', () => {
 			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
 			await fixture.whenStable();
-			expect(openDialogs).toBe(1);
+			await vi.runAllTimersAsync();
+			expect($openDialogs()).toBe(1);
 
 			await router.navigateByUrl('/test/baz');
 			fixture.detectChanges();
 			await fixture.whenStable();
+			await vi.runAllTimersAsync();
 
 			// Assert
 			expect(router.url).toBe('/test/baz');
-			expect(openDialogs).toBe(2);
+			expect($openDialogs()).toBe(2);
 		});
 
 		it('should retain outlet configuration when passed in dialogRouteConfig at factory creation', () => {

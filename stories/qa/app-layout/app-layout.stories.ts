@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'app-layout-stories',

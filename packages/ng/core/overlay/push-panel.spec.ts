@@ -1,7 +1,8 @@
+import type { MockInstance } from 'vitest';
 import { getPushPanelInlineSize, getPushPanelViewportMargin } from './push-panel';
 
 describe('push-panel overlay helpers', () => {
-	let getComputedStyleSpy: jest.SpyInstance;
+	let getComputedStyleSpy: MockInstance;
 
 	function withPushPanelValue(value: string): Element {
 		getComputedStyleSpy.mockReturnValue({
@@ -11,7 +12,7 @@ describe('push-panel overlay helpers', () => {
 	}
 
 	beforeEach(() => {
-		getComputedStyleSpy = jest.spyOn(window, 'getComputedStyle');
+		getComputedStyleSpy = vi.spyOn(window, 'getComputedStyle');
 	});
 
 	afterEach(() => {

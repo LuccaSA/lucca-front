@@ -33,7 +33,7 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 		};
 	} catch {
 		return {
-			number: phoneNumber as E164Number,
+			number: phoneNumber,
 			nationalNumber: phoneNumber,
 			isValid: false,
 		};

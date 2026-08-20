@@ -1,7 +1,7 @@
 import { READ_MORE_SURFACE, ReadMoreComponent } from '@lucca-front/ng/read-more';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
-import { sleep, waitForAngular } from 'stories/helpers/test';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { sleep, waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 const OTHER_SURFACE_OPTIONS = ['#0b1732'];

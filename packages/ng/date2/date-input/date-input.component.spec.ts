@@ -35,7 +35,7 @@ describe('DateInputComponent', () => {
 	}
 
 	it('should emit null when user clear the input', () => {
-		const valueChanges = jest.fn();
+		const valueChanges = vi.fn();
 
 		const formControl = new FormControl(new Date('2024-01-01T00:00:00.000Z'));
 		formControl.valueChanges.subscribe((value) => {
@@ -51,7 +51,7 @@ describe('DateInputComponent', () => {
 	});
 
 	it('should emit error when user enter a invalid date', () => {
-		const valueChanges = jest.fn();
+		const valueChanges = vi.fn();
 
 		const formControl = new FormControl(new Date('2024-01-01T00:00:00.000Z'));
 		formControl.valueChanges.subscribe((value) => {
@@ -68,7 +68,7 @@ describe('DateInputComponent', () => {
 	});
 
 	it('should not emit value at init if null value', fakeAsync(() => {
-		const valueChanges = jest.fn();
+		const valueChanges = vi.fn();
 
 		const formControl = new FormControl(null);
 		formControl.valueChanges.subscribe((value) => {
@@ -82,7 +82,7 @@ describe('DateInputComponent', () => {
 	}));
 
 	it('should not emit value at init if there is a value', fakeAsync(() => {
-		const valueChanges = jest.fn();
+		const valueChanges = vi.fn();
 
 		const formControl = new FormControl(new Date('2024-01-01T00:00:00.000Z'));
 		formControl.valueChanges.subscribe((value) => {

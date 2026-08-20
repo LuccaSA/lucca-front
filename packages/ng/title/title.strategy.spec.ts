@@ -1,10 +1,11 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, provideRouter, Router, RouterLink, RouterOutlet, Routes, TitleStrategy } from '@angular/router';
 import { of, timer } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
+import { vi } from 'vitest';
 import { ILuTitleTranslateService } from './title-translate.service';
 import { TitleSeparator } from './title.model';
 import { LuTitleStrategy, provideLuTitleStrategy } from './title.strategy';
@@ -150,9 +151,9 @@ describe('TitleStrategy', () => {
 		TestBed.configureTestingModule({
 			imports: [AppComponent],
 			providers: [
-				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
+				{ provide: LiveAnnouncer, useValue: { announce: vi.fn() } },
 				provideRouter(routes),
-				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
 				provideLuTitleStrategy({
 					appTitle: () => 'BU',
 					translateService: () => new TranslateService(),
@@ -218,7 +219,9 @@ describe('TitleStrategy', () => {
 		pageTitleService.title$.pipe(skip(1)).subscribe((title) => (resultTitle = title));
 
 		await clickLink('.link-6');
-		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
+		await vi.waitFor(() => {
+			expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
+		});
 	});
 
 	it('should include named params in title', async () => {
@@ -232,6 +235,61 @@ describe('TitleStrategy', () => {
 	it('should not announce title via LiveAnnouncer when not enabled', async () => {
 		await fixture.whenStable();
 		expect(liveAnnouncer.announce).not.toHaveBeenCalled();
+	});
+});
+
+describe('TitleStrategy with signal appTitle', () => {
+	let fixture: ComponentFixture<AppComponent>;
+	let pageTitleService: LuTitleStrategy;
+	const appTitle = signal('BU');
+
+	const routes: Routes = [
+		{
+			path: '',
+			title: 'Stub',
+			component: StubComponent,
+		},
+	];
+
+	beforeEach(async () => {
+		appTitle.set('BU');
+		TestBed.configureTestingModule({
+			imports: [AppComponent],
+			providers: [
+				{ provide: LiveAnnouncer, useValue: { announce: vi.fn() } },
+				provideRouter(routes),
+				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
+				provideLuTitleStrategy({
+					appTitle: () => appTitle,
+					translateService: () => new TranslateService(),
+				}),
+			],
+		});
+
+		fixture = TestBed.createComponent(AppComponent);
+		pageTitleService = TestBed.inject(TitleStrategy) as unknown as LuTitleStrategy;
+		fixture.detectChanges();
+		await TestBed.inject(Router).navigateByUrl('/');
+		fixture.detectChanges();
+	});
+
+	it('should set title from the signal value', async () => {
+		let resultTitle = '';
+		pageTitleService.title$.subscribe((title) => (resultTitle = title));
+
+		await fixture.whenStable();
+		expect(resultTitle).toEqual(`Stub${TitleSeparator}Lucca BU`);
+	});
+
+	it('should update title when the signal changes', async () => {
+		let resultTitle = '';
+		pageTitleService.title$.subscribe((title) => (resultTitle = title));
+
+		await fixture.whenStable();
+		appTitle.set('Poplee');
+		await vi.waitFor(() => {
+			expect(resultTitle).toEqual(`Stub${TitleSeparator}Lucca Poplee`);
+		});
 	});
 });
 
@@ -305,9 +363,9 @@ describe('TitleStrategy readTitleByLiveAnnouncer enabled', () => {
 		TestBed.configureTestingModule({
 			imports: [AppComponent],
 			providers: [
-				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
+				{ provide: LiveAnnouncer, useValue: { announce: vi.fn() } },
 				provideRouter(routes),
-				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
 				provideLuTitleStrategy({
 					appTitle: () => 'BU',
 					translateService: () => new TranslateService(),
@@ -330,7 +388,7 @@ describe('TitleStrategy readTitleByLiveAnnouncer enabled', () => {
 
 	it('should announce updated title on subsequent navigation', async () => {
 		await fixture.whenStable();
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 
 		await clickLink('.link-3');
 		await fixture.whenStable();
@@ -402,9 +460,9 @@ describe('TitleStrategy readTitleByLiveAnnouncer disabled', () => {
 		TestBed.configureTestingModule({
 			imports: [AppComponent],
 			providers: [
-				{ provide: LiveAnnouncer, useValue: { announce: jest.fn() } },
+				{ provide: LiveAnnouncer, useValue: { announce: vi.fn() } },
 				provideRouter(routes),
-				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
 				provideLuTitleStrategy({
 					appTitle: () => 'BU',
 					translateService: () => new TranslateService(),

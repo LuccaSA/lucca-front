@@ -1,13 +1,13 @@
+import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { waitForAngular } from '@/helpers/test';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, userEvent, within } from 'storybook/test';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/CheckboxField/Angular',
@@ -77,10 +77,9 @@ export default {
 export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, ...inputArgs } = args;
+		const model = useStoryModel(false);
 		return {
-			props: {
-				example: false,
-			},
+			props: { model },
 			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
 					label,
@@ -93,9 +92,9 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 				},
 				argTypes,
 			)}>
-	<lu-checkbox-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-checkbox-input [(ngModel)]="model.example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [CheckboxInputComponent, FormsModule, BrowserAnimationsModule],
 			},

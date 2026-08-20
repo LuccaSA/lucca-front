@@ -3,11 +3,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { NumberInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from 'stories/helpers/stories';
-import { waitForAngular } from 'stories/helpers/test';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/NumberField/Angular',
@@ -78,10 +78,9 @@ export default {
 export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const model = useStoryModel(1000);
 		return {
-			props: {
-				example: 1000,
-			},
+			props: { model },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -93,9 +92,9 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 				},
 				argTypes,
 			)}>
-	<lu-number-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-number-input [(ngModel)]="model.example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -127,10 +126,12 @@ export const WithPrefixAndSuffix: StoryObj<
 > = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
+		const model = useStoryModel(1000);
 		return {
 			props: {
 				prefix: args.prefix,
 				suffix: args.suffix,
+				model,
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -143,9 +144,9 @@ export const WithPrefixAndSuffix: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-input [(ngModel)]="example" [prefix]="prefix" [suffix]="suffix"${generateInputs(inputArgs, argTypes)} />
+	<lu-number-input [(ngModel)]="model.example" [prefix]="prefix" [suffix]="suffix"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},

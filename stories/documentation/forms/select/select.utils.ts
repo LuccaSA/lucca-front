@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
 import { ColorInputComponent, ColorOption } from '@lucca-front/ng/forms';
-import { StoryObj } from '@storybook/angular';
+import { StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
 
 export type LegumeColor = 'green' | 'purple' | 'red' | 'orange' | 'white' | 'yellow' | 'brown';

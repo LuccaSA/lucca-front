@@ -6,7 +6,7 @@ import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LuOptionContext, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
-import { EMPTY, Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
+import { Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
 import { FORMER_EMPLOYEES_CONTEXT, LuCoreSelectFormerEmployeesComponent } from './former-employees.component';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
@@ -119,7 +119,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	protected meParams$ = toObservable(
 		computed(() => ({
 			fields: this.#userFields,
-			...this.filters(),
+			// The "me" request is a lookup by id and must not carry the search `filters`:
+			// they target the search API and aren't necessarily supported by the endpoint
+			// resolving the current user (e.g. API v3), which would fail the request.
 			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()?.join(',') } : {}),
 			...(this.operationIds() ? { operations: this.operationIds()?.join(',') } : {}),
 			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
@@ -135,9 +137,13 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 						item: T;
 					}>
 				>(this.urlOrDefault(), { params })
-				.pipe(catchError(() => EMPTY)),
+				.pipe(
+					map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
+					// A failed "me" lookup must not block the options: getOptionsPage combines this
+					// stream with the users search, an EMPTY here would leave the select loading forever
+					catchError(() => of(null)),
+				),
 		),
-		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
 		takeUntilDestroyed(),
 		shareReplay(1),
 	);
@@ -185,10 +191,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		const me$ = prependMe ? this.getMe() : of(null);
 
-		const users$ = this.getOptions(params, page).pipe(
-			map((users) => ({ items: users, isLastPage: users.length < this.pageSize })),
-			tap(() => (this.select.loading = false)),
-		);
+		const users$ = this.getOptions(params, page).pipe(map((users) => ({ items: users, isLastPage: users.length < this.pageSize })));
 
 		const page$ = combineLatest([me$, users$]).pipe(
 			map(([me, { items, isLastPage }]) => {
@@ -207,6 +210,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 					})),
 				),
 			),
+			tap(() => (this.select.loading = false)),
 		);
 	}
 

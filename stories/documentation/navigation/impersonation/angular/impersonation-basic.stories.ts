@@ -3,7 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
 import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory, generateInputs } from '../../../../helpers/stories';
 import { waitForAngular } from '../../../../helpers/test';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';

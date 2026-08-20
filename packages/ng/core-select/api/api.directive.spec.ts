@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Observable, map, of } from 'rxjs';
+import { Observable, delay, map, of } from 'rxjs';
+import type { MockInstance } from 'vitest';
 import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
@@ -55,7 +56,7 @@ describe('ALuCoreSelectApiDirective', () => {
 	let selectElement: HTMLElement;
 	let select: LuSimpleSelectInputComponent<TestEntity>;
 	let testApi: TestDirective;
-	let getOptionsSpy: jest.SpyInstance<Observable<TestEntity[]>, []>;
+	let getOptionsSpy: MockInstance;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -68,8 +69,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		selectElement = selectDebugElement.nativeElement as HTMLElement;
 		select = selectDebugElement.componentInstance as LuSimpleSelectInputComponent<TestEntity>;
 		testApi = fixture.debugElement.query(By.directive(TestDirective)).injector.get(TestDirective);
-
-		getOptionsSpy = jest.spyOn(testApi, 'getOptions');
+		getOptionsSpy = vi.spyOn(testApi, 'getOptions');
 	});
 
 	it('should query options when clicking on the select', fakeAsync(() => {
@@ -89,6 +89,51 @@ describe('ALuCoreSelectApiDirective', () => {
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({}, 0);
+	}));
+
+	it('should start the loader as soon as the panel opens', fakeAsync(() => {
+		fixture.detectChanges(); // run ngOnInit first: the directive must observe the panel state before the assertion below
+		tick(); // Component initialization uses a setTimeout :see_no_evil:
+		getOptionsSpy.mockReturnValue(of([{ id: 1, name: 'test' }]).pipe(delay(300)));
+
+		// Capture the loading state at the exact moment the panel opens: if the loader is off
+		// at that point, the "no result" empty state flashes until the first fetch starts
+		let loadingWhenPanelOpens: boolean | undefined;
+		select.isPanelOpen$.subscribe((isOpen) => {
+			if (isOpen) {
+				loadingWhenPanelOpens = select.loading$.value;
+			}
+		});
+
+		select.openPanel();
+		fixture.detectChanges();
+		tick(); // openPanel defers its work in a setTimeout
+
+		expect(loadingWhenPanelOpens).toBe(true);
+
+		tick(300);
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+		expect(select.loading$.value).toBe(false);
+	}));
+
+	it('should not restart the loader when the open state is re-emitted without a close', fakeAsync(() => {
+		fixture.detectChanges();
+		tick(); // Component initialization uses a setTimeout :see_no_evil:
+
+		select.openPanel();
+		fixture.detectChanges();
+		tick(); // openPanel defers its work in a setTimeout
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		expect(select.loading$.value).toBe(false);
+
+		// A filter pill whose popover closed without notifying the select re-emits `true` on the
+		// next opening: no fetch runs on an open → open transition, so nothing would reset the loader
+		select.onFilterPillOpened();
+		fixture.detectChanges();
+		tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		expect(select.loading$.value).toBe(false);
 	}));
 
 	it('should query options once when searching while the select is closed', fakeAsync(() => {
@@ -184,7 +229,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		tick(); // Component initialization uses a setTimeout :see_no_evil:
 		testApi.setPageSize(2);
 
-		const getPageSpy = jest.spyOn(testApi, 'getOptionsPage');
+		const getPageSpy = vi.spyOn(testApi, 'getOptionsPage');
 		getPageSpy.mockImplementation((_params, page) => {
 			// Emit one list, then the same list with one more item
 			return of(

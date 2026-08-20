@@ -1,14 +1,14 @@
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
+import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
+import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
 import { waitForAngular } from '../../../../../helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
@@ -88,15 +88,16 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<
-	LuSimpleSelectInputComponent<unknown> &
+	LuSimpleSelectInputComponent<ILegume> &
 		FormFieldComponent & {
 			disabled: boolean;
 		}
 > = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
+		const model = useStoryModel<ILegume>(allLegumes[0]);
 		return {
-			props: { legumes: allLegumes, example: allLegumes[0] },
+			props: { legumes: allLegumes, model },
 			template: `<lu-form-field ${generateInputs(
 				{
 					label,
@@ -113,10 +114,10 @@ export const Basic: StoryObj<
 	<lu-simple-select ${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
-		[(ngModel)]="example">
+		[(ngModel)]="model.example">
 	</lu-simple-select>
 </lu-form-field>
-<pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
+<pr-story-model-display>{{ model.example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [LuSimpleSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},

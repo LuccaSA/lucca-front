@@ -2,28 +2,20 @@
 	<tbody>
 		<tr>
 			<td></td>
-			<td>
-				<div class="demo-QAtable-list">Angular</div>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Simple</div>
+			</td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Multi</div>
 			</td>
 		</tr>
 		<tr>
-			<td>Simple empty</td>
+			<td>Empty</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
 					<lu-simple-select placeholder="Placeholder" clearable [options]="allLegumes" [ngModel]="null" />
 				</lu-form-field>
 			</td>
-		</tr>
-		<tr>
-			<td>Simple filled</td>
-			<td>
-				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-simple-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="simpleExample" />
-				</lu-form-field>
-			</td>
-		</tr>
-		<tr>
-			<td>Multi empty</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
 					<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [ngModel]="[]" />
@@ -31,15 +23,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Multi filled</td>
+			<td>Filled</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="multiExample" />
+					<lu-simple-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="simpleExample" />
 				</lu-form-field>
 			</td>
-		</tr>
-		<tr>
-			<td>Multi counter</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
 					<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="multiExample" #selectRef>
@@ -48,6 +37,86 @@
 						</ng-container>
 					</lu-multi-select>
 				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Error filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Error message" inlineMessageState="error" invalid>
+					<lu-simple-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="simpleExample" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Error message" inlineMessageState="error" invalid>
+					<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="multiExample" #errorSelectRef>
+						<ng-container *luMultiDisplayer="let values; select: errorSelectRef">
+							<lu-multi-select-counter-displayer [selected]="values" label="légumes sélectionnés" />
+						</ng-container>
+					</lu-multi-select>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled empty</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-simple-select placeholder="Placeholder" clearable disabled [options]="allLegumes" [ngModel]="null" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-multi-select placeholder="Placeholder" clearable disabled [options]="allLegumes" [ngModel]="[]" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-simple-select placeholder="Placeholder" clearable disabled [options]="allLegumes" [(ngModel)]="simpleExample" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-multi-select
+						placeholder="Placeholder"
+						clearable
+						disabled
+						[options]="allLegumes"
+						[(ngModel)]="multiExample"
+						#disabledSelectRef
+					>
+						<ng-container *luMultiDisplayer="let values; select: disabledSelectRef">
+							<lu-multi-select-counter-displayer [selected]="values" label="légumes sélectionnés" />
+						</ng-container>
+					</lu-multi-select>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Without counter disabled</td>
+			<td>
+				<div style="inline-size: 20rem"></div>
+			</td>
+			<td>
+				<div style="inline-size: 20rem">
+					<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+						<lu-multi-select placeholder="Placeholder" clearable disabled [options]="allLegumes" [(ngModel)]="multiExample" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Without counter</td>
+			<td>
+				<div style="inline-size: 20rem"></div>
+			</td>
+			<td>
+				<div style="inline-size: 20rem">
+					<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+						<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="multiExample" />
+					</lu-form-field>
+				</div>
 			</td>
 		</tr>
 	</tbody>

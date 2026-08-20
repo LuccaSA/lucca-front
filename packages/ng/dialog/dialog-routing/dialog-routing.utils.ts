@@ -34,17 +34,14 @@ export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): R
 				path: '',
 				canDeactivate: dialogRouteConfig.canDeactivate
 					?.map((fn) => toCanDeactivateFn(fn))
-					?.map(
-						(guard): CanDeactivateFn<C> =>
-							(dialogComponentInstance, route, state, nextState) => {
-								// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
-								if (!dialogComponentInstance) {
-									return true;
-								}
+					?.map((guard): CanDeactivateFn<C> => (dialogComponentInstance, route, state, nextState) => {
+						// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
+						if (!dialogComponentInstance) {
+							return true;
+						}
 
-								return guard(dialogComponentInstance, route, state, nextState);
-							},
-					),
+						return guard(dialogComponentInstance, route, state, nextState);
+					}),
 			},
 		],
 	};
@@ -99,10 +96,10 @@ function mergeRouteConfig<C>(config1: Partial<DialogRouteConfig<C>>, config2: Pa
 
 	const result: Partial<DialogRouteConfig<C>> = { ...config1, ...config2 };
 
+	const arrayKeys = ['providers', 'canActivate', 'children', 'canDeactivate', 'canLoad', 'canActivateChild'] as const satisfies Array<keyof Route>;
+
 	// If both configs have the same key, we merge the arrays
-	const mergedArrays = (['providers', 'canActivate', 'children', 'canDeactivate', 'canLoad', 'canActivateChild'] as const satisfies Array<keyof Route>).filter(
-		(key) => key in config1 && key in config2,
-	);
+	const mergedArrays = arrayKeys.filter((key) => key in config1 && key in config2);
 
 	for (const key of mergedArrays) {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

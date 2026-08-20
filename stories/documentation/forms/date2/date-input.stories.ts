@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 import { waitForAngular } from '../../../helpers/test';

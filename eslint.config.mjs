@@ -7,11 +7,21 @@ import localRules from './packages/eslint-plugin/index.ts';
 import prettier from 'eslint-plugin-prettier/recommended';
 import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
-import tsParser from '@typescript-eslint/parser';
 
 export default defineConfig(
 	{
-		ignores: ['dist/', '.storybook/**', '**/schematics/**/tests/', 'node_modules/', '.angular/', '**/stories/**'],
+		ignores: [
+			'dist/',
+			'.storybook/**',
+			'**/schematics/**/tests/',
+			'node_modules/',
+			'.angular/',
+			'vitest.config.ts',
+			'vitest.shared-config.ts',
+			// schematics && stories can be strictified
+			'packages/ng/schematics/**/*.ts',
+			'stories/**/*.ts',
+		],
 	},
 	{
 		linterOptions: {
@@ -24,8 +34,8 @@ export default defineConfig(
 		processor: angular.processInlineTemplates,
 		languageOptions: {
 			parserOptions: {
-				project: ['tsconfig.json', 'packages/ng/tsconfig.json', '.storybook/tsconfig.json'],
-				createDefaultProgram: true,
+				projectService: true,
+				tsconfigRootDir: import.meta.dirname,
 			},
 		},
 		rules: {
@@ -123,12 +133,6 @@ export default defineConfig(
 	},
 	{
 		files: ['**/*.ts'],
-		languageOptions: {
-			parser: tsParser,
-			parserOptions: {
-				project: ['tsconfig.lint.json', 'packages/ng/tsconfig.lint.json', '.storybook/tsconfig.lint.json'],
-			},
-		},
 		plugins: {
 			'@lucca-front': localRules,
 		},
@@ -138,6 +142,17 @@ export default defineConfig(
 			'@typescript-eslint/no-unsafe-return': 'warn',
 			'@typescript-eslint/no-unsafe-member-access': 'warn',
 			'@typescript-eslint/no-unsafe-call': 'warn',
+		},
+	},
+	{
+		files: ['**/*.spec.ts', '**/*.spec.*.ts'],
+		rules: {
+			'@typescript-eslint/no-unsafe-call': 'off',
+			'@typescript-eslint/no-unsafe-member-access': 'off',
+			'@typescript-eslint/no-unsafe-assignment': 'off',
+			'@typescript-eslint/no-unsafe-return': 'off',
+			'@typescript-eslint/no-unsafe-argument': 'off',
+			'@typescript-eslint/no-unnecessary-type-assertion': 'off',
 		},
 	},
 	{

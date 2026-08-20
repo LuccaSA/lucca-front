@@ -27,6 +27,7 @@ demo/ng
 
 # storybook
 .storybook/documentation.json
+documentation.json
 storybook-static
 
 # compodoc
