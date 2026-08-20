@@ -1,0 +1,58 @@
+# card — Code & Implementation
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-listings-table-card--docs)
+
+## HTML/CSS
+
+### Card
+
+```html
+<div class="card">
+	<table class="table mod-card">
+		<thead class="table-head">
+			<tr class="table-head-row">
+				<th class="table-head-row-cell">Table head</th>
+				<th class="table-head-row-cell">Table head</th>
+			</tr>
+		</thead>
+		<tbody class="table-body">
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">Table cell</td>
+				<td class="table-body-row-cell">Table cell</td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">Table cell</td>
+				<td class="table-body-row-cell">Table cell</td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">Table cell</td>
+				<td class="table-body-row-cell">Table cell</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="card">
+	<table class="table mod-card mod-clickable">
+		<tbody class="table-body">
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">
+					<a href="#" class="table-body-row-cell-action">Table cell</a>
+				</td>
+				<td class="table-body-row-cell">Table cell</td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">
+					<a href="#" class="table-body-row-cell-action">Table cell</a>
+				</td>
+				<td class="table-body-row-cell">Table cell</td>
+			</tr>
+			<tr class="table-body-row">
+				<td class="table-body-row-cell">
+					<a href="#" class="table-body-row-cell-action">Table cell</a>
+				</td>
+				<td class="table-body-row-cell">Table cell</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+```

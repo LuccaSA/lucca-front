@@ -36,6 +36,19 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly values = this.#values.asReadonly();
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
 	readonly clueChange = toSignal(this.select.clueChange$);
+	readonly #options = toSignal(this.select.options$, { initialValue: [] as readonly TValue[] });
+
+	readonly singleRemainingOption = computed<TValue | undefined>(() => {
+		const options = this.#options();
+
+		const excludedValues = this.#values();
+
+		if (this.#mode() !== 'exclude' || options.length !== this.totalCount() || options.length - excludedValues.length !== 1) {
+			return undefined;
+		}
+
+		return options.find((option) => !excludedValues.some((excluded) => this.select.optionComparer(excluded, option)));
+	});
 
 	// only show panel header when no clue && values not empty
 	readonly #showPanelHeader = computed(() => isNil(this.clueChange()) || (this.clueChange()?.length === 0 && this.totalCount() !== 0));
@@ -86,7 +99,8 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
 		this.select.hasValue = () => this.#hasValue();
 		this.select.isFilterPillEmpty = computed(() => !this.#hasValue());
-		this.select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include');
+		this.select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include' || this.singleRemainingOption() !== undefined);
+		this.select.singleOptionForDisplay = computed(() => (this.#mode() === 'include' && this.#valuesCount() === 1 ? this.select.valueSignal()?.[0] : this.singleRemainingOption()));
 		this.select.valueLength = this.displayerCount;
 	}
 

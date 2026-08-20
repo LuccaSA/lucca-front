@@ -1,5 +1,6 @@
 import { LOCALE_ID } from '@angular/core';
 import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular-vite';
+import { useState } from 'storybook/preview-api';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -114,6 +115,33 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 		}
 		return `${acc} ${name}="${value.toString()}"`;
 	}, '');
+}
+
+export interface StoryModel<T> {
+	example: T;
+}
+
+/**
+ * Holds the value bound to `ngModel` so it survives a control change, which would otherwise reset a value passed
+ * directly in `props`. Lives as long as the mounted story.
+ */
+export function useStoryModel<T>(initialValue: T): StoryModel<T> {
+	const [model] = useState<StoryModel<T>>(() => ({ example: initialValue }));
+	return model;
+}
+
+/**
+ * {@link useStoryModel} for a value also driven by a control. Re-seeds the model when that control changes,
+ * comparing by reference — pass the arg itself, not a value rebuilt in `render`.
+ */
+export function useControlledStoryModel<T>(controlValue: T): StoryModel<T> {
+	const [synced] = useState(() => ({ model: { example: controlValue }, controlValue }));
+
+	if (controlValue !== synced.controlValue) {
+		synced.controlValue = controlValue;
+		synced.model.example = controlValue;
+	}
+	return synced.model;
 }
 
 export function createTestStory<TArgs = Args>(story: StoryObj<TArgs>, test: StoryObj<TArgs>['play']): StoryObj<TArgs> {

@@ -1,7 +1,18 @@
+import { UPDATE_STORY_ARGS } from 'storybook/internal/core-events';
+import { addons } from 'storybook/preview-api';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 export async function sleep(ms: number) {
 	await new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Changes a story arg from a play function, the same way the Controls panel does, and waits for the rerender.
+ * Use it to assert on what a configuration change does to an already interacted-with story.
+ */
+export async function updateStoryArgs(storyId: string, updatedArgs: Record<string, unknown>) {
+	addons.getChannel().emit(UPDATE_STORY_ARGS, { storyId, updatedArgs });
+	await waitForAngular();
 }
 
 /**

@@ -115,6 +115,7 @@
 @mixin insideDialogPanel {
 	--components-horizontalNavigation-panel-display: flex;
 	--components-horizontalNavigation-panel-overflow: auto;
+	--components-horizontalNavigation-panel-flexGrow: 1;
 
 	&:focus-visible {
 		@include a11y.focusVisible($offset: -4px, $borderRadius: var(--pr-t-border-radius-structure));

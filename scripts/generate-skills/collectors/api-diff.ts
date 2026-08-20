@@ -7,16 +7,33 @@
  * which is naturally stable across patch releases → most version pairs produce no delta.
  */
 
-import { PackageAPI, ExtractedAPI, ExtractedInput, ExtractedOutput, ExtractedModel } from '../types';
+import {
+	PackageAPI,
+	ExtractedAPI,
+	ExtractedInput,
+	ExtractedOutput,
+	ExtractedModel,
+	ExtractedPipe,
+	ExtractedProvider,
+	ExtractedService,
+	ExtractedToken,
+} from '../types';
 
 export interface ApiDelta {
 	/** Markdown bullet lines describing the change. Empty array = no API change. */
 	lines: string[];
 }
 
+/** Human note for a deprecation transition (none ↔ deprecated, or message change). */
+function deprecationNote(prev?: string, curr?: string): string | null {
+	if ((prev ?? '') === (curr ?? '')) return null;
+	if (curr) return `devient déprécié${curr === 'Déprécié.' ? '' : ` (${curr})`}`;
+	return "n'est plus déprécié";
+}
+
 /** Signature used to detect a *change* on an input of the same binding name. */
 function inputSignature(i: ExtractedInput): string {
-	return [i.type, i.required ? 'req' : 'opt', i.default ?? '', i.transform ?? ''].join('|');
+	return [i.type, i.required ? 'req' : 'opt', i.default ?? '', i.transform ?? '', i.deprecated ?? ''].join('|');
 }
 
 /** Builds a human note for a changed input (only the parts that actually differ). */
@@ -26,6 +43,8 @@ function inputChangeNote(name: string, prev: ExtractedInput, curr: ExtractedInpu
 	if (prev.required !== curr.required) parts.push(curr.required ? 'devient requis' : 'devient optionnel');
 	if ((prev.default ?? '') !== (curr.default ?? '')) parts.push(`défaut ${prev.default ?? '∅'} → ${curr.default ?? '∅'}`);
 	if ((prev.transform ?? '') !== (curr.transform ?? '')) parts.push(`transform ${prev.transform ?? '∅'} → ${curr.transform ?? '∅'}`);
+	const dep = deprecationNote(prev.deprecated, curr.deprecated);
+	if (dep) parts.push(dep);
 	if (parts.length === 0) return null;
 	return `~ \`${name}\` : ${parts.join(', ')}`;
 }
@@ -63,6 +82,10 @@ function diffMembers<T>(
 function diffClass(prev: ExtractedAPI, curr: ExtractedAPI, prefix: string): string[] {
 	const lines: string[] = [];
 
+	// Class-level deprecation transition
+	const classDep = deprecationNote(prev.deprecated, curr.deprecated);
+	if (classDep) lines.push(`${prefix}~ \`${curr.className}\` ${classDep}`);
+
 	// Selectors
 	for (const s of curr.selectors.filter((x) => !prev.selectors.includes(x))) lines.push(`${prefix}+ selector \`${s}\``);
 	for (const s of prev.selectors.filter((x) => !curr.selectors.includes(x))) lines.push(`${prefix}- selector \`${s}\``);
@@ -79,7 +102,7 @@ function diffClass(prev: ExtractedAPI, curr: ExtractedAPI, prefix: string): stri
 		),
 	);
 
-	// Outputs (identity = bindingName, change = type)
+	// Outputs (identity = bindingName, change = type or deprecation)
 	lines.push(
 		...diffMembers<ExtractedOutput>(
 			prev.outputs,
@@ -87,7 +110,13 @@ function diffClass(prev: ExtractedAPI, curr: ExtractedAPI, prefix: string): stri
 			(o) => o.bindingName,
 			(o) => `${prefix}+ (output) \`${o.bindingName}\` : ${o.type}`,
 			(o) => `${prefix}- (output) \`${o.bindingName}\``,
-			(p, c) => (p.type !== c.type ? `${prefix}~ (output) \`${c.bindingName}\` : ${p.type} → ${c.type}` : null),
+			(p, c) => {
+				const parts: string[] = [];
+				if (p.type !== c.type) parts.push(`${p.type} → ${c.type}`);
+				const dep = deprecationNote(p.deprecated, c.deprecated);
+				if (dep) parts.push(dep);
+				return parts.length > 0 ? `${prefix}~ (output) \`${c.bindingName}\` : ${parts.join(', ')}` : null;
+			},
 		),
 	);
 
@@ -99,12 +128,106 @@ function diffClass(prev: ExtractedAPI, curr: ExtractedAPI, prefix: string): stri
 			(m) => m.bindingName,
 			(m) => `${prefix}+ (model) \`${m.bindingName}\` : ${m.type}`,
 			(m) => `${prefix}- (model) \`${m.bindingName}\``,
-			(p, c) =>
-				p.type !== c.type || p.required !== c.required
-					? `${prefix}~ (model) \`${c.bindingName}\` : ${p.type}${p.required ? ' requis' : ''} → ${c.type}${c.required ? ' requis' : ''}`
-					: null,
+			(p, c) => {
+				const parts: string[] = [];
+				if (p.type !== c.type || p.required !== c.required) {
+					parts.push(`${p.type}${p.required ? ' requis' : ''} → ${c.type}${c.required ? ' requis' : ''}`);
+				}
+				const dep = deprecationNote(p.deprecated, c.deprecated);
+				if (dep) parts.push(dep);
+				return parts.length > 0 ? `${prefix}~ (model) \`${c.bindingName}\` : ${parts.join(', ')}` : null;
+			},
 		),
 	);
+
+	return lines;
+}
+
+/** Diffs the package-level symbols (providers, tokens, pipes, services, deprecated modules). */
+function diffPackageSymbols(prev: PackageAPI, curr: PackageAPI): string[] {
+	const lines: string[] = [];
+
+	lines.push(
+		...diffMembers<ExtractedProvider>(
+			prev.providers ?? [],
+			curr.providers ?? [],
+			(p) => p.name,
+			(p) => `+ provider \`${p.name}\` : ${p.signature}`,
+			(p) => `- provider \`${p.name}\` retiré`,
+			(p, c) => {
+				const parts: string[] = [];
+				if (p.signature !== c.signature) parts.push(`${p.signature} → ${c.signature}`);
+				const dep = deprecationNote(p.deprecated, c.deprecated);
+				if (dep) parts.push(dep);
+				return parts.length > 0 ? `~ provider \`${c.name}\` : ${parts.join(', ')}` : null;
+			},
+		),
+	);
+
+	lines.push(
+		...diffMembers<ExtractedToken>(
+			prev.tokens ?? [],
+			curr.tokens ?? [],
+			(t) => t.name,
+			(t) => `+ token \`${t.name}\` : ${t.type}`,
+			(t) => `- token \`${t.name}\` retiré`,
+			(p, c) => {
+				const parts: string[] = [];
+				if (p.type !== c.type) parts.push(`${p.type} → ${c.type}`);
+				const dep = deprecationNote(p.deprecated, c.deprecated);
+				if (dep) parts.push(dep);
+				return parts.length > 0 ? `~ token \`${c.name}\` : ${parts.join(', ')}` : null;
+			},
+		),
+	);
+
+	lines.push(
+		...diffMembers<ExtractedPipe>(
+			prev.pipes ?? [],
+			curr.pipes ?? [],
+			(p) => p.name,
+			(p) => `+ pipe \`${p.name}\`${p.transformSignature ? ` : transform${p.transformSignature}` : ''}`,
+			(p) => `- pipe \`${p.name}\` retiré`,
+			(p, c) => {
+				const parts: string[] = [];
+				if ((p.transformSignature ?? '') !== (c.transformSignature ?? '')) {
+					parts.push(`transform${p.transformSignature ?? '(?)'} → transform${c.transformSignature ?? '(?)'}`);
+				}
+				const dep = deprecationNote(p.deprecated, c.deprecated);
+				if (dep) parts.push(dep);
+				return parts.length > 0 ? `~ pipe \`${c.name}\` : ${parts.join(', ')}` : null;
+			},
+		),
+	);
+
+	lines.push(
+		...diffMembers<ExtractedService>(
+			prev.services ?? [],
+			curr.services ?? [],
+			(s) => s.className,
+			(s) => `+ service \`${s.className}\`${s.methods.length ? ` (${s.methods.length} méthode·s)` : ''}`,
+			(s) => `- service \`${s.className}\` retiré`,
+			(p, c) => {
+				const parts: string[] = [];
+				const prevMethods = new Set(p.methods);
+				const currMethods = new Set(c.methods);
+				const added = c.methods.filter((x) => !prevMethods.has(x));
+				const removed = p.methods.filter((x) => !currMethods.has(x));
+				for (const x of added) parts.push(`+ \`${x}\``);
+				for (const x of removed) parts.push(`- \`${x}\``);
+				const dep = deprecationNote(p.deprecated, c.deprecated);
+				if (dep) parts.push(dep);
+				return parts.length > 0 ? `~ service \`${c.className}\` : ${parts.join(', ')}` : null;
+			},
+		),
+	);
+
+	// Deprecated modules: only transitions INTO deprecation are meaningful (the set only ever
+	// contains deprecated modules — a module leaving the set was removed or un-deprecated).
+	const prevModules = new Set((prev.deprecatedModules ?? []).map((m) => m.className));
+	for (const m of curr.deprecatedModules ?? []) {
+		if (!prevModules.has(m.className)) lines.push(`~ module \`${m.className}\` devient déprécié (${m.deprecated})`);
+	}
 
 	return lines;
 }
@@ -147,6 +270,9 @@ export function diffPackageApi(prev: PackageAPI | null, curr: PackageAPI | null)
 			lines.push(...classLines);
 		}
 	}
+
+	// Package-level symbols (providers, tokens, pipes, services, deprecated modules)
+	lines.push(...diffPackageSymbols(prev!, curr!));
 
 	return { lines };
 }

@@ -1,5 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { inject, Injectable, InjectionToken, Provider } from '@angular/core';
+import { inject, Injectable, InjectionToken, isSignal, Provider, Signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, TitleStrategy } from '@angular/router';
 import { isNotNil } from '@lucca-front/ng/core';
@@ -8,7 +9,7 @@ import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
 import { PageTitle, TitleSeparator } from './title.model';
 
-export const ɵAPP_TITLE = new InjectionToken<string | Observable<string>>('APP_TITLE');
+export const ɵAPP_TITLE = new InjectionToken<string | Observable<string> | Signal<string>>('APP_TITLE');
 export type LuTitleNamingStrategy = 'product' | 'other';
 export const ɵNAMING_STRATEGY = new InjectionToken<LuTitleNamingStrategy>('NAMING_STRATEGY', { factory: () => 'product' });
 export const ɵREAD_TITLE_BY_LIVE_ANNOUNCER = new InjectionToken<boolean>('READ_TITLE_BY_LIVE_ANNOUNCEMENT', { factory: () => false });
@@ -29,7 +30,7 @@ export class LuTitleStrategy extends TitleStrategy {
 	private readTitleByLiveAnnouncer = inject(ɵREAD_TITLE_BY_LIVE_ANNOUNCER);
 	private liveAnnouncer = inject(LiveAnnouncer);
 
-	private luccaTitle$ = isObservable(this.appTitle) ? this.appTitle.pipe(map((title) => this.#luccaTitle(title))) : of(this.#luccaTitle(this.appTitle));
+	private readonly luccaTitle$ = this.#toLuccaTitle$(this.appTitle);
 
 	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>([Lucca]);
 	titleParts$ = this.titlePartsSubject.asObservable();
@@ -79,6 +80,16 @@ export class LuTitleStrategy extends TitleStrategy {
 		return snapshot.firstChild ? [pageTitle, ...this.#getPageTitleParts(snapshot.firstChild)] : [pageTitle];
 	}
 
+	#toLuccaTitle$(appTitle: string | Observable<string> | Signal<string>): Observable<string> {
+		if (isSignal(appTitle)) {
+			return toObservable(appTitle).pipe(map((title) => this.#luccaTitle(title)));
+		}
+		if (isObservable(appTitle)) {
+			return appTitle.pipe(map((title) => this.#luccaTitle(title)));
+		}
+		return of(this.#luccaTitle(appTitle));
+	}
+
 	#luccaTitle(appTitle: string) {
 		if (appTitle.includes(Lucca)) {
 			return appTitle;
@@ -95,7 +106,7 @@ function uniqTitle(titleParts: Array<PageTitle>): Array<PageTitle> {
 }
 
 export interface LuTitleStrategyOptions {
-	appTitle?: () => string | Observable<string>;
+	appTitle?: () => string | Observable<string> | Signal<string>;
 	translateService?: () => ILuTitleTranslateService;
 	namingStrategy?: LuTitleNamingStrategy;
 	readTitleByLiveAnnouncer?: boolean;
