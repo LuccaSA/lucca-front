@@ -24,6 +24,16 @@ describe('analyze — css', () => {
 	it('never flags unknown local custom properties', () => {
 		expect(names('.a { --my-local-var: 1px; color: var(--totally-made-up); }', 'scss')).toEqual([]);
 	});
+
+	it('carries the replacement when the manifest names one', () => {
+		const [finding] = analyze('.a { font-size: var(--sizes-M-fontSize); }', 'scss', index, { deprecations: true });
+		expect(finding).toMatchObject({ kind: 'deprecated-property', name: '--sizes-M-fontSize', replacement: '--pr-t-font-body-M' });
+	});
+
+	it('leaves the replacement undefined when the manifest has none', () => {
+		const [finding] = analyze('.a { font-family: var(--commons-font-family); }', 'scss', index, { deprecations: true });
+		expect(finding.replacement).toBeUndefined();
+	});
 });
 
 describe('analyze — utility classes ending in %', () => {

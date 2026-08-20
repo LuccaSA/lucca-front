@@ -46,7 +46,7 @@ export class ClassHoverProvider implements vscode.HoverProvider {
 		const utility = index.utilities.get(name);
 		if (utility) {
 			const links = utilityDocLinks(name, storybookBaseUrl(), this.service.getLibVersion(document.uri));
-			const markdown = `${utilityHover(name, utility, deprecationsEnabled())}\n\n${renderDocLinks(links)}`;
+			const markdown = `${utilityHover(name, utility, deprecationsEnabled(), index.config)}\n\n${renderDocLinks(links)}`;
 			return new vscode.Hover(new vscode.MarkdownString(markdown), range);
 		}
 		// Unknown but pr-u-prefixed: offer close matches (skip bare `u-` to avoid

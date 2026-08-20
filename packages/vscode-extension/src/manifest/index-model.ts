@@ -3,7 +3,8 @@
  * unit-tested directly. Downstream providers read only from here.
  */
 
-import { CustomProperty, Manifest, MixinDef, UtilityClass } from './types';
+import { CustomProperty, Manifest, ManifestConfig, MixinDef, UtilityClass } from './types';
+import { UTILITY_PREFIX } from '../constants';
 
 export interface CompletionSeed {
 	/** Insertion text and completion label, e.g. `--pr-t-spacings-200` or `pr-u-displayFlex`. */
@@ -21,9 +22,12 @@ export interface ManifestIndex {
 	readonly properties: ReadonlyMap<string, CustomProperty>;
 	readonly utilities: ReadonlyMap<string, UtilityClass>;
 	readonly propertyCompletions: readonly CompletionSeed[];
+	/** Suggestable utilities only — excludes the legacy unprefixed `u-*` twins. */
 	readonly utilityCompletions: readonly CompletionSeed[];
 	/** All utility class names, for close-match suggestions. */
 	readonly utilityNames: readonly string[];
+	/** Build flags the surface was compiled with; empty when the manifest predates it. */
+	readonly config: ManifestConfig;
 	/** Consumer-facing mixins (empty when the manifest predates mixin support). */
 	readonly mixins: readonly MixinDef[];
 	/** Mixins keyed by `namespace.name`, for hover/diagnostics lookup. */
@@ -54,7 +58,8 @@ function propertyDocumentation(name: string, prop: CustomProperty, showDeprecati
 	}
 	lines.push(`Category: \`${prop.category}\``);
 	if (showDeprecation && prop.deprecated) {
-		lines.push('', `⚠️ **Deprecated**${prop.note ? ` — ${prop.note}` : ''}`);
+		const replacement = prop.replacement ? ` — use \`${prop.replacement}\` instead` : '';
+		lines.push('', `⚠️ **Deprecated**${replacement}${prop.note ? ` (${prop.note})` : ''}`);
 	}
 	return lines.join('\n');
 }
@@ -80,14 +85,27 @@ function utilityDocumentation(utility: UtilityClass, showDeprecation = true): st
 	return lines.join('\n');
 }
 
-/** Concise one-line summary of a utility's declarations, for completion detail. */
+/**
+ * Concise one-line summary of a utility's declarations, for completion detail.
+ * Names the block's qualifier — without it `pr-u-clearfix` reads as if it set
+ * `display: table` on the element itself rather than on `::before`.
+ */
 export function utilityDetail(utility: UtilityClass): string {
 	const first = utility.css[0];
 	if (!first) {
 		return '';
 	}
-	const condition = first.media ? ' @media' : first.container ? ' @container' : '';
-	return first.decls.replace(/ !important/g, '') + condition;
+	const qualifiers: string[] = [];
+	if (first.sel) {
+		qualifiers.push(`&${first.sel}`);
+	}
+	if (first.media) {
+		qualifiers.push('@media');
+	}
+	if (first.container) {
+		qualifiers.push('@container');
+	}
+	return first.decls.replace(/ !important/g, '') + (qualifiers.length ? ` ${qualifiers.join(' ')}` : '');
 }
 
 export function buildIndex(manifest: Manifest): ManifestIndex {
@@ -107,6 +125,12 @@ export function buildIndex(manifest: Manifest): ManifestIndex {
 
 	const utilityCompletions: CompletionSeed[] = [];
 	for (const [name, utility] of utilities) {
+		// The legacy `u-*` twins only exist when the library was built with
+		// `deprecatedUtilityPrefix`, so never suggest them. They stay in `utilities`
+		// so hover and diagnostics still explain existing code.
+		if (!name.startsWith(UTILITY_PREFIX)) {
+			continue;
+		}
 		utilityCompletions.push({
 			name,
 			detail: utilityDetail(utility),
@@ -132,6 +156,7 @@ export function buildIndex(manifest: Manifest): ManifestIndex {
 		propertyCompletions,
 		utilityCompletions,
 		utilityNames: [...utilities.keys()],
+		config: manifest.config ?? {},
 		mixins,
 		mixinLookup,
 		mixinNamespaces,
@@ -165,8 +190,12 @@ export function propertyHover(name: string, prop: CustomProperty, showDeprecatio
 }
 
 /** Builds the hover markdown for a utility class. */
-export function utilityHover(name: string, utility: UtilityClass, showDeprecation = true): string {
-	return `**\`.${name}\`**\n\n${utilityDocumentation(utility, showDeprecation)}`;
+export function utilityHover(name: string, utility: UtilityClass, showDeprecation = true, config?: ManifestConfig): string {
+	const lines = [`**\`.${name}\`**`, '', utilityDocumentation(utility, showDeprecation)];
+	if (config?.deprecatedUtilityPrefix && !name.startsWith(UTILITY_PREFIX)) {
+		lines.push('', `⚠️ Emitted only when \`@lucca-front/scss\` is built with \`$deprecatedUtilityPrefix\`, so it may not exist in your build.`);
+	}
+	return lines.join('\n');
 }
 
 /** Builds the hover markdown for an unknown utility class, with close matches. */

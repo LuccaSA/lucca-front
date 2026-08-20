@@ -95,13 +95,10 @@ export class DiagnosticsController implements vscode.Disposable {
 			const hint = suggestion ? ` Did you mean \`${suggestion}\`?` : ' Check the spelling, or upgrade the package.';
 			message = `\`${finding.name}\` is not a utility class in the installed @lucca-front/scss.${hint}`;
 			severity = unknownSeverity;
-		} else if (finding.kind === 'deprecated-class') {
+		} else {
+			// deprecated-class and deprecated-property
 			const replacement = finding.replacement ? ` Use \`${finding.replacement}\` instead.` : '';
 			message = `\`${finding.name}\` is deprecated.${replacement}${finding.note ? ` ${finding.note}` : ''}`;
-			severity = deprecatedSeverity;
-			tags.push(vscode.DiagnosticTag.Deprecated);
-		} else {
-			message = `\`${finding.name}\` is deprecated.${finding.note ? ` ${finding.note}` : ''}`;
 			severity = deprecatedSeverity;
 			tags.push(vscode.DiagnosticTag.Deprecated);
 		}

@@ -116,7 +116,7 @@ function analyzeCss(text: string, index: ManifestIndex, flags: AnalyzeFlags): Fi
 		const name = match[0];
 		const prop = index.properties.get(name);
 		if (prop?.deprecated) {
-			findings.push({ startOffset: match.index, endOffset: match.index + name.length, kind: 'deprecated-property', name, note: prop.note });
+			findings.push({ startOffset: match.index, endOffset: match.index + name.length, kind: 'deprecated-property', name, replacement: prop.replacement, note: prop.note });
 		}
 	}
 	return findings;

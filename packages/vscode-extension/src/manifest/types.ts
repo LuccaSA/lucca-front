@@ -8,6 +8,8 @@ export interface CustomProperty {
 	resolved?: string;
 	category: VariableCategory;
 	deprecated?: boolean;
+	/** Modern property to use instead. Nothing populates it yet; the deprecation registry will. */
+	replacement?: string;
 	/** Optional human note (from a `/* @deprecated <note> *\/` source comment). */
 	note?: string;
 }
@@ -50,9 +52,23 @@ export interface MixinDef {
 	doc?: string;
 }
 
+/**
+ * Sass config the surface was compiled with. All of it is off/empty by default, so
+ * the manifest is the *maximal* surface — entries owed to a flag may be absent
+ * from the consumer's build.
+ */
+export interface ManifestConfig {
+	palettesOtherProduct?: string;
+	/** Emits the legacy unprefixed `u-*` twins. */
+	deprecatedUtilityPrefix?: boolean;
+	fontFamilyCursive?: string;
+}
+
 export interface Manifest {
 	manifestVersion: number;
 	package: string;
+	/** Absent in manifests generated before the config block was added. */
+	config?: ManifestConfig;
 	variables: Record<string, CustomProperty>;
 	utilities: Record<string, UtilityClass>;
 	/** Absent in manifests generated before mixin support was added. */

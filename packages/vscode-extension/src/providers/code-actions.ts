@@ -1,7 +1,7 @@
 /**
  * Quick Fix code actions for our diagnostics: replace an unknown pr-u-* class
- * with a close match, replace a deprecated class with its recommended
- * replacement, add a missing mixin `@use`, or remove an unused one.
+ * with a close match, replace a deprecated class or custom property with its
+ * recommended replacement, add a missing mixin `@use`, or remove an unused one.
  * Reachable via the standard Quick Fix menu (Ctrl+. / Cmd+.).
  */
 
@@ -39,7 +39,8 @@ export class QuickFixProvider implements vscode.CodeActionProvider {
 				actions.push(this.makeRemoveImportFix(document, diagnostic));
 				continue;
 			}
-			const replacements = this.replacementsFor(diagnostic.code, name, index.utilities.get(name)?.replacement, index.utilityNames);
+			const known = index.utilities.get(name)?.replacement ?? index.properties.get(name)?.replacement;
+			const replacements = this.replacementsFor(diagnostic.code, name, known, index.utilityNames);
 			replacements.forEach((replacement, i) => {
 				actions.push(this.makeFix(document, diagnostic, name, replacement, i === 0));
 			});
@@ -78,13 +79,13 @@ export class QuickFixProvider implements vscode.CodeActionProvider {
 	}
 
 	private replacementsFor(code: unknown, name: string, knownReplacement: string | undefined, utilityNames: readonly string[]): string[] {
-		if (code === 'deprecated-class') {
+		if (code === 'deprecated-class' || code === 'deprecated-property') {
 			return knownReplacement ? [knownReplacement] : [];
 		}
 		if (code === 'unknown-class') {
 			return closestUtilities(name, utilityNames);
 		}
-		return []; // deprecated-property has no replacement in the manifest
+		return [];
 	}
 
 	private makeFix(document: vscode.TextDocument, diagnostic: vscode.Diagnostic, from: string, to: string, preferred: boolean): vscode.CodeAction {
