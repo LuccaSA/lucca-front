@@ -33,6 +33,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		counterStatus: {
 			if: { arg: 'counterMax', truthy: true },
@@ -41,12 +42,15 @@ export default {
 				step: 1,
 			},
 			description: 'Nombre de caractères actuellement saisis.',
+			table: { category: 'inputs' },
 		},
 		counterId: {
 			if: { arg: 'counterMax', truthy: true },
+			table: { category: 'inputs' },
 		},
 		labelId: {
 			if: { arg: 'counterMax', truthy: true },
+			table: { category: 'inputs' },
 		},
 		counterMax: {
 			control: {
@@ -54,21 +58,27 @@ export default {
 				step: 1,
 			},
 			description: 'Définit la valeur maximale du compteur de caractères.',
+			table: { category: 'inputs' },
 		},
 		for: {
 			description: 'ID du champ de formulaire associé au label.',
+			table: { category: 'inputs' },
 		},
 		tooltip: {
 			description: 'Affiche une icône (?) associée à une info-bulle.',
+			table: { category: 'inputs' },
 		},
 		tag: {
 			description: 'Ajoute un tag associé au label.',
+			table: { category: 'inputs' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		error: {
 			description: 'Applique l’état d’erreur au label.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

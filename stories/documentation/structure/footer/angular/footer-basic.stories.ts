@@ -12,9 +12,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit le breakpoint pour lequel le mode narrow (responsive) est appliqué.',
+			table: { category: 'inputs' },
 		},
 		container: {
 			description: 'Applique un container autour du contenu du footer.',
+			table: { category: 'inputs' },
 		},
 		containerMax: {
 			options: setStoryOptions(FOOTER_CONTAINER_MAX),
@@ -23,12 +25,15 @@ export default {
 			},
 			if: { arg: 'container', truthy: true },
 			description: 'Définit la largeur maximale du container.',
+			table: { category: 'inputs' },
 		},
 		sticky: {
 			description: 'Fige le footer lors du défilement vertical.',
+			table: { category: 'inputs' },
 		},
 		forceNarrow: {
 			description: 'Force le mode narrow (responsive) du footer.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

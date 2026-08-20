@@ -14,6 +14,7 @@ export default {
 				max: 12,
 			},
 			if: { arg: 'mode', truthy: false },
+			table: { category: 'inputs' },
 		},
 		colspan: {
 			control: {
@@ -21,6 +22,7 @@ export default {
 				min: 1,
 				max: 12,
 			},
+			table: { category: 'inputs' },
 		},
 		rowspan: {
 			control: {
@@ -28,6 +30,7 @@ export default {
 				min: 1,
 				max: 12,
 			},
+			table: { category: 'inputs' },
 		},
 		column: {
 			control: {
@@ -35,6 +38,7 @@ export default {
 				min: 0,
 				max: 12,
 			},
+			table: { category: 'inputs' },
 		},
 		row: {
 			control: {
@@ -42,6 +46,7 @@ export default {
 				min: 0,
 				max: 12,
 			},
+			table: { category: 'inputs' },
 		},
 		gap: {
 			control: {
@@ -49,36 +54,42 @@ export default {
 			},
 
 			options: setStoryOptions([...GRID_GAP, ...OTHER_GAP]),
+			table: { category: 'inputs' },
 		},
 		columnGap: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions([...GRID_GAP, ...OTHER_GAP]),
+			table: { category: 'inputs' },
 		},
 		rowGap: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions([...GRID_GAP, ...OTHER_GAP]),
+			table: { category: 'inputs' },
 		},
 		align: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions(GRID_COLUMN_ALIGNMENT),
+			table: { category: 'inputs' },
 		},
 		justify: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions(GRID_COLUMN_ALIGNMENT),
+			table: { category: 'inputs' },
 		},
 		mode: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions(GRID_MODE),
+			table: { category: 'inputs' },
 		},
 
 		repeatCols: {
@@ -87,6 +98,7 @@ export default {
 				min: 0,
 				max: 35,
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

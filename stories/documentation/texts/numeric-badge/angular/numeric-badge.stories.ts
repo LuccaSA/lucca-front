@@ -18,17 +18,21 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au composant.',
+			table: { category: 'inputs' },
 		},
 		value: {
 			description: 'Valeur affichée par le composant. Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "999+", etc.)',
+			table: { category: 'inputs' },
 		},
 		maxValue: {
 			type: 'number',
 			description: '[v19.2] Valeur maximale affichée au format "999+".',
+			table: { category: 'inputs' },
 		},
 		disableTooltip: {
 			type: 'boolean',
 			description: 'Empêche le déclenchement d’une tooltip si la valeur est supérieure à <code>maxValue</code>.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(NUMERIC_BADGE_SIZE),
@@ -36,12 +40,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		loading: {
 			control: {
 				type: 'boolean',
 			},
 			description: '[v19.1] Applique l’état de chargement.',
+			table: { category: 'inputs' },
 		},
 	},
 	render: (args, { argTypes }) => {

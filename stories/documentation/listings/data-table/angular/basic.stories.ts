@@ -29,6 +29,7 @@ export default {
 	argTypes: {
 		empty: {
 			description: 'Affiche un empty state à la place des lignes de tableau.',
+			table: { category: 'inputs' },
 		},
 		sort: {
 			options: setStoryOptions(DATA_TABLE_SORT),
@@ -36,6 +37,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
+			table: { category: 'models' },
 		},
 		align: {
 			options: setStoryOptions(DATA_TABLE_ALIGN),
@@ -43,6 +45,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Aligne le contenu des cellules horizontalement.',
+			table: { category: 'inputs' },
 		},
 		verticalAlign: {
 			options: setStoryOptions(DATA_TABLE_VERTICAL_ALIGN),
@@ -50,50 +53,62 @@ export default {
 				type: 'select',
 			},
 			description: 'Aligne le contenu des cellules verticalement.',
+			table: { category: 'inputs' },
 		},
 		inlineSize: {
 			if: { arg: 'layoutFixed', truthy: true },
 			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
+			table: { category: 'inputs' },
 		},
 		selected: {
 			if: { arg: 'selectable', truthy: true },
 			description: 'Applique l’état actif à une ligne sélectionnable.',
+			table: { category: 'models' },
 		},
 		selectedLabel: {
 			if: { arg: 'selectable', truthy: true },
 			description: 'Texte alternatif restitué à la sélection d’une ligne.',
+			table: { category: 'inputs' },
 		},
 		selectedLabelHead: {
 			if: { arg: 'selectable', truthy: true },
 			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes.',
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			if: { arg: 'selectable', truthy: true },
+			table: { category: 'inputs' },
 		},
 		inlineSizeValue: {
 			if: { arg: 'inlineSize', truthy: true },
+			table: { category: 'inputs' },
 		},
 		groupButtonAlt: {
 			if: { arg: 'group', truthy: true },
 			description: 'Texte alternatif restitué au focus de l’action sur le groupe.',
+			table: { category: 'inputs' },
 		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
 			description: 'Affiche le groupe dans son état étendu.',
+			table: { category: 'models' },
 		},
 		cols: {
 			control: { type: 'range', min: 2, max: 6 },
 			description: 'Modifie le nombre de colonnes dans la story.',
+			table: { category: 'inputs' },
 		},
 		lines: {
 			control: { type: 'range', min: 2, max: 6 },
 			description: 'Modifie le nombre de lignes dans la story.',
+			table: { category: 'inputs' },
 		},
 		tfoot: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Affiche un footer.',
+			table: { category: 'inputs' },
 		},
 		stickyHeader: HiddenArgType,
 		hover: {
@@ -101,54 +116,63 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Marque la ligne au survol pour faciliter la lisibilité des tableaux larges (ne sous-entend pas une interaction).',
+			table: { category: 'inputs' },
 		},
 		cellBorder: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Ajoute un séparateur vertical entre les cellules.',
+			table: { category: 'inputs' },
 		},
 		layoutFixed: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Applique une largeur fixe aux colonnes. La largeur d’une colonne peut être redéfinie via <code>fixedWidth</code>.',
+			table: { category: 'inputs' },
 		},
 		selectable: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+			table: { category: 'inputs' },
 		},
 		group: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Présente un groupe de lignes dans la story.',
+			table: { category: 'inputs' },
 		},
 		editable: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Ajoute un champ de saisie dans une cellule.',
+			table: { category: 'inputs' },
 		},
 		nested: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Réduit le <code>border-radius</code> du tableau pour l’imbriquer dans un composant structure.',
+			table: { category: 'inputs' },
 		},
 		actions: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Ajoute des actions rapides à droite d’une ligne.',
+			table: { category: 'inputs' },
 		},
 		pagination: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Ajoute une pagination au tableau.',
+			table: { category: 'inputs' },
 		},
 		drag: HiddenArgType,
 	},

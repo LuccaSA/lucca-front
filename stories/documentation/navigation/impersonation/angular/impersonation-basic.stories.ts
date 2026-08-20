@@ -21,6 +21,7 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Inclus les collaborateurs partis',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

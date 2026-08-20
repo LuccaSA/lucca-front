@@ -38,22 +38,27 @@ Lien (nouvelle fenêtre) uniquement au survol/focus/touch : <a href="${href}" l
 		disabled: {
 			description: 'Désactive le lien.',
 			type: 'boolean',
+			table: { category: 'inputs' },
 		},
 		external: HiddenArgType,
 		label: {
 			type: 'string',
 			description: '[Story] Modifie le label du lien.',
+			table: { category: 'inputs' },
 		},
 		href: {
 			type: 'string',
 			description: 'Adresse de la page cible. À n’utiliser qu’en lien externe ou non connu par le routeur.',
+			table: { category: 'inputs' },
 		},
 		routerLink: {
 			type: 'string',
 			description: 'Adresse de la page cible.',
+			table: { category: 'inputs' },
 		},
 		decorationHover: {
 			description: 'Souligne le lien seulement au survol.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

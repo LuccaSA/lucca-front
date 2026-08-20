@@ -23,71 +23,93 @@ export default {
 		min: {
 			control: 'date',
 			description: 'Définit une date minimum de sélection.',
+			table: { category: 'inputs' },
 		},
 		max: {
 			control: 'date',
 			description: 'Définit une date maximum de sélection.',
+			table: { category: 'inputs' },
 		},
 		hideToday: {
 			control: 'boolean',
 			description: 'Retire la mise en valeur de la date du jour.',
+			table: { category: 'inputs' },
 		},
 		clearable: {
 			control: 'boolean',
 			description: 'Ajoute un bouton de suppression lorsqu’une date est sélectionnée.',
+			table: { category: 'inputs' },
 		},
 		clearBehavior: {
 			control: 'select',
 			options: setStoryOptions(DATE2_CLEAR_BEHAVIOR),
 			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
+			table: { category: 'inputs' },
 		},
 		format: {
 			control: 'select',
 			options: setStoryOptions(DATE_FORMAT_CONST),
 			description: 'Modifie le format de date.',
+			table: { category: 'inputs' },
 		},
 		mode: {
 			control: 'select',
 			options: setStoryOptions(CALENDAR_MODE),
 			description: "Modifie le mode de sélection au mois ou à l'année.",
+			table: { category: 'inputs' },
 		},
 		focusedDate: {
 			control: 'date',
 			description: 'Définit la date préselectionnée à l’ouverture du calendrier.',
+			table: { category: 'inputs' },
 		},
 		widthAuto: {
 			control: 'boolean',
 			description: 'Applique une pleine largeur au composant.',
+			table: { category: 'inputs' },
 		},
 		selected: {
 			description: 'Définit une période sélectionnée.',
+			table: { category: 'inputs' },
 		},
 		hideWeekend: {
 			description: 'Retire l’effet grisé visible sur les jours du isWeekend.',
+			table: { category: 'inputs' },
 		},
 		autocomplete: {
 			control: 'select',
 			options: ['', 'on'],
 			description: 'Applique une valeur d’autocomplete au champ.',
+			table: { category: 'inputs' },
 		},
 		placeholder: {
 			control: 'text',
 			description: 'Modifie le placeholder au champ.',
+			table: { category: 'inputs' },
 		},
 		shortcuts: {
 			description: 'Définit une liste de sélection rapide de périodes',
+			table: { category: 'inputs' },
 		},
 		hasTodayButton: {
 			description: 'Ajoute un bouton pour sélectionner la date du jour.',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
 		},
 		panelOpened: {
 			description: "Événement déclenché à l'ouverture du calendrier.",
+			action: 'panelOpened',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		panelClosed: {
 			description: 'Événement déclenché à la fermeture du calendrier.',
+			action: 'panelClosed',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 	},
 	render: (args, { argTypes }) => {
@@ -97,13 +119,14 @@ export default {
 		const focusedDateValue = args['format'] === 'date' ? new Date(args['focusedDate']) : new Date(args['focusedDate'] ?? 0)?.toISOString().substring(0, 10);
 		return {
 			props: {
+				...args,
 				selected,
 				min: args['min'] ? minValue : null,
 				max: args['max'] ? maxValue : null,
 				focusedDate: args['focusedDate'] ? focusedDateValue : null,
 			},
 			template: cleanupTemplate(`<lu-form-field label="Date range input example" inlineMessage="Inline message example" ${generateInputs({ presentation }, argTypes)}>
-				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)} />
+				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)} (panelOpened)="panelOpened()" (panelClosed)="panelClosed()" />
 			</lu-form-field>
 
 			<pr-story-model-display>{{ selected | json }}</pr-story-model-display>`),
@@ -133,6 +156,7 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 		const { min, max, selected, presentation, ...flags } = args;
 		return {
 			props: {
+				...args,
 				selected,
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
@@ -155,7 +179,7 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 
 			template: cleanupTemplate(`
 			<lu-form-field label="Date range input example" inlineMessage="Inline message example" ${generateInputs({ presentation }, argTypes)}>
-				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)} />
+				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)} (panelOpened)="panelOpened()" (panelClosed)="panelClosed()" />
 			</lu-form-field>
 
 			<pr-story-model-display>{{ selected | json }}</pr-story-model-display>`),

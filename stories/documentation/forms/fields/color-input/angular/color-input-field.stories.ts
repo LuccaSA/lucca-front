@@ -23,12 +23,15 @@ export default {
 			type: 'string',
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle. ',
+			table: { category: 'inputs' },
 		},
 		label: {
 			description: 'Modifie le label du champ.',
+			table: { category: 'inputs' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
@@ -36,6 +39,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
+			table: { category: 'inputs' },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
@@ -43,9 +47,11 @@ export default {
 				type: 'select',
 			},
 			description: '[v19.2] Applique une largeur fixe au champ.',
+			table: { category: 'inputs' },
 		},
 		inlineMessage: {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
+			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -53,15 +59,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
 		},
 		clearable: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
+			table: { category: 'inputs' },
 		},
 		compact: {
 			description: 'Modifie la taille du color picker pour le rendre plus petit.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

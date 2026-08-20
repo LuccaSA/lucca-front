@@ -39,42 +39,54 @@ export default {
 	argTypes: {
 		wrapperDraggable: {
 			if: { arg: 'wrapper', truthy: true },
+			table: { category: 'inputs' },
 		},
 		wrapperGrid: {
 			if: { arg: 'wrapper', truthy: true },
+			table: { category: 'inputs' },
 		},
 		draggable: {
 			if: { arg: 'wrapper', truthy: false },
+			table: { category: 'inputs' },
 		},
 		infosTemplate: {
 			if: { arg: 'infos', truthy: true },
+			table: { category: 'inputs' },
 		},
 		illustrationTemplate: {
 			if: { arg: 'illustration', truthy: true },
+			table: { category: 'inputs' },
 		},
 		contentTemplate: {
 			if: { arg: 'content', truthy: true },
+			table: { category: 'inputs' },
 		},
 		contentTemplateDisabled: {
 			if: { arg: 'disabled', truthy: true },
+			table: { category: 'inputs' },
 		},
 		actionTemplate: {
 			if: { arg: 'action', truthy: true },
+			table: { category: 'inputs' },
 		},
 		actionTemplateDisabled: {
 			if: { arg: 'disabled', truthy: true },
+			table: { category: 'inputs' },
 		},
 		illustrationTemplateDisabled: {
 			if: { arg: 'disabled', truthy: true },
+			table: { category: 'inputs' },
 		},
 		addResource: {
 			if: { arg: 'wrapper', truthy: true },
+			table: { category: 'inputs' },
 		},
 		actionType: {
 			options: ['a', 'button'],
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(RESOURCE_CARD_SIZE),
@@ -82,6 +94,7 @@ export default {
 				type: 'select',
 			},
 			if: { arg: 'wrapper', truthy: false },
+			table: { category: 'inputs' },
 		},
 		wrapperSize: {
 			options: setStoryOptions(RESOURCE_CARD_SIZE),
@@ -89,6 +102,7 @@ export default {
 				type: 'select',
 			},
 			if: { arg: 'wrapper', truthy: true },
+			table: { category: 'inputs' },
 		},
 		headingLevel: {
 			control: {
@@ -96,6 +110,7 @@ export default {
 				min: 1,
 				max: 6,
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

@@ -20,12 +20,15 @@ export default {
 	argTypes: {
 		inlineSize: {
 			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
+			table: { category: 'inputs' },
 		},
 		inlineSizeValue: {
 			if: { arg: 'inlineSize', truthy: true },
+			table: { category: 'inputs' },
 		},
 		responsiveConfig: {
 			description: 'Applique une configuration responsive à LayoutFixed.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [
