@@ -24,6 +24,18 @@ const KINDS = Object.freeze({
 });
 
 /**
+ * `pr-u-width100\%` → `pr-u-width100%`. Manifest keys are unescaped; sources keyed on
+ * raw selectors must be normalised here. A no-op for the current seed, load-bearing for
+ * `deprecations.json`, which keeps the escapes — without it the ten `100%` sizing
+ * utilities would silently lose their deprecation.
+ * @param {string} name
+ * @returns {string}
+ */
+function unescapeCssName(name) {
+	return name.replace(/\\(.)/g, '$1');
+}
+
+/**
  * Answers "is this element deprecated, and what replaces it".
  *
  * @param {'css-variable'|'class'|'mixin'} kind
@@ -33,14 +45,16 @@ const KINDS = Object.freeze({
  *   or note known" — callers must distinguish it from undefined.
  */
 function deprecationFor(kind, name) {
+	const key = unescapeCssName(name);
+
 	switch (kind) {
 		case KINDS.VARIABLE:
 			// The seed carries no replacements for custom properties. Intentionally
 			// not backfilled by hand: deprecations.json already supplies them.
-			return isDeprecatedVariable(name) ? {} : undefined;
+			return isDeprecatedVariable(key) ? {} : undefined;
 
 		case KINDS.CLASS: {
-			const dep = classDeprecation(name);
+			const dep = classDeprecation(key);
 			if (!dep) {
 				return undefined;
 			}
