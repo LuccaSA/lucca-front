@@ -1,3 +1,8 @@
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.sassApi('gauge.vertical', $note: 'The vertical gauge mixin is deprecated.', $scope: 'component:gauge');
+@include deprecated.sassApi('gauge.verticalThin', $note: 'The verticalThin gauge mixin is deprecated.', $scope: 'component:gauge');
+
 @mixin thin {
 	--components-gauge-blockSize: var(--pr-t-spacings-50);
 	--components-gauge-circle-strokeWidth: var(--pr-t-spacings-50);

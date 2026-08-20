@@ -3,6 +3,7 @@
 
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
+@use '@lucca-front/scss/src/commons/deprecated';
 @use '@lucca-front/scss/src/commons/function';
 @use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/commons/utils/media';
@@ -65,6 +66,17 @@
 	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
 
 	@each $palette in config.$palettesAll {
+		// The `text` shade is deprecated across every palette.
+		@include deprecated.cssVariable('--palettes-#{$palette}-text', $scope: 'commons/vars');
+
+		// Deprecated palette names (lucca, grey, primary, secondary) are still emitted for
+		// backwards compatibility; every shade of them is deprecated.
+		@if list.index(config.$palettesDeprecated, $palette) {
+			@each $shade, $value in map.get(config.$palettesInterpolation, $palette) {
+				@include deprecated.cssVariable('--palettes-#{$palette}-#{$shade}', $scope: 'commons/vars');
+			}
+		}
+
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
 
@@ -78,6 +90,14 @@
 	--palettes-assets-secondary-lighter: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'secondary')}-50);
 	--palettes-assets-secondary-light: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'secondary')}-100);
 	// stylelint-enable custom-property-pattern
+
+	@each $key, $value in config.$colors {
+		@include deprecated.cssVariable('--colors-#{$key}-color', $note: 'Use palette custom properties (--palettes-*) instead.', $scope: 'commons/vars');
+	}
+
+	@each $key, $value in config.$colorsRgb {
+		@include deprecated.cssVariable('--colors-#{$key}-rgb', $note: 'Use palette custom properties (--palettes-*) instead.', $scope: 'commons/vars');
+	}
 
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
@@ -105,11 +125,16 @@
 	--commons-pushPanel-inlineSize: 0px;
 
 	// Deprecated
+	@include deprecated.cssVariable('--commons-font-family', $replacement: '--pr-t-font-family', $scope: 'commons/vars');
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+
+	@include deprecated.cssVariable('--commons-font-family-brand', $replacement: '--pr-t-font-family-brand', $scope: 'commons/vars');
 	--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 
+	@include deprecated.cssVariable('--commons-background-base', $replacement: '--pr-t-elevation-surface-default', $scope: 'commons/vars');
 	--commons-background-base: var(--pr-t-elevation-surface-default);
 
+	@include deprecated.cssVariable('--commons-divider-color', $note: 'Use --palettes-neutral-200 instead.', $scope: 'commons/vars');
 	--commons-divider-color: var(--palettes-neutral-200);
 
 	--commons-container-padding: 0 var(--pr-t-spacings-200);
@@ -122,10 +147,15 @@
 	--commons-navSide-mobile-toggle-height: 3.5rem;
 
 	@if (config.$fontFamilyCursive) {
+		@include deprecated.cssVariable('--commons-font-family-cursive', $replacement: '--pr-t-font-family-cursive', $scope: 'commons/vars');
 		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
 	}
 
 	@each $key, $map in config.$sizes {
+		@each $property, $value in $map {
+			@include deprecated.cssVariable('--sizes-#{$key}-#{$property}', $note: 'Use --pr-t-font-* tokens instead.', $scope: 'commons/vars');
+		}
+
 		@include core.cssvars('sizes-#{$key}', $map);
 	}
 
@@ -169,6 +199,8 @@
 
 	// Deprecated .u- utilities
 	@if config.$deprecatedUtilityPrefix {
+		@include deprecated.class('u-prefersContrastMore', $replacement: 'pr-u-prefersContrastMore', $note: 'The u- prefix is deprecated.', $scope: 'commons/vars');
+
 		.u-prefersContrastMore {
 			@extend %prefersContrastMore;
 		}

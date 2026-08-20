@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
 
 .button {
 	@layer components {
@@ -41,7 +42,8 @@
 			@include disclosure;
 		}
 
-		// .mod-outline is deprecated
+		@include deprecated.selector('.mod-outline', $replacement: '.mod-outlined', $scope: 'component:button');
+
 		&.mod-outline,
 		&.mod-outlined {
 			&:where(:not(.is-success, .is-error)) {
@@ -49,7 +51,9 @@
 			}
 		}
 
-		// .mod-link .mod-text deprecated
+		@include deprecated.selector('.mod-link', $replacement: '.mod-ghost', $scope: 'component:button');
+		@include deprecated.selector('.mod-text', $replacement: '.mod-ghost', $scope: 'component:button');
+
 		&.mod-link,
 		&.mod-text,
 		&.mod-ghost {
@@ -108,25 +112,25 @@
 			}
 		}
 
-		// .mod-delete is deprecated
+		@include deprecated.selector('.mod-delete', $replacement: '.mod-critical', $scope: 'component:button');
+
 		&.mod-delete,
 		&.mod-critical {
 			@include critical;
 
-			// .mod-link is deprecated
 			&.mod-link,
 			&.mod-text {
 				@include criticalGhost;
 			}
 
-			// .mod-outline is deprecated
 			&.mod-outline,
 			&.mod-outlined {
 				@include criticalOutlined;
 			}
 		}
 
-		// .mod-invert is deprecated
+		@include deprecated.selector('.mod-invert', $replacement: '.mod-inverted', $scope: 'component:button');
+
 		&.mod-invert,
 		&.mod-inverted {
 			@include inverted;
@@ -144,7 +148,8 @@
 			}
 		}
 
-		// .loading is deprecated
+		@include deprecated.selector('.button.loading', $replacement: '.button.is-loading', $scope: 'component:button');
+
 		&.loading,
 		&.is-loading {
 			@include loading;
@@ -166,13 +171,15 @@
 			}
 		}
 
-		// .error is deprecated
+		@include deprecated.selector('.button.error', $replacement: '.button.is-error', $scope: 'component:button');
+
 		&.error,
 		&.is-error {
 			@include error;
 		}
 
-		// .success is deprecated
+		@include deprecated.selector('.button.success', $replacement: '.button.is-success', $scope: 'component:button');
+
 		&.success,
 		&.is-success {
 			@include success;
@@ -187,7 +194,8 @@
 			}
 		}
 
-		// .disabled is deprecated
+		@include deprecated.selector('.button.disabled', $replacement: '.button.is-disabled', $scope: 'component:button');
+
 		&.disabled,
 		&.is-disabled,
 		&[aria-disabled='true'] {

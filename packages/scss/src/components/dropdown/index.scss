@@ -1,4 +1,10 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.selector('.lu-dropdown-content', $replacement: '.dropdown', $scope: 'component:dropdown');
+@include deprecated.selector('.lu-dropdown-options', $replacement: '.dropdown-list', $scope: 'component:dropdown');
+@include deprecated.selector('.lu-dropdown-options-item', $replacement: '.dropdown-list-option', $scope: 'component:dropdown');
+@include deprecated.selector('.lu-dropdown-options-item-action', $replacement: '.dropdown-list-option-action', $scope: 'component:dropdown');
 
 // stylelint-disable-next-line selector-disallowed-list -- .lu-dropdown-content is deprecated
 .lu-dropdown-content.lu-popover-content,

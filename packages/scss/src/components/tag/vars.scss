@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/deprecated';
+
 @mixin vars {
 	--components-tag-background: var(--palettes-100, var(--palettes-neutral-100));
 	--components-tag-color: var(--palettes-800, var(--palettes-neutral-800));
@@ -9,7 +11,9 @@
 	--components-tag-boxShadow: 0 0 0 1px var(--components-tag-shadow);
 	--components-tag-position: static;
 
-	// Deprecated
+	@include deprecated.cssVariable('--components-tag-fontSize', $replacement: '--components-tag-font', $scope: 'component:tag');
 	--components-tag-fontSize: var(--pr-t-font-body-S-fontSize);
+
+	@include deprecated.cssVariable('--components-tag-lineHeight', $replacement: '--components-tag-font', $scope: 'component:tag');
 	--components-tag-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }

@@ -1,4 +1,9 @@
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.sassApi('userTile.XL', $note: 'The XL userTile size mixin is deprecated.', $scope: 'component:userTile');
+@include deprecated.sassApi('userTile.XXL', $note: 'The XXL userTile size mixin is deprecated.', $scope: 'component:userTile');
+@include deprecated.sassApi('userTile.XXXL', $note: 'The XXXL userTile size mixin is deprecated.', $scope: 'component:userTile');
 
 @mixin XS {
 	--components-userTile-gap: var(--pr-t-spacings-100);
