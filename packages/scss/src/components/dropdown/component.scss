@@ -70,7 +70,7 @@
 			transition: background-color var(--commons-animations-durations-fast);
 			text-decoration: none;
 			inline-size: 100%;
-			pointer-events: var(--components-dropdown-list-option-action-pointerEvents);
+			pointer-events: auto;
 			cursor: pointer;
 
 			.lucca-icon {
