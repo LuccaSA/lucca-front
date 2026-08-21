@@ -17,7 +17,9 @@ export class TagComponent {
 	/**
 	 * Which text should the tag be? Defaults to medium
 	 */
-	readonly label = input.required<string>();
+	readonly label = input<string | null>(null);
+
+	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Which size should the tag be? Defaults to medium
