@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { addMonths } from 'date-fns';
+import { By } from '@angular/platform-browser';
+import { addMonths, startOfDay } from 'date-fns';
 import { DateRange } from '../calendar2/date-range';
 import { DateRangeInputComponent } from './date-range-input.component';
 
@@ -172,5 +173,27 @@ describe('DateRangeInputComponent', () => {
 			start: new Date('2025-06-18T00:00:00.000Z'),
 			scope: 'day',
 		});
+	});
+
+	it('should anchor the calendar on the end bound when the written range has no start', () => {
+		const formControl = new FormControl<DateRange | null>(null);
+
+		TestBed.configureTestingModule({
+			imports: [FormControlHostComponent],
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		});
+
+		const fixture = TestBed.createComponent(FormControlHostComponent);
+		fixture.componentInstance.formControl = formControl;
+		fixture.detectChanges();
+
+		const end = new Date(2025, 11, 31);
+		// The component itself emits such a range when only the end field is filled
+		formControl.setValue({ start: null, end } as unknown as DateRange);
+		fixture.detectChanges();
+
+		const dateRangeInput = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
+
+		expect(dateRangeInput['currentDate']()).toEqual(startOfDay(end));
 	});
 });
