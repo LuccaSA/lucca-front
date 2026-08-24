@@ -1,0 +1,71 @@
+// Machine-readable deprecation registry.
+//
+// This module is the single authoritative source of deprecation metadata for
+// `@lucca-front/scss`. Call sites register a deprecated public API surface
+// (utility class, custom property, selector contract or Sass API) right where
+// it is declared; the registration accumulates into a module-level map and
+// EMITS NO CSS. A build-time extractor (packages/scss/css-api/extract-deprecations.js)
+// includes `dump()` to read the registry out as JSON.
+//
+// HARD RULE: this file must only `@use` sass built-ins. Depending on any other
+// module would risk a dependency cycle, since config.scss / core.scss /
+// component files all `@use` this module.
+
+@use 'sass:map';
+@use 'sass:meta';
+
+// stylelint-disable-next-line scss/dollar-variable-pattern -- private module state
+$-registry: ();
+
+// stylelint-disable-next-line scss/at-mixin-pattern -- private helper
+@mixin -register($kind, $name, $replacement, $note, $since, $scope) {
+	$key: '#{$kind}|#{$name}';
+	$entry: (
+		kind: $kind,
+		name: $name,
+		replacement: $replacement,
+		note: $note,
+		since: $since,
+		scope: $scope,
+	);
+	$existing: map.get($-registry, $key);
+
+	@if $existing != null and $existing != $entry {
+		@error 'Conflicting deprecation registration for "#{$name}" (#{$kind}).';
+	}
+
+	// stylelint-disable-next-line scss/dollar-variable-pattern
+	$-registry: map.set($-registry, $key, $entry) !global;
+}
+
+// A deprecated emitted class name (utility or component class), bare, no leading dot.
+@mixin class($name, $replacement: null, $note: null, $since: null, $scope: 'commons') {
+	@include -register('class', $name, $replacement, $note, $since, $scope);
+}
+
+// A deprecated compound / contextual selector, written as it appears in CSS ('.box.mod-grey').
+@mixin selector($name, $replacement: null, $note: null, $since: null, $scope: 'commons') {
+	@include -register('selector', $name, $replacement, $note, $since, $scope);
+}
+
+// A deprecated CSS custom property, with leading dashes ('--commons-font-family').
+@mixin cssVariable($name, $replacement: null, $note: null, $since: null, $scope: 'commons') {
+	@include -register('css-variable', $name, $replacement, $note, $since, $scope);
+}
+
+// A deprecated Sass API surface: variable ('config.$colors'), mixin ('core.sizes'),
+// list/map member or config flag ('config.$deprecatedUtilityPrefix').
+@mixin sassApi($name, $replacement: null, $note: null, $since: null, $scope: 'commons') {
+	@include -register('sass-api', $name, $replacement, $note, $since, $scope);
+}
+
+// Reads the registry out through the `lf-dump-deprecations` custom JS function.
+// Only ever included by packages/scss/css-api/extract-deprecations.js.
+@mixin dump {
+	@if not meta.function-exists('lf-dump-deprecations') {
+		@error 'deprecated.dump() must be compiled through packages/scss/css-api/extract-deprecations.js';
+	}
+
+	// stylelint-disable-next-line scss/dollar-variable-pattern
+	$-result: meta.call(meta.get-function('lf-dump-deprecations'), $-registry);
+}

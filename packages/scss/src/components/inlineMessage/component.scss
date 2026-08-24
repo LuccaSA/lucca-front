@@ -2,6 +2,9 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.selector('.lucca-icon:first-child', $replacement: '.inlineMessage-statusIcon', $scope: 'component:inlineMessage');
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;

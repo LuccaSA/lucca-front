@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/deprecated';
 
 .loading {
 	@layer components {
@@ -19,13 +20,15 @@
 			@include fullPage;
 		}
 
-		// .mod-dialog is deprecated
+		@include deprecated.selector('.mod-dialog', $replacement: '.mod-popin', $scope: 'component:loading');
+
 		&.mod-popin,
 		&.mod-dialog {
 			@include popin;
 		}
 
-		// .mod-sidePanel is deprecated
+		@include deprecated.selector('.mod-sidePanel', $replacement: '.mod-drawer', $scope: 'component:loading');
+
 		&.mod-drawer,
 		&.mod-sidePanel {
 			@include drawer;

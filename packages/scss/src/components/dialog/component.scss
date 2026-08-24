@@ -3,6 +3,10 @@
 @use '@lucca-front/scss/src/commons/utils/keyframe';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/deprecated';
+
+@include deprecated.selector('.dialog-form', $replacement: '.dialog-inside-formOptional', $scope: 'component:dialog');
+@include deprecated.selector('.dialog-formOptional', $replacement: '.dialog-inside-formOptional', $scope: 'component:dialog');
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	animation-name: var(--components-dialog-animationOpening);

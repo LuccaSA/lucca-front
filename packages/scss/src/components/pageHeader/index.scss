@@ -1,5 +1,6 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/deprecated';
 
 .pageHeader {
 	@layer components {
@@ -8,7 +9,8 @@
 	}
 
 	@layer mods {
-		// .mod-withMenu is deprecated
+		@include deprecated.selector('.mod-withMenu', $replacement: '.mod-withHorizontalNavigation', $scope: 'component:pageHeader');
+
 		&.mod-withHorizontalNavigation,
 		&:has(.horizontalNavigation),
 		&.mod-withMenu {
