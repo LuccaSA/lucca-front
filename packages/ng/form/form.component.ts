@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { LU_FORM_INSTANCE } from './form-instance';
 import { LuDialogRef } from '@lucca-front/ng/dialog';
@@ -30,21 +30,29 @@ export class FormComponent {
 
 	readonly #elementRef = inject<ElementRef<HTMLFormElement>>(ElementRef);
 
+	readonly #injector = inject(Injector);
+
 	readonly maxWidth = input(false, { transform: luBooleanAttribute });
 
 	readonly presentation = input(false, { transform: luBooleanAttribute });
 
-	readonly focusInvalidOnSubmit = input(true, { transform: luBooleanAttribute });
+	/**
+	 * When enabled, submitting an invalid form moves focus to the first invalid field. Disabled by default.
+	 */
+	readonly focusInvalidOnSubmit = input(false, { transform: luBooleanAttribute });
 
 	protected onSubmit(): void {
 		if (!this.focusInvalidOnSubmit()) {
 			return;
 		}
-		setTimeout(() => {
-			const form = this.#elementRef.nativeElement;
-			if (form.classList.contains('ng-invalid')) {
-				focusFirstInvalidControl(form);
-			}
-		});
+		afterNextRender(
+			() => {
+				const form = this.#elementRef.nativeElement;
+				if (form.classList.contains('ng-invalid')) {
+					focusFirstInvalidControl(form);
+				}
+			},
+			{ injector: this.#injector },
+		);
 	}
 }

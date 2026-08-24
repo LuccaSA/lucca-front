@@ -28,6 +28,23 @@ class FormHost {
 	}
 }
 
+@Component({
+	selector: 'lu-default-form-host',
+	imports: [FormComponent, ReactiveFormsModule],
+	template: `
+		<form luForm [formGroup]="formGroup">
+			<input id="name" formControlName="name" />
+			<button id="save" type="submit">Save</button>
+		</form>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class DefaultFormHost {
+	readonly formGroup = new FormGroup({
+		name: new FormControl('', Validators.required),
+	});
+}
+
 describe(FormComponent.name, () => {
 	function createHost() {
 		TestBed.configureTestingModule({ imports: [FormHost] });
@@ -42,13 +59,13 @@ describe(FormComponent.name, () => {
 		document.body.innerHTML = '';
 	});
 
-	const flushFocusTimeout = () => new Promise((resolve) => setTimeout(resolve));
+	const flushFocusRender = () => new Promise((resolve) => setTimeout(resolve));
 
 	it('should focus the first invalid field when submitting an invalid form', async () => {
 		const { form } = createHost();
 
 		form.dispatchEvent(new Event('submit'));
-		await flushFocusTimeout();
+		await flushFocusRender();
 
 		expect(document.activeElement?.id).toBe('name');
 	});
@@ -60,7 +77,21 @@ describe(FormComponent.name, () => {
 		const initialActiveElement = document.activeElement;
 
 		form.dispatchEvent(new Event('submit'));
-		await flushFocusTimeout();
+		await flushFocusRender();
+
+		expect(document.activeElement).toBe(initialActiveElement);
+	});
+
+	it('should not move focus by default when submitting an invalid form', async () => {
+		TestBed.configureTestingModule({ imports: [DefaultFormHost] });
+		const fixture = TestBed.createComponent(DefaultFormHost);
+		fixture.detectChanges();
+		const form = (fixture.nativeElement as HTMLElement).querySelector<HTMLFormElement>('form')!;
+		document.body.appendChild(fixture.nativeElement);
+		const initialActiveElement = document.activeElement;
+
+		form.dispatchEvent(new Event('submit'));
+		await flushFocusRender();
 
 		expect(document.activeElement).toBe(initialActiveElement);
 	});
@@ -72,7 +103,7 @@ describe(FormComponent.name, () => {
 		const initialActiveElement = document.activeElement;
 
 		form.dispatchEvent(new Event('submit'));
-		await flushFocusTimeout();
+		await flushFocusRender();
 
 		expect(document.activeElement).toBe(initialActiveElement);
 	});
@@ -83,7 +114,7 @@ describe(FormComponent.name, () => {
 		fixture.detectChanges();
 
 		form.dispatchEvent(new Event('submit'));
-		await flushFocusTimeout();
+		await flushFocusRender();
 
 		expect(document.activeElement?.id).toBe('name');
 	});
