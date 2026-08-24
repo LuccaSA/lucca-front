@@ -121,6 +121,10 @@ export class LuSimpleSelectPanelRefFactory {
 		const overlayConfig: OverlayConfig = overlayConfigOverride || {};
 		overlayConfig.positionStrategy = this.positionBuilder
 			.flexibleConnectedTo(this.elementRef)
+			// Options usually arrive after the panel has been opened: without this, every reposition is
+			// capped to the bounding box computed while the panel was still empty, so a panel opened in a
+			// tight space below the field can never grow nor flip above once its options are there.
+			.withGrowAfterOpen(true)
 			.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement, 8))
 			.withPositions([
 				{
