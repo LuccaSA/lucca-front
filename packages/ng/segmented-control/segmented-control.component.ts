@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LU_FILTER_BAR_INSTANCE } from '@lucca-front/ng/filter-pills';
 import { luBooleanAttribute } from '@lucca-front/ng/core';

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { luNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_MAIN_LAYOUT_INSTANCE } from '@lucca-front/ng/main-layout';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
