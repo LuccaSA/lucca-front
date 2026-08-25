@@ -86,6 +86,20 @@
 	}
 }
 
+@mixin successS {
+	&::after {
+		font-size: var(--pr-t-font-body-S-lineHeight);
+		block-size: var(--pr-t-font-body-S-lineHeight);
+	}
+}
+
+@mixin successXS {
+	&::after {
+		font-size: var(--pr-t-font-body-XS-lineHeight);
+		block-size: var(--pr-t-font-body-XS-lineHeight);
+	}
+}
+
 @mixin loadingAI {
 	--components-button-color: transparent;
 	--components-button-backgroundColor: var(--palettes-neutral-0);
