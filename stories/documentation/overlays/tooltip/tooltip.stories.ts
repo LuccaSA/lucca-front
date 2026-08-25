@@ -50,14 +50,6 @@ export default {
 				defaultValue: { summary: 'false' },
 			},
 		},
-		luTooltipNotOnOverlayFocusReturn: {
-			description: 'N’ouvre pas la tooltip lorsque le focus revient d’un overlay (dropdown, dialog…) qui se ferme et le redonne à son déclencheur.',
-			control: { type: 'boolean' },
-			table: {
-				category: 'inputs',
-				defaultValue: { summary: 'false' },
-			},
-		},
 		luTooltipOnlyForDisplay: {
 			description: 'Affiche un tooltip non restituée par les lecteurs d’écran. À utiliser si la réstitution est déjà portée par l’élément déclencheur (ex. une icône avec attribut `alt`)',
 		},

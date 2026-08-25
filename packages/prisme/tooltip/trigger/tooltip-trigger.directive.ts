@@ -94,12 +94,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltipPosition = input<TooltipPosition>('above');
 	readonly tooltipPosition = computed(() => this.prTooltipPosition() || this.luTooltipPosition());
 
-	/**
-	 * Does not open the tooltip when a closing overlay hands the focus back to its trigger.
-	 * Hover and keyboard navigation are unaffected.
-	 */
-	readonly luTooltipNotOnOverlayFocusReturn = input(false, { transform: booleanAttribute });
-
 	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
 	readonly prTooltipWhenEllipsisInput = input(false, { alias: 'prTooltipWhenEllipsis', transform: booleanAttribute });
 
@@ -323,7 +317,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 		// A closing overlay hands the focus back to its trigger.
 		// That is not the user reaching the trigger, so the tooltip stays closed.
-		if (this.luTooltipNotOnOverlayFocusReturn() && this.#isForeignPane(leftToPane)) {
+		if (this.#isForeignPane(leftToPane)) {
 			return;
 		}
 
