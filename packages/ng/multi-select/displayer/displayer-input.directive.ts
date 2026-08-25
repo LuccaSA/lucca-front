@@ -1,4 +1,4 @@
-import { computed, DestroyRef, Directive, ElementRef, inject, OnInit } from '@angular/core';
+import { afterNextRender, computed, DestroyRef, Directive, ElementRef, inject, Injector, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
@@ -34,6 +34,8 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	readonly elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef);
 
 	readonly destroyRef = inject(DestroyRef);
+
+	readonly #injector = inject(Injector);
 
 	get panelOpen() {
 		return this.#panelOpen();
@@ -87,6 +89,15 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	}
 
 	ngOnInit(): void {
+		// When the displayer swaps variants while the panel is open (e.g. the content-displayer
+		// gives way to the default displayer on the first selection), the previously focused input
+		// is destroyed. focusInput$ is a plain Subject, so its emission fires before this new input
+		// has subscribed and is lost — focus falls back to <body> and keyboard navigation dies.
+		// A freshly mounted displayer input owns focus whenever the panel is open.
+		if (this.select.isPanelOpen) {
+			afterNextRender(() => this.elementRef.nativeElement.focus(), { injector: this.#injector });
+		}
+
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: boolean }) => {
 			if (!data?.keepClue) {
 				this.#clearText();
