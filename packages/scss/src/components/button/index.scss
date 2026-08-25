@@ -177,14 +177,6 @@
 		&.is-success {
 			@include success;
 
-			&.mod-S {
-				@include successS;
-			}
-
-			&.mod-XS {
-				@include successXS;
-			}
-
 			&.mod-AI,
 			&.mod-outlined {
 				@include successOutlined;
