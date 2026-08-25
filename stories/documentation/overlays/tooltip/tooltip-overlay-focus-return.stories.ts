@@ -1,17 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import {
-	DialogComponent,
-	DialogContentComponent,
-	DialogFooterComponent,
-	DialogHeaderComponent,
-	LuDialogService,
-	configureLuDialog,
-	injectDialogRef,
-	provideLuDialog,
-} from '@lucca-front/ng/dialog';
+import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, LuDialogService, configureLuDialog, injectDialogRef, provideLuDialog } from '@lucca-front/ng/dialog';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { Meta, StoryObj, applicationConfig } from '@storybook/angular-vite';
+import { createTestStory } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 
 @Component({
 	selector: 'sb-tooltip-focus-return-dialog',
@@ -22,7 +16,7 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular-vite';
 			<lu-dialog-content>À la fermeture, le focus revient sur le bouton déclencheur.</lu-dialog-content>
 
 			<lu-dialog-footer>
-				<button type="button" luButton (click)="ref.close()">Fermer</button>
+				<button type="button" luButton (click)="ref.close()">Close</button>
 			</lu-dialog-footer>
 		</lu-dialog>
 	`,
@@ -65,3 +59,44 @@ export default {
 } as Meta;
 
 export const OverlayFocusReturn: StoryObj<TooltipFocusReturnStory> = {};
+
+export const OverlayFocusReturnTEST = createTestStory(OverlayFocusReturn, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const trigger = (name: RegExp) => canvas.getByRole('button', { name });
+	const tooltip = (text: RegExp) => screen.queryByText(text, { selector: '.tooltip' });
+
+	// The pointer stays off the triggers throughout: hover legitimately opens the tooltip.
+	const openThenCloseWith = async (name: RegExp, closeLabel: RegExp) => {
+		trigger(name).focus();
+		trigger(name).click();
+		await waitForAngular();
+		await userEvent.click(await screen.findByRole('button', { name: closeLabel }));
+		await waitForAngular();
+	};
+
+	// The tooltip has a 300ms enter delay, so leave it time to fail to appear.
+	const expectStaysClosed = async (text: RegExp) => {
+		await new Promise((resolve) => setTimeout(resolve, 600));
+		await expect(tooltip(text)).toBeNull();
+	};
+
+	await step('Sans l’option, le retour du focus ouvre la tooltip', async () => {
+		await openThenCloseWith(/Sans l’option/, /Fermer/);
+		await expect(trigger(/Sans l’option/)).toHaveFocus();
+		await waitFor(() => expect(tooltip(/Comportement par défaut/)).toBeVisible());
+	});
+
+	await step('Avec l’option, le retour du focus laisse la tooltip fermée', async () => {
+		await openThenCloseWith(/Avec l’option/, /Fermer/);
+		await expect(trigger(/Avec l’option/)).toHaveFocus();
+		await expectStaysClosed(/Pas de tooltip au retour du focus/);
+	});
+
+	await step('Idem via une fermeture avec résultat, que le bouton par défaut ne couvre pas', async () => {
+		await openThenCloseWith(/Avec l’option/, /Close/);
+		await expect(trigger(/Avec l’option/)).toHaveFocus();
+		await expectStaysClosed(/Pas de tooltip au retour du focus/);
+	});
+});
