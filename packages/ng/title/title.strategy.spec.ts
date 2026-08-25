@@ -139,6 +139,10 @@ describe('TitleStrategy', () => {
 				},
 			],
 		},
+		{
+			path: 'untitled/:id',
+			component: StubComponent,
+		},
 	];
 
 	async function clickLink(selector: string): Promise<void> {
@@ -184,6 +188,16 @@ describe('TitleStrategy', () => {
 
 		await clickLink('.link-2');
 		expect(resultTitle).toEqual(`Stub${TitleSeparator}Lucca BU`);
+	});
+
+	it('should not send a nil title to the translate service', async () => {
+		let resultTitle = '';
+		pageTitleService.title$.subscribe((title) => (resultTitle = title));
+
+		// A route without any title in its chain resolves to a nil title, which the translate service would choke on
+		await TestBed.inject(Router).navigateByUrl('/untitled/1');
+
+		expect(resultTitle).toEqual('Lucca BU');
 	});
 
 	it('should include named params in title', async () => {
