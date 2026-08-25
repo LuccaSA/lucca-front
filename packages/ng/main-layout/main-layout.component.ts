@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { Palette } from '@lucca/prisme/core';
-import { LuSafeExternalSvgPipe } from '../safe-content/safe-external-svg.pipe';
 import { LU_MAIN_LAYOUT_INSTANCE } from './main-layout.token';
 import { MainLayoutIllustrationEndStart, MainLayoutIllustrationStartEnd } from './main-layout.type';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 
 function bubblesCountAttribute(value: unknown): 1 | 2 | 3 | null {
 	const n = numberAttribute(value);
@@ -46,7 +46,7 @@ export class MainLayoutComponent {
 	/**
 	 * Sticks footer on the screen
 	 */
-	readonly footerSticky = input(false, { transform: booleanAttribute });
+	readonly footerSticky = input(false, { transform: luBooleanAttribute });
 
 	readonly bubblesStartEnd = input<1 | 2 | 3 | null>(null, { transform: bubblesCountAttribute });
 	readonly bubblesEndStart = input<1 | 2 | 3 | null>(null, { transform: bubblesCountAttribute });
