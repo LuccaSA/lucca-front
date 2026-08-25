@@ -351,6 +351,17 @@
 		"category": "Structure",
 		"since": "19.3"
 	},
+	"highlight-section": {
+		"storybookSlug": "highlight-section",
+		"storybookPath": "Documentation/Structure/Highlight section/Angular",
+		"ngPackage": "highlight-section",
+		"figmaName": "pr-HighlightSection (v22.0)",
+		"figmaNodeIds": [
+			"37632:5601"
+		],
+		"category": "Structure",
+		"since": "22.0"
+	},
 	"app-layout": {
 		"storybookSlug": "app-layout",
 		"storybookPath": "Documentation/Structure/App Layout/Angular",
