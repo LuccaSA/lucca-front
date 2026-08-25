@@ -1,4 +1,6 @@
+import { IconsList } from '@/stories/icons-list';
 import { CHIP_STATE, ChipComponent } from '@lucca-front/ng/chip';
+import { LuccaIcon } from '@lucca-front/icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 
@@ -9,6 +11,7 @@ interface ChipBasicStory {
 	withEllipsis: boolean;
 	small: boolean;
 	feedback: string;
+	icon: LuccaIcon | null;
 }
 
 export default {
@@ -48,6 +51,13 @@ export default {
 				type: 'select',
 			},
 		},
+		icon: {
+			options: IconsList.map((i) => i.icon),
+			control: {
+				type: 'select',
+			},
+			description: 'Ajoute une icône au chip.',
+		},
 		kill: {
 			description: 'Événement déclenché lors du clic sur le bouton de suppression du chip.',
 		},
@@ -66,7 +76,8 @@ function getTemplate(args: ChipBasicStory): string {
 	const ellipsis = args.withEllipsis ? ` withEllipsis` : ``;
 	const small = args.small ? ` size="S"` : ``;
 	const feedback = args.feedback === 'warning' ? ` state="warning"` : args.feedback === 'critical' ? ` state="critical"` : ``;
-	return `<lu-chip${disabled}${unkillable}${product}${ellipsis}${small}${feedback}>Label</lu-chip>`;
+	const icon = args.icon ? ` icon="${args.icon}"` : ``;
+	return `<lu-chip${disabled}${unkillable}${product}${ellipsis}${small}${feedback}${icon}>Label</lu-chip>`;
 }
 
 const Template = (args: ChipBasicStory) => ({
@@ -82,6 +93,7 @@ export const Basic: StoryObj<ChipBasicStory> = {
 		withEllipsis: false,
 		small: false,
 		feedback: '',
+		icon: null,
 	},
 	render: Template,
 };

@@ -1,7 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, luBooleanAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -56,13 +56,13 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	readonly placeholder = input('');
 
-	readonly openOnFocus = input(false, { transform: booleanAttribute });
+	readonly openOnFocus = input(false, { transform: luBooleanAttribute });
 
 	readonly autocomplete = input<AutoFill>('off');
 
-	readonly hasNoInvariant = input(false, { transform: booleanAttribute });
+	readonly hasNoInvariant = input(false, { transform: luBooleanAttribute });
 
-	readonly hasAIButtons = input(false, { transform: booleanAttribute });
+	readonly hasAIButtons = input(false, { transform: luBooleanAttribute });
 
 	readonly displayLocale = input('');
 
@@ -117,9 +117,12 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	protected getPopoverInlineSizeRem(inputElement: HTMLInputElement): number {
 		const inputContainer = inputElement.closest('.textField-input');
-		const referenceWidth = (inputContainer instanceof HTMLElement ? inputContainer : inputElement).getBoundingClientRect().width;
+		const inputContainerInlineSize = (inputContainer instanceof HTMLElement ? inputContainer : inputElement).getBoundingClientRect().width;
 
-		return referenceWidth / 16 + 1;
+		// Add to the inline size of the input container (converted from px to rem):
+		// 2.75rem, which corresponds to the width of the prefix before the field when in "no invariant" mode
+		// 0.5rem, which corresponds to the offset needed to make the poppover slightly wider than the input container
+		return this.hasNoInvariant() ? inputContainerInlineSize / 16 + 2.75 + 0.5 : inputContainerInlineSize / 16 + 0.5;
 	}
 
 	writeValue(value: MultilanguageTranslation[]): void {

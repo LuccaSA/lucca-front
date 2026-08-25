@@ -19,6 +19,10 @@
 	@at-root ($atRoot) {
 		.footer-content {
 			flex-grow: 1;
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.footer-actions {

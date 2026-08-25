@@ -1,4 +1,4 @@
-import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { waitForAngular } from '@/helpers/test';
 import { FormsModule } from '@angular/forms';
@@ -77,10 +77,9 @@ export default {
 export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, ...inputArgs } = args;
+		const model = useStoryModel(false);
 		return {
-			props: {
-				example: false,
-			},
+			props: { model },
 			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
 					label,
@@ -93,9 +92,9 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 				},
 				argTypes,
 			)}>
-	<lu-checkbox-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-checkbox-input [(ngModel)]="model.example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ example }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [CheckboxInputComponent, FormsModule, BrowserAnimationsModule],
 			},

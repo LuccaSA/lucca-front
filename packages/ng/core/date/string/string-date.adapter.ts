@@ -46,8 +46,8 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 		return this._nativeAdapter.isParsable(text);
 	}
 
-	parse(text: string, granularity: LuDateGranularity): string {
-		return this.dateToString(this._nativeAdapter.parse(text, granularity)) ?? '';
+	parse(text: string, granularity: LuDateGranularity): string | undefined {
+		return this.dateToString(this._nativeAdapter.parse(text, granularity));
 	}
 
 	format(d: string, format: string): string {

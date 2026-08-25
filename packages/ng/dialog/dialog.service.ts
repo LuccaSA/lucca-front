@@ -1,5 +1,6 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
-import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
+import { afterNextRender, inject, Injectable, Injector, Renderer2 } from '@angular/core';
 import { isObservable, merge, of, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogRef, LuDialogResult } from './model';
@@ -8,6 +9,8 @@ import { DISMISSED_VALUE } from './model/dialog-ref';
 @Injectable()
 export class LuDialogService {
 	#cdkDialog = inject(Dialog);
+
+	#overlay = inject(Overlay);
 
 	#injector = inject(Injector);
 
@@ -29,6 +32,9 @@ export class LuDialogService {
 				modeClasses = ['mod-drawer', 'mod-fromBottom'];
 				break;
 		}
+		// Built explicitly (rather than left to CDK's default) so we can force a re-check below.
+		const scrollStrategy = config.cdkConfigOverride?.scrollStrategy ?? this.#overlay.scrollStrategies.block();
+
 		const cdkRef = this.#cdkDialog.open(config.content, {
 			ariaModal: config.modal ?? true,
 			hasBackdrop: config.modal ?? true,
@@ -48,6 +54,7 @@ export class LuDialogService {
 			autoFocus: config.autoFocus === 'first-input' ? 'dialog' : (config.autoFocus ?? 'first-tabbable'),
 			templateContext: () => ({ dialogRef: luDialogRef }),
 			injector: this.#injector,
+			scrollStrategy,
 			providers: (ref: DialogRef<LuDialogResult<C>, C>) => {
 				luDialogRef = new LuDialogRef(ref, config);
 				return [
@@ -59,6 +66,10 @@ export class LuDialogService {
 			},
 			...(config.cdkConfigOverride || {}),
 		});
+
+		// Re-check once the view is stable: block strategy only locks scroll if the page already
+		// overflows at attach time, which can miss for dialogs opened asynchronously (e.g. via a route).
+		afterNextRender(() => scrollStrategy.enable(), { injector: this.#injector });
 
 		if (cdkRef.componentRef) {
 			const renderer = cdkRef.componentRef.injector.get(Renderer2);

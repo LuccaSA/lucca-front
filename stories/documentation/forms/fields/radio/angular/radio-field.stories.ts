@@ -4,7 +4,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RADIO_GROUP_INPUT_SIZE, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
@@ -68,10 +68,9 @@ export default {
 export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, inline, presentation, ...inputArgs } = args;
+		const model = useStoryModel(1);
 		return {
-			props: {
-				example: 1,
-			},
+			props: { model },
 			template: `<lu-form-field${generateInputs(
 				{
 					label,
@@ -85,7 +84,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 				},
 				argTypes,
 			)}>
-	<lu-radio-group-input${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
+	<lu-radio-group-input${generateInputs(inputArgs, argTypes)} [(ngModel)]="model.example">
 		<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 		<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
 		<ng-template #template><strong>Option</strong> text</ng-template>
@@ -93,7 +92,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 	</lu-radio-group-input>
 </lu-form-field>
 
-<pr-story-model-display>{{ example }}</pr-story-model-display>`,
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`,
 		};
 	},
 	args: {

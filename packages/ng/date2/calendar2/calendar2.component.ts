@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import {
 	addHours,
@@ -88,19 +88,19 @@ export class Calendar2Component implements OnInit {
 
 	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
-	readonly showOverflow = input(false, { transform: booleanAttribute });
+	readonly showOverflow = input(false, { transform: luBooleanAttribute });
 
-	readonly enableOverflow = input(false, { transform: booleanAttribute });
+	readonly enableOverflow = input(false, { transform: luBooleanAttribute });
 
-	readonly removeYearOverflow = input(false, { transform: booleanAttribute });
+	readonly removeYearOverflow = input(false, { transform: luBooleanAttribute });
 
-	readonly hideToday = input(false, { transform: booleanAttribute });
+	readonly hideToday = input(false, { transform: luBooleanAttribute });
 
-	readonly hasTodayButton = input(false, { transform: booleanAttribute });
+	readonly hasTodayButton = input(false, { transform: luBooleanAttribute });
 
-	readonly hideWeekend = input(false, { transform: booleanAttribute });
+	readonly hideWeekend = input(false, { transform: luBooleanAttribute });
 
-	readonly disableModeChange = input(false, { transform: booleanAttribute });
+	readonly disableModeChange = input(false, { transform: luBooleanAttribute });
 
 	// Date used to init the component and as internal focus model
 	readonly date = model.required<Date>();
@@ -215,7 +215,7 @@ export class Calendar2Component implements OnInit {
 			})
 			.reduce<CalendarMonthInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);
-				all[ch] = [...(all[ch] || []), one as CalendarMonthInfo];
+				all[ch] = [...(all[ch] || []), one];
 				return all;
 			}, []);
 	});
@@ -231,7 +231,7 @@ export class Calendar2Component implements OnInit {
 					...this.dateToCellInfo(year),
 					name: this.#intlDateYear.format(year),
 					isCurrent: isSameYear(new Date(), year),
-				} as CalendarYearInfo;
+				};
 			})
 			.reduce<CalendarYearInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);

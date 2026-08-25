@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { Palette } from '@lucca/prisme/core';
 import { LuSafeExternalSvgPipe } from '../safe-content/safe-external-svg.pipe';
 import { LU_MAIN_LAYOUT_INSTANCE } from './main-layout.token';
@@ -40,7 +41,7 @@ export class MainLayoutComponent {
 	/**
 	 * Sticks header on the screen
 	 */
-	readonly headerSticky = input(false, { transform: booleanAttribute });
+	readonly headerSticky = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Sticks footer on the screen

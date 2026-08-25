@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { DestroyRef, Directive, OnInit, computed, forwardRef, inject, input } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { luNullableNumberAttribute } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { Observable, debounceTime, filter, map, switchMap } from 'rxjs';
@@ -33,7 +34,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	readonly filters = input<Record<string, string | number | boolean> | null>(null);
 	readonly operationIds = input<readonly number[] | null>(null);
 	readonly uniqueOperationIds = input<readonly number[] | null>(null);
-	readonly appInstanceId = input<number | null>(null);
+	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
 	readonly searchDelimiter = input<string>(' ');
 
 	protected readonly clue = toSignal(this.clue$);

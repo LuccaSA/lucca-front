@@ -5,6 +5,6 @@
 	[multiple]="props['multiple']"
 	(focus)="focus()"
 	(blur)="blur()"
-	[placeholder]="props.placeholder"
+	[placeholder]="props.placeholder ?? ''"
 />
 <span class="textfield-label">{{ props.label }}</span>

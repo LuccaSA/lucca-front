@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
-import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
+import { intlInputOptions, isNotNil, luBooleanAttribute, luNullableBooleanAttribute } from '@lucca-front/ng/core';
 import { addMonths, addYears, FirstWeekContainsDateOptions, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
 import { WEEK_INFO } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
@@ -39,14 +39,16 @@ export abstract class AbstractDateComponent {
 	readonly format = input<DateFormat>(DATE_FORMAT.DATE);
 	protected readonly inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
 
-	readonly ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
-	readonly hideToday = input(false, { transform: booleanAttribute });
-	readonly hasTodayButton = input(false, { transform: booleanAttribute });
-	readonly clearable = input(null, { transform: booleanAttribute });
+	readonly ranges = input([], {
+		transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange).filter((range): range is DateRange => range !== null),
+	});
+	readonly hideToday = input(false, { transform: luBooleanAttribute });
+	readonly hasTodayButton = input(false, { transform: luBooleanAttribute });
+	readonly clearable = input(null, { transform: luNullableBooleanAttribute });
 	readonly clearBehavior = input<Date2ClearBehavior>('clear');
+	readonly hideWeekend = input(false, { transform: luBooleanAttribute });
 
 	readonly mode = input<CalendarMode>('day');
-	readonly hideWeekend = input(false, { transform: booleanAttribute });
 
 	readonly getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 

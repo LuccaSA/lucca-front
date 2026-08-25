@@ -1,14 +1,13 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
 	forwardRef,
 	inject,
 	input,
+	LOCALE_ID,
 	model,
-	numberAttribute,
 	OnDestroy,
 	OnInit,
 	Signal,
@@ -21,7 +20,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -30,6 +29,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
+import { listSeparators } from '../select.utils';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
 
@@ -46,7 +46,6 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		FilterPillLabelDirective,
 		ClearComponent,
 		PresentationDisplayDirective,
-		CommonModule,
 		ɵPresentationDisplayDefaultDirective,
 		IconComponent,
 	],
@@ -82,9 +81,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	readonly valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
-	readonly maxValuesShown = input(500, { transform: numberAttribute });
+	readonly maxValuesShown = input(500, { transform: luNumberAttribute });
 
-	readonly keepSearchAfterSelection = input(false, { transform: booleanAttribute });
+	readonly keepSearchAfterSelection = input(false, { transform: luBooleanAttribute });
 
 	readonly filterPillLabelPlural = input<string>();
 
@@ -110,6 +109,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	// eslint-disable-next-line @angular-eslint/prefer-signals
 	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
 	override _value: T[] = [];
+
+	#listFormat = new Intl.ListFormat(inject(LOCALE_ID));
+
+	protected readonly presentationSeparators = computed(() => listSeparators(this.#listFormat, this.valueSignal()?.length ?? 0));
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
 		return this._panelRef;

@@ -1,0 +1,80 @@
+# fieldset — Code & Implementation
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v21.0.5/storybook/?path=/docs/documentation-forms-fieldset-angular-basic--docs)
+
+## Angular
+
+### Basic
+
+```js
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
+```
+
+```html
+@let column = { colspanAtMediaMinXXS: 2 };
+
+<lu-fieldset heading="Title">
+	<lu-grid mode="form">
+		<lu-grid-column colspan="4" [responsive]="column">
+			<lu-form-field label="Label">
+				<lu-text-input type="text" [(ngModel)]="example1" />
+			</lu-form-field>
+		</lu-grid-column>
+		<lu-grid-column colspan="4" [responsive]="column">
+			<lu-form-field label="Label">
+				<lu-text-input type="text" [(ngModel)]="example2" />
+			</lu-form-field>
+		</lu-grid-column>
+	</lu-grid>
+</lu-fieldset>
+```
+
+## HTML/CSS
+
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/fieldset';
+@forward '@lucca-front/scss/src/components/formLabel';
+@forward '@lucca-front/scss/src/components/grid';
+@forward '@lucca-front/scss/src/components/textField';
+```
+
+```html
+<fieldset class="fieldset" aria-labelledby="fieldsetTitleContent1">
+	<legend class="fieldset-title">
+		<span class="fieldset-title-content" id="fieldsetTitleContent1">
+			<span class="fieldset-title-content-text">Title</span>
+		</span>
+	</legend>
+	<div class="fieldset-content">
+		<div class="grid mod-form" style="--grid-colspan: 4">
+			<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
+				<div class="form-field">
+					<label class="formLabel" id="IDlabel1" for="ID1">Label</label>
+					<div class="textField">
+						<div class="textField-input">
+							<input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
+				<div class="form-field">
+					<label class="formLabel" id="IDlabel2" for="ID2">Label</label>
+					<div class="textField">
+						<div class="textField-input">
+							<input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</fieldset>
+```
