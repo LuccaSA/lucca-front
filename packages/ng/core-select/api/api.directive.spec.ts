@@ -113,7 +113,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		expect(loadingWhenPanelOpens).toBe(true);
 
 		tick(300);
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 		expect(select.loading()).toBe(false);
 	}));
 

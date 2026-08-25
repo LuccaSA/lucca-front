@@ -194,7 +194,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		// Act
 		simpleSelect.openPanel();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert
 		// The "me" lookup is a lookup by id and must NOT carry the search filters (`foo=bar`)
