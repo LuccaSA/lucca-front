@@ -1,0 +1,48 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	background-color: var(--components-highlightSection-background);
+	border-radius: var(--components-highlightSection-borderRadius);
+	display: block;
+	overflow: hidden;
+	padding: var(--components-highlightSection-padding);
+	position: relative;
+
+	@at-root ($atRoot) {
+		.highlightSection-content {
+			align-items: flex-start;
+			column-gap: var(--components-highlightSection-gap);
+			display: flex;
+			position: relative;
+		}
+
+		.highlightSection-content-slot {
+			flex-grow: 1;
+			min-inline-size: 0;
+		}
+
+		.highlightSection-content-illustration {
+			block-size: var(--components-highlightSection-illustration-blockSize);
+			inline-size: var(--components-highlightSection-illustration-inlineSize);
+			flex-shrink: 0;
+			display: var(--components-highlightSection-content-illustration-display);
+		}
+
+		.highlightSection-bubbleStart,
+		.highlightSection-bubbleEnd {
+			inset-block-end: 0;
+			position: absolute;
+			pointer-events: none;
+			display: var(--components-highlightSection-bubbleStartBubbleEnd-display);
+		}
+
+		.highlightSection-bubbleStart {
+			inset-inline-start: 0;
+		}
+
+		.highlightSection-bubbleEnd {
+			inset-inline-end: 0;
+			transform: scaleX(-1);
+		}
+	}
+}

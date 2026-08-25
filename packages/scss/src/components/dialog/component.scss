@@ -165,6 +165,10 @@
 			flex-grow: var(--components-dialog-insideContent-flexGrow);
 			display: block;
 			outline: none;
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.dialog-inside-header-container {

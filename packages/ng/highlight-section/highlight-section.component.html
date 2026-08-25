@@ -1,0 +1,13 @@
+@if (bubbleStart()) {
+	<div class="highlightSection-bubbleStart" [innerHtml]="bubbleStartSrc() | luSafeExternalSvg"></div>
+}
+@if (bubbleEnd()) {
+	<div class="highlightSection-bubbleEnd" [innerHtml]="bubbleEndSrc() | luSafeExternalSvg"></div>
+}
+
+<div class="highlightSection-content">
+	<div class="highlightSection-content-slot"><ng-content /></div>
+	@if (illustration()) {
+		<img alt="" class="highlightSection-content-illustration" [attr.src]="illustrationSrc()" />
+	}
+</div>

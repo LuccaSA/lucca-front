@@ -74,6 +74,11 @@
 			@include withAction;
 		}
 
+		&:not(:has(.dialog-inside-content)),
+		&:has(.dialog-inside-content:empty) {
+			@include noContent;
+		}
+
 		&:has(.horizontalNavigation) {
 			@include withHorizontalNavigation;
 		}
