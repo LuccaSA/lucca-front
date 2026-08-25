@@ -230,8 +230,11 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 					this.#hasEllipsis.set(false);
 					return;
 				}
-				const cloneWidth = measurement.clone.getBoundingClientRect().width;
-				const hostWidth = measurement.host.getBoundingClientRect().width;
+				// Computed `width`, unlike `getBoundingClientRect`, ignores ancestor CSS transforms
+				// (e.g. the popover's scale-in animation), so a mid-animation read can't mistake the
+				// host for narrower than it is and get stuck with a false "has ellipsis".
+				const cloneWidth = parseFloat(getComputedStyle(measurement.clone).width);
+				const hostWidth = parseFloat(getComputedStyle(measurement.host).width);
 				// rounded to 3 decimals to ignore sub-pixel noise
 				this.#hasEllipsis.set(Math.round(cloneWidth * 1000) > Math.round(hostWidth * 1000));
 			},
