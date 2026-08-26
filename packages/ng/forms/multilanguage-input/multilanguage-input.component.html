@@ -23,6 +23,8 @@
 			(focus)="shouldOpenOnFocus() ? popoverRef.openPopover(true, true, true) : null"
 			[disabled]="disabledInternal()"
 			[autocomplete]="autocomplete()"
+			[attr.lang]="hasNoInvariant() ? displayCultureCode() : null"
+			translate="no"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
@@ -50,7 +52,7 @@
 						}
 						@for (row of panelInputs(); track row.cultureCode) {
 							<ng-template #prefixLang>
-								<div class="textField-prefix-lang">
+								<div class="textField-prefix-lang" [class.mod-withCulture]="hasCulture(row.cultureCode)">
 									@if (formFieldRef?.isInputRequired()) {
 										{{ row.cultureCode }}<sup class="formLabel-required" aria-hidden="true">*</sup>
 									} @else {
@@ -87,6 +89,8 @@
 									[disabled]="disabledInternal()"
 									[autocomplete]="autocomplete()"
 									[suffix]="hasAIButtons() ? { content: aiSuffix, ariaLabel: '' } : undefined"
+									[attr.lang]="row.cultureCode"
+									translate="no"
 								/>
 							</lu-form-field>
 						}
@@ -98,7 +102,7 @@
 </div>
 <ng-container *luPresentationDisplayDefault>
 	@if (presentationValue()) {
-		{{ presentationValue() }}
+		<span [attr.lang]="hasNoInvariant() ? displayCultureCode() : null" translate="no">{{ presentationValue() }}</span>
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}
