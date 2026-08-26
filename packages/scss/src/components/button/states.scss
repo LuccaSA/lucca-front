@@ -31,6 +31,10 @@
 	&,
 	&:disabled {
 		--components-button-color: transparent;
+
+		.lucca-icon {
+			color: transparent;
+		}
 	}
 
 	.numericBadge {
