@@ -94,7 +94,7 @@ describe('LuSimpleSelectInputComponent', () => {
 			const input = nativeElement().querySelector('input') as HTMLInputElement;
 
 			// Act
-			fixture.componentInstance.placeholder = 'Pick one';
+			fixture.componentRef.setInput('placeholder', 'Pick one');
 			fixture.detectChanges();
 
 			// Assert
@@ -104,7 +104,7 @@ describe('LuSimpleSelectInputComponent', () => {
 		it('should fall back to the translated placeholder once a value is set', () => {
 			// Arrange
 			const input = nativeElement().querySelector('input') as HTMLInputElement;
-			fixture.componentInstance.placeholder = 'Pick one';
+			fixture.componentRef.setInput('placeholder', 'Pick one');
 			fixture.detectChanges();
 
 			// Act
@@ -134,7 +134,7 @@ describe('LuSimpleSelectInputComponent', () => {
 			const onChange = vi.fn();
 			const component = fixture.componentInstance;
 			component.registerOnChange(onChange);
-			component.options = options;
+			fixture.componentRef.setInput('options', options);
 			component.openPanel();
 			await waitForPanel(component);
 
@@ -151,7 +151,7 @@ describe('LuSimpleSelectInputComponent', () => {
 			const onChange = vi.fn();
 			const component = fixture.componentInstance;
 			component.registerOnChange(onChange);
-			component.options = options;
+			fixture.componentRef.setInput('options', options);
 			component.writeValue(options[0]);
 
 			// Act
@@ -205,7 +205,7 @@ describe('LuSimpleSelectInputComponent', () => {
 
 		it('should not display the clearer when there is no value', () => {
 			// Act
-			fixture.componentInstance.clearable = true;
+			fixture.componentRef.setInput('clearable', true);
 
 			// Assert
 			expect(clearer()).toBeNull();
@@ -213,7 +213,7 @@ describe('LuSimpleSelectInputComponent', () => {
 
 		it('should display the clearer when the select is clearable and has a value', () => {
 			// Act
-			fixture.componentInstance.clearable = true;
+			fixture.componentRef.setInput('clearable', true);
 			fixture.componentInstance.writeValue(options[0]);
 
 			// Assert
@@ -224,7 +224,7 @@ describe('LuSimpleSelectInputComponent', () => {
 			// Arrange
 			const onChange = vi.fn();
 			fixture.componentInstance.registerOnChange(onChange);
-			fixture.componentInstance.clearable = true;
+			fixture.componentRef.setInput('clearable', true);
 			fixture.componentInstance.writeValue(options[0]);
 
 			// Act
@@ -262,7 +262,7 @@ describe('LuSimpleSelectInputComponent', () => {
 
 		it('should hide the clearer when disabled', () => {
 			// Arrange
-			fixture.componentInstance.clearable = true;
+			fixture.componentRef.setInput('clearable', true);
 			fixture.componentInstance.writeValue(options[0]);
 			expect(clearer()).not.toBeNull();
 
