@@ -109,7 +109,8 @@
 
 	--commons-divider-color: var(--palettes-neutral-200);
 
-	--commons-container-padding: 0 var(--pr-t-spacings-200);
+	--commons-container-paddingInline: var(--pr-t-spacings-200);
+	--commons-container-padding: 0 var(--commons-container-paddingInline);
 	--commons-container-maxWidth: 100rem; // 100 + 0 = 100
 
 	--commons-navSide-width: 0px;
@@ -131,7 +132,7 @@
 	}
 
 	@include media.min('S') {
-		--commons-container-padding: 0 var(--pr-t-spacings-400);
+		--commons-container-paddingInline: var(--pr-t-spacings-400);
 	}
 
 	&:has(.navSide) {

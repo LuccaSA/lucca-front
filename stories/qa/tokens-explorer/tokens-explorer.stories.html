@@ -2,7 +2,6 @@
 	<lu-filter-bar>
 		<lu-segmented-control
 			*luFilterPillAddonBefore
-			class="filterBar-segmentedControl"
 			[ngModel]="category()"
 			(ngModelChange)="category.set($event)"
 			[ngModelOptions]="{ standalone: true }"

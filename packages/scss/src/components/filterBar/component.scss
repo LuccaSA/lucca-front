@@ -24,7 +24,9 @@
 		.filterBar-divider.divider {
 			@include divider.vertical;
 
-			margin-inline: var(--pr-t-spacings-50);
+			margin-inline: 0;
+
+			--components-divider-marginBlock: var(--pr-t-spacings-50);
 
 			&:last-child {
 				display: none;
