@@ -1,5 +1,5 @@
-import { LuStringDateAdapter } from './string-date.adapter';
 import { ELuDateGranularity } from '../date-granularity.enum';
+import { LuStringDateAdapter } from './string-date.adapter';
 
 describe('LuStringDateAdapter', () => {
 	let adapter: LuStringDateAdapter;
