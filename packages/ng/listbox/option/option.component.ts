@@ -44,7 +44,7 @@ export class OptionComponent {
 	 * e.g. the host of a select panel element directive. Selection and disabled states are
 	 * exposed through the `is-selected` and `is-disabled` classes instead of aria attributes.
 	 */
-	readonly presentation = input(false, { transform: booleanAttribute });
+	readonly presentation = input(false, { transform: luBooleanAttribute });
 
 	readonly checked = input(false, { transform: luBooleanAttribute });
 

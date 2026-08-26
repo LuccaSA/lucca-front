@@ -1,24 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	contentChild,
-	ElementRef,
-	inject,
-	input,
-	OnInit,
-	output,
-	TemplateRef,
-	Type,
-	untracked,
-	viewChild,
-} from '@angular/core';
-import { intlInputOptions, isNil, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { OptionComponent as ListboxOptionComponent, Treeitem } from '@lucca-front/ng/listbox';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, contentChild, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
 import { intlInputOptions, isNil, luBooleanAttribute, luOptionalNumberAttribute, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { OptionComponent as ListboxOptionComponent, Treeitem } from '@lucca-front/ng/listbox';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn } from 'rxjs';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';

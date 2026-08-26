@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
 import { luBooleanAttribute } from '@lucca-front/ng/core';
-import { LoadingComponent } from '@lucca-front/ng/loading';
 import { ListboxState } from './listbox.type';
 import { OptionComponent } from './option/option.component';
 import { LISTBOX_INSTANCE } from './tokens';

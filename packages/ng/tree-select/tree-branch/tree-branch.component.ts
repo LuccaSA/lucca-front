@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
 import { Treeitem } from '@lucca-front/ng/listbox';
 
