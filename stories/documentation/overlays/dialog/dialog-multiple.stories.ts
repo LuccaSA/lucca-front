@@ -1,3 +1,4 @@
+import { OVERLAY_DEFAULT_CONFIG } from '@angular/cdk/overlay';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
@@ -209,3 +210,21 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await expect(screen.queryByText('dialog')).toBeNull();
 	});
 });
+
+export const WithoutPopoverTopLayer: StoryObj = {
+	...Basic,
+	name: 'Without the popover top layer',
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: OVERLAY_DEFAULT_CONFIG, useValue: { usePopover: false } }],
+		}),
+	],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'An app can opt out of the cdk popover top layer, for instance to keep its toasts above dialogs. The backdrop is then a sibling of the overlay wrapper instead of one of its children: the dialogs must stack all the same.',
+			},
+		},
+	},
+};
