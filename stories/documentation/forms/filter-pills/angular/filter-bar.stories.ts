@@ -73,7 +73,7 @@ export default {
 	<lu-form-field label="Test" hiddenLabel>
 		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 	</lu-form-field>
-	<button  *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
+	<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
 </lu-filter-bar>`,
 		};
 	},

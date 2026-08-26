@@ -1,5 +1,7 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
+import { luBooleanAttribute } from '@lucca-front/ng/core';
+import { LoadingComponent } from '@lucca-front/ng/loading';
 import { ListboxState } from './listbox.type';
 import { OptionComponent } from './option/option.component';
 import { LISTBOX_INSTANCE } from './tokens';
@@ -26,12 +28,12 @@ export class ListboxComponent {
 	/**
 	 * Applies multiple mod to the listbox
 	 */
-	readonly multiple = input(false, { transform: booleanAttribute });
+	readonly multiple = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Defines listbox role tree or listbox by default
 	 */
-	readonly tree = input(false, { transform: booleanAttribute });
+	readonly tree = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Listbox state

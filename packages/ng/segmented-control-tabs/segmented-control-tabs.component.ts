@@ -1,19 +1,6 @@
-import {
-	AfterContentInit,
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	contentChildren,
-	ElementRef,
-	forwardRef,
-	input,
-	model,
-	viewChildren,
-	ViewEncapsulation,
-} from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChildren, ElementRef, forwardRef, input, model, viewChildren, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PortalDirective } from '@lucca-front/ng/core';
+import { luBooleanAttribute, PortalDirective } from '@lucca-front/ng/core';
 import { NoopValueAccessorDirective } from '@lucca-front/ng/forms';
 import { SegmentedControlTabsPanelComponent } from './public-api';
 import { LU_SEGMENTEDCONTROLTABS_INSTANCE } from './segmented-control-tabs.token';
@@ -39,12 +26,12 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 	/**
 	 * Applies small size to segmented control tabs
 	 */
-	readonly small = input(false, { transform: booleanAttribute });
+	readonly small = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Display segmented control tabs vertically
 	 */
-	readonly vertical = input(false, { transform: booleanAttribute });
+	readonly vertical = input(false, { transform: luBooleanAttribute });
 
 	readonly active = model<T | null>(null);
 

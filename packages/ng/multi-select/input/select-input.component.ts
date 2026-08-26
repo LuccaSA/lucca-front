@@ -1,6 +1,5 @@
 import { AsyncPipe } from '@angular/common';
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -9,7 +8,6 @@ import {
 	input,
 	LOCALE_ID,
 	model,
-	numberAttribute,
 	OnDestroy,
 	OnInit,
 	Signal,
@@ -22,7 +20,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -83,9 +81,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	readonly valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
-	readonly maxValuesShown = input(500, { transform: numberAttribute });
+	readonly maxValuesShown = input(500, { transform: luNumberAttribute });
 
-	readonly keepSearchAfterSelection = input(false, { transform: booleanAttribute });
+	readonly keepSearchAfterSelection = input(false, { transform: luBooleanAttribute });
 
 	readonly filterPillLabelPlural = input<string>();
 

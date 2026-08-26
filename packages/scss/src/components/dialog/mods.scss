@@ -160,3 +160,7 @@
 	--components-dialog-inside-header-boxShadow: none;
 	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200) 0;
 }
+
+@mixin noContent {
+	--components-dialog-inside-header-boxShadow: none;
+}

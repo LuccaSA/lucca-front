@@ -124,7 +124,7 @@ export const SelectMonthWithDisplayer = generateStory({
 	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate" [granularity]="granularity">
-		<ng-container *luDisplayer="let value">start of {{ value | date : 'MM/YYYY' }}</ng-container>
+		<ng-container *luDisplayer="let value">start of {{ value | date : 'MM/yyyy' }}</ng-container>
 	</lu-date-select>
 	<span class="textfield-label">Label</span>
 </label>
