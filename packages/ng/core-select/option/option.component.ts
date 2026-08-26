@@ -1,19 +1,17 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, contentChild, ElementRef, inject, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, contentChild, ElementRef, inject, Injector, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
 import { intlInputOptions, isNil, luBooleanAttribute, luOptionalNumberAttribute, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { OptionComponent as ListboxOptionComponent, Treeitem } from '@lucca-front/ng/listbox';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn } from 'rxjs';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';
-import { GroupTemplateLocation } from '../panel/panel.utils';
+import { GroupTemplateLocation, scrollIntoViewOnceReady } from '../panel/panel.utils';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
 import { LuOptionContext, LuOptionGrouping, SELECT_ID } from '../select.model';
 import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { LU_OPTION_CONTEXT } from './option.token';
 import { LU_OPTION_TRANSLATIONS } from './option.translate';
-
-export const MAGIC_OPTION_SCROLL_DELAY = 15;
 
 @Component({
 	selector: 'lu-select-option',
@@ -57,6 +55,7 @@ export class LuOptionComponent<T> implements OnInit {
 	readonly optionContext = viewChild(LU_OPTION_CONTEXT);
 
 	private cdr = inject(ChangeDetectorRef);
+	readonly #injector = inject(Injector);
 
 	get id(): string {
 		const groupPart = this.groupIndex() === undefined ? `` : `-group-${this.groupIndex()}`;
@@ -70,10 +69,9 @@ export class LuOptionComponent<T> implements OnInit {
 	constructor() {
 		ɵeffectWithDeps([this.selectableItem.isHighlighted], (isHighlighted, onCleanup) => {
 			if (isHighlighted && !untracked(this.#panelRef.pointerNavigation)) {
-				const timeoutId = setTimeout(() => {
-					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions());
-				}, MAGIC_OPTION_SCROLL_DELAY);
-				onCleanup(() => clearTimeout(timeoutId));
+				// Wait for the panel layout to settle (opening animation) before scrolling,
+				// otherwise the browser computes a bogus scroll position.
+				onCleanup(scrollIntoViewOnceReady(this.elementRef.nativeElement, this.#injector, () => this.scrollIntoViewOptions()));
 			}
 		});
 

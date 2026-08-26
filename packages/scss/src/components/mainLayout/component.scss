@@ -7,10 +7,9 @@
 	display: flex;
 	flex-direction: var(--components-mainLayout-flexDirection);
 	block-size: 100%;
+	position: relative;
 
 	&:focus-visible {
-		position: relative;
-
 		&::after {
 			content: '';
 			position: absolute;
@@ -28,6 +27,7 @@
 			overflow-y: auto;
 			flex-shrink: 0;
 			inline-size: var(--components-mainLayout-sidebar-inlineSize);
+			position: relative;
 
 			&:focus-visible {
 				@include a11y.focusVisible($offset: -4px);
@@ -112,6 +112,54 @@
 			&:empty {
 				display: none;
 			}
+		}
+
+		.mainLayout-bubblesEndStart {
+			position: absolute;
+			inset-block-end: 0;
+			inset-inline-start: 0;
+			display: flex;
+			block-size: var(--components-mainLayout-bubblesEndStartBlockSize);
+
+			svg {
+				display: block;
+				inline-size: var(--components-mainLayout-bubblesEndStartSvgInlineSize);
+				block-size: var(--components-mainLayout-bubblesEndStartBlockSize);
+			}
+		}
+
+		.mainLayout-bubblesStartEnd {
+			position: absolute;
+			inset-block-start: 0;
+			inset-inline-start: var(--components-mainLayout-bubblesStartEndInsetInlineStart);
+			inline-size: var(--components-mainLayout-bubblesStartEndInlineSize);
+			block-size: var(--components-mainLayout-bubblesStartEndBlockSize);
+			pointer-events: none;
+			overflow: hidden;
+
+			svg {
+				display: block;
+				position: relative;
+				inset-inline-end: var(--components-mainLayout-bubblesStartEndSvgInsetInlineEnd);
+				inline-size: var(--components-mainLayout-bubblesStartEndSvgInlineSize);
+				block-size: var(--components-mainLayout-bubblesStartEndBlockSize);
+			}
+		}
+
+		.mainLayout-bubblesEndStart-illustration,
+		.mainLayout-bubblesStartEnd-illustration {
+			position: absolute;
+			block-size: auto;
+			inset-block-start: 0;
+		}
+
+		.mainLayout-bubblesEndStart-illustration {
+			inline-size: var(--components-mainLayout-bubblesEndStartSvgInlineSize);
+		}
+
+		.mainLayout-bubblesStartEnd-illustration {
+			inline-size: var(--components-mainLayout-bubblesStartEndSvgInlineSize);
+			inset-inline-start: calc(var(--components-mainLayout-bubblesStartEndSvgInsetInlineEnd) * -1);
 		}
 	}
 }

@@ -27,7 +27,7 @@ import { LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user'
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { InputAlias, SelectCommonAliasInput } from '../../../helpers/stories';
-import { waitForAngular } from '../../../helpers/test';
+import { ensurePickerPanelStyles, getPanelScrollContainer, isFullyVisibleInPanel, waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
@@ -109,6 +109,58 @@ export const Basic = generateStory({
 });
 
 export const BasicTEST = createTestStory(Basic, basePlay);
+
+export const ScrollOnOpen = generateStory({
+	name: 'Scroll on open',
+	description: `À l’ouverture, le panneau doit être positionné en haut de la liste (aucun défilement parasite), même si aucune valeur n’est sélectionnée.`,
+	template: `<lu-simple-select
+	#selectRef
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[(ngModel)]="selectedLegume"
+>
+	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
+</lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+});
+
+export const ScrollOnOpenTEST = createTestStory(ScrollOnOpen, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	ensurePickerPanelStyles();
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('combobox');
+
+	const getPanelScrollTop = () => getPanelScrollContainer().scrollTop;
+
+	await step('Opening with the mouse shows the top of the list', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		// The list must be scrollable for the assertion to be meaningful
+		await expect(options.length).toBeGreaterThan(10);
+		await expect(options[0]).toBeVisible();
+		// No spurious scroll should be applied on open: the panel stays at the top
+		await waitFor(() => expect(getPanelScrollTop()).toBeLessThan(10));
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	});
+
+	await step('Opening with the keyboard shows the top of the list', async () => {
+		input.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await waitFor(() => expect(getPanelScrollTop()).toBeLessThan(10));
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	});
+});
 
 export const Minimal = generateStory({
 	name: 'Minimal',
@@ -278,6 +330,43 @@ export const WithClearerTEST = createTestStory(WithClearer, async (context) => {
 	await userEvent.click(input.getByRole('button'));
 	await expect(inputContentElement).toHaveTextContent('');
 });
+
+export const ScrollToSelectedTEST = {
+	...createTestStory(WithClearer, async ({ canvasElement, step }) => {
+		await waitForAngular();
+		ensurePickerPanelStyles();
+		const canvas = within(canvasElement);
+		const input = canvas.getByRole('combobox');
+
+		await step('Opening scrolls the preselected option into view (mouse)', async () => {
+			await userEvent.click(input);
+			await waitForAngular();
+			const panel = within(screen.getByRole('listbox'));
+			const selectedOption = await panel.findByRole('option', { selected: true });
+			await expect(selectedOption).toHaveTextContent('Concombre');
+			// The list must actually overflow for this test to be meaningful
+			const container = getPanelScrollContainer();
+			await expect(container.scrollHeight).toBeGreaterThan(container.clientHeight);
+			// Once the opening animation settles, the panel must be scrolled to the selected option
+			await waitFor(() => expect(isFullyVisibleInPanel(selectedOption)).toBe(true));
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		});
+
+		await step('Opening with the keyboard scrolls to the selected option too', async () => {
+			input.focus();
+			await expect(input).toHaveFocus();
+			await userEvent.keyboard('{ArrowDown}');
+			await waitForAngular();
+			const panel = within(screen.getByRole('listbox'));
+			const selectedOption = await panel.findByRole('option', { selected: true });
+			await waitFor(() => expect(isFullyVisibleInPanel(selectedOption)).toBe(true));
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		});
+	}),
+	name: 'Scroll to selected TEST',
+};
 
 export const WithDisabledOptions = generateStory({
 	name: 'Disabled options',
