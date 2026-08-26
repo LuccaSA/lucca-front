@@ -75,12 +75,23 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	readonly model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
-	readonly displayRow = computed(() => {
-		if (this.hasNoInvariant()) {
-			return this.model().find((row) => row.cultureCode === this.displayLocale()) || { value: '', required: false, cultureCode: this.displayLocale() };
-		} else {
-			return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '', required: false, cultureCode: INVARIANT_CULTURE_CODE };
+	// Resolves the culture code to display: an exact match on `displayLocale` if there is one,
+	// otherwise a match on the language part only (e.g. `displayLocale` `en-US` matches a row `en`).
+	readonly displayCultureCode = computed(() => {
+		if (!this.hasNoInvariant()) {
+			return INVARIANT_CULTURE_CODE;
 		}
+		const displayLocale = this.displayLocale();
+		const rows = this.model();
+		if (rows.some((row) => row.cultureCode === displayLocale)) {
+			return displayLocale;
+		}
+		const language = displayLocale.split('-')[0];
+		return rows.find((row) => row.cultureCode.split('-')[0] === language)?.cultureCode ?? displayLocale;
+	});
+
+	readonly displayRow = computed(() => {
+		return this.model().find((row) => row.cultureCode === this.displayCultureCode()) || { value: '', required: false, cultureCode: this.displayCultureCode() };
 	});
 
 	readonly cultureCodeDisplay = computed(() => {
@@ -88,10 +99,13 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	});
 
 	readonly panelInputs = computed(() => {
-		return this.model().filter((row) => (this.hasNoInvariant() ? row.cultureCode !== this.displayLocale() && row.cultureCode !== INVARIANT_CULTURE_CODE : row.cultureCode !== INVARIANT_CULTURE_CODE));
+		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE && (!this.hasNoInvariant() || row.cultureCode !== this.displayCultureCode()));
 	});
 
 	readonly presentationValue = computed(() => {
+		if (this.hasNoInvariant()) {
+			return this.displayRow()?.value;
+		}
 		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.displayRow()?.value;
 	});
 
@@ -113,6 +127,10 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	getLocaleDisplayName(locale: string): string {
 		return this.#intlDisplay.of(locale) ?? locale;
+	}
+
+	protected hasCulture(cultureCode: string): boolean {
+		return cultureCode.includes('-');
 	}
 
 	protected getPopoverInlineSizeRem(inputElement: HTMLInputElement): number {

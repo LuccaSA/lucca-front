@@ -15,6 +15,7 @@
 	--component-textField-maxHeightFallback: 90vh;
 	--component-textField-borderRadius: var(--pr-t-border-radius-input);
 	--component-textField-width: auto;
+	--component-textField-prefix-lang-minInlineSize: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
 
 	// Deprecated
 	--component-textField-fontSize: var(--pr-t-font-body-M-fontSize);
