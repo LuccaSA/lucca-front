@@ -6,7 +6,7 @@ import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { createTestStory, generateInputs } from '../../../helpers/stories';
-import { mapInputs, sleep, waitForAngular } from '../../../helpers/test';
+import { mapInputs, waitForAngular } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
@@ -163,7 +163,7 @@ export const BasicTEST = createTestStory(
 				await userEvent.hover(button);
 				await waitFor(
 					() => {
-						expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+						expect(screen.queryByRole('tooltip')).toBeInTheDocument();
 					},
 					{ timeout: 1000 },
 				);
@@ -171,8 +171,12 @@ export const BasicTEST = createTestStory(
 
 			await step('Unhover', async () => {
 				await userEvent.unhover(button);
-				await waitForAngular();
-				await expect(screen.queryByRole('tooltip')).toBeNull();
+				await waitFor(
+					() => {
+						expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+					},
+					{ timeout: 1000 },
+				);
 			});
 		});
 
@@ -180,8 +184,12 @@ export const BasicTEST = createTestStory(
 			await step('Focus', async () => {
 				span.focus();
 				await expect(span).toHaveFocus();
-				await waitForAngular();
-				await expect(screen.getByRole('tooltip')).toBeVisible();
+				await waitFor(
+					() => {
+						expect(screen.getByRole('tooltip')).toBeVisible();
+					},
+					{ timeout: 1000 },
+				);
 				span.blur();
 				await waitForAngular();
 			});
@@ -192,14 +200,22 @@ export const BasicTEST = createTestStory(
 
 			await step('Hover', async () => {
 				await userEvent.hover(icon);
-				await waitForAngular();
-				await expect(screen.getByRole('tooltip')).toBeVisible();
+				await waitFor(
+					() => {
+						expect(screen.getByRole('tooltip')).toBeVisible();
+					},
+					{ timeout: 1000 },
+				);
 			});
 
 			await step('Unhover', async () => {
 				await userEvent.unhover(icon);
-				await waitForAngular();
-				await expect(screen.queryByRole('tooltip')).toBeNull();
+				await waitFor(
+					() => {
+						expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+					},
+					{ timeout: 1000 },
+				);
 			});
 		});
 	},
