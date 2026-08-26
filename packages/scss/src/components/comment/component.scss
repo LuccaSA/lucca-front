@@ -49,13 +49,15 @@
 		}
 
 		.comment-infos-name {
-			color: var(--pr-t-color-text);
+			&:not(:empty) {
+				color: var(--pr-t-color-text);
 
-			& + .comment-infos-date {
-				&::before {
-					color: var(--palettes-neutral-400);
-					padding-inline: 1ch;
-					content: var(--components-comment-info-separator) / '';
+				& + .comment-infos-date {
+					&::before {
+						color: var(--palettes-neutral-400);
+						padding-inline: 1ch;
+						content: var(--components-comment-info-separator) / '';
+					}
 				}
 			}
 		}
