@@ -24,6 +24,7 @@
 			[disabled]="disabledInternal()"
 			[autocomplete]="autocomplete()"
 			[attr.lang]="hasNoInvariant() ? displayCultureCode() : null"
+			translate="no"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
@@ -89,6 +90,7 @@
 									[autocomplete]="autocomplete()"
 									[suffix]="hasAIButtons() ? { content: aiSuffix, ariaLabel: '' } : undefined"
 									[attr.lang]="row.cultureCode"
+									translate="no"
 								/>
 							</lu-form-field>
 						}
@@ -100,7 +102,7 @@
 </div>
 <ng-container *luPresentationDisplayDefault>
 	@if (presentationValue()) {
-		<span [attr.lang]="hasNoInvariant() ? displayCultureCode() : null">{{ presentationValue() }}</span>
+		<span [attr.lang]="hasNoInvariant() ? displayCultureCode() : null" translate="no">{{ presentationValue() }}</span>
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}
