@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -23,7 +23,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
-import { PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Subject } from 'rxjs';
@@ -45,7 +45,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		FilterPillDisplayerDirective,
 		FilterPillLabelDirective,
 		ClearComponent,
-		PresentationDisplayDirective,
+		CommonModule,
 		ɵPresentationDisplayDefaultDirective,
 		IconComponent,
 	],
@@ -85,7 +85,20 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	readonly keepSearchAfterSelection = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * @deprecated use filterPillLabelPluralFn
+	 */
 	readonly filterPillLabelPlural = input<string>();
+	readonly filterPillLabelPluralFn = input<(count: number) => string>();
+
+	readonly filterPillLabelPluralValue = computed(() => {
+		const label = this.filterPillLabelPluralFn();
+		const count = this.valueLength();
+		if (label) {
+			return label(count);
+		}
+		return `${count} ${this.filterPillLabelPlural()}`;
+	});
 
 	override readonly selectParent$ = new Subject<void>();
 	override readonly selectChildren$ = new Subject<void>();
@@ -108,6 +121,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
 	// eslint-disable-next-line @angular-eslint/prefer-signals
 	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
+	public singleOptionForDisplay: Signal<T | undefined> = computed(() => this.valueSignal()?.[0]);
 	override _value: T[] = [];
 
 	#listFormat = new Intl.ListFormat(inject(LOCALE_ID));
