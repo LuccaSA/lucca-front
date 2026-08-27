@@ -3,7 +3,8 @@ import localeFr from '@angular/common/locales/fr';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DATE_FORMAT } from '../date2.type';
+import { CalendarMode } from '../calendar2/calendar-mode';
+import { DATE_FORMAT, DateFormat } from '../date2.type';
 import { DateInputComponent } from './date-input.component';
 
 registerLocaleData(localeFr, 'fr-FR');
@@ -15,6 +16,10 @@ registerLocaleData(localeFr, 'fr-FR');
 })
 class HostComponent {
 	formControl = new FormControl<Date | null>(null);
+	min: Date | null = null;
+	max: Date | null = null;
+	mode: CalendarMode = 'day';
+	format: DateFormat = DATE_FORMAT.DATE;
 }
 
 @Component({
@@ -25,9 +30,6 @@ class HostComponent {
 class WeekHostComponent {
 	formControl = new FormControl<Date | null>(null);
 	min: Date | null = null;
-	max: Date | null = null;
-	mode: CalendarMode = 'day';
-	format: DateFormat = DATE_FORMAT.DATE;
 }
 
 describe('DateInputComponent', () => {
@@ -291,5 +293,39 @@ describe('DateInputComponent', () => {
 			// Assert
 			expect(toggle.disabled).toBe(true);
 		});
+	});
+
+	it('should accept the min date itself even when min carries a time of day', () => {
+		const formControl = new FormControl<Date | null>(null);
+		const input = createHost(formControl, new Date('2024-01-01T14:00:00'));
+
+		typeInElement('01/01/2024', input);
+
+		expect(formControl.errors).toBeNull();
+	});
+
+	it('should reject a date before the min day', () => {
+		const formControl = new FormControl<Date | null>(null);
+		const input = createHost(formControl, new Date('2024-01-01T14:00:00'));
+
+		typeInElement('31/12/2023', input);
+
+		expect(formControl.errors).toEqual({ min: true });
+	});
+
+	it('should accept the max date itself even when the value carries a time of day', () => {
+		const formControl = new FormControl<Date | null>(new Date('2024-01-31T18:00:00'));
+		createHost(formControl, null, new Date('2024-01-31T00:00:00'));
+
+		expect(formControl.errors).toBeNull();
+	});
+
+	it('should reject a date after the max day', () => {
+		const formControl = new FormControl<Date | null>(null);
+		const input = createHost(formControl, null, new Date('2024-01-31T00:00:00'));
+
+		typeInElement('01/02/2024', input);
+
+		expect(formControl.errors).toEqual({ max: true });
 	});
 });

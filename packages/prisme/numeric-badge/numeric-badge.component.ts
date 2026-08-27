@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, HostAttributeToken, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { PrClass, Palette, ɵeffectWithDeps } from '@lucca/prisme/core';
 import { LuTooltipModule } from '@lucca/prisme/tooltip';
 import { NumericBadgeSize } from './numeric-badge.type';
@@ -13,7 +13,7 @@ import { NumericBadgeSize } from './numeric-badge.type';
 	host: {
 		class: 'numericBadge',
 		'[class.is-loading]': 'loading()',
-		'[attr.aria-hidden]': 'loading()',
+		'[attr.aria-hidden]': 'ariaHidden()',
 	},
 	encapsulation: ViewEncapsulation.None,
 })
@@ -49,6 +49,10 @@ export class NumericBadgeComponent {
 	 * Disabled tooltip on numeric badge
 	 */
 	readonly disableTooltip = input(false, { transform: booleanAttribute });
+
+	readonly #initialAriaHidden = inject(new HostAttributeToken('aria-hidden'), { optional: true });
+
+	readonly ariaHidden = computed(() => (this.loading() ? 'true' : this.#initialAriaHidden));
 
 	readonly numericBadgeClasses = computed(() => {
 		const palette = this.palette();

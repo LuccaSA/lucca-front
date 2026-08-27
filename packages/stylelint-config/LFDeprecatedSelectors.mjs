@@ -79,6 +79,14 @@ export default [
 		objectPattern: /\.palette-(grey|primary|secondary|lucca)(?![\w-])/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
+		actions: `
+			* Remplacer \`grey\` par \`neutral\`.
+			* Remplacer \`primary\` & \`secondary\` par \`product\`.
+			* Remplacer \`lucca\` par \`brand\`.
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+		},
 	},
 	{
 		// Old t-shirt sized utilities
@@ -106,6 +114,7 @@ export default [
 		objectPattern: [/\.u-textLeft(?![\w-])/, /\.u-textCenter(?![\w-])/, /\.u-textRight(?![\w-])/],
 		versionDeprecated: '18.1.0',
 		versionDeleted: '22.0.0',
+		actions: `Doublon. Remplacer par : \`.u-textAlignLeft\`, \`.u-textAlignCenter\` & \`.u-textAlignRight\`.`,
 	},
 	{
 		// SEE https://regex101.com/r/HoanMW.
@@ -131,12 +140,16 @@ export default [
 		objectPattern: [/\.comment-content-textContainer(?![\w-])/, /\.mod-withMenuCompact(?![\w-])/],
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
+		},
 	},
 	{
 		// SEE https://regex101.com/r/Ndh0bQ.
 		objectPattern: [/\.dialog-form(?![\w-])/, /\.dialog-formOptional(?![\w-])/],
 		versionDeprecated: '18.3.0',
 		versionDeleted: '22.0.0',
+		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
 	},
 	{
 		// SEE https://regex101.com/r/43OspP.
@@ -149,24 +162,33 @@ export default [
 		objectPattern: /\.lu-dropdown-(content|options|options-item|options-item-action)(?![\w-])/,
 		versionDeprecated: '19.2.0',
 		versionDeleted: '22.0.0',
+		actions: `Remplacer par le nouveau DOM du composant [Dropdown](https://prisme.lucca.io/94310e217/p/557682-dropdown).`,
 	},
 	{
 		// SEE https://regex101.com/r/VqPdDw.
 		objectPattern: /\.filterBarDeprecated\b/,
 		versionDeprecated: '19.2.0',
-		versionDeleted: '21.1.0',
+		versionDeleted: '22.0.0',
 	},
 	{
 		// SEE https://regex101.com/r/1eWJ0d.
 		objectPattern: /\.menu\b/,
 		versionDeprecated: '19.3.0',
 		versionDeleted: '22.0.0',
+		actions: `Remplacer par [Horizontal navigation](https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation).`,
 	},
 	{
 		// SEE https://regex101.com/r/rOqMxE.
 		objectPattern: /\.u-text(X?S|M|X{0,3}L)(?![\w-])/,
 		versionDeprecated: '20.1.0',
 		versionDeleted: '22.0.0',
+		actions: `
+			Remplacer par les classes \`.pr-u-bodyXS\`, \`.pr-u-bodyS\`, \`.pr-u-bodyM\`.
+
+			Les utilitaires L ~ XXXL peuvent être remplacés par un utilitaire de titre \`.pr-u-hx\` ou le [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) correspondant.
+
+			[Plus d’informations sur le sujet](https://www.notion.so/luccasoftware/Tokens-Typo-1ebd278ab26e808a9b58d1017514ecb9).
+		`,
 	},
 	{
 		// Any combination of .button and .mod-text, .mod-deleted or .loading, with any non-whitespace character between
@@ -174,6 +196,7 @@ export default [
 		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.(mod-text|mod-deleted|loading)(?![\w-]))\S*/,
 		versionDeprecated: '20.2.0',
 		versionDeleted: '22.0.0',
+		actions: `Remplacer par les classes \`.mod-ghost\` & \`.mod-critical\` et les inputs Angular \`critical\`, \`ghost\` & \`ghost-invert\``,
 	},
 	{
 		// Utilitaires renommés très utilisés
@@ -195,6 +218,12 @@ export default [
 			/\.pr-u-textWarning(?![\w-])/,
 		],
 		versionDeprecated: '21.0.0',
+		actions: `
+			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+		},
 	},
 	{
 		// Utilitaires renommés peu ou pas utilisés
@@ -225,5 +254,11 @@ export default [
 			/\.pr-u-textPineapple(?![\w-])/,
 		],
 		versionDeprecated: '21.0.0',
+		actions: `
+			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+		},
 	},
 ];

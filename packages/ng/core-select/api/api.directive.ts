@@ -109,6 +109,61 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 
 	public abstract totalCount$: Observable<number>;
 
+	protected buildOptions(): Observable<TOption[]> {
+		// Prevent a double call to getOptions when the clue is changed while the panel is closed
+		const clueIsPendingDebounce$ = merge(this.select.clueChange$.pipe(map(() => true)), this.clue$.pipe(map(() => false))).pipe(distinctUntilChanged());
+		const isOpen$ = combineLatest([
+			this.select.isPanelOpen$.pipe(
+				// A re-emitted `true` (filter pill reopening) must not start the loader: the fetch below
+				// only runs on a closed → open transition, so nothing would ever turn it off again
+				distinctUntilChanged(),
+				tap((isOpen) => {
+					// Start the loader synchronously on opening to avoid a short display of the "no result"
+					// message: the first fetch only starts on the next tick (debounced open, async params$)
+					if (isOpen) {
+						this.select.loading.set(true);
+					}
+				}),
+			),
+			clueIsPendingDebounce$,
+		]).pipe(
+			debounceTime(0),
+			startWith([false, false]),
+			pairwise(),
+			map(([[wasOpen], [isOpen, clueIsPendingDebounce]]) => (isOpen && !wasOpen ? !clueIsPendingDebounce : isOpen)),
+			distinctUntilChanged(),
+		);
+
+		return combineLatest([this.params$, isOpen$]).pipe(
+			switchMap(([params, isOpened]) => {
+				const hasNextPage$ = new Subject<void>();
+
+				return isOpened
+					? this.page$.pipe(
+							takeUntil(hasNextPage$),
+							concatMap((page) => this.getOptionsPage(params, page).pipe(map(({ items, isLastPage }) => ({ items, isLastPage, page })))),
+							tap(({ isLastPage }) => {
+								if (isLastPage) {
+									// `getOptionsPage` can emit multiple times (for example, when adding homonyms additional information),
+									// so we cannot use takeWhile here.
+									hasNextPage$.next();
+									hasNextPage$.complete();
+								}
+							}),
+							scan(
+								(acc, { items, page }) => {
+									acc[page] = items;
+									return acc;
+								},
+								{} as Record<number, TOption[]>,
+							),
+							map((pages) => Object.values(pages).flat()),
+						)
+					: of([] as TOption[]);
+			}),
+		);
+	}
+
 	protected clearLastPageByClue() {
 		this.#lastClue = undefined;
 		this.#lastPage = undefined;

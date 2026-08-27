@@ -117,6 +117,26 @@ describe('ALuCoreSelectApiDirective', () => {
 		expect(select.loading()).toBe(false);
 	}));
 
+	it('should not restart the loader when the open state is re-emitted without a close', fakeAsync(() => {
+		fixture.detectChanges();
+		tick(); // Component initialization uses a setTimeout :see_no_evil:
+
+		select.openPanel();
+		fixture.detectChanges();
+		tick(); // openPanel defers its work in a setTimeout
+		tick();
+
+		expect(select.loading()).toBe(false);
+
+		// A filter pill whose popover closed without notifying the select re-emits `true` on the
+		// next opening: no fetch runs on an open → open transition, so nothing would reset the loader
+		select.onFilterPillOpened();
+		fixture.detectChanges();
+		tick();
+
+		expect(select.loading()).toBe(false);
+	}));
+
 	it('should query options once when searching while the select is closed', fakeAsync(() => {
 		tick(); // Component initialization uses a setTimeout :see_no_evil:
 		select.clueChanged('test');

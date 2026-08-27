@@ -52,7 +52,7 @@ export class DialogComponent implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 		if (this.stacked()) {
-			this.dialogRef.cdkRef.overlayRef.backdropElement?.parentElement?.classList.add('mod-stacked');
+			this.dialogRef.cdkRef.overlayRef.hostElement.classList.add('mod-stacked');
 		}
 
 		if (this.dialogRef.config.autoFocus === 'first-input' && !this.dialogRef.config.cdkConfigOverride?.autoFocus) {

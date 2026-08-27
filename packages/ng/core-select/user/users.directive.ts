@@ -142,9 +142,13 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 						item: T;
 					}>
 				>(this.urlOrDefault(), { params })
-				.pipe(catchError(() => of<ILuApiCollectionResponse<{ item: T }>>({ data: { items: [] } }))),
+				.pipe(
+					map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
+					// A failed "me" lookup must not block the options: getOptionsPage combines this
+					// stream with the users search, an EMPTY here would leave the select loading forever
+					catchError(() => of(null)),
+				),
 		),
-		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
 		takeUntilDestroyed(),
 		shareReplay(1),
 	);
@@ -192,10 +196,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		const me$ = prependMe ? this.getMe() : of(null);
 
-		const users$ = this.getOptions(params, page).pipe(
-			map((users) => ({ items: users, isLastPage: users.length < this.pageSize })),
-			tap(() => this.select.loading.set(false)),
-		);
+		const users$ = this.getOptions(params, page).pipe(map((users) => ({ items: users, isLastPage: users.length < this.pageSize })));
 
 		const page$ = combineLatest([me$, users$]).pipe(
 			map(([me, { items, isLastPage }]) => {
@@ -214,6 +215,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 					})),
 				),
 			),
+			tap(() => this.select.loading.set(false)),
 		);
 	}
 

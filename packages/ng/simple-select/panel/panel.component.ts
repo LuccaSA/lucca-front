@@ -13,6 +13,7 @@ import {
 	TreeDisplayPipe,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
+	ɵinjectPointerNavigation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
@@ -31,8 +32,6 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		'[class.colorPanel]': 'colorPanel()',
-		'(document:keydown)': 'onKeydown()',
-		'(document:mousemove)': 'onMousemove()',
 	},
 	imports: [
 		LuSelectPanelLayoutComponent,
@@ -75,15 +74,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	readonly optionTpl = this.selectInput.optionTpl;
 
 	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
-	readonly pointerNavigation = signal(false);
-
-	onKeydown(): void {
-		this.pointerNavigation.set(false);
-	}
-
-	onMousemove(): void {
-		this.pointerNavigation.set(true);
-	}
+	readonly pointerNavigation = ɵinjectPointerNavigation();
 
 	public readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 

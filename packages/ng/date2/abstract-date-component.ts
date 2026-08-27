@@ -95,7 +95,7 @@ export abstract class AbstractDateComponent {
 
 		switch (mode) {
 			case 'day':
-				return min.getTime() <= date.getTime();
+				return startOfDay(min).getTime() <= startOfDay(date).getTime();
 			case 'week':
 				// In week mode the emitted value is the start of the week, so min applies to it
 				return startOfWeek(date, this.weekOptions).getTime() >= min.getTime();
@@ -113,7 +113,7 @@ export abstract class AbstractDateComponent {
 		if (max) {
 			switch (mode) {
 				case 'day':
-					return max.getTime() >= date.getTime();
+					return startOfDay(max).getTime() >= startOfDay(date).getTime();
 				case 'week':
 					// In week mode the emitted value is the start of the week, so max applies to it
 					return startOfWeek(date, this.weekOptions).getTime() <= max.getTime();

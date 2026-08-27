@@ -54,6 +54,8 @@ export class CommentComponent {
 
 	readonly noInfos = input(false, { transform: luBooleanAttribute });
 
+	readonly plainText = input(false, { transform: luBooleanAttribute });
+
 	readonly dateDisplay = computed(() => {
 		const formatted = this.#intlDateTimeFormat.format(this.date());
 		return `${formatted[0].toUpperCase()}${formatted.slice(1)}`;
