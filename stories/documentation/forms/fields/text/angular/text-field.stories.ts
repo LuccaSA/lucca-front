@@ -430,6 +430,19 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step, id
 	});
 });
 
+export const BasicCaretPositionTEST = createTestStory(Basic, async ({ canvasElement }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('textbox') as HTMLInputElement;
+
+	// Typing at the start of the value must keep the caret right after the typed characters, so the user can keep writing there.
+	await userEvent.type(input, 'AB', { initialSelectionStart: 0, initialSelectionEnd: 0 });
+	await waitForAngular();
+
+	await expect(input).toHaveValue('ABExample value');
+	await expect(input.selectionStart).toBe(2);
+});
+
 export const BasicPasswordVisibilityTEST = createTestStory(PasswordVisiblity, async (context) => {
 	const canvas = within(context.canvasElement);
 	await waitForAngular();

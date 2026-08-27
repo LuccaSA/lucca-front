@@ -1,0 +1,50 @@
+<p class="repro-intro">
+	Options are loaded asynchronously when the panel opens: the panel is still empty when the CDK picks a position, and grows once the options
+	arrive. Use the
+	<code>field</code>, <code>spaceBelow</code>, <code>optionCount</code> and <code>latency</code> args to change the scenario.
+</p>
+
+<div class="repro" [style.inset-block-end.px]="spaceBelow">
+	@switch (field) {
+		@case ("simple-async") {
+			<lu-form-field label="Simple (async)">
+				<lu-simple-select
+					data-testid="target"
+					placeholder="Placeholder"
+					[options]="asyncOptions()"
+					[loading]="loading()"
+					[(ngModel)]="simpleValue"
+					(clueChange)="clue = $event"
+					(panelOpened)="loadOptions()"
+				/>
+			</lu-form-field>
+		}
+		@case ("simple-sync") {
+			<lu-form-field label="Simple (sync)">
+				<lu-simple-select
+					data-testid="target"
+					placeholder="Placeholder"
+					[options]="syncOptions"
+					[(ngModel)]="simpleValue"
+					(clueChange)="clue = $event"
+				/>
+			</lu-form-field>
+		}
+		@case ("multi-async") {
+			<lu-form-field label="Multi (async)">
+				<lu-multi-select
+					data-testid="target"
+					placeholder="Placeholder"
+					[options]="asyncOptions()"
+					[loading]="loading()"
+					[(ngModel)]="multiValue"
+					(clueChange)="clue = $event"
+					(panelOpened)="loadOptions()"
+				/>
+			</lu-form-field>
+		}
+	}
+</div>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

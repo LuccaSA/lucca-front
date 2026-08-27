@@ -128,6 +128,9 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		const clueIsPendingDebounce$ = merge(this.select.clueChange$.pipe(map(() => true)), this.clue$.pipe(map(() => false))).pipe(distinctUntilChanged());
 		const isOpen$ = combineLatest([
 			this.select.isPanelOpen$.pipe(
+				// A re-emitted `true` (filter pill reopening) must not start the loader: the fetch below
+				// only runs on a closed → open transition, so nothing would ever turn it off again
+				distinctUntilChanged(),
 				tap((isOpen) => {
 					// Start the loader synchronously on opening to avoid a short display of the "no result"
 					// message: the first fetch only starts on the next tick (debounced open, async params$)

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, input, output
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions, luBooleanAttribute, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil, luBooleanAttribute, PortalDirective } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
@@ -60,6 +60,11 @@ export class TextInputComponent {
 	protected readonly typeRef = computed(() => (this.showPassword() ? 'text' : this.type()));
 
 	protected readonly hasTogglePasswordVisibilityIcon = computed(() => this.type() === 'password');
+
+	protected hasValue(): boolean {
+		const value: unknown = this.ngControl.value;
+		return isNotNil(value) && value !== '';
+	}
 
 	clearValue(): void {
 		this.ngControl.reset();
