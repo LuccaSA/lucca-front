@@ -9,7 +9,91 @@
 	margin-inline: var(--components-fancyBox-marginInline);
 	contain: layout;
 
+	&:has(.fancyBox-content-backgroundEndStart),
+	&:has(.fancyBox-content-backgroundStartEnd),
+	&:has(.fancyBox-content-foregroundStartEnd),
+	&:has(.fancyBox-content-foregroundEndStart) {
+		.fancyBox-content {
+			&::before,
+			&::after {
+				content: none;
+			}
+		}
+	}
+
 	@at-root ($atRoot) {
+		:is(
+			.fancyBox-content-backgroundEndStart,
+			.fancyBox-content-backgroundStartEnd,
+			.fancyBox-content-foregroundStartEnd,
+			.fancyBox-content-foregroundEndStart
+		) {
+			position: absolute;
+			transition-duration: var(--commons-animations-durations-slow);
+			pointer-events: none;
+			transition-property: inline-size, block-size, inset;
+
+			svg {
+				display: block;
+				inline-size: 100%;
+				block-size: auto;
+			}
+		}
+
+		.fancyBox-content-backgroundEndStart,
+		.fancyBox-content-backgroundStartEnd {
+			z-index: -1;
+		}
+
+		.fancyBox-content-backgroundEndStart {
+			inset-block-end: var(--components-fancyBox-content-backgroundEndStart-insetBlockEnd);
+			inset-inline-start: var(--components-fancyBox-content-backgroundEndStart-insetInlineStart);
+			inline-size: var(--components-fancyBox-content-backgroundEndStart-inlineSize);
+			block-size: var(--components-fancyBox-content-backgroundEndStart-blockSize);
+		}
+
+		.fancyBox-content-backgroundStartEnd {
+			inset-block-start: var(--components-fancyBox-content-backgroundStartEnd-insetBlockStart);
+			inset-inline-end: var(--components-fancyBox-content-backgroundStartEnd-insetInlineEnd);
+			inline-size: var(--components-fancyBox-content-backgroundStartEnd-inlineSize);
+			block-size: var(--components-fancyBox-content-backgroundStartEnd-blockSize);
+		}
+
+		.fancyBox-content-foregroundStartEnd {
+			inset-block-start: var(--components-fancyBox-content-foregroundStartEnd-insetBlockStart);
+			inset-inline-end: var(--components-fancyBox-content-foregroundStartEnd-insetInlineEnd);
+			inline-size: var(--components-fancyBox-content-foregroundStartEnd-inlineSize);
+			block-size: var(--components-fancyBox-content-foregroundStartEnd-blockSize);
+		}
+
+		.fancyBox-content-foregroundEndStart {
+			inset-block-end: var(--components-fancyBox-content-foregroundEndStart-insetBlockEnd);
+			inset-inline-start: var(--components-fancyBox-content-foregroundEndStart-insetInlineStart);
+			inline-size: var(--components-fancyBox-content-foregroundEndStart-inlineSize);
+			block-size: var(--components-fancyBox-content-foregroundEndStart-blockSize);
+		}
+
+		// deprecated
+		.fancyBox-content-foreground {
+			inset-block-start: var(--components-fancyBox-content-foregroundStartEnd-insetBlockStart);
+			inset-inline-end: var(--components-fancyBox-content-foregroundStartEnd-insetInlineEnd);
+			inline-size: var(--components-fancyBox-content-foregroundStartEnd-inlineSize);
+			block-size: var(--components-fancyBox-content-foregroundStartEnd-blockSize);
+			background-repeat: no-repeat;
+			background-image: var(--components-fancyBox-foreground);
+			background-size: contain;
+			position: absolute;
+			transition-duration: var(--commons-animations-durations-slow);
+			pointer-events: none;
+			transition-property: inline-size, block-size, inset;
+
+			svg {
+				display: block;
+				inline-size: 100%;
+				block-size: auto;
+			}
+		}
+
 		.fancyBox-content {
 			position: relative;
 			min-block-size: var(--components-fancyBox-contentMinBlockSize);
@@ -25,6 +109,7 @@
 			align-items: center;
 			justify-content: center;
 
+			// deprecated
 			&::before,
 			&::after {
 				content: '';
@@ -38,6 +123,7 @@
 				pointer-events: none;
 			}
 
+			// deprecated
 			&::before {
 				transition-property: inline-size, block-size, inset-block-end, inset-inline-start;
 				inset-block-end: var(--components-fancyBox-offsetBlock);
@@ -45,26 +131,13 @@
 				background-image: var(--components-fancyBox-background-left);
 			}
 
+			// deprecated
 			&::after {
 				transition-property: inline-size, block-size, inset-block-start, inset-inline-end;
 				inset-block-start: var(--components-fancyBox-offsetBlock);
 				inset-inline-end: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-right);
 			}
-		}
-
-		.fancyBox-content-foreground {
-			position: absolute;
-			inline-size: var(--components-fancyBox-imageWidth);
-			block-size: var(--components-fancyBox-imageHeight);
-			background-repeat: no-repeat;
-			inset-block-start: var(--components-fancyBox-offsetBlock);
-			inset-inline-end: var(--components-fancyBox-offsetInline);
-			background-image: var(--components-fancyBox-foreground);
-			background-size: contain;
-			transition-property: inline-size, block-size, inset-block-start, inset-inline-end;
-			transition-duration: var(--commons-animations-durations-slow);
-			pointer-events: none;
 		}
 	}
 }
