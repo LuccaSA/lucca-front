@@ -40,9 +40,6 @@ export class FancyBoxComponent {
 
 	readonly size = input<FancyBoxSize | null>(null);
 
-	/**
-	 * Palette utilisée pour les couleurs des bulles de fond.
-	 */
 	readonly palette = input<string>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 
