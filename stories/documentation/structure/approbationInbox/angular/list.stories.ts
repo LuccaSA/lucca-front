@@ -44,15 +44,18 @@ export default {
 				type: 'select',
 			},
 			if: { arg: 'itemCount', eq: 0 },
+			table: { category: 'inputs' },
 		},
 		current: {
 			description: 'Définit le lien (ou le bouton) comme l’élément courant affiché.',
+			table: { category: 'inputs' },
 		},
 		filterBar: {
 			description: 'Exemple de barre de filtres.',
 		},
 		selectable: {
 			description: 'Active la sélection multiple',
+			table: { category: 'inputs' },
 		},
 		rightContent: {
 			description: 'Exemple de données complémentaires.',
@@ -65,14 +68,17 @@ export default {
 		},
 		center: {
 			description: 'Centre verticalement les données d’un élément',
+			table: { category: 'inputs' },
 		},
 		icons: {
 			description: 'Icônes affichées dans les données complémentaires.',
 			control: { type: 'object' },
 			if: { arg: 'rightContent', truthy: true },
+			table: { category: 'inputs' },
 		},
 		emptyResetButton: {
 			if: { arg: 'itemCount', eq: 0 },
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

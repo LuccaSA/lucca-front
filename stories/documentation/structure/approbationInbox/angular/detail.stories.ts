@@ -13,9 +13,11 @@ export default {
 	argTypes: {
 		insideDialog: {
 			description: 'Adapte l’affichage du composant à une utilisation dans une dialog.',
+			table: { category: 'inputs' },
 		},
 		label: {
 			description: 'Titre affiché dans l’en-tête du composant.',
+			table: { category: 'inputs' },
 		},
 		illustration: {
 			description: 'Affiche une illustration au début de l’en-tête.',
@@ -25,6 +27,7 @@ export default {
 		},
 		delegatedBy: {
 			description: 'Nom de la personne à l’origine de la délégation si elle à lieu.',
+			table: { category: 'inputs' },
 		},
 		moreActions: {
 			description: 'Affiche un bouton d’actions tertaires sous forme de menu déroulant.',
