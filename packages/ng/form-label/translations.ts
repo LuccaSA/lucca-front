@@ -4,7 +4,7 @@
 		tooltipAlt: 'Additional info',
 	},
 	de: {
-		counterAlt: '{{counterStatus}} von {{counterMax}} zulässige Zeichen. ',
+		counterAlt: '{{counterStatus}} von {{counterMax}} zulässigen Zeichen. ',
 		tooltipAlt: 'Zusätzliche Informationen',
 	},
 	fr: {
@@ -32,7 +32,7 @@
 		tooltipAlt: 'Informações adicionais',
 	},
 	pl: {
-		counterAlt: 'Liczba znaków Twojej wiadomości wynosi {{counterStatus}}. Maksymalna liczba znaków wynosi {{counterMax}}. ',
+		counterAlt: '{{counterStatus}} z {{counterMax}} dozwolonych znaków. ',
 		tooltipAlt: 'Dodatkowe informacje',
 	},
 };
