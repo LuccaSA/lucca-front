@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, input, output
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions, isNotNil, luBooleanAttribute, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil, luBooleanAttribute, luNumberAttribute, PortalDirective } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
@@ -44,6 +44,9 @@ export class TextInputComponent {
 	readonly prefix = input<TextInputAddon>();
 
 	readonly suffix = input<TextInputAddon>();
+
+	readonly minlength = input<number>(0, { transform: luNumberAttribute });
+	readonly maxlength = input<number>(0, { transform: luNumberAttribute });
 
 	/**
 	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
