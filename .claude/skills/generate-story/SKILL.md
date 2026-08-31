@@ -24,8 +24,8 @@ Si la variante demandée est ambiguë ou si le composant n'a pas de dossier de d
 
 Explorer `packages/ng/<composant>/` (ou `packages/prisme/<composant>/`) et relever :
 
-- les `input()` / `input.required()` publics, leur type, leur valeur par défaut, leur JSDoc ;
-- les `output()` et le **type émis** (`void` si `output()` sans générique) ;
+- les `input()` / `input.required()` et `@Input()` publics, y compris hérités, leur nom public ou alias, leur type, leur valeur par défaut et leur JSDoc ;
+ - les `output()` et `@Output()` publics, y compris hérités, ainsi que le **type émis** (`void` si `output()` sans générique) ;
 - les `model()` (two-way) ;
 - les constantes d'unions exportées (`FORM_FIELD_SIZE`, `PALETTE`, `INLINE_MESSAGE_STATE`…) : **les réutiliser** via `setStoryOptions()` au lieu de recopier les valeurs à la main ;
 - les entrypoints d'import : toujours `@lucca-front/ng/<entrypoint>` ou `@lucca/prisme/<entrypoint>`, jamais un chemin relatif vers `packages/`.
