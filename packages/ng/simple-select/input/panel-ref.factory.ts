@@ -106,7 +106,7 @@ export class LuSimpleSelectPanelRefFactory {
 	private selectId = inject(SELECT_ID);
 
 	buildPanelRef<T>(selectInput: LuSimpleSelectInputComponent<T>, overlayConfigOverride: OverlayConfig = {}): LuSelectPanelRef<T, T> {
-		const overlayConfig = this.buildOverlayConfig(overlayConfigOverride);
+		const overlayConfig = selectInput.bottomSheetMode() ? this.buildBottomSheetOverlayConfig(overlayConfigOverride) : this.buildOverlayConfig(overlayConfigOverride);
 		const overlayRef = this.overlay.create(overlayConfig);
 
 		addAttributesOnCdkContainer(overlayRef, this.selectLabelId, this.selectId);
@@ -157,6 +157,22 @@ export class LuSimpleSelectPanelRefFactory {
 		overlayConfig.minWidth = this.elementRef.nativeElement.clientWidth;
 		overlayConfig.maxHeight = '100vh';
 		overlayConfig.maxWidth = '100vw';
+
+		return overlayConfig;
+	}
+
+	// Below the `S` breakpoint the panel is detached from the field and pinned to the bottom of the viewport
+	// as a full-width bottom sheet: a solid backdrop, blocked page scroll, and the field's search input
+	// re-rendered inside the sheet (see the panel template).
+	protected buildBottomSheetOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {
+		const overlayConfig: OverlayConfig = { ...overlayConfigOverride };
+		overlayConfig.positionStrategy = this.positionBuilder.global().bottom('0').start('0');
+		overlayConfig.scrollStrategy = this.scrollStrategies.block();
+		overlayConfig.hasBackdrop = true;
+		overlayConfig.backdropClass = 'cdk-overlay-dark-backdrop';
+		overlayConfig.panelClass = 'mod-bottomSheet';
+		overlayConfig.width = '100%';
+		overlayConfig.maxHeight = '90dvh';
 
 		return overlayConfig;
 	}

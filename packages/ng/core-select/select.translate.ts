@@ -8,6 +8,7 @@ export const LU_CORE_SELECT_TRANSLATIONS = new InjectionToken('LuCoreSelectTrans
 
 export interface LuCoreSelectLabel {
 	addOption: string;
+	close: string;
 }
 
 export const luCoreSelectTranslations: LuTranslation<LuCoreSelectLabel> = Translations;

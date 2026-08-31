@@ -1,8 +1,103 @@
 @use 'popover';
 
+@keyframes bottomSheetSlideIn {
+	0% {
+		transform: translateY(100%);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
+
 @layer components {
 	.lu-picker-panel {
 		@extend %popover-panel;
+
+		// Bottom sheet (< S breakpoint): the panel itself becomes the surface, pinned full-width to the
+		// bottom of the viewport with only its top corners rounded and its own search header on top.
+		&.mod-bottomSheet {
+			animation: bottomSheetSlideIn var(--commons-animations-durations-standard) cubic-bezier(0.25, 0.8, 0.25, 1);
+			background-color: var(--pr-t-elevation-surface-raised);
+			border-start-end-radius: var(--pr-t-border-radius-structure);
+			border-start-start-radius: var(--pr-t-border-radius-structure);
+			box-shadow: var(--pr-t-elevation-shadow-overlay);
+			inline-size: 100%;
+			max-block-size: 90dvb;
+			overflow: hidden;
+			padding: var(--pr-t-spacings-100);
+
+			.lu-picker-content {
+				background-color: transparent;
+				border-radius: 0;
+				box-shadow: none;
+				flex: 1 1 auto;
+				margin-inline: 0;
+				max-block-size: none;
+			}
+
+			// The search field carries the border/background so the leading icon sits inside it as a flex item,
+			// with the input itself borderless.
+			.lu-picker-textfield.mod-search {
+				align-items: center;
+				background-color: var(--pr-t-color-input-background);
+				border: 1px solid var(--pr-t-color-input-border);
+				border-radius: var(--pr-t-border-radius-input);
+				display: flex;
+				gap: var(--pr-t-spacings-100);
+				padding-block: 0;
+				padding-inline: var(--pr-t-spacings-150);
+			}
+
+			.lu-picker-textfield.mod-search .textfield-input {
+				background: none;
+				border: 0;
+				flex: 1 1 auto;
+				min-inline-size: 0;
+				outline: none;
+				padding-block: var(--pr-t-spacings-100);
+				padding-inline: 0;
+			}
+		}
+	}
+
+	.lu-picker-header-bar {
+		align-items: center;
+		display: flex;
+		gap: var(--pr-t-spacings-100);
+		justify-content: space-between;
+		margin-block-end: var(--pr-t-spacings-100);
+	}
+
+	.lu-picker-header-title {
+		color: var(--palettes-neutral-800);
+		font: var(--pr-t-font-body-M);
+		font-weight: var(--pr-t-font-fontWeight-semibold);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.lu-picker-header-close {
+		align-items: center;
+		background: none;
+		border: 0;
+		border-radius: var(--pr-t-border-radius-default);
+		color: var(--palettes-neutral-600);
+		cursor: pointer;
+		display: flex;
+		flex: 0 0 auto;
+		padding: var(--pr-t-spacings-50);
+
+		&:hover {
+			background-color: var(--palettes-neutral-100);
+		}
+	}
+
+	.lu-picker-textfield-icon {
+		color: var(--palettes-neutral-600);
+		flex: 0 0 auto;
+		pointer-events: none;
 	}
 
 	.lu-picker-content {

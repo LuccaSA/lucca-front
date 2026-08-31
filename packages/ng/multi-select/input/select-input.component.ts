@@ -154,6 +154,11 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	public override focusInput(): void {
+		// In bottom sheet mode the sheet's own search input holds focus; routing focus back to the covered
+		// field displayer (e.g. after toggling an option) would steal it and pop the mobile keyboard there.
+		if (this.bottomSheetMode()) {
+			return;
+		}
 		this.focusInput$.next({ keepClue: true });
 	}
 

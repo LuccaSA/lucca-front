@@ -1,4 +1,33 @@
-<div class="lu-picker-panel lu-option-picker-panel" cdkTrapFocus>
+<div class="lu-picker-panel lu-option-picker-panel" [class.mod-bottomSheet]="selectInput.bottomSheetMode()" cdkTrapFocus>
+	@if (selectInput.bottomSheetMode()) {
+		<!-- Bottom sheet embeds its own search input, the way filter pills move the field inside their overlay. -->
+		<header class="lu-picker-header">
+			<div class="lu-picker-header-bar">
+				<span class="lu-picker-header-title">{{ selectInput.panelTitle() }}</span>
+				<button type="button" class="lu-picker-header-close" [attr.aria-label]="intl().close" (click)="panelRef.close()">
+					<lu-icon icon="signClose" />
+				</button>
+			</div>
+			<div class="lu-picker-textfield mod-search">
+				<lu-icon class="lu-picker-textfield-icon" icon="searchMagnifyingGlass" />
+				<input
+					class="textfield-input"
+					type="text"
+					role="combobox"
+					aria-haspopup="listbox"
+					[attr.aria-expanded]="true"
+					[attr.aria-controls]="selectId"
+					[attr.placeholder]="intl().placeholder"
+					[ngModel]="clue()"
+					(ngModelChange)="selectInput.clueChanged($event)"
+					[ngModelOptions]="{ standalone: true }"
+					[readonly]="!searchable"
+					(keydown)="selectInput.onKeyDownNavigation($event)"
+					cdkFocusInitial
+				/>
+			</div>
+		</header>
+	}
 	<div class="lu-picker-content" [class.is-loading]="loading()" (scroll)="onScroll($event)">
 		@if (selectInput.panelHeaderTpl(); as tpl) {
 			<div>
