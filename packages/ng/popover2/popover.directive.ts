@@ -2,6 +2,7 @@ import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStr
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	booleanAttribute,
+	computed,
 	DestroyRef,
 	Directive,
 	ElementRef,
@@ -18,6 +19,7 @@ import {
 	output,
 	Provider,
 	Renderer2,
+	Signal,
 	signal,
 	TemplateRef,
 	Type,
@@ -27,12 +29,18 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { getPushPanelViewportMargin, intlInputOptions, isNotNil } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
-import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
+import { POPOVER_CONFIG, POPOVER_ROLES, PopoverConfig, PopoverRole } from './popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
 let nextId = 0;
+
+const ARIA_HASPOPUP_TOKENS = new Set<string>([...POPOVER_ROLES, 'true', 'false']);
+
+function sanitizeAriaHaspopup(value: string | null): string | null {
+	return value && ARIA_HASPOPUP_TOKENS.has(value) ? value : null;
+}
 
 const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	above: new ConnectionPositionPair(
@@ -69,6 +77,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	selector: '[luPopover2]',
 	host: {
 		'[attr.aria-expanded]': 'opened()',
+		'[attr.aria-haspopup]': 'ariaHaspopup()',
 	},
 	exportAs: 'luPopover2',
 })
@@ -91,6 +100,17 @@ export class PopoverDirective implements OnDestroy {
 	content: TemplateRef<unknown> | Type<unknown>;
 
 	luPopoverPosition = input<PopoverPosition | null>(null);
+
+	/**
+	 * Popup role applied to the panel and mirrored into `aria-haspopup` on the trigger.
+	 * `aria-haspopup` is invalid without the matching role on the panel, so both are driven by this single input.
+	 */
+	luPopoverRole = input<PopoverRole | null>(null);
+
+	// Read before Angular applies host bindings, so a template-set attribute survives an unset input.
+	#initialAriaHaspopup = sanitizeAriaHaspopup(this.elementRef.nativeElement.getAttribute('aria-haspopup'));
+
+	protected ariaHaspopup: Signal<string | null> = computed(() => this.luPopoverRole() ?? this.#initialAriaHaspopup);
 
 	luPopoverMaxBlockSize = input<string | null>(null);
 	luPopoverMaxInlineSize = input<string | null>(null);
@@ -266,6 +286,7 @@ export class PopoverDirective implements OnDestroy {
 				content: this.content,
 				ref: this.#overlayRef,
 				contentId: this.ariaControls,
+				role: this.luPopoverRole(),
 				triggerElement: this.elementRef.nativeElement,
 				maxBlockSize: this.luPopoverMaxBlockSize(),
 				maxInlineSize: this.luPopoverMaxInlineSize(),
