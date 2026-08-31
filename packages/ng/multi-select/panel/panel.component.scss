@@ -43,11 +43,10 @@
 
 	@layer mods {
 		// The per-group "select all" action is a plain button made keyboard-selectable via
-		// luCoreSelectPanelElement, which sets .is-highlighted directly on it. Mirror the global
-		// select-all header so the focused group action gets the same neutral highlight instead of
-		// only fading in.
-		> .listboxOption-content .link.is-highlighted {
-			border-radius: var(--pr-t-border-radius-50);
+		// luCoreSelectPanelElement, which sets .is-highlighted directly on it. Paint the whole
+		// group header row so keyboard nav highlights it like the global select-all header, rather
+		// than just the button.
+		> .listboxOption-content:has(.link.is-highlighted) {
 			background-color: var(--palettes-neutral-50);
 		}
 	}
