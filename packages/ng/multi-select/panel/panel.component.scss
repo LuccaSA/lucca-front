@@ -40,4 +40,15 @@
 			box-shadow: calc(var(--pr-t-spacings-50) * -0.5) calc(var(--pr-t-spacings-50) * -0.5) 0 2px var(--pr-t-elevation-surface-raised);
 		}
 	}
+
+	@layer mods {
+		// The per-group "select all" action is a plain button made keyboard-selectable via
+		// luCoreSelectPanelElement, which sets .is-highlighted directly on it. Mirror the global
+		// select-all header so the focused group action gets the same neutral highlight instead of
+		// only fading in.
+		> .listboxOption-content .link.is-highlighted {
+			border-radius: var(--pr-t-border-radius-50);
+			background-color: var(--palettes-neutral-50);
+		}
+	}
 }
