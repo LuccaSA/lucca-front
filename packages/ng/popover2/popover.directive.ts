@@ -39,7 +39,11 @@ let nextId = 0;
 const ARIA_HASPOPUP_TOKENS = new Set<string>([...POPOVER_ROLES, 'true', 'false']);
 
 function sanitizeAriaHaspopup(value: string | null): string | null {
-	return value && ARIA_HASPOPUP_TOKENS.has(value) ? value : null;
+	if (value && !ARIA_HASPOPUP_TOKENS.has(value)) {
+		throw new Error(`[luPopover2] Invalid aria-haspopup value "${value}"; expected one of: ${[...ARIA_HASPOPUP_TOKENS].join(', ')}.`);
+	}
+
+	return value;
 }
 
 const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
