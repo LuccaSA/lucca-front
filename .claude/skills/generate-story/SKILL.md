@@ -14,7 +14,7 @@ Hors périmètre : les tables QA (`stories/qa/`) → skill `generate-story-qa` ;
 Avant d'écrire, déterminer :
 
 1. **Le ou les composants documentés** — souvent plusieurs : le composant métier et son hôte (`lu-text-input` + `lu-form-field`, `lu-simple-select` + `lu-form-field`…).
-2. **La catégorie de doc** — dossier existant sous `stories/documentation/` : `actions`, `feedback`, `forms`, `integration`, `listings`, `loaders`, `navigation`, `overlays`, `structure`, `texts`, `toolbox`, `users`, `intl`, `icons`. Ne pas créer une nouvelle catégorie sans le demander.
+2. **La catégorie de doc** — dossier existant sous `stories/documentation/` : `actions`, `feedback`, `forms`, `integration`, `listings`, `loaders`, `navigation`, `overlays`, `structure`, `texts`, `toolbox`, `users`, `intl`. Ne pas créer une nouvelle catégorie sans le demander.
 3. **La variante** — `Basic` par défaut. Une story par intention (`Basic`, `WithPrefixAndSuffix`, `PasswordVisibility`, `AI`…), pas une story par valeur d'input : les valeurs sont explorées via les Controls.
 4. **S'il existe déjà une story** pour ce composant : dans ce cas la compléter plutôt que d'en créer une nouvelle.
 
