@@ -10,6 +10,7 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 	host: {
 		'[attr.id]': 'idAttribute()',
 		'[attr.aria-selected]': 'isSelected()',
+		'[attr.aria-disabled]': 'disabled || null',
 		'[class.is-highlighted]': 'isHighlighted()',
 		'(mouseenter)': 'onMouseEnter()',
 		role: 'option',

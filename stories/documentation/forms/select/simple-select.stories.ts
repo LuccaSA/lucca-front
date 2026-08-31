@@ -294,15 +294,23 @@ export const WithDisabledOptions = generateStory({
 	},
 });
 
-// export const WithDisabledOptionsTEST = createTestStory(WithDisabledOptions, async (context) => {
-// 	await basePlay(context);
-// 	const input = within(context.canvasElement).getByRole('combobox');
-// 	await userEvent.click(input);
-// 	await waitForAngular();
-// 	const panel = within(screen.getByRole('listbox'));
-// 	const options = await panel.findAllByRole('option');
-// 	await expect(options[1].firstChild).toHaveClass('is-disabled');
-// });
+export const WithDisabledOptionsTEST = createTestStory(WithDisabledOptions, async (context) => {
+	await basePlay(context);
+	const input = within(context.canvasElement).getByRole('combobox');
+	await userEvent.click(input);
+	await waitForAngular();
+	const panel = within(screen.getByRole('listbox'));
+	const options = await panel.findAllByRole('option');
+	// luDisabledOption reaches the option one macrotask after it renders, so the assertions have to
+	// wait for it rather than trust findAllByRole: a loaded CI runner loses that race.
+	await waitFor(async () => {
+		await expect(options[1].firstChild).toHaveClass('is-disabled');
+		// The disabled state has to reach the option itself, not only its inner value: assistive
+		// technologies read it from the [role="option"] element.
+		await expect(options[1]).toHaveAttribute('aria-disabled', 'true');
+		await expect(options[0]).not.toHaveAttribute('aria-disabled');
+	});
+});
 
 export const ApiV3 = generateStory({
 	name: 'Api V3',
