@@ -27,26 +27,34 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { getPushPanelViewportMargin, intlInputOptions, isNotNil } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
-import { POPOVER_CONFIG, POPOVER_ROLES, PopoverConfig, PopoverRole } from './popover-tokens';
+import { POPOVER_CONFIG, PopoverConfig, PopoverRole } from './popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
 let nextId = 0;
 
-const ARIA_HASPOPUP_TOKENS = new Set<string>([...POPOVER_ROLES, 'true', 'false']);
+// Valid aria-haspopup => Panel role (ARIA 1.0 equivalence)
+const PANEL_ROLE_BY_ARIA_HASPOPUP: Record<PopoverRole | 'true' | 'false', PopoverRole | null> = {
+	dialog: 'dialog',
+	menu: 'menu',
+	listbox: 'listbox',
+	tree: 'tree',
+	grid: 'grid',
+	true: 'menu',
+	false: null,
+};
 
 function panelRoleFromAriaHaspopup(value: string | null): PopoverRole | null {
-	if (value && !ARIA_HASPOPUP_TOKENS.has(value)) {
-		throw new Error(`[luPopover2] Invalid aria-haspopup value "${value}"; expected one of: ${[...ARIA_HASPOPUP_TOKENS].join(', ')}.`);
-	}
-
-	if (!value || value === 'false') {
+	if (!value) {
 		return null;
 	}
 
-	// `aria-haspopup="true"` means `menu` (ARIA 1.0 equivalence).
-	return value === 'true' ? 'menu' : (value as PopoverRole);
+	if (!(value in PANEL_ROLE_BY_ARIA_HASPOPUP)) {
+		throw new Error(`[luPopover2] Invalid aria-haspopup value "${value}"; expected one of: ${Object.keys(PANEL_ROLE_BY_ARIA_HASPOPUP).join(', ')}.`);
+	}
+
+	return PANEL_ROLE_BY_ARIA_HASPOPUP[value as PopoverRole | 'true' | 'false'];
 }
 
 const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
@@ -281,7 +289,7 @@ export class PopoverDirective implements OnDestroy {
 				content: this.content,
 				ref: this.#overlayRef,
 				contentId: this.ariaControls,
-				// The panel role matches the trigger's `aria-haspopup`: assistive tech finds the popup it was promised.
+				// Assistive tech must find the popup role the trigger's `aria-haspopup` promises.
 				role: panelRoleFromAriaHaspopup(this.elementRef.nativeElement.getAttribute('aria-haspopup')),
 				triggerElement: this.elementRef.nativeElement,
 				maxBlockSize: this.luPopoverMaxBlockSize(),

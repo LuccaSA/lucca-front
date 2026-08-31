@@ -1,13 +1,8 @@
 import { InjectionToken, TemplateRef, Type } from '@angular/core';
 import { OverlayRef } from '@angular/cdk/overlay';
 
-/**
- * Panel roles derived from the trigger's `aria-haspopup`.
- * Restricted to the roles `aria-haspopup` accepts.
- */
-export const POPOVER_ROLES = ['dialog', 'menu', 'listbox', 'tree', 'grid'] as const;
-
-export type PopoverRole = (typeof POPOVER_ROLES)[number];
+/** Panel roles `aria-haspopup` accepts. */
+export type PopoverRole = 'dialog' | 'menu' | 'listbox' | 'tree' | 'grid';
 
 export interface PopoverConfig {
 	triggerElement: HTMLElement;
