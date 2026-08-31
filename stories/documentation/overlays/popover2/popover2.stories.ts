@@ -33,6 +33,11 @@ export default {
 			options: ['above', 'below', 'before', 'after'],
 			description: 'Position du popover par rapport à son déclencheur.',
 		},
+		luPopoverRole: {
+			control: 'select',
+			options: ['dialog', 'menu', 'listbox', 'tree', 'grid'],
+			description: 'Rôle du panneau, reflété dans « aria-haspopup » sur le déclencheur.',
+		},
 		luPopoverDisabled: {
 			description: 'Désactive le popover.',
 		},
