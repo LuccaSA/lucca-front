@@ -157,7 +157,7 @@ render: (args, { argTypes }) => {
 },
 ```
 
-- **Outputs** → destructurer l'arg (`({ killed, ...args })`), exposer un handler dans `props` (`onKilled: () => killed?.()`) et le brancher dans le template. L'`action: '<nom>'` de l'argType fait apparaître l'émission dans l'onglet Actions.
+- **Outputs** → destructurer l’arg et exposer un handler dans `props`. Pour `output<void>()`, utiliser `onKilled: () => killed?.()` et `(killed)="onKilled()"`. Pour `output<T>()`, transmettre la valeur avec `onChanged: (value: T) => changed?.(value)` et `(changed)="onChanged($event)"`, afin que l’onglet Actions reçoive aussi le payload.
 - **Two-way / `ngModel`** → `useStoryModel(valeurInitiale)` et bind `[(ngModel)]="model.example"` : le modèle survit à un changement de contrôle (sinon une valeur passée dans `props` est réinitialisée à chaque rerender). Si la valeur est elle-même pilotée par un contrôle, utiliser `useControlledStoryModel(args.maValeur)`.
 - Afficher la valeur du modèle avec `<pr-story-model-display>{{ model.example }}</pr-story-model-display>` (`StoryModelDisplayComponent` de `@/helpers/story-model-display.component`) — c'est aussi le point d'ancrage des tests (`data-testid="pr-ng-model"`, helper `expectNgModelDisplay`).
 
