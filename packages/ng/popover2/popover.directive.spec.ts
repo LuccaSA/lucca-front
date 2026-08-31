@@ -1,67 +1,59 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChildren } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopoverDirective } from './popover.directive';
-import { PopoverRole } from './popover-tokens';
 
 @Component({
 	selector: 'lu-popover-test',
 	imports: [PopoverDirective],
 	template: `
 		<ng-template #content>Content</ng-template>
-		<button type="button" id="bare" [luPopover2]="content" [luPopoverRole]="role()">Bare</button>
-		<button type="button" id="valid" [luPopover2]="content" [luPopoverRole]="role()" aria-haspopup="dialog">Valid</button>
-		<button type="button" id="legacy" [luPopover2]="content" [luPopoverRole]="role()" aria-haspopup="true">Legacy</button>
+		<button type="button" id="bare" [luPopover2]="content">Bare</button>
+		<button type="button" id="dialog" [luPopover2]="content" aria-haspopup="dialog">Dialog</button>
+		<button type="button" id="legacy" [luPopover2]="content" aria-haspopup="true">Legacy</button>
+		<button type="button" id="invalid" [luPopover2]="content" aria-haspopup="bogus">Invalid</button>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PopoverTestComponent {
-	role = input<PopoverRole | null>(null);
+	popovers = viewChildren(PopoverDirective);
 }
-
-@Component({
-	selector: 'lu-popover-invalid-test',
-	imports: [PopoverDirective],
-	template: `
-		<ng-template #content>Content</ng-template>
-		<button type="button" [luPopover2]="content" aria-haspopup="bogus">Invalid</button>
-	`,
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class PopoverInvalidTestComponent {}
 
 describe('PopoverDirective aria-haspopup', () => {
 	let fixture: ComponentFixture<PopoverTestComponent>;
 
-	const haspopup = (id: string) => (fixture.nativeElement as HTMLElement).querySelector(`#${id}`)?.getAttribute('aria-haspopup');
+	const openPopover = (id: string) => {
+		const index = ['bare', 'dialog', 'legacy', 'invalid'].indexOf(id);
+		fixture.componentInstance.popovers()[index].openPopover();
+		fixture.detectChanges();
+	};
+
+	const panelRole = () => document.querySelector('lu-popover-content')?.getAttribute('role');
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [PopoverTestComponent, PopoverInvalidTestComponent],
+			imports: [PopoverTestComponent],
 		});
 
 		fixture = TestBed.createComponent(PopoverTestComponent);
 		fixture.detectChanges();
 	});
 
-	it('should not set aria-haspopup without luPopoverRole nor a template attribute', () => {
-		expect(haspopup('bare')).toBeNull();
+	it('should apply no panel role without aria-haspopup on the trigger', () => {
+		openPopover('bare');
+		expect(panelRole()).toBeNull();
 	});
 
-	it('should preserve a valid template aria-haspopup while luPopoverRole is unset', () => {
-		expect(haspopup('valid')).toBe('dialog');
-		expect(haspopup('legacy')).toBe('true');
+	it('should apply the trigger aria-haspopup as the panel role', () => {
+		openPopover('dialog');
+		expect(panelRole()).toBe('dialog');
 	});
 
-	it('should throw on an invalid template aria-haspopup', () => {
-		expect(() => TestBed.createComponent(PopoverInvalidTestComponent)).toThrowError(/Invalid aria-haspopup value "bogus"/);
+	it('should apply the menu panel role for aria-haspopup="true"', () => {
+		openPopover('legacy');
+		expect(panelRole()).toBe('menu');
 	});
 
-	it('should mirror luPopoverRole into aria-haspopup, overriding template attributes', () => {
-		fixture.componentRef.setInput('role', 'listbox');
-		fixture.detectChanges();
-
-		for (const id of ['bare', 'valid', 'legacy']) {
-			expect(haspopup(id)).toBe('listbox');
-		}
+	it('should throw on an invalid trigger aria-haspopup', () => {
+		expect(() => openPopover('invalid')).toThrowError(/Invalid aria-haspopup value "bogus"/);
 	});
 });
