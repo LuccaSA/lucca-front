@@ -475,7 +475,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 		if (isNotNil(dateRange)) {
 			this.selectedRange.set(_dateRange);
-			this.currentDate.set(startOfDay(dateRange.start));
+			const calendarAnchor = _dateRange?.start ?? _dateRange?.end ?? new Date();
+			this.currentDate.set(startOfDay(calendarAnchor));
 		}
 	}
 
