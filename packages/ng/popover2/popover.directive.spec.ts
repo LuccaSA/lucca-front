@@ -11,6 +11,8 @@ import { PopoverDirective } from './popover.directive';
 		<button type="button" id="dialog" [luPopover2]="content" aria-haspopup="dialog">Dialog</button>
 		<button type="button" id="legacy" [luPopover2]="content" aria-haspopup="true">Legacy</button>
 		<button type="button" id="invalid" [luPopover2]="content" aria-haspopup="bogus">Invalid</button>
+		<button type="button" id="empty" [luPopover2]="content" aria-haspopup="">Empty</button>
+		<button type="button" id="mixed-case" [luPopover2]="content" aria-haspopup="Dialog">Mixed case</button>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -22,7 +24,7 @@ describe('PopoverDirective aria-haspopup', () => {
 	let fixture: ComponentFixture<PopoverTestComponent>;
 
 	const openPopover = (id: string) => {
-		const index = ['bare', 'dialog', 'legacy', 'invalid'].indexOf(id);
+		const index = ['bare', 'dialog', 'legacy', 'invalid', 'empty', 'mixed-case'].indexOf(id);
 		fixture.componentInstance.popovers()[index].openPopover();
 		fixture.detectChanges();
 	};
@@ -55,6 +57,17 @@ describe('PopoverDirective aria-haspopup', () => {
 
 	it('should throw on an invalid trigger aria-haspopup', () => {
 		expect(() => openPopover('invalid')).toThrowError(/Invalid aria-haspopup value "bogus"/);
+	});
+
+	it('should apply no panel role for an empty trigger aria-haspopup', () => {
+		// ARIA 1.2: empty => `false` default.
+		openPopover('empty');
+		expect(panelRole()).toBeNull();
+	});
+
+	it('should throw on a mixed-case trigger aria-haspopup', () => {
+		// Lowercase only (https://w3c.github.io/html-aria/#case-sensitivity): AT casing support varies.
+		expect(() => openPopover('mixed-case')).toThrowError(/Invalid aria-haspopup value "Dialog"/);
 	});
 
 	it('should stay closed after an invalid trigger aria-haspopup threw', () => {
