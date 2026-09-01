@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FileEntryComponent } from '@lucca-front/ng/file-upload';
+import { FileEntryComponent, FileEntryWrapperComponent } from '@lucca-front/ng/file-upload';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'file-entry-stories',
 	templateUrl: './file-entry.stories.html',
-	imports: [FileEntryComponent],
+	imports: [FileEntryComponent, FileEntryWrapperComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [
 		`
