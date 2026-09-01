@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpStatusCode, provideHttpClient } from '@angular/common/http';
 import { Injectable, LOCALE_ID, Pipe, PipeTransform, signal } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { FILE_UPLOAD_SIZE, FileEntry, FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { FILE_UPLOAD_SIZE, FileEntry, FileEntryComponent, FileEntryWrapperComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuInputDirective } from '@lucca-front/ng/input';
@@ -167,6 +167,7 @@ export default {
 				ButtonComponent,
 				FileUploadToLFEntryPipe,
 				FileEntryComponent,
+				FileEntryWrapperComponent,
 				TagComponent,
 			],
 		}),
@@ -244,11 +245,11 @@ export const Multi = {
 			<lu-tag icon="weatherStars" label="Scan intelligent" AI />
 		</lu-multi-file-upload>
 	</lu-form-field>
-	<div class="fileEntryDisplayWrapper">
+	<lu-file-entry-wrapper>
 		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
 			<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 		}
-	</div>`,
+	</lu-file-entry-wrapper>`,
 			};
 		} else {
 			return {
@@ -274,11 +275,11 @@ export const Multi = {
 				template: `<lu-form-field label="Label">
 		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 	</lu-form-field>
-	<div class="fileEntryDisplayWrapper">
+	<lu-file-entry-wrapper>
 		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
 			<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 		}
-	</div>`,
+	</lu-file-entry-wrapper>`,
 			};
 		}
 	},
@@ -308,7 +309,9 @@ export const Single = {
 		const isLarge = !!size;
 		const entryAttrs = `size="L"${isLarge ? ` media` : ``}${isLarge && displayFileName ? ` displayFileName` : ``}`;
 		const sizeLFileUploadParam = size ? ` size="L"` : ``;
-		const fileEntry = `<lu-file-entry ${entryAttrs} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />`;
+		const fileEntry = `<lu-file-entry-wrapper>
+			<lu-file-entry ${entryAttrs} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+		</lu-file-entry-wrapper>`;
 		if (args.AItag) {
 			return {
 				props: { ...multi.props, accept },
