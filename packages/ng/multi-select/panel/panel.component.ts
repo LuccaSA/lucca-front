@@ -31,6 +31,10 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	templateUrl: './panel.component.html',
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'selectPanel',
+		'[class.is-pointerNavigation]': 'pointerNavigation()',
+	},
 	imports: [
 		LuSelectPanelLayoutComponent,
 		FormsModule,

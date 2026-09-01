@@ -31,7 +31,9 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
+		class: 'selectPanel',
 		'[class.colorPanel]': 'colorPanel()',
+		'[class.is-pointerNavigation]': 'pointerNavigation()',
 	},
 	imports: [
 		LuSelectPanelLayoutComponent,
