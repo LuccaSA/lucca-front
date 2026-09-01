@@ -1,11 +1,15 @@
 import { InjectionToken, TemplateRef, Type } from '@angular/core';
 import { OverlayRef } from '@angular/cdk/overlay';
 
+/** Panel roles `aria-haspopup` accepts. */
+export type PopoverRole = 'dialog' | 'menu' | 'listbox' | 'tree' | 'grid';
+
 export interface PopoverConfig {
 	triggerElement: HTMLElement;
 	content: TemplateRef<unknown> | Type<unknown>;
 	ref: OverlayRef;
 	contentId: string;
+	role: PopoverRole | null;
 	maxBlockSize: string | null;
 	maxInlineSize: string | null;
 	disableCloseButtonFocus: boolean;

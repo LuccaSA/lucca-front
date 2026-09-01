@@ -29,6 +29,9 @@ export class PopoverContentComponent implements AfterViewInit, OnDestroy {
 	@HostBinding('attr.id')
 	contentId = this.config.contentId;
 
+	@HostBinding('attr.role')
+	role = this.config.role;
+
 	content = this.config.content;
 
 	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.config.triggerElement, inject(Injector));

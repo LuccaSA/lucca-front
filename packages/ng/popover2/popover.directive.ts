@@ -27,12 +27,35 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { getPushPanelViewportMargin, intlInputOptions, isNotNil } from '@lucca-front/ng/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
-import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
+import { POPOVER_CONFIG, PopoverConfig, PopoverRole } from './popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
 let nextId = 0;
+
+// Valid aria-haspopup => Panel role (ARIA 1.0 equivalence)
+const PANEL_ROLE_BY_ARIA_HASPOPUP: Record<PopoverRole | 'true' | 'false', PopoverRole | null> = {
+	dialog: 'dialog',
+	menu: 'menu',
+	listbox: 'listbox',
+	tree: 'tree',
+	grid: 'grid',
+	true: 'menu',
+	false: null,
+};
+
+function panelRoleFromAriaHaspopup(value: string | null): PopoverRole | null {
+	if (!value) {
+		return null;
+	}
+
+	if (!Object.hasOwn(PANEL_ROLE_BY_ARIA_HASPOPUP, value)) {
+		throw new Error(`[luPopover2] Invalid aria-haspopup value "${value}"; expected one of: ${Object.keys(PANEL_ROLE_BY_ARIA_HASPOPUP).join(', ')}.`);
+	}
+
+	return PANEL_ROLE_BY_ARIA_HASPOPUP[value as PopoverRole | 'true' | 'false'];
+}
 
 const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	above: new ConnectionPositionPair(
@@ -241,6 +264,10 @@ export class PopoverDirective implements OnDestroy {
 
 	openPopover(withBackdrop = false, disableCloseButtonFocus = false, disableInitialTriggerFocus = false): void {
 		if (!this.opened() && !this.luPopoverDisabled && isNotNil(this.content)) {
+			// Assistive tech must find the popup role the trigger's `aria-haspopup` promises.
+			// Resolved before any side effect: an invalid value must throw while the popover is still closed.
+			const role = panelRoleFromAriaHaspopup(this.elementRef.nativeElement.getAttribute('aria-haspopup'));
+
 			this.opened.set(true);
 			this.luPopoverOpened.emit();
 			this.#overlayRef = this.overlay.create({
@@ -266,6 +293,7 @@ export class PopoverDirective implements OnDestroy {
 				content: this.content,
 				ref: this.#overlayRef,
 				contentId: this.ariaControls,
+				role,
 				triggerElement: this.elementRef.nativeElement,
 				maxBlockSize: this.luPopoverMaxBlockSize(),
 				maxInlineSize: this.luPopoverMaxInlineSize(),
