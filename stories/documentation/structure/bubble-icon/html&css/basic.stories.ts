@@ -1,6 +1,6 @@
 import { IconsList } from '@/stories/icons-list';
 import { BUBBLE_ICON_DIRECTION, BUBBLE_ICON_SIZE } from '@lucca-front/ng/bubble-icon';
-import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
+import { DECORATIVE_PALETTE, PALETTE, PRODUCT_PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 
@@ -30,7 +30,7 @@ export default {
 			description: 'Modifie la taille du composant.',
 		},
 		palette: {
-			options: setStoryOptions([...PALETTE, ...DECORATIVE_PALETTE]),
+			options: setStoryOptions([...PALETTE, ...PRODUCT_PALETTE, ...DECORATIVE_PALETTE]),
 			control: {
 				type: 'select',
 			},
