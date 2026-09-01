@@ -120,6 +120,11 @@ const routes: Routes = [
 export default {
 	title: 'Documentation/Overlays/Dialog/Routing nested',
 	component: DialogRoutingNestedStory,
+	parameters: {
+		// Each story bootstraps its own router on the page's hash; inlined together on the docs page,
+		// a history back would drive both routers at once and duplicate the dialogs.
+		docs: { story: { inline: false, iframeHeight: 500 } },
+	},
 } as Meta;
 
 const Template = (args: DialogRoutingNestedStory) => ({
