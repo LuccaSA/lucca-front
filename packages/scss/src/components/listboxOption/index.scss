@@ -42,7 +42,8 @@
 						@include hover;
 					}
 				}
-				&.is-hovered {
+				&.is-hovered,
+				&:has(.link.is-highlighted) {
 					.selectPanel:not(.is-pointerNavigation) & {
 						@include hover;
 					}

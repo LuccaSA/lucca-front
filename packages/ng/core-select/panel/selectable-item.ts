@@ -1,6 +1,5 @@
 import { Highlightable } from '@angular/cdk/a11y';
 import { computed, Directive, ElementRef, inject, input, linkedSignal, model, OnDestroy, output, signal, untracked } from '@angular/core';
-import { LISTBOX_INSTANCE } from '@lucca-front/ng/listbox';
 import { ALuSelectInputComponent } from '../input/select-input.component';
 import { CoreSelectKeyManager } from './key-manager';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
@@ -9,7 +8,6 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 	selector: '[luCoreSelectPanelElement]',
 	exportAs: 'luCoreSelectPanelElement',
 	host: {
-		'[attr.id]': 'idAttribute()',
 		'[class.is-highlighted]': 'isHighlighted()',
 		'(mouseover)': 'onMouseOver($event)',
 		role: 'presentation',

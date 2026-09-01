@@ -3,6 +3,7 @@
 	[hovered]="selectableItem.isHighlighted()"
 	[disabled]="selectableItem.disabled"
 	(click)="selectOption($event)"
+	[elementId]="selectableItem.idAttribute()"
 >
 	<ng-container [ngTemplateOutlet]="optionContent" />
 </lu-listbox-option>

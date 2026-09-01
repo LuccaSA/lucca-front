@@ -24,7 +24,7 @@ export class Treeitem {}
 		'[attr.aria-checked]': ' add() ? null : mixed() ? "mixed" : checked()',
 		'[attr.aria-disabled]': 'disabled()',
 		'[attr.aria-hidden]': 'empty()',
-		'[attr.id]': 'selectableElement.idAttribute()',
+		'[attr.id]': 'elementId()',
 		'[class.is-selected]': 'checked()',
 		'[class.is-disabled]': 'disabled()',
 		'[class.mod-add]': 'add()',
@@ -38,7 +38,8 @@ export class OptionComponent {
 	// rendered next to the listbox but inside the same scroll container.
 	#listboxRef = inject(LISTBOX_INSTANCE, { optional: true });
 	#parentOptionRef = inject(OPTION_INSTANCE, { skipSelf: true, optional: true });
-	readonly selectableElement = inject(CoreSelectPanelElement);
+
+	readonly elementId = input<string | null>(null);
 
 	readonly checked = input(false, { transform: luBooleanAttribute });
 

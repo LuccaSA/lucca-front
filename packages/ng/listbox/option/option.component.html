@@ -11,7 +11,7 @@
 	<ng-content />
 	<ng-content select="[group-action]" />
 	@if (selectAll()) {
-		<lu-listbox-option select>{{ selectAll() }}</lu-listbox-option>
+		<lu-listbox-option [elementId]="elementId() + '-selectAll'" select>{{ selectAll() }}</lu-listbox-option>
 	}
 </div>
 <ng-content select="[optgroup]" />
