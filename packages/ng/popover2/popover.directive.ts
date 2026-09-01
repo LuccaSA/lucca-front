@@ -50,7 +50,7 @@ function panelRoleFromAriaHaspopup(value: string | null): PopoverRole | null {
 		return null;
 	}
 
-	if (!(value in PANEL_ROLE_BY_ARIA_HASPOPUP)) {
+	if (!Object.hasOwn(PANEL_ROLE_BY_ARIA_HASPOPUP, value)) {
 		throw new Error(`[luPopover2] Invalid aria-haspopup value "${value}"; expected one of: ${Object.keys(PANEL_ROLE_BY_ARIA_HASPOPUP).join(', ')}.`);
 	}
 

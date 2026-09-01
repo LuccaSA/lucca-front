@@ -13,6 +13,7 @@ import { PopoverDirective } from './popover.directive';
 		<button type="button" id="invalid" [luPopover2]="content" aria-haspopup="bogus">Invalid</button>
 		<button type="button" id="empty" [luPopover2]="content" aria-haspopup="">Empty</button>
 		<button type="button" id="mixed-case" [luPopover2]="content" aria-haspopup="Dialog">Mixed case</button>
+		<button type="button" id="inherited" [luPopover2]="content" aria-haspopup="toString">Inherited</button>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -24,7 +25,7 @@ describe('PopoverDirective aria-haspopup', () => {
 	let fixture: ComponentFixture<PopoverTestComponent>;
 
 	const openPopover = (id: string) => {
-		const index = ['bare', 'dialog', 'legacy', 'invalid', 'empty', 'mixed-case'].indexOf(id);
+		const index = ['bare', 'dialog', 'legacy', 'invalid', 'empty', 'mixed-case', 'inherited'].indexOf(id);
 		fixture.componentInstance.popovers()[index].openPopover();
 		fixture.detectChanges();
 	};
@@ -68,6 +69,11 @@ describe('PopoverDirective aria-haspopup', () => {
 	it('should throw on a mixed-case trigger aria-haspopup', () => {
 		// Lowercase only (https://w3c.github.io/html-aria/#case-sensitivity): AT casing support varies.
 		expect(() => openPopover('mixed-case')).toThrowError(/Invalid aria-haspopup value "Dialog"/);
+	});
+
+	it('should throw on an inherited-key trigger aria-haspopup', () => {
+		// Object prototype members must not pass the map lookup.
+		expect(() => openPopover('inherited')).toThrowError(/Invalid aria-haspopup value "toString"/);
 	});
 
 	it('should stay closed after an invalid trigger aria-haspopup threw', () => {
