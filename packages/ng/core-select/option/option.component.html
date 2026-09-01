@@ -15,14 +15,13 @@
 }
 
 <ng-template #optionContent>
-	<!-- Normal-flow block so multi-element option templates (e.g. a name over a subtitle) stack
-	instead of being spread across the flex row of `.listboxOption-content`. -->
-	<div class="optionItem-body">
+	<div>
 		<ng-container *luOptionOutlet="optionTpl(); value: selectableItem.option()" />
 
 		@if (groupTemplateLocation() === "option") {
 			@if (grouping(); as grouping) {
-				<div class="optionItem-value-group">
+				<!-- TODO Vincent -->
+				<div>
 					<ng-container *luPortal="grouping.content; context: { $implicit: selectableItem.option() | luOptionGroup: grouping.selector }" />
 				</div>
 			}

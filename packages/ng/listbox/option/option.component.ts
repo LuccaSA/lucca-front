@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, contentChild, Directive, 
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LISTBOX_INSTANCE, OPTION_INSTANCE } from '../tokens';
+import { CoreSelectPanelElement } from '../../core-select/panel/selectable-item';
 
 let nextId = 0;
 
@@ -18,14 +19,14 @@ export class Treeitem {}
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'listboxOption',
-		'[attr.role]': 'presentation() ? null : group() ? "group" : tree() ? "treeitem" : "option"',
+		'[attr.role]': 'group() ? "group" : tree() ? "treeitem" : "option"',
 		'[attr.aria-labelledby]': 'group() ? groupLabelId() : null',
-		'[attr.aria-checked]': 'presentation() || add() ? null : mixed() ? "mixed" : checked()',
-		'[attr.aria-disabled]': 'presentation() ? null : disabled()',
+		'[attr.aria-checked]': 'add() ? null : mixed() ? "mixed" : checked()',
+		'[attr.aria-disabled]': 'disabled()',
 		'[attr.aria-hidden]': 'empty()',
-		'[attr.id]': 'empty() ? id() : null',
-		'[class.is-selected]': 'presentation() && checked()',
-		'[class.is-disabled]': 'presentation() && disabled()',
+		'[attr.id]': 'selectableElement.idAttribute()',
+		'[class.is-selected]': 'checked()',
+		'[class.is-disabled]': 'disabled()',
 		'[class.mod-add]': 'add()',
 		'[class.mod-select]': 'select()',
 	},
@@ -37,14 +38,7 @@ export class OptionComponent {
 	// rendered next to the listbox but inside the same scroll container.
 	#listboxRef = inject(LISTBOX_INSTANCE, { optional: true });
 	#parentOptionRef = inject(OPTION_INSTANCE, { skipSelf: true, optional: true });
-
-	/**
-	 * When true, the option is a purely visual layer: it carries no role nor aria attributes.
-	 * The semantics (role, aria-selected, id) must then be carried by an ancestor element,
-	 * e.g. the host of a select panel element directive. Selection and disabled states are
-	 * exposed through the `is-selected` and `is-disabled` classes instead of aria attributes.
-	 */
-	readonly presentation = input(false, { transform: luBooleanAttribute });
+	readonly selectableElement = inject(CoreSelectPanelElement);
 
 	readonly checked = input(false, { transform: luBooleanAttribute });
 

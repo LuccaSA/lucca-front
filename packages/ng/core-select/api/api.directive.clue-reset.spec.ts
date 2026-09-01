@@ -4,7 +4,6 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { NEVER, Observable, of } from 'rxjs';
-import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
 interface TestEntity {
@@ -66,21 +65,18 @@ describe('ALuCoreSelectApiDirective: clearing the clue resets dataSourceOptions'
 		select.openPanel();
 		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
-		tick(MAGIC_OPTION_SCROLL_DELAY);
 		expect(select.dataSourceOptions().map((o) => o.name)).toEqual(['Carotte', 'Navet', 'Poireau']);
 
 		// search
 		select.clueChanged('car');
 		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
-		tick(MAGIC_OPTION_SCROLL_DELAY);
 		expect(select.dataSourceOptions().map((o) => o.name)).toEqual(['Carotte']);
 
 		// clear
 		select.clueChanged('');
 		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
-		tick(MAGIC_OPTION_SCROLL_DELAY);
 		expect(select.dataSourceOptions().map((o) => o.name)).toEqual(['Carotte', 'Navet', 'Poireau']);
 
 		tick();

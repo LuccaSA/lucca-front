@@ -23,15 +23,14 @@
 					</span>
 					@if (someGroupOptionEnabled()(group.options)) {
 						@let groupCtx = group.options | luOptionsGroupContext: selectedOptions : optionComparer();
-						<button
+						<div
 							group-action
-							type="button"
 							class="link"
 							luCoreSelectPanelElement
 							[elementId]="selectId + '-group-' + group.key + '-action'"
+							(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
 							[disabled]="groupLoadingKeys().has(group.key)"
 							(click)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
-							(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
 						>
 							@if (groupLoadingKeys().has(group.key)) {
 								<span class="loading"></span>
@@ -39,7 +38,7 @@
 								<span class="pr-u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span
 								>{{ groupCtx.isGroupSelected ? intl().unselectAll : intl().selectAll }}
 							}
-						</button>
+						</div>
 					}
 					<div optgroup class="listboxOptionWrapper">
 						<ng-template

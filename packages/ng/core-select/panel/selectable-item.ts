@@ -10,10 +10,9 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 	exportAs: 'luCoreSelectPanelElement',
 	host: {
 		'[attr.id]': 'idAttribute()',
-		'[attr.aria-selected]': 'isSelected()',
 		'[class.is-highlighted]': 'isHighlighted()',
 		'(mouseover)': 'onMouseOver($event)',
-		'[attr.role]': 'role()',
+		role: 'presentation',
 	},
 })
 export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
@@ -21,13 +20,8 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
 	readonly #keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager, { optional: true });
-	// Optional: an option can live outside a lu-listbox (e.g. the sticky "add option" row).
-	readonly #listboxRef = inject(LISTBOX_INSTANCE, { optional: true });
 
 	readonly #selectRef = inject<ALuSelectInputComponent<T, T>>(ALuSelectInputComponent);
-
-	// Inside a tree listbox the semantics are carried by this host, so it must expose treeitem.
-	readonly role = computed(() => (this.#listboxRef?.tree() ? 'treeitem' : 'option'));
 
 	readonly id = signal<string>('');
 
