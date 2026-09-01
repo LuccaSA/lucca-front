@@ -21,7 +21,7 @@ export class Treeitem {}
 		class: 'listboxOption',
 		'[attr.role]': 'group() ? "group" : tree() ? "treeitem" : "option"',
 		'[attr.aria-labelledby]': 'group() ? groupLabelId() : null',
-		'[attr.aria-checked]': 'add() ? null : mixed() ? "mixed" : checked()',
+		'[attr.aria-checked]': ' add() ? null : mixed() ? "mixed" : checked()',
 		'[attr.aria-disabled]': 'disabled()',
 		'[attr.aria-hidden]': 'empty()',
 		'[attr.id]': 'selectableElement.idAttribute()',

@@ -4,7 +4,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: var(--components-listboxOption-display);
 	flex-direction: column;
-	gap: var(--pr-t-spacings-25);
+	gap: var(--pr-t-spacings-50);
 	scroll-margin-block: var(--components-listboxOption-scrollMarginBlock);
 	position: var(--components-listboxOption-position);
 	inset-block-end: 0;
