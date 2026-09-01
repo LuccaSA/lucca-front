@@ -56,4 +56,10 @@ describe('PopoverDirective aria-haspopup', () => {
 	it('should throw on an invalid trigger aria-haspopup', () => {
 		expect(() => openPopover('invalid')).toThrowError(/Invalid aria-haspopup value "bogus"/);
 	});
+
+	it('should stay closed after an invalid trigger aria-haspopup threw', () => {
+		expect(() => openPopover('invalid')).toThrow();
+		expect(fixture.componentInstance.popovers()[3].opened()).toBe(false);
+		expect(panelRole()).toBeUndefined();
+	});
 });

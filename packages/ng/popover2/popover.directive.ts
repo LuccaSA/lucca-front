@@ -264,6 +264,10 @@ export class PopoverDirective implements OnDestroy {
 
 	openPopover(withBackdrop = false, disableCloseButtonFocus = false, disableInitialTriggerFocus = false): void {
 		if (!this.opened() && !this.luPopoverDisabled && isNotNil(this.content)) {
+			// Assistive tech must find the popup role the trigger's `aria-haspopup` promises.
+			// Resolved before any side effect: an invalid value must throw while the popover is still closed.
+			const role = panelRoleFromAriaHaspopup(this.elementRef.nativeElement.getAttribute('aria-haspopup'));
+
 			this.opened.set(true);
 			this.luPopoverOpened.emit();
 			this.#overlayRef = this.overlay.create({
@@ -289,8 +293,7 @@ export class PopoverDirective implements OnDestroy {
 				content: this.content,
 				ref: this.#overlayRef,
 				contentId: this.ariaControls,
-				// Assistive tech must find the popup role the trigger's `aria-haspopup` promises.
-				role: panelRoleFromAriaHaspopup(this.elementRef.nativeElement.getAttribute('aria-haspopup')),
+				role,
 				triggerElement: this.elementRef.nativeElement,
 				maxBlockSize: this.luPopoverMaxBlockSize(),
 				maxInlineSize: this.luPopoverMaxInlineSize(),
