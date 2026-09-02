@@ -4,7 +4,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: var(--components-listboxOption-display);
 	flex-direction: column;
-	gap: var(--pr-t-spacings-25);
+	gap: var(--pr-t-spacings-50);
 	scroll-margin-block: var(--components-listboxOption-scrollMarginBlock);
 	position: var(--components-listboxOption-position);
 	inset-block-end: 0;
@@ -16,7 +16,6 @@
 
 	@at-root ($atRoot) {
 		.listboxOption-content {
-			opacity: var(--components-listboxOption-content-opacity);
 			background-color: var(--components-listboxOption-content-backgroundColor);
 			color: var(--components-listboxOption-content-color);
 			border-radius: var(--pr-t-border-radius-default);
@@ -36,6 +35,7 @@
 			inset-block-start: var(--components-listboxOption-content-insetBlockStart);
 			justify-content: var(--components-listboxOption-content-justifyContent);
 			box-shadow: var(--components-listboxOption-content-boxShadow);
+			overflow-wrap: anywhere;
 
 			&::before {
 				content: var(--components-listboxOption-content-before-content);
@@ -54,6 +54,16 @@
 				pointer-events: none;
 				box-shadow: var(--pr-t-elevation-shadow-overflow);
 			}
+
+			.avatar {
+				margin-inline-end: var(--pr-t-spacings-75);
+			}
+
+			.link {
+				opacity: var(--components-listboxOption-content-link-opacity);
+				transition-property: opacity;
+				transition-duration: var(--commons-animations-durations-fast);
+			}
 		}
 
 		.listboxOption-content-checkboxField.checkboxField {
@@ -65,7 +75,7 @@
 			list-style-type: none;
 			display: flex;
 			flex-direction: column;
-			gap: var(--pr-t-spacings-25);
+			gap: var(--pr-t-spacings-50);
 			background-color: var(--palettes-neutral-0);
 			position: relative;
 			z-index: 1;
@@ -77,11 +87,14 @@
 
 			@include reset.list;
 
-			padding: var(--components-listboxOptionWrapper-padding);
-
 			.listboxOptionWrapper {
 				--components-listboxOptionWrapper-overflow: visible;
 			}
+		}
+
+		.listboxOption-content-group {
+			color: var(--palettes-neutral-600);
+			font: var(--pr-t-font-body-S);
 		}
 	}
 }

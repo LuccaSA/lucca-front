@@ -3,7 +3,7 @@ import { computed, Directive, forwardRef, inject, input, model } from '@angular/
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiItem } from '@lucca-front/ng/api';
 import { applySearchDelimiter, CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
-import { debounceTime, map, Observable, of, switchMap } from 'rxjs';
+import { debounceTime, map, Observable, switchMap } from 'rxjs';
 import { ALuCoreSelectApiDirective } from './api.directive';
 
 @Directive({
@@ -27,28 +27,17 @@ export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSel
 
 	protected readonly clue = toSignal(this.clue$);
 
-	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
-		// Use the clue parameter directly instead of reading from the async signal
-		// to avoid stale params when selection triggers an immediate clue reset
-		return of({
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const sort = this.sort();
+		const clue = this.clue();
+		const searchDelimiter = this.searchDelimiter();
+		return {
 			...this.filters(),
-			...(this.sort() ? { sort: this.sort() } : {}),
-			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()) } : {}),
-		});
-	}
-
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const sort = this.sort();
-			const clue = this.clue();
-			const searchDelimiter = this.searchDelimiter();
-			return {
-				...this.filters(),
-				...(sort ? { sort } : {}),
-				...(clue ? { search: applySearchDelimiter(clue, searchDelimiter) } : {}),
-			};
-		}),
-	);
+			...(sort ? { sort } : {}),
+			...(clue ? { search: applySearchDelimiter(clue, searchDelimiter) } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	public readonly totalCount$ = toObservable(computed(() => ({ url: this.apiV4(), filters: this.filters() }))).pipe(
 		debounceTime(250),

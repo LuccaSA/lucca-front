@@ -93,43 +93,27 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	protected readonly clue = toSignal(this.clue$);
 
-	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
-		// Use the clue parameter directly instead of reading from the async signal
-		// to avoid stale params when selection triggers an immediate clue reset
-		return of({
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const orderBy = this.orderBy();
+		const clue = this.clue();
+		const operationIds = this.operationIds();
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const appInstanceId = this.appInstanceId();
+		const searchDelimiter = this.searchDelimiter();
+		const formerEmployees = this.includeFormerEmployees();
+
+		return {
 			fields: this.#userFields,
 			...this.filters(),
-			...(this.orderBy() ? { orderBy: this.orderBy() } : {}),
-			...(clue ? { clue: applySearchDelimiter(clue, this.searchDelimiter()) } : {}),
-			...(this.operationIds() ? { operations: this.operationIds()!.join(',') } : {}),
-			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()!.join(',') } : {}),
-			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
-			...(this.includeFormerEmployees() ? { formerEmployees: this.includeFormerEmployees() } : {}),
-		});
-	}
-
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const orderBy = this.orderBy();
-			const clue = this.clue();
-			const operationIds = this.operationIds();
-			const uniqueOperationIds = this.uniqueOperationIds();
-			const appInstanceId = this.appInstanceId();
-			const searchDelimiter = this.searchDelimiter();
-			const formerEmployees = this.includeFormerEmployees();
-
-			return {
-				fields: this.#userFields,
-				...this.filters(),
-				...(orderBy ? { orderBy } : {}),
-				...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
-				...(operationIds ? { operations: operationIds.join(',') } : {}),
-				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-				...(appInstanceId ? { appInstanceId } : {}),
-				...(formerEmployees ? { formerEmployees } : {}),
-			};
-		}),
-	);
+			...(orderBy ? { orderBy } : {}),
+			...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(appInstanceId ? { appInstanceId } : {}),
+			...(formerEmployees ? { formerEmployees } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	protected readonly meParams$ = toObservable(
 		computed(() => {

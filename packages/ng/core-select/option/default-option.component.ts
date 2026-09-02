@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 
 @Component({
-	selector: 'lu-simple-select-default-option',
+	selector: 'lu-core-select-default-option',
 	imports: [AsyncPipe],
 	templateUrl: './default-option.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,

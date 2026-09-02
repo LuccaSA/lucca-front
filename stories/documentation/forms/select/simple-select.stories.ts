@@ -527,12 +527,14 @@ export const UserCustom = generateStory({
 		👉👉👉 <span translate="no">{{ user | luUserDisplay }}</span> 👈👈👈
 	</ng-container>
 	<ng-container *luOption="let user; select: usersRef.select">
+		<div>
 		<span translate="no">{{ user | luUserDisplay }}</span> <span class="pr-u-textLight">(Random {{ user.myCustomProperty }})</span>
 
 		<!-- Handle homonyms -->
 		@if (user.additionalInformation) {
 			<div>({{ user.additionalInformation }})</div>
 		}
+			</div>
 	</ng-container>
 </lu-simple-select>`,
 	neededImports: {
@@ -618,7 +620,7 @@ export const EstablishmentCustom = generateStory({
 		👉👉👉 <span translate="no">{{ establishment.name }}</span> 👈👈👈
 	</ng-container>
 	<ng-container *luOption="let establishment; select: establishmentsRef.select">
-		<span translate="no">{{ establishment.name }}</span> <span class="pr-u-textLight">(Random {{ establishment.myCustomProperty }})</span>
+		<span><span translate="no">{{ establishment.name }}</span> <span class="pr-u-textLight">(Random {{ establishment.myCustomProperty }})</span></span>
 	</ng-container>
 </lu-simple-select>`,
 	neededImports: {
@@ -647,9 +649,9 @@ export const Tree = generateStory({
 	},
 	storyPartial: {
 		args: {
-			groupingFn: (legume: ILegume) => {
-				const parent = allLegumes.find((l) => l.color === legume.color);
-				if (parent === legume) {
+			groupingFn: (legume: ILegume, items: ILegume[]) => {
+				const parent = items.find((l) => l.color === legume.color);
+				if (!parent || parent === legume) {
 					return null;
 				}
 				return parent;

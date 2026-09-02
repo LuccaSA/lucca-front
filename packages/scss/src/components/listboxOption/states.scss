@@ -7,7 +7,7 @@
 }
 
 @mixin disabledHover {
-	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised) !important;
 }
 
 @mixin selectedDisabled {
@@ -78,9 +78,10 @@
 
 @mixin empty {
 	.listboxOption-content {
+		--components-listboxOption-content-color: var(--pr-t-color-text-subtle);
 		--components-listboxOption-content-checkboxField-display: none;
 		--components-listboxOption-content-cursor: default;
-		--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+		--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised) !important;
 	}
 }
 
@@ -91,7 +92,7 @@
 
 @mixin groupHover {
 	.listboxOption-content {
-		--components-listboxOption-content-opacity: 1;
+		--components-listboxOption-content-link-opacity: 1;
 	}
 }
 
@@ -106,6 +107,10 @@
 
 @mixin hover {
 	--components-listboxOption-content-backgroundColor: var(--palettes-neutral-50);
+
+	.listboxOption-content-checkboxField-input {
+		@include checkboxField.hover;
+	}
 }
 
 @mixin active {

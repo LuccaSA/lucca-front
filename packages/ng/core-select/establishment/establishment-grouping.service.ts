@@ -13,7 +13,7 @@ export class EstablishmentGroupingService {
 	protected readonly legalUnitsCount$ = this.http.get<{ count: number }>(this.legalUnitsUrl, { params: this.countParams }).pipe(map((res) => res.count));
 
 	public readonly useGrouping$ = combineLatest([this.legalUnitsCount$, this.establishmentsCount$]).pipe(
-		map(([luCount, establishmentCount]) => luCount > 1 && establishmentCount > 1 && luCount !== establishmentCount),
+		map(([luCount, establishmentCount]) => luCount > 1 && establishmentCount > 1),
 		shareReplay(),
 	);
 }

@@ -1,6 +1,6 @@
 import { UPDATE_STORY_ARGS } from 'storybook/internal/core-events';
 import { addons } from 'storybook/preview-api';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 
 export async function sleep(ms: number) {
 	await new Promise((resolve) => setTimeout(resolve, ms));
@@ -84,6 +84,37 @@ export function isFullyVisibleInPanel(option: HTMLElement): boolean {
 	const rect = option.getBoundingClientRect();
 	// While the opening animation runs (scale(0)), rects are degenerate: not visible yet
 	return rect.height > 0 && rect.top >= containerRect.top - 2 && rect.bottom <= containerRect.bottom + 2;
+}
+
+/**
+ * Options of the currently open select panel, once its content has settled.
+ *
+ * `role="option"` alone is not enough: while the panel loads, the listbox renders an `inert`
+ * skeleton row that keeps the option role, and `inert` is ignored by testing-library's
+ * accessibility filter (it only knows `display: none`, `visibility: hidden`, `hidden` and
+ * `aria-hidden`). A plain `findAllByRole('option')` would therefore resolve on that placeholder
+ * before the real options arrive. Waiting for the listbox to drop `aria-busy` and skipping the
+ * inert rows keeps the queries on actual options.
+ */
+export async function findPanelOptions(): Promise<HTMLElement[]> {
+	return waitFor(() => {
+		const listbox = screen.getByRole('listbox');
+		expect(listbox).toHaveAttribute('aria-busy', 'false');
+		const options = within(listbox)
+			.getAllByRole('option')
+			.filter((option) => !option.closest('[inert]'));
+		expect(options.length).toBeGreaterThan(0);
+		return options;
+	});
+}
+
+/**
+ * Whether the given panel option is the multi-select "select all" row. It is rendered as a
+ * checkbox row in the listbox header instead of a regular option, so it carries neither the
+ * option id of the panel element nor a selected state.
+ */
+export function isSelectAllOption(option: HTMLElement): boolean {
+	return option.id.includes('select-all') || option.classList.contains('multiSelectAllDisplayer');
 }
 
 export async function clearInputs(inputs: HTMLElement[]) {
