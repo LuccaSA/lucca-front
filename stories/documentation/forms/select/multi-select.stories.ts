@@ -789,9 +789,9 @@ export const Tree = generateStory({
 	},
 	storyPartial: {
 		args: {
-			groupingFn: (legume: ILegume) => {
-				const parent = allLegumes.find((l) => l.color === legume.color);
-				if (parent === legume) {
+			groupingFn: (legume: ILegume, items: ILegume[]) => {
+				const parent = items.find((l) => l.color === legume.color);
+				if (!parent || parent === legume) {
 					return null;
 				}
 				return parent;
