@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, NgZone, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, NgZone, Signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
 import { injectPointerNavigation } from './pointer-navigation';
@@ -10,6 +10,16 @@ import { injectPointerNavigation } from './pointer-navigation';
 })
 class HostComponent {
 	pointerNavigation: Signal<boolean> = injectPointerNavigation();
+}
+
+@Component({
+	selector: 'lu-scoped-pointer-navigation-test',
+	template: '<div class="child"></div>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class ScopedHostComponent {
+	readonly host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+	pointerNavigation: Signal<boolean> = injectPointerNavigation(this.host);
 }
 
 describe('injectPointerNavigation', () => {
@@ -30,7 +40,7 @@ describe('injectPointerNavigation', () => {
 	}
 
 	beforeEach(() => {
-		TestBed.configureTestingModule({ imports: [HostComponent] });
+		TestBed.configureTestingModule({ imports: [HostComponent, ScopedHostComponent] });
 	});
 
 	it('should assume keyboard navigation until proven otherwise', () => {
@@ -107,5 +117,67 @@ describe('injectPointerNavigation', () => {
 
 		// Assert
 		expect(host.pointerNavigation()).toBe(false);
+	});
+
+	describe('when scoped to an element', () => {
+		let scopedFixture: ComponentFixture<ScopedHostComponent>;
+		let scopedHost: ScopedHostComponent;
+
+		function createScopedHost(): void {
+			scopedFixture = TestBed.createComponent(ScopedHostComponent);
+			scopedHost = scopedFixture.componentInstance;
+			scopedFixture.detectChanges();
+		}
+
+		it('should switch to pointer navigation when the mouse moves inside the scope', () => {
+			// Arrange
+			createScopedHost();
+			// Act
+			scopedHost.host.querySelector('.child')?.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
+			// Assert
+			expect(scopedHost.pointerNavigation()).toBe(true);
+		});
+
+		it('should stay on keyboard navigation when the mouse moves outside of the scope', () => {
+			// Arrange
+			createScopedHost();
+			pressKey();
+			// Act
+			moveMouse();
+			// Assert
+			expect(scopedHost.pointerNavigation()).toBe(false);
+		});
+
+		it('should switch back to keyboard navigation when the mouse leaves the scope', () => {
+			// Arrange — the key manager keeps the last hovered item active, and only keyboard mode
+			// paints it, so leaving the panel must restore that highlight.
+			createScopedHost();
+			scopedHost.host.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
+			// Act
+			scopedHost.host.dispatchEvent(new MouseEvent('mouseleave'));
+			// Assert
+			expect(scopedHost.pointerNavigation()).toBe(false);
+		});
+
+		it('should switch back to pointer navigation when the mouse re-enters the scope', () => {
+			// Arrange
+			createScopedHost();
+			scopedHost.host.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
+			scopedHost.host.dispatchEvent(new MouseEvent('mouseleave'));
+			// Act
+			scopedHost.host.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
+			// Assert
+			expect(scopedHost.pointerNavigation()).toBe(true);
+		});
+
+		it('should still switch back to keyboard navigation on keydown outside of the scope', () => {
+			// Arrange
+			createScopedHost();
+			scopedHost.host.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
+			// Act
+			pressKey();
+			// Assert
+			expect(scopedHost.pointerNavigation()).toBe(false);
+		});
 	});
 });
