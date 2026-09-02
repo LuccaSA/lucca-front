@@ -24,6 +24,6 @@
 		establishments: 'establishments',
 	},
 	pl: {
-		establishments: 'placówki',
+		establishments: 'zakłady',
 	},
 };

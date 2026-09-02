@@ -1,15 +1,12 @@
 ﻿export const Translations = {
-	pl: {
-		includeArchivedLegalUnits: 'Include archived legal units',
-	},
 	'nl-BE': {
-		includeArchivedLegalUnits: 'Gearchiveerde wettelijke eenheden opnemen',
+		includeArchivedLegalUnits: 'Gearchiveerde wettelijke entiteiten opnemen',
 	},
 	fr: {
 		includeArchivedLegalUnits: 'Inclure les unités légales archivées',
 	},
 	de: {
-		includeArchivedLegalUnits: 'Archivierte gesetzliche Einheiten einbeziehen',
+		includeArchivedLegalUnits: 'Archivierte rechtliche Einheiten einbeziehen',
 	},
 	en: {
 		includeArchivedLegalUnits: 'Include archived legal units',
@@ -18,12 +15,15 @@
 		includeArchivedLegalUnits: 'Incluir las unidades legales archivadas',
 	},
 	it: {
-		includeArchivedLegalUnits: 'Includere le unità giuridiche archiviate',
+		includeArchivedLegalUnits: 'Includere le entità legali archiviate',
 	},
 	nl: {
-		includeArchivedLegalUnits: 'Gearchiveerde wettelijke eenheden opnemen',
+		includeArchivedLegalUnits: 'Gearchiveerde wettelijke entiteiten opnemen',
 	},
 	pt: {
 		includeArchivedLegalUnits: 'Incluir as unidades legais arquivadas',
+	},
+	pl: {
+		includeArchivedLegalUnits: 'Uwzględnij zarchiwizowane jednostki prawne',
 	},
 };

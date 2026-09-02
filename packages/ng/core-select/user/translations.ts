@@ -33,6 +33,6 @@
 	},
 	pl: {
 		me: 'Ja:',
-		includeFormerEmployees: 'Uwzględnienie pracowników, którzy odeszli',
+		includeFormerEmployees: 'Uwzględnij byłych pracowników',
 	},
 };

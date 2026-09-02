@@ -8,7 +8,7 @@
 		tooltipAlt: 'Zusätzliche Informationen',
 	},
 	fr: {
-		counterAlt: '{{counterStatus}} sur {{counterMax}} caractères autorisés. ',
+		counterAlt: '{{counterStatus}} sur {{counterMax}} caractères autorisés.',
 		tooltipAlt: 'Info supplémentaire',
 	},
 	it: {

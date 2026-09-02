@@ -24,6 +24,6 @@
 		counter: 'Your message is {{current}} characters long. A maximum of {{max}} characters is allowed.',
 	},
 	pl: {
-		counter: 'Publikacja ma długość {{current}} znaków. Dozwolona jest maksymalna długość {{max}} znaków.',
+		counter: 'Liczba znaków publikacji wynosi {{current}}. Dozwolona maksymalna liczba znaków wynosi {{max}}.',
 	},
 };
