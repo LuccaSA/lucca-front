@@ -23,7 +23,9 @@ export class Treeitem {}
 		'[attr.aria-checked]': ' add() ? null : mixed() ? "mixed" : checked()',
 		'[attr.aria-disabled]': 'disabled()',
 		'[attr.aria-hidden]': 'empty()',
-		'[attr.id]': 'elementId()',
+		// The empty status option is the target of the listbox `aria-describedby`, so it must
+		// carry the listbox id even though no consumer sets an elementId on it.
+		'[attr.id]': 'empty() ? id() : elementId()',
 		'[class.is-selected]': 'checked()',
 		'[class.is-disabled]': 'disabled()',
 		'[class.mod-add]': 'add()',

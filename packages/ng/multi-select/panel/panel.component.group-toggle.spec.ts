@@ -10,7 +10,7 @@ import { LuMultiSelectPanelComponent } from './panel.component';
 
 type Legume = { id: number; name: string };
 
-// A single group ("red") keeps exactly one group-action button in the DOM, so the tests
+// A single group ("red") keeps exactly one group-action element in the DOM, so the tests
 // never have to disambiguate between groups. `getGroupOptions` deliberately returns MORE
 // options than `getOptions` renders (it adds `pepper`) to prove the post-load toggle acts on
 // the authoritative group set fetched on click, not just the options currently visible.
@@ -64,12 +64,12 @@ describe('LuMultiSelectPanelComponent (group toggle via getGroupOptions)', () =>
 		fixture.detectChanges();
 	}
 
-	function groupActionButton(): HTMLButtonElement {
-		return overlayContainerElement.querySelector<HTMLButtonElement>('button[group-action]')!;
+	function groupAction(): HTMLElement {
+		return overlayContainerElement.querySelector<HTMLElement>('[group-action]')!;
 	}
 
 	function clickGroupAction(): void {
-		groupActionButton().click();
+		groupAction().click();
 		fixture.detectChanges();
 		tick(host.groupLoadDelayMs);
 		fixture.detectChanges();
@@ -85,10 +85,10 @@ describe('LuMultiSelectPanelComponent (group toggle via getGroupOptions)', () =>
 		overlayContainerElement = TestBed.inject(OverlayContainer).getContainerElement();
 	});
 
-	it('renders a single group-action button once the group options are visible', fakeAsync(() => {
+	it('renders a single group-action element once the group options are visible', fakeAsync(() => {
 		openPanel();
 
-		expect(overlayContainerElement.querySelectorAll('button[group-action]').length).toBe(1);
+		expect(overlayContainerElement.querySelectorAll('[group-action]').length).toBe(1);
 	}));
 
 	it('selects the full group returned by getGroupOptions, including options not yet rendered', fakeAsync(() => {
@@ -129,7 +129,7 @@ describe('LuMultiSelectPanelComponent (group toggle via getGroupOptions)', () =>
 		const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Legume>;
 		const panel = (select.panelRef as unknown as { instance: LuMultiSelectPanelComponent<Legume> }).instance;
 
-		groupActionButton().click();
+		groupAction().click();
 
 		// While the fetch is in flight the group key is registered and nothing is selected yet.
 		expect(panel.groupLoadingKeys().has('red')).toBe(true);
@@ -184,7 +184,7 @@ describe('LuMultiSelectPanelComponent (group toggle skips disabled options)', ()
 	}
 
 	function clickGroupAction(): void {
-		overlayContainerElement.querySelector<HTMLButtonElement>('button[group-action]')!.click();
+		overlayContainerElement.querySelector<HTMLElement>('[group-action]')!.click();
 		fixture.detectChanges();
 		tick();
 		fixture.detectChanges();

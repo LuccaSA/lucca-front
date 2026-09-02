@@ -55,20 +55,22 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 		openPanel();
 
 		const optionHost = overlayContainerElement.querySelector('lu-select-option')!;
-		expect(optionHost.getAttribute('role')).toBe('option');
+		// lu-select-option is only the behavioural host; the option role lives on lu-listbox-option
+		expect(optionHost.getAttribute('role')).toBe('presentation');
+		expect(optionHost.querySelector('lu-listbox-option')!.getAttribute('role')).toBe('option');
 		expect(optionHost.querySelectorAll('.checkboxField').length).toBe(1);
 		expect(optionHost.querySelector('.optionItem-value')).toBeNull();
 	}));
 
-	it('should reflect selection on host aria-selected and inner is-selected class', fakeAsync(() => {
+	it('should reflect selection on aria-checked and is-selected class of the listbox option', fakeAsync(() => {
 		component.writeValue([options[1]]);
 		openPanel();
 
-		const hosts = Array.from(overlayContainerElement.querySelectorAll('lu-select-option'));
-		const selected = hosts.filter((host) => host.getAttribute('aria-selected') === 'true');
+		const listboxOptions = Array.from(overlayContainerElement.querySelectorAll('lu-select-option lu-listbox-option'));
+		const selected = listboxOptions.filter((option) => option.getAttribute('aria-checked') === 'true');
 		expect(selected.length).toBe(1);
 		expect(selected[0].textContent).toContain('Poireau');
-		expect(selected[0].querySelector('lu-listbox-option')!.classList).toContain('is-selected');
+		expect(selected[0].classList).toContain('is-selected');
 	}));
 
 	it('should toggle the clicked option in the emitted value', fakeAsync(() => {

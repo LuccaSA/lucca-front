@@ -48,29 +48,30 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 		expect(overlayContainerElement.textContent).toContain('Carotte');
 	}));
 
-	it('should keep option semantics on the panel element host and none on the inner listbox option', fakeAsync(() => {
+	it('should keep the panel element host presentational and option semantics on the inner listbox option', fakeAsync(() => {
 		openPanel();
 
+		// lu-select-option is only the behavioural host (key manager, click); all the ARIA lives on lu-listbox-option
 		const optionHost = overlayContainerElement.querySelector('lu-select-option')!;
-		expect(optionHost.getAttribute('role')).toBe('option');
-		expect(optionHost.getAttribute('id')).toBeTruthy();
-		expect(optionHost.hasAttribute('aria-selected')).toBe(true);
+		expect(optionHost.getAttribute('role')).toBe('presentation');
+		expect(optionHost.hasAttribute('id')).toBe(false);
 
 		const listboxOption = optionHost.querySelector('lu-listbox-option')!;
 		expect(listboxOption).toBeTruthy();
-		expect(listboxOption.hasAttribute('role')).toBe(false);
-		expect(listboxOption.hasAttribute('aria-checked')).toBe(false);
-		expect(listboxOption.hasAttribute('aria-selected')).toBe(false);
+		expect(listboxOption.getAttribute('role')).toBe('option');
+		expect(listboxOption.getAttribute('id')).toBeTruthy();
+		expect(listboxOption.hasAttribute('aria-checked')).toBe(true);
 	}));
 
-	it('should reflect selection with aria-selected on host and is-selected class on listbox option', fakeAsync(() => {
+	it('should reflect selection with aria-checked and is-selected class on the listbox option', fakeAsync(() => {
 		component.writeValue(options[1]);
 		openPanel();
 
-		const hosts = Array.from(overlayContainerElement.querySelectorAll('lu-select-option'));
-		const selectedHost = hosts.find((host) => host.getAttribute('aria-selected') === 'true')!;
-		expect(selectedHost.textContent).toContain('Poireau');
-		expect(selectedHost.querySelector('lu-listbox-option')!.classList).toContain('is-selected');
+		const listboxOptions = Array.from(overlayContainerElement.querySelectorAll('lu-select-option lu-listbox-option'));
+		const selected = listboxOptions.filter((option) => option.getAttribute('aria-checked') === 'true');
+		expect(selected.length).toBe(1);
+		expect(selected[0].textContent).toContain('Poireau');
+		expect(selected[0].classList).toContain('is-selected');
 	}));
 
 	it('should bridge keyboard highlight to the is-hovered visual state', fakeAsync(() => {
@@ -104,7 +105,7 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 		const labelId = firstGroup.getAttribute('aria-labelledby')!;
 		expect(labelId).toContain('-group-Racines');
 		expect(firstGroup.querySelector(`[id="${labelId}"]`)).toBeTruthy();
-		expect(firstGroup.querySelectorAll('lu-select-option[role="option"]').length).toBe(2);
+		expect(firstGroup.querySelectorAll('lu-listbox-option[role="option"]').length).toBe(2);
 		expect(firstGroup.querySelector('[optgroup]')!.classList).toContain('listboxOptionWrapper');
 	}));
 
@@ -138,9 +139,9 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 		const hosts = overlayContainerElement.querySelectorAll('lu-select-option');
 		expect(hosts.length).toBe(3);
 		hosts.forEach((host) => {
-			// Inside a tree listbox each option host carries the treeitem role
-			expect(host.getAttribute('role')).toBe('treeitem');
-			expect(host.querySelector('lu-listbox-option')).toBeTruthy();
+			// Inside a tree listbox each listbox option carries the treeitem role, the host stays presentational
+			expect(host.getAttribute('role')).toBe('presentation');
+			expect(host.querySelector('lu-listbox-option')!.getAttribute('role')).toBe('treeitem');
 			expect(host.querySelector('.optionItem-value')).toBeNull();
 		});
 
