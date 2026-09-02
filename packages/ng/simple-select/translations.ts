@@ -64,11 +64,11 @@
 		emptyOptions: 'There are no values available. Contact your administrator for more information.',
 	},
 	pl: {
-		placeholder: 'Wybierz..',
+		placeholder: 'Wybierz…',
 		clear: 'Usuń',
-		clearSearch: 'Puste wyszukiwanie',
+		clearSearch: 'Wyczyść wyszukiwanie',
 		emptyResults: 'Wyszukiwanie nie przyniosło żadnych rezultatów.',
-		loading: 'Trwa ładowanie...',
+		loading: 'Trwa ładowanie…',
 		emptyOptions: 'Brak dostępnych wartości. Aby uzyskać więcej informacji, skontaktuj się z administratorem.',
 	},
 };

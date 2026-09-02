@@ -24,6 +24,6 @@
 		move: 'Mover',
 	},
 	pl: {
-		move: 'Przenieść',
+		move: 'Przenieś',
 	},
 };
