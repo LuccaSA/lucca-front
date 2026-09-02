@@ -7,7 +7,7 @@
 }
 
 @mixin disabledHover {
-	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised) !important;
 }
 
 @mixin selectedDisabled {
@@ -107,6 +107,10 @@
 
 @mixin hover {
 	--components-listboxOption-content-backgroundColor: var(--palettes-neutral-50);
+
+	.listboxOption-content-checkboxField-input {
+		@include checkboxField.hover;
+	}
 }
 
 @mixin active {
