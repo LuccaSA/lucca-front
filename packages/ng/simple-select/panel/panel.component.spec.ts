@@ -60,15 +60,15 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 		expect(listboxOption).toBeTruthy();
 		expect(listboxOption.getAttribute('role')).toBe('option');
 		expect(listboxOption.getAttribute('id')).toBeTruthy();
-		expect(listboxOption.hasAttribute('aria-checked')).toBe(true);
+		expect(listboxOption.hasAttribute('aria-selected')).toBe(true);
 	}));
 
-	it('should reflect selection with aria-checked and is-selected class on the listbox option', fakeAsync(() => {
+	it('should reflect selection with aria-selected and is-selected class on the listbox option', fakeAsync(() => {
 		component.writeValue(options[1]);
 		openPanel();
 
-		const listboxOptions = Array.from(overlayContainerElement.querySelectorAll('lu-select-option lu-listbox-option'));
-		const selected = listboxOptions.filter((option) => option.getAttribute('aria-checked') === 'true');
+		const listboxOptions = Array.from(overlayContainerElement.querySelectorAll('lu-listbox-option'));
+		const selected = listboxOptions.filter((option) => option.getAttribute('aria-selected') === 'true');
 		expect(selected.length).toBe(1);
 		expect(selected[0].textContent).toContain('Poireau');
 		expect(selected[0].classList).toContain('is-selected');
@@ -121,7 +121,7 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 		expect(addOption.closest('lu-listbox')).toBeNull();
 		expect(addOption.getAttribute('role')).toBe('option');
 		expect(addOption.getAttribute('id')).toBe('picker-content-add');
-		expect(addOption.hasAttribute('aria-checked')).toBe(false);
+		expect(addOption.hasAttribute('aria-selected')).toBe(false);
 
 		addOption.click();
 		expect(onAddOption).toHaveBeenCalled();

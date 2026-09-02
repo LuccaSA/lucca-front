@@ -62,12 +62,12 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 		expect(optionHost.querySelector('.optionItem-value')).toBeNull();
 	}));
 
-	it('should reflect selection on aria-checked and is-selected class of the listbox option', fakeAsync(() => {
+	it('should reflect selection on aria-selected and is-selected class of the listbox option', fakeAsync(() => {
 		component.writeValue([options[1]]);
 		openPanel();
 
-		const listboxOptions = Array.from(overlayContainerElement.querySelectorAll('lu-select-option lu-listbox-option'));
-		const selected = listboxOptions.filter((option) => option.getAttribute('aria-checked') === 'true');
+		const listboxOptions = Array.from(overlayContainerElement.querySelectorAll('lu-listbox-option'));
+		const selected = listboxOptions.filter((option) => option.getAttribute('aria-selected') === 'true');
 		expect(selected.length).toBe(1);
 		expect(selected[0].textContent).toContain('Poireau');
 		expect(selected[0].classList).toContain('is-selected');
