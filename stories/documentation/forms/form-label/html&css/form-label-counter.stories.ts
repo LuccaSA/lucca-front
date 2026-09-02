@@ -13,7 +13,7 @@ function getTemplate(args: FormLabelCounterStory): string {
 	<span class="formLabel-counter" id="IDcounter" aria-live="polite">
 		<span aria-hidden="true">7/77</span>
 		<span class="pr-u-mask">
-			Votre publication fait 7 caractères de long. 77 maximum sont autorisés.
+			7 sur 77 caractères autorisés.
 		</span>
 	</span>
 </label>`;

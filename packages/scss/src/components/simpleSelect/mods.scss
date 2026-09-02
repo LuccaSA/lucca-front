@@ -45,7 +45,7 @@
 
 @mixin filterPill {
 	inline-size: 26.5rem;
-	max-inline-size: calc(100vw - 2.5rem);
+	max-inline-size: calc(100vi - 2.5rem);
 
 	.simpleSelect-field {
 		position: relative;

@@ -23,26 +23,43 @@ Once the files are sent, the display management changes depending on the approac
 <lu-form-field label="Label">
   <lu-multi-file-upload [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 </lu-form-field>
-<div class="fileEntryDisplayWrapper">
+<lu-file-entry-wrapper>
   @for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
   <lu-file-entry [entry]="fileUpload | luFileEntry" [state]="fileUpload.state"
                  [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
   }
-</div>
+</lu-file-entry-wrapper>
 ```
 
 ### Single File Upload
+
+Just like the multi variant, you render the `lu-file-entry` yourself, as a sibling of
+`lu-single-file-upload` rather than projected inside it. The single variant only ever holds one
+file, so once it's uploaded you hide the dropzone and show the entry in its place — you own that
+toggle, the component does not do it for you.
 
 ```html
 
 <lu-form-field label="Label">
   @let fileUpload = fileUploadFeature.fileUploads()[0];
-  <lu-single-file-upload [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-                         [entry]="fileUpload | luFileEntry" [state]="fileUpload?.state"
-                         [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail"
-                         (deleteFile)="deleteFile(fileUpload)" />
+  @if (fileUpload) {
+    <lu-file-entry-wrapper>
+      <lu-file-entry [entry]="fileUpload | luFileEntry" [state]="fileUpload.state"
+                     [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail"
+                     (deleteFile)="deleteFile(fileUpload)" />
+    </lu-file-entry-wrapper>
+  } @else {
+    <lu-single-file-upload [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+  }
 </lu-form-field>
 ```
+
+### Layout of the entries
+
+`lu-file-entry-wrapper` (from `@lucca-front/ng/file-upload`) is the container laying out the
+`lu-file-entry`. It replaces the former `fileEntryDisplayWrapper` CSS class, collapses itself when it holds no entry,
+and handles the spacing with a preceding `lu-form-field` containing a file upload. Use it in both the single and the
+multi variants.
 
 ### Details
 

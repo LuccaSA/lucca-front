@@ -1,29 +1,31 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
-import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
+import { ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
+import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
+import { Treeitem } from '@lucca-front/ng/listbox';
 
 @Component({
 	selector: 'lu-tree-branch',
-	imports: [ɵCoreSelectPanelElement, LuIsOptionSelectedPipe, ɵLuOptionComponent],
+	imports: [ɵCoreSelectPanelElement, LuIsOptionSelectedPipe, ɵLuOptionComponent, Treeitem],
 	templateUrl: './tree-branch.component.html',
 	styleUrl: './tree-branch.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeBranchComponent<T> {
-	selectInputComponent = inject(ALuSelectInputComponent);
+	readonly selectInputComponent = inject(ALuSelectInputComponent);
 
-	rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
+	readonly rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
 
-	branch = input.required<TreeNode<T>>();
+	readonly branch = input.required<TreeNode<T>>();
 
-	optionTpl = input.required<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
+	readonly optionTpl = input.required<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
-	optionIndex = input.required({ transform: (value: string | number) => `${value}` });
+	readonly optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
-	optionComparer = input.required<LuOptionComparer<T>>();
+	readonly optionComparer = input.required<LuOptionComparer<T>>();
 
-	selectedOptions = input<T[]>([]);
+	readonly selectedOptions = input<T[]>([]);
 
 	toggleOne = output<T>();
 
@@ -31,27 +33,28 @@ export class TreeBranchComponent<T> {
 
 	unselectMany = output<T[]>();
 
-	simpleMode = input(false, { transform: booleanAttribute });
-
-	depth = input(1);
+	readonly simpleMode = input(false, { transform: luBooleanAttribute });
 
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {
-			this.selectInputComponent.selectChildren$.pipe(takeUntilDestroyed()).subscribe(() => {
-				if (this.rootOptionRef().isHighlighted()) {
+			this.selectInputComponent.selectChildren$?.pipe(takeUntilDestroyed()).subscribe(() => {
+				if (this.rootOptionRef()?.isHighlighted()) {
 					this.selectOnlyChildren(this.branch());
 				}
 			});
-			this.selectInputComponent.selectParent$.pipe(takeUntilDestroyed()).subscribe(() => {
-				if (this.rootOptionRef().isHighlighted()) {
+			this.selectInputComponent.selectParent$?.pipe(takeUntilDestroyed()).subscribe(() => {
+				if (this.rootOptionRef()?.isHighlighted()) {
 					this.toggleOne.emit(this.branch().node);
 				}
 			});
 		}
 	}
 
-	toggle(branchData: TreeNode<T>): void {
-		if (this.simpleMode() || branchData.children.length === 0) {
+	toggle(branchData: TreeNode<T>, event?: Event): void {
+		// Options are nested inside their parent's host, so a click bubbles up to every ancestor
+		// branch. Stop it here so clicking a child never toggles its parent.
+		event?.stopPropagation();
+		if (this.simpleMode() || !branchData.children?.length) {
 			this.toggleOne.emit(branchData.node);
 		} else {
 			const flatOptions = this.flattenTree(branchData);
@@ -76,7 +79,7 @@ export class TreeBranchComponent<T> {
 
 	flattenTree(branch: TreeNode<T>, excludeRoot = false): T[] {
 		const result: T[] = excludeRoot ? [] : [branch.node];
-		if (branch.children.length > 0) {
+		if (branch.children?.length) {
 			result.push(...branch.children.map((child) => this.flattenTree(child)).flat());
 		}
 		return result;

@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, input, viewChild, ViewEncapsulation } from '@angular/core';
-import { ResponsiveConfig } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, input, viewChild, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, ResponsiveConfig } from '@lucca-front/ng/core';
 
 import { IndexTableHeadComponent } from './index-table-head/index-table-head.component';
 import { IndexTableRowComponent } from './index-table-row/index-table-row.component';
@@ -23,20 +23,20 @@ import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableComponent {
-	tableRef = viewChild<ElementRef<Element>>('tableRef');
+	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
 
-	selectable = input(false, { transform: booleanAttribute });
-	layoutFixed = input(false, { transform: booleanAttribute });
-	empty = input(false, { transform: booleanAttribute });
+	readonly selectable = input(false, { transform: luBooleanAttribute });
+	readonly layoutFixed = input(false, { transform: luBooleanAttribute });
+	readonly empty = input(false, { transform: luBooleanAttribute });
 
-	responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
+	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
-	rows = contentChildren(IndexTableRowComponent, { descendants: true });
-	header = contentChild(IndexTableHeadComponent, { descendants: true });
+	readonly rows = contentChildren(IndexTableRowComponent, { descendants: true });
+	readonly header = contentChild(IndexTableHeadComponent, { descendants: true });
 
-	cols = computed(() => this.header()?.cols());
+	readonly cols = computed(() => this.header()?.cols());
 
-	classMods = computed(() => {
+	readonly classMods = computed(() => {
 		return {
 			indexTable: true,
 			['mod-selectable']: this.selectable(),

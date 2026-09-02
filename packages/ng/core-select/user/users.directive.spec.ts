@@ -1,10 +1,11 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component, Directive, forwardRef, viewChild } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { skip } from 'rxjs';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { MAGIC_DEBOUNCE_DURATION } from '../api/api.directive';
-import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { provideCoreSelectCurrentUserId } from './me.provider';
 import { LuCoreSelectUser } from './user-option.model';
 import { LuCoreSelectUsersDirective } from './users.directive';
@@ -32,8 +33,8 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 })
 class LuUsersDirectiveHostComponent {
 	filters: Record<string, string | number | boolean> = {};
-	simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
-	usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
+	readonly simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
+	readonly usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
 }
 
 const CURRENT_USER_ID = 12;
@@ -60,7 +61,7 @@ describe('LuCoreSelectUsersDirective', () => {
 	it('should not make any call on init', fakeAsync(() => {
 		// Act
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert
 		httpTestingController.verify();
@@ -70,11 +71,40 @@ describe('LuCoreSelectUsersDirective', () => {
 		// Act
 		simpleSelect.openPanel();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert (Me + Initial list)
 		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
 		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,20`);
+		httpTestingController.verify();
+	}));
+
+	it('should still load first page when the me request fails', fakeAsync(() => {
+		// Arrange
+		usersDirective.setPageSize(3);
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+
+		const page1 = [createUser(1), createUser(2), createUser(3)];
+
+		tick();
+
+		// Act
+		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		meReq.flush(null, { status: 500, statusText: 'Server Error' });
+		fixture.detectChanges();
+		tick();
+
+		const page1Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,3`);
+		page1Req.flush(usersResponse(page1));
+		fixture.detectChanges();
+		tick();
+
+		// Assert
+		let options: readonly LuCoreSelectUser[] = [];
+		options = simpleSelect.dataSourceOptions();
+
+		expect(options).toEqual(page1);
 		httpTestingController.verify();
 	}));
 
@@ -125,37 +155,34 @@ describe('LuCoreSelectUsersDirective', () => {
 		const page1 = [createUser(1), createUser(2), createUser(3)];
 		const page2 = [createUser(4), meUser, createUser(6)];
 
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Act (Page 1)
 		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
 		meReq.flush(usersResponse([meUser]));
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		const page1Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,3`);
 		page1Req.flush(usersResponse(page1));
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert (Page 1)
-		let options: readonly LuCoreSelectUser[];
-		simpleSelect.options$.subscribe((o) => (options = o));
-
-		expect(options).toEqual([meUser, ...page1]);
+		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, ...page1]);
 
 		// Act (Page 2)
 		simpleSelect.nextPage$.next();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		const page2Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=3,3`);
 		page2Req.flush(usersResponse(page2));
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert (Page 2)
-		expect(options).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
+		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
 		httpTestingController.verify();
 	}));
 
@@ -163,7 +190,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		// Arrange
 		simpleSelect.openPanel();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		const meUser = createUser(CURRENT_USER_ID);
 		const users = [createUser(1), createUser(2)];
@@ -174,21 +201,20 @@ describe('LuCoreSelectUsersDirective', () => {
 		// Act (the users search answers first, the "me" lookup is still pending)
 		usersReq.flush(usersResponse(users));
 		fixture.detectChanges();
+		tick();
 
 		// Assert: still loading — turning the loader off before the options arrive
 		// would show the "no result" empty state of the panel in the meantime
-		expect(simpleSelect.loading$.value).toBe(true);
+		expect(simpleSelect.loading()).toBe(true);
 
 		// Act (the "me" lookup answers)
 		meReq.flush(usersResponse([meUser]));
 		fixture.detectChanges();
+		tick();
 
 		// Assert
-		let options: readonly LuCoreSelectUser[];
-		simpleSelect.options$.subscribe((o) => (options = o));
-
-		expect(options).toEqual([meUser, ...users]);
-		expect(simpleSelect.loading$.value).toBe(false);
+		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, ...users]);
+		expect(simpleSelect.loading()).toBe(false);
 		httpTestingController.verify();
 	}));
 
@@ -196,7 +222,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		// Arrange
 		simpleSelect.openPanel();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		const users = [createUser(1), createUser(2)];
 
@@ -207,13 +233,11 @@ describe('LuCoreSelectUsersDirective', () => {
 		usersReq.flush(usersResponse(users));
 		meReq.flush('boom', { status: 500, statusText: 'Internal Server Error' });
 		fixture.detectChanges();
+		tick();
 
 		// Assert
-		let options: readonly LuCoreSelectUser[];
-		simpleSelect.options$.subscribe((o) => (options = o));
-
-		expect(options).toEqual(users);
-		expect(simpleSelect.loading$.value).toBe(false);
+		expect(simpleSelect.dataSourceOptions()).toEqual(users);
+		expect(simpleSelect.loading()).toBe(false);
 		httpTestingController.verify();
 	}));
 
@@ -225,7 +249,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		// Act
 		simpleSelect.openPanel();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert
 		// The "me" lookup is a lookup by id and must NOT carry the search filters (`foo=bar`)
@@ -241,7 +265,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		simpleSelect.openPanel();
 		fixture.detectChanges();
 
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		const meUser = createUser(CURRENT_USER_ID);
 		const user1 = createUser(1);
@@ -260,7 +284,11 @@ describe('LuCoreSelectUsersDirective', () => {
 
 		// Act
 		const options: Array<readonly LuCoreSelectUser[]> = [];
-		simpleSelect.options$.subscribe((o) => options.push(o));
+		TestBed.runInInjectionContext(() =>
+			toObservable(simpleSelect.dataSourceOptions)
+				.pipe(skip(1))
+				.subscribe((o) => options.push(o)),
+		);
 
 		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
 		meReq.flush(usersResponse([meUser]));
@@ -286,7 +314,7 @@ describe('LuCoreSelectUsersDirective', () => {
 });
 
 function createUser(id: number, lastName = 'test ' + id, firstName = 'test ' + id): LuCoreSelectUser {
-	return { id, firstName, lastName, picture: null };
+	return { id, firstName, lastName };
 }
 
 function usersResponse(users: LuCoreSelectUser[]) {

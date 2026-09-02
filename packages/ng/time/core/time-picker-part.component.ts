@@ -1,6 +1,6 @@
 import { formatNumber } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, ViewChild, booleanAttribute, computed, input, model, numberAttribute, output } from '@angular/core';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, LOCALE_ID, ModelSignal, computed, input, model, output, viewChild } from '@angular/core';
+import { luBooleanAttribute, luNumberAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { PickerControlDirection } from './misc.utils';
@@ -19,44 +19,32 @@ export class TimePickerPartComponent {
 
 	readonly decimalConf = input('2.0-0');
 
-	value: ModelSignal<number | '––'> = model('––');
+	readonly value: ModelSignal<number | '––'> = model('––');
 
-	readonly display = input<number | '––'>();
-
-	readonly max = input(0, {
-		transform: numberAttribute,
+	readonly display = input(undefined, {
+		transform: (value: number | `${number}` | '––') => (value === '––' ? value : luNumberAttribute(value)),
 	});
 
-	readonly autoWidth = input(false, {
-		transform: booleanAttribute,
-	});
+	readonly max = input(0, { transform: luNumberAttribute });
 
-	readonly displayArrows = input(false, {
-		transform: booleanAttribute,
-	});
+	readonly autoWidth = input(false, { transform: luBooleanAttribute });
 
-	readonly isReadonly = input(false, {
-		transform: booleanAttribute,
-	});
+	readonly displayArrows = input(false, { transform: luBooleanAttribute });
 
-	readonly hideValue = input(false, {
-		transform: booleanAttribute,
-	});
+	readonly isReadonly = input(false, { transform: luBooleanAttribute });
 
-	readonly disabled = input(false, {
-		transform: booleanAttribute,
-	});
+	readonly hideValue = input(false, { transform: luBooleanAttribute });
 
-	readonly focused = input(false, {
-		transform: booleanAttribute,
-	});
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
-	readonly maxDigits = input<number>(2);
+	readonly focused = input(false, { transform: luBooleanAttribute });
 
-	readonly showZero = input(false, { transform: booleanAttribute });
+	readonly maxDigits = input(2, { transform: luNumberAttribute });
 
-	digitNumber = model(2);
-	isValueSet = model<boolean>(false);
+	readonly showZero = input(false, { transform: luBooleanAttribute });
+
+	readonly digitNumber = model(2);
+	readonly isValueSet = model<boolean>(false);
 
 	prevRequest = output<void>();
 	nextRequest = output<void>();
@@ -64,9 +52,9 @@ export class TimePickerPartComponent {
 	inputControlClick = output<PickerControlDirection>();
 	touched = output<void>();
 
-	@ViewChild('timePickerInput') timePickerInput?: ElementRef<HTMLInputElement>;
+	readonly timePickerInput = viewChild<ElementRef<HTMLInputElement>>('timePickerInput');
 
-	valueLabel = computed(() => {
+	readonly valueLabel = computed(() => {
 		if (this.hideValue()) {
 			return '  ';
 		}
@@ -198,8 +186,8 @@ export class TimePickerPartComponent {
 	}
 
 	focus(): void {
-		if (this.timePickerInput) {
-			this.timePickerInput.nativeElement.focus();
+		if (this.timePickerInput()) {
+			this.timePickerInput()?.nativeElement.focus();
 		}
 	}
 }

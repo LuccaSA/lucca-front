@@ -1,25 +1,23 @@
-import { A11yModule } from '@angular/cdk/a11y';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
-	LuOptionGroup,
+	LuSelectPanelLayoutComponent,
 	LuSelectPanelRef,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
 	TreeDisplayPipe,
-	TreeNode,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
 	ɵinjectPointerNavigation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { ListboxComponent, ListboxState, OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -33,11 +31,12 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
+		class: 'selectPanel',
 		'[class.colorPanel]': 'colorPanel()',
+		'[class.is-pointerNavigation]': 'pointerNavigation()',
 	},
 	imports: [
-		A11yModule,
-		AsyncPipe,
+		LuSelectPanelLayoutComponent,
 		FormsModule,
 		NgTemplateOutlet,
 		ɵLuOptionGroupPipe,
@@ -45,7 +44,8 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 		LuIsOptionSelectedPipe,
 		PortalDirective,
 		ɵCoreSelectPanelElement,
-		IconComponent,
+		ListboxComponent,
+		ListboxOptionComponent,
 		TreeBranchComponent,
 		TreeDisplayPipe,
 	],
@@ -63,42 +63,50 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	public selectId = inject(SELECT_ID);
 	public intl = this.selectInput.intl;
 
-	options$ = this.selectInput.options$;
-	grouping = this.selectInput.groupingSignal;
+	readonly dataSourceOptions = this.selectInput.dataSourceOptions;
+	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
-	loading = toSignal(this.selectInput.loading$);
-	loading$ = this.selectInput.loading$;
+	readonly loading = this.selectInput.loading;
 	searchable = this.selectInput.searchable;
-	optionComparer = this.selectInput.optionComparer;
-	optionKey = this.selectInput.optionKey;
+	readonly optionComparer = this.selectInput.optionComparer;
+	readonly optionKey = this.selectInput.optionKey;
 	colorPanel = this.selectInput.colorPicker;
 
-	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
-	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
-	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
+	initialValue: T | null = this.selectInput.value;
+	readonly optionTpl = this.selectInput.optionTpl;
 
-	initialValue: T | undefined = this.selectInput.value;
-	optionTpl = this.selectInput.optionTpl;
+	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	readonly pointerNavigation = ɵinjectPointerNavigation(inject<ElementRef<HTMLElement>>(ElementRef).nativeElement);
 
-	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
-	pointerNavigation = ɵinjectPointerNavigation();
+	public readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
-	public keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+	public readonly selected = computed(() => this.selectInput.valueSignal());
 
-	public selected = computed(() => this.selectInput.valueSignal());
+	// Kept free of `null` so it doesn't widen `TreeBranchComponent`'s generic, which would in turn
+	// make its `toggleOne` output nullable and force a guard on `emitValue`.
+	protected readonly selectedOptions = computed(() => {
+		const selected = this.selected();
+		return selected === null ? [] : [selected];
+	});
 
-	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
-	public clueChange$ = this.selectInput.clue$;
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
-	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
+	readonly hasGrouping = computed(() => !!this.grouping());
+	public readonly clue = toSignal(this.selectInput.clue$.pipe(map((clue) => clue ?? '')), { initialValue: '' });
+	public shouldDisplayAddOption = this.selectInput.shouldDisplayAddOption;
+	public groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.dataSourceOptions, this.searchable);
+
+	// Loading takes precedence over empty so the "no result" message never flashes during a fetch
+	readonly listboxState = computed<ListboxState | null>(() => (this.loading() ? 'loading' : this.dataSourceOptions().length === 0 ? 'empty' : null));
+
+	readonly listboxStatusMsg = computed(() => {
+		if (this.loading()) {
+			return this.intl().loading;
+		}
+		return this.clue().length ? this.intl().emptyResults : this.intl().emptyOptions;
+	});
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
 			return;
-		}
-
-		if (evt.target.scrollTop === 0) {
-			this.panelRef.previousPage.emit();
 		}
 
 		if (evt.target.scrollHeight - evt.target.scrollTop - evt.target.clientHeight < 1) {
@@ -109,13 +117,13 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	ngAfterViewInit(): void {
 		this.keyManager.init({
 			queryList: this.options,
-			options$: this.options$,
-			optionComparer: this.optionComparer,
+			options: this.dataSourceOptions,
+			optionComparer: this.optionComparer(),
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
 			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});
 
-		if (this.initialValue && !this.selectInput.clue) {
+		if (this.initialValue !== null && !this.selectInput.clue) {
 			this.keyManager.highlightOption(this.initialValue);
 		}
 	}

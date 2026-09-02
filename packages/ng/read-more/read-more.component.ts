@@ -1,5 +1,5 @@
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { intlInputOptions, isNil } from '@lucca-front/ng/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { intlInputOptions, isNil, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 import { ReadMoreSurface } from './read-more.type';
 
@@ -22,28 +22,28 @@ import { ReadMoreSurface } from './read-more.type';
 	},
 })
 export class ReadMoreComponent {
-	intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
 
 	/**
 	 * Change the number of lines displayed when collapsed
 	 */
-	readonly lineClamp = input<number>(5);
+	readonly lineClamp = input(5, { transform: luNumberAttribute });
 
 	/**
 	 * Prevent the component from closing by hiding the "Read less" button
 	 */
-	readonly openOnly = input(false, { transform: booleanAttribute });
+	readonly openOnly = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Display the `\n` of the content as line breaks instead of collapsing them into spaces (`white-space: pre-line`).
 	 * Meant for plain-text content such as a textarea value.
 	 */
-	readonly plainText = input(false, { transform: booleanAttribute });
+	readonly plainText = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Change the background color under the "Read more / less" button
 	 */
-	readonly textFlow = input(false, { transform: booleanAttribute });
+	readonly textFlow = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Apply the spacing of the Text Flow component
@@ -55,15 +55,15 @@ export class ReadMoreComponent {
 	 */
 	readonly innerContent = input<null | string>(null);
 
-	labelReadMore = computed(() => this.intl().readMore);
-	labelReadLess = computed(() => this.intl().readLess);
+	readonly labelReadMore = computed(() => this.intl().readMore);
+	readonly labelReadLess = computed(() => this.intl().readLess);
 
-	label = computed(() => (this.expanded() ? this.labelReadLess() : this.labelReadMore()));
+	readonly label = computed(() => (this.expanded() ? this.labelReadLess() : this.labelReadMore()));
 
 	readonly contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 
-	expanded = signal(false);
-	isClamped = signal(false);
+	readonly expanded = signal(false);
+	readonly isClamped = signal(false);
 
 	readonly backgroundColor = computed(() => {
 		if (this.surface() === 'sunken' || this.surface() === 'default' || this.surface() === null) {

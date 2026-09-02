@@ -5,7 +5,7 @@ export function setAriaHiddenOnApplicationRoot(applicationRef: ApplicationRef, h
 		const nativeElement = component.location.nativeElement as unknown;
 
 		if (nativeElement instanceof HTMLElement) {
-			nativeElement.ariaHidden = hidden ? 'true' : undefined;
+			nativeElement.ariaHidden = hidden ? 'true' : null;
 		}
 	}
 }

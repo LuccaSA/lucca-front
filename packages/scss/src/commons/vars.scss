@@ -79,9 +79,6 @@
 	--palettes-assets-secondary-light: var(--palettes-#{map.get(map.get(config.$palettesAssets, config.$product), 'secondary')}-100);
 	// stylelint-enable custom-property-pattern
 
-	@include core.cssvars('colors', config.$colors, '-color');
-	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
-
 	@include core.cssvars('palettes-ai', config.$paletteAI);
 	@include core.cssvars('pr-t-color', config.$tokenAI, '-ai');
 
@@ -112,7 +109,8 @@
 
 	--commons-divider-color: var(--palettes-neutral-200);
 
-	--commons-container-padding: 0 var(--pr-t-spacings-200);
+	--commons-container-paddingInline: var(--pr-t-spacings-200);
+	--commons-container-padding: 0 var(--commons-container-paddingInline);
 	--commons-container-maxWidth: 100rem; // 100 + 0 = 100
 
 	--commons-navSide-width: 0px;
@@ -134,7 +132,7 @@
 	}
 
 	@include media.min('S') {
-		--commons-container-padding: 0 var(--pr-t-spacings-400);
+		--commons-container-paddingInline: var(--pr-t-spacings-400);
 	}
 
 	&:has(.navSide) {

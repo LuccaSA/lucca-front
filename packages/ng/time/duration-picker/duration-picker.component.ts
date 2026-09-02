@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output, signal, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { intlInputOptions, isNil, isNotNil } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, isNotNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Duration } from '../core/date-primitives';
 import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isISO8601Duration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
@@ -29,18 +29,18 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 export class DurationPickerComponent extends BasePickerComponent {
 	readonly intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
-	value = model<ISO8601Duration>('PT0S');
+	readonly value = model<ISO8601Duration>('PT0S');
 	readonly max = input<ISO8601Duration>('PT99H');
 
-	readonly displayArrows = input(false, { transform: booleanAttribute });
+	readonly displayArrows = input(false, { transform: luBooleanAttribute });
 
 	readonly label = input<string>();
 
-	readonly hideZeroValue = input(false, { transform: booleanAttribute });
+	readonly hideZeroValue = input(false, { transform: luBooleanAttribute });
 
 	readonly durationChange = output<DurationChangeEvent>();
 
-	keyPressed = signal(false);
+	readonly keyPressed = signal(false);
 
 	protected readonly hours = computed(() => getHoursPartFromDuration(this.value()));
 	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.value()));
@@ -68,7 +68,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 			'pr-u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
-	protected separator = computed(() => this.intl().timePickerTimeSeparator);
+	protected readonly separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
@@ -110,10 +110,10 @@ export class DurationPickerComponent extends BasePickerComponent {
 	}
 
 	protected pasteHandler(event: ClipboardEvent): void {
+		let value: ISO8601Duration | null = null;
 		event.preventDefault();
 		const pastedValue = event.clipboardData?.getData('text/plain');
 		if (isNotNil(pastedValue)) {
-			let value: ISO8601Duration;
 			// If it's an iso duration, handle as-is
 			if (isISO8601Duration(pastedValue)) {
 				value = pastedValue;

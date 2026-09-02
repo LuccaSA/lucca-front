@@ -7,8 +7,12 @@
 				</div>
 			}
 			<div class="comment-infos-content">
-				<span class="comment-infos-name"><ng-container *luPortal="authorName()" /></span>&ngsp;
-				<time class="comment-infos-date" [attr.datetime]="date().toISOString()">
+				<span class="comment-infos-name">
+					@if (authorName(); as authorName) {
+						<ng-container *luPortal="authorName" />
+					}</span
+				>&ngsp;
+				<time class="comment-infos-date" [attr.datetime]="date()?.toISOString()">
 					@if (datePipeFormat()) {
 						{{ date() | date: datePipeFormat() }}
 					} @else if (dateDisplay()) {

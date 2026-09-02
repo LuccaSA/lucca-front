@@ -17,6 +17,7 @@ import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-f
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import {
@@ -38,7 +39,8 @@ import { HiddenArgType } from '@/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
-import { sleep, waitForAngular } from '../../../helpers/test';
+import { InputAlias, SelectCommonAliasInput } from '../../../helpers/stories';
+import { ensurePickerPanelStyles, findPanelOptions, getPanelScrollContainer, isFullyVisibleInPanel, isSelectAllOption, sleep, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
@@ -48,6 +50,7 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedAxisSection: LuMultiSelection<{ id: number; name: string }>;
 	selectedEstablishment: LuMultiSelection<{ id: number; name: string }>;
 	selectedDepartments: LuMultiSelection<{ id: number; name: string }>;
+	selectedLegalUnits: { id: number; name: string }[];
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 	groupingFn?: TreeGroupingFn<ILegume>;
 } & LuMultiSelectInputComponent<ILegume>;
@@ -99,8 +102,7 @@ const basePlay = async ({ canvasElement, step }) => {
 	}
 	await userEvent.click(input);
 	await waitForAngular();
-	const panel = within(screen.getByRole('listbox'));
-	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+	const options = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
 	const optionValues = options.slice(0, 4).map((option) => option.textContent);
 	await userEvent.click(options[0]);
 	await userEvent.click(options[1]);
@@ -119,8 +121,7 @@ const basePlay = async ({ canvasElement, step }) => {
 			await expect(input.parentElement).not.toHaveTextContent(optionValues[0]);
 			await userEvent.click(input);
 			await waitForAngular();
-			const panel = within(screen.getByRole('listbox'));
-			const options = await panel.findAllByRole('option');
+			const options = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
 			await userEvent.click(options[1]);
 			await userEvent.keyboard('{Escape}');
 			await waitForAngular();
@@ -162,15 +163,14 @@ const basePlay = async ({ canvasElement, step }) => {
 		// await userEvent.keyboard('{ArrowDown}');
 		await userEvent.keyboard('{Enter}');
 		// Because of the arrowDown issue, we'll select more using mouse in order to be able to test more stuff
-		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+		const allOptions = await findPanelOptions();
+		const options = allOptions.filter((el) => !isSelectAllOption(el));
 		const optionValues = options.slice(0, 4).map((option) => option.textContent);
 		await userEvent.click(options[1]);
 		await userEvent.click(options[2]);
 		await userEvent.click(options[3]);
-		const allOptions = await panel.findAllByRole('option');
 		await userEvent.keyboard('{Escape}');
-		if (allOptions.some((opt) => opt.id.includes('select-all'))) {
+		if (allOptions.some(isSelectAllOption)) {
 			const valuesWithSelectAll = options.map((opt) => opt.textContent);
 			valuesWithSelectAll.splice(1, 3);
 			await checkValues(input, valuesWithSelectAll);
@@ -190,7 +190,7 @@ const basePlay = async ({ canvasElement, step }) => {
 			// Now we search and select an option based on the result
 			await userEvent.type(input, 'carotte');
 			await waitForAngular();
-			const searchResult = await within(screen.getByRole('listbox')).findAllByRole('option');
+			const searchResult = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
 			await expect(searchResult).toHaveLength(1);
 			await userEvent.keyboard('{Enter}');
 			await userEvent.keyboard('{Escape}');
@@ -243,7 +243,7 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 	const selectAllCheckbox = await panel.findByLabelText('Tout sélectionner');
 	await userEvent.click(selectAllCheckbox);
 	await waitForAngular();
-	const options = await panel.findAllByRole('option').then((opts) => opts.filter((el) => !el.id.includes('select-all')));
+	const options = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
 	const optionValues = options.map((option) => option.textContent);
 	await userEvent.keyboard('{Escape}');
 	await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
@@ -258,6 +258,83 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 		await waitFor(() => checkValues(input, []));
 	});
 });
+
+export const SelectAllScrollTEST = {
+	...createTestStory(SelectAll, async ({ canvasElement, step }) => {
+		await waitForAngular();
+		ensurePickerPanelStyles();
+		const canvas = within(canvasElement);
+		const input = canvas.getByRole('combobox');
+
+		await step('Panel opens at the top with "select all" visible (mouse)', async () => {
+			await userEvent.click(input);
+			await waitForAngular();
+			const selectAllOption = (await findPanelOptions()).find(isSelectAllOption);
+			await expect(selectAllOption).not.toBeUndefined();
+			// The opening animation must settle without applying a spurious scroll:
+			// the panel stays at the top and the "select all" header is visible
+			await waitFor(() => {
+				expect(getPanelScrollContainer().scrollTop).toBeLessThan(5);
+				expect(isFullyVisibleInPanel(selectAllOption)).toBe(true);
+			});
+		});
+
+		await step('Selected option stays marked and scrolled into view on reopen', async () => {
+			const options = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
+			// Pick an option far enough down that it is NOT visible without scrolling
+			const pickedText = options[12].textContent;
+			await userEvent.click(options[12]);
+			await waitForAngular();
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+
+			await userEvent.click(input);
+			await waitForAngular();
+			const reopenedPanel = within(screen.getByRole('listbox'));
+			const selectedOptions = await reopenedPanel.findAllByRole('option', { selected: true });
+			// The picked option is still marked as selected...
+			const pickedOption = selectedOptions.find((el) => el.textContent === pickedText);
+			await expect(pickedOption).not.toBeUndefined();
+			// ...and the panel scrolls it into view once the opening animation settles
+			await waitFor(() => expect(isFullyVisibleInPanel(pickedOption)).toBe(true));
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		});
+
+		await step('Keyboard: opening scrolls to the selection too', async () => {
+			// Same contract as the mouse case above: the option selected in the previous step is
+			// scrolled into view, the select-all header does not keep the panel at the top
+			input.focus();
+			await expect(input).toHaveFocus();
+			await userEvent.keyboard('{ArrowDown}');
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			const selectedOptions = await within(screen.getByRole('listbox')).findAllByRole('option', { selected: true });
+			await expect(selectedOptions).toHaveLength(1);
+			await waitFor(() => expect(isFullyVisibleInPanel(selectedOptions[0])).toBe(true));
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		});
+
+		await step('Keyboard: with nothing selected the panel opens at the top', async () => {
+			// Nothing legitimately scrolls anymore, so any scroll here is the spurious one applied
+			// while the opening animation runs
+			const clearButton = canvas.queryAllByRole('button').find((button) => button.className.includes('clear'));
+			await expect(clearButton).not.toBeUndefined();
+			await userEvent.click(clearButton);
+			await waitForAngular();
+			input.focus();
+			await expect(input).toHaveFocus();
+			await userEvent.keyboard('{ArrowDown}');
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			await waitFor(() => expect(getPanelScrollContainer().scrollTop).toBeLessThan(5));
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		});
+	}),
+	name: 'Select all scroll TEST',
+};
 
 export const Basic = generateStory({
 	name: 'Basic',
@@ -367,6 +444,60 @@ export const WithClueTEST = createTestStory(WithClue, async (context) => {
 			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 		});
 		await checkValues(input, ['Carotte']);
+	});
+});
+
+export const ScrollOnOpen = generateStory({
+	name: 'Scroll on open',
+	description: `À l’ouverture, le panneau doit être positionné en haut de la liste (aucun défilement parasite), même si aucune valeur n’est sélectionnée.`,
+	template: `<lu-multi-select
+	#selectRef
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+		},
+	},
+});
+
+export const ScrollOnOpenTEST = createTestStory(ScrollOnOpen, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	ensurePickerPanelStyles();
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('combobox');
+
+	const getPanelScrollTop = () => getPanelScrollContainer().scrollTop;
+
+	await step('Opening with the mouse shows the top of the list', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		// The list must be scrollable for the assertion to be meaningful
+		await expect(options.length).toBeGreaterThan(10);
+		await expect(options[0]).toBeVisible();
+		// No spurious scroll should be applied on open: the panel stays at the top
+		await waitFor(() => expect(getPanelScrollTop()).toBeLessThan(10));
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	});
+
+	await step('Opening with the keyboard shows the top of the list', async () => {
+		input.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await waitFor(() => expect(getPanelScrollTop()).toBeLessThan(10));
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
 	});
 });
 
@@ -575,6 +706,68 @@ export const Establishment = generateStory({
 	},
 });
 
+export const EstablishmentTEST = createTestStory(Establishment, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('combobox');
+	let initialCount = 0;
+
+	await step('Open panel and load initial options', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		const options = await findPanelOptions();
+		initialCount = options.length;
+		await expect(initialCount).toBeGreaterThan(1);
+	});
+
+	await step('Search filters the options through the API', async () => {
+		await userEvent.type(input, 'Marseille');
+		// Wait for the debounced API call to filter the options
+		await waitFor(async () => {
+			const options = await findPanelOptions();
+			expect(options.length).toBeLessThan(initialCount);
+		});
+		const options = await findPanelOptions();
+		await expect(options[0]).toHaveTextContent('Marseille');
+	});
+
+	await step('Selecting an option clears the search and restores the full list', async () => {
+		const options = await findPanelOptions();
+		await userEvent.click(options[0]);
+		await waitForAngular();
+		// The search input must be cleared…
+		await expect(input).toHaveValue('');
+		// …and the panel must show the unfiltered list again
+		// (regression: the panel used to keep showing only the filtered results)
+		await waitFor(async () => {
+			const refreshedOptions = await findPanelOptions();
+			expect(refreshedOptions.length).toBe(initialCount);
+		});
+	});
+
+	await step('Keyboard: search then Enter also restores the full list', async () => {
+		await expect(input).toHaveFocus();
+		await userEvent.type(input, 'Marseille');
+		await waitFor(async () => {
+			const options = await findPanelOptions();
+			expect(options.length).toBeLessThan(initialCount);
+		});
+		// Enter toggles the highlighted option (unselects the one picked above)
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(input).toHaveValue('');
+		await waitFor(async () => {
+			const refreshedOptions = await findPanelOptions();
+			expect(refreshedOptions.length).toBe(initialCount);
+		});
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => {
+			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+		});
+	});
+});
+
 export const Department = generateStory({
 	name: 'Departement Select',
 	description: 'Pour saisir un département, il suffit d’utiliser la directive `departments`',
@@ -609,9 +802,9 @@ export const Tree = generateStory({
 	},
 	storyPartial: {
 		args: {
-			groupingFn: (legume: ILegume) => {
-				const parent = allLegumes.find((l) => l.color === legume.color);
-				if (parent === legume) {
+			groupingFn: (legume: ILegume, items: ILegume[]) => {
+				const parent = items.find((l) => l.color === legume.color);
+				if (!parent || parent === legume) {
 					return null;
 				}
 				return parent;
@@ -710,6 +903,47 @@ export const OccupationCategory = generateStory({
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/occupation-category': ['LuCoreSelectOccupationCategoriesDirective'],
+	},
+});
+
+export const LegalUnits = generateStory({
+	name: 'LegalUnit Select',
+	description: 'Pour saisir une entité légale, il suffit d’utiliser la directive `legalUnits`',
+	template: `<lu-multi-select
+	legalUnits
+	[(ngModel)]="selectedLegalUnits"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+/>
+<pr-story-model-display>{{ selectedLegalUnits | json }}</pr-story-model-display>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/legal-units': ['LuCoreSelectLegalUnitsDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegalUnits: [],
+		},
+	},
+});
+
+export const LegalUnitsWithArchived = generateStory({
+	name: 'LegalUnit Select with Archived',
+	description: 'Utiliser l’input `enableArchivedLegalUnits` pour afficher un bouton dans le panel permettant d’inclure les entités légales archivées.',
+	template: `<lu-multi-select
+	legalUnits
+	[enableArchivedLegalUnits]="true"
+	[(ngModel)]="selectedLegalUnits"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+/>
+<pr-story-model-display>{{ selectedLegalUnits | json }}</pr-story-model-display>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/legal-units': ['LuCoreSelectLegalUnitsDirective', 'LuCoreSelectArchivedLegalUnitsComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegalUnits: [],
+		},
 	},
 });
 
@@ -906,7 +1140,7 @@ export const IntlOverride = generateStory({
 	},
 });
 
-const meta: Meta<LuMultiSelectInputStoryComponent> = {
+const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasInput>> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
 	decorators: [
@@ -931,6 +1165,8 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectDepartmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectLegalUnitsDirective,
+				LuCoreSelectArchivedLegalUnitsComponent,
 				LuCoreSelectOccupationCategoriesDirective,
 				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,

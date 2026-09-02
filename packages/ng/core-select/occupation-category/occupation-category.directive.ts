@@ -3,7 +3,7 @@ import { Directive, OnInit, computed, forwardRef, inject, input } from '@angular
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, map, switchMap } from 'rxjs';
+import { Observable, debounceTime, map, of, switchMap } from 'rxjs';
 import { LuCoreSelectOccupationCategory } from './models';
 
 @Directive({
@@ -25,11 +25,20 @@ export class LuCoreSelectOccupationCategoriesDirective<T extends LuCoreSelectOcc
 {
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/occupation-categories');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/occupation-categories');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly searchDelimiter = input<string>(' ');
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
+
+	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
+		// Use the clue parameter directly instead of reading from the async signal
+		// to avoid stale params when selection triggers an immediate clue reset
+		return of({
+			...this.filters(),
+			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()), sort: 'name' } : { sort: 'name' }),
+		});
+	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
 		return this.httpClient
@@ -43,23 +52,22 @@ export class LuCoreSelectOccupationCategoriesDirective<T extends LuCoreSelectOcc
 			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
 	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const filters = this.filters();
-			const clue = this.clue();
-			return {
-				...filters,
-				...(clue
-					? {
-							search: applySearchDelimiter(clue, this.searchDelimiter()),
-							sort: 'name',
-						}
-					: { sort: 'name' }),
-			};
-		}),
-	);
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const filters = this.filters();
+		const clue = this.clue();
+		return {
+			...filters,
+			...(clue
+				? {
+						search: applySearchDelimiter(clue, this.searchDelimiter()),
+						sort: 'name',
+					}
+				: { sort: 'name' }),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ count: number }>(url, {

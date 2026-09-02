@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, Provider, TemplateRef, Type, booleanAttribute, computed, effect, forwardRef, inject, input, model, signal, untracked } from '@angular/core';
+import { Directive, Provider, TemplateRef, Type, computed, effect, forwardRef, inject, input, model, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNullableNumberAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LuOptionContext, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
@@ -58,20 +58,20 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	protected httpClient = inject(HttpClient);
 	public currentUserId = inject(LU_CORE_SELECT_CURRENT_USER_ID);
 
-	displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
+	readonly displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
 
-	filters = input<Record<string, string | number | boolean>>({});
-	url = input<string | null>(null);
-	orderBy = input<string | null>(null);
-	operationIds = input<readonly number[] | null>(null);
-	uniqueOperationIds = input<readonly number[] | null>(null);
-	appInstanceId = input<number | null>(null);
-	enableFormerEmployees = input(false, { transform: booleanAttribute });
-	displayMeOption = input(true);
-	customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
+	readonly filters = input<Record<string, string | number | boolean>>({});
+	readonly url = input<string | null>(null);
+	readonly orderBy = input<string | null>(null);
+	readonly operationIds = input<readonly number[] | null>(null);
+	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
+	readonly enableFormerEmployees = input(false, { transform: luBooleanAttribute });
+	readonly displayMeOption = input(true, { transform: luBooleanAttribute });
+	readonly customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
-	includeFormerEmployees = signal(false);
-	searchDelimiter = input<string>(' ');
+	readonly includeFormerEmployees = signal(false);
+	readonly searchDelimiter = input<string>(' ');
 
 	constructor() {
 		super();
@@ -81,55 +81,60 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		effect(() => {
 			const enableFormerEmployees = this.enableFormerEmployees();
 			if (!enableFormerEmployees) {
-				untracked(() => this.select.panelHeaderTpl.set(null));
+				untracked(() => this.select.panelHeaderTpl.set(undefined));
 			} else {
 				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
 			}
 		});
 	}
 
-	protected defaultUrl = computed(() => (this.uniqueOperationIds()?.length || (this.appInstanceId() && this.operationIds()?.length) ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
-	protected urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
+	protected readonly defaultUrl = computed(() => (this.uniqueOperationIds()?.length || (this.appInstanceId() && this.operationIds()?.length) ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
+	protected readonly urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const orderBy = this.orderBy();
+		const clue = this.clue();
+		const operationIds = this.operationIds();
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const appInstanceId = this.appInstanceId();
+		const searchDelimiter = this.searchDelimiter();
+		const formerEmployees = this.includeFormerEmployees();
+
+		return {
+			fields: this.#userFields,
+			...this.filters(),
+			...(orderBy ? { orderBy } : {}),
+			...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(appInstanceId ? { appInstanceId } : {}),
+			...(formerEmployees ? { formerEmployees } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
+
+	protected readonly meParams$ = toObservable(
 		computed(() => {
-			const orderBy = this.orderBy();
-			const clue = this.clue();
-			const operationIds = this.operationIds();
 			const uniqueOperationIds = this.uniqueOperationIds();
+			const operationIds = this.operationIds();
 			const appInstanceId = this.appInstanceId();
-			const searchDelimiter = this.searchDelimiter();
-			const formerEmployees = this.includeFormerEmployees();
 
 			return {
 				fields: this.#userFields,
-				...this.filters(),
-				...(orderBy ? { orderBy } : {}),
-				...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
-				...(operationIds ? { operations: operationIds.join(',') } : {}),
+				// The "me" request is a lookup by id and must not carry the search `filters`:
+				// they target the search API and aren't necessarily supported by the endpoint
+				// resolving the current user (e.g. API v3), which would fail the request.
 				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+				...(operationIds ? { operations: operationIds.join(',') } : {}),
 				...(appInstanceId ? { appInstanceId } : {}),
-				...(formerEmployees ? { formerEmployees } : {}),
+				id: this.currentUserId,
 			};
 		}),
 	);
 
-	protected meParams$ = toObservable(
-		computed(() => ({
-			fields: this.#userFields,
-			// The "me" request is a lookup by id and must not carry the search `filters`:
-			// they target the search API and aren't necessarily supported by the endpoint
-			// resolving the current user (e.g. API v3), which would fail the request.
-			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()?.join(',') } : {}),
-			...(this.operationIds() ? { operations: this.operationIds()?.join(',') } : {}),
-			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
-			id: this.currentUserId,
-		})),
-	);
-
-	protected me$ = this.meParams$.pipe(
+	protected readonly me$ = this.meParams$.pipe(
 		switchMap((params) =>
 			this.httpClient
 				.get<
@@ -148,7 +153,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		shareReplay(1),
 	);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ data: { count: number } } | { count: number }>(url, {
@@ -187,7 +192,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		const displayMe = this.displayMeOption() && !hasClue;
 		const prependMe = displayMe && page === 0;
 
-		this.select.loading = true;
+		this.select.loading.set(true);
 
 		const me$ = prependMe ? this.getMe() : of(null);
 
@@ -210,7 +215,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 					})),
 				),
 			),
-			tap(() => (this.select.loading = false)),
+			tap(() => this.select.loading.set(false)),
 		);
 	}
 
@@ -223,7 +228,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 export class LuCoreSelectUserOptionDirective<T extends LuCoreSelectUser = LuCoreSelectUser> {
 	#templateRef = inject(TemplateRef<LuOptionContext<T>>);
 
-	readonly usersDirective = input<LuCoreSelectUsersDirective<T>>(null, { alias: 'luUserOptionUsersRef' });
+	readonly usersDirective = input<LuCoreSelectUsersDirective<T> | null>(null, { alias: 'luUserOptionUsersRef' });
 
 	constructor() {
 		ɵeffectWithDeps([this.usersDirective], (usersDirective) => {

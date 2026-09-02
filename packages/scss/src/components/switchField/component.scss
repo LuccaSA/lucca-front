@@ -37,7 +37,7 @@
 				border-radius: var(--pr-t-border-radius-full);
 				inset-inline-start: 0;
 				inset-block-start: 0;
-				transition-property: left;
+				transition-property: inset-inline-start;
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
 				box-shadow: var(--pr-t-elevation-shadow-overflow);

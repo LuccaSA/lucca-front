@@ -11,7 +11,7 @@ export class PresentationDisplayDirective implements OnInit {
 
 	#vcr = inject(ViewContainerRef);
 
-	defaultDisplay = signal(false);
+	readonly defaultDisplay = signal(false);
 
 	ngOnInit() {
 		if (this.#formFieldRef) {

@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, ElementRef, inject, Injector, input, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, effect, ElementRef, inject, Injector, input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router, UrlTree } from '@angular/router';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LU_INDEX_TABLE_INSTANCE } from '@lucca-front/ng/index-table';
 
 import { LU_DATA_TABLE_INSTANCE } from '@lucca-front/ng/data-table';
@@ -36,15 +36,15 @@ import { LuRouterLink } from './lu-router-link';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
-	intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
-	routerLink = inject(LuRouterLink);
+	readonly intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
+	readonly routerLink = inject(LuRouterLink);
 	#injector = inject(Injector);
 	#elementRef = inject(ElementRef);
-	router = inject(Router);
-	location = inject(Location);
-	#activatedRoute = inject(ActivatedRoute, { optional: true });
-	insideIndexTable = inject(LU_INDEX_TABLE_INSTANCE, { optional: true });
-	insideDataTable = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
+	readonly router = inject(Router);
+	readonly location = inject(Location);
+	readonly #activatedRoute = inject(ActivatedRoute, { optional: true });
+	readonly insideIndexTable = inject(LU_INDEX_TABLE_INSTANCE, { optional: true });
+	readonly insideDataTable = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
 	/**
 	 * Target page address. Use only for external links or pages not recognized by the router.
@@ -59,22 +59,22 @@ export class LinkComponent {
 	/**
 	 * Disables the link
 	 */
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Underlines the link only on hover
 	 */
-	readonly decorationHover = input(false, { transform: booleanAttribute });
+	readonly decorationHover = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Indicates that the link will open in a new tab
 	 */
-	readonly external = input(false, { transform: booleanAttribute });
+	readonly external = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * External icon only visible on hover/focus
 	 */
-	readonly hiddenIcon = input(false, { transform: booleanAttribute });
+	readonly hiddenIcon = input(false, { transform: luBooleanAttribute });
 
 	hrefBackup: string;
 
@@ -112,7 +112,7 @@ export class LinkComponent {
 		// Only non-anchor hosts (e.g. `button[luLink]`) need us to open the window programmatically.
 		if (!this.disabled() && this.routerLinkCommands() && this.external() && !this.#isAnchor()) {
 			const externalUrl = this.#serializeExternalUrl();
-			afterNextRender(() => window.open(externalUrl, '_blank'), { injector: this.#injector });
+			afterNextRender(() => window.open(externalUrl ?? undefined, '_blank'), { injector: this.#injector });
 		}
 	}
 

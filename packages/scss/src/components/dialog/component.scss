@@ -26,7 +26,7 @@
 	translate: var(--components-dialog-translateX) var(--components-dialog-translateY);
 	scale: var(--components-dialog-scale);
 
-	@supports not (height: 1dvh) {
+	@supports not (height: 1dvb) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
 	}
 
@@ -122,6 +122,10 @@
 			&.footer {
 				@include footer.insideDialog;
 			}
+
+			.icon-menuDots {
+				display: var(--components-dialog-inside-footer-actions-button-icon-menuDots-display) !important;
+			}
 		}
 
 		.dialog-inside-header {
@@ -161,6 +165,10 @@
 			flex-grow: var(--components-dialog-insideContent-flexGrow);
 			display: block;
 			outline: none;
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.dialog-inside-header-container {

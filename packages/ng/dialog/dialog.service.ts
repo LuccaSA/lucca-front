@@ -1,5 +1,6 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
-import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
+import { afterNextRender, inject, Injectable, Injector, Renderer2 } from '@angular/core';
 import { isObservable, merge, of, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogRef, LuDialogResult } from './model';
@@ -9,10 +10,13 @@ import { DISMISSED_VALUE } from './model/dialog-ref';
 export class LuDialogService {
 	#cdkDialog = inject(Dialog);
 
+	#overlay = inject(Overlay);
+
 	#injector = inject(Injector);
 
 	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> {
-		let luDialogRef: LuDialogRef<C, TData>;
+		// Assigned synchronously inside the `providers` callback below, which CDK calls during `Dialog.open()`.
+		let luDialogRef!: LuDialogRef<C, TData>;
 		let modeClasses: string[] = [];
 		switch (config.mode) {
 			case 'drawer':
@@ -21,10 +25,16 @@ export class LuDialogService {
 			case 'fancy':
 				modeClasses = ['mod-fancy'];
 				break;
+			case 'sheet':
+				modeClasses = ['mod-drawer', 'mod-fromBottom', 'mod-sheet'];
+				break;
 			case 'drawer-from-bottom':
 				modeClasses = ['mod-drawer', 'mod-fromBottom'];
 				break;
 		}
+		// Built explicitly (rather than left to CDK's default) so we can force a re-check below.
+		const scrollStrategy = config.cdkConfigOverride?.scrollStrategy ?? this.#overlay.scrollStrategies.block();
+
 		const cdkRef = this.#cdkDialog.open(config.content, {
 			ariaModal: config.modal ?? true,
 			hasBackdrop: config.modal ?? true,
@@ -34,7 +44,8 @@ export class LuDialogService {
 			role: config.alert ? 'alertdialog' : 'dialog',
 			restoreFocus: true,
 			backdropClass: 'dialog_backdrop',
-			panelClass: ['dialog', `mod-${config.size || 'M'}`, ...modeClasses, ...(config.panelClasses || [])],
+			panelClass: ['dialog', `mod-${config.size || 'M'}`, ...modeClasses, ...(config.surfaceDefault ? ['mod-surfaceDefault'] : []), ...(config.panelClasses || [])],
+
 			ariaLabel: config.ariaLabel,
 			// Handle manually
 			closeOnOverlayDetachments: false,
@@ -43,6 +54,7 @@ export class LuDialogService {
 			autoFocus: config.autoFocus === 'first-input' ? 'dialog' : (config.autoFocus ?? 'first-tabbable'),
 			templateContext: () => ({ dialogRef: luDialogRef }),
 			injector: this.#injector,
+			scrollStrategy,
 			providers: (ref: DialogRef<LuDialogResult<C>, C>) => {
 				luDialogRef = new LuDialogRef(ref, config);
 				return [
@@ -55,6 +67,10 @@ export class LuDialogService {
 			...(config.cdkConfigOverride || {}),
 		});
 
+		// Re-check once the view is stable: block strategy only locks scroll if the page already
+		// overflows at attach time, which can miss for dialogs opened asynchronously (e.g. via a route).
+		afterNextRender(() => scrollStrategy.enable(), { injector: this.#injector });
+
 		if (cdkRef.componentRef) {
 			const renderer = cdkRef.componentRef.injector.get(Renderer2);
 			renderer.setStyle(cdkRef.componentRef.location.nativeElement, 'display', 'contents');
@@ -66,7 +82,7 @@ export class LuDialogService {
 				.pipe(
 					filter(() => config.canCloseWithBackdrop ?? true),
 					switchMap(() => {
-						const canClose = config.canClose?.(cdkRef.componentInstance) ?? true;
+						const canClose = cdkRef.componentInstance ? (config.canClose?.(cdkRef.componentInstance) ?? true) : true;
 						const canClose$ = isObservable(canClose) ? canClose : of(canClose);
 						return canClose$.pipe(take(1));
 					}),

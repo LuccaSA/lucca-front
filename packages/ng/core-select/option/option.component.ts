@@ -1,78 +1,61 @@
-import {
-	AfterViewInit,
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	effect,
-	ElementRef,
-	HostBinding,
-	inject,
-	Input,
-	input,
-	OnDestroy,
-	OnInit,
-	output,
-	TemplateRef,
-	Type,
-	untracked,
-	ViewChild,
-} from '@angular/core';
-import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, contentChild, ElementRef, inject, Injector, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
+import { intlInputOptions, isNil, luBooleanAttribute, luOptionalNumberAttribute, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { OptionComponent as ListboxOptionComponent, Treeitem } from '@lucca-front/ng/listbox';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { asyncScheduler, observeOn, Subscription } from 'rxjs';
+import { asyncScheduler, observeOn } from 'rxjs';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';
-import { GroupTemplateLocation } from '../panel/panel.utils';
+import { GroupTemplateLocation, scrollIntoViewOnceReady } from '../panel/panel.utils';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
-import { LuOptionContext, SELECT_ID } from '../select.model';
-import { LuOptionGrouping } from './group.directive';
+import { LuOptionContext, LuOptionGrouping, SELECT_ID } from '../select.model';
 import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
-import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
+import { LU_OPTION_CONTEXT } from './option.token';
 import { LU_OPTION_TRANSLATIONS } from './option.translate';
-
-export const MAGIC_OPTION_SCROLL_DELAY = 15;
 
 @Component({
 	selector: 'lu-select-option',
 	templateUrl: './option.component.html',
 	styleUrl: './option.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
+	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective, NgTemplateOutlet, ListboxOptionComponent],
 })
-export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
+export class LuOptionComponent<T> implements OnInit {
 	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
-
 	protected selectableItem = inject(CoreSelectPanelElement);
 	readonly intl = input(...intlInputOptions(LU_OPTION_TRANSLATIONS));
 
-	@HostBinding('class.optionItem')
-	public hasOptionItemClass = true;
+	readonly optionTpl = input<TemplateRef<LuOptionContext<T>> | Type<unknown>>();
 
-	@Input()
-	public optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined;
+	readonly option = input<T>();
 
-	@Input() option?: T;
-	@Input() grouping?: LuOptionGrouping<T, unknown>;
+	readonly grouping = input<LuOptionGrouping<T, unknown>>();
 
-	hasChildren = input(false, { transform: booleanAttribute });
-	onlyParent = output<void>();
-	onlyChildren = output<void>();
+	readonly hasChildren = input(false, { transform: luBooleanAttribute });
 
-	groupIndex = input<number>();
+	readonly onlyParent = output<void>();
 
-	public optionIndex = input.required({ transform: (value: string | number) => `${value}` });
+	readonly onlyChildren = output<void>();
 
-	@Input()
-	scrollIntoViewOptions: ScrollIntoViewOptions = {};
+	readonly groupIndex = input(undefined, { transform: luOptionalNumberAttribute });
 
-	groupTemplateLocation = input<GroupTemplateLocation>();
+	public readonly optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
-	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
-	private optionContext?: ILuOptionContext<T>;
+	readonly scrollIntoViewOptions = input<ScrollIntoViewOptions>({});
+
+	readonly groupTemplateLocation = input<GroupTemplateLocation>();
+
+	/**
+	 * Present only when the consumer projects nested `[treeitem]` content (tree selects).
+	 * Detected here — and not on the inner `lu-listbox-option` — because Angular content
+	 * queries do not traverse the `ng-content` re-projection boundary.
+	 */
+	readonly treeitemContent = contentChild(Treeitem);
+
+	readonly optionContext = viewChild(LU_OPTION_CONTEXT);
 
 	private cdr = inject(ChangeDetectorRef);
-	private subscription?: Subscription;
+	readonly #injector = inject(Injector);
 
 	get id(): string {
 		const groupPart = this.groupIndex() === undefined ? `` : `-group-${this.groupIndex()}`;
@@ -84,32 +67,29 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectId = inject(SELECT_ID);
 
 	constructor() {
-		effect(() => {
-			if (this.selectableItem.isHighlighted() && !untracked(this.#panelRef.pointerNavigation)) {
-				setTimeout(() => {
-					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
-				}, MAGIC_OPTION_SCROLL_DELAY);
+		ɵeffectWithDeps([this.selectableItem.isHighlighted], (isHighlighted, onCleanup) => {
+			if (isHighlighted && !untracked(this.#panelRef.pointerNavigation)) {
+				// Wait for the panel layout to settle (opening animation) before scrolling,
+				// otherwise the browser computes a bogus scroll position.
+				onCleanup(scrollIntoViewOnceReady(this.elementRef.nativeElement, this.#injector, () => this.scrollIntoViewOptions()));
 			}
+		});
+
+		ɵeffectWithDeps([this.optionContext], (optionContext, onCleanup) => {
+			if (isNil(optionContext)) {
+				return;
+			}
+
+			const subscription = optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
+				this.selectableItem.disabled = isDisabled;
+				this.cdr.markForCheck();
+			});
+			onCleanup(() => subscription.unsubscribe());
 		});
 	}
 
 	ngOnInit(): void {
 		this.selectableItem.id.set(this.id);
-	}
-
-	ngOnDestroy(): void {
-		this.subscription?.unsubscribe();
-	}
-
-	ngAfterViewInit(): void {
-		if (!this.optionContext) {
-			return;
-		}
-
-		this.subscription = this.optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
-			this.selectableItem.disabled = isDisabled;
-			this.cdr.markForCheck();
-		});
 	}
 
 	selectOption($event: Event): void {

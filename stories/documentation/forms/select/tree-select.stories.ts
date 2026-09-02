@@ -137,8 +137,8 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	}
 	await userEvent.click(input);
 	await waitForAngular();
-	const panel = within(screen.getByRole('listbox'));
-	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+	const panel = within(screen.getByRole('tree'));
+	const options = await panel.findAllByRole('treeitem').then((options) => options.filter((el) => !el.id.includes('select-all')));
 	const optionValues = ['Artichaut', 'Brocoli', 'Céleri', 'Chou chinois', 'Laitue'];
 	await userEvent.click(options[0]);
 	await userEvent.click(options[1]);
@@ -155,8 +155,8 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 			await expect(input.parentElement).not.toHaveTextContent(optionValues[0]);
 			await userEvent.click(input);
 			await waitForAngular();
-			const panel = within(screen.getByRole('listbox'));
-			const options = await panel.findAllByRole('option');
+			const panel = within(screen.getByRole('tree'));
+			const options = await panel.findAllByRole('treeitem');
 			await userEvent.click(options[1]);
 			await userEvent.keyboard('{Escape}');
 			await waitForAngular();
@@ -173,7 +173,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await expect(input).toHaveFocus();
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
-		await expect(screen.getByRole('listbox')).toBeVisible();
+		await expect(screen.getByRole('tree')).toBeVisible();
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
 		await expect(screen.queryByText('listbox')).toBeNull();
@@ -182,7 +182,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		// Broken but fixed in current master, TODO uncomment
 		// await userEvent.keyboard('{Space}');
 		// await waitForAngular();
-		// await expect(screen.getByRole('listbox')).toBeVisible();
+		// await expect(screen.getByRole('tree')).toBeVisible();
 		// await userEvent.keyboard('{Escape}');
 		input.focus();
 		await userEvent.keyboard('{ArrowDown}');
@@ -192,13 +192,13 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		// await userEvent.keyboard('{ArrowDown}');
 		await userEvent.keyboard('{Enter}');
 		// Because of the arrowDown issue, we'll select more using mouse in order to be able to test more stuff
-		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+		const panel = within(screen.getByRole('tree'));
+		const options = await panel.findAllByRole('treeitem').then((options) => options.filter((el) => !el.id.includes('select-all')));
 		const optionValues = ['Artichaut', 'Brocoli', 'Céleri', 'Chou chinois', 'Laitue'];
 		await userEvent.click(options[1]);
 		await userEvent.click(options[2]);
 		await userEvent.click(options[3]);
-		const allOptions = await panel.findAllByRole('option');
+		const allOptions = await panel.findAllByRole('treeitem');
 		await userEvent.keyboard('{Escape}');
 		if (allOptions.some((opt) => opt.id.includes('select-all'))) {
 			const valuesWithSelectAll = options.map((opt) => opt.textContent);
@@ -220,7 +220,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 			// Now we search and select an option based on the result
 			await userEvent.type(input, 'carotte');
 			await waitForAngular();
-			const searchResult = await within(screen.getByRole('listbox')).findAllByRole('option');
+			const searchResult = await within(screen.getByRole('tree')).findAllByRole('treeitem');
 			await expect(searchResult).toHaveLength(1);
 			await userEvent.keyboard('{Enter}');
 			await userEvent.keyboard('{Escape}');

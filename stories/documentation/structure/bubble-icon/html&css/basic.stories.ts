@@ -1,6 +1,6 @@
 import { IconsList } from '@/stories/icons-list';
 import { BUBBLE_ICON_DIRECTION, BUBBLE_ICON_SIZE } from '@lucca-front/ng/bubble-icon';
-import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
+import { DECORATIVE_PALETTE, PALETTE, PRODUCT_PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 
@@ -30,7 +30,7 @@ export default {
 			description: 'Modifie la taille du composant.',
 		},
 		palette: {
-			options: setStoryOptions([...PALETTE, ...DECORATIVE_PALETTE]),
+			options: setStoryOptions([...PALETTE, ...PRODUCT_PALETTE, ...DECORATIVE_PALETTE]),
 			control: {
 				type: 'select',
 			},
@@ -56,7 +56,7 @@ function getTemplate(args: BubbleIconBasicStory): string {
 		: ``;
 	const paletteClass = args.palette !== 'product' ? ` palette-${args.palette}` : ``;
 	const sizeClasse = args.size !== '' ? ` mod-${args.size}` : ``;
-	return `<div class="bubbleIcon${sizeClasse}${paletteClass} mod-${args.direction}">
+	return `<span class="bubbleIcon${sizeClasse}${paletteClass} mod-${args.direction}">
 	<svg class="bubbleIcon-bubble" xmlns="http://www.w3.org/2000/svg" fill="none" width="40" height="40" viewBox="0 0 40 40">
 		<path
 			class="bubbleIcon-bubble-pathInline"
@@ -70,7 +70,7 @@ function getTemplate(args: BubbleIconBasicStory): string {
 	<span class="bubbleIcon-icon">
 		<span aria-hidden="true" class="lucca-icon icon-${args.icon}"></span>${altTpl}
 	</span>
-</div>`;
+</span>`;
 }
 
 const Template = (args: BubbleIconBasicStory) => ({

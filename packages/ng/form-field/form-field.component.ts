@@ -13,7 +13,6 @@ import {
 	Injector,
 	input,
 	model,
-	numberAttribute,
 	OnDestroy,
 	Renderer2,
 	signal,
@@ -23,7 +22,18 @@ import {
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { FormField } from '@angular/forms/signals';
 import { SafeHtml } from '@angular/platform-browser';
-import { intlInputOptions, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import {
+	intlInputOptions,
+	isNotNil,
+	luBooleanAttribute,
+	LuClass,
+	luNullableBooleanAttribute,
+	luNullableNumberAttribute,
+	luNumberAttribute,
+	PortalContent,
+	PortalDirective,
+	ɵeffectWithDeps,
+} from '@lucca-front/ng/core';
 import { LU_FORM_INSTANCE } from '@lucca-front/ng/form';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -31,9 +41,9 @@ import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inli
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
-import { FormFieldLayout, FormFieldWidth } from './form-field.type';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
+import { FormFieldLayout, FormFieldWidth } from './form-field.type';
 import { InputDirective } from './input.directive';
 import { INPUT_FRAMED_INSTANCE } from './public-api';
 
@@ -65,7 +75,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#renderer = inject(Renderer2);
 	protected parentForm = inject(LU_FORM_INSTANCE, { optional: true });
 
-	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
+	readonly framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
 	readonly formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 
@@ -81,8 +91,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 	readonly ownFormFields = computed(() => this.ngFormFields().filter((c) => !this.ignoredFormFields().has(c)));
 
-	#hasInputRequired = signal(false);
-	forceInputRequired = signal(false);
+	readonly #hasInputRequired = signal(false);
+	readonly forceInputRequired = signal(false);
 	readonly isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
 
 	readonly label = input.required<PortalContent>();
@@ -90,13 +100,13 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	/**
 	 * Hide field label, while keeping it in DOM for screen readers
 	 */
-	readonly hiddenLabel = input(false, { transform: booleanAttribute });
+	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
-	rolePresentationLabel = model(false);
+	readonly rolePresentationLabel = model(false);
 
-	labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
+	readonly labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
 
-	readonly inline = input(false, { transform: booleanAttribute });
+	readonly inline = input(false, { transform: luBooleanAttribute });
 
 	readonly statusControl = input<AbstractControl | null>(null);
 
@@ -104,18 +114,16 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly tag = input<string | null>(null);
 
-	readonly AI = input(false, { transform: booleanAttribute });
+	readonly AI = input(false, { transform: luBooleanAttribute });
 	readonly iconAItooltip = input<string | null>(null);
 	readonly iconAIalt = input<string | null>(null);
 
-	readonly width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}` | null>(null, {
-		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
-	});
+	readonly width = input(null, { transform: luNullableNumberAttribute<FormFieldWidth> });
 
-	#invalidStatus = signal(false);
+	readonly #invalidStatus = signal(false);
 	invalidStatus = this.#invalidStatus.asReadonly();
 
-	invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });
+	readonly invalid = input(null, { transform: luNullableBooleanAttribute });
 
 	readonly inlineMessage = input<PortalContent | null>(null);
 
@@ -143,11 +151,11 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	/**
 	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
 	 */
-	readonly counter = input<number>(0);
+	readonly counter = input(0, { transform: luNumberAttribute });
 
 	readonly contentLength = signal<number>(0);
 
-	readonly presentation = input(false, { transform: booleanAttribute });
+	readonly presentation = input(false, { transform: luBooleanAttribute });
 
 	readonly presentationMode = computed(() => this.parentForm?.presentation() || this.presentation());
 
@@ -155,21 +163,21 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
-		/* We have to put this in the next cycle to make sure it'll be applied properly
-		 * and that it won't trigger a change detection error
-		 */
-		setTimeout(() => {
-			this.prepareInput();
-		});
+		afterNextRender(
+			() => {
+				this.prepareInput();
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	public get inputs(): InputDirective[] {
 		return this.#inputs;
 	}
 
-	id = signal<string>('');
+	readonly id = signal<string>('');
 
-	ready$ = new BehaviorSubject<boolean>(false);
+	readonly ready$ = new BehaviorSubject<boolean>(false);
 
 	public get ready(): boolean {
 		return this.ready$.value;
@@ -198,7 +206,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			this.#ariaLabelledBy = [...this.#ariaLabelledBy, id];
 		}
 		this.#inputs.forEach((input) => {
-			if (!input.standalone) {
+			if (!input.standalone()) {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-labelledby', this.#ariaLabelledBy.join(' '));
 			}
 		});
@@ -213,7 +221,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			throw new Error('Missing input for form field, make sure to set `luInput` to your input inside lu-form-field');
 		}
 		this.inputs
-			.filter((input) => !input.standalone)
+			.filter((input) => !input.standalone())
 			.forEach((input) => {
 				const inputId = `${input.host.nativeElement.tagName.toLowerCase()}-${++nextId}`;
 				this.#renderer.setAttribute(input.host.nativeElement, 'id', inputId);
@@ -228,7 +236,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		this.#inputs.forEach((input) => {
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalidStatus()?.toString());
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.isInputRequired()?.toString());
-			if (!input.standalone) {
+			if (!input.standalone()) {
 				let ariaDescribedBy = `${input.host.nativeElement.id}-message`;
 				if (this.extraDescribedBy()) {
 					ariaDescribedBy += ` ${this.extraDescribedBy()}`;
@@ -266,9 +274,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	}
 
 	#hasInvalidStatus(): boolean {
-		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
+		const isInvalidOverride = isNotNil(this.invalid());
 		if (isInvalidOverride) {
-			return this.invalid();
+			return this.invalid() ?? false;
 		}
 		const statusControlOverride = this.statusControl();
 		if (statusControlOverride) {

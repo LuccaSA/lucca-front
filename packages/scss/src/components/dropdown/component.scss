@@ -66,11 +66,11 @@
 			gap: var(--pr-t-spacings-100);
 			line-height: var(--pr-t-font-body-M-lineHeight);
 			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
-			text-align: left;
+			text-align: start;
 			transition: background-color var(--commons-animations-durations-fast);
 			text-decoration: none;
 			inline-size: 100%;
-			pointer-events: var(--components-dropdown-list-option-action-pointerEvents);
+			pointer-events: auto;
 			cursor: pointer;
 
 			.lucca-icon {

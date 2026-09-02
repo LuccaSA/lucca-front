@@ -1,27 +1,25 @@
-import { A11yModule } from '@angular/cdk/a11y';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { NgTemplateOutlet } from '@angular/common';
+import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, Injector, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { PortalDirective } from '@lucca-front/ng/core';
+import { isNotNil, PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
 	LuIsOptionSelectedPipe,
-	LuOptionGroup,
+	LuSelectPanelLayoutComponent,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
 	TreeDisplayPipe,
-	TreeNode,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
 	ɵinjectPointerNavigation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { ListboxComponent, ListboxState, OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
-import { EMPTY } from 'rxjs';
+import { EMPTY, firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
@@ -33,9 +31,12 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	templateUrl: './panel.component.html',
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'selectPanel',
+		'[class.is-pointerNavigation]': 'pointerNavigation()',
+	},
 	imports: [
-		A11yModule,
-		AsyncPipe,
+		LuSelectPanelLayoutComponent,
 		FormsModule,
 		LuIsOptionSelectedPipe,
 		ɵLuOptionComponent,
@@ -44,7 +45,8 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 		PortalDirective,
 		LuOptionsGroupContextPipe,
 		ɵCoreSelectPanelElement,
-		IconComponent,
+		ListboxComponent,
+		ListboxOptionComponent,
 		TreeDisplayPipe,
 		TreeBranchComponent,
 	],
@@ -57,53 +59,60 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanelInstance {
-	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
-	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
-	selectId = inject(SELECT_ID);
+	protected readonly selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
+	readonly panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
+	readonly selectId = inject(SELECT_ID);
 
-	options$ = this.selectInput.options$;
-	grouping = this.selectInput.groupingSignal;
+	readonly dataSourceOptions = this.selectInput.dataSourceOptions;
+	readonly grouping = this.selectInput.groupingSignal;
 	treeGenerator = this.selectInput.treeGenerator;
-	loading = toSignal(this.selectInput.loading$);
-	loading$ = this.selectInput.loading$;
+	readonly loading = this.selectInput.loading;
 	searchable = this.selectInput.searchable;
-	optionComparer = this.selectInput.optionComparer;
-	optionKey = this.selectInput.optionKey;
+	readonly optionComparer = this.selectInput.optionComparer;
+	readonly optionKey = this.selectInput.optionKey;
 	intl = this.selectInput.intl;
 
-	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
-	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
-	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
-
 	selectedOptions: T[] = this.selectInput.value || [];
-	optionTpl = this.selectInput.optionTpl;
+	readonly optionTpl = this.selectInput.optionTpl;
 
-	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
-	pointerNavigation = ɵinjectPointerNavigation();
-	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+	readonly pointerNavigation = ɵinjectPointerNavigation(inject<ElementRef<HTMLElement>>(ElementRef).nativeElement);
 
-	someGroupOptionEnabled = computed(() => {
+	readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+	readonly #injector = inject(Injector);
+
+	readonly someGroupOptionEnabled = computed(() => {
 		return (groupOptions: T[]) => {
 			const disabledOptionIds = this.options()
 				.filter((o) => o.disabled)
-				.map((o) => this.optionKey(o.option()));
-			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey(option)));
+				.map((o) => o.option())
+				.filter(isNotNil)
+				.map((option) => this.optionKey()(option));
+			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey()(option)));
 		};
 	});
 
-	hasGrouping$ = toObservable(this.grouping).pipe(map((grouping) => !!grouping));
-	public clueChange$ = this.selectInput.clue$;
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
+	readonly groupLoadingKeys = signal<Set<unknown>>(new Set());
 
-	groupTemplateLocation$ = ɵgetGroupTemplateLocation(this.hasGrouping$, this.clueChange$, this.options$, this.searchable);
+	readonly hasGrouping = computed(() => !!this.grouping());
+	public readonly clue = toSignal(this.selectInput.clue$.pipe(map((clue) => clue ?? '')), { initialValue: '' });
+	public readonly shouldDisplayAddOption = this.selectInput.shouldDisplayAddOption;
+
+	readonly groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.dataSourceOptions, this.searchable);
+
+	// Loading takes precedence over empty so the "no result" message never flashes during a fetch
+	readonly listboxState = computed<ListboxState | null>(() => (this.loading() ? 'loading' : this.dataSourceOptions().length === 0 ? 'empty' : null));
+
+	readonly listboxStatusMsg = computed(() => {
+		if (this.loading()) {
+			return this.intl().loading;
+		}
+		return this.clue().length ? this.intl().emptyResults : this.intl().emptyOptions;
+	});
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
 			return;
-		}
-
-		if (evt.target.scrollTop === 0) {
-			this.panelRef.previousPage.emit();
 		}
 
 		if (evt.target.scrollHeight - evt.target.scrollTop - evt.target.clientHeight < 1) {
@@ -121,43 +130,74 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	}
 
 	toggleOption(option: T): void {
-		const matchingOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
+		const matchingOption = this.selectedOptions.find((o) => this.optionComparer()(o, option));
 		this.selectedOptions = matchingOption && option ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
 		this.panelRef.emitValue(this.selectedOptions);
-		setTimeout(() => this.panelRef.updatePosition());
+		afterNextRender(() => this.panelRef.updatePosition(), { injector: this.#injector });
 	}
 
-	toggleOptions(notSelectedOptions: T[], groupOptions: T[]): void {
+	toggleOptions(notSelectedOptions: T[], groupOptions: T[], groupKey?: unknown): void {
+		const dataSource = this.selectInput.dataSource();
+		if (groupKey !== undefined && dataSource.getGroupOptions) {
+			this.groupLoadingKeys.update((keys) => new Set(keys).add(groupKey));
+			void firstValueFrom(dataSource.getGroupOptions(groupKey))
+				.then((allGroupOptions) => {
+					this.groupLoadingKeys.update((keys) => {
+						const s = new Set(keys);
+						s.delete(groupKey);
+						return s;
+					});
+					const notSelectedOptions = allGroupOptions.filter((o) => !this.selectedOptions.some((so) => this.optionComparer()(so, o)));
+					this.#applyGroupToggle(notSelectedOptions, allGroupOptions);
+				})
+				.catch(() => {
+					this.groupLoadingKeys.update((keys) => {
+						const s = new Set(keys);
+						s.delete(groupKey);
+						return s;
+					});
+				});
+			return;
+		}
+		this.#applyGroupToggle(notSelectedOptions, groupOptions);
+	}
+
+	#applyGroupToggle(notSelectedOptions: T[], groupOptions: T[]): void {
 		// Filter out disabled options
 		const disabledOptionIds = this.options()
 			.filter((o) => o.disabled)
-			.map((o) => this.optionKey(o.option()));
-		const enabledNotSelectedOptions = notSelectedOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
-		const enabledGroupOptions = groupOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
+			.map((o) => o.option())
+			.filter(isNotNil)
+			.map((option) => this.optionKey()(option));
+		const enabledNotSelectedOptions = notSelectedOptions.filter((o) => !disabledOptionIds.includes(this.optionKey()(o)));
+		const enabledGroupOptions = groupOptions.filter((o) => !disabledOptionIds.includes(this.optionKey()(o)));
 
 		if (enabledNotSelectedOptions.length) {
 			// If some options are not selected, select them all
 			this.selectedOptions = [...this.selectedOptions, ...enabledNotSelectedOptions];
 		} else {
 			// If all options are already selected, unselect them all
-			this.selectedOptions = this.selectedOptions.filter((o) => !enabledGroupOptions.some((so) => this.optionComparer(so, o)));
+			this.selectedOptions = this.selectedOptions.filter((o) => !enabledGroupOptions.some((so) => this.optionComparer()(so, o)));
 		}
 
 		this.panelRef.emitValue(this.selectedOptions);
-		setTimeout(() => this.panelRef.updatePosition());
+		afterNextRender(() => this.panelRef.updatePosition(), { injector: this.#injector });
 	}
 
 	protected initKeyManager(): void {
 		this.keyManager.init({
 			queryList: this.options,
-			options$: this.options$,
-			optionComparer: this.optionComparer,
+			options: this.dataSourceOptions,
+			optionComparer: this.optionComparer(),
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
 			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});
 
 		if (this.selectedOptions?.length) {
-			this.keyManager.highlightOption(this.selectedOptions[0]);
+			const firstSelectedOption = this.selectedOptions[0];
+			if (firstSelectedOption !== undefined) {
+				this.keyManager.highlightOption(firstSelectedOption);
+			}
 		}
 	}
 }

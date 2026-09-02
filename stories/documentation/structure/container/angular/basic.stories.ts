@@ -1,7 +1,7 @@
-import { CONTAINER_SIZE, ContainerComponent } from '@lucca-front/ng/container';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from '@/helpers/common-arg-types';
 import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { CONTAINER_SIZE, ContainerComponent } from '@lucca-front/ng/container';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Structure/Container/Angular/Basic',

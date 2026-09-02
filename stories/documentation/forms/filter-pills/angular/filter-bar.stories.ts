@@ -48,7 +48,7 @@ export default {
 				examplePeriod: null,
 			},
 			template: `<lu-filter-bar>
-	<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
+	<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
 		<ng-template #label0>Tous <lu-numeric-badge [value]="12" /></ng-template>
 		<ng-template #label1>En cours d’approbation <lu-numeric-badge [value]="5" /></ng-template>
 		<ng-template #label2>Approuvés <lu-numeric-badge [value]="3" /></ng-template>
@@ -73,7 +73,7 @@ export default {
 	<lu-form-field label="Test" hiddenLabel>
 		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 	</lu-form-field>
-	<button  *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
+	<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
 </lu-filter-bar>`,
 		};
 	},

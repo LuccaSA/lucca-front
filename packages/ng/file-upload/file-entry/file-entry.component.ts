@@ -1,8 +1,8 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { intlInputOptions, IntlParamsPipe, isNotNil } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, isNotNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -33,7 +33,9 @@ export class FileEntryComponent {
 
 	readonly state = input<FileEntryState>('default');
 
-	readonly displayFileName = input(false, { transform: booleanAttribute });
+	readonly displayFileName = input(false, { transform: luBooleanAttribute });
+
+	readonly structure = input(false, { transform: luBooleanAttribute });
 
 	readonly inlineMessageError = input<string | null>(null);
 
@@ -45,19 +47,19 @@ export class FileEntryComponent {
 
 	readonly downloadURL = input('');
 
-	readonly openInNewTab = input(false, { transform: booleanAttribute });
+	readonly openInNewTab = input(false, { transform: luBooleanAttribute });
 
 	readonly password = input('');
-	passwordChange$ = new Subject<string>();
+	readonly passwordChange$ = new Subject<string>();
 	passwordChange = outputFromObservable(this.passwordChange$);
 
 	get withPassword() {
 		return this.passwordChange$.observed;
 	}
 
-	readonly media = input(false, { transform: booleanAttribute });
+	readonly media = input(false, { transform: luBooleanAttribute });
 
-	deleteFile$ = new Subject<void>();
+	readonly deleteFile$ = new Subject<void>();
 
 	deleteFile = outputFromObservable(this.deleteFile$);
 
@@ -114,11 +116,11 @@ export class FileEntryComponent {
 			}
 		}
 
-		if (!this.media() && this.size() === null) {
+		if (!this.media() && this.size() === 'L') {
 			return null;
 		}
 
-		if (this.size() === 'S' && !this.media()) {
+		if (this.size() === null && !this.media()) {
 			return this.fileTypeDisplay() + fileSize;
 		}
 

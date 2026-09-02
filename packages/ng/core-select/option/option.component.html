@@ -1,11 +1,31 @@
-<div class="optionItem-value" [class.is-disabled]="selectableItem.disabled" (click)="selectOption($event)">
-	<ng-container *luOptionOutlet="optionTpl; value: selectableItem.option()" />
+<lu-listbox-option
+	[checked]="selectableItem.isSelected()"
+	[hovered]="selectableItem.isHighlighted()"
+	[disabled]="selectableItem.disabled"
+	(click)="selectOption($event)"
+	[elementId]="selectableItem.idAttribute()"
+>
+	<ng-container [ngTemplateOutlet]="optionContent" />
+</lu-listbox-option>
+@if (treeitemContent()) {
+	<!-- The listbox derives the indentation level from the DOM nesting of these wrappers -->
+	<div class="listboxOptionWrapper" role="group">
+		<ng-content select="[treeitem]" />
+	</div>
+}
 
-	@if (groupTemplateLocation() === "option" && grouping) {
-		<div class="optionItem-value-group">
-			<ng-container *luPortal="grouping.content; context: { $implicit: selectableItem.option() | luOptionGroup: grouping.selector }" />
-		</div>
-	}
+<ng-template #optionContent>
+	<div>
+		<ng-container *luOptionOutlet="optionTpl(); value: selectableItem.option()" />
+
+		@if (groupTemplateLocation() === "option") {
+			@if (grouping(); as grouping) {
+				<div class="listboxOption-content-group">
+					<ng-container *luPortal="grouping.content; context: { $implicit: selectableItem.option() | luOptionGroup: grouping.selector }" />
+				</div>
+			}
+		}
+	</div>
 
 	@if (hasChildren() && !selectableItem.disabled) {
 		<div class="optionItem-icons">
@@ -45,4 +65,4 @@
 			</span>
 		</div>
 	}
-</div>
+</ng-template>

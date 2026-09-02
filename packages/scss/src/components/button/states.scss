@@ -31,6 +31,10 @@
 	&,
 	&:disabled {
 		--components-button-color: transparent;
+
+		.lucca-icon {
+			color: transparent;
+		}
 	}
 
 	.numericBadge {
@@ -74,8 +78,8 @@
 		@include icon.generate('sign_confirm');
 
 		color: var(--palettes-neutral-0);
-		font-size: calc(1.5 * var(--pr-t-font-body-M-fontSize));
-		block-size: var(--pr-t-font-body-M-lineHeight);
+		font-size: calc(1.5 * var(--components-button-font-size));
+		block-size: var(--components-button-line-height);
 		inset: 0;
 		margin: auto;
 		position: absolute;

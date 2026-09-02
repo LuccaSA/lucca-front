@@ -131,6 +131,11 @@
 			@include button.critical;
 		}
 
+		&.is-loading {
+			@include button.loadingS;
+			@include button.loadingGhost;
+		}
+
 		transition-property: box-shadow, color;
 	}
 

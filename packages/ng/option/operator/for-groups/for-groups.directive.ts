@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Directive, forwardRef, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
-import { ILuGroup } from '@lucca-front/ng/core';
+import { ChangeDetectorRef, Directive, forwardRef, input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ILuGroup, syncInputSignal } from '@lucca-front/ng/core';
 import { Observable, Subscription } from 'rxjs';
 import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
@@ -41,10 +41,8 @@ export class LuForGroupsDirective<TItem, TKey> implements ILuOptionOperator<TIte
 	outOptions$?: Observable<TItem[]>;
 
 	private _groupByFn: (item: TItem) => TKey;
-	@Input('luForGroupsGroupBy')
-	public set attrGroupBy(fn: (item: TItem) => TKey) {
-		this._groupByFn = fn;
-	}
+
+	readonly attrGroupBy = input<(item: TItem) => TKey>(undefined, { alias: 'luForGroupsGroupBy' });
 
 	protected _subs = new Subscription();
 	public set inOptions$(options$: Observable<TItem[]>) {
@@ -56,7 +54,9 @@ export class LuForGroupsDirective<TItem, TKey> implements ILuOptionOperator<TIte
 		protected _vcr: ViewContainerRef,
 		protected _cdr: ChangeDetectorRef,
 		protected _templateRef: TemplateRef<LuForGroupContext<ILuGroup<TItem, TKey>>>,
-	) {}
+	) {
+		syncInputSignal(this.attrGroupBy, (fn) => (this._groupByFn = fn));
+	}
 
 	public ngOnDestroy(): void {
 		this._subs.unsubscribe();

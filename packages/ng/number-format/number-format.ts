@@ -1,3 +1,4 @@
+import { isNil } from '@lucca-front/ng/core';
 import { canCastSplittedInputToNumber, joinSplittedInput, NumberFormatOptions, NumberFormatParsedInput, NumberFormatSplittedInput } from './number-format.models';
 
 const VALUE_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fraction', 'group', 'minusSign'];
@@ -85,8 +86,8 @@ export class NumberFormat {
 		return null;
 	}
 
-	applyRange(value: number | null): number | null {
-		if (value === null) {
+	applyRange(value: number | null | undefined): number | null {
+		if (isNil(value)) {
 			return null;
 		}
 		if (this.min !== undefined) {
@@ -101,12 +102,12 @@ export class NumberFormat {
 	#parseAndSplitInput(input: string): NumberFormatSplittedInput {
 		let minusSign = /^-/g.exec(input)?.[0] ?? '';
 		// if minus sign has been input but range only allows positive values, remove it
-		if (this.min >= 0) {
+		if (this.min !== undefined && this.min >= 0) {
 			minusSign = '';
 		}
 
 		// Add minus sign by default if range only allows negative values
-		if (this.max < 0) {
+		if (this.max !== undefined && this.max < 0) {
 			minusSign = '-';
 		}
 
@@ -137,7 +138,7 @@ export class NumberFormat {
 			let value = +joinSplittedInput(splittedInput);
 			if (this.options.style === 'percent') {
 				value /= 100;
-				value = +value.toFixed(this.options.maximumFractionDigits + 2);
+				value = this.options.maximumFractionDigits ? +value.toFixed(this.options.maximumFractionDigits + 2) : value;
 			}
 
 			// if value is not in range, fix it and split again !
@@ -158,7 +159,7 @@ export class NumberFormat {
 			value = +joinSplittedInput(splittedInput);
 			if (this.options.style === 'percent') {
 				value /= 100;
-				value = +value.toFixed(this.options.maximumFractionDigits + 2);
+				value = this.options.maximumFractionDigits ? +value.toFixed(this.options.maximumFractionDigits + 2) : value;
 			}
 		}
 		return {
@@ -176,9 +177,9 @@ export class NumberFormat {
 	}
 
 	getFocusFormat(value: number | undefined | null): string {
-		if (value === null || value === undefined || isNaN(value)) {
+		if (isNil(value) || isNaN(value)) {
 			// Add minus sign by default if range only allows negative values
-			return this.max < 0 ? '-' : '';
+			return this.max !== undefined && this.max < 0 ? '-' : '';
 		}
 		const parts = this.#focusIntlNumberFormat.formatToParts(value);
 		const minusSign = parts.find((p) => p.type === 'minusSign')?.value ?? '';
@@ -196,7 +197,7 @@ export class NumberFormat {
 	}
 
 	getBlurFormat(value: number | undefined | null): string {
-		if (value === null || value === undefined) {
+		if (isNil(value)) {
 			return '';
 		}
 		return this.#intlNumberFormat
