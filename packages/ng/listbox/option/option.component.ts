@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, computed, contentChild, Directive, 
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LISTBOX_INSTANCE, OPTION_INSTANCE } from '../tokens';
-import { CoreSelectPanelElement } from '../../core-select/panel/selectable-item';
 
 let nextId = 0;
 

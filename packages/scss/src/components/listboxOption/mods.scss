@@ -54,7 +54,6 @@
 
 @mixin select {
 	> .listboxOption-content {
-		--components-listboxOption-content-opacity: 0;
 		--components-listboxOption-content-position: static;
 		--components-listboxOption-content-font: var(--pr-t-font-body-S);
 		--components-listboxOption-content-padding: 0;

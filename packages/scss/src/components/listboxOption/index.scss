@@ -31,17 +31,26 @@
 		&[role='group'] {
 			@include group;
 
-			&:hover,
-			&:has(.is-hovered) {
-				@include groupHover;
+			&:hover {
+				.selectPanel.is-pointerNavigation & {
+					@include groupHover;
+				}
 			}
 
-			> .listboxOption-content {
+			&:has(.is-hovered),
+			&:has(.link.is-highlighted) {
+				.selectPanel:not(.is-pointerNavigation) & {
+					@include groupHover;
+				}
+			}
+
+			> .listboxOption-content:has(.link) {
 				&:hover {
 					.selectPanel.is-pointerNavigation & {
 						@include hover;
 					}
 				}
+
 				&.is-hovered,
 				&:has(.link.is-highlighted) {
 					.selectPanel:not(.is-pointerNavigation) & {
@@ -72,6 +81,7 @@
 						@include selectedHover;
 					}
 				}
+
 				&.is-hovered {
 					.selectPanel:not(.is-pointerNavigation) & {
 						@include selectedHover;
@@ -112,14 +122,15 @@
 
 	@layer mods {
 		&:hover {
-				.selectPanel.is-pointerNavigation & {
-					@include hover;
-				}
+			.selectPanel.is-pointerNavigation & {
+				@include hover;
+			}
 		}
+
 		&.is-hovered {
-				.selectPanel:not(.is-pointerNavigation) & {
-					@include hover;
-				}
+			.selectPanel:not(.is-pointerNavigation) & {
+				@include hover;
+			}
 		}
 
 		&:active {

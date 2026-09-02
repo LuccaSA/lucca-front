@@ -20,8 +20,7 @@
 
 		@if (groupTemplateLocation() === "option") {
 			@if (grouping(); as grouping) {
-				<!-- TODO Vincent -->
-				<div>
+				<div class="listboxOption-content-group">
 					<ng-container *luPortal="grouping.content; context: { $implicit: selectableItem.option() | luOptionGroup: grouping.selector }" />
 				</div>
 			}
