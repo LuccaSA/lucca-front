@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, signal } from '@angular/core';
+import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, Injector, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { isNotNil, PortalDirective } from '@lucca-front/ng/core';
@@ -76,7 +76,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	readonly optionTpl = this.selectInput.optionTpl;
 
 	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
-	readonly pointerNavigation = ɵinjectPointerNavigation();
+	readonly pointerNavigation = ɵinjectPointerNavigation(inject<ElementRef<HTMLElement>>(ElementRef).nativeElement);
 
 	readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 	readonly #injector = inject(Injector);
