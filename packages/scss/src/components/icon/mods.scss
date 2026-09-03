@@ -1,0 +1,51 @@
+@mixin XXS {
+	--components-icon-size: 0.75rem;
+}
+
+@mixin XS {
+	--components-icon-size: 1rem;
+}
+
+@mixin S {
+	--components-icon-size: 1.25rem;
+}
+
+@mixin M {
+	--components-icon-size: 1.5rem;
+}
+
+@mixin L {
+	--components-icon-size: 1.75rem;
+}
+
+@mixin XL {
+	--components-icon-size: 2rem;
+}
+
+@mixin XXL {
+	--components-icon-size: 2.5rem;
+}
+
+@mixin colorProduct {
+	--components-icon-color: var(--palettes-product-700);
+}
+
+@mixin colorError {
+	--components-icon-color: var(--palettes-error-700);
+}
+
+@mixin colorWarning {
+	--components-icon-color: var(--palettes-warning-700);
+}
+
+@mixin colorSuccess {
+	--components-icon-color: var(--palettes-success-700);
+}
+
+@mixin colorLight {
+	--components-icon-color: var(--palettes-neutral-600);
+}
+
+@mixin colorPlaceholder {
+	--components-icon-color: var(--palettes-neutral-400);
+}
