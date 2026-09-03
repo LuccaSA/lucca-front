@@ -11,6 +11,22 @@ Ce skill guide la migration d'un projet **consommateur** de `@lucca-front/ng` de
 
 Principe directeur : **les schematics font le mécanique, ce skill fait le résiduel contextuel.** Ne jamais réimplémenter à la main ce qu'un schematic couvre déjà — lancer le schematic, puis traiter uniquement ce qu'il laisse.
 
+**Ce skill s'exécute dans le dépôt du projet consommateur**, pas dans `lucca-front` : le voir listé signifie qu'il a été rapatrié (voir « Installation » plus bas). Toutes les commandes ci-dessous (`ng g`, `ng build`, lint, tests) s'appliquent au projet à migrer.
+
+## Fichiers de référence
+
+Ne pas les lire d'office : chaque étape indique lequel ouvrir, et seulement si le motif correspondant a été détecté.
+
+| Référence | Ce qu'elle couvre |
+|---|---|
+| [Palettes.md](./references/Palettes.md) | Résiduel non couvert par `ng g @lucca-front/ng:palettes` : CSS vars `*-rgb` (`--colors-grey\|neutral-400\|900-rgb`, `--colors-white-rgb`) à remplacer par `--palettes-neutral-*`, avec `color.transparentize` si opacité `rgba`. Et surtout `$palettesDeprecated`, supprimée en 22.0 : toute référence restante dans un `@use '@lucca-front/scss/src/commons/config' with (...)` casse la compilation SCSS. L'input `<lu-icon color="primary\|secondary">` est désormais couvert par le schematic. |
+| [FileUpload.md](./references/FileUpload.md) | `lu-single-file-upload` perd l'input `[entry]` : le `FileEntry` se rend côté parent via `lu-file-entry`. Nouvelle taille par défaut (la plus petite) sur `lu-single-file-upload` et `lu-multi-file-upload` : ajouter `size="L"` pour conserver l'ancien rendu. |
+| [ActivityFeed.md](./references/ActivityFeed.md) | `lu-activity-feed-update` gagne un niveau intermédiaire `lu-activity-feed-update-item`, qui porte le `label` et le contenu projeté (slots `activityFeedUpdateBefore` / `activityFeedUpdateAfter`). |
+| [SelectListBox.md](./references/SelectListBox.md) | Le panel des selects passe au composant ListBox : migration faite par LF, aucune action en usage standard. Les overrides SCSS de `.optionItem` et de ses enfants ne sont **jamais** migrés automatiquement — les détecter et les lister dans le rapport (équivalent connu : `.optionItem-value` → `.listboxOption-content`), sans les appliquer. |
+| [Signal.md](./references/Signal.md) | Derniers `@Input()`/`@Output()`/`@ViewChild` migrés vers `input()`/`output()`/`viewChild()` + `syncInputSignal()`. Alias de template préservés, mais côté TS : inputs à invoquer avec `()`, propriétés renommées (`inputPlaceholder`→`placeholderInput`, `inputMultiple`→`multipleInput`, `inputDisabled`→`disabledInput`, `overlapInput`→`pickerOverlap`), membres supprimés (`placeholder$`, `isDisabled`), Subjects devenus observables dérivés (`url$`, `fields$`, `loading$` : plus de `.next()`), pilotage d'un select par `.set()` sur un `linkedSignal`, `clueChange` en `output()`, et inputs devenus requis (`luOptionGroupSelect`/`luOptionGroupBy` échouent au build ; `apiV3` non concerné). `ngOnChanges` se déclenche toujours, mais la clé de `SimpleChanges` suit le nom TS renommé, pas l'alias. |
+| [Readonly.md](./references/Readonly.md) | ~360 propriétés de classe passées en `readonly` + règle ESLint `@angular-eslint/prefer-signals`. `readonly` bloque la réassignation, pas la mutation (`.next()`/`.set()` restent valides), et une sous-classe qui redéclare la propriété compile : la casse se limite au pilotage depuis l'extérieur (réassignation d'un flux, d'un template, d'une ref — y compris les mocks de refs en test). Contient le critère pour retirer un `readonly` côté LF. |
+| [Strict.md](./references/Strict.md) | `strictNullChecks` sur les `.d.ts` publiés : `value`/CVA en `T \| null`, `LuDialogRef.instance` en `C \| null`, `onOpen`/`onClose` en `D \| undefined`, `ILuDateAdapter.parse` en `D \| undefined`, inputs élargis, `PortalDirective<T extends object>`. **§5 et §8** listent les changements de comportement silencieux, obligatoires à auditer à l'Étape 5 même sur un projet non strict. |
+
 Utiliser `TodoWrite` pour suivre les étapes 0 à 7 ci-dessous comme une todo list : chaque étape devient une tâche, marquée `completed` au fur et à mesure — cette migration touche plusieurs fichiers sur plusieurs passes et ne doit pas perdre le fil en cours de route.
 
 ---
@@ -34,7 +50,7 @@ Les schematics couvrent le gros du remplacement palettes de façon fiable et tes
 
 **Demander donc explicitement à l'utilisateur** — via `AskUserQuestion` — s'il veut que le schematic `palettes` soit joué maintenant. Dans la question, préciser :
 
-- que LF 22 **remplace des palettes** : `.palette-grey` → `.palette-neutral`, `.palette-primary`/`.palette-secondary` → `.palette-product`, `.palette-lucca` → `.palette-brand`, ainsi que les CSS vars `--palettes-*` / `--colors-grey|white|black` correspondantes, les utilitaires `u-text*`/`pr-u-*`, `.mod-grey`, `.icon-color-*` et l'input `<lu-icon color="primary|secondary">` ;
+- que LF 22 **remplace des palettes** : `.palette-grey` → `.palette-neutral`, `.palette-primary`/`.palette-secondary` → `.palette-product`, `.palette-lucca` → `.palette-brand`, ainsi que les CSS vars `--palettes-*` / `--colors-grey|white|black` correspondantes, les utilitaires `u-text*`/`pr-u-*`, `.mod-grey`, `.icon-color-*` et l'input `<lu-icon color="primary\|secondary">` ;
 - que le schematic modifie HTML + SCSS + templates sur potentiellement beaucoup de fichiers ;
 - les deux réponses possibles : **Oui** (lancer maintenant) / **Non** (laisser pour une PR à part).
 
@@ -95,7 +111,7 @@ Traiter les cas de [Palettes.md](./references/Palettes.md) :
 - **Vars `*-rgb`** : remplacer par la palette neutre correspondante, en enveloppant avec `color.transparentize` **si et seulement si** une opacité était appliquée via `rgba(...)`. Ne **jamais** remplacer aveuglément.
 - **`$palettesDeprecated`** : la variable n'existe plus en 22.0 — supprimer sa déclaration partout où le consommateur la configure, sinon le SCSS ne compile plus. Voir [Palettes.md](./references/Palettes.md#4-palettesdeprecated--suppression-sèche).
 
-- **`<lu-icon color="primary|secondary">`** : rien à faire si le schematic `palettes` a été lancé (il le couvre, statique et bound). S'il a été refusé à l'Étape 1, **ne pas le migrer à la main** : ce cas fait partie du périmètre de la PR dédiée aux palettes.
+- **`<lu-icon color="primary\|secondary">`** : rien à faire si le schematic `palettes` a été lancé (il le couvre, statique et bound). S'il a été refusé à l'Étape 1, **ne pas le migrer à la main** : ce cas fait partie du périmètre de la PR dédiée aux palettes.
 
 ---
 
@@ -161,3 +177,17 @@ Produire un rapport structuré :
 - **Erreurs préexistantes** rencontrées au build/lint mais non imputables à LF 22 : listées, non corrigées.
 - **Pistes hors périmètre** repérées en chemin (modernisation, refacto, dette) : listées comme suggestions pour plus tard, jamais appliquées dans cette migration.
 - **Récapitulatif** : nombre d'occurrences par catégorie, fichiers touchés.
+
+---
+
+## Installation dans un projet consommateur
+
+Ce skill vit dans [`lucca-front/.claude/skills/`](https://github.com/LuccaSA/lucca-front/tree/master/.claude/skills). Pour l'utiliser sur un projet à migrer, le rapatrier tel quel — dossier complet, `SKILL.md` **et** `references/` :
+
+```bash
+# depuis la racine du projet à migrer, avec un clone de lucca-front à côté
+mkdir -p .claude/skills
+cp -r <chemin>/lucca-front/.claude/skills/lucca-front-migrate-22 .claude/skills/
+```
+
+Le poser dans `.claude/skills/` du projet le versionne et le partage avec l'équipe ; le poser dans `~/.claude/skills/` le réserve à un poste. Claude Code le charge ensuite automatiquement quand une migration LF 22 est demandée, ou explicitement via `/lucca-front-migrate-22`.
