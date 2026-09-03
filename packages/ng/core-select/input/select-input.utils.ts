@@ -62,6 +62,8 @@ export function buildOptionsFromDataSource<TOption>(ds: SelectDataSource<TOption
 							return lastIndexes.length < 2 || !lastIndexes.every((i) => pages[i]?.length === 0);
 						}),
 						map((pages) => Object.values(pages).flat()),
+						// Applied on the accumulated list so cross-page decorations (eg. homonyms) can be computed
+						switchMap((options) => ds.transformOptions?.(options) ?? of(options)),
 						finalize(() => setLoading(false)), // Avoid infinite loading on complete API or error
 					);
 				}),

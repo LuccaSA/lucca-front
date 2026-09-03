@@ -75,6 +75,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			clueDebounceMs: this.debounceDuration,
 			getTotalCount: () => this.totalCount$,
 			reset: () => this.clearLastPageByClue(),
+			transformOptions: (options) => this.transformOptions(options),
 			getOptions: ({ clue, page }) => {
 				const lastPage = clue === this.#lastClue ? this.#lastPage : undefined;
 				if (lastPage !== undefined && page > lastPage) {
@@ -98,6 +99,14 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		};
 
 		this.select.dataSource.set(dataSource);
+	}
+
+	/**
+	 * Post-process the whole list of loaded options (all pages accumulated). Override it for
+	 * decorations that can't be computed page by page, eg. flagging homonyms across pages.
+	 */
+	protected transformOptions(options: readonly TOption[]): Observable<readonly TOption[]> {
+		return of(options);
 	}
 
 	protected buildParamsFromClue(clue: string): Observable<TParams> {
