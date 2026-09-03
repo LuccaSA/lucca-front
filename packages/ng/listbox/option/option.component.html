@@ -16,8 +16,8 @@
 </div>
 <ng-content select="[optgroup]" />
 
-@if (treeitemContent()) {
-	<div class="listboxOptionWrapper" role="group" [attr.style]="level ? '--components-listboxOptionWrapper-level: ' + level : null">
+@if (hasTreeitems()) {
+	<div class="listboxOptionWrapper" role="group" [attr.style]="'--components-listboxOptionWrapper-level: ' + wrapperLevel()">
 		<ng-content select="[treeitem]" />
 	</div>
 }
