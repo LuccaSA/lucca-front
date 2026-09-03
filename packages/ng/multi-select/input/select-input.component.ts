@@ -20,7 +20,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
+import { getIntlPluralLabel, intlInputOptions, LOCALE_PLURAL_RULES, luBooleanAttribute, luNumberAttribute, LuPluralForms } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
@@ -85,17 +85,20 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	readonly keepSearchAfterSelection = input(false, { transform: luBooleanAttribute });
 
+	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
+
 	/**
 	 * @deprecated use filterPillLabelPluralFn
 	 */
 	readonly filterPillLabelPlural = input<string>();
-	readonly filterPillLabelPluralFn = input<(count: number) => string>();
+	readonly filterPillLabelPluralFn = input<(count: number) => string | LuPluralForms>();
 
 	readonly filterPillLabelPluralValue = computed(() => {
 		const label = this.filterPillLabelPluralFn();
 		const count = this.valueLength();
 		if (label) {
-			return label(count);
+			const result = label(count);
+			return typeof result === 'string' ? result : getIntlPluralLabel(this.pluralRules, result, count);
 		}
 		return `${count} ${this.filterPillLabelPlural()}`;
 	});

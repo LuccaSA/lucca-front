@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { LuTranslation } from '@lucca-front/ng/core';
+import { LuPluralForms, LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_USER_SELECT_INPUT_TRANSLATIONS = new InjectionToken('LuUserSelectTranslations', {
@@ -7,7 +7,7 @@ export const LU_USER_SELECT_INPUT_TRANSLATIONS = new InjectionToken('LuUserSelec
 });
 
 export interface ILuUserSelectInputLabel {
-	users: string;
+	users: string | LuPluralForms;
 	me: string;
 }
 
