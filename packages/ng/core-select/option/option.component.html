@@ -4,15 +4,13 @@
 	[disabled]="selectableItem.disabled"
 	(click)="selectOption($event)"
 	[elementId]="selectableItem.idAttribute()"
+	[treeitemLevel]="treeitemContent() ? level : null"
 >
 	<ng-container [ngTemplateOutlet]="optionContent" />
+	<!-- Re-projected into the option's own wrapper, so the tree rows are stacked by the listbox
+	itself: the level has to be passed along because a content query stops at this ng-content -->
+	<ng-content select="[treeitem]" ngProjectAs="[treeitem]" />
 </lu-listbox-option>
-@if (treeitemContent()) {
-	<!-- The listbox derives the indentation level from the DOM nesting of these wrappers -->
-	<div class="listboxOptionWrapper" role="group">
-		<ng-content select="[treeitem]" />
-	</div>
-}
 
 <ng-template #optionContent>
 	<div>
