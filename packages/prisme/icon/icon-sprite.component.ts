@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { LuSafeExternalSvgPipe } from '@lucca/prisme/safe-content';
 
 // TODO: point back to the CDN once the sprite is generated and published there.
-const ICON_SPRITE_URL = 'https://tmp.vincent-valentin.name/lucca/sprite.svg';
+const ICON_SPRITE_URL = 'https://cdn.lucca.fr/transverse/prisme/icons/svg/sprite.svg';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
