@@ -61,6 +61,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 		saveView: {
 			description: 'Ajoute une vue personnalisée ainsi qu’un dropdown pour enregistrer la vue.',
@@ -68,24 +69,28 @@ export default {
 				type: 'boolean',
 			},
 			if: { arg: 'views', truthy: true },
+			table: { category: 'inputs' },
 		},
 		optionalFilter: {
 			description: 'Ajoute une FilterPill optionnelle. Celle-ci déclanche automatiquement l’apparition du bouton d’ajout de filtres.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 		actionButton: {
 			description: 'Affiche un bouton d’action associé à la FilterBar.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 		applyFiltersButton: {
 			description: 'Affiche un bouton pour appliquer les filtres, utilisé lorsqu’il n’est pas possible d’appliquer les filtres automatiquement.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	render: (args, { argTypes }) => {
