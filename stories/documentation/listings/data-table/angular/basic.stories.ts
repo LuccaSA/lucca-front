@@ -316,7 +316,7 @@ export default {
 	</tfoot>`
 			: ``;
 		const modelEditableDisplayer = editable ? `<pr-story-model-display>{{ example }}</pr-story-model-display>` : ``;
-		const tbodyTpl = emptyAttr
+		const tbodyTpl = empty
 			? `<tr luDataTableRow>
 			<th luDataTableCell colspan="${cols}">
 				<lu-empty-state-section
