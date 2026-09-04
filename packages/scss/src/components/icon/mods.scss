@@ -49,3 +49,19 @@
 @mixin colorPlaceholder {
 	--components-icon-color: var(--palettes-neutral-400);
 }
+
+@mixin AI {
+	fill: url('#lu-icon-ai-gradient');
+}
+
+@mixin whenIconComponent {
+	:where(lu-icon, pr-icon) .lucca-icon {
+		@content;
+	}
+}
+
+@mixin whenRawIcon {
+	.lucca-icon:where(:not(:where(lu-icon, pr-icon) .lucca-icon)) {
+		@content;
+	}
+}

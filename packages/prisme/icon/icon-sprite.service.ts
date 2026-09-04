@@ -7,13 +7,13 @@ export class IconSpriteService {
 	#applicationRef = inject(ApplicationRef);
 	#environmentInjector = inject(EnvironmentInjector);
 	#platformId = inject(PLATFORM_ID);
-	#loaded = false;
+	#requested = false;
 
 	ensureSpriteLoaded(): void {
-		if (this.#loaded || !isPlatformBrowser(this.#platformId)) {
+		if (this.#requested || !isPlatformBrowser(this.#platformId)) {
 			return;
 		}
-		this.#loaded = true;
+		this.#requested = true;
 
 		const componentRef = createComponent(IconSpriteComponent, { environmentInjector: this.#environmentInjector });
 		document.body.append(componentRef.location.nativeElement as HTMLElement);

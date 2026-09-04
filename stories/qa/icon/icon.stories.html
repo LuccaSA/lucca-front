@@ -14,13 +14,11 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<span aria-hidden="true" class="lucca-icon icon-heart"></span>
-					<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-icon [icon]="'heart'" />
-					<lu-icon [icon]="'heart'" />
+					<lu-icon icon="heart" />
 				</div>
 			</td>
 		</tr>
@@ -39,13 +37,13 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-icon [icon]="'heart'" [size]="'XXS'" />
-					<lu-icon [icon]="'heart'" [size]="'XS'" />
-					<lu-icon [icon]="'heart'" [size]="'S'" />
-					<lu-icon [icon]="'heart'" [size]="'M'" />
-					<lu-icon [icon]="'heart'" [size]="'L'" />
-					<lu-icon [icon]="'heart'" [size]="'XL'" />
-					<lu-icon [icon]="'heart'" [size]="'XXL'" />
+					<lu-icon icon="heart" size="XXS" />
+					<lu-icon icon="heart" size="XS" />
+					<lu-icon icon="heart" size="S" />
+					<lu-icon icon="heart" size="M" />
+					<lu-icon icon="heart" size="L" />
+					<lu-icon icon="heart" size="XL" />
+					<lu-icon icon="heart" size="XXL" />
 				</div>
 			</td>
 		</tr>
@@ -59,17 +57,18 @@
 					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-colorTextSuccess"></span>
 					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-colorTextSubtle"></span>
 					<span aria-hidden="true" class="lucca-icon icon-heart pr-u-colorInputTextPlaceholder"></span>
+					<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-icon [icon]="'heart'" [color]="'product'" />
-					<lu-icon [icon]="'heart'" [color]="'error'" />
-					<lu-icon [icon]="'heart'" [color]="'warning'" />
-					<lu-icon [icon]="'heart'" [color]="'success'" />
-					<lu-icon [icon]="'heart'" [color]="'light'" />
-					<lu-icon [icon]="'heart'" [color]="'placeholder'" />
-					<lu-icon [icon]="'heart'" [color]="'inherit'" />
+					<lu-icon icon="heart" color="product" />
+					<lu-icon icon="heart" color="error" />
+					<lu-icon icon="heart" color="warning" />
+					<lu-icon icon="heart" color="success" />
+					<lu-icon icon="heart" color="light" />
+					<lu-icon icon="heart" color="placeholder" />
+					<lu-icon icon="heart" color="inherit" />
 				</div>
 			</td>
 		</tr>
@@ -82,7 +81,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-icon [icon]="'heart'" [AI]="true" />
+					<lu-icon icon="heart" AI />
 				</div>
 			</td>
 		</tr>
@@ -116,6 +115,34 @@
 					</button>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button mod-onlyIcon mod-ghost">
+						<lu-icon icon="officePen" alt="Edit" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost">
+						<lu-icon icon="trashDelete" alt="Delete" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost">
+						<lu-icon icon="star" alt="Bookmark" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-error">
+						<lu-icon icon="heart" alt="Like" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost" disabled>
+						<lu-icon icon="officePen" alt="Edit" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost" disabled>
+						<lu-icon icon="trashDelete" alt="Delete" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost" disabled>
+						<lu-icon icon="star" alt="Bookmark" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-error" disabled>
+						<lu-icon icon="heart" />
+					</button>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>Inverted</td>
@@ -132,6 +159,22 @@
 					</button>
 					<button type="button" class="button mod-onlyIcon mod-ghost mod-invert">
 						<span aria-hidden="true" class="lucca-icon icon-heart"></span><span class="pr-u-mask"></span>
+					</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list mod-black">
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-invert">
+						<lu-icon icon="officePen" alt="Edit" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-invert">
+						<lu-icon icon="trashDelete" color="error" alt="Delete" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-invert">
+						<lu-icon icon="star" alt="Bookmark" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost mod-invert">
+						<lu-icon icon="heart" />
 					</button>
 				</div>
 			</td>
@@ -154,13 +197,29 @@
 					</button>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="button mod-onlyIcon mod-ghost">
+						<lu-icon icon="arrowRight" alt="Next" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-success">
+						<lu-icon icon="arrowRight" alt="Next" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-warning">
+						<lu-icon icon="arrowRight" alt="Next" />
+					</button>
+					<button type="button" class="button mod-onlyIcon mod-ghost palette-error">
+						<lu-icon icon="arrowRight" alt="Next" />
+					</button>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>List</td>
 			<td>
 				<div class="demo-QAtable-list mod-column">
 					@for (icon of icons; track icon.icon) {
-						<div>
+						<div class="demo-QAtable-list-row">
 							<span aria-hidden="true" class="lucca-icon icon-{{ icon.icon }}"></span>
 							<code class="code">icon-{{ icon.icon }}</code>
 						</div>
@@ -170,7 +229,7 @@
 			<td>
 				<div class="demo-QAtable-list mod-column">
 					@for (icon of icons; track icon.icon) {
-						<div>
+						<div class="demo-QAtable-list-row">
 							<lu-icon [icon]="icon.icon" />
 							<code class="code">icon-{{ icon.icon }}</code>
 						</div>
