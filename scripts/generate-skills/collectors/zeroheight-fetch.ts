@@ -94,10 +94,23 @@ function removeBaseline(pagePath: string, zhReleaseId: number | null): void {
 	}
 }
 
+/**
+ * Section title as compared by the shrink oracle. ZeroHeight editors decorate H1 titles with status
+ * markers (`Changelog 🧪` → `Changelog`, `Arrondis 🎉`) and tweak spacing/case; none of that is a
+ * lost section, so only letters and digits (case-insensitive) take part in the comparison.
+ */
+function normalizeSectionTitle(title: string): string {
+	return title
+		.replace(/[^\p{L}\p{N}]+/gu, ' ')
+		.trim()
+		.toLowerCase();
+}
+
 /** Returns a human-readable reason if `fresh` is a suspicious regression vs the baseline, else null. */
 function shrinkReason(baselineRaw: string, fresh: ZeroHeightData): string | null {
 	const baseSections = Object.keys(parseSections(baselineRaw));
-	const missing = baseSections.filter((s) => !(s in fresh.sections));
+	const freshTitles = new Set(Object.keys(fresh.sections).map(normalizeSectionTitle));
+	const missing = baseSections.filter((s) => !freshTitles.has(normalizeSectionTitle(s)));
 	if (missing.length > 0) {
 		return `section(s) disparue(s) : ${missing.join(', ')}`;
 	}

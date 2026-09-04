@@ -111,7 +111,8 @@ Trois mécanismes garantissent un rendu reproductible malgré des sources distan
    source — uniquement comme oracle :
    - **ZH** : si le contenu frais *rétrécit* (section H1 disparue, ou taille < 80 % de la baseline),
      la baseline est conservée en sortie et un échec `shrink` est enregistré (rejouable). Un ajout ou
-     une modification passe silencieusement et met à jour la baseline.
+     une modification passe silencieusement et met à jour la baseline. Les titres de sections sont
+     comparés sans casse ni ponctuation/emoji (`Changelog 🧪` → `Changelog` n'est pas une disparition).
    - **Figma** : une réponse 200 fait foi (le frais est toujours écrit) ; la disparition de
      propriétés/variantes est seulement **signalée** dans le rapport de fin de run.
    - `--accept-shrink` entérine : le frais est accepté et les baselines mises à jour.
