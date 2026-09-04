@@ -21,5 +21,15 @@ jobs:
           node-version: 24.15.0
       - run: npm install
       - run: npm run build --if-present
+      # `ci-test` already covers the VS Code extension: its unit tests run as a
+      # Vitest project (see vitest.vscode-extension.config.ts), so they need no
+      # step of their own.
       - run: npm run ci-test
       - run: npm run lint
+      - run: npm run build:vscode-extension
+      - name: Upload VS Code extension VSIX
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: lucca-front-intellisense-vsix
+          path: packages/vscode-extension/*.vsix
+          if-no-files-found: error

@@ -12,12 +12,15 @@ export default defineConfig(
 	{
 		ignores: [
 			'dist/',
+			// Also the VS Code extension's own tsc output, which is not at the root.
+			'**/dist/',
 			'.storybook/**',
 			'**/schematics/**/tests/',
 			'node_modules/',
 			'.angular/',
 			'vitest.config.ts',
 			'vitest.shared-config.ts',
+			'vitest.vscode-extension.config.ts',
 			// schematics && stories can be strictified
 			'packages/ng/schematics/**/*.ts',
 			'stories/**/*.ts',
