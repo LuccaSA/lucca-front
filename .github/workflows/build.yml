@@ -23,3 +23,9 @@ jobs:
       - run: npm run build --if-present
       - run: npm run ci-test
       - run: npm run lint
+      # A stale dataset would show the wrong API surface with nothing to signal it.
+      - name: CSS API dataset is up to date
+        run: |
+          npm run css-api
+          git diff --exit-code -- stories/documentation/css-api-manifest.ts \
+            || (echo "::error::stories/documentation/css-api-manifest.ts is stale. Run 'npm run css-api' and commit the result." && exit 1)

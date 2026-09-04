@@ -1,0 +1,151 @@
+/**
+ * Emits the committed dataset the Storybook CSS API explorer reads. Committed
+ * rather than imported from `dist/` because the Storybook builds in CI never run
+ * `npm run build` — same reason as `stories/documentation/icons-list.ts`.
+ *
+ * A flat view of the manifest, not a copy: only the fields the page displays, so
+ * the committed artifact stays diff-readable. Prettier-formatted at generation
+ * time so it always satisfies `prettier --check`.
+ */
+
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const prettier = require('prettier');
+
+const BANNER = `// *******************************************
+// *** THIS FILE IS GENERATED, DO NOT EDIT ***
+// *** The generator is packages/scss/css-api/generate.js (npm run css-api) ***
+// *******************************************
+`;
+
+/**
+ * Flattens a manifest into the rows the explorer renders.
+ * @param {{ variables: object, utilities: object, mixins: object[] }} manifest
+ * @returns {object[]}
+ */
+function toRows(manifest) {
+	const rows = [];
+
+	for (const [name, entry] of Object.entries(manifest.variables)) {
+		rows.push(
+			compact({
+				kind: 'variable',
+				name,
+				group: entry.category,
+				value: entry.value,
+				resolved: entry.resolved,
+				deprecated: entry.deprecated,
+				replacement: entry.replacement,
+				note: entry.note,
+			}),
+		);
+	}
+
+	for (const [name, entry] of Object.entries(manifest.utilities)) {
+		const blocks = entry.css || [];
+		// Every block is rendered with its own qualifier: dropping the conditional ones
+		// inverted `pr-u-onlyPrintDisplayBlock`, which reads `display: none` off screen.
+		// `variants` stays as the scannable summary of the queries involved.
+		const conditional = blocks.filter((b) => b.media || b.container);
+		rows.push(
+			compact({
+				kind: 'utility',
+				name,
+				value: joinBlocks(blocks),
+				resolved: blocks.some((b) => b.resolved) ? joinBlocks(blocks, (b) => b.resolved || b.decls) : undefined,
+				variants: conditional.length ? conditional.map((b) => b.media || b.container) : undefined,
+				deprecated: entry.deprecated,
+				replacement: entry.replacement,
+				note: entry.note,
+			}),
+		);
+	}
+
+	for (const mixin of manifest.mixins || []) {
+		rows.push(
+			compact({
+				kind: 'mixin',
+				name: `${mixin.namespace}.${mixin.name}`,
+				group: mixin.namespace,
+				value: mixin.signature,
+				import: mixin.import,
+				doc: mixin.doc,
+				deprecated: mixin.deprecated,
+				replacement: mixin.replacement,
+				note: mixin.note,
+			}),
+		);
+	}
+
+	rows.sort((a, b) => a.kind.localeCompare(b.kind) || a.name.localeCompare(b.name));
+	return rows;
+}
+
+/**
+ * Concatenates a utility's blocks into one readable declaration list. `; ` between bare
+ * declaration lists so a class declaring the same property twice reads as valid CSS (last
+ * one wins, as in the cascade); a plain space around a braced group, already delimited.
+ * @param {object[]} blocks
+ * @param {(block: object) => string} pick which field to read from each block
+ */
+function joinBlocks(blocks, pick = (block) => block.decls) {
+	return blocks.reduce((out, block) => {
+		const text = blockText(block, pick);
+		if (!out) {
+			return text;
+		}
+		const braced = Boolean(block.sel || block.media || block.container);
+		return out + (braced || out.endsWith('}') ? ' ' : '; ') + text;
+	}, '');
+}
+
+/** One block as CSS, wrapped in its pseudo-element selector and media/container query. */
+function blockText(block, pick) {
+	const inner = block.sel ? `${block.sel} { ${pick(block)} }` : pick(block);
+	if (block.media) {
+		return `@media ${block.media} { ${inner} }`;
+	}
+	if (block.container) {
+		return `@container ${block.container} { ${inner} }`;
+	}
+	return inner;
+}
+
+/** Drops undefined/false entries so the committed file carries no empty noise. */
+function compact(row) {
+	const out = {};
+	for (const [key, value] of Object.entries(row)) {
+		if (value !== undefined && value !== false) {
+			out[key] = value;
+		}
+	}
+	return out;
+}
+
+/**
+ * Writes the story dataset. Async because Prettier 3's formatter is.
+ * @param {object} manifest
+ * @param {string} output absolute path of the .ts module to write
+ * @returns {Promise<number>} number of rows written
+ */
+async function writeStoryData(manifest, output) {
+	const rows = toRows(manifest);
+	const source = `${BANNER}
+import type { CssApiEntry } from './css-api-types';
+
+export const CssApiList: CssApiEntry[] = ${JSON.stringify(rows, null, '\t')};
+`;
+	const config = (await prettier.resolveConfig(output, { editorconfig: true })) || {};
+	const formatted = await prettier.format(source, { ...config, filepath: output, parser: 'typescript' });
+
+	const dir = path.dirname(output);
+	if (!fs.existsSync(dir)) {
+		fs.mkdirSync(dir, { recursive: true });
+	}
+	fs.writeFileSync(output, formatted);
+	return rows.length;
+}
+
+module.exports = { writeStoryData, toRows };
