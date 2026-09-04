@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { CdkObserveContent } from '@angular/cdk/observers';
 import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, Injector, input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -34,6 +35,8 @@ export class PopoverContentComponent implements AfterViewInit, OnDestroy {
 	contentId = this.config.contentId;
 
 	content = this.config.content;
+
+	#focusMonitor = inject(FocusMonitor);
 
 	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.config.triggerElement, inject(Injector));
 
@@ -75,8 +78,9 @@ export class PopoverContentComponent implements AfterViewInit, OnDestroy {
 
 	close(): void {
 		if (!this.config.disableInitialTriggerFocus) {
-			// Focus initial trigger element
-			this.config.triggerElement.focus();
+			// - The `program` origin tells this handover apart from the user reaching the trigger.
+			// - It reopens neither the popover nor a tooltip the trigger carries.
+			this.#focusMonitor.focusVia(this.config.triggerElement, 'program');
 		}
 		// Tell the directive we're closed now
 		this.#destroyEvents();
