@@ -66,6 +66,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			table: { category: 'inputs' },
 		},
 		defaultIcon: {
+			name: '↳ defaultIcon',
 			options: IconsList.map((i) => i.icon),
 			control: {
 				type: 'select',
@@ -75,6 +76,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			table: { category: 'inputs' },
 		},
 		icon: {
+			name: '↳ icon',
 			options: IconsList.map((i) => i.icon),
 			control: {
 				type: 'select',
@@ -84,11 +86,13 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			table: { category: 'inputs' },
 		},
 		start: {
+			name: '↳ start',
 			if: { arg: 'type', eq: 'ordered' },
 			description: 'Modifie la valeur initiale de la liste.',
 			table: { category: 'inputs' },
 		},
 		reversed: {
+			name: '↳ reversed',
 			if: { arg: 'type', eq: 'ordered' },
 			description: 'Présente la liste sous forme décroissante.',
 			table: { category: 'inputs' },

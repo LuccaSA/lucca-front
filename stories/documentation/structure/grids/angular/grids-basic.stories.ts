@@ -7,15 +7,6 @@ const OTHER_GAP = ['1px', '2em', '3%'];
 export default {
 	title: 'Documentation/Structure/Grids/Angular/Basic',
 	argTypes: {
-		columns: {
-			control: {
-				type: 'range',
-				min: 1,
-				max: 12,
-			},
-			if: { arg: 'mode', truthy: false },
-			table: { category: 'inputs' },
-		},
 		colspan: {
 			control: {
 				type: 'range',
@@ -89,6 +80,16 @@ export default {
 				type: 'select',
 			},
 			options: setStoryOptions(GRID_MODE),
+			table: { category: 'inputs' },
+		},
+		columns: {
+			name: '↳ columns',
+			control: {
+				type: 'range',
+				min: 1,
+				max: 12,
+			},
+			if: { arg: 'mode', truthy: false },
 			table: { category: 'inputs' },
 		},
 

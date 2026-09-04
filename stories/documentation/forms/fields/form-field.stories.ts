@@ -34,6 +34,12 @@ export default {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 			table: { category: 'inputs' },
 		},
+		tooltip: {
+			name: '↳ tooltip',
+			if: { arg: 'hiddenLabel', truthy: false },
+			description: 'Affiche une icône (?) associée à une info-bulle.',
+			table: { category: 'inputs' },
+		},
 		inlineMessage: {
 			control: {
 				type: 'text',
@@ -51,11 +57,6 @@ export default {
 		},
 		errorInlineMessage: {
 			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent]',
-			table: { category: 'inputs' },
-		},
-		tooltip: {
-			if: { arg: 'hiddenLabel', truthy: false },
-			description: 'Affiche une icône (?) associée à une info-bulle.',
 			table: { category: 'inputs' },
 		},
 		invalid: {

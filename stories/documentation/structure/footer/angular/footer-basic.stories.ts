@@ -19,6 +19,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		containerMax: {
+			name: '↳ containerMax',
 			options: setStoryOptions(FOOTER_CONTAINER_MAX),
 			control: {
 				type: 'select',

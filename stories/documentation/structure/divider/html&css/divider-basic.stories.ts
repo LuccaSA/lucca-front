@@ -31,16 +31,17 @@ export default {
 			},
 			description: 'Permet de restituer Divider comme un séparateur natif (hr). Son éventuel contenu textuel ne sera alors plus restitué.',
 		},
-		button: {
-			control: {
-				type: 'boolean',
-			},
-			if: { arg: 'icon', truthy: false },
-		},
 		icon: {
 			control: {
 				type: 'boolean',
 			},
+		},
+		button: {
+			name: '↳ button',
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'icon', truthy: false },
 		},
 		vertical: {
 			control: {

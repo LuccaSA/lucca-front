@@ -63,6 +63,12 @@ export default {
 			description: "Modifie le mode de sélection à la semaine, au mois ou à l'année.",
 			table: { category: 'inputs' },
 		},
+		hideOverflow: {
+			name: '↳ hideOverflow',
+			description: 'Masque les jours du mois précédent ou suivant visibles sur le mois en cours.',
+			if: { arg: 'mode', neq: 'week' },
+			table: { category: 'inputs' },
+		},
 		focusedDate: {
 			control: 'date',
 			description: 'Définit la date préselectionnée à l’ouverture du calendrier.',
@@ -75,11 +81,6 @@ export default {
 		},
 		disableOverflow: {
 			description: 'Empêche la sélection des jours du mois précédent ou suivant visibles sur le mois en cours.',
-			table: { category: 'inputs' },
-		},
-		hideOverflow: {
-			description: 'Masque les jours du mois précédent ou suivant visibles sur le mois en cours.',
-			if: { arg: 'mode', neq: 'week' },
 			table: { category: 'inputs' },
 		},
 		hideWeekend: {

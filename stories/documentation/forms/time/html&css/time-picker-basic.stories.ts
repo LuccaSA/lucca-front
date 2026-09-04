@@ -32,6 +32,7 @@ export default {
 			},
 		},
 		stepperHover: {
+			name: '↳ stepperHover',
 			control: {
 				type: 'boolean',
 			},

@@ -29,11 +29,13 @@ export default {
 			table: { category: 'inputs' },
 		},
 		withAction: {
+			name: '↳ withAction',
 			if: { arg: 'expandable', eq: false },
 			description: 'Ajoute un bouton d’action à droite du titre.',
 			table: { category: 'inputs' },
 		},
 		expanded: {
+			name: '↳ expanded',
 			control: {
 				type: 'boolean',
 			},
@@ -42,6 +44,7 @@ export default {
 			table: { category: 'models' },
 		},
 		hiddenLegend: {
+			name: '↳ hiddenLegend',
 			control: {
 				type: 'boolean',
 			},

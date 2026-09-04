@@ -26,23 +26,26 @@ export default {
 			description: 'Groupe les éléments.',
 		},
 		groupLabel: {
+			name: '↳ groupLabel',
 			description: 'Titre du groupe (aussi reprit dans l’intitulé masqué de sa sélection).',
 			if: { arg: 'group', truthy: true },
-		},
-		selected: {
-			description: 'Sélectionne un élément et affiche le footer de la sélection multiple.',
-			if: { arg: 'selectable', truthy: true },
 		},
 		itemCount: {
 			description: 'Nombre d’éléments affichés dans la liste.',
 			control: { type: 'range', min: 0, max: 5 },
 		},
 		emptyIllustration: {
+			name: '↳ emptyIllustration',
 			description: 'Illustration affichée lorsque la liste est vide.',
 			options: ['', 'awardRibbon'],
 			control: {
 				type: 'select',
 			},
+			if: { arg: 'itemCount', eq: 0 },
+			table: { category: 'inputs' },
+		},
+		emptyResetButton: {
+			name: '↳ emptyResetButton',
 			if: { arg: 'itemCount', eq: 0 },
 			table: { category: 'inputs' },
 		},
@@ -57,8 +60,20 @@ export default {
 			description: 'Active la sélection multiple',
 			table: { category: 'inputs' },
 		},
+		selected: {
+			name: '↳ selected',
+			description: 'Sélectionne un élément et affiche le footer de la sélection multiple.',
+			if: { arg: 'selectable', truthy: true },
+		},
 		rightContent: {
 			description: 'Exemple de données complémentaires.',
+		},
+		icons: {
+			name: '↳ icons',
+			description: 'Icônes affichées dans les données complémentaires.',
+			control: { type: 'object' },
+			if: { arg: 'rightContent', truthy: true },
+			table: { category: 'inputs' },
 		},
 		visual: {
 			description: 'Affiche un exemple de visuel au début d’un élément.',
@@ -68,16 +83,6 @@ export default {
 		},
 		center: {
 			description: 'Centre verticalement les données d’un élément',
-			table: { category: 'inputs' },
-		},
-		icons: {
-			description: 'Icônes affichées dans les données complémentaires.',
-			control: { type: 'object' },
-			if: { arg: 'rightContent', truthy: true },
-			table: { category: 'inputs' },
-		},
-		emptyResetButton: {
-			if: { arg: 'itemCount', eq: 0 },
 			table: { category: 'inputs' },
 		},
 	},

@@ -53,6 +53,12 @@ export default {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
 			table: { category: 'inputs' },
 		},
+		tooltip: {
+			name: '↳ tooltip',
+			if: { arg: 'hiddenLabel', truthy: false },
+			description: 'Affiche une icône (?) associée à une info-bulle.',
+			table: { category: 'inputs' },
+		},
 		inlineMessage: {
 			control: {
 				type: 'text',
@@ -70,11 +76,6 @@ export default {
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
-			table: { category: 'inputs' },
-		},
-		tooltip: {
-			if: { arg: 'hiddenLabel', truthy: false },
-			description: 'Affiche une icône (?) associée à une info-bulle.',
 			table: { category: 'inputs' },
 		},
 		openOnFocus: {

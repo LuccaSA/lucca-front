@@ -23,6 +23,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		inlineSizeValue: {
+			name: '↳ inlineSizeValue',
 			if: { arg: 'inlineSize', truthy: true },
 			table: { category: 'inputs' },
 		},

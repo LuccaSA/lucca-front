@@ -14,6 +14,12 @@ export default {
 			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs' },
 		},
+		structure: {
+			name: '↳ structure',
+			if: { arg: 'size', truthy: true },
+			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
+			table: { category: 'inputs' },
+		},
 		state: {
 			options: setStoryOptions(FILE_ENTRY_STATE),
 			control: {
@@ -22,22 +28,24 @@ export default {
 			description: 'Modifie l’état du composant.',
 			table: { category: 'inputs' },
 		},
-		previewUrl: {
-			if: { arg: 'iconOverride', truthy: false },
-			description: 'URL de prévisualisation de l’image uploadée.',
-			table: { category: 'inputs' },
-		},
-		displayFileName: {
-			if: { arg: 'media', truthy: true },
-			description: 'Affiche le nom du fichier sous l’image en vue <code>media</code>.',
-			table: { category: 'inputs' },
-		},
 		media: {
 			description: 'Affiche le fichier avec une mise en forme adaptée aux visuels.',
 			table: { category: 'inputs' },
 		},
+		displayFileName: {
+			name: '↳ displayFileName',
+			if: { arg: 'media', truthy: true },
+			description: 'Affiche le nom du fichier sous l’image en vue <code>media</code>.',
+			table: { category: 'inputs' },
+		},
 		iconOverride: {
 			description: 'Remplace l’icône de format de fichier.',
+			table: { category: 'inputs' },
+		},
+		previewUrl: {
+			name: '↳ previewUrl',
+			if: { arg: 'iconOverride', truthy: false },
+			description: 'URL de prévisualisation de l’image uploadée.',
 			table: { category: 'inputs' },
 		},
 		downloadURL: {
@@ -45,6 +53,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		openInNewTab: {
+			name: '↳ openInNewTab',
 			description: 'Ouvre le fichier dans un nouvel onglet au lieu de le télécharger. Peut varier selon les navigateurs ou les réglages utilisateurs.',
 			if: { arg: 'downloadURL', truthy: true },
 			table: { category: 'inputs' },
@@ -71,11 +80,6 @@ export default {
 		},
 		fileType: {
 			description: 'Type MIME du fichier.',
-			table: { category: 'inputs' },
-		},
-		structure: {
-			if: { arg: 'size', truthy: true },
-			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
 			table: { category: 'inputs' },
 		},
 		withFileType: {

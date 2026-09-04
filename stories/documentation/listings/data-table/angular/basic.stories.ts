@@ -55,48 +55,6 @@ export default {
 			description: 'Aligne le contenu des cellules verticalement.',
 			table: { category: 'inputs' },
 		},
-		inlineSize: {
-			if: { arg: 'layoutFixed', truthy: true },
-			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
-			table: { category: 'inputs' },
-		},
-		selected: {
-			if: { arg: 'selectable', truthy: true },
-			description: 'Applique l’état actif à une ligne sélectionnable.',
-			table: { category: 'models' },
-		},
-		selectedLabel: {
-			if: { arg: 'selectable', truthy: true },
-			description: 'Texte alternatif restitué à la sélection d’une ligne.',
-			table: { category: 'inputs' },
-		},
-		selectedLabelHead: {
-			if: { arg: 'selectable', truthy: true },
-			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes.',
-			table: { category: 'inputs' },
-		},
-		mixed: {
-			if: { arg: 'selectable', truthy: true },
-			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
-		},
-		disabled: {
-			if: { arg: 'selectable', truthy: true },
-			table: { category: 'inputs' },
-		},
-		inlineSizeValue: {
-			if: { arg: 'inlineSize', truthy: true },
-			table: { category: 'inputs' },
-		},
-		groupButtonAlt: {
-			if: { arg: 'group', truthy: true },
-			description: 'Texte alternatif restitué au focus de l’action sur le groupe.',
-			table: { category: 'inputs' },
-		},
-		expanded: {
-			if: { arg: 'group', truthy: true },
-			description: 'Affiche le groupe dans son état étendu.',
-			table: { category: 'models' },
-		},
 		cols: {
 			control: { type: 'range', min: 2, max: 6 },
 			description: 'Modifie le nombre de colonnes dans la story.',
@@ -136,11 +94,50 @@ export default {
 			description: 'Applique une largeur fixe aux colonnes. La largeur d’une colonne peut être redéfinie via <code>fixedWidth</code>.',
 			table: { category: 'inputs' },
 		},
+		inlineSize: {
+			name: '↳ inlineSize',
+			if: { arg: 'layoutFixed', truthy: true },
+			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
+			table: { category: 'inputs' },
+		},
+		inlineSizeValue: {
+			name: '↳ inlineSizeValue',
+			if: { arg: 'inlineSize', truthy: true },
+			table: { category: 'inputs' },
+		},
 		selectable: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+			table: { category: 'inputs' },
+		},
+		selected: {
+			name: '↳ selected',
+			if: { arg: 'selectable', truthy: true },
+			description: 'Applique l’état actif à une ligne sélectionnable.',
+			table: { category: 'models' },
+		},
+		selectedLabel: {
+			name: '↳ selectedLabel',
+			if: { arg: 'selectable', truthy: true },
+			description: 'Texte alternatif restitué à la sélection d’une ligne.',
+			table: { category: 'inputs' },
+		},
+		selectedLabelHead: {
+			name: '↳ selectedLabelHead',
+			if: { arg: 'selectable', truthy: true },
+			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes.',
+			table: { category: 'inputs' },
+		},
+		mixed: {
+			name: '↳ mixed',
+			if: { arg: 'selectable', truthy: true },
+			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
+		},
+		disabled: {
+			name: '↳ disabled',
+			if: { arg: 'selectable', truthy: true },
 			table: { category: 'inputs' },
 		},
 		group: {
@@ -149,6 +146,18 @@ export default {
 			},
 			description: 'Présente un groupe de lignes dans la story.',
 			table: { category: 'inputs' },
+		},
+		groupButtonAlt: {
+			name: '↳ groupButtonAlt',
+			if: { arg: 'group', truthy: true },
+			description: 'Texte alternatif restitué au focus de l’action sur le groupe.',
+			table: { category: 'inputs' },
+		},
+		expanded: {
+			name: '↳ expanded',
+			if: { arg: 'group', truthy: true },
+			description: 'Affiche le groupe dans son état étendu.',
+			table: { category: 'models' },
 		},
 		editable: {
 			control: {

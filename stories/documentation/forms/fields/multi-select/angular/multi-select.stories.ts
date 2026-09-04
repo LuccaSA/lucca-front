@@ -20,12 +20,6 @@ export default {
 		}),
 	],
 	argTypes: {
-		tooltip: {
-			type: 'string',
-			if: { arg: 'hiddenLabel', truthy: false },
-			description: 'Affiche une icône (?) associée à une info-bulle. ',
-			table: { category: 'inputs' },
-		},
 		label: {
 			description: 'Modifie le label du champ.',
 			table: { category: 'inputs' },
@@ -68,6 +62,13 @@ export default {
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
+		},
+		tooltip: {
+			name: '↳ tooltip',
+			type: 'string',
+			if: { arg: 'hiddenLabel', truthy: false },
+			description: 'Affiche une icône (?) associée à une info-bulle. ',
 			table: { category: 'inputs' },
 		},
 		clearable: {

@@ -30,6 +30,7 @@ export default {
 			description: 'Permet au fieldset de se replier.',
 		},
 		expanded: {
+			name: '↳ expanded',
 			control: {
 				type: 'boolean',
 			},
@@ -37,6 +38,7 @@ export default {
 			description: 'Affiche le fieldset en vue dépliée.',
 		},
 		hiddenLegend: {
+			name: '↳ hiddenLegend',
 			control: {
 				type: 'boolean',
 			},

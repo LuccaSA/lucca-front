@@ -28,6 +28,7 @@ export default {
 			description: 'Applique un container autour du contenu du footer.',
 		},
 		containerMax: {
+			name: '↳ containerMax',
 			options: ['', 'M', 'L', 'XL', 'XXL', 'XXXL'],
 			control: {
 				type: 'select',

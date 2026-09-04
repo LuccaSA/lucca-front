@@ -45,15 +45,6 @@ export default {
 		}
 	},
 	argTypes: {
-		items: {
-			control: {
-				type: 'number',
-				min: 1,
-			},
-			if: { arg: 'customText', truthy: false },
-			description: 'Nombre d’éléments présentés dans la story.',
-			table: { category: 'inputs' },
-		},
 		buttonLabel: {
 			description: 'Label du bouton.',
 			table: { category: 'inputs' },
@@ -84,19 +75,6 @@ export default {
 				type: 'select',
 			},
 			description: 'État du callout.',
-			table: { category: 'inputs' },
-		},
-		heading: {
-			description: 'Ajoute un titre au popover. [PortalContent]',
-			if: { arg: 'customText', truthy: false },
-			table: { category: 'inputs' },
-		},
-		headingHiddenIfSingleItem: {
-			control: {
-				type: 'boolean',
-			},
-			if: { arg: 'customText', truthy: false },
-			description: 'Masque le titre si le popover ne contient qu’un élément.',
 			table: { category: 'inputs' },
 		},
 		palette: {
@@ -140,6 +118,31 @@ export default {
 		},
 		customText: {
 			description: 'Remplace la liste d’éléments par un texte personnalisé.',
+			table: { category: 'inputs' },
+		},
+		items: {
+			name: '↳ items',
+			control: {
+				type: 'number',
+				min: 1,
+			},
+			if: { arg: 'customText', truthy: false },
+			description: 'Nombre d’éléments présentés dans la story.',
+			table: { category: 'inputs' },
+		},
+		heading: {
+			name: '↳ heading',
+			description: 'Ajoute un titre au popover. [PortalContent]',
+			if: { arg: 'customText', truthy: false },
+			table: { category: 'inputs' },
+		},
+		headingHiddenIfSingleItem: {
+			name: '↳ headingHiddenIfSingleItem',
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'customText', truthy: false },
+			description: 'Masque le titre si le popover ne contient qu’un élément.',
 			table: { category: 'inputs' },
 		},
 	},

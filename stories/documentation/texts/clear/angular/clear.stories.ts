@@ -31,17 +31,18 @@ export const Template: StoryObj = {
 			description: 'Désactive le bouton.',
 			table: { category: 'inputs' },
 		},
+		inverted: {
+			name: '↳ inverted',
+			if: { arg: 'disabled', truthy: false },
+			description: 'Modifie les couleurs du bouton pour un usage sur fond foncé.',
+			table: { category: 'inputs' },
+		},
 		palette: {
 			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au bouton.',
-			table: { category: 'inputs' },
-		},
-		inverted: {
-			if: { arg: 'disabled', truthy: false },
-			description: 'Modifie les couleurs du bouton pour un usage sur fond foncé.',
 			table: { category: 'inputs' },
 		},
 		size: {

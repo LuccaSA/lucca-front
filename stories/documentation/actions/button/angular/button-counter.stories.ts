@@ -31,17 +31,18 @@ export const Basic: StoryObj<ButtonComponent> = {
 			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
 			table: { category: 'inputs' },
 		},
-		block: {
-			description: 'Applique <code>display: block</code>.',
-			table: { category: 'inputs' },
-		},
 		palette: {
+			name: '↳ palette',
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
 			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
+		},
+		block: {
+			description: 'Applique <code>display: block</code>.',
 			table: { category: 'inputs' },
 		},
 		state: {

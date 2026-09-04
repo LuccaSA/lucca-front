@@ -46,6 +46,12 @@ export default {
 			description: 'Ajoute une section visible lorsque le champ est sélectionné.',
 			table: { category: 'inputs' },
 		},
+		grid: {
+			name: '↳ grid',
+			if: { arg: 'panel', truthy: false },
+			description: 'Affiche les différentes options dans une grille.',
+			table: { category: 'inputs' },
+		},
 		illustration: {
 			description: 'Slot dédié à l’ajout d’illustrations.',
 			table: { category: 'inputs' },
@@ -68,11 +74,6 @@ export default {
 		},
 		inlineMessage: {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
-		},
-		grid: {
-			if: { arg: 'panel', truthy: false },
-			description: 'Affiche les différentes options dans une grille.',
 			table: { category: 'inputs' },
 		},
 		size: {

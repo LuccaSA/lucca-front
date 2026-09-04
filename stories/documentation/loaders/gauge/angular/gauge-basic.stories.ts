@@ -27,6 +27,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		size: {
+			name: '↳ size',
 			control: { type: 'range', min: 32, max: 160, step: 8 },
 			if: { arg: 'circular', truthy: true },
 			description: 'Taille du composant pour sa forme circulaire.',

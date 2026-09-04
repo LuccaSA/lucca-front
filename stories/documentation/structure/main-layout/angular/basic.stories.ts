@@ -29,36 +29,57 @@ export default {
 			description: 'Présente un exemple de structure avec header.',
 			table: { category: 'inputs' },
 		},
+		headerSticky: {
+			name: '↳ headerSticky',
+			if: { arg: 'header', truthy: true },
+			description: 'Conserve le header visible en haut du layout.',
+			table: { category: 'inputs' },
+		},
 		footer: {
 			description: 'Présente un exemple de structure avec footer.',
+			table: { category: 'inputs' },
+		},
+		footerSticky: {
+			name: '↳ footerSticky',
+			if: { arg: 'footer', truthy: true },
+			description: 'Conserve le footer visible en bas du layout.',
 			table: { category: 'inputs' },
 		},
 		sidebar: {
 			description: 'Présente un exemple de structure avec un panneau latéral.',
 			table: { category: 'inputs' },
 		},
-		headerSticky: {
-			if: { arg: 'header', truthy: true },
-			description: 'Conserve le header visible en haut du layout.',
-			table: { category: 'inputs' },
+		bubblesEndStart: {
+			name: '↳ bubblesEndStart',
+			options: [null, 1, 2, 3],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'sidebar', truthy: false },
+			description: 'Affiche des bulles décoratives dans le coin inférieur droit.',
 		},
-		footerSticky: {
-			if: { arg: 'footer', truthy: true },
-			description: 'Conserve le footer visible en bas du layout.',
-			table: { category: 'inputs' },
+		illustrationEndStart: {
+			name: '↳ illustrationEndStart',
+			options: setStoryOptions(MAIN_LAYOUT_ILLUSTRATION_END_START),
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'sidebar', truthy: false },
+			description: 'Affiche une illustration dans le coin inférieur droit.',
 		},
 		repeatContent: {
 			control: { type: 'range', min: 1, max: 10 },
 			description: '[Story] Modifie le nombre d’éléments <lu-main-layout-block>',
 			table: { category: 'inputs' },
 		},
-		repeatOverflow: {
-			control: { type: 'range', min: 1, max: 10 },
-			if: { arg: 'contentOverflowing', truthy: true },
-			table: { category: 'inputs' },
-		},
 		contentOverflowing: {
 			description: 'Permet de rendre un élément <lu-main-layout-block> scrollable horizontalement tout en conservant le comportement du reste du layout.',
+			table: { category: 'inputs' },
+		},
+		repeatOverflow: {
+			name: '↳ repeatOverflow',
+			control: { type: 'range', min: 1, max: 10 },
+			if: { arg: 'contentOverflowing', truthy: true },
 			table: { category: 'inputs' },
 		},
 		bubblesStartEnd: {
@@ -68,28 +89,12 @@ export default {
 			},
 			description: 'Affiche des bulles décoratives dans le coin supérieur gauche.',
 		},
-		bubblesEndStart: {
-			options: [null, 1, 2, 3],
-			control: {
-				type: 'select',
-			},
-			if: { arg: 'sidebar', truthy: false },
-			description: 'Affiche des bulles décoratives dans le coin inférieur droit.',
-		},
 		illustrationStartEnd: {
 			options: setStoryOptions(MAIN_LAYOUT_ILLUSTRATION_START_END),
 			control: {
 				type: 'select',
 			},
 			description: 'Affiche une illustration dans le coin supérieur gauche.',
-		},
-		illustrationEndStart: {
-			options: setStoryOptions(MAIN_LAYOUT_ILLUSTRATION_END_START),
-			control: {
-				type: 'select',
-			},
-			if: { arg: 'sidebar', truthy: false },
-			description: 'Affiche une illustration dans le coin inférieur droit.',
 		},
 		palette: {
 			options: ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'],

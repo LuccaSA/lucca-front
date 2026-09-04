@@ -92,6 +92,22 @@ export default {
 			description: 'Permet d’afficher la fenêtre de dialogue en mode drawer.',
 			table: { category: 'inputs' },
 		},
+		fancyIllustration: {
+			name: '↳ fancyIllustration',
+			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'mode', eq: 'fancy' },
+			description: 'Modifie l’illustration affichée dans la Fancy dialog.',
+			table: { category: 'inputs' },
+		},
+		fancyIllustrationUrl: {
+			name: '↳ fancyIllustrationUrl',
+			if: { arg: 'mode', eq: 'fancy' },
+			description: 'Surcharge l’illustration avec une URL personnalisée.',
+			table: { category: 'inputs' },
+		},
 		autoFocus: {
 			options: ['first-tabbable', 'first-input'],
 			description: 'Définit quel élément doit recevoir le focus lorsque la fenêtre de dialogue s’ouvre. Peut aussi être un sélecteur CSS.',
@@ -115,20 +131,6 @@ export default {
 		alert: {
 			description:
 				'Transforme la fenêtre de dialogue en alerte en obligeant l’utilisateur à faire un choix. L’utilisateur ne peut alors plus la fermer en cliquant sur le backdrop ou en appuyant sur la touche Échap.',
-			table: { category: 'inputs' },
-		},
-		fancyIllustration: {
-			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
-			control: {
-				type: 'select',
-			},
-			if: { arg: 'mode', eq: 'fancy' },
-			description: 'Modifie l’illustration affichée dans la Fancy dialog.',
-			table: { category: 'inputs' },
-		},
-		fancyIllustrationUrl: {
-			if: { arg: 'mode', eq: 'fancy' },
-			description: 'Surcharge l’illustration avec une URL personnalisée.',
 			table: { category: 'inputs' },
 		},
 		surfaceDefault: {
@@ -275,18 +277,8 @@ export const WithAction: StoryObj = {
 export const Fancy: StoryObj = {
 	argTypes: {
 		mode: { table: { disable: true } },
-		alert: { table: { disable: true } },
-		autoFocus: { table: { disable: true } },
-		panelClasses: { table: { disable: true } },
-		palette: {
-			options: ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'],
-			control: {
-				type: 'select',
-			},
-			description: 'Applique une palette de couleurs au callout.',
-			table: { category: 'inputs' },
-		},
 		fancyIllustration: {
+			name: '↳ fancyIllustration',
 			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
 			control: {
 				type: 'select',
@@ -296,8 +288,20 @@ export const Fancy: StoryObj = {
 			table: { category: 'inputs' },
 		},
 		fancyIllustrationUrl: {
+			name: '↳ fancyIllustrationUrl',
 			if: { arg: 'mode', eq: 'fancy' },
 			description: 'Surcharge l’illustration avec une URL personnalisée.',
+			table: { category: 'inputs' },
+		},
+		alert: { table: { disable: true } },
+		autoFocus: { table: { disable: true } },
+		panelClasses: { table: { disable: true } },
+		palette: {
+			options: ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'],
+			control: {
+				type: 'select',
+			},
+			description: 'Applique une palette de couleurs au callout.',
 			table: { category: 'inputs' },
 		},
 	},

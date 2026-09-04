@@ -45,17 +45,9 @@ export default {
 			table: { category: 'inputs' },
 		},
 		removed: {
+			name: '↳ removed',
 			if: { arg: 'removable', truthy: true },
 			description: 'Masque le callout.',
-			table: { category: 'inputs' },
-		},
-		palette: {
-			options: setStoryOptions(PALETTE),
-			control: {
-				type: 'select',
-			},
-			description: 'Applique une palette de couleurs au callout.',
-			if: { arg: 'AI', truthy: false },
 			table: { category: 'inputs' },
 		},
 		icon: {
@@ -93,6 +85,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		hx: {
+			name: '↳ hx',
 			options: setStoryOptions(CALLOUT_HX),
 			control: {
 				type: 'select',
@@ -114,11 +107,22 @@ export default {
 			},
 			table: { category: 'inputs' },
 		},
+		palette: {
+			name: '↳ palette',
+			options: setStoryOptions(PALETTE),
+			control: {
+				type: 'select',
+			},
+			description: 'Applique une palette de couleurs au callout.',
+			if: { arg: 'AI', truthy: false },
+			table: { category: 'inputs' },
+		},
 		actions: {
 			description: '[v20.3] Ajoute une liste d’actions sous la description.',
 			table: { category: 'inputs' },
 		},
 		actionsInline: {
+			name: '↳ actionsInline',
 			if: { arg: 'actions', truthy: true },
 			description: '[v20.3] Déplace les actions sur la droite du callout.',
 			table: { category: 'inputs' },

@@ -36,6 +36,7 @@ export default {
 			description: 'Affiche un callout d’avertissement dans le contenu principal.',
 		},
 		calloutLabel: {
+			name: '↳ calloutLabel',
 			description: 'Texte affiché dans le callout.',
 			if: { arg: 'callout', truthy: true },
 		},
@@ -120,6 +121,16 @@ export default {
 	</lu-approbation-inbox-detail-main-block>`
 				: ``;
 		return {
+			styles: [
+				`
+/*
+Force l'affichage du composant pour le rendre visible dans la documentation
+ */
+.approbationInbox-detail {
+	display: flex !important;
+}
+				`,
+			],
 			template: `<lu-approbation-inbox-detail${insideDialogParam}>${headerTpl}${calloutTpl}${contentTpl.repeat(blockCount - 1 < 0 ? 0 : blockCount - 1)}${contentDefaultTpl}
 </lu-approbation-inbox-detail>`,
 		};

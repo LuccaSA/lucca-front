@@ -38,6 +38,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		tooltip: {
+			name: '↳ tooltip',
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
 			table: { category: 'inputs' },

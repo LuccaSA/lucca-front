@@ -41,13 +41,14 @@ export default {
 			description: "Modifie l'état de l'inline message.",
 			table: { category: 'inputs' },
 		},
-		tooltip: {
-			if: { arg: 'hiddenLabel', truthy: false },
-			description: 'Affiche une icône (?) associée à une info-bulle.',
-			table: { category: 'inputs' },
-		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans.",
+			table: { category: 'inputs' },
+		},
+		tooltip: {
+			name: '↳ tooltip',
+			if: { arg: 'hiddenLabel', truthy: false },
+			description: 'Affiche une icône (?) associée à une info-bulle.',
 			table: { category: 'inputs' },
 		},
 		label: {

@@ -35,7 +35,16 @@ export default {
 			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs' },
 		},
+		counterMax: {
+			control: {
+				min: 0,
+				step: 1,
+			},
+			description: 'Définit la valeur maximale du compteur de caractères.',
+			table: { category: 'inputs' },
+		},
 		counterStatus: {
+			name: '↳ counterStatus',
 			if: { arg: 'counterMax', truthy: true },
 			control: {
 				min: 0,
@@ -45,19 +54,13 @@ export default {
 			table: { category: 'inputs' },
 		},
 		counterId: {
+			name: '↳ counterId',
 			if: { arg: 'counterMax', truthy: true },
 			table: { category: 'inputs' },
 		},
 		labelId: {
+			name: '↳ labelId',
 			if: { arg: 'counterMax', truthy: true },
-			table: { category: 'inputs' },
-		},
-		counterMax: {
-			control: {
-				min: 0,
-				step: 1,
-			},
-			description: 'Définit la valeur maximale du compteur de caractères.',
 			table: { category: 'inputs' },
 		},
 		for: {

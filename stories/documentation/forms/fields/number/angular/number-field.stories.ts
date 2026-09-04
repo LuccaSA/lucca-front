@@ -17,12 +17,6 @@ export default {
 		}),
 	],
 	argTypes: {
-		tooltip: {
-			type: 'string',
-			description: 'Affiche une icône (?) associée à une info-bulle. ',
-			if: { arg: 'hiddenLabel', truthy: false },
-			table: { category: 'inputs' },
-		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
@@ -49,6 +43,13 @@ export default {
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
+		},
+		tooltip: {
+			name: '↳ tooltip',
+			type: 'string',
+			description: 'Affiche une icône (?) associée à une info-bulle. ',
+			if: { arg: 'hiddenLabel', truthy: false },
 			table: { category: 'inputs' },
 		},
 		required: {

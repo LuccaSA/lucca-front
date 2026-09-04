@@ -27,6 +27,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		withOption: {
+			name: '↳ withOption',
 			type: 'boolean',
 			if: { arg: 'state', truthy: true },
 			description: 'Conserve l’affichage des options déjà chargées.',

@@ -61,13 +61,14 @@ export default {
 			description: 'Ajout d’un slot avant le titre.',
 			table: { category: 'inputs' },
 		},
-		trailing: {
-			if: { arg: 'trailingWithImpersonation', truthy: false },
-			description: 'Ajout d’un slot après le titre.',
-			table: { category: 'inputs' },
-		},
 		trailingWithImpersonation: {
 			description: 'Utilisation du slot après le titre pour passer l’impersonation',
+			table: { category: 'inputs' },
+		},
+		trailing: {
+			name: '↳ trailing',
+			if: { arg: 'trailingWithImpersonation', truthy: false },
+			description: 'Ajout d’un slot après le titre.',
 			table: { category: 'inputs' },
 		},
 	},

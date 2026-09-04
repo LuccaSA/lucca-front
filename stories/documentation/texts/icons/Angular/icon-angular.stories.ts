@@ -15,16 +15,17 @@ export default {
 			control: 'select',
 			description: 'Modifie le glyphe de l’icône.',
 		},
-		color: {
-			options: setStoryOptions(ICON_COLOR),
-			if: { arg: 'AI', truthy: false },
-			description: 'Modifie la couleur de l’icône.',
-		},
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
 			control: {
 				type: 'boolean',
 			},
+		},
+		color: {
+			name: '↳ color',
+			options: setStoryOptions(ICON_COLOR),
+			if: { arg: 'AI', truthy: false },
+			description: 'Modifie la couleur de l’icône.',
 		},
 		size: {
 			options: setStoryOptions(ICON_SIZE),

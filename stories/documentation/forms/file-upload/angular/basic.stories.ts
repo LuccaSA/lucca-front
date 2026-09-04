@@ -121,6 +121,12 @@ export default {
 			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs' },
 		},
+		buttonFilled: {
+			name: '↳ buttonFilled',
+			description: 'Affiche le bouton comme action principale de la page.',
+			if: { arg: 'size', truthy: true },
+			table: { category: 'inputs' },
+		},
 		fileMaxSize: {
 			description: 'Limite le poids des fichiers importables (en octets).',
 			control: {
@@ -146,11 +152,6 @@ export default {
 		},
 		structure: {
 			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
-			table: { category: 'inputs' },
-		},
-		buttonFilled: {
-			description: 'Affiche le bouton comme action principale de la page.',
-			if: { arg: 'size', truthy: true },
 			table: { category: 'inputs' },
 		},
 		accept: {

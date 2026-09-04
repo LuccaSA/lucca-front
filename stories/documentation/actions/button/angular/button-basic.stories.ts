@@ -26,16 +26,17 @@ export const Basic: StoryObj<ButtonComponent> = {
 			},
 			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
 		},
-		block: {
-			description: 'Applique <code>display: block</code>.',
-		},
 		palette: {
+			name: '↳ palette',
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
 			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
+		},
+		block: {
+			description: 'Applique <code>display: block</code>.',
 		},
 		state: {
 			description: 'Modifie l’état du bouton.',

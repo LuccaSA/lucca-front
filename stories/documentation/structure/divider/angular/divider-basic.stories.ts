@@ -41,17 +41,18 @@ export default {
 			description: 'Permet de restituer Divider comme un séparateur natif (hr). Son éventuel contenu textuel ne sera alors plus restitué.',
 			table: { category: 'inputs' },
 		},
-		button: {
-			control: {
-				type: 'boolean',
-			},
-			if: { arg: 'icon', truthy: false },
-			table: { category: 'inputs' },
-		},
 		icon: {
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
+		},
+		button: {
+			name: '↳ button',
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'icon', truthy: false },
 			table: { category: 'inputs' },
 		},
 		vertical: {

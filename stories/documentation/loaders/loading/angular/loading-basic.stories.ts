@@ -28,6 +28,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		block: {
+			name: '↳ block',
 			description: 'Centre le loading dans son conteneur pour une utilisation en pleine page, dialog, section, etc.',
 			if: { arg: 'L', truthy: false },
 			table: { category: 'inputs' },

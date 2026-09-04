@@ -25,14 +25,6 @@ export const Template: StoryObj<TagComponent> = {
 			table: { category: 'inputs' },
 		},
 		palette: { ...PaletteAllArgType, table: { category: 'inputs' } },
-		outlined: {
-			control: {
-				type: 'boolean',
-			},
-			if: { arg: 'AI', truthy: false },
-			description: 'Applique un style secondaire au tag.',
-			table: { category: 'inputs' },
-		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
 			control: {
@@ -44,6 +36,15 @@ export const Template: StoryObj<TagComponent> = {
 		link: HiddenArgType,
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
+			table: { category: 'inputs' },
+		},
+		outlined: {
+			name: '↳ outlined',
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'AI', truthy: false },
+			description: 'Applique un style secondaire au tag.',
 			table: { category: 'inputs' },
 		},
 		withEllipsis: {

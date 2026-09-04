@@ -21,12 +21,6 @@ export default {
 		}),
 	],
 	argTypes: {
-		tooltip: {
-			type: 'string',
-			description: 'Affiche une icône (?) associée à une info-bulle. ',
-			if: { arg: 'hiddenLabel', truthy: false },
-			table: { category: 'inputs' },
-		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
@@ -53,6 +47,13 @@ export default {
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
+		},
+		tooltip: {
+			name: '↳ tooltip',
+			type: 'string',
+			description: 'Affiche une icône (?) associée à une info-bulle. ',
+			if: { arg: 'hiddenLabel', truthy: false },
 			table: { category: 'inputs' },
 		},
 		required: {
@@ -99,6 +100,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		currency: {
+			name: '↳ currency',
 			options: ['EUR', 'USD', 'CNY', 'JPY'],
 			control: {
 				type: 'select',
@@ -107,6 +109,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		currencyDisplay: {
+			name: '↳ currencyDisplay',
 			options: ['code', 'symbol', 'narrowSymbol', 'name'],
 			control: {
 				type: 'select',
@@ -115,6 +118,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		unit: {
+			name: '↳ unit',
 			options: ['second', 'kilometer', 'kilogram'],
 			control: {
 				type: 'select',
@@ -123,6 +127,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		unitDisplay: {
+			name: '↳ unitDisplay',
 			options: ['short', 'narrow', 'long'],
 			control: {
 				type: 'select',
