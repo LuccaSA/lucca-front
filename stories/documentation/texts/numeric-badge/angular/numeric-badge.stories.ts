@@ -1,7 +1,7 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { NUMERIC_BADGE_SIZE, NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/NumericBadge/Angular/Basic',
@@ -26,7 +26,7 @@ export default {
 		},
 		maxValue: {
 			type: 'number',
-			description: '[v19.2] Valeur maximale affichée au format "999+".',
+			description: 'Valeur maximale affichée au format "999+".',
 			table: { category: 'inputs' },
 		},
 		disableTooltip: {
@@ -46,7 +46,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: '[v19.1] Applique l’état de chargement.',
+			description: 'Applique l’état de chargement.',
 			table: { category: 'inputs' },
 		},
 	},

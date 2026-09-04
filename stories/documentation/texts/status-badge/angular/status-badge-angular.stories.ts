@@ -1,7 +1,7 @@
+import { setStoryOptions } from '@/helpers/stories';
 import { STATUS_BADGE_SIZE, StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { setStoryOptions } from '@/helpers/stories';
 
 interface StatusBadgeBasicStory {
 	label: string;
@@ -23,7 +23,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Applique une palette de couleurs au composant.<br>[v19.2] Ajout de Neutral.',
+			description: 'Applique une palette de couleurs au composant.<br>Ajout de Neutral.',
 			table: { category: 'inputs' },
 		},
 		size: {

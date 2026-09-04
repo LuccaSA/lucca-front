@@ -60,7 +60,7 @@ export default {
 		mode: {
 			control: 'select',
 			options: setStoryOptions(CALENDAR_MODE),
-			description: "Modifie le mode de sélection au mois ou à l'année.",
+			description: "Modifie le mode de sélection à la semaine, au mois ou à l'année.",
 			table: { category: 'inputs' },
 		},
 		focusedDate: {

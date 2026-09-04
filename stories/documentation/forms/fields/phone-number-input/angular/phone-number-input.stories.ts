@@ -1,3 +1,6 @@
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions, useStoryModel } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { waitForAngular } from '@/helpers/test';
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -5,10 +8,7 @@ import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field'
 import { PHONE_NUMBER_INPUT_AUTOCOMPLETE, PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/PhoneNumberField/Angular',
@@ -116,7 +116,7 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 			table: { category: 'inputs' },
 		},
 		noAutoPlaceholder: {
-			description: '[v19.2] Désactive le placeholder.',
+			description: 'Désactive le placeholder.',
 			table: { category: 'inputs' },
 		},
 		tooltip: {

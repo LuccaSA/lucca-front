@@ -96,7 +96,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: '[v19.2] Applique une largeur fixe au champ.',
+			description: 'Applique une largeur fixe au champ.',
 			table: { category: 'inputs' },
 		},
 		AI: {
@@ -137,6 +137,14 @@ export default {
 		},
 		presentation: {
 			description: 'Affiche une version présentation, en lecture seule, de la valeur',
+			table: { category: 'inputs' },
+		},
+		minlength: {
+			description: 'Longueur minimale requise pour la valeur du champ.',
+			table: { category: 'inputs' },
+		},
+		maxlength: {
+			description: 'Longueur maximale autorisée pour la valeur du champ.',
 			table: { category: 'inputs' },
 		},
 	},

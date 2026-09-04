@@ -8,7 +8,7 @@ import { generateInputs, setStoryOptions } from '@/helpers/stories';
 export default {
 	title: 'Documentation/Structure/Bubble icon/Angular/Basic',
 	argTypes: {
-		direction: {
+		bubbleDirection: {
 			options: setStoryOptions(BUBBLE_ICON_DIRECTION),
 			control: {
 				type: 'select',

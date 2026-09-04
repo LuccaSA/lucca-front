@@ -202,7 +202,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		slotTop: {
-			description: '[v19.3] Ajout d’un slot au dessus du titre. [PortalContent]',
+			description: 'Ajout d’un slot au dessus du titre. [PortalContent]',
 			table: { category: 'inputs' },
 		},
 	},

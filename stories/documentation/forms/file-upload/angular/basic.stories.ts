@@ -1,3 +1,4 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { HttpErrorResponse, HttpStatusCode, provideHttpClient } from '@angular/common/http';
 import { Injectable, LOCALE_ID, Pipe, PipeTransform, signal } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -8,7 +9,6 @@ import { LuInputDirective } from '@lucca-front/ng/input';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 type LuccaFileUploadResultId = string;
 
@@ -282,13 +282,13 @@ export const Multi = {
 					},
 				},
 				template: `<lu-form-field label="Label">
-		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
-	</lu-form-field>
-	<lu-file-entry-wrapper>
-		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-			<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
-		}
-	</lu-file-entry-wrapper>`,
+	<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+</lu-form-field>
+<lu-file-entry-wrapper>
+	@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
+		<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+	}
+</lu-file-entry-wrapper>`,
 			};
 		}
 	},
