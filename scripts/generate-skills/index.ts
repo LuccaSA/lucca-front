@@ -275,7 +275,7 @@ async function main(): Promise<void> {
 		const tech = getTechnicalMinor(v.replace(/^v/, ''));
 		if (tech) {
 			console.error(
-				`❌ --version ${v} : mineure technique (${tech.reason}) couverte par la skill ${tech.coveredBy} — aucune skill à générer (cf. TECHNICAL_MINORS dans version-config.ts). Si cette mineure porte désormais de vrais changements, retire-la de la table avant de la générer.`,
+				`❌ --version ${v} : mineure technique (${tech.reason}) couverte par la skill ${tech.coveredBy} — aucune skill dédiée (cf. TECHNICAL_MINORS dans version-config.ts) ; ses patchs > .0 sont documentés par les fixes/ de la skill ${tech.coveredBy}. Utilise --version ${tech.coveredBy}. Si cette mineure a désormais sa propre release ZeroHeight et de vrais changements de doc, retire-la de la table avant de la générer.`,
 			);
 			process.exit(1);
 		}
@@ -396,18 +396,20 @@ async function main(): Promise<void> {
 			const { written } = writeFixes(config.output.skillsDir, {
 				version,
 				patchTags: resolution.patchTags,
+				technicalMinors: resolution.technicalMinors,
 				components: Object.entries(componentMap).map(([slug, entry]) => ({
 					slug,
 					ngPackage: entry.ngPackage ?? null,
 					ngSelectors: entry.ngSelectors,
 				})),
 			});
-			console.log(`🩹 Fixes: ${written} fichier(s) (patchs > ${resolution.minorKey}.0)`);
+			const techNote = resolution.technicalMinors.length > 0 ? `, mineures techniques : ${resolution.technicalMinors.map((t) => t.minorKey).join(', ')}` : '';
+			console.log(`🩹 Fixes: ${written} fichier(s) (patchs > ${resolution.minorKey}.0${techNote})`);
 		}
 
 		// Per-minor SKILL.md (entry point) — written after this minor's files exist on disk
 		if (!flags.dryRun && !flags.component) {
-			const tocPath = writeToc(config.output.skillsDir, version, resolution.patchTags);
+			const tocPath = writeToc(config.output.skillsDir, version, resolution.patchTags, resolution.technicalMinors);
 			console.log(`📑 SKILL.md: ${path.relative(config.output.skillsDir, tocPath)}`);
 		}
 	}
@@ -514,7 +516,7 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 	// fixes/ are NOT rewritten here: they are git-sourced only, unaffected by ZH/Figma retries.
 	if (!flags.dryRun) {
 		for (const resolution of touched) {
-			writeToc(config.output.skillsDir, resolution.version, resolution.patchTags);
+			writeToc(config.output.skillsDir, resolution.version, resolution.patchTags, resolution.technicalMinors);
 		}
 		if (!flags.skipAggregate) {
 			const all = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
@@ -827,7 +829,7 @@ async function processVersion(
 	// Write version manifest — full runs only: a component-scoped run (--component or replay)
 	// would overwrite componentCount with the partial count of this run.
 	if (!flags.dryRun && !componentScoped) {
-		writeVersionManifest(config.output.skillsDir, version, successCount, resolution.patchTags);
+		writeVersionManifest(config.output.skillsDir, version, successCount, resolution.patchTags, resolution.technicalMinors);
 		console.log(`\n📋 Version manifest updated`);
 	}
 

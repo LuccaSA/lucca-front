@@ -17,7 +17,7 @@ description: >
 2. Décompose : **majeure** (`21`), **mineure** (`21.2`), **patch** (`21.2.1`).
 
 - **Majeure 22** (`./references/22/`) : base = 22.0 (contenu du patch 22.0.0)
-- **Majeure 21** (`./references/21/`) : base = 21.3 (contenu du patch 21.3.1) ; overrides : 21.2 → `minors/21-2/`, 21.1 → `minors/21-1/`, 21.0 → `minors/21-0/` ; mineures techniques : 21.4 (compatibilité Angular 22) → lire comme 21.3, patch `.0` uniquement
+- **Majeure 21** (`./references/21/`) : base = 21.3 (contenu du patch 21.3.1) ; overrides : 21.2 → `minors/21-2/`, 21.1 → `minors/21-1/`, 21.0 → `minors/21-0/` ; mineures techniques : 21.4 (compatibilité Angular 22) → lire comme 21.3 (patchs publiés : 21.4.0, 21.4.1, 21.4.2, ajouts des patchs 21.4.1, 21.4.2 dans `fixes/21-4-*.md`)
 
 Si la version ne peut pas être déterminée → **s'arrêter et demander à l'utilisateur**. Ne jamais supposer une version par défaut.
 
@@ -25,7 +25,7 @@ Si la version ne peut pas être déterminée → **s'arrêter et demander à l'u
 
 - la **majeure** détectée n'apparaît pas ci-dessus (ex: projet monté en majeure supérieure alors que la skill n'a pas été mise à jour) ;
 - la **mineure** détectée est plus récente que la base de sa majeure **et** n'est pas une mineure technique listée ci-dessus (mineure publiée après cette skill → non documentée) ;
-- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son `_manifest.md` ; `.0` pour une mineure technique → skill périmée, l'API réelle peut différer).
+- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son `_manifest.md` ; le dernier patch listé en §1 pour une mineure technique → skill périmée, l'API réelle peut différer).
 
 ## 2. Résolution des chemins
 
@@ -48,7 +48,7 @@ La doc reflète le **dernier patch publié** de la mineure. Si le patch du proje
 
 ### Projet sur une mineure technique
 
-Une mineure listée « technique » en §1 est une release de pure compatibilité framework : aucun changement d'API, de codemod ni de documentation. Traite le projet **comme s'il était sur sa mineure de couverture** et applique la résolution ci-dessus (ex: projet en `21.4.0` → documentation de `21.3`). **Seul le patch `.0` est couvert** — un patch ultérieur → arrête-toi et demande à l'utilisateur.
+Une mineure listée « technique » en §1 est une release de compatibilité framework : son patch `.0` est équivalent au dernier patch de sa mineure de couverture (aucun changement d'API, de codemod ni de documentation). Traite le projet **comme s'il était sur sa mineure de couverture** et applique la résolution ci-dessus (ex: projet en `21.4.2` → documentation de `21.3`). **Tous les patchs listés en §1 sont couverts.** Les patchs suivant le `.0` ont continué à livrer des correctifs **et quelques ajouts d'API** absents de la documentation : ils sont décrits dans les `fixes/<M-m-p>.md` de la mineure technique (au même endroit que ceux de la mineure de couverture, cf. « Patch antérieur » ci-dessus). Pour un projet sur un tel patch, lis tous les fixes de la mineure technique de version **inférieure ou égale** au patch installé et applique leurs changements **par-dessus** la documentation — sens inverse des fixes ordinaires : ces changements **sont** dans le code du projet.
 
 
 ## 3. Chemins (relatifs à `./references/<majeure>/` ou à `minors/<M-m>/` selon §2)

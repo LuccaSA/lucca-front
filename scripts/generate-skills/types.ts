@@ -407,6 +407,17 @@ export interface MinorManifestEntry {
 	componentCount: number;
 	/** Every published patch of the minor, ascending ("21.2.0" → …). */
 	patches: Record<string, PatchManifestEntry>;
+	/** Technical minors covered by this minor's skill (e.g. "21.4" for 21.3), if any. */
+	technicalMinors?: Record<string, TechnicalMinorManifestEntry>;
+}
+
+export interface TechnicalMinorManifestEntry {
+	/** Why the minor is technical (e.g. "compatibilité Angular 22"). */
+	reason: string;
+	/** Latest published patch of the technical minor, e.g. "21.4.2". */
+	latestPatch: string;
+	/** Every published patch of the technical minor, ascending. Patches > .0 have a fixes/ file. */
+	patches: Record<string, PatchManifestEntry>;
 }
 
 export interface VersionManifest {

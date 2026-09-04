@@ -114,20 +114,43 @@
     "21.3": {
       "latestPatch": "21.3.1",
       "tag": "v21.3.1",
-      "zhReleaseId": null,
+      "zhReleaseId": 63182,
       "storybookBaseUrl": "https://lucca-front.lucca.io/v21.3.1/storybook",
-      "generatedAt": "2026-07-29T10:42:59.895Z",
+      "generatedAt": "2026-09-04T15:03:44.471Z",
       "componentCount": 126,
       "patches": {
         "21.3.0": {
           "tag": "v21.3.0",
           "storybookBaseUrl": "https://lucca-front.lucca.io/v21.3.0/storybook",
-          "generatedAt": "2026-07-29T10:42:59.895Z"
+          "generatedAt": "2026-09-04T15:03:44.471Z"
         },
         "21.3.1": {
           "tag": "v21.3.1",
           "storybookBaseUrl": "https://lucca-front.lucca.io/v21.3.1/storybook",
-          "generatedAt": "2026-07-29T10:42:59.895Z"
+          "generatedAt": "2026-09-04T15:03:44.471Z"
+        }
+      },
+      "technicalMinors": {
+        "21.4": {
+          "reason": "compatibilité Angular 22",
+          "latestPatch": "21.4.2",
+          "patches": {
+            "21.4.0": {
+              "tag": "v21.4.0",
+              "storybookBaseUrl": "https://lucca-front.lucca.io/v21.4.0/storybook",
+              "generatedAt": "2026-09-04T15:03:44.471Z"
+            },
+            "21.4.1": {
+              "tag": "v21.4.1",
+              "storybookBaseUrl": "https://lucca-front.lucca.io/v21.4.1/storybook",
+              "generatedAt": "2026-09-04T15:03:44.471Z"
+            },
+            "21.4.2": {
+              "tag": "v21.4.2",
+              "storybookBaseUrl": "https://lucca-front.lucca.io/v21.4.2/storybook",
+              "generatedAt": "2026-09-04T15:03:44.471Z"
+            }
+          }
         }
       }
     }

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { MinorManifestEntry, VersionConfig, VersionManifest, WriteResult } from '../types';
+import { MinorManifestEntry, VersionConfig, VersionManifest, WriteResult, PatchManifestEntry } from '../types';
+import { TechnicalMinorPatches } from '../version-config';
 
 const SKILLS_BASE = 'lucca-front';
 
@@ -114,7 +115,13 @@ export function figmaSkillExists(skillsDir: string, slug: string, version: Versi
  * One entry per MINOR; `patches` records every published patch of the minor (its tag and
  * patch-exact Storybook URL), so no patch-level metadata is lost by the minor granularity.
  */
-export function writeVersionManifest(skillsDir: string, version: VersionConfig, componentCount: number, patchTags: string[]): void {
+export function writeVersionManifest(
+	skillsDir: string,
+	version: VersionConfig,
+	componentCount: number,
+	patchTags: string[],
+	technicalMinors: TechnicalMinorPatches[] = [],
+): void {
 	const manifestPath = path.resolve(skillsDir, SKILLS_BASE, '_versions.json');
 	let manifest: VersionManifest;
 
@@ -139,13 +146,20 @@ export function writeVersionManifest(skillsDir: string, version: VersionConfig, 
 		storybookBaseUrl: version.storybookBaseUrl,
 		generatedAt,
 		componentCount,
-		patches: Object.fromEntries(
-			patchTags.map((tag) => {
-				const bare = tag.replace(/^v/, '');
-				return [bare, { tag, storybookBaseUrl: `https://lucca-front.lucca.io/${tag}/storybook`, generatedAt }];
-			}),
-		),
+		patches: patchesEntry(patchTags, generatedAt),
 	};
+	if (technicalMinors.length > 0) {
+		entry.technicalMinors = Object.fromEntries(
+			technicalMinors.map((t) => [
+				t.minorKey,
+				{
+					reason: t.reason,
+					latestPatch: t.patchTags[t.patchTags.length - 1].replace(/^v/, ''),
+					patches: patchesEntry(t.patchTags, generatedAt),
+				},
+			]),
+		);
+	}
 
 	manifest.minors[minorKey] = entry;
 
@@ -162,6 +176,15 @@ export function writeVersionManifest(skillsDir: string, version: VersionConfig, 
 	manifest.minors = Object.fromEntries([...allMinors].reverse().map((v) => [v, manifest.minors[v]]));
 
 	fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
+}
+
+function patchesEntry(patchTags: string[], generatedAt: string): Record<string, PatchManifestEntry> {
+	return Object.fromEntries(
+		patchTags.map((tag) => {
+			const bare = tag.replace(/^v/, '');
+			return [bare, { tag, storybookBaseUrl: `https://lucca-front.lucca.io/${tag}/storybook`, generatedAt }];
+		}),
+	);
 }
 
 // ─── Fixes writers ────────────────────────────────────────────────────────────

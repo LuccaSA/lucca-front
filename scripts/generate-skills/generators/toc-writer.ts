@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { DocumentationMap, VersionConfig } from '../types';
-import { technicalMinorsCoveredBy } from '../version-config';
+import { TechnicalMinorPatches } from '../version-config';
 import { versionRoot, versionFolder } from './skill-writer';
 
 /**
@@ -15,7 +15,7 @@ import { versionRoot, versionFolder } from './skill-writer';
  * sourced from the generated folders on disk — the single source of truth, so every listed slug
  * is a navigable path.
  */
-export function writeToc(skillsDir: string, version: VersionConfig, patchTags: string[]): string {
+export function writeToc(skillsDir: string, version: VersionConfig, patchTags: string[], technicalMinors: TechnicalMinorPatches[] = []): string {
 	const root = versionRoot(skillsDir, version);
 	const minorVersion = `${version.major}.${version.minor}`;
 	const latestPatch = `${version.major}.${version.minor}.${version.patch}`;
@@ -23,19 +23,49 @@ export function writeToc(skillsDir: string, version: VersionConfig, patchTags: s
 	const patchList = patchTags.map((t) => t.replace(/^v/, ''));
 	const fixPatches = patchList.slice(1); // every published patch > x.y.0 has a fix file
 
-	// Technical minors covered by this skill (framework-compat releases with no change of their
-	// own, e.g. 21.4 = Angular 22 support) — declared so the coherence guard lets them through.
-	const techMinors = technicalMinorsCoveredBy(minorVersion);
+	// Technical minors covered by this skill (see TECHNICAL_MINORS): their .0 is a framework-compat
+	// release equivalent to this minor's latest patch; their later patches carry fixes AND small API
+	// additions, documented by fixes/<tech-M-m-p>.md in THIS skill (read in the inverted direction).
+	const techMinors = technicalMinors;
+	const techFixFile = (p: string) => `\`${p.replace(/\./g, '-')}.md\``;
 	const techBlock =
 		techMinors.length > 0
 			? `\n**Mineures techniques couvertes par cette skill.** ${techMinors
-					.map(
-						(t) =>
-							`La mineure \`${t.minorKey}\` est une release purement technique (${t.reason}) : aucun changement d'API, de codemod ni de documentation — un projet en \`${t.minorKey}.0\` utilise cette documentation (référence ${minorVersion}, dernier patch ${latestPatch}). **Seul le patch \`${t.minorKey}.0\` est couvert** : un patch ultérieur (ex: \`${t.minorKey}.1\`) porterait des correctifs non documentés ici.`,
-					)
-					.join('\n')}\n`
+					.map((t) => {
+						const patches = t.patchTags.map((tag) => tag.replace(/^v/, ''));
+						const later = patches.slice(1);
+						const last = patches[patches.length - 1];
+						let s = `La mineure \`${t.minorKey}\` est une release de compatibilité framework (${t.reason}) : son patch \`${t.minorKey}.0\` est équivalent à \`${latestPatch}\` (aucun changement d'API, de codemod ni de documentation) et un projet en \`${t.minorKey}.x\` (patchs publiés : ${patches.join(', ')}) utilise cette documentation.`;
+						if (later.length > 0) {
+							s += ` Les patchs suivants (${later.map((p) => `\`${p}\``).join(', ')}) ont continué à livrer des correctifs **et quelques ajouts d'API** absents de \`references/\` : ils sont décrits dans ${later.map((p) => `\`./fixes/${p.replace(/\./g, '-')}.md\``).join(', ')}. Pour un projet en \`${t.minorKey}.x\`, lis tous les \`fixes/${t.minorKey.replace(/\./g, '-')}-*.md\` de version **inférieure ou égale** au patch installé et applique leurs changements **par-dessus** la documentation — sens inverse des fixes ${minorVersion} : ces changements **sont** dans le code du projet. Dernier patch connu : \`${last}\`.`;
+						} else {
+							s += ` _(aucun patch publié après \`${t.minorKey}.0\` pour l'instant)_`;
+						}
+						return s;
+					})
+					.join('\n\n')}\n`
 			: '';
-	const techGuardSuffix = techMinors.length > 0 ? ` ni l'une des mineures techniques couvertes ci-dessus (patch \`.0\` uniquement)` : '';
+	const techGuardSuffix = techMinors.length > 0 ? ` ni l'une des mineures techniques couvertes ci-dessus` : '';
+	const techPatchGuardSuffix =
+		techMinors.length > 0
+			? ` — ou, pour une mineure technique, postérieur à son dernier patch connu (${techMinors.map((t) => `\`${t.patchTags[t.patchTags.length - 1].replace(/^v/, '')}\``).join(', ')})`
+			: '';
+	const techFixesLine =
+		techMinors.length > 0
+			? techMinors
+					.map((t) => {
+						const later = t.patchTags.slice(1).map((tag) => tag.replace(/^v/, ''));
+						return later.length > 0
+							? ` Mineure technique ${t.minorKey} : ${later.map(techFixFile).join(', ')} (lecture en sens inverse, voir §1 : à appliquer par-dessus la doc pour un projet en ${t.minorKey}.x).`
+							: '';
+					})
+					.join('')
+			: '';
+	const techUsageRow =
+		techMinors.length > 0
+			? `\n| Projet sur une mineure technique (${techMinors.map((t) => `${t.minorKey}.x`).join(', ')}) | ${techMinors.map((t) => `\`./fixes/${t.minorKey.replace(/\./g, '-')}-*.md\``).join(', ')} de version ≤ patch installé, par-dessus \`references/\` |`
+			: '';
+	const techDescription = techMinors.length > 0 ? ` (et ${techMinors.map((t) => `${t.minorKey}.x, mineure technique`).join(', ')})` : '';
 
 	// ── Build component list: flat, alphabetical, sourced from generated folders ──
 	const componentsDir = path.join(root, 'references', 'components');
@@ -83,7 +113,7 @@ export function writeToc(skillsDir: string, version: VersionConfig, patchTags: s
 	const content = `---
 name: ${skillName}
 description: >
-  Design system Lucca Front / Prisme (Angular), versions ${minorVersion}.x. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
+  Design system Lucca Front / Prisme (Angular), versions ${minorVersion}.x${techDescription}. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
   ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
 ---
 
@@ -105,7 +135,7 @@ ${techBlock}
 **Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
 
 - la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
-- le **patch** détecté est **postérieur** à ${latestPatch} (dernier patch connu de cette skill → skill périmée, l'API réelle peut différer) ;
+- le **patch** détecté est **postérieur** à ${latestPatch}${techPatchGuardSuffix} (dernier patch connu de cette skill → skill périmée, l'API réelle peut différer) ;
 - le patch (ou la version \`@lucca-front/ng\`) **ne peut pas être déterminé**.
 
 ## 2. Chemins
@@ -146,7 +176,7 @@ Slugs : animations, mixins, numbers, scrollbox, utilitaires, angular-api (provid
 
 ### Correctifs de patch (fixes/)
 
-\`./fixes/<M-m-p>.md\` — un fichier par patch publié de la mineure (delta vs le patch précédent : API, types partagés, codemods, sources de stories).${fixPatches.length > 0 ? ` Fichiers : ${fixPatches.map((p) => `\`${p.replace(/\./g, '-')}.md\``).join(', ')}.` : ' _(aucun patch publié après le .0 pour l\'instant)_'}
+\`./fixes/<M-m-p>.md\` — un fichier par patch publié de la mineure (delta vs le patch précédent : API, types partagés, codemods, sources de stories).${fixPatches.length > 0 ? ` Fichiers : ${fixPatches.map((p) => `\`${p.replace(/\./g, '-')}.md\``).join(', ')}.` : ' _(aucun patch publié après le .0 pour l\'instant)_'}${techFixesLine}
 
 À consulter quand : le projet est sur un patch **antérieur** à ${latestPatch} (les fixes postérieurs à sa version décrivent des correctifs absents de son code), ou pour comprendre ce qu'un patch précis a changé.
 
@@ -168,7 +198,7 @@ Bouton → API : \`./references/components/button/button.md\`, Figma : \`./refer
 | Mixins / animations SCSS | Outils (dossier \`tools/\`) |
 | Composant déprécié | \`./references/documentation/deprecated/deprecated.md\` |
 | Monter de version | \`./references/migrations.md\` + la section \`## Changelog\` du \`<slug>.md\` de chaque composant touché |
-| Projet sur un patch antérieur à ${latestPatch} / comportement inattendu sur un patch | \`./fixes/<M-m-p>.md\` |
+| Projet sur un patch antérieur à ${latestPatch} / comportement inattendu sur un patch | \`./fixes/<M-m-p>.md\` |${techUsageRow}
 
 ## 4. Workflow Code
 
