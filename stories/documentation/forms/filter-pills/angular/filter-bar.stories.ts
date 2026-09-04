@@ -72,7 +72,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		optionalFilter: {
-			description: 'Ajoute une FilterPill optionnelle. Celle-ci déclanche automatiquement l’apparition du bouton d’ajout de filtres.',
+			description: 'Ajoute une FilterPill optionnelle. Celle-ci déclenche automatiquement l’apparition du bouton d’ajout de filtres.',
 			control: {
 				type: 'boolean',
 			},
