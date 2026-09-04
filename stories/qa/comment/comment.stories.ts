@@ -10,7 +10,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CommentStory {
-	date = new Date();
+	date = new Date('2026-01-15T10:30:00Z');
 	formatedSample = `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 
 	Temporibus a veniam necessitatibus aut facilis repellendus provident nulla iste neque ex? `;
