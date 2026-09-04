@@ -64,6 +64,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		saveView: {
+			name: '↳ saveView',
 			description: 'Ajoute une vue personnalisée ainsi qu’un dropdown pour enregistrer la vue.',
 			control: {
 				type: 'boolean',
