@@ -1,6 +1,7 @@
 @use 'exports' as *;
 
-.icon {
+// where is for specificity here
+:where(lu-icon, pr-icon) .lucca-icon {
 	@layer components {
 		@include vars;
 		@include component;
@@ -57,6 +58,10 @@
 
 		&.icon-color-placeholder {
 			@include colorPlaceholder;
+		}
+
+		&.mod-AI {
+			@include AI;
 		}
 	}
 }

@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	block-size: var(--components-icon-size);
-	inline-size: var(--components-icon-size);
+	block-size: var(--components-icon-size, var(--icon-size, var(--components-icon-sizeDefault)));
+	inline-size: var(--components-icon-size, var(--icon-size, var(--components-icon-sizeDefault)));
 	color: var(--components-icon-color);
 	fill: currentColor;
 }

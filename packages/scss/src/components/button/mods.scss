@@ -1,11 +1,12 @@
-@use '@lucca-front/icons/src/icon/exports' as icons;
-@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/icons/src/icon/exports' as luccaIcon;
+@use '@lucca-front/icons/src/commons/utils/icon' as utilsIcon;
+@use '@lucca-front/scss/src/components/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin M {
-	@include icons.M;
+	@include luccaIcon.M;
 
 	--components-button-font: var(--pr-t-font-body-M);
 	--components-button-paddingBlock: var(--pr-t-spacings-100);
@@ -22,7 +23,7 @@
 }
 
 @mixin S {
-	@include icons.S;
+	@include luccaIcon.S;
 
 	--components-button-font: var(--pr-t-font-body-S);
 	--components-button-paddingBlock: var(--pr-t-spacings-75);
@@ -45,7 +46,7 @@
 }
 
 @mixin XS {
-	@include icons.XS;
+	@include luccaIcon.XS;
 
 	--components-button-font: var(--pr-t-font-body-XS);
 	--components-button-paddingBlock: var(--pr-t-spacings-50);
@@ -150,7 +151,7 @@
 	--components-button-padding: 0;
 
 	&::after {
-		@include icon.generate('arrow_chevron_bottom');
+		@include utilsIcon.generate('arrow_chevron_bottom');
 
 		block-size: 0;
 		order: -1;
@@ -283,8 +284,12 @@
 		@include color.borderGradient($gradient: var(--pr-t-color-border-ai));
 
 		&:not(.mod-invert) {
-			.lucca-icon {
-				@include icons.AI;
+			@include icon.whenRawIcon {
+				@include luccaIcon.AI;
+			}
+
+			@include icon.whenIconComponent {
+				@include icon.AI;
 			}
 		}
 	}
