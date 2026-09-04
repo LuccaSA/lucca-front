@@ -47,7 +47,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: '[v19.2] Applique une largeur fixe au champ.',
+			description: 'Applique une largeur fixe au champ.',
 			table: { category: 'inputs' },
 		},
 		inlineMessage: {

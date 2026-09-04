@@ -1,3 +1,4 @@
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { colorDecoratives500 } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -6,10 +7,9 @@ import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-fr
 import { ColorInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
-import { waitForAngular } from '../../../../../helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
+import { createTestStory, generateInputs, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
+import { waitForAngular } from '../../../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Color Picker/Angular',
@@ -46,7 +46,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: '[v19.2] Applique une largeur fixe au champ.',
+			description: 'Applique une largeur fixe au champ.',
 			table: { category: 'inputs' },
 		},
 		inlineMessage: {
