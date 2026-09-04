@@ -71,6 +71,7 @@ Chaque entrypoint qui affiche du texte a un `translations.ts` indexé par locale
 
 - **Stories QA** (`stories/qa/<composant>/`) : un `@Component` wrapper dans `<composant>.stories.ts` avec `templateUrl` pointant vers `<composant>.stories.html`, qui contient une `<table class="demo-QAtable">` comparant côte à côte la version HTML (classes CSS pures) et la version Angular (composants `<lu-*>`). La colonne Angular doit utiliser de vrais composants `lu-*`, jamais du HTML brut avec des classes.
 - **Stories de documentation** (`stories/documentation/<catégorie>/<composant>/`) : `Meta`/`StoryObj` standards sur la classe du composant, titre reflétant l'arborescence (`Documentation/<Catégorie>/<Composant>/Angular/<Variante>`) ; les variantes Angular et HTML vivent dans des dossiers frères `angular/` et `html&css/`. Utiliser `generateInputs(inputs, argTypes)` et `createTestStory` de `stories/helpers/stories`.
+  - **Convention `argTypes`** : chaque arg est rangé dans une `table.category` — `inputs` (`input()`), `outputs` (`output()`), `models` (`model()`). Un output est en plus exposé comme action loggée (`action: '<nom>'`, `control: false`), documente le type émis via `table.type.summary` (`void` si l'`output()` n'a pas de type, sinon `T`) et est bindé dans le template du `render` (`(nom)="nom($event)"`, avec les args passés en `props`). Voir `stories/documentation/_sample/angular/basic.stories.ts`.
 
 ## Docs & skills
 

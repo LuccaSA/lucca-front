@@ -68,6 +68,7 @@ lu-empty-state-page {
 	argTypes: {
 		heading: {
 			description: 'Titre de l’empty state.',
+			table: { category: 'inputs' },
 		},
 		hx: {
 			control: {
@@ -76,12 +77,15 @@ lu-empty-state-page {
 				max: 6,
 			},
 			description: 'Définit le niveau sémantique du titre.',
+			table: { category: 'inputs' },
 		},
 		src: {
 			description: 'URL de l’illustration.',
+			table: { category: 'inputs' },
 		},
 		alt: {
 			description: 'Texte alternatif de l’illustration restitué par les lecteurs d’écran.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

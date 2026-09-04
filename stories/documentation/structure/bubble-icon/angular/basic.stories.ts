@@ -14,6 +14,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(BUBBLE_ICON_SIZE),
@@ -21,6 +22,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		palette: {
 			options: setStoryOptions([...PALETTE, ...PRODUCT_PALETTE, ...DECORATIVE_PALETTE]),
@@ -28,6 +30,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au composant.',
+			table: { category: 'inputs' },
 		},
 		icon: {
 			options: IconsList.filter((i) => !i.deprecated).map((i) => i.icon),
@@ -35,9 +38,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie le glyphe de l’icône.',
+			table: { category: 'inputs' },
 		},
 		alt: {
 			description: 'Information restituée par le lecteur d’écran.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

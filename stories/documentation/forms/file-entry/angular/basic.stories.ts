@@ -12,6 +12,7 @@ export default {
 				type: 'radio',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		state: {
 			options: setStoryOptions(FILE_ENTRY_STATE),
@@ -19,61 +20,83 @@ export default {
 				type: 'radio',
 			},
 			description: 'Modifie l’état du composant.',
+			table: { category: 'inputs' },
 		},
 		previewUrl: {
 			if: { arg: 'iconOverride', truthy: false },
 			description: 'URL de prévisualisation de l’image uploadée.',
+			table: { category: 'inputs' },
 		},
 		displayFileName: {
 			if: { arg: 'media', truthy: true },
 			description: 'Affiche le nom du fichier sous l’image en vue <code>media</code>.',
+			table: { category: 'inputs' },
 		},
 		media: {
 			description: 'Affiche le fichier avec une mise en forme adaptée aux visuels.',
+			table: { category: 'inputs' },
 		},
 		iconOverride: {
 			description: 'Remplace l’icône de format de fichier.',
+			table: { category: 'inputs' },
 		},
 		downloadURL: {
 			description: 'URL de téléchargement du fichier.',
+			table: { category: 'inputs' },
 		},
 		openInNewTab: {
 			description: 'Ouvre le fichier dans un nouvel onglet au lieu de le télécharger. Peut varier selon les navigateurs ou les réglages utilisateurs.',
 			if: { arg: 'downloadURL', truthy: true },
+			table: { category: 'inputs' },
 		},
 		inlineMessageError: {
 			description: 'Message d’erreur affiché sous le composant.',
+			table: { category: 'inputs' },
 		},
 		deletable: {
 			description: 'Affiche un bouton de suppression.',
+			table: { category: 'inputs' },
 		},
 		withPassword: {
 			description: 'Affiche un champ permettant de définir un mot de passe au fichier.',
+			table: { category: 'inputs' },
 		},
 		fileName: {
 			description: 'Nom du fichier.',
+			table: { category: 'inputs' },
 		},
 		fileSize: {
 			description: 'Poids du fichier (en octets).',
+			table: { category: 'inputs' },
 		},
 		fileType: {
 			description: 'Type MIME du fichier.',
+			table: { category: 'inputs' },
 		},
 		structure: {
 			if: { arg: 'size', truthy: true },
 			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
+			table: { category: 'inputs' },
 		},
 		withFileType: {
 			control: 'boolean',
+			table: { category: 'inputs' },
 		},
 		withFileSize: {
 			control: 'boolean',
+			table: { category: 'inputs' },
 		},
 		deleteFile: {
 			description: 'Événement déclenché lors du clic sur le bouton de suppression du fichier.',
+			action: 'deleteFile',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		passwordChange: {
 			description: 'Événement déclenché lors de la modification du mot de passe du fichier.',
+			action: 'passwordChange',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'string' } },
 		},
 	},
 	decorators: [
@@ -86,10 +109,13 @@ export default {
 		const { fileName, fileSize, fileType, deletable, withPassword, structure, ...otherArgs } = args;
 
 		const deletableParam = deletable ? ` (deleteFile)="deleteFile()"` : ``;
-		const withPasswordParam = withPassword ? ` (passwordChange)="passwordChange()"` : ``;
+		const withPasswordParam = withPassword ? ` (passwordChange)="passwordChange($event)"` : ``;
 		const structureParam = structure ? ` structure` : ``;
 
 		return {
+			props: {
+				...args,
+			},
 			template: `<lu-file-entry${structureParam}${deletableParam}${withPasswordParam} [entry]="{
 			name: '${fileName}',
 			size: ${fileSize},

@@ -18,16 +18,18 @@ const globalArgTypes: any = {
 		control: {
 			type: 'select',
 		},
+		table: { category: 'inputs' },
 	},
-	panelClass: { control: { type: 'text' } },
-	undismissable: { control: { type: 'boolean' } },
+	panelClass: { control: { type: 'text' }, table: { category: 'inputs' } },
+	undismissable: { control: { type: 'boolean' }, table: { category: 'inputs' } },
 	size: {
 		options: ['XS', 'S', 'M', 'L', 'XL'],
 		control: {
 			type: 'select',
 		},
+		table: { category: 'inputs' },
 	},
-	noBackdrop: { control: { type: 'boolean' } },
+	noBackdrop: { control: { type: 'boolean' }, table: { category: 'inputs' } },
 } as const;
 
 const generateStory = getStoryGenerator<StoryComponent>({

@@ -29,12 +29,15 @@ export default {
 		bob: HiddenArgType,
 		empty: {
 			description: 'Affiche un empty state à la place des lignes de tableau.',
+			table: { category: 'inputs' },
 		},
 		layoutFixed: {
 			description: 'Applique une largeur fixe aux colonnes.',
+			table: { category: 'inputs' },
 		},
 		selectable: {
 			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+			table: { category: 'inputs' },
 		},
 		mixed: {
 			if: { arg: 'selectable', truthy: true },
@@ -49,24 +52,30 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie le type d’élément HTML cliquable.',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque les cellules d’en-tête du tableau.',
+			table: { category: 'inputs' },
 		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
 			description: 'Affiche le groupe dans son état déplié.',
+			table: { category: 'models' },
 		},
 		group: {
 			description: 'Regroupe des lignes de tableau en les rendant dépliables.',
+			table: { category: 'inputs' },
 		},
 		groupButtonAlt: {
 			if: { arg: 'group', truthy: true },
 			description: 'Texte restitué par le bouton du groupe.',
+			table: { category: 'inputs' },
 		},
 		stack: {
 			control: { type: 'range', min: 1, max: 3 },
 			description: 'Affiche une ligne sous la forme d’un empilement d’éléments.',
+			table: { category: 'inputs' },
 		},
 		sort: {
 			options: setStoryOptions(INDEX_TABLE_SORT),
@@ -74,6 +83,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
+			table: { category: 'models' },
 		},
 		align: {
 			options: setStoryOptions(INDEX_TABLE_ALIGN),
@@ -81,21 +91,27 @@ export default {
 				type: 'select',
 			},
 			description: 'Aligne le contenu des cellules horizontalement.',
+			table: { category: 'inputs' },
 		},
 		allowSelection: {
 			description: 'Permet de sélectionner le texte d’une cellule. Désactive l’action principal au clic sur la cellule.',
+			table: { category: 'inputs' },
 		},
 		allowAction: {
 			description: 'Permet de rendre une cellule cliquable. Désactive l’action principal au clic sur la cellule.',
+			table: { category: 'inputs' },
 		},
 		intermediateFooter: {
 			description: 'Présente une ligne de tableau sous la forme d’un footer intermédiaire. Exemple : Sous-total.',
+			table: { category: 'inputs' },
 		},
 		footer: {
 			description: 'Présente le tableau avec un footer.',
+			table: { category: 'inputs' },
 		},
 		pagination: {
 			description: 'Présente le tableau avec une pagination.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [
