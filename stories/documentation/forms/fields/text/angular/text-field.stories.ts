@@ -139,6 +139,14 @@ export default {
 			description: 'Affiche une version présentation, en lecture seule, de la valeur',
 			table: { category: 'inputs' },
 		},
+		minlength: {
+			description: 'Longueur minimale requise pour la valeur du champ.',
+			table: { category: 'inputs' },
+		},
+		maxlength: {
+			description: 'Longueur maximale autorisée pour la valeur du champ.',
+			table: { category: 'inputs' },
+		},
 	},
 } as Meta;
 

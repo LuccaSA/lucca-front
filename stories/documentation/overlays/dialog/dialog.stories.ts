@@ -1,3 +1,5 @@
+import { createTestStory, setStoryOptions } from '@/helpers/stories';
+import { waitForAngular } from '@/helpers/test';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
@@ -19,8 +21,6 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
@@ -109,7 +109,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		panelClasses: {
-			description: 'Permet d’ajouter des classes CSS au composant.',
+			description: 'Permet d’ajouter des classes CSS à la racine de la fenêtre de dialogue.',
 			table: { category: 'inputs' },
 		},
 		alert: {
@@ -131,11 +131,12 @@ export default {
 			description: 'Surcharge l’illustration avec une URL personnalisée.',
 			table: { category: 'inputs' },
 		},
-		neutralBackground: {
+		surfaceDefault: {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Applique un fond gris au contenu de la fenêtre de dialogue.',
+			description: 'Applique le fond de surface neutre (`--pr-t-elevation-surface-default`) au contenu de la fenêtre de dialogue.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;
