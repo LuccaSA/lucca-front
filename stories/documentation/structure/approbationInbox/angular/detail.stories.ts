@@ -36,6 +36,7 @@ export default {
 			description: 'Affiche un callout d’avertissement dans le contenu principal.',
 		},
 		calloutLabel: {
+			name: '↳ calloutLabel',
 			description: 'Texte affiché dans le callout.',
 			if: { arg: 'callout', truthy: true },
 		},

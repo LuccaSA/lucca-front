@@ -28,22 +28,24 @@ export default {
 			description: 'Présente un exemple de structure avec header.',
 			table: { category: 'inputs' },
 		},
-		footer: {
-			description: 'Présente un exemple de structure avec footer.',
-			table: { category: 'inputs' },
-		},
-		sidebar: {
-			description: 'Présente un exemple de structure avec un panneau latéral.',
-			table: { category: 'inputs' },
-		},
 		headerSticky: {
+			name: '↳ headerSticky',
 			if: { arg: 'header', truthy: true },
 			description: 'Fixe le footer en haut du layout.',
 			table: { category: 'inputs' },
 		},
+		footer: {
+			description: 'Présente un exemple de structure avec footer.',
+			table: { category: 'inputs' },
+		},
 		footerSticky: {
+			name: '↳ footerSticky',
 			if: { arg: 'footer', truthy: true },
 			description: 'Fixe le footer en bas du layout.',
+			table: { category: 'inputs' },
+		},
+		sidebar: {
+			description: 'Présente un exemple de structure avec un panneau latéral.',
 			table: { category: 'inputs' },
 		},
 		repeatContent: {
@@ -51,13 +53,14 @@ export default {
 			description: '[Story] Modifie le nombre d’éléments <lu-main-layout-block>',
 			table: { category: 'inputs' },
 		},
+		contentOverflowing: {
+			name: '↳ contentOverflowing',
+			description: 'Permet de rendre un élément <lu-main-layout-block> scrollable horizontalement tout en conservant le comportement du reste du layout.',
+			table: { category: 'inputs' },
+		},
 		repeatOverflow: {
 			control: { type: 'range', min: 1, max: 10 },
 			if: { arg: 'contentOverflowing', truthy: true },
-			table: { category: 'inputs' },
-		},
-		contentOverflowing: {
-			description: 'Permet de rendre un élément <lu-main-layout-block> scrollable horizontalement tout en conservant le comportement du reste du layout.',
 			table: { category: 'inputs' },
 		},
 		bubblesStartEnd: {
