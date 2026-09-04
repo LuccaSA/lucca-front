@@ -12,6 +12,12 @@ export interface SelectDataSource<TOption, TGroup = never> {
 	/** Optional debounce in ms for clue-based re-queries (useful for API data sources) */
 	clueDebounceMs?: number;
 	getOptions(params: SelectDataSourceParams): Observable<readonly TOption[]>;
+	/**
+	 * Optional post-processing applied to the whole list of loaded options (all pages accumulated),
+	 * every time it changes. Use it for decorations that can't be computed page by page —
+	 * for example flagging homonyms, which requires seeing every loaded option at once.
+	 */
+	transformOptions?(options: readonly TOption[]): Observable<readonly TOption[]>;
 	getTotalCount?(params: SelectDataSourceParams): Observable<number>;
 	getGroupOptions?: [TGroup] extends [never] ? never : (group: TGroup) => Observable<TOption[]>;
 	reset?(): void;
