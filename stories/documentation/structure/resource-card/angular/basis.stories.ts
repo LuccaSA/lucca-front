@@ -1,3 +1,4 @@
+import { setStoryOptions } from '@/helpers/stories';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -7,7 +8,6 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { setStoryOptions } from '@/helpers/stories';
 
 interface ResourceCardAngularBasicStory {
 	wrapper: boolean;

@@ -19,10 +19,10 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from '@/helpers/common-arg-types';
 import { setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Basic',
@@ -55,36 +55,31 @@ export default {
 			description: 'Aligne le contenu des cellules verticalement.',
 			table: { category: 'inputs' },
 		},
-		inlineSize: {
-			if: { arg: 'layoutFixed', truthy: true },
-			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
-			table: { category: 'inputs' },
-		},
 		selected: {
 			if: { arg: 'selectable', truthy: true },
 			description: 'Applique l’état actif à une ligne sélectionnable.',
 			table: { category: 'models' },
 		},
 		selectedLabel: {
+			name: '↳ selectedLabel',
 			if: { arg: 'selectable', truthy: true },
 			description: 'Texte alternatif restitué à la sélection d’une ligne.',
 			table: { category: 'inputs' },
 		},
 		selectedLabelHead: {
+			name: '↳ selectedLabelHead',
 			if: { arg: 'selectable', truthy: true },
 			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes.',
 			table: { category: 'inputs' },
 		},
 		mixed: {
+			name: '↳ mixed',
 			if: { arg: 'selectable', truthy: true },
 			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
 		},
 		disabled: {
+			name: '↳ disabled',
 			if: { arg: 'selectable', truthy: true },
-			table: { category: 'inputs' },
-		},
-		inlineSizeValue: {
-			if: { arg: 'inlineSize', truthy: true },
 			table: { category: 'inputs' },
 		},
 		groupButtonAlt: {
@@ -134,6 +129,17 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Applique une largeur fixe aux colonnes. La largeur d’une colonne peut être redéfinie via <code>fixedWidth</code>.',
+			table: { category: 'inputs' },
+		},
+		inlineSize: {
+			name: '↳ inlineSize',
+			if: { arg: 'layoutFixed', truthy: true },
+			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
+			table: { category: 'inputs' },
+		},
+		inlineSizeValue: {
+			name: '↳↳ inlineSizeValue',
+			if: { arg: 'inlineSize', truthy: true },
 			table: { category: 'inputs' },
 		},
 		selectable: {

@@ -1,7 +1,7 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { GaugeComponent } from '@lucca-front/ng/gauge';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Loaders/Gauge/Angular/Basic',
@@ -27,6 +27,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		size: {
+			name: '↳ size',
 			control: { type: 'range', min: 32, max: 160, step: 8 },
 			if: { arg: 'circular', truthy: true },
 			description: 'Taille du composant pour sa forme circulaire.',

@@ -93,6 +93,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		hx: {
+			name: '↳ hx',
 			options: setStoryOptions(CALLOUT_HX),
 			control: {
 				type: 'select',
@@ -119,6 +120,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		actionsInline: {
+			name: '↳ actionInline',
 			if: { arg: 'actions', truthy: true },
 			description: '[v20.3] Déplace les actions sur la droite du callout.',
 			table: { category: 'inputs' },

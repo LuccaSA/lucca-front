@@ -1,9 +1,9 @@
-import { IconsList } from '@/stories/icons-list';
-import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
 import { createTestStory, generateInputs } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
+import { IconsList } from '@/stories/icons-list';
+import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { expect, within } from 'storybook/test';
 
 interface ListingBasicStory {
@@ -55,6 +55,15 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			description: 'Modifie le type de liste (checklist, icônes, etc.)',
 			table: { category: 'inputs' },
 		},
+		palette: {
+			PaletteAllArgType,
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'type', truthy: true },
+			description: 'Modifie la couleur des icônes.',
+			table: { category: 'inputs' },
+		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
 		defaultIcon: {
@@ -73,15 +82,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			},
 			if: { arg: 'type', eq: 'icons' },
 			description: 'Modifie l’icône d’un élément de la liste.',
-			table: { category: 'inputs' },
-		},
-		palette: {
-			PaletteAllArgType,
-			control: {
-				type: 'select',
-			},
-			if: { arg: 'type', truthy: true },
-			description: 'Modifie la couleur des icônes.',
 			table: { category: 'inputs' },
 		},
 		divider: {

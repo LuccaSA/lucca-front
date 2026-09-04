@@ -1,7 +1,7 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { provideHttpClient } from '@angular/common/http';
 import { FILE_ENTRY_SIZE, FILE_ENTRY_STATE, FileEntryComponent } from '@lucca-front/ng/file-upload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/File/FileEntry/Angular/Basic',
@@ -28,6 +28,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		displayFileName: {
+			name: '↳ displayFileName',
 			if: { arg: 'media', truthy: true },
 			description: 'Affiche le nom du fichier sous l’image en vue <code>media</code>.',
 			table: { category: 'inputs' },
@@ -45,6 +46,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		openInNewTab: {
+			name: '↳ openInNewTab',
 			description: 'Ouvre le fichier dans un nouvel onglet au lieu de le télécharger. Peut varier selon les navigateurs ou les réglages utilisateurs.',
 			if: { arg: 'downloadURL', truthy: true },
 			table: { category: 'inputs' },
@@ -74,6 +76,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		structure: {
+			name: '↳ structure',
 			if: { arg: 'size', truthy: true },
 			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
 			table: { category: 'inputs' },
@@ -142,6 +145,7 @@ export const Basic = {
 		openInNewTab: false,
 		deletable: true,
 		withPassword: false,
+		size: '',
 		structure: false,
 	},
 };

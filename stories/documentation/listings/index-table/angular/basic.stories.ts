@@ -1,3 +1,5 @@
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { setStoryOptions } from '@/helpers/stories';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -20,8 +22,6 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { HiddenArgType } from '@/helpers/common-arg-types';
-import { setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Listings/Index Table/Angular/Basic',
@@ -40,10 +40,12 @@ export default {
 			table: { category: 'inputs' },
 		},
 		mixed: {
+			name: '↳ mixed',
 			if: { arg: 'selectable', truthy: true },
 			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
 		},
 		disabled: {
+			name: '↳ disabled',
 			if: { arg: 'selectable', truthy: true },
 		},
 		action: {
@@ -58,16 +60,17 @@ export default {
 			description: 'Masque les cellules d’en-tête du tableau.',
 			table: { category: 'inputs' },
 		},
+		group: {
+			description: 'Regroupe des lignes de tableau en les rendant dépliables.',
+			table: { category: 'inputs' },
+		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
 			description: 'Affiche le groupe dans son état déplié.',
 			table: { category: 'models' },
 		},
-		group: {
-			description: 'Regroupe des lignes de tableau en les rendant dépliables.',
-			table: { category: 'inputs' },
-		},
 		groupButtonAlt: {
+			name: '↳ groupButtonAlt',
 			if: { arg: 'group', truthy: true },
 			description: 'Texte restitué par le bouton du groupe.',
 			table: { category: 'inputs' },

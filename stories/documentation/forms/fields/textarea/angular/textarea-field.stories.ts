@@ -77,6 +77,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		autoResizeScrollIntoView: {
+			name: '↳ autoResizeScrollIntoView',
 			type: 'boolean',
 			if: { arg: 'autoResize', truthy: true },
 			description: 'Assure que le curseur de saisie soit toujours visible à l’écran en appliquant un scroll.',

@@ -26,6 +26,7 @@ export default {
 			description: 'Groupe les éléments.',
 		},
 		groupLabel: {
+			name: '↳ group',
 			description: 'Titre du groupe (aussi reprit dans l’intitulé masqué de sa sélection).',
 			if: { arg: 'group', truthy: true },
 		},
@@ -60,6 +61,12 @@ export default {
 		rightContent: {
 			description: 'Exemple de données complémentaires.',
 		},
+		icons: {
+			description: 'Icônes affichées dans les données complémentaires.',
+			control: { type: 'object' },
+			if: { arg: 'rightContent', truthy: true },
+			table: { category: 'inputs' },
+		},
 		visual: {
 			description: 'Affiche un exemple de visuel au début d’un élément.',
 		},
@@ -68,12 +75,6 @@ export default {
 		},
 		center: {
 			description: 'Centre verticalement les données d’un élément',
-			table: { category: 'inputs' },
-		},
-		icons: {
-			description: 'Icônes affichées dans les données complémentaires.',
-			control: { type: 'object' },
-			if: { arg: 'rightContent', truthy: true },
 			table: { category: 'inputs' },
 		},
 		emptyResetButton: {

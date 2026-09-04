@@ -1,7 +1,7 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FOOTER_CONTAINER_MAX, FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } from '@lucca-front/ng/footer';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Footer/Angular/Basic',
@@ -19,6 +19,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		containerMax: {
+			name: '↳ container',
 			options: setStoryOptions(FOOTER_CONTAINER_MAX),
 			control: {
 				type: 'select',
