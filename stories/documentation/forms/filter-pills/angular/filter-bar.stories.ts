@@ -6,6 +6,7 @@ import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { DividerComponent } from '@lucca-front/ng/divider';
+import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
@@ -13,6 +14,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { IconComponent } from '@lucca/prisme/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
@@ -39,53 +41,127 @@ export default {
 				DividerComponent,
 				SegmentedControlComponent,
 				SegmentedControlFilterComponent,
+				IconComponent,
+				DropdownMenuComponent,
+				DropdownItemComponent,
+				DropdownActionComponent,
+				LuDropdownTriggerDirective,
 			],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), { provide: LOCALE_ID, useValue: 'fr-FR' }] }),
 	],
+	parameters: {
+		controls: {
+			sort: 'none',
+		},
+	},
 	argTypes: {
-		showExportButton: {
-			description: 'Affiche le bouton d’export en tant qu’action associée à droite de la Filter bar.',
+		views: {
+			description: 'Affiche les vues via SegmentedControl.',
 			control: {
 				type: 'boolean',
 			},
 		},
-		showViews: {
-			description: 'Affiche les vues (Segmented control) en tant qu’addon avant les filtres de la Filter bar.',
+		saveView: {
+			description: 'Ajoute une vue personnalisée ainsi qu’un dropdown pour enregistrer la vue.',
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'views', truthy: true },
+		},
+		optionalFilter: {
+			description: 'Ajoute une FilterPill optionnelle. Celle-ci déclanche automatiquement l’apparition du bouton d’ajout de filtres.',
 			control: {
 				type: 'boolean',
 			},
 		},
-		showOptionalFilter: {
-			description: 'Rend le filtre "Période" optionnel. Dès qu’au moins un filtre est optionnel, le bouton d’ajout de filtres apparaît automatiquement.',
+		actionButton: {
+			description: 'Affiche un bouton d’action associé à la FilterBar.',
 			control: {
 				type: 'boolean',
 			},
 		},
-		showApplyButton: {
-			description:
-				'Affiche le bouton "Appliquer les filtres", utilisé lorsque des contraintes techniques empêchent une application automatique des filtres. Il se positionne à la toute fin des filtres.',
+		applyFiltersButton: {
+			description: 'Affiche un bouton pour appliquer les filtres, utilisé lorsqu’il n’est pas possible d’appliquer les filtres automatiquement.',
 			control: {
 				type: 'boolean',
 			},
 		},
 	},
 	render: (args, { argTypes }) => {
-		const exportButton = args['showExportButton'] ? `<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>` : '';
-		const applyButton = args['showApplyButton'] ? `<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>` : '';
-		const periodFilter = args['showOptionalFilter']
+		const actionButton = args['actionButton'] ? `<button type="submit" size="S" luButton="outlined">Exporter</button>` : '';
+		const applyFiltersButton = args['applyFiltersButton'] ? `<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>` : '';
+		const periodFilter = args['optionalFilter']
 			? `<lu-filter-pill label="Période" optional name="period">
 		<lu-date-range-input [(ngModel)]="examplePeriod" />
 	</lu-filter-pill>`
 			: '';
-		const views = args['showViews']
+		const saveViewEnabled = args['views'] && args['saveView'];
+		const saveViewTab = saveViewEnabled
+			? `<ng-template #label4>
+			Produit
+			<button type="button" size="XS" luButton="ghost" aria-expanded="false" disclosure [luDropdown]="optionsDropdown">
+				<lu-icon alt="Options" icon="menuDots" />
+			</button>
+			<ng-template #optionsDropdown>
+				<lu-dropdown-menu>
+					<lu-dropdown-item>
+						<button lu-dropdown-action type="button">
+							<lu-icon icon="edit" />
+							Modifier le nom
+						</button>
+					</lu-dropdown-item>
+					<lu-dropdown-item>
+						<button lu-dropdown-action type="button" critical>
+							<lu-icon icon="trash" />
+							Supprimer
+						</button>
+					</lu-dropdown-item>
+				</lu-dropdown-menu>
+			</ng-template>
+		</ng-template>
+		<lu-segmented-control-filter [label]="label4" value="4" />`
+			: '';
+		const saveViewButton = saveViewEnabled
+			? `<button type="button" size="S" luButton="outlined" palette="product" disclosure aria-expanded="false" [luDropdown]="saveDropdown">
+			Enregistrer la vue
+			<lu-icon icon="arrowChevronBottom" />
+		</button>`
+			: '';
+		const saveViewDropdownTemplate = saveViewEnabled
+			? `<ng-template #saveDropdown>
+	<lu-dropdown-menu>
+		<lu-dropdown-item>
+			<button lu-dropdown-action type="button">
+				<lu-icon icon="save" />
+				Enregistrer les modifications
+			</button>
+		</lu-dropdown-item>
+		<lu-dropdown-item>
+			<button lu-dropdown-action type="button" aria-disabled="true" class="is-disabled" luTooltip="Supprimer des vues pour en créer des nouvelles">
+				<lu-icon icon="mathsPlus" />
+				Enregistrer en tant que nouvelle vue
+			</button>
+		</lu-dropdown-item>
+	</lu-dropdown-menu>
+</ng-template>`
+			: '';
+		const views = args['views']
 			? `<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
 		<ng-template #label0>Tous <lu-numeric-badge [value]="12" /></ng-template>
 		<ng-template #label2>Approuvés <lu-numeric-badge [value]="3" /></ng-template>
 		<lu-segmented-control-filter [label]="label0" value="0" />
 		<lu-segmented-control-filter [label]="label2" value="2" />
+		${saveViewTab}
 	</lu-segmented-control>`
 			: '';
+		const addonAfter =
+			saveViewButton || actionButton
+				? `<ng-container *luFilterPillAddonAfter>
+		${saveViewButton}
+		${actionButton}
+	</ng-container>`
+				: '';
 		return {
 			props: {
 				example1: null,
@@ -109,18 +185,20 @@ export default {
 	<lu-form-field label="Test" hiddenLabel>
 		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 	</lu-form-field>
-	${applyButton}
-	${exportButton}
-</lu-filter-bar>`,
+	${applyFiltersButton}
+	${addonAfter}
+</lu-filter-bar>
+${saveViewDropdownTemplate}`,
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterBarComponent & { showExportButton: boolean; showViews: boolean; showOptionalFilter: boolean; showApplyButton: boolean }> = {
+export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; optionalFilter: boolean; actionButton: boolean; applyFiltersButton: boolean }> = {
 	args: {
-		showExportButton: false,
-		showViews: false,
-		showOptionalFilter: false,
-		showApplyButton: false,
+		views: false,
+		saveView: false,
+		optionalFilter: false,
+		actionButton: false,
+		applyFiltersButton: false,
 	},
 };
