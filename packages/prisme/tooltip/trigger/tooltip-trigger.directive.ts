@@ -74,13 +74,13 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltip = linkedSignal<string | SafeHtml>(() => this.prTooltipInput());
 	readonly tooltipContent = computed(() => this.luTooltip() || this.prTooltip());
 
-	readonly luTooltipEnterDelay = input(300, { transform: numberAttribute });
+	readonly luTooltipEnterDelay = input(0, { transform: numberAttribute });
 	readonly prTooltipEnterDelay = input(300, { transform: numberAttribute });
-	readonly tooltipEnterDelay = computed(() => this.prTooltipEnterDelay() || this.luTooltipEnterDelay());
+	readonly tooltipEnterDelay = computed(() => this.luTooltipEnterDelay() || this.prTooltipEnterDelay());
 
-	readonly luTooltipLeaveDelay = input(100, { transform: numberAttribute });
+	readonly luTooltipLeaveDelay = input(0, { transform: numberAttribute });
 	readonly prTooltipLeaveDelay = input(100, { transform: numberAttribute });
-	readonly tooltipLeaveDelay = computed(() => this.prTooltipLeaveDelay() || this.luTooltipLeaveDelay());
+	readonly tooltipLeaveDelay = computed(() => this.luTooltipLeaveDelay() || this.prTooltipLeaveDelay());
 
 	readonly luTooltipDisabled = input(false, { transform: booleanAttribute });
 	readonly prTooltipDisabled = input(false, { transform: booleanAttribute });
@@ -90,9 +90,9 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltipOnlyForDisplay = input(false, { transform: booleanAttribute });
 	readonly tooltipOnlyForDisplay = computed(() => this.prTooltipOnlyForDisplay() || this.luTooltipOnlyForDisplay());
 
-	readonly luTooltipPosition = input<TooltipPosition>('above');
+	readonly luTooltipPosition = input<TooltipPosition | null>(null);
 	readonly prTooltipPosition = input<TooltipPosition>('above');
-	readonly tooltipPosition = computed(() => this.prTooltipPosition() || this.luTooltipPosition());
+	readonly tooltipPosition = computed(() => this.luTooltipPosition() ?? this.prTooltipPosition());
 
 	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
 	readonly prTooltipWhenEllipsisInput = input(false, { alias: 'prTooltipWhenEllipsis', transform: booleanAttribute });
@@ -101,9 +101,9 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltipWhenEllipsis = linkedSignal(() => this.prTooltipWhenEllipsisInput());
 	readonly tooltipWhenEllipsis = computed(() => this.prTooltipWhenEllipsis() || this.luTooltipWhenEllipsis());
 
-	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(this.#host);
+	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(null);
 	readonly prTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(this.#host);
-	readonly tooltipAnchor = computed(() => this.prTooltipAnchor() || this.luTooltipAnchor());
+	readonly tooltipAnchor = computed(() => this.luTooltipAnchor() || this.prTooltipAnchor());
 
 	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
@@ -164,14 +164,14 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	constructor() {
 		this.#destroyRef.onDestroy(() => (this.#destroyed = true));
 
-		// Action debounce pipeline — kept as Observable since signals can't debounce
+		// content attach/detach — immediate on open, VoiceOver/Safari misses a late aria-describedby
 		toObservable(this.#realAction)
 			.pipe(
 				filter(isNotNil),
-				debounce((action) => timer(action === 'open' ? this.tooltipEnterDelay() : this.tooltipLeaveDelay())),
-				tap((event) => {
-					if (event === 'open') {
-						this.openTooltip();
+				debounce((action) => timer(action === 'open' ? 0 : this.tooltipLeaveDelay())),
+				tap((action) => {
+					if (action === 'open') {
+						this.attachTooltip();
 					} else {
 						this.closeTooltip();
 					}
@@ -382,7 +382,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		}
 	}
 
-	private openTooltip(): void {
+	private attachTooltip(): void {
 		// A pending debounced 'open' is flushed when `toObservable(#realAction)` completes on
 		// destroy (`debounce` re-emits the held value on completion), i.e. AFTER ngOnDestroy has
 		// disposed the overlay. Opening then would recreate an overlay anchored to a detached
@@ -402,6 +402,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		}
 		const portal = new ComponentPortal(LuTooltipPanelComponent);
 		const ref = this.overlayRef.attach(portal);
+		ref.instance.enterDelay.set(this.tooltipEnterDelay());
 		position.positionChanges
 			.pipe(
 				takeUntilDestroyed(this.#destroyRef),
