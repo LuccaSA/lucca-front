@@ -1,3 +1,4 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { FormsModule } from '@angular/forms';
 import {
 	ApprobationInboxGroupComponent,
@@ -17,7 +18,21 @@ import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
+import { of } from 'rxjs';
+
 import { generateInputs } from '@/helpers/stories';
+
+/**
+ * Force `mediaMinM()` (issu de `BreakpointObserver`) à `true` pour que le contour de l'option `current`
+ * reste visible dans la documentation, indépendamment de la largeur réelle du panneau Storybook.
+ */
+const breakpointObserverAlwaysMatchProvider = {
+	provide: BreakpointObserver,
+	useValue: {
+		observe: () => of({ matches: true, breakpoints: {} }),
+		isMatched: () => true,
+	},
+};
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/List',
@@ -104,6 +119,7 @@ export default {
 				LuTooltipTriggerDirective,
 				ButtonComponent,
 			],
+			providers: [breakpointObserverAlwaysMatchProvider],
 		}),
 	],
 	render: ({ filterBar, group, groupLabel, visual, rightContent, center, selected, itemCount, itemLabel, current, icons, ...args }, { argTypes }) => {
