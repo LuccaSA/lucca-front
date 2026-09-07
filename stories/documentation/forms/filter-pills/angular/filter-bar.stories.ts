@@ -7,7 +7,7 @@ import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/de
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
-import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent, FilterViewSelectorComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
@@ -24,6 +24,7 @@ export default {
 			imports: [
 				FilterBarComponent,
 				FilterPillComponent,
+				FilterViewSelectorComponent,
 				CheckboxInputComponent,
 				FormsModule,
 				DateRangeInputComponent,
@@ -72,6 +73,15 @@ export default {
 			if: { arg: 'views', truthy: true },
 			table: { category: 'inputs' },
 		},
+		filterViewSelector: {
+			name: '↳ filterViewSelector',
+			description: 'Bascule la sélection de vue en dropdown (grand nombre de vues).',
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'views', truthy: true },
+			table: { category: 'inputs' },
+		},
 		optionalFilter: {
 			description: 'Ajoute une FilterPill optionnelle. Celle-ci déclenche automatiquement l’apparition du bouton d’ajout de filtres.',
 			control: {
@@ -102,7 +112,8 @@ export default {
 		<lu-date-range-input [(ngModel)]="examplePeriod" />
 	</lu-filter-pill>`
 			: '';
-		const saveViewEnabled = args['views'] && args['saveView'];
+		const filterViewSelectorEnabled = args['views'] && args['filterViewSelector'];
+		const saveViewEnabled = args['views'] && args['saveView'] && !filterViewSelectorEnabled;
 		const saveViewTab = saveViewEnabled
 			? `<ng-template #label4>
 			Produit
@@ -153,7 +164,15 @@ export default {
 </ng-template>`
 			: '';
 		const views = args['views']
-			? `<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
+			? filterViewSelectorEnabled
+				? `<lu-filter-view-selector
+			*luFilterPillAddonBefore
+			[views]="filterViews"
+			[(selectedView)]="selectedFilterView"
+			(renameView)="onRenameFilterView($event)"
+			(deleteView)="onDeleteFilterView($event)"
+		/>`
+				: `<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
 		<ng-template #label0>Tous <lu-numeric-badge [value]="12" /></ng-template>
 		<ng-template #label2>Approuvés <lu-numeric-badge [value]="3" /></ng-template>
 		<lu-segmented-control-filter [label]="label0" value="0" />
@@ -168,10 +187,20 @@ export default {
 		${actionButton}
 	</ng-container>`
 				: '';
+		const filterViews = [
+			{ id: 1, name: 'Product manager' },
+			{ id: 2, name: 'Product designer' },
+			{ id: 3, name: 'Développeur' },
+		];
 		return {
 			props: {
 				example1: null,
 				examplePeriod: null,
+				filterViews,
+				// Reference the actual array element so it matches (the selector compares views by reference).
+				selectedFilterView: filterViews[0],
+				onRenameFilterView: (view: (typeof filterViews)[number]) => console.log('rename', view),
+				onDeleteFilterView: (view: (typeof filterViews)[number]) => console.log('delete', view),
 			},
 			template: `<lu-filter-bar>
 	${views}
@@ -199,10 +228,11 @@ ${saveViewDropdownTemplate}`,
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; optionalFilter: boolean; actionButton: boolean; applyFiltersButton: boolean }> = {
+export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; actionButton: boolean; applyFiltersButton: boolean }> = {
 	args: {
 		views: false,
 		saveView: false,
+		filterViewSelector: false,
 		optionalFilter: false,
 		actionButton: false,
 		applyFiltersButton: false,
