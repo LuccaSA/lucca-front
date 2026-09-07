@@ -364,6 +364,40 @@ describe('LuCoreSelectUsersDirective', () => {
 		httpTestingController.verify();
 		expect(options[options.length - 1]).toEqual([meUser, user1, { ...user2, additionalInformation: 'Engineering' }, { ...user3, additionalInformation: 'Marketing' }, user4]);
 	}));
+
+	it('should not fetch additional information again for already known homonyms', fakeAsync(() => {
+		usersDirective.setPageSize(2);
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick();
+
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`).flush(usersResponse([createUser(CURRENT_USER_ID)]));
+		fixture.detectChanges();
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,2`).flush(usersResponse([createUser(1), createUser(2, 'Doe', 'John')]));
+		fixture.detectChanges();
+
+		simpleSelect.nextPage$.next();
+		fixture.detectChanges();
+		tick();
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=2,2`).flush(usersResponse([createUser(3, 'Doe', 'John'), createUser(4)]));
+		fixture.detectChanges();
+		httpTestingController.expectOne(`/api/v3/users?id=2,3&fields=id,department.name`).flush({
+			data: { items: [{ id: 2, department: { name: 'Engineering' } }, { id: 3 }] },
+		});
+		fixture.detectChanges();
+		httpTestingController.verify();
+
+		// Third page, no new homonym
+		simpleSelect.nextPage$.next();
+		fixture.detectChanges();
+		tick();
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=4,2`).flush(usersResponse([createUser(5), createUser(6)]));
+		fixture.detectChanges();
+
+		// User 3 has no department: it is cached as an empty string and must not be fetched again
+		expect(httpTestingController.match((req) => req.url === '/api/v3/users')).toEqual([]);
+		httpTestingController.verify();
+	}));
 });
 
 function createUser(id: number, lastName = 'test ' + id, firstName = 'test ' + id): LuCoreSelectUser {

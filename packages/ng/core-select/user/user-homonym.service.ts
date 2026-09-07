@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { LuDisplayFormat, luUserDisplay } from '@lucca-front/ng/user';
-import { Observable, map, of, startWith, tap } from 'rxjs';
+import { Observable, combineLatest, map, of, shareReplay, startWith, tap } from 'rxjs';
 import { LuCoreSelectUser } from './user-option.model';
 
 @Injectable({ providedIn: 'root' })
@@ -39,7 +39,7 @@ export class LuCoreSelectUserHomonymsService {
 					homonyms.has(user.id)
 						? {
 								...user,
-								additionalInformation: this.cache[user.id] || additionalInformation[user.id],
+								additionalInformation: additionalInformation[user.id] ?? this.cache[user.id],
 							}
 						: user,
 				),
@@ -49,12 +49,27 @@ export class LuCoreSelectUserHomonymsService {
 	}
 
 	protected getAdditionalInformationByUserId<T extends LuCoreSelectUser>(homonyms: T['id'][]): Observable<Record<number, string>> {
-		const userIds = homonyms.filter((userId) => !this.cache[userId]);
+		// Users without department are cached as an empty string, so `hasOwn` is required to consider them as known
+		const unknownIds = homonyms.filter((userId) => !Object.hasOwn(this.cache, userId));
+		const idsToFetch = unknownIds.filter((userId) => !this.#pendingRequests.has(userId));
 
-		if (userIds.length === 0) {
+		if (idsToFetch.length > 0) {
+			const request$ = this.fetchAdditionalInformation(idsToFetch).pipe(shareReplay(1));
+			idsToFetch.forEach((userId) => this.#pendingRequests.set(userId, request$));
+		}
+
+		const requests = Array.from(new Set(unknownIds.map((userId) => this.#pendingRequests.get(userId)).filter((request) => !!request)));
+
+		if (requests.length === 0) {
 			return of({});
 		}
 
+		return combineLatest(requests).pipe(map((infos) => Object.assign({}, ...infos) as Record<number, string>));
+	}
+
+	#pendingRequests = new Map<number, Observable<Record<number, string>>>();
+
+	private fetchAdditionalInformation(userIds: number[]): Observable<Record<number, string>> {
 		return this.http
 			.get<ILuApiCollectionResponse<{ id: number; department?: { name: string } }>>(`/api/v3/users`, {
 				params: {
@@ -64,20 +79,18 @@ export class LuCoreSelectUserHomonymsService {
 			})
 			.pipe(
 				map((res) => res.data.items),
-				map((infos) =>
-					infos.reduce<Record<number, string>>(
-						(acc, info) => ({
-							...acc,
-							[info.id]: info.department?.name || '',
-						}),
-						{},
-					),
-				),
+				map((infos) => {
+					// Ids missing from the response are cached as well, to never fetch them again
+					const additionalInformation: Record<number, string> = Object.fromEntries(userIds.map((userId) => [userId, '']));
+					infos.forEach((info) => (additionalInformation[info.id] = info.department?.name || ''));
+					return additionalInformation;
+				}),
 				tap((infos) => {
 					this.cache = {
 						...this.cache,
 						...infos,
 					};
+					userIds.forEach((userId) => this.#pendingRequests.delete(userId));
 				}),
 			);
 	}
