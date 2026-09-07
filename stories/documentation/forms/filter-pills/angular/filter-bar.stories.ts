@@ -125,13 +125,13 @@ export default {
 					<lu-dropdown-item>
 						<button lu-dropdown-action type="button">
 							<lu-icon icon="edit" />
-							Modifier le nom
+							{{ filterBar.intl().renameView }}
 						</button>
 					</lu-dropdown-item>
 					<lu-dropdown-item>
 						<button lu-dropdown-action type="button" critical>
 							<lu-icon icon="trash" />
-							Supprimer
+							{{ filterBar.intl().deleteView }}
 						</button>
 					</lu-dropdown-item>
 				</lu-dropdown-menu>
@@ -141,7 +141,7 @@ export default {
 			: '';
 		const saveViewButton = saveViewEnabled
 			? `<button type="button" size="S" luButton="outlined" palette="product" disclosure aria-expanded="false" [luDropdown]="saveDropdown">
-			Enregistrer la vue
+			{{ filterBar.intl().saveView }}
 			<lu-icon icon="arrowChevronBottom" />
 		</button>`
 			: '';
@@ -151,13 +151,13 @@ export default {
 		<lu-dropdown-item>
 			<button lu-dropdown-action type="button">
 				<lu-icon icon="save" />
-				Enregistrer les modifications
+				{{ filterBar.intl().saveModification }}
 			</button>
 		</lu-dropdown-item>
 		<lu-dropdown-item>
 			<button lu-dropdown-action type="button" aria-disabled="true" class="is-disabled" luTooltip="Supprimer des vues pour en créer des nouvelles">
 				<lu-icon icon="mathsPlus" />
-				Enregistrer en tant que nouvelle vue
+				{{ filterBar.intl().saveNewView }}
 			</button>
 		</lu-dropdown-item>
 	</lu-dropdown-menu>
@@ -188,9 +188,9 @@ export default {
 	</ng-container>`
 				: '';
 		const filterViews = [
-			{ id: 1, name: 'Product manager' },
-			{ id: 2, name: 'Product designer' },
-			{ id: 3, name: 'Développeur' },
+			{ id: 1, name: 'Tous' },
+			{ id: 2, name: 'Approuvés' },
+			{ id: 3, name: 'Produit' },
 		];
 		return {
 			props: {
