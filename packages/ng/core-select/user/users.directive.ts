@@ -198,25 +198,18 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		const users$ = this.getOptions(params, page).pipe(map((users) => ({ items: users, isLastPage: users.length < this.pageSize })));
 
-		const page$ = combineLatest([me$, users$]).pipe(
+		return combineLatest([me$, users$]).pipe(
 			map(([me, { items, isLastPage }]) => {
 				// If "me" is displayed as first option, we remove it from the list of users
 				const filteredItems = displayMe ? items.filter((u) => u.id !== this.currentUserId) : items;
 				return { items: me && prependMe ? [me, ...filteredItems] : filteredItems, isLastPage };
 			}),
-		);
-
-		return page$.pipe(
-			switchMap((page) =>
-				this.#userHomonymsService.handleHomonyms(page.items, this.displayFormat()).pipe(
-					map((items) => ({
-						items,
-						isLastPage: page.isLastPage,
-					})),
-				),
-			),
 			tap(() => this.select.loading.set(false)),
 		);
+	}
+
+	protected override mapLoadedOptions(options: readonly LuCoreSelectWithAdditionnalInformation<T>[]): Observable<readonly LuCoreSelectWithAdditionnalInformation<T>[]> {
+		return this.#userHomonymsService.handleHomonyms(options, this.displayFormat());
 	}
 
 	protected override optionKey = (option: T) => option.id;

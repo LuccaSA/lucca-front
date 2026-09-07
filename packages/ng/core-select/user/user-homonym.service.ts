@@ -10,7 +10,7 @@ export class LuCoreSelectUserHomonymsService {
 	protected http = inject(HttpClient);
 	protected cache: Record<number, string> = {};
 
-	protected extractHomonyms<T extends LuCoreSelectUser>(users: T[], format: LuDisplayFormat): Set<T['id']> {
+	protected extractHomonyms<T extends LuCoreSelectUser>(users: readonly T[], format: LuDisplayFormat): Set<T['id']> {
 		const usersByFullName: Record<string, T[]> = {};
 
 		for (const user of users) {
@@ -26,7 +26,7 @@ export class LuCoreSelectUserHomonymsService {
 		);
 	}
 
-	public handleHomonyms<T extends LuCoreSelectUser>(users: T[], format: LuDisplayFormat): Observable<T[]> {
+	public handleHomonyms<T extends LuCoreSelectUser>(users: readonly T[], format: LuDisplayFormat): Observable<readonly T[]> {
 		const homonyms = this.extractHomonyms(users, format);
 
 		if (homonyms.size === 0) {

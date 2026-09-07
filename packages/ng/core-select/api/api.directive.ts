@@ -75,6 +75,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			clueDebounceMs: this.debounceDuration,
 			getTotalCount: () => this.totalCount$,
 			reset: () => this.clearLastPageByClue(),
+			mapLoadedOptions: (options) => this.mapLoadedOptions(options),
 			getOptions: ({ clue, page }) => {
 				const lastPage = clue === this.#lastClue ? this.#lastPage : undefined;
 				if (lastPage !== undefined && page > lastPage) {
@@ -112,6 +113,10 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	protected clearLastPageByClue() {
 		this.#lastClue = undefined;
 		this.#lastPage = undefined;
+	}
+
+	protected mapLoadedOptions(options: readonly TOption[]): Observable<readonly TOption[]> {
+		return of(options);
 	}
 
 	protected getOptionsPage(params: TParams, page: number): Observable<{ items: TOption[]; isLastPage: boolean }> {

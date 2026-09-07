@@ -311,6 +311,59 @@ describe('LuCoreSelectUsersDirective', () => {
 			[meUser, user1, { ...user2, additionalInformation: 'Engineering' }, { ...user3, additionalInformation: 'Marketing' }],
 		]);
 	}));
+
+	it('should append additional information for homonyms spread over two pages', fakeAsync(() => {
+		// Arrange
+		usersDirective.setPageSize(2);
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+
+		tick();
+
+		const meUser = createUser(CURRENT_USER_ID);
+		const user1 = createUser(1);
+		const user2 = createUser(2, 'Doe', 'John');
+		const user3 = createUser(3, 'Doe', 'John');
+		const user4 = createUser(4);
+
+		// Act
+		const options: Array<readonly LuCoreSelectUser[]> = [];
+		TestBed.runInInjectionContext(() =>
+			toObservable(simpleSelect.dataSourceOptions)
+				.pipe(skip(1))
+				.subscribe((o) => options.push(o)),
+		);
+
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`).flush(usersResponse([meUser]));
+		fixture.detectChanges();
+
+		// Page 0 ends with a "John Doe", no homonym detected yet
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,2`).flush(usersResponse([user1, user2]));
+		fixture.detectChanges();
+		httpTestingController.verify();
+
+		// Page 1 starts with another "John Doe": both users are homonyms
+		simpleSelect.nextPage$.next();
+		fixture.detectChanges();
+		tick();
+
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=2,2`).flush(usersResponse([user3, user4]));
+		fixture.detectChanges();
+
+		httpTestingController.expectOne(`/api/v3/users?id=2,3&fields=id,department.name`).flush({
+			data: {
+				items: [
+					{ id: 2, department: { name: 'Engineering' } },
+					{ id: 3, department: { name: 'Marketing' } },
+				],
+			},
+		});
+		fixture.detectChanges();
+
+		// Assert
+		httpTestingController.verify();
+		expect(options[options.length - 1]).toEqual([meUser, user1, { ...user2, additionalInformation: 'Engineering' }, { ...user3, additionalInformation: 'Marketing' }, user4]);
+	}));
 });
 
 function createUser(id: number, lastName = 'test ' + id, firstName = 'test ' + id): LuCoreSelectUser {

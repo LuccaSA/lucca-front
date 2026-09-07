@@ -14,6 +14,11 @@ export interface SelectDataSource<TOption, TGroup = never> {
 	getOptions(params: SelectDataSourceParams): Observable<readonly TOption[]>;
 	getTotalCount?(params: SelectDataSourceParams): Observable<number>;
 	getGroupOptions?: [TGroup] extends [never] ? never : (group: TGroup) => Observable<TOption[]>;
+	/**
+	 * Optional transformation applied to every loaded page at once, for decorations that depend on
+	 * the whole list (for example, users homonyms spread over several pages).
+	 */
+	mapLoadedOptions?(options: readonly TOption[]): Observable<readonly TOption[]>;
 	reset?(): void;
 }
 
