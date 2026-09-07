@@ -13,7 +13,7 @@ export default {
 	argTypes: {
 		insideDialog: {
 			description: 'Adapte l’affichage du composant à une utilisation dans une dialog.',
-			table: { category: 'inputs' },
+			table: { disable: true },
 		},
 		label: {
 			description: 'Titre affiché dans l’en-tête du composant.',

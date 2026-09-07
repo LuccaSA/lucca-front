@@ -41,7 +41,7 @@ export default {
 			description: 'Groupe les éléments.',
 		},
 		groupLabel: {
-			name: '↳ group',
+			name: '↳ groupLabel',
 			description: 'Titre du groupe (aussi reprit dans l’intitulé masqué de sa sélection).',
 			if: { arg: 'group', truthy: true },
 		},
@@ -208,7 +208,6 @@ export const Basic: StoryObj<
 		visual: false,
 		rightContent: false,
 		icons: [
-			{ icon: 'formatClipperAttachment', alt: 'Contient une pièce jointe' },
 			{ icon: 'bubbleSpeech', alt: 'Contient un commentaire' },
 			{ icon: 'signWarning', alt: 'Contient un avertissement', state: 'warning' },
 		],
