@@ -36,27 +36,10 @@
 				max-block-size: none;
 			}
 
-			// The search field carries the border/background so the leading icon sits inside it as a flex item,
-			// with the input itself borderless.
-			.lu-picker-textfield.mod-search {
-				align-items: center;
-				background-color: var(--pr-t-color-input-background);
-				border: 1px solid var(--pr-t-color-input-border);
-				border-radius: var(--pr-t-border-radius-input);
-				display: flex;
-				gap: var(--pr-t-spacings-100);
-				padding-block: 0;
-				padding-inline: var(--pr-t-spacings-150);
-			}
-
-			.lu-picker-textfield.mod-search .textfield-input {
-				background: none;
-				border: 0;
-				flex: 1 1 auto;
-				min-inline-size: 0;
-				outline: none;
-				padding-block: var(--pr-t-spacings-100);
-				padding-inline: 0;
+			// The sheet's search field is a `textField` component: only space it from the options below,
+			// its own chrome comes from the component.
+			.textField {
+				margin-block-end: var(--pr-t-spacings-100);
 			}
 		}
 	}
@@ -92,12 +75,6 @@
 		&:hover {
 			background-color: var(--palettes-neutral-100);
 		}
-	}
-
-	.lu-picker-textfield-icon {
-		color: var(--palettes-neutral-600);
-		flex: 0 0 auto;
-		pointer-events: none;
 	}
 
 	.lu-picker-content {

@@ -1,6 +1,14 @@
+<!-- In bottom sheet mode the panel is a modal surface: it names itself with the field label, traps focus and
+	auto-captures it into its own search input, since the displayer it covers is no longer reachable. The trap
+	stays off on desktop, where focus belongs to the displayer's own input. -->
 <div
 	class="lu-picker-panel lu-option-picker-panel mod-multiple"
 	[class.mod-bottomSheet]="selectInput.bottomSheetMode()"
+	[attr.role]="selectInput.bottomSheetMode() ? 'dialog' : null"
+	[attr.aria-modal]="selectInput.bottomSheetMode() ? 'true' : null"
+	[attr.aria-label]="selectInput.bottomSheetMode() ? selectInput.panelTitle() || null : null"
+	[cdkTrapFocus]="selectInput.bottomSheetMode()"
+	[cdkTrapFocusAutoCapture]="selectInput.bottomSheetMode()"
 	data-testid="dialog-panel"
 >
 	@if (selectInput.bottomSheetMode()) {
@@ -12,23 +20,27 @@
 					<lu-icon icon="signClose" />
 				</button>
 			</div>
-			<div class="lu-picker-textfield mod-search">
-				<lu-icon class="lu-picker-textfield-icon" icon="searchMagnifyingGlass" />
-				<input
-					class="textfield-input"
-					type="text"
-					role="combobox"
-					aria-haspopup="listbox"
-					[attr.aria-expanded]="true"
-					[attr.aria-controls]="selectId"
-					[attr.placeholder]="intl().placeholder"
-					[ngModel]="clue()"
-					(ngModelChange)="selectInput.clueChanged($event)"
-					[ngModelOptions]="{ standalone: true }"
-					[readonly]="!searchable"
-					(keydown)="selectInput.onKeyDownNavigation($event)"
-					cdkFocusInitial
-				/>
+			<div class="textField">
+				<div class="textField-input">
+					<input
+						class="textField-input-value"
+						type="text"
+						role="combobox"
+						aria-haspopup="listbox"
+						[attr.aria-expanded]="true"
+						[attr.aria-controls]="selectId"
+						[attr.placeholder]="intl().placeholder"
+						[ngModel]="clue()"
+						(ngModelChange)="selectInput.clueChanged($event)"
+						[ngModelOptions]="{ standalone: true }"
+						[readonly]="!searchable"
+						(keydown)="selectInput.onKeyDownNavigation($event)"
+						cdkFocusInitial
+					/>
+					<div class="textField-input-affix">
+						<lu-icon class="textField-input-affix-icon" icon="searchMagnifyingGlass" />
+					</div>
+				</div>
 			</div>
 		</header>
 	}

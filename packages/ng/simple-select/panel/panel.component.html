@@ -1,4 +1,14 @@
-<div class="lu-picker-panel lu-option-picker-panel" [class.mod-bottomSheet]="selectInput.bottomSheetMode()" cdkTrapFocus>
+<!-- In bottom sheet mode the panel is a modal surface: it names itself with the field label, traps focus and
+	auto-captures it into its own search input, since the field it covers is no longer reachable. -->
+<div
+	class="lu-picker-panel lu-option-picker-panel"
+	[class.mod-bottomSheet]="selectInput.bottomSheetMode()"
+	[attr.role]="selectInput.bottomSheetMode() ? 'dialog' : null"
+	[attr.aria-modal]="selectInput.bottomSheetMode() ? 'true' : null"
+	[attr.aria-label]="selectInput.bottomSheetMode() ? selectInput.panelTitle() || null : null"
+	cdkTrapFocus
+	[cdkTrapFocusAutoCapture]="selectInput.bottomSheetMode()"
+>
 	@if (selectInput.bottomSheetMode()) {
 		<!-- Bottom sheet embeds its own search input, the way filter pills move the field inside their overlay. -->
 		<header class="lu-picker-header">
@@ -8,23 +18,27 @@
 					<lu-icon icon="signClose" />
 				</button>
 			</div>
-			<div class="lu-picker-textfield mod-search">
-				<lu-icon class="lu-picker-textfield-icon" icon="searchMagnifyingGlass" />
-				<input
-					class="textfield-input"
-					type="text"
-					role="combobox"
-					aria-haspopup="listbox"
-					[attr.aria-expanded]="true"
-					[attr.aria-controls]="selectId"
-					[attr.placeholder]="intl().placeholder"
-					[ngModel]="clue()"
-					(ngModelChange)="selectInput.clueChanged($event)"
-					[ngModelOptions]="{ standalone: true }"
-					[readonly]="!searchable"
-					(keydown)="selectInput.onKeyDownNavigation($event)"
-					cdkFocusInitial
-				/>
+			<div class="textField">
+				<div class="textField-input">
+					<input
+						class="textField-input-value"
+						type="text"
+						role="combobox"
+						aria-haspopup="listbox"
+						[attr.aria-expanded]="true"
+						[attr.aria-controls]="selectId"
+						[attr.placeholder]="intl().placeholder"
+						[ngModel]="clue()"
+						(ngModelChange)="selectInput.clueChanged($event)"
+						[ngModelOptions]="{ standalone: true }"
+						[readonly]="!searchable"
+						(keydown)="selectInput.onKeyDownNavigation($event)"
+						cdkFocusInitial
+					/>
+					<div class="textField-input-affix">
+						<lu-icon class="textField-input-affix-icon" icon="searchMagnifyingGlass" />
+					</div>
+				</div>
 			</div>
 		</header>
 	}

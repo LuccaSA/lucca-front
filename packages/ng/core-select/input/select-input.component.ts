@@ -345,6 +345,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				this.panelRef?.close();
 				break;
 			case 'Tab':
+				// A bottom sheet is modal: its focus trap cycles Tab between the sheet's own controls, so
+				// tabbing must not close it the way leaving the field does on desktop.
+				if (this.bottomSheetMode()) {
+					break;
+				}
 				// If we are in a filterpill, this will close it on tab press, but we want it to not lose any
 				// displayed stuff and properly close on focus exit
 				this.panelRef?.close();
@@ -487,10 +492,16 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	// The bottom sheet echoes the field label as its title. Standalone selects may be wrapped in a <label>,
 	// but inside a form-field the label is a separate element referenced through the control's aria-labelledby.
 	private resolvePanelTitle(): string {
+		if (this.labelElement) {
+			return this.getLabelText(this.labelElement);
+		}
+
+		// The field points its own `aria-labelledby` at its value displayer, so only an actual `<label>`
+		// counts here — otherwise a select without any label would echo its selected value as the title.
 		const host = this.hostElementRef.nativeElement;
 		const labelId = host.querySelector('[aria-labelledby]')?.getAttribute('aria-labelledby')?.split(' ')[0];
-		const label = this.labelElement ?? (labelId ? host.ownerDocument.getElementById(labelId) : null);
-		return label ? this.getLabelText(label) : '';
+		const label = labelId ? host.ownerDocument.getElementById(labelId) : null;
+		return label?.tagName === 'LABEL' ? this.getLabelText(label) : '';
 	}
 
 	// Read the label text without its adornments (help tooltip, required marker, screen-reader-only copy),
