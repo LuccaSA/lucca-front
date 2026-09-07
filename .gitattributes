@@ -1,3 +1,6 @@
 # Skills LF générées
 .github/skills/lucca-front/** linguist-generated
 scripts/generate-skills/baselines/** linguist-generated
+
+# Generated: written in LF, so autocrlf must not rewrite it.
+stories/documentation/css-api-manifest.ts text eol=lf linguist-generated
