@@ -1,3 +1,5 @@
+import { capitalize } from '@lucca-front/ng/core';
+import { differenceInCalendarDays } from 'date-fns';
 import { CalendarMode } from './public-api';
 
 export function getDateFormat(locale: string, mode: CalendarMode = 'day'): string {
@@ -65,4 +67,24 @@ export function getLocalizedDateFormat(locale: string, period: CalendarMode = 'd
 	}
 
 	return format;
+}
+
+export function humanizeDate(locale: string, date: Date, mode: CalendarMode = 'day', reference: Date = new Date()): string | null {
+	if (isNaN(date.getTime())) {
+		return null;
+	}
+
+	switch (mode) {
+		case 'day': {
+			const differenceInDays = differenceInCalendarDays(date, reference);
+			if (Math.abs(differenceInDays) > 1) {
+				return null;
+			}
+			return capitalize(new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(differenceInDays, 'day'));
+		}
+		case 'month':
+			return capitalize(new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(date));
+		default:
+			return null;
+	}
 }
