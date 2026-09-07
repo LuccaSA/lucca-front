@@ -82,6 +82,20 @@ export default {
 			if: { arg: 'views', truthy: true },
 			table: { category: 'inputs' },
 		},
+		renameView: {
+			description: 'Événement déclenché lorsque l’utilisateur demande à renommer une vue.',
+			action: 'renameView',
+			control: false,
+			if: { arg: 'filterViewSelector', truthy: true },
+			table: { category: 'outputs (filter-view-selector)', type: { summary: 'T' } },
+		},
+		deleteView: {
+			description: 'Événement déclenché lorsque l’utilisateur demande à supprimer une vue.',
+			action: 'deleteView',
+			control: false,
+			if: { arg: 'filterViewSelector', truthy: true },
+			table: { category: 'outputs (filter-view-selector)', type: { summary: 'T' } },
+		},
 		optionalFilter: {
 			description: 'Ajoute une FilterPill optionnelle. Celle-ci déclenche automatiquement l’apparition du bouton d’ajout de filtres.',
 			control: {
@@ -169,8 +183,8 @@ export default {
 			*luFilterPillAddonBefore
 			[views]="filterViews"
 			[(selectedView)]="selectedFilterView"
-			(renameView)="onRenameFilterView($event)"
-			(deleteView)="onDeleteFilterView($event)"
+			(renameView)="renameView($event)"
+			(deleteView)="deleteView($event)"
 		/>`
 				: `<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
 		<ng-template #label0>Tous <lu-numeric-badge [value]="12" /></ng-template>
@@ -199,8 +213,8 @@ export default {
 				filterViews,
 				// Reference the actual array element so it matches (the selector compares views by reference).
 				selectedFilterView: filterViews[0],
-				onRenameFilterView: (view: (typeof filterViews)[number]) => console.log('rename', view),
-				onDeleteFilterView: (view: (typeof filterViews)[number]) => console.log('delete', view),
+				renameView: (view: (typeof filterViews)[number]) => args['renameView']?.(view),
+				deleteView: (view: (typeof filterViews)[number]) => args['deleteView']?.(view),
 			},
 			template: `<lu-filter-bar>
 	${views}
