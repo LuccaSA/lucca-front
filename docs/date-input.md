@@ -13,6 +13,23 @@ Il est possible d'utiliser `lu-date-input` de plusieurs façons différentes, vi
 - `hasTodayButton` permet d'ajouter un bouton "aujourd'hui", automatiquement traduit via `Intl`, qui sélectionne la date d'aujourd'hui.
 - `hideWeekend` permet de désactiver le style spécifiques des jours du weekend.
 - `clearable` permet d'ajouter un bouton "clear" à la fin de l'input.
+- `humanized` permet d'afficher la date en langage naturel lorsque le champ n'a pas le focus.
+
+#### `humanized` : affichage en langage naturel
+
+Par défaut, la date sélectionnée est affichée au format numérique de la locale (`31/12/2026`). Avec `humanized`, elle est remplacée par sa formulation naturelle **uniquement lorsque le champ n'a pas le focus** :
+
+- en mode `day` : « Hier », « Aujourd'hui » et « Demain » ; toute autre date conserve son format numérique ;
+- en mode `month` : le nom du mois suivi de l'année (« Mars 2026 ») ;
+- en modes `week` et `year` : rien ne change, il n'existe pas de formulation naturelle pertinente.
+
+Les libellés viennent d'`Intl` (`RelativeTimeFormat` et `DateTimeFormat`), ils sont donc traduits dans toutes les locales sans clé de traduction, et la première lettre est passée en majuscule.
+
+L'option ne concerne que l'**affichage** : dès que l'utilisateur donne le focus au champ, la valeur numérique éditable est restaurée. Il n'est donc jamais possible de saisir « aujourd'hui » au clavier, et la validation du `FormControl` continue de porter sur la valeur numérique.
+
+L'affichage humanisé s'applique aussi au mode présentation (`presentation` sur le `lu-form-field`) et au rendu en filter pill, qui n'ont jamais le focus.
+
+`lu-date-range-input` n'est pas concerné à ce jour.
 
 #### Bornes `min` / `max` : limites actuelles
 

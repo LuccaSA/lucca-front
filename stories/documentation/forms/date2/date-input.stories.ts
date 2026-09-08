@@ -63,6 +63,12 @@ export default {
 			description: "Modifie le mode de sélection à la semaine, au mois ou à l'année.",
 			table: { category: 'inputs' },
 		},
+		humanized: {
+			control: 'boolean',
+			description:
+				'[v22.0] Affiche la date sélectionnée en langage naturel lorsque le champ n’a pas le focus : « Hier », « Aujourd’hui » ou « Demain » en mode `day`, « Mars 2026 » en mode `month`. Les autres dates, ainsi que les modes `week` et `year`, conservent leur format numérique. La saisie reste toujours numérique.',
+			table: { category: 'inputs' },
+		},
 		focusedDate: {
 			control: 'date',
 			description: 'Définit la date préselectionnée à l’ouverture du calendrier.',
@@ -138,6 +144,7 @@ export const Basic: StoryObj<DateInputComponent & { selected: Date; presentation
 		clearable: false,
 		clearBehavior: 'clear',
 		widthAuto: false,
+		humanized: false,
 		mode: 'day',
 		format: 'date',
 		presentation: false,
@@ -155,6 +162,7 @@ export const StartFromYear: StoryObj<DateInputComponent & { selected: Date; pres
 		clearable: false,
 		clearBehavior: 'clear',
 		widthAuto: false,
+		humanized: false,
 		mode: 'day',
 		calendarMode: 'year',
 		format: 'date',
@@ -163,6 +171,47 @@ export const StartFromYear: StoryObj<DateInputComponent & { selected: Date; pres
 		selected: null,
 	},
 };
+
+export const Humanized: StoryObj<DateInputComponent & { selected: Date; presentation: boolean }> = {
+	args: {
+		disableOverflow: false,
+		hideOverflow: false,
+		hideToday: false,
+		hideWeekend: false,
+		clearable: false,
+		clearBehavior: 'clear',
+		widthAuto: false,
+		humanized: true,
+		mode: 'day',
+		format: 'date',
+		presentation: false,
+		// Underlying ngModel
+		selected: new Date(),
+	},
+};
+
+export const HumanizedTEST = createTestStory(Humanized, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByTestId('lu-date-input');
+
+	await step('Hors focus, la date du jour est affichée en langage naturel', async () => {
+		await expect(input).toHaveValue('Aujourd’hui');
+	});
+
+	await step('Au focus, la date repasse au format numérique éditable', async () => {
+		input.focus();
+		await waitForAngular();
+		await expect(input).toHaveValue(new Intl.DateTimeFormat('fr-FR').format(new Date()));
+	});
+
+	await step('Au blur, la date revient en langage naturel', async () => {
+		await userEvent.keyboard('{Escape}');
+		input.blur();
+		await waitForAngular();
+		await expect(input).toHaveValue('Aujourd’hui');
+	});
+});
 
 export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
 	await waitForAngular();
@@ -202,6 +251,7 @@ export const Week: StoryObj<DateInputComponent & { selected: Date; presentation:
 		clearable: false,
 		clearBehavior: 'clear',
 		widthAuto: false,
+		humanized: false,
 		mode: 'week',
 		format: 'date',
 		presentation: false,
