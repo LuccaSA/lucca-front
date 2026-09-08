@@ -67,4 +67,4 @@ Many contributions are now written with the help of AI agents. That is fine, but
 
 Name branches `type/kebab-case-description` (`fix/select-option-aria-disabled`), and write pull request titles as conventional commits in English, subject in the imperative: `fix(tooltip): do not reopen when a closing overlay refocuses the trigger`. Same types on both sides — `feat`, `fix`, `chore`, `docs`, `test`, `refactor` — and the scope is the entrypoint being touched. Pull requests are squash-merged, so the title becomes the commit message kept in the history.
 
-Release pull requests, and those synchronizing `master` and `release/vX.X`, are merged with a merge commit, never squashed: squashing flattens the history shared by both branches, and the same changes come back on the next merge.
+Release pull requests, and those synchronizing `master` and `release/vX.X` (name those `chore/sync-21.4.1-to-22.0`), are merged with a merge commit, never squashed: squashing flattens the history shared by both branches, and the same changes come back on the next merge. Their title never becomes a commit message, so it is not bound to the convention above.
