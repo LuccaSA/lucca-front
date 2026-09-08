@@ -6,6 +6,7 @@
 		"esModuleInterop": true,
 		"strict": false,
 		"resolveJsonModule": true,
+		"types": ["node"],
 		"outDir": "../../dist/generate-skills",
 		"skipLibCheck": true
 	},

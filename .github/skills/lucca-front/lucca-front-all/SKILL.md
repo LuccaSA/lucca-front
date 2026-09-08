@@ -16,6 +16,7 @@ description: >
    - à défaut, la dépendance `@lucca-front/ng` (ou `@lucca-front/scss`) dans le `package.json` du projet (ex: `^21.2.1` → `21.2.1`).
 2. Décompose : **majeure** (`21`), **mineure** (`21.2`), **patch** (`21.2.1`).
 
+- **Majeure 22** (`./references/22/`) : base = 22.0 (contenu du patch 22.0.0)
 - **Majeure 21** (`./references/21/`) : base = 21.3 (contenu du patch 21.3.1) ; overrides : 21.2 → `minors/21-2/`, 21.1 → `minors/21-1/`, 21.0 → `minors/21-0/` ; mineures techniques : 21.4 (compatibilité Angular 22) → lire comme 21.3, patch `.0` uniquement
 
 Si la version ne peut pas être déterminée → **s'arrêter et demander à l'utilisateur**. Ne jamais supposer une version par défaut.
@@ -68,7 +69,7 @@ Une mineure listée « technique » en §1 est une release de pure compatibilit�
 
 ### Exemple
 
-Projet en `21.2.5` (mineure 21.2, base = 21.3), bouton → `./references/21/minors/21-2/components/button/button.md` s'il existe, sinon `./references/21/components/button/button.md`.
+Projet en `22.0.0`, bouton → `./references/22/components/button/button.md`.
 
 ## 4. Quand consulter quoi
 
@@ -102,6 +103,7 @@ Liste consolidée toutes versions. Un composant peut ne pas exister dans la vers
 - animations
 - api-select
 - app-layout
+- approbation-inbox
 - avatar
 - box
 - breadcrumbs
@@ -157,6 +159,7 @@ Liste consolidée toutes versions. Un composant peut ne pas exister dans la vers
 - gauge
 - grid
 - highlight-data
+- highlight-section
 - highlight-text
 - horizontalnavigation
 - icons
