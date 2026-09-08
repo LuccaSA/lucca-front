@@ -40,8 +40,8 @@
 		timePickerMinutes: 'minutes',
 	},
 	pl: {
-		timePickerHours: 'godziny',
-		timePickerTimeSeparator: 'h',
-		timePickerMinutes: 'minuty',
+		timePickerHours: 'godz.',
+		timePickerTimeSeparator: 'godz.',
+		timePickerMinutes: 'min',
 	},
 };

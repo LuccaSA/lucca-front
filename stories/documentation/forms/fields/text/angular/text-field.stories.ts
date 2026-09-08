@@ -1,3 +1,7 @@
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions, useStoryModel } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { updateStoryArgs, waitForAngular } from '@/helpers/test';
 import { AsyncPipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -6,10 +10,6 @@ import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-fr
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { HiddenArgType } from '@/helpers/common-arg-types';
-import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { updateStoryArgs, waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
 export default {
@@ -176,6 +176,8 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		presentation: false,
 		iconAIalt: 'Assistant IA',
 		iconAItooltip: 'Donnée remplie automatiquement',
+		minlength: 0,
+		maxlength: 0,
 	},
 };
 

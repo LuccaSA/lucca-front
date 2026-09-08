@@ -6,7 +6,6 @@
 			[attr.disabled]="disabled() ? 'disabled' : null"
 			[class.is-filled]="!this.inputIsEmpty()"
 			[attr.aria-expanded]="popoverRef.opened()"
-			(click)="popoverRef.openPopover(true)"
 			(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"
 			(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover(true)"
 			[luPopover2]="pillContent"

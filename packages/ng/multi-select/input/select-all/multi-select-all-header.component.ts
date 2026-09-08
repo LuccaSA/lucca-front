@@ -13,7 +13,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 	hostDirectives: [ɵCoreSelectPanelElement],
 	styleUrl: './multi-select-all-header.component.scss',
 	template: `
-		<div class="multiSelectAllDisplayer">
+		<div class="multiSelectAllDisplayer" role="option">
 			<lu-form-field [label]="intl().selectAll">
 				<lu-checkbox-input
 					class="multiSelectAllDisplayer-checkbox"

@@ -8,9 +8,16 @@ import { DestroyRef, DOCUMENT, inject, NgZone, Signal, signal, untracked } from 
  * going through Angular's event system there schedules a change detection run each time — for a
  * value that almost never changes.
  *
+ * `scope` bounds pointer navigation to an element — pass the panel host. Moving the mouse anywhere
+ * else on the page then doesn't drop the keyboard highlight, and leaving the scope switches back to
+ * keyboard navigation: pointer mode paints the active item through `:hover` alone, which vanishes
+ * with the pointer, whereas the key manager keeps that item active and keyboard navigation resumes
+ * from it. `keydown` always listens on the document, since focus stays on the input, outside of the
+ * panel.
+ *
  * Must be called from an injection context.
  */
-export function injectPointerNavigation(): Signal<boolean> {
+export function injectPointerNavigation(scope?: HTMLElement): Signal<boolean> {
 	const document = inject(DOCUMENT);
 	const ngZone = inject(NgZone);
 	const pointerNavigation = signal(false);
@@ -21,11 +28,21 @@ export function injectPointerNavigation(): Signal<boolean> {
 	ngZone.runOutsideAngular(() => {
 		const options: AddEventListenerOptions = { passive: true, signal: abortController.signal };
 
-		document.addEventListener(
+		(scope ?? document).addEventListener(
 			'mousemove',
 			() => {
 				if (!untracked(pointerNavigation)) {
 					pointerNavigation.set(true);
+				}
+			},
+			options,
+		);
+
+		scope?.addEventListener(
+			'mouseleave',
+			() => {
+				if (untracked(pointerNavigation)) {
+					pointerNavigation.set(false);
 				}
 			},
 			options,

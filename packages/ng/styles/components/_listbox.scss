@@ -1,0 +1,8 @@
+// The select/listbox Angular components (`lu-listbox`, `lu-select-option`, `lu-listbox-option`,
+// color picker) ship no component-scoped CSS — their visuals live in the shared `@lucca-front/scss`
+// component sheets. Forward them here so importing `@lucca-front/ng/styles` is enough to render the
+// selects, without the consuming app also having to pull `@lucca-front/scss` `main-all` (or these
+// sheets à la carte). Loaded once per compilation, so apps that also import the scss components
+// won't emit these twice.
+@forward '@lucca-front/scss/src/components/listboxOption';
+@forward '@lucca-front/scss/src/components/color';

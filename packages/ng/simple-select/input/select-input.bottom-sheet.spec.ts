@@ -265,7 +265,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 
 	describe('sheet header', () => {
 		function panel(): HTMLElement | null {
-			return document.querySelector<HTMLElement>('.lu-picker-panel');
+			return document.querySelector<HTMLElement>('.lu-select-panel-layout');
 		}
 
 		function openSheet(): void {
@@ -300,7 +300,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			openSheet();
 
 			// Assert
-			expect(panel()?.querySelector('.lu-picker-header-close')?.getAttribute('aria-label')).toBeTruthy();
+			expect(panel()?.querySelector('.lu-select-panel-layout-header-close')?.getAttribute('aria-label')).toBeTruthy();
 		});
 
 		it('should not render a header above the S breakpoint', () => {
@@ -315,7 +315,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			// Assert
 			expect(panel()).not.toBeNull();
 			expect(panel()).not.toHaveAttribute('role', 'dialog');
-			expect(panel()?.querySelector('.lu-picker-header')).toBeNull();
+			expect(panel()?.querySelector('.lu-select-panel-layout-header')).toBeNull();
 		});
 	});
 });

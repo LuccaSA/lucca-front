@@ -1,3 +1,4 @@
+import { HiddenArgType } from '@/helpers/common-arg-types';
 import { finn } from '@/stories/users/user.mocks';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -13,7 +14,6 @@ import {
 } from '@lucca-front/ng/index-table';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { HiddenArgType } from '@/helpers/common-arg-types';
 
 interface BasicStory {}
 
@@ -84,7 +84,7 @@ function getTemplate(args: BasicStory): string {
 			 Content
 			</td>
 			<td luIndexTableCell align="end">
-				<button luButton luTooltip="Secondary action" luTooltipOnlyForDisplay type="button" class="indexTable-body-row-cell-subAction">
+				<button luButton luTooltip="Secondary action" luTooltipOnlyForDisplay type="button">
 					<lu-icon icon="trashDelete" alt="Supprimer" />
 				</button>
 			</td>

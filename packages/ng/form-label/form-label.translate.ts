@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { LuPluralForms, LuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_FORM_LABEL_TRANSLATIONS = new InjectionToken('LuFormLabelTranslations', {
@@ -7,7 +7,7 @@ export const LU_FORM_LABEL_TRANSLATIONS = new InjectionToken('LuFormLabelTransla
 });
 
 export interface LuFormLabelTranslations {
-	counterAlt: LuPluralForms;
+	counterAlt: string;
 	tooltipAlt: string;
 }
 

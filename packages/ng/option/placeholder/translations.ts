@@ -33,6 +33,6 @@
 	},
 	pl: {
 		placeholderDescription: 'Brak wyników wyszukiwania',
-		placeholderAction: 'Puste wyszukiwanie',
+		placeholderAction: 'Wyczyść wyszukiwanie',
 	},
 };

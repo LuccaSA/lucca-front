@@ -20,8 +20,8 @@
 		childrenOnly: 'Solo i figli',
 	},
 	de: {
-		parentOnly: 'Nur der Elternteil',
-		childrenOnly: 'Nur die Kinder',
+		parentOnly: 'Nur die Muttergesellschaft',
+		childrenOnly: 'Nur die Tochtergesellschaften',
 	},
 	fr: {
 		parentOnly: 'Seulement le parent',

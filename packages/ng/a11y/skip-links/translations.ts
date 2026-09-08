@@ -49,7 +49,7 @@
 	},
 	pl: {
 		Goto: 'Szybki dostęp',
-		Goto_Nav_Banner: 'Przejdź do głównej nawigacji',
+		Goto_Nav_Banner: 'Przejdź do nawigacji głównej',
 		Goto_Nav_Navside: 'Przejdź do nawigacji wewnętrznej',
 		Goto_Content: 'Przejdź do treści',
 	},

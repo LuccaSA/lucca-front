@@ -2,39 +2,50 @@
 
 @include definitions.optionItemStyle;
 
-@layer mods {
-	.is-disabled {
-		color: var(--palettes-neutral-500); // disabled token candidate
-		user-select: none;
-		cursor: default;
-
-		&.is-selected {
-			background-color: var(--commons-disabled-background);
+@layer components {
+	.optionItem {
+		&:not(:last-child) {
+			margin-block-end: var(--pr-t-spacings-50);
 		}
 
 		&:hover {
-			background-color: inherit;
+			.optionItem-value {
+				background: var(--palettes-neutral-50);
+			}
+
+			.optionItem-icons {
+				opacity: 1;
+			}
 		}
 	}
 
-	.optionItem-value:has(.optionItem-icon) {
-		display: flex;
-		justify-content: space-between;
+	.optionItem-value {
+		padding-block: var(--components-options-item-padding-vertical);
+		padding-inline: var(--components-options-item-padding-horizontal);
 	}
-}
 
-@layer components {
 	.optionItem-icons {
-		display: flex;
-		gap: var(--pr-t-spacings-50);
+		position: absolute;
+		inset-block-start: var(--pr-t-spacings-50);
+		inset-inline-end: var(--pr-t-spacings-100);
+		opacity: 0;
+		transition: all var(--commons-animations-durations-fast) ease;
+	}
+
+	.optionItem-icon {
+		cursor: pointer;
+		opacity: 0.66;
+		margin-inline-start: var(--pr-t-spacings-100);
+		transition: all var(--commons-animations-durations-fast) ease;
+
+		&:hover {
+			opacity: 1;
+		}
 	}
 
 	.optionItem-icon-shape {
-		display: block;
-		fill: var(--palettes-neutral-500);
-
-		&:hover {
-			fill: var(--palettes-neutral-800);
-		}
+		fill: var(--components-options-item-icon-color);
+		inline-size: 1.4rem;
+		block-size: 1.4rem;
 	}
 }

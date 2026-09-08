@@ -23,10 +23,10 @@
 	--components-listboxOption-content-position: relative;
 	--components-listboxOption-content-before-content: var(--components-listboxOptionWrapper-childrenBefore-content, '');
 	--components-listboxOption-content-after-content: none;
-	--components-listboxOption-content-opacity: 1;
 	--components-listboxOption-content-boxShadow: none;
 	--components-listboxOption-content-flexWrap: nowrap;
 	--components-listboxOption-content-justifyContent: normal;
+	--components-listboxOption-content-link-opacity: 0;
 }
 
 @mixin varsWrapper {
@@ -35,5 +35,5 @@
 	--components-listboxOptionWrapper-childrenPaddingInlineStart: var(--pr-t-spacings-100);
 	--components-listboxOptionWrapper-childrenCheckboxField-display: none;
 	--components-listboxOptionWrapper-childrenBefore-content: '';
-	--components-listboxOptionWrapper-overflow: auto;
+	--components-listboxOptionWrapper-overflow: visible;
 }

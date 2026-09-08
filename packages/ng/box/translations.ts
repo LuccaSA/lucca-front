@@ -1,7 +1,4 @@
 ﻿export const Translations = {
-	pl: {
-		close: 'Close',
-	},
 	'nl-BE': {
 		close: 'Sluiten',
 	},
@@ -25,5 +22,8 @@
 	},
 	pt: {
 		close: 'Fechar',
+	},
+	pl: {
+		close: 'Zamknij',
 	},
 };

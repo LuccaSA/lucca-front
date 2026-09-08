@@ -52,21 +52,20 @@ export class LuCoreSelectOccupationCategoriesDirective<T extends LuCoreSelectOcc
 			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
 	}
 
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const filters = this.filters();
-			const clue = this.clue();
-			return {
-				...filters,
-				...(clue
-					? {
-							search: applySearchDelimiter(clue, this.searchDelimiter()),
-							sort: 'name',
-						}
-					: { sort: 'name' }),
-			};
-		}),
-	);
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const filters = this.filters();
+		const clue = this.clue();
+		return {
+			...filters,
+			...(clue
+				? {
+						search: applySearchDelimiter(clue, this.searchDelimiter()),
+						sort: 'name',
+					}
+				: { sort: 'name' }),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	public readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
 		debounceTime(250),
