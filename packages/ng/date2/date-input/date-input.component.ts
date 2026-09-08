@@ -107,6 +107,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly inputFocused = signal(false);
 
+	readonly panelOpen = signal(false);
+
 	readonly selectedDate = signal<Date | null>(null);
 
 	readonly initialValue = signal<Date | null | undefined>(undefined);
@@ -151,7 +153,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly displayValue = computed(() => {
 		const selectedDate = this.selectedDate();
-		if (this.humanized() && !this.inputFocused() && this.isValidDate(selectedDate)) {
+		if (this.humanized() && !this.inputFocused() && !this.panelOpen() && this.isValidDate(selectedDate)) {
 			const humanizedDate = humanizeDate(this.locale, selectedDate, this.mode());
 			if (humanizedDate) {
 				return humanizedDate;
