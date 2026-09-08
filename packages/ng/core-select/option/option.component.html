@@ -13,7 +13,7 @@
 </lu-listbox-option>
 
 <ng-template #optionContent>
-	<div>
+	<div class="listboxOption-content-value">
 		<ng-container *luOptionOutlet="optionTpl(); value: selectableItem.option()" />
 
 		@if (groupTemplateLocation() === "option") {
