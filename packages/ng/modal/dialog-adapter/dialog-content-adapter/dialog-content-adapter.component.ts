@@ -7,7 +7,7 @@ import { getIntl, Palette } from '@lucca-front/ng/core';
 import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, injectDialogData, injectDialogRef } from '@lucca-front/ng/dialog';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { isObservable, Observable, of, ReplaySubject, Subject, timer } from 'rxjs';
-import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { delay, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 import { ALuModalRef } from '../../modal-ref.model';
 import { ILuModalContent, LuModalContentResult } from '../../modal.model';
 import { LU_MODAL_DATA } from '../../modal.token';
@@ -60,6 +60,9 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 	private observeValue<TValue>(selector: () => TValue | Observable<TValue>): Observable<TValue> {
 		return this.doCheck$.pipe(
 			takeUntilDestroyed(this.#destroyRef),
+			// The content component only exists from `ngAfterViewInit` onwards, while `doCheck$` (a ReplaySubject)
+			// replays the first `ngDoCheck` to the template's async pipes before that.
+			filter(() => !!this.#contentComponentInstance),
 			map(selector),
 			distinctUntilChanged(),
 			switchMap((value) => (isObservable(value) ? value : of(value))),
@@ -120,5 +123,7 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 		this.#contentComponentInstance = this.contentProjectionRef().createComponent(this.dialogData.component, {
 			injector,
 		}).instance;
+		// The instance is now available: replay a check so the header/footer observables emit their first value.
+		this.doCheck$.next();
 	}
 }
