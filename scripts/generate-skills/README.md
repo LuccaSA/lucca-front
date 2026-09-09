@@ -80,6 +80,7 @@ npx ts-node ... --validate
 | `--retry-failed` | Rejouer uniquement les unités (composants, pages doc/outils, deprecated) dont le fetch a échoué au run précédent (manifeste `_fetch-failures.json`) |
 | `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH/Figma) |
 | `--accept-output-violations` | Ne pas faire échouer le run sur les violations du garde-fou de sortie. Cf. garde-fou de sortie. |
+| `--aggregate-only` | Reconstruire `lucca-front-all/` depuis les mineures déjà sur disque, sans rien régénérer d'autre. L'agrégat n'étant qu'une copie des dossiers par mineure, il n'exige ni réseau ni extraction — mais sans ce flag, le rafraîchir imposait de régénérer une mineure entière, donc de réécrire tous ses fichiers. Nécessaire après une correction ciblée de quelques composants. |
 
 Variable d'environnement complémentaire : **`FETCH_TIMEOUT_MS`** — deadline des fetchs, 60 000 ms par défaut. Le bon réglage dépend de ce que le run fait bloquer la boucle d'événements : une génération complète le veut **bas** (une page est différée puis rejouée, plutôt que d'immobiliser un worker), une passe `--retry-failed` le veut **haut** (quelques dizaines d'unités seulement, et son but est de les obtenir, pas de les différer à nouveau). Cf. `collectors/http.ts`.
 | `--zh-latest <minor>` | Affirme que `<minor>` (ex. `21.3`) est la dernière version en ligne → autorisée en « latest » non pinné. Répétable. Cf. garde-fou ZeroHeight. |

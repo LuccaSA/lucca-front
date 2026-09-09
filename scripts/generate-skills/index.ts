@@ -26,6 +26,7 @@
  *   --accept-shrink      Accept content regressions vs the baselines (legitimate deletions)
  *   --accept-output-violations
  *                        Do not fail the run on output-guard violations (see generators/output-guard.ts)
+ *   --aggregate-only     Rebuild lucca-front-all from the minors already on disk, nothing else
  */
 
 import path from 'path';
@@ -124,6 +125,7 @@ const flags = {
 	retryFailed: args.includes('--retry-failed'),
 	acceptShrink: args.includes('--accept-shrink'),
 	acceptOutputViolations: args.includes('--accept-output-violations'),
+	aggregateOnly: args.includes('--aggregate-only'),
 	// ZeroHeight release-ID guard: supply IDs / assert "latest" non-interactively (CI).
 	zhIds: Object.fromEntries(
 		getFlags('zh-id')
@@ -310,6 +312,19 @@ async function main(): Promise<void> {
 	// legitimate deletion (fresh content written, baselines updated) instead of being held back.
 	setZhAcceptShrink(flags.acceptShrink);
 	setFigmaAcceptShrink(flags.acceptShrink);
+
+	// Rebuild the aggregate alone. It is a pure copy of the per-minor folders, so refreshing it
+	// needed no network and no extraction — yet the only way to trigger it was a full generation of
+	// a minor, which rewrites every one of its files. That made a targeted fix impossible: correcting
+	// three components left the aggregate's copies of them stale.
+	if (flags.aggregateOnly) {
+		const bundled = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
+		const { skillPath, versionCount } = writeAggregateSkill(config.output.skillsDir, bundled);
+		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} mineure·s)`);
+		const violations = reportOutputViolations(config.output.skillsDir);
+		if (violations.length > 0 && !flags.acceptOutputViolations) process.exitCode = 1;
+		return;
+	}
 
 	// Replay only the fetches that failed in a previous run (from the manifest).
 	if (flags.retryFailed) {
