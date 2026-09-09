@@ -88,10 +88,49 @@ argTypes: {
 
 Autres options utiles :
 
-- `if: { arg: 'removable', truthy: true }` pour masquer un contrôle dépendant d'un autre.
+- `if: { arg: 'removable', truthy: true }` pour masquer un contrôle dépendant d'un autre (cf. §3.1).
 - `HiddenArgType` (`@/helpers/common-arg-types`) pour neutraliser, dans une story dérivée, un contrôle hérité du `meta`.
 - `PaletteArgType` / `PaletteAllArgType` / `stateArgType` pour les argTypes récurrents.
 - Préfixer la description d'un ajout récent par la version : `'[v20.3] Indique que…'`.
+
+### 3.1 Contrôles dépendants (`↳`)
+
+Un input qui n'a de sens que lorsqu'un autre est activé ne doit pas rester affiché en permanence dans le panneau Controls : il est **conditionné** à son parent et **préfixé par `↳ `** dans son libellé.
+
+```typescript
+argTypes: {
+	heading: {
+		description: 'Ajoute un titre au callout. [PortalContent]',
+		table: { category: 'inputs' },
+	},
+	hx: {
+		name: '↳ hx',
+		if: { arg: 'heading', truthy: true },
+		options: setStoryOptions(CALLOUT_HX),
+		control: { type: 'select' },
+		description: '[v21.4] Applique un niveau sémantique au titre.',
+		table: { category: 'inputs' },
+	},
+}
+```
+
+Règles :
+
+- **`if` et `↳ ` vont toujours ensemble** : le `if` masque le contrôle, le `↳ ` signale la dépendance quand il est visible. Ne pas poser l'un sans l'autre.
+- Le préfixe est `'↳ '` (U+21B3 + une espace) suivi du **nom réel de l'arg** — `name` ne fait que changer le libellé affiché, la clé de l'arg et le nom de l'input Angular restent inchangés.
+- **Deuxième niveau de dépendance** → `'↳↳ '`, avec un `if` sur le parent intermédiaire (le parent porte lui-même son `↳`) :
+
+    ```typescript
+    layoutFixed: { description: 'Applique une largeur fixe aux colonnes.', table: { category: 'inputs' } },
+    inlineSize: { name: '↳ inlineSize', if: { arg: 'layoutFixed', truthy: true }, /* … */ },
+    inlineSizeValue: { name: '↳↳ inlineSizeValue', if: { arg: 'inlineSize', truthy: true }, /* … */ },
+    ```
+
+- Déclarer l'arg dépendant **juste après son parent** dans `argTypes` : l'ordre du panneau suit celui de l'objet, la hiérarchie doit rester lisible.
+- La condition porte sur la **valeur de l'arg**, pas sur sa catégorie : `truthy: true` pour un booléen ou une chaîne non vide, `eq: 'valeur'` pour une union, `neq: …` pour l'inverse.
+- La règle vaut aussi pour les `outputs` et les `models`, ainsi que pour les args de catégorie `'story'` (helpers de story) : un output qui n'existe que sur un composant secondaire activé par un contrôle porte le même `if` et le même `↳`.
+- Renseigner quand même la valeur par défaut de l'arg dépendant dans les `args` de la story (§6), même s'il démarre masqué.
+- Cas typiques : un input qui n'a d'effet qu'avec un autre (`hx` ↔ `heading`, `size` ↔ `circular`), les inputs d'un sous-composant affiché par un booléen de story (`selectedLabel` ↔ `selectable`, `saveView` ↔ `views`), la valeur d'un mode (`inlineSizeValue` ↔ `inlineSize`).
 
 ## 4. Structure du fichier
 
