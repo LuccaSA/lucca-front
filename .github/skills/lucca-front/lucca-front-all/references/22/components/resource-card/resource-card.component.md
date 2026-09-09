@@ -114,7 +114,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/resource-card';
+@forward '@lucca-front/scss/src/components/resourceCard';
 ```
 
 ```html
@@ -140,7 +140,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 ### Dnd
 
 ```css
-@forward '@lucca-front/scss/src/components/resource-card';
+@forward '@lucca-front/scss/src/components/resourceCard';
 @forward '@lucca-front/scss/src/components/button';
 ```
 

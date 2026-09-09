@@ -32,7 +32,7 @@ Classe CSS : `.activityFeed`
 ### Add
 
 ```css
-@forward '@lucca-front/scss/src/components/activity-feed';
+@forward '@lucca-front/scss/src/components/activityFeed';
 @forward '@lucca-front/scss/src/components/avatar';
 @forward '@lucca-front/scss/src/components/button';
 ```
@@ -78,7 +78,7 @@ Classe CSS : `.activityFeed`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/activity-feed';
+@forward '@lucca-front/scss/src/components/activityFeed';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 
@@ -118,7 +118,7 @@ Classe CSS : `.activityFeed`
 ### States
 
 ```css
-@forward '@lucca-front/scss/src/components/activity-feed';
+@forward '@lucca-front/scss/src/components/activityFeed';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 
@@ -158,7 +158,7 @@ Classe CSS : `.activityFeed`
 ### Updated
 
 ```css
-@forward '@lucca-front/scss/src/components/activity-feed';
+@forward '@lucca-front/scss/src/components/activityFeed';
 @forward '@lucca-front/scss/src/components/avatar';
 @forward '@lucca-front/scss/src/components/statusBadge';
 ```

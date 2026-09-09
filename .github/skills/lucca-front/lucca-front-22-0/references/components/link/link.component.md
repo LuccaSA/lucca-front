@@ -70,7 +70,7 @@ Lien (nouvelle fenêtre) uniquement au survol/focus/touch :
 import { AsyncPipe } from '@angular/common';
 import { provideRouter, RouterLink } from '@angular/router';
 import { DataTableBodyComponent, DataTableComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
-import {
+import { IndexTableActionComponent, IndexTableBodyComponent, IndexTableComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent } from '@lucca-front/ng/index-table';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { timer } from 'rxjs';
 ```

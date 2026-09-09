@@ -26,7 +26,7 @@ Classe CSS : `.highlightData`
 ### Action illustration
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-data';
+@forward '@lucca-front/scss/src/components/highlightData';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -55,7 +55,7 @@ Classe CSS : `.highlightData`
 ### Action
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-data';
+@forward '@lucca-front/scss/src/components/highlightData';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -72,7 +72,7 @@ Classe CSS : `.highlightData`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-data';
+@forward '@lucca-front/scss/src/components/highlightData';
 ```
 
 ```html
@@ -99,7 +99,7 @@ Classe CSS : `.highlightData`
 ### Infos
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-data';
+@forward '@lucca-front/scss/src/components/highlightData';
 ```
 
 ```html
@@ -126,7 +126,7 @@ Classe CSS : `.highlightData`
 ### Nested
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-data';
+@forward '@lucca-front/scss/src/components/highlightData';
 ```
 
 ```html
@@ -153,7 +153,7 @@ Classe CSS : `.highlightData`
 ### No illustration
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-data';
+@forward '@lucca-front/scss/src/components/highlightData';
 ```
 
 ```html
@@ -168,7 +168,7 @@ Classe CSS : `.highlightData`
 ### Bubble
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-data';
+@forward '@lucca-front/scss/src/components/highlightData';
 ```
 
 ```html
@@ -190,7 +190,7 @@ Classe CSS : `.highlightData`
 ### Sizes
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-data';
+@forward '@lucca-front/scss/src/components/highlightData';
 ```
 
 ```html
@@ -235,7 +235,7 @@ Classe CSS : `.highlightData`
 ### Themes
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-data';
+@forward '@lucca-front/scss/src/components/highlightData';
 ```
 
 ```html

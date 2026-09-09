@@ -42,11 +42,14 @@ import { BoxComponent } from '@lucca-front/ng/box';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`BoxComponent`).
+~ `toggle` : transform booleanAttribute → luBooleanAttribute
+~ `neutral` : transform booleanAttribute → luBooleanAttribute
+~ `killable` : transform booleanAttribute → luBooleanAttribute
+~ `withArrow` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
 

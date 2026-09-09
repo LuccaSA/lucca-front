@@ -33,11 +33,14 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`ReadMoreComponent`).
+~ `lineClamp` : transform ∅ → luNumberAttribute
+~ `openOnly` : transform booleanAttribute → luBooleanAttribute
+~ `plainText` : transform booleanAttribute → luBooleanAttribute
+~ `textFlow` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
 

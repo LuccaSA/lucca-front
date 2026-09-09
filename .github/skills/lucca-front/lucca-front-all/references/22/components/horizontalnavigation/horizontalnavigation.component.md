@@ -58,7 +58,7 @@ Dans le composant :
 ### Navigation basic
 
 ```css
-@forward '@lucca-front/scss/src/components/horizontal-navigation';
+@forward '@lucca-front/scss/src/components/horizontalNavigation';
 ```
 
 ```html
@@ -82,7 +82,7 @@ Dans le composant :
 Ce menu intègre un `container` pour s'aligner horizontalement au contenu de la page.
 
 ```css
-@forward '@lucca-front/scss/src/components/horizontal-navigation';
+@forward '@lucca-front/scss/src/components/horizontalNavigation';
 ```
 
 ```html
@@ -106,7 +106,7 @@ Ce menu intègre un `container` pour s'aligner horizontalement au contenu de la 
 ### Navigation count
 
 ```css
-@forward '@lucca-front/scss/src/components/horizontal-navigation';
+@forward '@lucca-front/scss/src/components/horizontalNavigation';
 @forward '@lucca-front/scss/src/components/numericBadge';
 ```
 
@@ -138,7 +138,7 @@ Ce menu intègre un `container` pour s'aligner horizontalement au contenu de la 
 ### Navigation scrollbox
 
 ```css
-@forward '@lucca-front/scss/src/components/horizontal-navigation';
+@forward '@lucca-front/scss/src/components/horizontalNavigation';
 ```
 
 ```html
@@ -173,7 +173,7 @@ Ce menu intègre un `container` pour s'aligner horizontalement au contenu de la 
 ### Navigation tabs
 
 ```css
-@forward '@lucca-front/scss/src/components/horizontal-navigation';
+@forward '@lucca-front/scss/src/components/horizontalNavigation';
 ```
 
 ```html

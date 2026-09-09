@@ -15,7 +15,7 @@ Classe CSS : `.newBadge`
 ### Badge
 
 ```css
-@forward '@lucca-front/scss/src/components/new-badge';
+@forward '@lucca-front/scss/src/components/newBadge';
 ```
 
 ```html

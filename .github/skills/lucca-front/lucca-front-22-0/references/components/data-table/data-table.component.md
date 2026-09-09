@@ -21,7 +21,7 @@ Dans un tableau, privilégiez l'attribut `external` sur vos liens. L'icône asso
 ```js
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import {
+import { DATA_TABLE_ALIGN, DATA_TABLE_SORT, DATA_TABLE_VERTICAL_ALIGN, DataTableBodyComponent, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -58,7 +58,7 @@ Le drag and drop est porté par Angular CDK [drag-drop](https://angular.dev/guid
 ```js
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import {
+import { DataTableBodyComponent, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
 ```
 
 ```html
@@ -86,7 +86,7 @@ import {
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import {
+import { DataTableBodyComponent, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -141,7 +141,7 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 ```js
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import {
+import { DataTableBodyComponent, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -192,7 +192,7 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 ```js
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import {
+import { DataTableBodyComponent, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -230,7 +230,7 @@ Classe CSS : `.dataTable`
 ### Alignement horizontal
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -262,7 +262,7 @@ Classe CSS : `.dataTable`
 ### Alignement vertical
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -299,7 +299,7 @@ Classe CSS : `.dataTable`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -338,7 +338,7 @@ Classe CSS : `.dataTable`
 ### Border
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -377,7 +377,7 @@ Classe CSS : `.dataTable`
 ### Draggable
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -431,7 +431,7 @@ Classe CSS : `.dataTable`
 ### Editable
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/textField';
 ```
@@ -503,7 +503,7 @@ Classe CSS : `.dataTable`
 ### State
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/bubbleIllustration';
 @forward '@lucca-front/scss/src/components/emptyState';
 ```
@@ -551,7 +551,7 @@ Classe CSS : `.dataTable`
 ### Columns responsive
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -587,7 +587,7 @@ Classe CSS : `.dataTable`
 ### Fixed columns
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/dataTableSticked'; // Import additionnel
 ```
 
@@ -622,7 +622,7 @@ Classe CSS : `.dataTable`
 ### Group
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/numericBadge';
 ```
@@ -692,7 +692,7 @@ Classe CSS : `.dataTable`
 ### Hover
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -736,7 +736,7 @@ Classe CSS : `.dataTable`
 ### Nested
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -775,7 +775,7 @@ Classe CSS : `.dataTable`
 ### Both
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -850,7 +850,7 @@ Classe CSS : `.dataTable`
 ### Overflow horizontal
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -923,7 +923,7 @@ Classe CSS : `.dataTable`
 ### Overflow vertical
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -967,7 +967,7 @@ Classe CSS : `.dataTable`
 ### Pagination
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/pagination';
 ```
@@ -1034,7 +1034,7 @@ Classe CSS : `.dataTable`
 ### Actions
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -1085,7 +1085,7 @@ Classe CSS : `.dataTable`
 ### Selectable hover
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/checkboxField';
 ```
 
@@ -1167,7 +1167,7 @@ Classe CSS : `.dataTable`
 ### Selectable
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/checkboxField';
 ```
 
@@ -1223,7 +1223,7 @@ Classe CSS : `.dataTable`
 ### Sort
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/tableSortable';
 ```
@@ -1281,7 +1281,7 @@ Classe CSS : `.dataTable`
 ### Columns multiple
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -1363,7 +1363,7 @@ Classe CSS : `.dataTable`
 ### Sticky columns
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 ```
 
 ```html
@@ -1425,7 +1425,7 @@ Classe CSS : `.dataTable`
 ### Header columns
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/dataTableSticked'; // Import additionne
 ```
 
@@ -1488,7 +1488,7 @@ Classe CSS : `.dataTable`
 ### Header
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/dataTableSticked'; // Import additionnel
 ```
 
@@ -1531,7 +1531,7 @@ Classe CSS : `.dataTable`
 ### Tree
 
 ```css
-@forward '@lucca-front/scss/src/components/data-table';
+@forward '@lucca-front/scss/src/components/dataTable';
 @forward '@lucca-front/scss/src/components/button';
 ```
 

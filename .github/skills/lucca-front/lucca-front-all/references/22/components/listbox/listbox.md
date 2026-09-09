@@ -58,11 +58,26 @@ import { ListboxComponent, Treeitem, OptionComponent } from '@lucca-front/ng/lis
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`ListboxComponent`, `Treeitem`, `OptionComponent`).
+`ListboxComponent` :
+  ~ `multiple` : transform booleanAttribute → luBooleanAttribute
+  ~ `tree` : transform booleanAttribute → luBooleanAttribute
+`OptionComponent` :
+  + `elementId` : string | null
+  + `groupId` : string | null
+  + `treeitemLevel` : number | null
+  ~ `checked` : transform booleanAttribute → luBooleanAttribute
+  ~ `mixed` : transform booleanAttribute → luBooleanAttribute
+  ~ `disabled` : transform booleanAttribute → luBooleanAttribute
+  ~ `hovered` : transform booleanAttribute → luBooleanAttribute
+  ~ `add` : transform booleanAttribute → luBooleanAttribute
+  ~ `group` : transform booleanAttribute → luBooleanAttribute
+  ~ `select` : transform booleanAttribute → luBooleanAttribute
++ token `LISTBOX_INSTANCE` : ListboxComponent
++ token `OPTION_INSTANCE` : OptionComponent
 
 ### Notes de release (ZeroHeight)
 

@@ -219,7 +219,6 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/select';
 @forward '@lucca-front/scss/src/components/clear';
 @forward '@lucca-front/scss/src/components/filterPill';
 ```

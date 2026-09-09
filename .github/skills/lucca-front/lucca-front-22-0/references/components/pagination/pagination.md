@@ -40,11 +40,15 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`PaginationComponent`).
+~ `isFirstPage` : transform booleanAttribute → luBooleanAttribute
+~ `isLastPage` : transform booleanAttribute → luBooleanAttribute
+~ `from` : number | null → unknown, défaut ∅ → undefined, transform ∅ → luOptionalNullableNumberAttribute
+~ `to` : number | null → unknown, défaut ∅ → undefined, transform ∅ → luOptionalNullableNumberAttribute
+~ `itemsCount` : number | null → unknown, défaut ∅ → undefined, transform ∅ → luOptionalNullableNumberAttribute
 
 ### Notes de release (ZeroHeight)
 

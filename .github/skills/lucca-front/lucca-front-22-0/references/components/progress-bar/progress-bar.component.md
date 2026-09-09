@@ -23,7 +23,6 @@ Classe CSS : `.progress`
 ### Bar
 
 ```css
-@forward '@lucca-front/scss/src/components/progress-bar';
 @forward '@lucca-front/scss/src/components/progress';
 ```
 

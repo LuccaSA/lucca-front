@@ -212,11 +212,10 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 ### Bar
 
 ```css
-@forward '@lucca-front/scss/src/components/filter-pills';
+@forward '@lucca-front/scss/src/components/filterBar';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/clear';
 @forward '@lucca-front/scss/src/components/divider';
-@forward '@lucca-front/scss/src/components/filterBar';
 @forward '@lucca-front/scss/src/components/filterPill';
 @forward '@lucca-front/scss/src/components/numericBadge';
 @forward '@lucca-front/scss/src/components/segmentedControl';

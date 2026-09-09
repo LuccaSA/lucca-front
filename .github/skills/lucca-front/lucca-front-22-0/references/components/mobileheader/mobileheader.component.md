@@ -6,6 +6,10 @@
 
 ### Header basic
 
+```css
+@forward '@lucca-front/scss/src/components/mobileHeader';
+```
+
 ```html
 <div class="mobileHeader">
 	<a href="#" class="link mod-decorationHover">Text link</a>

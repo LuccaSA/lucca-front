@@ -46,7 +46,7 @@ Classe CSS : `.sortableList`
 ### List
 
 ```css
-@forward '@lucca-front/scss/src/components/sortable-list';
+@forward '@lucca-front/scss/src/components/sortableList';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/clear';
 ```
@@ -98,7 +98,7 @@ Classe CSS : `.sortableList`
 ### List basic
 
 ```css
-@forward '@lucca-front/scss/src/components/sortable-list';
+@forward '@lucca-front/scss/src/components/sortableList';
 @forward '@lucca-front/scss/src/components/clear';
 ```
 

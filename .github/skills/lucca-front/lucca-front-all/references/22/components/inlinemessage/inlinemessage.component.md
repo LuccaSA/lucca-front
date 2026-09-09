@@ -15,7 +15,7 @@ Classe CSS : `.inlineMessage`
 ### Message basic
 
 ```css
-@forward '@lucca-front/scss/src/components/inline-message';
+@forward '@lucca-front/scss/src/components/inlineMessage';
 ```
 
 ```html
@@ -27,7 +27,7 @@ Classe CSS : `.inlineMessage`
 ### Message size
 
 ```css
-@forward '@lucca-front/scss/src/components/inline-message';
+@forward '@lucca-front/scss/src/components/inlineMessage';
 ```
 
 ```html
@@ -39,7 +39,7 @@ Classe CSS : `.inlineMessage`
 ### Message states
 
 ```css
-@forward '@lucca-front/scss/src/components/inline-message';
+@forward '@lucca-front/scss/src/components/inlineMessage';
 ```
 
 ```html

@@ -45,7 +45,6 @@ Classe CSS : `.fieldset`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
 @forward '@lucca-front/scss/src/components/fieldset';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/grid';

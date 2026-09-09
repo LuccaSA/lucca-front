@@ -42,7 +42,7 @@ Classe CSS : `.bubbleIllustration`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/bubble-illustration';
+@forward '@lucca-front/scss/src/components/bubbleIllustration';
 ```
 
 ```html

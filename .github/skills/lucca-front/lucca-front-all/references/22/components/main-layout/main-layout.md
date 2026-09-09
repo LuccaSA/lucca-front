@@ -60,8 +60,19 @@ import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/m
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`MainLayoutBlockComponent`, `MainLayoutComponent`).
+`MainLayoutBlockComponent` :
+  ~ `overflow` : transform booleanAttribute → luBooleanAttribute
+`MainLayoutComponent` :
+  + `bubblesStartEnd` : 1 | 2 | 3 | null
+  + `bubblesEndStart` : 1 | 2 | 3 | null
+  + `illustrationStartEnd` : MainLayoutIllustrationStartEnd | null
+  + `illustrationEndStart` : MainLayoutIllustrationEndStart | null
+  + `palette` : 'success' | 'warning' | 'error' | 'product' | 'neutral' | 'none' | 'brand'
+  + `responsive` : 'wideM' | null
+  ~ `headerSticky` : transform booleanAttribute → luBooleanAttribute
+  ~ `footerSticky` : transform booleanAttribute → luBooleanAttribute
++ token `LU_MAIN_LAYOUT_INSTANCE` : MainLayoutIllustrations

@@ -109,8 +109,32 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`LuCalendarInputComponent`, `LuDateInputDirective`, `LuDatePickerComponent`, `LuDateSelectInputComponent`).
+`LuCalendarInputComponent` :
+  ~ `min` : unknown → D
+  ~ `max` : unknown → D
+  ~ `startOn` : défaut this._adapter.forgeToday() → ∅
+`LuDateInputDirective` :
+  ~ `min` : unknown → D
+  ~ `max` : unknown → D
+  ~ `placeholder` : défaut ∅ → ''
+`LuDatePickerComponent` :
+  ~ `min` : unknown → D
+  ~ `max` : unknown → D
+  ~ `startOn` : défaut this._adapter.forgeToday() → ∅
+  + (output) `closeOutput` : void
+  + (output) `openOutput` : void
+  + (output) `hoveredOutput` : void
+  + (output) `onSelectValueOutput` : void
+  - (output) `close`
+  - (output) `open`
+  - (output) `hovered`
+  - (output) `onSelectValue`
+`LuDateSelectInputComponent` :
+  - `placeholder`
+  ~ `min` : unknown → D
+  ~ `max` : unknown → D
+  ~ `hideClearer` : transform ∅ → luBooleanAttribute

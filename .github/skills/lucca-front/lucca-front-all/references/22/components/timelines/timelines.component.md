@@ -6,6 +6,10 @@
 
 ### Basic
 
+```css
+@forward '@lucca-front/scss/src/components/timeline';
+```
+
 ```html
 <ol class="timeline">
 	<li class="timeline-step">
@@ -26,6 +30,10 @@
 ```
 
 ### Checked
+
+```css
+@forward '@lucca-front/scss/src/components/timeline';
+```
 
 ```html
 <ol class="timeline mod-checkedPastStep mod-number">
@@ -58,6 +66,10 @@
 
 ### Dashed
 
+```css
+@forward '@lucca-front/scss/src/components/timeline';
+```
+
 ```html
 <ol class="timeline mod-dashed">
 	<li class="timeline-step">
@@ -78,6 +90,10 @@
 ```
 
 ### Progress
+
+```css
+@forward '@lucca-front/scss/src/components/timeline';
+```
 
 ```html
 <ol class="timeline mod-progress">
@@ -100,6 +116,10 @@
 Vous pouvez modifier le niveau des titres en l’adaptant à votre plan documentaire.
 
 </callout>
+
+```css
+@forward '@lucca-front/scss/src/components/timeline';
+```
 
 ```html
 <ol class="timeline mod-vertical">

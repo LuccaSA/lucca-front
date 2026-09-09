@@ -23,6 +23,8 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `step` | `step` | `ISO8601Duration \| null` | `null` | — | — | — |
+| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ. |
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `max` | `max` | ``${string}P${string}`` | `'PT99H'` | — | — | — |
 | `displayArrows` | `displayArrows` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche les boutons d’incrémentation. |
@@ -39,6 +41,7 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 
 | Property | Type | Required | Notes |
 |----------|------|----------|-------|
+| `disabled` | `unknown` | — | — |
 | `value` | `ISO8601Duration` | — | — |
 
 ### TimePickerComponent (component)
@@ -49,6 +52,8 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `step` | `step` | `ISO8601Duration \| null` | `null` | — | — | — |
+| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ. |
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `max` | `max` | ``${string}:${string}:${string}`` | `MAX_TIME` | — | — | — |
 | `displayArrows` | `displayArrows` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche les boutons d’incrémentation. |
@@ -69,6 +74,7 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 
 | Property | Type | Required | Notes |
 |----------|------|----------|-------|
+| `disabled` | `unknown` | — | — |
 | `value` | `ISO8601Time` | — | — |
 
 ### TimeRangePickerComponent (component)
@@ -103,8 +109,19 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`DurationPickerComponent`, `TimePickerComponent`, `TimeRangePickerComponent`).
+`DurationPickerComponent` :
+  ~ `step` : `${string}P${string}` → ISO8601Duration | null
+  ~ `displayArrows` : transform booleanAttribute → luBooleanAttribute
+  ~ `hideZeroValue` : transform booleanAttribute → luBooleanAttribute
+`TimePickerComponent` :
+  ~ `step` : `${string}P${string}` → ISO8601Duration | null
+  ~ `displayArrows` : transform booleanAttribute → luBooleanAttribute
+  ~ `forceMeridiemDisplay` : boolean | null → unknown, transform ∅ → luNullableBooleanAttribute
+`TimeRangePickerComponent` :
+  ~ `displayArrows` : transform booleanAttribute → luBooleanAttribute
+  ~ `forceMeridiemDisplay` : transform booleanAttribute → luBooleanAttribute
+  ~ `disabled` : transform booleanAttribute → luBooleanAttribute

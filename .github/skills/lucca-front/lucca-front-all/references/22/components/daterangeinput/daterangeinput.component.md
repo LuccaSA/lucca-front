@@ -34,15 +34,7 @@ shortcuts: [
 
 ```html
 <lu-form-field label="Date range input example" inlineMessage="Inline message example">
-	<lu-date-range-input
-		[(ngModel)]="selected"
-		[min]="min"
-		[max]="max"
-		[focusedDate]="focusedDate"
-		clearBehavior="clear"
-		mode="day"
-		format="date"
-	/>
+	<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" format="date" />
 </lu-form-field>
 
 <pr-story-model-display>{{ selected | json }}</pr-story-model-display>
@@ -50,14 +42,7 @@ shortcuts: [
 
 ```html
 <lu-form-field label="Date range input example" inlineMessage="Inline message example">
-	<lu-date-range-input
-		[(ngModel)]="selected"
-		[min]="min"
-		[max]="max"
-		[shortcuts]="shortcuts"
-		clearBehavior="clear"
-		mode="day"
-	/>
+	<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" />
 </lu-form-field>
 
 <pr-story-model-display>{{ selected | json }}</pr-story-model-display>

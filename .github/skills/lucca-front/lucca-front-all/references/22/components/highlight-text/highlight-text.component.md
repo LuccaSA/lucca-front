@@ -23,7 +23,7 @@ import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 ### Text sizes
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-text';
+@forward '@lucca-front/scss/src/components/highlightText';
 ```
 
 ```html
@@ -37,7 +37,7 @@ import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 ### Text
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-text';
+@forward '@lucca-front/scss/src/components/highlightText';
 ```
 
 ```html

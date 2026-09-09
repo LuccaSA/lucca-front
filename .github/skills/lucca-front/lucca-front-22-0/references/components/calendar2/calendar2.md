@@ -50,8 +50,15 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`Calendar2Component`).
+~ `showOverflow` : transform booleanAttribute → luBooleanAttribute
+~ `enableOverflow` : transform booleanAttribute → luBooleanAttribute
+~ `removeYearOverflow` : transform booleanAttribute → luBooleanAttribute
+~ `hideToday` : transform booleanAttribute → luBooleanAttribute
+~ `hasTodayButton` : transform booleanAttribute → luBooleanAttribute
+~ `hideWeekend` : transform booleanAttribute → luBooleanAttribute
+~ `disableModeChange` : transform booleanAttribute → luBooleanAttribute
+~ `getCellInfo` : (date: Date, displayMode: CalendarMode) => CellStatus → (date: Date, displayMode: CalendarMode | null) => CellStatus

@@ -8,9 +8,27 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
 ## API Reference
 
-### LuSelectInputComponent (directive)
+### LuSelectInputComponent (component)
 
 **Selector:** `lu-select`
+
+> ⚠️ **Déprécié** : prefer SimpleSelect or MultipleSelect
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `pickerOverlap` | `pickerOverlap` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `placeholderInput` | `placeholder` | `string` | `''` | — | — | — |
+| `multipleInput` | `multiple` | `boolean \| string` | `false` | — | — | — |
+| `disabledInput` | `disabled` | `boolean` | `false` | — | — | — |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `onOpenOutput` | `onOpenOutput` | `void` | — |
+| `onCloseOutput` | `onCloseOutput` | `void` | — |
 
 ### Modules dépréciés
 
@@ -25,8 +43,15 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`LuSelectInputComponent`).
+~ `pickerOverlap` : défaut ∅ → false, transform ∅ → luBooleanAttribute
+~ `placeholder` : défaut ∅ → ''
+~ `multiple` : défaut ∅ → false
+~ `disabled` : défaut ∅ → false
++ (output) `onOpenOutput` : void
++ (output) `onCloseOutput` : void
+- (output) `onOpen`
+- (output) `onClose`

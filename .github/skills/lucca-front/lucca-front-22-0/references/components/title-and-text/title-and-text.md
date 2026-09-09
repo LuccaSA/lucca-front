@@ -7,7 +7,7 @@
 
 ## Changelog
 
-_Aucun changement d'API détecté sur l'historique stable jusqu'à v22.0.0._
+_Aucun changement d'API entre v21.4.2 et v22.0.0._
 
 ### Notes de release (ZeroHeight)
 

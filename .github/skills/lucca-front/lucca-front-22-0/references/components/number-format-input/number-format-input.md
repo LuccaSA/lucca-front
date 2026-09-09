@@ -35,8 +35,12 @@ import { NumberFormatInputComponent } from '@lucca-front/ng/forms';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`NumberFormatInputComponent`).
+~ `useAutoPrefixSuffix` : transform booleanAttribute → luBooleanAttribute
+~ `min` : number | undefined → unknown, transform ∅ → luOptionalNumberAttribute
+~ `max` : number | undefined → unknown, transform ∅ → luOptionalNumberAttribute
+~ `hasClearer` : transform booleanAttribute → luBooleanAttribute
+~ `valueAlignRight` : transform booleanAttribute → luBooleanAttribute

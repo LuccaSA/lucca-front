@@ -31,7 +31,7 @@ Classe CSS : `.errorPage`
 ### Page basic
 
 ```css
-@forward '@lucca-front/scss/src/components/error-page';
+@forward '@lucca-front/scss/src/components/errorPage';
 @forward '@lucca-front/scss/src/components/textFlow';
 ```
 

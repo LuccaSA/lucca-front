@@ -54,11 +54,23 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`LuTooltipPanelComponent`, `LuTooltipTriggerDirective`).
+`LuTooltipPanelComponent` :
+  + selector `pr-tooltip-panel`
+`LuTooltipTriggerDirective` :
+  + selector `[prTooltip]`
+  + `prTooltip` : string | SafeHtml
+  + `prTooltipEnterDelay` : number
+  + `prTooltipLeaveDelay` : number
+  + `prTooltipDisabled` : boolean
+  + `prTooltipOnlyForDisplay` : boolean
+  + `prTooltipPosition` : 'above' | 'below' | 'before' | 'after'
+  + `prTooltipWhenEllipsis` : boolean
+  + `prTooltipAnchor` : FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined
+  ~ `luTooltipPosition` : LuPopoverPosition → 'above' | 'below' | 'before' | 'after'
 
 ### Notes de release (ZeroHeight)
 

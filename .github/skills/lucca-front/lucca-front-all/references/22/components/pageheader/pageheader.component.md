@@ -42,7 +42,7 @@ Les exemples ci-dessous sont affichés dans leur vue compact par défaut compte 
 ### Header back
 
 ```css
-@forward '@lucca-front/scss/src/components/page-header';
+@forward '@lucca-front/scss/src/components/pageHeader';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -97,7 +97,7 @@ Les exemples ci-dessous sont affichés dans leur vue compact par défaut compte 
 ### Header basic
 
 ```css
-@forward '@lucca-front/scss/src/components/page-header';
+@forward '@lucca-front/scss/src/components/pageHeader';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -151,7 +151,7 @@ Les exemples ci-dessous sont affichés dans leur vue compact par défaut compte 
 ### Header breadcrumb
 
 ```css
-@forward '@lucca-front/scss/src/components/page-header';
+@forward '@lucca-front/scss/src/components/pageHeader';
 @forward '@lucca-front/scss/src/components/breadcrumbs';
 @forward '@lucca-front/scss/src/components/button';
 ```
@@ -216,7 +216,7 @@ Les exemples ci-dessous sont affichés dans leur vue compact par défaut compte 
 ### Header container
 
 ```css
-@forward '@lucca-front/scss/src/components/page-header';
+@forward '@lucca-front/scss/src/components/pageHeader';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -272,7 +272,7 @@ Les exemples ci-dessous sont affichés dans leur vue compact par défaut compte 
 ### Header leading trailing
 
 ```css
-@forward '@lucca-front/scss/src/components/page-header';
+@forward '@lucca-front/scss/src/components/pageHeader';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -323,7 +323,7 @@ Les exemples ci-dessous sont affichés dans leur vue compact par défaut compte 
 ### Header menu
 
 ```css
-@forward '@lucca-front/scss/src/components/page-header';
+@forward '@lucca-front/scss/src/components/pageHeader';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/horizontalNavigation';
 ```

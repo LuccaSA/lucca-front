@@ -26,7 +26,7 @@ Classe CSS : `.formLabel`
 ### Label basic
 
 ```css
-@forward '@lucca-front/scss/src/components/form-label';
+@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/tag';
 ```
 
@@ -45,7 +45,7 @@ Classe CSS : `.formLabel`
 ### Label counter
 
 ```css
-@forward '@lucca-front/scss/src/components/form-label';
+@forward '@lucca-front/scss/src/components/formLabel';
 ```
 
 ```html
@@ -66,7 +66,7 @@ Classe CSS : `.formLabel`
 ### Label error
 
 ```css
-@forward '@lucca-front/scss/src/components/form-label';
+@forward '@lucca-front/scss/src/components/formLabel';
 ```
 
 ```html
@@ -83,7 +83,7 @@ Classe CSS : `.formLabel`
 ### Label size
 
 ```css
-@forward '@lucca-front/scss/src/components/form-label';
+@forward '@lucca-front/scss/src/components/formLabel';
 ```
 
 ```html

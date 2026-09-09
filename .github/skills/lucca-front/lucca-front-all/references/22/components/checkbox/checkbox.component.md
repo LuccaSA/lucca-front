@@ -6,31 +6,13 @@
 
 Component selector : `lu-checkbox-input`
 
-### Filter pill
-
-```js
-import { FormsModule } from '@angular/forms';
-import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
-import { CheckboxInputComponent } from '@lucca-front/ng/forms';
-```
-
-```html
-<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
-	<lu-checkbox-input [(ngModel)]="checkboxValue" />
-</lu-filter-pill>
-
-<pr-story-model-display>{{ checkboxValue }}</pr-story-model-display>
-```
-
 ## HTML/CSS
 
 Classe CSS : `.checkboxField`
 
-### Checkbox basic
+### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
@@ -65,26 +47,4 @@ Classe CSS : `.checkboxField`
 	</div>
 	}
 </div>
-```
-
-### Filter-pills checkbox basic
-
-```css
-@forward '@lucca-front/scss/src/components/forms';
-@forward '@lucca-front/scss/src/components/filterPill';
-```
-
-```html
-<button type="button" class="filterPill mod-checkbox">
-	<span class="filterPill-checkbox">
-		<span class="filterPill-checkbox-input"></span>
-		<span class="filterPill-checkbox-icon" aria-hidden="true">
-			<span class="filterPill-checkbox-icon-check"></span>
-		</span>
-	</span>
-	<span class="filterPill-label" luTooltip="Lorem ipsum dolor" luTooltipWhenEllipsis>
-		Lorem ipsum dolor
-		<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="Lorem ipsum dolor"></span>
-	</span>
-</button>
 ```

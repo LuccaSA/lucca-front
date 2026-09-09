@@ -6,6 +6,10 @@
 
 ### Navigation basic
 
+```css
+@forward '@lucca-front/scss/src/components/mobileNavigation';
+```
+
 ```html
 <nav class="mobileNavigation">
 	<ul class="mobileNavigation-list">

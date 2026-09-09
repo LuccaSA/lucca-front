@@ -43,7 +43,7 @@ Classe CSS : `.textFlow`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/text-flow';
+@forward '@lucca-front/scss/src/components/textFlow';
 ```
 
 ```html

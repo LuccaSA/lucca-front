@@ -40,11 +40,16 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`GaugeComponent`).
+~ `value` : transform numberAttribute → luNumberAttribute
+~ `thin` : transform booleanAttribute → luBooleanAttribute
+~ `circular` : transform booleanAttribute → luBooleanAttribute
+~ `animated` : transform booleanAttribute → luBooleanAttribute
+~ `noAlt` : transform booleanAttribute → luBooleanAttribute
+~ `size` : transform numberAttribute → luNumberAttribute
 
 ### Notes de release (ZeroHeight)
 

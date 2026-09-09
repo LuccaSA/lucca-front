@@ -40,7 +40,6 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ### Field
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
 @forward '@lucca-front/scss/src/components/textField';

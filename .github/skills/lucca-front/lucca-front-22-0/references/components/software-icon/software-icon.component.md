@@ -48,7 +48,7 @@ Classe CSS : `.softwareIcon`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/software-icon';
+@forward '@lucca-front/scss/src/components/softwareIcon';
 ```
 
 ```html

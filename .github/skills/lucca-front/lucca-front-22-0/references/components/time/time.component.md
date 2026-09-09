@@ -85,7 +85,7 @@ import { TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/t
 ### Picker basic
 
 ```css
-@forward '@lucca-front/scss/src/components/time';
+@forward '@lucca-front/scss/src/components/timepicker';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
 ```
@@ -146,7 +146,7 @@ import { TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/t
 ### Picker range
 
 ```css
-@forward '@lucca-front/scss/src/components/time';
+@forward '@lucca-front/scss/src/components/timepicker';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
 ```

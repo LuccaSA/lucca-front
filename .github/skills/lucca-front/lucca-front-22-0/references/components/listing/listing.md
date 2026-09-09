@@ -58,11 +58,21 @@ import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing'
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`ListingItemComponent`, `ListingComponent`).
+`ListingItemComponent` :
+  ~ `critical` : transform booleanAttribute → luBooleanAttribute
+`ListingComponent` :
+  ~ `ordered` : transform booleanAttribute → luBooleanAttribute
+  ~ `orderedFancy` : transform booleanAttribute → luBooleanAttribute
+  ~ `checklist` : transform booleanAttribute → luBooleanAttribute
+  ~ `icons` : transform booleanAttribute → luBooleanAttribute
+  ~ `start` : transform numberAttribute → luNumberAttribute
+  ~ `inline` : transform booleanAttribute → luBooleanAttribute
+  ~ `divider` : transform booleanAttribute → luBooleanAttribute
+  ~ `reversed` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
 

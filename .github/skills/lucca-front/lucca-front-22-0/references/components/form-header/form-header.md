@@ -22,8 +22,8 @@ import { FormHeaderComponent } from '@lucca-front/ng/form-header';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`FormHeaderComponent`).
+~ `headingLevel` : 1 | 2 | 3 | 4 | 5 | 6 → number, transform ∅ → luNumberAttribute

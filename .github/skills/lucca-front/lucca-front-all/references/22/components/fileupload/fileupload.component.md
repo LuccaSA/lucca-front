@@ -85,7 +85,6 @@ import { MultiFileUploadComponent } from '@lucca-front/ng/file-upload';
 	} @else {
 		<lu-single-file-upload
 			fileMaxSize="5000000"
-			illustration="invoice"
 			[accept]="accept"
 			(filePicked)="fileUploadFeature.uploadFiles([$event])"
 		/>

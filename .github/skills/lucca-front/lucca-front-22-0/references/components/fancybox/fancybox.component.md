@@ -29,7 +29,7 @@ Classe CSS : `.fancyBox`
 ### Box basic
 
 ```css
-@forward '@lucca-front/scss/src/components/fancy-box';
+@forward '@lucca-front/scss/src/components/fancyBox';
 ```
 
 ```html

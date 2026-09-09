@@ -43,11 +43,16 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`ButtonComponent`).
+~ `block` : boolean → boolean, boolean | `${boolean}` | ''
+~ `disabled` : boolean → boolean, boolean | `${boolean}` | ''
+~ `critical` : boolean → boolean, boolean | `${boolean}` | ''
+~ `delete` : boolean → boolean, boolean | `${boolean}` | ''
+~ `disclosure` : boolean → boolean, boolean | `${boolean}` | ''
+~ `palette` : 'success' | 'warning' | 'error' | 'product' | 'neutral' | 'none' | 'primary' | 'grey' | 'brand' → 'success' | 'warning' | 'error' | 'product' | 'neutral' | 'none' | 'brand'
 
 ### Notes de release (ZeroHeight)
 

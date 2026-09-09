@@ -48,6 +48,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `align` | `align` | `IndexTableAlign \| null` | `null` | — | — | — |
 | `selectable` | `selectable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes du tableau sélectionnables via des checkbox. |
 | `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | Masque les cellules d’en-tête du tableau. |
 | `actions` | `actions` | `boolean` | `false` | — | `luBooleanAttribute` | — |
@@ -67,6 +68,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `align` | `align` | `IndexTableAlign \| null` | `null` | — | — | — |
 | `allowTextSelection` | `allowTextSelection` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `tfoot` | `tfoot` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
@@ -125,8 +127,23 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`IndexTableActionFileComponent`, `IndexTableActionComponent`, `IndexTableBodyComponent`, `IndexTableRowCellHeaderComponent`, `IndexTableRowCellComponent`, `IndexTableFootComponent`, `IndexTableHeadComponent`, `IndexTableRowComponent`, `IndexTableComponent`).
+`IndexTableRowCellHeaderComponent` :
+  ~ `selectable` : transform booleanAttribute → luBooleanAttribute
+  ~ `hiddenLabel` : transform booleanAttribute → luBooleanAttribute
+  ~ `actions` : transform booleanAttribute → luBooleanAttribute
+  ~ `inlineSize` : transform numberAttribute → luNumberAttribute
+`IndexTableRowCellComponent` :
+  ~ `allowTextSelection` : transform booleanAttribute → luBooleanAttribute
+  ~ `tfoot` : transform booleanAttribute → luBooleanAttribute
+`IndexTableRowComponent` :
+  + `mixed` : boolean
+  ~ `disabled` : transform booleanAttribute → luBooleanAttribute
+  ~ `stack` : transform numberAttribute → luNumberAttribute
+`IndexTableComponent` :
+  ~ `selectable` : transform booleanAttribute → luBooleanAttribute
+  ~ `layoutFixed` : transform booleanAttribute → luBooleanAttribute
+  ~ `empty` : transform booleanAttribute → luBooleanAttribute

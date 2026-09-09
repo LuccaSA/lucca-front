@@ -97,7 +97,7 @@ Classe CSS : `.emptyState`
 ### State page
 
 ```css
-@forward '@lucca-front/scss/src/components/empty-state';
+@forward '@lucca-front/scss/src/components/emptyState';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -129,7 +129,7 @@ Classe CSS : `.emptyState`
 ### State section center
 
 ```css
-@forward '@lucca-front/scss/src/components/empty-state';
+@forward '@lucca-front/scss/src/components/emptyState';
 @forward '@lucca-front/scss/src/components/bubbleIllustration';
 @forward '@lucca-front/scss/src/components/button';
 ```
@@ -162,7 +162,7 @@ Classe CSS : `.emptyState`
 ### State section palette
 
 ```css
-@forward '@lucca-front/scss/src/components/empty-state';
+@forward '@lucca-front/scss/src/components/emptyState';
 @forward '@lucca-front/scss/src/components/bubbleIllustration';
 @forward '@lucca-front/scss/src/components/button';
 ```
@@ -195,7 +195,7 @@ Classe CSS : `.emptyState`
 ### State section
 
 ```css
-@forward '@lucca-front/scss/src/components/empty-state';
+@forward '@lucca-front/scss/src/components/emptyState';
 @forward '@lucca-front/scss/src/components/bubbleIllustration';
 @forward '@lucca-front/scss/src/components/button';
 ```

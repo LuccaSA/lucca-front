@@ -53,7 +53,7 @@ L'ajout manuel d'un ID `main-content` sur `<lu-main-layout>` est nécessaire afi
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/app-layout';
+@forward '@lucca-front/scss/src/components/appLayout';
 ```
 
 ```html

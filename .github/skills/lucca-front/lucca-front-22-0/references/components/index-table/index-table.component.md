@@ -20,7 +20,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DropdownActionComponent, DropdownGroupComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
-import {
+import { IndexTableActionComponent, IndexTableBodyComponent, IndexTableComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent } from '@lucca-front/ng/index-table';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
@@ -60,7 +60,7 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
-import {
+import { INDEX_TABLE_ALIGN, INDEX_TABLE_SORT, IndexTableActionComponent, IndexTableActionFileComponent, IndexTableBodyComponent, IndexTableComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent } from '@lucca-front/ng/index-table';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
@@ -99,7 +99,7 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 ### Scrollbox
 
 ```js
-import {
+import { IndexTableBodyComponent, IndexTableComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent } from '@lucca-front/ng/index-table';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 ```
@@ -160,7 +160,7 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 ```js
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import {
+import { IndexTableActionComponent, IndexTableBodyComponent, IndexTableComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent } from '@lucca-front/ng/index-table';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 ```
 
@@ -224,7 +224,7 @@ Le clic sur la cellule est automatiquement désactivée par le bouton d'action. 
 </callout>
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -260,7 +260,7 @@ Le clic sur la cellule est automatiquement désactivée par le bouton d'action. 
 ### Table actions selectable
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html
@@ -300,7 +300,7 @@ Le clic sur la cellule est automatiquement désactivée par le bouton d'action. 
 </callout>
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -351,7 +351,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 </callout>
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/code';
 ```
@@ -481,7 +481,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 </callout>
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/code';
 ```
@@ -602,7 +602,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table actions userPopover
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html
@@ -636,7 +636,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table basic
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/code';
 ```
 
@@ -687,7 +687,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table empty state
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/bubbleIllustration';
 @forward '@lucca-front/scss/src/components/emptyState';
 ```
@@ -733,7 +733,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table footer
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html
@@ -814,7 +814,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table input
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html
@@ -847,7 +847,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table interactive nested selectable
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
@@ -1130,7 +1130,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table layout fixed responsive
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html
@@ -1179,7 +1179,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table layout fixed
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html
@@ -1228,7 +1228,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table mass selection and pagination
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
@@ -1329,7 +1329,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table nested selectable
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
@@ -1565,7 +1565,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table nested sub totals
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/numericBadge';
 ```
@@ -1731,7 +1731,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table nested
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/numericBadge';
 ```
@@ -1823,7 +1823,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table pagination
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/pagination';
 ```
@@ -1887,7 +1887,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table responsive card list custom
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html
@@ -1941,7 +1941,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table responsive card list label
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html
@@ -1987,7 +1987,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table responsive card list nested
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
@@ -2223,7 +2223,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table responsive card list
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html
@@ -2257,7 +2257,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table selectable
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
 ```
@@ -2314,7 +2314,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table sortable
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/tableSortable'; // Import additionnel
 ```
 
@@ -2402,7 +2402,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table stackable
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
 ```
@@ -2480,7 +2480,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ### Table sticky header
 
 ```css
-@forward '@lucca-front/scss/src/components/index-table';
+@forward '@lucca-front/scss/src/components/indexTable';
 ```
 
 ```html

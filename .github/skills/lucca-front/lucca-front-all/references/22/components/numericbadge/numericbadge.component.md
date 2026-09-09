@@ -26,7 +26,7 @@ Classe CSS : `.numericBadge`
 ### Badge basic
 
 ```css
-@forward '@lucca-front/scss/src/components/numeric-badge';
+@forward '@lucca-front/scss/src/components/numericBadge';
 ```
 
 ```html
@@ -36,7 +36,7 @@ Classe CSS : `.numericBadge`
 ### Badge loading
 
 ```css
-@forward '@lucca-front/scss/src/components/numeric-badge';
+@forward '@lucca-front/scss/src/components/numericBadge';
 ```
 
 ```html
@@ -46,7 +46,7 @@ Classe CSS : `.numericBadge`
 ### Badge palette
 
 ```css
-@forward '@lucca-front/scss/src/components/numeric-badge';
+@forward '@lucca-front/scss/src/components/numericBadge';
 ```
 
 ```html
@@ -56,7 +56,7 @@ Classe CSS : `.numericBadge`
 ### Badge size
 
 ```css
-@forward '@lucca-front/scss/src/components/numeric-badge';
+@forward '@lucca-front/scss/src/components/numericBadge';
 ```
 
 ```html

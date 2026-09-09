@@ -76,8 +76,14 @@ import { PopoverDirective, PopoverContentComponent } from '@lucca-front/ng/popov
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`PopoverDirective`, `PopoverContentComponent`).
+`PopoverDirective` :
+  + `luPopoverIgnoredOutsidePointerTargets` : HTMLElement | HTMLElement[] | null
+  ~ `luPopoverDisabled` : transform booleanAttribute → luBooleanAttribute
+  ~ `customPositions` : unknown → ConnectionPositionPair[] | null, défaut ∅ → null
+  ~ `luPopoverNoCloseButton` : transform booleanAttribute → luBooleanAttribute
+  ~ `luPopoverOpenDelay` : transform ∅ → luNumberAttribute
+  ~ `luPopoverCloseDelay` : transform ∅ → luNumberAttribute

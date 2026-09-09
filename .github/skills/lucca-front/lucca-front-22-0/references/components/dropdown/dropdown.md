@@ -104,11 +104,18 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`DropdownActionComponent`, `DropdownDividerComponent`, `DropdownGroupComponent`, `DropdownItemComponent`, `DropdownMenuComponent`, `LuDropdownItemDirective`, `LuDropdownPanelComponent`, `LuDropdownTriggerDirective`).
+`DropdownActionComponent` :
+  ~ `disabled` : transform booleanAttribute → luBooleanAttribute
+  ~ `critical` : transform booleanAttribute → luBooleanAttribute
+`LuDropdownItemDirective` :
+  + (output) `onSelectOutput` : void
+  - (output) `onSelect`
+`LuDropdownTriggerDirective` :
+  ~ `luDropdown` : défaut ∅ → undefined
 
 ### Notes de release (ZeroHeight)
 

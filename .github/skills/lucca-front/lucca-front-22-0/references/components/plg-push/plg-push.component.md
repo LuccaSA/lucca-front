@@ -33,7 +33,7 @@ Classe CSS : `.plgPush`
 ### Push basic
 
 ```css
-@forward '@lucca-front/scss/src/components/plg-push';
+@forward '@lucca-front/scss/src/components/plgPush';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/link';
 ```
@@ -65,7 +65,7 @@ Classe CSS : `.plgPush`
 ### Push title
 
 ```css
-@forward '@lucca-front/scss/src/components/plg-push';
+@forward '@lucca-front/scss/src/components/plgPush';
 @forward '@lucca-front/scss/src/components/link';
 ```
 

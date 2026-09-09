@@ -119,11 +119,16 @@ import { ClearFormatComponent, HeadingsComponent, LinkComponent, ListStyleToolba
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`ClearFormatComponent`, `HeadingsComponent`, `LinkComponent`, `ListStyleToolbarComponent`, `RichTextPluginTagComponent`, `TextStyleComponent`, `TextStyleToolbarComponent`, `RichTextInputToolbarComponent`, `RichTextInputComponent`).
+`HeadingsComponent` :
+  ~ `maxHeadingLevel` : 1 | 2 | 3 | 4 | 5 | 6 → number, transform ∅ → luNumberAttribute
+`RichTextInputComponent` :
+  ~ `disableSpellcheck` : transform booleanAttribute → luBooleanAttribute
+  ~ `autoResize` : transform booleanAttribute → luBooleanAttribute
+  ~ `hideToolbar` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
 

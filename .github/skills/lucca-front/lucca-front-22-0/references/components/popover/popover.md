@@ -93,11 +93,51 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`LuPopoverPanelComponent`, `LuPopoverTargetDirective`, `LuPopoverTriggerDirective`).
+`LuPopoverPanelComponent` :
+  + `templateContext` : unknown
+  + `inputCloseOnClick` : boolean
+  + `inputTrapFocus` : boolean
+  + `inputScrollStrategy` : 'reposition' | 'block' | 'close'
+  + `inputPanelClasses` : string
+  + `inputContentClasses` : string
+  - `template-context`
+  - `close-on-click`
+  - `trap-focus`
+  - `scroll-strategy`
+  - `panel-classes`
+  - `content-classes`
+  + (output) `closeOutput` : void
+  + (output) `openOutput` : void
+  + (output) `hoveredOutput` : void
+  - (output) `close`
+  - (output) `open`
+  - (output) `hovered`
+`LuPopoverTargetDirective` :
+  ~ `luPopoverPosition` : LuPopoverPosition → 'above' | 'below' | 'before' | 'after', défaut ∅ → undefined
+  ~ `luPopoverAlignment` : LuPopoverAlignment → 'top' | 'bottom' | 'left' | 'right' | 'center', défaut ∅ → undefined
+  ~ `luPopoverOverlap` : défaut ∅ → undefined
+  ~ `luPopoverOffsetX` : défaut ∅ → undefined
+  ~ `luPopoverOffsetY` : défaut ∅ → undefined
+`LuPopoverTriggerDirective` :
+  ~ `luPopover` : défaut ∅ → undefined
+  ~ `luPopoverTarget` : défaut ∅ → undefined
+  ~ `luPopoverTrigger` : LuPopoverTriggerEvent → 'click' | 'hover' | 'none' | 'focus', défaut ∅ → undefined
+  ~ `luPopoverPosition` : défaut ∅ → undefined
+  ~ `luPopoverAlignment` : défaut ∅ → undefined
+  ~ `luPopoverEnterDelay` : défaut ∅ → undefined
+  ~ `luPopoverLeaveDelay` : défaut ∅ → undefined
+  ~ `luPopoverDisabled` : défaut ∅ → undefined
+  ~ `luPopoverOverlap` : défaut ∅ → undefined
+  ~ `luPopoverOffsetX` : défaut ∅ → undefined
+  ~ `luPopoverOffsetY` : défaut ∅ → undefined
+  + (output) `onCloseOutput` : void
+  + (output) `onOpenOutput` : void
+  - (output) `luPopoverOnOpen`
+  - (output) `luPopoverOnClose`
 
 ### Notes de release (ZeroHeight)
 

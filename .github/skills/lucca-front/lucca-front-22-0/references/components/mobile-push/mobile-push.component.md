@@ -24,7 +24,7 @@ Classe CSS : `.mobilePush`
 ### Push basic
 
 ```css
-@forward '@lucca-front/scss/src/components/mobile-push';
+@forward '@lucca-front/scss/src/components/mobilePush';
 ```
 
 ```html

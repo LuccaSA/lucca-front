@@ -16,10 +16,36 @@ import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `format` | `format` | `(typeof DATE_FORMAT)[keyof typeof DATE_FORMAT]` | `DATE_FORMAT.DATE` | — | — | Modifie le format de date. |
+| `ranges` | `ranges` | `unknown` | `[]` | — | — | — |
+| `hideToday` | `hideToday` | `boolean` | `false` | — | `luBooleanAttribute` | Retire la mise en valeur de la date du jour. |
+| `hasTodayButton` | `hasTodayButton` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `clearable` | `clearable` | `unknown` | `null` | — | `luNullableBooleanAttribute` | Ajoute un bouton de suppression lorsqu’une date est sélectionnée. |
+| `clearBehavior` | `clearBehavior` | `'clear' \| 'reset'` | `'clear'` | — | — | [v20.1] Change le comportement au clic sur la croix de suppression |
+| `hideWeekend` | `hideWeekend` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `mode` | `mode` | `'day' \| 'week' \| 'month' \| 'year'` | `'day'` | — | — | Modifie le mode de sélection au mois ou à l'année. |
+| `getCellInfo` | `getCellInfo` | `((day: Date, mode: CalendarMode) => CellStatus) \| null` | — | — | — | — |
+| `min` | `min` | `unknown` | `new Date('1/1/1000')` | — | `transformDateInputToDate` | Définit une date minimum de sélection. |
+| `max` | `max` | `unknown` | `null` | — | `transformDateInputToDate` | Définit une date maximum de sélection. |
+| `focusedDate` | `focusedDate` | `unknown` | `null` | — | `transformDateInputToDate` | Définit la date préselectionnée à l’ouverture du calendrier. |
 | `placeholder` | `placeholder` | `string` | — | — | — | — |
 | `widthAuto` | `widthAuto` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `shortcuts` | `shortcuts` | `readonly CalendarShortcut[]` | — | — | — | — |
 | `autocomplete` | `autocomplete` | `AutoFill` | `'off'` | — | — | — |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `panelOpened` | `panelOpened` | `void` | — |
+| `panelClosed` | `panelClosed` | `void` | — |
+
+#### Models (two-way binding)
+
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `calendarMode` | `CalendarMode \| null` | — | — |
 
 ## Related files
 
@@ -30,11 +56,17 @@ import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`DateRangeInputComponent`).
+~ `hideToday` : transform booleanAttribute → luBooleanAttribute
+~ `hasTodayButton` : transform booleanAttribute → luBooleanAttribute
+~ `clearable` : transform booleanAttribute → luNullableBooleanAttribute
+~ `hideWeekend` : transform booleanAttribute → luBooleanAttribute
+~ `mode` : 'day' | 'month' | 'year' → 'day' | 'week' | 'month' | 'year'
+~ `widthAuto` : transform booleanAttribute → luBooleanAttribute
+~ (model) `calendarMode` : CalendarMode → CalendarMode | null
 
 ### Notes de release (ZeroHeight)
 

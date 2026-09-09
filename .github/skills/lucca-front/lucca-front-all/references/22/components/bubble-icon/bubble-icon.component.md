@@ -27,7 +27,7 @@ Classe CSS : `.bubbleIcon`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/bubble-icon';
+@forward '@lucca-front/scss/src/components/bubbleIcon';
 ```
 
 ```html

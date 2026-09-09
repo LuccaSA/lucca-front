@@ -19,7 +19,7 @@ import { HIGHLIGHT_SECTION_BUBBLE, HIGHLIGHT_SECTION_ILLUSTRATION, HIGHLIGHT_SEC
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-section';
+@forward '@lucca-front/scss/src/components/highlightSection';
 ```
 
 ```html
@@ -44,7 +44,7 @@ import { HIGHLIGHT_SECTION_BUBBLE, HIGHLIGHT_SECTION_ILLUSTRATION, HIGHLIGHT_SEC
 ### Illustration
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-section';
+@forward '@lucca-front/scss/src/components/highlightSection';
 @forward '@lucca-front/scss/src/components/link';
 ```
 
@@ -75,7 +75,7 @@ import { HIGHLIGHT_SECTION_BUBBLE, HIGHLIGHT_SECTION_ILLUSTRATION, HIGHLIGHT_SEC
 ### Ornaments
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-section';
+@forward '@lucca-front/scss/src/components/highlightSection';
 ```
 
 ```html
@@ -131,7 +131,7 @@ import { HIGHLIGHT_SECTION_BUBBLE, HIGHLIGHT_SECTION_ILLUSTRATION, HIGHLIGHT_SEC
 ### Themes
 
 ```css
-@forward '@lucca-front/scss/src/components/highlight-section';
+@forward '@lucca-front/scss/src/components/highlightSection';
 ```
 
 ```html

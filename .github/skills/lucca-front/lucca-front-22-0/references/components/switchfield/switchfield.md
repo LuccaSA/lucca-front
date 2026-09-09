@@ -21,11 +21,7 @@ import { SwitchInputComponent } from '@lucca-front/ng/forms';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
-
-### 22.0.0
-
-Composant introduit (`SwitchInputComponent`).
+_Aucun changement d'API entre v21.4.2 et v22.0.0._
 
 ### Notes de release (ZeroHeight)
 

@@ -104,8 +104,14 @@ import { LuCoreSelectTotalCountDirective, LuCoreSelectNoClueDirective, LuDisable
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`LuCoreSelectTotalCountDirective`, `LuCoreSelectNoClueDirective`, `LuDisabledOptionDirective`, `LuOptionGroupDirective`, `LuOptionDirective`, `LuCoreSelectPanelHeaderDirective`).
+`LuDisabledOptionDirective` :
+  ~ `luDisabledOption` : boolean | null → boolean, défaut ∅ → undefined
+`LuOptionGroupDirective` :
+  ~ `luOptionGroupSelect` : devient requis
+  ~ `luOptionGroupBy` : (option: TOption) → (option: TOption) => TGroup, devient requis, défaut > TGroup → ∅
+`LuOptionDirective` :
+  ~ `luOptionSelect` : défaut ∅ → undefined

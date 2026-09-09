@@ -90,7 +90,7 @@ Classe CSS : `.verticalNavigation`
 ### Navigation disabled
 
 ```css
-@forward '@lucca-front/scss/src/components/vertical-navigation';
+@forward '@lucca-front/scss/src/components/verticalNavigation';
 ```
 
 ```html
@@ -140,7 +140,7 @@ Classe CSS : `.verticalNavigation`
 ### Navigation iconless
 
 ```css
-@forward '@lucca-front/scss/src/components/vertical-navigation';
+@forward '@lucca-front/scss/src/components/verticalNavigation';
 ```
 
 ```html
@@ -188,7 +188,7 @@ Classe CSS : `.verticalNavigation`
 ### Navigation
 
 ```css
-@forward '@lucca-front/scss/src/components/vertical-navigation';
+@forward '@lucca-front/scss/src/components/verticalNavigation';
 ```
 
 ```html

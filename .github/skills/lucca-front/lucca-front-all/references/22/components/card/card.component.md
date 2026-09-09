@@ -6,6 +6,10 @@
 
 ### Card
 
+```css
+@forward '@lucca-front/scss/src/components/card';
+```
+
 ```html
 <div class="card">
 	<table class="table mod-card">

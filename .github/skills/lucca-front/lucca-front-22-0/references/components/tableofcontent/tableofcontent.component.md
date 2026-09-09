@@ -32,7 +32,7 @@ La table des matière est sticky par défaut. Ajoutez une valeur top à `tableO
 ### Of content
 
 ```css
-@forward '@lucca-front/scss/src/components/table-of-content';
+@forward '@lucca-front/scss/src/components/tableOfContent';
 ```
 
 ```html

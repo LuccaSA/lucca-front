@@ -95,11 +95,21 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`LuMultiSelectContentDisplayerComponent`, `LuMultiSelectCounterDisplayerComponent`, `LuMultiSelectDefaultDisplayerComponent`, `LuMultiSelectDisplayerInputDirective`, `LuMultiDisplayerDirective`, `LuMultiSelectWithSelectAllDirective`, `LuMultiSelectInputComponent`).
+`LuMultiSelectCounterDisplayerComponent` :
+  ~ `selected` : défaut ∅ → []
+`LuMultiDisplayerDirective` :
+  ~ `luMultiDisplayerSelect` : défaut ∅ → undefined
+`LuMultiSelectWithSelectAllDirective` :
+  ~ `withSelectAllDisplayerLabelFn` : (count: number) => string → (count: number) => string | LuPluralForms
+`LuMultiSelectInputComponent` :
+  ~ `maxValuesShown` : transform numberAttribute → luNumberAttribute
+  ~ `keepSearchAfterSelection` : transform booleanAttribute → luBooleanAttribute
+  ~ `filterPillLabelPlural` : défaut undefined → ∅
+  ~ `filterPillLabelPluralFn` : (count: number) => string → (count: number) => string | LuPluralForms, défaut undefined → ∅
 
 ### Notes de release (ZeroHeight)
 

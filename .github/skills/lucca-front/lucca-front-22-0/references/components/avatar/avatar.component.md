@@ -265,7 +265,6 @@ Classe CSS : `.avatar`
 ### Avatars basic
 
 ```css
-@forward '@lucca-front/scss/src/components/user';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 
@@ -278,7 +277,6 @@ Classe CSS : `.avatar`
 ### Display
 
 ```css
-@forward '@lucca-front/scss/src/components/user';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 
@@ -302,7 +300,6 @@ Classe CSS : `.avatar`
 ### Group basic
 
 ```css
-@forward '@lucca-front/scss/src/components/user';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 
@@ -374,7 +371,6 @@ Classe CSS : `.avatar`
 ### Clickable
 
 ```css
-@forward '@lucca-front/scss/src/components/user';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 
@@ -466,7 +462,6 @@ Classe CSS : `.avatar`
 ### More
 
 ```css
-@forward '@lucca-front/scss/src/components/user';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 
@@ -540,7 +535,6 @@ Classe CSS : `.avatar`
 ### Sizes
 
 ```css
-@forward '@lucca-front/scss/src/components/user';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 

@@ -118,8 +118,32 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`SkeletonButtonComponent`, `SkeletonCardComponent`, `SkeletonDataTableComponent`, `SkeletonFancyBoxComponent`, `SkeletonFieldComponent`, `SkeletonHeaderComponent`, `SkeletonHighlightDataComponent`, `SkeletonIndexTableComponent`, `SkeletonTableComponent`, `SkeletonUserPopoverComponent`).
++ component `SkeletonCardComponent` (lu-skeleton-card)
++ component `SkeletonFancyBoxComponent` (lu-skeleton-fancy-box)
++ component `SkeletonHighlightDataComponent` (lu-skeleton-highlight-data)
+- component `SkeletonResourceCardComponent` retiré
+`SkeletonButtonComponent` :
+  + selector `pr-skeleton-button`
+`SkeletonDataTableComponent` :
+  + selector `pr-skeleton-data-table`
+  ~ `cols` : transform ∅ → numberAttribute
+  ~ `rows` : transform ∅ → numberAttribute
+`SkeletonFieldComponent` :
+  + selector `pr-skeleton-field`
+  ~ `dark` : boolean, boolean | `${boolean}` → boolean
+  ~ `hiddenLabel` : boolean, boolean | `${boolean}` → boolean
+  ~ `rows` : number, number | `${number}` → number
+`SkeletonHeaderComponent` :
+  + selector `pr-skeleton-header`
+`SkeletonIndexTableComponent` :
+  + selector `pr-skeleton-index-table`
+  ~ `cols` : transform ∅ → numberAttribute
+  ~ `rows` : transform ∅ → numberAttribute
+`SkeletonTableComponent` :
+  + selector `pr-skeleton-table`
+  ~ `cols` : transform ∅ → numberAttribute
+  ~ `rows` : transform ∅ → numberAttribute

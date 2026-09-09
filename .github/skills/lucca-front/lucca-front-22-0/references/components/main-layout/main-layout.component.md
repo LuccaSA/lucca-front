@@ -76,7 +76,7 @@ import { MAIN_LAYOUT_ILLUSTRATION_END_START, MAIN_LAYOUT_ILLUSTRATION_START_END,
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/main-layout';
+@forward '@lucca-front/scss/src/components/mainLayout';
 @forward '@lucca-front/scss/src/components/container';
 ```
 
@@ -107,7 +107,7 @@ import { MAIN_LAYOUT_ILLUSTRATION_END_START, MAIN_LAYOUT_ILLUSTRATION_START_END,
 ### InAppLayout
 
 ```css
-@forward '@lucca-front/scss/src/components/main-layout';
+@forward '@lucca-front/scss/src/components/mainLayout';
 @forward '@lucca-front/scss/src/components/appLayout';
 @forward '@lucca-front/scss/src/components/container';
 ```

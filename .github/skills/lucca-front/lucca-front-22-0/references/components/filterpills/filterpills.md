@@ -103,8 +103,11 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`FilterPillComponent`, `FilterBarComponent`, `FilterViewSelectorComponent`, `FilterPillAddonBeforeDirective`, `FilterPillAddonAfterDirective`, `FilterPillDisplayerDirective`, `FilterPillLabelDirective`).
++ component `FilterViewSelectorComponent` (lu-filter-view-selector)
+`FilterPillComponent` :
+  ~ `optional` : transform booleanAttribute → luBooleanAttribute
++ token `LU_FILTER_BAR_INSTANCE` : FilterBarComponent

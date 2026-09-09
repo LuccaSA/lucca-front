@@ -18,6 +18,30 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 
 **Selector:** `lu-file-dropzone`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `accept` | `accept` | `Array<{
+			format: string;
+			name?: string;
+		}>` | `[]` | — | — | Liste des formats de fichiers acceptés. |
+| `structure` | `structure` | `boolean` | `false` | — | `luBooleanAttribute` | Augmente le border-radius du champ pour l’utiliser en élément de structure. |
+| `fileMaxSize` | `fileMaxSize` | `unknown` | `80 * MEGA_BYTE` | — | `luNumberAttribute` | Limite le poids des fichiers importables (en octets). |
+| `size` | `size` | `FileUploadSize \| null` | `null` | — | — | Modifie la taille du composant. |
+| `password` | `password` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `illustration` | `illustration` | `/** @deprecated use 'invoice' instead */
+		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. |
+| `required` | `required` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `buttonFilled` | `buttonFilled` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le bouton comme action principale de la page. |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `filePicked` | `filePicked` | `File` | — |
+
 ### FileEntryComponent (component)
 
 **Selector:** `lu-file-entry`
@@ -55,6 +79,30 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 
 **Selector:** `lu-multi-file-upload`
 
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `accept` | `accept` | `Array<{
+			format: string;
+			name?: string;
+		}>` | `[]` | — | — | Liste des formats de fichiers acceptés. |
+| `structure` | `structure` | `boolean` | `false` | — | `luBooleanAttribute` | Augmente le border-radius du champ pour l’utiliser en élément de structure. |
+| `fileMaxSize` | `fileMaxSize` | `unknown` | `80 * MEGA_BYTE` | — | `luNumberAttribute` | Limite le poids des fichiers importables (en octets). |
+| `size` | `size` | `FileUploadSize \| null` | `null` | — | — | Modifie la taille du composant. |
+| `password` | `password` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `illustration` | `illustration` | `/** @deprecated use 'invoice' instead */
+		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. |
+| `required` | `required` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `buttonFilled` | `buttonFilled` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le bouton comme action principale de la page. |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `filePicked` | `filePicked` | `File` | — |
+
 ### SingleFileUploadComponent (component)
 
 **Selector:** `lu-single-file-upload`
@@ -63,6 +111,19 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `accept` | `accept` | `Array<{
+			format: string;
+			name?: string;
+		}>` | `[]` | — | — | Liste des formats de fichiers acceptés. |
+| `structure` | `structure` | `boolean` | `false` | — | `luBooleanAttribute` | Augmente le border-radius du champ pour l’utiliser en élément de structure. |
+| `fileMaxSize` | `fileMaxSize` | `unknown` | `80 * MEGA_BYTE` | — | `luNumberAttribute` | Limite le poids des fichiers importables (en octets). |
+| `size` | `size` | `FileUploadSize \| null` | `null` | — | — | Modifie la taille du composant. |
+| `password` | `password` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `illustration` | `illustration` | `/** @deprecated use 'invoice' instead */
+		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. |
+| `required` | `required` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `buttonFilled` | `buttonFilled` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le bouton comme action principale de la page. |
 | `entry` | `entry` | `FileEntry \| null` | `null` | — | — | — |
 | `state` | `state` | `'loading' \| 'success' \| 'error' \| 'default'` | `'default'` | — | — | — |
 | `inlineMessageError` | `inlineMessageError` | `string \| null` | `null` | — | — | — |
@@ -73,6 +134,7 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 
 | Property | Binding name | Type | Notes |
 |----------|-------------|------|-------|
+| `filePicked` | `filePicked` | `File` | — |
 | `deleteFile` | `deleteFile` | `void` | — |
 
 ## Related files
@@ -84,8 +146,32 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`FileDropzoneComponent`, `FileEntryComponent`, `FileEntryWrapperComponent`, `MultiFileUploadComponent`, `SingleFileUploadComponent`).
++ component `FileEntryWrapperComponent` (lu-file-entry-wrapper)
+`FileDropzoneComponent` :
+  ~ `structure` : transform booleanAttribute → luBooleanAttribute
+  ~ `fileMaxSize` : number → unknown, transform ∅ → luNumberAttribute
+  ~ `password` : transform booleanAttribute → luBooleanAttribute
+  ~ `required` : transform booleanAttribute → luBooleanAttribute
+  ~ `buttonFilled` : transform booleanAttribute → luBooleanAttribute
+`FileEntryComponent` :
+  + `structure` : boolean
+  ~ `displayFileName` : transform booleanAttribute → luBooleanAttribute
+  ~ `openInNewTab` : transform booleanAttribute → luBooleanAttribute
+  ~ `media` : transform booleanAttribute → luBooleanAttribute
+`MultiFileUploadComponent` :
+  ~ `structure` : transform booleanAttribute → luBooleanAttribute
+  ~ `fileMaxSize` : number → unknown, transform ∅ → luNumberAttribute
+  ~ `password` : transform booleanAttribute → luBooleanAttribute
+  ~ `required` : transform booleanAttribute → luBooleanAttribute
+  ~ `buttonFilled` : transform booleanAttribute → luBooleanAttribute
+`SingleFileUploadComponent` :
+  ~ `structure` : transform booleanAttribute → luBooleanAttribute
+  ~ `fileMaxSize` : number → unknown, transform ∅ → luNumberAttribute
+  ~ `password` : transform booleanAttribute → luBooleanAttribute
+  ~ `required` : transform booleanAttribute → luBooleanAttribute
+  ~ `buttonFilled` : transform booleanAttribute → luBooleanAttribute
+  ~ `displayFileName` : transform booleanAttribute → luBooleanAttribute

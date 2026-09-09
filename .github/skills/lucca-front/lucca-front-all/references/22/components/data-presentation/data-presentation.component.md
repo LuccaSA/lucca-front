@@ -23,7 +23,6 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
 @forward '@lucca-front/scss/src/components/presentation';
 ```
 
@@ -37,7 +36,6 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 ### Size
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
 @forward '@lucca-front/scss/src/components/presentation';
 ```
 

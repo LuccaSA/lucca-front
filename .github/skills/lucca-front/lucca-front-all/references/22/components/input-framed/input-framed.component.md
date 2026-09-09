@@ -34,9 +34,8 @@ Classe CSS : `.inputFramed`
 ### Center
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
-@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inputFramed';
+@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/radioField';
 ```
 
@@ -73,9 +72,8 @@ Classe CSS : `.inputFramed`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
-@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inputFramed';
+@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/radioField';
 ```
 
@@ -125,11 +123,10 @@ Classe CSS : `.inputFramed`
 ### Checkbox
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
+@forward '@lucca-front/scss/src/components/inputFramed';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/inputFramed';
 ```
 
 ```html
@@ -182,10 +179,9 @@ Classe CSS : `.inputFramed`
 ### Grid
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
+@forward '@lucca-front/scss/src/components/inputFramed';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/grid';
-@forward '@lucca-front/scss/src/components/inputFramed';
 @forward '@lucca-front/scss/src/components/radioField';
 ```
 
@@ -334,10 +330,9 @@ Classe CSS : `.inputFramed`
 ### Illustrations
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
+@forward '@lucca-front/scss/src/components/inputFramed';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/inputFramed';
 @forward '@lucca-front/scss/src/components/radioField';
 ```
 
@@ -375,9 +370,8 @@ Classe CSS : `.inputFramed`
 ### Infos
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
-@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inputFramed';
+@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/radioField';
 ```
 
@@ -429,10 +423,9 @@ Classe CSS : `.inputFramed`
 ### Message
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
+@forward '@lucca-front/scss/src/components/inputFramed';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/inputFramed';
 @forward '@lucca-front/scss/src/components/radioField';
 ```
 
@@ -488,9 +481,8 @@ Classe CSS : `.inputFramed`
 ### Panels
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
-@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inputFramed';
+@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/radioField';
 ```
 
@@ -546,9 +538,8 @@ Classe CSS : `.inputFramed`
 ### SizeL
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
-@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inputFramed';
+@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/radioField';
 ```
 
@@ -598,9 +589,8 @@ Classe CSS : `.inputFramed`
 ### States
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
-@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inputFramed';
+@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/radioField';
 ```
 
@@ -692,9 +682,8 @@ Classe CSS : `.inputFramed`
 ### Tag
 
 ```css
-@forward '@lucca-front/scss/src/components/form-field';
-@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inputFramed';
+@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/radioField';
 @forward '@lucca-front/scss/src/components/tag';
 ```

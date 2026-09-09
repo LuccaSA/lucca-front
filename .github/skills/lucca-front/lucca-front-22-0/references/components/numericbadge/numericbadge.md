@@ -32,11 +32,13 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`NumericBadgeComponent`).
++ selector `pr-numeric-badge`
+~ `palette` : Palette → 'success' | 'warning' | 'error' | 'product' | 'neutral' | 'none' | 'brand'
+~ `maxValue` : transform ∅ → numberAttribute
 
 ### Notes de release (ZeroHeight)
 

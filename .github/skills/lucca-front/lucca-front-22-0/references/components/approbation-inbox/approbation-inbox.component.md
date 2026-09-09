@@ -34,7 +34,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 
 ```js
 import { FormsModule } from '@angular/forms';
-import {
+import { ApprobationInboxGroupComponent, ApprobationInboxIcon, ApprobationInboxIconsComponent, ApprobationInboxItemComponent, ApprobationInboxLinkComponent, ApprobationInboxListComponent, ApprobationInboxSubtleComponent } from '@lucca-front/ng/approbation-inbox';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
@@ -58,7 +58,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Detail basic
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/container';
 ```
 
@@ -74,7 +74,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Block insideDialog
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/divider';
 ```
 
@@ -103,7 +103,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Block
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/divider';
 ```
 
@@ -132,7 +132,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Header all
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/avatar';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/listing';
@@ -186,7 +186,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Header delegation
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/tag';
 ```
@@ -217,7 +217,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Header description
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/listing';
 ```
@@ -253,7 +253,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Header illustration
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/avatar';
 @forward '@lucca-front/scss/src/components/button';
 ```
@@ -286,7 +286,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Header insideDialog
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -311,7 +311,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Header moreActions
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -340,7 +340,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Header
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/button';
 ```
 
@@ -365,7 +365,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### InsideDialog
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/container';
 ```
 
@@ -381,7 +381,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### List basic
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/numericBadge';
 ```
 
@@ -408,7 +408,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Filterable
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/filterBar';
 @forward '@lucca-front/scss/src/components/numericBadge';
 @forward '@lucca-front/scss/src/components/scrollBox';
@@ -467,7 +467,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Group basic
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 ```
 
 ```html
@@ -519,7 +519,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Group collapsed
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 ```
 
 ```html
@@ -571,7 +571,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Group selectable
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
 ```
@@ -647,7 +647,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Item centered
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 
@@ -706,7 +706,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Item current
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 ```
 
 ```html
@@ -730,7 +730,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Item data
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/avatar';
 ```
 
@@ -789,7 +789,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Item selectable
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/formLabel';
 ```
@@ -826,7 +826,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Item
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 ```
 
 ```html
@@ -850,7 +850,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Selectable
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/divider';
 @forward '@lucca-front/scss/src/components/formLabel';
@@ -903,7 +903,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 ### Selected
 
 ```css
-@forward '@lucca-front/scss/src/components/approbation-inbox';
+@forward '@lucca-front/scss/src/components/approbationInbox';
 @forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/checkboxField';
 @forward '@lucca-front/scss/src/components/divider';

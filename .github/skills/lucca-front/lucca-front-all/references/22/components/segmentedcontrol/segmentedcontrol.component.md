@@ -64,7 +64,7 @@ Les onglets s’appliquent à des données différentes, dont une seule est affi
 Les filtres s’appliquent à un même jeu de données. Ce sont des options de formulaire.
 
 ```css
-@forward '@lucca-front/scss/src/components/segmented-control';
+@forward '@lucca-front/scss/src/components/segmentedControl';
 ```
 
 ```html
@@ -91,7 +91,7 @@ Les filtres s’appliquent à un même jeu de données. Ce sont des options de f
 ### Control tabs
 
 ```css
-@forward '@lucca-front/scss/src/components/segmented-control';
+@forward '@lucca-front/scss/src/components/segmentedControl';
 ```
 
 ```html

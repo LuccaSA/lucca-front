@@ -240,7 +240,6 @@ Classe CSS : `.calendar`
 ### Basic html
 
 ```css
-@forward '@lucca-front/scss/src/components/date';
 @forward '@lucca-front/scss/src/components/calendar';
 ```
 
@@ -463,7 +462,6 @@ Classe CSS : `.calendar`
 ### Week html
 
 ```css
-@forward '@lucca-front/scss/src/components/date';
 @forward '@lucca-front/scss/src/components/calendar';
 ```
 

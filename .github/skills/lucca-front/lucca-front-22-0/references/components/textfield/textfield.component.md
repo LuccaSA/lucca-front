@@ -109,10 +109,9 @@ Classe CSS : `.textField`
 ### Field AI
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -151,10 +150,9 @@ Classe CSS : `.textField`
 ### Field counter
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -189,10 +187,9 @@ Classe CSS : `.textField`
 ### Field disabled
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -222,10 +219,9 @@ Classe CSS : `.textField`
 ### Field info
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -260,10 +256,9 @@ Classe CSS : `.textField`
 ### Field invalid
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -292,9 +287,8 @@ Classe CSS : `.textField`
 ### Field prefix suffix
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
-@forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/textField';
+@forward '@lucca-front/scss/src/components/formLabel';
 ```
 
 ```html
@@ -326,10 +320,9 @@ Classe CSS : `.textField`
 ### Field required
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -362,10 +355,9 @@ Classe CSS : `.textField`
 ### Field search clear
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/clear';
 @forward '@lucca-front/scss/src/components/formLabel';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -397,10 +389,9 @@ Classe CSS : `.textField`
 ### Field sizes
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -449,10 +440,9 @@ Classe CSS : `.textField`
 ### Field valueAlignRight
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -487,10 +477,9 @@ Les champs de formulaires sont pensés pour être utilisés dans une [grille](ht
 </callout>
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html
@@ -599,10 +588,9 @@ Les champs de formulaires sont pensés pour être utilisés dans une [grille](ht
 ### Field
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/textField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/textField';
 ```
 
 ```html

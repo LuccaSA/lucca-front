@@ -40,6 +40,8 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `editable` | `editable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `align` | `align` | `DataTableAlign \| null` | `null` | — | — | Aligne le contenu des cellules horizontalement. |
 | `fixedWidth` | `fixedWidth` | `string \| null` | `null` | — | — | — |
 | `inlineSize` | `inlineSize` | `string \| null` | `null` | — | — | Modifie la largeur d’une colonne lorsque layoutFixed est activé. |
 
@@ -57,6 +59,8 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `editable` | `editable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `align` | `align` | `DataTableAlign \| null` | `null` | — | — | Aligne le contenu des cellules horizontalement. |
 | `actions` | `actions` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 ### DataTableFootComponent (component)
@@ -127,11 +131,30 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`DataTableBodyComponent`, `DataTableRowCellHeaderComponent`, `DataTableRowCellComponent`, `DataTableFootComponent`, `DataTableHeadComponent`, `DataTableRowComponent`, `DataTableComponent`).
+`DataTableRowCellHeaderComponent` :
+  ~ `editable` : transform booleanAttribute → luBooleanAttribute
+`DataTableRowCellComponent` :
+  ~ `editable` : transform booleanAttribute → luBooleanAttribute
+  ~ `actions` : transform booleanAttribute → luBooleanAttribute
+`DataTableHeadComponent` :
+  ~ `sticky` : transform booleanAttribute → luBooleanAttribute
+`DataTableRowComponent` :
+  + `mixed` : boolean
+  ~ `disabled` : transform booleanAttribute → luBooleanAttribute
+`DataTableComponent` :
+  ~ `hover` : transform booleanAttribute → luBooleanAttribute
+  ~ `selectable` : transform booleanAttribute → luBooleanAttribute
+  ~ `layoutFixed` : transform booleanAttribute → luBooleanAttribute
+  ~ `cellBorder` : transform booleanAttribute → luBooleanAttribute
+  ~ `nested` : transform booleanAttribute → luBooleanAttribute
+  ~ `drag` : transform booleanAttribute → luBooleanAttribute
+  ~ `noOverflow` : transform booleanAttribute → luBooleanAttribute
+  ~ `stickyColsStart` : transform numberAttribute → luNumberAttribute
+  ~ `stickyColsEnd` : transform numberAttribute → luNumberAttribute
 
 ### Notes de release (ZeroHeight)
 

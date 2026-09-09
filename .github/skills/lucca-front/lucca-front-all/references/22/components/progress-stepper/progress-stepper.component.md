@@ -48,7 +48,7 @@ Classe CSS : `.progressStepper`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/progress-stepper';
+@forward '@lucca-front/scss/src/components/progressStepper';
 ```
 
 ```html
@@ -81,7 +81,7 @@ Classe CSS : `.progressStepper`
 ### States
 
 ```css
-@forward '@lucca-front/scss/src/components/progress-stepper';
+@forward '@lucca-front/scss/src/components/progressStepper';
 ```
 
 ```html
@@ -116,7 +116,7 @@ Classe CSS : `.progressStepper`
 ### Steps
 
 ```css
-@forward '@lucca-front/scss/src/components/progress-stepper';
+@forward '@lucca-front/scss/src/components/progressStepper';
 ```
 
 ```html

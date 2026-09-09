@@ -32,10 +32,9 @@ Classe CSS : `.switchField`
 ### Field disabled
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/switchField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/switchField';
 ```
 
 ```html
@@ -54,10 +53,9 @@ Classe CSS : `.switchField`
 ### Field invalid
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/switchField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/switchField';
 ```
 
 ```html
@@ -76,10 +74,9 @@ Classe CSS : `.switchField`
 ### Field size
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/switchField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/switchField';
 ```
 
 ```html
@@ -98,10 +95,9 @@ Classe CSS : `.switchField`
 ### Field
 
 ```css
-@forward '@lucca-front/scss/src/components/forms';
+@forward '@lucca-front/scss/src/components/switchField';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/inlineMessage';
-@forward '@lucca-front/scss/src/components/switchField';
 ```
 
 ```html

@@ -24,7 +24,7 @@ Classe CSS : `.statusBadge`
 ### Badge basic
 
 ```css
-@forward '@lucca-front/scss/src/components/status-badge';
+@forward '@lucca-front/scss/src/components/statusBadge';
 ```
 
 ```html
@@ -34,7 +34,7 @@ Classe CSS : `.statusBadge`
 ### Badge palettes
 
 ```css
-@forward '@lucca-front/scss/src/components/status-badge';
+@forward '@lucca-front/scss/src/components/statusBadge';
 ```
 
 ```html
@@ -48,7 +48,7 @@ Classe CSS : `.statusBadge`
 ### Badge size
 
 ```css
-@forward '@lucca-front/scss/src/components/status-badge';
+@forward '@lucca-front/scss/src/components/statusBadge';
 ```
 
 ```html

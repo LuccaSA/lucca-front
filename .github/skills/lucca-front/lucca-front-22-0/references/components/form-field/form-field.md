@@ -74,11 +74,20 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
-Composant introduit (`FormFieldComponent`, `InputDirective`, `PresentationDisplayDirective`).
+`FormFieldComponent` :
+  ~ `hiddenLabel` : transform booleanAttribute → luBooleanAttribute
+  ~ `inline` : transform booleanAttribute → luBooleanAttribute
+  ~ `AI` : transform booleanAttribute → luBooleanAttribute
+  ~ `width` : FormFieldWidth, FormFieldWidth | `${FormFieldWidth}` | null → unknown, transform numberAttribute → luNullableNumberAttribute
+  ~ `invalid` : boolean | null, boolean → unknown, transform booleanAttribute → luNullableBooleanAttribute
+  ~ `counter` : transform ∅ → luNumberAttribute
+  ~ `presentation` : transform booleanAttribute → luBooleanAttribute
+`InputDirective` :
+  ~ `luInputStandalone` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
 

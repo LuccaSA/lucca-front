@@ -28,9 +28,8 @@ Classe CSS : `.userTile`
 ### Basic
 
 ```css
-@forward '@lucca-front/scss/src/components/user';
-@forward '@lucca-front/scss/src/components/avatar';
 @forward '@lucca-front/scss/src/components/userTile';
+@forward '@lucca-front/scss/src/components/avatar';
 ```
 
 ```html
@@ -48,9 +47,8 @@ Classe CSS : `.userTile`
 ### Sizes
 
 ```css
-@forward '@lucca-front/scss/src/components/user';
-@forward '@lucca-front/scss/src/components/avatar';
 @forward '@lucca-front/scss/src/components/userTile';
+@forward '@lucca-front/scss/src/components/avatar';
 ```
 
 ```html
