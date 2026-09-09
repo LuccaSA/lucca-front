@@ -52,6 +52,7 @@ export class DataTableComponent implements OnInit {
 	readonly nested = input(false, { transform: luBooleanAttribute });
 	readonly drag = input(false, { transform: luBooleanAttribute });
 	readonly noOverflow = input(false, { transform: luBooleanAttribute });
+	readonly empty = input(false, { transform: luBooleanAttribute });
 
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
