@@ -20,8 +20,6 @@ export class TagComponent {
 	 */
 	readonly label = input<string | null>(null);
 
-	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
-
 	/**
 	 * Which size should the tag be? Defaults to medium
 	 */
@@ -48,6 +46,11 @@ export class TagComponent {
 	 * Defaults to no icon.
 	 */
 	readonly icon = input<LuccaIcon | null>(null);
+
+	/**
+	 * Visually hides the label while keeping it in the DOM for screen readers. Requires an icon.
+	 */
+	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Truncates the text with an ellipsis and adds a tooltip when the label is too long

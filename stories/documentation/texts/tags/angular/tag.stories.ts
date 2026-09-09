@@ -38,6 +38,11 @@ export const Template: StoryObj<TagComponent> = {
 			},
 			description: 'Ajoute une icône au tag.',
 		},
+		hiddenLabel: {
+			name: '↳ hiddenLabel',
+			if: { arg: 'icon', truthy: true },
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+		},
 		link: HiddenArgType,
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
@@ -48,17 +53,13 @@ export const Template: StoryObj<TagComponent> = {
 		label: {
 			description: 'Modifie le texte affiché par le composant.',
 		},
-		hiddenLabel: {
-			if: { arg: 'label', neq: '' },
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
-		},
 	},
 
 	args: {
 		label: 'Text',
-		hiddenLabel: false,
 		outlined: false,
 		icon: null,
+		hiddenLabel: false,
 		withEllipsis: false,
 		AI: false,
 	},
