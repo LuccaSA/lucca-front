@@ -30,7 +30,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
-import { getPushPanelViewportMargin, isNil, isNotNil, ɵeffectWithDeps } from '@lucca/prisme/core';
+import { getPushPanelViewportMargin, isNil, isNotNil, ɵeffectWithDeps, ɵintentionalFocus$ } from '@lucca/prisme/core';
 import { startWith, timer } from 'rxjs';
 import { debounce, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
@@ -51,8 +51,6 @@ let nextId = 0;
 		'[attr.id]': 'id()',
 		'(mouseenter)': 'onMouseEnter()',
 		'(mouseleave)': 'onMouseLeave()',
-		'(focus)': 'onFocus()',
-		'(focusout)': 'onFocusOut($event)',
 		'(blur)': 'onBlur()',
 		'(keydown.escape)': 'onEscape($event)',
 		class: 'tooltip_trigger',
@@ -158,11 +156,12 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	#effectRef?: EffectRef;
 
-	// pane the focus moved into when it last left this trigger, or null
-	#focusLeftToPane: Element | null = null;
-
 	constructor() {
 		this.#destroyRef.onDestroy(() => (this.#destroyed = true));
+
+		ɵintentionalFocus$(this.#host)
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => this.onFocus());
 
 		// Action debounce pipeline — kept as Observable since signals can't debounce
 		toObservable(this.#realAction)
@@ -312,34 +311,9 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	}
 
 	onFocus() {
-		const leftToPane = this.#focusLeftToPane;
-		this.#focusLeftToPane = null;
-
-		// A closing overlay hands the focus back to its trigger.
-		// That is not the user reaching the trigger, so the tooltip stays closed.
-		if (this.#isForeignPane(leftToPane)) {
-			return;
-		}
-
 		if (this.#host.nativeElement.getAttribute('aria-expanded') !== 'true') {
 			this.#action.set('open');
 		}
-	}
-
-	onFocusOut(event: FocusEvent) {
-		// Captured on the way out.
-		// Some overlays dispose their pane before handing the focus back, leaving nothing to inspect.
-		this.#focusLeftToPane = event.relatedTarget instanceof Element ? this.#paneOf(event.relatedTarget) : null;
-	}
-
-	#isForeignPane(pane: Element | null): boolean {
-		// Panes, not the whole container.
-		// A trigger inside an overlay keeps its tooltip when the focus moves within that same overlay.
-		return isNotNil(pane) && pane !== this.#paneOf(this.#host.nativeElement);
-	}
-
-	#paneOf(element: Element): Element | null {
-		return element.closest('.cdk-overlay-pane');
 	}
 
 	onBlur() {

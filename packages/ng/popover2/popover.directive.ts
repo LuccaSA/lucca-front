@@ -21,6 +21,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { getPushPanelViewportMargin, intlInputOptions, isNotNil, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
+import { ɵintentionalFocus$ } from '@lucca/prisme/core';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, take, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -75,7 +76,6 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 		'[attr.aria-controls]': 'ariaControls',
 		'(click)': 'onMouseClick()',
 		'(mouseleave)': 'onMouseLeave()',
-		'(focus)': 'onFocus()',
 		'(mouseenter)': 'onMouseEnter()',
 		'(keydown.Tab)': 'focusBackToContent($event)',
 		'(keydown.Shift.Tab)': 'focusOutBefore()',
@@ -151,7 +151,6 @@ export class PopoverDirective implements OnDestroy {
 
 	#listenToMouseLeave = false;
 	#listenToMouseEnter = true;
-	#skipNextFocus = false;
 
 	#overlayRef: OverlayRef;
 
@@ -169,6 +168,10 @@ export class PopoverDirective implements OnDestroy {
 	protected additionalProviders: Provider[] = [];
 
 	constructor() {
+		ɵintentionalFocus$(this.elementRef)
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => this.onFocus());
+
 		combineLatest([toObservable(this.luPopoverOpenDelay), toObservable(this.luPopoverCloseDelay), toObservable(this.luPopoverTrigger)])
 			.pipe(
 				filter(([, , trigger]) => {
@@ -213,13 +216,8 @@ export class PopoverDirective implements OnDestroy {
 
 	onFocus() {
 		if (this.luPopoverTrigger().includes('focus')) {
-			if (this.#skipNextFocus) {
-				this.#skipNextFocus = false;
-			} else {
-				this.open$.next('focus');
-				this.#listenToMouseLeave = true;
-				this.#skipNextFocus = true;
-			}
+			this.open$.next('focus');
+			this.#listenToMouseLeave = true;
 		}
 	}
 
@@ -325,7 +323,6 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
 			this.#componentRef.closed$.pipe(take(1), takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 				this.opened.set(false);
-				this.#skipNextFocus = false;
 				this.luPopoverClosed.emit();
 				this.#listenToMouseLeave = false;
 				if (this.#screenReaderDescription) {
