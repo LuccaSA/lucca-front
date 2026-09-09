@@ -209,7 +209,7 @@ scripts/generate-skills/
 │
 ├── collectors/
 │   ├── component-discovery.ts        # Découverte dynamique (Storybook + packages git + métadonnées)
-│   ├── ast-extractor.ts              # Extraction API Angular depuis git tags
+│   ├── ast-extractor.ts              # Extraction API Angular depuis git tags (chaîne `extends` incluse)
 │   ├── api-diff.ts                   # Diff structurel de deux PackageAPI (→ changelog)
 │   ├── storybook.ts                  # Fetch index.json Storybook + groupement par slug + classification framework (tiers 1-2)
 │   ├── story-source.ts               # Code source des stories via git show + classification framework (tier 3)
@@ -263,6 +263,19 @@ scripts/generate-skills/
 9. _versions.json (manifeste dist : mineure + sous-map patches)
 10. SKILL.md de la mineure (toc-writer) — écrit après les fichiers (scanne les composants du disque)
 ```
+
+## Membres hérités (`extends`)
+
+L'extracteur lisait le corps de la classe décorée et s'arrêtait là : tout `input()` / `output()` /
+`model()` déclaré sur une classe de base manquait au tableau d'API — sans rien qui distingue « ce
+composant a cinq inputs » de « ce composant a cinq de ses dix-huit inputs ». `lu-date-input` en
+perdait 13 (+ 1 model, 2 outputs) hérités d'`AbstractDateComponent` ; même chose pour les cellules
+data-table / index-table (`editable`, `align`) et les trois composants file-upload.
+
+`collectInheritedMembers` remonte la chaîne : la classe de base est cherchée dans le fichier courant,
+sinon via l'import qui l'amène (relatif, `@lucca-front/ng/<pkg>`, `@lucca/prisme/<sub>`), en suivant
+un niveau de re-export de barrel. Un membre redéclaré dans la classe dérivée gagne — c'est ce que fait
+une surcharge. Profondeur bornée et cycles coupés par un `seen`.
 
 ## Angular ou HTML/CSS : la classification du framework
 
@@ -344,6 +357,23 @@ fait échouer le run (`process.exitCode = 1`) sauf `--accept-output-violations`.
 | `html-css-story-with-ts-imports` | Des imports ou extraits TypeScript curés sur ZeroHeight pour une story classée `html-css` — c'est la classification du framework qui est fausse | En cours de génération, par composant |
 | `ts-import-in-css-fence` | Une ligne `import … from` dans un bloc ```css / ```scss | Relecture du markdown écrit |
 | `sass-in-ts-fence` | Un `@forward` / `@use` dans un bloc ```js / ```ts (la régression miroir) | idem |
+| `scss-forward-unknown-component` | Un `@forward '@lucca-front/scss/src/components/<x>'` dont le dossier n'existe pas au tag généré | idem |
+| `truncated-import` | Une ligne `import` sans module source dans un bloc ```js / ```ts (statement tronqué) | idem |
+
+La règle 4 se compare au **listing réel** de `packages/scss/src/components` au tag : les dossiers y sont
+en camelCase (`dataTable`, `emptyState`) alors que `ngPackage` et les slugs sont en kebab-case. Le chemin
+était interpolé depuis `ngPackage`, d'où 206 `@forward` morts sur 48 fichiers de la 22.0. La résolution
+vit dans `resolveScssComponentName` (exact → kebab→camel → insensible à la casse, sur `scssComponent`
+puis `ngPackage` puis le slug) ; si rien ne correspond, **aucun import n'est émis** et un avertissement
+le dit. `sanitizeScssForwards` retire en plus les lignes invalides quelle qu'en soit l'origine — ZeroHeight
+en écrit quelques-unes à la main, dont une fausse (`components/forms` n'existe à aucun tag). La règle
+n'est appliquée qu'aux dossiers dans le périmètre du run, pour ne pas juger une skill ancienne sur un
+listing récent.
+
+La règle 5 découle de la collecte des imports : elle se faisait ligne à ligne, donc un import replié par
+prettier publiait le seul `import {` — 13 blocs ```js syntaxiquement invalides sur la 22.0, et toujours
+la ligne la plus longue, c'est-à-dire le package du composant lui-même. `collectImportStatements`
+recompose maintenant le statement sur une ligne.
 
 La règle 2 est volontairement étroite : les blocs ```css contiennent aussi du CSS et du Sass
 légitimes venus des pages de documentation ZH (tokens, mixins, utilitaires). Exiger `@forward`/`@use`
@@ -362,10 +392,16 @@ elle vient.
 
 `changelog-writer.ts` construit un `<slug>.changelog.md` **cumulatif par composant** :
 
+- **baseline** : l'API telle qu'elle était au dernier tag stable de la majeure précédente (`previousMajorLastStableTag`) ;
 - walk des **tags git stables** de la majeure (`listStableTags`, pré-releases filtrées), ≤ version cible ;
 - pour chaque paire consécutive, `diffPackageApi` (`api-diff.ts`) compare selectors / inputs / outputs / models ;
 - **les versions sans changement d'API sont omises** ; extraction AST mémoïsée par `(ngPackage, tag)` ;
 - une couche optionnelle « Notes de release (ZeroHeight) » (prose) est ajoutée en fin.
+
+Sans baseline, le walk démarrait sur une API vide et le **premier tag de la majeure** ressortait en
+« Composant introduit » pour tout composant qui lui préexistait. Invisible tant qu'une majeure comptait
+18 tags et que la ligne fausse était noyée sous un vrai historique ; sur la 22.0, où `v22.0.0` est le seul
+tag, c'était la seule ligne de **119 des 128** pages composant.
 
 Comme le workflow de montée met à jour **d'abord** (la skill cible est alors installée), le changelog cumulatif de la cible couvre le delta depuis n'importe quelle version de départ. Layout-agnostique (différe des objets AST, pas des dossiers).
 
@@ -390,6 +426,9 @@ La liste des composants est **découverte dynamiquement** (`collectors/component
 | `figmaName` | Nom du composant dans Figma (peut différer du slug Angular) |
 | `figmaAliases` | Noms Figma alternatifs (many-to-one) |
 | `ngPackageOverride` | Force le mapping vers un package Angular si l'heuristique échoue |
+| `ngSelectors` | Restreint l'API extraite à ces sélecteurs (isole un composant d'un package multi-composants) |
+| `scssComponent` | Dossier SCSS sous `packages/scss/src/components`. À renseigner seulement quand ni `ngPackage` ni le slug ne s'y résolvent (`date2` → `dateField`). `""` déclare l'absence de contrepartie SCSS et éteint l'avertissement |
+| `storybookFamily` | Titre Storybook de la famille de stories. **Opt-in** : ne le renseigner que si deux composants réellement différents se retrouvent dans le même groupe — `Documentation/Forms/FiltersPills/Checkbox` documentait un filter pill sur la page `checkbox`. Regrouper plusieurs familles d'un **même** composant est le comportement utile par défaut |
 
 > La résolution slug → clé tolère les écarts de tirets : `findMetadata` compare en forme compacte (sans tirets), donc `userpopover` retrouve une clé `user-popover` et inversement.
 

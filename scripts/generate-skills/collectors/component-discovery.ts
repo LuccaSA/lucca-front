@@ -30,6 +30,15 @@ export interface ComponentMetadata {
 	ngPackageOverride?: string;
 	/** Restrict the extracted API to these selectors (scope one component out of a multi-component package). */
 	ngSelectors?: string[];
+	/** SCSS component folder under `packages/scss/src/components`, e.g. "userTile". Only needed when neither
+	 * `ngPackage` nor the slug resolves to it — the Angular entrypoint and the SCSS folder often differ.
+	 * `""` states there is no SCSS counterpart, which silences the resolution warning. */
+	scssComponent?: string;
+	/** Storybook title of the component's story family, e.g. "Documentation/Forms/Checkbox". Opt-in, and only
+	 * needed when two genuinely different components collapse into one group — stating it discards the
+	 * stories of the other family. Leave unset: grouping several families of the *same* component together
+	 * is the useful default (`Documentation/Forms/Date2/DateInput` and `.../Fields/DateInput/Angular`). */
+	storybookFamily?: string;
 }
 
 export type MetadataMap = Record<string, ComponentMetadata>;
@@ -173,9 +182,11 @@ export function discoverComponents(
 		const entry: ComponentEntry = {
 			storybookSlug: sbSlug,
 			storybookPath: group.docsEntry?.title,
+			storybookFamily: meta?.storybookFamily,
 			category: group.category,
 			ngPackage,
 			ngSelectors: meta?.ngSelectors,
+			scssComponent: meta?.scssComponent,
 			zeroheightPagePath: meta?.zeroheightPagePath,
 			figmaNodeIds: meta?.figmaNodeIds,
 			figmaName: meta?.figmaName,
@@ -204,6 +215,7 @@ export function discoverComponents(
 			category: 'Unknown',
 			ngPackage,
 			ngSelectors: meta.ngSelectors,
+			scssComponent: meta.scssComponent,
 			zeroheightPagePath: meta.zeroheightPagePath,
 			figmaNodeIds: meta.figmaNodeIds,
 			figmaName: meta.figmaName,

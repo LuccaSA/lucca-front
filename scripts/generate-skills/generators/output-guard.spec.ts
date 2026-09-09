@@ -106,3 +106,68 @@ describe('auditStoryExamples', () => {
 		expect(reportOutputViolations(dir)).toEqual([]);
 	});
 });
+
+describe('scss-forward-unknown-component', () => {
+	const known = new Set(['dataTable', 'button']);
+
+	it('flags a @forward pointing at a folder that does not exist', () => {
+		write('references/components/data-table/data-table.component.md', "```css\n@forward '@lucca-front/scss/src/components/data-table';\n```\n");
+
+		const violations = auditGeneratedMarkdown(dir, undefined, known);
+
+		expect(violations).toHaveLength(1);
+		expect(violations[0].rule).toBe('scss-forward-unknown-component');
+		expect(violations[0].detail).toContain('components/data-table');
+	});
+
+	it('accepts the camelCase folder that actually exists', () => {
+		write('references/components/data-table/data-table.component.md', "```css\n@forward '@lucca-front/scss/src/components/dataTable';\n```\n");
+
+		expect(auditGeneratedMarkdown(dir, undefined, known)).toEqual([]);
+	});
+
+	it('leaves other Sass imports alone', () => {
+		write('references/tools/mixins.md', "```css\n@use '@lucca-front/scss/src/commons/utils/media';\n@forward 'sass:math';\n```\n");
+
+		expect(auditGeneratedMarkdown(dir, undefined, known)).toEqual([]);
+	});
+
+	it('judges a folder only against the listing of the run that produced it', () => {
+		write('lucca-front-21-3/references/components/x/x.component.md', "```css\n@forward '@lucca-front/scss/src/components/data-table';\n```\n");
+
+		// Out of scope: no listing applies, so nothing is claimed about it.
+		expect(auditGeneratedMarkdown(dir, ['lucca-front-22-0'], known)).toEqual([]);
+	});
+
+	it('does nothing without a listing to check against', () => {
+		write('references/components/x/x.component.md', "```css\n@forward '@lucca-front/scss/src/components/whatever';\n```\n");
+
+		expect(auditGeneratedMarkdown(dir)).toEqual([]);
+	});
+});
+
+describe('truncated-import', () => {
+	it('flags an import statement with no module source', () => {
+		write('references/components/data-table/data-table.component.md', '```js\nimport {\n```\n');
+
+		const violations = auditGeneratedMarkdown(dir);
+
+		expect(violations).toHaveLength(1);
+		expect(violations[0].rule).toBe('truncated-import');
+	});
+
+	it('accepts a complete import, however long', () => {
+		write(
+			'references/components/data-table/data-table.component.md',
+			"```js\nimport { DataTableCellComponent, DataTableComponent, DataTableHeaderComponent } from '@lucca-front/ng/data-table';\n```\n",
+		);
+
+		expect(auditGeneratedMarkdown(dir)).toEqual([]);
+	});
+
+	it('says nothing about html or css fences', () => {
+		write('references/components/x/x.component.md', '```html\n<p>import {</p>\n```\n');
+
+		expect(auditGeneratedMarkdown(dir)).toEqual([]);
+	});
+});

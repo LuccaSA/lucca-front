@@ -135,7 +135,8 @@ export interface ZhFetchContext {
  * Guarded ZH fetch — the entry point all collectors should use.
  *
  * Wraps `fetchZeroHeightPage` with the run cache and the baseline shrink-guard (see above).
- * Transient failures still throw `TransientFetchError` (caller records them as before).
+ * A transient failure falls back to the baseline when one exists (recorded for replay all the same);
+ * without a baseline it still throws `TransientFetchError` and the caller records it.
  */
 export async function fetchZeroHeightPageGuarded(
 	pagePath: string,
@@ -145,8 +146,34 @@ export async function fetchZeroHeightPageGuarded(
 	const cacheKey = `${zhReleaseId ?? 'latest'}:${pagePath}`;
 	if (runCache.has(cacheKey)) return runCache.get(cacheKey)!;
 
-	const fresh = await fetchZeroHeightPage(pagePath, zhReleaseId);
 	const baselineRaw = readBaseline(pagePath, zhReleaseId);
+
+	let fresh: ZeroHeightData | null;
+	try {
+		fresh = await fetchZeroHeightPage(pagePath, zhReleaseId);
+	} catch (err) {
+		// Transient failure with a baseline in hand: serve the baseline rather than let the caller
+		// publish the component without its page. The 404 branch below already refuses to drop
+		// content on a single doubtful signal, but a timeout took the other path and the page was
+		// simply deleted — `activity-feed.design.md` (111 lines) vanished from the 22.0 on one
+		// 10 s deadline, which also made two identical runs produce different output. The failure
+		// is still recorded, so `--retry-failed` refreshes the page for real.
+		if (err instanceof TransientFetchError && baselineRaw !== null) {
+			recordFailure({
+				source: 'zeroheight',
+				scope: ctx.scope,
+				slug: ctx.slug,
+				version: ctx.version,
+				ref: pagePath,
+				status: err.status,
+				reason: `${err.message} — baseline conservée (rejeu avec --retry-failed)`,
+			});
+			const kept: ZeroHeightData = { raw: baselineRaw, sections: parseSections(baselineRaw) };
+			runCache.set(cacheKey, kept);
+			return kept;
+		}
+		throw err;
+	}
 
 	let result: ZeroHeightData | null;
 	if (fresh === null) {

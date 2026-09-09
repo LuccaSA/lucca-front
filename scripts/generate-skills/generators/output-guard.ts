@@ -19,6 +19,14 @@
  *     fire on 211 legitimate blocks. An `import … from` line, however, is never CSS.
  *  3. `sass-in-ts-fence` — the mirror of rule 2, so a future regression cannot flip the mix the
  *     other way round unnoticed.
+ *  4. `scss-forward-unknown-component` — a `@forward '@lucca-front/scss/src/components/<x>'` whose
+ *     folder does not exist at the generated tag. The path used to be interpolated from the
+ *     kebab-case `ngPackage` while the folders are camelCase, which shipped 206 dead imports over
+ *     48 files of the 22.0 skill. Checked against the real listing, so a renamed folder is caught
+ *     too — and so are the few ZeroHeight writes by hand (`components/forms` does not exist).
+ *  5. `truncated-import` — an `import` line in a ```js / ```ts fence with no module specifier.
+ *     Imports were collected line by line, so a prettier-wrapped one published as the bare
+ *     `import {`. Always the long specifier list, which is always the component's own package.
  *
  * Deliberately NOT a rule: "an html-css template must not contain Angular binding syntax". The
  * repo's own `html&css/` stories use `(click)="…"` and `[attr.style]="…"` in raw HTML, which would
@@ -30,7 +38,7 @@ import path from 'path';
 
 export interface OutputViolation {
 	/** Stable rule id, for grouping in the report. */
-	rule: 'html-css-story-with-ts-imports' | 'ts-import-in-css-fence' | 'sass-in-ts-fence';
+	rule: 'html-css-story-with-ts-imports' | 'ts-import-in-css-fence' | 'sass-in-ts-fence' | 'scss-forward-unknown-component' | 'truncated-import';
 	/** Where it was found — a generated file path, or a component/story for in-process rules. */
 	where: string;
 	detail: string;
@@ -43,6 +51,10 @@ export interface OutputViolation {
 
 const SASS_IMPORT_LINE = /^\s*@(forward|use)\b/;
 const TS_IMPORT_LINE = /^\s*import\b[^;]*\bfrom\b/;
+/** A `@forward`/`@use` of an `@lucca-front/scss` component folder, with the folder captured. */
+const LF_SCSS_COMPONENT_IMPORT = /^\s*@(?:forward|use)\s+['"]@lucca-front\/scss\/src\/components\/([A-Za-z0-9_-]+)['"]/;
+/** An import statement that never names the module it imports from. */
+const IMPORT_WITHOUT_SOURCE = /^\s*import\b(?![^'"]*['"])/;
 
 /** Violations detected while generating (rule 1), collected across the run. */
 const inProcess: OutputViolation[] = [];
@@ -85,12 +97,12 @@ export function auditStoryExamples(version: string, slug: string, examples: { fi
 }
 
 /**
- * Rules 2 and 3 — read back the generated markdown.
+ * Rules 2 to 5 — read back the generated markdown.
  *
  * `changelog/` is skipped: those files quote generated markdown inside ````diff blocks, so every
  * violation there is an echo of one already reported at its source.
  */
-export function auditGeneratedMarkdown(skillsDir: string, scope?: string[]): OutputViolation[] {
+export function auditGeneratedMarkdown(skillsDir: string, scope?: string[], validScssComponents?: Set<string>): OutputViolation[] {
 	const violations: OutputViolation[] = [];
 
 	for (const file of walkMarkdown(skillsDir)) {
@@ -116,7 +128,7 @@ export function auditGeneratedMarkdown(skillsDir: string, scope?: string[]): Out
 			}
 
 			if (lines[i].trimEnd() === fence.marker) {
-				checkFence(rel, fence, inScope, violations);
+				checkFence(rel, fence, inScope, violations, validScssComponents);
 				fence = null;
 				continue;
 			}
@@ -127,7 +139,7 @@ export function auditGeneratedMarkdown(skillsDir: string, scope?: string[]): Out
 	return violations;
 }
 
-function checkFence(rel: string, fence: { lang: string; start: number; body: string[] }, inScope: boolean, out: OutputViolation[]): void {
+function checkFence(rel: string, fence: { lang: string; start: number; body: string[] }, inScope: boolean, out: OutputViolation[], validScssComponents?: Set<string>): void {
 	const content = fence.body.filter((l) => l.trim());
 
 	if (fence.lang === 'css' || fence.lang === 'scss') {
@@ -140,6 +152,21 @@ function checkFence(rel: string, fence: { lang: string; start: number; body: str
 				inScope,
 			});
 		}
+		// Rule 4 — only against the listing of the tag this run generated, so an older skill folder
+		// is not judged on folders that did not exist when it was produced.
+		if (validScssComponents && inScope) {
+			for (const line of content) {
+				const m = LF_SCSS_COMPONENT_IMPORT.exec(line);
+				if (m && !validScssComponents.has(m[1])) {
+					out.push({
+						rule: 'scss-forward-unknown-component',
+						where: `${rel}:${fence.start}`,
+						detail: `dossier SCSS inexistant : ${line.trim()}`,
+						inScope,
+					});
+				}
+			}
+		}
 		return;
 	}
 
@@ -150,6 +177,16 @@ function checkFence(rel: string, fence: { lang: string; start: number; body: str
 				rule: 'sass-in-ts-fence',
 				where: `${rel}:${fence.start}`,
 				detail: `Sass dans un bloc ${fence.lang} : ${offender.trim()}`,
+				inScope,
+			});
+		}
+
+		const truncated = content.find((l) => IMPORT_WITHOUT_SOURCE.test(l));
+		if (truncated) {
+			out.push({
+				rule: 'truncated-import',
+				where: `${rel}:${fence.start}`,
+				detail: `import sans module source (statement tronqué) : ${truncated.trim()}`,
 				inScope,
 			});
 		}
@@ -170,8 +207,8 @@ function walkMarkdown(dir: string, out: string[] = []): string[] {
  * Prints every violation, grouped by rule. Returns the full list so the caller can decide the
  * exit code (a violation is a generator bug: it must fail the run unless explicitly accepted).
  */
-export function reportOutputViolations(skillsDir: string, scope?: string[]): OutputViolation[] {
-	const all = [...inProcess, ...auditGeneratedMarkdown(skillsDir, scope)];
+export function reportOutputViolations(skillsDir: string, scope?: string[], validScssComponents?: Set<string>): OutputViolation[] {
+	const all = [...inProcess, ...auditGeneratedMarkdown(skillsDir, scope, validScssComponents)];
 	if (all.length === 0) {
 		console.log('\n🛡️  Garde-fou de sortie : aucune violation.');
 		return all;

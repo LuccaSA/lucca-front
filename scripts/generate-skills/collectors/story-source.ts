@@ -402,6 +402,57 @@ const IMPORT_EXCLUDE_PATTERNS = [
 	/['"]@\/stories\//,          // alias-rooted story assets (e.g. '@/stories/icons-list')
 ];
 
+/** Start of an import statement — excludes `import(` and `import.meta`. */
+const IMPORT_START = /^import[\s{'"*]/;
+
+/**
+ * Collects whole import statements from a source file, one per returned string.
+ *
+ * Line-based collection used to be enough, until prettier wrapped a long specifier list over
+ * several lines: the filter kept the first line and dropped the rest, publishing `import {` as a
+ * complete statement in 13 ```js blocks of the 22.0 skill. Worse, the wrapped import is the long
+ * one — the component's own package — so the reader lost exactly the line they came for.
+ *
+ * A wrapped statement is re-joined onto one line, which is also how the single-line ones already
+ * read; the block stays a flat list of copyable imports.
+ */
+export function collectImportStatements(content: string): string[] {
+	const out: string[] = [];
+	const lines = content.split('\n');
+
+	for (let i = 0; i < lines.length; i++) {
+		if (!IMPORT_START.test(lines[i].trimStart())) continue;
+
+		const parts = [lines[i].trim()];
+		// A statement is complete once it carries its source: `from '…'`, or a bare
+		// `import '…'` side-effect import. Bounded so an unterminated one cannot eat the file.
+		while (!isCompleteImport(parts.join(' ')) && i + 1 < lines.length && parts.length < 40) {
+			i++;
+			parts.push(lines[i].trim());
+		}
+
+		// `{ A,` + `B, }` → `{ A, B }`: join on spaces, then tidy what the wrapping left behind —
+		// the padding inside the braces and prettier's trailing comma, which only exists because
+		// the list was multi-line.
+		out.push(
+			parts
+				.join(' ')
+				.replace(/\s+/g, ' ')
+				.replace(/,\s*\}/g, ' }')
+				.replace(/\{\s*/g, '{ ')
+				.replace(/\s*\}/g, ' }')
+				.trim(),
+		);
+	}
+
+	return out;
+}
+
+/** True once an accumulated import statement carries its module source. */
+function isCompleteImport(statement: string): boolean {
+	return /\bfrom\s*['"][^'"]+['"]/.test(statement) || /^import\s*['"][^'"]+['"]/.test(statement);
+}
+
 interface StoryExtraction {
 	imports: string[];
 	templates: string[];
@@ -416,11 +467,7 @@ interface StoryExtraction {
  */
 function extractStoryEssentials(content: string): StoryExtraction | null {
 	// 1. Imports — filter out storybook-related ones
-	const imports = content
-		.split('\n')
-		.filter((l) => l.trimStart().startsWith('import '))
-		.filter((l) => !IMPORT_EXCLUDE_PATTERNS.some((p) => p.test(l)))
-		.map((l) => l.trim());
+	const imports = collectImportStatements(content).filter((l) => !IMPORT_EXCLUDE_PATTERNS.some((p) => p.test(l)));
 
 	// 2. HTML templates
 	const templates = extractTemplateLiterals(content);
@@ -719,6 +766,74 @@ function getScssComponentNames(tag: string): Set<string> {
 /** Converts kebab-case to camelCase: "button-group" → "buttonGroup" */
 function kebabToCamelCase(str: string): string {
 	return str.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
+}
+
+/**
+ * Resolves the SCSS component folder a component's base `@forward` should point at.
+ *
+ * The folder names under `packages/scss/src/components` are camelCase (`dataTable`,
+ * `emptyState`); `ngPackage` and the skill slug are the kebab-case Angular entrypoint /
+ * folder names. Deriving the path from either verbatim produced 206 `@forward` lines pointing
+ * at directories that do not exist, across 48 files of the 22.0 skill — none of which came
+ * from ZeroHeight, whose own snippets always spell the folder correctly.
+ *
+ * Candidates are tried in order (an explicit `scssComponent` override first, then `ngPackage`,
+ * then the slug), each against the real listing at `tag`: exact, kebab→camel, then
+ * case-insensitive. Returns null when nothing matches — the caller emits no import rather than
+ * a broken one, and `scss-forward-unknown-component` in the output guard makes a broken one
+ * fail the run if it ever comes back by another route.
+ */
+export function resolveScssComponentName(candidates: (string | null | undefined)[], tag: string): string | null {
+	const known = getScssComponentNames(tag);
+	if (known.size === 0) return null;
+
+	const lower = new Map([...known].map((n) => [n.toLowerCase(), n]));
+
+	for (const raw of candidates) {
+		const candidate = raw?.trim();
+		if (!candidate) continue;
+		if (known.has(candidate)) return candidate;
+		const camel = kebabToCamelCase(candidate);
+		if (known.has(camel)) return camel;
+		const ci = lower.get(camel.toLowerCase());
+		if (ci) return ci;
+	}
+	return null;
+}
+
+/** A `@forward`/`@use` of an `@lucca-front/scss` component folder, with the folder captured. */
+const LF_SCSS_COMPONENT_IMPORT = /^\s*@(?:forward|use)\s+['"]@lucca-front\/scss\/src\/components\/([A-Za-z0-9_-]+)['"]/;
+
+/**
+ * Drops Sass import lines pointing at an `@lucca-front/scss` component folder that does not exist
+ * at `tag`, and returns what was dropped so the caller can warn.
+ *
+ * Applies whatever the origin: most of these were built by the generator from a kebab-case
+ * `ngPackage`, but ZeroHeight curates a few by hand and gets one wrong too (`components/forms`
+ * on the textarea page — there is no `forms` folder at any tag). An import that resolves to
+ * nothing is wrong in the published skill either way, and shipping it teaches the reader a path
+ * that will not compile.
+ *
+ * Only `@lucca-front/scss` component paths are examined; every other `@forward` / `@use` line —
+ * tokens, mixins, utilities, third-party — passes through untouched.
+ */
+export function sanitizeScssForwards(lines: string[], tag: string): { kept: string[]; dropped: string[] } {
+	const known = getScssComponentNames(tag);
+	if (known.size === 0) return { kept: lines, dropped: [] };
+
+	const kept: string[] = [];
+	const dropped: string[] = [];
+	for (const line of lines) {
+		const m = LF_SCSS_COMPONENT_IMPORT.exec(line);
+		if (m && !known.has(m[1])) dropped.push(line);
+		else kept.push(line);
+	}
+	return { kept, dropped };
+}
+
+/** The SCSS component folder names that exist at a tag — used by the output guard. */
+export function listScssComponentNames(tag: string): Set<string> {
+	return getScssComponentNames(tag);
 }
 
 /** Class prefixes that are modifiers/utilities, not component names. */

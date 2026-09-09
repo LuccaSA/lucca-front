@@ -271,3 +271,47 @@ export function listStableTags(major: number): string[] {
 	return tags;
 }
 
+
+/** Majors that have at least one stable, published tag — descending. Cached, one git call. */
+let stableMajorsCache: number[] | null = null;
+
+function listStableMajors(): number[] {
+	if (stableMajorsCache) return stableMajorsCache;
+
+	let majors: number[] = [];
+	try {
+		const out = execSync(`git tag -l 'v*'`, { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
+		majors = [
+			...new Set(
+				out
+					.split('\n')
+					.map((t) => t.trim())
+					.filter((t) => /^v\d+\.\d+\.\d+$/.test(t))
+					.filter((t) => !UNPUBLISHED_TAGS.has(t))
+					.map((t) => parseVersion(t)!.major),
+			),
+		].sort((a, b) => b - a);
+	} catch {
+		majors = [];
+	}
+	stableMajorsCache = majors;
+	return majors;
+}
+
+/**
+ * Last stable tag of the newest major **strictly below** `major` (e.g. 22 → `v21.3.1`), or null
+ * when none exists (the first documented major).
+ *
+ * The per-component changelog needs it as a baseline: without it, the tag-walk starts with an
+ * empty API and the first tag of the major reads as "Composant introduit" for every component
+ * that in fact predates it. Harmless while a major held 18 tags and the false line was buried
+ * under real history; blatant on `v22.0.0`, where it was the only line on 119 of 128 pages.
+ *
+ * Reads the majors that actually have tags rather than stepping down one by one, so a gap in the
+ * numbering costs nothing and cannot silently drop the baseline.
+ */
+export function previousMajorLastStableTag(major: number): string | null {
+	const previous = listStableMajors().find((m) => m < major);
+	if (previous === undefined) return null;
+	return listStableTags(previous).at(-1) ?? null;
+}

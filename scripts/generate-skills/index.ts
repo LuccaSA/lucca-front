@@ -36,8 +36,8 @@ import {
 	prefetchFigmaNodes,
 	setAcceptShrink as setFigmaAcceptShrink,
 } from './collectors/figma-connect';
-import { fetchStorybookIndex } from './collectors/storybook';
-import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates } from './collectors/story-source';
+import { fetchStorybookIndex, restrictToStoryFamily } from './collectors/storybook';
+import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates, resolveScssComponentName, listScssComponentNames, sanitizeScssForwards } from './collectors/story-source';
 import { buildInputDefaults } from './collectors/story-eval';
 import { fetchZeroHeightPageGuarded, setAcceptShrink as setZhAcceptShrink } from './collectors/zeroheight-fetch';
 import {
@@ -537,7 +537,11 @@ async function main(): Promise<void> {
 		// aggregate is deliberately out of scope — it is a copy, so every violation it holds is already
 		// reported against the minor folder it came from.
 		const scope = flags.versions.map((v) => versionFolder(resolutions.get(v)!.version));
-		const violations = reportOutputViolations(config.output.skillsDir, scope);
+		// Rule 4 needs the SCSS folders that actually exist at the tag being generated. Only one
+		// listing is threaded through — the last target's — and the rule is scoped to `scope`
+		// anyway, so an older folder is never judged against a newer listing.
+		const lastTarget = resolutions.get(flags.versions[flags.versions.length - 1])!.version;
+		const violations = reportOutputViolations(config.output.skillsDir, scope, listScssComponentNames(lastTarget.tag));
 		if (violations.length > 0 && !flags.acceptOutputViolations) {
 			console.error('\n❌ Génération refusée : corrige le générateur (jamais les .md), ou relance avec --accept-output-violations si tu assumes ces écarts.');
 			process.exitCode = 1;
@@ -744,7 +748,7 @@ async function processVersion(
 			}
 
 			// 3. Storybook match
-			const sbGroup = storybookMap.get(entry.storybookSlug) ?? null;
+			const sbGroup = restrictToStoryFamily(storybookMap.get(entry.storybookSlug) ?? null, entry.storybookFamily, slug);
 
 			// 4. Story source code + input descriptions.
 			// Component input defaults feed the story renderer's generateInputs, so default-valued
@@ -815,6 +819,20 @@ async function processVersion(
 					const extraScss = inferScssImports(ex.templates, entry.ngPackage, version.tag);
 					if (extraScss.length > 0) {
 						ex.zhScssImports = extraScss;
+					}
+				}
+			}
+
+			// 4d ter. Drop Sass imports naming a component folder that does not exist at this tag —
+			// whoever built them. Most came from the generator itself (kebab-case `ngPackage`), a
+			// few are ZeroHeight's own (`components/forms`); both ship a path that will not compile.
+			if (storyExamples) {
+				for (const ex of storyExamples) {
+					if (!ex.zhScssImports?.length) continue;
+					const { kept, dropped } = sanitizeScssForwards(ex.zhScssImports, version.tag);
+					if (dropped.length > 0) {
+						console.warn(`   ⚠️  ${slug} → ${ex.fileSlug} : ${dropped.length} import Sass vers un dossier inexistant, retiré(s) — ${dropped.join(', ')}`);
+						ex.zhScssImports = kept;
 					}
 				}
 			}
@@ -899,9 +917,17 @@ async function processVersion(
 				}
 			}
 
-			const scssImport = entry.ngPackage
-				? `@forward '@lucca-front/scss/src/components/${entry.ngPackage}';`
-				: '';
+			// `ngPackage` is the kebab-case Angular entrypoint; the SCSS folders are camelCase.
+			// Interpolating it verbatim emitted paths that do not exist — resolve it instead, and
+			// emit nothing when it cannot be resolved (see resolveScssComponentName).
+			const scssComponent = resolveScssComponentName([entry.scssComponent, entry.ngPackage, slug], version.tag);
+			// Only worth saying when the page actually has an HTML/CSS story to carry the import:
+			// most Angular-only components (the selects, `api`, `scroll`…) have no SCSS counterpart
+			// at all, and warning on those buries the one case that matters.
+			if (!scssComponent && entry.scssComponent !== '' && storyExamples?.some((ex) => ex.framework === 'html-css')) {
+				console.warn(`   ⚠️  ${slug} : section HTML/CSS sans dossier SCSS résolu (ngPackage=${entry.ngPackage ?? '∅'}) — @forward omis`);
+			}
+			const scssImport = scssComponent ? `@forward '@lucca-front/scss/src/components/${scssComponent}';` : '';
 
 			// Component page — ZH code-section notes + every story inline. Rendered before <slug>.md
 			// because the link to it there must follow whether the page actually exists, not whether

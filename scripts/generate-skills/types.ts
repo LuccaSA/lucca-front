@@ -49,6 +49,9 @@ export interface ComponentEntry {
 	storybookSlug?: string;
 	/** Full Storybook title path, e.g. "Documentation/Actions/Button/Angular". */
 	storybookPath?: string;
+	/** Declared story family — set only to break a grouping collision between two different components.
+	 * See `restrictToStoryFamily`. */
+	storybookFamily?: string;
 	/** ZeroHeight page path segment, e.g. "098404-button". Stable across releases. */
 	zeroheightPagePath?: string;
 	/** Angular package name (from @lucca-front/ng/<package>), e.g. "button". Omit for CSS-only components.
@@ -57,6 +60,11 @@ export interface ComponentEntry {
 	/** Restrict the extracted API to components/directives whose selector is in this list. Use to scope a
 	 * single component out of a multi-component package (e.g. "lu-text-input" from the "forms" package). */
 	ngSelectors?: string[];
+	/** SCSS component folder under `packages/scss/src/components`, e.g. "checkboxField". Only needed when
+	 * neither `ngPackage` nor the slug resolves to it (the Angular entrypoint and the SCSS folder often
+	 * differ: `date2` → `dateField`, `input` → `textField`). Set to "" for a component with no SCSS
+	 * counterpart, to silence the resolution warning. */
+	scssComponent?: string;
 	/** Primary Figma component name, e.g. "pr-Button". */
 	figmaName?: string;
 	/** All Figma names that map to this slug (many-to-one). */

@@ -305,7 +305,7 @@ function extractFromFile(content: string, ngPackage: string, filePath: string, t
 	const typeContext = buildTypeContext(content, filePath, tag);
 
 	// Find all @Component or @Directive decorated classes
-	const classRe = /@(Component|Directive)\s*\(\s*\{([\s\S]*?)\}\s*\)\s*(?:export\s+)?class\s+(\w+)/g;
+	const classRe = /@(Component|Directive)\s*\(\s*\{([\s\S]*?)\}\s*\)\s*(?:export\s+)?(?:abstract\s+)?class\s+(\w+)([^{]*)/g;
 	let classMatch: RegExpExecArray | null;
 
 	while ((classMatch = classRe.exec(content)) !== null) {
@@ -323,16 +323,18 @@ function extractFromFile(content: string, ngPackage: string, filePath: string, t
 		const standalone = !decoratorBody.includes('standalone: false');
 		const exportAs = extractExportAs(decoratorBody);
 
-		// Extract inputs, outputs, models
-		const inputs = [
-			...extractSignalInputs(classBody, typeContext),
-			...extractDecoratorInputs(classBody),
-		];
-		const outputs = [
-			...extractSignalOutputs(classBody),
-			...extractDecoratorOutputs(classBody),
-		];
-		const models = extractModels(classBody);
+		// Extract inputs, outputs, models — the class's own, then whatever it inherits.
+		// A base class's `input()` / `output()` / `model()` are part of the published template
+		// contract exactly like a declared one, and `lu-date-input` alone took 13 inputs, a model
+		// and 2 outputs from `AbstractDateComponent` that no page listed.
+		const own = {
+			inputs: [...extractSignalInputs(classBody, typeContext), ...extractDecoratorInputs(classBody)],
+			outputs: [...extractSignalOutputs(classBody), ...extractDecoratorOutputs(classBody)],
+			models: extractModels(classBody),
+		};
+		const baseName = /\bextends\s+([A-Za-z_$][\w$]*)/.exec(classMatch[4] ?? '')?.[1] ?? null;
+		const inherited = baseName ? collectInheritedMembers(baseName, content, filePath, tag, new Set()) : EMPTY_MEMBERS;
+		const { inputs, outputs, models } = mergeInheritedMembers(inherited, own);
 
 		if (selectors.length === 0) continue;
 
@@ -352,6 +354,137 @@ function extractFromFile(content: string, ngPackage: string, filePath: string, t
 	}
 
 	return apis;
+}
+
+interface ClassMembers {
+	inputs: ExtractedInput[];
+	outputs: ExtractedOutput[];
+	models: ExtractedModel[];
+}
+
+const EMPTY_MEMBERS: ClassMembers = { inputs: [], outputs: [], models: [] };
+
+/** Heritage chains are shallow in practice; the cap only stops a pathological or cyclic one. */
+const MAX_HERITAGE_DEPTH = 5;
+
+/**
+ * Merges what a class inherits with what it declares — the derived member wins on a name clash,
+ * since that is what an override does. Inherited members are listed first so a component's own
+ * API keeps reading as a block.
+ */
+function mergeInheritedMembers(inherited: ClassMembers, own: ClassMembers): ClassMembers {
+	const pick = <T extends { bindingName: string }>(base: T[], derived: T[]): T[] => {
+		const overridden = new Set(derived.map((m) => m.bindingName));
+		return [...base.filter((m) => !overridden.has(m.bindingName)), ...derived];
+	};
+	return {
+		inputs: pick(inherited.inputs, own.inputs),
+		outputs: pick(inherited.outputs, own.outputs),
+		models: pick(inherited.models, own.models),
+	};
+}
+
+/**
+ * Walks up an `extends` chain and collects the template-facing members it contributes.
+ *
+ * The extractor read a decorated class's own body and stopped there, so every member declared on
+ * a base class was missing from the published API table — silently, since nothing distinguishes
+ * "this component has five inputs" from "this component has five of its eighteen inputs". It hit
+ * the date family (`AbstractDateComponent`), the data-table and index-table cells (`editable`,
+ * `align`) and the three file-upload components (`BaseFileUploadComponent`).
+ *
+ * `seen` breaks cycles; the chain is followed across files through the base class's import.
+ */
+function collectInheritedMembers(baseName: string, content: string, filePath: string, tag: string, seen: Set<string>, depth = 0): ClassMembers {
+	if (depth >= MAX_HERITAGE_DEPTH) return EMPTY_MEMBERS;
+
+	const located = locateClass(baseName, content, filePath, tag);
+	if (!located) return EMPTY_MEMBERS;
+
+	const key = `${located.filePath}#${baseName}`;
+	if (seen.has(key)) return EMPTY_MEMBERS;
+	seen.add(key);
+
+	const typeContext = buildTypeContext(located.content, located.filePath, tag);
+	const own: ClassMembers = {
+		inputs: [...extractSignalInputs(located.body, typeContext), ...extractDecoratorInputs(located.body)],
+		outputs: [...extractSignalOutputs(located.body), ...extractDecoratorOutputs(located.body)],
+		models: extractModels(located.body),
+	};
+
+	const parent = located.baseName ? collectInheritedMembers(located.baseName, located.content, located.filePath, tag, seen, depth + 1) : EMPTY_MEMBERS;
+	return mergeInheritedMembers(parent, own);
+}
+
+interface LocatedClass {
+	filePath: string;
+	content: string;
+	body: string;
+	baseName: string | null;
+}
+
+/** Finds a class declaration in `content`, wherever it sits in the file. */
+function findClassIn(name: string, content: string, filePath: string): LocatedClass | null {
+	const re = new RegExp(`(?:export\\s+)?(?:abstract\\s+)?class\\s+${name}\\b([^{]*)`, 'g');
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(content)) !== null) {
+		const body = extractClassBody(content, m.index + m[0].length);
+		if (body === null) continue;
+		return {
+			filePath,
+			content,
+			body,
+			baseName: /\bextends\s+([A-Za-z_$][\w$]*)/.exec(m[1] ?? '')?.[1] ?? null,
+		};
+	}
+	return null;
+}
+
+/** Maps a module specifier used inside `packages/` onto candidate repo paths at `tag`. */
+function moduleCandidates(spec: string, fromFile: string): string[] {
+	if (spec.startsWith('.')) return [path.posix.normalize(`${path.dirname(fromFile)}/${spec}`)];
+	const ng = /^@lucca-front\/ng\/(.+)$/.exec(spec);
+	if (ng) return [`packages/ng/${ng[1]}`];
+	const prisme = /^@lucca\/prisme\/(.+)$/.exec(spec);
+	if (prisme) return [`packages/prisme/${prisme[1]}`];
+	return [];
+}
+
+/**
+ * Locates a class by name: in the current file first, then through the import that brings it in,
+ * following one level of barrel re-exports (an entrypoint's `public-api.ts` rarely holds the
+ * implementation).
+ */
+function locateClass(name: string, content: string, filePath: string, tag: string): LocatedClass | null {
+	const here = findClassIn(name, content, filePath);
+	if (here) return here;
+
+	// The import that brings `name` in — named, default, or aliased (`X as name`).
+	const importRe = /import\s+(?:type\s+)?([^;]*?)\s+from\s+['"]([^'"]+)['"]/g;
+	let m: RegExpExecArray | null;
+	while ((m = importRe.exec(content)) !== null) {
+		const clause = m[1];
+		const brings = new RegExp(`(?:^|[{,\\s])(?:[A-Za-z_$][\\w$]*\\s+as\\s+)?${name}(?:$|[},\\s])`).test(clause);
+		if (!brings) continue;
+
+		for (const base of moduleCandidates(m[2], filePath)) {
+			const mod = gitResolveModule(tag, base);
+			if (!mod) continue;
+
+			const direct = findClassIn(name, mod.content, mod.path);
+			if (direct) return direct;
+
+			// Barrel: follow its relative re-exports one level down.
+			for (const target of collectReExportTargets(mod.content)) {
+				const deep = gitResolveModule(tag, path.posix.normalize(`${path.dirname(mod.path)}/${target}`));
+				if (!deep) continue;
+				const found = findClassIn(name, deep.content, deep.path);
+				if (found) return found;
+			}
+		}
+	}
+
+	return null;
 }
 
 /**

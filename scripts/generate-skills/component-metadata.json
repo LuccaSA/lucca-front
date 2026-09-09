@@ -3,7 +3,8 @@
 		"zeroheightPagePath": "3541ee"
 	},
 	"animations": {
-		"zeroheightPagePath": "85c178"
+		"zeroheightPagePath": "85c178",
+		"scssComponent": ""
 	},
 	"api-select": {
 		"ngPackageOverride": "api",
@@ -145,7 +146,9 @@
 		"ngPackageOverride": "forms",
 		"ngSelectors": [
 			"lu-checkbox-input"
-		]
+		],
+		"scssComponent": "checkboxField",
+		"storybookFamily": "Documentation/Forms/Checkbox"
 	},
 	"chip": {
 		"zeroheightPagePath": "3960bc",
@@ -239,7 +242,8 @@
 		"ngPackageOverride": "form-field",
 		"ngSelectors": [
 			"lu-data-presentation"
-		]
+		],
+		"scssComponent": ""
 	},
 	"data-table": {
 		"zeroheightPagePath": "4263a5",
@@ -257,7 +261,8 @@
 		"ngPackageOverride": "date2",
 		"ngSelectors": [
 			"lu-date-input"
-		]
+		],
+		"scssComponent": ""
 	},
 	"daterangeinput": {
 		"zeroheightPagePath": "00bf9b",
@@ -268,7 +273,8 @@
 		"ngPackageOverride": "date2",
 		"ngSelectors": [
 			"lu-date-range-input"
-		]
+		],
+		"scssComponent": ""
 	},
 	"department-select": {
 		"ngPackageOverride": "department",
@@ -299,7 +305,8 @@
 		]
 	},
 	"display-name": {
-		"zeroheightPagePath": "05750c"
+		"zeroheightPagePath": "05750c",
+		"scssComponent": ""
 	},
 	"divider": {
 		"zeroheightPagePath": "22632c",
@@ -324,7 +331,8 @@
 		"ngPackageOverride": "time",
 		"ngSelectors": [
 			"lu-duration-picker"
-		]
+		],
+		"scssComponent": ""
 	},
 	"empty-state": {
 		"zeroheightPagePath": "49b0ef",
@@ -418,7 +426,8 @@
 		"figmaNodeIds": [
 			"26824:178929"
 		],
-		"figmaName": "pr-FilterPill (v19.2)"
+		"figmaName": "pr-FilterPill (v19.2)",
+		"scssComponent": ""
 	},
 	"footer": {
 		"zeroheightPagePath": "419504",
@@ -443,7 +452,8 @@
 			"[luInput]",
 			"[luPresentationDisplay]",
 			"[luPresentationDisplayDefault]"
-		]
+		],
+		"scssComponent": ""
 	},
 	"form-header": {
 		"ngSelectors": [
@@ -454,7 +464,8 @@
 		"zeroheightPagePath": "3491a2"
 	},
 	"form-layout": {
-		"zeroheightPagePath": "36780d"
+		"zeroheightPagePath": "36780d",
+		"scssComponent": ""
 	},
 	"gauge": {
 		"zeroheightPagePath": "75e507",
@@ -492,7 +503,8 @@
 			"34358:9707"
 		],
 		"figmaName": "pr-Icon",
-		"ngPackageOverride": "icon"
+		"ngPackageOverride": "icon",
+		"scssComponent": ""
 	},
 	"index-table": {
 		"zeroheightPagePath": "24fc14",
@@ -527,7 +539,8 @@
 		"figmaName": "pr-Link"
 	},
 	"listbox": {
-		"zeroheightPagePath": "005487"
+		"zeroheightPagePath": "005487",
+		"scssComponent": "listboxOption"
 	},
 	"listing": {
 		"zeroheightPagePath": "170797",
@@ -561,7 +574,8 @@
 		"figmaName": "pr-MobileNavigation"
 	},
 	"modal": {
-		"zeroheightPagePath": "4068ed"
+		"zeroheightPagePath": "4068ed",
+		"scssComponent": ""
 	},
 	"multi-select": {
 		"zeroheightPagePath": "927519",
@@ -579,7 +593,8 @@
 		"ngPackageOverride": "forms",
 		"ngSelectors": [
 			"lu-multilanguage-input"
-		]
+		],
+		"scssComponent": ""
 	},
 	"newbadge": {
 		"zeroheightPagePath": "36bcdf",
@@ -637,7 +652,8 @@
 			"18201:22261"
 		],
 		"figmaName": "pr-PhoneNumberField",
-		"ngPackageOverride": "forms/phone-number-input"
+		"ngPackageOverride": "forms/phone-number-input",
+		"scssComponent": ""
 	},
 	"plg-push": {
 		"zeroheightPagePath": "6035eb",
@@ -658,7 +674,8 @@
 		"figmaNodeIds": [
 			"16861:21023"
 		],
-		"figmaName": "pr-ProgressBar"
+		"figmaName": "pr-ProgressBar",
+		"scssComponent": "progress"
 	},
 	"progress-stepper": {
 		"zeroheightPagePath": "8211e2"
@@ -705,7 +722,8 @@
 			"6946:36398"
 		],
 		"figmaName": "pr-RichTextfield (v19.3)",
-		"ngPackageOverride": "forms/rich-text-input"
+		"ngPackageOverride": "forms/rich-text-input",
+		"scssComponent": ""
 	},
 	"scroll": {
 		"ngSelectors": [
@@ -742,6 +760,9 @@
 		],
 		"figmaName": "pr-SegmentedControl"
 	},
+	"select": {
+		"scssComponent": ""
+	},
 	"select-templating": {
 		"ngPackageOverride": "core-select",
 		"ngSelectors": [
@@ -754,7 +775,8 @@
 		]
 	},
 	"side-navigation": {
-		"zeroheightPagePath": "160093"
+		"zeroheightPagePath": "160093",
+		"scssComponent": ""
 	},
 	"simple-select": {
 		"zeroheightPagePath": "587833",
@@ -847,7 +869,8 @@
 		"ngPackageOverride": "forms",
 		"ngSelectors": [
 			"lu-textarea-input"
-		]
+		],
+		"scssComponent": ""
 	},
 	"textfield": {
 		"zeroheightPagePath": "459eda",
@@ -869,7 +892,11 @@
 		"ngPackageOverride": "user",
 		"ngSelectors": [
 			"lu-user-tile"
-		]
+		],
+		"scssComponent": "userTile"
+	},
+	"time": {
+		"scssComponent": "timepicker"
 	},
 	"time-picker": {
 		"zeroheightPagePath": "2473a1",
@@ -892,7 +919,8 @@
 		"figmaAliases": [
 			"pr-TimelineHorizontal",
 			"pr-TimelineVertical"
-		]
+		],
+		"scssComponent": "timeline"
 	},
 	"title-and-text": {
 		"zeroheightPagePath": "021fef",
