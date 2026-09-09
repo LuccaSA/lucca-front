@@ -79,6 +79,9 @@ npx ts-node ... --validate
 | `--validate` | Vérifier la couverture ZH de `component-map.json` (aucune génération) |
 | `--retry-failed` | Rejouer uniquement les unités (composants, pages doc/outils, deprecated) dont le fetch a échoué au run précédent (manifeste `_fetch-failures.json`) |
 | `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH/Figma) |
+| `--accept-output-violations` | Ne pas faire échouer le run sur les violations du garde-fou de sortie. Cf. garde-fou de sortie. |
+
+Variable d'environnement complémentaire : **`FETCH_TIMEOUT_MS`** — deadline des fetchs, 60 000 ms par défaut. Le bon réglage dépend de ce que le run fait bloquer la boucle d'événements : une génération complète le veut **bas** (une page est différée puis rejouée, plutôt que d'immobiliser un worker), une passe `--retry-failed` le veut **haut** (quelques dizaines d'unités seulement, et son but est de les obtenir, pas de les différer à nouveau). Cf. `collectors/http.ts`.
 | `--zh-latest <minor>` | Affirme que `<minor>` (ex. `21.3`) est la dernière version en ligne → autorisée en « latest » non pinné. Répétable. Cf. garde-fou ZeroHeight. |
 | `--zh-id <minor>=<id>` | Fournit l'ID de release ZeroHeight d'une mineure (ex. `21.3=61234`), validé puis persisté dans `zh-release-ids.json`. Répétable. |
 
@@ -207,8 +210,8 @@ scripts/generate-skills/
 │   ├── component-discovery.ts        # Découverte dynamique (Storybook + packages git + métadonnées)
 │   ├── ast-extractor.ts              # Extraction API Angular depuis git tags
 │   ├── api-diff.ts                   # Diff structurel de deux PackageAPI (→ changelog)
-│   ├── storybook.ts                  # Fetch index.json Storybook + groupement par slug
-│   ├── story-source.ts               # Code source des stories via git show
+│   ├── storybook.ts                  # Fetch index.json Storybook + groupement par slug + classification framework (tiers 1-2)
+│   ├── story-source.ts               # Code source des stories via git show + classification framework (tier 3)
 │   ├── story-eval.ts                 # Évaluation déterministe du render() des stories
 │   ├── zeroheight-fetch.ts           # Fetch .md ZeroHeight (avec fallback HTML)
 │   ├── figma-connect.ts              # Fetch propriétés Figma via REST API (caché)
@@ -223,6 +226,7 @@ scripts/generate-skills/
 │   ├── toc-writer.ts                 # Génération du SKILL.md par mineure
 │   ├── changelog-writer.ts           # Changelog cumulatif par composant (AST diff)
 │   ├── fixes-writer.ts               # fixes/<M-m-p>.md : delta par patch publié (git)
+│   ├── output-guard.ts               # Garde-fou de sortie : invariants sur le markdown émis
 │   ├── version-diff-writer.ts        # changelog/<M.m>.md : diff de review entre mineures
 │   └── aggregate-writer.ts           # lucca-front-all : base par majeure + overrides par mineure
 │
@@ -249,7 +253,7 @@ scripts/generate-skills/
 7. Composants (découverte Storybook + git) — pour chacun :
    a. AST extraction          → PackageAPI (inputs, outputs, models, selectors, types)
    b. ZeroHeight fetch        → design sections + prose changelog
-   c. Storybook + story source/eval → exemples Angular + HTML/CSS
+   c. Storybook + story source/eval → exemples Angular + HTML/CSS (framework résolu, cf. ci-dessous)
    d. Figma REST API          → tokens variantes
    e. Changelog structurel    → AST diff sur tags stables ≤ cible (cumulatif) + prose ZH
    f. Rendu Handlebars + écriture → references/components/<slug>/
@@ -258,6 +262,100 @@ scripts/generate-skills/
 9. _versions.json (manifeste dist : mineure + sous-map patches)
 10. SKILL.md de la mineure (toc-writer) — écrit après les fichiers (scanne les composants du disque)
 ```
+
+## Angular ou HTML/CSS : la classification du framework
+
+Chaque story est rendue soit sous `## Angular`, soit sous `## HTML/CSS` de son `.component.md`. La
+décision se prend en trois paliers, le premier qui tranche gagne :
+
+| Palier | Signal | Où |
+|--------|--------|-----|
+| 1 | Dossier de la story : `angular/` ou `html&css/` | `collectors/storybook.ts` — `classifyFramework()` |
+| 2 | Segment de framework du titre Storybook (`Documentation/Overlays/Dialog/**Angular**`) | idem |
+| 3 | Source de la story : `moduleMetadata(` / `applicationConfig(` / `importProvidersFrom(` / `component:` | `collectors/story-source.ts` — `resolveStoryFrameworks()` |
+
+Le palier 3 existe parce que ni le dossier ni le titre ne sont garantis : à `v21.3.1`, **164 stories
+sur 596** n'ont aucun des deux (`stories/documentation/forms/date2/date-range-input.stories.ts`,
+`overlays/dialog/*.stories.ts`…). Elles étaient toutes déclarées `html-css` par défaut — dont 60
+stories Angular, ce qui les rangeait sous `## HTML/CSS` et concaténait leurs imports TypeScript dans
+le bloc SCSS du composant.
+
+Deux signaux **volontairement écartés**, tous deux mesurés comme faux :
+
+- **La syntaxe de binding Angular dans le markup** (`(click)="…"`, `[attr.style]="…"`) : les stories
+  `html&css/` du repo en utilisent, puisqu'elles sont rendues dans Storybook Angular. 29 stories
+  légitimes mal classées à `v21.3.1`.
+- **Un import depuis `@storybook/angular`** : toutes les stories en ont, `html&css/` incluses.
+
+Le palier 3 ne s'applique jamais à une story que le palier 1 ou 2 a tranchée : `moduleMetadata` est
+aussi utilisé par des stories `html&css/` qui ont besoin de directives Angular pour se rendre.
+
+## Extraction des templates de stories
+
+Le markup d'un exemple est lu dans la source de la story, par `extractTemplateLiterals()`
+(`collectors/story-source.ts`), avec quatre formes reconnues et, en dernier recours, l'évaluation
+de la story :
+
+| Forme | Exemple |
+|-------|---------|
+| Littéral direct | ``template: `<lu-box>…</lu-box>` `` |
+| Littéral emballé dans un helper | ``template: cleanupTemplate(`<lu-box>…</lu-box>`)`` — forme dominante du repo |
+| Chaîne quotée contenant du markup | `return '<span class="tag">Text</span>';` |
+| Fichier `.html` frère | `templateUrl: './dropdown-basic.stories.html'` — lu depuis le même tag git |
+| Template calculé | `template: getTemplate()` → résolu par `story-eval` (`vm`) |
+
+L'évaluation (`renderStoryTemplates`) est tentée **aussi bien quand l'extraction statique a laissé
+des `${…}` que quand elle n'a rien trouvé** : un template calculé n'existe qu'à l'exécution, et ce
+second cas n'atteignait jamais l'évaluateur.
+
+Résultat mesuré, stories sans aucun template extrait :
+
+| Tag | Avant | Après |
+|-----|-------|-------|
+| `v21.3.1` | 53 / 596 | **12** |
+| `v22.0.0` | 55 / 636 | **14** |
+
+Le résidu n'est pas extractible : ce sont des stories `component:` + `args` sans aucun markup dans
+la source (les `skeleton-*`, `inline-message`, `icon-angular`, `new-badge` — Storybook rend le
+composant depuis ses args), plus `highlight-text-palettes` dont le template est calculé depuis une
+constante de package que le sandbox `vm` neutralise.
+
+Ces stories sont désormais **écartées** (`if (templates.length === 0) continue;`) au lieu d'être
+publiées comme un titre au-dessus d'un bloc d'imports sans code. Leur bloc d'imports était de toute
+façon identique au `## Import` de `<slug>.md`, donc rien n'est perdu. **L'ordre compte** : écarter
+ces stories avant de réparer l'extraction aurait supprimé 41 exemples légitimes à `v21.3.1`.
+
+## Garde-fou de sortie (`generators/output-guard.ts`)
+
+Les mécanismes de la section « Fiabilité des fetchs » protègent les **entrées** — ils répondent à
+« la source a-t-elle été récupérée fidèlement ». Aucun ne répond à « le markdown émis est-il
+cohérent ». C'est ce trou qui a laissé passer des imports TypeScript rendus dans des blocs ```css
+sur les cinq variantes de skill : `scripts/**` n'était couvert par aucun projet Vitest, aucun job CI
+n'exécute `skills:generate`, et les skills atterrissent dans des PR de 30 000+ fichiers marqués
+`linguist-generated` — donc invisibles en revue.
+
+Le garde-fou vérifie des **invariants**, pas des heuristiques : une violation est toujours un bug du
+générateur. Il tourne en fin de run, après écriture (pour que la sortie fautive soit lisible), et
+fait échouer le run (`process.exitCode = 1`) sauf `--accept-output-violations`.
+
+| Règle | Ce qu'elle interdit | Quand |
+|-------|--------------------|-------|
+| `html-css-story-with-ts-imports` | Des imports ou extraits TypeScript curés sur ZeroHeight pour une story classée `html-css` — c'est la classification du framework qui est fausse | En cours de génération, par composant |
+| `ts-import-in-css-fence` | Une ligne `import … from` dans un bloc ```css / ```scss | Relecture du markdown écrit |
+| `sass-in-ts-fence` | Un `@forward` / `@use` dans un bloc ```js / ```ts (la régression miroir) | idem |
+
+La règle 2 est volontairement étroite : les blocs ```css contiennent aussi du CSS et du Sass
+légitimes venus des pages de documentation ZH (tokens, mixins, utilitaires). Exiger `@forward`/`@use`
+y déclencherait 211 faux positifs — seul un `import … from` n'est jamais du CSS.
+
+`changelog/` est exclu de la relecture : ces fichiers citent du markdown généré dans des blocs
+````diff, donc toute violation y est l'écho d'une autre déjà signalée à sa source.
+
+**Périmètre** : seules les mineures que le run a (re)générées sont bloquantes. Les violations restées
+dans les autres dossiers sont signalées comme « hors périmètre » — un run ciblé `--version 21.3` ne
+doit pas échouer sur du contenu qu'il n'a pas produit. `lucca-front-all/` est volontairement hors
+périmètre : c'est une copie, donc chaque violation qu'il porte est déjà signalée sur la mineure dont
+elle vient.
 
 ## Changelog structurel
 
