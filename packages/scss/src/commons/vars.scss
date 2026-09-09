@@ -11,7 +11,11 @@
 	// TOKENS : TYPO
 
 	--pr-t-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-	--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', Tahoma, sans-serif;
+	--pr-t-font-family-brand: var(--pr-t-font-family);
+
+	&:lang(fr, en, de, nl, it, pt, es) {
+		--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', Tahoma, sans-serif;
+	}
 
 	@if (config.$fontFamilyCursive) {
 		--pr-t-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
