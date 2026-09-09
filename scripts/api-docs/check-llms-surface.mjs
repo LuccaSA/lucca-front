@@ -20,10 +20,39 @@ const llmsFull = resolve(root, OUT_LLMS);
 const llmsIndex = resolve(root, OUT_INDEX);
 const llmsDir = resolve(root, OUT_DIR);
 
-/** The extraction is far above these today; the floors only catch a collapse. */
+/** The extraction is far above these today; the floors only catch a mass collapse. */
 const MIN_ENTRIES = 500;
-const MIN_ENTRYPOINT_FILES = 80; // ~110 ng + prisme entry points today
+const MIN_ENTRYPOINT_FILES = 80; // ~120 ng + prisme entry points today
 const MIN_STORY_FILES = 10; // 16 story categories today
+
+/**
+ * Feeds named by hand, never derived. The index and the `llms/` folder both come out
+ * of the same extraction, so a lost entry point disappears from both and the
+ * feed-count floors — 80 of ~120 — let it through silently. These anchors pin the
+ * SHAPE of the surface: one per package, per nesting depth and per story-category
+ * arm, so losing any single family fails the gate by name. Add an anchor when a new
+ * family becomes load-bearing; never trim the list to make the gate pass.
+ */
+const EXPECTED_FEEDS = [
+	'ng-core.md',
+	'ng-button.md',
+	'ng-forms.md',
+	'ng-forms-rich-text-input.md',
+	'ng-select.md',
+	'ng-core-select.md',
+	'ng-date2.md',
+	'ng-pagination.md',
+	'ng-icon.md',
+	'ng-dialog.md',
+	'prisme-core.md',
+	'prisme-button.md',
+	'prisme-icon.md',
+	'stories-forms.md',
+	'stories-navigation.md',
+	'stories-overlays.md',
+	'stories-listings.md',
+	'stories-structure.md',
+];
 
 const PROBES = [
 	{ family: 'header', needle: '# lucca-front — LLM API reference' },
@@ -68,6 +97,11 @@ try {
 const entryPointFeeds = feeds.filter((f) => !f.startsWith('stories-'));
 const storyFeeds = feeds.filter((f) => f.startsWith('stories-'));
 const unlinked = feeds.filter((f) => !index.includes(`/llms/${f})`));
+const absentAnchors = EXPECTED_FEEDS.filter((f) => !feeds.includes(f));
+console.log(
+	`[llms-smoke] ${absentAnchors.length === 0 ? 'ok' : 'MISSING'}: ${EXPECTED_FEEDS.length - absentAnchors.length}/${EXPECTED_FEEDS.length} named feed anchors present`,
+);
+if (absentAnchors.length) failures.push(`named feed anchor(s) gone: ${absentAnchors.join(', ')}`);
 console.log(
 	`[llms-smoke] ${entryPointFeeds.length >= MIN_ENTRYPOINT_FILES ? 'ok' : 'LOW'}: ${entryPointFeeds.length} entry-point feeds (floor ${MIN_ENTRYPOINT_FILES})`,
 );

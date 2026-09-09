@@ -6,6 +6,7 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+	attachImportPaths,
 	cleanCell,
 	collectDeprecations,
 	coverageReport,
@@ -166,6 +167,26 @@ describe('deprecations', () => {
 		expect(collectDeprecations(doc, new Set(['OldComponent']))).toEqual([
 			{ symbol: 'OldComponent', type: 'component', public: true, message: 'use `NewComponent` instead', replacement: 'NewComponent' },
 			{ symbol: 'OldComponent.legacy', type: 'input', public: true, message: 'gone', replacement: null },
+		]);
+	});
+
+	test('attachImportPaths resolves every entry point exporting the owning symbol', () => {
+		const deprecations = collectDeprecations(doc, new Set(['OldComponent']));
+		const entryPoints = [
+			{ importPath: '@lucca-front/ng/legacy', names: new Set(['OldComponent']) },
+			{ importPath: '@lucca/prisme/legacy', names: new Set(['OldComponent']) },
+			{ importPath: '@lucca-front/ng/other', names: new Set(['Unrelated']) },
+		];
+		expect(attachImportPaths(deprecations, entryPoints).map((d) => [d.symbol, d.importPaths])).toEqual([
+			['OldComponent', ['@lucca-front/ng/legacy', '@lucca/prisme/legacy']],
+			['OldComponent.legacy', ['@lucca-front/ng/legacy', '@lucca/prisme/legacy']],
+		]);
+	});
+
+	test('attachImportPaths leaves an unresolved symbol with an empty list, never guessing', () => {
+		const deprecations = [{ symbol: 'Ghost', type: 'class', public: false, message: 'x', replacement: null }];
+		expect(attachImportPaths(deprecations, [{ importPath: '@lucca-front/ng/a', names: new Set(['Other']) }])).toEqual([
+			{ symbol: 'Ghost', type: 'class', public: false, message: 'x', replacement: null, importPaths: [] },
 		]);
 	});
 });

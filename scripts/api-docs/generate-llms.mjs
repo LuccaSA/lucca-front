@@ -644,6 +644,32 @@ export function renderLlmsIndex({ baseUrl, entryPoints, storyCategories }) {
 }
 
 /**
+ * Resolve, for each deprecation, the entry points whose barrel exports the owning
+ * symbol. A member reads as `Owner.member`, so the owner is the discriminant.
+ *
+ * The import path — not the bare name — is what identifies a deprecation: the same
+ * name can sit under several entry points (`ButtonComponent` and `LuTooltipModule`
+ * surface through both the ng and prisme button/tooltip barrels), so a consumer
+ * keyed on the name alone cannot say which import to flag. An unresolved symbol
+ * keeps an empty list rather than a guessed path.
+ *
+ * @param {ReturnType<typeof collectDeprecations>} deprecations
+ * @param {Array<{ importPath: string, names: Set<string> }>} entryPoints
+ */
+export function attachImportPaths(deprecations, entryPoints) {
+	return deprecations.map((dep) => {
+		const owner = dep.symbol.split('.')[0];
+		return {
+			...dep,
+			importPaths: entryPoints
+				.filter((entry) => entry.names.has(owner))
+				.map((entry) => entry.importPath)
+				.sort((a, b) => a.localeCompare(b)),
+		};
+	});
+}
+
+/**
  * Render the deprecations.json manifest. Deterministic (sorted, no volatile data).
  * @param {ReturnType<typeof collectDeprecations>} deprecations
  * @returns {string}
@@ -691,7 +717,7 @@ export function storyCategoriesOf(storyFiles) {
 export function generateAll({ root = workspaceRoot } = {}) {
 	const { doc, names, entryPoints } = extractSurface(root);
 	const api = selectPublicApi(doc, names);
-	const deprecations = collectDeprecations(doc, names);
+	const deprecations = attachImportPaths(collectDeprecations(doc, names), entryPoints);
 
 	const outDir = resolve(root, OUT_DIR);
 	mkdirSync(outDir, { recursive: true });
