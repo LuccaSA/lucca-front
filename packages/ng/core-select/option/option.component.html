@@ -1,11 +1,29 @@
-<div class="optionItem-value" [class.is-disabled]="selectableItem.disabled" (click)="selectOption($event)">
-	<ng-container *luOptionOutlet="optionTpl; value: selectableItem.option()" />
+<lu-listbox-option
+	[checked]="selectableItem.isSelected()"
+	[hovered]="selectableItem.isHighlighted()"
+	[disabled]="selectableItem.disabled"
+	(click)="selectOption($event)"
+	[elementId]="selectableItem.idAttribute()"
+	[treeitemLevel]="treeitemContent() ? level : null"
+>
+	<ng-container [ngTemplateOutlet]="optionContent" />
+	<!-- Re-projected into the option's own wrapper, so the tree rows are stacked by the listbox
+	itself: the level has to be passed along because a content query stops at this ng-content -->
+	<ng-content select="[treeitem]" ngProjectAs="[treeitem]" />
+</lu-listbox-option>
 
-	@if (groupTemplateLocation() === "option" && grouping) {
-		<div class="optionItem-value-group">
-			<ng-container *luPortal="grouping.content; context: { $implicit: selectableItem.option() | luOptionGroup: grouping.selector }" />
-		</div>
-	}
+<ng-template #optionContent>
+	<div>
+		<ng-container *luOptionOutlet="optionTpl(); value: selectableItem.option()" />
+
+		@if (groupTemplateLocation() === "option") {
+			@if (grouping(); as grouping) {
+				<div class="listboxOption-content-group">
+					<ng-container *luPortal="grouping.content; context: { $implicit: selectableItem.option() | luOptionGroup: grouping.selector }" />
+				</div>
+			}
+		}
+	</div>
 
 	@if (hasChildren() && !selectableItem.disabled) {
 		<div class="optionItem-icons">
@@ -45,4 +63,4 @@
 			</span>
 		</div>
 	}
-</div>
+</ng-template>

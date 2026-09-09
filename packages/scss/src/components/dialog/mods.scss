@@ -34,7 +34,7 @@
 	--components-dialog-maxHeight: none;
 	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
 	--components-dialog-height: calc(100% - var(--pr-t-spacings-100) * 2);
-	--components-dialog-maxWidth: calc(100vw - var(--pr-t-spacings-200) - var(--commons-pushPanel-inlineSize));
+	--components-dialog-maxWidth: calc(100vi - var(--pr-t-spacings-200) - var(--commons-pushPanel-inlineSize));
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
 	--components-dialog-inset: var(--pr-t-spacings-100) calc(var(--pr-t-spacings-100) + var(--commons-pushPanel-inlineSize)) var(--pr-t-spacings-100) auto;
 	--components-dialog-translateX: var(--components-dialog-translate);
@@ -46,7 +46,8 @@
 
 @mixin fromBottom {
 	--components-dialog-animationOpening: slideFromBottom;
-	--components-dialog-maxHeight: calc(100dvh - var(--pr-t-spacings-200));
+	--components-dialog-maxHeight: calc(100dvb - var(--pr-t-spacings-200));
+	// stylelint-disable-next-line unit-layout-mappings -- Physical fallback: browsers without `dvb` do not support `vb` either.
 	--components-dialog-maxHeightFallback: calc(100vh - var(--pr-t-spacings-200));
 	--components-dialog-maxWidth: none;
 	--components-dialog-inset: auto calc(var(--pr-t-spacings-100) + var(--commons-pushPanel-inlineSize)) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
@@ -75,7 +76,27 @@
 	--components-dialog-inset: 0;
 }
 
-@mixin neutralBackground {
+@mixin sheet {
+	--components-dialog-width: 100%;
+	--components-dialog-maxWidth: none;
+	--components-dialog-maxHeight: calc(100% - var(--pr-t-spacings-150));
+	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
+	--components-dialog-borderRadius: var(--pr-t-border-radius-structure) var(--pr-t-border-radius-structure) 0 0;
+	--components-dialog-inset: auto 0 0;
+}
+
+@mixin sheetNarrow {
+	--components-dialog-inside-footer-actions-button-icon-menuDots-display: none;
+	--components-dialog-inside-footer-actions-button-icon-mask-all: unset !important;
+
+	.icon-menuDots {
+		+ .pr-u-mask {
+			all: unset !important;
+		}
+	}
+}
+
+@mixin surfaceDefault {
 	--components-dialog-insideContent-background: var(--pr-t-elevation-surface-default);
 }
 
@@ -158,4 +179,8 @@
 	--components-dialog-insideContent-flexGrow: 1;
 	--components-dialog-inside-header-boxShadow: none;
 	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200) 0;
+}
+
+@mixin noContent {
+	--components-dialog-inside-header-boxShadow: none;
 }

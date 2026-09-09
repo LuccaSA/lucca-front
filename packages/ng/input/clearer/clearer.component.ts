@@ -20,7 +20,7 @@ import { LU_CLEARER_TRANSLATIONS } from './clearer.translate';
 	],
 })
 export class LuInputClearerComponent<T> extends ALuClearer<T> implements ILuClearer<T> {
-	intl = input(...intlInputOptions(LU_CLEARER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_CLEARER_TRANSLATIONS));
 
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() override onClear = new EventEmitter<T>();

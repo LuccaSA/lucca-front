@@ -12,6 +12,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		max: {
 			control: {
@@ -20,6 +21,7 @@ export default {
 				max: 12,
 			},
 			description: 'Nombre maximum d’icônes à afficher. Les icônes supplémentaires sont cachées.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

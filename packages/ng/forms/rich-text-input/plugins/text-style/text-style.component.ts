@@ -24,15 +24,15 @@ import { registerFormatSelectionChange } from './text-style.command';
 	],
 })
 export class TextStyleComponent implements OnDestroy, RichTextPluginComponent {
-	public format = input.required<TextFormatType>();
-	public icon = input.required<LuccaIcon>();
-	public tooltip = input.required<string>();
+	public readonly format = input.required<TextFormatType>();
+	public readonly icon = input.required<LuccaIcon>();
+	public readonly tooltip = input.required<string>();
 
-	public tabindex = signal<number>(-1);
-	public active = signal(false);
-	public isDisabled = signal(false);
+	public readonly tabindex = signal<number>(-1);
+	public readonly active = signal(false);
+	public readonly isDisabled = signal(false);
 
-	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
+	public readonly element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 
 	#editor?: LexicalEditor;
 
@@ -48,9 +48,9 @@ export class TextStyleComponent implements OnDestroy, RichTextPluginComponent {
 	}
 
 	dispatchCommand() {
-		this.#editor.dispatchCommand(FORMAT_TEXT_COMMAND, this.format());
+		this.#editor?.dispatchCommand(FORMAT_TEXT_COMMAND, this.format());
 		// force update selection
-		this.#editor.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
+		this.#editor?.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
 	}
 
 	setDisabledState(isDisabled: boolean) {

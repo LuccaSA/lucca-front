@@ -38,7 +38,7 @@ export class LuUserTileComponent {
 	 * User Display format.
 	 * It is set to 'LU_DEFAULT_DISPLAY_POLICY' by default
 	 */
-	readonly displayFormat = input<LuDisplayFormat>();
+	readonly displayFormat = input<LuDisplayFormat>(this.#defaultFormat);
 
 	/**
 	 * LuUserTileUserInput role to display
@@ -50,7 +50,7 @@ export class LuUserTileComponent {
 	 */
 	readonly size = input<UserTileSize>();
 
-	readonly displayPictureFormat = computed(() => (this.displayFormat() ? displayPictureFormatRecord[this.displayFormat()] : displayPictureFormatRecord[this.#defaultFormat]));
+	readonly displayPictureFormat = computed(() => displayPictureFormatRecord[this.displayFormat() ?? this.#defaultFormat]);
 
 	constructor() {
 		effect(() => {

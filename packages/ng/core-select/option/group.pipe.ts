@@ -10,7 +10,7 @@ export function generateGroups<T, TGroup>(options: T[], selector: (option: T) =>
 	}
 
 	const groups: Array<LuOptionGroup<T, TGroup>> = [];
-	let group: LuOptionGroup<T, TGroup>;
+	let group: LuOptionGroup<T, TGroup> | undefined;
 
 	for (const option of options) {
 		const groupKey = selector(option);

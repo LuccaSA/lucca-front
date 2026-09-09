@@ -6,7 +6,7 @@
 		<div class="inputFramed-header-illustration"><ng-content select="[illustration]" /></div>
 		<div class="inputFramed-header-info"><ng-content select="[info]" /></div>
 	</div>
-	@if (framedPortal()) {
-		<div class="inputFramed-content"><ng-container *luPortal="framedPortal()" /></div>
+	@if (framedPortal(); as framedPortal) {
+		<div class="inputFramed-content"><ng-container *luPortal="framedPortal" /></div>
 	}
 </div>

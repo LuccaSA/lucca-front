@@ -18,16 +18,19 @@ export default {
 	argTypes: {
 		multiple: {
 			description: 'Ajoute une checkbox à l’option.',
+			table: { category: 'inputs' },
 		},
 		state: {
 			control: 'select',
 			options: setStoryOptions(LISTBOX_STATE),
 			description: "Modifie l'état de l'option.",
+			table: { category: 'inputs' },
 		},
 		withOption: {
 			type: 'boolean',
 			if: { arg: 'state', truthy: true },
 			description: 'Conserve l’affichage des options déjà chargées.',
+			table: { category: 'inputs' },
 		},
 	},
 	render: (args: OptionBasicStory) => {

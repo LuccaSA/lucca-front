@@ -1,12 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LuClass, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { luBooleanAttribute, LuClass, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective, InputFramedComponent, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { RADIO_GROUP_INSTANCE } from '../radio-group-token';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 let nextId = 0;
 
@@ -30,7 +30,7 @@ export class RadioComponent<T = unknown> {
 
 	readonly value = input.required<T>();
 
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	readonly inlineMessage = input<PortalContent>();
 

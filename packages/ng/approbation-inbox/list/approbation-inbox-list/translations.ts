@@ -1,0 +1,98 @@
+export const Translations = {
+	'nl-BE': {
+		selectAll: 'Alles selecteren',
+		selectedCount: {
+			one: '{{count}} aanvraag geselecteerd',
+			other: '{{count}} aanvragen geselecteerd',
+		},
+		label: 'Goedkeuringsaanvragen',
+		submitLabel: 'Bevestigen',
+		forwardLabel: 'Doorsturen',
+		emptyLabel: 'Geen aanvragen',
+		emptyResetLabel: 'Filters resetten',
+	},
+	nl: {
+		selectAll: 'Alles selecteren',
+		selectedCount: {
+			one: '{{count}} aanvraag geselecteerd',
+			other: '{{count}} aanvragen geselecteerd',
+		},
+		label: 'Goedkeuringsaanvragen',
+		submitLabel: 'Bevestigen',
+		forwardLabel: 'Doorsturen',
+		emptyLabel: 'Geen aanvragen',
+		emptyResetLabel: 'Filters resetten',
+	},
+	it: {
+		selectAll: 'Seleziona tutto',
+		selectedCount: {
+			one: '{{count}} richiesta selezionata',
+			other: '{{count}} richieste selezionate',
+		},
+		label: 'Richieste di approvazione',
+		submitLabel: 'Conferma',
+		forwardLabel: 'Inoltra',
+		emptyLabel: 'Nessuna richiesta',
+		emptyResetLabel: 'Reimposta i filtri',
+	},
+	fr: {
+		selectAll: 'Tout sélectionner',
+		selectedCount: {
+			one: '{{count}} demande sélectionnée',
+			other: '{{count}} demandes sélectionnées',
+		},
+		label: 'Demandes à approuver',
+		submitLabel: 'Valider',
+		forwardLabel: 'Transférer',
+		emptyLabel: 'Aucune demande',
+		emptyResetLabel: 'Réinitialiser les filtres',
+	},
+	pt: {
+		selectAll: 'Selecionar tudo',
+		selectedCount: {
+			one: '{{count}} solicitação selecionada',
+			other: '{{count}} solicitações selecionadas',
+		},
+		label: 'Solicitações de aprovação',
+		submitLabel: 'Confirmar',
+		forwardLabel: 'Encaminhar',
+		emptyLabel: 'Nenhuma solicitação',
+		emptyResetLabel: 'Redefinir filtros',
+	},
+	es: {
+		selectAll: 'Seleccionar todo',
+		selectedCount: {
+			one: '{{count}} solicitud seleccionada',
+			other: '{{count}} solicitudes seleccionadas',
+		},
+		label: 'Solicitudes de aprobación',
+		submitLabel: 'Confirmar',
+		forwardLabel: 'Reenviar',
+		emptyLabel: 'Ninguna solicitud',
+		emptyResetLabel: 'Restablecer filtros',
+	},
+	de: {
+		selectAll: 'Alles auswählen',
+		selectedCount: {
+			one: '{{count}} Antrag ausgewählt',
+			other: '{{count}} Anträge ausgewählt',
+		},
+		label: 'Genehmigungsanträge',
+		submitLabel: 'Bestätigen',
+		forwardLabel: 'Weiterleiten',
+		emptyLabel: 'Keine Anträge',
+		emptyResetLabel: 'Filter zurücksetzen',
+	},
+	en: {
+		selectAll: 'Select all',
+		selectedCount: {
+			one: '{{count}} request selected',
+			other: '{{count}} requests selected',
+		},
+		label: 'Approval requests',
+		submitLabel: 'Approve',
+		forwardLabel: 'Forward',
+		emptyLabel: 'No requests',
+		emptyResetLabel: 'Reset filters',
+	},
+};

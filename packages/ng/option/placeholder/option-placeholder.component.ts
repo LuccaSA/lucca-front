@@ -15,7 +15,7 @@ export class LuOptionPlaceholderComponent {
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onClear = new EventEmitter();
 
-	public intl = input(...intlInputOptions(LU_OPTION_PLACEHOLDER_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_OPTION_PLACEHOLDER_TRANSLATIONS));
 
 	clear() {
 		this.onClear.emit();

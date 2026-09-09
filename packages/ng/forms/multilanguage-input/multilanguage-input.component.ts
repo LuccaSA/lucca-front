@@ -1,7 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, luBooleanAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -44,65 +44,79 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language', languageDisplay: 'dialect' });
 
-	intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
 
-	protected formFieldRef = inject(FORM_FIELD_INSTANCE);
+	readonly formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
-	formFieldSize = this.formFieldRef.size;
+	readonly formFieldSize = this.formFieldRef?.size;
 
 	protected onTouched = () => {};
 
 	protected onChange = (_value: MultilanguageTranslation[]) => {};
 
-	placeholder = input('');
+	readonly placeholder = input('');
 
-	openOnFocus = input(false, { transform: booleanAttribute });
+	readonly openOnFocus = input(false, { transform: luBooleanAttribute });
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
-	hasNoInvariant = input(false, { transform: booleanAttribute });
+	readonly hasNoInvariant = input(false, { transform: luBooleanAttribute });
 
-	hasAIButtons = input(false, { transform: booleanAttribute });
+	readonly hasAIButtons = input(false, { transform: luBooleanAttribute });
 
-	displayLocale = input('');
+	readonly displayLocale = input('');
 
-	translateWithAI = output<string>();
+	readonly translateWithAI = output<string>();
 
-	shouldOpenOnFocus = computed(() => this.openOnFocus() || this.hasNoInvariant());
+	readonly shouldOpenOnFocus = computed(() => this.openOnFocus() || this.hasNoInvariant());
 
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
-	disabledInternal = signal(false);
+	readonly disabledInternal = signal(false);
 
-	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
+	readonly model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
-	displayRow = computed(() => {
-		if (this.hasNoInvariant()) {
-			return this.model().find((row) => row.cultureCode === this.displayLocale()) || { value: '', required: false, cultureCode: this.displayLocale() };
-		} else {
-			return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '', required: false, cultureCode: INVARIANT_CULTURE_CODE };
+	// Resolves the culture code to display: an exact match on `displayLocale` if there is one,
+	// otherwise a match on the language part only (e.g. `displayLocale` `en-US` matches a row `en`).
+	readonly displayCultureCode = computed(() => {
+		if (!this.hasNoInvariant()) {
+			return INVARIANT_CULTURE_CODE;
 		}
+		const displayLocale = this.displayLocale();
+		const rows = this.model();
+		if (rows.some((row) => row.cultureCode === displayLocale)) {
+			return displayLocale;
+		}
+		const language = displayLocale.split('-')[0];
+		return rows.find((row) => row.cultureCode.split('-')[0] === language)?.cultureCode ?? displayLocale;
 	});
 
-	cultureCodeDisplay = computed(() => {
+	readonly displayRow = computed(() => {
+		return this.model().find((row) => row.cultureCode === this.displayCultureCode()) || { value: '', required: false, cultureCode: this.displayCultureCode() };
+	});
+
+	readonly cultureCodeDisplay = computed(() => {
 		return this.displayLocale().split('-')[0]?.toUpperCase();
 	});
 
-	panelInputs = computed(() => {
-		return this.model().filter((row) => (this.hasNoInvariant() ? row.cultureCode !== this.displayLocale() && row.cultureCode !== INVARIANT_CULTURE_CODE : row.cultureCode !== INVARIANT_CULTURE_CODE));
+	readonly panelInputs = computed(() => {
+		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE && (!this.hasNoInvariant() || row.cultureCode !== this.displayCultureCode()));
 	});
 
-	presentationValue = computed(() => {
+	readonly presentationValue = computed(() => {
+		if (this.hasNoInvariant()) {
+			return this.displayRow()?.value;
+		}
 		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.displayRow()?.value;
 	});
 
-	popoverPositions: ConnectionPositionPair[] = [
+	readonly popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 12, 6),
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 12, -6),
 	];
 
 	constructor() {
 		effect(() => {
-			if (this.hasNoInvariant() && !this.formFieldRef.isInputRequired()) {
+			if (this.hasNoInvariant() && !this.formFieldRef?.isInputRequired()) {
 				console.warn('[Multilanguage Input] Input with no invariant should be required, make sure you make the corresponding form field (or NgModel) required.');
 			}
 			if (this.hasNoInvariant() && !this.displayLocale()) {
@@ -113,6 +127,10 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	getLocaleDisplayName(locale: string): string {
 		return this.#intlDisplay.of(locale) ?? locale;
+	}
+
+	protected hasCulture(cultureCode: string): boolean {
+		return cultureCode.includes('-');
 	}
 
 	protected getPopoverInlineSizeRem(inputElement: HTMLInputElement): number {

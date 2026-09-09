@@ -1,3 +1,31 @@
+@if (bubblesIllustrationStartEnd() || illustrationStartEndUrl()) {
+	<div class="mainLayout-bubblesStartEnd">
+		@if (bubblesIllustrationStartEnd()) {
+			<div
+				[innerHtml]="`${domain}${path}bubbles/startEnd-${bubblesIllustrationStartEnd()}${extension}` | luSafeExternalSvg"
+				aria-hidden="true"
+			></div>
+		}
+		@if (illustrationStartEndUrl()) {
+			<img class="mainLayout-bubblesStartEnd-illustration" [attr.src]="illustrationStartEndUrl()" alt="" />
+		}
+	</div>
+}
+
+@if (bubblesIllustrationEndStart() || illustrationEndStartUrl()) {
+	<div class="mainLayout-bubblesEndStart">
+		@if (bubblesIllustrationEndStart()) {
+			<div
+				[innerHtml]="`${domain}${path}bubbles/endStart-${bubblesIllustrationEndStart()}${extension}` | luSafeExternalSvg"
+				aria-hidden="true"
+			></div>
+		}
+		@if (illustrationEndStartUrl()) {
+			<img class="mainLayout-bubblesEndStart-illustration" [attr.src]="illustrationEndStartUrl()" alt="" />
+		}
+	</div>
+}
+
 <div class="mainLayout-sidebar">
 	<ng-content select="[mainLayoutSidebar]" />
 </div>

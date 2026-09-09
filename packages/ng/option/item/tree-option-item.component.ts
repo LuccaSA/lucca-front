@@ -5,6 +5,7 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ALuTreeOptionItem, ILuTreeOptionItem } from './tree-option-item.model';
 import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */
@@ -27,10 +28,10 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 	protected _tree: ILuTree<T>;
 	protected _displayer: ILuInputDisplayer<T>;
 	@ViewChild('value', { static: true, read: ViewContainerRef })
-	protected _valueVCR: ViewContainerRef;
+	protected readonly _valueVCR: ViewContainerRef;
 	@ViewChild('children', { static: true, read: ViewContainerRef })
-	protected _childrenVCR: ViewContainerRef;
-	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
+	protected readonly _childrenVCR: ViewContainerRef;
+	@ViewChild('element', { read: ElementRef, static: true }) readonly element: ElementRef;
 
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelect = new EventEmitter<this>();
@@ -93,14 +94,14 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		}
 	}
 	get disabled() {
-		return this._tree.disabled;
+		return this._tree.disabled ?? false;
 	}
 
 	@ContentChild(ALuInputDisplayer, { static: true }) set _contentChildDisplayer(displayer: ILuInputDisplayer<T>) {
 		this._displayer = displayer;
 	}
 
-	public intl = input(...intlInputOptions(LU_TREE_OPTION_ITEM_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_TREE_OPTION_ITEM_TRANSLATIONS));
 
 	constructor(private _cdr: ChangeDetectorRef) {
 		super();

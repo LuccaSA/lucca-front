@@ -39,14 +39,14 @@
 			}
 
 			&::before {
-				transition-property: width, height, bottom, left;
+				transition-property: inline-size, block-size, inset-block-end, inset-inline-start;
 				inset-block-end: var(--components-fancyBox-offsetBlock);
 				inset-inline-start: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-left);
 			}
 
 			&::after {
-				transition-property: width, height, top, right;
+				transition-property: inline-size, block-size, inset-block-start, inset-inline-end;
 				inset-block-start: var(--components-fancyBox-offsetBlock);
 				inset-inline-end: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-right);
@@ -62,7 +62,7 @@
 			inset-inline-end: var(--components-fancyBox-offsetInline);
 			background-image: var(--components-fancyBox-foreground);
 			background-size: contain;
-			transition-property: width, height, top, right;
+			transition-property: inline-size, block-size, inset-block-start, inset-inline-end;
 			transition-duration: var(--commons-animations-durations-slow);
 			pointer-events: none;
 		}

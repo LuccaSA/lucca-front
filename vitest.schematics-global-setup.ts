@@ -14,7 +14,7 @@ import { join } from 'path';
  */
 export default function setup(): void {
 	const cwd = join(__dirname, 'packages/ng/schematics/lib/local-deps');
-	const result = spawnSync('npm', ['ci'], { cwd, stdio: 'inherit' });
+	const result = spawnSync('npm', ['ci'], { cwd, stdio: 'inherit', shell: true });
 	if (result.status !== 0) {
 		throw new Error(`Failed to install schematics local dependencies (npm ci exited with ${result.status})`);
 	}

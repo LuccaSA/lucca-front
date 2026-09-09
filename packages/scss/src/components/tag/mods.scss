@@ -63,10 +63,18 @@
 		--components-tag-boxShadow: none;
 		--components-tag-position: relative;
 
-		@include color.borderGradient($gradient: var(--pr-t-color-border-ai), $radius: var(--pr-t-border-radius-small));
+		@include color.borderGradient(
+			$gradient: var(--pr-t-color-border-ai),
+			$radius: var(--pr-t-border-radius-small),
+			$pseudo: '::after',
+		);
 
 		.lucca-icon {
 			@include icons.AI;
 		}
 	}
+}
+
+@mixin withIcon {
+	--components-tag-before-content: ' ';
 }

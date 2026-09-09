@@ -1,5 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
@@ -24,5 +25,5 @@ export class VerticalNavigationLinkComponent {
 	/**
 	 * Disabled the vertical navigation link
 	 */
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 }

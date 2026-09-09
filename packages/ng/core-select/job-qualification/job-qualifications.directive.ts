@@ -3,7 +3,7 @@ import { Directive, OnInit, computed, forwardRef, inject, input } from '@angular
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, map, switchMap } from 'rxjs';
+import { Observable, debounceTime, map, of, switchMap } from 'rxjs';
 import { LuJobQualificationGroupingComponent } from './job-qualification-grouping.component';
 import { LuCoreSelectJobQualification } from './models';
 
@@ -25,11 +25,11 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 {
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/job-qualifications');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/job-qualifications');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly searchDelimiter = input<string>(' ');
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
 	public constructor() {
 		super();
@@ -37,6 +37,15 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 		this.select.groupingSignal.set({
 			selector: (option) => option.job.id,
 			content: LuJobQualificationGroupingComponent,
+		});
+	}
+
+	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
+		// Use the clue parameter directly instead of reading from the async signal
+		// to avoid stale params when selection triggers an immediate clue reset
+		return of({
+			...this.filters(),
+			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()), sort: 'name' } : { sort: 'job.name,level.position' }),
 		});
 	}
 
@@ -52,23 +61,22 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
 	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const filters = this.filters();
-			const clue = this.clue();
-			return {
-				...filters,
-				...(clue
-					? {
-							search: applySearchDelimiter(clue, this.searchDelimiter()),
-							sort: 'name',
-						}
-					: { sort: 'job.name,level.position' }),
-			};
-		}),
-	);
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const filters = this.filters();
+		const clue = this.clue();
+		return {
+			...filters,
+			...(clue
+				? {
+						search: applySearchDelimiter(clue, this.searchDelimiter()),
+						sort: 'name',
+					}
+				: { sort: 'job.name,level.position' }),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ count: number }>(url, {

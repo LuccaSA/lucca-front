@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
 import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 @Component({
@@ -15,8 +16,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 	],
 })
 export class LuOptionFeederComponent<T> implements ILuOptionOperator<T> {
-	outOptions$ = new BehaviorSubject<T[]>([]);
-	@Input() set options(options: T[]) {
-		this.outOptions$.next(options);
-	}
+	readonly options = input<T[]>([]);
+
+	readonly outOptions$: Observable<T[]> = toObservable(this.options);
 }

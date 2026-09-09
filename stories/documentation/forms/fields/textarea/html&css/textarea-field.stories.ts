@@ -12,6 +12,7 @@ export default {
 			type: 'boolean',
 		},
 		autoResizeScrollIntoView: {
+			name: '↳ autoResizeScrollIntoView',
 			type: 'boolean',
 			if: { arg: 'autoResize', truthy: true },
 		},

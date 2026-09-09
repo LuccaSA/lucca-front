@@ -473,6 +473,12 @@
 		],
 		"figmaName": "pr-HighlightData (v19.3)"
 	},
+	"highlight-section": {
+		"figmaNodeIds": [
+			"37632:5601"
+		],
+		"figmaName": "pr-HighlightSection (v22.0)"
+	},
 	"horizontalnavigation": {
 		"zeroheightPagePath": "29aaef",
 		"figmaNodeIds": [

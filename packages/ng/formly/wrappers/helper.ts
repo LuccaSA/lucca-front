@@ -10,6 +10,7 @@ import { buildAddWrapperExtension } from '../formly.utils';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperHelper extends FieldWrapper {
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;
 }

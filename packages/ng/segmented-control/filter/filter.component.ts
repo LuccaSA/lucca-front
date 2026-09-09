@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_SEGMENTEDCONTROL_INSTANCE } from '../segmented-control.token';
 
 let nextId = 0;
@@ -22,7 +22,7 @@ export class SegmentedControlFilterComponent<T = unknown> {
 	/**
 	 * Disabled the segmented control filter
 	 */
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Defines filtered value used

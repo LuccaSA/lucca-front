@@ -7,20 +7,22 @@ import { HtmlAst, HtmlAstVisitor, updateCssClassNames } from './html-ast';
 import { currentSchematicContext } from './lf-schematic-context';
 import { expand } from './schematic.utils';
 import { migrateFile } from './schematics';
-import { PostCssScssLib, PostCssSelectorParserLib, updateCSSClassNamesInRules, updateCSSVariableNames, updateMixinNames } from './scss-ast';
+import { PostCssLib, PostCssScssLib, PostCssSelectorParserLib, updateCSSClassNamesInRules, updateCSSVariableNames, updateMixinNames, updateRgbaToTransparentize } from './scss-ast';
 import { replaceStringLiterals } from './typescript-ast';
 
 interface Mappings {
 	classes: Record<string, string>;
 	variables: Record<string, string>;
 	mixins: Record<string, string>;
+	rgbaVariables?: Record<string, string>;
 }
 
 export class CssMapper {
 	private mappings: Mappings = {
 		classes: expand(this.rawMappings.classes, this.mappingProps),
 		variables: expand(this.rawMappings.variables, this.mappingProps),
-		mixins: expand(this.rawMappings.mixins, this.mappingProps)
+		mixins: expand(this.rawMappings.mixins, this.mappingProps),
+		rgbaVariables: this.rawMappings.rgbaVariables ? expand(this.rawMappings.rgbaVariables, this.mappingProps) : undefined,
 	};
 	private classesToUpdate = new Set(Object.keys(this.mappings.classes));
 	private varsToUpdate = new Set(Object.keys(this.mappings.variables));
@@ -36,12 +38,13 @@ export class CssMapper {
 		const postCssScss = await import('../lib/local-deps/postcss-scss.js');
 		const { postcssValueParser } = await import('../lib/local-deps/postcss-value-parser.js');
 		const { postcssSelectorParser } = await import('../lib/local-deps/postcss-selector-parser.js');
+		const { postCss } = await import('../lib/local-deps/postcss.js');
 		this.tree.visit((path, entry) => {
 			if (path.includes('node_modules') || !entry) {
 				return;
 			}
 			if (path.endsWith('.scss')) {
-				migrateFile(path, entry, this.tree, (content) => this.migrateScssFile(content, postCssScss, postcssValueParser, postcssSelectorParser));
+				migrateFile(path, entry, this.tree, (content) => this.migrateScssFile(content, postCssScss, postcssValueParser, postcssSelectorParser, postCss));
 			}
 			if (path.endsWith('.html')) {
 				migrateFile(path, entry, this.tree, (content) => this.migrateHTMLFile(content));
@@ -52,12 +55,16 @@ export class CssMapper {
 		});
 	}
 
-	private migrateScssFile(content: string, postCssScss: PostCssScssLib, postcssValueParser: ValueParser, postcssSelectorParser: PostCssSelectorParserLib): string {
+	private migrateScssFile(content: string, postCssScss: PostCssScssLib, postcssValueParser: ValueParser, postcssSelectorParser: PostCssSelectorParserLib, postCss: PostCssLib): string {
 		const root = postCssScss.parse(content);
 
 		updateMixinNames(root, this.mappings.mixins);
 		updateCSSVariableNames(root, this.mappings.variables, postcssValueParser);
 		updateCSSClassNamesInRules(root, this.mappings.classes, postcssSelectorParser);
+
+		if (this.mappings.rgbaVariables && Object.keys(this.mappings.rgbaVariables).length) {
+			updateRgbaToTransparentize(root, this.mappings.rgbaVariables, postcssValueParser, postCss);
+		}
 
 		return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 	}

@@ -15,18 +15,22 @@ export default {
 		current: {
 			control: { type: 'range', min: 1, max: 6 },
 			description: 'Étape courante.',
+			table: { category: 'inputs' },
 		},
 		steps: {
 			control: { type: 'range', min: 2, max: 6 },
 			description: 'Nombre d’étapes présentées dans l’exemple.',
+			table: { category: 'inputs' },
 		},
 		critical: {
 			control: { type: 'boolean' },
 			description: 'Affiche une étape en état critical.',
+			table: { category: 'inputs' },
 		},
 		success: {
 			control: { type: 'boolean' },
 			description: 'Affiche une étape en état success.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

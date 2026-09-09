@@ -51,24 +51,31 @@ export default {
 	argTypes: {
 		noAvatar: {
 			description: 'Masque l’avatar.',
+			table: { category: 'inputs' },
 		},
 		compact: {
 			description: 'N’affiche l’auteur que sur le premier commentaire de <code><lu-comment-block></code>',
+			table: { category: 'inputs' },
 		},
 		small: {
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		date: {
 			description: 'Modifie la date du commentaire.',
+			table: { category: 'inputs' },
 		},
 		datePipeFormat: {
 			description: "[v20.3] Modifie le format de date affiché, via <a href='https://angular.dev/api/common/DatePipe' target='_blank'>Angular DatePipe</a>. Exemples : 'mediumDate', 'YYYY', etc.",
+			table: { category: 'inputs' },
 		},
 		firstName: {
 			description: 'Modifie le prénom de l’auteur.',
+			table: { category: 'inputs' },
 		},
 		lastName: {
 			description: 'Modifie le nom de l’auteur.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

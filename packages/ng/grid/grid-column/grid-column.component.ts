@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { ResponsiveConfig } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { luNullableNumberAttribute, ResponsiveConfig } from '@lucca-front/ng/core';
 import { LU_GRID_INSTANCE } from '../grid.token';
 import { GridColumnAlignment, GridColumnResponsive } from './grid-column.type';
 
@@ -14,10 +14,10 @@ import { GridColumnAlignment, GridColumnResponsive } from './grid-column.type';
 	},
 })
 export class GridColumnComponent {
-	readonly colspan = input(null, { transform: numberAttribute });
-	readonly rowspan = input(null, { transform: numberAttribute });
-	readonly column = input(null, { transform: numberAttribute });
-	readonly row = input(null, { transform: numberAttribute });
+	readonly colspan = input(null, { transform: luNullableNumberAttribute });
+	readonly rowspan = input(null, { transform: luNullableNumberAttribute });
+	readonly column = input(null, { transform: luNullableNumberAttribute });
+	readonly row = input(null, { transform: luNullableNumberAttribute });
 	readonly align = input<GridColumnAlignment | null>(null);
 	readonly justify = input<GridColumnAlignment | null>(null);
 

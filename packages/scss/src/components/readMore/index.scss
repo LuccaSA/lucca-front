@@ -28,5 +28,9 @@
 		&.mod-sunken {
 			@include sunken;
 		}
+
+		&.mod-plainText {
+			@include plainText;
+		}
 	}
 }

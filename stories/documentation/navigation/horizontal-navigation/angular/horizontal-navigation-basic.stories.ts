@@ -15,15 +15,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		noBorder: {
 			description: 'Retire la bordure sous le composant.',
+			table: { category: 'inputs' },
 		},
 		container: {
 			description: 'Applique un container autour des liens pour aligner le composant avec le contenu de la page.',
+			table: { category: 'inputs' },
 		},
 		numericBadge: {
 			description: 'Présente un exemple avec Numeric Badge.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

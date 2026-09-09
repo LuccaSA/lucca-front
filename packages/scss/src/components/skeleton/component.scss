@@ -5,6 +5,36 @@
 		.skeleton-item {
 			animation: skeletonFade var(--commons-animations-durations-fast) ease-in 1 forwards;
 		}
+
+		.skeletonCard {
+			background-color: var(--pr-t-elevation-surface-raised);
+			box-shadow: var(--pr-t-elevation-shadow-raised);
+			border-radius: var(--pr-t-border-radius-structure);
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+		}
+
+		.skeletonHighlight {
+			background-color: var(--pr-t-elevation-surface-raised);
+			padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
+			border-radius: var(--pr-t-border-radius-structure);
+
+			&.mod-dark {
+				background-color: var(--pr-t-elevation-surface-default);
+			}
+		}
+
+		.skeletonFancyBox {
+			padding: var(--pr-t-spacings-300) var(--pr-t-spacings-700);
+			background-color: var(--pr-t-elevation-surface-raised);
+			border-radius: var(--pr-t-border-radius-structure);
+			inline-size: fit-content;
+			margin-inline: auto;
+			min-inline-size: min(22rem, 100%);
+			min-block-size: 7rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
 	}
 
 	// fades content in on load

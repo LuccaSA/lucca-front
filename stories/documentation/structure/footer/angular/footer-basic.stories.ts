@@ -1,7 +1,7 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FOOTER_CONTAINER_MAX, FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } from '@lucca-front/ng/footer';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Footer/Angular/Basic',
@@ -12,23 +12,29 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit le breakpoint pour lequel le mode narrow (responsive) est appliqué.',
+			table: { category: 'inputs' },
 		},
 		container: {
 			description: 'Applique un container autour du contenu du footer.',
+			table: { category: 'inputs' },
 		},
 		containerMax: {
+			name: '↳ container',
 			options: setStoryOptions(FOOTER_CONTAINER_MAX),
 			control: {
 				type: 'select',
 			},
 			if: { arg: 'container', truthy: true },
 			description: 'Définit la largeur maximale du container.',
+			table: { category: 'inputs' },
 		},
 		sticky: {
 			description: 'Fige le footer lors du défilement vertical.',
+			table: { category: 'inputs' },
 		},
 		forceNarrow: {
 			description: 'Force le mode narrow (responsive) du footer.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

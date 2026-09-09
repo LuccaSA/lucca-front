@@ -5,18 +5,23 @@
 	--components-fileEntry-gridTemplateAreas: 'picture title toolbar' 'picture description toolbar';
 	--components-fileEntry-status-content-inside-backgroundColor: var(--palettes-critical-50);
 	--components-fileEntry-minHeight: 3.75rem;
+	--components-fileEntry-description-display: flex;
 }
 
 @mixin loading {
 	--components-fileEntry-status-content-img-opacity: 0.08;
 }
 
-@mixin loadingS {
+@mixin loadingL {
 	.fileEntry-status-content-inside-loading.loading {
-		@include loading.S;
+		@include loading.M;
 	}
 }
 
-@mixin errorS {
-	--components-fileEntry-status-blockSize: 100%;
+@mixin errorL {
+	--components-fileEntry-status-blockSize: var(--components-fileEntry-status-inlineSize);
+}
+
+@mixin mediaErrorL {
+	--components-fileEntry-status-blockSize: calc(21.5rem - 1rem + 2px);
 }

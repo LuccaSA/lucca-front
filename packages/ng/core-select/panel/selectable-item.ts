@@ -1,5 +1,5 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { computed, Directive, ElementRef, inject, Input, input, model, OnDestroy, output, signal, untracked } from '@angular/core';
+import { computed, Directive, ElementRef, inject, input, linkedSignal, model, OnDestroy, output, signal, untracked } from '@angular/core';
 import { ALuSelectInputComponent } from '../input/select-input.component';
 import { CoreSelectKeyManager } from './key-manager';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
@@ -8,11 +8,9 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 	selector: '[luCoreSelectPanelElement]',
 	exportAs: 'luCoreSelectPanelElement',
 	host: {
-		'[attr.id]': 'idAttribute()',
-		'[attr.aria-selected]': 'isSelected()',
 		'[class.is-highlighted]': 'isHighlighted()',
-		'(mouseenter)': 'onMouseEnter()',
-		role: 'option',
+		'(mouseover)': 'onMouseOver($event)',
+		role: 'presentation',
 	},
 })
 export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
@@ -23,23 +21,31 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	readonly #selectRef = inject<ALuSelectInputComponent<T, T>>(ALuSelectInputComponent);
 
-	id = signal<string>('');
+	readonly id = signal<string>('');
 
-	elementId = input<string>('');
+	readonly elementId = input<string>('');
 
-	idAttribute = computed(() => this.id() || this.elementId());
+	readonly idAttribute = computed(() => this.id() || this.elementId());
 
-	isSelected = model(false);
+	readonly isSelected = model(false);
 
-	option = input<T>();
+	readonly option = input<T>();
 
-	isHighlighted = signal(false);
+	readonly disabledInput = input<boolean>(false, { alias: 'disabled' });
+
+	readonly disabledRef = linkedSignal(() => this.disabledInput());
+
+	readonly isHighlighted = signal(false);
 
 	selected = output<void>();
 
-	// We have to use input here because this is consumed by ActiveKeyManager, which doesn't use a signal
-	@Input()
-	disabled: boolean;
+	get disabled() {
+		return this.disabledRef();
+	}
+
+	set disabled(disabled: boolean) {
+		this.disabledRef.set(disabled);
+	}
 
 	constructor() {
 		this.#panelRef.options.set([...this.#panelRef.options(), this]);
@@ -61,8 +67,18 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 		this.isHighlighted.set(false);
 	}
 
-	onMouseEnter(): void {
+	onMouseOver(event: MouseEvent): void {
 		if (!this.#keyManager || this.disabled || !untracked(this.#panelRef.pointerNavigation)) {
+			return;
+		}
+
+		// Tree options nest their children inside their own host, so the event bubbles through every
+		// ancestor option. mouseover (unlike mouseenter) re-fires as the pointer moves, so activate
+		// only the option whose own row is directly under the pointer. Keying off the row — and not
+		// the host — mirrors the native `.listboxOption-content:hover`: the gap between nested options
+		// lives in the wrapper, not in any row, so hovering it must not highlight the parent.
+		const row = (event.target as HTMLElement).closest('.listboxOption-content');
+		if (!row || row.closest('[luCoreSelectPanelElement]') !== this.elementRef.nativeElement) {
 			return;
 		}
 

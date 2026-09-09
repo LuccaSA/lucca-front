@@ -28,19 +28,38 @@
 	}
 
 	<div class="textField-input">
-		<input
-			luInput
-			[type]="typeRef()"
-			[attr.autocomplete]="autocomplete() ? autocomplete() : null"
-			class="textField-input-value"
-			[placeholder]="placeholder()"
-			[formControl]="ngControl.control"
-			(blur)="blur.emit($event)"
-			[mask]="mask()"
-			#inputElement
-		/>
+		<!-- The `mask` directive is only applied when a mask is actually set: as a ControlValueAccessor it rewrites the input value
+		asynchronously, which moves the caret to the end of the value on every keystroke. -->
+		@if (mask(); as mask) {
+			<input
+				luInput
+				[type]="typeRef()"
+				[attr.autocomplete]="autocomplete() ? autocomplete() : null"
+				class="textField-input-value"
+				[placeholder]="placeholder()"
+				[formControl]="ngControl.control"
+				(blur)="blur.emit($event)"
+				[mask]="mask"
+				[attr.minlength]="minlength() > 0 ? minlength() : null"
+				[attr.maxlength]="maxlength() > 0 ? maxlength() : null"
+				#inputElement
+			/>
+		} @else {
+			<input
+				luInput
+				[type]="typeRef()"
+				[attr.autocomplete]="autocomplete() ? autocomplete() : null"
+				class="textField-input-value"
+				[placeholder]="placeholder()"
+				[formControl]="ngControl.control"
+				(blur)="blur.emit($event)"
+				[attr.minlength]="minlength() > 0 ? minlength() : null"
+				[attr.maxlength]="maxlength() > 0 ? maxlength() : null"
+				#inputElement
+			/>
+		}
 		<div class="textField-input-affix">
-			@if (hasClearer() && inputElement.value) {
+			@if (hasClearer() && hasValue()) {
 				<lu-clear (onClear)="clearValue()" class="textField-input-affix-clear">{{ intl().clear }}</lu-clear>
 			}
 			@if (hasSearchIcon()) {

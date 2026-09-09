@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
-import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { luNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { VerticalNavigationGroupComponent } from './group/vertical-navigation-group.component';
 import { VerticalNavigationLinkComponent } from './link/vertical-navigation-link.component';
 
@@ -24,7 +24,7 @@ export class VerticalNavigationComponent {
 	/**
 	 * Defines aria level for heading title
 	 */
-	readonly level = input<number>(3);
+	readonly level = input(3, { transform: luNumberAttribute });
 
 	readonly verticalNavigationGroup = contentChildren(VerticalNavigationGroupComponent, { descendants: true });
 	readonly verticalNavigationLinks = contentChildren(VerticalNavigationLinkComponent, { descendants: true });

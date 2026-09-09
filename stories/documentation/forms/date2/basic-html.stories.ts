@@ -113,22 +113,22 @@ export default {
 						15
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell" aria-selected="false">
+				<td class="calendar-table-body-row-cell is-selected is-start" aria-selected="true">
 					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
 						16
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell" aria-selected="false">
+				<td class="calendar-table-body-row-cell is-selected" aria-selected="true">
 					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
 						17
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell" aria-selected="false">
+				<td class="calendar-table-body-row-cell is-selected" aria-selected="true">
 					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
 						18
 					</button>
 				</td>
-				<td class="calendar-table-body-row-cell is-daysOff" aria-selected="false">
+				<td class="calendar-table-body-row-cell is-selected is-end is-daysOff" aria-selected="true">
 					<button type="button" class="calendar-table-body-row-cell-action" tabindex="-1">
 						19
 						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>

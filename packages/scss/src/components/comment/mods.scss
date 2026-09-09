@@ -57,3 +57,7 @@
 		margin-inline: 0 var(--components-comment-content-margin);
 	}
 }
+
+@mixin plainText {
+	--components-comment-text-whiteSpace: pre-line;
+}

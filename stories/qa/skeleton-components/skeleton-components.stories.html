@@ -3,108 +3,397 @@
 		<tr>
 			<td></td>
 			<td style="inline-size: 50%">
-				<div class="demo-QAtable-list">Light</div>
+				<div class="demo-QAtable-list">Skeleton</div>
 			</td>
 			<td style="inline-size: 50%">
-				<div class="demo-QAtable-list">Dark</div>
+				<div class="demo-QAtable-list">Default</div>
 			</td>
 		</tr>
-		<tr>
-			<td>Button</td>
-			<td style="background-color: white">
-				<lu-skeleton-button />
-				<br />
-				<lu-skeleton-button size="S" />
-				<br />
-				<lu-skeleton-button size="XS" />
+		<tr style="background-color: var(--pr-t-elevation-surface-raised)">
+			<td>Button<br />(raised surface)</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-skeleton-button />
+					<lu-skeleton-button size="S" />
+					<lu-skeleton-button size="XS" />
+				</div>
 			</td>
 			<td>
-				<lu-skeleton-button dark />
-				<br />
-				<lu-skeleton-button dark size="S" />
-				<br />
-				<lu-skeleton-button dark size="XS" />
+				<div class="demo-QAtable-list">
+					<button luButton type="button">Sit amet</button>
+					<button luButton type="button" size="S">Sit amet</button>
+					<button luButton type="button" size="XS">Sit amet</button>
+				</div>
 			</td>
 		</tr>
-		<tr>
-			<td>Field</td>
-			<td style="background-color: white">
-				<lu-skeleton-field />
-				<br />
-				<lu-skeleton-field rows="2" />
-				<br />
-				<lu-skeleton-field hiddenLabel rows="3" />
+		<tr style="background-color: var(--pr-t-elevation-surface-default)">
+			<td>Button<br />(default surface)</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-skeleton-button dark />
+					<lu-skeleton-button dark size="S" />
+					<lu-skeleton-button dark size="XS" />
+				</div>
 			</td>
 			<td>
-				<lu-skeleton-field dark />
-				<br />
-				<lu-skeleton-field dark rows="2" />
-				<br />
-				<lu-skeleton-field dark hiddenLabel rows="3" />
+				<div class="demo-QAtable-list">
+					<button luButton type="button">Sit amet</button>
+					<button luButton type="button" size="S">Sit amet</button>
+					<button luButton type="button" size="XS">Sit amet</button>
+				</div>
 			</td>
 		</tr>
-		<tr>
-			<td>IndexTable</td>
-			<td style="background-color: white">
-				<lu-skeleton-index-table [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
-				<br />
-				<lu-index-table inert="inert">
-					<thead luIndexTableHead>
-						<tr luIndexTableRow>
-							<th luIndexTableCell>Label</th>
-							<th luIndexTableCell align="center">Label</th>
-							<th luIndexTableCell align="end">Label</th>
-						</tr>
-					</thead>
-					<lu-skeleton-index-table tableBodyOnly [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
-				</lu-index-table>
+		<tr style="background-color: var(--pr-t-elevation-surface-raised)">
+			<td>Field<br />(raised surface)</td>
+			<td>
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<lu-skeleton-field />
+					<lu-skeleton-field rows="2" />
+					<lu-skeleton-field hiddenLabel rows="3" />
+				</div>
 			</td>
-			<td></td>
+			<td>
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<lu-form-field label="Lorem ipsum dolor">
+						<lu-text-input type="text" [(ngModel)]="example" />
+					</lu-form-field>
+					<lu-form-field label="Lorem ipsum dolor">
+						<lu-textarea-input rows="2" [(ngModel)]="example" />
+					</lu-form-field>
+					<lu-form-field label="Lorem ipsum dolor" hiddenLabel>
+						<lu-textarea-input rows="3" [(ngModel)]="example" />
+					</lu-form-field>
+				</div>
+			</td>
 		</tr>
-		<tr>
-			<td>DataTable</td>
-			<td style="background-color: white">
-				<lu-skeleton-data-table [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
-				<br />
-				<div class="dataTableWrapper">
-					<table class="dataTable skeleton is-loading" inert="inert">
-						<thead class="dataTable-head">
-							<tr class="dataTable-head-row">
-								<th class="dataTable-head-row-cell">Lorem</th>
-								<th class="dataTable-head-row-cell mod-alignCenter">Ipsum</th>
-								<th class="dataTable-head-row-cell mod-alignEnd">Dolor</th>
+		<tr style="background-color: var(--pr-t-elevation-surface-default)">
+			<td>Field<br />(default surface)</td>
+			<td>
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<lu-skeleton-field dark />
+					<lu-skeleton-field dark rows="2" />
+					<lu-skeleton-field dark hiddenLabel rows="3" />
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<lu-form-field label="Lorem ipsum dolor">
+						<lu-text-input type="text" [(ngModel)]="example" />
+					</lu-form-field>
+					<lu-form-field label="Lorem ipsum dolor">
+						<lu-textarea-input rows="2" [(ngModel)]="example" />
+					</lu-form-field>
+					<lu-form-field label="Lorem ipsum dolor" hiddenLabel>
+						<lu-textarea-input rows="3" [(ngModel)]="example" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr style="background-color: var(--pr-t-elevation-surface-raised)">
+			<td>IndexTable<br />(raised surface)</td>
+			<td>
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<lu-skeleton-index-table [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+					<lu-index-table inert="inert">
+						<thead luIndexTableHead>
+							<tr luIndexTableRow>
+								<th luIndexTableCell align="start">Lorem</th>
+								<th luIndexTableCell align="center">Ipsum</th>
+								<th luIndexTableCell align="end">Dolor</th>
 							</tr>
 						</thead>
-						<lu-skeleton-data-table dataTableBodyOnly [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+						<lu-skeleton-index-table tableBodyOnly [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+					</lu-index-table>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<lu-index-table>
+						<thead luIndexTableHead>
+							<tr luIndexTableRow>
+								<th luIndexTableCell align="start">Lorem</th>
+								<th luIndexTableCell align="center">Ipsum</th>
+								<th luIndexTableCell align="end">Dolor</th>
+							</tr>
+						</thead>
+						<tbody luIndexTableBody>
+							<tr luIndexTableRow>
+								<th luIndexTableCell align="start"><a href="#" luIndexTableAction>Lorem</a></th>
+								<td luIndexTableCell align="center">Ipsum</td>
+								<td luIndexTableCell align="end">Dolor</td>
+							</tr>
+							<tr luIndexTableRow>
+								<th luIndexTableCell align="start"><a href="#" luIndexTableAction>Lorem</a></th>
+								<td luIndexTableCell align="center">Ipsum</td>
+								<td luIndexTableCell align="end">Dolor</td>
+							</tr>
+							<tr luIndexTableRow>
+								<th luIndexTableCell align="start"><a href="#" luIndexTableAction>Lorem</a></th>
+								<td luIndexTableCell align="center">Ipsum</td>
+								<td luIndexTableCell align="end">Dolor</td>
+							</tr>
+						</tbody>
+					</lu-index-table>
+					<lu-index-table>
+						<thead luIndexTableHead>
+							<tr luIndexTableRow>
+								<th luIndexTableCell align="start">Lorem</th>
+								<th luIndexTableCell align="center">Ipsum</th>
+								<th luIndexTableCell align="end">Dolor</th>
+							</tr>
+						</thead>
+						<tbody luIndexTableBody>
+							<tr luIndexTableRow>
+								<th luIndexTableCell align="start"><a href="#" luIndexTableAction>Lorem</a></th>
+								<td luIndexTableCell align="center">Ipsum</td>
+								<td luIndexTableCell align="end">Dolor</td>
+							</tr>
+							<tr luIndexTableRow>
+								<th luIndexTableCell align="start"><a href="#" luIndexTableAction>Lorem</a></th>
+								<td luIndexTableCell align="center">Ipsum</td>
+								<td luIndexTableCell align="end">Dolor</td>
+							</tr>
+							<tr luIndexTableRow>
+								<th luIndexTableCell align="start"><a href="#" luIndexTableAction>Lorem</a></th>
+								<td luIndexTableCell align="center">Ipsum</td>
+								<td luIndexTableCell align="end">Dolor</td>
+							</tr>
+						</tbody>
+					</lu-index-table>
+				</div>
+			</td>
+		</tr>
+		<tr style="background-color: var(--pr-t-elevation-surface-default)">
+			<td>DataTable<br />(default surface)</td>
+			<td>
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<lu-skeleton-data-table [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+					<div class="dataTableWrapper">
+						<table class="dataTable skeleton is-loading" inert="inert">
+							<thead class="dataTable-head">
+								<tr class="dataTable-head-row">
+									<th class="dataTable-head-row-cell">Lorem</th>
+									<th class="dataTable-head-row-cell mod-alignCenter">Ipsum</th>
+									<th class="dataTable-head-row-cell mod-alignEnd">Dolor</th>
+								</tr>
+							</thead>
+							<lu-skeleton-data-table dataTableBodyOnly [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+						</table>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<lu-data-table>
+						<thead luDataTableHead>
+							<tr luDataTableRow>
+								<th luDataTableCell align="start">Lorem</th>
+								<th luDataTableCell align="center">Ipsum</th>
+								<th luDataTableCell align="end">Dolor</th>
+							</tr>
+						</thead>
+						<tbody luDataTableBody>
+							<tr luDataTableRow>
+								<th luDataTableCell align="start">Lorem</th>
+								<th luDataTableCell align="center">Ipsum</th>
+								<th luDataTableCell align="end">Dolor</th>
+							</tr>
+							<tr luDataTableRow>
+								<th luDataTableCell align="start">Lorem</th>
+								<th luDataTableCell align="center">Ipsum</th>
+								<th luDataTableCell align="end">Dolor</th>
+							</tr>
+							<tr luDataTableRow>
+								<th luDataTableCell align="start">Lorem</th>
+								<th luDataTableCell align="center">Ipsum</th>
+								<th luDataTableCell align="end">Dolor</th>
+							</tr>
+						</tbody>
+					</lu-data-table>
+					<lu-data-table>
+						<thead luDataTableHead>
+							<tr luDataTableRow>
+								<th luDataTableCell align="start">Lorem</th>
+								<th luDataTableCell align="center">Ipsum</th>
+								<th luDataTableCell align="end">Dolor</th>
+							</tr>
+						</thead>
+						<tbody luDataTableBody>
+							<tr luDataTableRow>
+								<th luDataTableCell align="start">Lorem</th>
+								<th luDataTableCell align="center">Ipsum</th>
+								<th luDataTableCell align="end">Dolor</th>
+							</tr>
+							<tr luDataTableRow>
+								<th luDataTableCell align="start">Lorem</th>
+								<th luDataTableCell align="center">Ipsum</th>
+								<th luDataTableCell align="end">Dolor</th>
+							</tr>
+							<tr luDataTableRow>
+								<th luDataTableCell align="start">Lorem</th>
+								<th luDataTableCell align="center">Ipsum</th>
+								<th luDataTableCell align="end">Dolor</th>
+							</tr>
+						</tbody>
+					</lu-data-table>
+				</div>
+			</td>
+		</tr>
+		<tr style="background-color: var(--pr-t-elevation-surface-default)">
+			<td>Table<br />(default surface)</td>
+			<td>
+				<lu-skeleton-table [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<table class="table skeleton is-loading" inert="inert">
+						<thead class="table-head">
+							<tr class="table-head-row">
+								<th class="table-head-row-cell mod-alignLeft">Lorem</th>
+								<th class="table-head-row-cell mod-alignCenter">Ipsum</th>
+								<th class="table-head-row-cell mod-alignRight">Dolor</th>
+							</tr>
+						</thead>
+						<lu-skeleton-table tableBodyOnly [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
 					</table>
 				</div>
 			</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>Table</td>
-			<td style="background-color: white">
-				<lu-skeleton-table [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
-				<br />
-				<table class="table skeleton is-loading" inert="inert">
-					<thead class="table-head">
-						<tr class="table-head-row">
-							<th class="table-head-row-cell">Lorem</th>
-							<th class="table-head-row-cell mod-alignCenter">Ipsum</th>
-							<th class="table-head-row-cell mod-alignRight">Dolor</th>
-						</tr>
-					</thead>
-					<lu-skeleton-table tableBodyOnly [cols]="3" [rows]="3" [colsAlign]="{ '1': 'center', '2': 'end' }" />
-				</table>
+			<td>
+				<div class="demo-QAtable-list" style="flex-direction: column; align-items: stretch">
+					<table class="table">
+						<thead class="table-head">
+							<tr class="table-head-row">
+								<th class="table-head-row-cell mod-alignLeft">Lorem</th>
+								<th class="table-head-row-cell mod-alignCenter">Ipsum</th>
+								<th class="table-head-row-cell mod-alignRight">Dolor</th>
+							</tr>
+						</thead>
+						<tbody class="table-body">
+							<tr class="table-body-row">
+								<td class="table-body-row-cell mod-alignLeft">Lorem</td>
+								<td class="table-body-row-cell mod-alignCenter">Ipsum</td>
+								<td class="table-body-row-cell mod-alignRight">Dolor</td>
+							</tr>
+							<tr class="table-body-row">
+								<td class="table-body-row-cell mod-alignLeft">Lorem</td>
+								<td class="table-body-row-cell mod-alignCenter">Ipsum</td>
+								<td class="table-body-row-cell mod-alignRight">Dolor</td>
+							</tr>
+							<tr class="table-body-row">
+								<td class="table-body-row-cell mod-alignLeft">Lorem</td>
+								<td class="table-body-row-cell mod-alignCenter">Ipsum</td>
+								<td class="table-body-row-cell mod-alignRight">Dolor</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table">
+						<thead class="table-head">
+							<tr class="table-head-row">
+								<th class="table-head-row-cell mod-alignLeft">Lorem</th>
+								<th class="table-head-row-cell mod-alignCenter">Ipsum</th>
+								<th class="table-head-row-cell mod-alignRight">Dolor</th>
+							</tr>
+						</thead>
+						<tbody class="table-body">
+							<tr class="table-body-row">
+								<td class="table-body-row-cell mod-alignLeft">Lorem</td>
+								<td class="table-body-row-cell mod-alignCenter">Ipsum</td>
+								<td class="table-body-row-cell mod-alignRight">Dolor</td>
+							</tr>
+							<tr class="table-body-row">
+								<td class="table-body-row-cell mod-alignLeft">Lorem</td>
+								<td class="table-body-row-cell mod-alignCenter">Ipsum</td>
+								<td class="table-body-row-cell mod-alignRight">Dolor</td>
+							</tr>
+							<tr class="table-body-row">
+								<td class="table-body-row-cell mod-alignLeft">Lorem</td>
+								<td class="table-body-row-cell mod-alignCenter">Ipsum</td>
+								<td class="table-body-row-cell mod-alignRight">Dolor</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</td>
-			<td></td>
 		</tr>
-		<tr>
-			<td>User popover</td>
-			<td style="background-color: white">
-				<lu-skeleton-user-popover />
+		<tr style="background-color: var(--pr-t-elevation-surface-default)">
+			<td>User popover<br />(default surface)</td>
+			<td>
+				<section class="lu-popover-content" style="padding: 0; inline-size: fit-content">
+					<lu-skeleton-user-popover />
+				</section>
 			</td>
-			<td></td>
+			<td>
+				<section class="lu-popover-content userPopover">
+					<div class="userPopover-details">
+						<div class="userPopover-details-avatar avatar">
+							<div class="avatar-picture" style="background-color: rgb(92, 214, 153)">
+								<span class="avatar-picture-initials" translate="no">CA</span>
+							</div>
+						</div>
+						<div class="userPopover-details-info">
+							<h1 class="userPopover-details-info-name pr-u-ellipsis">
+								<a class="userPopover-details-info-name-linkOptional" href="#"> Chloé Alibert </a>
+							</h1>
+							<p class="userPopover-details-info-detail pr-u-ellipsis">Technicienne</p>
+							<p class="userPopover-details-info-detail pr-u-ellipsis">SAV</p>
+							<p class="userPopover-details-info-detail">
+								<a class="userPopover-details-info-detail-workplace" href="#">
+									<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
+									<span class="userPopover-details-info-detail-workplace-state">
+										Absent(e) – <span class="pr-u-textLight">Jusqu’au 28/02/2024 inclus</span>
+									</span>
+								</a>
+							</p>
+						</div>
+					</div>
+				</section>
+			</td>
+		</tr>
+		<tr style="background-color: var(--pr-t-elevation-surface-default)">
+			<td>Card<br />(default surface)</td>
+			<td>
+				<lu-skeleton-card />
+			</td>
+			<td>
+				<lu-resource-card>
+					<a href="#" luResourceCardAction>Lorem ipsum dolor </a>
+					<ng-container resourceCardContent> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. </ng-container>
+				</lu-resource-card>
+			</td>
+		</tr>
+		<tr style="background-color: var(--pr-t-elevation-surface-raised)">
+			<td>Highlight data<br />(raised surface)</td>
+			<td>
+				<lu-skeleton-highlight-data dark />
+			</td>
+			<td>
+				<lu-highlight-data heading="Title" value="Content" illustration="piggy-bank" bubble="1" theme="dark" />
+			</td>
+		</tr>
+		<tr style="background-color: var(--pr-t-elevation-surface-default)">
+			<td>Highlight data<br />(default surface)</td>
+			<td>
+				<lu-skeleton-highlight-data />
+			</td>
+			<td>
+				<lu-highlight-data heading="Title" value="Content" illustration="piggy-bank" bubble="1" />
+			</td>
+		</tr>
+		<tr style="background-color: var(--pr-t-elevation-surface-default)">
+			<td>Fancy box<br />(default surface)</td>
+			<td>
+				<lu-skeleton-fancy-box />
+			</td>
+			<td style="overflow: hidden">
+				<lu-fancy-box
+					backgroundLeft="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg"
+					backgroundRight="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg"
+					foreground="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg"
+				>
+					<div class="pr-u-textAlignCenter">
+						Lorem ipsum dolor<br />
+						Sit amet
+					</div>
+				</lu-fancy-box>
+			</td>
 		</tr>
 	</tbody>
 </table>

@@ -1,3 +1,11 @@
 # Skills LF générées
 .github/skills/lucca-front/** linguist-generated
 scripts/generate-skills/baselines/** linguist-generated
+
+# Traductions récupérées depuis Lokalise (npm run i18n:update)
+packages/ng/**/translations.ts linguist-generated
+
+# Générés par npm run icons:update
+packages/prisme/icon/icons.ts linguist-generated
+packages/icons/src/commons/config.scss linguist-generated
+stories/documentation/icons-list.ts linguist-generated

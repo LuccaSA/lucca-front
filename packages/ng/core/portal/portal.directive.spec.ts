@@ -15,11 +15,11 @@ import { PortalDirective } from './portal.directive';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PortalTestComponent {
-	context = input<PortalDirective['luPortalContext'] | null>(null);
-	content = input<PortalContent | null>(null);
-	displayed = input(true);
+	readonly context = input<PortalDirective['luPortalContext'] | null>(null);
+	readonly content = input<PortalContent | null>(null);
+	readonly displayed = input(true);
 
-	contentTpl = viewChild.required<TemplateRef<unknown>>('tpl');
+	readonly contentTpl = viewChild.required<TemplateRef<unknown>>('tpl');
 }
 
 @Component({

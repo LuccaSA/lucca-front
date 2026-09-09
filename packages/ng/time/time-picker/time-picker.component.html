@@ -13,7 +13,7 @@
 			[max]="maxHours()"
 			[decimalConf]="hoursDecimalConf"
 			[displayArrows]="displayArrows()"
-			(touched)="onTouched?.()"
+			(touched)="onTouched()"
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
 			(keydown.arrowleft)="$event.preventDefault(); prevPicker.emit()"
@@ -33,7 +33,7 @@
 			[value]="minutesDisplay()"
 			[max]="59"
 			[displayArrows]="displayArrows()"
-			(touched)="onTouched?.()"
+			(touched)="onTouched()"
 			[disabled]="disabled() || !minutesIncrement()"
 			showZero
 			(valueChange)="minutesInputHandler($event)"

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { DestroyRef, Directive, OnInit, computed, forwardRef, inject, input } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { luNullableNumberAttribute } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, filter, map, switchMap } from 'rxjs';
+import { Observable, debounceTime, filter, map, of, switchMap } from 'rxjs';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuCoreSelectEstablishment } from './models';
@@ -29,14 +30,14 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 
 	protected httpClient = inject(HttpClient);
 
-	url = input<string>('/organization/structure/api/establishments');
-	filters = input<Record<string, string | number | boolean> | null>(null);
-	operationIds = input<readonly number[] | null>(null);
-	uniqueOperationIds = input<readonly number[] | null>(null);
-	appInstanceId = input<number | null>(null);
-	searchDelimiter = input<string>(' ');
+	readonly url = input<string>('/organization/structure/api/establishments');
+	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	readonly operationIds = input<readonly number[] | null>(null);
+	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
+	readonly searchDelimiter = input<string>(' ');
 
-	protected clue = toSignal(this.clue$);
+	protected readonly clue = toSignal(this.clue$);
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
@@ -49,6 +50,18 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 				selector: (option) => option.legalUnitId,
 				content: LuEstablishmentGroupingComponent,
 			});
+		});
+	}
+
+	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
+		// Use the clue parameter directly instead of reading from the async signal
+		// to avoid stale params when selection triggers an immediate clue reset
+		return of({
+			...this.filters(),
+			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()), sort: 'name' } : { sort: 'legalunit.name,name' }),
+			...(this.operationIds() ? { operations: this.operationIds()!.join(',') } : {}),
+			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()!.join(',') } : {}),
+			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
 		});
 	}
 
@@ -66,28 +79,27 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 		return this.#groupingService.useGrouping$.pipe(switchMap(() => options$));
 	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const operationIds = this.operationIds();
-			const uniqueOperationIds = this.uniqueOperationIds();
-			const appInstanceId = this.appInstanceId();
-			const clue = this.clue();
-			const searchDelimiter = this.searchDelimiter();
-			return {
-				...this.filters(),
-				...(clue
-					? // When the clue is not empty, sort establishments by name
-						{ search: applySearchDelimiter(clue, searchDelimiter), sort: 'name' }
-					: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
-						{ sort: 'legalunit.name,name' }),
-				...(operationIds ? { operations: operationIds.join(',') } : {}),
-				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-				...(appInstanceId ? { appInstanceId } : {}),
-			};
-		}),
-	);
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const operationIds = this.operationIds();
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const appInstanceId = this.appInstanceId();
+		const clue = this.clue();
+		const searchDelimiter = this.searchDelimiter();
+		return {
+			...this.filters(),
+			...(clue
+				? // When the clue is not empty, sort establishments by name
+					{ search: applySearchDelimiter(clue, searchDelimiter), sort: 'name' }
+				: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
+					{ sort: 'legalunit.name,name' }),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(appInstanceId ? { appInstanceId } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
+	public readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ count: number }>(url, {

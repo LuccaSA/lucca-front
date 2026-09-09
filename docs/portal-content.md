@@ -26,7 +26,7 @@ Si vous avez besoin d'un rendu spécifique, vous pouvez passer une référence d
 <lu-page-header [label]="myTpl"></lu-page-header>
 
 <ng-template #myTpl>
-  <span class="u-textPrimary">Titre</span> personnalisé
+  <span class="u-textProduct">Titre</span> personnalisé
 </ng-template>
 ```
 

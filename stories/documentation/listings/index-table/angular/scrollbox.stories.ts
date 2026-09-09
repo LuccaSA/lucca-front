@@ -20,9 +20,11 @@ export default {
 	argTypes: {
 		layoutFixed: {
 			description: 'Applique une largeur fixe aux colonnes et force le tableau à se compresser dans le scrollbox.',
+			table: { category: 'inputs' },
 		},
 		pagination: {
 			description: 'Ajoute une pagination au tableau.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

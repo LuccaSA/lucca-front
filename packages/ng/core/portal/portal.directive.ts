@@ -4,15 +4,15 @@ import { PORTAL_CONTEXT, PortalContent } from './portal-content';
 @Directive({
 	selector: '[luPortal]',
 })
-export class PortalDirective<T = unknown> implements OnDestroy {
+export class PortalDirective<T extends object = object> implements OnDestroy {
 	private viewContainerRef = inject(ViewContainerRef);
 	private renderer = inject(Renderer2);
 	private templateRef = inject(TemplateRef);
 	private injector = inject(Injector);
 
-	luPortal = input.required<PortalContent<T>>();
+	readonly luPortal = input.required<PortalContent<T>>();
 
-	luPortalContext = input<T | null>(null);
+	readonly luPortalContext = input<T | null>(null);
 
 	private createdTextElement: Text | null = null;
 	private embeddedViewRef?: EmbeddedViewRef<T>;
@@ -112,7 +112,7 @@ export class PortalDirective<T = unknown> implements OnDestroy {
 		}
 	}
 
-	public static ngTemplateContextGuard<T>(_dir: PortalDirective<T>, _ctx: unknown): _ctx is void {
+	public static ngTemplateContextGuard<T extends object>(_dir: PortalDirective<T>, _ctx: unknown): _ctx is void {
 		return true;
 	}
 }

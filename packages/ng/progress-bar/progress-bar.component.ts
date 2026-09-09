@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { ProgressBarState } from './progress-bar.type';
 
 @Component({
@@ -12,7 +13,7 @@ export class ProgressBarComponent {
 	/**
 	 * Progress percentage (0 to 100)
 	 */
-	readonly value = input(0, { transform: numberAttribute });
+	readonly value = input(0, { transform: luNumberAttribute });
 
 	/**
 	 * Progress bar state
@@ -22,7 +23,7 @@ export class ProgressBarComponent {
 	/**
 	 * Displays a loading state without progress information
 	 */
-	readonly indeterminate = input(false, { transform: booleanAttribute });
+	readonly indeterminate = input(false, { transform: luBooleanAttribute });
 
 	readonly stateClass = computed(() => ({
 		[`is-${this.state()}`]: !!this.state(),

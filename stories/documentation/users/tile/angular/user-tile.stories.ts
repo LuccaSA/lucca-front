@@ -123,6 +123,7 @@ export const Basic: StoryObj<UserTileStoryArgs> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		size: {
 			description: 'Taille du composant.',
@@ -130,12 +131,14 @@ export const Basic: StoryObj<UserTileStoryArgs> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		role: {
 			description: 'Rôle de l’utilisateur affiché sous son nom.',
 			control: {
 				type: 'text',
 			},
+			table: { category: 'inputs' },
 		},
 		firstNameFormat: {
 			description: '[Story] Format d’affichage du prénom.',
@@ -143,6 +146,7 @@ export const Basic: StoryObj<UserTileStoryArgs> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		lastNameFormat: {
 			description: '[Story] Format d’affichage du nom de famille.',
@@ -150,18 +154,21 @@ export const Basic: StoryObj<UserTileStoryArgs> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		lastNameFirst: {
 			description: '[Story] Affiche le nom de famille avant le prénom.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 		withPopover: {
 			description: '[Story] Affiche UserPopover au survol du composant.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 };

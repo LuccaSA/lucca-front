@@ -16,6 +16,7 @@ export default {
 				type: 'text',
 			},
 			description: 'Titre de la section. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

@@ -33,8 +33,8 @@ export class LuTitleStrategy extends TitleStrategy {
 	private readonly luccaTitle$ = this.#toLuccaTitle$(this.appTitle);
 
 	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>([Lucca]);
-	titleParts$ = this.titlePartsSubject.asObservable();
-	title$ = this.titleParts$.pipe(
+	readonly titleParts$ = this.titlePartsSubject.asObservable();
+	readonly title$ = this.titleParts$.pipe(
 		switchMap((titleParts) => combineLatest(titleParts.map((part) => (typeof part === 'string' ? of(part) : part)))),
 		map((parts) => parts.join(TitleSeparator)),
 		distinctUntilChanged(),
@@ -57,7 +57,8 @@ export class LuTitleStrategy extends TitleStrategy {
 		// Title page is display from child to root
 		const pageTitles = this.#getPageTitleParts(routerState.root).reverse();
 		const translatedPageTitles = uniqTitle(pageTitles)
-			.filter(({ title }) => title !== '')
+			// Routes without a title expose it as nil, which must not reach the consumer's translate service
+			.filter(({ title }) => !!title)
 			.map(({ title, params }) => (this.translateService ? this.translateService.translate(title, params) : title));
 		// Add the name app
 		const titleParts = [...translatedPageTitles, this.luccaTitle$].filter((x) => !!x);

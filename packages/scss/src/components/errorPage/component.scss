@@ -2,8 +2,8 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-errorPage-background);
-	block-size: 100vh;
-	inline-size: 100vw;
+	block-size: 100vb;
+	inline-size: 100vi;
 	line-height: 1.2;
 	overflow: hidden;
 	display: block;
@@ -14,7 +14,7 @@
 			max-inline-size: 1200px;
 			padding-block: 0;
 			padding-inline: var(--pr-t-spacings-400);
-			inline-size: 100vw;
+			inline-size: 100vi;
 			margin-block: 0;
 			margin-inline: auto;
 			display: flex;
@@ -23,8 +23,8 @@
 		}
 
 		.errorPage-section-info {
-			margin-block-start: 10vh;
-			max-inline-size: 90vw;
+			margin-block-start: 10vb;
+			max-inline-size: 90vi;
 			inline-size: 450px;
 			padding-inline-end: var(--pr-t-spacings-400);
 		}
@@ -41,7 +41,7 @@
 		}
 
 		.errorPage-section-image {
-			margin-block-start: 10vh;
+			margin-block-start: 10vb;
 			inline-size: 50%;
 			max-inline-size: 580px;
 			min-inline-size: 350px;

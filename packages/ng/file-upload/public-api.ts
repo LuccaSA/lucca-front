@@ -1,6 +1,7 @@
 export * from './file-dropzone/file-dropzone.component';
 export * from './file-entry/file-entry.type';
 export * from './file-entry/file-entry.component';
+export * from './file-entry-wrapper/file-entry-wrapper.component';
 export * from './file-upload-entry';
 export * from './file-upload.type';
 export { formatFileSize } from './formatter';

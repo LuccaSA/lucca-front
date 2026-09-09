@@ -1,6 +1,6 @@
-@if (heading()) {
+@if (heading(); as heading) {
 	<div role="heading" [attr.aria-level]="level()" class="verticalNavigation-sectionTitle">
-		<ng-container *luPortal="heading()" />
+		<ng-container *luPortal="heading" />
 	</div>
 }
 <ul class="verticalNavigation-list">

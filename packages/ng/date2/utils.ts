@@ -1,5 +1,5 @@
 import { isNil } from '@lucca-front/ng/core';
-import { Day, format, isSameDay, isSameMonth, isSameYear, parse, startOfDecade, startOfMonth, startOfYear } from 'date-fns';
+import { Day, FirstWeekContainsDate, format, isSameDay, isSameMonth, isSameWeek, isSameYear, parse, startOfDecade, startOfMonth, startOfYear, WeekOptions } from 'date-fns';
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
@@ -13,34 +13,46 @@ export function getJSFirstDayOfWeek(weekInfo: CalendarWeekInfo): Day {
 	return (weekInfo.firstDay % 7) as Day;
 }
 
+export function getWeekNumberOptions(weekInfo: CalendarWeekInfo): { weekStartsOn: Day; firstWeekContainsDate: FirstWeekContainsDate } {
+	const weekStartsOn = getJSFirstDayOfWeek(weekInfo);
+	// Monday-start locales follow ISO 8601 numbering (the first week of the year is the one containing January 4th),
+	// others (like en-US) number the week containing January 1st as week 1.
+	return { weekStartsOn, firstWeekContainsDate: weekStartsOn === 1 ? 4 : 1 };
+}
+
 const modeToComparator: Record<CalendarMode, (a: Date, b: Date) => boolean> = {
 	day: isSameDay,
+	week: isSameWeek,
 	month: isSameMonth,
 	year: isSameYear,
 };
 
 const modeToCalendarComparator: Record<CalendarMode, (a: Date, b: Date) => boolean> = {
 	day: isSameMonth,
+	week: isSameWeek,
 	month: isSameYear,
 	year: (a, b) => Math.floor(a.getFullYear() / 10) === Math.floor(b.getFullYear() / 10),
 };
 
 const modeToPeriodStart: Record<CalendarMode, (date: Date) => Date> = {
 	day: startOfMonth,
+	week: startOfMonth, // week mode pages by month (the grid shows a full month of weeks)
 	month: startOfYear,
 	year: startOfDecade,
 };
 
-export function comparePeriods(mode: CalendarMode, a: Date, b: Date): boolean {
+export function comparePeriods(mode: CalendarMode | null, a: Date, b: Date, weekOptions?: WeekOptions): boolean {
+	if (!mode) return false;
+	if (mode === 'week') return isSameWeek(a, b, weekOptions);
 	return modeToComparator[mode](a, b);
 }
 
 export function compareCalendarPeriods(mode: CalendarMode, a: Date, b: Date): boolean {
-	return modeToCalendarComparator[mode](a, b);
+	return mode ? modeToCalendarComparator[mode](a, b) : false;
 }
 
-export function startOfPeriod(mode: CalendarMode, date: Date): Date {
-	return modeToPeriodStart[mode](date);
+export function startOfPeriod(mode: CalendarMode | null, date: Date): Date {
+	return mode ? modeToPeriodStart[mode](date) : date;
 }
 
 function stringToDateISO(value: string): Date {
@@ -51,6 +63,9 @@ function stringToDateISO(value: string): Date {
 	return res;
 }
 
+export function transformDateInputToDate(value: null | undefined): null;
+export function transformDateInputToDate(value: Date | string): Date;
+export function transformDateInputToDate(value: Date | string | null): Date | null;
 export function transformDateInputToDate(value: Date | null | undefined | string): Date | null {
 	if (isNil(value)) {
 		return null;
@@ -61,6 +76,8 @@ export function transformDateInputToDate(value: Date | null | undefined | string
 	return stringToDateISO(value);
 }
 
+export function transformDateToDateISO(value: null): null;
+export function transformDateToDateISO(value: Date): string;
 export function transformDateToDateISO(value: Date | null): string | null {
 	if (isNil(value)) {
 		return null;
@@ -82,17 +99,20 @@ export function transformDateRangeInputToDateRange(value: DateRange | null | und
 		return value;
 	}
 
+	const valueEnd = value.end ? transformDateInputToDate(value.end) : null;
+
 	return {
 		...value,
 		start: transformDateInputToDate(value.start),
-		end: transformDateInputToDate(value.end),
+		end: valueEnd,
 	};
 }
 
 export function transformDateRangeToDateRangeInput(value: DateRange): DateRangeInput {
+	const valueEnd = value.end ? transformDateToDateISO(value.end) : null;
 	return {
 		...value,
 		start: transformDateToDateISO(value.start),
-		end: transformDateToDateISO(value.end),
+		end: valueEnd,
 	};
 }

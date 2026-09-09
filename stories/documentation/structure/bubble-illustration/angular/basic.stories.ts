@@ -12,6 +12,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’illustration.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(BUBBLE_ILLUSTRATION_SIZE),
@@ -19,6 +20,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		palette: {
 			options: setStoryOptions([...PALETTE, ...DECORATIVE_PALETTE]),
@@ -26,9 +28,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au composant.',
+			table: { category: 'inputs' },
 		},
 		action: {
 			description: 'Ajoute une icône d’action (+) à l’illustration.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

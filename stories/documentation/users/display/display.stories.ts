@@ -37,10 +37,12 @@ export default {
 					...Object.entries(LuDisplayHybrid).reduce((acc, [value, key]) => ({ ...acc, [key]: `LuDisplayHybrid.${value}` }), {}),
 				},
 			},
+			table: { category: 'inputs' },
 		},
 		separator: {
 			description: 'Séparateur utilisé entre les noms.',
 			control: 'text',
+			table: { category: 'inputs' },
 		},
 		formatter: {
 			description: 'Formate la liste d’utilisateurs selon la langue, via `Intl.ListFormat`.',
@@ -49,6 +51,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

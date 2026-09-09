@@ -2,7 +2,7 @@ import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, input, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { IntlPluralLabelPipe, intlInputOptions } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuOptionPickerPanel, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
@@ -16,6 +16,7 @@ import { LuEstablishmentSearcherComponent } from '../searcher';
 import { LuEstablishmentSelectAllComponent } from '../select-all';
 import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.translate';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated prefer SimpleSelect or MultipleSelect with establishments directive
  */
@@ -34,6 +35,7 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 		LuOptionItemComponent,
 		LuForLegalUnitsDirective,
 		LuInputDisplayerDirective,
+		IntlPluralLabelPipe,
 	],
 	providers: [
 		{
@@ -74,7 +76,7 @@ export class LuEstablishmentSelectInputComponent<
 		return this.isSearching ? 'name' : 'legalunit.name,name';
 	}
 
-	public intl = input(...intlInputOptions(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS));
+	public readonly intl = input(...intlInputOptions(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS));
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

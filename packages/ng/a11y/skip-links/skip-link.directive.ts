@@ -14,12 +14,12 @@ export class SkipLinkDirective implements OnDestroy {
 
 	link: LuSkipLink;
 
-	luSkipLinkLabel = input.required<string>();
-	luSkipLinkTarget = input<string>('');
+	readonly luSkipLinkLabel = input.required<string>();
+	readonly luSkipLinkTarget = input<string>('');
 
-	linkTarget = linkedSignal(() => this.luSkipLinkTarget());
+	readonly linkTarget = linkedSignal(() => this.luSkipLinkTarget());
 
-	#link = computed(() => {
+	readonly #link = computed(() => {
 		return {
 			label: this.luSkipLinkLabel(),
 			id: this.linkTarget(),

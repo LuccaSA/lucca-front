@@ -62,6 +62,8 @@
 			$wrappingElements: 'ol, ul';
 
 			&:not(:has(#{$notPlainText})) {
+				white-space: var(--components-readMore-content-whiteSpace);
+
 				&::after {
 					@extend %after;
 				}

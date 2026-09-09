@@ -1,6 +1,6 @@
 import { UPDATE_STORY_ARGS } from 'storybook/internal/core-events';
 import { addons } from 'storybook/preview-api';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 
 export async function sleep(ms: number) {
 	await new Promise((resolve) => setTimeout(resolve, ms));
@@ -31,6 +31,90 @@ export async function expectNgModelDisplay(canvas: HTMLElement, expectedValue: s
 	const canvasElement = within(canvas);
 	const modelDisplay = canvasElement.getByTestId('pr-ng-model');
 	await expect(modelDisplay).toHaveTextContent(expectedValue);
+}
+
+/**
+ * The vitest browser environment doesn't load the global component styles (packages/ng/styles),
+ * so select panels have no max-height nor opening animation there. This re-creates the production
+ * constraints (copied from packages/ng/styles/components/_picker.scss and
+ * packages/scss/src/commons/utils/keyframe.scss) so scroll-related assertions are meaningful.
+ */
+export function ensurePickerPanelStyles(): void {
+	if (document.getElementById('test-picker-panel-styles')) {
+		return;
+	}
+	const style = document.createElement('style');
+	style.id = 'test-picker-panel-styles';
+	style.textContent = `
+		/* Hold at scale(0) for the first half: production's scaleIn starts at scale(0) for a frame,
+		   widening that window makes the "scroll during opening animation" regression deterministic */
+		@keyframes testScaleIn { 0% { transform: scale(0); } 50% { transform: scale(0); } 100% { transform: scale(1); } }
+		.lu-picker-content {
+			max-block-size: 20rem;
+			overflow-y: auto;
+			display: block;
+			animation: testScaleIn 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+		}
+		/* Realistic option row height (production ~2.75rem), so long lists actually overflow */
+		.lu-picker-content [role='option'] {
+			display: block;
+			min-block-size: 2.75rem;
+		}
+	`;
+	document.head.appendChild(style);
+}
+
+/**
+ * Returns the scrollable container of the currently open select panel
+ * (walks up from the listbox element to the first scrollable ancestor).
+ */
+export function getPanelScrollContainer(): HTMLElement {
+	let element: HTMLElement | null = screen.getByRole('listbox');
+	while (element && element.scrollHeight <= element.clientHeight + 1) {
+		element = element.parentElement;
+	}
+	return element ?? screen.getByRole('listbox');
+}
+
+/**
+ * Whether the given option is fully visible inside the open select panel's scroll container.
+ */
+export function isFullyVisibleInPanel(option: HTMLElement): boolean {
+	const containerRect = getPanelScrollContainer().getBoundingClientRect();
+	const rect = option.getBoundingClientRect();
+	// While the opening animation runs (scale(0)), rects are degenerate: not visible yet
+	return rect.height > 0 && rect.top >= containerRect.top - 2 && rect.bottom <= containerRect.bottom + 2;
+}
+
+/**
+ * Options of the currently open select panel, once its content has settled.
+ *
+ * `role="option"` alone is not enough: while the panel loads, the listbox renders an `inert`
+ * skeleton row that keeps the option role, and `inert` is ignored by testing-library's
+ * accessibility filter (it only knows `display: none`, `visibility: hidden`, `hidden` and
+ * `aria-hidden`). A plain `findAllByRole('option')` would therefore resolve on that placeholder
+ * before the real options arrive. Waiting for the listbox to drop `aria-busy` and skipping the
+ * inert rows keeps the queries on actual options.
+ */
+export async function findPanelOptions(): Promise<HTMLElement[]> {
+	return waitFor(() => {
+		const listbox = screen.getByRole('listbox');
+		expect(listbox).toHaveAttribute('aria-busy', 'false');
+		const options = within(listbox)
+			.getAllByRole('option')
+			.filter((option) => !option.closest('[inert]'));
+		expect(options.length).toBeGreaterThan(0);
+		return options;
+	});
+}
+
+/**
+ * Whether the given panel option is the multi-select "select all" row. It is rendered as a
+ * checkbox row in the listbox header instead of a regular option, so it carries neither the
+ * option id of the panel element nor a selected state.
+ */
+export function isSelectAllOption(option: HTMLElement): boolean {
+	return option.id.includes('select-all') || option.classList.contains('multiSelectAllDisplayer');
 }
 
 export async function clearInputs(inputs: HTMLElement[]) {

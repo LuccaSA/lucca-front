@@ -12,13 +12,13 @@
 					luButton
 					type="button"
 					[palette]="submitPalette"
-					[disabled]="submitDisabled$ | async"
+					[disabled]="(submitDisabled$ | async) ?? false"
 					[class]="submitClass()"
 					(click)="submit()"
 				>
 					{{ submitLabel$ | async }}
 					@if (hasSubmitCounter$ | async) {
-						<lu-numeric-badge disableTooltip palette="product" [value]="submitCounter$ | async" />
+						<lu-numeric-badge disableTooltip palette="product" [value]="(submitCounter$ | async) ?? 0" />
 					}
 				</button>
 			}

@@ -25,3 +25,12 @@
 @mixin stickyBlock {
 	--components-mainLayout-content-inside-block-position: sticky;
 }
+
+@mixin narrow {
+	// ratio: 0.75
+	--components-mainLayout-bubblesStartEndSvgInlineSize: 162px;
+	--components-mainLayout-bubblesEndStartSvgInlineSize: 186px;
+	--components-mainLayout-bubblesStartEndBlockSize: 174px;
+	--components-mainLayout-bubblesEndStartBlockSize: 174px;
+	--components-mainLayout-bubblesStartEndSvgInsetInlineEnd: -1.5rem;
+}

@@ -1,14 +1,13 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-	booleanAttribute,
+	afterNextRender,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
 	effect,
 	ElementRef,
 	forwardRef,
-	HostBinding,
 	inject,
 	Injector,
 	input,
@@ -21,12 +20,12 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { isNil, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, isNotNil, luBooleanAttribute, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { isSameDay, parse, startOfDay } from 'date-fns';
+import { addDays, getWeek, parse, setDay, setWeek, startOfDay, startOfWeek } from 'date-fns';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -46,6 +45,8 @@ export type DateInputValidatorErrorType = {
 	styleUrl: './date-input.component.scss',
 	host: {
 		class: 'dateField',
+		'[class.mod-filterPill]': 'isFilterPill',
+		'[class.mod-auto]': 'isWidthAuto',
 	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -71,21 +72,22 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	#injector = inject(Injector);
 	ngControl: NgControl; // Initialized in ngOnInit
+	weekParsingRegexp = /(\d{1,2})\D*(\d{4})?/;
 
 	// CVA stuff
 	#onChange?: (value: Date | null) => void;
 
 	#luClass = inject(LuClass);
 
-	autocomplete = input<AutoFill>('off');
+	readonly autocomplete = input<AutoFill>('off');
 
-	placeholder = input<string>();
+	readonly placeholder = input<string>();
 
-	disableOverflow = input(false, { transform: booleanAttribute });
-	hideOverflow = input(false, { transform: booleanAttribute });
-	widthAuto = input(false, { transform: booleanAttribute });
+	readonly disableOverflow = input(false, { transform: luBooleanAttribute });
+	readonly hideOverflow = input(false, { transform: luBooleanAttribute });
+	readonly widthAuto = input(false, { transform: luBooleanAttribute });
 
-	filterPillDisabled = signal(false);
+	readonly filterPillDisabled = signal(false);
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
@@ -100,31 +102,34 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		),
 	];
 
-	inputFocused = signal(false);
+	readonly inputFocused = signal(false);
 
-	selectedDate = signal<Date | null>(null);
+	readonly selectedDate = signal<Date | null>(null);
 
-	initialValue = signal<Date | null>(undefined);
-	dateFromWriteValue = signal<Date | null>(null);
+	readonly initialValue = signal<Date | null | undefined>(undefined);
+	readonly dateFromWriteValue = signal<Date | null>(null);
 
-	calendar = viewChild(Calendar2Component);
+	readonly calendar = viewChild(Calendar2Component);
 
-	inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
+	readonly inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
 
-	displayValue = computed(() => {
+	readonly displayValue = computed(() => {
 		const textInput = this.userTextInput();
 		if (textInput !== 'ɵ') {
-			const parsedInput = parse(textInput, this.dateFormatWithMode(), startOfDay(new Date()));
+			const parsedInput = this.parseValue(textInput);
 			if (this.isValidDate(parsedInput) && this.inputFocused()) {
 				return textInput;
 			}
 		}
-		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
+		const selectedDate = this.selectedDate();
+		if (selectedDate && this.isValidDate(selectedDate)) {
 			let formatter: Intl.DateTimeFormat;
 			switch (this.mode()) {
 				case 'day':
 					formatter = this.intlDateTimeFormat;
 					break;
+				case 'week':
+					return `${this.intl().weekPrefix}${getWeek(selectedDate, this.weekOptions)}/${selectedDate.getFullYear()}`;
 				case 'month':
 					formatter = this.intlDateTimeFormatMonth;
 					break;
@@ -132,7 +137,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 					formatter = this.intlDateTimeFormatYear;
 					break;
 			}
-			return formatter.format(this.selectedDate());
+			return formatter.format(selectedDate);
 		}
 		// If we are initializing the component, we don't want to display the value
 		if (textInput === 'ɵ') {
@@ -142,39 +147,38 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	});
 
 	// We need to use a "magic key" here to avoid sending a null value change on initialization
-	userTextInput = signal<string>('ɵ');
+	readonly userTextInput = signal<string>('ɵ');
 
 	combinedGetCellInfo = (date: Date, mode: CalendarMode): CellStatus => {
 		const infoFromInput = this.getCellInfo()?.(date, mode);
+		const selectedDate = this.selectedDate();
 		return {
 			classes: [...(infoFromInput?.classes || [])],
 			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
-			selected: this.selectedDate() && this.calendarMode() === mode && comparePeriods(mode, date, this.selectedDate()),
+			selected: isNotNil(selectedDate) && this.calendarMode() === mode && comparePeriods(mode, date, selectedDate, this.weekOptions),
 			label: infoFromInput?.label,
 		};
 	};
 
-	previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
+	readonly previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
 
-	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
+	readonly nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
-	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
 
-	@HostBinding('class.mod-auto')
 	get isWidthAuto() {
 		return this.widthAuto();
 	}
 
-	isFilterPillEmpty = computed(() => !this.selectedDate());
-	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	readonly isFilterPillEmpty = computed(() => !this.selectedDate());
+	readonly isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	#defaultClearable = false;
-	#defaultFilterPillClearable = signal<boolean | null>(null);
+	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
 
 	filterPillPopoverCloseFn?: () => void;
 
 	get isNavigationButtonFocused(): boolean {
-		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
+		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement || undefined);
 	}
 
 	constructor() {
@@ -201,16 +205,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				return;
 			}
 			if (inputValue.length > 0) {
-				let parsed: Date;
-				try {
-					parsed = parse(inputValue, this.dateFormatWithMode(), startOfDay(new Date()));
-				} catch {
-					/* not a correct date */
-				}
+				const parsed: Date | null = this.parseValue(inputValue);
 				if (parsed instanceof Date && parsed.getFullYear() > 999) {
-					this.selectedDate.set(startOfDay(parsed));
-					this.currentDate.set(startOfDay(parsed));
-					this.tabbableDate.set(startOfDay(parsed));
+					const normalized = this.#normalizeDate(parsed);
+					this.selectedDate.set(normalized);
+					this.currentDate.set(normalized);
+					this.tabbableDate.set(normalized);
 				} else if (!this.isFilterPill) {
 					this.selectedDate.set(parsed);
 				}
@@ -229,6 +229,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		effect(() => {
 			this.#luClass.setState({
 				'mod-day': this.mode() === 'day',
+				'mod-week': this.mode() === 'week',
 				'mod-month': this.mode() === 'month',
 				'mod-year': this.mode() === 'year',
 			});
@@ -241,24 +242,60 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
-			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
-				this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
+			if (tabbableDate && !comparePeriods(calendarMode ?? null, tabbableDate, this.currentDate(), this.weekOptions)) {
+				this.currentDate.set(startOfPeriod(calendarMode ?? null, tabbableDate));
 			}
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
 				this.calendar()?.blurTabbableDate();
-				setTimeout(() => {
-					this.calendar()?.focusTabbableDate();
-				});
+				afterNextRender(
+					() => {
+						this.calendar()?.focusTabbableDate();
+					},
+					{ injector: this.#injector },
+				);
 			}
 		});
+	}
+
+	parseValue(inputValue: string): Date | null {
+		if (this.mode() === 'week') {
+			let parsed: Date | null = startOfDay(new Date());
+			const regexpResult = this.weekParsingRegexp.exec(inputValue);
+			if (regexpResult) {
+				// If we have a year, use it, otherwise use current year
+				if (regexpResult[2]) {
+					parsed.setFullYear(+regexpResult[2]);
+				}
+				parsed = setWeek(parsed, +regexpResult[1], this.weekOptions);
+				parsed = setDay(parsed, 3);
+				return parsed;
+			} else {
+				return null;
+			}
+		} else {
+			try {
+				return parse(inputValue, this.dateFormatWithMode(), startOfDay(new Date()));
+			} catch {
+				/* not a correct date */
+				return null;
+			}
+		}
 	}
 
 	ngOnInit() {
 		this.ngControl = this.#injector.get(NgControl);
 	}
 
-	#safeCompareDate(a: Date, b: Date): boolean {
-		return a === b || (!!a && !!b && isSameDay(a, b));
+	// The value is a Date in every mode, but two dates are "the same value" only if they belong
+	// to the same period for the current mode (same week in week mode, same day in day mode, etc.)
+	#safeCompareDate(a: Date | null, b: Date | null): boolean {
+		return a === b || (!!a && !!b && comparePeriods(this.mode(), a, b, this.weekOptions));
+	}
+
+	// The emitted value is always the start of the period matching the current mode:
+	// start of day, or start of week in week mode.
+	#normalizeDate(date: Date): Date {
+		return this.mode() === 'week' ? addDays(startOfWeek(date, this.weekOptions), 3) : startOfDay(date);
 	}
 
 	registerFilterPillClosePopover(closeFn: () => void): void {
@@ -282,10 +319,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		if (!this.isFilterPill) {
 			ref.openPopover(true, true);
 			// Once popover is opened, aka in the next CD cycle, focus current tabbable date
-
-			setTimeout(() => {
-				this.calendar()?.focusTabbableDate();
-			});
+			afterNextRender(
+				() => {
+					this.calendar()?.focusTabbableDate();
+				},
+				{ injector: this.#injector },
+			);
 		}
 	}
 
@@ -311,7 +350,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	validate(control: AbstractControl<Date | string | null>): Partial<DateInputValidatorErrorType> | null {
 		// null is not an error but means we'll skip everything else, we'll let the presence of a
 		// Validators.required (or not) decide if it's an error.
-		if (control.value === null || control.value === undefined) {
+		if (isNil(control.value)) {
 			return null;
 		}
 		const date = transformDateInputToDate(control.value);
@@ -344,16 +383,16 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		}
 
 		const _date = transformDateInputToDate(date);
+		const normalized = isNotNil(_date) ? this.#normalizeDate(_date) : null;
 
 		if (this.initialValue() === undefined) {
-			this.initialValue.set(_date);
+			this.initialValue.set(normalized);
 		}
 
-		if (date != null) {
-			const start = startOfDay(_date);
-			this.dateFromWriteValue.set(start);
-			this.selectedDate.set(start);
-			this.currentDate.set(start);
+		if (isNotNil(date) && isNotNil(normalized)) {
+			this.dateFromWriteValue.set(normalized);
+			this.selectedDate.set(normalized);
+			this.currentDate.set(normalized);
 		} else {
 			this.reset();
 		}
@@ -367,11 +406,11 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	override setDisabledState(isDisabled: boolean) {
 		this.filterPillDisabled.set(isDisabled);
-		super.setDisabledState(isDisabled);
+		super.setDisabledState?.(isDisabled);
 	}
 
 	reset(): Date | null {
-		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
+		const newValue = this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : null;
 		this.dateFromWriteValue.set(newValue);
 		this.selectedDate.set(newValue);
 		return newValue;
@@ -389,9 +428,10 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	}
 
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
-		this.selectedDate.set(date);
-		this.currentDate.set(date);
-		this.tabbableDate.set(date);
+		const normalized = this.#normalizeDate(date);
+		this.selectedDate.set(normalized);
+		this.currentDate.set(normalized);
+		this.tabbableDate.set(normalized);
 		if (!this.isFilterPill) {
 			popoverRef.close();
 			this.inputRef()?.nativeElement.focus();

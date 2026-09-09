@@ -18,6 +18,7 @@ export default {
 	argTypes: {
 		navSideCompact: {
 			if: { arg: 'navSide', truthy: true },
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

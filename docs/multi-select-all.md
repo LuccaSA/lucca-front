@@ -53,6 +53,20 @@ L'utilisation de `withSelectAll` apporte un certain nombre de changements :
   export type LuMultiSelectionMode = 'include' | 'exclude' | 'none' | 'all';
   ```
 
+#### Label pluriel (langues avec plus de 2 formes, ex. polonais)
+
+`withSelectAllDisplayerLabelFn` accepte une fonction `(count: number) => string | LuPluralForms`. Si elle
+retourne un objet `LuPluralForms` (`{ one?, few?, many?, other? }`), la directive résout elle-même la bonne
+forme CLDR en fonction du nombre d'éléments sélectionnés :
+
+```html
+<lu-multi-select establishments withSelectAll [withSelectAllDisplayerLabelFn]="establishmentsDisplayerLabel" />
+```
+
+```ts
+establishmentsDisplayerLabel = (count: number) => this.i18n.ESTABLISHMENTS_DISPLAYER_LABEL;
+```
+
 ### Exemple : Barre de filtres
 
 On pourra utiliser la fonction `selectionToQueryParams` qui permet de créer un objet utilisable en query params à partir d'une `LuMultiSelection`.

@@ -1,13 +1,14 @@
-import { CONTAINER_SIZE, ContainerComponent } from '@lucca-front/ng/container';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from '@/helpers/common-arg-types';
 import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { CONTAINER_SIZE, ContainerComponent } from '@lucca-front/ng/container';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Structure/Container/Angular/Basic',
 	argTypes: {
 		center: {
 			description: 'Centre horizontalement le container.',
+			table: { category: 'inputs' },
 		},
 		overflow: HiddenArgType,
 		max: {
@@ -16,6 +17,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

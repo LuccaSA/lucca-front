@@ -15,6 +15,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	render: ({ label, icon, altIcon, hiddenLabel }) => {

@@ -8,6 +8,8 @@
 		display: flex;
 		flex-direction: column;
 		min-block-size: 0;
+		max-block-size: none;
+		max-inline-size: none;
 
 		// to target open Angular components when opening a dialog via a route
 		> router-outlet + * {

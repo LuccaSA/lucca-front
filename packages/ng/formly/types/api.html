@@ -5,7 +5,7 @@
 	[multiple]="props['multiple']"
 	(focus)="focus()"
 	(blur)="blur()"
-	[placeholder]="props.placeholder"
+	[placeholder]="props.placeholder ?? ''"
 	[api]="_api"
 	[filters]="_filters"
 	[orderBy]="_orderBy"

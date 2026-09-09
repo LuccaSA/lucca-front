@@ -1,3 +1,5 @@
+import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -5,8 +7,6 @@ import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field
 import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { useState } from 'storybook/preview-api';
 
 export default {
@@ -25,18 +25,21 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Désactive le champ.',
+			table: { category: 'inputs' },
 		},
 		label: {
 			control: {
 				type: 'text',
 			},
 			description: 'Modifie le label du champ.',
+			table: { category: 'inputs' },
 		},
 		required: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: ['S', 'M'],
@@ -44,15 +47,18 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille de la checkbox.',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
+			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -60,41 +66,51 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
+			table: { category: 'inputs' },
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
+			table: { category: 'inputs' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
+			table: { category: 'inputs' },
 		},
 		openOnFocus: {
 			description: 'Ouvre le panel automatiquement au focus du champ.',
+			table: { category: 'inputs' },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
-			description: '[v19.2] Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée.',
+			description: 'Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée.',
+			table: { category: 'inputs' },
 		},
 		autocomplete: {
 			control: {
 				type: 'text',
 			},
 			description: 'Modifie l’attribut autocomplete des champs input.',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
 		},
 		hasNoInvariant: {
 			description: "[v21.3] Supprime la notion d'invariant du champ, nécessite d'être associé à un Validateur required et l'utilisation de `displayLocale`.",
+			table: { category: 'inputs' },
 		},
 		hasAIButtons: {
 			description: "[v21.3] Ajoute les boutons 'translate with ai', qui émettent la locale à traduire via l'output `translateWithAI`",
+			table: { category: 'inputs' },
 		},
 		displayLocale: {
 			description: '[v21.3] Locale à utiliser comme valeur affichée dans le champ en version collapsed lorsque `hasNoInvariant` est active.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;
@@ -126,7 +142,7 @@ export const Basic: StoryObj<
 					},
 					{
 						cultureCode: 'de-DE',
-						value: "I don't speak German",
+						value: 'Wert auf Deutsch',
 					},
 				]),
 		);

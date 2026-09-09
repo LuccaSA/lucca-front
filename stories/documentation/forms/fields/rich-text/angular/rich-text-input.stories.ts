@@ -28,27 +28,35 @@ export default {
 	argTypes: {
 		value: {
 			description: '[Story] Valeur du champ.',
+			table: { category: 'inputs' },
 		},
 		placeholder: {
 			description: 'Applique un placeholder au champ.',
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			description: 'Désactive le champ.',
+			table: { category: 'inputs' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		disableSpellcheck: {
 			description: 'Désactive le correcteur d’orthographe.',
+			table: { category: 'inputs' },
 		},
 		autoResize: {
 			description: 'Active / désactive l’autoresize du champ.',
+			table: { category: 'inputs' },
 		},
 		hideToolbar: {
 			description: 'Masque les options de mise en forme.',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;
@@ -136,6 +144,21 @@ export const WithTagPluginWithNoInitialValue: StoryObj<RichTextInputComponent & 
 																			key: 'tag3',
 																			description: 'Tag 3',
 																		},
+																		{
+																			key: 'tag4',
+																			description: 'Tag 4',
+																			secondary: true,
+																		},
+																		{
+																			key: 'tag5',
+																			description: 'Prénom',
+																			secondary: true,
+																		},
+																		{
+																			key: 'tag6',
+																			description: 'Téléphone',
+																			secondary: true,
+																		},
 																	]" />
 		</lu-rich-text-input>
 </lu-form-field>
@@ -210,6 +233,24 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 																			key: 'tag3',
 																			description: 'Tag 3',
 																		},
+																		{
+																		key: 'tag4',
+																		description: 'Tag 4',
+																		secondary: true,
+																			group: 'Groupe 2'
+																		},
+																		{
+																			key: 'tag6',
+																			description: 'Téléphone',
+																			secondary: true,
+																			group: 'Groupe 2'
+																		},
+																		{
+																			key: 'tag5',
+																			description: 'Prénom',
+																			secondary: true,
+																			group: 'Groupe 1'
+																		},
 																	]" />
 		</lu-rich-text-input>
 </lu-form-field>
@@ -255,6 +296,21 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 																		key: 'tag3',
 																		description: 'Tag 3',
 																	},
+																	{
+																		key: 'tag4',
+																		description: 'Tag 4',
+																		secondary: true,
+																	},
+																	{
+																		key: 'tag5',
+																		description: 'Prénom',
+																		secondary: true,
+																	},
+																	{
+																		key: 'tag6',
+																		description: 'Téléphone',
+																		secondary: true,
+																	},
 																]" />
 	</lu-rich-text-input>
 </lu-form-field>
@@ -265,7 +321,7 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 		};
 	},
 	args: {
-		value: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and regular {{tag2}} trailing text\nLine 2\n\nParagraph 2\n\n\n\nParagraph 3',
+		value: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and {{tag4}} regular {{tag2}} trailing text\nLine 2\n\nParagraph 2\n\n\n\nParagraph 3',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,
@@ -347,6 +403,21 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 																	{
 																		key: 'tag3',
 																		description: 'Tag 3',
+																	},
+																	{
+																		key: 'tag4',
+																		description: 'Tag 4',
+																		secondary: true,
+																	},
+																	{
+																		key: 'tag5',
+																		description: 'Prénom',
+																		secondary: true,
+																	},
+																	{
+																		key: 'tag6',
+																		description: 'Téléphone',
+																		secondary: true,
 																	},
 																]"/>
 	</lu-rich-text-input>

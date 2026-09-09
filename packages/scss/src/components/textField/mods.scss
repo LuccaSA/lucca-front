@@ -6,6 +6,7 @@
 	--component-textField-font: var(--pr-t-font-body-S);
 	--component-textField-padding: var(--pr-t-spacings-75);
 	--component-textField-affix-size: 1.5rem;
+	--component-textField-prefix-lang-minInlineSize: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
 
 	.textField-input-affix-toggle {
 		@include icon.S;
@@ -22,6 +23,20 @@
 
 	.textField-input-affix-icon {
 		@include icon.S;
+	}
+
+	.textField-prefix-lang {
+		&:has(.formLabel-required) {
+			--component-textField-prefix-lang-minInlineSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+		}
+
+		&.mod-withCulture {
+			--component-textField-prefix-lang-minInlineSize: calc(var(--pr-t-spacings-500) + var(--pr-t-spacings-50));
+
+			&:has(.formLabel-required) {
+				--component-textField-prefix-lang-minInlineSize: calc(var(--pr-t-spacings-600) + var(--pr-t-spacings-50));
+			}
+		}
 	}
 }
 

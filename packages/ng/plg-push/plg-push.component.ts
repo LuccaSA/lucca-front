@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 
@@ -26,7 +26,7 @@ export class PLGPushComponent {
 	/**
 	 * Display sign close button
 	 */
-	readonly removable = input(false, { transform: booleanAttribute });
+	readonly removable = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Is the callout removed? Works with two way binding too.

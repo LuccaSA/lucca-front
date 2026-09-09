@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { LuClass, Palette } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, LuClass, Palette } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { StatusBadgeSize } from './status-badge.type';
 
@@ -21,7 +21,7 @@ export class StatusBadgeComponent implements OnChanges {
 	/**
 	 * Truncates the text with an ellipsis and adds a tooltip when the label is too long
 	 */
-	readonly withEllipsis = input(false, { transform: booleanAttribute });
+	readonly withEllipsis = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Changes the text displayed by the status badge

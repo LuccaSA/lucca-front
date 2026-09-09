@@ -37,8 +37,10 @@
 			@include XXL;
 		}
 
-		&.mod-neutralBackground {
-			@include neutralBackground;
+		// neutralBackground is deprecated
+		&.mod-neutralBackground,
+		&.mod-surfaceDefault {
+			@include surfaceDefault;
 		}
 
 		&:where(.mod-drawer) {
@@ -46,11 +48,21 @@
 
 			&:where(.mod-fromBottom) {
 				@include fromBottom;
+
+				&:where(.mod-sheet) {
+					@include sheet;
+
+					@include media.max('XXS') {
+						@include sheetNarrow;
+					}
+				}
 			}
 
-			@include media.max('S') {
-				@include fromBottom;
-				@include maxContent;
+			&:where(:not(.mod-sheet)) {
+				@include media.max('S') {
+					@include fromBottom;
+					@include maxContent;
+				}
 			}
 		}
 
@@ -60,6 +72,11 @@
 
 		&:has(.dialog-inside-header-actionOptional:not(:empty)) {
 			@include withAction;
+		}
+
+		&:not(:has(.dialog-inside-content)),
+		&:has(.dialog-inside-content:empty) {
+			@include noContent;
 		}
 
 		&:has(.horizontalNavigation) {

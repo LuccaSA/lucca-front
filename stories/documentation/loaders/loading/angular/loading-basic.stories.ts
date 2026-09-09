@@ -17,19 +17,24 @@ export default {
 		label: {
 			description: '[Story] Modifie le texte affiché par le composant.',
 			control: 'text',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écrans.',
+			table: { category: 'inputs' },
 		},
 		L: {
 			description: 'Applique la taille L au loading. Applique également automatiquement le mode block.',
+			table: { category: 'inputs' },
 		},
 		block: {
 			description: 'Centre le loading dans son conteneur pour une utilisation en pleine page, dialog, section, etc.',
 			if: { arg: 'L', truthy: false },
+			table: { category: 'inputs' },
 		},
 		invert: {
 			description: 'Modifie les couleurs du loading pour un usage sur fond foncé.',
+			table: { category: 'inputs' },
 		},
 		template: {
 			description: 'Applique une mise en forme adaptée à certains contextes (pleine page, dialog, etc.).',
@@ -37,6 +42,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

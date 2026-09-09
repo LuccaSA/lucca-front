@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-code',
@@ -8,5 +9,5 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeComponent {
-	readonly block = input(false, { transform: booleanAttribute });
+	readonly block = input(false, { transform: luBooleanAttribute });
 }

@@ -23,15 +23,6 @@
 	--components-fileUpload-borderColor: var(--palettes-critical-600);
 }
 
-@mixin loading {
-	--components-fileUpload-instruction-display: none;
-	--components-fileUpload-button-display: none;
-}
-
-@mixin loadingS {
-	--components-fileUpload-instruction-display: block;
-}
-
 @mixin hidden {
 	--components-fileUpload-display: none;
 }

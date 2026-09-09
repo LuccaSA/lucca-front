@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, input, viewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnOpenSubscriber, ILuOnOpenSubscriber } from '@lucca-front/ng/core';
 import { combineLatest, merge, Observable, of } from 'rxjs';
@@ -28,23 +28,25 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 })
 export class LuOptionSearcherComponent<T> extends ALuOptionOperator<T> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
 	searchControl = new FormControl();
-	clue$ = merge(of(''), this.searchControl.valueChanges) as Observable<string>;
+	readonly clue$ = merge(of(''), this.searchControl.valueChanges) as Observable<string>;
 	empty$: Observable<boolean>;
-	@ViewChild('searchInput', { read: ElementRef, static: true })
-	searchInput: ElementRef<HTMLElement>;
+
+	readonly searchInput = viewChild.required<ElementRef<HTMLElement>>('searchInput');
+
 	outOptions$: Observable<T[]>;
 	set inOptions$(in$: Observable<T[]>) {
 		this.outOptions$ = combineLatest([in$, this.clue$]).pipe(
 			map(([options, clue]) => {
-				return clue ? (options || []).filter((o) => this.searchFn(o, clue)) : options || [];
+				return clue ? (options || []).filter((o) => this.searchFn()(o, clue)) : options || [];
 			}),
 		);
 		this.empty$ = this.outOptions$.pipe(map((o) => !o || o.length === 0));
 	}
-	@Input() searchFn: (option: T, clue: string) => boolean = () => true;
+
+	readonly searchFn = input<(option: T, clue: string) => boolean>(() => true);
 
 	onOpen() {
-		this.searchInput.nativeElement.focus();
+		this.searchInput().nativeElement.focus();
 		this.searchControl.setValue('');
 	}
 	resetClue() {

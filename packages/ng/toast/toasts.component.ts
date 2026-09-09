@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { intlInputOptions, isNotNil, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { intlInputOptions, isNotNil, luBooleanAttribute, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { merge, Observable } from 'rxjs';
 import { LuToast, LuToastInput, LuToastType } from './toasts.model';
 import { LuToastsService } from './toasts.service';
@@ -16,7 +16,7 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 export class LuToastsComponent {
 	readonly #toastsService = inject(LuToastsService);
 
-	readonly bottom = input(false);
+	readonly bottom = input(false, { transform: luBooleanAttribute });
 	readonly sources = input<Array<Observable<LuToastInput>>>();
 
 	constructor() {

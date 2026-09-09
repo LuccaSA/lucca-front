@@ -2,6 +2,9 @@
 	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
 		"rootDir": "..",
+		// Stories are not published, so they stay out of the strictNullChecks scope
+		// (see the "stories can be strictified" note in eslint.config.mjs).
+		"strictNullChecks": false,
 		"types": ["node", "@testing-library/jest-dom"],
 		"resolveJsonModule": true,
 		"skipLibCheck": true

@@ -1,47 +1,57 @@
-import { computed, Directive, ElementRef, HostBinding, HostListener, inject, input } from '@angular/core';
-import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
+import { computed, Directive, ElementRef, inject, input } from '@angular/core';
 import type { Duration } from 'date-fns';
+import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
 import { comparePeriods, getJSFirstDayOfWeek } from '../utils';
 import { CalendarMode } from './calendar-mode';
-import { CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
+import { CALENDAR_DISPLAY_MODE, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 
 const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
 	day: 'days',
+	week: 'weeks',
 	month: 'months',
 	year: 'years',
 };
 
 @Directive({
 	selector: '[luCalendar2Cell]',
+	host: {
+		'[tabindex]': 'tabindex',
+		'(keydown)': 'keydown($event)',
+	},
 })
 export class Calendar2CellDirective {
 	#host = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
-	#tabbableDate = inject(CALENDAR_TABBABLE_DATE);
+	readonly #tabbableDate = inject(CALENDAR_TABBABLE_DATE);
+	readonly #displayMode = inject(CALENDAR_DISPLAY_MODE);
 	#weekInfo = inject(WEEK_INFO);
 
 	// Index of this day in the current week display row, not depending on locale, 0 is first day of week and 6 is last
-	luCalendar2Cell = input.required<number>();
+	readonly luCalendar2Cell = input.required<number>();
 
-	luCalendar2Mode = input.required<CalendarMode>();
+	readonly luCalendar2Mode = input.required<CalendarMode>();
 
-	luCalendar2Date = input.required<Date>();
+	readonly luCalendar2Date = input.required<Date>();
 
-	@HostBinding('tabindex')
 	get tabindex(): 0 | -1 {
 		return this.isTabbableDate() ? 0 : -1;
 	}
 
-	isTabbableDate = computed(() => {
-		return comparePeriods(this.luCalendar2Mode(), this.luCalendar2Date(), this.#tabbableDate());
+	readonly isTabbableDate = computed(() => {
+		// In week display mode, day cells share the grid with the week rowheaders: only the cell
+		// whose own mode matches the calendar's display mode can be tabbable, so a tabbable date
+		// never makes both a week rowheader and a day cell tabbable at the same time.
+		if (this.luCalendar2Mode() !== this.#displayMode()) {
+			return false;
+		}
+		return comparePeriods(this.luCalendar2Mode(), this.luCalendar2Date(), this.#tabbableDate(), { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) });
 	});
 
-	@HostListener('keydown', ['$event'])
 	keydown($event: Event): void {
 		// See https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/#ex_label for keyboard
 		// navigation standards on date pickers
-		const cellsPerRow = this.luCalendar2Mode() === 'day' ? 7 : 3;
+		const cellsPerRow = this.luCalendar2Mode() === 'day' ? 7 : this.luCalendar2Mode() === 'week' ? 1 : 3;
 		const datePropertyToEdit = modeToDurationKey[this.luCalendar2Mode()];
 		switch (($event as KeyboardEvent).key) {
 			case 'ArrowRight':
@@ -73,7 +83,7 @@ export class Calendar2CellDirective {
 				}
 				break;
 			case 'PageUp':
-				if (this.luCalendar2Mode() === 'day') {
+				if (this.luCalendar2Mode() === 'day' || this.luCalendar2Mode() === 'week') {
 					if (($event as KeyboardEvent).shiftKey) {
 						this.#tabbableDate.set(subYears(this.luCalendar2Date(), 1));
 					} else {
@@ -83,7 +93,7 @@ export class Calendar2CellDirective {
 				}
 				break;
 			case 'PageDown':
-				if (this.luCalendar2Mode() === 'day') {
+				if (this.luCalendar2Mode() === 'day' || this.luCalendar2Mode() === 'week') {
 					if (($event as KeyboardEvent).shiftKey) {
 						this.#tabbableDate.set(addYears(this.luCalendar2Date(), 1));
 					} else {

@@ -123,7 +123,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			return false;
 		}
 	}
-	parse(text: string, granularity: LuDateGranularity = ELuDateGranularity.day): Date {
+	parse(text: string, granularity: LuDateGranularity = ELuDateGranularity.day): Date | undefined {
 		if (!text) {
 			return undefined;
 		}

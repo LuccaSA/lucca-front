@@ -34,7 +34,7 @@ export class DialogHeaderSubtitle {}
 export class DialogHeaderComponent implements OnDestroy {
 	#ref = inject(LuDialogRef);
 
-	intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DIALOG_HEADER_TRANSLATIONS));
 
 	dismissible = !this.#ref.config.alert;
 
@@ -52,9 +52,9 @@ export class DialogHeaderComponent implements OnDestroy {
 		this.#ref.dismiss();
 	}
 
-	optionalAction = contentChild(DialogHeaderAction);
+	readonly optionalAction = contentChild(DialogHeaderAction);
 
-	optionalSubtitle = contentChild(DialogHeaderSubtitle);
+	readonly optionalSubtitle = contentChild(DialogHeaderSubtitle);
 
 	ngOnDestroy(): void {
 		this.#unregisterAriaLabelledBy();

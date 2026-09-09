@@ -9,7 +9,7 @@ export type ILuApiOptionSearcher<T extends import('../../api.model').ILuApiItem 
 export abstract class ALuApiOptionSearcher<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem, S extends ILuApiService<T> = ILuApiService<T>>
 	implements ILuApiOptionFeeder<T>, ILuOnOpenSubscriber
 {
-	outOptions$ = new Subject<T[]>();
+	readonly outOptions$ = new Subject<T[]>();
 	loading$: Observable<boolean>;
 	empty$: Observable<boolean>;
 
@@ -53,10 +53,10 @@ export abstract class ALuApiOptionPagedSearcher<T extends import('../../api.mode
 	extends ALuApiOptionSearcher<T, S>
 	implements ILuApiOptionPagedSearcher<T>, ILuOnScrollBottomSubscriber
 {
-	override outOptions$ = new Subject<T[]>();
+	override readonly outOptions$ = new Subject<T[]>();
 	override loading$: Observable<boolean>;
 	protected _loading = false;
-	protected _page$ = new Subject<void>();
+	protected readonly _page$ = new Subject<void>();
 	protected _isLastPage: boolean;
 	protected _options: T[] = [];
 

@@ -10,12 +10,8 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 			.gridDemo {
 				background-color: var(--pr-t-elevation-surface-sunken);
 				border-radius: var(--pr-t-border-radius-50);
-				min-block-size: 2.7rem;
-				padding-block: 0.6rem;
-				padding-inline: var(--pr-t-spacings-200);
-			}
-			.grid + .grid {
-				margin-block-start: var(--pr-t-spacings-200);
+				min-block-size: 1.5rem;
+				min-inline-size: 1.5rem;
 			}
 		`,
 	],

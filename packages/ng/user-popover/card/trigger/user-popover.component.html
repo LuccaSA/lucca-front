@@ -47,7 +47,9 @@
 						<span class="userPopover-details-info-detail-workplace">
 							<lu-icon icon="calendarPlanning" size="S" />
 							<span class="userPopover-details-info-detail-link-state">
-								{{ intl().EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | intlParams: { date: (employee.dtContractStart | date: "shortDate") } }}
+								{{
+									intl().EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | intlParams: { date: (employee.dtContractStart | date: "shortDate") ?? "" }
+								}}
 							</span>
 						</span>
 					}
@@ -71,9 +73,9 @@
 							<span class="userPopover-details-info-detail-workplace-state">
 								@if (employee.isWorkingNow) {
 									@if (employee.currentWorkLocation) {
-										{{ employee.currentWorkLocation?.name }}
-										@if (employee.currentWorkLocation?.area) {
-											<span class="pr-u-colorTextSubtle"> – {{ employee.currentWorkLocation?.area?.name }}</span>
+										{{ employee.currentWorkLocation.name }}
+										@if (employee.currentWorkLocation.area) {
+											<span class="pr-u-colorTextSubtle"> – {{ employee.currentWorkLocation.area.name }}</span>
 										}
 									}
 									@if (!employee.currentWorkLocation) {

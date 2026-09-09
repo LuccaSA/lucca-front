@@ -22,27 +22,32 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Rend le chip non supprimable.',
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Désactive le composant.',
+			table: { category: 'inputs' },
 		},
 		product: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Applique la palette product au composant.',
+			table: { category: 'inputs' },
 		},
 		withEllipsis: {
 			description: '[20.1] Ellipse le texte et ajoute une tooltip lorsque le label est trop long.',
+			table: { category: 'inputs' },
 		},
 		small: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		feedback: {
 			description: "[20.1] Donne une information sur l'état du composant.",
@@ -50,6 +55,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
@@ -57,9 +63,13 @@ export default {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au chip.',
+			table: { category: 'inputs' },
 		},
 		kill: {
 			description: 'Événement déclenché lors du clic sur le bouton de suppression du chip.',
+			action: 'kill',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'Event' } },
 		},
 	},
 	decorators: [
@@ -77,7 +87,7 @@ function getTemplate(args: ChipBasicStory): string {
 	const small = args.small ? ` size="S"` : ``;
 	const feedback = args.feedback === 'warning' ? ` state="warning"` : args.feedback === 'critical' ? ` state="critical"` : ``;
 	const icon = args.icon ? ` icon="${args.icon}"` : ``;
-	return `<lu-chip${disabled}${unkillable}${product}${ellipsis}${small}${feedback}${icon}>Label</lu-chip>`;
+	return `<lu-chip${disabled}${unkillable}${product}${ellipsis}${small}${feedback}${icon} (kill)="kill($event)">Label</lu-chip>`;
 }
 
 const Template = (args: ChipBasicStory) => ({

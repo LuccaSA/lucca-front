@@ -1,14 +1,14 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { HttpErrorResponse, HttpStatusCode, provideHttpClient } from '@angular/common/http';
 import { Injectable, LOCALE_ID, Pipe, PipeTransform, signal } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { FILE_UPLOAD_SIZE, FileEntry, FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { FILE_UPLOAD_SIZE, FileEntry, FileEntryComponent, FileEntryWrapperComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuInputDirective } from '@lucca-front/ng/input';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 type LuccaFileUploadResultId = string;
 
@@ -119,12 +119,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		fileMaxSize: {
 			description: 'Limite le poids des fichiers importables (en octets).',
 			control: {
 				type: null,
 			},
+			table: { category: 'inputs' },
 		},
 		illustration: {
 			options: ['invoice', 'picture'],
@@ -132,24 +134,35 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’illustration de l’icône dans la zone de drop.',
+			table: { category: 'inputs' },
 		},
 		media: {
 			description: 'Affiche les fichiers importés avec une mise en forme adaptée aux visuels.',
+			table: { category: 'inputs' },
 		},
 		displayFileName: {
 			description: 'Affiche le nom des fichiers importés sous l’image en vue <code>media</code>.',
+			table: { category: 'inputs' },
 		},
 		structure: {
 			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
+			table: { category: 'inputs' },
 		},
 		buttonFilled: {
 			description: 'Affiche le bouton comme action principale de la page.',
+			if: { arg: 'size', truthy: true },
+			table: { category: 'inputs' },
 		},
 		accept: {
+			control: {
+				type: 'object',
+			},
 			description: 'Liste des formats de fichiers acceptés.',
+			table: { category: 'inputs' },
 		},
 		AItag: {
 			description: '[Story] Ajoute un tag AI au contenu du composant.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [
@@ -163,6 +176,7 @@ export default {
 				ButtonComponent,
 				FileUploadToLFEntryPipe,
 				FileEntryComponent,
+				FileEntryWrapperComponent,
 				TagComponent,
 			],
 		}),
@@ -175,7 +189,7 @@ export default {
 
 export const Multi = {
 	render: (args, { argTypes }) => {
-		const { media, size, displayFileName, ...mainArgs } = args;
+		const { media, size, displayFileName, accept, ...mainArgs } = args;
 		const service = new MockFileUploadService();
 		const uploads = signal([] as FileUpload<LuccaFileUploadResult>[]);
 		const fileUploadFeature = {
@@ -211,8 +225,8 @@ export const Multi = {
 		const previewCache = new Map<File, string>();
 		const mediaParam = media ? ` media` : ``;
 		const displayFileNameParam = displayFileName && media ? ` displayFileName` : ``;
-		const sizeSFileUploadParam = size ? ` size="S"` : ``;
-		const sizeSFileEntryParam = media ? ` size="S"` : sizeSFileUploadParam;
+		const sizeLFileUploadParam = size ? ` size="L"` : ``;
+		const sizeLFileEntryParam = media ? `` : sizeLFileUploadParam;
 
 		if (args.AItag) {
 			return {
@@ -236,15 +250,15 @@ export const Multi = {
 					},
 				},
 				template: `<lu-form-field label="Label">
-		<lu-multi-file-upload${sizeSFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])">
+		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])">
 			<lu-tag icon="weatherStars" label="Scan intelligent" AI />
 		</lu-multi-file-upload>
 	</lu-form-field>
-	<div class="fileEntryDisplayWrapper">
+	<lu-file-entry-wrapper>
 		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-			<lu-file-entry${sizeSFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+			<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 		}
-	</div>`,
+	</lu-file-entry-wrapper>`,
 			};
 		} else {
 			return {
@@ -268,13 +282,13 @@ export const Multi = {
 					},
 				},
 				template: `<lu-form-field label="Label">
-		<lu-multi-file-upload${sizeSFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
-	</lu-form-field>
-	<div class="fileEntryDisplayWrapper">
-		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-			<lu-file-entry${sizeSFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
-		}
-	</div>`,
+	<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+</lu-form-field>
+<lu-file-entry-wrapper>
+	@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
+		<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+	}
+</lu-file-entry-wrapper>`,
 			};
 		}
 	},
@@ -285,6 +299,12 @@ export const Multi = {
 		illustration: 'paper',
 		structure: false,
 		buttonFilled: false,
+		accept: [
+			{
+				format: 'image/*',
+				name: 'tous les formats d’images',
+			},
+		],
 		AItag: false,
 	},
 };
@@ -292,16 +312,27 @@ export const Multi = {
 export const Single = {
 	render: (args, { argTypes }) => {
 		const multi = Multi.render(args, { argTypes });
-		const { accept, ...mainArgs } = args;
+		const { size, displayFileName, accept, ...mainArgs } = args;
+
+		// En Single, le FileEntry est toujours en taille L ; l'aperçu média n'existe qu'à size="L".
+		const isLarge = !!size;
+		const entryAttrs = `size="L"${isLarge ? ` media` : ``}${isLarge && displayFileName ? ` displayFileName` : ``}`;
+		const sizeLFileUploadParam = size ? ` size="L"` : ``;
+		const fileEntry = `<lu-file-entry-wrapper>
+			<lu-file-entry ${entryAttrs} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+		</lu-file-entry-wrapper>`;
 		if (args.AItag) {
 			return {
 				props: { ...multi.props, accept },
 				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
-	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)">
-		<lu-tag icon="weatherStars" label="Scan intelligent" AI />
-	</lu-single-file-upload>
+	@if (fileUpload) {
+		${fileEntry}
+	} @else {
+		<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])">
+			<lu-tag icon="weatherStars" label="Scan intelligent" AI />
+		</lu-single-file-upload>
+	}
 </lu-form-field>`,
 			};
 		} else {
@@ -309,11 +340,18 @@ export const Single = {
 				props: { ...multi.props, accept },
 				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
-	<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+	@if (fileUpload) {
+		${fileEntry}
+	} @else {
+		<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+	}
 </lu-form-field>`,
 			};
 		}
+	},
+	argTypes: {
+		// En Single, le mode media découle de la taille : le contrôle n'a pas lieu d'être.
+		media: { table: { disable: true } },
 	},
 	args: {
 		accept: [

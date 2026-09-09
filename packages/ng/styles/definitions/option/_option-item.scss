@@ -24,7 +24,7 @@
 			display: block;
 			scroll-margin: var(--pr-t-spacings-50);
 
-			.lu-picker-content-group & {
+			.listboxOption[role='group'] & {
 				scroll-margin-block-start: var(--pr-t-spacings-400);
 			}
 		}
@@ -95,13 +95,6 @@
 		}
 	}
 
-	.optionItem-value-group {
-		@layer components {
-			color: var(--palettes-neutral-600);
-			font: var(--pr-t-font-body-S);
-		}
-	}
-
 	:host-context(.lu-select-value) {
 		.optionItem-value {
 			@layer components {
@@ -120,7 +113,8 @@
 	}
 
 	:host-context(.mod-multiple),
-	.formerEmployeeDisplayer {
+	.formerEmployeeDisplayer,
+	.archivedLegalUnitsDisplayer {
 		.optionItem-value {
 			@layer mods {
 				position: relative;

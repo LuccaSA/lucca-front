@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { luNumberAttribute } from '@lucca-front/ng/core';
 import { FormHeaderHeadingLevel } from './form-header.type';
 
 @Component({
@@ -14,5 +15,5 @@ export class FormHeaderComponent {
 	/**
 	 * Define the aria level of the title
 	 */
-	readonly headingLevel = input<FormHeaderHeadingLevel>(1);
+	readonly headingLevel = input(1, { transform: luNumberAttribute<FormHeaderHeadingLevel> });
 }

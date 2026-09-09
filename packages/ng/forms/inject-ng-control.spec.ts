@@ -18,7 +18,7 @@ export class CustomControl {
 }
 
 describe('injectNgControl', () => {
-	function createHost<T extends { customControl: Signal<CustomControl> }>(cmp: Type<T>) {
+	function createHost<T extends { customControl: Signal<CustomControl | undefined> }>(cmp: Type<T>) {
 		TestBed.configureTestingModule({
 			imports: [cmp],
 		});
@@ -27,7 +27,7 @@ describe('injectNgControl', () => {
 		const host = fixture.componentInstance;
 		fixture.detectChanges();
 
-		return { fixture, host, nativeInput: computed(() => host.customControl().htmlInput()!.nativeElement) };
+		return { fixture, host, nativeInput: computed(() => host.customControl()!.htmlInput()!.nativeElement) };
 	}
 
 	it('should work when using ngModel', async () => {

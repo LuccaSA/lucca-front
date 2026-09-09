@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, viewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementRef, inject, Injector, input, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
@@ -18,12 +18,12 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 			@if (displayerCount() !== null) {
 				<div class="multipleSelect-displayer-filter">
-					@if (displayerCount() === 1 && isIncludeMode()) {
-						<lu-chip withEllipsis (kill)="unselectOption(select.value[0], $event)" class="multipleSelect-displayer-chip" [unkillable]="disabled()">
-							<ng-template *luOptionOutlet="select.displayerTpl(); value: select.value[0]" />
+					@if (displayedSingleOption(); as singleOption) {
+						<lu-chip withEllipsis (kill)="unselectOption(singleOption, $event)" class="multipleSelect-displayer-chip" [unkillable]="disabled() ?? false">
+							<ng-template *luOptionOutlet="select.displayerTpl(); value: singleOption" />
 						</lu-chip>
 					} @else {
-						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ displayerCount() }} {{ displayerLabel() }}</lu-chip>
+						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ displayerLabelValue() }}</lu-chip>
 					}
 				</div>
 			}
@@ -42,24 +42,27 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 
 	readonly isFilled = computed(() => this.selectAllContext.mode() !== 'none');
 	readonly isIncludeMode = computed(() => this.selectAllContext.mode() === 'include');
-	readonly displayerLabel = this.selectAllContext.displayerLabel;
+	readonly displayerLabelValue = this.selectAllContext.displayerLabelValue;
 	readonly displayerCount = this.selectAllContext.displayerCount;
+
+	readonly displayedSingleOption = this.select.singleOptionForDisplay;
 
 	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 	readonly disabled = toSignal(this.select.disabled$);
 
 	readonly inputElementRef = viewChild.required<LuMultiSelectDisplayerInputDirective<TValue>, ElementRef<HTMLInputElement>>(LuMultiSelectDisplayerInputDirective, { read: ElementRef });
+	readonly #injector = inject(Injector);
 
 	unselectOption(option: TValue, $event: Event): void {
 		$event.stopPropagation();
 		$event.preventDefault();
-		this.select.updateValue(
-			this.select.value.filter((o) => o !== option),
-			true,
+		this.select.updateValue(this.isIncludeMode() ? (this.select.value?.filter((o) => o !== option) ?? []) : [...(this.select.value ?? []), option], true);
+		afterNextRender(
+			() => {
+				this.select.panelRef?.updatePosition();
+				this.inputElementRef().nativeElement.focus();
+			},
+			{ injector: this.#injector },
 		);
-		setTimeout(() => {
-			this.select.panelRef?.updatePosition();
-			this.inputElementRef().nativeElement.focus();
-		});
 	}
 }

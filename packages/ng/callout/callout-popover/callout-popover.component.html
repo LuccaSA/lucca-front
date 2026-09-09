@@ -6,7 +6,7 @@
 	[class]="calloutClasses()"
 	[luPopover2]="overlayContentRef"
 	[luPopoverPosition]="popoverPosition()"
-	[customPositions]="customPopoverPositions()"
+	[customPositions]="customPopoverPositions() ?? null"
 	[luPopoverTrigger]="popoverTrigger()"
 	[luPopoverOpenDelay]="openDelay()"
 	[luPopoverCloseDelay]="closeDelay()"
@@ -27,11 +27,11 @@
 			</div>
 		}
 		<div class="pr-u-flexGrow1">
-			@if (heading()) {
+			@if (heading(); as heading) {
 				@if (!headingHiddenIfSingleItem() || feedbackItems().length !== 1) {
 					<div class="calloutPopover-overlay-head">
 						<strong class="calloutPopover-overlay-head-title">
-							<ng-container *luPortal="heading()" />
+							<ng-container *luPortal="heading" />
 						</strong>
 					</div>
 				}

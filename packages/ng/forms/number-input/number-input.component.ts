@@ -1,8 +1,8 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, luNumberAttribute, luOptionalNumberAttribute } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
@@ -23,11 +23,11 @@ export class NumberInputComponent {
 
 	readonly placeholder = input<string>('');
 
-	readonly step = input<number, number>(1, { transform: numberAttribute });
+	readonly step = input(1, { transform: luNumberAttribute });
 
-	readonly noSpinButtons = input(false, { transform: booleanAttribute });
+	readonly noSpinButtons = input(false, { transform: luBooleanAttribute });
 
-	readonly hasClearer = input(false, { transform: booleanAttribute });
+	readonly hasClearer = input(false, { transform: luBooleanAttribute });
 
 	readonly inputElementRef = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
@@ -35,11 +35,11 @@ export class NumberInputComponent {
 
 	readonly suffix = input<TextInputAddon>();
 
-	readonly min = input<number>();
+	readonly min = input(undefined, { transform: luOptionalNumberAttribute });
 
-	readonly max = input<number>();
+	readonly max = input(undefined, { transform: luOptionalNumberAttribute });
 
-	readonly valueAlignRight = input(false, { transform: booleanAttribute });
+	readonly valueAlignRight = input(false, { transform: luBooleanAttribute });
 
 	readonly intl = input(...intlInputOptions(LU_NUMBERFIELD_TRANSLATIONS));
 

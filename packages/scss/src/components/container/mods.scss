@@ -4,7 +4,7 @@
 
 // deprecated
 @mixin S {
-	--commons-container-padding: 0 var(--pr-t-spacings-200);
+	--commons-container-paddingInline: var(--pr-t-spacings-200);
 }
 
 @mixin maxM {

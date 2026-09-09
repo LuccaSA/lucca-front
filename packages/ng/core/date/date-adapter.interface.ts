@@ -7,7 +7,7 @@ export interface ILuDateAdapter<D> {
 	isValid(d: D): boolean;
 	compare(a: D, b: D, granularity: LuDateGranularity): number;
 	isParsable(text: string, granularity?: LuDateGranularity): boolean;
-	parse(text: string, granularity?: LuDateGranularity): D;
+	parse(text: string, granularity?: LuDateGranularity): D | undefined;
 	format(d: D, format: string): string;
 	clone(d: D): D;
 

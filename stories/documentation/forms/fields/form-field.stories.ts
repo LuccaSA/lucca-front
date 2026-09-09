@@ -21,21 +21,25 @@ export default {
 				type: 'text',
 			},
 			description: 'Modifie le label de l’input. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		required: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte indicatif sous le champ de formulaire. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -43,19 +47,23 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
+			table: { category: 'inputs' },
 		},
 		errorInlineMessage: {
 			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
+			table: { category: 'inputs' },
 		},
 		invalid: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Applique l’état invalide au champ.',
+			table: { category: 'inputs' },
 		},
 		counter: {
 			control: {
@@ -63,6 +71,7 @@ export default {
 			},
 			description:
 				'Nombre de caractères maximum autorisés pour un champ de type texte. A seulement un impact sur l’interface et doit être complété à un réglage au niveau de <code>FormControl</code>.',
+			table: { category: 'inputs' },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
@@ -70,9 +79,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée.',
+			table: { category: 'inputs' },
 		},
 		rolePresentationLabel: {
 			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d’écran.",
+			table: { category: 'models' },
 		},
 	},
 	render: (args, { argTypes }) => {

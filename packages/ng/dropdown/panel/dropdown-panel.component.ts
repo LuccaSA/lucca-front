@@ -19,6 +19,7 @@ import { merge, Observable, Subscription } from 'rxjs';
 import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated prefer the new menu approach: https://prisme.lucca.io/94310e217/p/557682-dropdown
  */

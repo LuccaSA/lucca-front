@@ -11,6 +11,7 @@ import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../operator/index'
 import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../selector/index';
 import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 
+/* eslint-disable @angular-eslint/prefer-signals */
 /**
  * @deprecated
  */
@@ -83,7 +84,9 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 		let options$: Observable<ILuTree<T>[]>;
 		operators.forEach((operator) => {
 			operator.inOptions$ = options$;
-			options$ = operator.outOptions$;
+			if (operator.outOptions$) {
+				options$ = operator.outOptions$;
+			}
 		});
 		const lastOperator = operators[operators.length - 1];
 		if (lastOperator && lastOperator.outOptions$) {

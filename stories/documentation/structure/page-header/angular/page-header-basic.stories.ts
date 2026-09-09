@@ -23,40 +23,52 @@ export default {
 	argTypes: {
 		label: {
 			description: 'Titre du composant. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		description: {
 			description: 'Description du composant. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		container: {
 			description: '[v20.1] Applique un container autour du contenu de Page Header.',
+			table: { category: 'inputs' },
 		},
 		sticky: {
 			description: '[v21.2] Applique un comportement sticky au Page Header quand celui ci n’est pas géré par le Main Layout',
+			table: { category: 'inputs' },
 		},
 		breadcrumbs: {
 			description: 'Exemple avec fil d’Ariane.',
+			table: { category: 'inputs' },
 		},
 		actions: {
 			description: 'Exemple avec des actions générales.',
+			table: { category: 'inputs' },
 		},
 		titleActions: {
 			description: 'Exemple avec des actions spécifiques au titre.',
+			table: { category: 'inputs' },
 		},
 		navigation: {
 			description: 'Exemple avec une navigation horizontale.',
+			table: { category: 'inputs' },
 		},
 		backAction: {
 			description: 'Exemple avec une action de retour en arrière.',
+			table: { category: 'inputs' },
 		},
 		leading: {
 			description: 'Ajout d’un slot avant le titre.',
+			table: { category: 'inputs' },
 		},
 		trailing: {
 			if: { arg: 'trailingWithImpersonation', truthy: false },
 			description: 'Ajout d’un slot après le titre.',
+			table: { category: 'inputs' },
 		},
 		trailingWithImpersonation: {
 			description: 'Utilisation du slot après le titre pour passer l’impersonation',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

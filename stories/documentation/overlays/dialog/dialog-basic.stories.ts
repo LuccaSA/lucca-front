@@ -2,14 +2,14 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface DialogBasicStory {
 	size: string;
-	neutralBackground: boolean;
+	surfaceDefault: boolean;
 }
 
 function getTemplate(args: DialogBasicStory): string {
-	const neutralBackground = args.neutralBackground ? ' mod-neutralBackground' : '';
+	const surfaceDefault = args.surfaceDefault ? ' mod-surfaceDefault' : '';
 	return `
 <div class="dialog_backdrop"></div>
-<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog${neutralBackground} ${args.size}">
+<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog${surfaceDefault} ${args.size}">
 	<div class="dialog-inside">
 		<form class="dialog-inside-formOptional">
 			<header class="dialog-inside-header">
@@ -59,7 +59,7 @@ export default {
 				type: 'select',
 			},
 		},
-		neutralBackground: {
+		surfaceDefault: {
 			control: {
 				type: 'boolean',
 			},
@@ -69,6 +69,6 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<DialogBasicStory> = {
-	args: { size: '', neutralBackground: false },
+	args: { size: '', surfaceDefault: false },
 	render: Template,
 };

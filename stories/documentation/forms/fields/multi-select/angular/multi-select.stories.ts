@@ -1,3 +1,4 @@
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -6,11 +7,10 @@ import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-fr
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '../../../../../helpers/stories';
-import { waitForAngular } from '../../../../../helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
+import { HiddenArgType } from '../../../../../helpers/common-arg-types';
+import { createTestStory, generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
+import { waitForAngular } from '../../../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
@@ -24,15 +24,19 @@ export default {
 			type: 'string',
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle. ',
+			table: { category: 'inputs' },
 		},
 		label: {
 			description: 'Modifie le label du champ.',
+			table: { category: 'inputs' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
@@ -40,16 +44,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
+			table: { category: 'inputs' },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
 			control: {
 				type: 'select',
 			},
-			description: '[v19.2] Applique une largeur fixe au champ.',
+			description: 'Applique une largeur fixe au champ.',
+			table: { category: 'inputs' },
 		},
 		inlineMessage: {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
+			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -57,31 +64,42 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
 		},
 		clearable: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
+			table: { category: 'inputs' },
 		},
 		keepSearchAfterSelection: {
 			description: 'Permet de poursuivre la recherche après une sélection',
+			table: { category: 'inputs' },
 		},
 		loading: {
 			description: 'Applique l’état de chargement.',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
 		},
-		onOpen: {
+		panelOpened: {
 			description: "Événement déclenché à l'ouverture du panneau de sélection.",
+			action: 'panelOpened',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
-		onClose: {
+		panelClosed: {
 			description: 'Événement déclenché à la fermeture du panneau de sélection.',
+			action: 'panelClosed',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
-		previousPage: HiddenArgType,
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
 		optionTpl: HiddenArgType,
@@ -90,12 +108,12 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }> = {
+export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }, SelectCommonAliasInput>> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, ...inputArgs } = args;
 		const model = useStoryModel<ILegume[]>([]);
 		return {
-			props: { legumes: allLegumes, model },
+			props: { ...args, legumes: allLegumes, model },
 			template: `<lu-form-field ${generateInputs(
 				{
 					label,
@@ -109,7 +127,7 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 				},
 				argTypes,
 			)}>
-	<lu-multi-select [(ngModel)]="model.example" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event"${generateInputs(inputArgs, argTypes)} />
+	<lu-multi-select [(ngModel)]="model.example" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event"${generateInputs(inputArgs, argTypes)} (panelOpened)="panelOpened()" (panelClosed)="panelClosed()" />
 </lu-form-field>
 <pr-story-model-display>{{ model.example | json }}</pr-story-model-display>`,
 			moduleMetadata: {

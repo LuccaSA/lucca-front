@@ -3,15 +3,21 @@ import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department'; // v20.2
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
-import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { FilterPillComponent, FilterViewSelectorComponent } from '@lucca-front/ng/filter-pills';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+
+interface SavedView {
+	id: number;
+	name: string;
+}
 
 @Component({
 	selector: 'filter-pill-stories',
@@ -19,9 +25,12 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 	imports: [
 		FancyBoxComponent,
 		FilterPillComponent,
+		FilterViewSelectorComponent,
 		CheckboxInputComponent,
 		LuSimpleSelectInputComponent,
 		LuMultiSelectInputComponent,
+		LuMultiSelectWithSelectAllDirective,
+		LuCoreSelectTotalCountDirective,
 		DateInputComponent,
 		DateRangeInputComponent,
 		LuCoreSelectDepartmentsDirective,
@@ -33,6 +42,14 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 })
 class FilterPillStory {
 	legumes = allLegumes;
+	clue = '';
+	views: SavedView[] = [
+		{ id: 1, name: 'Product manager' },
+		{ id: 2, name: 'Product designer' },
+		{ id: 3, name: 'Développeur' },
+	];
+	// Reference the actual array element so it matches (the selector compares views by reference).
+	selectedView: SavedView | null = this.views[0];
 	groupingFn(legume: ILegume) {
 		const parent = allLegumes.find((l) => l.color === legume.color);
 		if (parent === legume) {

@@ -51,7 +51,7 @@ function getTemplate(args: IndexTableActionsTooltipsRowStory): string {
 				Content
 			</td>
 			<td class="indexTable-body-row-cell mod-alignRight mod-actions">
-				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="$event.stopPropagation(); message('Secondary action (on button)')" type="button" class="button mod-critical indexTable-body-row-cell-subAction">
+				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="$event.stopPropagation(); message('Secondary action (on button)')" type="button" class="button mod-critical">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 				</button>
 			</td>
@@ -73,7 +73,7 @@ function getTemplate(args: IndexTableActionsTooltipsRowStory): string {
 				Content
 			</td>
 			<td class="indexTable-body-row-cell mod-alignRight mod-actions">
-				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="$event.stopPropagation(); message('Secondary action (on button)')" type="button" class="button mod-critical indexTable-body-row-cell-subAction">
+				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="$event.stopPropagation(); message('Secondary action (on button)')" type="button" class="button mod-critical">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 				</button>
 			</td>

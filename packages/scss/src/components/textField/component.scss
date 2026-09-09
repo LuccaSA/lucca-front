@@ -71,7 +71,7 @@
 			&:is(textarea, div) {
 				max-block-size: var(--component-textField-maxHeight);
 
-				@supports not (height: 1dvh) {
+				@supports not (height: 1dvb) {
 					--component-textField-maxHeight: var(--component-textField-maxHeightFallback);
 				}
 			}
@@ -131,19 +131,32 @@
 		}
 
 		.textField-prefix-lang {
-			min-inline-size: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
+			min-inline-size: var(--component-textField-prefix-lang-minInlineSize);
 			padding-inline-end: var(--pr-t-spacings-100);
 			position: relative;
+			text-align: end;
+
+			&:not(.mod-withCulture) {
+				text-transform: uppercase;
+			}
+
+			&:has(.formLabel-required) {
+				--component-textField-prefix-lang-minInlineSize: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+			}
+
+			&.mod-withCulture {
+				--component-textField-prefix-lang-minInlineSize: calc(var(--pr-t-spacings-600) + var(--pr-t-spacings-50));
+
+				&:has(.formLabel-required) {
+					--component-textField-prefix-lang-minInlineSize: calc(var(--pr-t-spacings-700) + var(--pr-t-spacings-50));
+				}
+			}
 
 			&::after {
 				content: '';
 				position: absolute;
 				inset: var(--pr-t-spacings-25) 0;
-				border-right: 1px solid var(--palettes-neutral-200);
-			}
-
-			&:has(.formLabel-required) {
-				min-inline-size: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+				border-inline-end: 1px solid var(--palettes-neutral-200);
 			}
 		}
 

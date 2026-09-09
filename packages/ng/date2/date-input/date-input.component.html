@@ -12,7 +12,9 @@
 			(input)="userTextInput.set(date.value)"
 			(blur)="inputBlurred()"
 			(focus)="inputFocused.set(true)"
-			aria-haspopup="true"
+			aria-haspopup="dialog"
+			[attr.aria-expanded]="popoverRef.opened()"
+			[attr.aria-controls]="popoverRef.ariaControls"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
 			(keydown.arrowDown)="arrowDown(popoverRef)"
@@ -44,6 +46,7 @@
 				tabindex="-1"
 				type="button"
 				class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
+				aria-hidden="true"
 			>
 				<lu-icon [icon]="'calendarDate'" [alt]="intl().pickDate" />
 			</button>
@@ -58,14 +61,14 @@
 <div *luFilterPillDisplayer>{{ displayValue() }}</div>
 
 <ng-template #calendar>
-	<div class="calendarWrapper">
+	<div class="calendarWrapper" role="dialog" aria-modal="true" [attr.aria-label]="intl().pickDate">
 		<div class="calendarWrapper-navigation pr-u-left0">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())" #previousButtonRef>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode() ?? mode())" #previousButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">{{ intl().previous }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-navigation pr-u-right0">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode())" #nextButtonRef>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode() ?? mode())" #nextButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask"> {{ intl().next }}</span>
 			</button>
 		</div>
@@ -81,8 +84,8 @@
 				[getCellInfo]="combinedGetCellInfo"
 				[ranges]="ranges()"
 				(dateClicked)="dateClicked($event, popoverRef)"
-				(nextPage)="move(1, calendarMode())"
-				(previousPage)="move(-1, calendarMode())"
+				(nextPage)="move(1, calendarMode() ?? mode())"
+				(previousPage)="move(-1, calendarMode() ?? mode())"
 				[(displayMode)]="calendarMode"
 				[mode]="mode()"
 				[hideWeekend]="hideWeekend()"

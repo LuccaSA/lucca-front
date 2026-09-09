@@ -21,39 +21,49 @@ export default {
 	argTypes: {
 		min: {
 			control: 'date',
+			table: { category: 'inputs' },
 		},
 		max: {
 			control: 'date',
+			table: { category: 'inputs' },
 		},
 		selected: {
 			control: 'date',
+			table: { category: 'inputs' },
 		},
 		hideToday: {
 			control: 'boolean',
 			description: 'Masque la mise en valeur du jour en cours.',
+			table: { category: 'inputs' },
 		},
 		hasTodayButton: {
 			control: 'boolean',
+			table: { category: 'inputs' },
 		},
 		enableOverflow: {
 			control: 'boolean',
 			description: 'Autorise la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
+			table: { category: 'inputs' },
 		},
 		showOverflow: {
 			control: 'boolean',
 			description: 'Affiche la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
+			table: { category: 'inputs' },
 		},
 		clearable: {
 			control: 'boolean',
+			table: { category: 'inputs' },
 		},
 		clearBehavior: {
 			control: 'select',
 			options: setStoryOptions(DATE2_CLEAR_BEHAVIOR),
 			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
+			table: { category: 'inputs' },
 		},
 		mode: {
 			control: 'select',
 			options: setStoryOptions(CALENDAR_MODE),
+			table: { category: 'inputs' },
 		},
 	},
 	render: (args, { argTypes }) => {

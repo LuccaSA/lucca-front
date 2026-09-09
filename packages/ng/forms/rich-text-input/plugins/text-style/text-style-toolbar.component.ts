@@ -21,9 +21,9 @@ import { TextStyleComponent } from './text-style.component';
 	],
 })
 export class TextStyleToolbarComponent implements RichTextPluginComponent {
-	pluginComponents = viewChildren(RICH_TEXT_PLUGIN_COMPONENT);
+	readonly pluginComponents = viewChildren(RICH_TEXT_PLUGIN_COMPONENT);
 
-	intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	setEditorInstance(editor: LexicalEditor): void {
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(editor));

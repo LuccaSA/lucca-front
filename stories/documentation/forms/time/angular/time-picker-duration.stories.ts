@@ -21,12 +21,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
+			table: { category: 'inputs' },
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
+			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -34,58 +36,69 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
+			table: { category: 'inputs' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran.',
+			table: { category: 'inputs' },
 		},
 		label: {
 			control: {
 				type: 'text',
 			},
 			description: 'Modifie le label de l’input.',
+			table: { category: 'inputs' },
 		},
 		required: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		hideZeroValue: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Masque le contenu du champ lorsque sa valeur est nulle.',
+			table: { category: 'inputs' },
 		},
 		displayArrows: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Affiche les boutons d’incrémentation.',
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Désactive le composant.',
+			table: { category: 'models' },
 		},
 		step: {
 			control: {
 				type: 'text',
 			},
 			description: 'Modifie le pas d’incrémentation.',
+			table: { category: 'inputs' },
 		},
 		max: {
 			control: {
 				type: 'text',
 			},
 			description: '[v21.1] Définit une valeur maximale.',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

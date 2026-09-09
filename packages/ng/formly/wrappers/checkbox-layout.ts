@@ -9,6 +9,7 @@ import { FieldWrapper } from '@ngx-formly/core';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuFormlyWrapperCheckboxLayout extends FieldWrapper {
+	// eslint-disable-next-line @angular-eslint/prefer-signals
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;
 

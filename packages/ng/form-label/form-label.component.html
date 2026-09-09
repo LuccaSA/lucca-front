@@ -2,17 +2,17 @@
 @if (required()) {
 	<sup class="formLabel-required" aria-hidden="true">*</sup>
 }
-@if (tooltip()) {
-	<span class="formLabel-info" [luTooltip]="tooltip()">
+@if (tooltip(); as tooltip) {
+	<span class="formLabel-info" [luTooltip]="tooltip">
 		<lu-icon icon="signHelp" [alt]="intl().tooltipAlt" />
 	</span>
 }
-@if (tag()) {
-	<lu-tag class="formLabel-tag" [label]="tag()" />
+@if (tag(); as tag) {
+	<lu-tag class="formLabel-tag" [label]="tag" />
 }
 @if (counterMax() > 0) {
 	<span class="formLabel-counter" [attr.id]="counterId()" aria-live="polite">
 		<span aria-hidden="true">{{ counterStatus() }}/{{ counterMax() }}</span>
-		<span class="pr-u-mask">{{ counterAltLabel() | intlParams: { counterStatus: counterStatus(), counterMax: counterMax() } }}</span>
+		<span class="pr-u-mask">{{ intl().counterAlt | intlParams: { counterStatus: counterStatus(), counterMax: counterMax() } }}</span>
 	</span>
 }

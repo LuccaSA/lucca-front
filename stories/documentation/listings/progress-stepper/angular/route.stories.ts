@@ -6,7 +6,7 @@ import { cleanupTemplate } from '@/helpers/stories';
 export default {
 	title: 'Documentation/Progress stepper/Angular/Route',
 	argTypes: {
-		routerLinkParam: { control: { type: 'object' } },
+		routerLinkParam: { control: { type: 'object' }, table: { category: 'inputs' } },
 	},
 	decorators: [
 		moduleMetadata({

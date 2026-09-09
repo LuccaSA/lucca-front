@@ -1,4 +1,5 @@
-import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { DialogFancyIllustration } from '../dialog.type';
 import { LuDialogRef } from '../model';
@@ -18,7 +19,7 @@ import { LuDialogRef } from '../model';
 export class DialogComponent implements AfterViewInit {
 	public readonly dialogRef = inject<LuDialogRef>(LuDialogRef);
 
-	readonly stacked = input(false, { transform: booleanAttribute });
+	readonly stacked = input(false, { transform: luBooleanAttribute });
 	readonly fancyIllustration = input<DialogFancyIllustration>('welcome');
 	readonly fancyIllustrationUrl = input<string | null>(null);
 
@@ -51,11 +52,11 @@ export class DialogComponent implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 		if (this.stacked()) {
-			this.dialogRef.cdkRef.overlayRef.backdropElement?.parentElement?.classList.add('mod-stacked');
+			this.dialogRef.cdkRef.overlayRef.hostElement.classList.add('mod-stacked');
 		}
 
 		if (this.dialogRef.config.autoFocus === 'first-input' && !this.dialogRef.config.cdkConfigOverride?.autoFocus) {
-			const focusable: HTMLElement =
+			const focusable: HTMLElement | null =
 				this.#htmlElement.querySelector('.luDialog-autofocus .luNativeInput') || this.#htmlElement.querySelector('.luDialog-autofocus') || this.#htmlElement.querySelector('.luNativeInput');
 			focusable?.focus();
 		}
