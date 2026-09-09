@@ -1,12 +1,12 @@
 /**
  * Build-time step for the npm channel of the doc-for-LLM epic: write each published
- * package's `llms.txt` proxy and its two corpora — `llms-api.txt` (public API) and
- * `llms-stories.txt` (Storybook usage examples) — into its ng-packagr dist folder, so
- * `npm publish` (publish.yml, no `files` allowlist) ships all three and agents read the
- * doc from `node_modules/@lucca-front/ng/llms*.txt` at the exact installed version — no
- * fetch, no auth. `llms.txt` is the conventional discovery filename (llmstxt.org); it
- * routes to the sibling corpora rather than duplicating them, so an agent after a
- * signature never loads the templates and vice versa.
+ * package's `llms.txt` proxy and `llms-api.txt` corpus — plus `llms-stories.txt` where
+ * the target opts in — into its ng-packagr dist folder, so `npm publish` (publish.yml,
+ * no `files` allowlist) ships them and agents read the doc from
+ * `node_modules/@lucca-front/ng/llms*.txt` at the exact installed version — no fetch, no
+ * auth. `llms.txt` is the conventional discovery filename (llmstxt.org); it routes to
+ * the sibling corpora rather than duplicating them, so an agent after a signature never
+ * loads the templates and vice versa.
  *
  * Runs after `build:ng` in the `build` script; also acts as the committed guardrail:
  * it FAILS the build when a package's extraction collapses below its floor, when its
@@ -16,11 +16,11 @@
  * at publish time (a `files` allowlist added upstream, a `.npmignore`, a renamed dist
  * layout) leaves the write green and ships a package with no doc — silently. Only
  * `npm pack` sees the published file list, and it is asserted per file: an allowlist
- * naming `llms-api.txt` alone would drop the proxy and the stories without failing
- * anything.
+ * naming `llms-api.txt` alone would drop the proxy without failing anything. The
+ * symmetric case is asserted too: a target that opted out must not ship a stale corpus.
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, writeFileSync } from 'node:fs';
+import { existsSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -29,16 +29,23 @@ import { extractSurface, renderPackageIndex, renderPackageLlms, renderPackageSto
 
 const root = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
 
-/** dist folder and collapse floor per published package (floors are ratchets). */
+/**
+ * dist folder and collapse floor per published package (floors are ratchets). `stories`
+ * says whether the tarball carries the workspace stories corpus: `@lucca/prisme` opts
+ * out because 722 KB of examples that mostly document `ng` nearly doubled a 90 KB
+ * package. Its proxy then links the stories on the deploy, which tracks `master` — the
+ * accepted cost of the opt-out.
+ */
 const PACK_TARGETS = [
-	{ name: '@lucca-front/ng', dist: 'dist/ng', minEntries: 500 },
-	{ name: '@lucca/prisme', dist: 'dist/prisme', minEntries: 5 },
+	{ name: '@lucca-front/ng', dist: 'dist/ng', minEntries: 500, stories: true },
+	{ name: '@lucca/prisme', dist: 'dist/prisme', minEntries: 5, stories: false },
 ];
 
-/** Every doc file the tarball must carry — asserted one by one against `npm pack`. */
-const SHIPPED_FEEDS = ['llms.txt', 'llms-api.txt', 'llms-stories.txt'];
+/** Doc files every tarball must carry, plus the one only a `stories` target carries. */
+const BASE_FEEDS = ['llms.txt', 'llms-api.txt'];
+const STORIES_FEED = 'llms-stories.txt';
 
-/** Collapse floor for the stories extraction, shared by both packages (ratchet). */
+/** Collapse floor for the stories extraction (ratchet). */
 const MIN_STORY_FILES = 400;
 
 /** Named story anchors — a floor against ~636 files lets a whole family vanish. */
@@ -80,33 +87,46 @@ for (const target of PACK_TARGETS) {
 		failures.push(`${target.name}: only ${total} API entries (floor ${target.minEntries}) — extraction collapsed`);
 		continue;
 	}
+	const shippedFeeds = target.stories ? [...BASE_FEEDS, STORIES_FEED] : BASE_FEEDS;
 	const apiCorpus = renderPackageLlms(target.name, entries);
-	const storiesCorpus = renderPackageStories(target.name, storyFiles);
-	const missingAnchors = STORY_ANCHORS.filter((anchor) => !storiesCorpus.includes(anchor));
+	const storiesCorpus = target.stories ? renderPackageStories(target.name, storyFiles) : '';
+	const missingAnchors = target.stories ? STORY_ANCHORS.filter((anchor) => !storiesCorpus.includes(anchor)) : [];
 	if (missingAnchors.length) {
 		failures.push(`${target.name}: story anchor(s) gone from the packaged corpus: ${missingAnchors.join(', ')}`);
 		continue;
 	}
 	writeFileSync(join(distDir, 'llms-api.txt'), apiCorpus);
-	writeFileSync(join(distDir, 'llms-stories.txt'), storiesCorpus);
-	writeFileSync(join(distDir, 'llms.txt'), renderPackageIndex(target.name, entries, { storyComponents: storyComponentCount }));
+	if (target.stories) writeFileSync(join(distDir, STORIES_FEED), storiesCorpus);
+	else rmSync(join(distDir, STORIES_FEED), { force: true });
+	writeFileSync(
+		join(distDir, 'llms.txt'),
+		renderPackageIndex(target.name, entries, { storyComponents: target.stories ? storyComponentCount : 0 }),
+	);
 
 	const packed = packedFiles(distDir);
 	if (!packed) {
 		failures.push(`${target.name}: \`npm pack --dry-run\` could not read ${target.dist} — packaging unverified`);
 		continue;
 	}
-	const missing = SHIPPED_FEEDS.filter((f) => !packed.includes(f));
+	const missing = shippedFeeds.filter((f) => !packed.includes(f));
 	if (missing.length) {
 		failures.push(
 			`${target.name}: ${missing.join(', ')} written to ${target.dist} but ABSENT from the published tarball (${packed.length} files) — check \`files\`/.npmignore in the dist manifest`,
 		);
 		continue;
 	}
+	if (!target.stories && packed.includes(STORIES_FEED)) {
+		failures.push(
+			`${target.name}: opted out of the stories corpus, yet ${STORIES_FEED} reaches the tarball — a stale dist file is being published`,
+		);
+		continue;
+	}
+	const storiesNote = target.stories
+		? `${storyComponentCount} documented components from ${storyFiles.length} story files (${Math.round(storiesCorpus.length / 1024)} KB)`
+		: 'no stories corpus (opted out)';
 	console.log(
-		`[llms-pack] ${target.name}: ${total} API entries (${Math.round(apiCorpus.length / 1024)} KB) + ` +
-			`${storyComponentCount} documented components from ${storyFiles.length} story files (${Math.round(storiesCorpus.length / 1024)} KB) → ` +
-			`${target.dist}/{${SHIPPED_FEEDS.join(',')}} (in tarball, ${packed.length} files)`,
+		`[llms-pack] ${target.name}: ${total} API entries (${Math.round(apiCorpus.length / 1024)} KB) + ${storiesNote} → ` +
+			`${target.dist}/{${shippedFeeds.join(',')}} (in tarball, ${packed.length} files)`,
 	);
 }
 
@@ -114,4 +134,4 @@ if (failures.length) {
 	console.error(`\n[llms-pack] FAIL: ${failures.join('; ')}.`);
 	process.exit(1);
 }
-console.log(`\n[llms-pack] OK: every published package carries its ${SHIPPED_FEEDS.join(' + ')}.`);
+console.log(`\n[llms-pack] OK: every published package carries its ${BASE_FEEDS.join(' + ')}, plus ${STORIES_FEED} where it opts in.`);

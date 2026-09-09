@@ -655,7 +655,7 @@ export function renderPackageIndex(pkgName, entries, { storyComponents = 0 } = {
 		'',
 		`> Auto-generated LLM documentation of ${pkgName}, shipped inside the published package.`,
 		'> The corpora linked below describe THIS installed version, resolved from the',
-		"> library's TypeScript source, JSDoc and Storybook stories.",
+		`> library's TypeScript source${hasStories ? ', JSDoc and Storybook stories.' : ' and JSDoc.'}`,
 		'',
 		`Public API entries: ${total}`,
 		...(hasStories ? [`Documented components: ${storyComponents}`] : []),

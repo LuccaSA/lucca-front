@@ -374,6 +374,12 @@ describe('renderPackageIndex', () => {
 		expect(absent).not.toContain('Storybook usage examples');
 	});
 
+	test('names only the sources its own corpora carry', () => {
+		expect(out).toContain("library's TypeScript source and JSDoc.");
+		expect(out).not.toContain("Storybook stories");
+		expect(renderPackageIndex("@lucca-front/ng", [], { storyComponents: 12 })).toContain("Storybook stories");
+	});
+
 	test('still points at the public deploy for the stories when the tarball has none', () => {
 		const absent = out.slice(out.indexOf('## Not in this package'));
 		expect(absent).toContain('Storybook usage examples');
