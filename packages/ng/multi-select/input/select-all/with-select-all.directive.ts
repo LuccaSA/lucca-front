@@ -51,7 +51,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$, { initialValue: 0 });
-	readonly clueChange = toSignal(this.select.clueChange$);
+	readonly clueChange = toSignal(this.select.clue$);
 	readonly #options = computed<readonly TValue[]>(() => this.select.options() ?? []);
 
 	readonly singleRemainingOption = computed<TValue | undefined>(() => {

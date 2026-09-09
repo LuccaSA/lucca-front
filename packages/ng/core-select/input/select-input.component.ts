@@ -182,6 +182,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly clueChange$ = new Subject<string>();
 	clueChange = outputFromObservable(this.clueChange$);
+	// searchable is derived from clueChange$.observed, so internal consumers must use this stream instead:
+	// subscribing to clueChange$ would make every select look searchable.
+	readonly #internalClueChange$ = new Subject<string>();
 	readonly nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
 	readonly addOption = output<string>();
@@ -212,6 +215,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
 			this.clueChange$.next(clue);
+			this.#internalClueChange$.next(clue);
 			this.lastEmittedClue = clue;
 		}
 	}
@@ -255,7 +259,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
-	readonly clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
+	readonly clue$ = defer(() => this.#internalClueChange$.pipe(startWith(this.clue)));
 
 	readonly shouldDisplayAddOption = toSignal(
 		toObservable(this.addOptionStrategy).pipe(
