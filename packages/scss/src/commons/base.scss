@@ -24,7 +24,19 @@
 @mixin base($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		@if config.$fontFamily {
-			@include core.fontFace(config.$fontFamily, config.$fontWeights, config.$fontStyles);
+			@include core.fontFace(
+				config.$fontFamily,
+				config.$fontWeights,
+				config.$fontStyles,
+				$unicodeRange: config.$fontFamilyCoreRange
+			);
+			@include core.fontFace(
+				config.$fontFamily,
+				config.$fontWeights,
+				config.$fontStyles,
+				$unicodeRange: config.$fontFamilyExtendedRange,
+				$filenameSuffix: '-extended'
+			);
 		}
 
 		@if config.$fontFamilyBrand {

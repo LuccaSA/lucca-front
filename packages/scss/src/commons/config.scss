@@ -13,6 +13,26 @@ $deprecatedUtilityPrefix: false !default;
 $prefersContrast: 'no-preference' !default;
 
 $fontFamily: 'SourceSans' !default;
+$fontPath: '//cdn.lucca.fr/transverse/fonts/unicode-range' !default;
+
+// Covers fr/en/de/es/it/nl/pt/ca on their own: ASCII
+// + Latin-1 Supplement (letters/punctuation/currency), Œ œ Ÿ,
+// and common typographic punctuation.
+
+// ¡ ¢ £ ¥ ¨ © ª « ® ° ± ´ · ¸ º » ¿ À Á Â Ã Ä Å Æ Ç È É Ê Ë Ì Í Î Ï Ñ Ò Ó Ô Õ Ö × Ø Ù Ú Û Ü Ý ß à á â ã ä å æ ç è
+// é ê ë ì í î ï ñ ò ó ô õ ö ÷ ø ù ú û ü ý ÿ Œ œ Ÿ – — ‘ ’ ‚ “ ” „ • … ‰ ‹ › ⁄ € ™ − ﬁ ﬂ (+ a thin space, U+2009)
+$fontFamilyCoreRange: 'U+0020-007E, U+00A0-00A3, U+00A5, U+00A8-00AB, U+00AE, U+00B0-00B1, U+00B4, U+00B7-00B8, U+00BA-00BB, U+00BF-00CF, U+00D1-00DD, U+00DF-00EF, U+00F1-00FD, U+00FF, U+0152-0153, U+0178, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+202F-2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02' !default;
+
+// Only fetched by the browser when a page actually renders one of these glyphs:
+// Central/Eastern European Latin
+// Extended-A/B (pl/cs/hr/ro/hu/tr),
+// Vietnamese-style tilde/grave vowels and ẞ found in LuccaSans,
+// spacing modifiers, and arrows.
+
+// Ă ă Ą ą Ć ć Č č Ď ď Đ đ Ę ę Ě ě Ğ ğ Ĩ ĩ İ ı Ł ł Ń ń Ň ň Ő ő Ř ř Ś ś Ş ş Š š Ť ť Ũ ũ Ů ů Ű ű Ŷ ŷ Ź ź Ż ż Ž ž Ș ș
+// Ț ț ˆ ˜ ô ẞ Ẽ ẽ Ỳ ỳ Ỹ ỹ ← ↑ → ↓ ↔ ↕ ↖ ↗ ↘ ↙ ≈ ≠ ≤ ≥
+$fontFamilyExtendedRange: 'U+0102-0107, U+010C-0111, U+0118-011B, U+011E-011F, U+0128-0129, U+0130-0131, U+0141-0144, U+0147-0148, U+0150-0151, U+0158-015B, U+015E-0161, U+0164-0165, U+0168-0169, U+016E-0171, U+0176-0177, U+0179-017E, U+0218-021B, U+02C6, U+02DC, U+0302, U+1E9E, U+1EBC-1EBD, U+1EF2-1EF3, U+1EF8-1EF9, U+2190-2199, U+2248, U+2260, U+2264-2265' !default;
+
 $fontFamilyBrand: 'LuccaSans' !default;
 $fontWeights: (
 	'regular': 400,
