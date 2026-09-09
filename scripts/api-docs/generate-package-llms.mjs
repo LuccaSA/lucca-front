@@ -1,11 +1,12 @@
 /**
  * Build-time step for the npm channel of the doc-for-LLM epic: write each published
- * package's `llms.txt` index and self-sufficient `llms-full.txt` corpus into its
- * ng-packagr dist folder, so `npm publish` (publish.yml, no `files` allowlist) ships
- * both and agents read the doc from `node_modules/@lucca-front/ng/llms*.txt` at the
- * exact installed version — no fetch, no auth. `llms.txt` is the conventional
- * discovery filename (llmstxt.org); it indexes the sibling corpus rather than
- * duplicating it.
+ * package's `llms.txt` proxy and its two corpora — `llms-api.txt` (public API) and
+ * `llms-stories.txt` (Storybook usage examples) — into its ng-packagr dist folder, so
+ * `npm publish` (publish.yml, no `files` allowlist) ships all three and agents read the
+ * doc from `node_modules/@lucca-front/ng/llms*.txt` at the exact installed version — no
+ * fetch, no auth. `llms.txt` is the conventional discovery filename (llmstxt.org); it
+ * routes to the sibling corpora rather than duplicating them, so an agent after a
+ * signature never loads the templates and vice versa.
  *
  * Runs after `build:ng` in the `build` script; also acts as the committed guardrail:
  * it FAILS the build when a package's extraction collapses below its floor, when its
@@ -15,14 +16,16 @@
  * at publish time (a `files` allowlist added upstream, a `.npmignore`, a renamed dist
  * layout) leaves the write green and ships a package with no doc — silently. Only
  * `npm pack` sees the published file list, and it is asserted per file: an allowlist
- * naming `llms-full.txt` alone would drop the index without failing anything.
+ * naming `llms-api.txt` alone would drop the proxy and the stories without failing
+ * anything.
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { extractSurface, renderPackageIndex, renderPackageLlms, selectPublicApi } from './generate-llms.mjs';
+import { extractAllStories, groupByComponent } from './extract-stories.mjs';
+import { extractSurface, renderPackageIndex, renderPackageLlms, renderPackageStories, selectPublicApi } from './generate-llms.mjs';
 
 const root = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
 
@@ -33,7 +36,13 @@ const PACK_TARGETS = [
 ];
 
 /** Every doc file the tarball must carry — asserted one by one against `npm pack`. */
-const SHIPPED_FEEDS = ['llms.txt', 'llms-full.txt'];
+const SHIPPED_FEEDS = ['llms.txt', 'llms-api.txt', 'llms-stories.txt'];
+
+/** Collapse floor for the stories extraction, shared by both packages (ratchet). */
+const MIN_STORY_FILES = 400;
+
+/** Named story anchors — a floor against ~636 files lets a whole family vanish. */
+const STORY_ANCHORS = ['## Actions / Button', '## Forms / MultiSelect', '## Overlays / Tooltip', '## Listings / Data table'];
 
 /** The file list `npm publish` would ship from `distDir`, or null when pack fails. */
 function packedFiles(distDir) {
@@ -50,7 +59,14 @@ function packedFiles(distDir) {
 }
 
 const { entryPoints } = extractSurface(root);
+const storyFiles = extractAllStories(resolve(root, 'stories/documentation'));
+const storyComponentCount = groupByComponent(storyFiles).length;
 const failures = [];
+
+if (storyFiles.length < MIN_STORY_FILES) {
+	console.error(`\n[llms-pack] FAIL: only ${storyFiles.length} story files (floor ${MIN_STORY_FILES}) — stories extraction collapsed.`);
+	process.exit(1);
+}
 
 for (const target of PACK_TARGETS) {
 	const distDir = resolve(root, target.dist);
@@ -64,8 +80,16 @@ for (const target of PACK_TARGETS) {
 		failures.push(`${target.name}: only ${total} API entries (floor ${target.minEntries}) — extraction collapsed`);
 		continue;
 	}
-	writeFileSync(join(distDir, 'llms-full.txt'), renderPackageLlms(target.name, entries));
-	writeFileSync(join(distDir, 'llms.txt'), renderPackageIndex(target.name, entries));
+	const apiCorpus = renderPackageLlms(target.name, entries);
+	const storiesCorpus = renderPackageStories(target.name, storyFiles);
+	const missingAnchors = STORY_ANCHORS.filter((anchor) => !storiesCorpus.includes(anchor));
+	if (missingAnchors.length) {
+		failures.push(`${target.name}: story anchor(s) gone from the packaged corpus: ${missingAnchors.join(', ')}`);
+		continue;
+	}
+	writeFileSync(join(distDir, 'llms-api.txt'), apiCorpus);
+	writeFileSync(join(distDir, 'llms-stories.txt'), storiesCorpus);
+	writeFileSync(join(distDir, 'llms.txt'), renderPackageIndex(target.name, entries, { storyComponents: storyComponentCount }));
 
 	const packed = packedFiles(distDir);
 	if (!packed) {
@@ -80,7 +104,9 @@ for (const target of PACK_TARGETS) {
 		continue;
 	}
 	console.log(
-		`[llms-pack] ${target.name}: ${total} API entries → ${target.dist}/{${SHIPPED_FEEDS.join(',')}} (in tarball, ${packed.length} files)`,
+		`[llms-pack] ${target.name}: ${total} API entries (${Math.round(apiCorpus.length / 1024)} KB) + ` +
+			`${storyComponentCount} documented components from ${storyFiles.length} story files (${Math.round(storiesCorpus.length / 1024)} KB) → ` +
+			`${target.dist}/{${SHIPPED_FEEDS.join(',')}} (in tarball, ${packed.length} files)`,
 	);
 }
 

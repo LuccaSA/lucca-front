@@ -20,6 +20,8 @@ import {
 	renderLlmsIndex,
 	renderPackageIndex,
 	renderPackageLlms,
+	renderPackageStories,
+	renderStoriesCorpus,
 	replacementFrom,
 	selectPublicApi,
 } from './generate-llms.mjs';
@@ -259,8 +261,17 @@ describe('renderLlmsIndex', () => {
 	});
 });
 
+/** One extracted story file, shaped as `extractAllStories` returns it. */
+const STORY_FILES = [
+	{
+		title: 'Documentation/Forms/Button/Basic',
+		templates: ['<lu-button>Go</lu-button>'],
+		stories: [{ argTypes: [{ name: 'size', description: 'The button size.' }] }],
+	},
+];
+
 describe('renderPackageLlms', () => {
-	const out = renderPackageLlms('@lucca-front/ng', [
+	const entries = [
 		{
 			importPath: '@lucca-front/ng/button',
 			api: { matched: [{ kind: 'component', entity: { name: 'ButtonComponent', rawdescription: 'A button.' } }] },
@@ -269,7 +280,8 @@ describe('renderPackageLlms', () => {
 			importPath: '@lucca-front/ng/callout',
 			api: { matched: [{ kind: 'component', entity: { name: 'CalloutComponent' } }] },
 		},
-	]);
+	];
+	const out = renderPackageLlms('@lucca-front/ng', entries);
 
 	test('emits the package header with the total entry count', () => {
 		expect(out).toMatch(/^# @lucca-front\/ng — LLM API reference$/m);
@@ -282,8 +294,38 @@ describe('renderPackageLlms', () => {
 		expect(out).toMatch(/^# @lucca-front\/ng\/callout — API$/m);
 	});
 
+	test('carries no story content — the stories are a sibling file, not a tail section', () => {
+		expect(out).not.toContain('Storybook usage examples');
+		expect(out).not.toContain('```html');
+	});
+
 	test('is deterministic — identical input yields byte-identical output', () => {
 		expect(renderPackageLlms('@lucca-front/ng', [])).toBe(renderPackageLlms('@lucca-front/ng', []));
+		expect(renderPackageLlms('@lucca-front/ng', entries)).toBe(renderPackageLlms('@lucca-front/ng', entries));
+	});
+});
+
+describe('renderPackageStories', () => {
+	const out = renderPackageStories('@lucca-front/ng', STORY_FILES);
+
+	test('emits the package-scoped header with the documented-component count', () => {
+		expect(out).toMatch(/^# @lucca-front\/ng — Storybook usage examples$/m);
+		expect(out).toMatch(/^Documented components: 1$/m);
+	});
+
+	test('renders the grouped stories with their templates and prop tables', () => {
+		expect(out).toMatch(/^## Forms \/ Button$/m);
+		expect(out).toContain('<lu-button>Go</lu-button>');
+		expect(out).toContain('`size`');
+	});
+
+	test('carries no API content — the API reference is a sibling file', () => {
+		expect(out).not.toContain('— API');
+		expect(out).not.toContain('Public API entries');
+	});
+
+	test('is deterministic — identical input yields byte-identical output', () => {
+		expect(renderPackageStories('@lucca-front/ng', STORY_FILES)).toBe(renderPackageStories('@lucca-front/ng', STORY_FILES));
 	});
 });
 
@@ -298,9 +340,16 @@ describe('renderPackageIndex', () => {
 		expect(out).toMatch(/^> /m);
 	});
 
-	test('points at the corpus shipped in the same tarball with a relative link', () => {
-		expect(out).toMatch(/\[llms-full\.txt\]\(\.\/llms-full\.txt\)/);
-		expect(out).not.toMatch(/\]\(https:\/\/[^)]*llms-full\.txt\)/);
+	test('points at the corpora shipped in the same tarball with relative links', () => {
+		expect(out).toMatch(/\[llms-api\.txt\]\(\.\/llms-api\.txt\)/);
+		expect(out).not.toMatch(/\]\(https:\/\/[^)]*llms-api\.txt\)/);
+	});
+
+	test('proxies to both corpora, never inlining either, when the tarball carries them', () => {
+		const withStories = renderPackageIndex('@lucca-front/ng', [], { storyComponents: 12 });
+		expect(withStories).toMatch(/\[llms-stories\.txt\]\(\.\/llms-stories\.txt\)/);
+		expect(withStories).not.toContain('```html');
+		expect(withStories).toMatch(/^Documented components: 12$/m);
 	});
 
 	test('lists every entry point with a sample of its symbols', () => {
@@ -312,6 +361,22 @@ describe('renderPackageIndex', () => {
 	test('links what the tarball does NOT carry to the canonical public deploy', () => {
 		expect(out).toContain(`${CANONICAL_BASE_URL}/llms.txt`);
 		expect(out).not.toContain('dd.lucca.tech');
+	});
+
+	test('announces the stories as a shipped corpus when the tarball carries them', () => {
+		const withStories = renderPackageIndex('@lucca-front/ng', [], { storyComponents: 12 });
+		expect(withStories).toMatch(/## Corpora \(in this package\)[\s\S]*Storybook usage examples/);
+	});
+
+	test('never advertises the stories as absent once the tarball carries them', () => {
+		const withStories = renderPackageIndex('@lucca-front/ng', [], { storyComponents: 12 });
+		const absent = withStories.slice(withStories.indexOf('## Not in this package'));
+		expect(absent).not.toContain('Storybook usage examples');
+	});
+
+	test('still points at the public deploy for the stories when the tarball has none', () => {
+		const absent = out.slice(out.indexOf('## Not in this package'));
+		expect(absent).toContain('Storybook usage examples');
 	});
 
 	test('is deterministic — identical input yields byte-identical output', () => {
@@ -333,5 +398,34 @@ describe('renderLlmsFull', () => {
 
 	test('is deterministic — identical input yields byte-identical output', () => {
 		expect(renderLlmsFull(api)).toBe(renderLlmsFull(api));
+	});
+});
+
+describe('renderStoriesCorpus', () => {
+	const storyFiles = [
+		{
+			title: 'Documentation/Forms/Button/Basic',
+			templates: ['<lu-button>Go</lu-button>'],
+			stories: [{ argTypes: [{ name: 'size', description: 'The button size.' }] }],
+		},
+	];
+	const out = renderStoriesCorpus(storyFiles);
+
+	test('heads the section so both channels emit the same anchor', () => {
+		expect(out).toMatch(/^# Storybook usage examples$/m);
+	});
+
+	test('renders the grouped stories under that anchor', () => {
+		expect(out).toMatch(/^## Forms \/ Button$/m);
+		expect(out).toContain('<lu-button>Go</lu-button>');
+		expect(out).toContain('`size`');
+	});
+
+	test('is empty for no stories, so a collapsed extraction cannot ship a bare header', () => {
+		expect(renderStoriesCorpus([])).toBe('');
+	});
+
+	test('is deterministic — identical input yields byte-identical output', () => {
+		expect(renderStoriesCorpus(storyFiles)).toBe(renderStoriesCorpus(storyFiles));
 	});
 });

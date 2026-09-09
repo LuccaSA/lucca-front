@@ -577,10 +577,21 @@ export function renderEntrypointDoc({ importPath, api }) {
 }
 
 /**
- * Render one package's self-sufficient corpus, shipped INSIDE the published npm
- * package (`node_modules/<pkg>/llms-full.txt`): agents read the doc at the exact
- * installed version, no fetch, no auth. Per the doc-for-LLM epic, the packaged
- * artifact is the corpus, never the URL index. Deterministic.
+ * Render the stories corpus under the `# Storybook usage examples` anchor both channels
+ * index on. Empty for no stories — a bare header would satisfy the anchor probes.
+ * @param {import('./extract-stories.mjs').StoriesFile[]} storyFiles
+ * @returns {string}
+ */
+export function renderStoriesCorpus(storyFiles) {
+	if (!storyFiles.length) return '';
+	return `# Storybook usage examples\n\n${renderStoriesSection(groupByComponent(storyFiles))}`;
+}
+
+/**
+ * Render one package's API corpus, shipped INSIDE the published npm package
+ * (`node_modules/<pkg>/llms-api.txt`): agents read the doc at the exact installed
+ * version, no fetch, no auth. Per the doc-for-LLM epic, the packaged artifact is the
+ * corpus, never the URL index. Deterministic.
  * @param {string} pkgName
  * @param {Array<{ importPath: string, api: { matched: any[] } }>} entries
  * @returns {string}
@@ -598,35 +609,65 @@ export function renderPackageLlms(pkgName, entries) {
 }
 
 /**
- * Render one package's `llms.txt`, the discovery file shipped NEXT TO its corpus in
- * the published tarball. It is an index, not a second corpus: the entry-point list
- * tells an agent which section of the sibling `llms-full.txt` to search, so the split
- * per-entry-point feeds stay out of the tarball (they would duplicate ~300 KB of the
- * same bytes). Everything the tarball does not carry — the stories, the deprecation
- * map, the per-file feeds — is linked absolutely to the canonical public deploy.
+ * Render one package's stories corpus (`node_modules/<pkg>/llms-stories.txt`), the
+ * sibling of the API corpus. Every package carries the whole workspace's stories:
+ * most story files import neither package, so a per-package split by import would
+ * drop the majority of the examples from both.
+ * @param {string} pkgName
+ * @param {import('./extract-stories.mjs').StoriesFile[]} storyFiles
+ * @returns {string}
+ */
+export function renderPackageStories(pkgName, storyFiles) {
+	const groups = groupByComponent(storyFiles);
+	const header =
+		`# ${pkgName} — Storybook usage examples\n\n` +
+		`Auto-generated from the lucca-front Storybook stories at this published version: one\n` +
+		`section per component, each with its templates and prop tables. Read it windowed\n` +
+		`(search the component, then read around it) — do not load the whole file.\n\n` +
+		`Documented components: ${groups.length}\n`;
+	return `${header}\n${renderStoriesSection(groups)}\n`;
+}
+
+/**
+ * Render one package's `llms.txt`, the discovery file shipped NEXT TO its corpora in
+ * the published tarball. It is a proxy, not a third corpus: it routes an agent to the
+ * API reference or to the usage examples, and the entry-point list tells it which
+ * section of the API file to search — so the split per-entry-point feeds stay out of
+ * the tarball (they would duplicate ~300 KB of the same bytes). Everything the tarball
+ * does not carry — the deprecation map, the per-file feeds — is linked absolutely to
+ * the canonical public deploy.
  *
- * The relative `./llms-full.txt` link is the invariant: it resolves inside
+ * The relative `./llms-*.txt` links are the invariant: they resolve inside
  * `node_modules/<pkg>/` at the exact installed version, where an absolute docs URL
- * would silently answer for `master`.
+ * would silently answer for `master`. So a corpus the tarball carries is never also
+ * advertised as absent, or the version leak reopens through that link.
  *
  * @param {string} pkgName
  * @param {Array<{ importPath: string, api: { matched: Array<{ name: string }> } }>} entries
+ * @param {{ storyComponents?: number }} [options]
  * @returns {string}
  */
-export function renderPackageIndex(pkgName, entries) {
+export function renderPackageIndex(pkgName, entries, { storyComponents = 0 } = {}) {
 	const total = entries.reduce((n, e) => n + e.api.matched.length, 0);
+	const hasStories = storyComponents > 0;
 	const lines = [
 		`# ${pkgName}`,
 		'',
 		`> Auto-generated LLM documentation of ${pkgName}, shipped inside the published package.`,
-		'> The corpus below is the API surface of THIS installed version, resolved from the',
-		"> library's TypeScript source and JSDoc.",
+		'> The corpora linked below describe THIS installed version, resolved from the',
+		"> library's TypeScript source, JSDoc and Storybook stories.",
 		'',
 		`Public API entries: ${total}`,
+		...(hasStories ? [`Documented components: ${storyComponents}`] : []),
 		'',
-		'## Corpus (in this package)',
+		'## Corpora (in this package)',
 		'',
-		`- [llms-full.txt](./llms-full.txt): every public API entry of ${pkgName}, one section per entry point. Read it windowed — search the symbol, then read around it.`,
+		`- [llms-api.txt](./llms-api.txt): every public API entry of ${pkgName}, one section per entry point. Read it windowed — search the symbol, then read around it.`,
+		...(hasStories
+			? [
+					'- [llms-stories.txt](./llms-stories.txt): the Storybook usage examples — one section per component, with its templates and prop tables.',
+				]
+			: []),
 		'',
 		'## Entry points',
 		'',
@@ -642,7 +683,9 @@ export function renderPackageIndex(pkgName, entries) {
 		'',
 		'## Not in this package (published docs, tracks `master`)',
 		'',
-		`- [llms.txt](${CANONICAL_BASE_URL}/llms.txt): the whole-workspace index — per-entry-point feeds and Storybook usage examples`,
+		hasStories
+			? `- [llms.txt](${CANONICAL_BASE_URL}/llms.txt): the whole-workspace index — the split per-entry-point and per-category feeds (this package carries both corpora whole)`
+			: `- [llms.txt](${CANONICAL_BASE_URL}/llms.txt): the whole-workspace index — per-entry-point feeds and Storybook usage examples`,
 		`- [deprecations.json](${CANONICAL_BASE_URL}/deprecations.json): every \`@deprecated\` symbol with its replacement hint and import paths`,
 		'- [Prisme on zeroheight](https://prisme.lucca.io): design guidelines and component usage documentation (not machine-generated)',
 		'',
@@ -787,7 +830,7 @@ export function generateAll({ root = workspaceRoot } = {}) {
 		const body = renderStoriesSection(cat.groups);
 		writeFileSync(join(outDir, `${cat.slug}.md`), `# ${cat.category} — Storybook usage examples\n\n${body}`);
 	}
-	const storiesSection = `# Storybook usage examples\n\n${renderStoriesSection(groupByComponent(storyFiles))}`;
+	const storiesSection = renderStoriesCorpus(storyFiles);
 
 	writeFileSync(resolve(root, OUT_LLMS), `${renderLlmsFull(api)}\n${storiesSection}`);
 	writeFileSync(resolve(root, OUT_DEPRECATIONS), renderDeprecations(deprecations));
