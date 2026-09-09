@@ -6,12 +6,10 @@
  * the examples match the exact version being documented.
  */
 
-import { execFileSync, execSync } from 'child_process';
 import path from 'path';
-import { StorybookGroup, StoryExample, StoryCollectionResult, VersionConfig } from '../types';
+import { StorybookGroup, StorybookStory, StoryExample, StoryCollectionResult, VersionConfig } from '../types';
 import { renderStoryTemplates, renderBasicStoryTemplate } from './story-eval';
-
-const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
+import { listDirsAtTag, readAtTag } from './git-snapshot';
 
 /**
  * Reads story source code for a component from a specific git tag,
@@ -36,6 +34,11 @@ export function readStorySourceFromGit(
 	const inputDescriptions = new Map<string, string>();
 
 	const allStories = allGroups.flatMap((g) => g.stories);
+
+	// Settle every story whose framework the Storybook index could not decide, BEFORE anything
+	// derives a file slug or a section from it (index.ts maps ZeroHeight notes onto these same
+	// objects, so the resolution has to happen in place and up front).
+	resolveStoryFrameworks(allStories, version);
 
 	for (const story of allStories) {
 		if (!story.importPath) continue;
@@ -63,14 +66,31 @@ export function readStorySourceFromGit(
 			// Resolve interpolations by evaluating the story's render() at default args.
 			// Static extraction can only leave an opaque `${…}` placeholder; only fall back to it
 			// when evaluation yields nothing usable, so we never emit worse code than before.
+			// Evaluating the story's render() resolves interpolations that static extraction can only
+			// leave as `${…}` — and is also the ONLY way to read a computed template such as
+			// `template: getTemplate()` where the helper builds the markup at runtime. So it runs both
+			// when extraction left placeholders and when it found nothing at all; previously the second
+			// case never reached the evaluator.
 			let templates = extracted.templates;
-			if (templates.some((t) => t.includes('${'))) {
+			if (templates.length === 0 || templates.some((t) => t.includes('${'))) {
 				const rendered = renderStoryTemplates(content, componentDefaults);
 				if (rendered && rendered.length > 0) templates = rendered;
 			}
 
-			// Skip stories with no templates (nothing useful to show)
-			if (templates.length === 0 && extracted.imports.length === 0) continue;
+			// Last resort: the markup lives in a sibling .html file.
+			if (templates.length === 0) {
+				templates = readTemplateUrlFile(content, normalizedImport, version.tag);
+			}
+
+			// A story with no markup has nothing to show: its section would be a heading over an import
+			// block that `<slug>.md` already prints verbatim under `## Import`. It used to be kept as
+			// long as it had imports (`&&`), which turned every extraction failure into a code-less
+			// example — daterangeinput shipped as 29 lines with no `<lu-date-range-input>` anywhere.
+			//
+			// This is only safe because extraction now succeeds on the shapes it used to miss (wrapped
+			// helper calls, quoted markup, `templateUrl`, computed templates): failures fell from 53 to
+			// 12 at v21.3.1. Flipping this without those fixes would have deleted 41 legitimate examples.
+			if (templates.length === 0) continue;
 
 			// Derive a file slug from the import path
 			const fileSlug = deriveFileSlug(story.importPath, story.framework);
@@ -88,6 +108,8 @@ export function readStorySourceFromGit(
 			// File doesn't exist in this tag — skip
 		}
 	}
+
+	disambiguateNames(examples);
 
 	return examples.length > 0 || inputDescriptions.size > 0
 		? { examples, inputDescriptions }
@@ -108,6 +130,77 @@ function deriveFileSlug(importPath: string, framework: 'angular' | 'html-css'): 
 	const suffix = parts.length > 1 ? parts.slice(1).join('-') : parts[0];
 	const prefix = framework === 'angular' ? 'angular' : 'html';
 	return `${prefix}-${suffix}`;
+}
+
+/**
+ * Restores the segment `deriveDisplayName` drops, for the stories where dropping it loses the
+ * distinction.
+ *
+ * That heuristic assumes the first hyphen-separated segment is the component prefix, which holds
+ * for `button-basic` but not for a component whose stories are split by sub-part:
+ * `detail-basic.stories.ts` and `list-basic.stories.ts` both became "Basic", and the page then
+ * showed two `### Basic` under one heading with different content and nothing to tell them apart.
+ * 83 such collisions on 22.0.
+ *
+ * Only the colliding names are rewritten — `detail-basic` → "Detail basic" — so every other title
+ * keeps the shorter form it has today.
+ */
+function disambiguateNames(examples: StoryExample[]): void {
+	const byKey = new Map<string, StoryExample[]>();
+	for (const ex of examples) {
+		const key = `${ex.framework}::${ex.name}`;
+		const list = byKey.get(key) ?? [];
+		list.push(ex);
+		byKey.set(key, list);
+	}
+
+	for (const list of byKey.values()) {
+		if (list.length < 2) continue;
+
+		// Escalate context until the titles differ. The file name alone is not always enough: two
+		// stories can share it in different folders — `html&css/basic` and `html&css/group/basic`,
+		// or `overlays/popover/popover` and `users/popover/angular/popover`.
+		for (let depth = 0; depth <= 2; depth++) {
+			const names = list.map((ex) => deriveFullName(ex.importPath, depth));
+			if (new Set(names).size === list.length || depth === 2) {
+				list.forEach((ex, i) => (ex.name = names[i]));
+				break;
+			}
+		}
+	}
+}
+
+/** Folder names that carry no meaning in a title. */
+const NOISE_SEGMENTS = new Set(['stories', 'documentation', 'angular', 'demo']);
+
+/**
+ * Display name keeping every segment of the file name, plus `depth` folder levels of context.
+ *
+ * `depth` 0 → ".../detail-basic.stories.ts" → "Detail basic"
+ * `depth` 1 → ".../html&css/group/basic.stories.ts" → "Group basic"
+ * `depth` 2 → ".../overlays/popover/popover.stories.ts" → "Overlays popover"
+ *
+ * Framework folders are skipped — they are already the section the example sits in — and a folder
+ * repeating the file name is dropped rather than yielding "Popover popover".
+ */
+export function deriveFullName(importPath: string, depth = 0): string {
+	const segments = importPath.replace(/^[./\\]+/, '').split('/');
+	const base = (segments.pop() ?? '').replace(/\.stories\.ts$/, '');
+
+	// A folder repeating the file name adds nothing ("Popover popover"), so it is skipped rather
+	// than kept and deduplicated — otherwise one level of context buys nothing at all.
+	const meaningful = segments.filter(
+		(s) => !NOISE_SEGMENTS.has(s) && !/^html\s*&\s*css$/i.test(s) && s.toLowerCase() !== base.toLowerCase(),
+	);
+	const context = depth > 0 ? meaningful.slice(-depth) : [];
+
+	const words = [...context, ...base.split('-')]
+		.map((w) => w.trim())
+		.filter(Boolean)
+		.filter((w, i, all) => i === 0 || w.toLowerCase() !== all[i - 1].toLowerCase());
+
+	const joined = words.join(' ');
+	return joined.charAt(0).toUpperCase() + joined.slice(1);
 }
 
 /**
@@ -148,7 +241,15 @@ export function readStoryTemplates(importPath: string, version: VersionConfig): 
 
 	// Fallback: inline template literals (template: `...`)
 	const templates = extractTemplateLiterals(content);
-	return templates.length > 0 ? templates : null;
+	if (templates.length > 0) return templates;
+
+	// Computed templates (`template: getTemplate()`) only exist once the story is evaluated.
+	const rendered = renderStoryTemplates(content, new Map());
+	if (rendered && rendered.length > 0) return rendered;
+
+	// Last resort: the markup lives in a sibling .html file (templateUrl).
+	const fromFile = readTemplateUrlFile(content, normalizedImport, version.tag);
+	return fromFile.length > 0 ? fromFile : null;
 }
 
 /**
@@ -185,16 +286,96 @@ function extractCodeLiterals(content: string): string[] {
  * Reads a file from a specific git tag using `git show`.
  * Uses execFileSync to avoid shell interpretation of special chars like `&`.
  */
+/**
+ * Reads the template of a story that declares `templateUrl: './x.stories.html'` instead of an
+ * inline one — 12 stories at v21.3.1 and v22.0.0, which yielded no markup at all.
+ *
+ * The sibling file is resolved relative to the story and fetched from the same git tag, so the
+ * markup matches the documented version like every other source in this pipeline.
+ */
+function readTemplateUrlFile(content: string, importPath: string, tag: string): string[] {
+	const results: string[] = [];
+	const seen = new Set<string>();
+
+	for (const match of content.matchAll(/templateUrl:\s*['\"`]([^'\"`]+)['\"`]/g)) {
+		const rel = match[1];
+		if (/\.\./.test(rel) || rel.startsWith('/')) continue;
+		if (seen.has(rel)) continue;
+		seen.add(rel);
+
+		const storyDir = path.posix.dirname(importPath.replace(/^[./\\]+/, ''));
+		const htmlPath = path.posix.normalize(path.posix.join(storyDir, rel));
+		if (htmlPath.startsWith('..')) continue;
+
+		const html = gitShowFile(tag, htmlPath);
+		if (html?.trim()) results.push(html.trim());
+	}
+
+	return results;
+}
+
+/** Per-run cache: `git show` is invoked once per (tag, path) across both passes. */
+const gitShowCache = new Map<string, string | null>();
+
 function gitShowFile(tag: string, filePath: string): string | null {
-	try {
-		return execFileSync('git', ['show', `${tag}:${filePath}`], {
-			cwd: WORKSPACE_ROOT,
-			encoding: 'utf-8',
-			maxBuffer: 1024 * 1024,
-			stdio: ['pipe', 'pipe', 'pipe'],
-		});
-	} catch {
-		return null;
+	const key = `${tag}:${filePath}`;
+	if (gitShowCache.has(key)) return gitShowCache.get(key)!;
+	const content = gitShowFileUncached(tag, filePath);
+	gitShowCache.set(key, content);
+	return content;
+}
+
+function gitShowFileUncached(tag: string, filePath: string): string | null {
+	return readAtTag(tag, filePath);
+}
+
+/**
+ * Angular-only Storybook constructs. A story declaring an Angular module/provider set or a
+ * `component:` documents the Angular API.
+ *
+ * Deliberately NOT a signal: Angular binding syntax in the rendered markup. The repo's own
+ * `html&css/` stories use `(click)="…"` and `[attr.style]="…"` in raw HTML (they render inside
+ * Storybook Angular), so bindings misclassify 29 of them at v21.3.1. Nor is an import from
+ * `@storybook/angular`, which every story has.
+ */
+const ANGULAR_STORY_CONSTRUCTS = /\bmoduleMetadata\s*\(|\bapplicationConfig\s*\(|\bimportProvidersFrom\s*\(/;
+const ANGULAR_STORY_COMPONENT = /^\s*component:\s*[A-Z][\w$]*\s*,?\s*$/m;
+
+/** Tier 3 of the framework decision: read it off the story source. */
+export function detectFrameworkFromSource(source: string): 'angular' | 'html-css' {
+	if (ANGULAR_STORY_CONSTRUCTS.test(source)) return 'angular';
+	if (ANGULAR_STORY_COMPONENT.test(source)) return 'angular';
+	return 'html-css';
+}
+
+/**
+ * Resolves, in place, the framework of every story the Storybook index could not decide from its
+ * folder layout or its title (`frameworkConfident: false`).
+ *
+ * Without this pass those stories all defaulted to `html-css`: at v21.3.1, 164 of 596 stories —
+ * 60 of them Angular — which filed Angular examples under `## HTML/CSS` and concatenated their
+ * TypeScript imports into the component's SCSS block.
+ */
+export function resolveStoryFrameworks(stories: StorybookStory[], version: VersionConfig): void {
+	const byPath = new Map<string, 'angular' | 'html-css'>();
+
+	for (const story of stories) {
+		if (story.frameworkConfident || !story.importPath) continue;
+
+		const normalizedImport = story.importPath.replace(/^[./\\]+/, '');
+		if (/\.\./.test(normalizedImport)) continue;
+
+		// Several stories share one file — classify it once.
+		let resolved = byPath.get(normalizedImport);
+		if (resolved === undefined) {
+			const content = gitShowFile(version.tag, normalizedImport);
+			if (!content) continue; // absent from this tag — leave the index's default untouched
+			resolved = detectFrameworkFromSource(content);
+			byPath.set(normalizedImport, resolved);
+		}
+
+		story.framework = resolved;
+		story.frameworkConfident = true;
 	}
 }
 
@@ -204,6 +385,12 @@ const IMPORT_EXCLUDE_PATTERNS = [
 	/['"]storybook\//,           // storybook/test, etc.
 	/['"]stories\/helpers/,      // shared test helpers
 	/\.stories['"]/,             // cross-story imports (e.g., './button-basic.stories')
+	// Story helpers reached by a relative path — `'../../../helpers/stories'`,
+	// `'../helpers/story-model-display.component'`, `'@/helpers/test'`. The pattern above only
+	// matched the `stories/helpers` spelling, so these leaked into the published import block of
+	// 17 components at v21.3.1; they are story plumbing, never consumer API.
+	/['"][@./][^'"]*\/helpers(\/|['"])/,
+	/['"]@\/stories\//,          // alias-rooted story assets (e.g. '@/stories/icons-list')
 ];
 
 interface StoryExtraction {
@@ -237,14 +424,63 @@ function extractStoryEssentials(content: string): StoryExtraction | null {
 	return { imports, templates, descriptions };
 }
 
+/** A helper call wrapping the template, e.g. `cleanupTemplate(` in `template: cleanupTemplate(`…`)`. */
+const CALL_HEAD = /^[A-Za-z_$][\w$.]*\s*\(\s*/;
+
+function skipWhitespace(content: string, pos: number): number {
+	let i = pos;
+	while (i < content.length && (content[i] === ' ' || content[i] === '\n' || content[i] === '\r' || content[i] === '\t')) i++;
+	return i;
+}
+
 /**
- * Extracts all template literal values from story files.
+ * Steps over any helper calls between `template:` / `return` and the literal that follows.
  *
- * Looks for two patterns:
- * 1. `template: \`...\`` — direct template assignments
- * 2. `return \`...\`` — template returned from helper functions (common in HTML/CSS stories)
+ * `template: cleanupTemplate(`…`)` is the repo's dominant story shape and used to yield nothing:
+ * the reader only saw a heading with imports and no markup. Loops, so `a(b(`…`))` works too.
  */
-function extractTemplateLiterals(content: string): string[] {
+function skipCallHeads(content: string, pos: number): number {
+	let i = pos;
+	for (;;) {
+		const match = CALL_HEAD.exec(content.slice(i, i + 120));
+		if (!match) return i;
+		i += match[0].length;
+	}
+}
+
+/** Reads a single-quoted or double-quoted string literal, stopping at the unescaped closing quote. */
+function readQuotedString(content: string, startPos: number, quote: string): { text: string; endPos: number } {
+	let i = startPos;
+	let text = '';
+	while (i < content.length) {
+		const ch = content[i];
+		if (ch === '\\' && i + 1 < content.length) {
+			text += content[i + 1];
+			i += 2;
+		} else if (ch === quote) {
+			return { text, endPos: i + 1 };
+		} else if (ch === '\n') {
+			return { text: '', endPos: i };
+		} else {
+			text += ch;
+			i++;
+		}
+	}
+	return { text, endPos: i };
+}
+
+/**
+ * Extracts all template values from story files.
+ *
+ * Looks for `template:` and `return`, then accepts:
+ * 1. a template literal — `template: \`...\`` / `return \`...\``;
+ * 2. the same wrapped in helper calls — `template: cleanupTemplate(\`...\`)`;
+ * 3. a quoted string containing markup — `return '<span class="tag">Text</span>';`.
+ *
+ * Templates living in a sibling `.html` file (`templateUrl`) are handled separately, by
+ * `readTemplateUrlFile()` — the file has to be fetched from git, which needs the tag.
+ */
+export function extractTemplateLiterals(content: string): string[] {
 	const results: string[] = [];
 	const patterns = ['template:', 'return'];
 
@@ -254,18 +490,28 @@ function extractTemplateLiterals(content: string): string[] {
 			const idx = content.indexOf(searchStr, pos);
 			if (idx === -1) break;
 
-			let i = idx + searchStr.length;
-			while (i < content.length && (content[i] === ' ' || content[i] === '\n' || content[i] === '\r' || content[i] === '\t')) i++;
+			const next = idx + searchStr.length;
+			pos = next;
 
-			if (content[i] !== '`') {
-				pos = idx + searchStr.length;
+			// `return` must be the keyword, not the head of an identifier like `returnValue`.
+			if (searchStr === 'return' && !/\s/.test(content[next] ?? '')) continue;
+
+			const i = skipCallHeads(content, skipWhitespace(content, next));
+			const ch = content[i];
+
+			if (ch === '`') {
+				const { text, endPos } = readTemplateLiteral(content, i + 1);
+				if (text.trim()) results.push(text);
+				pos = endPos;
 				continue;
 			}
 
-			i++;
-			const { text, endPos } = readTemplateLiteral(content, i);
-			if (text.trim()) results.push(text);
-			pos = endPos;
+			if (ch === "'" || ch === '"') {
+				const { text, endPos } = readQuotedString(content, i + 1, ch);
+				// Only markup: a story helper returns plenty of strings that are not templates.
+				if (text.trim() && text.includes('<')) results.push(text);
+				pos = endPos;
+			}
 		}
 	}
 
@@ -449,15 +695,9 @@ function getScssComponentNames(tag: string): Set<string> {
 	if (cached) return cached;
 
 	try {
-		const output = execFileSync('git', ['ls-tree', '--name-only', '-d', tag, 'packages/scss/src/components/'], {
-			cwd: WORKSPACE_ROOT,
-			encoding: 'utf-8',
-			maxBuffer: 512 * 1024,
-			stdio: ['pipe', 'pipe', 'pipe'],
-		});
 		const names = new Set(
-			output.split('\n')
-				.map((line) => line.replace('packages/scss/src/components/', '').trim())
+			listDirsAtTag(tag, 'packages/scss/src/components')
+				.map((name) => name.trim())
 				.filter((n) => n && !n.startsWith('_'))
 		);
 		scssComponentsCache.set(tag, names);

@@ -45,7 +45,13 @@ export function versionRoot(skillsDir: string, version: VersionConfig): string {
 /**
  * Cleans stale component files before a fresh generation: legacy multi-file subdirectories
  * (design/, stories/, examples/ — pre-merge layout) and per-run optional files that would
- * otherwise linger when their source disappears (<slug>.design.md, legacy <slug>.changelog.md).
+ * otherwise linger when their source disappears (<slug>.design.md, <slug>.component.md, legacy
+ * <slug>.changelog.md).
+ *
+ * `<slug>.component.md` belongs here for the same reason as `<slug>.design.md`: it is written only
+ * when there is something to show. It was missing from the list, so three pages that the generator
+ * had stopped producing survived on disk from an earlier run — a fresh output directory had none of
+ * them while the committed one still did. A file the pipeline no longer emits must not outlive it.
  */
 export function cleanVersionDirectory(skillsDir: string, slug: string, version: VersionConfig): void {
 	validateSlug(slug);
@@ -56,7 +62,7 @@ export function cleanVersionDirectory(skillsDir: string, slug: string, version: 
 			fs.rmSync(dir, { recursive: true });
 		}
 	}
-	for (const file of [`${slug}.design.md`, `${slug}.changelog.md`]) {
+	for (const file of [`${slug}.design.md`, `${slug}.component.md`, `${slug}.changelog.md`]) {
 		const p = path.join(compDir, file);
 		if (fs.existsSync(p)) fs.rmSync(p);
 	}

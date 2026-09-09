@@ -1,4 +1,5 @@
 import { StorybookDocsEntry, StorybookGroup, StorybookStory, VersionConfig } from '../types';
+import { fetchWithTimeout } from './http';
 
 /**
  * Fetches the Storybook index.json for a specific version and groups stories by component.
@@ -9,7 +10,7 @@ export async function fetchStorybookIndex(version: VersionConfig): Promise<Map<s
 	const indexUrl = `${version.storybookBaseUrl}/index.json`;
 	console.log(`📚 Fetching Storybook index for ${version.tag}...`);
 
-	const res = await fetch(indexUrl);
+	const res = await fetchWithTimeout(indexUrl);
 	if (!res.ok) {
 		throw new Error(`Storybook index HTTP ${res.status}: ${indexUrl}`);
 	}
@@ -72,18 +73,51 @@ function groupStoriesByComponent(entries: any[], baseUrl: string): Map<string, S
 				};
 			}
 		} else if (type === 'story') {
+			const { framework, confident } = classifyFramework(importPath, parts);
 			group.stories.push({
 				id,
 				name,
 				title,
 				url: `${baseUrl}/?path=/story/${id}`,
 				importPath,
-				framework: importPath?.includes('/angular/') ? 'angular' : 'html-css',
+				framework,
+				frameworkConfident: confident,
 			});
 		}
 	}
 
 	return groups;
+}
+
+/**
+ * Decides whether a story documents the Angular API or the raw HTML/CSS one.
+ *
+ * The Storybook index carries no story source, so only two signals are available here — and both
+ * can be absent. A story file living directly under its component folder (neither `angular/` nor
+ * `html&css/`) whose title has no framework segment is NOT html-css by default: that assumption is
+ * what filed Angular stories under `## HTML/CSS` and concatenated their TypeScript imports into
+ * the SCSS block. Such a story is returned as `confident: false` so that `resolveStoryFrameworks()`
+ * (story-source.ts) can settle it from the file contents.
+ */
+export function classifyFramework(
+	importPath: string | undefined,
+	titleParts: string[],
+): { framework: 'angular' | 'html-css'; confident: boolean } {
+	// Tier 1 — story folder layout. Authoritative whenever the split is in place.
+	if (importPath) {
+		if (importPath.includes('/angular/')) return { framework: 'angular', confident: true };
+		if (/\/html\s*&\s*css\//i.test(importPath)) return { framework: 'html-css', confident: true };
+	}
+
+	// Tier 2 — framework segment of the Storybook title (`Documentation/Overlays/Dialog/Angular`).
+	for (const part of titleParts) {
+		const p = part.trim();
+		if (/^Angular$/i.test(p)) return { framework: 'angular', confident: true };
+		if (/^HTML[&\s]*CSS$/i.test(p)) return { framework: 'html-css', confident: true };
+	}
+
+	// Tier 3 — undecidable from the index. Kept as the historical default, flagged as a guess.
+	return { framework: 'html-css', confident: false };
 }
 
 function normalizeName(name: string): string {

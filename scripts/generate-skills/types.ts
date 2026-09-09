@@ -266,6 +266,12 @@ export interface StorybookStory {
 	url: string;
 	importPath?: string;
 	framework: 'angular' | 'html-css';
+	/**
+	 * false when `framework` is a fallback guess rather than a decision (neither the story folder
+	 * layout nor the Storybook title carried a framework segment). Such stories are re-classified
+	 * from their source by `resolveStoryFrameworks()`.
+	 */
+	frameworkConfident: boolean;
 }
 
 export interface StorybookDocsEntry {
@@ -308,10 +314,29 @@ export interface StoryExample {
 	imports: string[];
 	/** HTML template strings. */
 	templates: string[];
-	/** Consumer imports from ZeroHeight (curated, preferred over story imports). */
-	zhImports?: string[];
+	/**
+	 * Sass import lines curated on ZeroHeight for this story (`@forward` / `@use`), merged with the
+	 * component's base `@forward`. Kept apart from `zhTsImports`: a single untyped `zhImports` field
+	 * is what let TypeScript imports be rendered inside a ```css fence.
+	 */
+	zhScssImports?: string[];
+	/** Consumer TypeScript import lines curated on ZeroHeight (preferred over story imports). */
+	zhTsImports?: string[];
+	/** ZeroHeight code excerpts that are not import statements (option objects, usage fragments). */
+	zhSnippets?: StorySnippet[];
 	/** Contextual note from ZeroHeight associated with this story. */
 	zhNote?: string;
+}
+
+/**
+ * A ZeroHeight code excerpt kept verbatim, with the language it must be fenced as.
+ *
+ * `scss` rather than `css` on purpose: the ```css fence is reserved for a story's import block, so
+ * the output guard can require that fence to hold nothing but `@forward` / `@use`.
+ */
+export interface StorySnippet {
+	lang: 'ts' | 'scss';
+	code: string;
 }
 
 /** Result from reading all stories for a component. */
