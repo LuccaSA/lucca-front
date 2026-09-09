@@ -53,6 +53,24 @@ import { Node, Project } from 'ts-morph';
 
 /** Angular signal-input factories whose call expression declares a component input. */
 const INPUT_CALLEES = new Set(['input', 'input.required', 'model', 'model.required']);
+// Which argument carries the `{ alias }` options object — the `.required` forms take no
+// initial value, so their options sit first.
+const OPTIONS_ARG = new Map([
+	['input', 1],
+	['input.required', 0],
+	['model', 1],
+	['model.required', 0],
+	['output', 0],
+	['outputFromObservable', 1],
+]);
+
+/** `alias: 'x'` from an options object literal, or `undefined`. */
+function aliasIn(arg) {
+	if (!arg || !Node.isObjectLiteralExpression(arg)) return undefined;
+	const prop = arg.getProperty('alias');
+	const value = prop && Node.isPropertyAssignment(prop) ? prop.getInitializer() : undefined;
+	return value && Node.isStringLiteral(value) ? value.getLiteralValue() : undefined;
+}
 
 /** JSDoc nodes attached to a declaration (variable JSDoc lives on the statement). */
 function jsDocsOf(node) {
@@ -175,9 +193,7 @@ function decoratorConfig(member, decoratorName) {
 	let required = false;
 	if (arg && Node.isStringLiteral(arg)) alias = arg.getLiteralValue();
 	if (arg && Node.isObjectLiteralExpression(arg)) {
-		const aliasProp = arg.getProperty('alias');
-		const aliasInit = aliasProp && Node.isPropertyAssignment(aliasProp) ? aliasProp.getInitializer() : undefined;
-		if (aliasInit && Node.isStringLiteral(aliasInit)) alias = aliasInit.getLiteralValue();
+		alias = aliasIn(arg);
 		const requiredProp = arg.getProperty('required');
 		required = !!(requiredProp && Node.isPropertyAssignment(requiredProp) && requiredProp.getInitializer()?.getText() === 'true');
 	}
@@ -200,8 +216,8 @@ function emitterPayload(prop) {
 /**
  * Component/directive inputs and outputs — every Angular declaration form: signal
  * factories (`input()`/`model()`/`output()`), decorators (`@Input`/`@Output` on
- * properties and setters, aliases resolved to the public name), and
- * `outputFromObservable()`.
+ * properties and setters) and `outputFromObservable()`. Every form's alias is resolved
+ * to the public name — the property name is not the template API when an alias is set.
  */
 function membersOf(classNode) {
 	const inputsClass = [];
@@ -234,11 +250,12 @@ function membersOf(classNode) {
 		if (!init || !Node.isCallExpression(init)) continue;
 		const callee = init.getExpression().getText();
 		const writtenType = init.getTypeArguments()[0]?.getText();
+		const factoryAlias = aliasIn(init.getArguments()[OPTIONS_ARG.get(callee)]);
 		if (INPUT_CALLEES.has(callee)) {
 			const required = callee.endsWith('.required');
 			const initArgs = init.getArguments();
 			inputsClass.push({
-				name: prop.getName(),
+				name: factoryAlias ?? prop.getName(),
 				type: normalizeType(writtenType ?? signalReadType(prop)) ?? 'unknown',
 				defaultValue: !required && initArgs.length ? initArgs[0].getText() : undefined,
 				required,
@@ -247,14 +264,14 @@ function membersOf(classNode) {
 			});
 		} else if (callee === 'output') {
 			outputsClass.push({
-				name: prop.getName(),
+				name: factoryAlias ?? prop.getName(),
 				type: normalizeType(writtenType) ?? 'void',
 				rawdescription,
 				...memberDeprecation(prop),
 			});
 		} else if (callee === 'outputFromObservable') {
 			outputsClass.push({
-				name: prop.getName(),
+				name: factoryAlias ?? prop.getName(),
 				type: normalizeType(writtenType) ?? 'unknown',
 				rawdescription,
 				...memberDeprecation(prop),

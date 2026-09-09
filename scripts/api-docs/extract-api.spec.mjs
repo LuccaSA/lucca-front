@@ -247,6 +247,43 @@ describe('decorator-based inputs and outputs', () => {
 	});
 });
 
+describe('signal-factory aliases', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      import { Component, input, model, output } from '@angular/core';
+      import { outputFromObservable } from '@angular/core/rxjs-interop';
+      @Component({ selector: 'lu-signal', template: '' })
+      export class SignalComponent {
+        /** The placeholder. */
+        readonly placeHolderInput = input<string>('', { alias: 'placeholder' });
+        readonly sizeInput = input.required<'s' | 'm'>({ alias: 'size' });
+        readonly openedModel = model<boolean>(false, { alias: 'opened' });
+        readonly doneOutput = output<string>({ alias: 'done' });
+        readonly closeOutput = outputFromObservable<void>(undefined, { alias: 'close' });
+        readonly plain = input<number>(1);
+      }
+    `,
+	});
+	const ins = Object.fromEntries(doc.components[0].inputsClass.map((i) => [i.name, i]));
+	const outs = Object.fromEntries(doc.components[0].outputsClass.map((o) => [o.name, o]));
+
+	test('input()/input.required()/model() publish the alias, not the property name', () => {
+		expect(Object.keys(ins).sort()).toEqual(['opened', 'placeholder', 'plain', 'size']);
+		expect(ins.placeHolderInput).toBeUndefined();
+	});
+
+	test('an aliased input keeps its type, default and required flag', () => {
+		expect(ins.placeholder).toMatchObject({ type: 'string', required: false, rawdescription: 'The placeholder.' });
+		expect(ins.placeholder.defaultValue).toBe("''");
+		expect(ins.size.required).toBe(true);
+	});
+
+	test('output()/outputFromObservable() publish the alias, not the property name', () => {
+		expect(Object.keys(outs).sort()).toEqual(['close', 'done']);
+		expect(outs.done.type).toBe('string');
+	});
+});
+
 describe('method overloads', () => {
 	const { doc } = docFrom({
 		'index.ts': `
