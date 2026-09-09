@@ -372,7 +372,7 @@ describe('DateInputComponent', () => {
 			expect(input.value).toBe(numericFormat(inThreeDays));
 		});
 
-		it('should display the month name in month mode', () => {
+		it('should display the short month name in month mode', () => {
 			const input = createHost(new FormControl(new Date(2026, 2, 15)), null, null, { humanized: true, mode: 'month' });
 
 			expect(input.value).toBe('Mars 2026');

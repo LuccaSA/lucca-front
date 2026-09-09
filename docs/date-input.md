@@ -20,7 +20,7 @@ Il est possible d'utiliser `lu-date-input` de plusieurs façons différentes, vi
 Par défaut, la date sélectionnée est affichée au format numérique de la locale (`31/12/2026`). Avec `humanized`, elle est remplacée par sa formulation naturelle **uniquement lorsque le champ n'a pas le focus** :
 
 - en mode `day` : « Hier », « Aujourd'hui » et « Demain » ; toute autre date conserve son format numérique ;
-- en mode `month` : le nom du mois suivi de l'année (« Mars 2026 ») ;
+- en mode `month` : le nom du mois en version abrégée suivi de l'année (« Mars 2026 », « Juil. 2026 ») ;
 - en modes `week` et `year` : rien ne change, il n'existe pas de formulation naturelle pertinente.
 
 Les libellés viennent d'`Intl` (`RelativeTimeFormat` et `DateTimeFormat`), ils sont donc traduits dans toutes les locales sans clé de traduction, et la première lettre est passée en majuscule.

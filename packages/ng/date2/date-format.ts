@@ -83,7 +83,7 @@ export function humanizeDate(locale: string, date: Date, mode: CalendarMode = 'd
 			return capitalize(new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(differenceInDays, 'day'));
 		}
 		case 'month':
-			return capitalize(new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(date));
+			return capitalize(new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric' }).format(date));
 		default:
 			return null;
 	}

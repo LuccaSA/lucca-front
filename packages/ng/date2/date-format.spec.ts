@@ -46,14 +46,15 @@ describe('humanizeDate', () => {
 	});
 
 	describe('in month mode', () => {
-		it('should display the month name and the year', () => {
+		it('should display the short month name and the year', () => {
 			expect(humanizeDate('fr-FR', new Date(2026, 2, 15), 'month', reference)).toBe('Mars 2026');
-			expect(humanizeDate('en', new Date(2026, 2, 15), 'month', reference)).toBe('March 2026');
+			expect(humanizeDate('en', new Date(2026, 2, 15), 'month', reference)).toBe('Mar 2026');
 			expect(humanizeDate('de-DE', new Date(2026, 2, 15), 'month', reference)).toBe('März 2026');
+			expect(humanizeDate('fr-FR', new Date(2026, 6, 12), 'month', reference)).toBe('Juil. 2026');
 		});
 
 		it('should humanize any month, whatever the reference', () => {
-			expect(humanizeDate('en', new Date(1998, 6, 12), 'month', reference)).toBe('July 1998');
+			expect(humanizeDate('en', new Date(1998, 6, 12), 'month', reference)).toBe('Jul 1998');
 		});
 	});
 
