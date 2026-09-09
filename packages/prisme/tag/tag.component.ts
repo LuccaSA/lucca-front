@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { DecorativePalette, Palette } from '@lucca/prisme/core';
 import { IconComponent, LuccaIcon } from '@lucca/prisme/icon';
 import { LuTooltipModule } from '@lucca/prisme/tooltip';
@@ -34,7 +33,7 @@ export class TagComponent {
 	/**
 	 * Should display be outlined?
 	 */
-	readonly outlined = input(false, { transform: luBooleanAttribute });
+	readonly outlined = input(false, { transform: booleanAttribute });
 
 	/**
 	 * For routerLink usage
@@ -50,17 +49,17 @@ export class TagComponent {
 	/**
 	 * Visually hides the label while keeping it in the DOM for screen readers. Requires an icon.
 	 */
-	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
+	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Truncates the text with an ellipsis and adds a tooltip when the label is too long
 	 */
-	readonly withEllipsis = input(false, { transform: luBooleanAttribute });
+	readonly withEllipsis = input(false, { transform: booleanAttribute });
 
 	/**
 	 * Applies AI colors
 	 */
-	readonly AI = input(false, { transform: luBooleanAttribute });
+	readonly AI = input(false, { transform: booleanAttribute });
 
 	readonly tagClasses = computed(() => {
 		const size = this.size();
