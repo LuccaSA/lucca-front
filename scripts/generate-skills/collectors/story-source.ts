@@ -145,7 +145,7 @@ function deriveFileSlug(importPath: string, framework: 'angular' | 'html-css'): 
  * Only the colliding names are rewritten — `detail-basic` → "Detail basic" — so every other title
  * keeps the shorter form it has today.
  */
-function disambiguateNames(examples: StoryExample[]): void {
+export function disambiguateNames(examples: StoryExample[]): void {
 	const byKey = new Map<string, StoryExample[]>();
 	for (const ex of examples) {
 		const key = `${ex.framework}::${ex.name}`;
@@ -160,15 +160,24 @@ function disambiguateNames(examples: StoryExample[]): void {
 		// Escalate context until the titles differ. The file name alone is not always enough: two
 		// stories can share it in different folders — `html&css/basic` and `html&css/group/basic`,
 		// or `overlays/popover/popover` and `users/popover/angular/popover`.
-		for (let depth = 0; depth <= 2; depth++) {
+		for (let depth = 0; depth <= MAX_NAME_DEPTH; depth++) {
 			const names = list.map((ex) => deriveFullName(ex.importPath, depth));
-			if (new Set(names).size === list.length || depth === 2) {
+			const unique = new Set(names).size === list.length;
+			if (unique || depth === MAX_NAME_DEPTH) {
 				list.forEach((ex, i) => (ex.name = names[i]));
+				// Two folder levels were not enough to tell them apart, so the page goes back to
+				// showing the same title twice. Say so rather than reintroducing the defect quietly.
+				if (!unique) {
+					console.warn(`  ⚠️  Titres de stories toujours identiques après ${MAX_NAME_DEPTH} niveaux de contexte : ${names[0]} (${list.map((e) => e.importPath).join(', ')})`);
+				}
 				break;
 			}
 		}
 	}
 }
+
+/** Folder levels of context `disambiguateNames` may add before giving up. */
+const MAX_NAME_DEPTH = 2;
 
 /** Folder names that carry no meaning in a title. */
 const NOISE_SEGMENTS = new Set(['stories', 'documentation', 'angular', 'demo']);

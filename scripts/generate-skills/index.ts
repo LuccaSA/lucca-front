@@ -329,6 +329,10 @@ async function main(): Promise<void> {
 	// Replay only the fetches that failed in a previous run (from the manifest).
 	if (flags.retryFailed) {
 		await retryFailedRun(config, FAILURES_MANIFEST);
+		// A replay regenerates components, so it can introduce violations like any other run — and it
+		// returned before the guard, so nothing checked what it had just written.
+		const violations = reportOutputViolations(config.output.skillsDir);
+		if (violations.length > 0 && !flags.acceptOutputViolations) process.exitCode = 1;
 		return;
 	}
 
@@ -516,6 +520,14 @@ async function main(): Promise<void> {
 	}
 
 	console.log(`\n🎉 All done! ${flags.versions.length} version(s), ${totalSuccess} generated, ${totalErrors} errors`);
+
+	// A component that threw was logged ❌ and counted, but the run still exited 0 — so a generation
+	// missing components looked like a success to CI, the same class of silent failure the exit guard
+	// exists to close.
+	if (totalErrors > 0) {
+		console.error(`\n❌ ${totalErrors} unité(s) en erreur — la skill produite est incomplète.`);
+		process.exitCode = 1;
+	}
 
 	// Output guard: assert the emitted markdown is coherent. A violation is a generator bug, so it
 	// fails the run — but only after everything is written, so the offending output can be read.

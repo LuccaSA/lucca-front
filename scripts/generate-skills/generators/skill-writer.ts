@@ -160,7 +160,9 @@ export function writeVersionManifest(
 				t.minorKey,
 				{
 					reason: t.reason,
-					latestPatch: t.patchTags[t.patchTags.length - 1].replace(/^v/, ''),
+					// A technical minor can have no local tag (a clone without `fetch --tags`, or an entry
+					// added to TECHNICAL_MINORS before its first tag) — and this ran after 126 components.
+					latestPatch: t.patchTags.at(-1)?.replace(/^v/, '') ?? null,
 					patches: patchesEntry(t.patchTags, generatedAt),
 				},
 			]),

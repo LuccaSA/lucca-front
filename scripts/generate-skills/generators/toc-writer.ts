@@ -46,9 +46,12 @@ export function writeToc(skillsDir: string, version: VersionConfig, patchTags: s
 					.join('\n\n')}\n`
 			: '';
 	const techGuardSuffix = techMinors.length > 0 ? ` ni l'une des mineures techniques couvertes ci-dessus` : '';
+	// A technical minor with no local tag has no "last known patch" to name — same guard as in
+	// skill-writer: `patchTags` is empty on a clone without `fetch --tags`.
+	const techPatchLabels = techMinors.map((t) => t.patchTags.at(-1)?.replace(/^v/, '')).filter(Boolean);
 	const techPatchGuardSuffix =
-		techMinors.length > 0
-			? ` — ou, pour une mineure technique, postérieur à son dernier patch connu (${techMinors.map((t) => `\`${t.patchTags[t.patchTags.length - 1].replace(/^v/, '')}\``).join(', ')})`
+		techPatchLabels.length > 0
+			? ` — ou, pour une mineure technique, postérieur à son dernier patch connu (${techPatchLabels.map((l) => `\`${l}\``).join(', ')})`
 			: '';
 	const techFixesLine =
 		techMinors.length > 0

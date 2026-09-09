@@ -1,8 +1,9 @@
 /**
  * `fetch` with a hard deadline.
  *
- * Node's `fetch` applies no timeout of its own: a connection that stalls without erroring leaves
- * the promise pending forever. That is how a full generation stopped at 20 of 126 components while
+ * Node's `fetch` applies no *request* deadline of its own — undici bounds headers and body
+ * separately, in minutes — so a connection that stalls without erroring leaves the promise pending
+ * far longer than a generation can afford. That is how a full generation stopped at 20 of 126 components while
  * reporting **exit code 0** — the retry loop in `zeroheight-fetch.ts` only retries a fetch that
  * *rejects*, so one that never settles blocks it for good, and Node exits silently as soon as
  * nothing else keeps the event loop alive. A partial skill published as a success.
@@ -23,9 +24,10 @@
  * only to turn an infinite hang into a retryable error; slowness is the collectors' retry/backoff
  * business, and a silent early exit is caught by the guard in index.ts.
  *
- * The signal stays attached to the response body, so a download that stalls mid-stream aborts just
- * like a connection that never opens. Callers therefore keep reading `res.text()` themselves and
- * remain covered.
+ * Scope: connection and response headers. The timer is cleared as soon as `fetch` resolves, so a
+ * socket that dies while the caller reads the body is NOT covered here — undici's own `bodyTimeout`
+ * is what bounds that. Keeping the deadline armed through the body read would mean holding it open
+ * until the caller consumes the response, which this function cannot observe.
  */
 
 /**

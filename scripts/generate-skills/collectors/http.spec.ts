@@ -1,5 +1,5 @@
 import { createServer, Server } from 'http';
-import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { fetchWithTimeout, readTimeoutEnv } from './http';
 
 /**
@@ -47,12 +47,18 @@ describe('fetchWithTimeout', () => {
 	});
 
 	it('clears its timer once the response arrives', async () => {
-		// A deadline left pending would hold the event loop open for its full duration after every
-		// single request — 300 s in production. The test simply has to finish.
-		const res = await fetchWithTimeout(answeringUrl, {}, 60_000);
-		await res.text();
+		// A deadline left pending holds the event loop open for its full duration after every single
+		// request. Asserting the response alone proved nothing — that version passed with the
+		// `clearTimeout` deleted — so this watches the call itself.
+		const cleared = vi.spyOn(globalThis, 'clearTimeout');
+		try {
+			const res = await fetchWithTimeout(answeringUrl, {}, 60_000);
+			await res.text();
 
-		expect(res.status).toBe(200);
+			expect(cleared).toHaveBeenCalled();
+		} finally {
+			cleared.mockRestore();
+		}
 	});
 });
 

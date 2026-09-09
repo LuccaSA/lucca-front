@@ -37,9 +37,22 @@ const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
  * Its value appears at full-run scale, where each tag of the changelog walk is read by ~120 packages
  * instead of one. 128 is the value that costs nothing on a small run while still promoting early
  * enough on a large one (128 reads ≈ 3.7 s of `git show` before a 0.5 s archive takes over).
- * Override with `GIT_SNAPSHOT_THRESHOLD`.
+ * Override with `GIT_SNAPSHOT_THRESHOLD`. Validated rather than `Number(env) || 128`, which would
+ * swallow a typo silently and could not express a deliberate 0 (promote immediately) — the very
+ * shape called out as a mistake in http.ts.
  */
-const PROMOTION_THRESHOLD = Number(process.env['GIT_SNAPSHOT_THRESHOLD']) || 128;
+const PROMOTION_THRESHOLD = readThresholdEnv(128);
+
+function readThresholdEnv(fallback: number): number {
+	const raw = process.env['GIT_SNAPSHOT_THRESHOLD'];
+	if (raw === undefined || raw.trim() === '') return fallback;
+	const parsed = Number(raw);
+	if (!Number.isInteger(parsed) || parsed < 0) {
+		console.warn(`⚠️  GIT_SNAPSHOT_THRESHOLD="${raw}" ignoré (attendu : un entier ≥ 0) — ${fallback} conservé`);
+		return fallback;
+	}
+	return parsed;
+}
 
 /** Top-level trees the collectors read from a tag. A path outside them is never snapshotted. */
 const PATHSPECS = ['packages/ng', 'packages/scss', 'stories'];
