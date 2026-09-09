@@ -1,9 +1,11 @@
 /**
  * Build-time step for the npm channel of the doc-for-LLM epic: write each published
- * package's self-sufficient `llms-full.txt` into its ng-packagr dist folder, so
- * `npm publish` (publish.yml, no `files` allowlist) ships it and agents read the
- * doc from `node_modules/@lucca-front/ng/llms-full.txt` at the exact installed
- * version — no fetch, no auth.
+ * package's `llms.txt` index and self-sufficient `llms-full.txt` corpus into its
+ * ng-packagr dist folder, so `npm publish` (publish.yml, no `files` allowlist) ships
+ * both and agents read the doc from `node_modules/@lucca-front/ng/llms*.txt` at the
+ * exact installed version — no fetch, no auth. `llms.txt` is the conventional
+ * discovery filename (llmstxt.org); it indexes the sibling corpus rather than
+ * duplicating it.
  *
  * Runs after `build:ng` in the `build` script; also acts as the committed guardrail:
  * it FAILS the build when a package's extraction collapses below its floor, when its
@@ -12,14 +14,15 @@
  * That last check is why the step packs instead of trusting the write: a feed dropped
  * at publish time (a `files` allowlist added upstream, a `.npmignore`, a renamed dist
  * layout) leaves the write green and ships a package with no doc — silently. Only
- * `npm pack` sees the published file list.
+ * `npm pack` sees the published file list, and it is asserted per file: an allowlist
+ * naming `llms-full.txt` alone would drop the index without failing anything.
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { extractSurface, renderPackageLlms, selectPublicApi } from './generate-llms.mjs';
+import { extractSurface, renderPackageIndex, renderPackageLlms, selectPublicApi } from './generate-llms.mjs';
 
 const root = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
 
@@ -28,6 +31,9 @@ const PACK_TARGETS = [
 	{ name: '@lucca-front/ng', dist: 'dist/ng', minEntries: 500 },
 	{ name: '@lucca/prisme', dist: 'dist/prisme', minEntries: 5 },
 ];
+
+/** Every doc file the tarball must carry — asserted one by one against `npm pack`. */
+const SHIPPED_FEEDS = ['llms.txt', 'llms-full.txt'];
 
 /** The file list `npm publish` would ship from `distDir`, or null when pack fails. */
 function packedFiles(distDir) {
@@ -59,23 +65,27 @@ for (const target of PACK_TARGETS) {
 		continue;
 	}
 	writeFileSync(join(distDir, 'llms-full.txt'), renderPackageLlms(target.name, entries));
+	writeFileSync(join(distDir, 'llms.txt'), renderPackageIndex(target.name, entries));
 
 	const packed = packedFiles(distDir);
 	if (!packed) {
 		failures.push(`${target.name}: \`npm pack --dry-run\` could not read ${target.dist} — packaging unverified`);
 		continue;
 	}
-	if (!packed.includes('llms-full.txt')) {
+	const missing = SHIPPED_FEEDS.filter((f) => !packed.includes(f));
+	if (missing.length) {
 		failures.push(
-			`${target.name}: llms-full.txt written to ${target.dist} but ABSENT from the published tarball (${packed.length} files) — check \`files\`/.npmignore in the dist manifest`,
+			`${target.name}: ${missing.join(', ')} written to ${target.dist} but ABSENT from the published tarball (${packed.length} files) — check \`files\`/.npmignore in the dist manifest`,
 		);
 		continue;
 	}
-	console.log(`[llms-pack] ${target.name}: ${total} API entries → ${target.dist}/llms-full.txt (in tarball, ${packed.length} files)`);
+	console.log(
+		`[llms-pack] ${target.name}: ${total} API entries → ${target.dist}/{${SHIPPED_FEEDS.join(',')}} (in tarball, ${packed.length} files)`,
+	);
 }
 
 if (failures.length) {
 	console.error(`\n[llms-pack] FAIL: ${failures.join('; ')}.`);
 	process.exit(1);
 }
-console.log('\n[llms-pack] OK: every published package carries its llms-full.txt.');
+console.log(`\n[llms-pack] OK: every published package carries its ${SHIPPED_FEEDS.join(' + ')}.`);

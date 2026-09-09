@@ -598,6 +598,59 @@ export function renderPackageLlms(pkgName, entries) {
 }
 
 /**
+ * Render one package's `llms.txt`, the discovery file shipped NEXT TO its corpus in
+ * the published tarball. It is an index, not a second corpus: the entry-point list
+ * tells an agent which section of the sibling `llms-full.txt` to search, so the split
+ * per-entry-point feeds stay out of the tarball (they would duplicate ~300 KB of the
+ * same bytes). Everything the tarball does not carry — the stories, the deprecation
+ * map, the per-file feeds — is linked absolutely to the canonical public deploy.
+ *
+ * The relative `./llms-full.txt` link is the invariant: it resolves inside
+ * `node_modules/<pkg>/` at the exact installed version, where an absolute docs URL
+ * would silently answer for `master`.
+ *
+ * @param {string} pkgName
+ * @param {Array<{ importPath: string, api: { matched: Array<{ name: string }> } }>} entries
+ * @returns {string}
+ */
+export function renderPackageIndex(pkgName, entries) {
+	const total = entries.reduce((n, e) => n + e.api.matched.length, 0);
+	const lines = [
+		`# ${pkgName}`,
+		'',
+		`> Auto-generated LLM documentation of ${pkgName}, shipped inside the published package.`,
+		'> The corpus below is the API surface of THIS installed version, resolved from the',
+		"> library's TypeScript source and JSDoc.",
+		'',
+		`Public API entries: ${total}`,
+		'',
+		'## Corpus (in this package)',
+		'',
+		`- [llms-full.txt](./llms-full.txt): every public API entry of ${pkgName}, one section per entry point. Read it windowed — search the symbol, then read around it.`,
+		'',
+		'## Entry points',
+		'',
+	];
+	for (const entry of entries) {
+		const sample = entry.api.matched
+			.slice(0, 3)
+			.map((m) => m.name)
+			.join(', ');
+		lines.push(`- \`${entry.importPath}\`${sample ? `: ${sample}${entry.api.matched.length > 3 ? ', …' : ''}` : ''}`);
+	}
+	lines.push(
+		'',
+		'## Not in this package (published docs, tracks `master`)',
+		'',
+		`- [llms.txt](${CANONICAL_BASE_URL}/llms.txt): the whole-workspace index — per-entry-point feeds and Storybook usage examples`,
+		`- [deprecations.json](${CANONICAL_BASE_URL}/deprecations.json): every \`@deprecated\` symbol with its replacement hint and import paths`,
+		'- [Prisme on zeroheight](https://prisme.lucca.io): design guidelines and component usage documentation (not machine-generated)',
+		'',
+	);
+	return lines.join('\n');
+}
+
+/**
  * Render the `llms.txt` index (llmstxt.org shape): one absolute link per
  * entry-point API file and per story-category file, the full corpus, and the
  * design-system prose reference on zeroheight. Links are absolute to the

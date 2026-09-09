@@ -7,6 +7,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
 	attachImportPaths,
+	CANONICAL_BASE_URL,
 	cleanCell,
 	collectDeprecations,
 	coverageReport,
@@ -17,6 +18,7 @@ import {
 	renderInterface,
 	renderLlmsFull,
 	renderLlmsIndex,
+	renderPackageIndex,
 	renderPackageLlms,
 	replacementFrom,
 	selectPublicApi,
@@ -282,6 +284,38 @@ describe('renderPackageLlms', () => {
 
 	test('is deterministic — identical input yields byte-identical output', () => {
 		expect(renderPackageLlms('@lucca-front/ng', [])).toBe(renderPackageLlms('@lucca-front/ng', []));
+	});
+});
+
+describe('renderPackageIndex', () => {
+	const out = renderPackageIndex('@lucca-front/ng', [
+		{ importPath: '@lucca-front/ng/button', api: { matched: [{ name: 'ButtonComponent' }, { name: 'ButtonModule' }] } },
+		{ importPath: '@lucca-front/ng/callout', api: { matched: [{ name: 'CalloutComponent' }] } },
+	]);
+
+	test('emits the llmstxt.org shape headed by the package name', () => {
+		expect(out).toMatch(/^# @lucca-front\/ng$/m);
+		expect(out).toMatch(/^> /m);
+	});
+
+	test('points at the corpus shipped in the same tarball with a relative link', () => {
+		expect(out).toMatch(/\[llms-full\.txt\]\(\.\/llms-full\.txt\)/);
+		expect(out).not.toMatch(/\]\(https:\/\/[^)]*llms-full\.txt\)/);
+	});
+
+	test('lists every entry point with a sample of its symbols', () => {
+		expect(out).toMatch(/`@lucca-front\/ng\/button`.*ButtonComponent/);
+		expect(out).toMatch(/`@lucca-front\/ng\/callout`.*CalloutComponent/);
+		expect(out).toMatch(/^Public API entries: 3$/m);
+	});
+
+	test('links what the tarball does NOT carry to the canonical public deploy', () => {
+		expect(out).toContain(`${CANONICAL_BASE_URL}/llms.txt`);
+		expect(out).not.toContain('dd.lucca.tech');
+	});
+
+	test('is deterministic — identical input yields byte-identical output', () => {
+		expect(renderPackageIndex('@lucca-front/ng', [])).toBe(renderPackageIndex('@lucca-front/ng', []));
 	});
 });
 
