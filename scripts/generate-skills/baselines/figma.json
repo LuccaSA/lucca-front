@@ -1749,5 +1749,20 @@
 				"false"
 			]
 		}
+	},
+	"37632:5601": {
+		"componentName": ".💀 pr-HighlightSection [DEPRECATED]",
+		"properties": {
+			"> Right": null,
+			"> Left": null,
+			"Bubbles": null,
+			"Slot": null,
+			"Illustration": null,
+			"Theme": [
+				"Light",
+				"Dark",
+				"White"
+			]
+		}
 	}
 }

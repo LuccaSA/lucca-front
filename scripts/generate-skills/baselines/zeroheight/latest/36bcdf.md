@@ -50,3 +50,13 @@ Classe CSS : `.newBadge`
 ```
 
 [Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-texts-newbadge-html-css-basic--basic)
+
+# Changelog
+
+## New badge changelog
+
+### 19.3.0
+
+#### Added
+
+- `mod-inverted` modifier to display the badge with inverted colors (brand background/text swapped) for use on dark surfaces such as the side navigation.

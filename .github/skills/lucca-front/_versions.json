@@ -1,5 +1,5 @@
 {
-  "latest": "21.3",
+  "latest": "22.0",
   "minors": {
     "21.0": {
       "latestPatch": "21.0.5",
@@ -151,6 +151,21 @@
               "generatedAt": "2026-09-04T15:03:44.471Z"
             }
           }
+        }
+      }
+    },
+    "22.0": {
+      "latestPatch": "22.0.0",
+      "tag": "v22.0.0",
+      "zhReleaseId": null,
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v22.0.0/storybook",
+      "generatedAt": "2026-09-09T12:39:16.121Z",
+      "componentCount": 128,
+      "patches": {
+        "22.0.0": {
+          "tag": "v22.0.0",
+          "storybookBaseUrl": "https://lucca-front.lucca.io/v22.0.0/storybook",
+          "generatedAt": "2026-09-09T12:39:16.121Z"
         }
       }
     }
