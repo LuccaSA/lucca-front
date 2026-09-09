@@ -17,6 +17,7 @@ import { TransientFetchError, recordFailure } from './fetch-failures';
 import { readStoryTemplates } from './story-source';
 import { cleanZeroHeightMarkdown } from '../generators/template-renderer';
 import { writeToolsPage } from '../generators/skill-writer';
+import { fetchWithTimeout } from './http';
 
 interface ToolEntry {
 	slug: string;
@@ -38,7 +39,7 @@ function loadToolsMap(): ToolEntry[] {
 async function buildStoryIdMap(version: VersionConfig): Promise<Map<string, string>> {
 	const map = new Map<string, string>();
 	try {
-		const res = await fetch(`${version.storybookBaseUrl}/index.json`);
+		const res = await fetchWithTimeout(`${version.storybookBaseUrl}/index.json`);
 		if (!res.ok) return map;
 		const data = await res.json() as { entries?: Record<string, { importPath?: string }> };
 		for (const [id, entry] of Object.entries(data.entries ?? {})) {

@@ -16,7 +16,7 @@
  * 3. Extract from each implementation file
  */
 
-import { execSync } from 'child_process';
+import { readAtTag } from './git-snapshot';
 import path from 'path';
 import {
 	DeprecatedModule,
@@ -32,7 +32,6 @@ import {
 	VersionConfig,
 } from '../types';
 
-const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
 
 /**
  * Extracts the full API for an Angular package from a specific git tag.
@@ -106,7 +105,42 @@ interface CollectedPackage {
 }
 
 /** Walks a package's public API files and extracts classes + package-level symbols. */
+/**
+ * Parsed-package cache, keyed by `(package, tag)`.
+ *
+ * `extractPackageAPI` is called from three independent places — `index.ts` per component,
+ * `changelog-writer.ts` for each tag of the changelog walk, and `angular-api-writer.ts` for the
+ * orphan-symbols page — and none of them shared any work. A package with ten components was parsed
+ * ten times over, and the changelog walk (18 tags × 120 packages) accounted for 72 % of all
+ * `git show` calls on its own.
+ *
+ * Handed out as a deep copy, and that is not optional. A shallow copy of the arrays was not enough:
+ * `index.ts` merges story argType descriptions into the API by assigning `inp.description`, so with
+ * shared objects one component's descriptions leaked onto every other component of the same package,
+ * and which one won depended on how the five workers interleaved. Two consecutive generations of
+ * 22.0 differed on `fileupload` and `fileentry` for exactly that reason — a cache that makes output
+ * depend on scheduling is worse than no cache.
+ */
+const packageCache = new Map<string, CollectedPackage | null>();
+
 function collectPackage(ngPackage: string, version: VersionConfig, silent: boolean): CollectedPackage | null {
+	const cacheKey = `${ngPackage}@${version.tag}`;
+	if (packageCache.has(cacheKey)) return copyCollected(packageCache.get(cacheKey)!);
+
+	const collected = collectPackageUncached(ngPackage, version, silent);
+	packageCache.set(cacheKey, collected);
+	return copyCollected(collected);
+}
+
+function copyCollected(c: CollectedPackage | null): CollectedPackage | null {
+	if (!c) return null;
+	// Deep: callers mutate the symbols, not just the arrays holding them (see the note above).
+	// Cheap next to the parse it replaces — the whole point of the cache is that the parse is what
+	// costs, and this runs once per component rather than per file read.
+	return structuredClone(c);
+}
+
+function collectPackageUncached(ngPackage: string, version: VersionConfig, silent: boolean): CollectedPackage | null {
 	// Start from the public API entrypoint
 	const publicApiPath = `packages/ng/${ngPackage}/public-api.ts`;
 	const publicApiContent = gitShow(version.tag, publicApiPath);
@@ -1091,15 +1125,30 @@ export function extractDeprecatedModules(content: string, sourceFile: string): D
 	return out;
 }
 
+/**
+ * Blob cache, keyed by `(tag, path)`. A tagged blob is immutable, so one read is always enough.
+ *
+ * Profiled: a full 21.3 generation issued **96 735** `git show` calls for **15 814** distinct blobs —
+ * ×6 redundancy — and 2 386 of them probed paths that do not exist at the tag (`gitResolveModule`
+ * tries three extensions per re-export). Caching the misses matters as much as the hits.
+ */
+const blobCache = new Map<string, string | null>();
+
 function gitShow(tag: string, filePath: string): string | null {
-	try {
-		return execSync(`git show ${tag}:${filePath}`, {
-			cwd: WORKSPACE_ROOT,
-			encoding: 'utf-8',
-			maxBuffer: 2 * 1024 * 1024,
-			stdio: ['pipe', 'pipe', 'pipe'],
-		});
-	} catch {
-		return null;
-	}
+	const key = `${tag}:${filePath}`;
+	const cached = blobCache.get(key);
+	if (cached !== undefined) return cached;
+
+	const content = gitShowUncached(tag, filePath);
+	blobCache.set(key, content);
+	return content;
+}
+
+/**
+ * Served from the tag's on-disk snapshot (`collectors/git-snapshot.ts`), which turns what used to be
+ * a `git show` subprocess per file into a `readFileSync`. Falls back to `git show` on its own when
+ * the snapshot cannot answer, so behaviour never degrades below the previous implementation.
+ */
+function gitShowUncached(tag: string, filePath: string): string | null {
+	return readAtTag(tag, filePath);
 }

@@ -10,7 +10,7 @@
  * This replaces the need for a manually maintained component-map.json.
  */
 
-import { execSync } from 'child_process';
+import { listDirsAtTag } from './git-snapshot';
 import fs from 'fs';
 import path from 'path';
 import { ComponentEntry, StorybookGroup, VersionConfig } from '../types';
@@ -53,11 +53,10 @@ export function loadMetadataMap(): MetadataMap {
  */
 export function listNgPackages(tag: string): Set<string> {
 	try {
-		const output = execSync(`git show ${tag}:packages/ng/ 2>/dev/null`, { encoding: 'utf-8' });
 		const names = new Set<string>();
-		for (const line of output.split('\n')) {
-			const trimmed = line.replace(/\/$/, '').trim();
-			if (trimmed && !trimmed.startsWith('tree ') && !trimmed.includes('.')) {
+		for (const entry of listDirsAtTag(tag, 'packages/ng')) {
+			const trimmed = entry.replace(/\/$/, '').trim();
+			if (trimmed && !trimmed.includes('.')) {
 				names.add(trimmed);
 			}
 		}

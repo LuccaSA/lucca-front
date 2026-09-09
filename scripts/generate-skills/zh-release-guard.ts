@@ -23,6 +23,7 @@
 import readline from 'readline';
 import { parseMinor, parseVersion, getZeroHeightUrl, getZhReleaseIds, addZhReleaseId } from './version-config';
 import { listGeneratedVersionStrings } from './generators/aggregate-writer';
+import { fetchWithTimeout } from './collectors/http';
 
 export interface ZhGuardFlags {
 	/** Release IDs supplied non-interactively: { "21.3": 12345 } (from --zh-id 21.3=12345). */
@@ -63,10 +64,7 @@ function ask(question: string): Promise<string> {
 async function validateReleaseId(releaseId: number): Promise<true | false | 'unknown'> {
 	const url = getZeroHeightUrl(VALIDATION_PAGE, releaseId);
 	try {
-		const controller = new AbortController();
-		const timer = setTimeout(() => controller.abort(), 20000);
-		const res = await fetch(url, { signal: controller.signal });
-		clearTimeout(timer);
+		const res = await fetchWithTimeout(url, {}, 20_000);
 		if (res.status === 200) {
 			const body = await res.text();
 			return body.trim().length > 0 ? true : false;

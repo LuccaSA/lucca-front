@@ -17,6 +17,7 @@ import path from 'path';
 import { ZeroHeightData } from '../types';
 import { getZeroHeightUrl } from '../version-config';
 import { FetchScope, TransientFetchError, recordFailure, recordWarning } from './fetch-failures';
+import { fetchWithTimeout } from './http';
 
 const MAX_RETRIES = 4;
 /**
@@ -216,7 +217,15 @@ export async function fetchZeroHeightPage(pagePath: string, zhReleaseId: number 
 		if (typeof raw === 'object') {
 			lastStatus = raw.status;
 			lastReason = raw.reason;
-			continue; // hard transient (network/5xx/HTML/empty): retry
+
+			// A network failure (a dead socket, or our own deadline) has already cost a full timeout.
+			// Retrying it inline multiplies that on the critical path — four attempts on one page cost
+			// over 20 minutes of a run. The page is deferred to the failure manifest instead and
+			// replayed by `--retry-failed`, off the critical path. Everything else (5xx, HTML, empty,
+			// thin) means the server answered promptly, so retrying is cheap and usually works.
+			if (raw.status === 'network') break;
+
+			continue;
 		}
 
 		const cleaned = stripImages(raw);
@@ -232,7 +241,8 @@ export async function fetchZeroHeightPage(pagePath: string, zhReleaseId: number 
 	// Accept the richest 200 we got (a genuinely small page is valid — never fail on thinness).
 	if (best) return best;
 
-	throw new TransientFetchError(lastStatus, `ZeroHeight ${pagePath}: ${lastReason} (après ${MAX_RETRIES} retries)`);
+	const how = lastStatus === 'network' ? 'différé pour rejeu (--retry-failed)' : `après ${MAX_RETRIES} retries`;
+	throw new TransientFetchError(lastStatus, `ZeroHeight ${pagePath}: ${lastReason} (${how})`);
 }
 
 const NOT_FOUND = Symbol('not-found');
@@ -244,7 +254,7 @@ async function tryFetchMd(pagePath: string, zhReleaseId: number | null): Promise
 
 	let res: Response;
 	try {
-		res = await fetch(url, { headers: { Accept: 'text/plain, text/markdown' } });
+		res = await fetchWithTimeout(url, { headers: { Accept: 'text/plain, text/markdown' } });
 	} catch (err: any) {
 		return { status: 'network', reason: err?.message ?? 'fetch failed' };
 	}
@@ -260,7 +270,7 @@ async function tryFetchMd(pagePath: string, zhReleaseId: number | null): Promise
 	if (isHtml(raw) && zhReleaseId !== null) {
 		const fallbackUrl = getZeroHeightUrl(pagePath, null);
 		try {
-			const fb = await fetch(fallbackUrl, { headers: { Accept: 'text/plain, text/markdown' } });
+			const fb = await fetchWithTimeout(fallbackUrl, { headers: { Accept: 'text/plain, text/markdown' } });
 			if (fb.ok) {
 				const fbRaw = await fb.text();
 				if (!isHtml(fbRaw)) {

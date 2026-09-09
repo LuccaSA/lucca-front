@@ -18,7 +18,7 @@
  * almost none (a single pre-21 entry), so it added no value. Prose guidance lives in deprecated.md.
  */
 
-import { execSync } from 'child_process';
+import { readAtTag } from './git-snapshot';
 import { VersionConfig } from '../types';
 import { writeMigrationsPage } from '../generators/skill-writer';
 import { listStableTags, compareTags } from '../version-config';
@@ -37,10 +37,8 @@ export function collectionAt(tag: string): Map<string, string> {
 	if (cached) return cached;
 
 	const map = new Map<string, string>();
-	let raw: string;
-	try {
-		raw = execSync(`git show ${tag}:${COLLECTION_PATH}`, { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
-	} catch {
+	const raw = readAtTag(tag, COLLECTION_PATH);
+	if (raw === null) {
 		collectionCache.set(tag, map);
 		return map;
 	}
