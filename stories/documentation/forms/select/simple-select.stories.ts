@@ -395,6 +395,33 @@ export const WithDisabledOptions = generateStory({
 // 	await expect(options[1].firstChild).toHaveClass('is-disabled');
 // });
 
+export const WithCustomOptionTemplate = generateStory({
+	name: 'Custom option template',
+	description: 'Le template d’option occupe toute la largeur de la ligne : un contenu réparti avec `justify-content: space-between` aligne bien sa partie droite sur le bord de l’option.',
+	template: `<lu-simple-select
+	#selectRef
+	[(ngModel)]="selectedLegume"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+>
+	<ng-container *luOption="let legume; select: selectRef">
+		<span class="pr-u-displayFlex pr-u-justifyContentSpaceBetween">
+			<span>{{ legume.name }}</span>
+			<span>{{ colorNameByColor[legume.color] }}</span>
+		</span>
+	</ng-container>
+</lu-simple-select>`,
+	storyPartial: {
+		args: {
+			colorNameByColor,
+		},
+	},
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+});
+
 export const ApiV3 = generateStory({
 	name: 'Api V3',
 	description: `Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive \`apiV3\`.

@@ -1,3 +1,6 @@
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { createTestStory, getStoryGenerator } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { AsyncPipe, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
@@ -35,12 +38,9 @@ import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
-import { HiddenArgType } from '@/helpers/common-arg-types';
-import { createTestStory, getStoryGenerator } from '@/helpers/stories';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { InputAlias, SelectCommonAliasInput } from '../../../helpers/stories';
-import { ensurePickerPanelStyles, findPanelOptions, getPanelScrollContainer, isFullyVisibleInPanel, isSelectAllOption, sleep, waitForAngular } from '../../../helpers/test';
+import { ensurePickerPanelStyles, findPanelOptions, getPanelScrollContainer, isFullyVisibleInPanel, isSelectAllOption, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
@@ -636,6 +636,35 @@ export const WithDisabledOptions = generateStory({
 	},
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuDisabledOptionDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+});
+
+export const WithCustomOptionTemplate = generateStory({
+	name: 'Custom option template',
+	description: 'Le template d’option occupe toute la largeur de la ligne : un contenu réparti avec `justify-content: space-between` aligne bien sa partie droite sur le bord de l’option.',
+	template: `<lu-multi-select
+	#selectRef
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[maxValuesShown]="maxValuesShown"
+>
+	<ng-container *luOption="let legume; select: selectRef">
+		<span class="pr-u-displayFlex pr-u-justifyContentSpaceBetween">
+			<span>{{ legume.name }}</span>
+			<span>{{ colorNameByColor[legume.color] }}</span>
+		</span>
+	</ng-container>
+</lu-multi-select>`,
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+			colorNameByColor,
+		},
+	},
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 	},
 });
