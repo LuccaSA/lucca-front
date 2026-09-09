@@ -157,13 +157,27 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 	}
 }
 
-@mixin fontFace($family, $weights, $styles, $path: config.$fontPath, $unicodeRange: null, $filenameSuffix: '') {
+@mixin fontFace(
+	$family,
+	$weights,
+	$styles,
+	$path: config.$fontPath,
+	$unicodeRange: null,
+	$filenameSuffix: '',
+	$unicodeRangeFolder: config.$fontUnicodeRangeFolder
+) {
+	$familyPath: '#{$path}/#{$family}';
+
+	@if $unicodeRange {
+		$familyPath: '#{$familyPath}/#{$unicodeRangeFolder}';
+	}
+
 	@each $keyword, $number in $weights {
 		@each $style in $styles {
 			@if $style == 'normal' {
 				@font-face {
 					font-family: '#{$family}';
-					src: url('#{$path}/#{$family}/#{$keyword}#{$filenameSuffix}.woff2') format('woff2');
+					src: url('#{$familyPath}/#{$keyword}#{$filenameSuffix}.woff2') format('woff2');
 					font-weight: #{$number};
 					font-style: #{$style};
 					font-display: swap;
@@ -175,7 +189,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 			} @else {
 				@font-face {
 					font-family: '#{$family}';
-					src: url('#{$path}/#{$family}/#{$keyword}#{$filenameSuffix}-#{$style}.woff2') format('woff2');
+					src: url('#{$familyPath}/#{$keyword}#{$filenameSuffix}-#{$style}.woff2') format('woff2');
 					font-weight: #{$number};
 					font-style: #{$style};
 					font-display: swap;

@@ -28,19 +28,25 @@
 				config.$fontFamily,
 				config.$fontWeights,
 				config.$fontStyles,
-				$unicodeRange: config.$fontFamilyCoreRange
+				$unicodeRange: config.$fontCoreRange
 			);
 			@include core.fontFace(
 				config.$fontFamily,
 				config.$fontWeights,
 				config.$fontStyles,
-				$unicodeRange: config.$fontFamilyExtendedRange,
+				$unicodeRange: config.$fontExtendedRange,
 				$filenameSuffix: '-extended'
 			);
 		}
 
 		@if config.$fontFamilyBrand {
-			@include core.fontFace(config.$fontFamilyBrand, config.$fontWeightsBrand, config.$fontStylesBrand);
+			@include core.fontFace(
+				config.$fontFamilyBrand,
+				config.$fontWeightsBrand,
+				config.$fontStylesBrand,
+				$path: config.$fontPathBrand,
+				$unicodeRangeFolder: config.$fontUnicodeRangeFolderBrand
+			);
 		}
 
 		@if config.$fontFamilyCursive {
