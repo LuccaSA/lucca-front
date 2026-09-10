@@ -1,32 +1,23 @@
 /**
- * CI gate (offline): fails when `@lucca-front/ng`'s public-API JSDoc-description
- * coverage drops below MIN_COVERAGE. "Public API" = the names reachable from the
- * secondary entry-point barrels; "documented" = carries a non-empty JSDoc description
- * in the ts-morph extraction. This is stricter and more meaningful than Compodoc's
- * blanket `--coverageTest`, which also counts internal helpers that are not part of
- * any published surface.
+ * CI gate (offline): fails when `@lucca-front/ng` loses documented public API.
+ * "Public API" = the names reachable from the secondary entry-point barrels;
+ * "documented" = carries a non-empty JSDoc description in the ts-morph extraction.
  *
  * Extraction runs in-process (see extract-api.mjs) — no intermediate JSON to stage.
- *
- * Coverage measured at 9% on 2026-07-23 (the library documents its components through
- * Storybook stories rather than class-level JSDoc, so most public exports carry no
- * description). The floor starts below current so it guards against regressions without
- * blocking unrelated PRs — ratchet it up as JSDoc descriptions land.
  */
 import { coverageReport, extractSurface } from './generate-llms.mjs';
 
-/** Ratchet floor — raise as JSDoc coverage improves; never lower it. */
-export const MIN_COVERAGE = 5;
+/** Non-decreasing count, not a ratio: a floor under current tolerates deleting docs, a floor at it fails on new undocumented exports. */
+export const MIN_DOCUMENTED = 102;
 /** Cap the undocumented-export list so CI logs stay readable. */
 const SAMPLE = 30;
 
 const { doc, names } = extractSurface();
 const { total, documented, coverage, missing } = coverageReport(doc, names);
-// Exact ratio, not the rounded display value — 4.5% must not pass a 5% floor.
-const ok = documented * 100 >= MIN_COVERAGE * total;
+const ok = documented >= MIN_DOCUMENTED;
 
 console.log(
-	`[${ok ? 'PASS' : 'FAIL'}] @lucca-front/ng + @lucca/prisme: ${documented}/${total} public exports documented = ${coverage}% (floor ${MIN_COVERAGE}%)`,
+	`[${ok ? 'PASS' : 'FAIL'}] @lucca-front/ng + @lucca/prisme: ${documented}/${total} public exports documented = ${coverage}% (baseline ${MIN_DOCUMENTED} documented)`,
 );
 if (missing.length) {
 	const shown = missing.slice(0, SAMPLE);
@@ -36,7 +27,12 @@ if (missing.length) {
 }
 
 if (!ok) {
-	console.error(`\n↳ below the ${MIN_COVERAGE}% floor — add JSDoc descriptions to the undocumented exports above.`);
+	console.error(
+		`\n↳ ${MIN_DOCUMENTED - documented} public export(s) lost their JSDoc description since the baseline — restore them, or lower MIN_DOCUMENTED in the same commit with the reason.`,
+	);
 	process.exit(1);
+}
+if (documented > MIN_DOCUMENTED) {
+	console.log(`\n↳ ${documented - MIN_DOCUMENTED} above the baseline — raise MIN_DOCUMENTED to ${documented} to lock the gain in.`);
 }
 console.log('\nPublic-API documentation coverage OK.');
