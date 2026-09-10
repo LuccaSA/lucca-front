@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/keyframe';
+
 @layer components {
 	.lu-select-panel-layout {
 		display: flex;
@@ -17,9 +19,75 @@
 		animation: scaleIn 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
 		margin-inline: calc(var(--pr-t-spacings-50) * -1);
 	}
+
+	// Bottom sheet header: pinned above the scroll content, so it survives scrolling the options.
+	.lu-select-panel-layout-header-bar {
+		align-items: center;
+		display: flex;
+		gap: var(--pr-t-spacings-100);
+		justify-content: space-between;
+		margin-block-end: var(--pr-t-spacings-100);
+	}
+
+	.lu-select-panel-layout-header-title {
+		color: var(--palettes-neutral-800);
+		font: var(--pr-t-font-body-M);
+		font-weight: var(--pr-t-font-fontWeight-semibold);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.lu-select-panel-layout-header-close {
+		align-items: center;
+		background: none;
+		border: 0;
+		border-radius: var(--pr-t-border-radius-default);
+		color: var(--palettes-neutral-600);
+		cursor: pointer;
+		display: flex;
+		flex: 0 0 auto;
+		padding: var(--pr-t-spacings-50);
+
+		&:hover {
+			background-color: var(--palettes-neutral-100);
+		}
+	}
 }
 
 @layer mods {
+	@include keyframe.slideFromBottom;
+
+	// Bottom sheet (< S breakpoint): the layout itself becomes the surface, pinned full-width to the
+	// bottom of the viewport with only its top corners rounded and its own search header on top.
+	.lu-select-panel-layout.mod-bottomSheet {
+		animation: slideFromBottom var(--commons-animations-durations-standard) cubic-bezier(0.25, 0.8, 0.25, 1);
+		background-color: var(--pr-t-elevation-surface-raised);
+		border-start-end-radius: var(--pr-t-border-radius-structure);
+		border-start-start-radius: var(--pr-t-border-radius-structure);
+		box-shadow: var(--pr-t-elevation-shadow-overlay);
+		inline-size: 100%;
+		max-block-size: 90dvb;
+		overflow: hidden;
+		padding: var(--pr-t-spacings-100);
+
+		.lu-select-panel-layout-content {
+			animation: none;
+			background-color: transparent;
+			border-radius: 0;
+			box-shadow: none;
+			flex: 1 1 auto;
+			margin-inline: 0;
+			max-block-size: none;
+		}
+
+		// The sheet's search field is a `textField` component: only space it from the options below,
+		// its own chrome comes from the component.
+		.textField {
+			margin-block-end: var(--pr-t-spacings-100);
+		}
+	}
+
 	// Positioning hooks (set by the overlay when the panel flips around its trigger)
 	.lu-select-panel-layout {
 		&.is-above {

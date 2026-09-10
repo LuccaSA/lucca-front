@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { injectMediaMinBreakpoint, isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
@@ -119,6 +119,18 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	// TODO Might be temporary, check after merging signalize PR
 	readonly panelOpenSignal = toSignal(this.isPanelOpen$);
+
+	private readonly belowSmallBreakpoint = injectMediaMinBreakpoint('S', true);
+
+	/**
+	 * Below the `S` breakpoint (800px) the panel opens as a full-width bottom sheet that embeds its own
+	 * search input, instead of a popover anchored to the field — mirroring how filter pills move the input
+	 * inside their overlay. Filter pills already provide their own overlay, so they keep their behaviour.
+	 */
+	readonly bottomSheetMode = computed(() => (this.belowSmallBreakpoint() ?? false) && !this.filterPillMode);
+
+	/** Field label echoed as the bottom sheet's title, snapshotted when the sheet opens. */
+	readonly panelTitle = signal('');
 
 	readonly activeDescendant$ = new BehaviorSubject('');
 
@@ -286,6 +298,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected readonly destroyed$ = new Subject<void>();
 
 	private readonly injector = inject(Injector);
+	private readonly hostElementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	constructor() {
 		if (this.filterPillHost) {
@@ -332,6 +345,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				this.panelRef?.close();
 				break;
 			case 'Tab':
+				// A bottom sheet is modal: its focus trap cycles Tab between the sheet's own controls, so
+				// tabbing must not close it the way leaving the field does on desktop.
+				if (this.bottomSheetMode()) {
+					break;
+				}
 				// If we are in a filterpill, this will close it on tab press, but we want it to not lose any
 				// displayed stuff and properly close on focus exit
 				this.panelRef?.close();
@@ -420,7 +438,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 		this.#isOpeningPanel = true;
 		try {
-			this.focusInput();
+			if (this.bottomSheetMode()) {
+				// The sheet shows the field label as its title and embeds its own search input (auto-focused via
+				// cdkFocusInitial); focusing the covered host input would pop the mobile keyboard on a hidden field.
+				this.panelTitle.set(this.resolvePanelTitle());
+			} else {
+				this.focusInput();
+			}
 
 			const isSearchable = this.searchable;
 			this.isPanelOpen$.next(true);
@@ -463,6 +487,29 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (this.inputElementRef()) {
 			this.inputElementRef()?.nativeElement.focus();
 		}
+	}
+
+	// The bottom sheet echoes the field label as its title. Standalone selects may be wrapped in a <label>,
+	// but inside a form-field the label is a separate element referenced through the control's aria-labelledby.
+	private resolvePanelTitle(): string {
+		if (this.labelElement) {
+			return this.getLabelText(this.labelElement);
+		}
+
+		// The field points its own `aria-labelledby` at its value displayer, so only an actual `<label>`
+		// counts here — otherwise a select without any label would echo its selected value as the title.
+		const host = this.hostElementRef.nativeElement;
+		const labelId = host.querySelector('[aria-labelledby]')?.getAttribute('aria-labelledby')?.split(' ')[0];
+		const label = labelId ? host.ownerDocument.getElementById(labelId) : null;
+		return label?.tagName === 'LABEL' ? this.getLabelText(label) : '';
+	}
+
+	// Read the label text without its adornments (help tooltip, required marker, screen-reader-only copy),
+	// so the title stays the plain field label.
+	private getLabelText(label: HTMLElement): string {
+		const clone = label.cloneNode(true) as HTMLElement;
+		clone.querySelectorAll('[role="button"], .pr-u-mask').forEach((node) => node.remove());
+		return (clone.textContent ?? '').trim();
 	}
 
 	protected emptyClue(): void {

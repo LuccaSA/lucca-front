@@ -119,12 +119,17 @@ export class LuMultiSelectPanelRefFactory {
 	private selectId = inject(SELECT_ID);
 
 	buildPanelRef<T>(selectInput: LuMultiSelectInputComponent<T>, defaultOverlayConfigOverride: OverlayConfig = {}): LuMultiSelectPanelRef<T> {
-		const defaultOverlayConfig = this.buildDefaultOverlayConfig(defaultOverlayConfigOverride);
+		const bottomSheet = selectInput.bottomSheetMode();
+		const defaultOverlayConfig = bottomSheet ? this.buildBottomSheetOverlayConfig(defaultOverlayConfigOverride) : this.buildDefaultOverlayConfig(defaultOverlayConfigOverride);
 
 		const overlayRef = this.overlay.create(defaultOverlayConfig);
 
-		overlayRef.hostElement.style.transitionProperty = 'height';
-		overlayRef.hostElement.style.transitionDuration = 'var(--commons-animations-durations-standard)';
+		if (!bottomSheet) {
+			// The connected panel animates its height as options stream in; the bottom sheet slides up
+			// from the viewport edge instead (see the `.mod-bottomSheet` panel styles).
+			overlayRef.hostElement.style.transitionProperty = 'height';
+			overlayRef.hostElement.style.transitionDuration = 'var(--commons-animations-durations-standard)';
+		}
 
 		addAttributesOnCdkContainer(overlayRef, this.selectLabelId, this.selectId);
 
@@ -153,6 +158,21 @@ export class LuMultiSelectPanelRefFactory {
 		overlayConfig.scrollStrategy = this.scrollStrategies.reposition();
 		overlayConfig.minWidth = this.elementRef.nativeElement.clientWidth;
 		overlayConfig.maxWidth = '100vw';
+
+		return overlayConfig;
+	}
+
+	// Below the `S` breakpoint the panel detaches from the field and pins to the bottom of the viewport as a
+	// full-width bottom sheet (solid backdrop, blocked page scroll, its own search input inside the sheet).
+	protected buildBottomSheetOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {
+		const overlayConfig: OverlayConfig = { ...overlayConfigOverride };
+		overlayConfig.positionStrategy = this.positionBuilder.global().bottom('0').start('0');
+		overlayConfig.scrollStrategy = this.scrollStrategies.block();
+		overlayConfig.hasBackdrop = true;
+		overlayConfig.backdropClass = 'cdk-overlay-dark-backdrop';
+		overlayConfig.panelClass = 'mod-bottomSheet';
+		overlayConfig.width = '100%';
+		overlayConfig.maxHeight = '90dvh';
 
 		return overlayConfig;
 	}

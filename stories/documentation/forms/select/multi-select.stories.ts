@@ -20,6 +20,7 @@ import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-sel
 import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import {
 	LuMultiDisplayerDirective,
 	LuMultiSelectContentDisplayerComponent,
@@ -365,6 +366,37 @@ export const Basic = generateStory({
 });
 
 export const BasicTEST = createTestStory(Basic, basePlay);
+
+export const WithFormField = generateStory({
+	name: 'With form field',
+	description: `Encapsulé dans un \`lu-form-field\`, le select est associé à son label, qui reste la façon recommandée de nommer le champ. Sous le breakpoint S, le panneau s’ouvre en bottom sheet et reprend ce label comme titre.`,
+	template: `<lu-form-field label="Légumes" tooltip="Plusieurs légumes possibles" inlineMessage="Choisissez vos légumes préférés">
+	<lu-multi-select
+		#selectRef
+		[clearable]="clearable"
+		[loading]="loading"
+		[keepSearchAfterSelection]="keepSearchAfterSelection"
+		[(ngModel)]="selectedLegumes"
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+		[maxValuesShown]="maxValuesShown"
+	/>
+</lu-form-field>`,
+	neededImports: {
+		'@lucca-front/ng/form-field': ['FormFieldComponent'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+			keepSearchAfterSelection: false,
+		},
+		argTypes: {
+			clearable: { control: { type: 'boolean' } },
+			maxValuesShown: { control: { type: 'number' } },
+		},
+	},
+});
 
 export const WithClue = generateStory({
 	name: 'Clue',
@@ -1177,6 +1209,7 @@ const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasI
 				LuMultiSelectContentDisplayerComponent,
 				AsyncPipe,
 				TreeSelectDirective,
+				FormFieldComponent,
 				StoryModelDisplayComponent,
 			],
 		}),

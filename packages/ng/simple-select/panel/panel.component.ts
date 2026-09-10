@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -17,6 +18,7 @@ import {
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { ListboxComponent, ListboxState, OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
@@ -36,6 +38,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 		'[class.is-pointerNavigation]': 'pointerNavigation()',
 	},
 	imports: [
+		A11yModule,
 		LuSelectPanelLayoutComponent,
 		FormsModule,
 		NgTemplateOutlet,
@@ -46,6 +49,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 		ɵCoreSelectPanelElement,
 		ListboxComponent,
 		ListboxOptionComponent,
+		IconComponent,
 		TreeBranchComponent,
 		TreeDisplayPipe,
 	],

@@ -1,4 +1,51 @@
-<lu-select-panel-layout [loading]="loading()" [trapFocus]="true" (scrolled)="onScroll($event)">
+<!-- In bottom sheet mode the panel is a modal surface: it names itself with the field label, traps focus and
+	auto-captures it into its own search input, since the field it covers is no longer reachable. Desktop keeps
+	the trap on the layout's scroll content, which has no header to include. -->
+<lu-select-panel-layout
+	[loading]="loading()"
+	[trapFocus]="!selectInput.bottomSheetMode()"
+	[bottomSheet]="selectInput.bottomSheetMode()"
+	[attr.role]="selectInput.bottomSheetMode() ? 'dialog' : null"
+	[attr.aria-modal]="selectInput.bottomSheetMode() ? 'true' : null"
+	[attr.aria-label]="selectInput.bottomSheetMode() ? selectInput.panelTitle() || null : null"
+	[cdkTrapFocus]="selectInput.bottomSheetMode()"
+	[cdkTrapFocusAutoCapture]="selectInput.bottomSheetMode()"
+	(scrolled)="onScroll($event)"
+>
+	@if (selectInput.bottomSheetMode()) {
+		<!-- Bottom sheet embeds its own search input, the way filter pills move the field inside their overlay.
+		It sits outside the scroll content so it stays pinned while the options scroll. -->
+		<header panel-header class="lu-select-panel-layout-header">
+			<div class="lu-select-panel-layout-header-bar">
+				<span class="lu-select-panel-layout-header-title">{{ selectInput.panelTitle() }}</span>
+				<button type="button" class="lu-select-panel-layout-header-close" [attr.aria-label]="intl().close" (click)="panelRef.close()">
+					<lu-icon icon="signClose" />
+				</button>
+			</div>
+			<div class="textField">
+				<div class="textField-input">
+					<input
+						class="textField-input-value"
+						type="text"
+						role="combobox"
+						aria-haspopup="listbox"
+						[attr.aria-expanded]="true"
+						[attr.aria-controls]="selectId"
+						[attr.placeholder]="intl().placeholder"
+						[ngModel]="clue()"
+						(ngModelChange)="selectInput.clueChanged($event)"
+						[ngModelOptions]="{ standalone: true }"
+						[readonly]="!searchable"
+						(keydown)="selectInput.onKeyDownNavigation($event)"
+						cdkFocusInitial
+					/>
+					<div class="textField-input-affix">
+						<lu-icon class="textField-input-affix-icon" icon="searchMagnifyingGlass" />
+					</div>
+				</div>
+			</div>
+		</header>
+	}
 	<lu-listbox [tree]="!!treeGenerator" [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
 		<!-- The header is projected inside the listbox because it can contain selectable elements
 		that are referenced by aria-activedescendant -->
