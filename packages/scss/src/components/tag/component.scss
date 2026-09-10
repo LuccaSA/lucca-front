@@ -6,13 +6,11 @@
 	border-radius: var(--pr-t-border-radius-small);
 	padding-block: 0;
 	padding-inline: var(--pr-t-spacings-50);
-
-	/* autoprefixer: off */
 	text-decoration: var(--components-tag-decoration);
 	box-shadow: 0 0 0 1px var(--components-tag-shadow);
 	gap: var(--components-tag-gap);
 	cursor: var(--components-tag-cursor);
-	display: inline-flex;
+	display: var(--components-tag-display);
 	align-items: center;
 	text-align: center;
 	vertical-align: baseline;
@@ -42,9 +40,11 @@
 	@at-root ($atRoot) {
 		.tag-content {
 			outline: none;
-
-			/* autoprefixer: off */
 			text-decoration: var(--components-tag-decoration);
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }

@@ -41,5 +41,15 @@
 		&:has(.lucca-icon) {
 			@include withIcon;
 		}
+
+		&:has(.tag-content:empty) {
+			&:not(:has(.lucca-icon)) {
+				@include empty;
+			}
+		}
+
+		&:empty {
+			@include empty;
+		}
 	}
 }
