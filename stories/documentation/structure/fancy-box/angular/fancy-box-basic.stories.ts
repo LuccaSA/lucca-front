@@ -1,12 +1,22 @@
-import { FANCY_BOX_SIZE, FancyBoxComponent } from '@lucca-front/ng/fancy-box';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
+import {
+	FANCY_BOX_BACKGROUND_END_START,
+	FANCY_BOX_BACKGROUND_START_END,
+	FANCY_BOX_FOREGROUND_END_START,
+	FANCY_BOX_FOREGROUND_START_END,
+	FANCY_BOX_SIZE,
+	FancyBoxComponent,
+} from '@lucca-front/ng/fancy-box';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface FancyBoxBasicStory {
-	backgroundLeft: string;
-	backgroundRight: string;
-	foreground: string;
+	backgroundEndStart: string;
+	backgroundStartEnd: string;
+	foregroundStartEnd: string;
+	foregroundEndStart: string;
 	size: string;
+	palette: string;
+	content: string;
 }
 
 export default {
@@ -17,25 +27,36 @@ export default {
 		}),
 	],
 	argTypes: {
-		backgroundLeft: {
+		backgroundEndStart: {
+			options: setStoryOptions(FANCY_BOX_BACKGROUND_END_START),
 			control: {
-				type: 'text',
+				type: 'select',
 			},
-			description: 'URL de l’image en arrière plan à gauche (200x160).',
+			description: 'Image en arrière plan, en bas du côté "début" (gauche en LTR, droite en RTL). Accepte aussi une URL pour une illustration personnalisée.',
 			table: { category: 'inputs' },
 		},
-		backgroundRight: {
+		backgroundStartEnd: {
+			options: setStoryOptions(FANCY_BOX_BACKGROUND_START_END),
 			control: {
-				type: 'text',
+				type: 'select',
 			},
-			description: 'URL de l’image en arrière plan à droite (200x160).',
+			description: 'Image en arrière plan, en haut du côté "fin" (droite en LTR, gauche en RTL). Accepte aussi une URL pour une illustration personnalisée.',
 			table: { category: 'inputs' },
 		},
-		foreground: {
+		foregroundStartEnd: {
+			options: setStoryOptions(FANCY_BOX_FOREGROUND_START_END),
 			control: {
-				type: 'text',
+				type: 'select',
 			},
-			description: 'URL de l’image au premier plan (200x160).',
+			description: 'Image au premier plan, en haut du côté "fin" (droite en LTR, gauche en RTL). Accepte aussi une URL pour une illustration personnalisée.',
+			table: { category: 'inputs' },
+		},
+		foregroundEndStart: {
+			options: setStoryOptions(FANCY_BOX_FOREGROUND_END_START),
+			control: {
+				type: 'select',
+			},
+			description: 'Image au premier plan, en bas du côté "début" (gauche en LTR, droite en RTL). Accepte aussi une URL pour une illustration personnalisée.',
 			table: { category: 'inputs' },
 		},
 		size: {
@@ -46,27 +67,49 @@ export default {
 			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs' },
 		},
+		palette: {
+			options: ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'],
+			control: {
+				type: 'select',
+			},
+			description: 'Applique une palette de couleurs aux bulles de fond.',
+			table: { category: 'inputs' },
+		},
+		content: {
+			control: {
+				type: 'text',
+			},
+			description: 'Contenu textuel inséré dans le composant.',
+			table: { category: 'inputs' },
+		},
 	},
 } as Meta;
 
 function getTemplate(args: FancyBoxBasicStory): string {
-	const bgLeft = args.backgroundLeft
+	const backgroundEndStartValue = args.backgroundEndStart === 'bubbles' ? '' : args.backgroundEndStart;
+	const backgroundEndStart = backgroundEndStartValue
 		? `
-		backgroundLeft="${args.backgroundLeft}"`
+		backgroundEndStart="${backgroundEndStartValue}"`
 		: ``;
-	const bgRight = args.backgroundRight
+	const backgroundStartEndValue = args.backgroundStartEnd === 'bubbles' ? '' : args.backgroundStartEnd;
+	const backgroundStartEnd = backgroundStartEndValue
 		? `
-		backgroundRight="${args.backgroundRight}"`
+		backgroundStartEnd="${backgroundStartEndValue}"`
 		: ``;
-	const fg = args.foreground
+	const foregroundStartEnd = args.foregroundStartEnd
 		? `
-		foreground="${args.foreground}"`
+		foregroundStartEnd="${args.foregroundStartEnd}"`
+		: ``;
+	const foregroundEndStart = args.foregroundEndStart
+		? `
+		foregroundEndStart="${args.foregroundEndStart}"`
 		: ``;
 	const sizeAttr = args.size === 'S' ? ` size="S"` : ``;
+	const paletteAttr = args.palette && args.palette !== 'product' ? ` palette="${args.palette}"` : ``;
 
 	return `
-	<lu-fancy-box${sizeAttr}${bgLeft}${bgRight}${fg}>
-		Content
+	<lu-fancy-box${sizeAttr}${paletteAttr}${backgroundEndStart}${backgroundStartEnd}${foregroundStartEnd}${foregroundEndStart}>
+		${args.content}
 	</lu-fancy-box>
 	`;
 }
@@ -86,9 +129,12 @@ const Template = (args: FancyBoxBasicStory) => ({
 
 export const Basic: StoryObj<FancyBoxBasicStory> = {
 	args: {
-		backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
-		backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
-		foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
+		backgroundEndStart: 'plant',
+		backgroundStartEnd: 'candies',
+		foregroundStartEnd: 'pizza',
+		foregroundEndStart: 'clips',
+		palette: 'product',
+		content: 'Content<br />Content<br />Content<br />Content<br />Content<br />Content',
 	},
 	render: Template,
 };
