@@ -16,7 +16,8 @@ description: >
    - à défaut, la dépendance `@lucca-front/ng` (ou `@lucca-front/scss`) dans le `package.json` du projet (ex: `^21.2.1` → `21.2.1`).
 2. Décompose : **majeure** (`21`), **mineure** (`21.2`), **patch** (`21.2.1`).
 
-- **Majeure 21** (`./references/21/`) : base = 21.3 (contenu du patch 21.3.1) ; overrides : 21.2 → `minors/21-2/`, 21.1 → `minors/21-1/`, 21.0 → `minors/21-0/` ; mineures techniques : 21.4 (compatibilité Angular 22) → lire comme 21.3, patch `.0` uniquement
+- **Majeure 22** (`./references/22/`) : base = 22.0 (contenu du patch 22.0.0)
+- **Majeure 21** (`./references/21/`) : base = 21.3 (contenu du patch 21.3.1) ; overrides : 21.2 → `minors/21-2/`, 21.1 → `minors/21-1/`, 21.0 → `minors/21-0/` ; mineures techniques : 21.4 (compatibilité Angular 22) → lire comme 21.3 (patchs publiés : 21.4.0, 21.4.1, 21.4.2, ajouts des patchs 21.4.1, 21.4.2 dans `fixes/21-4-*.md`)
 
 Si la version ne peut pas être déterminée → **s'arrêter et demander à l'utilisateur**. Ne jamais supposer une version par défaut.
 
@@ -24,7 +25,7 @@ Si la version ne peut pas être déterminée → **s'arrêter et demander à l'u
 
 - la **majeure** détectée n'apparaît pas ci-dessus (ex: projet monté en majeure supérieure alors que la skill n'a pas été mise à jour) ;
 - la **mineure** détectée est plus récente que la base de sa majeure **et** n'est pas une mineure technique listée ci-dessus (mineure publiée après cette skill → non documentée) ;
-- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son `_manifest.md` ; `.0` pour une mineure technique → skill périmée, l'API réelle peut différer).
+- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son `_manifest.md` ; le dernier patch listé en §1 pour une mineure technique → skill périmée, l'API réelle peut différer).
 
 ## 2. Résolution des chemins
 
@@ -47,7 +48,7 @@ La doc reflète le **dernier patch publié** de la mineure. Si le patch du proje
 
 ### Projet sur une mineure technique
 
-Une mineure listée « technique » en §1 est une release de pure compatibilité framework : aucun changement d'API, de codemod ni de documentation. Traite le projet **comme s'il était sur sa mineure de couverture** et applique la résolution ci-dessus (ex: projet en `21.4.0` → documentation de `21.3`). **Seul le patch `.0` est couvert** — un patch ultérieur → arrête-toi et demande à l'utilisateur.
+Une mineure listée « technique » en §1 est une release de compatibilité framework : son patch `.0` est équivalent au dernier patch de sa mineure de couverture (aucun changement d'API, de codemod ni de documentation). Traite le projet **comme s'il était sur sa mineure de couverture** et applique la résolution ci-dessus (ex: projet en `21.4.2` → documentation de `21.3`). **Tous les patchs listés en §1 sont couverts.** Les patchs suivant le `.0` ont continué à livrer des correctifs **et quelques ajouts d'API** absents de la documentation : ils sont décrits dans les `fixes/<M-m-p>.md` de la mineure technique (au même endroit que ceux de la mineure de couverture, cf. « Patch antérieur » ci-dessus). Pour un projet sur un tel patch, lis tous les fixes de la mineure technique de version **inférieure ou égale** au patch installé et applique leurs changements **par-dessus** la documentation — sens inverse des fixes ordinaires : ces changements **sont** dans le code du projet.
 
 
 ## 3. Chemins (relatifs à `./references/<majeure>/` ou à `minors/<M-m>/` selon §2)
@@ -68,7 +69,7 @@ Une mineure listée « technique » en §1 est une release de pure compatibilit�
 
 ### Exemple
 
-Projet en `21.2.5` (mineure 21.2, base = 21.3), bouton → `./references/21/minors/21-2/components/button/button.md` s'il existe, sinon `./references/21/components/button/button.md`.
+Projet en `22.0.0`, bouton → `./references/22/components/button/button.md`.
 
 ## 4. Quand consulter quoi
 
@@ -102,6 +103,7 @@ Liste consolidée toutes versions. Un composant peut ne pas exister dans la vers
 - animations
 - api-select
 - app-layout
+- approbation-inbox
 - avatar
 - box
 - breadcrumbs
@@ -157,6 +159,7 @@ Liste consolidée toutes versions. Un composant peut ne pas exister dans la vers
 - gauge
 - grid
 - highlight-data
+- highlight-section
 - highlight-text
 - horizontalnavigation
 - icons
@@ -226,10 +229,10 @@ Liste consolidée toutes versions. Un composant peut ne pas exister dans la vers
 - verticalnavigation
 ## 7. Documentation transverse
 
-- **Tokens** (dossier `tokens/`) : Couleurs (`couleurs`), Typographie (`typographie`), Espacements (`espacements`), Élévations (`elevations`), Arrondis (`arrondis`), Design tokens (`design-tokens`), Noms de logiciels (`noms-de-logiciels`)
-- **Contenu & Rédaction** (dossier `content/`) : Notre voix, 100 % humaine (`voix-humaine`), Règles de ponctuation, de typographie (`ponctuation-typographie`), Grammaire, orthographe (`grammaire-orthographe`), Singulier ou pluriel ? (`singulier-pluriel`), Possessifs et pronoms (`possessifs-pronoms`), Infinitif ou impératif ? (`infinitif-imperatif`), Verbes d'action à utiliser (`verbes-action`), Nombres (`nombres`), Dates (`dates`), Accessibilité (`accessibilite-contenu`), 4 critères essentiels pour notre contenu (`criteres-essentiels`), Blocage sur le contenu ? (`blocage-contenu`), Face au jargon, que faire ? (`jargon`), Ressources pour définitions (`ressources-definitions`), Tester clarté et efficacité du contenu (`tester-clarte`), Messages d'erreur (`messages-erreur`)
+- **Tokens** (dossier `tokens/`) : Couleurs (`couleurs`), Typographie (`typographie`), Espacements (`espacements`), Élévations (`elevations`), Arrondis (`arrondis`), Design tokens (`design-tokens`), Noms des logiciels (`noms-de-logiciels`)
+- **Contenu & Rédaction** (dossier `content/`) : Notre voix, 100 % humaine (`voix-humaine`), Règles de ponctuation, de typographie (`ponctuation-typographie`), Grammaire, orthographe (`grammaire-orthographe`), Singulier ou pluriel ? (`singulier-pluriel`), Possessifs « mon, ma, mes, votre, vos » et pronoms « je, vous » (`possessifs-pronoms`), Infinitif ou impératif ? (`infinitif-imperatif`), Verbes d'action à utiliser (`verbes-action`), Nombres (`nombres`), Dates (`dates`), Accessibilité (`accessibilite-contenu`), 4 critères essentiels pour notre contenu (`criteres-essentiels`), Blocage sur le contenu ? (`blocage-contenu`), Face au jargon, que faire ? (`jargon`), Ressources pour définitions (`ressources-definitions`), Tester clarté et efficacité du contenu (`tester-clarte`), Messages d'erreur (`messages-erreur`)
 - **Guidelines** (dossier `guidelines/`) : Guidelines dev UI (`guidelines-dev-ui`)
-- **Design Patterns** (dossier `patterns/`) : Règles d'or (`regles-or`), Identification des pages (`identification-pages`), Card et box (`card-et-box`), Dialogs de confirmation (`dialogs-confirmation`), Actions de suppression (`actions-suppression`), Emails (`emails`), Feedback (`feedback`), Vues, filtres et navigation dans une page (`vues-filtres-navigation`), Structure en accordéon (`structure-accordeon`), Responsive design (`responsive-design`), Pattern IA (`pattern-ia`), Widgets (`widgets`), Parcours de création de ressource (`parcours-creation-ressource`), Conception d'un formulaire (`conception-formulaire`), Gestion des erreurs (`gestion-erreurs-formulaire`), Champs conditionnels (`champs-conditionnels`), Quitter un formulaire (`quitter-formulaire`), Aide contextuelle (`aide-contextuelle`), Champs effaçables (`champs-effacables`), Placeholders (`placeholders`), Modes d'affichage (`modes-affichage`), Traduction d'un formulaire (`traduction-formulaire`), Navigation mobile (`navigation-mobile`), Push Notification mobile (`push-notification-mobile`)
+- **Design Patterns** (dossier `patterns/`) : Nos 10 principes Design (`regles-or`), Identification des pages (`identification-pages`), Card et box (`card-et-box`), Dialogs de confirmation (`dialogs-confirmation`), Actions de suppression (`actions-suppression`), Emails (`emails`), Feedback (`feedback`), Vues, filtres et navigation dans une page (`vues-filtres-navigation`), Structure en accordéon (`structure-accordeon`), Responsive design (`responsive-design`), Pattern IA (`pattern-ia`), Widgets (`widgets`), Cycle de vie d'une ressource (`cycle-vie-ressource`), Parcours de création de ressource : avec action de diffusion (`parcours-creation-ressource`), Parcours de création de ressource : sans action de diffusion (`parcours-creation-ressource-sans-diffusion`), Conception d'un formulaire (`conception-formulaire`), Gestion des erreurs (`gestion-erreurs-formulaire`), Champs conditionnels (`champs-conditionnels`), Quitter un formulaire (`quitter-formulaire`), Aide contextuelle (`aide-contextuelle`), Champs effaçables (`champs-effacables`), Placeholders (`placeholders`), Modes d’affichage (`modes-affichage`), Traduction d'un formulaire (`traduction-formulaire`), Navigation mobile (`navigation-mobile`), Push Notification mobile (`push-notification-mobile`)
 ## 8. Composants dépréciés
 
 Consulte `documentation/deprecated/deprecated.md` (résolution §2) avant d'utiliser un composant inconnu.

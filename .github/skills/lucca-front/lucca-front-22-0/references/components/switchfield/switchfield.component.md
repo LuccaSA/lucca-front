@@ -1,0 +1,114 @@
+# switchfield — Code & Implementation
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-switchfield-angular--docs)
+
+## Angular
+
+Mots-clés : interrupteur, toggle, on, off, activation
+
+Component selector : `lu-switch-input`
+
+### Field
+
+```js
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/forms';
+import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
+```
+
+```html
+<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+	<lu-switch-input [(ngModel)]="model.example" required />
+</lu-form-field>
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>
+```
+
+## HTML/CSS
+
+Classe CSS : `.switchField`
+
+### Field disabled
+
+```css
+@forward '@lucca-front/scss/src/components/switchField';
+@forward '@lucca-front/scss/src/components/formLabel';
+@forward '@lucca-front/scss/src/components/inlineMessage';
+```
+
+```html
+<div class="form-field">
+	<label class="formLabel" for="ID">Label</label>
+	<span class="switchField">
+		<input type="checkbox" class="switchField-input" id="ID" aria-describedby="IDmessage" disabled />
+		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
+	</span>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
+</div>
+```
+
+### Field invalid
+
+```css
+@forward '@lucca-front/scss/src/components/switchField';
+@forward '@lucca-front/scss/src/components/formLabel';
+@forward '@lucca-front/scss/src/components/inlineMessage';
+```
+
+```html
+<div class="form-field">
+	<label class="formLabel" for="ID">Label</label>
+	<span class="switchField">
+		<input type="checkbox" class="switchField-input" id="ID" aria-describedby="IDmessage" aria-invalid="true" />
+		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
+	</span>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
+</div>
+```
+
+### Field size
+
+```css
+@forward '@lucca-front/scss/src/components/switchField';
+@forward '@lucca-front/scss/src/components/formLabel';
+@forward '@lucca-front/scss/src/components/inlineMessage';
+```
+
+```html
+<div class="form-field mod-S">
+	<label class="formLabel" for="ID">Label</label>
+	<span class="switchField">
+		<input type="checkbox" class="switchField-input" id="ID" aria-describedby="IDmessage" />
+		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
+	</span>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
+</div>
+```
+
+### Field
+
+```css
+@forward '@lucca-front/scss/src/components/switchField';
+@forward '@lucca-front/scss/src/components/formLabel';
+@forward '@lucca-front/scss/src/components/inlineMessage';
+```
+
+```html
+<div class="form-field">
+	<label class="formLabel" for="ID">Label</label>
+	<span class="switchField">
+		<input type="checkbox" class="switchField-input" id="ID" aria-describedby="IDmessage" />
+		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
+	</span>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
+</div>
+```

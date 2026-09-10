@@ -1,0 +1,75 @@
+# fancybox
+
+## Import
+
+```typescript
+import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
+```
+
+## Basic Usage
+
+```html
+<lu-fancy-box backgroundLeft="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg" backgroundRight="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg" foreground="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg"> Content </lu-fancy-box>
+```
+
+## API Reference
+
+### FancyBoxComponent (component)
+
+**Selector:** `lu-fancy-box`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `foreground` | `foreground` | `string \| null` | `null` | — | — | URL de l’image au premier plan (200x160). |
+| `backgroundLeft` | `backgroundLeft` | `string` | — | ✅ | — | URL de l’image en arrière plan à gauche (200x160). |
+| `backgroundRight` | `backgroundRight` | `string` | — | ✅ | — | URL de l’image en arrière plan à droite (200x160). |
+| `size` | `size` | `FancyBoxSize \| null` | `null` | — | — | Modifie la taille du composant. |
+
+## Related files
+
+- 📝 [Code & implementation](./fancybox.component.md)
+- 🎨 [Design guidelines](./fancybox.design.md)
+- 🎯 [Figma design tokens](./fancybox.figma.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-fancybox-angular-basic--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.0
+
+~ `foreground` : string → string | null, défaut ∅ → null
+
+### Notes de release (ZeroHeight)
+
+#### 21.3.0
+
+##### Added
+
+- `FANCY_BOX_SIZE` constant and `FancyBoxSize` type are now publicly exported and used to type the `size` input.
+
+#### 21.1.2
+
+##### Fixed
+
+- `mod-S` styles are now declared inside the `mods` layer, so they are no longer overridden by the component styles.
+
+#### 21.0.0
+
+##### Added
+
+- `size` input with the `S` value (`mod-S`).
+
+#### 19.2.6
+
+##### Fixed
+
+- Positioning of the fancy box decorations.
+
+#### 19.1.0
+
+##### Added
+
+- `lu-fancy-box` component (`fancyBox`) with the `backgroundLeft`, `backgroundRight` and `foreground` inputs.

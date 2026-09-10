@@ -17,6 +17,7 @@ import { TransientFetchError, recordFailure } from './fetch-failures';
 import { readStoryTemplates } from './story-source';
 import { cleanZeroHeightMarkdown } from '../generators/template-renderer';
 import { writeToolsPage } from '../generators/skill-writer';
+import { fetchWithTimeout } from './http';
 
 interface ToolEntry {
 	slug: string;
@@ -38,7 +39,7 @@ function loadToolsMap(): ToolEntry[] {
 async function buildStoryIdMap(version: VersionConfig): Promise<Map<string, string>> {
 	const map = new Map<string, string>();
 	try {
-		const res = await fetch(`${version.storybookBaseUrl}/index.json`);
+		const res = await fetchWithTimeout(`${version.storybookBaseUrl}/index.json`);
 		if (!res.ok) return map;
 		const data = await res.json() as { entries?: Record<string, { importPath?: string }> };
 		for (const [id, entry] of Object.entries(data.entries ?? {})) {
@@ -108,7 +109,7 @@ function buildExampleBlock(label: string, storyId: string, version: VersionConfi
 export async function collectAllTools(
 	skillsDir: string,
 	version: VersionConfig,
-	{ skipStorybook = false, only }: { skipStorybook?: boolean; only?: Set<string> } = {},
+	{ only }: { only?: Set<string> } = {},
 ): Promise<{ written: number; errors: number }> {
 	const tools = only ? loadToolsMap().filter((t) => only.has(t.slug)) : loadToolsMap();
 	const minorVersion = `${version.major}.${version.minor}`;
@@ -117,7 +118,7 @@ export async function collectAllTools(
 	let errors = 0;
 
 	// Build story ID map once for all tools (empty map if storybook is skipped/unavailable)
-	const storyIdMap = skipStorybook ? new Map<string, string>() : await buildStoryIdMap(version);
+	const storyIdMap = await buildStoryIdMap(version);
 	if (storyIdMap.size > 0) {
 		console.log(`  📚 Storybook index: ${storyIdMap.size} stories indexed`);
 	}

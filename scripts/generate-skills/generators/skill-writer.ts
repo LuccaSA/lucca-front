@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { MinorManifestEntry, VersionConfig, VersionManifest, WriteResult } from '../types';
+import { MinorManifestEntry, VersionConfig, VersionManifest, WriteResult, PatchManifestEntry } from '../types';
+import { TechnicalMinorPatches } from '../version-config';
 
 const SKILLS_BASE = 'lucca-front';
 
@@ -44,7 +45,13 @@ export function versionRoot(skillsDir: string, version: VersionConfig): string {
 /**
  * Cleans stale component files before a fresh generation: legacy multi-file subdirectories
  * (design/, stories/, examples/ — pre-merge layout) and per-run optional files that would
- * otherwise linger when their source disappears (<slug>.design.md, legacy <slug>.changelog.md).
+ * otherwise linger when their source disappears (<slug>.design.md, <slug>.component.md, legacy
+ * <slug>.changelog.md).
+ *
+ * `<slug>.component.md` belongs here for the same reason as `<slug>.design.md`: it is written only
+ * when there is something to show. It was missing from the list, so three pages that the generator
+ * had stopped producing survived on disk from an earlier run — a fresh output directory had none of
+ * them while the committed one still did. A file the pipeline no longer emits must not outlive it.
  */
 export function cleanVersionDirectory(skillsDir: string, slug: string, version: VersionConfig): void {
 	validateSlug(slug);
@@ -55,7 +62,7 @@ export function cleanVersionDirectory(skillsDir: string, slug: string, version: 
 			fs.rmSync(dir, { recursive: true });
 		}
 	}
-	for (const file of [`${slug}.design.md`, `${slug}.changelog.md`]) {
+	for (const file of [`${slug}.design.md`, `${slug}.component.md`, `${slug}.changelog.md`]) {
 		const p = path.join(compDir, file);
 		if (fs.existsSync(p)) fs.rmSync(p);
 	}
@@ -114,7 +121,13 @@ export function figmaSkillExists(skillsDir: string, slug: string, version: Versi
  * One entry per MINOR; `patches` records every published patch of the minor (its tag and
  * patch-exact Storybook URL), so no patch-level metadata is lost by the minor granularity.
  */
-export function writeVersionManifest(skillsDir: string, version: VersionConfig, componentCount: number, patchTags: string[]): void {
+export function writeVersionManifest(
+	skillsDir: string,
+	version: VersionConfig,
+	componentCount: number,
+	patchTags: string[],
+	technicalMinors: TechnicalMinorPatches[] = [],
+): void {
 	const manifestPath = path.resolve(skillsDir, SKILLS_BASE, '_versions.json');
 	let manifest: VersionManifest;
 
@@ -139,13 +152,22 @@ export function writeVersionManifest(skillsDir: string, version: VersionConfig, 
 		storybookBaseUrl: version.storybookBaseUrl,
 		generatedAt,
 		componentCount,
-		patches: Object.fromEntries(
-			patchTags.map((tag) => {
-				const bare = tag.replace(/^v/, '');
-				return [bare, { tag, storybookBaseUrl: `https://lucca-front.lucca.io/${tag}/storybook`, generatedAt }];
-			}),
-		),
+		patches: patchesEntry(patchTags, generatedAt),
 	};
+	if (technicalMinors.length > 0) {
+		entry.technicalMinors = Object.fromEntries(
+			technicalMinors.map((t) => [
+				t.minorKey,
+				{
+					reason: t.reason,
+					// A technical minor can have no local tag (a clone without `fetch --tags`, or an entry
+					// added to TECHNICAL_MINORS before its first tag) — and this ran after 126 components.
+					latestPatch: t.patchTags.at(-1)?.replace(/^v/, '') ?? null,
+					patches: patchesEntry(t.patchTags, generatedAt),
+				},
+			]),
+		);
+	}
 
 	manifest.minors[minorKey] = entry;
 
@@ -162,6 +184,15 @@ export function writeVersionManifest(skillsDir: string, version: VersionConfig, 
 	manifest.minors = Object.fromEntries([...allMinors].reverse().map((v) => [v, manifest.minors[v]]));
 
 	fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
+}
+
+function patchesEntry(patchTags: string[], generatedAt: string): Record<string, PatchManifestEntry> {
+	return Object.fromEntries(
+		patchTags.map((tag) => {
+			const bare = tag.replace(/^v/, '');
+			return [bare, { tag, storybookBaseUrl: `https://lucca-front.lucca.io/${tag}/storybook`, generatedAt }];
+		}),
+	);
 }
 
 // ─── Fixes writers ────────────────────────────────────────────────────────────
