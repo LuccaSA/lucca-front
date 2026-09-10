@@ -35,7 +35,9 @@ class TypographyFontsStory implements AfterViewInit {
 				.replace(/^['"]|['"]$/g, ''),
 		);
 
-		await Promise.allSettled(targetFonts.map((targetFont) => document.fonts.load(`64px "${targetFont}"`)));
+		await Promise.allSettled(
+			paragraphs.map((paragraph, index) => document.fonts.load(`64px "${targetFonts[index]}"`, paragraph.textContent ?? '')),
+		);
 
 		paragraphs.forEach((paragraph, index) => {
 			const targetFont = targetFonts[index];
