@@ -1,50 +1,56 @@
-const { readFileSync, writeFileSync } = require('fs');
-const { join } = require('path');
-
-function getDefaultSpriteUrl() {
-	const componentSource = readFileSync(join(__dirname, 'icon-sprite.component.ts'), 'utf-8');
-	const match = componentSource.match(/const ICON_SPRITE_URL = '([^']+)';/);
-	if (!match) {
-		throw new Error('Could not find ICON_SPRITE_URL in icon-sprite.component.ts');
-	}
-	return match[1];
-}
+const { execFileSync } = require('child_process');
+const { mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } = require('fs');
+const { tmpdir } = require('os');
+const { basename, join } = require('path');
 
 const generatedWarning = `// *******************************************
 // *** THIS FILE IS GENERATED, DO NOT EDIT ***
 // *** The generator is packages/prisme/icon/update-icons.js ***
 // *******************************************\n\n`;
 
-function parseArgs(argv) {
-	const args = {};
-	for (const arg of argv) {
-		const [, key, value] = arg.match(/^--([^=]+)=(.*)$/) ?? [];
-		if (key) {
-			args[key] = value;
-		}
-	}
-	return args;
-}
+const SOURCE_REPO_URL = 'https://github.com/LuccaSA/cdn.lucca.fr.git';
+const SOURCE_ICONS_PATH = 'files/transverse/prisme/icons/svg';
 
 function kebabToCamelCase(kebabCase) {
 	return kebabCase.replace(/-([a-z0-9])/g, (_, char) => char.toUpperCase());
 }
 
-async function getSpriteContent(args) {
-	if (args.file) {
-		return readFileSync(args.file, 'utf-8');
+function svgToSymbol(name, svg) {
+	const viewBox = svg.match(/viewBox="([^"]+)"/)?.[1];
+	if (!viewBox) {
+		throw new Error(`Icon "${name}" has no viewBox`);
 	}
-	const url = args.url ?? getDefaultSpriteUrl();
-	const response = await fetch(url);
-	if (!response.ok) {
-		throw new Error(`Failed to fetch sprite from ${url}: ${response.status} ${response.statusText}`);
+	const inner = svg
+		.replace(/<!--.*?-->/s, '')
+		.replace(/<svg[^>]*>/, '')
+		.replace(/<\/svg>\s*$/, '')
+		.trim();
+	return `\t<symbol id="${name}" viewBox="${viewBox}" fill="currentColor">\n\t\t${inner}\n\t</symbol>`;
+}
+
+function getSpriteContentFromSource() {
+	const cloneDir = mkdtempSync(join(tmpdir(), 'lucca-front-cdn-source-'));
+	try {
+		console.log(`Cloning ${SOURCE_REPO_URL}...`);
+		execFileSync('git', ['clone', '--depth', '1', '--progress', SOURCE_REPO_URL, cloneDir], { stdio: ['ignore', 'ignore', 'inherit'] });
+		const sha = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: cloneDir, encoding: 'utf-8' }).trim();
+
+		const iconsDir = join(cloneDir, SOURCE_ICONS_PATH);
+		const names = readdirSync(iconsDir)
+			.filter((file) => file.endsWith('.svg') && file !== 'sprite.svg')
+			.map((file) => basename(file, '.svg'));
+
+		const symbols = names.map((name) => svgToSymbol(name, readFileSync(join(iconsDir, `${name}.svg`), 'utf-8')));
+
+		console.log(`Built sprite from ${symbols.length} icons cloned from ${SOURCE_REPO_URL}@${sha} (bypassing the CDN).`);
+		return `<svg xmlns="http://www.w3.org/2000/svg">\n\t<defs>\n${symbols.join('\n')}\n\t</defs>\n</svg>\n`;
+	} finally {
+		rmSync(cloneDir, { recursive: true, force: true });
 	}
-	return response.text();
 }
 
 async function main() {
-	const args = parseArgs(process.argv.slice(2));
-	const spriteContent = await getSpriteContent(args);
+	const spriteContent = getSpriteContentFromSource();
 
 	const canonicalIcons = [...spriteContent.matchAll(/<symbol\s+id="([^"]+)"/g)].map((match) => kebabToCamelCase(match[1])).sort();
 
@@ -68,13 +74,12 @@ async function main() {
 		aliasesByTarget.set(target, [...(aliasesByTarget.get(target) ?? []), alias]);
 	}
 
-	// Group each canonical icon with its deprecated aliases, mirroring the previous IcoMoon-based generation.
 	const icons = canonicalIcons.flatMap((icon) => [
 		{ icon, deprecated: false },
 		...(aliasesByTarget.get(icon) ?? []).sort().map((alias) => ({ icon: alias, deprecated: true })),
 	]);
 
-	const type = `${generatedWarning}export type LuccaIcon =\n\t| ${icons.map(({ icon }) => `'${icon}'`).join('\n\t| ')};\n`;
+	const type = `${generatedWarning}export type LuccaIcon =\n\t| ${icons.map(({ icon }) => `'${icon}'`).join('\n\t| ')}\n\t| (string & {});\n`;
 	writeFileSync(join(__dirname, 'icons.ts'), type);
 
 	const list = `${generatedWarning}export const IconsList = [\n\t${icons.map(({ icon, deprecated }) => `{ icon: '${icon}', deprecated: ${deprecated} }`).join(',\n\t')},\n];\n`;

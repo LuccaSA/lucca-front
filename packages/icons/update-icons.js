@@ -35,3 +35,5 @@ ${icons
 `;
 
 writeFileSync(join(__dirname, 'src/commons/config.scss'), scssConfig);
+
+console.log(`Wrote src/commons/config.scss (${icons.length} icons from selection.json).`);
