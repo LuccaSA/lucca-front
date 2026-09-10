@@ -7,6 +7,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
 	assertFullyResolved,
+	assertUniqueSlugs,
 	attachImportPaths,
 	CANONICAL_BASE_URL,
 	cleanCell,
@@ -14,6 +15,7 @@ import {
 	coverageReport,
 	entryPointMeta,
 	renderComponentOrDirective,
+	renderDeprecations,
 	renderEntrypointDoc,
 	renderFunction,
 	renderInterface,
@@ -649,4 +651,90 @@ describe('the whole-surface guarantee', () => {
 	test('a fully resolved surface passes', () => {
 		expect(() => assertFullyResolved({ matched: [{ name: 'A' }], unmatched: [] })).not.toThrow();
 	});
+});
+
+describe('a deprecation on one of two same-named declarations', () => {
+	const CORE = '/repo/packages/ng/core-select/input/select-input.component.ts';
+	const SELECT = '/repo/packages/ng/select/input/select-input.component.ts';
+	const SHARED = '/repo/packages/prisme/button/button.component.ts';
+	const entryPoints = [
+		{
+			importPath: '@lucca-front/ng/core-select',
+			names: new Set(['ALuSelectInputComponent']),
+			doc: docWith({ components: [{ name: 'ALuSelectInputComponent', sourceFile: CORE }] }),
+		},
+		{
+			importPath: '@lucca-front/ng/select',
+			names: new Set(['ALuSelectInputComponent']),
+			doc: docWith({ components: [{ name: 'ALuSelectInputComponent', sourceFile: SELECT }] }),
+		},
+		{
+			importPath: '@lucca-front/ng/button',
+			names: new Set(['ButtonComponent']),
+			doc: docWith({ components: [{ name: 'ButtonComponent', sourceFile: SHARED }] }),
+		},
+		{
+			importPath: '@lucca/prisme/button',
+			names: new Set(['ButtonComponent']),
+			doc: docWith({ components: [{ name: 'ButtonComponent', sourceFile: SHARED }] }),
+		},
+	];
+
+	test('names only the entry point whose declaration carries it', () => {
+		const [dep] = attachImportPaths([{ symbol: 'ALuSelectInputComponent.grouping', type: 'input', sourceFile: CORE }], entryPoints);
+		expect(dep.importPaths).toEqual(['@lucca-front/ng/core-select']);
+	});
+
+	test('a re-exported declaration still names every entry point it reaches', () => {
+		const [dep] = attachImportPaths([{ symbol: 'ButtonComponent.delete', type: 'input', sourceFile: SHARED }], entryPoints);
+		expect(dep.importPaths).toEqual(['@lucca-front/ng/button', '@lucca/prisme/button']);
+	});
+
+	test('the published manifest never carries a machine path', () => {
+		const attached = attachImportPaths([{ symbol: 'ALuSelectInputComponent.grouping', type: 'input', sourceFile: CORE }], entryPoints);
+		expect(renderDeprecations(attached)).not.toContain('/repo/packages');
+	});
+});
+
+describe('rendering a signature inside a code fence', () => {
+	test('a constructor union keeps its pipe unescaped', () => {
+		const out = renderComponentOrDirective({
+			entity: {
+				name: 'LuDialogRef',
+				constructorArgs: [{ name: 'value', type: 'string | Date' }],
+				inputsClass: [],
+				outputsClass: [],
+				methodsClass: [],
+			},
+		});
+		expect(out).toContain('new LuDialogRef(value: string | Date)');
+		expect(out).not.toContain('\\|');
+	});
+
+	test('a method union in the table still escapes its pipe', () => {
+		const out = renderComponentOrDirective({
+			entity: {
+				name: 'X',
+				inputsClass: [],
+				outputsClass: [],
+				methodsClass: [{ name: 'set', args: [{ name: 'v', type: 'string | Date' }], returnType: 'void' }],
+			},
+		});
+		expect(out).toContain('`set(v: string \\| Date)`');
+	});
+});
+
+test('two entry points that would share a slug are refused, not silently merged', () => {
+	expect(() =>
+		assertUniqueSlugs([
+			{ slug: 'ng-core-select', importPath: '@lucca-front/ng/core/select' },
+			{ slug: 'ng-core-select', importPath: '@lucca-front/ng/core-select' },
+		]),
+	).toThrow(/ng-core-select/);
+	expect(() =>
+		assertUniqueSlugs([
+			{ slug: 'ng-a', importPath: 'a' },
+			{ slug: 'ng-b', importPath: 'b' },
+		]),
+	).not.toThrow();
 });

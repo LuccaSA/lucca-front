@@ -360,8 +360,13 @@ function classChain(classNode) {
 	return chain;
 }
 
-/** Bindings `hostDirectives` forwards: only the listed ones are public, and `'name: alias'` publishes the alias. */
-function hostDirectiveMembers(classNode) {
+/**
+ * Bindings `hostDirectives` forwards: only the listed ones are public, and `'name: alias'`
+ * publishes the alias. `seen` carries the classes already being extracted down the
+ * traversal — a host-directive cycle would otherwise recurse until the stack gives out,
+ * the same guard `classChain` and `interfaceChain` already carry.
+ */
+function hostDirectiveMembers(classNode, seen) {
 	const inputsClass = [];
 	const outputsClass = [];
 	const decorator = classNode.getDecorator('Component') ?? classNode.getDecorator('Directive');
@@ -378,7 +383,7 @@ function hostDirectiveMembers(classNode) {
 		const ref = directiveProp && Node.isPropertyAssignment(directiveProp) ? directiveProp.getInitializer() : undefined;
 		let source = { inputsClass: [], outputsClass: [] };
 		const declaration = ref && Node.isIdentifier(ref) ? ref.getDefinitionNodes().find((node) => Node.isClassDeclaration(node)) : undefined;
-		if (declaration) source = membersOf(declaration);
+		if (declaration && !seen.has(declaration)) source = membersOf(declaration, seen);
 
 		for (const [key, target, from] of [
 			['inputs', inputsClass, source.inputsClass],
@@ -402,10 +407,11 @@ function hostDirectiveMembers(classNode) {
 }
 
 /** Own + host-directive + inherited bindings; first writer wins, so a derived declaration overrides. */
-function membersOf(classNode) {
+function membersOf(classNode, seen = new Set()) {
 	const inputs = new Map();
 	const outputs = new Map();
-	const host = hostDirectiveMembers(classNode);
+	seen.add(classNode);
+	const host = hostDirectiveMembers(classNode, seen);
 	for (const node of classChain(classNode)) {
 		const own = node === classNode ? mergeMembers(ownMembersOf(node), host) : ownMembersOf(node);
 		for (const input of own.inputsClass) if (!inputs.has(input.name)) inputs.set(input.name, input);
@@ -528,7 +534,9 @@ function paramsOf(node) {
  */
 function signaturesOf(declarations) {
 	const overloads = declarations.filter((decl) => Node.isFunctionDeclaration(decl) && !decl.getBody());
-	const sigNodes = overloads.length ? overloads : declarations;
+	// Without overloads, only the callable declarations qualify: a name merged with an
+	// interface or a namespace also reaches here, and those carry no parameter list.
+	const sigNodes = overloads.length ? overloads : declarations.filter((decl) => Node.isFunctionDeclaration(decl));
 	return sigNodes.map((node) => ({
 		typeParameters: typeParamsOf(node),
 		args: paramsOf(node),

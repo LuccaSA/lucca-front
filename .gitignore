@@ -36,8 +36,6 @@ storybook-static
 .storybook/public/llms/
 .storybook/public/deprecations.json
 
-# compodoc
-
 /.angular/cache
 
 # IDE - Jetbrains

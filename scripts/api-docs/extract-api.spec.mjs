@@ -592,3 +592,28 @@ test('two distinct exports sharing a name both survive the merge', () => {
 	expect(links.length).toBe(2);
 	expect(links.map((l) => l.methodsClass[0].name).sort()).toEqual(['a', 'b']);
 });
+
+test('a function merged with an interface of the same name does not crash the extraction', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      export interface Formatter { locale: string; }
+      export function Formatter(locale: string): string { return locale; }
+    `,
+	});
+	expect(doc.miscellaneous.functions.find((f) => f.name === 'Formatter').signatures).toEqual([
+		{ typeParameters: [], args: [{ name: 'locale', type: 'string' }], returnType: 'string' },
+	]);
+});
+
+test('a hostDirectives cycle terminates instead of overflowing the stack', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      import { Directive, input } from '@angular/core';
+      @Directive({ selector: '[luB]', hostDirectives: [{ directive: ADirective, inputs: ['a'] }] })
+      export class BDirective { readonly b = input<string>(''); }
+      @Directive({ selector: '[luA]', hostDirectives: [{ directive: BDirective, inputs: ['b'] }] })
+      export class ADirective { readonly a = input<string>(''); }
+    `,
+	});
+	expect(doc.directives.map((d) => d.name).sort()).toEqual(['ADirective', 'BDirective']);
+});

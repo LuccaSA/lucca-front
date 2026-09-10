@@ -2,6 +2,7 @@
 import storybook from 'eslint-plugin-storybook';
 
 import eslint from '@eslint/js';
+import globals from 'globals';
 import angular from 'angular-eslint';
 import localRules from './packages/eslint-plugin/index.ts';
 import prettier from 'eslint-plugin-prettier/recommended';
@@ -190,6 +191,20 @@ export default defineConfig(
 			'@angular-eslint/template/prefer-self-closing-tags': 'off',
 			// TODO A lot of issues currently so a lot of rules are turned off. Would be nice to enable them but requires a lot of fixes
 			'@angular-eslint/template/button-has-type': 'off',
+		},
+	},
+	// Scripts: the api-docs generators are plain Node ESM, so the TypeScript blocks above
+	// never reach them — without this they ship unlinted.
+	{
+		files: ['scripts/api-docs/**/*.mjs'],
+		extends: [eslint.configs.recommended],
+		languageOptions: {
+			ecmaVersion: 2023,
+			sourceType: 'module',
+			globals: globals.node,
+		},
+		rules: {
+			'no-console': 'off',
 		},
 	},
 	// Scripts: generate-skills is tooling code, downgrade strict rules to warn

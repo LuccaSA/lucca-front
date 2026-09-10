@@ -65,6 +65,16 @@ function packedFiles(distDir) {
 	}
 }
 
+// The dist check first: it is the likely failure (no prior build) and it is free, while the
+// extraction below costs ~11 s over 122 barrels and 637 story files.
+const missingDist = PACK_TARGETS.filter((target) => !existsSync(join(resolve(root, target.dist), 'package.json')));
+if (missingDist.length === PACK_TARGETS.length) {
+	console.error(
+		`\n[llms-pack] FAIL: ${missingDist.map((t) => `${t.dist}/package.json`).join(', ')} not found — run the ng-packagr build first.`,
+	);
+	process.exit(1);
+}
+
 const { entryPoints } = extractSurface(root);
 const storyFiles = extractAllStories(resolve(root, 'stories/documentation'));
 const storyComponentCount = groupByComponent(storyFiles).length;

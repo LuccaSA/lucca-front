@@ -310,9 +310,14 @@ function codeCell(text) {
 	return escaped.includes('`') ? `\`\` ${escaped} \`\`` : `\`${escaped}\``;
 }
 
+/** Argument list of a signature, verbatim — for a ```ts fence, where an escape is a literal backslash. */
+function argsSignature(args) {
+	return (args || []).map((a) => `${a.name}: ${a.type || 'unknown'}`).join(', ');
+}
+
 /** Argument list of a signature — `|` escaped, since a union type otherwise opens a table column. */
 function argsCell(args) {
-	return (args || []).map((a) => `${a.name}: ${(a.type || 'unknown').replace(/\|/g, '\\|')}`).join(', ');
+	return argsSignature(args).replace(/\|/g, '\\|');
 }
 
 /** `### Methods` table, shared by the class and interface renderers. */
@@ -323,7 +328,7 @@ function methodsTable(methods, heading = '### Methods') {
 		// `static` and `<T, D>` both change how the method is called — the signature is wrong without them.
 		const base = m.static ? `static ${m.name}` : m.name;
 		const name = `${m.optional ? `${base}?` : base}${typeParamSuffix(m)}`;
-		lines.push(`| \`${name}(${argsCell(m.args)})\` | ${typeCell(m.returnType)} | ${cleanCell(m.rawdescription || m.description)} |`);
+		lines.push(`| \`${name}(${argsCell(m.args)})\` | ${typeCell(m.returnType)} | ${cleanCell(m.rawdescription)} |`);
 	}
 	lines.push('');
 	return lines;
@@ -336,13 +341,13 @@ function methodsTable(methods, heading = '### Methods') {
 /** @param {any} entry */
 export function renderComponentOrDirective({ entity }) {
 	const lines = [`## ${entity.name}`, '', ...deprecationBlock(entity)];
-	const desc = cleanBlock(entity.rawdescription || entity.description);
+	const desc = cleanBlock(entity.rawdescription);
 	if (desc) lines.push(desc, '');
 	if (entity.selector) lines.push(`**Selector:** \`${entity.selector}\``, '');
 	if (entity.exportAs) lines.push(`**Exported as:** \`${entity.exportAs}\``, '');
 	// A pipe is reached through its name, never through its class name.
 	if (entity.pipeName) lines.push(`**Pipe:** \`value | ${entity.pipeName}\``, '');
-	if (entity.constructorArgs?.length) lines.push('```ts', `new ${entity.name}(${argsCell(entity.constructorArgs)})`, '```', '');
+	if (entity.constructorArgs?.length) lines.push('```ts', `new ${entity.name}(${argsSignature(entity.constructorArgs)})`, '```', '');
 	// Without it, a generic class publishes members typed on parameters it never declares.
 	const suffix = typeParamSuffix(entity);
 	if (suffix) lines.push('```ts', `class ${entity.name}${suffix}`, '```', '');
@@ -352,7 +357,7 @@ export function renderComponentOrDirective({ entity }) {
 		lines.push('### Inputs', '', '| Input | Type | Default | Required | Description |', '| --- | --- | --- | --- | --- |');
 		for (const i of inputs) {
 			lines.push(
-				`| \`${i.name}\` | ${typeCell(i.type)} | ${defaultCell(i.defaultValue)} | ${i.required ? 'yes' : 'no'} | ${cleanCell(i.rawdescription || i.description)} |`,
+				`| \`${i.name}\` | ${typeCell(i.type)} | ${defaultCell(i.defaultValue)} | ${i.required ? 'yes' : 'no'} | ${cleanCell(i.rawdescription)} |`,
 			);
 		}
 		lines.push('');
@@ -363,7 +368,7 @@ export function renderComponentOrDirective({ entity }) {
 		lines.push('### Properties', '', '| Property | Type | Description |', '| --- | --- | --- |');
 		for (const p of properties) {
 			const base = p.readonly ? `readonly ${p.name}` : p.name;
-			lines.push(`| \`${p.optional ? `${base}?` : base}\` | ${typeCell(p.type)} | ${cleanCell(p.rawdescription || p.description)} |`);
+			lines.push(`| \`${p.optional ? `${base}?` : base}\` | ${typeCell(p.type)} | ${cleanCell(p.rawdescription)} |`);
 		}
 		lines.push('');
 	}
@@ -372,7 +377,7 @@ export function renderComponentOrDirective({ entity }) {
 	if (outputs.length) {
 		lines.push('### Outputs', '', '| Output | Type | Description |', '| --- | --- | --- |');
 		for (const o of outputs) {
-			lines.push(`| \`${o.name}\` | ${typeCell(o.type)} | ${cleanCell(o.rawdescription || o.description)} |`);
+			lines.push(`| \`${o.name}\` | ${typeCell(o.type)} | ${cleanCell(o.rawdescription)} |`);
 		}
 		lines.push('');
 	}
@@ -384,11 +389,11 @@ export function renderComponentOrDirective({ entity }) {
 /** @param {any} entry */
 export function renderFunction({ entity }) {
 	const lines = [`## ${entity.name}()`, '', ...deprecationBlock(entity)];
-	const desc = cleanBlock(entity.rawdescription || entity.description);
+	const desc = cleanBlock(entity.rawdescription);
 	if (desc) lines.push(desc, '');
 	// A function carries one entry per overload signature; the legacy single-signature
 	// shape is the one-element fallback.
-	const signatures = entity.signatures ?? [{ typeParameters: entity.typeParameters, args: entity.args, returnType: entity.returnType }];
+	const signatures = entity.signatures;
 	lines.push('```ts');
 	for (const sig of signatures) {
 		const args = (sig.args || []).map((a) => `${a.name}: ${a.type || 'unknown'}`).join(', ');
@@ -401,7 +406,7 @@ export function renderFunction({ entity }) {
 /** @param {any} entry */
 export function renderInterface({ entity }) {
 	const lines = [`## ${entity.name}`, '', ...deprecationBlock(entity)];
-	const desc = cleanBlock(entity.rawdescription || entity.description);
+	const desc = cleanBlock(entity.rawdescription);
 	if (desc) lines.push(desc, '');
 	const suffix = typeParamSuffix(entity);
 	if (suffix) lines.push('```ts', `interface ${entity.name}${suffix}`, '```', '');
@@ -415,7 +420,7 @@ export function renderInterface({ entity }) {
 			// Mirror the TypeScript modifier order so a readonly property does not read as reassignable.
 			const base = p.readonly ? `readonly ${p.name}` : p.name;
 			const name = p.optional ? `${base}?` : base;
-			lines.push(`| \`${name}\` | ${typeCell(p.type)} | ${cleanCell(p.rawdescription || p.description)} |`);
+			lines.push(`| \`${name}\` | ${typeCell(p.type)} | ${cleanCell(p.rawdescription)} |`);
 		}
 		lines.push('');
 	}
@@ -427,7 +432,7 @@ export function renderInterface({ entity }) {
 export function renderTypeAlias({ entity }) {
 	const suffix = typeParamSuffix(entity);
 	const lines = [`## ${entity.name}`, '', ...deprecationBlock(entity)];
-	const desc = cleanBlock(entity.rawdescription || entity.description);
+	const desc = cleanBlock(entity.rawdescription);
 	if (desc) lines.push(desc, '');
 	if (entity.rawtype && entity.rawtype !== 'unknown') {
 		lines.push('```ts', `type ${entity.name}${suffix} = ${entity.rawtype}`, '```', '');
@@ -440,9 +445,9 @@ export function renderTypeAlias({ entity }) {
 /** @param {any} entry */
 export function renderEnumeration({ entity }) {
 	const lines = [`## ${entity.name}`, '', ...deprecationBlock(entity)];
-	const desc = cleanBlock(entity.rawdescription || entity.description);
+	const desc = cleanBlock(entity.rawdescription);
 	if (desc) lines.push(desc, '');
-	const members = sortedByName(entity.childs || entity.members);
+	const members = sortedByName(entity.members);
 	if (members.length) {
 		lines.push('| Member | Value |', '| --- | --- |');
 		for (const m of members) lines.push(`| \`${m.name}\` | ${defaultCell(m.value)} |`);
@@ -454,7 +459,7 @@ export function renderEnumeration({ entity }) {
 /** @param {any} entry — top-level `const` exports such as InjectionTokens. */
 export function renderVariable({ entity }) {
 	const lines = [`## ${entity.name}`, '', ...deprecationBlock(entity)];
-	const desc = cleanBlock(entity.rawdescription || entity.description);
+	const desc = cleanBlock(entity.rawdescription);
 	if (desc) lines.push(desc, '');
 	if (entity.type) lines.push('```ts', `const ${entity.name}: ${entity.type}`, '```', '');
 	return lines.join('\n');
@@ -519,6 +524,24 @@ function importPathOf(entity, entryPoints) {
  * stays green. Throws rather than shipping a silently amputated surface.
  * @param {{ unmatched: string[] }} api
  */
+/**
+ * Two entry points must not flatten to one slug: the second write would replace the first
+ * feed on disk while the index still links both, and every count-based floor stays green.
+ * @param {Array<{ slug: string, importPath: string }>} entryPoints
+ */
+export function assertUniqueSlugs(entryPoints) {
+	const bySlug = new Map();
+	for (const entry of entryPoints) {
+		const existing = bySlug.get(entry.slug);
+		if (existing) {
+			throw new Error(
+				`Entry points ${existing} and ${entry.importPath} both map to the feed slug '${entry.slug}' — one would overwrite the other.`,
+			);
+		}
+		bySlug.set(entry.slug, entry.importPath);
+	}
+}
+
 export function assertFullyResolved(api) {
 	if (!api.unmatched.length) return;
 	throw new Error(
@@ -552,7 +575,7 @@ export function coverageReport(doc, exportedNames) {
 		// A name exported twice is two declarations to document, not one.
 		for (const candidate of found) {
 			total++;
-			const desc = candidate.entity.rawdescription || candidate.entity.description;
+			const desc = candidate.entity.rawdescription;
 			if (desc && String(desc).trim()) documented++;
 			else if (!missing.includes(name)) missing.push(name);
 		}
@@ -589,14 +612,16 @@ function deprecationOf(node) {
  */
 export function collectDeprecations(doc, publicNames = new Set()) {
 	const out = [];
-	const push = (symbol, type, isPublic, dep) =>
-		out.push({ symbol, type, public: isPublic, message: dep.message, replacement: dep.replacement });
+	// `sourceFile` is carried for resolution only; `attachImportPaths` strips it before the
+	// manifest is written, since it is an absolute path on whoever ran the build.
+	const push = (symbol, type, isPublic, dep, sourceFile) =>
+		out.push({ symbol, type, public: isPublic, message: dep.message, replacement: dep.replacement, sourceFile });
 
 	const scan = (arr, type) => {
 		for (const entity of arr || []) {
 			const isPublic = publicNames.has(entity.name);
 			const entityDep = deprecationOf(entity);
-			if (entityDep) push(entity.name, type, isPublic, entityDep);
+			if (entityDep) push(entity.name, type, isPublic, entityDep, entity.sourceFile);
 			const members = [
 				['inputsClass', 'input'],
 				['outputsClass', 'output'],
@@ -606,7 +631,7 @@ export function collectDeprecations(doc, publicNames = new Set()) {
 			for (const [key, memberType] of members) {
 				for (const member of entity[key] || []) {
 					const memberDep = deprecationOf(member);
-					if (memberDep) push(`${entity.name}.${member.name}`, memberType, isPublic, memberDep);
+					if (memberDep) push(`${entity.name}.${member.name}`, memberType, isPublic, memberDep, entity.sourceFile);
 				}
 			}
 		}
@@ -847,16 +872,34 @@ export function renderLlmsIndex({ baseUrl, entryPoints, storyCategories }) {
  * @param {Array<{ importPath: string, names: Set<string> }>} entryPoints
  */
 export function attachImportPaths(deprecations, entryPoints) {
-	return deprecations.map((dep) => {
+	const index = entryPoints.map((entry) => ({
+		importPath: entry.importPath,
+		names: entry.names,
+		declarations: declarationKeys(entry.doc),
+	}));
+	return deprecations.map(({ sourceFile, ...dep }) => {
 		const owner = dep.symbol.split('.')[0];
+		const exporting = index.filter((entry) => entry.names.has(owner));
+		// By declaration, not by name: two entry points can export different classes under
+		// one name, and only one of them carries the deprecation. A re-export of a single
+		// declaration still matches every entry point it reaches.
+		const declaring = sourceFile ? exporting.filter((entry) => entry.declarations.has(declarationKey(owner, sourceFile))) : [];
 		return {
 			...dep,
-			importPaths: entryPoints
-				.filter((entry) => entry.names.has(owner))
-				.map((entry) => entry.importPath)
-				.sort((a, b) => a.localeCompare(b)),
+			importPaths: (declaring.length ? declaring : exporting).map((entry) => entry.importPath).sort((a, b) => a.localeCompare(b)),
 		};
 	});
+}
+
+const declarationKey = (name, sourceFile) => `${name}\u0000${sourceFile}`;
+
+/** Every `name + declaration file` an extraction holds, for identity-aware lookups. */
+function declarationKeys(doc) {
+	const keys = new Set();
+	for (const [, candidates] of indexEntities(doc || {})) {
+		for (const { entity } of candidates) if (entity.sourceFile) keys.add(declarationKey(entity.name, entity.sourceFile));
+	}
+	return keys;
 }
 
 /**
@@ -904,10 +947,16 @@ export function storyCategoriesOf(storyFiles) {
  * Returns a summary for the CLI and the smoke gate.
  * @param {{ root?: string }} [opts]
  */
-export function generateAll({ root = workspaceRoot } = {}) {
+export function generateAll({ root = workspaceRoot, strict = false } = {}) {
 	const { doc, names, entryPoints } = extractSurface(root);
+	assertUniqueSlugs(entryPoints);
 	const api = selectPublicApi(doc, names, entryPoints);
-	assertFullyResolved(api);
+	// `build-storybook` generates the feeds too, so a hard failure here would take the whole
+	// Storybook deploy down for a documentation gap. CI runs `docs:api` (strict) on every
+	// push, which is where an unresolved export must stop the line.
+	if (strict) assertFullyResolved(api);
+	else if (api.unmatched.length)
+		console.warn(`[llms] WARNING: ${api.unmatched.length} public export(s) resolved to no declaration: ${api.unmatched.join(', ')}`);
 	const deprecations = attachImportPaths(collectDeprecations(doc, names), entryPoints);
 
 	const outDir = resolve(root, OUT_DIR);
@@ -951,7 +1000,7 @@ export function generateAll({ root = workspaceRoot } = {}) {
 
 // Run when invoked directly (not when imported by tests).
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-	const s = generateAll();
+	const s = generateAll({ strict: process.argv.includes('--strict') });
 	console.log(
 		`[llms] ${s.documented} declarations from ${s.exported} public exports rendered to ${OUT_LLMS} ` +
 			`(${s.unmatched} names not in the extraction), ` +

@@ -263,7 +263,9 @@ export function renderStoriesSection(groups) {
 			const tables = new Map();
 			for (const story of file.stories) {
 				if (!story.argTypes.length) continue;
-				const signature = story.argTypes.map((a) => a.name).join(',');
+				// The descriptions are part of the key: two stories documenting the same props
+				// differently are two tables, not one showing the first one's prose twice.
+				const signature = JSON.stringify(story.argTypes);
 				const existing = tables.get(signature);
 				if (existing) existing.names.push(story.name);
 				else tables.set(signature, { names: [story.name], argTypes: story.argTypes });

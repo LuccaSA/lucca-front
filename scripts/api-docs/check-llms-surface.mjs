@@ -117,12 +117,18 @@ if (unlinked.length) failures.push(`${unlinked.length} generated feed(s) not lin
 // Everything generated is published, not just the index: a URL reaching the feeds through
 // JSDoc, a story template or a deprecation entry is as public as one written in llms.txt.
 const INTERNAL_HOST = /dd\.lucca\.tech/;
-const publishedFiles = [
-	{ label: 'llms.txt', text: index },
-	{ label: 'llms-full.txt', text: content },
-	...feeds.map((name) => ({ label: `llms/${name}`, text: readFileSync(resolve(llmsDir, name), 'utf8') })),
-	{ label: 'deprecations.json', text: readFileSync(resolve(root, OUT_DEPRECATIONS), 'utf8') },
-];
+let publishedFiles;
+try {
+	publishedFiles = [
+		{ label: 'llms.txt', text: index },
+		{ label: 'llms-full.txt', text: content },
+		...feeds.map((name) => ({ label: `llms/${name}`, text: readFileSync(resolve(llmsDir, name), 'utf8') })),
+		{ label: 'deprecations.json', text: readFileSync(resolve(root, OUT_DEPRECATIONS), 'utf8') },
+	];
+} catch (error) {
+	console.error(`\n[llms-smoke] FAIL: a generated file could not be read — ${error.message}.`);
+	process.exit(1);
+}
 const leaking = publishedFiles.filter((file) => INTERNAL_HOST.test(file.text)).map((file) => file.label);
 if (leaking.length) failures.push(`internal host dd.lucca.tech in ${leaking.join(', ')}`);
 console.log(`[llms-smoke] ${leaking.length ? 'FAIL' : 'ok'}: no internal host in any of ${publishedFiles.length} generated files`);
