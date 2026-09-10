@@ -108,6 +108,7 @@
 		}
 
 		.dialog-inside-header-actionOptional {
+			grid-area: action;
 			margin-inline-end: calc(var(--pr-t-spacings-100) * -1);
 
 			&:empty {

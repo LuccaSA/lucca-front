@@ -254,6 +254,102 @@
 				</h4>
 			</td>
 		</tr>
+		<tr>
+			<td>Inside DataTable</td>
+			<td>
+				<div class="dataTableWrapper">
+					<table class="dataTable">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell"><span class="tag">Text</span></td>
+							</tr>
+							<tr class="dataTable-body-row">
+								<th class="dataTable-body-row-cell">header</th>
+								<td class="dataTable-body-row-cell">
+									<span class="tag"><span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</td>
+			<td>
+				<lu-data-table>
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell><lu-tag label="Text" /></td>
+						</tr>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<td luDataTableCell><lu-tag icon="heart" label="Text" /></td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
+		</tr>
+		<tr>
+			<td>Inside IndexTable</td>
+			<td>
+				<table class="indexTable">
+					<thead class="indexTable-head">
+						<tr class="indexTable-head-row">
+							<th class="indexTable-head-row-cell" scope="col">Label</th>
+							<th class="indexTable-head-row-cell" scope="col">Label</th>
+						</tr>
+					</thead>
+					<tbody class="indexTable-body">
+						<tr class="indexTable-body-row">
+							<td class="indexTable-body-row-cell">
+								<a href="#" class="indexTable-body-row-cell-link">Content</a>
+							</td>
+							<td class="indexTable-body-row-cell mod-allowTextSelection"><span class="tag">Text</span></td>
+						</tr>
+						<tr class="indexTable-body-row">
+							<td class="indexTable-body-row-cell">
+								<a href="#" class="indexTable-body-row-cell-link">Content</a>
+							</td>
+							<td class="indexTable-body-row-cell mod-allowTextSelection">
+								<span class="tag"><span class="lucca-icon icon-heart" aria-hidden="true"></span> <span class="tag-content">Text</span></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td>
+				<lu-index-table>
+					<thead luIndexTableHead>
+						<tr luIndexTableRow>
+							<th luIndexTableCell>Label</th>
+							<th luIndexTableCell>Label</th>
+						</tr>
+					</thead>
+					<tbody luIndexTableBody>
+						<tr luIndexTableRow>
+							<th luIndexTableCell><a href="#" luIndexTableAction>Content</a></th>
+							<td luIndexTableCell><lu-tag label="Text" /></td>
+						</tr>
+						<tr luIndexTableRow>
+							<th luIndexTableCell><a href="#" luIndexTableAction>Content</a></th>
+							<td luIndexTableCell><lu-tag icon="heart" label="Text" /></td>
+						</tr>
+					</tbody>
+				</lu-index-table>
+			</td>
+		</tr>
 	</tbody>
 </table>
 

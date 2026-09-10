@@ -16,8 +16,8 @@ export default {
 
 function getTemplate(args: EmptyState): string {
 	return `<div class="dataTableWrapper">
-	<table class="dataTable">
-		<thead class="dataTable-head">
+	<table class="dataTable" role="presentation">
+		<thead class="dataTable-head" inert="inert">
 			<tr class="dataTable-head-row">
 				<th class="dataTable-head-row-cell">Label</th>
 				<th class="dataTable-head-row-cell">Label</th>

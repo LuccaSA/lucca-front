@@ -311,6 +311,61 @@ describe('LuCoreSelectUsersDirective', () => {
 			[meUser, user1, { ...user2, additionalInformation: 'Engineering' }, { ...user3, additionalInformation: 'Marketing' }],
 		]);
 	}));
+
+	it('should append additional information for homonyms split across two pages', fakeAsync(() => {
+		// Arrange
+		usersDirective.setPageSize(2);
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick();
+
+		const meUser = createUser(CURRENT_USER_ID);
+		const user1 = createUser(1);
+		const user2 = createUser(2, 'Doe', 'John');
+		const user3 = createUser(3, 'Doe', 'John');
+		const user4 = createUser(4);
+
+		// Act (Page 1: the first homonym is the last option of the page)
+		const meReq = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		meReq.flush(usersResponse([meUser]));
+		fixture.detectChanges();
+		tick();
+
+		const page1Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,2`);
+		page1Req.flush(usersResponse([user1, user2]));
+		fixture.detectChanges();
+		tick();
+
+		// Assert (Page 1: no homonym detected yet)
+		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, user1, user2]);
+		httpTestingController.verify();
+
+		// Act (Page 2: the second homonym is the first option of the page)
+		simpleSelect.nextPage$.next();
+		fixture.detectChanges();
+		tick();
+
+		const page2Req = httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=2,2`);
+		page2Req.flush(usersResponse([user3, user4]));
+		fixture.detectChanges();
+		tick();
+
+		const additionalInfoReq = httpTestingController.expectOne(`/api/v3/users?id=2,3&fields=id,department.name`);
+		additionalInfoReq.flush({
+			data: {
+				items: [
+					{ id: 2, department: { name: 'Engineering' } },
+					{ id: 3, department: { name: 'Marketing' } },
+				],
+			},
+		});
+		fixture.detectChanges();
+		tick();
+
+		// Assert (Page 2: both homonyms are decorated, including the one loaded on the previous page)
+		expect(simpleSelect.dataSourceOptions()).toEqual([meUser, user1, { ...user2, additionalInformation: 'Engineering' }, { ...user3, additionalInformation: 'Marketing' }, user4]);
+		httpTestingController.verify();
+	}));
 });
 
 function createUser(id: number, lastName = 'test ' + id, firstName = 'test ' + id): LuCoreSelectUser {

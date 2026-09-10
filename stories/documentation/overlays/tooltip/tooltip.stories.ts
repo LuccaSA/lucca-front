@@ -12,7 +12,7 @@ export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
 	argTypes: {
 		luTooltipEnterDelay: {
-			description: 'Délai d’apparition du tooltip au survol (en ms).',
+			description: 'Délai d’apparition du tooltip (en ms).',
 			control: { type: 'number' },
 			table: {
 				category: 'inputs',
@@ -64,7 +64,14 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const inputs = generateInputs(args, argTypes);
+		const filteredArgs = { ...args };
+		if (filteredArgs['luTooltipEnterDelay'] === 300) {
+			delete filteredArgs['luTooltipEnterDelay'];
+		}
+		if (filteredArgs['luTooltipLeaveDelay'] === 100) {
+			delete filteredArgs['luTooltipLeaveDelay'];
+		}
+		const inputs = generateInputs(filteredArgs, argTypes);
 		return {
 			styles: [
 				`
@@ -84,35 +91,35 @@ export default {
 	luButton
 	luTooltip="👋 Hello"
 	${inputs}
->Tooltip au survol</button>
+>Tooltip au survol ou au focus</button>
 <h3>Tooltip sur un texte</h3>
 <span
-
+  class="pr-u-focusVisible pr-u-borderRadiusSmall"
 	luTooltip="👋 Hello"
 	${inputs}
->Tooltip au survol</span>
+>Tooltip au survol ou au focus</span>
 <h3>Tooltip et ellipse</h3>
 <div
 	data-testid="ellipsis-truncated"
-	class="pr-u-ellipsis"
+	class="pr-u-ellipsis pr-u-focusVisible pr-u-borderRadiusSmall"
 	style="inline-size: 10rem;"
 	tabindex="0"
-	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
-	${generateInputs(args, argTypes)}
+	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol ou au focus."
+	${generateInputs(filteredArgs, argTypes)}
 	[luTooltipWhenEllipsis]="true"
->Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.</div>
+>Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol ou au focus.</div>
 <div
 	data-testid="ellipsis-not-truncated"
-	class="pr-u-ellipsis"
-	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
-	${generateInputs(args, argTypes)}
+	class="pr-u-ellipsis pr-u-focusVisible pr-u-borderRadiusSmall"
+	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait ni au survol ni au focus."
+	${generateInputs(filteredArgs, argTypes)}
 	[luTooltipWhenEllipsis]="true"
->Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>
+>Ce texte est affiché entièrement. Le tooltip n'apparait ni au survol, ni au focus.</div>
 <h3>Tooltip et icône (avec alternative)</h3>
-<lu-icon data-testid="icon-tooltip" icon="star" alt="Favoris" luTooltip="Favoris" ${inputs} luTooltipOnlyForDisplay="true" />
+<lu-icon data-testid="icon-tooltip" icon="star" alt="Favoris" luTooltip="Favoris" ${inputs} luTooltipOnlyForDisplay="true" class="pr-u-focusVisible pr-u-borderRadiusSmall" />
 
 <h3>Tooltip affiché avec un host séparé</h3>
-<span class="pr-u-marginInlineEnd800" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">
+<span class="pr-u-marginInlineEnd800 pr-u-focusVisible pr-u-borderRadiusSmall" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">
 `,
 		};
 	},
