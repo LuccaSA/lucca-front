@@ -53,6 +53,8 @@ import { Node, Project } from 'ts-morph';
 
 /** Angular signal-input factories whose call expression declares a component input. */
 const INPUT_CALLEES = new Set(['input', 'input.required', 'model', 'model.required']);
+// A model is two-way: it also publishes `<publicName>Change`, which no other input form does.
+const MODEL_CALLEES = new Set(['model', 'model.required']);
 // Which argument carries the `{ alias }` options object — the `.required` forms take no
 // initial value, so their options sit first.
 const OPTIONS_ARG = new Map([
@@ -218,8 +220,10 @@ function emitterPayload(prop) {
  * factories (`input()`/`model()`/`output()`), decorators (`@Input`/`@Output` on
  * properties and setters) and `outputFromObservable()`. Every form's alias is resolved
  * to the public name — the property name is not the template API when an alias is set.
+ *
+ * Declared on this class only — `membersOf` merges the base-class chain on top.
  */
-function membersOf(classNode) {
+function ownMembersOf(classNode) {
 	const inputsClass = [];
 	const outputsClass = [];
 	for (const prop of classNode.getProperties()) {
@@ -254,14 +258,24 @@ function membersOf(classNode) {
 		if (INPUT_CALLEES.has(callee)) {
 			const required = callee.endsWith('.required');
 			const initArgs = init.getArguments();
+			const publicName = factoryAlias ?? prop.getName();
+			const valueType = normalizeType(writtenType ?? signalReadType(prop)) ?? 'unknown';
 			inputsClass.push({
-				name: factoryAlias ?? prop.getName(),
-				type: normalizeType(writtenType ?? signalReadType(prop)) ?? 'unknown',
+				name: publicName,
+				type: valueType,
 				defaultValue: !required && initArgs.length ? initArgs[0].getText() : undefined,
 				required,
 				rawdescription,
 				...memberDeprecation(prop),
 			});
+			if (MODEL_CALLEES.has(callee)) {
+				outputsClass.push({
+					name: `${publicName}Change`,
+					type: valueType,
+					rawdescription,
+					...memberDeprecation(prop),
+				});
+			}
 		} else if (callee === 'output') {
 			outputsClass.push({
 				name: factoryAlias ?? prop.getName(),
@@ -293,8 +307,87 @@ function membersOf(classNode) {
 	return { inputsClass, outputsClass };
 }
 
+/** Class + base chain, most-derived first; an Angular component inherits its base's bindings. */
+function classChain(classNode) {
+	const chain = [];
+	const seen = new Set();
+	for (let node = classNode; node;) {
+		const key = `${node.getSourceFile().getFilePath()}#${node.getName() ?? ''}`;
+		if (seen.has(key)) break;
+		seen.add(key);
+		chain.push(node);
+		try {
+			node = node.getBaseClass();
+		} catch {
+			break;
+		}
+	}
+	return chain;
+}
+
+/** Bindings `hostDirectives` forwards: only the listed ones are public, and `'name: alias'` publishes the alias. */
+function hostDirectiveMembers(classNode) {
+	const inputsClass = [];
+	const outputsClass = [];
+	const decorator = classNode.getDecorator('Component') ?? classNode.getDecorator('Directive');
+	const arg = decorator?.getArguments()[0];
+	if (!arg || !Node.isObjectLiteralExpression(arg)) return { inputsClass, outputsClass };
+	const prop = arg.getProperty('hostDirectives');
+	const list = prop && Node.isPropertyAssignment(prop) ? prop.getInitializer() : undefined;
+	if (!list || !Node.isArrayLiteralExpression(list)) return { inputsClass, outputsClass };
+
+	for (const element of list.getElements()) {
+		// `hostDirectives: [Foo]` forwards nothing — only the object form lists bindings.
+		if (!Node.isObjectLiteralExpression(element)) continue;
+		const directiveProp = element.getProperty('directive');
+		const ref = directiveProp && Node.isPropertyAssignment(directiveProp) ? directiveProp.getInitializer() : undefined;
+		let source = { inputsClass: [], outputsClass: [] };
+		const declaration = ref && Node.isIdentifier(ref) ? ref.getDefinitionNodes().find((node) => Node.isClassDeclaration(node)) : undefined;
+		if (declaration) source = membersOf(declaration);
+
+		for (const [key, target, from] of [
+			['inputs', inputsClass, source.inputsClass],
+			['outputs', outputsClass, source.outputsClass],
+		]) {
+			const forwarded = element.getProperty(key);
+			const values = forwarded && Node.isPropertyAssignment(forwarded) ? forwarded.getInitializer() : undefined;
+			if (!values || !Node.isArrayLiteralExpression(values)) continue;
+			for (const entry of values.getElements()) {
+				if (!Node.isStringLiteral(entry)) continue;
+				const [own, alias] = entry
+					.getLiteralValue()
+					.split(':')
+					.map((part) => part.trim());
+				const origin = from.find((member) => member.name === own);
+				target.push({ ...origin, name: alias || own, type: origin?.type ?? 'unknown', required: origin?.required ?? false });
+			}
+		}
+	}
+	return { inputsClass, outputsClass };
+}
+
+/** Own + host-directive + inherited bindings; first writer wins, so a derived declaration overrides. */
+function membersOf(classNode) {
+	const inputs = new Map();
+	const outputs = new Map();
+	const host = hostDirectiveMembers(classNode);
+	for (const node of classChain(classNode)) {
+		const own = node === classNode ? mergeMembers(ownMembersOf(node), host) : ownMembersOf(node);
+		for (const input of own.inputsClass) if (!inputs.has(input.name)) inputs.set(input.name, input);
+		for (const output of own.outputsClass) if (!outputs.has(output.name)) outputs.set(output.name, output);
+	}
+	return { inputsClass: [...inputs.values()], outputsClass: [...outputs.values()] };
+}
+
+function mergeMembers(first, second) {
+	return {
+		inputsClass: [...first.inputsClass, ...second.inputsClass],
+		outputsClass: [...first.outputsClass, ...second.outputsClass],
+	};
+}
+
 /** Public, non-static, non-#-private instance methods (lifecycle filtering stays in the renderer). */
-function methodsOf(classNode) {
+function ownMethodsOf(classNode) {
 	const methods = [];
 	for (const method of classNode.getMethods()) {
 		if (method.isStatic() || method.getName().startsWith('#') || method.getScope() !== 'public') continue;
@@ -310,6 +403,18 @@ function methodsOf(classNode) {
 				...memberDeprecation(node),
 			});
 		}
+	}
+	return methods;
+}
+
+/** Own + inherited public methods; a name redeclared downstack hides every base signature of it. */
+function methodsOf(classNode) {
+	const methods = [];
+	const overridden = new Set();
+	for (const node of classChain(classNode)) {
+		const own = ownMethodsOf(node);
+		for (const method of own) if (!overridden.has(method.name)) methods.push(method);
+		for (const method of own) overridden.add(method.name);
 	}
 	return methods;
 }
@@ -359,6 +464,18 @@ function propertiesOf(interfaceNode) {
 	}));
 }
 
+/** Interface method signatures — an overloaded name publishes one entry per declaration. */
+function interfaceMethodsOf(interfaceNode) {
+	return interfaceNode.getMethods().map((method) => ({
+		name: method.getName(),
+		args: paramsOf(method),
+		returnType: normalizeType(method.getReturnTypeNode()?.getText() ?? safeTypeText(method.getReturnType(), method)) ?? 'void',
+		optional: method.hasQuestionToken(),
+		rawdescription: descriptionOf(method),
+		...memberDeprecation(method),
+	}));
+}
+
 /** Variable type: written annotation → reconstructed `new X<T>()` → resolved type. */
 function variableType(varDecl) {
 	const written = varDecl.getTypeNode()?.getText();
@@ -391,7 +508,7 @@ function buildEntity(name, kind, node, declarations) {
 		case 'function':
 			return { ...base, signatures: signaturesOf(declarations) };
 		case 'interface':
-			return { ...base, properties: propertiesOf(node) };
+			return { ...base, properties: propertiesOf(node), methodsClass: interfaceMethodsOf(node) };
 		case 'typealias':
 			return { ...base, rawtype: normalizeType(node.getTypeNode()?.getText()) ?? 'unknown' };
 		case 'enumeration':

@@ -61,7 +61,7 @@ describe('component extraction', () => {
 	});
 
 	test('reads outputs and excludes private methods from the surface', () => {
-		expect(comp.outputsClass.map((o) => o.name)).toEqual(['closed']);
+		expect(comp.outputsClass.map((o) => o.name)).toEqual(['openedChange', 'closed']);
 		const methodNames = comp.methodsClass.map((m) => m.name);
 		expect(methodNames).toContain('open');
 		expect(methodNames).not.toContain('secret');
@@ -279,8 +279,13 @@ describe('signal-factory aliases', () => {
 	});
 
 	test('output()/outputFromObservable() publish the alias, not the property name', () => {
-		expect(Object.keys(outs).sort()).toEqual(['close', 'done']);
+		expect(Object.keys(outs).sort()).toEqual(['close', 'done', 'openedChange']);
 		expect(outs.done.type).toBe('string');
+	});
+
+	test("model() also publishes <publicName>Change, built on the alias and the model's value type", () => {
+		expect(outs.openedChange).toMatchObject({ type: 'boolean' });
+		expect(outs.openedModelChange).toBeUndefined();
 	});
 });
 
@@ -298,5 +303,89 @@ describe('method overloads', () => {
 	test('keeps every overload declaration and drops the implementation signature', () => {
 		const transforms = doc.classes[0].methodsClass.filter((m) => m.name === 'transform');
 		expect(transforms.map((m) => m.returnType)).toEqual(['string', 'number']);
+	});
+});
+
+describe('inherited Angular members', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      import { Component, Directive, input, output } from '@angular/core';
+      @Directive()
+      export abstract class BasePicker {
+        /** Base step. */
+        readonly step = input<number>(1);
+        readonly baseChanged = output<void>();
+        publicOnBase(): void {}
+      }
+      @Component({ selector: 'lu-picker', template: '' })
+      export class PickerComponent extends BasePicker {
+        readonly step = input<number>(5);
+        readonly own = input<string>('');
+        ownMethod(): void {}
+      }
+    `,
+	});
+	const picker = doc.components.find((c) => c.name === 'PickerComponent');
+
+	test('a base class contributes its inputs, outputs and public methods', () => {
+		expect(picker.inputsClass.map((i) => i.name).sort()).toEqual(['own', 'step']);
+		expect(picker.outputsClass.map((o) => o.name)).toContain('baseChanged');
+		expect(picker.methodsClass.map((m) => m.name).sort()).toEqual(['ownMethod', 'publicOnBase']);
+	});
+
+	test('the derived declaration wins over the inherited one of the same name', () => {
+		expect(picker.inputsClass.find((i) => i.name === 'step').defaultValue).toBe('5');
+	});
+});
+
+describe('host directives', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      import { Component, Directive, input, output } from '@angular/core';
+      @Directive({ selector: '[luDropdown]' })
+      export class DropdownDirective {
+        /** Where the panel opens. */
+        readonly position = input<'top' | 'bottom'>('bottom');
+        readonly opened = output<void>();
+        readonly untouched = input<string>('');
+      }
+      @Component({
+        selector: 'lu-trigger',
+        template: '',
+        hostDirectives: [{ directive: DropdownDirective, inputs: ['position: luDropdownPosition'], outputs: ['opened'] }],
+      })
+      export class TriggerComponent {}
+    `,
+	});
+	const trigger = doc.components.find((c) => c.name === 'TriggerComponent');
+
+	test('a forwarded binding is published under its alias, with the source directive type', () => {
+		const position = trigger.inputsClass.find((i) => i.name === 'luDropdownPosition');
+		expect(position).toMatchObject({ type: "'top' | 'bottom'", rawdescription: 'Where the panel opens.' });
+		expect(trigger.outputsClass.map((o) => o.name)).toEqual(['opened']);
+	});
+
+	test('a binding the host does not forward stays off its surface', () => {
+		expect(trigger.inputsClass.map((i) => i.name)).not.toContain('untouched');
+	});
+});
+
+describe('interface methods', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      export interface ILuPopupRef {
+        /** The current result. */
+        readonly result: string;
+        open(config?: string): void;
+        dismiss(): void;
+      }
+    `,
+	});
+
+	test('method signatures reach the surface alongside the properties', () => {
+		const iface = doc.interfaces[0];
+		expect(iface.methodsClass.map((m) => m.name)).toEqual(['open', 'dismiss']);
+		expect(iface.methodsClass[0].args).toEqual([{ name: 'config?', type: 'string' }]);
+		expect(iface.properties.map((p) => p.name)).toEqual(['result']);
 	});
 });
