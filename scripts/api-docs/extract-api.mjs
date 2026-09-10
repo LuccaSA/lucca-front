@@ -427,6 +427,15 @@ function ownMethodsOf(classNode) {
  * twice would read as two distinct members. A readable member is part of the public
  * contract (`LuTitleStrategy.title$`, `ALuPopupRef.onOpen`), so the surface owes it.
  */
+/** Every factory whose result is already published as an input or an output. */
+const BINDING_CALLEES = new Set([...INPUT_CALLEES, 'output', 'outputFromObservable']);
+
+/** Is this member a signal binding (`input()`, `model()`, `output()`…) rather than plain state? */
+function isBindingDeclaration(member) {
+	const init = Node.isPropertyDeclaration(member) ? member.getInitializer() : undefined;
+	return !!init && Node.isCallExpression(init) && BINDING_CALLEES.has(init.getExpression().getText());
+}
+
 function writtenMemberType(member) {
 	return Node.isGetAccessorDeclaration(member) ? member.getReturnTypeNode()?.getText() : member.getTypeNode()?.getText();
 }
@@ -437,8 +446,10 @@ function classPropertiesOf(classNode, publishedNames) {
 		const members = [...node.getProperties(), ...node.getGetAccessors()];
 		for (const member of members) {
 			const name = member.getName();
-			if (name.startsWith('#') || member.getScope() !== 'public' || member.isStatic()) continue;
-			if (publishedNames.has(name) || byName.has(name)) continue;
+			if (name.startsWith('#') || name.startsWith('_') || member.getScope() !== 'public' || member.isStatic()) continue;
+			// An aliased binding is published under its alias, so the declaration name never
+			// matches `publishedNames` — the factory call is what identifies it.
+			if (isBindingDeclaration(member) || publishedNames.has(name) || byName.has(name)) continue;
 			byName.set(name, {
 				name,
 				// A getter carries its type on the return node; only a property has `getTypeNode`.

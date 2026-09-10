@@ -547,3 +547,19 @@ describe('class members carrying a modifier or a generic signature', () => {
 		expect(out).toContain('| `changes$` | `Subject<string>` | The stream. |');
 	});
 });
+
+test('the compiler-only template context guard is not a callable method', () => {
+	const out = renderComponentOrDirective({
+		entity: {
+			name: 'Guarded',
+			inputsClass: [],
+			outputsClass: [],
+			methodsClass: [
+				{ name: 'ngTemplateContextGuard', args: [], returnType: 'boolean', static: true },
+				{ name: 'focus', args: [], returnType: 'void' },
+			],
+		},
+	});
+	expect(out).not.toContain('ngTemplateContextGuard');
+	expect(out).toContain('focus()');
+});

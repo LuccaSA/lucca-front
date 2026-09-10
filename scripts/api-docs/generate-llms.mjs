@@ -267,13 +267,18 @@ const NG_LIFECYCLE = new Set([
 	'ngAfterViewChecked',
 ]);
 
+/** Compiler contracts, not API: nothing calls them, the template type-checker reads them. */
+const NG_COMPILER_MEMBER = /^ng(TemplateContextGuard|AcceptInputType_)/;
+
 /**
  * The meaningful callable surface: non-lifecycle methods, alpha-sorted. Visibility is
  * already resolved from the AST by the extractor (only public methods reach here).
  * @param {any[] | undefined} methods
  */
 function publicMethods(methods) {
-	return (methods || []).filter((m) => m?.name && !NG_LIFECYCLE.has(m.name)).sort((a, b) => a.name.localeCompare(b.name));
+	return (methods || [])
+		.filter((m) => m?.name && !NG_LIFECYCLE.has(m.name) && !NG_COMPILER_MEMBER.test(m.name))
+		.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /** Members carrying a name, alpha-sorted. */

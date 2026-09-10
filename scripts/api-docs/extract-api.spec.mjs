@@ -505,3 +505,29 @@ describe('the callable and readable surface of a plain class', () => {
 		expect(directive.outputsClass.find((o) => o.name === 'onSelect').type).toBe('boolean');
 	});
 });
+
+describe('members that only look public', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      import { Directive, input, model } from '@angular/core';
+      @Directive({ selector: '[luAliased]' })
+      export class AliasedDirective {
+        readonly clearableInput = input<boolean>(false, { alias: 'clearable' });
+        readonly valueModel = model<string>('', { alias: 'value' });
+        _internal = 1;
+        static ngTemplateContextGuard(dir: AliasedDirective, ctx: unknown): ctx is object { return true; }
+      }
+    `,
+	});
+	const directive = doc.directives[0];
+
+	test('an aliased signal input is published once, under its alias', () => {
+		expect(directive.inputsClass.map((i) => i.name).sort()).toEqual(['clearable', 'value']);
+		expect(directive.properties.map((p) => p.name)).not.toContain('clearableInput');
+		expect(directive.properties.map((p) => p.name)).not.toContain('valueModel');
+	});
+
+	test('an underscore-prefixed member stays out of the surface', () => {
+		expect(directive.properties.map((p) => p.name)).not.toContain('_internal');
+	});
+});
