@@ -21,7 +21,7 @@
  * and nothing volatile (dates, absolute paths, line numbers) reaches the output —
  * same code in, byte-identical output out.
  */
-import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -48,7 +48,7 @@ export const OUT_LLMS = '.storybook/public/llms-full.txt';
 export const OUT_DEPRECATIONS = '.storybook/public/deprecations.json';
 export const OUT_INDEX = '.storybook/public/llms.txt';
 export const OUT_DIR = '.storybook/public/llms';
-/** Canonical public base of the deployed Storybook (per-ref folders; master = latest). */
+/** For the npm packages' explicitly-non-versioned fallbacks only — the deployed index links relatively. */
 export const CANONICAL_BASE_URL = 'https://lucca-front.lucca.io/master/storybook';
 
 // ---------------------------------------------------------------------------
@@ -290,6 +290,23 @@ function defaultCell(value) {
 	return value != null && value !== '' ? `\`${String(value).replace(/\|/g, '\\|')}\`` : '—';
 }
 
+/** Argument list of a signature — `|` escaped, since a union type otherwise opens a table column. */
+function argsCell(args) {
+	return (args || []).map((a) => `${a.name}: ${(a.type || 'unknown').replace(/\|/g, '\\|')}`).join(', ');
+}
+
+/** `### Methods` table, shared by the class and interface renderers. */
+function methodsTable(methods, heading = '### Methods') {
+	if (!methods.length) return [];
+	const lines = [heading, '', '| Method | Returns | Description |', '| --- | --- | --- |'];
+	for (const m of methods) {
+		const name = m.optional ? `${m.name}?` : m.name;
+		lines.push(`| \`${name}(${argsCell(m.args)})\` | ${typeCell(m.returnType)} | ${cleanCell(m.rawdescription || m.description)} |`);
+	}
+	lines.push('');
+	return lines;
+}
+
 // ---------------------------------------------------------------------------
 // Renderers (one Markdown section per entity)
 // ---------------------------------------------------------------------------
@@ -321,15 +338,7 @@ export function renderComponentOrDirective({ entity }) {
 		lines.push('');
 	}
 
-	const methods = publicMethods(entity.methodsClass);
-	if (methods.length) {
-		lines.push('### Methods', '', '| Method | Returns | Description |', '| --- | --- | --- |');
-		for (const m of methods) {
-			const args = (m.args || []).map((a) => `${a.name}: ${a.type || 'unknown'}`).join(', ');
-			lines.push(`| \`${m.name}(${args})\` | ${typeCell(m.returnType)} | ${cleanCell(m.rawdescription || m.description)} |`);
-		}
-		lines.push('');
-	}
+	lines.push(...methodsTable(publicMethods(entity.methodsClass)));
 	return lines.join('\n');
 }
 
@@ -358,7 +367,10 @@ export function renderInterface({ entity }) {
 	const suffix = typeParamSuffix(entity);
 	if (suffix) lines.push('```ts', `interface ${entity.name}${suffix}`, '```', '');
 	const props = sortedByName(entity.properties);
+	const methods = sortedByName(entity.methodsClass);
 	if (props.length) {
+		// The heading only earns its place once a Methods table can follow it.
+		if (methods.length) lines.push('### Properties', '');
 		lines.push('| Property | Type | Description |', '| --- | --- | --- |');
 		for (const p of props) {
 			// Mirror the TypeScript modifier order so a readonly property does not read as reassignable.
@@ -368,6 +380,7 @@ export function renderInterface({ entity }) {
 		}
 		lines.push('');
 	}
+	lines.push(...methodsTable(methods));
 	return lines.join('\n');
 }
 
@@ -393,7 +406,7 @@ export function renderEnumeration({ entity }) {
 	const members = sortedByName(entity.childs || entity.members);
 	if (members.length) {
 		lines.push('| Member | Value |', '| --- | --- |');
-		for (const m of members) lines.push(`| \`${m.name}\` | ${m.value != null ? `\`${m.value}\`` : '—'} |`);
+		for (const m of members) lines.push(`| \`${m.name}\` | ${defaultCell(m.value)} |`);
 		lines.push('');
 	}
 	return lines.join('\n');
@@ -816,6 +829,8 @@ export function generateAll({ root = workspaceRoot } = {}) {
 	const deprecations = attachImportPaths(collectDeprecations(doc, names), entryPoints);
 
 	const outDir = resolve(root, OUT_DIR);
+	// Purged, not merged: a renamed entry point would otherwise ship its old feed forever.
+	rmSync(outDir, { recursive: true, force: true });
 	mkdirSync(outDir, { recursive: true });
 
 	// Per-entry-point windowed API files.
@@ -836,7 +851,8 @@ export function generateAll({ root = workspaceRoot } = {}) {
 	writeFileSync(resolve(root, OUT_DEPRECATIONS), renderDeprecations(deprecations));
 	writeFileSync(
 		resolve(root, OUT_INDEX),
-		renderLlmsIndex({ baseUrl: CANONICAL_BASE_URL, entryPoints: entries, storyCategories: categories }),
+		// Relative, so `v21.3/storybook/llms.txt` links to v21.3's feeds and not to master's.
+		renderLlmsIndex({ baseUrl: '.', entryPoints: entries, storyCategories: categories }),
 	);
 
 	return {

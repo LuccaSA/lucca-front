@@ -376,8 +376,8 @@ describe('renderPackageIndex', () => {
 
 	test('names only the sources its own corpora carry', () => {
 		expect(out).toContain("library's TypeScript source and JSDoc.");
-		expect(out).not.toContain("Storybook stories");
-		expect(renderPackageIndex("@lucca-front/ng", [], { storyComponents: 12 })).toContain("Storybook stories");
+		expect(out).not.toContain('Storybook stories');
+		expect(renderPackageIndex('@lucca-front/ng', [], { storyComponents: 12 })).toContain('Storybook stories');
 	});
 
 	test('still points at the public deploy for the stories when the tarball has none', () => {
@@ -433,5 +433,64 @@ describe('renderStoriesCorpus', () => {
 
 	test('is deterministic — identical input yields byte-identical output', () => {
 		expect(renderStoriesCorpus(storyFiles)).toBe(renderStoriesCorpus(storyFiles));
+	});
+});
+
+describe('the deployed index links relatively', () => {
+	const out = renderLlmsIndex({
+		baseUrl: '.',
+		entryPoints: [{ importPath: '@lucca-front/ng/button', slug: 'ng-button', api: { matched: [{ name: 'ButtonComponent' }] } }],
+		storyCategories: [{ slug: 'stories-actions', category: 'Actions', components: ['Button'] }],
+	});
+
+	test('a versioned deployment resolves its own feeds, not master', () => {
+		expect(out).toContain('](./llms/ng-button.md)');
+		expect(out).toContain('](./llms/stories-actions.md)');
+		expect(out).toContain('](./llms-full.txt)');
+		expect(out).not.toContain(CANONICAL_BASE_URL);
+	});
+});
+
+describe('a union type never opens a table column', () => {
+	const row = (markdown, startsWith) =>
+		markdown.split('\n').find((line) => line.startsWith(`| \`${startsWith}`) && !line.startsWith('| ---'));
+
+	test('a method argument escapes its pipes', () => {
+		const out = renderComponentOrDirective({
+			entity: {
+				name: 'GuardComponent',
+				methodsClass: [
+					{
+						name: 'callCanDeactivateFn',
+						args: [{ name: 'fn', type: 'CanDeactivateFn<C> | DeprecatedGuard' }],
+						returnType: 'boolean | void',
+					},
+				],
+			},
+		});
+		const line = row(out, 'callCanDeactivateFn');
+		expect(line).toContain('CanDeactivateFn<C> \\| DeprecatedGuard');
+		// Method / Returns / Description, plus the empty ends the outer pipes open.
+		expect(line.split(/(?<!\\)\|/).length).toBe(5);
+	});
+});
+
+describe('renderInterface publishes the method signatures', () => {
+	const out = renderInterface({
+		entity: {
+			name: 'ILuPopupRef',
+			properties: [{ name: 'result', type: 'string' }],
+			methodsClass: [
+				{ name: 'open', args: [{ name: 'config?', type: 'string' }], returnType: 'void' },
+				{ name: 'dismiss', args: [], returnType: 'void', optional: true },
+			],
+		},
+	});
+
+	test('methods land in their own table, under a heading that separates them from the properties', () => {
+		expect(out).toContain('### Properties');
+		expect(out).toContain('### Methods');
+		expect(out).toContain('| `open(config?: string)` |');
+		expect(out).toContain('| `dismiss?()` |');
 	});
 });
