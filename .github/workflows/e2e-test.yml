@@ -2,17 +2,27 @@ name: E2E Tests
 
 on: [push]
 
+# Pushing several times in a row on the same branch used to stack full 6-minute runs
+# that competed for runners; only the latest push is worth testing.
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright@sha256:5b8f294aff9041b7191c34a4bab3ac270157a28774d4b0660e9743297b697e48 # v1.61.1-noble
+      # Docker defaults /dev/shm to 64MB, which makes Chromium crash mid-run with
+      # "Browser connection was closed while running tests". See https://playwright.dev/docs/docker
+      options: --ipc=host --shm-size=2gb
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4.3.1
       - name: Setup Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
         with:
           node-version: 24.15.0
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -24,4 +34,4 @@ jobs:
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on tcp:127.0.0.1:6006 && yarn test-storybook"
+            "npx wait-on tcp:127.0.0.1:6006 && npm run test-storybook"
