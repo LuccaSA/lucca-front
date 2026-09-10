@@ -24,7 +24,16 @@ Cette option permet d'afficher les fichiers importés par un utilisateur lors d'
 
 ### Modification d'un paramètre
 
-Cette option est utilisée lorsqu'une action entraîne la modification d'une propriété de la ressource. Elle permet d'afficher côte à côte l'ancienne valeur et la nouvelle valeur pour une compréhension immédiate de l'évolution.
+#### Modification unique
+
+Cette option est utilisée lorsqu'une action entraîne la modification d'une seule propriété de la ressource. Elle permet d'afficher côte à côte l'ancienne valeur et la nouvelle valeur pour une compréhension immédiate de l'évolution. Le titre de l’étape doit préciser ce qui à été modifié par l’utilisateur.
+
+#### Modifications multiples
+
+Lorsque plusieurs modifications sont effectuées simultanément, elles sont regroupées au sein d'une **entrée globale** afin d'alléger le fil d'activité.
+
+* **Titre principal :** il doit être global et synthétiser l'action.
+* **Sous-entrées :** un label spécifique est **obligatoire** pour chaque modification afin d'identifier clairemen<t les changements individuels.
 
 ## États
 

@@ -66,8 +66,6 @@ Une fois l’application chargée, le titre de la page s’adapte en fonction de
 
 # Angular
 
-La stratégie Angular pour la gestion des titres de pages sera mise à jour en version 19.3.3 afin de correspondre aux nouvelles guidelines.
-
 # LuTitleStrategy
 
 ## Usage

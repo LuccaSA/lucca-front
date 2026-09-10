@@ -4,9 +4,11 @@
 
 # Design
 
-**Mots-clés :**upload, téléchargement, fichier, pièce jointe
+**Mots-clés :**upload, téléchargement, fichier, pièce jointe, file entry, entry
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
+
+/
 
 ## Anatomie
 

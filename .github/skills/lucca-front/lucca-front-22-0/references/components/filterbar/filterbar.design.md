@@ -20,6 +20,10 @@ Lorsqu’un compteur est affiché dans le Segmented control utilisé pour les vu
 
 Si des filtres sont appliqués, cela n’a pas d’impact sur le nombre indiqué dans le Numeric badge.
 
+### Vues personnalisées
+
+Pour les cas d’usages nécessitant des filtrages récurrents, il est recommandé de permettre à l'utilisateur d'enregistrer ses configurations pour qu'elles soient persistées. Pour en savoir plus sur la gestion de ces états, référez-vous au pattern Enregistrer des vues.
+
 ### Ajout de filtres supplémentaires
 
 Des filtres supplémentaires, masqués derrière un bouton, peuvent être affichés si l’utilisateur souhaite affiner les résultats.

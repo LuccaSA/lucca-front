@@ -12,6 +12,14 @@ Component selector : `lu-filter-bar`
 
 Une filter pill optionnelle doit obligatoirement contenir un attribut `name` (dont la valeur est libre) afin de pouvoir être affichée.
 
+### luFilterPillAddonBefore et luFilterPillAddonAfter
+
+Deux directives structurelles permettent de projeter du contenu aux extrémités de la FilterBar.
+
+| **`*`**`luFilterPillAddonBefore` | Placé **avant** les pills, dans la zone scrollable, avec un séparateur vertical automatique. Exemple : un SegmentedControl ou un sélecteur de vues. |
+| --- | --- |
+| **`*`**`luFilterPillAddonAfter` | Placé **après** les pills, aligné à droite. Exemple : un bouton d'export. |
+
 ### Bar save
 
 ```js

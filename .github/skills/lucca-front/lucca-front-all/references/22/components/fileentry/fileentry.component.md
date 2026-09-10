@@ -34,8 +34,6 @@ In both cases, `fileUploadFeature` is simply the SignalStore provided by `@lucca
 It's also possible to specify a list of accepted files, solely for UX purposes, as the file type is not enforced by the
 browser in any way, this list is an `Array<{ format: string; name?: string; }>`, `name` being used for display only.
 
-###
-
 ### Basic
 
 Component selector : `lu-file-entry`
