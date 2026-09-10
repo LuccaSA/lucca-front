@@ -142,6 +142,7 @@ export type LuccaIcon =
 	| 'calendarOff'
 	| 'capCrown'
 	| 'crown'
+	| 'capCrownFilled'
 	| 'capGraduate'
 	| 'graduate'
 	| 'school'

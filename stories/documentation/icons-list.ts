@@ -142,6 +142,7 @@ export const IconsList = [
 	{ icon: 'calendarOff', deprecated: true },
 	{ icon: 'capCrown', deprecated: false },
 	{ icon: 'crown', deprecated: true },
+	{ icon: 'capCrownFilled', deprecated: false },
 	{ icon: 'capGraduate', deprecated: false },
 	{ icon: 'graduate', deprecated: true },
 	{ icon: 'school', deprecated: true },
