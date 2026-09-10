@@ -18,7 +18,13 @@ class TypographyFontsStory implements AfterViewInit {
 	private elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
 	ngAfterViewInit(): void {
-		this.highlightMissingGlyphs();
+		const ready = this.elementRef.nativeElement.querySelector('#ready');
+		ready?.remove();
+		void this.highlightMissingGlyphs().finally(() => {
+			if (ready) {
+				this.elementRef.nativeElement.append(ready);
+			}
+		});
 	}
 
 	private async highlightMissingGlyphs(): Promise<void> {
