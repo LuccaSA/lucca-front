@@ -43,6 +43,7 @@ Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss �
 - Composants standalone, `changeDetection: OnPush` (imposé par ESLint), `ViewEncapsulation.None` (les styles sont du SCSS global), styles SCSS (défauts schematics d'angular.json).
 - Sélecteurs préfixés `lu` (`lu-kebab-case` pour les composants, `luCamelCase` pour les directives attribut).
 - APIs signal-based : `input()` / `input.required()` / `output()`. Chaque input public a un commentaire JSDoc.
+- Un composant qui a un style dédié déclare `styleUrl: './<name>.component.scss'`, et ce fichier commence par `@use '@lucca-front/scss/src/components/<nameCamelCase>';` — c'est ce `@use` qui embarque le CSS du composant. L'oublier livre le composant sans style, sans erreur de build.
 - Host bindings via la métadonnée `host: {}` : classe CSS de base posée directement (`class: 'numericBadge'`), conditionnels via `[class.is-X]` (voir `numeric-badge` pour la forme canonique).
 - Garder les composants design system « dumb » ; les connecter aux APIs Lucca via des directives séparées (ex. `simple-select`/`multi-select` + directives API). L'accessibilité clavier est une priorité.
 - Règles DX de contributing.md : utiliser les transforms `booleanAttribute`/`numberAttribute`, éviter les noms d'inputs génériques (`config`, `param`), typer les inputs avec des unions de strings pour l'autocomplétion, ne jamais entrer en collision avec un input natif de l'hôte. Les contrats d'inputs/outputs publiés sont des breaking changes.
@@ -58,6 +59,7 @@ Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss �
 - Toujours utiliser les tokens/variables (`--pr-t-*`, `--palettes-*`, `--components-<name>-*`), jamais de valeur en dur.
 - Les styles vivent dans des `@layer` (`reset → base → components → mods → product → utils`) ; le SCSS d'un composant suit le découpage de `_sample/` (`index`/`component`/`vars`/`mods`/`states`/`exports`).
 - Tout nouveau composant doit être enregistré dans `packages/scss/src/commons/utils/highlight-prisme.scss`.
+- Le SCSS d'un composant n'est chargé par son composant Angular que via le `@use '@lucca-front/scss/src/components/<name>'` de son `.component.scss` : toujours vérifier ce câblage en créant ou déplaçant un composant.
 
 Référence : [Guidelines dev UI](https://prisme.lucca.io/94310e217/p/929c63-guidelines-dev-ui) (Prisme). Le formatage (tabs, ordre alphabétique, hexadécimaux en majuscules…) est vérifié par `npm run lint:style`.
 
