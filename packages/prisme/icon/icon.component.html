@@ -1,9 +1,10 @@
-<span
-	aria-hidden="true"
+<svg
+	class="lucca-icon"
 	[class.mod-AI]="AI()"
-	class="lucca-icon icon-{{ icon() }} icon-color-{{ color() }}"
 	[ngClass]="iconClasses()"
-></span>
-@if (alt()) {
-	<span class="pr-u-mask">{{ alt() }}</span>
-}
+	[attr.aria-hidden]="this.alt() ? null : 'true'"
+	[attr.role]="this.alt() ? 'img' : null"
+	[attr.aria-label]="alt()"
+>
+	<use [attr.href]="'#' + spriteIconId()" />
+</svg>

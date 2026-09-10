@@ -1,0 +1,67 @@
+@use 'exports' as *;
+
+// where is for specificity here
+:where(lu-icon, pr-icon) .lucca-icon {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-XXS {
+			@include XXS;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-M {
+			@include M;
+		}
+
+		&.mod-L {
+			@include L;
+		}
+
+		&.mod-XL {
+			@include XL;
+		}
+
+		&.mod-XXL {
+			@include XXL;
+		}
+
+		&.icon-color-product {
+			@include colorProduct;
+		}
+
+		&.icon-color-error {
+			@include colorError;
+		}
+
+		&.icon-color-warning {
+			@include colorWarning;
+		}
+
+		&.icon-color-success {
+			@include colorSuccess;
+		}
+
+		&.icon-color-light {
+			@include colorLight;
+		}
+
+		&.icon-color-placeholder {
+			@include colorPlaceholder;
+		}
+
+		&.mod-AI {
+			@include AI;
+		}
+	}
+}
