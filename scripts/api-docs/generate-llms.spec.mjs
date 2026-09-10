@@ -6,6 +6,7 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+	assertFullyResolved,
 	attachImportPaths,
 	CANONICAL_BASE_URL,
 	cleanCell,
@@ -562,4 +563,90 @@ test('the compiler-only template context guard is not a callable method', () => 
 	});
 	expect(out).not.toContain('ngTemplateContextGuard');
 	expect(out).toContain('focus()');
+});
+
+describe('metadata a template author needs', () => {
+	test('a pipe renders the name it is piped through', () => {
+		const out = renderComponentOrDirective({
+			entity: { name: 'LuDatePipe', pipeName: 'luDate', inputsClass: [], outputsClass: [], methodsClass: [] },
+		});
+		expect(out).toContain('**Pipe:** `value | luDate`');
+	});
+
+	test('a directive renders its exportAs handle', () => {
+		const out = renderComponentOrDirective({
+			entity: {
+				name: 'TriggerDirective',
+				selector: '[luTrigger]',
+				exportAs: 'luTrigger',
+				inputsClass: [],
+				outputsClass: [],
+				methodsClass: [],
+			},
+		});
+		expect(out).toContain('**Exported as:** `luTrigger`');
+	});
+
+	test('a class renders the constructor a consumer must call', () => {
+		const out = renderComponentOrDirective({
+			entity: {
+				name: 'StringDateAdapter',
+				constructorArgs: [{ name: 'locale', type: 'string' }],
+				inputsClass: [],
+				outputsClass: [],
+				methodsClass: [],
+			},
+		});
+		expect(out).toContain('```ts\nnew StringDateAdapter(locale: string)\n```');
+	});
+});
+
+describe('a name that resolves to two distinct exports', () => {
+	const doc = docWith({
+		components: [
+			{
+				name: 'LinkComponent',
+				sourceFile: '/repo/packages/ng/link/link.component.ts',
+				inputsClass: [],
+				outputsClass: [],
+				methodsClass: [],
+			},
+			{
+				name: 'LinkComponent',
+				sourceFile: '/repo/packages/ng/forms/rich-text-input/link.component.ts',
+				inputsClass: [],
+				outputsClass: [],
+				methodsClass: [],
+			},
+		],
+	});
+	const entryPoints = [
+		{ importPath: '@lucca-front/ng/link', barrel: '/repo/packages/ng/link/index.ts' },
+		{ importPath: '@lucca-front/ng/forms/rich-text-input', barrel: '/repo/packages/ng/forms/rich-text-input/index.ts' },
+	];
+	const api = selectPublicApi(doc, new Set(['LinkComponent']), entryPoints);
+
+	test('both declarations are selected, not just the first', () => {
+		expect(api.matched.length).toBe(2);
+	});
+
+	test('each one carries the import path that tells them apart', () => {
+		expect(api.matched.map((e) => e.importPath).sort()).toEqual(['@lucca-front/ng/forms/rich-text-input', '@lucca-front/ng/link']);
+	});
+
+	test('the full corpus states the import path under the shared heading', () => {
+		const out = renderLlmsFull(api);
+		expect(out).toContain('## LinkComponent\n\n**Import:** `@lucca-front/ng/link`');
+		expect(out).toContain('**Import:** `@lucca-front/ng/forms/rich-text-input`');
+	});
+});
+
+describe('the whole-surface guarantee', () => {
+	test('an unresolved public export fails generation instead of vanishing', () => {
+		expect(() => assertFullyResolved({ matched: [], unmatched: ['SomeNewExport'] })).toThrow(/SomeNewExport/);
+	});
+
+	test('a fully resolved surface passes', () => {
+		expect(() => assertFullyResolved({ matched: [{ name: 'A' }], unmatched: [] })).not.toThrow();
+	});
 });

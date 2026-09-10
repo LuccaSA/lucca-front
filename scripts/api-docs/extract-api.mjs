@@ -157,16 +157,43 @@ function classify(node) {
 	return null;
 }
 
-/** `selector` string from a `@Component`/`@Directive` decorator, or `undefined`. */
-function selectorOf(classNode) {
-	const decorator = classNode.getDecorator('Component') ?? classNode.getDecorator('Directive');
-	const arg = decorator?.getArguments()[0];
-	if (arg && Node.isObjectLiteralExpression(arg)) {
-		const prop = arg.getProperty('selector');
+/** A string property of the first `@<name>({...})` decorator found, or `undefined`. */
+function decoratorString(classNode, decoratorNames, property) {
+	for (const decoratorName of decoratorNames) {
+		const arg = classNode.getDecorator(decoratorName)?.getArguments()[0];
+		if (!arg || !Node.isObjectLiteralExpression(arg)) continue;
+		const prop = arg.getProperty(property);
 		const init = prop && Node.isPropertyAssignment(prop) ? prop.getInitializer() : undefined;
 		if (init && Node.isStringLiteral(init)) return init.getLiteralValue();
 	}
 	return undefined;
+}
+
+/** `selector` string from a `@Component`/`@Directive` decorator, or `undefined`. */
+function selectorOf(classNode) {
+	return decoratorString(classNode, ['Component', 'Directive'], 'selector');
+}
+
+/**
+ * The handles a template needs but the class name never carries: `exportAs` for a
+ * template reference (`#ref="luTooltip"`), and a pipe's `name` (`value | luDate`).
+ */
+function templateHandlesOf(classNode) {
+	return {
+		exportAs: decoratorString(classNode, ['Component', 'Directive'], 'exportAs'),
+		pipeName: decoratorString(classNode, ['Pipe'], 'name'),
+	};
+}
+
+/**
+ * Public constructor parameters of a class a consumer instantiates itself
+ * (`new LuStringDateAdapter('en')`). Absent when nothing is declared, so an
+ * Angular-instantiated class publishes no misleading empty signature.
+ */
+function constructorArgsOf(classNode) {
+	const ctor = classNode.getConstructors().find((c) => c.getScope() === 'public');
+	if (!ctor || !ctor.getParameters().length) return undefined;
+	return paramsOf(ctor);
 }
 
 /**
@@ -594,6 +621,8 @@ function buildEntity(name, kind, node, declarations) {
 	const { deprecated, message } = firstDeprecation(declarations);
 	const base = {
 		name,
+		// Declaration identity: two entry points can export different classes under one name.
+		sourceFile: node.getSourceFile().getFilePath(),
 		rawdescription: descriptionOf(node),
 		deprecated,
 		deprecationMessage: message,
@@ -609,6 +638,10 @@ function buildEntity(name, kind, node, declarations) {
 			return {
 				...base,
 				selector: selectorOf(node),
+				...templateHandlesOf(node),
+				// A component or a directive is built by Angular; a class or a service can be
+				// `new`-ed by hand (`new LuStringDateAdapter('en')`), and then the args matter.
+				constructorArgs: kind === 'class' || kind === 'injectable' ? constructorArgsOf(node) : undefined,
 				...members,
 				properties: classPropertiesOf(node, published),
 				methodsClass: methodsOf(node),
@@ -748,8 +781,11 @@ export function extractLibraries(project, indexAbsPaths) {
 		const barrelBuckets = allBuckets(doc);
 		for (let i = 0; i < mergedBuckets.length; i++) {
 			for (const entity of barrelBuckets[i]) {
-				if (seen.has(entity.name)) continue;
-				seen.add(entity.name);
+				// Keyed on the declaration, not the name: a re-export dedupes, two distinct
+				// classes called `LinkComponent` both stay.
+				const key = `${entity.name}\u0000${entity.sourceFile ?? ''}`;
+				if (seen.has(key)) continue;
+				seen.add(key);
 				mergedBuckets[i].push(entity);
 			}
 		}

@@ -8,7 +8,7 @@
 import { coverageReport, extractSurface } from './generate-llms.mjs';
 
 /** Non-decreasing count, not a ratio: a floor under current tolerates deleting docs, a floor at it fails on new undocumented exports. */
-export const MIN_DOCUMENTED = 102;
+export const MIN_DOCUMENTED = 105;
 /** Cap the undocumented-export list so CI logs stay readable. */
 const SAMPLE = 30;
 

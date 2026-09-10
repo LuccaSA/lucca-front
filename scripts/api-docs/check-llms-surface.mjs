@@ -13,7 +13,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-import { OUT_DIR, OUT_INDEX, OUT_LLMS } from './generate-llms.mjs';
+import { OUT_DEPRECATIONS, OUT_DIR, OUT_INDEX, OUT_LLMS } from './generate-llms.mjs';
 
 const root = resolve(import.meta.dirname, '..', '..');
 const llmsFull = resolve(root, OUT_LLMS);
@@ -114,9 +114,18 @@ if (entryPointFeeds.length < MIN_ENTRYPOINT_FILES)
 if (storyFeeds.length < MIN_STORY_FILES) failures.push(`only ${storyFeeds.length} story-category feeds (floor ${MIN_STORY_FILES})`);
 if (unlinked.length) failures.push(`${unlinked.length} generated feed(s) not linked from llms.txt: ${unlinked.slice(0, 5).join(', ')}`);
 
-// The index is the public discovery surface — it must never leak an internal host.
-if (/dd\.lucca\.tech/.test(index)) failures.push('llms.txt points at dd.lucca.tech (internal host)');
-console.log(`[llms-smoke] ${/dd\.lucca\.tech/.test(index) ? 'FAIL' : 'ok'}: no internal host in llms.txt`);
+// Everything generated is published, not just the index: a URL reaching the feeds through
+// JSDoc, a story template or a deprecation entry is as public as one written in llms.txt.
+const INTERNAL_HOST = /dd\.lucca\.tech/;
+const publishedFiles = [
+	{ label: 'llms.txt', text: index },
+	{ label: 'llms-full.txt', text: content },
+	...feeds.map((name) => ({ label: `llms/${name}`, text: readFileSync(resolve(llmsDir, name), 'utf8') })),
+	{ label: 'deprecations.json', text: readFileSync(resolve(root, OUT_DEPRECATIONS), 'utf8') },
+];
+const leaking = publishedFiles.filter((file) => INTERNAL_HOST.test(file.text)).map((file) => file.label);
+if (leaking.length) failures.push(`internal host dd.lucca.tech in ${leaking.join(', ')}`);
+console.log(`[llms-smoke] ${leaking.length ? 'FAIL' : 'ok'}: no internal host in any of ${publishedFiles.length} generated files`);
 
 if (failures.length) {
 	console.error(`\n[llms-smoke] FAIL: ${failures.join('; ')}.`);

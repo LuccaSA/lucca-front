@@ -139,15 +139,19 @@ export function extractSurface(root = workspaceRoot) {
 
 /**
  * Index every documented entity by name, tagging its kind so the renderer can
- * dispatch. First writer wins to keep lookups stable.
+ * dispatch. A name maps to every declaration carrying it, in barrel order.
  * @param {Record<string, any>} doc
- * @returns {Map<string, { kind: string, entity: any }>}
+ * @returns {Map<string, Array<{ kind: string, entity: any }>>}
  */
 export function indexEntities(doc) {
 	const map = new Map();
 	const add = (arr, kind) => {
 		for (const entity of arr || []) {
-			if (entity?.name && !map.has(entity.name)) map.set(entity.name, { kind, entity });
+			if (!entity?.name) continue;
+			// One entry per declaration: a name exported by two entry points has two.
+			const existing = map.get(entity.name);
+			if (existing) existing.push({ kind, entity });
+			else map.set(entity.name, [{ kind, entity }]);
 		}
 	};
 	add(doc.components, 'component');
@@ -335,6 +339,10 @@ export function renderComponentOrDirective({ entity }) {
 	const desc = cleanBlock(entity.rawdescription || entity.description);
 	if (desc) lines.push(desc, '');
 	if (entity.selector) lines.push(`**Selector:** \`${entity.selector}\``, '');
+	if (entity.exportAs) lines.push(`**Exported as:** \`${entity.exportAs}\``, '');
+	// A pipe is reached through its name, never through its class name.
+	if (entity.pipeName) lines.push(`**Pipe:** \`value | ${entity.pipeName}\``, '');
+	if (entity.constructorArgs?.length) lines.push('```ts', `new ${entity.name}(${argsCell(entity.constructorArgs)})`, '```', '');
 	// Without it, a generic class publishes members typed on parameters it never declares.
 	const suffix = typeParamSuffix(entity);
 	if (suffix) lines.push('```ts', `class ${entity.name}${suffix}`, '```', '');
@@ -475,16 +483,48 @@ export const RENDERERS = {
  * @param {Record<string, any>} doc
  * @param {Set<string>} exportedNames
  */
-export function selectPublicApi(doc, exportedNames) {
+export function selectPublicApi(doc, exportedNames, entryPoints = []) {
 	const entities = indexEntities(doc);
 	const matched = [];
 	const unmatched = [];
 	for (const name of [...exportedNames].sort((a, b) => a.localeCompare(b))) {
-		const found = entities.get(name);
-		if (found && RENDERERS[found.kind]) matched.push({ name, ...found });
-		else unmatched.push(name);
+		const found = (entities.get(name) || []).filter((candidate) => RENDERERS[candidate.kind]);
+		if (!found.length) {
+			unmatched.push(name);
+			continue;
+		}
+		for (const candidate of found) {
+			// Only a collision needs the import path: it is the sole thing telling the two apart.
+			const importPath = found.length > 1 ? importPathOf(candidate.entity, entryPoints) : undefined;
+			matched.push({ name, ...candidate, importPath });
+		}
 	}
 	return { matched, unmatched };
+}
+
+/** The entry point a declaration lives under — the deepest barrel whose folder contains it. */
+function importPathOf(entity, entryPoints) {
+	let best;
+	for (const entry of entryPoints) {
+		const dir = `${dirname(entry.barrel)}/`;
+		if (!entity?.sourceFile?.startsWith(dir)) continue;
+		if (!best || dir.length > best.dir.length) best = { dir, importPath: entry.importPath };
+	}
+	return best?.importPath;
+}
+
+/**
+ * Every barrel export must reach a renderer: the corpus advertises the whole public API,
+ * and a name that resolves to nothing disappears from it while every count-based floor
+ * stays green. Throws rather than shipping a silently amputated surface.
+ * @param {{ unmatched: string[] }} api
+ */
+export function assertFullyResolved(api) {
+	if (!api.unmatched.length) return;
+	throw new Error(
+		`${api.unmatched.length} public export(s) resolved to no documentable declaration: ${api.unmatched.join(', ')}. ` +
+			`Add support for the declaration kind, or stop exporting the name.`,
+	);
 }
 
 /**
@@ -505,14 +545,17 @@ export function coverageReport(doc, exportedNames) {
 	let documented = 0;
 	for (const name of names) {
 		const found = entities.get(name);
-		if (!found) {
+		if (!found?.length) {
 			external.push(name);
 			continue;
 		}
-		total++;
-		const desc = found.entity.rawdescription || found.entity.description;
-		if (desc && String(desc).trim()) documented++;
-		else missing.push(name);
+		// A name exported twice is two declarations to document, not one.
+		for (const candidate of found) {
+			total++;
+			const desc = candidate.entity.rawdescription || candidate.entity.description;
+			if (desc && String(desc).trim()) documented++;
+			else if (!missing.includes(name)) missing.push(name);
+		}
 	}
 	return {
 		total,
@@ -593,6 +636,13 @@ export function collectDeprecations(doc, publicNames = new Set()) {
  * @param {{ matched: any[] }} api
  * @returns {string}
  */
+/** Insert the import path under the heading — the only thing telling two same-named exports apart. */
+function withImportPath(markdown, importPath) {
+	if (!importPath) return markdown;
+	const [heading, ...rest] = markdown.split('\n');
+	return [heading, '', `**Import:** \`${importPath}\``, ...rest].join('\n');
+}
+
 export function renderLlmsFull(api) {
 	const packages = PACKAGES.map((p) => p.name).join(' and ');
 	const header =
@@ -601,7 +651,7 @@ export function renderLlmsFull(api) {
 		`TypeScript source and JSDoc (via the compiler API) and rendered deterministically.\n` +
 		`Do not edit by hand — edit the source code's JSDoc. Regenerated on every docs build.\n\n` +
 		`Public API entries: ${api.matched.length}\n`;
-	const body = api.matched.map((e) => RENDERERS[e.kind](e).trimEnd()).join('\n\n');
+	const body = api.matched.map((e) => withImportPath(RENDERERS[e.kind](e).trimEnd(), e.importPath)).join('\n\n');
 	return `${header}\n${body}\n`;
 }
 
@@ -616,7 +666,7 @@ export function renderEntrypointDoc({ importPath, api }) {
 		`# ${importPath} — API\n\n` +
 		`Auto-generated from the library's TypeScript source and JSDoc. Import from '${importPath}'.\n` +
 		`Public API entries: ${api.matched.length}\n`;
-	const body = api.matched.map((e) => RENDERERS[e.kind](e).trimEnd()).join('\n\n');
+	const body = api.matched.map((e) => withImportPath(RENDERERS[e.kind](e).trimEnd(), e.importPath)).join('\n\n');
 	return `${header}\n${body}\n`;
 }
 
@@ -856,7 +906,8 @@ export function storyCategoriesOf(storyFiles) {
  */
 export function generateAll({ root = workspaceRoot } = {}) {
 	const { doc, names, entryPoints } = extractSurface(root);
-	const api = selectPublicApi(doc, names);
+	const api = selectPublicApi(doc, names, entryPoints);
+	assertFullyResolved(api);
 	const deprecations = attachImportPaths(collectDeprecations(doc, names), entryPoints);
 
 	const outDir = resolve(root, OUT_DIR);
@@ -902,7 +953,7 @@ export function generateAll({ root = workspaceRoot } = {}) {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
 	const s = generateAll();
 	console.log(
-		`[llms] ${s.documented}/${s.exported} public exports rendered to ${OUT_LLMS} ` +
+		`[llms] ${s.documented} declarations from ${s.exported} public exports rendered to ${OUT_LLMS} ` +
 			`(${s.unmatched} names not in the extraction), ` +
 			`${s.deprecations} deprecations written to ${OUT_DEPRECATIONS}.`,
 	);

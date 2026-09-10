@@ -8,7 +8,7 @@ import { describe, expect, test } from 'vitest';
 
 import { Project } from 'ts-morph';
 
-import { extractDoc } from './extract-api.mjs';
+import { extractDoc, extractLibraries } from './extract-api.mjs';
 
 /** Build a `doc` from one or more in-memory sources; extraction runs on `index.ts`. */
 function docFrom(files) {
@@ -530,4 +530,65 @@ describe('members that only look public', () => {
 	test('an underscore-prefixed member stays out of the surface', () => {
 		expect(directive.properties.map((p) => p.name)).not.toContain('_internal');
 	});
+});
+
+describe('template-facing decorator metadata and call information', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      import { Directive, Injectable, Pipe, PipeTransform } from '@angular/core';
+      @Pipe({ name: 'luDate', standalone: true })
+      export class LuDatePipe implements PipeTransform {
+        transform(value: string): string { return value; }
+      }
+      @Directive({ selector: '[luTrigger]', exportAs: 'luTrigger' })
+      export class TriggerDirective {}
+      /** Adapts a string date. */
+      export class StringDateAdapter {
+        constructor(locale: string, offset: number = 0) {}
+      }
+      export class NoArgs {}
+      @Injectable()
+      export class StringAdapterService {
+        constructor(locale: string) {}
+      }
+    `,
+	});
+	const pipe = doc.injectables.find((i) => i.name === 'LuDatePipe');
+	const directive = doc.directives.find((d) => d.name === 'TriggerDirective');
+	const adapter = doc.classes.find((c) => c.name === 'StringDateAdapter');
+
+	test('a pipe publishes the name a template pipes through', () => {
+		expect(pipe.pipeName).toBe('luDate');
+	});
+
+	test('a directive publishes its exportAs handle', () => {
+		expect(directive.exportAs).toBe('luTrigger');
+	});
+
+	test('a class publishes its public constructor signature', () => {
+		expect(adapter.constructorArgs).toEqual([
+			{ name: 'locale', type: 'string' },
+			{ name: 'offset?', type: 'number' },
+		]);
+	});
+
+	test('a service that can be new-ed by hand publishes its constructor too', () => {
+		expect(doc.injectables.find((i) => i.name === 'StringAdapterService').constructorArgs).toEqual([{ name: 'locale', type: 'string' }]);
+	});
+
+	test('a class with no declared constructor publishes none', () => {
+		expect(doc.classes.find((c) => c.name === 'NoArgs').constructorArgs).toBeUndefined();
+	});
+});
+
+test('two distinct exports sharing a name both survive the merge', () => {
+	const project = new Project({ useInMemoryFileSystem: true });
+	project.createSourceFile('/a/link.ts', 'export class LinkComponent { a(): void {} }');
+	project.createSourceFile('/a/index.ts', "export * from './link';");
+	project.createSourceFile('/b/link.ts', 'export class LinkComponent { b(): void {} }');
+	project.createSourceFile('/b/index.ts', "export * from './link';");
+	const { doc } = extractLibraries(project, ['/a/index.ts', '/b/index.ts']);
+	const links = doc.classes.filter((c) => c.name === 'LinkComponent');
+	expect(links.length).toBe(2);
+	expect(links.map((l) => l.methodsClass[0].name).sort()).toEqual(['a', 'b']);
 });
