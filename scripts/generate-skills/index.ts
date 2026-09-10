@@ -19,7 +19,6 @@
  *   --component <slug>   Generate only the specified component
  *   --skip-figma         Skip Figma data collection
  *   --skip-zeroheight    Skip ZeroHeight data collection
- *   --skip-storybook     Skip Storybook data collection
  *   --dry-run            Print what would be generated without writing files
  *   --validate           Validate ZH coverage of component-map.json (no generation)
  *   --retry-failed       Replay only the units whose ZH/Figma fetch failed in a previous run
@@ -80,6 +79,7 @@ import { writeVersionChangelog } from './generators/version-diff-writer';
 import { writeAggregateSkill, listGeneratedVersionStrings } from './generators/aggregate-writer';
 import { auditStoryExamples, clearOutputViolations, reportOutputViolations } from './generators/output-guard';
 import { ensureZhReleaseIds } from './zh-release-guard';
+import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist } from './preflight';
 import { MinorResolution, getTechnicalMinor, parseVersion, resolveMinorVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
@@ -114,7 +114,6 @@ const flags = {
 	component: getFlag('component'),
 	skipFigma: args.includes('--skip-figma'),
 	skipZeroheight: args.includes('--skip-zeroheight'),
-	skipStorybook: args.includes('--skip-storybook'),
 	skipDocumentation: args.includes('--skip-documentation'),
 	skipTools: args.includes('--skip-tools'),
 	skipSchematics: args.includes('--skip-schematics'),
@@ -369,10 +368,31 @@ async function main(): Promise<void> {
 		}
 	}
 
+	// ── Pre-flight ────────────────────────────────────────────────────────────
+	// Three phases, ordered so that no question is asked while a check can still stop the run, and
+	// so nothing is persisted before the last abort door (the ZeroHeight prompt writes an ID to
+	// zh-release-ids.json the instant it is typed — see preflight.ts).
+
+	// Phase 1 — the release exists: tag, clone up to date, npm publication, deployed Storybook.
+	// Read-only, so it runs under --dry-run too: learning that the release is not ready is exactly
+	// what a dry run is for.
+	// Phase 2 — a usable Figma token, or a deliberate yes to generate without one. A question, so it
+	// is skipped when nothing will be written, like the ZeroHeight guard below.
+	try {
+		await ensureReleasesExist([...resolutions.values()]);
+		if (!flags.dryRun) await ensureFigmaAccess(config.figma, { skipFigma: flags.skipFigma });
+	} catch (err: any) {
+		if (!(err instanceof PreflightAbort)) throw err;
+		// A refusal is a decision, not a crash — but nothing was generated, so it still exits 1,
+		// exactly like the ZeroHeight guard's own `abandon`.
+		console.error(`\n🛑 Génération abandonnée : ${err.message}`);
+		process.exit(1);
+	}
+
 	clearFailures();
 	clearOutputViolations();
 
-	// Pre-flight: every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
+	// Phase 3 — every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
 	// the confirmed latest online. Aborts before any heavy work if an unpinned, superseded minor is
 	// unresolved (would otherwise pull "latest" = a newer version and corrupt its design sections).
 	if (!flags.skipZeroheight && !flags.dryRun) {
@@ -441,7 +461,7 @@ async function main(): Promise<void> {
 				const toolsMap = require('./tools-map.json');
 				console.log(`   DRY RUN — ${toolsMap.length} tool pages would be fetched from ZeroHeight`);
 			} else {
-				const { written, errors } = await collectAllTools(config.output.skillsDir, version, { skipStorybook: flags.skipStorybook });
+				const { written, errors } = await collectAllTools(config.output.skillsDir, version);
 				console.log(`\n   🔧 Tools: ${written} written, ${errors} errors`);
 				totalSuccess += written;
 				totalErrors += errors;
@@ -609,7 +629,7 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 		}
 		if (toolSlugs.size > 0 && !flags.dryRun) {
 			console.log(`\n🔧 Rejeu tools (${toolSlugs.size} page·s)...`);
-			await collectAllTools(config.output.skillsDir, version, { skipStorybook: flags.skipStorybook, only: toolSlugs });
+			await collectAllTools(config.output.skillsDir, version, { only: toolSlugs });
 		}
 		if (componentSlugs.size > 0) {
 			await processVersion(resolution, config, componentSlugs);
@@ -649,18 +669,15 @@ async function processVersion(
 	console.log(`   Storybook: ${version.storybookBaseUrl}`);
 	console.log(`   Flags: ${JSON.stringify({ ...flags, versions: undefined, version: resolution.minorKey })}\n`);
 
-	// Collect Storybook index (primary source for component discovery)
-	let storybookMap = new Map<string, StorybookGroup>();
-	if (!flags.skipStorybook) {
-		console.log('📥 Fetching Storybook index...');
-		try {
-			storybookMap = await fetchStorybookIndex(version);
-		} catch (err: any) {
-			console.warn(`  ⚠️  Storybook unavailable: ${err.message}`);
-		}
-	}
+	// Collect Storybook index — NOT one source among others: the component list itself is built from
+	// it (discoverComponents starts from the index and only rescues metadata entries that have an
+	// Angular entrypoint). A run without it silently produces a hollow skill — no code examples, no
+	// CSS-only components, every survivor in category 'Unknown' — that no guard flags, since the
+	// output guard only inspects examples that exist. So a failure here is fatal, not a warning; the
+	// pre-flight has already proven the index answers, which leaves only a mid-run disappearance.
+	const storybookMap: Map<string, StorybookGroup> = await fetchStorybookIndex(version);
 
-	// Discover components dynamically (from Storybook + metadata, or metadata-only if Storybook unavailable)
+	// Discover components from the Storybook index, completed by component-metadata.json.
 	// Sync metadata first to ensure it's up-to-date
 	if (!componentScoped) {
 		console.log('🔄 Syncing component-metadata.json...');

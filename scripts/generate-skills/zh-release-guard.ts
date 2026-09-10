@@ -20,8 +20,8 @@
  * Supplied IDs are validated against ZeroHeight and persisted via addZhReleaseId.
  */
 
-import readline from 'readline';
 import { parseMinor, parseVersion, getZeroHeightUrl, getZhReleaseIds, addZhReleaseId } from './version-config';
+import { ask, isInteractive, isYes } from './prompt';
 import { listGeneratedVersionStrings } from './generators/aggregate-writer';
 import { fetchWithTimeout } from './collectors/http';
 
@@ -48,11 +48,6 @@ function compareMinors(a: string, b: string): number {
 	const [aMaj, aMin] = a.split('.').map(Number);
 	const [bMaj, bMin] = b.split('.').map(Number);
 	return aMaj - bMaj || aMin - bMin;
-}
-
-function ask(question: string): Promise<string> {
-	const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-	return new Promise((resolve) => rl.question(question, (answer) => { rl.close(); resolve(answer.trim()); }));
 }
 
 /**
@@ -132,7 +127,7 @@ export async function ensureZhReleaseIds(runVersions: string[], skillsDir: strin
 	if (allMinors.length === 0) return;
 
 	const newest = allMinors[allMinors.length - 1];
-	const interactive = !!process.stdin.isTTY;
+	const interactive = isInteractive();
 	const pinned = getZhReleaseIds();
 
 	for (const minor of allMinors) {
@@ -168,8 +163,8 @@ export async function ensureZhReleaseIds(runVersions: string[], skillsDir: strin
 			continue;
 		}
 		if (interactive) {
-			const answer = (await ask(`  ↳ ZeroHeight : ${minor} est-elle la dernière version disponible EN LIGNE (ZeroHeight) ? (y/n) : `)).toLowerCase();
-			if (answer === 'y' || answer === 'o' || answer === 'yes' || answer === 'oui') {
+			const answer = await ask(`  ↳ ZeroHeight : ${minor} est-elle la dernière version disponible EN LIGNE (ZeroHeight) ? (y/n) : `);
+			if (isYes(answer)) {
 				console.log(`  ℹ️  ${minor} = dernière en ligne → contenu « latest » (à pinner dès qu'une version plus récente sortira).`);
 				continue;
 			}

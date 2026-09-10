@@ -33,7 +33,9 @@ Pour créer le token : Figma → Profil → Settings → Security → **Personal
 
 ### Comportement sans token
 
-Sans token, la collecte Figma est sautée **sans erreur ni avertissement** (équivalent `--skip-figma`) :
+Sans token — ou avec un token expiré/révoqué — le **pré-flight arrête le run** et demande confirmation avant de continuer (cf. [Parcours pré-flight](#parcours-pré-flight)). Le token est validé en une requête (`/v1/me`) : sa simple présence ne suffit pas, un 401/403 ne produit aucun token de design et ne se voyait nulle part.
+
+En cas de poursuite explicite (`y`, ou `--skip-figma` d'emblée) :
 
 - les fichiers `.figma.md` (design tokens des variantes) ne sont **ni générés ni rafraîchis** ;
 - un `.figma.md` issu d'un run précédent est conservé sur disque et reste lié depuis `<slug>.md` ;
@@ -54,7 +56,7 @@ npx ts-node ... --version 21.2
 # Plusieurs mineures à la fois
 npx ts-node ... --version 21.2 --version 21.1
 
-# Sans Figma / ZeroHeight / Storybook
+# Sans Figma / ZeroHeight (Storybook, lui, est obligatoire — cf. pré-flight)
 npx ts-node ... --version 21.2 --skip-figma --skip-zeroheight
 
 # Valider la couverture ZH (aucune génération)
@@ -69,7 +71,6 @@ npx ts-node ... --validate
 | `--component <slug>` | Générer uniquement ce composant (n'écrit pas le SKILL.md ni la doc transverse) |
 | `--skip-figma` | Ignorer la collecte Figma |
 | `--skip-zeroheight` | Ignorer la collecte ZeroHeight |
-| `--skip-storybook` | Ignorer la collecte Storybook |
 | `--skip-documentation` | Ignorer la doc transverse (tokens, contenu, guidelines, patterns, deprecated) |
 | `--skip-tools` | Ignorer les outils (SCSS + Angular tools) |
 | `--skip-schematics` | Ignorer les codemods de migration (`collection.json` git) |
@@ -85,6 +86,58 @@ npx ts-node ... --validate
 Variable d'environnement complémentaire : **`FETCH_TIMEOUT_MS`** — deadline des fetchs, 10 000 ms par défaut. Le bon réglage dépend de ce que le run fait bloquer la boucle d'événements : une génération complète le veut **bas** (une page est différée puis rejouée, plutôt que d'immobiliser un worker), une passe `--retry-failed` le veut **haut** (quelques dizaines d'unités seulement, et son but est de les obtenir, pas de les différer à nouveau). Cf. `collectors/http.ts`.
 | `--zh-latest <minor>` | Affirme que `<minor>` (ex. `21.3`) est la dernière version en ligne → autorisée en « latest » non pinné. Répétable. Cf. garde-fou ZeroHeight. |
 | `--zh-id <minor>=<id>` | Fournit l'ID de release ZeroHeight d'une mineure (ex. `21.3=61234`), validé puis persisté dans `zh-release-ids.json`. Répétable. |
+
+## Parcours pré-flight
+
+Avant la moindre collecte, le run passe trois phases. L'ordre suit deux règles :
+
+1. **Aucune question tant qu'un contrôle non interactif peut encore tout arrêter** — sinon on répond à des prompts pour une génération qui n'aura pas lieu ;
+2. **Aucun effet de bord avant la dernière porte d'abandon** — le prompt ZeroHeight écrit l'ID dans `zh-release-ids.json` dès la saisie (`addZhReleaseId`), donc la question Figma, dont le « non » ne laisse rien derrière, passe avant.
+
+### Phase 1 — la release existe (`preflight.ts`, non interactif)
+
+Pour chaque mineure passée en `--version`. Lecture seule, donc exécutée aussi sous `--dry-run` : apprendre que la release n'est pas prête est précisément ce qu'on attend d'un dry run. Au premier ❌, arrêt **avant toute question**, sortie 1.
+
+| Contrôle | Source | Ce qu'il ferme |
+|---|---|---|
+| Tag git | `git tag -l` (via `resolveMinorVersion`) | la mineure n'existe pas |
+| Clone à jour | `git ls-remote --tags origin` | un clone en retard d'un patch fait passer `v22.1.1` pour le dernier patch : skill figée sur un patch dépassé, **sans le moindre message** |
+| Publication npm | `npm view @lucca-front/ng@<patch> version` | tag poussé mais publication ratée → skill d'une version non installable + `fixes/` fantôme |
+| Storybook déployé | `GET <storybookBaseUrl>/index.json` | cf. ci-dessous |
+
+Le pré-flight ne fait **pas** le `git fetch --tags` à ta place : un script de génération n'a pas à muter le dépôt.
+
+Un tag local absent de `origin` (release jamais poussée) est signalé sans bloquer : le contenu qu'il pointe existe.
+
+> **Storybook est obligatoire.** Ce n'est pas une source parmi d'autres : la liste des composants est construite à partir de son index (`discoverComponents` part des groupes Storybook et ne rattrape en phase 2 que les entrées de `component-metadata.json` ayant un entrypoint Angular). Sans lui : aucun exemple de code, les composants CSS-only **disparaissent** de la skill, les survivants tombent en `category: 'Unknown'` — et rien ne le signale, le garde-fou de sortie n'inspectant que des exemples existants (zéro exemple = zéro violation, sortie 0, « All done! »). C'est pourquoi `--skip-storybook` a été supprimé et pourquoi un échec de l'index en cours de run est désormais fatal.
+
+### Phase 2 — token Figma (`preflight.ts`, interactif)
+
+Première question, parce que c'est la seule dont le « non » ne laisse aucune trace sur disque. Sautée sous `--skip-figma` (la même décision, énoncée d'avance) et sous `--dry-run` (rien ne sera écrit).
+
+Le token est **validé** (`GET /v1/me`) : présence ≠ validité, un 401/403 n'est jamais rejoué et ne produit aucun token de design. Token absent ou refusé → question à défaut négatif :
+
+```
+   ⚠️ Figma       aucun token (ni generate-skills-config.json, ni FIGMA_TOKEN)
+        Sans token, aucun <slug>.figma.md ne sera écrit : la skill partira sans les tokens de design.
+  ↳ Générer quand même sans Figma ? (N/y) :
+```
+
+Tout ce qui n'est pas `y`/`o` abandonne (sortie 1). Sans TTY : pas de prompt, échec dur renvoyant vers `--skip-figma`. Une erreur réseau sur `/v1/me` n'est pas une preuve contre le token : il est accepté avec un `ℹ️`.
+
+### Phase 3 — IDs de release ZeroHeight (`zh-release-guard.ts`)
+
+Inchangée, cf. [Garde-fou pré-flight](#garde-fou-pré-flight-zh-release-guardts). Il n'y a **pas** de contrôle automatique d'existence de la release ZH en phase 1 : une mineure non pinnée est servie en « latest », qui répond toujours 200 même si Prisme n'a pas encore publié la release. C'est la question humaine (« est-elle la dernière version disponible EN LIGNE ? ») qui tient ce rôle.
+
+### Récapitulatif des questions
+
+| Ordre | Question | Posée quand | Défaut | Refus |
+|---|---|---|---|---|
+| 1 | Générer quand même sans Figma ? `(N/y)` | token absent ou refusé, hors `--skip-figma` / `--dry-run` | **N** | sortie 1 |
+| 2 | ID ZeroHeight de `<mineure>.x` ? | mineure supersédée non pinnée (0..n fois) | — | `abandon` → sortie 1 |
+| 3 | `<mineure>` est-elle la dernière en ligne ? `(y/n)` | mineure la plus récente du run, non pinnée | — | `n` → demande l'ID |
+
+Tous les abandons sortent en **1**, via `PreflightAbort` attrapé dans `main()` — jamais par un `process.exit(0)`, qui déclencherait le faux diagnostic « Génération interrompue avant la fin » du garde de sortie (`index.ts`). Le message d'abandon est préfixé 🛑 pour se distinguer d'un plantage.
 
 ## Sources de données
 
@@ -183,7 +236,7 @@ Le fichier principal `button.md` contient l'import, le basic usage, la table d'A
 
 ### Tags fantômes (jamais publiés npm)
 
-Un tag git sans release npm (ex : `v21.1.5`, `v21.2.3`) ne doit produire **ni skill, ni fixe, ni entrée de changelog** : ses changements sont attribués au patch publié suivant. La liste est maintenue dans `UNPUBLISHED_TAGS` (`version-config.ts`) — à compléter si un futur tag n'atteint jamais npm.
+Un tag git sans release npm (ex : `v21.1.5`, `v21.2.3`) ne doit produire **ni skill, ni fixe, ni entrée de changelog** : ses changements sont attribués au patch publié suivant. La liste est maintenue dans `UNPUBLISHED_TAGS` (`version-config.ts`) — à compléter si un futur tag n'atteint jamais npm. Le [pré-flight](#parcours-pré-flight) interroge npm sur le dernier patch de la mineure ciblée et refuse de générer un fantôme, de sorte que le cas se découvre au moment où il se produit et non des semaines plus tard ; npm reste une **alarme**, jamais une source : `listStableTags` demeure git-only, donc changelogs et `fixes/` restent hors-ligne et reproductibles.
 
 ### Mineures techniques (pas de skill dédiée)
 
@@ -247,6 +300,8 @@ scripts/generate-skills/
 1. CLI parse (--version M.m, --component, flags) — une version patch est refusée
 2. Résolution mineure → dernier tag stable publié (tags fantômes exclus) + liste des tags patch,
    ZH release ID, Storybook base URL
+2 bis. Pré-flight (preflight.ts + zh-release-guard.ts) : existence de la release, token Figma,
+   IDs de release ZeroHeight — cf. « Parcours pré-flight »
 3. Doc transverse        → references/documentation/<category>/   (ZH fetch)
 4. Dépréciés             → references/documentation/deprecated/deprecated.md  (ZH "Cycle de vie")
 5. Schematics            → references/migrations.md                (git collection.json, codemods cumulatifs ≤ cible)

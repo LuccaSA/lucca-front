@@ -109,7 +109,7 @@ function buildExampleBlock(label: string, storyId: string, version: VersionConfi
 export async function collectAllTools(
 	skillsDir: string,
 	version: VersionConfig,
-	{ skipStorybook = false, only }: { skipStorybook?: boolean; only?: Set<string> } = {},
+	{ only }: { only?: Set<string> } = {},
 ): Promise<{ written: number; errors: number }> {
 	const tools = only ? loadToolsMap().filter((t) => only.has(t.slug)) : loadToolsMap();
 	const minorVersion = `${version.major}.${version.minor}`;
@@ -118,7 +118,7 @@ export async function collectAllTools(
 	let errors = 0;
 
 	// Build story ID map once for all tools (empty map if storybook is skipped/unavailable)
-	const storyIdMap = skipStorybook ? new Map<string, string>() : await buildStoryIdMap(version);
+	const storyIdMap = await buildStoryIdMap(version);
 	if (storyIdMap.size > 0) {
 		console.log(`  📚 Storybook index: ${storyIdMap.size} stories indexed`);
 	}
