@@ -1,5 +1,6 @@
 import {
 	$createTextNode,
+	$getNodeByKey,
 	COMMAND_PRIORITY_NORMAL,
 	DecoratorNode,
 	type DOMConversion,
@@ -27,12 +28,48 @@ export type SerializedTagNode = Spread<
 	SerializedLexicalNode
 >;
 
+// Chip components per editor and node key. Not stored on the nodes: Lexical clones them and reuses old instances on undo/redo.
+const tagChips = new WeakMap<LexicalEditor, Map<NodeKey, Set<ComponentRef<ChipComponent>>>>();
+
+function getTagChips(editor: LexicalEditor): Map<NodeKey, Set<ComponentRef<ChipComponent>>> {
+	let chips = tagChips.get(editor);
+	if (!chips) {
+		chips = new Map();
+		tagChips.set(editor, chips);
+	}
+	return chips;
+}
+
+/** Destroy the chip components of a tag node that are no longer in the editor DOM. */
+export function destroyStaleTagChips(editor: LexicalEditor, nodeKey: NodeKey): void {
+	const chips = getTagChips(editor);
+	const refs = chips.get(nodeKey);
+	if (!refs) {
+		return;
+	}
+	const currentElement = editor.getElementByKey(nodeKey);
+	refs.forEach((ref) => {
+		if (ref.location.nativeElement !== currentElement) {
+			ref.destroy();
+			refs.delete(ref);
+		}
+	});
+	if (refs.size === 0) {
+		chips.delete(nodeKey);
+	}
+}
+
+/** Destroy stale chip components once Lexical has reconciled the DOM. */
+export function registerTagChipsCleanup(editor: LexicalEditor): () => void {
+	return editor.registerMutationListener(TagNode, (mutations) => {
+		mutations.forEach((_mutation, nodeKey) => destroyStaleTagChips(editor, nodeKey));
+	});
+}
+
 export class TagNode extends DecoratorNode<string> {
 	#tagKey: string;
 	#tagDescription?: string;
 	#disabled: boolean;
-	// Store the component reference on the node instance
-	#componentRef?: ComponentRef<ChipComponent>;
 	#viewContainerRef?: ViewContainerRef;
 
 	setViewContainerRef(vcr: ViewContainerRef): this {
@@ -101,32 +138,35 @@ export class TagNode extends DecoratorNode<string> {
 	override createDOM(_config: EditorConfig, editor: LexicalEditor): HTMLElement {
 		if (this.#viewContainerRef) {
 			if (!editor.isEditable()) {
-				this.#componentRef?.destroy();
 				const span = document.createElement('span');
 				span.textContent = this.#tagDescription ?? this.#tagKey;
 				return span;
 			}
-			if (!this.#componentRef) {
-				// Create the component
-				this.#componentRef = this.#viewContainerRef.createComponent(ChipComponent);
+			// Always create a new component, stale ones are destroyed by `registerTagChipsCleanup`
+			const componentRef = this.#viewContainerRef.createComponent(ChipComponent);
+			const chips = getTagChips(editor);
+			const nodeKey = this.getKey();
+			if (!chips.has(nodeKey)) {
+				chips.set(nodeKey, new Set());
 			}
+			chips.get(nodeKey)?.add(componentRef);
 
 			// Set inputs on the component instance
-			this.#componentRef.setInput('unkillable', false);
-			this.#componentRef.setInput('palette', 'product');
-			this.#componentRef.setInput('disabled', this.#disabled);
+			componentRef.setInput('unkillable', false);
+			componentRef.setInput('palette', 'product');
+			componentRef.setInput('disabled', this.#disabled);
 
 			// Get the component's DOM element
-			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;
+			const componentElement = componentRef.location.nativeElement as HTMLElement;
 			const textNode = document.createTextNode(this.#tagDescription ?? this.#tagKey);
 			componentElement.insertBefore(textNode, componentElement.firstChild);
 			componentElement.classList.add('mod-S');
 			componentElement.classList.add('richTextField-content-chip');
 
 			// Add click handler ONLY to the delete button, not the whole chip
-			this.#componentRef.instance.kill.subscribe(() => {
+			componentRef.instance.kill.subscribe(() => {
 				editor.update(() => {
-					this.remove();
+					$getNodeByKey(nodeKey)?.remove();
 				});
 			});
 
@@ -140,11 +180,6 @@ export class TagNode extends DecoratorNode<string> {
 
 	override updateDOM(prevNode: TagNode, _dom: HTMLElement, _config: EditorConfig): boolean {
 		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey || this.#disabled !== prevNode.#disabled || this.#viewContainerRef !== prevNode.#viewContainerRef;
-	}
-
-	override remove(preserveEmptyParent?: boolean): void {
-		super.remove(preserveEmptyParent);
-		this.#componentRef?.destroy();
 	}
 
 	override exportDOM(): DOMExportOutput {
