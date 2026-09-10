@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { LuSafeExternalSvgPipe } from '../safe-content/safe-external-svg.pipe';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { FancyBoxBackgroundEndStart, FancyBoxBackgroundStartEnd, FancyBoxForegroundEndStart, FancyBoxForegroundStartEnd, FancyBoxSize } from './fancy-box.type';
 
 @Component({
