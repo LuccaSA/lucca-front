@@ -494,3 +494,28 @@ describe('renderInterface publishes the method signatures', () => {
 		expect(out).toContain('| `dismiss?()` |');
 	});
 });
+
+test('renderComponentOrDirective declares a generic class with its type parameters', () => {
+	const out = renderComponentOrDirective({
+		entity: {
+			name: 'ALuPopupRef',
+			typeParameters: ['T = unknown', 'D = unknown'],
+			inputsClass: [],
+			outputsClass: [],
+			methodsClass: [{ name: 'close', args: [{ name: 'result', type: 'D' }], returnType: 'void' }],
+		},
+	});
+	expect(out).toContain('```ts\nclass ALuPopupRef<T = unknown, D = unknown>\n```');
+});
+
+test('renderComponentOrDirective emits no declaration fence for a non-generic class', () => {
+	const out = renderComponentOrDirective({ entity: { name: 'ButtonComponent', inputsClass: [], outputsClass: [], methodsClass: [] } });
+	expect(out).not.toContain('```ts');
+});
+
+test('renderInterface fences a template-literal type so its backticks survive the table', () => {
+	const out = renderInterface({
+		entity: { name: 'Themed', properties: [{ name: 'class', type: '`palette-${Palette}` | string', optional: true }], methodsClass: [] },
+	});
+	expect(out).toContain('| `class?` | `` `palette-${Palette}` \\| string `` |');
+});

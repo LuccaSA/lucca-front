@@ -389,3 +389,59 @@ describe('interface methods', () => {
 		expect(iface.properties.map((p) => p.name)).toEqual(['result']);
 	});
 });
+
+describe('transformed signal inputs', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      import { Component, input, booleanAttribute } from '@angular/core';
+      @Component({ selector: 'lu-x', template: '' })
+      export class XComponent {
+        readonly block = input<boolean, boolean | \`\${boolean}\` | ''>(false, { transform: booleanAttribute });
+        readonly plain = input<string>('');
+      }
+    `,
+	});
+	const byName = Object.fromEntries(doc.components[0].inputsClass.map((i) => [i.name, i]));
+
+	test('documents the write type an author binds, not the read type', () => {
+		expect(byName.block.type).toBe("boolean | `${boolean}` | ''");
+	});
+
+	test('a single-argument input is unchanged', () => {
+		expect(byName.plain.type).toBe('string');
+	});
+});
+
+describe('interface inheritance', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      export interface Base {
+        /** From the base. */
+        id: string;
+        label?: string;
+        describe(): string;
+      }
+      export interface Derived extends Base {
+        /** Narrowed here. */
+        label: string;
+        scope: number;
+      }
+    `,
+	});
+	const derived = doc.interfaces.find((i) => i.name === 'Derived');
+	const byName = Object.fromEntries(derived.properties.map((p) => [p.name, p]));
+
+	test('inherited properties reach the feed', () => {
+		expect(Object.keys(byName).sort()).toEqual(['id', 'label', 'scope']);
+		expect(byName.id.rawdescription).toBe('From the base.');
+	});
+
+	test('the derived declaration wins over the inherited one', () => {
+		expect(byName.label.optional).toBe(false);
+		expect(byName.label.rawdescription).toBe('Narrowed here.');
+	});
+
+	test('inherited methods reach the feed', () => {
+		expect(derived.methodsClass.map((m) => m.name)).toEqual(['describe']);
+	});
+});

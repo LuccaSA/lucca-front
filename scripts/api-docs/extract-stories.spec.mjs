@@ -78,6 +78,21 @@ describe('parseTitle', () => {
 			title: 'Documentation/Intl',
 			expected: { category: 'Intl', component: '', arm: '', variant: '' },
 		},
+		{
+			label: 'nested component path keeps every segment before the arm',
+			title: 'Documentation/Forms/Fields/CheckboxField/Angular/Basic',
+			expected: { category: 'Forms', component: 'Fields/CheckboxField', arm: 'Angular', variant: 'Basic' },
+		},
+		{
+			label: 'spaced HTML & CSS arm is recognised',
+			title: 'Documentation/Feedback/ErrorPage/HTML & CSS/Basic',
+			expected: { category: 'Feedback', component: 'ErrorPage', arm: 'HTML & CSS', variant: 'Basic' },
+		},
+		{
+			label: 'armless title keeps the positional reading',
+			title: 'Documentation/Actions/Link/Basic',
+			expected: { category: 'Actions', component: 'Link', arm: 'Basic', variant: '' },
+		},
 	];
 	test.each(cases)('$label', ({ title, expected }) => {
 		expect(parseTitle(title)).toEqual(expected);
@@ -189,4 +204,12 @@ describe('story-factory helper calls', () => {
 	test('resolves a shorthand template property through the local variable', () => {
 		expect(file.templates).toEqual(['<modal-stories [mode]="mode" />']);
 	});
+});
+
+test('groupByComponent keeps nested component paths apart', () => {
+	const groups = groupByComponent([
+		{ title: 'Documentation/Forms/Fields/CheckboxField/Angular/Basic', stories: [], templates: [] },
+		{ title: 'Documentation/Forms/Fields/TextField/Angular/Basic', stories: [], templates: [] },
+	]);
+	expect(groups.map((g) => g.key)).toEqual(['Forms/Fields/CheckboxField', 'Forms/Fields/TextField']);
 });

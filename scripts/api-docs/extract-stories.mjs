@@ -29,15 +29,31 @@ import { Node, Project } from 'ts-morph';
  * @property {string[]} templates — every template literal reachable from a `template:` property
  */
 
+/** The two arms every documented component is written twice for. */
+const ARM_SEGMENT = /^(Angular|HTML\s*&\s*CSS)$/i;
+
 /**
  * Split a documentation title into its hierarchy. The canonical shape is
- * `Documentation/<Category>/<Component>/<Angular|HTML&CSS>/<Variant…>`; shorter
- * titles degrade gracefully (missing segments come back empty).
+ * `Documentation/<Category>/<Component…>/<Angular|HTML&CSS>/<Variant…>`, where the
+ * component part spans as many segments as the story tree nests
+ * (`Forms/Fields/CheckboxField`). The arm segment is what anchors the split — a
+ * fixed position collapses every nested component onto its parent. Titles with no
+ * arm keep the positional reading; shorter ones come back with empty segments.
  * @param {string} title
  */
 export function parseTitle(title) {
-	const [, category = '', component = '', arm = '', ...variant] = title.split('/');
-	return { category, component, arm, variant: variant.join('/') };
+	const [, category = '', ...rest] = title.split('/');
+	const armIndex = rest.findIndex((segment) => ARM_SEGMENT.test(segment));
+	if (armIndex === -1) {
+		const [component = '', arm = '', ...variant] = rest;
+		return { category, component, arm, variant: variant.join('/') };
+	}
+	return {
+		category,
+		component: rest.slice(0, armIndex).join('/'),
+		arm: rest[armIndex],
+		variant: rest.slice(armIndex + 1).join('/'),
+	};
 }
 
 /** Literal text of a string or (no-substitution) template literal node, else undefined. */

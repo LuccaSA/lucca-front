@@ -169,10 +169,14 @@ function selectorOf(classNode) {
 	return undefined;
 }
 
-/** Read type of a signal input from its declared type: `input<T>()` → `T`, else the checker. */
-function signalReadType(prop) {
+/**
+ * Binding type of a signal input from its resolved type — the type an author may write
+ * in a template, not the type the signal reads back. `InputSignalWithTransform<T, W>`
+ * carries both, and only `W` describes what the input accepts.
+ */
+function signalBindingType(prop) {
 	const args = safeTypeArguments(prop);
-	return args.length ? safeTypeText(args[0], prop) : undefined;
+	return args.length ? safeTypeText(args[args.length - 1], prop) : undefined;
 }
 function safeTypeArguments(prop) {
 	try {
@@ -253,13 +257,16 @@ function ownMembersOf(classNode) {
 		}
 		if (!init || !Node.isCallExpression(init)) continue;
 		const callee = init.getExpression().getText();
-		const writtenType = init.getTypeArguments()[0]?.getText();
+		const typeArgs = init.getTypeArguments();
+		const writtenType = typeArgs[0]?.getText();
+		// `input<Read, Write>()` — an author binds the write type; the read type is internal.
+		const writtenBindingType = typeArgs[typeArgs.length - 1]?.getText();
 		const factoryAlias = aliasIn(init.getArguments()[OPTIONS_ARG.get(callee)]);
 		if (INPUT_CALLEES.has(callee)) {
 			const required = callee.endsWith('.required');
 			const initArgs = init.getArguments();
 			const publicName = factoryAlias ?? prop.getName();
-			const valueType = normalizeType(writtenType ?? signalReadType(prop)) ?? 'unknown';
+			const valueType = normalizeType(writtenBindingType ?? signalBindingType(prop)) ?? 'unknown';
 			inputsClass.push({
 				name: publicName,
 				type: valueType,
@@ -452,28 +459,70 @@ function signaturesOf(declarations) {
 	}));
 }
 
-/** Interface property `{ name, type, optional, readonly, rawdescription }` list. */
-function propertiesOf(interfaceNode) {
-	return interfaceNode.getProperties().map((prop) => ({
-		name: prop.getName(),
-		type: normalizeType(prop.getTypeNode()?.getText()) ?? 'unknown',
-		optional: prop.hasQuestionToken(),
-		readonly: prop.isReadonly(),
-		rawdescription: descriptionOf(prop),
-		...memberDeprecation(prop),
-	}));
+/**
+ * An interface and every interface it extends, nearest first. What a consumer may
+ * pass is the whole chain, so an inherited member is part of the published contract;
+ * `seen` keeps a circular `extends` from recursing.
+ * @returns {import('ts-morph').InterfaceDeclaration[]}
+ */
+function interfaceChain(interfaceNode, seen = new Set()) {
+	if (!interfaceNode || seen.has(interfaceNode)) return [];
+	seen.add(interfaceNode);
+	let bases = [];
+	try {
+		bases = interfaceNode.getBaseDeclarations().filter((decl) => Node.isInterfaceDeclaration(decl));
+	} catch {
+		bases = [];
+	}
+	return [interfaceNode, ...bases.flatMap((base) => interfaceChain(base, seen))];
 }
 
-/** Interface method signatures — an overloaded name publishes one entry per declaration. */
+/**
+ * Interface property `{ name, type, optional, readonly, rawdescription }` list, inherited
+ * members included. A name redeclared closer to the interface wins — that is what a
+ * consumer of the derived type sees.
+ */
+function propertiesOf(interfaceNode) {
+	const byName = new Map();
+	for (const node of interfaceChain(interfaceNode)) {
+		for (const prop of node.getProperties()) {
+			if (byName.has(prop.getName())) continue;
+			byName.set(prop.getName(), {
+				name: prop.getName(),
+				type: normalizeType(prop.getTypeNode()?.getText()) ?? 'unknown',
+				optional: prop.hasQuestionToken(),
+				readonly: prop.isReadonly(),
+				rawdescription: descriptionOf(prop),
+				...memberDeprecation(prop),
+			});
+		}
+	}
+	return [...byName.values()];
+}
+
+/**
+ * Interface method signatures, inherited members included — an overloaded name publishes
+ * one entry per declaration, and a name redeclared closer replaces the whole inherited
+ * overload set rather than adding to it.
+ */
 function interfaceMethodsOf(interfaceNode) {
-	return interfaceNode.getMethods().map((method) => ({
-		name: method.getName(),
-		args: paramsOf(method),
-		returnType: normalizeType(method.getReturnTypeNode()?.getText() ?? safeTypeText(method.getReturnType(), method)) ?? 'void',
-		optional: method.hasQuestionToken(),
-		rawdescription: descriptionOf(method),
-		...memberDeprecation(method),
-	}));
+	const entries = [];
+	const claimed = new Set();
+	for (const node of interfaceChain(interfaceNode)) {
+		const own = node.getMethods().filter((method) => !claimed.has(method.getName()));
+		for (const method of own) {
+			entries.push({
+				name: method.getName(),
+				args: paramsOf(method),
+				returnType: normalizeType(method.getReturnTypeNode()?.getText() ?? safeTypeText(method.getReturnType(), method)) ?? 'void',
+				optional: method.hasQuestionToken(),
+				rawdescription: descriptionOf(method),
+				...memberDeprecation(method),
+			});
+		}
+		for (const method of own) claimed.add(method.getName());
+	}
+	return entries;
 }
 
 /** Variable type: written annotation → reconstructed `new X<T>()` → resolved type. */

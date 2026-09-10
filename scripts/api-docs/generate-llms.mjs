@@ -283,11 +283,22 @@ function sortedByName(arr) {
 
 /** @param {string | undefined} type */
 function typeCell(type) {
-	return type ? `\`${type.replace(/\|/g, '\\|')}\`` : '—';
+	return type ? codeCell(type) : '—';
 }
 /** @param {string | undefined} value */
 function defaultCell(value) {
-	return value != null && value !== '' ? `\`${String(value).replace(/\|/g, '\\|')}\`` : '—';
+	return value != null && value !== '' ? codeCell(String(value)) : '—';
+}
+
+/**
+ * Table cell holding code: `|` escaped so a union does not open a column, and a doubled,
+ * padded fence when the text itself carries a backtick — a template-literal type
+ * (`` `palette-${P}` ``) closes a single-backtick span halfway through.
+ * @param {string} text
+ */
+function codeCell(text) {
+	const escaped = text.replace(/\|/g, '\\|');
+	return escaped.includes('`') ? `\`\` ${escaped} \`\`` : `\`${escaped}\``;
 }
 
 /** Argument list of a signature — `|` escaped, since a union type otherwise opens a table column. */
@@ -317,6 +328,9 @@ export function renderComponentOrDirective({ entity }) {
 	const desc = cleanBlock(entity.rawdescription || entity.description);
 	if (desc) lines.push(desc, '');
 	if (entity.selector) lines.push(`**Selector:** \`${entity.selector}\``, '');
+	// Without it, a generic class publishes members typed on parameters it never declares.
+	const suffix = typeParamSuffix(entity);
+	if (suffix) lines.push('```ts', `class ${entity.name}${suffix}`, '```', '');
 
 	const inputs = sortedByName(entity.inputsClass);
 	if (inputs.length) {
