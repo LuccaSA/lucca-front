@@ -52,7 +52,7 @@ export class FancyBoxComponent {
 		if (value === null) {
 			return null;
 		}
-		if (value.startsWith('https://') || value.startsWith('/')) {
+		if (value.startsWith('https://') || value.startsWith('/') || value.startsWith('./')) {
 			return value;
 		}
 		return `${this.domain}${this.path}${prefix}-${value}${this.extension}`;
