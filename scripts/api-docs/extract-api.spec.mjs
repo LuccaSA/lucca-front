@@ -445,3 +445,63 @@ describe('interface inheritance', () => {
 		expect(derived.methodsClass.map((m) => m.name)).toEqual(['describe']);
 	});
 });
+
+describe('the callable and readable surface of a plain class', () => {
+	const { doc } = docFrom({
+		'index.ts': `
+      import { Directive, input } from '@angular/core';
+      // Stubs: the in-memory project has no node_modules, and the emitter payload is
+      // read off the resolved type — an unresolvable import would make it \`any\`.
+      declare class Subject<T> { next(value: T): void; }
+      declare class EventEmitter<T> extends Subject<T> {}
+      declare class OutputEmitterRef<T> { emit(value: T): void; }
+      declare function outputFromObservable<T>(source: Subject<T>, opts?: { alias?: string }): OutputEmitterRef<T>;
+      /** A formatter. */
+      export class Formatter {
+        /** Format it. */
+        static format(value: string, upper = false): string { return value; }
+        static #hidden(): void {}
+        /** The stream. */
+        readonly changes$ = new Subject<string>();
+        get label(): string { return ''; }
+        private secret = 1;
+        protected internal = 2;
+        /** Open it. */
+        open<T, D>(component: T, data?: D): D | undefined { return data; }
+      }
+      @Directive({ selector: '[luItem]' })
+      export class ItemDirective {
+        readonly size = input<'s' | 'm'>('s');
+        readonly onSelect = new EventEmitter<boolean>();
+        protected readonly onSelectOutput = outputFromObservable(this.onSelect, { alias: 'onSelect' });
+      }
+    `,
+	});
+	const formatter = doc.classes.find((c) => c.name === 'Formatter');
+	const directive = doc.directives.find((d) => d.name === 'ItemDirective');
+
+	test('a public static method stays in the surface, flagged as static', () => {
+		const format = formatter.methodsClass.find((m) => m.name === 'format');
+		expect(format).toBeDefined();
+		expect(format.static).toBe(true);
+		expect(format.rawdescription).toBe('Format it.');
+		expect(formatter.methodsClass.map((m) => m.name)).not.toContain('#hidden');
+	});
+
+	test('a method publishes its own type parameters', () => {
+		expect(formatter.methodsClass.find((m) => m.name === 'open').typeParameters).toEqual(['T', 'D']);
+	});
+
+	test('public properties and getters reach the feed, private and protected ones do not', () => {
+		expect(formatter.properties.map((p) => p.name).sort()).toEqual(['changes$', 'label']);
+		expect(formatter.properties.find((p) => p.name === 'changes$').rawdescription).toBe('The stream.');
+	});
+
+	test('a property already published as an input or an output is not repeated', () => {
+		expect(directive.properties.map((p) => p.name)).not.toContain('size');
+	});
+
+	test('an inferred outputFromObservable payload falls back to the resolved type', () => {
+		expect(directive.outputsClass.find((o) => o.name === 'onSelect').type).toBe('boolean');
+	});
+});

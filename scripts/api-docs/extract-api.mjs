@@ -286,14 +286,15 @@ function ownMembersOf(classNode) {
 		} else if (callee === 'output') {
 			outputsClass.push({
 				name: factoryAlias ?? prop.getName(),
-				type: normalizeType(writtenType) ?? 'void',
+				type: normalizeType(writtenType ?? signalBindingType(prop)) ?? 'void',
 				rawdescription,
 				...memberDeprecation(prop),
 			});
 		} else if (callee === 'outputFromObservable') {
+			// `outputFromObservable(this.x)` never writes its payload — only `OutputEmitterRef<T>` carries it.
 			outputsClass.push({
 				name: factoryAlias ?? prop.getName(),
-				type: normalizeType(writtenType) ?? 'unknown',
+				type: normalizeType(writtenType ?? signalBindingType(prop)) ?? 'unknown',
 				rawdescription,
 				...memberDeprecation(prop),
 			});
@@ -393,25 +394,63 @@ function mergeMembers(first, second) {
 	};
 }
 
-/** Public, non-static, non-#-private instance methods (lifecycle filtering stays in the renderer). */
+/**
+ * Public, non-`#`-private methods, instance and static alike — a static method is as
+ * callable as an instance one (`PhoneNumberFormatter.format`), so dropping it removes
+ * a real export. Lifecycle filtering stays in the renderer.
+ */
 function ownMethodsOf(classNode) {
 	const methods = [];
 	for (const method of classNode.getMethods()) {
-		if (method.isStatic() || method.getName().startsWith('#') || method.getScope() !== 'public') continue;
+		if (method.getName().startsWith('#') || method.getScope() !== 'public') continue;
 		// A method with overload declarations only publishes those: its implementation
 		// signature (usually the widest union) is not callable as written.
 		const signatureNodes = method.getOverloads().length ? method.getOverloads() : [method];
 		for (const node of signatureNodes) {
 			methods.push({
 				name: method.getName(),
+				typeParameters: typeParamsOf(node),
 				args: paramsOf(node),
 				returnType: normalizeType(node.getReturnTypeNode()?.getText() ?? safeTypeText(node.getReturnType(), node)) ?? 'void',
+				static: method.isStatic() || undefined,
 				rawdescription: descriptionOf(node) || descriptionOf(method),
 				...memberDeprecation(node),
 			});
 		}
 	}
 	return methods;
+}
+
+/**
+ * Own + inherited public instance properties and getters, minus the ones already
+ * published as inputs or outputs — a signal input is a property too, and listing it
+ * twice would read as two distinct members. A readable member is part of the public
+ * contract (`LuTitleStrategy.title$`, `ALuPopupRef.onOpen`), so the surface owes it.
+ */
+function writtenMemberType(member) {
+	return Node.isGetAccessorDeclaration(member) ? member.getReturnTypeNode()?.getText() : member.getTypeNode()?.getText();
+}
+
+function classPropertiesOf(classNode, publishedNames) {
+	const byName = new Map();
+	for (const node of classChain(classNode)) {
+		const members = [...node.getProperties(), ...node.getGetAccessors()];
+		for (const member of members) {
+			const name = member.getName();
+			if (name.startsWith('#') || member.getScope() !== 'public' || member.isStatic()) continue;
+			if (publishedNames.has(name) || byName.has(name)) continue;
+			byName.set(name, {
+				name,
+				// A getter carries its type on the return node; only a property has `getTypeNode`.
+				type: normalizeType(writtenMemberType(member) ?? safeTypeText(member.getType(), member)) ?? 'unknown',
+				optional: Node.isPropertyDeclaration(member) && member.hasQuestionToken(),
+				readonly: Node.isPropertyDeclaration(member) ? member.isReadonly() : true,
+				rawdescription: descriptionOf(member),
+				...memberDeprecation(member),
+			});
+		}
+	}
+	return [...byName.values()];
 }
 
 /** Own + inherited public methods; a name redeclared downstack hides every base signature of it. */
@@ -513,6 +552,7 @@ function interfaceMethodsOf(interfaceNode) {
 		for (const method of own) {
 			entries.push({
 				name: method.getName(),
+				typeParameters: typeParamsOf(method),
 				args: paramsOf(method),
 				returnType: normalizeType(method.getReturnTypeNode()?.getText() ?? safeTypeText(method.getReturnType(), method)) ?? 'void',
 				optional: method.hasQuestionToken(),
@@ -552,8 +592,17 @@ function buildEntity(name, kind, node, declarations) {
 		case 'component':
 		case 'directive':
 		case 'injectable':
-		case 'class':
-			return { ...base, selector: selectorOf(node), ...membersOf(node), methodsClass: methodsOf(node) };
+		case 'class': {
+			const members = membersOf(node);
+			const published = new Set([...members.inputsClass, ...members.outputsClass].map((m) => m.name));
+			return {
+				...base,
+				selector: selectorOf(node),
+				...members,
+				properties: classPropertiesOf(node, published),
+				methodsClass: methodsOf(node),
+			};
+		}
 		case 'function':
 			return { ...base, signatures: signaturesOf(declarations) };
 		case 'interface':

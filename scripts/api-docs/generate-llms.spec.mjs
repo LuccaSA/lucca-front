@@ -519,3 +519,31 @@ test('renderInterface fences a template-literal type so its backticks survive th
 	});
 	expect(out).toContain('| `class?` | `` `palette-${Palette}` \\| string `` |');
 });
+
+describe('class members carrying a modifier or a generic signature', () => {
+	const out = renderComponentOrDirective({
+		entity: {
+			name: 'Formatter',
+			inputsClass: [],
+			outputsClass: [],
+			properties: [{ name: 'changes$', type: 'Subject<string>', rawdescription: 'The stream.' }],
+			methodsClass: [
+				{ name: 'format', args: [{ name: 'value', type: 'string' }], returnType: 'string', static: true },
+				{ name: 'open', args: [{ name: 'data', type: 'D' }], returnType: 'D', typeParameters: ['T', 'D'] },
+			],
+		},
+	});
+
+	test('a static method reads as static', () => {
+		expect(out).toContain('| `static format(value: string)` |');
+	});
+
+	test('a generic method declares its type parameters', () => {
+		expect(out).toContain('| `open<T, D>(data: D)` |');
+	});
+
+	test('public properties get their own table', () => {
+		expect(out).toContain('### Properties');
+		expect(out).toContain('| `changes$` | `Subject<string>` | The stream. |');
+	});
+});

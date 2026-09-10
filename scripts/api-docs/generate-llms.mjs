@@ -311,7 +311,9 @@ function methodsTable(methods, heading = '### Methods') {
 	if (!methods.length) return [];
 	const lines = [heading, '', '| Method | Returns | Description |', '| --- | --- | --- |'];
 	for (const m of methods) {
-		const name = m.optional ? `${m.name}?` : m.name;
+		// `static` and `<T, D>` both change how the method is called — the signature is wrong without them.
+		const base = m.static ? `static ${m.name}` : m.name;
+		const name = `${m.optional ? `${base}?` : base}${typeParamSuffix(m)}`;
 		lines.push(`| \`${name}(${argsCell(m.args)})\` | ${typeCell(m.returnType)} | ${cleanCell(m.rawdescription || m.description)} |`);
 	}
 	lines.push('');
@@ -339,6 +341,16 @@ export function renderComponentOrDirective({ entity }) {
 			lines.push(
 				`| \`${i.name}\` | ${typeCell(i.type)} | ${defaultCell(i.defaultValue)} | ${i.required ? 'yes' : 'no'} | ${cleanCell(i.rawdescription || i.description)} |`,
 			);
+		}
+		lines.push('');
+	}
+
+	const properties = sortedByName(entity.properties);
+	if (properties.length) {
+		lines.push('### Properties', '', '| Property | Type | Description |', '| --- | --- | --- |');
+		for (const p of properties) {
+			const base = p.readonly ? `readonly ${p.name}` : p.name;
+			lines.push(`| \`${p.optional ? `${base}?` : base}\` | ${typeCell(p.type)} | ${cleanCell(p.rawdescription || p.description)} |`);
 		}
 		lines.push('');
 	}
