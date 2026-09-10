@@ -19,6 +19,15 @@ export default mergeConfig(
 		test: {
 			watch: false,
 			fileParallelism: true,
+			// Must stay on the root config: the browser pool reads `isolate` from the root, not from
+			// the project, so setting it per project silently leaves isolation on. Isolation would be
+			// desirable — story files currently share one browser page, so the DOM, Angular apps,
+			// overlays and subscriptions of ~750 files pile up in a single tab, and an async error
+			// thrown by one story is reported against whichever unrelated file is running — but it
+			// deadlocks the run: the per-file tester URL is not escaped, so any story under a
+			// `html&css/` directory (311 of them) truncates it at the `&` and the tester never
+			// reports back. Do not flip this before that is fixed upstream.
+			isolate: false,
 			passWithNoTests: true,
 			pool: 'threads',
 			globals: true,
@@ -41,8 +50,6 @@ export default mergeConfig(
 					extends: true,
 					test: {
 						name: 'lucca-front',
-						// happy-dom environments are cheap to share between files.
-						isolate: false,
 						exclude: ['**/node_modules/**', '**/schematics/**/*.spec.ts'],
 					},
 				},
@@ -60,13 +67,9 @@ export default mergeConfig(
 					],
 					test: {
 						name: 'storybook',
-						// Story files must not share a browser page: without isolation the DOM,
-						// Angular apps, overlays and subscriptions of ~750 story files pile up in a
-						// single tab until Chromium dies mid-run, and an async error thrown by one
-						// story gets reported against whichever unrelated file is running.
-						isolate: true,
-						// The CI runner has 4 vCPUs; more concurrent pages than this starves the
-						// workers and makes even static stories hit the test timeout.
+						// The CI runner has 4 vCPUs; more concurrent pages than this starves the workers
+						// and makes even static stories hit the test timeout. Raise it if the suite gets
+						// too slow and the runner gets bigger.
 						maxWorkers: 2,
 						testTimeout: 30_000,
 						// Last resort so a single browser-level flake doesn't red the whole build.
