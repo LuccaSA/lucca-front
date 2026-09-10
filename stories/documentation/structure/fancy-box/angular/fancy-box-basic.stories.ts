@@ -11,13 +11,9 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface FancyBoxBasicStory {
 	backgroundEndStart: string;
-	backgroundEndStartUrl: string;
 	backgroundStartEnd: string;
-	backgroundStartEndUrl: string;
 	foregroundStartEnd: string;
-	foregroundStartEndUrl: string;
 	foregroundEndStart: string;
-	foregroundEndStartUrl: string;
 	size: string;
 	palette: string;
 	content: string;
@@ -36,14 +32,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Image en arrière plan du côté "fin" (droite en LTR, gauche en RTL).',
-			table: { category: 'inputs' },
-		},
-		backgroundEndStartUrl: {
-			control: {
-				type: 'text',
-			},
-			description: 'URL personnalisée pour l’image en arrière plan du côté "fin", prioritaire sur le sélecteur ci-dessus.',
+			description: 'Image en arrière plan, en bas du côté "début" (gauche en LTR, droite en RTL). Accepte aussi une URL pour une illustration personnalisée.',
 			table: { category: 'inputs' },
 		},
 		backgroundStartEnd: {
@@ -51,14 +40,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Image en arrière plan du côté "début" (gauche en LTR, droite en RTL).',
-			table: { category: 'inputs' },
-		},
-		backgroundStartEndUrl: {
-			control: {
-				type: 'text',
-			},
-			description: 'URL personnalisée pour l’image en arrière plan du côté "début", prioritaire sur le sélecteur ci-dessus.',
+			description: 'Image en arrière plan, en haut du côté "fin" (droite en LTR, gauche en RTL). Accepte aussi une URL pour une illustration personnalisée.',
 			table: { category: 'inputs' },
 		},
 		foregroundStartEnd: {
@@ -66,14 +48,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Image au premier plan du côté "début" (gauche en LTR, droite en RTL).',
-			table: { category: 'inputs' },
-		},
-		foregroundStartEndUrl: {
-			control: {
-				type: 'text',
-			},
-			description: 'URL personnalisée pour l’image au premier plan du côté "début", prioritaire sur le sélecteur ci-dessus.',
+			description: 'Image au premier plan, en haut du côté "fin" (droite en LTR, gauche en RTL). Accepte aussi une URL pour une illustration personnalisée.',
 			table: { category: 'inputs' },
 		},
 		foregroundEndStart: {
@@ -81,14 +56,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Image au premier plan du côté "fin" (droite en LTR, gauche en RTL).',
-			table: { category: 'inputs' },
-		},
-		foregroundEndStartUrl: {
-			control: {
-				type: 'text',
-			},
-			description: 'URL personnalisée pour l’image au premier plan du côté "fin", prioritaire sur le sélecteur ci-dessus.',
+			description: 'Image au premier plan, en bas du côté "début" (gauche en LTR, droite en RTL). Accepte aussi une URL pour une illustration personnalisée.',
 			table: { category: 'inputs' },
 		},
 		size: {
@@ -118,25 +86,23 @@ export default {
 } as Meta;
 
 function getTemplate(args: FancyBoxBasicStory): string {
-	const backgroundEndStartValue = args.backgroundEndStartUrl || (args.backgroundEndStart === 'bubbles' ? '' : args.backgroundEndStart);
+	const backgroundEndStartValue = args.backgroundEndStart === 'bubbles' ? '' : args.backgroundEndStart;
 	const backgroundEndStart = backgroundEndStartValue
 		? `
 		backgroundEndStart="${backgroundEndStartValue}"`
 		: ``;
-	const backgroundStartEndValue = args.backgroundStartEndUrl || (args.backgroundStartEnd === 'bubbles' ? '' : args.backgroundStartEnd);
+	const backgroundStartEndValue = args.backgroundStartEnd === 'bubbles' ? '' : args.backgroundStartEnd;
 	const backgroundStartEnd = backgroundStartEndValue
 		? `
 		backgroundStartEnd="${backgroundStartEndValue}"`
 		: ``;
-	const foregroundStartEndValue = args.foregroundStartEndUrl || args.foregroundStartEnd;
-	const foregroundStartEnd = foregroundStartEndValue
+	const foregroundStartEnd = args.foregroundStartEnd
 		? `
-		foregroundStartEnd="${foregroundStartEndValue}"`
+		foregroundStartEnd="${args.foregroundStartEnd}"`
 		: ``;
-	const foregroundEndStartValue = args.foregroundEndStartUrl || args.foregroundEndStart;
-	const foregroundEndStart = foregroundEndStartValue
+	const foregroundEndStart = args.foregroundEndStart
 		? `
-		foregroundEndStart="${foregroundEndStartValue}"`
+		foregroundEndStart="${args.foregroundEndStart}"`
 		: ``;
 	const sizeAttr = args.size === 'S' ? ` size="S"` : ``;
 	const paletteAttr = args.palette && args.palette !== 'product' ? ` palette="${args.palette}"` : ``;
@@ -167,10 +133,6 @@ export const Basic: StoryObj<FancyBoxBasicStory> = {
 		backgroundStartEnd: 'candies',
 		foregroundStartEnd: 'pizza',
 		foregroundEndStart: 'clips',
-		foregroundStartEndUrl: '',
-		backgroundEndStartUrl: '',
-		backgroundStartEndUrl: '',
-		foregroundEndStartUrl: '',
 		palette: 'product',
 		content: 'Content<br />Content<br />Content<br />Content<br />Content<br />Content',
 	},
