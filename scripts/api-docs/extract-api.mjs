@@ -1,0 +1,804 @@
+/**
+ * Extraction front-end for the LLM/API documentation surface of `@lucca-front/ng`,
+ * driven by the TypeScript compiler API (via ts-morph — bundling the same TS the
+ * repo compiles with). It resolves each secondary entry-point's public surface from
+ * the type system rather than a regex over the barrel, so `export *` re-exports are
+ * included, and it reads type parameters, deprecation, visibility and signatures
+ * from the AST — no `modifierKind` magic numbers, no `@deprecated`-as-string-terminator.
+ *
+ * This replaces the Compodoc `documentation.json` extraction of the earlier attempt:
+ * ts-morph reads Angular signal `input()`/`output()`/`model()` straight from source,
+ * so the surface no longer depends on Compodoc's renderer resolving them.
+ *
+ * Output is a compodoc-shaped `doc` object so the renderers and coverage report in
+ * `generate-llms.mjs` consume it unchanged. Extraction is purely syntactic (AST +
+ * JSDoc) wherever possible, which keeps it deterministic: the same source in yields
+ * the same `doc` out.
+ *
+ * @see generate-llms.mjs (the renderer/determinism contract this feeds)
+ */
+import { resolve } from 'node:path';
+
+import { Node, Project } from 'ts-morph';
+
+/**
+ * A normalised documentation entity. Fields are a superset across kinds; a given
+ * kind only populates the ones its renderer reads (see `generate-llms.mjs`).
+ * @typedef {Object} ApiEntity
+ * @property {string} name — the public export name (aliases resolved to the alias)
+ * @property {string} [rawdescription] — JSDoc description, tags excluded
+ * @property {boolean} [deprecated]
+ * @property {string} [deprecationMessage]
+ * @property {string[]} [typeParameters]
+ * @property {string} [selector]
+ * @property {any[]} [inputsClass]
+ * @property {any[]} [outputsClass]
+ * @property {any[]} [methodsClass]
+ * @property {any[]} [args]
+ * @property {string} [returnType]
+ * @property {any[]} [signatures] — per-overload `{ typeParameters, args, returnType }` for functions
+ * @property {any[]} [properties]
+ * @property {string} [rawtype]
+ * @property {any[]} [members]
+ * @property {string} [type]
+ *
+ * @typedef {Object} ApiDoc — compodoc-shaped extraction consumed by the renderers.
+ * @property {ApiEntity[]} components
+ * @property {ApiEntity[]} directives
+ * @property {ApiEntity[]} injectables
+ * @property {ApiEntity[]} interfaces
+ * @property {ApiEntity[]} classes
+ * @property {{ functions: ApiEntity[], typealiases: ApiEntity[], enumerations: ApiEntity[], variables: ApiEntity[] }} miscellaneous
+ */
+
+/** Angular signal-input factories whose call expression declares a component input. */
+const INPUT_CALLEES = new Set(['input', 'input.required', 'model', 'model.required']);
+// A model is two-way: it also publishes `<publicName>Change`, which no other input form does.
+const MODEL_CALLEES = new Set(['model', 'model.required']);
+// Which argument carries the `{ alias }` options object — the `.required` forms take no
+// initial value, so their options sit first.
+const OPTIONS_ARG = new Map([
+	['input', 1],
+	['input.required', 0],
+	['model', 1],
+	['model.required', 0],
+	['output', 0],
+	['outputFromObservable', 1],
+]);
+
+/** `alias: 'x'` from an options object literal, or `undefined`. */
+function aliasIn(arg) {
+	if (!arg || !Node.isObjectLiteralExpression(arg)) return undefined;
+	const prop = arg.getProperty('alias');
+	const value = prop && Node.isPropertyAssignment(prop) ? prop.getInitializer() : undefined;
+	return value && Node.isStringLiteral(value) ? value.getLiteralValue() : undefined;
+}
+
+/** JSDoc nodes attached to a declaration (variable JSDoc lives on the statement). */
+function jsDocsOf(node) {
+	const holder = Node.isVariableDeclaration(node) ? node.getVariableStatement() : node;
+	return holder && typeof holder.getJsDocs === 'function' ? holder.getJsDocs() : [];
+}
+
+/** JSDoc description (text before the first block tag), trimmed. */
+function descriptionOf(node) {
+	const docs = jsDocsOf(node);
+	return docs.length ? docs[docs.length - 1].getDescription().trim() : '';
+}
+
+/** First `@deprecated` tag across a set of declarations (covers overload signatures). */
+function firstDeprecation(declarations) {
+	for (const decl of declarations) {
+		for (const doc of jsDocsOf(decl)) {
+			for (const tag of doc.getTags()) {
+				if (tag.getTagName() === 'deprecated') return { deprecated: true, message: (tag.getCommentText() ?? '').trim() };
+			}
+		}
+	}
+	return { deprecated: false, message: '' };
+}
+
+/**
+ * Deprecation fields for a single member (input/output/method/property), spread into
+ * the member object only when present so undeprecated members stay clean. A deprecated
+ * input is common in a design system, so members carry their own deprecation, not just
+ * the owning entity.
+ * @param {import('ts-morph').Node} node
+ */
+function memberDeprecation(node) {
+	const { deprecated, message } = firstDeprecation([node]);
+	return deprecated ? { deprecated, deprecationMessage: message } : {};
+}
+
+/** Type-parameter texts (`['TId']`, `['T', 'K extends string']`) or `[]`. */
+function typeParamsOf(node) {
+	return typeof node.getTypeParameters === 'function' ? node.getTypeParameters().map((tp) => tp.getText()) : [];
+}
+
+/** Resolved type text, guarded — falls back to `undefined` if the checker throws. */
+function safeTypeText(type, enclosing) {
+	try {
+		return type.getText(enclosing);
+	} catch {
+		return undefined;
+	}
+}
+
+/**
+ * Presentation-ready type text for a code fence: strip JSDoc blocks leaked from
+ * object-literal member docs, drop `import("pkg").` qualifiers the checker emits
+ * for non-imported symbols, and collapse to a single line. Idempotent, so already
+ * clean AST type text passes through unchanged. Returns `undefined` for empty input
+ * so callers can `?? 'unknown'`.
+ * @param {string | undefined} text
+ */
+function normalizeType(text) {
+	if (!text) return undefined;
+	return text
+		.replace(/\/\*\*[\s\S]*?\*\//g, '')
+		.replace(/import\((?:"[^"]*"|'[^']*')\)\./g, '')
+		.replace(/\s+/g, ' ')
+		.trim();
+}
+
+/** Classify a declaration into a renderer bucket, or `null` when unsupported. */
+function classify(node) {
+	if (Node.isClassDeclaration(node)) {
+		if (node.getDecorator('Component')) return 'component';
+		if (node.getDecorator('Directive')) return 'directive';
+		if (node.getDecorator('Injectable') || node.getDecorator('Pipe')) return 'injectable';
+		return 'class';
+	}
+	if (Node.isFunctionDeclaration(node)) return 'function';
+	if (Node.isInterfaceDeclaration(node)) return 'interface';
+	if (Node.isTypeAliasDeclaration(node)) return 'typealias';
+	if (Node.isEnumDeclaration(node)) return 'enumeration';
+	if (Node.isVariableDeclaration(node)) return 'variable';
+	return null;
+}
+
+/** A string property of the first `@<name>({...})` decorator found, or `undefined`. */
+function decoratorString(classNode, decoratorNames, property) {
+	for (const decoratorName of decoratorNames) {
+		const arg = classNode.getDecorator(decoratorName)?.getArguments()[0];
+		if (!arg || !Node.isObjectLiteralExpression(arg)) continue;
+		const prop = arg.getProperty(property);
+		const init = prop && Node.isPropertyAssignment(prop) ? prop.getInitializer() : undefined;
+		if (init && Node.isStringLiteral(init)) return init.getLiteralValue();
+	}
+	return undefined;
+}
+
+/** `selector` string from a `@Component`/`@Directive` decorator, or `undefined`. */
+function selectorOf(classNode) {
+	return decoratorString(classNode, ['Component', 'Directive'], 'selector');
+}
+
+/**
+ * The handles a template needs but the class name never carries: `exportAs` for a
+ * template reference (`#ref="luTooltip"`), and a pipe's `name` (`value | luDate`).
+ */
+function templateHandlesOf(classNode) {
+	return {
+		exportAs: decoratorString(classNode, ['Component', 'Directive'], 'exportAs'),
+		pipeName: decoratorString(classNode, ['Pipe'], 'name'),
+	};
+}
+
+/**
+ * Public constructor parameters of a class a consumer instantiates itself
+ * (`new LuStringDateAdapter('en')`). Absent when nothing is declared, so an
+ * Angular-instantiated class publishes no misleading empty signature.
+ */
+function constructorArgsOf(classNode) {
+	const ctor = classNode.getConstructors().find((c) => c.getScope() === 'public');
+	if (!ctor || !ctor.getParameters().length) return undefined;
+	return paramsOf(ctor);
+}
+
+/**
+ * Binding type of a signal input from its resolved type — the type an author may write
+ * in a template, not the type the signal reads back. `InputSignalWithTransform<T, W>`
+ * carries both, and only `W` describes what the input accepts.
+ */
+function signalBindingType(prop) {
+	const args = safeTypeArguments(prop);
+	return args.length ? safeTypeText(args[args.length - 1], prop) : undefined;
+}
+function safeTypeArguments(prop) {
+	try {
+		return prop.getType().getTypeArguments();
+	} catch {
+		return [];
+	}
+}
+
+/**
+ * `@Input`/`@Output` decorator configuration of a class member, or `undefined` when
+ * the decorator is absent. Resolves the public name (`@Input('alias')` or
+ * `@Input({ alias: 'x' })`) and the `required` flag.
+ */
+function decoratorConfig(member, decoratorName) {
+	const decorator = typeof member.getDecorator === 'function' ? member.getDecorator(decoratorName) : undefined;
+	if (!decorator) return undefined;
+	const arg = decorator.getArguments()[0];
+	let alias;
+	let required = false;
+	if (arg && Node.isStringLiteral(arg)) alias = arg.getLiteralValue();
+	if (arg && Node.isObjectLiteralExpression(arg)) {
+		alias = aliasIn(arg);
+		const requiredProp = arg.getProperty('required');
+		required = !!(requiredProp && Node.isPropertyAssignment(requiredProp) && requiredProp.getInitializer()?.getText() === 'true');
+	}
+	return { alias, required };
+}
+
+/** Payload type of an `@Output() x = new EventEmitter<T>()` property, or `undefined`. */
+function emitterPayload(prop) {
+	const init = prop.getInitializer();
+	if (init && Node.isNewExpression(init)) {
+		const written = init.getTypeArguments()[0]?.getText();
+		if (written) return written;
+	}
+	return prop
+		.getTypeNode()
+		?.getText()
+		.match(/^EventEmitter<([\s\S]+)>$/)?.[1];
+}
+
+/**
+ * Component/directive inputs and outputs — every Angular declaration form: signal
+ * factories (`input()`/`model()`/`output()`), decorators (`@Input`/`@Output` on
+ * properties and setters) and `outputFromObservable()`. Every form's alias is resolved
+ * to the public name — the property name is not the template API when an alias is set.
+ *
+ * Declared on this class only — `membersOf` merges the base-class chain on top.
+ */
+function ownMembersOf(classNode) {
+	const inputsClass = [];
+	const outputsClass = [];
+	for (const prop of classNode.getProperties()) {
+		const rawdescription = descriptionOf(prop);
+		const init = prop.getInitializer();
+		const inputDecorator = decoratorConfig(prop, 'Input');
+		const outputDecorator = decoratorConfig(prop, 'Output');
+		if (inputDecorator) {
+			inputsClass.push({
+				name: inputDecorator.alias ?? prop.getName(),
+				type: normalizeType(prop.getTypeNode()?.getText() ?? safeTypeText(prop.getType(), prop)) ?? 'unknown',
+				defaultValue: init?.getText(),
+				required: inputDecorator.required,
+				rawdescription,
+				...memberDeprecation(prop),
+			});
+			continue;
+		}
+		if (outputDecorator) {
+			outputsClass.push({
+				name: outputDecorator.alias ?? prop.getName(),
+				type: normalizeType(emitterPayload(prop)) ?? 'void',
+				rawdescription,
+				...memberDeprecation(prop),
+			});
+			continue;
+		}
+		if (!init || !Node.isCallExpression(init)) continue;
+		const callee = init.getExpression().getText();
+		const typeArgs = init.getTypeArguments();
+		const writtenType = typeArgs[0]?.getText();
+		// `input<Read, Write>()` — an author binds the write type; the read type is internal.
+		const writtenBindingType = typeArgs[typeArgs.length - 1]?.getText();
+		const factoryAlias = aliasIn(init.getArguments()[OPTIONS_ARG.get(callee)]);
+		if (INPUT_CALLEES.has(callee)) {
+			const required = callee.endsWith('.required');
+			const initArgs = init.getArguments();
+			const publicName = factoryAlias ?? prop.getName();
+			const valueType = normalizeType(writtenBindingType ?? signalBindingType(prop)) ?? 'unknown';
+			inputsClass.push({
+				name: publicName,
+				type: valueType,
+				defaultValue: !required && initArgs.length ? initArgs[0].getText() : undefined,
+				required,
+				rawdescription,
+				...memberDeprecation(prop),
+			});
+			if (MODEL_CALLEES.has(callee)) {
+				outputsClass.push({
+					name: `${publicName}Change`,
+					type: valueType,
+					rawdescription,
+					...memberDeprecation(prop),
+				});
+			}
+		} else if (callee === 'output') {
+			outputsClass.push({
+				name: factoryAlias ?? prop.getName(),
+				type: normalizeType(writtenType ?? signalBindingType(prop)) ?? 'void',
+				rawdescription,
+				...memberDeprecation(prop),
+			});
+		} else if (callee === 'outputFromObservable') {
+			// `outputFromObservable(this.x)` never writes its payload — only `OutputEmitterRef<T>` carries it.
+			outputsClass.push({
+				name: factoryAlias ?? prop.getName(),
+				type: normalizeType(writtenType ?? signalBindingType(prop)) ?? 'unknown',
+				rawdescription,
+				...memberDeprecation(prop),
+			});
+		}
+	}
+	// `@Input() set x(...)` setters — the decorator's alias (if any) is the public name.
+	for (const setter of classNode.getSetAccessors()) {
+		const inputDecorator = decoratorConfig(setter, 'Input');
+		if (!inputDecorator) continue;
+		inputsClass.push({
+			name: inputDecorator.alias ?? setter.getName(),
+			type: normalizeType(setter.getParameters()[0]?.getTypeNode()?.getText()) ?? 'unknown',
+			required: inputDecorator.required,
+			rawdescription: descriptionOf(setter),
+			...memberDeprecation(setter),
+		});
+	}
+	return { inputsClass, outputsClass };
+}
+
+/** Class + base chain, most-derived first; an Angular component inherits its base's bindings. */
+function classChain(classNode) {
+	const chain = [];
+	const seen = new Set();
+	for (let node = classNode; node;) {
+		const key = `${node.getSourceFile().getFilePath()}#${node.getName() ?? ''}`;
+		if (seen.has(key)) break;
+		seen.add(key);
+		chain.push(node);
+		try {
+			node = node.getBaseClass();
+		} catch {
+			break;
+		}
+	}
+	return chain;
+}
+
+/**
+ * Bindings `hostDirectives` forwards: only the listed ones are public, and `'name: alias'`
+ * publishes the alias. `seen` carries the classes already being extracted down the
+ * traversal — a host-directive cycle would otherwise recurse until the stack gives out,
+ * the same guard `classChain` and `interfaceChain` already carry.
+ */
+function hostDirectiveMembers(classNode, seen) {
+	const inputsClass = [];
+	const outputsClass = [];
+	const decorator = classNode.getDecorator('Component') ?? classNode.getDecorator('Directive');
+	const arg = decorator?.getArguments()[0];
+	if (!arg || !Node.isObjectLiteralExpression(arg)) return { inputsClass, outputsClass };
+	const prop = arg.getProperty('hostDirectives');
+	const list = prop && Node.isPropertyAssignment(prop) ? prop.getInitializer() : undefined;
+	if (!list || !Node.isArrayLiteralExpression(list)) return { inputsClass, outputsClass };
+
+	for (const element of list.getElements()) {
+		// `hostDirectives: [Foo]` forwards nothing — only the object form lists bindings.
+		if (!Node.isObjectLiteralExpression(element)) continue;
+		const directiveProp = element.getProperty('directive');
+		const ref = directiveProp && Node.isPropertyAssignment(directiveProp) ? directiveProp.getInitializer() : undefined;
+		let source = { inputsClass: [], outputsClass: [] };
+		const declaration = ref && Node.isIdentifier(ref) ? ref.getDefinitionNodes().find((node) => Node.isClassDeclaration(node)) : undefined;
+		if (declaration && !seen.has(declaration)) source = membersOf(declaration, seen);
+
+		for (const [key, target, from] of [
+			['inputs', inputsClass, source.inputsClass],
+			['outputs', outputsClass, source.outputsClass],
+		]) {
+			const forwarded = element.getProperty(key);
+			const values = forwarded && Node.isPropertyAssignment(forwarded) ? forwarded.getInitializer() : undefined;
+			if (!values || !Node.isArrayLiteralExpression(values)) continue;
+			for (const entry of values.getElements()) {
+				if (!Node.isStringLiteral(entry)) continue;
+				const [own, alias] = entry
+					.getLiteralValue()
+					.split(':')
+					.map((part) => part.trim());
+				const origin = from.find((member) => member.name === own);
+				target.push({ ...origin, name: alias || own, type: origin?.type ?? 'unknown', required: origin?.required ?? false });
+			}
+		}
+	}
+	return { inputsClass, outputsClass };
+}
+
+/** Own + host-directive + inherited bindings; first writer wins, so a derived declaration overrides. */
+function membersOf(classNode, seen = new Set()) {
+	const inputs = new Map();
+	const outputs = new Map();
+	seen.add(classNode);
+	const host = hostDirectiveMembers(classNode, seen);
+	for (const node of classChain(classNode)) {
+		const own = node === classNode ? mergeMembers(ownMembersOf(node), host) : ownMembersOf(node);
+		for (const input of own.inputsClass) if (!inputs.has(input.name)) inputs.set(input.name, input);
+		for (const output of own.outputsClass) if (!outputs.has(output.name)) outputs.set(output.name, output);
+	}
+	return { inputsClass: [...inputs.values()], outputsClass: [...outputs.values()] };
+}
+
+function mergeMembers(first, second) {
+	return {
+		inputsClass: [...first.inputsClass, ...second.inputsClass],
+		outputsClass: [...first.outputsClass, ...second.outputsClass],
+	};
+}
+
+/**
+ * Public, non-`#`-private methods, instance and static alike — a static method is as
+ * callable as an instance one (`PhoneNumberFormatter.format`), so dropping it removes
+ * a real export. Lifecycle filtering stays in the renderer.
+ */
+function ownMethodsOf(classNode) {
+	const methods = [];
+	for (const method of classNode.getMethods()) {
+		if (method.getName().startsWith('#') || method.getScope() !== 'public') continue;
+		// A method with overload declarations only publishes those: its implementation
+		// signature (usually the widest union) is not callable as written.
+		const signatureNodes = method.getOverloads().length ? method.getOverloads() : [method];
+		for (const node of signatureNodes) {
+			methods.push({
+				name: method.getName(),
+				typeParameters: typeParamsOf(node),
+				args: paramsOf(node),
+				returnType: normalizeType(node.getReturnTypeNode()?.getText() ?? safeTypeText(node.getReturnType(), node)) ?? 'void',
+				static: method.isStatic() || undefined,
+				rawdescription: descriptionOf(node) || descriptionOf(method),
+				...memberDeprecation(node),
+			});
+		}
+	}
+	return methods;
+}
+
+/**
+ * Own + inherited public instance properties and getters, minus the ones already
+ * published as inputs or outputs — a signal input is a property too, and listing it
+ * twice would read as two distinct members. A readable member is part of the public
+ * contract (`LuTitleStrategy.title$`, `ALuPopupRef.onOpen`), so the surface owes it.
+ */
+/** Every factory whose result is already published as an input or an output. */
+const BINDING_CALLEES = new Set([...INPUT_CALLEES, 'output', 'outputFromObservable']);
+
+/** Is this member a signal binding (`input()`, `model()`, `output()`…) rather than plain state? */
+function isBindingDeclaration(member) {
+	const init = Node.isPropertyDeclaration(member) ? member.getInitializer() : undefined;
+	return !!init && Node.isCallExpression(init) && BINDING_CALLEES.has(init.getExpression().getText());
+}
+
+function writtenMemberType(member) {
+	return Node.isGetAccessorDeclaration(member) ? member.getReturnTypeNode()?.getText() : member.getTypeNode()?.getText();
+}
+
+function classPropertiesOf(classNode, publishedNames) {
+	const byName = new Map();
+	for (const node of classChain(classNode)) {
+		const members = [...node.getProperties(), ...node.getGetAccessors()];
+		for (const member of members) {
+			const name = member.getName();
+			if (name.startsWith('#') || name.startsWith('_') || member.getScope() !== 'public' || member.isStatic()) continue;
+			// An aliased binding is published under its alias, so the declaration name never
+			// matches `publishedNames` — the factory call is what identifies it.
+			if (isBindingDeclaration(member) || publishedNames.has(name) || byName.has(name)) continue;
+			byName.set(name, {
+				name,
+				// A getter carries its type on the return node; only a property has `getTypeNode`.
+				type: normalizeType(writtenMemberType(member) ?? safeTypeText(member.getType(), member)) ?? 'unknown',
+				optional: Node.isPropertyDeclaration(member) && member.hasQuestionToken(),
+				readonly: Node.isPropertyDeclaration(member) ? member.isReadonly() : true,
+				rawdescription: descriptionOf(member),
+				...memberDeprecation(member),
+			});
+		}
+	}
+	return [...byName.values()];
+}
+
+/** Own + inherited public methods; a name redeclared downstack hides every base signature of it. */
+function methodsOf(classNode) {
+	const methods = [];
+	const overridden = new Set();
+	for (const node of classChain(classNode)) {
+		const own = ownMethodsOf(node);
+		for (const method of own) if (!overridden.has(method.name)) methods.push(method);
+		for (const method of own) overridden.add(method.name);
+	}
+	return methods;
+}
+
+/**
+ * Parameter `{ name, type }` list, preferring the written type node. Markers that
+ * change the call contract are kept in the name: a rest parameter is `...name`
+ * (variadic, never optional), and a parameter with a `?` token or a default value
+ * is `name?` — otherwise a defaulted parameter would read as required.
+ */
+function paramsOf(node) {
+	return node.getParameters().map((param) => {
+		const rest = param.isRestParameter();
+		const optional = !rest && (param.hasQuestionToken() || param.hasInitializer());
+		const base = param.getName();
+		return {
+			name: rest ? `...${base}` : optional ? `${base}?` : base,
+			type: normalizeType(param.getTypeNode()?.getText() ?? safeTypeText(param.getType(), param)) ?? 'unknown',
+		};
+	});
+}
+
+/**
+ * Every public signature of a function: its overload declarations, or the single
+ * implementation when there are none. A function's public API is its overloads —
+ * keeping only one would drop the others (e.g. a custom-key form).
+ */
+function signaturesOf(declarations) {
+	const overloads = declarations.filter((decl) => Node.isFunctionDeclaration(decl) && !decl.getBody());
+	// Without overloads, only the callable declarations qualify: a name merged with an
+	// interface or a namespace also reaches here, and those carry no parameter list.
+	const sigNodes = overloads.length ? overloads : declarations.filter((decl) => Node.isFunctionDeclaration(decl));
+	return sigNodes.map((node) => ({
+		typeParameters: typeParamsOf(node),
+		args: paramsOf(node),
+		returnType: normalizeType(node.getReturnTypeNode()?.getText() ?? safeTypeText(node.getReturnType(), node)) ?? 'void',
+	}));
+}
+
+/**
+ * An interface and every interface it extends, nearest first. What a consumer may
+ * pass is the whole chain, so an inherited member is part of the published contract;
+ * `seen` keeps a circular `extends` from recursing.
+ * @returns {import('ts-morph').InterfaceDeclaration[]}
+ */
+function interfaceChain(interfaceNode, seen = new Set()) {
+	if (!interfaceNode || seen.has(interfaceNode)) return [];
+	seen.add(interfaceNode);
+	let bases = [];
+	try {
+		bases = interfaceNode.getBaseDeclarations().filter((decl) => Node.isInterfaceDeclaration(decl));
+	} catch {
+		bases = [];
+	}
+	return [interfaceNode, ...bases.flatMap((base) => interfaceChain(base, seen))];
+}
+
+/**
+ * Interface property `{ name, type, optional, readonly, rawdescription }` list, inherited
+ * members included. A name redeclared closer to the interface wins — that is what a
+ * consumer of the derived type sees.
+ */
+function propertiesOf(interfaceNode) {
+	const byName = new Map();
+	for (const node of interfaceChain(interfaceNode)) {
+		for (const prop of node.getProperties()) {
+			if (byName.has(prop.getName())) continue;
+			byName.set(prop.getName(), {
+				name: prop.getName(),
+				type: normalizeType(prop.getTypeNode()?.getText()) ?? 'unknown',
+				optional: prop.hasQuestionToken(),
+				readonly: prop.isReadonly(),
+				rawdescription: descriptionOf(prop),
+				...memberDeprecation(prop),
+			});
+		}
+	}
+	return [...byName.values()];
+}
+
+/**
+ * Interface method signatures, inherited members included — an overloaded name publishes
+ * one entry per declaration, and a name redeclared closer replaces the whole inherited
+ * overload set rather than adding to it.
+ */
+function interfaceMethodsOf(interfaceNode) {
+	const entries = [];
+	const claimed = new Set();
+	for (const node of interfaceChain(interfaceNode)) {
+		const own = node.getMethods().filter((method) => !claimed.has(method.getName()));
+		for (const method of own) {
+			entries.push({
+				name: method.getName(),
+				typeParameters: typeParamsOf(method),
+				args: paramsOf(method),
+				returnType: normalizeType(method.getReturnTypeNode()?.getText() ?? safeTypeText(method.getReturnType(), method)) ?? 'void',
+				optional: method.hasQuestionToken(),
+				rawdescription: descriptionOf(method),
+				...memberDeprecation(method),
+			});
+		}
+		for (const method of own) claimed.add(method.getName());
+	}
+	return entries;
+}
+
+/** Variable type: written annotation → reconstructed `new X<T>()` → resolved type. */
+function variableType(varDecl) {
+	const written = varDecl.getTypeNode()?.getText();
+	if (written) return normalizeType(written) ?? 'unknown';
+	const init = varDecl.getInitializer();
+	if (init && Node.isNewExpression(init)) {
+		const callee = init.getExpression().getText();
+		const typeArgs = init.getTypeArguments().map((t) => t.getText());
+		return normalizeType(typeArgs.length ? `${callee}<${typeArgs.join(', ')}>` : callee) ?? 'unknown';
+	}
+	return normalizeType(safeTypeText(varDecl.getType(), varDecl)) ?? 'unknown';
+}
+
+/** Build the normalised entity for one export name and its resolved declaration. */
+function buildEntity(name, kind, node, declarations) {
+	const { deprecated, message } = firstDeprecation(declarations);
+	const base = {
+		name,
+		// Declaration identity: two entry points can export different classes under one name.
+		sourceFile: node.getSourceFile().getFilePath(),
+		rawdescription: descriptionOf(node),
+		deprecated,
+		deprecationMessage: message,
+		typeParameters: typeParamsOf(node),
+	};
+	switch (kind) {
+		case 'component':
+		case 'directive':
+		case 'injectable':
+		case 'class': {
+			const members = membersOf(node);
+			const published = new Set([...members.inputsClass, ...members.outputsClass].map((m) => m.name));
+			return {
+				...base,
+				selector: selectorOf(node),
+				...templateHandlesOf(node),
+				// A component or a directive is built by Angular; a class or a service can be
+				// `new`-ed by hand (`new LuStringDateAdapter('en')`), and then the args matter.
+				constructorArgs: kind === 'class' || kind === 'injectable' ? constructorArgsOf(node) : undefined,
+				...members,
+				properties: classPropertiesOf(node, published),
+				methodsClass: methodsOf(node),
+			};
+		}
+		case 'function':
+			return { ...base, signatures: signaturesOf(declarations) };
+		case 'interface':
+			return { ...base, properties: propertiesOf(node), methodsClass: interfaceMethodsOf(node) };
+		case 'typealias':
+			return { ...base, rawtype: normalizeType(node.getTypeNode()?.getText()) ?? 'unknown' };
+		case 'enumeration':
+			return {
+				...base,
+				members: node.getMembers().map((m) => ({ name: m.getName(), value: m.getValue() })),
+			};
+		case 'variable':
+			return { ...base, type: variableType(node) };
+		default:
+			return base;
+	}
+}
+
+/** @param {ApiDoc} doc @param {string} kind */
+function bucketFor(doc, kind) {
+	switch (kind) {
+		case 'component':
+			return doc.components;
+		case 'directive':
+			return doc.directives;
+		case 'injectable':
+			return doc.injectables;
+		case 'interface':
+			return doc.interfaces;
+		case 'class':
+			return doc.classes;
+		case 'function':
+			return doc.miscellaneous.functions;
+		case 'typealias':
+			return doc.miscellaneous.typealiases;
+		case 'enumeration':
+			return doc.miscellaneous.enumerations;
+		case 'variable':
+			return doc.miscellaneous.variables;
+		default:
+			return null;
+	}
+}
+
+/** An empty compodoc-shaped `doc`. */
+export function emptyDoc() {
+	return {
+		components: [],
+		directives: [],
+		injectables: [],
+		interfaces: [],
+		classes: [],
+		miscellaneous: { functions: [], typealiases: [], enumerations: [], variables: [] },
+	};
+}
+
+/** Every bucket of a `doc`, as a flat array of arrays (for sorting/merging). */
+function allBuckets(doc) {
+	return [
+		doc.components,
+		doc.directives,
+		doc.injectables,
+		doc.interfaces,
+		doc.classes,
+		doc.miscellaneous.functions,
+		doc.miscellaneous.typealiases,
+		doc.miscellaneous.enumerations,
+		doc.miscellaneous.variables,
+	];
+}
+
+/**
+ * Extract a compodoc-shaped `doc` and the public-export name set from a barrel
+ * source file. `getExportedDeclarations()` resolves the surface through the type
+ * system — including `export *` and aliased/type-only re-exports.
+ * @param {import('ts-morph').SourceFile} barrelSourceFile
+ * @returns {{ doc: ApiDoc, names: Set<string> }}
+ */
+export function extractDoc(barrelSourceFile) {
+	const exported = barrelSourceFile.getExportedDeclarations();
+	const doc = emptyDoc();
+	for (const [name, declarations] of exported) {
+		const node = declarations.find((decl) => descriptionOf(decl)) ?? declarations[0];
+		const kind = node && classify(node);
+		const bucket = kind && bucketFor(doc, kind);
+		if (bucket) bucket.push(buildEntity(name, kind, node, declarations));
+	}
+	// Alpha-sort each bucket so the extraction is stable regardless of source order.
+	for (const bucket of allBuckets(doc)) bucket.sort((a, b) => a.name.localeCompare(b.name));
+	return { doc, names: new Set(exported.keys()) };
+}
+
+/**
+ * Create a ts-morph project from the repo's tsconfig (for module resolution and
+ * the type fallback), without eagerly loading the whole program.
+ * @param {string} root — workspace root
+ */
+export function createProject(root) {
+	return new Project({
+		tsConfigFilePath: resolve(root, 'tsconfig.json'),
+		skipAddingFilesFromTsConfig: true,
+	});
+}
+
+/**
+ * Extract one entry point's public API from its barrel, in the given project.
+ * @param {import('ts-morph').Project} project
+ * @param {string} indexAbsPath — absolute path to the barrel (public-api.ts)
+ * @returns {{ doc: ApiDoc, names: Set<string> }}
+ */
+export function extractLibrary(project, indexAbsPath) {
+	const sourceFile = project.getSourceFile(indexAbsPath) ?? project.addSourceFileAtPath(indexAbsPath);
+	return extractDoc(sourceFile);
+}
+
+/**
+ * Extract and MERGE the public API of many barrels into one `doc` + name set — the
+ * whole `@lucca-front/ng` surface. A symbol re-exported from several entry points is
+ * kept once (first occurrence wins); buckets are re-sorted after the merge so the
+ * union is stable regardless of barrel order.
+ * @param {import('ts-morph').Project} project
+ * @param {string[]} indexAbsPaths — absolute paths to the barrels
+ * @returns {{ doc: ApiDoc, names: Set<string> }}
+ */
+export function extractLibraries(project, indexAbsPaths) {
+	const merged = emptyDoc();
+	const names = new Set();
+	const seen = new Set();
+	const mergedBuckets = allBuckets(merged);
+	for (const indexAbsPath of indexAbsPaths) {
+		const { doc, names: barrelNames } = extractLibrary(project, indexAbsPath);
+		const barrelBuckets = allBuckets(doc);
+		for (let i = 0; i < mergedBuckets.length; i++) {
+			for (const entity of barrelBuckets[i]) {
+				// Keyed on the declaration, not the name: a re-export dedupes, two distinct
+				// classes called `LinkComponent` both stay.
+				const key = `${entity.name}\u0000${entity.sourceFile ?? ''}`;
+				if (seen.has(key)) continue;
+				seen.add(key);
+				mergedBuckets[i].push(entity);
+			}
+		}
+		for (const name of barrelNames) names.add(name);
+	}
+	for (const bucket of mergedBuckets) bucket.sort((a, b) => a.name.localeCompare(b.name));
+	return { doc: merged, names };
+}
