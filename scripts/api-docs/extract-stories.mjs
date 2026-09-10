@@ -96,6 +96,13 @@ function argTypesOf(storyObject) {
 	return out;
 }
 
+/** Merge argType lists by prop name, later sources winning — Storybook resolves them the same way. */
+function mergeArgTypes(...sources) {
+	const byName = new Map();
+	for (const source of sources) for (const arg of source) byName.set(arg.name, arg);
+	return [...byName.values()];
+}
+
 /** First template/string literal found in a function body's return values, or undefined. */
 function templateInBody(fnNode) {
 	if (!fnNode) return undefined;
@@ -179,8 +186,9 @@ export function extractStoriesFile(sourceFile) {
 			if (!storyObject) continue;
 		}
 		if (!storyObject) continue;
-		const own = argTypesOf(storyObject);
-		stories.push({ name: varDecl.getName(), argTypes: own.length ? own : metaArgTypes });
+		// A helper's real Storybook config sits under `storyPartial`; its argTypes are the story's own.
+		const partial = argTypesOf(asObjectLiteral(propInitializer(storyObject, 'storyPartial')));
+		stories.push({ name: varDecl.getName(), argTypes: mergeArgTypes(metaArgTypes, argTypesOf(storyObject), partial) });
 	}
 
 	return { title, stories, templates: templatesOf(sourceFile) };
@@ -230,17 +238,23 @@ export function renderStoriesSection(groups) {
 			const { arm, variant } = parseTitle(file.title);
 			lines.push(`### ${[arm, variant].filter(Boolean).join(' — ') || file.title}`, '');
 			for (const template of file.templates) {
-				lines.push('```html', template.trim(), '```', '');
+				// An interpolated template is TypeScript source, not markup a consumer can paste.
+				lines.push(template.includes('${') ? '```ts' : '```html', template.trim(), '```', '');
 			}
-			// One argTypes table per distinct prop set — stories of a file share the Meta's.
-			const seen = new Set();
+			const names = file.stories.map((story) => story.name);
+			if (names.length) lines.push(`**Stories:** ${names.map((name) => `\`${name}\``).join(', ')}`, '');
+			// One argTypes table per distinct prop set — stories of a file often share the Meta's.
+			const tables = new Map();
 			for (const story of file.stories) {
 				if (!story.argTypes.length) continue;
 				const signature = story.argTypes.map((a) => a.name).join(',');
-				if (seen.has(signature)) continue;
-				seen.add(signature);
-				lines.push('| Prop | Description |', '| --- | --- |');
-				for (const arg of story.argTypes) lines.push(`| \`${arg.name}\` | ${cell(arg.description)} |`);
+				const existing = tables.get(signature);
+				if (existing) existing.names.push(story.name);
+				else tables.set(signature, { names: [story.name], argTypes: story.argTypes });
+			}
+			for (const table of tables.values()) {
+				lines.push(`#### ${table.names.join(', ')}`, '', '| Prop | Description |', '| --- | --- |');
+				for (const arg of table.argTypes) lines.push(`| \`${arg.name}\` | ${cell(arg.description)} |`);
 				lines.push('');
 			}
 		}
