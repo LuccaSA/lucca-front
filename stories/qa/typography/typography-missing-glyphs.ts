@@ -15,9 +15,11 @@ export function runAfterViewInit(root: HTMLElement, work: (root: HTMLElement) =>
 	const ready = root.querySelector('#ready');
 	ready?.remove();
 	work(root);
-	if (ready) {
-		root.append(ready);
-	}
+	void document.fonts.ready.then(() => {
+		if (ready) {
+			root.append(ready);
+		}
+	});
 }
 
 export function highlightMissingCharacters(root: HTMLElement, selector: string, missing: ReadonlySet<string>, options?: HighlightMissingCharactersOptions): void {
