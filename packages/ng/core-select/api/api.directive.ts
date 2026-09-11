@@ -52,6 +52,13 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	 */
 	protected abstract getOptions(params: TParams, page: number): Observable<TOption[]>;
 
+	/**
+	 * Return every option of a group, ignoring pagination, so the group "select all" acts on the whole
+	 * group and not only on the pages already loaded. Override it in directives that set a grouping;
+	 * left undefined, the panel keeps its default behaviour and toggles the rendered options only.
+	 */
+	protected getGroupOptions?: (group: unknown) => Observable<TOption[]>;
+
 	#lastClue?: string;
 	#lastPage?: number;
 
@@ -70,8 +77,9 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			this.clearLastPageByClue();
 		});
 
-		const dataSource: SelectDataSource<TOption> = {
+		const dataSource: SelectDataSource<TOption, unknown> = {
 			paramsChange: this.params$,
+			...(this.getGroupOptions ? { getGroupOptions: (group: unknown) => this.getGroupOptions!(group) } : {}),
 			clueDebounceMs: this.debounceDuration,
 			getTotalCount: () => this.totalCount$,
 			reset: () => this.clearLastPageByClue(),
