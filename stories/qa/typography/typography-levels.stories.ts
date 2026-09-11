@@ -2,20 +2,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
-	selector: 'typography-headings-stories',
-	templateUrl: './typography-headings.stories.html',
+	selector: 'typography-levels-stories',
+	templateUrl: './typography-levels.stories.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class TypographyHeadingsStory {}
+class TypographyLevelsStory {}
 
 export default {
-	title: 'QA/Typography/Headings',
-	component: TypographyHeadingsStory,
+	title: 'QA/Typography/Levels',
+	component: TypographyLevelsStory,
 } as Meta;
 
 const template = () => ({});
 
-export const Basic: StoryObj<TypographyHeadingsStory> = {
+export const Basic: StoryObj<TypographyLevelsStory> = {
 	args: {},
 	render: template,
 };
