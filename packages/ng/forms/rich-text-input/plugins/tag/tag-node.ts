@@ -41,7 +41,7 @@ function getTagChips(editor: LexicalEditor): Map<NodeKey, Set<ComponentRef<ChipC
 }
 
 /** Destroy the chip components of a tag node that are no longer in the editor DOM. */
-export function destroyStaleTagChips(editor: LexicalEditor, nodeKey: NodeKey): void {
+function destroyStaleTagChips(editor: LexicalEditor, nodeKey: NodeKey): void {
 	const chips = getTagChips(editor);
 	const refs = chips.get(nodeKey);
 	if (!refs) {
