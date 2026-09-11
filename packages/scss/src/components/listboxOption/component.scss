@@ -66,6 +66,11 @@
 			}
 		}
 
+		.listboxOption-content-value {
+			flex-grow: 1;
+			min-inline-size: 0;
+		}
+
 		.listboxOption-content-checkboxField.checkboxField {
 			margin-block-start: var(--pr-t-spacings-25);
 			display: var(--components-listboxOption-content-checkboxField-display);

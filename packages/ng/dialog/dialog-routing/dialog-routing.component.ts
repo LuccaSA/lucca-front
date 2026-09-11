@@ -124,6 +124,8 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 
 		this.#ref = this.#dialog.open<C>({
 			...dialogConfig,
+			// A routed dialog closes through its route, not through the cdk's closeOnNavigation.
+			cdkConfigOverride: { closeOnNavigation: false, ...dialogConfig.cdkConfigOverride },
 			content: this.dialogTemplate(),
 			data,
 			canClose: this.#getCanCloseFn(dialogConfig),

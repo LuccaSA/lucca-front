@@ -7,7 +7,7 @@ description: De "New" à "Deprecated", nos composants répondent à un cycle de 
 
 ## Composants
 
-| Nom | Depuis  | Suppression | Action à réaliser |
+| Nom | Depuis | Suppression | Action à réaliser |
 | --- | --- | --- | --- |
 | Deprecated [Filter bar](https://prisme.lucca.io/94310e217/p/334d4a-filter-bar) | 19.2 | 22.0 | À remplacer par [Filter Pills](https://prisme.lucca.io/94310e217/p/053be4-filter-pill) & [Filter Bar](https://prisme.lucca.io/94310e217/p/13044b-filter-bar-). |
 | [List](https://prisme.lucca.io/94310e217/p/66df2f-list) | - | Non défini | À remplacer par [Sortable list](https://prisme.lucca.io/94310e217/p/883e34-sortable-list). |
@@ -29,9 +29,6 @@ description: De "New" à "Deprecated", nos composants répondent à un cycle de 
 
 | Nom | Depuis | Suppression | Action à réaliser |
 | --- | --- | --- | --- |
-| `.palette-grey` | 17.3 | 22.0 | À remplacer par `.palette-neutral`- [Schematics](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256) |
-| `.palette-primary` & `.palette-secondary` | 17.3 | 22.0 | À remplacer par `.palette-product`- [Schematics](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256) |
-| `.palette-lucca` | 17.3 | 22.0 | À remplacer par `.palette-brand` - [Schematics](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256) |
 | `.u-textLeft` `.u-textCenter` `.u-textRight`  | 18.1 | 22.0 | Doublon. À remplacer par :  `.u-textAlignLeft` `.u-textAlignCenter`  `.u-textAlignRight`  |
 | `.dialog-form` & `.dialog-formOptional` | 18.3 | 22.0 | À remplacer par la classe unique `.dialog-inside-formOptional` |
 | `.lu-dropdown-[...]` | 19.2 | 22.0 | À remplacer par le nouveau DOM du composant [Dropdown](https://prisme.lucca.io/94310e217/p/557682-dropdown). |
@@ -44,9 +41,4 @@ description: De "New" à "Deprecated", nos composants répondent à un cycle de 
 
 | Nom | Depuis | Suppression | Action à réaliser |
 | --- | --- | --- | --- |
-| `--palettes-grey-XXX` | 17.3 | 22.0 | À remplacer par `--palettes-neutral-XXX` - [Schematics](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256) |
-| `--palettes-primary-XXX` & `--palettes-secondary-XXX` | 17.3 | 22.0 | À remplacer par `--palettes-product-XXX` - [Schematics](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256) |
-| `--palettes-lucca-XXX` | 17.3 | 22.0 | À remplacer par `--palettes-brand-XXX` - [Schematics](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256) |
-| `--colors-white-color` | 18.2 | 22.0 | À remplacer par `--palettes-neutral-0` ou `--pr-t-elevation-surface-raised` selon si la couleur en question est considérée comme une couleur ou une surface. |
-| `--colors-black-color` | 18.2 | 22.0 | À remplacer par `--palettes-neutral-900` |
 | `--commons-borderRadius-XXX` | 20.2 | 22.0 | À remplacer par `--pr-t-border-radius-XXX` - [Schematics](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0) |

@@ -22,7 +22,9 @@ export function loadConfig(): Config {
 			fileKey: cfg.figma?.fileKey || 'PQEOcUF9CYfKNqaejAGLWP',
 		},
 		output: {
-			skillsDir: cfg.output?.skillsDir || path.join(__dirname, '..', '..', '.github', 'skills'),
+			// SKILLS_DIR redirects the whole run to another folder — the way to do a control generation
+			// without overwriting the committed skills.
+			skillsDir: process.env['SKILLS_DIR'] || cfg.output?.skillsDir || path.join(__dirname, '..', '..', '.github', 'skills'),
 		},
 		concurrency: cfg.concurrency || 5,
 	};

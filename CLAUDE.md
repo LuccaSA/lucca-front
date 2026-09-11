@@ -43,6 +43,7 @@ Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss �
 - Composants standalone, `changeDetection: OnPush` (imposé par ESLint), `ViewEncapsulation.None` (les styles sont du SCSS global), styles SCSS (défauts schematics d'angular.json).
 - Sélecteurs préfixés `lu` (`lu-kebab-case` pour les composants, `luCamelCase` pour les directives attribut).
 - APIs signal-based : `input()` / `input.required()` / `output()`. Chaque input public a un commentaire JSDoc.
+- Un composant qui a un style dédié déclare `styleUrl: './<name>.component.scss'`, et ce fichier commence par `@use '@lucca-front/scss/src/components/<nameCamelCase>';` — c'est ce `@use` qui embarque le CSS du composant. L'oublier livre le composant sans style, sans erreur de build. Un composant dont le template embarque d'autres composants — Angular (`<lu-*>`) ou HTML portant les classes d'un autre composant Prisme — importe aussi leurs styles dans son propre.
 - Host bindings via la métadonnée `host: {}` : classe CSS de base posée directement (`class: 'numericBadge'`), conditionnels via `[class.is-X]` (voir `numeric-badge` pour la forme canonique).
 - Garder les composants design system « dumb » ; les connecter aux APIs Lucca via des directives séparées (ex. `simple-select`/`multi-select` + directives API). L'accessibilité clavier est une priorité.
 - Règles DX de contributing.md : utiliser les transforms `booleanAttribute`/`numberAttribute`, éviter les noms d'inputs génériques (`config`, `param`), typer les inputs avec des unions de strings pour l'autocomplétion, ne jamais entrer en collision avec un input natif de l'hôte. Les contrats d'inputs/outputs publiés sont des breaking changes.
@@ -58,6 +59,7 @@ Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss �
 - Toujours utiliser les tokens/variables (`--pr-t-*`, `--palettes-*`, `--components-<name>-*`), jamais de valeur en dur.
 - Les styles vivent dans des `@layer` (`reset → base → components → mods → product → utils`) ; le SCSS d'un composant suit le découpage de `_sample/` (`index`/`component`/`vars`/`mods`/`states`/`exports`).
 - Tout nouveau composant doit être enregistré dans `packages/scss/src/commons/utils/highlight-prisme.scss`.
+- Le SCSS d'un composant n'est chargé par son composant Angular que via le `@use '@lucca-front/scss/src/components/<name>'` de son `.component.scss` : toujours vérifier ce câblage en créant ou déplaçant un composant.
 
 Référence : [Guidelines dev UI](https://prisme.lucca.io/94310e217/p/929c63-guidelines-dev-ui) (Prisme). Le formatage (tabs, ordre alphabétique, hexadécimaux en majuscules…) est vérifié par `npm run lint:style`.
 
@@ -72,6 +74,19 @@ Chaque entrypoint qui affiche du texte a un `translations.ts` indexé par locale
 - **Stories QA** (`stories/qa/<composant>/`) : un `@Component` wrapper dans `<composant>.stories.ts` avec `templateUrl` pointant vers `<composant>.stories.html`, qui contient une `<table class="demo-QAtable">` comparant côte à côte la version HTML (classes CSS pures) et la version Angular (composants `<lu-*>`). La colonne Angular doit utiliser de vrais composants `lu-*`, jamais du HTML brut avec des classes.
 - **Stories de documentation** (`stories/documentation/<catégorie>/<composant>/`) : `Meta`/`StoryObj` standards sur la classe du composant, titre reflétant l'arborescence (`Documentation/<Catégorie>/<Composant>/Angular/<Variante>`) ; les variantes Angular et HTML vivent dans des dossiers frères `angular/` et `html&css/`. Utiliser `generateInputs(inputs, argTypes)` et `createTestStory` de `stories/helpers/stories`.
   - **Convention `argTypes`** : chaque arg est rangé dans une `table.category` — `inputs` (`input()`), `outputs` (`output()`), `models` (`model()`). Un output est en plus exposé comme action loggée (`action: '<nom>'`, `control: false`), documente le type émis via `table.type.summary` (`void` si l'`output()` n'a pas de type, sinon `T`) et est bindé dans le template du `render` (`(nom)="nom($event)"`, avec les args passés en `props`). Voir `stories/documentation/_sample/angular/basic.stories.ts`.
+
+## Git & PR
+
+Ne jamais commit ni push sans demande explicite. Les fix ciblent `master`, les features la branche `release/vX.X` du cycle en cours.
+
+- **Nommage de branche** : `type/kebab-case-description`, avec les mêmes types que les commits (`feat`, `fix`, `chore`, `docs`, `test`, `refactor`) — `fix/select-option-aria-disabled`, `feat/tag-only-icon`. Description courte (50 caractères max), pas de point ni de slash supplémentaire. Le nom de branche n'est **pas** le titre de commit slugifié : ni parenthèses, ni deux-points, ni la phrase entière.
+- **Titres de PR et messages de commit** : conventional commits, en anglais, sujet à l'impératif — `type(scope): subject`. Types autorisés : `feat`, `fix`, `chore`, `docs`, `test`, `refactor`. Le scope est le nom de l'entrypoint en kebab-case (`core-select`, `date2`, `approbation-inbox`). Les PR étant squash-mergées, le titre de la PR devient le message de commit conservé dans l'historique : c'est le même exercice. Exception : les PR de release et les PR de synchronisation entre `master` et `release/vX.X` (`chore/sync-*`) se mergent en merge commit, jamais en squash — sinon l'historique commun aux deux branches est écrasé et les mêmes changements réapparaissent aux merges suivants. Leur titre échappe aux conventional commits, il ne devient pas un message de commit.
+- **Description de PR** : partir du template (`gh pr create --template feature.md`, ou `bugfix.md`). Le premier bloc est la description fonctionnelle reprise dans le changelog, le second — facultatif — est le contexte technique pour les relecteurs. Les séparateurs `-----` sont parsés par c-3po (`check-functional-description`, `release-drafter`) : ne pas les retirer.
+- **Écrire pour un humain** : la description est lue par des relecteurs, pas par un outil — elle doit être courte et facile à comprendre. Phrases simples, pas d'énumération du diff (le relecteur l'a sous les yeux). Un changement local et sans ambiguïté se résume en une phrase ; garder les descriptions détaillées pour ce qui touche plusieurs composants, modifie un comportement existant ou demande de justifier un choix d'implémentation. Relire et raccourcir avant de soumettre.
+- **Labels** : poser le label de type (`FIX`, `Feature`, `Technical`…) et, quand le code est majoritairement produit par IA, `🤖 Produced by AI` (l'autocomplétion ne compte pas).
+- **Scope maîtrisé** : rester dans le périmètre demandé, ne pas refactorer en passant. Si un changement hors périmètre paraît nécessaire, le signaler plutôt que de le faire. À la fin du travail, lister explicitement ce qui a été touché en dehors du périmètre demandé — fichier déplacé, helper introduit, nettoyage annexe, dépendance ajoutée — pour que l'auteur de la PR le voie avant de soumettre.
+
+Attentes détaillées côté relecture : [contributing.md](contributing.md#pull-requests).
 
 ## Docs & skills
 

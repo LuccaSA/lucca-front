@@ -21,10 +21,19 @@
  * component REMOVED mid-minor would not appear in the API section (its removal and content are
  * still captured by the story-source diff). Never observed to date (component counts are
  * monotonic within a minor).
+ *
+ * Technical minors (see TECHNICAL_MINORS in version-config.ts): the covering minor's skill also
+ * hosts one `fixes/<tech-M-m-p>.md` per published patch > .0 of each technical minor it covers
+ * (e.g. 21.3 hosts `fixes/21-4-1.md`, `fixes/21-4-2.md`). Same git-sourced machinery, but the
+ * reading direction is inverted and the header says so: `references/` documents the covering
+ * minor's latest patch, `<tech>.0` is equivalent to it, and the technical fixes describe what a
+ * project on `<tech>.p` HAS in addition (read every technical fix ≤ the installed patch). The
+ * `.0` itself gets no file: its delta vs the covering minor is the framework bump (huge, no API).
  */
 
 import { execSync } from 'child_process';
 import { PackageAPI, VersionConfig } from '../types';
+import { TechnicalMinorPatches } from '../version-config';
 import { diffPackageApi } from '../collectors/api-diff';
 import { collectionAt } from '../collectors/schematics';
 import { getApiAtTag } from './changelog-writer';
@@ -43,6 +52,18 @@ export interface FixesInput {
 	patchTags: string[];
 	/** Components discovered at the latest patch (slug + ngPackage for the API diff). */
 	components: FixesComponent[];
+	/** Technical minors covered by this minor (from resolveMinorVersion). Their patches > .0 get a fix file too. */
+	technicalMinors?: TechnicalMinorPatches[];
+}
+
+/** Context of a fix file written for a technical minor's patch (inverted reading direction). */
+interface TechnicalFixContext {
+	/** The technical minor, e.g. "21.4". */
+	minorKey: string;
+	reason: string;
+	/** Covering minor ("21.3") and its latest documented patch ("21.3.1"). */
+	coveredBy: string;
+	coveringLatestPatch: string;
 }
 
 /**
@@ -50,7 +71,7 @@ export interface FixesInput {
  * Returns the number of fix files written.
  */
 export function writeFixes(skillsDir: string, input: FixesInput): { written: number } {
-	const { version, patchTags, components } = input;
+	const { version, patchTags, components, technicalMinors = [] } = input;
 	cleanFixesDirectory(skillsDir, version);
 
 	let written = 0;
@@ -62,18 +83,47 @@ export function writeFixes(skillsDir: string, input: FixesInput): { written: num
 		writeFixFile(skillsDir, version, patchVersion, md);
 		written++;
 	}
+
+	// Technical minors covered by this skill: one file per patch > .0, chained from the .0
+	// (equivalent to this minor's latest patch — no file for it, see header).
+	const coveringLatestPatch = `${version.major}.${version.minor}.${version.patch}`;
+	for (const tech of technicalMinors) {
+		const ctx: TechnicalFixContext = {
+			minorKey: tech.minorKey,
+			reason: tech.reason,
+			coveredBy: `${version.major}.${version.minor}`,
+			coveringLatestPatch,
+		};
+		for (let i = 1; i < tech.patchTags.length; i++) {
+			const prevTag = tech.patchTags[i - 1];
+			const currTag = tech.patchTags[i];
+			const md = buildFixMd(prevTag, currTag, components, ctx);
+			writeFixFile(skillsDir, version, currTag.replace(/^v/, ''), md);
+			written++;
+		}
+	}
 	return { written };
 }
 
-function buildFixMd(prevTag: string, currTag: string, components: FixesComponent[]): string {
+function buildFixMd(prevTag: string, currTag: string, components: FixesComponent[], technical?: TechnicalFixContext): string {
 	const prev = prevTag.replace(/^v/, '');
 	const curr = currTag.replace(/^v/, '');
 	const date = tagDate(currTag);
 
-	let md = `# Fix ${curr} — correctifs vs ${prev}\n\n`;
-	md += `> Correctifs livrés par le patch \`${curr}\`${date ? ` (publié le ${date})` : ''}. `;
-	md += `La documentation de cette skill (\`references/\`) reflète le **dernier** patch de la mineure : `;
-	md += `si votre projet est sur un patch **antérieur** à \`${curr}\`, les correctifs ci-dessous ne sont **pas** dans votre version.\n`;
+	let md: string;
+	if (technical) {
+		md = `# Fix ${curr} — mineure technique ${technical.minorKey} (couverte par ${technical.coveredBy}), changements vs ${prev}\n\n`;
+		md += `> Changements livrés par le patch \`${curr}\`${date ? ` (publié le ${date})` : ''} de la mineure technique \`${technical.minorKey}\` (${technical.reason}), `;
+		md += `dont le patch \`${technical.minorKey}.0\` est équivalent à \`${technical.coveringLatestPatch}\`. `;
+		md += `La documentation de cette skill (\`references/\`) reflète \`${technical.coveringLatestPatch}\` : `;
+		md += `si votre projet est en \`${curr}\` ou **postérieur** (même mineure), les changements ci-dessous **sont** dans votre version et **complètent** la documentation ; `;
+		md += `s'il est sur un patch **antérieur** à \`${curr}\` (ou sur \`${technical.coveredBy}.x\`), ils n'y sont **pas**.\n`;
+	} else {
+		md = `# Fix ${curr} — correctifs vs ${prev}\n\n`;
+		md += `> Correctifs livrés par le patch \`${curr}\`${date ? ` (publié le ${date})` : ''}. `;
+		md += `La documentation de cette skill (\`references/\`) reflète le **dernier** patch de la mineure : `;
+		md += `si votre projet est sur un patch **antérieur** à \`${curr}\`, les correctifs ci-dessous ne sont **pas** dans votre version.\n`;
+	}
 	md += `> Storybook exact de ce patch : https://lucca-front.lucca.io/${currTag}/storybook\n\n`;
 
 	const sections: string[] = [];

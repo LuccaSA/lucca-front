@@ -1,0 +1,18 @@
+<!-- Run `npm run typography:update-font-coverage` after a font update to refresh which glyphs show as missing. -->
+<div class="glyphsGrid">
+	@for (character of characters; track character.char; let i = $index) {
+		@if (character.startsBucket && i > 0) {
+			<div class="glyphsGrid-bucketDivider" luTooltip="From here on, glyphs come from the extended (lazily-loaded) font file">
+				<span>EXT</span><span>→</span>
+			</div>
+		}
+		<div class="glyphsGrid-cell" [luTooltip]="character.codePoint">
+			<div class="glyphsGrid-glyph pr-u-h1 pr-u-fontFamilyBrand" [style.font-weight]="fontWeight()" [style.font-style]="fontStyle()">
+				{{ character.char }}
+			</div>
+		</div>
+	}
+</div>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
