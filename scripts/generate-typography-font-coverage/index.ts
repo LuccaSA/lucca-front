@@ -72,8 +72,7 @@ function collectCorpusCharacters(): string[] {
 async function fetchCoveredCodePoints(url: string): Promise<Set<number> | null> {
 	const response = await fetch(url);
 	if (!response.ok) {
-		console.warn(`  ! ${url} -> HTTP ${response.status}, skipping`);
-		return null;
+		throw new Error(`Failed to fetch ${url}: HTTP ${response.status}`);
 	}
 	const buffer = Buffer.from(await response.arrayBuffer());
 	const font = fontkit.create(buffer);
