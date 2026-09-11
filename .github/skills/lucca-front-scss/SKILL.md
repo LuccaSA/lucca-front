@@ -150,6 +150,27 @@ Pour surcharger un composant imbriqué, scoper avec la classe parente : `.parent
 - `:host-context` plutôt que `::ng-deep` (déprécié) quand le contexte impose de modifier un composant.
 - `ViewEncapsulation.None` : les styles des composants `packages/ng` vivent dans le SCSS global.
 
+### Câbler le SCSS au composant Angular
+
+Un composant Angular n'embarque jamais son style implicitement : son `styleUrl` doit pointer un `.component.scss` contenant le `@use` du composant SCSS. Sans ce `@use`, le composant est livré sans style, et aucune erreur de build ne le signale.
+
+```scss
+// numeric-badge.component.scss
+@use '@lucca-front/scss/src/components/numericBadge';
+```
+
+`<name>` est le nom camelCase du dossier de `packages/scss/src/components/`, pas le sélecteur kebab-case.
+
+Un `@use` par composant SCSS affiché : si le template embarque d'autres composants — un composant Angular (`<lu-*>`) ou du HTML portant les classes d'un autre composant Prisme — leurs styles doivent être importés ici aussi, en plus de celui du composant lui-même.
+
+```scss
+// date-input.component.scss — le champ embarque un calendrier, un bouton et une croix de reset
+@use '@lucca-front/scss/src/components/dateField';
+@use '@lucca-front/scss/src/components/calendar';
+@use '@lucca-front/scss/src/components/button';
+@use '@lucca-front/scss/src/components/clear';
+```
+
 ## Enregistrer un nouveau composant
 
 Tout nouveau composant doit être ajouté au registre `packages/scss/src/commons/utils/highlight-prisme.scss` (sélecteurs de l'utilitaire `.pr-u-highlightPrisme`) :
@@ -183,4 +204,6 @@ lu-progress-stepper,
 - [ ] Media queries dans leur contexte
 - [ ] Style réparti dans les bons fichiers (`vars` / `component` / `mods` / `states`)
 - [ ] Nouveau composant enregistré dans `highlight-prisme.scss`
+- [ ] Composant Angular associé : `styleUrl` renseigné et `@use '@lucca-front/scss/src/components/<name>'` présent dans le `.component.scss`
+- [ ] Styles des composants embarqués par le template (`<lu-*>` ou HTML Prisme) également importés
 - [ ] `npm run lint:style` passe
