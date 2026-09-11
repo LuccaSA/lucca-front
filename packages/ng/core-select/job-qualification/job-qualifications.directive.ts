@@ -49,6 +49,21 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 		});
 	}
 
+	/**
+	 * Job qualifications are grouped by job, but the panel only knows the options of the pages it
+	 * already loaded: a job spanning several pages would be partially selected. Fetch the whole job
+	 * instead, page by page, so "select all" covers the options that are not rendered yet. Groups are
+	 * only displayed when the clue is empty, hence the clue-less params.
+	 */
+	protected override getGroupOptions = (jobId: unknown): Observable<T[]> => this.#getJobOptions(jobId as number, 0);
+
+	#getJobOptions(jobId: number, page: number): Observable<T[]> {
+		const params = { ...this.filters(), 'job.id': jobId, sort: 'level.position' };
+		return this.getOptions(params, page).pipe(
+			switchMap((options) => (options.length < this.pageSize ? of(options) : this.#getJobOptions(jobId, page + 1).pipe(map((nextOptions) => [...options, ...nextOptions])))),
+		);
+	}
+
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
 		return this.httpClient
 			.get<T[] | { items: T[] }>(this.url(), {
