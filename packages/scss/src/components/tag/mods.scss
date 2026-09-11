@@ -78,3 +78,7 @@
 @mixin withIcon {
 	--components-tag-before-content: ' ';
 }
+
+@mixin onlyIcon {
+	--components-tag-padding-inline: var(--pr-t-spacings-25);
+}

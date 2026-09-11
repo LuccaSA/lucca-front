@@ -40,6 +40,13 @@
 
 		&:has(.lucca-icon) {
 			@include withIcon;
+
+			// mask condition is necessary for hiddenLabel
+			&:not(:has(.tag-content)),
+			&:has(.tag-content:empty),
+			&:has(.tag-content.pr-u-mask) {
+				@include onlyIcon;
+			}
 		}
 
 		&:has(.tag-content:empty) {
