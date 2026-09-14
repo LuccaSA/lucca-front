@@ -139,6 +139,77 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 		});
 	});
 
+	describe('trigger element', () => {
+		function trigger(fixture: ComponentFixture<unknown>): HTMLElement | null {
+			return fixture.nativeElement.querySelector('.simpleSelect-field-input');
+		}
+
+		it('should be a button below the S breakpoint, so tapping it on iOS does not raise the keyboard', () => {
+			// Act
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Assert
+			expect(trigger(fixture)?.tagName).toBe('BUTTON');
+			// Without this an implicit submit fires when the field sits in a form
+			expect(trigger(fixture)).toHaveAttribute('type', 'button');
+		});
+
+		it('should stay a searchable text input above the S breakpoint', () => {
+			// Act
+			const fixture = createHost(FormFieldHostComponent, false);
+
+			// Assert
+			expect(trigger(fixture)?.tagName).toBe('INPUT');
+			expect(trigger(fixture)).toHaveAttribute('role', 'combobox');
+		});
+
+		it('should announce that it opens the sheet rather than an inline listbox', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			fixture.detectChanges();
+
+			// Assert
+			expect(trigger(fixture)).toHaveAttribute('aria-haspopup', 'dialog');
+			expect(trigger(fixture)).toHaveAttribute('aria-expanded', 'true');
+			expect(trigger(fixture)).not.toHaveAttribute('role');
+		});
+
+		it('should render the placeholder as text, a button having no placeholder of its own', () => {
+			// Act
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Assert
+			expect(trigger(fixture)?.querySelector('.simpleSelect-field-placeholder')?.textContent?.trim()).toBeTruthy();
+		});
+
+		it('should drop the placeholder once a value is selected, the value displayer taking over', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).writeValue(options[0]);
+			fixture.detectChanges();
+
+			// Assert
+			expect(trigger(fixture)?.querySelector('.simpleSelect-field-placeholder')).toBeNull();
+		});
+
+		it('should carry the disabled state so the button cannot be tapped', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).setDisabledState(true);
+			fixture.detectChanges();
+
+			// Assert
+			expect((trigger(fixture) as HTMLButtonElement).disabled).toBe(true);
+		});
+	});
+
 	describe('panel title', () => {
 		it('should use the label associated by the form field', () => {
 			// Arrange

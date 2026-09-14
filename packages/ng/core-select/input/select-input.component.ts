@@ -60,7 +60,18 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
-	public filterPillMode = false;
+
+	// Signal-backed because a filter pill takes the select over *after* it has rendered, and
+	// `bottomSheetMode` — which gates the trigger element itself — is computed from it.
+	readonly #filterPillMode = signal(false);
+
+	public get filterPillMode(): boolean {
+		return this.#filterPillMode();
+	}
+
+	public set filterPillMode(filterPillMode: boolean) {
+		this.#filterPillMode.set(filterPillMode);
+	}
 
 	public readonly ignorePresentation = input(false, { transform: luBooleanAttribute });
 
@@ -72,7 +83,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public readonly highlightedOption = output<TOption>();
 
-	private readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+	// Below the `S` breakpoint the trigger is a `<button>` rather than the text input, so this is only
+	// ever focused, never read as an input.
+	private readonly inputElementRef = viewChild<ElementRef<HTMLElement>>('inputElement');
 
 	readonly disabled$ = new BehaviorSubject(false);
 	readonly filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
@@ -504,11 +517,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return label?.tagName === 'LABEL' ? this.getLabelText(label) : '';
 	}
 
-	// Read the label text without its adornments (help tooltip, required marker, screen-reader-only copy),
-	// so the title stays the plain field label.
+	// Read the label text without its adornments (help tooltip, required marker, screen-reader-only copy)
+	// nor, when the label wraps the select, the field's own rendered content — its selected value or the
+	// placeholder standing in for it — so the title stays the plain field label.
 	private getLabelText(label: HTMLElement): string {
 		const clone = label.cloneNode(true) as HTMLElement;
-		clone.querySelectorAll('[role="button"], .pr-u-mask').forEach((node) => node.remove());
+		const selectTag = this.hostElementRef.nativeElement.tagName.toLowerCase();
+		clone.querySelectorAll(`${selectTag}, [role="button"], .pr-u-mask`).forEach((node) => node.remove());
 		return (clone.textContent ?? '').trim();
 	}
 

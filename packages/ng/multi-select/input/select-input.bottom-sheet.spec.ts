@@ -94,6 +94,64 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 		});
 	});
 
+	describe('trigger element', () => {
+		function trigger(fixture: ComponentFixture<HostComponent>): HTMLElement | null {
+			return fixture.nativeElement.querySelector('.multipleSelect-displayer-search');
+		}
+
+		it('should be a button below the S breakpoint, so tapping it on iOS does not raise the keyboard', () => {
+			// Act
+			const { fixture } = createSelect(true);
+
+			// Assert
+			expect(trigger(fixture)?.tagName).toBe('BUTTON');
+			// Without this an implicit submit fires when the field sits in a form
+			expect(trigger(fixture)).toHaveAttribute('type', 'button');
+		});
+
+		it('should stay a searchable text input above the S breakpoint', () => {
+			// Act
+			const { fixture } = createSelect(false);
+
+			// Assert
+			expect(trigger(fixture)?.tagName).toBe('INPUT');
+			expect(trigger(fixture)).toHaveAttribute('type', 'text');
+			expect(trigger(fixture)).toHaveAttribute('role', 'combobox');
+		});
+
+		it('should announce that it opens the sheet rather than an inline listbox', () => {
+			// Arrange
+			const { fixture, select } = createSelect(true);
+
+			// Act
+			select.openPanel();
+			fixture.detectChanges();
+
+			// Assert
+			expect(trigger(fixture)).toHaveAttribute('aria-haspopup', 'dialog');
+			expect(trigger(fixture)).toHaveAttribute('aria-expanded', 'true');
+			expect(trigger(fixture)).not.toHaveAttribute('role');
+		});
+
+		it('should drop the input-only attributes a button has no use for', () => {
+			// Act
+			const { fixture } = createSelect(true);
+
+			// Assert
+			expect(trigger(fixture)).not.toHaveAttribute('placeholder');
+			expect(trigger(fixture)).not.toHaveAttribute('readonly');
+			expect(trigger(fixture)).not.toHaveAttribute('aria-activedescendant');
+		});
+
+		it('should render the placeholder as text, a button having no placeholder of its own', () => {
+			// Act
+			const { fixture } = createSelect(true);
+
+			// Assert
+			expect(trigger(fixture)?.textContent?.trim()).toBeTruthy();
+		});
+	});
+
 	describe('focus', () => {
 		it('should not send focus back to the covered displayer below the S breakpoint', () => {
 			// Arrange

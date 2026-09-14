@@ -69,6 +69,18 @@
 			&::placeholder {
 				color: var(--components-multiSelect-placeholder);
 			}
+
+			// Below the S breakpoint the trigger is a button instead of a text input, so the native
+			// button chrome has to be stripped and its text — standing in for the placeholder, which a
+			// button has no equivalent of — coloured and aligned the way the placeholder was.
+			&.mod-button {
+				appearance: none;
+				text-align: start;
+				color: var(--components-multiSelect-placeholder);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 		}
 
 		.multipleSelect-displayer-label {

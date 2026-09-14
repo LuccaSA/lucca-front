@@ -4,33 +4,58 @@
 			<ng-container *luPortal="prefix" />
 		}
 	</span>
-	<input
-		class="simpleSelect-field-input"
-		type="text"
-		role="combobox"
-		aria-haspopup="listbox"
-		[attr.aria-activedescendant]="activeDescendant$ | async"
-		[attr.aria-expanded]="panelOpenSignal()"
-		[attr.aria-controls]="ariaControls"
-		[attr.placeholder]="inputPlaceholder ? inputPlaceholder : intl().placeholder"
-		[ngModel]="clue"
-		(ngModelChange)="clueChanged($event)"
-		[ngModelOptions]="{ standalone: true }"
-		[readonly]="!searchable"
-		[disabled]="(disabled$ | async) ?? false"
-		(keyup.space)="inputSpace($event)"
-		luInput
-		#inputElement
-		[attr.autocomplete]="autocomplete()"
-		[attr.tabindex]="inputTabindex()"
-		[attr.aria-labelledby]="valueID"
-	/>
+	@if (bottomSheetMode()) {
+		<!--
+			The panel opens as a modal sheet that embeds its own search input, so the field itself is only ever
+			a trigger. Keeping a text input here makes iOS focus it and raise the software keyboard on a field
+			that is about to be covered by the sheet; a button is both what this control actually is and what
+			mobile browsers treat as a tap target rather than a text entry.
+		-->
+		<button
+			class="simpleSelect-field-input mod-button"
+			type="button"
+			aria-haspopup="dialog"
+			[attr.aria-expanded]="panelOpenSignal()"
+			[attr.aria-controls]="ariaControls"
+			[disabled]="(disabled$ | async) ?? false"
+			luInput
+			#inputElement
+			[attr.tabindex]="inputTabindex()"
+			[attr.aria-labelledby]="valueID"
+		>
+			@if (!hasValue()) {
+				<span class="simpleSelect-field-placeholder">{{ inputPlaceholder ? inputPlaceholder : intl().placeholder }}</span>
+			}
+		</button>
+	} @else {
+		<input
+			class="simpleSelect-field-input"
+			type="text"
+			role="combobox"
+			aria-haspopup="listbox"
+			[attr.aria-activedescendant]="activeDescendant$ | async"
+			[attr.aria-expanded]="panelOpenSignal()"
+			[attr.aria-controls]="ariaControls"
+			[attr.placeholder]="inputPlaceholder ? inputPlaceholder : intl().placeholder"
+			[ngModel]="clue"
+			(ngModelChange)="clueChanged($event)"
+			[ngModelOptions]="{ standalone: true }"
+			[readonly]="!searchable"
+			[disabled]="(disabled$ | async) ?? false"
+			(keyup.space)="inputSpace($event)"
+			luInput
+			#inputElement
+			[attr.autocomplete]="autocomplete()"
+			[attr.tabindex]="inputTabindex()"
+			[attr.aria-labelledby]="valueID"
+		/>
+	}
 	<div class="simpleSelect-field-value" [attr.id]="valueID">
 		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 	</div>
 	@if (!filterPillMode && !impersonation()) {
 		@if (clearable() && hasValue() && (disabled$ | async) === false) {
-			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event); inputElement.focus()">{{ intl().clear }}</lu-clear>
+			<lu-clear class="simpleSelect-field-clear" (onClear)="clearValue($event)">{{ intl().clear }}</lu-clear>
 		}
 		<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />
 	}
