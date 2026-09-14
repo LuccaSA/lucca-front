@@ -2,14 +2,17 @@ import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, ScrollStrat
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, ElementRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
 import { getPushPanelViewportMargin } from '@lucca-front/ng/core';
-import { addAttributesOnCdkContainer, LuSelectPanelRef, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
+import { addAttributesOnCdkContainer, LuSelectPanelRef, SELECT_ID, SELECT_LABEL_ID, ɵopenSelectPanelSheet } from '@lucca-front/ng/core-select';
+import { LuDialogRef, LuDialogService } from '@lucca-front/ng/dialog';
 import { takeUntil } from 'rxjs';
 import { LuSelectPanelComponent } from '../panel';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LuSimpleSelectInputComponent } from './select-input.component';
 
 abstract class BaseSelectPanelRef<T> extends LuSelectPanelRef<T, T> {
-	protected readonly portalRef: ComponentPortal<LuSelectPanelComponent<T>>;
+	/** Carries this ref and the select input down to the panel, however it ends up being rendered. */
+	protected readonly panelInjector: Injector;
+
 	instance: LuSelectPanelComponent<T>;
 
 	protected panelRef: ComponentRef<LuSelectPanelComponent<T>>;
@@ -20,7 +23,7 @@ abstract class BaseSelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 	) {
 		super();
 
-		this.portalRef = new ComponentPortal<LuSelectPanelComponent<T>>(LuSelectPanelComponent, undefined, this.createInjector(selectInput, parentInjector));
+		this.panelInjector = this.createInjector(selectInput, parentInjector);
 	}
 
 	protected createInjector(selectInput: LuSimpleSelectInputComponent<T>, parentInjector: Injector): Injector {
@@ -54,7 +57,7 @@ class SelectPanelRef<T> extends BaseSelectPanelRef<T> {
 		selectInput: LuSimpleSelectInputComponent<T>,
 	) {
 		super(parentInjector, selectInput);
-		this.panelRef = overlayRef.attach(this.portalRef);
+		this.panelRef = overlayRef.attach(new ComponentPortal<LuSelectPanelComponent<T>>(LuSelectPanelComponent, undefined, this.panelInjector));
 		this.instance = this.panelRef.instance;
 
 		overlayRef
@@ -75,13 +78,51 @@ class SelectPanelRef<T> extends BaseSelectPanelRef<T> {
 	}
 }
 
+class SelectPanelSheetRef<T> extends BaseSelectPanelRef<T> {
+	private readonly dialogRef: LuDialogRef<LuSelectPanelComponent<T>, never>;
+
+	// The sheet can be closed from either side (a selection here, the backdrop/Escape/close button there);
+	// this keeps the two from bouncing the close back at each other.
+	private dialogClosed = false;
+
+	constructor(dialogService: LuDialogService, parentInjector: Injector, selectInput: LuSimpleSelectInputComponent<T>) {
+		super(parentInjector, selectInput);
+
+		const panelComponent: Type<LuSelectPanelComponent<T>> = LuSelectPanelComponent;
+
+		this.dialogRef = ɵopenSelectPanelSheet(dialogService, panelComponent, this.panelInjector, selectInput.panelTitle());
+		this.panelRef = this.dialogRef.cdkRef.componentRef!;
+		this.instance = this.panelRef.instance;
+
+		this.dialogRef.closed$.pipe(takeUntil(this.closed)).subscribe(() => {
+			this.dialogClosed = true;
+			this.close();
+		});
+	}
+
+	updatePosition(): void {
+		// The sheet is pinned to the viewport, it never follows the field.
+	}
+
+	override close(): void {
+		super.close();
+
+		if (!this.dialogClosed) {
+			this.dialogClosed = true;
+			this.dialogRef.dismiss();
+		}
+		// Focus goes back to the field through the dialog's own `restoreFocus`.
+	}
+}
+
 class SelectPanelDOMHostRef<T> extends BaseSelectPanelRef<T> {
 	constructor(host: ViewContainerRef, parentInjector: Injector, selectInput: LuSimpleSelectInputComponent<T>) {
 		super(parentInjector, selectInput);
-		const panelComponent = this.portalRef.component as Type<LuSelectPanelComponent<T>>;
+
+		const panelComponent: Type<LuSelectPanelComponent<T>> = LuSelectPanelComponent;
 
 		this.panelRef = host.createComponent(panelComponent, {
-			injector: this.portalRef.injector ?? undefined,
+			injector: this.panelInjector,
 		});
 		this.instance = this.panelRef.instance;
 	}
@@ -102,11 +143,16 @@ export class LuSimpleSelectPanelRefFactory {
 	protected positionBuilder = inject(OverlayPositionBuilder);
 	protected scrollStrategies = inject(ScrollStrategyOptions);
 	protected parentInjector = inject(Injector);
+	protected dialogService = inject(LuDialogService);
 	private selectLabelId = inject(SELECT_LABEL_ID);
 	private selectId = inject(SELECT_ID);
 
 	buildPanelRef<T>(selectInput: LuSimpleSelectInputComponent<T>, overlayConfigOverride: OverlayConfig = {}): LuSelectPanelRef<T, T> {
-		const overlayConfig = selectInput.bottomSheetMode() ? this.buildBottomSheetOverlayConfig(overlayConfigOverride) : this.buildOverlayConfig(overlayConfigOverride);
+		if (selectInput.bottomSheetMode()) {
+			return new SelectPanelSheetRef(this.dialogService, this.parentInjector, selectInput);
+		}
+
+		const overlayConfig = this.buildOverlayConfig(overlayConfigOverride);
 		const overlayRef = this.overlay.create(overlayConfig);
 
 		addAttributesOnCdkContainer(overlayRef, this.selectLabelId, this.selectId);
@@ -157,22 +203,6 @@ export class LuSimpleSelectPanelRefFactory {
 		overlayConfig.minWidth = this.elementRef.nativeElement.clientWidth;
 		overlayConfig.maxHeight = '100vh';
 		overlayConfig.maxWidth = '100vw';
-
-		return overlayConfig;
-	}
-
-	// Below the `S` breakpoint the panel is detached from the field and pinned to the bottom of the viewport
-	// as a full-width bottom sheet: a solid backdrop, blocked page scroll, and the field's search input
-	// re-rendered inside the sheet (see the panel template).
-	protected buildBottomSheetOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {
-		const overlayConfig: OverlayConfig = { ...overlayConfigOverride };
-		overlayConfig.positionStrategy = this.positionBuilder.global().bottom('0').start('0');
-		overlayConfig.scrollStrategy = this.scrollStrategies.block();
-		overlayConfig.hasBackdrop = true;
-		overlayConfig.backdropClass = 'cdk-overlay-dark-backdrop';
-		overlayConfig.panelClass = 'mod-bottomSheet';
-		overlayConfig.width = '100%';
-		overlayConfig.maxHeight = '90dvh';
 
 		return overlayConfig;
 	}

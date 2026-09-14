@@ -123,9 +123,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	private readonly belowSmallBreakpoint = injectMediaMinBreakpoint('S', true);
 
 	/**
-	 * Below the `S` breakpoint (800px) the panel opens as a full-width bottom sheet that embeds its own
+	 * Below the `S` breakpoint (800px) the panel opens as a dialog in `sheet` mode that embeds its own
 	 * search input, instead of a popover anchored to the field — mirroring how filter pills move the input
-	 * inside their overlay. Filter pills already provide their own overlay, so they keep their behaviour.
+	 * inside their overlay. Filter pills already provide their own overlay, so they keep their behavior.
 	 */
 	readonly bottomSheetMode = computed(() => (this.belowSmallBreakpoint() ?? false) && !this.filterPillMode);
 

@@ -22,6 +22,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { provideLuDialog } from '@lucca-front/ng/dialog';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -61,6 +62,8 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		},
 		provideLuSelectLabelsAndIds(),
 		LuMultiSelectPanelRefFactory,
+		// Below the `S` breakpoint the panel opens as a dialog in `sheet` mode.
+		provideLuDialog(),
 		{
 			provide: FILTER_PILL_INPUT_COMPONENT,
 			useExisting: forwardRef(() => LuMultiSelectInputComponent),

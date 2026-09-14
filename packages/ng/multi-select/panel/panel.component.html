@@ -1,53 +1,58 @@
-<!-- In bottom sheet mode the panel is a modal surface: it names itself with the field label, traps focus and
-	auto-captures it into its own search input, since the displayer it covers is no longer reachable. The trap
-	stays off on desktop, where focus belongs to the displayer's own input. -->
-<lu-select-panel-layout
-	class="lu-option-picker-panel mod-multiple"
-	data-testid="dialog-panel"
-	[loading]="loading()"
-	[contentTabIndex]="0"
-	[bottomSheet]="selectInput.bottomSheetMode()"
-	[attr.role]="selectInput.bottomSheetMode() ? 'dialog' : null"
-	[attr.aria-modal]="selectInput.bottomSheetMode() ? 'true' : null"
-	[attr.aria-label]="selectInput.bottomSheetMode() ? selectInput.panelTitle() || null : null"
-	[cdkTrapFocus]="selectInput.bottomSheetMode()"
-	[cdkTrapFocusAutoCapture]="selectInput.bottomSheetMode()"
-	(scrolled)="onScroll($event)"
->
-	@if (selectInput.bottomSheetMode()) {
-		<!-- Bottom sheet embeds its own search input, the way filter pills move the field inside their overlay.
-		It sits outside the scroll content so it stays pinned while the options scroll. -->
-		<header panel-header class="lu-select-panel-layout-header">
-			<div class="lu-select-panel-layout-header-bar">
-				<span class="lu-select-panel-layout-header-title">{{ selectInput.panelTitle() }}</span>
-				<button type="button" class="lu-select-panel-layout-header-close" [attr.aria-label]="intl().close" (click)="panelRef.close()">
-					<lu-icon icon="signClose" />
-				</button>
+@if (selectInput.bottomSheetMode()) {
+	<!-- Below the S breakpoint the panel is a dialog in `sheet` mode: the surface, the backdrop, the focus
+	trap, the close button and the focus restoration all come from the dialog, so the panel only fills in
+	its title, its own search input — the displayer it covers is no longer reachable — and its content. -->
+	<lu-dialog>
+		<lu-dialog-header>
+			@if (selectInput.panelTitle(); as title) {
+				<h1>{{ title }}</h1>
+			}
+			<div dialogHeaderContent>
+				<ng-container [ngTemplateOutlet]="sheetSearch" />
 			</div>
-			<div class="textField">
-				<div class="textField-input">
-					<input
-						class="textField-input-value"
-						type="text"
-						role="combobox"
-						aria-haspopup="listbox"
-						[attr.aria-expanded]="true"
-						[attr.aria-controls]="selectId"
-						[attr.placeholder]="intl().placeholder"
-						[ngModel]="clue()"
-						(ngModelChange)="selectInput.clueChanged($event)"
-						[ngModelOptions]="{ standalone: true }"
-						[readonly]="!searchable"
-						(keydown)="selectInput.onKeyDownNavigation($event)"
-						cdkFocusInitial
-					/>
-					<div class="textField-input-affix">
-						<lu-icon class="textField-input-affix-icon" icon="searchMagnifyingGlass" />
-					</div>
-				</div>
+		</lu-dialog-header>
+		<lu-dialog-content data-testid="dialog-panel" tabindex="0" (scroll)="onScroll($event)">
+			<ng-container [ngTemplateOutlet]="panelContent" />
+		</lu-dialog-content>
+	</lu-dialog>
+} @else {
+	<lu-select-panel-layout
+		class="lu-option-picker-panel mod-multiple"
+		data-testid="dialog-panel"
+		[loading]="loading()"
+		[contentTabIndex]="0"
+		(scrolled)="onScroll($event)"
+	>
+		<ng-container [ngTemplateOutlet]="panelContent" />
+	</lu-select-panel-layout>
+}
+
+<ng-template #sheetSearch>
+	<div class="textField">
+		<div class="textField-input">
+			<input
+				class="textField-input-value"
+				type="text"
+				role="combobox"
+				aria-haspopup="listbox"
+				[attr.aria-expanded]="true"
+				[attr.aria-controls]="selectId"
+				[attr.placeholder]="intl().placeholder"
+				[ngModel]="clue()"
+				(ngModelChange)="selectInput.clueChanged($event)"
+				[ngModelOptions]="{ standalone: true }"
+				[readonly]="!searchable"
+				(keydown)="selectInput.onKeyDownNavigation($event)"
+				cdkFocusInitial
+			/>
+			<div class="textField-input-affix">
+				<lu-icon class="textField-input-affix-icon" icon="searchMagnifyingGlass" />
 			</div>
-		</header>
-	}
+		</div>
+	</div>
+</ng-template>
+
+<ng-template #panelContent>
 	<lu-listbox multiple [tree]="!!treeGenerator" [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
 		<!-- The header is projected inside the listbox because it can contain selectable elements
 		(e.g. the select-all checkbox) that are referenced by aria-activedescendant -->
@@ -143,4 +148,4 @@
 			<ng-container *luPortal="selectInput.addOptionLabel" />
 		</lu-listbox-option>
 	}
-</lu-select-panel-layout>
+</ng-template>

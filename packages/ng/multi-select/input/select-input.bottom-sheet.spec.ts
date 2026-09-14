@@ -66,7 +66,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 	}
 
 	describe('overlay', () => {
-		it('should pin the panel to the bottom of the viewport below the S breakpoint', () => {
+		it('should open the panel as a dialog in sheet mode below the S breakpoint', () => {
 			// Arrange
 			const { select } = createSelect(true);
 
@@ -74,8 +74,11 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			select.openPanel();
 
 			// Assert
-			expect(document.querySelector('.cdk-overlay-pane')).toHaveClass('mod-bottomSheet');
-			expect(document.querySelector('.cdk-overlay-dark-backdrop')).not.toBeNull();
+			const pane = document.querySelector('.cdk-overlay-pane');
+			expect(pane).toHaveClass('dialog');
+			expect(pane).toHaveClass('mod-sheet');
+			expect(pane).toHaveClass('mod-maxContent');
+			expect(document.querySelector('.dialog_backdrop')).not.toBeNull();
 		});
 
 		it('should keep anchoring the panel to the field above the S breakpoint', () => {
@@ -86,8 +89,8 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			select.openPanel();
 
 			// Assert
-			expect(document.querySelector('.cdk-overlay-pane')).not.toHaveClass('mod-bottomSheet');
-			expect(document.querySelector('.cdk-overlay-dark-backdrop')).toBeNull();
+			expect(document.querySelector('.cdk-overlay-pane')).not.toHaveClass('dialog');
+			expect(document.querySelector('.dialog_backdrop')).toBeNull();
 		});
 	});
 
@@ -118,8 +121,8 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 	});
 
 	describe('sheet header', () => {
-		function panel(): HTMLElement | null {
-			return document.querySelector<HTMLElement>('.lu-select-panel-layout');
+		function sheet(): HTMLElement | null {
+			return document.querySelector<HTMLElement>('cdk-dialog-container');
 		}
 
 		it('should mark the sheet as a modal dialog named after the field, with its own search input', () => {
@@ -132,13 +135,14 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			TestBed.inject(ApplicationRef).tick();
 
 			// Assert
-			expect(panel()).toHaveAttribute('role', 'dialog');
-			expect(panel()).toHaveAttribute('aria-modal', 'true');
-			expect(panel()).toHaveAttribute('aria-label', 'Options');
-			expect(panel()?.querySelector('.textField-input-value')).toHaveAttribute('cdkFocusInitial');
+			expect(sheet()).toHaveAttribute('role', 'dialog');
+			expect(sheet()).toHaveAttribute('aria-modal', 'true');
+			expect(sheet()).toHaveAttribute('aria-label', 'Options');
+			expect(sheet()?.querySelector('h1')?.textContent?.trim()).toBe('Options');
+			expect(sheet()?.querySelector('.textField-input-value')).toHaveAttribute('cdkFocusInitial');
 		});
 
-		it('should not render a header above the S breakpoint', () => {
+		it('should not render a sheet above the S breakpoint', () => {
 			// Arrange
 			const { fixture, select } = createSelect(false);
 
@@ -148,9 +152,8 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			TestBed.inject(ApplicationRef).tick();
 
 			// Assert
-			expect(panel()).not.toBeNull();
-			expect(panel()).not.toHaveAttribute('role', 'dialog');
-			expect(panel()?.querySelector('.lu-select-panel-layout-header')).toBeNull();
+			expect(document.querySelector('.lu-select-panel-layout')).not.toBeNull();
+			expect(sheet()).toBeNull();
 		});
 	});
 });

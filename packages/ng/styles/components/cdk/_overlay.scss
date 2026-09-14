@@ -41,14 +41,10 @@
 		max-inline-size: 30rem;
 	}
 
-	&:has(> lu-select-panel) {
+	// Caps the panel anchored to the field only: below the `S` breakpoint the panel is rendered by the
+	// dialog as a sheet, which spans the whole viewport and sizes itself.
+	&:not(.dialog):has(> lu-select-panel) {
 		max-inline-size: 35rem !important;
-	}
-
-	// Below the `S` breakpoint the select panel is pinned to the bottom of the viewport as a full-width
-	// bottom sheet, so it must shed the popover's max-inline-size cap.
-	&.mod-bottomSheet {
-		max-inline-size: 100% !important;
 	}
 }
 
