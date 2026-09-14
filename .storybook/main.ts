@@ -1,4 +1,5 @@
 import { StorybookConfig } from '@storybook/angular-vite';
+import autoprefixer from 'autoprefixer';
 import { mergeConfig, UserConfig } from 'vite';
 
 import { dirname } from 'path';
@@ -15,12 +16,7 @@ function getAbsolutePath(value: string): any {
 
 const config: StorybookConfig = {
 	stories: ['../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-	addons: [
-        getAbsolutePath('@storybook/addon-a11y'),
-        getAbsolutePath('@storybook/addon-docs'),
-        getAbsolutePath('@storybook/addon-mcp'),
-        getAbsolutePath("@storybook/addon-vitest")
-    ],
+	addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-docs'), getAbsolutePath('@storybook/addon-mcp'), getAbsolutePath('@storybook/addon-vitest')],
 	framework: {
 		name: '@storybook/angular-vite',
 		options: {},
@@ -29,7 +25,15 @@ const config: StorybookConfig = {
 	staticDirs: ['./public'],
 	viteFinal: async (config) => {
 		const userConfig: UserConfig = {
+			// Mirror the CSS pipeline the published package ships (sass + autoprefixer, see build.js).
+			css: {
+				transformer: 'postcss',
+				postcss: {
+					plugins: [autoprefixer()],
+				},
+			},
 			build: {
+				cssMinify: 'esbuild',
 				rolldownOptions: {
 					output: {
 						chunkFileNames: '[hash].js',
