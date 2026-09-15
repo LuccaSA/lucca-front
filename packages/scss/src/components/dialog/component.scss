@@ -6,7 +6,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	animation-name: var(--components-dialog-animationOpening);
-	animation-duration: var(--commons-animations-durations-standard);
+	animation-duration: var(--components-dialog-animationDuration);
 	inset: var(--components-dialog-inset);
 	inline-size: var(--components-dialog-width);
 	block-size: var(--components-dialog-height);
@@ -21,7 +21,7 @@
 	max-inline-size: var(--components-dialog-maxWidth) !important;
 	max-block-size: var(--components-dialog-maxHeight) !important;
 	transition-property: scale, translate, inline-size, block-size, inset;
-	transition-duration: var(--commons-animations-durations-standard);
+	transition-duration: var(--components-dialog-animationDuration);
 	overflow: hidden;
 	translate: var(--components-dialog-translateX) var(--components-dialog-translateY);
 	scale: var(--components-dialog-scale);

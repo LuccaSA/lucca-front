@@ -7,8 +7,13 @@ import { LuDialogConfig, LuDialogRef, LuDialogService } from '@lucca-front/ng/di
  *
  * Below the `S` breakpoint the panel stops being a popover anchored to the field and becomes a modal
  * surface pinned to the bottom of the viewport. That surface already exists as the dialog's `sheet`
- * mode — backdrop, blocked page scroll, slide up animation, focus trap, focus restoration and close
- * button all come with it — so the panel is opened as a dialog instead of as a bespoke overlay.
+ * mode — backdrop, blocked page scroll, focus trap, focus restoration and close button all come with
+ * it — so the panel is opened as a dialog instead of as a bespoke overlay.
+ *
+ * The opening animation is disabled (`mod-noOpeningAnimation`): the sheet's search input autofocuses
+ * on open, which raises the iOS virtual keyboard while the slide-up animation is still running. The
+ * keyboard's own viewport resize then fights the animation and the sheet ends up visibly offset.
+ * Appearing instantly sidesteps the conflict entirely.
  *
  * @param dialogService the dialog service provided alongside the select input
  * @param panel the panel component to render inside the sheet
@@ -21,6 +26,7 @@ export function openSelectPanelSheet<TPanel>(dialogService: LuDialogService, pan
 		mode: 'sheet',
 		size: 'maxContent',
 		ariaLabel: ariaLabel || undefined,
+		panelClasses: ['mod-noOpeningAnimation'],
 		// The panel ref and the select input reach the panel through this injector: the dialog's own
 		// `providers` hook is reserved by the service for `LuDialogRef`.
 		cdkConfigOverride: { injector },
