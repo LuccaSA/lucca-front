@@ -1,4 +1,4 @@
-import { catchError, concatMap, defer, distinctUntilChanged, finalize, map, Observable, of, scan, startWith, switchMap, takeWhile, tap, timer } from 'rxjs';
+import { catchError, concatMap, defer, distinctUntilChanged, filter, finalize, map, Observable, of, scan, startWith, switchMap, takeWhile, tap, timer } from 'rxjs';
 import { SelectDataSource } from '../select.model';
 
 export interface BuildOptionsFromDataSourceDeps {
@@ -8,13 +8,19 @@ export interface BuildOptionsFromDataSourceDeps {
 	setLoading: (loading: boolean) => void;
 }
 
+/**
+ * State of a single page in the accumulator: a page stays `pending` until its request emits, so the
+ * pagination guard never mistakes a page that is still loading for a page the data source answered empty.
+ */
+interface PageState<TOption> {
+	status: 'pending' | 'loaded';
+	items: readonly TOption[];
+}
+
+type PageEmission<TOption> = PageState<TOption> & { page: number };
+
 export function buildOptionsFromDataSource<TOption>(ds: SelectDataSource<TOption>, deps: BuildOptionsFromDataSourceDeps): Observable<readonly TOption[]> {
 	const { nextPage$, clue$, isPanelOpen$, setLoading } = deps;
-
-	const page$ = nextPage$.pipe(
-		scan((page) => page + 1, 0),
-		startWith(0),
-	);
 
 	const normalizedClue$ = clue$.pipe(
 		map((clue) => clue ?? ''),
@@ -36,37 +42,55 @@ export function buildOptionsFromDataSource<TOption>(ds: SelectDataSource<TOption
 			return debouncedClue$.pipe(
 				switchMap((clue) => {
 					ds.reset?.();
-					return page$.pipe(
-						concatMap((page) => {
-							setLoading(true);
-							return ds.getOptions({ clue, page }).pipe(
-								catchError(() => of([] as readonly TOption[])),
-								tap(() => setLoading(false)),
-								startWith([] as readonly TOption[]),
-								map((items) => ({ items, page })),
-							);
-						}),
-						scan(
-							(acc, { items, page }) => {
-								acc[page] = items;
-								return acc;
-							},
-							{} as Record<number, readonly TOption[]>,
-						),
-						// Stop calling pages when last two pages are empty
-						takeWhile((pages) => {
-							const indexes = Object.keys(pages)
-								.map((p) => parseInt(p))
-								.sort((a, b) => a - b);
-							const lastIndexes = indexes.slice(-2);
-							return lastIndexes.length < 2 || !lastIndexes.every((i) => pages[i]?.length === 0);
-						}),
-						map((pages) => Object.values(pages).flat()),
-						// Applied on the accumulated list so cross-page decorations (eg. homonyms) can be computed
-						// Falls back to the raw accumulated options so a failing decoration doesn't kill the whole stream
-						switchMap((options) => defer(() => ds.transformOptions?.(options) ?? of(options)).pipe(catchError(() => of(options)))),
-						finalize(() => setLoading(false)), // Avoid infinite loading on complete API or error
-					);
+					// `defer` so the paging state below is rebuilt for each clue, alongside the accumulator
+					return defer(() => {
+						let isPageLoading = false;
+						let lastPage = 0;
+
+						return nextPage$.pipe(
+							// Only one page in flight at a time: scrolling to the bottom of the panel can ask for the
+							// next page twice (Firefox emits two scroll events where Chrome emits one), and asking for
+							// page n+1 before page n has answered would leave two pending pages behind.
+							filter(() => !isPageLoading),
+							map(() => ++lastPage),
+							startWith(0),
+							concatMap((page) => {
+								isPageLoading = true;
+								setLoading(true);
+								const pageLoaded = () => {
+									isPageLoading = false;
+									setLoading(false);
+								};
+								return ds.getOptions({ clue, page }).pipe(
+									catchError(() => of([] as readonly TOption[])),
+									tap(pageLoaded),
+									map((items) => ({ page, status: 'loaded', items }) satisfies PageEmission<TOption>),
+									startWith({ page, status: 'pending', items: [] } satisfies PageEmission<TOption>),
+									// A request completing without emitting (or erroring) must not keep pagination locked
+									finalize(pageLoaded),
+								);
+							}),
+							scan(
+								(acc, { page, status, items }) => {
+									acc[page] = { status, items };
+									return acc;
+								},
+								{} as Record<number, PageState<TOption>>,
+							),
+							// Stop calling pages when the last two *loaded* pages are empty
+							takeWhile((pages) => {
+								const lastLoadedPages = Object.values(pages)
+									.filter(({ status }) => status === 'loaded')
+									.slice(-2);
+								return lastLoadedPages.length < 2 || !lastLoadedPages.every(({ items }) => items.length === 0);
+							}),
+							map((pages) => Object.values(pages).flatMap(({ items }) => items)),
+							// Applied on the accumulated list so cross-page decorations (eg. homonyms) can be computed
+							// Falls back to the raw accumulated options so a failing decoration doesn't kill the whole stream
+							switchMap((options) => defer(() => ds.transformOptions?.(options) ?? of(options)).pipe(catchError(() => of(options)))),
+							finalize(() => setLoading(false)), // Avoid infinite loading on complete API or error
+						);
+					});
 				}),
 			);
 		}),
