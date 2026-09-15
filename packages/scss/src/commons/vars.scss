@@ -11,7 +11,11 @@
 	// TOKENS : TYPO
 
 	--pr-t-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-	--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', Tahoma, sans-serif;
+	--pr-t-font-family-brand: var(--pr-t-font-family);
+
+	&:lang(fr, en, de, nl, it, pt, es) {
+		--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', Tahoma, sans-serif;
+	}
 
 	@if (config.$fontFamilyCursive) {
 		--pr-t-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
@@ -109,7 +113,8 @@
 
 	--commons-divider-color: var(--palettes-neutral-200);
 
-	--commons-container-padding: 0 var(--pr-t-spacings-200);
+	--commons-container-paddingInline: var(--pr-t-spacings-200);
+	--commons-container-padding: 0 var(--commons-container-paddingInline);
 	--commons-container-maxWidth: 100rem; // 100 + 0 = 100
 
 	--commons-navSide-width: 0px;
@@ -131,7 +136,7 @@
 	}
 
 	@include media.min('S') {
-		--commons-container-padding: 0 var(--pr-t-spacings-400);
+		--commons-container-paddingInline: var(--pr-t-spacings-400);
 	}
 
 	&:has(.navSide) {

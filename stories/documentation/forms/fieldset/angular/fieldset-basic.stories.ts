@@ -18,6 +18,7 @@ export default {
 			},
 			if: { arg: 'expandable', truthy: false },
 			description: 'Place le titre du fieldset à gauche des champs.',
+			table: { category: 'inputs' },
 		},
 		expandable: {
 			control: {
@@ -25,10 +26,12 @@ export default {
 			},
 			if: { arg: 'horizontal', truthy: false },
 			description: 'Permet au fieldset de se replier.',
+			table: { category: 'inputs' },
 		},
 		withAction: {
 			if: { arg: 'expandable', eq: false },
 			description: 'Ajoute un bouton d’action à droite du titre.',
+			table: { category: 'inputs' },
 		},
 		expanded: {
 			control: {
@@ -36,6 +39,7 @@ export default {
 			},
 			if: { arg: 'expandable', truthy: true },
 			description: 'Affiche le fieldset en vue dépliée.',
+			table: { category: 'models' },
 		},
 		hiddenLegend: {
 			control: {
@@ -43,6 +47,7 @@ export default {
 			},
 			if: { arg: 'expandable', truthy: false },
 			description: 'Masque la légende en la conservant dans le DOM pour les lecteurs d’écrans. ',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(FIELDSET_SIZE),
@@ -50,27 +55,32 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du fieldset.',
+			table: { category: 'inputs' },
 		},
 		heading: {
 			control: {
 				type: 'text',
 			},
 			description: 'Titre du fieldset. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		helper: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un sous-titre au fieldset. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
 		},
 		maxWidth: {
 			control: {
 				type: 'boolean',
 			},
 			description: "Applique la largeur maximale d'un formulaire au fieldset (cette largeur maximale est généralement appliquée par le formulaire lui-même).",
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

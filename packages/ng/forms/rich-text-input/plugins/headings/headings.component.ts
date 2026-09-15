@@ -10,7 +10,7 @@ import { filter } from 'rxjs';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 
 import { HeadingNode } from '@lexical/rich-text';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luNumberAttribute } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { FORMAT_HEADINGS, registerHeadings, registerHeadingsSelectionChange } from './headings.command';
 
@@ -35,7 +35,7 @@ export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 	readonly element = viewChild<LuSimpleSelectInputComponent<string>>('selectRef');
 
 	readonly tabindex = signal<number>(-1);
-	readonly maxHeadingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(6);
+	readonly maxHeadingLevel = input(6, { transform: luNumberAttribute<1 | 2 | 3 | 4 | 5 | 6> });
 	readonly headingOptions = computed<CommandPayloadType<typeof FORMAT_HEADINGS>[]>(
 		() => Object.keys(this.headingLabels()).slice(0, this.maxHeadingLevel() + 1) as CommandPayloadType<typeof FORMAT_HEADINGS>[],
 	);

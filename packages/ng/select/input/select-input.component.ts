@@ -1,8 +1,8 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Overlay } from '@angular/cdk/overlay';
 import {
+	afterNextRender,
 	AfterViewInit,
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
@@ -11,6 +11,8 @@ import {
 	ElementRef,
 	EventEmitter,
 	forwardRef,
+	inject,
+	Injector,
 	input,
 	linkedSignal,
 	OnDestroy,
@@ -21,7 +23,7 @@ import {
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ALuClear, ILuClear } from '@lucca-front/ng/clear';
-import { isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
 import { ALuPickerPanel, ILuPickerPanel } from '@lucca-front/ng/picker';
 import { ALuSelectInput } from './select-input.model';
@@ -44,10 +46,11 @@ import { ALuSelectInput } from './select-input.model';
 })
 export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<T> = ILuPickerPanel<T>> extends ALuSelectInput<T, TPicker> implements ControlValueAccessor, AfterViewInit, OnDestroy {
 	private readonly _vcDisplayContainer = viewChild('display', { read: ViewContainerRef });
+	readonly #injector = inject(Injector);
 
 	tabindex = 0;
 
-	readonly pickerOverlap = input(false, { transform: booleanAttribute });
+	readonly pickerOverlap = input(false, { transform: luBooleanAttribute });
 
 	readonly placeholderInput = input<string>('', { alias: 'placeholder' });
 
@@ -168,12 +171,13 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 		this._picker.setValue(this.value);
 
 		// strange bug where the view renderred in the displayer was only injected after a hover
-		// no matter how many cdr.markforchack i added
-		// but with a timeout it works
-		// shrug emoji
-		setTimeout(() => {
-			this._changeDetectorRef.markForCheck();
-		}, 1);
+		// unless we trigger another change detection cycle right after the first render
+		afterNextRender(
+			() => {
+				this._changeDetectorRef.markForCheck();
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	ngOnDestroy() {

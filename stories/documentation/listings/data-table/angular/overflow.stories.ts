@@ -22,27 +22,34 @@ export default {
 		cols: {
 			description: 'Nombre de colonnes.',
 			control: { type: 'range', min: 2, max: 8 },
+			table: { category: 'inputs' },
 		},
 		lines: {
 			description: 'Nombre de lignes.',
 			control: { type: 'range', min: 2, max: 8 },
+			table: { category: 'inputs' },
 		},
 		stickyColsStart: {
 			description: 'Nombre de colonnes figées depuis la gauche. Non compatible avec l’usage de colspan.',
 			control: { type: 'range', min: 0, max: 4 },
+			table: { category: 'inputs' },
 		},
 		stickyColsEnd: {
 			description: 'Nombre de colonnes figées depuis la droite. Non compatible avec l’usage de colspan.',
 			control: { type: 'range', min: 0, max: 4 },
+			table: { category: 'inputs' },
 		},
 		noOverflow: {
 			description: 'Désactive le défilement horizontal du tableau. Celui-ci prendra alors la place nécessaire pour afficher tout son contenu.',
+			table: { category: 'inputs' },
 		},
 		stickyHeader: {
 			description: 'Fige le header lors du défilement vertical.',
+			table: { category: 'inputs' },
 		},
 		pagination: {
 			description: 'Affiche une pagination sous le tableau.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

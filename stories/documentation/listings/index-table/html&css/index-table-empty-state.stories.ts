@@ -30,7 +30,7 @@ function getTemplate(args: IndexTableEmptyStateStory): string {
 					<div class="emptyState-container">
 						<div class="emptyState-content">
 							<div class="emptyState-content-icon" aria-hidden="true">
-								<div class="bubbleIllustration mod-L" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/magnifyingGlass.svg' | luSafeExternalSvg"></div>
+								<span class="bubbleIllustration mod-L" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/magnifyingGlass.svg' | luSafeExternalSvg"></span>
 							</div>
 							<div class="emptyState-content-text">
 								<h3 class="emptyState-content-heading">Empty State</h3>

@@ -104,7 +104,11 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 	return Object.entries(inputs).reduce((acc, [name, value]) => {
 		const argType = argTypes[name];
 
-		if (!argType || (argType['table'] && argType['table'].category !== 'inputs')) {
+		// `models` are two-way bound inputs, so they are rendered as attributes just like `inputs`.
+		// A category prefixed with `inputs`/`models` is still an input: multi-component stories split them
+		// per host (`inputs`, `inputs (form-field)`…) so the Controls panel groups them separately.
+		const category = argType?.['table']?.category as string | undefined;
+		if (!argType || (argType['table'] && !category?.startsWith('inputs') && !category?.startsWith('models'))) {
 			return acc;
 		}
 

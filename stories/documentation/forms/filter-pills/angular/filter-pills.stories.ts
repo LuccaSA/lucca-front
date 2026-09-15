@@ -48,25 +48,31 @@ export default {
 	argTypes: {
 		clearable: {
 			description: 'Affiche une croix pour réinitialiser le filtre si celui-ci est renseigné.',
+			table: { category: 'inputs' },
 		},
 		label: {
 			description: 'Modifie le label du filtre.',
+			table: { category: 'inputs' },
 		},
 		filterPillLabelPlural: {
 			description: 'Dans le cas d’un multi select, permet de définir le label lorsque plusieurs éléments sont sélectionnés.',
+			table: { category: 'inputs' },
 		},
 		optional: {
 			description:
 				'Rend disponible le filtre via le bouton d’ajout de filtre. Celui-ci est désactivé par défaut. Lorsque qu’un filtre est optionnel, celui-ci doit obligatoirement porter un attribut `name`. (Voir Filter bar)',
+			table: { category: 'inputs' },
 		},
 		name: {
 			description: 'Dans le cas d’un filtre optionnel, permet de faire le lien entre la liste de filtres disponible et l’affichage du filtre.',
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			description: 'Désactive le filtre.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	render: (args, { argTypes }) => {

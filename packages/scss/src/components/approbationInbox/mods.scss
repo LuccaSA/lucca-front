@@ -1,0 +1,78 @@
+@mixin center {
+	--components-approbationInbox-list-content-items-item-content-info-alignItems: center;
+}
+
+@mixin noDescription {
+	--components-approbationInbox-detail-header-main-delegation-marginBlockStart: 0;
+}
+
+@mixin insideDialog {
+	--components-approbationInbox-detail-header-main-actions-display: none;
+	--components-approbationInbox-detail-container-display: contents;
+	--components-approbationInbox-detail-headerMain-padding: var(--pr-t-spacings-150);
+	--components-approbationInbox-detail-headerMain-margin: 0 calc(var(--pr-t-spacings-150) * -1);
+	--components-approbationInbox-detail-gap: var(--pr-t-spacings-50);
+	--components-approbationInbox-detail-main-gap: var(--pr-t-spacings-150);
+	--components-approbationInbox-detail-header-main-block-content-paddingBlockEnd: var(--pr-t-spacings-150);
+	--components-approbationInbox-detail-header-minBlockSize: 0;
+
+	.dialog-inside-content:has(&) {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.approbationInbox-detail-main-block-divider.divider {
+		margin: var(--components-divider-margin);
+	}
+}
+
+@mixin outsideDialogMediaMaxM {
+	display: none;
+}
+
+@mixin listMediaMinS {
+	--components-approbationInbox-list-marginInlineEnd: var(--pr-t-spacings-400);
+	--components-approbationInbox-list-marginInlineStart: var(--pr-t-spacings-400);
+}
+
+@mixin listMediaMinM {
+	--components-approbationInbox-list-inlineSize: 17rem;
+	--components-approbationInbox-list-marginInlineEnd: 0;
+}
+
+@mixin listMediaMinL {
+	--components-approbationInbox-list-inlineSize: 22.5rem;
+}
+
+@mixin listMediaMaxM {
+	--components-approbationInbox-list-footer-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-approbationInbox-list-footer-borderRadius: 0;
+	--components-approbationInbox-list-footer-marginBlock: var(--pr-t-spacings-150) calc(var(--pr-t-spacings-300) * -1);
+	--components-approbationInbox-list-footer-paddingBlock: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+	--components-approbationInbox-list-footer-paddingInline: var(--pr-t-spacings-400);
+	--components-approbationInbox-list-footer-marginInline: calc(var(--components-approbationInbox-list-footer-paddingInline) * -1);
+}
+
+@mixin listMediaMaxS {
+	--components-approbationInbox-list-footer-paddingInline: var(--pr-t-spacings-300);
+}
+
+@mixin blockLastChild {
+	--components-approbationInbox-detail-header-main-block-content-paddingBlockEnd: 0;
+
+	.approbationInbox-detail-main-block-divider.divider {
+		--components-divider-display: none;
+	}
+}
+
+@mixin mainLayoutSidebar {
+	overflow: visible;
+}
+
+@mixin mainLayoutSidebarMediaMaxM {
+	block-size: 100%;
+}
+
+@mixin detailMediaMaxL {
+	--components-approbationInbox-detail-header-main-flexWrap: wrap;
+}

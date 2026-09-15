@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/mobile/examples';
 import { PhoneNumberInputAutocomplete } from './phone-number-input.type';
-import { CountryCode, E164Number } from './types';
+import { CountryCode } from './types';
 import { PhoneNumberValidators } from './validators';
 
 interface PrefixEntry {
@@ -16,7 +17,7 @@ interface PrefixEntry {
 }
 
 type ParsePhoneNumberResult = {
-	number: E164Number;
+	number: string;
 	country?: CountryCode;
 	nationalNumber?: string;
 	isValid: boolean;
@@ -74,7 +75,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	 */
 	readonly allowedCountries = input<ReadonlyArray<CountryCode | string>>([]);
 
-	readonly noAutoPlaceholder = input<boolean>(false);
+	readonly noAutoPlaceholder = input(false, { transform: luBooleanAttribute });
 
 	readonly defaultCountryCode = input<CountryCode>(undefined, { alias: 'country' });
 
@@ -82,7 +83,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	readonly currentValue = signal<string>('');
 
-	#onChange?: (value: E164Number) => void;
+	#onChange?: (value: string) => void;
 
 	#onTouched?: () => void;
 
@@ -155,7 +156,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		this.formatNationalNumber();
 	}
 
-	registerOnChange(fn: (value: E164Number) => void): void {
+	registerOnChange(fn: (value: string) => void): void {
 		this.#onChange = fn;
 	}
 

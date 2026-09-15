@@ -13,6 +13,7 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Désactive le composant.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

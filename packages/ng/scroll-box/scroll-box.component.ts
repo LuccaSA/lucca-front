@@ -1,4 +1,5 @@
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, inject, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject, input, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-scroll-box',
@@ -20,7 +21,7 @@ export class ScrollBoxComponent implements OnInit {
 	/**
 	 * Scroll box content vertically
 	 */
-	readonly vertical = input(false, { transform: booleanAttribute });
+	readonly vertical = input(false, { transform: luBooleanAttribute });
 
 	readonly isFirstVisible = signal(true);
 	readonly isLastVisible = signal(false);

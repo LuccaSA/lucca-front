@@ -41,7 +41,7 @@
 	},
 	pl: {
 		delete: 'Usuń',
-		warning: 'Ostrzeżenie',
+		warning: 'Alarm',
 		error: 'Błąd',
 	},
 };

@@ -21,7 +21,7 @@
 		border-radius: var(--pr-t-border-radius-structure);
 		inline-size: var(--components-popup-M);
 		max-inline-size: 95%;
-		max-block-size: 90vh;
+		max-block-size: 90vb;
 		overflow: auto;
 		animation: popup var(--commons-animations-durations-standard) cubic-bezier(0.25, 0.8, 0.25, 1);
 	}
@@ -84,7 +84,7 @@
 	.lu-modal-panel-inner {
 		display: flex;
 		flex-flow: column;
-		max-block-size: 90vh;
+		max-block-size: 90vb;
 	}
 
 	.lu-modal-container {
@@ -148,17 +148,17 @@
 		.lu-popup-panel {
 			border-radius: 0;
 			max-inline-size: none;
-			max-block-size: 100vh;
+			max-block-size: 100vb;
 			inline-size: 100%;
 			inline-size: stretch;
-			block-size: 100vh;
+			block-size: 100vb;
 			block-size: stretch;
 		}
 
 		.lu-modal-panel-inner {
-			max-block-size: 100vh;
+			max-block-size: 100vb;
 			max-block-size: stretch;
-			block-size: 100vh;
+			block-size: 100vb;
 			block-size: stretch;
 		}
 	}

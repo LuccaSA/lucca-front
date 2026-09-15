@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"ignoreDeprecations": "6.0",
+		"types": ["node"],
+		"esModuleInterop": true,
+		"strict": false,
+		"resolveJsonModule": true,
+		"outDir": "../../dist/generate-typography-font-coverage",
+		"skipLibCheck": true
+	},
+	"include": ["./**/*.ts", "../../stories/qa/typography/typography-fonts-content.ts"],
+	"exclude": ["../../node_modules", "../../dist", "**/*.spec.ts"]
+}

@@ -33,7 +33,7 @@
 		}
 
 		.calloutPopover-overlay {
-			max-inline-size: calc(100vw - (var(--pr-t-spacings-200) * 2));
+			max-inline-size: calc(100vi - (var(--pr-t-spacings-200) * 2));
 			display: flex;
 			gap: var(--pr-t-spacings-100);
 

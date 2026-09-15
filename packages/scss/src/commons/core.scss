@@ -157,28 +157,46 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 	}
 }
 
-@mixin fontFace($family, $weights, $styles, $path: '//cdn.lucca.fr/transverse/fonts') {
+@mixin fontFace(
+	$family,
+	$weights,
+	$styles,
+	$path: config.$fontPath,
+	$unicodeRange: null,
+	$filenameSuffix: '',
+	$unicodeRangeFolder: config.$fontUnicodeRangeFolder
+) {
+	$familyPath: '#{$path}/#{$family}';
+
+	@if $unicodeRange {
+		$familyPath: '#{$familyPath}/#{$unicodeRangeFolder}';
+	}
+
 	@each $keyword, $number in $weights {
 		@each $style in $styles {
 			@if $style == 'normal' {
 				@font-face {
 					font-family: '#{$family}';
-					src:
-						url('#{$path}/#{$family}/#{$keyword}.woff2') format('woff2'),
-						url('#{$path}/#{$family}/#{$keyword}.woff') format('woff');
+					src: url('#{$familyPath}/#{$keyword}#{$filenameSuffix}.woff2') format('woff2');
 					font-weight: #{$number};
 					font-style: #{$style};
 					font-display: swap;
+
+					@if $unicodeRange {
+						unicode-range: #{$unicodeRange};
+					}
 				}
 			} @else {
 				@font-face {
 					font-family: '#{$family}';
-					src:
-						url('#{$path}/#{$family}/#{$keyword}-#{$style}.woff2') format('woff2'),
-						url('#{$path}/#{$family}/#{$keyword}-#{$style}.woff') format('woff');
+					src: url('#{$familyPath}/#{$keyword}#{$filenameSuffix}-#{$style}.woff2') format('woff2');
 					font-weight: #{$number};
 					font-style: #{$style};
 					font-display: swap;
+
+					@if $unicodeRange {
+						unicode-range: #{$unicodeRange};
+					}
 				}
 			}
 		}

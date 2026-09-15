@@ -1,6 +1,7 @@
 import { Provider } from '@angular/core';
 import { registerPlainText } from '@lexical/plain-text';
 import { $rootTextContent } from '@lexical/text';
+import { mergeRegister } from '@lexical/utils';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
 import { $createParagraphNode, $createTextNode, $getRoot, LexicalEditor, TextNode } from 'lexical';
 import { PLAINTEXT_TAGS, PlainTextTransformer } from './transformers';
@@ -16,7 +17,11 @@ export class PlainTextFormatter extends RichTextFormatter {
 	}
 
 	override registerTextPlugin(editor: LexicalEditor) {
-		return registerPlainText(editor);
+		return mergeRegister(
+			registerPlainText(editor),
+			// Pasted content is inserted as raw text: apply the transformers whenever a text node changes
+			editor.registerNodeTransform(TextNode, (textNode) => this.#applyTransformers(textNode)),
+		);
 	}
 
 	override parse(editor: LexicalEditor, text?: string | null): void {

@@ -1,6 +1,6 @@
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, LOCALE_ID, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, LOCALE_ID, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
-import { intlInputOptions, isNil } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca/prisme/icon';
 import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
@@ -55,11 +55,11 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	readonly intl = input(...intlInputOptions(LU_TIME_RANGE_PICKER_TRANSLATIONS));
 
-	readonly displayArrows = input(false, { transform: booleanAttribute });
+	readonly displayArrows = input(false, { transform: luBooleanAttribute });
 
-	readonly forceMeridiemDisplay = input(false, { transform: booleanAttribute });
+	readonly forceMeridiemDisplay = input(false, { transform: luBooleanAttribute });
 
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	readonly isDisabled = computed(() => this.disabled() || this.#disabledState());
 

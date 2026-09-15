@@ -8,13 +8,43 @@ Le composant s'utilise via la balise `lu-form-field` et supporte `ngModel` ainsi
 
 Il est possible d'utiliser `lu-date-input` de plusieurs façons différentes, via ses inputs, tout d'abord:
 
-- `min` et `max`, servent à définir des dates minimales et maximales pour la sélection, **ils ne constituent pas un validateur**, ainsi, vous devrez spécficier un `Validator` à la main pour traiter une sélection hors limites comme erreur.
+- `min` et `max`, servent à définir les dates minimales et maximales sélectionnables. Ce sont **des validateurs** : une valeur hors bornes fait remonter l'erreur `{ min: true }` ou `{ max: true }` sur le `FormControl`.
 - `hideToday` permet de désactiver le style spécifique appliqué au jour en cours.
 - `hasTodayButton` permet d'ajouter un bouton "aujourd'hui", automatiquement traduit via `Intl`, qui sélectionne la date d'aujourd'hui.
 - `hideWeekend` permet de désactiver le style spécifiques des jours du weekend.
 - `clearable` permet d'ajouter un bouton "clear" à la fin de l'input.
+- `humanized` permet d'afficher la date en langage naturel lorsque le champ n'a pas le focus.
 
-Le composant utilise uniquement des objets de type `Date`, le premier jour de la semaine ainsi que les jours du weekend sont récupérés via la locale Angular, car à ce jour, l'implémentation proposée dans `Intl` n'est pas présente dans Firefox.
+#### `humanized` : affichage en langage naturel
+
+Par défaut, la date sélectionnée est affichée au format numérique de la locale (`31/12/2026`). Avec `humanized`, elle est remplacée par sa formulation naturelle **uniquement lorsque le champ n'a pas le focus** :
+
+- en mode `day` : « Hier », « Aujourd'hui » et « Demain » ; toute autre date conserve son format numérique ;
+- en mode `month` : le nom du mois en version abrégée suivi de l'année (« Mars 2026 », « Juil. 2026 ») ;
+- en modes `week` et `year` : rien ne change, il n'existe pas de formulation naturelle pertinente.
+
+Les libellés viennent d'`Intl` (`RelativeTimeFormat` et `DateTimeFormat`), ils sont donc traduits dans toutes les locales sans clé de traduction, et la première lettre est passée en majuscule.
+
+L'option ne concerne que l'**affichage** : dès que l'utilisateur donne le focus au champ, la valeur numérique éditable est restaurée. Il n'est donc jamais possible de saisir « aujourd'hui » au clavier, et la validation du `FormControl` continue de porter sur la valeur numérique.
+
+L'affichage humanisé s'applique aussi au mode présentation (`presentation` sur le `lu-form-field`) et au rendu en filter pill, qui n'ont jamais le focus.
+
+`lu-date-range-input` n'est pas concerné à ce jour.
+
+#### Bornes `min` / `max` : limites actuelles
+
+En mode `day`, les bornes sont **inclusives à la journée** : l'heure portée par la valeur est ignorée des deux côtés. `[min]="new Date()"` laisse donc le jour même sélectionnable, quelle que soit l'heure.
+
+Les deux inputs acceptent une `Date` ou une string `yyyy-MM-dd`, et les interprètent comme un **jour calendaire local**. N'y passez donc qu'une valeur qui ne transporte pas d'instant :
+
+- ✅ `'2026-12-31'`, `new Date()`, `new Date(2026, 11, 31)`, `new Date('2026-12-31T00:00:00')`
+- ❌ `new Date('2026-12-31')` — interprété en UTC par JS, contrairement à la forme avec `T00:00:00`
+- ❌ toute `Date` issue d'un instant horodaté (`…T00:00:00Z`, `…+01:00`)
+- ❌ le résultat d'une fonction `date-fns` appliquée à une string : `subDays('2026-12-31', 1)` convertit la string en UTC avant de calculer
+
+Les formes ❌ sont décalées d'un jour dans les fuseaux à l'ouest de Greenwich — et, pour les instants de soirée, à l'est. Le symptôme est soit une date valide non sélectionnable, soit une date hors bornes acceptée sans erreur.
+
+Par défaut le composant manipule des objets `Date` ; avec `format="date-iso"`, la valeur du `FormControl` est une string `yyyy-MM-dd`. Le premier jour de la semaine ainsi que les jours du weekend sont récupérés via la locale Angular, car à ce jour, l'implémentation proposée dans `Intl` n'est pas présente dans Firefox.
 
 ### Configuration avancée
 

@@ -57,7 +57,8 @@ export class LuTitleStrategy extends TitleStrategy {
 		// Title page is display from child to root
 		const pageTitles = this.#getPageTitleParts(routerState.root).reverse();
 		const translatedPageTitles = uniqTitle(pageTitles)
-			.filter(({ title }) => title !== '')
+			// Routes without a title expose it as nil, which must not reach the consumer's translate service
+			.filter(({ title }) => !!title)
 			.map(({ title, params }) => (this.translateService ? this.translateService.translate(title, params) : title));
 		// Add the name app
 		const titleParts = [...translatedPageTitles, this.luccaTitle$].filter((x) => !!x);

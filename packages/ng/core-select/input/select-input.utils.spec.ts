@@ -261,6 +261,82 @@ describe('buildOptionsFromDataSource', () => {
 		sub.unsubscribe();
 	}));
 
+	it('should fall back to accumulated options when transformOptions fails', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$ } = createDeps();
+		const ds: SelectDataSource<TestOption> = {
+			getOptions: () => of([{ id: 1, name: 'A' }]),
+			transformOptions: () => throwError(() => new Error('Additional information error')),
+		};
+		const emitted: (readonly TestOption[])[] = [];
+		let errored = false;
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe({
+			next: (options) => emitted.push(options),
+			error: () => (errored = true),
+		});
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick();
+
+		expect(errored).toBe(false);
+		expect(emitted[emitted.length - 1]).toEqual([{ id: 1, name: 'A' }]);
+
+		sub.unsubscribe();
+	}));
+
+	it('should fall back to accumulated options when transformOptions throws synchronously', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$ } = createDeps();
+		const ds: SelectDataSource<TestOption> = {
+			getOptions: () => of([{ id: 1, name: 'A' }]),
+			transformOptions: () => {
+				throw new Error('Additional information error');
+			},
+		};
+		const emitted: (readonly TestOption[])[] = [];
+		let errored = false;
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe({
+			next: (options) => emitted.push(options),
+			error: () => (errored = true),
+		});
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick();
+
+		expect(errored).toBe(false);
+		expect(emitted[emitted.length - 1]).toEqual([{ id: 1, name: 'A' }]);
+
+		sub.unsubscribe();
+	}));
+
+	it('should keep loading next pages after a transformOptions failure', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		let transformCall = 0;
+		const ds: SelectDataSource<TestOption> = {
+			getOptions: ({ page }) => of([{ id: page, name: `Page ${page}` }]),
+			transformOptions: (options) => (transformCall++ === 0 ? throwError(() => new Error('Additional information error')) : of(options)),
+		};
+		const emitted: (readonly TestOption[])[] = [];
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick();
+		expect(emitted[emitted.length - 1]).toEqual([{ id: 0, name: 'Page 0' }]);
+
+		nextPage$.next();
+		tick();
+		expect(emitted[emitted.length - 1]).toEqual([
+			{ id: 0, name: 'Page 0' },
+			{ id: 1, name: 'Page 1' },
+		]);
+
+		sub.unsubscribe();
+	}));
+
 	it('should pass clue and page number to getOptions', fakeAsync(() => {
 		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
 		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {

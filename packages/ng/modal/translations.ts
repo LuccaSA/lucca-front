@@ -40,7 +40,7 @@
 		close: 'Close',
 	},
 	pl: {
-		submit: 'Ok',
+		submit: 'OK',
 		cancel: 'Anuluj',
 		close: 'Zamknij',
 	},

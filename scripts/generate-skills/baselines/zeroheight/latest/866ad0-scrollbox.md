@@ -4,7 +4,7 @@ title: Scrollbox
 
 # Content
 
-## Scrollbox Angular `v19.2`
+## Scrollbox Angular
 
 ```ts
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';

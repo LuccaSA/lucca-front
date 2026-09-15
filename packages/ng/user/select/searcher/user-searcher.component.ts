@@ -9,6 +9,7 @@ import {
 	ILuOnOpenSubscriber,
 	ILuOnScrollBottomSubscriber,
 	intlInputOptions,
+	luBooleanAttribute,
 	syncInputSignal,
 } from '@lucca-front/ng/core';
 import { ALuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
@@ -77,7 +78,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 
 	readonly operations = input<number[]>();
 
-	readonly enableFormerEmployees = input<boolean>(false);
+	readonly enableFormerEmployees = input(false, { transform: luBooleanAttribute });
 
 	readonly clueChange = output<string>();
 

@@ -10,7 +10,8 @@
 		&.mod-add {
 			@include add;
 
-			&:hover {
+			&:hover,
+			&:has(> .listboxOption-content.is-hovered) {
 				@include addHover;
 			}
 
@@ -30,14 +31,31 @@
 		&[role='group'] {
 			@include group;
 
-			&:hover,
-			&:has(.is-hovered) {
-				@include groupHover;
+			&:hover {
+				.selectPanel.is-pointerNavigation & {
+					@include groupHover;
+				}
 			}
 
-			> .listboxOption-content {
+			&:has(.is-hovered),
+			&:has(.link.is-highlighted) {
+				.selectPanel:not(.is-pointerNavigation) & {
+					@include groupHover;
+				}
+			}
+
+			> .listboxOption-content:has(.link) {
 				&:hover {
-					@include groupHoverReset;
+					.selectPanel.is-pointerNavigation & {
+						@include hover;
+					}
+				}
+
+				&.is-hovered,
+				&:has(.link.is-highlighted) {
+					.selectPanel:not(.is-pointerNavigation) & {
+						@include hover;
+					}
 				}
 			}
 
@@ -53,13 +71,21 @@
 		}
 
 		&[aria-selected='true'],
-		&[aria-checked='true'] {
+		&[aria-checked='true'],
+		&.is-selected {
 			> .listboxOption-content {
 				@include selected;
 
-				&.is-hovered,
 				&:hover {
-					@include selectedHover;
+					.selectPanel.is-pointerNavigation & {
+						@include selectedHover;
+					}
+				}
+
+				&.is-hovered {
+					.selectPanel:not(.is-pointerNavigation) & {
+						@include selectedHover;
+					}
 				}
 
 				&:active {
@@ -68,7 +94,8 @@
 			}
 		}
 
-		&[aria-disabled='true'] {
+		&[aria-disabled='true'],
+		&.is-disabled {
 			> .listboxOption-content {
 				@include disabled;
 
@@ -78,7 +105,8 @@
 			}
 
 			&[aria-selected='true'],
-			&[aria-checked='true'] {
+			&[aria-checked='true'],
+			&.is-selected {
 				> .listboxOption-content {
 					@include selectedDisabled;
 				}
@@ -93,9 +121,16 @@
 	}
 
 	@layer mods {
-		&.is-hovered,
 		&:hover {
-			@include hover;
+			.selectPanel.is-pointerNavigation & {
+				@include hover;
+			}
+		}
+
+		&.is-hovered {
+			.selectPanel:not(.is-pointerNavigation) & {
+				@include hover;
+			}
 		}
 
 		&:active {
@@ -128,13 +163,20 @@
 		}
 
 		&.mod-multiple {
+			// Grouped options keep the same inline alignment as ungrouped ones (checkbox + label),
+			// so the extra group indentation from `@mixin group` must not apply in multi-select.
+			.listboxOption[role='group'] > .listboxOptionWrapper {
+				--components-listboxOptionWrapper-childrenPaddingInlineStart: var(--pr-t-spacings-100);
+			}
+
 			&,
 			.listboxOptionWrapper {
 				@include multiple;
 
 				.listboxOption {
 					&:hover,
-					&.is-hovered {
+					&.is-hovered,
+					&:has(> .listboxOption-content.is-hovered) {
 						@include multipleHover;
 					}
 
@@ -143,7 +185,8 @@
 					}
 
 					&[aria-selected='true'],
-					&[aria-checked='true'] {
+					&[aria-checked='true'],
+					&.is-selected {
 						> .listboxOption-content {
 							@include multipleSelected;
 
@@ -173,13 +216,15 @@
 						}
 					}
 
-					&[aria-disabled='true'], {
+					&[aria-disabled='true'],
+					&.is-disabled {
 						> .listboxOption-content {
 							@include multipleDisabled;
 						}
 
 						&[aria-selected='true'],
-						&[aria-checked='true'] {
+						&[aria-checked='true'],
+						&.is-selected {
 							> .listboxOption-content {
 								@include multipleSelectedDisabled;
 							}

@@ -1,5 +1,5 @@
 <div class="dataTableShadows">
-	<table [class]="classMods()" #tableRef>
+	<table [class]="classMods()" [attr.role]="empty() ? 'presentation' : null" #tableRef>
 		<ng-content />
 	</table>
 	<div class="dataTableWrapper-pagination">

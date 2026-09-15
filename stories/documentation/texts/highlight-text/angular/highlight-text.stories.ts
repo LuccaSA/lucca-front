@@ -11,7 +11,7 @@ interface HighlightBasicStory {}
 export default {
 	title: 'Documentation/Texts/Highlight Text/Angular/Basic',
 	argTypes: {
-		palette: PaletteAllArgType,
+		palette: { ...PaletteAllArgType, table: { category: 'inputs' } },
 	},
 	decorators: [
 		moduleMetadata({

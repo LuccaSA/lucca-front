@@ -1,0 +1,169 @@
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { LuSimpleSelectInputComponent } from '../input/select-input.component';
+
+type Entity = { id: number; name: string };
+
+describe('LuSelectPanelComponent (listbox rendering)', () => {
+	let fixture: ComponentFixture<LuSimpleSelectInputComponent<Entity>>;
+	let component: LuSimpleSelectInputComponent<Entity>;
+	let overlayContainerElement: HTMLElement;
+
+	const options: Entity[] = [
+		{ id: 1, name: 'Carotte' },
+		{ id: 2, name: 'Poireau' },
+		{ id: 3, name: 'Navet' },
+	];
+
+	function openPanel(opts: Entity[] = options): void {
+		fixture.componentRef.setInput('options', opts);
+		fixture.detectChanges();
+		component.openPanel();
+		fixture.detectChanges();
+		tick(20);
+		fixture.detectChanges();
+	}
+
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [LuSimpleSelectInputComponent],
+		});
+
+		fixture = TestBed.createComponent<LuSimpleSelectInputComponent<Entity>>(LuSimpleSelectInputComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+		overlayContainerElement = TestBed.inject(OverlayContainer).getContainerElement();
+	});
+
+	it('should render options inside a lu-listbox', fakeAsync(() => {
+		openPanel();
+
+		const listbox = overlayContainerElement.querySelector('lu-listbox')!;
+		expect(listbox).toBeTruthy();
+		expect(listbox.getAttribute('role')).toBe('listbox');
+		expect(listbox.classList).toContain('listboxOptionWrapper');
+
+		const renderedOptions = overlayContainerElement.querySelectorAll('lu-select-option');
+		expect(renderedOptions.length).toBe(3);
+		expect(overlayContainerElement.textContent).toContain('Carotte');
+	}));
+
+	it('should keep the panel element host presentational and option semantics on the inner listbox option', fakeAsync(() => {
+		openPanel();
+
+		// lu-select-option is only the behavioural host (key manager, click); all the ARIA lives on lu-listbox-option
+		const optionHost = overlayContainerElement.querySelector('lu-select-option')!;
+		expect(optionHost.getAttribute('role')).toBe('presentation');
+		expect(optionHost.hasAttribute('id')).toBe(false);
+
+		const listboxOption = optionHost.querySelector('lu-listbox-option')!;
+		expect(listboxOption).toBeTruthy();
+		expect(listboxOption.getAttribute('role')).toBe('option');
+		expect(listboxOption.getAttribute('id')).toBeTruthy();
+		expect(listboxOption.hasAttribute('aria-selected')).toBe(true);
+	}));
+
+	it('should reflect selection with aria-selected and is-selected class on the listbox option', fakeAsync(() => {
+		component.writeValue(options[1]);
+		openPanel();
+
+		const listboxOptions = Array.from(overlayContainerElement.querySelectorAll('lu-listbox-option'));
+		const selected = listboxOptions.filter((option) => option.getAttribute('aria-selected') === 'true');
+		expect(selected.length).toBe(1);
+		expect(selected[0].textContent).toContain('Poireau');
+		expect(selected[0].classList).toContain('is-selected');
+	}));
+
+	it('should bridge keyboard highlight to the is-hovered visual state', fakeAsync(() => {
+		openPanel();
+		tick();
+		fixture.detectChanges();
+
+		// The key manager highlights the first option on init
+		const firstOption = overlayContainerElement.querySelector('lu-select-option')!;
+		expect(firstOption.classList).toContain('is-highlighted');
+		expect(firstOption.querySelector('.listboxOption-content')!.classList).toContain('is-hovered');
+	}));
+
+	it('should display the empty state through the listbox status option', fakeAsync(() => {
+		openPanel([]);
+
+		const listbox = overlayContainerElement.querySelector('lu-listbox')!;
+		const emptyOption = listbox.querySelector('lu-listbox-option[aria-hidden="true"]')!;
+		expect(emptyOption).toBeTruthy();
+		expect(listbox.getAttribute('aria-describedby')).toBe(emptyOption.getAttribute('id'));
+	}));
+
+	it('should render groups as listbox group options with deterministic label ids', fakeAsync(() => {
+		component.grouping = { selector: (option) => (option.id < 3 ? 'Racines' : 'Autres'), content: 'Groupe' };
+		openPanel();
+
+		const groups = overlayContainerElement.querySelectorAll('lu-listbox-option[role="group"]');
+		expect(groups.length).toBe(2);
+
+		const firstGroup = groups[0];
+		const labelId = firstGroup.getAttribute('aria-labelledby')!;
+		expect(labelId).toContain('-group-Racines');
+		expect(firstGroup.querySelector(`[id="${labelId}"]`)).toBeTruthy();
+		expect(firstGroup.querySelectorAll('lu-listbox-option[role="option"]').length).toBe(2);
+		expect(firstGroup.querySelector('[optgroup]')!.classList).toContain('listboxOptionWrapper');
+	}));
+
+	it('should render the add option as a listbox option outside the listbox, visible even when empty', fakeAsync(() => {
+		const onAddOption = vi.fn();
+		component.addOption.subscribe(onAddOption);
+		fixture.componentRef.setInput('addOptionStrategy', 'always');
+		openPanel([]);
+
+		const addOption = overlayContainerElement.querySelector<HTMLElement>('lu-listbox-option.mod-add')!;
+		expect(addOption).toBeTruthy();
+		// It must stay outside the lu-listbox so the empty state does not hide it
+		expect(addOption.closest('lu-listbox')).toBeNull();
+		expect(addOption.getAttribute('role')).toBe('option');
+		expect(addOption.getAttribute('id')).toBe('picker-content-add');
+		expect(addOption.hasAttribute('aria-selected')).toBe(false);
+
+		addOption.click();
+		expect(onAddOption).toHaveBeenCalled();
+	}));
+
+	it('should render tree branches with the listbox visuals', fakeAsync(() => {
+		component.treeGenerator = {
+			generateTrees: (items) => [{ node: items[0], children: [{ node: items[1] }, { node: items[2] }] }],
+		};
+		openPanel();
+
+		const branches = overlayContainerElement.querySelectorAll('lu-tree-branch');
+		expect(branches.length).toBe(3);
+
+		const hosts = overlayContainerElement.querySelectorAll('lu-select-option');
+		expect(hosts.length).toBe(3);
+		hosts.forEach((host) => {
+			// Inside a tree listbox each listbox option carries the treeitem role, the host stays presentational
+			expect(host.getAttribute('role')).toBe('presentation');
+			expect(host.querySelector('lu-listbox-option')!.getAttribute('role')).toBe('treeitem');
+			expect(host.querySelector('.optionItem-value')).toBeNull();
+		});
+
+		// The parent branch nests its children inside a listbox group wrapper; the listbox itself
+		// derives the indentation from the DOM nesting of these wrappers
+		const wrapper = overlayContainerElement.querySelector<HTMLElement>('lu-tree-branch .listboxOptionWrapper[role="group"]')!;
+		expect(wrapper).toBeTruthy();
+		expect(wrapper.querySelectorAll('lu-tree-branch').length).toBe(2);
+
+		const nested = overlayContainerElement.querySelectorAll('lu-tree-branch lu-tree-branch lu-select-option');
+		expect(nested.length).toBe(2);
+	}));
+
+	it('should emit the clicked option as new value', fakeAsync(() => {
+		const onChange = vi.fn();
+		component.registerOnChange(onChange);
+		openPanel();
+
+		const hosts = overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option');
+		hosts[2].click();
+		fixture.detectChanges();
+
+		expect(onChange).toHaveBeenCalledWith(options[2]);
+	}));
+});

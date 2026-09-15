@@ -1,0 +1,23 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.highlightSection {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-light {
+			@include light;
+		}
+
+		&.mod-dark {
+			@include dark;
+		}
+
+		@include media.max('XXS') {
+			@include narrow;
+		}
+	}
+}

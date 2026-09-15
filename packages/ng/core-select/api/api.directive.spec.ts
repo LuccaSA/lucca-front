@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { NEVER, Observable, delay, map, of } from 'rxjs';
 import type { MockInstance } from 'vitest';
-import { MAGIC_OPTION_SCROLL_DELAY } from '../option/option.component';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
 interface TestEntity {
@@ -77,7 +76,7 @@ describe('ALuCoreSelectApiDirective', () => {
 	it('should query options when clicking on the select', fakeAsync(() => {
 		selectElement.click();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY); // Avoid "1 periodic timer(s) still in the queue." because of the setTimeout in the option component
+		tick();
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({}, 0);
@@ -87,7 +86,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		selectElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 		fixture.detectChanges();
 		tick(10); // Wait for panel to be opened
-		tick(MAGIC_OPTION_SCROLL_DELAY); // Avoid "1 periodic timer(s) still in the queue." because of the setTimeout in the option component
+		tick();
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({}, 0);
@@ -114,7 +113,27 @@ describe('ALuCoreSelectApiDirective', () => {
 		expect(loadingWhenPanelOpens).toBe(true);
 
 		tick(300);
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
+		expect(select.loading()).toBe(false);
+	}));
+
+	it('should not restart the loader when the open state is re-emitted without a close', fakeAsync(() => {
+		fixture.detectChanges();
+		tick(); // Component initialization uses a setTimeout :see_no_evil:
+
+		select.openPanel();
+		fixture.detectChanges();
+		tick(); // openPanel defers its work in a setTimeout
+		tick();
+
+		expect(select.loading()).toBe(false);
+
+		// A filter pill whose popover closed without notifying the select re-emits `true` on the
+		// next opening: no fetch runs on an open → open transition, so nothing would reset the loader
+		select.onFilterPillOpened();
+		fixture.detectChanges();
+		tick();
+
 		expect(select.loading()).toBe(false);
 	}));
 
@@ -145,7 +164,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		select.clueChanged('hey');
 		fixture.detectChanges();
 		tick(MAGIC_DEBOUNCE_DURATION);
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({ clue: 'hey' }, 0);
@@ -179,12 +198,12 @@ describe('ALuCoreSelectApiDirective', () => {
 			]),
 		);
 		select.nextPage$.next();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// // Act (Page 3)
 		getOptionsSpy.mockReturnValue(of([{ id: 5, name: 'test 5' }]));
 		select.nextPage$.next();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Act (do nothing)
 		select.nextPage$.next();
@@ -232,11 +251,11 @@ describe('ALuCoreSelectApiDirective', () => {
 		// Act (Page 1)
 		select.openPanel();
 		fixture.detectChanges();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Act (Page 2)
 		select.nextPage$.next();
-		tick(MAGIC_OPTION_SCROLL_DELAY);
+		tick();
 
 		// Assert
 		let options: readonly TestEntity[] = [];

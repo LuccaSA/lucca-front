@@ -8,11 +8,13 @@ export default {
 		label: {
 			control: { type: 'text' },
 			description: 'Valeur affichée. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: [null, 'S'],
 			control: { type: 'select' },
 			description: 'Taille du composant.',
+			table: { category: 'inputs' },
 		},
 	},
 	render: (args, { argTypes }) => {

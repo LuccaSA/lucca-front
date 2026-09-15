@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
-import { LoadingComponent } from '@lucca-front/ng/loading';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { ListboxState } from './listbox.type';
 import { OptionComponent } from './option/option.component';
 import { LISTBOX_INSTANCE } from './tokens';
@@ -15,23 +15,24 @@ let nextId = 0;
 	host: {
 		class: 'listboxOptionWrapper',
 		'[attr.role]': 'tree() ? "tree" : "listbox"',
+		'[attr.aria-multiselectable]': 'multiple() ? true : null',
 		'[class.mod-multiple]': 'multiple()',
 		'[attr.aria-busy]': 'state() === "loading"',
 		'[attr.aria-describedby]': 'state() === "empty" ? listboxId : null',
 	},
-	imports: [OptionComponent, LoadingComponent],
+	imports: [OptionComponent],
 	providers: [{ provide: LISTBOX_INSTANCE, useExisting: forwardRef(() => ListboxComponent) }],
 })
 export class ListboxComponent {
 	/**
 	 * Applies multiple mod to the listbox
 	 */
-	readonly multiple = input(false, { transform: booleanAttribute });
+	readonly multiple = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Defines listbox role tree or listbox by default
 	 */
-	readonly tree = input(false, { transform: booleanAttribute });
+	readonly tree = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Listbox state
@@ -44,4 +45,6 @@ export class ListboxComponent {
 	readonly statusMsg = input<string | null>(null);
 
 	readonly listboxId = `listbox${nextId++}`;
+
+	readonly skeletonWidth = computed(() => (this.state() === 'loading' ? `${Math.floor(Math.random() * 60 + 20)}%` : null));
 }

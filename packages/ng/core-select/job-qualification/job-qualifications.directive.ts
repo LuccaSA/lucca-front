@@ -3,7 +3,7 @@ import { Directive, OnInit, computed, forwardRef, inject, input } from '@angular
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, map, switchMap } from 'rxjs';
+import { Observable, debounceTime, map, of, switchMap } from 'rxjs';
 import { LuJobQualificationGroupingComponent } from './job-qualification-grouping.component';
 import { LuCoreSelectJobQualification } from './models';
 
@@ -40,6 +40,30 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 		});
 	}
 
+	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
+		// Use the clue parameter directly instead of reading from the async signal
+		// to avoid stale params when selection triggers an immediate clue reset
+		return of({
+			...this.filters(),
+			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()), sort: 'name' } : { sort: 'job.name,level.position' }),
+		});
+	}
+
+	/**
+	 * Job qualifications are grouped by job, but the panel only knows the options of the pages it
+	 * already loaded: a job spanning several pages would be partially selected. Fetch the whole job
+	 * instead, page by page, so "select all" covers the options that are not rendered yet. Groups are
+	 * only displayed when the clue is empty, hence the clue-less params.
+	 */
+	protected override getGroupOptions = (jobId: unknown): Observable<T[]> => this.#getJobOptions(jobId as number, 0);
+
+	#getJobOptions(jobId: number, page: number): Observable<T[]> {
+		const params = { ...this.filters(), 'job.id': jobId, sort: 'level.position' };
+		return this.getOptions(params, page).pipe(
+			switchMap((options) => (options.length < this.pageSize ? of(options) : this.#getJobOptions(jobId, page + 1).pipe(map((nextOptions) => [...options, ...nextOptions])))),
+		);
+	}
+
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
 		return this.httpClient
 			.get<T[] | { items: T[] }>(this.url(), {
@@ -52,21 +76,20 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
 	}
 
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const filters = this.filters();
-			const clue = this.clue();
-			return {
-				...filters,
-				...(clue
-					? {
-							search: applySearchDelimiter(clue, this.searchDelimiter()),
-							sort: 'name',
-						}
-					: { sort: 'job.name,level.position' }),
-			};
-		}),
-	);
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const filters = this.filters();
+		const clue = this.clue();
+		return {
+			...filters,
+			...(clue
+				? {
+						search: applySearchDelimiter(clue, this.searchDelimiter()),
+						sort: 'name',
+					}
+				: { sort: 'job.name,level.position' }),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	public readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
 		debounceTime(250),

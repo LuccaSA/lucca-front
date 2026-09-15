@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
-import { isNotNil } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 
@@ -31,7 +31,7 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellComponent extends BaseDataTableCell {
-	readonly actions = input(false, { transform: booleanAttribute });
+	readonly actions = input(false, { transform: luBooleanAttribute });
 
 	readonly isSticky = computed(() => {
 		return this.isStickyStart() || this.isStickyEnd();

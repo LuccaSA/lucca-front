@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, contentChildren, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChildren, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { luNumberAttribute } from '@lucca-front/ng/core';
 import { ProgressStepperStepComponent } from './progress-stepper-step/progress-stepper-step.component';
 import { LU_PROGRESS_STEPPER_INSTANCE } from './progress-stepper.token';
 
@@ -21,5 +22,5 @@ import { LU_PROGRESS_STEPPER_INSTANCE } from './progress-stepper.token';
 export class ProgressStepperComponent {
 	public readonly steps = contentChildren(ProgressStepperStepComponent);
 
-	readonly current = input(1, { transform: numberAttribute });
+	readonly current = input(1, { transform: luNumberAttribute });
 }

@@ -19,7 +19,10 @@ export default {
 		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
 
 		return {
-			template: `<lu-callout-disclosure ${paletteArg}${generateInputs(args, argTypes)}>
+			props: {
+				...args,
+			},
+			template: `<lu-callout-disclosure ${paletteArg}${generateInputs(args, argTypes)} (openChange)="openChange($event)">
 		<ul lu-callout-feedback-list palette="neutral">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
@@ -45,6 +48,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au callout.',
+			table: { category: 'inputs' },
 		},
 		state: {
 			options: setStoryOptions(CalloutStates),
@@ -52,6 +56,7 @@ export default {
 				type: 'select',
 			},
 			description: 'État du callout.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(CALLOUT_SIZE),
@@ -59,9 +64,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du callout.',
+			table: { category: 'inputs' },
 		},
 		heading: {
 			description: 'Titre du callout. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		palette: {
 			options: setStoryOptions(PALETTE),
@@ -69,12 +76,17 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au callout.',
+			table: { category: 'inputs' },
 		},
 		open: {
 			description: 'Place le callout dans son état déplié.',
+			table: { category: 'inputs' },
 		},
 		openChange: {
 			description: "Événement déclenché lors du changement d'état déplié/replié du callout.",
+			action: 'openChange',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'boolean' } },
 		},
 	},
 } as Meta;

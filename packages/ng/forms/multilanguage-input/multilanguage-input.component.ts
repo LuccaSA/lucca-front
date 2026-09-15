@@ -1,7 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, luBooleanAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -56,13 +56,13 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	readonly placeholder = input('');
 
-	readonly openOnFocus = input(false, { transform: booleanAttribute });
+	readonly openOnFocus = input(false, { transform: luBooleanAttribute });
 
 	readonly autocomplete = input<AutoFill>('off');
 
-	readonly hasNoInvariant = input(false, { transform: booleanAttribute });
+	readonly hasNoInvariant = input(false, { transform: luBooleanAttribute });
 
-	readonly hasAIButtons = input(false, { transform: booleanAttribute });
+	readonly hasAIButtons = input(false, { transform: luBooleanAttribute });
 
 	readonly displayLocale = input('');
 
@@ -75,12 +75,23 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	readonly model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
-	readonly displayRow = computed(() => {
-		if (this.hasNoInvariant()) {
-			return this.model().find((row) => row.cultureCode === this.displayLocale()) || { value: '', required: false, cultureCode: this.displayLocale() };
-		} else {
-			return this.model().find((row) => row.cultureCode === INVARIANT_CULTURE_CODE) || { value: '', required: false, cultureCode: INVARIANT_CULTURE_CODE };
+	// Resolves the culture code to display: an exact match on `displayLocale` if there is one,
+	// otherwise a match on the language part only (e.g. `displayLocale` `en-US` matches a row `en`).
+	readonly displayCultureCode = computed(() => {
+		if (!this.hasNoInvariant()) {
+			return INVARIANT_CULTURE_CODE;
 		}
+		const displayLocale = this.displayLocale();
+		const rows = this.model();
+		if (rows.some((row) => row.cultureCode === displayLocale)) {
+			return displayLocale;
+		}
+		const language = displayLocale.split('-')[0];
+		return rows.find((row) => row.cultureCode.split('-')[0] === language)?.cultureCode ?? displayLocale;
+	});
+
+	readonly displayRow = computed(() => {
+		return this.model().find((row) => row.cultureCode === this.displayCultureCode()) || { value: '', required: false, cultureCode: this.displayCultureCode() };
 	});
 
 	readonly cultureCodeDisplay = computed(() => {
@@ -88,10 +99,13 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	});
 
 	readonly panelInputs = computed(() => {
-		return this.model().filter((row) => (this.hasNoInvariant() ? row.cultureCode !== this.displayLocale() && row.cultureCode !== INVARIANT_CULTURE_CODE : row.cultureCode !== INVARIANT_CULTURE_CODE));
+		return this.model().filter((row) => row.cultureCode !== INVARIANT_CULTURE_CODE && (!this.hasNoInvariant() || row.cultureCode !== this.displayCultureCode()));
 	});
 
 	readonly presentationValue = computed(() => {
+		if (this.hasNoInvariant()) {
+			return this.displayRow()?.value;
+		}
 		return this.model().find((row) => row.cultureCode === this.#localeId)?.value || this.displayRow()?.value;
 	});
 
@@ -113,6 +127,10 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	getLocaleDisplayName(locale: string): string {
 		return this.#intlDisplay.of(locale) ?? locale;
+	}
+
+	protected hasCulture(cultureCode: string): boolean {
+		return cultureCode.includes('-');
 	}
 
 	protected getPopoverInlineSizeRem(inputElement: HTMLInputElement): number {

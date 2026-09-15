@@ -16,8 +16,8 @@ export default {
 
 function getTemplate(args: EmptyState): string {
 	return `<div class="dataTableWrapper">
-	<table class="dataTable">
-		<thead class="dataTable-head">
+	<table class="dataTable" role="presentation">
+		<thead class="dataTable-head" inert="inert">
 			<tr class="dataTable-head-row">
 				<th class="dataTable-head-row-cell">Label</th>
 				<th class="dataTable-head-row-cell">Label</th>
@@ -31,7 +31,7 @@ function getTemplate(args: EmptyState): string {
 						<div class="emptyState-container">
 							<div class="emptyState-content">
 								<div class="emptyState-content-icon" aria-hidden="true">
-									<div class="bubbleIllustration mod-L" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/magnifyingGlass.svg' | luSafeExternalSvg"></div>
+									<span class="bubbleIllustration mod-L" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/magnifyingGlass.svg' | luSafeExternalSvg"></span>
 								</div>
 								<div class="emptyState-content-text">
 									<h3 class="emptyState-content-heading">Empty State</h3>

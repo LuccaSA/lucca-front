@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, Provider, TemplateRef, Type, booleanAttribute, computed, effect, forwardRef, inject, input, model, signal, untracked } from '@angular/core';
+import { Directive, Provider, TemplateRef, Type, computed, effect, forwardRef, inject, input, model, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNullableNumberAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LuOptionContext, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
@@ -65,9 +65,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	readonly orderBy = input<string | null>(null);
 	readonly operationIds = input<readonly number[] | null>(null);
 	readonly uniqueOperationIds = input<readonly number[] | null>(null);
-	readonly appInstanceId = input<number | null>(null);
-	readonly enableFormerEmployees = input(false, { transform: booleanAttribute });
-	readonly displayMeOption = input(true);
+	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
+	readonly enableFormerEmployees = input(false, { transform: luBooleanAttribute });
+	readonly displayMeOption = input(true, { transform: luBooleanAttribute });
 	readonly customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
 	readonly includeFormerEmployees = signal(false);
@@ -93,28 +93,27 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	protected readonly clue = toSignal(this.clue$);
 
-	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(
-		computed(() => {
-			const orderBy = this.orderBy();
-			const clue = this.clue();
-			const operationIds = this.operationIds();
-			const uniqueOperationIds = this.uniqueOperationIds();
-			const appInstanceId = this.appInstanceId();
-			const searchDelimiter = this.searchDelimiter();
-			const formerEmployees = this.includeFormerEmployees();
+	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
+		const orderBy = this.orderBy();
+		const clue = this.clue();
+		const operationIds = this.operationIds();
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const appInstanceId = this.appInstanceId();
+		const searchDelimiter = this.searchDelimiter();
+		const formerEmployees = this.includeFormerEmployees();
 
-			return {
-				fields: this.#userFields,
-				...this.filters(),
-				...(orderBy ? { orderBy } : {}),
-				...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
-				...(operationIds ? { operations: operationIds.join(',') } : {}),
-				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-				...(appInstanceId ? { appInstanceId } : {}),
-				...(formerEmployees ? { formerEmployees } : {}),
-			};
-		}),
-	);
+		return {
+			fields: this.#userFields,
+			...this.filters(),
+			...(orderBy ? { orderBy } : {}),
+			...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(appInstanceId ? { appInstanceId } : {}),
+			...(formerEmployees ? { formerEmployees } : {}),
+		};
+	});
+	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	protected readonly meParams$ = toObservable(
 		computed(() => {
@@ -143,9 +142,13 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 						item: T;
 					}>
 				>(this.urlOrDefault(), { params })
-				.pipe(catchError(() => of<ILuApiCollectionResponse<{ item: T }>>({ data: { items: [] } }))),
+				.pipe(
+					map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
+					// A failed "me" lookup must not block the options: getOptionsPage combines this
+					// stream with the users search, an EMPTY here would leave the select loading forever
+					catchError(() => of(null)),
+				),
 		),
-		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
 		takeUntilDestroyed(),
 		shareReplay(1),
 	);
@@ -193,10 +196,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		const me$ = prependMe ? this.getMe() : of(null);
 
-		const users$ = this.getOptions(params, page).pipe(
-			map((users) => ({ items: users, isLastPage: users.length < this.pageSize })),
-			tap(() => this.select.loading.set(false)),
-		);
+		const users$ = this.getOptions(params, page).pipe(map((users) => ({ items: users, isLastPage: users.length < this.pageSize })));
 
 		const page$ = combineLatest([me$, users$]).pipe(
 			map(([me, { items, isLastPage }]) => {
@@ -206,16 +206,16 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			}),
 		);
 
-		return page$.pipe(
-			switchMap((page) =>
-				this.#userHomonymsService.handleHomonyms(page.items, this.displayFormat()).pipe(
-					map((items) => ({
-						items,
-						isLastPage: page.isLastPage,
-					})),
-				),
-			),
-		);
+		return page$.pipe(tap(() => this.select.loading.set(false)));
+	}
+
+	/**
+	 * Homonyms can only be detected by looking at every loaded option at once: two homonyms may
+	 * land on different pages (last option of a page, first of the next one), in which case a
+	 * page by page detection would find none. So we run it on the accumulated list instead.
+	 */
+	protected override transformOptions(options: readonly LuCoreSelectWithAdditionnalInformation<T>[]): Observable<readonly LuCoreSelectWithAdditionnalInformation<T>[]> {
+		return this.#userHomonymsService.handleHomonyms([...options], this.displayFormat());
 	}
 
 	protected override optionKey = (option: T) => option.id;

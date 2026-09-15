@@ -52,12 +52,15 @@ export default {
 			},
 			if: { arg: 'customText', truthy: false },
 			description: 'Nombre d’éléments présentés dans la story.',
+			table: { category: 'inputs' },
 		},
 		buttonLabel: {
 			description: 'Label du bouton.',
+			table: { category: 'inputs' },
 		},
 		buttonAlt: {
 			description: 'Information restituée par le bouton.',
+			table: { category: 'inputs' },
 		},
 		popoverPosition: {
 			options: ['', 'below', 'before', 'after'],
@@ -65,6 +68,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Position du popover par rapport au bouton de déclenchement.',
+			table: { category: 'inputs' },
 		},
 		icon: {
 			options: ['', 'info', 'success', 'warning', 'error', 'help'],
@@ -72,6 +76,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Ajoute une icône au callout.',
+			table: { category: 'inputs' },
 		},
 		state: {
 			options: setStoryOptions(CalloutStates),
@@ -79,10 +84,12 @@ export default {
 				type: 'select',
 			},
 			description: 'État du callout.',
+			table: { category: 'inputs' },
 		},
 		heading: {
 			description: 'Ajoute un titre au popover. [PortalContent]',
 			if: { arg: 'customText', truthy: false },
+			table: { category: 'inputs' },
 		},
 		headingHiddenIfSingleItem: {
 			control: {
@@ -90,6 +97,7 @@ export default {
 			},
 			if: { arg: 'customText', truthy: false },
 			description: 'Masque le titre si le popover ne contient qu’un élément.',
+			table: { category: 'inputs' },
 		},
 		palette: {
 			options: setStoryOptions(PALETTE),
@@ -97,6 +105,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au callout.',
+			table: { category: 'inputs' },
 		},
 		popoverTrigger: {
 			options: ['click', 'click+hover', 'hover+focus'],
@@ -104,12 +113,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Détermine le mode d’ouverture du popover.',
+			table: { category: 'inputs' },
 		},
 		popoverDisabled: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Désactive l’apparition du popover.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(CALLOUT_POPOVER_SIZE),
@@ -117,15 +128,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		closeDelay: {
 			description: 'Délai nécessaire à la fermeture du popover.',
+			table: { category: 'inputs' },
 		},
 		openDelay: {
 			description: 'Délai nécessaire à l’ouverture du popover.',
+			table: { category: 'inputs' },
 		},
 		customText: {
 			description: 'Remplace la liste d’éléments par un texte personnalisé.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

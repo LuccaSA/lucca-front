@@ -1,10 +1,12 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
+import { Treeitem } from '@lucca-front/ng/listbox';
 
 @Component({
 	selector: 'lu-tree-branch',
-	imports: [ɵCoreSelectPanelElement, LuIsOptionSelectedPipe, ɵLuOptionComponent],
+	imports: [ɵCoreSelectPanelElement, LuIsOptionSelectedPipe, ɵLuOptionComponent, Treeitem],
 	templateUrl: './tree-branch.component.html',
 	styleUrl: './tree-branch.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -31,9 +33,7 @@ export class TreeBranchComponent<T> {
 
 	unselectMany = output<T[]>();
 
-	readonly simpleMode = input(false, { transform: booleanAttribute });
-
-	readonly depth = input(1);
+	readonly simpleMode = input(false, { transform: luBooleanAttribute });
 
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {
@@ -50,7 +50,10 @@ export class TreeBranchComponent<T> {
 		}
 	}
 
-	toggle(branchData: TreeNode<T>): void {
+	toggle(branchData: TreeNode<T>, event?: Event): void {
+		// Options are nested inside their parent's host, so a click bubbles up to every ancestor
+		// branch. Stop it here so clicking a child never toggles its parent.
+		event?.stopPropagation();
 		if (this.simpleMode() || !branchData.children?.length) {
 			this.toggleOne.emit(branchData.node);
 		} else {

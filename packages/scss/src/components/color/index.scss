@@ -23,7 +23,9 @@
 			@include selected;
 		}
 
-		.lu-picker-panel .optionItem.is-highlighted & {
+		// The option's highlight (keyboard + hover) now lives as `is-highlighted` on the
+		// `luCoreSelectPanelElement` host, so the picker/optionItem selectors no longer apply.
+		.is-highlighted & {
 			@include highlighted;
 		}
 	}

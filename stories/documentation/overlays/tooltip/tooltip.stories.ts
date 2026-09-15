@@ -4,15 +4,15 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { createTestStory, generateInputs } from '../../../helpers/stories';
-import { mapInputs, sleep } from '../../../helpers/test';
+import { mapInputs, waitForAngular } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
 	argTypes: {
 		luTooltipEnterDelay: {
-			description: 'Délai d’apparition du tooltip au survol (en ms).',
+			description: 'Délai d’apparition du tooltip (en ms).',
 			control: { type: 'number' },
 			table: {
 				category: 'inputs',
@@ -54,6 +54,7 @@ export default {
 		},
 		luTooltipOnlyForDisplay: {
 			description: 'Affiche un tooltip non restituée par les lecteurs d’écran. À utiliser si la réstitution est déjà portée par l’élément déclencheur (ex. une icône avec attribut `alt`)',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [
@@ -63,7 +64,14 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const inputs = generateInputs(args, argTypes);
+		const filteredArgs = { ...args };
+		if (filteredArgs['luTooltipEnterDelay'] === 300) {
+			delete filteredArgs['luTooltipEnterDelay'];
+		}
+		if (filteredArgs['luTooltipLeaveDelay'] === 100) {
+			delete filteredArgs['luTooltipLeaveDelay'];
+		}
+		const inputs = generateInputs(filteredArgs, argTypes);
 		return {
 			styles: [
 				`
@@ -83,35 +91,35 @@ export default {
 	luButton
 	luTooltip="👋 Hello"
 	${inputs}
->Tooltip au survol</button>
+>Tooltip au survol ou au focus</button>
 <h3>Tooltip sur un texte</h3>
 <span
-
+  class="pr-u-focusVisible pr-u-borderRadiusSmall"
 	luTooltip="👋 Hello"
 	${inputs}
->Tooltip au survol</span>
+>Tooltip au survol ou au focus</span>
 <h3>Tooltip et ellipse</h3>
 <div
 	data-testid="ellipsis-truncated"
-	class="pr-u-ellipsis"
+	class="pr-u-ellipsis pr-u-focusVisible pr-u-borderRadiusSmall"
 	style="inline-size: 10rem;"
 	tabindex="0"
-	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
-	${generateInputs(args, argTypes)}
+	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol ou au focus."
+	${generateInputs(filteredArgs, argTypes)}
 	[luTooltipWhenEllipsis]="true"
->Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.</div>
+>Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol ou au focus.</div>
 <div
 	data-testid="ellipsis-not-truncated"
-	class="pr-u-ellipsis"
-	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
-	${generateInputs(args, argTypes)}
+	class="pr-u-ellipsis pr-u-focusVisible pr-u-borderRadiusSmall"
+	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait ni au survol ni au focus."
+	${generateInputs(filteredArgs, argTypes)}
 	[luTooltipWhenEllipsis]="true"
->Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>
+>Ce texte est affiché entièrement. Le tooltip n'apparait ni au survol, ni au focus.</div>
 <h3>Tooltip et icône (avec alternative)</h3>
-<lu-icon data-testid="icon-tooltip" icon="star" alt="Favoris" luTooltip="Favoris" ${inputs} luTooltipOnlyForDisplay="true" />
+<lu-icon data-testid="icon-tooltip" icon="star" alt="Favoris" luTooltip="Favoris" ${inputs} luTooltipOnlyForDisplay="true" class="pr-u-focusVisible pr-u-borderRadiusSmall" />
 
 <h3>Tooltip affiché avec un host séparé</h3>
-<span class="pr-u-marginInlineEnd800" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">
+<span class="pr-u-marginInlineEnd800 pr-u-focusVisible pr-u-borderRadiusSmall" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">
 `,
 		};
 	},
@@ -125,3 +133,98 @@ export const Basic: StoryObj<LuTooltipTriggerDirective> = {
 		luTooltipPosition: 'above',
 	},
 };
+
+export const BasicTEST = createTestStory(
+	{
+		...Basic,
+		args: {
+			...Basic.args,
+			luTooltipEnterDelay: 0,
+			luTooltipLeaveDelay: 0,
+		},
+	},
+	async ({ canvasElement, step }) => {
+		const canvas = within(canvasElement);
+		const inputs = canvas.getAllByRole('button');
+
+		// Map inputs to named references
+		const { button, span } = mapInputs(inputs, {
+			button: 0,
+			span: 1,
+		});
+
+		await step('ButtonTooltip', async () => {
+			await step('Focus', async () => {
+				button.focus();
+				await expect(button).toHaveFocus();
+				await waitFor(
+					() => {
+						expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+					},
+					{ timeout: 1000 },
+				);
+				button.blur();
+				await waitForAngular();
+			});
+
+			await step('Hover', async () => {
+				await userEvent.hover(button);
+				await waitFor(
+					() => {
+						expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+					},
+					{ timeout: 1000 },
+				);
+			});
+
+			await step('Unhover', async () => {
+				await userEvent.unhover(button);
+				await waitFor(
+					() => {
+						expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+					},
+					{ timeout: 1000 },
+				);
+			});
+		});
+
+		await step('SpanTooltip', async () => {
+			await step('Focus', async () => {
+				span.focus();
+				await expect(span).toHaveFocus();
+				await waitFor(
+					() => {
+						expect(screen.getByRole('tooltip')).toBeVisible();
+					},
+					{ timeout: 1000 },
+				);
+				span.blur();
+				await waitForAngular();
+			});
+		});
+
+		await step('IconTooltip', async () => {
+			const icon = canvas.getByTestId('icon-tooltip');
+
+			await step('Hover', async () => {
+				await userEvent.hover(icon);
+				await waitFor(
+					() => {
+						expect(screen.getByRole('tooltip')).toBeVisible();
+					},
+					{ timeout: 1000 },
+				);
+			});
+
+			await step('Unhover', async () => {
+				await userEvent.unhover(icon);
+				await waitFor(
+					() => {
+						expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+					},
+					{ timeout: 1000 },
+				);
+			});
+		});
+	},
+);

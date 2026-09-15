@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { DecorativePalette, Palette } from '@lucca-front/ng/core';
+import { DecorativePalette, Palette, ProductPalette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { BubbleIconSize } from './bubble-icon.type';
 
@@ -28,7 +28,7 @@ export class BubbleIconComponent {
 	readonly alt = input<string | null>(null);
 	readonly size = input<BubbleIconSize>('M');
 
-	readonly palette = input<Palette | DecorativePalette>('product');
+	readonly palette = input<Palette | DecorativePalette | ProductPalette>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 
 	readonly bubbleDirection = input<'top' | 'bottom' | 'left' | 'right' | 'random'>('random');

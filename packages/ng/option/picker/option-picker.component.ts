@@ -3,6 +3,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
+	afterNextRender,
 	AfterViewInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
@@ -14,6 +15,7 @@ import {
 	forwardRef,
 	inject,
 	Inject,
+	Injector,
 	Input,
 	OnDestroy,
 	Output,
@@ -25,7 +27,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, of } from 'rxjs';
-import { delay, map, share } from 'rxjs/operators';
+import { delay, map, share, take } from 'rxjs/operators';
 import { ALuOptionItem } from '../item/option-item.model';
 import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
 
@@ -39,6 +41,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit
 {
 	protected destroyRef = inject(DestroyRef);
+	readonly #injector = inject(Injector);
 
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
@@ -172,9 +175,15 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 				}
 			}),
 		);
-		setTimeout(() => {
-			this.highlightIndex = -1;
-		}, 1);
+	}
+
+	protected _resetHighlightAfterInit() {
+		// Reset the highlight once the initial options have been applied (and _applySelected potentially moved it)
+		this._subs.add(
+			this._options$.pipe(take(1)).subscribe(() => {
+				this.highlightIndex = -1;
+			}),
+		);
 	}
 
 	protected _incrHighlight() {
@@ -222,9 +231,12 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 			highlightedOption.highlighted = true;
 			// scroll to let the highlighted option visible
 			if (reScroll) {
-				setTimeout(() => {
-					this._scrollToHighlight(highlightedOption.element.nativeElement);
-				}, 1);
+				afterNextRender(
+					() => {
+						this._scrollToHighlight(highlightedOption.element.nativeElement);
+					},
+					{ injector: this.#injector },
+				);
 			}
 		}
 		this._changeDetectorRef.markForCheck();
@@ -322,6 +334,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		this._options$ = items$;
 		this._initHighlight();
 		this._initSelected();
+		this._resetHighlightAfterInit();
 	}
 
 	ngAfterViewInit() {

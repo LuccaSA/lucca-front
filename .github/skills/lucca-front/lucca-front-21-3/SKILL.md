@@ -1,7 +1,7 @@
 ---
 name: lucca-front-21-3
 description: >
-  Design system Lucca Front / Prisme (Angular), versions 21.3.x. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
+  Design system Lucca Front / Prisme (Angular), versions 21.3.x (et 21.4.x, mineure technique). À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
   ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
 ---
 
@@ -20,12 +20,12 @@ Cette skill couvre **Lucca Front 21.3.x** (patchs publiés : 21.3.0, 21.3.1). La
 
 La documentation `references/` reflète le **dernier patch publié : 21.3.1**. Si le patch du projet est **antérieur**, les correctifs livrés après sa version sont décrits dans `fixes/` (voir §2) — ils ne sont **pas** dans son code : consulte tous les `fixes/<M-m-p>.md` de version **strictement supérieure** au patch installé et ignore ces changements.
 
-**Mineures techniques couvertes par cette skill.** La mineure `21.4` est une release purement technique (compatibilité Angular 22) : aucun changement d'API, de codemod ni de documentation — un projet en `21.4.0` utilise cette documentation (référence 21.3, dernier patch 21.3.1). **Seul le patch `21.4.0` est couvert** : un patch ultérieur (ex: `21.4.1`) porterait des correctifs non documentés ici.
+**Mineures techniques couvertes par cette skill.** La mineure `21.4` est une release de compatibilité framework (compatibilité Angular 22) : son patch `21.4.0` est équivalent à `21.3.1` (aucun changement d'API, de codemod ni de documentation) et un projet en `21.4.x` (patchs publiés : 21.4.0, 21.4.1, 21.4.2) utilise cette documentation. Les patchs suivants (`21.4.1`, `21.4.2`) ont continué à livrer des correctifs **et quelques ajouts d'API** absents de `references/` : ils sont décrits dans `./fixes/21-4-1.md`, `./fixes/21-4-2.md`. Pour un projet en `21.4.x`, lis tous les `fixes/21-4-*.md` de version **inférieure ou égale** au patch installé et applique leurs changements **par-dessus** la documentation — sens inverse des fixes 21.3 : ces changements **sont** dans le code du projet. Dernier patch connu : `21.4.2`.
 
 **Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
 
-- la **mineure** détectée n'est pas `21.3` ni l'une des mineures techniques couvertes ci-dessus (patch `.0` uniquement) (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
-- le **patch** détecté est **postérieur** à 21.3.1 (dernier patch connu de cette skill → skill périmée, l'API réelle peut différer) ;
+- la **mineure** détectée n'est pas `21.3` ni l'une des mineures techniques couvertes ci-dessus (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
+- le **patch** détecté est **postérieur** à 21.3.1 — ou, pour une mineure technique, postérieur à son dernier patch connu (`21.4.2`) (dernier patch connu de cette skill → skill périmée, l'API réelle peut différer) ;
 - le patch (ou la version `@lucca-front/ng`) **ne peut pas être déterminé**.
 
 ## 2. Chemins
@@ -66,7 +66,7 @@ Slugs : animations, mixins, numbers, scrollbox, utilitaires, angular-api (provid
 
 ### Correctifs de patch (fixes/)
 
-`./fixes/<M-m-p>.md` — un fichier par patch publié de la mineure (delta vs le patch précédent : API, types partagés, codemods, sources de stories). Fichiers : `21-3-1.md`.
+`./fixes/<M-m-p>.md` — un fichier par patch publié de la mineure (delta vs le patch précédent : API, types partagés, codemods, sources de stories). Fichiers : `21-3-1.md`. Mineure technique 21.4 : `21-4-1.md`, `21-4-2.md` (lecture en sens inverse, voir §1 : à appliquer par-dessus la doc pour un projet en 21.4.x).
 
 À consulter quand : le projet est sur un patch **antérieur** à 21.3.1 (les fixes postérieurs à sa version décrivent des correctifs absents de son code), ou pour comprendre ce qu'un patch précis a changé.
 
@@ -89,6 +89,7 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 | Composant déprécié | `./references/documentation/deprecated/deprecated.md` |
 | Monter de version | `./references/migrations.md` + la section `## Changelog` du `<slug>.md` de chaque composant touché |
 | Projet sur un patch antérieur à 21.3.1 / comportement inattendu sur un patch | `./fixes/<M-m-p>.md` |
+| Projet sur une mineure technique (21.4.x) | `./fixes/21-4-*.md` de version ≤ patch installé, par-dessus `references/` |
 
 ## 4. Workflow Code
 

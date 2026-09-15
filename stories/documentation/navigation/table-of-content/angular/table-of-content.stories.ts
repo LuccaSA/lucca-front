@@ -16,6 +16,7 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Désactive le lien d’un des éléments.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

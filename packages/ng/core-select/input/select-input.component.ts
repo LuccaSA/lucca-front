@@ -1,7 +1,6 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
 	afterNextRender,
-	booleanAttribute,
 	ChangeDetectorRef,
 	computed,
 	Directive,
@@ -22,7 +21,7 @@ import {
 } from '@angular/core';
 import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { isNotNil, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
@@ -63,7 +62,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected updatePositionFn?: () => void;
 	public filterPillMode = false;
 
-	public readonly ignorePresentation = input(false, { transform: booleanAttribute });
+	public readonly ignorePresentation = input(false, { transform: luBooleanAttribute });
 
 	public selectParent$?: Subject<void>;
 	public selectChildren$?: Subject<void>;
@@ -82,7 +81,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly placeholder = input<string>();
 
-	readonly clearableInput = input<boolean | null>(null, { transform: booleanAttribute, alias: 'clearable' });
+	readonly clearableInput = input<boolean | null>(null, { transform: luBooleanAttribute, alias: 'clearable' });
 
 	readonly isClearable = computed(() => this.clearableInput() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
@@ -139,13 +138,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly optionKeyInput = input<(option: TOption) => unknown>(coreSelectDefaultOptionKey, { alias: 'optionKey' });
 
-	readonly noClueIcon = input(false, { transform: booleanAttribute });
+	readonly noClueIcon = input(false, { transform: luBooleanAttribute });
 
-	readonly inputTabindex = input<number>(0);
+	readonly inputTabindex = input(0, { transform: luNumberAttribute });
 
-	readonly compact = input(false, { transform: booleanAttribute });
+	readonly compact = input(false, { transform: luBooleanAttribute });
 
-	readonly colorPicker = input(false, { transform: booleanAttribute });
+	readonly colorPicker = input(false, { transform: luBooleanAttribute });
 
 	protected get isNoClueIconClass(): boolean {
 		return this.noClueIcon();
@@ -183,6 +182,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly clueChange$ = new Subject<string>();
 	clueChange = outputFromObservable(this.clueChange$);
+	// searchable is derived from clueChange$.observed, so internal consumers must use this stream instead:
+	// subscribing to clueChange$ would make every select look searchable.
+	readonly #internalClueChange$ = new Subject<string>();
 	readonly nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
 	readonly addOption = output<string>();
@@ -213,6 +215,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
 			this.clueChange$.next(clue);
+			this.#internalClueChange$.next(clue);
 			this.lastEmittedClue = clue;
 		}
 	}
@@ -256,7 +259,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
-	readonly clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
+	readonly clue$ = defer(() => this.#internalClueChange$.pipe(startWith(this.clue)));
 
 	readonly shouldDisplayAddOption = toSignal(
 		toObservable(this.addOptionStrategy).pipe(
@@ -410,26 +413,18 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.inputElementRef()?.nativeElement.focus();
 	}
 
+	// Re-entrancy guard: opening the panel (focus, clueChanged, overlay creation) can synchronously
+	// trigger openPanel again, which used to cause a double tap.
+	#isOpeningPanel = false;
+
 	openPanel(clue: string = ''): void {
-		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value) {
+		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value || this.#isOpeningPanel) {
 			return;
 		}
 
-		this.focusInput();
-
-		/**
-		 * I know what you're thinking, but let me explain:
-		 *
-		 * When setting isPanelOpen$'s internal value to true and then calling clueChanged,
-		 * it creates a race condition which calls this method again from inside clueChanged's code before
-		 * the change is applied inside the Subject, meaning this is called twice and we get a double tap.
-		 *
-		 * The only easy solution is this (or store yet another boolean like "isOpeningPanel" which is, imo, equally ugly.
-		 */
-		setTimeout(() => {
-			if (this.isPanelOpen) {
-				return;
-			}
+		this.#isOpeningPanel = true;
+		try {
+			this.focusInput();
 
 			const isSearchable = this.searchable;
 			this.isPanelOpen$.next(true);
@@ -441,7 +436,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 			this._panelRef = this.buildPanelRef();
 			this.bindInputToPanelRefEvents();
-		});
+		} finally {
+			this.#isOpeningPanel = false;
+		}
 	}
 
 	emitAddOption(): void {

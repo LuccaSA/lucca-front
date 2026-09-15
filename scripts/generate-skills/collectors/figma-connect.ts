@@ -15,6 +15,7 @@ import fs from 'fs';
 import path from 'path';
 import { FigmaDesignTokens, FigmaProperty } from '../types';
 import { TransientFetchError, recordWarning } from './fetch-failures';
+import { fetchWithTimeout } from './http';
 
 const FIGMA_API_BASE = 'https://api.figma.com/v1';
 /**
@@ -48,12 +49,24 @@ let active = 0;
 const waiters: (() => void)[] = [];
 let nextAllowedStart = 0;
 
+/**
+ * Slot acquisition. `release()` hands its slot straight to the next waiter instead of freeing it,
+ * which is what makes the pair race-free.
+ *
+ * The previous version decremented in `release()` and re-incremented in the woken `acquire()`. A
+ * fresh caller taking the fast path in between saw the slot as free, so one `release()` was matched
+ * by TWO increments and `active` drifted up by one — permanently. With MAX_CONCURRENT = 1 a single
+ * drift is enough: every later `acquire()` queues behind a phantom slot that no `release()` will
+ * ever return. And since `await new Promise(resolve => waiters.push(resolve))` holds no timer or
+ * handle, the stuck workers keep nothing alive: the event loop empties and Node exits 0 mid-run.
+ * That is what stopped full generations at 20-27 of 126 components while reporting success.
+ */
 async function acquire(): Promise<void> {
 	if (active < MAX_CONCURRENT) {
 		active++;
 	} else {
+		// The slot is handed over by release(), which never freed it — do NOT increment here.
 		await new Promise<void>((resolve) => waiters.push(resolve));
-		active++;
 	}
 	// Pace request starts: never fire two within MIN_INTERVAL_MS of each other.
 	const now = Date.now();
@@ -61,10 +74,15 @@ async function acquire(): Promise<void> {
 	nextAllowedStart = Math.max(now, nextAllowedStart) + MIN_INTERVAL_MS;
 	if (wait > 0) await sleep(wait);
 }
+
 function release(): void {
-	active--;
-	waiters.shift()?.();
+	const next = waiters.shift();
+	if (next) next(); // pass the slot on: `active` stays put, no window for a fast-path caller
+	else active--;
 }
+
+/** Test-only accessors — the throttle is module state, and its race was invisible to any test. */
+export const __throttle = { acquire, release, state: () => ({ active, waiting: waiters.length }) };
 
 interface FigmaResult {
 	ok: boolean;
@@ -86,15 +104,15 @@ async function figmaRequest(url: string, token: string): Promise<FigmaResult> {
 		await acquire();
 		let response: Response;
 		try {
-			response = await fetch(url, { headers: { 'X-Figma-Token': token } });
+			response = await fetchWithTimeout(url, { headers: { 'X-Figma-Token': token } });
 		} catch (err: any) {
 			release();
 			lastStatus = 'network';
 			lastReason = err?.message ?? 'fetch failed';
-			if (attempt >= MAX_RETRIES) break;
-			console.warn(`  ⏳ Figma réseau — retry ${attempt + 1}/${MAX_RETRIES}`);
-			await sleep(Math.min(1000 * 2 ** attempt, 30000));
-			continue;
+			// Same rule as ZeroHeight: the deadline is already spent, so this goes to the replay
+			// manifest rather than being re-spent inline. A 429 or a 5xx still retries below — there
+			// the server answered, so a retry is cheap.
+			break;
 		}
 		release();
 
@@ -310,7 +328,11 @@ export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, to
 			return null;
 		}
 		// transient (429/5xx/network exhausted) or non-retryable error: NOT cached, surfaced as a failure
-		throw new TransientFetchError(res.status ?? 'unknown', `Figma node ${nodeId}: ${res.reason ?? 'erreur'} (après ${MAX_RETRIES} retries)`);
+		// The status matters: a 401/403 is an expired or wrong token and never retries, while a 429
+		// exhausted its ladder. Reporting only `reason` made every failure read "HTTP error", which
+		// is how an expired token went undiagnosed across ~90 nodes.
+		const how = res.status === 'network' ? 'différé pour rejeu (--retry-failed)' : `après ${MAX_RETRIES} retries`;
+		throw new TransientFetchError(res.status ?? 'unknown', `Figma node ${nodeId}: HTTP ${res.status ?? '?'} ${res.reason ?? 'erreur'} (${how})`);
 	}
 
 	const data = res.json as FigmaNodeResponse;

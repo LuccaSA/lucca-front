@@ -113,12 +113,14 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'XXL', 'maxContent', 'fullScreen'],
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		autoFocus: HiddenArgType,
 		alert: HiddenArgType,

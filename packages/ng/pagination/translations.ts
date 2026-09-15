@@ -49,8 +49,8 @@
 	},
 	pl: {
 		results: '{{from}} – {{to}} na stronie {{itemsCount}}',
-		previous: 'Poprzedni',
+		previous: 'Wstecz',
 		next: 'Dalej',
-		resultsA11y: 'Wyniki z {{from}} do {{to}} na stronie {{itemsCount}}',
+		resultsA11y: 'Wyniki od {{from}} do {{to}} na stronie {{itemsCount}}',
 	},
 };

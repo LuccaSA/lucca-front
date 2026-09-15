@@ -33,6 +33,6 @@
 	},
 	pl: {
 		readMore: 'Czytaj więcej',
-		readLess: 'Przeczytaj mniej',
+		readLess: 'Czytaj mniej',
 	},
 };

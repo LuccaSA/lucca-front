@@ -77,6 +77,7 @@ Below is the current list of all available components. Import only the ones you 
 @forward '@lucca-front/scss/src/components/fancyBox';
 @forward '@lucca-front/scss/src/components/gauge';
 @forward '@lucca-front/scss/src/components/highlightData';
+@forward '@lucca-front/scss/src/components/highlightSection';
 @forward '@lucca-front/scss/src/components/label';
 @forward '@lucca-front/scss/src/components/list';
 @forward '@lucca-front/scss/src/components/listing';

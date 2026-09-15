@@ -5,9 +5,9 @@ import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user
 import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory, generateInputs } from '../../../../helpers/stories';
-import { waitForAngular } from '../../../../helpers/test';
+import { findPanelOptions, waitForAngular } from '../../../../helpers/test';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
 
 const me = { id: 66, picture: null, department: { id: 3, name: 'Commercial' }, firstName: 'Pierre', lastName: 'Durand' };
 const chloe = { id: 1, picture: null, department: { id: 1, name: 'Direction' }, firstName: 'Chloe', lastName: 'Alibert', additionalInformation: 'Direction' };
@@ -21,6 +21,7 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Inclus les collaborateurs partis',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [
@@ -116,8 +117,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		const trigger = getTrigger();
 		await userEvent.click(trigger);
 		await waitForAngular();
-		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option');
+		const options = await findPanelOptions();
 		// Pick first option that is not the current user (not marked with mod-me)
 		const otherOption = options.find((opt) => !opt.querySelector('.mod-me'));
 		const optionText = otherOption.querySelector('[translate="no"]').textContent.trim();

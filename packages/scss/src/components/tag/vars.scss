@@ -9,6 +9,8 @@
 	--components-tag-boxShadow: 0 0 0 1px var(--components-tag-shadow);
 	--components-tag-position: static;
 	--components-tag-before-content: none;
+	--components-tag-display: inline-flex;
+	--components-tag-padding-inline: var(--pr-t-spacings-50);
 
 	// Deprecated
 	--components-tag-fontSize: var(--pr-t-font-body-S-fontSize);

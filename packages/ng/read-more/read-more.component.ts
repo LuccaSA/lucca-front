@@ -1,5 +1,5 @@
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { intlInputOptions, isNil } from '@lucca-front/ng/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { intlInputOptions, isNil, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 import { ReadMoreSurface } from './read-more.type';
 
@@ -15,6 +15,7 @@ import { ReadMoreSurface } from './read-more.type';
 		'[style.--components-readMore-content-lastChild-content]': '`"${labelReadLess()}"`',
 		'[class.is-disabled]': '!expanded() && !isClamped()',
 		'[class.mod-openOnly]': 'openOnly()',
+		'[class.mod-plainText]': 'plainText()',
 		'[class.mod-sunken]': 'surface() === `sunken`',
 		'[class.mod-default]': 'surface() === `default`',
 		'[style.--components-readMore-link-backgroudColor]': 'backgroundColor()',
@@ -26,17 +27,23 @@ export class ReadMoreComponent {
 	/**
 	 * Change the number of lines displayed when collapsed
 	 */
-	readonly lineClamp = input<number>(5);
+	readonly lineClamp = input(5, { transform: luNumberAttribute });
 
 	/**
 	 * Prevent the component from closing by hiding the "Read less" button
 	 */
-	readonly openOnly = input(false, { transform: booleanAttribute });
+	readonly openOnly = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Display the `\n` of the content as line breaks instead of collapsing them into spaces (`white-space: pre-line`).
+	 * Meant for plain-text content such as a textarea value.
+	 */
+	readonly plainText = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Change the background color under the "Read more / less" button
 	 */
-	readonly textFlow = input(false, { transform: booleanAttribute });
+	readonly textFlow = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Apply the spacing of the Text Flow component

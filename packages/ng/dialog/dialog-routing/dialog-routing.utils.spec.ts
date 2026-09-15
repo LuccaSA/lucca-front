@@ -9,48 +9,36 @@ import { vi } from 'vitest';
 import { LuDialogService } from '../dialog.service';
 import { dialogLazyRouteFactory, dialogRouteFactory } from './dialog-routing.utils';
 
-const { $dialogService, set$dialogService, $dialogRef, set$dialogRef, $openDialogs, inc$openDialogs, reset$openDialogs } = vi.hoisted(() => {
-	let _dialogService: LuDialogService;
-	let _dialogRef: LuDialogRef<unknown, unknown>;
-	let _openDialogs = 0;
-	return {
-		$dialogService: () => _dialogService,
-		set$dialogService: (v: LuDialogService) => {
-			_dialogService = v;
-		},
-		$dialogRef: () => _dialogRef,
-		set$dialogRef: (v: LuDialogRef<unknown, unknown>) => {
-			_dialogRef = v;
-		},
-		$openDialogs: () => _openDialogs,
-		inc$openDialogs: () => {
-			_openDialogs++;
-		},
-		reset$openDialogs: () => {
-			_openDialogs = 0;
-		},
-	};
-});
+const originalOpen = LuDialogService.prototype.open;
 
-vi.mock('../dialog.providers', () => ({
-	provideLuDialog: () => ({
-		provide: LuDialogService,
-		useFactory: () => {
-			const service = new LuDialogService();
-			set$dialogService(service);
-			const originalOpen = service.open.bind(service) as LuDialogService['open'];
-			vi.spyOn(service, 'open').mockImplementation((config) => {
-				inc$openDialogs();
-				const ref = originalOpen(config)!;
-				set$dialogRef(ref);
-				vi.spyOn(ref, 'close');
-				vi.spyOn(ref, 'dismiss');
-				return ref;
-			});
-			return service;
-		},
-	}),
-}));
+let _dialogRef: LuDialogRef<unknown, unknown>;
+let _openDialogs = 0;
+
+const $dialogOpen = () => vi.mocked(LuDialogService.prototype.open);
+const $dialogRef = () => _dialogRef;
+const $openDialogs = () => _openDialogs;
+const reset$openDialogs = () => {
+	_openDialogs = 0;
+};
+
+/**
+ * Spies on every `LuDialogService` instance through its prototype rather than mocking
+ * `provideLuDialog`. `dialog-routing.component.ts` calls `provideLuDialog()` while its
+ * decorator is evaluated, so the resulting provider is baked in the first time that module
+ * is loaded. Specs share a module registry (`isolate: false`), which means a module mock
+ * would only apply when this file happens to be the first of its worker to pull the dialog
+ * entrypoint in.
+ */
+function spyOnDialogOpen(): void {
+	vi.spyOn(LuDialogService.prototype, 'open').mockImplementation(function (this: LuDialogService, config) {
+		_openDialogs++;
+		const ref = originalOpen.call(this, config);
+		_dialogRef = ref as LuDialogRef<unknown, unknown>;
+		vi.spyOn(ref, 'close');
+		vi.spyOn(ref, 'dismiss');
+		return ref;
+	});
+}
 
 interface DialogRoutingTestDialogData {
 	foo: string;
@@ -120,6 +108,7 @@ describe('dialog-routing.utils', () => {
 			guard1.mockReset();
 			guard2.mockReset();
 			reset$openDialogs();
+			spyOnDialogOpen();
 		});
 
 		afterEach(() => {
@@ -148,8 +137,8 @@ describe('dialog-routing.utils', () => {
 			await vi.runAllTimersAsync();
 
 			// Assert
-			expect($dialogService().open).toHaveBeenCalledTimes(1);
-			expect($dialogService().open).toHaveBeenCalledWith(
+			expect($dialogOpen()).toHaveBeenCalledTimes(1);
+			expect($dialogOpen()).toHaveBeenCalledWith(
 				expect.objectContaining({
 					data: { foo: 'bar' },
 				}),
@@ -172,8 +161,8 @@ describe('dialog-routing.utils', () => {
 			await vi.runAllTimersAsync();
 
 			// Assert
-			expect($dialogService().open).toHaveBeenCalledTimes(1);
-			expect($dialogService().open).toHaveBeenCalledWith(
+			expect($dialogOpen()).toHaveBeenCalledTimes(1);
+			expect($dialogOpen()).toHaveBeenCalledWith(
 				expect.objectContaining({
 					data: { foo: 'baz' },
 				}),
@@ -199,8 +188,8 @@ describe('dialog-routing.utils', () => {
 			await vi.runAllTimersAsync();
 
 			// Assert
-			expect($dialogService().open).toHaveBeenCalledTimes(1);
-			expect($dialogService().open).toHaveBeenCalledWith(
+			expect($dialogOpen()).toHaveBeenCalledTimes(1);
+			expect($dialogOpen()).toHaveBeenCalledWith(
 				expect.objectContaining({
 					data: { foo: 'bar' },
 				}),
@@ -382,7 +371,7 @@ describe('dialog-routing.utils', () => {
 			expect(router.url).toBe('/test/child1');
 			expect(fixture.debugElement.parent?.query(By.directive(Child1Component))).toBeTruthy();
 			expect(fixture.debugElement.parent?.query(By.directive(Child2Component))).toBeFalsy();
-			expect($dialogService().open).toHaveBeenCalledTimes(1);
+			expect($dialogOpen()).toHaveBeenCalledTimes(1);
 
 			// Act 2
 			await router.navigateByUrl('/test/child2');
@@ -394,7 +383,7 @@ describe('dialog-routing.utils', () => {
 			expect(router.url).toBe('/test/child2');
 			expect(fixture.debugElement.parent?.query(By.directive(Child1Component))).toBeFalsy();
 			expect(fixture.debugElement.parent?.query(By.directive(Child2Component))).toBeTruthy();
-			expect($dialogService().open).toHaveBeenCalledTimes(1); // Still 1, dialog not reopened
+			expect($dialogOpen()).toHaveBeenCalledTimes(1); // Still 1, dialog not reopened
 			expect($dialogRef().close).not.toHaveBeenCalled();
 			expect($dialogRef().dismiss).not.toHaveBeenCalled();
 		});
@@ -423,7 +412,7 @@ describe('dialog-routing.utils', () => {
 			const dialogComponent = fixture.debugElement.parent?.query(By.directive(DialogRoutingTestWithParentDIComponent)).componentInstance as DialogRoutingTestWithParentDIComponent;
 
 			// Assert
-			expect($dialogService().open).toHaveBeenCalledTimes(1);
+			expect($dialogOpen()).toHaveBeenCalledTimes(1);
 			expect(dialogComponent).toBeTruthy();
 			expect(dialogComponent.parentService.value).toBe('provided-in-parent');
 			expect(dialogComponent.routeService.value).toBe('provided-in-parent-route');
@@ -475,8 +464,8 @@ describe('dialog-routing.utils', () => {
 			await vi.runAllTimersAsync();
 
 			// Assert
-			expect($dialogService().open).toHaveBeenCalledTimes(1);
-			expect($dialogService().open).toHaveBeenCalledWith(
+			expect($dialogOpen()).toHaveBeenCalledTimes(1);
+			expect($dialogOpen()).toHaveBeenCalledWith(
 				expect.objectContaining({
 					data: { foo: 'BAZ' },
 				}),

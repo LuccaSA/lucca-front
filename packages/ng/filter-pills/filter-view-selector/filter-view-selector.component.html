@@ -1,0 +1,50 @@
+<button
+	type="button"
+	luButton="outlined"
+	size="S"
+	disclosure
+	luPopoverNoCloseButton
+	[luPopover2]="viewsPopover"
+	[customPositions]="popoverPositions"
+>
+	@if (selectedLabel(); as label) {
+		<span class="pr-u-mask">{{ intl().selectView }} - </span>
+		{{ label }}
+	} @else {
+		{{ intl().selectView }}
+	}
+	<lu-icon icon="arrowChevronBottom" />
+</button>
+
+<ng-template #viewsPopover>
+	<div class="filterPill_popover-content popover-contentOptional">
+		@for (view of views(); track optionKey()(view); let index = $index) {
+			<div class="filterPill_popover-content-option">
+				<label luFormLabel [attr.for]="inputId(index)">{{ viewLabel()(view) }}</label>
+				<span class="filterPill_popover-content-option-input">
+					<input type="radio" [attr.id]="inputId(index)" [attr.name]="groupName" [checked]="isSelected(view)" (change)="selectView(view)" />
+				</span>
+				<button type="button" class="filterPill_popover-content-option-actions" size="XS" luButton="ghost" [luDropdown]="optionsDropdown">
+					<lu-icon icon="menuDots" [alt]="intl().viewOptions | intlParams: { viewName: viewLabel()(view) }" />
+				</button>
+
+				<ng-template #optionsDropdown>
+					<lu-dropdown-menu>
+						<lu-dropdown-item>
+							<button type="button" lu-dropdown-action (click)="renameView.emit(view); popoverRef()?.close()">
+								<lu-icon icon="edit" />
+								{{ intl().renameView }}
+							</button>
+						</lu-dropdown-item>
+						<lu-dropdown-item>
+							<button type="button" lu-dropdown-action critical (click)="deleteView.emit(view); popoverRef()?.close()">
+								<lu-icon icon="trash" />
+								{{ intl().deleteView }}
+							</button>
+						</lu-dropdown-item>
+					</lu-dropdown-menu>
+				</ng-template>
+			</div>
+		}
+	</div>
+</ng-template>

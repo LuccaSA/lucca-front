@@ -1,11 +1,12 @@
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
+import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { startWith } from 'rxjs';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 
 @Component({
 	selector: 'lu-textarea-input',
@@ -25,13 +26,13 @@ export class TextareaInputComponent implements OnInit {
 
 	readonly placeholder = input<string>('');
 
-	readonly rows = input<number>(3);
+	readonly rows = input(3, { transform: luNumberAttribute });
 
-	readonly autoResize = input(false, { transform: booleanAttribute });
+	readonly autoResize = input(false, { transform: luBooleanAttribute });
 
-	readonly autoResizeScrollIntoView = input(false, { transform: booleanAttribute });
+	readonly autoResizeScrollIntoView = input(false, { transform: luBooleanAttribute });
 
-	readonly disableSpellcheck = input(false, { transform: booleanAttribute });
+	readonly disableSpellcheck = input(false, { transform: luBooleanAttribute });
 
 	cloneValue = '';
 

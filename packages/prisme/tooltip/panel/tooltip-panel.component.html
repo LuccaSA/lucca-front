@@ -1,0 +1,8 @@
+@if (content(); as content) {
+	<div
+		class="tooltip"
+		[class]="contentPositionClasses()"
+		[innerHtml]="content"
+		[style.--components-tooltip-animationDelay]="enterDelay() + 'ms'"
+	></div>
+}

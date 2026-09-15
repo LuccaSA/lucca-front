@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-app-layout',
@@ -12,5 +13,5 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, ViewEncaps
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppLayoutComponent {
-	readonly mobileNavSideBottom = input(false, { transform: booleanAttribute });
+	readonly mobileNavSideBottom = input(false, { transform: luBooleanAttribute });
 }

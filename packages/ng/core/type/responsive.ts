@@ -1,3 +1,8 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
+
 export type At = 'media' | 'container';
 export type Breakpoint = 'XXXS' | 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 
@@ -20,3 +25,11 @@ export const defaultBreakpoints = {
 
 export type ResponsiveConfig<T extends string, V> = Partial<Record<ResponsiveProperty<T>, V>>;
 export type ResponsiveProperty<T extends string> = `${T}At${Capitalize<At>}Min${Breakpoint}`;
+
+export function injectMediaMinBreakpoint(breakpoint: Breakpoint, reversed = false) {
+	const breakpointObserver = inject(BreakpointObserver);
+
+	const reversedParam = reversed ? `not all and ` : ``;
+
+	return toSignal(breakpointObserver.observe(`${reversedParam}(min-width: ${defaultBreakpoints[breakpoint]})`).pipe(map((state) => state.matches)));
+}

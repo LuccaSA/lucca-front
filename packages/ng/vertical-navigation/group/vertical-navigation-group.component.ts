@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
@@ -29,7 +29,7 @@ export class VerticalNavigationGroupComponent {
 	/**
 	 * Disabled the vertical navigation group
 	 */
-	readonly disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	readonly expanded = model(true);
 

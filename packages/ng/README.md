@@ -25,7 +25,7 @@ This package contains specialized components organized by domain:
 
 **Data Display**
 - **Tables**: `data-table`, `index-table`, `sortable-list`
-- **Cards**: `resource-card`, `highlight-data`
+- **Cards**: `resource-card`, `highlight-data`, `highlight-section`
 - **Feedback**: `toast`, `inline-message`, `callout`, `empty-state`
 - **Progress**: `progress-bar`, `gauge`, `loading`, `skeleton`
 

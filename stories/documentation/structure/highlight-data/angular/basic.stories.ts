@@ -37,20 +37,24 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		heading: {
 			type: 'string',
 			description: 'Titre du composant. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		value: {
 			type: 'string',
 			description: 'Valeur affichée. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		subText: {
 			type: 'string',
 			description: 'Texte secondaire. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		bubble: {
 			options: setStoryOptions(HIGHLIGHT_DATA_BUBBLE),
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		illustration: {
 			options: setStoryOptions(HIGHLIGHT_DATA_ILLUSTRATION),
@@ -58,21 +62,25 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 				type: 'select',
 			},
 			description: 'Il est également possible de renseigner une URL.',
+			table: { category: 'inputs' },
 		},
 		valueFirst: {
 			type: 'boolean',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(HIGHLIGHT_DATA_SIZE),
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		theme: {
 			options: setStoryOptions(HIGHLIGHT_DATA_THEME),
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		palette: {
 			options: setStoryOptions(HIGHLIGHT_DATA_PALETTE),
@@ -80,12 +88,14 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 				type: 'select',
 			},
 			description: 'La palette influençant également la couleur du SVG des bubbles et donc l’URL associée, il est nécessaire de renseigner la gamme.',
+			table: { category: 'inputs' },
 		},
 		action: {
 			options: ['', 'button', 'link'],
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 

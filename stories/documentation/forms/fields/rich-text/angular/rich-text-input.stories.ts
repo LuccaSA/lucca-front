@@ -28,27 +28,35 @@ export default {
 	argTypes: {
 		value: {
 			description: '[Story] Valeur du champ.',
+			table: { category: 'inputs' },
 		},
 		placeholder: {
 			description: 'Applique un placeholder au champ.',
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			description: 'Désactive le champ.',
+			table: { category: 'inputs' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		disableSpellcheck: {
 			description: 'Désactive le correcteur d’orthographe.',
+			table: { category: 'inputs' },
 		},
 		autoResize: {
 			description: 'Active / désactive l’autoresize du champ.',
+			table: { category: 'inputs' },
 		},
 		hideToolbar: {
 			description: 'Masque les options de mise en forme.',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

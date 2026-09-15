@@ -21,6 +21,7 @@ export default {
 			type: 'string',
 			description: 'Affiche une icône (?) associée à une info-bulle. ',
 			if: { arg: 'hiddenLabel', truthy: false },
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
@@ -28,9 +29,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
+			table: { category: 'inputs' },
 		},
 		inlineMessage: {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
+			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -38,39 +41,51 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
+			table: { category: 'inputs' },
 		},
 		label: {
 			description: 'Modifie le label de l’input.',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		hasClearer: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli. Il est alors conseillé de masquer les boutons d’incrémentation (noSpinButtons).',
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			description: 'Désactive le champ.',
+			table: { category: 'inputs' },
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
+			table: { category: 'inputs' },
 		},
 		step: {
 			description: 'Modifie le pas d’incrémentation.',
+			table: { category: 'inputs' },
 		},
 		min: {
 			description: 'Définit une valeur minimale.',
+			table: { category: 'inputs' },
 		},
 		max: {
 			description: 'Définit une valeur maximale.',
+			table: { category: 'inputs' },
 		},
 		valueAlignRight: {
 			description: 'Aligne la valeur du champ à droite.',
+			table: { category: 'inputs' },
 		},
 		noSpinButtons: {
 			description: 'Masque les boutons d’incrémentation.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

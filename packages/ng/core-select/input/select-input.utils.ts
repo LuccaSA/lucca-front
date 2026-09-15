@@ -1,4 +1,4 @@
-import { catchError, concatMap, distinctUntilChanged, finalize, map, Observable, of, scan, startWith, switchMap, takeWhile, tap, timer } from 'rxjs';
+import { catchError, concatMap, defer, distinctUntilChanged, finalize, map, Observable, of, scan, startWith, switchMap, takeWhile, tap, timer } from 'rxjs';
 import { SelectDataSource } from '../select.model';
 
 export interface BuildOptionsFromDataSourceDeps {
@@ -62,6 +62,9 @@ export function buildOptionsFromDataSource<TOption>(ds: SelectDataSource<TOption
 							return lastIndexes.length < 2 || !lastIndexes.every((i) => pages[i]?.length === 0);
 						}),
 						map((pages) => Object.values(pages).flat()),
+						// Applied on the accumulated list so cross-page decorations (eg. homonyms) can be computed
+						// Falls back to the raw accumulated options so a failing decoration doesn't kill the whole stream
+						switchMap((options) => defer(() => ds.transformOptions?.(options) ?? of(options)).pipe(catchError(() => of(options)))),
 						finalize(() => setLoading(false)), // Avoid infinite loading on complete API or error
 					);
 				}),

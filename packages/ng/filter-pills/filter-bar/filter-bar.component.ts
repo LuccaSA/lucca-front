@@ -1,6 +1,6 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, input, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, input, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
@@ -11,6 +11,7 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { FilterPillComponent } from '../filter-pill/filter-pill.component';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
+import { LU_FILTER_BAR_INSTANCE } from './filter-bar.token';
 
 @Component({
 	selector: 'lu-filter-bar',
@@ -22,6 +23,12 @@ import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 	host: {
 		class: 'filterBar',
 	},
+	providers: [
+		{
+			provide: LU_FILTER_BAR_INSTANCE,
+			useExisting: forwardRef(() => FilterBarComponent),
+		},
+	],
 })
 export class FilterBarComponent {
 	readonly intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));

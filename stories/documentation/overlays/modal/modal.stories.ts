@@ -18,16 +18,18 @@ const globalArgTypes: any = {
 		control: {
 			type: 'select',
 		},
+		table: { category: 'inputs' },
 	},
-	panelClass: { control: { type: 'text' } },
-	undismissable: { control: { type: 'boolean' } },
+	panelClass: { control: { type: 'text' }, table: { category: 'inputs' } },
+	undismissable: { control: { type: 'boolean' }, table: { category: 'inputs' } },
 	size: {
 		options: ['XS', 'S', 'M', 'L', 'XL'],
 		control: {
 			type: 'select',
 		},
+		table: { category: 'inputs' },
 	},
-	noBackdrop: { control: { type: 'boolean' } },
+	noBackdrop: { control: { type: 'boolean' }, table: { category: 'inputs' } },
 } as const;
 
 const generateStory = getStoryGenerator<StoryComponent>({
@@ -337,6 +339,40 @@ export const ModalTEST = createTestStory(Modal, async ({ canvasElement, step }) 
 
 	await step('Ferme avec Escape', async () => {
 		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+	});
+});
+
+export const ModalSubmitTEST = createTestStory(Modal, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	const openModal = async () => {
+		await userEvent.click(canvas.getByRole('button', { name: 'Open' }));
+		await waitForAngular();
+		return within(screen.getByRole('dialog'));
+	};
+
+	await step('Le bouton de submit est visible dans la modale', async () => {
+		const dialog = await openModal();
+		await expect(dialog.getByRole('button', { name: 'Ok' })).toBeVisible();
+		await expect(dialog.getByRole('button', { name: 'Annuler' })).toBeVisible();
+	});
+
+	await step('Le clic sur submit ferme la modale', async () => {
+		const dialog = within(screen.getByRole('dialog'));
+		await userEvent.click(dialog.getByRole('button', { name: 'Ok' }));
+		await waitForAngular();
+		await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+	});
+
+	await step('Le submit est déclenchable au clavier (Enter)', async () => {
+		const dialog = await openModal();
+		const submitButton = dialog.getByRole('button', { name: 'Ok' });
+		submitButton.focus();
+		await expect(submitButton).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
 		await waitForAngular();
 		await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 	});

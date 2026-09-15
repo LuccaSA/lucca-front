@@ -8,3 +8,7 @@
 @mixin focusVisible {
 	@include a11y.focusVisible;
 }
+
+@mixin empty {
+	--components-tag-display: none;
+}

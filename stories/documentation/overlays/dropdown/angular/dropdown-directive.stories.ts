@@ -34,12 +34,19 @@ export default {
 			description: 'Modifie la position du dropdown par rapport à son déclencheur.',
 			control: 'select',
 			options: ['above', 'below', 'before', 'after'],
+			table: { category: 'inputs' },
 		},
 		luDropdownOnOpen: {
 			description: "Événement déclenché à l'ouverture du dropdown.",
+			action: 'luDropdownOnOpen',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		luDropdownOnClose: {
 			description: 'Événement déclenché à la fermeture du dropdown.',
+			action: 'luDropdownOnClose',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 	},
 } as Meta;
@@ -47,7 +54,7 @@ export default {
 function getTemplate(args: DropdownBasicStory): string {
 	const direction = args.luPopoverPosition !== 'below' ? ` luDropdownPosition="${args.luPopoverPosition}"` : ``;
 	return `<div class="demo">
-	<button type="button" luButton disclosure [luDropdown]="dropdownSample"${direction}>Dropdown<lu-icon icon="arrowChevronBottom" /></button>
+	<button type="button" luButton disclosure [luDropdown]="dropdownSample"${direction} (luDropdownOnOpen)="luDropdownOnOpen()" (luDropdownOnClose)="luDropdownOnClose()">Dropdown<lu-icon icon="arrowChevronBottom" /></button>
 	<ng-template #dropdownSample>
 		<lu-dropdown-menu>
 			<lu-dropdown-item>

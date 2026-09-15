@@ -2,7 +2,6 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -21,7 +20,7 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { isNil, isNotNil, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, isNotNil, luBooleanAttribute, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -31,6 +30,7 @@ import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
+import { humanizeDate } from '../date-format';
 import { comparePeriods, startOfPeriod, transformDateInputToDate, transformDateToDateISO } from '../utils';
 
 export type DateInputValidatorErrorType = {
@@ -84,9 +84,11 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly placeholder = input<string>();
 
-	readonly disableOverflow = input(false, { transform: booleanAttribute });
-	readonly hideOverflow = input(false, { transform: booleanAttribute });
-	readonly widthAuto = input(false, { transform: booleanAttribute });
+	readonly disableOverflow = input(false, { transform: luBooleanAttribute });
+	readonly hideOverflow = input(false, { transform: luBooleanAttribute });
+	readonly widthAuto = input(false, { transform: luBooleanAttribute });
+
+	readonly humanized = input(false, { transform: luBooleanAttribute });
 
 	readonly filterPillDisabled = signal(false);
 
@@ -105,6 +107,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly inputFocused = signal(false);
 
+	readonly panelOpen = signal(false);
+
 	readonly selectedDate = signal<Date | null>(null);
 
 	readonly initialValue = signal<Date | null | undefined>(undefined);
@@ -114,7 +118,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
 
-	readonly displayValue = computed(() => {
+	readonly formattedValue = computed(() => {
 		const textInput = this.userTextInput();
 		if (textInput !== 'ɵ') {
 			const parsedInput = this.parseValue(textInput);
@@ -145,6 +149,17 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			return '';
 		}
 		return textInput;
+	});
+
+	readonly displayValue = computed(() => {
+		const selectedDate = this.selectedDate();
+		if (this.humanized() && !this.inputFocused() && !this.panelOpen() && this.isValidDate(selectedDate)) {
+			const humanizedDate = humanizeDate(this.locale, selectedDate, this.mode());
+			if (humanizedDate) {
+				return humanizedDate;
+			}
+		}
+		return this.formattedValue();
 	});
 
 	// We need to use a "magic key" here to avoid sending a null value change on initialization
@@ -357,7 +372,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		const date = transformDateInputToDate(control.value);
 		// try to parse the display value cause formControl.value is undefined if date is not parsable
 		try {
-			parse(this.displayValue(), this.dateFormatWithMode(), startOfDay(new Date()));
+			parse(this.formattedValue(), this.dateFormatWithMode(), startOfDay(new Date()));
 		} catch {
 			/* not a correct date */
 			return { date: true };

@@ -5,6 +5,22 @@ description: De "New" à "Deprecated", nos composants répondent à un cycle de 
 
 # Liste des éléments supprimés
 
+## LF 22.0
+
+### Classes
+
+| Nom | Remplacement |
+| --- | --- |
+| `.palette-grey`, `.palette-primary`, `.palette-secondary`, `.palette-lucca` | À remplacer par `.palette-neutral`, `.palette-product`, `.palette-brand`- [Schematics](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256) |
+
+### Variables CSS
+
+| Nom | Remplacement |
+| --- | --- |
+| `--palettes-grey-x`, `--palettes-primary-x`, `--palettes-secondary-x`, `--palettes-lucca-x` | À remplacer par `--palettes-neutral-x`, `--palettes-product-x`, `--palettes-lucca-x` - [Schematics](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256) |
+| `--colors-white-color` | À remplacer par `--palettes-neutral-0` ou `--pr-t-elevation-surface-raised` selon si la couleur en question est considérée comme une couleur ou une surface. |
+| `--colors-white-color` | À remplacer par `--palettes-neutral-900` |
+
 ## LF 20.1
 
 ### Composants

@@ -18,11 +18,11 @@ function getTemplate(args: EmptyStateSectionBasicStory): string {
 	return `<section class="emptyState">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
-			<div
+			<span
 				class="emptyState-content-icon bubbleIllustration mod-action mod-L"
 				aria-hidden="true"
 				[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/calendar.svg' | luSafeExternalSvg"
-			></div>
+			></span>
 			<div class="emptyState-content-text">
 				<h3 class="emptyState-content-heading">Empty State</h3>
 				<p class="emptyState-content-description">Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>

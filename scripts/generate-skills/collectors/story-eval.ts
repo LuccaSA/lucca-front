@@ -35,7 +35,7 @@ function unquote(value: string): string {
 
 /**
  * Faithful re-implementation of the repo's `generateInputs` helper
- * (stories/helpers/stories.ts), but fed with the component's AST-extracted input
+ * (@/helpers/stories.ts), but fed with the component's AST-extracted input
  * defaults so that default-valued args are correctly omitted — matching what
  * Storybook produces when its argTypes carry the component's default values.
  */
@@ -62,6 +62,17 @@ function makeGenerateInputs(defaults: Map<string, string>) {
 	};
 }
 
+/** Exposes the re-implemented helpers, and an inert stub for any helper this file does not know. */
+function withStubFallback(known: Record<string, unknown>): Record<string, unknown> {
+	return new Proxy(known, {
+		get: (target, prop) => (prop in target ? (target as any)[prop] : makeStub()),
+		has: () => true,
+	});
+}
+
+/** How many stubs iterating a stub yields — see the reasoning on `Symbol.iterator` below. */
+const STUB_ITERATION_LENGTH = 8;
+
 /** Universal inert stub: callable, indexable, coerces to '' in template literals. */
 function makeStub(): any {
 	const fn: any = function () {
@@ -71,7 +82,26 @@ function makeStub(): any {
 		get(_t, p) {
 			if (p === Symbol.toPrimitive) return () => '';
 			if (p === 'toString' || p === 'valueOf') return () => '';
-			if (p === Symbol.iterator) return undefined; // keep non-iterable so spreads fail loudly → caught
+			// Iterating a stub must not abort the evaluation. It used to: the stub was left
+			// non-iterable so spreads would "fail loudly", but the throw is swallowed by the caller's
+			// catch and the pipeline falls back to static extraction — which publishes
+			// `<lu-bubble-icon${…}${…} />`, markup nobody can copy. That was 14 of 111 component
+			// pages on 22.0, every form field included.
+			//
+			// The length is a compromise between the two ways stories iterate a stub, and neither
+			// tolerates the obvious answer:
+			//   • a spread wants it FINITE — `argTypes: { palette: { options: [...PALETTE] } }`
+			//     would hang forever on an endless one;
+			//   • array destructuring wants it NON-EMPTY — `const [formControl] = useState(…)`
+			//     hands back `undefined` from an empty one, and the next `formControl.enable()`
+			//     throws, which is exactly how `multilanguagefield` kept losing its markup.
+			// A few stubs satisfies both. Option lists never reach the markup, and each element is
+			// itself a stub, so any method called on it answers.
+			if (p === Symbol.iterator) {
+				return function* () {
+					for (let i = 0; i < STUB_ITERATION_LENGTH; i++) yield makeStub();
+				};
+			}
 			return makeStub();
 		},
 		apply() {
@@ -106,7 +136,11 @@ function evaluateModule(source: string, defaults: Map<string, string>): Evaluate
 	const requireStub = (id: string): any => {
 		// In-repo story helpers: re-implement the pure ones faithfully, stub the rest.
 		if (id.includes('helpers/stories')) {
-			return {
+			// Known helpers are re-implemented faithfully; anything else falls back to the inert stub.
+			// The list used to be closed, so every helper added to the repo silently broke evaluation
+			// for the stories using it: `useStoryModel`, introduced in 22.0, threw
+			// "is not a function" and cost 11 component pages their markup — every form field.
+			return withStubFallback({
 				generateInputs,
 				setStoryOptions: <T>(list: readonly T[]) => ['', ...(Array.isArray(list) ? list : [])],
 				cleanupTemplate: (t: string) => t,
@@ -116,7 +150,7 @@ function evaluateModule(source: string, defaults: Map<string, string>): Evaluate
 				getStoryGenerator:
 					() =>
 					({ template }: any) => ({ render: (args: any) => ({ props: args, template }) }),
-			};
+			});
 		}
 		return makeStub();
 	};
@@ -169,9 +203,7 @@ export function renderStoryTemplates(source: string, defaults: Map<string, strin
 	const mod = evaluateModule(source, defaults);
 	if (!mod) return null;
 
-	const storyExports = Object.entries(mod.exports).filter(
-		([name, val]) => name !== 'default' && !/TEST$/.test(name) && val && typeof val === 'object',
-	);
+	const storyExports = Object.entries(mod.exports).filter(([name, val]) => name !== 'default' && !/TEST$/.test(name) && val && typeof val === 'object');
 
 	const candidates: [string, any][] = storyExports.length > 0 ? storyExports : [['_meta', mod.meta]];
 

@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-footer-backgroundColor);

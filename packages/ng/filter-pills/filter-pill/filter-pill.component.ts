@@ -1,7 +1,6 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -22,7 +21,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -81,7 +80,7 @@ export class FilterPillComponent {
 
 	readonly name = input<string>();
 
-	readonly optional = input(false, { transform: booleanAttribute });
+	readonly optional = input(false, { transform: luBooleanAttribute });
 
 	readonly disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
 
@@ -191,9 +190,14 @@ export class FilterPillComponent {
 		this.inputComponentRef()?.onFilterPillOpened?.();
 	}
 
-	closePopover = () => {
-		this.popoverRef()?.close();
+	popoverClosed(): void {
 		this.inputComponentRef()?.onFilterPillClosed?.();
+	}
+
+	closePopover = () => {
+		// `onFilterPillClosed` is notified by the `luPopoverClosed` binding, which also covers
+		// closes the input never asked for (outside click, Escape handled by the popover)
+		this.popoverRef()?.close();
 	};
 
 	updatePosition = () => {

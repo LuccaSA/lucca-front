@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
 	selector: 'lu-text-flow',
-	template: `<ng-content />`,
+	template: '<ng-content />',
 	styleUrl: './text-flow.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,

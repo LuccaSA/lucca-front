@@ -1,6 +1,5 @@
-import { A11yModule } from '@angular/cdk/a11y';
 import { NgTemplateOutlet } from '@angular/common';
-import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, signal } from '@angular/core';
+import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, Injector, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { isNotNil, PortalDirective } from '@lucca-front/ng/core';
@@ -8,15 +7,17 @@ import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
 	LuIsOptionSelectedPipe,
+	LuSelectPanelLayoutComponent,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
 	TreeDisplayPipe,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
+	ɵinjectPointerNavigation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { ListboxComponent, ListboxState, OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY, firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -31,11 +32,11 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		'(document:keydown)': 'onKeydown()',
-		'(document:mousemove)': 'onMousemove()',
+		class: 'selectPanel',
+		'[class.is-pointerNavigation]': 'pointerNavigation()',
 	},
 	imports: [
-		A11yModule,
+		LuSelectPanelLayoutComponent,
 		FormsModule,
 		LuIsOptionSelectedPipe,
 		ɵLuOptionComponent,
@@ -44,7 +45,8 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 		PortalDirective,
 		LuOptionsGroupContextPipe,
 		ɵCoreSelectPanelElement,
-		IconComponent,
+		ListboxComponent,
+		ListboxOptionComponent,
 		TreeDisplayPipe,
 		TreeBranchComponent,
 	],
@@ -74,18 +76,10 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	readonly optionTpl = this.selectInput.optionTpl;
 
 	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
-	readonly pointerNavigation = signal(false);
+	readonly pointerNavigation = ɵinjectPointerNavigation(inject<ElementRef<HTMLElement>>(ElementRef).nativeElement);
 
 	readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 	readonly #injector = inject(Injector);
-
-	onKeydown(): void {
-		this.pointerNavigation.set(false);
-	}
-
-	onMousemove(): void {
-		this.pointerNavigation.set(true);
-	}
 
 	readonly someGroupOptionEnabled = computed(() => {
 		return (groupOptions: T[]) => {
@@ -104,7 +98,17 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	public readonly clue = toSignal(this.selectInput.clue$.pipe(map((clue) => clue ?? '')), { initialValue: '' });
 	public readonly shouldDisplayAddOption = this.selectInput.shouldDisplayAddOption;
 
-	readonly groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.searchable);
+	readonly groupTemplateLocation = ɵgetGroupTemplateLocation(this.hasGrouping, this.clue, this.dataSourceOptions, this.searchable);
+
+	// Loading takes precedence over empty so the "no result" message never flashes during a fetch
+	readonly listboxState = computed<ListboxState | null>(() => (this.loading() ? 'loading' : this.dataSourceOptions().length === 0 ? 'empty' : null));
+
+	readonly listboxStatusMsg = computed(() => {
+		if (this.loading()) {
+			return this.intl().loading;
+		}
+		return this.clue().length ? this.intl().emptyResults : this.intl().emptyOptions;
+	});
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {
@@ -143,7 +147,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 						s.delete(groupKey);
 						return s;
 					});
-					this.#applyGroupToggle(allGroupOptions, allGroupOptions);
+					const notSelectedOptions = allGroupOptions.filter((o) => !this.selectedOptions.some((so) => this.optionComparer()(so, o)));
+					this.#applyGroupToggle(notSelectedOptions, allGroupOptions);
 				})
 				.catch(() => {
 					this.groupLoadingKeys.update((keys) => {

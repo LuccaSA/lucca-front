@@ -262,7 +262,7 @@ export interface SyncResult {
  * - Resolves ZH page paths from the hardcoded ZH page map
  * - Preserves Figma data (manual, not auto-discoverable)
  *
- * @param storybookMap - Storybook index groups (may be empty if --skip-storybook)
+ * @param storybookMap - Storybook index groups
  * @param version - Version config for git tag access
  * @param dryRun - If true, don't write the file
  * @returns Summary of changes

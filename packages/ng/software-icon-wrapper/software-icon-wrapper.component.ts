@@ -1,8 +1,8 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, input, numberAttribute, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { LU_SOFTWARE_ICON_WRAPPER } from '@lucca-front/ng/software-icon';
 
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, IntlPluralLabelPipe, luNumberAttribute } from '@lucca-front/ng/core';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.translate';
 
@@ -11,7 +11,7 @@ import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.t
 	templateUrl: './software-icon-wrapper.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [PopoverDirective, IntlParamsPipe, NgTemplateOutlet],
+	imports: [PopoverDirective, IntlParamsPipe, IntlPluralLabelPipe, NgTemplateOutlet],
 	providers: [{ provide: LU_SOFTWARE_ICON_WRAPPER, useValue: true }],
 	host: {
 		class: 'softwareIconWrapper',
@@ -20,7 +20,7 @@ import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.t
 	},
 })
 export class SoftwareIconWrapperComponent {
-	readonly max = input(0, { transform: numberAttribute });
+	readonly max = input(0, { transform: luNumberAttribute });
 	readonly size = input<'XS' | 'S' | ''>('');
 	readonly intl = input(...intlInputOptions(LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS));
 

@@ -35,6 +35,7 @@ export default {
 		heading: {
 			type: 'string',
 			description: 'Titre de la page d’erreur.',
+			table: { category: 'inputs' },
 		},
 		illustration: {
 			options: setStoryOptions(ERROR_PAGE_ILLUSTRATION),
@@ -42,6 +43,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’illustration.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

@@ -72,12 +72,14 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		illustration: {
 			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

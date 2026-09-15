@@ -20,9 +20,10 @@
  * Supplied IDs are validated against ZeroHeight and persisted via addZhReleaseId.
  */
 
-import readline from 'readline';
 import { parseMinor, parseVersion, getZeroHeightUrl, getZhReleaseIds, addZhReleaseId } from './version-config';
+import { ask, isInteractive, isYes } from './prompt';
 import { listGeneratedVersionStrings } from './generators/aggregate-writer';
+import { fetchWithTimeout } from './collectors/http';
 
 export interface ZhGuardFlags {
 	/** Release IDs supplied non-interactively: { "21.3": 12345 } (from --zh-id 21.3=12345). */
@@ -49,11 +50,6 @@ function compareMinors(a: string, b: string): number {
 	return aMaj - bMaj || aMin - bMin;
 }
 
-function ask(question: string): Promise<string> {
-	const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-	return new Promise((resolve) => rl.question(question, (answer) => { rl.close(); resolve(answer.trim()); }));
-}
-
 /**
  * Validates a release ID by fetching a known page at `/v/<id>/`. Returns:
  *  - true  → the release exists (HTTP 200 with content);
@@ -63,10 +59,7 @@ function ask(question: string): Promise<string> {
 async function validateReleaseId(releaseId: number): Promise<true | false | 'unknown'> {
 	const url = getZeroHeightUrl(VALIDATION_PAGE, releaseId);
 	try {
-		const controller = new AbortController();
-		const timer = setTimeout(() => controller.abort(), 20000);
-		const res = await fetch(url, { signal: controller.signal });
-		clearTimeout(timer);
+		const res = await fetchWithTimeout(url, {}, 20_000);
 		if (res.status === 200) {
 			const body = await res.text();
 			return body.trim().length > 0 ? true : false;
@@ -134,7 +127,7 @@ export async function ensureZhReleaseIds(runVersions: string[], skillsDir: strin
 	if (allMinors.length === 0) return;
 
 	const newest = allMinors[allMinors.length - 1];
-	const interactive = !!process.stdin.isTTY;
+	const interactive = isInteractive();
 	const pinned = getZhReleaseIds();
 
 	for (const minor of allMinors) {
@@ -170,8 +163,8 @@ export async function ensureZhReleaseIds(runVersions: string[], skillsDir: strin
 			continue;
 		}
 		if (interactive) {
-			const answer = (await ask(`  ↳ ZeroHeight : ${minor} est-elle la dernière version disponible EN LIGNE (ZeroHeight) ? (y/n) : `)).toLowerCase();
-			if (answer === 'y' || answer === 'o' || answer === 'yes' || answer === 'oui') {
+			const answer = await ask(`  ↳ ZeroHeight : ${minor} est-elle la dernière version disponible EN LIGNE (ZeroHeight) ? (y/n) : `);
+			if (isYes(answer)) {
 				console.log(`  ℹ️  ${minor} = dernière en ligne → contenu « latest » (à pinner dès qu'une version plus récente sortira).`);
 				continue;
 			}

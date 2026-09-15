@@ -13,6 +13,7 @@ export default {
 		block: {
 			type: 'boolean',
 			description: 'Permet un affichage sur plusieurs lignes.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

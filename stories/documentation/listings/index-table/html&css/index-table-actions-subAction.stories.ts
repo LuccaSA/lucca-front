@@ -26,15 +26,15 @@ function getTemplate(args: IndexTableActionsSubActionStory): string {
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell mod-actions">
-				<button type="button" class="button indexTable-body-row-cell-subAction">
+				<button type="button" class="button">
 					<span aria-hidden="true" class="lucca-icon icon-copy"></span>
 					<span class="pr-u-mask">Copy</span>
 				</button>
-				<button type="button" class="button indexTable-body-row-cell-subAction">
+				<button type="button" class="button">
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					<span class="pr-u-mask">Edit</span>
 				</button>
-				<button type="button" class="button mod-critical indexTable-body-row-cell-subAction">
+				<button type="button" class="button mod-critical">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					<span class="pr-u-mask">Delete</span>
 				</button>

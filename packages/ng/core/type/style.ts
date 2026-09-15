@@ -1,1 +1,1 @@
-export { Palette, DecorativePalette } from '@lucca/prisme/core';
+export { Palette, DecorativePalette, ProductPalette } from '@lucca/prisme/core';

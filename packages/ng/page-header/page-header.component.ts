@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-page-header',
@@ -24,9 +24,9 @@ export class PageHeaderComponent {
 	/**
 	 * Apply a container around the content
 	 */
-	readonly container = input(false, { transform: booleanAttribute });
+	readonly container = input(false, { transform: luBooleanAttribute });
 
-	readonly sticky = input(false, { transform: booleanAttribute });
+	readonly sticky = input(false, { transform: luBooleanAttribute });
 
 	readonly descriptionIsString = computed(() => this.isStringPortalContent(this.description()));
 	readonly labelIsString = computed(() => this.isStringPortalContent(this.label()));

@@ -29,9 +29,11 @@ export const Basic: StoryObj<ButtonComponent> = {
 				type: 'select',
 			},
 			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
+			table: { category: 'inputs' },
 		},
 		block: {
 			description: 'Applique <code>display: block</code>.',
+			table: { category: 'inputs' },
 		},
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
@@ -40,6 +42,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		state: {
 			description: 'Modifie l’état du bouton.',
@@ -47,15 +50,19 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		critical: {
 			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
+			table: { category: 'inputs' },
 		},
 		disclosure: {
 			description: 'Indique la présence d’un menu.',
+			table: { category: 'inputs' },
 		},
 		delete: {
 			description: '[Deprecated] Remplacé par <code>critical</code>.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
@@ -63,6 +70,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	args: {

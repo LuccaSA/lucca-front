@@ -1,3 +1,6 @@
+import { cleanupTemplate, createTestStory, generateInputs, setStoryOptions, useStoryModel } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { waitForAngular } from '@/helpers/test';
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -5,10 +8,7 @@ import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field'
 import { PHONE_NUMBER_INPUT_AUTOCOMPLETE, PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/PhoneNumberField/Angular',
@@ -60,18 +60,21 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 				type: 'boolean',
 			},
 			description: 'Désactive le champ.',
+			table: { category: 'inputs' },
 		},
 		label: {
 			control: {
 				type: 'text',
 			},
 			description: 'Modifie le label du champ.',
+			table: { category: 'inputs' },
 		},
 		required: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
@@ -79,15 +82,18 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
+			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs' },
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
+			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -95,9 +101,11 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
+			table: { category: 'inputs' },
 		},
 		errorInlineMessage: {
 			description: 'Ajoute un texte d’erreur sous le champ lorsque celui-ci est en erreur.',
+			table: { category: 'inputs' },
 		},
 		autocomplete: {
 			options: setStoryOptions(PHONE_NUMBER_INPUT_AUTOCOMPLETE),
@@ -105,16 +113,20 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 				type: 'select',
 			},
 			description: 'Modifie le comportement autocomplete du champ.',
+			table: { category: 'inputs' },
 		},
 		noAutoPlaceholder: {
-			description: '[v19.2] Désactive le placeholder.',
+			description: 'Désactive le placeholder.',
+			table: { category: 'inputs' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
+			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
 		},
 	},
 	args: {

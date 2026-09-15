@@ -24,6 +24,9 @@ export default mergeConfig(createBaseConfig(__dirname), {
 			// Schematics project: runs the `ng add`/`ng update` migration specs in a
 			// Node environment with a ts-node loader (see vitest.schematics.config.ts).
 			'./vitest.schematics.config.ts',
+			// Skills generator project: pure Node specs for scripts/generate-skills
+			// (see vitest.generate-skills.config.ts).
+			'./vitest.generate-skills.config.ts',
 		],
 	},
 });

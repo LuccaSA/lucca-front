@@ -1,0 +1,29 @@
+@mixin vars {
+	--components-approbationInbox-list-marginInlineEnd: var(--pr-t-spacings-200);
+	--components-approbationInbox-list-marginInlineStart: var(--pr-t-spacings-200);
+	--components-approbationInbox-list-inlineSize: auto;
+	--components-approbationInbox-list-content-groupOptional-header-action-icon-backgroundColor: transparent;
+	--components-approbationInbox-list-content-groupOptional-content-display: flex;
+	--components-approbationInbox-list-content-groupOptional-marginBlockStart: var(--pr-t-spacings-50);
+	--components-approbationInbox-list-content-items-item-content-info-alignItems: start;
+	--components-approbationInbox-list-content-items-item-content-before-background: var(--pr-t-elevation-surface-raised);
+	--components-approbationInbox-list-content-items-item-content-before-boxShadow: var(--pr-t-elevation-shadow-raised);
+	--components-approbationInbox-list-footer-backgroundColor: var(--pr-t-elevation-surface-sunken);
+	--components-approbationInbox-list-footer-borderRadius: var(--pr-t-border-radius-structure);
+	--components-approbationInbox-list-footer-paddingInline: var(--pr-t-spacings-100);
+	--components-approbationInbox-list-footer-paddingBlock: var(--pr-t-spacings-100);
+	--components-approbationInbox-list-footer-marginInline: 0;
+	--components-approbationInbox-list-footer-marginBlock: 0;
+
+	--components-approbationInbox-detail-header-main-actions-display: flex;
+	--components-approbationInbox-detail-main-gap: var(--pr-t-spacings-300);
+	--components-approbationInbox-detail-header-main-block-content-paddingBlockEnd: var(--pr-t-spacings-300);
+	--components-approbationInbox-detail-container-display: flex;
+	--components-approbationInbox-detail-headerMain-padding: var(--pr-t-spacings-300);
+	--components-approbationInbox-detail-gap: var(--pr-t-spacings-200);
+	--components-approbationInbox-detail-headerMain-margin: 0;
+	--components-approbationInbox-detail-header-main-delegation-marginBlockStart: var(--pr-t-spacings-150);
+	--components-approbationInbox-detail-empty-display: none;
+	--components-approbationInbox-detail-header-main-flexWrap: nowrap;
+	--components-approbationInbox-detail-header-minBlockSize: calc(var(--components-approbationInbox-detail-headerMain-padding) * 2 + var(--pr-t-spacings-600) + var(--pr-t-spacings-50));
+}

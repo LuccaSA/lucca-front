@@ -11,6 +11,8 @@ export interface DisallowedObject {
 	objectPattern: RegExp[] | RegExp;
 	versionDeprecated?: string;
 	versionDeleted?: string;
+	actions?: string;
+	urls?: Record<string, string>;
 }
 
 export type Options = [{ deprecations: DisallowedObject[] }];
@@ -134,6 +136,8 @@ export default createRule<Options, 'deprecatedClass'>({
 								objectPattern: { oneOf: [{ type: 'object' }, { type: 'array', items: { type: 'object' }, minItems: 1 }] },
 								versionDeprecated: { type: 'string' },
 								versionDeleted: { type: 'string' },
+								actions: { type: 'string' },
+								urls: { type: 'object', additionalProperties: { type: 'string' } },
 							},
 							required: ['objectPattern'],
 							additionalProperties: false,

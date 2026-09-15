@@ -1,6 +1,5 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -9,7 +8,6 @@ import {
 	input,
 	LOCALE_ID,
 	model,
-	numberAttribute,
 	OnDestroy,
 	OnInit,
 	Signal,
@@ -22,10 +20,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { getIntlPluralLabel, intlInputOptions, LOCALE_PLURAL_RULES, luBooleanAttribute, luNumberAttribute, LuPluralForms } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
-import { PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Subject } from 'rxjs';
@@ -47,7 +45,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		FilterPillDisplayerDirective,
 		FilterPillLabelDirective,
 		ClearComponent,
-		PresentationDisplayDirective,
+		CommonModule,
 		ɵPresentationDisplayDefaultDirective,
 		IconComponent,
 	],
@@ -83,11 +81,27 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	readonly valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
-	readonly maxValuesShown = input(500, { transform: numberAttribute });
+	readonly maxValuesShown = input(500, { transform: luNumberAttribute });
 
-	readonly keepSearchAfterSelection = input(false, { transform: booleanAttribute });
+	readonly keepSearchAfterSelection = input(false, { transform: luBooleanAttribute });
 
+	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
+
+	/**
+	 * @deprecated use filterPillLabelPluralFn
+	 */
 	readonly filterPillLabelPlural = input<string>();
+	readonly filterPillLabelPluralFn = input<(count: number) => string | LuPluralForms>();
+
+	readonly filterPillLabelPluralValue = computed(() => {
+		const label = this.filterPillLabelPluralFn();
+		const count = this.valueLength();
+		if (label) {
+			const result = label(count);
+			return typeof result === 'string' ? result : getIntlPluralLabel(this.pluralRules, result, count);
+		}
+		return `${count} ${this.filterPillLabelPlural()}`;
+	});
 
 	override readonly selectParent$ = new Subject<void>();
 	override readonly selectChildren$ = new Subject<void>();
@@ -110,6 +124,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
 	// eslint-disable-next-line @angular-eslint/prefer-signals
 	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
+	public singleOptionForDisplay: Signal<T | undefined> = computed(() => this.valueSignal()?.[0]);
 	override _value: T[] = [];
 
 	#listFormat = new Intl.ListFormat(inject(LOCALE_ID));

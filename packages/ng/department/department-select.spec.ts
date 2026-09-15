@@ -1,7 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { LOCALE_ID } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ILuTree } from '@lucca-front/ng/core';
-import { fireEvent, render, screen } from '@testing-library/angular';
+import { fireEvent, render, screen, within } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
@@ -82,5 +84,142 @@ describe('department select', () => {
 
 		const results = await axe(luSelectElement);
 		expect(results).toHaveNoViolations(); // of course not
+	});
+
+	// `departments` has no Polish plural forms in Lokalise yet (see translations.ts), so we exercise the
+	// plural-resolution mechanism itself via an `[intl]` override rather than the real (untranslated) copy.
+	describe('plural resolution of the selected-count label (via intl override)', () => {
+		const departments = (count: number): ILuDepartment[] => Array.from({ length: count }, (_, i) => ({ id: i + 1, name: `Department ${i + 1}` }));
+		const intl = { departments: { few: 'few-form', many: 'many-form', other: 'other-form' } };
+
+		it('should use the "few" form for 2 selected departments (pl locale)', async () => {
+			const control = new FormControl<ILuDepartment[]>(departments(2));
+
+			await render('<lu-department-select [multiple]="true" [formControl]="control" [intl]="intl" data-testid="lu-select" />', {
+				imports: [LuDepartmentSelectInputComponent, ReactiveFormsModule],
+				providers: [{ provide: LOCALE_ID, useValue: 'pl' }],
+				componentProperties: { control, intl },
+			});
+
+			expect(screen.getByTestId('lu-select')).toHaveTextContent('few-form');
+		});
+
+		it('should use the "many" form for 5 selected departments (pl locale)', async () => {
+			const control = new FormControl<ILuDepartment[]>(departments(5));
+
+			await render('<lu-department-select [multiple]="true" [formControl]="control" [intl]="intl" data-testid="lu-select" />', {
+				imports: [LuDepartmentSelectInputComponent, ReactiveFormsModule],
+				providers: [{ provide: LOCALE_ID, useValue: 'pl' }],
+				componentProperties: { control, intl },
+			});
+
+			expect(screen.getByTestId('lu-select')).toHaveTextContent('many-form');
+		});
+	});
+
+	describe('selection', () => {
+		// Same shape as deptMock, but with unique ids so the `byId` comparer can tell the nodes apart
+		const uniqueIdsTree: ILuTree<ILuDepartment>[] = [
+			{
+				value: { id: 1, name: 'Lucca France' },
+				children: [
+					{ value: { id: 11, name: 'Tech' }, children: [] },
+					{ value: { id: 12, name: 'Admin' }, children: [] },
+				],
+			},
+			{ value: { id: 2, name: 'Lucca UK' }, children: [{ value: { id: 21, name: 'Support' }, children: [] }] },
+		];
+
+		async function renderSelect(options: { multiple?: boolean } = {}): Promise<ReturnType<typeof vi.fn>> {
+			const ngModelChange = vi.fn();
+			const treeMock = {
+				getTrees: vi.fn(() => of(uniqueIdsTree)),
+			} as Partial<LuDepartmentV4Service> as LuDepartmentV4Service;
+
+			await render(
+				`<lu-department-select
+					data-testid="lu-select"
+					${options.multiple ? 'multiple' : ''}
+					[appInstanceId]="15"
+					[ngModel]="null"
+					(ngModelChange)="ngModelChange($event)"
+				></lu-department-select>`,
+				{
+					imports: [LuDepartmentSelectInputComponent, FormsModule],
+					providers: [provideHttpClient(), provideHttpClientTesting()],
+					componentProviders: [{ provide: ALuDepartmentService, useValue: treeMock }],
+					componentProperties: { ngModelChange },
+				},
+			);
+
+			await userEvent.click(screen.getByTestId('lu-select'));
+
+			return ngModelChange;
+		}
+
+		// The selected department is also rendered in the select display, so options are looked up inside the panel
+		function clickOption(name: string): Promise<void> {
+			return userEvent.click(within(screen.getByTestId('dialog-panel')).getByText(name));
+		}
+
+		it('should emit the clicked department', async () => {
+			// Arrange
+			const ngModelChange = await renderSelect();
+
+			// Act
+			await clickOption('Tech');
+
+			// Assert
+			expect(ngModelChange).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ id: 11, name: 'Tech' }));
+		});
+
+		it('should emit a parent department without its children', async () => {
+			// Arrange
+			const ngModelChange = await renderSelect();
+
+			// Act
+			await clickOption('Lucca France');
+
+			// Assert
+			expect(ngModelChange).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ id: 1, name: 'Lucca France' }));
+		});
+
+		it('should replace the previous selection in single mode', async () => {
+			// Arrange
+			const ngModelChange = await renderSelect();
+
+			// Act
+			await clickOption('Tech');
+			await userEvent.click(screen.getByTestId('lu-select'));
+			await clickOption('Support');
+
+			// Assert
+			expect(ngModelChange).toHaveBeenLastCalledWith(expect.objectContaining({ id: 21, name: 'Support' }));
+			expect(ngModelChange).toHaveBeenCalledTimes(2);
+		});
+
+		it('should accumulate departments in multiple mode', async () => {
+			// Arrange
+			const ngModelChange = await renderSelect({ multiple: true });
+
+			// Act
+			await clickOption('Tech');
+			await clickOption('Support');
+
+			// Assert
+			expect(ngModelChange).toHaveBeenLastCalledWith([expect.objectContaining({ id: 11 }), expect.objectContaining({ id: 21 })]);
+		});
+
+		it('should deselect an already selected department in multiple mode', async () => {
+			// Arrange
+			const ngModelChange = await renderSelect({ multiple: true });
+
+			// Act
+			await clickOption('Tech');
+			await clickOption('Tech');
+
+			// Assert
+			expect(ngModelChange).toHaveBeenLastCalledWith([]);
+		});
 	});
 });

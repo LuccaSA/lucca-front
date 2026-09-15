@@ -26,26 +26,32 @@ export default {
 		statusStep: {
 			control: 'boolean',
 			description: 'Exemple avec des étapes success et critical.',
+			table: { category: 'inputs' },
 		},
 		pendingStep: {
 			control: 'boolean',
 			description: 'Exemple avec une étape en attente.',
+			table: { category: 'inputs' },
 		},
 		updated: {
 			control: 'boolean',
 			description: 'Présente une étape avec des valeurs modifiées grâce aux sous-composant <code>lu-activity-feed-update</code> et <code>lu-activity-feed-update-item</code>.',
+			table: { category: 'inputs' },
 		},
 		attachedContent: {
 			options: ['none', 'file', 'readMore'],
 			control: { type: 'select' },
 			description: 'Présente une étape avec un contenu attaché (fichier ou commentaire).',
+			table: { category: 'inputs' },
 		},
 		addAction: {
 			control: 'boolean',
 			description: 'Exemple avec un bouton d’action supplémentaire à la fin du fil d’activité.',
+			table: { category: 'inputs' },
 		},
 		user: {
 			description: 'Permet de définir l’utilisateur présenté dans l’avatar',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

@@ -39,7 +39,7 @@ function getTemplate(args: ProgressionBasicStory): string {
 	const indeterminate = args.indeterminate ? ` mod-indeterminate` : '';
 	return `
 	<div class="progress${classes}${indeterminate}">
-		<div class="progress-bar" [attr.style]="'width:' + width + '%'"></div>
+		<div class="progress-bar" [attr.style]="'inline-size:' + width + '%'"></div>
 	</div>
 	`;
 }

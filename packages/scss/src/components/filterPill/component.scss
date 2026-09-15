@@ -48,10 +48,15 @@
 		.filterPill_popover-content-option {
 			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 			border-radius: var(--pr-t-border-radius-default);
+			background-color: var(--components-filterPill-option-backgroundColor);
 			position: relative;
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			justify-content: space-between;
 
 			.formLabel {
 				position: static;
+				cursor: pointer;
 
 				&::before {
 					content: '';
@@ -60,15 +65,31 @@
 				}
 			}
 
+			.filterPill_popover-content-option-input {
+				@include a11y.mask;
+			}
+
 			&:hover {
-				background-color: var(--palettes-neutral-50);
+				--components-filterPill-option-backgroundColor: var(--palettes-neutral-50);
 			}
 
 			&:has(:checked) {
-				background-color: var(--palettes-product-50);
+				--components-filterPill-option-backgroundColor: var(--palettes-product-50);
+
+				.filterPill_popover-content-option-actions {
+					&:hover {
+						background-color: var(--palettes-product-200);
+					}
+				}
 
 				&:hover {
-					background-color: var(--palettes-product-100);
+					--components-filterPill-option-backgroundColor: var(--palettes-product-100);
+				}
+			}
+
+			.filterPill_popover-content-option-actions {
+				&:hover {
+					background-color: var(--palettes-neutral-100);
 				}
 			}
 		}

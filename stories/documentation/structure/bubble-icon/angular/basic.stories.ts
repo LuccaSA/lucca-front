@@ -1,19 +1,20 @@
 //import { DecorativeIconComponent } from '@lucca-front/ng/';
 import { IconsList } from '@/stories/icons-list';
 import { BUBBLE_ICON_DIRECTION, BUBBLE_ICON_SIZE, BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
-import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
+import { DECORATIVE_PALETTE, PALETTE, PRODUCT_PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Bubble icon/Angular/Basic',
 	argTypes: {
-		direction: {
+		bubbleDirection: {
 			options: setStoryOptions(BUBBLE_ICON_DIRECTION),
 			control: {
 				type: 'select',
 			},
 			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(BUBBLE_ICON_SIZE),
@@ -21,13 +22,15 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		palette: {
-			options: setStoryOptions([...PALETTE, ...DECORATIVE_PALETTE]),
+			options: setStoryOptions([...PALETTE, ...PRODUCT_PALETTE, ...DECORATIVE_PALETTE]),
 			control: {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au composant.',
+			table: { category: 'inputs' },
 		},
 		icon: {
 			options: IconsList.filter((i) => !i.deprecated).map((i) => i.icon),
@@ -35,9 +38,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie le glyphe de l’icône.',
+			table: { category: 'inputs' },
 		},
 		alt: {
 			description: 'Information restituée par le lecteur d’écran.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

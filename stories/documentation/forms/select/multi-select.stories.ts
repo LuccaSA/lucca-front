@@ -1,3 +1,6 @@
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { createTestStory, getStoryGenerator } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { AsyncPipe, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
@@ -35,12 +38,9 @@ import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
-import { HiddenArgType } from '@/helpers/common-arg-types';
-import { createTestStory, getStoryGenerator } from '@/helpers/stories';
-import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { InputAlias, SelectCommonAliasInput } from '../../../helpers/stories';
-import { sleep, waitForAngular } from '../../../helpers/test';
+import { ensurePickerPanelStyles, findPanelOptions, getPanelScrollContainer, isFullyVisibleInPanel, isSelectAllOption, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
@@ -102,8 +102,7 @@ const basePlay = async ({ canvasElement, step }) => {
 	}
 	await userEvent.click(input);
 	await waitForAngular();
-	const panel = within(screen.getByRole('listbox'));
-	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+	const options = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
 	const optionValues = options.slice(0, 4).map((option) => option.textContent);
 	await userEvent.click(options[0]);
 	await userEvent.click(options[1]);
@@ -122,8 +121,7 @@ const basePlay = async ({ canvasElement, step }) => {
 			await expect(input.parentElement).not.toHaveTextContent(optionValues[0]);
 			await userEvent.click(input);
 			await waitForAngular();
-			const panel = within(screen.getByRole('listbox'));
-			const options = await panel.findAllByRole('option');
+			const options = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
 			await userEvent.click(options[1]);
 			await userEvent.keyboard('{Escape}');
 			await waitForAngular();
@@ -165,15 +163,14 @@ const basePlay = async ({ canvasElement, step }) => {
 		// await userEvent.keyboard('{ArrowDown}');
 		await userEvent.keyboard('{Enter}');
 		// Because of the arrowDown issue, we'll select more using mouse in order to be able to test more stuff
-		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+		const allOptions = await findPanelOptions();
+		const options = allOptions.filter((el) => !isSelectAllOption(el));
 		const optionValues = options.slice(0, 4).map((option) => option.textContent);
 		await userEvent.click(options[1]);
 		await userEvent.click(options[2]);
 		await userEvent.click(options[3]);
-		const allOptions = await panel.findAllByRole('option');
 		await userEvent.keyboard('{Escape}');
-		if (allOptions.some((opt) => opt.id.includes('select-all'))) {
+		if (allOptions.some(isSelectAllOption)) {
 			const valuesWithSelectAll = options.map((opt) => opt.textContent);
 			valuesWithSelectAll.splice(1, 3);
 			await checkValues(input, valuesWithSelectAll);
@@ -193,7 +190,7 @@ const basePlay = async ({ canvasElement, step }) => {
 			// Now we search and select an option based on the result
 			await userEvent.type(input, 'carotte');
 			await waitForAngular();
-			const searchResult = await within(screen.getByRole('listbox')).findAllByRole('option');
+			const searchResult = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
 			await expect(searchResult).toHaveLength(1);
 			await userEvent.keyboard('{Enter}');
 			await userEvent.keyboard('{Escape}');
@@ -246,7 +243,7 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 	const selectAllCheckbox = await panel.findByLabelText('Tout sélectionner');
 	await userEvent.click(selectAllCheckbox);
 	await waitForAngular();
-	const options = await panel.findAllByRole('option').then((opts) => opts.filter((el) => !el.id.includes('select-all')));
+	const options = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
 	const optionValues = options.map((option) => option.textContent);
 	await userEvent.keyboard('{Escape}');
 	await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
@@ -261,6 +258,83 @@ export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
 		await waitFor(() => checkValues(input, []));
 	});
 });
+
+export const SelectAllScrollTEST = {
+	...createTestStory(SelectAll, async ({ canvasElement, step }) => {
+		await waitForAngular();
+		ensurePickerPanelStyles();
+		const canvas = within(canvasElement);
+		const input = canvas.getByRole('combobox');
+
+		await step('Panel opens at the top with "select all" visible (mouse)', async () => {
+			await userEvent.click(input);
+			await waitForAngular();
+			const selectAllOption = (await findPanelOptions()).find(isSelectAllOption);
+			await expect(selectAllOption).not.toBeUndefined();
+			// The opening animation must settle without applying a spurious scroll:
+			// the panel stays at the top and the "select all" header is visible
+			await waitFor(() => {
+				expect(getPanelScrollContainer().scrollTop).toBeLessThan(5);
+				expect(isFullyVisibleInPanel(selectAllOption)).toBe(true);
+			});
+		});
+
+		await step('Selected option stays marked and scrolled into view on reopen', async () => {
+			const options = (await findPanelOptions()).filter((el) => !isSelectAllOption(el));
+			// Pick an option far enough down that it is NOT visible without scrolling
+			const pickedText = options[12].textContent;
+			await userEvent.click(options[12]);
+			await waitForAngular();
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+
+			await userEvent.click(input);
+			await waitForAngular();
+			const reopenedPanel = within(screen.getByRole('listbox'));
+			const selectedOptions = await reopenedPanel.findAllByRole('option', { selected: true });
+			// The picked option is still marked as selected...
+			const pickedOption = selectedOptions.find((el) => el.textContent === pickedText);
+			await expect(pickedOption).not.toBeUndefined();
+			// ...and the panel scrolls it into view once the opening animation settles
+			await waitFor(() => expect(isFullyVisibleInPanel(pickedOption)).toBe(true));
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		});
+
+		await step('Keyboard: opening scrolls to the selection too', async () => {
+			// Same contract as the mouse case above: the option selected in the previous step is
+			// scrolled into view, the select-all header does not keep the panel at the top
+			input.focus();
+			await expect(input).toHaveFocus();
+			await userEvent.keyboard('{ArrowDown}');
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			const selectedOptions = await within(screen.getByRole('listbox')).findAllByRole('option', { selected: true });
+			await expect(selectedOptions).toHaveLength(1);
+			await waitFor(() => expect(isFullyVisibleInPanel(selectedOptions[0])).toBe(true));
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		});
+
+		await step('Keyboard: with nothing selected the panel opens at the top', async () => {
+			// Nothing legitimately scrolls anymore, so any scroll here is the spurious one applied
+			// while the opening animation runs
+			const clearButton = canvas.queryAllByRole('button').find((button) => button.className.includes('clear'));
+			await expect(clearButton).not.toBeUndefined();
+			await userEvent.click(clearButton);
+			await waitForAngular();
+			input.focus();
+			await expect(input).toHaveFocus();
+			await userEvent.keyboard('{ArrowDown}');
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			await waitFor(() => expect(getPanelScrollContainer().scrollTop).toBeLessThan(5));
+			await userEvent.keyboard('{Escape}');
+			await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		});
+	}),
+	name: 'Select all scroll TEST',
+};
 
 export const Basic = generateStory({
 	name: 'Basic',
@@ -284,8 +358,8 @@ export const Basic = generateStory({
 			keepSearchAfterSelection: false,
 		},
 		argTypes: {
-			clearable: { control: { type: 'boolean' } },
-			maxValuesShown: { control: { type: 'number' } },
+			clearable: { control: { type: 'boolean' }, table: { category: 'inputs' } },
+			maxValuesShown: { control: { type: 'number' }, table: { category: 'inputs' } },
 		},
 	},
 });
@@ -370,6 +444,60 @@ export const WithClueTEST = createTestStory(WithClue, async (context) => {
 			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 		});
 		await checkValues(input, ['Carotte']);
+	});
+});
+
+export const ScrollOnOpen = generateStory({
+	name: 'Scroll on open',
+	description: `À l’ouverture, le panneau doit être positionné en haut de la liste (aucun défilement parasite), même si aucune valeur n’est sélectionnée.`,
+	template: `<lu-multi-select
+	#selectRef
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+		},
+	},
+});
+
+export const ScrollOnOpenTEST = createTestStory(ScrollOnOpen, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	ensurePickerPanelStyles();
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('combobox');
+
+	const getPanelScrollTop = () => getPanelScrollContainer().scrollTop;
+
+	await step('Opening with the mouse shows the top of the list', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		// The list must be scrollable for the assertion to be meaningful
+		await expect(options.length).toBeGreaterThan(10);
+		await expect(options[0]).toBeVisible();
+		// No spurious scroll should be applied on open: the panel stays at the top
+		await waitFor(() => expect(getPanelScrollTop()).toBeLessThan(10));
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	});
+
+	await step('Opening with the keyboard shows the top of the list', async () => {
+		input.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await waitFor(() => expect(getPanelScrollTop()).toBeLessThan(10));
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
 	});
 });
 
@@ -512,6 +640,35 @@ export const WithDisabledOptions = generateStory({
 	},
 });
 
+export const WithCustomOptionTemplate = generateStory({
+	name: 'Custom option template',
+	description: 'Le template d’option occupe toute la largeur de la ligne : un contenu réparti avec `justify-content: space-between` aligne bien sa partie droite sur le bord de l’option.',
+	template: `<lu-multi-select
+	#selectRef
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[maxValuesShown]="maxValuesShown"
+>
+	<ng-container *luOption="let legume; select: selectRef">
+		<span class="pr-u-displayFlex pr-u-justifyContentSpaceBetween">
+			<span>{{ legume.name }}</span>
+			<span>{{ colorNameByColor[legume.color] }}</span>
+		</span>
+	</ng-container>
+</lu-multi-select>`,
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+			colorNameByColor,
+		},
+	},
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+});
+
 export const ApiV3 = generateStory({
 	name: 'Api V3',
 	description: 'Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d’utiliser la directive `apiV3`.',
@@ -578,6 +735,68 @@ export const Establishment = generateStory({
 	},
 });
 
+export const EstablishmentTEST = createTestStory(Establishment, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('combobox');
+	let initialCount = 0;
+
+	await step('Open panel and load initial options', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		const options = await findPanelOptions();
+		initialCount = options.length;
+		await expect(initialCount).toBeGreaterThan(1);
+	});
+
+	await step('Search filters the options through the API', async () => {
+		await userEvent.type(input, 'Marseille');
+		// Wait for the debounced API call to filter the options
+		await waitFor(async () => {
+			const options = await findPanelOptions();
+			expect(options.length).toBeLessThan(initialCount);
+		});
+		const options = await findPanelOptions();
+		await expect(options[0]).toHaveTextContent('Marseille');
+	});
+
+	await step('Selecting an option clears the search and restores the full list', async () => {
+		const options = await findPanelOptions();
+		await userEvent.click(options[0]);
+		await waitForAngular();
+		// The search input must be cleared…
+		await expect(input).toHaveValue('');
+		// …and the panel must show the unfiltered list again
+		// (regression: the panel used to keep showing only the filtered results)
+		await waitFor(async () => {
+			const refreshedOptions = await findPanelOptions();
+			expect(refreshedOptions.length).toBe(initialCount);
+		});
+	});
+
+	await step('Keyboard: search then Enter also restores the full list', async () => {
+		await expect(input).toHaveFocus();
+		await userEvent.type(input, 'Marseille');
+		await waitFor(async () => {
+			const options = await findPanelOptions();
+			expect(options.length).toBeLessThan(initialCount);
+		});
+		// Enter toggles the highlighted option (unselects the one picked above)
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(input).toHaveValue('');
+		await waitFor(async () => {
+			const refreshedOptions = await findPanelOptions();
+			expect(refreshedOptions.length).toBe(initialCount);
+		});
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => {
+			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+		});
+	});
+});
+
 export const Department = generateStory({
 	name: 'Departement Select',
 	description: 'Pour saisir un département, il suffit d’utiliser la directive `departments`',
@@ -612,9 +831,9 @@ export const Tree = generateStory({
 	},
 	storyPartial: {
 		args: {
-			groupingFn: (legume: ILegume) => {
-				const parent = allLegumes.find((l) => l.color === legume.color);
-				if (parent === legume) {
+			groupingFn: (legume: ILegume, items: ILegume[]) => {
+				const parent = items.find((l) => l.color === legume.color);
+				if (!parent || parent === legume) {
 					return null;
 				}
 				return parent;
@@ -845,8 +1064,8 @@ export const TestDynamicDisabled = generateStory({
 			),
 		} as any,
 		argTypes: {
-			clearable: { control: { type: 'boolean' } },
-			maxValuesShown: { control: { type: 'number' } },
+			clearable: { control: { type: 'boolean' }, table: { category: 'inputs' } },
+			maxValuesShown: { control: { type: 'number' }, table: { category: 'inputs' } },
 		},
 	},
 });
@@ -873,6 +1092,7 @@ export const AddOption = generateStory({
 			addOptionLabel: {
 				control: { type: 'text' },
 				description: 'Label affiché sur le bouton d’ajout d’option.',
+				table: { category: 'inputs' },
 			},
 			addOptionStrategy: {
 				description: 'Définit les conditions pour afficher le bouton d’ajout d’option.',
@@ -880,6 +1100,7 @@ export const AddOption = generateStory({
 					type: 'select',
 					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
 				},
+				table: { category: 'inputs' },
 			},
 		},
 		args: {
