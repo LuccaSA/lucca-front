@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, input, OnInit } from '@angular/core';
+import { Directive, ElementRef, inject, input, OnDestroy, OnInit } from '@angular/core';
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 
@@ -9,7 +9,7 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 		class: 'luNativeInput',
 	},
 })
-export class InputDirective implements OnInit {
+export class InputDirective implements OnInit, OnDestroy {
 	public readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	public readonly formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
@@ -24,5 +24,9 @@ export class InputDirective implements OnInit {
 		if (this.formFieldRef) {
 			this.formFieldRef.addInput(this);
 		}
+	}
+
+	ngOnDestroy(): void {
+		this.formFieldRef?.removeInput(this);
 	}
 }

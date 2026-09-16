@@ -14,6 +14,7 @@
 		'container close'
 		'content content';
 	--components-dialog-insideHeaderTitleAlign: left;
+	--components-dialog-insideHeaderTitleFont: var(--pr-t-font-heading-2);
 	--components-dialog-insideHeaderTitlePadding: calc(var(--pr-t-spacings-50) / 2) 0;
 	--components-dialog-insideHeaderButtonDisplay: flex;
 	--components-dialog-insideHeaderLinkDisplay: none;
@@ -33,6 +34,7 @@
 	--components-dialog-inside-header-position: relative;
 	--components-dialog-inside-header-paddingBlock: var(--pr-t-spacings-200);
 	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-300);
+	--components-dialog-inside-header-content-paddingBlockStart: 0px;
 	--components-dialog-inside-header-button-position: static;
 	--components-dialog-inside-backgroundImage: none;
 	--components-dialog-minBlockSize: 0px;
@@ -42,6 +44,7 @@
 	--components-dialog-inside-fancyIllustrations-inlineSize: var(--components-dialog-inside-paddingInlineEnd);
 	--components-dialog-inside-header-button-insetBlockStart: var(--pr-t-spacings-200);
 	--components-dialog-inside-header-button-insetInlineEnd: var(--pr-t-spacings-300);
+	--components-dialog-inside-header-button-justifySelf: auto;
 	--components-dialog-inside-header-marginBlock: 0px;
 	--components-dialog-inside-footer-marginBlock: 0px;
 	--components-dialog-inside-footer-actions-button-icon-menuDots-display: block;

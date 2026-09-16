@@ -91,10 +91,6 @@
 	--components-dialog-inset: auto 0 var(--components-dialog-visibleViewportBottomOffset, 0px) 0;
 }
 
-@mixin noOpeningAnimation {
-	--components-dialog-animationDuration: 0s;
-}
-
 @mixin sheetNarrow {
 	--components-dialog-inside-footer-actions-button-icon-menuDots-display: none;
 	--components-dialog-inside-footer-actions-button-icon-mask-all: unset !important;

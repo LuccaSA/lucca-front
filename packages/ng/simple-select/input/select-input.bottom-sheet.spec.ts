@@ -282,6 +282,9 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(pane()).toHaveClass('dialog');
 			expect(pane()).toHaveClass('mod-sheet');
 			expect(pane()).toHaveClass('mod-maxContent');
+			// Scopes the select-specific dialog header tweaks (centered title, close button pulled out of
+			// flow) so they don't leak onto unrelated `lu-dialog-header` usages elsewhere in the app.
+			expect(pane()).toHaveClass('mod-select');
 			expect(document.querySelector('.dialog_backdrop')).not.toBeNull();
 		});
 
@@ -295,6 +298,64 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			// Assert
 			expect(pane()).not.toHaveClass('dialog');
 			expect(document.querySelector('.dialog_backdrop')).toBeNull();
+		});
+	});
+
+	describe('resizing across the breakpoint while the panel stays open', () => {
+		/**
+		 * The panel's own ref (`SelectPanelSheetRef` vs `SelectPanelRef`) is picked once at open time —
+		 * `bottomSheetMode()` changing afterwards must not make the panel's template try to switch which
+		 * surface it renders (it was never actually attached as a CDK dialog), which used to crash with
+		 * `NG0201: No provider found for LuDialogRef`. Instead, the panel closes outright.
+		 */
+		it('should close, rather than crash, when going from the desktop overlay to below the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, false);
+			const select = selectOf(fixture);
+			select.openPanel();
+			expect(select.isPanelOpen).toBe(true);
+
+			// Act
+			breakpointObserver.belowSmallBreakpoint.next(true);
+			expect(() => fixture.detectChanges()).not.toThrow();
+
+			// Assert
+			expect(select.isPanelOpen).toBe(false);
+		});
+
+		it('should close, rather than crash, when going from the sheet to above the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, true);
+			const select = selectOf(fixture);
+			select.openPanel();
+			expect(select.isPanelOpen).toBe(true);
+
+			// Act
+			breakpointObserver.belowSmallBreakpoint.next(false);
+			expect(() => fixture.detectChanges()).not.toThrow();
+
+			// Assert
+			expect(select.isPanelOpen).toBe(false);
+		});
+
+		it('should still resolve the panel title on the next open, even though the trigger was torn down and rebuilt as button/input while the breakpoint round-tripped', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, true);
+			const select = selectOf(fixture);
+			select.openPanel();
+			expect(select.panelTitle()).toBe('Country');
+
+			// Act — round trip through desktop, which auto-closes the panel and rebuilds the trigger
+			// (button below the S breakpoint, input above it) each way
+			breakpointObserver.belowSmallBreakpoint.next(false);
+			fixture.detectChanges();
+			breakpointObserver.belowSmallBreakpoint.next(true);
+			fixture.detectChanges();
+			select.openPanel();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(select.panelTitle()).toBe('Country');
 		});
 	});
 

@@ -146,10 +146,12 @@
 			position: var(--components-dialog-inside-header-button-position);
 			inset-block-start: var(--components-dialog-inside-header-button-insetBlockStart);
 			inset-inline-end: var(--components-dialog-inside-header-button-insetInlineEnd);
+			justify-self: var(--components-dialog-inside-header-button-justifySelf);
 		}
 
 		.dialog-inside-header-content {
 			grid-area: content;
+			padding-block-start: var(--components-dialog-inside-header-content-paddingBlockStart);
 
 			&:empty {
 				display: none;
@@ -165,6 +167,7 @@
 			flex-grow: var(--components-dialog-insideContent-flexGrow);
 			display: block;
 			outline: none;
+			isolation: isolate;
 
 			&:empty {
 				display: none;
@@ -176,7 +179,7 @@
 		}
 
 		.dialog-inside-header-container-title {
-			font: var(--pr-t-font-heading-2);
+			font: var(--components-dialog-insideHeaderTitleFont);
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;

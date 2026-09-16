@@ -11,14 +11,14 @@ import { take } from 'rxjs';
  * mode — backdrop, blocked page scroll, focus trap, focus restoration and close button all come with
  * it — so the panel is opened as a dialog instead of as a bespoke overlay.
  *
- * The opening animation is disabled (`mod-noOpeningAnimation`) and the search input is focused by hand
- * instead of through CDK's `autoFocus`. iOS Safari only raises the virtual keyboard for a `focus()`
- * call made synchronously inside the tap that triggered it; CDK's own autofocus defers the actual
- * `focus()` through `afterNextRender`, which always lands after that window has closed, so the
- * keyboard silently never opens. Forcing a render with `ApplicationRef.tick()` right here — still
- * inside the same synchronous call stack as the tap — makes the search input exist in the DOM in time
- * to focus it for real, and skipping the animation keeps the sheet from visibly jumping once the
- * keyboard's own viewport resize kicks in immediately after.
+ * The opening animation is disabled (`mod-select`, styled by the select packages themselves — see their
+ * `sheet` mixin) and the search input is focused by hand instead of through CDK's `autoFocus`. iOS
+ * Safari only raises the virtual keyboard for a `focus()` call made synchronously inside the tap that
+ * triggered it; CDK's own autofocus defers the actual `focus()` through `afterNextRender`, which always
+ * lands after that window has closed, so the keyboard silently never opens. Forcing a render with
+ * `ApplicationRef.tick()` right here — still inside the same synchronous call stack as the tap — makes
+ * the search input exist in the DOM in time to focus it for real, and skipping the animation keeps the
+ * sheet from visibly jumping once the keyboard's own viewport resize kicks in immediately after.
  *
  * @param dialogService the dialog service provided alongside the select input
  * @param panel the panel component to render inside the sheet
@@ -31,7 +31,10 @@ export function openSelectPanelSheet<TPanel>(dialogService: LuDialogService, pan
 		mode: 'sheet',
 		size: 'maxContent',
 		ariaLabel: ariaLabel || undefined,
-		panelClasses: ['mod-noOpeningAnimation'],
+		// `mod-select` lets the select packages scope their own dialog header tweaks (centered title,
+		// close button pulled out of flow, no opening animation) without reaching into the generic
+		// dialog styles.
+		panelClasses: ['mod-select'],
 		// The panel ref and the select input reach the panel through this injector: the dialog's own
 		// `providers` hook is reserved by the service for `LuDialogRef`. `autoFocus: false` disables
 		// CDK's own deferred autofocus — the search input is focused by hand right below instead.

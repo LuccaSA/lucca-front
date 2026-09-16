@@ -70,10 +70,6 @@
 			@include fullScreen;
 		}
 
-		&.mod-noOpeningAnimation {
-			@include noOpeningAnimation;
-		}
-
 		&:has(.dialog-inside-header-actionOptional:not(:empty)) {
 			@include withAction;
 		}

@@ -65,3 +65,18 @@
 		margin: var(--pr-t-spacings-75) calc(var(--pr-t-spacings-100) * -1) calc(var(--pr-t-spacings-100) * -1);
 	}
 }
+
+@mixin select {
+	--components-dialog-animationDuration: 0s;
+	--components-dialog-insideHeaderTitleAlign: center;
+	--components-dialog-insideHeaderTitleFont: var(--pr-t-font-heading-3);
+	--components-dialog-insideHeaderColumns: 1fr auto 1fr;
+	--components-dialog-inside-header-button-justifySelf: end;
+	--components-dialog-insideHeaderAreas:
+		'spacer  container close  '
+		'content content   content';
+	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-200);
+	--components-dialog-inside-header-content-paddingBlockStart: var(--pr-t-spacings-100);
+	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-50);
+	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50);
+}

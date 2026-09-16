@@ -144,6 +144,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	 */
 	readonly bottomSheetMode = computed(() => (this.belowSmallBreakpoint() ?? false) && !this.filterPillMode);
 
+	/**
+	 * Whether the currently open panel is a sheet, snapshotted when it opens rather than tracking
+	 * `bottomSheetMode()` live: the panel's own ref (`SelectPanelSheetRef` vs `SelectPanelRef`) is
+	 * chosen once at open time too, so resizing across the breakpoint while the panel stays open must
+	 * not flip which surface its template renders — that surface was never actually attached as a
+	 * dialog, so switching to it crashes with a missing `LuDialogRef` provider.
+	 */
+	readonly panelBottomSheetMode = signal(false);
+
 	/** Field label echoed as the bottom sheet's title, snapshotted when the sheet opens. */
 	readonly panelTitle = signal('');
 
@@ -329,6 +338,14 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			}
 		});
 
+		// Rather than leaving an open panel stuck in a stale sheet/overlay style once `bottomSheetMode()`
+		// no longer matches it, close it outright — the next open picks the right style for the new breakpoint.
+		ɵeffectWithDeps([this.bottomSheetMode], (bottomSheetMode) => {
+			if (this.isPanelOpen && bottomSheetMode !== this.panelBottomSheetMode()) {
+				this.closePanel();
+			}
+		});
+
 		// When options arrive asynchronously via a dataSource, dataSourceOptions changes but options doesn't.
 		// We need to reposition the panel after the DOM updates in both cases.
 		ɵeffectWithDeps([this.dataSourceOptions], (_options, onCleanup) => {
@@ -456,9 +473,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 		this.#isOpeningPanel = true;
 		try {
-			if (this.bottomSheetMode()) {
-				// The sheet shows the field label as its title and embeds its own search input (auto-focused via
-				// cdkFocusInitial); focusing the covered host input would pop the mobile keyboard on a hidden field.
+			const isSheet = this.bottomSheetMode();
+			this.panelBottomSheetMode.set(isSheet);
+
+			if (isSheet) {
+				// The sheet shows the field label as its title and embeds its own search input (auto-focused by
+				// `openSelectPanelSheet`); focusing the covered host input would pop the mobile keyboard on a
+				// hidden field.
 				this.panelTitle.set(this.resolvePanelTitle());
 			} else {
 				this.focusInput();
@@ -516,10 +537,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 		// The field points its own `aria-labelledby` at its value displayer, so only an actual `<label>`
 		// counts here — otherwise a select without any label would echo its selected value as the title.
+		// `aria-labelledby` can list several ids (label, hint, …), and some can be stale — e.g. leftover
+		// from before the trigger was torn down and rebuilt as the breakpoint flipped between the button
+		// and input variants — so every id is checked instead of trusting the first one to be the label.
 		const host = this.hostElementRef.nativeElement;
-		const labelId = host.querySelector('[aria-labelledby]')?.getAttribute('aria-labelledby')?.split(' ')[0];
-		const label = labelId ? host.ownerDocument.getElementById(labelId) : null;
-		return label?.tagName === 'LABEL' ? this.getLabelText(label) : '';
+		const labelledByIds = host.querySelector('[aria-labelledby]')?.getAttribute('aria-labelledby')?.split(' ') ?? [];
+		const label = labelledByIds.map((id) => host.ownerDocument.getElementById(id)).find((element): element is HTMLElement => element?.tagName === 'LABEL');
+		return label ? this.getLabelText(label) : '';
 	}
 
 	// Read the label text without its adornments (help tooltip, required marker, screen-reader-only copy)
