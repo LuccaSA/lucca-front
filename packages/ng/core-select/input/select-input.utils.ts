@@ -69,10 +69,18 @@ function accumulatedPages<TOption>(ds: SelectDataSource<TOption>, clue: string, 
 			catchError(() => of([] as readonly TOption[])),
 			// A request completing without emitting still answers its page, rather than locking pagination
 			defaultIfEmpty([] as readonly TOption[]),
-			tap({ subscribe: () => setLoading(true), next: () => setLoading(false) }),
 			// A long lived data source keeps refreshing its page: those later emissions update the
-			// accumulated list, but only the first one may arm the request for the next page
+			// accumulated list, but only the first one answers the page — it alone arms the request for
+			// the next page and clears the loading row, which a refresh must leave up while a page is in flight
 			map((items, index) => ({ page, items, isFirstAnswer: index === 0 })),
+			tap({
+				subscribe: () => setLoading(true),
+				next: ({ isFirstAnswer }) => {
+					if (isFirstAnswer) {
+						setLoading(false);
+					}
+				},
+			}),
 		);
 
 	return loadPage(0).pipe(

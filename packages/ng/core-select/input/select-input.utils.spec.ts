@@ -445,6 +445,32 @@ describe('buildOptionsFromDataSource', () => {
 		sub.unsubscribe();
 	}));
 
+	it('should keep the loading state while a page is in flight and an older one refreshes', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$, setLoading } = createDeps();
+		const page0$ = new ReplaySubject<readonly TestOption[]>(1);
+		const ds: SelectDataSource<TestOption> = {
+			getOptions: ({ page }) => (page === 0 ? page0$ : of([{ id: page, name: `Page ${page}` }]).pipe(delay(10))),
+		};
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe();
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		page0$.next([{ id: 0, name: 'Page 0' }]);
+		tick();
+
+		nextPage$.next(); // page 1 in flight
+		page0$.next([{ id: 0, name: 'Page 0 refreshed' }]); // page 0 refreshing must not clear the loading row
+		tick();
+
+		expect(setLoading).toHaveBeenLastCalledWith(true);
+
+		tick(10);
+		expect(setLoading).toHaveBeenLastCalledWith(false);
+
+		sub.unsubscribe();
+	}));
+
 	it('should settle a page whose request completes without emitting', fakeAsync(() => {
 		const { deps, isPanelOpen$, clue$, nextPage$, setLoading } = createDeps();
 		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
