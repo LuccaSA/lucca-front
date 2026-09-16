@@ -70,6 +70,13 @@ function trackVisibleViewport<TPanel>(dialogRef: LuDialogRef<TPanel, never>): vo
 		const style = document.documentElement.style;
 		style.setProperty('--components-dialog-visibleViewportHeight', `${viewport.height}px`);
 		style.setProperty('--components-dialog-visibleViewportBottomOffset', `${window.innerHeight - viewport.height - viewport.offsetTop}px`);
+		// The initially-selected option scrolls into view as soon as it's rendered (see
+		// `scrollIntoViewOnceReady`), which — with the opening animation disabled — happens before the
+		// keyboard has finished opening and before the resize above has clamped the sheet down to its
+		// final size. That earlier scroll position is stale once the sheet's own geometry has changed
+		// size underneath it, so it's redone here on every viewport update, landing correctly once the
+		// keyboard settles.
+		dialogRef.cdkRef.overlayRef.overlayElement.querySelector('.is-highlighted')?.scrollIntoView({ block: 'nearest' });
 	};
 	update();
 	viewport.addEventListener('resize', update);

@@ -476,4 +476,36 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportBottomOffset')).toBe('');
 		});
 	});
+
+	describe('selected option scroll position', () => {
+		afterEach(() => {
+			vi.unstubAllGlobals();
+		});
+
+		it('should re-scroll the highlighted option into view once the visual viewport settles, since resizing the sheet down for the keyboard can scroll it back out of view', () => {
+			// Arrange
+			const listeners = new Set<() => void>();
+			const viewport = {
+				height: 800,
+				offsetTop: 0,
+				addEventListener: (_type: string, listener: () => void) => listeners.add(listener),
+				removeEventListener: (_type: string, listener: () => void) => listeners.delete(listener),
+			};
+			vi.stubGlobal('visualViewport', viewport);
+			vi.stubGlobal('innerHeight', 800);
+			const scrollIntoView = vi.spyOn(Element.prototype, 'scrollIntoView').mockImplementation(() => {});
+			const fixture = createHost(FormFieldHostComponent, true);
+			selectOf(fixture).writeValue(options[1]);
+			fixture.detectChanges();
+
+			// Act
+			selectOf(fixture).openPanel();
+			scrollIntoView.mockClear(); // ignore whatever scrolled synchronously while the sheet was opening
+			viewport.height = 400; // the keyboard just finished opening
+			listeners.forEach((listener) => listener());
+
+			// Assert
+			expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest' });
+		});
+	});
 });
