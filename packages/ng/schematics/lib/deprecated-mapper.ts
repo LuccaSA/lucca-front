@@ -2,7 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import { createSourceFile, forEachChild, isIdentifier, ScriptTarget } from 'typescript';
 import { createVisitor, replaceComponentInput, replaceComponentInputName, updateAngularTemplate } from './angular-template';
 import { applyUpdates, FileUpdate, updateContent } from './file-update';
-import { HtmlAst, HtmlAstVisitor } from './html-ast';
+import { HtmlAst, HtmlAstVisitor, removeAttributeUpdate } from './html-ast';
 import { migrateFile } from './schematics';
 
 /**
@@ -158,20 +158,12 @@ export class DeprecatedMapper {
 
 				// Static text attribute: `attrName` (boolean) or `attrName="value"`
 				elAst.visitAttribute(attrName, (attr) => {
-					const from = attr.sourceSpan.start.offset;
-					const to = attr.sourceSpan.end.offset;
-					const hasLeadingSpace = from > 0 && template[from - 1] === ' ';
-					const removeFrom = hasLeadingSpace ? from - 1 : from;
-					updates.push({ position: removeFrom, oldContent: template.slice(removeFrom, to), newContent: '' });
+					updates.push(removeAttributeUpdate(template, attr));
 				});
 
 				// Bound attribute: `[attrName]="expr"`
 				elAst.visitBoundAttribute(attrName, (attr) => {
-					const from = attr.sourceSpan.start.offset;
-					const to = attr.sourceSpan.end.offset;
-					const hasLeadingSpace = from > 0 && template[from - 1] === ' ';
-					const removeFrom = hasLeadingSpace ? from - 1 : from;
-					updates.push({ position: removeFrom, oldContent: template.slice(removeFrom, to), newContent: '' });
+					updates.push(removeAttributeUpdate(template, attr));
 				});
 			});
 		});
