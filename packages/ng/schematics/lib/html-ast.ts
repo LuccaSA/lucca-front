@@ -2,7 +2,7 @@
 // @ts-ignore
 import type { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
 import { createSourceFile, ScriptTarget } from 'typescript';
-import { applyUpdates, updateContent } from './file-update.js';
+import { applyUpdates, FileUpdate, updateContent } from './file-update.js';
 import { currentSchematicContext } from './lf-schematic-context';
 import { replaceStringLiterals } from './typescript-ast.js';
 
@@ -121,6 +121,34 @@ export class HtmlAst extends HtmlAstVisitor<TemplateNode> {
 			}).nodes
 		);
 	}
+}
+
+/**
+ * Builds the update removing an attribute from the template it belongs to, along with the whitespace preceding it.
+ */
+export function removeAttributeUpdate(template: string, attribute: TmplAstTextAttribute | TmplAstBoundAttribute): FileUpdate {
+	let position = attribute.sourceSpan.start.offset;
+
+	while (position > 0 && /\s/.test(template[position - 1])) {
+		position--;
+	}
+
+	return {
+		position,
+		oldContent: template.slice(position, attribute.sourceSpan.end.offset),
+		newContent: ''
+	};
+}
+
+/**
+ * Builds the update adding `name="value"` right after the tag name of the given element.
+ */
+export function addAttributeUpdate(element: TmplAstElement, name: string, value: string): FileUpdate {
+	return {
+		position: element.startSourceSpan.start.offset + '<'.length + element.name.length,
+		oldContent: '',
+		newContent: ` ${name}="${value}"`
+	};
 }
 
 export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>): string {

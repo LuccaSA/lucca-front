@@ -1,0 +1,26 @@
+<lu-single-file-upload size="L" />
+
+<lu-single-file-upload />
+
+<lu-multi-file-upload [droppable]="true" (fileChange)="onChange($event)" />
+
+<lu-file-entry size="L" [entry]="file" />
+
+<lu-file-entry
+	[entry]="file"
+	[deletable]="true"
+/>
+
+<lu-file-entry [entry]="file" />
+
+<lu-file-entry [entry]="file" [size]="'L'" />
+
+<lu-single-file-upload [size]="isCompact ? 'S' : null" />
+
+@if (file) {
+	<lu-file-entry size="L" [entry]="file" />
+} @else {
+	<lu-single-file-upload />
+}
+
+<lu-bubble-illustration illustration="empty" size="L" />
