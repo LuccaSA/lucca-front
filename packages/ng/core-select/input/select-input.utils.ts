@@ -6,6 +6,12 @@ export interface BuildOptionsFromDataSourceDeps {
 	clue$: Observable<string | null>;
 	isPanelOpen$: Observable<boolean>;
 	setLoading: (loading: boolean) => void;
+	/**
+	 * Called when a next page request is actually accepted (ie. not dropped because a page is already
+	 * loading). Data sources that close their current page when the next one is asked must rely on this
+	 * rather than on `nextPage$`, whose duplicates would cut a page still waiting for its options.
+	 */
+	onPageAccepted?: () => void;
 }
 
 /**
@@ -20,7 +26,7 @@ interface PageState<TOption> {
 type PageEmission<TOption> = PageState<TOption> & { page: number };
 
 export function buildOptionsFromDataSource<TOption>(ds: SelectDataSource<TOption>, deps: BuildOptionsFromDataSourceDeps): Observable<readonly TOption[]> {
-	const { nextPage$, clue$, isPanelOpen$, setLoading } = deps;
+	const { nextPage$, clue$, isPanelOpen$, setLoading, onPageAccepted } = deps;
 
 	const normalizedClue$ = clue$.pipe(
 		map((clue) => clue ?? ''),
@@ -47,13 +53,19 @@ export function buildOptionsFromDataSource<TOption>(ds: SelectDataSource<TOption
 						let isPageLoading = false;
 						let lastPage = 0;
 
-						return nextPage$.pipe(
-							// Only one page in flight at a time: scrolling to the bottom of the panel can ask for the
-							// next page twice (Firefox emits two scroll events where Chrome emits one), and asking for
-							// page n+1 before page n has answered would leave two pending pages behind.
+						// Only one page in flight at a time: scrolling to the bottom of the panel can ask for the
+						// next page twice (Firefox emits two scroll events where Chrome emits one), and asking for
+						// page n+1 before page n has answered would leave two pending pages behind.
+						const page$ = nextPage$.pipe(
 							filter(() => !isPageLoading),
 							map(() => ++lastPage),
+							// Emitted before `concatMap` subscribes to the new page, so a data source closing its current
+							// page on this signal doesn't lose options that are still on their way
+							tap(() => onPageAccepted?.()),
 							startWith(0),
+						);
+
+						return page$.pipe(
 							concatMap((page) => {
 								isPageLoading = true;
 								setLoading(true);

@@ -187,6 +187,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	readonly #internalClueChange$ = new Subject<string>();
 	readonly nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
+	// Next page requests actually honoured by the pagination pipeline: `nextPage$` can emit twice for a
+	// single scroll to the bottom of the panel (Firefox), and the duplicate must not close a pending page.
+	readonly #pageAccepted$ = new Subject<void>();
 	readonly addOption = output<string>();
 
 	public readonly valueSignal = signal<TValue | null>(null);
@@ -230,7 +233,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				let lastEmittedThisPage: readonly TOption[] = [];
 				return this.manualOptions$.pipe(
 					tap((options) => (lastEmittedThisPage = options)),
-					takeUntil(this.nextPage$),
+					takeUntil(this.#pageAccepted$),
 					finalize(() => (emittedKeys = new Set(lastEmittedThisPage.map((p) => this.optionKey()(p))))),
 					map((options) => options.filter((c) => !emittedKeys.has(this.optionKey()(c)))),
 				);
@@ -251,6 +254,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 					clue$: this.clue$,
 					isPanelOpen$: this.isPanelOpen$,
 					setLoading: (v) => this.loading.set(v),
+					onPageAccepted: () => this.#pageAccepted$.next(),
 				}),
 			),
 		),

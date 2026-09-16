@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import type { Mock } from 'vitest';
-import { BehaviorSubject, delay, of, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, delay, of, Subject, takeUntil, throwError } from 'rxjs';
 import { SelectDataSource } from '../select.model';
 import { buildOptionsFromDataSource, BuildOptionsFromDataSourceDeps } from './select-input.utils';
 
@@ -412,6 +412,64 @@ describe('buildOptionsFromDataSource', () => {
 		expect(emitted[emitted.length - 1]).toEqual([
 			{ id: 0, name: 'Page 0' },
 			{ id: 2, name: 'Page 2' },
+		]);
+
+		sub.unsubscribe();
+	}));
+
+	it('should only notify next page requests that are actually honoured', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		const onPageAccepted = vi.fn();
+		const ds: SelectDataSource<TestOption> = {
+			getOptions: ({ page }) => of([{ id: page, name: `Page ${page}` }]).pipe(delay(10)),
+		};
+
+		const sub = buildOptionsFromDataSource(ds, { ...deps, onPageAccepted }).subscribe();
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick(10);
+
+		expect(onPageAccepted).not.toHaveBeenCalled(); // initial page is not a next page request
+
+		nextPage$.next();
+		nextPage$.next(); // duplicate, dropped while page 1 is loading
+		tick(10);
+
+		expect(onPageAccepted).toHaveBeenCalledTimes(1);
+
+		sub.unsubscribe();
+	}));
+
+	it('should not drop a pending page when the data source closes its page on accepted requests', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		// Mirrors the manual `[options]` data source: a long-lived stream of options, closed when the next
+		// page is asked — a duplicate request must not close a page that hasn't received its options yet
+		const manualOptions$ = new Subject<TestOption[]>();
+		const pageAccepted$ = new Subject<void>();
+		const ds: SelectDataSource<TestOption> = {
+			getOptions: () => manualOptions$.pipe(takeUntil(pageAccepted$)),
+		};
+		const emitted: (readonly TestOption[])[] = [];
+
+		const sub = buildOptionsFromDataSource(ds, { ...deps, onPageAccepted: () => pageAccepted$.next() }).subscribe((options) => emitted.push(options));
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick();
+
+		manualOptions$.next([{ id: 0, name: 'Page 0' }]);
+		tick();
+
+		nextPage$.next();
+		nextPage$.next(); // Firefox emits two scroll events at the bottom of the panel
+
+		manualOptions$.next([{ id: 1, name: 'Page 1' }]); // options pushed after the duplicate request
+		tick();
+
+		expect(emitted[emitted.length - 1]).toEqual([
+			{ id: 0, name: 'Page 0' },
+			{ id: 1, name: 'Page 1' },
 		]);
 
 		sub.unsubscribe();
