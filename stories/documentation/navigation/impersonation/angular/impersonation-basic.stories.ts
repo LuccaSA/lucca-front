@@ -23,6 +23,27 @@ export default {
 			description: 'Inclus les collaborateurs partis',
 			table: { category: 'inputs' },
 		},
+		operationIds: {
+			control: {
+				type: 'object',
+			},
+			description: "Restreint les utilisateurs à ceux accessibles via ces opérations, dans le périmètre de l'appInstanceId",
+			table: { category: 'inputs' },
+		},
+		uniqueOperationIds: {
+			control: {
+				type: 'object',
+			},
+			description: "Restreint les utilisateurs à ceux accessibles via ces opérations uniques ; prioritaire sur operationIds / appInstanceId, que l'API ignore alors",
+			table: { category: 'inputs' },
+		},
+		appInstanceId: {
+			control: {
+				type: 'number',
+			},
+			description: "Instance d'application dans laquelle les operationIds sont résolus ; sans effet avec uniqueOperationIds",
+			table: { category: 'inputs' },
+		},
 	},
 	decorators: [
 		moduleMetadata({
