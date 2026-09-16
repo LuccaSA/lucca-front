@@ -1,4 +1,4 @@
-import { catchError, concatMap, defer, distinctUntilChanged, finalize, map, Observable, of, scan, startWith, switchMap, takeWhile, tap, timer } from 'rxjs';
+import { catchError, defaultIfEmpty, defer, distinctUntilChanged, EMPTY, expand, finalize, map, Observable, of, scan, switchMap, take, takeWhile, tap, timer } from 'rxjs';
 import { SelectDataSource, SelectDataSourceParams } from '../select.model';
 
 export interface BuildOptionsFromDataSourceDeps {
@@ -53,37 +53,48 @@ function wholeList<TOption>(ds: SelectDataSource<TOption>, clue: string): Observ
 	return ds.getOptions(params).pipe(catchError(() => of([] as readonly TOption[])));
 }
 
-/** Paginated data source: one request per page, accumulated in order until two consecutive pages come back empty. */
+/**
+ * Paginated data source: one request per page, accumulated in order until two consecutive pages come
+ * back empty.
+ *
+ * `expand` asks for the next page from the result of the previous one, so `nextPage$` is only listened
+ * to between two pages: a page can't be asked for while one is in flight, and the extra scroll events
+ * Firefox emits at the bottom of the panel fall on no subscriber instead of queueing pages. Pages also
+ * only ever enter the accumulator once they answered, so the guard below can't take one that is still
+ * loading for an empty one.
+ */
 function accumulatedPages<TOption>(ds: SelectDataSource<TOption>, clue: string, { nextPage$, setLoading }: BuildOptionsFromDataSourceDeps): Observable<readonly TOption[]> {
-	const page$ = nextPage$.pipe(
-		scan((page) => page + 1, 0),
-		startWith(0),
-	);
+	const loadPage = (page: number): Observable<{ page: number; items: readonly TOption[]; isFirstAnswer: boolean }> =>
+		ds.getOptions({ clue, page }).pipe(
+			catchError(() => of([] as readonly TOption[])),
+			// A request completing without emitting still answers its page, rather than locking pagination
+			defaultIfEmpty([] as readonly TOption[]),
+			tap({ subscribe: () => setLoading(true), next: () => setLoading(false) }),
+			// A long lived data source keeps refreshing its page: those later emissions update the
+			// accumulated list, but only the first one may arm the request for the next page
+			map((items, index) => ({ page, items, isFirstAnswer: index === 0 })),
+		);
 
-	return page$.pipe(
-		concatMap((page) => {
-			setLoading(true);
-			return ds.getOptions({ clue, page }).pipe(
-				catchError(() => of([] as readonly TOption[])),
-				tap(() => setLoading(false)),
-				startWith([] as readonly TOption[]),
-				map((items) => ({ items, page })),
-			);
-		}),
+	return loadPage(0).pipe(
+		expand(({ page, isFirstAnswer }) =>
+			isFirstAnswer
+				? nextPage$.pipe(
+						take(1),
+						switchMap(() => loadPage(page + 1)),
+					)
+				: EMPTY,
+		),
 		scan(
-			(acc, { items, page }) => {
+			(acc, { page, items }) => {
 				acc[page] = items;
 				return acc;
 			},
 			{} as Record<number, readonly TOption[]>,
 		),
-		// Stop calling pages when last two pages are empty
+		// Stop calling pages when the last two pages came back empty
 		takeWhile((pages) => {
-			const indexes = Object.keys(pages)
-				.map((p) => parseInt(p))
-				.sort((a, b) => a - b);
-			const lastIndexes = indexes.slice(-2);
-			return lastIndexes.length < 2 || !lastIndexes.every((i) => pages[i]?.length === 0);
+			const lastPages = Object.values(pages).slice(-2);
+			return lastPages.length < 2 || !lastPages.every((items) => items.length === 0);
 		}),
 		map((pages) => Object.values(pages).flat()),
 		finalize(() => setLoading(false)), // Avoid infinite loading on complete API or error

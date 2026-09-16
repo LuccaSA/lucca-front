@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import type { Mock } from 'vitest';
-import { BehaviorSubject, Observable, of, ReplaySubject, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, delay, EMPTY, Observable, of, ReplaySubject, Subject, throwError } from 'rxjs';
 import { SelectDataSource } from '../select.model';
 import { buildOptionsFromDataSource, BuildOptionsFromDataSourceDeps } from './select-input.utils';
 
@@ -358,6 +358,112 @@ describe('buildOptionsFromDataSource', () => {
 
 		expect(ds.getOptions).toHaveBeenNthCalledWith(1, { clue: 'hello', page: 0 });
 		expect(ds.getOptions).toHaveBeenNthCalledWith(2, { clue: 'hello', page: 1 });
+
+		sub.unsubscribe();
+	}));
+
+	it('should ask for a single page when the panel asks twice while a page is still loading', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi.fn(({ page }) => of([{ id: page, name: `Page ${page}` }]).pipe(delay(10))),
+		};
+		const emitted: (readonly TestOption[])[] = [];
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick(10);
+
+		// Firefox emits several scroll events at the bottom of the panel where Chrome emits one
+		nextPage$.next();
+		nextPage$.next();
+		tick(10);
+
+		expect(ds.getOptions).toHaveBeenCalledTimes(2);
+		expect(emitted[emitted.length - 1]).toEqual([
+			{ id: 0, name: 'Page 0' },
+			{ id: 1, name: 'Page 1' },
+		]);
+
+		sub.unsubscribe();
+	}));
+
+	it('should keep paginating when a page answers right after an empty one', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		const pages: TestOption[][] = [[{ id: 0, name: 'Page 0' }], [], [{ id: 2, name: 'Page 2' }]];
+		const ds: SelectDataSource<TestOption> = {
+			getOptions: ({ page }) => of(pages[page] ?? []).pipe(delay(10)),
+		};
+		const emitted: (readonly TestOption[])[] = [];
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick(10);
+
+		nextPage$.next(); // page 1: empty
+		tick(10);
+
+		nextPage$.next(); // page 2: still loading, must not count as a second empty page
+		tick(10);
+
+		expect(emitted[emitted.length - 1]).toEqual([
+			{ id: 0, name: 'Page 0' },
+			{ id: 2, name: 'Page 2' },
+		]);
+
+		sub.unsubscribe();
+	}));
+
+	it('should ask for the next page once when a page keeps refreshing itself', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		const page0$ = new ReplaySubject<readonly TestOption[]>(1);
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi.fn(({ page }) => (page === 0 ? page0$ : of([{ id: page, name: `Page ${page}` }]))),
+		};
+		const emitted: (readonly TestOption[])[] = [];
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		page0$.next([{ id: 0, name: 'Page 0' }]);
+		page0$.next([{ id: 0, name: 'Page 0 refreshed' }]); // a long lived page updating itself
+		tick();
+
+		nextPage$.next();
+		tick();
+
+		expect(ds.getOptions).toHaveBeenCalledTimes(2);
+		expect(emitted[emitted.length - 1]).toEqual([
+			{ id: 0, name: 'Page 0 refreshed' },
+			{ id: 1, name: 'Page 1' },
+		]);
+
+		sub.unsubscribe();
+	}));
+
+	it('should settle a page whose request completes without emitting', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$, setLoading } = createDeps();
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi.fn(({ page }) => (page === 0 ? of([{ id: 0, name: 'Page 0' }]) : EMPTY)),
+		};
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe();
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick();
+
+		nextPage$.next(); // completes without emitting: must not keep pagination locked
+		tick();
+		nextPage$.next();
+		tick();
+
+		expect(setLoading).toHaveBeenLastCalledWith(false);
+		expect(ds.getOptions).toHaveBeenCalledTimes(3);
 
 		sub.unsubscribe();
 	}));
