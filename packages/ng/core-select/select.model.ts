@@ -11,6 +11,13 @@ export interface SelectDataSource<TOption, TGroup = never> {
 	paramsChange?: Observable<unknown>;
 	/** Optional debounce in ms for clue-based re-queries (useful for API data sources) */
 	clueDebounceMs?: number;
+	/**
+	 * Whether `getOptions` answers page by page. When false, it emits the whole list at once and `page`
+	 * is always 0: the select accumulates nothing, `nextPage` is only a request for more, and the loading
+	 * row is left to the consumer through the `loading` input.
+	 * @default true
+	 */
+	paginated?: boolean;
 	getOptions(params: SelectDataSourceParams): Observable<readonly TOption[]>;
 	/**
 	 * Optional post-processing applied to the whole list of loaded options (all pages accumulated),

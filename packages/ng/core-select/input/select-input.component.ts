@@ -23,10 +23,10 @@ import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs
 import { ControlValueAccessor } from '@angular/forms';
 import { isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, defer, map, of, ReplaySubject, startWith, Subject, switchMap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
-import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource, SelectDataSourceParams } from '../select.model';
+import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource } from '../select.model';
 import { LuCoreSelectLabel } from '../select.translate';
 import { TreeNode } from './model';
 import { buildOptionsFromDataSource } from './select-input.utils';
@@ -223,21 +223,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected _value: TValue | null = null;
 
 	private getDefaultDataSource(): SelectDataSource<TOption> {
-		let emittedKeys = new Set<unknown>();
-
 		return {
-			getOptions: (_params: SelectDataSourceParams) => {
-				let lastEmittedThisPage: readonly TOption[] = [];
-				return this.manualOptions$.pipe(
-					tap((options) => (lastEmittedThisPage = options)),
-					takeUntil(this.nextPage$),
-					finalize(() => (emittedKeys = new Set(lastEmittedThisPage.map((p) => this.optionKey()(p))))),
-					map((options) => options.filter((c) => !emittedKeys.has(this.optionKey()(c)))),
-				);
-			},
-			reset() {
-				emittedKeys.clear();
-			},
+			getOptions: () => this.manualOptions$,
+			paginated: false,
 		};
 	}
 
