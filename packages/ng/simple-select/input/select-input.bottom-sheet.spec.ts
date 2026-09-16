@@ -62,6 +62,22 @@ class FormFieldHostComponent {
 }
 
 @Component({
+	selector: 'lu-simple-select-required-form-field-host',
+	imports: [FormsModule, LuSimpleSelectInputComponent, FormFieldComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Country">
+			<lu-simple-select [ngModel]="selected" [options]="options" required />
+		</lu-form-field>
+	`,
+})
+class RequiredFormFieldHostComponent {
+	selected: Entity | null = null;
+
+	options: Entity[] = options;
+}
+
+@Component({
 	selector: 'lu-simple-select-label-host',
 	imports: [FormsModule, LuSimpleSelectInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -357,6 +373,31 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(sheet()).toHaveAttribute('aria-modal', 'true');
 			expect(sheet()).toHaveAttribute('aria-label', 'Country');
 			expect(sheet()?.querySelector('h1')?.textContent?.trim()).toBe('Country');
+		});
+
+		it('should echo the label required marker in the title when the field is required', () => {
+			// Arrange
+			const fixture = createHost(RequiredFormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(sheet()?.querySelector('h1 .formLabel-required')).toHaveAttribute('aria-hidden', 'true');
+			expect(sheet()?.querySelector('h1 .formLabel-required')?.textContent).toBe('*');
+			// A single asterisk: the label's own `.formLabel-required` marker must not leak into the plain
+			// title text (`panelTitle`) on top of the one rendered here, or it would show up twice.
+			expect(sheet()?.querySelector('h1')?.textContent?.trim()).toBe('Country*');
+		});
+
+		it('should not show the required marker when the field is not required', () => {
+			// Act
+			openSheet();
+
+			// Assert
+			expect(sheet()?.querySelector('h1 .formLabel-required')).toBeNull();
 		});
 
 		it('should embed a search input, focused synchronously so the tap that opened the sheet also raises the iOS keyboard', () => {

@@ -47,6 +47,22 @@ class HostComponent {
 	options: Entity[] = options;
 }
 
+@Component({
+	selector: 'lu-multi-select-required-bottom-sheet-host',
+	imports: [FormsModule, LuMultiSelectInputComponent, FormFieldComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Options">
+			<lu-multi-select [ngModel]="selected" [options]="options" required />
+		</lu-form-field>
+	`,
+})
+class RequiredHostComponent {
+	selected: Entity[] = [];
+
+	options: Entity[] = options;
+}
+
 describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 	let breakpointObserver: FakeBreakpointObserver;
 
@@ -197,6 +213,39 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			expect(sheet()).toHaveAttribute('aria-modal', 'true');
 			expect(sheet()).toHaveAttribute('aria-label', 'Options');
 			expect(sheet()?.querySelector('h1')?.textContent?.trim()).toBe('Options');
+		});
+
+		it('should echo the label required marker in the title when the field is required', () => {
+			// Arrange
+			breakpointObserver.belowSmallBreakpoint.next(true);
+			const fixture = TestBed.createComponent(RequiredHostComponent);
+			fixture.detectChanges();
+			const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Entity>;
+
+			// Act
+			select.openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(sheet()?.querySelector('h1 .formLabel-required')).toHaveAttribute('aria-hidden', 'true');
+			expect(sheet()?.querySelector('h1 .formLabel-required')?.textContent).toBe('*');
+			// A single asterisk: the label's own `.formLabel-required` marker must not leak into the plain
+			// title text (`panelTitle`) on top of the one rendered here, or it would show up twice.
+			expect(sheet()?.querySelector('h1')?.textContent?.trim()).toBe('Options*');
+		});
+
+		it('should not show the required marker when the field is not required', () => {
+			// Arrange
+			const { fixture, select } = createSelect(true);
+
+			// Act
+			select.openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(sheet()?.querySelector('h1 .formLabel-required')).toBeNull();
 		});
 
 		it('should focus the search input synchronously so the tap that opened the sheet also raises the iOS keyboard', () => {

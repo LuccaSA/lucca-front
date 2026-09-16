@@ -5,7 +5,14 @@
 	<lu-dialog>
 		<lu-dialog-header>
 			@if (selectInput.panelTitle(); as title) {
-				<h1>{{ title }}</h1>
+				<!-- The interpolation and the marker must stay adjacent in the source: any whitespace between
+				them (even just a line break) renders as a literal space, pushing the asterisk away from the
+				title instead of hugging it the way `.formLabel-required`'s own margin expects. -->
+				@if (selectInput.panelTitleRequired()) {
+					<h1>{{ title }}<sup class="formLabel-required" aria-hidden="true">*</sup></h1>
+				} @else {
+					<h1>{{ title }}</h1>
+				}
 			}
 			<div dialogHeaderContent>
 				<ng-container [ngTemplateOutlet]="sheetSearch" />

@@ -23,6 +23,7 @@ import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs
 import { ControlValueAccessor } from '@angular/forms';
 import { injectMediaMinBreakpoint, isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { FORM_FIELD_INSTANCE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
@@ -54,6 +55,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
 	protected labelId: string = inject(SELECT_LABEL_ID);
+	protected formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	protected abstract intl: Signal<LuCoreSelectLabel>;
 
@@ -144,6 +146,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	/** Field label echoed as the bottom sheet's title, snapshotted when the sheet opens. */
 	readonly panelTitle = signal('');
+
+	/** Whether that field label carries the required marker, so the sheet's title can echo it too. */
+	readonly panelTitleRequired = computed(() => this.formField?.isInputRequired() ?? false);
 
 	readonly activeDescendant$ = new BehaviorSubject('');
 
@@ -523,7 +528,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	private getLabelText(label: HTMLElement): string {
 		const clone = label.cloneNode(true) as HTMLElement;
 		const selectTag = this.hostElementRef.nativeElement.tagName.toLowerCase();
-		clone.querySelectorAll(`${selectTag}, [role="button"], .pr-u-mask`).forEach((node) => node.remove());
+		clone.querySelectorAll(`${selectTag}, [role="button"], .pr-u-mask, .formLabel-required`).forEach((node) => node.remove());
 		return (clone.textContent ?? '').trim();
 	}
 
