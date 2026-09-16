@@ -599,7 +599,8 @@ export const WithDisplayer = generateStory({
 
 export const WithPagination = generateStory({
 	name: 'Pagination',
-	description: 'Il est possible de charger les options au fur et à mesure en écoutant l’évènement `(nextPage)`.',
+	description:
+		'Il est possible de charger les options au fur et à mesure en écoutant l’évènement `(nextPage)`. Le tableau passé à `[options]` reste la liste complète : c’est au consommateur d’afficher la ligne de chargement via l’input `[loading]` pendant qu’il récupère la suite.',
 	template: `<lu-multi-select
 	#selectRef
 	[(ngModel)]="selectedLegumes"
