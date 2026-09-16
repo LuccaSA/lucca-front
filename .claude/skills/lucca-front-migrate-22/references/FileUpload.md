@@ -1,11 +1,14 @@
 # FileUpload — résiduel du schematic `file-upload`
 
-`ng g @lucca-front/ng:file-upload` (Étape 1) couvre trois changements d'un coup. **Ne rien refaire à la main de ce qu'il traite** ; cette référence sert à reprendre ce qu'il signale en warning.
+`ng g @lucca-front/ng:file-upload` (Étape 1) migre la taille, le rendu du `FileEntry` et la classe `.fileEntryDisplayWrapper`. **Ne rien refaire à la main de ce qu'il a traité.** Cette référence ne couvre que ce qu'il laisse.
 
-## Ce que le schematic applique
+## 1. Reprendre ses warnings
 
-1. **Taille** : `S` est devenue la taille par défaut de `lu-single-file-upload`, `lu-multi-file-upload` et `lu-file-entry`, et `L` a été introduite pour retrouver l'ancien rendu. Le schematic ajoute `size="L"` là où aucune taille n'était précisée et supprime les `size="S"` devenus redondants.
-2. **Rendu du `FileEntry`** : `lu-single-file-upload` n'affiche plus l'entry qu'on lui passe. Le schematic restructure l'usage en `@if` / `@else`, répartit les inputs entre les deux composants et ajoute les imports nécessaires :
+Le schematic laisse le code inchangé et signale en warning, avec le chemin du fichier, les cas qu'il ne sait pas migrer : `[size]` lié à une expression, `[entry]` sur un élément portant une directive structurelle, `.fileEntryDisplayWrapper` appliquée via un binding.
+
+**Taille** : `S` est devenue la valeur par défaut et `L` a été introduite pour retrouver l'ancien rendu. Dans une expression, `'S'` devient donc `null` et `null` devient `'L'`.
+
+**`[entry]`** : `lu-single-file-upload` n'affiche plus l'entry qu'on lui passe. Reproduire la forme cible à la main, en répartissant les inputs entre les deux composants — `entry`, `state`, `previewUrl`, `inlineMessageError`, `displayFileName` et `deleteFile` vont sur le `lu-file-entry`, le reste demeure sur l'upload, et `structure` va sur les deux :
 
 ```html
 <!-- Avant -->
@@ -21,14 +24,8 @@
 }
 ```
 
-3. **`.fileEntryDisplayWrapper`** : la classe est remplacée par le composant `lu-file-entry-wrapper`.
+Le `lu-file-entry` est toujours en `size="L"`, et ne reçoit `media` que si l'upload est en `size="L"` — c'est ce que faisait le composant en interne.
 
-## Ce qu'il laisse
+## 2. Usages HTML/CSS purs
 
-- **Ses warnings** : `[size]` lié à une expression, `[entry]` sur un élément portant une directive structurelle, `.fileEntryDisplayWrapper` appliquée via un binding. Chaque warning porte le chemin du fichier. Les reprendre au cas par cas — pour la taille, `'S'` devient `null` (défaut) et `null` devient `'L'`.
-- **Usages HTML/CSS purs** : `.fileUpload.mod-S`, `.fileEntry.mod-S` et `.fileToolbar.mod-S` n'existent plus. Un élément qui portait `mod-S` perd simplement la classe ; un élément sans `mod-S` doit recevoir `mod-L` pour garder son rendu.
-
-## Deux écarts à l'iso-rendu, assumés
-
-- Le `@if` / `@else` **retire** la zone d'upload du DOM là où le composant la masquait seulement (`is-hidden`) : le focus et l'état du champ ne se comportent plus tout à fait pareil.
-- La conversion de `.fileEntryDisplayWrapper` s'applique à **tous** les éléments portant la classe, y compris ceux sans rapport avec un file upload. La classe CSS continuerait de fonctionner telle quelle ; c'est une adoption, pas une réparation.
+Hors de portée du schematic, qui ne traite que les composants Angular. `.fileUpload.mod-S`, `.fileEntry.mod-S` et `.fileToolbar.mod-S` n'existent plus : un élément qui portait `mod-S` perd simplement la classe, un élément sans `mod-S` doit recevoir `mod-L` pour garder son rendu.
