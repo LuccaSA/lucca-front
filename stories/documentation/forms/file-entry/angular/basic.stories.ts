@@ -81,14 +81,6 @@ export default {
 			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
 			table: { category: 'inputs' },
 		},
-		withFileType: {
-			control: 'boolean',
-			table: { category: 'inputs' },
-		},
-		withFileSize: {
-			control: 'boolean',
-			table: { category: 'inputs' },
-		},
 		deleteFile: {
 			description: 'Événement déclenché lors du clic sur le bouton de suppression du fichier.',
 			action: 'deleteFile',
@@ -133,9 +125,7 @@ export const Basic = {
 		media: false,
 		displayFileName: false,
 		fileSize: 28420,
-		withFileSize: true,
 		fileType: 'image/png',
-		withFileType: true,
 		fileName: 'dummyimage.png',
 		previewUrl: 'https://dummyimage.com/500',
 		iconOverride: '',
