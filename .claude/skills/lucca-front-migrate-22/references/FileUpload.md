@@ -1,4 +1,4 @@
-# FileUpload — SingleFileUpload & taille par défaut
+# FileUpload — SingleFileUpload & taille
 
 ## 1. SingleFileUpload — gestion de `FileEntry` déléguée
 
@@ -18,22 +18,11 @@ Le composant `lu-single-file-upload` ne prend plus l'input `[entry]`. On rend la
 
 Non automatisable proprement : la variable conditionnelle (`fileUpload` ci-dessus) dépend du code du consommateur. Restructurer le template au cas par cas.
 
-## 2. Taille par défaut
+## 2. Taille — couverte par le schematic
 
-Avant la 22, seule la valeur `S` existait pour l'input `size` ; sans `size` précisé, le rendu était grand (aucune valeur `L` n'existait pour le désigner explicitement). En 22, l'ancienne `S` devient la taille par défaut — plus besoin de la préciser — et `L` est une nouvelle valeur introduite pour retrouver l'ancien rendu par défaut.
+`S` est devenue la taille par défaut de `lu-single-file-upload`, `lu-multi-file-upload` et `lu-file-entry`, et la valeur `L` a été introduite pour retrouver l'ancien rendu par défaut. `ng g @lucca-front/ng:file-upload-size` (Étape 1) applique cette bascule : ajout de `size="L"` là où aucune taille n'était précisée, suppression des `size="S"` devenus redondants. **Ne pas le refaire à la main.**
 
-```html
-<!-- Avant -->
-<lu-single-file-upload size="S" />
-<lu-single-file-upload />          <!-- ancien défaut = grand, pas de valeur "L" pour le désigner -->
+Deux cas que le schematic ne traite pas, à relever dans le rapport final :
 
-<!-- Après -->
-<lu-single-file-upload />          <!-- size="S" supprimé : c'est le nouveau défaut -->
-<lu-single-file-upload size="L" /> <!-- pour retrouver l'ancien rendu (nouvelle valeur) -->
-```
-
-**Appliquer systématiquement** :
-- chaque `lu-single-file-upload`/`lu-multi-file-upload` **sans** `size` explicite doit recevoir `size="L"`, sous peine de changer silencieusement le rendu de l'UI (passage au nouveau défaut petit) ;
-- chaque `lu-single-file-upload`/`lu-multi-file-upload` avec `size="S"` explicite doit voir cet attribut **supprimé**, puisque `S` est désormais la valeur par défaut (attribut redondant).
-
-Ne pas laisser ces décisions à l'utilisateur — les appliquer systématiquement sur chaque occurrence détectée.
+- **`[size]` lié à une expression** (`[size]="isCompact ? 'S' : null"`) : le schematic l'affiche en warning dans sa sortie et laisse le code inchangé. Reprendre l'expression au cas par cas — `'S'` devient `null` (défaut) et `null` devient `'L'`.
+- **Usages HTML/CSS purs** : `.fileUpload.mod-S`, `.fileEntry.mod-S` et `.fileToolbar.mod-S` n'existent plus. Un élément qui portait `mod-S` perd simplement la classe ; un élément sans `mod-S` doit recevoir `mod-L` pour garder son rendu.
