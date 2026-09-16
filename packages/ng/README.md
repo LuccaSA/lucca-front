@@ -53,6 +53,7 @@ Schematics help automate migrations and updates when upgrading Lucca Front. They
 
 | Description | Version | Command |
 | ----------- | ------- | ------- |
+| Migrate file upload usages: new `size` default, `FileEntry` rendered by the parent, `.fileEntryDisplayWrapper` as `<lu-file-entry-wrapper>` | 22.0.3+ | `ng g @lucca-front/ng:file-upload` |
 | Replace HTML loading with `<lu-loading>` | 21.1+ | `ng g @lucca-front/ng:lu-loading` |
 | Replace HTML containers with `<lu-container>` | 21.1+ | `ng g @lucca-front/ng:lu-container` |
 | Replace physical alignment utilities (e.g., `.pr-u-textRight`) with logical ones (e.g., `.pr-u-textAlignEnd`) | 21.0.1+ | `ng g @lucca-front/ng:alignment-utilities` |

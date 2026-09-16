@@ -1,39 +1,31 @@
-# FileUpload — SingleFileUpload & taille par défaut
+# FileUpload — résiduel du schematic `file-upload`
 
-## 1. SingleFileUpload — gestion de `FileEntry` déléguée
+`ng g @lucca-front/ng:file-upload` (Étape 1) migre la taille, le rendu du `FileEntry` et la classe `.fileEntryDisplayWrapper`. **Ne rien refaire à la main de ce qu'il a traité.** Cette référence ne couvre que ce qu'il laisse.
 
-Le composant `lu-single-file-upload` ne prend plus l'input `[entry]`. On rend la main sur la gestion de `FileEntry`, pour offrir la même souplesse que `MultipleFileUpload` : c'est au parent d'afficher `lu-file-entry` quand un fichier est présent.
+## 1. Reprendre ses warnings
+
+Le schematic laisse le code inchangé et signale en warning, avec le chemin du fichier, les cas qu'il ne sait pas migrer : `[size]` lié à une expression, `[entry]` sur un élément portant une directive structurelle, `.fileEntryDisplayWrapper` appliquée via un binding.
+
+**Taille** : `S` est devenue la valeur par défaut et `L` a été introduite pour retrouver l'ancien rendu. Dans une expression, `'S'` devient donc `null` et `null` devient `'L'`.
+
+**`[entry]`** : `lu-single-file-upload` n'affiche plus l'entry qu'on lui passe. Reproduire la forme cible à la main, en répartissant les inputs entre les deux composants — `entry`, `state`, `previewUrl`, `inlineMessageError`, `displayFileName` et `deleteFile` vont sur le `lu-file-entry`, le reste demeure sur l'upload, et `structure` va sur les deux :
 
 ```html
 <!-- Avant -->
-<lu-single-file-upload [entry]="fileUpload" />
+<lu-single-file-upload [entry]="file" [state]="state" (deleteFile)="delete()" [accept]="accept" />
 
 <!-- Après -->
-@if (fileUpload) {
-  <lu-file-entry [entry]="fileUpload" />
+@if (file; as fileEntry) {
+  <lu-file-entry-wrapper>
+    <lu-file-entry [entry]="fileEntry" size="L" media [state]="state" (deleteFile)="delete()" />
+  </lu-file-entry-wrapper>
 } @else {
-  <lu-single-file-upload />
+  <lu-single-file-upload size="L" [accept]="accept" />
 }
 ```
 
-Non automatisable proprement : la variable conditionnelle (`fileUpload` ci-dessus) dépend du code du consommateur. Restructurer le template au cas par cas.
+Le `lu-file-entry` est toujours en `size="L"`, et ne reçoit `media` que si l'upload est en `size="L"` — c'est ce que faisait le composant en interne.
 
-## 2. Taille par défaut
+## 2. Usages HTML/CSS purs
 
-Avant la 22, seule la valeur `S` existait pour l'input `size` ; sans `size` précisé, le rendu était grand (aucune valeur `L` n'existait pour le désigner explicitement). En 22, l'ancienne `S` devient la taille par défaut — plus besoin de la préciser — et `L` est une nouvelle valeur introduite pour retrouver l'ancien rendu par défaut.
-
-```html
-<!-- Avant -->
-<lu-single-file-upload size="S" />
-<lu-single-file-upload />          <!-- ancien défaut = grand, pas de valeur "L" pour le désigner -->
-
-<!-- Après -->
-<lu-single-file-upload />          <!-- size="S" supprimé : c'est le nouveau défaut -->
-<lu-single-file-upload size="L" /> <!-- pour retrouver l'ancien rendu (nouvelle valeur) -->
-```
-
-**Appliquer systématiquement** :
-- chaque `lu-single-file-upload`/`lu-multi-file-upload` **sans** `size` explicite doit recevoir `size="L"`, sous peine de changer silencieusement le rendu de l'UI (passage au nouveau défaut petit) ;
-- chaque `lu-single-file-upload`/`lu-multi-file-upload` avec `size="S"` explicite doit voir cet attribut **supprimé**, puisque `S` est désormais la valeur par défaut (attribut redondant).
-
-Ne pas laisser ces décisions à l'utilisateur — les appliquer systématiquement sur chaque occurrence détectée.
+Hors de portée du schematic, qui ne traite que les composants Angular. `.fileUpload.mod-S`, `.fileEntry.mod-S` et `.fileToolbar.mod-S` n'existent plus : un élément qui portait `mod-S` perd simplement la classe, un élément sans `mod-S` doit recevoir `mod-L` pour garder son rendu.
