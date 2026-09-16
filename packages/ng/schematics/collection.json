@@ -101,10 +101,10 @@
       "factory": "./lu-button/index",
       "schema": "./lu-button/schema.json"
     },
-    "file-upload-size": {
-      "description": "Migrate the size input of file upload components to its new default",
-      "factory": "./file-upload-size/index",
-      "schema": "./file-upload-size/schema.json"
+    "file-upload": {
+      "description": "Migrate file upload usages: size default, FileEntry rendering and fileEntryDisplayWrapper",
+      "factory": "./file-upload/index",
+      "schema": "./file-upload/schema.json"
     }
   }
 }

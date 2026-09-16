@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import type { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
+import type { ParsedTemplate, TmplAstBoundAttribute, TmplAstBoundEvent, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
 import { createSourceFile, ScriptTarget } from 'typescript';
 import { applyUpdates, FileUpdate, updateContent } from './file-update.js';
 import { currentSchematicContext } from './lf-schematic-context';
@@ -126,7 +126,7 @@ export class HtmlAst extends HtmlAstVisitor<TemplateNode> {
 /**
  * Builds the update removing an attribute from the template it belongs to, along with the whitespace preceding it.
  */
-export function removeAttributeUpdate(template: string, attribute: TmplAstTextAttribute | TmplAstBoundAttribute): FileUpdate {
+export function removeAttributeUpdate(template: string, attribute: TmplAstTextAttribute | TmplAstBoundAttribute | TmplAstBoundEvent): FileUpdate {
 	let position = attribute.sourceSpan.start.offset;
 
 	while (position > 0 && /\s/.test(template[position - 1])) {

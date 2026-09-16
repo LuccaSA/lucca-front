@@ -1,6 +1,6 @@
 ---
 name: lucca-front-migrate-22
-description: "Skill de migration vers Lucca Front 22 (breaking release). Charge ce skill pour migrer un projet consommateur de @lucca-front/ng 21.x vers 22.x. Couvre : suppression des palettes dépréciées (.palette-grey→neutral, .palette-primary/secondary→product, .palette-lucca→brand, CSS vars --palettes-* / --colors-*, y compris les cas manuels *-rgb avec color.transparentize et <lu-icon color>), les refactos de composants (SingleFileUpload → lu-file-entry, ActivityFeed → lu-activity-feed-update-item, Select panel → ListBox), et la modernisation strict/readonly/signaux. Orchestre les schematics officiels avant de traiter le résiduel non automatisable. Use when migrating a project to lucca-front 22."
+description: "Skill de migration vers Lucca Front 22 (breaking release). Charge ce skill pour migrer un projet consommateur de @lucca-front/ng 21.x vers 22.x. Couvre : suppression des palettes dépréciées (.palette-grey→neutral, .palette-primary/secondary→product, .palette-lucca→brand, CSS vars --palettes-* / --colors-*, y compris les cas manuels *-rgb avec color.transparentize et <lu-icon color>), les refactos de composants (file upload et FileEntry, ActivityFeed → lu-activity-feed-update-item, Select panel → ListBox), et la modernisation strict/readonly/signaux. Orchestre les schematics officiels avant de traiter le résiduel non automatisable. Use when migrating a project to lucca-front 22."
 ---
 
 # lucca-front-migrate-22
@@ -20,7 +20,7 @@ Ne pas les lire d'office : chaque étape indique lequel ouvrir, et seulement si 
 | Référence | Ce qu'elle couvre |
 |---|---|
 | [Palettes.md](./references/Palettes.md) | Résiduel non couvert par `ng g @lucca-front/ng:palettes` : CSS vars `*-rgb` (`--colors-grey\|neutral-400\|900-rgb`, `--colors-white-rgb`) à remplacer par `--palettes-neutral-*`, avec `color.transparentize` si opacité `rgba`. Et surtout `$palettesDeprecated`, supprimée en 22.0 : toute référence restante dans un `@use '@lucca-front/scss/src/commons/config' with (...)` casse la compilation SCSS. L'input `<lu-icon color="primary\|secondary">` est désormais couvert par le schematic. |
-| [FileUpload.md](./references/FileUpload.md) | `lu-single-file-upload` perd l'input `[entry]` : le `FileEntry` se rend côté parent via `lu-file-entry`. La bascule de taille (`S` devenue le défaut, `L` pour l'ancien rendu) est couverte par le schematic `file-upload-size` ; restent les `[size]` liés à une expression et les usages HTML/CSS `.mod-S`. |
+| [FileUpload.md](./references/FileUpload.md) | Taille, rendu du `FileEntry` par le parent et `.fileEntryDisplayWrapper` : tout est couvert par le schematic `file-upload`. Ne lire cette référence que pour traiter ses warnings. |
 | [ActivityFeed.md](./references/ActivityFeed.md) | `lu-activity-feed-update` gagne un niveau intermédiaire `lu-activity-feed-update-item`, qui porte le `label` et le contenu projeté (slots `activityFeedUpdateBefore` / `activityFeedUpdateAfter`). |
 | [SelectListBox.md](./references/SelectListBox.md) | Le panel des selects passe au composant ListBox : migration faite par LF, aucune action en usage standard. Les overrides SCSS de `.optionItem` et de ses enfants ne sont **jamais** migrés automatiquement — les détecter et les lister dans le rapport (équivalent connu : `.optionItem-value` → `.listboxOption-content`), sans les appliquer. |
 | [Signal.md](./references/Signal.md) | Derniers `@Input()`/`@Output()`/`@ViewChild` migrés vers `input()`/`output()`/`viewChild()` + `syncInputSignal()`. Alias de template préservés, mais côté TS : inputs à invoquer avec `()`, propriétés renommées (`inputPlaceholder`→`placeholderInput`, `inputMultiple`→`multipleInput`, `inputDisabled`→`disabledInput`, `overlapInput`→`pickerOverlap`), membres supprimés (`placeholder$`, `isDisabled`), Subjects devenus observables dérivés (`url$`, `fields$`, `loading$` : plus de `.next()`), pilotage d'un select par `.set()` sur un `linkedSignal`, `clueChange` en `output()`, et inputs devenus requis (`luOptionGroupSelect`/`luOptionGroupBy` échouent au build ; `apiV3` non concerné). `ngOnChanges` se déclenche toujours, mais la clé de `SimpleChanges` suit le nom TS renommé, pas l'alias. |
@@ -66,16 +66,16 @@ Selon la réponse :
 
 - **Non** → **ne rien lancer**, ne pas refaire à la main le travail du schematic, et **passer directement à l'Étape 2**. Signaler dans le rapport final (Étape 7) que le remplacement des palettes reste à faire dans une PR dédiée via `ng g @lucca-front/ng:palettes`.
 
-### Taille des composants de file upload
+### File upload
 
-Ce schematic-ci est à lancer **systématiquement**, sans poser la question : son diff est petit, circonscrit aux usages de `lu-single-file-upload`, `lu-multi-file-upload` et `lu-file-entry`, et sans lui le rendu de ces composants change silencieusement.
+Ce schematic-ci est à lancer **systématiquement**, sans poser la question : sans lui, le rendu des composants de file upload change silencieusement et les `FileEntry` disparaissent de l'écran.
 
 ```bash
-# Taille : ajoute size="L" là où aucune taille n'était précisée, supprime les size="S" redondants.
-ng g @lucca-front/ng:file-upload-size
+# Taille, rendu du FileEntry par le parent, et .fileEntryDisplayWrapper en composant.
+ng g @lucca-front/ng:file-upload
 ```
 
-**Conserver la sortie du schematic** : les `[size]` liés à une expression y sont signalés en warning et restent à traiter à l'Étape 4.
+**Conserver la sortie du schematic** : tout ce qu'il n'a pas su migrer y est signalé en warning et reste à traiter à l'Étape 4.
 
 Une fois les schematics passés, il reste les cas ci-dessous que les schematics **ne couvrent pas**.
 
@@ -94,7 +94,7 @@ Privilégier `Grep`/`Glob` pour des recherches ciblées ; pour un projet volumin
 | CSS vars `*-rgb` résiduelles dans les `.scss`/`.css` (`--colors-grey-*-rgb`, `--colors-neutral-*-rgb`, `--colors-white-rgb`) | Étape 3 |
 | `$palettesDeprecated` dans un `@use ... config with (...)` du consommateur | Étape 3 |
 | `<lu-icon>` avec input `color` — **à ne chercher que si le schematic `palettes` a été refusé à l'Étape 1** (sinon déjà traité) | Étape 3 |
-| Usages de `lu-single-file-upload` avec `[entry]`, `[size]` lié à une expression sur un composant de file upload, classes `.mod-S` sur `.fileUpload`/`.fileEntry`/`.fileToolbar` | Étape 4 |
+| Warnings du schematic `file-upload`, classes `.mod-S` sur `.fileUpload`/`.fileEntry`/`.fileToolbar` | Étape 4 |
 | Usages de `lu-activity-feed-update` | Étape 4 |
 | Usages de `lu-simple-select` / `lu-multi-select`, et overrides SCSS de `.optionItem` et enfants | Étape 4 |
 | Accès TS aux composants/refs LF : réassignation de propriété, lecture/écriture d'un input, `ngOnChanges`, mutation d'un tableau/objet reçu (`.push()`/`.sort()`, champ imbriqué, `Object.assign`) — y compris les cas que le compilateur ne bloque pas | Étape 5 |
@@ -130,7 +130,7 @@ Traiter les cas de [Palettes.md](./references/Palettes.md) :
 
 Appliquer chaque migration en suivant son fichier de référence :
 
-- [FileUpload.md](./references/FileUpload.md) — `SingleFileUpload` (gestion de `FileEntry` via `lu-file-entry`) + résiduel de taille laissé par le schematic `file-upload-size`.
+- [FileUpload.md](./references/FileUpload.md) — résiduel laissé par le schematic `file-upload`.
 - [ActivityFeed.md](./references/ActivityFeed.md) — niveau intermédiaire `lu-activity-feed-update-item`.
 - [SelectListBox.md](./references/SelectListBox.md) — panel des Select passé à `ListBox`. Le panel est migré par LF ; les overrides `.optionItem*` du projet ne sont **pas** à modifier — seulement à relever dans le rapport.
 

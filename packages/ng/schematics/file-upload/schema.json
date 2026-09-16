@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "LuccaFrontFileUploadSize",
-  "title": "Lucca Front File Upload Size Schema",
+  "$id": "LuccaFrontFileUpload",
+  "title": "Lucca Front File Upload Schema",
   "type": "object",
   "properties": {
     "dryRun": {
