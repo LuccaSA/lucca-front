@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import type { Mock } from 'vitest';
-import { BehaviorSubject, delay, of, Subject, takeUntil, throwError } from 'rxjs';
+import { BehaviorSubject, delay, finalize, identity, map, of, ReplaySubject, skip, Subject, takeUntil, tap, throwError } from 'rxjs';
 import { SelectDataSource } from '../select.model';
 import { buildOptionsFromDataSource, BuildOptionsFromDataSourceDeps } from './select-input.utils';
 
@@ -470,6 +470,66 @@ describe('buildOptionsFromDataSource', () => {
 		expect(emitted[emitted.length - 1]).toEqual([
 			{ id: 0, name: 'Page 0' },
 			{ id: 1, name: 'Page 1' },
+		]);
+
+		sub.unsubscribe();
+	}));
+
+	// Mirrors `getDefaultDataSource` of the select input component, ie. the `[options]` + `(nextPage)` path:
+	// a replayed stream of every option the consumer has pushed so far, minus the ones previous pages showed
+	function createManualDs(manualOptions$: ReplaySubject<readonly TestOption[]>, pageAccepted$: Subject<void>): SelectDataSource<TestOption> {
+		let emittedKeys = new Set<unknown>();
+		return {
+			getOptions: ({ page }) => {
+				let lastEmittedThisPage: readonly TestOption[] = [];
+				return manualOptions$.pipe(
+					page === 0 ? identity : skip(1),
+					tap((options) => (lastEmittedThisPage = options)),
+					takeUntil(pageAccepted$),
+					finalize(() => (emittedKeys = new Set(lastEmittedThisPage.map((o) => o.id)))),
+					map((options) => options.filter((o) => !emittedKeys.has(o.id))),
+				);
+			},
+			reset: () => emittedKeys.clear(),
+		};
+	}
+
+	it('should display manual options pushed after several next page requests', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		const manualOptions$ = new ReplaySubject<readonly TestOption[]>(1);
+		const pageAccepted$ = new Subject<void>();
+		const ds = createManualDs(manualOptions$, pageAccepted$);
+		const emitted: (readonly TestOption[])[] = [];
+
+		const sub = buildOptionsFromDataSource(ds, { ...deps, onPageAccepted: () => pageAccepted$.next() }).subscribe((options) => emitted.push(options));
+
+		manualOptions$.next([
+			{ id: 1, name: 'A' },
+			{ id: 2, name: 'B' },
+		]);
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick();
+		expect(emitted[emitted.length - 1]).toHaveLength(2);
+
+		// Firefox fires several scroll events at the bottom of the panel before the consumer answers
+		nextPage$.next();
+		nextPage$.next();
+		nextPage$.next();
+		tick(300);
+		manualOptions$.next([
+			{ id: 1, name: 'A' },
+			{ id: 2, name: 'B' },
+			{ id: 3, name: 'C' },
+			{ id: 4, name: 'D' },
+		]);
+		tick();
+
+		expect(emitted[emitted.length - 1]).toEqual([
+			{ id: 1, name: 'A' },
+			{ id: 2, name: 'B' },
+			{ id: 3, name: 'C' },
+			{ id: 4, name: 'D' },
 		]);
 
 		sub.unsubscribe();

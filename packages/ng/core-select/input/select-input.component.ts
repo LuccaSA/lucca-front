@@ -23,7 +23,7 @@ import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs
 import { ControlValueAccessor } from '@angular/forms';
 import { isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, defer, finalize, identity, map, of, ReplaySubject, skip, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource, SelectDataSourceParams } from '../select.model';
@@ -229,9 +229,14 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		let emittedKeys = new Set<unknown>();
 
 		return {
-			getOptions: (_params: SelectDataSourceParams) => {
+			getOptions: ({ page }: SelectDataSourceParams) => {
 				let lastEmittedThisPage: readonly TOption[] = [];
 				return this.manualOptions$.pipe(
+					// `manualOptions$` replays the current options on subscribe: for a page past the first, that
+					// replay is what the previous page already showed, not an answer to this page. Letting it
+					// through would resolve the page instantly empty — and two of those in a row stop pagination
+					// while the options the consumer is about to push are still on their way.
+					page === 0 ? identity : skip(1),
 					tap((options) => (lastEmittedThisPage = options)),
 					takeUntil(this.#pageAccepted$),
 					finalize(() => (emittedKeys = new Set(lastEmittedThisPage.map((p) => this.optionKey()(p))))),
