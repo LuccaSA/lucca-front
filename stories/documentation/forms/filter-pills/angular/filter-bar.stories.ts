@@ -127,8 +127,8 @@ export default {
 	</lu-filter-pill>`
 			: '';
 		const filterViewSelectorEnabled = args['views'] && args['filterViewSelector'];
-		const saveViewEnabled = args['views'] && args['saveView'] && !filterViewSelectorEnabled;
-		const saveViewTab = saveViewEnabled
+		const saveViewEnabled = args['views'] && args['saveView'];
+		const saveViewTab = saveViewEnabled && !filterViewSelectorEnabled
 			? `<ng-template #label4>
 			Produit
 			<button type="button" size="XS" luButton="ghost" aria-expanded="false" disclosure [luDropdown]="optionsDropdown">
@@ -139,13 +139,13 @@ export default {
 					<lu-dropdown-item>
 						<button lu-dropdown-action type="button">
 							<lu-icon icon="edit" />
-							{{ filterBar.intl().renameView }}
+							Modifier le nom
 						</button>
 					</lu-dropdown-item>
 					<lu-dropdown-item>
 						<button lu-dropdown-action type="button" critical>
 							<lu-icon icon="trash" />
-							{{ filterBar.intl().deleteView }}
+							Supprimer
 						</button>
 					</lu-dropdown-item>
 				</lu-dropdown-menu>
@@ -155,7 +155,7 @@ export default {
 			: '';
 		const saveViewButton = saveViewEnabled
 			? `<button type="button" size="S" luButton="outlined" palette="product" disclosure aria-expanded="false" [luDropdown]="saveDropdown">
-			{{ filterBar.intl().saveView }}
+			Enregistrer la vue
 			<lu-icon icon="arrowChevronBottom" />
 		</button>`
 			: '';
@@ -165,13 +165,13 @@ export default {
 		<lu-dropdown-item>
 			<button lu-dropdown-action type="button">
 				<lu-icon icon="save" />
-				{{ filterBar.intl().saveModification }}
+				Enregistrer les modifications
 			</button>
 		</lu-dropdown-item>
 		<lu-dropdown-item>
 			<button lu-dropdown-action type="button" aria-disabled="true" class="is-disabled" luTooltip="Supprimer des vues pour en créer des nouvelles">
 				<lu-icon icon="mathsPlus" />
-				{{ filterBar.intl().saveNewView }}
+				Enregistrer en tant que nouvelle vue
 			</button>
 		</lu-dropdown-item>
 	</lu-dropdown-menu>
