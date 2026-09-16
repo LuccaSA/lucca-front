@@ -197,7 +197,20 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			expect(sheet()).toHaveAttribute('aria-modal', 'true');
 			expect(sheet()).toHaveAttribute('aria-label', 'Options');
 			expect(sheet()?.querySelector('h1')?.textContent?.trim()).toBe('Options');
-			expect(sheet()?.querySelector('.textField-input-value')).toHaveAttribute('cdkFocusInitial');
+		});
+
+		it('should focus the search input synchronously so the tap that opened the sheet also raises the iOS keyboard', () => {
+			// Arrange
+			const { fixture, select } = createSelect(true);
+
+			// Act
+			select.openPanel();
+			fixture.detectChanges();
+
+			// Assert
+			const searchInput = sheet()?.querySelector('.textField-input-value');
+			expect(searchInput).not.toBeNull();
+			expect(document.activeElement).toBe(searchInput);
 		});
 
 		it('should not render a sheet above the S breakpoint', () => {

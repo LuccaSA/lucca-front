@@ -359,14 +359,14 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(sheet()?.querySelector('h1')?.textContent?.trim()).toBe('Country');
 		});
 
-		it('should embed a search input that takes the initial focus', () => {
+		it('should embed a search input, focused synchronously so the tap that opened the sheet also raises the iOS keyboard', () => {
 			// Act
 			openSheet();
 
 			// Assert
 			const searchInput = sheet()?.querySelector('.textField-input-value');
 			expect(searchInput).not.toBeNull();
-			expect(searchInput).toHaveAttribute('cdkFocusInitial');
+			expect(document.activeElement).toBe(searchInput);
 		});
 
 		it('should let the dialog header bring its own close button', () => {
@@ -389,6 +389,91 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			// Assert
 			expect(document.querySelector('.lu-select-panel-layout')).not.toBeNull();
 			expect(sheet()).toBeNull();
+		});
+	});
+
+	describe('keyboard-aware height', () => {
+		/**
+		 * iOS doesn't shrink the layout viewport when the on-screen keyboard opens, only the visual one, so
+		 * the sheet tracks the visual viewport itself: its height, to clamp the sheet's own max height, and
+		 * how much of the layout viewport it no longer covers, to nudge the sheet's `bottom` up by that much
+		 * — otherwise the sheet stays pinned behind the keyboard no matter how short it is.
+		 */
+		function mockVisualViewport(initialHeight: number, initialOffsetTop = 0): { setHeight: (height: number) => void; setOffsetTop: (offsetTop: number) => void } {
+			const listeners = new Set<() => void>();
+			const viewport = {
+				height: initialHeight,
+				offsetTop: initialOffsetTop,
+				addEventListener: (type: string, listener: () => void) => {
+					if (type === 'resize' || type === 'scroll') {
+						listeners.add(listener);
+					}
+				},
+				removeEventListener: (type: string, listener: () => void) => {
+					if (type === 'resize' || type === 'scroll') {
+						listeners.delete(listener);
+					}
+				},
+			};
+			vi.stubGlobal('visualViewport', viewport);
+			vi.stubGlobal('innerHeight', 800);
+			return {
+				setHeight: (height: number) => {
+					viewport.height = height;
+					listeners.forEach((listener) => listener());
+				},
+				setOffsetTop: (offsetTop: number) => {
+					viewport.offsetTop = offsetTop;
+					listeners.forEach((listener) => listener());
+				},
+			};
+		}
+
+		afterEach(() => {
+			vi.unstubAllGlobals();
+			document.documentElement.style.removeProperty('--components-dialog-visibleViewportHeight');
+			document.documentElement.style.removeProperty('--components-dialog-visibleViewportBottomOffset');
+		});
+
+		it("should track the visual viewport's height on the document once the sheet opens, so the keyboard shrinking it clamps the sheet's own max height", () => {
+			// Arrange
+			const viewport = mockVisualViewport(800);
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			viewport.setHeight(400); // the keyboard just opened
+
+			// Assert
+			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportHeight')).toBe('400px');
+		});
+
+		it("should track how much of the layout viewport the keyboard covers, so the sheet's `bottom` can be nudged above it instead of staying pinned underneath", () => {
+			// Arrange
+			const viewport = mockVisualViewport(800);
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			viewport.setHeight(400); // the keyboard now covers the bottom 400px of the 800px layout viewport
+
+			// Assert
+			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportBottomOffset')).toBe('400px');
+		});
+
+		it('should stop tracking and clean up both properties once the sheet closes', () => {
+			// Arrange
+			mockVisualViewport(800);
+			const fixture = createHost(FormFieldHostComponent, true);
+			const select = selectOf(fixture);
+			select.openPanel();
+
+			// Act
+			select.closePanel();
+
+			// Assert
+			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportHeight')).toBe('');
+			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportBottomOffset')).toBe('');
 		});
 	});
 });
