@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormsModule, NgControl } from '@angular/forms';
+import { FormControl, NgControl } from '@angular/forms';
 import { isNotNil } from '@lucca-front/ng/core';
 import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { By } from '@angular/platform-browser';
@@ -28,10 +28,10 @@ const options: Entity[] = [
 // `values.length === 0`, destroying the focused input.
 @Component({
 	selector: 'lu-host',
-	imports: [FormsModule, LuMultiSelectInputComponent, LuMultiDisplayerDirective, ɵLuOptionOutletDirective, LuMultiSelectContentDisplayerComponent],
+	imports: [LuMultiSelectInputComponent, LuMultiDisplayerDirective, ɵLuOptionOutletDirective, LuMultiSelectContentDisplayerComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-		<lu-multi-select #selectRef [(ngModel)]="selected" [options]="options">
+		<lu-multi-select #selectRef [(value)]="selected" [options]="options">
 			<ng-container *luMultiDisplayer="let values; select: selectRef">
 				@if (values.length === 0) {
 					<lu-multi-select-content-displayer>All</lu-multi-select-content-displayer>
@@ -114,7 +114,7 @@ describe('ContentDisplayer: keyboard survives the displayer swap on first select
 		expect(activeItemIndex()).toBe(1);
 
 		press('Enter'); // first selection → values 0 -> 1 → displayer swaps out the focused input
-		expect(select.value?.length).toBe(1);
+		expect(select.value()?.length).toBe(1);
 		// The regression: focus fell to <body>. It must stay on the new displayer's input.
 		expect(focusInsideHost()).toBe(true);
 

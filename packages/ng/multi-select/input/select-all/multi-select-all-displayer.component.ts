@@ -1,5 +1,4 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementRef, inject, Injector, input, viewChild } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -48,7 +47,7 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly displayedSingleOption = this.select.singleOptionForDisplay;
 
 	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
-	readonly disabled = toSignal(this.select.disabled$);
+	readonly disabled = this.select.disabled;
 
 	readonly inputElementRef = viewChild.required<LuMultiSelectDisplayerInputDirective<TValue>, ElementRef<HTMLInputElement>>(LuMultiSelectDisplayerInputDirective, { read: ElementRef });
 	readonly #injector = inject(Injector);
@@ -56,7 +55,7 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	unselectOption(option: TValue, $event: Event): void {
 		$event.stopPropagation();
 		$event.preventDefault();
-		this.select.updateValue(this.isIncludeMode() ? (this.select.value?.filter((o) => o !== option) ?? []) : [...(this.select.value ?? []), option], true);
+		this.select.updateValue(this.isIncludeMode() ? this.select.selectedOptions().filter((o) => o !== option) : [...this.select.selectedOptions(), option], true);
 		afterNextRender(
 			() => {
 				this.select.panelRef?.updatePosition();

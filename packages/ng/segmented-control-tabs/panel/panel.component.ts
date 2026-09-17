@@ -13,7 +13,7 @@ let nextId = 0;
 		class: 'segmentedControl_panel',
 		role: 'tabpanel',
 		'[tabindex]': '0',
-		'[class.is-active]': 'segmentedControlTabsRef.active() === value()',
+		'[class.is-active]': 'segmentedControlTabsRef.value() === value()',
 		'[id]': 'panelId',
 		'[attr.aria-labelledby]': 'labelId',
 	},

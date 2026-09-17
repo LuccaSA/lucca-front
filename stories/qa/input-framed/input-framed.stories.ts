@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent, InputFramedComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
@@ -9,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 @Component({
 	selector: 'input-framed-stories',
 	templateUrl: './input-framed.stories.html',
-	imports: [FormFieldComponent, InputFramedComponent, RadioGroupInputComponent, RadioComponent, CheckboxInputComponent, GridComponent, GridColumnComponent, IconComponent, FormsModule],
+	imports: [FormFieldComponent, InputFramedComponent, RadioGroupInputComponent, RadioComponent, CheckboxInputComponent, GridComponent, GridColumnComponent, IconComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class InputFramedStory {

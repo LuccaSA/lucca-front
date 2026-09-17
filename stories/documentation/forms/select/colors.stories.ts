@@ -1,5 +1,4 @@
 import { LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ColorComponent } from '@lucca-front/ng/color';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -67,7 +66,7 @@ const basePlay = async ({ canvasElement, step }) => {
 export const Basic = generateStory({
 	name: 'Basic',
 	description: '',
-	template: `<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" [clearable]="clearable" [compact]="compact" />
+	template: `<lu-color-input [colors]="colors" [(value)]="selectedColor" [clearable]="clearable" [compact]="compact" />
 <pr-story-model-display>{{selectedColor | json}}</pr-story-model-display>`,
 	storyPartial: {
 		args: {
@@ -81,7 +80,7 @@ export const BasicTEST = createTestStory(Basic, basePlay);
 export const Decorative = generateStory({
 	name: 'Decorative Color',
 	description: '',
-	template: `<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" clearable />`,
+	template: `<lu-color-input [colors]="colors" [(value)]="selectedColor" clearable />`,
 	storyPartial: {
 		args: {
 			colors: colorDecoratives50,
@@ -92,7 +91,7 @@ export const Decorative = generateStory({
 export const Neutral = generateStory({
 	name: 'Neutral Color',
 	description: '',
-	template: `<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" clearable />`,
+	template: `<lu-color-input [colors]="colors" [(value)]="selectedColor" clearable />`,
 	storyPartial: {
 		args: {
 			colors: colorNeutral,
@@ -103,7 +102,7 @@ export const Neutral = generateStory({
 export const Lucca = generateStory({
 	name: 'Lucca Color',
 	description: '',
-	template: `<lu-color-input [colors]="colors" [(ngModel)]="selectedColor" clearable />`,
+	template: `<lu-color-input [colors]="colors" [(value)]="selectedColor" clearable />`,
 	storyPartial: {
 		args: {
 			colors: colorLucca,
@@ -116,17 +115,7 @@ const meta: Meta<LuColorPickerInputStoryComponent> = {
 	component: LuSimpleSelectInputComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [
-				FormFieldComponent,
-				FilterColorsPipe,
-				LuSimpleSelectInputComponent,
-				LuTooltipTriggerDirective,
-				LuDisplayerDirective,
-				LuOptionDirective,
-				FormsModule,
-				ColorInputComponent,
-				ColorComponent,
-			],
+			imports: [FormFieldComponent, FilterColorsPipe, LuSimpleSelectInputComponent, LuTooltipTriggerDirective, LuDisplayerDirective, LuOptionDirective, ColorInputComponent, ColorComponent],
 		}),
 	],
 	args: {

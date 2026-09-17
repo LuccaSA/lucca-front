@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -7,7 +6,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 @Component({
 	selector: 'forms-checkbox-stories',
 	templateUrl: './checkbox.stories.html',
-	imports: [FormsModule, FormFieldComponent, CheckboxInputComponent],
+	imports: [FormFieldComponent, CheckboxInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CheckboxStory {}

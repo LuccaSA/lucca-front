@@ -83,7 +83,7 @@ describe('LuSimpleSelectInputComponent', () => {
 
 		it('should display the name of the selected option', () => {
 			// Act
-			fixture.componentInstance.writeValue(options[1]);
+			fixture.componentInstance.value.set(options[1]);
 
 			// Assert
 			expect(displayedValue()).toBe('test 2');
@@ -108,7 +108,7 @@ describe('LuSimpleSelectInputComponent', () => {
 			fixture.detectChanges();
 
 			// Act
-			fixture.componentInstance.writeValue(options[0]);
+			fixture.componentInstance.value.set(options[0]);
 			fixture.detectChanges();
 
 			// Assert
@@ -117,11 +117,11 @@ describe('LuSimpleSelectInputComponent', () => {
 
 		it('should update the display when the value changes', () => {
 			// Arrange
-			fixture.componentInstance.writeValue(options[0]);
+			fixture.componentInstance.value.set(options[0]);
 			expect(displayedValue()).toBe('test 1');
 
 			// Act
-			fixture.componentInstance.writeValue(options[2]);
+			fixture.componentInstance.value.set(options[2]);
 
 			// Assert
 			expect(displayedValue()).toBe('test 3');
@@ -133,7 +133,7 @@ describe('LuSimpleSelectInputComponent', () => {
 			// Arrange
 			const onChange = vi.fn();
 			const component = fixture.componentInstance;
-			component.registerOnChange(onChange);
+			component.value.subscribe(onChange);
 			fixture.componentRef.setInput('options', options);
 			component.openPanel();
 			await waitForPanel(component);
@@ -143,16 +143,16 @@ describe('LuSimpleSelectInputComponent', () => {
 
 			// Assert
 			expect(onChange).toHaveBeenCalledExactlyOnceWith(options[1]);
-			expect(component.value).toEqual(options[1]);
+			expect(component.value()).toEqual(options[1]);
 		});
 
 		it('should replace the previous value when another option is picked', async () => {
 			// Arrange
 			const onChange = vi.fn();
 			const component = fixture.componentInstance;
-			component.registerOnChange(onChange);
 			fixture.componentRef.setInput('options', options);
-			component.writeValue(options[0]);
+			component.value.set(options[0]);
+			component.value.subscribe(onChange);
 
 			// Act
 			component.openPanel();
@@ -161,7 +161,7 @@ describe('LuSimpleSelectInputComponent', () => {
 
 			// Assert
 			expect(onChange).toHaveBeenCalledExactlyOnceWith(options[2]);
-			expect(component.value).toEqual(options[2]);
+			expect(component.value()).toEqual(options[2]);
 		});
 
 		it('should not emit a value when the parent writes one (with NgModel)', () => {
@@ -197,7 +197,7 @@ describe('LuSimpleSelectInputComponent', () => {
 	describe('clearable', () => {
 		it('should not display the clearer when the select is not clearable', () => {
 			// Act
-			fixture.componentInstance.writeValue(options[0]);
+			fixture.componentInstance.value.set(options[0]);
 
 			// Assert
 			expect(clearer()).toBeNull();
@@ -214,7 +214,7 @@ describe('LuSimpleSelectInputComponent', () => {
 		it('should display the clearer when the select is clearable and has a value', () => {
 			// Act
 			fixture.componentRef.setInput('clearable', true);
-			fixture.componentInstance.writeValue(options[0]);
+			fixture.componentInstance.value.set(options[0]);
 
 			// Assert
 			expect(clearer()).not.toBeNull();
@@ -223,9 +223,9 @@ describe('LuSimpleSelectInputComponent', () => {
 		it('should emit null and reset the display when clearing', () => {
 			// Arrange
 			const onChange = vi.fn();
-			fixture.componentInstance.registerOnChange(onChange);
 			fixture.componentRef.setInput('clearable', true);
-			fixture.componentInstance.writeValue(options[0]);
+			fixture.componentInstance.value.set(options[0]);
+			fixture.componentInstance.value.subscribe(onChange);
 
 			// Act
 			clearer()?.click();
@@ -239,7 +239,7 @@ describe('LuSimpleSelectInputComponent', () => {
 	describe('disabled', () => {
 		it('should disable the input when disabled', async () => {
 			// Act
-			fixture.componentInstance.setDisabledState(true);
+			fixture.componentRef.setInput('disabled', true);
 			fixture.detectChanges();
 			// The disabled binding goes through NgModel, which applies it asynchronously
 			await fixture.whenStable();
@@ -250,7 +250,7 @@ describe('LuSimpleSelectInputComponent', () => {
 
 		it('should not open the panel when disabled', () => {
 			// Arrange
-			fixture.componentInstance.setDisabledState(true);
+			fixture.componentRef.setInput('disabled', true);
 			fixture.detectChanges();
 
 			// Act
@@ -263,11 +263,11 @@ describe('LuSimpleSelectInputComponent', () => {
 		it('should hide the clearer when disabled', () => {
 			// Arrange
 			fixture.componentRef.setInput('clearable', true);
-			fixture.componentInstance.writeValue(options[0]);
+			fixture.componentInstance.value.set(options[0]);
 			expect(clearer()).not.toBeNull();
 
 			// Act
-			fixture.componentInstance.setDisabledState(true);
+			fixture.componentRef.setInput('disabled', true);
 
 			// Assert
 			expect(clearer()).toBeNull();

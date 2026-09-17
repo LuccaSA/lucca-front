@@ -72,7 +72,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	readonly optionKey = this.selectInput.optionKey;
 	colorPanel = this.selectInput.colorPicker;
 
-	initialValue: T | null = this.selectInput.value;
+	initialValue: T | null = this.selectInput.value();
 	readonly optionTpl = this.selectInput.optionTpl;
 
 	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
@@ -80,7 +80,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 
 	public readonly keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
-	public readonly selected = computed(() => this.selectInput.valueSignal());
+	public readonly selected = computed(() => this.selectInput.value());
 
 	// Kept free of `null` so it doesn't widen `TreeBranchComponent`'s generic, which would in turn
 	// make its `toggleOne` output nullable and force a guard on `emitValue`.

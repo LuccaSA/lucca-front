@@ -1,61 +1,46 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { ISO8601Duration } from '../core/date-primitives';
 import { DurationPickerComponent } from './duration-picker.component';
 
 @Component({
-	selector: 'lu-duration-picker-ngmodel-test',
-	imports: [DurationPickerComponent, FormFieldComponent, FormsModule],
+	selector: 'lu-duration-picker-test',
+	imports: [DurationPickerComponent, FormFieldComponent],
 	template: `
 		<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-			<lu-duration-picker [(ngModel)]="value" />
+			<lu-duration-picker [(value)]="value" />
 		</lu-form-field>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class DurationPickerNgModelTestComponent {
-	value: string | null = null;
+class DurationPickerTestComponent {
+	value: ISO8601Duration | null = null;
 }
 
 @Component({
-	selector: 'lu-duration-picker-formcontrol-test',
-	imports: [DurationPickerComponent, FormFieldComponent, ReactiveFormsModule],
+	selector: 'lu-duration-picker-max-test',
+	imports: [DurationPickerComponent, FormFieldComponent],
 	template: `
 		<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-			<lu-duration-picker [formControl]="control" />
+			<lu-duration-picker [(value)]="value" max="PT9999H" />
 		</lu-form-field>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class DurationPickerFormControlTestComponent {
-	control = new FormControl<string | null>(null);
-}
-
-@Component({
-	selector: 'lu-duration-picker-formcontrol-max-test',
-	imports: [DurationPickerComponent, FormFieldComponent, ReactiveFormsModule],
-	template: `
-		<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-			<lu-duration-picker [formControl]="control" max="PT9999H" />
-		</lu-form-field>
-	`,
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class DurationPickerFormControlMaxTestComponent {
-	control = new FormControl<string | null>(null);
+class DurationPickerMaxTestComponent {
+	value: ISO8601Duration | null = null;
 }
 
 @Component({
 	selector: 'lu-duration-picker-configurable-test',
-	imports: [DurationPickerComponent, ReactiveFormsModule],
-	template: `<lu-duration-picker [formControl]="control" [max]="max" [step]="step" />`,
+	imports: [DurationPickerComponent],
+	template: `<lu-duration-picker [(value)]="value" [max]="max" [step]="step" />`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DurationPickerConfigurableTestComponent {
-	control = new FormControl<string | null>(null);
+	value: ISO8601Duration | null = null;
 	max: ISO8601Duration = 'PT99H';
 	step: ISO8601Duration | null = null;
 }
@@ -91,7 +76,7 @@ function pressKey(key: string, input: HTMLInputElement, fixture: ComponentFixtur
 function createConfigurableHost(value: string | null, options: { max?: ISO8601Duration; step?: ISO8601Duration } = {}): ComponentFixture<DurationPickerConfigurableTestComponent> {
 	TestBed.configureTestingModule({ imports: [DurationPickerConfigurableTestComponent] });
 	const fixture = TestBed.createComponent(DurationPickerConfigurableTestComponent);
-	fixture.componentInstance.control = new FormControl(value);
+	fixture.componentInstance.value = value;
 	fixture.componentInstance.max = options.max ?? 'PT99H';
 	fixture.componentInstance.step = options.step ?? null;
 	fixture.detectChanges();
@@ -99,8 +84,8 @@ function createConfigurableHost(value: string | null, options: { max?: ISO8601Du
 }
 
 describe('DurationPickerComponent', () => {
-	it('should render with empty ngModel (null)', async () => {
-		const fixture = TestBed.createComponent(DurationPickerNgModelTestComponent);
+	it('should render with empty value (null)', async () => {
+		const fixture = TestBed.createComponent(DurationPickerTestComponent);
 		fixture.componentInstance.value = null;
 		fixture.detectChanges();
 		await fixture.whenStable();
@@ -110,8 +95,8 @@ describe('DurationPickerComponent', () => {
 		expect(minutes).toBe('');
 	});
 
-	it('should render with filled ngModel', async () => {
-		const fixture = TestBed.createComponent(DurationPickerNgModelTestComponent);
+	it('should render with filled value', async () => {
+		const fixture = TestBed.createComponent(DurationPickerTestComponent);
 		fixture.componentInstance.value = 'PT1H';
 		fixture.detectChanges();
 		await fixture.whenStable();
@@ -122,31 +107,9 @@ describe('DurationPickerComponent', () => {
 		expect(minutes).toBe('00');
 	});
 
-	it('should render with empty formControl (null)', async () => {
-		const fixture = TestBed.createComponent(DurationPickerFormControlTestComponent);
-		fixture.detectChanges();
-		await fixture.whenStable();
-
-		const { hours, minutes } = getDisplayTexts(fixture);
-		expect(hours).toBe('');
-		expect(minutes).toBe('');
-	});
-
-	it('should render with filled formControl', async () => {
-		const fixture = TestBed.createComponent(DurationPickerFormControlTestComponent);
-		fixture.componentInstance.control = new FormControl('PT1H');
-		fixture.detectChanges();
-		await fixture.whenStable();
-		fixture.detectChanges();
-
-		const { hours, minutes } = getDisplayTexts(fixture);
-		expect(hours).toBe('1');
-		expect(minutes).toBe('00');
-	});
-
 	it('should render with 1000 hours when max allows it', async () => {
-		const fixture = TestBed.createComponent(DurationPickerFormControlMaxTestComponent);
-		fixture.componentInstance.control = new FormControl('PT1000H');
+		const fixture = TestBed.createComponent(DurationPickerMaxTestComponent);
+		fixture.componentInstance.value = 'PT1000H';
 		fixture.detectChanges();
 		await fixture.whenStable();
 		fixture.detectChanges();
@@ -157,23 +120,7 @@ describe('DurationPickerComponent', () => {
 	});
 
 	describe('value emission', () => {
-		it('should emit the ISO duration once hours and minutes are entered', async () => {
-			// Arrange
-			const fixture = TestBed.createComponent(DurationPickerNgModelTestComponent);
-			fixture.detectChanges();
-			await fixture.whenStable();
-			const inputs = getInputs(fixture);
-
-			// Act
-			typeInPart('2', inputs.hours, fixture);
-			typeInPart('30', inputs.minutes, fixture);
-			await fixture.whenStable();
-
-			// Assert
-			expect(fixture.componentInstance.value).toBe('PT2H30M');
-		});
-
-		it('should emit the ISO duration on the form control once hours and minutes are entered', () => {
+		it('should emit the ISO duration once hours and minutes are entered', () => {
 			// Arrange
 			const fixture = createConfigurableHost(null);
 			const inputs = getInputs(fixture);
@@ -183,7 +130,7 @@ describe('DurationPickerComponent', () => {
 			typeInPart('30', inputs.minutes, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT2H30M');
+			expect(fixture.componentInstance.value).toBe('PT2H30M');
 		});
 
 		it('should emit a durationChange event with its source when typing', () => {
@@ -214,7 +161,7 @@ describe('DurationPickerComponent', () => {
 			typeInPart('10', getInputs(fixture).hours, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT0H30M');
+			expect(fixture.componentInstance.value).toBe('PT0H30M');
 		});
 
 		it('should wrap back to 0 when incrementing the hours past max', () => {
@@ -225,7 +172,7 @@ describe('DurationPickerComponent', () => {
 			pressKey('ArrowUp', getInputs(fixture).hours, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT0H0M');
+			expect(fixture.componentInstance.value).toBe('PT0H0M');
 		});
 
 		it('should keep a value equal to max untouched', () => {
@@ -234,7 +181,7 @@ describe('DurationPickerComponent', () => {
 
 			// Assert
 			expect(getDisplayTexts(fixture)).toEqual({ hours: '9', minutes: '00' });
-			expect(fixture.componentInstance.control.value).toBe('PT9H0M');
+			expect(fixture.componentInstance.value).toBe('PT9H0M');
 		});
 	});
 
@@ -247,7 +194,7 @@ describe('DurationPickerComponent', () => {
 			pressKey('ArrowDown', getInputs(fixture).hours, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT9H0M');
+			expect(fixture.componentInstance.value).toBe('PT9H0M');
 		});
 
 		it('should borrow from the hours when decrementing the minutes below zero', () => {
@@ -258,7 +205,7 @@ describe('DurationPickerComponent', () => {
 			pressKey('ArrowDown', getInputs(fixture).minutes, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT0H59M');
+			expect(fixture.componentInstance.value).toBe('PT0H59M');
 		});
 	});
 
@@ -271,7 +218,7 @@ describe('DurationPickerComponent', () => {
 			pressKey('ArrowUp', getInputs(fixture).minutes, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT1H15M');
+			expect(fixture.componentInstance.value).toBe('PT1H15M');
 		});
 
 		it('should snap the minutes to the step when the current value is off-step', () => {
@@ -282,7 +229,7 @@ describe('DurationPickerComponent', () => {
 			pressKey('ArrowUp', getInputs(fixture).minutes, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT1H30M');
+			expect(fixture.componentInstance.value).toBe('PT1H30M');
 		});
 
 		it('should ignore the minutes arrows when the step has no minutes part', () => {
@@ -293,7 +240,7 @@ describe('DurationPickerComponent', () => {
 			pressKey('ArrowUp', getInputs(fixture).minutes, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT1H0M');
+			expect(fixture.componentInstance.value).toBe('PT1H0M');
 		});
 
 		it('should increment the hours by the step', () => {
@@ -304,7 +251,7 @@ describe('DurationPickerComponent', () => {
 			pressKey('ArrowUp', getInputs(fixture).hours, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT2H0M');
+			expect(fixture.componentInstance.value).toBe('PT2H0M');
 		});
 	});
 });

@@ -1,7 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { luBooleanAttribute, LuClass, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective, InputFramedComponent, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
@@ -12,7 +10,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-radio',
-	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, InputFramedComponent, FormLabelComponent, ɵPresentationDisplayDefaultDirective],
+	imports: [InlineMessageComponent, NgTemplateOutlet, InputDirective, InputFramedComponent, FormLabelComponent, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './radio.component.html',
 	styleUrl: './radio.component.scss',
 	host: {
@@ -26,7 +24,6 @@ let nextId = 0;
 export class RadioComponent<T = unknown> {
 	#luClass = inject(LuClass);
 	#parentGroup = inject(RADIO_GROUP_INSTANCE);
-	#cdr = inject(ChangeDetectorRef);
 
 	readonly value = input.required<T>();
 
@@ -44,17 +41,9 @@ export class RadioComponent<T = unknown> {
 	readonly framedSize = computed(() => this.#parentGroup.framedSize());
 	readonly size = computed(() => this.#parentGroup.size());
 
-	public get ngControl() {
-		return this.#parentGroup.ngControl;
-	}
-
-	public get formControl() {
-		return this.ngControl.control;
-	}
-
-	public get name() {
-		return this.#parentGroup.name;
-	}
+	readonly checked = computed(() => this.#parentGroup.value() === this.value());
+	readonly isDisabled = computed(() => this.#parentGroup.disabled() || this.disabled());
+	readonly name = computed(() => this.#parentGroup.name());
 
 	id = `radio-${++nextId}`;
 
@@ -65,12 +54,13 @@ export class RadioComponent<T = unknown> {
 				'mod-withArrow': arrow !== undefined,
 			});
 		});
-		// We have to do this for presentation mode because otherwise, form value inits after component and because it's not a signal,
-		// it doesn't trigger an update to show the presentation display
-		if (this.ngControl?.valueChanges) {
-			this.ngControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
-				this.#cdr.markForCheck();
-			});
-		}
+	}
+
+	protected onChange() {
+		this.#parentGroup.value.set(this.value());
+	}
+
+	protected onBlur() {
+		this.#parentGroup.touch.emit();
 	}
 }

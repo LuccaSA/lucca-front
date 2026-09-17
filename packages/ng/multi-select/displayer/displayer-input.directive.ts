@@ -67,7 +67,7 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 
 	readonly #panelOpen = toSignal(this.select.isPanelOpen$);
 	readonly #activeDescendant = toSignal(this.select.activeDescendant$);
-	readonly #disabled = toSignal(this.select.disabled$);
+	readonly #disabled = this.select.disabled;
 	readonly #options = toSignal(this.context.option$, { initialValue: [] as T[] });
 	readonly #placeholder = computed(() => {
 		const options = this.#options();
