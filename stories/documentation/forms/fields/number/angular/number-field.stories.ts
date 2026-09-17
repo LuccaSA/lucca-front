@@ -1,4 +1,4 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { luNumberFieldTranslations, NumberInputComponent } from '@lucca-front/ng/forms';
@@ -12,7 +12,7 @@ export default {
 	title: 'Documentation/Forms/Fields/NumberField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [NumberInputComponent, FormFieldComponent, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -127,11 +127,11 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 				},
 				argTypes,
 			)}>
-	<lu-number-input [(ngModel)]="model.example"${generateInputs({ ...inputArgs, width: inputWidth }, argTypes)} />
+	<lu-number-input [(value)]="model.example"${generateInputs({ ...inputArgs, width: inputWidth }, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -181,11 +181,11 @@ export const WithPrefixAndSuffix: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-input [(ngModel)]="model.example" [prefix]="prefix" [suffix]="suffix"${generateInputs(inputArgs, argTypes)} />
+	<lu-number-input [(value)]="model.example" [prefix]="prefix" [suffix]="suffix"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},

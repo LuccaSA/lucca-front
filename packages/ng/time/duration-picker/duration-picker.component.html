@@ -13,6 +13,7 @@
 			[hideValue]="shouldHideValue()"
 			[displayArrows]="displayArrows()"
 			[maxDigits]="maxDigits()"
+			(touched)="touch.emit()"
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
@@ -29,6 +30,7 @@
 			[displayArrows]="displayArrows()"
 			[disabled]="disabled() || !minutesIncrement()"
 			showZero
+			(touched)="touch.emit()"
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"
 			(inputControlClick)="inputControlClickHandler('minutes', $event)"

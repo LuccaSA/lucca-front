@@ -46,7 +46,7 @@ export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
 	get value(): T[] {
-		return this.select.value || [];
+		return this.select.selectedOptions();
 	}
 
 	readonly selectedOptions$ = new BehaviorSubject<T[]>([]);

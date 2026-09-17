@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BoxComponent } from '@lucca-front/ng/box';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -14,7 +13,7 @@ export default {
 	title: 'Documentation/Structure/Box/HTML&CSS/Arrow/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BoxComponent, BrowserAnimationsModule],
+			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, BoxComponent, BrowserAnimationsModule],
 		}),
 	],
 	argTypes: {
@@ -37,7 +36,7 @@ function getTemplate(args: ArrowBasicStory): string {
 
 	if (args.field === 'radio') {
 		return `<lu-form-field label="Légende" hiddenLabel inline>
-	<lu-radio-group-input [(ngModel)]="example" arrow="neutral">
+	<lu-radio-group-input [(value)]="example" arrow="neutral">
 		<lu-radio [value]="1">Option A</lu-radio>
 		<lu-radio [value]="2">Option B</lu-radio>
 		<lu-radio [value]="3">Option C</lu-radio>

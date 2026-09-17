@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { DialogComponent, DialogContentComponent, DialogDismissDirective, DialogFooterComponent, injectDialogData, injectDialogRef } from '@lucca-front/ng/dialog';
@@ -11,26 +10,23 @@ import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../../rich-text-input.transl
 	selector: 'lu-rich-text-plugin-link-dialog',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: 'link-dialog.component.html',
-	imports: [DialogComponent, DialogContentComponent, DialogFooterComponent, FormFieldComponent, TextInputComponent, ReactiveFormsModule, ButtonComponent, DialogDismissDirective],
+	imports: [DialogComponent, DialogContentComponent, DialogFooterComponent, FormFieldComponent, TextInputComponent, ButtonComponent, DialogDismissDirective],
 })
 export class LinkDialogComponent {
 	public readonly dialogData = injectDialogData<{ url: string; canDelete: boolean }>();
 	public readonly dialogRef = injectDialogRef<string | undefined>();
 
-	readonly intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
+	intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
-	public readonly formGroup = new FormGroup({
-		href: new FormControl<string>(this.dialogData.url, Validators.required),
-	});
+	public readonly href = signal<string>(this.dialogData.url);
 
 	public save() {
-		if (this.formGroup.invalid) {
-			this.formGroup.markAllAsTouched();
+		const hrefValue = this.href();
+		if (!hrefValue) {
 			return;
 		}
 
-		const hrefValue = this.formGroup.controls.href.value;
-		this.dialogRef.close(hrefValue ? this.#encodeHref(hrefValue.trim()) : hrefValue);
+		this.dialogRef.close(this.#encodeHref(hrefValue.trim()));
 	}
 
 	/**

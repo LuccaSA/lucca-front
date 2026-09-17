@@ -1,27 +1,22 @@
-import { ChangeDetectionStrategy, Component, computed, input, Signal, signal, ViewEncapsulation } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, input, model, output, signal, ViewEncapsulation } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
 import { ColorComponent } from '@lucca-front/ng/color';
 import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuCoreSelectNoClueDirective, LuDisplayerDirective, LuOptionDirective, ɵinjectPointerNavigation } from '@lucca-front/ng/core-select';
 import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { startWith } from 'rxjs';
-import { injectNgControl } from '../inject-ng-control';
-import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { ColorOption } from './color';
 import { LU_COLOR_TRANSLATIONS } from './color.translate';
 
 @Component({
 	selector: 'lu-color-input',
-	imports: [ReactiveFormsModule, LuSimpleSelectInputComponent, LuDisplayerDirective, LuOptionDirective, ColorComponent, LuCoreSelectNoClueDirective, ɵPresentationDisplayDefaultDirective],
-	hostDirectives: [NoopValueAccessorDirective],
+	imports: [LuSimpleSelectInputComponent, LuDisplayerDirective, LuOptionDirective, ColorComponent, LuCoreSelectNoClueDirective, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './color-input.component.html',
 	styleUrl: './color-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ColorInputComponent {
+export class ColorInputComponent implements FormValueControl<ColorOption | null> {
 	readonly intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
 
 	readonly pointerNavigation = ɵinjectPointerNavigation();
@@ -40,18 +35,13 @@ export class ColorInputComponent {
 	readonly clearable = input(false, { transform: luBooleanAttribute });
 	readonly compact = input(false, { transform: luBooleanAttribute });
 
-	ngControl = injectNgControl();
+	readonly value = model<ColorOption | null>(null);
 
-	readonly currentColorPresentation: Signal<ColorOption | null>;
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
-	constructor() {
-		if (this.ngControl && this.ngControl.valueChanges) {
-			const controlValueSignal = toSignal(this.ngControl.valueChanges?.pipe(startWith(this.ngControl.value)));
-			this.currentColorPresentation = computed(() => {
-				return this.colors().find((c) => c.background === controlValueSignal()) || null;
-			});
-		}
-	}
+	readonly touch = output<void>();
+
+	readonly currentColorPresentation = computed(() => this.colors().find((c) => c.background === this.value()?.background) || null);
 
 	readonly filteredColors = computed(() => {
 		if (this.clue()) {

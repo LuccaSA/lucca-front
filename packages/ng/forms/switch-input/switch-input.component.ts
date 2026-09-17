@@ -1,29 +1,30 @@
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, model, output, ViewEncapsulation } from '@angular/core';
+import { FormCheckboxControl } from '@angular/forms/signals';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { getIntl } from '@lucca-front/ng/core';
 import { CHECKBOX_INPUT_TRANSLATIONS } from '../checkbox-input/checkbox-input.translate';
-import { injectNgControl } from '../inject-ng-control';
-import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 
 @Component({
 	selector: 'lu-switch-input',
-	imports: [ReactiveFormsModule, InputDirective, ɵPresentationDisplayDefaultDirective],
+	imports: [InputDirective, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './switch-input.component.html',
 	styleUrl: './switch-input.component.scss',
-	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'switchField',
 	},
 })
-export class SwitchInputComponent {
-	readonly formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
+export class SwitchInputComponent implements FormCheckboxControl {
+	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
-	ngControl = injectNgControl();
+	readonly checked = model(false);
 
-	readonly intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
+	readonly disabled = input(false, { transform: booleanAttribute });
+
+	readonly touch = output<void>();
+
+	intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
 
 	constructor() {
 		if (this.formField) {

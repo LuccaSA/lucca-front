@@ -1,8 +1,8 @@
 <lu-dialog>
-	<form class="dialog-form" (submit)="save()" [formGroup]="formGroup">
+	<form class="dialog-form" (submit)="$event.preventDefault(); save()">
 		<lu-dialog-content>
 			<lu-form-field [label]="intl().linksHref">
-				<lu-text-input formControlName="href" type="url" [placeholder]="intl().linksPlaceholder" />
+				<lu-text-input [(value)]="href" type="url" [placeholder]="intl().linksPlaceholder" />
 			</lu-form-field>
 		</lu-dialog-content>
 		<lu-dialog-footer>

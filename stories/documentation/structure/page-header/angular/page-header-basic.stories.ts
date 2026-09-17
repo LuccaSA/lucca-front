@@ -1,6 +1,5 @@
 import { JsonPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { provideRouter } from '@angular/router';
 import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -81,7 +80,6 @@ export default {
 				LuTooltipModule,
 				FormFieldComponent,
 				TextInputComponent,
-				FormsModule,
 				HorizontalNavigationComponent,
 				HorizontalNavigationLinkDirective,
 				BreadcrumbsComponent,
@@ -131,7 +129,7 @@ export default {
 				hasSearchIcon
 				type="text"
 				placeholder="ex : Mon précieux"
-				[(ngModel)]="example"
+				[(value)]="example"
 			></lu-text-input>
 		</lu-form-field>
 		<button type="button" luButton>Button</button>

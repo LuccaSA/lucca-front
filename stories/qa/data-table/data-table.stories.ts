@@ -1,7 +1,6 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	DataTableBodyComponent,
@@ -37,7 +36,6 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 		DataTableRowCellHeaderComponent,
 		FormFieldComponent,
 		TextInputComponent,
-		FormsModule,
 		ButtonComponent,
 		IconComponent,
 		PaginationComponent,

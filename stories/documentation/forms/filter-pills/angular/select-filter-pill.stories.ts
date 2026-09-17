@@ -1,7 +1,6 @@
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { JsonPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { FilterPillComponent, luFilterPillsTranslations } from '@lucca-front/ng/filter-pills';
@@ -19,7 +18,7 @@ export default {
 	decorators: [
 		applicationConfig({ providers: [provideAnimations(), provideHttpClient()] }),
 		moduleMetadata({
-			imports: [FilterPillComponent, LuSimpleSelectInputComponent, LuMultiSelectInputComponent, FormsModule, StoryModelDisplayComponent, JsonPipe, FilterLegumesPipe, LuCoreSelectUsersDirective],
+			imports: [FilterPillComponent, LuSimpleSelectInputComponent, LuMultiSelectInputComponent, StoryModelDisplayComponent, JsonPipe, FilterLegumesPipe, LuCoreSelectUsersDirective],
 			providers: [provideCoreSelectCurrentUserId(() => 66)],
 		}),
 	],
@@ -33,7 +32,7 @@ export default {
 				legumesPluralFn: (count: number) => ({ one: `${count} légume`, other: `${count} légumes` }),
 			},
 			template: `<lu-filter-pill label="Légume" name="legume">
-			<lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
+			<lu-simple-select [(value)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
 </lu-filter-pill>
 
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>
@@ -41,7 +40,7 @@ export default {
 <hr class="divider pr-u-marginBlock400" />
 
 <lu-filter-pill label="Légume" name="legume">
-	<lu-multi-select [(ngModel)]="examples"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" />
+	<lu-multi-select [(value)]="examples"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" />
 </lu-filter-pill>
 
 <pr-story-model-display>{{ examples | json }}</pr-story-model-display>
@@ -49,7 +48,7 @@ export default {
 <hr class="divider pr-u-marginBlock400" />
 
 <lu-filter-pill label="Utilisateur" name="user">
-	<lu-simple-select [(ngModel)]="user"	users enableFormerEmployees/>
+	<lu-simple-select [(value)]="user"	users enableFormerEmployees/>
 </lu-filter-pill>
 
 <pr-story-model-display>{{ user | json }}</pr-story-model-display>
