@@ -189,7 +189,9 @@
 						<li class="activityFeed-step">
 							<div class="activityFeed-step-state mod-success"></div>
 							<div class="activityFeed-step-description">
-								<p class="activityFeed-step-description-content">Étape de traitement réussie.</p>
+								<p class="activityFeed-step-description-content">
+									Étape de traitement réussie. Étape de traitement réussie. Étape de traitement réussie.
+								</p>
 								<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time"
 									><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time
 								>
@@ -218,7 +220,12 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-activity-feed>
-						<lu-activity-feed-step [user]="user" [date]="date" label="Étape de traitement réussie." status="success" />
+						<lu-activity-feed-step
+							[user]="user"
+							[date]="date"
+							label="Étape de traitement réussie. Étape de traitement réussie. Étape de traitement réussie."
+							status="success"
+						/>
 						<lu-activity-feed-step status="pending" [user]="user" label="En attente d'approbation par Daniel Hernandez. " />
 						<lu-activity-feed-step [user]="user" [date]="date" label="Étape de traitement en erreur." status="critical" />
 					</lu-activity-feed>
