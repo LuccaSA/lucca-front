@@ -32,6 +32,7 @@
 		.activityFeed-step-state,
 		.activityFeed-step-avatar {
 			margin-block: var(--pr-t-spacings-75);
+			flex-shrink: 0;
 		}
 
 		.activityFeed-step-state {
