@@ -53,7 +53,7 @@ export function openSelectPanelSheet<TPanel>(dialogService: LuDialogService, pan
 }
 
 /**
- * Keeps `--components-dialog-visibleViewportHeight` and `--components-dialog-visibleViewportBottomOffset`
+ * Keeps `--components-dialog-visibleViewportBlockSize` and `--components-dialog-insetBlockEnd`
  * in sync with the visual viewport for as long as the sheet stays open.
  *
  * iOS doesn't shrink the layout viewport when the on-screen keyboard opens — only the visual one — so
@@ -62,6 +62,10 @@ export function openSelectPanelSheet<TPanel>(dialogService: LuDialogService, pan
  * clamped height or not. Nudging `bottom` up by the amount the keyboard currently obscures — on top of
  * clamping the max height — keeps the sheet entirely above the keyboard, using all the space that's
  * actually visible, instead of a second, outer page scroll on top of the listbox's own.
+ *
+ * Set on the sheet's own overlay element rather than `document.documentElement`: these custom properties
+ * are also read by any other dialog in `mode: 'sheet'` (e.g. approbation-inbox's), and a document-wide
+ * value would leak this select's keyboard tracking onto an unrelated sheet stacked underneath it.
  */
 function trackVisibleViewport<TPanel>(dialogRef: LuDialogRef<TPanel, never>): void {
 	const viewport = window.visualViewport;
@@ -69,10 +73,10 @@ function trackVisibleViewport<TPanel>(dialogRef: LuDialogRef<TPanel, never>): vo
 		return;
 	}
 
+	const style = dialogRef.cdkRef.overlayRef.overlayElement.style;
 	const update = (): void => {
-		const style = document.documentElement.style;
-		style.setProperty('--components-dialog-visibleViewportHeight', `${viewport.height}px`);
-		style.setProperty('--components-dialog-visibleViewportBottomOffset', `${window.innerHeight - viewport.height - viewport.offsetTop}px`);
+		style.setProperty('--components-dialog-visibleViewportBlockSize', `${viewport.height}px`);
+		style.setProperty('--components-dialog-insetBlockEnd', `${window.innerHeight - viewport.height - viewport.offsetTop}px`);
 		// The initially-selected option scrolls into view as soon as it's rendered (see
 		// `scrollIntoViewOnceReady`), which — with the opening animation disabled — happens before the
 		// keyboard has finished opening and before the resize above has clamped the sheet down to its
@@ -88,8 +92,7 @@ function trackVisibleViewport<TPanel>(dialogRef: LuDialogRef<TPanel, never>): vo
 	dialogRef.closed$.pipe(take(1)).subscribe(() => {
 		viewport.removeEventListener('resize', update);
 		viewport.removeEventListener('scroll', update);
-		const style = document.documentElement.style;
-		style.removeProperty('--components-dialog-visibleViewportHeight');
-		style.removeProperty('--components-dialog-visibleViewportBottomOffset');
+		style.removeProperty('--components-dialog-visibleViewportBlockSize');
+		style.removeProperty('--components-dialog-insetBlockEnd');
 	});
 }

@@ -531,13 +531,15 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			};
 		}
 
+		function pane(): HTMLElement | null {
+			return document.querySelector<HTMLElement>('.cdk-overlay-pane');
+		}
+
 		afterEach(() => {
 			vi.unstubAllGlobals();
-			document.documentElement.style.removeProperty('--components-dialog-visibleViewportHeight');
-			document.documentElement.style.removeProperty('--components-dialog-visibleViewportBottomOffset');
 		});
 
-		it("should track the visual viewport's height on the document once the sheet opens, so the keyboard shrinking it clamps the sheet's own max height", () => {
+		it("should track the visual viewport's height on the sheet's own overlay element once it opens, so the keyboard shrinking it clamps the sheet's own max height", () => {
 			// Arrange
 			const viewport = mockVisualViewport(800);
 			const fixture = createHost(FormFieldHostComponent, true);
@@ -547,7 +549,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			viewport.setHeight(400); // the keyboard just opened
 
 			// Assert
-			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportHeight')).toBe('400px');
+			expect(pane()?.style.getPropertyValue('--components-dialog-visibleViewportBlockSize')).toBe('400px');
 		});
 
 		it("should track how much of the layout viewport the keyboard covers, so the sheet's `bottom` can be nudged above it instead of staying pinned underneath", () => {
@@ -560,7 +562,21 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			viewport.setHeight(400); // the keyboard now covers the bottom 400px of the 800px layout viewport
 
 			// Assert
-			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportBottomOffset')).toBe('400px');
+			expect(pane()?.style.getPropertyValue('--components-dialog-insetBlockEnd')).toBe('400px');
+		});
+
+		it('should not leak the tracked properties onto the document, which other sheets (e.g. stacked underneath) also read from', () => {
+			// Arrange
+			const viewport = mockVisualViewport(800);
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			viewport.setHeight(400);
+
+			// Assert
+			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportBlockSize')).toBe('');
+			expect(document.documentElement.style.getPropertyValue('--components-dialog-insetBlockEnd')).toBe('');
 		});
 
 		it('should stop tracking and clean up both properties once the sheet closes', () => {
@@ -569,13 +585,14 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			const fixture = createHost(FormFieldHostComponent, true);
 			const select = selectOf(fixture);
 			select.openPanel();
+			const sheetPane = pane();
 
 			// Act
 			select.closePanel();
 
 			// Assert
-			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportHeight')).toBe('');
-			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportBottomOffset')).toBe('');
+			expect(sheetPane?.style.getPropertyValue('--components-dialog-visibleViewportBlockSize')).toBe('');
+			expect(sheetPane?.style.getPropertyValue('--components-dialog-insetBlockEnd')).toBe('');
 		});
 	});
 

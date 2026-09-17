@@ -8,6 +8,8 @@
 	--components-dialog-maxHeightFallback: calc(100vh - (var(--pr-t-spacings-200) * 2));
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
 	--components-dialog-inset: 0 var(--commons-pushPanel-inlineSize) 0 0;
+	--components-dialog-insetBlockEnd: 0px;
+	--components-dialog-visibleViewportBlockSize: 100%;
 	--components-dialog-animationOpening: scaleIn;
 	--components-dialog-animationDuration: var(--commons-animations-durations-standard);
 	--components-dialog-insideHeaderAreas:
