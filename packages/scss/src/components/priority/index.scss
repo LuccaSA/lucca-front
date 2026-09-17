@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+lu-priority {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.is-low {
+			@include low;
+		}
+
+		&.is-medium {
+			@include medium;
+		}
+
+		&.is-high {
+			@include high;
+		}
+	}
+}
