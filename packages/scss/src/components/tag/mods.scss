@@ -1,4 +1,5 @@
 @use '@lucca-front/icons/src/icon/exports' as icons;
+@use '@lucca-front/scss/src/components/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin clickable {
@@ -69,8 +70,12 @@
 			$pseudo: '::after',
 		);
 
-		.lucca-icon {
+		@include icon.whenRawIcon {
 			@include icons.AI;
+		}
+
+		@include icon.whenIconComponent {
+			@include icon.AI;
 		}
 	}
 }

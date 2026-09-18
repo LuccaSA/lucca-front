@@ -1,6 +1,8 @@
 @use 'exports' as *;
 
-.lucca-icon {
+// legacy .lucca-icon
+// where is for specificity here
+.lucca-icon:where(:not(:where(lu-icon, pr-icon) .lucca-icon)) {
 	@layer components {
 		@include vars;
 		@include component;
