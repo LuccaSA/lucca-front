@@ -8,6 +8,13 @@ export interface SelectDataSourceParams {
 }
 
 export interface SelectDataSource<TOption, TGroup = never> {
+	/**
+	 * Emits when the params behind `getOptions` changed, so the select resets and reloads from page 0
+	 * with the current clue — a panel header toggle, a filter bound to an input…
+	 *
+	 * It must not emit on clue changes: those are the select's own business, debounce included, and an
+	 * emission here would load the same page a second time.
+	 */
 	paramsChange?: Observable<unknown>;
 	/** Optional debounce in ms for clue-based re-queries (useful for API data sources) */
 	clueDebounceMs?: number;

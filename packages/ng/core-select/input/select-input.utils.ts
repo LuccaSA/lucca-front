@@ -1,4 +1,4 @@
-import { catchError, defaultIfEmpty, defer, distinctUntilChanged, EMPTY, expand, finalize, map, Observable, of, scan, switchMap, take, takeWhile, tap, timer } from 'rxjs';
+import { catchError, defaultIfEmpty, defer, distinctUntilChanged, EMPTY, expand, finalize, map, Observable, of, scan, startWith, switchMap, take, takeWhile, tap, timer } from 'rxjs';
 import { SelectDataSource, SelectDataSourceParams } from '../select.model';
 
 export interface BuildOptionsFromDataSourceDeps {
@@ -10,6 +10,10 @@ export interface BuildOptionsFromDataSourceDeps {
 
 export function buildOptionsFromDataSource<TOption>(ds: SelectDataSource<TOption>, deps: BuildOptionsFromDataSourceDeps): Observable<readonly TOption[]> {
 	const { clue$, isPanelOpen$ } = deps;
+
+	// Resets and reloads from page 0 with the current clue. `paramsChange` carries params changes only:
+	// clue changes are already handled by `clue$`, whose emissions must not load a second time
+	const paramsChange$ = ds.paramsChange ?? EMPTY;
 
 	const normalizedClue$ = clue$.pipe(
 		map((clue) => clue ?? ''),
@@ -29,15 +33,22 @@ export function buildOptionsFromDataSource<TOption>(ds: SelectDataSource<TOption
 			}
 
 			return debouncedClue$.pipe(
-				switchMap((clue) => {
-					ds.reset?.();
-					const options$ = ds.paginated === false ? wholeList(ds, clue) : accumulatedPages(ds, clue, deps);
-					return options$.pipe(
-						// Applied on the accumulated list so cross-page decorations (eg. homonyms) can be computed
-						// Falls back to the raw accumulated options so a failing decoration doesn't kill the whole stream
-						switchMap((options) => defer(() => ds.transformOptions?.(options) ?? of(options)).pipe(catchError(() => of(options)))),
-					);
-				}),
+				switchMap((clue) =>
+					// A params change restarts the very same load as a clue change would, minus the debounce:
+					// it comes from a deliberate action (a panel header toggle, a filter) and not from typing
+					paramsChange$.pipe(
+						startWith(null),
+						switchMap(() => {
+							ds.reset?.();
+							const options$ = ds.paginated === false ? wholeList(ds, clue) : accumulatedPages(ds, clue, deps);
+							return options$.pipe(
+								// Applied on the accumulated list so cross-page decorations (eg. homonyms) can be computed
+								// Falls back to the raw accumulated options so a failing decoration doesn't kill the whole stream
+								switchMap((options) => defer(() => ds.transformOptions?.(options) ?? of(options)).pipe(catchError(() => of(options)))),
+							);
+						}),
+					),
+				),
 			);
 		}),
 	);

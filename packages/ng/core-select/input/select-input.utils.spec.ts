@@ -494,6 +494,81 @@ describe('buildOptionsFromDataSource', () => {
 		sub.unsubscribe();
 	}));
 
+	describe('params change', () => {
+		it('should reset and reload from page 0 with the current clue', fakeAsync(() => {
+			const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+			const paramsChange$ = new Subject<void>();
+			const ds: SelectDataSource<TestOption> & { getOptions: Mock; reset: Mock } = {
+				...createDs([[{ id: 1, name: 'Page 0' }], [{ id: 2, name: 'Page 1' }], [{ id: 3, name: 'Reloaded page 0' }]]),
+				paramsChange: paramsChange$,
+			};
+			const emitted: (readonly TestOption[])[] = [];
+
+			const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+			isPanelOpen$.next(true);
+			clue$.next('carotte');
+			tick();
+			nextPage$.next();
+			tick();
+
+			paramsChange$.next();
+			tick();
+
+			// Back to a single page, asked for with the clue that is still in the input
+			expect(ds.reset).toHaveBeenCalledTimes(2);
+			expect(ds.getOptions).toHaveBeenNthCalledWith(3, { clue: 'carotte', page: 0 });
+			expect(emitted[emitted.length - 1]).toEqual([{ id: 3, name: 'Reloaded page 0' }]);
+
+			sub.unsubscribe();
+		}));
+
+		it('should reload without waiting for the clue debounce', fakeAsync(() => {
+			const { deps, isPanelOpen$, clue$ } = createDeps();
+			const paramsChange$ = new Subject<void>();
+			const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+				...createDs([[{ id: 1, name: 'A' }], [{ id: 2, name: 'B' }]]),
+				clueDebounceMs: 250,
+				paramsChange: paramsChange$,
+			};
+
+			const sub = buildOptionsFromDataSource(ds, deps).subscribe();
+
+			isPanelOpen$.next(true);
+			clue$.next('');
+			tick();
+			expect(ds.getOptions).toHaveBeenCalledTimes(1);
+
+			// A toggle in the panel header is a deliberate action, not typing: it fires right away
+			paramsChange$.next();
+			tick();
+
+			expect(ds.getOptions).toHaveBeenCalledTimes(2);
+
+			sub.unsubscribe();
+			tick(250);
+		}));
+
+		it('should not reload while the panel is closed', fakeAsync(() => {
+			const { deps, isPanelOpen$ } = createDeps();
+			const paramsChange$ = new Subject<void>();
+			const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+				...createDs([[{ id: 1, name: 'A' }]]),
+				paramsChange: paramsChange$,
+			};
+
+			const sub = buildOptionsFromDataSource(ds, deps).subscribe();
+
+			isPanelOpen$.next(false);
+			paramsChange$.next();
+			tick();
+
+			expect(ds.getOptions).not.toHaveBeenCalled();
+
+			sub.unsubscribe();
+		}));
+	});
+
 	describe('non paginated data source', () => {
 		function createWholeListDs(options$: Observable<readonly TestOption[]>): SelectDataSource<TestOption> & { getOptions: Mock } {
 			return { getOptions: vi.fn(() => options$), paginated: false };
