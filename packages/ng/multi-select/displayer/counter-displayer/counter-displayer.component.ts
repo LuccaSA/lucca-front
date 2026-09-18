@@ -24,7 +24,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 						</lu-chip>
 					}
 					@if ((selectedOptions?.length ?? 0) > 1) {
-						<lu-chip class="multipleSelect-displayer-chip" unkillable>{{ selectedOptions?.length }} {{ label() }}</lu-chip>
+						<lu-chip class="multipleSelect-displayer-chip" unkillable withEllipsis>{{ selectedOptions?.length }} {{ label() }}</lu-chip>
 					}
 				</div>
 			}
