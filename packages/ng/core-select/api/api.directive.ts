@@ -77,11 +77,13 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			this.clearLastPageByClue();
 		});
 
+		const totalCount$ = this.totalCount$;
+
 		const dataSource: SelectDataSource<TOption, unknown> = {
 			paramsChange: this.params$,
 			...(this.getGroupOptions ? { getGroupOptions: (group: unknown) => this.getGroupOptions!(group) } : {}),
 			clueDebounceMs: this.debounceDuration,
-			getTotalCount: () => this.totalCount$,
+			...(totalCount$ ? { getTotalCount: () => totalCount$ } : {}),
 			reset: () => this.clearLastPageByClue(),
 			transformOptions: (options) => this.transformOptions(options),
 			getOptions: ({ clue, page }) => {
@@ -124,7 +126,15 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		return this.paramsSignal ? of(this.paramsSignal()) : this.params$.pipe(take(1));
 	}
 
-	public abstract totalCount$: Observable<number>;
+	/**
+	 * Total number of options matching the current params, ignoring pagination. Only the select-all
+	 * feature of `lu-multi-select` needs it, so it is optional: a directive that has no cheap way to
+	 * count — or whose select never offers a select-all — simply leaves it undefined.
+	 *
+	 * Being a property of this class, it has to be implemented as a field: TypeScript rejects an
+	 * accessor overriding a property (TS2611).
+	 */
+	public totalCount$: Observable<number> | undefined;
 
 	protected clearLastPageByClue() {
 		this.#lastClue = undefined;

@@ -56,6 +56,11 @@ export const SELECT_ID = new InjectionToken<number>('LuSelectPanelData');
 export const SELECT_LABEL = new InjectionToken<HTMLLabelElement | undefined>('LuSelectLabel');
 export const SELECT_LABEL_ID = new InjectionToken<string>('LuSelectLabelId');
 
+/**
+ * Contract behind {@link CORE_SELECT_API_TOTAL_COUNT_PROVIDER}: a directive fulfills it by declaring
+ * a `totalCount$`, which the select-all of `lu-multi-select` then reads through the token. Providing
+ * a count stays optional — see `ALuCoreSelectApiDirective.totalCount$`.
+ */
 export interface CoreSelectApiTotalCountProvider {
 	totalCount$: Observable<number>;
 }
