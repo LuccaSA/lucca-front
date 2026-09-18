@@ -9,17 +9,18 @@ import { LuMultiSelectContentDisplayerComponent } from './content-displayer/cont
 
 @Directive({
 	selector: '[luMultiSelectDisplayerInput]',
+	exportAs: 'luMultiSelectDisplayerInput',
 	host: {
-		'aria-haspopup': 'listbox',
-		role: 'combobox',
 		class: 'multipleSelect-displayer-search',
-		type: 'text',
+		'[class.mod-button]': 'isButton',
+		'[attr.role]': 'isButton ? null : "combobox"',
+		'[attr.aria-haspopup]': 'isButton ? "dialog" : "listbox"',
 		'[attr.aria-expanded]': 'panelOpen',
-		'[attr.aria-activedescendant]': 'activeDescendant',
+		'[attr.aria-activedescendant]': 'isButton ? null : activeDescendant',
 		'[attr.aria-controls]': 'controls',
 		'[attr.disabled]': 'disabled',
-		'[attr.placeholder]': 'placeholder',
-		'[attr.readonly]': 'readonly',
+		'[attr.placeholder]': 'isButton ? null : placeholder',
+		'[attr.readonly]': 'isButton ? null : readonly',
 		'(input)': 'onInput()',
 	},
 	hostDirectives: [InputDirective],
@@ -36,6 +37,16 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	readonly destroyRef = inject(DestroyRef);
 
 	readonly #injector = inject(Injector);
+
+	/**
+	 * Below the `S` breakpoint the panel opens as a modal sheet carrying its own search input, so this
+	 * element is only ever a trigger and the displayers render it as a `<button>`. Typing into it is
+	 * impossible by then, and an `<input>` would make iOS raise the software keyboard on a field the
+	 * sheet is about to cover.
+	 */
+	get isButton() {
+		return this.select.bottomSheetMode();
+	}
 
 	get panelOpen() {
 		return this.#panelOpen();
@@ -94,7 +105,8 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 		// is destroyed. focusInput$ is a plain Subject, so its emission fires before this new input
 		// has subscribed and is lost — focus falls back to <body> and keyboard navigation dies.
 		// A freshly mounted displayer input owns focus whenever the panel is open.
-		if (this.select.isPanelOpen) {
+		// A sheet traps focus on its own content, so the covered trigger must not claim it back.
+		if (this.select.isPanelOpen && !this.isButton) {
 			afterNextRender(() => this.elementRef.nativeElement.focus(), { injector: this.#injector });
 		}
 

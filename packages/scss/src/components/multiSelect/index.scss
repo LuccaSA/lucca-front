@@ -73,3 +73,9 @@
 		}
 	}
 }
+
+@layer mods {
+	.dialog.mod-select {
+		@include select;
+	}
+}

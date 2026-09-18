@@ -1,10 +1,64 @@
-<lu-select-panel-layout
-	class="lu-option-picker-panel mod-multiple"
-	data-testid="dialog-panel"
-	[loading]="loading()"
-	[contentTabIndex]="0"
-	(scrolled)="onScroll($event)"
->
+@if (selectInput.panelBottomSheetMode()) {
+	<!-- Below the S breakpoint the panel is a dialog in `sheet` mode: the surface, the backdrop, the focus
+	trap, the close button and the focus restoration all come from the dialog, so the panel only fills in
+	its title, its own search input — the displayer it covers is no longer reachable — and its content. -->
+	<lu-dialog>
+		<lu-dialog-header>
+			@if (selectInput.panelTitle(); as title) {
+				<!-- The interpolation and the marker must stay adjacent in the source: any whitespace between
+				them (even just a line break) renders as a literal space, pushing the asterisk away from the
+				title instead of hugging it the way `.formLabel-required`'s own margin expects. -->
+				@if (selectInput.panelTitleRequired()) {
+					<h1>{{ title }}<sup class="formLabel-required" aria-hidden="true">*</sup></h1>
+				} @else {
+					<h1>{{ title }}</h1>
+				}
+			}
+			<div dialogHeaderContent>
+				<ng-container [ngTemplateOutlet]="sheetSearch" />
+			</div>
+		</lu-dialog-header>
+		<lu-dialog-content data-testid="dialog-panel" tabindex="0" (scroll)="onScroll($event)">
+			<ng-container [ngTemplateOutlet]="panelContent" />
+		</lu-dialog-content>
+	</lu-dialog>
+} @else {
+	<lu-select-panel-layout
+		class="lu-option-picker-panel mod-multiple"
+		data-testid="dialog-panel"
+		[loading]="loading()"
+		[contentTabIndex]="0"
+		(scrolled)="onScroll($event)"
+	>
+		<ng-container [ngTemplateOutlet]="panelContent" />
+	</lu-select-panel-layout>
+}
+
+<ng-template #sheetSearch>
+	<div class="textField">
+		<div class="textField-input">
+			<input
+				class="textField-input-value"
+				type="text"
+				role="combobox"
+				aria-haspopup="listbox"
+				[attr.aria-expanded]="true"
+				[attr.aria-controls]="selectId"
+				[attr.placeholder]="intl().placeholder"
+				[ngModel]="clue()"
+				(ngModelChange)="selectInput.clueChanged($event)"
+				[ngModelOptions]="{ standalone: true }"
+				[readonly]="!searchable"
+				(keydown)="selectInput.onKeyDownNavigation($event)"
+			/>
+			<div class="textField-input-affix">
+				<lu-icon class="textField-input-affix-icon" icon="searchMagnifyingGlass" />
+			</div>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template #panelContent>
 	<lu-listbox multiple [tree]="!!treeGenerator" [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
 		<!-- The header is projected inside the listbox because it can contain selectable elements
 		(e.g. the select-all checkbox) that are referenced by aria-activedescendant -->
@@ -100,4 +154,4 @@
 			<ng-container *luPortal="selectInput.addOptionLabel" />
 		</lu-listbox-option>
 	}
-</lu-select-panel-layout>
+</ng-template>

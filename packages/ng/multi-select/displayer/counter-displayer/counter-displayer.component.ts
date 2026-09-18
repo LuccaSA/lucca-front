@@ -15,7 +15,11 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 	imports: [AsyncPipe, LuTooltipModule, ChipComponent, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="((selectedOptions$ | async)?.length ?? 0) > 0">
-			<input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
+			@if (select.bottomSheetMode()) {
+				<button type="button" #inputElement luMultiSelectDisplayerInput #trigger="luMultiSelectDisplayerInput">{{ trigger.placeholder }}</button>
+			} @else {
+				<input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
+			}
 			@if (selectedOptions$ | async; as selectedOptions) {
 				<div class="multipleSelect-displayer-filter">
 					@if (selectedOptions?.length === 1) {

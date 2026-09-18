@@ -1,0 +1,630 @@
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { vi } from 'vitest';
+import { LuSimpleSelectInputComponent } from './select-input.component';
+
+type Entity = { id: number; name: string };
+
+const options: Entity[] = [
+	{ id: 1, name: 'test 1' },
+	{ id: 2, name: 'test 2' },
+];
+
+/**
+ * The select observes `injectMediaMinBreakpoint('S', true)`, which matches while the viewport is *below*
+ * the S breakpoint, so this single subject drives bottom sheet mode.
+ */
+class FakeBreakpointObserver {
+	readonly belowSmallBreakpoint = new BehaviorSubject(false);
+	readonly observedQueries: string[] = [];
+
+	observe(query: string | readonly string[]): Observable<BreakpointState> {
+		this.observedQueries.push(...(typeof query === 'string' ? [query] : query));
+		return this.belowSmallBreakpoint.pipe(map((matches) => ({ matches, breakpoints: {} })));
+	}
+
+	isMatched(): boolean {
+		return this.belowSmallBreakpoint.value;
+	}
+}
+
+@Component({
+	selector: 'lu-simple-select-bare-host',
+	imports: [FormsModule, LuSimpleSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: ` <lu-simple-select [ngModel]="selected" [options]="options" /> `,
+})
+class BareHostComponent {
+	selected: Entity | null = null;
+
+	options: Entity[] = options;
+}
+
+@Component({
+	selector: 'lu-simple-select-form-field-host',
+	imports: [FormsModule, LuSimpleSelectInputComponent, FormFieldComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Country">
+			<lu-simple-select [ngModel]="selected" [options]="options" />
+		</lu-form-field>
+	`,
+})
+class FormFieldHostComponent {
+	selected: Entity | null = null;
+
+	options: Entity[] = options;
+}
+
+@Component({
+	selector: 'lu-simple-select-required-form-field-host',
+	imports: [FormsModule, LuSimpleSelectInputComponent, FormFieldComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Country">
+			<lu-simple-select [ngModel]="selected" [options]="options" required />
+		</lu-form-field>
+	`,
+})
+class RequiredFormFieldHostComponent {
+	selected: Entity | null = null;
+
+	options: Entity[] = options;
+}
+
+@Component({
+	selector: 'lu-simple-select-label-host',
+	imports: [FormsModule, LuSimpleSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<label>
+			<span>Wrapping label</span>
+			<span role="button">Additional info</span>
+			<span class="pr-u-mask">screen reader only</span>
+			<lu-simple-select [ngModel]="selected" [options]="options" />
+		</label>
+	`,
+})
+class LabelHostComponent {
+	selected: Entity | null = null;
+
+	options: Entity[] = options;
+}
+
+describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
+	let breakpointObserver: FakeBreakpointObserver;
+
+	beforeEach(() => {
+		breakpointObserver = new FakeBreakpointObserver();
+		TestBed.configureTestingModule({
+			providers: [{ provide: BreakpointObserver, useValue: breakpointObserver }],
+		});
+	});
+
+	function createHost<THost>(host: new () => THost, belowSmallBreakpoint: boolean): ComponentFixture<THost> {
+		breakpointObserver.belowSmallBreakpoint.next(belowSmallBreakpoint);
+		const fixture = TestBed.createComponent(host);
+		fixture.detectChanges();
+		return fixture;
+	}
+
+	function selectOf(fixture: ComponentFixture<unknown>): LuSimpleSelectInputComponent<Entity> {
+		return fixture.debugElement.query(By.directive(LuSimpleSelectInputComponent)).componentInstance as LuSimpleSelectInputComponent<Entity>;
+	}
+
+	describe('mode detection', () => {
+		it('should watch the viewport for the S breakpoint', () => {
+			// Act
+			createHost(BareHostComponent, false);
+
+			// Assert
+			expect(breakpointObserver.observedQueries).toContain('not all and (min-width: 50em)');
+		});
+
+		it('should not use bottom sheet mode above the S breakpoint', () => {
+			// Act
+			const fixture = createHost(BareHostComponent, false);
+
+			// Assert
+			expect(selectOf(fixture).bottomSheetMode()).toBe(false);
+		});
+
+		it('should use bottom sheet mode below the S breakpoint', () => {
+			// Act
+			const fixture = createHost(BareHostComponent, true);
+
+			// Assert
+			expect(selectOf(fixture).bottomSheetMode()).toBe(true);
+		});
+
+		it('should not use bottom sheet mode in a filter pill, which brings its own overlay', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, true);
+			const select = selectOf(fixture);
+
+			// Act — a filter pill flips this flag as it takes the select over, before any panel is opened
+			select.filterPillMode = true;
+
+			// Assert
+			expect(select.bottomSheetMode()).toBe(false);
+		});
+	});
+
+	describe('trigger element', () => {
+		function trigger(fixture: ComponentFixture<unknown>): HTMLElement | null {
+			return fixture.nativeElement.querySelector('.simpleSelect-field-input');
+		}
+
+		it('should be a button below the S breakpoint, so tapping it on iOS does not raise the keyboard', () => {
+			// Act
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Assert
+			expect(trigger(fixture)?.tagName).toBe('BUTTON');
+			// Without this an implicit submit fires when the field sits in a form
+			expect(trigger(fixture)).toHaveAttribute('type', 'button');
+		});
+
+		it('should stay a searchable text input above the S breakpoint', () => {
+			// Act
+			const fixture = createHost(FormFieldHostComponent, false);
+
+			// Assert
+			expect(trigger(fixture)?.tagName).toBe('INPUT');
+			expect(trigger(fixture)).toHaveAttribute('role', 'combobox');
+		});
+
+		it('should announce that it opens the sheet rather than an inline listbox', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			fixture.detectChanges();
+
+			// Assert
+			expect(trigger(fixture)).toHaveAttribute('aria-haspopup', 'dialog');
+			expect(trigger(fixture)).toHaveAttribute('aria-expanded', 'true');
+			expect(trigger(fixture)).not.toHaveAttribute('role');
+		});
+
+		it('should render the placeholder as text, a button having no placeholder of its own', () => {
+			// Act
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Assert
+			expect(trigger(fixture)?.querySelector('.simpleSelect-field-placeholder')?.textContent?.trim()).toBeTruthy();
+		});
+
+		it('should drop the placeholder once a value is selected, the value displayer taking over', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).writeValue(options[0]);
+			fixture.detectChanges();
+
+			// Assert
+			expect(trigger(fixture)?.querySelector('.simpleSelect-field-placeholder')).toBeNull();
+		});
+
+		it('should carry the disabled state so the button cannot be tapped', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).setDisabledState(true);
+			fixture.detectChanges();
+
+			// Assert
+			expect((trigger(fixture) as HTMLButtonElement).disabled).toBe(true);
+		});
+	});
+
+	describe('panel title', () => {
+		it('should use the label associated by the form field', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, true);
+			const select = selectOf(fixture);
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(select.panelTitle()).toBe('Country');
+		});
+
+		it('should use the wrapping label without its adornments', () => {
+			// Arrange
+			const fixture = createHost(LabelHostComponent, true);
+			const select = selectOf(fixture);
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(select.panelTitle()).toBe('Wrapping label');
+		});
+
+		it('should stay empty rather than echo the selected value when there is no label', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, true);
+			const select = selectOf(fixture);
+			select.writeValue(options[0]);
+			fixture.detectChanges();
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(select.panelTitle()).toBe('');
+		});
+	});
+
+	describe('overlay', () => {
+		function pane(): HTMLElement | null {
+			return document.querySelector<HTMLElement>('.cdk-overlay-pane');
+		}
+
+		it('should open the panel as a dialog in sheet mode below the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+
+			// Assert
+			expect(pane()).toHaveClass('dialog');
+			expect(pane()).toHaveClass('mod-sheet');
+			expect(pane()).toHaveClass('mod-maxContent');
+			// Scopes the select-specific dialog header tweaks (centered title, close button pulled out of
+			// flow) so they don't leak onto unrelated `lu-dialog-header` usages elsewhere in the app.
+			expect(pane()).toHaveClass('mod-select');
+			expect(document.querySelector('.dialog_backdrop')).not.toBeNull();
+		});
+
+		it('should keep anchoring the panel to the field above the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, false);
+
+			// Act
+			selectOf(fixture).openPanel();
+
+			// Assert
+			expect(pane()).not.toHaveClass('dialog');
+			expect(document.querySelector('.dialog_backdrop')).toBeNull();
+		});
+	});
+
+	describe('resizing across the breakpoint while the panel stays open', () => {
+		/**
+		 * The panel's own ref (`SelectPanelSheetRef` vs `SelectPanelRef`) is picked once at open time —
+		 * `bottomSheetMode()` changing afterwards must not make the panel's template try to switch which
+		 * surface it renders (it was never actually attached as a CDK dialog), which used to crash with
+		 * `NG0201: No provider found for LuDialogRef`. Instead, the panel closes outright.
+		 */
+		it('should close, rather than crash, when going from the desktop overlay to below the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, false);
+			const select = selectOf(fixture);
+			select.openPanel();
+			expect(select.isPanelOpen).toBe(true);
+
+			// Act
+			breakpointObserver.belowSmallBreakpoint.next(true);
+			expect(() => fixture.detectChanges()).not.toThrow();
+
+			// Assert
+			expect(select.isPanelOpen).toBe(false);
+		});
+
+		it('should close, rather than crash, when going from the sheet to above the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, true);
+			const select = selectOf(fixture);
+			select.openPanel();
+			expect(select.isPanelOpen).toBe(true);
+
+			// Act
+			breakpointObserver.belowSmallBreakpoint.next(false);
+			expect(() => fixture.detectChanges()).not.toThrow();
+
+			// Assert
+			expect(select.isPanelOpen).toBe(false);
+		});
+
+		it('should still resolve the panel title on the next open, even though the trigger was torn down and rebuilt as button/input while the breakpoint round-tripped', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, true);
+			const select = selectOf(fixture);
+			select.openPanel();
+			expect(select.panelTitle()).toBe('Country');
+
+			// Act — round trip through desktop, which auto-closes the panel and rebuilds the trigger
+			// (button below the S breakpoint, input above it) each way
+			breakpointObserver.belowSmallBreakpoint.next(false);
+			fixture.detectChanges();
+			breakpointObserver.belowSmallBreakpoint.next(true);
+			fixture.detectChanges();
+			select.openPanel();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(select.panelTitle()).toBe('Country');
+		});
+	});
+
+	describe('focus', () => {
+		it('should not focus the covered field below the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, true);
+			const select = selectOf(fixture);
+			const focusInput = vi.spyOn(select, 'focusInput');
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(focusInput).not.toHaveBeenCalled();
+		});
+
+		it('should focus the field above the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, false);
+			const select = selectOf(fixture);
+			const focusInput = vi.spyOn(select, 'focusInput');
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(focusInput).toHaveBeenCalled();
+		});
+
+		it('should keep the sheet open on Tab, which cycles inside the modal surface', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, true);
+			const select = selectOf(fixture);
+			select.openPanel();
+
+			// Act
+			select.onKeyDownNavigation(new KeyboardEvent('keydown', { key: 'Tab' }));
+
+			// Assert
+			expect(select.isPanelOpen).toBe(true);
+		});
+
+		it('should close the panel on Tab above the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, false);
+			const select = selectOf(fixture);
+			select.openPanel();
+
+			// Act
+			select.onKeyDownNavigation(new KeyboardEvent('keydown', { key: 'Tab' }));
+
+			// Assert
+			expect(select.isPanelOpen).toBe(false);
+		});
+	});
+
+	describe('sheet header', () => {
+		function sheet(): HTMLElement | null {
+			return document.querySelector<HTMLElement>('cdk-dialog-container');
+		}
+
+		function openSheet(): void {
+			const fixture = createHost(FormFieldHostComponent, true);
+			selectOf(fixture).openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+		}
+
+		it('should mark the sheet as a modal dialog named after the field', () => {
+			// Act
+			openSheet();
+
+			// Assert
+			expect(sheet()).toHaveAttribute('role', 'dialog');
+			expect(sheet()).toHaveAttribute('aria-modal', 'true');
+			expect(sheet()).toHaveAttribute('aria-label', 'Country');
+			expect(sheet()?.querySelector('h1')?.textContent?.trim()).toBe('Country');
+		});
+
+		it('should echo the label required marker in the title when the field is required', () => {
+			// Arrange
+			const fixture = createHost(RequiredFormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(sheet()?.querySelector('h1 .formLabel-required')).toHaveAttribute('aria-hidden', 'true');
+			expect(sheet()?.querySelector('h1 .formLabel-required')?.textContent).toBe('*');
+			// A single asterisk: the label's own `.formLabel-required` marker must not leak into the plain
+			// title text (`panelTitle`) on top of the one rendered here, or it would show up twice.
+			expect(sheet()?.querySelector('h1')?.textContent?.trim()).toBe('Country*');
+		});
+
+		it('should not show the required marker when the field is not required', () => {
+			// Act
+			openSheet();
+
+			// Assert
+			expect(sheet()?.querySelector('h1 .formLabel-required')).toBeNull();
+		});
+
+		it('should embed a search input, focused synchronously so the tap that opened the sheet also raises the iOS keyboard', () => {
+			// Act
+			openSheet();
+
+			// Assert
+			const searchInput = sheet()?.querySelector('.textField-input-value');
+			expect(searchInput).not.toBeNull();
+			expect(document.activeElement).toBe(searchInput);
+		});
+
+		it('should let the dialog header bring its own close button', () => {
+			// Act
+			openSheet();
+
+			// Assert
+			expect(sheet()?.querySelector('.dialog-inside-header-button')).not.toBeNull();
+		});
+
+		it('should not render a sheet above the S breakpoint', () => {
+			// Arrange
+			const fixture = createHost(FormFieldHostComponent, false);
+
+			// Act
+			selectOf(fixture).openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(document.querySelector('.lu-select-panel-layout')).not.toBeNull();
+			expect(sheet()).toBeNull();
+		});
+	});
+
+	describe('keyboard-aware height', () => {
+		/**
+		 * iOS doesn't shrink the layout viewport when the on-screen keyboard opens, only the visual one, so
+		 * the sheet tracks the visual viewport itself: its height, to clamp the sheet's own max height, and
+		 * how much of the layout viewport it no longer covers, to nudge the sheet's `bottom` up by that much
+		 * — otherwise the sheet stays pinned behind the keyboard no matter how short it is.
+		 */
+		function mockVisualViewport(initialHeight: number, initialOffsetTop = 0): { setHeight: (height: number) => void; setOffsetTop: (offsetTop: number) => void } {
+			const listeners = new Set<() => void>();
+			const viewport = {
+				height: initialHeight,
+				offsetTop: initialOffsetTop,
+				addEventListener: (type: string, listener: () => void) => {
+					if (type === 'resize' || type === 'scroll') {
+						listeners.add(listener);
+					}
+				},
+				removeEventListener: (type: string, listener: () => void) => {
+					if (type === 'resize' || type === 'scroll') {
+						listeners.delete(listener);
+					}
+				},
+			};
+			vi.stubGlobal('visualViewport', viewport);
+			vi.stubGlobal('innerHeight', 800);
+			return {
+				setHeight: (height: number) => {
+					viewport.height = height;
+					listeners.forEach((listener) => listener());
+				},
+				setOffsetTop: (offsetTop: number) => {
+					viewport.offsetTop = offsetTop;
+					listeners.forEach((listener) => listener());
+				},
+			};
+		}
+
+		function pane(): HTMLElement | null {
+			return document.querySelector<HTMLElement>('.cdk-overlay-pane');
+		}
+
+		afterEach(() => {
+			vi.unstubAllGlobals();
+		});
+
+		it("should track the visual viewport's height on the sheet's own overlay element once it opens, so the keyboard shrinking it clamps the sheet's own max height", () => {
+			// Arrange
+			const viewport = mockVisualViewport(800);
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			viewport.setHeight(400); // the keyboard just opened
+
+			// Assert
+			expect(pane()?.style.getPropertyValue('--components-dialog-visibleViewportBlockSize')).toBe('400px');
+		});
+
+		it("should track how much of the layout viewport the keyboard covers, so the sheet's `bottom` can be nudged above it instead of staying pinned underneath", () => {
+			// Arrange
+			const viewport = mockVisualViewport(800);
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			viewport.setHeight(400); // the keyboard now covers the bottom 400px of the 800px layout viewport
+
+			// Assert
+			expect(pane()?.style.getPropertyValue('--components-dialog-insetBlockEnd')).toBe('400px');
+		});
+
+		it('should not leak the tracked properties onto the document, which other sheets (e.g. stacked underneath) also read from', () => {
+			// Arrange
+			const viewport = mockVisualViewport(800);
+			const fixture = createHost(FormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			viewport.setHeight(400);
+
+			// Assert
+			expect(document.documentElement.style.getPropertyValue('--components-dialog-visibleViewportBlockSize')).toBe('');
+			expect(document.documentElement.style.getPropertyValue('--components-dialog-insetBlockEnd')).toBe('');
+		});
+
+		it('should stop tracking and clean up both properties once the sheet closes', () => {
+			// Arrange
+			mockVisualViewport(800);
+			const fixture = createHost(FormFieldHostComponent, true);
+			const select = selectOf(fixture);
+			select.openPanel();
+			const sheetPane = pane();
+
+			// Act
+			select.closePanel();
+
+			// Assert
+			expect(sheetPane?.style.getPropertyValue('--components-dialog-visibleViewportBlockSize')).toBe('');
+			expect(sheetPane?.style.getPropertyValue('--components-dialog-insetBlockEnd')).toBe('');
+		});
+	});
+
+	describe('selected option scroll position', () => {
+		afterEach(() => {
+			vi.unstubAllGlobals();
+		});
+
+		it('should re-scroll the highlighted option into view once the visual viewport settles, since resizing the sheet down for the keyboard can scroll it back out of view', () => {
+			// Arrange
+			const listeners = new Set<() => void>();
+			const viewport = {
+				height: 800,
+				offsetTop: 0,
+				addEventListener: (_type: string, listener: () => void) => listeners.add(listener),
+				removeEventListener: (_type: string, listener: () => void) => listeners.delete(listener),
+			};
+			vi.stubGlobal('visualViewport', viewport);
+			vi.stubGlobal('innerHeight', 800);
+			const scrollIntoView = vi.spyOn(Element.prototype, 'scrollIntoView').mockImplementation(() => {});
+			const fixture = createHost(FormFieldHostComponent, true);
+			selectOf(fixture).writeValue(options[1]);
+			fixture.detectChanges();
+
+			// Act
+			selectOf(fixture).openPanel();
+			scrollIntoView.mockClear(); // ignore whatever scrolled synchronously while the sheet was opening
+			viewport.height = 400; // the keyboard just finished opening
+			listeners.forEach((listener) => listener());
+
+			// Assert
+			expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest' });
+		});
+	});
+});

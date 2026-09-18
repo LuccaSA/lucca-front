@@ -17,6 +17,8 @@ import {
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
+import { DialogComponent, DialogContentComponent, DialogHeaderComponent } from '@lucca-front/ng/dialog';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { ListboxComponent, ListboxState, OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
@@ -37,6 +39,9 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	},
 	imports: [
 		LuSelectPanelLayoutComponent,
+		DialogComponent,
+		DialogHeaderComponent,
+		DialogContentComponent,
 		FormsModule,
 		NgTemplateOutlet,
 		ɵLuOptionGroupPipe,
@@ -46,6 +51,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 		ɵCoreSelectPanelElement,
 		ListboxComponent,
 		ListboxOptionComponent,
+		IconComponent,
 		TreeBranchComponent,
 		TreeDisplayPipe,
 	],

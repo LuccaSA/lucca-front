@@ -79,10 +79,10 @@
 @mixin sheet {
 	--components-dialog-width: 100%;
 	--components-dialog-maxWidth: none;
-	--components-dialog-maxHeight: calc(100% - var(--pr-t-spacings-150));
+	--components-dialog-maxHeight: min(calc(100% - var(--pr-t-spacings-150)), calc(var(--components-dialog-visibleViewportBlockSize) - var(--pr-t-spacings-150)));
 	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
 	--components-dialog-borderRadius: var(--pr-t-border-radius-structure) var(--pr-t-border-radius-structure) 0 0;
-	--components-dialog-inset: auto 0 0;
+	--components-dialog-inset: auto 0 var(--components-dialog-insetBlockEnd) 0;
 }
 
 @mixin sheetNarrow {

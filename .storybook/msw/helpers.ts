@@ -88,3 +88,11 @@ export function applyV3Fields<T>(count: number): (items: T[], params: { fields?:
 		};
 	};
 }
+
+/**
+ * True while the stories run as Vitest browser tests, false in the dev Storybook. Lets the
+ * mocks tighten up for CI (no real network) without changing what developers see locally.
+ */
+export function isVitestBrowser(): boolean {
+	return '__vitest_browser__' in globalThis;
+}

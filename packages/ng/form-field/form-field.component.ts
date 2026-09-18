@@ -171,6 +171,24 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		);
 	}
 
+	/**
+	 * Unregisters an input that's being destroyed — e.g. one side of an `@if`/`@else` toggling which
+	 * element carries `luInput` (a text field swapping for a button below a breakpoint, say). Without
+	 * this, the detached element lingers in `#inputs` forever: `prepareInput` keeps reassigning it a
+	 * fresh id on every future change, and each one gets added to `aria-labelledby` and never removed.
+	 */
+	public removeInput(input: InputDirective): void {
+		this.#inputs = this.#inputs.filter((existing) => existing !== input);
+		if (this.#inputs.length > 0) {
+			afterNextRender(
+				() => {
+					this.prepareInput();
+				},
+				{ injector: this.#injector },
+			);
+		}
+	}
+
 	public get inputs(): InputDirective[] {
 		return this.#inputs;
 	}
@@ -184,6 +202,11 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	}
 
 	#ariaLabelledBy: string[] = [];
+
+	// The `-label` id `updateAria` contributes to `#ariaLabelledBy` on this field's own behalf, tracked so
+	// that a later, different id (`this.id()` changing, e.g. `prepareInput` reassigning ids after an input
+	// was added/removed) replaces it instead of piling up next to it.
+	#selfLabelledById: string | null = null;
 
 	constructor() {
 		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus, this.extraDescribedBy], () => {
@@ -214,6 +237,11 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	removeLabelledBy(id: string): void {
 		this.#ariaLabelledBy = this.#ariaLabelledBy.filter((labelledBy) => labelledBy !== id);
+		this.#inputs.forEach((input) => {
+			if (!input.standalone()) {
+				this.#renderer.setAttribute(input.host.nativeElement, 'aria-labelledby', this.#ariaLabelledBy.join(' '));
+			}
+		});
 	}
 
 	prepareInput(): void {
@@ -244,8 +272,15 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', ariaDescribedBy);
 			}
 		});
-		if (this.id() && !this.#ariaLabelledBy.includes(`${this.id()}-label`)) {
-			this.addLabelledBy(`${this.id()}-label`);
+		const selfLabelledById = this.id() ? `${this.id()}-label` : null;
+		if (selfLabelledById !== this.#selfLabelledById) {
+			if (this.#selfLabelledById) {
+				this.removeLabelledBy(this.#selfLabelledById);
+			}
+			if (selfLabelledById) {
+				this.addLabelledBy(selfLabelledById);
+			}
+			this.#selfLabelledById = selfLabelledById;
 		}
 	}
 

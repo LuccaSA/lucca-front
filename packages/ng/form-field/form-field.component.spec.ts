@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, viewChild } from '@angular/core';
+import { ApplicationRef, ChangeDetectionStrategy, Component, computed, input, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormFieldIdDirective, TextInputComponent } from '@lucca-front/ng/forms';
@@ -8,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { vi } from 'vitest';
 import { FormFieldComponent } from './form-field.component';
+import { InputDirective } from './input.directive';
 
 @Component({
 	selector: 'lu-form-field-test',
@@ -47,6 +48,24 @@ class FormFieldContentTestComponent {
 	hiddenLabel = input(false);
 
 	formControl = new FormControl('');
+}
+
+@Component({
+	selector: 'lu-form-field-swap-test',
+	imports: [FormFieldComponent, InputDirective],
+	template: `
+		<lu-form-field label="First name">
+			@if (useButton()) {
+				<button luInput type="button">Pick…</button>
+			} @else {
+				<input luInput type="text" />
+			}
+		</lu-form-field>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FormFieldSwapTestComponent {
+	readonly useButton = input(false);
 }
 
 describe('FormFieldComponent', () => {
@@ -211,6 +230,31 @@ describe('FormFieldComponent', () => {
 
 			// Assert
 			expect(query('lu-inline-message')?.classList).toContain('is-warning');
+		});
+	});
+
+	describe('when the projected luInput is torn down and replaced', () => {
+		// Mirrors a select's bottom sheet trigger, which swaps between a button and a text input as the
+		// viewport crosses a breakpoint — each swap destroys one `luInput` and creates another.
+		it('should not leave stale ids behind in aria-labelledby', () => {
+			// Arrange
+			const swapFixture = TestBed.createComponent(FormFieldSwapTestComponent);
+			swapFixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Act — flip back and forth a few times, as resizing across the breakpoint repeatedly would
+			swapFixture.componentRef.setInput('useButton', true);
+			swapFixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+			swapFixture.componentRef.setInput('useButton', false);
+			swapFixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			const current = (swapFixture.nativeElement as HTMLElement).querySelector('[luInput]');
+			const ids = current?.getAttribute('aria-labelledby')?.split(' ') ?? [];
+			expect(ids).not.toHaveLength(0);
+			expect(ids.every((id) => document.getElementById(id) !== null)).toBe(true);
 		});
 	});
 });

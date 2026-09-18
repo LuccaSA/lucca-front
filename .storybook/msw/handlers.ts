@@ -1,5 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
-import { applyFilter, applyV3Fields, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot } from './helpers';
+import { applyFilter, applyV3Fields, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot, isVitestBrowser } from './helpers';
 import {
 	mockAxisSectionsV3,
 	mockDepartmentsTree,
@@ -42,7 +42,19 @@ const usersSearchHandler = genericHandler(
 	},
 );
 
+const PLACEHOLDER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" viewBox="0 0 1 1"></svg>';
+
+/**
+ * Illustrations, flags and decorative bubbles are fetched from an external CDN. Letting those
+ * requests reach the network makes the Storybook test run depend on the CI container's outbound
+ * connectivity, adds hundreds of round-trips to the critical path, and turns a single CDN hiccup
+ * into a failed run, so tests get an empty placeholder instead. Only under Vitest: the dev
+ * Storybook must keep showing the real illustrations.
+ */
+const cdnHandlers = isVitestBrowser() ? [http.get('https://cdn.lucca.fr/*', () => new HttpResponse(PLACEHOLDER_SVG, { headers: { 'Content-Type': 'image/svg+xml' } }))] : [];
+
 export const handlers = [
+	...cdnHandlers,
 	http.get(
 		'/organization/structure/api/legal-units',
 		genericHandler(

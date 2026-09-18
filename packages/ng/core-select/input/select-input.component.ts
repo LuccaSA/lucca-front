@@ -21,8 +21,9 @@ import {
 } from '@angular/core';
 import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { injectMediaMinBreakpoint, isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { FORM_FIELD_INSTANCE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
@@ -54,13 +55,25 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
 	protected labelId: string = inject(SELECT_LABEL_ID);
+	protected formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	protected abstract intl: Signal<LuCoreSelectLabel>;
 
 	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
-	public filterPillMode = false;
+
+	// Signal-backed because a filter pill takes the select over *after* it has rendered, and
+	// `bottomSheetMode` — which gates the trigger element itself — is computed from it.
+	readonly #filterPillMode = signal(false);
+
+	public get filterPillMode(): boolean {
+		return this.#filterPillMode();
+	}
+
+	public set filterPillMode(filterPillMode: boolean) {
+		this.#filterPillMode.set(filterPillMode);
+	}
 
 	public readonly ignorePresentation = input(false, { transform: luBooleanAttribute });
 
@@ -72,7 +85,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public readonly highlightedOption = output<TOption>();
 
-	private readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+	// Below the `S` breakpoint the trigger is a `<button>` rather than the text input, so this is only
+	// ever focused, never read as an input.
+	private readonly inputElementRef = viewChild<ElementRef<HTMLElement>>('inputElement');
 
 	readonly disabled$ = new BehaviorSubject(false);
 	readonly filterPillDisabled = toSignal(this.disabled$, { initialValue: false });
@@ -119,6 +134,30 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	// TODO Might be temporary, check after merging signalize PR
 	readonly panelOpenSignal = toSignal(this.isPanelOpen$);
+
+	private readonly belowSmallBreakpoint = injectMediaMinBreakpoint('S', true);
+
+	/**
+	 * Below the `S` breakpoint (800px) the panel opens as a dialog in `sheet` mode that embeds its own
+	 * search input, instead of a popover anchored to the field — mirroring how filter pills move the input
+	 * inside their overlay. Filter pills already provide their own overlay, so they keep their behavior.
+	 */
+	readonly bottomSheetMode = computed(() => (this.belowSmallBreakpoint() ?? false) && !this.filterPillMode);
+
+	/**
+	 * Whether the currently open panel is a sheet, snapshotted when it opens rather than tracking
+	 * `bottomSheetMode()` live: the panel's own ref (`SelectPanelSheetRef` vs `SelectPanelRef`) is
+	 * chosen once at open time too, so resizing across the breakpoint while the panel stays open must
+	 * not flip which surface its template renders — that surface was never actually attached as a
+	 * dialog, so switching to it crashes with a missing `LuDialogRef` provider.
+	 */
+	readonly panelBottomSheetMode = signal(false);
+
+	/** Field label echoed as the bottom sheet's title, snapshotted when the sheet opens. */
+	readonly panelTitle = signal('');
+
+	/** Whether that field label carries the required marker, so the sheet's title can echo it too. */
+	readonly panelTitleRequired = computed(() => this.formField?.isInputRequired() ?? false);
 
 	readonly activeDescendant$ = new BehaviorSubject('');
 
@@ -290,6 +329,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected readonly destroyed$ = new Subject<void>();
 
 	private readonly injector = inject(Injector);
+	private readonly hostElementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	constructor() {
 		if (this.filterPillHost) {
@@ -299,6 +339,14 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		ɵeffectWithDeps([this.options], (options) => {
 			if (isNotNil(options)) {
 				this.manualOptions$.next(options);
+			}
+		});
+
+		// Rather than leaving an open panel stuck in a stale sheet/overlay style once `bottomSheetMode()`
+		// no longer matches it, close it outright — the next open picks the right style for the new breakpoint.
+		ɵeffectWithDeps([this.bottomSheetMode], (bottomSheetMode) => {
+			if (this.isPanelOpen && bottomSheetMode !== this.panelBottomSheetMode()) {
+				this.closePanel();
 			}
 		});
 
@@ -336,6 +384,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				this.panelRef?.close();
 				break;
 			case 'Tab':
+				// A bottom sheet is modal: its focus trap cycles Tab between the sheet's own controls, so
+				// tabbing must not close it the way leaving the field does on desktop.
+				if (this.bottomSheetMode()) {
+					break;
+				}
 				// If we are in a filterpill, this will close it on tab press, but we want it to not lose any
 				// displayed stuff and properly close on focus exit
 				this.panelRef?.close();
@@ -424,7 +477,17 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 		this.#isOpeningPanel = true;
 		try {
-			this.focusInput();
+			const isSheet = this.bottomSheetMode();
+			this.panelBottomSheetMode.set(isSheet);
+
+			if (isSheet) {
+				// The sheet shows the field label as its title and embeds its own search input (auto-focused by
+				// `openSelectPanelSheet`); focusing the covered host input would pop the mobile keyboard on a
+				// hidden field.
+				this.panelTitle.set(this.resolvePanelTitle());
+			} else {
+				this.focusInput();
+			}
 
 			const isSearchable = this.searchable;
 			this.isPanelOpen$.next(true);
@@ -467,6 +530,34 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (this.inputElementRef()) {
 			this.inputElementRef()?.nativeElement.focus();
 		}
+	}
+
+	// The bottom sheet echoes the field label as its title. Standalone selects may be wrapped in a <label>,
+	// but inside a form-field the label is a separate element referenced through the control's aria-labelledby.
+	private resolvePanelTitle(): string {
+		if (this.labelElement) {
+			return this.getLabelText(this.labelElement);
+		}
+
+		// The field points its own `aria-labelledby` at its value displayer, so only an actual `<label>`
+		// counts here — otherwise a select without any label would echo its selected value as the title.
+		// `aria-labelledby` can list several ids (label, hint, …), and some can be stale — e.g. leftover
+		// from before the trigger was torn down and rebuilt as the breakpoint flipped between the button
+		// and input variants — so every id is checked instead of trusting the first one to be the label.
+		const host = this.hostElementRef.nativeElement;
+		const labelledByIds = host.querySelector('[aria-labelledby]')?.getAttribute('aria-labelledby')?.split(' ') ?? [];
+		const label = labelledByIds.map((id) => host.ownerDocument.getElementById(id)).find((element): element is HTMLElement => element?.tagName === 'LABEL');
+		return label ? this.getLabelText(label) : '';
+	}
+
+	// Read the label text without its adornments (help tooltip, required marker, screen-reader-only copy)
+	// nor, when the label wraps the select, the field's own rendered content — its selected value or the
+	// placeholder standing in for it — so the title stays the plain field label.
+	private getLabelText(label: HTMLElement): string {
+		const clone = label.cloneNode(true) as HTMLElement;
+		const selectTag = this.hostElementRef.nativeElement.tagName.toLowerCase();
+		clone.querySelectorAll(`${selectTag}, [role="button"], .pr-u-mask, .formLabel-required`).forEach((node) => node.remove());
+		return (clone.textContent ?? '').trim();
 	}
 
 	protected emptyClue(): void {

@@ -30,6 +30,9 @@ export default {
 			description: 'Modifie le label du champ.',
 			table: { category: 'inputs' },
 		},
+		required: {
+			description: 'Marque le champ comme obligatoire.',
+		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
 			table: { category: 'inputs' },
@@ -109,6 +112,7 @@ export const Basic: StoryObj<
 		LuSimpleSelectInputComponent<ILegume> &
 			FormFieldComponent & {
 				disabled: boolean;
+				required: boolean;
 			},
 		SelectCommonAliasInput
 	>
@@ -147,6 +151,7 @@ export const Basic: StoryObj<
 		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
+		required: false,
 		placeholder: 'Placeholder',
 		clearable: true,
 		inlineMessage: 'Helper text',
