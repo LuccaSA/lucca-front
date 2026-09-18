@@ -105,6 +105,11 @@
       "description": "Migrate file upload usages: size default, FileEntry rendering and fileEntryDisplayWrapper",
       "factory": "./file-upload/index",
       "schema": "./file-upload/schema.json"
+    },
+    "select-total-count": {
+      "description": "Add the override modifier to totalCount$ in directives extending a core select API directive",
+      "factory": "./select-total-count/index",
+      "schema": "./select-total-count/schema.json"
     }
   }
 }

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "LuccaFrontSelectTotalCount",
+  "title": "Lucca Front Select Total Count Schema",
+  "type": "object",
+  "properties": {
+    "dryRun": {
+      "type": "boolean",
+      "description": "Run through the migration without making any changes.",
+      "default": false
+    },
+    "skipInstall": {
+      "type": "boolean",
+      "description": "Skip installing dependencies.",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Enable verbose logging.",
+      "default": false
+    },
+    "detectUnused": {
+      "type": "boolean",
+      "description": "Report the totalCount$ members that look like placeholders and can now be removed.",
+      "default": false
+    }
+  }
+}
