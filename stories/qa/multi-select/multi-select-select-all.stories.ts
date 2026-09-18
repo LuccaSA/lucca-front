@@ -1,7 +1,6 @@
 import { JsonPipe, registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuMultiSelection } from '@lucca-front/ng/multi-select';
@@ -12,7 +11,7 @@ registerLocaleData(localesFr);
 
 @Component({
 	selector: 'multi-select-stories',
-	imports: [JsonPipe, FormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, FormFieldComponent, LuCoreSelectTotalCountDirective],
+	imports: [JsonPipe, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, FormFieldComponent, LuCoreSelectTotalCountDirective],
 	template: `
 		<lu-form-field label="Légumes">
 			<lu-multi-select
@@ -21,7 +20,7 @@ registerLocaleData(localesFr);
 				withSelectAllDisplayerLabel="légumes"
 				class="multiSelect"
 				placeholder="placeholder"
-				[(ngModel)]="legumeSelection"
+				[(value)]="legumeSelection"
 				[options]="legumes"
 			/>
 		</lu-form-field>

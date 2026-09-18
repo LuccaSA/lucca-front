@@ -1,7 +1,6 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChildren, ElementRef, forwardRef, input, model, viewChildren, ViewEncapsulation } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChildren, ElementRef, forwardRef, input, model, output, viewChildren, ViewEncapsulation } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
 import { luBooleanAttribute, PortalDirective } from '@lucca-front/ng/core';
-import { NoopValueAccessorDirective } from '@lucca-front/ng/forms';
 import { SegmentedControlTabsPanelComponent } from './public-api';
 import { LU_SEGMENTEDCONTROLTABS_INSTANCE } from './segmented-control-tabs.token';
 
@@ -12,9 +11,8 @@ let nextId = 0;
 	templateUrl: './segmented-control-tabs.component.html',
 	styleUrl: './segmented-control-tabs.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [ReactiveFormsModule, PortalDirective],
+	imports: [PortalDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	hostDirectives: [NoopValueAccessorDirective],
 	providers: [
 		{
 			provide: LU_SEGMENTEDCONTROLTABS_INSTANCE,
@@ -22,7 +20,7 @@ let nextId = 0;
 		},
 	],
 })
-export class SegmentedControlTabsComponent<T = unknown> implements AfterContentInit {
+export class SegmentedControlTabsComponent<T = unknown> implements AfterContentInit, FormValueControl<T | null> {
 	/**
 	 * Applies small size to segmented control tabs
 	 */
@@ -33,14 +31,18 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 	 */
 	readonly vertical = input(false, { transform: luBooleanAttribute });
 
-	readonly active = model<T | null>(null);
+	readonly value = model<T | null>(null);
+
+	readonly disabled = input(false, { transform: luBooleanAttribute });
+
+	readonly touch = output<void>();
 
 	readonly id = `segmentedControl${nextId++}`;
 
 	readonly tabs = contentChildren<SegmentedControlTabsPanelComponent<T>>(SegmentedControlTabsPanelComponent);
 	readonly tabButtons = viewChildren<ElementRef<HTMLButtonElement>>('tabButton');
 
-	readonly currentIndex = computed(() => this.tabs().findIndex((tab) => tab.value() === this.active()));
+	readonly currentIndex = computed(() => this.tabs().findIndex((tab) => tab.value() === this.value()));
 
 	previous() {
 		let newIndex = this.currentIndex() - 1;
@@ -67,13 +69,13 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 	}
 
 	setActiveTab(index: number) {
-		this.active.set(this.tabs()[index].value());
+		this.value.set(this.tabs()[index].value());
 		this.tabButtons()[index].nativeElement.focus();
 	}
 
 	ngAfterContentInit(): void {
-		if (this.active() === null) {
-			this.active.set(this.tabs()[0].value());
+		if (this.value() === null) {
+			this.value.set(this.tabs()[0].value());
 		}
 	}
 }

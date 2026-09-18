@@ -1,15 +1,17 @@
 <div class="textField" [class.mod-autoResize]="autoResize()">
 	<div class="textField-input" #parent>
 		@if (autoResize()) {
-			<div class="textField-input-valueClone" aria-hidden="true" [attr.data-content-before]="cloneValue"></div>
+			<div class="textField-input-valueClone" aria-hidden="true" [attr.data-content-before]="value()"></div>
 		}
 		<textarea
 			luInput
 			class="textField-input-value"
-			[formControl]="ngControl.control"
+			[value]="value()"
+			[disabled]="disabled()"
 			[attr.placeholder]="placeholder()"
 			[attr.rows]="rows()"
-			(input)="updateScroll(textarea.value)"
+			(input)="value.set(textarea.value)"
+			(blur)="touch.emit()"
 			[attr.spellcheck]="!disableSpellcheck()"
 			#textarea
 		></textarea>
@@ -17,8 +19,8 @@
 </div>
 
 <ng-container *luPresentationDisplayDefault>
-	@if (ngControl.value) {
-		<lu-read-more plainText [innerContent]="ngControl.value" />
+	@if (value()) {
+		<lu-read-more plainText [innerContent]="value()" />
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}

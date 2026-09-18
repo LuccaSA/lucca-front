@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -8,12 +7,13 @@ import { stateArgType } from '@/helpers/common-arg-types';
 @Component({
 	selector: 'form-field-stories',
 	templateUrl: './form-field.stories.html',
-	imports: [FormFieldComponent, InputDirective, TextInputComponent, FormsModule],
+	imports: [FormFieldComponent, InputDirective, TextInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FormFieldStory {
 	stateOptions = stateArgType.options;
 	widthOptions = ['20', '30', '40', '50', '60'];
+	example = '';
 }
 
 export default {

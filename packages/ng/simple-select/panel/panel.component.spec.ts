@@ -64,7 +64,7 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 	}));
 
 	it('should reflect selection with aria-selected and is-selected class on the listbox option', fakeAsync(() => {
-		component.writeValue(options[1]);
+		component.value.set(options[1]);
 		openPanel();
 
 		const listboxOptions = Array.from(overlayContainerElement.querySelectorAll('lu-listbox-option'));
@@ -157,7 +157,7 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 
 	it('should emit the clicked option as new value', fakeAsync(() => {
 		const onChange = vi.fn();
-		component.registerOnChange(onChange);
+		component.value.subscribe(onChange);
 		openPanel();
 
 		const hosts = overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option');

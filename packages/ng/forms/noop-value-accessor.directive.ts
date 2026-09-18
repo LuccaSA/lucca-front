@@ -2,6 +2,11 @@
 import { Directive } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+/**
+ * @deprecated Form bricks now implement the signal forms `FormValueControl` / `FormCheckboxControl`
+ * contract; use `[formField]` (signal forms) or the component's `value` / `checked` model instead
+ * of `formControl` / `ngModel`. Will be removed in a future major version.
+ */
 @Directive({
 	selector: '[luNoopValueAccessor]',
 	providers: [

@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -11,7 +10,7 @@ export default {
 	title: 'Documentation/Forms/Examples/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [FormFieldComponent, TextInputComponent, FormsModule, GridColumnComponent, GridComponent, FieldsetComponent, DividerComponent, FormComponent, DividerComponent, FormHeaderComponent],
+			imports: [FormFieldComponent, TextInputComponent, GridColumnComponent, GridComponent, FieldsetComponent, DividerComponent, FormComponent, DividerComponent, FormHeaderComponent],
 		}),
 	],
 	argTypes: {},
@@ -24,37 +23,37 @@ function getTemplate(): string {
 		<lu-grid mode="form">
 			<lu-grid-column colspan="4">
 				<lu-form-field label="Label" inlineMessage="Helper text">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
 				<lu-form-field label="Label">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
 				<lu-form-field label="Label">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 1 }">
 				<lu-form-field label="Label">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 1 }">
 				<lu-form-field label="Label">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 1 }">
 				<lu-form-field label="Label">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 1 }">
 				<lu-form-field label="Label">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 		</lu-grid>
@@ -64,17 +63,17 @@ function getTemplate(): string {
 		<lu-grid mode="form">
 			<lu-grid-column colspan="4">
 				<lu-form-field label="Label" inlineMessage="Helper text">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
 				<lu-form-field label="Label">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 			<lu-grid-column colspan="4" [responsive]="{ colspanAtMediaMinXXS: 2 }">
 				<lu-form-field label="Label">
-					<lu-text-input ngModel [ngModelOptions]="{ standalone: true }" placeholder="Placeholder" />
+					<lu-text-input placeholder="Placeholder" />
 				</lu-form-field>
 			</lu-grid-column>
 		</lu-grid>

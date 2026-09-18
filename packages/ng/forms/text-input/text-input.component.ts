@@ -1,14 +1,13 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, input, model, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, isNotNil, luBooleanAttribute, luNumberAttribute, PortalDirective } from '@lucca-front/ng/core';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
-import { injectNgControl } from '../inject-ng-control';
-import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { TextInputAddon } from './text-input-addon';
 import { LU_TEXTFIELD_TRANSLATIONS } from './text-input.translate';
 
@@ -16,16 +15,22 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 
 @Component({
 	selector: 'lu-text-input',
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent, ɵPresentationDisplayDefaultDirective, PortalDirective],
+	imports: [InputDirective, FormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent, ɵPresentationDisplayDefaultDirective, PortalDirective],
 	templateUrl: './text-input.component.html',
-	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [provideNgxMask()],
 })
-export class TextInputComponent {
+export class TextInputComponent implements FormValueControl<string> {
 	readonly intl = input(...intlInputOptions(LU_TEXTFIELD_TRANSLATIONS));
-	readonly ngControl = injectNgControl();
+
+	readonly value = model<string>('');
+
+	readonly disabled = input(false, { transform: luBooleanAttribute });
+
+	readonly required = input(false, { transform: luBooleanAttribute });
+
+	readonly touch = output<void>();
 
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
@@ -65,12 +70,12 @@ export class TextInputComponent {
 	protected readonly hasTogglePasswordVisibilityIcon = computed(() => this.type() === 'password');
 
 	protected hasValue(): boolean {
-		const value: unknown = this.ngControl.value;
+		const value: unknown = this.value();
 		return isNotNil(value) && value !== '';
 	}
 
 	clearValue(): void {
-		this.ngControl.reset();
+		this.value.set('');
 		this.inputElementRef()?.nativeElement.focus();
 	}
 

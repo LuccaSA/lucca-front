@@ -1,4 +1,3 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -11,18 +10,7 @@ export default {
 	title: 'Documentation/Feedback/Callout/Angular/AI',
 	decorators: [
 		moduleMetadata({
-			imports: [
-				CalloutComponent,
-				CalloutFeedbackItemComponent,
-				CalloutFeedbackListComponent,
-				ButtonComponent,
-				CalloutActionsComponent,
-				IconComponent,
-				FormFieldComponent,
-				TextInputComponent,
-				FormsModule,
-				ReactiveFormsModule,
-			],
+			imports: [CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, ButtonComponent, CalloutActionsComponent, IconComponent, FormFieldComponent, TextInputComponent],
 		}),
 	],
 	render: (args: CalloutComponent & { description: string }, context) => {
@@ -32,7 +20,7 @@ export default {
 			props: { example: 'Formulaires : utiliser le bon composant pour le bon besoin' },
 			template: `<div class="suggestion">
 	<lu-form-field label="Intitulé" class="suggestion-form-field">
-		<lu-text-input required type="text" [(ngModel)]="example" />
+		<lu-text-input required type="text" [(value)]="example" />
 	</lu-form-field>
 	<lu-callout AI iconAlt="${iconAlt}"${generateInputs(inputs, context.argTypes)} class="suggestion-callout">
 		<div class="suggestion-callout-text">

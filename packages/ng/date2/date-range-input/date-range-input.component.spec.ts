@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID, signal } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { addMonths, startOfDay } from 'date-fns';
 import { DateRange } from '../calendar2/date-range';
@@ -11,22 +10,23 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeFr, 'fr-FR');
 
 @Component({
-	template: `<lu-date-range-input [(ngModel)]="selected" (ngModelChange)="ngModelChangeCallback($event)" />`,
-	imports: [FormsModule, ReactiveFormsModule, DateRangeInputComponent],
+	template: `<lu-date-range-input [value]="selected" (valueChange)="valueChangeCallback($event)" />`,
+	imports: [DateRangeInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class NgModelHostComponent {
+class ValueHostComponent {
 	selected: DateRange | null = null;
-	ngModelChangeCallback = (_value: unknown): void => {};
+	valueChangeCallback = (_value: unknown): void => {};
 }
 
 @Component({
-	template: `<lu-date-range-input [formControl]="formControl" [min]="min" [max]="max" />`,
-	imports: [FormsModule, ReactiveFormsModule, DateRangeInputComponent],
+	template: `<lu-date-range-input [(value)]="value" [disabled]="disabled()" [min]="min" [max]="max" />`,
+	imports: [DateRangeInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class FormControlHostComponent {
-	formControl = new FormControl<DateRange | null>(null);
+class RangeHostComponent {
+	value: DateRange | null = null;
+	readonly disabled = signal(false);
 	min: Date | null = null;
 	max: Date | null = null;
 }
@@ -38,14 +38,15 @@ describe('DateRangeInputComponent', () => {
 		fixture.detectChanges();
 	}
 
-	function createFormControlHost(formControl: FormControl<DateRange | null>, min: Date | null = null, max: Date | null = null): ComponentFixture<FormControlHostComponent> {
+	function createRangeHost(value: DateRange | null = null, min: Date | null = null, max: Date | null = null, disabled = false): ComponentFixture<RangeHostComponent> {
 		TestBed.configureTestingModule({
-			imports: [FormControlHostComponent],
+			imports: [RangeHostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		});
 
-		const fixture = TestBed.createComponent(FormControlHostComponent);
-		fixture.componentInstance.formControl = formControl;
+		const fixture = TestBed.createComponent(RangeHostComponent);
+		fixture.componentInstance.value = value;
+		fixture.componentInstance.disabled.set(disabled);
 		fixture.componentInstance.min = min;
 		fixture.componentInstance.max = max;
 		fixture.detectChanges();
@@ -57,24 +58,24 @@ describe('DateRangeInputComponent', () => {
 		return (fixture.nativeElement as HTMLElement).querySelector(`.mod-${field} > input`) as HTMLInputElement;
 	}
 
-	it('should not called ngModelChange at init if null value', () => {
-		const ngModelChangeCallback = vi.fn();
+	it('should not emit valueChange at init if null value', () => {
+		const valueChangeCallback = vi.fn();
 
 		TestBed.configureTestingModule({
-			imports: [NgModelHostComponent],
+			imports: [ValueHostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		});
 
-		const fixture = TestBed.createComponent(NgModelHostComponent);
+		const fixture = TestBed.createComponent(ValueHostComponent);
 		fixture.componentInstance.selected = null;
-		fixture.componentInstance.ngModelChangeCallback = ngModelChangeCallback;
+		fixture.componentInstance.valueChangeCallback = valueChangeCallback;
 		fixture.detectChanges();
 
-		expect(ngModelChangeCallback).toHaveBeenCalledTimes(0);
+		expect(valueChangeCallback).toHaveBeenCalledTimes(0);
 	});
 
-	it('should not called ngModelChange at init if there is a value', fakeAsync(() => {
-		const ngModelChangeCallback = vi.fn();
+	it('should not emit valueChange at init if there is a value', fakeAsync(() => {
+		const valueChangeCallback = vi.fn();
 
 		const today = new Date();
 
@@ -84,30 +85,30 @@ describe('DateRangeInputComponent', () => {
 		};
 
 		TestBed.configureTestingModule({
-			imports: [NgModelHostComponent],
+			imports: [ValueHostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		});
 
-		const fixture = TestBed.createComponent(NgModelHostComponent);
+		const fixture = TestBed.createComponent(ValueHostComponent);
 		fixture.componentInstance.selected = selected;
-		fixture.componentInstance.ngModelChangeCallback = ngModelChangeCallback;
+		fixture.componentInstance.valueChangeCallback = valueChangeCallback;
 		fixture.detectChanges();
 
 		tick();
-		expect(ngModelChangeCallback).toHaveBeenCalledTimes(0);
+		expect(valueChangeCallback).toHaveBeenCalledTimes(0);
 	}));
 
 	it('should called ngModelChange when the user enter a date with a keyboard', () => {
-		const ngModelChangeCallback = vi.fn();
+		const valueChangeCallback = vi.fn();
 
 		TestBed.configureTestingModule({
-			imports: [NgModelHostComponent],
+			imports: [ValueHostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		});
 
-		const fixture = TestBed.createComponent(NgModelHostComponent);
+		const fixture = TestBed.createComponent(ValueHostComponent);
 		fixture.componentInstance.selected = null;
-		fixture.componentInstance.ngModelChangeCallback = ngModelChangeCallback;
+		fixture.componentInstance.valueChangeCallback = valueChangeCallback;
 		fixture.detectChanges();
 
 		const input = (fixture.nativeElement as HTMLElement).querySelector('.mod-start > input') as HTMLInputElement;
@@ -115,87 +116,9 @@ describe('DateRangeInputComponent', () => {
 
 		typeInElement('18/06/2025', input, fixture);
 
-		expect(ngModelChangeCallback).toHaveBeenCalledTimes(1);
-		expect(ngModelChangeCallback).toHaveBeenCalledWith({
+		expect(valueChangeCallback).toHaveBeenCalledTimes(1);
+		expect(valueChangeCallback).toHaveBeenCalledWith({
 			start: new Date(2025, 5, 18),
-			scope: 'day',
-		});
-	});
-
-	it('should not emit value at init if null value with reactive forms', fakeAsync(() => {
-		const valueChanges = vi.fn();
-
-		const formControl = new FormControl(null);
-		formControl.valueChanges.subscribe((value) => {
-			valueChanges(value);
-		});
-
-		TestBed.configureTestingModule({
-			imports: [FormControlHostComponent],
-			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
-		});
-
-		const fixture = TestBed.createComponent(FormControlHostComponent);
-		fixture.componentInstance.formControl = formControl;
-		fixture.detectChanges();
-
-		tick();
-		expect(valueChanges).toHaveBeenCalledTimes(0);
-	}));
-
-	it('should not emit value at init if there is a value with reactive forms', fakeAsync(() => {
-		const valueChanges = vi.fn();
-
-		const today = new Date();
-
-		const selected: DateRange = {
-			start: today,
-			end: addMonths(today, 1),
-		};
-
-		const formControl = new FormControl(selected);
-		formControl.valueChanges.subscribe((value) => {
-			valueChanges(value);
-		});
-
-		TestBed.configureTestingModule({
-			imports: [FormControlHostComponent],
-			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
-		});
-
-		const fixture = TestBed.createComponent(FormControlHostComponent);
-		fixture.componentInstance.formControl = formControl;
-		fixture.detectChanges();
-
-		tick();
-		expect(valueChanges).toHaveBeenCalledTimes(0);
-	}));
-
-	it('should emit value when the user enter a date with a keyboard with reactive forms', () => {
-		const valueChanges = vi.fn();
-
-		const formControl = new FormControl(null);
-		formControl.valueChanges.subscribe((value) => {
-			valueChanges(value);
-		});
-
-		TestBed.configureTestingModule({
-			imports: [FormControlHostComponent],
-			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
-		});
-
-		const fixture = TestBed.createComponent(FormControlHostComponent);
-		fixture.componentInstance.formControl = formControl;
-		fixture.detectChanges();
-
-		const input = (fixture.nativeElement as HTMLElement).querySelector('.mod-start > input') as HTMLInputElement;
-		expect(input).toBeTruthy();
-
-		typeInElement('18/06/2025', input, fixture);
-
-		expect(valueChanges).toHaveBeenCalledTimes(1);
-		expect(valueChanges).toHaveBeenCalledWith({
-			start: new Date('2025-06-18T00:00:00.000Z'),
 			scope: 'day',
 		});
 	});
@@ -203,9 +126,8 @@ describe('DateRangeInputComponent', () => {
 	it('should emit value when the user enters only the end date with a keyboard', () => {
 		// Arrange
 		const valueChanges = vi.fn();
-		const formControl = new FormControl<DateRange | null>(null);
-		formControl.valueChanges.subscribe((value) => valueChanges(value));
-		const fixture = createFormControlHost(formControl);
+		const fixture = createRangeHost(null);
+		(fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent).value.subscribe((value) => valueChanges(value));
 
 		// Act
 		typeInElement('20/06/2025', getInput(fixture, 'end'), fixture);
@@ -219,39 +141,35 @@ describe('DateRangeInputComponent', () => {
 
 	it('should emit the whole range once both dates are entered', () => {
 		// Arrange
-		const formControl = new FormControl<DateRange | null>(null);
-		const fixture = createFormControlHost(formControl);
+		const fixture = createRangeHost(null);
 
 		// Act
 		typeInElement('18/06/2025', getInput(fixture, 'start'), fixture);
 		typeInElement('20/06/2025', getInput(fixture, 'end'), fixture);
 
 		// Assert
-		expect(formControl.value).toEqual({
+		expect(fixture.componentInstance.value).toEqual({
 			start: new Date(2025, 5, 18),
 			end: new Date(2025, 5, 20),
 			scope: 'day',
 		});
-		expect(formControl.errors).toBeNull();
 	});
 
 	it('should emit null when the user clears both dates', () => {
 		// Arrange
-		const formControl = new FormControl<DateRange | null>({ start: new Date(2025, 5, 18), end: new Date(2025, 5, 20) });
-		const fixture = createFormControlHost(formControl);
+		const fixture = createRangeHost({ start: new Date(2025, 5, 18), end: new Date(2025, 5, 20) });
 
 		// Act
 		typeInElement('', getInput(fixture, 'start'), fixture);
 		typeInElement('', getInput(fixture, 'end'), fixture);
 
 		// Assert
-		expect(formControl.value).toBeNull();
+		expect(fixture.componentInstance.value).toBeNull();
 	});
 
 	it('should swap start and end on blur when the range is reversed', () => {
 		// Arrange
-		const formControl = new FormControl<DateRange | null>(null);
-		const fixture = createFormControlHost(formControl);
+		const fixture = createRangeHost(null);
 		const startInput = getInput(fixture, 'start');
 
 		// Act
@@ -261,30 +179,17 @@ describe('DateRangeInputComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		expect(formControl.value).toEqual({
+		expect(fixture.componentInstance.value).toEqual({
 			start: new Date(2025, 5, 20),
 			end: new Date(2025, 5, 25),
 			scope: 'day',
 		});
 	});
 
-	it('should report a date error when the start date is not parsable', () => {
-		// Arrange
-		const formControl = new FormControl<DateRange | null>(null);
-		const fixture = createFormControlHost(formControl);
-
-		// Act
-		typeInElement('20/06/2025', getInput(fixture, 'end'), fixture);
-		typeInElement('12', getInput(fixture, 'start'), fixture);
-
-		// Assert
-		expect(formControl.errors).toEqual({ date: true });
-	});
-
 	describe('min / max', () => {
 		it('should disable calendar cells before min', () => {
 			// Arrange
-			const fixture = createFormControlHost(new FormControl<DateRange | null>(null), new Date(2025, 5, 10));
+			const fixture = createRangeHost(null, new Date(2025, 5, 10));
 			const cmp = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
 
 			// Assert
@@ -294,7 +199,7 @@ describe('DateRangeInputComponent', () => {
 
 		it('should disable calendar cells after max', () => {
 			// Arrange
-			const fixture = createFormControlHost(new FormControl<DateRange | null>(null), null, new Date(2025, 5, 20));
+			const fixture = createRangeHost(null, null, new Date(2025, 5, 20));
 			const cmp = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
 
 			// Assert
@@ -304,13 +209,10 @@ describe('DateRangeInputComponent', () => {
 	});
 
 	describe('disabled state', () => {
-		it('should disable both inputs and the calendar toggle when the control is disabled', async () => {
+		it('should disable both inputs and the calendar toggle when disabled is set', async () => {
 			// Arrange
-			const formControl = new FormControl<DateRange | null>(null);
-			formControl.disable();
-
 			// Act
-			const fixture = createFormControlHost(formControl);
+			const fixture = createRangeHost(null, null, null, true);
 			await fixture.whenStable();
 
 			// Assert
@@ -319,15 +221,13 @@ describe('DateRangeInputComponent', () => {
 			expect(((fixture.nativeElement as HTMLElement).querySelector('.textField-input-affix-toggle') as HTMLButtonElement).disabled).toBe(true);
 		});
 
-		it('should enable both inputs back when the control is enabled', async () => {
+		it('should enable both inputs back when disabled is unset', async () => {
 			// Arrange
-			const formControl = new FormControl<DateRange | null>(null);
-			formControl.disable();
-			const fixture = createFormControlHost(formControl);
+			const fixture = createRangeHost(null, null, null, true);
 			await fixture.whenStable();
 
 			// Act
-			formControl.enable();
+			fixture.componentInstance.disabled.set(false);
 			await fixture.whenStable();
 
 			// Assert
@@ -337,21 +237,9 @@ describe('DateRangeInputComponent', () => {
 	});
 
 	it('should anchor the calendar on the end bound when the written range has no start', () => {
-		const formControl = new FormControl<DateRange | null>(null);
-
-		TestBed.configureTestingModule({
-			imports: [FormControlHostComponent],
-			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
-		});
-
-		const fixture = TestBed.createComponent(FormControlHostComponent);
-		fixture.componentInstance.formControl = formControl;
-		fixture.detectChanges();
-
 		const end = new Date(2025, 11, 31);
 		// The component itself emits such a range when only the end field is filled
-		formControl.setValue({ start: null, end } as unknown as DateRange);
-		fixture.detectChanges();
+		const fixture = createRangeHost({ start: null, end } as unknown as DateRange);
 
 		const dateRangeInput = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
 

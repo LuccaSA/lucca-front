@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -22,7 +21,6 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 		TextInputComponent,
 		ButtonComponent,
 		IconComponent,
-		FormsModule,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,4 +1,4 @@
-<fieldset [disabled]="disabled" class="phoneNumber-fieldset">
+<fieldset [disabled]="disabled()" class="phoneNumber-fieldset">
 	<legend>
 		<span class="pr-u-mask">{{ label() }}</span>
 	</legend>
@@ -7,9 +7,8 @@
 		<lu-simple-select
 			ignorePresentation
 			[options]="prefixesDisplay()"
-			[ngModel]="prefixEntry()"
-			(ngModelChange)="updatePrefix($event)"
-			[ngModelOptions]="{ standalone: true }"
+			[value]="prefixEntry()"
+			(valueChange)="updatePrefix($event)"
 			[optionKey]="getPrefixKey"
 			[optionComparer]="prefixComparator"
 			(clueChange)="query.set($event)"
@@ -42,7 +41,7 @@
 				[ngModel]="displayedNumber()"
 				(ngModelChange)="updateNumber($event)"
 				[ngModelOptions]="{ standalone: true }"
-				(blur)="touched(); formatNationalNumber()"
+				(blur)="touch.emit(); formatNationalNumber()"
 				luInput
 				luInputStandalone
 				class="textField-input-value"
@@ -54,8 +53,8 @@
 </fieldset>
 
 <ng-container *luPresentationDisplayDefault>
-	@if (currentValue()) {
-		<a class="presentation-definition-link" href="tel:{{ currentValue() }}">{{ currentValue() }}</a>
+	@if (value()) {
+		<a class="presentation-definition-link" href="tel:{{ value() }}">{{ value() }}</a>
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}

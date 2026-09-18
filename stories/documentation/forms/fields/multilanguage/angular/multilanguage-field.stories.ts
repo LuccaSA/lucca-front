@@ -1,7 +1,6 @@
 import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { LOCALE_ID } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
@@ -13,7 +12,7 @@ export default {
 	title: 'Documentation/Forms/Fields/MultilanguageField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [MultilanguageInputComponent, FormFieldComponent, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, FormsModule],
+			imports: [MultilanguageInputComponent, FormFieldComponent, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -124,36 +123,28 @@ export const Basic: StoryObj<
 > = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, disabled, ...inputArgs } = args;
-		// Same lifetime as useStoryModel: kept across control changes, rebuilt when the story is remounted.
-		const [formControl] = useState(
-			() =>
-				new FormControl<MultilanguageTranslation[]>([
-					{
-						cultureCode: 'invariant',
-						value: 'Invariant value',
-					},
-					{
-						cultureCode: 'fr-FR',
-						value: 'Valeur en français',
-					},
-					{
-						cultureCode: 'en-US',
-						value: 'English value',
-					},
-					{
-						cultureCode: 'de-DE',
-						value: 'Wert auf Deutsch',
-					},
-				]),
-		);
-		if (disabled) {
-			formControl.disable();
-		} else {
-			formControl.enable();
-		}
+		const example: MultilanguageTranslation[] = [
+			{
+				cultureCode: 'invariant',
+				value: 'Invariant value',
+			},
+			{
+				cultureCode: 'fr-FR',
+				value: 'Valeur en français',
+			},
+			{
+				cultureCode: 'en-US',
+				value: 'English value',
+			},
+			{
+				cultureCode: 'de-DE',
+				value: "I don't speak German",
+			},
+		];
 		return {
 			props: {
-				formControl,
+				example,
+				disabled,
 			},
 			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
@@ -168,9 +159,9 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-multilanguage-input [formControl]="formControl"${generateInputs(inputArgs, argTypes)} />
+	<lu-multilanguage-input [(value)]="example" [disabled]="disabled"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ formControl.value | json }}</pr-story-model-display>`),
+<pr-story-model-display>{{ example | json }}</pr-story-model-display>`),
 		};
 	},
 	args: {

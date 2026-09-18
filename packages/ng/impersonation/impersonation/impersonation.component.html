@@ -32,7 +32,7 @@
 	<div class="impersonation_popover-content popover-contentOptional">
 		<lu-simple-select
 			impersonation
-			[(ngModel)]="selectedUser"
+			[(value)]="selectedUser"
 			users
 			[enableFormerEmployees]="enableFormerEmployees()"
 			[operationIds]="operationIds()"

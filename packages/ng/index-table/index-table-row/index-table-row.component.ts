@@ -1,7 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LuTooltipAnchorRef } from '@lucca-front/ng/tooltip';
@@ -11,6 +9,7 @@ import { LU_INDEX_TABLE_FOOT_INSTANCE } from '../index-table-foot/index-table-fo
 import { LU_INDEX_TABLE_HEAD_INSTANCE } from '../index-table-head/index-table-head.token';
 import { LU_INDEX_TABLE_INSTANCE } from '../index-table.token';
 import { LU_INDEX_TABLE_ROW_INSTANCE } from './index-table-row.token';
+import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -26,7 +25,7 @@ import { LU_INDEX_TABLE_ROW_INSTANCE } from './index-table-row.token';
 		'[class.mod-stack2]': 'stack() === 2',
 		'[class.mod-stack3]': 'stack() === 3',
 	},
-	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet],
+	imports: [CheckboxInputComponent, FormFieldComponent, NgTemplateOutlet],
 	providers: [
 		{
 			provide: LU_INDEX_TABLE_ROW_INSTANCE,

@@ -48,7 +48,8 @@
 			inputmode="decimal"
 			class="textField-input-value"
 			[placeholder]="placeholder()"
-			[formControl]="ngControl.control"
+			[formControl]="formControl"
+			(blur)="touch.emit()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
