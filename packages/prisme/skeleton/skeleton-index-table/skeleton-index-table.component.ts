@@ -23,6 +23,9 @@ export class SkeletonIndexTableComponent {
 	 */
 	readonly cols = input(5, { transform: numberAttribute });
 
+	/**
+	 * Defines the horizontal alignment of the cells content
+	 */
 	readonly colsAlign = input<Record<number, SkeletonColsAlign>>({});
 
 	/**
@@ -31,7 +34,7 @@ export class SkeletonIndexTableComponent {
 	readonly rows = input(8, { transform: numberAttribute });
 
 	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
-	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));
+	readonly colsNumber = computed<number[]>(() => Array.from({ length: this.cols() }, (_, index) => index + 1));
 
 	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 }

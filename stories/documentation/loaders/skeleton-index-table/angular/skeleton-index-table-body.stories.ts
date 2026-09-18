@@ -23,7 +23,7 @@ function getTemplate(args: SkeletonIndexTableStory): string {
 			<th luIndexTableCell align="end">Label</th>
 		</tr>
 	</thead>
-	<lu-skeleton-index-table tableBodyOnly [cols]="3" [rows]="8" [colsAlign]="{ '1': 'center', '2': 'end' }" />
+	<lu-skeleton-index-table tableBodyOnly [cols]="3" [rows]="8" [colsAlign]="{ '2': 'center', '3': 'end' }" />
 </lu-index-table>`;
 }
 
