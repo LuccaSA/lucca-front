@@ -30,13 +30,14 @@ export class ScrollBoxComponent implements OnInit {
 		const container = this.#elementRef.nativeElement.getBoundingClientRect();
 		const first = this.#elementRef.nativeElement.firstElementChild?.getBoundingClientRect();
 		const last = this.#elementRef.nativeElement.lastElementChild?.getBoundingClientRect();
+		const tolerance = 1;
 
 		if (this.vertical()) {
-			this.isFirstVisible.set(!first || first.top >= container.top);
-			this.isLastVisible.set(!last || last.bottom <= container.bottom);
+			this.isFirstVisible.set(!first || first.top >= container.top - tolerance);
+			this.isLastVisible.set(!last || last.bottom <= container.bottom + tolerance);
 		} else {
-			this.isFirstVisible.set(!first || first.left >= container.left);
-			this.isLastVisible.set(!last || last.right <= container.right);
+			this.isFirstVisible.set(!first || first.left >= container.left - tolerance);
+			this.isLastVisible.set(!last || last.right <= container.right + tolerance);
 		}
 	}
 
