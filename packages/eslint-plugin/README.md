@@ -211,4 +211,100 @@ Verify that:
 
 ---
 
+# ESLint Rule `no-deprecated-classes`
+
+Reports usage of deprecated Lucca Front CSS classes in Angular templates.
+
+## 🎯 Overview
+
+- Covers external `.html` templates and inline component templates (through `angular.processInlineTemplates`).
+- The deprecation list lives in `@lucca-front/stylelint-config` (`LFDeprecatedSelectors.mjs`).
+- Its regexes are written against **CSS selectors** (e.g. `/\.mod-link/`, or same-element lookahead combinations).
+- The rule converts each class list into a compound selector before matching: `class="button mod-counter"` → `".button.mod-counter"`.
+- The stylelint regexes therefore apply verbatim — `\b` boundaries and combinations included.
+- The stylelint list stays the single source of truth.
+
+## 🚀 Configuration
+
+- Requires `@angular-eslint/template-parser` (the rule visits `TextAttribute` / `BoundAttribute` nodes; wrong parser fails fast).
+- Options take the raw `LFDeprecatedSelectors` entries — no mapping layer. String entries are rejected by the schema (near-inert against class attributes).
+- One rule implementation, registered under two ids — `no-deprecated-classes` (`warn`) and `no-deleted-classes` (`error`).
+- `createDeprecatedClassesConfig()` returns the ready flat-config block: it wires the message builder and applies the version-aware split (warn-until-deleted) in one call.
+- The plugin stays decoupled from Lucca data — the list, message formatter, and severity policy are all passed in.
+- Wired in `eslint.config.mjs`:
+
+```javascript
+import { createDeprecatedClassesConfig } from './packages/eslint-plugin/index.ts';
+import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
+import { getDisallowedData, getSeverity } from './packages/stylelint-config/stylelintForLF.mjs';
+
+const deprecatedClassesConfig = createDeprecatedClassesConfig({
+	deprecations: LFDeprecatedSelectors,
+	buildMessage: (deprecations, matchedSelector) => getDisallowedData(deprecations, matchedSelector).message,
+	isDeleted: (entry) => getSeverity(entry) === 'error',
+});
+
+// then spread `deprecatedClassesConfig` into the flat config array.
+```
+
+## 📦 Using in another project
+
+- The factory is data-agnostic, so any Angular project can reuse the rules with its own deprecation list:
+
+```javascript
+import { createDeprecatedClassesConfig } from '@lucca-front/eslint-plugin';
+
+export default [
+	createDeprecatedClassesConfig({
+		deprecations: [{ objectPattern: /\.legacy-\w+/, versionDeleted: '3.0.0' }],
+		// buildMessage and isDeleted are optional; omit them for a plain warning on every match.
+	}),
+	// ...the consumer's `**/*.html` block must use `@angular-eslint/template-parser`.
+];
+```
+
+- A Lucca product app passes `@lucca-front/stylelint-config`'s `LFDeprecatedSelectors` + `getDisallowedData`/`getSeverity`, exactly like `eslint.config.mjs` above.
+- **Not yet publishable as-is** — before an external install works:
+  - Add a build step (emit `.js` + `.d.ts`; the source uses `.ts` import specifiers) and point `exports`/`main`/`types` at the built entry.
+  - Publish `@lucca-front/eslint-plugin` and `@lucca/stylelint-config-prisme` (both currently unpublished, versions `1.0.0`/`0.0.0`).
+  - The `@angular-eslint/*` peers are now declared; consumers already on `angular-eslint` satisfy them.
+
+## 🔍 Coverage
+
+| Template syntax                              | How it is checked                                                 |
+| -------------------------------------------- | ----------------------------------------------------------------- |
+| `class="button mod-counter"`                 | Whole class list, as a compound selector                          |
+| `ngClass="u-comma"` (static)                 | Same as `class`                                                   |
+| `[class.mod-link]="cond"`                    | The bound class name itself                                       |
+| `[class]="expr"` / `[attr.class]="expr"`     | String literals in the expression AST                             |
+| `[ngClass]="{ 'palette-grey': cond }"`       | Object-literal keys and string literals in the expression AST     |
+| `class="foo {{ expr }}"`                     | Static interpolation parts + literals in `expr`                   |
+
+## ⚠️ Limitations
+
+1. **Single-element checks only** — descendant selector patterns (e.g. `.lu-select-value .label`) can never match a single `class` attribute and are silently inert (their individual classes are usually covered by other entries).
+2. **Static analysis only** — class names computed in TypeScript code are invisible to the rule.
+
+## 📐 Design notes
+
+- Messages come verbatim from `stylelint-config`'s `getDisallowedData()` — same wording as stylelint, dates included.
+- The formatter is injected via `setDeprecationMessageBuilder()` in `eslint.config.mjs`, not via options.
+- Two constraints force that indirection: ESLint `structuredClone`s rule options (functions cannot travel through them), and the plugin cannot import `stylelintForLF.mjs` itself (jest cannot load it: its `currentLFVersion` import uses top-level await).
+- The builder receives only the entry that matched, so a report always carries its own entry's versions.
+- Without injection (e.g. under jest), the rule falls back to a plain static message.
+- Message dates come from `LFVersions.mjs`, which fetches release data (1-hour tmp cache): message text varies with network/cache state, and in-repo messages always carry `| LF version not found` (scss version `0.0.0`).
+- ESLint severity is fixed per rule id, so the warn/error split is done by registering the rule twice and partitioning the list with `getSeverity()` (see Configuration).
+- Inside this repo `currentLFVersion` is `null` (scss version `0.0.0`), so `getSeverity()` returns `warning` for every entry: the whole list lands in the `warn` bucket and the `error` bucket is empty.
+- Consequently `lint:es` (which passes `--quiet`) prints nothing from these rules in-repo; the deprecated-class warnings still show in editors and in a non-`--quiet` run. The split becomes an actual error only in consumer repos installed at an LF version that has reached a class's `versionDeleted`.
+- `\b` boundaries stop camelCase over-matches but not hyphen ones (`.error-message` still matches `\.error\b`): a stricter `(?![\w-])` would break dash-separated deprecated families like `.menu-link`, so the looseness is kept knowingly.
+
+## 📋 Known violations in this repository
+
+- Existing violations are suppressed with an explaining inline `eslint-disable` comment, not fixed.
+- Each comment names the deprecated class and its replacement.
+- Find them all with `grep -r "eslint-disable.*no-deprecated-classes"`.
+- Exception: the rule is `off` for `stories/**/*.html` — stories deliberately showcase deprecated classes (~137 occurrences).
+
+---
+
 **Version**: Compatible with ESLint 8.57+ and ESLint 9+
