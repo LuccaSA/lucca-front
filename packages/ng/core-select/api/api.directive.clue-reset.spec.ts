@@ -3,7 +3,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { NEVER, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
 interface TestEntity {
@@ -22,8 +22,6 @@ const ALL: TestEntity[] = [
 	selector: 'lu-simple-select[testApi]',
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
-	public override totalCount$ = NEVER;
-
 	// mirror the real establishment/apiV4 directives exactly: clue goes signal -> computed,
 	// exposed synchronously via `paramsSignal` (and reactively via `params$`).
 	protected readonly clue = toSignal(this.clue$);

@@ -1,5 +1,5 @@
 import { Directive, inject, OnDestroy, OnInit, Signal } from '@angular/core';
-import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, LuOptionComparer, SelectDataSource } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, CoreSelectApiTotalCountProvider, LuOptionComparer, SelectDataSource } from '@lucca-front/ng/core-select';
 import { BehaviorSubject, catchError, map, Observable, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
@@ -77,7 +77,9 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			this.clearLastPageByClue();
 		});
 
-		const totalCount$ = this.totalCount$;
+		// Read structurally: the member is not part of this class' shape, so a directive is free to
+		// implement it as a field or as a getter. See {@link CoreSelectApiTotalCountProvider}.
+		const { totalCount$ } = this as Partial<CoreSelectApiTotalCountProvider>;
 
 		const dataSource: SelectDataSource<TOption, unknown> = {
 			paramsChange: this.params$,
@@ -125,13 +127,6 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		// reactive observable for directives that still build their params from observables.
 		return this.paramsSignal ? of(this.paramsSignal()) : this.params$.pipe(take(1));
 	}
-
-	/**
-	 * Total number of options matching the current params, ignoring pagination. Only the select-all
-	 * feature of `lu-multi-select` needs it, so it is optional: a directive that has no cheap way to
-	 * count — or whose select never offers a select-all — simply leaves it undefined.
-	 */
-	public totalCount$?: Observable<number>;
 
 	protected clearLastPageByClue() {
 		this.#lastClue = undefined;

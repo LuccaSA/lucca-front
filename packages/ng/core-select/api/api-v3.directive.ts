@@ -42,7 +42,7 @@ export class LuCoreSelectApiV3Directive<T extends ILuApiItem> extends ALuCoreSel
 		})),
 	);
 
-	public override totalCount$ = combineLatest([this.url$, this.filters$]).pipe(
+	public totalCount$ = combineLatest([this.url$, this.filters$]).pipe(
 		debounceTime(250),
 		switchMap(([url, params]) =>
 			this.httpClient.get<{ data: { count: number } }>(url, {

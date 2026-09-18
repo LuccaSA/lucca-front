@@ -56,6 +56,12 @@ export const SELECT_ID = new InjectionToken<number>('LuSelectPanelData');
 export const SELECT_LABEL = new InjectionToken<HTMLLabelElement | undefined>('LuSelectLabel');
 export const SELECT_LABEL_ID = new InjectionToken<string>('LuSelectLabelId');
 
+/**
+ * Total number of options matching the current params, ignoring pagination. Only the select-all
+ * feature of `lu-multi-select` needs it, so an API directive is free not to provide it: one that has
+ * no cheap way to count — or whose select never offers a select-all — simply declares no
+ * `totalCount$`. Implement this interface on the directive to keep the member typed.
+ */
 export interface CoreSelectApiTotalCountProvider {
 	totalCount$: Observable<number>;
 }

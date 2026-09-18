@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { NEVER, Observable, delay, map, of } from 'rxjs';
+import { Observable, delay, map, of } from 'rxjs';
 import type { MockInstance } from 'vitest';
 import { ALuCoreSelectApiDirective, MAGIC_DEBOUNCE_DURATION } from './api.directive';
 
@@ -16,8 +16,6 @@ interface TestEntity {
 	selector: 'lu-simple-select[testApi]',
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
-	public override totalCount$ = NEVER;
-
 	protected override readonly params$ = this.clue$.pipe(
 		map((clue) => ({
 			...(clue ? { clue } : {}),
