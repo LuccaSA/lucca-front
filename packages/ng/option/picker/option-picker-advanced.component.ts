@@ -81,7 +81,7 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 		});
 		super.onClose();
 	}
-	override setValue(value: T | T[]) {
+	override setValue(value: T | T[] | undefined) {
 		super.setValue(value);
 		this._selectors.forEach((s) => s.setValue(value));
 	}
