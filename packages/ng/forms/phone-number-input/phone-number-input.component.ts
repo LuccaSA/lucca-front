@@ -185,18 +185,21 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		const displayedNumber = this.displayedNumber();
 		const countryCode = this.countryCode();
 
-		if (displayedNumber) {
-			try {
-				const { country, number } = tryParsePhoneNumber(displayedNumber, countryCode);
-				if (country && country !== countryCode) {
-					this.countryCodeSelected.set(country);
-					this.countryChange.emit(country);
-				}
-				this.#onChange?.(number);
-				return;
-			} catch {
-				this.#onChange?.(displayedNumber);
+		if (!displayedNumber) {
+			// the field has been emptied, the control has to be emptied too
+			this.#onChange?.('');
+			return;
+		}
+
+		try {
+			const { country, number } = tryParsePhoneNumber(displayedNumber, countryCode);
+			if (country && country !== countryCode) {
+				this.countryCodeSelected.set(country);
+				this.countryChange.emit(country);
 			}
+			this.#onChange?.(number);
+		} catch {
+			this.#onChange?.(displayedNumber);
 		}
 	}
 
