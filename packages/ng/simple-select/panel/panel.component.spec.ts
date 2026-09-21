@@ -1,5 +1,9 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { LuOptionComparer } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 
 type Entity = { id: number; name: string };
@@ -165,5 +169,40 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 		fixture.detectChanges();
 
 		expect(onChange).toHaveBeenCalledWith(options[2]);
+	}));
+});
+
+describe('LuSelectPanelComponent (initial highlight)', () => {
+	@Component({
+		selector: 'lu-simple-select-no-value-host',
+		imports: [FormsModule, LuSimpleSelectInputComponent],
+		changeDetection: ChangeDetectionStrategy.OnPush,
+		template: ` <lu-simple-select [ngModel]="selected" [options]="options" [optionComparer]="comparer" /> `,
+	})
+	class NoValueHostComponent {
+		selected: Entity | undefined = undefined;
+
+		options: Entity[] = [
+			{ id: 1, name: 'Carotte' },
+			{ id: 2, name: 'Poireau' },
+		];
+
+		// a comparer only ever receives options, so it is free to dereference them
+		comparer: LuOptionComparer<Entity> = (a, b) => a.id === b.id;
+	}
+
+	it('should open the panel without calling the option comparer when the control has no value', fakeAsync(() => {
+		const fixture = TestBed.configureTestingModule({ imports: [NoValueHostComponent] }).createComponent(NoValueHostComponent);
+		fixture.detectChanges();
+		tick();
+
+		const select = fixture.debugElement.query(By.directive(LuSimpleSelectInputComponent)).componentInstance as LuSimpleSelectInputComponent<Entity>;
+
+		expect(() => {
+			select.openPanel();
+			fixture.detectChanges();
+			tick(20);
+			fixture.detectChanges();
+		}).not.toThrow();
 	}));
 });
