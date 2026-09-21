@@ -1,6 +1,22 @@
 import { Directive, inject, OnDestroy, OnInit, Signal } from '@angular/core';
 import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, LuOptionComparer, SelectDataSource } from '@lucca-front/ng/core-select';
-import { BehaviorSubject, catchError, map, Observable, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, catchError, filter, map, Observable, of, pairwise, Subject, switchMap, take, takeUntil, tap, withLatestFrom } from 'rxjs';
+
+/**
+ * Shallow comparison of two params objects: every directive builds its params as a flat record of
+ * primitives rebuilt on each computation, so identity never holds and only the values matter.
+ */
+function paramsEqual<TParams>(a: TParams, b: TParams): boolean {
+	if (a === b) {
+		return true;
+	}
+	if (!a || !b || typeof a !== 'object' || typeof b !== 'object') {
+		return false;
+	}
+	const aEntries = Object.entries(a as Record<string, unknown>);
+	const bParams = b as Record<string, unknown>;
+	return aEntries.length === Object.keys(bParams).length && aEntries.every(([key, value]) => bParams[key] === value);
+}
 
 export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
 export const MAGIC_DEBOUNCE_DURATION = 250;
@@ -80,7 +96,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		const totalCount$ = this.totalCount$;
 
 		const dataSource: SelectDataSource<TOption, unknown> = {
-			paramsChange: this.params$,
+			paramsChange: this.buildParamsChange(),
 			...(this.getGroupOptions ? { getGroupOptions: (group: unknown) => this.getGroupOptions!(group) } : {}),
 			clueDebounceMs: this.debounceDuration,
 			...(totalCount$ ? { getTotalCount: () => totalCount$ } : {}),
@@ -109,6 +125,25 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		};
 
 		this.select.dataSource.set(dataSource);
+	}
+
+	/**
+	 * Emits whenever something *other than the clue* changed in {@link params$}, so the option stream
+	 * resets and reloads from page 0 — a panel header toggle, a filter bound to an input…
+	 *
+	 * Clue changes are already the select's own business (debounce included), and every directive folds
+	 * the clue into its params under its own key — sometimes driving the sort along with it — so there
+	 * is no clue key to strip generically. They are recognized here by comparing the clue of two
+	 * consecutive params emissions instead: same clue but different params means a real params change.
+	 */
+	protected buildParamsChange(): Observable<TParams> {
+		return this.params$.pipe(
+			withLatestFrom(this.currentClue$),
+			// Drops the initial params: the panel opening already loads them
+			pairwise(),
+			filter(([[previousParams, previousClue], [params, clue]]) => clue === previousClue && !paramsEqual(previousParams, params)),
+			map(([, [params]]) => params),
+		);
 	}
 
 	/**
