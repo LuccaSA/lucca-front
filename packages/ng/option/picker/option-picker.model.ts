@@ -10,8 +10,8 @@ export type LuOptionComparer<T> = (option1: T, option2: T) => boolean;
 export abstract class ALuOptionPicker<T, O extends ILuOptionItem<T> = ILuOptionItem<T>> extends ALuPickerPanel<T> implements ILuOptionPickerPanel<T> {
 	protected _subs = new Subscription();
 	override onSelectValue: Observable<T | T[]>;
-	protected _value: T | T[];
-	setValue(value: T | T[]) {
+	protected _value: T | T[] | undefined;
+	setValue(value: T | T[] | undefined) {
 		this._value = value;
 		this._applySelected();
 	}

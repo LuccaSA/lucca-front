@@ -15,12 +15,12 @@ export declare interface ILuPickerPanel<T> extends ILuPopoverPanel {
 	 * called to tell the picker what's the current value
 	 * @param value
 	 */
-	setValue(value: T | T[]): void;
+	setValue(value: T | T[] | undefined): void;
 }
 export abstract class ALuPickerPanel<T> extends ALuPopoverPanel implements ILuPickerPanel<T> {
 	multiple: boolean;
 	onSelectValue: Observable<T | T[]>;
-	abstract setValue(value: T | T[]): void;
+	abstract setValue(value: T | T[] | undefined): void;
 }
 
 export declare interface ILuInputWithPicker<TValue> extends ILuInput, ILuPopoverTrigger<ILuPickerPanel<TValue>> {}

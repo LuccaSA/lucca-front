@@ -24,6 +24,7 @@ import {
 	ViewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { isNil } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, of } from 'rxjs';
@@ -292,6 +293,11 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		const options = this._options;
 		// remove `is-selected` class from all other options
 		options.forEach((option) => (option.selected = false));
+
+		if (isNil(this._value)) {
+			// nothing is selected anymore, and the comparer only accepts actual values
+			return;
+		}
 
 		// add `is-selected` to all selected indexes
 		const selectedIndexes: number[] = [];

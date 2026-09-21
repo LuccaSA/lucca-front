@@ -50,7 +50,7 @@ export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implemen
 	deselectAll() {
 		this.onSelectValue.next([]);
 	}
-	setValue(values: T | T[]): void {
+	setValue(values: T | T[] | undefined): void {
 		this._values = values as T[];
 	}
 }
