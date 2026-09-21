@@ -22,12 +22,21 @@
 	}
 
 	.lucca-icon {
+		--icon-size: 1em;
+
 		text-decoration: none;
 		font-size: 1em;
 		vertical-align: baseline;
 		position: relative;
-		inset-block-start: 0.075rem;
 		margin-inline-start: var(--components-link-icon-marginInlineStart);
+
+		&:not(svg) {
+			inset-block-start: 0.075rem;
+		}
+
+		&:is(svg) {
+			inset-block-start: var(--pr-t-spacings-50);
+		}
 	}
 
 	.link-text {
