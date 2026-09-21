@@ -3,10 +3,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { LuOptionComparer } from '@lucca-front/ng/core-select';
+import { LuOptionComparer, TreeGroupingFn } from '@lucca-front/ng/core-select';
+import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 
 type Entity = { id: number; name: string };
+type TreeEntity = { id: number; name: string; parentId?: number };
 
 describe('LuSelectPanelComponent (listbox rendering)', () => {
 	let fixture: ComponentFixture<LuSimpleSelectInputComponent<Entity>>;
@@ -191,6 +193,25 @@ describe('LuSelectPanelComponent (initial highlight)', () => {
 		comparer: LuOptionComparer<Entity> = (a, b) => a.id === b.id;
 	}
 
+	@Component({
+		selector: 'lu-simple-select-no-value-tree-host',
+		imports: [FormsModule, LuSimpleSelectInputComponent, TreeSelectDirective],
+		changeDetection: ChangeDetectionStrategy.OnPush,
+		template: ` <lu-simple-select [ngModel]="selected" [options]="options" [optionComparer]="comparer" [treeSelect]="groupingFn" /> `,
+	})
+	class NoValueTreeHostComponent {
+		selected: TreeEntity | undefined = undefined;
+
+		options: TreeEntity[] = [
+			{ id: 1, name: 'Légumes' },
+			{ id: 2, name: 'Carotte', parentId: 1 },
+		];
+
+		comparer: LuOptionComparer<TreeEntity> = (a, b) => a.id === b.id;
+
+		groupingFn: TreeGroupingFn<TreeEntity> = (item, all) => all.find((o) => o.id === item.parentId) ?? null;
+	}
+
 	it('should open the panel without calling the option comparer when the control has no value', fakeAsync(() => {
 		const fixture = TestBed.configureTestingModule({ imports: [NoValueHostComponent] }).createComponent(NoValueHostComponent);
 		fixture.detectChanges();
@@ -204,5 +225,22 @@ describe('LuSelectPanelComponent (initial highlight)', () => {
 			tick(20);
 			fixture.detectChanges();
 		}).not.toThrow();
+	}));
+
+	it('should open the tree panel without calling the option comparer when the control has no value', fakeAsync(() => {
+		const fixture = TestBed.configureTestingModule({ imports: [NoValueTreeHostComponent] }).createComponent(NoValueTreeHostComponent);
+		fixture.detectChanges();
+		tick();
+
+		const select = fixture.debugElement.query(By.directive(LuSimpleSelectInputComponent)).componentInstance as LuSimpleSelectInputComponent<TreeEntity>;
+
+		expect(() => {
+			select.openPanel();
+			fixture.detectChanges();
+			tick(20);
+			fixture.detectChanges();
+		}).not.toThrow();
+
+		expect(TestBed.inject(OverlayContainer).getContainerElement().querySelectorAll('lu-tree-branch').length).toBe(2);
 	}));
 });
