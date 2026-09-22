@@ -166,10 +166,16 @@
 
 <ng-container *luFilterPillDisplayer="let empty = isEmpty">
 	@if (!empty) {
-		<span class="pr-u-mask">{{ intl().from }}</span>
-		{{ startLabel() }}
-		<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
-		{{ endLabel() }}
+		@if (startLabel() && endLabel()) {
+			<span class="pr-u-mask">{{ intl().from }}</span>
+			{{ startLabel() }}
+			<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
+			{{ endLabel() }}
+		} @else if (startLabel()) {
+			{{ intl().fromDate }} {{ startLabel() }}
+		} @else if (endLabel()) {
+			{{ intl().untilDate }} {{ endLabel() }}
+		}
 	}
 </ng-container>
 

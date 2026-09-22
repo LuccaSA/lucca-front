@@ -337,7 +337,7 @@ export class Calendar2Component implements OnInit {
 		// Is it weekend day? for is-dayOff class toggle
 		const isWeekend = isDayMode && this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend();
 		// Is it first day of month? Mostly used for overflow display logic
-		const isFirstDayOfMonth = isDayMode && rangeInfo && isSameDay(startOfMonth(date), rangeInfo.range.start);
+		const isFirstDayOfMonth = isDayMode && rangeInfo && isSameDay(startOfMonth(date), rangeInfo.anchor);
 
 		// Is this the current period? Will match if same day as today, or same month in month display, or same year if year display
 
@@ -348,22 +348,26 @@ export class Calendar2Component implements OnInit {
 			isCurrent = comparePeriods(this.displayMode(), new Date(), date, this.#weekOptions) && !this.hideToday();
 		}
 
-		// Are we currently in a range that's being created (start date selected, end date is being hovered)
-		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
+		// A range with a single bound is either being created (one date selected, the other one is
+		// being hovered) or open on one side
+		const isOpenRange = !!rangeInfo?.range && !(rangeInfo.range.start && rangeInfo.range.end);
+
+		// Are we currently in a range that's being created (one date selected, the other one is being hovered)
+		const isInProgress = isOpenRange && this.dateHovered() !== null;
 
 		// Progress flags
 		let isProgressBody = false;
-		let isProgressStart = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
-		let isProgressEnd = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
+		let isProgressStart = isOpenRange && this.dateHovered() === null;
+		let isProgressEnd = isOpenRange && this.dateHovered() === null;
 		// Specific case for when start is == end and we're hovering it
 		let isSingleDayInProgress = false;
 
-		if (isInProgress) {
-			let start = rangeInfo?.range.start;
+		if (isInProgress && rangeInfo) {
+			let start = rangeInfo.anchor;
 			// If we're in day mode, depending on if first day of month or not, we want to consider the start or the end of the day,
 			// To make sure we don't conflict with overflow
 			if (isDayMode) {
-				start = isFirstDayOfMonth ? endOfDay(rangeInfo.range.start) : startOfDay(rangeInfo.range.start);
+				start = isFirstDayOfMonth ? endOfDay(rangeInfo.anchor) : startOfDay(rangeInfo.anchor);
 			}
 			const hoveredRange: Interval = {
 				start,
@@ -377,7 +381,7 @@ export class Calendar2Component implements OnInit {
 				if (isDayMode) {
 					newStart = newStartIsFirstDayOfMonth ? endOfDay(hoveredRange.end) : startOfDay(hoveredRange.end);
 				}
-				hoveredRange.end = rangeInfo.range.start;
+				hoveredRange.end = rangeInfo.anchor;
 				hoveredRange.start = newStart;
 			}
 
@@ -394,7 +398,7 @@ export class Calendar2Component implements OnInit {
 			isProgressEnd = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.end as Date, this.#weekOptions);
 
 			// This is the case where you clicked a first date and then are hovering it, which requires a specific case for CSS
-			if (isSameDay(rangeInfo.range.start, this.dateHovered() ?? 0)) {
+			if (isSameDay(rangeInfo.anchor, this.dateHovered() ?? 0)) {
 				isSingleDayInProgress = !isOverflow && isSameDay(hoveredRange.start, hoveredRange.end) && isSameDay(hoveredRange.start, this.dateHovered() ?? 0);
 			}
 		}
@@ -457,49 +461,60 @@ export class Calendar2Component implements OnInit {
 		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
 			const isSameScope = (range.scope || 'day') === scope;
 			if (isSameScope) {
-				if (range.end) {
+				if (range.start && range.end) {
 					return isWithinInterval(date, {
 						start: isOverflow ? endOfDay(range.start) : startOfDay(range.start),
 						end: isOverflow ? startOfDay(range.end) : range.end,
 					});
-				} else if (this.dateHovered() !== null) {
-					// Nominal case: end is after start
-					if (isAfter(this.dateHovered() ?? 0, startOfDay(range.start))) {
+				}
+				// Only one bound is known, either because the range is still being built or because
+				// it is open on one side. The other bound follows the hovered date.
+				const anchor = range.start ?? range.end;
+				if (!anchor) {
+					return false;
+				}
+				if (this.dateHovered() !== null) {
+					// Nominal case: the hovered date is after the known bound
+					if (isAfter(this.dateHovered() ?? 0, startOfDay(anchor))) {
 						return isWithinInterval(date, {
-							start: startOfDay(range.start),
+							start: startOfDay(anchor),
 							end: endOfDay(this.dateHovered() ?? 0),
 						});
 					} else {
 						// When user clicked end date first and now wants to select a start date
 						return isWithinInterval(date, {
 							start: startOfDay(this.dateHovered() ?? 0),
-							end: endOfDay(range.start),
+							end: endOfDay(anchor),
 						});
 					}
 				} else {
 					switch (this.mode()) {
 						case 'day':
-							return isSameDay(date, range.start);
+							return isSameDay(date, anchor);
 						case 'week':
-							return isSameWeek(date, range.start, this.#weekOptions);
+							return isSameWeek(date, anchor, this.#weekOptions);
 						case 'month':
-							return isSameMonth(date, range.start);
+							return isSameMonth(date, anchor);
 						case 'year':
-							return isSameYear(date, range.start);
+							return isSameYear(date, anchor);
 					}
 				}
 			}
 			return false;
 		});
-		if (!range) {
+		const anchor = range?.start ?? range?.end;
+		if (!range || !anchor) {
 			return null;
 		}
 
-		const isStart: boolean = range && isSameDay(date, range.start);
-		const isEnd: boolean = Boolean(range && range.end && isSameDay(date, range.end));
+		// A range anchored on its end is rendered like an incomplete one: its single cell is the
+		// start cap, so that both open-ended cases look the same.
+		const isStart: boolean = isSameDay(date, anchor);
+		const isEnd: boolean = Boolean(range.start && range.end && isSameDay(date, range.end));
 
 		return {
 			range,
+			anchor,
 			isStart,
 			isEnd,
 			label: range?.label,
