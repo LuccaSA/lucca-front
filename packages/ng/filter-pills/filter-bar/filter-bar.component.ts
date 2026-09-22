@@ -10,6 +10,14 @@ import { FilterPillComponent } from '../filter-pill/filter-pill.component';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 import { LU_FILTER_BAR_INSTANCE } from './filter-bar.token';
 
+/** Case and accent insensitive, so searching `periode` matches a `Période` pill. */
+function normalizeSearch(value: string): string {
+	return value
+		.normalize('NFD')
+		.replace(/\p{Diacritic}/gu, '')
+		.toLowerCase();
+}
+
 @Component({
 	selector: 'lu-filter-bar',
 	imports: [DividerComponent, ScrollBoxComponent, FormsModule, NgTemplateOutlet, FilterPillComponent, LuMultiSelectInputComponent, LuOptionDirective],
@@ -39,20 +47,26 @@ export class FilterBarComponent {
 
 	protected readonly displayedOptionalPills = computed(() => this.optionalPills().filter((pill) => pill.displayed()));
 
+	/** Mirrors the search clue of the optional filters select, which filters its options on its own. */
+	protected readonly clue = signal('');
+
 	/**
 	 * The panel builds a group out of each run of consecutive options, so the pills of a same group
 	 * have to be listed together. Groups keep the order of their first pill, ungrouped pills come first.
 	 */
 	protected readonly optionalPillOptions = computed(() => {
+		const clue = normalizeSearch(this.clue());
 		const pillsByGroup = new Map<string, FilterPillComponent[]>([['', []]]);
-		this.optionalPills().forEach((pill) => {
-			const groupPills = pillsByGroup.get(pill.grouping());
-			if (groupPills) {
-				groupPills.push(pill);
-			} else {
-				pillsByGroup.set(pill.grouping(), [pill]);
-			}
-		});
+		this.optionalPills()
+			.filter((pill) => normalizeSearch(pill.label()).includes(clue))
+			.forEach((pill) => {
+				const groupPills = pillsByGroup.get(pill.grouping());
+				if (groupPills) {
+					groupPills.push(pill);
+				} else {
+					pillsByGroup.set(pill.grouping(), [pill]);
+				}
+			});
 		return [...pillsByGroup.values()].flat();
 	});
 

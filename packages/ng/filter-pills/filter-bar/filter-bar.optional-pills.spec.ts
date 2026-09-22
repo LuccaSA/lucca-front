@@ -58,6 +58,9 @@ describe('FilterBarComponent: the optional pills selector', () => {
 		const backdrop = overlayContainer.querySelector<HTMLElement>('.cdk-overlay-backdrop.cdk-overlay-transparent-backdrop');
 		expect(backdrop).not.toBeNull();
 
+		// The combobox is only editable once the select is searchable, which the bar's `clueChange` binding turns on
+		expect(overlayContainer.querySelector('input[role="combobox"]').hasAttribute('readonly')).toBe(false);
+
 		backdrop.click();
 		fixture.detectChanges();
 		tick(500);
@@ -123,6 +126,23 @@ describe('FilterBarComponent: grouping the optional pills', () => {
 	});
 
 	it('lists the pills of a same group together, ungrouped ones first', () => {
+		expect(select.options().map((pill) => pill.label())).toEqual(['Établissement', 'Période', "Date d'entrée", 'Département']);
+	});
+
+	it('filters the options with the search clue, case and accents aside', () => {
+		select.clueChanged('aucun filtre', true);
+		fixture.detectChanges();
+
+		expect(select.options().map((pill) => pill.label())).toEqual([]);
+
+		select.clueChanged("DATE D'ENTREE", true);
+		fixture.detectChanges();
+
+		expect(select.options().map((pill) => pill.label())).toEqual(["Date d'entrée"]);
+
+		select.clueChanged('', true);
+		fixture.detectChanges();
+
 		expect(select.options().map((pill) => pill.label())).toEqual(['Établissement', 'Période', "Date d'entrée", 'Département']);
 	});
 

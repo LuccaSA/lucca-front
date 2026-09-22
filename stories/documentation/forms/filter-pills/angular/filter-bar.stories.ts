@@ -146,14 +146,15 @@ export default {
 	<lu-filter-pill label="Établissement" optional name="optionalEstablishment" grouping="Organisation">
 		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
 	</lu-filter-pill>
-	<lu-filter-pill label="Collaborateurs partis" optional name="formerEmployees">
+	<lu-filter-pill label="Collaborateurs partis" optional name="formerEmployees" grouping="Organisation">
 		<lu-checkbox-input [ngModel]="false" />
 	</lu-filter-pill>`
 				: '';
 		const filterViewSelectorEnabled = args['views'] && args['filterViewSelector'];
 		const saveViewEnabled = args['views'] && args['saveView'];
-		const saveViewTab = saveViewEnabled && !filterViewSelectorEnabled
-			? `<ng-template #label4>
+		const saveViewTab =
+			saveViewEnabled && !filterViewSelectorEnabled
+				? `<ng-template #label4>
 			Produit
 			<button type="button" size="XS" luButton="ghost" aria-expanded="false" disclosure [luDropdown]="optionsDropdown">
 				<lu-icon alt="Options" icon="menuDots" />
@@ -176,7 +177,7 @@ export default {
 			</ng-template>
 		</ng-template>
 		<lu-segmented-control-filter [label]="label4" value="4" />`
-			: '';
+				: '';
 		const saveViewButton = saveViewEnabled
 			? `<button type="button" size="S" luButton="outlined" palette="product" disclosure aria-expanded="false" [luDropdown]="saveDropdown">
 			Enregistrer la vue

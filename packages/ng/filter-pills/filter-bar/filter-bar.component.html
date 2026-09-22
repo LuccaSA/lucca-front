@@ -14,6 +14,7 @@
 					[ngModel]="displayedOptionalPills()"
 					[ngModelOptions]="{ standalone: true }"
 					(ngModelChange)="displayOptionalPills($event)"
+					(clueChange)="clue.set($event)"
 				>
 					<ng-container *luOption="let pill; select: optionalPillsSelect">{{ pill.label() }}</ng-container>
 					<ng-template #optionalPillsGroup let-group>{{ group.key }}</ng-template>
