@@ -35,7 +35,7 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange, DateRangeInput } from '../calendar2/date-range';
-import { compareCalendarPeriods, startOfPeriod, transformDateRangeInputToDateRange, transformDateRangeToDateRangeInput } from '../utils';
+import { compareCalendarPeriods, getDateRangeAnchor, startOfPeriod, transformDateRangeInputToDateRange, transformDateRangeToDateRangeInput } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
 
 let nextId = 0;
@@ -98,13 +98,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	readonly startTextInputRef = viewChild<ElementRef<HTMLInputElement>>('start');
 	readonly startUserTextInput = signal('ɵ');
-	// Set when the field holds text that doesn't parse into a date: such a field leaves no bound
-	// in the value, so it can't be told apart from an empty one without this
-	readonly startParseError = signal(false);
 
 	readonly endTextInputRef = viewChild<ElementRef<HTMLInputElement>>('end');
 	readonly endUserTextInput = signal('ɵ');
-	readonly endParseError = signal(false);
 
 	// CVA stuff
 	#onChange?: (value: DateRange | null) => void;
@@ -433,19 +429,12 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	validate(control: AbstractControl<DateRange | DateRangeInput | null>): ValidationErrors | null {
-		// A field holding text that doesn't parse into a date is an error on its own, even though
-		// it leaves no bound behind in the value
-		if (this.startParseError() || this.endParseError()) {
-			return { date: true };
-		}
 		if (!control.value) {
 			return null;
 		}
 		const dateRange = transformDateRangeInputToDateRange(control.value);
-		// A range open on one of its bounds is valid, only the bounds it does have must be dates
-		const bounds = [dateRange?.start, dateRange?.end].filter(isNotNil);
 
-		return bounds.every((bound) => this.isValidDate(bound)) ? null : { date: true };
+		return this.isValidDate(dateRange?.start) ? null : { date: true };
 	}
 
 	writeValue(dateRange: DateRange | DateRangeInput | null): void {
@@ -462,7 +451,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 		if (isNotNil(dateRange)) {
 			this.selectedRange.set(_dateRange);
-			const calendarAnchor = _dateRange?.start ?? _dateRange?.end ?? new Date();
+			const calendarAnchor = getDateRangeAnchor(_dateRange) ?? new Date();
 			this.currentDate.set(startOfDay(calendarAnchor));
 		}
 	}
@@ -480,8 +469,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	clear() {
 		const newValue = this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : null;
-		this.startParseError.set(false);
-		this.endParseError.set(false);
 		this.selectedRange.set(newValue);
 		this.#onChange?.(this.selectedRange());
 		this.onTouched?.();
@@ -535,7 +522,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	textInputChange(inputValue: string, rangeProperty: 'start' | 'end'): void {
-		const parseError = rangeProperty === 'start' ? this.startParseError : this.endParseError;
 		switch (rangeProperty) {
 			case 'start':
 				this.startUserTextInput.set(inputValue);
@@ -544,7 +530,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				this.endUserTextInput.set(inputValue);
 				break;
 		}
-		parseError.set(false);
 		let currentRange: DateRange = this.selectedRange() || {};
 		if (inputValue?.length > 0) {
 			const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
@@ -562,8 +547,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 					scope: this.mode(),
 					[rangeProperty]: parsed,
 				};
-			} else {
-				parseError.set(true);
 			}
 		} else if (inputValue !== null) {
 			currentRange = {

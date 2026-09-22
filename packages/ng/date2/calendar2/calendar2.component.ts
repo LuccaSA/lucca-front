@@ -34,7 +34,7 @@ import {
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
-import { comparePeriods, getIntlWeekDay, getJSFirstDayOfWeek, getWeekNumberOptions } from '../utils';
+import { comparePeriods, getDateRangeAnchor, getIntlWeekDay, getJSFirstDayOfWeek, getWeekNumberOptions } from '../utils';
 import { CalendarCellInfo, CalendarMonthInfo, CalendarYearInfo } from './calendar-cell-info';
 import { CalendarMode } from './calendar-mode';
 import { Calendar2CellDirective } from './calendar2-cell.directive';
@@ -469,7 +469,7 @@ export class Calendar2Component implements OnInit {
 				}
 				// Only one bound is known, either because the range is still being built or because
 				// it is open on one side. The other bound follows the hovered date.
-				const anchor = range.start ?? range.end;
+				const anchor = getDateRangeAnchor(range);
 				if (!anchor) {
 					return false;
 				}
@@ -502,7 +502,7 @@ export class Calendar2Component implements OnInit {
 			}
 			return false;
 		});
-		const anchor = range?.start ?? range?.end;
+		const anchor = getDateRangeAnchor(range);
 		if (!range || !anchor) {
 			return null;
 		}

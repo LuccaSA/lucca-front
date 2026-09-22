@@ -106,6 +106,14 @@ export function transformDateRangeInputToDateRange(value: DateRange | null | und
 	};
 }
 
+/**
+ * Bound a range is anchored on: its start when it has one, its end otherwise. A range open on
+ * its start is displayed from its end, the same way an incomplete one is displayed from its start.
+ */
+export function getDateRangeAnchor(range: DateRange | null | undefined): Date | null {
+	return range?.start ?? range?.end ?? null;
+}
+
 export function transformDateRangeToDateRangeInput(value: DateRange): DateRangeInput {
 	return {
 		...value,

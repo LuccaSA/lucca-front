@@ -68,6 +68,24 @@ describe('DateRangeInputComponent', () => {
 		return (fixture.nativeElement as HTMLElement).querySelector(`.mod-${field} > input`) as HTMLInputElement;
 	}
 
+	function createFilterPillHost(value: DateRange | null = null): ComponentFixture<FilterPillHostComponent> {
+		TestBed.configureTestingModule({
+			imports: [FilterPillHostComponent],
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		});
+
+		const fixture = TestBed.createComponent(FilterPillHostComponent);
+		fixture.detectChanges();
+		// The pill projects the input inside its popover, so it has to be opened for the
+		// input to register itself and provide the pill content
+		(fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>('.filterPill')!.click();
+		fixture.detectChanges();
+		fixture.componentInstance.formControl.setValue(value);
+		fixture.detectChanges();
+
+		return fixture;
+	}
+
 	it('should not called ngModelChange at init if null value', () => {
 		const ngModelChangeCallback = vi.fn();
 
@@ -376,7 +394,10 @@ describe('DateRangeInputComponent', () => {
 			return fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
 		}
 
-		it('should keep the control valid when only the end date is filled', () => {
+		// The validator is left untouched by this feature: a range still has to carry a start date
+		// to be valid. Filter pills don't read the control's validity, so an "until" filter works
+		// all the same
+		it('should still report a date error when the range has no start date', () => {
 			// Arrange
 			const formControl = new FormControl<DateRange | null>(null);
 			const fixture = createFormControlHost(formControl);
@@ -385,7 +406,7 @@ describe('DateRangeInputComponent', () => {
 			typeInElement('20/06/2025', getInput(fixture, 'end'), fixture);
 
 			// Assert
-			expect(formControl.errors).toBeNull();
+			expect(formControl.errors).toEqual({ date: true });
 		});
 
 		it('should keep the control valid when only the start date is filled', () => {
@@ -412,7 +433,6 @@ describe('DateRangeInputComponent', () => {
 
 			// Assert
 			expect(formControl.value).toEqual({ end: new Date(2025, 5, 20), scope: 'day' });
-			expect(formControl.errors).toBeNull();
 		});
 
 		it('should move on to the start field once the end bound has been picked', () => {
@@ -461,26 +481,8 @@ describe('DateRangeInputComponent', () => {
 	});
 
 	describe('filter pill display', () => {
-		function createFilterPillHost(value: DateRange | null): ComponentFixture<FilterPillHostComponent> {
-			TestBed.configureTestingModule({
-				imports: [FilterPillHostComponent],
-				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
-			});
-
-			const fixture = TestBed.createComponent(FilterPillHostComponent);
-			fixture.detectChanges();
-			// The pill projects the input inside its popover, so it has to be opened for the
-			// input to register itself and provide the pill content
-			(fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>('.filterPill').click();
-			fixture.detectChanges();
-			fixture.componentInstance.formControl.setValue(value);
-			fixture.detectChanges();
-
-			return fixture;
-		}
-
 		function getPillValue(fixture: ComponentFixture<unknown>): string {
-			return (fixture.nativeElement as HTMLElement).querySelector('.filterPill-value').textContent.replace(/\s+/g, ' ').trim();
+			return (fixture.nativeElement as HTMLElement).querySelector('.filterPill-value')!.textContent!.replace(/\s+/g, ' ').trim();
 		}
 
 		it('should display both dates when the range is complete', () => {
