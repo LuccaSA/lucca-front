@@ -1,0 +1,8 @@
+<lu-form-field label="Label">
+	<lu-single-file-upload [entry]="file" [accept]="accept" (filePicked)="upload($event)" />
+</lu-form-field>
+<div class="fileEntryDisplayWrapper">
+	<lu-file-entry size="S" [entry]="file" />
+</div>
+<lu-file-entry [entry]="file" [size]="null" />
+<lu-file-entry [entry]="file" [size]="'S'" />

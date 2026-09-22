@@ -43,6 +43,7 @@ export default {
 			name: '↳ mixed',
 			if: { arg: 'selectable', truthy: true },
 			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			name: '↳ disabled',

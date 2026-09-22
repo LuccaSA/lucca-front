@@ -57,6 +57,12 @@
 		overflow: auto;
 	}
 
+	.multiSelect-field-icon {
+		&.mod-search {
+			margin-inline-start: auto;
+		}
+	}
+
 	.lu-picker-content {
 		animation: none;
 		box-shadow: none;

@@ -8,9 +8,23 @@ export interface SelectDataSourceParams {
 }
 
 export interface SelectDataSource<TOption, TGroup = never> {
+	/**
+	 * Emits when the params behind `getOptions` changed, so the select resets and reloads from page 0
+	 * with the current clue — a panel header toggle, a filter bound to an input…
+	 *
+	 * It must not emit on clue changes: those are the select's own business, debounce included, and an
+	 * emission here would load the same page a second time.
+	 */
 	paramsChange?: Observable<unknown>;
 	/** Optional debounce in ms for clue-based re-queries (useful for API data sources) */
 	clueDebounceMs?: number;
+	/**
+	 * Whether `getOptions` answers page by page. When false, it emits the whole list at once and `page`
+	 * is always 0: the select accumulates nothing, `nextPage` is only a request for more, and the loading
+	 * row is left to the consumer through the `loading` input.
+	 * @default true
+	 */
+	paginated?: boolean;
 	getOptions(params: SelectDataSourceParams): Observable<readonly TOption[]>;
 	/**
 	 * Optional post-processing applied to the whole list of loaded options (all pages accumulated),
@@ -49,6 +63,11 @@ export const SELECT_ID = new InjectionToken<number>('LuSelectPanelData');
 export const SELECT_LABEL = new InjectionToken<HTMLLabelElement | undefined>('LuSelectLabel');
 export const SELECT_LABEL_ID = new InjectionToken<string>('LuSelectLabelId');
 
+/**
+ * Contract behind {@link CORE_SELECT_API_TOTAL_COUNT_PROVIDER}: a directive fulfills it by declaring
+ * a `totalCount$`, which the select-all of `lu-multi-select` then reads through the token. Providing
+ * a count stays optional — see `ALuCoreSelectApiDirective.totalCount$`.
+ */
 export interface CoreSelectApiTotalCountProvider {
 	totalCount$: Observable<number>;
 }

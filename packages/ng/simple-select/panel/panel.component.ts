@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { PortalDirective } from '@lucca-front/ng/core';
+import { isNotNil, PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
@@ -72,7 +72,9 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	readonly optionKey = this.selectInput.optionKey;
 	colorPanel = this.selectInput.colorPicker;
 
-	initialValue: T | null = this.selectInput.value;
+	// `undefined` despite the select's own type when the control was written with no value,
+	// and the key manager forwards it to the public option comparer, which only accepts options
+	initialValue: T | null | undefined = this.selectInput.value;
 	readonly optionTpl = this.selectInput.optionTpl;
 
 	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);
@@ -82,11 +84,12 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 
 	public readonly selected = computed(() => this.selectInput.valueSignal());
 
-	// Kept free of `null` so it doesn't widen `TreeBranchComponent`'s generic, which would in turn
-	// make its `toggleOne` output nullable and force a guard on `emitValue`.
+	// Kept free of nil so it doesn't widen `TreeBranchComponent`'s generic, which would in turn
+	// make its `toggleOne` output nullable and force a guard on `emitValue` — and so the public
+	// option comparer, which only accepts options, never receives an empty value.
 	protected readonly selectedOptions = computed(() => {
 		const selected = this.selected();
-		return selected === null ? [] : [selected];
+		return isNotNil(selected) ? [selected] : [];
 	});
 
 	readonly hasGrouping = computed(() => !!this.grouping());
@@ -123,7 +126,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange$ : EMPTY,
 		});
 
-		if (this.initialValue !== null && !this.selectInput.clue) {
+		if (isNotNil(this.initialValue) && !this.selectInput.clue) {
 			this.keyManager.highlightOption(this.initialValue);
 		}
 	}

@@ -151,7 +151,9 @@ export function insertTSImportIfNeeded(sourceFile: SourceFile, fileToEdit: strin
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		if (!imports.some((node) => (node.propertyName || node.name)?.text === symbolName)) {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call
-			const insertPos: number = imports[0].getFullStart() || 0;
+			// getStart() and not getFullStart(): the latter points before the leading trivia, which inserts the
+			// symbol right after the opening brace and leaves a double space behind it.
+			const insertPos: number = imports[0].getStart(sourceFile) || 0;
 			return new InsertChange(fileToEdit, insertPos, `${symbolName}, `);
 		}
 
