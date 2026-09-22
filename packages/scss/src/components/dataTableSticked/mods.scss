@@ -53,6 +53,12 @@
 		flex-direction: column;
 		flex-grow: 1;
 
+		.dataTable {
+			// override required for Safari
+			block-size: auto;
+			flex-grow: 1;
+		}
+
 		&::before,
 		&::after {
 			content: '';
