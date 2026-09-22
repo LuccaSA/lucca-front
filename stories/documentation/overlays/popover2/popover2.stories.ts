@@ -23,6 +23,9 @@ export default {
 	],
 	argTypes: {
 		luPopover2: HiddenArgType,
+		// Property names of aliased inputs: only the aliases are bindable, hide the duplicates.
+		luPopoverDisabledInput: HiddenArgType,
+		luPopoverNoCloseButtonInput: HiddenArgType,
 		luPopoverTrigger: {
 			control: 'select',
 			options: ['click', 'click+hover', 'hover+focus'],
@@ -70,7 +73,10 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<PopoverDirective> = {
+// Args must be keyed on the template aliases, not on the `…Input` property names, for `generateInputs` to bind them.
+type PopoverStoryArgs = Omit<PopoverDirective, 'luPopoverDisabled' | 'luPopoverNoCloseButton'> & Record<'luPopoverDisabled' | 'luPopoverNoCloseButton', boolean>;
+
+export const Basic: StoryObj<PopoverStoryArgs> = {
 	render: (args, { argTypes }) => {
 		const action = args.luPopoverTrigger === 'click' ? 'Cliquez-moi' : 'Cliquez ou survolez-moi';
 		let openDelay = '';
@@ -122,14 +128,14 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverTrigger: 'click',
 		luPopoverCloseDelay: 300,
 		luPopoverOpenDelay: 300,
-		luPopoverDisabledInput: false,
+		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
-		luPopoverNoCloseButtonInput: false,
+		luPopoverNoCloseButton: false,
 		luPopoverMaxBlockSize: '',
 		luPopoverMaxInlineSize: '',
 	},
 };
-export const CustomPosition: StoryObj<PopoverDirective> = {
+export const CustomPosition: StoryObj<PopoverStoryArgs> = {
 	render: (_args, { argTypes }) => {
 		const { luPopoverPosition, ...args } = _args;
 		const action = args.luPopoverTrigger === 'click' ? 'Cliquez-moi' : 'Cliquez ou survolez-moi';
@@ -210,9 +216,9 @@ export const CustomPosition: StoryObj<PopoverDirective> = {
 		luPopoverTrigger: 'click',
 		luPopoverCloseDelay: 300,
 		luPopoverOpenDelay: 300,
-		luPopoverDisabledInput: false,
+		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
-		luPopoverNoCloseButtonInput: false,
+		luPopoverNoCloseButton: false,
 		overlayScrollStrategy: 'reposition',
 	},
 };
