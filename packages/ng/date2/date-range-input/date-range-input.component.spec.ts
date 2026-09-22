@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, startOfDay } from 'date-fns';
 import { DateRange } from '../calendar2/date-range';
 import { DateRangeInputComponent } from './date-range-input.component';
@@ -29,6 +31,15 @@ class FormControlHostComponent {
 	formControl = new FormControl<DateRange | null>(null);
 	min: Date | null = null;
 	max: Date | null = null;
+}
+
+@Component({
+	template: `<lu-filter-pill label="Période"><lu-date-range-input [formControl]="formControl" /></lu-filter-pill>`,
+	imports: [ReactiveFormsModule, DateRangeInputComponent, FilterPillComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FilterPillHostComponent {
+	formControl = new FormControl<DateRange | null>(null);
 }
 
 describe('DateRangeInputComponent', () => {
@@ -356,5 +367,139 @@ describe('DateRangeInputComponent', () => {
 		const dateRangeInput = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
 
 		expect(dateRangeInput['currentDate']()).toEqual(startOfDay(end));
+	});
+
+	describe('range open on one of its bounds', () => {
+		const noopPopover = { close: () => {} } as PopoverDirective;
+
+		function getComponent(fixture: ComponentFixture<unknown>): DateRangeInputComponent {
+			return fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
+		}
+
+		it('should keep the control valid when only the end date is filled', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null);
+			const fixture = createFormControlHost(formControl);
+
+			// Act
+			typeInElement('20/06/2025', getInput(fixture, 'end'), fixture);
+
+			// Assert
+			expect(formControl.errors).toBeNull();
+		});
+
+		it('should keep the control valid when only the start date is filled', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null);
+			const fixture = createFormControlHost(formControl);
+
+			// Act
+			typeInElement('18/06/2025', getInput(fixture, 'start'), fixture);
+
+			// Assert
+			expect(formControl.errors).toBeNull();
+		});
+
+		it('should fill the end bound when a date is picked while the end field is edited', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null);
+			const fixture = createFormControlHost(formControl);
+			const cmp = getComponent(fixture);
+			cmp.editedField.set(1);
+
+			// Act
+			cmp.dateClicked(new Date(2025, 5, 20), noopPopover);
+
+			// Assert
+			expect(formControl.value).toEqual({ end: new Date(2025, 5, 20), scope: 'day' });
+			expect(formControl.errors).toBeNull();
+		});
+
+		it('should move on to the start field once the end bound has been picked', () => {
+			// Arrange
+			const fixture = createFormControlHost(new FormControl<DateRange | null>(null));
+			const cmp = getComponent(fixture);
+			cmp.editedField.set(1);
+
+			// Act
+			cmp.dateClicked(new Date(2025, 5, 20), noopPopover);
+
+			// Assert
+			expect(cmp.editedField()).toBe(0);
+			expect(cmp.highlightedField()).toBe(0);
+		});
+
+		it('should complete the range when a start date is picked on an end-only range', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null);
+			const fixture = createFormControlHost(formControl);
+			const cmp = getComponent(fixture);
+			cmp.editedField.set(1);
+			cmp.dateClicked(new Date(2025, 5, 20), noopPopover);
+
+			// Act
+			cmp.dateClicked(new Date(2025, 5, 18), noopPopover);
+
+			// Assert
+			expect(formControl.value).toEqual({ start: new Date(2025, 5, 18), end: new Date(2025, 5, 20), scope: 'day' });
+		});
+
+		it('should not swap bounds on blur when the range has a single one', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null);
+			const fixture = createFormControlHost(formControl);
+			const endInput = getInput(fixture, 'end');
+
+			// Act
+			typeInElement('20/06/2025', endInput, fixture);
+			endInput.dispatchEvent(new Event('blur'));
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.value).toEqual({ end: new Date(2025, 5, 20), scope: 'day' });
+		});
+	});
+
+	describe('filter pill display', () => {
+		function createFilterPillHost(value: DateRange | null): ComponentFixture<FilterPillHostComponent> {
+			TestBed.configureTestingModule({
+				imports: [FilterPillHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+
+			const fixture = TestBed.createComponent(FilterPillHostComponent);
+			fixture.detectChanges();
+			// The pill projects the input inside its popover, so it has to be opened for the
+			// input to register itself and provide the pill content
+			(fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>('.filterPill').click();
+			fixture.detectChanges();
+			fixture.componentInstance.formControl.setValue(value);
+			fixture.detectChanges();
+
+			return fixture;
+		}
+
+		function getPillValue(fixture: ComponentFixture<unknown>): string {
+			return (fixture.nativeElement as HTMLElement).querySelector('.filterPill-value').textContent.replace(/\s+/g, ' ').trim();
+		}
+
+		it('should display both dates when the range is complete', () => {
+			const fixture = createFilterPillHost({ start: new Date(2025, 5, 18), end: new Date(2025, 5, 20) });
+
+			expect(getPillValue(fixture)).toContain('18/06/2025');
+			expect(getPillValue(fixture)).toContain('20/06/2025');
+		});
+
+		it('should display "à partir du" when the range only has a start date', () => {
+			const fixture = createFilterPillHost({ start: new Date(2025, 5, 18) });
+
+			expect(getPillValue(fixture)).toBe('à partir du 18/06/2025');
+		});
+
+		it('should display "jusqu’au" when the range only has an end date', () => {
+			const fixture = createFilterPillHost({ end: new Date(2025, 5, 20) });
+
+			expect(getPillValue(fixture)).toBe('jusqu’au 20/06/2025');
+		});
 	});
 });
