@@ -156,7 +156,7 @@ export default {
 	<lu-filter-pill label="Établissement" optional name="optionalEstablishment" grouping="Organisation">
 		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
 	</lu-filter-pill>
-	<lu-filter-pill label="Collaborateurs partis" optional name="formerEmployees">
+	<lu-filter-pill label="Collaborateurs partis" optional name="formerEmployees" grouping="Organisation">
 		<lu-checkbox-input [ngModel]="false" />
 	</lu-filter-pill>`
 				: '';
