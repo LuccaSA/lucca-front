@@ -379,6 +379,7 @@ export const IconsList = [
 	{ icon: 'moneyPaymentCards', deprecated: false },
 	{ icon: 'moneyPiggyBank', deprecated: false },
 	{ icon: 'piggyBank', deprecated: true },
+	{ icon: 'moneyShoppingBag', deprecated: false },
 	{ icon: 'moneyWallet', deprecated: false },
 	{ icon: 'wallet', deprecated: true },
 	{ icon: 'officeBriefcase', deprecated: false },
@@ -591,4 +592,5 @@ export const IconsList = [
 	{ icon: 'windowAsideLarge', deprecated: false },
 	{ icon: 'windowCornerBottom', deprecated: false },
 	{ icon: 'windowCornerTop', deprecated: false },
+	{ icon: 'windowSplit', deprecated: false },
 ];

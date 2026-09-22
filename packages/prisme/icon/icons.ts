@@ -379,6 +379,7 @@ export type LuccaIcon =
 	| 'moneyPaymentCards'
 	| 'moneyPiggyBank'
 	| 'piggyBank'
+	| 'moneyShoppingBag'
 	| 'moneyWallet'
 	| 'wallet'
 	| 'officeBriefcase'
@@ -590,4 +591,5 @@ export type LuccaIcon =
 	| 'windowAside'
 	| 'windowAsideLarge'
 	| 'windowCornerBottom'
-	| 'windowCornerTop';
+	| 'windowCornerTop'
+	| 'windowSplit';
