@@ -25,7 +25,7 @@ import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '../core';
+import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillHostComponent, FilterPillInputComponent } from '@lucca-front/ng/filter-pills/core';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 
 @Component({
@@ -50,7 +50,7 @@ import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 		'(click)': 'hostClick()',
 	},
 })
-export class FilterPillComponent {
+export class FilterPillComponent implements FilterPillHostComponent {
 	readonly intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
 
 	#locale = inject(LOCALE_ID);
@@ -81,6 +81,15 @@ export class FilterPillComponent {
 	readonly name = input<string>();
 
 	readonly optional = input(false, { transform: luBooleanAttribute });
+
+	/** Groups the pill with the ones sharing the same value in the filter bar's optional filters list. Empty means no group. */
+	readonly grouping = input('');
+
+	/** Renders the pill as an icon-only button, its label being carried by a tooltip. */
+	readonly iconOnly = input(false, { transform: luBooleanAttribute });
+
+	/** Catches the click that closes the popover instead of letting it through to the page. */
+	readonly backdrop = input(false, { transform: luBooleanAttribute });
 
 	readonly disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
 

@@ -123,6 +123,13 @@ export class PopoverDirective implements OnDestroy {
 	readonly luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
 
 	/**
+	 * Renders a transparent backdrop catching the outside click instead of letting it through to the page.
+	 * Reserved for menu-like popovers (a filter dropdown, where the click that closes the panel shouldn't
+	 * also hit what's underneath): a description popover must stay non-blocking, see #5012.
+	 */
+	readonly luPopoverBackdrop = input(false, { transform: luBooleanAttribute });
+
+	/**
 	 * Extra element(s) to treat as "inside" the popover for outside-pointer detection. Pointer events
 	 * originating from them won't close the popover. Useful when an external control opens the popover
 	 * (e.g. an input opening it on focus) and clicking it again should not trigger a close-then-reopen.
@@ -276,9 +283,9 @@ export class PopoverDirective implements OnDestroy {
 					.withPositions(this.customPositions() || this.#buildPositions())
 					.withGrowAfterOpen(true),
 				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy() ?? 'reposition'](),
-				// No blocking backdrop: outside interactions are handled via outsidePointerEvents() below.
-				hasBackdrop: false,
-				backdropClass: '',
+				// No blocking backdrop by default: outside interactions are handled via outsidePointerEvents() below.
+				hasBackdrop: this.luPopoverBackdrop(),
+				backdropClass: this.luPopoverBackdrop() ? 'cdk-overlay-transparent-backdrop' : '',
 				disposeOnNavigation: true,
 			});
 			// Close on outside interaction WITHOUT a blocking backdrop that would

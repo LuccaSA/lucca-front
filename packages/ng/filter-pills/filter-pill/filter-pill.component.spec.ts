@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '../core';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills/core';
 import { FilterPillComponent } from './filter-pill.component';
 
 @Component({

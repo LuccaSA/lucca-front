@@ -1,5 +1,5 @@
 import { Directive, inject, TemplateRef } from '@angular/core';
-import { FilterPillComponent } from '../filter-pill/filter-pill.component';
+import { FILTER_PILL_HOST_COMPONENT } from './tokens';
 
 interface FilterPillDisplayerContext {
 	label: string;
@@ -11,7 +11,7 @@ interface FilterPillDisplayerContext {
 	selector: '[luFilterPillDisplayer]',
 })
 export class FilterPillDisplayerDirective {
-	#filterPillComponentRef = inject(FilterPillComponent, { optional: true });
+	#filterPillComponentRef = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 
 	#templateRef = inject(TemplateRef);
 

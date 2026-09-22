@@ -1,21 +1,18 @@
-import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, input, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, forwardRef, input, signal, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { intlInputOptions } from '@lucca-front/ng/core';
+import { LuOptionComparer, LuOptionDirective, LuOptionGroupByContext, LuOptionGrouping } from '@lucca-front/ng/core-select';
 import { DividerComponent } from '@lucca-front/ng/divider';
-import { FormLabelComponent } from '@lucca-front/ng/form-label';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { FilterPillComponent } from '../filter-pill/filter-pill.component';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 import { LU_FILTER_BAR_INSTANCE } from './filter-bar.token';
 
 @Component({
 	selector: 'lu-filter-bar',
-	imports: [IconComponent, LuTooltipTriggerDirective, PopoverDirective, DividerComponent, ScrollBoxComponent, FormsModule, NgTemplateOutlet, FormLabelComponent],
+	imports: [DividerComponent, ScrollBoxComponent, FormsModule, NgTemplateOutlet, FilterPillComponent, LuMultiSelectInputComponent, LuOptionDirective],
 	templateUrl: './filter-bar.component.html',
 	styleUrl: './filter-bar.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -36,28 +33,48 @@ export class FilterBarComponent {
 	readonly addonBefore = signal<TemplateRef<unknown> | null>(null);
 	readonly addonAfter = signal<TemplateRef<unknown> | null>(null);
 
-	popoverPositions: ConnectionPositionPair[] = [
-		new ConnectionPositionPair(
-			{ originX: 'start', originY: 'bottom' },
-			{
-				overlayX: 'start',
-				overlayY: 'top',
-			},
-			-4,
-			0,
-		),
-		new ConnectionPositionPair(
-			{ originX: 'start', originY: 'top' },
-			{
-				overlayX: 'start',
-				overlayY: 'bottom',
-			},
-			-4,
-			0,
-		),
-	];
-
 	readonly pills = contentChildren(FilterPillComponent, { descendants: true });
 
 	readonly optionalPills = computed(() => this.pills().filter((pill) => pill.optional()));
+
+	protected readonly displayedOptionalPills = computed(() => this.optionalPills().filter((pill) => pill.displayed()));
+
+	/**
+	 * The panel builds a group out of each run of consecutive options, so the pills of a same group
+	 * have to be listed together. Groups keep the order of their first pill, ungrouped pills come first.
+	 */
+	protected readonly optionalPillOptions = computed(() => {
+		const pillsByGroup = new Map<string, FilterPillComponent[]>([['', []]]);
+		this.optionalPills().forEach((pill) => {
+			const groupPills = pillsByGroup.get(pill.grouping());
+			if (groupPills) {
+				groupPills.push(pill);
+			} else {
+				pillsByGroup.set(pill.grouping(), [pill]);
+			}
+		});
+		return [...pillsByGroup.values()].flat();
+	});
+
+	/** Optional pills are identified by their instance, they have no serializable value to compare. */
+	protected readonly optionalPillComparer: LuOptionComparer<FilterPillComponent> = (pill1, pill2) => pill1 === pill2;
+
+	// `viewChild` can't be declared on an ES private field
+	private readonly optionalPillsSelect = viewChild(LuMultiSelectInputComponent);
+
+	private readonly optionalPillsGroupTpl = viewChild<TemplateRef<LuOptionGroupByContext<unknown, unknown>>>('optionalPillsGroup');
+
+	constructor() {
+		effect(() => {
+			// Grouping stays off until a pill declares one, so a bar without groups keeps a flat option list
+			const grouped = this.optionalPills().some((pill) => pill.grouping().length > 0);
+			const content = this.optionalPillsGroupTpl();
+			const grouping: LuOptionGrouping<unknown, unknown> | undefined = grouped && content ? { selector: (pill: unknown) => (pill as FilterPillComponent).grouping(), content } : undefined;
+			this.optionalPillsSelect()?.groupingSignal.set(grouping);
+		});
+	}
+
+	protected displayOptionalPills(pills: FilterPillComponent[]): void {
+		this.optionalPills().forEach((pill) => pill.displayed.set(pills.includes(pill)));
+	}
 }
