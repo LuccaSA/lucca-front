@@ -24,3 +24,12 @@
 		@include icon.generate('sign_close');
 	}
 }
+
+@mixin withIcon {
+	@include color.palette('product');
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--palettes-product-700);
+}
