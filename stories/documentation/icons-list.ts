@@ -10,6 +10,7 @@ export const IconsList = [
 	{ icon: 'mosaic', deprecated: true },
 	{ icon: 'tiles', deprecated: true },
 	{ icon: 'appWidget', deprecated: false },
+	{ icon: 'arrowBackspace', deprecated: false },
 	{ icon: 'arrowBackward', deprecated: false },
 	{ icon: 'backward', deprecated: true },
 	{ icon: 'arrowBottom', deprecated: false },

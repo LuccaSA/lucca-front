@@ -10,6 +10,7 @@ export type LuccaIcon =
 	| 'mosaic'
 	| 'tiles'
 	| 'appWidget'
+	| 'arrowBackspace'
 	| 'arrowBackward'
 	| 'backward'
 	| 'arrowBottom'
