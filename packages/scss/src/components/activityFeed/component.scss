@@ -36,6 +36,9 @@
 		}
 
 		.activityFeed-step-state {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			inline-size: var(--pr-t-spacings-400);
 			block-size: var(--pr-t-spacings-400);
 			border-radius: var(--pr-t-border-radius-full);
@@ -46,10 +49,6 @@
 				color: var(--palettes-700, var(--palettes-neutral-700));
 				font-size: calc(1.5 * var(--pr-t-font-body-M-fontSize));
 				block-size: var(--pr-t-font-body-M-lineHeight);
-				inset: 0;
-				margin: auto;
-				position: absolute;
-				text-align: center;
 			}
 		}
 

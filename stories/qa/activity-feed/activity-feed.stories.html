@@ -232,6 +232,41 @@
 				</div>
 			</td>
 		</tr>
+		<tr>
+			<td>Icon</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<ol class="activityFeed">
+						<li class="activityFeed-step">
+							<div class="activityFeed-step-state mod-icon"><span class="lucca-icon icon-signInfo" aria-hidden="true"></span></div>
+							<div class="activityFeed-step-description">
+								<p class="activityFeed-step-description-content">Étape avec une icône.</p>
+								<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time"
+									><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time
+								>
+							</div>
+						</li>
+						<li class="activityFeed-step">
+							<div class="activityFeed-step-state mod-icon"><span class="lucca-icon icon-timeHourglass" aria-hidden="true"></span></div>
+							<div class="activityFeed-step-description">
+								<p class="activityFeed-step-description-content">Étape avec une autre icône.</p>
+								<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time"
+									><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time
+								>
+							</div>
+						</li>
+					</ol>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-activity-feed>
+						<lu-activity-feed-step [date]="date" label="Étape avec une icône." icon="signInfo" />
+						<lu-activity-feed-step [date]="date" label="Étape avec une autre icône." icon="timeHourglass" />
+					</lu-activity-feed>
+				</div>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
