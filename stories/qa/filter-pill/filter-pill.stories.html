@@ -57,27 +57,32 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Légumes">
-						<lu-multi-select [ngModel]="[]" clearable="false" filterPillLabelPlural="légumes" [options]="legumes" />
+						<lu-multi-select [ngModel]="[]" clearable="false" [filterPillLabelPluralFn]="legumesPluralFn" [options]="legumes" />
 					</lu-filter-pill>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Légumes">
-						<lu-multi-select [ngModel]="['Artichaut']" clearable="false" filterPillLabelPlural="légumes" [options]="legumes" />
+						<lu-multi-select [ngModel]="['Artichaut']" clearable="false" [filterPillLabelPluralFn]="legumesPluralFn" [options]="legumes" />
 					</lu-filter-pill>
 					<lu-filter-pill label="Légumes">
-						<lu-multi-select [ngModel]="['Artichaut', 'Asperge']" clearable="false" filterPillLabelPlural="légumes" [options]="legumes" />
+						<lu-multi-select
+							[ngModel]="['Artichaut', 'Asperge']"
+							clearable="false"
+							[filterPillLabelPluralFn]="legumesPluralFn"
+							[options]="legumes"
+						/>
 					</lu-filter-pill>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Légumes">
-						<lu-multi-select [ngModel]="['Artichaut']" filterPillLabelPlural="légumes" [options]="legumes" />
+						<lu-multi-select [ngModel]="['Artichaut']" [filterPillLabelPluralFn]="legumesPluralFn" [options]="legumes" />
 					</lu-filter-pill>
 					<lu-filter-pill label="Légumes">
-						<lu-multi-select [ngModel]="['Artichaut', 'Asperge']" filterPillLabelPlural="légumes" [options]="legumes" />
+						<lu-multi-select [ngModel]="['Artichaut', 'Asperge']" [filterPillLabelPluralFn]="legumesPluralFn" [options]="legumes" />
 					</lu-filter-pill>
 				</div>
 			</td>
@@ -95,7 +100,7 @@
 							[options]="legumes | filterLegumes: clue"
 							[totalCount]="legumes.length"
 							(clueChange)="clue = $event"
-							filterPillLabelPlural="légumes"
+							[filterPillLabelPluralFn]="legumesPluralFn"
 						/>
 					</lu-filter-pill>
 				</div>
@@ -111,7 +116,7 @@
 							[options]="legumes | filterLegumes: clue"
 							[totalCount]="legumes.length"
 							(clueChange)="clue = $event"
-							filterPillLabelPlural="légumes"
+							[filterPillLabelPluralFn]="legumesPluralFn"
 						/>
 					</lu-filter-pill>
 					<lu-filter-pill label="Légumes" name="legume">
@@ -123,7 +128,7 @@
 							[options]="legumes | filterLegumes: clue"
 							[totalCount]="legumes.length"
 							(clueChange)="clue = $event"
-							filterPillLabelPlural="légumes"
+							[filterPillLabelPluralFn]="legumesPluralFn"
 						/>
 					</lu-filter-pill>
 				</div>
@@ -138,7 +143,7 @@
 							[options]="legumes | filterLegumes: clue"
 							[totalCount]="legumes.length"
 							(clueChange)="clue = $event"
-							filterPillLabelPlural="légumes"
+							[filterPillLabelPluralFn]="legumesPluralFn"
 						/>
 					</lu-filter-pill>
 				</div>
@@ -176,7 +181,7 @@
 						<lu-multi-select
 							[ngModel]="[]"
 							clearable="false"
-							filterPillLabelPlural="légumes"
+							[filterPillLabelPluralFn]="legumesPluralFn"
 							[treeSelect]="groupingFn"
 							[options]="legumes"
 						/>
@@ -189,7 +194,7 @@
 						<lu-multi-select
 							[ngModel]="['Artichaut']"
 							clearable="false"
-							filterPillLabelPlural="légumes"
+							[filterPillLabelPluralFn]="legumesPluralFn"
 							[treeSelect]="groupingFn"
 							[options]="legumes"
 						/>
@@ -198,7 +203,7 @@
 						<lu-multi-select
 							[ngModel]="['Artichaut', 'Asperge']"
 							clearable="false"
-							filterPillLabelPlural="légumes"
+							[filterPillLabelPluralFn]="legumesPluralFn"
 							[treeSelect]="groupingFn"
 							[options]="legumes"
 						/>
@@ -208,12 +213,17 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Légumes">
-						<lu-multi-select [ngModel]="['Artichaut']" filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" />
+						<lu-multi-select
+							[ngModel]="['Artichaut']"
+							[filterPillLabelPluralFn]="legumesPluralFn"
+							[treeSelect]="groupingFn"
+							[options]="legumes"
+						/>
 					</lu-filter-pill>
 					<lu-filter-pill label="Légumes">
 						<lu-multi-select
 							[ngModel]="['Artichaut', 'Asperge']"
-							filterPillLabelPlural="légumes"
+							[filterPillLabelPluralFn]="legumesPluralFn"
 							[treeSelect]="groupingFn"
 							[options]="legumes"
 						/>
@@ -250,27 +260,37 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Départements" name="departments">
-						<lu-multi-select [ngModel]="[]" clearable="false" filterPillLabelPlural="départements" departments />
+						<lu-multi-select [ngModel]="[]" clearable="false" [filterPillLabelPluralFn]="departmentsPluralFn" departments />
 					</lu-filter-pill>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Départements" name="departments">
-						<lu-multi-select [ngModel]="[selectedDepartment]" clearable="false" filterPillLabelPlural="départements" departments />
+						<lu-multi-select
+							[ngModel]="[selectedDepartment]"
+							clearable="false"
+							[filterPillLabelPluralFn]="departmentsPluralFn"
+							departments
+						/>
 					</lu-filter-pill>
 					<lu-filter-pill label="Départements" name="departments">
-						<lu-multi-select [ngModel]="selectedDepartments" clearable="false" filterPillLabelPlural="départements" departments />
+						<lu-multi-select
+							[ngModel]="selectedDepartments"
+							clearable="false"
+							[filterPillLabelPluralFn]="departmentsPluralFn"
+							departments
+						/>
 					</lu-filter-pill>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Départements" name="departments">
-						<lu-multi-select [ngModel]="[selectedDepartment]" filterPillLabelPlural="départements" departments />
+						<lu-multi-select [ngModel]="[selectedDepartment]" [filterPillLabelPluralFn]="departmentsPluralFn" departments />
 					</lu-filter-pill>
 					<lu-filter-pill label="Départements" name="departments">
-						<lu-multi-select [ngModel]="selectedDepartments" filterPillLabelPlural="départements" departments />
+						<lu-multi-select [ngModel]="selectedDepartments" [filterPillLabelPluralFn]="departmentsPluralFn" departments />
 					</lu-filter-pill>
 				</div>
 			</td>

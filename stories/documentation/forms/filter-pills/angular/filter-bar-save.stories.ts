@@ -55,6 +55,7 @@ export default {
 			props: {
 				example1: new Date(),
 				examplePeriod: null,
+				establishmentsPluralFn: (count: number) => `${count} établissements`,
 			},
 			template: `<lu-filter-bar>
 	<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
@@ -100,7 +101,7 @@ export default {
 		<lu-date-range-input [(ngModel)]="examplePeriod" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Multi ApiV4" optional name="multiv4">
-		<lu-multi-select [ngModel]="[]" apiV4="/organization/structure/api/establishments" filterPillLabelPlural="établissements" />
+		<lu-multi-select [ngModel]="[]" apiV4="/organization/structure/api/establishments" [filterPillLabelPluralFn]="establishmentsPluralFn" />
 	</lu-filter-pill>
 	<lu-form-field label="Test" hiddenLabel>
 		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />

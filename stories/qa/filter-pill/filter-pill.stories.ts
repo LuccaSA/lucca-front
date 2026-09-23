@@ -42,6 +42,8 @@ interface SavedView {
 })
 class FilterPillStory {
 	legumes = allLegumes;
+	legumesPluralFn = (count: number) => `${count} légumes`;
+	departmentsPluralFn = (count: number) => `${count} départements`;
 	clue = '';
 	views: SavedView[] = [
 		{ id: 1, name: 'Product manager' },

@@ -26,6 +26,7 @@ export default {
 				examples: [],
 				user: null,
 				legumes: allLegumes,
+				legumesPluralFn: (count: number) => ({ one: `${count} légume`, other: `${count} légumes` }),
 			},
 			template: `<lu-filter-pill label="Légume" name="legume">
 			<lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
@@ -36,7 +37,7 @@ export default {
 <hr class="divider pr-u-marginBlock400" />
 
 <lu-filter-pill label="Légume" name="legume">
-	<lu-multi-select [(ngModel)]="examples"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+	<lu-multi-select [(ngModel)]="examples"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" />
 </lu-filter-pill>
 
 <pr-story-model-display>{{ examples | json }}</pr-story-model-display>
