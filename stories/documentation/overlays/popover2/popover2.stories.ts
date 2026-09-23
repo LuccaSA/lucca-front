@@ -74,7 +74,10 @@ export default {
 } as Meta;
 
 // Args must be keyed on the template aliases, not on the `…Input` property names, for `generateInputs` to bind them.
-type PopoverStoryArgs = Omit<PopoverDirective, 'luPopoverDisabled' | 'luPopoverNoCloseButton'> & Record<'luPopoverDisabled' | 'luPopoverNoCloseButton', boolean>;
+type PopoverStoryArgs = Omit<PopoverDirective, 'luPopoverDisabledInput' | 'luPopoverNoCloseButtonInput'> & {
+	luPopoverDisabled: boolean;
+	luPopoverNoCloseButton: boolean;
+};
 
 export const Basic: StoryObj<PopoverStoryArgs> = {
 	render: (args, { argTypes }) => {
