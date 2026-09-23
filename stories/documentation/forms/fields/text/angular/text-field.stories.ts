@@ -96,7 +96,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Applique une largeur fixe au champ.',
+			description: 'Applique une largeur fixe au champ. Peut également être appliqué sur <lu-text-input> afin de conserver de la place pour le label et le message d’aide.',
 			table: { category: 'inputs' },
 		},
 		AI: {

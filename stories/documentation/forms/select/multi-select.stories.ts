@@ -23,6 +23,7 @@ import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-sel
 import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import {
 	LuMultiDisplayerDirective,
 	LuMultiSelectContentDisplayerComponent,
@@ -365,6 +366,36 @@ export const Basic = generateStory({
 });
 
 export const BasicTEST = createTestStory(Basic, basePlay);
+
+export const InputWidth = generateStory({
+	name: 'Input Width',
+	description: `L’input \`width\` contraint la largeur du select lui-même, sur la même échelle que le \`width\` du form field : la valeur correspond à des demi-rem (30 → 15rem, soit 240px). Le label et l’inline message du form field, eux, gardent la largeur du form field.`,
+	template: `<lu-form-field label="Légumes" inlineMessage="Ce message d’aide est volontairement long pour vérifier qu’il occupe toute la largeur du form field et ne se cale pas sur la largeur réduite du select.">
+	<lu-multi-select
+		[width]="width"
+		[(ngModel)]="selectedLegumes"
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+	/>
+</lu-form-field>`,
+	neededImports: {
+		'@lucca-front/ng/form-field': ['FormFieldComponent'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+			width: 30,
+		},
+		argTypes: {
+			width: {
+				control: { type: 'select' },
+				options: [null, 10, 20, 30, 40, 50, 60],
+				table: { category: 'inputs', type: { summary: 'FormFieldWidth | null' } },
+			},
+		},
+	},
+});
 
 export const WithClue = generateStory({
 	name: 'Clue',
@@ -1181,6 +1212,7 @@ const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasI
 				I18nPluralPipe,
 				FormsModule,
 				FilterLegumesPipe,
+				FormFieldComponent,
 				SortLegumesPipe,
 				LuMultiSelectInputComponent,
 				LuMultiDisplayerDirective,
