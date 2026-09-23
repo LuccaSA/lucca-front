@@ -12,6 +12,7 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -30,7 +31,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		stickyColsStart: {
-			description: 'Nombre de colonnes figées depuis la gauche. Non compatible avec l’usage de colspan.',
+			description: 'Nombre de colonnes figées depuis la gauche. Limité à 1 avec l’usage de colspan.',
 			control: { type: 'range', min: 0, max: 4 },
 			table: { category: 'inputs' },
 		},
@@ -51,6 +52,23 @@ export default {
 			description: 'Affiche une pagination sous le tableau.',
 			table: { category: 'inputs' },
 		},
+		group: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Présente un groupe de lignes dans la story.',
+			table: { category: 'inputs' },
+		},
+		groupButtonAlt: {
+			if: { arg: 'group', truthy: true },
+			description: 'Texte alternatif restitué au focus de l’action sur le groupe.',
+			table: { category: 'inputs' },
+		},
+		expanded: {
+			if: { arg: 'group', truthy: true },
+			description: 'Affiche le groupe dans son état étendu.',
+			table: { category: 'models' },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -67,13 +85,14 @@ export default {
 				FormsModule,
 				ButtonComponent,
 				IconComponent,
+				NumericBadgeComponent,
 				PaginationComponent,
 			],
 		}),
 	],
 
 	render: (args, { argTypes }) => {
-		const { cols, stickyHeader, lines, stickyColsStart, stickyColsEnd, pagination, noOverflow, ...inputArgs } = args;
+		const { cols, stickyHeader, lines, stickyColsStart, stickyColsEnd, pagination, noOverflow, group, groupButtonAlt, expanded, ...inputArgs } = args;
 
 		const text = 'cell';
 		const textHeader = 'header';
@@ -81,8 +100,11 @@ export default {
 		const stickyHeaderAttr = stickyHeader ? ` sticky` : ``;
 		const overflowingAttr = noOverflow ? ` noOverflow` : ``;
 
-		const stickyColsStartAttr = stickyColsStart > 0 ? ` stickyColsStart="${stickyColsStart}"` : ``;
+		const stickyColsStartValue = group ? Math.min(stickyColsStart, 1) : stickyColsStart;
+		const stickyColsStartAttr = stickyColsStartValue > 0 ? ` stickyColsStart="${stickyColsStartValue}"` : ``;
 		const stickyColsEndAttr = stickyColsEnd > 0 ? ` stickyColsEnd="${stickyColsEnd}"` : ``;
+		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" [group]="samplePortalContent"` : ``;
+		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
 
 		let colsContent = `
 			<td luDataTableCell>${text}</td>`;
@@ -107,6 +129,13 @@ export default {
 		for (let i = 1; i <= lines; i++) {
 			linesContent = linesContent + line;
 		}
+		const samplePortalContentTpl = group
+			? `
+<ng-template #samplePortalContent>
+	Group
+	<lu-numeric-badge [value]="${lines}" />
+</ng-template>`
+			: ``;
 		const paginationTpl = pagination
 			? `
 	<lu-pagination dataTablePagination from="1" to="20" itemsCount="27" isFirstPage />`
@@ -122,9 +151,9 @@ export default {
 			<th luDataTableCell>${textHeader}</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody>${linesContent}
+	<tbody luDataTableBody${groupAttr}${expandedAttr}>${linesContent}
 	</tbody>${paginationTpl}
-</lu-data-table>`,
+</lu-data-table>${samplePortalContentTpl}`,
 		};
 	},
 } as Meta;
@@ -138,5 +167,8 @@ export const Basic: StoryObj = {
 		stickyColsEnd: 0,
 		stickyHeader: false,
 		pagination: false,
+		group: false,
+		groupButtonAlt: 'Afficher X lignes supplémentaires',
+		expanded: false,
 	},
 };
