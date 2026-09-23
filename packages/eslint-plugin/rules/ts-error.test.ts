@@ -27,7 +27,6 @@ import rule, { RULE_NAME } from './ts-error';
  * - TS2345: Argument of type 'X' is not assignable to parameter of type 'Y'
  */
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 const ruleTester = new RuleTester({
 	languageOptions: {
 		parser,
@@ -35,7 +34,6 @@ const ruleTester = new RuleTester({
 			projectService: { allowDefaultProject: ['*.ts*'] },
 		},
 	},
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 });
 
 ruleTester.run(RULE_NAME, rule, {
