@@ -210,6 +210,7 @@ export default {
 			props: {
 				example1: null,
 				examplePeriod: null,
+				departmentsPluralFn: (count: number) => `${count} départements`,
 				filterViews,
 				// Reference the actual array element so it matches (the selector compares views by reference).
 				selectedFilterView: filterViews[0],
@@ -225,7 +226,7 @@ export default {
 		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Départements" name="departments">
-		<lu-multi-select [ngModel]="[]" departments filterPillLabelPlural="départements" />
+		<lu-multi-select [ngModel]="[]" departments [filterPillLabelPluralFn]="departmentsPluralFn" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Date de début" name="startingDate">
 		<lu-date-input [(ngModel)]="example1" />

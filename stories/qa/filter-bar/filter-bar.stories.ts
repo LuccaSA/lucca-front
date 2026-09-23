@@ -39,7 +39,9 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class FilterBarStory {}
+class FilterBarStory {
+	establishmentsPluralFn = (count: number) => `${count} établissements`;
+}
 
 export default {
 	title: 'QA/FilterBar',

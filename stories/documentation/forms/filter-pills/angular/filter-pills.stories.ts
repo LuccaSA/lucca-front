@@ -55,7 +55,8 @@ export default {
 			table: { category: 'inputs' },
 		},
 		filterPillLabelPlural: {
-			description: 'Dans le cas d’un multi select, permet de définir le label lorsque plusieurs éléments sont sélectionnés.',
+			description:
+				'Dans le cas d’un multi select, le label affiché lorsque plusieurs éléments sont sélectionnés est fourni par l’input `filterPillLabelPluralFn`, une fonction recevant le nombre d’éléments sélectionnés. Ce contrôle alimente le nom utilisé par cette fonction.',
 			table: { category: 'inputs' },
 		},
 		optional: {
@@ -87,6 +88,9 @@ export default {
 				date: null,
 				dateRange: null,
 				legumes: allLegumes,
+				legumesPluralFn: (count: number) => `${count} ${filterPillLabelPlural}`,
+				treeLegumesPluralFn: (count: number) => `${count} légumes`,
+				departmentsPluralFn: (count: number) => `${count} départements`,
 				groupingFn: (legume: ILegume) => {
 					const parent = allLegumes.find((l) => l.color === legume.color);
 					if (parent === legume) {
@@ -100,19 +104,19 @@ export default {
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
 <lu-filter-pill label="${label} (multi)" name="legume">
-	<lu-multi-select [ngModel]="[]" ${clearableProperty}[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="${filterPillLabelPlural}" ${disabledPill} />
+	<lu-multi-select [ngModel]="[]" ${clearableProperty}[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" ${disabledPill} />
 </lu-filter-pill>
 <lu-filter-pill label="Legume (simple)" name="department">
 	<lu-simple-select [ngModel]="null" ${clearableProperty}[options]="legumes | filterLegumes:clue" />
 </lu-filter-pill>
 <lu-filter-pill label="Départements" name="departments">
-	<lu-multi-select [ngModel]="[]" ${clearableProperty}filterPillLabelPlural="départements" departments />
+	<lu-multi-select [ngModel]="[]" ${clearableProperty}[filterPillLabelPluralFn]="departmentsPluralFn" departments />
 </lu-filter-pill>
 <lu-filter-pill label="Tree (simple)">
 	<lu-simple-select [ngModel]="null" ${clearableProperty}[treeSelect]="groupingFn" [options]="legumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Tree (multi)">
-	<lu-multi-select [ngModel]="[]" ${clearableProperty}filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" />
+	<lu-multi-select [ngModel]="[]" ${clearableProperty}[filterPillLabelPluralFn]="treeLegumesPluralFn" [treeSelect]="groupingFn" [options]="legumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
 	<lu-date-input [ngModel]="null" ${clearableProperty}/>

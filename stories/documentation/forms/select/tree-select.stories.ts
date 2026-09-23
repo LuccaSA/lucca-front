@@ -60,6 +60,8 @@ export const AllImplementations: StoryObj = {
 		return {
 			props: {
 				allLegumes: allLegumes,
+				legumesPluralFn: (count: number) => `${count} légumes`,
+				departmentsPluralFn: (count: number) => `${count} départements`,
 				groupingFn: (legume: ILegume) => {
 					const parent = allLegumes.find((l) => l.color === legume.color);
 					if (parent === legume) {
@@ -88,10 +90,10 @@ export const AllImplementations: StoryObj = {
 <lu-divider />
 <lu-filter-bar>
 	<lu-filter-pill label="Légumes">
-		<lu-multi-select filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="allLegumes" />
+		<lu-multi-select [filterPillLabelPluralFn]="legumesPluralFn" [treeSelect]="groupingFn" [options]="allLegumes" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Départements">
-		<lu-multi-select departments filterPillLabelPlural="départements" />
+		<lu-multi-select departments [filterPillLabelPluralFn]="departmentsPluralFn" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Légume">
 		<lu-simple-select [treeSelect]="groupingFn" [options]="allLegumes" />
