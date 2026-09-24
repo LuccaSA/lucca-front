@@ -16,6 +16,10 @@ export class LuUserV3Service<U extends ILuUser = ILuUser> extends LuApiV3Service
 	set operations(operations: number[]) {
 		this._operations = operations;
 	}
+	protected _uniqueOperations: number[] = [];
+	set uniqueOperations(uniqueOperations: number[]) {
+		this._uniqueOperations = uniqueOperations;
+	}
 
 	constructor(protected override _http: HttpClient) {
 		super(_http);
@@ -32,6 +36,9 @@ export class LuUserV3Service<U extends ILuUser = ILuUser> extends LuApiV3Service
 	}
 
 	override get url() {
+		if (this._uniqueOperations?.length) {
+			return `/api/v3/users/scopedsearch?${[...this._filters, `uniqueOperations=${this._uniqueOperations.join(',')}`, this._orderBy, this._fields].filter((f) => !!f).join('&')}`;
+		}
 		if (!this._appInstanceId || !this._operations || !this._operations.length) {
 			return `${this._api}?${[...this._filters, this._orderBy, this._fields].filter((f) => !!f).join('&')}`;
 		} else {

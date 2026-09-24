@@ -78,6 +78,8 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 
 	readonly operations = input<number[]>();
 
+	readonly uniqueOperations = input<number[]>();
+
 	readonly enableFormerEmployees = input(false, { transform: luBooleanAttribute });
 
 	readonly clueChange = output<string>();
@@ -116,6 +118,7 @@ export class LuUserPagedSearcherComponent<U extends ILuUser = ILuUser> implement
 		syncInputSignal(this.orderBy, (orderBy) => (this._service.orderBy = orderBy));
 		syncInputSignal(this.appInstanceId, (appInstanceId) => (this._service.appInstanceId = appInstanceId));
 		syncInputSignal(this.operations, (operations) => (this._service.operations = operations));
+		syncInputSignal(this.uniqueOperations, (uniqueOperations) => (this._service.uniqueOperations = uniqueOperations));
 	}
 
 	ngOnInit() {

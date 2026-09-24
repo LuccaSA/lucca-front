@@ -37,6 +37,8 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 
 	readonly luUserMeOptionOperations = input<number[]>();
 
+	readonly luUserMeOptionUniqueOperations = input<number[]>();
+
 	readonly luUserMeOptionClue = input<string>();
 
 	set inOptions$(in$: Observable<U[]>) {
@@ -74,6 +76,7 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 		syncInputSignal(this.luUserMeOptionOrderBy, (luUserMeOptionOrderBy) => (this._service.orderBy = luUserMeOptionOrderBy));
 		syncInputSignal(this.luUserMeOptionAppInstanceId, (luUserMeOptionAppInstanceId) => (this._service.appInstanceId = luUserMeOptionAppInstanceId));
 		syncInputSignal(this.luUserMeOptionOperations, (luUserMeOptionOperations) => (this._service.operations = luUserMeOptionOperations));
+		syncInputSignal(this.luUserMeOptionUniqueOperations, (luUserMeOptionUniqueOperations) => (this._service.uniqueOperations = luUserMeOptionUniqueOperations));
 	}
 
 	onOpen() {
