@@ -1,3 +1,9 @@
+### 22.0.4
+
+#### Fixed
+
+- Scroll shadows are now computed from the position of the first and last children, so they are displayed reliably in Chrome.
+
 ### 21.1.1
 
 #### Fixed

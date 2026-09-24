@@ -1,3 +1,18 @@
+### 22.0.0
+
+#### Added
+
+- `lu-file-entry-wrapper` component to group several `lu-file-entry` in a single display block.
+- `structure` input on `lu-multi-file-upload`, to display the structured variant already available on `lu-single-file-upload`.
+
+#### Changed
+
+- `size` input of the file upload components and of `lu-file-entry` now accepts `L` instead of `S`: the compact variant became the default (unset) size and `L` is the large one. `FILE_UPLOAD_SIZE` and `FILE_ENTRY_SIZE` are updated accordingly.
+
+#### Removed
+
+- `entry`, `state`, `previewUrl`, `inlineMessageError` and `displayFileName` inputs and `deleteFile` output of `lu-single-file-upload` — like the multi upload, it no longer renders the uploaded file itself; display a `lu-file-entry` next to it instead.
+
 ### 21.3.1
 
 #### Added

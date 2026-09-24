@@ -1,3 +1,10 @@
+### 22.0.0
+
+#### Fixed
+
+- Calendar now opens on the end bound when the range has no start.
+- Calendar overlay is now exposed as a labelled dialog (`aria-haspopup="dialog"`, `aria-expanded` and `aria-controls` on the triggers).
+
 ### 21.3.0
 
 #### Changed

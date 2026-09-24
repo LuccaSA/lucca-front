@@ -1,3 +1,15 @@
+### 22.0.0
+
+#### Added
+
+- `minlength` and `maxlength` inputs, forwarded to the native field.
+
+### 21.4.1
+
+#### Fixed
+
+- Clear button can now be triggered with the keyboard.
+
 ### 21.3.1
 
 #### Fixed

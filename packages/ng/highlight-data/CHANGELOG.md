@@ -1,3 +1,9 @@
+### 21.4.1
+
+#### Fixed
+
+- Palette of outlined buttons inside the component.
+
 ### 21.3.1
 
 #### Added

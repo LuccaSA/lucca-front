@@ -1,3 +1,33 @@
+### 22.0.4
+
+#### Fixed
+
+- Component styles now also apply to the `pr-icon` selector.
+
+### 22.0.1
+
+#### Added
+
+- `chartTree` and `capCrownFilled` icons.
+
+### 22.0.0
+
+#### Removed
+
+- `primary` and `secondary` values of the `color` input — use `product` and `neutral` instead.
+
+### 21.4.1
+
+#### Added
+
+- `arrowUndo`, `arrowRedo` and `signShieldCancel` icons.
+
+### 21.3.1
+
+#### Added
+
+- `window`, `windowAside`, `windowCornerBottom`, `windowCornerTop` and `windowAsideLarge` icons.
+
 ### 21.2.2
 
 #### Added

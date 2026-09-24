@@ -1,3 +1,22 @@
+### 22.0.1
+
+#### Fixed
+
+- VoiceOver support.
+
+### 22.0.0
+
+#### Fixed
+
+- Tooltip no longer reopens when a closing overlay gives the focus back to its trigger.
+- Position measurement while the trigger is animated or transformed.
+
+### 21.4.1
+
+#### Fixed
+
+- A pending tooltip no longer opens after its trigger has been destroyed.
+
 ### 21.3.1
 
 #### Fixed
