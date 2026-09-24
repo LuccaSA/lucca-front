@@ -1,3 +1,13 @@
+### 22.0.0
+
+#### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+#### Fixed
+
+- Component now renders a `span` instead of a `div`, so it can be nested inside a button without producing invalid markup.
+
 ### 21.3.0
 
 #### Added

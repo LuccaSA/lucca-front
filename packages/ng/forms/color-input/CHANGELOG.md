@@ -1,3 +1,9 @@
+### 21.3.0
+
+#### Fixed
+
+- Highlighted option no longer follows the pointer while navigating with the keyboard.
+
 ### 21.1.3
 
 #### Fixed

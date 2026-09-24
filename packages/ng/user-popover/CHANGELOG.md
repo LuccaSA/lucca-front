@@ -1,3 +1,16 @@
+### 21.3.0
+
+#### Changed
+
+- Loading state of the popover now uses `lu-skeleton-user-popover`.
+
+### 21.1.2
+
+#### Deprecated
+
+- `USER_POPOVER_IS_ACTIVATED` token — the popover is now always activated.
+- `provideLuUserPopover()` — no longer needed, the popover relies on `luPopover2`.
+
 ### 21.1.0
 
 #### Changed

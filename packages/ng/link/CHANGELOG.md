@@ -1,3 +1,10 @@
+### 21.4.1
+
+#### Fixed
+
+- Relative commands of `luLink` are now resolved against the current route, like `routerLink` does.
+- Application `baseHref` is now applied to the generated URL whatever the shape of the commands (string, array or `UrlTree`).
+
 ### 21.3.1
 
 #### Fixed

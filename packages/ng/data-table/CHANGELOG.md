@@ -1,3 +1,19 @@
+### 22.0.1
+
+#### Added
+
+- `empty` input on `lu-data-table` to mark the table as empty: it is then exposed as `role="presentation"` and its header becomes inert.
+
+### 22.0.0
+
+#### Added
+
+- `mixed` input on `tr[luDataTableRow]` to display the row checkbox in the indeterminate state.
+
+#### Fixed
+
+- Ghost buttons used as row actions no longer change size nor keep their icon visible while loading.
+
 ### 21.3.1
 
 #### Fixed

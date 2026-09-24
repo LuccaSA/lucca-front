@@ -1,3 +1,9 @@
+### 22.0.0
+
+#### Added
+
+- `week` value on the `mode` input: the calendar displays week numbers, selects a whole week and emits its first day.
+
 ### 21.1.0
 
 #### Added
