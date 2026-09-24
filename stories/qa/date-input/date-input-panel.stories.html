@@ -1,0 +1,540 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">No selection</div>
+			</td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">With selection</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Day mode</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2 [date]="referenceDate" mode="day" [showOverflow]="true" [enableOverflow]="true" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="day"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[getCellInfo]="daySelectedCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Week mode</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2 [date]="referenceDate" mode="week" [showOverflow]="true" [enableOverflow]="true" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="week"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[getCellInfo]="weekSelectedCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Month mode</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2 [date]="referenceDate" mode="month" [showOverflow]="true" [enableOverflow]="true" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="month"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[getCellInfo]="monthSelectedCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Year mode</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2 [date]="yearModeDate" mode="year" [showOverflow]="true" [enableOverflow]="true" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="yearModeDate"
+									mode="year"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[getCellInfo]="yearSelectedCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled cells (min/max)</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="day"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[getCellInfo]="minMaxCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="day"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[getCellInfo]="minMaxSelectedCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Overflow hidden</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2 [date]="referenceDate" mode="day" [showOverflow]="false" [enableOverflow]="false" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="day"
+									[showOverflow]="false"
+									[enableOverflow]="false"
+									[getCellInfo]="daySelectedCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Overflow disabled</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2 [date]="referenceDate" mode="day" [showOverflow]="true" [enableOverflow]="false" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="day"
+									[showOverflow]="true"
+									[enableOverflow]="false"
+									[getCellInfo]="daySelectedCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Weekend hidden</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2 [date]="referenceDate" mode="day" [showOverflow]="true" [enableOverflow]="true" [hideWeekend]="true" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="day"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[hideWeekend]="true"
+									[getCellInfo]="daySelectedCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Current</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="day"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[getCellInfo]="currentCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="day"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[getCellInfo]="currentWithSelectionCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>With shortcut</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2 [date]="referenceDate" mode="day" [showOverflow]="true" [enableOverflow]="true" [hasTodayButton]="true" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarWrapper" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<div class="calendarWrapper-navigation pr-u-left0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-navigation pr-u-right0">
+								<button class="calendarWrapper-navigation-button button" type="button">
+									<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+								</button>
+							</div>
+							<div class="calendarWrapper-content" tabindex="-1">
+								<lu-calendar2
+									[date]="referenceDate"
+									mode="day"
+									[showOverflow]="true"
+									[enableOverflow]="true"
+									[hasTodayButton]="true"
+									[getCellInfo]="daySelectedCellInfo"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
