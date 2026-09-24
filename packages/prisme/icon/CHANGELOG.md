@@ -14,7 +14,7 @@
 
 #### Removed
 
-- `primary` and `secondary` values of the `color` input — use `product` and `neutral` instead.
+- `primary` and `secondary` values of the `color` input — use `product` instead.
 
 ### 21.4.1
 
