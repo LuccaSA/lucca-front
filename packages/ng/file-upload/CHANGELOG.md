@@ -8,10 +8,7 @@
 #### Changed
 
 - `size` input of the file upload components and of `lu-file-entry` now accepts `L` instead of `S`: the compact variant became the default (unset) size and `L` is the large one. `FILE_UPLOAD_SIZE` and `FILE_ENTRY_SIZE` are updated accordingly.
-
-#### Removed
-
-- `entry`, `state`, `previewUrl`, `inlineMessageError` and `displayFileName` inputs and `deleteFile` output of `lu-single-file-upload` — like the multi upload, it no longer renders the uploaded file itself; display a `lu-file-entry` next to it instead.
+- `lu-single-file-upload` no longer renders the uploaded file itself; display a `lu-file-entry` next to it instead. Its former `entry`, `state`, `previewUrl`, `inlineMessageError` and `displayFileName` inputs and `deleteFile` output remain exposed but no longer affect rendering.
 
 ### 21.3.1
 
