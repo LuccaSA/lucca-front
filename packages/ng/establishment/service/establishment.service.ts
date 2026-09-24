@@ -15,7 +15,15 @@ export class LuEstablishmentService extends LuApiV4Service<ILuEstablishment> {
 	set operations(ops: number[]) {
 		this._operations = ops || [];
 	}
+	protected _uniqueOperations: number[] = [];
+	set uniqueOperations(ops: number[]) {
+		this._uniqueOperations = ops || [];
+	}
 	override get filters(): string[] {
+		if (this._uniqueOperations.length) {
+			return [...this._filters, `uniqueOperations=${this._uniqueOperations.join(',')}`];
+		}
+
 		const isScopeFiltered = this._appInstanceId && this._operations.length;
 
 		if (isScopeFiltered) {
