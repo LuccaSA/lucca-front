@@ -7,7 +7,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
-import { sleep, waitForAngular } from '../../helpers/test';
+import { sleep, waitForAngular } from '../../../helpers/test';
 
 @Component({
 	selector: 'select-async-position-stories',
@@ -59,7 +59,7 @@ class SelectAsyncPositionStory {
 }
 
 export default {
-	title: 'QA/Select/AsyncPanelPosition',
+	title: 'Documentation/Forms/SimpleSelect/AsyncPanelPosition TEST',
 	component: SelectAsyncPositionStory,
 	argTypes: {
 		field: { control: 'inline-radio', options: ['simple-async', 'simple-sync', 'multi-async'] },
