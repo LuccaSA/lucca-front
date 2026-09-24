@@ -61,6 +61,8 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 
 	readonly operations = input<number[]>();
 
+	readonly uniqueOperations = input<number[]>();
+
 	readonly sort = input<string>();
 
 	private _service: LuEstablishmentService;
@@ -124,6 +126,7 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 		syncInputSignal(this.filters, (filters) => (this._service.filters = filters));
 		syncInputSignal(this.appInstanceId, (appInstanceId) => (this._service.appInstanceId = appInstanceId));
 		syncInputSignal(this.operations, (operations) => (this._service.operations = operations));
+		syncInputSignal(this.uniqueOperations, (uniqueOperations) => (this._service.uniqueOperations = uniqueOperations));
 		syncInputSignal(this.sort, (sort) => (this._service.sort = sort));
 	}
 

@@ -33,6 +33,8 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 	readonly appInstanceId = input<number>();
 	readonly operations = input<number[]>();
 
+	readonly uniqueOperations = input<number[]>();
+
 	loading = false;
 	private _service: LuEstablishmentService;
 	private _subs = new Subscription();
@@ -52,6 +54,7 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 		syncInputSignal(this.filters, (filters) => (this._service.filters = filters));
 		syncInputSignal(this.appInstanceId, (appInstanceId) => (this._service.appInstanceId = appInstanceId));
 		syncInputSignal(this.operations, (operations) => (this._service.operations = operations));
+		syncInputSignal(this.uniqueOperations, (uniqueOperations) => (this._service.uniqueOperations = uniqueOperations));
 	}
 
 	override selectAll() {
