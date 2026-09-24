@@ -20,8 +20,8 @@ export class Treeitem {}
 		class: 'listboxOption',
 		'[attr.role]': 'group() ? "group" : tree() ? "treeitem" : "option"',
 		'[attr.aria-labelledby]': 'group() ? groupLabelId() : null',
-		'[attr.aria-selected]': 'add() || mixed() ? null : checked()',
-		'[attr.aria-checked]': 'mixed() ? "mixed" : null',
+		'[attr.aria-selected]': 'add() || group() || mixed() ? null : checked()',
+		'[attr.aria-checked]': '!group() && mixed() ? "mixed" : null',
 		'[attr.aria-disabled]': 'disabled()',
 		'[attr.aria-hidden]': 'empty()',
 		// The empty status option is the target of the listbox `aria-describedby`, so it must
