@@ -39,11 +39,14 @@ describe(OptionComponent.name, () => {
 	it('should not expose aria-selected nor aria-checked on a group option, even if checked or mixed', () => {
 		fixture.componentRef.setInput('group', true);
 		fixture.componentRef.setInput('checked', true);
-		fixture.componentRef.setInput('mixed', true);
 		fixture.detectChanges();
 
 		expect(host.getAttribute('role')).toBe('group');
 		expect(host.hasAttribute('aria-selected')).toBe(false);
+
+		fixture.componentRef.setInput('mixed', true);
+		fixture.detectChanges();
+
 		expect(host.hasAttribute('aria-checked')).toBe(false);
 	});
 });
