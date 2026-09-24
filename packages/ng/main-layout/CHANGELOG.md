@@ -3,7 +3,7 @@
 #### Added
 
 - `bubblesStartEnd` and `bubblesEndStart` inputs (`1`, `2` or `3`) to display decorative bubbles in the corresponding corner.
-- `illustrationStartEnd` and `illustrationEndStart` inputs to display an illustration in a corner, typed by `MAIN_LAYOUT_ILLUSTRATION_START_END` and `MAIN_LAYOUT_ILLUSTRATION_END_START`, or any URL.
+- `illustrationStartEnd` and `illustrationEndStart` inputs to display a predefined illustration from `MAIN_LAYOUT_ILLUSTRATION_START_END` or `MAIN_LAYOUT_ILLUSTRATION_END_START`, or one supplied by an absolute HTTPS or root-relative URL.
 - `palette` and `responsive` (`wideM`) inputs.
 - `LU_MAIN_LAYOUT_INSTANCE` token and the layout types are now publicly exported.
 
