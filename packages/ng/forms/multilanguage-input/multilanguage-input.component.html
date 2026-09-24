@@ -53,7 +53,7 @@
 						@for (row of panelInputs(); track row.cultureCode) {
 							<ng-template #prefixLang>
 								<div class="textField-prefix-lang" [class.mod-withCulture]="hasCulture(row.cultureCode)">
-									@if (formFieldRef?.isInputRequired()) {
+									@if (hasNoInvariant()) {
 										{{ row.cultureCode }}<sup class="formLabel-required" aria-hidden="true">*</sup>
 									} @else {
 										{{ row.cultureCode }}
@@ -78,12 +78,12 @@
 								[size]="formFieldSize?.() ?? null"
 								[label]="intl().translateTo | intlParams: { lang: getLocaleDisplayName(row.cultureCode) }"
 								hiddenLabel
-								[errorInlineMessage]="formFieldRef?.isInputRequired() && !row.value ? intl().requiredError : ''"
+								[errorInlineMessage]="hasNoInvariant() && !row.value ? intl().requiredError : ''"
 							>
 								<lu-text-input
 									[prefix]="{ content: prefixLang, ariaLabel: '' }"
 									[(ngModel)]="row.value"
-									[required]="formFieldRef?.isInputRequired() ?? false"
+									[required]="hasNoInvariant()"
 									(ngModelChange)="valueChange()"
 									[ngModelOptions]="{ standalone: true }"
 									[disabled]="disabledInternal()"
