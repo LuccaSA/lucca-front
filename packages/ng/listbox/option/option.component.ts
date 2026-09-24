@@ -20,7 +20,7 @@ export class Treeitem {}
 		class: 'listboxOption',
 		'[attr.role]': 'group() ? "group" : tree() ? "treeitem" : "option"',
 		'[attr.aria-labelledby]': 'group() ? groupLabelId() : null',
-		'[attr.aria-selected]': 'add() ? null : mixed() ? "mixed" : checked()',
+		'[attr.aria-selected]': 'add() || mixed() ? null : checked()',
 		'[attr.aria-checked]': 'mixed() ? "mixed" : null',
 		'[attr.aria-disabled]': 'disabled()',
 		'[attr.aria-hidden]': 'empty()',
