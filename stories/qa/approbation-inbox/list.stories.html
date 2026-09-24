@@ -1,3 +1,7 @@
+<div style="display: none" aria-hidden="true">
+	<lu-approbation-inbox-detail #detailRef></lu-approbation-inbox-detail>
+</div>
+
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
@@ -38,7 +42,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list>
+					<lu-approbation-inbox-list [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-item>
 							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
 							Metadata
@@ -81,7 +85,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list>
+					<lu-approbation-inbox-list [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-item>
 							<lu-user-picture approbationInboxListItemVisual />
 							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
@@ -124,7 +128,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list>
+					<lu-approbation-inbox-list [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-item center>
 							<lu-user-picture approbationInboxListItemVisual />
 							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
@@ -186,7 +190,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list>
+					<lu-approbation-inbox-list [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-item>
 							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
 							Metadata
@@ -229,7 +233,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list>
+					<lu-approbation-inbox-list [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-item>
 							<a href="#" current lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
 							Metadata
@@ -290,7 +294,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list selectable>
+					<lu-approbation-inbox-list selectable [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-item>
 							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
 							Metadata
@@ -356,7 +360,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list selectable>
+					<lu-approbation-inbox-list selectable [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-item [checked]="true">
 							<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
 							Metadata
@@ -422,7 +426,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list selectable>
+					<lu-approbation-inbox-list selectable [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-item [checked]="true">
 							<a href="#" current lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
 							Metadata
@@ -484,7 +488,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list>
+					<lu-approbation-inbox-list [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-group label="Group title">
 							<lu-approbation-inbox-list-item>
 								<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
@@ -574,7 +578,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list selectable>
+					<lu-approbation-inbox-list selectable [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-group label="Group title">
 							<lu-approbation-inbox-list-item>
 								<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
@@ -688,7 +692,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list selectable>
+					<lu-approbation-inbox-list selectable [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-group label="Group title">
 							<lu-approbation-inbox-list-item [checked]="true">
 								<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
@@ -768,7 +772,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list>
+					<lu-approbation-inbox-list [detailsComponent]="detailRef">
 						<lu-approbation-inbox-list-group label="Group title" [expanded]="false">
 							<lu-approbation-inbox-list-item>
 								<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
@@ -838,7 +842,7 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list>
+					<lu-approbation-inbox-list [detailsComponent]="detailRef">
 						<lu-filter-bar approbationInboxListFilterBar>
 							<lu-segmented-control [ngModel]="'0'" [ngModelOptions]="{ standalone: true }">
 								<lu-segmented-control-filter label="By you" value="0" />
@@ -878,7 +882,11 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-approbation-inbox-list emptyIllustration="magnifyingGlass" emptyResetButton></lu-approbation-inbox-list>
+					<lu-approbation-inbox-list
+						[detailsComponent]="detailRef"
+						emptyIllustration="magnifyingGlass"
+						emptyResetButton
+					></lu-approbation-inbox-list>
 				</div>
 			</td>
 		</tr>

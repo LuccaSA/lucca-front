@@ -2,6 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+	ApprobationInboxDetailComponent,
 	ApprobationInboxGroupComponent,
 	ApprobationInboxIcon,
 	ApprobationInboxIconsComponent,
@@ -11,11 +12,9 @@ import {
 	ApprobationInboxSubtleComponent,
 } from '@lucca-front/ng/approbation-inbox';
 import { FilterBarComponent } from '@lucca-front/ng/filter-pills';
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta } from '@storybook/angular-vite';
 
 @Component({
@@ -23,6 +22,7 @@ import { applicationConfig, Meta } from '@storybook/angular-vite';
 	templateUrl: './list.stories.html',
 	imports: [
 		FormsModule,
+		ApprobationInboxDetailComponent,
 		ApprobationInboxListComponent,
 		ApprobationInboxItemComponent,
 		ApprobationInboxLinkComponent,
@@ -30,11 +30,9 @@ import { applicationConfig, Meta } from '@storybook/angular-vite';
 		ApprobationInboxIconsComponent,
 		ApprobationInboxSubtleComponent,
 		LuUserPictureComponent,
-		NumericBadgeComponent,
 		FilterBarComponent,
 		SegmentedControlComponent,
 		SegmentedControlFilterComponent,
-		ButtonComponent,
 		LuSafeExternalSvgPipe,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
