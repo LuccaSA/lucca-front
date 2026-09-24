@@ -16,9 +16,9 @@ import {
 	getWeek,
 	Interval,
 	isAfter,
+	isBefore,
 	isSameDay,
 	isSameMonth,
-	isSameWeek,
 	isSameYear,
 	isWithinInterval,
 	lastDayOfMonth,
@@ -355,10 +355,15 @@ export class Calendar2Component implements OnInit {
 		// Are we currently in a range that's being created (one date selected, the other one is being hovered)
 		const isInProgress = isOpenRange && this.dateHovered() !== null;
 
+		// Open range with nothing hovered: it spans every period from its start onwards (start only)
+		// or every period up to its end (end only)
+		const isInIdleOpenRange = isOpenRange && this.dateHovered() === null;
+		const isIdleOpenRangeBound = isInIdleOpenRange && comparePeriods(this.displayMode(), date, rangeInfo.anchor, this.#weekOptions);
+
 		// Progress flags
-		let isProgressBody = false;
-		let isProgressStart = isOpenRange && this.dateHovered() === null;
-		let isProgressEnd = isOpenRange && this.dateHovered() === null;
+		let isProgressBody = isInIdleOpenRange;
+		let isProgressStart = isIdleOpenRangeBound && !isOverflow && !!rangeInfo.range.start;
+		let isProgressEnd = isIdleOpenRangeBound && !isOverflow && !rangeInfo.range.start;
 		// Specific case for when start is == end and we're hovering it
 		let isSingleDayInProgress = false;
 
@@ -403,7 +408,8 @@ export class Calendar2Component implements OnInit {
 			}
 		}
 
-		const isSelected = status.selected || (!!rangeInfo?.range && !isInProgress);
+		// In an open range, only the known bound is actually selected, the other periods are just highlighted
+		const isSelected = status.selected || (!!rangeInfo?.range && !isInProgress && (!isInIdleOpenRange || isIdleOpenRangeBound));
 
 		return {
 			day: date.getDate(),
@@ -488,16 +494,10 @@ export class Calendar2Component implements OnInit {
 						});
 					}
 				} else {
-					switch (this.mode()) {
-						case 'day':
-							return isSameDay(date, anchor);
-						case 'week':
-							return isSameWeek(date, anchor, this.#weekOptions);
-						case 'month':
-							return isSameMonth(date, anchor);
-						case 'year':
-							return isSameYear(date, anchor);
-					}
+					// Open range with nothing hovered: every period from the start onwards (start only)
+					// or up to the end (end only) is in range
+					const isInAnchorPeriod = comparePeriods(this.mode(), date, anchor, this.#weekOptions);
+					return isInAnchorPeriod || (range.start ? isAfter(date, anchor) : isBefore(date, anchor));
 				}
 			}
 			return false;
@@ -507,10 +507,8 @@ export class Calendar2Component implements OnInit {
 			return null;
 		}
 
-		// A range anchored on its end is rendered like an incomplete one: its single cell is the
-		// start cap, so that both open-ended cases look the same.
-		const isStart: boolean = isSameDay(date, anchor);
-		const isEnd: boolean = Boolean(range.start && range.end && isSameDay(date, range.end));
+		const isStart: boolean = Boolean(range.start && isSameDay(date, range.start));
+		const isEnd: boolean = Boolean(range.end && isSameDay(date, range.end));
 
 		return {
 			range,

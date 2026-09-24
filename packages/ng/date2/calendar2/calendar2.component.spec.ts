@@ -47,29 +47,40 @@ describe(Calendar2Component.name, () => {
 			expect(calendar.getRangeInfo(end, 'day')?.anchor).toEqual(end);
 		});
 
-		it('should match the end date only', () => {
+		it('should match every date up to the end date when nothing is hovered', () => {
 			// Arrange
 			const end = new Date(2025, 5, 20);
 			const calendar = getCalendar(createHost([{ end, scope: 'day' }]));
 
 			// Assert
 			expect(calendar.getRangeInfo(end, 'day')).not.toBeNull();
-			expect(calendar.getRangeInfo(new Date(2025, 5, 19), 'day')).toBeNull();
+			expect(calendar.getRangeInfo(new Date(2025, 5, 2), 'day')).not.toBeNull();
+			expect(calendar.getRangeInfo(new Date(2025, 5, 21), 'day')).toBeNull();
 		});
 
-		it('should render its end date the same way as a range that only has a start date', () => {
+		it('should render its end date as the end of the range', () => {
 			// Arrange
-			const date = new Date(2025, 5, 20);
-			const fixture = createHost([{ end: date, scope: 'day' }]);
-			const calendar = getCalendar(fixture);
-			const fromEnd = calendar.dateToCellInfo(date).classes;
+			const end = new Date(2025, 5, 20);
+			const calendar = getCalendar(createHost([{ end, scope: 'day' }]));
 
 			// Act
-			fixture.componentInstance.ranges = [{ start: date, scope: 'day' }];
-			fixture.detectChanges();
+			const cell = calendar.dateToCellInfo(end);
 
 			// Assert
-			expect(fromEnd).toEqual(calendar.dateToCellInfo(date).classes);
+			expect(cell.isSelected).toBe(true);
+			expect(cell.classes).toMatchObject({ 'is-end': true, 'is-endInProgress': true, 'is-start': false, 'is-startInProgress': false });
+		});
+
+		it('should highlight the dates before the end date without selecting them', () => {
+			// Arrange
+			const calendar = getCalendar(createHost([{ end: new Date(2025, 5, 20), scope: 'day' }]));
+
+			// Act
+			const cell = calendar.dateToCellInfo(new Date(2025, 5, 10));
+
+			// Assert
+			expect(cell.isSelected).toBe(false);
+			expect(cell.classes).toMatchObject({ 'is-selectionInProgress': true, 'is-startInProgress': false, 'is-endInProgress': false });
 		});
 
 		it('should extend to the hovered date while the start date is being picked', () => {
@@ -83,6 +94,46 @@ describe(Calendar2Component.name, () => {
 
 			// Assert
 			expect(calendar.getRangeInfo(new Date(2025, 5, 19), 'day')).not.toBeNull();
+		});
+	});
+
+	describe('range without end date', () => {
+		it('should match every date from the start date when nothing is hovered', () => {
+			// Arrange
+			const start = new Date(2025, 5, 10);
+			const calendar = getCalendar(createHost([{ start, scope: 'day' }]));
+
+			// Assert
+			expect(calendar.getRangeInfo(start, 'day')).not.toBeNull();
+			expect(calendar.getRangeInfo(new Date(2025, 5, 28), 'day')).not.toBeNull();
+			expect(calendar.getRangeInfo(new Date(2025, 5, 9), 'day')).toBeNull();
+		});
+
+		it('should render its start date as the start of the range', () => {
+			// Arrange
+			const start = new Date(2025, 5, 10);
+			const calendar = getCalendar(createHost([{ start, scope: 'day' }]));
+
+			// Act
+			const cell = calendar.dateToCellInfo(start);
+
+			// Assert
+			expect(cell.isSelected).toBe(true);
+			expect(cell.classes).toMatchObject({ 'is-start': true, 'is-startInProgress': true, 'is-end': false, 'is-endInProgress': false });
+		});
+
+		it('should extend to the hovered date only while the end date is being picked', () => {
+			// Arrange
+			const fixture = createHost([{ start: new Date(2025, 5, 10), scope: 'day' }]);
+			const calendar = getCalendar(fixture);
+
+			// Act
+			calendar.dateHovered.set(new Date(2025, 5, 15));
+			fixture.detectChanges();
+
+			// Assert
+			expect(calendar.getRangeInfo(new Date(2025, 5, 12), 'day')).not.toBeNull();
+			expect(calendar.getRangeInfo(new Date(2025, 5, 20), 'day')).toBeNull();
 		});
 	});
 
