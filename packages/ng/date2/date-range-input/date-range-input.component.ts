@@ -35,7 +35,7 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange, DateRangeInput } from '../calendar2/date-range';
-import { compareCalendarPeriods, startOfPeriod, transformDateRangeInputToDateRange, transformDateRangeToDateRangeInput } from '../utils';
+import { compareCalendarPeriods, getDateRangeAnchor, startOfPeriod, transformDateRangeInputToDateRange, transformDateRangeToDateRangeInput } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
 
 let nextId = 0;
@@ -227,6 +227,21 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	readonly isFilterPillEmpty = computed(() => this.selectedRange() === null);
+
+	/**
+	 * The field of the missing bound when a single date is selected, null otherwise.
+	 * In filter pill mode, the popover initially focuses it, so the next picked date completes the range instead of replacing the selected one
+	 */
+	protected readonly missingBoundField = computed<0 | 1 | null>(() => {
+		const range = this.selectedRange();
+		if (range?.start && !range.end) {
+			return 1;
+		}
+		if (range?.end && !range.start) {
+			return 0;
+		}
+		return null;
+	});
 	readonly isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	#defaultClearable = false;
 	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
@@ -331,7 +346,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	fixOrderIfNeeded(): void {
 		const range = this.selectedRange();
-		if (range && range.end && isAfter(range.start, range.end)) {
+		if (range?.start && range.end && isAfter(range.start, range.end)) {
 			const swappedRange = {
 				...range,
 				end: range.start,
@@ -363,7 +378,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				if (propertyToFocus && selectedRange && selectedRange[propertyToFocus]) {
 					// Specific case: if range is on a single month, focus on it on left calendar
 					// Same goes for focus on start date, we want it on left panel
-					if (propertyToFocus === 'start' || (selectedRange.end && compareCalendarPeriods(this.mode(), selectedRange.start, selectedRange.end))) {
+					if (propertyToFocus === 'start' || (selectedRange.start && selectedRange.end && compareCalendarPeriods(this.mode(), selectedRange.start, selectedRange.end))) {
 						this.currentDate.set(selectedRange[propertyToFocus]);
 						this.tabbableDate.set(selectedRange[propertyToFocus]);
 					} else {
@@ -385,59 +400,40 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
 		const selectedRange = this.selectedRange();
-		let newRange: DateRange | null;
+		// The clicked date always fills the field being edited, so picking a date while the end
+		// field is focused builds a range without start date
+		const isEditingEnd = this.editedField() === 1;
+		// The user picked the end date first and is now picking the start date
+		const isCompletingFromEnd = !isEditingEnd && !!selectedRange?.end && !selectedRange.start;
+		let newRange: DateRange;
 
-		if (selectedRange === null) {
-			newRange = {
-				start: date,
-				scope: this.mode(),
-			};
-			this.selectedRange.set(newRange);
-			this.editedField.set(1);
-			this.highlightedField.set(1);
+		if (isEditingEnd) {
+			// If end is before start, invert them
+			newRange =
+				selectedRange?.start && isBefore(date, selectedRange.start)
+					? { ...selectedRange, scope: this.mode(), start: date, end: selectedRange.start }
+					: { ...selectedRange, scope: this.mode(), end: date };
+		} else if (isCompletingFromEnd && selectedRange?.end) {
+			// If start is after end, invert them, the same way as when the start date is picked first
+			newRange = isAfter(date, selectedRange.end) ? { ...selectedRange, scope: this.mode(), start: selectedRange.end, end: date } : { ...selectedRange, scope: this.mode(), start: date };
 		} else {
-			// If we're editing end field
-			if (this.editedField() === 1) {
-				// If end is before start, invert them
-				if (isBefore(date, selectedRange.start)) {
-					newRange = {
-						start: date,
-						scope: this.mode(),
-						end: selectedRange.start,
-					};
-				} else {
-					newRange = {
-						...selectedRange,
-						scope: this.mode(),
-						end: date,
-					};
-				}
-				this.selectedRange.set(newRange);
-				popoverRef?.close();
-				this.filterPillPopoverCloseFn?.();
-				this.endTextInputRef()?.nativeElement.focus();
-				this.editedField.set(-1);
-				this.dateHovered.set(null);
-			} else {
-				// Else, we're editing start field
-				// If start is after end, invert them
-				if (selectedRange.end && isAfter(date, selectedRange.end)) {
-					newRange = {
-						start: date,
-						scope: this.mode(),
-					};
-				} else {
-					newRange = {
-						...selectedRange,
-						start: date,
-						scope: this.mode(),
-					};
-				}
-				this.selectedRange.set(newRange);
-				this.editedField.set(1);
-				this.highlightedField.set(1);
-				this.dateHovered.set(null);
-			}
+			// If start is after end, start a new range from it
+			newRange = selectedRange?.end && isAfter(date, selectedRange.end) ? { scope: this.mode(), start: date } : { ...selectedRange, scope: this.mode(), start: date };
+		}
+
+		this.selectedRange.set(newRange);
+
+		if ((isEditingEnd && newRange.start) || isCompletingFromEnd) {
+			// Both bounds are set, the user is done picking
+			popoverRef?.close();
+			this.filterPillPopoverCloseFn?.();
+			(isEditingEnd ? this.endTextInputRef() : this.startTextInputRef())?.nativeElement.focus();
+			this.editedField.set(-1);
+			this.dateHovered.set(null);
+		} else {
+			// Move on to the bound that is still missing
+			this.editedField.set(isEditingEnd ? 0 : 1);
+			this.highlightedField.set(isEditingEnd ? 0 : 1);
 		}
 
 		this.#onChange?.(newRange);
@@ -475,7 +471,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 		if (isNotNil(dateRange)) {
 			this.selectedRange.set(_dateRange);
-			const calendarAnchor = _dateRange?.start ?? _dateRange?.end ?? new Date();
+			const calendarAnchor = getDateRangeAnchor(_dateRange) ?? new Date();
 			this.currentDate.set(startOfDay(calendarAnchor));
 		}
 	}
@@ -554,7 +550,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				this.endUserTextInput.set(inputValue);
 				break;
 		}
-		let currentRange: DateRange = this.selectedRange() || ({} as DateRange);
+		let currentRange: DateRange = this.selectedRange() || {};
 		if (inputValue?.length > 0) {
 			const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
 			if (parsed.getFullYear() > 999) {
