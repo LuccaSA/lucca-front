@@ -214,14 +214,18 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 					return { measure: false } as const;
 				}
 				const host = this.#host.nativeElement;
-				const hostStyle = getComputedStyle(host);
+				// Every computed value the measurement needs is copied out here, in the read-only phase.
+				// A `CSSStyleDeclaration` is live: reading one property from it in the write phase, after
+				// another tooltip has already mutated the DOM, forces a full style recalculation — once
+				// per tooltip on the page.
+				const { textOverflow, display, padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } = getComputedStyle(host);
 				// No need to run a test if the element is not truncated
 				// or if its `display` property is set to `inline`
 				// (especially for Safari, which still calculates a width, unlike other browsers)
-				if (hostStyle.textOverflow !== 'ellipsis' || hostStyle.display === 'inline') {
+				if (textOverflow !== 'ellipsis' || display === 'inline') {
 					return { measure: false } as const;
 				}
-				return { measure: true, host, hostStyle } as const;
+				return { measure: true, host, cloneStyles: { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } } as const;
 			},
 			write: (earlyReadResult) => {
 				const snapshot = earlyReadResult();
@@ -229,8 +233,13 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 					return { measure: false } as const;
 				}
 				const clone = (this.#clone ??= this.#createClone());
-				this.#applyClonedStyles(clone, snapshot.hostStyle);
-				clone.innerHTML = snapshot.host.innerHTML;
+				Object.assign(clone.style, snapshot.cloneStyles);
+				const html = snapshot.host.innerHTML;
+				// Writing the same markup back would invalidate layout for nothing, and every tooltip
+				// measured after this one would then pay for a new layout on its first geometry read.
+				if (clone.innerHTML !== html) {
+					clone.innerHTML = html;
+				}
 				return { measure: true, host: snapshot.host, clone } as const;
 			},
 			read: (writeResult) => {
@@ -264,6 +273,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		const el = this.#host.nativeElement;
 		const bump = () => this.#measureTrigger.update((v) => v + 1);
 
+		// `observe` always delivers an initial notification, which doubles as the first measurement:
+		// asking for one here as well would measure every tooltip on the page twice.
 		const resizeObserver = new ResizeObserver(() => bump());
 		resizeObserver.observe(el);
 
@@ -274,9 +285,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			resizeObserver.disconnect();
 			mutationObserver.disconnect();
 		});
-
-		// initial measurement now that the element has appeared
-		bump();
 	}
 
 	#createClone(): HTMLDivElement {
@@ -296,11 +304,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		});
 		this.#document.body.appendChild(clone);
 		return clone;
-	}
-
-	#applyClonedStyles(clone: HTMLDivElement, hostStyle: CSSStyleDeclaration): void {
-		const { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } = hostStyle;
-		Object.assign(clone.style, { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize });
 	}
 
 	onMouseEnter() {
