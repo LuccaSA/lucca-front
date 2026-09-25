@@ -41,6 +41,10 @@
 
 		&:has(.multipleSelect-displayer-search[aria-invalid='true']) {
 			@include invalid;
+
+			&:hover {
+				@include invalidHover;
+			}
 		}
 
 		&:has(.multipleSelect-displayer-search:disabled) {
