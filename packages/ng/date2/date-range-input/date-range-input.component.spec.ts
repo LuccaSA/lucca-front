@@ -511,62 +511,47 @@ describe('DateRangeInputComponent', () => {
 		});
 	});
 
-	describe('opening with a single date selected', () => {
-		function openFromInput(fixture: ComponentFixture<unknown>, field: 'start' | 'end'): HTMLInputElement {
-			const input = getInput(fixture, field);
-			input.focus();
-			input.click();
-			fixture.detectChanges();
-			return input;
+	describe('opening a filter pill with a single date selected', () => {
+		// The pill popover is rendered in the overlay container, outside of the fixture
+		function getPillInput(field: 'start' | 'end'): HTMLInputElement {
+			return document.querySelector(`.mod-${field} > input`) as HTMLInputElement;
 		}
 
-		it('should move the focus to the end field when only the start date is selected', () => {
+		it('should initially focus the end field when only the start date is selected', () => {
+			// Arrange
+			createFilterPillHost({ start: new Date(2025, 5, 18), scope: 'day' });
+
+			// Assert
+			expect(getPillInput('end').hasAttribute('cdkFocusInitial')).toBe(true);
+			expect(getPillInput('start').hasAttribute('cdkFocusInitial')).toBe(false);
+		});
+
+		it('should initially focus the start field when only the end date is selected', () => {
+			// Arrange
+			createFilterPillHost({ end: new Date(2025, 5, 20), scope: 'day' });
+
+			// Assert
+			expect(getPillInput('start').hasAttribute('cdkFocusInitial')).toBe(true);
+			expect(getPillInput('end').hasAttribute('cdkFocusInitial')).toBe(false);
+		});
+
+		it('should not force the initial focus when the range is complete', () => {
+			// Arrange
+			createFilterPillHost({ start: new Date(2025, 5, 18), end: new Date(2025, 5, 20), scope: 'day' });
+
+			// Assert
+			expect(getPillInput('start').hasAttribute('cdkFocusInitial')).toBe(false);
+			expect(getPillInput('end').hasAttribute('cdkFocusInitial')).toBe(false);
+		});
+	});
+
+	describe('opening the calendar outside of a filter pill', () => {
+		it('should not force the initial focus when a single date is selected', () => {
 			// Arrange
 			const fixture = createFormControlHost(new FormControl<DateRange | null>({ start: new Date(2025, 5, 18), scope: 'day' }));
-			const cmp = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
-
-			// Act
-			openFromInput(fixture, 'start');
 
 			// Assert
-			expect(document.activeElement).toBe(getInput(fixture, 'end'));
-			expect(cmp.editedField()).toBe(1);
-		});
-
-		it('should move the focus to the start field when only the end date is selected', () => {
-			// Arrange
-			const fixture = createFormControlHost(new FormControl<DateRange | null>({ end: new Date(2025, 5, 20), scope: 'day' }));
-			const cmp = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
-
-			// Act
-			openFromInput(fixture, 'end');
-
-			// Assert
-			expect(document.activeElement).toBe(getInput(fixture, 'start'));
-			expect(cmp.editedField()).toBe(0);
-		});
-
-		it('should keep the focus on the clicked field when the range is complete', () => {
-			// Arrange
-			const fixture = createFormControlHost(new FormControl<DateRange | null>({ start: new Date(2025, 5, 18), end: new Date(2025, 5, 20), scope: 'day' }));
-
-			// Act
-			const startInput = openFromInput(fixture, 'start');
-
-			// Assert
-			expect(document.activeElement).toBe(startInput);
-		});
-
-		it('should target the end bound when a filter pill with only a start date is opened', () => {
-			// Arrange
-			const fixture = createFilterPillHost({ start: new Date(2025, 5, 18), scope: 'day' });
-			const cmp = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
-
-			// Act
-			cmp.onFilterPillOpened();
-
-			// Assert
-			expect(cmp.editedField()).toBe(1);
+			expect(getInput(fixture, 'end').hasAttribute('cdkFocusInitial')).toBe(false);
 		});
 	});
 

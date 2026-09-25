@@ -197,8 +197,7 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 	},
 };
 
-// Starts from an empty range: with a single date selected, opening the calendar focuses the empty field
-export const BasicTEST = createTestStory({ ...Basic, args: { ...Basic.args, selected: { start: null, end: null } } }, async ({ canvasElement, step }) => {
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
 	const canvas = within(canvasElement);
 	await waitForAngular();
 	const startInput = canvas.getByLabelText('Start');
@@ -264,22 +263,22 @@ export const StartDateOnlyTEST = createTestStory(withSelection('Start date only'
 	const endInput = canvas.getByLabelText('End');
 
 	await step('Keyboard: ArrowDown opens the calendar and Escape closes it', async () => {
-		startInput.focus();
+		endInput.focus();
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
 		await expect(screen.getByRole('dialog')).toBeVisible();
-		// Escape is handled by the text fields, ArrowDown moved the focus into the calendar
-		startInput.focus();
+		// Escape pressed on a calendar cell doesn't reach the popover: the cell's tooltip trigger stops its
+		// propagation even when no tooltip is displayed, so press it from the text field
+		endInput.focus();
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
 		await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 	});
 
-	await step('Opening the calendar moves the focus to the empty end field', async () => {
-		await userEvent.click(startInput);
+	await step('Clicking the empty end field opens the calendar', async () => {
+		await userEvent.click(endInput);
 		await waitForAngular();
 		await expect(screen.getByRole('dialog')).toBeVisible();
-		await expect(endInput).toHaveFocus();
 	});
 
 	await step('The start date and every following date are highlighted', async () => {
@@ -298,14 +297,31 @@ export const StartDateOnlyTEST = createTestStory(withSelection('Start date only'
 	});
 });
 
+export const StartDateOnlyEditStartTEST = createTestStory(withSelection('Start date only edit start', { start: new Date(2025, 5, 10), end: null }), async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const startInput = canvas.getByLabelText('Start');
+	const endInput = canvas.getByLabelText('End');
+
+	await step('Picking a date from the filled start field replaces the start date', async () => {
+		await userEvent.click(startInput);
+		await waitForAngular();
+		await expect(startInput).toHaveFocus();
+		await pickDayInOpenCalendar(5);
+		await expect(screen.getByRole('dialog')).toBeVisible();
+		await expect(startInput).toHaveValue('05/06/2025');
+		await expect(endInput).toHaveValue('');
+	});
+});
+
 export const StartDateOnlyKeyboardTEST = createTestStory(withSelection('Start date only keyboard', { start: new Date(2025, 5, 10), end: null }), async ({ canvasElement, step }) => {
 	await waitForAngular();
 	const canvas = within(canvasElement);
 	const startInput = canvas.getByLabelText('Start');
 	const endInput = canvas.getByLabelText('End');
 
-	await step('Keyboard: picking a date from the start field completes the range', async () => {
-		startInput.focus();
+	await step('Keyboard: picking a date from the end field completes the range', async () => {
+		endInput.focus();
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
 		// The calendar focuses the selected start date, move to the 20th and pick it
@@ -325,11 +341,10 @@ export const EndDateOnlyTEST = createTestStory(withSelection('End date only', { 
 	const startInput = canvas.getByLabelText('Start');
 	const endInput = canvas.getByLabelText('End');
 
-	await step('Opening the calendar moves the focus to the empty start field', async () => {
-		await userEvent.click(endInput);
+	await step('Clicking the empty start field opens the calendar', async () => {
+		await userEvent.click(startInput);
 		await waitForAngular();
 		await expect(screen.getByRole('dialog')).toBeVisible();
-		await expect(startInput).toHaveFocus();
 	});
 
 	await step('The end date and every previous date are highlighted', async () => {
@@ -355,7 +370,7 @@ export const EndDateOnlyInvertedTEST = createTestStory(withSelection('End date o
 	const endInput = canvas.getByLabelText('End');
 
 	await step('Picking a start date after the end date inverts the bounds', async () => {
-		await userEvent.click(endInput);
+		await userEvent.click(startInput);
 		await waitForAngular();
 		await pickDayInOpenCalendar(25);
 		await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
