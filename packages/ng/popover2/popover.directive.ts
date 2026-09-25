@@ -17,7 +17,6 @@ import {
 	signal,
 	TemplateRef,
 	Type,
-	ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { getPushPanelViewportMargin, intlInputOptions, isNotNil, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
@@ -87,7 +86,7 @@ export class PopoverDirective implements OnDestroy {
 
 	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	#vcr = inject(ViewContainerRef);
+	#injector = inject(Injector);
 
 	#destroyRef = inject(DestroyRef);
 
@@ -313,8 +312,10 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef = this.#overlayRef.attach(
 				new ComponentPortal(
 					PopoverContentComponent,
-					this.#vcr,
+					// No ViewContainerRef: the host must be created in the HTML namespace, even when the trigger is an SVG element
+					null,
 					Injector.create({
+						parent: this.#injector,
 						providers: [{ provide: POPOVER_CONFIG, useValue: config }, { provide: PopoverContentComponent, useValue: this.#componentRef }, ...this.additionalProviders],
 					}),
 				),
