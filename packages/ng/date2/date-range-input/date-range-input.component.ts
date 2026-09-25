@@ -311,6 +311,23 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 	}
 
+	popoverOpened(): void {
+		this.panelOpened.emit();
+		// Once the opening click or keydown is handled, move the focus to the empty field so the
+		// next picked date completes the range instead of replacing the selected one
+		afterNextRender(
+			() => {
+				const missingBoundField = this.#getMissingBoundField();
+				if (missingBoundField === 1) {
+					this.endTextInputRef()?.nativeElement.focus();
+				} else if (missingBoundField === 0) {
+					this.startTextInputRef()?.nativeElement.focus();
+				}
+			},
+			{ injector: this.#injector },
+		);
+	}
+
 	popoverClosed(): void {
 		this.panelClosed.emit();
 		if (this.editedField() === 1) {
@@ -513,6 +530,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		this.#defaultFilterPillClearable.set(true);
 	}
 
+	onFilterPillOpened(): void {
+		// Filter pill has no text field to focus, so only target the empty bound for the next picked date
+		const missingBoundField = this.#getMissingBoundField();
+		if (missingBoundField !== null) {
+			this.editedField.set(missingBoundField);
+		}
+	}
+
 	clearFilterPillValue(): void {
 		this.clear();
 	}
@@ -561,5 +586,19 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			this.selectedRange.set(currentRange);
 		}
 		this.#onChange?.(this.selectedRange());
+	}
+
+	/**
+	 * The field of the missing bound when a single date is selected, null otherwise
+	 */
+	#getMissingBoundField(): 0 | 1 | null {
+		const range = this.selectedRange();
+		if (range?.start && !range.end) {
+			return 1;
+		}
+		if (range?.end && !range.start) {
+			return 0;
+		}
+		return null;
 	}
 }

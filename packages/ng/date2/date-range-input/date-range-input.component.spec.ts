@@ -480,6 +480,65 @@ describe('DateRangeInputComponent', () => {
 		});
 	});
 
+	describe('opening with a single date selected', () => {
+		function openFromInput(fixture: ComponentFixture<unknown>, field: 'start' | 'end'): HTMLInputElement {
+			const input = getInput(fixture, field);
+			input.focus();
+			input.click();
+			fixture.detectChanges();
+			return input;
+		}
+
+		it('should move the focus to the end field when only the start date is selected', () => {
+			// Arrange
+			const fixture = createFormControlHost(new FormControl<DateRange | null>({ start: new Date(2025, 5, 18), scope: 'day' }));
+			const cmp = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
+
+			// Act
+			openFromInput(fixture, 'start');
+
+			// Assert
+			expect(document.activeElement).toBe(getInput(fixture, 'end'));
+			expect(cmp.editedField()).toBe(1);
+		});
+
+		it('should move the focus to the start field when only the end date is selected', () => {
+			// Arrange
+			const fixture = createFormControlHost(new FormControl<DateRange | null>({ end: new Date(2025, 5, 20), scope: 'day' }));
+			const cmp = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
+
+			// Act
+			openFromInput(fixture, 'end');
+
+			// Assert
+			expect(document.activeElement).toBe(getInput(fixture, 'start'));
+			expect(cmp.editedField()).toBe(0);
+		});
+
+		it('should keep the focus on the clicked field when the range is complete', () => {
+			// Arrange
+			const fixture = createFormControlHost(new FormControl<DateRange | null>({ start: new Date(2025, 5, 18), end: new Date(2025, 5, 20), scope: 'day' }));
+
+			// Act
+			const startInput = openFromInput(fixture, 'start');
+
+			// Assert
+			expect(document.activeElement).toBe(startInput);
+		});
+
+		it('should target the end bound when a filter pill with only a start date is opened', () => {
+			// Arrange
+			const fixture = createFilterPillHost({ start: new Date(2025, 5, 18), scope: 'day' });
+			const cmp = fixture.debugElement.query(By.directive(DateRangeInputComponent)).componentInstance as DateRangeInputComponent;
+
+			// Act
+			cmp.onFilterPillOpened();
+
+			// Assert
+			expect(cmp.editedField()).toBe(1);
+		});
+	});
+
 	describe('filter pill display', () => {
 		function getPillValue(fixture: ComponentFixture<unknown>): string {
 			return (fixture.nativeElement as HTMLElement).querySelector('.filterPill-value')!.textContent!.replace(/\s+/g, ' ').trim();
