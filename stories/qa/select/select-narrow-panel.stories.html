@@ -1,0 +1,879 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Simple select</div>
+			</td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Multi select</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-default-simple"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-default-simple" class="dialog-inside-header-container-title">Vegetable</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox>
+										<lu-listbox-option><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-default-multi"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-default-multi" class="dialog-inside-header-container-title">Vegetables</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox multiple>
+										<lu-listbox-option><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Required</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-required-simple"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-required-simple" class="dialog-inside-header-container-title">
+											Vegetable<sup class="formLabel-required" aria-hidden="true">*</sup>
+										</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox>
+										<lu-listbox-option><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-required-multi"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-required-multi" class="dialog-inside-header-container-title">
+											Vegetables<sup class="formLabel-required" aria-hidden="true">*</sup>
+										</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox multiple>
+										<lu-listbox-option><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Filtering</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-filtering-simple"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-filtering-simple" class="dialog-inside-header-container-title">Vegetable</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													value="Ca"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox>
+										<lu-listbox-option><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-filtering-multi"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-filtering-multi" class="dialog-inside-header-container-title">Vegetables</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													value="Ca"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox multiple>
+										<lu-listbox-option><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>With value</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-value-simple"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-value-simple" class="dialog-inside-header-container-title">Vegetable</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox>
+										<lu-listbox-option checked><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-value-multi"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-value-multi" class="dialog-inside-header-container-title">Vegetables</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox multiple>
+										<lu-listbox-option checked><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option checked><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Hovered</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-hovered-simple"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-hovered-simple" class="dialog-inside-header-container-title">Vegetable</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox>
+										<lu-listbox-option><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option hovered><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-hovered-multi"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-hovered-multi" class="dialog-inside-header-container-title">Vegetables</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox multiple>
+										<lu-listbox-option><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option hovered><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Hovered (selected)</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-hovered-selected-simple"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-hovered-selected-simple" class="dialog-inside-header-container-title">Vegetable</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox>
+										<lu-listbox-option checked hovered><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-hovered-selected-multi"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-hovered-selected-multi" class="dialog-inside-header-container-title">Vegetables</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox multiple>
+										<lu-listbox-option checked hovered><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+										<lu-listbox-option checked><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+										<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Groups</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-groups-simple"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-groups-simple" class="dialog-inside-header-container-title">Vegetable</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox>
+										<lu-listbox-option group>
+											Root vegetables
+											<div optgroup class="listboxOptionWrapper">
+												<lu-listbox-option checked><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+											</div>
+										</lu-listbox-option>
+										<lu-listbox-option group>
+											Other vegetables
+											<div optgroup class="listboxOptionWrapper">
+												<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+											</div>
+										</lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div style="block-size: 20rem; position: relative; overflow: hidden">
+					<div class="dialog_backdrop"></div>
+					<div
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="panelTitle-groups-multi"
+						class="dialog mod-maxContent mod-drawer mod-fromBottom mod-sheet mod-select"
+					>
+						<div class="selectPanel" style="display: contents">
+							<div class="dialog-inside">
+								<div class="dialog-inside-header">
+									<button type="button" class="dialog-inside-header-button" luButton>
+										<lu-icon icon="signClose" alt="Close" />
+									</button>
+									<div class="dialog-inside-header-container">
+										<h1 id="panelTitle-groups-multi" class="dialog-inside-header-container-title">Vegetables</h1>
+									</div>
+									<div class="dialog-inside-header-content">
+										<div class="textField">
+											<div class="textField-input">
+												<input
+													type="text"
+													role="combobox"
+													aria-haspopup="listbox"
+													class="textField-input-value"
+													aria-expanded="true"
+													placeholder="Select…"
+												/>
+												<div class="textField-input-affix">
+													<lu-icon icon="searchMagnifyingGlass" class="textField-input-affix-icon" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dialog-inside-content">
+									<lu-listbox multiple>
+										<lu-listbox-option group>
+											Root vegetables
+											<div optgroup class="listboxOptionWrapper">
+												<lu-listbox-option checked><div class="listboxOption-content-value">Carrot</div></lu-listbox-option>
+												<lu-listbox-option checked><div class="listboxOption-content-value">Potato</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Turnip</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Radish</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Beet</div></lu-listbox-option>
+											</div>
+										</lu-listbox-option>
+										<lu-listbox-option group>
+											Other vegetables
+											<div optgroup class="listboxOptionWrapper">
+												<lu-listbox-option><div class="listboxOption-content-value">Leek</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Onion</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Cabbage</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Broccoli</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Cauliflower</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Spinach</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Celery</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Pumpkin</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Zucchini</div></lu-listbox-option>
+												<lu-listbox-option><div class="listboxOption-content-value">Cucumber</div></lu-listbox-option>
+											</div>
+										</lu-listbox-option>
+									</lu-listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
