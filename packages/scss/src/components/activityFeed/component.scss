@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/icons/src/icon/exports' as icons;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	list-style-type: '';
@@ -36,6 +37,8 @@
 		}
 
 		.activityFeed-step-state {
+			@include icons.S;
+
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -47,7 +50,7 @@
 
 			&::before {
 				color: var(--palettes-700, var(--palettes-neutral-700));
-				font-size: calc(1.5 * var(--pr-t-font-body-M-fontSize));
+				font-size: var(--icon-size);
 				block-size: var(--pr-t-font-body-M-lineHeight);
 			}
 		}
