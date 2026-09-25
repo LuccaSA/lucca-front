@@ -464,6 +464,37 @@ describe('DateRangeInputComponent', () => {
 			expect(formControl.value).toEqual({ start: new Date(2025, 5, 18), end: new Date(2025, 5, 20), scope: 'day' });
 		});
 
+		it('should invert the bounds when the start date picked on an end-only range is after the end date', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null);
+			const fixture = createFormControlHost(formControl);
+			const cmp = getComponent(fixture);
+			cmp.editedField.set(1);
+			cmp.dateClicked(new Date(2025, 5, 20), noopPopover);
+
+			// Act
+			cmp.dateClicked(new Date(2025, 5, 25), noopPopover);
+
+			// Assert
+			expect(formControl.value).toEqual({ start: new Date(2025, 5, 20), end: new Date(2025, 5, 25), scope: 'day' });
+		});
+
+		it('should close the calendar once the start date is picked on an end-only range', () => {
+			// Arrange
+			const fixture = createFormControlHost(new FormControl<DateRange | null>(null));
+			const cmp = getComponent(fixture);
+			const popover = { close: vi.fn() } as unknown as PopoverDirective;
+			cmp.editedField.set(1);
+			cmp.dateClicked(new Date(2025, 5, 20), popover);
+
+			// Act
+			cmp.dateClicked(new Date(2025, 5, 25), popover);
+
+			// Assert
+			expect(popover.close).toHaveBeenCalledTimes(1);
+			expect(cmp.editedField()).toBe(-1);
+		});
+
 		it('should not swap bounds on blur when the range has a single one', () => {
 			// Arrange
 			const formControl = new FormControl<DateRange | null>(null);

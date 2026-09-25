@@ -405,6 +405,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		// The clicked date always fills the field being edited, so picking a date while the end
 		// field is focused builds a range without start date
 		const isEditingEnd = this.editedField() === 1;
+		// The user picked the end date first and is now picking the start date
+		const isCompletingFromEnd = !isEditingEnd && !!selectedRange?.end && !selectedRange.start;
 		let newRange: DateRange;
 
 		if (isEditingEnd) {
@@ -413,6 +415,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				selectedRange?.start && isBefore(date, selectedRange.start)
 					? { ...selectedRange, scope: this.mode(), start: date, end: selectedRange.start }
 					: { ...selectedRange, scope: this.mode(), end: date };
+		} else if (isCompletingFromEnd && selectedRange?.end) {
+			// If start is after end, invert them, the same way as when the start date is picked first
+			newRange = isAfter(date, selectedRange.end) ? { ...selectedRange, scope: this.mode(), start: selectedRange.end, end: date } : { ...selectedRange, scope: this.mode(), start: date };
 		} else {
 			// If start is after end, start a new range from it
 			newRange = selectedRange?.end && isAfter(date, selectedRange.end) ? { scope: this.mode(), start: date } : { ...selectedRange, scope: this.mode(), start: date };
@@ -420,11 +425,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 		this.selectedRange.set(newRange);
 
-		if (isEditingEnd && newRange.start) {
+		if ((isEditingEnd && newRange.start) || isCompletingFromEnd) {
 			// Both bounds are set, the user is done picking
 			popoverRef?.close();
 			this.filterPillPopoverCloseFn?.();
-			this.endTextInputRef()?.nativeElement.focus();
+			(isEditingEnd ? this.endTextInputRef() : this.startTextInputRef())?.nativeElement.focus();
 			this.editedField.set(-1);
 			this.dateHovered.set(null);
 		} else {
