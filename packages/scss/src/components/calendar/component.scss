@@ -28,11 +28,7 @@
 			}
 
 			&.mod-day {
-				max-block-size: 19.25rem;
-
-				&:has(+ .calendarWrapper .calendar-todayLink) {
-					max-block-size: 21.75rem;
-				}
+				max-block-size: 20rem;
 			}
 
 			&.mod-month,
