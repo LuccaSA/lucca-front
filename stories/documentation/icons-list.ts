@@ -170,6 +170,7 @@ export const IconsList = [
 	{ icon: 'chartVerticalBar', deprecated: false },
 	{ icon: 'analytics', deprecated: true },
 	{ icon: 'charts', deprecated: true },
+	{ icon: 'circleHalf', deprecated: false },
 	{ icon: 'clipboard', deprecated: false },
 	{ icon: 'paste', deprecated: true },
 	{ icon: 'completion', deprecated: false },

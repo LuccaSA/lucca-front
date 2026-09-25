@@ -170,6 +170,7 @@ export type LuccaIcon =
 	| 'chartVerticalBar'
 	| 'analytics'
 	| 'charts'
+	| 'circleHalf'
 	| 'clipboard'
 	| 'paste'
 	| 'completion'
