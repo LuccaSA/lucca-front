@@ -3,25 +3,19 @@
 @mixin XS {
 	--components-bubbleIcon-size: var(--pr-t-spacings-300);
 
-	.lucca-icon {
-		@include icon.XS;
-	}
+	@include icon.XS;
 }
 
 @mixin S {
 	--components-bubbleIcon-size: var(--pr-t-spacings-400);
 
-	.lucca-icon {
-		@include icon.S;
-	}
+	@include icon.S;
 }
 
 @mixin L {
 	--components-bubbleIcon-size: var(--pr-t-spacings-600);
 
-	.lucca-icon {
-		@include icon.L;
-	}
+	@include icon.L;
 }
 
 @mixin left {

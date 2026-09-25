@@ -8,6 +8,15 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 	templateUrl: './icon.stories.html',
 	imports: [IconComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	styles: [
+		`
+			.demo-QAtable-list-row {
+				display: flex;
+				align-items: center;
+				gap: var(--pr-t-spacings-100);
+			}
+		`,
+	],
 })
 class IconStory {
 	icons = IconsList;
