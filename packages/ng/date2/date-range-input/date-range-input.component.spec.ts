@@ -4,6 +4,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { addMonths, startOfDay } from 'date-fns';
 import { DateRange } from '../calendar2/date-range';
+import { getLocalizedDateFormat } from '../date-format';
 import { DateRangeInputComponent } from './date-range-input.component';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
@@ -21,7 +22,7 @@ class NgModelHostComponent {
 }
 
 @Component({
-	template: `<lu-date-range-input [formControl]="formControl" [min]="min" [max]="max" />`,
+	template: `<lu-date-range-input [formControl]="formControl" [min]="min" [max]="max" [placeholder]="placeholder" />`,
 	imports: [FormsModule, ReactiveFormsModule, DateRangeInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -29,6 +30,7 @@ class FormControlHostComponent {
 	formControl = new FormControl<DateRange | null>(null);
 	min: Date | null = null;
 	max: Date | null = null;
+	placeholder: string | undefined = undefined;
 }
 
 describe('DateRangeInputComponent', () => {
@@ -38,7 +40,12 @@ describe('DateRangeInputComponent', () => {
 		fixture.detectChanges();
 	}
 
-	function createFormControlHost(formControl: FormControl<DateRange | null>, min: Date | null = null, max: Date | null = null): ComponentFixture<FormControlHostComponent> {
+	function createFormControlHost(
+		formControl: FormControl<DateRange | null>,
+		min: Date | null = null,
+		max: Date | null = null,
+		placeholder: string | undefined = undefined,
+	): ComponentFixture<FormControlHostComponent> {
 		TestBed.configureTestingModule({
 			imports: [FormControlHostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -48,6 +55,7 @@ describe('DateRangeInputComponent', () => {
 		fixture.componentInstance.formControl = formControl;
 		fixture.componentInstance.min = min;
 		fixture.componentInstance.max = max;
+		fixture.componentInstance.placeholder = placeholder;
 		fixture.detectChanges();
 
 		return fixture;
@@ -333,6 +341,27 @@ describe('DateRangeInputComponent', () => {
 			// Assert
 			expect(getInput(fixture, 'start').disabled).toBe(false);
 			expect(getInput(fixture, 'end').disabled).toBe(false);
+		});
+	});
+
+	describe('placeholder', () => {
+		it('should set the custom placeholder on both native inputs', () => {
+			// Arrange
+			const fixture = createFormControlHost(new FormControl<DateRange | null>(null), null, null, 'jj-mm-aaaa');
+
+			// Assert
+			expect(getInput(fixture, 'start').placeholder).toBe('jj-mm-aaaa');
+			expect(getInput(fixture, 'end').placeholder).toBe('jj-mm-aaaa');
+		});
+
+		it('should fall back to the localized date format on both native inputs when no placeholder is set', () => {
+			// Arrange
+			const fixture = createFormControlHost(new FormControl<DateRange | null>(null));
+			const expectedPlaceholder = getLocalizedDateFormat('fr-FR', 'day');
+
+			// Assert
+			expect(getInput(fixture, 'start').placeholder).toBe(expectedPlaceholder);
+			expect(getInput(fixture, 'end').placeholder).toBe(expectedPlaceholder);
 		});
 	});
 
