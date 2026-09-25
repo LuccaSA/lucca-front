@@ -134,6 +134,15 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	// reusable hidden clone, one per directive, used to measure the unconstrained width
 	#clone?: HTMLDivElement;
 
+	// Each measurement phase hands over to the next one through these signals rather than through
+	// the value `afterRenderEffect` pipes between phases. A phase only receives that value when the
+	// phases before it ran in the same pass; a directive created while the after-render hooks are
+	// running starts mid-pipeline and gets Angular's `registerCleanupFn` as its first argument
+	// instead. Calling it then registers `undefined` as a cleanup function, which throws
+	// `fn is not a function` when the view is destroyed, far away from the cause.
+	readonly #measurementRequest = signal<{ host: HTMLElement; cloneStyles: Record<string, string> } | null>(null);
+	readonly #preparedMeasurement = signal<{ host: HTMLElement; clone: HTMLDivElement } | null>(null);
+
 	readonly #action = signal<'open' | 'close' | null>(null);
 	readonly #realAction = linkedSignal<'open' | 'close' | null, 'open' | 'close' | null>({
 		source: this.#action,
@@ -207,44 +216,27 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		// This keeps the whole batch to a single forced reflow instead of one reflow per element.
 		afterRenderEffect({
 			earlyRead: () => {
-				// reading the trigger registers the dependency; 0 means "not measured yet"
-				const measured = this.#measureTrigger() > 0;
-				const shouldMeasure = measured && !this.tooltipDisabled() && this.tooltipWhenEllipsis();
-				if (!shouldMeasure) {
-					return { measure: false } as const;
-				}
-				const host = this.#host.nativeElement;
-				// Every computed value the measurement needs is copied out here, in the read-only phase.
-				// A `CSSStyleDeclaration` is live: reading one property from it in the write phase, after
-				// another tooltip has already mutated the DOM, forces a full style recalculation — once
-				// per tooltip on the page.
-				const { textOverflow, display, padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } = getComputedStyle(host);
-				// No need to run a test if the element is not truncated
-				// or if its `display` property is set to `inline`
-				// (especially for Safari, which still calculates a width, unlike other browsers)
-				if (textOverflow !== 'ellipsis' || display === 'inline') {
-					return { measure: false } as const;
-				}
-				return { measure: true, host, cloneStyles: { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } } as const;
+				this.#measurementRequest.set(this.#readMeasurementRequest());
 			},
-			write: (earlyReadResult) => {
-				const snapshot = earlyReadResult();
-				if (!snapshot.measure) {
-					return { measure: false } as const;
+			write: () => {
+				const request = this.#measurementRequest();
+				if (!request) {
+					this.#preparedMeasurement.set(null);
+					return;
 				}
 				const clone = (this.#clone ??= this.#createClone());
-				Object.assign(clone.style, snapshot.cloneStyles);
-				const html = snapshot.host.innerHTML;
+				Object.assign(clone.style, request.cloneStyles);
+				const html = request.host.innerHTML;
 				// Writing the same markup back would invalidate layout for nothing, and every tooltip
 				// measured after this one would then pay for a new layout on its first geometry read.
 				if (clone.innerHTML !== html) {
 					clone.innerHTML = html;
 				}
-				return { measure: true, host: snapshot.host, clone } as const;
+				this.#preparedMeasurement.set({ host: request.host, clone });
 			},
-			read: (writeResult) => {
-				const measurement = writeResult();
-				if (!measurement.measure) {
+			read: () => {
+				const measurement = this.#preparedMeasurement();
+				if (!measurement) {
 					this.#hasEllipsis.set(false);
 					return;
 				}
@@ -285,6 +277,27 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			resizeObserver.disconnect();
 			mutationObserver.disconnect();
 		});
+	}
+
+	// Reads everything the measurement needs from the host, in the read-only phase.
+	#readMeasurementRequest(): { host: HTMLElement; cloneStyles: Record<string, string> } | null {
+		// reading the trigger registers the dependency; 0 means "not measured yet"
+		const measured = this.#measureTrigger() > 0;
+		if (!measured || this.tooltipDisabled() || !this.tooltipWhenEllipsis()) {
+			return null;
+		}
+		const host = this.#host.nativeElement;
+		// A `CSSStyleDeclaration` is live: reading one property from it in the write phase, after
+		// another tooltip has already mutated the DOM, forces a full style recalculation — once per
+		// tooltip on the page. Every value is therefore copied out here.
+		const { textOverflow, display, padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } = getComputedStyle(host);
+		// No need to run a test if the element is not truncated
+		// or if its `display` property is set to `inline`
+		// (especially for Safari, which still calculates a width, unlike other browsers)
+		if (textOverflow !== 'ellipsis' || display === 'inline') {
+			return null;
+		}
+		return { host, cloneStyles: { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } };
 	}
 
 	#createClone(): HTMLDivElement {
