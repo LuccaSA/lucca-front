@@ -696,14 +696,7 @@
 								</div>
 								<div class="calendarWrapper-content" tabindex="-1">
 									<lu-calendar2 [date]="leftDate" mode="day" [disableModeChange]="true" [showOverflow]="true" [enableOverflow]="true" />
-									<lu-calendar2
-										[date]="rightDate"
-										mode="day"
-										[disableModeChange]="true"
-										[showOverflow]="true"
-										[enableOverflow]="true"
-										[hasTodayButton]="true"
-									/>
+									<lu-calendar2 [date]="rightDate" mode="day" [disableModeChange]="true" [showOverflow]="true" [enableOverflow]="true" />
 								</div>
 							</div>
 							<div
@@ -719,6 +712,8 @@
 						</div>
 					</div>
 				</div>
+				<div class="calendar-divider divider" style="visibility: hidden"></div>
+				<button type="button" class="calendar-todayLink link" style="visibility: hidden">Today</button>
 			</td>
 			<td>
 				<div class="popover" style="inline-size: fit-content">
@@ -758,8 +753,94 @@
 										[showOverflow]="true"
 										[enableOverflow]="true"
 										[ranges]="[fullRange]"
-										[hasTodayButton]="true"
 									/>
+								</div>
+							</div>
+							<div
+								style="
+									position: absolute;
+									inset-block: -0.5rem;
+									inset-inline-end: -0.5rem;
+									inline-size: 8rem;
+									z-index: 2;
+									background: linear-gradient(to right, transparent, var(--commons-background-base) 50%);
+								"
+							></div>
+						</div>
+					</div>
+				</div>
+				<div class="calendar-divider divider" style="visibility: hidden"></div>
+				<button type="button" class="calendar-todayLink link" style="visibility: hidden">Today</button>
+			</td>
+		</tr>
+		<tr>
+			<td>With shortcuts (month mode)</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarShortcutsOptional" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<ul class="calendarShortcuts mod-month">
+								@for (shortcut of monthShortcuts; track shortcut.label) {
+									<li class="calendarShortcutsButton-item">
+										<button type="button" class="calendarShortcutsButton-item-button button">{{ shortcut.label }}</button>
+									</li>
+								}
+							</ul>
+							<div class="calendarWrapper" style="inline-size: 10rem; overflow: hidden; position: relative">
+								<div class="calendarWrapper-navigation pr-u-left0">
+									<button class="calendarWrapper-navigation-button button" type="button">
+										<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+									</button>
+								</div>
+								<div class="calendarWrapper-navigation pr-u-right0">
+									<button class="calendarWrapper-navigation-button button" type="button">
+										<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+									</button>
+								</div>
+								<div class="calendarWrapper-content" tabindex="-1">
+									<lu-calendar2 [date]="leftDateMonth" mode="month" [disableModeChange]="true" />
+									<lu-calendar2 [date]="rightDateMonth" mode="month" [disableModeChange]="true" />
+								</div>
+							</div>
+							<div
+								style="
+									position: absolute;
+									inset-block: -0.5rem;
+									inset-inline-end: -0.5rem;
+									inline-size: 8rem;
+									z-index: 2;
+									background: linear-gradient(to right, transparent, var(--commons-background-base) 50%);
+								"
+							></div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="calendarShortcutsOptional" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<ul class="calendarShortcuts mod-month">
+								@for (shortcut of monthShortcuts; track shortcut.label) {
+									<li class="calendarShortcutsButton-item">
+										<button type="button" class="calendarShortcutsButton-item-button button">{{ shortcut.label }}</button>
+									</li>
+								}
+							</ul>
+							<div class="calendarWrapper" style="inline-size: 10rem; overflow: hidden; position: relative">
+								<div class="calendarWrapper-navigation pr-u-left0">
+									<button class="calendarWrapper-navigation-button button" type="button">
+										<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+									</button>
+								</div>
+								<div class="calendarWrapper-navigation pr-u-right0">
+									<button class="calendarWrapper-navigation-button button" type="button">
+										<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+									</button>
+								</div>
+								<div class="calendarWrapper-content" tabindex="-1">
+									<lu-calendar2 [date]="leftDateMonth" mode="month" [disableModeChange]="true" [ranges]="[monthRange]" />
+									<lu-calendar2 [date]="rightDateMonth" mode="month" [disableModeChange]="true" [ranges]="[monthRange]" />
 								</div>
 							</div>
 							<div

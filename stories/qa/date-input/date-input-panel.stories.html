@@ -533,6 +533,71 @@
 				</div>
 			</td>
 		</tr>
+		<tr>
+			<td>With shortcuts (month mode)</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content; visibility: hidden">
+					<div class="popover-content">
+						<div class="calendarShortcutsOptional" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<ul class="calendarShortcuts mod-month">
+								@for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9]; track i) {
+									<li class="calendarShortcutsButton-item">
+										<button type="button" class="calendarShortcutsButton-item-button button">Shortcut</button>
+									</li>
+								}
+							</ul>
+							<div class="calendarWrapper" style="inline-size: 10rem; overflow: hidden; position: relative">
+								<div class="calendarWrapper-navigation pr-u-left0">
+									<button class="calendarWrapper-navigation-button button" type="button">
+										<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+									</button>
+								</div>
+								<div class="calendarWrapper-navigation pr-u-right0">
+									<button class="calendarWrapper-navigation-button button" type="button">
+										<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+									</button>
+								</div>
+								<div class="calendarWrapper-content" tabindex="-1">
+									<lu-calendar2 [date]="referenceDate" mode="month" [disableModeChange]="true" />
+									<lu-calendar2 [date]="referenceDate" mode="month" [disableModeChange]="true" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content; visibility: hidden">
+					<div class="popover-content">
+						<div class="calendarShortcutsOptional" role="dialog" aria-modal="true" aria-label="Pick a date in calendar">
+							<ul class="calendarShortcuts mod-month">
+								@for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9]; track i) {
+									<li class="calendarShortcutsButton-item">
+										<button type="button" class="calendarShortcutsButton-item-button button">Shortcut</button>
+									</li>
+								}
+							</ul>
+							<div class="calendarWrapper" style="inline-size: 10rem; overflow: hidden; position: relative">
+								<div class="calendarWrapper-navigation pr-u-left0">
+									<button class="calendarWrapper-navigation-button button" type="button">
+										<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">Previous</span>
+									</button>
+								</div>
+								<div class="calendarWrapper-navigation pr-u-right0">
+									<button class="calendarWrapper-navigation-button button" type="button">
+										<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask">Next</span>
+									</button>
+								</div>
+								<div class="calendarWrapper-content" tabindex="-1">
+									<lu-calendar2 [date]="referenceDate" mode="month" [disableModeChange]="true" />
+									<lu-calendar2 [date]="referenceDate" mode="month" [disableModeChange]="true" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
