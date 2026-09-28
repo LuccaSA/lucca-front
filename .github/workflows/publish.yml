@@ -54,10 +54,25 @@ jobs:
           if [[ "$VERSION" =~ -rc(\.|$) ]]; then
             echo "NPM_PUBLISH_COMMAND=npm publish --access public --provenance --tag rc" >> "$GITHUB_ENV"
             echo "Publish mode: direct (RC tag detected: $TAG)"
+            exit 0
+          fi
+
+          # npm refuses to implicitly move the "latest" dist-tag backwards, so a
+          # backport released after a newer major must carry an explicit tag.
+          MAJOR="${VERSION%%.*}"
+          LATEST="$(npm view @lucca-front/ng version 2>/dev/null || true)"
+
+          if [ -n "$LATEST" ] && [ "$VERSION" != "$LATEST" ] &&
+             [ "$(printf '%s\n%s\n' "$VERSION" "$LATEST" | sort -V | head -n 1)" = "$VERSION" ]; then
+            DIST_TAG="v${MAJOR}-lts"
+            echo "Publish mode: staged (tag: $TAG, backport behind latest $LATEST)"
           else
-            echo "NPM_PUBLISH_COMMAND=npm stage publish --access public --provenance" >> "$GITHUB_ENV"
+            DIST_TAG="latest"
             echo "Publish mode: staged (tag: $TAG)"
           fi
+
+          echo "Resolved npm dist-tag: $DIST_TAG"
+          echo "NPM_PUBLISH_COMMAND=npm stage publish --access public --provenance --tag $DIST_TAG" >> "$GITHUB_ENV"
 
       - run: $NPM_PUBLISH_COMMAND
         working-directory: dist/icons
