@@ -10,6 +10,7 @@ export type LuccaIcon =
 	| 'mosaic'
 	| 'tiles'
 	| 'appWidget'
+	| 'arrowBackspace'
 	| 'arrowBackward'
 	| 'backward'
 	| 'arrowBottom'
@@ -169,6 +170,7 @@ export type LuccaIcon =
 	| 'chartVerticalBar'
 	| 'analytics'
 	| 'charts'
+	| 'circleHalf'
 	| 'clipboard'
 	| 'paste'
 	| 'completion'
@@ -379,6 +381,7 @@ export type LuccaIcon =
 	| 'moneyPaymentCards'
 	| 'moneyPiggyBank'
 	| 'piggyBank'
+	| 'moneyShoppingBag'
 	| 'moneyWallet'
 	| 'wallet'
 	| 'officeBriefcase'
@@ -452,6 +455,7 @@ export type LuccaIcon =
 	| 'higher'
 	| 'priorityHighest'
 	| 'highest'
+	| 'priorityLevels'
 	| 'priorityLow'
 	| 'low'
 	| 'priorityLower'
@@ -590,4 +594,5 @@ export type LuccaIcon =
 	| 'windowAside'
 	| 'windowAsideLarge'
 	| 'windowCornerBottom'
-	| 'windowCornerTop';
+	| 'windowCornerTop'
+	| 'windowSplit';
