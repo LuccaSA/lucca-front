@@ -3,9 +3,12 @@ import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/cor
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { vi } from 'vitest';
+import { LuMultiSelection } from '../select.model';
+import { LuMultiSelectWithSelectAllDirective } from './select-all/with-select-all.directive';
 import { LuMultiSelectInputComponent } from './select-input.component';
 
 type Entity = { id: number; name: string };
@@ -59,6 +62,22 @@ class HostComponent {
 })
 class RequiredHostComponent {
 	selected: Entity[] = [];
+
+	options: Entity[] = options;
+}
+
+@Component({
+	selector: 'lu-multi-select-all-bottom-sheet-host',
+	imports: [FormsModule, LuMultiSelectInputComponent, FormFieldComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Options">
+			<lu-multi-select [ngModel]="selected" [options]="options" withSelectAll withSelectAllDisplayerLabel="options" [totalCount]="options.length" />
+		</lu-form-field>
+	`,
+})
+class SelectAllHostComponent {
+	selected: LuMultiSelection<Entity> = { mode: 'none' };
 
 	options: Entity[] = options;
 }
@@ -248,6 +267,23 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 
 			// Assert
 			expect(trigger(fixture)?.textContent?.trim()).toBeTruthy();
+		});
+
+		// The select-all displayer is a fourth displayer variant, easy to leave behind when the three
+		// others swap their input for a button: it kept rendering an `<input>`, whose placeholder the
+		// directive nulls out below the S breakpoint, so the field showed nothing at all.
+		it('should render the placeholder as text on the select-all displayer too', () => {
+			// Arrange
+			breakpointObserver.belowSmallBreakpoint.next(true);
+
+			// Act
+			const fixture = TestBed.createComponent(SelectAllHostComponent);
+			fixture.detectChanges();
+
+			// Assert
+			const selectAllTrigger = fixture.nativeElement.querySelector('.multipleSelect-displayer-search') as HTMLElement | null;
+			expect(selectAllTrigger?.tagName).toBe('BUTTON');
+			expect(selectAllTrigger?.textContent?.trim()).toBeTruthy();
 		});
 	});
 
