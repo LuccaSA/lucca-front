@@ -93,13 +93,22 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	protected clue = toSignal(this.clue$);
 
+	readonly #scopeParams = computed(() => {
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const operationIds = this.operationIds();
+		const appInstanceId = this.appInstanceId();
+
+		return {
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
+			...(appInstanceId ? { appInstanceId } : {}),
+		};
+	});
+
 	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const orderBy = this.orderBy();
 			const clue = this.clue();
-			const operationIds = this.operationIds();
-			const uniqueOperationIds = this.uniqueOperationIds();
-			const appInstanceId = this.appInstanceId();
 			const searchDelimiter = this.searchDelimiter();
 			const formerEmployees = this.includeFormerEmployees();
 
@@ -108,9 +117,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 				...this.filters(),
 				...(orderBy ? { orderBy } : {}),
 				...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
-				...(operationIds ? { operations: operationIds.join(',') } : {}),
-				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-				...(appInstanceId ? { appInstanceId } : {}),
+				...this.#scopeParams(),
 				...(formerEmployees ? { formerEmployees } : {}),
 			};
 		}),
@@ -120,9 +127,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		computed(() => ({
 			fields: this.#userFields,
 			...this.filters(),
-			...(this.uniqueOperationIds() ? { uniqueOperations: this.uniqueOperationIds()?.join(',') } : {}),
-			...(this.operationIds() ? { operations: this.operationIds()?.join(',') } : {}),
-			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
+			...this.#scopeParams(),
 			id: this.currentUserId,
 		})),
 	);
@@ -142,16 +147,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		shareReplay(1),
 	);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
+	public totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), params: { ...this.filters(), ...this.#scopeParams(), fields: 'collection.count' } }))).pipe(
 		debounceTime(250),
-		switchMap(({ url, filters }) =>
-			this.httpClient.get<{ data: { count: number } } | { count: number }>(url, {
-				params: {
-					...filters,
-					fields: 'collection.count',
-				},
-			}),
-		),
+		switchMap(({ url, params }) => this.httpClient.get<{ data: { count: number } } | { count: number }>(url, { params })),
 		map((res) => ('data' in res ? (res?.data.count ?? 0) : (res?.count ?? 0))),
 	);
 
