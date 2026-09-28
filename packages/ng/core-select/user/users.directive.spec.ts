@@ -27,13 +27,16 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 @Component({
 	selector: 'lu-users-directive-host',
 	imports: [LuSimpleSelectInputComponent, TestUsersDirective],
-	template: `<lu-simple-select luTestUsers [filters]="filters" />`,
+	template: `<lu-simple-select luTestUsers [filters]="filters" [operationIds]="operationIds" [uniqueOperationIds]="uniqueOperationIds" [appInstanceId]="appInstanceId" />`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LuUsersDirectiveHostComponent {
 	filters: Record<string, string | number | boolean> = {};
-	simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
-	usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
+	operationIds: number[] | null = null;
+	uniqueOperationIds: number[] | null = null;
+	appInstanceId: number | null = null;
+	readonly simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
+	readonly usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
 }
 
 const CURRENT_USER_ID = 12;
@@ -156,6 +159,24 @@ describe('LuCoreSelectUsersDirective', () => {
 
 		// Assert (Page 2)
 		expect(options).toEqual([meUser, ...page1, ...page2.filter((u) => u.id !== CURRENT_USER_ID)]);
+		httpTestingController.verify();
+	}));
+
+	it('should forward filters and scope params to the total count request', fakeAsync(() => {
+		// Arrange
+		fixture.componentInstance.filters = { foo: 'bar' };
+		fixture.componentInstance.uniqueOperationIds = [1, 2];
+		fixture.componentInstance.operationIds = [3];
+		fixture.componentInstance.appInstanceId = 4;
+		fixture.detectChanges();
+
+		// Act
+		usersDirective.totalCount$.subscribe();
+		fixture.detectChanges();
+		tick(250);
+
+		// Assert
+		httpTestingController.expectOne(`/api/v3/users/scopedsearch?foo=bar&uniqueOperations=1,2&operations=3&appInstanceId=4&fields=collection.count`);
 		httpTestingController.verify();
 	}));
 
