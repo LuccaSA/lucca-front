@@ -1,0 +1,72 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Simple tree empty</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-simple-select placeholder="Placeholder" clearable [treeSelect]="groupingFn" [options]="allLegumes" [ngModel]="null" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Simple tree filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-simple-select
+						placeholder="Placeholder"
+						clearable
+						[treeSelect]="groupingFn"
+						[options]="allLegumes"
+						[(ngModel)]="simpleExample"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Multi tree empty</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-multi-select placeholder="Placeholder" clearable [treeSelect]="groupingFn" [options]="allLegumes" [ngModel]="[]" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Multi tree filled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-multi-select
+						placeholder="Placeholder"
+						clearable
+						[treeSelect]="groupingFn"
+						[options]="allLegumes"
+						[(ngModel)]="multiExample"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+					<lu-simple-select
+						placeholder="Placeholder"
+						clearable
+						disabled
+						[treeSelect]="groupingFn"
+						[options]="allLegumes"
+						[ngModel]="simpleExample"
+					/>
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

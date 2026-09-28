@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, Injector, input, ViewEncapsulation } from '@angular/core';
-import { Router, UrlTree } from '@angular/router';
+import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, effect, ElementRef, inject, Injector, input, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { LU_INDEX_TABLE_INSTANCE } from '@lucca-front/ng/index-table';
 
@@ -39,8 +39,10 @@ export class LinkComponent {
 	intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
 	routerLink = inject(LuRouterLink);
 	#injector = inject(Injector);
+	#elementRef = inject(ElementRef);
 	router = inject(Router);
 	location = inject(Location);
+	#activatedRoute = inject(ActivatedRoute, { optional: true });
 	insideIndexTable = inject(LU_INDEX_TABLE_INSTANCE, { optional: true });
 	insideDataTable = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
@@ -94,6 +96,11 @@ export class LinkComponent {
 				// We need to do this in order to have `routerLink` update the value for `href`:
 				// See https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link.ts#L281
 				this.routerLink.ngOnChanges({});
+			} else if (this.routerLinkCommands() && this.external()) {
+				// External router links must not wire up the `RouterLink` directive (it would navigate in-place),
+				// but they still need an `href` so the anchor is keyboard-focusable and its destination is previewable.
+				// Actual navigation is handled natively by `target="_blank"` (anchors) or by `redirect()` (buttons).
+				this.routerLink.publicReactiveHref.set(this.#serializeExternalUrl());
 			} else if (!href() && this.hrefBackup) {
 				this.routerLink.publicReactiveHref.set(this.hrefBackup);
 			}
@@ -101,20 +108,39 @@ export class LinkComponent {
 	}
 
 	redirect(): void {
-		const routerLinkCommands = this.routerLinkCommands();
-		if (!this.disabled() && routerLinkCommands && this.external()) {
-			const urlTree =
-				routerLinkCommands instanceof UrlTree
-					? routerLinkCommands
-					: this.router.createUrlTree(Array.isArray(routerLinkCommands) ? routerLinkCommands : [routerLinkCommands], {
-							queryParams: this.routerLink.queryParams,
-							fragment: this.routerLink.fragment,
-							queryParamsHandling: this.routerLink.queryParamsHandling,
-							preserveFragment: this.routerLink.preserveFragment,
-						});
-			const serializedUrl = this.router.serializeUrl(urlTree);
-			const externalUrl = Array.isArray(routerLinkCommands) ? this.location.prepareExternalUrl(serializedUrl) : serializedUrl;
+		// Anchors carry an `href` with `target="_blank"`, so the browser opens the new tab natively.
+		// Only non-anchor hosts (e.g. `button[luLink]`) need us to open the window programmatically.
+		if (!this.disabled() && this.routerLinkCommands() && this.external() && !this.#isAnchor()) {
+			const externalUrl = this.#serializeExternalUrl();
 			afterNextRender(() => window.open(externalUrl, '_blank'), { injector: this.#injector });
 		}
+	}
+
+	#isAnchor(): boolean {
+		return (this.#elementRef.nativeElement as HTMLElement).tagName === 'A';
+	}
+
+	#serializeExternalUrl(): string | null {
+		const routerLinkCommands = this.routerLinkCommands();
+		if (!routerLinkCommands) {
+			return null;
+		}
+		const urlTree =
+			routerLinkCommands instanceof UrlTree
+				? routerLinkCommands
+				: this.router.createUrlTree(Array.isArray(routerLinkCommands) ? routerLinkCommands : [routerLinkCommands], {
+						// Resolve relative commands against the current route, like Angular's `RouterLink` does.
+						// An explicit `relativeTo` wins, including `null` which means "resolve from the root";
+						// only `undefined` falls back to the injected `ActivatedRoute`.
+						relativeTo: this.routerLink.relativeTo === undefined ? this.#activatedRoute : this.routerLink.relativeTo,
+						queryParams: this.routerLink.queryParams,
+						fragment: this.routerLink.fragment,
+						queryParamsHandling: this.routerLink.queryParamsHandling,
+						preserveFragment: this.routerLink.preserveFragment,
+					});
+		const serializedUrl = this.router.serializeUrl(urlTree);
+		// Apply the app's baseHref regardless of the commands' shape (string, array or `UrlTree`):
+		// they all describe an internal route, so the serialized URL must carry the baseHref.
+		return this.location.prepareExternalUrl(serializedUrl);
 	}
 }

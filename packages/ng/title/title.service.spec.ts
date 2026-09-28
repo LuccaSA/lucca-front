@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterLink, RouterOutlet, Routes, provideRouter } from '@angular/router';
 import { Observable, of, timer } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
+import { vi } from 'vitest';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
 import { TitleSeparator } from './title.model';
 import { LuTitleService } from './title.service';
@@ -160,7 +161,7 @@ describe('TitleService', () => {
 			providers: [
 				provideRouter(routes),
 				LuTitleService,
-				{ provide: Title, useValue: { setTitle: jest.fn(), getTitle: jest.fn().mockReturnValue('') } },
+				{ provide: Title, useValue: { setTitle: vi.fn(), getTitle: vi.fn().mockReturnValue('') } },
 				{
 					provide: LU_TITLE_TRANSLATE_SERVICE,
 					useClass: TranslateService,
@@ -229,7 +230,9 @@ describe('TitleService', () => {
 			.subscribe((title) => (resultTitle = title));
 
 		await clickLink('.link-6');
-		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		await vi.waitFor(() => {
+			expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		});
 	});
 
 	it('should include named params in title', async () => {

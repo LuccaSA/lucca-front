@@ -1,6 +1,6 @@
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { cleanupTemplate } from '@/helpers/stories';
 
 interface AppLayoutAngularBasicStory {
 	mobileNavSideBottom: boolean;

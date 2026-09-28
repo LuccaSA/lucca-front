@@ -1,8 +1,8 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, HostListener, input, Signal, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, Signal, signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColorComponent } from '@lucca-front/ng/color';
 import { intlInputOptions } from '@lucca-front/ng/core';
-import { LuCoreSelectNoClueDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
+import { LuCoreSelectNoClueDirective, LuDisplayerDirective, LuOptionDirective, ɵinjectPointerNavigation } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -24,7 +24,7 @@ import { of, startWith } from 'rxjs';
 export class ColorInputComponent {
 	intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
 
-	pointerNavigation = signal(false);
+	pointerNavigation = ɵinjectPointerNavigation();
 	mouseHighlighted = signal<string>('');
 	keyboardHighlighted = signal<string>('');
 	highlighted = computed(() => {
@@ -60,14 +60,4 @@ export class ColorInputComponent {
 		}
 		return this.colors();
 	});
-
-	@HostListener('document:keydown')
-	onKeydown(): void {
-		this.pointerNavigation.set(false);
-	}
-
-	@HostListener('document:mousemove')
-	onMousemove(): void {
-		this.pointerNavigation.set(true);
-	}
 }

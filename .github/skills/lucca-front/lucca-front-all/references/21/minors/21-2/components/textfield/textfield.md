@@ -1,0 +1,64 @@
+# textfield
+
+## Import
+
+```typescript
+import { TextInputComponent } from '@lucca-front/ng/forms';
+```
+
+## API Reference
+
+### TextInputComponent (component)
+
+**Selector:** `lu-text-input`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `mask` | `mask` | `string \| null` | `null` | — | — | — |
+| `placeholder` | `placeholder` | `string` | `''` | — | — | — |
+| `autocomplete` | `autocomplete` | `AutoFill` | `'off'` | — | — | — |
+| `hasClearer` | `hasClearer` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `hasSearchIcon` | `hasSearchIcon` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `valueAlignRight` | `valueAlignRight` | `boolean` | `false` | — | `booleanAttribute` | Aligne la valeur du champ à droite. |
+| `prefix` | `prefix` | `TextfieldIconAddon \| TextfieldTextAddon` | — | — | — | — |
+| `suffix` | `suffix` | `TextfieldIconAddon \| TextfieldTextAddon` | — | — | — | — |
+| `searchIcon` | `searchIcon` | `LuccaIcon` | `'searchMagnifyingGlass'` | — | — | — |
+| `type` | `type` | `TextFieldType` | `'text'` | — | — | — |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `blur` | `blur` | `FocusEvent` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_TEXTFIELD_TRANSLATIONS` | `unknown` | — |
+
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 577 available values
+
+## Related files
+
+- 📝 [Code & implementation](./textfield.component.md)
+- 🎨 [Design guidelines](./textfield.design.md)
+- 🎯 [Figma design tokens](./textfield.figma.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.2.5`. Les versions sans changement d'API sont omises.
+
+### 21.1.0
+
++ `intl` : unknown
+
+### 21.0.0
+
+Composant introduit (`TextInputComponent`).

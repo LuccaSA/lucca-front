@@ -30,7 +30,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
-import { isNil, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { getPushPanelViewportMargin, isNil, isNotNil, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { startWith, timer } from 'rxjs';
 import { debounce, filter, map, tap } from 'rxjs/operators';
@@ -54,6 +54,8 @@ let nextId = 0;
 		'(focus)': 'onFocus()',
 		'(blur)': 'onBlur()',
 		'(keydown.escape)': 'onEscape($event)',
+		class: 'tooltip_trigger',
+		'[class.is-whenEllipsis]': 'luTooltipWhenEllipsis()',
 	},
 })
 export class LuTooltipTriggerDirective implements OnDestroy {
@@ -96,8 +98,9 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	// guards the one-time setup of the persistent resize/mutation observers
 	#measurementObserversArmed = false;
 
-	// the IntersectionObserver callback can fire after the view is destroyed; avoid touching
-	// the destroyed injector (NG0911) when that happens
+	// the IntersectionObserver callback and a debounced 'open' action (see openTooltip) can
+	// fire after the view is destroyed; avoid touching the destroyed injector (NG0911) or
+	// recreating the overlay when that happens
 	#destroyed = false;
 
 	// written only from the `read` phase of the afterRenderEffect below
@@ -256,9 +259,11 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		// A `CSSStyleDeclaration` is live: reading one property from it in the write phase, after
 		// another tooltip has already mutated the DOM, forces a full style recalculation — once per
 		// tooltip on the page. Every value is therefore copied out here.
-		const { textOverflow, padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } = getComputedStyle(host);
+		const { textOverflow, display, padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } = getComputedStyle(host);
 		// No need to run a test if the element is not truncated
-		if (textOverflow !== 'ellipsis') {
+		// or if its `display` property is set to `inline`
+		// (especially for Safari, which still calculates a width, unlike other browsers)
+		if (textOverflow !== 'ellipsis' || display === 'inline') {
 			return null;
 		}
 		return { host, cloneStyles: { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } };
@@ -338,7 +343,11 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	}
 
 	private openTooltip(): void {
-		if (this.overlayRef?.hasAttached()) {
+		// A pending debounced 'open' is flushed when `toObservable(#realAction)` completes on
+		// destroy (`debounce` re-emits the held value on completion), i.e. AFTER ngOnDestroy has
+		// disposed the overlay. Opening then would recreate an overlay anchored to a detached
+		// host — pinned to the viewport's top-left corner — that nothing would ever dispose.
+		if (this.#destroyed || this.overlayRef?.hasAttached()) {
 			return;
 		}
 		const position = this.legacyPositionBuilder();
@@ -455,6 +464,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		return this.#overlay
 			.position()
 			.flexibleConnectedTo(this.#resolveAnchor())
+			.withViewportMargin(getPushPanelViewportMargin(this.#host.nativeElement))
 			.withPositions([
 				{
 					originX: connectionPosition.originX,

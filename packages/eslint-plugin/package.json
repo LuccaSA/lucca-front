@@ -10,8 +10,8 @@
   "description": "Custom ESLint rules for Lucca Front",
   "exports": "./index.ts",
   "scripts": {
-    "test": "jest --config jest.config.js",
-    "test:watch": "jest --config jest.config.js --watch"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [
     "eslint",

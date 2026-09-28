@@ -12,7 +12,7 @@ describe('lu-grid Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'lu-grid', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'lu-grid', { skipInstall: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);

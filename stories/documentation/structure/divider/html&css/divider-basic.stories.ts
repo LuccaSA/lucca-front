@@ -1,6 +1,6 @@
 import { DIVIDER_SIZE } from '@lucca-front/ng/divider';
-import { Meta, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface DividerBasicStory {
 	size: string;

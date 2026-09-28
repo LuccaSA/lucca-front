@@ -1,8 +1,8 @@
 import { IconsList } from '@/stories/icons-list';
 import { TAG_SIZE, TagComponent } from '@lucca-front/ng/tag';
-import { Meta, StoryObj } from '@storybook/angular';
-import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Tags/Angular/Basic',

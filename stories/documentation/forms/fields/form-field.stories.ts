@@ -2,8 +2,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
 import { waitForAngular } from '../../../helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
 
@@ -77,7 +77,9 @@ export default {
 	},
 	render: (args, { argTypes }) => {
 		const { required, ...fieldArgs } = args;
+		const model = useStoryModel('');
 		return {
+			props: { model },
 			template: `<lu-form-field extraDescribedBy="extra-message" ${generateInputs(fieldArgs, argTypes)}>
 	<div class="textField">
 		<div class="textField-input">
@@ -86,7 +88,7 @@ export default {
 				luInput
 				class="textField-input-value"
 				${required ? 'required' : ''}
-				[(ngModel)]="example"
+				[(ngModel)]="model.example"
 				placeholder="Placeholder">
 			</textarea>
 		</div>

@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { Meta } from '@storybook/angular-vite';
+import { cleanupTemplate } from '@/helpers/stories';
 
 interface OptionBasicStory {
 	multiple: boolean;

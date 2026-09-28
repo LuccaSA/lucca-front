@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { DurationPickerComponent } from '@lucca-front/ng/time';
-import { Meta } from '@storybook/angular';
+import { Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'duration-picker-stories',

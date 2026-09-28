@@ -2,8 +2,8 @@
 // Heavily modified to handle ngModel properly
 import { DestroyRef, effect, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, FormControlDirective, FormControlName, NgControl, NgModel } from '@angular/forms';
-import { FormField } from '@angular/forms/signals';
+import { FormControl, FormControlDirective, FormControlName, NgControl, NgModel, type ValidationErrors } from '@angular/forms';
+import { FormField, type ValidationError } from '@angular/forms/signals';
 import { distinctUntilChanged, map } from 'rxjs';
 
 export function injectNgControl() {
@@ -84,7 +84,10 @@ function generateMirrorControl(_ngControl: NgControl, field: FormField<unknown>)
 	effect(() => (field.state().disabled() ? control.disable() : control.enable()));
 
 	// Error | Field -> Control
-	effect(() => control.setErrors(field.state().errors()));
+	effect(() => {
+		const errors = field.state().errors();
+		control.setErrors(errors.length ? toValidationErrors(errors) : null);
+	});
 
 	ngControl.registerOnChange ??= () => {};
 	ngControl.markAsTouched ??= () => {};
@@ -96,4 +99,11 @@ function generateMirrorControl(_ngControl: NgControl, field: FormField<unknown>)
 
 	// eslint-disable-next-line
 	return ngControl as NgControl & { control: FormControl<any> };
+}
+
+/** Maps signal-forms ValidationError[] to reactive-forms' flat ValidationErrors map. */
+function toValidationErrors(errors: readonly ValidationError[]): ValidationErrors {
+	// Keyed by `kind`; the message (or `true` when absent) is the value. Duplicate kinds are
+	// last-wins, matching reactive-forms' single-value-per-key error map.
+	return Object.fromEntries(errors.map((error) => [error.kind, error.message ?? true]));
 }

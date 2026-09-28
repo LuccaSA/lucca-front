@@ -149,6 +149,7 @@
 		.horizontalNavigation_panel {
 			display: var(--components-horizontalNavigation-panel-display);
 			overflow: var(--components-horizontalNavigation-panel-overflow);
+			flex-grow: var(--components-horizontalNavigation-panel-flexGrow);
 			min-height: 0;
 			flex-direction: column;
 

@@ -1,0 +1,42 @@
+# icons
+
+## Import
+
+```typescript
+import { IconComponent } from '@lucca-front/ng/icon';
+```
+
+## API Reference
+
+### IconComponent (component)
+
+**Selector:** `lu-icon`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `icon` | `icon` | `LuccaIcon` | — | ✅ | — | Modifie le glyphe de l'icône. |
+| `alt` | `alt` | `string` | — | — | — | Information restituée par le lecteur d'écran. |
+| `size` | `size` | `'XXS' \| 'XS' \| 'S' \| 'M' \| 'L' \| 'XL' \| 'XXL'` | — | — | — | Modifie la taille de l'icône. |
+| `color` | `color` | `'primary' \| 'secondary' \| 'product' \| 'error' \| 'warning' \| 'success' \| 'light' \| 'placeholder' \| 'inherit'` | `'inherit'` | — | — | Modifie la couleur de l'icône. |
+| `AI` | `AI` | `boolean` | `false` | — | `booleanAttribute` | [v20.3] Applique les couleurs IA. |
+
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 569 available values
+
+## Related files
+
+- 📝 [Code & implementation](./icons.component.md)
+
+- 🎯 [Figma design tokens](./icons.figma.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v21.0.5/storybook/?path=/docs/documentation-texts-icons-angular--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à `v21.0.5`. Les versions sans changement d'API sont omises.
+
+### 21.0.0
+
+Composant introduit (`IconComponent`).

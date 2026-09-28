@@ -1,5 +1,5 @@
 import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface FancyBoxBasicStory {
 	content: string;

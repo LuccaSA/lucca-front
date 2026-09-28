@@ -1,7 +1,7 @@
 import { IconsList } from '@/stories/icons-list';
 import { ICON_COLOR, ICON_SIZE, IconComponent } from '@lucca-front/ng/icon';
-import { Meta, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Icons/Angular',

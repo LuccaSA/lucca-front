@@ -28,20 +28,35 @@
 	}
 
 	<div class="textField-input">
-		<input
-			luInput
-			[type]="typeRef()"
-			[attr.autocomplete]="autocomplete() ? autocomplete() : null"
-			class="textField-input-value"
-			[placeholder]="placeholder()"
-			[formControl]="ngControl.control"
-			(blur)="blur.emit($event)"
-			[mask]="mask()"
-			#inputElement
-		/>
+		<!-- The `mask` directive is only applied when a mask is actually set: as a ControlValueAccessor it rewrites the input value
+		asynchronously, which moves the caret to the end of the value on every keystroke. -->
+		@if (mask(); as mask) {
+			<input
+				luInput
+				[type]="typeRef()"
+				[attr.autocomplete]="autocomplete() ? autocomplete() : null"
+				class="textField-input-value"
+				[placeholder]="placeholder()"
+				[formControl]="ngControl.control"
+				(blur)="blur.emit($event)"
+				[mask]="mask"
+				#inputElement
+			/>
+		} @else {
+			<input
+				luInput
+				[type]="typeRef()"
+				[attr.autocomplete]="autocomplete() ? autocomplete() : null"
+				class="textField-input-value"
+				[placeholder]="placeholder()"
+				[formControl]="ngControl.control"
+				(blur)="blur.emit($event)"
+				#inputElement
+			/>
+		}
 		<div class="textField-input-affix">
-			@if (hasClearer() && inputElement.value) {
-				<lu-clear (click)="clearValue()" class="textField-input-affix-clear">{{ intl().clear }}</lu-clear>
+			@if (hasClearer() && hasValue()) {
+				<lu-clear (onClear)="clearValue()" class="textField-input-affix-clear">{{ intl().clear }}</lu-clear>
 			}
 			@if (hasSearchIcon()) {
 				<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{ searchIcon() }}"></span>

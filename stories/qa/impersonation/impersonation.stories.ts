@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 
-import { applicationConfig, Meta } from '@storybook/angular';
+import { applicationConfig, Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'impersonation-stories',

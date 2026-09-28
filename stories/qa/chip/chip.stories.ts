@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'chip-stories',

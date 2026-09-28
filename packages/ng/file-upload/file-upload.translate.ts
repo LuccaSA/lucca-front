@@ -30,6 +30,7 @@ export interface LuFileUploadLabel {
 	all: string;
 	file: string;
 	download: string;
+	preview: string;
 	downloadFile: string;
 	delete: string;
 	deleteFile: string;

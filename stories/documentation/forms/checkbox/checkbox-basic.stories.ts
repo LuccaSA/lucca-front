@@ -1,6 +1,6 @@
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { Meta, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface CheckboxBasicStory {
 	disabled: boolean;

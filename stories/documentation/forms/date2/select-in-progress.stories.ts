@@ -1,7 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Calendar2Component, CalendarMode } from '@lucca-front/ng/date2';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Forms/Date2/Calendar',
@@ -13,7 +13,17 @@ export default {
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		nextPage: {
+			description: 'Événement déclenché lors de la navigation vers la page suivante du calendrier.',
+		},
+		previousPage: {
+			description: 'Événement déclenché lors de la navigation vers la page précédente du calendrier.',
+		},
+		dateClicked: {
+			description: 'Événement déclenché lors du clic sur une date, avec la date en paramètre.',
+		},
+	},
 	render: (args, { argTypes }) => {
 		return {
 			props: {

@@ -1,6 +1,6 @@
 import { PALETTE } from '@lucca/prisme/core';
-import { Meta, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface GaugeBasicStory {
 	palette: string;

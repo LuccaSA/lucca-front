@@ -104,21 +104,17 @@
 
 			display: flex;
 			margin-block-start: -1px;
-			margin-inline-start: var(--pr-t-spacings-50);
 			inline-size: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-200));
 			flex-shrink: 0;
 			z-index: 1;
 			color: var(--components-filterPill-toggle-iconColor);
 			cursor: var(--components-filterPill-label-cursor);
+			margin-inline-start: var(--components-filterPill-toggle-marginInlineStart);
 
 			.icon-arrowChevronBottom {
 				transition-property: transform;
 				transition-duration: var(--commons-animations-durations-fast);
 				transform: rotate(var(--components-filterPill-toggle-rotation));
-			}
-
-			.filterPill-value + & {
-				margin-inline-start: var(--components-filterPill-toggle-marginInlineStart);
 			}
 		}
 

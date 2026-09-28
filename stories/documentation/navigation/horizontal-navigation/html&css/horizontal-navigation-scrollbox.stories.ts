@@ -1,5 +1,5 @@
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface HorizontalNavigationScrollboxStory {
 	noBorder: boolean;

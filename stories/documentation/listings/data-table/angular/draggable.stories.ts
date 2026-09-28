@@ -9,8 +9,8 @@ import {
 	DataTableRowCellHeaderComponent,
 	DataTableRowComponent,
 } from '@lucca-front/ng/data-table';
-import { Meta, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { Meta, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType } from '@/helpers/common-arg-types';
 
 @Component({
 	selector: 'data-table-draggable-stories',

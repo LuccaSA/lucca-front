@@ -1,5 +1,21 @@
 import { LuMultiSelection } from './select.model';
 
+/**
+ * Returns the `itemCount - 1` separators `Intl.ListFormat` puts between `itemCount` items, so they can be
+ * interleaved with values rendered by a template rather than by `format()`.
+ *
+ * @example
+ * ```ts
+ * listSeparators(new Intl.ListFormat('fr-FR'), 3); // [', ', ' et ']
+ * ```
+ */
+export function listSeparators(listFormat: Intl.ListFormat, itemCount: number): string[] {
+	return listFormat
+		.formatToParts(Array.from({ length: itemCount }, (_, index) => `${index}`))
+		.filter(({ type }) => type === 'literal')
+		.map(({ value }) => value);
+}
+
 export function selectionToQueryParams<T, Key extends string>(key: Key, value: LuMultiSelection<T>, selector: (value: T) => unknown): Partial<Record<Key | `-${Key}`, string>> {
 	if (value.mode === 'all' || value.mode === 'none') {
 		return {};

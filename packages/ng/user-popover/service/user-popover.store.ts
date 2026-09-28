@@ -54,6 +54,9 @@ export function cacheImage<T>(accessor: (value: T) => string | undefined): Opera
 						subscriber.next(value);
 					};
 				},
+				error(err: Error) {
+					subscriber.error(err);
+				},
 			});
 		});
 }

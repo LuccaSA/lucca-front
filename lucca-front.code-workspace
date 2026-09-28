@@ -7,11 +7,11 @@
 			"path": "./e2e"
 		},
 		{
-			"path": "./e2e/LuccaFront.Tests.e2e/bin/Debug/net6.0/artifacts",
+			"path": "./e2e/LuccaFront.Tests.e2e/bin/Debug/net8.0/artifacts",
 			"name": "e2e screenshots"
 		},
 		{
-			"path": "./e2e/LuccaFront.Tests.e2e/bin/Debug/net6.0/recordings",
+			"path": "./e2e/LuccaFront.Tests.e2e/bin/Debug/net8.0/recordings",
 			"name": "e2e recordings"
 		}
 	],

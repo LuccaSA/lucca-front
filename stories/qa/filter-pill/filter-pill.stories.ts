@@ -11,7 +11,7 @@ import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'filter-pill-stories',
@@ -40,6 +40,15 @@ class FilterPillStory {
 		}
 		return parent;
 	}
+
+	selectedDepartment = { id: 14, name: 'Administration' };
+	selectedDepartments = [
+		{ id: 14, name: 'Administration' },
+		{ id: 13, name: 'Direction commerciale' },
+	];
+
+	selectedDate = new Date(2024, 0, 15);
+	selectedDateRange = { start: new Date(2024, 0, 10), end: new Date(2024, 0, 20) };
 }
 
 export default {

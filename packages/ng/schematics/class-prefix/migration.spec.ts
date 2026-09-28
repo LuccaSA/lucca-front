@@ -15,7 +15,7 @@ describe('Class prefix Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'class-prefix', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'class-prefix', { skipInstall: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);
@@ -40,7 +40,7 @@ describe('Class prefix Migration', () => {
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');
 
 		// Act
-		await runSchematic('collection', collectionPath, 'class-prefix', { skipInstallation: true }, tree);
+		await runSchematic('collection', collectionPath, 'class-prefix', { skipInstall: true }, tree);
 
 		// Assert
 		tree.visit((p, entry) => {

@@ -1,0 +1,26 @@
+### {{name}}
+
+{{#if zhNote}}
+{{{zhNote}}}
+
+{{/if}}
+{{#if scssImport}}
+```css
+{{{scssImport}}}
+```
+
+{{/if}}
+{{#if displayImports.length}}
+```js
+{{#each displayImports}}
+{{{this}}}
+{{/each}}
+```
+
+{{/if}}
+{{#each templates}}
+```html
+{{{this}}}
+```
+
+{{/each}}

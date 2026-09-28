@@ -1,6 +1,6 @@
 import { FANCY_BOX_SIZE, FancyBoxComponent } from '@lucca-front/ng/fancy-box';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface FancyBoxBasicStory {
 	backgroundLeft: string;

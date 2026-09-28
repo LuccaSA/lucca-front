@@ -15,7 +15,7 @@ describe('New icons Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'new-icons', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'new-icons', { skipInstall: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);
@@ -40,7 +40,7 @@ describe('New icons Migration', () => {
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');
 
 		// Act
-		await runSchematic('collection', collectionPath, 'new-icons', { skipInstallation: true }, tree);
+		await runSchematic('collection', collectionPath, 'new-icons', { skipInstall: true }, tree);
 
 		// Assert
 		tree.visit((p, entry) => {

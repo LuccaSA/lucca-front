@@ -7,7 +7,7 @@ import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@luc
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {

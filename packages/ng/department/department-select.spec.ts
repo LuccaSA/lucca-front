@@ -1,8 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ILuTree } from '@lucca-front/ng/core';
 import { fireEvent, render, screen } from '@testing-library/angular';
-import { createMock } from '@testing-library/angular/jest-utils';
-import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { of } from 'rxjs';
@@ -21,8 +20,9 @@ const deptMock: ILuTree<ILuDepartment>[] = [
 	{ value: { id: 2, name: 'Lucca UK' }, children: [{ value: { id: 21, name: 'Support' }, children: [] }] },
 ];
 
-const mock = createMock(LuDepartmentV4Service);
-mock.getTrees = jest.fn(() => of(deptMock));
+const mock = {
+	getTrees: vi.fn(() => of(deptMock)),
+} as Partial<LuDepartmentV4Service> as LuDepartmentV4Service;
 
 describe('department select', () => {
 	const departmentStoryTemplate = `<label class="textfield">
@@ -37,7 +37,8 @@ describe('department select', () => {
 
 	it('should display dialog with a click on a lu select ', async () => {
 		await render(departmentStoryTemplate, {
-			imports: [LuDepartmentSelectInputComponent, HttpClientModule],
+			imports: [LuDepartmentSelectInputComponent],
+			providers: [provideHttpClient(), provideHttpClientTesting()],
 		});
 
 		const luSelectElement = screen.getByTestId('lu-select');
@@ -49,7 +50,8 @@ describe('department select', () => {
 
 	it('should filters results when clue is typed in', async () => {
 		await render(departmentStoryTemplate, {
-			imports: [LuDepartmentSelectInputComponent, HttpClientModule],
+			imports: [LuDepartmentSelectInputComponent],
+			providers: [provideHttpClient(), provideHttpClientTesting()],
 			componentProviders: [
 				{
 					provide: ALuDepartmentService,
@@ -73,7 +75,8 @@ describe('department select', () => {
 
 	it('should check a11y', async () => {
 		await render(departmentStoryTemplate, {
-			imports: [LuDepartmentSelectInputComponent, HttpClientModule],
+			imports: [LuDepartmentSelectInputComponent],
+			providers: [provideHttpClient(), provideHttpClientTesting()],
 		});
 		const luSelectElement = screen.getByTestId('lu-select');
 

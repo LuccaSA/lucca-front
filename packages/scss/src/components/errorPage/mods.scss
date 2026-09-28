@@ -26,7 +26,7 @@
 	}
 }
 
-@mixin inAppLayout {
+@mixin nested {
 	&,
 	.errorPage-section {
 		block-size: 100%;

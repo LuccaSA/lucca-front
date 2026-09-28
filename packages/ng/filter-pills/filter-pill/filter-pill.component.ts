@@ -129,7 +129,7 @@ export class FilterPillComponent {
 		if (!this.shouldShowColon()) {
 			return '';
 		}
-		if (this.#locale === 'fr') {
+		if (this.#locale.split('-')[0] === 'fr') {
 			return ' :';
 		}
 		return ':';
@@ -142,7 +142,7 @@ export class FilterPillComponent {
 			const ref = this.inputComponentRef();
 			if (ref) {
 				untracked(() => {
-					ref.enableFilterPillMode();
+					ref.enableFilterPillMode?.();
 					ref.registerFilterPillClosePopover(this.closePopover);
 					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
 				});
@@ -172,9 +172,14 @@ export class FilterPillComponent {
 		this.inputComponentRef()?.onFilterPillOpened?.();
 	}
 
-	closePopover = () => {
-		this.popoverRef()?.close();
+	popoverClosed(): void {
 		this.inputComponentRef()?.onFilterPillClosed?.();
+	}
+
+	closePopover = () => {
+		// `onFilterPillClosed` is notified by the `luPopoverClosed` binding, which also covers
+		// closes the input never asked for (outside click, Escape handled by the popover)
+		this.popoverRef()?.close();
 	};
 
 	updatePosition = () => {

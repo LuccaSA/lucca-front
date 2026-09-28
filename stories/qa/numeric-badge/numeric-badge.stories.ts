@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'numeric-badge-stories',

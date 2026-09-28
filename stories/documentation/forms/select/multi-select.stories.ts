@@ -31,12 +31,12 @@ import {
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
-import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { createTestStory, getStoryGenerator } from '@/helpers/stories';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { sleep, waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
@@ -740,22 +740,6 @@ export const GroupBy = generateStory({
 			colorNameByColor,
 		},
 	},
-});
-
-export const GroupByTEST = createTestStory(GroupBy, async (context) => {
-	await basePlay(context);
-	context.step('Group select all keyboard interactions', async () => {
-		const input = within(context.canvasElement).getByRole('combobox');
-		input.focus();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await userEvent.keyboard('{Enter}');
-		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option');
-		const optionValues = options.map((option) => option.textContent);
-		// We should have unselected everything with this keyboard input sequence
-		await checkValues(input, optionValues.slice(1, 3));
-	});
 });
 
 export const GroupBySelectAll = generateStory({

@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface EmptyStateSectionBasicStory {}
 

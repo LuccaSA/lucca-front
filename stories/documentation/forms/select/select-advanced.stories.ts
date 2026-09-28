@@ -6,7 +6,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { Meta, applicationConfig, StoryObj } from '@storybook/angular';
+import { Meta, applicationConfig, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'select-advanced-stories',

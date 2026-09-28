@@ -18,9 +18,7 @@
 
 <ng-container *luPresentationDisplayDefault>
 	@if (ngControl.value) {
-		<lu-read-more>
-			{{ ngControl.value }}
-		</lu-read-more>
+		<lu-read-more plainText [innerContent]="ngControl.value" />
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}

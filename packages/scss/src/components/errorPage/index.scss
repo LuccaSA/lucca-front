@@ -16,8 +16,8 @@
 			@include narrow;
 		}
 
-		.appLayout & {
-			@include inAppLayout;
+		:is(.appLayout, .dialog) & {
+			@include nested;
 		}
 	}
 }

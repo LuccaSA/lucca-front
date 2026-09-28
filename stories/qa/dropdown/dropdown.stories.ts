@@ -3,7 +3,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { DropdownActionComponent, DropdownGroupComponent, DropdownItemComponent, DropdownMenuComponent } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'dropdown-stories',

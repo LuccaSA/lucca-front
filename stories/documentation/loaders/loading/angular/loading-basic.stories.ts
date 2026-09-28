@@ -1,6 +1,6 @@
 import { LoadingComponent } from '@lucca-front/ng/loading';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { cleanupTemplate } from '@/helpers/stories';
 
 interface LoadingsBasicStory {
 	label: string;

@@ -9,13 +9,9 @@
 {{{zhAngularNotes}}}
 
 {{/if}}
-{{#if angularExamples.length}}
-| Example | File |
-|---------|------|
 {{#each angularExamples}}
-| {{name}} | [{{fileSlug}}.md](./stories/{{fileSlug}}.md) |
+{{> storyBody}}
 {{/each}}
-{{/if}}
 {{/if}}
 
 {{#if hasHtml}}
@@ -25,11 +21,7 @@
 {{{zhHtmlNotes}}}
 
 {{/if}}
-{{#if htmlExamples.length}}
-| Example | File |
-|---------|------|
 {{#each htmlExamples}}
-| {{name}} | [{{fileSlug}}.md](./stories/{{fileSlug}}.md) |
+{{> storyBody}}
 {{/each}}
-{{/if}}
 {{/if}}

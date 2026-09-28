@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, ElementRef, Signal, signal, Type, viewChild } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { form, FormField } from '@angular/forms/signals';
+import { form, FormField, validate } from '@angular/forms/signals';
 import { injectNgControl } from './inject-ng-control';
 import { NoopValueAccessorDirective } from './noop-value-accessor.directive';
 
@@ -136,5 +136,37 @@ describe('injectNgControl', () => {
 		// Assert
 		expect(initialValue).toBe('Initial');
 		expect(host.value()).toBe('Changed');
+	});
+
+	it('should mirror field validity into the control when using formField', () => {
+		// Arrange: field starts with a valid (non-empty) value
+		@Component({
+			selector: 'lu-form-field-validity-host',
+			imports: [CustomControl, FormField],
+			template: `<lu-custom-control [formField]="form" />`,
+			changeDetection: ChangeDetectionStrategy.OnPush,
+		})
+		class FormFieldValidityHost {
+			readonly value = signal('Bob');
+			readonly form = form(this.value, (path) => {
+				validate(path, ({ value }) => (value() ? null : [{ kind: 'required' as const, message: 'Required' }]));
+			});
+			readonly customControl = viewChild(CustomControl);
+		}
+
+		const { fixture, host } = createHost(FormFieldValidityHost);
+		const control = host.customControl().ngControl.control;
+
+		// Assert: a valid field leaves the control VALID (regression: setErrors([]) used to force INVALID)
+		expect(control.valid).toBe(true);
+		expect(control.errors).toBeNull();
+
+		// Act: clear the field so the required validator fails
+		host.value.set('');
+		fixture.detectChanges();
+
+		// Assert: the error is mirrored as a keyed ValidationErrors object, not a raw array
+		expect(control.invalid).toBe(true);
+		expect(control.errors).toEqual({ required: 'Required' });
 	});
 });

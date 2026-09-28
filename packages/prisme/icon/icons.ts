@@ -45,6 +45,8 @@ export type LuccaIcon =
 	| 'distribute'
 	| 'arrowCornerExpand'
 	| 'arrowCurvedDownRight'
+	| 'arrowUndo'
+	| 'arrowRedo'
 	| 'arrowDownload'
 	| 'download'
 	| 'arrowExternal'
@@ -501,6 +503,7 @@ export type LuccaIcon =
 	| 'signShieldError'
 	| 'signShieldSuccess'
 	| 'signShieldWarning'
+	| 'signShieldCancel'
 	| 'signSimpleChoice'
 	| 'signSuccess'
 	| 'success'
@@ -583,5 +586,6 @@ export type LuccaIcon =
 	| 'weight'
 	| 'window'
 	| 'windowAside'
+	| 'windowAsideLarge'
 	| 'windowCornerBottom'
 	| 'windowCornerTop';

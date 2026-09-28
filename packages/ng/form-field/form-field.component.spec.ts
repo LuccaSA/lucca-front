@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, viewChild } from '
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormFieldIdDirective, TextInputComponent } from '@lucca-front/ng/forms';
+import { vi } from 'vitest';
 import { FormFieldComponent } from './form-field.component';
 
 @Component({
@@ -45,7 +46,7 @@ describe('FormFieldComponent', () => {
 		expect(isInputRequired()).toBe(false);
 	});
 
-	it('should detect required validator', (done) => {
+	it('should detect required validator', async () => {
 		// Arrange
 		fixture.componentRef.setInput('formControlToUse', 'required');
 
@@ -53,14 +54,12 @@ describe('FormFieldComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		setTimeout(() => {
-			// For some reason, if not triggered in a timeout, we're getting a cached version of the signal, resulting in this test failing
+		await vi.waitFor(() => {
 			expect(isInputRequired()).toBe(true);
-			done();
-		}, 1);
+		});
 	});
 
-	it('should handle required when going from normal to required', (done) => {
+	it('should handle required when going from normal to required', async () => {
 		// Arrange
 		fixture.detectChanges();
 
@@ -69,14 +68,12 @@ describe('FormFieldComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		setTimeout(() => {
-			// For some reason, if not triggered in a timeout, we're getting a cached version of the signal, resulting in this test failing
+		await vi.waitFor(() => {
 			expect(isInputRequired()).toBe(true);
-			done();
-		}, 1);
+		});
 	});
 
-	it('should handle required when going from normal to required', (done) => {
+	it('should handle required when going from normal to required', async () => {
 		// Arrange
 		fixture.componentRef.setInput('formControlToUse', 'required');
 		fixture.detectChanges();
@@ -86,10 +83,8 @@ describe('FormFieldComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		setTimeout(() => {
-			// For some reason, if not triggered in a timeout, we're getting a cached version of the signal, resulting in this test failing
+		await vi.waitFor(() => {
 			expect(isInputRequired()).toBe(false);
-			done();
-		}, 1);
+		});
 	});
 });

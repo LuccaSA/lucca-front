@@ -21,7 +21,7 @@
  */
 
 import readline from 'readline';
-import { parseVersion, getZeroHeightUrl, getZhReleaseIds, addZhReleaseId } from './version-config';
+import { parseMinor, parseVersion, getZeroHeightUrl, getZhReleaseIds, addZhReleaseId } from './version-config';
 import { listGeneratedVersionStrings } from './generators/aggregate-writer';
 
 export interface ZhGuardFlags {
@@ -34,7 +34,10 @@ export interface ZhGuardFlags {
 /** A ZeroHeight page path known to exist in recent releases, used to validate a supplied release ID. */
 const VALIDATION_PAGE = '098404'; // button
 
+/** Accepts a minor ("21.2") or a full patch version ("21.2.5") and returns "major.minor". */
 function minorKey(version: string): string {
+	const m = parseMinor(version);
+	if (m) return `${m.major}.${m.minor}`;
 	const p = parseVersion(version);
 	if (!p) throw new Error(`Version invalide: "${version}"`);
 	return `${p.major}.${p.minor}`;

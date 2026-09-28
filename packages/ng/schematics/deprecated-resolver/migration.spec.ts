@@ -14,7 +14,7 @@ describe('Deprecated Resolver Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'deprecated-resolver', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'deprecated-resolver', { skipInstall: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);

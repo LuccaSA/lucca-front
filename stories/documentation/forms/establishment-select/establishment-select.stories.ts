@@ -2,7 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 @Component({
 	selector: 'establishment-select-stories',
 	imports: [LuEstablishmentSelectInputComponent],

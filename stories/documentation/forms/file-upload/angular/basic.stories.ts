@@ -6,9 +6,9 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuInputDirective } from '@lucca-front/ng/input';
 import { TagComponent } from '@lucca-front/ng/tag';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
-import { generateInputs, setStoryOptions } from 'stories/helpers/stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 type LuccaFileUploadResultId = string;
 

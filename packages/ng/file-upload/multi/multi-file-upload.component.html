@@ -25,7 +25,7 @@
 				@if (acceptNames().length > 1 || acceptAll()) {
 					{{ intl().acceptedFormat.other }}
 				} @else {
-					intl().acceptedFormat.one
+					{{ intl().acceptedFormat.one }}
 				}
 				{{ acceptNames().join(", ") }}.
 			</span>

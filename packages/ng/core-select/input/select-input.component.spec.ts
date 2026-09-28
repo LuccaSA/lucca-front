@@ -23,9 +23,14 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	let nativeElement: HTMLElement;
 
 	beforeEach(() => {
+		vi.useFakeTimers();
 		fixture = config.getFixture();
 		component = fixture.componentInstance;
 		nativeElement = fixture.nativeElement as HTMLElement;
+	});
+
+	afterEach(() => {
+		vi.useRealTimers();
 	});
 
 	it('should openPanel when ArrowDown', async () => {
@@ -34,7 +39,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 
 		// Act
 		nativeElement.dispatchEvent(event);
-		await fixture.whenStable();
+		await vi.runAllTimersAsync();
 
 		// Assert
 		expect(component.isPanelOpen).toBe(true);
@@ -43,12 +48,12 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	it.each(['a', 'A', 'À'])('should openPanel and emit clueChange when pressing %s and select is searchable', async (key) => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key });
-		const clueChangeSpy = jest.spyOn(component.clueChange$, 'next');
+		const clueChangeSpy = vi.spyOn(component.clueChange$, 'next');
 		component.clueChange$.subscribe(); // Emulate a `(clueChange)=""` binding
 
 		// Act
 		nativeElement.dispatchEvent(event);
-		await fixture.whenStable();
+		await vi.runAllTimersAsync();
 
 		// Assert
 		expect(component.isPanelOpen).toBe(true);
@@ -58,11 +63,11 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	it.each(['a', 'A', 'À'])('should openPanel and not emit clueChange when pressing %s and select is not searchable', async (key) => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key });
-		const clueChangeSpy = jest.spyOn(component.clueChange$, 'next');
+		const clueChangeSpy = vi.spyOn(component.clueChange$, 'next');
 
 		// Act
 		nativeElement.dispatchEvent(event);
-		await fixture.whenStable();
+		await vi.runAllTimersAsync();
 
 		// Assert
 		expect(component.isPanelOpen).toBe(true);
@@ -72,11 +77,11 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	it('should openPanel and but not emit clueChange when pressing Space', async () => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key: ' ' });
-		const clueChangeSpy = jest.spyOn(component.clueChange$, 'next');
+		const clueChangeSpy = vi.spyOn(component.clueChange$, 'next');
 
 		// Act
 		nativeElement.dispatchEvent(event);
-		await fixture.whenStable();
+		await vi.runAllTimersAsync();
 
 		// Assert
 		expect(component.isPanelOpen).toBe(true);
@@ -106,7 +111,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 	it.each(['ArrowLeft', 'ArrowRight', 'Backspace', 'Meta'])('should not open the panel when sending not a letter events (%s)', (key) => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key });
-		const clueChangeSpy = jest.spyOn(component.clueChange$, 'next');
+		const clueChangeSpy = vi.spyOn(component.clueChange$, 'next');
 
 		// Act
 		nativeElement.dispatchEvent(event);

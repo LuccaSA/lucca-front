@@ -1,5 +1,5 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostBinding, HostListener, inject, Injector, input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -31,7 +31,7 @@ export class PopoverContentComponent implements AfterViewInit, OnDestroy {
 
 	content = this.config.content;
 
-	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.config.triggerElement);
+	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.config.triggerElement, inject(Injector));
 
 	closed$ = new Subject<void>();
 

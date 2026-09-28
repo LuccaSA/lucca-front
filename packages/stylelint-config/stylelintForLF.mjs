@@ -108,22 +108,34 @@ function getMessage(objectData) {
 		messageLFVersionWarning = ' | LF version not found';
 	}
 
-	if (objectData.dateDeprecated) {
-		const daysAgo = Math.ceil((objectData.dateDeprecated.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-		const daysAgoString = new Intl.RelativeTimeFormat().format(daysAgo, 'day');
+	if (objectData.versionDeprecated) {
+		let detail = `LF ${objectData.versionDeprecated}`;
 
-		messageDeprecated = ` | since ${objectData.dateDeprecated.toLocaleDateString()} (${daysAgoString}, LF ${objectData.versionDeprecated})`;
-	}
+		if (objectData.dateDeprecated) {
+			const daysAgo = Math.ceil((objectData.dateDeprecated.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+			const daysAgoString = new Intl.RelativeTimeFormat().format(daysAgo, 'day');
 
-	if (objectData.dateDeleted) {
-		const daysLeft = Math.ceil((objectData.dateDeleted.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-		const dayString = new Intl.RelativeTimeFormat().format(daysLeft, 'day');
-
-		if (daysLeft <= 0) {
-			status = 'deleted';
+			detail = `${detail} (${objectData.dateDeprecated.toLocaleDateString()}, ${daysAgoString})`;
 		}
 
-		messageDeleted = ` | until ${objectData.dateDeleted.toLocaleDateString()} (${dayString}, LF ${objectData.versionDeleted})`;
+		messageDeprecated = ` | since ${detail}`;
+	}
+
+	if (objectData.versionDeleted) {
+		let detail = `LF ${objectData.versionDeleted}`;
+
+		if (objectData.dateDeleted) {
+			const daysLeft = Math.ceil((objectData.dateDeleted.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+			const daysLeftString = new Intl.RelativeTimeFormat().format(daysLeft, 'day');
+
+			if (daysLeft <= 0) {
+				status = 'deleted';
+			}
+
+			detail = `${detail} (${objectData.dateDeleted.toLocaleDateString()}, ${daysLeftString})`;
+		}
+
+		messageDeleted = ` | until ${detail}`;
 	}
 
 	return `${status}${messageLFVersionWarning}${messageDeprecated}${messageDeleted} | ${pattern}`;

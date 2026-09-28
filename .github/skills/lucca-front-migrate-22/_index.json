@@ -1,0 +1,30 @@
+{
+  "Palettes": {
+    "description": "Résiduel palettes non couvert par le schematic ng g @lucca-front/ng:palettes : CSS vars *-rgb (--colors-grey|neutral-400|900-rgb, --colors-white-rgb) à remplacer par --palettes-neutral-* avec color.transparentize si opacité rgba. Note : l'input <lu-icon color=\"primary|secondary\"> → product est désormais géré par le schematic. En 22.0 les palettes dépréciées sont supprimées et la variable $palettesDeprecated n'existe plus : supprimer toute référence à $palettesDeprecated dans les @use '@lucca-front/scss/src/commons/config' with (...) du consommateur, sinon le SCSS ne compile pas (This variable was not declared with !default in the @used module).",
+    "category": "Breaking22"
+  },
+  "FileUpload": {
+    "description": "SingleFileUpload perd l'input [entry] : gérer FileEntry via lu-file-entry côté parent. Nouvelle taille par défaut (la plus petite) pour lu-single-file-upload et lu-multi-file-upload : ajouter size=\"L\" pour conserver l'ancien rendu.",
+    "category": "Breaking22"
+  },
+  "ActivityFeed": {
+    "description": "lu-activity-feed-update gagne un niveau intermédiaire lu-activity-feed-update-item qui porte le label et le contenu projeté (slots activityFeedUpdateBefore/activityFeedUpdateAfter).",
+    "category": "Breaking22"
+  },
+  "SelectListBox": {
+    "description": "Le panel des Select (lu-simple-select, lu-multi-select) passe au composant ListBox : migration faite par LF, aucune action en usage standard. Les overrides SCSS de .optionItem et enfants ne sont jamais migrés automatiquement — les détecter et les lister dans le rapport (équivalent connu : .optionItem-value → .listboxOption-content), en laissant l'utilisateur appliquer les changements.",
+    "category": "Breaking22"
+  },
+  "Signal": {
+    "description": "PR #4737 : derniers @Input()/@Output()/@ViewChild migrés vers input()/output()/viewChild() + syncInputSignal(). Les alias de template et les propriétés plaines sont préservés, mais côté TS : inputs à invoquer avec (), propriétés renommées (inputPlaceholder→placeholderInput, inputMultiple→multipleInput, inputDisabled→disabledInput, overlapInput→pickerOverlap), membres supprimés (placeholder$, isDisabled), Subjects devenus observables dérivés (url$, fields$, loading$ : plus de .next()), pilotage d'un select via linkedSignal .set() (options/loading/optionComparer/optionKey), clueChange en output(), et inputs devenus requis : luOptionGroupSelect/luOptionGroupBy échouent au build (la directive matche sur l'attribut nu [luOptionGroup]), tandis qu'apiV3 ne pose aucun problème (sélecteur lu-simple-select[apiV3] : sans l'attribut, la directive n'est pas instanciée). Le hook ngOnChanges continue de se déclencher sur les signal inputs, mais la clé de SimpleChanges suit le nom de la propriété TS renommée, pas l'alias.",
+    "category": "Breaking22"
+  },
+  "Readonly": {
+    "description": "PR #4718 : ~360 propriétés de classe passées en readonly + règle ESLint @angular-eslint/prefer-signals (preferReadonlySignalProperties). readonly bloque la réassignation, pas la mutation (.next()/.set() OK) et une sous-classe qui redéclare la propriété compile → surface de casse étroite, aucun changement runtime. Ce qui casse est le pilotage depuis l'extérieur (réassignation d'un flux, d'un template, d'une ref — y compris les mocks de refs en test). Contient le critère pour retirer un readonly côté LF (précédent interne : LuMultiSelectInputComponent redéclare isFilterPillEmpty sans readonly pour que withSelectAll puisse la réassigner).",
+    "category": "Breaking22"
+  },
+  "Strict": {
+    "description": "strictNullChecks activé sur les .d.ts publiés (PR #4497 « strict them all ») : value/CVA des inputs et selects en T | null, LuDialogRef.instance en C | null, popup/modal onOpen/onClose en D | undefined, ILuDateAdapter.parse en D | undefined, inputs élargis (progress-bar state=\"null\" ne compile plus, form-field width, segmented-control-tabs active, fancy-box foreground, time step), PortalDirective<T extends object>, plus une liste de changements de comportement silencieux (canClose avalé, setValue(null) ignoré, date invalide non écrite, popover garde muette).",
+    "category": "Breaking22"
+  }
+}

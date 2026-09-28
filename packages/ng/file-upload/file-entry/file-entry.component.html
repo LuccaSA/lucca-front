@@ -66,18 +66,18 @@
 						<li class="fileToolbar-list-item">
 							<a
 								[href]="downloadURL()"
-								target="_blank"
-								rel="noopener noreferrer"
-								download="download"
+								[attr.target]="openInNewTab() ? '_blank' : null"
+								[attr.rel]="openInNewTab() ? 'noopener noreferrer' : null"
+								[attr.download]="openInNewTab() ? null : 'download'"
 								class="fileToolbar-list-item-button"
 								type="button"
 								luButton
-								[luTooltip]="intl().download"
+								[luTooltip]="openInNewTab() ? intl().preview : intl().download"
 								luTooltipOnlyForDisplay
 							>
 								<lu-icon
 									class="fileToolbar-list-item-button-icon"
-									icon="arrowDownload"
+									[icon]="openInNewTab() ? 'eye' : 'arrowDownload'"
 									[alt]="intl().downloadFile | intlParams: { fileName: fileName() }"
 								/>
 							</a>

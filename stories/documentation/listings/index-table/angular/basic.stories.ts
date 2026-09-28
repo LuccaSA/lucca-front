@@ -19,9 +19,9 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { setStoryOptions } from 'stories/helpers/stories';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { HiddenArgType } from '@/helpers/common-arg-types';
+import { setStoryOptions } from '@/helpers/stories';
 
 interface BasicStory {
 	action: string;

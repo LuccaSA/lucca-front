@@ -1,6 +1,15 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<div class="form-field">
@@ -39,6 +48,14 @@
 						<p class="inlineMessage-content">Helper text</p>
 					</div>
 				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" inlineMessage="Helper text" tooltip="Tooltip">
+					<lu-switch-input [(ngModel)]="switch" />
+				</lu-form-field>
+				<lu-form-field label="Label" inlineMessage="Helper text" tooltip="Tooltip">
+					<lu-switch-input [(ngModel)]="switchChecked" />
+				</lu-form-field>
 			</td>
 		</tr>
 		<tr>
@@ -86,6 +103,14 @@
 						<p class="inlineMessage-content">Helper text</p>
 					</div>
 				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" size="S" inlineMessage="Helper text" tooltip="Tooltip">
+					<lu-switch-input [(ngModel)]="switch" />
+				</lu-form-field>
+				<lu-form-field label="Label" size="S" inlineMessage="Helper text" tooltip="Tooltip">
+					<lu-switch-input [(ngModel)]="switchChecked" />
+				</lu-form-field>
 			</td>
 		</tr>
 		<tr>
@@ -135,12 +160,20 @@
 					</div>
 				</div>
 			</td>
+			<td>
+				<lu-form-field label="Label" inlineMessage="Helper text" tooltip="Tooltip">
+					<lu-switch-input [(ngModel)]="switch" [disabled]="true" />
+				</lu-form-field>
+				<lu-form-field label="Label" inlineMessage="Helper text" tooltip="Tooltip">
+					<lu-switch-input [(ngModel)]="switchChecked" [disabled]="true" />
+				</lu-form-field>
+			</td>
 		</tr>
 		<tr>
 			<td>Invalid</td>
 			<td>
 				<div class="form-field">
-					<label class="formLabel" for="switchInvalid" id="switchInvalid-label"
+					<label class="formLabel is-error" for="switchInvalid" id="switchInvalid-label"
 						>Label<span class="formLabel-info"
 							><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
 						></label
@@ -156,13 +189,13 @@
 						/>
 						<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 					</span>
-					<div class="inlineMessage" id="switchInvalid-message">
+					<div class="inlineMessage is-error" id="switchInvalid-message">
 						<p class="inlineMessage-content">Helper text</p>
 					</div>
 				</div>
 
 				<div class="form-field">
-					<label class="formLabel" for="switchInvalidCheck" id="switchInvalidCheck-label"
+					<label class="formLabel is-error" for="switchInvalidCheck" id="switchInvalidCheck-label"
 						>Label<span class="formLabel-info"
 							><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span
 						></label
@@ -179,10 +212,18 @@
 						/>
 						<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 					</span>
-					<div class="inlineMessage" id="switchInvalidCheck-message">
+					<div class="inlineMessage is-error" id="switchInvalidCheck-message">
 						<p class="inlineMessage-content">Helper text</p>
 					</div>
 				</div>
+			</td>
+			<td>
+				<lu-form-field label="Label" invalid inlineMessage="Helper text" tooltip="Tooltip">
+					<lu-switch-input [(ngModel)]="switch" />
+				</lu-form-field>
+				<lu-form-field label="Label" invalid inlineMessage="Helper text" tooltip="Tooltip">
+					<lu-switch-input [(ngModel)]="switchChecked" />
+				</lu-form-field>
 			</td>
 		</tr>
 	</tbody>

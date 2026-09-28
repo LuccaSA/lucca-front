@@ -3,8 +3,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, ELuDateGranularity, LuStringDateAdapter } from '@lucca-front/ng/core';
 import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular-vite';
+import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
 
 type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: string; secondSelectedDate: string };
 
@@ -124,7 +124,7 @@ export const SelectMonthWithDisplayer = generateStory({
 	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate" [granularity]="granularity">
-		<ng-container *luDisplayer="let value">start of {{ value | date : 'MM/YYYY' }}</ng-container>
+		<ng-container *luDisplayer="let value">start of {{ value | date : 'MM/yyyy' }}</ng-container>
 	</lu-date-select>
 	<span class="textfield-label">Label</span>
 </label>

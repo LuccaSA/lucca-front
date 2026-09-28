@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
-import { createTestStory } from 'stories/helpers/stories';
-import { sleep, waitForAngular } from 'stories/helpers/test';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { createTestStory } from '@/helpers/stories';
+import { sleep, waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, within } from 'storybook/test';
 
 @Component({

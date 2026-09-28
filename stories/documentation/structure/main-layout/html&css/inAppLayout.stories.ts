@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/angular';
+import { Meta } from '@storybook/angular-vite';
 
 interface MainLayoutHTMLInAppLayoutStory {
 	header: boolean;
@@ -198,6 +198,7 @@ export default {
 		</main>
 	</div>
 </div>
+<!-- <lu-toasts /> -->
 `,
 		};
 	},

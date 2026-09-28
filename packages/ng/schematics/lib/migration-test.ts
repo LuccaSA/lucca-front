@@ -46,7 +46,12 @@ export function expectTree(tree: Tree): { toMatchTree(expectedTree: Tree): void 
 				try {
 					expect(stripLastNewLine(actualContent)).toEqual(stripLastNewLine(expectedContent));
 				} catch (error) {
-					throw error instanceof Error ? new Error(`Expected file content to match for ${path}: \n${error.message}`) : error;
+					if (error instanceof Error) {
+						// Mutate the message in place (rather than re-throwing a new Error) so the original
+						// stack trace and Vitest's expected/actual diff properties are preserved.
+						error.message = `Expected file content to match for ${path}: \n${error.message}`;
+					}
+					throw error;
 				}
 			});
 
