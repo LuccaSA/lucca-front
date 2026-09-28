@@ -14,7 +14,7 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { createTestStory } from '@/helpers/stories';
-import { pickDay, waitForAngular } from '@/helpers/test';
+import { findPanelOptions, pickDay, waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
@@ -311,3 +311,160 @@ export const ColonSpacingEnglishTEST = {
 		}),
 	],
 };
+
+export const KeyboardTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const getPill = () => canvas.getByRole('button', { name: /Legume \(simple\)/ });
+	const getClearer = (pill: HTMLElement) => within(pill.closest('.filterPillWrapper') as HTMLElement).getByRole('button', { name: /Vider ce champ/ });
+	const queryClearer = (pill: HTMLElement) => within(pill.closest('.filterPillWrapper') as HTMLElement).queryByRole('button', { name: /Vider ce champ/ });
+
+	await step('ArrowUp opens the popover and moves the focus into it', async () => {
+		getPill().focus();
+		await userEvent.keyboard('{ArrowUp}');
+		await waitForAngular();
+		await expect(getPill()).toHaveAttribute('aria-expanded', 'true');
+		await expect(screen.getByRole('combobox')).toHaveFocus();
+	});
+
+	let selectedOptionText = '';
+	await step('Selecting an option with the keyboard fills the pill', async () => {
+		const options = await within(screen.getByRole('listbox')).findAllByRole('option');
+		selectedOptionText = options[0].innerText;
+		// The first option is highlighted when the panel opens
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(getPill()).toHaveTextContent(selectedOptionText);
+	});
+
+	await step('Escape closes the popover and gives the focus back to the pill', async () => {
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(getPill()).toHaveAttribute('aria-expanded', 'false'));
+		await expect(getPill()).toHaveFocus();
+	});
+
+	await step('Clearing with the keyboard empties the pill and gives the focus back to it', async () => {
+		getClearer(getPill()).focus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(getPill()).not.toHaveTextContent(selectedOptionText);
+		await expect(queryClearer(getPill())).not.toBeInTheDocument();
+		await expect(getPill()).toHaveFocus();
+	});
+
+	await step('Space toggles the checkbox pill', async () => {
+		const pill = canvas.getByRole('button', { name: /Inclure les collaborateurs partis/ });
+		pill.focus();
+		await userEvent.keyboard(' ');
+		await waitForAngular();
+		await expect(pill).toHaveAttribute('aria-pressed', 'true');
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(pill).toHaveAttribute('aria-pressed', 'false');
+	});
+
+	await step('An option of the multi-select can be selected with the keyboard', async () => {
+		const pill = canvas.getByRole('button', { name: /Légume \(multi\)/ });
+		pill.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(screen.getByRole('combobox')).toHaveFocus();
+		const [firstOption] = await findPanelOptions();
+		const firstOptionText = firstOption.innerText;
+		// Moving the highlight with a second ArrowDown is not handled in the test environment
+		// (see multi-select.stories.ts), so we stick to the option highlighted on opening
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		await expect(firstOption).toHaveAttribute('aria-selected', 'true');
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(pill).toHaveAttribute('aria-expanded', 'false'));
+		await expect(pill).toHaveFocus();
+		await expect(pill).toHaveTextContent(firstOptionText);
+	});
+});
+
+export const DisabledTEST = createTestStory({ ...Basic, name: 'Disabled', args: { ...Basic.args, disabled: true } }, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const pill = canvas.getByRole('button', { name: /Légume \(multi\)/ });
+
+	await step('A disabled pill is disabled and shows no placeholder', async () => {
+		await expect(pill).toBeDisabled();
+		await expect(pill).not.toHaveTextContent('Aucune valeur sélectionnée');
+	});
+
+	await step('A disabled pill does not open its popover', async () => {
+		await userEvent.click(pill);
+		await waitForAngular();
+		await expect(pill).toHaveAttribute('aria-expanded', 'false');
+		await expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+		pill.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await expect(pill).toHaveAttribute('aria-expanded', 'false');
+	});
+
+	await step('The other pills stay enabled', async () => {
+		await expect(canvas.getByRole('button', { name: /Legume \(simple\)/ })).toBeEnabled();
+	});
+});
+
+export const NotClearableTEST = createTestStory({ ...Basic, name: 'Not clearable', args: { ...Basic.args, clearable: false } }, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const pill = canvas.getByRole('button', { name: /Legume \(simple\)/ });
+
+	await step('A filled pill has no clear button when clearable is false', async () => {
+		await userEvent.click(pill);
+		await waitForAngular();
+		const options = await within(screen.getByRole('listbox')).findAllByRole('option');
+		const selectedOptionText = options[0].innerText;
+		await userEvent.click(options[0]);
+		await waitForAngular();
+		await expect(pill).toHaveTextContent(selectedOptionText);
+		await expect(within(pill.closest('.filterPillWrapper') as HTMLElement).queryByRole('button', { name: /Vider ce champ/ })).not.toBeInTheDocument();
+	});
+});
+
+export const CustomizationTEST = createTestStory(
+	{
+		name: 'Customization',
+		render: () => ({
+			props: { legumes: allLegumes },
+			template: `<lu-filter-pill label="Légume" placeholder="Tous" icon="heart">
+	<lu-simple-select [ngModel]="null" [options]="legumes" />
+</lu-filter-pill>
+<lu-filter-pill label="Date de début">
+	<lu-date-input [ngModel]="null" />
+</lu-filter-pill>`,
+		}),
+	},
+	async ({ canvasElement, step }) => {
+		await waitForAngular();
+
+		const canvas = within(canvasElement);
+
+		await step('The placeholder input replaces the default placeholder', async () => {
+			const pill = canvas.getByRole('button', { name: /Légume/ });
+			await expect(pill).toHaveTextContent('Tous');
+			await expect(pill).not.toHaveTextContent('Aucune valeur sélectionnée');
+		});
+
+		await step('The icon input replaces the default icon', async () => {
+			const pill = canvas.getByRole('button', { name: /Légume/ });
+			await expect(pill.querySelector('.filterPill-toggle .lucca-icon')).toHaveClass('icon-heart');
+		});
+
+		await step('The input component provides its own default icon and placeholder', async () => {
+			const pill = canvas.getByRole('button', { name: /Date de début/ });
+			await expect(pill).toHaveTextContent('Aucune valeur sélectionnée');
+			await expect(pill.querySelector('.filterPill-toggle .lucca-icon')).not.toHaveClass('icon-arrowChevronBottom');
+		});
+	},
+);
