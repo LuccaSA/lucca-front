@@ -51,14 +51,22 @@ jobs:
           TAG="$REF_NAME"
           VERSION="${TAG#v}"
 
-          if [[ "$VERSION" =~ -rc(\.|$) ]]; then
-            echo "NPM_PUBLISH_COMMAND=npm publish --access public --provenance --tag rc" >> "$GITHUB_ENV"
-            echo "Publish mode: direct (RC tag detected: $TAG)"
+          # Prereleases (rc, beta, split...) never own "latest": publish them
+          # directly under a dist-tag named after their prerelease identifier.
+          if [[ "$VERSION" == *-* ]]; then
+            PRE="${VERSION#*-}"
+            PRE="${PRE%%.*}"
+            # npm rejects a dist-tag that parses as a semver range.
+            [[ "$PRE" =~ ^[a-z][a-z0-9-]*$ ]] || PRE="prerelease"
+            echo "NPM_PUBLISH_COMMAND=npm publish --access public --provenance --tag $PRE" >> "$GITHUB_ENV"
+            echo "Publish mode: direct (prerelease tag: $TAG, dist-tag: $PRE)"
             exit 0
           fi
 
-          # npm refuses to implicitly move the "latest" dist-tag backwards, so a
-          # backport released after a newer major must carry an explicit tag.
+          # From here VERSION is a plain X.Y.Z, where "sort -V" matches semver
+          # ordering. npm refuses to implicitly move the "latest" dist-tag
+          # backwards, so a backport released after a newer major needs an
+          # explicit tag.
           MAJOR="${VERSION%%.*}"
           LATEST="$(npm view @lucca-front/ng version 2>/dev/null || true)"
 
