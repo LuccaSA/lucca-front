@@ -72,15 +72,15 @@ jobs:
 
           if [ -n "$LATEST" ] && [ "$VERSION" != "$LATEST" ] &&
              [ "$(printf '%s\n%s\n' "$VERSION" "$LATEST" | sort -V | head -n 1)" = "$VERSION" ]; then
-            DIST_TAG="v${MAJOR}-lts"
-            echo "Publish mode: staged (tag: $TAG, backport behind latest $LATEST)"
+            echo "NPM_PUBLISH_COMMAND=npm stage publish --access public --provenance --tag v${MAJOR}-lts" >> "$GITHUB_ENV"
+            echo "Publish mode: staged (tag: $TAG, dist-tag: v${MAJOR}-lts, behind latest $LATEST)"
           else
-            DIST_TAG="latest"
-            echo "Publish mode: staged (tag: $TAG)"
+            # "latest" stays implicit: npm then still refuses the publish if the
+            # lookup above came back empty or stale and this version would in
+            # fact move the dist-tag backwards.
+            echo "NPM_PUBLISH_COMMAND=npm stage publish --access public --provenance" >> "$GITHUB_ENV"
+            echo "Publish mode: staged (tag: $TAG, dist-tag: latest)"
           fi
-
-          echo "Resolved npm dist-tag: $DIST_TAG"
-          echo "NPM_PUBLISH_COMMAND=npm stage publish --access public --provenance --tag $DIST_TAG" >> "$GITHUB_ENV"
 
       - run: $NPM_PUBLISH_COMMAND
         working-directory: dist/icons
