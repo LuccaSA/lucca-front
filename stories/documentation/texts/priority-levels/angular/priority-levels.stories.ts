@@ -18,10 +18,21 @@ export default {
 			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs' },
 		},
+		hiddenLabel: {
+			control: { type: 'boolean' },
+			description: 'Masque visuellement le libellé (accessible aux lecteurs d’écran) et l’affiche dans une tooltip sur l’icône.',
+			table: { category: 'inputs' },
+		},
 	},
 	render: (args, { argTypes }) => ({
 		template: `<lu-priority-levels${generateInputs(args, argTypes)} />`,
 	}),
 } as Meta;
 
-export const Template: StoryObj<PriorityLevelsComponent> = {};
+export const Template: StoryObj<PriorityLevelsComponent> = {
+	args: {
+		level: 1,
+		size: 'M',
+		hiddenLabel: false,
+	},
+};

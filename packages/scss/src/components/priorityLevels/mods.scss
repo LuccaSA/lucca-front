@@ -12,9 +12,11 @@
 
 @mixin S {
 	--components-priorityLevels-font: var(--pr-t-font-body-XS);
+	--components-priorityLevels-minBlockSize: var(--pr-t-font-body-XS-lineHeight);
 	--components-priorityLevels-gap: var(--pr-t-spacings-25);
 }
 
 @mixin L {
 	--components-priorityLevels-font: var(--pr-t-font-body-M);
+	--components-priorityLevels-minBlockSize: var(--pr-t-font-body-M-lineHeight);
 }

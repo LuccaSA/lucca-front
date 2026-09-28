@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, luNumberAttribute } from '@lucca-front/ng/core';
 import { IconComponent, IconSize } from '@lucca-front/ng/icon';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LU_PRIORITY_LEVELS_TRANSLATIONS } from './priority-levels.translate';
 import { PriorityLevel, PriorityLevelsSize } from './priority-levels.type';
 
@@ -16,7 +17,7 @@ const LEVEL_TRANSLATION_KEYS = {
 	styleUrl: './priority-levels.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent],
+	imports: [IconComponent, LuTooltipTriggerDirective],
 	host: {
 		class: 'priorityLevels',
 		'[class.mod-medium]': 'level() === 2',
@@ -40,6 +41,11 @@ export class PriorityLevelsComponent {
 	 * Overrides for the default translations
 	 */
 	readonly intl = input(...intlInputOptions(LU_PRIORITY_LEVELS_TRANSLATIONS));
+
+	/**
+	 * Visually hides the label while keeping it in the DOM for screen readers, and shows it in a tooltip on the icon instead
+	 */
+	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 
 	readonly label = computed(() => this.intl()[LEVEL_TRANSLATION_KEYS[this.level()]]);
 

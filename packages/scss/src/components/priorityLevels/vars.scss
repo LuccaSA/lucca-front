@@ -1,5 +1,6 @@
 @mixin vars {
 	--components-priorityLevels-font: var(--pr-t-font-body-S);
+	--components-priorityLevels-minBlockSize: var(--pr-t-font-body-S-lineHeight);
 	--components-priorityLevels-gap: var(--pr-t-spacings-50);
 	--components-priorityLevels-icon-color1: var(--pr-t-color-text);
 	--components-priorityLevels-icon-color2: var(--palettes-neutral-400);

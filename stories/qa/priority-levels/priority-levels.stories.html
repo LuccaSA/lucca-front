@@ -14,15 +14,15 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<div class="priorityLevels">
-						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-chartLevels mod-XS"></span></span>
+						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-XS"></span></span>
 						<span class="priorityLevels-label">Low</span>
 					</div>
 					<div class="priorityLevels mod-medium">
-						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-chartLevels mod-XS"></span></span>
+						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-XS"></span></span>
 						<span class="priorityLevels-label">Medium</span>
 					</div>
 					<div class="priorityLevels mod-high">
-						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-chartLevels mod-XS"></span></span>
+						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-XS"></span></span>
 						<span class="priorityLevels-label">High</span>
 					</div>
 				</div>
@@ -40,15 +40,15 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<div class="priorityLevels mod-S">
-						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-chartLevels mod-XXS"></span></span>
+						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-XXS"></span></span>
 						<span class="priorityLevels-label">Low</span>
 					</div>
 					<div class="priorityLevels">
-						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-chartLevels mod-XS"></span></span>
+						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-XS"></span></span>
 						<span class="priorityLevels-label">Low</span>
 					</div>
 					<div class="priorityLevels mod-L">
-						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-chartLevels mod-S"></span></span>
+						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-S"></span></span>
 						<span class="priorityLevels-label">Low</span>
 					</div>
 				</div>
@@ -58,6 +58,24 @@
 					<lu-priority-levels size="S" />
 					<lu-priority-levels size="M" />
 					<lu-priority-levels size="L" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Hidden label</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="priorityLevels mod-high">
+						<span class="priorityLevels-icon" [luTooltip]="'High'" luTooltipOnlyForDisplay>
+							<span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-XS"></span>
+						</span>
+						<span class="priorityLevels-label pr-u-mask">High</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-priority-levels [level]="3" [hiddenLabel]="true" />
 				</div>
 			</td>
 		</tr>
