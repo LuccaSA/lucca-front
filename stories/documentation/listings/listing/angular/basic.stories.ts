@@ -63,6 +63,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.).<br>[v21.2] <code>orderedFancy</code>',
+			table: { category: 'inputs' },
 		},
 		defaultIcon: {
 			options: IconsList.map((i) => i.icon),
@@ -71,6 +72,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			},
 			description: 'Modifie l’icône par défaut.',
 			if: { arg: 'type', eq: 'icons' },
+			table: { category: 'inputs' },
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
@@ -79,19 +81,22 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			},
 			description: 'Modifie l’icône d’un élément de la liste.',
 			if: { arg: 'type', eq: 'icons' },
+			table: { category: 'inputs' },
 		},
 		start: {
 			if: { arg: 'type', eq: 'ordered' },
 			description: 'Modifie la valeur initiale de la liste.',
+			table: { category: 'inputs' },
 		},
 		reversed: {
 			if: { arg: 'type', eq: 'ordered' },
 			description: 'Présente la liste sous forme décroissante.',
+			table: { category: 'inputs' },
 		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
 		ordered: HiddenArgType,
-		palette: PaletteAllArgType,
+		palette: { ...PaletteAllArgType, table: { category: 'inputs' } },
 	},
 
 	args: {

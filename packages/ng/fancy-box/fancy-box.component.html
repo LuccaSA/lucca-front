@@ -1,4 +1,15 @@
 <div class="fancyBox-content">
+	@if (backgroundEndStartUrl(); as backgroundEndStartUrl) {
+		<div class="fancyBox-content-backgroundEndStart" [innerHtml]="backgroundEndStartUrl | luSafeExternalSvg"></div>
+	}
+	@if (backgroundStartEndUrl(); as backgroundStartEndUrl) {
+		<div class="fancyBox-content-backgroundStartEnd" [innerHtml]="backgroundStartEndUrl | luSafeExternalSvg"></div>
+	}
+	@if (foregroundStartEndUrl(); as foregroundStartEndUrl) {
+		<div class="fancyBox-content-foregroundStartEnd" [innerHtml]="foregroundStartEndUrl | luSafeExternalSvg"></div>
+	}
+	@if (foregroundEndStartUrl(); as foregroundEndStartUrl) {
+		<div class="fancyBox-content-foregroundEndStart" [innerHtml]="foregroundEndStartUrl | luSafeExternalSvg"></div>
+	}
 	<ng-content />
-	<div class="fancyBox-content-foreground"></div>
 </div>

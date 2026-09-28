@@ -1,6 +1,6 @@
 import { computed, Directive, effect, forwardRef, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { isNil } from '@lucca-front/ng/core';
+import { getIntlPluralLabel, isNil, LOCALE_PLURAL_RULES, LuPluralForms } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
 import { LuMultiSelection, LuMultiSelectionMode } from '../../select.model';
@@ -27,17 +27,20 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
 	readonly intl = this.select.intl;
 
+	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
+
 	/**
 	 * @deprecated use withSelectAllDisplayerLabelFn
 	 */
 	readonly displayerLabel = input<string>(undefined, { alias: 'withSelectAllDisplayerLabel' });
-	readonly displayerLabelFn = input<(count: number) => string>(undefined, { alias: 'withSelectAllDisplayerLabelFn' });
+	readonly displayerLabelFn = input<(count: number) => string | LuPluralForms>(undefined, { alias: 'withSelectAllDisplayerLabelFn' });
 
 	readonly displayerLabelValue = computed(() => {
 		const label = this.displayerLabelFn();
 		const count = this.displayerCount();
 		if (label) {
-			return label(count);
+			const result = label(count);
+			return typeof result === 'string' ? result : getIntlPluralLabel(this.pluralRules, result, count ?? 0);
 		}
 		return `${count} ${this.displayerLabel()}`;
 	});
@@ -48,7 +51,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$, { initialValue: 0 });
-	readonly clueChange = toSignal(this.select.clueChange$);
+	readonly clueChange = toSignal(this.select.clue$);
 	readonly #options = computed<readonly TValue[]>(() => this.select.options() ?? []);
 
 	readonly singleRemainingOption = computed<TValue | undefined>(() => {

@@ -6,19 +6,7 @@
 
 Component selector : `lu-dialog`
 
-## HTML/CSS
-
-Classe CSS : `.dialog`
-
-💡 L'ouverture d'une fenêtre de dialogue désactive le plan de document du reste de la page. Son titre doit donc être contenu dans une balise `<h1>` afin de rester valide.
-
 ### Basic
-
-```css
-@forward '@lucca-front/scss/src/components/dialog';
-@forward '@lucca-front/scss/src/components/button';
-@forward '@lucca-front/scss/src/components/footer';
-```
 
 ```html
 <div class="dialog_backdrop"></div>
@@ -48,8 +36,14 @@ Classe CSS : `.dialog`
 
 ### Confirmation
 
-```css
-@forward '@lucca-front/scss/src/components/dialog';
+```js
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import {
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
@@ -69,12 +63,17 @@ Classe CSS : `.dialog`
 
 ### Multiple
 
-```css
-@forward '@lucca-front/scss/src/components/dialog';
+```js
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import {
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-@let config = {"mode":"drawer","autoFocus":".open"};
+@let config = { mode: "drawer", autoFocus: ".open" };
 
 <button class="open" luButton="outlined" [luDialogOpen]="dialogTpl1" [luDialogConfig]="config">Open Dialog</button>
 
@@ -215,8 +214,6 @@ Pour créer et ouvrir une dialog depuis le template, vous pouvez utiliser les di
 - `luDialogClose` pour fermer la dialog via la méthode `close` lors du click sur son élément hôte.
 - `luDialogDismiss` pour fermer la dialog via la méthode `dismiss` lors du click sur son élément hôte.
 
-#### Exemple:
-
 #### Envoyer et reçevoir des données en Template-driven
 
 Du fait que tout soit géré depuis le template, vous pouvez totalement ignorer la partie transmission de données car par définition,
@@ -226,11 +223,106 @@ la dialog box a accès à tout ce que le composant expose au template, fonctions
 
 Dans le cas où vous souhaitez utiliser un formulaire au sein d’une [dialog box](https://prisme.lucca.io/94310e217/p/841b0b-dialogs), il vous suffit de placer la balise `form` avec un attribut `luForm` autour du contenu de votre dialog, que celle-ci soit template-driven ou non :
 
-```css
-@forward '@lucca-front/scss/src/components/dialog';
+```js
+import { configureLuDialog } from '@lucca-front/ng/dialog';
+import { provideLuDialog } from '@lucca-front/ng/dialog';
+import {DialogHeaderAction} from '@lucca-front/ng/dialog';
+import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+```
+
+```ts
+bootstrapApplication(App, {
+  providers: [configureLuDialog()],
+});
+```
+
+```ts
+@Component({
+  selector: 'my-component',
+  ...
+  providers: [provideLuDialog()]
+})
+```
+
+```ts
+// Tout d'abord, on récupère le service via injection
+#dialog = inject(LuDialogService);
+
+openDialog(): void {
+    // On appele la méthode open en lui passant un Component en content, vous pouvez également passer un TemplateRef
+    const dialogRef = this.#dialog.open({
+        content: ExampleDialogComponent
+    });
+}
+```
+
+```ts
+@Component({
+  selector: 'my-dialog',
+  template: `...`,
+})
+export class MyDialogComponent {
+  /**
+   *  Vous pouvez nommer le champ de données comme vous le souhaitez, celui-ci sera automatiquement retrouvé par le service.
+   *
+   *  Cependant, il doit obligatoirement être public.
+   */
+  myData = injectDialogData<{ name: string; height?: number }>();
+
+  /**
+   * Ici on récupère la référence au dialog ouvert et on en profite pour déclarer que ce dialog retourne un `boolean`
+   *
+   * Tout comme pour `injectDialogData`, le nom du champ importe peu, du moment qu'il est public.
+   */
+  ref = injectDialogRef<boolean>();
+
+  close(): void {
+    /**
+     *  Le type de données passé à la méthode close doit correspondre au type passe à `injectDialogRef`
+     *
+     *  Ce type à une valeur par défaut à `void`, donc aucune donnée ne doit être passée si aucun type n'est passé à `injectDialogRef`
+     */
+    this.ref.close(true);
+  }
+}
+```
+
+```ts
+this.#dialog.open({
+  content: MyDialogComponent,
+  data: { name: 'toto' }, // Fonctionne, seul name est required
+});
+
+this.#dialog.open({
+  content: MyDialogComponent,
+  // Erreur: aucun data fourni alors que le composant en a besoin
+});
+
+this.#dialog.open({
+  content: MyDialogComponent,
+  data: 25, // Erreur: data non conforme à l'interface demandée
+});
+```
+
+```ts
+const dialogRef = this.#dialog.open({
+  content: MyDialogComponent,
+  data: { name: 'toto' }, // On passe des data pour que ça fonctionne
+});
+
+// Cette logique ne sera pas déclenchée si l'utilisateur ferme la dialog via la touche Echap., la croix de fermeture ou un click sur le backdrop.
+dialogRef.result$
+  .pipe(
+    switchMap((res: boolean) => {
+      return this.serviceMetier.modifierTruc(res);
+    }),
+  )
+  .subscribe(() => {
+    this.notification.success('Opération réussie');
+  });
 ```
 
 ```html
@@ -343,7 +435,7 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 ```
 
 ```html
-<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="{mode: 'fancy'}">
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="{ mode: 'fancy' }">
 	Open Template-driven Fancy Dialog
 </button>
 
@@ -361,3 +453,9 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 	</lu-dialog>
 </ng-template>
 ```
+
+## HTML/CSS
+
+Classe CSS : `.dialog`
+
+💡 L'ouverture d'une fenêtre de dialogue désactive le plan de document du reste de la page. Son titre doit donc être contenu dans une balise `<h1>` afin de rester valide.

@@ -121,6 +121,20 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		expect(clueChangeSpy).not.toHaveBeenCalled();
 	});
 
+	it('should stay non-searchable once the panel has been opened', async () => {
+		// Arrange — no `(clueChange)` binding, so the select must never turn searchable
+		const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+
+		// Act
+		nativeElement.dispatchEvent(event);
+		await vi.runAllTimersAsync();
+		fixture.detectChanges();
+
+		// Assert
+		expect(component.isPanelOpen).toBe(true);
+		expect(component.searchable).toBe(false);
+	});
+
 	it('should update filter pill disabled signal when disabled state changes', () => {
 		// Assert initial state
 		expect(component.filterPillDisabled?.()).toBe(false);

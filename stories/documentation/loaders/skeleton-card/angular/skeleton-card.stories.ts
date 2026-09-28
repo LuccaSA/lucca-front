@@ -14,6 +14,7 @@ export const Template: StoryObj<SkeletonCardComponent> = {
 				type: 'number',
 				min: 0,
 			},
+			table: { category: 'inputs' },
 		},
 	},
 

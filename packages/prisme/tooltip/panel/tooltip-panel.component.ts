@@ -21,6 +21,7 @@ export class LuTooltipPanelComponent {
 	readonly mouseLeave$ = new Subject<void>();
 
 	readonly content = signal<string | SafeHtml | null>(null);
+	readonly enterDelay = signal(300);
 
 	readonly contentPositionClasses = signal<Record<string, boolean>>({});
 

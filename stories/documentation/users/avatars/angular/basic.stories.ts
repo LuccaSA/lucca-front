@@ -46,6 +46,7 @@ export default {
 				'Avec image erronée': georges,
 				'Sans image': jake,
 			},
+			table: { category: 'inputs' },
 		},
 		sizes: {
 			description: "Taille de l'avatar.",
@@ -53,21 +54,25 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		displayFormat: {
 			description: 'Format d’affichage des initiales. F pour prénom (firstname) L pour nom (lastname).',
+			table: { category: 'inputs' },
 		},
 		placeholder: {
 			description: 'Applique un placeholder d’avatar.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 		AI: {
 			description: 'Avatar utilisé pour une réponse faite par IA.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

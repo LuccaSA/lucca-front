@@ -13,12 +13,24 @@
 	margin: var(--components-tooltip-margin);
 	text-align: center;
 	inline-size: fit-content;
-	animation-name: scaleIn;
+	animation-name: scaleIn, tooltipPointerEventsIn;
+	animation-delay: var(--components-tooltip-animationDelay);
 	animation-duration: var(--commons-animations-durations-fast);
 	animation-iteration-count: 1;
+	animation-fill-mode: backwards;
 	overflow-wrap: break-word;
 
 	@include keyframe.scaleIn;
+
+	@keyframes tooltipPointerEventsIn {
+		0% {
+			pointer-events: none;
+		}
+
+		1% {
+			pointer-events: auto;
+		}
+	}
 
 	&:empty {
 		display: none;

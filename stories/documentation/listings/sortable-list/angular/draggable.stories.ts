@@ -8,6 +8,8 @@ interface SortableListDraggableStory {
 	small: boolean;
 	clickable: boolean;
 	unclearable: boolean;
+	// Action Storybook injectée à la place de l'événement de drop documenté dans `argTypes`.
+	drop?: (event: CdkDragDrop<unknown[]>) => void;
 }
 
 export default {
@@ -23,27 +25,35 @@ export default {
 				type: 'text',
 			},
 			description: 'Modifie le texte principal d’un élément de liste. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 		helperMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte secondaire à l’élément de liste.',
+			table: { category: 'inputs' },
 		},
 		small: {
 			control: 'boolean',
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		clickable: {
 			control: 'boolean',
 			description: 'Rend les lignes cliquables.',
+			table: { category: 'inputs' },
 		},
 		unclearable: {
 			control: 'boolean',
 			description: 'Masque la croix de suppression.',
+			table: { category: 'inputs' },
 		},
 		drop: {
 			description: 'Événement déclenché au drop.',
+			action: 'drop',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'CdkDragDrop<unknown[]>' } },
 		},
 	},
 	render: (args: SortableListDraggableStory) => {
@@ -55,7 +65,10 @@ export default {
 		return {
 			props: {
 				listItem,
-				drop: (event: CdkDragDrop<unknown[]>) => moveItemInArray(listItem, event.previousIndex, event.currentIndex),
+				drop: (event: CdkDragDrop<unknown[]>) => {
+					moveItemInArray(listItem, event.previousIndex, event.currentIndex);
+					args.drop?.(event);
+				},
 			},
 			template: `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)">
 	<lu-sortable-list-item label="${args.label}" helperMessage="${args.helperMessage}"${unclearable}${clickable}${small} drag cdkDrag />

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
-import { map, startWith } from 'rxjs';
+import { map } from 'rxjs';
 import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
 import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
 import { LuCoreSelectUsersDirective } from './users.directive';
@@ -37,9 +37,6 @@ export class LuUserOptionComponent {
 	protected context = inject<ILuOptionContext<LuCoreSelectWithAdditionnalInformation<LuCoreSelectUser>>>(LU_OPTION_CONTEXT);
 	protected userDirective = inject(LuCoreSelectUsersDirective);
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
-	protected readonly hasEmptyClue$ = this.userDirective.select.clueChange$.pipe(
-		startWith(this.userDirective.select.clue),
-		map((clue) => !clue),
-	);
+	protected readonly hasEmptyClue$ = this.userDirective.select.clue$.pipe(map((clue) => !clue));
 	protected readonly customUserOptionTpl = this.userDirective.customUserOptionTpl;
 }

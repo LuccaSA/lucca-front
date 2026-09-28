@@ -75,5 +75,17 @@ export class OptionComponent {
 
 	readonly treeitemContent = contentChild(Treeitem);
 
+	/**
+	 * Depth of the nested `[treeitem]` wrapper, for consumers that hand their own projected
+	 * content over to this option: a content query does not cross an `ng-content` boundary, so
+	 * the option can then neither see those children nor derive the depth it sits at. Setting it
+	 * renders the wrapper and pins its level; leave it null to let both be worked out here.
+	 */
+	readonly treeitemLevel = input<number | null>(null);
+
 	readonly level: number = (this.#parentOptionRef?.level || 0) + 1;
+
+	readonly hasTreeitems = computed(() => !!this.treeitemContent() || this.treeitemLevel() !== null);
+
+	readonly wrapperLevel = computed(() => this.treeitemLevel() ?? this.level);
 }

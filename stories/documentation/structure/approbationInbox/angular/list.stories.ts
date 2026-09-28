@@ -26,6 +26,7 @@ export default {
 			description: 'Groupe les éléments.',
 		},
 		groupLabel: {
+			name: '↳ group',
 			description: 'Titre du groupe (aussi reprit dans l’intitulé masqué de sa sélection).',
 			if: { arg: 'group', truthy: true },
 		},
@@ -44,18 +45,27 @@ export default {
 				type: 'select',
 			},
 			if: { arg: 'itemCount', eq: 0 },
+			table: { category: 'inputs' },
 		},
 		current: {
 			description: 'Définit le lien (ou le bouton) comme l’élément courant affiché.',
+			table: { category: 'inputs' },
 		},
 		filterBar: {
 			description: 'Exemple de barre de filtres.',
 		},
 		selectable: {
 			description: 'Active la sélection multiple',
+			table: { category: 'inputs' },
 		},
 		rightContent: {
 			description: 'Exemple de données complémentaires.',
+		},
+		icons: {
+			description: 'Icônes affichées dans les données complémentaires.',
+			control: { type: 'object' },
+			if: { arg: 'rightContent', truthy: true },
+			table: { category: 'inputs' },
 		},
 		visual: {
 			description: 'Affiche un exemple de visuel au début d’un élément.',
@@ -65,14 +75,11 @@ export default {
 		},
 		center: {
 			description: 'Centre verticalement les données d’un élément',
-		},
-		icons: {
-			description: 'Icônes affichées dans les données complémentaires.',
-			control: { type: 'object' },
-			if: { arg: 'rightContent', truthy: true },
+			table: { category: 'inputs' },
 		},
 		emptyResetButton: {
 			if: { arg: 'itemCount', eq: 0 },
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

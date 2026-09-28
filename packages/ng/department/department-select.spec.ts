@@ -1,6 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { FormsModule } from '@angular/forms';
+import { LOCALE_ID } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ILuTree } from '@lucca-front/ng/core';
 import { fireEvent, render, screen, within } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
@@ -83,6 +84,37 @@ describe('department select', () => {
 
 		const results = await axe(luSelectElement);
 		expect(results).toHaveNoViolations(); // of course not
+	});
+
+	// `departments` has no Polish plural forms in Lokalise yet (see translations.ts), so we exercise the
+	// plural-resolution mechanism itself via an `[intl]` override rather than the real (untranslated) copy.
+	describe('plural resolution of the selected-count label (via intl override)', () => {
+		const departments = (count: number): ILuDepartment[] => Array.from({ length: count }, (_, i) => ({ id: i + 1, name: `Department ${i + 1}` }));
+		const intl = { departments: { few: 'few-form', many: 'many-form', other: 'other-form' } };
+
+		it('should use the "few" form for 2 selected departments (pl locale)', async () => {
+			const control = new FormControl<ILuDepartment[]>(departments(2));
+
+			await render('<lu-department-select [multiple]="true" [formControl]="control" [intl]="intl" data-testid="lu-select" />', {
+				imports: [LuDepartmentSelectInputComponent, ReactiveFormsModule],
+				providers: [{ provide: LOCALE_ID, useValue: 'pl' }],
+				componentProperties: { control, intl },
+			});
+
+			expect(screen.getByTestId('lu-select')).toHaveTextContent('few-form');
+		});
+
+		it('should use the "many" form for 5 selected departments (pl locale)', async () => {
+			const control = new FormControl<ILuDepartment[]>(departments(5));
+
+			await render('<lu-department-select [multiple]="true" [formControl]="control" [intl]="intl" data-testid="lu-select" />', {
+				imports: [LuDepartmentSelectInputComponent, ReactiveFormsModule],
+				providers: [{ provide: LOCALE_ID, useValue: 'pl' }],
+				componentProperties: { control, intl },
+			});
+
+			expect(screen.getByTestId('lu-select')).toHaveTextContent('many-form');
+		});
 	});
 
 	describe('selection', () => {

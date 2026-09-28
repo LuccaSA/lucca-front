@@ -73,7 +73,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 		});
 		super.onClose();
 	}
-	override setValue(value: T | T[]) {
+	override setValue(value: T | T[] | undefined) {
 		super.setValue(value);
 		this._selectors.forEach((s) => s.setValue(value));
 	}

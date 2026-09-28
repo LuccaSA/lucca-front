@@ -12,12 +12,15 @@ export default {
 				max: 12,
 			},
 			if: { arg: 'mode', truthy: false },
+			table: { category: 'inputs' },
 		},
 		responsiveMediaConfig: {
 			if: { arg: 'container', eq: false },
+			table: { category: 'inputs' },
 		},
 		responsiveContainerConfig: {
 			if: { arg: 'container', eq: true },
+			table: { category: 'inputs' },
 		},
 		modeMedia: {
 			if: { arg: 'container', eq: false },
@@ -36,6 +39,7 @@ export default {
 				'autoAtMediaMinXXL',
 				'autoAtMediaMinXXXL',
 			],
+			table: { category: 'inputs' },
 		},
 		modeContainer: {
 			if: { arg: 'container', eq: true },
@@ -54,6 +58,7 @@ export default {
 				'autoAtContainerMinXXL',
 				'autoAtContainerMinXXXL',
 			],
+			table: { category: 'inputs' },
 		},
 		repeatCols: {
 			control: {
@@ -61,6 +66,7 @@ export default {
 				min: 0,
 				max: 34,
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

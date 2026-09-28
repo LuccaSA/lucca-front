@@ -1,6 +1,6 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Overlay } from '@angular/cdk/overlay';
-import { afterNextRender, inject, Injectable, Injector, Renderer2 } from '@angular/core';
+import { afterNextRender, EnvironmentInjector, inject, Injectable, Injector, Renderer2 } from '@angular/core';
 import { isObservable, merge, of, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogRef, LuDialogResult } from './model';
@@ -13,6 +13,8 @@ export class LuDialogService {
 	#overlay = inject(Overlay);
 
 	#injector = inject(Injector);
+
+	#environmentInjector = inject(EnvironmentInjector);
 
 	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> {
 		// Assigned synchronously inside the `providers` callback below, which CDK calls during `Dialog.open()`.
@@ -69,7 +71,9 @@ export class LuDialogService {
 
 		// Re-check once the view is stable: block strategy only locks scroll if the page already
 		// overflows at attach time, which can miss for dialogs opened asynchronously (e.g. via a route).
-		afterNextRender(() => scrollStrategy.enable(), { injector: this.#injector });
+		// With `provideLuDialog()` on a directive, `#injector` is the trigger's node injector.
+		// A `lu-dropdown-action` trigger is already destroyed by this click: `afterNextRender` on it would throw `NG0911`.
+		afterNextRender(() => scrollStrategy.enable(), { injector: this.#environmentInjector });
 
 		if (cdkRef.componentRef) {
 			const renderer = cdkRef.componentRef.injector.get(Renderer2);

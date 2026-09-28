@@ -1,12 +1,11 @@
 ## Description
 
-Functional description for the changelog.
-Keep an empty line under your text, as well as the 5 lines that follow it.
+Functional description, published in the changelog. Keep it short, it is read by humans.
+Keep the blank lines and the `-----` separators, our bot parses them.
 
 -----
 
-Optionally, technical or more in-depth description for reviewers.
-Keep an empty line under your text, as well as the 5 lines that follow it.
+Optional context for reviewers: which file to start reading, why this approach, and for a UI change a link to the impacted stories in the Storybook preview.
 
 -----
 

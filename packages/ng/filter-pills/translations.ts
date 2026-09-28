@@ -7,6 +7,9 @@
 		viewOptions: 'Options de la vue : {{viewName}}',
 		renameView: 'Modifier le nom',
 		deleteView: 'Supprimer',
+		saveView: 'Enregistrer la vue',
+		saveModification: 'Enregistrer les modifications',
+		saveNewView: 'Enregistrer en tant que nouvelle vue',
 	},
 	pt: {
 		clear: 'Esvaziar este campo',
@@ -16,6 +19,9 @@
 		viewOptions: 'Opções da visualização: {{viewName}}',
 		renameView: 'Alterar o nome',
 		deleteView: 'Eliminar',
+		saveView: 'Guardar a vista',
+		saveModification: 'Guardar as alterações',
+		saveNewView: 'Guardar como nova vista',
 	},
 	es: {
 		clear: 'Vaciar este campo',
@@ -25,6 +31,9 @@
 		viewOptions: 'Opciones de la vista: {{viewName}}',
 		renameView: 'Editar el nombre',
 		deleteView: 'Eliminar',
+		saveView: 'Guardar vista',
+		saveModification: 'Guardar los cambios',
+		saveNewView: 'Guardar como vista nueva',
 	},
 	'nl-BE': {
 		clear: 'Dit veld leegmaken',
@@ -34,6 +43,9 @@
 		viewOptions: 'Opties van de weergave: {{viewName}}',
 		renameView: 'De naam wijzigen',
 		deleteView: 'Verwijderen',
+		saveView: 'De weergave opslaan',
+		saveModification: 'Wijzigingen opslaan',
+		saveNewView: 'Opslaan als nieuwe weergave',
 	},
 	nl: {
 		clear: 'Dit veld leegmaken',
@@ -43,6 +55,9 @@
 		viewOptions: 'Opties van de weergave: {{viewName}}',
 		renameView: 'De naam wijzigen',
 		deleteView: 'Verwijderen',
+		saveView: 'De weergave opslaan',
+		saveModification: 'Wijzigingen opslaan',
+		saveNewView: 'Opslaan als nieuwe weergave',
 	},
 	it: {
 		clear: 'Vuotare questo campo',
@@ -52,6 +67,9 @@
 		viewOptions: 'Opzioni della vista: {{viewName}}',
 		renameView: 'Modificare il nome',
 		deleteView: 'Elimina',
+		saveView: 'Salva la vista',
+		saveModification: 'Salva le modifiche',
+		saveNewView: 'Salva come nuova vista',
 	},
 	de: {
 		clear: 'Den Inhalt aus diesem Feld entfernen',
@@ -61,6 +79,9 @@
 		viewOptions: 'Ansichtsoptionen: {{viewName}}',
 		renameView: 'Name bearbeiten',
 		deleteView: 'Löschen',
+		saveView: 'Ansicht speichern',
+		saveModification: 'Änderungen speichern',
+		saveNewView: 'Als neue Ansicht speichern',
 	},
 	en: {
 		clear: 'Empty this field',
@@ -70,6 +91,9 @@
 		viewOptions: 'View options: {{viewName}}',
 		renameView: 'Edit name',
 		deleteView: 'Delete',
+		saveView: 'Save view',
+		saveModification: 'Save changes',
+		saveNewView: 'Save as new view',
 	},
 	pl: {
 		clear: 'Wyczyść to pole',
@@ -79,5 +103,8 @@
 		viewOptions: 'Opcje widoku: {{viewName}}',
 		renameView: 'Zmień nazwę',
 		deleteView: 'Usuń',
+		saveView: 'Save view',
+		saveModification: 'Save changes',
+		saveNewView: 'Save as new view',
 	},
 };

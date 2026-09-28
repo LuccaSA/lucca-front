@@ -31,9 +31,11 @@ export default {
 		bob: HiddenArgType,
 		layoutFixed: {
 			description: 'Applique une largeur fixe aux colonnes.',
+			table: { category: 'inputs' },
 		},
 		dropdown: {
 			description: 'Remplace les boutons d’action par un menu déroulant.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

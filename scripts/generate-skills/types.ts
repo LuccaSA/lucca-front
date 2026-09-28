@@ -49,6 +49,9 @@ export interface ComponentEntry {
 	storybookSlug?: string;
 	/** Full Storybook title path, e.g. "Documentation/Actions/Button/Angular". */
 	storybookPath?: string;
+	/** Declared story family — set only to break a grouping collision between two different components.
+	 * See `restrictToStoryFamily`. */
+	storybookFamily?: string;
 	/** ZeroHeight page path segment, e.g. "098404-button". Stable across releases. */
 	zeroheightPagePath?: string;
 	/** Angular package name (from @lucca-front/ng/<package>), e.g. "button". Omit for CSS-only components.
@@ -57,6 +60,11 @@ export interface ComponentEntry {
 	/** Restrict the extracted API to components/directives whose selector is in this list. Use to scope a
 	 * single component out of a multi-component package (e.g. "lu-text-input" from the "forms" package). */
 	ngSelectors?: string[];
+	/** SCSS component folder under `packages/scss/src/components`, e.g. "checkboxField". Only needed when
+	 * neither `ngPackage` nor the slug resolves to it (the Angular entrypoint and the SCSS folder often
+	 * differ: `date2` → `dateField`, `input` → `textField`). Set to "" for a component with no SCSS
+	 * counterpart, to silence the resolution warning. */
+	scssComponent?: string;
 	/** Primary Figma component name, e.g. "pr-Button". */
 	figmaName?: string;
 	/** All Figma names that map to this slug (many-to-one). */
@@ -266,6 +274,12 @@ export interface StorybookStory {
 	url: string;
 	importPath?: string;
 	framework: 'angular' | 'html-css';
+	/**
+	 * false when `framework` is a fallback guess rather than a decision (neither the story folder
+	 * layout nor the Storybook title carried a framework segment). Such stories are re-classified
+	 * from their source by `resolveStoryFrameworks()`.
+	 */
+	frameworkConfident: boolean;
 }
 
 export interface StorybookDocsEntry {
@@ -308,10 +322,29 @@ export interface StoryExample {
 	imports: string[];
 	/** HTML template strings. */
 	templates: string[];
-	/** Consumer imports from ZeroHeight (curated, preferred over story imports). */
-	zhImports?: string[];
+	/**
+	 * Sass import lines curated on ZeroHeight for this story (`@forward` / `@use`), merged with the
+	 * component's base `@forward`. Kept apart from `zhTsImports`: a single untyped `zhImports` field
+	 * is what let TypeScript imports be rendered inside a ```css fence.
+	 */
+	zhScssImports?: string[];
+	/** Consumer TypeScript import lines curated on ZeroHeight (preferred over story imports). */
+	zhTsImports?: string[];
+	/** ZeroHeight code excerpts that are not import statements (option objects, usage fragments). */
+	zhSnippets?: StorySnippet[];
 	/** Contextual note from ZeroHeight associated with this story. */
 	zhNote?: string;
+}
+
+/**
+ * A ZeroHeight code excerpt kept verbatim, with the language it must be fenced as.
+ *
+ * `scss` rather than `css` on purpose: the ```css fence is reserved for a story's import block, so
+ * the output guard can require that fence to hold nothing but `@forward` / `@use`.
+ */
+export interface StorySnippet {
+	lang: 'ts' | 'scss';
+	code: string;
 }
 
 /** Result from reading all stories for a component. */
@@ -406,6 +439,17 @@ export interface MinorManifestEntry {
 	generatedAt: string;
 	componentCount: number;
 	/** Every published patch of the minor, ascending ("21.2.0" → …). */
+	patches: Record<string, PatchManifestEntry>;
+	/** Technical minors covered by this minor's skill (e.g. "21.4" for 21.3), if any. */
+	technicalMinors?: Record<string, TechnicalMinorManifestEntry>;
+}
+
+export interface TechnicalMinorManifestEntry {
+	/** Why the minor is technical (e.g. "compatibilité Angular 22"). */
+	reason: string;
+	/** Latest published patch of the technical minor, e.g. "21.4.2". */
+	latestPatch: string;
+	/** Every published patch of the technical minor, ascending. Patches > .0 have a fixes/ file. */
 	patches: Record<string, PatchManifestEntry>;
 }
 

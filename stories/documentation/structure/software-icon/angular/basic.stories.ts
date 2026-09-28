@@ -11,6 +11,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’icône produit.',
+			table: { category: 'inputs' },
 		},
 		size: {
 			options: setStoryOptions(SOFTWARE_ICON_SIZE),
@@ -18,15 +19,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		disabled: {
 			description: 'Marque le produit comme inactif.',
+			table: { category: 'inputs' },
 		},
 		iconAlt: {
 			description: 'Texte alternatif de l’illustration restitué par les lecteurs d’écran.',
+			table: { category: 'inputs' },
 		},
 		withTooltip: {
 			description: 'Ajoute une info-bulle qui reprend l’alternative textuelle de l’icône. (Ce paramètre est automatiquement activé quand l’icône est dans son wrapper.)',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

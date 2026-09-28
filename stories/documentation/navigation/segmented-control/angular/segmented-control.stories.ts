@@ -22,12 +22,15 @@ export default {
 	argTypes: {
 		small: {
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		withNumericBadge: {
 			description: 'Présente un exemple avec un Numeric Badge.',
+			table: { category: 'inputs' },
 		},
 		vertical: {
 			description: 'Affiche le composant en vue verticale.',
+			table: { category: 'inputs' },
 		},
 	},
 	title: 'Documentation/Navigation/segmentedControl/Angular/Basic',

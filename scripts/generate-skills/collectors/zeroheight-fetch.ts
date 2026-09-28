@@ -17,6 +17,7 @@ import path from 'path';
 import { ZeroHeightData } from '../types';
 import { getZeroHeightUrl } from '../version-config';
 import { FetchScope, TransientFetchError, recordFailure, recordWarning } from './fetch-failures';
+import { fetchWithTimeout } from './http';
 
 const MAX_RETRIES = 4;
 /**
@@ -94,10 +95,23 @@ function removeBaseline(pagePath: string, zhReleaseId: number | null): void {
 	}
 }
 
+/**
+ * Section title as compared by the shrink oracle. ZeroHeight editors decorate H1 titles with status
+ * markers (`Changelog 🧪` → `Changelog`, `Arrondis 🎉`) and tweak spacing/case; none of that is a
+ * lost section, so only letters and digits (case-insensitive) take part in the comparison.
+ */
+function normalizeSectionTitle(title: string): string {
+	return title
+		.replace(/[^\p{L}\p{N}]+/gu, ' ')
+		.trim()
+		.toLowerCase();
+}
+
 /** Returns a human-readable reason if `fresh` is a suspicious regression vs the baseline, else null. */
 function shrinkReason(baselineRaw: string, fresh: ZeroHeightData): string | null {
 	const baseSections = Object.keys(parseSections(baselineRaw));
-	const missing = baseSections.filter((s) => !(s in fresh.sections));
+	const freshTitles = new Set(Object.keys(fresh.sections).map(normalizeSectionTitle));
+	const missing = baseSections.filter((s) => !freshTitles.has(normalizeSectionTitle(s)));
 	if (missing.length > 0) {
 		return `section(s) disparue(s) : ${missing.join(', ')}`;
 	}
@@ -121,7 +135,8 @@ export interface ZhFetchContext {
  * Guarded ZH fetch — the entry point all collectors should use.
  *
  * Wraps `fetchZeroHeightPage` with the run cache and the baseline shrink-guard (see above).
- * Transient failures still throw `TransientFetchError` (caller records them as before).
+ * A transient failure falls back to the baseline when one exists (recorded for replay all the same);
+ * without a baseline it still throws `TransientFetchError` and the caller records it.
  */
 export async function fetchZeroHeightPageGuarded(
 	pagePath: string,
@@ -131,8 +146,34 @@ export async function fetchZeroHeightPageGuarded(
 	const cacheKey = `${zhReleaseId ?? 'latest'}:${pagePath}`;
 	if (runCache.has(cacheKey)) return runCache.get(cacheKey)!;
 
-	const fresh = await fetchZeroHeightPage(pagePath, zhReleaseId);
 	const baselineRaw = readBaseline(pagePath, zhReleaseId);
+
+	let fresh: ZeroHeightData | null;
+	try {
+		fresh = await fetchZeroHeightPage(pagePath, zhReleaseId);
+	} catch (err) {
+		// Transient failure with a baseline in hand: serve the baseline rather than let the caller
+		// publish the component without its page. The 404 branch below already refuses to drop
+		// content on a single doubtful signal, but a timeout took the other path and the page was
+		// simply deleted — `activity-feed.design.md` (111 lines) vanished from the 22.0 on one
+		// 10 s deadline, which also made two identical runs produce different output. The failure
+		// is still recorded, so `--retry-failed` refreshes the page for real.
+		if (err instanceof TransientFetchError && baselineRaw !== null) {
+			recordFailure({
+				source: 'zeroheight',
+				scope: ctx.scope,
+				slug: ctx.slug,
+				version: ctx.version,
+				ref: pagePath,
+				status: err.status,
+				reason: `${err.message} — baseline conservée (rejeu avec --retry-failed)`,
+			});
+			const kept: ZeroHeightData = { raw: baselineRaw, sections: parseSections(baselineRaw) };
+			runCache.set(cacheKey, kept);
+			return kept;
+		}
+		throw err;
+	}
 
 	let result: ZeroHeightData | null;
 	if (fresh === null) {
@@ -203,7 +244,15 @@ export async function fetchZeroHeightPage(pagePath: string, zhReleaseId: number 
 		if (typeof raw === 'object') {
 			lastStatus = raw.status;
 			lastReason = raw.reason;
-			continue; // hard transient (network/5xx/HTML/empty): retry
+
+			// A network failure (a dead socket, or our own deadline) has already cost a full timeout.
+			// Retrying it inline multiplies that on the critical path — four attempts on one page cost
+			// over 20 minutes of a run. The page is deferred to the failure manifest instead and
+			// replayed by `--retry-failed`, off the critical path. Everything else (5xx, HTML, empty,
+			// thin) means the server answered promptly, so retrying is cheap and usually works.
+			if (raw.status === 'network') break;
+
+			continue;
 		}
 
 		const cleaned = stripImages(raw);
@@ -219,7 +268,8 @@ export async function fetchZeroHeightPage(pagePath: string, zhReleaseId: number 
 	// Accept the richest 200 we got (a genuinely small page is valid — never fail on thinness).
 	if (best) return best;
 
-	throw new TransientFetchError(lastStatus, `ZeroHeight ${pagePath}: ${lastReason} (après ${MAX_RETRIES} retries)`);
+	const how = lastStatus === 'network' ? 'différé pour rejeu (--retry-failed)' : `après ${MAX_RETRIES} retries`;
+	throw new TransientFetchError(lastStatus, `ZeroHeight ${pagePath}: ${lastReason} (${how})`);
 }
 
 const NOT_FOUND = Symbol('not-found');
@@ -231,7 +281,7 @@ async function tryFetchMd(pagePath: string, zhReleaseId: number | null): Promise
 
 	let res: Response;
 	try {
-		res = await fetch(url, { headers: { Accept: 'text/plain, text/markdown' } });
+		res = await fetchWithTimeout(url, { headers: { Accept: 'text/plain, text/markdown' } });
 	} catch (err: any) {
 		return { status: 'network', reason: err?.message ?? 'fetch failed' };
 	}
@@ -247,7 +297,7 @@ async function tryFetchMd(pagePath: string, zhReleaseId: number | null): Promise
 	if (isHtml(raw) && zhReleaseId !== null) {
 		const fallbackUrl = getZeroHeightUrl(pagePath, null);
 		try {
-			const fb = await fetch(fallbackUrl, { headers: { Accept: 'text/plain, text/markdown' } });
+			const fb = await fetchWithTimeout(fallbackUrl, { headers: { Accept: 'text/plain, text/markdown' } });
 			if (fb.ok) {
 				const fbRaw = await fb.text();
 				if (!isHtml(fbRaw)) {

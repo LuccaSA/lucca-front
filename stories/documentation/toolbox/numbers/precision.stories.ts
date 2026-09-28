@@ -17,8 +17,8 @@ export default {
 	title: 'Documentation/Toolbox/Numbers/Precision',
 	component: PrecisionStory,
 	argTypes: {
-		value: { control: { type: 'number' } },
-		precision: { control: { type: 'range', min: 1, max: 15, step: 1 } },
+		value: { control: { type: 'number' }, table: { category: 'inputs' } },
+		precision: { control: { type: 'range', min: 1, max: 15, step: 1 }, table: { category: 'inputs' } },
 	},
 } as Meta;
 

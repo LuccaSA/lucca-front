@@ -27,7 +27,7 @@ import { FORM_FIELD_INSTANCE, FormFieldComponent } from '@lucca-front/ng/form-fi
 import { BehaviorSubject, defer, finalize, map, of, ReplaySubject, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
-import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource, SelectDataSourceParams } from '../select.model';
+import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource } from '../select.model';
 import { LuCoreSelectLabel } from '../select.translate';
 import { TreeNode } from './model';
 import { buildOptionsFromDataSource } from './select-input.utils';
@@ -221,6 +221,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	readonly clueChange$ = new Subject<string>();
 	clueChange = outputFromObservable(this.clueChange$);
+	// searchable is derived from clueChange$.observed, so internal consumers must use this stream instead:
+	// subscribing to clueChange$ would make every select look searchable.
+	readonly #internalClueChange$ = new Subject<string>();
 	readonly nextPage$ = new Subject<void>();
 	nextPage = outputFromObservable(this.nextPage$);
 	readonly addOption = output<string>();
@@ -251,6 +254,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
 			this.clueChange$.next(clue);
+			this.#internalClueChange$.next(clue);
 			this.lastEmittedClue = clue;
 		}
 	}
@@ -258,21 +262,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected _value: TValue | null = null;
 
 	private getDefaultDataSource(): SelectDataSource<TOption> {
-		let emittedKeys = new Set<unknown>();
-
 		return {
-			getOptions: (_params: SelectDataSourceParams) => {
-				let lastEmittedThisPage: readonly TOption[] = [];
-				return this.manualOptions$.pipe(
-					tap((options) => (lastEmittedThisPage = options)),
-					takeUntil(this.nextPage$),
-					finalize(() => (emittedKeys = new Set(lastEmittedThisPage.map((p) => this.optionKey()(p))))),
-					map((options) => options.filter((c) => !emittedKeys.has(this.optionKey()(c)))),
-				);
-			},
-			reset() {
-				emittedKeys.clear();
-			},
+			getOptions: () => this.manualOptions$,
+			paginated: false,
 		};
 	}
 
@@ -294,7 +286,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
-	readonly clue$ = defer(() => this.clueChange$.pipe(startWith(this.clue)));
+	readonly clue$ = defer(() => this.#internalClueChange$.pipe(startWith(this.clue)));
 
 	readonly shouldDisplayAddOption = toSignal(
 		toObservable(this.addOptionStrategy).pipe(

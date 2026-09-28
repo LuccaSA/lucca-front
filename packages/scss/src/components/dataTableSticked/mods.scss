@@ -149,6 +149,12 @@
 			}
 		}
 	}
+
+	.dataTable-body-row.mod-group .dataTable-body-row-cell-expand {
+		position: sticky;
+		inset-inline-start: var(--components-dataTable-cell-padding-inline);
+		inline-size: fit-content;
+	}
 }
 
 @mixin stickyColumnBorder {

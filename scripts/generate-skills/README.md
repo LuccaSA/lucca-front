@@ -33,7 +33,9 @@ Pour créer le token : Figma → Profil → Settings → Security → **Personal
 
 ### Comportement sans token
 
-Sans token, la collecte Figma est sautée **sans erreur ni avertissement** (équivalent `--skip-figma`) :
+Sans token — ou avec un token expiré/révoqué — le **pré-flight arrête le run** et demande confirmation avant de continuer (cf. [Parcours pré-flight](#parcours-pré-flight)). Le token est validé en une requête (`/v1/me`) : sa simple présence ne suffit pas, un 401/403 ne produit aucun token de design et ne se voyait nulle part.
+
+En cas de poursuite explicite (`y`, ou `--skip-figma` d'emblée) :
 
 - les fichiers `.figma.md` (design tokens des variantes) ne sont **ni générés ni rafraîchis** ;
 - un `.figma.md` issu d'un run précédent est conservé sur disque et reste lié depuis `<slug>.md` ;
@@ -54,7 +56,7 @@ npx ts-node ... --version 21.2
 # Plusieurs mineures à la fois
 npx ts-node ... --version 21.2 --version 21.1
 
-# Sans Figma / ZeroHeight / Storybook
+# Sans Figma / ZeroHeight (Storybook, lui, est obligatoire — cf. pré-flight)
 npx ts-node ... --version 21.2 --skip-figma --skip-zeroheight
 
 # Valider la couverture ZH (aucune génération)
@@ -69,7 +71,6 @@ npx ts-node ... --validate
 | `--component <slug>` | Générer uniquement ce composant (n'écrit pas le SKILL.md ni la doc transverse) |
 | `--skip-figma` | Ignorer la collecte Figma |
 | `--skip-zeroheight` | Ignorer la collecte ZeroHeight |
-| `--skip-storybook` | Ignorer la collecte Storybook |
 | `--skip-documentation` | Ignorer la doc transverse (tokens, contenu, guidelines, patterns, deprecated) |
 | `--skip-tools` | Ignorer les outils (SCSS + Angular tools) |
 | `--skip-schematics` | Ignorer les codemods de migration (`collection.json` git) |
@@ -79,8 +80,64 @@ npx ts-node ... --validate
 | `--validate` | Vérifier la couverture ZH de `component-map.json` (aucune génération) |
 | `--retry-failed` | Rejouer uniquement les unités (composants, pages doc/outils, deprecated) dont le fetch a échoué au run précédent (manifeste `_fetch-failures.json`) |
 | `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH/Figma) |
+| `--accept-output-violations` | Ne pas faire échouer le run sur les violations du garde-fou de sortie. Cf. garde-fou de sortie. |
+| `--aggregate-only` | Reconstruire `lucca-front-all/` depuis les mineures déjà sur disque, sans rien régénérer d'autre. L'agrégat n'étant qu'une copie des dossiers par mineure, il n'exige ni réseau ni extraction — mais sans ce flag, le rafraîchir imposait de régénérer une mineure entière, donc de réécrire tous ses fichiers. Nécessaire après une correction ciblée de quelques composants. |
+
+Variable d'environnement complémentaire : **`FETCH_TIMEOUT_MS`** — deadline des fetchs, 10 000 ms par défaut. Le bon réglage dépend de ce que le run fait bloquer la boucle d'événements : une génération complète le veut **bas** (une page est différée puis rejouée, plutôt que d'immobiliser un worker), une passe `--retry-failed` le veut **haut** (quelques dizaines d'unités seulement, et son but est de les obtenir, pas de les différer à nouveau). Cf. `collectors/http.ts`.
 | `--zh-latest <minor>` | Affirme que `<minor>` (ex. `21.3`) est la dernière version en ligne → autorisée en « latest » non pinné. Répétable. Cf. garde-fou ZeroHeight. |
 | `--zh-id <minor>=<id>` | Fournit l'ID de release ZeroHeight d'une mineure (ex. `21.3=61234`), validé puis persisté dans `zh-release-ids.json`. Répétable. |
+
+## Parcours pré-flight
+
+Avant la moindre collecte, le run passe trois phases. L'ordre suit deux règles :
+
+1. **Aucune question tant qu'un contrôle non interactif peut encore tout arrêter** — sinon on répond à des prompts pour une génération qui n'aura pas lieu ;
+2. **Aucun effet de bord avant la dernière porte d'abandon** — le prompt ZeroHeight écrit l'ID dans `zh-release-ids.json` dès la saisie (`addZhReleaseId`), donc la question Figma, dont le « non » ne laisse rien derrière, passe avant.
+
+### Phase 1 — la release existe (`preflight.ts`, non interactif)
+
+Pour chaque mineure passée en `--version`. Lecture seule, donc exécutée aussi sous `--dry-run` : apprendre que la release n'est pas prête est précisément ce qu'on attend d'un dry run. Au premier ❌, arrêt **avant toute question**, sortie 1.
+
+| Contrôle | Source | Ce qu'il ferme |
+|---|---|---|
+| Tag git | `git tag -l` (via `resolveMinorVersion`) | la mineure n'existe pas |
+| Clone à jour | `git ls-remote --tags origin` | un clone en retard d'un patch fait passer `v22.1.1` pour le dernier patch : skill figée sur un patch dépassé, **sans le moindre message** |
+| Publication npm | `npm view @lucca-front/ng@<patch> version` | tag poussé mais publication ratée → skill d'une version non installable + `fixes/` fantôme |
+| Storybook déployé | `GET <storybookBaseUrl>/index.json` | cf. ci-dessous |
+
+Le pré-flight ne fait **pas** le `git fetch --tags` à ta place : un script de génération n'a pas à muter le dépôt.
+
+Un tag local absent de `origin` (release jamais poussée) est signalé sans bloquer : le contenu qu'il pointe existe.
+
+> **Storybook est obligatoire.** Ce n'est pas une source parmi d'autres : la liste des composants est construite à partir de son index (`discoverComponents` part des groupes Storybook et ne rattrape en phase 2 que les entrées de `component-metadata.json` ayant un entrypoint Angular). Sans lui : aucun exemple de code, les composants CSS-only **disparaissent** de la skill, les survivants tombent en `category: 'Unknown'` — et rien ne le signale, le garde-fou de sortie n'inspectant que des exemples existants (zéro exemple = zéro violation, sortie 0, « All done! »). C'est pourquoi `--skip-storybook` a été supprimé et pourquoi un échec de l'index en cours de run est désormais fatal.
+
+### Phase 2 — token Figma (`preflight.ts`, interactif)
+
+Première question, parce que c'est la seule dont le « non » ne laisse aucune trace sur disque. Sautée sous `--skip-figma` (la même décision, énoncée d'avance) et sous `--dry-run` (rien ne sera écrit).
+
+Le token est **validé** (`GET /v1/me`) : présence ≠ validité, un 401/403 n'est jamais rejoué et ne produit aucun token de design. Token absent ou refusé → question à défaut négatif :
+
+```
+   ⚠️ Figma       aucun token (ni generate-skills-config.json, ni FIGMA_TOKEN)
+        Sans token, aucun <slug>.figma.md ne sera écrit : la skill partira sans les tokens de design.
+  ↳ Générer quand même sans Figma ? (N/y) :
+```
+
+Tout ce qui n'est pas `y`/`o` abandonne (sortie 1). Sans TTY : pas de prompt, échec dur renvoyant vers `--skip-figma`. Une erreur réseau sur `/v1/me` n'est pas une preuve contre le token : il est accepté avec un `ℹ️`.
+
+### Phase 3 — IDs de release ZeroHeight (`zh-release-guard.ts`)
+
+Inchangée, cf. [Garde-fou pré-flight](#garde-fou-pré-flight-zh-release-guardts). Il n'y a **pas** de contrôle automatique d'existence de la release ZH en phase 1 : une mineure non pinnée est servie en « latest », qui répond toujours 200 même si Prisme n'a pas encore publié la release. C'est la question humaine (« est-elle la dernière version disponible EN LIGNE ? ») qui tient ce rôle.
+
+### Récapitulatif des questions
+
+| Ordre | Question | Posée quand | Défaut | Refus |
+|---|---|---|---|---|
+| 1 | Générer quand même sans Figma ? `(N/y)` | token absent ou refusé, hors `--skip-figma` / `--dry-run` | **N** | sortie 1 |
+| 2 | ID ZeroHeight de `<mineure>.x` ? | mineure supersédée non pinnée (0..n fois) | — | `abandon` → sortie 1 |
+| 3 | `<mineure>` est-elle la dernière en ligne ? `(y/n)` | mineure la plus récente du run, non pinnée | — | `n` → demande l'ID |
+
+Tous les abandons sortent en **1**, via `PreflightAbort` attrapé dans `main()` — jamais par un `process.exit(0)`, qui déclencherait le faux diagnostic « Génération interrompue avant la fin » du garde de sortie (`index.ts`). Le message d'abandon est préfixé 🛑 pour se distinguer d'un plantage.
 
 ## Sources de données
 
@@ -111,7 +168,8 @@ Trois mécanismes garantissent un rendu reproductible malgré des sources distan
    source — uniquement comme oracle :
    - **ZH** : si le contenu frais *rétrécit* (section H1 disparue, ou taille < 80 % de la baseline),
      la baseline est conservée en sortie et un échec `shrink` est enregistré (rejouable). Un ajout ou
-     une modification passe silencieusement et met à jour la baseline.
+     une modification passe silencieusement et met à jour la baseline. Les titres de sections sont
+     comparés sans casse ni ponctuation/emoji (`Changelog 🧪` → `Changelog` n'est pas une disparition).
    - **Figma** : une réponse 200 fait foi (le frais est toujours écrit) ; la disparition de
      propriétés/variantes est seulement **signalée** dans le rapport de fin de run.
    - `--accept-shrink` entérine : le frais est accepté et les baselines mises à jour.
@@ -178,11 +236,13 @@ Le fichier principal `button.md` contient l'import, le basic usage, la table d'A
 
 ### Tags fantômes (jamais publiés npm)
 
-Un tag git sans release npm (ex : `v21.1.5`, `v21.2.3`) ne doit produire **ni skill, ni fixe, ni entrée de changelog** : ses changements sont attribués au patch publié suivant. La liste est maintenue dans `UNPUBLISHED_TAGS` (`version-config.ts`) — à compléter si un futur tag n'atteint jamais npm.
+Un tag git sans release npm (ex : `v21.1.5`, `v21.2.3`) ne doit produire **ni skill, ni fixe, ni entrée de changelog** : ses changements sont attribués au patch publié suivant. La liste est maintenue dans `UNPUBLISHED_TAGS` (`version-config.ts`) — à compléter si un futur tag n'atteint jamais npm. Le [pré-flight](#parcours-pré-flight) interroge npm sur le dernier patch de la mineure ciblée et refuse de générer un fantôme, de sorte que le cas se découvre au moment où il se produit et non des semaines plus tard ; npm reste une **alarme**, jamais une source : `listStableTags` demeure git-only, donc changelogs et `fixes/` restent hors-ligne et reproductibles.
 
 ### Mineures techniques (pas de skill dédiée)
 
-Une **mineure technique** est une release npm publiée dont le seul objet est la compatibilité framework (ex : `21.4.0` = support Angular 22 avant la majeure 22.0) : aucun changement d'API, de codemod ni de documentation. Le cas revient avant chaque majeure. Plutôt que de dupliquer ~440 fichiers identiques (et de gérer un ID de release ZH qui peut ne pas exister), la table `TECHNICAL_MINORS` (`version-config.ts`) la déclare couverte par une mineure documentée : le SKILL.md de la mineure de couverture et le routeur de l'agrégat l'annoncent explicitement (le garde-fou de cohérence laisse passer le patch `.0`, et **uniquement lui**). `--version <mineure technique>` est refusé. Si un patch ultérieur sort (ex : `21.4.1`), soit générer une vraie skill (retirer l'entrée de la table), soit étendre l'entrée en connaissance de cause.
+Une **mineure technique** est une release npm publiée dont le patch `.0` a pour seul objet la compatibilité framework (ex : `21.4.0` = support Angular 22 avant la majeure 22.0) : aucun changement d'API, de codemod ni de documentation, et en général **pas de release ZeroHeight dédiée** (Prisme passe directement à la majeure suivante — il n'existe pas de 21.4 sur ZH, mais une 22.0). Le cas revient avant chaque majeure. Générer une skill dédiée dupliquerait ~440 fichiers et, sans ID ZH, tirerait le contenu design « latest » (= la majeure suivante) : la table `TECHNICAL_MINORS` (`version-config.ts`) déclare donc la mineure couverte par une mineure documentée, et `--version <mineure technique>` est refusé.
+
+Les patchs **suivant** le `.0` (ex : `21.4.1`, `21.4.2`) ne sont en revanche **pas neutres** : c'est le tronc qui continue à livrer des correctifs et de petits ajouts d'API avant la majeure (inputs, icônes, variables CSS…). `resolveMinorVersion` expose donc leurs tags (`MinorResolution.technicalMinors`) et `fixes-writer.ts` génère pour chacun un `fixes/<tech-M-m-p>.md` **dans la skill de la mineure de couverture** (ex : `lucca-front-21-3/fixes/21-4-1.md`, `21-4-2.md`), avec le même diff structurel git que les fixes ordinaires. Leur en-tête inverse le sens de lecture : `references/` reflète `21.3.1`, `21.4.0` lui est équivalent, et un projet en `21.4.p` **possède** les changements de tous les `fixes/21-4-*.md` ≤ `p`. Le `.0` n'a pas de fichier (son delta vs `21.3.1` est le bump de framework : ~500 Ko de diff de stories, aucune API). Le SKILL.md de la mineure de couverture, le routeur de l'agrégat et `_versions.json` (`minors.<couverture>.technicalMinors`) listent la mineure technique et tous ses patchs ; le garde-fou de cohérence les laisse passer. Si la mineure obtient un jour sa propre release ZeroHeight et de vrais changements de doc, générer une vraie skill (retirer l'entrée de la table).
 
 ## Architecture du pipeline
 
@@ -202,10 +262,10 @@ scripts/generate-skills/
 │
 ├── collectors/
 │   ├── component-discovery.ts        # Découverte dynamique (Storybook + packages git + métadonnées)
-│   ├── ast-extractor.ts              # Extraction API Angular depuis git tags
+│   ├── ast-extractor.ts              # Extraction API Angular depuis git tags (chaîne `extends` incluse)
 │   ├── api-diff.ts                   # Diff structurel de deux PackageAPI (→ changelog)
-│   ├── storybook.ts                  # Fetch index.json Storybook + groupement par slug
-│   ├── story-source.ts               # Code source des stories via git show
+│   ├── storybook.ts                  # Fetch index.json Storybook + groupement par slug + classification framework (tiers 1-2)
+│   ├── story-source.ts               # Code source des stories via git show + classification framework (tier 3)
 │   ├── story-eval.ts                 # Évaluation déterministe du render() des stories
 │   ├── zeroheight-fetch.ts           # Fetch .md ZeroHeight (avec fallback HTML)
 │   ├── figma-connect.ts              # Fetch propriétés Figma via REST API (caché)
@@ -220,6 +280,7 @@ scripts/generate-skills/
 │   ├── toc-writer.ts                 # Génération du SKILL.md par mineure
 │   ├── changelog-writer.ts           # Changelog cumulatif par composant (AST diff)
 │   ├── fixes-writer.ts               # fixes/<M-m-p>.md : delta par patch publié (git)
+│   ├── output-guard.ts               # Garde-fou de sortie : invariants sur le markdown émis
 │   ├── version-diff-writer.ts        # changelog/<M.m>.md : diff de review entre mineures
 │   └── aggregate-writer.ts           # lucca-front-all : base par majeure + overrides par mineure
 │
@@ -239,6 +300,8 @@ scripts/generate-skills/
 1. CLI parse (--version M.m, --component, flags) — une version patch est refusée
 2. Résolution mineure → dernier tag stable publié (tags fantômes exclus) + liste des tags patch,
    ZH release ID, Storybook base URL
+2 bis. Pré-flight (preflight.ts + zh-release-guard.ts) : existence de la release, token Figma,
+   IDs de release ZeroHeight — cf. « Parcours pré-flight »
 3. Doc transverse        → references/documentation/<category>/   (ZH fetch)
 4. Dépréciés             → references/documentation/deprecated/deprecated.md  (ZH "Cycle de vie")
 5. Schematics            → references/migrations.md                (git collection.json, codemods cumulatifs ≤ cible)
@@ -246,7 +309,7 @@ scripts/generate-skills/
 7. Composants (découverte Storybook + git) — pour chacun :
    a. AST extraction          → PackageAPI (inputs, outputs, models, selectors, types)
    b. ZeroHeight fetch        → design sections + prose changelog
-   c. Storybook + story source/eval → exemples Angular + HTML/CSS
+   c. Storybook + story source/eval → exemples Angular + HTML/CSS (framework résolu, cf. ci-dessous)
    d. Figma REST API          → tokens variantes
    e. Changelog structurel    → AST diff sur tags stables ≤ cible (cumulatif) + prose ZH
    f. Rendu Handlebars + écriture → references/components/<slug>/
@@ -256,14 +319,144 @@ scripts/generate-skills/
 10. SKILL.md de la mineure (toc-writer) — écrit après les fichiers (scanne les composants du disque)
 ```
 
+## Membres hérités (`extends`)
+
+L'extracteur lisait le corps de la classe décorée et s'arrêtait là : tout `input()` / `output()` /
+`model()` déclaré sur une classe de base manquait au tableau d'API — sans rien qui distingue « ce
+composant a cinq inputs » de « ce composant a cinq de ses dix-huit inputs ». `lu-date-input` en
+perdait 13 (+ 1 model, 2 outputs) hérités d'`AbstractDateComponent` ; même chose pour les cellules
+data-table / index-table (`editable`, `align`) et les trois composants file-upload.
+
+`collectInheritedMembers` remonte la chaîne : la classe de base est cherchée dans le fichier courant,
+sinon via l'import qui l'amène (relatif, `@lucca-front/ng/<pkg>`, `@lucca/prisme/<sub>`), en suivant
+un niveau de re-export de barrel. Un membre redéclaré dans la classe dérivée gagne — c'est ce que fait
+une surcharge. Profondeur bornée et cycles coupés par un `seen`.
+
+## Angular ou HTML/CSS : la classification du framework
+
+Chaque story est rendue soit sous `## Angular`, soit sous `## HTML/CSS` de son `.component.md`. La
+décision se prend en trois paliers, le premier qui tranche gagne :
+
+| Palier | Signal | Où |
+|--------|--------|-----|
+| 1 | Dossier de la story : `angular/` ou `html&css/` | `collectors/storybook.ts` — `classifyFramework()` |
+| 2 | Segment de framework du titre Storybook (`Documentation/Overlays/Dialog/**Angular**`) | idem |
+| 3 | Source de la story : `moduleMetadata(` / `applicationConfig(` / `importProvidersFrom(` / `component:` | `collectors/story-source.ts` — `resolveStoryFrameworks()` |
+
+Le palier 3 existe parce que ni le dossier ni le titre ne sont garantis : à `v21.3.1`, **164 stories
+sur 596** n'ont aucun des deux (`stories/documentation/forms/date2/date-range-input.stories.ts`,
+`overlays/dialog/*.stories.ts`…). Elles étaient toutes déclarées `html-css` par défaut — dont 60
+stories Angular, ce qui les rangeait sous `## HTML/CSS` et concaténait leurs imports TypeScript dans
+le bloc SCSS du composant.
+
+Deux signaux **volontairement écartés**, tous deux mesurés comme faux :
+
+- **La syntaxe de binding Angular dans le markup** (`(click)="…"`, `[attr.style]="…"`) : les stories
+  `html&css/` du repo en utilisent, puisqu'elles sont rendues dans Storybook Angular. 29 stories
+  légitimes mal classées à `v21.3.1`.
+- **Un import depuis `@storybook/angular`** : toutes les stories en ont, `html&css/` incluses.
+
+Le palier 3 ne s'applique jamais à une story que le palier 1 ou 2 a tranchée : `moduleMetadata` est
+aussi utilisé par des stories `html&css/` qui ont besoin de directives Angular pour se rendre.
+
+## Extraction des templates de stories
+
+Le markup d'un exemple est lu dans la source de la story, par `extractTemplateLiterals()`
+(`collectors/story-source.ts`), avec quatre formes reconnues et, en dernier recours, l'évaluation
+de la story :
+
+| Forme | Exemple |
+|-------|---------|
+| Littéral direct | ``template: `<lu-box>…</lu-box>` `` |
+| Littéral emballé dans un helper | ``template: cleanupTemplate(`<lu-box>…</lu-box>`)`` — forme dominante du repo |
+| Chaîne quotée contenant du markup | `return '<span class="tag">Text</span>';` |
+| Fichier `.html` frère | `templateUrl: './dropdown-basic.stories.html'` — lu depuis le même tag git |
+| Template calculé | `template: getTemplate()` → résolu par `story-eval` (`vm`) |
+
+L'évaluation (`renderStoryTemplates`) est tentée **aussi bien quand l'extraction statique a laissé
+des `${…}` que quand elle n'a rien trouvé** : un template calculé n'existe qu'à l'exécution, et ce
+second cas n'atteignait jamais l'évaluateur.
+
+Résultat mesuré, stories sans aucun template extrait :
+
+| Tag | Avant | Après |
+|-----|-------|-------|
+| `v21.3.1` | 53 / 596 | **12** |
+| `v22.0.0` | 55 / 636 | **14** |
+
+Le résidu n'est pas extractible : ce sont des stories `component:` + `args` sans aucun markup dans
+la source (les `skeleton-*`, `inline-message`, `icon-angular`, `new-badge` — Storybook rend le
+composant depuis ses args), plus `highlight-text-palettes` dont le template est calculé depuis une
+constante de package que le sandbox `vm` neutralise.
+
+Ces stories sont désormais **écartées** (`if (templates.length === 0) continue;`) au lieu d'être
+publiées comme un titre au-dessus d'un bloc d'imports sans code. Leur bloc d'imports était de toute
+façon identique au `## Import` de `<slug>.md`, donc rien n'est perdu. **L'ordre compte** : écarter
+ces stories avant de réparer l'extraction aurait supprimé 41 exemples légitimes à `v21.3.1`.
+
+## Garde-fou de sortie (`generators/output-guard.ts`)
+
+Les mécanismes de la section « Fiabilité des fetchs » protègent les **entrées** — ils répondent à
+« la source a-t-elle été récupérée fidèlement ». Aucun ne répond à « le markdown émis est-il
+cohérent ». C'est ce trou qui a laissé passer des imports TypeScript rendus dans des blocs ```css
+sur les cinq variantes de skill : `scripts/**` n'était couvert par aucun projet Vitest, aucun job CI
+n'exécute `skills:generate`, et les skills atterrissent dans des PR de 30 000+ fichiers marqués
+`linguist-generated` — donc invisibles en revue.
+
+Le garde-fou vérifie des **invariants**, pas des heuristiques : une violation est toujours un bug du
+générateur. Il tourne en fin de run, après écriture (pour que la sortie fautive soit lisible), et
+fait échouer le run (`process.exitCode = 1`) sauf `--accept-output-violations`.
+
+| Règle | Ce qu'elle interdit | Quand |
+|-------|--------------------|-------|
+| `html-css-story-with-ts-imports` | Des imports ou extraits TypeScript curés sur ZeroHeight pour une story classée `html-css` — c'est la classification du framework qui est fausse | En cours de génération, par composant |
+| `ts-import-in-css-fence` | Une ligne `import … from` dans un bloc ```css / ```scss | Relecture du markdown écrit |
+| `sass-in-ts-fence` | Un `@forward` / `@use` dans un bloc ```js / ```ts (la régression miroir) | idem |
+| `scss-forward-unknown-component` | Un `@forward '@lucca-front/scss/src/components/<x>'` dont le dossier n'existe pas au tag généré | idem |
+| `truncated-import` | Une ligne `import` sans module source dans un bloc ```js / ```ts (statement tronqué) | idem |
+
+La règle 4 se compare au **listing réel** de `packages/scss/src/components` au tag : les dossiers y sont
+en camelCase (`dataTable`, `emptyState`) alors que `ngPackage` et les slugs sont en kebab-case. Le chemin
+était interpolé depuis `ngPackage`, d'où 206 `@forward` morts sur 48 fichiers de la 22.0. La résolution
+vit dans `resolveScssComponentName` (exact → kebab→camel → insensible à la casse, sur `scssComponent`
+puis `ngPackage` puis le slug) ; si rien ne correspond, **aucun import n'est émis** et un avertissement
+le dit. `sanitizeScssForwards` retire en plus les lignes invalides quelle qu'en soit l'origine — ZeroHeight
+en écrit quelques-unes à la main, dont une fausse (`components/forms` n'existe à aucun tag). La règle
+n'est appliquée qu'aux dossiers dans le périmètre du run, pour ne pas juger une skill ancienne sur un
+listing récent.
+
+La règle 5 découle de la collecte des imports : elle se faisait ligne à ligne, donc un import replié par
+prettier publiait le seul `import {` — 13 blocs ```js syntaxiquement invalides sur la 22.0, et toujours
+la ligne la plus longue, c'est-à-dire le package du composant lui-même. `collectImportStatements`
+recompose maintenant le statement sur une ligne.
+
+La règle 2 est volontairement étroite : les blocs ```css contiennent aussi du CSS et du Sass
+légitimes venus des pages de documentation ZH (tokens, mixins, utilitaires). Exiger `@forward`/`@use`
+y déclencherait 211 faux positifs — seul un `import … from` n'est jamais du CSS.
+
+`changelog/` est exclu de la relecture : ces fichiers citent du markdown généré dans des blocs
+````diff, donc toute violation y est l'écho d'une autre déjà signalée à sa source.
+
+**Périmètre** : seules les mineures que le run a (re)générées sont bloquantes. Les violations restées
+dans les autres dossiers sont signalées comme « hors périmètre » — un run ciblé `--version 21.3` ne
+doit pas échouer sur du contenu qu'il n'a pas produit. `lucca-front-all/` est volontairement hors
+périmètre : c'est une copie, donc chaque violation qu'il porte est déjà signalée sur la mineure dont
+elle vient.
+
 ## Changelog structurel
 
 `changelog-writer.ts` construit un `<slug>.changelog.md` **cumulatif par composant** :
 
+- **baseline** : l'API telle qu'elle était au dernier tag stable de la majeure précédente (`previousMajorLastStableTag`) ;
 - walk des **tags git stables** de la majeure (`listStableTags`, pré-releases filtrées), ≤ version cible ;
 - pour chaque paire consécutive, `diffPackageApi` (`api-diff.ts`) compare selectors / inputs / outputs / models ;
 - **les versions sans changement d'API sont omises** ; extraction AST mémoïsée par `(ngPackage, tag)` ;
 - une couche optionnelle « Notes de release (ZeroHeight) » (prose) est ajoutée en fin.
+
+Sans baseline, le walk démarrait sur une API vide et le **premier tag de la majeure** ressortait en
+« Composant introduit » pour tout composant qui lui préexistait. Invisible tant qu'une majeure comptait
+18 tags et que la ligne fausse était noyée sous un vrai historique ; sur la 22.0, où `v22.0.0` est le seul
+tag, c'était la seule ligne de **119 des 128** pages composant.
 
 Comme le workflow de montée met à jour **d'abord** (la skill cible est alors installée), le changelog cumulatif de la cible couvre le delta depuis n'importe quelle version de départ. Layout-agnostique (différe des objets AST, pas des dossiers).
 
@@ -288,6 +481,9 @@ La liste des composants est **découverte dynamiquement** (`collectors/component
 | `figmaName` | Nom du composant dans Figma (peut différer du slug Angular) |
 | `figmaAliases` | Noms Figma alternatifs (many-to-one) |
 | `ngPackageOverride` | Force le mapping vers un package Angular si l'heuristique échoue |
+| `ngSelectors` | Restreint l'API extraite à ces sélecteurs (isole un composant d'un package multi-composants) |
+| `scssComponent` | Dossier SCSS sous `packages/scss/src/components`. À renseigner seulement quand ni `ngPackage` ni le slug ne s'y résolvent (`date2` → `dateField`). `""` déclare l'absence de contrepartie SCSS et éteint l'avertissement |
+| `storybookFamily` | Titre Storybook de la famille de stories. **Opt-in** : ne le renseigner que si deux composants réellement différents se retrouvent dans le même groupe — `Documentation/Forms/FiltersPills/Checkbox` documentait un filter pill sur la page `checkbox`. Regrouper plusieurs familles d'un **même** composant est le comportement utile par défaut |
 
 > La résolution slug → clé tolère les écarts de tirets : `findMetadata` compare en forme compacte (sans tirets), donc `userpopover` retrouve une clé `user-popover` et inversement.
 

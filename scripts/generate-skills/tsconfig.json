@@ -3,6 +3,13 @@
 		"target": "ES2022",
 		"module": "commonjs",
 		"moduleResolution": "node",
+		// TypeScript 6 (pinned in package.json) deprecates node10 resolution and rejects this whole
+		// config without the escape hatch, which cascades into "Cannot find name 'process'" and makes
+		// `npm run skills:generate` fail before it starts. Same workaround as vitest.schematics-setup.ts.
+		// Moving to node16 is not a drop-in: it forces `module: Node16` and changes CJS/ESM emit.
+		"ignoreDeprecations": "6.0",
+		// TS 6 no longer picks up node_modules/@types on its own under node10 resolution.
+		"types": ["node"],
 		"esModuleInterop": true,
 		"strict": false,
 		"resolveJsonModule": true,
@@ -10,5 +17,5 @@
 		"skipLibCheck": true
 	},
 	"include": ["./**/*.ts"],
-	"exclude": ["../../node_modules", "../../dist"]
+	"exclude": ["../../node_modules", "../../dist", "**/*.spec.ts"]
 }

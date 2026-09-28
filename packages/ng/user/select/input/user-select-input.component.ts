@@ -1,9 +1,8 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, input, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, input, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { booleanAttribute } from '@angular/core';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlPluralLabelPipe } from '@lucca-front/ng/core';
 import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
@@ -35,6 +34,7 @@ import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate
 		LuUserMeOptionDirective,
 		LuForOptionsDirective,
 		LuUserDisplayPipe,
+		IntlPluralLabelPipe,
 	],
 	providers: [
 		LuUserDisplayPipe,

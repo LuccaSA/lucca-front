@@ -13,6 +13,7 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Présente le composant sans icônes.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

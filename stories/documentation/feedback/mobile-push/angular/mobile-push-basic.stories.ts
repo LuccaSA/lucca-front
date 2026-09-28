@@ -16,7 +16,10 @@ export default {
 	render: (args: MobilePushComponent & { description: string }, context) => {
 		const { description, ...inputs } = args;
 		return {
-			template: `<lu-mobile-push ${generateInputs(inputs, context.argTypes)}>
+			props: {
+				...args,
+			},
+			template: `<lu-mobile-push ${generateInputs(inputs, context.argTypes)} (appStoreLinkClicked)="appStoreLinkClicked()" (googlePlayLinkClicked)="googlePlayLinkClicked()">
 	Posez une absence depuis n’importe où avec l’application Lucca.
 </lu-mobile-push>`,
 		};
@@ -27,12 +30,16 @@ export default {
 				type: null,
 			},
 			description: 'Clic sur le bouton App Store.',
+			action: 'appStoreLinkClicked',
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		googlePlayLinkClicked: {
 			control: {
 				type: null,
 			},
 			description: 'Clic sur le bouton Google Play.',
+			action: 'googlePlayLinkClicked',
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 	},
 } as Meta;

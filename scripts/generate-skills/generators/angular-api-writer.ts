@@ -12,7 +12,7 @@
  * so each public symbol appears on exactly one page (decided 2026-07-10).
  */
 
-import { execSync } from 'child_process';
+import { listFilesAtTag } from '../collectors/git-snapshot';
 import { extractPackageAPI, extractPackageSymbols } from '../collectors/ast-extractor';
 import { VersionConfig, WriteResult } from '../types';
 import { writeToolsPage } from './skill-writer';
@@ -45,8 +45,7 @@ function symbolKey(kind: string, name: string, sourceFile?: string): string {
 /** Every package entrypoint at the tag (top-level and secondary, e.g. "forms/rich-text-input"). */
 function listPackageEntrypoints(tag: string): string[] {
 	try {
-		return execSync(`git ls-tree -r --name-only ${tag} packages/ng/`, { encoding: 'utf-8', maxBuffer: 50 * 1024 * 1024 })
-			.split('\n')
+		return listFilesAtTag(tag, 'packages/ng')
 			.filter((f) => f.endsWith('/public-api.ts'))
 			.map((f) => f.replace('packages/ng/', '').replace('/public-api.ts', ''))
 			.filter(Boolean);

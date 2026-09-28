@@ -7,6 +7,7 @@ export * from './overlay/index';
 export * from './portal/index';
 export * from './route';
 export * from './signal';
+export * from './string';
 export * from './tools/class';
 export * from './transform/index';
 export * from './translate/index';

@@ -1,0 +1,14 @@
+<lu-form-field label="Label">
+	@if (file; as fileEntry) {
+		<lu-file-entry-wrapper>
+			<lu-file-entry [entry]="fileEntry" size="L" media />
+		</lu-file-entry-wrapper>
+	} @else {
+		<lu-single-file-upload size="L" [accept]="accept" (filePicked)="upload($event)" />
+	}
+</lu-form-field>
+<lu-file-entry-wrapper>
+	<lu-file-entry [entry]="file" />
+</lu-file-entry-wrapper>
+<lu-file-entry [entry]="file" [size]="'L'" />
+<lu-file-entry [entry]="file" />

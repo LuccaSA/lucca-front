@@ -1,7 +1,7 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { GaugeComponent } from '@lucca-front/ng/gauge';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Loaders/Gauge/Angular/Basic',
@@ -12,30 +12,39 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs à la jauge.',
+			table: { category: 'inputs' },
 		},
 		thin: {
 			description: 'Diminue l’épaisseur de la jauge.',
+			table: { category: 'inputs' },
 		},
 		animated: {
 			description: 'Ajoute une animation au chargement ou lorsque la valeur est modifiée.',
+			table: { category: 'inputs' },
 		},
 		circular: {
 			description: 'Affiche la jauge sous une forme circulaire.',
+			table: { category: 'inputs' },
 		},
 		size: {
+			name: '↳ size',
 			control: { type: 'range', min: 32, max: 160, step: 8 },
 			if: { arg: 'circular', truthy: true },
 			description: 'Taille du composant pour sa forme circulaire.',
+			table: { category: 'inputs' },
 		},
 		value: {
 			control: { type: 'range', min: 0, max: 100, step: 1 },
 			description: 'Valeur en pourcentage.',
+			table: { category: 'inputs' },
 		},
 		alt: {
 			description: 'Information restituée par le lecteur d’écran.',
+			table: { category: 'inputs' },
 		},
 		noAlt: {
 			description: 'Empêche la restitution par le lecteur d’écran. À n’utiliser que si l’information est déjà présente.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

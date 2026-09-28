@@ -10,6 +10,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		palette: {
 			options: setStoryOptions(HIGHLIGHT_SECTION_PALETTE),
@@ -17,6 +18,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au composant.',
+			table: { category: 'inputs' },
 		},
 		bubbleStart: {
 			options: setStoryOptions(HIGHLIGHT_SECTION_BUBBLE),
@@ -24,6 +26,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Sans valeur, aucune bulle se sera affichée.',
+			table: { category: 'inputs' },
 		},
 		bubbleEnd: {
 			options: setStoryOptions(HIGHLIGHT_SECTION_BUBBLE),
@@ -31,6 +34,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Sans valeur, aucune bulle se sera affichée.',
+			table: { category: 'inputs' },
 		},
 		illustration: {
 			options: setStoryOptions(HIGHLIGHT_SECTION_ILLUSTRATION),
@@ -38,6 +42,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Il est également possible de renseigner une URL.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [

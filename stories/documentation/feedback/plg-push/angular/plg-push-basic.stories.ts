@@ -28,12 +28,14 @@ export default {
 		heading: {
 			type: 'string',
 			description: 'Ajoute un titre au composant.',
+			table: { category: 'inputs' },
 		},
 		removable: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Rend le composant supprimable.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

@@ -102,6 +102,9 @@ export interface MinorResolution {
 	/** ALL stable published patch tags of the minor, ascending (e.g. ["v21.2.0", "v21.2.1", …]).
 	 * Phantom tags never published to npm are excluded by listStableTags (UNPUBLISHED_TAGS). */
 	patchTags: string[];
+	/** Technical minors covered by this minor (see TECHNICAL_MINORS), with their published patch
+	 * tags. Their patches > .0 get a fixes/ file in THIS minor's skill. Empty for most minors. */
+	technicalMinors: TechnicalMinorPatches[];
 }
 
 /**
@@ -119,10 +122,15 @@ export function resolveMinorVersion(minorStr: string): MinorResolution {
 		throw new Error(`No stable git tag found for minor ${major}.${minor} (expected tags like v${major}.${minor}.0).`);
 	}
 	const latestTag = patchTags[patchTags.length - 1];
+	const minorKey = `${major}.${minor}`;
 	return {
 		version: resolveVersion(latestTag),
-		minorKey: `${major}.${minor}`,
+		minorKey,
 		patchTags,
+		technicalMinors: technicalMinorsCoveredBy(minorKey).map((t) => ({
+			...t,
+			patchTags: listStableTags(major).filter((tag) => parseVersion(tag)!.minor === parseMinor(t.minorKey)!.minor),
+		})),
 	};
 }
 
@@ -188,16 +196,22 @@ const UNPUBLISHED_TAGS = new Set(['v21.1.5', 'v21.2.3']);
 
 // ─── Technical minors (no skill of their own) ────────────────────────────────
 //
-// A technical minor is a published npm release whose ONLY purpose is framework compatibility
-// (e.g. 21.4.0 = Angular 22 support before the 22.0 major): no API change, no codemod, no
-// documentation change. The pattern recurs before every major. Generating a full skill for it
-// would duplicate ~440 identical files (and require a ZH release ID that may not even exist).
+// A technical minor is a published npm release whose `.0` patch has ONE purpose: framework
+// compatibility (e.g. 21.4.0 = Angular 22 support before the 22.0 major) — no API change, no
+// codemod, no documentation change, and typically no ZeroHeight release of its own (Prisme moves
+// straight to the next major). The pattern recurs before every major. Generating a full skill for
+// it would duplicate ~440 identical files and, without a ZH release ID, would pull "latest" design
+// content (= the next major) — so it is NOT generated.
 //
-// Instead, the covering minor's SKILL.md and the aggregate router declare it explicitly: the
-// coherence guard lets a project on `<minor>.0` through and reads the covering minor's docs.
-// ONLY the `.0` patch is covered — a later patch (e.g. 21.4.1) would carry unknown fixes, so
-// the guard still stops there. If that happens: either generate a real skill for the minor
-// (remove it from this table), or extend the entry knowingly.
+// Instead, the covering minor's skill absorbs it:
+//   - `<tech>.0` is documented as equivalent to the covering minor's latest patch;
+//   - every later patch (`<tech>.1`, `<tech>.2`…) is the trunk continuing to ship fixes AND small
+//     API additions before the major. Those are NOT neutral (21.4.1/21.4.2 added inputs, icons,
+//     CSS vars…), so each gets a `fixes/<tech-M-m-p>.md` in the covering minor's skill, generated
+//     from git exactly like the covering minor's own fixes (resolveMinorVersion exposes the
+//     technical patch tags on MinorResolution.technicalMinors).
+//   - the covering minor's SKILL.md and the aggregate router declare the technical minor, and the
+//     coherence guard lets a project on ANY listed `<tech>.x` patch through.
 //
 // Key format: "major.minor" (the technical minor) → its covering minor + human-readable reason.
 export interface TechnicalMinorInfo {
@@ -205,6 +219,14 @@ export interface TechnicalMinorInfo {
 	coveredBy: string;
 	/** Short reason shown in the generated SKILL.md (e.g. "compatibilité Angular 22"). */
 	reason: string;
+}
+
+/** A technical minor resolved against git: its info + every published stable patch tag, ascending. */
+export interface TechnicalMinorPatches extends TechnicalMinorInfo {
+	/** "major.minor" of the technical minor, e.g. "21.4". */
+	minorKey: string;
+	/** e.g. ["v21.4.0", "v21.4.1", "v21.4.2"]. Patches > .0 each get a fixes/ file. */
+	patchTags: string[];
 }
 
 const TECHNICAL_MINORS: Record<string, TechnicalMinorInfo> = {
@@ -249,3 +271,47 @@ export function listStableTags(major: number): string[] {
 	return tags;
 }
 
+
+/** Majors that have at least one stable, published tag — descending. Cached, one git call. */
+let stableMajorsCache: number[] | null = null;
+
+function listStableMajors(): number[] {
+	if (stableMajorsCache) return stableMajorsCache;
+
+	let majors: number[] = [];
+	try {
+		const out = execSync(`git tag -l 'v*'`, { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
+		majors = [
+			...new Set(
+				out
+					.split('\n')
+					.map((t) => t.trim())
+					.filter((t) => /^v\d+\.\d+\.\d+$/.test(t))
+					.filter((t) => !UNPUBLISHED_TAGS.has(t))
+					.map((t) => parseVersion(t)!.major),
+			),
+		].sort((a, b) => b - a);
+	} catch {
+		majors = [];
+	}
+	stableMajorsCache = majors;
+	return majors;
+}
+
+/**
+ * Last stable tag of the newest major **strictly below** `major` (e.g. 22 → `v21.3.1`), or null
+ * when none exists (the first documented major).
+ *
+ * The per-component changelog needs it as a baseline: without it, the tag-walk starts with an
+ * empty API and the first tag of the major reads as "Composant introduit" for every component
+ * that in fact predates it. Harmless while a major held 18 tags and the false line was buried
+ * under real history; blatant on `v22.0.0`, where it was the only line on 119 of 128 pages.
+ *
+ * Reads the majors that actually have tags rather than stepping down one by one, so a gap in the
+ * numbering costs nothing and cannot silently drop the baseline.
+ */
+export function previousMajorLastStableTag(major: number): string | null {
+	const previous = listStableMajors().find((m) => m < major);
+	if (previous === undefined) return null;
+	return listStableTags(previous).at(-1) ?? null;
+}

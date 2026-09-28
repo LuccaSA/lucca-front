@@ -153,7 +153,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		shareReplay(1),
 	);
 
-	public readonly totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
+	public override readonly totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ data: { count: number } } | { count: number }>(url, {
@@ -206,17 +206,16 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			}),
 		);
 
-		return page$.pipe(
-			switchMap((page) =>
-				this.#userHomonymsService.handleHomonyms(page.items, this.displayFormat()).pipe(
-					map((items) => ({
-						items,
-						isLastPage: page.isLastPage,
-					})),
-				),
-			),
-			tap(() => this.select.loading.set(false)),
-		);
+		return page$.pipe(tap(() => this.select.loading.set(false)));
+	}
+
+	/**
+	 * Homonyms can only be detected by looking at every loaded option at once: two homonyms may
+	 * land on different pages (last option of a page, first of the next one), in which case a
+	 * page by page detection would find none. So we run it on the accumulated list instead.
+	 */
+	protected override transformOptions(options: readonly LuCoreSelectWithAdditionnalInformation<T>[]): Observable<readonly LuCoreSelectWithAdditionnalInformation<T>[]> {
+		return this.#userHomonymsService.handleHomonyms([...options], this.displayFormat());
 	}
 
 	protected override optionKey = (option: T) => option.id;

@@ -104,7 +104,7 @@ export const Basic = generateStory({
 	},
 	storyPartial: {
 		argTypes: {
-			clearable: { control: { type: 'boolean' } },
+			clearable: { control: { type: 'boolean' }, table: { category: 'inputs' } },
 		},
 	},
 });
@@ -314,7 +314,8 @@ export const WithClueTEST = createTestStory(WithClue, async (context) => {
 
 export const WithPagination = generateStory({
 	name: 'Pagination',
-	description: 'Il est possible de charger les options au fur et à mesure en écoutant l’évènement `(nextPage)`.',
+	description:
+		'Il est possible de charger les options au fur et à mesure en écoutant l’évènement `(nextPage)`. Le tableau passé à `[options]` reste la liste complète : c’est au consommateur d’afficher la ligne de chargement via l’input `[loading]` pendant qu’il récupère la suite.',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"
@@ -424,6 +425,33 @@ export const WithDisabledOptions = generateStory({
 // 	const options = await panel.findAllByRole('option');
 // 	await expect(options[1].firstChild).toHaveClass('is-disabled');
 // });
+
+export const WithCustomOptionTemplate = generateStory({
+	name: 'Custom option template',
+	description: 'Le template d’option occupe toute la largeur de la ligne : un contenu réparti avec `justify-content: space-between` aligne bien sa partie droite sur le bord de l’option.',
+	template: `<lu-simple-select
+	#selectRef
+	[(ngModel)]="selectedLegume"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+>
+	<ng-container *luOption="let legume; select: selectRef">
+		<span class="pr-u-displayFlex pr-u-justifyContentSpaceBetween">
+			<span>{{ legume.name }}</span>
+			<span>{{ colorNameByColor[legume.color] }}</span>
+		</span>
+	</ng-container>
+</lu-simple-select>`,
+	storyPartial: {
+		args: {
+			colorNameByColor,
+		},
+	},
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+});
 
 export const ApiV3 = generateStory({
 	name: 'Api V3',
@@ -803,6 +831,7 @@ export const AddOption = generateStory({
 			addOptionLabel: {
 				control: { type: 'text' },
 				description: 'Label affiché sur le bouton d’ajout d’option.',
+				table: { category: 'inputs' },
 			},
 			addOptionStrategy: {
 				description: 'Définit les conditions pour afficher le bouton d’ajout d’option.',
@@ -810,6 +839,7 @@ export const AddOption = generateStory({
 					type: 'select',
 					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
 				},
+				table: { category: 'inputs' },
 			},
 		},
 		args: {

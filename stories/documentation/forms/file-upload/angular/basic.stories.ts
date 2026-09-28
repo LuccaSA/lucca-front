@@ -1,3 +1,4 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { HttpErrorResponse, HttpStatusCode, provideHttpClient } from '@angular/common/http';
 import { Injectable, LOCALE_ID, Pipe, PipeTransform, signal } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -8,7 +9,6 @@ import { LuInputDirective } from '@lucca-front/ng/input';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 type LuccaFileUploadResultId = string;
 
@@ -119,12 +119,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 		fileMaxSize: {
 			description: 'Limite le poids des fichiers importables (en octets).',
 			control: {
 				type: null,
 			},
+			table: { category: 'inputs' },
 		},
 		illustration: {
 			options: ['invoice', 'picture'],
@@ -132,28 +134,35 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’illustration de l’icône dans la zone de drop.',
+			table: { category: 'inputs' },
 		},
 		media: {
 			description: 'Affiche les fichiers importés avec une mise en forme adaptée aux visuels.',
+			table: { category: 'inputs' },
 		},
 		displayFileName: {
 			description: 'Affiche le nom des fichiers importés sous l’image en vue <code>media</code>.',
+			table: { category: 'inputs' },
 		},
 		structure: {
 			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
+			table: { category: 'inputs' },
 		},
 		buttonFilled: {
 			description: 'Affiche le bouton comme action principale de la page.',
 			if: { arg: 'size', truthy: true },
+			table: { category: 'inputs' },
 		},
 		accept: {
 			control: {
 				type: 'object',
 			},
 			description: 'Liste des formats de fichiers acceptés.',
+			table: { category: 'inputs' },
 		},
 		AItag: {
 			description: '[Story] Ajoute un tag AI au contenu du composant.',
+			table: { category: 'inputs' },
 		},
 	},
 	decorators: [
@@ -273,13 +282,13 @@ export const Multi = {
 					},
 				},
 				template: `<lu-form-field label="Label">
-		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
-	</lu-form-field>
-	<lu-file-entry-wrapper>
-		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-			<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
-		}
-	</lu-file-entry-wrapper>`,
+	<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+</lu-form-field>
+<lu-file-entry-wrapper>
+	@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
+		<lu-file-entry${sizeLFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+	}
+</lu-file-entry-wrapper>`,
 			};
 		}
 	},

@@ -52,6 +52,15 @@ export class LuOptionComponent<T> implements OnInit {
 	 */
 	readonly treeitemContent = contentChild(Treeitem);
 
+	readonly #parentOption = inject<LuOptionComponent<T>>(LuOptionComponent, { skipSelf: true, optional: true });
+
+	/**
+	 * Depth this option sits at, handed to the listbox option that wraps the projected
+	 * `[treeitem]` children: option indentation is absolute, so the stylesheet cannot work out a
+	 * depth it has no rule for, and every level below its deepest one would share an indentation.
+	 */
+	readonly level: number = (this.#parentOption?.level ?? 0) + 1;
+
 	readonly optionContext = viewChild(LU_OPTION_CONTEXT);
 
 	private cdr = inject(ChangeDetectorRef);

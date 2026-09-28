@@ -27,31 +27,42 @@ export default {
 	argTypes: {
 		header: {
 			description: 'Présente un exemple de structure avec header.',
+			table: { category: 'inputs' },
+		},
+		headerSticky: {
+			name: '↳ headerSticky',
+			if: { arg: 'header', truthy: true },
+			description: 'Conserve le header visible en haut du layout.',
+			table: { category: 'inputs' },
 		},
 		footer: {
 			description: 'Présente un exemple de structure avec footer.',
+			table: { category: 'inputs' },
+		},
+		footerSticky: {
+			name: '↳ footerSticky',
+			if: { arg: 'footer', truthy: true },
+			description: 'Conserve le footer visible en bas du layout.',
+			table: { category: 'inputs' },
 		},
 		sidebar: {
 			description: 'Présente un exemple de structure avec un panneau latéral.',
-		},
-		headerSticky: {
-			if: { arg: 'header', truthy: true },
-			description: 'Conserve le header visible en haut du layout.',
-		},
-		footerSticky: {
-			if: { arg: 'footer', truthy: true },
-			description: 'Conserve le footer visible en bas du layout.',
+			table: { category: 'inputs' },
 		},
 		repeatContent: {
 			control: { type: 'range', min: 1, max: 10 },
 			description: '[Story] Modifie le nombre d’éléments <lu-main-layout-block>',
-		},
-		repeatOverflow: {
-			control: { type: 'range', min: 1, max: 10 },
-			if: { arg: 'contentOverflowing', truthy: true },
+			table: { category: 'inputs' },
 		},
 		contentOverflowing: {
 			description: 'Permet de rendre un élément <lu-main-layout-block> scrollable horizontalement tout en conservant le comportement du reste du layout.',
+			table: { category: 'inputs' },
+		},
+		repeatOverflow: {
+			name: '↳ repeatOverflow',
+			control: { type: 'range', min: 1, max: 10 },
+			if: { arg: 'contentOverflowing', truthy: true },
+			table: { category: 'inputs' },
 		},
 		bubblesStartEnd: {
 			options: [null, 1, 2, 3],

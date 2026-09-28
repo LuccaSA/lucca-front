@@ -26,12 +26,14 @@ export default {
 		};
 	},
 	argTypes: {
-		palette: { ...PaletteArgType, description: 'Applique une palette de couleurs au composant.' },
+		palette: { ...PaletteArgType, description: 'Applique une palette de couleurs au composant.', table: { category: 'inputs' } },
 		center: {
 			description: 'Centre le contenu horizontalement.',
+			table: { category: 'inputs' },
 		},
 		action: {
 			description: 'Ajoute une icône (+) à l’illustration.',
+			table: { category: 'inputs' },
 		},
 		illustration: {
 			options: setStoryOptions(BUBBLE_ILLUSTRATION),
@@ -39,6 +41,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’illustration.',
+			table: { category: 'inputs' },
 		},
 		hx: {
 			control: {
@@ -47,12 +50,15 @@ export default {
 				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
 			},
 			description: 'Définit le niveau sémantique du titre.',
+			table: { category: 'inputs' },
 		},
 		heading: {
 			description: 'Titre de l’empty state.',
+			table: { category: 'inputs' },
 		},
 		description: {
 			description: 'Description de l’empty state. [PortalContent]',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

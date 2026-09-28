@@ -27,36 +27,45 @@ export default {
 			control: 'select',
 			options: ['click', 'click+hover', 'hover+focus'],
 			description: 'Méthode d’ouverture du popover.',
+			table: { category: 'models' },
 		},
 		luPopoverPosition: {
 			control: 'select',
 			options: ['above', 'below', 'before', 'after'],
 			description: 'Position du popover par rapport à son déclencheur.',
+			table: { category: 'inputs' },
 		},
 		luPopoverDisabled: {
 			description: 'Désactive le popover.',
+			table: { category: 'inputs' },
 		},
 		luPopoverOpenDelay: {
 			description: 'Délai en millisecondes avant ouverture du popover.',
+			table: { category: 'inputs' },
 		},
 		luPopoverCloseDelay: {
 			description: 'Délai en millisecondes avant fermeture du popover.',
+			table: { category: 'inputs' },
 		},
 		overlayScrollStrategy: {
 			control: 'select',
 			options: ['reposition', 'block', 'close'],
 			description: '[v21.1] Comportement du popover lors du scroll.',
+			table: { category: 'inputs' },
 		},
 		luPopoverNoCloseButton: {
 			description: 'Masque le bouton de fermeture du popover visible à la navigation clavier.',
+			table: { category: 'inputs' },
 		},
 		luPopoverMaxBlockSize: {
 			control: 'text',
 			description: 'Modifie la hauteur max de la popover.',
+			table: { category: 'inputs' },
 		},
 		luPopoverMaxInlineSize: {
 			control: 'text',
 			description: 'Modifie la largeur max de la popover.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

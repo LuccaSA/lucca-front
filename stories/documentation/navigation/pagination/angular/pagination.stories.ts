@@ -15,22 +15,27 @@ export default {
 		isFirstPage: {
 			type: 'boolean',
 			description: 'Désactive le bouton précédent.',
+			table: { category: 'inputs' },
 		},
 		isLastPage: {
 			type: 'boolean',
 			description: 'Désactive le bouton suivant.',
+			table: { category: 'inputs' },
 		},
 		from: {
 			type: 'number',
 			description: 'Numéro du dernier élément affiché.',
+			table: { category: 'inputs' },
 		},
 		to: {
 			type: 'number',
 			description: 'Numéro du dernier élément affiché.',
+			table: { category: 'inputs' },
 		},
 		itemsCount: {
 			type: 'number',
 			description: 'Nombre total d’éléments.',
+			table: { category: 'inputs' },
 		},
 		mod: {
 			options: setStoryOptions(PAGINATION_MOD),
@@ -38,6 +43,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Affiche la pagination en vue compacte (seulement avec les boutons précédent et suivant).',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;
