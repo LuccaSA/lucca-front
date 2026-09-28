@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, luNumberAttribute } from '@lucca-front/ng/core';
+import { IconComponent, IconSize } from '@lucca-front/ng/icon';
 import { LU_PRIORITY_LEVELS_TRANSLATIONS } from './priority-levels.translate';
 import { PriorityLevel, PriorityLevelsSize } from './priority-levels.type';
 
@@ -15,9 +16,9 @@ const LEVEL_TRANSLATION_KEYS = {
 	styleUrl: './priority-levels.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	imports: [IconComponent],
 	host: {
 		class: 'priorityLevels',
-		'[class.mod-low]': 'level() === 1',
 		'[class.mod-medium]': 'level() === 2',
 		'[class.mod-high]': 'level() === 3',
 		'[class.mod-S]': "size() === 'S'",
@@ -42,14 +43,14 @@ export class PriorityLevelsComponent {
 
 	readonly label = computed(() => this.intl()[LEVEL_TRANSLATION_KEYS[this.level()]]);
 
-	readonly iconSizeClass = computed(() => {
+	readonly iconSize = computed<IconSize>(() => {
 		switch (this.size()) {
 			case 'S':
-				return 'mod-XXS';
+				return 'XXS';
 			case 'L':
-				return 'mod-S';
+				return 'S';
 			default:
-				return 'mod-XS';
+				return 'XS';
 		}
 	});
 }

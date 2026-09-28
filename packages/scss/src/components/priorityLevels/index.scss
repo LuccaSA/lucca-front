@@ -7,10 +7,6 @@
 	}
 
 	@layer mods {
-		&.mod-low {
-			@include low;
-		}
-
 		&.mod-medium {
 			@include medium;
 		}

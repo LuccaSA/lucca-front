@@ -1,15 +1,28 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	align-items: center;
-	color: var(--components-priorityLevels-color);
 	display: flex;
+	align-items: center;
+	color: var(--pr-t-color-text);
 	font: var(--components-priorityLevels-font);
 	gap: var(--components-priorityLevels-gap);
 
 	@at-root ($atRoot) {
-		.priorityLevels-icon {
-			color: var(--components-priorityLevels-icon-color);
+		.priorityLevels-icon .lucca-icon {
+			&::before {
+				background:
+					linear-gradient(
+						to right,
+						var(--components-priorityLevels-icon-color1) 0%,
+						var(--components-priorityLevels-icon-color1) calc(100% / 3),
+						var(--components-priorityLevels-icon-color2) calc(100% / 3),
+						var(--components-priorityLevels-icon-color2) calc(100% / 3 * 2),
+						var(--components-priorityLevels-icon-color3) calc(100% / 3 * 2),
+						var(--components-priorityLevels-icon-color3) 100%
+					);
+				background-clip: text;
+				color: transparent;
+			}
 		}
 	}
 }
