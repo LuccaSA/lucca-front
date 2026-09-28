@@ -1,0 +1,68 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Level</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="priorityLevels mod-low">
+						<span aria-hidden="true" class="priorityLevels-icon lucca-icon icon-chartLevels mod-XS"></span>
+						<span class="priorityLevels-label">Low</span>
+					</div>
+					<div class="priorityLevels mod-medium">
+						<span aria-hidden="true" class="priorityLevels-icon lucca-icon icon-chartLevels mod-XS"></span>
+						<span class="priorityLevels-label">Medium</span>
+					</div>
+					<div class="priorityLevels mod-high">
+						<span aria-hidden="true" class="priorityLevels-icon lucca-icon icon-chartLevels mod-XS"></span>
+						<span class="priorityLevels-label">High</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-priority-levels [level]="1" />
+					<lu-priority-levels [level]="2" />
+					<lu-priority-levels [level]="3" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="priorityLevels mod-low mod-S">
+						<span aria-hidden="true" class="priorityLevels-icon lucca-icon icon-chartLevels mod-XXS"></span>
+						<span class="priorityLevels-label">Low</span>
+					</div>
+					<div class="priorityLevels mod-low">
+						<span aria-hidden="true" class="priorityLevels-icon lucca-icon icon-chartLevels mod-XS"></span>
+						<span class="priorityLevels-label">Low</span>
+					</div>
+					<div class="priorityLevels mod-low mod-L">
+						<span aria-hidden="true" class="priorityLevels-icon lucca-icon icon-chartLevels mod-S"></span>
+						<span class="priorityLevels-label">Low</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-priority-levels size="S" />
+					<lu-priority-levels size="M" />
+					<lu-priority-levels size="L" />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

@@ -1,0 +1,15 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	align-items: center;
+	color: var(--components-priorityLevels-color);
+	display: flex;
+	font: var(--components-priorityLevels-font);
+	gap: var(--components-priorityLevels-gap);
+
+	@at-root ($atRoot) {
+		.priorityLevels-icon {
+			color: var(--components-priorityLevels-icon-color);
+		}
+	}
+}

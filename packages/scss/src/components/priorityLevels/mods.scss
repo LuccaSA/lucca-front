@@ -1,0 +1,20 @@
+@mixin low {
+	--components-priorityLevels-icon-color: var(--palettes-neutral-800);
+}
+
+@mixin medium {
+	--components-priorityLevels-icon-color: var(--palettes-warning-800);
+}
+
+@mixin high {
+	--components-priorityLevels-icon-color: var(--palettes-error-800);
+}
+
+@mixin S {
+	--components-priorityLevels-font: var(--pr-t-font-body-XS);
+	--components-priorityLevels-gap: var(--pr-t-spacings-25);
+}
+
+@mixin L {
+	--components-priorityLevels-font: var(--pr-t-font-body-M);
+}
