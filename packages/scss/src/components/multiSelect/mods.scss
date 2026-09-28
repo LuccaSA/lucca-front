@@ -90,4 +90,17 @@
 	--components-dialog-inside-header-content-paddingBlockStart: var(--pr-t-spacings-100);
 	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-50);
 	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50);
+
+	// The sheet is how the select is reached on a touch device, where there is no hover to reveal
+	// either the tree's onlyParent/onlyChildren buttons or a group's « select all » link: inside a
+	// sheet both are shown for good. The tree buttons also leave their absolute position on the way,
+	// so that being there all the time shortens the option's label instead of covering it.
+	.optionItem-icons {
+		position: static;
+		opacity: 1;
+	}
+
+	.listboxOption-content {
+		--components-listboxOption-content-link-opacity: 1;
+	}
 }

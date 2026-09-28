@@ -63,6 +63,31 @@ class RequiredHostComponent {
 	options: Entity[] = options;
 }
 
+/**
+ * Pages of 10 options out of 25, the way a paginated consumer does it: `nextPage` extends the
+ * `[options]` array, and asking for a page past the end leaves it unchanged.
+ */
+@Component({
+	selector: 'lu-multi-select-paginated-bottom-sheet-host',
+	imports: [FormsModule, LuMultiSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: ` <lu-multi-select [ngModel]="selected" [options]="options" (nextPage)="loadNextPage()" /> `,
+})
+class PaginatedHostComponent {
+	readonly allOptions: Entity[] = Array.from({ length: 25 }, (_, index) => ({ id: index, name: `test ${index}` }));
+
+	selected: Entity[] = [];
+
+	options: Entity[] = this.allOptions.slice(0, 10);
+
+	nextPageCount = 0;
+
+	loadNextPage(): void {
+		this.nextPageCount++;
+		this.options = this.allOptions.slice(0, this.options.length + 10);
+	}
+}
+
 describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 	let breakpointObserver: FakeBreakpointObserver;
 
@@ -332,6 +357,58 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			// Assert
 			expect(document.querySelector('.lu-select-panel-layout')).not.toBeNull();
 			expect(sheet()).toBeNull();
+		});
+	});
+	describe('pagination', () => {
+		function createPaginatedSelect(belowSmallBreakpoint: boolean): { fixture: ComponentFixture<PaginatedHostComponent>; select: LuMultiSelectInputComponent<Entity> } {
+			breakpointObserver.belowSmallBreakpoint.next(belowSmallBreakpoint);
+			const fixture = TestBed.createComponent(PaginatedHostComponent);
+			fixture.detectChanges();
+			const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Entity>;
+			return { fixture, select };
+		}
+
+		/**
+		 * Each page request is deferred by a microtask and only the next render measures the viewport
+		 * again, so the two are alternated until the panel stops asking — with a bound, so a panel that
+		 * never stops fails the test instead of hanging it.
+		 */
+		async function drainPageRequests(fixture: ComponentFixture<PaginatedHostComponent>): Promise<void> {
+			for (let previous = -1, rounds = 0; previous !== fixture.componentInstance.nextPageCount && rounds < 10; rounds++) {
+				previous = fixture.componentInstance.nextPageCount;
+				await Promise.resolve();
+				TestBed.inject(ApplicationRef).tick();
+			}
+		}
+
+		it('should keep asking for the next page while the sheet has nothing to scroll, and stop once the options are exhausted', async () => {
+			// Arrange
+			const { fixture, select } = createPaginatedSelect(true);
+
+			// Act
+			select.openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+			await drainPageRequests(fixture);
+
+			// Assert: a sheet taller than its first page never scrolls, so the scroll handler alone would
+			// leave pagination stuck on page 1 — and asking for a page that brings nothing back stops it.
+			expect(fixture.componentInstance.options.length).toBe(25);
+			expect(fixture.componentInstance.nextPageCount).toBe(3);
+		});
+
+		it('should leave pagination to the scroll handler above the S breakpoint', async () => {
+			// Arrange
+			const { fixture, select } = createPaginatedSelect(false);
+
+			// Act
+			select.openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+			await drainPageRequests(fixture);
+
+			// Assert: the popover caps its content at 20rem, which a page of options always overflows.
+			expect(fixture.componentInstance.nextPageCount).toBe(0);
 		});
 	});
 });

@@ -18,7 +18,7 @@
 				<ng-container [ngTemplateOutlet]="sheetSearch" />
 			</div>
 		</lu-dialog-header>
-		<lu-dialog-content data-testid="dialog-panel" tabindex="0" (scroll)="onScroll($event)">
+		<lu-dialog-content #sheetViewport data-testid="dialog-panel" tabindex="0" (scroll)="onScroll($event)">
 			<ng-container [ngTemplateOutlet]="panelContent" />
 		</lu-dialog-content>
 	</lu-dialog>
