@@ -1,3 +1,19 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/text';
+
+@mixin ellipsis {
+	--components-sortable-minInlineSize: 0;
+	--components-sortable-maxInlineSize: 100%;
+
+	.tableSortable-label {
+		@include text.ellipsis;
+
+		&:focus-visible {
+			@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-small));
+		}
+	}
+}
+
 @mixin sortAlignEnd {
 	--components-sortable-direction: row-reverse;
 	--components-sortable-offset: var(--pr-t-spacings-50);

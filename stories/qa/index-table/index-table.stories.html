@@ -395,6 +395,73 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Sort</td>
+			<td>
+				<table class="indexTable mod-layoutFixed">
+					<thead class="indexTable-head">
+						<tr class="indexTable-head-row">
+							<th class="indexTable-head-row-cell" scope="col" aria-sort="ascending" style="--components-indexTable-cell-fixed-width: 8">
+								<button type="button" class="tableSortable button">
+									<span class="tableSortable-label">Sort with wrap and a somewhat long label</span>
+									<span class="tableSortable-arrows">
+										<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+										<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
+									</span>
+								</button>
+							</th>
+							<th class="indexTable-head-row-cell" scope="col" aria-sort="ascending" style="--components-indexTable-cell-fixed-width: 14">
+								<button type="button" class="tableSortable button mod-ellipsis" #sortBtn1>
+									<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn1"
+										>Ellipsis, no overflow</span
+									>
+									<span class="tableSortable-arrows">
+										<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+										<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
+									</span>
+								</button>
+							</th>
+							<th class="indexTable-head-row-cell" scope="col" aria-sort="ascending" style="--components-indexTable-cell-fixed-width: 6">
+								<button type="button" class="tableSortable button mod-ellipsis" #sortBtn2>
+									<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn2"
+										>Ellipsis, with overflow because this label is long</span
+									>
+									<span class="tableSortable-arrows">
+										<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+										<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
+									</span>
+								</button>
+							</th>
+						</tr>
+					</thead>
+					<tbody class="indexTable-body">
+						<tr class="indexTable-body-row">
+							<td class="indexTable-body-row-cell">Content</td>
+							<td class="indexTable-body-row-cell">Content</td>
+							<td class="indexTable-body-row-cell">Content</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td>
+				<lu-index-table layoutFixed>
+					<thead luIndexTableHead>
+						<tr luIndexTableRow>
+							<th luIndexTableCell sort="ascending" inlineSize="8">Sort with wrap and a somewhat long label</th>
+							<th luIndexTableCell sort="ascending" inlineSize="14" sortWithEllipsis>Ellipsis, no overflow</th>
+							<th luIndexTableCell sort="ascending" inlineSize="6" sortWithEllipsis>Ellipsis, with overflow because this label is long</th>
+						</tr>
+					</thead>
+					<tbody luIndexTableBody>
+						<tr luIndexTableRow>
+							<td luIndexTableCell>Content</td>
+							<td luIndexTableCell>Content</td>
+							<td luIndexTableCell>Content</td>
+						</tr>
+					</tbody>
+				</lu-index-table>
+			</td>
+		</tr>
+		<tr>
 			<td>Action</td>
 			<td>
 				<table class="indexTable">
