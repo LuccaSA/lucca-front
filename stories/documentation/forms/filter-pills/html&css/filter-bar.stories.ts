@@ -94,7 +94,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 								<span class="filterPill-checkbox-icon-check"></span>
 							</span>
 						</span>
-						<span class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis [luTooltipDelegateTrigger]="button">
+						<span class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis [luTooltipTriggerAnchor]="button">
 							Inclure les collaborateurs partis
 							<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="Inclure les collaborateurs partis"></span>
 						</span>

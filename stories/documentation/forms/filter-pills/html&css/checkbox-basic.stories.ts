@@ -30,7 +30,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 			<span class="filterPill-checkbox-icon-check"></span>
 		</span>
 	</span>
-	<span class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis [luTooltipDelegateTrigger]="button">
+	<span class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis [luTooltipTriggerAnchor]="button">
 		${args.label}
 		<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="${args.label}"></span>
 	</span>

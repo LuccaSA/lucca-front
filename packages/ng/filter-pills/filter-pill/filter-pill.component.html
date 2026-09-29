@@ -30,7 +30,7 @@
 				luTooltip
 				luTooltipWhenEllipsis
 				[luTooltipDisabled]="inputIsEmpty()"
-				[luTooltipDelegateTrigger]="filterPillRef"
+				[luTooltipTriggerAnchor]="filterPillRef"
 			>
 				<ng-container *ngTemplateOutlet="pillTpl; context: { label: label(), isEmpty: inputIsEmpty() }" />
 				@if (inputIsEmpty() && !disabled()) {

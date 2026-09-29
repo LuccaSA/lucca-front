@@ -18,7 +18,7 @@ export default {
 		<li class="progressStepper-list-step">
 			<a href="#" class="progressStepper-list-step-linkOptional" #link>
 				<span class="progressStepper-list-step-number" aria-hidden="true"></span>
-				<span class="progressStepper-list-step-title"><span luTooltip luTooltipWhenEllipsis [luTooltipDelegateTrigger]="link" class="progressStepper-list-step-title-content">Step</span></span>
+				<span class="progressStepper-list-step-title"><span luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="link" class="progressStepper-list-step-title-content">Step</span></span>
 			</a>
 		</li>
 		<li class="progressStepper-list-step" aria-current="step">
