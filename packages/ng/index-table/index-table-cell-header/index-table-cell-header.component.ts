@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, model, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
@@ -49,6 +49,10 @@ export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	readonly actions = input(false, { transform: luBooleanAttribute });
 	readonly inlineSize = input(0, { transform: luNumberAttribute });
 	readonly sortWithEllipsis = input(false, { transform: luBooleanAttribute });
+
+	// #sortButton hosts the luButton component, so the template ref resolves to that component
+	// instance rather than the native element — read it explicitly as an ElementRef instead.
+	protected readonly sortButtonRef = viewChild<unknown, ElementRef<HTMLElement>>('sortButton', { read: ElementRef });
 
 	toggleSort(): void {
 		if (this.sort()) {

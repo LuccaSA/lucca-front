@@ -23,8 +23,8 @@ function getTemplate(args: SortStory): string {
 		<thead class="dataTable-head">
 			<tr class="dataTable-head-row">
 				<th class="dataTable-head-row-cell">
-					<button type="button" class="tableSortable button mod-ellipsis">
-						<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis>Label</span>
+					<button type="button" class="tableSortable button mod-ellipsis" #sortBtn1>
+						<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn1">Label</span>
 						<span class="tableSortable-arrows">
 							<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 							<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -32,8 +32,8 @@ function getTemplate(args: SortStory): string {
 					</button>
 				</th>
 				<th class="dataTable-head-row-cell" aria-sort="ascending">
-					<button type="button" class="tableSortable button mod-ellipsis">
-						<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis>Label</span>
+					<button type="button" class="tableSortable button mod-ellipsis" #sortBtn2>
+						<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn2">Label</span>
 						<span class="tableSortable-arrows">
 							<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 							<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -41,8 +41,8 @@ function getTemplate(args: SortStory): string {
 					</button>
 				</th>
 				<th class="dataTable-head-row-cell" aria-sort="descending">
-					<button type="button" class="tableSortable button mod-ellipsis">
-						<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis>Label</span>
+					<button type="button" class="tableSortable button mod-ellipsis" #sortBtn3>
+						<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn3">Label</span>
 						<span class="tableSortable-arrows">
 							<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 							<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>

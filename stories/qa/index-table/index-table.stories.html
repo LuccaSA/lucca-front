@@ -410,8 +410,10 @@
 								</button>
 							</th>
 							<th class="indexTable-head-row-cell" scope="col" aria-sort="ascending" style="--components-indexTable-cell-fixed-width: 14">
-								<button type="button" class="tableSortable button mod-ellipsis">
-									<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis>Ellipsis, no overflow</span>
+								<button type="button" class="tableSortable button mod-ellipsis" #sortBtn1>
+									<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn1"
+										>Ellipsis, no overflow</span
+									>
 									<span class="tableSortable-arrows">
 										<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 										<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -419,8 +421,8 @@
 								</button>
 							</th>
 							<th class="indexTable-head-row-cell" scope="col" aria-sort="ascending" style="--components-indexTable-cell-fixed-width: 6">
-								<button type="button" class="tableSortable button mod-ellipsis">
-									<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis
+								<button type="button" class="tableSortable button mod-ellipsis" #sortBtn2>
+									<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn2"
 										>Ellipsis, with overflow because this label is long</span
 									>
 									<span class="tableSortable-arrows">

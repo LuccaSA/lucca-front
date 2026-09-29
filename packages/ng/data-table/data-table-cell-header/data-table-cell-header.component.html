@@ -1,6 +1,11 @@
 @if (sort()) {
-	<button luButton type="button" class="tableSortable" [class.mod-ellipsis]="sortWithEllipsis()" (click)="toggleSort()">
-		<span class="tableSortable-label" [luTooltipDisabled]="!sortWithEllipsis()" luTooltip luTooltipWhenEllipsis
+	<button luButton type="button" class="tableSortable" [class.mod-ellipsis]="sortWithEllipsis()" (click)="toggleSort()" #sortButton>
+		<span
+			class="tableSortable-label"
+			[luTooltipDisabled]="!sortWithEllipsis()"
+			luTooltip
+			luTooltipWhenEllipsis
+			[luTooltipTriggerAnchor]="sortButtonRef()"
 			><ng-container *ngTemplateOutlet="contentTpl"
 		/></span>
 		<span class="tableSortable-arrows">

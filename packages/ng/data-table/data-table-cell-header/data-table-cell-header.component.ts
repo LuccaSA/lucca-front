@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, forwardRef, inject, input, model, viewChild, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -51,6 +51,10 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	readonly fixedWidth = input<string | null>(null);
 	readonly inlineSize = input<string | null>(null);
 	readonly sortWithEllipsis = input(false, { transform: luBooleanAttribute });
+
+	// #sortButton hosts the luButton component, so the template ref resolves to that component
+	// instance rather than the native element — read it explicitly as an ElementRef instead.
+	protected readonly sortButtonRef = viewChild<unknown, ElementRef<HTMLElement>>('sortButton', { read: ElementRef });
 
 	readonly insetInlineStart = computed(() => {
 		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
