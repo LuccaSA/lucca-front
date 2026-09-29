@@ -5,10 +5,8 @@ import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { ChipSize, ChipState } from './chip.type';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
-
-const NATIVELY_FOCUSABLE_TAGS = ['BUTTON', 'A'];
+import { ChipSize, ChipState } from './chip.type';
 
 @Component({
 	selector: 'lu-chip, button[luChip], a[luChip]',
@@ -28,13 +26,6 @@ const NATIVELY_FOCUSABLE_TAGS = ['BUTTON', 'A'];
 })
 export class ChipComponent {
 	readonly #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-
-	/**
-	 * Set only when rendered on a natively focusable tag (button[luChip]/a[luChip]): that tag is
-	 * already a tab stop, so the truncated content must not become a second one. Rendered as
-	 * lu-chip (not focusable on its own), content keeps managing its own tabindex.
-	 */
-	protected readonly tooltipDelegateTrigger = NATIVELY_FOCUSABLE_TAGS.includes(this.#elementRef.nativeElement.tagName) ? this.#elementRef.nativeElement : undefined;
 
 	readonly intl = input(...intlInputOptions(LU_CHIP_TRANSLATIONS));
 
@@ -88,4 +79,10 @@ export class ChipComponent {
 	readonly isWarning = computed<boolean>(() => this.state() === 'warning');
 	readonly isCritical = computed<boolean>(() => this.state() === 'critical');
 	readonly displayedIcon = computed<LuccaIcon | null>(() => (this.isWarning() ? 'signWarning' : this.isCritical() ? 'signError' : this.icon()));
+
+	protected readonly tooltipTriggerAnchor = computed(() => {
+		const el = this.#elementRef.nativeElement;
+		const isFocusable = el.tagName === 'BUTTON' ? !this.disabled() : el.tagName === 'A' ? el.hasAttribute('href') : false;
+		return isFocusable ? el : undefined;
+	});
 }
