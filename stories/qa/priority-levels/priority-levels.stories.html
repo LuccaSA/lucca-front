@@ -13,7 +13,7 @@
 			<td>Level</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<div class="priorityLevels">
+					<div class="priorityLevels mod-low">
 						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-XS"></span></span>
 						<span class="priorityLevels-label">Low</span>
 					</div>
@@ -39,15 +39,15 @@
 			<td>Size</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<div class="priorityLevels mod-S">
+					<div class="priorityLevels mod-low mod-S">
 						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-XXS"></span></span>
 						<span class="priorityLevels-label">Low</span>
 					</div>
-					<div class="priorityLevels">
+					<div class="priorityLevels mod-low">
 						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-XS"></span></span>
 						<span class="priorityLevels-label">Low</span>
 					</div>
-					<div class="priorityLevels mod-L">
+					<div class="priorityLevels mod-low mod-L">
 						<span class="priorityLevels-icon"><span aria-hidden="true" class="lucca-icon icon-priorityLevels mod-S"></span></span>
 						<span class="priorityLevels-label">Low</span>
 					</div>
@@ -55,9 +55,9 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-priority-levels size="S" />
-					<lu-priority-levels size="M" />
-					<lu-priority-levels size="L" />
+					<lu-priority-levels [level]="1" size="S" />
+					<lu-priority-levels [level]="1" size="M" />
+					<lu-priority-levels [level]="1" size="L" />
 				</div>
 			</td>
 		</tr>

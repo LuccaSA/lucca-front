@@ -20,6 +20,7 @@ const LEVEL_TRANSLATION_KEYS = {
 	imports: [IconComponent, LuTooltipTriggerDirective],
 	host: {
 		class: 'priorityLevels',
+		'[class.mod-low]': 'level() === 1',
 		'[class.mod-medium]': 'level() === 2',
 		'[class.mod-high]': 'level() === 3',
 		'[class.mod-S]': "size() === 'S'",
@@ -28,9 +29,9 @@ const LEVEL_TRANSLATION_KEYS = {
 })
 export class PriorityLevelsComponent {
 	/**
-	 * Which priority level should be displayed (1 = low, 2 = medium, 3 = high). Defaults to 1
+	 * Which priority level should be displayed (1 = low, 2 = medium, 3 = high)
 	 */
-	readonly level = input<PriorityLevel>(1, { transform: luNumberAttribute<PriorityLevel> });
+	readonly level = input.required({ transform: luNumberAttribute<PriorityLevel> });
 
 	/**
 	 * Which size should the component be? Defaults to M

@@ -1,3 +1,9 @@
+@mixin low {
+	--components-priorityLevels-icon-color1: var(--pr-t-color-text);
+	--components-priorityLevels-icon-color2: var(--palettes-neutral-400);
+	--components-priorityLevels-icon-color3: var(--palettes-neutral-400);
+}
+
 @mixin medium {
 	--components-priorityLevels-icon-color1: var(--palettes-warning-800);
 	--components-priorityLevels-icon-color2: var(--palettes-warning-800);
