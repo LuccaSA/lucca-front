@@ -105,9 +105,9 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(this.#host);
 	readonly tooltipAnchor = computed(() => this.luTooltipAnchor() || this.prTooltipAnchor());
 
-	readonly luTooltipFocusDelegate = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
-	readonly prTooltipFocusDelegate = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
-	readonly tooltipFocusDelegate = computed(() => this.luTooltipFocusDelegate() || this.prTooltipFocusDelegate());
+	readonly luTooltipDelegateTrigger = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
+	readonly prTooltipDelegateTrigger = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
+	readonly tooltipDelegateTrigger = computed(() => this.luTooltipDelegateTrigger() || this.prTooltipDelegateTrigger());
 
 	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
@@ -202,17 +202,17 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		});
 
 		effect((onCleanup) => {
-			const focusDelegateElement = this.#resolveFocusDelegateElement();
-			if (!focusDelegateElement) {
+			const delegateTriggerElement = this.#resolveDelegateTriggerElement();
+			if (!delegateTriggerElement) {
 				return;
 			}
 
 			const unlisten = [
-				this.#renderer.listen(focusDelegateElement, 'mouseenter', () => this.onMouseEnter()),
-				this.#renderer.listen(focusDelegateElement, 'mouseleave', () => this.onMouseLeave()),
-				this.#renderer.listen(focusDelegateElement, 'focus', () => this.onFocus()),
-				this.#renderer.listen(focusDelegateElement, 'blur', () => this.onBlur()),
-				this.#renderer.listen(focusDelegateElement, 'focusout', (event: FocusEvent) => this.onFocusOut(event)),
+				this.#renderer.listen(delegateTriggerElement, 'mouseenter', () => this.onMouseEnter()),
+				this.#renderer.listen(delegateTriggerElement, 'mouseleave', () => this.onMouseLeave()),
+				this.#renderer.listen(delegateTriggerElement, 'focus', () => this.onFocus()),
+				this.#renderer.listen(delegateTriggerElement, 'blur', () => this.onBlur()),
+				this.#renderer.listen(delegateTriggerElement, 'focusout', (event: FocusEvent) => this.onFocusOut(event)),
 			];
 			onCleanup(() => unlisten.forEach((fn) => fn()));
 		});
@@ -475,7 +475,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
-		if (this.#resolveFocusDelegateElement()) {
+		if (this.#resolveDelegateTriggerElement()) {
 			return;
 		}
 
@@ -586,17 +586,17 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		}
 	}
 
-	#resolveFocusDelegateElement(): HTMLElement | null {
-		const focusDelegate = this.tooltipFocusDelegate();
+	#resolveDelegateTriggerElement(): HTMLElement | null {
+		const delegateTrigger = this.tooltipDelegateTrigger();
 
-		if (isNil(focusDelegate)) {
+		if (isNil(delegateTrigger)) {
 			return null;
-		} else if (focusDelegate instanceof HTMLElement) {
-			return focusDelegate;
-		} else if ('getElementRef' in focusDelegate) {
-			return focusDelegate.getElementRef().nativeElement as HTMLElement;
+		} else if (delegateTrigger instanceof HTMLElement) {
+			return delegateTrigger;
+		} else if ('getElementRef' in delegateTrigger) {
+			return delegateTrigger.getElementRef().nativeElement as HTMLElement;
 		} else {
-			return focusDelegate.nativeElement;
+			return delegateTrigger.nativeElement;
 		}
 	}
 

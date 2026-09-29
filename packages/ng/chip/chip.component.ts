@@ -34,7 +34,7 @@ export class ChipComponent {
 	 * already a tab stop, so the truncated content must not become a second one. Rendered as
 	 * lu-chip (not focusable on its own), content keeps managing its own tabindex.
 	 */
-	protected readonly tooltipFocusDelegate = NATIVELY_FOCUSABLE_TAGS.includes(this.#elementRef.nativeElement.tagName) ? this.#elementRef.nativeElement : undefined;
+	protected readonly tooltipDelegateTrigger = NATIVELY_FOCUSABLE_TAGS.includes(this.#elementRef.nativeElement.tagName) ? this.#elementRef.nativeElement : undefined;
 
 	readonly intl = input(...intlInputOptions(LU_CHIP_TRANSLATIONS));
 

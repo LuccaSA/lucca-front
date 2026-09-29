@@ -18,13 +18,13 @@ export default {
 		<li class="progressStepper-list-step is-success">
 			<a href="#" class="progressStepper-list-step-linkOptional" #link1>
 				<span class="progressStepper-list-step-number" aria-hidden="true"></span>
-				<span class="progressStepper-list-step-title"><span luTooltip luTooltipWhenEllipsis [luTooltipFocusDelegate]="link1" class="progressStepper-list-step-title-content">Step success</span></span>
+				<span class="progressStepper-list-step-title"><span luTooltip luTooltipWhenEllipsis [luTooltipDelegateTrigger]="link1" class="progressStepper-list-step-title-content">Step success</span></span>
 			</a>
 		</li>
 		<li class="progressStepper-list-step is-critical">
 			<a href="#" class="progressStepper-list-step-linkOptional" #link2>
 				<span class="progressStepper-list-step-number" aria-hidden="true"></span>
-				<span class="progressStepper-list-step-title"><span luTooltip luTooltipWhenEllipsis [luTooltipFocusDelegate]="link2" class="progressStepper-list-step-title-content">Step critical</span></span>
+				<span class="progressStepper-list-step-title"><span luTooltip luTooltipWhenEllipsis [luTooltipDelegateTrigger]="link2" class="progressStepper-list-step-title-content">Step critical</span></span>
 			</a>
 		</li>
 		<li class="progressStepper-list-step" aria-current="step">
