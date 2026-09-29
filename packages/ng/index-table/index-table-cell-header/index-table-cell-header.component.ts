@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { BaseIndexTableCell } from '../base-index-table-cell';
 import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 import { IndexTableSort } from '../index-table.type';
@@ -30,7 +31,7 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 		'[class.mod-actions]': 'actions()',
 		'[style.--components-indexTable-cell-fixed-width]': 'inlineSize() !== 0 ? inlineSize() : null',
 	},
-	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule],
+	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule, LuTooltipTriggerDirective],
 	providers: [
 		{
 			provide: LU_INDEX_TABLE_CELL_INSTANCE,
@@ -47,6 +48,7 @@ export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 	readonly actions = input(false, { transform: luBooleanAttribute });
 	readonly inlineSize = input(0, { transform: luNumberAttribute });
+	readonly sortWithEllipsis = input(false, { transform: luBooleanAttribute });
 
 	toggleSort(): void {
 		if (this.sort()) {

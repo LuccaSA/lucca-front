@@ -1,6 +1,8 @@
 @if (sort()) {
-	<button luButton type="button" class="tableSortable" (click)="toggleSort()">
-		<ng-container *ngTemplateOutlet="contentTpl" />
+	<button luButton type="button" class="tableSortable" [class.mod-ellipsis]="sortWithEllipsis()" (click)="toggleSort()">
+		<span class="tableSortable-label" [luTooltipDisabled]="!sortWithEllipsis()" luTooltip luTooltipWhenEllipsis
+			><ng-container *ngTemplateOutlet="contentTpl"
+		/></span>
 		<span class="tableSortable-arrows">
 			<lu-icon icon="chevronTop" class="tableSortable-arrows-ascending" />
 			<lu-icon icon="chevronBottom" class="tableSortable-arrows-descending" />

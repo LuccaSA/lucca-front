@@ -1,4 +1,6 @@
-import { Meta, StoryObj } from '@storybook/angular-vite';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface TableSortableStory {
 	align: string;
@@ -14,6 +16,14 @@ export default {
 			},
 		},
 	},
+	decorators: [
+		moduleMetadata({
+			imports: [LuTooltipModule],
+		}),
+		applicationConfig({
+			providers: [provideAnimations()],
+		}),
+	],
 } as Meta;
 
 function getTemplate(args: TableSortableStory): string {
@@ -24,8 +34,8 @@ function getTemplate(args: TableSortableStory): string {
 				Non triable
 			</th>
 			<th class="table-head-row-cell ${args.align}">
-				<button type="button" class="tableSortable button">
-					Triable
+				<button type="button" class="tableSortable button mod-ellipsis">
+					<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis>Triable</span>
 					<span class="tableSortable-arrows">
 						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -33,8 +43,8 @@ function getTemplate(args: TableSortableStory): string {
 				</button>
 			</th>
 			<th class="table-head-row-cell ${args.align}" aria-sort="ascending">
-				<button type="button" class="tableSortable button">
-					Trié ascendant
+				<button type="button" class="tableSortable button mod-ellipsis">
+					<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis>Trié ascendant</span>
 					<span class="tableSortable-arrows">
 						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -42,8 +52,8 @@ function getTemplate(args: TableSortableStory): string {
 				</button>
 			</th>
 			<th class="table-head-row-cell ${args.align}" aria-sort="descending">
-				<button type="button" class="tableSortable button">
-					Trié descendant
+				<button type="button" class="tableSortable button mod-ellipsis">
+					<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis>Trié descendant</span>
 					<span class="tableSortable-arrows">
 						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -51,8 +61,8 @@ function getTemplate(args: TableSortableStory): string {
 				</button>
 			</th>
 			<th class="table-head-row-cell ${args.align}" aria-sort="none">
-				<button type="button" class="tableSortable button" onclick="switch (this.parentNode.getAttribute('aria-sort')) { case 'ascending': this.parentNode.setAttribute('aria-sort', 'descending'); break; case 'descending': this.parentNode.setAttribute('aria-sort', 'none'); break; default: this.parentNode.setAttribute('aria-sort', 'ascending'); }">
-					Interactif
+				<button type="button" class="tableSortable button mod-ellipsis" onclick="switch (this.parentNode.getAttribute('aria-sort')) { case 'ascending': this.parentNode.setAttribute('aria-sort', 'descending'); break; case 'descending': this.parentNode.setAttribute('aria-sort', 'none'); break; default: this.parentNode.setAttribute('aria-sort', 'ascending'); }">
+					<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis>Interactif</span>
 					<span class="tableSortable-arrows">
 						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
