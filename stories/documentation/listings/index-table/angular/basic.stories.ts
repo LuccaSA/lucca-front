@@ -89,6 +89,11 @@ export default {
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
 			table: { category: 'models' },
 		},
+		sortWithEllipsis: {
+			if: { arg: 'sort', truthy: true },
+			description: 'Tronque le libellé du header avec une ellipsis si la colonne n’offre pas assez de largeur.',
+			table: { category: 'inputs' },
+		},
 		align: {
 			options: setStoryOptions(INDEX_TABLE_ALIGN),
 			control: {
@@ -158,6 +163,7 @@ export default {
 			action,
 			hiddenLabel,
 			sort,
+			sortWithEllipsis,
 			align,
 			expanded,
 			pagination,
@@ -178,6 +184,7 @@ export default {
 		const intermediateFooterAttr = intermediateFooter ? ` tfoot` : ``;
 		const hiddenLabelAttr = hiddenLabel ? ` hiddenLabel` : ``;
 		const sortAttr = sort ? ` sort="${sort}"` : ``;
+		const sortWithEllipsisAttr = sortWithEllipsis ? ` sortWithEllipsis` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
 		const groupExpandedAttr = expanded && group ? ` [expanded]="true"` : ``;
 		const groupButtonAltAttr = group ? ` groupButtonAlt="${groupButtonAlt}"` : ``;
@@ -257,7 +264,7 @@ export default {
 		<tr luIndexTableRow${selectableAllParam}${mixedAttr}>
 			<th luIndexTableCell>Label</th>
 			<th luIndexTableCell${hiddenLabelAttr}>Label</th>
-			<th luIndexTableCell${alignAttr}${sortAttr}>Label</th>
+			<th luIndexTableCell${alignAttr}${sortAttr}${sortWithEllipsisAttr}>Label</th>
 		</tr>
 	</thead>
 	<tbody luIndexTableBody${groupAttr}${groupButtonAltAttr}${groupExpandedAttr}>
@@ -278,6 +285,7 @@ export const Basic: StoryObj = {
 		mixed: false,
 
 		sort: '',
+		sortWithEllipsis: false,
 		align: '',
 		hiddenLabel: false,
 

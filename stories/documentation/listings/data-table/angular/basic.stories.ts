@@ -39,6 +39,11 @@ export default {
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
 			table: { category: 'models' },
 		},
+		sortWithEllipsis: {
+			if: { arg: 'sort', truthy: true },
+			description: 'Tronque le libellé du header avec une ellipsis si la colonne n’offre pas assez de largeur.',
+			table: { category: 'inputs' },
+		},
 		align: {
 			options: setStoryOptions(DATA_TABLE_ALIGN),
 			control: {
@@ -226,6 +231,7 @@ export default {
 			layoutFixed,
 			hover,
 			sort,
+			sortWithEllipsis,
 			cellBorder,
 			inlineSize,
 			inlineSizeValue,
@@ -246,6 +252,7 @@ export default {
 		const hoverAttr = hover ? ` hover` : ``;
 		const cellBorderAttr = cellBorder ? ` cellBorder` : ``;
 		const sortAttr = sort ? ` sort="${sort}"` : ``;
+		const sortWithEllipsisAttr = sortWithEllipsis ? ` sortWithEllipsis` : ``;
 		const inlineSizeAttr = inlineSize && inlineSizeValue !== `` ? ` inlineSize="${inlineSizeValue}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
 		const draggable = drag ? ` drag` : ``;
@@ -349,7 +356,7 @@ export default {
 	<thead luDataTableHead>
 		<tr luDataTableRow${selectableLabelHeadAttr}${mixedAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
-			<th luDataTableCell${inlineSizeAttr}${sortAttr}${alignAttr}>${textHeader}</th>
+			<th luDataTableCell${inlineSizeAttr}${sortAttr}${sortWithEllipsisAttr}${alignAttr}>${textHeader}</th>
 		</tr>
 	</thead>
 	<tbody luDataTableBody${groupAttr}${expandedAttr}>
@@ -370,6 +377,7 @@ export const Basic: StoryObj = {
 		empty: false,
 		verticalAlign: undefined,
 		sort: undefined,
+		sortWithEllipsis: false,
 		hover: false,
 		cellBorder: false,
 		layoutFixed: false,

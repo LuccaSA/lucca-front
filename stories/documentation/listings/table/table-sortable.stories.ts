@@ -1,5 +1,5 @@
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface TableSortableStory {
@@ -18,7 +18,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [LuTooltipModule],
+			imports: [LuTooltipTriggerDirective],
 		}),
 		applicationConfig({
 			providers: [provideAnimations()],
