@@ -28,11 +28,14 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 @Component({
 	selector: 'lu-users-directive-host',
 	imports: [LuSimpleSelectInputComponent, TestUsersDirective],
-	template: `<lu-simple-select luTestUsers [filters]="filters" />`,
+	template: `<lu-simple-select luTestUsers [filters]="filters" [operationIds]="operationIds" [uniqueOperationIds]="uniqueOperationIds" [appInstanceId]="appInstanceId" />`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LuUsersDirectiveHostComponent {
 	filters: Record<string, string | number | boolean> = {};
+	operationIds: number[] | null = null;
+	uniqueOperationIds: number[] | null = null;
+	appInstanceId: number | null = null;
 	readonly simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
 	readonly usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
 }
@@ -256,6 +259,24 @@ describe('LuCoreSelectUsersDirective', () => {
 		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
 		// The search list, on the other hand, does carry the filters
 		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&foo=bar&paging=0,20`);
+		httpTestingController.verify();
+	}));
+
+	it('should forward filters and scope params to the total count request', fakeAsync(() => {
+		// Arrange
+		fixture.componentInstance.filters = { foo: 'bar' };
+		fixture.componentInstance.uniqueOperationIds = [1, 2];
+		fixture.componentInstance.operationIds = [3];
+		fixture.componentInstance.appInstanceId = 4;
+		fixture.detectChanges();
+
+		// Act
+		usersDirective.totalCount$.subscribe();
+		fixture.detectChanges();
+		tick(250);
+
+		// Assert
+		httpTestingController.expectOne(`/api/v3/users/scopedsearch?foo=bar&uniqueOperations=1,2&operations=3&appInstanceId=4&fields=collection.count`);
 		httpTestingController.verify();
 	}));
 

@@ -16,6 +16,9 @@ import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@luc
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { IconComponent } from '@lucca/prisme/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { createTestStory } from '@/helpers/stories';
+import { pickDay, waitForAngular } from '@/helpers/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
@@ -128,8 +131,9 @@ export default {
 			: '';
 		const filterViewSelectorEnabled = args['views'] && args['filterViewSelector'];
 		const saveViewEnabled = args['views'] && args['saveView'];
-		const saveViewTab = saveViewEnabled && !filterViewSelectorEnabled
-			? `<ng-template #label4>
+		const saveViewTab =
+			saveViewEnabled && !filterViewSelectorEnabled
+				? `<ng-template #label4>
 			Produit
 			<button type="button" size="XS" luButton="ghost" aria-expanded="false" disclosure [luDropdown]="optionsDropdown">
 				<lu-icon alt="Options" icon="menuDots" />
@@ -152,7 +156,7 @@ export default {
 			</ng-template>
 		</ng-template>
 		<lu-segmented-control-filter [label]="label4" value="4" />`
-			: '';
+				: '';
 		const saveViewButton = saveViewEnabled
 			? `<button type="button" size="S" luButton="outlined" palette="product" disclosure aria-expanded="false" [luDropdown]="saveDropdown">
 			Enregistrer la vue
@@ -253,3 +257,88 @@ export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: bo
 		applyFiltersButton: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+
+	await step('Without optional pill, there is no additional filters button', async () => {
+		await expect(canvas.getByRole('button', { name: /Départements/ })).toBeVisible();
+		await expect(canvas.queryByRole('button', { name: 'Filtres supplémentaires' })).not.toBeInTheDocument();
+	});
+});
+
+export const OptionalFilterTEST = createTestStory({ ...Basic, name: 'Optional filter', args: { ...Basic.args, optionalFilter: true } }, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const getAddFiltersButton = () => canvas.getByRole('button', { name: 'Filtres supplémentaires' });
+	const getPeriodPill = () => canvas.getByRole('button', { name: /Période/ });
+	const queryPeriodPill = () => canvas.queryByRole('button', { name: /Période/ });
+	const togglePeriodOption = async () => {
+		await userEvent.click(getAddFiltersButton());
+		await waitForAngular();
+		await userEvent.click(screen.getByRole('checkbox', { name: 'Période' }));
+		await waitForAngular();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+	};
+
+	await step('An optional pill is hidden until it is added', async () => {
+		await expect(getAddFiltersButton()).toBeVisible();
+		await expect(queryPeriodPill()).not.toBeInTheDocument();
+	});
+
+	await step('Checking the optional pill in the additional filters displays it', async () => {
+		await userEvent.click(getAddFiltersButton());
+		await waitForAngular();
+		const option = screen.getByRole('checkbox', { name: 'Période' });
+		await expect(option).not.toBeChecked();
+		await userEvent.click(option);
+		await waitForAngular();
+		await expect(option).toBeChecked();
+		await expect(getPeriodPill()).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('checkbox', { name: 'Période' })).not.toBeInTheDocument());
+	});
+
+	await step('The displayed optional pill can be filled', async () => {
+		await userEvent.click(getPeriodPill());
+		await waitForAngular();
+		await pickDay(screen.getByLabelText('Start'), 10, true);
+		await pickDay(screen.getByLabelText('End'), 20, true);
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(getPeriodPill()).toHaveAttribute('aria-expanded', 'false'));
+		await expect(getPeriodPill()).not.toHaveTextContent('Aucune valeur sélectionnée');
+	});
+
+	await step('Unchecking the optional pill hides it', async () => {
+		await togglePeriodOption();
+		await expect(queryPeriodPill()).not.toBeInTheDocument();
+	});
+
+	await step('Hiding an optional pill clears its value', async () => {
+		await togglePeriodOption();
+		await expect(getPeriodPill()).toHaveTextContent('Aucune valeur sélectionnée');
+	});
+
+	await step('The additional filters can be managed with the keyboard', async () => {
+		getAddFiltersButton().focus();
+		await userEvent.keyboard('{Enter}');
+		await waitForAngular();
+		const option = screen.getByRole('checkbox', { name: 'Période' });
+		await expect(option).toBeChecked();
+		option.focus();
+		await userEvent.keyboard(' ');
+		await waitForAngular();
+		await expect(option).not.toBeChecked();
+		await expect(queryPeriodPill()).not.toBeInTheDocument();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('checkbox', { name: 'Période' })).not.toBeInTheDocument());
+		await expect(getAddFiltersButton()).toHaveFocus();
+	});
+});
