@@ -400,18 +400,30 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		}
 	}
 
-	private prepareOverlay(): void {
+	private prepareOverlay(): OverlayRef {
 		if (this.overlayRef) {
-			return;
+			return this.overlayRef;
 		}
-		this.overlayRef = this.#overlay.create({
+		const overlayRef = this.#overlay.create({
 			scrollStrategy: this.#overlay.scrollStrategies.close(),
 			disposeOnNavigation: true,
 		});
+		// `disposeOnNavigation` disposes the overlay on a history navigation (browser back/forward)
+		// while this directive may live on: forget it then, so the next opening creates a new one
+		// instead of attaching to a disposed overlay (`attach()` returns null).
+		overlayRef.detachments().subscribe({
+			complete: () => {
+				if (this.overlayRef === overlayRef) {
+					delete this.overlayRef;
+				}
+			},
+		});
 		const describedBy = this.ariaDescribedBy();
 		if (describedBy !== null) {
-			this.overlayRef.overlayElement.id = describedBy;
+			overlayRef.overlayElement.id = describedBy;
 		}
+		this.overlayRef = overlayRef;
+		return overlayRef;
 	}
 
 	private attachTooltip(): void {
@@ -423,17 +435,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			return;
 		}
 		const position = this.legacyPositionBuilder();
-		if (!this.overlayRef) {
-			this.overlayRef = this.#overlay.create({
-				positionStrategy: position,
-				scrollStrategy: this.#overlay.scrollStrategies.close(),
-				disposeOnNavigation: true,
-			});
-		} else {
-			this.overlayRef.updatePositionStrategy(position);
-		}
+		const overlayRef = this.prepareOverlay();
+		overlayRef.updatePositionStrategy(position);
 		const portal = new ComponentPortal(LuTooltipPanelComponent);
-		const ref = this.overlayRef.attach(portal);
+		const ref = overlayRef.attach(portal);
 		ref.instance.enterDelay.set(this.tooltipEnterDelay());
 		position.positionChanges
 			.pipe(
