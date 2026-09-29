@@ -1,7 +1,9 @@
-<ng-template #content>
+<ng-template #content let-linkRef="linkRef">
 	<span class="progressStepper-list-step-number" aria-hidden="true"></span>
 	<span class="progressStepper-list-step-title">
-		<span luTooltip luTooltipWhenEllipsis class="progressStepper-list-step-title-content">{{ label() }}</span>
+		<span luTooltip luTooltipWhenEllipsis class="progressStepper-list-step-title-content" [luTooltipFocusDelegate]="linkRef">{{
+			label()
+		}}</span>
 	</span>
 </ng-template>
 
@@ -19,12 +21,13 @@
 			[skipLocationChange]="typedRouterLinkParam?.skipLocationChange"
 			[replaceUrl]="typedRouterLinkParam?.replaceUrl"
 			class="progressStepper-list-step-linkOptional"
+			#link
 		>
-			<ng-container *ngTemplateOutlet="content" />
+			<ng-container *ngTemplateOutlet="content; context: { linkRef: link }" />
 		</a>
 	} @else {
-		<a [routerLink]="typedRouterLinkParam" class="progressStepper-list-step-linkOptional">
-			<ng-container *ngTemplateOutlet="content" />
+		<a [routerLink]="typedRouterLinkParam" class="progressStepper-list-step-linkOptional" #link>
+			<ng-container *ngTemplateOutlet="content; context: { linkRef: link }" />
 		</a>
 	}
 } @else {

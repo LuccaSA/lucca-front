@@ -9,7 +9,7 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
@@ -36,7 +36,7 @@ export default {
 				CheckboxInputComponent,
 				TextInputComponent,
 				DividerComponent,
-				LuTooltipModule,
+				LuTooltipTriggerDirective,
 			],
 		}),
 		applicationConfig({
@@ -87,14 +87,14 @@ function getTemplate(args: FilterBarBasicStory): string {
 
 					<div class="divider filterBar-divider"></div>
 
-					<button type="button" class="filterPill mod-checkbox">
+					<button type="button" class="filterPill mod-checkbox" #button>
 						<span class="filterPill-checkbox">
 							<span class="filterPill-checkbox-input"></span>
 							<span class="filterPill-checkbox-icon" aria-hidden="true">
 								<span class="filterPill-checkbox-icon-check"></span>
 							</span>
 						</span>
-						<span class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis>
+						<span class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis [luTooltipFocusDelegate]="button">
 							Inclure les collaborateurs partis
 							<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="Inclure les collaborateurs partis"></span>
 						</span>

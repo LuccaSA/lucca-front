@@ -25,7 +25,13 @@
 					"
 				/>
 			</span>
-			<span class="filterPill-value" luTooltip luTooltipWhenEllipsis [luTooltipDisabled]="inputIsEmpty()">
+			<span
+				class="filterPill-value"
+				luTooltip
+				luTooltipWhenEllipsis
+				[luTooltipDisabled]="inputIsEmpty()"
+				[luTooltipFocusDelegate]="filterPillRef"
+			>
 				<ng-container *ngTemplateOutlet="pillTpl; context: { label: label(), isEmpty: inputIsEmpty() }" />
 				@if (inputIsEmpty() && !disabled()) {
 					{{ placeholder() }}

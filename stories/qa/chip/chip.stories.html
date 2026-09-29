@@ -41,6 +41,23 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Button / Focusable / Ellipsis</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" class="chip" style="max-inline-size: 100px" #chipBtn>
+						<span class="chip-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis [luTooltipFocusDelegate]="chipBtn"
+							>John Doe with a very long name</span
+						>
+					</button>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<button type="button" luChip unkillable withEllipsis style="max-inline-size: 100px">John Doe with a very long name</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Product</td>
 			<td>
 				<div class="demo-QAtable-list">

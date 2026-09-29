@@ -5,7 +5,9 @@
 <ng-template #content><ng-content /></ng-template>
 
 @if (withEllipsis()) {
-	<span class="chip-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis><ng-container *ngTemplateOutlet="content" /></span>
+	<span class="chip-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis [luTooltipFocusDelegate]="tooltipFocusDelegate"
+		><ng-container *ngTemplateOutlet="content"
+	/></span>
 } @else {
 	<ng-container *ngTemplateOutlet="content" />
 }

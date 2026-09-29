@@ -1,19 +1,21 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, output, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ChipSize, ChipState } from './chip.type';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
+
+const NATIVELY_FOCUSABLE_TAGS = ['BUTTON', 'A'];
 
 @Component({
 	selector: 'lu-chip, button[luChip], a[luChip]',
 	templateUrl: './chip.component.html',
 	styleUrl: './chip.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgTemplateOutlet, LuTooltipModule, IconComponent],
+	imports: [NgTemplateOutlet, LuTooltipTriggerDirective, IconComponent],
 	host: {
 		class: 'chip',
 		'[class.is-disabled]': 'disabled()',
@@ -25,6 +27,15 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipComponent {
+	readonly #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+	/**
+	 * Set only when rendered on a natively focusable tag (button[luChip]/a[luChip]): that tag is
+	 * already a tab stop, so the truncated content must not become a second one. Rendered as
+	 * lu-chip (not focusable on its own), content keeps managing its own tabindex.
+	 */
+	protected readonly tooltipFocusDelegate = NATIVELY_FOCUSABLE_TAGS.includes(this.#elementRef.nativeElement.tagName) ? this.#elementRef.nativeElement : undefined;
+
 	readonly intl = input(...intlInputOptions(LU_CHIP_TRANSLATIONS));
 
 	/**
