@@ -49,12 +49,6 @@ let nextId = 0;
 	host: {
 		'[attr.aria-describedby]': 'ariaDescribedBy()',
 		'[attr.id]': 'id()',
-		'(mouseenter)': 'onMouseEnter()',
-		'(mouseleave)': 'onMouseLeave()',
-		'(focus)': 'onFocus()',
-		'(focusout)': 'onFocusOut($event)',
-		'(blur)': 'onBlur()',
-		'(keydown.escape)': 'onEscape($event)',
 		class: 'tooltip_trigger',
 		'[class.is-whenEllipsis]': 'luTooltipWhenEllipsis()',
 	},
@@ -104,6 +98,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(null);
 	readonly prTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(this.#host);
 	readonly tooltipAnchor = computed(() => this.luTooltipAnchor() || this.prTooltipAnchor());
+
+	readonly luTooltipTriggerAnchor = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
+	readonly prTooltipTriggerAnchor = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
+	readonly tooltipTriggerAnchor = computed(() => this.luTooltipTriggerAnchor() || this.prTooltipTriggerAnchor());
 
 	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
@@ -195,6 +193,24 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			} else {
 				this.setAccessibilityProperties(null);
 			}
+		});
+
+		effect((onCleanup) => {
+			const trigger = this.#resolveTriggerAnchorElement() ?? this.#host.nativeElement;
+
+			const unlisten = [
+				this.#renderer.listen(trigger, 'mouseenter', () => this.onMouseEnter()),
+				this.#renderer.listen(trigger, 'mouseleave', () => this.onMouseLeave()),
+				this.#renderer.listen(trigger, 'focus', () => this.onFocus()),
+				this.#renderer.listen(trigger, 'blur', () => this.onBlur()),
+				this.#renderer.listen(trigger, 'focusout', (event: FocusEvent) => this.onFocusOut(event)),
+				this.#renderer.listen(trigger, 'keydown', (event: KeyboardEvent) => {
+					if (event.key === 'Escape') {
+						this.onEscape(event);
+					}
+				}),
+			];
+			onCleanup(() => unlisten.forEach((fn) => fn()));
 		});
 
 		// Defer the first measurement until the element is near the viewport, then stop tracking
@@ -455,6 +471,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
+		if (this.#resolveTriggerAnchorElement()) {
+			return;
+		}
+
 		if (tabindex === null) {
 			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
 			return;
@@ -559,6 +579,20 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			return anchor.getElementRef();
 		} else {
 			return anchor;
+		}
+	}
+
+	#resolveTriggerAnchorElement(): HTMLElement | null {
+		const triggerAnchor = this.tooltipTriggerAnchor();
+
+		if (isNil(triggerAnchor)) {
+			return null;
+		} else if (triggerAnchor instanceof HTMLElement) {
+			return triggerAnchor;
+		} else if ('getElementRef' in triggerAnchor) {
+			return triggerAnchor.getElementRef().nativeElement as HTMLElement;
+		} else {
+			return triggerAnchor.nativeElement;
 		}
 	}
 

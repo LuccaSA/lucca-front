@@ -129,6 +129,41 @@
 				}
 			</td>
 		</tr>
+		<tr>
+			<td>Link / Ellipsis</td>
+			<td>
+				<div class="progressStepper">
+					<ol class="progressStepper-list">
+						<li class="progressStepper-list-step" aria-current="step">
+							<a href="#" class="progressStepper-list-step-linkOptional" #link1>
+								<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+								<span class="progressStepper-list-step-title"
+									><span luTooltip luTooltipWhenEllipsis class="progressStepper-list-step-title-content" [luTooltipTriggerAnchor]="link1"
+										>Lorem ipsum dolor sit amet consectetur adipiscing elit</span
+									></span
+								>
+							</a>
+						</li>
+						<li class="progressStepper-list-step">
+							<a href="#" class="progressStepper-list-step-linkOptional" #link2>
+								<span class="progressStepper-list-step-number" aria-hidden="true"></span>
+								<span class="progressStepper-list-step-title"
+									><span luTooltip luTooltipWhenEllipsis class="progressStepper-list-step-title-content" [luTooltipTriggerAnchor]="link2"
+										>Sed do eiusmod tempor incididunt ut labore et dolore magna</span
+									></span
+								>
+							</a>
+						</li>
+					</ol>
+				</div>
+			</td>
+			<td>
+				<lu-progress-stepper steps="2" current="1">
+					<lu-progress-stepper-step label="Lorem ipsum dolor sit amet consectetur adipiscing elit" routerLinkParam="#" />
+					<lu-progress-stepper-step label="Sed do eiusmod tempor incididunt ut labore et dolore magna" routerLinkParam="#" />
+				</lu-progress-stepper>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
