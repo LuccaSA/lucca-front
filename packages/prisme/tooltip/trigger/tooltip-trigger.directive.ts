@@ -105,6 +105,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(this.#host);
 	readonly tooltipAnchor = computed(() => this.luTooltipAnchor() || this.prTooltipAnchor());
 
+	readonly luTooltipTrigger = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
+	readonly prTooltipTrigger = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
+	readonly tooltipTrigger = computed(() => this.luTooltipTrigger() || this.prTooltipTrigger());
+
 	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
 	readonly ariaDescribedBy = computed(() => {
@@ -195,6 +199,22 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			} else {
 				this.setAccessibilityProperties(null);
 			}
+		});
+
+		effect((onCleanup) => {
+			const triggerElement = this.#resolveTriggerElement();
+			if (!triggerElement) {
+				return;
+			}
+
+			const unlisten = [
+				this.#renderer.listen(triggerElement, 'mouseenter', () => this.onMouseEnter()),
+				this.#renderer.listen(triggerElement, 'mouseleave', () => this.onMouseLeave()),
+				this.#renderer.listen(triggerElement, 'focus', () => this.onFocus()),
+				this.#renderer.listen(triggerElement, 'blur', () => this.onBlur()),
+				this.#renderer.listen(triggerElement, 'focusout', (event: FocusEvent) => this.onFocusOut(event)),
+			];
+			onCleanup(() => unlisten.forEach((fn) => fn()));
 		});
 
 		// Defer the first measurement until the element is near the viewport, then stop tracking
@@ -455,6 +475,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
+		if (this.#resolveTriggerElement()) {
+			return;
+		}
+
 		if (tabindex === null) {
 			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
 			return;
@@ -559,6 +583,20 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			return anchor.getElementRef();
 		} else {
 			return anchor;
+		}
+	}
+
+	#resolveTriggerElement(): HTMLElement | null {
+		const trigger = this.tooltipTrigger();
+
+		if (isNil(trigger)) {
+			return null;
+		} else if (trigger instanceof HTMLElement) {
+			return trigger;
+		} else if ('getElementRef' in trigger) {
+			return trigger.getElementRef().nativeElement as HTMLElement;
+		} else {
+			return trigger.nativeElement;
 		}
 	}
 
