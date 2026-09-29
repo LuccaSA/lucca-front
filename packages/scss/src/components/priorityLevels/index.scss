@@ -1,0 +1,30 @@
+@use 'exports' as *;
+
+.priorityLevels {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-low {
+			@include low;
+		}
+
+		&.mod-medium {
+			@include medium;
+		}
+
+		&.mod-high {
+			@include high;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-L {
+			@include L;
+		}
+	}
+}
