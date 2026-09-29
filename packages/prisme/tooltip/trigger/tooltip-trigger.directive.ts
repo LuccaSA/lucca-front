@@ -411,13 +411,16 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		// `disposeOnNavigation` disposes the overlay on a history navigation (browser back/forward)
 		// while this directive may live on: forget it then, so the next opening creates a new one
 		// instead of attaching to a disposed overlay (`attach()` returns null).
-		overlayRef.detachments().subscribe({
-			complete: () => {
-				if (this.overlayRef === overlayRef) {
-					delete this.overlayRef;
-				}
-			},
-		});
+		overlayRef
+			.detachments()
+			.pipe(takeUntilDestroyed(this.#destroyRef))
+			.subscribe({
+				complete: () => {
+					if (this.overlayRef === overlayRef) {
+						delete this.overlayRef;
+					}
+				},
+			});
 		const describedBy = this.ariaDescribedBy();
 		if (describedBy !== null) {
 			overlayRef.overlayElement.id = describedBy;
