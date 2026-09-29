@@ -87,7 +87,7 @@ export function transformDateToDateISO(value: Date | null): string | null {
 }
 
 function isDateRangeInput(value: DateRangeInput | DateRange): value is DateRangeInput {
-	return !(value.start instanceof Date);
+	return typeof value.start === 'string' || typeof value.end === 'string';
 }
 
 export function transformDateRangeInputToDateRange(value: DateRange | null | undefined | DateRangeInput): DateRange | null {
@@ -99,20 +99,25 @@ export function transformDateRangeInputToDateRange(value: DateRange | null | und
 		return value;
 	}
 
-	const valueEnd = value.end ? transformDateInputToDate(value.end) : null;
-
 	return {
 		...value,
-		start: transformDateInputToDate(value.start),
-		end: valueEnd,
+		start: value.start ? transformDateInputToDate(value.start) : null,
+		end: value.end ? transformDateInputToDate(value.end) : null,
 	};
 }
 
+/**
+ * Bound a range is anchored on: its start when it has one, its end otherwise. A range open on
+ * its start is displayed from its end, the same way an incomplete one is displayed from its start.
+ */
+export function getDateRangeAnchor(range: DateRange | null | undefined): Date | null {
+	return range?.start ?? range?.end ?? null;
+}
+
 export function transformDateRangeToDateRangeInput(value: DateRange): DateRangeInput {
-	const valueEnd = value.end ? transformDateToDateISO(value.end) : null;
 	return {
 		...value,
-		start: transformDateToDateISO(value.start),
-		end: valueEnd,
+		start: value.start ? transformDateToDateISO(value.start) : null,
+		end: value.end ? transformDateToDateISO(value.end) : null,
 	};
 }
