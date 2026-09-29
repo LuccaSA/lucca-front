@@ -48,6 +48,28 @@
 			&::placeholder {
 				color: var(--components-simpleSelect-placeholder);
 			}
+
+			// Below the S breakpoint the trigger is a button instead of a text input, so the native
+			// button chrome (centred text, rounded corners on iOS) has to be stripped for it to keep
+			// sitting on the value the way the input did. An empty button would collapse to no height
+			// and stop covering the value it triggers, hence the stretch.
+			&.mod-button {
+				appearance: none;
+				text-align: start;
+				align-self: stretch;
+				display: flex;
+				align-items: center;
+			}
+		}
+
+		// Stands in for the input placeholder, which a button trigger has no equivalent of. It sets its
+		// own colour rather than inheriting so it survives `colorPicker` making the trigger transparent.
+		.simpleSelect-field-placeholder {
+			color: var(--components-simpleSelect-placeholder);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: block;
 		}
 
 		.simpleSelect-field-value {

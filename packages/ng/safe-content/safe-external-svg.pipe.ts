@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, inject, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import DOMPurify from 'isomorphic-dompurify';
-import { map, Subscription } from 'rxjs';
+import { catchError, map, of, Subscription } from 'rxjs';
 
 @Pipe({
 	name: 'luSafeExternalSvg',
@@ -32,6 +32,9 @@ export class LuSafeExternalSvgPipe implements PipeTransform {
 			.pipe(
 				map((svg) => DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true } })),
 				map((svg) => this.#domSanitizer.bypassSecurityTrustHtml(svg)),
+				// The illustrations are decorative and hosted on an external CDN: a failed fetch
+				// must degrade to no illustration, not surface as an uncaught error in the host app.
+				catchError(() => of<SafeHtml>('')),
 			)
 			.subscribe((svg) => {
 				this.#lastSvgValue = svg;

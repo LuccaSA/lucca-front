@@ -3,9 +3,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
-import { waitForAngular } from '../../../helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
+import { createTestStory, generateInputs, setStoryOptions, useStoryModel } from '../../../helpers/stories';
+import { waitForAngular } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
