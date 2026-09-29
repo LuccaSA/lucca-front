@@ -14,7 +14,8 @@
 2. Read the component source to establish: the value type (ISO duration string? `{hours,
    minutes}`? — assert the real one), whether fields are separate hour/minute segments or
    one masked input, and which keys the component explicitly handles.
-3. Check `stories/documentation/forms/time*/` for existing play functions.
+3. Check `stories/e2e/time-picker/`, `stories/e2e/time-range-picker/` and `stories/e2e/duration-picker/`
+   for existing play functions.
 
 ## Behaviors to cover
 

@@ -18,7 +18,7 @@ whole budget here.
    editor engine's internals are out of scope** — test the component's contract: toolbar
    actions, FormControl value, keyboard shortcuts the component itself wires.
 2. Read existing specs/stories: `packages/ng/forms/rich-text-input/**/*.spec.ts` (if any),
-   `stories/documentation/forms/rich-text*/*.stories.ts` (play functions may exist).
+   `stories/documentation/forms/fields/rich-text/`, and the play functions in `stories/e2e/rich-text-input/`.
 3. jsdom warning: contenteditable support in jsdom is poor. Expect most rich-text
    interaction coverage to live in **Storybook play functions**, with Jest reserved for
    the CVA contract (writeValue renders HTML, disable works, value emitted on change).

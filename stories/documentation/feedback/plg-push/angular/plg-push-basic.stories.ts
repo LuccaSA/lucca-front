@@ -1,9 +1,7 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
+import { generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/PLG Push/Angular/Basic',

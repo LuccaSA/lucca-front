@@ -18,7 +18,7 @@ The `defaultOnClosedFn<_C>` generic overload is deprecated — don't use it in f
 3. This is a CDK Dialog wrapper: focus trapping and backdrop behavior come from CDK and
    work partially in jsdom. Test the **wiring**, not CDK itself: put behaviors that need
    real focus-trap semantics into Storybook play functions
-   (`stories/documentation/overlays/dialog*` — check for existing play functions first).
+   (`stories/e2e/dialog/` — check for existing play functions first).
 
 ## Behaviors to cover
 

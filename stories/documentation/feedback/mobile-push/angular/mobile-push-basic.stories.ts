@@ -1,9 +1,7 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
-import { expect, within } from 'storybook/test';
+import { generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/Mobile Push/Angular/Basic',
