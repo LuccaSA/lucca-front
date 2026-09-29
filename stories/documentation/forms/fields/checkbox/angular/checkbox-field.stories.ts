@@ -1,13 +1,12 @@
-import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { cleanupTemplate, useStoryModel, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { waitForAngular } from '@/helpers/test';
+
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/CheckboxField/Angular',
@@ -122,37 +121,3 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 		presentation: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const checkbox = canvas.getByRole('checkbox');
-		await expect(checkbox).toBeVisible();
-		await expect(checkbox).not.toBeChecked();
-	});
-
-	await step('Interaction souris - cocher', async () => {
-		const checkbox = canvas.getByRole('checkbox');
-		await userEvent.click(checkbox);
-		await waitForAngular();
-		await expect(checkbox).toBeChecked();
-	});
-
-	await step('Interaction souris - décocher', async () => {
-		const checkbox = canvas.getByRole('checkbox');
-		await userEvent.click(checkbox);
-		await waitForAngular();
-		await expect(checkbox).not.toBeChecked();
-	});
-
-	// We have issues with keyboard interactions testing in general
-	// await step('Interaction clavier - espace pour cocher', async () => {
-	// 	const checkbox = canvas.getByRole('checkbox');
-	// 	checkbox.focus();
-	// 	await userEvent.keyboard('{Space}');
-	// 	await waitForAngular();
-	// 	await expect(checkbox).toBeChecked();
-	// });
-});

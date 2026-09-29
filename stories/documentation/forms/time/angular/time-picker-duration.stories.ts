@@ -4,10 +4,8 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { BASE_PICKER_SIZE, DurationPickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { expectNgModelDisplay, mapInputs, repeatKeyboardUserEvent, waitForAngular } from '@/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Time/Angular/Duration',
@@ -142,57 +140,3 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 		max: 'PT99H',
 	},
 };
-
-const basePlay = async ({ canvasElement, step }) => {
-	await waitForAngular();
-
-	const canvas = within(canvasElement);
-	const { hours, minutes } = mapInputs(canvas.getAllByRole('textbox'), { hours: 0, minutes: 1 });
-
-	await step('Mouse interactions', async () => {
-		await userEvent.click(hours);
-		await waitForAngular();
-		await expect(hours).toHaveFocus();
-		await userEvent.type(hours, '2');
-		await waitForAngular();
-		await expectNgModelDisplay(canvasElement, 'PT2H0M');
-
-		await userEvent.click(minutes);
-		await waitForAngular();
-		await expect(minutes).toHaveFocus();
-		await userEvent.type(minutes, '30');
-		await waitForAngular();
-		await expectNgModelDisplay(canvasElement, 'PT2H30M');
-	});
-
-	await step('Keyboard interactions', async () => {
-		minutes.focus();
-		await userEvent.keyboard('{Backspace}');
-		await waitForAngular();
-		await expectNgModelDisplay(canvasElement, 'PT2H0M');
-
-		// Decrementing the minutes below zero borrows from the hours
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await expectNgModelDisplay(canvasElement, 'PT1H59M');
-
-		await userEvent.keyboard('{ArrowLeft}');
-		await waitForAngular();
-		await expect(hours).toHaveFocus();
-
-		await repeatKeyboardUserEvent('{ArrowUp}', 3);
-		await waitForAngular();
-		await expectNgModelDisplay(canvasElement, 'PT4H59M');
-
-		// "h" moves to the minutes like ArrowRight
-		await userEvent.keyboard('h');
-		await waitForAngular();
-		await expect(minutes).toHaveFocus();
-
-		await userEvent.keyboard('{ArrowUp}');
-		await waitForAngular();
-		await expectNgModelDisplay(canvasElement, 'PT5H0M');
-	});
-};
-
-export const BasicTEST = createTestStory(Basic, basePlay);

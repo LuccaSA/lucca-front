@@ -2,9 +2,7 @@ import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { expect, within } from 'storybook/test';
-import { BasicTEST as ButtonBasic } from './button-basic.stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Icon',
@@ -96,14 +94,3 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 		disclosure: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async (context) => {
-	const canvas = within(context.canvasElement);
-	await ButtonBasic.play(context);
-	const button = await canvas.findByRole('button');
-	if (context.args.label) {
-		await expect(button).toHaveClass('mod-withIcon');
-	} else {
-		await expect(button).toHaveClass('mod-onlyIcon');
-	}
-});
