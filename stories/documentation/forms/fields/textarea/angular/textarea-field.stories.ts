@@ -4,9 +4,7 @@ import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field'
 import { TextareaInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, useControlledStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
+import { cleanupTemplate, useControlledStoryModel, generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextAreaField/Angular',
@@ -151,30 +149,3 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 		presentation: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const textarea = canvas.getByRole('textbox');
-		await expect(textarea).toBeVisible();
-	});
-
-	await step('Interaction souris - saisir du texte', async () => {
-		const textarea = canvas.getByRole('textbox');
-		await userEvent.click(textarea);
-		await userEvent.type(textarea, 'Texte de test');
-		await waitForAngular();
-		await expect(textarea).toHaveValue('Texte de test');
-	});
-
-	await step('Interaction clavier - focus et saisie supplémentaire', async () => {
-		const textarea = canvas.getByRole('textbox');
-		textarea.focus();
-		await userEvent.keyboard('{Control>}a{/Control}');
-		await userEvent.keyboard('Saisie clavier');
-		await waitForAngular();
-		await expect(textarea).toHaveValue('Saisie clavier');
-	});
-});

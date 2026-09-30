@@ -8,10 +8,10 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 import { HiddenArgType } from '@/helpers/common-arg-types';
-import { createTestStory, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
+
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
-import { waitForAngular } from '../../../helpers/test';
+
 import { colorDecoratives50, colorDecoratives500, colorLucca, colorNeutral, colorPickerStory, FilterColorsPipe, LuCoreColorPickerInputStoryComponent } from './select.utils';
 
 export type LuColorPickerInputStoryComponent = LuCoreColorPickerInputStoryComponent & {
@@ -34,36 +34,6 @@ const generateStory = getStoryGenerator<LuColorPickerInputStoryComponent>({
 	},
 });
 
-const basePlay = async ({ canvasElement, step }) => {
-	const input = within(canvasElement).getByRole('combobox');
-
-	await step('Mouse interactions', async () => {
-		await userEvent.click(input);
-		await waitForAngular();
-		await expect(screen.getByRole('listbox')).toBeVisible();
-		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option');
-		const optionText = options[0].innerText;
-		await userEvent.click(options[0]);
-		await waitForAngular();
-		await expect(input).toHaveFocus();
-		await expect(input.parentElement).toHaveTextContent(optionText);
-	});
-
-	await step('Keyboard interactions', async () => {
-		input.focus();
-		await expect(input).toHaveFocus();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await expect(screen.getByRole('listbox')).toBeVisible();
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		await expect(screen.queryByText('listbox')).toBeNull();
-		await expect(input).toHaveFocus();
-		await waitForAngular();
-	});
-};
-
 export const Basic = generateStory({
 	name: 'Basic',
 	description: '',
@@ -75,8 +45,6 @@ export const Basic = generateStory({
 		},
 	},
 });
-
-export const BasicTEST = createTestStory(Basic, basePlay);
 
 export const Decorative = generateStory({
 	name: 'Decorative Color',

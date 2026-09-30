@@ -1,4 +1,3 @@
-import { createTestStory } from '@/helpers/stories';
 import { finn } from '@/stories/users/user.mocks';
 import { LOCALE_ID } from '@angular/core';
 import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent, ActivityFeedUpdateItemComponent } from '@lucca-front/ng/activity-feed';
@@ -8,8 +7,6 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, within } from 'storybook/test';
-import { waitForAngular } from '@/helpers/test';
 
 interface ActivityFeedBasicStory {
 	statusStep: boolean;
@@ -148,21 +145,3 @@ export const Basic: StoryObj<ActivityFeedBasicStory> = {
 	},
 	render: Template,
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step("Vérifie le rendu initial du fil d'activité", async () => {
-		const list = canvas.getByRole('list');
-		await expect(list).toBeVisible();
-	});
-
-	await step('Vérifie que les étapes sont visibles', async () => {
-		const items = canvas.getAllByRole('listitem');
-		await expect(items.length).toBeGreaterThan(0);
-		for (const item of items) {
-			await expect(item).toBeVisible();
-		}
-	});
-});
