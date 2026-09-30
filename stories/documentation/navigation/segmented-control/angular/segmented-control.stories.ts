@@ -9,6 +9,7 @@ interface segmentedControlBasicStory {
 	small: boolean;
 	withNumericBadge: boolean;
 	vertical: boolean;
+	ariaLabel: string;
 }
 
 export default {
@@ -30,6 +31,10 @@ export default {
 			description: 'Affiche le composant en vue verticale.',
 			table: { category: 'inputs' },
 		},
+		ariaLabel: {
+			description: "Nom accessible du groupe d'options, restitué aux technologies d'assistance.",
+			table: { category: 'inputs' },
+		},
 	},
 	title: 'Documentation/Navigation/segmentedControl/Angular/Basic',
 } as Meta;
@@ -37,12 +42,13 @@ export default {
 function getTemplate(args: segmentedControlBasicStory): string {
 	const size = args.small ? ` small` : ``;
 	const vertical = args.vertical ? ` vertical` : ``;
+	const ariaLabel = args.ariaLabel ? ` [ariaLabel]="ariaLabel"` : ``;
 	const numericBadgeComponent = args.withNumericBadge ? ` <lu-numeric-badge value="8" />` : ``;
 
 	return `<ng-template #label>
 	Lorem${numericBadgeComponent}
 </ng-template>
-<lu-segmented-control${size}${vertical} [(ngModel)]="sample">
+<lu-segmented-control${size}${vertical}${ariaLabel} [(ngModel)]="sample">
 	<lu-segmented-control-filter [label]="label" value="0" />
 	<lu-segmented-control-filter label="Ipsum" value="1" />
 	<lu-segmented-control-filter label="Dolor sit amet" value="2" />
@@ -62,6 +68,7 @@ export const Basic: StoryObj<segmentedControlBasicStory> = {
 		small: false,
 		withNumericBadge: false,
 		vertical: false,
+		ariaLabel: 'Lorem ipsum',
 	},
 	render: Template,
 };
