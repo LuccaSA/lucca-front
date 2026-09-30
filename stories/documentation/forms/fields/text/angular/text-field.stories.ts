@@ -96,7 +96,16 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Applique une largeur fixe au champ.',
+			description: 'Applique une largeur fixe au FormField.',
+			table: { category: 'inputs' },
+		},
+		widthOnInput: {
+			name: '↳ widthOnInput',
+			if: { arg: 'width', truthy: true },
+			control: {
+				type: 'boolean',
+			},
+			description: 'Applique la largeur sur l’input plutôt que sur le FormField, afin que le label et le message d’aide conservent toute la largeur disponible.',
 			table: { category: 'inputs' },
 		},
 		AI: {
@@ -150,10 +159,12 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean; widthOnInput: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, presentation, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, widthOnInput, AI, iconAItooltip, iconAIalt, presentation, ...inputArgs } = args;
 		const model = useStoryModel('Example value');
+		const formFieldWidth = widthOnInput ? undefined : width;
+		const inputWidth = widthOnInput ? width : undefined;
 		return {
 			props: { model },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
@@ -166,7 +177,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 					inlineMessageState,
 					size,
 					counter,
-					width,
+					width: formFieldWidth,
 					AI,
 					iconAItooltip,
 					iconAIalt,
@@ -175,7 +186,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 				argTypes,
 			)}>
 	<lu-text-input
-	${generateInputs(inputArgs, argTypes)}
+	${generateInputs({ ...inputArgs, width: inputWidth }, argTypes)}
 		[(ngModel)]="model.example">
 	</lu-text-input>
 </lu-form-field>
@@ -202,6 +213,8 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		tag: '',
 		counter: 0,
 		valueAlignRight: false,
+		width: '',
+		widthOnInput: false,
 		AI: false,
 		presentation: false,
 		iconAIalt: 'Assistant IA',

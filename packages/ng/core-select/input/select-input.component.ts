@@ -21,8 +21,9 @@ import {
 } from '@angular/core';
 import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { isNotNil, luBooleanAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute, luNullableNumberAttribute, luNumberAttribute, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { FormFieldWidth } from '@lucca-front/ng/form-field';
 import { BehaviorSubject, defer, map, of, ReplaySubject, startWith, Subject, switchMap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
@@ -43,6 +44,7 @@ export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option)
 		'[class.is-selected]': 'isSelectedClass',
 		'[class.is-searchFilled]': 'isSearchFilledClass',
 		'[class.mod-noClueIcon]': 'isNoClueIconClass',
+		'[class]': 'widthClass()',
 		'(click)': 'onClickOpenPanel($event)',
 		'(keydown)': 'onKeyDownNavigation($event)',
 	},
@@ -63,6 +65,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public filterPillMode = false;
 
 	public readonly ignorePresentation = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Width of the select itself, using the same scale as the form field width
+	 */
+	public readonly width = input(null, { transform: luNullableNumberAttribute<FormFieldWidth> });
+
+	protected readonly widthClass = computed(() => (this.width() ? `mod-width${this.width()}` : null));
 
 	public selectParent$?: Subject<void>;
 	public selectChildren$?: Subject<void>;

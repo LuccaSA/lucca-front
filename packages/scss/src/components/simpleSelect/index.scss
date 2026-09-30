@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/config';
+
 @use 'exports' as *;
 
 .simpleSelect {
@@ -30,6 +32,12 @@
 
 		&:has(.simpleSelect-field-input:disabled) {
 			@include disabled;
+		}
+
+		@each $value in config.$fieldsWidth {
+			&.mod-width#{$value} {
+				@include width($value);
+			}
 		}
 
 		&.mod-S {

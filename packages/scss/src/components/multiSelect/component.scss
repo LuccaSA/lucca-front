@@ -8,6 +8,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
+	inline-size: var(--components-multiSelect-width);
 	box-shadow: 0 0 0 1px var(--components-multiSelect-border-color);
 	background-color: var(--components-multiSelect-background);
 	border-radius: var(--pr-t-border-radius-input);
