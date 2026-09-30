@@ -2,8 +2,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { ILuUser, LuUserSelectModule } from '@lucca-front/ng/user';
+import { ILuUser, luUserSelectInputTranslations, LuUserSelectModule } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 @Component({
 	selector: 'user-select-stories',
@@ -18,6 +19,9 @@ class UserSelectStory {
 
 export default {
 	title: 'Documentation/Users/Select/Basique',
+	argTypes: {
+		intl: intlArgType(luUserSelectInputTranslations, 'ILuUserSelectInputLabel'),
+	},
 	component: UserSelectStory,
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;

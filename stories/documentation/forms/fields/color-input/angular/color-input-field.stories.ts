@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { ColorInputComponent } from '@lucca-front/ng/forms';
+import { ColorInputComponent, luColorTranslations } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
-import { generateInputs, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
+import { generateInputs, intlArgType, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Color Picker/Angular',
@@ -72,6 +72,7 @@ export default {
 			description: 'Modifie la taille du color picker pour le rendre plus petit.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luColorTranslations, 'LuColorLabel'),
 	},
 } as Meta;
 

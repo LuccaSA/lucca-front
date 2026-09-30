@@ -1,7 +1,7 @@
 import { IconComponent } from '@lucca-front/ng/icon';
-import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
+import { luMobilePushTranslations, MobilePushComponent } from '@lucca-front/ng/mobile-push';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs } from '@/helpers/stories';
+import { generateInputs, intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/Mobile Push/Angular/Basic',
@@ -39,6 +39,7 @@ export default {
 			action: 'googlePlayLinkClicked',
 			table: { category: 'outputs', type: { summary: 'void' } },
 		},
+		intl: intlArgType(luMobilePushTranslations, 'MobilePushTranslate'),
 	},
 } as Meta;
 

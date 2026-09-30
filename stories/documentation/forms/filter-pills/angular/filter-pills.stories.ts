@@ -6,7 +6,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { FilterPillComponent, luFilterPillsTranslations } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective } from '@lucca-front/ng/multi-select';
@@ -15,6 +15,7 @@ import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterPills/Angular',
@@ -73,6 +74,7 @@ export default {
 			},
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
 	},
 	render: (args, { argTypes }) => {
 		const clearableProperty = args['clearable'] ? '' : 'clearable="false" ';

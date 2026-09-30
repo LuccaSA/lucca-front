@@ -1,7 +1,7 @@
 import { IconComponent } from '@lucca-front/ng/icon';
-import { PLGPushComponent } from '@lucca-front/ng/plg-push';
+import { LuPlgPushTranslations, PLGPushComponent } from '@lucca-front/ng/plg-push';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs } from '@/helpers/stories';
+import { generateInputs, intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/PLG Push/Angular/Basic',
@@ -35,6 +35,7 @@ export default {
 			description: 'Rend le composant supprimable.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(LuPlgPushTranslations, 'LuPlgPushLabel'),
 	},
 } as Meta;
 

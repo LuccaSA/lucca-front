@@ -1,6 +1,6 @@
-import { READ_MORE_SURFACE, ReadMoreComponent } from '@lucca-front/ng/read-more';
+import { luReadMoreTranslations, READ_MORE_SURFACE, ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 
 const OTHER_SURFACE_OPTIONS = ['#0b1732'];
 
@@ -40,6 +40,7 @@ export default {
 		content: {
 			table: { disable: true },
 		},
+		intl: intlArgType(luReadMoreTranslations, 'ReadMoreTranslate'),
 	},
 	decorators: [
 		moduleMetadata({

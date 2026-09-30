@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LuSkipLinksComponent, SkipLinkDirective } from '@lucca-front/ng/a11y';
+import { LuSkipLinksComponent, luSkipLinksTranslations, SkipLinkDirective } from '@lucca-front/ng/a11y';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 @Component({
 	selector: 'skip-links-story',
@@ -186,6 +187,9 @@ class SkipLinksStory {}
 
 export default {
 	title: 'Documentation/Navigation/SkipLinks/Basic',
+	argTypes: {
+		intl: intlArgType(luSkipLinksTranslations, 'ILuSkipLinksLabel'),
+	},
 	component: SkipLinksStory,
 } as Meta;
 

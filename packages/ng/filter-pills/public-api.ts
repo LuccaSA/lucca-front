@@ -4,3 +4,4 @@ export * from './filter-bar/filter-bar.token';
 export * from './filter-view-selector/filter-view-selector.component';
 export * from './filter-bar/filter-pill-addon.directive';
 export * from './core/index';
+export * from './filter-pills.translate';

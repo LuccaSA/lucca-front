@@ -4,8 +4,9 @@ import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
-import { LuCalendarInputComponent, LuDateAdapterPipe } from '@lucca-front/ng/date';
+import { LuCalendarInputComponent, luCalendarInputTranslations, LuDateAdapterPipe } from '@lucca-front/ng/date';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 registerLocaleData(localesFr);
 
@@ -33,6 +34,9 @@ class CalendarStory {
 
 export default {
 	title: 'Documentation/Forms/Date/Calendar',
+	argTypes: {
+		intl: intlArgType(luCalendarInputTranslations, 'LuCalendarInputLabel'),
+	},
 	component: CalendarStory,
 	decorators: [
 		applicationConfig({

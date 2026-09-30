@@ -1,6 +1,6 @@
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 import { provideHttpClient } from '@angular/common/http';
-import { FILE_ENTRY_SIZE, FILE_ENTRY_STATE, FileEntryComponent } from '@lucca-front/ng/file-upload';
+import { FILE_ENTRY_SIZE, FILE_ENTRY_STATE, FileEntryComponent, luFileUploadTranslations } from '@lucca-front/ng/file-upload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 
 export default {
@@ -93,6 +93,7 @@ export default {
 			control: false,
 			table: { category: 'outputs', type: { summary: 'string' } },
 		},
+		intl: intlArgType(luFileUploadTranslations, 'LuFileUploadLabel'),
 	},
 	decorators: [
 		moduleMetadata({

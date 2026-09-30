@@ -1,10 +1,10 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { NumberInputComponent } from '@lucca-front/ng/forms';
+import { luNumberFieldTranslations, NumberInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, useStoryModel, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { cleanupTemplate, useStoryModel, generateInputs, setStoryOptions, intlArgType } from '@/helpers/stories';
 
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
@@ -86,6 +86,7 @@ export default {
 			description: 'Masque les boutons d’incrémentation.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luNumberFieldTranslations, 'LuNumberFieldLabel'),
 	},
 } as Meta;
 

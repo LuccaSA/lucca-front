@@ -1,5 +1,5 @@
 import { HiddenArgType } from '@/helpers/common-arg-types';
-import { cleanupTemplate, generateInputs, setStoryOptions, useStoryModel } from '@/helpers/stories';
+import { cleanupTemplate, generateInputs, intlArgType, setStoryOptions, useStoryModel } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 import { AsyncPipe } from '@angular/common';
@@ -7,7 +7,7 @@ import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TextInputComponent } from '@lucca-front/ng/forms';
+import { luTextfieldTranslations, TextInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
@@ -146,6 +146,7 @@ export default {
 			description: 'Longueur maximale autorisée pour la valeur du champ.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luTextfieldTranslations, 'LuTextfieldLabel'),
 	},
 } as Meta;
 

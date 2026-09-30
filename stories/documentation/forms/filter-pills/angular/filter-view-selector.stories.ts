@@ -5,15 +5,26 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { configureLuDialog } from '@lucca-front/ng/dialog';
-import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent, FilterViewSelectorComponent } from '@lucca-front/ng/filter-pills';
+import {
+	FilterBarComponent,
+	FilterPillAddonAfterDirective,
+	FilterPillAddonBeforeDirective,
+	FilterPillComponent,
+	FilterViewSelectorComponent,
+	luFilterPillsTranslations,
+} from '@lucca-front/ng/filter-pills';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 import { AdvancedFilterViewStoryComponent, SavedView } from './filter-view-selector-advanced-example.component';
+import { intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterViewSelector/Angular',
+	argTypes: {
+		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [

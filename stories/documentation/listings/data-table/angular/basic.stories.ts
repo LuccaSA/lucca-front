@@ -11,6 +11,7 @@ import {
 	DataTableRowCellComponent,
 	DataTableRowCellHeaderComponent,
 	DataTableRowComponent,
+	luDataTableTranslations,
 } from '@lucca-front/ng/data-table';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -20,7 +21,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { HiddenArgType } from '@/helpers/common-arg-types';
-import { setStoryOptions } from '@/helpers/stories';
+import { intlArgType, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
@@ -191,6 +192,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		drag: HiddenArgType,
+		intl: intlArgType(luDataTableTranslations, 'LuDataTableTranslations', 'tr[luDataTableRow]'),
 	},
 	decorators: [
 		moduleMetadata({

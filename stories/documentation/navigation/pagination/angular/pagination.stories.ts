@@ -1,6 +1,6 @@
-import { PAGINATION_MOD, PaginationComponent } from '@lucca-front/ng/pagination';
+import { luPaginationTranslations, PAGINATION_MOD, PaginationComponent } from '@lucca-front/ng/pagination';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { cleanupTemplate, generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Navigation/Pagination/Angular',
@@ -43,6 +43,7 @@ export default {
 			description: 'Affiche la pagination en vue compacte (seulement avec les boutons précédent et suivant).',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luPaginationTranslations, 'LuPaginationLabel'),
 	},
 } as Meta;
 

@@ -2,14 +2,14 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuOptionDirective } from '@lucca-front/ng/core-select';
+import { luCoreSelectTranslations, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuSimpleSelectInputComponent, luSimpleSelectTranslations } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
+import { generateInputs, InputAlias, intlArgType, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Simple Select/Angular',
@@ -100,6 +100,7 @@ export default {
 		valueTpl: HiddenArgType,
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
+		intl: intlArgType([luCoreSelectTranslations, luSimpleSelectTranslations], 'ILuSimpleSelectLabel & LuCoreSelectLabel'),
 	},
 } as Meta;
 

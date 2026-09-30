@@ -1,9 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective, luFormFieldTranslations } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { useStoryModel, generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { useStoryModel, generateInputs, setStoryOptions, intlArgType } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
@@ -83,6 +83,7 @@ export default {
 			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d’écran.",
 			table: { category: 'models' },
 		},
+		intl: intlArgType(luFormFieldTranslations, 'LuFormFieldTranslations'),
 	},
 	render: (args, { argTypes }) => {
 		const { required, ...fieldArgs } = args;

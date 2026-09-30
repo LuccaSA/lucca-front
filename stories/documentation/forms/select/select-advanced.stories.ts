@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
-import { LuOptionModule } from '@lucca-front/ng/option';
+import { LuOptionModule, luOptionSelectAllTranslations } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { Meta, applicationConfig, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 @Component({
 	selector: 'select-advanced-stories',
@@ -64,7 +65,9 @@ class SelectAdvancedStory {
 export default {
 	title: 'Documentation/Forms/SelectAdvanced',
 	component: SelectAdvancedStory,
-	argTypes: {},
+	argTypes: {
+		intl: intlArgType(luOptionSelectAllTranslations, 'ILuOptionSelectAllLabel', 'lu-option-select-all'),
+	},
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
