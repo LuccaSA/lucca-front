@@ -370,9 +370,9 @@ export const BasicTEST = createTestStory(Basic, basePlay);
 export const InputWidth = generateStory({
 	name: 'Input Width',
 	description: `L’input \`width\` contraint la largeur du select lui-même, sur la même échelle que le \`width\` du form field : la valeur correspond à des demi-rem (30 → 15rem, soit 240px). Le label et l’inline message du form field, eux, gardent la largeur du form field.`,
-	template: `<lu-form-field label="Légumes" inlineMessage="Ce message d’aide est volontairement long pour vérifier qu’il occupe toute la largeur du form field et ne se cale pas sur la largeur réduite du select.">
+	template: `<lu-form-field label="Légumes" inlineMessage="Ce message d’aide est volontairement long pour vérifier qu’il occupe toute la largeur du form field et ne se cale pas sur la largeur réduite du select." [width]="widthOnInput ? null : width">
 	<lu-multi-select
-		[width]="width"
+		[width]="widthOnInput ? width : null"
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
@@ -386,12 +386,20 @@ export const InputWidth = generateStory({
 		args: {
 			selectedLegumes: [],
 			width: 30,
+			widthOnInput: true,
 		},
 		argTypes: {
 			width: {
 				control: { type: 'select' },
 				options: [null, 10, 20, 30, 40, 50, 60],
 				table: { category: 'inputs', type: { summary: 'FormFieldWidth | null' } },
+			},
+			widthOnInput: {
+				name: '↳ widthOnInput',
+				if: { arg: 'width', truthy: true },
+				control: { type: 'boolean' },
+				description: 'Applique la largeur sur le select plutôt que sur le <lu-form-field>, afin que le label et le message d’aide conservent toute la largeur disponible.',
+				table: { category: 'inputs' },
 			},
 		},
 	},
