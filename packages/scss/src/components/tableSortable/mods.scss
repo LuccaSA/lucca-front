@@ -1,4 +1,3 @@
-@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/text';
 
 @mixin ellipsis {
@@ -7,10 +6,6 @@
 
 	.tableSortable-label {
 		@include text.ellipsis;
-
-		&:focus-visible {
-			@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-small));
-		}
 	}
 }
 
