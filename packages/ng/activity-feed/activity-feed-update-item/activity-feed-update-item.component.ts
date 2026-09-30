@@ -22,7 +22,7 @@ export class ActivityFeedUpdateItemComponent {
 	readonly label = input.required<string>();
 
 	readonly colonDisplay = computed(() => {
-		if (this.#locale === 'fr') {
+		if (this.#locale.substring(0, 2) === 'fr') {
 			return ' :';
 		}
 		return ':';
