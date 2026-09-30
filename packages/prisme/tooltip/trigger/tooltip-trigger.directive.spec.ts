@@ -216,6 +216,7 @@ describe(`${LuTooltipTriggerDirective.name}: history navigation`, () => {
 
 		// Browser back/forward while the tooltip is displayed: the CDK disposes its overlay (`disposeOnNavigation`)
 		(TestBed.inject(Location) as SpyLocation).simulateUrlPop('/previous');
+		expect(directive.overlayRef).toBeUndefined();
 		host.dispatchEvent(new MouseEvent('mouseleave'));
 		tick(150);
 

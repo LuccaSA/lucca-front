@@ -418,6 +418,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 				complete: () => {
 					if (this.overlayRef === overlayRef) {
 						delete this.overlayRef;
+						// the content effect writes to the disposed panel: a reopening would overwrite it without destroying it
+						this.#effectRef?.destroy();
 					}
 				},
 			});
