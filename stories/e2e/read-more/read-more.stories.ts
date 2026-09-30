@@ -79,6 +79,13 @@ export const BasicTEST = createTestStory({ ...Basic, args: { ...Basic.args, cont
 		await expect(readMoreButton).toBeVisible();
 	});
 
+	await step('Vérifie que le bouton est exposé aux technologies d\'assistance (non aria-hidden)', async () => {
+		// getByRole s'appuie sur l'arbre d'accessibilité et exclut les éléments aria-hidden par
+		// défaut, contrairement à getByText : ça garantit que ce défaut précis ne revienne pas.
+		const readMoreButton = canvas.getByRole('button', { name: /lire plus/i });
+		await expect(readMoreButton).toBeVisible();
+	});
+
 	await step('Clic sur "Lire plus" pour déplier le contenu', async () => {
 		const readMoreButton = canvas.getByText(/lire plus/i);
 		await userEvent.click(readMoreButton);
