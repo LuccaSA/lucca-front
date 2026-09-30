@@ -9,14 +9,7 @@
 <ng-template #inputLayoutTpl>
 	@if (layout() === "fieldset" && !presentationMode()) {
 		<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
-			<legend
-				luFormLabel
-				[tooltip]="tooltip()"
-				[tag]="tag()"
-				[required]="isInputRequired()"
-				[class.pr-u-mask]="hiddenLabel()"
-				[attr.aria-hidden]="hiddenLabel()"
-			>
+			<legend luFormLabel [tooltip]="tooltip()" [tag]="tag()" [required]="isInputRequired()" [class.pr-u-mask]="hiddenLabel()">
 				<ng-container *luPortal="label()" />
 			</legend>
 			<ng-container *ngTemplateOutlet="projectionTpl" />
