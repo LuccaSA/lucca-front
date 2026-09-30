@@ -8,6 +8,7 @@ import { firstValueFrom } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { vi } from 'vitest';
 import { FormFieldComponent } from './form-field.component';
+import { FormFieldLayout } from './form-field.type';
 
 @Component({
 	selector: 'lu-form-field-test',
@@ -33,7 +34,14 @@ export class FormFieldComponentTestComponent {
 	selector: 'lu-form-field-content-test',
 	imports: [TextInputComponent, FormFieldComponent, ReactiveFormsModule],
 	template: `
-		<lu-form-field [label]="label()" [tooltip]="tooltip()" [inlineMessage]="inlineMessage()" [inlineMessageState]="inlineMessageState()" [hiddenLabel]="hiddenLabel()">
+		<lu-form-field
+			[label]="label()"
+			[tooltip]="tooltip()"
+			[inlineMessage]="inlineMessage()"
+			[inlineMessageState]="inlineMessageState()"
+			[hiddenLabel]="hiddenLabel()"
+			[layout]="layout()"
+		>
 			<lu-text-input [formControl]="formControl" />
 		</lu-form-field>
 	`,
@@ -45,6 +53,7 @@ class FormFieldContentTestComponent {
 	inlineMessage = input<string | null>(null);
 	inlineMessageState = input<InlineMessageState | null>(null);
 	hiddenLabel = input(false);
+	layout = input<FormFieldLayout>('default');
 
 	formControl = new FormControl('');
 }
@@ -115,7 +124,7 @@ describe('FormFieldComponent', () => {
 	describe('label, tooltip and inline message', () => {
 		let contentFixture: ComponentFixture<FormFieldContentTestComponent>;
 
-		async function createContentHost(inputs: Partial<Record<'label' | 'tooltip' | 'inlineMessage' | 'inlineMessageState' | 'hiddenLabel', unknown>> = {}): Promise<void> {
+		async function createContentHost(inputs: Partial<Record<'label' | 'tooltip' | 'inlineMessage' | 'inlineMessageState' | 'hiddenLabel' | 'layout', unknown>> = {}): Promise<void> {
 			// The TestBed is already configured by the outer beforeEach
 			contentFixture = TestBed.createComponent(FormFieldContentTestComponent);
 			Object.entries(inputs).forEach(([name, value]) => contentFixture.componentRef.setInput(name, value));
@@ -154,6 +163,17 @@ describe('FormFieldComponent', () => {
 			const label = queryRequired<HTMLLabelElement>('label.formLabel');
 			expect(label?.textContent).toContain('First name');
 			expect(label?.classList).toContain('pr-u-mask');
+		});
+
+		it('should mask the fieldset legend but keep it accessible to assistive technologies when hiddenLabel is set', async () => {
+			// Act
+			await createContentHost({ label: 'First name', hiddenLabel: true, layout: 'fieldset' });
+
+			// Assert
+			const legend = queryRequired<HTMLLegendElement>('legend.formLabel');
+			expect(legend?.textContent).toContain('First name');
+			expect(legend?.classList).toContain('pr-u-mask');
+			expect(legend?.hasAttribute('aria-hidden')).toBe(false);
 		});
 
 		it('should bind the label to the input through matching for and id attributes', async () => {
