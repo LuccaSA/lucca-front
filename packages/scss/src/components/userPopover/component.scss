@@ -80,6 +80,15 @@
 					}
 				}
 			}
+
+			&.link {
+				--components-link-color: currentColor;
+				--components-link-color-hover: currentColor;
+
+				.userPopover-details-info-detail-workplace-icon .lucca-icon {
+					font-size: var(--icon-size);
+				}
+			}
 		}
 	}
 

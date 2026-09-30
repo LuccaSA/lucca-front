@@ -69,14 +69,19 @@
 
 					<!-- EN CONTRAT-->
 					@if (employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
-						<a class="userPopover-details-info-detail-workplace" [href]="employee._links?.schedule?.href">
+						<a
+							class="userPopover-details-info-detail-workplace link mod-icon mod-hiddenIcon mod-decorationHover"
+							[href]="employee._links?.schedule?.href"
+							rel="noopener noreferrer"
+							target="_blank"
+						>
 							@if (employee.isWorkingNow && employee.currentWorkLocation) {
-								<lu-icon icon="mapPin" size="S" />
+								<lu-icon class="userPopover-details-info-detail-workplace-icon" icon="mapPin" size="S" />
 							}
 							@if (!employee.isWorkingNow || !employee.currentWorkLocation) {
-								<lu-icon icon="calendarPlanning" size="S" />
+								<lu-icon class="userPopover-details-info-detail-workplace-icon" icon="calendarPlanning" size="S" />
 							}
-							<span class="userPopover-details-info-detail-workplace-state">
+							<span class="userPopover-details-info-detail-workplace-state link-text">
 								@if (employee.isWorkingNow) {
 									@if (employee.currentWorkLocation) {
 										{{ employee.currentWorkLocation.name }}
@@ -98,6 +103,8 @@
 									}
 								}
 							</span>
+							<span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>
+							<span class="pr-u-mask">{{ linkIntl.external }}</span>
 						</a>
 					}
 				</p>
