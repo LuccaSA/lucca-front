@@ -33,7 +33,9 @@
 			</span>
 		}
 	</legend>
-	<div class="fieldset-content" [attr.hidden]="!expandable() || expanded() ? null : 'hidden'"><ng-content /></div>
+	<div class="fieldset-content" [attr.hidden]="!expandable() || expanded() ? null : 'until-found'" (beforematch)="expanded.set(true)">
+		<ng-content />
+	</div>
 </fieldset>
 
 <ng-template #titleContent>
