@@ -106,7 +106,6 @@
 			font-weight: var(--components-filterPill-label-fontWeight);
 			overflow: hidden;
 			text-overflow: ellipsis;
-			outline: none;
 			text-align: center;
 			flex-shrink: 0;
 			max-inline-size: var(--components-filterPill-label-maxInlineSize);
@@ -169,10 +168,6 @@
 			text-overflow: ellipsis;
 			cursor: var(--components-filterPill-label-cursor);
 			max-inline-size: 15rem;
-
-			&:focus-visible {
-				outline: none;
-			}
 
 			.lucca-icon {
 				color: var(--components-filterPill-arrowColor);
