@@ -53,6 +53,13 @@
 			}
 		}
 
+		.userPopover-details-info-name-linkOptional-icon {
+			margin-inline-start: var(--pr-t-spacings-50);
+
+			// Safari draws the anchor's underline through the icon box without this
+			text-decoration: none;
+		}
+
 		.userPopover-details-info-detail {
 			margin-block-end: 0;
 			font: var(--pr-t-font-body-S);

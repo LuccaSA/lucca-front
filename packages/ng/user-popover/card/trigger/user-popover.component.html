@@ -26,8 +26,14 @@
 					@if (!employee._links?.hrCard?.href) {
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					} @else {
-						<a class="userPopover-details-info-name-linkOptional" [href]="employee._links?.hrCard?.href">
+						<a
+							class="userPopover-details-info-name-linkOptional"
+							[href]="employee._links?.hrCard?.href"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<ng-container *ngTemplateOutlet="fullNameDisplay" />
+							<lu-icon class="userPopover-details-info-name-linkOptional-icon" icon="arrowExternal" size="XS" />
 						</a>
 					}
 				</h1>
