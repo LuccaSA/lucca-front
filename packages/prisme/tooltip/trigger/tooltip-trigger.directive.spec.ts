@@ -1,7 +1,10 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { Location } from '@angular/common';
+import { provideLocationMocks, SpyLocation } from '@angular/common/testing';
 import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, signal, ViewChild, ViewContainerRef } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { config } from 'rxjs';
 import { LuTooltipTriggerDirective } from './tooltip-trigger.directive';
 
 @Component({
@@ -184,5 +187,43 @@ describe(`${LuTooltipTriggerDirective.name}: without a delegated trigger`, () =>
 		host.dispatchEvent(new MouseEvent('mouseleave'));
 		tick(150);
 		expect(directive.overlayRef?.hasAttached()).toBe(false);
+	}));
+});
+
+describe(`${LuTooltipTriggerDirective.name}: history navigation`, () => {
+	const unhandledErrors = vi.fn();
+
+	beforeEach(() => {
+		config.onUnhandledError = unhandledErrors;
+		TestBed.configureTestingModule({ providers: [provideLocationMocks()] });
+	});
+
+	afterEach(() => {
+		config.onUnhandledError = null;
+		unhandledErrors.mockReset();
+		TestBed.inject(OverlayContainer).getContainerElement().remove();
+	});
+
+	it('opens again after a history navigation disposed the displayed tooltip', fakeAsync(() => {
+		const fixture = TestBed.createComponent(PlainHostComponent);
+		fixture.detectChanges();
+		const directive = directiveOf(fixture);
+		const host = fixture.nativeElement.querySelector('span') as HTMLElement;
+
+		host.dispatchEvent(new MouseEvent('mouseenter'));
+		tick(150);
+		expect(directive.overlayRef?.hasAttached()).toBe(true);
+
+		// Browser back/forward while the tooltip is displayed: the CDK disposes its overlay (`disposeOnNavigation`)
+		(TestBed.inject(Location) as SpyLocation).simulateUrlPop('/previous');
+		expect(directive.overlayRef).toBeUndefined();
+		host.dispatchEvent(new MouseEvent('mouseleave'));
+		tick(150);
+
+		host.dispatchEvent(new MouseEvent('mouseenter'));
+		tick(150);
+		expect(unhandledErrors).not.toHaveBeenCalled();
+		expect(directive.overlayRef?.hasAttached()).toBe(true);
+		expect(directive.overlayRef?.overlayElement.id).toBe(host.getAttribute('aria-describedby'));
 	}));
 });
