@@ -7,7 +7,7 @@
 				type="button"
 				role="tab"
 				[attr.id]="panel.labelId"
-				[attr.aria-controls]="panel.value()"
+				[attr.aria-controls]="panel.panelId"
 				[attr.aria-selected]="active() === panel.value()"
 				[attr.tabindex]="active() !== panel.value() ? '-1' : null"
 				(click)="active.set(panel.value())"
