@@ -27,13 +27,13 @@
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					} @else {
 						<a
-							class="userPopover-details-info-name-linkOptional"
+							class="userPopover-details-info-name-linkOptional link mod-icon mod-hiddenIcon"
 							[href]="employee._links?.hrCard?.href"
-							target="_blank"
 							rel="noopener noreferrer"
-						>
-							<ng-container *ngTemplateOutlet="fullNameDisplay" />
-							<lu-icon class="userPopover-details-info-name-linkOptional-icon" icon="arrowExternal" size="XS" />
+							target="_blank"
+							><span class="link-text"><ng-container *ngTemplateOutlet="fullNameDisplay" /></span
+							><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+							><span class="pr-u-mask">{{ linkIntl.external }}</span>
 						</a>
 					}
 				</h1>

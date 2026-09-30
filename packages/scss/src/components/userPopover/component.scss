@@ -51,13 +51,11 @@
 				color: currentColor;
 				text-decoration-thickness: 1.5px;
 			}
-		}
 
-		.userPopover-details-info-name-linkOptional-icon {
-			margin-inline-start: var(--pr-t-spacings-50);
-
-			// Safari draws the anchor's underline through the icon box without this
-			text-decoration: none;
+			&.link {
+				--components-link-color: var(--pr-t-color-text-heading);
+				--components-link-color-hover: var(--pr-t-color-text-heading);
+			}
 		}
 
 		.userPopover-details-info-detail {
