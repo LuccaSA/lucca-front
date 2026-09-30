@@ -85,8 +85,9 @@
 		.activityFeed-content-update-item {
 			display: var(--components-activityFeed-content-update-item-display);
 			align-items: center;
-			gap: var(--pr-t-spacings-75);
+			gap: 0 var(--pr-t-spacings-75);
 			min-block-size: var(--pr-t-spacings-300);
+			flex-wrap: wrap;
 		}
 
 		.activityFeed-content-update-item-object {
