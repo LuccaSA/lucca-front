@@ -29,6 +29,10 @@
 			@include expanded;
 		}
 
+		&:has(.fieldset-content[hidden]) {
+			@include collapsed;
+		}
+
 		&:has(.fieldset-title-content-action:not(:empty)) {
 			@include withAction;
 		}

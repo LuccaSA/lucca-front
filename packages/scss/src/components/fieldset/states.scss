@@ -1,3 +1,7 @@
 @mixin expanded {
 	--components-fieldset-title-iconRotation: 180deg;
 }
+
+@mixin collapsed {
+	--components-fieldset-gap: 0;
+}
