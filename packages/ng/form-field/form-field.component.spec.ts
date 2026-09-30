@@ -34,14 +34,7 @@ export class FormFieldComponentTestComponent {
 	selector: 'lu-form-field-content-test',
 	imports: [TextInputComponent, FormFieldComponent, ReactiveFormsModule],
 	template: `
-		<lu-form-field
-			[label]="label()"
-			[tooltip]="tooltip()"
-			[inlineMessage]="inlineMessage()"
-			[inlineMessageState]="inlineMessageState()"
-			[hiddenLabel]="hiddenLabel()"
-			[layout]="layout()"
-		>
+		<lu-form-field [label]="label()" [tooltip]="tooltip()" [inlineMessage]="inlineMessage()" [inlineMessageState]="inlineMessageState()" [hiddenLabel]="hiddenLabel()" [layout]="layout()">
 			<lu-text-input [formControl]="formControl" />
 		</lu-form-field>
 	`,
