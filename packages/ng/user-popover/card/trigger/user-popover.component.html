@@ -26,14 +26,8 @@
 					@if (!employee._links?.hrCard?.href) {
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					} @else {
-						<a
-							class="userPopover-details-info-name-linkOptional link mod-icon mod-hiddenIcon"
-							[href]="employee._links?.hrCard?.href"
-							rel="noopener noreferrer"
-							target="_blank"
-							><span class="link-text"><ng-container *ngTemplateOutlet="fullNameDisplay" /></span
-							><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
-							><span class="pr-u-mask">{{ linkIntl.external }}</span>
+						<a luLink class="userPopover-details-info-name-linkOptional" [href]="employee._links?.hrCard?.href" external hiddenIcon>
+							<ng-container *ngTemplateOutlet="fullNameDisplay" />
 						</a>
 					}
 				</h1>
@@ -70,10 +64,12 @@
 					<!-- EN CONTRAT-->
 					@if (employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
 						<a
-							class="userPopover-details-info-detail-workplace link mod-icon mod-hiddenIcon mod-decorationHover"
+							luLink
+							class="userPopover-details-info-detail-workplace"
 							[href]="employee._links?.schedule?.href"
-							rel="noopener noreferrer"
-							target="_blank"
+							external
+							hiddenIcon
+							decorationHover
 						>
 							@if (employee.isWorkingNow && employee.currentWorkLocation) {
 								<lu-icon class="userPopover-details-info-detail-workplace-icon" icon="mapPin" size="S" />
@@ -81,7 +77,7 @@
 							@if (!employee.isWorkingNow || !employee.currentWorkLocation) {
 								<lu-icon class="userPopover-details-info-detail-workplace-icon" icon="calendarPlanning" size="S" />
 							}
-							<span class="userPopover-details-info-detail-workplace-state link-text">
+							<span class="userPopover-details-info-detail-workplace-state">
 								@if (employee.isWorkingNow) {
 									@if (employee.currentWorkLocation) {
 										{{ employee.currentWorkLocation.name }}
@@ -103,8 +99,6 @@
 									}
 								}
 							</span>
-							<span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>
-							<span class="pr-u-mask">{{ linkIntl.external }}</span>
 						</a>
 					}
 				</p>

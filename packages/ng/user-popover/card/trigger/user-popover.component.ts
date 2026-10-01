@@ -1,9 +1,9 @@
 import { AsyncPipe, DatePipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, Signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { getIntl, intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LU_LINK_TRANSLATIONS } from '@lucca-front/ng/link';
+import { LinkComponent } from '@lucca-front/ng/link';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
 import { SkeletonUserPopoverComponent } from '@lucca-front/ng/skeleton';
 import { ILuUser } from '@lucca-front/ng/user';
@@ -20,7 +20,7 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 	selector: 'lu-user-popover-content',
 	templateUrl: './user-popover.component.html',
 	styleUrl: './user-popover.component.scss',
-	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, SkeletonUserPopoverComponent],
+	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, LinkComponent, SkeletonUserPopoverComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserPopoverComponent {
@@ -31,10 +31,6 @@ export class LuUserPopoverComponent {
 	#service = inject(LuUserPopoverStore);
 
 	readonly intl = input(...intlInputOptions(LU_POPUP_EMPLOYEE_TRANSLATIONS));
-
-	// Reuses the `link` wording for the "opens in a new window" mention. `LinkComponent` itself is not used:
-	// it extends `RouterLink`, which would force a routed context on every `user-popover` consumer.
-	readonly linkIntl = getIntl(LU_LINK_TRANSLATIONS);
 
 	readonly #errorImage$ = new BehaviorSubject<boolean>(false);
 

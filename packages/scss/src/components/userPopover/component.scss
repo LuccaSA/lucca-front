@@ -67,23 +67,20 @@
 			display: flex;
 			align-items: flex-start;
 			gap: var(--pr-t-spacings-50);
-			color: currentColor;
-			text-decoration: none;
-
-			&:is(a, button) {
-				&:hover,
-				&:focus {
-					color: currentColor;
-
-					.userPopover-details-info-detail-workplace-state {
-						text-decoration: underline;
-					}
-				}
-			}
 
 			&.link {
 				--components-link-color: currentColor;
 				--components-link-color-hover: currentColor;
+
+				// Flattening `LinkComponent`'s wrapper keeps the icon and the state as direct flex
+				// children, and stops the hover underline from reaching the leading icon
+				.link-text {
+					display: contents;
+				}
+
+				&:hover .userPopover-details-info-detail-workplace-state {
+					text-decoration: underline;
+				}
 
 				.userPopover-details-info-detail-workplace-icon .lucca-icon {
 					font-size: var(--icon-size);
