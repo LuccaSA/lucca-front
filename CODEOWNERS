@@ -18,5 +18,8 @@ packages/icons             @LuccaSA/ux-devs
 packages/scss              @LuccaSA/ux-devs
 packages/stylelint-config  @LuccaSA/ux-devs @LuccaSA/guilde-front
 
+# Translations
+packages/**/translations.ts  @LuccaSA/ux-devs
+
 # Storybook
 stories               @LuccaSA/ux-devs
