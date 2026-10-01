@@ -22,7 +22,7 @@ import { LuMultiSelectContentDisplayerComponent } from './content-displayer/cont
 		'[attr.readonly]': 'readonly',
 		'(input)': 'onInput()',
 	},
-	hostDirectives: [{ directive: InputDirective, inputs: ['ɵluInputLabelledBy'] }],
+	hostDirectives: [{ directive: InputDirective, inputs: ['luInputLabelledBy'] }],
 })
 export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);

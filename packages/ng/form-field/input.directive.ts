@@ -30,21 +30,23 @@ export class InputDirective implements OnInit {
 	readonly standalone = input(false, { transform: luBooleanAttribute, alias: 'luInputStandalone' });
 
 	/**
-	 * @internal Space-separated ids labelling the input, merged with the ones provided by the parent form field
+	 * Space-separated ids labelling the input, appended to the ones provided by the parent form field.
+	 * Use it instead of binding `aria-labelledby`, which the form field would override.
 	 */
-	readonly ɵlabelledBy = input<string | null>(null, { alias: 'ɵluInputLabelledBy' });
+	readonly labelledBy = input<string | null>(null, { alias: 'luInputLabelledBy' });
 
 	/**
-	 * @internal Space-separated ids describing the input, placed before the ones provided by the parent form field
+	 * Space-separated ids describing the input, placed before the ones provided by the parent form field.
+	 * Use it instead of binding `aria-describedby`, which the form field would override.
 	 */
-	readonly ɵdescribedBy = input<string | null>(null, { alias: 'ɵluInputDescribedBy' });
+	readonly describedBy = input<string | null>(null, { alias: 'luInputDescribedBy' });
 
 	readonly #linkedFormField = computed(() => (this.standalone() ? null : this.formFieldRef));
 
-	readonly #ariaLabelledBy = computed(() => mergeIds(this.#linkedFormField()?.ariaLabelledBy() ?? [], splitIds(this.ɵlabelledBy())));
+	readonly #ariaLabelledBy = computed(() => mergeIds(this.#linkedFormField()?.ariaLabelledBy() ?? [], splitIds(this.labelledBy())));
 
 	// Own descriptions (e.g. instructions) are read before the form field ones, so an error message comes last
-	readonly #ariaDescribedBy = computed(() => mergeIds(splitIds(this.ɵdescribedBy()), this.#linkedFormField()?.ariaDescribedBy() ?? []));
+	readonly #ariaDescribedBy = computed(() => mergeIds(splitIds(this.describedBy()), this.#linkedFormField()?.ariaDescribedBy() ?? []));
 
 	constructor() {
 		this.#syncAttribute('aria-labelledby', this.#ariaLabelledBy);

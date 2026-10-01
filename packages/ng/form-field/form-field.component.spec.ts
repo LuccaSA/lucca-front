@@ -57,7 +57,7 @@ class FormFieldContentTestComponent {
 	imports: [FormFieldComponent, InputDirective],
 	template: `
 		<lu-form-field label="Files" [inlineMessage]="inlineMessage()" [extraDescribedBy]="extraDescribedBy()">
-			<input luInput [ɵluInputLabelledBy]="ownLabelledBy()" [ɵluInputDescribedBy]="ownDescribedBy()" [luInputStandalone]="standalone()" />
+			<input luInput [luInputLabelledBy]="ownLabelledBy()" [luInputDescribedBy]="ownDescribedBy()" [luInputStandalone]="standalone()" />
 		</lu-form-field>
 		<input class="outside" luInput aria-describedby="consumer-description" />
 	`,
