@@ -9,6 +9,7 @@ import { filter } from 'rxjs/operators';
 import { vi } from 'vitest';
 import { FormFieldComponent } from './form-field.component';
 import { FormFieldLayout } from './form-field.type';
+import { InputDirective } from './input.directive';
 
 @Component({
 	selector: 'lu-form-field-test',
@@ -49,6 +50,25 @@ class FormFieldContentTestComponent {
 	layout = input<FormFieldLayout>('default');
 
 	formControl = new FormControl('');
+}
+
+@Component({
+	selector: 'lu-form-field-aria-test',
+	imports: [FormFieldComponent, InputDirective],
+	template: `
+		<lu-form-field label="Files" [inlineMessage]="inlineMessage()" [extraDescribedBy]="extraDescribedBy()">
+			<input luInput [luInputLabelledBy]="ownLabelledBy()" [luInputDescribedBy]="ownDescribedBy()" [luInputStandalone]="standalone()" />
+		</lu-form-field>
+		<input class="outside" luInput aria-describedby="consumer-description" />
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FormFieldAriaTestComponent {
+	inlineMessage = input<string | null>(null);
+	extraDescribedBy = input('');
+	ownLabelledBy = input<string | null>(null);
+	ownDescribedBy = input<string | null>(null);
+	standalone = input(false);
 }
 
 describe('FormFieldComponent', () => {
@@ -224,6 +244,84 @@ describe('FormFieldComponent', () => {
 
 			// Assert
 			expect(query('lu-inline-message')?.classList).toContain('is-warning');
+		});
+	});
+
+	describe('aria ids', () => {
+		let ariaFixture: ComponentFixture<FormFieldAriaTestComponent>;
+		let formField: FormFieldComponent;
+
+		async function createAriaHost(inputs: Partial<Record<'inlineMessage' | 'extraDescribedBy' | 'ownLabelledBy' | 'ownDescribedBy' | 'standalone', unknown>> = {}): Promise<HTMLInputElement> {
+			ariaFixture = TestBed.createComponent(FormFieldAriaTestComponent);
+			Object.entries(inputs).forEach(([name, value]) => ariaFixture.componentRef.setInput(name, value));
+			ariaFixture.detectChanges();
+			formField = ariaFixture.debugElement.query(By.directive(FormFieldComponent)).componentInstance as FormFieldComponent;
+			await firstValueFrom(formField.ready$.pipe(filter(Boolean)));
+			ariaFixture.detectChanges();
+			return (ariaFixture.nativeElement as HTMLElement).querySelector('lu-form-field input') as HTMLInputElement;
+		}
+
+		it('should not reference a missing inline message', async () => {
+			// Act
+			const field = await createAriaHost();
+
+			// Assert
+			expect(field.hasAttribute('aria-describedby')).toBe(false);
+		});
+
+		it('should keep the ids of the input next to the ones of the form field', async () => {
+			// Act
+			const field = await createAriaHost({ inlineMessage: 'Helper text', ownLabelledBy: 'value-1', ownDescribedBy: 'instruction-1' });
+
+			// Assert
+			expect(field.getAttribute('aria-labelledby')).toBe(`${field.id}-label value-1`);
+			expect(field.getAttribute('aria-describedby')).toBe(`instruction-1 ${field.id}-message`);
+		});
+
+		it('should keep the ids of the input when the field state changes', async () => {
+			// Arrange
+			const field = await createAriaHost({ ownDescribedBy: 'instruction-1' });
+
+			// Act
+			ariaFixture.componentRef.setInput('inlineMessage', 'Helper text');
+			ariaFixture.detectChanges();
+			ariaFixture.componentRef.setInput('extraDescribedBy', 'extra-1');
+			ariaFixture.detectChanges();
+
+			// Assert
+			expect(field.getAttribute('aria-describedby')).toBe(`instruction-1 ${field.id}-message extra-1`);
+		});
+
+		it('should remove a labelledby id from the DOM', async () => {
+			// Arrange
+			const field = await createAriaHost();
+			formField.addLabelledBy('custom-1');
+			ariaFixture.detectChanges();
+
+			// Act
+			formField.removeLabelledBy('custom-1');
+			ariaFixture.detectChanges();
+
+			// Assert
+			expect(field.getAttribute('aria-labelledby')).toBe(`${field.id}-label`);
+		});
+
+		it('should only apply the ids of the input when standalone', async () => {
+			// Act
+			const field = await createAriaHost({ inlineMessage: 'Helper text', ownDescribedBy: 'instruction-1', standalone: true });
+
+			// Assert
+			expect(field.getAttribute('aria-describedby')).toBe('instruction-1');
+			expect(field.hasAttribute('aria-labelledby')).toBe(false);
+		});
+
+		it('should not touch the attributes of an input without ids', async () => {
+			// Act
+			await createAriaHost();
+
+			// Assert
+			const outside = (ariaFixture.nativeElement as HTMLElement).querySelector('input.outside');
+			expect(outside?.getAttribute('aria-describedby')).toBe('consumer-description');
 		});
 	});
 });
