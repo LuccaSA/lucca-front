@@ -5,6 +5,7 @@ interface segmentedControlTabsStory {
 	withNumericBadge: boolean;
 	vertical: boolean;
 	tabActive: number;
+	ariaLabel: string;
 }
 
 export default {
@@ -32,6 +33,12 @@ export default {
 				type: 'boolean',
 			},
 		},
+		ariaLabel: {
+			description: "Nom accessible du groupe d'onglets, restitué aux technologies d'assistance.",
+			control: {
+				type: 'text',
+			},
+		},
 	},
 } as Meta;
 
@@ -39,7 +46,8 @@ function getTemplate(args: segmentedControlTabsStory): string {
 	const size = args.S ? ` mod-S` : ``;
 	const vertical = args.vertical ? ` mod-vertical` : ``;
 	const numericBadge = args.withNumericBadge ? ` <span class="numericBadge">8</span>` : ``;
-	return `<ul class="segmentedControl${size}${vertical}" role="tablist">
+	const ariaLabel = args.ariaLabel ? ` aria-label="${args.ariaLabel}"` : ``;
+	return `<ul class="segmentedControl${size}${vertical}" role="tablist"${ariaLabel}>
 	<li class="segmentedControl-item" role="presentation">
 		<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-controls="panel1" [attr.aria-selected]="tabActive === 1" [attr.tabindex]="tabActive === 1 ? null : '-1'">
 			Lorem
@@ -88,6 +96,7 @@ export const Tabs: StoryObj<segmentedControlTabsStory> = {
 		withNumericBadge: false,
 		vertical: false,
 		tabActive: 1,
+		ariaLabel: 'Lorem ipsum',
 	},
 	render: Template,
 };

@@ -1,4 +1,4 @@
-<ul class="segmentedControl" role="tablist" [class.mod-S]="small()" [class.mod-vertical]="vertical()">
+<ul class="segmentedControl" role="tablist" [attr.aria-label]="ariaLabel()" [class.mod-S]="small()" [class.mod-vertical]="vertical()">
 	@for (panel of tabs(); track panel.id) {
 		<li class="segmentedControl-item" role="presentation">
 			<button
