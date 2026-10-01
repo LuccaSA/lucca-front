@@ -8,7 +8,7 @@
 		(dragenter)="droppable = true"
 		(dragleave)="droppable = false"
 		(change)="filesChange($event)"
-		[attr.aria-describedby]="'fileUpload-instruction-' + idSuffix"
+		[ɵluInputDescribedBy]="'fileUpload-instruction-' + idSuffix"
 	/>
 	<div class="fileUpload-status">
 		<lu-bubble-illustration [illustration]="illus()" action size="L" />

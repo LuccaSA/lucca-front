@@ -13,7 +13,7 @@
 				<ng-container *luPortal="label()" />
 			</legend>
 			<ng-container *ngTemplateOutlet="projectionTpl" />
-			@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
+			@if (hasInlineMessage()) {
 				<lu-inline-message
 					id="{{ id() }}-message"
 					[label]="(invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()) ?? ''"
@@ -68,7 +68,7 @@
 			} @else {
 				<ng-container *ngTemplateOutlet="projectionTpl" />
 			}
-			@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
+			@if (hasInlineMessage()) {
 				<lu-inline-message
 					id="{{ id() }}-message"
 					[label]="(invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()) ?? ''"
