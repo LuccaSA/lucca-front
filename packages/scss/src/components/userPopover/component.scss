@@ -42,19 +42,11 @@
 		}
 
 		.userPopover-details-info-name-linkOptional {
-			color: currentColor;
-			text-decoration: underline;
 			text-decoration-thickness: 0.75px;
 			text-underline-offset: 3px;
 
 			&:hover {
-				color: currentColor;
 				text-decoration-thickness: 1.5px;
-			}
-
-			&.link {
-				--components-link-color: var(--pr-t-color-text-heading);
-				--components-link-color-hover: var(--pr-t-color-text-heading);
 			}
 		}
 
@@ -67,25 +59,6 @@
 			display: flex;
 			align-items: flex-start;
 			gap: var(--pr-t-spacings-50);
-
-			&.link {
-				--components-link-color: currentColor;
-				--components-link-color-hover: currentColor;
-
-				// Flattening `LinkComponent`'s wrapper keeps the icon and the state as direct flex
-				// children, and stops the hover underline from reaching the leading icon
-				.link-text {
-					display: contents;
-				}
-
-				&:hover .userPopover-details-info-detail-workplace-state {
-					text-decoration: underline;
-				}
-
-				.userPopover-details-info-detail-workplace-icon .lucca-icon {
-					font-size: var(--icon-size);
-				}
-			}
 		}
 	}
 

@@ -1,3 +1,9 @@
+### Unreleased
+
+#### Added
+
+- `neutral` renders the link with the default text color instead of the link color.
+
 ### 21.3.1
 
 #### Fixed
