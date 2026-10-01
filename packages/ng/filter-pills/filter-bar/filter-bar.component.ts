@@ -2,7 +2,7 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, input, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -13,6 +13,8 @@ import { FilterPillComponent } from '../filter-pill/filter-pill.component';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 import { LU_FILTER_BAR_INSTANCE } from './filter-bar.token';
 
+let nextId = 0;
+
 @Component({
 	selector: 'lu-filter-bar',
 	imports: [IconComponent, LuTooltipTriggerDirective, PopoverDirective, DividerComponent, ScrollBoxComponent, FormsModule, NgTemplateOutlet, FormLabelComponent],
@@ -22,6 +24,7 @@ import { LU_FILTER_BAR_INSTANCE } from './filter-bar.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'filterBar',
+		'[attr.aria-describedby]': 'manualApply() ? null : autoApplyAnnouncementId',
 	},
 	providers: [
 		{
@@ -32,6 +35,14 @@ import { LU_FILTER_BAR_INSTANCE } from './filter-bar.token';
 })
 export class FilterBarComponent {
 	readonly intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
+
+	/**
+	 * Set when results only update after an explicit "Apply" action, to remove the hidden message
+	 * telling assistive technology users that the results list updates automatically
+	 */
+	readonly manualApply = input(false, { transform: luBooleanAttribute });
+
+	readonly autoApplyAnnouncementId = `filterBar-autoApplyAnnouncement-${nextId++}`;
 
 	readonly addonBefore = signal<TemplateRef<unknown> | null>(null);
 	readonly addonAfter = signal<TemplateRef<unknown> | null>(null);
