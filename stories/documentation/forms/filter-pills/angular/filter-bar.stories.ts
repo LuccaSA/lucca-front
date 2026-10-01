@@ -227,7 +227,7 @@ export default {
 				renameView: (view: (typeof filterViews)[number]) => args['renameView']?.(view),
 				deleteView: (view: (typeof filterViews)[number]) => args['deleteView']?.(view),
 			},
-			template: `<lu-filter-bar>
+			template: `<lu-filter-bar${args['applyFiltersButton'] ? ' manualApply' : ''}>
 	${views}
 	<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false" />

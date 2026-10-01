@@ -18,7 +18,28 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await expect(canvas.getByRole('button', { name: /Départements/ })).toBeVisible();
 		await expect(canvas.queryByRole('button', { name: 'Filtres supplémentaires' })).not.toBeInTheDocument();
 	});
+
+	await step('Results updating automatically is announced to assistive technologies', async () => {
+		const filterBar = canvasElement.querySelector('lu-filter-bar')!;
+		await expect(filterBar).toHaveAccessibleDescription('La liste des résultats se met à jour automatiquement.');
+	});
 });
+
+export const ManualApplyTEST = createTestStory(
+	{ ...Basic, name: 'Manual apply', args: { ...Basic.args, applyFiltersButton: true } },
+	async ({ canvasElement, step }) => {
+		await waitForAngular();
+
+		const canvas = within(canvasElement);
+
+		await step('With an apply button, results are not announced as updating automatically', async () => {
+			await expect(canvas.getByRole('button', { name: 'Appliquer les filtres' })).toBeVisible();
+			const filterBar = canvasElement.querySelector('lu-filter-bar')!;
+			await expect(filterBar).not.toHaveAttribute('aria-describedby');
+			await expect(canvas.queryByText('La liste des résultats se met à jour automatiquement.')).not.toBeInTheDocument();
+		});
+	},
+);
 
 export const OptionalFilterTEST = createTestStory({ ...Basic, name: 'Optional filter', args: { ...Basic.args, optionalFilter: true } }, async ({ canvasElement, step }) => {
 	await waitForAngular();
