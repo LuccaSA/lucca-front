@@ -48,6 +48,11 @@
 			&:hover {
 				text-decoration-thickness: 1.5px;
 			}
+
+			&.link {
+				--components-link-color: var(--pr-t-color-text-highlight);
+				--components-link-color-hover: var(--pr-t-color-text-highlight);
+			}
 		}
 
 		.userPopover-details-info-detail {

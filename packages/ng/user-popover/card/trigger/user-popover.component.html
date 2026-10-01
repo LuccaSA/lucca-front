@@ -26,7 +26,7 @@
 					@if (!employee._links?.hrCard?.href) {
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					} @else {
-						<a luLink class="userPopover-details-info-name-linkOptional" [href]="employee._links?.hrCard?.href" external hiddenIcon neutral>
+						<a luLink class="userPopover-details-info-name-linkOptional" [href]="employee._links?.hrCard?.href" external hiddenIcon>
 							<ng-container *ngTemplateOutlet="fullNameDisplay" />
 						</a>
 					}
