@@ -129,6 +129,26 @@ describe(PopoverDirective.name, () => {
 			expect(triggerElement.getAttribute('aria-controls')).toMatch(/^popover-content-\d+$/);
 			expect(getPopover()?.id).toBe(triggerElement.getAttribute('aria-controls'));
 		});
+
+		it('should not set aria-controls before the popover is opened', () => {
+			// Act
+			setup();
+			// Assert
+			expect(triggerElement.hasAttribute('aria-controls')).toBe(false);
+		});
+
+		it('should remove aria-controls once the popover is closed', () => {
+			// Arrange
+			setup();
+			triggerElement.click();
+			fixture.detectChanges();
+			// Act
+			directive.close();
+			fixture.detectChanges();
+			// Assert
+			expect(getPopover()).toBeNull();
+			expect(triggerElement.hasAttribute('aria-controls')).toBe(false);
+		});
 	});
 
 	describe('click trigger', () => {
