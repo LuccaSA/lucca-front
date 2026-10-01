@@ -118,8 +118,9 @@ export default {
 			},
 			table: { category: 'inputs' },
 		},
-		applyFiltersButton: {
-			description: 'Affiche un bouton pour appliquer les filtres, utilisé lorsqu’il n’est pas possible d’appliquer les filtres automatiquement.',
+		manualApply: {
+			description:
+				'Indique que les résultats ne se mettent à jour qu’après une action explicite (ici un bouton « Appliquer les filtres »), pour ne plus annoncer aux technologies d’assistance que la liste se met à jour automatiquement.',
 			control: {
 				type: 'boolean',
 			},
@@ -129,7 +130,7 @@ export default {
 	},
 	render: (args, { argTypes }) => {
 		const actionButton = args['actionButton'] ? `<button type="submit" size="S" luButton="outlined">Exporter</button>` : '';
-		const applyFiltersButton = args['applyFiltersButton'] ? `<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>` : '';
+		const applyFiltersButton = args['manualApply'] ? `<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>` : '';
 		const periodFilter = args['optionalFilter']
 			? `<lu-filter-pill label="Période" optional name="period">
 		<lu-date-range-input [(ngModel)]="examplePeriod" />
@@ -227,7 +228,7 @@ export default {
 				renameView: (view: (typeof filterViews)[number]) => args['renameView']?.(view),
 				deleteView: (view: (typeof filterViews)[number]) => args['deleteView']?.(view),
 			},
-			template: `<lu-filter-bar>
+			template: `<lu-filter-bar${args['manualApply'] ? ' manualApply' : ''}>
 	${views}
 	<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false" />
@@ -253,13 +254,13 @@ ${saveViewDropdownTemplate}`,
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; actionButton: boolean; applyFiltersButton: boolean }> = {
+export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; actionButton: boolean }> = {
 	args: {
 		views: false,
 		saveView: false,
 		filterViewSelector: false,
 		optionalFilter: false,
 		actionButton: false,
-		applyFiltersButton: false,
+		manualApply: false,
 	},
 };
