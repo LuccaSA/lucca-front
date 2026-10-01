@@ -14,7 +14,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	const canvas = within(canvasElement);
 
 	await step('Vérifie le rendu initial', async () => {
-		const tablist = canvas.getByRole('tablist');
+		const tablist = canvas.getByRole('tablist', { name: 'Lorem ipsum' });
 		await expect(tablist).toBeVisible();
 		const tabs = canvas.getAllByRole('tab');
 		await expect(tabs.length).toBe(4);
