@@ -65,10 +65,10 @@
 					@if (employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
 						<span class="userPopover-details-info-detail-workplace">
 							@if (employee.isWorkingNow && employee.currentWorkLocation) {
-								<lu-icon class="userPopover-details-info-detail-workplace-icon" icon="mapPin" size="S" />
+								<lu-icon icon="mapPin" size="S" />
 							}
 							@if (!employee.isWorkingNow || !employee.currentWorkLocation) {
-								<lu-icon class="userPopover-details-info-detail-workplace-icon" icon="calendarPlanning" size="S" />
+								<lu-icon icon="calendarPlanning" size="S" />
 							}
 							<a
 								luLink
