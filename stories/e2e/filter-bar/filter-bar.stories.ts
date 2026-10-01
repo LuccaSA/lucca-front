@@ -26,7 +26,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 });
 
 export const ManualApplyTEST = createTestStory(
-	{ ...Basic, name: 'Manual apply', args: { ...Basic.args, applyFiltersButton: true } },
+	{ ...Basic, name: 'Manual apply', args: { ...Basic.args, manualApply: true } },
 	async ({ canvasElement, step }) => {
 		await waitForAngular();
 
