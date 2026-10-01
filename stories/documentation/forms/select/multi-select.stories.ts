@@ -1,5 +1,5 @@
 import { HiddenArgType } from '@/helpers/common-arg-types';
-import { getStoryGenerator } from '@/helpers/stories';
+import { getStoryGenerator, intlArgType } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { AsyncPipe, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
@@ -15,6 +15,7 @@ import {
 	LuOptionGroupDirective,
 	TreeGroupingFn,
 	ɵLuOptionOutletDirective,
+	luCoreSelectTranslations,
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
@@ -31,6 +32,7 @@ import {
 	LuMultiSelectDisplayerInputDirective,
 	LuMultiSelectInputComponent,
 	LuMultiSelection,
+	luMultiSelectTranslations,
 	LuMultiSelectWithSelectAllDirective,
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -782,6 +784,9 @@ export const IntlOverride = generateStory({
 
 const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasInput>> = {
 	title: 'Documentation/Forms/MultiSelect',
+	argTypes: {
+		intl: intlArgType([luCoreSelectTranslations, luMultiSelectTranslations], 'ILuMultiSelectLabel & LuCoreSelectLabel'),
+	},
 	component: LuMultiSelectInputComponent,
 	decorators: [
 		moduleMetadata({

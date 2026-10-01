@@ -1,10 +1,12 @@
-import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
+import { BreadcrumbsComponent, BreadcrumbsLinkDirective, luBreadcrumbsTranslations } from '@lucca-front/ng/breadcrumbs';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
-import { generateInputs } from '@/helpers/stories';
+import { generateInputs, intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Navigation/Breadcrumbs/Angular/Basic',
-	argTypes: {},
+	argTypes: {
+		intl: intlArgType(luBreadcrumbsTranslations, 'LuBreadcrumbsLabel'),
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [BreadcrumbsComponent, BreadcrumbsLinkDirective],

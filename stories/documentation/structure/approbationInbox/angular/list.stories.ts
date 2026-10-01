@@ -7,6 +7,9 @@ import {
 	ApprobationInboxLinkComponent,
 	ApprobationInboxListComponent,
 	ApprobationInboxSubtleComponent,
+	luApprobationInboxListGroupTranslations,
+	luApprobationInboxListItemTranslations,
+	luApprobationInboxListTranslations,
 } from '@lucca-front/ng/approbation-inbox';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
@@ -17,7 +20,7 @@ import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
-import { generateInputs } from '@/helpers/stories';
+import { generateInputs, intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Approbation Inbox/Angular/List',
@@ -81,6 +84,9 @@ export default {
 			if: { arg: 'itemCount', eq: 0 },
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luApprobationInboxListTranslations, 'LuApprobationInboxListTranslations'),
+		intlListGroup: intlArgType(luApprobationInboxListGroupTranslations, 'LuApprobationInboxListGroupTranslations', 'lu-approbation-inbox-list-group'),
+		intlListItem: intlArgType(luApprobationInboxListItemTranslations, 'LuApprobationInboxListItemTranslations', 'lu-approbation-inbox-list-item'),
 	},
 	decorators: [
 		moduleMetadata({

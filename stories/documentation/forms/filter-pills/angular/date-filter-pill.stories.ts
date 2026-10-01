@@ -1,13 +1,17 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { FilterPillComponent, luFilterPillsTranslations } from '@lucca-front/ng/filter-pills';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/Date/Angular',
+	argTypes: {
+		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [FilterPillComponent, DateInputComponent, FormsModule, StoryModelDisplayComponent, DateRangeInputComponent, CheckboxInputComponent],

@@ -2,12 +2,12 @@ import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
+import { luTimeRangePickerTranslations, TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
-import { generateInputs } from '../../../../helpers/stories';
+import { generateInputs, intlArgType } from '../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Time/Angular/TimeRangePicker',
@@ -103,6 +103,7 @@ export default {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luTimeRangePickerTranslations, 'TimeRangePickerTranslations'),
 	},
 } as Meta;
 

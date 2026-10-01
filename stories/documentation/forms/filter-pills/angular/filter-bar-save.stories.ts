@@ -6,7 +6,7 @@ import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
-import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent, luFilterPillsTranslations } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
@@ -16,9 +16,13 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { IconComponent } from '@lucca/prisme/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
+	argTypes: {
+		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [

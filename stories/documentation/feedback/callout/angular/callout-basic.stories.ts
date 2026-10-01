@@ -1,7 +1,16 @@
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CALLOUT_HX, CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
+import {
+	CALLOUT_HX,
+	CALLOUT_SIZE,
+	CalloutActionsComponent,
+	CalloutComponent,
+	CalloutFeedbackItemComponent,
+	CalloutFeedbackListComponent,
+	CalloutStates,
+	luCalloutTranslations,
+} from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -124,6 +133,7 @@ export default {
 			description: '[v20.3] Déplace les actions sur la droite du callout.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luCalloutTranslations, 'LuCalloutLabel'),
 	},
 } as Meta;
 

@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 
-import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
-import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
+import { luCoreSelectUserTranslations, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { ImpersonationComponent, luImpersonationTranslations } from '@lucca-front/ng/impersonation';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs } from '../../../../helpers/stories';
+import { generateInputs, intlArgType } from '../../../../helpers/stories';
 
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
@@ -21,6 +21,7 @@ export default {
 			description: 'Inclus les collaborateurs partis',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType([luCoreSelectUserTranslations, luImpersonationTranslations], 'LuImpersonationTranslations & LuCoreSelectUserTranslations'),
 	},
 	decorators: [
 		moduleMetadata({

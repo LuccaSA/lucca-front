@@ -3,11 +3,11 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
+import { configureLuPopover, luPopoverTranslations, PopoverDirective } from '@lucca-front/ng/popover2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 import { HiddenArgType } from '../../../helpers/common-arg-types';
-import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
+import { cleanupTemplate, generateInputs, intlArgType } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Overlays/Popover2/Angular',
@@ -69,6 +69,7 @@ export default {
 			description: 'Modifie la largeur max de la popover.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luPopoverTranslations, 'ILuPopover2Label'),
 	},
 } as Meta;
 

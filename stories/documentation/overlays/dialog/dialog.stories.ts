@@ -1,4 +1,4 @@
-import { setStoryOptions } from '@/helpers/stories';
+import { intlArgType, setStoryOptions } from '@/helpers/stories';
 
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -14,6 +14,7 @@ import {
 	DialogHeaderComponent,
 	DialogHeaderSubtitle,
 	DialogOpenDirective,
+	luDialogHeaderTranslations,
 } from '@lucca-front/ng/dialog';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -137,6 +138,7 @@ export default {
 			description: 'Applique le fond de surface neutre (`--pr-t-elevation-surface-default`) au contenu de la fenêtre de dialogue.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luDialogHeaderTranslations, 'LuDialogHeaderTranslations', 'lu-dialog-header'),
 	},
 } as Meta;
 

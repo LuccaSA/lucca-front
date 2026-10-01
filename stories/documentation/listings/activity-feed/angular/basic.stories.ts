@@ -1,12 +1,13 @@
 import { finn } from '@/stories/users/user.mocks';
 import { LOCALE_ID } from '@angular/core';
-import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent, ActivityFeedUpdateItemComponent } from '@lucca-front/ng/activity-feed';
+import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent, ActivityFeedUpdateItemComponent, luActivityFeedTranslations } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
 import { FileEntryComponent } from '@lucca-front/ng/file-upload';
 import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 interface ActivityFeedBasicStory {
 	statusStep: boolean;
@@ -50,6 +51,7 @@ export default {
 			description: 'Permet de définir l’utilisateur présenté dans l’avatar',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luActivityFeedTranslations, 'ActivityFeedTranslate', 'lu-activity-feed-step, lu-activity-feed-update-item'),
 	},
 	decorators: [
 		moduleMetadata({

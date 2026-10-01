@@ -1,5 +1,5 @@
 import { HiddenArgType } from '@/helpers/common-arg-types';
-import { getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
+import { getStoryGenerator, intlArgType, useDocumentationStory } from '@/helpers/stories';
 import { I18nPluralPipe, SlicePipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import {
 	LuCoreSelectNoClueDirective,
 	LuCoreSelectPanelHeaderDirective,
+	luCoreSelectTranslations,
 	LuDisabledOptionDirective,
 	LuDisplayerDirective,
 	LuOptionDirective,
@@ -21,7 +22,7 @@ import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirectiv
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuSimpleSelectInputComponent, luSimpleSelectTranslations } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
@@ -721,6 +722,9 @@ export const IntlOverride = generateStory({
 
 const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAliasInput>> = {
 	title: 'Documentation/Forms/SimpleSelect',
+	argTypes: {
+		intl: intlArgType([luCoreSelectTranslations, luSimpleSelectTranslations], 'ILuSimpleSelectLabel & LuCoreSelectLabel'),
+	},
 	component: LuSimpleSelectInputComponent,
 	decorators: [
 		moduleMetadata({

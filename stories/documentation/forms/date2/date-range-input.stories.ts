@@ -1,10 +1,10 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CALENDAR_MODE, CalendarShortcut, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateRange, DateRangeInputComponent, PremadeShortcuts } from '@lucca-front/ng/date2';
+import { CALENDAR_MODE, CalendarShortcut, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateRange, DateRangeInputComponent, luDate2Translations, PremadeShortcuts } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
-import { cleanupTemplate, generateInputs, setStoryOptions } from '../../../helpers/stories';
+import { cleanupTemplate, generateInputs, intlArgType, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 
 export default {
@@ -110,6 +110,7 @@ export default {
 			control: false,
 			table: { category: 'outputs', type: { summary: 'void' } },
 		},
+		intl: intlArgType(luDate2Translations, 'Date2Translate'),
 	},
 	render: (args, { argTypes }) => {
 		const { selected, min, max, focusedDate, presentation, ...flags } = args;
