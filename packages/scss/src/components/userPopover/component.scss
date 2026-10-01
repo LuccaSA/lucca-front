@@ -42,14 +42,16 @@
 		}
 
 		.userPopover-details-info-name-linkOptional {
-			color: currentColor;
-			text-decoration: underline;
 			text-decoration-thickness: 0.75px;
 			text-underline-offset: 3px;
 
 			&:hover {
-				color: currentColor;
 				text-decoration-thickness: 1.5px;
+			}
+
+			&.link {
+				--components-link-color: var(--pr-t-color-text-highlight);
+				--components-link-color-hover: var(--pr-t-color-text-highlight);
 			}
 		}
 
@@ -62,19 +64,6 @@
 			display: flex;
 			align-items: flex-start;
 			gap: var(--pr-t-spacings-50);
-			color: currentColor;
-			text-decoration: none;
-
-			&:is(a, button) {
-				&:hover,
-				&:focus {
-					color: currentColor;
-
-					.userPopover-details-info-detail-workplace-state {
-						text-decoration: underline;
-					}
-				}
-			}
 		}
 	}
 
