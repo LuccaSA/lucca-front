@@ -107,7 +107,7 @@
 		clear: 'Wyczyść to pole',
 		placeholder: 'Nie wybrano żadnej wartości',
 		additionalFilters: 'Dodatkowe filtry',
-		autoApplyAnnouncement: 'Lista wyników aktualizuje się automatycznie po wyborze lub wpisaniu.',
+		autoApplyAnnouncement: 'Lista wyników aktualizuje się automatycznie.',
 		selectView: 'Wybierz widok',
 		viewOptions: 'Opcje widoku: {{viewName}}',
 		renameView: 'Zmień nazwę',
