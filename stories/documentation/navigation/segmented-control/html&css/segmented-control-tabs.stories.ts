@@ -46,7 +46,7 @@ function getTemplate(args: segmentedControlTabsStory): string {
 	const size = args.S ? ` mod-S` : ``;
 	const vertical = args.vertical ? ` mod-vertical` : ``;
 	const numericBadge = args.withNumericBadge ? ` <span class="numericBadge">8</span>` : ``;
-	const ariaLabel = args.ariaLabel ? ` aria-label="${args.ariaLabel}"` : ``;
+	const ariaLabel = args.ariaLabel ? ` [attr.aria-label]="ariaLabel"` : ``;
 	return `<ul class="segmentedControl${size}${vertical}" role="tablist"${ariaLabel}>
 	<li class="segmentedControl-item" role="presentation">
 		<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-controls="panel1" [attr.aria-selected]="tabActive === 1" [attr.tabindex]="tabActive === 1 ? null : '-1'">
