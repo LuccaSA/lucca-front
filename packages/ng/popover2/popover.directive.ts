@@ -71,7 +71,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	selector: '[luPopover2]',
 	host: {
 		'[attr.aria-expanded]': 'opened()',
-		'[attr.aria-controls]': 'ariaControls',
+		'[attr.aria-controls]': 'opened() ? ariaControls : null',
 		'(click)': 'onMouseClick()',
 		'(mouseleave)': 'onMouseLeave()',
 		'(focus)': 'onFocus()',
