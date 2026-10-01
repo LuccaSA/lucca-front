@@ -26,7 +26,7 @@ Les composants utilisent la fonction `intlInputOptions()` pour créer un input `
     results: 'Page {{from}}-{{to}} / {{itemsCount}}',
     previous: 'Prev',
     next: 'Next',
-    results: 'Showing {{from}} to {{to}} of {{itemsCount}} items'
+    resultsA11y: 'Showing {{from}} to {{to}} of {{itemsCount}} items'
   }" 
 />
 ```
