@@ -36,7 +36,8 @@ export default {
 			table: { category: 'inputs' },
 		},
 		selectable: {
-			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+			description:
+				'Rend les lignes du tableau sélectionnables via des checkbox. <kbd>⇧ Shift</kbd> + clic (ou <kbd>⇧ Shift</kbd> + <kbd>Espace</kbd>) sur une checkbox coche ou décoche toutes les lignes depuis la dernière checkbox cliquée, hors lignes désactivées et groupes repliés. La plage est limitée à la page affichée : avec <code>@for (…; track $index)</code>, les lignes sont réutilisées d’une page à l’autre et la dernière checkbox cliquée reste mémorisée, préférer un <code>track</code> sur un identifiant.',
 			table: { category: 'inputs' },
 		},
 		mixed: {
