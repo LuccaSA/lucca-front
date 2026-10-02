@@ -27,7 +27,9 @@ export default {
 		}
 
 		return {
-			template: `<lu-highlight-data${generateInputs(inputs, context.argTypes)}>${actionContent}</lu-highlight-data>`,
+			template: actionContent
+				? `<lu-highlight-data${generateInputs(inputs, context.argTypes)}>${actionContent}</lu-highlight-data>`
+				: `<lu-highlight-data${generateInputs(inputs, context.argTypes)} />`,
 		};
 	},
 } as Meta;
