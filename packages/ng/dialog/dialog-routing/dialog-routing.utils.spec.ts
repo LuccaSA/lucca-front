@@ -334,6 +334,68 @@ describe('dialog-routing.utils', () => {
 			expect($dialogRef().dismiss).not.toHaveBeenCalled();
 		});
 
+		describe.each([
+			{ trigger: 'escape key', dismissDialog: () => document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })) },
+			{ trigger: 'backdrop click', dismissDialog: () => document.querySelector<HTMLElement>('.dialog_backdrop')!.click() },
+		])('when dismissed with the $trigger', ({ dismissDialog }) => {
+			async function openGuardedDialog(canDeactivateGuard: () => boolean) {
+				const route = addTestRoute({
+					path: 'test/:name',
+					dataFactory: () => ({ foo: 'bar' }),
+					dialogRouteConfig: {
+						canDeactivate: [canDeactivateGuard],
+					},
+				});
+				const { router, fixture } = initTest(route);
+
+				await router.navigateByUrl('/test/bar');
+				fixture.detectChanges();
+				await fixture.whenStable();
+				await vi.runAllTimersAsync();
+
+				// Use real timers to avoid infinite timer loop from router navigation
+				vi.useRealTimers();
+
+				return { router, fixture };
+			}
+
+			it('should keep dialog opened when canDeactivate return false', async () => {
+				// Arrange
+				const canDeactivateGuard = vi.fn(() => false);
+				const { router, fixture } = await openGuardedDialog(canDeactivateGuard);
+				const dismissed = vi.fn();
+				$dialogRef().dismissed$.subscribe(dismissed);
+
+				// Act
+				dismissDialog();
+				await fixture.whenStable();
+
+				// Assert
+				expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
+				expect(dismissed).not.toHaveBeenCalled();
+				expect(router.url).toBe('/test/bar');
+			});
+
+			it('should dismiss dialog when canDeactivate return true', async () => {
+				// Arrange
+				const canDeactivateGuard = vi.fn(() => true);
+				const { router, fixture } = await openGuardedDialog(canDeactivateGuard);
+				const dismissed = vi.fn();
+				$dialogRef().dismissed$.subscribe(dismissed);
+
+				// Act
+				dismissDialog();
+				await fixture.whenStable();
+
+				// Assert
+				await vi.waitFor(() => {
+					expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
+					expect(dismissed).toHaveBeenCalledTimes(1);
+					expect(router.url).toBe('/');
+				});
+			});
+		});
+
 		it('should support children', async () => {
 			// Arrange
 			const addTestRouteWithChildren = dialogRouteFactory(DialogRoutingWithRouterOutletTestComponent, {

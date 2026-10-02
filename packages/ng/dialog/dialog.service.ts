@@ -1,7 +1,7 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Overlay } from '@angular/cdk/overlay';
 import { afterNextRender, EnvironmentInjector, inject, Injectable, Injector, Renderer2 } from '@angular/core';
-import { isObservable, merge, of, take } from 'rxjs';
+import { merge, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { LuDialogConfig, LuDialogData, LuDialogRef, LuDialogResult } from './model';
 import { DISMISSED_VALUE } from './model/dialog-ref';
@@ -85,11 +85,7 @@ export class LuDialogService {
 			merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
 				.pipe(
 					filter(() => config.canCloseWithBackdrop ?? true),
-					switchMap(() => {
-						const canClose = cdkRef.componentInstance ? (config.canClose?.(cdkRef.componentInstance) ?? true) : true;
-						const canClose$ = isObservable(canClose) ? canClose : of(canClose);
-						return canClose$.pipe(take(1));
-					}),
+					switchMap(() => luDialogRef.canDismiss$().pipe(take(1))),
 					takeUntil(luDialogRef.closed$),
 				)
 				.subscribe((canClose) => {
