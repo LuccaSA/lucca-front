@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { defaultToastDuration, LuToastInput, LuToastsComponent, LuToastsService, LuToastType } from '@lucca-front/ng/toast';
+import { defaultToastDuration, LuToastInput, LuToastsComponent, LuToastsService, luToastTranslations, LuToastType } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { intlArgType } from '@/helpers/stories';
 
 @Component({
 	selector: 'toasts-stories',
@@ -72,6 +73,9 @@ class ToastsStory implements OnInit, OnDestroy {
 
 export default {
 	title: 'Documentation/Overlays/Toasts',
+	argTypes: {
+		intl: intlArgType(luToastTranslations, 'ILuToastLabel'),
+	},
 	component: ToastsStory,
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;

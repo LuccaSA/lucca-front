@@ -1,19 +1,19 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, output, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { ChipSize, ChipState } from './chip.type';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
+import { ChipSize, ChipState } from './chip.type';
 
 @Component({
 	selector: 'lu-chip, button[luChip], a[luChip]',
 	templateUrl: './chip.component.html',
 	styleUrl: './chip.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgTemplateOutlet, LuTooltipModule, IconComponent],
+	imports: [NgTemplateOutlet, LuTooltipTriggerDirective, IconComponent],
 	host: {
 		class: 'chip',
 		'[class.is-disabled]': 'disabled()',
@@ -25,6 +25,8 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipComponent {
+	readonly #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
 	readonly intl = input(...intlInputOptions(LU_CHIP_TRANSLATIONS));
 
 	/**
@@ -77,4 +79,10 @@ export class ChipComponent {
 	readonly isWarning = computed<boolean>(() => this.state() === 'warning');
 	readonly isCritical = computed<boolean>(() => this.state() === 'critical');
 	readonly displayedIcon = computed<LuccaIcon | null>(() => (this.isWarning() ? 'signWarning' : this.isCritical() ? 'signError' : this.icon()));
+
+	protected readonly tooltipTriggerAnchor = computed(() => {
+		const el = this.#elementRef.nativeElement;
+		const isFocusable = el.tagName === 'BUTTON' ? !this.disabled() : el.tagName === 'A' ? el.hasAttribute('href') : false;
+		return isFocusable ? el : undefined;
+	});
 }

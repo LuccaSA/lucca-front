@@ -1,3 +1,30 @@
+### 22.0.1
+
+#### Fixed
+
+- Tags copy/paste and undo in plain-text mode.
+- Editable area is now exposed as multiline (`aria-multiline`).
+
+### 22.0.0
+
+#### Added
+
+- `secondary` and `group` properties on a tag: secondary tags are no longer displayed inline but offered in a searchable dropdown, grouped when a `group` is set.
+
+#### Changed
+
+- Link template context is now typed by `LinkTemplateContext` and exposes `isAutoLink` alongside `href`, `title` and `target`.
+
+#### Fixed
+
+- Delete button is no longer displayed in the link popover of an autolink.
+
+### 21.4.1
+
+#### Fixed
+
+- Links are displayed as external ones in presentation mode.
+
 ### 21.3.1
 
 #### Fixed

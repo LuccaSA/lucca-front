@@ -1,11 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective, luFormFieldTranslations } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
-import { waitForAngular } from '../../../helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
+import { useStoryModel, generateInputs, setStoryOptions, intlArgType } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
@@ -85,6 +83,7 @@ export default {
 			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d’écran.",
 			table: { category: 'models' },
 		},
+		intl: intlArgType(luFormFieldTranslations, 'LuFormFieldTranslations'),
 	},
 	render: (args, { argTypes }) => {
 		const { required, ...fieldArgs } = args;
@@ -123,22 +122,3 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		rolePresentationLabel: false,
 	},
 };
-
-export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		await expect(canvas.getByText('Label')).toBeVisible();
-		await expect(canvas.getByRole('textbox')).toBeVisible();
-	});
-
-	await step('Interaction clavier', async () => {
-		const textarea = canvas.getByRole('textbox');
-		textarea.focus();
-		await expect(textarea).toHaveFocus();
-		await userEvent.type(textarea, 'test input');
-		await waitForAngular();
-		await expect(textarea).toHaveValue('test input');
-	});
-});

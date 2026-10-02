@@ -31,7 +31,7 @@
 					(keydown.arrowDown)="arrowDown(popoverRef, 'start')"
 					(keydown.escape)="popoverRef.close()"
 					[disabled]="disabled()"
-					[attr.placeholder]="dateFormatLocalized()"
+					[attr.placeholder]="placeholder() || dateFormatLocalized()"
 					[attr.autocomplete]="autocomplete()"
 				/>
 			</div>
@@ -58,7 +58,7 @@
 					(keydown.arrowDown)="arrowDown(popoverRef, 'end')"
 					(keydown.escape)="popoverRef.close()"
 					[disabled]="disabled()"
-					[attr.placeholder]="dateFormatLocalized()"
+					[attr.placeholder]="placeholder() || dateFormatLocalized()"
 					[attr.autocomplete]="autocomplete()"
 				/>
 			</div>

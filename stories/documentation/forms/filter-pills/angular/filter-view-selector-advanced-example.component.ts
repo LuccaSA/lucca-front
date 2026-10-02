@@ -120,7 +120,7 @@ const emptyState = (): FilterState => ({
 			<lu-checkbox-input [(ngModel)]="state.includeFormerEmployees" />
 		</lu-filter-pill>
 		<lu-filter-pill label="Légume (multi)" name="legumes">
-			<lu-multi-select [(ngModel)]="state.legumes" [options]="legumes | filterLegumes: clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+			<lu-multi-select [(ngModel)]="state.legumes" [options]="legumes | filterLegumes: clue" [totalCount]="legumes.length" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" />
 		</lu-filter-pill>
 		<lu-filter-pill label="Catégorie (simple)" optional name="category">
 			<lu-simple-select [(ngModel)]="state.category" [options]="legumes | filterLegumes: clue" (clueChange)="clue = $event" />
@@ -158,6 +158,7 @@ export class AdvancedFilterViewStoryComponent {
 	readonly #dialog = inject(LuDialogService);
 
 	protected readonly legumes = allLegumes;
+	protected readonly legumesPluralFn = (count: number) => `${count} légumes`;
 	protected clue = '';
 
 	protected readonly views: (SavedView & { state: FilterState })[] = [

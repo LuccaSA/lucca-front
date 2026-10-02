@@ -11,8 +11,8 @@
 ## Before writing
 
 1. Read `packages/ng/filter-pills/**/*.spec.ts` and
-   `stories/documentation/filter-pills/*.stories.ts` (play functions likely exist — list
-   them, extend rather than duplicate).
+   `stories/documentation/forms/filter-pills/`, and the play functions in `stories/e2e/filter-pill/`,
+   `stories/e2e/filter-bar/` and `stories/e2e/filter-view-selector/` (list them, extend rather than duplicate).
 2. Pills wrap other in-scope components (selects, date inputs) inside a popover2-based
    panel. Do **not** re-test the inner components' behavior (tasks 01/02 own that); test
    the **pill layer**: open/close, value summary display, clearing, and the bar's

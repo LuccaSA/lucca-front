@@ -1,3 +1,13 @@
+### 22.0.0
+
+#### Added
+
+- `plainText` input to display the line breaks of the content instead of collapsing them.
+
+#### Fixed
+
+- Read less label is now correctly quoted when built from a signal.
+
 ### 21.3.0
 
 #### Added

@@ -1,9 +1,10 @@
 import { AsyncPipe } from '@angular/common';
 import { provideRouter, RouterLink } from '@angular/router';
-import { LinkComponent } from '@lucca-front/ng/link';
+import { LinkComponent, luLinkTranslations } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { timer } from 'rxjs';
 import { HiddenArgType } from '@/helpers/common-arg-types';
+import { intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Link/Angular/Basic',
@@ -61,6 +62,7 @@ Lien (nouvelle fenêtre) uniquement au survol/focus/touch : <a href="${href}" l
 			description: 'Souligne le lien seulement au survol.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luLinkTranslations, 'LinkTranslate'),
 		neutral: {
 			description: 'Affiche le lien dans la couleur de texte par défaut plutôt que dans la couleur de lien.',
 			table: { category: 'inputs' },

@@ -1,3 +1,14 @@
+### 22.0.0
+
+#### Added
+
+- `mixed` input on `tr[luIndexTableRow]` to display the row checkbox in the indeterminate state.
+
+#### Fixed
+
+- Empty pagination wrapper no longer takes space below the table.
+- Ghost buttons used as row actions no longer change size nor keep their icon visible while loading.
+
 ### 21.3.0
 
 #### Added

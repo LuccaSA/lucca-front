@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { isNotNil } from '@lucca-front/ng/core';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { firstValueFrom } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { vi } from 'vitest';
 import { TestEntity, runALuSelectInputComponentTestSuite } from '../../core-select/input/select-input.component.spec';
 import { LuSimpleSelectInputComponent } from './select-input.component';
@@ -38,6 +42,22 @@ class SimpleSelectNgModelHostComponent {
 })
 class SimpleSelectFormControlHostComponent {
 	formControl = new FormControl<TestEntity | null>(null);
+
+	options: TestEntity[] = options;
+}
+
+@Component({
+	selector: 'lu-simple-select-form-field-host',
+	imports: [ReactiveFormsModule, FormFieldComponent, LuSimpleSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Vegetable">
+			<lu-simple-select [formControl]="formControl" [options]="options" />
+		</lu-form-field>
+	`,
+})
+class SimpleSelectFormFieldHostComponent {
+	formControl = new FormControl<TestEntity | null>(options[0]);
 
 	options: TestEntity[] = options;
 }
@@ -271,6 +291,35 @@ describe('LuSimpleSelectInputComponent', () => {
 
 			// Assert
 			expect(clearer()).toBeNull();
+		});
+	});
+
+	describe('accessible name', () => {
+		function valueId(element: HTMLElement): string {
+			return element.querySelector('.simpleSelect-field-value')?.id ?? '';
+		}
+
+		it('should label the combobox with the selected value when used standalone', () => {
+			// Assert
+			const element = nativeElement();
+			expect(element.querySelector('input')?.getAttribute('aria-labelledby')).toBe(valueId(element));
+		});
+
+		it('should label the combobox with the form field label then the selected value', async () => {
+			// Arrange
+			const hostFixture = TestBed.createComponent(SimpleSelectFormFieldHostComponent);
+			hostFixture.detectChanges();
+			const formField = hostFixture.debugElement.query(By.directive(FormFieldComponent)).componentInstance as FormFieldComponent;
+
+			// Act
+			await firstValueFrom(formField.ready$.pipe(filter(Boolean)));
+			hostFixture.detectChanges();
+
+			// Assert
+			const element = hostFixture.nativeElement as HTMLElement;
+			const combobox = element.querySelector('input');
+			expect(combobox?.getAttribute('aria-labelledby')).toBe(`${combobox?.id}-label ${valueId(element)}`);
+			expect(element.querySelector(`#${valueId(element)}`)?.textContent).toContain('test 1');
 		});
 	});
 });

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta } from '@storybook/angular-vite';
@@ -7,11 +7,12 @@ import { applicationConfig, Meta } from '@storybook/angular-vite';
 @Component({
 	selector: 'date-input-stories',
 	templateUrl: './date-input.stories.html',
-	imports: [FormFieldComponent, DateInputComponent, ReactiveFormsModule],
+	imports: [FormFieldComponent, DateInputComponent, FormsModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DateInputStory {
-	control = new FormControl<Date | null>(null);
+	emptyDate: Date | null = null;
+	filledDate: Date | null = new Date(2024, 8, 16);
 }
 
 export default {
@@ -19,7 +20,7 @@ export default {
 	component: DateInputStory,
 	decorators: [
 		applicationConfig({
-			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
 		}),
 	],
 } as Meta;

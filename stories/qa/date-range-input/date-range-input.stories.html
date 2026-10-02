@@ -2,16 +2,121 @@
 	<tbody>
 		<tr>
 			<td></td>
-			<td>
-				<div class="demo-QAtable-list">Angular</div>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Empty</div>
+			</td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Filled</div>
 			</td>
 		</tr>
 		<tr>
 			<td>Default</td>
 			<td>
-				<div class="demo-QAtable-list">
-					<lu-form-field label="Label" inlineMessage="Helper text">
-						<lu-date-range-input [formControl]="control" />
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="emptyRange" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="filledRange" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Error</td>
+			<td>
+				<lu-form-field label="Label" inlineMessage="Error message" inlineMessageState="error" invalid>
+					<lu-date-range-input [(ngModel)]="emptyRange" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label" inlineMessage="Error message" inlineMessageState="error" invalid>
+					<lu-date-range-input [(ngModel)]="filledRange" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="emptyRange" disabled />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="filledRange" disabled />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Clearable</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="emptyRange" clearable />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="filledRange" clearable />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Week mode</td>
+			<td>
+				<div style="visibility: hidden">
+					<lu-form-field label="Label">
+						<lu-date-range-input [(ngModel)]="emptyRange" />
+					</lu-form-field>
+				</div>
+			</td>
+			<td>
+				<div style="visibility: hidden">
+					<lu-form-field label="Label">
+						<lu-date-range-input [(ngModel)]="filledRange" />
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Month mode</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="emptyRange" mode="month" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="filledRange" mode="month" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Year mode</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="emptyRange" mode="year" />
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-date-range-input [(ngModel)]="filledRange" mode="year" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Auto width</td>
+			<td>
+				<div style="inline-size: 30rem">
+					<lu-form-field label="Label">
+						<lu-date-range-input [(ngModel)]="emptyRange" widthAuto />
+					</lu-form-field>
+				</div>
+			</td>
+			<td>
+				<div style="inline-size: 30rem">
+					<lu-form-field label="Label">
+						<lu-date-range-input [(ngModel)]="filledRange" widthAuto />
 					</lu-form-field>
 				</div>
 			</td>

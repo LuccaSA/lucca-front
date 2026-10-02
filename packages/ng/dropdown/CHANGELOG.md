@@ -1,3 +1,21 @@
+### 22.0.3
+
+#### Fixed
+
+- Clicking a disabled action no longer closes the panel.
+
+### 21.2.0
+
+#### Fixed
+
+- Legacy positions of `luDropdownTrigger` are now recomputed when the popover position changes.
+
+### 21.1.4
+
+#### Fixed
+
+- Disabled `lu-dropdown-action` now carries the `disabled` attribute.
+
 ### 21.0.4
 
 #### Changed

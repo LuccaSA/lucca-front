@@ -100,7 +100,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 			const result = label(count);
 			return typeof result === 'string' ? result : getIntlPluralLabel(this.pluralRules, result, count);
 		}
-		return `${count} ${this.filterPillLabelPlural()}`;
+		const deprecatedLabel = this.filterPillLabelPlural();
+		return deprecatedLabel ? `${count} ${deprecatedLabel}` : `${count}`;
 	});
 
 	override readonly selectParent$ = new Subject<void>();

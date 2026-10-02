@@ -1,3 +1,9 @@
+### 22.0.0
+
+#### Fixed
+
+- Component now renders a `span` instead of a `div`, so it can be nested inside a button without producing invalid markup.
+
 ### 21.3.1
 
 #### Added

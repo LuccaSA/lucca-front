@@ -1,3 +1,13 @@
+### 22.0.0
+
+#### Added
+
+- `lu-skeleton-card`, `lu-skeleton-fancy-box` and `lu-skeleton-highlight-data` components.
+
+#### Removed
+
+- `lu-skeleton-resource-card` — use `lu-skeleton-card` instead.
+
 ### 21.3.0
 
 #### Added

@@ -19,7 +19,8 @@ value-parsing behavior is already tested.
 
 1. Read all existing specs under `packages/ng/date2/` and list what they already cover
    (typing partial dates, clearing, min/max, granularity — verify).
-2. Read `stories/documentation/forms/date2/*.stories.ts` and note existing play functions;
+2. Read `stories/documentation/forms/date2/*.stories.ts` and note the existing play functions in
+   `stories/e2e/date-input/` and `stories/e2e/date-range-input/`;
    `stories/helpers/test.ts` already has a `pickDay()` helper — reuse it.
 3. Read the calendar template for the real grid roles (`grid`, `gridcell`) and the
    navigation button labels.
@@ -56,7 +57,7 @@ values (assert with explicit UTC dates like the existing specs do).
 ## Storybook play functions
 
 The calendar popover's focus management and grid keyboard navigation are the priority for
-real-browser coverage. Extend `stories/documentation/forms/date2/` test stories using
+real-browser coverage. Extend the `stories/e2e/date-input/` and `stories/e2e/date-range-input/` test stories using
 `createTestStory` + `pickDay`.
 
 ## Definition of done
