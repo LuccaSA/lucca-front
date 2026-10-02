@@ -6,6 +6,7 @@ export * from './misc';
 export * from './overlay/index';
 export * from './portal/index';
 export * from './route';
+export * from './selection/index';
 export * from './signal';
 export * from './string';
 export * from './tools/class';

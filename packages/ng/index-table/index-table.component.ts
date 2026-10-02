@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, input, viewChild, ViewEncapsulation } from '@angular/core';
-import { luBooleanAttribute, ResponsiveConfig } from '@lucca-front/ng/core';
+import { luBooleanAttribute, ResponsiveConfig, ɵRangeSelection } from '@lucca-front/ng/core';
 
 import { IndexTableHeadComponent } from './index-table-head/index-table-head.component';
 import { IndexTableRowComponent } from './index-table-row/index-table-row.component';
@@ -35,6 +35,8 @@ export class IndexTableComponent {
 	readonly header = contentChild(IndexTableHeadComponent, { descendants: true });
 
 	readonly cols = computed(() => this.header()?.cols());
+
+	readonly rangeSelection = new ɵRangeSelection(() => this.rows().filter((row) => row.bodyRef !== null && row.getElementRef().nativeElement.closest('table') === this.tableRef()?.nativeElement));
 
 	readonly classMods = computed(() => {
 		return {
