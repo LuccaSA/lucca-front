@@ -82,4 +82,12 @@ const Template = (args: TreeStory) => ({
 export const Tree: StoryObj<TreeStory> = {
 	args: {},
 	render: Template,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					'Chaque nœud racine doit être placé dans son propre `tbody.dataTable-body`. Replier la première ligne d’un `tbody` masque toutes les lignes suivantes de ce même `tbody` : si plusieurs racines partagent un `tbody`, replier la première masque aussi les autres.',
+			},
+		},
+	},
 };
