@@ -15,6 +15,18 @@
 			@include dark;
 		}
 
+		&.palette-success {
+			@include success;
+		}
+
+		&.palette-warning {
+			@include warning;
+		}
+
+		&.palette-critical {
+			@include critical;
+		}
+
 		&.mod-valueFirst {
 			@include valueFirst;
 		}

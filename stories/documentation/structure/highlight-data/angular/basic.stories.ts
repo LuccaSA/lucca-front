@@ -87,7 +87,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
-			description: 'La palette influençant également la couleur du SVG des bubbles et donc l’URL associée, il est nécessaire de renseigner la gamme.',
+			description: 'La palette influence également la couleur des bubbles.',
 			table: { category: 'inputs' },
 		},
 		action: {
@@ -105,6 +105,6 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		bubble: 1,
 		illustration: 'piggy-bank',
 		valueFirst: false,
-		subText: null,
+		subText: '',
 	},
 };
