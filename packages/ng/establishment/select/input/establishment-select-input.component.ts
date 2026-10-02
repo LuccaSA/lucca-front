@@ -65,6 +65,7 @@ export class LuEstablishmentSelectInputComponent<
 	@Input() filters: string[];
 	@Input() appInstanceId: number;
 	@Input() operations: number[];
+	@Input() uniqueOperations: number[];
 
 	private _establishmentService: LuEstablishmentService;
 	private _legalUnitService: LuLegalUnitService;
