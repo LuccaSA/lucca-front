@@ -455,6 +455,7 @@ export const IconsList = [
 	{ icon: 'higher', deprecated: true },
 	{ icon: 'priorityHighest', deprecated: false },
 	{ icon: 'highest', deprecated: true },
+	{ icon: 'priorityLevels', deprecated: false },
 	{ icon: 'priorityLow', deprecated: false },
 	{ icon: 'low', deprecated: true },
 	{ icon: 'priorityLower', deprecated: false },

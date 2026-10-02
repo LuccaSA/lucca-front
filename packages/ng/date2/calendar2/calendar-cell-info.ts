@@ -3,6 +3,12 @@ import { DateRange } from './date-range';
 
 export interface RangeInfo {
 	range?: DateRange;
+	/**
+	 * Bound the range is anchored on: its start when it has one, its end otherwise.
+	 * A range without start date is rendered from its end, the same way an incomplete
+	 * range is rendered from its start.
+	 */
+	anchor: Date;
 	isStart: boolean;
 	isEnd: boolean;
 	label?: string;

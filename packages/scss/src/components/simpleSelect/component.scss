@@ -3,6 +3,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
+	inline-size: var(--components-simpleSelect-width);
 
 	@at-root ($atRoot) {
 		.simpleSelect-field {

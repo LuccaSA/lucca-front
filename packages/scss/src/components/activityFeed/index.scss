@@ -34,6 +34,10 @@
 		@include critical;
 	}
 
+	.activityFeed-step-state.mod-icon {
+		@include withIcon;
+	}
+
 	.activityFeed-content-update-item {
 		&:has(.activityFeed-content-update-item-before:empty, .activityFeed-content-update-item-after:empty) {
 			@include single;

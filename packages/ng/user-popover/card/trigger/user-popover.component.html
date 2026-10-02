@@ -26,7 +26,7 @@
 					@if (!employee._links?.hrCard?.href) {
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					} @else {
-						<a class="userPopover-details-info-name-linkOptional" [href]="employee._links?.hrCard?.href">
+						<a luLink class="userPopover-details-info-name-linkOptional" [href]="employee._links?.hrCard?.href" external hiddenIcon>
 							<ng-container *ngTemplateOutlet="fullNameDisplay" />
 						</a>
 					}
@@ -63,14 +63,22 @@
 
 					<!-- EN CONTRAT-->
 					@if (employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
-						<a class="userPopover-details-info-detail-workplace" [href]="employee._links?.schedule?.href">
+						<span class="userPopover-details-info-detail-workplace">
 							@if (employee.isWorkingNow && employee.currentWorkLocation) {
 								<lu-icon icon="mapPin" size="S" />
 							}
 							@if (!employee.isWorkingNow || !employee.currentWorkLocation) {
 								<lu-icon icon="calendarPlanning" size="S" />
 							}
-							<span class="userPopover-details-info-detail-workplace-state">
+							<a
+								luLink
+								class="userPopover-details-info-detail-workplace-state"
+								[href]="employee._links?.schedule?.href"
+								external
+								hiddenIcon
+								decorationHover
+								neutral
+							>
 								@if (employee.isWorkingNow) {
 									@if (employee.currentWorkLocation) {
 										{{ employee.currentWorkLocation.name }}
@@ -91,8 +99,8 @@
 										}
 									}
 								}
-							</span>
-						</a>
+							</a>
+						</span>
 					}
 				</p>
 			</div>

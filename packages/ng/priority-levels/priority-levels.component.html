@@ -1,0 +1,9 @@
+<lu-icon
+	icon="priorityLevels"
+	class="priorityLevels-icon"
+	[size]="iconSize()"
+	[luTooltip]="label()"
+	luTooltipOnlyForDisplay
+	[luTooltipDisabled]="!hiddenLabel()"
+/>
+<span class="priorityLevels-label" [class.pr-u-mask]="hiddenLabel()">{{ label() }}</span>

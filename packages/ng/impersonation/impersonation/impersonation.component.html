@@ -30,7 +30,16 @@
 
 <ng-template #impersonationPopover>
 	<div class="impersonation_popover-content popover-contentOptional">
-		<lu-simple-select impersonation [(ngModel)]="selectedUser" users [enableFormerEmployees]="enableFormerEmployees()" #selectRef>
+		<lu-simple-select
+			impersonation
+			[(ngModel)]="selectedUser"
+			users
+			[enableFormerEmployees]="enableFormerEmployees()"
+			[operationIds]="operationIds()"
+			[uniqueOperationIds]="uniqueOperationIds()"
+			[appInstanceId]="appInstanceId()"
+			#selectRef
+		>
 			<ng-container *luOption="let user; select: selectRef">
 				<div class="impersonation_popover-content-option" [class.mod-me]="currentUserId === user.id">
 					<lu-user-picture aria-hidden="true" [user]="user" size="XS" softRounded />

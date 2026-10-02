@@ -1,8 +1,8 @@
+import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { IconsList } from '@/stories/icons-list';
 import { TAG_SIZE, TagComponent } from '@lucca-front/ng/tag';
 import { Meta, StoryObj } from '@storybook/angular-vite';
-import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Tags/Angular/Basic',
@@ -41,6 +41,11 @@ export const Template: StoryObj<TagComponent> = {
 			description: 'Ajoute une icône au tag.',
 			table: { category: 'inputs' },
 		},
+		hiddenLabel: {
+			name: '↳ hiddenLabel',
+			if: { arg: 'icon', truthy: true },
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+		},
 		link: HiddenArgType,
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
@@ -60,6 +65,7 @@ export const Template: StoryObj<TagComponent> = {
 		label: 'Text',
 		outlined: false,
 		icon: null,
+		hiddenLabel: false,
 		withEllipsis: false,
 		AI: false,
 	},

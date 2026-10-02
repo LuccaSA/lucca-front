@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/config';
+
 @use 'exports' as *;
 
 .multiSelect {
@@ -7,6 +9,12 @@
 	}
 
 	@layer mods {
+		@each $value in config.$fieldsWidth {
+			&.mod-width#{$value} {
+				@include width($value);
+			}
+		}
+
 		&.mod-S {
 			@include S;
 		}

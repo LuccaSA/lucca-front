@@ -30,6 +30,7 @@ import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
+import { humanizeDate } from '../date-format';
 import { comparePeriods, startOfPeriod, transformDateInputToDate, transformDateToDateISO } from '../utils';
 
 export type DateInputValidatorErrorType = {
@@ -87,6 +88,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	readonly hideOverflow = input(false, { transform: luBooleanAttribute });
 	readonly widthAuto = input(false, { transform: luBooleanAttribute });
 
+	readonly humanized = input(false, { transform: luBooleanAttribute });
+
 	readonly filterPillDisabled = signal(false);
 
 	popoverPositions: ConnectionPositionPair[] = [
@@ -104,6 +107,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly inputFocused = signal(false);
 
+	readonly panelOpen = signal(false);
+
 	readonly selectedDate = signal<Date | null>(null);
 
 	readonly initialValue = signal<Date | null | undefined>(undefined);
@@ -113,7 +118,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
 
-	readonly displayValue = computed(() => {
+	readonly formattedValue = computed(() => {
 		const textInput = this.userTextInput();
 		if (textInput !== 'ɵ') {
 			const parsedInput = this.parseValue(textInput);
@@ -144,6 +149,17 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			return '';
 		}
 		return textInput;
+	});
+
+	readonly displayValue = computed(() => {
+		const selectedDate = this.selectedDate();
+		if (this.humanized() && !this.inputFocused() && !this.panelOpen() && this.isValidDate(selectedDate)) {
+			const humanizedDate = humanizeDate(this.locale, selectedDate, this.mode());
+			if (humanizedDate) {
+				return humanizedDate;
+			}
+		}
+		return this.formattedValue();
 	});
 
 	// We need to use a "magic key" here to avoid sending a null value change on initialization
@@ -356,7 +372,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		const date = transformDateInputToDate(control.value);
 		// try to parse the display value cause formControl.value is undefined if date is not parsable
 		try {
-			parse(this.displayValue(), this.dateFormatWithMode(), startOfDay(new Date()));
+			parse(this.formattedValue(), this.dateFormatWithMode(), startOfDay(new Date()));
 		} catch {
 			/* not a correct date */
 			return { date: true };

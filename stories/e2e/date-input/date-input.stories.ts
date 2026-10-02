@@ -1,7 +1,7 @@
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { createTestStory } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
-import meta, { Basic, Week } from '@/stories/forms/date2/date-input.stories';
+import meta, { Basic, Humanized, Week } from '@/stories/forms/date2/date-input.stories';
 
 export default {
 	...meta,
@@ -89,5 +89,28 @@ export const WeekTEST = createTestStory(Week, async ({ canvasElement, step }) =>
 
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
+	});
+});
+
+export const HumanizedTEST = createTestStory(Humanized, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByTestId('lu-date-input');
+
+	await step('Hors focus, la date du jour est affichée en langage naturel', async () => {
+		await expect(input).toHaveValue('Aujourd’hui');
+	});
+
+	await step('Au focus, la date repasse au format numérique éditable', async () => {
+		input.focus();
+		await waitForAngular();
+		await expect(input).toHaveValue(new Intl.DateTimeFormat('fr-FR').format(new Date()));
+	});
+
+	await step('Au blur, la date revient en langage naturel', async () => {
+		await userEvent.keyboard('{Escape}');
+		input.blur();
+		await waitForAngular();
+		await expect(input).toHaveValue('Aujourd’hui');
 	});
 });

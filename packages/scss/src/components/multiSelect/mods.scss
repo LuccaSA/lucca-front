@@ -1,8 +1,13 @@
+@use 'sass:math';
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 @use '@lucca-front/scss/src/components/chip/exports' as chip;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+
+@mixin width($value) {
+	--components-multiSelect-width: #{math.div($value, 2) * 1rem};
+}
 
 @mixin S {
 	--components-multiSelect-font: var(--pr-t-font-body-S);
