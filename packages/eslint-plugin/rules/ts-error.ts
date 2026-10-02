@@ -2,8 +2,7 @@ import type { TSESTree } from '@typescript-eslint/utils';
 import { ESLintUtils, TSESLint } from '@typescript-eslint/utils';
 import * as ts from 'typescript';
 import { DiagnosticCategory, forEachChild } from 'typescript';
-
-const createRule = ESLintUtils.RuleCreator((ruleName) => ruleName);
+import { createRule } from './create-rule.ts';
 
 export const RULE_NAME = 'ts-error';
 

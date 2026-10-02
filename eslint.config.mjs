@@ -3,10 +3,22 @@ import storybook from 'eslint-plugin-storybook';
 
 import eslint from '@eslint/js';
 import angular from 'angular-eslint';
-import localRules from './packages/eslint-plugin/index.ts';
+import localRules, { createDeprecatedClassesConfig } from './packages/eslint-plugin/index.ts';
+import LFDeprecatedSelectors from './packages/stylelint-config/LFDeprecatedSelectors.mjs';
+import { getDisallowedData, getSeverity } from './packages/stylelint-config/stylelintForLF.mjs';
 import prettier from 'eslint-plugin-prettier/recommended';
 import typescript from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
+
+// Ready-made deprecated/deleted class rules block, fed the stylelint deprecation list (single source
+// of truth), its message formatter, and its warn-until-deleted severity policy. The plugin's factory
+// applies the version-aware split; inside this repo getSeverity() returns 'warning' for everything
+// (scss version 0.0.0), so both buckets stay warnings here.
+const deprecatedClassesConfig = createDeprecatedClassesConfig({
+	deprecations: LFDeprecatedSelectors,
+	buildMessage: (deprecations, matchedSelector) => getDisallowedData(deprecations, matchedSelector).message,
+	isDeleted: (entry) => getSeverity(entry) === 'error',
+});
 
 export default defineConfig(
 	{
@@ -155,6 +167,7 @@ export default defineConfig(
 			'@typescript-eslint/no-unnecessary-type-assertion': 'off',
 		},
 	},
+	deprecatedClassesConfig,
 	{
 		files: ['**/*.html'],
 		extends: [...angular.configs.templateRecommended],
@@ -190,6 +203,9 @@ export default defineConfig(
 			'@angular-eslint/template/prefer-self-closing-tags': 'off',
 			// TODO A lot of issues currently so a lot of rules are turned off. Would be nice to enable them but requires a lot of fixes
 			'@angular-eslint/template/button-has-type': 'off',
+			// Stories deliberately showcase deprecated classes (QA pages, migration docs): ~137 occurrences
+			'@lucca-front/no-deprecated-classes': 'off',
+			'@lucca-front/no-deleted-classes': 'off',
 		},
 	},
 	// Scripts: generate-skills is tooling code, downgrade strict rules to warn
