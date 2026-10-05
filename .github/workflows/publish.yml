@@ -59,6 +59,7 @@ jobs:
             # npm rejects a dist-tag that parses as a semver range.
             [[ "$PRE" =~ ^[a-z][a-z0-9-]*$ ]] || PRE="prerelease"
             echo "NPM_PUBLISH_COMMAND=npm publish --access public --provenance --tag $PRE" >> "$GITHUB_ENV"
+            echo "NPM_STRICT_PUBLISH_COMMAND=npm publish --access public --provenance --tag $PRE-strict" >> "$GITHUB_ENV"
             echo "Publish mode: direct (prerelease tag: $TAG, dist-tag: $PRE)"
             exit 0
           fi
@@ -73,12 +74,14 @@ jobs:
           if [ -n "$LATEST" ] && [ "$VERSION" != "$LATEST" ] &&
              [ "$(printf '%s\n%s\n' "$VERSION" "$LATEST" | sort -V | head -n 1)" = "$VERSION" ]; then
             echo "NPM_PUBLISH_COMMAND=npm stage publish --access public --provenance --tag v${MAJOR}-lts" >> "$GITHUB_ENV"
+            echo "NPM_STRICT_PUBLISH_COMMAND=npm stage publish --access public --provenance --tag v${MAJOR}-lts-strict" >> "$GITHUB_ENV"
             echo "Publish mode: staged (tag: $TAG, dist-tag: v${MAJOR}-lts, behind latest $LATEST)"
           else
             # "latest" stays implicit: npm then still refuses the publish if the
             # lookup above came back empty or stale and this version would in
             # fact move the dist-tag backwards.
             echo "NPM_PUBLISH_COMMAND=npm stage publish --access public --provenance" >> "$GITHUB_ENV"
+            echo "NPM_STRICT_PUBLISH_COMMAND=npm stage publish --access public --provenance --tag strict" >> "$GITHUB_ENV"
             echo "Publish mode: staged (tag: $TAG, dist-tag: latest)"
           fi
 
@@ -96,3 +99,30 @@ jobs:
 
       - run: $NPM_PUBLISH_COMMAND
         working-directory: packages/stylelint-config
+
+      - run: npm run build:strict
+
+      - name: Set strict version in dist packages
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          VERSION="${REF_NAME#v}"
+          STRICT_VERSION="${VERSION}-strict"
+          for pkg in dist/ng dist/prisme; do
+            node -e "
+              const fs = require('fs');
+              const path = '$pkg/package.json';
+              const pkg = JSON.parse(fs.readFileSync(path, 'utf8'));
+              pkg.version = '$STRICT_VERSION';
+              for (const [k, v] of Object.entries(pkg.peerDependencies ?? {})) {
+                if (v === '*') pkg.peerDependencies[k] = k === '@lucca/prisme' ? '$STRICT_VERSION' : '$VERSION';
+              }
+              fs.writeFileSync(path, JSON.stringify(pkg, null, 2) + '\n');
+            "
+          done
+
+      - run: $NPM_STRICT_PUBLISH_COMMAND
+        working-directory: dist/ng
+
+      - run: $NPM_STRICT_PUBLISH_COMMAND
+        working-directory: dist/prisme
