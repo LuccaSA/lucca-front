@@ -10,7 +10,7 @@
 	(click)="toggle(branch(), $event)"
 	(onlyParent)="toggleOne.emit(branch().node)"
 	(onlyChildren)="selectOnlyChildren(branch())"
-	[hasChildren]="!simpleMode() && branch().children?.length > 0"
+	[hasChildren]="!simpleMode() && !!branch().children?.length"
 >
 	@if (branch().children?.length) {
 		<ng-container treeitem>
