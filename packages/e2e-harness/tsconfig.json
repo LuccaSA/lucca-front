@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": ".",
+    "outDir": "../../dist/out-tsc/e2e-harness"
+  },
+  "include": ["./src/**/*.ts", "./tests/**/*.ts"]
+}

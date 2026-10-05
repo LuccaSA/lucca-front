@@ -1,0 +1,50 @@
+{
+  "name": "@lucca-front/e2e-harness",
+  "version": "0.0.0",
+  "description": "Playwright harnesses for Lucca Front components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git",
+    "directory": "packages/e2e-harness"
+  },
+  "license": "MIT",
+  "public": true,
+  "keywords": [
+    "lucca",
+    "playwright",
+    "e2e",
+    "harness"
+  ],
+  "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
+  "bugs": {
+    "url": "https://github.com/LuccaSA/lucca-front/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "peerDependencies": {
+    "@playwright/test": ">=1.49.0"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      }
+    },
+    "./simple-select": {
+      "import": {
+        "types": "./esm/simple-select/index.d.ts",
+        "default": "./esm/simple-select/index.js"
+      },
+      "require": {
+        "types": "./cjs/simple-select/index.d.ts",
+        "default": "./cjs/simple-select/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  }
+}
