@@ -1,10 +1,10 @@
-import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { cleanupTemplate, generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
+import { luMultilanguageInputTranslations, MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { useState } from 'storybook/preview-api';
@@ -112,6 +112,7 @@ export default {
 			description: '[v21.3] Locale à utiliser comme valeur affichée dans le champ en version collapsed lorsque `hasNoInvariant` est active.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luMultilanguageInputTranslations, 'LuMultilanguageInputTranslations'),
 	},
 } as Meta;
 

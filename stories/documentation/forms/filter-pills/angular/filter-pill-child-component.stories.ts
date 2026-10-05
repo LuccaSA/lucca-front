@@ -3,13 +3,14 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { FilterPillComponent, luFilterPillsTranslations } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiDisplayerDirective, LuMultiSelectCounterDisplayerComponent, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { intlArgType } from '@/helpers/stories';
 
 @Component({
 	selector: 'demo-child-component',
@@ -39,6 +40,9 @@ class MyChildComponent {
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterPills/Child Select',
+	argTypes: {
+		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [

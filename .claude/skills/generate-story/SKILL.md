@@ -7,7 +7,13 @@ description: 'Génère une story de documentation Angular (stories/documentation
 
 Génère une **story de documentation Angular** dans `stories/documentation/<catégorie>/<composant>/angular/<variante>.stories.ts`.
 
-Hors périmètre : les tables QA (`stories/qa/`) → skill `generate-story-qa` ; les tests d'interaction `play` → skill `generate-e2e-test` ; les variantes `html&css/` (classes CSS pures, sans argTypes).
+## Périmètre
+
+- Le skill n'écrit **que** dans `stories/documentation/`.
+- Hors périmètre :
+  - les tables QA (`stories/qa/`) → skill `generate-story-qa` ;
+  - les tests d'interaction → skill `generate-e2e-test`. Ils vivent dans `stories/e2e/` et réutilisent les stories de documentation. Ne jamais ajouter de `play`, de `createTestStory` ni d'export `*TEST` dans un fichier de documentation ;
+  - les variantes `html&css/` (classes CSS pures, sans argTypes).
 
 ## 1. Cadrer la demande
 

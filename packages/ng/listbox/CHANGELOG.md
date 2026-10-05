@@ -1,3 +1,9 @@
+### 22.0.0
+
+#### Fixed
+
+- Indentation of tree options beyond level 2.
+
 ### 21.3.0
 
 #### Added

@@ -1,3 +1,19 @@
+### 22.0.1
+
+#### Fixed
+
+- `lu-tag` now renders as `inline-flex` instead of `display: contents`, so a tooltip can be anchored on it.
+
+### 22.0.0
+
+#### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+#### Fixed
+
+- Vertical alignment of the tag content.
+
 ### 20.3.0
 
 #### Added

@@ -1,3 +1,9 @@
+### 22.0.0
+
+#### Fixed
+
+- `align` values inherited from the parent are now applied in Chrome.
+
 ### 21.3.0
 
 #### Added

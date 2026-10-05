@@ -1,6 +1,6 @@
-import { setStoryOptions } from '@/helpers/stories';
+import { intlArgType, setStoryOptions } from '@/helpers/stories';
 import { LOCALE_ID } from '@angular/core';
-import { FORM_LABEL_SIZE, FormLabelComponent } from '@lucca-front/ng/form-label';
+import { FORM_LABEL_SIZE, FormLabelComponent, luFormLabelTranslations } from '@lucca-front/ng/form-label';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface FormLabelBasicStory {
@@ -83,6 +83,7 @@ export default {
 			description: 'Applique l’état d’erreur au label.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luFormLabelTranslations, 'LuFormLabelTranslations'),
 	},
 } as Meta;
 

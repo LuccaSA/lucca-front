@@ -1,3 +1,9 @@
+### 21.3.0
+
+#### Fixed
+
+- Group is now exposed as a `radiogroup` to assistive technologies.
+
 ### 21.1.0
 
 #### Added

@@ -1,3 +1,20 @@
+### 22.0.0
+
+#### Fixed
+
+- Success checkmark is now centered on the `S` and `XS` sizes.
+- Icon of a loading button is no longer visible through the loader.
+
+### 21.3.1
+
+#### Added
+
+- `disabled` input.
+
+#### Changed
+
+- A button in the `loading` state is now disabled automatically.
+
 ### 21.2.0
 
 #### Added

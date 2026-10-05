@@ -1,3 +1,9 @@
+### 22.0.0
+
+#### Changed
+
+- A segmented control nested in a `lu-filter-bar` now adapts its style to the filter bar.
+
 ### 21.3.0
 
 #### Added

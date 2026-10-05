@@ -1,6 +1,6 @@
-import { BoxComponent } from '@lucca-front/ng/box';
+import { BoxComponent, luBoxTranslations } from '@lucca-front/ng/box';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, generateInputs } from '@/helpers/stories';
+import { cleanupTemplate, generateInputs, intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Box/Angular/Basic',
@@ -21,6 +21,7 @@ export default {
 			table: { category: 'outputs', type: { summary: 'void' } },
 			control: false,
 		},
+		intl: intlArgType(luBoxTranslations, 'LuBoxLabel'),
 	},
 	decorators: [
 		moduleMetadata({

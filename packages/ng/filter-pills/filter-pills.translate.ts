@@ -10,6 +10,7 @@ export interface LuFilterPillsLabel {
 	clear: string;
 	placeholder: string;
 	additionalFilters: string;
+	autoApplyAnnouncement: string;
 	selectView: string;
 	viewOptions: string;
 	renameView: string;

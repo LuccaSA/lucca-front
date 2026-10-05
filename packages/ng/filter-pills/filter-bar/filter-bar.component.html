@@ -1,3 +1,6 @@
+@if (!manualApply()) {
+	<span class="pr-u-mask" [attr.id]="autoApplyAnnouncementId">{{ intl().autoApplyAnnouncement }}</span>
+}
 <lu-scroll-box class="filterBar-scrollBox">
 	<div class="filterBar-scrollBox-group">
 		@if (addonBefore()) {

@@ -1,3 +1,35 @@
+### 22.0.4
+
+#### Fixed
+
+- No option is highlighted any more when the control has no value.
+
+### 22.0.1
+
+#### Fixed
+
+- Selects stay non-searchable when no `clueChange` binding is provided.
+
+### 22.0.0
+
+#### Added
+
+- `dataSource` input accepting a `SelectDataSource` (`getOptions`, `getTotalCount`, `getGroupOptions`, `reset`, `paramsChange`, `clueDebounceMs`) to feed the options, next to the existing `options` input.
+
+#### Changed
+
+- Panel is now built on the `listbox` component and its shared panel layout.
+
+#### Removed
+
+- `previousPage` output — pagination is now driven by the data source.
+
+#### Fixed
+
+- Clear button is now displayed in filter pill mode.
+- A failing "me" lookup no longer keeps a user select loading forever.
+- Loader is no longer started again when a filter pill is reopened.
+
 ### 21.3.1
 
 #### Added

@@ -18,6 +18,8 @@ export * from './text-input/text-input.component';
 export * from './textarea-input/textarea-input.component';
 
 export * from './number-input/number-input.translate';
+export * from './multilanguage-input/multilanguage-input.translate';
+export * from './number-format-input/number-format-input.translate';
 export * from './text-input/text-input.translate';
 
 export * from './fieldset/fieldset.component';
@@ -25,3 +27,4 @@ export * from './fieldset/fieldset.type';
 
 export * from './color-input/color';
 export * from './color-input/color-input.component';
+export * from './color-input/color.translate';

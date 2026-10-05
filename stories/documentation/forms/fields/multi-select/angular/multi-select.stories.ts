@@ -2,15 +2,14 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuOptionDirective } from '@lucca-front/ng/core-select';
+import { luCoreSelectTranslations, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuMultiSelectInputComponent, luMultiSelectTranslations } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
+
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { createTestStory, generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
-import { waitForAngular } from '../../../../../helpers/test';
+import { generateInputs, InputAlias, intlArgType, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
@@ -98,6 +97,7 @@ export default {
 			control: false,
 			table: { category: 'outputs', type: { summary: 'void' } },
 		},
+		intl: intlArgType([luCoreSelectTranslations, luMultiSelectTranslations], 'ILuMultiSelectLabel & LuCoreSelectLabel'),
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
 		optionComparer: HiddenArgType,
@@ -149,50 +149,3 @@ export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & F
 		presentation: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const combobox = canvas.getByRole('combobox');
-		await expect(combobox).toBeVisible();
-		await expect(combobox).toHaveAttribute('aria-expanded', 'false');
-	});
-
-	await step('Interaction souris - ouvrir la liste', async () => {
-		const combobox = canvas.getByRole('combobox');
-		await userEvent.click(combobox);
-		await waitForAngular();
-		await expect(combobox).toHaveAttribute('aria-expanded', 'true');
-		const listbox = screen.getByRole('listbox');
-		await expect(listbox).toBeVisible();
-	});
-
-	await step('Interaction souris - sélectionner une option', async () => {
-		const options = screen.getAllByRole('option');
-		await userEvent.click(options[0]);
-		await waitForAngular();
-	});
-
-	await step('Interaction clavier - fermer avec Escape', async () => {
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		const combobox = canvas.getByRole('combobox');
-		await expect(combobox).toHaveAttribute('aria-expanded', 'false');
-	});
-
-	await step('Interaction clavier - ouvrir et naviguer', async () => {
-		const combobox = canvas.getByRole('combobox');
-		combobox.focus();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await expect(screen.getByRole('listbox')).toBeVisible();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-	});
-});

@@ -20,8 +20,8 @@ popover, user-popover). Solid coverage here de-risks all of them.
 1. Read both directives' sources to enumerate: trigger modes (click? hover? focus?),
    open/close delays, disabled input, position inputs, and any outputs.
 2. Read existing specs (`packages/ng/popover2/**/*.spec.ts`,
-   `packages/ng/tooltip/**/*.spec.ts`) and stories with play functions
-   (`stories/documentation/overlays/`).
+   `packages/ng/tooltip/**/*.spec.ts`) and the play functions in
+   `stories/e2e/popover2/` and `stories/e2e/tooltip/`.
 3. jsdom rule of thumb: open/close state and ARIA wiring are Jest-testable; positioning
    and hover with delays are Storybook material. Hover in jsdom via `userEvent.hover`
    works for simple cases — use `fakeAsync`/`tick` for delay logic.

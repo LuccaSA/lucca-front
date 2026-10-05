@@ -13,7 +13,8 @@ one defines the scope. Follow both exactly.
   setup: `setup-jest.ts` (already loads `@testing-library/jest-dom`, `jest-axe`, and
   polyfills for ResizeObserver/IntersectionObserver/MutationObserver).
 - Interaction tests in a real browser: **Storybook play functions** run by
-  `@storybook/test-runner` (Playwright). Stories live in `stories/documentation/**`.
+  `@storybook/test-runner` (Playwright). Test stories live in `stories/e2e/<component>/` and
+  wrap the documentation stories of `stories/documentation/**` (never duplicate them).
 - Path alias in tests: `@lucca-front/ng/<entry>` resolves to that entry point's public API.
 
 ## Choosing the test layer
@@ -22,10 +23,10 @@ Write a **Jest spec** (`packages/ng/<entry>/**/*.spec.ts`) when the behavior is 
 in jsdom: form value changes, outputs emitted, ARIA attribute changes, DOM content changes,
 keydown handling, focus moves within the component's own template.
 
-Write a **Storybook play-function story** (`stories/documentation/**`) when the behavior
+Write a **Storybook play-function story** (`stories/e2e/**`) when the behavior
 needs a real browser: overlay positioning, focus trapping across an overlay boundary,
 hover-triggered behavior, scrolling, anything where jsdom's lack of layout would make the
-test lie. The repo already has 141 play-function stories — always look at neighbors first.
+test lie. The repo already has more than 100 play-function stories in `stories/e2e/` — always look at neighbors first.
 
 If a behavior works in both layers, prefer Jest (faster, runs in `ci-test`).
 
@@ -81,8 +82,15 @@ Rules for Jest specs:
 ## Storybook play-function pattern (copy this style)
 
 Reference examples to read before writing anything:
-`stories/documentation/forms/select/simple-select.stories.ts` and
-`stories/helpers/stories.ts` / `stories/helpers/test.ts`.
+`stories/e2e/_sample/basic.stories.ts`, `stories/e2e/simple-select/simple-select.stories.ts` and
+`stories/helpers/stories.ts` / `stories/helpers/test.ts`. The full convention is in the
+`generate-e2e-test` skill (`.claude/skills/generate-e2e-test/SKILL.md`).
+
+- Test stories go in `stories/e2e/<component>/`, **never** in `stories/documentation/` or
+  `stories/qa/`. The e2e file imports the meta and stories of the documentation file
+  (`import meta, { Basic } from '@/stories/…'`) and re-exports the meta with an `E2E/…` title
+  and the `!autodocs` tag. If the story to test does not exist in the documentation, add it
+  there first rather than defining it in the e2e file.
 
 - Create test variants with `createTestStory(existingStory, playFn)` from
   `stories/helpers/stories.ts` — it clones a story, appends " TEST" to its name, and
@@ -122,7 +130,7 @@ programmatic `writeValue`.
 - No testing of private members, internal signals, or implementation details. Assert only:
   FormControl values, emitted outputs, DOM/ARIA state, focus location, rendered text.
 - No duplicating existing coverage. **Before writing, list the existing `*.spec.ts` files
-  in the entry point and any existing `play` functions in its stories, read them, and only
+  in the entry point and any existing `play` functions in `stories/e2e/<component>/`, read them, and only
   add what's missing.** Extending an existing spec file is preferred over creating a
   parallel one.
 - Every test must fail if the behavior it describes breaks. If you cannot articulate the

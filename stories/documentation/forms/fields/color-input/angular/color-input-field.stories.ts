@@ -4,12 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { ColorInputComponent } from '@lucca-front/ng/forms';
+import { ColorInputComponent, luColorTranslations } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
-import { createTestStory, generateInputs, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
-import { waitForAngular } from '../../../../../helpers/test';
+
+import { generateInputs, intlArgType, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Color Picker/Angular',
@@ -73,6 +72,7 @@ export default {
 			description: 'Modifie la taille du color picker pour le rendre plus petit.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luColorTranslations, 'LuColorLabel'),
 	},
 } as Meta;
 
@@ -113,39 +113,3 @@ export const Basic: StoryObj<ColorInputComponent & FormFieldComponent & { requir
 		compact: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const trigger = canvas.getByRole('combobox');
-		await expect(trigger).toBeVisible();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-	});
-
-	await step('Interaction souris - ouvrir la palette', async () => {
-		const trigger = canvas.getByRole('combobox');
-		await userEvent.click(trigger);
-		await waitForAngular();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'true');
-		await expect(screen.getByRole('listbox')).toBeVisible();
-	});
-
-	await step('Interaction clavier - fermer avec Escape', async () => {
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		const trigger = canvas.getByRole('combobox');
-		await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-	});
-
-	await step('Interaction clavier - ouvrir avec ArrowDown', async () => {
-		const trigger = canvas.getByRole('combobox');
-		trigger.focus();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'true');
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-	});
-});

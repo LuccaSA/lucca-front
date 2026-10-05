@@ -1,9 +1,17 @@
 ---
 name: generate-story-qa
-description: 'Génère une story QA à partir de guidelines et du contrat d’interface d’un composant.'
+description: 'Génère une story QA (stories/qa/) à partir de guidelines et du contrat d’interface d’un composant.'
 ---
 
 Chaque composant possède une story QA qui liste les cas d’usage permettant de tester ses différentes options. Ces stories sont situées dans `stories/qa/<composant>/` et suivent un format strict pour être facilement maintenues et utilisées par les équipes de développement et de QA.
+
+## Périmètre
+
+- Le skill n'écrit **que** dans `stories/qa/<composant>/`.
+- Hors périmètre :
+  - les stories de documentation (`stories/documentation/`) → skill `generate-story` ;
+  - les tests d'interaction → skill `generate-e2e-test` (dans `stories/e2e/`). Pas de `play`, de `createTestStory` ni d'export `*TEST` dans une story QA.
+
 ## Processus de génération
 
 ### 1. Analyser le contrat d'interface du composant

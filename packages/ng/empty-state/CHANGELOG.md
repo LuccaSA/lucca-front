@@ -1,3 +1,13 @@
+### 22.0.0
+
+#### Changed
+
+- `topRightBackground`, `topRightForeground`, `bottomLeftBackground` and `bottomLeftForeground` inputs now accept `null` and no longer apply their default illustration when the empty state is nested in a `lu-main-layout` that already displays an illustration in the same corner.
+
+#### Removed
+
+- `grey` and `primary` values of the `palette` input on `lu-empty-state-section` — use `neutral` and `product` instead.
+
 ### 21.3.0
 
 #### Added

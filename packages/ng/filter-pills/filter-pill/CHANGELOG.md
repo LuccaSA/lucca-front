@@ -1,3 +1,16 @@
+### 22.0.0
+
+#### Changed
+
+- Pill popover no longer opens with a blocking backdrop: the rest of the page stays interactive while it is open.
+
+### 21.4.1
+
+#### Fixed
+
+- Non-breaking space before the colon is now applied to every French locale (`fr-BE`, `fr-CA`…), not only `fr`.
+- Margins of a clearable pill.
+
 ### 21.3.0
 
 #### Fixed
