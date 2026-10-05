@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, Injector, signal } from '@angular/core';
+import { afterNextRender, AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, Injector, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { isNotNil, PortalDirective } from '@lucca-front/ng/core';
@@ -12,11 +12,14 @@ import {
 	SELECT_PANEL_INSTANCE,
 	TreeDisplayPipe,
 	ɵCoreSelectPanelElement,
+	ɵfillScrollViewport,
 	ɵgetGroupTemplateLocation,
 	ɵinjectPointerNavigation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
+import { DialogComponent, DialogContentComponent, DialogHeaderComponent } from '@lucca-front/ng/dialog';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { ListboxComponent, ListboxState, OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY, firstValueFrom } from 'rxjs';
@@ -37,6 +40,9 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	},
 	imports: [
 		LuSelectPanelLayoutComponent,
+		DialogComponent,
+		DialogHeaderComponent,
+		DialogContentComponent,
 		FormsModule,
 		LuIsOptionSelectedPipe,
 		ɵLuOptionComponent,
@@ -47,6 +53,7 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 		ɵCoreSelectPanelElement,
 		ListboxComponent,
 		ListboxOptionComponent,
+		IconComponent,
 		TreeDisplayPipe,
 		TreeBranchComponent,
 	],
@@ -109,6 +116,21 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		}
 		return this.clue().length ? this.intl().emptyResults : this.intl().emptyOptions;
 	});
+
+	private readonly sheetViewport = viewChild<unknown, ElementRef<HTMLElement>>('sheetViewport', { read: ElementRef });
+
+	constructor() {
+		// Only the sheet needs the viewport filled by hand: it is sized to its own content, so a first
+		// page that doesn't reach its maximum height leaves nothing to scroll and `onScroll` — the only
+		// thing that asks for the next page — never fires. The popover panel caps its content at 20rem,
+		// which a page of options always overflows, so there it already works on its own.
+		ɵfillScrollViewport({
+			viewport: computed(() => this.sheetViewport()?.nativeElement),
+			optionCount: computed(() => this.dataSourceOptions().length),
+			loading: this.loading,
+			nextPage: () => this.panelRef.nextPage.emit(),
+		});
+	}
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

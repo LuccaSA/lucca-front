@@ -1,4 +1,4 @@
-import { computed, Directive, effect, ElementRef, inject, input, OnInit, Renderer2 } from '@angular/core';
+import { computed, Directive, effect, ElementRef, inject, input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 
@@ -17,7 +17,7 @@ function mergeIds(...lists: string[][]): string {
 		class: 'luNativeInput',
 	},
 })
-export class InputDirective implements OnInit {
+export class InputDirective implements OnInit, OnDestroy {
 	public readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	public readonly formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
@@ -58,6 +58,10 @@ export class InputDirective implements OnInit {
 		if (this.formFieldRef) {
 			this.formFieldRef.addInput(this);
 		}
+	}
+
+	ngOnDestroy(): void {
+		this.formFieldRef?.removeInput(this);
 	}
 
 	/**
