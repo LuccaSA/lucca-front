@@ -23,6 +23,7 @@ const config: StorybookConfig = {
 	},
 	logLevel: process.env['CI'] ? 'error' : 'info',
 	staticDirs: ['./public'],
+	// Automatically add 'ui-diff' tag on stories inside '/stories/qa/' directory
 	experimental_indexers: async (indexers) =>
 		indexers.map((indexer) => ({
 			...indexer,
