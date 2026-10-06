@@ -1,4 +1,5 @@
 const autoprefixer = require('autoprefixer');
+const { execFileSync } = require('child_process');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
@@ -11,12 +12,14 @@ const ROOT = __dirname;
 const ICONS = path.join(ROOT, 'packages', 'icons');
 const SCSS = path.join(ROOT, 'packages', 'scss');
 const SCHEMATICS = path.join(ROOT, 'packages', 'ng', 'schematics');
+const E2E_HARNESS = path.join(ROOT, 'packages', 'e2e-harness');
 
 const OUTPUT = path.join(ROOT, 'dist');
 const OUTPUT_SCSS = path.join(OUTPUT, 'scss');
 const OUTPUT_ICONS = path.join(OUTPUT, 'icons');
 const OUTPUT_NG = path.join(OUTPUT, 'ng');
 const OUTPUT_SCHEMATICS = path.join(OUTPUT_NG, 'schematics');
+const OUTPUT_E2E_HARNESS = path.join(OUTPUT, 'e2e-harness');
 
 runTask('Lucca Front compilation', async () => {
 	// Clean dist directories
@@ -24,6 +27,7 @@ runTask('Lucca Front compilation', async () => {
 		removeDirectory(OUTPUT_SCSS);
 		removeDirectory(OUTPUT_ICONS);
 		removeDirectory(OUTPUT_SCHEMATICS);
+		removeDirectory(OUTPUT_E2E_HARNESS);
 	});
 
 	/**
@@ -99,6 +103,31 @@ runTask('Lucca Front compilation', async () => {
 		addLineToFile(npmIgnoreFile, '!/schematics/package.json');
 		addLineToFile(npmIgnoreFile, '!/schematics/lib/local-deps/package.json');
 	});
+
+	/**
+	 *   _    _          _____  _   _ ______  _____ _____
+	 *  | |  | |   /\   |  __ \| \ | |  ____|/ ____/ ____|
+	 *  | |__| |  /  \  | |__) |  \| | |__  | (___| (___
+	 *  |  __  | / /\ \ |  _  /| . ' |  __|  \___ \___ \
+	 *  | |  | |/ ____ \| | \ \| |\  | |____ ____) |___) |
+	 *  |_|  |_/_/    \_\_|  \_\_| \_|______|_____/_____/
+	 */
+	await runTask('@lucca-front/e2e-harness compilation', () => {
+		// Published for both module systems: a product's Playwright setup can be either.
+		compileWithTsconfig(path.join(E2E_HARNESS, 'tsconfig.lib.json'));
+		compileWithTsconfig(path.join(E2E_HARNESS, 'tsconfig.lib.cjs.json'));
+	});
+	await runTask('@lucca-front/e2e-harness copy', () => {
+		copyFiles({
+			patterns: ['package.json', 'README.md'],
+			context: E2E_HARNESS,
+			output: OUTPUT_E2E_HARNESS,
+		});
+
+		// The package is ESM ("type": "module"), so the CommonJS output needs its own override
+		// to stop Node from reading those .js files as ES modules.
+		writeFile(path.join(OUTPUT_E2E_HARNESS, 'cjs', 'package.json'), JSON.stringify({ type: 'commonjs' }, null, '\t'));
+	});
 });
 
 /**
@@ -163,6 +192,16 @@ function copyFiles({ patterns, context, output }) {
 			fs.cpSync(inputFilePath, outputFilePath);
 		}
 	}
+}
+
+/**
+ * Compiles a package from its own tsconfig, so the editor and the build agree on the options.
+ *
+ * @param {string} configPath
+ */
+function compileWithTsconfig(configPath) {
+	const tsc = path.join(ROOT, 'node_modules', 'typescript', 'bin', 'tsc');
+	execFileSync(process.execPath, [tsc, '-p', configPath], { stdio: 'inherit' });
 }
 
 /**
