@@ -2,7 +2,7 @@
   "name": "@lucca-front/ng",
   "version": "0.0.0",
   "description": "Angular components of the Lucca design system Prisme. Storybook: https://lucca-front.lucca.io, design system: https://prisme.lucca.io, LLM documentation: llms.txt in this package.",
-  "homepage": "https://lucca-front.lucca.io",
+  "homepage": "https://prisme.lucca.io",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git",
