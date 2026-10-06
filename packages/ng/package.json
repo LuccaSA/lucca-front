@@ -1,7 +1,8 @@
 {
   "name": "@lucca-front/ng",
   "version": "0.0.0",
-  "description": "A library of icons made by the team @Lucca",
+  "description": "Angular components of the Lucca design system Prisme. Storybook: https://lucca-front.lucca.io, design system: https://prisme.lucca.io, LLM documentation: llms.txt in this package.",
+  "homepage": "https://lucca-front.lucca.io",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git",
@@ -20,7 +21,12 @@
   "public": true,
   "keywords": [
     "lucca",
-    "angular"
+    "angular",
+    "prisme",
+    "design-system",
+    "components",
+    "storybook",
+    "llms-txt"
   ],
   "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
   "peerDependencies": {
