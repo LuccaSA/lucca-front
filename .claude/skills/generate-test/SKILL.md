@@ -9,6 +9,8 @@ Génère un fichier `*.spec.ts` à côté de la cible (composant, directive, ser
 
 Le but est de produire des tests **comportementaux** : privilégier ce que la cible garantit (valeur de retour, effet observable, contrat public). Tester un état ou une méthode « interne » est légitime quand c'est le point testable le plus direct — le repo le fait couramment (ex. `form-field.component.spec.ts` appelle `formField()?.isInputRequired()`, `title.service.spec.ts` s'abonne à `title$`). La vraie limite à ne pas franchir : se coupler à un **détail d'implémentation volatil** (ordre d'appels privés, structure DOM interne non contractuelle, propriété privée) qui casserait le test lors d'un refactor sans changement de comportement.
 
+Exception : une logique privée **complexe** (calcul, parsing, algorithme à nombreuses branches) qu'on veut protéger de la régression peut être testée directement, quand la couvrir via l'API publique demanderait une combinatoire de setup disproportionnée. Accéder au membre via la notation crochet (`component['computeRanges'](…)`, pas possible avec un champ `#private`), justifier le choix dans le `describe` ou un commentaire, et s'en tenir à ses entrées/sorties — pas à ses appels internes. Une logique triviale ou simplement déléguée reste testée par le comportement public.
+
 ---
 
 ## Entrées attendues
@@ -285,7 +287,7 @@ Viser peu de cas ciblés : un cas par comportement à risque, pas un cas par inp
 3. **Cartographier les cas de test** : cas nominal, chaque branche/variante, valeurs par défaut, cas limites (null/vide), transitions d'état, gestion d'erreur. Privilégier peu de tests ciblés et lisibles. Pour un composant ou une directive, rattacher chaque cas à un critère, présenter le plan et **attendre la validation** de l'utilisateur.
 4. **Écrire le `*.spec.ts`** à côté de la cible avec le pattern adapté ; imports depuis les entrypoints publics (`@lucca-front/ng/<name>`) quand on croise un autre entrypoint, jamais en relatif inter-entrypoints.
 5. **Exécuter** `npx vitest run <chemin>` et corriger jusqu'au vert.
-6. **Relire** : chaque test a une intention claire, assertions explicites, aucun test d'implémentation privée, aucune fuite d'état entre tests.
+6. **Relire** : chaque test a une intention claire, assertions explicites, aucun couplage à un détail d'implémentation volatil (une méthode privée n'est testée directement que si elle est complexe et que le choix est justifié), aucune fuite d'état entre tests.
 
 ---
 
