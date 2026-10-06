@@ -1,3 +1,13 @@
+### 22.0.0
+
+#### Added
+
+- `week` mode: the input displays and parses a week as `<weekPrefix><week number>/<year>`, and the selected value is normalized to that week.
+
+#### Fixed
+
+- Calendar overlay is now exposed as a labelled dialog (`aria-haspopup="dialog"`, `aria-expanded` and `aria-controls` on the trigger).
+
 ### 21.2.3
 
 #### Fixed

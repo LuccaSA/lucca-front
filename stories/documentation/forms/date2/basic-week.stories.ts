@@ -1,7 +1,8 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Date2/Calendar',
@@ -13,7 +14,9 @@ export default {
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		intl: intlArgType(luDate2Translations, 'Date2Translate'),
+	},
 	render: (args, { argTypes }) => {
 		return {
 			props: {

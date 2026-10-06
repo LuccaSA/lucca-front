@@ -22,6 +22,9 @@ export class DropdownActionComponent {
 	readonly critical = input(false, { transform: luBooleanAttribute });
 
 	closePanel() {
+		if (this.disabled()) {
+			return;
+		}
 		if (this.#popoverContentRef) {
 			this.#popoverContentRef.close();
 		}

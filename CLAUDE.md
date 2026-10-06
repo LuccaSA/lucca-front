@@ -43,6 +43,7 @@ Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss �
 - Composants standalone, `changeDetection: OnPush` (imposé par ESLint), `ViewEncapsulation.None` (les styles sont du SCSS global), styles SCSS (défauts schematics d'angular.json).
 - Sélecteurs préfixés `lu` (`lu-kebab-case` pour les composants, `luCamelCase` pour les directives attribut).
 - APIs signal-based : `input()` / `input.required()` / `output()`. Chaque input public a un commentaire JSDoc.
+- Un composant qui a un style dédié déclare `styleUrl: './<name>.component.scss'`, et ce fichier commence par `@use '@lucca-front/scss/src/components/<nameCamelCase>';` — c'est ce `@use` qui embarque le CSS du composant. L'oublier livre le composant sans style, sans erreur de build. Un composant dont le template embarque d'autres composants — Angular (`<lu-*>`) ou HTML portant les classes d'un autre composant Prisme — importe aussi leurs styles dans son propre.
 - Host bindings via la métadonnée `host: {}` : classe CSS de base posée directement (`class: 'numericBadge'`), conditionnels via `[class.is-X]` (voir `numeric-badge` pour la forme canonique).
 - Garder les composants design system « dumb » ; les connecter aux APIs Lucca via des directives séparées (ex. `simple-select`/`multi-select` + directives API). L'accessibilité clavier est une priorité.
 - Règles DX de contributing.md : utiliser les transforms `booleanAttribute`/`numberAttribute`, éviter les noms d'inputs génériques (`config`, `param`), typer les inputs avec des unions de strings pour l'autocomplétion, ne jamais entrer en collision avec un input natif de l'hôte. Les contrats d'inputs/outputs publiés sont des breaking changes.
@@ -58,6 +59,7 @@ Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss �
 - Toujours utiliser les tokens/variables (`--pr-t-*`, `--palettes-*`, `--components-<name>-*`), jamais de valeur en dur.
 - Les styles vivent dans des `@layer` (`reset → base → components → mods → product → utils`) ; le SCSS d'un composant suit le découpage de `_sample/` (`index`/`component`/`vars`/`mods`/`states`/`exports`).
 - Tout nouveau composant doit être enregistré dans `packages/scss/src/commons/utils/highlight-prisme.scss`.
+- Le SCSS d'un composant n'est chargé par son composant Angular que via le `@use '@lucca-front/scss/src/components/<name>'` de son `.component.scss` : toujours vérifier ce câblage en créant ou déplaçant un composant.
 
 Référence : [Guidelines dev UI](https://prisme.lucca.io/94310e217/p/929c63-guidelines-dev-ui) (Prisme). Le formatage (tabs, ordre alphabétique, hexadécimaux en majuscules…) est vérifié par `npm run lint:style`.
 
@@ -67,11 +69,12 @@ Chaque entrypoint qui affiche du texte a un `translations.ts` indexé par locale
 
 ## Storybook
 
-`stories/` est découpé en `documentation/` (docs publiques, groupées par thème : forms, overlays, navigation…), `qa/` (pages QA par composant) et `helpers/`. Le lint est fortement assoupli pour `stories/**`. Storybook build avec compodoc pour la doc d'API.
+`stories/` est découpé en `documentation/` (docs publiques, groupées par thème : forms, overlays, navigation…), `qa/` (pages QA par composant), `e2e/` (tests d'interaction `play`) et `helpers/`. Le lint est fortement assoupli pour `stories/**`. Storybook build avec compodoc pour la doc d'API.
 
 - **Stories QA** (`stories/qa/<composant>/`) : un `@Component` wrapper dans `<composant>.stories.ts` avec `templateUrl` pointant vers `<composant>.stories.html`, qui contient une `<table class="demo-QAtable">` comparant côte à côte la version HTML (classes CSS pures) et la version Angular (composants `<lu-*>`). La colonne Angular doit utiliser de vrais composants `lu-*`, jamais du HTML brut avec des classes.
-- **Stories de documentation** (`stories/documentation/<catégorie>/<composant>/`) : `Meta`/`StoryObj` standards sur la classe du composant, titre reflétant l'arborescence (`Documentation/<Catégorie>/<Composant>/Angular/<Variante>`) ; les variantes Angular et HTML vivent dans des dossiers frères `angular/` et `html&css/`. Utiliser `generateInputs(inputs, argTypes)` et `createTestStory` de `stories/helpers/stories`.
+- **Stories de documentation** (`stories/documentation/<catégorie>/<composant>/`) : `Meta`/`StoryObj` standards sur la classe du composant, titre reflétant l'arborescence (`Documentation/<Catégorie>/<Composant>/Angular/<Variante>`) ; les variantes Angular et HTML vivent dans des dossiers frères `angular/` et `html&css/`. Utiliser `generateInputs(inputs, argTypes)` de `stories/helpers/stories`. Aucune story de test (`play`, `*TEST`) dans ce dossier : elles vont dans `stories/e2e/`.
   - **Convention `argTypes`** : chaque arg est rangé dans une `table.category` — `inputs` (`input()`), `outputs` (`output()`), `models` (`model()`). Un output est en plus exposé comme action loggée (`action: '<nom>'`, `control: false`), documente le type émis via `table.type.summary` (`void` si l'`output()` n'a pas de type, sinon `T`) et est bindé dans le template du `render` (`(nom)="nom($event)"`, avec les args passés en `props`). Voir `stories/documentation/_sample/angular/basic.stories.ts`.
+- **Tests e2e** (`stories/e2e/`) : un dossier par composant testé, sans catégorie ni `angular/` (`stories/e2e/<composant>/<fichier-de-doc>.stories.ts`). Titre `E2E/<Composant>` quand le composant n'a qu'un fichier, `E2E/<Composant>/<Variante>` s'il en a plusieurs (`E2E/Button/Basic`, `E2E/Button/Counter`…). Le composant est celui réellement testé : une story « field » de la doc (`forms/fields/text/`) va sous `text-input/`, `E2E/TextInput`. Les stories ne sont pas dupliquées : le fichier importe la méta et les stories du fichier de doc (`import meta, { Basic } from '@/stories/…'`), réexporte `export default { ...meta, title: 'E2E/…', tags: ['!autodocs'] }` et déclare les tests via `createTestStory(Basic, play)` (export suffixé `TEST`). Une variante qui n'existe que pour un test est déclarée (non exportée) dans le fichier e2e. Voir `stories/e2e/_sample/basic.stories.ts` et le skill `generate-e2e-test`.
 
 ## Git & PR
 

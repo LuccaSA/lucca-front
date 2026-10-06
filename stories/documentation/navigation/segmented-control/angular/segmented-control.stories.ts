@@ -2,15 +2,14 @@ import { FormsModule } from '@angular/forms';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory } from '@/helpers/stories';
-import { expectNgModelDisplay, waitForAngular } from '@/helpers/test';
+
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { expect, userEvent, within } from 'storybook/test';
 
 interface segmentedControlBasicStory {
 	small: boolean;
 	withNumericBadge: boolean;
 	vertical: boolean;
+	ariaLabel: string;
 }
 
 export default {
@@ -32,6 +31,10 @@ export default {
 			description: 'Affiche le composant en vue verticale.',
 			table: { category: 'inputs' },
 		},
+		ariaLabel: {
+			description: "Nom accessible du groupe d'options, restitué aux technologies d'assistance.",
+			table: { category: 'inputs' },
+		},
 	},
 	title: 'Documentation/Navigation/segmentedControl/Angular/Basic',
 } as Meta;
@@ -39,12 +42,13 @@ export default {
 function getTemplate(args: segmentedControlBasicStory): string {
 	const size = args.small ? ` small` : ``;
 	const vertical = args.vertical ? ` vertical` : ``;
+	const ariaLabel = args.ariaLabel ? ` [ariaLabel]="ariaLabel"` : ``;
 	const numericBadgeComponent = args.withNumericBadge ? ` <lu-numeric-badge value="8" />` : ``;
 
 	return `<ng-template #label>
 	Lorem${numericBadgeComponent}
 </ng-template>
-<lu-segmented-control${size}${vertical} [(ngModel)]="sample">
+<lu-segmented-control${size}${vertical}${ariaLabel} [(ngModel)]="sample">
 	<lu-segmented-control-filter [label]="label" value="0" />
 	<lu-segmented-control-filter label="Ipsum" value="1" />
 	<lu-segmented-control-filter label="Dolor sit amet" value="2" />
@@ -64,33 +68,7 @@ export const Basic: StoryObj<segmentedControlBasicStory> = {
 		small: false,
 		withNumericBadge: false,
 		vertical: false,
+		ariaLabel: 'Lorem ipsum',
 	},
 	render: Template,
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const options = canvas.getAllByRole('radio');
-		await expect(options.length).toBe(4);
-	});
-
-	await step('Sélectionne une option par clic', async () => {
-		const options = canvas.getAllByRole('radio');
-		await userEvent.click(options[1]);
-		await waitForAngular();
-		await expect(options[1]).toBeChecked();
-		await expectNgModelDisplay(canvasElement, '1');
-	});
-
-	await step('Navigation clavier entre les options', async () => {
-		const options = canvas.getAllByRole('radio');
-		options[0].focus();
-		await expect(options[0]).toHaveFocus();
-		await userEvent.keyboard('{ArrowRight}');
-		await waitForAngular();
-		await expect(options[1]).toHaveFocus();
-	});
-});

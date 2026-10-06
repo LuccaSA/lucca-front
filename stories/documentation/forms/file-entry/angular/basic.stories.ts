@@ -1,6 +1,6 @@
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 import { provideHttpClient } from '@angular/common/http';
-import { FILE_ENTRY_SIZE, FILE_ENTRY_STATE, FileEntryComponent } from '@lucca-front/ng/file-upload';
+import { FILE_ENTRY_SIZE, FILE_ENTRY_STATE, FileEntryComponent, luFileUploadTranslations } from '@lucca-front/ng/file-upload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
 
 export default {
@@ -81,14 +81,6 @@ export default {
 			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
 			table: { category: 'inputs' },
 		},
-		withFileType: {
-			control: 'boolean',
-			table: { category: 'inputs' },
-		},
-		withFileSize: {
-			control: 'boolean',
-			table: { category: 'inputs' },
-		},
 		deleteFile: {
 			description: 'Événement déclenché lors du clic sur le bouton de suppression du fichier.',
 			action: 'deleteFile',
@@ -101,6 +93,7 @@ export default {
 			control: false,
 			table: { category: 'outputs', type: { summary: 'string' } },
 		},
+		intl: intlArgType(luFileUploadTranslations, 'LuFileUploadLabel'),
 	},
 	decorators: [
 		moduleMetadata({
@@ -133,9 +126,7 @@ export const Basic = {
 		media: false,
 		displayFileName: false,
 		fileSize: 28420,
-		withFileSize: true,
 		fileType: 'image/png',
-		withFileType: true,
 		fileName: 'dummyimage.png',
 		previewUrl: 'https://dummyimage.com/500',
 		iconOverride: '',

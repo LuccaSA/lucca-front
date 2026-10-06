@@ -159,36 +159,9 @@ In order to work on Lucca Front, we use Storybook to display components.
 
 ## Translations
 
-### How it works
+Translations are hosted by Lokalise and imported with `npm run i18n:update`. Components accept partial overrides through their `[intl]` input.
 
-Translations are hosted by Lokalise on `Lucca.Front` project and must be imported by launching the command at project root: `npm run i18n:update`.
-[Full translations documentation](https://www.notion.so/Lucca-Front-Traductions-Lokalise-173d278ab26e801b8462f90e1a93dd50)
-
-### Overrides
-
-Many Lucca Front components support translation overrides through the `[intl]` input. This allows you to customize specific translations without modifying the default translation files.
-
-Components use the `intlInputOptions()` function to create an `intl` input that:
-1. Automatically loads translations based on the current locale (`LOCALE_ID`)
-2. Accepts an object with partial translations to override specific keys
-3. Merges your custom translations with the default ones
-
-#### Example with Pagination Component
-
-**Override multiple keys**:
-```html
-<lu-pagination 
-  [from]="0" 
-  [to]="10" 
-  [itemsCount]="100" 
-  [intl]="{
-    results: 'Page {{from}}-{{to}} / {{itemsCount}}',
-    previous: 'Prev',
-    next: 'Next',
-    results: 'Showing {{from}} to {{to}} of {{itemsCount}} items'
-  }" 
-/>
-```
+See [docs/translations.md](docs/translations.md).
 
 ## Compatibility Table
 

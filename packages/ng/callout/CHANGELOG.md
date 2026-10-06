@@ -1,3 +1,14 @@
+### 22.0.0
+
+#### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+#### Fixed
+
+- `mod-S` — actions placed in the description no longer add extra vertical spacing.
+- Outlined and ghost buttons in the actions now show a focus ring when focused with the keyboard.
+
 ### 21.3.0
 
 #### Added

@@ -1,3 +1,15 @@
+### 22.0.0
+
+#### Fixed
+
+- Nil titles are no longer passed to the translate service.
+
+### 21.4.1
+
+#### Added
+
+- `appTitle` of `provideLuTitleStrategy` now also accepts a `Signal<string>`.
+
 ### 21.3.1
 
 #### Fixed

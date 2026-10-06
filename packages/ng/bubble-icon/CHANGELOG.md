@@ -1,3 +1,13 @@
+### 22.0.0
+
+#### Added
+
+- `palette` input now accepts the product palettes (`pagga`, `poplee`, `coreHR`, `timmi`, `cleemy`, `cc`), in addition to the existing ones.
+
+#### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
 ### 21.3.0
 
 #### Added

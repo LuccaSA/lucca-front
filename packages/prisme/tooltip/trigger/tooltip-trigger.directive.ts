@@ -49,12 +49,6 @@ let nextId = 0;
 	host: {
 		'[attr.aria-describedby]': 'ariaDescribedBy()',
 		'[attr.id]': 'id()',
-		'(mouseenter)': 'onMouseEnter()',
-		'(mouseleave)': 'onMouseLeave()',
-		'(focus)': 'onFocus()',
-		'(focusout)': 'onFocusOut($event)',
-		'(blur)': 'onBlur()',
-		'(keydown.escape)': 'onEscape($event)',
 		class: 'tooltip_trigger',
 		'[class.is-whenEllipsis]': 'luTooltipWhenEllipsis()',
 	},
@@ -105,6 +99,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(this.#host);
 	readonly tooltipAnchor = computed(() => this.luTooltipAnchor() || this.prTooltipAnchor());
 
+	readonly luTooltipTriggerAnchor = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
+	readonly prTooltipTriggerAnchor = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
+	readonly tooltipTriggerAnchor = computed(() => this.luTooltipTriggerAnchor() || this.prTooltipTriggerAnchor());
+
 	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
 	readonly ariaDescribedBy = computed(() => {
@@ -133,6 +131,15 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	// reusable hidden clone, one per directive, used to measure the unconstrained width
 	#clone?: HTMLDivElement;
+
+	// Each measurement phase hands over to the next one through these signals rather than through
+	// the value `afterRenderEffect` pipes between phases. A phase only receives that value when the
+	// phases before it ran in the same pass; a directive created while the after-render hooks are
+	// running starts mid-pipeline and gets Angular's `registerCleanupFn` as its first argument
+	// instead. Calling it then registers `undefined` as a cleanup function, which throws
+	// `fn is not a function` when the view is destroyed, far away from the cause.
+	readonly #measurementRequest = signal<{ host: HTMLElement; cloneStyles: Record<string, string> } | null>(null);
+	readonly #preparedMeasurement = signal<{ host: HTMLElement; clone: HTMLDivElement } | null>(null);
 
 	readonly #action = signal<'open' | 'close' | null>(null);
 	readonly #realAction = linkedSignal<'open' | 'close' | null, 'open' | 'close' | null>({
@@ -188,6 +195,24 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			}
 		});
 
+		effect((onCleanup) => {
+			const trigger = this.#resolveTriggerAnchorElement() ?? this.#host.nativeElement;
+
+			const unlisten = [
+				this.#renderer.listen(trigger, 'mouseenter', () => this.onMouseEnter()),
+				this.#renderer.listen(trigger, 'mouseleave', () => this.onMouseLeave()),
+				this.#renderer.listen(trigger, 'focus', () => this.onFocus()),
+				this.#renderer.listen(trigger, 'blur', () => this.onBlur()),
+				this.#renderer.listen(trigger, 'focusout', (event: FocusEvent) => this.onFocusOut(event)),
+				this.#renderer.listen(trigger, 'keydown', (event: KeyboardEvent) => {
+					if (event.key === 'Escape') {
+						this.onEscape(event);
+					}
+				}),
+			];
+			onCleanup(() => unlisten.forEach((fn) => fn()));
+		});
+
 		// Defer the first measurement until the element is near the viewport, then stop tracking
 		// visibility: scrolling must not re-measure, so we arm the resize/mutation observers once.
 		// A single shared IntersectionObserver handles every tooltip (see TooltipVisibilityObserver).
@@ -207,35 +232,27 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		// This keeps the whole batch to a single forced reflow instead of one reflow per element.
 		afterRenderEffect({
 			earlyRead: () => {
-				// reading the trigger registers the dependency; 0 means "not measured yet"
-				const measured = this.#measureTrigger() > 0;
-				const shouldMeasure = measured && !this.tooltipDisabled() && this.tooltipWhenEllipsis();
-				if (!shouldMeasure) {
-					return { measure: false } as const;
-				}
-				const host = this.#host.nativeElement;
-				const hostStyle = getComputedStyle(host);
-				// No need to run a test if the element is not truncated
-				// or if its `display` property is set to `inline`
-				// (especially for Safari, which still calculates a width, unlike other browsers)
-				if (hostStyle.textOverflow !== 'ellipsis' || hostStyle.display === 'inline') {
-					return { measure: false } as const;
-				}
-				return { measure: true, host, hostStyle } as const;
+				this.#measurementRequest.set(this.#readMeasurementRequest());
 			},
-			write: (earlyReadResult) => {
-				const snapshot = earlyReadResult();
-				if (!snapshot.measure) {
-					return { measure: false } as const;
+			write: () => {
+				const request = this.#measurementRequest();
+				if (!request) {
+					this.#preparedMeasurement.set(null);
+					return;
 				}
 				const clone = (this.#clone ??= this.#createClone());
-				this.#applyClonedStyles(clone, snapshot.hostStyle);
-				clone.innerHTML = snapshot.host.innerHTML;
-				return { measure: true, host: snapshot.host, clone } as const;
+				Object.assign(clone.style, request.cloneStyles);
+				const html = request.host.innerHTML;
+				// Writing the same markup back would invalidate layout for nothing, and every tooltip
+				// measured after this one would then pay for a new layout on its first geometry read.
+				if (clone.innerHTML !== html) {
+					clone.innerHTML = html;
+				}
+				this.#preparedMeasurement.set({ host: request.host, clone });
 			},
-			read: (writeResult) => {
-				const measurement = writeResult();
-				if (!measurement.measure) {
+			read: () => {
+				const measurement = this.#preparedMeasurement();
+				if (!measurement) {
 					this.#hasEllipsis.set(false);
 					return;
 				}
@@ -264,6 +281,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		const el = this.#host.nativeElement;
 		const bump = () => this.#measureTrigger.update((v) => v + 1);
 
+		// `observe` always delivers an initial notification, which doubles as the first measurement:
+		// asking for one here as well would measure every tooltip on the page twice.
 		const resizeObserver = new ResizeObserver(() => bump());
 		resizeObserver.observe(el);
 
@@ -274,9 +293,27 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			resizeObserver.disconnect();
 			mutationObserver.disconnect();
 		});
+	}
 
-		// initial measurement now that the element has appeared
-		bump();
+	// Reads everything the measurement needs from the host, in the read-only phase.
+	#readMeasurementRequest(): { host: HTMLElement; cloneStyles: Record<string, string> } | null {
+		// reading the trigger registers the dependency; 0 means "not measured yet"
+		const measured = this.#measureTrigger() > 0;
+		if (!measured || this.tooltipDisabled() || !this.tooltipWhenEllipsis()) {
+			return null;
+		}
+		const host = this.#host.nativeElement;
+		// A `CSSStyleDeclaration` is live: reading one property from it in the write phase, after
+		// another tooltip has already mutated the DOM, forces a full style recalculation — once per
+		// tooltip on the page. Every value is therefore copied out here.
+		const { textOverflow, display, padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } = getComputedStyle(host);
+		// No need to run a test if the element is not truncated
+		// or if its `display` property is set to `inline`
+		// (especially for Safari, which still calculates a width, unlike other browsers)
+		if (textOverflow !== 'ellipsis' || display === 'inline') {
+			return null;
+		}
+		return { host, cloneStyles: { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } };
 	}
 
 	#createClone(): HTMLDivElement {
@@ -296,11 +333,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		});
 		this.#document.body.appendChild(clone);
 		return clone;
-	}
-
-	#applyClonedStyles(clone: HTMLDivElement, hostStyle: CSSStyleDeclaration): void {
-		const { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize } = hostStyle;
-		Object.assign(clone.style, { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle, fontSize });
 	}
 
 	onMouseEnter() {
@@ -368,18 +400,35 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		}
 	}
 
-	private prepareOverlay(): void {
+	private prepareOverlay(): OverlayRef {
 		if (this.overlayRef) {
-			return;
+			return this.overlayRef;
 		}
-		this.overlayRef = this.#overlay.create({
+		const overlayRef = this.#overlay.create({
 			scrollStrategy: this.#overlay.scrollStrategies.close(),
 			disposeOnNavigation: true,
 		});
+		// `disposeOnNavigation` disposes the overlay on a history navigation (browser back/forward)
+		// while this directive may live on: forget it then, so the next opening creates a new one
+		// instead of attaching to a disposed overlay (`attach()` returns null).
+		overlayRef
+			.detachments()
+			.pipe(takeUntilDestroyed(this.#destroyRef))
+			.subscribe({
+				complete: () => {
+					if (this.overlayRef === overlayRef) {
+						delete this.overlayRef;
+						// the content effect writes to the disposed panel: a reopening would overwrite it without destroying it
+						this.#effectRef?.destroy();
+					}
+				},
+			});
 		const describedBy = this.ariaDescribedBy();
 		if (describedBy !== null) {
-			this.overlayRef.overlayElement.id = describedBy;
+			overlayRef.overlayElement.id = describedBy;
 		}
+		this.overlayRef = overlayRef;
+		return overlayRef;
 	}
 
 	private attachTooltip(): void {
@@ -391,17 +440,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			return;
 		}
 		const position = this.legacyPositionBuilder();
-		if (!this.overlayRef) {
-			this.overlayRef = this.#overlay.create({
-				positionStrategy: position,
-				scrollStrategy: this.#overlay.scrollStrategies.close(),
-				disposeOnNavigation: true,
-			});
-		} else {
-			this.overlayRef.updatePositionStrategy(position);
-		}
+		const overlayRef = this.prepareOverlay();
+		overlayRef.updatePositionStrategy(position);
 		const portal = new ComponentPortal(LuTooltipPanelComponent);
-		const ref = this.overlayRef.attach(portal);
+		const ref = overlayRef.attach(portal);
 		ref.instance.enterDelay.set(this.tooltipEnterDelay());
 		position.positionChanges
 			.pipe(
@@ -439,6 +481,10 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
+		if (this.#resolveTriggerAnchorElement()) {
+			return;
+		}
+
 		if (tabindex === null) {
 			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
 			return;
@@ -543,6 +589,20 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			return anchor.getElementRef();
 		} else {
 			return anchor;
+		}
+	}
+
+	#resolveTriggerAnchorElement(): HTMLElement | null {
+		const triggerAnchor = this.tooltipTriggerAnchor();
+
+		if (isNil(triggerAnchor)) {
+			return null;
+		} else if (triggerAnchor instanceof HTMLElement) {
+			return triggerAnchor;
+		} else if ('getElementRef' in triggerAnchor) {
+			return triggerAnchor.getElementRef().nativeElement as HTMLElement;
+		} else {
+			return triggerAnchor.nativeElement;
 		}
 	}
 

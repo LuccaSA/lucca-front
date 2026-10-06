@@ -33,7 +33,7 @@
 							(click)="toggleOptions(groupCtx.notSelectedOptions, group.options, group.key)"
 						>
 							@if (groupLoadingKeys().has(group.key)) {
-								<span class="loading"></span>
+								<span class="pr-u-displayInlineBlock pr-u-colorTextSubtle">{{ intl().loading }}</span>
 							} @else {
 								<span class="pr-u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span
 								>{{ groupCtx.isGroupSelected ? intl().unselectAll : intl().selectAll }}

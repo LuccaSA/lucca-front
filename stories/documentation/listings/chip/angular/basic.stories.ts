@@ -1,8 +1,8 @@
 import { IconsList } from '@/stories/icons-list';
-import { CHIP_STATE, ChipComponent } from '@lucca-front/ng/chip';
+import { CHIP_STATE, ChipComponent, luChipTranslations } from '@lucca-front/ng/chip';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { setStoryOptions } from '@/helpers/stories';
+import { intlArgType, setStoryOptions } from '@/helpers/stories';
 
 interface ChipBasicStory {
 	unkillable: boolean;
@@ -71,6 +71,7 @@ export default {
 			control: false,
 			table: { category: 'outputs', type: { summary: 'Event' } },
 		},
+		intl: intlArgType(luChipTranslations, 'ChipTranslate'),
 	},
 	decorators: [
 		moduleMetadata({

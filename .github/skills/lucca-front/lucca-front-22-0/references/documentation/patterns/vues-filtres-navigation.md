@@ -1,0 +1,86 @@
+# Vues, filtres et navigation dans une page
+
+# Content
+
+## Les vues
+
+Les vues, représentées par le composant SegmentedControl, permettent de basculer entre différentes représentations d’un même contenu ou ensemble de données. Elles peuvent être utilisées pour :
+
+* Changer la manière dont un même ensemble de données est présenté (ex. : afficher un graphique en tableau, afficher un formulaire dans une autre langue, etc.). **Dans ce cas, le SegmentedControl est utilisé comme des onglets**.
+* Filtrer les données affichées pour répondre à un besoin ou contexte spécifique (ex. : afficher uniquement les ressources en cours d’approbation, ou celles terminées, etc.). **Dans ce cas, le SegmentedControl est utilisé comme un filtre**.
+
+⚠️  Il ne peut y avoir qu’un seul SegmentedControl sur une interface.
+
+### Les vues en tant qu'onglets
+
+Les vues peuvent être utilisées comme des onglets, ce qui permet à l’utilisateur de modifier ce qui est affiché sur l’interface. D’un point de vue technique, cela n’engendre pas de rechargement de la page, le contenu de chaque onglet étant déjà présent dans le HTML. Lorsque l’utilisateur clique sur une vue, seul le contenu lié à l’onglet actif est visible, les autres sont masqués.
+
+Cela peut être utilisé pour changer la manière dont les informations sont présentées, sans affecter les données elles-mêmes. Chaque vue représente une mise en forme ou un mode d’affichage différent du même ensemble de données. Ce type de vue peut-être accompagné de filtres supplémentaires. Ils peuvent être affiché pour toutes les vues.
+
+Dans ce contexte spécifique, les vues, représentées par le composant SegmentedControl, se positionnent sur la droite de l’interface.
+
+### Vues en tant que filtres
+
+Le composant SegmentedControl (disponible via le composant FilterBar) peut être utilisé seul, **comme un filtre** pour passer d'une vue à l'autre.
+
+Des filtres supplémentaires sont disponibles via des FilterPills (Select, Date, Period, etc.). Lorsqu’un utilisateur bascule d’une vue à une autre les filtres actifs ne sont pas réinitialisés, ils sont cumulatifs.
+
+#### Vue par défaut
+
+Les vues par défaut sont des configuration de référence, commune à tous les utilisateurs. Les filtres présents dans ces vues peuvent être modifiées librement.
+
+**Enregistrer en tant que nouvelle vue**
+
+Si des filtres sont appliqués par l’utilisateur sur une vue par défaut, il a la possibilité de créer une nouvelle vue.
+
+L'action est accessible directement via un bouton **« Enregistrer en tant que nouvelle vue »**. Ce bouton apparaît au moment où l’utilisateur applique un filtre.
+
+La création se fait sous forme de "capture" instantanée des filtres appliqués.
+
+Au clic sur le bouton, le système récupère automatiquement tous les filtres actifs. Une Dialog s'ouvre et le focus est immédiatement placé dans le TextField pour réduire la friction.
+
+Une fois validée, l’utilisateur est redirigé vers la nouvelle vue, la barre de filtres s'épure pour ne laisser apparaître que les champs ayant une valeur sélectionnée.
+
+#### Vue personalisée
+
+Une vue personnalisée est une configuration de filtres sauvegardée par l'utilisateur et commune à l'ensemble des autres utilisateurs. Ces vues sont itératives : elles peuvent être mises à jour pour s'adapter en continu aux besoins de l'utilisateur.
+
+Les filtres sont sauvegardés en base de donnée.
+
+**Enregistrement**
+
+Toute modification des filtres actifs déclenche l'apparition d’un bouton `disclosure` « **Enregistrer la vue** » contenant les options d’enregistrement.
+
+* **Enregistrer en tant que nouvelle vue** : l'utilisateur peut choisir de ne pas écraser sa vue actuelle et d'en générer une nouvelle à partir de ses modifications. Ceci déclenche alors le même parcours de création que la vue par défaut.
+* **Enregistrer les modifications** : l'utilisateur peut mettre à jour sa vue personnalisée en écrasant l'ancienne configuration. Une fois l'enregistrement effectué, le bouton d'action disparaît pour laisser place à une interface épurée.
+
+#### Gestion des vues
+
+La gestion des vues s’effectue depuis un dot menu présent au niveau d’une vue. Il est possible de renommer une vue, ou de la supprimer.
+
+#### Renommer une vue
+
+L'utilisateur peut modifier le titre via une Dialog. Elle contient un champ de saisie unique.
+
+Dès l'ouverture de la dialog, le focus est automatiquement positionné dans le champ de texte, avec le texte sélectionné. Cela permet à l'utilisateur de commencer à taper son nouveau titre immédiatement, sans interaction intermédiaire.
+
+#### Supprimer une vue
+
+Cette action est considérée comme critique. Une modale de confirmation est requise pour éviter toute perte accidentelle. Une fois la vue supprimée, l'utilisateur est automatiquement redirigé vers la vue par défaut.
+
+#### Nombre de vue
+
+Lorsque le nombre de vues est supérieur à 5, l'interface s'adapte : les vues s’affichent sous la forme d’un `select`. Le `dotmenu` d’une vue est accessible uniquement via le dropdown du select.
+
+Afin de maintenir une interface lisible et performante, un plafond de vues par utilisateur peut être défini. Lorsque ce quota est atteint :
+
+* L'option « Créer une nouvelle vue » est `disabled`.
+* Un `tooltip` s'affiche au survol de l'option pour informer l'utilisateur de la limite et l'inviter à supprimer ou modifier des vues existantes pour libérer de l'espace.
+
+## La navigation horizontale
+
+La navigation horizontale, représentée par le composant Menu, permet de structurer et naviguer entre des sections principales ou des catégories d’une interface. Ces sections sont totalement indépendantes et ne partagent pas les même caractéristiques.
+
+⚠️  Il ne peut y avoir de niveau de navigation supplémentaire sous cette barre de navigation.
+
+À noter qu’il est tout à fait possible de trouver une FilterBar (vues et/ou FilterPills) à l’intérieur du module actif. Le contenu de ce module est totalement indépendant.

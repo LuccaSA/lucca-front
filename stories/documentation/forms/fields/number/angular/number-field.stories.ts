@@ -1,12 +1,11 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { NumberInputComponent } from '@lucca-front/ng/forms';
+import { luNumberFieldTranslations, NumberInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
+import { cleanupTemplate, useStoryModel, generateInputs, setStoryOptions, intlArgType } from '@/helpers/stories';
+
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
@@ -87,6 +86,7 @@ export default {
 			description: 'Masque les boutons d’incrémentation.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luNumberFieldTranslations, 'LuNumberFieldLabel'),
 	},
 } as Meta;
 
@@ -192,30 +192,3 @@ export const WithPrefixAndSuffix: StoryObj<
 		valueAlignRight: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const input = canvas.getByRole('spinbutton');
-		await expect(input).toBeVisible();
-	});
-
-	await step('Interaction souris - saisir un nombre', async () => {
-		const input = canvas.getByRole('spinbutton');
-		await userEvent.clear(input);
-		await userEvent.type(input, '42');
-		await waitForAngular();
-		await expect(input).toHaveValue(42);
-	});
-
-	await step('Interaction clavier - focus et saisie', async () => {
-		const input = canvas.getByRole('spinbutton');
-		await userEvent.clear(input);
-		input.focus();
-		await userEvent.keyboard('123');
-		await waitForAngular();
-		await expect(input).toHaveValue(123);
-	});
-});

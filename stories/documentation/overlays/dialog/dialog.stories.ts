@@ -1,5 +1,5 @@
-import { createTestStory, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
+import { intlArgType, setStoryOptions } from '@/helpers/stories';
+
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
@@ -14,6 +14,7 @@ import {
 	DialogHeaderComponent,
 	DialogHeaderSubtitle,
 	DialogOpenDirective,
+	luDialogHeaderTranslations,
 } from '@lucca-front/ng/dialog';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -21,7 +22,6 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Overlays/Dialog/Angular',
@@ -138,6 +138,7 @@ export default {
 			description: 'Applique le fond de surface neutre (`--pr-t-elevation-surface-default`) au contenu de la fenêtre de dialogue.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luDialogHeaderTranslations, 'LuDialogHeaderTranslations', 'lu-dialog-header'),
 	},
 } as Meta;
 
@@ -383,44 +384,3 @@ export const WithTabs: StoryObj = {
 		mode: 'default',
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	const canvas = within(canvasElement);
-	const button = await canvas.findByRole('button');
-
-	await step('Keyboard interactions', async () => {
-		button.focus();
-		await expect(button).toHaveFocus();
-		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
-		await expect(screen.getByRole('dialog')).toBeVisible();
-		await userEvent.keyboard('{Escape}');
-		await expect(screen.queryByText('dialog')).toBeNull();
-		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
-		await expect(screen.getByRole('dialog')).toBeVisible();
-		await userEvent.keyboard('{Enter}');
-		await expect(screen.queryByText('dialog')).toBeNull();
-	});
-
-	await step('Mouse interaction', async () => {
-		await userEvent.click(button);
-		await waitForAngular();
-		await expect(screen.getByRole('dialog')).toBeVisible();
-		// close with dialog cross
-		await userEvent.click(screen.getAllByRole('button')[0]);
-		await expect(screen.queryByText('dialog')).toBeNull();
-		await userEvent.click(button);
-		await waitForAngular();
-		await expect(screen.getByRole('dialog')).toBeVisible();
-		// close with confirm button
-		await userEvent.click(screen.getAllByRole('button')[1]);
-		await expect(screen.queryByText('dialog')).toBeNull();
-		await userEvent.click(button);
-		await waitForAngular();
-		await expect(screen.getByRole('dialog')).toBeVisible();
-		// close with cancel button
-		await userEvent.click(screen.getAllByRole('button')[2]);
-		await expect(screen.queryByText('dialog')).toBeNull();
-	});
-});

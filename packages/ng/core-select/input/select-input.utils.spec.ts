@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 import type { Mock } from 'vitest';
-import { BehaviorSubject, of, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, delay, EMPTY, Observable, of, ReplaySubject, Subject, throwError } from 'rxjs';
 import { SelectDataSource } from '../select.model';
 import { buildOptionsFromDataSource, BuildOptionsFromDataSourceDeps } from './select-input.utils';
 
@@ -361,4 +361,293 @@ describe('buildOptionsFromDataSource', () => {
 
 		sub.unsubscribe();
 	}));
+
+	it('should ask for a single page when the panel asks twice while a page is still loading', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi.fn(({ page }) => of([{ id: page, name: `Page ${page}` }]).pipe(delay(10))),
+		};
+		const emitted: (readonly TestOption[])[] = [];
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick(10);
+
+		// Firefox emits several scroll events at the bottom of the panel where Chrome emits one
+		nextPage$.next();
+		nextPage$.next();
+		tick(10);
+
+		expect(ds.getOptions).toHaveBeenCalledTimes(2);
+		expect(emitted[emitted.length - 1]).toEqual([
+			{ id: 0, name: 'Page 0' },
+			{ id: 1, name: 'Page 1' },
+		]);
+
+		sub.unsubscribe();
+	}));
+
+	it('should keep paginating when a page answers right after an empty one', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		const pages: TestOption[][] = [[{ id: 0, name: 'Page 0' }], [], [{ id: 2, name: 'Page 2' }]];
+		const ds: SelectDataSource<TestOption> = {
+			getOptions: ({ page }) => of(pages[page] ?? []).pipe(delay(10)),
+		};
+		const emitted: (readonly TestOption[])[] = [];
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick(10);
+
+		nextPage$.next(); // page 1: empty
+		tick(10);
+
+		nextPage$.next(); // page 2: still loading, must not count as a second empty page
+		tick(10);
+
+		expect(emitted[emitted.length - 1]).toEqual([
+			{ id: 0, name: 'Page 0' },
+			{ id: 2, name: 'Page 2' },
+		]);
+
+		sub.unsubscribe();
+	}));
+
+	it('should ask for the next page once when a page keeps refreshing itself', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+		const page0$ = new ReplaySubject<readonly TestOption[]>(1);
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi.fn(({ page }) => (page === 0 ? page0$ : of([{ id: page, name: `Page ${page}` }]))),
+		};
+		const emitted: (readonly TestOption[])[] = [];
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		page0$.next([{ id: 0, name: 'Page 0' }]);
+		page0$.next([{ id: 0, name: 'Page 0 refreshed' }]); // a long lived page updating itself
+		tick();
+
+		nextPage$.next();
+		tick();
+
+		expect(ds.getOptions).toHaveBeenCalledTimes(2);
+		expect(emitted[emitted.length - 1]).toEqual([
+			{ id: 0, name: 'Page 0 refreshed' },
+			{ id: 1, name: 'Page 1' },
+		]);
+
+		sub.unsubscribe();
+	}));
+
+	it('should keep the loading state while a page is in flight and an older one refreshes', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$, setLoading } = createDeps();
+		const page0$ = new ReplaySubject<readonly TestOption[]>(1);
+		const ds: SelectDataSource<TestOption> = {
+			getOptions: ({ page }) => (page === 0 ? page0$ : of([{ id: page, name: `Page ${page}` }]).pipe(delay(10))),
+		};
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe();
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		page0$.next([{ id: 0, name: 'Page 0' }]);
+		tick();
+
+		nextPage$.next(); // page 1 in flight
+		page0$.next([{ id: 0, name: 'Page 0 refreshed' }]); // page 0 refreshing must not clear the loading row
+		tick();
+
+		expect(setLoading).toHaveBeenLastCalledWith(true);
+
+		tick(10);
+		expect(setLoading).toHaveBeenLastCalledWith(false);
+
+		sub.unsubscribe();
+	}));
+
+	it('should settle a page whose request completes without emitting', fakeAsync(() => {
+		const { deps, isPanelOpen$, clue$, nextPage$, setLoading } = createDeps();
+		const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+			getOptions: vi.fn(({ page }) => (page === 0 ? of([{ id: 0, name: 'Page 0' }]) : EMPTY)),
+		};
+
+		const sub = buildOptionsFromDataSource(ds, deps).subscribe();
+
+		isPanelOpen$.next(true);
+		clue$.next('');
+		tick();
+
+		nextPage$.next(); // completes without emitting: must not keep pagination locked
+		tick();
+		nextPage$.next();
+		tick();
+
+		expect(setLoading).toHaveBeenLastCalledWith(false);
+		expect(ds.getOptions).toHaveBeenCalledTimes(3);
+
+		sub.unsubscribe();
+	}));
+
+	describe('params change', () => {
+		it('should reset and reload from page 0 with the current clue', fakeAsync(() => {
+			const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+			const paramsChange$ = new Subject<void>();
+			const ds: SelectDataSource<TestOption> & { getOptions: Mock; reset: Mock } = {
+				...createDs([[{ id: 1, name: 'Page 0' }], [{ id: 2, name: 'Page 1' }], [{ id: 3, name: 'Reloaded page 0' }]]),
+				paramsChange: paramsChange$,
+			};
+			const emitted: (readonly TestOption[])[] = [];
+
+			const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+			isPanelOpen$.next(true);
+			clue$.next('carotte');
+			tick();
+			nextPage$.next();
+			tick();
+
+			paramsChange$.next();
+			tick();
+
+			// Back to a single page, asked for with the clue that is still in the input
+			expect(ds.reset).toHaveBeenCalledTimes(2);
+			expect(ds.getOptions).toHaveBeenNthCalledWith(3, { clue: 'carotte', page: 0 });
+			expect(emitted[emitted.length - 1]).toEqual([{ id: 3, name: 'Reloaded page 0' }]);
+
+			sub.unsubscribe();
+		}));
+
+		it('should reload without waiting for the clue debounce', fakeAsync(() => {
+			const { deps, isPanelOpen$, clue$ } = createDeps();
+			const paramsChange$ = new Subject<void>();
+			const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+				...createDs([[{ id: 1, name: 'A' }], [{ id: 2, name: 'B' }]]),
+				clueDebounceMs: 250,
+				paramsChange: paramsChange$,
+			};
+
+			const sub = buildOptionsFromDataSource(ds, deps).subscribe();
+
+			isPanelOpen$.next(true);
+			clue$.next('');
+			tick();
+			expect(ds.getOptions).toHaveBeenCalledTimes(1);
+
+			// A toggle in the panel header is a deliberate action, not typing: it fires right away
+			paramsChange$.next();
+			tick();
+
+			expect(ds.getOptions).toHaveBeenCalledTimes(2);
+
+			sub.unsubscribe();
+			tick(250);
+		}));
+
+		it('should not reload while the panel is closed', fakeAsync(() => {
+			const { deps, isPanelOpen$ } = createDeps();
+			const paramsChange$ = new Subject<void>();
+			const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+				...createDs([[{ id: 1, name: 'A' }]]),
+				paramsChange: paramsChange$,
+			};
+
+			const sub = buildOptionsFromDataSource(ds, deps).subscribe();
+
+			isPanelOpen$.next(false);
+			paramsChange$.next();
+			tick();
+
+			expect(ds.getOptions).not.toHaveBeenCalled();
+
+			sub.unsubscribe();
+		}));
+	});
+
+	describe('non paginated data source', () => {
+		function createWholeListDs(options$: Observable<readonly TestOption[]>): SelectDataSource<TestOption> & { getOptions: Mock } {
+			return { getOptions: vi.fn(() => options$), paginated: false };
+		}
+
+		it('should emit the whole list without asking for pages', fakeAsync(() => {
+			const { deps, isPanelOpen$, clue$, nextPage$ } = createDeps();
+			const options$ = new ReplaySubject<readonly TestOption[]>(1);
+			const ds = createWholeListDs(options$);
+			const emitted: (readonly TestOption[])[] = [];
+
+			const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+			isPanelOpen$.next(true);
+			clue$.next('');
+			options$.next([{ id: 1, name: 'A' }]);
+			tick();
+
+			// Several scroll events at the bottom of the panel (Firefox emits more than Chrome)
+			nextPage$.next();
+			nextPage$.next();
+			nextPage$.next();
+			options$.next([
+				{ id: 1, name: 'A' },
+				{ id: 2, name: 'B' },
+			]);
+			tick();
+
+			expect(ds.getOptions).toHaveBeenCalledTimes(1);
+			expect(ds.getOptions).toHaveBeenCalledWith({ clue: '', page: 0 });
+			expect(emitted[emitted.length - 1]).toEqual([
+				{ id: 1, name: 'A' },
+				{ id: 2, name: 'B' },
+			]);
+
+			sub.unsubscribe();
+		}));
+
+		it('should leave the loading state to the consumer', fakeAsync(() => {
+			const { deps, isPanelOpen$, clue$, nextPage$, setLoading } = createDeps();
+			const options$ = new ReplaySubject<readonly TestOption[]>(1);
+
+			const sub = buildOptionsFromDataSource(createWholeListDs(options$), deps).subscribe();
+
+			isPanelOpen$.next(true);
+			clue$.next('');
+			options$.next([{ id: 1, name: 'A' }]);
+			tick();
+
+			// The consumer may never answer (exhausted list, no `(nextPage)` binding at all): inferring a
+			// loading state here would leave the loading row of the panel up for good
+			nextPage$.next();
+			tick();
+
+			expect(setLoading).not.toHaveBeenCalled();
+
+			sub.unsubscribe();
+		}));
+
+		it('should restart from a fresh list when the clue changes', fakeAsync(() => {
+			const { deps, isPanelOpen$, clue$ } = createDeps();
+			const ds: SelectDataSource<TestOption> & { getOptions: Mock } = {
+				getOptions: vi.fn(({ clue }) => of([{ id: 1, name: clue }])),
+				paginated: false,
+			};
+			const emitted: (readonly TestOption[])[] = [];
+
+			const sub = buildOptionsFromDataSource(ds, deps).subscribe((options) => emitted.push(options));
+
+			isPanelOpen$.next(true);
+			clue$.next('');
+			tick();
+			clue$.next('hello');
+			tick();
+
+			expect(ds.getOptions).toHaveBeenNthCalledWith(2, { clue: 'hello', page: 0 });
+			expect(emitted[emitted.length - 1]).toEqual([{ id: 1, name: 'hello' }]);
+
+			sub.unsubscribe();
+		}));
+	});
 });

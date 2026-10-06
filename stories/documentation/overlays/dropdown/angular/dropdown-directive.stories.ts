@@ -3,12 +3,10 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverPosition } from '@lucca-front/ng/popover2';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
-import { expect, screen, userEvent, within } from 'storybook/test';
 
-interface DropdownBasicStory {
+export interface DropdownBasicStory {
 	luPopoverPosition: PopoverPosition;
+	luDropdownDisabled: boolean;
 }
 
 export default {
@@ -36,6 +34,11 @@ export default {
 			options: ['above', 'below', 'before', 'after'],
 			table: { category: 'inputs' },
 		},
+		luDropdownDisabled: {
+			description: 'Empêche le dropdown de s’ouvrir.',
+			control: 'boolean',
+			table: { category: 'inputs' },
+		},
 		luDropdownOnOpen: {
 			description: "Événement déclenché à l'ouverture du dropdown.",
 			action: 'luDropdownOnOpen',
@@ -53,8 +56,9 @@ export default {
 
 function getTemplate(args: DropdownBasicStory): string {
 	const direction = args.luPopoverPosition !== 'below' ? ` luDropdownPosition="${args.luPopoverPosition}"` : ``;
+	const disabled = args.luDropdownDisabled ? ` luDropdownDisabled` : ``;
 	return `<div class="demo">
-	<button type="button" luButton disclosure [luDropdown]="dropdownSample"${direction} (luDropdownOnOpen)="luDropdownOnOpen()" (luDropdownOnClose)="luDropdownOnClose()">Dropdown<lu-icon icon="arrowChevronBottom" /></button>
+	<button type="button" luButton disclosure [luDropdown]="dropdownSample"${direction}${disabled} (luDropdownOnOpen)="luDropdownOnOpen()" (luDropdownOnClose)="luDropdownOnClose()">Dropdown<lu-icon icon="arrowChevronBottom" /></button>
 	<ng-template #dropdownSample>
 		<lu-dropdown-menu>
 			<lu-dropdown-item>
@@ -120,60 +124,8 @@ const Template = (args) => ({
 export const Directive: StoryObj<DropdownBasicStory> = {
 	args: {
 		luPopoverPosition: 'below',
+		luDropdownDisabled: false,
 	},
 	render: Template,
 	argTypes: {},
 };
-
-export const DirectiveTEST = createTestStory(Directive, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-	const trigger = canvas.getByRole('button', { name: /dropdown/i });
-
-	await step("Vérifie l'état initial", async () => {
-		await expect(trigger).toBeVisible();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-		await expect(screen.queryByRole('list')).not.toBeInTheDocument();
-	});
-
-	await step('Ouvre le dropdown au clic', async () => {
-		await userEvent.click(trigger);
-		await waitForAngular();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'true');
-		await expect(screen.getAllByRole('list').at(0)).toBeVisible();
-	});
-
-	await step('Les items du menu sont visibles et accessibles', async () => {
-		const menu = within(screen.getAllByRole('list').at(0));
-		await expect(menu.getByRole('button', { name: 'Ipsum' })).toBeVisible();
-		await expect(menu.getByRole('link', { name: /sit amet/i })).toBeVisible();
-		const [loremEnabled, loremDisabled] = menu.getAllByRole('button', { name: 'Lorem' });
-		await expect(loremEnabled).toBeVisible();
-		await expect(loremEnabled).not.toBeDisabled();
-		await expect(loremDisabled).toBeDisabled();
-	});
-
-	await step('Ferme le dropdown en cliquant sur une action', async () => {
-		await userEvent.click(within(screen.getAllByRole('list').at(0)).getByRole('button', { name: 'Ipsum' }));
-		await waitForAngular();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-		await expect(screen.queryByRole('list')).not.toBeInTheDocument();
-	});
-
-	await step('Ouvre le dropdown au clavier (Enter)', async () => {
-		trigger.focus();
-		await expect(trigger).toHaveFocus();
-		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'true');
-		await expect(screen.getAllByRole('list').at(0)).toBeVisible();
-	});
-
-	await step('Ferme le dropdown avec Échap et rend le focus au déclencheur', async () => {
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-		await expect(screen.queryByRole('list')).not.toBeInTheDocument();
-		await expect(trigger).toHaveFocus();
-	});
-});

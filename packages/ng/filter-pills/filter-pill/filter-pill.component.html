@@ -25,7 +25,13 @@
 					"
 				/>
 			</span>
-			<span class="filterPill-value" luTooltip luTooltipWhenEllipsis [luTooltipDisabled]="inputIsEmpty()">
+			<span
+				class="filterPill-value"
+				luTooltip
+				luTooltipWhenEllipsis
+				[luTooltipDisabled]="inputIsEmpty()"
+				[luTooltipTriggerAnchor]="filterPillRef"
+			>
 				<ng-container *ngTemplateOutlet="pillTpl; context: { label: label(), isEmpty: inputIsEmpty() }" />
 				@if (inputIsEmpty() && !disabled()) {
 					{{ placeholder() }}
@@ -35,7 +41,7 @@
 				<lu-icon [icon]="displayedIcon()" size="S" />
 			</span>
 		</button>
-		@if (inputIsClearable()) {
+		@if (inputIsClearable() && !disabled()) {
 			<lu-clear class="filterPill_clear" (onClear)="clear(); popoverRef.opened() ? null : filterPillRef.focus()">{{
 				intl().clear
 			}}</lu-clear>

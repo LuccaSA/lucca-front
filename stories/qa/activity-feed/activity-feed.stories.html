@@ -108,6 +108,14 @@
 								<div class="activityFeed-content">
 									<ul class="activityFeed-content-update">
 										<li class="activityFeed-content-update-item">
+											<div class="activityFeed-content-update-item-object">Lorem ipsum dolor sit amet :</div>
+											<div class="activityFeed-content-update-item-before">Consectetur adipisicing elit</div>
+											<span class="activityFeed-content-update-item-icon lucca-icon icon-arrowRight mod-XS" aria-hidden="true"></span>
+											<span class="pr-u-mask">a été remplacé par</span>
+											<div class="activityFeed-content-update-item-after">Veritatis ullam porro harum reprehenderit</div>
+										</li>
+										<li class="activityFeed-content-update-item">
+											<div class="activityFeed-content-update-item-object">Montant :</div>
 											<div class="activityFeed-content-update-item-before">1000 €</div>
 											<span class="activityFeed-content-update-item-icon lucca-icon icon-arrowRight mod-XS" aria-hidden="true"></span>
 											<span class="pr-u-mask">a été remplacé par</span>
@@ -134,6 +142,10 @@
 						</lu-activity-feed-step>
 						<lu-activity-feed-step [user]="user" [date]="date" label="Finn Mertens a modifié le budget.">
 							<lu-activity-feed-update>
+								<lu-activity-feed-update-item label="Lorem ipsum dolor sit amet">
+									<ng-container activityFeedUpdateBefore>Consectetur adipisicing elit</ng-container>
+									<ng-container activityFeedUpdateAfter>Veritatis ullam porro harum reprehenderit</ng-container>
+								</lu-activity-feed-update-item>
 								<lu-activity-feed-update-item label="Montant">
 									<ng-container activityFeedUpdateBefore>1000 €</ng-container>
 									<ng-container activityFeedUpdateAfter>800 €</ng-container>
@@ -189,7 +201,9 @@
 						<li class="activityFeed-step">
 							<div class="activityFeed-step-state mod-success"></div>
 							<div class="activityFeed-step-description">
-								<p class="activityFeed-step-description-content">Étape de traitement réussie.</p>
+								<p class="activityFeed-step-description-content">
+									Étape de traitement réussie. Étape de traitement réussie. Étape de traitement réussie.
+								</p>
 								<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time"
 									><abbr>Mar.</abbr> 15 juillet 2025 à 08:56</time
 								>
@@ -218,7 +232,12 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-activity-feed>
-						<lu-activity-feed-step [user]="user" [date]="date" label="Étape de traitement réussie." status="success" />
+						<lu-activity-feed-step
+							[user]="user"
+							[date]="date"
+							label="Étape de traitement réussie. Étape de traitement réussie. Étape de traitement réussie."
+							status="success"
+						/>
 						<lu-activity-feed-step status="pending" [user]="user" label="En attente d'approbation par Daniel Hernandez. " />
 						<lu-activity-feed-step [user]="user" [date]="date" label="Étape de traitement en erreur." status="critical" />
 					</lu-activity-feed>

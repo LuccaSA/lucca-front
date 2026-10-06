@@ -1,10 +1,13 @@
-import { CLEAR_SIZE, ClearComponent } from '@lucca-front/ng/clear';
+import { CLEAR_SIZE, ClearComponent, luClearTranslations } from '@lucca-front/ng/clear';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Clear/Angular/Basic',
+	argTypes: {
+		intl: intlArgType(luClearTranslations, 'LuClearLabel'),
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [ClearComponent],

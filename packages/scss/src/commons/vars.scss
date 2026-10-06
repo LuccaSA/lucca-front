@@ -13,7 +13,13 @@
 	--pr-t-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
 	--pr-t-font-family-brand: var(--pr-t-font-family);
 
-	&:lang(fr, en, de, nl, it, pt, es) {
+	&:lang(fr),
+	&:lang(en),
+	&:lang(de),
+	&:lang(nl),
+	&:lang(it),
+	&:lang(pt),
+	&:lang(es) {
 		--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', Tahoma, sans-serif;
 	}
 

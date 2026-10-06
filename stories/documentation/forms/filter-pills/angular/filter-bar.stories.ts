@@ -7,7 +7,14 @@ import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/de
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
-import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent, FilterViewSelectorComponent } from '@lucca-front/ng/filter-pills';
+import {
+	FilterBarComponent,
+	FilterPillAddonAfterDirective,
+	FilterPillAddonBeforeDirective,
+	FilterPillComponent,
+	FilterViewSelectorComponent,
+	luFilterPillsTranslations,
+} from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
@@ -16,6 +23,7 @@ import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@luc
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { IconComponent } from '@lucca/prisme/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
@@ -110,26 +118,29 @@ export default {
 			},
 			table: { category: 'inputs' },
 		},
-		applyFiltersButton: {
-			description: 'Affiche un bouton pour appliquer les filtres, utilisé lorsqu’il n’est pas possible d’appliquer les filtres automatiquement.',
+		manualApply: {
+			description:
+				'Indique que les résultats ne se mettent à jour qu’après une action explicite (ici un bouton « Appliquer les filtres »), pour ne plus annoncer aux technologies d’assistance que la liste se met à jour automatiquement.',
 			control: {
 				type: 'boolean',
 			},
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
 	},
 	render: (args, { argTypes }) => {
 		const actionButton = args['actionButton'] ? `<button type="submit" size="S" luButton="outlined">Exporter</button>` : '';
-		const applyFiltersButton = args['applyFiltersButton'] ? `<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>` : '';
+		const applyFiltersButton = args['manualApply'] ? `<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>` : '';
 		const periodFilter = args['optionalFilter']
 			? `<lu-filter-pill label="Période" optional name="period">
 		<lu-date-range-input [(ngModel)]="examplePeriod" />
 	</lu-filter-pill>`
 			: '';
 		const filterViewSelectorEnabled = args['views'] && args['filterViewSelector'];
-		const saveViewEnabled = args['views'] && args['saveView'] && !filterViewSelectorEnabled;
-		const saveViewTab = saveViewEnabled
-			? `<ng-template #label4>
+		const saveViewEnabled = args['views'] && args['saveView'];
+		const saveViewTab =
+			saveViewEnabled && !filterViewSelectorEnabled
+				? `<ng-template #label4>
 			Produit
 			<button type="button" size="XS" luButton="ghost" aria-expanded="false" disclosure [luDropdown]="optionsDropdown">
 				<lu-icon alt="Options" icon="menuDots" />
@@ -139,23 +150,23 @@ export default {
 					<lu-dropdown-item>
 						<button lu-dropdown-action type="button">
 							<lu-icon icon="edit" />
-							{{ filterBar.intl().renameView }}
+							Modifier le nom
 						</button>
 					</lu-dropdown-item>
 					<lu-dropdown-item>
 						<button lu-dropdown-action type="button" critical>
 							<lu-icon icon="trash" />
-							{{ filterBar.intl().deleteView }}
+							Supprimer
 						</button>
 					</lu-dropdown-item>
 				</lu-dropdown-menu>
 			</ng-template>
 		</ng-template>
 		<lu-segmented-control-filter [label]="label4" value="4" />`
-			: '';
+				: '';
 		const saveViewButton = saveViewEnabled
 			? `<button type="button" size="S" luButton="outlined" palette="product" disclosure aria-expanded="false" [luDropdown]="saveDropdown">
-			{{ filterBar.intl().saveView }}
+			Enregistrer la vue
 			<lu-icon icon="arrowChevronBottom" />
 		</button>`
 			: '';
@@ -165,13 +176,13 @@ export default {
 		<lu-dropdown-item>
 			<button lu-dropdown-action type="button">
 				<lu-icon icon="save" />
-				{{ filterBar.intl().saveModification }}
+				Enregistrer les modifications
 			</button>
 		</lu-dropdown-item>
 		<lu-dropdown-item>
 			<button lu-dropdown-action type="button" aria-disabled="true" class="is-disabled" luTooltip="Supprimer des vues pour en créer des nouvelles">
 				<lu-icon icon="mathsPlus" />
-				{{ filterBar.intl().saveNewView }}
+				Enregistrer en tant que nouvelle vue
 			</button>
 		</lu-dropdown-item>
 	</lu-dropdown-menu>
@@ -210,13 +221,14 @@ export default {
 			props: {
 				example1: null,
 				examplePeriod: null,
+				departmentsPluralFn: (count: number) => `${count} départements`,
 				filterViews,
 				// Reference the actual array element so it matches (the selector compares views by reference).
 				selectedFilterView: filterViews[0],
 				renameView: (view: (typeof filterViews)[number]) => args['renameView']?.(view),
 				deleteView: (view: (typeof filterViews)[number]) => args['deleteView']?.(view),
 			},
-			template: `<lu-filter-bar>
+			template: `<lu-filter-bar${args['manualApply'] ? ' manualApply' : ''}>
 	${views}
 	<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false" />
@@ -225,7 +237,7 @@ export default {
 		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Départements" name="departments">
-		<lu-multi-select [ngModel]="[]" departments filterPillLabelPlural="départements" />
+		<lu-multi-select [ngModel]="[]" departments [filterPillLabelPluralFn]="departmentsPluralFn" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Date de début" name="startingDate">
 		<lu-date-input [(ngModel)]="example1" />
@@ -242,13 +254,13 @@ ${saveViewDropdownTemplate}`,
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; actionButton: boolean; applyFiltersButton: boolean }> = {
+export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; actionButton: boolean }> = {
 	args: {
 		views: false,
 		saveView: false,
 		filterViewSelector: false,
 		optionalFilter: false,
 		actionButton: false,
-		applyFiltersButton: false,
+		manualApply: false,
 	},
 };

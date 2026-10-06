@@ -17,7 +17,7 @@
 import { PackageAPI, VersionConfig } from '../types';
 import { extractPackageAPI } from '../collectors/ast-extractor';
 import { diffPackageApi } from '../collectors/api-diff';
-import { resolveVersion, listStableTags, compareTags } from '../version-config';
+import { resolveVersion, listStableTags, compareTags, previousMajorLastStableTag } from '../version-config';
 
 /** Run-level cache: each (ngPackage, selectors, tag) API is extracted once, reused across target versions. */
 const apiCache = new Map<string, PackageAPI | null>();
@@ -58,12 +58,18 @@ export function buildComponentChangelog(input: ChangelogInput): string | null {
 
 	const entries: { version: string; lines: string[] }[] = [];
 
+	let baselineTag: string | null = null;
+
 	if (ngPackage) {
 		// Real stable release tags of this major, up to (and including) the target version.
 		const tags = listStableTags(version.major).filter((t) => compareTags(t, version.tag) <= 0);
 
-		let prevApi: PackageAPI | null = null;
-		let seen = false;
+		// Baseline: the API as it stood at the end of the previous major. Without it the walk
+		// starts empty and the major's first tag reads "Composant introduit" for every component
+		// that already existed — 119 of 128 pages on the 22.0 skill, where v22.0.0 is the only tag.
+		baselineTag = previousMajorLastStableTag(version.major);
+		let prevApi: PackageAPI | null = baselineTag ? getApiAtTag(ngPackage, baselineTag, ngSelectors) : null;
+		let seen = prevApi !== null;
 		for (const tag of tags) {
 			const api = getApiAtTag(ngPackage, tag, ngSelectors);
 			if (!api && !seen) continue; // component not introduced yet at this tag
@@ -82,13 +88,14 @@ export function buildComponentChangelog(input: ChangelogInput): string | null {
 	let md = '';
 
 	if (entries.length > 0) {
-		md += `> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, jusqu'à \`${version.tag}\`. Les versions sans changement d'API sont omises.\n\n`;
+		const since = baselineTag ? `depuis \`${baselineTag}\` ` : '';
+		md += `> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, ${since}jusqu'à \`${version.tag}\`. Les versions sans changement d'API sont omises.\n\n`;
 		// Newest first.
 		for (const e of entries.reverse()) {
 			md += `### ${e.version}\n\n${e.lines.join('\n')}\n\n`;
 		}
 	} else if (ngPackage) {
-		md += `_Aucun changement d'API détecté sur l'historique stable jusqu'à ${version.tag}._\n\n`;
+		md += baselineTag ? `_Aucun changement d'API entre ${baselineTag} et ${version.tag}._\n\n` : `_Aucun changement d'API détecté sur l'historique stable jusqu'à ${version.tag}._\n\n`;
 	}
 
 	if (zhProse && zhProse.trim()) {

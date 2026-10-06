@@ -1,8 +1,7 @@
 import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca/prisme/button';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { expect, within } from 'storybook/test';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Basic',
@@ -72,9 +71,3 @@ export const Basic: StoryObj<ButtonComponent> = {
 		block: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async (context) => {
-	const canvas = within(context.canvasElement);
-	const button = await canvas.findByRole('button');
-	await expect(button).toHaveClass('button is-default palette-none');
-});

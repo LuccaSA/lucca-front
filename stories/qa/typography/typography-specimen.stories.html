@@ -1,0 +1,35 @@
+<!-- Run `npm run typography:update-font-coverage` after a font update to refresh which glyphs show as missing. -->
+<table class="demo-QAtable">
+	<thead>
+		<tr>
+			<td></td>
+			<td>Source Sans</td>
+			<td>Lucca Sans</td>
+		</tr>
+	</thead>
+	<tbody>
+		@for (pangram of languagePangrams; track pangram.lang) {
+			<tr [attr.lang]="pangram.lang">
+				<td>{{ pangram.language }}<br />{{ pangram.code }}<br />Lowercase</td>
+				<td>
+					<p class="pr-u-h1 pr-u-fontFamily">{{ pangram.lowercase }}</p>
+				</td>
+				<td>
+					<p class="pr-u-h1 pr-u-fontFamilyBrand">{{ pangram.lowercase }}</p>
+				</td>
+			</tr>
+			<tr [attr.lang]="pangram.lang">
+				<td>{{ pangram.language }}<br />{{ pangram.code }}<br />Uppercase</td>
+				<td>
+					<p class="pr-u-h1 pr-u-fontFamily">{{ pangram.lowercase.toLocaleUpperCase(pangram.lang) }}</p>
+				</td>
+				<td>
+					<p class="pr-u-h1 pr-u-fontFamilyBrand">{{ pangram.lowercase.toLocaleUpperCase(pangram.lang) }}</p>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

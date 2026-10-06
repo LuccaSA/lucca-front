@@ -1,3 +1,22 @@
+### 22.0.0
+
+#### Added
+
+- `luPopoverIgnoredOutsidePointerTargets` input to declare elements whose pointer events must not close the popover.
+- Options object on `openPopover({ disableCloseButtonFocus, disableInitialTriggerFocus })`.
+
+#### Changed
+
+- Popover no longer creates a blocking backdrop: it closes on outside pointer events and the rest of the page stays interactive.
+
+#### Deprecated
+
+- Positional signature `openPopover(withBackdrop, disableCloseButtonFocus, disableInitialTriggerFocus)` — `withBackdrop` is now ignored, use the options object instead.
+
+#### Fixed
+
+- Size recalculation when the popover content changes.
+
 ### 21.3.1
 
 #### Fixed

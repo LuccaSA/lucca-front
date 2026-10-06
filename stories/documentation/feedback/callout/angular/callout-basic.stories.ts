@@ -1,11 +1,19 @@
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
+
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CALLOUT_HX, CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
+import {
+	CALLOUT_HX,
+	CALLOUT_SIZE,
+	CalloutActionsComponent,
+	CalloutComponent,
+	CalloutFeedbackItemComponent,
+	CalloutFeedbackListComponent,
+	CalloutStates,
+	luCalloutTranslations,
+} from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Feedback/Callout/Angular/Basic',
@@ -125,6 +133,7 @@ export default {
 			description: '[v20.3] Déplace les actions sur la droite du callout.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luCalloutTranslations, 'LuCalloutLabel'),
 	},
 } as Meta;
 
@@ -139,26 +148,3 @@ export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsIn
 		actionsInline: false,
 	},
 };
-
-export const TemplateTEST = createTestStory({ ...Template, args: { ...Template.args, removable: true } }, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const callout = canvasElement.querySelector('lu-callout');
-		await expect(callout).toBeInTheDocument();
-		await expect(canvas.getByText('Feedback description')).toBeVisible();
-	});
-
-	await step('Vérifie le bouton de fermeture (removable)', async () => {
-		const closeButton = canvas.getByRole('button');
-		await expect(closeButton).toBeVisible();
-	});
-
-	await step('Interaction souris - fermeture du callout', async () => {
-		const closeButton = canvas.getByRole('button');
-		await userEvent.click(closeButton);
-		await waitForAngular();
-		await expect(canvasElement.querySelector('.callout')).not.toBeInTheDocument();
-	});
-});

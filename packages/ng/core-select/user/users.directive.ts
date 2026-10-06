@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, Provider, TemplateRef, Type, computed, effect, forwardRef, inject, input, model, signal, untracked } from '@angular/core';
+import { computed, Directive, effect, forwardRef, inject, input, model, Provider, signal, TemplateRef, Type, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { luBooleanAttribute, luNullableNumberAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LuOptionContext, applySearchDelimiter } from '@lucca-front/ng/core-select';
+import { applySearchDelimiter, CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LuOptionContext } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
-import { Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
+import { catchError, combineLatest, debounceTime, map, Observable, of, shareReplay, switchMap, take, tap } from 'rxjs';
 import { FORMER_EMPLOYEES_CONTEXT, LuCoreSelectFormerEmployeesComponent } from './former-employees.component';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
@@ -93,12 +93,21 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	protected readonly clue = toSignal(this.clue$);
 
+	readonly #scopeParams = computed(() => {
+		const uniqueOperationIds = this.uniqueOperationIds();
+		const operationIds = this.operationIds();
+		const appInstanceId = this.appInstanceId();
+
+		return {
+			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
+			...(appInstanceId ? { appInstanceId } : {}),
+		};
+	});
+
 	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
 		const orderBy = this.orderBy();
 		const clue = this.clue();
-		const operationIds = this.operationIds();
-		const uniqueOperationIds = this.uniqueOperationIds();
-		const appInstanceId = this.appInstanceId();
 		const searchDelimiter = this.searchDelimiter();
 		const formerEmployees = this.includeFormerEmployees();
 
@@ -107,31 +116,21 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			...this.filters(),
 			...(orderBy ? { orderBy } : {}),
 			...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
-			...(operationIds ? { operations: operationIds.join(',') } : {}),
-			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-			...(appInstanceId ? { appInstanceId } : {}),
+			...this.#scopeParams(),
 			...(formerEmployees ? { formerEmployees } : {}),
 		};
 	});
 	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
 	protected readonly meParams$ = toObservable(
-		computed(() => {
-			const uniqueOperationIds = this.uniqueOperationIds();
-			const operationIds = this.operationIds();
-			const appInstanceId = this.appInstanceId();
-
-			return {
-				fields: this.#userFields,
-				// The "me" request is a lookup by id and must not carry the search `filters`:
-				// they target the search API and aren't necessarily supported by the endpoint
-				// resolving the current user (e.g. API v3), which would fail the request.
-				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
-				...(operationIds ? { operations: operationIds.join(',') } : {}),
-				...(appInstanceId ? { appInstanceId } : {}),
-				id: this.currentUserId,
-			};
-		}),
+		computed(() => ({
+			fields: this.#userFields,
+			// The "me" request is a lookup by id and must not carry the search `filters`:
+			// they target the search API and aren't necessarily supported by the endpoint
+			// resolving the current user (e.g. API v3), which would fail the request.
+			...this.#scopeParams(),
+			id: this.currentUserId,
+		})),
 	);
 
 	protected readonly me$ = this.meParams$.pipe(
@@ -153,16 +152,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		shareReplay(1),
 	);
 
-	public readonly totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
+	public override readonly totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), params: { ...this.filters(), ...this.#scopeParams(), fields: 'collection.count' } }))).pipe(
 		debounceTime(250),
-		switchMap(({ url, filters }) =>
-			this.httpClient.get<{ data: { count: number } } | { count: number }>(url, {
-				params: {
-					...filters,
-					fields: 'collection.count',
-				},
-			}),
-		),
+		switchMap(({ url, params }) => this.httpClient.get<{ data: { count: number } } | { count: number }>(url, { params })),
 		map((res) => ('data' in res ? (res?.data.count ?? 0) : (res?.count ?? 0))),
 	);
 

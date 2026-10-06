@@ -7,3 +7,4 @@ export * from './plugins/tag';
 export * from './plugins/text-style';
 export * from './plugins/toolbar';
 export * from './rich-text-input.component';
+export * from './rich-text-input.translate';

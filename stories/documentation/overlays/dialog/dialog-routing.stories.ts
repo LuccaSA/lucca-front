@@ -25,6 +25,7 @@ import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { map } from 'rxjs';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+
 @Injectable()
 class DataProvider {
 	dummy = signal(42);

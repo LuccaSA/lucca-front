@@ -17,6 +17,7 @@ function getTemplate(args: TreeStory): string {
 				<th class="dataTable-head-row-cell">Label</th>
 			</tr>
 		</thead>
+		<!-- Un tbody par nœud racine -->
 		<tbody class="dataTable-body">
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-tree">
@@ -50,6 +51,7 @@ function getTemplate(args: TreeStory): string {
 				<td class="dataTable-body-row-cell">Text</td>
 			</tr>
 		</tbody>
+		<!-- Un tbody par nœud racine -->
 		<tbody class="dataTable-body">
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-tree">

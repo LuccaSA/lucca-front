@@ -742,7 +742,7 @@ Permet d'adapter la hauteur ou la largeur d'un élément.
 .pr-u-minBlockSize0
 ```
 
-## Focus `v19.3`
+## Focus
 
 Permet d'appliquer le style focus commun.
 

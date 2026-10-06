@@ -47,6 +47,10 @@
 			flex-wrap: var(--components-filterBar-scrollBox-group-flexWrap);
 			flex-grow: 1;
 			flex-shrink: 1 !important;
+
+			.button {
+				white-space: nowrap;
+			}
 		}
 
 		.filterBar-scrollBox-export {

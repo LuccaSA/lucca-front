@@ -8,7 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import Handlebars from 'handlebars';
-import { ComponentData, DesignSection, FigmaDesignTokens, SharedTypeDef, StoryExample } from '../types';
+import { ComponentData, DesignSection, FigmaDesignTokens, SharedTypeDef, StoryExample, StorySnippet } from '../types';
 
 const TEMPLATES_DIR = path.join(__dirname, '..', 'templates');
 
@@ -42,7 +42,10 @@ function getTemplate(name: string): HandlebarsTemplateDelegate {
 /**
  * Renders the main component skill markdown (API + Basic Usage + links).
  */
-export function renderComponentMd(data: ComponentData, opts?: { hasDesign?: boolean; changelog?: string | null; hasFigma?: boolean }): string {
+export function renderComponentMd(
+	data: ComponentData,
+	opts?: { hasDesign?: boolean; changelog?: string | null; hasFigma?: boolean; hasComponentPage?: boolean },
+): string {
 	const template = getTemplate('component');
 
 	const context = {
@@ -56,7 +59,10 @@ export function renderComponentMd(data: ComponentData, opts?: { hasDesign?: bool
 		storybook: data.storybook,
 		basicUsage: data.basicUsage,
 		version: data.version,
-		hasExamples: data.storyExamples && data.storyExamples.length > 0,
+		// Whether `<slug>.component.md` was actually rendered. Falls back to the story count only when
+		// the caller does not say, which is what the link used to be based on — and it was wrong in
+		// both directions: a page could exist without stories, or stories exist without a page.
+		hasExamples: opts?.hasComponentPage ?? (data.storyExamples && data.storyExamples.length > 0),
 		// hasDesign must reflect whether design/_index.md is actually written (design sections exist),
 		// not merely the presence of ZH data — otherwise the link is dead for components whose ZH
 		// content is code-only. The caller passes the real value (from splitDesignSections).
@@ -99,10 +105,40 @@ export function splitDesignSections(data: ComponentData): {
 export interface ZhStoryNote {
 	/** Storybook story IDs extracted from iframe links. */
 	storyIds: string[];
-	/** Consumer import lines (curated by design team). */
-	imports: string[];
+	/** Sass import lines (`@forward` / `@use`) curated by the design team. */
+	scssImports: string[];
+	/** Consumer TypeScript import lines curated by the design team. */
+	tsImports: string[];
+	/** Code excerpts that are not import statements, kept verbatim with their language. */
+	snippets: StorySnippet[];
 	/** Prose text associated with these stories. */
 	note: string;
+}
+
+/** A Sass import line. */
+const SCSS_IMPORT_LINE = /^\s*@(forward|use)\b/;
+/** A TypeScript/JavaScript import statement, on a single line. */
+const TS_IMPORT_LINE = /^\s*import\b[^;]*\bfrom\b/;
+
+function dedupe(lines: string[]): string[] {
+	return [...new Set(lines.filter(Boolean))];
+}
+
+/** Drops leading and trailing blank lines, keeping inner indentation untouched. */
+function trimBlankEdges(lines: string[]): string[] {
+	let start = 0;
+	let end = lines.length;
+	while (start < end && !lines[start].trim()) start++;
+	while (end > start && !lines[end - 1].trim()) end--;
+	return lines.slice(start, end);
+}
+
+/** True when a leftover excerpt carries nothing but comments (e.g. `// Imports additionnels`). */
+function isCommentOnly(code: string): boolean {
+	return code
+		.split('\n')
+		.filter((l) => l.trim())
+		.every((l) => /^\s*(\/\/|\/\*|\*)/.test(l));
 }
 
 /**
@@ -131,13 +167,28 @@ export function extractZhStoryNotes(rawZh: string): ZhStoryNote[] {
 
 		if (storyIds.length === 0) continue;
 
-		// Extract import lines from code blocks
-		const imports: string[] = [];
-		const codeBlockRegex = /```(?:ts|typescript|css)\n([\s\S]*?)```/g;
+		// Split each code block by what its lines actually are. Pushing every line into a single
+		// `imports` array is what mixed TypeScript into the SCSS fence and flattened multi-line
+		// excerpts (an options object, a directive class) into a list of orphan lines.
+		const scssImports: string[] = [];
+		const tsImports: string[] = [];
+		const snippets: StorySnippet[] = [];
+		const codeBlockRegex = /```(ts|typescript|tsx|css|scss)\n([\s\S]*?)```/g;
 		let codeMatch: RegExpExecArray | null;
 		while ((codeMatch = codeBlockRegex.exec(tabContent)) !== null) {
-			const lines = codeMatch[1].trim().split('\n').map((l) => l.trim()).filter(Boolean);
-			imports.push(...lines);
+			const lang: StorySnippet['lang'] = /^(css|scss)$/.test(codeMatch[1]) ? 'scss' : 'ts';
+			const rest: string[] = [];
+
+			for (const line of codeMatch[2].split('\n')) {
+				if (SCSS_IMPORT_LINE.test(line)) scssImports.push(line.trim());
+				else if (TS_IMPORT_LINE.test(line)) tsImports.push(line.trim());
+				else rest.push(line);
+			}
+
+			// Whatever is left is an excerpt, not an import: keep it verbatim (indentation included)
+			// so it can be fenced in its own language instead of being passed off as imports.
+			const code = trimBlankEdges(rest).join('\n');
+			if (code.trim() && !isCommentOnly(code)) snippets.push({ lang, code });
 		}
 
 		// Extract prose text (everything except tab-title, code blocks, storybook links)
@@ -151,7 +202,7 @@ export function extractZhStoryNotes(rawZh: string): ZhStoryNote[] {
 		// Strip empty notes
 		if (!note || note.length < 5) note = '';
 
-		results.push({ storyIds, imports, note });
+		results.push({ storyIds, scssImports: dedupe(scssImports), tsImports: dedupe(tsImports), snippets, note });
 	}
 
 	return results;
@@ -180,15 +231,15 @@ export function renderComponentPageMd(data: ComponentData, codeSections: DesignS
 	const angularSection = codeSections.find((s) => /angular/i.test(s.title));
 	const htmlSection = codeSections.find((s) => /html/i.test(s.title));
 
+	const zhAngularNotes = substantial(dropEmptyHeadings(angularSection ? cleanCodeSectionForExamples(angularSection.content) : null));
+	const zhHtmlNotes = substantial(dropEmptyHeadings(htmlSection ? cleanCodeSectionForExamples(htmlSection.content) : null));
+
 	const angularExamples = (data.storyExamples ?? [])
 		.filter((e) => e.framework === 'angular')
 		.map((e) => buildStoryContext(data.slug, e, scssImport));
 	const htmlExamples = (data.storyExamples ?? [])
 		.filter((e) => e.framework === 'html-css')
 		.map((e) => buildStoryContext(data.slug, e, scssImport));
-
-	const zhAngularNotes = angularSection ? cleanCodeSectionForExamples(angularSection.content) || null : null;
-	const zhHtmlNotes = htmlSection ? cleanCodeSectionForExamples(htmlSection.content) || null : null;
 
 	const context = {
 		slug: data.slug,
@@ -201,6 +252,12 @@ export function renderComponentPageMd(data: ComponentData, codeSections: DesignS
 		hasHtml: htmlExamples.length > 0 || !!zhHtmlNotes,
 	};
 
+	// Nothing to show: emit no page rather than a title over a void. The early return above only
+	// covers "no examples AND no ZH code section"; a section that cleans down to nothing still got
+	// through, and shipped pages holding a heading and not one line else — `onboarding-empty-state`
+	// was literally its own title, `duration-picker` and `time-picker` a title over an empty H2.
+	if (!context.hasAngular && !context.hasHtml) return null;
+
 	return cleanOutput(template(context));
 }
 
@@ -210,26 +267,74 @@ export function renderComponentPageMd(data: ComponentData, codeSections: DesignS
 function buildStoryContext(slug: string, example: StoryExample, scssImport?: string): Record<string, unknown> {
 	const isHtml = example.framework === 'html-css';
 
-	// For HTML/CSS stories: merge ZH imports (SCSS) with the base scssImport into a single CSS block
-	// For Angular stories: use ZH imports (curated) if available, otherwise filtered story imports
-	let cssImportBlock: string | undefined;
-	let displayImports: string[];
+	// What language a line is in decides its fence — not what framework the story documents. The
+	// component's base `@forward` belongs to the HTML/CSS integration; ZeroHeight's own Sass and
+	// TypeScript lines are rendered for what they are, whichever section the story sits in.
+	const scssLines = dedupe([...(isHtml && scssImport ? [scssImport] : []), ...(example.zhScssImports ?? [])]);
 
-	if (isHtml) {
-		const cssLines = [scssImport, ...(example.zhImports ?? [])].filter(Boolean) as string[];
-		cssImportBlock = cssLines.length > 0 ? cssLines.join('\n') : undefined;
-		displayImports = []; // HTML stories don't have JS consumer imports
-	} else {
-		cssImportBlock = undefined;
-		displayImports = example.zhImports ?? example.imports;
-	}
+	// An HTML/CSS story's own imports are Storybook plumbing, never consumer imports — only
+	// ZeroHeight can supply TypeScript for one.
+	const tsLines = dedupe(example.zhTsImports?.length ? example.zhTsImports : isHtml ? [] : example.imports);
 
 	return {
 		slug,
 		...example,
-		displayImports,
-		scssImport: cssImportBlock,
+		// Same rule as the section notes: a note reduced to headings is not content. These are worse
+		// there — one ZeroHeight tab maps onto several stories, so a heading-only note was reprinted
+		// under every one of them. `callout` carried the same six empty `###` twice, which is where
+		// most of the 83 duplicate titles actually came from.
+		zhNote: substantial(dropEmptyHeadings(example.zhNote ?? null)),
+		displayImports: tsLines,
+		scssImport: scssLines.length > 0 ? scssLines.join('\n') : undefined,
+		snippets: example.zhSnippets ?? [],
 	};
+}
+
+/**
+ * Drops the headings of a ZeroHeight note that have nothing under them.
+ *
+ * Cleaning a code section strips what the page renders elsewhere — story links, code blocks — and
+ * used to leave the headings that introduced them. `callout`'s HTML note came out as seven
+ * consecutive `###` with a single line of prose between them, and `### Actions` twice, which is also
+ * where most of the 83 duplicate titles came from: not two examples sharing a name, but a skeleton
+ * of empty headings. Same rule as everywhere else here — a heading with no content is not content.
+ */
+function dropEmptyHeadings(note: string | null): string | null {
+	if (!note) return null;
+
+	const lines = note.split('\n');
+	const kept: string[] = [];
+	for (let i = 0; i < lines.length; i++) {
+		const isHeading = /^\s*#{1,6}\s/.test(lines[i]);
+		if (!isHeading) {
+			kept.push(lines[i]);
+			continue;
+		}
+		// Keep it only if something other than blank lines and further headings follows.
+		let j = i + 1;
+		while (j < lines.length && (!lines[j].trim() || /^\s*#{1,6}\s/.test(lines[j]))) {
+			if (/^\s*#{1,6}\s/.test(lines[j])) break;
+			j++;
+		}
+		if (j < lines.length && lines[j].trim() && !/^\s*#{1,6}\s/.test(lines[j])) kept.push(lines[i]);
+	}
+
+	return kept.join('\n').replace(/\n{3,}/g, '\n\n').trim() || null;
+}
+
+/**
+ * Keeps a ZeroHeight note only if it says something. A note reduced to its headings reads as content
+ * to a truthiness check but renders as an empty section — which is how a page could be published
+ * carrying `## Time and Duration picker Angular` and nothing underneath.
+ */
+function substantial(note: string | null): string | null {
+	if (!note) return null;
+	const body = note
+		.split('\n')
+		.filter((l) => !/^\s*#{1,6}\s/.test(l))
+		.join('')
+		.trim();
+	return body.length > 0 ? note : null;
 }
 
 /**

@@ -1,9 +1,13 @@
-import { ReadMoreComponent } from '@lucca-front/ng/read-more';
+import { luReadMoreTranslations, ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/ReadMore/Angular/AI',
+	argTypes: {
+		intl: intlArgType(luReadMoreTranslations, 'ReadMoreTranslate'),
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [ReadMoreComponent, TagComponent],

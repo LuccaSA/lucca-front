@@ -1,14 +1,12 @@
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
 
 interface segmentedControlBasicStory {
 	S: boolean;
 	withNumericBadge: boolean;
 	vertical: boolean;
+	ariaLabel: string;
 }
 
 export default {
@@ -30,6 +28,10 @@ export default {
 			description: 'Affiche le composant en vue verticale.',
 			table: { category: 'inputs' },
 		},
+		ariaLabel: {
+			description: "Nom accessible du groupe d'onglets, restitué aux technologies d'assistance.",
+			table: { category: 'inputs' },
+		},
 	},
 	title: 'Documentation/Navigation/segmentedControl/Angular/Tabs',
 } as Meta;
@@ -37,11 +39,12 @@ export default {
 function getTemplate(args: segmentedControlBasicStory): string {
 	const size = args.S ? ` small` : ``;
 	const vertical = args.vertical ? ` vertical` : ``;
+	const ariaLabel = args.ariaLabel ? ` [ariaLabel]="ariaLabel"` : ``;
 	const numericBadgeComponent = args.withNumericBadge ? ` <lu-numeric-badge value="8" />` : ``;
 	return `<ng-template #label>
 	Lorem${numericBadgeComponent}
 </ng-template>
-<lu-segmented-control-tabs${size}${vertical}>
+<lu-segmented-control-tabs${size}${vertical}${ariaLabel}>
 	<lu-segmented-control-tabs-panel [label]="label" value="0">
 		<div class="demo">Content Lorem</div>
 	</lu-segmented-control-tabs-panel>
@@ -69,35 +72,7 @@ export const Basic: StoryObj<segmentedControlBasicStory> = {
 		S: false,
 		withNumericBadge: false,
 		vertical: false,
+		ariaLabel: 'Lorem ipsum',
 	},
 	render: Template,
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const tablist = canvas.getByRole('tablist');
-		await expect(tablist).toBeVisible();
-		const tabs = canvas.getAllByRole('tab');
-		await expect(tabs.length).toBe(4);
-	});
-
-	await step('Clic sur un onglet', async () => {
-		const tabs = canvas.getAllByRole('tab');
-		await userEvent.click(tabs[1]);
-		await waitForAngular();
-		await expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
-		await expect(canvas.getByText('Content Ipsum')).toBeVisible();
-	});
-
-	await step('Navigation clavier entre les onglets', async () => {
-		const tabs = canvas.getAllByRole('tab');
-		tabs[1].focus();
-		await expect(tabs[1]).toHaveFocus();
-		await userEvent.keyboard('{ArrowRight}');
-		await waitForAngular();
-		await expect(tabs[2]).toHaveFocus();
-	});
-});

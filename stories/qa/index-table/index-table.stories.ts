@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import {
@@ -16,8 +17,9 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
-import { Meta, StoryObj } from '@storybook/angular-vite';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'index-table-stories',
@@ -40,6 +42,7 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 		IndexTableActionFileComponent,
 		PaginationComponent,
 		ButtonComponent,
+		LuTooltipTriggerDirective,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -48,6 +51,11 @@ class IndexTableStory {}
 export default {
 	title: 'QA/IndexTable',
 	component: IndexTableStory,
+	decorators: [
+		applicationConfig({
+			providers: [provideAnimations()],
+		}),
+	],
 } as Meta;
 
 const template = () => ({});

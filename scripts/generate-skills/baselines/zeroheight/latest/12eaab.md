@@ -5,27 +5,11 @@ description: Le Toast est un composant permettant de faire un feedback en réact
 
 # Design
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=5762:157544">
+<design>
 
 **🖼️ Intro**
 
 **🖼️ Intro**
-
-**Style**
-
-| Group | Name | Value |
-| :--- | :--- | :--- |
-| Borders | Weight | 1 px |
-| Borders | Align | Outside |
-
-**Attributes**
-
-| Attribute | Value |
-| :--- | :--- |
-| Position | X: 0 px; Y: 0 px |
-| Size | W: 960 px; H: 240 px |
-| Opacity | 100% |
-| Border radius | 8px |
 
 </design>
 
@@ -41,27 +25,11 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 ## Anatomie
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=4234:48275">
+<design>
 
 **🖼️ Anatomy**
 
 **🖼️ Anatomy**
-
-**Style**
-
-| Group | Name | Value |
-| :--- | :--- | :--- |
-| Borders | Weight | 1 px |
-| Borders | Align | Outside |
-
-**Attributes**
-
-| Attribute | Value |
-| :--- | :--- |
-| Position | X: 0 px; Y: 0 px |
-| Size | W: 960 px; H: 248 px |
-| Opacity | 100% |
-| Border radius | 8px |
 
 <notes>
 
@@ -81,27 +49,11 @@ Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-pu
 
 Lorsqu’une action est réversible dans un un court délai il est possible d’afficher un Toast pour que l’utilisateur puisse annuler son action de manière simple.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=4234:48305">
+<design>
 
 **🖼️ Cancel**
 
 **🖼️ Cancel**
-
-**Style**
-
-| Group | Name | Value |
-| :--- | :--- | :--- |
-| Borders | Weight | 1 px |
-| Borders | Align | Outside |
-
-**Attributes**
-
-| Attribute | Value |
-| :--- | :--- |
-| Position | X: 0 px; Y: 0 px |
-| Size | W: 960 px; H: 376 px |
-| Opacity | 100% |
-| Border radius | 8px |
 
 </design>
 
@@ -109,27 +61,11 @@ Lorsqu’une action est réversible dans un un court délai il est possible d’
 
 Le Toast est un bon moyen pour alerter l’utilisateur quand l’action qu’il vient de réaliser rencontre une erreur. Cela est aussi valable dans le cas d’un enregistrement automatique.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=4234:48332">
+<design>
 
 **🖼️ Error**
 
 **🖼️ Error**
-
-**Style**
-
-| Group | Name | Value |
-| :--- | :--- | :--- |
-| Borders | Weight | 1 px |
-| Borders | Align | Outside |
-
-**Attributes**
-
-| Attribute | Value |
-| :--- | :--- |
-| Position | X: 0 px; Y: 0 px |
-| Size | W: 960 px; H: 376 px |
-| Opacity | 100% |
-| Border radius | 8px |
 
 </design>
 
@@ -137,27 +73,11 @@ Le Toast est un bon moyen pour alerter l’utilisateur quand l’action qu’il 
 
 Le Toast est particulièrement utile pour informer l’utilisateur du résultat d’une action asynchrone. Il notifie du succès ou de l’échec d’une action, offrant un feedback rapide et non intrusif, alors que l’utilisateur a continué sa navigation.
 
-<design figma-url="https://www.figma.com/design/ud1QBuvu6PMBaMRljCZVYV/?node-id=4234:48353">
+<design>
 
 **🖼️ Asynchrone**
 
 **🖼️ Asynchrone**
-
-**Style**
-
-| Group | Name | Value |
-| :--- | :--- | :--- |
-| Borders | Weight | 1 px |
-| Borders | Align | Outside |
-
-**Attributes**
-
-| Attribute | Value |
-| :--- | :--- |
-| Position | X: 0 px; Y: 0 px |
-| Size | W: 960 px; H: 376 px |
-| Opacity | 100% |
-| Border radius | 8px |
 
 </design>
 
@@ -190,11 +110,11 @@ Si l’utilisateur clique à répétition sur un bouton qui entraine une erreur,
 ## Contenus associés
 
 <shortcut_tiles>
-<shortcut_tile url="https://prisme.lucca.io/94310e217/p/833f79" page-id="8794481">
+<shortcut_tile url="https://prisme.lucca.io/94310e217/p/833f79" page-id="6380292">
 **Feedback**
 </shortcut_tile>
 
-<shortcut_tile url="https://prisme.lucca.io/94310e217/p/64c8d8" page-id="8794368">
+<shortcut_tile url="https://prisme.lucca.io/94310e217/p/64c8d8" page-id="2688423">
 **Callout**
 </shortcut_tile>
 
@@ -250,3 +170,63 @@ N’employons pas de ton encourageant ni décontracté, restons très direct.
 Les toasts servent à afficher une information ou un callback dans un coin de l'application.
 
 [Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-overlays-toasts--basic)
+
+# Changelog
+
+## Toast changelog
+
+### 21.3.0
+
+#### Changed
+
+- Long words now wrap (`overflow-wrap`) instead of overflowing the toast.
+
+### 21.1.3
+
+#### Fixed
+
+- `max-inline-size` of the toasts on narrow viewports.
+
+### 21.1.0
+
+#### Changed
+
+- `intl` input now accepts partial overrides that are merged with the default translations.
+
+### 21.0.0
+
+#### Deprecated
+
+- `LuToastsModule` — import the standalone `LuToastsComponent` instead.
+
+### 20.3.4
+
+#### Fixed
+
+- The Angular component now imports its own styles.
+
+### 18.3.4
+
+#### Changed
+
+- Toast message is rendered inside a paragraph.
+
+### 18.2.0
+
+#### Deprecated
+
+- `ILuTranslation` type — use `LuTranslation` instead.
+
+#### Fixed
+
+- Toast position when a footer is present.
+
+### 18.1.0
+
+#### Added
+
+- `message` now accepts a `PortalContent`.
+
+#### Changed
+
+- Toast UI refactored.

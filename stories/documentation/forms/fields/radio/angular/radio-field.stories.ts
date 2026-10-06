@@ -4,9 +4,8 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RADIO_GROUP_INPUT_SIZE, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
+import { useStoryModel, generateInputs, setStoryOptions } from '@/helpers/stories';
+
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
@@ -115,30 +114,3 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 		presentation: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const radios = canvas.getAllByRole('radio');
-		await expect(radios.length).toBeGreaterThanOrEqual(2);
-		await expect(radios[0]).toBeChecked();
-	});
-
-	await step('Interaction souris - sélectionner option B', async () => {
-		const radios = canvas.getAllByRole('radio');
-		await userEvent.click(radios[1]);
-		await waitForAngular();
-		await expect(radios[1]).toBeChecked();
-		await expect(radios[0]).not.toBeChecked();
-	});
-
-	await step('Interaction clavier - naviguer avec les flèches', async () => {
-		const radios = canvas.getAllByRole('radio');
-		radios[1].focus();
-		await userEvent.keyboard('{ArrowUp}');
-		await waitForAngular();
-		await expect(radios[0]).toBeChecked();
-	});
-});

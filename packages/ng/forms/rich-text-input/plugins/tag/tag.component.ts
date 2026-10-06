@@ -2,6 +2,7 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChild, viewChildren, ViewContainerRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { mergeRegister } from '@lexical/utils';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions, isNotNil } from '@lucca-front/ng/core';
@@ -11,7 +12,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode, type NodeKey, SKIP_DOM_SELECTION_TAG } from 'lexical';
 import { INITIAL_UPDATE_TAG, RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
-import { $createTagNode, TagNode } from './tag-node';
+import { $createTagNode, registerTagChipsCleanup, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 
@@ -104,25 +105,28 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 	setEditorInstance(editor: LexicalEditor): void {
 		this.editor = editor;
 
-		// listen for new partial tag nodes (coming from formatters)
-		this.#registeredCommands = this.editor.registerMutationListener(
-			TagNode,
-			(mutations) => {
-				const newNodes = new Set<NodeKey>(this.#tagNodeKeys());
-				this.editor?.read(() => {
-					mutations.forEach((m, k) => {
-						if (m === 'created') {
-							newNodes.add(k);
-						} else if (m === 'destroyed') {
-							newNodes.delete(k);
+		this.#registeredCommands = mergeRegister(
+			registerTagChipsCleanup(this.editor),
+			// listen for new partial tag nodes (coming from formatters)
+			this.editor.registerMutationListener(
+				TagNode,
+				(mutations) => {
+					const newNodes = new Set<NodeKey>(this.#tagNodeKeys());
+					this.editor?.read(() => {
+						mutations.forEach((m, k) => {
+							if (m === 'created') {
+								newNodes.add(k);
+							} else if (m === 'destroyed') {
+								newNodes.delete(k);
+							}
+						});
+						if (!areSetsEqual(newNodes, this.#tagNodeKeys())) {
+							this.#tagNodeKeys.set(newNodes);
 						}
 					});
-					if (!areSetsEqual(newNodes, this.#tagNodeKeys())) {
-						this.#tagNodeKeys.set(newNodes);
-					}
-				});
-			},
-			{ skipInitialization: true },
+				},
+				{ skipInitialization: true },
+			),
 		);
 	}
 

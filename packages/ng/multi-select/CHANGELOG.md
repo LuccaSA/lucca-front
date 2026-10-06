@@ -1,3 +1,47 @@
+### 22.0.4
+
+#### Fixed
+
+- Counter of the selected options no longer wraps onto a new line.
+- Icon position when the select is displayed in a filter pill.
+
+### 22.0.1
+
+#### Fixed
+
+- Selecting a group through "select all" now selects every option of that group.
+- Selects stay non-searchable when no `clueChange` binding is provided.
+
+### 22.0.0
+
+#### Added
+
+- `dataSource` input accepting a `SelectDataSource` (`getOptions`, `getTotalCount`, `getGroupOptions`, `reset`, `paramsChange`, `clueDebounceMs`) to feed the options, next to the existing `options` input.
+
+#### Changed
+
+- Panel is now built on the `listbox` component and its shared panel layout.
+
+#### Removed
+
+- `previousPage` output — pagination is now driven by the data source.
+
+#### Fixed
+
+- Clear button is now displayed in filter pill mode.
+- A failing "me" lookup no longer keeps a user select loading forever.
+- Loader is no longer started again when a filter pill is reopened.
+
+### 21.4.1
+
+#### Added
+
+- Presentation mode now formats the selected options with `Intl.ListFormat`.
+
+#### Fixed
+
+- Extra spacing when the select is displayed in a filter pill.
+
 ### 21.3.1
 
 #### Added

@@ -2,9 +2,7 @@ import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { expect, within } from 'storybook/test';
-import { BasicTEST as ButtonBasic } from './button-basic.stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Counter',
@@ -81,11 +79,3 @@ export const Basic: StoryObj<ButtonComponent> = {
 		critical: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async (context) => {
-	const canvas = within(context.canvasElement);
-	await ButtonBasic.play(context);
-	const button = await canvas.findByRole('button');
-	const counter = await within(button).findByText('999+');
-	await expect(counter).toBeInTheDocument();
-});

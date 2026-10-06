@@ -25,15 +25,16 @@ export default mergeConfig(createBaseConfig(__dirname), {
 			// Node environment with a ts-node loader (see vitest.schematics.config.ts).
 			'./vitest.schematics.config.ts',
 			{
-				// API-docs scripts: pure Node ESM (ts-morph extraction + Markdown
-				// renderers for the LLM API surface), no Angular runtime — a plain
-				// Node environment, not the Angular base config.
+				// Plain Node ESM scripts: deliberately not extending the Angular base config.
 				test: {
 					name: 'api-docs',
 					environment: 'node',
 					include: ['scripts/api-docs/**/*.spec.mjs'],
 				},
 			},
+			// Skills generator project: pure Node specs for scripts/generate-skills
+			// (see vitest.generate-skills.config.ts).
+			'./vitest.generate-skills.config.ts',
 		],
 	},
 });

@@ -1,0 +1,248 @@
+# Messages d'erreur
+
+# Recommandations générales
+
+### **En bref** 
+
+Un message d’erreur bien pensé :
+
+* **Décrit le problème** et ses conséquences.
+* Explique la raison du problème uniquement **si c'est indispensable** pour l'utilisateur.
+* **Suggère une manière** de résoudre le problème.
+* Permet de se concentrer sur la solution plutôt que de répéter le problème.
+* Se compose le moins possible de termes négatifs ou techniques afin de **ne pas mettre de pression inutile**.
+* **Est adressé à l’utilisateur** directement, en utilisant “vous”, comme si nous étions en face de lui.
+
+## 1. Définition
+
+Un message d’erreur :
+
+* **Décrit le problème et ses conséquences ;**
+* **Suggère une manière de résoudre le problème.**
+
+## 2. Anatomie d’un message d’erreur
+
+Pour construire ce message, il est recommandé de retrouver les éléments suivants :
+
+* **Qui :** quel est l’objet ou le *process* concerné par l’erreur.
+* **Quoi :** ce qui s’est passé.
+* **Pourquoi :** la raison pour laquelle l’erreur a eu / a lieu - **mais seulement si on le sait, et seulement si c’est indispensable à l’utilisateur.**
+* **Comment :** les étapes pour résoudre le problème.
+
+## 3. Les différents types de messages d’erreur
+
+📌 Le message d’erreur signale avant tout **une erreur liée aux informations fournies par l’utilisateur.** 
+
+**Ne l’utilisons pas pour indiquer à un utilisateur qu'il n'est pas autorisé à faire quelque chose** - il doit en être prévenu en amont. 
+
+Ou alors, c’est un message d’information, et non d’erreur.
+
+Le message d’erreur relaie donc un problème lié à l’erreur humaine lors de :
+
+* La saisie d’informations ;
+* Le paramétrage : l’erreur n’est dans ce cas pas forcément directement liée à l’utilisateur mais liée aux choix de l’admin RH et/ou du CS.
+
+À noter : les messages liés aux problèmes techniques sont volontairement écartés ici. Cette problématique sera traitée prochainement.
+
+## 4. Bien penser et rédiger le message d’erreur 
+
+En plus des recommandations pour Employer une voix 100% humaine (recommandations en cours de refonte), voici celles, spécifiques, à la rédaction de messages d’erreur simples et efficaces.
+
+### Accessibilité
+
+Pour des messages d’erreur accessibles auprès d'un large public :
+
+* **Restons clairs et simples :** Cela permet de demeurer compréhensible par des utilisateurs rencontrant des difficultés de lecture, des déficiences cognitives ou pour qui la langue de l’interface n’est pas la langue maternelle. Lire : les 4 critères essentiels pour votre contenu.
+* **Visons la précision**, pour que l’utilisateur comprenne qu’il est dans l’un des cas suivants : erreurs, avertissement. 
+* **Ne faisons aucune référence à une couleur** (”les champs en rouge”) **ou à une position dans l’espace** (”le bouton à droite”) pour pointer un élément associé au message. 
+
+### Restons empathiques...
+
+**Évitons de rejeter la** **faute sur l'utilisateur.** 
+
+S'il y a une erreur, c'est souvent parce que le parcours ou les instructions ne sont pas clairs. Ou parce que le logiciel n'a pas fonctionné comme prévu.
+
+**Nous suggérons une solution pour accompagner l'utilisateur.** 
+
+Si nous avons du mal à fournir toutes les informations nécessaires dans le composant choisi, on peut suggérer la possibilité de consulter la fiche d'aide (sous réserve de sa pertinence par rapport au problème rencontré).
+
+### ... Sans dramatiser, ni s’excuser, ni plaisanter
+
+**Évitons le plus possible** les termes à la tonalité négative, qui apportent peu au message :
+
+❌ « Erreurs », « erroné », « faux », « invalide », « valide », « interdit », « illégal », « problème » ou « échec » ;
+
+❌ « Désolé » ou « s’il vous plaît » ;
+
+❌ « Oups ! » ou « mince ! »
+
+ **Concentrons-nous sur la solution** au problème.
+
+### Privilégions la franchise
+
+Pas de mensonge, ni de tentative d'atténuer l'erreur. 
+
+### Adressons-nous directement à l'utilisateur
+
+**Employons la voix active** - car la voix passive induit de la lourdeur et de l'ambiguïté (qui doit accomplir l'action ? Moi ou le logiciel ?).
+
+**Adressons-nous directement à l'utilisateur** dès que c'est possible.
+
+### Méfions-nous du jargon
+
+Expliquons le problème le plus simplement possible.
+
+Utilisons les termes qu’utilisent, comprennent tous les utilisateurs. 
+
+*Des questions, des remarques, un témoignage ?* 
+
+*Envoyez un DM sur Slack à Anne-Laure ou sur #ux-writing.*
+
+# Callout
+
+## **Dans un** ***callout***
+
+**Consulter les recommandations générales sur la page** ***callout*** **sur Prisme.**
+
+### 📣
+
+**Icône :** la combinaison de l'icône d'erreur et de la couleur de fond *Critical* indique le type de message.
+
+**Titre H1 : il n'est pas indispensable.**
+
+**Description :** y décrire le problème, expliquer de manière concise comment réaliser l’action, formuler une solution claire.
+
+**Un bouton d’action (optionnel) :** guider l’utilisateur au bon endroit, s’il y a besoin.
+
+## 1. Description 
+
+* Misons sur une tonalité courtoise, encourageante, professionnelle.
+* C’est dans l’idéal une phrase que vous pourriez dire à l’oral, pour interpeller, impliquer l’utilisateur et l’inciter à l’action : “Vous devez choisir...”, “Vous avez X éléments à rectifier.”
+* C’est 1 phrase courte qui décrit le problème.
+* La phrase est formulée à la voix active, sans point d'exclamation.
+* **Si c’est possible**, éviter la négation.
+* La phrase se finit par un point.
+
+* La description peut signaler plusieurs problèmes, en explicitant :
+    * Le nombre de problèmes à résoudre.
+    * Ou le nombre d’actions à mener, dans le cas où plusieurs problèmes peuvent être résolus par une seule et même action.
+
+💡 **Cas particulier où plusieurs erreurs peuvent être corrigées avec 1 seule action**
+
+Dans les cas où 1 seule action (donc 1 seul bouton d’action) permet de corriger plusieurs erreurs ou informations, on peut éviter de répéter le même message d’erreur plusieurs fois.
+
+Il nous faut alors formuler la phrase en énumérant les éléments posant problème. 
+
+NB : le titre est obligatoire.
+
+Si une notion est trop complexe à appréhender à travers le seul callout, **nous pouvons miser sur un lien** vers une fiche d’aide ou vers une page sur laquelle la notion problématique est clairement explicitée.
+
+## 2. Bouton d’action
+
+L’erreur est sur la page, elle est facile à repérer ? Pas de bouton. 
+
+L’erreur est en dehors de la page ? Ajoutons un bouton, si l’erreur peut être traitée en un seul clic. Sinon, préférons un simple lien.
+
+**Consulter les** **guidelines sur les boutons d'action** **dans Prisme.**
+
+*Des questions, des remarques, un témoignage ?* 
+
+*Envoyez un DM sur Slack à Anne-Laure ou sur #ux-writing.*
+
+# Empty state
+
+## Dans un *empty state*
+
+**Recommandations générales disponibles sur la page** **Empty state****.**
+
+### 📣
+
+**Titre H1 :** il décrit le problème.
+
+**Description :** elle offre des informations complémentaires à celles contenues dans le titre - on ne répète pas ce qui est contenu dans le titre. 
+
+**Un bouton d’action (optionnel) :** guider l’utilisateur au bon endroit, s’il y a besoin.
+
+## 1. Titre 
+
+* Son intitulé répond à la question “Qu’est-ce qui fait que rien ne s’affiche ?”, “Qu’est-ce qui ne va pas ?”, ou “Qu’est-ce qui empêche le user de progresser dans sa tâche ?”
+* Il se suffit en lui-même, car l’utilisateur ne lit pas forcément la description qui suit.
+
+## 2. Description 
+
+* Misons sur une tonalité courtoise, encourageante, professionnelle.
+* C’est dans l’idéal une phrase que vous pourriez dire à l’oral, pour interpeller, impliquer l’utilisateur et l’inciter à l’action : “Vous devez choisir...”, “Vous avez X éléments à rectifier.”
+* C’est 1 phrase courte qui décrit le problème.
+* La phrase est formulée à la voix active, sans exclamation.
+* **Si c’est possible**, éviter la négation.
+* La phrase se finit par un point.
+* Vous pouvez la formuler sous forme de question, pour ne pas verser dans un ton trop abrupt, impératif.
+* Dans la mesure du possible, **incluons-y un lien** pour rediriger vers une action en ligne qui permet de résoudre le problème facilement, ou pour rafraîchir la page / renouveler l'action. **Ou bien incluons un bouton d'action :** il offre à l’utilisateur une prolongation - mais il faut s'interroger sur le fait qu'il soit indispensable ou non.
+
+## 3. Exemples
+
+*Des questions, des remarques, un témoignage ?* 
+
+*Envoyez un DM sur Slack à Anne-Laure ou sur #ux-writing.*
+
+# Toast
+
+**Consulter les recommandations générales sur la** **page du composant Toast**¬**.**
+
+# Formulaire
+
+## Dans un formulaire (New)
+
+**Recommandations générales disponibles sur :**
+
+* **[Formulaires](https://zeroheight.com/94310e217/p/2143a6)** 
+* ***[Textfield ](https://zeroheight.com/94310e217/p/459eda)*****[(](https://zeroheight.com/94310e217/p/459eda)*****[New](https://zeroheight.com/94310e217/p/459eda)*****[)](https://zeroheight.com/94310e217/p/459eda)**
+
+## 1. Description
+
+* Le message d'erreur de formulaire s'affiche en-dessous du champ lorsqu'il y a une erreur de validation.
+* **Utilisons une phrase courte** pour expliquer **de la manière la plus précise possible le problème tout en orientant vers l'action.**
+* **Tonalité : directe, concise, claire** - encore plus brève que pour les messages d'*empty state* par exemple.
+* La phrase est formulée à la voix active, sans point d'exclamation.
+* L'impératif est autorisé car il n'est pas ici considéré comme abrupt, ni « donneur d'ordre ». 
+* Éviter au maximum la négation - cela allège votre message et permet de rester plus direct.
+* La phrase se finit par un point.
+
+📣
+
+* **Un libellé (*****label*****) clair limite l'apparition des messages d'erreur.**
+
+* **On peut rappeler les éléments d'un libellé (*****label*****) dans le** ***inline message*****.** Exemple : rappeler les formats ou tailles de fichier acceptés quand il y a erreur sur le choix du fichier.
+
+## 2. Exemples
+
+| Descriptif de l'erreur | Message d'erreur recommandé |
+| --- | --- |
+| Ajout d’une seconde fin de période d’essai sans première période d’essai. | ✅ Indiquez une première période d’essai pour pouvoir en ajouter une seconde. |
+| Avenant incomplet. | ✅ Un avenant doit contenir au moins un établissement, une catégorie socio-professionnelle, un fichier ou un commentaire. |
+| Balises non valides. | ✅ Vos balises doivent comporter un code de donnée entouré de deux accolades. Exemple {{code_de_donnée}}.❌ Votre code de donnée n'est pas entouré d'accolades. |
+| Champ (*text field**,* *text area*) non rempli. | ✅ Complétez le / la / les [intitulé du champ].❌ Ce champ est requis.❌ Merci de compléter ce champ. |
+| *Checkbox*, case à cocher. | ✅ Sélectionnez au moins 1 critère. ✅ Sélectionnez 2 critères maximum.❌ Merci de sélectionner jusqu’à 2 critères maximum. |
+| Code postal trop court, ou format incorrect. | ✅ Indiquez un code postal complet. ❌ Ce champs est obligatoire |
+| Date d’affectation de poste improbable. | ✅ Une autre affectation de poste démarre avant cette date : indiquez une autre date.✅  Vérifiez la date indiquée.  ❌ Impossible de terminer l'affectation de poste à la date souhaitée : une autre affectation de poste démarre avant cette date.❌ Une erreur est survenue lors de la sauvegarde. |
+| Date de clôture d’un contrat improbable. | ✅ La date de fin doit être postérieure à la date de début. ❌ Veuillez indiquer une date de fin du contrat qui ne doit pas être antérieure à sa date de début. |
+| Date de fin de cycle de travail improbable. | ✅ La date doit être antérieure à celle de la fin de cycle. ❌ La date de début doit être antérieure à la date de fin |
+| Date de fin de seconde période d’essai renseignée sans la date de fin de la première période d’essai. | ✅ Indiquez la date de « Fin de période d'essai » avant d’indiquer la date de « Fin de la seconde période d'essai ». ❌ Vous devez saisir la date de "Fin de période d'essai" avant de saisir la date de « Fin de la seconde période d'essai". |
+| Email incorrect. | ✅ Entrez un email du type nom@entreprise.com**.**❌  Le mail saisi est invalide ! |
+| Fichier trop volumineux. | ✅ Le fichier doit avoir une taille de 600 MB maximum.❌ Unhandled Lucca.Files.Exception. Message: Unhandled Lucca.Files.Exception. Message: Status code: BadRequest. Reason: Bad Request. Response content: {"type":null,"title":null,"status":400,"detail":"Your files cannot fit in only one archive. Archive content size is limited to 600 MB\"","instance":null,"extensions":{}} |
+| IBAN incorrect. | ✅ L’IBAN paraît incorrect. Sélectionnez « Autres » puis complétez vos informations bancaires. ❌ Nous n’avons pas pu identifier votre IBAN. Merci de compléter manuellement vos informations bancaires en sélectionnant « Autres ». |
+| IBAN trop court. | ✅ L’IBAN doit comprendre 14 caractères minimum. ❌ Ce champ a une longueur minimale de 14 caractères. |
+| Identifiant ou matricule déjà utilisé. | ✅  L'identifiant « mbragoulet » est déjà utilisé.✅  Matricule déjà utilisé sur l’établissement [nom de l'établissement].  ❌  Le login mbragoulet a déjà été pris par un collaborateur.❌ Le matricule M0052 est déjà utilisé sur les établissements suivants : 1.  |
+| Longueur maximale atteinte. | ✅ Le prénom doit faire 100 caractères maximum.❌  La propriété firstName ne doit pas dépasser 100 caractères (actuellement 115 caractères). |
+| Montant non cohérent. | ✅ Le montant doit être égal au montant du paiement (45 €). ❌ Le montant est invalide car il doit être égale au montant du paiement (45 €). |
+| Nom, prénom manquant. | ✅ Indiquez le nom. ✅ Indiquez le prénom. ❌  Le nom est obligatoire. ❌  Le prénom est obligatoire. |
+| Nombre d'étoiles. | ✅ Indiquez le nombre. ✅ Le nombre doit être inférieur ou égal à 20. ❌ Valeur requise. |
+| Nombre entier demandé. | ✅ Indiquez un nombre entier, sans virgule. ❌  La valeur saisie ne correspond pas à un nombre entier |
+| Numéro de sécurité sociale incorrect. | ✅ Le numéro de sécurité sociale doit se composer de 15 chiffres.✅ Entrez  un numéro de sécurité sociale au format correct. ❌ Le numéro de sécurité sociale n'est pas valide. |
+| Numéro de téléphone (*phone number field)* incorrect. | ✅ Le numéro doit être au format 06 76 89 01 38. |
+| Sélection (*select simple*, *select multiple*) d'un objet. | ✅ Sélectionnez un / une [nom de l'objet].✅ Sélectionnez un / une ou plusieurs [nom de l'objet]. ❌ Propriété requise. ❌ Propriété obligatoire. |
+| Téléchargement de fichier. | **Si le fichier n'est pas au bon format**✅ Le format du fichier sélectionné doit être .csv ou .ods. ✅ Le format du fichier sélectionné doit être : .bmp, .jpg, .pdf, .png, ou .tif. **Si le fichier est vide** ✅ Le fichier sélectionné est vide. **Si le fichier est protégé par mot de passe** ✅ Le fichier sélectionné est protégé par mot de passe. **S'il y a eu un problème et que le fichier n'a pas été téléchargé** ✅ Le fichier sélectionné n'a pas pu être téléchargé. Essayez à nouveau. **S'il existe une limite au nombre de fichiers que l'utilisateur peut sélectionner** ✅ Vous pouvez sélectionner jusqu'à [nombre le plus élevé] fichiers maximum à la fois.**Si le fichier n'a pas été créé à partir d'un modèle à utiliser ou si le modèle a été modifié** ✅ Le fichier sélectionné doit être créé à partir d'un modèle. |
+
+*Des questions, un besoin de message standard ?* 
+
+*Envoyez un DM sur Slack à Anne-Laure ou sur #ux-writing.*

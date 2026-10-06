@@ -34,7 +34,7 @@
 import fs from 'fs';
 import path from 'path';
 import { DocumentationMap } from '../types';
-import { MinorResolution, technicalMinorsCoveredBy } from '../version-config';
+import { MinorResolution } from '../version-config';
 import { versionRoot } from './skill-writer';
 
 const SKILLS_BASE = 'lucca-front';
@@ -296,15 +296,22 @@ function renderRouter(majorInfos: MajorInfo[], componentSlugs: string[], docLine
 	const availableLines = majorInfos
 		.map((info) => {
 			const older = info.olderMinors.map((m) => `${m.minorKey} → \`minors/${m.minorKey.replace(/\./g, '-')}/\``).join(', ');
-			// Technical minors (framework-compat releases, no content of their own) covered by one
-			// of this major's documented minors — resolved as their covering minor, patch .0 only.
+			// Technical minors (framework-compat .0, then trunk patches) covered by one of this
+			// major's documented minors — resolved as their covering minor, every listed patch.
 			const techs = [info.baseMinor, ...info.olderMinors]
-				.flatMap((m) => technicalMinorsCoveredBy(m.minorKey).map((t) => `${t.minorKey} (${t.reason}) → lire comme ${t.coveredBy}, patch \`.0\` uniquement`))
+				.flatMap((m) =>
+					m.technicalMinors.map((t) => {
+						const patches = t.patchTags.map((tag) => tag.replace(/^v/, ''));
+						const later = patches.slice(1);
+						const fixes = later.length > 0 ? `, ajouts des patchs ${later.join(', ')} dans \`fixes/${t.minorKey.replace(/\./g, '-')}-*.md\`` : '';
+						return `${t.minorKey} (${t.reason}) → lire comme ${t.coveredBy} (patchs publiés : ${patches.join(', ')}${fixes})`;
+					}),
+				)
 				.join(', ');
 			return `- **Majeure ${info.major}** (\`./references/${info.major}/\`) : base = ${info.baseMinor.minorKey} (contenu du patch ${info.baseMinor.version.tag.replace(/^v/, '')})${older ? ` ; overrides : ${older}` : ''}${techs ? ` ; mineures techniques : ${techs}` : ''}`;
 		})
 		.join('\n');
-	const hasTechMinors = majorInfos.some((info) => [info.baseMinor, ...info.olderMinors].some((m) => technicalMinorsCoveredBy(m.minorKey).length > 0));
+	const hasTechMinors = majorInfos.some((info) => [info.baseMinor, ...info.olderMinors].some((m) => m.technicalMinors.length > 0));
 
 	const newestInfo = majorInfos[0];
 	const exMajor = newestInfo ? String(newestInfo.major) : '21';
@@ -336,7 +343,7 @@ Si la version ne peut pas être déterminée → **s'arrêter et demander à l'u
 
 - la **majeure** détectée n'apparaît pas ci-dessus (ex: projet monté en majeure supérieure alors que la skill n'a pas été mise à jour) ;
 - la **mineure** détectée est plus récente que la base de sa majeure${hasTechMinors ? ' **et** n\'est pas une mineure technique listée ci-dessus' : ''} (mineure publiée après cette skill → non documentée) ;
-- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son \`_manifest.md\`${hasTechMinors ? ' ; \`.0\` pour une mineure technique' : ''} → skill périmée, l'API réelle peut différer).
+- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son \`_manifest.md\`${hasTechMinors ? ' ; le dernier patch listé en §1 pour une mineure technique' : ''} → skill périmée, l'API réelle peut différer).
 
 ## 2. Résolution des chemins
 
@@ -361,7 +368,7 @@ ${
 		? `
 ### Projet sur une mineure technique
 
-Une mineure listée « technique » en §1 est une release de pure compatibilité framework : aucun changement d'API, de codemod ni de documentation. Traite le projet **comme s'il était sur sa mineure de couverture** et applique la résolution ci-dessus (ex: projet en \`21.4.0\` → documentation de \`21.3\`). **Seul le patch \`.0\` est couvert** — un patch ultérieur → arrête-toi et demande à l'utilisateur.
+Une mineure listée « technique » en §1 est une release de compatibilité framework : son patch \`.0\` est équivalent au dernier patch de sa mineure de couverture (aucun changement d'API, de codemod ni de documentation). Traite le projet **comme s'il était sur sa mineure de couverture** et applique la résolution ci-dessus (ex: projet en \`21.4.2\` → documentation de \`21.3\`). **Tous les patchs listés en §1 sont couverts.** Les patchs suivant le \`.0\` ont continué à livrer des correctifs **et quelques ajouts d'API** absents de la documentation : ils sont décrits dans les \`fixes/<M-m-p>.md\` de la mineure technique (au même endroit que ceux de la mineure de couverture, cf. « Patch antérieur » ci-dessus). Pour un projet sur un tel patch, lis tous les fixes de la mineure technique de version **inférieure ou égale** au patch installé et applique leurs changements **par-dessus** la documentation — sens inverse des fixes ordinaires : ces changements **sont** dans le code du projet.
 `
 		: ''
 }
