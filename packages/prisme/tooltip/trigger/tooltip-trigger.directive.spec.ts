@@ -83,6 +83,30 @@ class DelegateHostComponent implements OnInit {
 })
 class PlainHostComponent {}
 
+@Component({
+	selector: 'lu-tooltip-disabled-host',
+	template: `<button #button type="button" luTooltip="Tip" [attr.disabled]="disabledAttribute()">Text</button>`,
+	imports: [LuTooltipTriggerDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class DisabledHostComponent {
+	@ViewChild('button', { static: true }) buttonRef!: ElementRef<HTMLButtonElement>;
+
+	readonly disabled = signal(false);
+
+	/**
+	 * A browser blurs a focused element as soon as a binding disables it, inside the render.
+	 * happy-dom does not, so the binding does it itself.
+	 */
+	disabledAttribute(): '' | null {
+		if (!this.disabled()) {
+			return null;
+		}
+		this.buttonRef.nativeElement.blur();
+		return '';
+	}
+}
+
 function directiveOf(fixture: ComponentFixture<unknown>): LuTooltipTriggerDirective {
 	return fixture.debugElement.query(By.directive(LuTooltipTriggerDirective)).injector.get(LuTooltipTriggerDirective);
 }
@@ -225,5 +249,27 @@ describe(`${LuTooltipTriggerDirective.name}: history navigation`, () => {
 		expect(unhandledErrors).not.toHaveBeenCalled();
 		expect(directive.overlayRef?.hasAttached()).toBe(true);
 		expect(directive.overlayRef?.overlayElement.id).toBe(host.getAttribute('aria-describedby'));
+	}));
+});
+
+describe(`${LuTooltipTriggerDirective.name}: trigger disabled while focused`, () => {
+	afterEach(() => {
+		TestBed.inject(OverlayContainer).getContainerElement().remove();
+	});
+
+	it('closes without writing to a signal during the render when the trigger loses the focus', fakeAsync(() => {
+		const fixture = TestBed.createComponent(DisabledHostComponent);
+		fixture.detectChanges();
+		const directive = directiveOf(fixture);
+		const host = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+
+		host.focus();
+		tick(150);
+		expect(directive.overlayRef?.hasAttached()).toBe(true);
+
+		fixture.componentInstance.disabled.set(true);
+		expect(() => fixture.detectChanges()).not.toThrow();
+		tick(150);
+		expect(directive.overlayRef?.hasAttached()).toBe(false);
 	}));
 });
