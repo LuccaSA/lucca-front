@@ -197,13 +197,6 @@ describe(MyComponent.name, () => {
 });
 ```
 
-Pour un composant simple, un smoke test suffit à démarrer (voir `packages/ng/button/button.spec.ts`) :
-
-```typescript
-button = TestBed.createComponent(ButtonComponent).componentInstance;
-expect(button).not.toBeUndefined();
-```
-
 Notes composant :
 
 - Requêtes DOM : `(fixture.nativeElement as HTMLElement).querySelector('[data-testid="…"]')`, ou `fixture.debugElement.query(By.css(…))`. Préférer les sélecteurs de rôle/`data-testid` aux classes CSS internes.
@@ -241,16 +234,19 @@ Un test est justifié si la cible coche **au moins un** critère. Chaque cas de 
 4. **Historique de bugs** : un fix passé sur la cible est une régression à verrouiller. Vérifier avec :
 
    ```bash
-   git log --oneline -- packages/ng/<entrypoint> | grep -E '^\w+ fix'
+   git log --format='%h %s' -- <fichiers de la cible> | grep -E '^[0-9a-f]+ fix[(:!]'
    ```
 
+   `<fichiers de la cible>` désigne ses propres fichiers (`.ts`, template, `.scss`), ou son dossier quand elle en a un dédié (`packages/ng/core-select/api/`, `packages/prisme/…`), jamais l'entrypoint entier : un fix sur un composant voisin ne qualifie pas la cible. Lire les commits remontés pour confirmer que le fix porte bien sur elle.
+
 5. **Connexion à une API** : construction des paramètres de requête, pagination, reset du clue, gestion des réponses vides ou en erreur (directives `core-select/api`, `users`, `establishments`…). Mocker le HTTP avec `HttpTestingController` (voir §4 du choix du pattern).
+6. **Contrat d'accessibilité** : attributs sémantiques posés ou calculés par la cible — `role`, `aria-expanded`, `aria-disabled`, `aria-selected`, `aria-describedby`, nom accessible (`aria-label`, `aria-labelledby`), `tabindex`. Une régression ici casse les lecteurs d'écran sans aucun signal visuel, et la story QA ne l'asserte pas.
 
 Le nombre de consommateurs (select, form-field, file-upload…) ne suffit pas seul : il augmente la priorité d'une cible qui coche déjà un critère.
 
 ### 3. Ce qu'on ne teste pas
 
-- **Présentation pure** : inputs qui ne font que poser des classes CSS ou des attributs. La story QA (`stories/qa/`) couvre ce rendu.
+- **Présentation pure** : inputs qui ne font que poser des classes CSS ou des attributs visuels (`mod-*`, `palette-*`, taille, variante). La story QA (`stories/qa/`) couvre ce rendu. Ne s'applique pas aux attributs sémantiques ou ARIA, qui relèvent du critère 6.
 - **Wrapper fin** qui délègue à un composant déjà testé, sans logique propre.
 - **Directive de marquage** : porteuse d'un `TemplateRef` (`panel-header-template`, `displayer`…), alias de sélecteur ou héritage sans surcharge (`simple-select/api/api.directive.ts`), lien stylé (`breadcrumbs-link`…).
 - **Cible dépréciée** (voir §1).
@@ -263,6 +259,7 @@ Quand la cible ne coche aucun critère, le dire à l'utilisateur avec la justifi
 | Ce qu'on vérifie | Niveau |
 |---|---|
 | Valeur entrée → valeur sortie, validators, état dérivé, logique pure | spec Vitest (ce skill) |
+| Attributs ARIA et `role` en fonction des inputs et de l'état | spec Vitest (ce skill) |
 | Interaction clavier/souris réelle, focus, overlay CDK, `contenteditable`, a11y en navigateur | e2e Storybook (skill `generate-e2e-test`) |
 | Rendu visuel, variantes de style | story QA, pas de test |
 
