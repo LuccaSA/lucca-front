@@ -234,7 +234,7 @@ Un test est justifié si la cible coche **au moins un** critère. Chaque cas de 
 4. **Historique de bugs** : un fix passé sur la cible est une régression à verrouiller. Vérifier avec :
 
    ```bash
-   git log --format='%h %s' -- <fichiers de la cible> | grep -E '^[0-9a-f]+ fix[(:!]'
+   git log --format='%h %s' -- <fichiers de la cible> | grep -iE '^[0-9a-f]+ (fix[(:!]|\[[^]]+\] *fix\b)'
    ```
 
    `<fichiers de la cible>` désigne ses propres fichiers (`.ts`, template, `.scss`), ou son dossier quand elle en a un dédié (`packages/ng/core-select/api/`, `packages/prisme/…`), jamais l'entrypoint entier : un fix sur un composant voisin ne qualifie pas la cible. Lire les commits remontés pour confirmer que le fix porte bien sur elle.
