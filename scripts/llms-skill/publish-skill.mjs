@@ -1,14 +1,17 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { dirname, join, posix, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
 const skillsRoot = join(root, '.github/skills/lucca-front');
 
+export const STORYBOOK_URL = 'https://lucca-front.lucca.io';
+export const PRISME_URL = 'https://prisme.lucca.io';
+
 const TARGETS = {
-	storybook: { outDir: '.storybook/public', pack: false },
-	npm: { outDir: 'dist/ng', pack: true },
+	storybook: { outDir: '.storybook/public', pack: false, linkRemoteOnly: false },
+	npm: { outDir: 'dist/ng', pack: true, linkRemoteOnly: true },
 };
 
 /** Documented minor whose skill covers `version` (a technical minor resolves to the minor covering it), or null. */
@@ -27,9 +30,30 @@ export function skillDirName(minor) {
 	return `lucca-front-${minor.replace('.', '-')}`;
 }
 
+/** Design, Figma and UX-writing content follows ZeroHeight and Figma, not the code version: the npm package links it on the deploy. */
+export function isRemoteOnly(path) {
+	return /\.(design|figma)\.md$/.test(path) || path.startsWith('references/documentation/');
+}
+
+export function deployedSkillUrl(ref) {
+	return `${STORYBOOK_URL}/${ref}/storybook/llms`;
+}
+
+export const RELATIVE_MD_PATH = /(?<![\w./])(?:\.\.?\/)+[^\s`)'"\]]+\.md/g;
+
+/** Points every relative path of a skill file (`fileRel`, relative to the skill folder) that resolves to a remote-only file at `remoteBase`. */
+export function rewriteRemoteLinks(content, fileRel, remoteBase) {
+	const dir = posix.dirname(fileRel);
+	return content.replace(RELATIVE_MD_PATH, (match) => {
+		const resolved = posix.join(dir, match);
+		return isRemoteOnly(resolved) ? `${remoteBase}/${resolved}` : match;
+	});
+}
+
 /** llms.txt index (llmstxt.org) over the skill's files, given as POSIX paths relative to the skill folder. */
-export function renderIndex(minor, files) {
-	const link = (path) => `- [${path}](llms/${path})`;
+export function renderIndex(minor, files, { ref, linkRemoteOnly }) {
+	const href = (path) => (linkRemoteOnly && isRemoteOnly(path) ? `${deployedSkillUrl(ref)}/${path}` : `llms/${path}`);
+	const link = (path) => `- [${path}](${href(path)})`;
 	const components = files.filter((f) => /^references\/components\/([^/]+)\/\1\.md$/.test(f));
 	const section = (title, prefix) => {
 		const entries = files.filter((f) => f.startsWith(prefix));
@@ -53,6 +77,11 @@ export function renderIndex(minor, files) {
 		...section('Types', 'references/types/'),
 		...section('Migrations', 'references/migrations.md'),
 		...section('Patch fixes', 'fixes/'),
+		'## Online',
+		'',
+		`- [Storybook](${STORYBOOK_URL}/${ref}/storybook/): components and stories at this version`,
+		`- [Prisme](${PRISME_URL}): design system reference (ZeroHeight)`,
+		'',
 	].join('\n');
 }
 
@@ -63,7 +92,7 @@ function listFiles(dir) {
 		.sort();
 }
 
-function currentVersion(manifest) {
+function currentTag() {
 	try {
 		return execFileSync('git', ['describe', '--tags', '--exact-match', 'HEAD'], {
 			cwd: root,
@@ -71,8 +100,22 @@ function currentVersion(manifest) {
 			stdio: ['ignore', 'pipe', 'ignore'],
 		}).trim();
 	} catch {
-		return `${manifest.latest}.0`;
+		return null;
 	}
+}
+
+function copyCodeOnly(skillDir, outDir, files, remoteBase) {
+	const shipped = files.filter((f) => !isRemoteOnly(f));
+	for (const file of shipped) {
+		const dest = join(outDir, file);
+		mkdirSync(dirname(dest), { recursive: true });
+		if (file.endsWith('.md')) {
+			writeFileSync(dest, rewriteRemoteLinks(readFileSync(join(skillDir, file), 'utf8'), file, remoteBase));
+		} else {
+			copyFileSync(join(skillDir, file), dest);
+		}
+	}
+	return shipped.length;
 }
 
 function packedFiles(distDir) {
@@ -93,7 +136,9 @@ function publish(targetName) {
 	rmSync(join(outDir, 'llms'), { recursive: true, force: true });
 
 	const manifest = JSON.parse(readFileSync(join(skillsRoot, '_versions.json'), 'utf8'));
-	const version = currentVersion(manifest);
+	const tag = currentTag();
+	const ref = tag ?? 'master';
+	const version = tag ?? `${manifest.latest}.0`;
 	const minor = resolveSkillMinor(manifest, version);
 	const skillDir = minor && join(skillsRoot, skillDirName(minor));
 	if (!skillDir || !existsSync(join(skillDir, 'SKILL.md'))) {
@@ -103,10 +148,15 @@ function publish(targetName) {
 		return;
 	}
 
-	mkdirSync(outDir, { recursive: true });
-	cpSync(skillDir, join(outDir, 'llms'), { recursive: true });
 	const files = listFiles(skillDir);
-	writeFileSync(join(outDir, 'llms.txt'), renderIndex(minor, files));
+	mkdirSync(outDir, { recursive: true });
+	let shipped = files.length;
+	if (target.linkRemoteOnly) {
+		shipped = copyCodeOnly(skillDir, join(outDir, 'llms'), files, deployedSkillUrl(ref));
+	} else {
+		cpSync(skillDir, join(outDir, 'llms'), { recursive: true });
+	}
+	writeFileSync(join(outDir, 'llms.txt'), renderIndex(minor, files, { ref, linkRemoteOnly: target.linkRemoteOnly }));
 
 	if (target.pack) {
 		const packed = packedFiles(outDir);
@@ -115,7 +165,9 @@ function publish(targetName) {
 			throw new Error(`${missing.join(', ')} written to ${target.outDir} but absent from the npm tarball, check "files" / .npmignore`);
 		}
 	}
-	console.log(`[llms] ${version} → skill ${skillDirName(minor)} (${files.length} files) → ${target.outDir}/llms.txt + llms/`);
+	console.log(
+		`[llms] ${version} → skill ${skillDirName(minor)} (${shipped}/${files.length} files shipped) → ${target.outDir}/llms.txt + llms/`,
+	);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
