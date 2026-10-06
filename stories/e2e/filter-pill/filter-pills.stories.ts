@@ -17,22 +17,22 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	await waitForAngular();
 
 	const canvas = within(canvasElement);
-	// On cible la pill portée par un simple-select (aucun appel HTTP requis).
+	// Targets the pill holding a simple select (no HTTP call needed).
 	const getPill = () => canvas.getByRole('button', { name: /Legume \(simple\)/ });
-	// Le bouton de réinitialisation est un frère de la pill dans son wrapper : on scope
-	// la recherche pour éviter les collisions quand plusieurs pills sont renseignées.
+	// The clear button is a sibling of the pill in its wrapper: the query is scoped
+	// to avoid collisions when several pills are filled.
 	const getClearer = (pill: HTMLElement) => within(pill.closest('.filterPillWrapper') as HTMLElement).getByRole('button', { name: /Vider ce champ/ });
 	const queryClearer = (pill: HTMLElement) => within(pill.closest('.filterPillWrapper') as HTMLElement).queryByRole('button', { name: /Vider ce champ/ });
 
-	await step('État initial : la pill est fermée et sans valeur', async () => {
+	await step('Initial state: the pill is closed and empty', async () => {
 		const pill = getPill();
 		await expect(pill).toBeVisible();
 		await expect(pill).toHaveAttribute('aria-expanded', 'false');
-		// Aucune valeur sélectionnée → pas de bouton de réinitialisation.
+		// No selected value → no clear button.
 		await expect(queryClearer(pill)).not.toBeInTheDocument();
 	});
 
-	await step('Ouverture du popover à la souris', async () => {
+	await step('The popover opens on click', async () => {
 		await userEvent.click(getPill());
 		await waitForAngular();
 		await expect(getPill()).toHaveAttribute('aria-expanded', 'true');
@@ -41,7 +41,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	});
 
 	let selectedOptionText = '';
-	await step('Sélection d’une option', async () => {
+	await step('Selecting an option', async () => {
 		const combobox = screen.getByRole('combobox');
 		await userEvent.click(combobox);
 		await waitForAngular();
@@ -50,24 +50,24 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		selectedOptionText = options[0].innerText;
 		await userEvent.click(options[0]);
 		await waitForAngular();
-		// La valeur choisie est reflétée dans la pill et le bouton de réinitialisation apparaît.
+		// The selected value is displayed in the pill and the clear button appears.
 		await expect(getPill()).toHaveTextContent(selectedOptionText);
 		await expect(getClearer(getPill())).toBeVisible();
 	});
 
-	await step('Réinitialisation via le bouton clear', async () => {
+	await step('Clearing with the clear button', async () => {
 		await userEvent.click(getClearer(getPill()));
 		await waitForAngular();
-		// La valeur est retirée et le bouton de réinitialisation disparaît.
+		// The value is removed and the clear button disappears.
 		await expect(getPill()).not.toHaveTextContent(selectedOptionText);
 		await expect(queryClearer(getPill())).not.toBeInTheDocument();
 	});
 
-	await step('Ouverture et fermeture au clavier', async () => {
+	await step('Opening and closing with the keyboard', async () => {
 		const pill = getPill();
 		pill.focus();
 		await expect(pill).toHaveFocus();
-		// La flèche bas ouvre le popover.
+		// ArrowDown opens the popover.
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
 		await expect(getPill()).toHaveAttribute('aria-expanded', 'true');
@@ -78,7 +78,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await waitFor(() => expect(getPill()).toHaveAttribute('aria-expanded', 'false'));
 	});
 
-	await step('Coche la checkbox', async () => {
+	await step('Checking the checkbox', async () => {
 		// La pill checkbox n'ouvre pas de popover : c'est un bouton bascule (aria-pressed).
 		const pill = canvas.getByRole('button', { name: /Inclure les collaborateurs partis/ });
 		await expect(pill).toHaveAttribute('aria-pressed', 'false');
@@ -87,14 +87,14 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await expect(pill).toHaveAttribute('aria-pressed', 'true');
 	});
 
-	await step('Sélectionne plusieurs items dans le multi-select', async () => {
+	await step('Selecting several items in the multi select', async () => {
 		const pill = canvas.getByRole('button', { name: /Légume \(multi\)/ });
 		await userEvent.click(pill);
 		await waitForAngular();
 		await userEvent.click(screen.getByRole('combobox'));
 		await waitForAngular();
 		const listbox = within(screen.getByRole('listbox'));
-		// On écarte l'option « tout sélectionner » pour ne cliquer que de vraies options.
+		// Skips the “select all” option, to only click actual options.
 		const options = (await listbox.findAllByRole('option')).filter((option) => !option.id.includes('select-all'));
 		await userEvent.click(options[0]);
 		await userEvent.click(options[1]);
@@ -102,32 +102,32 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
 		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
-		// Une fois renseignée, la pill affiche le label pluriel « légumes » (son nom
-		// accessible change) : on réutilise la référence capturée plus haut.
+		// Once filled, the pill displays the “légumes” plural label (its accessible
+		// name changes): the reference captured above is reused.
 		await expect(pill).toHaveTextContent(/légumes/);
 		await expect(getClearer(pill)).toBeVisible();
 	});
 
-	await step('Sélectionne une date', async () => {
+	await step('Picking a date', async () => {
 		const pill = canvas.getByRole('button', { name: /Date de début/ });
 		await userEvent.click(pill);
 		await waitForAngular();
 		const dateInput = screen.getByTestId('lu-date-input');
 		await pickDay(dateInput, 15);
 		await waitForAngular();
-		// Une date choisie → la pill est renseignée et propose une réinitialisation.
+		// A picked date → the pill is filled and offers to clear it.
 		await expect(getClearer(pill)).toBeVisible();
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
 	});
 
-	await step('Sélectionne une période dans le date range', async () => {
+	await step('Picking a period in the date range', async () => {
 		const pill = canvas.getByRole('button', { name: /Période/ });
 		await userEvent.click(pill);
 		await waitForAngular();
 		const startInput = screen.getByLabelText('Start');
 		const endInput = screen.getByLabelText('End');
-		// `multipleGrid` : le date range affiche deux calendriers côte à côte.
+		// `multipleGrid`: the date range displays two calendars side by side.
 		await pickDay(startInput, 10, true);
 		await pickDay(endInput, 20, true);
 		await waitForAngular();
@@ -145,15 +145,15 @@ const colonSpacingPlay =
 
 		const canvas = within(canvasElement);
 		const getPill = () => canvas.getByRole('button', { name: /Legume \(simple\)/ });
-		// On lit le textContent brut (sans normalisation de jest-dom) pour distinguer
-		// l'espace insécable U+00A0 d'une espace classique ou d'une absence d'espace.
+		// Reads the raw textContent (without jest-dom normalization) to tell
+		// the U+00A0 non-breaking space apart from a regular space or no space at all.
 		const labelOf = (pill: HTMLElement) => pill.querySelector('.filterPill-label')?.textContent?.trim() ?? '';
 
-		await step('État initial : pas de deux-points tant que la pill est vide', async () => {
+		await step('Initial state: no colon while the pill is empty', async () => {
 			await expect(labelOf(getPill())).toBe('Legume (simple)');
 		});
 
-		await step('Sélection d’une option', async () => {
+		await step('Selecting an option', async () => {
 			await userEvent.click(getPill());
 			await waitForAngular();
 			await userEvent.click(screen.getByRole('combobox'));
@@ -164,7 +164,7 @@ const colonSpacingPlay =
 			await waitForAngular();
 		});
 
-		await step('Le label affiche le deux-points attendu pour la locale', async () => {
+		await step('The label displays the colon expected for the locale', async () => {
 			await expect(labelOf(getPill())).toBe(expectedFilledLabel);
 		});
 	};
