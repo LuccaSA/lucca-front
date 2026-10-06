@@ -172,6 +172,113 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 
 		expect(onChange).toHaveBeenCalledWith(options[2]);
 	}));
+
+	it('should emit only the clicked node in tree mode and mark it as the selected tree item', fakeAsync(() => {
+		const onChange = vi.fn();
+		component.registerOnChange(onChange);
+		component.writeValue(options[1]);
+		component.treeGenerator = {
+			generateTrees: (items) => [{ node: items[0], children: [{ node: items[1] }, { node: items[2] }] }],
+		};
+		openPanel();
+
+		// Only the child is selected, its parent branch is not
+		const selected = Array.from(overlayContainerElement.querySelectorAll('lu-listbox-option[aria-selected="true"]'));
+		expect(selected.length).toBe(1);
+		expect(selected[0].closest('lu-tree-branch lu-tree-branch')).not.toBeNull();
+		expect(selected[0].textContent).toContain('Poireau');
+
+		// In a simple select, clicking a parent selects that node alone, never its children
+		overlayContainerElement.querySelector<HTMLElement>('lu-select-option')!.click();
+		fixture.detectChanges();
+
+		expect(onChange).toHaveBeenCalledExactlyOnceWith(options[0]);
+	}));
+
+	describe('initial highlight', () => {
+		function highlightedOptionText(): string | null | undefined {
+			return overlayContainerElement.querySelector('lu-select-option.is-highlighted')?.textContent;
+		}
+
+		it('should highlight the selected option on open', fakeAsync(() => {
+			component.writeValue(options[2]);
+			openPanel();
+			tick();
+			fixture.detectChanges();
+
+			expect(highlightedOptionText()).toContain('Navet');
+		}));
+
+		it('should not highlight the selected option when the panel is opened with a clue', fakeAsync(() => {
+			component.writeValue(options[2]);
+			fixture.componentRef.setInput('options', options);
+			fixture.detectChanges();
+
+			component.clueChanged('a');
+			fixture.detectChanges();
+			tick(20);
+			fixture.detectChanges();
+
+			// The key manager falls back to the first option
+			expect(highlightedOptionText()).toContain('Carotte');
+		}));
+	});
+
+	describe('listbox status', () => {
+		function listbox(): HTMLElement {
+			return overlayContainerElement.querySelector<HTMLElement>('lu-listbox')!;
+		}
+
+		it('should announce the loading state rather than the empty state while options are fetched', fakeAsync(() => {
+			fixture.componentRef.setInput('loading', true);
+			openPanel([]);
+
+			// Loading takes precedence: the "no result" option must never flash during a fetch
+			expect(listbox().querySelector('lu-listbox-option[empty]')).toBeNull();
+			expect(listbox().textContent).toContain('Loading...');
+		}));
+
+		it('should tell that there are no options when nothing is searched', fakeAsync(() => {
+			openPanel([]);
+
+			expect(listbox().querySelector('lu-listbox-option[empty]')!.textContent).toContain('There are no values available.');
+		}));
+
+		it('should tell that the search has no results when a clue is typed', fakeAsync(() => {
+			openPanel([]);
+
+			component.clueChanged('zzz');
+			fixture.detectChanges();
+			tick(20);
+			fixture.detectChanges();
+
+			expect(listbox().querySelector('lu-listbox-option[empty]')!.textContent).toContain('We couldn’t find any results that match your search.');
+		}));
+	});
+
+	describe('pagination', () => {
+		function scrollContentTo(scrollTop: number): void {
+			const content = overlayContainerElement.querySelector<HTMLElement>('.lu-select-panel-layout-content')!;
+			// happy-dom does not lay out, so the scroll metrics are simulated
+			Object.defineProperty(content, 'scrollHeight', { configurable: true, value: 500 });
+			Object.defineProperty(content, 'clientHeight', { configurable: true, value: 200 });
+			content.scrollTop = scrollTop;
+			content.dispatchEvent(new Event('scroll'));
+			fixture.detectChanges();
+		}
+
+		it('should request the next page only when scrolled to the bottom', fakeAsync(() => {
+			const nextPage = vi.fn();
+			component.nextPage.subscribe(nextPage);
+			openPanel();
+
+			scrollContentTo(100);
+			expect(nextPage).not.toHaveBeenCalled();
+
+			scrollContentTo(300);
+			expect(nextPage).toHaveBeenCalledOnce();
+		}));
+	});
 });
 
 describe('LuSelectPanelComponent (initial highlight)', () => {

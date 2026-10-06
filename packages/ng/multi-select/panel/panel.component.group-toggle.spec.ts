@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { LuDisabledOptionDirective, LuOptionDirective, LuOptionGroupDirective, SelectDataSource } from '@lucca-front/ng/core-select';
-import { Observable, delay, of } from 'rxjs';
+import { Observable, delay, of, throwError } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../input/select-input.component';
 import { LuMultiSelectPanelComponent } from './panel.component';
 
@@ -218,5 +218,128 @@ describe('LuMultiSelectPanelComponent (group toggle skips disabled options)', ()
 
 		// Only the enabled members are removed; the disabled radish stays selected.
 		expect(host.value).toEqual([radish]);
+	}));
+});
+
+describe('LuMultiSelectPanelComponent (group toggle from local options)', () => {
+	@Component({
+		template: `
+			<lu-multi-select #ref [options]="options" [(ngModel)]="value">
+				<ng-container *luOptionGroup="let group; by: groupBy; select: ref">{{ group.key }}</ng-container>
+				<ng-template luOption [luOptionSelect]="ref" let-legume>
+					<span [luDisabledOption]="disabledIds.includes(legume.id)">{{ legume.name }}</span>
+				</ng-template>
+			</lu-multi-select>
+		`,
+		imports: [LuMultiSelectInputComponent, LuOptionGroupDirective, LuOptionDirective, LuDisabledOptionDirective, FormsModule],
+		changeDetection: ChangeDetectionStrategy.OnPush,
+	})
+	class HostComponent {
+		readonly groupBy = (_legume: Legume): string => 'red';
+		readonly options = VISIBLE_OPTIONS;
+		disabledIds: number[] = [];
+		value: Legume[] = [];
+	}
+
+	let fixture: ComponentFixture<HostComponent>;
+	let host: HostComponent;
+	let overlayContainerElement: HTMLElement;
+
+	function openPanel(): void {
+		fixture.detectChanges();
+		const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Legume>;
+		select.openPanel();
+		fixture.detectChanges();
+		tick(20);
+		fixture.detectChanges();
+	}
+
+	function groupAction(): HTMLElement | null {
+		return overlayContainerElement.querySelector<HTMLElement>('[group-action]');
+	}
+
+	function clickGroupAction(): void {
+		groupAction()!.click();
+		fixture.detectChanges();
+		tick();
+		fixture.detectChanges();
+	}
+
+	beforeEach(() => {
+		TestBed.configureTestingModule({ imports: [HostComponent] });
+		fixture = TestBed.createComponent(HostComponent);
+		host = fixture.componentInstance;
+		overlayContainerElement = TestBed.inject(OverlayContainer).getContainerElement();
+	});
+
+	it('selects then unselects the whole group without getGroupOptions', fakeAsync(() => {
+		openPanel();
+
+		clickGroupAction();
+		expect(host.value).toEqual([tomato, radish]);
+
+		clickGroupAction();
+		expect(host.value).toEqual([]);
+	}));
+
+	it('switches the group action label, prefixed by the group name for screen readers', fakeAsync(() => {
+		openPanel();
+
+		expect(groupAction()!.querySelector('.pr-u-mask')!.textContent).toContain('red');
+		expect(groupAction()!.textContent).toContain('Select all');
+
+		clickGroupAction();
+
+		expect(groupAction()!.textContent).toContain('Deselect all');
+	}));
+
+	it('hides the group action when every option of the group is disabled', fakeAsync(() => {
+		host.disabledIds = [tomato.id, radish.id];
+		openPanel();
+
+		expect(groupAction()).toBeNull();
+	}));
+});
+
+describe('LuMultiSelectPanelComponent (group toggle when getGroupOptions fails)', () => {
+	@Component({
+		template: `
+			<lu-multi-select #ref [dataSource]="dataSource" [(ngModel)]="value">
+				<ng-container *luOptionGroup="let group; by: groupBy; select: ref">{{ group.key }}</ng-container>
+			</lu-multi-select>
+		`,
+		imports: [LuMultiSelectInputComponent, LuOptionGroupDirective, FormsModule],
+		changeDetection: ChangeDetectionStrategy.OnPush,
+	})
+	class HostComponent {
+		readonly groupBy = (_legume: Legume): string => 'red';
+		value: Legume[] = [];
+
+		readonly dataSource: SelectDataSource<Legume, string> = {
+			getOptions: () => of(VISIBLE_OPTIONS),
+			getGroupOptions: (): Observable<Legume[]> => throwError(() => new Error('Network error')),
+		};
+	}
+
+	it('clears the loading state and keeps the value unchanged', fakeAsync(() => {
+		TestBed.configureTestingModule({ imports: [HostComponent] });
+		const fixture = TestBed.createComponent(HostComponent);
+		const overlayContainerElement = TestBed.inject(OverlayContainer).getContainerElement();
+		fixture.detectChanges();
+		const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Legume>;
+		select.openPanel();
+		fixture.detectChanges();
+		tick(20);
+		fixture.detectChanges();
+
+		overlayContainerElement.querySelector<HTMLElement>('[group-action]')!.click();
+		fixture.detectChanges();
+		tick();
+		fixture.detectChanges();
+
+		const panel = (select.panelRef as unknown as { instance: LuMultiSelectPanelComponent<Legume> }).instance;
+		expect(panel.groupLoadingKeys().has('red')).toBe(false);
+		expect(fixture.componentInstance.value).toEqual([]);
+		expect(overlayContainerElement.querySelector('[group-action]')!.textContent).toContain('Select all');
 	}));
 });
