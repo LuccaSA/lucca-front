@@ -193,10 +193,10 @@ export default defineConfig(
 			'@angular-eslint/template/button-has-type': 'off',
 		},
 	},
-	// Scripts: the api-docs generators are plain Node ESM, so the TypeScript blocks above
+	// Scripts: the llms-skill publisher is plain Node ESM, so the TypeScript blocks above
 	// never reach them — without this they ship unlinted.
 	{
-		files: ['scripts/api-docs/**/*.mjs'],
+		files: ['scripts/llms-skill/**/*.mjs'],
 		extends: [eslint.configs.recommended],
 		languageOptions: {
 			ecmaVersion: 2023,

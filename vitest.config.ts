@@ -27,9 +27,9 @@ export default mergeConfig(createBaseConfig(__dirname), {
 			{
 				// Plain Node ESM scripts: deliberately not extending the Angular base config.
 				test: {
-					name: 'api-docs',
+					name: 'llms-skill',
 					environment: 'node',
-					include: ['scripts/api-docs/**/*.spec.mjs'],
+					include: ['scripts/llms-skill/**/*.spec.mjs'],
 				},
 			},
 			// Skills generator project: pure Node specs for scripts/generate-skills
