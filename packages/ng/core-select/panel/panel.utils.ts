@@ -1,4 +1,4 @@
-import { afterNextRender, Injector, Signal } from '@angular/core';
+import { afterNextRender, afterRenderEffect, DestroyRef, inject, Injector, Signal, untracked } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { distinctUntilChanged, map, of, skip, startWith, switchMap, take } from 'rxjs';
 
@@ -86,4 +86,66 @@ export function getGroupTemplateLocation(hasGrouping: Signal<boolean>, clue: Sig
 	);
 
 	return toSignal(location$, { initialValue: hasGrouping() ? 'group-header' : 'none' });
+}
+
+/**
+ * Requests the next page for as long as the panel's scroll viewport can't scroll.
+ *
+ * Pagination is driven by the scroll event: reaching the bottom of the viewport asks the consumer
+ * for the next page. A page that doesn't overflow the viewport therefore never asks for anything —
+ * there is nothing to scroll. The popover panel caps its content at 20rem, which a page of options
+ * always overflows, so this never came up; the bottom sheet is only as tall as its content instead,
+ * so a first page of a few options leaves it short of a scrollbar and pagination stops right there.
+ *
+ * So the viewport is measured again after every render and, while it still can't scroll, the next
+ * page is requested. The option count is what guards against an endless loop: a page that brought
+ * no new option — the data source is exhausted — is never requested twice. A new search landing on
+ * exactly the same count as the last requested page is the one case left unfilled, which the next
+ * scroll — or the next keystroke — resolves on its own.
+ *
+ * The request itself is deferred by a microtask: the panel's first render happens inside the sheet's
+ * own `ApplicationRef.tick()`, which `openPanel` runs *before* subscribing the select input to the
+ * panel ref, so a page requested straight from that render would be emitted into the void. A
+ * microtask lands once `openPanel` has returned, still well ahead of anything the user could do.
+ *
+ * Must be called from an injection context.
+ */
+export function fillScrollViewport({
+	viewport,
+	optionCount,
+	loading,
+	nextPage,
+}: {
+	viewport: Signal<HTMLElement | undefined>;
+	optionCount: Signal<number>;
+	loading: Signal<boolean>;
+	nextPage: () => void;
+}): void {
+	let lastRequestedCount: number | null = null;
+	let destroyed = false;
+	inject(DestroyRef).onDestroy(() => (destroyed = true));
+
+	afterRenderEffect({
+		read: () => {
+			const element = viewport();
+			const count = optionCount();
+
+			if (!element || loading() || count === 0 || count === lastRequestedCount) {
+				return;
+			}
+
+			// `scrollHeight` and `clientHeight` are both rounded, so a sub-pixel difference between
+			// them isn't a scrollbar: the same 1px tolerance as the panels' scroll handler applies.
+			if (element.scrollHeight - element.clientHeight > 1) {
+				return;
+			}
+
+			lastRequestedCount = count;
+			queueMicrotask(() => {
+				if (!destroyed) {
+					untracked(nextPage);
+				}
+			});
+		},
+	});
 }

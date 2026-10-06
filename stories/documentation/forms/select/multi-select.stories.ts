@@ -169,6 +169,37 @@ export const InputWidth = generateStory({
 	},
 });
 
+export const WithFormField = generateStory({
+	name: 'With form field',
+	description: `Encapsulé dans un \`lu-form-field\`, le select est associé à son label, qui reste la façon recommandée de nommer le champ. Sous le breakpoint S, le panneau s’ouvre en bottom sheet et reprend ce label comme titre.`,
+	template: `<lu-form-field label="Légumes" tooltip="Plusieurs légumes possibles" inlineMessage="Choisissez vos légumes préférés">
+	<lu-multi-select
+		#selectRef
+		[clearable]="clearable"
+		[loading]="loading"
+		[keepSearchAfterSelection]="keepSearchAfterSelection"
+		[(ngModel)]="selectedLegumes"
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+		[maxValuesShown]="maxValuesShown"
+	/>
+</lu-form-field>`,
+	neededImports: {
+		'@lucca-front/ng/form-field': ['FormFieldComponent'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegumes: [],
+			keepSearchAfterSelection: false,
+		},
+		argTypes: {
+			clearable: { control: { type: 'boolean' } },
+			maxValuesShown: { control: { type: 'number' } },
+		},
+	},
+});
+
 export const WithClue = generateStory({
 	name: 'Clue',
 	description: `Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement \`(clueChange)\`.`,
@@ -860,6 +891,7 @@ const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasI
 				LuMultiSelectContentDisplayerComponent,
 				AsyncPipe,
 				TreeSelectDirective,
+				FormFieldComponent,
 				StoryModelDisplayComponent,
 			],
 		}),
