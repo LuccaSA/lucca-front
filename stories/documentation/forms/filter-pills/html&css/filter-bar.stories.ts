@@ -20,7 +20,7 @@ interface FilterBarBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/FilterBar/HTML&CSS',
+	title: 'Documentation/Forms/FiltersPills/FilterBar/HTML&CSS/Basic',
 	decorators: [
 		moduleMetadata({
 			imports: [

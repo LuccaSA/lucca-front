@@ -28,6 +28,12 @@
 		<ng-content />
 	</div>
 
+	@if (segmentedControlTabs(); as segmentedControlTabs) {
+		<div class="filterBar-scrollBox-tabs">
+			<ng-container *ngTemplateOutlet="segmentedControlTabs.tablistTemplate()" />
+		</div>
+		<lu-divider class="filterBar-scrollBox-divider" />
+	}
 	@if (addonAfter()) {
 		<div class="filterBar-scrollBox-export">
 			<ng-container *ngTemplateOutlet="addonAfter()" />

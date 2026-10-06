@@ -21,7 +21,8 @@
 	}
 
 	@at-root ($atRoot) {
-		.filterBar-divider.divider {
+		.filterBar-divider.divider,
+		.filterBar-scrollBox-divider.divider {
 			@include divider.vertical;
 
 			margin-inline: 0;
@@ -50,11 +51,21 @@
 		}
 
 		.filterBar-scrollBox-export {
-			margin-inline-start: auto;
-			padding-inline-start: var(--pr-t-spacings-200);
+			margin-inline-start: var(--components-filterBar-scrollBox-export-marginInlineStart);
+			padding-inline-start: var(--components-filterBar-scrollBox-export-paddingInlineStart);
 			flex-shrink: 0;
 			display: flex;
 			gap: var(--pr-t-spacings-100);
+		}
+
+		.filterBar-scrollBox-tabs {
+			margin-inline-start: auto;
+			padding-inline-start: var(--pr-t-spacings-200);
+			flex-shrink: 0;
+
+			.segmentedControl {
+				@include segmentedControl.S;
+			}
 		}
 	}
 }

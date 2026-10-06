@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, forwardRef, input, signal, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, forwardRef, input, Signal, signal, TemplateRef, viewChild, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuOptionComparer, LuOptionDirective, LuOptionGroupByContext, LuOptionGrouping } from '@lucca-front/ng/core-select';
@@ -18,6 +18,15 @@ function normalizeSearch(value: string): string {
 		.normalize('NFD')
 		.replace(/\p{Diacritic}/gu, '')
 		.toLowerCase();
+}
+
+/**
+ * Shape of `lu-segmented-control-tabs` used by the filter bar, typed structurally
+ * since importing the component would create a cycle between entrypoints
+ */
+export interface FilterBarSegmentedControlTabs {
+	readonly tablistTemplate: Signal<TemplateRef<unknown>>;
+	readonly externalTablist: WritableSignal<boolean>;
 }
 
 @Component({
@@ -46,6 +55,13 @@ export class FilterBarComponent {
 	 * telling assistive technology users that the results list updates automatically
 	 */
 	readonly manualApply = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Segmented control tabs whose tablist is displayed at the end of the filter bar, in its scroll box.
+	 * Its panels stay where the `lu-segmented-control-tabs` is declared.
+	 * The `luFilterPillAddonAfter` addon is displayed after the tabs, separated by a divider.
+	 */
+	readonly segmentedControlTabs = input<FilterBarSegmentedControlTabs | null>(null);
 
 	readonly autoApplyAnnouncementId = `filterBar-autoApplyAnnouncement-${nextId++}`;
 
@@ -96,6 +112,14 @@ export class FilterBarComponent {
 			const content = this.optionalPillsGroupTpl();
 			const grouping: LuOptionGrouping<unknown, unknown> | undefined = grouped && content ? { selector: (pill: unknown) => (pill as FilterPillComponent).grouping(), content } : undefined;
 			this.optionalPillsSelect()?.groupingSignal.set(grouping);
+		});
+
+		effect((onCleanup) => {
+			const segmentedControlTabs = this.segmentedControlTabs();
+			if (segmentedControlTabs) {
+				segmentedControlTabs.externalTablist.set(true);
+				onCleanup(() => segmentedControlTabs.externalTablist.set(false));
+			}
 		});
 	}
 

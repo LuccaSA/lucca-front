@@ -20,13 +20,14 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
+import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { IconComponent } from '@lucca/prisme/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { intlArgType } from '@/helpers/stories';
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
+	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular/Basic',
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -50,6 +51,8 @@ export default {
 				DividerComponent,
 				SegmentedControlComponent,
 				SegmentedControlFilterComponent,
+				SegmentedControlTabsComponent,
+				SegmentedControlTabsPanelComponent,
 				IconComponent,
 				DropdownMenuComponent,
 				DropdownItemComponent,

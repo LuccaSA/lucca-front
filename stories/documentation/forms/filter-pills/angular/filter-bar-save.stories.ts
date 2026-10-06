@@ -19,7 +19,7 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 import { intlArgType } from '@/helpers/stories';
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
+	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular/Save',
 	argTypes: {
 		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
 	},
