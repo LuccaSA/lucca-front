@@ -56,6 +56,7 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	@Input() orderBy: string;
 	@Input() appInstanceId: number | string;
 	@Input() operations: number[];
+	@Input() uniqueOperations: number[];
 	@Input({ transform: booleanAttribute }) enableFormerEmployees = false;
 	@Input({ transform: booleanAttribute }) disablePrincipal = false;
 
