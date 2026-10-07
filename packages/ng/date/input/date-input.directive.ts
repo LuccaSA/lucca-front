@@ -27,12 +27,24 @@ import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> implements Validator {
 	private _focused = false;
 
+	/**
+	 * Minimum valid date
+	 */
 	readonly min = input<D>();
 
+	/**
+	 * Maximum valid date
+	 */
 	readonly max = input<D>();
 
+	/**
+	 * Granularity of the value (day, month, year…), also sets the default placeholder. Defaults to day
+	 */
 	readonly granularity = input<LuDateGranularity>(ELuDateGranularity.day);
 
+	/**
+	 * Placeholder of the input. Defaults to a translated date format matching the granularity
+	 */
 	readonly placeHolderInput = input<string>('', { alias: 'placeholder' });
 
 	override set placeholder(p: string) {

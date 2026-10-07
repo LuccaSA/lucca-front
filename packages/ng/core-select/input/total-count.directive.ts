@@ -14,6 +14,9 @@ import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider }
 	],
 })
 export class LuCoreSelectTotalCountDirective implements CoreSelectApiTotalCountProvider {
+	/**
+	 * Total number of available options, used by the select-all feature of `lu-multi-select` when options are not provided by an API directive
+	 */
 	readonly totalCount = input.required<number>({ alias: 'totalCount' });
 
 	readonly totalCount$ = toObservable(this.totalCount);

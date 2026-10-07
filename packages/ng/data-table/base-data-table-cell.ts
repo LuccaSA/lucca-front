@@ -19,7 +19,14 @@ export abstract class BaseDataTableCell {
 	readonly footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
 	readonly rowRef = inject(LU_DATA_TABLE_ROW_INSTANCE, { optional: true });
 
+	/**
+	 * Adapts the cell to contain a form field
+	 */
 	readonly editable = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Horizontal alignment of the cell content. On a header cell, it also applies to the cells of its column
+	 */
 	readonly align = input<DataTableAlign | null>(null);
 
 	readonly isStickyStart = computed(() => {

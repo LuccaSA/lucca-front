@@ -7,6 +7,9 @@ import { ALuSelectInputComponent } from '../input';
 export class LuCoreSelectPanelHeaderDirective {
 	readonly templateRef = inject<TemplateRef<void>>(TemplateRef);
 
+	/**
+	 * Select component whose panel header is rendered with this template
+	 */
 	readonly select = input.required<ALuSelectInputComponent<unknown, unknown> | ALuSelectInputComponent<unknown, unknown[]>>({ alias: 'luSelectPanelHeader' });
 
 	constructor() {

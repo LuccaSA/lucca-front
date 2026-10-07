@@ -47,9 +47,24 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 	#destroyRef = inject(DestroyRef);
 
+	/**
+	 * Sort state of the column. Setting it displays a sort button cycling through the values
+	 */
 	readonly sort = model<DataTableSort | null>(null);
+
+	/**
+	 * Width of the column when the table is `layoutFixed`. Same as `inlineSize`, which takes priority
+	 */
 	readonly fixedWidth = input<string | null>(null);
+
+	/**
+	 * Width of the column when the table is `layoutFixed` (CSS length, e.g. `6rem`)
+	 */
 	readonly inlineSize = input<string | null>(null);
+
+	/**
+	 * Truncates the sortable header label with an ellipsis when the column is too narrow
+	 */
 	readonly sortWithEllipsis = input(false, { transform: luBooleanAttribute });
 
 	// #sortButton hosts the luButton component, so the template ref resolves to that component

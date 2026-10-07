@@ -23,9 +23,19 @@ import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableBodyComponent {
+	/**
+	 * Content of the group header row. The group header is only displayed when `groupButtonAlt` is also set
+	 */
 	readonly group = input<PortalContent | null>(null);
+
+	/**
+	 * Alternative text of the button toggling the group, read by screen readers
+	 */
 	readonly groupButtonAlt = input<string | null>(null);
 
+	/**
+	 * Whether the group is expanded
+	 */
 	readonly expanded = model(false);
 
 	expandedToggle() {

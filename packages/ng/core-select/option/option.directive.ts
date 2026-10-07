@@ -7,6 +7,9 @@ import type { LuOptionContext } from '../select.model';
 	selector: '[luOption]',
 })
 export class LuOptionDirective<TOption, TValue> {
+	/**
+	 * Select component whose options are rendered with this template
+	 */
 	readonly select = input<ALuSelectInputComponent<TOption, TValue>>(undefined, { alias: 'luOptionSelect' });
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {

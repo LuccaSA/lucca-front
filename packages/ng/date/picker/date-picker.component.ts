@@ -28,12 +28,24 @@ import { LuDateInputDirective } from '../input';
 export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	_value: D;
 
+	/**
+	 * Minimum selectable date
+	 */
 	readonly min = input<D>();
 
+	/**
+	 * Maximum selectable date
+	 */
 	readonly max = input<D>();
 
+	/**
+	 * Granularity of the selected value (day, month, year…). Defaults to day
+	 */
 	readonly granularity = input<LuDateGranularity>(ELuDateGranularity.day);
 
+	/**
+	 * Date displayed by the calendar when there is no value. Defaults to today
+	 */
 	readonly startOn = input<D>();
 
 	override close = new EventEmitter<void>();

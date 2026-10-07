@@ -31,6 +31,9 @@ import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableRowCellComponent extends BaseDataTableCell {
+	/**
+	 * Adapts the cell to contain quick actions buttons
+	 */
 	readonly actions = input(false, { transform: luBooleanAttribute });
 
 	readonly isSticky = computed(() => {

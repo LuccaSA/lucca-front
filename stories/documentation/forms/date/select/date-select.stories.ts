@@ -12,10 +12,41 @@ const generateStory = getStoryGenerator<StoryComponent>({
 	argTypes: {
 		selectedDate: { control: { type: 'text' }, table: { type: { summary: 'D' }, category: 'inputs' } },
 		secondSelectedDate: { control: { type: 'text' }, table: { type: { summary: 'D' }, category: 'inputs' } },
-		startOn: { control: { type: 'text' }, table: { category: 'inputs' } },
-		min: { control: { type: 'text' }, table: { category: 'inputs' } },
-		max: { control: { type: 'text' }, table: { category: 'inputs' } },
-		multiple: { control: false, table: { category: 'inputs' } },
+		startOn: {
+			control: { type: 'text' },
+			description: 'Date affichée par le sélecteur en l’absence de valeur. Par défaut : aujourd’hui.',
+			table: { category: 'inputs' },
+		},
+		min: { control: { type: 'text' }, description: 'Date minimale sélectionnable.', table: { category: 'inputs' } },
+		max: { control: { type: 'text' }, description: 'Date maximale sélectionnable.', table: { category: 'inputs' } },
+		granularity: {
+			options: Object.values(ELuDateGranularity),
+			control: { type: 'select' },
+			description: 'Granularité de la valeur sélectionnée.',
+			table: { category: 'inputs', defaultValue: { summary: 'day' } },
+		},
+		hideClearer: {
+			control: { type: 'boolean' },
+			description: 'Masque le bouton de suppression de la valeur.',
+			table: { category: 'inputs' },
+		},
+		placeholder: {
+			control: { type: 'text' },
+			description: 'Texte affiché en l’absence de valeur.',
+			table: { category: 'inputs' },
+		},
+		disabled: {
+			control: { type: 'boolean' },
+			description: 'Désactive le champ.',
+			table: { category: 'inputs' },
+		},
+		pickerOverlap: {
+			control: { type: 'boolean' },
+			description: 'Affiche le sélecteur de date par-dessus le champ (déjà activé à l’initialisation par <code>lu-date-select</code>).',
+			table: { category: 'inputs' },
+		},
+		// Inherited from lu-select, meaningless for a date select
+		multiple: { table: { disable: true } },
 	},
 });
 
@@ -107,7 +138,7 @@ export const SelectWithDisplayer = generateStory({
 	template: `
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate">
-		<ng-container *luDisplayer="let value">Birthday: {{ value | date : 'LL' }}</ng-container>
+		<ng-container *luDisplayer="let value">Birthday: {{ value | date : 'longDate' }}</ng-container>
 	</lu-date-select>
 	<span class="textfield-label">Label</span>
 </label>
@@ -154,6 +185,10 @@ const meta: Meta<StoryComponent> = {
 	],
 	args: {
 		granularity: ELuDateGranularity.day,
+		hideClearer: false,
+		placeholder: '',
+		disabled: false,
+		pickerOverlap: false,
 		selectedDate: today,
 		secondSelectedDate: today,
 		startOn: today,
