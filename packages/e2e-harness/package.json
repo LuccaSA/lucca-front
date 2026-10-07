@@ -35,6 +35,16 @@
         "default": "./cjs/index.js"
       }
     },
+    "./multi-select": {
+      "import": {
+        "types": "./esm/multi-select/index.d.ts",
+        "default": "./esm/multi-select/index.js"
+      },
+      "require": {
+        "types": "./cjs/multi-select/index.d.ts",
+        "default": "./cjs/multi-select/index.js"
+      }
+    },
     "./simple-select": {
       "import": {
         "types": "./esm/simple-select/index.d.ts",

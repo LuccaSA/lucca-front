@@ -51,7 +51,74 @@ for a harness method rather than settling there.
 
 | Harness                 | Component          | Entrypoint                               |
 | ----------------------- | ------------------ | ---------------------------------------- |
+| `LuMultiSelectHarness`  | `lu-multi-select`  | `@lucca-front/e2e-harness/multi-select`  |
 | `LuSimpleSelectHarness` | `lu-simple-select` | `@lucca-front/e2e-harness/simple-select` |
+
+A multi select holds several values at once, so it reads them as a list and toggles them one by
+one — the panel stays open, as it does for a user picking values in a row:
+
+```ts
+const legumes = LuMultiSelectHarness.byLabel(page, 'Légumes');
+
+await legumes.selectOption('Carotte');
+await legumes.selectOption('Betterave');
+await legumes.deselectOption('Carotte');
+await legumes.removeValue('Betterave'); // through the chip's own button, no panel needed
+
+await expect.poll(() => legumes.selectedLabels()).toEqual([]);
+```
+
+`selectOption` and `deselectOption` state where the value should end up and do nothing when it is
+already there; `toggleOption` flips it whichever state it is in. To set the whole value at once,
+whatever the select already holds:
+
+```ts
+await legumes.setValue(['Carotte', 'Betterave']);
+await legumes.setValue([]); // empties it
+```
+
+`setValue` reads what is held off the panel, not off the chips, so it is right on a select given a
+`maxValuesShown` that displays only part of its value. The resulting order is the select's own: an
+option already held keeps its place.
+
+### Rows that are not options
+
+A panel can offer two rows that look like options and are not: the one that makes an option out of
+the current search, and the one that takes every option at once. They are actions, so they are
+driven from the select in a single call and left out of `options()` and `optionLabels()`:
+
+```ts
+await select.addOption('Rutabaga'); // searches, then takes the row the panel offers
+await select.canAddOption();
+
+await legumes.selectAll(); // lands on every option, whatever the selection started as
+await legumes.selectAllState(); // 'none' | 'some' | 'all', or null without a select-all row
+```
+
+`addOption` only reports the clue to the select: what the new option becomes is the consumer's
+`addOption` handler, so wait on the value rather than assuming it is there.
+
+### Tree selects
+
+`treeSelect` is a directive, not a component: there is no `lu-tree-select` to wrap, and a tree is
+driven through the simple or multi select harness it is applied to. What changes is the panel,
+which takes the `tree` role and nests its options:
+
+```ts
+const panel = legumes.panel();
+await legumes.open();
+
+expect(await panel.isTree()).toBe(true);
+expect(await panel.option('Carotte').hasChildren()).toBe(true);
+
+// Picks the node and its whole subtree. The two shortcuts the panel offers on a node:
+await panel.option('Carotte').selectOnlyParent();
+await panel.option('Carotte').selectOnlyChildren();
+```
+
+A node renders its children inside its own element, so an option is always matched, read and
+clicked on its own row — `option('Carotte')` never resolves to one of its children, and
+`optionLabels()` lists each node's own label.
 
 ## How these are kept honest
 

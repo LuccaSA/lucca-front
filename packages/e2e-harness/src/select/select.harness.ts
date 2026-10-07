@@ -1,5 +1,6 @@
 import type { Locator } from '@playwright/test';
 import { LuHarness } from '../core/harness.js';
+import { readOptionLabel } from './option.harness.js';
 import { LISTBOX_SELECTOR, LuSelectPanelHarness } from './panel.harness.js';
 
 /** The control a select is driven by, whichever displayer renders it. */
@@ -7,6 +8,12 @@ const COMBOBOX_SELECTOR = '[role="combobox"]';
 
 /** The CDK overlay the panel is rendered in, at the end of the document. */
 const OVERLAY_PANE_SELECTOR = '.cdk-overlay-pane';
+
+/**
+ * The row a panel offers to make an option out of the current search, when its select is given an
+ * `addOptionStrategy`. Its label is translated by the consumer, but both panels pin its id.
+ */
+const ADD_OPTION_SELECTOR = '[id="picker-content-add"]';
 
 /**
  * What every Lucca select shares, whether it holds one value or several: a combobox to drive it
@@ -36,12 +43,18 @@ export abstract class LuSelectHarness extends LuHarness {
 		return this.clearButton().isVisible();
 	}
 
-	/** Opens the panel and waits for it, doing nothing if it is already open. */
+	/**
+	 * Opens the panel and waits for it, doing nothing if it is already open.
+	 *
+	 * Clicks the select itself rather than the control it is driven by: a multi select lays its
+	 * values over that control, which then takes no click at all. Every select opens from a click
+	 * anywhere on itself, which is also what a user does.
+	 */
 	async open(): Promise<void> {
 		if (await this.isOpen()) {
 			return;
 		}
-		await this.combobox().click();
+		await this.host.click();
 		await this.panel().waitForOpen();
 	}
 
@@ -83,6 +96,31 @@ export abstract class LuSelectHarness extends LuHarness {
 	}
 
 	/**
+	 * Whether the panel offers to make an option out of the current search. Opens the panel, which
+	 * is where that row lives.
+	 */
+	async canAddOption(): Promise<boolean> {
+		await this.open();
+		return this.#addOptionRow().isVisible();
+	}
+
+	/**
+	 * Makes an option out of `clue` and takes it, in one call: opens the panel, searches, then
+	 * takes the row the panel offers. Called without a clue, takes that row as it stands.
+	 *
+	 * What the new option becomes is the consumer's business — the select only reports the clue
+	 * through its `addOption` output — so wait on the value with a web-first assertion.
+	 */
+	async addOption(clue?: string): Promise<void> {
+		if (clue === undefined) {
+			await this.open();
+		} else {
+			await this.search(clue);
+		}
+		await this.#addOptionRow().click();
+	}
+
+	/**
 	 * The text of the option the keyboard is currently on, `null` when none is. This is the option
 	 * `Enter` would pick, and the one a screen reader announces.
 	 */
@@ -91,7 +129,12 @@ export abstract class LuSelectHarness extends LuHarness {
 		if (!activeDescendant) {
 			return null;
 		}
-		return (await this.page.locator(`[id="${activeDescendant}"]`).innerText()).trim();
+		return readOptionLabel(this.page.locator(`[id="${activeDescendant}"]`));
+	}
+
+	/** The add row, which the panel renders next to its options rather than among them. */
+	#addOptionRow(): Locator {
+		return this.panel().locator.locator(ADD_OPTION_SELECTOR);
 	}
 
 	/** The control driving the select, which the displayer of a multi select also carries. */

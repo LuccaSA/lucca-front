@@ -1,13 +1,16 @@
 import type { Locator } from '@playwright/test';
 import { LuHarness } from '../core/harness.js';
 import type { LuHarnessText } from '../core/scope.js';
-import { LuSelectOptionHarness } from './option.harness.js';
+import { locateOptionValues, locateOptions, LuSelectOptionHarness } from './option.harness.js';
 
 /** Both roles a Lucca select panel can take: `tree` once the select is fed a tree generator. */
 export const LISTBOX_SELECTOR = '[role="listbox"], [role="tree"]';
 
 /** The scroll container of the panel, which paginated data sources load more options into. */
 const SCROLL_CONTAINER_SELECTOR = '.lu-select-panel-layout-content';
+
+/** The top level of a tree panel, whose nodes nest the rest of the options inside themselves. */
+const ROOT_OPTIONS_SELECTOR = ':scope > lu-tree-branch > lu-select-option > [role="treeitem"]';
 
 /**
  * The panel of a select, rendered in a CDK overlay at the end of the document rather than inside
@@ -38,6 +41,11 @@ export class LuSelectPanelHarness extends LuHarness {
 		return (await this.#listbox().getAttribute('aria-describedby')) !== null;
 	}
 
+	/** Whether the panel nests its options, which a select fed a tree generator does. */
+	async isTree(): Promise<boolean> {
+		return (await this.#listbox().getAttribute('role')) === 'tree';
+	}
+
 	/**
 	 * The message shown in place of the options while the panel is empty or loading, `null` when
 	 * the panel is showing options.
@@ -54,20 +62,37 @@ export class LuSelectPanelHarness extends LuHarness {
 		return null;
 	}
 
-	/** One option of the panel, by its text. */
+	/** One option of the panel, by its own text — a tree node is not matched by its children's. */
 	option(label: LuHarnessText): LuSelectOptionHarness {
 		return new LuSelectOptionHarness(this.#options(label));
 	}
 
-	/** Every option currently rendered, in display order. */
+	/**
+	 * Every option currently rendered, in display order, a tree's nested ones included.
+	 *
+	 * The "add option" and "select all" rows are not options: they are driven by `addOption()` and
+	 * `selectAll()` on the select itself.
+	 */
 	async options(): Promise<LuSelectOptionHarness[]> {
 		const options = await this.#options().all();
 		return options.map((option) => new LuSelectOptionHarness(option));
 	}
 
+	/**
+	 * The options of a tree panel's top level, in display order, each holding its own children.
+	 * Equivalent to `options()` on a panel that is not a tree.
+	 */
+	async rootOptions(): Promise<LuSelectOptionHarness[]> {
+		if (!(await this.isTree())) {
+			return this.options();
+		}
+		const roots = await this.#listbox().locator(ROOT_OPTIONS_SELECTOR).all();
+		return roots.map((root) => new LuSelectOptionHarness(root));
+	}
+
 	/** The text of every option currently rendered, in display order. */
 	async optionLabels(): Promise<string[]> {
-		const labels = await this.#options().allInnerTexts();
+		const labels = await locateOptionValues(this.#options()).allInnerTexts();
 		return labels.map((label) => label.trim());
 	}
 
@@ -84,7 +109,6 @@ export class LuSelectPanelHarness extends LuHarness {
 	}
 
 	#options(label?: LuHarnessText): Locator {
-		const name = label === undefined ? undefined : { name: label };
-		return this.host.getByRole('option', name).or(this.host.getByRole('treeitem', name));
+		return locateOptions(this.host, label);
 	}
 }

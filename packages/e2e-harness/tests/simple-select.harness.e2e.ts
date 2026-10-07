@@ -55,7 +55,8 @@ test.describe('LuSimpleSelectHarness', () => {
 
 		await select.selectOption('Carotte');
 
-		expect(await select.isOpen()).toBe(false);
+		// Polled, not read once: the overlay is gone before the combobox has caught up with it.
+		await expect.poll(() => select.isOpen()).toBe(false);
 		await expect.poll(() => select.selectedLabel()).toBe('Carotte');
 	});
 
