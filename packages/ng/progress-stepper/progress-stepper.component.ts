@@ -22,5 +22,8 @@ import { LU_PROGRESS_STEPPER_INSTANCE } from './progress-stepper.token';
 export class ProgressStepperComponent {
 	public readonly steps = contentChildren(ProgressStepperStepComponent);
 
+	/**
+	 * Position of the current step, starting at 1
+	 */
 	readonly current = input(1, { transform: luNumberAttribute });
 }

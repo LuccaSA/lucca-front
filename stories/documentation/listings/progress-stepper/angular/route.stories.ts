@@ -4,10 +4,7 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite
 import { cleanupTemplate } from '@/helpers/stories';
 
 export default {
-	title: 'Documentation/Progress stepper/Angular/Route',
-	argTypes: {
-		routerLinkParam: { control: { type: 'object' }, table: { category: 'inputs' } },
-	},
+	title: 'Documentation/Listings/Progress stepper/Angular/Route',
 	decorators: [
 		moduleMetadata({
 			imports: [ProgressStepperComponent, ProgressStepperStepComponent, RouterLink],
@@ -18,7 +15,7 @@ export default {
 	],
 	render: () => {
 		return {
-			template: cleanupTemplate(`<lu-progress-stepper current="2" steps="3">
+			template: cleanupTemplate(`<lu-progress-stepper current="2">
 	<lu-progress-stepper-step [routerLinkParam]="{ commands: '/route/step-1', fragment: 'home' }" label="Home page" />
 	<lu-progress-stepper-step [routerLinkParam]="{ commands: ['route', 'step', '2'], fragment: 'config' }" label="Config page" />
 	<lu-progress-stepper-step [routerLinkParam]="{ commands: '/route/step-3', fragment: 'edit' }" label="Edit page" />
@@ -27,17 +24,4 @@ export default {
 	},
 } as Meta;
 
-export const Basic = {
-	args: {
-		routerLinkParam: {
-			commands: '/route/step-1',
-			relativeTo: { outlet: 'outlet' },
-			fragment: 'home',
-			queryParams: { debug: true },
-			target: 'target',
-			preserveFragment: true,
-			skipLocationChange: false,
-			replaceUrl: 'replace/url',
-		},
-	},
-};
+export const Basic = {};

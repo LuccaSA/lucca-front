@@ -3,10 +3,11 @@ import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } fro
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface segmentedControlBasicStory {
-	S: boolean;
+	small: boolean;
 	withNumericBadge: boolean;
 	vertical: boolean;
 	ariaLabel: string;
+	active: string;
 }
 
 export default {
@@ -16,35 +17,51 @@ export default {
 		}),
 	],
 	argTypes: {
-		S: {
+		small: {
 			description: 'Modifie la taille du composant.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		withNumericBadge: {
 			description: 'Présente un exemple avec un Numeric Badge.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		vertical: {
 			description: 'Affiche le composant en vue verticale.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		ariaLabel: {
 			description: "Nom accessible du groupe d'onglets, restitué aux technologies d'assistance.",
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
+		},
+		active: {
+			options: ['0', '1', '2', '3'],
+			control: { type: 'select' },
+			description: 'Valeur de l’onglet actif. Two-way. Le premier onglet est activé si aucune valeur n’est fournie.',
+			table: { category: 'models', type: { summary: 'T | null' }, defaultValue: { summary: 'null' } },
+		},
+		label: {
+			control: false,
+			description: 'Libellé de l’onglet.',
+			table: { category: 'inputs (segmented-control-tabs-panel)', type: { summary: 'PortalContent' } },
+		},
+		value: {
+			control: false,
+			description: 'Valeur de l’onglet (obligatoire).',
+			table: { category: 'inputs (segmented-control-tabs-panel)', type: { summary: 'T' } },
 		},
 	},
 	title: 'Documentation/Navigation/segmentedControl/Angular/Tabs',
 } as Meta;
 
 function getTemplate(args: segmentedControlBasicStory): string {
-	const size = args.S ? ` small` : ``;
+	const size = args.small ? ` small` : ``;
 	const vertical = args.vertical ? ` vertical` : ``;
 	const ariaLabel = args.ariaLabel ? ` [ariaLabel]="ariaLabel"` : ``;
 	const numericBadgeComponent = args.withNumericBadge ? ` <lu-numeric-badge value="8" />` : ``;
 	return `<ng-template #label>
 	Lorem${numericBadgeComponent}
 </ng-template>
-<lu-segmented-control-tabs${size}${vertical}${ariaLabel}>
+<lu-segmented-control-tabs${size}${vertical}${ariaLabel} [(active)]="active">
 	<lu-segmented-control-tabs-panel [label]="label" value="0">
 		<div class="demo">Content Lorem</div>
 	</lu-segmented-control-tabs-panel>
@@ -69,10 +86,11 @@ const Template = (args: segmentedControlBasicStory) => ({
 
 export const Basic: StoryObj<segmentedControlBasicStory> = {
 	args: {
-		S: false,
+		small: false,
 		withNumericBadge: false,
 		vertical: false,
 		ariaLabel: 'Lorem ipsum',
+		active: '0',
 	},
 	render: Template,
 };

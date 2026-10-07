@@ -23,10 +23,19 @@ import { LU_PROGRESS_STEPPER_INSTANCE } from '../progress-stepper.token';
 export class ProgressStepperStepComponent {
 	protected readonly progressStepperRef = inject(LU_PROGRESS_STEPPER_INSTANCE);
 
+	/**
+	 * Label of the step
+	 */
 	readonly label = input.required<string>();
 
+	/**
+	 * State of the step
+	 */
 	readonly state = input<ProgressStepperStepState | null>(null);
 
+	/**
+	 * Navigation link of the step, as a `RouterLinkParam` or any value accepted by `routerLink`
+	 */
 	readonly routerLinkParam = input<RouterLinkParam | string | readonly string[] | UrlTree | null | undefined>(null);
 
 	protected readonly position = computed(() => this.progressStepperRef.steps().indexOf(this) + 1);

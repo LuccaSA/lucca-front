@@ -22,6 +22,9 @@ import { ReadMoreSurface } from './read-more.type';
 	},
 })
 export class ReadMoreComponent {
+	/**
+	 * Override the default translations of the component
+	 */
 	readonly intl = input(...intlInputOptions(LU_READMORE_TRANSLATIONS));
 
 	/**

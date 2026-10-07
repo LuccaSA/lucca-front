@@ -30,7 +30,7 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 	/** References the popover target instance that the trigger is associated with. */
 	readonly inputTarget = input<TTarget>(undefined, { alias: 'luPopoverTarget' });
 
-	/** References the popover target instance that the trigger is associated with. */
+	/** Event that opens the popover, allowed values: click, hover, focus, none */
 	readonly inputTriggerEvent = input<LuPopoverTriggerEvent>(undefined, { alias: 'luPopoverTrigger' });
 
 	readonly onOpen = new EventEmitter<void>();
@@ -61,8 +61,10 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 	/** set to true if you want the panel to appear on top of the target */
 	readonly inputOverlap = input<boolean>(undefined, { alias: 'luPopoverOverlap' });
 
+	/** horizontal offset of the panel, in pixels */
 	readonly inputOffsetX = input<number>(undefined, { alias: 'luPopoverOffsetX' });
 
+	/** vertical offset of the panel, in pixels */
 	readonly inputOffsetY = input<number>(undefined, { alias: 'luPopoverOffsetY' });
 
 	/** accessibility attribute - dont override */
