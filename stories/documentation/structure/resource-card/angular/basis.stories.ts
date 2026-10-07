@@ -3,7 +3,14 @@ import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LinkComponent } from '@lucca-front/ng/link';
-import { RESOURCE_CARD_SIZE, ResourceCardButtonComponent, ResourceCardComponent, ResourceCardLinkComponent, ResourceCardWrapperComponent } from '@lucca-front/ng/resource-card';
+import {
+	RESOURCE_CARD_HEADING_LEVEL,
+	RESOURCE_CARD_SIZE,
+	ResourceCardButtonComponent,
+	ResourceCardComponent,
+	ResourceCardLinkComponent,
+	ResourceCardWrapperComponent,
+} from '@lucca-front/ng/resource-card';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -20,7 +27,7 @@ interface ResourceCardAngularBasicStory {
 	actionType: string;
 	content: boolean;
 	contentTemplate: string;
-	headingLevel: number;
+	headingLevel: string;
 	illustration: boolean;
 	illustrationTemplate: string;
 	illustrationTemplateDisabled: string;
@@ -37,80 +44,115 @@ interface ResourceCardAngularBasicStory {
 export default {
 	title: 'Documentation/Structure/Resource Card/Angular/Basic',
 	argTypes: {
+		wrapper: {
+			description: 'Affiche plusieurs cartes dans un `lu-resource-card-wrapper`.',
+			table: { category: 'story' },
+		},
 		wrapperDraggable: {
+			description: 'Rend les cartes du wrapper déplaçables.',
 			if: { arg: 'wrapper', truthy: true },
-			table: { category: 'inputs' },
+			table: { category: 'inputs (resource-card-wrapper)', defaultValue: { summary: 'false' } },
 		},
 		wrapperGrid: {
+			description: 'Affiche les cartes du wrapper en grille.',
 			if: { arg: 'wrapper', truthy: true },
-			table: { category: 'inputs' },
+			table: { category: 'inputs (resource-card-wrapper)', defaultValue: { summary: 'false' } },
 		},
-		draggable: {
-			if: { arg: 'wrapper', truthy: false },
-			table: { category: 'inputs' },
-		},
-		infosTemplate: {
-			if: { arg: 'infos', truthy: true },
-			table: { category: 'inputs' },
-		},
-		illustrationTemplate: {
-			if: { arg: 'illustration', truthy: true },
-			table: { category: 'inputs' },
-		},
-		contentTemplate: {
-			if: { arg: 'content', truthy: true },
-			table: { category: 'inputs' },
-		},
-		contentTemplateDisabled: {
-			if: { arg: 'disabled', truthy: true },
-			table: { category: 'inputs' },
-		},
-		actionTemplate: {
-			if: { arg: 'action', truthy: true },
-			table: { category: 'inputs' },
-		},
-		actionTemplateDisabled: {
-			if: { arg: 'disabled', truthy: true },
-			table: { category: 'inputs' },
-		},
-		illustrationTemplateDisabled: {
-			if: { arg: 'disabled', truthy: true },
-			table: { category: 'inputs' },
+		wrapperSize: {
+			description: 'Modifie la taille des cartes du wrapper.',
+			options: setStoryOptions(RESOURCE_CARD_SIZE),
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'wrapper', truthy: true },
+			table: { category: 'inputs (resource-card-wrapper)', defaultValue: { summary: 'null' } },
 		},
 		addResource: {
+			description: 'Ajoute un bouton à la fin du wrapper.',
 			if: { arg: 'wrapper', truthy: true },
-			table: { category: 'inputs' },
+			table: { category: 'story' },
+		},
+		draggable: {
+			description: 'Rend la carte déplaçable.',
+			if: { arg: 'wrapper', truthy: false },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		size: {
+			description: 'Modifie la taille de la carte.',
+			options: setStoryOptions(RESOURCE_CARD_SIZE),
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'wrapper', truthy: false },
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
+		},
+		headingLevel: {
+			description: 'Niveau sémantique du titre de la carte.',
+			options: RESOURCE_CARD_HEADING_LEVEL,
+			control: {
+				type: 'select',
+			},
+			table: { category: 'inputs', defaultValue: { summary: '3' } },
+		},
+		disabled: {
+			description: 'Désactive l’action principale de la carte.',
+			table: { category: 'inputs (resource-card-action)', defaultValue: { summary: 'false' } },
+		},
+		heading: {
+			description: 'Titre de la carte.',
+			table: { category: 'story' },
 		},
 		actionType: {
+			description: 'Élément portant l’action principale : `a[luResourceCardAction]` ou `button[luResourceCardAction]`.',
 			options: ['a', 'button'],
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
-		size: {
-			options: setStoryOptions(RESOURCE_CARD_SIZE),
-			control: {
-				type: 'select',
-			},
-			if: { arg: 'wrapper', truthy: false },
-			table: { category: 'inputs' },
+		infos: {
+			description: 'Affiche des informations complémentaires (`resourceCardInfos`).',
+			table: { category: 'story' },
 		},
-		wrapperSize: {
-			options: setStoryOptions(RESOURCE_CARD_SIZE),
-			control: {
-				type: 'select',
-			},
-			if: { arg: 'wrapper', truthy: true },
-			table: { category: 'inputs' },
+		infosTemplate: {
+			if: { arg: 'infos', truthy: true },
+			table: { category: 'story' },
 		},
-		headingLevel: {
-			control: {
-				type: 'range',
-				min: 1,
-				max: 6,
-			},
-			table: { category: 'inputs' },
+		illustration: {
+			description: 'Affiche une illustration (`resourceCardIllustration`).',
+			table: { category: 'story' },
+		},
+		illustrationTemplate: {
+			if: { arg: 'illustration', truthy: true },
+			table: { category: 'story' },
+		},
+		illustrationTemplateDisabled: {
+			if: { arg: 'disabled', truthy: true },
+			table: { category: 'story' },
+		},
+		content: {
+			description: 'Affiche un contenu (`resourceCardContent`).',
+			table: { category: 'story' },
+		},
+		contentTemplate: {
+			if: { arg: 'content', truthy: true },
+			table: { category: 'story' },
+		},
+		contentTemplateDisabled: {
+			if: { arg: 'disabled', truthy: true },
+			table: { category: 'story' },
+		},
+		action: {
+			description: 'Affiche une action secondaire (`resourceCardAction`).',
+			table: { category: 'story' },
+		},
+		actionTemplate: {
+			if: { arg: 'action', truthy: true },
+			table: { category: 'story' },
+		},
+		actionTemplateDisabled: {
+			if: { arg: 'disabled', truthy: true },
+			table: { category: 'story' },
 		},
 	},
 	decorators: [
@@ -149,7 +191,7 @@ function getTemplate(args: ResourceCardAngularBasicStory) {
 		args.actionType === 'a'
 			? `<a href="#" luResourceCardAction luTooltip luTooltipWhenEllipsis${disabledAttr}>${args.heading}</a>`
 			: `<button type="button" luResourceCardAction luTooltip luTooltipWhenEllipsis${disabledAttr}>${args.heading}</button>`;
-	const headingLevelAttr = args.headingLevel !== 3 ? ` headingLevel="${args.headingLevel}"` : ``;
+	const headingLevelAttr = args.headingLevel !== '3' ? ` headingLevel="${args.headingLevel}"` : ``;
 	const headingInfosTpl = args.infos
 		? `
 			<ng-container resourceCardInfos>
@@ -222,7 +264,7 @@ export const Basic: StoryObj<ResourceCardAngularBasicStory> = {
 		draggable: false,
 		disabled: false,
 		heading: 'Lorem ipsum dolor ',
-		headingLevel: 3,
+		headingLevel: '3',
 		size: '',
 		actionType: 'a',
 		infos: false,

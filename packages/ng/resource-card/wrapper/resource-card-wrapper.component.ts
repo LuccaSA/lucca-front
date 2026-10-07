@@ -21,9 +21,18 @@ import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './resource-card-wrapper.token
 	],
 })
 export class ResourceCardWrapperComponent {
+	/**
+	 * Display the cards of the wrapper in a grid
+	 */
 	readonly grid = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Display the cards of the wrapper as draggable
+	 */
 	readonly draggable = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Size of the cards of the wrapper
+	 */
 	readonly size = input<ResourceCardSize | null>(null);
 }

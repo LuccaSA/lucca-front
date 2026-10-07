@@ -21,8 +21,14 @@ let nextId = 0;
 export class SegmentedControlTabsPanelComponent<T = unknown> {
 	protected segmentedControlTabsRef = inject(LU_SEGMENTEDCONTROLTABS_INSTANCE);
 
+	/**
+	 * Label of the tab
+	 */
 	readonly label = input<PortalContent>();
 
+	/**
+	 * Value of the tab
+	 */
 	readonly value = input.required<T>();
 
 	readonly id = nextId++;

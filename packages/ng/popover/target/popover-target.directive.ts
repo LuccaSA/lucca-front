@@ -16,8 +16,10 @@ export class LuPopoverTargetDirective extends ALuPopoverTarget {
 	/** set to true if you want the panel to appear on top of the target */
 	readonly inputOverlap = input<boolean>(undefined, { alias: 'luPopoverOverlap' });
 
+	/** horizontal offset of the panel, in pixels */
 	readonly inputOffsetX = input<number>(undefined, { alias: 'luPopoverOffsetX' });
 
+	/** vertical offset of the panel, in pixels */
 	readonly inputOffsetY = input<number>(undefined, { alias: 'luPopoverOffsetY' });
 
 	constructor(ref: ElementRef) {

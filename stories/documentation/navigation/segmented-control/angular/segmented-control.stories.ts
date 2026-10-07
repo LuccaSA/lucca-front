@@ -25,7 +25,7 @@ export default {
 		},
 		withNumericBadge: {
 			description: 'Présente un exemple avec un Numeric Badge.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		vertical: {
 			description: 'Affiche le composant en vue verticale.',
@@ -34,6 +34,21 @@ export default {
 		ariaLabel: {
 			description: "Nom accessible du groupe d'options, restitué aux technologies d'assistance.",
 			table: { category: 'inputs' },
+		},
+		label: {
+			control: false,
+			description: 'Libellé du filtre.',
+			table: { category: 'inputs (segmented-control-filter)', type: { summary: 'PortalContent' } },
+		},
+		value: {
+			control: false,
+			description: 'Valeur du filtre (obligatoire).',
+			table: { category: 'inputs (segmented-control-filter)', type: { summary: 'T' } },
+		},
+		disabled: {
+			control: false,
+			description: 'Désactive le filtre.',
+			table: { category: 'inputs (segmented-control-filter)', defaultValue: { summary: 'false' } },
 		},
 	},
 	title: 'Documentation/Navigation/segmentedControl/Angular/Basic',

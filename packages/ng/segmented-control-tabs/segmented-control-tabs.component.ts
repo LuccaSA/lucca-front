@@ -38,6 +38,9 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 	 */
 	readonly ariaLabel = input<string | null>(null);
 
+	/**
+	 * Value of the active tab, the first tab is activated when none is provided
+	 */
 	readonly active = model<T | null>(null);
 
 	readonly id = `segmentedControl${nextId++}`;

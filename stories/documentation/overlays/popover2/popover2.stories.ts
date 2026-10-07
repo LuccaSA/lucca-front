@@ -25,39 +25,40 @@ export default {
 		// Property names of aliased inputs: only the aliases are bindable, hide the duplicates.
 		luPopoverDisabledInput: HiddenArgType,
 		luPopoverNoCloseButtonInput: HiddenArgType,
+		customPositionsInput: HiddenArgType,
 		luPopoverTrigger: {
 			control: 'select',
 			options: ['click', 'click+hover', 'hover+focus'],
 			description: 'Méthode d’ouverture du popover.',
-			table: { category: 'models' },
+			table: { category: 'models', defaultValue: { summary: 'click' } },
 		},
 		luPopoverPosition: {
 			control: 'select',
 			options: ['above', 'below', 'before', 'after'],
 			description: 'Position du popover par rapport à son déclencheur.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'above' } },
 		},
 		luPopoverDisabled: {
 			description: 'Désactive le popover.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		luPopoverOpenDelay: {
-			description: 'Délai en millisecondes avant ouverture du popover.',
-			table: { category: 'inputs' },
+			description: 'Délai en millisecondes avant ouverture du popover, lorsque `luPopoverTrigger` inclut `hover` ou `focus`.',
+			table: { category: 'inputs', defaultValue: { summary: '300' } },
 		},
 		luPopoverCloseDelay: {
-			description: 'Délai en millisecondes avant fermeture du popover.',
-			table: { category: 'inputs' },
+			description: 'Délai en millisecondes avant fermeture du popover, lorsque `luPopoverTrigger` inclut `hover` ou `focus`.',
+			table: { category: 'inputs', defaultValue: { summary: '100' } },
 		},
 		overlayScrollStrategy: {
 			control: 'select',
 			options: ['reposition', 'block', 'close'],
 			description: '[v21.1] Comportement du popover lors du scroll.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'reposition' } },
 		},
 		luPopoverNoCloseButton: {
 			description: 'Masque le bouton de fermeture du popover visible à la navigation clavier.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		luPopoverMaxBlockSize: {
 			control: 'text',
@@ -68,6 +69,33 @@ export default {
 			control: 'text',
 			description: 'Modifie la largeur max de la popover.',
 			table: { category: 'inputs' },
+		},
+		customPositions: {
+			control: false,
+			description: 'Positions personnalisées (`ConnectionPositionPair[]` du CDK Angular), prioritaires sur `luPopoverPosition`.',
+			table: { category: 'inputs', type: { summary: 'ConnectionPositionPair[]' } },
+		},
+		luPopoverAnchor: {
+			control: false,
+			description: 'Élément sur lequel le popover est positionné, à la place de son déclencheur.',
+			table: { category: 'inputs', type: { summary: 'FlexibleConnectedPositionStrategyOrigin' } },
+		},
+		luPopoverIgnoredOutsidePointerTargets: {
+			control: false,
+			description: 'Élément(s) considéré(s) comme faisant partie du popover : un clic dessus ne le ferme pas.',
+			table: { category: 'inputs', type: { summary: 'HTMLElement | HTMLElement[]' } },
+		},
+		luPopoverOpened: {
+			description: 'Événement déclenché à l’ouverture du popover.',
+			action: 'luPopoverOpened',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
+		},
+		luPopoverClosed: {
+			description: 'Événement déclenché à la fermeture du popover.',
+			action: 'luPopoverClosed',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		intl: intlArgType(luPopoverTranslations, 'ILuPopover2Label'),
 	},
@@ -87,8 +115,9 @@ export const Basic: StoryObj<PopoverStoryArgs> = {
 			openDelay = ' ' + args.luPopoverOpenDelay + 'ms';
 		}
 		return {
+			props: args,
 			template: `<div class="demo">
-	<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay} !</button>
+	<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)} (luPopoverOpened)="luPopoverOpened()" (luPopoverClosed)="luPopoverClosed()">${action}${openDelay} !</button>
 	<ng-template #contentRef>
 		<div class="popover-contentOptional">
 			<h3>Title</h3>
@@ -129,7 +158,7 @@ export const Basic: StoryObj<PopoverStoryArgs> = {
 	},
 	args: {
 		luPopoverTrigger: 'click',
-		luPopoverCloseDelay: 300,
+		luPopoverCloseDelay: 100,
 		luPopoverOpenDelay: 300,
 		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
@@ -148,6 +177,8 @@ export const CustomPosition: StoryObj<PopoverStoryArgs> = {
 		}
 		return {
 			props: {
+				luPopoverOpened: args.luPopoverOpened,
+				luPopoverClosed: args.luPopoverClosed,
 				examplePosition: [
 					new ConnectionPositionPair(
 						{ originX: 'start', originY: 'bottom' },
@@ -191,7 +222,7 @@ export const CustomPosition: StoryObj<PopoverStoryArgs> = {
 	<br>
 	<br>
 
-	<button luButton [luPopover2]="contentRef" [customPositions]="examplePosition" ${generateInputs(args, argTypes)}>${action}${openDelay} !</button>
+	<button luButton [luPopover2]="contentRef" [customPositions]="examplePosition" ${generateInputs(args, argTypes)} (luPopoverOpened)="luPopoverOpened()" (luPopoverClosed)="luPopoverClosed()">${action}${openDelay} !</button>
 	<ng-template #contentRef>
 		<div class="popover-contentOptional">
 			<div class="verticalNavigation mod-iconless">
@@ -217,7 +248,7 @@ export const CustomPosition: StoryObj<PopoverStoryArgs> = {
 	},
 	args: {
 		luPopoverTrigger: 'click',
-		luPopoverCloseDelay: 300,
+		luPopoverCloseDelay: 100,
 		luPopoverOpenDelay: 300,
 		luPopoverDisabled: false,
 		luPopoverPosition: 'above',

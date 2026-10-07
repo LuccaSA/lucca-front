@@ -92,22 +92,31 @@ export class PopoverDirective implements OnDestroy {
 
 	#renderer = inject(Renderer2);
 
+	/** Overrides the default translations of the popover */
 	readonly intl = input(...intlInputOptions(LU_POPOVER2_TRANSLATIONS));
 
+	/** Content of the popover, as a template or a component */
 	readonly luPopover2 = input<TemplateRef<unknown> | Type<unknown>>();
 
+	/** Position of the popover relative to its trigger, defaults to `above` */
 	readonly luPopoverPosition = input<PopoverPosition | null>(null);
 
+	/** Maximum block size (height) of the popover, as a CSS length */
 	readonly luPopoverMaxBlockSize = input<string | null>(null);
 
+	/** Maximum inline size (width) of the popover, as a CSS length */
 	readonly luPopoverMaxInlineSize = input<string | null>(null);
 
+	/** Behavior of the popover when the page is scrolled */
 	readonly overlayScrollStrategy = input<'reposition' | 'block' | 'close'>('reposition');
 
+	/** Prevents the popover from opening */
 	readonly luPopoverDisabledInput = input(false, { transform: luBooleanAttribute, alias: 'luPopoverDisabled' });
 
+	/** Interaction(s) that open the popover */
 	readonly luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
 
+	/** Custom CDK connected positions, overriding `luPopoverPosition` */
 	readonly customPositionsInput = input<ConnectionPositionPair[] | null>(null, { alias: 'customPositions' });
 
 	/**
@@ -129,8 +138,10 @@ export class PopoverDirective implements OnDestroy {
 	readonly luPopoverIgnoredOutsidePointerTargets = input<HTMLElement | HTMLElement[] | null>(null);
 
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
+	/** Delay in milliseconds before the popover opens on hover or focus */
 	readonly luPopoverOpenDelay: InputSignalWithTransform<number, number | `${number}`> = input(300, { transform: luNumberAttribute });
 
+	/** Delay in milliseconds before the popover closes on hover or focus */
 	readonly luPopoverCloseDelay: InputSignalWithTransform<number, number | `${number}`> = input(100, { transform: luNumberAttribute });
 
 	readonly luPopoverPositionRef = linkedSignal(() => this.luPopoverPosition() || 'above');

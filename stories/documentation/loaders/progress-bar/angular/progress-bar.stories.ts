@@ -10,6 +10,7 @@ interface ProgressBarBasicStory {
 
 export default {
 	title: 'Documentation/Loaders/Progress Bar/Angular/Basic',
+	component: ProgressBarComponent,
 	argTypes: {
 		state: {
 			options: setStoryOptions(PROGRESS_BAR_STATE),
@@ -17,14 +18,14 @@ export default {
 				type: 'select',
 			},
 			description: 'État du composant.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		indeterminate: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Affiche un état de chargement sans information de progression.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		value: {
 			control: {
@@ -34,7 +35,7 @@ export default {
 				step: 1,
 			},
 			description: 'Pourcentage de progression.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '0' } },
 		},
 	},
 	decorators: [
@@ -50,7 +51,7 @@ export default {
 			template: cleanupTemplate(`<lu-progress-bar${state}${indeterminate}${val} />`),
 		};
 	},
-} as Meta;
+} as Meta<ProgressBarBasicStory>;
 
 export const Basic = {
 	args: {

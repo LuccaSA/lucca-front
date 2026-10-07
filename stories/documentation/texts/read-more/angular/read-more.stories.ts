@@ -6,6 +6,7 @@ const OTHER_SURFACE_OPTIONS = ['#0b1732'];
 
 export default {
 	title: 'Documentation/Texts/ReadMore/Angular/Basic',
+	component: ReadMoreComponent,
 	argTypes: {
 		lineClamp: {
 			control: {
@@ -15,7 +16,7 @@ export default {
 				step: 1,
 			},
 			description: 'Modifie le nombre de lignes affichées à l’état replié.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '5' } },
 		},
 		surface: {
 			options: setStoryOptions([...READ_MORE_SURFACE, ...OTHER_SURFACE_OPTIONS]),
@@ -23,19 +24,23 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la couleur de fond sous le bouton "Lire plus / moins" ',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		textFlow: {
 			description: 'Applique les espacements du composant Text flow',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		openOnly: {
 			description: 'Empêche la fermeture du composant en masquant le bouton "Lire moins"',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		plainText: {
+			description: 'Affiche les retours à la ligne (`\\n`) du contenu au lieu de les fusionner en espaces. Destiné à du texte brut, comme la valeur d’un textarea.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		innerContent: {
-			description: 'Permet de passer le contenu via un innerHTML',
-			table: { category: 'inputs' },
+			description: 'Passe le contenu de l’exemple via l’input `innerContent` (`string | null`, injecté en innerHTML) au lieu de le projeter dans le composant.',
+			table: { category: 'story' },
 		},
 		content: {
 			table: { disable: true },
@@ -67,6 +72,7 @@ export const Basic = {
 	args: {
 		lineClamp: 3,
 		openOnly: false,
+		plainText: false,
 		surface: 'default',
 		textFlow: false,
 		innerContent: false,
