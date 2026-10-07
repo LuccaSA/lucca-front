@@ -30,12 +30,24 @@ import { ICalendarItem } from './calendar-item.interface';
 export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit, Validator {
 	readonly intl = input(...intlInputOptions(LU_CALENDARINPUT_TRANSLATIONS));
 
+	/**
+	 * Minimum selectable date
+	 */
 	readonly min = input<D>();
 
+	/**
+	 * Maximum selectable date
+	 */
 	readonly max = input<D>();
 
+	/**
+	 * Granularity of the selected value (day, month, year…). Defaults to day
+	 */
 	readonly granularity = input<LuDateGranularity>(ELuDateGranularity.day);
 
+	/**
+	 * Date displayed by the calendar when there is no value. Defaults to today
+	 */
 	readonly startOn = input<D>();
 
 	viewGranularity: LuDateGranularity;

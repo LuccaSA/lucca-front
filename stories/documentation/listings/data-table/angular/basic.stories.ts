@@ -29,7 +29,8 @@ export default {
 	title: 'Documentation/Listings/Data table/Angular/Basic',
 	argTypes: {
 		empty: {
-			description: 'Affiche un empty state à la place des lignes de tableau.',
+			description:
+				'Indique que le tableau est vide : la table passe en <code>role="presentation"</code> et l’en-tête devient <code>inert</code>. L’empty state lui-même doit être projeté dans une ligne du <code>tbody</code> (voir la story).',
 			table: { category: 'inputs' },
 		},
 		sort: {
@@ -38,20 +39,20 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
-			table: { category: 'models' },
+			table: { category: 'models (th[luDataTableCell])' },
 		},
 		sortWithEllipsis: {
 			if: { arg: 'sort', truthy: true },
 			description: 'Tronque le libellé du header avec une ellipsis si la colonne n’offre pas assez de largeur.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (th[luDataTableCell])' },
 		},
 		align: {
 			options: setStoryOptions(DATA_TABLE_ALIGN),
 			control: {
 				type: 'select',
 			},
-			description: 'Aligne le contenu des cellules horizontalement.',
-			table: { category: 'inputs' },
+			description: 'Aligne le contenu des cellules horizontalement. Posé sur une cellule d’en-tête, il s’applique à toute la colonne.',
+			table: { category: 'inputs (th[luDataTableCell])' },
 		},
 		verticalAlign: {
 			options: setStoryOptions(DATA_TABLE_VERTICAL_ALIGN),
@@ -64,57 +65,58 @@ export default {
 		selected: {
 			if: { arg: 'selectable', truthy: true },
 			description: 'Applique l’état actif à une ligne sélectionnable.',
-			table: { category: 'models' },
+			table: { category: 'models (tr[luDataTableRow])' },
 		},
 		selectedLabel: {
 			name: '↳ selectedLabel',
 			if: { arg: 'selectable', truthy: true },
-			description: 'Texte alternatif restitué à la sélection d’une ligne.',
-			table: { category: 'inputs' },
+			description: 'Texte alternatif restitué à la sélection d’une ligne. La checkbox n’est affichée que s’il est renseigné.',
+			table: { category: 'inputs (tr[luDataTableRow])' },
 		},
 		selectedLabelHead: {
 			name: '↳ selectedLabelHead',
 			if: { arg: 'selectable', truthy: true },
-			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes.',
-			table: { category: 'inputs' },
+			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes (input <code>selectedLabel</code> de la ligne d’en-tête).',
+			table: { category: 'story' },
 		},
 		mixed: {
 			name: '↳ mixed',
 			if: { arg: 'selectable', truthy: true },
 			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
-			table: { category: 'inputs' },
+			table: { category: 'inputs (tr[luDataTableRow])' },
 		},
 		disabled: {
 			name: '↳ disabled',
 			if: { arg: 'selectable', truthy: true },
-			table: { category: 'inputs' },
+			description: 'Désactive la checkbox de sélection d’une ligne.',
+			table: { category: 'inputs (tr[luDataTableRow])' },
 		},
 		groupButtonAlt: {
 			if: { arg: 'group', truthy: true },
 			description: 'Texte alternatif restitué au focus de l’action sur le groupe.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (tbody[luDataTableBody])' },
 		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
 			description: 'Affiche le groupe dans son état étendu.',
-			table: { category: 'models' },
+			table: { category: 'models (tbody[luDataTableBody])' },
 		},
 		cols: {
 			control: { type: 'range', min: 2, max: 6 },
 			description: 'Modifie le nombre de colonnes dans la story.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		lines: {
 			control: { type: 'range', min: 2, max: 6 },
 			description: 'Modifie le nombre de lignes dans la story.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		tfoot: {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Affiche un footer.',
-			table: { category: 'inputs' },
+			description: 'Affiche un footer (<code>tfoot[luDataTableFoot]</code>).',
+			table: { category: 'story' },
 		},
 		stickyHeader: HiddenArgType,
 		hover: {
@@ -135,19 +137,21 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Applique une largeur fixe aux colonnes. La largeur d’une colonne peut être redéfinie via <code>fixedWidth</code>.',
+			description:
+				'Applique une largeur fixe aux colonnes. La largeur d’une colonne peut être redéfinie via <code>inlineSize</code> sur <code>th[luDataTableCell]</code> (<code>fixedWidth</code> en est un équivalent, <code>inlineSize</code> est prioritaire).',
 			table: { category: 'inputs' },
 		},
 		inlineSize: {
 			name: '↳ inlineSize',
 			if: { arg: 'layoutFixed', truthy: true },
-			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
-			table: { category: 'inputs' },
+			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé. La valeur est définie par <code>inlineSizeValue</code> dans la story.',
+			table: { category: 'inputs (th[luDataTableCell])' },
 		},
 		inlineSizeValue: {
 			name: '↳↳ inlineSizeValue',
 			if: { arg: 'inlineSize', truthy: true },
-			table: { category: 'inputs' },
+			description: 'Valeur passée à l’input <code>inlineSize</code> (longueur CSS).',
+			table: { category: 'story' },
 		},
 		selectable: {
 			control: {
@@ -160,15 +164,15 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Présente un groupe de lignes dans la story.',
-			table: { category: 'inputs' },
+			description: 'Présente un groupe de lignes dans la story, via l’input <code>group</code> (<code>PortalContent</code>) de <code>tbody[luDataTableBody]</code>.',
+			table: { category: 'story' },
 		},
 		editable: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Ajoute un champ de saisie dans une cellule.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (td[luDataTableCell])' },
 		},
 		nested: {
 			control: {
@@ -182,14 +186,14 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Ajoute des actions rapides à droite d’une ligne.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (td[luDataTableCell])' },
 		},
 		pagination: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Ajoute une pagination au tableau.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		drag: HiddenArgType,
 		intl: intlArgType(luDataTableTranslations, 'LuDataTableTranslations', 'tr[luDataTableRow]'),

@@ -47,8 +47,23 @@ export class DataTableRowComponent {
 
 	protected tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
+	/**
+	 * Selection state of the row, when the table is `selectable`
+	 */
 	readonly selected = model<boolean>(false);
+
+	/**
+	 * Label of the selection checkbox, read by screen readers. The checkbox is only displayed when it is set
+	 */
 	readonly selectedLabel = input<string | null>(null);
+
+	/**
+	 * Displays the selection checkbox in a mixed state
+	 */
 	readonly mixed = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Disables the selection checkbox of the row
+	 */
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 }

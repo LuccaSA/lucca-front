@@ -1,16 +1,16 @@
 import { IconsList } from '@/stories/icons-list';
-import { CHIP_STATE, ChipComponent, luChipTranslations } from '@lucca-front/ng/chip';
+import { CHIP_SIZE, CHIP_STATE, ChipComponent, ChipSize, ChipState, luChipTranslations } from '@lucca-front/ng/chip';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { intlArgType, setStoryOptions } from '@/helpers/stories';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 
 interface ChipBasicStory {
 	unkillable: boolean;
 	disabled: boolean;
-	product: boolean;
+	palette: 'product' | '';
 	withEllipsis: boolean;
-	small: boolean;
-	feedback: string;
+	size: ChipSize | '';
+	state: ChipState | '';
 	icon: LuccaIcon | null;
 }
 
@@ -31,25 +31,30 @@ export default {
 			description: 'Désactive le composant.',
 			table: { category: 'inputs' },
 		},
-		product: {
+		palette: {
+			options: ['', 'product'],
 			control: {
-				type: 'boolean',
+				type: 'select',
 			},
-			description: 'Applique la palette product au composant.',
+			description: 'Applique la palette product au composant. Seule la valeur <code>product</code> a un effet.',
 			table: { category: 'inputs' },
 		},
 		withEllipsis: {
+			control: {
+				type: 'boolean',
+			},
 			description: '[20.1] Ellipse le texte et ajoute une tooltip lorsque le label est trop long.',
 			table: { category: 'inputs' },
 		},
-		small: {
+		size: {
+			options: setStoryOptions(CHIP_SIZE),
 			control: {
-				type: 'boolean',
+				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs' },
 		},
-		feedback: {
+		state: {
 			description: "[20.1] Donne une information sur l'état du composant.",
 			options: setStoryOptions(CHIP_STATE),
 			control: {
@@ -80,31 +85,18 @@ export default {
 	],
 } as Meta;
 
-function getTemplate(args: ChipBasicStory): string {
-	const unkillable = args.unkillable ? ` unkillable` : ``;
-	const product = args.product ? ` palette="product"` : ``;
-	const disabled = args.disabled ? ` disabled` : ``;
-	const ellipsis = args.withEllipsis ? ` withEllipsis` : ``;
-	const small = args.small ? ` size="S"` : ``;
-	const feedback = args.feedback === 'warning' ? ` state="warning"` : args.feedback === 'critical' ? ` state="critical"` : ``;
-	const icon = args.icon ? ` icon="${args.icon}"` : ``;
-	return `<lu-chip${disabled}${unkillable}${product}${ellipsis}${small}${feedback}${icon} (kill)="kill($event)">Label</lu-chip>`;
-}
-
-const Template = (args: ChipBasicStory) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
 export const Basic: StoryObj<ChipBasicStory> = {
 	args: {
 		unkillable: false,
 		disabled: false,
-		product: false,
+		palette: '',
 		withEllipsis: false,
-		small: false,
-		feedback: '',
+		size: '',
+		state: '',
 		icon: null,
 	},
-	render: Template,
+	render: (args, { argTypes }) => ({
+		props: args,
+		template: `<lu-chip${generateInputs(args, argTypes)} (kill)="kill($event)">Label</lu-chip>`,
+	}),
 };

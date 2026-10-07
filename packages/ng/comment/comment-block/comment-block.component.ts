@@ -26,23 +26,37 @@ export class CommentBlockComponent {
 
 	readonly comments = contentChildren(CommentComponent, { read: CommentComponent, descendants: true });
 
+	/**
+	 * Only displays the author infos on the first comment of the block
+	 */
 	readonly compact = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Small is a shorthand to set the size to small
+	 * Reduces the text size of all the comments of the block, by setting `mod-S` on the comments wrapper.
 	 *
-	 * If the size input is filled along with the small input, their values will have the priority
+	 * It has the same visual result as `size="S"` but is applied independently: `size="M"` does not override it
 	 */
 	readonly small = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Displays the block as an answer in a `lu-comment-chat` (aligned to the end, product background)
+	 */
 	readonly chatAnswer = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Name of the author, displayed in the infos of the comments
+	 */
 	readonly authorName = input<PortalContent>();
 
+	/**
+	 * Template of the author avatar (usually a `lu-user-picture`). Without it, no avatar is displayed
+	 */
 	readonly avatar = input<TemplateRef<unknown>>();
 
 	/**
-	 * Which size should the block comment be? Defaults or small
+	 * Which size should the comments of the block be? Defaults to M (no value).
+	 *
+	 * `size="S"` sets `mod-S` on each comment; it is independent from the `small` input
 	 */
 	readonly size = input<CommentBlockSize>();
 

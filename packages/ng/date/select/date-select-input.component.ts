@@ -29,14 +29,29 @@ import { LuDatePickerComponent } from '../picker';
 	],
 })
 export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator {
+	/**
+	 * Minimum selectable date
+	 */
 	readonly min = input<D>();
 
+	/**
+	 * Maximum selectable date
+	 */
 	readonly max = input<D>();
 
+	/**
+	 * Granularity of the selected value (day, month, year…). Defaults to day
+	 */
 	readonly granularity = input<LuDateGranularity>(ELuDateGranularity.day);
 
+	/**
+	 * Hides the clear button
+	 */
 	readonly hideClearer = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Date displayed by the picker when there is no value. Defaults to today
+	 */
 	readonly startOn = input<D>();
 
 	protected _startOn: D = this._adapter.forgeToday();

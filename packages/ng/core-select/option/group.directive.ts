@@ -7,8 +7,14 @@ import type { LuOptionGroupByContext } from '../select.model';
 	selector: '[luOptionGroup]',
 })
 export class LuOptionGroupDirective<TOption, TValue, TGroup> {
+	/**
+	 * Select component whose options are grouped, the template rendering each group header
+	 */
 	readonly select = input.required<ALuSelectInputComponent<TOption, TValue>>({ alias: 'luOptionGroupSelect' });
 
+	/**
+	 * Function returning the group of an option, options with the same group are displayed together
+	 */
 	readonly selector = input.required<(option: TOption) => TGroup>({ alias: 'luOptionGroupBy' });
 
 	readonly content = inject<TemplateRef<LuOptionGroupByContext<TOption, TGroup>>>(TemplateRef);

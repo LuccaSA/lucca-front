@@ -7,6 +7,9 @@ import { LuOptionContext } from '../select.model';
 	selector: '[luDisplayer]',
 })
 export class LuDisplayerDirective<TOption, TValue> {
+	/**
+	 * Select component whose selected value is rendered with this template
+	 */
 	readonly select = input<ALuSelectInputComponent<TOption, TValue>>(undefined, { alias: 'luDisplayerSelect' });
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {

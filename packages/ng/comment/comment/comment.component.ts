@@ -29,8 +29,14 @@ export class CommentComponent {
 
 	#parentBlock = inject(COMMENT_BLOCK_INSTANCE, { optional: true });
 
+	/**
+	 * Content of the comment: a string (HTML is rendered), a TemplateRef or a component type
+	 */
 	readonly content = input.required<PortalContent>();
 
+	/**
+	 * Date of the comment, displayed next to the author name
+	 */
 	readonly date = input<Date>();
 
 	/**
@@ -52,8 +58,14 @@ export class CommentComponent {
 
 	readonly contentIsHTML = computed(() => !this.contentIsPortal() && /<\/?[a-z][\s\S]*>/i.test(this.content() as string));
 
+	/**
+	 * Hides the comment infos (avatar, author name and date)
+	 */
 	readonly noInfos = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Preserves the line breaks of a plain text content
+	 */
 	readonly plainText = input(false, { transform: luBooleanAttribute });
 
 	readonly dateDisplay = computed(() => {

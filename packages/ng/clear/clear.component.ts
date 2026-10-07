@@ -38,7 +38,7 @@ export class ClearComponent<T> extends ALuClear<T> implements ILuClear<T> {
 	readonly intl = input(...intlInputOptions(LU_CLEAR_TRANSLATIONS));
 
 	/**
-	 * Which size should the clear be? Defaults to small
+	 * Which size should the clear be? Defaults to M (no value)
 	 */
 	readonly size = input<ClearSize | null>(null);
 

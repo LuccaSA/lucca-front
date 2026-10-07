@@ -26,6 +26,9 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from './data-table-head.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableHeadComponent {
+	/**
+	 * Keeps the header visible when scrolling vertically
+	 */
 	readonly sticky = input(false, { transform: luBooleanAttribute });
 	readonly isFirstVisible = signal(false);
 

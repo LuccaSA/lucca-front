@@ -22,12 +22,12 @@ export default {
 		cols: {
 			description: 'Nombre de colonnes.',
 			control: { type: 'range', min: 2, max: 8 },
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		lines: {
 			description: 'Nombre de lignes.',
 			control: { type: 'range', min: 2, max: 8 },
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		stickyColsStart: {
 			description: 'Nombre de colonnes figées depuis la gauche. Non compatible avec l’usage de colspan.',
@@ -43,13 +43,13 @@ export default {
 			description: 'Désactive le défilement horizontal du tableau. Celui-ci prendra alors la place nécessaire pour afficher tout son contenu.',
 			table: { category: 'inputs' },
 		},
-		stickyHeader: {
+		sticky: {
 			description: 'Fige le header lors du défilement vertical.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (thead[luDataTableHead])' },
 		},
 		pagination: {
 			description: 'Affiche une pagination sous le tableau.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 	},
 	decorators: [
@@ -73,12 +73,12 @@ export default {
 	],
 
 	render: (args, { argTypes }) => {
-		const { cols, stickyHeader, lines, stickyColsStart, stickyColsEnd, pagination, noOverflow, ...inputArgs } = args;
+		const { cols, sticky, lines, stickyColsStart, stickyColsEnd, pagination, noOverflow, ...inputArgs } = args;
 
 		const text = 'cell';
 		const textHeader = 'header';
 
-		const stickyHeaderAttr = stickyHeader ? ` sticky` : ``;
+		const stickyHeaderAttr = sticky ? ` sticky` : ``;
 		const overflowingAttr = noOverflow ? ` noOverflow` : ``;
 
 		const stickyColsStartAttr = stickyColsStart > 0 ? ` stickyColsStart="${stickyColsStart}"` : ``;
@@ -136,7 +136,7 @@ export const Basic: StoryObj = {
 		lines: 2,
 		stickyColsStart: 0,
 		stickyColsEnd: 0,
-		stickyHeader: false,
+		sticky: false,
 		pagination: false,
 	},
 };

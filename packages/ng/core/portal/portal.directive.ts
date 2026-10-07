@@ -10,8 +10,14 @@ export class PortalDirective<T extends object = object> implements OnDestroy {
 	private templateRef = inject(TemplateRef);
 	private injector = inject(Injector);
 
+	/**
+	 * Content to render: a string, a TemplateRef or a component type
+	 */
 	readonly luPortal = input.required<PortalContent<T>>();
 
+	/**
+	 * Context passed to the rendered TemplateRef or component
+	 */
 	readonly luPortalContext = input<T | null>(null);
 
 	private createdTextElement: Text | null = null;

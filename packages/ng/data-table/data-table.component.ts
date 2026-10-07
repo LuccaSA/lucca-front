@@ -45,17 +45,55 @@ export class DataTableComponent implements OnInit {
 	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
 	#destroyRef = inject(DestroyRef);
 
+	/**
+	 * Highlights the hovered row to ease the reading of wide tables (does not imply an interaction)
+	 */
 	readonly hover = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Adds a selection checkbox column to the rows (displayed for rows with a `selectedLabel`)
+	 */
 	readonly selectable = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Applies a fixed layout to the table columns. A column width can be set with `inlineSize` on `th[luDataTableCell]`
+	 */
 	readonly layoutFixed = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Adds a vertical separator between cells
+	 */
 	readonly cellBorder = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Reduces the table border radius to nest it in a structure component
+	 */
 	readonly nested = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Adds a drag handle column to the rows, to be used with the CDK drag and drop
+	 */
 	readonly drag = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Lets the table grow with its content (minimum inline size set to `fit-content`) instead of scrolling horizontally
+	 */
 	readonly noOverflow = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Marks the table as empty: the table gets `role="presentation"` and the header becomes `inert`.
+	 * The empty state itself must be projected in a body row
+	 */
 	readonly empty = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Applies `layoutFixed` from a given breakpoint, e.g. `{ layoutFixedAtMediaMinS: true }`
+	 */
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
+	/**
+	 * Vertical alignment of the cells content
+	 */
 	readonly verticalAlign = input<DataTableVerticalAlign | null>(null);
 
 	readonly rows = contentChildren(DataTableRowComponent, { descendants: true });
@@ -63,7 +101,14 @@ export class DataTableComponent implements OnInit {
 
 	readonly stickyHeader = computed(() => this.header()?.sticky());
 
+	/**
+	 * Number of columns kept sticky at the start of the table when scrolling horizontally
+	 */
 	readonly stickyColsStart = input(0, { transform: luNumberAttribute });
+
+	/**
+	 * Number of columns kept sticky at the end of the table when scrolling horizontally
+	 */
 	readonly stickyColsEnd = input(0, { transform: luNumberAttribute });
 
 	readonly firstColumnVisibleAfterColsStart = signal(true);

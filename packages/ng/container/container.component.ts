@@ -14,10 +14,19 @@ import { ContainerSize } from './container.type';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContainerComponent {
+	/**
+	 * Centers the container horizontally
+	 */
 	readonly center = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Lets the container grow with its content (minimum inline size set to `fit-content`) instead of shrinking to the available space
+	 */
 	readonly overflow = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Sets the maximum inline size of the container
+	 */
 	readonly max = input<ContainerSize | null>(null);
 
 	readonly classesConfig = computed(() => ({

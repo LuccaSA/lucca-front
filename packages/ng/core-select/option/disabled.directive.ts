@@ -6,6 +6,9 @@ import { LU_OPTION_CONTEXT } from './option.token';
 	selector: '[luDisabledOption]',
 })
 export class LuDisabledOptionDirective {
+	/**
+	 * Disables the option rendered by the current option template
+	 */
 	readonly isDisabled = input<boolean>(undefined, { alias: 'luDisabledOption' });
 
 	private context = inject(LU_OPTION_CONTEXT);
