@@ -14,6 +14,9 @@ import { PaginationMod } from './pagination.type';
 	encapsulation: ViewEncapsulation.None,
 })
 export class PaginationComponent {
+	/**
+	 * Overrides the default translations. Partial overrides are merged with the defaults.
+	 */
 	readonly intl = input(...intlInputOptions(LU_PAGINATION_TRANSLATIONS));
 
 	/**

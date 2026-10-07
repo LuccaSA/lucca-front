@@ -26,6 +26,9 @@ export class PageHeaderComponent {
 	 */
 	readonly container = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Makes the page header sticky when it is not handled by the main layout
+	 */
 	readonly sticky = input(false, { transform: luBooleanAttribute });
 
 	readonly descriptionIsString = computed(() => this.isStringPortalContent(this.description()));

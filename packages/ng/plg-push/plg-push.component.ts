@@ -16,6 +16,9 @@ import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class PLGPushComponent {
+	/**
+	 * Overrides the default translations. Partial overrides are merged with the defaults.
+	 */
 	readonly intl = input(...intlInputOptions(LU_PLG_PUSH_TRANSLATIONS));
 
 	/**

@@ -27,6 +27,9 @@ export class LuForOptionsDirective<T> extends NgForOf<T> implements ILuOptionOpe
 		this.outOptions$ = options$;
 	}
 
+	/**
+	 * Track by function used to identify the rendered options, like `ngForTrackBy`.
+	 */
 	readonly luForOptionsTrackBy = input<TrackByFunction<T>>();
 
 	constructor(

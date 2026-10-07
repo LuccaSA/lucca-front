@@ -16,6 +16,9 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 	],
 })
 export class LuOptionFeederComponent<T> implements ILuOptionOperator<T> {
+	/**
+	 * Options fed to the picker, before the other operators (searcher, pager…) are applied.
+	 */
 	readonly options = input<T[]>([]);
 
 	readonly outOptions$: Observable<T[]> = toObservable(this.options);

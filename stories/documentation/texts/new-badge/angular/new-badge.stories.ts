@@ -6,7 +6,9 @@ export default {
 	component: NewBadgeComponent,
 	argTypes: {
 		label: {
+			control: 'text',
 			description: 'Modifie le texte affiché par le composant.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

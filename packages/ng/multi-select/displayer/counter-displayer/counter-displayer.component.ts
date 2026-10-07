@@ -47,8 +47,14 @@ export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
 
 	readonly selectedOptions$ = new BehaviorSubject<T[]>([]);
 
+	/**
+	 * Selected options to display.
+	 */
 	readonly selected = input<T[]>([]);
 
+	/**
+	 * Label displayed after the count when more than one option is selected (e.g. `3 legumes`).
+	 */
 	readonly label = input.required<string>();
 
 	constructor() {

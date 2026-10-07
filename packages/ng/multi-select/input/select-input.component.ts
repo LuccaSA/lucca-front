@@ -75,14 +75,26 @@ import { LuMultiSelectPanelRef } from './panel.model';
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy, OnInit {
+	/**
+	 * Overrides the default translations. Partial overrides are merged with the defaults.
+	 */
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_MULTI_SELECT_TRANSLATIONS));
 
 	showColon: false;
 
+	/**
+	 * Template or component used to display the selected values in the input. Defaults to `LuMultiSelectDefaultDisplayerComponent` (one chip per value).
+	 */
 	readonly valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
+	/**
+	 * Maximum number of selected values displayed as chips by the default displayer. The remaining values are summarized in an overflow counter.
+	 */
 	readonly maxValuesShown = input(500, { transform: luNumberAttribute });
 
+	/**
+	 * Keeps the search clue after selecting an option, so the user can keep searching.
+	 */
 	readonly keepSearchAfterSelection = input(false, { transform: luBooleanAttribute });
 
 	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
@@ -91,6 +103,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	 * @deprecated use filterPillLabelPluralFn
 	 */
 	readonly filterPillLabelPlural = input<string>();
+	/**
+	 * Function returning the label displayed after the count of selected values in filter pill mode. It can return a string or plural forms resolved with the current locale.
+	 */
 	readonly filterPillLabelPluralFn = input<(count: number) => string | LuPluralForms>();
 
 	readonly filterPillLabelPluralValue = computed(() => {

@@ -14,6 +14,9 @@ import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class MobilePushComponent {
+	/**
+	 * Overrides the default translations. Partial overrides are merged with the defaults.
+	 */
 	readonly intl = input(...intlInputOptions(LU_MOBILE_PUSH_TRANSLATIONS));
 
 	/**
