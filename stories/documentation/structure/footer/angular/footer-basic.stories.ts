@@ -12,14 +12,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit le breakpoint pour lequel le mode narrow (responsive) est appliqué.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'XXS' } },
 		},
 		container: {
 			description: 'Applique un container autour du contenu du footer.',
 			table: { category: 'inputs' },
 		},
 		containerMax: {
-			name: '↳ container',
+			name: '↳ containerMax',
 			options: setStoryOptions(FOOTER_CONTAINER_MAX),
 			control: {
 				type: 'select',
@@ -36,6 +36,10 @@ export default {
 			description: 'Force le mode narrow (responsive) du footer.',
 			table: { category: 'inputs' },
 		},
+		dialog: {
+			description: 'Adapte le footer à son utilisation dans une dialog.',
+			table: { category: 'inputs' },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -44,7 +48,7 @@ export default {
 	],
 	render: (args, { argTypes }) => {
 		const { narrowAtMediaMax, forceNarrow, ...otherArgs } = args;
-		const narrow = forceNarrow ? `` : ` narrowAtMediaMax=${narrowAtMediaMax}`;
+		const narrow = forceNarrow || narrowAtMediaMax === 'XXS' ? `` : ` narrowAtMediaMax="${narrowAtMediaMax}"`;
 		const force = forceNarrow ? ` forceNarrow` : ``;
 
 		return {
@@ -65,6 +69,7 @@ export const Basic = {
 		container: false,
 		containerMax: '',
 		forceNarrow: false,
+		dialog: false,
 		narrowAtMediaMax: 'XXS',
 	},
 };

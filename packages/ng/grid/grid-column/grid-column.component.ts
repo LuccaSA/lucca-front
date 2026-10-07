@@ -14,13 +14,39 @@ import { GridColumnAlignment, GridColumnResponsive } from './grid-column.type';
 	},
 })
 export class GridColumnComponent {
+	/**
+	 * Number of columns spanned (overrides the grid `colspan`)
+	 */
 	readonly colspan = input(null, { transform: luNullableNumberAttribute });
+
+	/**
+	 * Number of rows spanned (overrides the grid `rowspan`)
+	 */
 	readonly rowspan = input(null, { transform: luNullableNumberAttribute });
+
+	/**
+	 * Start column of the column
+	 */
 	readonly column = input(null, { transform: luNullableNumberAttribute });
+
+	/**
+	 * Start row of the column
+	 */
 	readonly row = input(null, { transform: luNullableNumberAttribute });
+
+	/**
+	 * Vertical alignment of the column content
+	 */
 	readonly align = input<GridColumnAlignment | null>(null);
+
+	/**
+	 * Horizontal alignment of the column content
+	 */
 	readonly justify = input<GridColumnAlignment | null>(null);
 
+	/**
+	 * Responsive values of `row`, `column`, `rowspan` and `colspan`, per media or container breakpoint (e.g. `{ colspanAtMediaMinS: 2 }`)
+	 */
 	readonly responsive = input<ResponsiveConfig<GridColumnResponsive, number>>({});
 
 	protected gridRef = inject(LU_GRID_INSTANCE);

@@ -31,36 +31,75 @@ export class FileEntryComponent {
 
 	readonly intl = input(...intlInputOptions(LU_FILE_UPLOAD_TRANSLATIONS));
 
+	/**
+	 * Upload state of the file
+	 */
 	readonly state = input<FileEntryState>('default');
 
+	/**
+	 * Displays the file name below the preview in `media` mode
+	 */
 	readonly displayFileName = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Increases the border-radius to use the component as a structure element
+	 */
 	readonly structure = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Error message displayed when `state` is `error`
+	 */
 	readonly inlineMessageError = input<string | null>(null);
 
+	/**
+	 * File to display (name, size, type)
+	 */
 	readonly entry = input.required<FileEntry>();
 
+	/**
+	 * Changes the size of the component
+	 */
 	readonly size = input<FileEntrySize | null>(null);
 
+	/**
+	 * Replaces the file type icon with the given image URL
+	 */
 	readonly iconOverride = input('');
 
+	/**
+	 * Displays a download button pointing to this URL
+	 */
 	readonly downloadURL = input('');
 
+	/**
+	 * Opens `downloadURL` in a new tab (preview) instead of downloading it
+	 */
 	readonly openInNewTab = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Value of the password field, displayed when `passwordChange` is listened to
+	 */
 	readonly password = input('');
 	readonly passwordChange$ = new Subject<string>();
+	/**
+	 * Emits the password typed by the user. Listening to it displays the password field
+	 */
 	passwordChange = outputFromObservable(this.passwordChange$);
 
 	get withPassword() {
 		return this.passwordChange$.observed;
 	}
 
+	/**
+	 * Displays the file as a media (image preview layout)
+	 */
 	readonly media = input(false, { transform: luBooleanAttribute });
 
 	readonly deleteFile$ = new Subject<void>();
 
+	/**
+	 * Emits when the delete button is clicked. Listening to it displays the delete button
+	 */
 	deleteFile = outputFromObservable(this.deleteFile$);
 
 	get deletable() {
@@ -81,6 +120,9 @@ export class FileEntryComponent {
 		return this.intl().file.replace('{{fileTypeLastPart}}', fileExtension);
 	});
 
+	/**
+	 * URL of the image preview displayed instead of the file type icon
+	 */
 	readonly previewUrl = input<string>('');
 
 	readonly fileEntryIconSrc = computed(() => {

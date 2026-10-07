@@ -95,6 +95,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	readonly forceInputRequired = signal(false);
 	readonly isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
 
+	/**
+	 * Label of the field
+	 */
 	readonly label = input.required<PortalContent>();
 
 	/**
@@ -102,29 +105,62 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Sets `role="presentation"` on the label (two-way bindable)
+	 */
 	readonly rolePresentationLabel = model(false);
 
 	readonly labelIsPresentation = computed(() => this.rolePresentationLabel() || this.presentation());
 
+	/**
+	 * Displays the options of a fieldset layout inline
+	 */
 	readonly inline = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Control used to compute the invalid status instead of the projected controls
+	 */
 	readonly statusControl = input<AbstractControl | null>(null);
 
+	/**
+	 * Displays an info icon with a tooltip next to the label
+	 */
 	readonly tooltip = input<string | SafeHtml | null>(null);
 
+	/**
+	 * Displays a tag next to the label
+	 */
 	readonly tag = input<string | null>(null);
 
+	/**
+	 * Displays an AI icon next to the field
+	 */
 	readonly AI = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Tooltip of the AI icon
+	 */
 	readonly iconAItooltip = input<string | null>(null);
+	/**
+	 * Alternative text of the AI icon
+	 */
 	readonly iconAIalt = input<string | null>(null);
 
+	/**
+	 * Sets the width of the field
+	 */
 	readonly width = input(null, { transform: luNullableNumberAttribute<FormFieldWidth> });
 
 	readonly #invalidStatus = signal(false);
 	invalidStatus = this.#invalidStatus.asReadonly();
 
+	/**
+	 * Forces the invalid status of the field, overriding the status of its controls
+	 */
 	readonly invalid = input(null, { transform: luNullableBooleanAttribute });
 
+	/**
+	 * Inline message displayed below the field
+	 */
 	readonly inlineMessage = input<PortalContent | null>(null);
 
 	/**
@@ -137,6 +173,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly inlineMessageState = input<InlineMessageState | null>(null);
 
+	/**
+	 * Changes the size of the field
+	 */
 	readonly size = input<FormFieldSize | null>(null);
 
 	/**
@@ -144,6 +183,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	readonly extraDescribedBy = input<string>('');
 
+	/**
+	 * Layout of the field (two-way bindable)
+	 */
 	readonly layout = model<FormFieldLayout>('default');
 
 	#inputs: InputDirective[] = [];
@@ -155,6 +197,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly contentLength = signal<number>(0);
 
+	/**
+	 * Displays the field in presentation mode (read-only value instead of the input)
+	 */
 	readonly presentation = input(false, { transform: luBooleanAttribute });
 
 	readonly presentationMode = computed(() => this.parentForm?.presentation() || this.presentation());

@@ -19,19 +19,43 @@ import { LU_GRID_INSTANCE } from './grid.token';
 	],
 })
 export class GridComponent {
+	/**
+	 * Wraps the grid in a container, so that responsive configurations rely on container queries instead of media queries
+	 */
 	readonly container = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Number of columns of the grid (ignored when `mode` is set)
+	 */
 	readonly columns = input(null, { transform: luNullableNumberAttribute });
 
+	/**
+	 * Default number of columns spanned by each column of the grid
+	 */
 	readonly colspan = input(null, { transform: luNullableNumberAttribute });
 
+	/**
+	 * Default number of rows spanned by each column of the grid
+	 */
 	readonly rowspan = input(null, { transform: luNullableNumberAttribute });
 
+	/**
+	 * Layout mode of the grid
+	 */
 	readonly mode = input<GridMode | null>(null);
 
+	/**
+	 * Gap between rows and columns (spacing token or CSS length)
+	 */
 	readonly gap = input<Gap | null>(null);
+	/**
+	 * Gap between columns (spacing token or CSS length)
+	 */
 	readonly columnGap = input<Gap | null>(null);
 
+	/**
+	 * Gap between rows (spacing token or CSS length)
+	 */
 	readonly rowGap = input<Gap | null>(null);
 
 	#gapTransform = (gap: Gap | null): string | null => {

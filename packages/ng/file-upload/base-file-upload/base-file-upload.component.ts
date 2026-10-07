@@ -19,8 +19,14 @@ export abstract class BaseFileUploadComponent {
 
 	protected formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
+	/**
+	 * Emits each file picked by the user, through the file selector or drag and drop
+	 */
 	filePicked = output<File>();
 
+	/**
+	 * List of accepted file formats (`format` is used in the native `accept` attribute, `name` is displayed in the instructions). Accepts all formats when empty
+	 */
 	readonly accept = input<
 		Array<{
 			format: string;
@@ -52,16 +58,28 @@ export abstract class BaseFileUploadComponent {
 		return this.acceptAttribute().some((str) => str.includes('*'));
 	});
 
+	/**
+	 * Increases the border-radius to use the component as a structure element
+	 */
 	readonly structure = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Maximum file size displayed in the instructions, in bytes (80 MB by default)
+	 */
 	readonly fileMaxSize = input(80 * MEGA_BYTE, { transform: luNumberAttribute });
 
 	readonly maxSizeDisplay = computed(() => formatFileSize(this.locale, this.fileMaxSize()));
 
+	/**
+	 * Changes the size of the component
+	 */
 	readonly size = input<FileUploadSize | null>(null);
 
 	readonly password = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Changes the illustration displayed in the drop zone
+	 */
 	readonly illustration = input<
 		/** @deprecated use 'invoice' instead */
 		'paper' | 'picture' | 'invoice'
@@ -77,8 +95,14 @@ export abstract class BaseFileUploadComponent {
 		}
 	});
 
+	/**
+	 * Marks the field as required in the parent form field
+	 */
 	readonly required = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Displays the button as the main action of the page
+	 */
 	readonly buttonFilled = input(false, { transform: luBooleanAttribute });
 
 	constructor() {

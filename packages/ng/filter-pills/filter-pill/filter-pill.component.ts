@@ -78,8 +78,14 @@ export class FilterPillComponent {
 
 	readonly customLabelTpl = signal<TemplateRef<unknown> | null>(null);
 
+	/**
+	 * Identifies the filter pill in the filter bar's add filter menu. Required when `optional` is set
+	 */
 	readonly name = input<string>();
 
+	/**
+	 * Hides the filter pill until it is added through the filter bar's add filter menu
+	 */
 	readonly optional = input(false, { transform: luBooleanAttribute });
 
 	readonly disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
@@ -88,6 +94,9 @@ export class FilterPillComponent {
 		return this.isHidden();
 	}
 
+	/**
+	 * Whether an optional filter pill is displayed (two-way bindable)
+	 */
 	readonly displayed = model(false);
 
 	protected readonly isHidden = computed(() => this.optional() && !this.displayed());
@@ -113,11 +122,20 @@ export class FilterPillComponent {
 		),
 	];
 
+	/**
+	 * Label of the filter pill
+	 */
 	readonly label = input.required<string>();
 
 	readonly placeholder = computed(() => this.placeholderOverride() ?? this.intl().placeholder);
+	/**
+	 * Overrides the text displayed when the filter is empty
+	 */
 	readonly placeholderOverride = input<string | null>(null, { alias: 'placeholder' });
 
+	/**
+	 * Overrides the icon displayed at the end of the filter pill
+	 */
 	readonly icon = input<LuccaIcon>();
 
 	readonly defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() ?? 'arrowChevronBottom');

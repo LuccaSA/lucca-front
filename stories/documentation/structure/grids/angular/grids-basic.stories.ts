@@ -14,7 +14,32 @@ export default {
 				max: 12,
 			},
 			if: { arg: 'mode', truthy: false },
-			table: { category: 'inputs' },
+			description: 'Nombre de colonnes de la grille (ignoré si <code>mode</code> est renseigné).',
+			table: { category: 'inputs (grid)' },
+		},
+		gridColspan: {
+			name: 'colspan',
+			control: {
+				type: 'range',
+				min: 1,
+				max: 12,
+			},
+			description: 'Nombre de colonnes occupées par défaut par chaque colonne de la grille.',
+			table: { category: 'inputs (grid)' },
+		},
+		gridRowspan: {
+			name: 'rowspan',
+			control: {
+				type: 'range',
+				min: 1,
+				max: 12,
+			},
+			description: 'Nombre de lignes occupées par défaut par chaque colonne de la grille.',
+			table: { category: 'inputs (grid)' },
+		},
+		container: {
+			description: 'Encapsule la grille dans un container : les configurations responsive s’appuient alors sur des container queries plutôt que sur des media queries.',
+			table: { category: 'inputs (grid)' },
 		},
 		colspan: {
 			control: {
@@ -22,7 +47,8 @@ export default {
 				min: 1,
 				max: 12,
 			},
-			table: { category: 'inputs' },
+			description: 'Nombre de colonnes occupées par la première colonne (surcharge le <code>colspan</code> de la grille).',
+			table: { category: 'inputs (grid-column)' },
 		},
 		rowspan: {
 			control: {
@@ -30,7 +56,8 @@ export default {
 				min: 1,
 				max: 12,
 			},
-			table: { category: 'inputs' },
+			description: 'Nombre de lignes occupées par la première colonne (surcharge le <code>rowspan</code> de la grille).',
+			table: { category: 'inputs (grid-column)' },
 		},
 		column: {
 			control: {
@@ -38,7 +65,8 @@ export default {
 				min: 0,
 				max: 12,
 			},
-			table: { category: 'inputs' },
+			description: 'Colonne de départ de la première colonne.',
+			table: { category: 'inputs (grid-column)' },
 		},
 		row: {
 			control: {
@@ -46,7 +74,8 @@ export default {
 				min: 0,
 				max: 12,
 			},
-			table: { category: 'inputs' },
+			description: 'Ligne de départ de la première colonne.',
+			table: { category: 'inputs (grid-column)' },
 		},
 		gap: {
 			control: {
@@ -54,42 +83,48 @@ export default {
 			},
 
 			options: setStoryOptions([...GRID_GAP, ...OTHER_GAP]),
-			table: { category: 'inputs' },
+			description: 'Espacement entre les lignes et les colonnes (token d’espacement ou longueur CSS).',
+			table: { category: 'inputs (grid)' },
 		},
 		columnGap: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions([...GRID_GAP, ...OTHER_GAP]),
-			table: { category: 'inputs' },
+			description: 'Espacement entre les colonnes (token d’espacement ou longueur CSS).',
+			table: { category: 'inputs (grid)' },
 		},
 		rowGap: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions([...GRID_GAP, ...OTHER_GAP]),
-			table: { category: 'inputs' },
+			description: 'Espacement entre les lignes (token d’espacement ou longueur CSS).',
+			table: { category: 'inputs (grid)' },
 		},
 		align: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions(GRID_COLUMN_ALIGNMENT),
-			table: { category: 'inputs' },
+			description: 'Alignement vertical du contenu de la première colonne.',
+			table: { category: 'inputs (grid-column)' },
 		},
 		justify: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions(GRID_COLUMN_ALIGNMENT),
-			table: { category: 'inputs' },
+			description: 'Alignement horizontal du contenu de la première colonne.',
+			table: { category: 'inputs (grid-column)' },
 		},
 		mode: {
 			control: {
 				type: 'select',
 			},
 			options: setStoryOptions(GRID_MODE),
-			table: { category: 'inputs' },
+			description: 'Mode de disposition de la grille.',
+			table: { category: 'inputs (grid)' },
 		},
 
 		repeatCols: {
@@ -98,7 +133,8 @@ export default {
 				min: 0,
 				max: 35,
 			},
-			table: { category: 'inputs' },
+			description: '[Story] Nombre de colonnes supplémentaires affichées.',
+			table: { category: 'story' },
 		},
 	},
 	decorators: [
@@ -106,7 +142,7 @@ export default {
 			imports: [GridComponent, GridColumnComponent],
 		}),
 	],
-	render: ({ colspan, rowspan, column, row, align, justify, repeatCols, container, semantic, ...args }, { argTypes }) => {
+	render: ({ colspan, rowspan, column, row, align, justify, repeatCols, semantic, gridColspan, gridRowspan, ...args }, { argTypes }) => {
 		const content = `col`;
 		const columnArgs = {
 			colspan: colspan === 1 ? null : colspan,
@@ -116,6 +152,7 @@ export default {
 			align,
 			justify,
 		};
+		const gridSpanArgs = `${gridColspan > 1 ? ` colspan="${gridColspan}"` : ``}${gridRowspan > 1 ? ` rowspan="${gridRowspan}"` : ``}`;
 		const cols = `\n <lu-grid-column>${content}</lu-grid-column>`.repeat(repeatCols);
 		const colsSemantic = `\n <dd lu-grid-column>${content}</dd>`.repeat(repeatCols);
 
@@ -148,14 +185,14 @@ export default {
 		if (semantic) {
 			return {
 				styles: style,
-				template: cleanupTemplate(`<dl class="pr-u-descriptionListReset" lu-grid${generateInputs(args, argTypes)}>
+				template: cleanupTemplate(`<dl class="pr-u-descriptionListReset" lu-grid${generateInputs(args, argTypes)}${gridSpanArgs}>
 	<dt lu-grid-column${generateInputs(columnArgs, argTypes)}>story</dt>${colsSemantic}
 </dl>`),
 			};
 		} else {
 			return {
 				styles: style,
-				template: cleanupTemplate(`<lu-grid${generateInputs(args, argTypes)}>
+				template: cleanupTemplate(`<lu-grid${generateInputs(args, argTypes)}${gridSpanArgs}>
 	<lu-grid-column${generateInputs(columnArgs, argTypes)}>story</lu-grid-column>${cols}
 </lu-grid>`),
 			};
@@ -163,11 +200,14 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols: number; semantic: boolean }> = {
+export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols: number; semantic: boolean; gridColspan: number; gridRowspan: number }> = {
 	args: {
 		semantic: false,
 		columns: 6,
 		repeatCols: 10,
+		container: false,
+		gridColspan: 1,
+		gridRowspan: 1,
 		colspan: 1,
 		rowspan: 1,
 		column: 0,
