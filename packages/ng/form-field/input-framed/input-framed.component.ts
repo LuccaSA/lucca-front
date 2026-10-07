@@ -17,7 +17,16 @@ import { INPUT_FRAMED_INSTANCE } from './input-framed.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputFramedComponent {
+	/**
+	 * Content displayed in the frame below the field
+	 */
 	readonly framedPortal = input<PortalContent | null>(null);
+	/**
+	 * Centers the content of the frame
+	 */
 	readonly center = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Changes the size of the component
+	 */
 	readonly size = input<InputFramedSize | null>(null);
 }

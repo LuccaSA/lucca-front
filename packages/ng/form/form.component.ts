@@ -26,7 +26,13 @@ import { LuDialogRef } from '@lucca-front/ng/dialog';
 export class FormComponent {
 	protected readonly dialogRef = inject(LuDialogRef, { optional: true });
 
+	/**
+	 * Limits the maximum width of the form
+	 */
 	readonly maxWidth = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Displays all the form fields of the form in presentation mode
+	 */
 	readonly presentation = input(false, { transform: luBooleanAttribute });
 }

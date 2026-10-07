@@ -125,25 +125,25 @@ export default {
 		fileMaxSize: {
 			description: 'Limite le poids des fichiers importables (en octets).',
 			control: {
-				type: null,
+				type: 'number',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '80 Mo' } },
 		},
 		illustration: {
 			options: ['invoice', 'picture'],
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie l’illustration de l’icône dans la zone de drop.',
-			table: { category: 'inputs' },
+			description: 'Modifie l’illustration de l’icône dans la zone de drop. La valeur <code>paper</code> est dépréciée au profit de <code>invoice</code>.',
+			table: { category: 'inputs', defaultValue: { summary: 'invoice' } },
 		},
 		media: {
 			description: 'Affiche les fichiers importés avec une mise en forme adaptée aux visuels.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (file-entry)' },
 		},
 		displayFileName: {
 			description: 'Affiche le nom des fichiers importés sous l’image en vue <code>media</code>.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (file-entry)' },
 		},
 		structure: {
 			description: 'Augmente le border-radius du champ pour l’utiliser en élément de structure.',
@@ -161,9 +161,19 @@ export default {
 			description: 'Liste des formats de fichiers acceptés.',
 			table: { category: 'inputs' },
 		},
+		required: {
+			description: 'Rend le champ obligatoire dans le <code>lu-form-field</code> parent.',
+			table: { category: 'inputs' },
+		},
 		AItag: {
 			description: '[Story] Ajoute un tag AI au contenu du composant.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
+		},
+		filePicked: {
+			description: 'Événement déclenché pour chaque fichier sélectionné ou déposé.',
+			action: 'filePicked',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'File' } },
 		},
 		intl: intlArgType(luFileUploadTranslations, 'LuFileUploadLabel'),
 	},
@@ -191,7 +201,7 @@ export default {
 
 export const Multi = {
 	render: (args, { argTypes }) => {
-		const { media, size, displayFileName, accept, ...mainArgs } = args;
+		const { media, size, displayFileName, accept, filePicked, ...mainArgs } = args;
 		const service = new MockFileUploadService();
 		const uploads = signal([] as FileUpload<LuccaFileUploadResult>[]);
 		const fileUploadFeature = {
@@ -234,6 +244,8 @@ export const Multi = {
 			return {
 				props: {
 					fileUploadFeature,
+					accept,
+					filePicked,
 					deleteFile: (upload: FileUpload<LuccaFileUploadResult>) => {
 						uploads.set([...uploads().filter(({ file: f }) => f !== upload.file)]);
 					},
@@ -252,7 +264,7 @@ export const Multi = {
 					},
 				},
 				template: `<lu-form-field label="Label">
-		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])">
+		<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="filePicked($event); fileUploadFeature.uploadFiles([$event])">
 			<lu-tag icon="weatherStars" label="Scan intelligent" AI />
 		</lu-multi-file-upload>
 	</lu-form-field>
@@ -266,6 +278,8 @@ export const Multi = {
 			return {
 				props: {
 					fileUploadFeature,
+					accept,
+					filePicked,
 					deleteFile: (upload: FileUpload<LuccaFileUploadResult>) => {
 						uploads.set([...uploads().filter(({ file: f }) => f !== upload.file)]);
 					},
@@ -284,7 +298,7 @@ export const Multi = {
 					},
 				},
 				template: `<lu-form-field label="Label">
-	<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+	<lu-multi-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="filePicked($event); fileUploadFeature.uploadFiles([$event])" />
 </lu-form-field>
 <lu-file-entry-wrapper>
 	@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
@@ -298,9 +312,10 @@ export const Multi = {
 		media: false,
 		displayFileName: false,
 		fileMaxSize: 5000000,
-		illustration: 'paper',
+		illustration: 'invoice',
 		structure: false,
 		buttonFilled: false,
+		required: false,
 		accept: [
 			{
 				format: 'image/*',
@@ -314,7 +329,7 @@ export const Multi = {
 export const Single = {
 	render: (args, { argTypes }) => {
 		const multi = Multi.render(args, { argTypes });
-		const { size, displayFileName, accept, ...mainArgs } = args;
+		const { size, displayFileName, accept, filePicked, ...mainArgs } = args;
 
 		// En Single, le FileEntry est toujours en taille L ; l'aperçu média n'existe qu'à size="L".
 		const isLarge = !!size;
@@ -325,13 +340,13 @@ export const Single = {
 		</lu-file-entry-wrapper>`;
 		if (args.AItag) {
 			return {
-				props: { ...multi.props, accept },
+				props: multi.props,
 				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
 	@if (fileUpload) {
 		${fileEntry}
 	} @else {
-		<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])">
+		<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="filePicked($event); fileUploadFeature.uploadFiles([$event])">
 			<lu-tag icon="weatherStars" label="Scan intelligent" AI />
 		</lu-single-file-upload>
 	}
@@ -339,13 +354,13 @@ export const Single = {
 			};
 		} else {
 			return {
-				props: { ...multi.props, accept },
+				props: multi.props,
 				template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
 <lu-form-field label="Label">
 	@if (fileUpload) {
 		${fileEntry}
 	} @else {
-		<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+		<lu-single-file-upload${sizeLFileUploadParam}${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="filePicked($event); fileUploadFeature.uploadFiles([$event])" />
 	}
 </lu-form-field>`,
 			};
@@ -367,6 +382,7 @@ export const Single = {
 		displayFileName: false,
 		structure: false,
 		buttonFilled: false,
+		required: false,
 		AItag: false,
 	},
 };

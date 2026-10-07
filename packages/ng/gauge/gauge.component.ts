@@ -23,7 +23,7 @@ export class GaugeComponent {
 	readonly thin = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Display gaugue in circular
+	 * Display gauge in circular
 	 */
 	readonly circular = input(false, { transform: luBooleanAttribute });
 
@@ -49,7 +49,7 @@ export class GaugeComponent {
 	readonly alt = input<string>('');
 
 	/**
-	 * Which size should the gauge be? widht & height
+	 * Which size should the gauge be? width & height
 	 */
 	readonly size = input(40, { transform: luNumberAttribute });
 

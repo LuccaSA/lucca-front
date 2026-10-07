@@ -56,24 +56,35 @@ export default {
 			table: { category: 'inputs' },
 		},
 		deletable: {
-			description: 'Affiche un bouton de suppression.',
-			table: { category: 'inputs' },
+			description: '[Story] Écoute l’output <code>deleteFile</code>, ce qui affiche un bouton de suppression.',
+			table: { category: 'story' },
 		},
 		withPassword: {
-			description: 'Affiche un champ permettant de définir un mot de passe au fichier.',
+			description: '[Story] Écoute l’output <code>passwordChange</code>, ce qui affiche un champ permettant de définir un mot de passe au fichier.',
+			table: { category: 'story' },
+		},
+		password: {
+			name: '↳ password',
+			if: { arg: 'withPassword', truthy: true },
+			description: 'Valeur du champ mot de passe.',
 			table: { category: 'inputs' },
+		},
+		entry: {
+			description: 'Fichier affiché (<code>name</code>, <code>size</code>, <code>type</code>). Obligatoire.',
+			control: false,
+			table: { category: 'inputs', type: { summary: 'FileEntry' } },
 		},
 		fileName: {
-			description: 'Nom du fichier.',
-			table: { category: 'inputs' },
+			description: '[Story] Nom du fichier (<code>entry.name</code>).',
+			table: { category: 'story' },
 		},
 		fileSize: {
-			description: 'Poids du fichier (en octets).',
-			table: { category: 'inputs' },
+			description: '[Story] Poids du fichier en octets (<code>entry.size</code>).',
+			table: { category: 'story' },
 		},
 		fileType: {
-			description: 'Type MIME du fichier.',
-			table: { category: 'inputs' },
+			description: '[Story] Type MIME du fichier (<code>entry.type</code>).',
+			table: { category: 'story' },
 		},
 		structure: {
 			name: '↳ structure',
@@ -136,6 +147,7 @@ export const Basic = {
 		openInNewTab: false,
 		deletable: true,
 		withPassword: false,
+		password: '',
 		size: '',
 		structure: false,
 	},

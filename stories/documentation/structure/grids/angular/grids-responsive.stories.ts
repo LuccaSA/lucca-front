@@ -12,18 +12,32 @@ export default {
 				max: 12,
 			},
 			if: { arg: 'mode', truthy: false },
-			table: { category: 'inputs' },
+			description: 'Nombre de colonnes de la grille (ignoré si <code>mode</code> est renseigné).',
+			table: { category: 'inputs (grid)' },
+		},
+		container: {
+			description: 'Encapsule la grille dans un container : les configurations responsive s’appuient alors sur des container queries plutôt que sur des media queries.',
+			table: { category: 'inputs (grid)' },
+		},
+		responsive: {
+			description:
+				'Valeurs responsive de <code>row</code>, <code>column</code>, <code>rowspan</code> et <code>colspan</code> par breakpoint de media ou de container (ex. <code>{ colspanAtMediaMinS: 2 }</code>).',
+			control: false,
+			table: { category: 'inputs (grid-column)', type: { summary: 'ResponsiveConfig<GridColumnResponsive, number>' } },
 		},
 		responsiveMediaConfig: {
 			if: { arg: 'container', eq: false },
-			table: { category: 'inputs' },
+			description: '[Story] Configuration <code>responsive</code> de la première colonne, par breakpoint de media.',
+			table: { category: 'story' },
 		},
 		responsiveContainerConfig: {
 			if: { arg: 'container', eq: true },
-			table: { category: 'inputs' },
+			description: '[Story] Configuration <code>responsive</code> de la première colonne, par breakpoint de container.',
+			table: { category: 'story' },
 		},
 		modeMedia: {
 			if: { arg: 'container', eq: false },
+			description: 'Valeur de <code>mode</code> : passe la grille en mode <code>auto</code> à partir d’un breakpoint de media.',
 			control: {
 				type: 'select',
 			},
@@ -39,10 +53,11 @@ export default {
 				'autoAtMediaMinXXL',
 				'autoAtMediaMinXXXL',
 			],
-			table: { category: 'inputs' },
+			table: { category: 'inputs (grid)' },
 		},
 		modeContainer: {
 			if: { arg: 'container', eq: true },
+			description: 'Valeur de <code>mode</code> : passe la grille en mode <code>auto</code> à partir d’un breakpoint de container.',
 			control: {
 				type: 'select',
 			},
@@ -58,7 +73,7 @@ export default {
 				'autoAtContainerMinXXL',
 				'autoAtContainerMinXXXL',
 			],
-			table: { category: 'inputs' },
+			table: { category: 'inputs (grid)' },
 		},
 		repeatCols: {
 			control: {
@@ -66,7 +81,8 @@ export default {
 				min: 0,
 				max: 34,
 			},
-			table: { category: 'inputs' },
+			description: '[Story] Nombre de colonnes supplémentaires affichées.',
+			table: { category: 'story' },
 		},
 	},
 	decorators: [

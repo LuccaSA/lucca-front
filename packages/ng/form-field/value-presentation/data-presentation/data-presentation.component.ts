@@ -10,7 +10,16 @@ import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataPresentationComponent {
+	/**
+	 * Label of the data (term), the value being the projected content
+	 */
 	readonly label = input.required<PortalContent>();
+	/**
+	 * Displays a dash when there is no value
+	 */
 	readonly noValue = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Changes the size of the component
+	 */
 	readonly size = input<'S' | null>(null);
 }
