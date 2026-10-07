@@ -1,7 +1,7 @@
 import { provideRouter } from '@angular/router';
 import { ERROR_PAGE_ILLUSTRATION, ErrorPageComponent } from '@lucca-front/ng/error-page';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
+import { generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/ErrorPage/Angular/Basic',
@@ -33,15 +33,17 @@ export default {
 	},
 	argTypes: {
 		heading: {
-			type: 'string',
+			type: { name: 'string', required: true },
 			description: 'Titre de la page d’erreur.',
 			table: { category: 'inputs' },
 		},
 		illustration: {
-			options: setStoryOptions(ERROR_PAGE_ILLUSTRATION),
+			// Required input: no empty option, unlike `setStoryOptions`
+			options: [...ERROR_PAGE_ILLUSTRATION],
 			control: {
 				type: 'select',
 			},
+			type: { name: 'string', required: true },
 			description: 'Modifie l’illustration.',
 			table: { category: 'inputs' },
 		},

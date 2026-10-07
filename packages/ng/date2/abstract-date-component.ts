@@ -31,41 +31,90 @@ export abstract class AbstractDateComponent {
 	intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.locale, { month: 'numeric', year: 'numeric' });
 	intlDateTimeFormatYear = new Intl.DateTimeFormat(this.locale, { year: 'numeric' });
 
+	/**
+	 * Overrides the default translations of the component. Only the provided keys are replaced.
+	 */
 	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
 	onTouched?: () => void;
 	readonly disabled = signal<boolean>(false);
 
+	/**
+	 * Format of the bound value: a `Date` object (`date`) or an ISO string `yyyy-MM-dd` (`date-iso`). Defaults to `date`.
+	 */
 	readonly format = input<DateFormat>(DATE_FORMAT.DATE);
 	protected readonly inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
 
+	/**
+	 * Date ranges to highlight in the calendar.
+	 */
 	readonly ranges = input([], {
 		transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange).filter((range): range is DateRange => range !== null),
 	});
+	/**
+	 * Removes the highlight of the current date in the calendar.
+	 */
 	readonly hideToday = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Adds a button in the calendar to select the current date.
+	 */
 	readonly hasTodayButton = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Adds a clear button when a value is selected.
+	 */
 	readonly clearable = input(null, { transform: luNullableBooleanAttribute });
+	/**
+	 * Behavior of the clear button: `clear` empties the field, `reset` restores the initial value. Defaults to `clear`.
+	 */
 	readonly clearBehavior = input<Date2ClearBehavior>('clear');
+	/**
+	 * Removes the greyed out style applied to weekend days in the calendar.
+	 */
 	readonly hideWeekend = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Selection granularity: day, week, month or year. Defaults to `day`.
+	 */
 	readonly mode = input<CalendarMode>('day');
 
+	/**
+	 * Function called for each calendar cell to customize its status (classes, disabled, selected...).
+	 */
 	readonly getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 
+	/**
+	 * Minimum selectable date.
+	 */
 	readonly min = input(new Date('1/1/1000'), {
 		transform: transformDateInputToDate,
 	});
+	/**
+	 * Maximum selectable date.
+	 */
 	readonly max = input(null, {
 		transform: transformDateInputToDate,
 	});
+	/**
+	 * Date displayed and focused when the calendar opens without any selected value.
+	 */
 	readonly focusedDate = input(null, {
 		transform: transformDateInputToDate,
 	});
 
+	/**
+	 * Display mode of the calendar (day, month or year view), independently from the selection `mode`.
+	 * Defaults to the selection `mode`. Two-way bindable.
+	 */
 	readonly calendarMode = model<CalendarMode | null>(null);
 
+	/**
+	 * Emits when the calendar panel opens.
+	 */
 	readonly panelOpened = output<void>();
 
+	/**
+	 * Emits when the calendar panel closes.
+	 */
 	readonly panelClosed = output<void>();
 
 	readonly dateFormatLocalized = computed(() => getLocalizedDateFormat(this.locale, this.mode(), this.intl().weekPrefix));

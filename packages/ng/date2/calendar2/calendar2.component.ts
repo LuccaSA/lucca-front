@@ -86,33 +86,75 @@ export class Calendar2Component implements OnInit {
 
 	#weekNumberOptions = getWeekNumberOptions(this.#weekInfo);
 
+	/**
+	 * Overrides the default translations of the component. Only the provided keys are replaced.
+	 */
 	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
+	/**
+	 * Displays the days of the previous and next months in the current month.
+	 */
 	readonly showOverflow = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Allows the selection of the days of the previous and next months displayed in the current month.
+	 */
 	readonly enableOverflow = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Removes the overflowing years displayed before and after the current decade in the year view.
+	 */
 	readonly removeYearOverflow = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Removes the highlight of the current date.
+	 */
 	readonly hideToday = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Adds a button to select the current date.
+	 */
 	readonly hasTodayButton = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Removes the greyed out style applied to weekend days.
+	 */
 	readonly hideWeekend = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Prevents switching to the month or year view by clicking the calendar header.
+	 */
 	readonly disableModeChange = input(false, { transform: luBooleanAttribute });
 
 	// Date used to init the component and as internal focus model
+	/**
+	 * Date used to initialize the displayed period, also used as internal focus model. Two-way bindable.
+	 */
 	readonly date = model.required<Date>();
 
+	/**
+	 * Date of the cell that can receive the focus with the Tab key. Defaults to `date`. Two-way bindable.
+	 */
 	readonly tabbableDate = model<Date | null>(null);
 
+	/**
+	 * Selection granularity: day, week, month or year. Defaults to `day`. Two-way bindable.
+	 */
 	readonly mode = model<CalendarMode>('day');
 
+	/**
+	 * Current view of the calendar (day, month or year). Defaults to `mode`. Two-way bindable.
+	 */
 	readonly displayMode = model<CalendarMode | null>(null);
 
+	/**
+	 * Date ranges to highlight in the calendar.
+	 */
 	readonly ranges = input<readonly DateRange[]>([]);
 
+	/**
+	 * Function called for each cell to customize its status (classes, disabled, selected...).
+	 */
 	readonly getCellInfo = input<(date: Date, displayMode: CalendarMode | null) => CellStatus>((_date: Date) => ({
 		classes: [],
 		disabled: false,
@@ -128,12 +170,24 @@ export class Calendar2Component implements OnInit {
 
 	readonly nextMonth = computed(() => addMonths(this.month(), 1));
 
+	/**
+	 * Emits when navigating to the next page of the calendar.
+	 */
 	readonly nextPage = output();
 
+	/**
+	 * Emits when navigating to the previous page of the calendar.
+	 */
 	readonly previousPage = output();
 
+	/**
+	 * Emits the date of the clicked cell.
+	 */
 	dateClicked = output<Date>();
 
+	/**
+	 * Date of the hovered or focused cell, used to preview a range being selected. Two-way bindable.
+	 */
 	readonly dateHovered = model<Date | null>(null);
 
 	todayLabel = this.#intlRelativeDay.format(0, 'day');

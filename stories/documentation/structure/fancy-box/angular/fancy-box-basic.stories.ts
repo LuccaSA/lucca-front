@@ -21,6 +21,7 @@ export default {
 			control: {
 				type: 'text',
 			},
+			type: { name: 'string', required: true },
 			description: 'URL de l’image en arrière plan à gauche (200x160).',
 			table: { category: 'inputs' },
 		},
@@ -28,6 +29,7 @@ export default {
 			control: {
 				type: 'text',
 			},
+			type: { name: 'string', required: true },
 			description: 'URL de l’image en arrière plan à droite (200x160).',
 			table: { category: 'inputs' },
 		},
@@ -50,14 +52,11 @@ export default {
 } as Meta;
 
 function getTemplate(args: FancyBoxBasicStory): string {
-	const bgLeft = args.backgroundLeft
-		? `
-		backgroundLeft="${args.backgroundLeft}"`
-		: ``;
-	const bgRight = args.backgroundRight
-		? `
-		backgroundRight="${args.backgroundRight}"`
-		: ``;
+	// `backgroundLeft` and `backgroundRight` are required inputs: always render them, even when empty
+	const bgLeft = `
+		backgroundLeft="${args.backgroundLeft ?? ''}"`;
+	const bgRight = `
+		backgroundRight="${args.backgroundRight ?? ''}"`;
 	const fg = args.foreground
 		? `
 		foreground="${args.foreground}"`

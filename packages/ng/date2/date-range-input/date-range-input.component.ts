@@ -110,8 +110,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	readonly dateHovered = signal<Date | null>(null);
 
+	/**
+	 * Placeholder of the field. Defaults to the localized date format.
+	 */
 	readonly placeholder = input<string>();
 
+	/**
+	 * Lets the field adapt its width to its content instead of using a fixed width.
+	 */
 	readonly widthAuto = input(false, { transform: luBooleanAttribute });
 
 	readonly label: Signal<PortalContent | undefined> = signal('');
@@ -135,8 +141,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	readonly highlightedField = signal<-1 | 0 | 1>(-1);
 
+	/**
+	 * List of shortcuts displayed beside the calendar to quickly select a predefined range.
+	 */
 	readonly shortcuts = input<readonly CalendarShortcut[]>();
 
+	/**
+	 * Value of the `autocomplete` attribute of the native inputs. Defaults to `off`.
+	 */
 	readonly autocomplete = input<AutoFill>('off');
 
 	protected readonly currentRightDate = computed(() => {

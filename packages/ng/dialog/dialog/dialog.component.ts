@@ -19,8 +19,17 @@ import { LuDialogRef } from '../model';
 export class DialogComponent implements AfterViewInit {
 	public readonly dialogRef = inject<LuDialogRef>(LuDialogRef);
 
+	/**
+	 * Marks the dialog as stacked: when several stacked dialogs are opened, the underlying ones are visually offset to show the stack.
+	 */
 	readonly stacked = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Illustration displayed in a dialog opened in `fancy` mode. Defaults to `welcome`.
+	 */
 	readonly fancyIllustration = input<DialogFancyIllustration>('welcome');
+	/**
+	 * URL of a custom illustration displayed in a dialog opened in `fancy` mode. Overrides `fancyIllustration`.
+	 */
 	readonly fancyIllustrationUrl = input<string | null>(null);
 
 	readonly domain = 'https://cdn.lucca.fr';

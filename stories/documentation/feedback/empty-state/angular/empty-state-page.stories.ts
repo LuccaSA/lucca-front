@@ -23,6 +23,11 @@ export default {
 				? ``
 				: `
 	hxStyle="${args['hxStyle']}"`;
+		const paramContentBackgroundColor =
+			!args['contentBackgroundColor'] || args['contentBackgroundColor'] === 'var(--pr-t-elevation-surface-default)'
+				? ``
+				: `
+	contentBackgroundColor="${args['contentBackgroundColor']}"`;
 		const paramIcon =
 			args['icon'] === ''
 				? ``
@@ -61,7 +66,7 @@ export default {
 			template: `<lu-empty-state-page
 	heading="${heading}"
 	slotTop="${slotTop}"
-	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramHx}${paramHxStyle}
+	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramContentBackgroundColor}${paramHx}${paramHxStyle}
 >
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
@@ -173,7 +178,7 @@ export default {
 				type: 'text',
 			},
 			description: 'Modifie la couleur de fond du contenu (variable CSS, couleur hexadécimale, etc.).',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'var(--pr-t-elevation-surface-default)' } },
 		},
 		hx: {
 			control: {
@@ -182,7 +187,7 @@ export default {
 				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
 			},
 			description: 'Niveau de titre (sémantique).',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '1' } },
 		},
 		hxStyle: {
 			control: {
@@ -191,7 +196,7 @@ export default {
 				max: EMPTY_STATE_HX_STYLE.at(EMPTY_STATE_HX_STYLE.length - 1),
 			},
 			description: '[v21.2] Niveau du titre (style).',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '1' } },
 		},
 		heading: {
 			description: 'Titre du composant.',
@@ -203,6 +208,11 @@ export default {
 		},
 		slotTop: {
 			description: 'Ajout d’un slot au dessus du titre. [PortalContent]',
+			table: { category: 'inputs' },
+		},
+		illustration: {
+			control: false,
+			description: 'Ajoute une illustration à côté du contenu, généralement un `lu-empty-state-page-illustration` (voir la story Onboarding page). [PortalContent]',
 			table: { category: 'inputs' },
 		},
 	},

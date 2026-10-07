@@ -43,19 +43,25 @@ export default {
 			control: 'select',
 			options: setStoryOptions(DATE2_CLEAR_BEHAVIOR),
 			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'clear' } },
 		},
 		format: {
 			control: 'select',
 			options: setStoryOptions(DATE_FORMAT_CONST),
 			description: 'Modifie le format de date.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'date' } },
 		},
 		mode: {
 			control: 'select',
 			options: setStoryOptions(CALENDAR_MODE),
 			description: "Modifie le mode de sélection à la semaine, au mois ou à l'année.",
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'day' } },
+		},
+		calendarMode: {
+			control: 'select',
+			options: setStoryOptions(CALENDAR_MODE),
+			description: 'Vue affichée par le calendrier à l’ouverture (jour, mois ou année), indépendamment du mode de sélection. Vaut `mode` par défaut. Two-way.',
+			table: { category: 'models', type: { summary: 'CalendarMode | null' } },
 		},
 		focusedDate: {
 			control: 'date',
@@ -72,14 +78,14 @@ export default {
 			table: { category: 'inputs' },
 		},
 		hideWeekend: {
-			description: 'Retire l’effet grisé visible sur les jours du isWeekend.',
+			description: 'Retire l’effet grisé visible sur les jours du week-end.',
 			table: { category: 'inputs' },
 		},
 		autocomplete: {
 			control: 'select',
-			options: ['', 'on'],
+			options: ['off', 'on'],
 			description: 'Applique une valeur d’autocomplete au champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'off' } },
 		},
 		placeholder: {
 			control: 'text',
@@ -94,9 +100,19 @@ export default {
 			description: 'Ajoute un bouton pour sélectionner la date du jour.',
 			table: { category: 'inputs' },
 		},
+		ranges: {
+			control: false,
+			description: 'Périodes à mettre en valeur dans le calendrier.',
+			table: { category: 'inputs', type: { summary: 'readonly DateRange[] | readonly DateRangeInput[]' } },
+		},
+		getCellInfo: {
+			control: false,
+			description: 'Fonction appelée pour chaque cellule du calendrier afin de personnaliser son statut : classes, désactivation, sélection.',
+			table: { category: 'inputs', type: { summary: '(day: Date, mode: CalendarMode) => CellStatus' } },
+		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		panelOpened: {
 			description: "Événement déclenché à l'ouverture du calendrier.",

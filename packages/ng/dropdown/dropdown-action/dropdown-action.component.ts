@@ -18,7 +18,13 @@ import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 export class DropdownActionComponent {
 	#popoverContentRef = inject(PopoverContentComponent, { optional: true });
 
+	/**
+	 * Disables the action: it can no longer be triggered and does not close the dropdown.
+	 */
 	readonly disabled = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Applies a critical style to the action (e.g. delete).
+	 */
 	readonly critical = input(false, { transform: luBooleanAttribute });
 
 	closePanel() {

@@ -32,7 +32,7 @@ export class FancyBoxComponent {
 	readonly backgroundRight = input.required<string>();
 
 	/**
-	 * Which size should the callout be? Defaults to small
+	 * Which size should the fancy box be? Defaults to the standard size (null), `S` reduces it
 	 */
 	readonly size = input<FancyBoxSize | null>(null);
 
