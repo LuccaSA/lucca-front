@@ -5,7 +5,7 @@ import meta, { Basic } from '@/stories/forms/filter-pills/angular/filter-bar.sto
 
 export default {
 	...meta,
-	title: 'E2E/FilterBar',
+	title: 'E2E/FilterBar/Basic',
 	tags: ['!autodocs'],
 };
 
@@ -25,21 +25,18 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	});
 });
 
-export const ManualApplyTEST = createTestStory(
-	{ ...Basic, name: 'Manual apply', args: { ...Basic.args, manualApply: true } },
-	async ({ canvasElement, step }) => {
-		await waitForAngular();
+export const ManualApplyTEST = createTestStory({ ...Basic, name: 'Manual apply', args: { ...Basic.args, manualApply: true } }, async ({ canvasElement, step }) => {
+	await waitForAngular();
 
-		const canvas = within(canvasElement);
+	const canvas = within(canvasElement);
 
-		await step('With an apply button, results are not announced as updating automatically', async () => {
-			await expect(canvas.getByRole('button', { name: 'Appliquer les filtres' })).toBeVisible();
-			const filterBar = canvasElement.querySelector('lu-filter-bar')!;
-			await expect(filterBar).not.toHaveAttribute('aria-describedby');
-			await expect(canvas.queryByText('La liste des résultats se met à jour automatiquement.')).not.toBeInTheDocument();
-		});
-	},
-);
+	await step('With an apply button, results are not announced as updating automatically', async () => {
+		await expect(canvas.getByRole('button', { name: 'Appliquer les filtres' })).toBeVisible();
+		const filterBar = canvasElement.querySelector('lu-filter-bar')!;
+		await expect(filterBar).not.toHaveAttribute('aria-describedby');
+		await expect(canvas.queryByText('La liste des résultats se met à jour automatiquement.')).not.toBeInTheDocument();
+	});
+});
 
 export const OptionalFilterTEST = createTestStory({ ...Basic, name: 'Optional filter', args: { ...Basic.args, optionalFilter: true } }, async ({ canvasElement, step }) => {
 	await waitForAngular();
