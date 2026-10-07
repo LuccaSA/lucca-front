@@ -15,7 +15,7 @@ import {
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { luBooleanAttribute, luNumberAttribute, ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNumberAttribute, ResponsiveConfig, ɵeffectWithDeps, ɵRangeSelection } from '@lucca-front/ng/core';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
 import { DataTableRowComponent } from './data-table-row/data-table-row.component';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
@@ -62,6 +62,8 @@ export class DataTableComponent implements OnInit {
 	readonly header = contentChild(DataTableHeadComponent, { descendants: true });
 
 	readonly stickyHeader = computed(() => this.header()?.sticky());
+
+	readonly rangeSelection = new ɵRangeSelection(() => this.rows().filter((row) => row.bodyRef !== null && row.elementRef.nativeElement.closest('table') === this.tableRef()?.nativeElement));
 
 	readonly stickyColsStart = input(0, { transform: luNumberAttribute });
 	readonly stickyColsEnd = input(0, { transform: luNumberAttribute });
