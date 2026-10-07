@@ -29,6 +29,9 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	readonly #value = signal<number | undefined | null>(null);
 	readonly #isFocused = signal<boolean>(false);
 
+	/**
+	 * Formatting options (locale, style, currency, unit, fraction digits, min / max…) applied to the displayed value.
+	 */
 	readonly formatOptions = input.required<NumberFormatOptions>();
 	readonly #numberFormat = computed(() => {
 		return new NumberFormat(this.formatOptions());

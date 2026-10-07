@@ -20,6 +20,7 @@ const me = { id: 66, picture: null, department: { id: 3, name: 'Commercial' }, f
 
 export default {
 	title: 'Documentation/Structure/PageHeader/Angular/Basic',
+	component: PageHeaderComponent,
 	argTypes: {
 		label: {
 			description: 'Titre du composant. [PortalContent]',
@@ -31,44 +32,44 @@ export default {
 		},
 		container: {
 			description: '[v20.1] Applique un container autour du contenu de Page Header.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		sticky: {
 			description: '[v21.2] Applique un comportement sticky au Page Header quand celui ci n’est pas géré par le Main Layout',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		breadcrumbs: {
 			description: 'Exemple avec fil d’Ariane.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		actions: {
 			description: 'Exemple avec des actions générales.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		titleActions: {
 			description: 'Exemple avec des actions spécifiques au titre.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		navigation: {
 			description: 'Exemple avec une navigation horizontale.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		backAction: {
 			description: 'Exemple avec une action de retour en arrière.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		leading: {
 			description: 'Ajout d’un slot avant le titre.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		trailing: {
 			if: { arg: 'trailingWithImpersonation', truthy: false },
 			description: 'Ajout d’un slot après le titre.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		trailingWithImpersonation: {
 			description: 'Utilisation du slot après le titre pour passer l’impersonation',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 	},
 	decorators: [

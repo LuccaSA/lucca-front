@@ -8,7 +8,7 @@ export default {
 	component: NumericBadgeComponent,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [NumericBadgeComponent],
+			imports: [NumericBadgeComponent],
 		}),
 	],
 	argTypes: {
@@ -18,21 +18,28 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au composant.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'none' } },
 		},
 		value: {
+			control: {
+				type: 'text',
+			},
 			description: 'Valeur affichée par le composant. Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "999+", etc.)',
 			table: { category: 'inputs' },
 		},
 		maxValue: {
-			type: 'number',
+			control: {
+				type: 'number',
+			},
 			description: 'Valeur maximale affichée au format "999+".',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '999' } },
 		},
 		disableTooltip: {
-			type: 'boolean',
+			control: {
+				type: 'boolean',
+			},
 			description: 'Empêche le déclenchement d’une tooltip si la valeur est supérieure à <code>maxValue</code>.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		size: {
 			options: setStoryOptions(NUMERIC_BADGE_SIZE),
@@ -47,13 +54,15 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Applique l’état de chargement.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 	},
 	render: (args, { argTypes }) => {
 		const { value, ...inputs } = args;
+		// A numeric value is bound as a number (so that `maxValue` applies), any other value as a plain string ("3/5", "999+"…).
+		const valueBinding = typeof value === 'number' || /^\d+$/.test(value) ? `[value]="${value}"` : `value="${value}"`;
 		return {
-			template: `<lu-numeric-badge ${generateInputs(inputs, argTypes)} [value]="${value}" />`,
+			template: `<lu-numeric-badge ${generateInputs(inputs, argTypes)} ${valueBinding} />`,
 		};
 	},
 } as Meta;
@@ -61,7 +70,6 @@ export default {
 export const Template: StoryObj<NumericBadgeComponent> = {
 	args: {
 		value: 7,
-		maxValue: 999,
 		loading: false,
 		disableTooltip: false,
 	},

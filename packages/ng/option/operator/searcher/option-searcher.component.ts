@@ -43,6 +43,9 @@ export class LuOptionSearcherComponent<T> extends ALuOptionOperator<T> implement
 		this.empty$ = this.outOptions$.pipe(map((o) => !o || o.length === 0));
 	}
 
+	/**
+	 * Predicate used to filter the options against the search clue. Keeps every option by default.
+	 */
 	readonly searchFn = input<(option: T, clue: string) => boolean>(() => true);
 
 	onOpen() {

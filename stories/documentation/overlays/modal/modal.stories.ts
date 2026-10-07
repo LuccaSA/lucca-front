@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, input, Type } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
+import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, provideLuModal } from '@lucca-front/ng/modal';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
+import { applicationConfig, Meta } from '@storybook/angular-vite';
 import { map, shareReplay, timer } from 'rxjs';
 import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from '@/helpers/stories';
 
@@ -17,6 +17,16 @@ const globalArgTypes: any = {
 			type: 'select',
 		},
 		table: { category: 'inputs' },
+	},
+	position: {
+		name: '↳ position',
+		if: { arg: 'mode', eq: 'sidepanel' },
+		description: "Côté d'affichage du sidepanel. Uniquement pris en compte par `legacyOpen()` : `open()` l'ignore.",
+		options: ['left', 'right'],
+		control: {
+			type: 'select',
+		},
+		table: { category: 'inputs', defaultValue: { summary: 'right' } },
 	},
 	panelClass: { control: { type: 'text' }, table: { category: 'inputs' } },
 	undismissable: { control: { type: 'boolean' }, table: { category: 'inputs' } },
@@ -51,6 +61,8 @@ class ModalContentComponent implements ILuModalContent {
 }
 `,
 )}
+
+Le bouton de validation peut être personnalisé avec \`submitLabel\`, \`submitPalette\` (palette du bouton, \`'product'\` par défaut), \`submitDisabled\` et \`submitCounter\`. Le libellé du bouton d'annulation se personnalise avec \`cancelLabel\`.
 `;
 
 @Component({
@@ -124,6 +136,9 @@ class ModalStories {
 				: baseOptions;
 		const data = this.message() ? { message: this.message() } : {};
 
+		// The snippets document `open()`, the recommended API, which delegates to `LuDialogService`.
+		// The demo still runs `legacyOpen()` to render the legacy `lu-modal-panel` / `lu-sidepanel-panel` overlay,
+		// which is the only one honoring the `position` option.
 		const ref = this.modal.legacyOpen(cmp, data, options);
 
 		if (this.undismissable()) {
@@ -145,7 +160,7 @@ export const Modal = generateStory({
 	codeLang: 'ts',
 	template,
 	neededImports: {
-		'@lucca-front/ng/modal': ['LuModalModule', 'LuModal', 'LU_MODAL_DATA'],
+		'@lucca-front/ng/modal': ['provideLuModal', 'LuModal', 'LU_MODAL_DATA'],
 	},
 });
 
@@ -179,7 +194,7 @@ this.modal.open(ModalContentComponent, data);`,
 	codeLang: 'ts',
 	template,
 	neededImports: {
-		'@lucca-front/ng/modal': ['LuModalModule', 'LuModal'],
+		'@lucca-front/ng/modal': ['provideLuModal', 'LuModal'],
 	},
 	storyPartial: {
 		args: {
@@ -195,7 +210,7 @@ export const ModalSidepanelMode = generateStory({
 	codeLang: 'ts',
 	template,
 	neededImports: {
-		'@lucca-front/ng/modal': ['LuModalModule', 'LuModal'],
+		'@lucca-front/ng/modal': ['provideLuModal', 'LuModal'],
 	},
 	storyPartial: {
 		args: {
@@ -215,7 +230,7 @@ export const ModalSize = generateStory({
 	codeLang: 'ts',
 	template,
 	neededImports: {
-		'@lucca-front/ng/modal': ['LuModalModule', 'LuModal'],
+		'@lucca-front/ng/modal': ['provideLuModal', 'LuModal'],
 	},
 	storyPartial: {
 		args: {
@@ -251,11 +266,11 @@ class ModalDynamicContentComponent implements ILuModalContent {
 `,
 )}
 `,
-	code: `this.modal.open(ModalDynamicContentComponent, {}, { size: 'XL' });`,
+	code: `this.modal.open(ModalDynamicContentComponent);`,
 	codeLang: 'ts',
 	template,
 	neededImports: {
-		'@lucca-front/ng/modal': ['LuModalModule', 'LuModal'],
+		'@lucca-front/ng/modal': ['provideLuModal', 'LuModal'],
 	},
 	storyPartial: {
 		args: {
@@ -274,7 +289,7 @@ export const ModalNoBackdrop = generateStory({
 	codeLang: 'ts',
 	template,
 	neededImports: {
-		'@lucca-front/ng/modal': ['LuModalModule', 'LuModal'],
+		'@lucca-front/ng/modal': ['provideLuModal', 'LuModal'],
 	},
 	storyPartial: {
 		args: {
@@ -290,11 +305,11 @@ export const ModalUndismissable = generateStory({
 	name: 'Undismissable',
 	description: `Il est possible de désactiver la possibilité de fermer la modale avec l'option \`undismissable: true\`. Dans ce cas, il faut ajouter un bouton de fermeture dans le contenu de la modale. Il est possible d'écouter les clics sur le backdrop.`,
 	code: `const modalRef = this.modal.open(ModalContentComponent, {}, { undismissable: true });
-modalRef.backdropClick.subscribe(() => console.log('backdrop clicked'));`,
+modalRef.onBackdropClick.subscribe(() => console.log('backdrop clicked'));`,
 	codeLang: 'ts',
 	template,
 	neededImports: {
-		'@lucca-front/ng/modal': ['LuModalModule', 'LuModal'],
+		'@lucca-front/ng/modal': ['provideLuModal', 'LuModal'],
 	},
 	storyPartial: {
 		args: {
@@ -311,10 +326,7 @@ const meta: Meta<StoryComponent> = {
 	component: ModalStories,
 	decorators: [
 		applicationConfig({
-			providers: [provideAnimations()],
-		}),
-		moduleMetadata({
-			imports: [LuModalModule],
+			providers: [provideAnimations(), provideLuModal()],
 		}),
 	],
 	args: {},

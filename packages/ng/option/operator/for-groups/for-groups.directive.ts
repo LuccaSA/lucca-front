@@ -42,6 +42,9 @@ export class LuForGroupsDirective<TItem, TKey> implements ILuOptionOperator<TIte
 
 	private _groupByFn: (item: TItem) => TKey;
 
+	/**
+	 * Function returning the key used to group the options.
+	 */
 	readonly attrGroupBy = input<(item: TItem) => TKey>(undefined, { alias: 'luForGroupsGroupBy' });
 
 	protected _subs = new Subscription();
