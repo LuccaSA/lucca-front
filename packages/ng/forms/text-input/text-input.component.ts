@@ -24,37 +24,76 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 	providers: [provideNgxMask()],
 })
 export class TextInputComponent {
+	/**
+	 * Overrides the default translations (partial overrides are merged with the defaults)
+	 */
 	readonly intl = input(...intlInputOptions(LU_TEXTFIELD_TRANSLATIONS));
 	readonly ngControl = injectNgControl();
 
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
+	/**
+	 * Input mask applied to the value (ngx-mask syntax), no mask when null
+	 */
 	readonly mask = input<string | null>(null);
 
+	/**
+	 * Placeholder of the input
+	 */
 	readonly placeholder = input<string>('');
 
+	/**
+	 * Value of the native `autocomplete` attribute, defaults to 'off'
+	 */
 	readonly autocomplete = input<AutoFill>('off');
 
+	/**
+	 * Displays a button to clear the value when the input is not empty
+	 */
 	readonly hasClearer = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Displays a search icon at the end of the input
+	 */
 	readonly hasSearchIcon = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Aligns the value to the right
+	 */
 	readonly valueAlignRight = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Content or icon displayed before the input, with its accessible label
+	 */
 	readonly prefix = input<TextInputAddon>();
 
+	/**
+	 * Content or icon displayed after the input, with its accessible label
+	 */
 	readonly suffix = input<TextInputAddon>();
 
+	/**
+	 * Value of the native `minlength` attribute, not set when 0 (default)
+	 */
 	readonly minlength = input<number>(0, { transform: luNumberAttribute });
+	/**
+	 * Value of the native `maxlength` attribute, not set when 0 (default)
+	 */
 	readonly maxlength = input<number>(0, { transform: luNumberAttribute });
 
 	/**
-	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
+	 * Search icon to use when `hasSearchIcon` is true, defaults to 'searchMagnifyingGlass'
 	 */
 	readonly searchIcon = input<LuccaIcon>('searchMagnifyingGlass');
 
+	/**
+	 * Type of the native input, defaults to 'text'. 'password' adds a button to toggle the value visibility
+	 */
 	readonly type = input<TextFieldType>('text');
 
+	/**
+	 * Emits when the native input loses focus
+	 */
 	// eslint-disable-next-line @angular-eslint/no-output-native
 	readonly blur = output<FocusEvent>();
 

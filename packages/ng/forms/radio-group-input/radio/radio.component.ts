@@ -28,14 +28,29 @@ export class RadioComponent<T = unknown> {
 	#parentGroup = inject(RADIO_GROUP_INSTANCE);
 	#cdr = inject(ChangeDetectorRef);
 
+	/**
+	 * Value written to the parent radio group control when this radio button is selected
+	 */
 	readonly value = input.required<T>();
 
+	/**
+	 * Disables this radio button only (the whole group can be disabled through its form control)
+	 */
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Inline message displayed below the radio button label
+	 */
 	readonly inlineMessage = input<PortalContent>();
 
+	/**
+	 * Tag displayed next to the radio button label
+	 */
 	readonly tag = input<string>();
 
+	/**
+	 * Additional content displayed inside the frame, only applies when the parent group is `framed`
+	 */
 	readonly framedPortal = input<PortalContent>();
 
 	readonly arrow = computed(() => this.#parentGroup.arrow());

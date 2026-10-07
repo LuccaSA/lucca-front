@@ -44,6 +44,9 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language', languageDisplay: 'dialect' });
 
+	/**
+	 * Overrides the default translations (partial overrides are merged with the defaults)
+	 */
 	readonly intl = input(...intlInputOptions(LU_MULTILANGUAGE_INPUT_TRANSLATIONS));
 
 	readonly formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
@@ -54,18 +57,39 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	protected onChange = (_value: MultilanguageTranslation[]) => {};
 
+	/**
+	 * Placeholder of the main input
+	 */
 	readonly placeholder = input('');
 
+	/**
+	 * Opens the translations popover when the main input is focused (always the case when `hasNoInvariant` is true)
+	 */
 	readonly openOnFocus = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Value of the native `autocomplete` attribute of the inputs, defaults to 'off'
+	 */
 	readonly autocomplete = input<AutoFill>('off');
 
+	/**
+	 * Removes the invariant translation: the main input edits the `displayLocale` translation and every translation is required
+	 */
 	readonly hasNoInvariant = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Displays a "translate with AI" button next to each translation input of the popover
+	 */
 	readonly hasAIButtons = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Locale edited by the main input when `hasNoInvariant` is true (e.g. 'fr-FR'), falls back to a language-only match
+	 */
 	readonly displayLocale = input('');
 
+	/**
+	 * Emits the culture code of the translation whose "translate with AI" button was clicked
+	 */
 	readonly translateWithAI = output<string>();
 
 	readonly shouldOpenOnFocus = computed(() => this.openOnFocus() || this.hasNoInvariant());

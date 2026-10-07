@@ -66,9 +66,21 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly #richTextFormatter = inject<RichTextFormatter>(RICH_TEXT_FORMATTER);
 	readonly #formField = inject(FormFieldComponent, { optional: true });
 
+	/**
+	 * Placeholder displayed when the editor is empty
+	 */
 	readonly placeholder = input<string>('');
+	/**
+	 * Disables the browser spellcheck
+	 */
 	readonly disableSpellcheck = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Makes the editor grow with its content
+	 */
 	readonly autoResize = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Hides the formatting toolbar
+	 */
 	readonly hideToolbar = input(false, { transform: luBooleanAttribute });
 
 	readonly content = viewChild<string, ElementRef<HTMLElement>>('content', {

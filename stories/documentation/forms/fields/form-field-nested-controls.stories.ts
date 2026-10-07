@@ -65,7 +65,7 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		hiddenLabel: false,
 		inlineMessage: 'Helper text',
 		errorInlineMessage: 'Error helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		tooltip: 'You expected me to be helpful but this is a story!',
 		invalid: false,
 		counter: null,

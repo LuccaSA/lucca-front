@@ -28,16 +28,23 @@ export default {
 		},
 		withAction: {
 			if: { arg: 'expandable', eq: false },
-			description: 'Ajoute un bouton d’action à droite du titre.',
-			table: { category: 'inputs' },
+			description: 'Renseigne l’input <code>action</code> [PortalContent] avec un bouton d’exemple, affiché à droite du titre. Ignoré lorsque <code>expandable</code> est actif.',
+			table: { category: 'story' },
 		},
 		expanded: {
 			control: {
 				type: 'boolean',
 			},
 			if: { arg: 'expandable', truthy: true },
-			description: 'Affiche le fieldset en vue dépliée.',
-			table: { category: 'models' },
+			description: 'Affiche le fieldset en vue dépliée. Two-way.',
+			table: { category: 'models', defaultValue: { summary: 'false' } },
+		},
+		expandedChange: {
+			description: 'Événement déclenché lorsque le fieldset est déplié ou replié.',
+			action: 'expandedChange',
+			control: false,
+			if: { arg: 'expandable', truthy: true },
+			table: { category: 'outputs', type: { summary: 'boolean' } },
 		},
 		hiddenLegend: {
 			control: {
@@ -71,14 +78,14 @@ export default {
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		maxWidth: {
 			control: {
 				type: 'boolean',
 			},
 			description: "Applique la largeur maximale d'un formulaire au fieldset (cette largeur maximale est généralement appliquée par le formulaire lui-même).",
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form)' },
 		},
 	},
 	decorators: [
@@ -86,8 +93,8 @@ export default {
 			imports: [FieldsetComponent, GridComponent, GridColumnComponent, FormFieldComponent, TextInputComponent, FormsModule, ButtonComponent, FormComponent],
 		}),
 	],
-	render: ({ expanded, size, helper, action, withAction, presentation, horizontal, maxWidth, ...args }, { argTypes }) => {
-		const expandedParam = expanded ? ` [expanded]="true"` : ``;
+	render: ({ expanded, expandedChange, size, helper, action, withAction, presentation, horizontal, maxWidth, ...args }, { argTypes }) => {
+		const expandedParam = args['expandable'] ? ` [(expanded)]="expanded" (expandedChange)="onExpandedChange($event)"` : ``;
 		const helperParam = helper ? ` helper="${helper}"` : ``;
 		const sizeParam = size ? ` size="S"` : ``;
 		const actionParam = withAction ? ` [action]="portalSample"` : ``;
@@ -101,6 +108,10 @@ export default {
 	</ng-template>`
 			: ``;
 		return {
+			props: {
+				expanded,
+				onExpandedChange: (value: boolean) => expandedChange?.(value),
+			},
 			template: `<form luForm${maxWidthParam}>
 	<lu-fieldset${horizontalParam}${helperParam}${expandedParam}${sizeParam}${actionParam}${generateInputs(args, argTypes)}>
 		<lu-grid mode="form">

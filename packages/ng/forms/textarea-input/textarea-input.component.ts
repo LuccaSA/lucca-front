@@ -24,14 +24,29 @@ export class TextareaInputComponent implements OnInit {
 
 	readonly parent = viewChild<ElementRef<HTMLElement>>('parent');
 
+	/**
+	 * Placeholder of the textarea
+	 */
 	readonly placeholder = input<string>('');
 
+	/**
+	 * Number of visible text lines, defaults to 3
+	 */
 	readonly rows = input(3, { transform: luNumberAttribute });
 
+	/**
+	 * Makes the textarea grow with its content
+	 */
 	readonly autoResize = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Scrolls the textarea into view when its value changes, useful with `autoResize`
+	 */
 	readonly autoResizeScrollIntoView = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Disables the browser spellcheck
+	 */
 	readonly disableSpellcheck = input(false, { transform: luBooleanAttribute });
 
 	cloneValue = '';

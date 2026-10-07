@@ -3,7 +3,7 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { luMultilanguageInputTranslations, MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -25,40 +25,40 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Désactive le champ.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		label: {
 			control: {
 				type: 'text',
 			},
 			description: 'Modifie le label du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		required: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (formControl)' },
 		},
 		size: {
-			options: ['S', 'M'],
+			options: setStoryOptions(FORM_FIELD_SIZE),
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie la taille de la checkbox.',
-			table: { category: 'inputs' },
+			description: 'Modifie la taille du champ.',
+			table: { category: 'inputs (form-field)' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -66,7 +66,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)', defaultValue: { summary: 'null' } },
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
@@ -75,7 +75,7 @@ export default {
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		openOnFocus: {
 			description: 'Ouvre le panel automatiquement au focus du champ.',
@@ -87,18 +87,18 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		autocomplete: {
 			control: {
 				type: 'text',
 			},
 			description: 'Modifie l’attribut autocomplete des champs input.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'off' } },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		hasNoInvariant: {
 			description: "[v21.3] Supprime la notion d'invariant du champ, nécessite d'être associé à un Validateur required et l'utilisation de `displayLocale`.",
@@ -109,8 +109,17 @@ export default {
 			table: { category: 'inputs' },
 		},
 		displayLocale: {
+			name: '↳ displayLocale',
+			if: { arg: 'hasNoInvariant', truthy: true },
+			control: { type: 'text' },
 			description: '[v21.3] Locale à utiliser comme valeur affichée dans le champ en version collapsed lorsque `hasNoInvariant` est active.',
 			table: { category: 'inputs' },
+		},
+		translateWithAI: {
+			description: '[v21.3] Événement déclenché au clic sur un bouton « translate with AI » (<code>hasAIButtons</code>), avec la locale à traduire.',
+			action: 'translateWithAI',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'string' } },
 		},
 		intl: intlArgType(luMultilanguageInputTranslations, 'LuMultilanguageInputTranslations'),
 	},
@@ -124,7 +133,7 @@ export const Basic: StoryObj<
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, disabled, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, presentation, disabled, displayLocale, translateWithAI, ...inputArgs } = args;
 		// Same lifetime as useStoryModel: kept across control changes, rebuilt when the story is remounted.
 		const [formControl] = useState(
 			() =>
@@ -155,6 +164,7 @@ export const Basic: StoryObj<
 		return {
 			props: {
 				formControl,
+				onTranslateWithAI: (locale: string) => translateWithAI?.(locale),
 			},
 			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
@@ -169,7 +179,7 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-multilanguage-input [formControl]="formControl"${generateInputs(inputArgs, argTypes)} />
+	<lu-multilanguage-input [formControl]="formControl"${generateInputs({ ...inputArgs, displayLocale: inputArgs.hasNoInvariant ? displayLocale : null }, argTypes)} (translateWithAI)="onTranslateWithAI($event)" />
 </lu-form-field>
 <pr-story-model-display>{{ formControl.value | json }}</pr-story-model-display>`),
 		};
@@ -180,7 +190,7 @@ export const Basic: StoryObj<
 		required: true,
 		hiddenLabel: false,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		openOnFocus: false,

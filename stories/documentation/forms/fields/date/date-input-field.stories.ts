@@ -98,7 +98,7 @@ export const Basic: StoryObj<DateInputComponent & FormFieldComponent & { selecte
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		// DateInput
 		disableOverflow: false,
 		hideOverflow: false,
