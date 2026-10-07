@@ -20,7 +20,13 @@ import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.t
 	},
 })
 export class SoftwareIconWrapperComponent {
+	/**
+	 * Maximum number of displayed icons, the other ones are listed in a popover (0 means no limit)
+	 */
 	readonly max = input(0, { transform: luNumberAttribute });
+	/**
+	 * Changes the size of the icons
+	 */
 	readonly size = input<'XS' | 'S' | ''>('');
 	readonly intl = input(...intlInputOptions(LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS));
 

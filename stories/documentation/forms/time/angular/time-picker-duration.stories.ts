@@ -7,6 +7,9 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
+// `DurationChangeEvent` is not exported by `@lucca-front/ng/time`.
+type DurationChangeEvent = Parameters<DurationPickerComponent['durationChange']['emit']>[0];
+
 export default {
 	title: 'Documentation/Forms/Time/Angular/Duration',
 	decorators: [
@@ -21,14 +24,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -36,16 +39,16 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		label: {
 			control: {
@@ -98,7 +101,13 @@ export default {
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
+		},
+		durationChange: {
+			description: 'Événement déclenché lorsque l’utilisateur modifie la durée. Émet la nouvelle et la précédente valeur.',
+			action: 'durationChange',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'DurationChangeEvent' } },
 		},
 		intl: intlArgType(luDurationPickerTranslations, 'DurationPickerTranslations'),
 	},
@@ -106,8 +115,11 @@ export default {
 
 export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, durationChange, ...inputArgs } = args;
 		return {
+			props: {
+				onDurationChange: (event: DurationChangeEvent) => durationChange?.(event),
+			},
 			template: `<lu-form-field [rolePresentationLabel]="true"${generateInputs(
 				{
 					label,
@@ -120,7 +132,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 				},
 				argTypes,
 			)}>
-	<lu-duration-picker label="${label}"${generateInputs(inputArgs, argTypes)} [(ngModel)]="example" />
+	<lu-duration-picker label="${label}"${generateInputs(inputArgs, argTypes)} [(ngModel)]="example" (durationChange)="onDurationChange($event)" />
 </lu-form-field>
 
 <pr-story-model-display>{{ example }}</pr-story-model-display>`,

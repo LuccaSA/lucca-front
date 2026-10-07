@@ -12,8 +12,14 @@ import { LuUserPopoverComponent } from './user-popover.component';
 	exportAs: 'LuUserPopoverDirective',
 })
 export class LuUserPopoverDirective extends PopoverDirective {
+	/**
+	 * User whose card is displayed in the popover, on hover or focus
+	 */
 	readonly luUserPopover = input.required<ILuUser>();
 
+	/**
+	 * Disables the popover
+	 */
 	readonly luUserPopoverDisabled = input<boolean>(false);
 
 	override readonly luPopoverDisabled = linkedSignal(() => this.luUserPopoverDisabled());

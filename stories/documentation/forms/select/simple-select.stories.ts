@@ -641,7 +641,7 @@ export const AddOption = generateStory({
 	[addOptionLabel]="addOptionLabel || ('Ajouter ' + (clue || 'un légume'))"
 	[addOptionStrategy]="addOptionStrategy"
 	(clueChange)="clue = $event"
-	(addOption)="legumes = addLegume($event, legumes); selectedLegume = legumes[legumes.length - 1]"
+	(addOption)="addOption($event); legumes = addLegume($event, legumes); selectedLegume = legumes[legumes.length - 1]"
 />`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -655,11 +655,15 @@ export const AddOption = generateStory({
 			},
 			addOptionStrategy: {
 				description: 'Définit les conditions pour afficher le bouton d’ajout d’option.',
-				control: {
-					type: 'select',
-					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
-				},
-				table: { category: 'inputs' },
+				options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
+				control: { type: 'select' },
+				table: { category: 'inputs', defaultValue: { summary: 'never' } },
+			},
+			addOption: {
+				description: 'Événement déclenché au clic sur le bouton d’ajout d’option. Émet la recherche saisie.',
+				action: 'addOption',
+				control: false,
+				table: { category: 'outputs', type: { summary: 'string' } },
 			},
 		},
 		args: {
@@ -679,7 +683,7 @@ export const AddOption = generateStory({
 
 export const CustomPanelHeader = generateStory({
 	name: 'Custom Panel Header',
-	description: 'Pour customiser l’en-tête du panel, il suffit d’utiliser la directive `luCoreSelectPanelHeader`.',
+	description: 'Pour customiser l’en-tête du panel, il suffit d’utiliser la directive `luSelectPanelHeader`.',
 	template: `<lu-simple-select
 	#selectRef
 	[(ngModel)]="selectedLegume"

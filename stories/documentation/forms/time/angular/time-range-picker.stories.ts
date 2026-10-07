@@ -22,7 +22,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie la taille du champ.',
+			description: 'Modifie la taille du champ (appliquée à `lu-form-field` et à `lu-time-range-picker`).',
 			table: { category: 'inputs' },
 		},
 		inlineMessage: {
@@ -30,7 +30,7 @@ export default {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: ['default', 'success', 'warning', 'error'],
@@ -38,23 +38,23 @@ export default {
 				type: 'select',
 			},
 			description: "Modifie l'état de l'inline message.",
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans.",
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		label: {
 			control: {
 				type: 'text',
 			},
 			description: "Modifie le label de l'input.",
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		required: {
 			control: {
@@ -75,7 +75,7 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Désactive le composant.',
-			table: { category: 'models' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		step: {
 			control: {
@@ -92,27 +92,26 @@ export default {
 			table: { category: 'inputs' },
 		},
 		forceMeridiemDisplay: {
-			options: [null, false, true],
 			control: {
-				type: 'select',
+				type: 'boolean',
 			},
-			description: "Force l'affichage de l'indicateur AM/PM",
-			table: { category: 'inputs' },
+			description: "Force l'affichage de l'indicateur AM/PM.",
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		intl: intlArgType(luTimeRangePickerTranslations, 'TimeRangePickerTranslations'),
 	},
 } as Meta;
 
-export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
+export const Basic: StoryObj<TimeRangePickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, presentation, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, presentation, ...inputArgs } = args;
 		return {
-			template: `<lu-form-field label="${label}"${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation }, argTypes)}>
-	<lu-time-range-picker${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
+			template: `<lu-form-field label="${label}"${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size: inputArgs.size, presentation }, argTypes)}>
+	<lu-time-range-picker${generateInputs(inputArgs, argTypes)} [(ngModel)]="example" />
 </lu-form-field>
 
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>

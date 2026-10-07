@@ -12,10 +12,19 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 	onChange: (value: ISO8601Time | ISO8601Duration) => void = () => {};
 	onTouched: () => void = () => {};
 
+	/**
+	 * Increment step applied by the arrows and keyboard, as an ISO 8601 duration (e.g. `PT15M`)
+	 */
 	readonly step = input<ISO8601Duration | null>(null);
 
+	/**
+	 * Disables the picker
+	 */
 	readonly disabled = model(false);
 
+	/**
+	 * Changes the size of the picker
+	 */
 	readonly size = input<BasePickerSize>();
 
 	readonly hoursPart = viewChild<TimePickerPartComponent>('hoursPart');

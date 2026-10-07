@@ -29,15 +29,33 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 export class DurationPickerComponent extends BasePickerComponent {
 	readonly intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
+	/**
+	 * Selected duration, as an ISO 8601 duration (e.g. `PT1H30M`)
+	 */
 	readonly value = model<ISO8601Duration>('PT0S');
+	/**
+	 * Maximum selectable duration, as an ISO 8601 duration
+	 */
 	readonly max = input<ISO8601Duration>('PT99H');
 
+	/**
+	 * Displays increment and decrement arrows
+	 */
 	readonly displayArrows = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Accessible label of the picker
+	 */
 	readonly label = input<string>();
 
+	/**
+	 * Hides the field content when the duration is zero
+	 */
 	readonly hideZeroValue = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Emits the new and previous values when the duration is changed by the user
+	 */
 	readonly durationChange = output<DurationChangeEvent>();
 
 	readonly keyPressed = signal(false);

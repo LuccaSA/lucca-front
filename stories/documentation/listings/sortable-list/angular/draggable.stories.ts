@@ -25,29 +25,35 @@ export default {
 				type: 'text',
 			},
 			description: 'Modifie le texte principal d’un élément de liste. [PortalContent]',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (sortable-list-item)' },
 		},
 		helperMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte secondaire à l’élément de liste.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (sortable-list-item)' },
 		},
 		small: {
 			control: 'boolean',
-			description: 'Modifie la taille du composant.',
-			table: { category: 'inputs' },
+			description:
+				'Modifie la taille de l’élément de liste. Posé sur chaque `lu-sortable-list-item` (plutôt que sur `lu-sortable-list`), il s’applique aussi à l’aperçu de l’élément déplacé, rendu en dehors de la liste.',
+			table: { category: 'inputs (sortable-list-item)', defaultValue: { summary: 'false' } },
+		},
+		drag: {
+			control: false,
+			description: 'Affiche la poignée de déplacement de l’élément de liste. À combiner avec la directive `cdkDrag`.',
+			table: { category: 'inputs (sortable-list-item)', defaultValue: { summary: 'false' } },
 		},
 		clickable: {
 			control: 'boolean',
 			description: 'Rend les lignes cliquables.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (sortable-list-item)' },
 		},
 		unclearable: {
 			control: 'boolean',
 			description: 'Masque la croix de suppression.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (sortable-list-item)' },
 		},
 		drop: {
 			description: 'Événement déclenché au drop.',

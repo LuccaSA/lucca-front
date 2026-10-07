@@ -1,12 +1,18 @@
 import { IconsList } from '@/stories/icons-list';
 import { TAG_SIZE, TagComponent } from '@lucca-front/ng/tag';
-import { Meta, StoryObj } from '@storybook/angular-vite';
-import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
+import { provideRouter, withHashLocation } from '@angular/router';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { PaletteAllArgType } from '@/helpers/common-arg-types';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Tags/Angular/Basic',
 	component: TagComponent,
+	decorators: [
+		applicationConfig({
+			providers: [provideRouter([{ path: '**', children: [] }], withHashLocation())],
+		}),
+	],
 	render: (args, context) => {
 		return {
 			template: `<lu-tag${generateInputs(args, context.argTypes)} />`,
@@ -41,7 +47,13 @@ export const Template: StoryObj<TagComponent> = {
 			description: 'Ajoute une icône au tag.',
 			table: { category: 'inputs' },
 		},
-		link: HiddenArgType,
+		link: {
+			control: {
+				type: 'text',
+			},
+			description: 'Transforme le tag en lien vers la route indiquée (`routerLink`).',
+			table: { category: 'inputs' },
+		},
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
 			table: { category: 'inputs' },
@@ -62,5 +74,6 @@ export const Template: StoryObj<TagComponent> = {
 		icon: null,
 		withEllipsis: false,
 		AI: false,
+		link: '',
 	},
 };

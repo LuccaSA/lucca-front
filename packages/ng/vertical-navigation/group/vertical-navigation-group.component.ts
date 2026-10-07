@@ -31,6 +31,9 @@ export class VerticalNavigationGroupComponent {
 	 */
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Expands the vertical navigation group
+	 */
 	readonly expanded = model(true);
 
 	toggleExpanded() {
