@@ -8,12 +8,15 @@ import {
 	CalloutPopoverComponent,
 	CalloutStates,
 } from '@lucca-front/ng/callout';
+import { PopoverPosition } from '@lucca-front/ng/popover2';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
+const POPOVER_POSITIONS: PopoverPosition[] = ['above', 'below', 'before', 'after'];
+
 export default {
-	title: 'Documentation/Feedback/Callout Popover/Angular',
+	title: 'Documentation/Feedback/Callout Popover/Angular/Basic',
 	component: CalloutPopoverComponent,
 	decorators: [
 		moduleMetadata({
@@ -50,7 +53,7 @@ export default {
 			},
 			if: { arg: 'customText', truthy: false },
 			description: 'Nombre d’éléments présentés dans la story.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		buttonLabel: {
 			description: 'Label du bouton.',
@@ -61,15 +64,20 @@ export default {
 			table: { category: 'inputs' },
 		},
 		popoverPosition: {
-			options: ['', 'below', 'before', 'after'],
+			options: POPOVER_POSITIONS,
 			control: {
 				type: 'select',
 			},
 			description: 'Position du popover par rapport au bouton de déclenchement.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'above' } },
+		},
+		customPopoverPositions: {
+			control: false,
+			description: 'Positions personnalisées du popover, prioritaires sur <code>popoverPosition</code>.',
+			table: { category: 'inputs', type: { summary: 'ConnectionPositionPair[]' } },
 		},
 		icon: {
-			options: ['', 'info', 'success', 'warning', 'error', 'help'],
+			options: ['', 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp'],
 			control: {
 				type: 'select',
 			},
@@ -103,7 +111,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au callout.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'none' } },
 		},
 		popoverTrigger: {
 			options: ['click', 'click+hover', 'hover+focus'],
@@ -111,7 +119,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Détermine le mode d’ouverture du popover.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'click+hover' } },
 		},
 		popoverDisabled: {
 			control: {
@@ -129,21 +137,25 @@ export default {
 			table: { category: 'inputs' },
 		},
 		closeDelay: {
+			control: { type: 'number' },
 			description: 'Délai nécessaire à la fermeture du popover.',
-			table: { category: 'inputs' },
+			// `generateInputs` compares with `===`: the summary has to be a number, like the arg.
+			table: { category: 'inputs', defaultValue: { summary: 500 as unknown as string } },
 		},
 		openDelay: {
+			control: { type: 'number' },
 			description: 'Délai nécessaire à l’ouverture du popover.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 50 as unknown as string } },
 		},
 		customText: {
 			description: 'Remplace la liste d’éléments par un texte personnalisé.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 	},
 } as Meta;
 
 export const Template: StoryObj<CalloutPopoverComponent & { items: number; customText: string; popoverTrigger: 'click' | 'click+hover' | 'hover+focus' }> = {
+	name: 'Basic',
 	args: {
 		icon: 'signInfo',
 		palette: 'none',

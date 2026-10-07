@@ -14,7 +14,14 @@ export class SkipLinkDirective implements OnDestroy {
 
 	link: LuSkipLink;
 
+	/**
+	 * Label of the skip link displayed in `lu-skip-links`
+	 */
 	readonly luSkipLinkLabel = input.required<string>();
+	/**
+	 * Id of the target element. When empty, the existing id of the host is used, or a generated one if it has none.
+	 * When provided, it overwrites the existing id of the host (a warning is logged).
+	 */
 	readonly luSkipLinkTarget = input<string>('');
 
 	readonly linkTarget = linkedSignal(() => this.luSkipLinkTarget());

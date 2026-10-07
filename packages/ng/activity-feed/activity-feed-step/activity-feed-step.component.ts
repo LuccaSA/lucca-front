@@ -29,12 +29,24 @@ export class ActivityFeedStepComponent {
 		minute: 'numeric',
 	});
 
+	/**
+	 * Description of the step
+	 */
 	readonly label = input<PortalContent | null>(null);
 
+	/**
+	 * User displayed in the avatar of the step (not displayed when status is `success` or `critical`)
+	 */
 	readonly user = input<ILuUser | null>(null);
 
+	/**
+	 * Status of the step: `success` and `critical` replace the avatar with a state indicator
+	 */
 	readonly status = input<ActivityFeedStepStatus | null>(null);
 
+	/**
+	 * Date of the step, displayed as a full date and time (or formatted with `datePipeFormat`)
+	 */
 	readonly date = input<Date | string | null>(null);
 
 	protected readonly preparedDate = computed(() => {

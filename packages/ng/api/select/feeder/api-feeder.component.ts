@@ -30,16 +30,34 @@ import { ALuApiOptionFeeder } from './api-feeder.model';
 export class LuApiFeederComponent<T extends ILuApiItem = ILuApiItem> extends ALuApiOptionFeeder<T, LuApiHybridService<T>> implements ILuOptionOperator<T>, ILuOnOpenSubscriber {
 	override readonly outOptions$ = new BehaviorSubject<T[]>([]);
 
+	/**
+	 * Standard of the Lucca API to query: `v3` or `v4`
+	 */
 	readonly standard = input<'v3' | 'v4'>();
 
+	/**
+	 * Url of the API to query
+	 */
 	readonly api = input<string>();
 
+	/**
+	 * Fields to retrieve, only works with standard="v3"
+	 */
 	readonly fields = input<string>();
 
+	/**
+	 * Filters added to the query string of the API call
+	 */
 	readonly filters = input<string[]>();
 
+	/**
+	 * Sort order, only works with standard="v3", otherwise use sort
+	 */
 	readonly orderBy = input<string>();
 
+	/**
+	 * Sort order, only works with standard="v4", otherwise use orderBy
+	 */
 	readonly sort = input<string>();
 
 	constructor(

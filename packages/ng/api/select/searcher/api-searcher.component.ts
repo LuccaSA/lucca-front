@@ -34,18 +34,39 @@ import { ALuApiOptionPagedSearcher, ALuApiOptionSearcher } from './api-searcher.
 export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiItem = import('../../api.model').ILuApiItem> extends ALuApiOptionSearcher<T, LuApiHybridService<T>> implements OnInit {
 	readonly searchInput = viewChild.required<ElementRef<HTMLElement>>('searchInput');
 
+	/**
+	 * Standard of the Lucca API to query: `v3` or `v4`
+	 */
 	readonly standard = input<'v3' | 'v4'>();
 
+	/**
+	 * Url of the API to query
+	 */
 	readonly api = input<string>();
 
+	/**
+	 * Fields to retrieve, only works with standard="v3"
+	 */
 	readonly fields = input<string>();
 
+	/**
+	 * Filters added to the query string of the API call
+	 */
 	readonly filters = input<string[]>();
 
+	/**
+	 * Sort order, only works with standard="v3", otherwise use sort
+	 */
 	readonly orderBy = input<string>();
 
+	/**
+	 * Sort order, only works with standard="v4", otherwise use orderBy
+	 */
 	readonly sort = input<string>();
 
+	/**
+	 * Debounce time (in ms) applied to the search input
+	 */
 	readonly debounceTime = input<number>(250);
 
 	clueControl: FormControl;
@@ -119,18 +140,39 @@ export class LuApiPagedSearcherComponent<T extends import('../../api.model').ILu
 {
 	readonly searchInput = viewChild.required<ElementRef<HTMLElement>>('searchInput');
 
+	/**
+	 * Standard of the Lucca API to query: `v3` or `v4`
+	 */
 	readonly standard = input<'v3' | 'v4'>();
 
+	/**
+	 * Url of the API to query
+	 */
 	readonly api = input<string>();
 
+	/**
+	 * Fields to retrieve, only works with standard="v3"
+	 */
 	readonly fields = input<string>();
 
+	/**
+	 * Filters added to the query string of the API call
+	 */
 	readonly filters = input<string[]>();
 
+	/**
+	 * Sort order, only works with standard="v3", otherwise use sort
+	 */
 	readonly orderBy = input<string>();
 
+	/**
+	 * Sort order, only works with standard="v4", otherwise use orderBy
+	 */
 	readonly sort = input<string>();
 
+	/**
+	 * Debounce time (in ms) applied to the search input
+	 */
 	readonly debounceTime = input<number>(250);
 
 	clueControl: FormControl;

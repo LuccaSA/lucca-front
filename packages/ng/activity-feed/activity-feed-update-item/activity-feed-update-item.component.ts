@@ -19,6 +19,9 @@ export class ActivityFeedUpdateItemComponent {
 
 	readonly intl = input(...intlInputOptions(LU_ACTIVITY_FEED_TRANSLATIONS));
 
+	/**
+	 * Label of the updated value
+	 */
 	readonly label = input.required<string>();
 
 	readonly colonDisplay = computed(() => {

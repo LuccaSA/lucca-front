@@ -11,7 +11,7 @@ interface ArrowBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Box/HTML&CSS/Arrow/Angular',
+	title: 'Documentation/Structure/Box/Angular/Arrow',
 	decorators: [
 		moduleMetadata({
 			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BoxComponent, BrowserAnimationsModule],
@@ -61,7 +61,7 @@ function getTemplate(args: ArrowBasicStory): string {
 		<input type="checkbox" class="switchField-input" id="ID" />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
-	<div class="form-field-arrow${neutral}"></div>
+	<div class="form-field-arrow${modNeutral}"></div>
 </div>
 <lu-box withArrow${neutral}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</lu-box>`;
 	}

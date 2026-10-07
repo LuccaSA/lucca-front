@@ -31,8 +31,42 @@ class ApiSelectStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Api/Select',
+	title: 'Documentation/Forms/Api/Select/Angular/Basic',
 	component: ApiSelectStory,
+	// Documentation only: the inputs are set in the template of the wrapper component, they can't be changed from the Controls panel.
+	argTypes: {
+		standard: {
+			options: ['v3', 'v4'],
+			control: false,
+			description: 'Standard de l’API Lucca interrogée.',
+			table: { category: 'inputs', type: { summary: "'v3' | 'v4'" }, defaultValue: { summary: 'v3' } },
+		},
+		api: {
+			control: false,
+			description: 'URL de l’API interrogée.',
+			table: { category: 'inputs', type: { summary: 'string' } },
+		},
+		fields: {
+			control: false,
+			description: 'Champs récupérés. Fonctionne uniquement avec <code>standard="v3"</code>.',
+			table: { category: 'inputs', type: { summary: 'string' } },
+		},
+		filters: {
+			control: false,
+			description: 'Filtres ajoutés à la requête envoyée à l’API.',
+			table: { category: 'inputs', type: { summary: 'string[]' } },
+		},
+		orderBy: {
+			control: false,
+			description: 'Tri des résultats. Fonctionne uniquement avec <code>standard="v3"</code>, sinon utiliser <code>sort</code>.',
+			table: { category: 'inputs', type: { summary: 'string' } },
+		},
+		sort: {
+			control: false,
+			description: 'Tri des résultats. Fonctionne uniquement avec <code>standard="v4"</code>, sinon utiliser <code>orderBy</code>.',
+			table: { category: 'inputs', type: { summary: 'string' } },
+		},
+	},
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
@@ -72,8 +106,8 @@ export const Basic: StoryObj<ApiSelectStory> = {
 	render: Template,
 };
 Basic.parameters = {
-	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: [] },
+	// Hide the properties of the wrapper component, only the documented inputs of lu-api-select are listed
+	controls: { include: ['standard', 'api', 'fields', 'filters', 'orderBy', 'sort'] },
 	docs: {
 		source: {
 			language: 'ts',

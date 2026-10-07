@@ -6,7 +6,7 @@ import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export default {
-	title: 'Documentation/Feedback/Callout Disclosure/Angular',
+	title: 'Documentation/Feedback/Callout Disclosure/Angular/Basic',
 	component: CalloutDisclosureComponent,
 	decorators: [
 		moduleMetadata({
@@ -21,7 +21,7 @@ export default {
 			props: {
 				...args,
 			},
-			template: `<lu-callout-disclosure ${paletteArg}${generateInputs(args, argTypes)} (openChange)="openChange($event)">
+			template: `<lu-callout-disclosure${paletteArg}${generateInputs(inputs, argTypes)} (openChange)="openChange($event)">
 		<ul lu-callout-feedback-list palette="neutral">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
@@ -81,6 +81,18 @@ export default {
 			description: 'Place le callout dans son état déplié.',
 			table: { category: 'inputs' },
 		},
+		feedbackListPalette: {
+			name: 'palette',
+			control: false,
+			description: 'Palette de la liste <code>ul[lu-callout-feedback-list]</code>. Par défaut, hérite de la palette du parent.',
+			table: { category: 'inputs (callout-feedback-list)', type: { summary: 'Palette' } },
+		},
+		feedbackListSize: {
+			name: 'size',
+			control: false,
+			description: 'Taille de la liste <code>ul[lu-callout-feedback-list]</code>. M par défaut.',
+			table: { category: 'inputs (callout-feedback-list)', type: { summary: 'CalloutSize' } },
+		},
 		openChange: {
 			description: "Événement déclenché lors du changement d'état déplié/replié du callout.",
 			action: 'openChange',
@@ -91,6 +103,7 @@ export default {
 } as Meta;
 
 export const Template: StoryObj<CalloutDisclosureComponent> = {
+	name: 'Basic',
 	args: {
 		heading: 'List title',
 		palette: 'none',

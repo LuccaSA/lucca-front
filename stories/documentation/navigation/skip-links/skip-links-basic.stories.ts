@@ -186,8 +186,19 @@ import { intlArgType } from '@/helpers/stories';
 class SkipLinksStory {}
 
 export default {
-	title: 'Documentation/Navigation/SkipLinks/Basic',
+	title: 'Documentation/Navigation/SkipLinks/Angular/Basic',
 	argTypes: {
+		luSkipLinkLabel: {
+			description: 'Libellé du lien d’évitement affiché dans `lu-skip-links`.',
+			control: false,
+			table: { category: 'inputs (luSkipLinkTarget)', type: { summary: 'string (required)' } },
+		},
+		luSkipLinkTarget: {
+			description:
+				'Id de l’élément cible. Vide par défaut : l’id existant de l’élément est utilisé, ou un id est généré s’il n’en a pas. Un id explicite (`luSkipLinkTarget="monId"`) écrase l’id existant de l’élément (avec un warning en console).',
+			control: false,
+			table: { category: 'inputs (luSkipLinkTarget)', type: { summary: 'string' }, defaultValue: { summary: "''" } },
+		},
 		intl: intlArgType(luSkipLinksTranslations, 'ILuSkipLinksLabel'),
 	},
 	component: SkipLinksStory,
@@ -196,9 +207,9 @@ export default {
 const Template = (props: SkipLinksStory) => ({ props });
 
 const code = `
-import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
+import { LuSkipLinksComponent, SkipLinkDirective } from '@lucca-front/ng/a11y';
 @Component({
-	imports: [LuSkipLinksComponent],
+	imports: [LuSkipLinksComponent, SkipLinkDirective],
 	selector: 'app-component',
 	template: \`
 <!-- Place this at the very top of the body (before the banner) -->

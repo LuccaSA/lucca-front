@@ -41,13 +41,28 @@ export class ApprobationInboxListComponent {
 
 	readonly titleId = `approbationInboxListTitle-${generateId()}`;
 
+	/**
+	 * Title of the list, defaults to the translated label
+	 */
 	readonly label = input<PortalContent>(getIntl(LU_APPROBATION_INBOX_LIST_TRANSLATIONS).label);
 
+	/**
+	 * Enables multiple selection of the items
+	 */
 	readonly selectable = input(false, { transform: booleanAttribute });
+	/**
+	 * Detail component associated with the list, displayed in a dialog when an item is opened below the M breakpoint
+	 */
 	readonly detailsComponent = input.required<ApprobationInboxDetailComponent>();
 
+	/**
+	 * Illustration displayed when the list is empty
+	 */
 	readonly emptyIllustration = input<BubbleIllustration | string>('magnifyingGlass');
 
+	/**
+	 * Displays a reset button when the list is empty
+	 */
 	readonly emptyResetButton = input(false, { transform: booleanAttribute });
 
 	readonly submitEvent = output<void>();

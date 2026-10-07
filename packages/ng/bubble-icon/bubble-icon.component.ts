@@ -24,13 +24,28 @@ import { BubbleIconSize } from './bubble-icon.type';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BubbleIconComponent {
+	/**
+	 * Glyph of the icon
+	 */
 	readonly icon = input.required<LuccaIcon>();
+	/**
+	 * Alternative text of the icon, read by screen readers
+	 */
 	readonly alt = input<string | null>(null);
+	/**
+	 * Size of the component
+	 */
 	readonly size = input<BubbleIconSize>('M');
 
+	/**
+	 * Color palette applied to the component
+	 */
 	readonly palette = input<Palette | DecorativePalette | ProductPalette>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 
+	/**
+	 * Direction of the bubble, random by default
+	 */
 	readonly bubbleDirection = input<'top' | 'bottom' | 'left' | 'right' | 'random'>('random');
 
 	readonly randomNumber = signal<number>(Math.floor(Math.random() * 4) + 1);

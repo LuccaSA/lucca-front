@@ -39,7 +39,13 @@ export class ApprobationInboxItemComponent implements OnInit {
 	private readonly destroyRef = inject(DestroyRef);
 
 	readonly selectable = computed(() => this.list?.selectable() ?? false);
+	/**
+	 * Vertically centers the content of the item
+	 */
 	readonly center = input(false, { transform: booleanAttribute });
+	/**
+	 * Whether the item is checked, when the list is selectable
+	 */
 	readonly checked = model(false);
 
 	private readonly titleSlot = viewChild<ElementRef<HTMLElement>>('titleSlot');

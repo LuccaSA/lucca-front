@@ -43,6 +43,9 @@ export class CalloutPopoverComponent {
 	 */
 	readonly headingHiddenIfSingleItem = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Defines how the popover is opened
+	 */
 	readonly popoverTrigger = input<'click' | 'click+hover' | 'hover+focus'>('click+hover');
 
 	/**

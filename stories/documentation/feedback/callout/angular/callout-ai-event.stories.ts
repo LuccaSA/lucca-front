@@ -12,7 +12,7 @@ export default {
 		}),
 	],
 	render: (args: CalloutComponent & { description: string; actions: boolean }, context) => {
-		const { description, actions, iconAlt, ...inputs } = args;
+		const { description, actions, ...inputs } = args;
 
 		const actionsTemplate = actions
 			? `<lu-callout-actions inline>
@@ -21,7 +21,7 @@ export default {
 			: ``;
 
 		return {
-			template: `<lu-callout AI iconAlt="${iconAlt}"${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-callout AI${generateInputs(inputs, context.argTypes)}>
 	<p>${description}</p>
 	${actionsTemplate}
 </lu-callout>`,
@@ -33,7 +33,20 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie l’icône IA du callout.',
 			table: { category: 'inputs' },
+		},
+		iconAlt: {
+			description: 'Information restituée par le lecteur d’écran pour l’icône.',
+			table: { category: 'inputs' },
+		},
+		description: {
+			description: 'Contenu du callout.',
+			table: { category: 'story' },
+		},
+		actions: {
+			description: 'Ajoute une action (<code>lu-callout-actions</code>) sur la droite du callout.',
+			table: { category: 'story' },
 		},
 		intl: intlArgType(luCalloutTranslations, 'LuCalloutLabel'),
 	},

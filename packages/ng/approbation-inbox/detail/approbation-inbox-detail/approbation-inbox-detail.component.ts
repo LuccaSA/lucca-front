@@ -21,6 +21,9 @@ import { ApprobationInboxHeaderComponent } from '../approbation-inbox-detail-hea
 export class ApprobationInboxDetailComponent {
 	protected readonly dialogRef = inject(LuDialogRef, { optional: true });
 
+	/**
+	 * Adapts the display to a usage inside a dialog, defaults to true when the component is rendered in a dialog
+	 */
 	readonly insideDialog = input(this.dialogRef !== null, { transform: booleanAttribute });
 
 	readonly headerRef = contentChild(ApprobationInboxHeaderComponent);

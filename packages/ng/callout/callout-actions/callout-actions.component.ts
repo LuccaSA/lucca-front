@@ -12,5 +12,8 @@ import { luBooleanAttribute } from '@lucca-front/ng/core';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalloutActionsComponent {
+	/**
+	 * Moves the actions to the right of the callout
+	 */
 	readonly inline = input(false, { transform: luBooleanAttribute });
 }

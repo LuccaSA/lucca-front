@@ -23,6 +23,9 @@ let nextId = 0;
 export class BreadcrumbsComponent {
 	readonly intl = input(...intlInputOptions(LU_BREADCRUMBS_TRANSLATIONS));
 
+	/**
+	 * Disables the compact display, applied by default when there are 2 links or less
+	 */
 	readonly disableCompact = input(false, { transform: luBooleanAttribute });
 
 	readonly links = contentChildren(BreadcrumbsLinkDirective);

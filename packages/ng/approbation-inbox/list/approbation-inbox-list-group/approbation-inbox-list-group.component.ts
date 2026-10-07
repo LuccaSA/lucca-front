@@ -26,8 +26,14 @@ export class ApprobationInboxGroupComponent {
 
 	readonly selectable = computed(() => this.list?.selectable() ?? false);
 
+	/**
+	 * Title of the group, also used in the hidden label of its selection
+	 */
 	readonly label = input.required<string>();
 
+	/**
+	 * Whether the group is expanded
+	 */
 	readonly expanded = model(true);
 
 	readonly items = contentChildren(ApprobationInboxItemComponent);

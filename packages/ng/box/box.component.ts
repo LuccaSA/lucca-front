@@ -21,12 +21,24 @@ import { LU_BOX_TRANSLATIONS } from './box.translate';
 export class BoxComponent {
 	readonly intl = input(...intlInputOptions(LU_BOX_TRANSLATIONS));
 
+	/**
+	 * Applies the toggle style (`mod-toggle`, deprecated in the SCSS framework), prefer `withArrow`
+	 */
 	readonly toggle = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Applies a neutral (grey) background
+	 */
 	readonly neutral = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Adds a close button
+	 */
 	readonly killable = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Adds an arrow pointing to the field placed above the box
+	 */
 	readonly withArrow = input(false, { transform: luBooleanAttribute });
 
 	readonly killed = output();

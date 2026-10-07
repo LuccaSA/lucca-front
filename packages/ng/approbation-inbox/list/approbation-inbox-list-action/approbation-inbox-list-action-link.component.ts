@@ -19,6 +19,9 @@ import { APPROBATION_INBOX_LIST_INSTANCE } from '../approbation-inbox-list/token
 })
 export class ApprobationInboxLinkComponent {
 	private readonly listInstance = inject(APPROBATION_INBOX_LIST_INSTANCE);
+	/**
+	 * Marks the link as the item currently displayed
+	 */
 	readonly current = input(false, { transform: booleanAttribute });
 	readonly dialogService = inject(LuDialogService);
 

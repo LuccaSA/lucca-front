@@ -124,20 +124,21 @@ export default {
 			table: { category: 'inputs' },
 		},
 		actions: {
-			description: '[v20.3] Ajoute une liste d’actions sous la description.',
-			table: { category: 'inputs' },
+			description: '[v20.3] Ajoute une liste d’actions sous la description (<code>lu-callout-actions</code>).',
+			table: { category: 'story' },
 		},
 		actionsInline: {
-			name: '↳ actionInline',
+			name: '↳ inline',
 			if: { arg: 'actions', truthy: true },
 			description: '[v20.3] Déplace les actions sur la droite du callout.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (callout-actions)' },
 		},
 		intl: intlArgType(luCalloutTranslations, 'LuCalloutLabel'),
 	},
 } as Meta;
 
 export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsInline: boolean }> = {
+	name: 'Basic',
 	args: {
 		heading: '',
 		palette: 'none',

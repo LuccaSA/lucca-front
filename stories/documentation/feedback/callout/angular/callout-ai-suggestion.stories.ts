@@ -26,7 +26,7 @@ export default {
 		}),
 	],
 	render: (args: CalloutComponent & { description: string }, context) => {
-		const { description, iconAlt, ...inputs } = args;
+		const { description, ...inputs } = args;
 
 		return {
 			props: { example: 'Formulaires : utiliser le bon composant pour le bon besoin' },
@@ -34,7 +34,7 @@ export default {
 	<lu-form-field label="Intitulé" class="suggestion-form-field">
 		<lu-text-input required type="text" [(ngModel)]="example" />
 	</lu-form-field>
-	<lu-callout AI iconAlt="${iconAlt}"${generateInputs(inputs, context.argTypes)} class="suggestion-callout">
+	<lu-callout AI${generateInputs(inputs, context.argTypes)} class="suggestion-callout">
 		<div class="suggestion-callout-text">
 			<p>${description}</p>
 		</div>
@@ -52,7 +52,16 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie l’icône IA du callout.',
 			table: { category: 'inputs' },
+		},
+		iconAlt: {
+			description: 'Information restituée par le lecteur d’écran pour l’icône.',
+			table: { category: 'inputs' },
+		},
+		description: {
+			description: 'Contenu du callout.',
+			table: { category: 'story' },
 		},
 		intl: intlArgType(luCalloutTranslations, 'LuCalloutLabel'),
 	},

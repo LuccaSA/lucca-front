@@ -24,9 +24,11 @@ export const Basic: StoryObj<ButtonComponent> = {
 				type: 'select',
 			},
 			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
+			table: { category: 'inputs', defaultValue: { summary: '' } },
 		},
 		block: {
 			description: 'Applique <code>display: block</code>.',
+			table: { category: 'inputs' },
 		},
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
@@ -35,6 +37,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs', defaultValue: { summary: 'none' } },
 		},
 		state: {
 			description: 'Modifie l’état du bouton.',
@@ -42,16 +45,25 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs', defaultValue: { summary: 'default' } },
 		},
 		critical: {
 			description:
 				"[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>. Dans le cas d’un bouton toujours affiché en rouge, préférez l’usage de <code>palette='critical'</code>.",
+			table: { category: 'inputs' },
 		},
 		disclosure: {
 			description: 'Indique la présence d’un menu.',
+			table: { category: 'inputs' },
 		},
 		delete: {
 			description: '[Deprecated] Remplacé par <code>critical</code>.',
+			table: { disable: true },
+		},
+		prButton: {
+			description: 'Alias de <code>luButton</code>, pour une utilisation avec le sélecteur <code>prButton</code>.',
+			control: false,
+			table: { category: 'inputs', type: { summary: 'ButtonType' } },
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
@@ -59,6 +71,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	args: {

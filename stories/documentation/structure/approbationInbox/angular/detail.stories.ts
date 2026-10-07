@@ -16,36 +16,44 @@ export default {
 			table: { category: 'inputs' },
 		},
 		label: {
-			description: 'Titre affiché dans l’en-tête du composant.',
-			table: { category: 'inputs' },
+			description: 'Titre affiché dans l’en-tête du composant. Requis.',
+			table: { category: 'inputs (approbation-inbox-detail-header)' },
 		},
 		illustration: {
 			description: 'Affiche une illustration au début de l’en-tête.',
+			table: { category: 'story' },
 		},
 		headerContent: {
 			description: 'Exemple d’informations complémentaires possibles sous le titre de l’en-tête.',
+			table: { category: 'story' },
 		},
 		delegatedBy: {
-			description: 'Nom de la personne à l’origine de la délégation si elle à lieu.',
-			table: { category: 'inputs' },
+			description: 'Nom de la personne à l’origine de la délégation si elle a lieu.',
+			table: { category: 'inputs (approbation-inbox-detail-header)' },
 		},
 		moreActions: {
 			description: 'Affiche un bouton d’actions tertaires sous forme de menu déroulant.',
+			table: { category: 'story' },
 		},
 		callout: {
 			description: 'Affiche un callout d’avertissement dans le contenu principal.',
+			table: { category: 'story' },
 		},
 		calloutLabel: {
 			name: '↳ calloutLabel',
 			description: 'Texte affiché dans le callout.',
 			if: { arg: 'callout', truthy: true },
+			table: { category: 'story' },
 		},
 		blockLabel: {
-			description: 'Titre des blocs de contenu supplémentaires.',
+			name: 'label',
+			description: 'Titre des blocs de contenu supplémentaires. Requis.',
+			table: { category: 'inputs (approbation-inbox-detail-main-block)' },
 		},
 		blockCount: {
 			description: 'Nombre de blocs affichés dans le contenu principal.',
 			control: { type: 'range', min: 0, max: 5 },
+			table: { category: 'story' },
 		},
 	},
 	decorators: [

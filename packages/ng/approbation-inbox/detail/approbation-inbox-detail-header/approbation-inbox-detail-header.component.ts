@@ -21,8 +21,14 @@ export class ApprobationInboxHeaderComponent {
 	protected readonly dialogRef = inject(LuDialogRef, { optional: true });
 	protected readonly intl = getIntl(LU_APPROBATION_INBOX_DETAIL_HEADER_TRANSLATIONS);
 
+	/**
+	 * Title displayed in the header
+	 */
 	readonly label = input.required<string>();
 
+	/**
+	 * Name of the person who delegated the approval, if any
+	 */
 	readonly delegatedBy = input<string | null>(null);
 
 	readonly actions = viewChild<TemplateRef<unknown>>('actionsTpl');
