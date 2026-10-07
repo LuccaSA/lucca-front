@@ -31,30 +31,69 @@ export class NumberFormatInputComponent implements AfterViewInit {
 		this.ngControl?.valueChanges?.pipe(takeUntilDestroyed(this.#destroyRef), startWith(this.ngControl.value)).subscribe((value) => this.#suffixPrefixValue.set(value as number));
 	}
 
+	/**
+	 * Formatting style of the number (`Intl.NumberFormat` style), defaults to 'decimal'
+	 */
 	readonly formatStyle = input<NumberFormatStyle>('decimal');
 
+	/**
+	 * Computes the prefix and suffix from the number format (e.g. currency symbol, unit) instead of using `prefix` and `suffix`
+	 */
 	readonly useAutoPrefixSuffix = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Content or icon displayed before the input, ignored when `useAutoPrefixSuffix` is true
+	 */
 	readonly prefix = input<TextInputAddon | undefined>(undefined);
 
+	/**
+	 * Content or icon displayed after the input, ignored when `useAutoPrefixSuffix` is true
+	 */
 	readonly suffix = input<TextInputAddon | undefined>(undefined);
 
+	/**
+	 * ISO 4217 currency code (e.g. 'EUR'), used when `formatStyle` is 'currency'
+	 */
 	readonly currency = input<string | undefined>(undefined);
 
+	/**
+	 * How the currency is displayed, used when `formatStyle` is 'currency'
+	 */
 	readonly currencyDisplay = input<NumberFormatCurrencyDisplay | undefined>(undefined);
 
+	/**
+	 * Unit of the value, used when `formatStyle` is 'unit'
+	 */
 	readonly unit = input<NumberFormatUnit | undefined>(undefined);
 
+	/**
+	 * How the unit is displayed, used when `formatStyle` is 'unit'
+	 */
 	readonly unitDisplay = input<NumberFormatUnitDisplay | undefined>(undefined);
 
+	/**
+	 * Minimum value, the entered value is clamped to it
+	 */
 	readonly min = input(undefined, { transform: luOptionalNumberAttribute });
 
+	/**
+	 * Maximum value, the entered value is clamped to it
+	 */
 	readonly max = input(undefined, { transform: luOptionalNumberAttribute });
 
+	/**
+	 * Placeholder of the input
+	 */
 	readonly placeholder = input<string>('');
 
+	/**
+	 * Displays a button to clear the value when the input is not empty
+	 */
 	readonly hasClearer = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Aligns the value to the right
+	 */
 	readonly valueAlignRight = input(false, { transform: luBooleanAttribute });
 
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
@@ -105,6 +144,9 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	readonly formattedValue = computed(() => this.#numberFormat().getBlurFormat(this.#suffixPrefixValue()));
 
+	/**
+	 * Overrides the default translations (partial overrides are merged with the defaults)
+	 */
 	readonly intl = input(...intlInputOptions(LU_NUMBERFORMATFIELD_TRANSLATIONS));
 
 	clearValue(): void {

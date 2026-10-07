@@ -38,10 +38,13 @@ export class CheckboxInputComponent implements FilterPillInputComponent, OnInit 
 	readonly formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 	readonly intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
 
+	/**
+	 * Displays the checkbox with the checklist style (`mod-checklist`)
+	 */
 	readonly checklist = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Should set aria-checked='mixed' attribute ?
+	 * Displays the checkbox in an indeterminate (mixed) state by setting aria-checked='mixed' on the input
 	 */
 	readonly mixed = input(false, { transform: luBooleanAttribute });
 

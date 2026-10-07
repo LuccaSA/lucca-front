@@ -33,14 +33,29 @@ export class RadioGroupInputComponent {
 
 	ngControl = injectNgControl();
 
+	/**
+	 * Size of the radio buttons in the group
+	 */
 	readonly size = input<RadioGroupInputSize>();
 
+	/**
+	 * Displays each radio button of the group inside a frame
+	 */
 	readonly framed = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Centers the content of the frames, only applies when `framed` is true
+	 */
 	readonly framedCenter = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Size of the frames, only applies when `framed` is true
+	 */
 	readonly framedSize = input<RadioGroupInputFramedSize | null>(null);
 
+	/**
+	 * Displays an arrow below each radio button, in the given style
+	 */
 	readonly arrow = input<RadioGroupInputArrow>();
 
 	name = `radio-group-${nextId++}`;

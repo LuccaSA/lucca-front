@@ -20,7 +20,7 @@ export default {
 			type: 'string',
 			description: 'Affiche une icône (?) associée à une info-bulle. ',
 			if: { arg: 'hiddenLabel', truthy: false },
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
@@ -28,11 +28,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessage: {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -40,19 +40,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)', defaultValue: { summary: 'null' } },
 		},
 		label: {
 			description: 'Modifie le label de l’input.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		hasClearer: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli. Il est alors conseillé de masquer les boutons d’incrémentation (noSpinButtons).',
@@ -60,23 +60,36 @@ export default {
 		},
 		disabled: {
 			description: 'Désactive le champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
 			table: { category: 'inputs' },
 		},
 		step: {
+			control: { type: 'number' },
 			description: 'Modifie le pas d’incrémentation.',
 			table: { category: 'inputs' },
 		},
 		min: {
+			control: { type: 'number' },
 			description: 'Définit une valeur minimale.',
 			table: { category: 'inputs' },
 		},
 		max: {
+			control: { type: 'number' },
 			description: 'Définit une valeur maximale.',
 			table: { category: 'inputs' },
+		},
+		prefix: {
+			control: { type: 'object' },
+			description: 'Ajoute un préfixe (texte ou icône) avant la valeur du champ. [TextInputAddon]',
+			table: { category: 'inputs', type: { summary: 'TextInputAddon' } },
+		},
+		suffix: {
+			control: { type: 'object' },
+			description: 'Ajoute un suffixe (texte ou icône) après la valeur du champ. [TextInputAddon]',
+			table: { category: 'inputs', type: { summary: 'TextInputAddon' } },
 		},
 		valueAlignRight: {
 			description: 'Aligne la valeur du champ à droite.',
@@ -92,10 +105,10 @@ export default {
 
 export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
-		const model = useStoryModel(1000);
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
+		const model = useStoryModel(100);
 		return {
-			props: { model },
+			props: { model, prefix, suffix },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -107,7 +120,7 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 				},
 				argTypes,
 			)}>
-	<lu-number-input [(ngModel)]="model.example"${generateInputs(inputArgs, argTypes)} />
+	<lu-number-input [(ngModel)]="model.example"${prefix ? ' [prefix]="prefix"' : ''}${suffix ? ' [suffix]="suffix"' : ''}${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
@@ -122,7 +135,7 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 		hasClearer: true,
 		disabled: false,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		step: 1,
@@ -141,11 +154,11 @@ export const WithPrefixAndSuffix: StoryObj<
 > = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
-		const model = useStoryModel(1000);
+		const model = useStoryModel(100);
 		return {
 			props: {
-				prefix: args.prefix,
-				suffix: args.suffix,
+				prefix,
+				suffix,
 				model,
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
@@ -184,7 +197,7 @@ export const WithPrefixAndSuffix: StoryObj<
 			ariaLabel: 'euros par jour',
 		},
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		step: 1,
 		min: 0,
 		max: 999,
