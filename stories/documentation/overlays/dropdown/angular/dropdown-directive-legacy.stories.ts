@@ -44,5 +44,11 @@ export const Directive: StoryObj = {
 };
 
 Directive.parameters = {
+	docs: {
+		description: {
+			story:
+				'**Déprécié** : `LuDropdownModule` et le composant `<lu-dropdown>` sont dépréciés. Utiliser la directive `[luDropdown]` avec `lu-dropdown-menu`, `lu-dropdown-item` et `[lu-dropdown-action]` (voir la story Angular/Directive).',
+		},
+	},
 	controls: { include: [] },
 };

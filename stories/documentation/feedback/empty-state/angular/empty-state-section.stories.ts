@@ -50,7 +50,7 @@ export default {
 				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
 			},
 			description: 'Définit le niveau sémantique du titre.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '3' } },
 		},
 		heading: {
 			description: 'Titre de l’empty state.',

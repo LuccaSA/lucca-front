@@ -80,12 +80,24 @@ export class EmptyStatePageComponent {
 	 */
 	readonly illustration = input<PortalContent>();
 
+	/**
+	 * Title of the empty state page.
+	 */
 	readonly heading = input<string>();
 
+	/**
+	 * Description of the empty state page.
+	 */
 	readonly description = input<PortalContent>();
 
+	/**
+	 * Aria level of the title. Defaults to 1.
+	 */
 	readonly hx = input(1, { transform: luNumberAttribute<Hx> });
 
+	/**
+	 * Visual level of the title, independently from its aria level. Defaults to 1.
+	 */
 	readonly hxStyle = input(1, { transform: luNumberAttribute<HxStyle> });
 
 	public isStringPortalContent(message: PortalContent): message is string {

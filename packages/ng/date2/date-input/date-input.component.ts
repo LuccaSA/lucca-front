@@ -79,12 +79,27 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	#luClass = inject(LuClass);
 
+	/**
+	 * Value of the `autocomplete` attribute of the native input. Defaults to `off`.
+	 */
 	readonly autocomplete = input<AutoFill>('off');
 
+	/**
+	 * Placeholder of the field. Defaults to the localized date format.
+	 */
 	readonly placeholder = input<string>();
 
+	/**
+	 * Prevents the selection of the days of the previous and next months displayed in the current month.
+	 */
 	readonly disableOverflow = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Hides the days of the previous and next months displayed in the current month.
+	 */
 	readonly hideOverflow = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Lets the field adapt its width to its content instead of using a fixed width.
+	 */
 	readonly widthAuto = input(false, { transform: luBooleanAttribute });
 
 	readonly filterPillDisabled = signal(false);

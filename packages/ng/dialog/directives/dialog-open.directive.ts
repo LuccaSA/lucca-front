@@ -14,8 +14,14 @@ import { LuDialogConfig } from '../model';
 export class DialogOpenDirective {
 	#dialogService = inject(LuDialogService);
 
+	/**
+	 * Template to display in the dialog opened on click.
+	 */
 	readonly dialog = input.required<TemplateRef<void>>({ alias: 'luDialogOpen' });
 
+	/**
+	 * Configuration of the dialog opened on click (size, mode, alert...).
+	 */
 	readonly luDialogConfig = input<LuDialogConfig<unknown>>();
 
 	click() {

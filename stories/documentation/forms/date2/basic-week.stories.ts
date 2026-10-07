@@ -15,14 +15,21 @@ export default {
 		}),
 	],
 	argTypes: {
+		dateClicked: {
+			description: 'Événement déclenché lors du clic sur une date, avec la date en paramètre.',
+			action: 'dateClicked',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'Date' } },
+		},
 		intl: intlArgType(luDate2Translations, 'Date2Translate'),
 	},
-	render: (args, { argTypes }) => {
+	render: (args) => {
 		return {
 			props: {
+				...args,
 				currentMonth: new Date(),
 			},
-			template: `<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [date]="currentMonth" mode="week" (dateClicked)="selected($event)" />`,
+			template: `<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [date]="currentMonth" mode="week" (dateClicked)="dateClicked($event)" />`,
 		};
 	},
 } as Meta;

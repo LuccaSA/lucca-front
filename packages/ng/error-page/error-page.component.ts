@@ -14,7 +14,13 @@ import { ErrorPageIllustration } from './error-page.model';
 	},
 })
 export class ErrorPageComponent {
+	/**
+	 * Title of the error page.
+	 */
 	readonly heading = input.required<string>();
+	/**
+	 * Illustration displayed on the error page.
+	 */
 	readonly illustration = input.required<ErrorPageIllustration>();
 
 	readonly illustrationSrc = computed(() => {

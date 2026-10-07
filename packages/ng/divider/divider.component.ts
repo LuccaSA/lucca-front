@@ -21,15 +21,17 @@ export class DividerComponent implements OnChanges {
 	readonly content = viewChild<ElementRef>('content');
 
 	/**
-	 * Allows rendering the Divider as a native separator
-	 * (Any text content it may have will no longer be rendered)
+	 * Adds `role="separator"` to the divider so it is announced as a separator by assistive technologies
 	 */
 	readonly separatorRole = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Displays the divider vertically.
+	 */
 	readonly vertical = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Which size should the chip be? Defaults or small
+	 * Which size should the divider be? Defaults to the standard size (M)
 	 */
 	readonly size = input<DividerSize | null>(null);
 

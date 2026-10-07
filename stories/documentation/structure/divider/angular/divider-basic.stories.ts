@@ -25,20 +25,22 @@ export default {
 			control: {
 				type: 'text',
 			},
-			table: { category: 'inputs' },
+			description: 'Contenu textuel projeté dans le séparateur.',
+			table: { category: 'story' },
 		},
 		size: {
 			options: setStoryOptions(DIVIDER_SIZE),
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du séparateur.',
 			table: { category: 'inputs' },
 		},
 		separatorRole: {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Permet de restituer Divider comme un séparateur natif (hr). Son éventuel contenu textuel ne sera alors plus restitué.',
+			description: 'Ajoute `role="separator"` au composant pour qu’il soit restitué comme un séparateur par les technologies d’assistance.',
 			table: { category: 'inputs' },
 		},
 		button: {
@@ -46,18 +48,21 @@ export default {
 				type: 'boolean',
 			},
 			if: { arg: 'icon', truthy: false },
-			table: { category: 'inputs' },
+			description: 'Projette un bouton dans le séparateur.',
+			table: { category: 'story' },
 		},
 		icon: {
 			control: {
 				type: 'boolean',
 			},
-			table: { category: 'inputs' },
+			description: 'Projette une icône dans le séparateur.',
+			table: { category: 'story' },
 		},
 		vertical: {
 			control: {
 				type: 'boolean',
 			},
+			description: 'Affiche le séparateur verticalement.',
 			table: { category: 'inputs' },
 		},
 	},
