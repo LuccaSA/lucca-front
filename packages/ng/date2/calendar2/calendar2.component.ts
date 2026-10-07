@@ -41,6 +41,7 @@ import { Calendar2CellDirective } from './calendar2-cell.directive';
 import { CALENDAR_CELLS, CALENDAR_DISPLAY_MODE, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
+import { OpenDateRange } from './open-date-range';
 
 const MODE_HIERARCHY: Array<CalendarMode | null> = ['day', 'month', 'year', null];
 const WEEK_MODE_HIERARCHY: Array<CalendarMode | null> = ['week', 'month', 'year', null];
@@ -464,7 +465,9 @@ export class Calendar2Component implements OnInit {
 	}
 
 	getRangeInfo(date: Date, scope: CalendarMode | null, isOverflow = false) {
-		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
+		// Ranges given by the date range input can be open on one side, even if the public input type does not say so yet
+		const ranges: readonly OpenDateRange[] = this.ranges();
+		const range: OpenDateRange | undefined = ranges.find((range) => {
 			const isSameScope = (range.scope || 'day') === scope;
 			if (isSameScope) {
 				if (range.start && range.end) {

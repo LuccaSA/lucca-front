@@ -35,6 +35,7 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange, DateRangeInput } from '../calendar2/date-range';
+import { OpenDateRange } from '../calendar2/open-date-range';
 import { compareCalendarPeriods, getDateRangeAnchor, startOfPeriod, transformDateRangeInputToDateRange, transformDateRangeToDateRangeInput } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
 
@@ -103,10 +104,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	readonly endUserTextInput = signal('ɵ');
 
 	// CVA stuff
-	#onChange?: (value: DateRange | null) => void;
+	#onChange?: (value: OpenDateRange | null) => void;
 
-	readonly initialValue = signal<DateRange | null | undefined>(undefined);
-	readonly selectedRange = signal<DateRange | null>(null);
+	readonly initialValue = signal<OpenDateRange | null | undefined>(undefined);
+	readonly selectedRange = signal<OpenDateRange | null>(null);
 
 	readonly dateHovered = signal<Date | null>(null);
 
@@ -182,7 +183,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	readonly calendarRanges = computed(() => {
 		const selectedRange = this.selectedRange();
 		if (selectedRange) {
-			return [selectedRange, ...this.ranges()];
+			// The calendar handles ranges open on one side, but its public input type still requires a start date
+			return [selectedRange as DateRange, ...this.ranges()];
 		}
 		return this.ranges();
 	});
@@ -405,7 +407,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		const isEditingEnd = this.editedField() === 1;
 		// The user picked the end date first and is now picking the start date
 		const isCompletingFromEnd = !isEditingEnd && !!selectedRange?.end && !selectedRange.start;
-		let newRange: DateRange;
+		let newRange: OpenDateRange;
 
 		if (isEditingEnd) {
 			// If end is before start, invert them
@@ -477,8 +479,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	registerOnChange(fn: (value: DateRange | DateRangeInput | null) => void): void {
-		this.#onChange = (dateRange: DateRange | null) => {
-			fn(dateRange && this.inDateISOFormat() ? transformDateRangeToDateRangeInput(dateRange) : dateRange);
+		this.#onChange = (dateRange: OpenDateRange | null) => {
+			const value = dateRange && this.inDateISOFormat() ? transformDateRangeToDateRangeInput(dateRange) : dateRange;
+			// The emitted range can be open on one side, but the public type still requires a start date
+			fn(value as DateRange | DateRangeInput | null);
 		};
 	}
 
@@ -550,7 +554,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				this.endUserTextInput.set(inputValue);
 				break;
 		}
-		let currentRange: DateRange = this.selectedRange() || {};
+		let currentRange: OpenDateRange = this.selectedRange() || {};
 		if (inputValue?.length > 0) {
 			const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
 			if (parsed.getFullYear() > 999) {

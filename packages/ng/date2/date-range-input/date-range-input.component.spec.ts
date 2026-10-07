@@ -6,6 +6,7 @@ import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, startOfDay } from 'date-fns';
 import { DateRange } from '../calendar2/date-range';
+import { OpenDateRange } from '../calendar2/open-date-range';
 import { getLocalizedDateFormat } from '../date-format';
 import { DateRangeInputComponent } from './date-range-input.component';
 import localeFr from '@angular/common/locales/fr';
@@ -76,7 +77,7 @@ describe('DateRangeInputComponent', () => {
 		return (fixture.nativeElement as HTMLElement).querySelector(`.mod-${field} > input`) as HTMLInputElement;
 	}
 
-	function createFilterPillHost(value: DateRange | null = null): ComponentFixture<FilterPillHostComponent> {
+	function createFilterPillHost(value: OpenDateRange | null = null): ComponentFixture<FilterPillHostComponent> {
 		TestBed.configureTestingModule({
 			imports: [FilterPillHostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -88,7 +89,8 @@ describe('DateRangeInputComponent', () => {
 		// input to register itself and provide the pill content
 		(fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>('.filterPill')!.click();
 		fixture.detectChanges();
-		fixture.componentInstance.formControl.setValue(value);
+		// The public type still requires a start date, consumers have to cast an open range the same way
+		fixture.componentInstance.formControl.setValue(value as DateRange | null);
 		fixture.detectChanges();
 
 		return fixture;
