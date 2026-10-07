@@ -21,8 +21,8 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie la taille de la checkbox.',
-			table: { category: 'inputs' },
+			description: 'Modifie la taille du champ.',
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -30,16 +30,16 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)', defaultValue: { summary: 'null' } },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		checklist: {
 			control: {
@@ -53,14 +53,14 @@ export default {
 				type: 'text',
 			},
 			description: 'Modifie le label de l’input.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		required: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		mixed: {
 			control: {
@@ -74,11 +74,11 @@ export default {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		presentation: {
 			description: 'Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 	},
 } as Meta;
@@ -116,7 +116,7 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 		required: true,
 		mixed: false,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		checklist: false,
 		presentation: false,
 	},

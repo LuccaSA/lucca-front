@@ -27,24 +27,26 @@ export default {
 				type: 'text',
 			},
 			description: 'Modifie le label de l’input.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		required: {
 			control: {
 				type: 'boolean',
 			},
 			description: 'Marque le champ comme obligatoire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		tag: {
-			type: 'string',
+			control: {
+				type: 'text',
+			},
 			description: 'Ajoute un tag après le label du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
@@ -52,14 +54,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -67,7 +69,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)', defaultValue: { summary: 'null' } },
 		},
 		type: {
 			options: ['text', 'email', 'password', 'url'],
@@ -75,7 +77,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'text' } },
 		},
 		valueAlignRight: {
 			description: 'Aligne la valeur du champ à droite.',
@@ -83,12 +85,14 @@ export default {
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		autocomplete: {
-			type: 'string',
+			control: {
+				type: 'text',
+			},
 			description: 'Modifie le comportement autocomplete du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'off' } },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
@@ -109,15 +113,15 @@ export default {
 		},
 		AI: {
 			description: '[v20.3] Indique que la valeur du champ a été générée par IA.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		iconAIalt: {
 			description: 'Information restituée par le lecteur d’écran.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		iconAItooltip: {
 			description: 'Ajoute une info-bulle à l’icône AI.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		hasClearer: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
@@ -129,11 +133,11 @@ export default {
 		},
 		searchIcon: {
 			description: 'Modifie l’icône (loupe par défaut)',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'searchMagnifyingGlass' } },
 		},
 		disabled: {
 			description: 'Désactive le champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		placeholder: {
 			description: 'Applique un placeholder au champ.',
@@ -141,19 +145,42 @@ export default {
 		},
 		counter: {
 			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limitée via formControl.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)', defaultValue: { summary: '0' } },
 		},
 		presentation: {
 			description: 'Affiche une version présentation, en lecture seule, de la valeur',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		minlength: {
-			description: 'Longueur minimale requise pour la valeur du champ.',
-			table: { category: 'inputs' },
+			control: { type: 'number' },
+			description: 'Longueur minimale requise pour la valeur du champ. 0 désactive la contrainte.',
+			table: { category: 'inputs', defaultValue: { summary: '0' } },
 		},
 		maxlength: {
-			description: 'Longueur maximale autorisée pour la valeur du champ.',
+			control: { type: 'number' },
+			description: 'Longueur maximale autorisée pour la valeur du champ. 0 désactive la contrainte.',
+			table: { category: 'inputs', defaultValue: { summary: '0' } },
+		},
+		mask: {
+			control: { type: 'text' },
+			description: 'Applique un masque de saisie au champ (ex. <code>SS00 AAAA 0000</code>).',
 			table: { category: 'inputs' },
+		},
+		prefix: {
+			control: { type: 'object' },
+			description: 'Ajoute un préfixe (texte ou icône) avant la valeur du champ. [TextInputAddon]',
+			table: { category: 'inputs', type: { summary: 'TextInputAddon' } },
+		},
+		suffix: {
+			control: { type: 'object' },
+			description: 'Ajoute un suffixe (texte ou icône) après la valeur du champ. [TextInputAddon]',
+			table: { category: 'inputs', type: { summary: 'TextInputAddon' } },
+		},
+		blur: {
+			description: 'Événement déclenché lorsque le champ perd le focus.',
+			action: 'blur',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'FocusEvent' } },
 		},
 		intl: intlArgType(luTextfieldTranslations, 'LuTextfieldLabel'),
 	},
@@ -161,12 +188,12 @@ export default {
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean; widthOnInput: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, widthOnInput, AI, iconAItooltip, iconAIalt, presentation, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, widthOnInput, AI, iconAItooltip, iconAIalt, presentation, prefix, suffix, blur, ...inputArgs } = args;
 		const model = useStoryModel('Example value');
 		const formFieldWidth = widthOnInput ? undefined : width;
 		const inputWidth = widthOnInput ? width : undefined;
 		return {
-			props: { model },
+			props: { model, prefix, suffix, onBlur: (event: FocusEvent) => blur?.(event) },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -186,8 +213,9 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 				argTypes,
 			)}>
 	<lu-text-input
-	${generateInputs({ ...inputArgs, width: inputWidth }, argTypes)}
-		[(ngModel)]="model.example">
+	${generateInputs({ ...inputArgs, width: inputWidth }, argTypes)}${prefix ? ' [prefix]="prefix"' : ''}${suffix ? ' [suffix]="suffix"' : ''}
+		[(ngModel)]="model.example"
+		(blur)="onBlur($event)">
 	</lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
@@ -203,15 +231,16 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		hasClearer: false,
 		hasSearchIcon: false,
 		autocomplete: '',
+		mask: '',
 		searchIcon: 'searchMagnifyingGlass',
 		disabled: false,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		type: 'text',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		tag: '',
-		counter: 0,
+		counter: null,
 		valueAlignRight: false,
 		width: '',
 		widthOnInput: false,
@@ -219,17 +248,21 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		presentation: false,
 		iconAIalt: 'Assistant IA',
 		iconAItooltip: 'Donnée remplie automatiquement',
-		minlength: 0,
-		maxlength: 0,
+		minlength: null,
+		maxlength: null,
 	},
 };
 
 export const IBANFormat: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
+	argTypes: {
+		prefix: HiddenArgType,
+		suffix: HiddenArgType,
+	},
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, blur, ...inputArgs } = args;
 		const model = useStoryModel('');
 		return {
-			props: { model },
+			props: { model, onBlur: (event: FocusEvent) => blur?.(event) },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -246,10 +279,11 @@ export const IBANFormat: StoryObj<TextInputComponent & { disabled: boolean; requ
 			)}>
 	<lu-text-input
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="model.example" mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99">
+		[(ngModel)]="model.example"
+		(blur)="onBlur($event)">
 	</lu-text-input>
 </lu-form-field>
-{{ model.example }}`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -262,15 +296,16 @@ export const IBANFormat: StoryObj<TextInputComponent & { disabled: boolean; requ
 		hasClearer: false,
 		hasSearchIcon: false,
 		autocomplete: '',
+		mask: 'SS00 AAAA 0000 0000 0000 9999 9999 9999 99',
 		searchIcon: 'searchMagnifyingGlass',
 		disabled: false,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		type: 'text',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		tag: '',
-		counter: 0,
+		counter: null,
 		valueAlignRight: false,
 	},
 };
@@ -281,12 +316,17 @@ export const PasswordVisiblity: StoryObj<
 		required: boolean;
 	} & FormFieldComponent
 > = {
+	argTypes: {
+		type: HiddenArgType,
+		prefix: HiddenArgType,
+		suffix: HiddenArgType,
+	},
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, blur, ...inputArgs } = args;
 		const model = useStoryModel('');
 		return {
-			props: { model },
-			template: `<lu-form-field ${generateInputs(
+			props: { model, onBlur: (event: FocusEvent) => blur?.(event) },
+			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -300,10 +340,11 @@ export const PasswordVisiblity: StoryObj<
 			)}>
 	<lu-text-input ${generateInputs(inputArgs, argTypes)}
 		type="password"
-		[(ngModel)]="model.example">
+		[(ngModel)]="model.example"
+		(blur)="onBlur($event)">
 	</lu-text-input>
 </lu-form-field>
-<pr-story-model-display>{{ model.example }}</pr-story-model-display>`,
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -318,10 +359,10 @@ export const PasswordVisiblity: StoryObj<
 		searchIcon: 'searchMagnifyingGlass',
 		disabled: false,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
-		counter: 0,
+		counter: null,
 	},
 };
 
@@ -332,13 +373,14 @@ export const WithPrefixAndSuffix: StoryObj<
 	} & FormFieldComponent
 > = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, presentation, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, presentation, blur, ...inputArgs } = args;
 		const model = useStoryModel('42');
 		return {
 			props: {
-				prefix: args.prefix,
-				suffix: args.suffix,
+				prefix,
+				suffix,
 				model,
+				onBlur: (event: FocusEvent) => blur?.(event),
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -357,7 +399,8 @@ export const WithPrefixAndSuffix: StoryObj<
 		${generateInputs(inputArgs, argTypes)}
 		[prefix]="prefix"
 		[suffix]="suffix"
-		[(ngModel)]="model.example">
+		[(ngModel)]="model.example"
+		(blur)="onBlur($event)">
 	</lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
@@ -386,8 +429,8 @@ export const WithPrefixAndSuffix: StoryObj<
 			ariaLabel: 'euros par jour',
 		},
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
-		counter: 0,
+		inlineMessageState: null,
+		counter: null,
 		presentation: false,
 	},
 };
@@ -406,20 +449,22 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 		type: HiddenArgType,
 	},
 	render: (args, { argTypes }) => {
-		const { label, iconAItooltip, iconAIalt, ...inputArgs } = args;
+		const { label, AI, iconAItooltip, iconAIalt, inlineMessage, presentation, prefix, suffix, blur, ...inputArgs } = args;
 		const model = useStoryModel('');
 		return {
-			props: { model },
-			template: cleanupTemplate(`<lu-form-field AI${generateInputs(
+			props: { model, prefix, suffix, onBlur: (event: FocusEvent) => blur?.(event) },
+			template: cleanupTemplate(`<lu-form-field${generateInputs(
 				{
 					label,
+					AI,
 					iconAItooltip,
 					iconAIalt,
-					inputArgs,
+					inlineMessage,
+					presentation,
 				},
 				argTypes,
 			)}>
-	<lu-text-input [(ngModel)]="model.example" />
+	<lu-text-input${generateInputs(inputArgs, argTypes)}${prefix ? ' [prefix]="prefix"' : ''}${suffix ? ' [suffix]="suffix"' : ''} [(ngModel)]="model.example" (blur)="onBlur($event)" />
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 `),
@@ -430,6 +475,7 @@ export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
 	},
 	args: {
 		label: 'Label',
+		AI: true,
 		iconAIalt: 'Assistant IA',
 		iconAItooltip: 'Donnée remplie automatiquement',
 	},
