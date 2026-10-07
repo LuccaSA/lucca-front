@@ -16,7 +16,13 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 export class LuToastsComponent {
 	readonly #toastsService = inject(LuToastsService);
 
+	/**
+	 * Displays the toasts at the bottom of the screen instead of the top
+	 */
 	readonly bottom = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Streams of toasts to display, in addition to the ones added via `LuToastsService.addToast()`
+	 */
 	readonly sources = input<Array<Observable<LuToastInput>>>();
 
 	constructor() {

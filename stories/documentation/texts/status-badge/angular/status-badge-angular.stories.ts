@@ -32,7 +32,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.<br>[v20.2] Ajout de la taille <code>M</code>',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'M' } },
 		},
 		label: {
 			control: {

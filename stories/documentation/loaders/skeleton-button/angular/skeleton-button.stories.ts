@@ -11,6 +11,7 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Applique un style foncé pour un usage sur fond gris.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		size: {
 			options: setStoryOptions(SKELETON_BUTTON_SIZE),
@@ -18,6 +19,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

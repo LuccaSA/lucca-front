@@ -60,14 +60,29 @@ export class LuUserPictureComponent {
 	 */
 	readonly displayFormat = input<LuDisplayInitials>(displayPictureFormatRecord[inject(LU_DEFAULT_DISPLAY_POLICY)]);
 
+	/**
+	 * User whose picture or initials are displayed
+	 */
 	readonly user = input<LuUserPictureUserInput>();
 
+	/**
+	 * Applies AI colors, for an answer made by an AI
+	 */
 	readonly AI = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Displays a placeholder instead of the user picture
+	 */
 	readonly placeholder = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Applies soft rounded corners instead of a circle
+	 */
 	readonly softRounded = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Changes the size of the picture
+	 */
 	readonly size = input<UserPictureSize>('M');
 
 	/**

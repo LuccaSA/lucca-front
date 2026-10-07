@@ -20,11 +20,26 @@ export class SoftwareIconComponent {
 	readonly path = '/transverse/prisme/visuals/software-icon/';
 	readonly extension = '.svg';
 
+	/**
+	 * Software whose icon is displayed
+	 */
 	readonly icon = input.required<SoftwareIcon>();
 
+	/**
+	 * Marks the software as inactive
+	 */
 	readonly disabled = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Displays a tooltip with the icon alternative text (always enabled inside a `lu-software-icon-wrapper`)
+	 */
 	readonly withTooltip = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Alternative text of the icon, read by screen readers
+	 */
 	readonly iconAlt = input<string>('');
+	/**
+	 * Changes the size of the icon
+	 */
 	readonly size = input<SoftwareIconSize | ''>('');
 	readonly iconUrl = computed(() => `${this.domain}${this.path}${this.icon()}${this.extension}`);
 }

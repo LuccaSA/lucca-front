@@ -63,47 +63,104 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly #destroyRef = inject(DestroyRef);
 	readonly #visibilityObserver = inject(TooltipVisibilityObserver);
 
+	/**
+	 * Content of the tooltip
+	 */
 	readonly luTooltipInput = input<string | SafeHtml>('', { alias: 'luTooltip' });
 	readonly luTooltip = linkedSignal<string | SafeHtml>(() => this.luTooltipInput());
+	/**
+	 * Content of the tooltip
+	 */
 	readonly prTooltipInput = input<string | SafeHtml>('', { alias: 'prTooltip' });
 	readonly prTooltip = linkedSignal<string | SafeHtml>(() => this.prTooltipInput());
 	readonly tooltipContent = computed(() => this.luTooltip() || this.prTooltip());
 
+	/**
+	 * Delay before showing the tooltip, in ms. `0` falls back to the `prTooltipEnterDelay` value (300 by default)
+	 */
 	readonly luTooltipEnterDelay = input(0, { transform: numberAttribute });
+	/**
+	 * Delay before showing the tooltip, in ms
+	 */
 	readonly prTooltipEnterDelay = input(300, { transform: numberAttribute });
 	readonly tooltipEnterDelay = computed(() => this.luTooltipEnterDelay() || this.prTooltipEnterDelay());
 
+	/**
+	 * Delay before hiding the tooltip, in ms. `0` falls back to the `prTooltipLeaveDelay` value (100 by default)
+	 */
 	readonly luTooltipLeaveDelay = input(0, { transform: numberAttribute });
+	/**
+	 * Delay before hiding the tooltip, in ms
+	 */
 	readonly prTooltipLeaveDelay = input(100, { transform: numberAttribute });
 	readonly tooltipLeaveDelay = computed(() => this.luTooltipLeaveDelay() || this.prTooltipLeaveDelay());
 
+	/**
+	 * Disables the tooltip
+	 */
 	readonly luTooltipDisabled = input(false, { transform: booleanAttribute });
+	/**
+	 * Disables the tooltip
+	 */
 	readonly prTooltipDisabled = input(false, { transform: booleanAttribute });
 	readonly tooltipDisabled = computed(() => this.prTooltipDisabled() || this.luTooltipDisabled());
 
+	/**
+	 * Hides the tooltip from screen readers, when its content is already conveyed by the trigger element
+	 */
 	readonly luTooltipOnlyForDisplay = input(false, { transform: booleanAttribute });
+	/**
+	 * Hides the tooltip from screen readers, when its content is already conveyed by the trigger element
+	 */
 	readonly prTooltipOnlyForDisplay = input(false, { transform: booleanAttribute });
 	readonly tooltipOnlyForDisplay = computed(() => this.prTooltipOnlyForDisplay() || this.luTooltipOnlyForDisplay());
 
+	/**
+	 * Position of the tooltip relative to its anchor. Falls back to `prTooltipPosition` when `null`
+	 */
 	readonly luTooltipPosition = input<TooltipPosition | null>(null);
+	/**
+	 * Position of the tooltip relative to its anchor
+	 */
 	readonly prTooltipPosition = input<TooltipPosition>('above');
 	readonly tooltipPosition = computed(() => this.luTooltipPosition() ?? this.prTooltipPosition());
 
+	/**
+	 * Only shows the tooltip when the trigger content is truncated by an ellipsis
+	 */
 	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
+	/**
+	 * Only shows the tooltip when the trigger content is truncated by an ellipsis
+	 */
 	readonly prTooltipWhenEllipsisInput = input(false, { alias: 'prTooltipWhenEllipsis', transform: booleanAttribute });
 
 	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
 	readonly prTooltipWhenEllipsis = linkedSignal(() => this.prTooltipWhenEllipsisInput());
 	readonly tooltipWhenEllipsis = computed(() => this.prTooltipWhenEllipsis() || this.luTooltipWhenEllipsis());
 
+	/**
+	 * Element the tooltip is positioned against, instead of the host element
+	 */
 	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(null);
+	/**
+	 * Element the tooltip is positioned against (the host element by default)
+	 */
 	readonly prTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null | undefined>(this.#host);
 	readonly tooltipAnchor = computed(() => this.luTooltipAnchor() || this.prTooltipAnchor());
 
+	/**
+	 * Element whose hover and focus open the tooltip, instead of the host element
+	 */
 	readonly luTooltipTriggerAnchor = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
+	/**
+	 * Element whose hover and focus open the tooltip, instead of the host element
+	 */
 	readonly prTooltipTriggerAnchor = input<ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined>(null);
 	readonly tooltipTriggerAnchor = computed(() => this.luTooltipTriggerAnchor() || this.prTooltipTriggerAnchor());
 
+	/**
+	 * Id of the tooltip, used to build the id of its panel referenced by `aria-describedby`
+	 */
 	readonly id = input<string>(`${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`);
 
 	readonly ariaDescribedBy = computed(() => {

@@ -61,8 +61,14 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 
 	valueID = `value-${++nextID}`;
 
+	/**
+	 * Value of the `autocomplete` attribute of the search input
+	 */
 	readonly autocomplete = input<AutoFill | null>('off');
 
+	/**
+	 * Displays the select in impersonation mode, as used by the `lu-impersonation` component
+	 */
 	readonly impersonation = input(false, { transform: luBooleanAttribute });
 
 	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });

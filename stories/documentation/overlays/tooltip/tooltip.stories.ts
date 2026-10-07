@@ -11,7 +11,7 @@ export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
 	argTypes: {
 		luTooltipEnterDelay: {
-			description: 'Délai d’apparition du tooltip (en ms).',
+			description: 'Délai d’apparition du tooltip (en ms). La valeur `0` (valeur par défaut de l’input) applique le délai par défaut de 300 ms : il n’est pas possible de supprimer ce délai.',
 			control: { type: 'number' },
 			table: {
 				category: 'inputs',
@@ -19,7 +19,8 @@ export default {
 			},
 		},
 		luTooltipLeaveDelay: {
-			description: 'Délai de disparition du tooltip après la fin du survol (en ms).',
+			description:
+				'Délai de disparition du tooltip après la fin du survol (en ms). La valeur `0` (valeur par défaut de l’input) applique le délai par défaut de 100 ms : il n’est pas possible de supprimer ce délai.',
 			control: { type: 'number' },
 			table: {
 				category: 'inputs',
@@ -53,7 +54,35 @@ export default {
 		},
 		luTooltipOnlyForDisplay: {
 			description: 'Affiche un tooltip non restituée par les lecteurs d’écran. À utiliser si la réstitution est déjà portée par l’élément déclencheur (ex. une icône avec attribut `alt`)',
-			table: { category: 'inputs' },
+			control: { type: 'boolean' },
+			table: {
+				category: 'inputs',
+				defaultValue: { summary: 'false' },
+			},
+		},
+		luTooltipAnchor: {
+			description: 'Élément par rapport auquel le tooltip est positionné, à la place de l’élément déclencheur (voir l’exemple « Tooltip affiché avec un host séparé »).',
+			control: false,
+			table: {
+				category: 'inputs',
+				type: { summary: 'FlexibleConnectedPositionStrategyOrigin | LuTooltipAnchorRef | null' },
+			},
+		},
+		luTooltipTriggerAnchor: {
+			description: 'Élément dont le survol et le focus déclenchent le tooltip, à la place de l’élément portant la directive.',
+			control: false,
+			table: {
+				category: 'inputs',
+				type: { summary: 'ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null' },
+			},
+		},
+		id: {
+			description: 'Identifiant de l’élément déclencheur, utilisé pour construire l’identifiant du tooltip référencé par `aria-describedby`. Généré automatiquement par défaut.',
+			control: false,
+			table: {
+				category: 'inputs',
+				type: { summary: 'string' },
+			},
 		},
 	},
 	decorators: [
@@ -118,7 +147,7 @@ export default {
 <lu-icon data-testid="icon-tooltip" icon="star" alt="Favoris" luTooltip="Favoris" ${inputs} luTooltipOnlyForDisplay="true" class="pr-u-focusVisible pr-u-borderRadiusSmall" />
 
 <h3>Tooltip affiché avec un host séparé</h3>
-<span class="pr-u-marginInlineEnd800 pr-u-focusVisible pr-u-borderRadiusSmall" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">
+<span class="pr-u-marginInlineEnd800 pr-u-focusVisible pr-u-borderRadiusSmall" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target"></span>
 `,
 		};
 	},
@@ -130,5 +159,6 @@ export const Basic: StoryObj<LuTooltipTriggerDirective> = {
 		luTooltipLeaveDelay: 100,
 		luTooltipDisabled: false,
 		luTooltipPosition: 'above',
+		luTooltipOnlyForDisplay: false,
 	},
 };

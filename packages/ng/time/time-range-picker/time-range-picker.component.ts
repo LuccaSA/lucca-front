@@ -55,18 +55,36 @@ export class TimeRangePickerComponent implements ControlValueAccessor, OnInit, V
 
 	readonly intl = input(...intlInputOptions(LU_TIME_RANGE_PICKER_TRANSLATIONS));
 
+	/**
+	 * Displays increment and decrement arrows
+	 */
 	readonly displayArrows = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Forces the AM/PM indicator display
+	 */
 	readonly forceMeridiemDisplay = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Disables the picker
+	 */
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	readonly isDisabled = computed(() => this.disabled() || this.#disabledState());
 
+	/**
+	 * Changes the size of the picker
+	 */
 	readonly size = input<TimeRangePickerSize>();
 
+	/**
+	 * Maximum selectable time, as an ISO 8601 time (`HH:mm:ss`)
+	 */
 	readonly max = input<ISO8601Time>(MAX_TIME);
 
+	/**
+	 * Increment step applied by the arrows and keyboard, as an ISO 8601 duration (e.g. `PT15M`)
+	 */
 	readonly step = input<ISO8601Duration | null>(null);
 
 	readonly keyPressed = signal(false);

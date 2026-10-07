@@ -15,7 +15,7 @@ import { TagSize } from './tag.type';
 })
 export class TagComponent {
 	/**
-	 * Which text should the tag be? Defaults to medium
+	 * Changes the text displayed by the tag
 	 */
 	readonly label = input.required<string>();
 

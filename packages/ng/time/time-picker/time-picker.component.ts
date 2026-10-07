@@ -49,12 +49,24 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	readonly postMeridiemRef = viewChild<ElementRef<HTMLInputElement>>('postMeridiemRef');
 
+	/**
+	 * Selected time, as an ISO 8601 time (`HH:mm:ss`)
+	 */
 	readonly value = model<ISO8601Time>(DEFAULT_MIN_TIME);
 
+	/**
+	 * Maximum selectable time, as an ISO 8601 time (`HH:mm:ss`)
+	 */
 	readonly max = input<ISO8601Time>(MAX_TIME);
 
+	/**
+	 * Displays increment and decrement arrows
+	 */
 	readonly displayArrows = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Forces (`true`) or prevents (`false`) the AM/PM indicator display. When `null`, it depends on the locale
+	 */
 	readonly forceMeridiemDisplay = input(null, { transform: luNullableBooleanAttribute });
 
 	readonly keyPressed = signal(false);
@@ -72,8 +84,14 @@ export class TimePickerComponent extends BasePickerComponent {
 			.includes('PM');
 	});
 
+	/**
+	 * Accessible label of the picker
+	 */
 	readonly label = input<string>();
 
+	/**
+	 * Emits the new and previous values when the time is changed by the user
+	 */
 	readonly timeChange = output<TimeChangeEvent>();
 
 	readonly prevPicker = output<void>();

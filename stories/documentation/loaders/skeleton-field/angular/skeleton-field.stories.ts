@@ -13,25 +13,29 @@ export const Template: StoryObj<SkeletonFieldComponent> = {
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		hiddenLabel: {
 			description: '[v20.1] Masque le label.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		rows: {
 			description: '[v20.1] Modifie le nombre de lignes de contenu.',
 			control: {
 				type: 'number',
 			},
+			table: { category: 'inputs', defaultValue: { summary: '1' } },
 		},
 		size: {
-			options: ['', 'S', 'XS'],
+			options: ['', 'XS', 'S', 'M'],
 			control: {
 				type: 'select',
 			},
 			description: '[v21.2.4] Modifie la taille du composant.',
+			table: { category: 'inputs' },
 		},
 	},
 
