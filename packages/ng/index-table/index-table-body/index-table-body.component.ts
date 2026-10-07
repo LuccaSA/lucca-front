@@ -24,9 +24,18 @@ import { LU_INDEX_TABLE_BODY_INSTANCE } from './index-table-body.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableBodyComponent {
+	/**
+	 * Group the rows of this body and make them expandable, the content is used as the group label
+	 */
 	readonly group = input<PortalContent | null>(null);
+	/**
+	 * Text conveyed by the group toggle button
+	 */
 	readonly groupButtonAlt = input<string | null>(null);
 
+	/**
+	 * Whether the group is expanded
+	 */
 	readonly expanded = model(false);
 
 	expandedToggle() {

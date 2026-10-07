@@ -48,14 +48,33 @@ export class MainLayoutComponent {
 	 */
 	readonly footerSticky = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Display decorative bubbles in the top start corner (1 to 3)
+	 */
 	readonly bubblesStartEnd = input<1 | 2 | 3 | null>(null, { transform: bubblesCountAttribute });
+	/**
+	 * Display decorative bubbles in the bottom end corner (1 to 3)
+	 */
 	readonly bubblesEndStart = input<1 | 2 | 3 | null>(null, { transform: bubblesCountAttribute });
 
+	/**
+	 * Display an illustration in the top start corner, a URL can also be provided
+	 */
 	readonly illustrationStartEnd = input<MainLayoutIllustrationStartEnd | null>(null);
 
+	/**
+	 * Display an illustration in the bottom end corner, a URL can also be provided
+	 */
 	readonly illustrationEndStart = input<MainLayoutIllustrationEndStart | null>(null);
 
+	/**
+	 * Apply a color palette to the layout
+	 */
 	readonly palette = input<Palette>('none');
+
+	/**
+	 * Change the responsive behavior of the layout
+	 */
 	readonly responsive = input<'wideM' | null>(null);
 
 	readonly hostClass = computed(() => ({

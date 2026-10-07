@@ -19,6 +19,9 @@ export abstract class BaseIndexTableCell {
 	readonly footRef = inject(LU_INDEX_TABLE_FOOT_INSTANCE, { optional: true });
 	readonly rowRef = inject(LU_INDEX_TABLE_ROW_INSTANCE);
 
+	/**
+	 * Horizontal alignment of the cell content
+	 */
 	readonly align = input<IndexTableAlign | null>(null);
 
 	readonly alignCol = computed(() => {

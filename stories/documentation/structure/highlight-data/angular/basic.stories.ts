@@ -68,6 +68,11 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			type: 'boolean',
 			table: { category: 'inputs' },
 		},
+		nested: {
+			type: 'boolean',
+			description: 'Affiche le composant en mode imbriqué.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
 		size: {
 			options: setStoryOptions(HIGHLIGHT_DATA_SIZE),
 			control: {
@@ -80,7 +85,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'white' } },
 		},
 		palette: {
 			options: setStoryOptions(HIGHLIGHT_DATA_PALETTE),
@@ -88,14 +93,15 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 				type: 'select',
 			},
 			description: 'La palette influençant également la couleur du SVG des bubbles et donc l’URL associée, il est nécessaire de renseigner la gamme.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'lucca' } },
 		},
 		action: {
 			options: ['', 'button', 'link'],
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			description: '[Story] Ajoute une action (bouton ou lien) en contenu projeté.',
+			table: { category: 'story' },
 		},
 	},
 
@@ -105,6 +111,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		bubble: 1,
 		illustration: 'piggy-bank',
 		valueFirst: false,
+		nested: false,
 		subText: null,
 	},
 };

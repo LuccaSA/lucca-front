@@ -11,7 +11,7 @@ import { StoryModelDisplayComponent } from '../../../../helpers/story-model-disp
 const me = { id: 66, picture: null, department: { id: 3, name: 'Commercial' }, firstName: 'Pierre', lastName: 'Durand' };
 
 export default {
-	title: 'Documentation/Navigation/Impersonation/Angular',
+	title: 'Documentation/Navigation/Impersonation/Angular/Basic',
 	component: ImpersonationComponent,
 	argTypes: {
 		enableFormerEmployees: {
@@ -19,7 +19,18 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Inclus les collaborateurs partis',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		selectedUser: {
+			description: 'Collaborateur actuellement incarné. Two-way.',
+			control: false,
+			table: { category: 'models', type: { summary: 'ILuUser' } },
+		},
+		clear: {
+			description: 'Événement déclenché lorsque l’incarnation est réinitialisée.',
+			action: 'clear',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		intl: intlArgType([luCoreSelectUserTranslations, luImpersonationTranslations], 'LuImpersonationTranslations & LuCoreSelectUserTranslations'),
 	},
@@ -30,14 +41,16 @@ export default {
 		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),
 	],
 	render: (args, { argTypes }) => {
+		const { clear, selectedUser, ...inputs } = args;
 		return {
-			template: `<lu-impersonation [(selectedUser)]="example" ${generateInputs(args, argTypes)} (clear)="example = me" />
+			template: `<lu-impersonation [(selectedUser)]="example" ${generateInputs(inputs, argTypes)} (clear)="example = me; onClear()" />
 
 <pr-story-model-display>{{example | json}}</pr-story-model-display>
 `,
 			props: {
 				example: me,
 				me,
+				onClear: () => clear?.(),
 			},
 		};
 	},

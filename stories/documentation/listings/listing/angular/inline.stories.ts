@@ -30,7 +30,7 @@ export default {
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
 		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
-		const paletteParam = args.palette !== 'none' ? ` palette="${palette}"` : ``;
+		const paletteParam = palette && palette !== 'none' ? ` palette="${palette}"` : ``;
 		return {
 			template: `<lu-listing inline${checklistParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>Lorem ipsum</lu-listing-item>
@@ -55,13 +55,10 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			table: { category: 'inputs' },
 		},
 		palette: {
-			PaletteAllArgType,
-			control: {
-				type: 'select',
-			},
+			...PaletteAllArgType,
 			if: { arg: 'type', truthy: true },
 			description: 'Modifie la couleur des icônes.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'none' } },
 		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,

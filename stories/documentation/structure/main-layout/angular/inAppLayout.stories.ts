@@ -1,3 +1,4 @@
+import { PaletteArgType } from '@/helpers/common-arg-types';
 import { setStoryOptions } from '@/helpers/stories';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
@@ -10,7 +11,7 @@ interface MainLayoutAngularInAppLayoutStory {
 	headerSticky: boolean;
 	footerSticky: boolean;
 	sidebar: boolean;
-	contentOverflowing: boolean;
+	overflow: boolean;
 	repeatContent: number;
 	repeatOverflow: number;
 	bubblesStartEnd: 1 | 2 | 3 | null;
@@ -25,43 +26,44 @@ export default {
 	title: 'Documentation/Structure/Main Layout/Angular/In AppLayout',
 	argTypes: {
 		header: {
-			description: 'Présente un exemple de structure avec header.',
-			table: { category: 'inputs' },
+			description: '[Story] Présente un exemple de structure avec header.',
+			table: { category: 'story' },
 		},
 		headerSticky: {
 			name: '↳ headerSticky',
 			if: { arg: 'header', truthy: true },
 			description: 'Fixe le footer en haut du layout.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		footer: {
-			description: 'Présente un exemple de structure avec footer.',
-			table: { category: 'inputs' },
+			description: '[Story] Présente un exemple de structure avec footer.',
+			table: { category: 'story' },
 		},
 		footerSticky: {
 			name: '↳ footerSticky',
 			if: { arg: 'footer', truthy: true },
 			description: 'Fixe le footer en bas du layout.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		sidebar: {
-			description: 'Présente un exemple de structure avec un panneau latéral.',
-			table: { category: 'inputs' },
+			description: '[Story] Présente un exemple de structure avec un panneau latéral.',
+			table: { category: 'story' },
 		},
 		repeatContent: {
 			control: { type: 'range', min: 1, max: 10 },
 			description: '[Story] Modifie le nombre d’éléments <lu-main-layout-block>',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
-		contentOverflowing: {
-			name: '↳ contentOverflowing',
+		overflow: {
 			description: 'Permet de rendre un élément <lu-main-layout-block> scrollable horizontalement tout en conservant le comportement du reste du layout.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (main-layout-block)', defaultValue: { summary: 'false' } },
 		},
 		repeatOverflow: {
+			name: '↳ repeatOverflow',
 			control: { type: 'range', min: 1, max: 10 },
-			if: { arg: 'contentOverflowing', truthy: true },
-			table: { category: 'inputs' },
+			if: { arg: 'overflow', truthy: true },
+			description: '[Story] Modifie la longueur du contenu qui déborde.',
+			table: { category: 'story' },
 		},
 		bubblesStartEnd: {
 			options: [null, 1, 2, 3],
@@ -69,6 +71,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Affiche des bulles décoratives dans le coin supérieur gauche.',
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		bubblesEndStart: {
 			options: [null, 1, 2, 3],
@@ -77,6 +80,7 @@ export default {
 			},
 			if: { arg: 'sidebar', truthy: false },
 			description: 'Affiche des bulles décoratives dans le coin inférieur droit.',
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		illustrationStartEnd: {
 			options: setStoryOptions(MAIN_LAYOUT_ILLUSTRATION_START_END),
@@ -84,6 +88,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Affiche une illustration dans le coin supérieur gauche.',
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		illustrationEndStart: {
 			options: setStoryOptions(MAIN_LAYOUT_ILLUSTRATION_END_START),
@@ -92,13 +97,12 @@ export default {
 			},
 			if: { arg: 'sidebar', truthy: false },
 			description: 'Affiche une illustration dans le coin inférieur droit.',
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		palette: {
-			options: ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'],
-			control: {
-				type: 'select',
-			},
+			...PaletteArgType,
 			description: 'Applique une palette de couleurs au layout.',
+			table: { category: 'inputs', defaultValue: { summary: 'none' } },
 		},
 		responsive: {
 			options: ['', 'wideM'],
@@ -106,6 +110,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie le comportement responsive du layout.',
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 	},
 	decorators: [
@@ -168,7 +173,7 @@ export default {
 		</lu-main-layout-block>`;
 		let content = ``;
 		for (let i = 1; i <= args.repeatContent; i++) {
-			if (i === args.repeatContent && args.contentOverflowing) {
+			if (i === args.repeatContent && args.overflow) {
 				content = content + templateOverflow;
 			} else {
 				content = content + template;
@@ -300,7 +305,7 @@ export const Basic = {
 		footer: true,
 		footerSticky: true,
 		sidebar: false,
-		contentOverflowing: false,
+		overflow: false,
 		repeatOverflow: 5,
 		repeatContent: 1,
 		bubblesStartEnd: null,

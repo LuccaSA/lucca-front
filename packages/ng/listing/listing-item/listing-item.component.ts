@@ -23,5 +23,8 @@ export class ListingItemComponent {
 	 */
 	readonly icon = input<LuccaIcon | null>(null);
 
+	/**
+	 * Apply the critical style to the listing item
+	 */
 	readonly critical = input(false, { transform: luBooleanAttribute });
 }

@@ -12,5 +12,8 @@ import { luBooleanAttribute } from '@lucca-front/ng/core';
 	},
 })
 export class MainLayoutBlockComponent {
+	/**
+	 * Make the block horizontally scrollable while keeping the rest of the layout behavior
+	 */
 	readonly overflow = input(false, { transform: luBooleanAttribute });
 }

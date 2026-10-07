@@ -37,6 +37,11 @@ export class HighlightSectionComponent {
 	 * Ornaments are hidden when this input is not set.
 	 */
 	readonly bubbleStart = input<HighlightSectionBubble | number>();
+
+	/**
+	 * Define the end ornament style based on the CDN image bubble number.
+	 * The end ornament is hidden when this input is not set.
+	 */
 	readonly bubbleEnd = input<HighlightSectionBubble | number>();
 
 	/**

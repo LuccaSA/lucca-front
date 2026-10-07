@@ -30,7 +30,13 @@ import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexTableRowCellComponent extends BaseIndexTableCell {
+	/**
+	 * Allow the text of the cell to be selected, disabling the row primary action on click
+	 */
 	readonly allowTextSelection = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Display the cell as an intermediate footer (e.g. subtotal)
+	 */
 	readonly tfoot = input(false, { transform: luBooleanAttribute });
 
 	readonly actions = computed(() => {

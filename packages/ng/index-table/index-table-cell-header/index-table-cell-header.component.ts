@@ -43,11 +43,29 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
+	/**
+	 * Sort state of the column, makes the header cell sortable when set
+	 */
 	readonly sort = model<IndexTableSort | null>(null);
+	/**
+	 * Apply the selectable modifier to the header cell
+	 */
 	readonly selectable = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Visually hide the label of the header cell, keeping it for screen readers
+	 */
 	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Mark the column as the actions column, its label is visually hidden
+	 */
 	readonly actions = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Fixed inline size of the column, used with `layoutFixed`
+	 */
 	readonly inlineSize = input(0, { transform: luNumberAttribute });
+	/**
+	 * Truncate the sortable header label with an ellipsis and a tooltip when the column is too narrow
+	 */
 	readonly sortWithEllipsis = input(false, { transform: luBooleanAttribute });
 
 	// #sortButton hosts the luButton component, so the template ref resolves to that component
