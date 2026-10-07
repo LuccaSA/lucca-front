@@ -27,14 +27,29 @@ type DisplayMode =
 export class LoadingComponent {
 	#luClass = inject(LuClass);
 
+	/**
+	 * Which size should the loading be? Size L also applies the block mode
+	 */
 	readonly size = input<LoadingSize | null>(null);
 
+	/**
+	 * Invert the loading colors for use on a dark background
+	 */
 	readonly invert = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Center the loading in its container (full page, dialog, section…)
+	 */
 	readonly block = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Visually hide the label, keeping it for screen readers
+	 */
 	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Apply a layout adapted to a specific context (popin, drawer, full page)
+	 */
 	readonly template = input<DisplayMode | null>(null);
 
 	constructor() {

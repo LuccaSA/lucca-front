@@ -50,9 +50,24 @@ export class IndexTableRowComponent implements LuTooltipAnchorRef {
 		return this.#elementRef;
 	}
 
+	/**
+	 * Whether the row is selected
+	 */
 	readonly selected = model<boolean>(false);
+	/**
+	 * Label of the selection checkbox, the checkbox is displayed only when set
+	 */
 	readonly selectedLabel = input<string | null>(null);
+	/**
+	 * Disable the selection checkbox of the row
+	 */
 	readonly disabled = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Display the selection checkbox in a mixed state
+	 */
 	readonly mixed = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Display the row as a stack of 1 to 3 elements
+	 */
 	readonly stack = input(1, { transform: luNumberAttribute });
 }

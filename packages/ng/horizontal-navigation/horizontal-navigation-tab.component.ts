@@ -18,7 +18,14 @@ import { LU_HORIZONTALNAVIGATION_INSTANCE } from './horizontal-navigation.token'
 export class HorizontalNavigationTabComponent {
 	protected horizontalNavigationRef = inject(LU_HORIZONTALNAVIGATION_INSTANCE);
 
+	/**
+	 * Label of the tab
+	 */
 	readonly label = input.required<PortalContent>();
+
+	/**
+	 * Disable the tab
+	 */
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 	readonly index = computed(() => this.horizontalNavigationRef.getTabIndex(this));
 	readonly selected = computed(() => !this.disabled() && this.index() === this.horizontalNavigationRef.selectedIndex());

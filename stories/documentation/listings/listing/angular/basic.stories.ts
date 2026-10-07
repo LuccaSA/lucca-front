@@ -1,12 +1,13 @@
 import { IconsList } from '@/stories/icons-list';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
+import { PaletteAllArgType } from '@/helpers/common-arg-types';
 import { generateInputs } from '@/helpers/stories';
 
 interface ListingBasicStory {
 	checklist: boolean;
 	ordered: boolean;
+	orderedFancy: boolean;
 	icons: boolean;
 	type: string;
 	palette: string;
@@ -27,7 +28,7 @@ export default {
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, icons, defaultIcon, icon, start, reversed, palette, ...inputs } = args;
+		const { type, checklist, ordered, orderedFancy, icons, defaultIcon, icon, start, reversed, palette, ...inputs } = args;
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
 		const orderedFancyParam = args.type === 'orderedFancy' ? ` orderedFancy` : ``;
@@ -62,8 +63,9 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie le type de liste (ordonnée, checklist, icônes, etc.).<br>[v21.2] <code>orderedFancy</code>',
-			table: { category: 'inputs' },
+			description:
+				'[Story] Modifie le type de liste en activant l’input booléen correspondant : <code>checklist</code>, <code>ordered</code>, <code>orderedFancy</code> ou <code>icons</code>.<br>[v21.2] <code>orderedFancy</code>',
+			table: { category: 'story' },
 		},
 		defaultIcon: {
 			options: IconsList.map((i) => i.icon),
@@ -72,7 +74,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			},
 			description: 'Modifie l’icône par défaut.',
 			if: { arg: 'type', eq: 'icons' },
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'signConfirm' } },
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
@@ -86,17 +88,39 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		start: {
 			if: { arg: 'type', eq: 'ordered' },
 			description: 'Modifie la valeur initiale de la liste.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '1' } },
 		},
 		reversed: {
 			if: { arg: 'type', eq: 'ordered' },
 			description: 'Présente la liste sous forme décroissante.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
-		checklist: HiddenArgType,
-		icons: HiddenArgType,
-		ordered: HiddenArgType,
-		palette: { ...PaletteAllArgType, table: { category: 'inputs' } },
+		checklist: {
+			control: false,
+			description: 'Présente la liste sous forme de checklist (piloté par le contrôle <code>type</code>).',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		ordered: {
+			control: false,
+			description: 'Présente la liste sous forme ordonnée (piloté par le contrôle <code>type</code>).',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		orderedFancy: {
+			control: false,
+			description: '[v21.2] Présente la liste sous forme ordonnée stylisée (piloté par le contrôle <code>type</code>).',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		icons: {
+			control: false,
+			description: 'Présente la liste avec des icônes (piloté par le contrôle <code>type</code>).',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		palette: { ...PaletteAllArgType, table: { category: 'inputs', defaultValue: { summary: 'none' } } },
+		critical: {
+			control: false,
+			description: 'Applique le style critique à un élément de la liste.',
+			table: { category: 'inputs (listing-item)', defaultValue: { summary: 'false' } },
+		},
 	},
 
 	args: {

@@ -25,10 +25,22 @@ import { LU_INDEX_TABLE_INSTANCE } from './index-table.token';
 export class IndexTableComponent {
 	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
 
+	/**
+	 * Make the table rows selectable with checkboxes
+	 */
 	readonly selectable = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Apply a fixed layout to the table columns
+	 */
 	readonly layoutFixed = input(false, { transform: luBooleanAttribute });
+	/**
+	 * Indicate that the table displays an empty state instead of rows
+	 */
 	readonly empty = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Apply modifiers depending on the viewport size (e.g. `layoutFixedAtMediaMinS`)
+	 */
 	readonly responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
 	readonly rows = contentChildren(IndexTableRowComponent, { descendants: true });

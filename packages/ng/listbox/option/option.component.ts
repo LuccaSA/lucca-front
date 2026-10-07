@@ -41,18 +41,39 @@ export class OptionComponent {
 	#listboxRef = inject(LISTBOX_INSTANCE, { optional: true });
 	#parentOptionRef = inject(OPTION_INSTANCE, { skipSelf: true, optional: true });
 
+	/**
+	 * Id applied to the option element
+	 */
 	readonly elementId = input<string | null>(null);
 
+	/**
+	 * Mark the option as selected
+	 */
 	readonly checked = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Display the option in a mixed (partially selected) state
+	 */
 	readonly mixed = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Disable the option
+	 */
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Apply the hovered (visually focused) state to the option
+	 */
 	readonly hovered = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Display the option as an "add option" action
+	 */
 	readonly add = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Display the option as a group of options
+	 */
 	readonly group = input(false, { transform: luBooleanAttribute });
 
 	/**
@@ -61,8 +82,14 @@ export class OptionComponent {
 	 */
 	readonly groupId = input<string | null>(null);
 
+	/**
+	 * Display the option as a "select all" action, without checkbox
+	 */
 	readonly select = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Label of the "select all" option displayed inside a group
+	 */
 	readonly selectAll = input<'string' | null>();
 
 	readonly multiple = computed(() => this.#listboxRef?.multiple() ?? false);

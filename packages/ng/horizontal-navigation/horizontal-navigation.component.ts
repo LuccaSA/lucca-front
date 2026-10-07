@@ -33,12 +33,24 @@ export class HorizontalNavigationComponent {
 
 	readonly buttons = viewChildren<ElementRef<HTMLButtonElement>>('tabButton');
 
+	/**
+	 * Remove the border below the navigation
+	 */
 	readonly noBorder = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Wrap the links in a container to align the navigation with the page content
+	 */
 	readonly container = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Display the navigation vertically
+	 */
 	readonly vertical = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Apply a color palette to the navigation
+	 */
 	readonly palette = input<Palette | DecorativePalette | null>(null);
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 
@@ -49,6 +61,9 @@ export class HorizontalNavigationComponent {
 
 	readonly isTablist = computed(() => this.tabs().length > 0);
 
+	/**
+	 * Index of the selected tab (tabs mode only)
+	 */
 	readonly currentIndex = model<number>(0);
 
 	readonly selectedIndex = computed(() => {

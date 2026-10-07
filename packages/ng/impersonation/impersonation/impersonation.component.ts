@@ -24,6 +24,9 @@ import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 })
 export class ImpersonationComponent {
 	protected readonly elementRef = inject(ElementRef);
+	/**
+	 * Override the default translations of the component
+	 */
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS, LU_IMPERSONATION_TRANSLATIONS));
 	protected readonly currentUserId = inject(ɵLU_CORE_SELECT_CURRENT_USER_ID);
 
@@ -31,11 +34,20 @@ export class ImpersonationComponent {
 
 	readonly popoverRef = viewChild(PopoverDirective);
 
+	/**
+	 * User currently impersonated (two-way bindable)
+	 */
 	readonly selectedUser = model<ILuUser>();
 
+	/**
+	 * Include former employees in the user list
+	 */
 	readonly enableFormerEmployees = input(false, { transform: luBooleanAttribute });
 
 	readonly isNotMe = computed(() => this.selectedUser()?.id !== this.currentUserId);
+	/**
+	 * Emitted when the impersonation is cleared
+	 */
 	readonly clear = output<void>();
 
 	readonly popoverPositions: ConnectionPositionPair[] = [
