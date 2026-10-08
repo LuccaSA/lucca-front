@@ -127,7 +127,7 @@
     "playwright": "1.61.1",
     "postcss": "8.5.26",
     "postcss-scss": "^4.0.6",
-    "postcss-selector-parser": "7.1.0",
+    "postcss-selector-parser": "7.1.6",
     "postcss-value-parser": "^4.2.0",
     "prettier": "^3.5.1",
     "sass": "^1.62.1",

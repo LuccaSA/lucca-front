@@ -13,7 +13,7 @@
   "devDependencies": {
     "postcss": "8.5.26",
     "postcss-scss": "4.0.9",
-    "postcss-selector-parser": "7.1.0",
+    "postcss-selector-parser": "7.1.6",
     "postcss-value-parser": "4.2.0"
   },
   "volta": {
