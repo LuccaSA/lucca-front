@@ -107,7 +107,7 @@
 
 @mixin successAI {
 	.lucca-icon {
-		@include icons.transparent;
+		background-image: none !important;
 	}
 
 	&::before {
