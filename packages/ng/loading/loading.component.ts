@@ -14,7 +14,7 @@ type DisplayMode =
 	selector: 'lu-loading',
 	providers: [LuClass],
 	styleUrl: './loading.component.scss',
-	template: '<span class="loading-label"><ng-content><span #defaultLabel>{{ intl().label }}</span></ng-content></span>',
+	template: '<span class="loading-label"><ng-content><ng-container #defaultLabel>{{ intl().label }}</ng-container></ng-content></span>',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
@@ -40,7 +40,7 @@ export class LoadingComponent {
 
 	readonly template = input<DisplayMode | null>(null);
 
-	protected readonly defaultLabel = viewChild<ElementRef<HTMLElement>>('defaultLabel');
+	protected readonly defaultLabel = viewChild<ElementRef<Comment>>('defaultLabel');
 
 	protected readonly isLabelHidden = computed(() => this.hiddenLabel() ?? !!this.defaultLabel());
 
