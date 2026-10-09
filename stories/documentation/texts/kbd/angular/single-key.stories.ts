@@ -17,8 +17,6 @@ export const SingleKey: StoryObj<KbdStory> = {
 		modifiers: [],
 		key: 'Escape',
 		otherKey: 'S',
-		pill: false,
-		skeuo: false,
 		inDropdown: false,
 	},
 };

@@ -1,16 +1,17 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { IconComponent, LuccaIcon } from '@lucca-front/ng/icon';
 import { LU_KBD_TRANSLATIONS, LuKbdTranslations } from './kbd.translate';
 import { KbdKey } from './kbd.type';
 
-type DisplayedKey = { type: 'text'; key: KbdKey; label: string } | { type: 'icon'; key: KbdKey; label: string; icon: LuccaIcon };
+type DisplayedKey = { type: 'text'; label: string } | { type: 'icon'; label: string; icon: LuccaIcon };
 
 const LABELS: Partial<Record<KbdKey, keyof LuKbdTranslations>> = {
 	Control: 'control',
 	Shift: 'shift',
 	Tab: 'tab',
+	' ': 'space',
 	Enter: 'enter',
 	Escape: 'escape',
 	Delete: 'delete',
@@ -71,16 +72,6 @@ export class KbdComponent {
 	readonly keys = input.required<KbdKey | readonly KbdKey[]>();
 
 	/**
-	 * Displays round keys
-	 */
-	readonly pill = input(false, { transform: booleanAttribute });
-
-	/**
-	 * Displays skeuomorphic keys, whose top is slightly hollowed out
-	 */
-	readonly skeuo = input(false, { transform: booleanAttribute });
-
-	/**
 	 * Overrides the default labels of the keys
 	 */
 	readonly intl = input(...intlInputOptions(LU_KBD_TRANSLATIONS));
@@ -99,21 +90,18 @@ export class KbdComponent {
 	#display(key: KbdKey, intl: LuKbdTranslations): DisplayedKey {
 		const icon = ICONS[key];
 		if (icon) {
-			return { type: 'icon', key, icon: icon[0], label: intl[icon[1]] };
+			return { type: 'icon', icon: icon[0], label: intl[icon[1]] };
 		}
 		if (key === 'Alt') {
-			return { type: 'text', key, label: this.#mac ? intl.option : intl.alt };
+			return { type: 'text', label: this.#mac ? intl.option : intl.alt };
 		}
 		if (key === 'Meta') {
-			return { type: 'text', key, label: this.#mac ? intl.command : intl.meta };
-		}
-		if (key === ' ') {
-			return { type: 'text', key, label: intl.space };
+			return { type: 'text', label: this.#mac ? intl.command : intl.meta };
 		}
 		const label = LABELS[key];
 		if (label) {
-			return { type: 'text', key, label: intl[label] };
+			return { type: 'text', label: intl[label] };
 		}
-		return { type: 'text', key, label: key.length === 1 ? key.toUpperCase() : key };
+		return { type: 'text', label: key.length === 1 ? key.toUpperCase() : key };
 	}
 }

@@ -57,7 +57,6 @@ describe(KbdComponent.name, () => {
 
 		// Assert
 		expect(getKeys(fixture)).toEqual(['Ctrl', 'Maj', 'Espace', 'Suppr']);
-		expect((fixture.nativeElement as HTMLElement).querySelector('.kbd.mod-space .pr-u-mask')?.textContent).toBe('Espace');
 	});
 
 	it('should display the arrows as icons with a translated alternative', () => {
@@ -115,23 +114,6 @@ describe(KbdComponent.name, () => {
 
 		// Assert
 		expect(getKeys(fixture)).toEqual(['Début', 'Page préc']);
-	});
-
-	it('should apply the pill and skeuo modifiers to the wrapper', () => {
-		// Arrange
-		TestBed.configureTestingModule({});
-		const fixture = TestBed.createComponent(KbdComponent);
-		fixture.componentRef.setInput('keys', 'Escape');
-		fixture.componentRef.setInput('pill', true);
-		fixture.componentRef.setInput('skeuo', '');
-
-		// Act
-		fixture.detectChanges();
-
-		// Assert
-		const wrapper = (fixture.nativeElement as HTMLElement).querySelector('.kbdWrapper');
-		expect(wrapper?.classList.contains('mod-pill')).toBe(true);
-		expect(wrapper?.classList.contains('mod-skeuo')).toBe(true);
 	});
 
 	it('should display the modifiers first, in the Mac order on Mac', () => {

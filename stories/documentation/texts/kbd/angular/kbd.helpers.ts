@@ -13,8 +13,6 @@ export interface KbdStory {
 	modifiers: KbdModifier[];
 	key: KbdKey;
 	otherKey: string;
-	pill: boolean;
-	skeuo: boolean;
 	inDropdown: boolean;
 }
 
@@ -66,7 +64,7 @@ export const KBD_ARG_TYPES: ArgTypes = {
 		},
 		options: KEYS,
 		description:
-			'Touche, nommée comme `KeyboardEvent.key` : n’importe quelle valeur est acceptée en code. Les touches nommées sont traduites, les flèches et Retour arrière affichés en icônes, l’espace en touche large, et sur Mac Début, Fin, Page préc / suiv s’affichent Fn + une flèche.',
+			'Touche, nommée comme `KeyboardEvent.key` : n’importe quelle valeur est acceptée en code. Les touches nommées sont traduites, les flèches et Retour arrière affichés en icônes, et sur Mac Début, Fin, Page préc / suiv s’affichent Fn + une flèche.',
 		table: { category: 'inputs', type: { summary: 'KbdKey' } },
 	},
 	otherKey: {
@@ -75,16 +73,6 @@ export const KBD_ARG_TYPES: ArgTypes = {
 		control: 'text',
 		description: 'N’importe quelle autre touche : une lettre (`S`), un chiffre, une touche de fonction (`F2`), un symbole (`/`)…',
 		table: { category: 'inputs', type: { summary: 'KbdKey' } },
-	},
-	pill: {
-		control: 'boolean',
-		description: 'Touches rondes.',
-		table: { category: 'inputs', defaultValue: { summary: 'false' } },
-	},
-	skeuo: {
-		control: 'boolean',
-		description: 'Touches réalistes, au dessus légèrement creusé.',
-		table: { category: 'inputs', defaultValue: { summary: 'false' } },
 	},
 	intl: intlArgType(luKbdTranslations, 'LuKbdTranslations'),
 	inDropdown: {

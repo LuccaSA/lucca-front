@@ -13,14 +13,14 @@
 			<td>Single key</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">Esc</kbd></span>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">N</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Esc</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">N</kbd></span>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="Escape" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="n" />
+					<lu-kbd keys="Escape" />
+					<lu-kbd keys="n" />
 				</div>
 			</td>
 		</tr>
@@ -28,36 +28,34 @@
 			<td>Named keys</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">Shift</kbd></span>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">Tab</kbd></span>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"
-						><kbd class="kbd mod-space"><span class="pr-u-mask">Space</span></kbd></span
-					>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">Enter</kbd></span>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"
+					<span class="kbdWrapper"><kbd class="kbd">Shift</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Tab</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Space</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Enter</kbd></span>
+					<span class="kbdWrapper"
 						><kbd class="kbd"
 							><span aria-hidden="true" class="lucca-icon icon-arrowBackspace mod-XXS"></span><span class="pr-u-mask">Backspace</span></kbd
 						></span
 					>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">Delete</kbd></span>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">Home</kbd></span>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">End</kbd></span>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">Page Up</kbd></span>
-					<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">Page Down</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Delete</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Home</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">End</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Page Up</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Page Down</kbd></span>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="Shift" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="Tab" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys=" " />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="Enter" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="Backspace" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="Delete" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="Home" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="End" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="PageUp" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="PageDown" />
+					<lu-kbd keys="Shift" />
+					<lu-kbd keys="Tab" />
+					<lu-kbd keys=" " />
+					<lu-kbd keys="Enter" />
+					<lu-kbd keys="Backspace" />
+					<lu-kbd keys="Delete" />
+					<lu-kbd keys="Home" />
+					<lu-kbd keys="End" />
+					<lu-kbd keys="PageUp" />
+					<lu-kbd keys="PageDown" />
 				</div>
 			</td>
 		</tr>
@@ -65,18 +63,14 @@
 			<td>Combination</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"
-						><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">N</kbd></kbd
-					>
-					<kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"
-						><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">Shift</kbd>+<kbd class="kbd">Z</kbd></kbd
-					>
+					<kbd class="kbdWrapper"><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">N</kbd></kbd>
+					<kbd class="kbdWrapper"><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">Shift</kbd>+<kbd class="kbd">Z</kbd></kbd>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" [keys]="['Control', 'n']" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" [keys]="['Control', 'Shift', 'z']" />
+					<lu-kbd [keys]="['Control', 'n']" />
+					<lu-kbd [keys]="['Control', 'Shift', 'z']" />
 				</div>
 			</td>
 		</tr>
@@ -84,12 +78,12 @@
 			<td>Symbols</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()">
+					<kbd class="kbdWrapper">
 						<kbd class="kbd">Alt</kbd>+<kbd class="kbd"
 							><span aria-hidden="true" class="lucca-icon icon-arrowTop mod-XXS"></span><span class="pr-u-mask">up arrow</span></kbd
 						>
 					</kbd>
-					<kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()">
+					<kbd class="kbdWrapper">
 						<kbd class="kbd">Option</kbd>+
 						<kbd class="kbd"
 							><span aria-hidden="true" class="lucca-icon icon-arrowBottom mod-XXS"></span><span class="pr-u-mask">down arrow</span></kbd
@@ -99,8 +93,8 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" [keys]="['Alt', 'ArrowUp']" />
-					<lu-kbd [pill]="pill()" [skeuo]="skeuo()" [keys]="['Alt', 'ArrowDown']" />
+					<lu-kbd [keys]="['Alt', 'ArrowUp']" />
+					<lu-kbd [keys]="['Alt', 'ArrowDown']" />
 				</div>
 			</td>
 		</tr>
@@ -109,15 +103,13 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<span class="demo-kbdPressed"
-						><span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"><kbd class="kbd">Esc</kbd></span></span
+						><span class="kbdWrapper"><kbd class="kbd">Esc</kbd></span></span
 					>
 					<span class="demo-kbdPressed mod-last"
-						><kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"
-							><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">S</kbd></kbd
-						></span
+						><kbd class="kbdWrapper"><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">S</kbd></kbd></span
 					>
 					<span class="demo-kbdPressed"
-						><kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"
+						><kbd class="kbdWrapper"
 							><kbd class="kbd">Alt</kbd>+<kbd class="kbd"
 								><span aria-hidden="true" class="lucca-icon icon-arrowTop mod-XXS"></span><span class="pr-u-mask">up arrow</span></kbd
 							></kbd
@@ -127,9 +119,9 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<span class="demo-kbdPressed"><lu-kbd [pill]="pill()" [skeuo]="skeuo()" keys="Escape" /></span>
-					<span class="demo-kbdPressed mod-last"><lu-kbd [pill]="pill()" [skeuo]="skeuo()" [keys]="['Control', 's']" /></span>
-					<span class="demo-kbdPressed"><lu-kbd [pill]="pill()" [skeuo]="skeuo()" [keys]="['Alt', 'ArrowUp']" /></span>
+					<span class="demo-kbdPressed"><lu-kbd keys="Escape" /></span>
+					<span class="demo-kbdPressed mod-last"><lu-kbd [keys]="['Control', 's']" /></span>
+					<span class="demo-kbdPressed"><lu-kbd [keys]="['Alt', 'ArrowUp']" /></span>
 				</div>
 			</td>
 		</tr>
@@ -138,14 +130,12 @@
 			<td>
 				<p>
 					Press
-					<kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"
-						><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">S</kbd></kbd
-					>
+					<kbd class="kbdWrapper"><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">S</kbd></kbd>
 					to save the document.
 				</p>
 			</td>
 			<td>
-				<p>Press <lu-kbd [pill]="pill()" [skeuo]="skeuo()" [keys]="['Control', 's']" /> to save the document.</p>
+				<p>Press <lu-kbd [keys]="['Control', 's']" /> to save the document.</p>
 			</td>
 		</tr>
 		<tr>
@@ -158,7 +148,7 @@
 								<li class="dropdown-list-option">
 									<button type="button" class="dropdown-list-option-action">
 										Move up
-										<kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"
+										<kbd class="kbdWrapper"
 											><kbd class="kbd">Alt</kbd>+<kbd class="kbd"
 												><span aria-hidden="true" class="lucca-icon icon-arrowTop mod-XXS"></span
 												><span class="pr-u-mask">up arrow</span></kbd
@@ -169,7 +159,7 @@
 								<li class="dropdown-list-option">
 									<button type="button" class="dropdown-list-option-action">
 										Move down
-										<kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()"
+										<kbd class="kbdWrapper"
 											><kbd class="kbd">Alt</kbd>+<kbd class="kbd"
 												><span aria-hidden="true" class="lucca-icon icon-arrowBottom mod-XXS"></span
 												><span class="pr-u-mask">down arrow</span></kbd
@@ -192,13 +182,13 @@
 							<lu-dropdown-item>
 								<button type="button" lu-dropdown-action>
 									Move up
-									<lu-kbd [pill]="pill()" [skeuo]="skeuo()" [keys]="['Alt', 'ArrowUp']" />
+									<lu-kbd [keys]="['Alt', 'ArrowUp']" />
 								</button>
 							</lu-dropdown-item>
 							<lu-dropdown-item>
 								<button type="button" lu-dropdown-action>
 									Move down
-									<lu-kbd [pill]="pill()" [skeuo]="skeuo()" [keys]="['Alt', 'ArrowDown']" />
+									<lu-kbd [keys]="['Alt', 'ArrowDown']" />
 								</button>
 							</lu-dropdown-item>
 							<lu-dropdown-item>
