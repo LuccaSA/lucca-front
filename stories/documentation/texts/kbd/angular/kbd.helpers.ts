@@ -88,7 +88,7 @@ export const KBD_ARG_TYPES: ArgTypes = {
 	},
 	intl: intlArgType(luKbdTranslations, 'LuKbdTranslations'),
 	inDropdown: {
-		name: 'In a dropdown (to see the animation)',
+		name: 'In a dropdown (to see the animation on hover)',
 		control: 'boolean',
 		description: 'Affiche le raccourci dans un menu, pour jouer son animation au survol ou au focus d’une option.',
 		table: { category: 'story' },
