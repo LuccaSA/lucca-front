@@ -1,0 +1,28 @@
+@mixin low {
+	--components-priorityLevels-icon-color1: var(--pr-t-color-text);
+	--components-priorityLevels-icon-color2: var(--palettes-neutral-400);
+	--components-priorityLevels-icon-color3: var(--palettes-neutral-400);
+}
+
+@mixin medium {
+	--components-priorityLevels-icon-color1: var(--palettes-warning-800);
+	--components-priorityLevels-icon-color2: var(--palettes-warning-800);
+	--components-priorityLevels-icon-color3: var(--palettes-neutral-400);
+}
+
+@mixin high {
+	--components-priorityLevels-icon-color1: var(--palettes-critical-800);
+	--components-priorityLevels-icon-color2: var(--palettes-critical-800);
+	--components-priorityLevels-icon-color3: var(--palettes-critical-800);
+}
+
+@mixin S {
+	--components-priorityLevels-font: var(--pr-t-font-body-XS);
+	--components-priorityLevels-minBlockSize: var(--pr-t-font-body-XS-lineHeight);
+	--components-priorityLevels-gap: var(--pr-t-spacings-25);
+}
+
+@mixin L {
+	--components-priorityLevels-font: var(--pr-t-font-body-M);
+	--components-priorityLevels-minBlockSize: var(--pr-t-font-body-M-lineHeight);
+}

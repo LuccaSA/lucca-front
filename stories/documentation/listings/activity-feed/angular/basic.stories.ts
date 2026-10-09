@@ -1,5 +1,8 @@
+import { intlArgType, setStoryOptions } from '@/helpers/stories';
+import { IconsList } from '@/stories/icons-list';
 import { finn } from '@/stories/users/user.mocks';
 import { LOCALE_ID } from '@angular/core';
+import { LuccaIcon } from '@lucca-front/icons';
 import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent, ActivityFeedUpdateItemComponent, luActivityFeedTranslations } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
 import { FileEntryComponent } from '@lucca-front/ng/file-upload';
@@ -7,11 +10,11 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { intlArgType } from '@/helpers/stories';
 
 interface ActivityFeedBasicStory {
 	statusStep: boolean;
 	pendingStep: boolean;
+	icon: LuccaIcon | null;
 	updated: boolean;
 	attachedContent: 'none' | 'file' | 'readMore';
 	addAction: boolean;
@@ -29,6 +32,14 @@ export default {
 		pendingStep: {
 			control: 'boolean',
 			description: 'Exemple avec une étape en attente.',
+			table: { category: 'inputs' },
+		},
+		icon: {
+			options: setStoryOptions(IconsList.map((i) => i.icon)),
+			control: {
+				type: 'select',
+			},
+			description: 'Étape identifiée par une icône.',
 			table: { category: 'inputs' },
 		},
 		updated: {
@@ -83,6 +94,10 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 		? `
 	<lu-activity-feed-step status="pending" [user]="user" label="En attente d'approbation par Daniel Hernandez. " />`
 		: '';
+	const iconStep = args.icon
+		? `
+	<lu-activity-feed-step icon="${args.icon}" [date]="date" label="Lorem ipsum dolor." />`
+		: '';
 	const updatedStep = args.updated
 		? `
 	<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié une demande.">
@@ -127,7 +142,7 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 	</lu-activity-feed-step>`
 		: '';
 	return `<lu-activity-feed>
-	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />${attachedContentStep}${statusSteps}${pendingStep}${updatedStep}${addActionStep}
+	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />${attachedContentStep}${statusSteps}${pendingStep}${iconStep}${updatedStep}${addActionStep}
 </lu-activity-feed>`;
 }
 
@@ -141,6 +156,7 @@ export const Basic: StoryObj<ActivityFeedBasicStory> = {
 		user: finn,
 		statusStep: false,
 		pendingStep: false,
+		icon: null,
 		updated: false,
 		attachedContent: 'none',
 		addAction: false,

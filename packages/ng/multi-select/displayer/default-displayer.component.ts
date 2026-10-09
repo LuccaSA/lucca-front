@@ -20,7 +20,11 @@ let nextID = 0;
 	template: `
 		<div class="multipleSelect-displayer">
 			<div class="multipleSelect-displayer-suffix">
-				<input [luInputLabelledBy]="valueID" autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
+				@if (select.bottomSheetMode()) {
+					<button type="button" [luInputLabelledBy]="valueID" #inputElement luMultiSelectDisplayerInput #trigger="luMultiSelectDisplayerInput">{{ trigger.placeholder }}</button>
+				} @else {
+					<input type="text" [luInputLabelledBy]="valueID" autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
+				}
 				@if (select.filterPillMode) {
 					<lu-icon icon="searchMagnifyingGlass" class="multiSelect-field-icon mod-search" />
 				}

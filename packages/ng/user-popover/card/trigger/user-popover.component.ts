@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, input, Signal } from '@angu
 import { toObservable } from '@angular/core/rxjs-interop';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LinkComponent } from '@lucca-front/ng/link';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
 import { SkeletonUserPopoverComponent } from '@lucca-front/ng/skeleton';
 import { ILuUser } from '@lucca-front/ng/user';
@@ -19,7 +20,7 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 	selector: 'lu-user-popover-content',
 	templateUrl: './user-popover.component.html',
 	styleUrl: './user-popover.component.scss',
-	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, SkeletonUserPopoverComponent],
+	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, LinkComponent, SkeletonUserPopoverComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserPopoverComponent {

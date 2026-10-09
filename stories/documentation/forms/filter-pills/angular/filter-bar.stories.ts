@@ -20,13 +20,14 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
+import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { IconComponent } from '@lucca/prisme/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { intlArgType } from '@/helpers/stories';
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
+	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular/Basic',
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -50,6 +51,8 @@ export default {
 				DividerComponent,
 				SegmentedControlComponent,
 				SegmentedControlFilterComponent,
+				SegmentedControlTabsComponent,
+				SegmentedControlTabsPanelComponent,
 				IconComponent,
 				DropdownMenuComponent,
 				DropdownItemComponent,
@@ -111,6 +114,15 @@ export default {
 			},
 			table: { category: 'inputs' },
 		},
+		groupedOptionalFilters: {
+			name: '↳ groupedOptionalFilters',
+			description: 'Ajoute d’autres FilterPills optionnelles, réparties en groupes via l’input `grouping` de la FilterPill. Une pill sans `grouping` reste hors groupe.',
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'optionalFilter', truthy: true },
+			table: { category: 'inputs' },
+		},
 		actionButton: {
 			description: 'Affiche un bouton d’action associé à la FilterBar.',
 			control: {
@@ -132,10 +144,25 @@ export default {
 		const actionButton = args['actionButton'] ? `<button type="submit" size="S" luButton="outlined">Exporter</button>` : '';
 		const applyFiltersButton = args['manualApply'] ? `<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>` : '';
 		const periodFilter = args['optionalFilter']
-			? `<lu-filter-pill label="Période" optional name="period">
+			? `<lu-filter-pill label="Période" optional name="period"${args['groupedOptionalFilters'] ? ' grouping="Dates"' : ''}>
 		<lu-date-range-input [(ngModel)]="examplePeriod" />
 	</lu-filter-pill>`
 			: '';
+		const groupedFilters =
+			args['optionalFilter'] && args['groupedOptionalFilters']
+				? `<lu-filter-pill label="Date d’entrée" optional name="hireDate" grouping="Dates">
+		<lu-date-input [(ngModel)]="exampleHireDate" />
+	</lu-filter-pill>
+	<lu-filter-pill label="Départements" optional name="optionalDepartments" grouping="Organisation">
+		<lu-multi-select [ngModel]="[]" departments filterPillLabelPlural="départements" />
+	</lu-filter-pill>
+	<lu-filter-pill label="Établissement" optional name="optionalEstablishment" grouping="Organisation">
+		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
+	</lu-filter-pill>
+	<lu-filter-pill label="Collaborateurs partis" optional name="formerEmployees" grouping="Organisation">
+		<lu-checkbox-input [ngModel]="false" />
+	</lu-filter-pill>`
+				: '';
 		const filterViewSelectorEnabled = args['views'] && args['filterViewSelector'];
 		const saveViewEnabled = args['views'] && args['saveView'];
 		const saveViewTab =
@@ -222,6 +249,7 @@ export default {
 				example1: null,
 				examplePeriod: null,
 				departmentsPluralFn: (count: number) => `${count} départements`,
+				exampleHireDate: null,
 				filterViews,
 				// Reference the actual array element so it matches (the selector compares views by reference).
 				selectedFilterView: filterViews[0],
@@ -243,6 +271,7 @@ export default {
 		<lu-date-input [(ngModel)]="example1" />
 	</lu-filter-pill>
 	${periodFilter}
+	${groupedFilters}
 	<lu-form-field label="Test" hiddenLabel>
 		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 	</lu-form-field>
@@ -254,12 +283,15 @@ ${saveViewDropdownTemplate}`,
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; actionButton: boolean }> = {
+export const Basic: StoryObj<
+	FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; groupedOptionalFilters: boolean; actionButton: boolean }
+> = {
 	args: {
 		views: false,
 		saveView: false,
 		filterViewSelector: false,
 		optionalFilter: false,
+		groupedOptionalFilters: false,
 		actionButton: false,
 		manualApply: false,
 	},

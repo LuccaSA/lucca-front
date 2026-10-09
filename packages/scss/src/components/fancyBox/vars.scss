@@ -1,19 +1,37 @@
 @mixin vars {
 	--components-fancyBox-paddingInline: var(--pr-t-spacings-200);
 	--components-fancyBox-marginInline: auto;
-
-	// Content
 	--components-fancyBox-contentMinBlockSize: 7rem;
 	--components-fancyBox-contentMinInlineSize: min(22rem, 100%);
 	--components-fancyBox-contentPaddingBlock: var(--pr-t-spacings-300);
 	--components-fancyBox-contentPaddingInline: var(--pr-t-spacings-700);
 
-	// Visuals
+	--components-fancyBox-content-foregroundStartEnd-insetBlockStart: -1.5rem;
+	--components-fancyBox-content-foregroundStartEnd-insetInlineEnd: -10rem;
+	--components-fancyBox-content-foregroundStartEnd-inlineSize: 12.5rem;
+	--components-fancyBox-content-foregroundStartEnd-blockSize: 10rem;
+
+	--components-fancyBox-content-backgroundStartEnd-insetBlockStart: var(--components-fancyBox-content-foregroundStartEnd-insetBlockStart);
+	--components-fancyBox-content-backgroundStartEnd-insetInlineEnd: var(--components-fancyBox-content-foregroundStartEnd-insetInlineEnd);
+	--components-fancyBox-content-backgroundStartEnd-inlineSize: var(--components-fancyBox-content-foregroundStartEnd-inlineSize);
+	--components-fancyBox-content-backgroundStartEnd-blockSize: var(--components-fancyBox-content-foregroundStartEnd-blockSize);
+
+	--components-fancyBox-content-foregroundEndStart-insetBlockEnd: var(--components-fancyBox-content-foregroundStartEnd-insetBlockStart);
+	--components-fancyBox-content-foregroundEndStart-insetInlineStart: var(--components-fancyBox-content-foregroundStartEnd-insetInlineEnd);
+	--components-fancyBox-content-foregroundEndStart-inlineSize: var(--components-fancyBox-content-foregroundStartEnd-inlineSize);
+	--components-fancyBox-content-foregroundEndStart-blockSize: var(--components-fancyBox-content-foregroundStartEnd-blockSize);
+
+	--components-fancyBox-content-backgroundEndStart-insetBlockEnd: var(--components-fancyBox-content-foregroundStartEnd-insetBlockStart);
+	--components-fancyBox-content-backgroundEndStart-insetInlineStart: var(--components-fancyBox-content-foregroundStartEnd-insetInlineEnd);
+	--components-fancyBox-content-backgroundEndStart-inlineSize: var(--components-fancyBox-content-foregroundStartEnd-inlineSize);
+	--components-fancyBox-content-backgroundEndStart-blockSize: var(--components-fancyBox-content-foregroundStartEnd-blockSize);
+
+	// Deprecated
+	--components-fancyBox-offsetInline: var(--components-fancyBox-content-foregroundStartEnd-insetInlineEnd);
+	--components-fancyBox-offsetBlock: var(--components-fancyBox-content-foregroundStartEnd-insetBlockStart);
+	--components-fancyBox-imageWidth: var(--components-fancyBox-content-foregroundStartEnd-inlineSize);
+	--components-fancyBox-imageHeight: var(--components-fancyBox-content-foregroundStartEnd-blockSize);
 	--components-fancyBox-background-left: none;
 	--components-fancyBox-background-right: none;
 	--components-fancyBox-foreground: none;
-	--components-fancyBox-imageWidth: 12.5rem;
-	--components-fancyBox-imageHeight: 10rem;
-	--components-fancyBox-offsetInline: -10rem;
-	--components-fancyBox-offsetBlock: -1.5rem;
 }

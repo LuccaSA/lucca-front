@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/icons/src/icon/exports' as icon;
@@ -62,6 +63,10 @@
 			@include clear.S;
 		}
 	}
+}
+
+@mixin width($value) {
+	--component-textField-width: #{math.div($value, 2) * 1rem};
 }
 
 @mixin valueAlignRight {

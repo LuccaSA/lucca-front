@@ -455,6 +455,7 @@ export type LuccaIcon =
 	| 'higher'
 	| 'priorityHighest'
 	| 'highest'
+	| 'priorityLevels'
 	| 'priorityLow'
 	| 'low'
 	| 'priorityLower'

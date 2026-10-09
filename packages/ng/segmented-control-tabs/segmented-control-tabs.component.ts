@@ -1,7 +1,25 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, contentChildren, ElementRef, forwardRef, input, model, viewChildren, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+	AfterContentInit,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	contentChildren,
+	ElementRef,
+	forwardRef,
+	input,
+	model,
+	signal,
+	TemplateRef,
+	viewChild,
+	viewChildren,
+	ViewEncapsulation,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { luBooleanAttribute, PortalDirective } from '@lucca-front/ng/core';
 import { NoopValueAccessorDirective } from '@lucca-front/ng/forms';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { SegmentedControlTabsPanelComponent } from './public-api';
 import { LU_SEGMENTEDCONTROLTABS_INSTANCE } from './segmented-control-tabs.token';
 
@@ -12,7 +30,7 @@ let nextId = 0;
 	templateUrl: './segmented-control-tabs.component.html',
 	styleUrl: './segmented-control-tabs.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [ReactiveFormsModule, PortalDirective],
+	imports: [ReactiveFormsModule, PortalDirective, NgTemplateOutlet, LuTooltipTriggerDirective, IconComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [NoopValueAccessorDirective],
 	providers: [
@@ -44,6 +62,16 @@ export class SegmentedControlTabsComponent<T = unknown> implements AfterContentI
 
 	readonly tabs = contentChildren<SegmentedControlTabsPanelComponent<T>>(SegmentedControlTabsPanelComponent);
 	readonly tabButtons = viewChildren<ElementRef<HTMLButtonElement>>('tabButton');
+
+	/**
+	 * Tablist template, rendered by the component itself unless a host (e.g. `lu-filter-bar`) renders it elsewhere
+	 */
+	readonly tablistTemplate = viewChild.required<TemplateRef<unknown>>('tablist');
+
+	/**
+	 * Set by a host rendering the tablist itself, so the component only renders its panels
+	 */
+	readonly externalTablist = signal(false);
 
 	readonly currentIndex = computed(() => this.tabs().findIndex((tab) => tab.value() === this.active()));
 

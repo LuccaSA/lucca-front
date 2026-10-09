@@ -2,43 +2,401 @@
 	<tbody>
 		<tr>
 			<td></td>
-			<td>
-				<div class="demo-QAtable-list">Angular</div>
-			</td>
+			<td>Angular</td>
 		</tr>
 		<tr>
 			<td>Default</td>
 			<td>
 				<lu-filter-bar>
-					<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
-						<ng-template #label0>Tous <lu-numeric-badge [value]="12" /></ng-template>
-						<ng-template #label1>En cours d’approbation <lu-numeric-badge [value]="5" /></ng-template>
-						<ng-template #label2>Approuvés <lu-numeric-badge [value]="3" /></ng-template>
-						<ng-template #label3>Clos <lu-numeric-badge [value]="4" /></ng-template>
-						<lu-segmented-control-filter [label]="label0" value="0" />
-						<lu-segmented-control-filter [label]="label1" value="1" />
-						<lu-segmented-control-filter [label]="label2" value="2" />
-						<lu-segmented-control-filter [label]="label3" value="3" />
-					</lu-segmented-control>
-					<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
+					<lu-filter-pill label="Arroser" name="defaultFormerEmployees">
 						<lu-checkbox-input [ngModel]="false" />
 					</lu-filter-pill>
-					<lu-filter-pill label="Date de début" optional name="startingDate"> <lu-date-input [(ngModel)]="example1" /></lu-filter-pill>
-					<lu-filter-pill label="Période">
-						<lu-date-range-input [(ngModel)]="examplePeriod" />
-					</lu-filter-pill>
-					<lu-filter-pill label="Multi ApiV4" optional name="multiv4">
-						<lu-multi-select
-							[ngModel]="[]"
-							apiV4="/organization/structure/api/establishments"
-							[filterPillLabelPluralFn]="establishmentsPluralFn"
-						/>
-					</lu-filter-pill>
-					<lu-form-field label="Test" hiddenLabel>
-						<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+					<lu-form-field label="Rechercher" hiddenLabel>
+						<lu-text-input [ngModel]="null" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 					</lu-form-field>
-					<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
 				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>Views</td>
+			<td>
+				<lu-filter-bar>
+					<lu-segmented-control *luFilterPillAddonBefore [ngModel]="'0'">
+						<ng-template #counterLabel0>Tous <lu-numeric-badge [value]="12" /></ng-template>
+						<ng-template #counterLabel1>À semer <lu-numeric-badge [value]="5" /></ng-template>
+						<ng-template #counterLabel2>À planter <lu-numeric-badge [value]="3" /></ng-template>
+						<ng-template #counterLabel3>À récolter <lu-numeric-badge [value]="4" /></ng-template>
+						<lu-segmented-control-filter [label]="counterLabel0" value="0" />
+						<lu-segmented-control-filter [label]="counterLabel1" value="1" />
+						<lu-segmented-control-filter [label]="counterLabel2" value="2" />
+						<lu-segmented-control-filter [label]="counterLabel3" value="3" />
+					</lu-segmented-control>
+					<lu-filter-pill label="Arroser" name="counterFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>Modified view</td>
+			<td>
+				<lu-filter-bar>
+					<lu-segmented-control *luFilterPillAddonBefore [ngModel]="'0'">
+						<ng-template #newViewLabel0>Tous</ng-template>
+						<ng-template #newViewLabel1>À semer</ng-template>
+						<ng-template #newViewLabel2>À planter</ng-template>
+						<ng-template #newViewLabel3>À récolter</ng-template>
+						<lu-segmented-control-filter [label]="newViewLabel0" value="0" />
+						<lu-segmented-control-filter [label]="newViewLabel1" value="1" />
+						<lu-segmented-control-filter [label]="newViewLabel2" value="2" />
+						<lu-segmented-control-filter [label]="newViewLabel3" value="3" />
+					</lu-segmented-control>
+					<lu-filter-pill label="Arroser" name="newViewFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<button *luFilterPillAddonAfter type="button" size="S" luButton="outlined" palette="product">
+						Enregistrer en tant que nouvelle vue
+					</button>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>Custom view</td>
+			<td>
+				<lu-filter-bar>
+					<lu-segmented-control *luFilterPillAddonBefore [ngModel]="'4'">
+						<ng-template #customLabel0>Tous</ng-template>
+						<ng-template #customLabel1>À semer</ng-template>
+						<ng-template #customLabel2>À planter</ng-template>
+						<ng-template #customLabel3>À récolter</ng-template>
+						<ng-template #customLabel4>
+							Potager
+							<button type="button" size="XS" luButton="ghost" aria-expanded="false" disclosure [luDropdown]="customOptionsDropdown">
+								<lu-icon alt="Options" icon="menuDots" />
+							</button>
+							<ng-template #customOptionsDropdown>
+								<lu-dropdown-menu>
+									<lu-dropdown-item>
+										<button lu-dropdown-action type="button"><lu-icon icon="edit" /> Modifier le nom</button>
+									</lu-dropdown-item>
+									<lu-dropdown-item>
+										<button lu-dropdown-action type="button" critical><lu-icon icon="trash" /> Supprimer</button>
+									</lu-dropdown-item>
+								</lu-dropdown-menu>
+							</ng-template>
+						</ng-template>
+						<lu-segmented-control-filter [label]="customLabel0" value="0" />
+						<lu-segmented-control-filter [label]="customLabel1" value="1" />
+						<lu-segmented-control-filter [label]="customLabel2" value="2" />
+						<lu-segmented-control-filter [label]="customLabel3" value="3" />
+						<lu-segmented-control-filter [label]="customLabel4" value="4" />
+					</lu-segmented-control>
+					<lu-filter-pill label="Arroser" name="customFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<button *luFilterPillAddonAfter type="button" size="S" luButton="outlined" palette="product" disclosure aria-expanded="false">
+						Enregistrer la vue
+						<lu-icon icon="arrowChevronBottom" />
+					</button>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>View selector</td>
+			<td>
+				<lu-filter-bar>
+					<lu-filter-view-selector *luFilterPillAddonBefore [views]="views" [(selectedView)]="selectedView" />
+					<lu-filter-pill label="Arroser" name="viewSelectorFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>Optional filters</td>
+			<td>
+				<lu-filter-bar>
+					<lu-filter-pill label="Arroser" name="optionalFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Période de récolte" optional name="optionalPeriod">
+						<lu-date-range-input [ngModel]="null" />
+					</lu-filter-pill>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>Actions</td>
+			<td>
+				<lu-filter-bar>
+					<lu-filter-pill label="Arroser" name="actionsFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Cueillir</button>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>Manual apply</td>
+			<td>
+				<lu-filter-bar manualApply>
+					<lu-filter-pill label="Arroser" name="manualFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>Tabs</td>
+			<td>
+				<lu-filter-bar [segmentedControlTabs]="tabsTabs">
+					<lu-filter-pill label="Arroser" name="tabsFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+				</lu-filter-bar>
+				<lu-segmented-control-tabs #tabsTabs ariaLabel="Affichage">
+					<lu-segmented-control-tabs-panel label="Liste" icon="list" hiddenLabel value="list"
+						>Liste des plantations</lu-segmented-control-tabs-panel
+					>
+					<lu-segmented-control-tabs-panel label="Carte" icon="mapPlan" hiddenLabel value="map"
+						>Carte des plantations</lu-segmented-control-tabs-panel
+					>
+				</lu-segmented-control-tabs>
+			</td>
+		</tr>
+		<tr>
+			<td>Tabs + actions</td>
+			<td>
+				<lu-filter-bar [segmentedControlTabs]="tabsActionsTabs">
+					<lu-filter-pill label="Arroser" name="tabsActionsFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Cueillir</button>
+				</lu-filter-bar>
+				<lu-segmented-control-tabs #tabsActionsTabs ariaLabel="Affichage">
+					<lu-segmented-control-tabs-panel label="Liste" icon="list" hiddenLabel value="list"
+						>Liste des plantations</lu-segmented-control-tabs-panel
+					>
+					<lu-segmented-control-tabs-panel label="Carte" icon="mapPlan" hiddenLabel value="map"
+						>Carte des plantations</lu-segmented-control-tabs-panel
+					>
+				</lu-segmented-control-tabs>
+			</td>
+		</tr>
+		<tr>
+			<td>Overflow</td>
+			<td>
+				<lu-filter-bar>
+					<lu-filter-pill label="Tailler" name="overflowPill0">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Désherber" name="overflowPill1">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Rempoter" name="overflowPill2">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Pailler" name="overflowPill3">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Semer" name="overflowPill4">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Planter" name="overflowPill5">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Récolter" name="overflowPill6">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Bouturer" name="overflowPill7">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Tondre" name="overflowPill8">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Biner" name="overflowPill9">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Butter" name="overflowPill10">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Éclaircir" name="overflowPill11">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Composter" name="overflowPill12">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Fertiliser" name="overflowPill13">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Traiter" name="overflowPill14">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Ramasser" name="overflowPill15">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>All options</td>
+			<td>
+				<lu-filter-bar manualApply>
+					<lu-segmented-control *luFilterPillAddonBefore [ngModel]="'0'">
+						<ng-template #allOptionsLabel0>Tous <lu-numeric-badge [value]="12" /></ng-template>
+						<ng-template #allOptionsLabel1>À semer <lu-numeric-badge [value]="5" /></ng-template>
+						<ng-template #allOptionsLabel2>À planter <lu-numeric-badge [value]="3" /></ng-template>
+						<ng-template #allOptionsLabel3>À récolter <lu-numeric-badge [value]="4" /></ng-template>
+						<lu-segmented-control-filter [label]="allOptionsLabel0" value="0" />
+						<lu-segmented-control-filter [label]="allOptionsLabel1" value="1" />
+						<lu-segmented-control-filter [label]="allOptionsLabel2" value="2" />
+						<lu-segmented-control-filter [label]="allOptionsLabel3" value="3" />
+					</lu-segmented-control>
+					<lu-filter-pill label="Arroser" name="allOptionsFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Date de plantation" name="allOptionsStartingDate">
+						<lu-date-input [ngModel]="null" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Période de récolte" optional name="allOptionsPeriod">
+						<lu-date-range-input [ngModel]="null" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Légumes" optional name="allOptionsLegumes">
+						<lu-multi-select [ngModel]="[]" [filterPillLabelPluralFn]="legumesPluralFn" [options]="legumes" />
+					</lu-filter-pill>
+					<lu-form-field label="Rechercher" hiddenLabel>
+						<lu-text-input [ngModel]="null" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+					</lu-form-field>
+					<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>
+					<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Cueillir</button>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
+			<td>Narrow (simulated)</td>
+			<td>
+				<div class="demo-filterBar-narrow">
+					<lu-filter-bar manualApply>
+						<lu-segmented-control *luFilterPillAddonBefore [ngModel]="'0'">
+							<ng-template #narrowLabel0>Tous <lu-numeric-badge [value]="12" /></ng-template>
+							<ng-template #narrowLabel1>À semer <lu-numeric-badge [value]="5" /></ng-template>
+							<ng-template #narrowLabel2>À planter <lu-numeric-badge [value]="3" /></ng-template>
+							<ng-template #narrowLabel3>À récolter <lu-numeric-badge [value]="4" /></ng-template>
+							<lu-segmented-control-filter [label]="narrowLabel0" value="0" />
+							<lu-segmented-control-filter [label]="narrowLabel1" value="1" />
+							<lu-segmented-control-filter [label]="narrowLabel2" value="2" />
+							<lu-segmented-control-filter [label]="narrowLabel3" value="3" />
+						</lu-segmented-control>
+						<lu-filter-pill label="Arroser" name="narrowFormerEmployees">
+							<lu-checkbox-input [ngModel]="false" />
+						</lu-filter-pill>
+						<lu-filter-pill label="Date de plantation" name="narrowStartingDate">
+							<lu-date-input [ngModel]="null" />
+						</lu-filter-pill>
+						<lu-filter-pill label="Période de récolte" optional name="narrowPeriod">
+							<lu-date-range-input [ngModel]="null" />
+						</lu-filter-pill>
+						<lu-filter-pill label="Légumes" optional name="narrowLegumes">
+							<lu-multi-select [ngModel]="[]" [filterPillLabelPluralFn]="legumesPluralFn" [options]="legumes" />
+						</lu-filter-pill>
+						<lu-form-field label="Rechercher" hiddenLabel>
+							<lu-text-input [ngModel]="null" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+						</lu-form-field>
+						<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>
+						<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Cueillir</button>
+					</lu-filter-bar>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Narrow, tabs (simulated)</td>
+			<td>
+				<div class="demo-filterBar-narrow">
+					<lu-filter-bar [segmentedControlTabs]="narrowTabsTabs">
+						<lu-filter-pill label="Arroser" name="narrowTabsFormerEmployees">
+							<lu-checkbox-input [ngModel]="false" />
+						</lu-filter-pill>
+						<lu-filter-pill label="Date de plantation" name="narrowTabsStartingDate">
+							<lu-date-input [ngModel]="null" />
+						</lu-filter-pill>
+						<lu-form-field label="Rechercher" hiddenLabel>
+							<lu-text-input [ngModel]="null" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+						</lu-form-field>
+						<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Cueillir</button>
+					</lu-filter-bar>
+					<lu-segmented-control-tabs #narrowTabsTabs ariaLabel="Affichage">
+						<lu-segmented-control-tabs-panel label="Liste" icon="list" hiddenLabel value="list"
+							>Liste des plantations</lu-segmented-control-tabs-panel
+						>
+						<lu-segmented-control-tabs-panel label="Carte" icon="mapPlan" hiddenLabel value="map"
+							>Carte des plantations</lu-segmented-control-tabs-panel
+						>
+					</lu-segmented-control-tabs>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Touch (simulated)</td>
+			<td>
+				<div class="demo-filterBar-touch">
+					<lu-filter-bar manualApply>
+						<lu-segmented-control *luFilterPillAddonBefore [ngModel]="'0'">
+							<ng-template #touchLabel0>Tous <lu-numeric-badge [value]="12" /></ng-template>
+							<ng-template #touchLabel1>À semer <lu-numeric-badge [value]="5" /></ng-template>
+							<ng-template #touchLabel2>À planter <lu-numeric-badge [value]="3" /></ng-template>
+							<ng-template #touchLabel3>À récolter <lu-numeric-badge [value]="4" /></ng-template>
+							<lu-segmented-control-filter [label]="touchLabel0" value="0" />
+							<lu-segmented-control-filter [label]="touchLabel1" value="1" />
+							<lu-segmented-control-filter [label]="touchLabel2" value="2" />
+							<lu-segmented-control-filter [label]="touchLabel3" value="3" />
+						</lu-segmented-control>
+						<lu-filter-pill label="Arroser" name="touchFormerEmployees">
+							<lu-checkbox-input [ngModel]="false" />
+						</lu-filter-pill>
+						<lu-filter-pill label="Date de plantation" name="touchStartingDate">
+							<lu-date-input [ngModel]="null" />
+						</lu-filter-pill>
+						<lu-filter-pill label="Période de récolte" optional name="touchPeriod">
+							<lu-date-range-input [ngModel]="null" />
+						</lu-filter-pill>
+						<lu-filter-pill label="Légumes" optional name="touchLegumes">
+							<lu-multi-select [ngModel]="[]" [filterPillLabelPluralFn]="legumesPluralFn" [options]="legumes" />
+						</lu-filter-pill>
+						<lu-form-field label="Rechercher" hiddenLabel>
+							<lu-text-input [ngModel]="null" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+						</lu-form-field>
+						<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>
+						<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Cueillir</button>
+					</lu-filter-bar>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Touch, tabs (simulated)</td>
+			<td>
+				<div class="demo-filterBar-touch">
+					<lu-filter-bar [segmentedControlTabs]="touchTabsTabs">
+						<lu-filter-pill label="Arroser" name="touchTabsFormerEmployees">
+							<lu-checkbox-input [ngModel]="false" />
+						</lu-filter-pill>
+						<lu-filter-pill label="Date de plantation" name="touchTabsStartingDate">
+							<lu-date-input [ngModel]="null" />
+						</lu-filter-pill>
+						<lu-form-field label="Rechercher" hiddenLabel>
+							<lu-text-input [ngModel]="null" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+						</lu-form-field>
+						<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Cueillir</button>
+					</lu-filter-bar>
+					<lu-segmented-control-tabs #touchTabsTabs ariaLabel="Affichage">
+						<lu-segmented-control-tabs-panel label="Liste" icon="list" hiddenLabel value="list"
+							>Liste des plantations</lu-segmented-control-tabs-panel
+						>
+						<lu-segmented-control-tabs-panel label="Carte" icon="mapPlan" hiddenLabel value="map"
+							>Carte des plantations</lu-segmented-control-tabs-panel
+						>
+					</lu-segmented-control-tabs>
+				</div>
 			</td>
 		</tr>
 	</tbody>

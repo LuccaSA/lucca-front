@@ -1,6 +1,6 @@
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
@@ -41,14 +41,19 @@ interface SavedView {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FilterPillStory {
+	/**
+	 * Disables every input, to check the disabled filter pills
+	 */
+	readonly disabled = input(false);
+
 	legumes = allLegumes;
 	legumesPluralFn = (count: number) => `${count} légumes`;
-	departmentsPluralFn = (count: number) => `${count} départements`;
+	departmentsPluralFn = (count: number) => `${count} parcelles`;
 	clue = '';
 	views: SavedView[] = [
-		{ id: 1, name: 'Product manager' },
-		{ id: 2, name: 'Product designer' },
-		{ id: 3, name: 'Développeur' },
+		{ id: 1, name: 'Potager' },
+		{ id: 2, name: 'Verger' },
+		{ id: 3, name: 'Serre' },
 	];
 	// Reference the actual array element so it matches (the selector compares views by reference).
 	selectedView: SavedView | null = this.views[0];
@@ -76,9 +81,14 @@ export default {
 	decorators: [applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template = () => ({});
+const template = (args: Partial<FilterPillStory>) => ({ props: args });
 
 export const Basic: StoryObj<FilterPillStory> = {
 	args: {},
+	render: template,
+};
+
+export const Disabled: StoryObj<FilterPillStory> = {
+	args: { disabled: true },
 	render: template,
 };
