@@ -1,8 +1,10 @@
-import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { LOCALE_ID } from '@angular/core';
+import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LinkComponent } from '@lucca-front/ng/link';
+import { ReorderDirective, ReorderEvent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
 import { RESOURCE_CARD_SIZE, ResourceCardButtonComponent, ResourceCardComponent, ResourceCardLinkComponent, ResourceCardWrapperComponent } from '@lucca-front/ng/resource-card';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
@@ -19,6 +21,7 @@ interface ResourceCardAngularBasicStory {
 	illustration: boolean;
 	infos: boolean;
 	action: boolean;
+	luReorder?: (event: ReorderEvent) => void;
 }
 
 export default {
@@ -30,6 +33,12 @@ export default {
 				type: 'select',
 			},
 			table: { category: 'inputs' },
+		},
+		luReorder: {
+			description: 'Événement déclenché lorsqu’une carte est déplacée, à la souris, depuis le menu de sa poignée ou au clavier.',
+			action: 'luReorder',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'ReorderEvent' } },
 		},
 	},
 	decorators: [
@@ -47,10 +56,12 @@ export default {
 				ResourceCardWrapperComponent,
 				CdkDropList,
 				CdkDrag,
+				ReorderDirective,
+				ReorderItemLabelDirective,
 			],
 		}),
 		applicationConfig({
-			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
+			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }]), { provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
 } as Meta;
@@ -83,19 +94,34 @@ function getTemplate(args: ResourceCardAngularBasicStory) {
 			</ng-container>`
 		: ``;
 	const cards = `
-		<lu-resource-card cdkDrag>
-			<a href="#" luResourceCardAction>Lorem ipsum dolor</a>${headingInfosTpl}${beforeTpl}${afterTpl}${descriptionTpl}
-		</lu-resource-card>`.repeat(3);
+		@for (card of cards; track card) {
+			<lu-resource-card cdkDrag [luReorderItemLabel]="card">
+				<a href="#" luResourceCardAction>{{ card }}</a>${headingInfosTpl}${beforeTpl}${afterTpl}${descriptionTpl}
+			</lu-resource-card>
+		}`;
 
-	return `<lu-resource-card-wrapper cdkDropList draggable${sizeWrapperAttr}>${cards}</lu-resource-card-wrapper>`;
+	return `<lu-resource-card-wrapper cdkDropList luReorder (luReorder)="onReorder($event)" draggable${sizeWrapperAttr}>${cards}
+</lu-resource-card-wrapper>`;
 }
 
-const Template = (args: ResourceCardAngularBasicStory) => ({
-	props: args,
-	template: getTemplate(args),
-});
+const Template = (args: ResourceCardAngularBasicStory) => {
+	const cards = ['Lorem ipsum dolor 1', 'Lorem ipsum dolor 2', 'Lorem ipsum dolor 3'];
+
+	return {
+		props: {
+			...args,
+			cards,
+			onReorder: (event: ReorderEvent) => {
+				moveItemInArray(cards, event.previousIndex, event.currentIndex);
+				args.luReorder?.(event);
+			},
+		},
+		template: getTemplate(args),
+	};
+};
 
 export const Basic: StoryObj<ResourceCardAngularBasicStory> = {
+	name: 'Reorder',
 	args: {
 		wrapperSize: '',
 		infos: true,

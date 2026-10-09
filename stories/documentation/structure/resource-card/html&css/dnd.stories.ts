@@ -59,9 +59,10 @@ function getTemplate(args: ResourceCardHTMLBasicStory) {
 		<section class="resourceCard${sizeAttr}" #resourceCard1>
 			<div class="resourceCard-layout">
 				<div class="resourceCard-layout-before">
-					<div class="button resourceCard-layout-before-button">
+					<button type="button" class="button resourceCard-layout-before-button" aria-expanded="false" aria-keyshortcuts="Alt+ArrowUp Alt+ArrowLeft Alt+ArrowDown Alt+ArrowRight">
 						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
-					</div>${beforeTpl}
+						<span class="pr-u-mask">Déplacer « Lorem ipsum dolor »</span>
+					</button>${beforeTpl}
 				</div>
 				<header class="resourceCard-layout-header">
 					<h3 class="resourceCard-layout-header-title">
@@ -73,9 +74,10 @@ function getTemplate(args: ResourceCardHTMLBasicStory) {
 		<section class="resourceCard${sizeAttr} cdk-drag-preview" #resourceCard1>
 			<div class="resourceCard-layout">
 				<div class="resourceCard-layout-before">
-					<div class="button resourceCard-layout-before-button">
+					<button type="button" class="button resourceCard-layout-before-button" aria-expanded="false" aria-keyshortcuts="Alt+ArrowUp Alt+ArrowLeft Alt+ArrowDown Alt+ArrowRight">
 						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
-					</div>${beforeTpl}
+						<span class="pr-u-mask">Déplacer « Lorem ipsum dolor »</span>
+					</button>${beforeTpl}
 				</div>
 				<header class="resourceCard-layout-header">
 					<h3 class="resourceCard-layout-header-title">
@@ -87,9 +89,10 @@ function getTemplate(args: ResourceCardHTMLBasicStory) {
 		<section class="resourceCard${sizeAttr} cdk-drag-placeholder" #resourceCard1>
 			<div class="resourceCard-layout">
 				<div class="resourceCard-layout-before">
-					<div class="button resourceCard-layout-before-button">
+					<button type="button" class="button resourceCard-layout-before-button" aria-expanded="false" aria-keyshortcuts="Alt+ArrowUp Alt+ArrowLeft Alt+ArrowDown Alt+ArrowRight">
 						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
-					</div>${beforeTpl}
+						<span class="pr-u-mask">Déplacer « Lorem ipsum dolor »</span>
+					</button>${beforeTpl}
 				</div>
 				<header class="resourceCard-layout-header">
 					<h3 class="resourceCard-layout-header-title">
@@ -108,6 +111,7 @@ const Template = (args: ResourceCardHTMLBasicStory) => ({
 });
 
 export const Basic: StoryObj<ResourceCardHTMLBasicStory> = {
+	name: 'Reorder',
 	args: {
 		size: '',
 		infos: false,

@@ -1,0 +1,10 @@
+<lu-data-table>
+	<tbody luDataTableBody cdkDropList luReorder (luReorder)="onDrop($event)">
+		@for (employee of employees; track employee.name) {
+			<!-- TODO: add luReorderItemLabel -->
+			<tr luDataTableRow draggable cdkDrag>
+				<td luDataTableCell>{{ employee.name }}</td>
+			</tr>
+		}
+	</tbody>
+</lu-data-table>

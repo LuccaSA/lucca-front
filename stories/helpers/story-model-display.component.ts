@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 
 @Component({
 	selector: 'pr-story-model-display',
 	imports: [CalloutComponent],
-	template: ` <lu-callout icon="settingsGear" size="S" heading="NgModel value">
+	template: ` <lu-callout icon="settingsGear" size="S" [heading]="heading()">
 		<pre class="code" data-testid="pr-ng-model"><ng-content /></pre>
 	</lu-callout>`,
 	styles: `
@@ -39,4 +39,9 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StoryModelDisplayComponent {}
+export class StoryModelDisplayComponent {
+	/**
+	 * Title of the callout
+	 */
+	readonly heading = input('NgModel value');
+}

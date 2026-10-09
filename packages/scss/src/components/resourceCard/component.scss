@@ -13,7 +13,7 @@
 		content: '';
 		position: absolute;
 		inset: var(--components-resourceCard-before-inset);
-		background-color: var(--pr-t-elevation-surface-raised);
+		background-color: var(--components-resourceCard-before-backgroundColor);
 		box-shadow: var(--components-resourceCard-before-boxShadow);
 		border-radius: var(--components-resourceCard-borderRadius);
 		transition-duration: var(--commons-animations-durations-fast);

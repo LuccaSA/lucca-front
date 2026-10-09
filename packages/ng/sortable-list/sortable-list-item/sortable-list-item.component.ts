@@ -1,8 +1,9 @@
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output, ViewEncapsulation } from '@angular/core';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { PortalContent, PortalDirective, luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { ReorderDirective, ReorderHandleComponent } from '@lucca-front/ng/reorder';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
@@ -12,7 +13,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	styleUrl: './sortable-list-item.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [ClearComponent, CdkDragHandle, IconComponent, LuTooltipModule, PortalDirective],
+	imports: [ClearComponent, CdkDragHandle, IconComponent, LuTooltipModule, PortalDirective, ReorderHandleComponent],
 	host: {
 		class: 'sortableList-item',
 		'[class.mod-clickable]': 'clickable()',
@@ -21,6 +22,8 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	},
 })
 export class SortableListItemComponent {
+	protected readonly reorder = inject(ReorderDirective, { optional: true });
+
 	/**
 	 * Changes the text displayed by the sortable list item
 	 */

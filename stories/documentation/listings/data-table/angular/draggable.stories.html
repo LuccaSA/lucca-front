@@ -5,9 +5,9 @@
 			<th luDataTableCell>Cell</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="onDrop($event)">
+	<tbody luDataTableBody cdkDropList luReorder (luReorder)="onReorder($event)">
 		@for (item of listItem; track $index) {
-			<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag>
+			<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag [luReorderItemLabel]="item.header">
 				<th luDataTableCell>{{ item.header }}</th>
 				<td luDataTableCell>{{ item.cell }}</td>
 			</tr>
