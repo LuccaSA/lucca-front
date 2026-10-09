@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { LoadingComponent } from '@lucca-front/ng/loading';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
@@ -6,9 +6,21 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 	selector: 'loadings-stories',
 	templateUrl: './loadings.stories.html',
 	styles: [
-		'.loading::after { animation-play-state: paused; } .demo-invert { background: #444; display: inline-block; padding-block: var(--pr-t-spacings-100); padding-inline: var(--pr-t-spacings-200); margin-block: 0; margin-inline: var(--pr-t-spacings-100); border-radius: var(--pr-t-border-radius-50); }',
+		`
+			.loading::after {
+				animation-play-state: paused;
+			}
+			.demo-QAtable {
+				inline-size: 100%;
+				table-layout: fixed;
+			}
+			.demo-QAtable td:first-child {
+				inline-size: 12rem;
+			}
+		`,
 	],
 	imports: [LoadingComponent],
+	providers: [{ provide: LOCALE_ID, useValue: 'en' }],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LoadingsStory {}

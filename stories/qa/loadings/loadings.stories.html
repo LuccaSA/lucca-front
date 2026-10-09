@@ -12,51 +12,98 @@
 		<tr>
 			<td>Default</td>
 			<td>
-				<div class="demo-QAtable-list"><div class="loading"></div></div>
+				<div class="demo-QAtable-list">
+					<div class="loading mod-hiddenLabel"><span class="loading-label">Loading…</span></div>
+				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list"><lu-loading /></div>
 			</td>
 		</tr>
 		<tr>
+			<td>Default label displayed</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="loading"><span class="loading-label">Loading…</span></div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading [hiddenLabel]="false" /></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default label overridden</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="loading"><span class="loading-label">Fetching data…</span></div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading [hiddenLabel]="false" [intl]="{ label: 'Fetching data…' }" /></div>
+			</td>
+		</tr>
+		<tr>
 			<td>Label</td>
 			<td>
-				<div class="demo-QAtable-list"><div class="loading">Loading…</div></div>
+				<div class="demo-QAtable-list">
+					<div class="loading"><span class="loading-label">Loading…</span></div>
+				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list"><lu-loading>Loading…</lu-loading></div>
 			</td>
 		</tr>
 		<tr>
-			<td>Block</td>
+			<td>Hidden label</td>
 			<td>
-				<div class="demo-QAtable-list"><div class="loading mod-block">Loading…</div></div>
+				<div class="demo-QAtable-list">
+					<div class="loading mod-hiddenLabel"><span class="loading-label">Loading…</span></div>
+				</div>
 			</td>
 			<td>
-				<div class="demo-QAtable-list"><lu-loading block /></div>
+				<div class="demo-QAtable-list"><lu-loading hiddenLabel>Loading…</lu-loading></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Block</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="loading mod-block"><span class="loading-label">Loading…</span></div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list"><lu-loading block>Loading…</lu-loading></div>
 			</td>
 		</tr>
 		<tr>
 			<td>Large</td>
 			<td>
-				<div class="demo-QAtable-list"><div class="loading mod-L">Loading</div></div>
+				<div class="demo-QAtable-list">
+					<div class="loading mod-L"><span class="loading-label">Loading…</span></div>
+				</div>
 			</td>
 			<td>
-				<div class="demo-QAtable-list"><lu-loading size="L" /></div>
+				<div class="demo-QAtable-list"><lu-loading size="L">Loading…</lu-loading></div>
 			</td>
 		</tr>
 		<tr>
 			<td>Inverted</td>
 			<td>
-				<div class="demo-QAtable-list mod-black"><div class="loading mod-invert">Loading…</div></div>
+				<div class="demo-QAtable-list mod-black">
+					<div class="loading mod-invert"><span class="loading-label">Loading…</span></div>
+				</div>
 			</td>
 			<td>
-				<div class="demo-QAtable-list"><lu-loading invert /></div>
+				<div class="demo-QAtable-list mod-black"><lu-loading invert>Loading…</lu-loading></div>
 			</td>
 		</tr>
 		<tr>
 			<td>Template Popin</td>
-			<td></td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="loading mod-popin mod-hiddenLabel"><span class="loading-label">Loading…</span></div>
+				</div>
+			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-loading template="popin" />
