@@ -49,7 +49,7 @@ const MODIFIERS: KbdKey[] = ['Meta', 'Control', 'Alt', 'Shift'];
 /**
  * Whether the page runs on Apple platforms, whose keys and shortcuts differ (Option, Cmd, Fn)
  */
-export function isMacPlatform(): boolean {
+function isMacPlatform(): boolean {
 	return typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.userAgent);
 }
 
