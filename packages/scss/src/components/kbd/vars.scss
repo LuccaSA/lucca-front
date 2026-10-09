@@ -1,0 +1,17 @@
+@use 'component';
+
+@mixin vars {
+	--components-kbd-backgroundImage: none;
+	--components-kbd-before-content: none;
+	--components-kbd-borderRadius: var(--pr-t-border-radius-small);
+	--components-kbd-minInlineSize: var(--pr-t-spacings-250);
+	--components-kbd-paddingInline: var(--pr-t-spacings-50);
+
+	--components-kbd-animationDelay: 0s;
+	--components-kbd-animationDuration: calc(var(--components-kbd-animationPause) / #{component.$tapIdle});
+	--components-kbd-animationName: var(--components-kbd-modifier-animationName);
+	--components-kbd-animationOffset: 0s;
+	--components-kbd-animationPause: calc(var(--commons-animations-durations-slow) * 3.5);
+	--components-kbd-last-animationName: none;
+	--components-kbd-modifier-animationName: none;
+}

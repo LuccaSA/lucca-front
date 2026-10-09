@@ -1,0 +1,33 @@
+@if (displayedKeys().length === 1) {
+	<span class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()">
+		<kbd class="kbd" [class.mod-space]="displayedKeys()[0].key === ' '">
+			<ng-container *ngTemplateOutlet="content; context: { $implicit: displayedKeys()[0] }" />
+		</kbd>
+	</span>
+} @else {
+	<kbd class="kbdWrapper" [class.mod-pill]="pill()" [class.mod-skeuo]="skeuo()">
+		@for (key of displayedKeys(); track $index) {
+			@if (!$first) {
+				+
+			}
+			<kbd class="kbd" [class.mod-space]="key.key === ' '">
+				<ng-container *ngTemplateOutlet="content; context: { $implicit: key }" />
+			</kbd>
+		}
+	</kbd>
+}
+
+<ng-template #content let-key>
+	@switch (key.type) {
+		@case ("icon") {
+			<lu-icon [icon]="key.icon" size="XXS" [alt]="key.label" />
+		}
+		@default {
+			@if (key.key === " ") {
+				<span class="pr-u-mask">{{ key.label }}</span>
+			} @else {
+				{{ key.label }}
+			}
+		}
+	}
+</ng-template>
