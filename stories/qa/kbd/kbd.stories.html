@@ -1,0 +1,203 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Single key</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="kbdWrapper"><kbd class="kbd">Esc</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">N</kbd></span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-kbd keys="Escape" />
+					<lu-kbd keys="n" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Named keys</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="kbdWrapper"><kbd class="kbd">Shift</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Tab</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Space</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Enter</kbd></span>
+					<span class="kbdWrapper"
+						><kbd class="kbd"
+							><span aria-hidden="true" class="lucca-icon icon-arrowBackspace mod-XXS"></span><span class="pr-u-mask">Backspace</span></kbd
+						></span
+					>
+					<span class="kbdWrapper"><kbd class="kbd">Delete</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Home</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">End</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Page Up</kbd></span>
+					<span class="kbdWrapper"><kbd class="kbd">Page Down</kbd></span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-kbd keys="Shift" />
+					<lu-kbd keys="Tab" />
+					<lu-kbd keys=" " />
+					<lu-kbd keys="Enter" />
+					<lu-kbd keys="Backspace" />
+					<lu-kbd keys="Delete" />
+					<lu-kbd keys="Home" />
+					<lu-kbd keys="End" />
+					<lu-kbd keys="PageUp" />
+					<lu-kbd keys="PageDown" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Combination</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<kbd class="kbdWrapper"><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">N</kbd></kbd>
+					<kbd class="kbdWrapper"><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">Shift</kbd>+<kbd class="kbd">Z</kbd></kbd>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-kbd [keys]="['Control', 'n']" />
+					<lu-kbd [keys]="['Control', 'Shift', 'z']" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Symbols</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<kbd class="kbdWrapper">
+						<kbd class="kbd">Alt</kbd>+<kbd class="kbd"
+							><span aria-hidden="true" class="lucca-icon icon-arrowTop mod-XXS"></span><span class="pr-u-mask">up arrow</span></kbd
+						>
+					</kbd>
+					<kbd class="kbdWrapper">
+						<kbd class="kbd">Option</kbd>+
+						<kbd class="kbd"
+							><span aria-hidden="true" class="lucca-icon icon-arrowBottom mod-XXS"></span><span class="pr-u-mask">down arrow</span></kbd
+						>
+					</kbd>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-kbd [keys]="['Alt', 'ArrowUp']" />
+					<lu-kbd [keys]="['Alt', 'ArrowDown']" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Pressed</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="demo-kbdPressed"
+						><span class="kbdWrapper"><kbd class="kbd">Esc</kbd></span></span
+					>
+					<span class="demo-kbdPressed mod-last"
+						><kbd class="kbdWrapper"><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">S</kbd></kbd></span
+					>
+					<span class="demo-kbdPressed"
+						><kbd class="kbdWrapper"
+							><kbd class="kbd">Alt</kbd>+<kbd class="kbd"
+								><span aria-hidden="true" class="lucca-icon icon-arrowTop mod-XXS"></span><span class="pr-u-mask">up arrow</span></kbd
+							></kbd
+						></span
+					>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="demo-kbdPressed"><lu-kbd keys="Escape" /></span>
+					<span class="demo-kbdPressed mod-last"><lu-kbd [keys]="['Control', 's']" /></span>
+					<span class="demo-kbdPressed"><lu-kbd [keys]="['Alt', 'ArrowUp']" /></span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>In text</td>
+			<td>
+				<p>
+					Press
+					<kbd class="kbdWrapper"><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">S</kbd></kbd>
+					to save the document.
+				</p>
+			</td>
+			<td>
+				<p>Press <lu-kbd [keys]="['Control', 's']" /> to save the document.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>In a dropdown</td>
+			<td>
+				<div class="popover demo-kbdPopover">
+					<div class="popover-content">
+						<div class="dropdown">
+							<ul class="dropdown-list">
+								<li class="dropdown-list-option">
+									<button type="button" class="dropdown-list-option-action">
+										Move up
+										<kbd class="kbdWrapper"
+											><kbd class="kbd">Alt</kbd>+<kbd class="kbd"
+												><span aria-hidden="true" class="lucca-icon icon-arrowTop mod-XXS"></span
+												><span class="pr-u-mask">up arrow</span></kbd
+											></kbd
+										>
+									</button>
+								</li>
+								<li class="dropdown-list-option">
+									<button type="button" class="dropdown-list-option-action">
+										Move down
+										<kbd class="kbdWrapper"
+											><kbd class="kbd">Alt</kbd>+<kbd class="kbd"
+												><span aria-hidden="true" class="lucca-icon icon-arrowBottom mod-XXS"></span
+												><span class="pr-u-mask">down arrow</span></kbd
+											></kbd
+										>
+									</button>
+								</li>
+								<li class="dropdown-list-option">
+									<button type="button" class="dropdown-list-option-action">Move to top</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover demo-kbdPopover">
+					<div class="popover-content">
+						<lu-dropdown-menu>
+							<lu-dropdown-item>
+								<button type="button" lu-dropdown-action>
+									Move up
+									<lu-kbd [keys]="['Alt', 'ArrowUp']" />
+								</button>
+							</lu-dropdown-item>
+							<lu-dropdown-item>
+								<button type="button" lu-dropdown-action>
+									Move down
+									<lu-kbd [keys]="['Alt', 'ArrowDown']" />
+								</button>
+							</lu-dropdown-item>
+							<lu-dropdown-item>
+								<button type="button" lu-dropdown-action>Move to top</button>
+							</lu-dropdown-item>
+						</lu-dropdown-menu>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>

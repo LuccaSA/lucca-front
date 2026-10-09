@@ -1,0 +1,92 @@
+@use 'sass:math';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+$holdPress: 6%;
+$holdRelease: 34%;
+$holdEnd: 40%;
+$tapStart: 14%;
+$tapPeak: 20%;
+$tapEnd: 26%;
+$holdIdle: math.div(100% - $holdEnd, 100%);
+$tapIdle: math.div(100% - ($tapEnd - $tapStart), 100%);
+$keysMax: 6;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	align-items: center;
+	background-color: var(--palettes-neutral-0);
+	border: 1px solid var(--palettes-neutral-200);
+	border-block-end-width: 2px;
+	border-radius: var(--pr-t-border-radius-small);
+	color: var(--pr-t-color-text-subtle);
+	display: inline-flex;
+	font: var(--pr-t-font-body-XS);
+	justify-content: center;
+	min-block-size: var(--pr-t-spacings-250);
+	min-inline-size: var(--pr-t-spacings-250);
+	padding-inline: var(--components-kbd-paddingInline);
+	white-space: nowrap;
+	animation-delay: calc(var(--components-kbd-animationDelay) + var(--components-kbd-animationOffset));
+	animation-duration: var(--components-kbd-animationDuration);
+	animation-iteration-count: infinite;
+	animation-name: var(--components-kbd-animationName);
+	animation-timing-function: ease-in-out;
+
+	&:has(.lucca-icon) {
+		--components-kbd-paddingInline: 0;
+	}
+
+	@for $index from 2 through $keysMax {
+		&:nth-of-type(#{$index}) {
+			--components-kbd-animationOffset: calc(var(--commons-animations-durations-fast) / 2 * #{$index - 1});
+		}
+	}
+
+	&:last-of-type {
+		--components-kbd-animationName: var(--components-kbd-last-animationName);
+	}
+
+	@at-root ($atRoot) {
+		@keyframes kbdHold {
+			#{$holdPress},
+			#{$holdRelease} {
+				border-block-end-width: 1px;
+				translate: 0 1px;
+			}
+
+			#{$holdEnd} {
+				border-block-end-width: 2px;
+				translate: 0;
+			}
+		}
+
+		@keyframes kbdTap {
+			#{$tapStart},
+			#{$tapEnd} {
+				border-block-end-width: 2px;
+				translate: 0;
+			}
+
+			#{$tapPeak} {
+				border-block-end-width: 1px;
+				translate: 0 1px;
+			}
+		}
+	}
+}
+
+@mixin wrapper {
+	align-items: center;
+	color: var(--pr-t-color-text-subtle);
+	display: inline-flex;
+	font: var(--pr-t-font-body-S);
+	gap: var(--pr-t-spacings-25);
+	white-space: nowrap;
+
+	@for $keys from 2 through $keysMax {
+		$lastModifierOffset: calc(var(--commons-animations-durations-fast) / 2 * #{$keys - 2});
+
+		&:has(.kbd:nth-of-type(#{$keys})) .kbd {
+			--components-kbd-animationDuration: calc((var(--components-kbd-animationPause) + #{$lastModifierOffset}) / #{$holdIdle});
+		}
+	}
+}

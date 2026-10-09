@@ -1,0 +1,20 @@
+@use 'exports' as *;
+
+.kbd {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		@media (prefers-reduced-motion: reduce) {
+			@include reducedMotion;
+		}
+	}
+}
+
+.kbdWrapper {
+	@layer components {
+		@include wrapper;
+	}
+}
