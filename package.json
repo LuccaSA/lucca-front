@@ -29,6 +29,7 @@
     "build:ng": "npm run build:prisme && ng run ng:build",
     "build:prisme": "ng run prisme:build",
     "build:remaining": "node build.js",
+    "build:strict": "ng run prisme:build:strict && ng run ng:build:strict && npm run build:remaining",
     "start": "npm run typography:update-font-coverage & ng run ng:storybook",
     "test:eslint-plugin": "npm test -w @lucca-front/eslint-plugin",
     "jenkins-test": "vitest run --reporter=verbose",

@@ -37,10 +37,10 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly displayerLabelValue = computed(() => {
 		const label = this.displayerLabelFn();
-		const count = this.displayerCount();
+		const count = this.displayerCount() ?? 0;
 		if (label) {
 			const result = label(count);
-			return typeof result === 'string' ? result : getIntlPluralLabel(this.pluralRules, result, count ?? 0);
+			return typeof result === 'string' ? result : getIntlPluralLabel(this.pluralRules, result, count);
 		}
 		return `${count} ${this.displayerLabel()}`;
 	});

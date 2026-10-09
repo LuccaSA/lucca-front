@@ -7,7 +7,7 @@
 		"outDir": "../build",
 		"rootDirs": ["."],
 		"skipLibCheck": true,
-		// Surfaces null-safety errors in the IDE and ESLint; disabled in tsconfig.lib.prod.json until the codebase is compliant
+		// Disabled in tsconfig.lib.prod.json until the next major; tsconfig.lib.strict.json builds the "-strict" variant
 		"strictNullChecks": true
 	},
 	"exclude": ["**/*.spec.ts", "**/*.spec.*.ts"],
