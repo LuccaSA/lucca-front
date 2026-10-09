@@ -1,6 +1,8 @@
-import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { LOCALE_ID } from '@angular/core';
+import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ReorderDirective, ReorderEvent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface SortableListDraggableStory {
 	label: string;
@@ -8,16 +10,17 @@ interface SortableListDraggableStory {
 	small: boolean;
 	clickable: boolean;
 	unclearable: boolean;
-	// Action Storybook injectée à la place de l'événement de drop documenté dans `argTypes`.
-	drop?: (event: CdkDragDrop<unknown[]>) => void;
+	// Action Storybook injectée à la place de l'événement de déplacement documenté dans `argTypes`.
+	luReorder?: (event: ReorderEvent) => void;
 }
 
 export default {
 	title: 'Documentation/Listings/Sortable List/Angular/Draggable',
 	decorators: [
 		moduleMetadata({
-			imports: [SortableListComponent, SortableListItemComponent, CdkDropList, CdkDrag],
+			imports: [SortableListComponent, SortableListItemComponent, CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective],
 		}),
+		applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }] }),
 	],
 	argTypes: {
 		label: {
@@ -49,11 +52,11 @@ export default {
 			description: 'Masque la croix de suppression.',
 			table: { category: 'inputs' },
 		},
-		drop: {
-			description: 'Événement déclenché au drop.',
-			action: 'drop',
+		luReorder: {
+			description: 'Événement déclenché lorsqu’un élément est déplacé, à la souris, depuis le menu de sa poignée ou au clavier.',
+			action: 'luReorder',
 			control: false,
-			table: { category: 'outputs', type: { summary: 'CdkDragDrop<unknown[]>' } },
+			table: { category: 'outputs', type: { summary: 'ReorderEvent' } },
 		},
 	},
 	render: (args: SortableListDraggableStory) => {
@@ -65,21 +68,22 @@ export default {
 		return {
 			props: {
 				listItem,
-				drop: (event: CdkDragDrop<unknown[]>) => {
+				onReorder: (event: ReorderEvent) => {
 					moveItemInArray(listItem, event.previousIndex, event.currentIndex);
-					args.drop?.(event);
+					args.luReorder?.(event);
 				},
 			},
-			template: `<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)">
-	<lu-sortable-list-item label="${args.label}" helperMessage="${args.helperMessage}"${unclearable}${clickable}${small} drag cdkDrag />
-	<lu-sortable-list-item label="${args.label}" helperMessage="${args.helperMessage}"${unclearable}${clickable}${small} drag cdkDrag />
-	<lu-sortable-list-item label="${args.label}" helperMessage="${args.helperMessage}"${unclearable}${clickable}${small} drag cdkDrag />
+			template: `<lu-sortable-list cdkDropList luReorder (luReorder)="onReorder($event)">
+	@for (item of listItem; track item.id) {
+		<lu-sortable-list-item label="${args.label} {{ item.id }}" helperMessage="${args.helperMessage}"${unclearable}${clickable}${small} drag cdkDrag luReorderItemLabel="${args.label} {{ item.id }}" />
+	}
 </lu-sortable-list>`,
 		};
 	},
 } as Meta;
 
 export const Basic: StoryObj<SortableListDraggableStory> = {
+	name: 'Reorder',
 	args: {
 		label: 'Label',
 		helperMessage: 'Helper message',

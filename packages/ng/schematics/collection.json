@@ -105,6 +105,11 @@
       "description": "Migrate file upload usages: size default, FileEntry rendering and fileEntryDisplayWrapper",
       "factory": "./file-upload/index",
       "schema": "./file-upload/schema.json"
+    },
+    "reorder": {
+      "description": "Make cdkDropList lists accessible with luReorder: keyboard and menu moves, announcements",
+      "factory": "./reorder/index",
+      "schema": "./reorder/schema.json"
     }
   }
 }
