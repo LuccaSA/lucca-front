@@ -23,6 +23,15 @@ const config: StorybookConfig = {
 	},
 	logLevel: process.env['CI'] ? 'error' : 'info',
 	staticDirs: ['./public'],
+	// Automatically add 'ui-diff' tag on stories inside '/stories/qa/' directory
+	experimental_indexers: async (indexers) =>
+		indexers.map((indexer) => ({
+			...indexer,
+			createIndex: async (fileName, options) => {
+				const entries = await indexer.createIndex(fileName, options);
+				return fileName.includes('/stories/qa/') ? entries.map((entry) => ({ ...entry, tags: ['ui-diff', ...(entry.tags ?? [])] })) : entries;
+			},
+		})),
 	viteFinal: async (config) => {
 		const userConfig: UserConfig = {
 			// Mirror the CSS pipeline the published package ships (sass + autoprefixer, see build.js).
