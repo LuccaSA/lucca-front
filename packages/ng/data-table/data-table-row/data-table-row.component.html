@@ -1,9 +1,15 @@
 @if (tableRef?.drag()) {
-	<td class="dataTable-body-row-cell" aria-hidden="true">
+	<td class="dataTable-body-row-cell" [attr.aria-hidden]="tableRef?.reorderable() ? null : 'true'">
 		@if (bodyRef) {
-			<span class="button dataTable-body-row-cell-drag" cdkDragHandle>
-				<lu-icon icon="dotsDrag" [alt]="intl().move" />
-			</span>
+			@if (reorder) {
+				<button type="button" lu-reorder-handle class="button dataTable-body-row-cell-drag">
+					<lu-icon icon="dotsDrag" />
+				</button>
+			} @else {
+				<span class="button dataTable-body-row-cell-drag" cdkDragHandle>
+					<lu-icon icon="dotsDrag" [alt]="intl().move" />
+				</span>
+			}
 		}
 	</td>
 }

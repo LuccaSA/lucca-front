@@ -1,0 +1,73 @@
+<ng-content />
+<span class="pr-u-mask">{{ label() }}</span>
+
+<ng-template #menuTemplate>
+	@if (menu(); as state) {
+		<lu-dropdown-menu (keydown)="onMenuKeydown($event)">
+			@if (state.entries; as entries) {
+				@if (entries.previous) {
+					<lu-dropdown-item>
+						<button type="button" lu-dropdown-action (click)="moveTo(state.index - 1)">
+							{{ state.labels.previous }}
+							@if (shortcutDisplayed("previous")) {
+								<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.shortcuts.previous }" />
+							}
+						</button>
+					</lu-dropdown-item>
+				}
+				@if (entries.next) {
+					<lu-dropdown-item>
+						<button type="button" lu-dropdown-action (click)="moveTo(state.index + 1)">
+							{{ state.labels.next }}
+							@if (shortcutDisplayed("next")) {
+								<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.shortcuts.next }" />
+							}
+						</button>
+					</lu-dropdown-item>
+				}
+				@if ((entries.previous || entries.next) && (entries.first || entries.last)) {
+					<lu-dropdown-divider />
+				}
+				@if (entries.first) {
+					<lu-dropdown-item>
+						<button type="button" lu-dropdown-action (click)="moveTo(0)">
+							{{ state.labels.first }}
+							@if (shortcutDisplayed("first")) {
+								<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.edgeKeys.first }" />
+							}
+						</button>
+					</lu-dropdown-item>
+				}
+				@if (entries.last) {
+					<lu-dropdown-item>
+						<button type="button" lu-dropdown-action (click)="moveTo(state.count - 1)">
+							{{ state.labels.last }}
+							@if (shortcutDisplayed("last")) {
+								<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.edgeKeys.last }" />
+							}
+						</button>
+					</lu-dropdown-item>
+				}
+				@if (state.lists.length) {
+					@if (entries.previous || entries.next) {
+						<lu-dropdown-divider />
+					}
+					@for (target of state.lists; track target.list) {
+						<lu-dropdown-item>
+							<button type="button" lu-dropdown-action (click)="moveTo(target.index, target.list)">
+								{{ target.label }}
+								@if (target.shortcut && shortcutDisplayed("lists")) {
+									<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: target.shortcut }" />
+								}
+							</button>
+						</lu-dropdown-item>
+					}
+				}
+			}
+		</lu-dropdown-menu>
+	}
+</ng-template>
+
+<ng-template #shortcut let-shortcut>
+	<lu-kbd [keys]="['Alt', shortcut]" />
+</ng-template>

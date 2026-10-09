@@ -1,7 +1,13 @@
 @if (drag()) {
-	<span class="sortableList-item-handler button" cdkDragHandle>
-		<lu-icon icon="drag" />
-	</span>
+	@if (reorder) {
+		<button type="button" lu-reorder-handle class="sortableList-item-handler button">
+			<lu-icon icon="drag" />
+		</button>
+	} @else {
+		<span class="sortableList-item-handler button" cdkDragHandle>
+			<lu-icon icon="drag" />
+		</span>
+	}
 }
 <div class="sortableList-item-content">
 	<p class="sortableList-item-content-description"><ng-container *luPortal="label()" /></p>
