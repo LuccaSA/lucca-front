@@ -24,11 +24,14 @@ export const OTHER = 'Other';
 const KEYS: KbdKey[] = ['Escape', 'Enter', 'Tab', ' ', 'Delete', 'Home', 'End', 'PageUp', 'PageDown', 'Backspace', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', OTHER];
 
 /**
- * A single key is written as a plain attribute, a combination as a bound array, modifiers first in their conventional order
+ * A single key is written as a plain attribute, a combination as a bound array, modifiers first in their conventional order.
+ * Keys are escaped, as any value can be typed in the free text control
  */
 function keysInput(modifiers: KbdModifier[] = [], key: KbdKey): string {
 	const keys = [...MODIFIERS.filter((modifier) => modifiers.includes(modifier)), key];
-	return keys.length === 1 ? `keys="${key}"` : `[keys]="[${keys.map((k) => `'${k.replace(/'/g, "\\'")}'`).join(', ')}]"`;
+	const attribute = (value: string) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+	const string = (value: string) => `'${value.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
+	return keys.length === 1 ? `keys="${attribute(key)}"` : `[keys]="${attribute(`[${keys.map(string).join(', ')}]`)}"`;
 }
 
 export const KBD_DECORATORS = [moduleMetadata({ imports: [KbdComponent] }), applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }] })];
