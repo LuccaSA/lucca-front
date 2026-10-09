@@ -14,16 +14,15 @@ $keysMax: 6;
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	align-items: center;
 	background-color: var(--palettes-neutral-0);
-	background-image: var(--components-kbd-backgroundImage);
-	border: 1px solid var(--palettes-neutral-300);
+	border: 1px solid var(--palettes-neutral-200);
 	border-block-end-width: 2px;
-	border-radius: var(--components-kbd-borderRadius);
-	color: var(--pr-t-color-text);
+	border-radius: var(--pr-t-border-radius-small);
+	color: var(--pr-t-color-text-subtle);
 	display: inline-flex;
 	font: var(--pr-t-font-body-XS);
 	justify-content: center;
 	min-block-size: var(--pr-t-spacings-250);
-	min-inline-size: var(--components-kbd-minInlineSize);
+	min-inline-size: var(--pr-t-spacings-250);
 	padding-inline: var(--components-kbd-paddingInline);
 	white-space: nowrap;
 	animation-delay: calc(var(--components-kbd-animationDelay) + var(--components-kbd-animationOffset));
@@ -31,10 +30,6 @@ $keysMax: 6;
 	animation-iteration-count: infinite;
 	animation-name: var(--components-kbd-animationName);
 	animation-timing-function: ease-in-out;
-
-	&::before {
-		content: var(--components-kbd-before-content);
-	}
 
 	&:has(.lucca-icon) {
 		--components-kbd-paddingInline: 0;

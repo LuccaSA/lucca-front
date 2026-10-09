@@ -13,8 +13,6 @@ export const Combination: StoryObj<KbdStory> = {
 		modifiers: ['Control'],
 		key: OTHER,
 		otherKey: 'S',
-		pill: false,
-		skeuo: false,
 		inDropdown: false,
 	},
 };

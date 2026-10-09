@@ -7,10 +7,6 @@
 	}
 
 	@layer mods {
-		&.mod-space {
-			@include space;
-		}
-
 		@media (prefers-reduced-motion: reduce) {
 			@include reducedMotion;
 		}
@@ -20,15 +16,5 @@
 .kbdWrapper {
 	@layer components {
 		@include wrapper;
-	}
-
-	@layer mods {
-		&.mod-skeuo .kbd {
-			@include skeuo;
-		}
-
-		&.mod-pill .kbd {
-			@include pill;
-		}
 	}
 }
