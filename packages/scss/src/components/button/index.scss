@@ -4,24 +4,53 @@
 	@layer components {
 		@include vars;
 		@include component;
+
+		// .mod-outline is deprecated
+		&:not(.mod-outlined, .mod-outline) {
+			.numericBadge {
+				@include numericBadgeInherit;
+			}
+		}
+
+		&:hover {
+			@include hover;
+		}
+
+		&:focus-visible {
+			@include focusVisible;
+		}
+
+		&:active {
+			@include active;
+		}
+
+		// .disabled is deprecated
+		&:is(:disabled, [aria-disabled='true'], .is-disabled, .disabled) {
+			@include disabled;
+		}
+
+		// .disabled is deprecated
+		&:is(:disabled, .is-disabled, .disabled) {
+			@include disabledPointer;
+		}
 	}
 
 	@layer mods {
 		&.mod-AI {
-			&:not(.invert) {
+			&:where(:not(.mod-invert)) {
 				@include AI;
+			}
 
-				&.mod-invert {
-					@include invertIA;
-				}
+			&.mod-invert {
+				@include invertIA;
+			}
 
-				&.is-success {
-					@include successAI;
-				}
+			&.is-success {
+				@include successAI;
+			}
 
-				&.is-loading {
-					@include loadingAI;
-				}
+			&.is-loading {
+				@include loadingAI;
 			}
 		}
 
@@ -44,7 +73,7 @@
 		// .mod-outline is deprecated
 		&.mod-outline,
 		&.mod-outlined {
-			&:where(:not(.is-success, .is-error)) {
+			&:where(:not(.is-success)) {
 				@include outlined;
 			}
 		}
@@ -53,7 +82,7 @@
 		&.mod-link,
 		&.mod-text,
 		&.mod-ghost {
-			&:where(:not(.is-success, .is-error)) {
+			&:where(:not(.is-success)) {
 				@include ghost;
 			}
 		}
@@ -111,22 +140,36 @@
 		// .mod-delete is deprecated
 		&.mod-delete,
 		&.mod-critical {
-			@include critical;
+			// An aria-disabled button can be hovered: it must not look critical
+			&:where(:not(:disabled, [aria-disabled='true'], .is-disabled, .disabled)) {
+				@include critical;
 
-			// .mod-link is deprecated
-			&.mod-link,
-			&.mod-text {
-				@include criticalGhost;
-			}
+				// .mod-link is deprecated
+				&.mod-link,
+				&.mod-text,
+				&.mod-ghost {
+					@include criticalGhost;
+				}
 
-			// .mod-outline is deprecated
-			&.mod-outline,
-			&.mod-outlined {
-				@include criticalOutlined;
+				// .mod-outline is deprecated
+				&.mod-outline,
+				&.mod-outlined {
+					@include criticalOutlined;
+				}
+
+				// AI invert has no critical rendering of its own: same as ghost invert
+				&.mod-AI.mod-invert {
+					@include criticalGhost;
+
+					&:is(:hover, :focus-visible, :active) {
+						--components-button-AI-background-opacity: 0%;
+						--components-button-boxShadow: none;
+					}
+				}
 			}
 		}
 
-		// .mod-invert is deprecated
+		// .mod-inverted is an alias of .mod-invert (the name used by the clear and newBadge components)
 		&.mod-invert,
 		&.mod-inverted {
 			@include inverted;
@@ -161,6 +204,9 @@
 				@include loadingOutlined;
 			}
 
+			// .mod-link .mod-text deprecated
+			&.mod-link,
+			&.mod-text,
 			&.mod-ghost {
 				@include loadingGhost;
 			}
@@ -177,21 +223,17 @@
 		&.is-success {
 			@include success;
 
-			&.mod-AI,
+			&.mod-AI:where(:not(.mod-invert)),
 			&.mod-outlined {
 				@include successOutlined;
 			}
 
+			// .mod-link .mod-text deprecated
+			&.mod-link,
+			&.mod-text,
 			&.mod-ghost {
 				@include successGhost;
 			}
-		}
-
-		// .disabled is deprecated
-		&.disabled,
-		&.is-disabled,
-		&[aria-disabled='true'] {
-			@include disabled;
 		}
 	}
 }

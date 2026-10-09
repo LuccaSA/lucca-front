@@ -1,6 +1,4 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
-@use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin component {
 	@include icon.M;
@@ -45,37 +43,5 @@
 	// deprecated
 	.button-icon {
 		@include icon.M;
-	}
-
-	// .mod-outline is deprecated
-	&:not(.mod-outlined, .mod-outline) {
-		.numericBadge {
-			@include numericBadge.inherit;
-		}
-	}
-
-	&:hover {
-		--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
-		--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
-	}
-
-	&:focus-visible {
-		// Radius needed to override focused link / a
-		@include a11y.focusVisible($borderRadius: var(--components-button-borderRadius));
-	}
-
-	&:active {
-		--components-button-backgroundColor: var(--palettes-900, var(--palettes-product-900));
-	}
-
-	&:disabled {
-		--components-button-cursor: default;
-		--components-button-color: var(--palettes-neutral-500); // disabled token candidate
-		--components-button-backgroundColor: var(--commons-disabled-background);
-		--components-button-pointerEvents: none;
-
-		.numericBadge {
-			@include numericBadge.disabled;
-		}
 	}
 }

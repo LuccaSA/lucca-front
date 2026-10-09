@@ -8,15 +8,37 @@
 
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
+@mixin numericBadgeInherit {
+	@include numericBadge.inherit;
+}
+
+@mixin hover {
+	--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
+	--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
+}
+
+@mixin focusVisible {
+	// Radius needed to override focused link / a
+	@include a11y.focusVisible($borderRadius: var(--components-button-borderRadius));
+}
+
+@mixin active {
+	--components-button-backgroundColor: var(--palettes-900, var(--palettes-product-900));
+}
+
 @mixin disabled {
 	--components-button-cursor: default;
 	--components-button-color: var(--pr-t-color-text-disabled);
 	--components-button-backgroundColor: var(--commons-disabled-background);
-	--components-button-pointerEvents: none;
 
 	.numericBadge {
 		@include numericBadge.disabled;
 	}
+}
+
+// Kept out of `disabled`: an aria-disabled button stays reachable with the pointer (tooltips), the consumer prevents the action
+@mixin disabledPointer {
+	--components-button-pointerEvents: none;
 }
 
 @mixin loading {
@@ -70,9 +92,13 @@
 
 @mixin success {
 	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
-	--components-button-color: transparent;
 	--components-button-pointerEvents: none;
 	--components-button-userSelect: none;
+
+	&,
+	&:focus-visible {
+		--components-button-color: transparent;
+	}
 
 	&::after {
 		@include icon.generate('sign_confirm');
@@ -106,6 +132,11 @@
 }
 
 @mixin successAI {
+	&,
+	&:focus-visible {
+		--components-button-color: transparent;
+	}
+
 	.lucca-icon {
 		@include icons.transparent;
 	}

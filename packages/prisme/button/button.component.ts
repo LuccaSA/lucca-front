@@ -65,15 +65,29 @@ export class ButtonComponent {
 	 */
 	readonly state = input<ButtonState>('default');
 
+	/**
+	 * Changes the style of the Button. `text` and `text-invert` are deprecated, use `ghost` and `ghost-invert` instead
+	 */
 	readonly luButton = input<ButtonType>('');
 
 	/**
+	 * Same as `luButton`, with the Prisme prefix.
 	 * '' is the default value when you just set the `prButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
 	readonly prButton = input<ButtonType>('');
 
-	readonly buttonType = computed(() => this.luButton() || this.prButton());
+	readonly buttonType = computed(() => {
+		const buttonType = this.luButton() || this.prButton();
+		// 'text' and 'text-invert' are the former names of 'ghost' and 'ghost-invert'
+		if (buttonType === 'text') {
+			return 'ghost';
+		}
+		if (buttonType === 'text-invert') {
+			return 'ghost-invert';
+		}
+		return buttonType;
+	});
 
 	readonly isDisabled = computed(() => this.disabled() || this.state() === 'loading');
 
@@ -97,7 +111,7 @@ export class ButtonComponent {
 			if (this.buttonType() === 'ghost-invert') {
 				config['mod-ghost'] = true;
 				config['mod-invert'] = true;
-			} else if (this.luButton() === 'AI-invert') {
+			} else if (this.buttonType() === 'AI-invert') {
 				config['mod-AI'] = true;
 				config['mod-invert'] = true;
 			} else {

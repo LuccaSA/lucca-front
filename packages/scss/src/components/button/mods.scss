@@ -103,7 +103,7 @@
 		@include a11y.focusVisible($offset: 3px);
 	}
 
-	&:disabled {
+	&:is(:disabled, [aria-disabled='true'], .is-disabled, .disabled) {
 		--components-button-backgroundColor: var(--palettes-neutral-0);
 		--components-button-boxShadow: 0 0 0 1px var(--palettes-neutral-100);
 		--components-button-color: var(--pr-t-color-text-disabled);
@@ -125,7 +125,7 @@
 		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
 	}
 
-	&:disabled {
+	&:is(:disabled, [aria-disabled='true'], .is-disabled, .disabled) {
 		--components-button-backgroundColor: transparent;
 		--components-button-color: var(--pr-t-color-text-disabled);
 	}
@@ -134,14 +134,17 @@
 @mixin inverted {
 	--components-button-color: var(--palettes-neutral-0);
 
-	&:hover,
-	&:focus-visible {
-		--components-button-color: var(--palettes-neutral-0);
-		--components-button-backgroundColor: var(--palettes-neutral-900);
-	}
+	// A disabled button can still be focused (aria-disabled)
+	&:where(:not(:disabled, [aria-disabled='true'], .is-disabled, .disabled)) {
+		&:hover,
+		&:focus-visible {
+			--components-button-color: var(--palettes-neutral-0);
+			--components-button-backgroundColor: var(--palettes-neutral-900);
+		}
 
-	&:active {
-		--components-button-backgroundColor: var(--palettes-neutral-700);
+		&:active {
+			--components-button-backgroundColor: var(--palettes-neutral-700);
+		}
 	}
 }
 
@@ -152,6 +155,7 @@
 	&::after {
 		@include icon.generate('arrow_chevron_bottom');
 
+		font-size: var(--icon-size);
 		block-size: 0;
 		order: -1;
 		vertical-align: text-top;
@@ -279,10 +283,10 @@
 @mixin AI {
 	@include outlined;
 
-	&:not(:disabled) {
+	&:not(:disabled, [aria-disabled='true'], .is-disabled, .disabled) {
 		@include color.borderGradient($gradient: var(--pr-t-color-border-ai));
 
-		&:not(.mod-invert) {
+		&:where(:not(.mod-invert)) {
 			.lucca-icon {
 				@include icons.AI;
 			}
@@ -301,13 +305,25 @@
 			color-mix(in srgb, var(--palettes-brand-200) var(--components-button-AI-background-opacity), transparent)
 		);
 
-	&:hover,
-	&:focus-visible {
-		--components-button-AI-background-opacity: 15%;
-		--components-button-color: var(--palettes-neutral-0);
+	// A disabled button can still be focused (aria-disabled)
+	&:where(:not(:disabled, [aria-disabled='true'], .is-disabled, .disabled)) {
+		&:hover,
+		&:focus-visible {
+			--components-button-AI-background-opacity: 15%;
+			--components-button-backgroundColor: transparent;
+			--components-button-color: var(--palettes-neutral-0);
+		}
+
+		&:active {
+			--components-button-AI-background-opacity: 5%;
+			--components-button-backgroundColor: transparent;
+		}
 	}
 
-	&:active {
-		--components-button-AI-background-opacity: 5%;
+	// Same rendering as a disabled ghost invert button
+	&:where(:disabled, [aria-disabled='true'], .is-disabled, .disabled):where(:not(.is-loading)) {
+		--components-button-AI-background-opacity: 0%;
+		--components-button-boxShadow: none;
+		--components-button-color: var(--pr-t-color-text-disabled);
 	}
 }
