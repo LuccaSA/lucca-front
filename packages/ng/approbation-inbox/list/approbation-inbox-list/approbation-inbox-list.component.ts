@@ -35,7 +35,7 @@ interface SelectableItem {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxListComponent {
-	protected readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_TRANSLATIONS));
 
 	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
 
