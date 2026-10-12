@@ -35,12 +35,12 @@ export const Template: StoryObj = {
 			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		palette: {
-			options: setStoryOptions(PALETTE),
+			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
 			control: {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au bouton.',
-			table: { category: 'inputs', defaultValue: { summary: 'none' } },
+			table: { category: 'inputs' },
 		},
 		inverted: {
 			if: { arg: 'disabled', truthy: false },
