@@ -64,14 +64,8 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 export class PhoneNumberInputComponent implements ControlValueAccessor, Validator {
 	#locale = inject(LOCALE_ID);
 
-	/**
-	 * Accessible label of the fieldset grouping the prefix select and the number input, visually hidden
-	 */
 	readonly label = input<string>();
 
-	/**
-	 * Enables browser autocomplete ('tel') or disables it ('off'), no `autocomplete` attribute when not set
-	 */
 	readonly autocomplete = input<PhoneNumberInputAutocomplete>();
 
 	/**
@@ -81,19 +75,10 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	 */
 	readonly allowedCountries = input<ReadonlyArray<CountryCode | string>>([]);
 
-	/**
-	 * Disables the placeholder showing an example number of the selected country
-	 */
 	readonly noAutoPlaceholder = input(false, { transform: luBooleanAttribute });
 
-	/**
-	 * Country selected by default (bound as `country`), used when the value does not contain a country prefix
-	 */
 	readonly defaultCountryCode = input<CountryCode>(undefined, { alias: 'country' });
 
-	/**
-	 * Emits the country code when the selected country changes, by user selection or by parsing the typed number
-	 */
 	readonly countryChange = output<CountryCode>();
 
 	readonly currentValue = signal<string>('');
