@@ -1,3 +1,5 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -36,6 +38,13 @@ describe.each([
 	{ name: SingleFileUploadComponent.name, component: SingleFileUploadComponent as Type<BaseFileUploadComponent>, requiredHost: SingleRequiredHostComponent as Type<unknown> },
 	{ name: MultiFileUploadComponent.name, component: MultiFileUploadComponent as Type<BaseFileUploadComponent>, requiredHost: MultiRequiredHostComponent as Type<unknown> },
 ])(`${BaseFileUploadComponent.name} through $name`, ({ component, requiredHost }) => {
+	// The bubble illustration fetches its SVG through HttpClient: keep it off the network
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			providers: [provideHttpClient(), provideHttpClientTesting()],
+		});
+	});
+
 	function createComponent(inputs: Record<string, unknown> = {}) {
 		const fixture = TestBed.createComponent(component);
 		Object.entries(inputs).forEach(([name, value]) => fixture.componentRef.setInput(name, value));
