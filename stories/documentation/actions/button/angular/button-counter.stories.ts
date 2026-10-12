@@ -36,7 +36,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
 			description: 'Applique une palette de couleurs au bouton.',
-			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},

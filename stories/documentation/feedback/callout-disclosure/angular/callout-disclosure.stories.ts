@@ -70,7 +70,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		palette: {
-			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
