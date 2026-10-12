@@ -25,12 +25,12 @@
 		}
 
 		// .disabled is deprecated
-		&:is(:disabled, [aria-disabled='true'], .is-disabled, .disabled) {
+		&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
 			@include disabled;
 		}
 
 		// .disabled is deprecated
-		&:is(:disabled, .is-disabled, .disabled) {
+		&:is(:disabled, [disabled], .is-disabled, .disabled) {
 			@include disabledPointer;
 		}
 	}
@@ -140,7 +140,7 @@
 		&.mod-delete,
 		&.mod-critical {
 			// An aria-disabled button can be hovered: it must not look critical
-			&:where(:not(:disabled, [aria-disabled='true'], .is-disabled, .disabled)) {
+			&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
 				@include critical;
 
 				// .mod-link is deprecated
