@@ -163,6 +163,35 @@ describe('injectNgControl', () => {
 		expect(nativeInput().value).toBe('');
 	});
 
+	it('should mark the field untouched and pristine when reset is called on the control when using formField', () => {
+		// Arrange
+		@Component({
+			selector: 'lu-form-field-reset-state-host',
+			imports: [CustomControl, FormField],
+			template: `<lu-custom-control [formField]="form" />`,
+			changeDetection: ChangeDetectionStrategy.OnPush,
+		})
+		class FormFieldResetStateHost {
+			readonly value = signal<string | null>('Initial');
+			readonly form = form(this.value);
+			readonly customControl = viewChild(CustomControl);
+		}
+
+		const { fixture, host } = createHost(FormFieldResetStateHost);
+		host.form().markAsTouched();
+		host.form().markAsDirty();
+		fixture.detectChanges();
+
+		// Act
+		host.customControl()!.ngControl.reset();
+		fixture.detectChanges();
+
+		// Assert: as a reactive control reset does
+		expect(host.form().touched()).toBe(false);
+		expect(host.form().dirty()).toBe(false);
+		expect(host.customControl()!.ngControl.control.touched).toBe(false);
+	});
+
 	it('should mirror field validity into the control when using formField', () => {
 		// Arrange: field starts with a valid (non-empty) value
 		@Component({

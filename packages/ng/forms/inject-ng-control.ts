@@ -89,7 +89,10 @@ function generateMirrorControl(_ngControl: NgControl, field: FormField<unknown>)
 		control.setErrors(errors.length ? toValidationErrors(errors) : null);
 	});
 
-	ngControl.reset ??= (value?: unknown) => control.reset(value);
+	ngControl.reset ??= (value?: unknown) => {
+		field.state().reset();
+		control.reset(value);
+	};
 	ngControl.registerOnChange ??= () => {};
 	ngControl.markAsTouched ??= () => {};
 	ngControl.registerOnDisabledChange ??= () => {};
