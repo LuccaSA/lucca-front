@@ -16,7 +16,7 @@ export default {
 	],
 	render: (args) => {
 		const { heading, description, center, palette, hx, illustration, action } = args;
-		const paletteArg = palette !== 'none' ? ` palette="${palette}"` : ``;
+		const paletteArg = palette ? ` palette="${palette}"` : ``;
 		const actionArg = action ? ` action` : ``;
 		return {
 			template: `<lu-empty-state-section illustration="${illustration}" hx="${hx}" heading="${heading}" description="${description}"${actionArg}${paletteArg}${center ? ' center' : ''}>
@@ -26,7 +26,12 @@ export default {
 		};
 	},
 	argTypes: {
-		palette: { ...PaletteArgType, description: 'Applique une palette de couleurs au composant.', table: { category: 'inputs' } },
+		palette: {
+			...PaletteArgType,
+			options: PaletteArgType.options.filter((option) => option !== 'none'),
+			description: 'Applique une palette de couleurs au composant.',
+			table: { category: 'inputs' },
+		},
 		center: {
 			description: 'Centre le contenu horizontalement.',
 			table: { category: 'inputs' },
@@ -70,7 +75,6 @@ export const Section: StoryObj<EmptyStateSectionComponent> = {
 		heading: 'Empty state section',
 		description: 'Description can be a string or a ng-template',
 		center: false,
-		palette: 'none',
 		hx: 3,
 	},
 };
