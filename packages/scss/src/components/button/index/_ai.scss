@@ -52,6 +52,8 @@
 			}
 
 			&.is-success {
+				@include successAI;
+
 				&,
 				&:focus-visible {
 					@include successLabel;
@@ -60,8 +62,6 @@
 				.lucca-icon {
 					@include successAIIcon;
 				}
-
-				@include noAIBorder;
 
 				@include successAIStatusIcon;
 			}
@@ -72,8 +72,6 @@
 				.lucca-icon {
 					@include loadingAIIcon;
 				}
-
-				@include noAIBorder;
 			}
 		}
 	}

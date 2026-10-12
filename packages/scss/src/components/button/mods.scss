@@ -215,6 +215,11 @@ $spacings: (
 // Gradient border
 @mixin aiBorder {
 	@include color.borderGradient($gradient: var(--pr-t-color-border-ai));
+
+	// Set to `none` to hide the border
+	&::before {
+		content: var(--components-button-AI-border-content);
+	}
 }
 
 @mixin aiIcon {

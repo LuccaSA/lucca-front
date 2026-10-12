@@ -94,17 +94,11 @@
 	--components-button-backgroundColor: var(--palettes-neutral-0);
 	--commons-loading-frontground: var(--palettes-neutral-300);
 	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
+	--components-button-AI-border-content: none;
 }
 
 @mixin loadingAIIcon {
 	background-image: none !important;
-}
-
-// Removes the AI gradient border
-@mixin noAIBorder {
-	&::before {
-		content: none;
-	}
 }
 
 // Success
@@ -145,6 +139,10 @@
 	--components-button-backgroundColor: var(--palettes-neutral-50);
 	--components-button-boxShadow: none;
 	--components-button-statusIcon-color: var(--palettes-700, var(--palettes-product-700));
+}
+
+@mixin successAI {
+	--components-button-AI-border-content: none;
 }
 
 @mixin successAIIcon {
