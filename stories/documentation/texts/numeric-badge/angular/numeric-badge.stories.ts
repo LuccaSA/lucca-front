@@ -13,12 +13,12 @@ export default {
 	],
 	argTypes: {
 		palette: {
-			options: setStoryOptions(PALETTE),
+			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
 			control: {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au composant.',
-			table: { category: 'inputs', defaultValue: { summary: 'none' } },
+			table: { category: 'inputs' },
 		},
 		value: {
 			control: {
