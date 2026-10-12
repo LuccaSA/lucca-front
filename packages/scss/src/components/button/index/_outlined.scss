@@ -3,7 +3,6 @@
 .button {
 	@layer mods {
 		// .mod-outline is deprecated
-
 		&:is(.mod-outlined, .mod-outline) {
 			&:where(:not(.is-success)) {
 				@include outlined;

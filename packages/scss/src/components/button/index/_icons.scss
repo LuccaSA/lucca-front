@@ -2,6 +2,18 @@
 
 .button {
 	@layer mods {
+		&.mod-disclosure {
+			@include iconOnRight;
+
+			.icon-arrowChevronBottom {
+				@include disclosureIcon;
+			}
+
+			&[aria-expanded='true'] {
+				@include disclosureExpanded;
+			}
+		}
+
 		&.mod-withIcon {
 			&.mod-iconOnLeft {
 				@include iconOnLeft;

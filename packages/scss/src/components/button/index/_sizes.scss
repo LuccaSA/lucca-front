@@ -19,17 +19,5 @@
 				}
 			}
 		}
-
-		&.mod-disclosure {
-			@include iconOnRight;
-
-			.icon-arrowChevronBottom {
-				@include disclosureIcon;
-			}
-
-			&[aria-expanded='true'] {
-				@include disclosureExpanded;
-			}
-		}
 	}
 }
