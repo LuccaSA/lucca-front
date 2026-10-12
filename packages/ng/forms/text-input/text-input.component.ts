@@ -49,7 +49,7 @@ export class TextInputComponent {
 	readonly maxlength = input<number>(0, { transform: luNumberAttribute });
 
 	/**
-	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
+	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'searchMagnifyingGlass'
 	 */
 	readonly searchIcon = input<LuccaIcon>('searchMagnifyingGlass');
 

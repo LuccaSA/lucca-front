@@ -51,7 +51,7 @@ export class ChipComponent {
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Which size should the chip be? Defaults or small
+	 * Which size should the chip be? Defaults to the regular size, `S` for small
 	 */
 	readonly size = input<ChipSize | null>(null);
 
