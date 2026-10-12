@@ -30,11 +30,7 @@ export const Template: StoryObj<TagComponent> = {
 			description: 'Modifie la taille du tag.',
 			table: { category: 'inputs' },
 		},
-		palette: {
-			...PaletteAllArgType,
-			options: PaletteAllArgType.options.filter((option) => option !== 'none'),
-			table: { category: 'inputs' },
-		},
+		palette: { ...PaletteAllArgType, table: { category: 'inputs' } },
 		outlined: {
 			control: {
 				type: 'boolean',
