@@ -31,15 +31,14 @@
 			}
 		}
 
-		&:not([disabled], .is-disabled) {
-			&:hover,
-			&:focus-visible {
-				z-index: 1;
-			}
+		// A disabled button is not raised on hover, but can still be focused (aria-disabled): its focus ring must stay on top
+		&:not([disabled], [aria-disabled='true'], .is-disabled, .disabled):hover,
+		&:focus-visible {
+			z-index: 1;
+		}
 
-			&:focus-visible {
-				@include a11y.focusVisible;
-			}
+		&:focus-visible {
+			@include a11y.focusVisible;
 		}
 	}
 
