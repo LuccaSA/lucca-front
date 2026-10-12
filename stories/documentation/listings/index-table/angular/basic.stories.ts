@@ -87,7 +87,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
-			table: { category: 'models' },
+			table: { category: 'inputs' },
 		},
 		sortWithEllipsis: {
 			if: { arg: 'sort', truthy: true },
