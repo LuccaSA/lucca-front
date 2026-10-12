@@ -72,10 +72,44 @@ Mentionner dans le rapport le nombre de PR d'icônes exclues.
 
 *Exclusion — outillage, tests, stories, release*
 - Des PR FIX ne corrigent aucun bug livré aux utilisateurs : skills, stylelint, tests/e2e, stories et pages QA, release/sync. Les correctifs de **schematics** restent comptés (catégorie « Schematics / migrations ») : ce sont des migrations livrées aux équipes produit, sauf quand la PR ne touche que leurs tests. Les **exclure aussi de tous les compteurs et listes de PR FIX** (§1, §2, §4, §5, §6).
-- Critère : le classement par type du §5 C, catégories « Outillage / tests / stories » et « Release / versionning ». **Charger la fonction `classify` du §5 C avant de commencer** : elle filtre déjà les icônes et sort `numéro⇥catégorie⇥titre`. Un titre « fix X + story » ou « + QA » reste un correctif.
+- Critère : le classement par type du §5 C, catégories « Outillage / tests / stories » et « Release / versionning ». **Charger la fonction `classify` ci-dessous avant de commencer** (heuristique détaillée au §5 C) : elle filtre déjà les icônes et sort `numéro⇥catégorie⇥titre`. Un titre « fix X + story » ou « + QA » reste un correctif.
 - Comme pour les icônes, soustraire ces PR des `total_count` (`fix_net = total_count − icônes − hors_bug`). `classify` interroge les fichiers de chaque PR mal classée par son titre : la lancer **une fois** par plage et par état, et réutiliser le résultat.
 
 ```bash
+# classify <qualifier> <state> → numéro⇥catégorie⇥titre (icônes déjà exclues)
+classify(){
+gh pr list --repo LuccaSA/lucca-front --state "$2" \
+  --search "$1 label:\":bookmark::bug: FIX\"" --limit 500 \
+  --json number,title,labels --jq ".[] | $ICONS_JQ"' | "\(.number)\t\([.labels[].name]|join(","))\t\(.title)"' \
+| awk -F'\t' '
+{
+  l=tolower($2); t=tolower($3); cat="Comportement / logique";
+  gsub(/ *\+ *(story|stories|qa)/, "", t)   # « fix X + story / + QA » = un vrai correctif livré avec sa story
+  if      (t ~ /release|update rc|^v[0-9]|^\[?[0-9]+\.[0-9]+\.[0-9]+\]|chore\(sync\)|^sync/)       cat="Release / versionning";
+  else if (t ~ /stories|(^|[^i])story|e2e|qa|test|msw|mock|stylelint|peer dep|description|skill/) cat="Outillage / tests / stories";
+  else if (t ~ /schematic|migration/)                                                             cat="Schematics / migrations";
+  else if (t ~ /vulnerab|security|cve|xss/)                                                       cat="Sécurité";
+  else if (t ~ /^\[?revert|regression|régression/)                                               cat="Régression";
+  else if (t ~ /perf\(|memory|leak|re-measuring|debounce/)                                        cat="Performance";
+  else if (l ~ /accessibility/ || t ~ /a11y|accessib|aria|keyboard|focus|escape key|contrast|screen ?reader|alt|announce|voiceover| vo /) cat="Accessibilité";
+  else if (t ~ /translat|i18n|locale|plural/)                                                     cat="i18n / traduction";
+  else if (t ~ /import|selector|component name|typo|package|dependenc|token|encapsulation/)       cat="Technique / intégration";
+  else if (t ~ /crash|undefined|infinite|not displayed|no first or last|does not|doesn.t|remove .*(setting|header)/) cat="Comportement / logique";
+  else if (t ~ /signal|zoneless|change detection|computed|two-way|model\(|reactivit|value initialization|pending value|binding|ngmodel|not triggered|mark as touched|value not/) cat="Réactivité / signaux / état";
+  else if (t ~ /style|css|scss|visual|display|spacing|align|margin|padding|colo|palette|theme|background|border|shadow|z-index|overflow|ellipsis|truncat|wrap|scroll|icon|layout|responsive|position|width|height|[- ]size| ui|slot|panel|design|shrink|linebreak|indent/) cat="Correction graphique / visuelle";
+  printf "%s\t%s\t%s\n", $1, cat, $3
+}' \
+| while IFS=$'\t' read -r n cat title; do
+    # Filet de la catégorie par défaut : reclasser d'après les fichiers modifiés
+    if [ "$cat" = "Comportement / logique" ]; then
+      code=$(gh pr view "$n" --repo LuccaSA/lucca-front --json files --jq '.files[].path' | grep -v '^stories/')
+      if [ -z "$code" ]; then cat="Outillage / tests / stories"
+      elif ! grep -qvE '\.(scss|css|html)$' <<<"$code"; then cat="Correction graphique / visuelle"; fi
+    fi
+    printf '%s\t%s\t%s\n' "$n" "$cat" "$title"
+  done
+}
+
 nonbug(){ classify "$1" "$2" | grep -cE $'\t(Outillage|Release)'; }  # à soustraire d'un total_count
 bugs(){ classify "$1" "$2" | grep -vE $'\t(Outillage|Release)'; }     # vrais correctifs : numéro⇥catégorie⇥titre
 nonbug "merged:<RANGE>" merged   # à soustraire des PR mergées
@@ -174,7 +208,7 @@ bugs "merged:<RANGE>" merged | cut -f1 \
          END{ for (x in c) printf "%3d  %s\n", c[x], d[x] }' | sort -rn | head -25
 ```
 
-> **Regroupement des variantes** : un même composant vit souvent dans deux dossiers (SCSS en camelCase `multiSelect`, Angular en kebab `multi-select`). Le premier `awk` les fusionne en normalisant la clé (minuscules + suppression des tirets), le second et affiche l'étiquette kebab quand elle existe. Les sous-composants `forms/*` restent distincts (préfixe conservé).
+> **Regroupement des variantes** : un même composant vit souvent dans deux dossiers (SCSS en camelCase `multiSelect`, Angular en kebab `multi-select`). Le premier `awk` les fusionne en normalisant la clé (minuscules + suppression des tirets), le second cumule et affiche l'étiquette kebab quand elle existe. Les sous-composants `forms/*` restent distincts (préfixe conservé).
 
 Fallback hors ligne (dépôt cloné, si `gh` indisponible) : produire la même liste de fichiers via git, puis brancher le **même** `grep | sed | awk` que ci-dessus. Moins fiable car dépend des conventions de message (`fix(<scope>): …`, ancien style `[Composant] fix …`) :
 
@@ -199,43 +233,9 @@ bugs "merged:<RANGE>" merged | cut -f3 \
 
 L'**ordre des tests = priorité** : placer technique/perf/logique **avant** le graphique évite que des mots comme `header`/`display`/`size` (présents dans des noms de composants ou des bugs logiques) ne gonflent à tort le visuel.
 
-« Comportement / logique » est la **catégorie par défaut** : toute PR dont le titre ne matche aucun motif y tombe (titres `[Composant] fix …`, formulations vagues). Le titre seul ne suffit donc pas : la boucle finale **reclasse ces PR d'après leurs fichiers modifiés** — uniquement des stories → outillage ; uniquement du `.scss`/`.css`/`.html` → visuel. Sans ce filet, environ un tiers de la catégorie est mal classé (16 PR sur 47 au Q3 2026).
+« Comportement / logique » est la **catégorie par défaut** : toute PR dont le titre ne matche aucun motif y tombe (titres `[Composant] fix …`, formulations vagues). Le titre seul ne suffit donc pas : la boucle finale de `classify` (voir *Exclusion — outillage, tests, stories, release*) **reclasse ces PR d'après leurs fichiers modifiés** — uniquement des stories → outillage ; uniquement du `.scss`/`.css`/`.html` → visuel. Sans ce filet, environ un tiers de la catégorie est mal classé (16 PR sur 47 au Q3 2026).
 
 ```bash
-# classify <qualifier> <state> → numéro⇥catégorie⇥titre (icônes déjà exclues)
-classify(){
-gh pr list --repo LuccaSA/lucca-front --state "$2" \
-  --search "$1 label:\":bookmark::bug: FIX\"" --limit 500 \
-  --json number,title,labels --jq ".[] | $ICONS_JQ"' | "\(.number)\t\([.labels[].name]|join(","))\t\(.title)"' \
-| awk -F'\t' '
-{
-  l=tolower($2); t=tolower($3); cat="Comportement / logique";
-  gsub(/ *\+ *(story|stories|qa)/, "", t)   # « fix X + story / + QA » = un vrai correctif livré avec sa story
-  if      (t ~ /release|update rc|^v[0-9]|^\[?[0-9]+\.[0-9]+\.[0-9]+\]|chore\(sync\)|^sync/)       cat="Release / versionning";
-  else if (t ~ /stories|(^|[^i])story|e2e|qa|test|msw|mock|stylelint|peer dep|description|skill/) cat="Outillage / tests / stories";
-  else if (t ~ /schematic|migration/)                                                             cat="Schematics / migrations";
-  else if (t ~ /vulnerab|security|cve|xss/)                                                       cat="Sécurité";
-  else if (t ~ /^\[?revert|regression|régression/)                                               cat="Régression";
-  else if (t ~ /perf\(|memory|leak|re-measuring|debounce/)                                        cat="Performance";
-  else if (l ~ /accessibility/ || t ~ /a11y|accessib|aria|keyboard|focus|escape key|contrast|screen ?reader|alt|announce|voiceover| vo /) cat="Accessibilité";
-  else if (t ~ /translat|i18n|locale|plural/)                                                     cat="i18n / traduction";
-  else if (t ~ /import|selector|component name|typo|package|dependenc|token|encapsulation/)       cat="Technique / intégration";
-  else if (t ~ /crash|undefined|infinite|not displayed|no first or last|does not|doesn.t|remove .*(setting|header)/) cat="Comportement / logique";
-  else if (t ~ /signal|zoneless|change detection|computed|two-way|model\(|reactivit|value initialization|pending value|binding|ngmodel|not triggered|mark as touched|value not/) cat="Réactivité / signaux / état";
-  else if (t ~ /style|css|scss|visual|display|spacing|align|margin|padding|colo|palette|theme|background|border|shadow|z-index|overflow|ellipsis|truncat|wrap|scroll|icon|layout|responsive|position|width|height|[- ]size| ui|slot|panel|design|shrink|linebreak|indent/) cat="Correction graphique / visuelle";
-  printf "%s\t%s\t%s\n", $1, cat, $3
-}' \
-| while IFS=$'\t' read -r n cat title; do
-    # Filet de la catégorie par défaut : reclasser d'après les fichiers modifiés
-    if [ "$cat" = "Comportement / logique" ]; then
-      code=$(gh pr view "$n" --repo LuccaSA/lucca-front --json files --jq '.files[].path' | grep -v '^stories/')
-      if [ -z "$code" ]; then cat="Outillage / tests / stories"
-      elif ! grep -qvE '\.(scss|css|html)$' <<<"$code"; then cat="Correction graphique / visuelle"; fi
-    fi
-    printf '%s\t%s\t%s\n' "$n" "$cat" "$title"
-  done
-}
-
 classify "merged:<RANGE>" merged > all-types.tsv
 grep -vE $'\t(Outillage|Release)' all-types.tsv > types.tsv   # vrais correctifs : base des sous-découpages ci-dessous
 cut -f2 all-types.tsv | sort | uniq -c | sort -rn              # Outillage + Release = PR exclues du rapport
