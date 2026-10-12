@@ -26,12 +26,7 @@ export default {
 		};
 	},
 	argTypes: {
-		palette: {
-			...PaletteArgType,
-			options: PaletteArgType.options.filter((option) => option !== 'none'),
-			description: 'Applique une palette de couleurs au composant.',
-			table: { category: 'inputs' },
-		},
+		palette: { ...PaletteArgType, description: 'Applique une palette de couleurs au composant.', table: { category: 'inputs' } },
 		center: {
 			description: 'Centre le contenu horizontalement.',
 			table: { category: 'inputs' },
