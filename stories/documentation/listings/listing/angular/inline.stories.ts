@@ -56,7 +56,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		},
 		palette: {
 			...PaletteAllArgType,
-			options: PaletteAllArgType.options.filter((option) => option !== 'none'),
 			if: { arg: 'type', truthy: true },
 			description: 'Modifie la couleur des icônes.',
 			table: { category: 'inputs' },

@@ -101,7 +101,6 @@ export default {
 		},
 		palette: {
 			...PaletteArgType,
-			options: PaletteArgType.options.filter((option) => option !== 'none'),
 			description: 'Applique une palette de couleurs au layout.',
 			table: { category: 'inputs' },
 		},

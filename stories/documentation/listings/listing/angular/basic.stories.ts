@@ -115,11 +115,7 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			description: 'Présente la liste avec des icônes (piloté par le contrôle <code>type</code>).',
 			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
-		palette: {
-			...PaletteAllArgType,
-			options: PaletteAllArgType.options.filter((option) => option !== 'none'),
-			table: { category: 'inputs' },
-		},
+		palette: { ...PaletteAllArgType, table: { category: 'inputs' } },
 		critical: {
 			control: false,
 			description: 'Applique le style critique à un élément de la liste.',
