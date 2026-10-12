@@ -1,10 +1,5 @@
 @use 'exports' as *;
 
-// Every selector of the button lives here: the mixins only hold declarations.
-// A disabled button is any of `:disabled` (browser state, e.g. inside a disabled fieldset), `[disabled]` (attribute set
-// on non-form hosts such as `a` and `span`), `[aria-disabled='true']`, `.is-disabled` and `.disabled` (deprecated).
-// The order of the blocks matters: it settles the selectors of equal specificity.
-
 .button {
 	@layer components {
 		@include vars;
@@ -31,8 +26,6 @@
 			}
 		}
 
-		// Interaction
-
 		&:hover {
 			@include hover;
 		}
@@ -45,8 +38,6 @@
 			@include active;
 		}
 
-		// Disabled
-
 		&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
 			@include disabled;
 
@@ -55,17 +46,14 @@
 			}
 		}
 
-		// aria-disabled keeps the pointer (tooltips)
 		&:is(:disabled, [disabled], .is-disabled, .disabled) {
 			@include disabledPointer;
 		}
 	}
 
 	@layer mods {
-		// AI, built on outlined
-
 		&.mod-AI {
-			@include outlinedRest;
+			@include outlined;
 
 			&:hover {
 				@include outlinedHover;
@@ -182,7 +170,7 @@
 
 		&:is(.mod-outlined, .mod-outline) {
 			&:where(:not(.is-success)) {
-				@include outlinedRest;
+				@include outlined;
 
 				&:hover {
 					@include outlinedHover;
@@ -207,7 +195,7 @@
 
 		&:is(.mod-ghost, .mod-text, .mod-link) {
 			&:where(:not(.is-success)) {
-				@include ghostRest;
+				@include ghost;
 
 				&:hover,
 				&:focus-visible {
@@ -338,7 +326,7 @@
 		// .mod-inverted is an alias of .mod-invert (the name used by the clear and newBadge components)
 
 		&:is(.mod-invert, .mod-inverted) {
-			@include invertedRest;
+			@include inverted;
 
 			// A disabled button can still be focused (aria-disabled)
 			&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {

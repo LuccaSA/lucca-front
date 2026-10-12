@@ -93,7 +93,7 @@
 			display: var(--components-fileUpload-button-display);
 
 			&:not(.mod-filled) {
-				@include button.outlined;
+				@include button.outlinedWithStates;
 				@include color.palette('product');
 			}
 		}

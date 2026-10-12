@@ -39,7 +39,7 @@
 
 		.calendarShortcutsButton-item-button.button {
 			@include button.block;
-			@include button.ghost;
+			@include button.ghostWithStates;
 			@include button.S;
 
 			justify-content: flex-start;
@@ -99,7 +99,7 @@
 
 		.calendarWrapper-navigation-button {
 			&.button {
-				@include button.ghost;
+				@include button.ghostWithStates;
 				@include button.onlyIconXS;
 			}
 		}

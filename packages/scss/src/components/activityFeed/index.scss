@@ -19,7 +19,7 @@
 
 @layer mods {
 	.activityFeed-content > .button:only-child {
-		@include button.outlined;
+		@include button.outlinedWithStates;
 	}
 
 	.activityFeed-step-avatar {

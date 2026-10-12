@@ -109,7 +109,7 @@ $spacings: (
 
 // Outlined
 
-@mixin outlinedRest {
+@mixin outlined {
 	--components-button-backgroundColor: var(--palettes-neutral-0);
 	--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
 	--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-neutral-200);
@@ -137,7 +137,7 @@ $spacings: (
 
 // Ghost
 
-@mixin ghostRest {
+@mixin ghost {
 	--components-button-backgroundColor: transparent;
 	--components-button-color: var(--palettes-700, var(--pr-t-color-text-subtle));
 	--components-button-boxShadow: none;
@@ -160,7 +160,7 @@ $spacings: (
 
 // Invert
 
-@mixin invertedRest {
+@mixin inverted {
 	--components-button-color: var(--palettes-neutral-0);
 }
 
@@ -289,8 +289,8 @@ $spacings: (
 	@include onlyIcon(XS);
 }
 
-@mixin outlined {
-	@include outlinedRest;
+@mixin outlinedWithStates {
+	@include outlined;
 
 	&:hover {
 		@include outlinedHover;
@@ -309,8 +309,8 @@ $spacings: (
 	}
 }
 
-@mixin ghost {
-	@include ghostRest;
+@mixin ghostWithStates {
+	@include ghost;
 
 	&:hover,
 	&:focus-visible {
@@ -326,8 +326,8 @@ $spacings: (
 	}
 }
 
-@mixin inverted {
-	@include invertedRest;
+@mixin invertedWithStates {
+	@include inverted;
 
 	// A disabled button can still be focused (aria-disabled)
 	&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {

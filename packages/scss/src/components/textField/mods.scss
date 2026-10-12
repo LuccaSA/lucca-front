@@ -109,7 +109,7 @@
 
 @mixin multilanguage {
 	.textField-input-affix-toggle {
-		@include button.outlined;
+		@include button.outlinedWithStates;
 		@include button.S;
 
 		pointer-events: auto;

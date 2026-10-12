@@ -289,7 +289,7 @@
 
 	.button {
 		@include button.S;
-		@include button.ghost;
+		@include button.ghostWithStates;
 		@include button.onlyIconS;
 
 		// .mod-delete is deprecated
@@ -362,7 +362,7 @@
 		background-color: var(--pr-t-elevation-surface-default);
 
 		.button {
-			@include button.ghost;
+			@include button.ghostWithStates;
 			@include button.S;
 		}
 	}
@@ -399,7 +399,7 @@
 }
 
 @mixin groupButton {
-	@include button.ghost;
+	@include button.ghostWithStates;
 	@include button.S;
 	@include button.onlyIconS;
 

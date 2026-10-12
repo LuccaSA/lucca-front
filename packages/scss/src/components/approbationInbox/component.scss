@@ -72,7 +72,7 @@
 				@include button.block;
 
 				&:last-child {
-					@include button.outlined;
+					@include button.outlinedWithStates;
 				}
 			}
 		}
@@ -164,11 +164,11 @@
 
 			.button {
 				&:nth-child(2) {
-					@include button.outlined;
+					@include button.outlinedWithStates;
 				}
 
 				&:nth-child(3) {
-					@include button.ghost;
+					@include button.ghostWithStates;
 				}
 			}
 		}

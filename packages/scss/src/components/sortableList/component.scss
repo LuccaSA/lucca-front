@@ -60,7 +60,7 @@
 			&.button {
 				@include button.S;
 				@include button.onlyIcon;
-				@include button.ghost;
+				@include button.ghostWithStates;
 
 				--components-button-padding: var(--pr-t-spacings-50);
 			}

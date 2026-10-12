@@ -26,7 +26,7 @@
 @mixin withAction {
 	.fieldset-title-content-action {
 		.button {
-			@include button.outlined;
+			@include button.outlinedWithStates;
 			@include button.S;
 		}
 	}

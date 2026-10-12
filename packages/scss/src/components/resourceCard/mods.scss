@@ -67,7 +67,7 @@
 @mixin hasAction {
 	.resourceCard-layout-after .button {
 		@include button.S;
-		@include button.ghost;
+		@include button.ghostWithStates;
 
 		&.mod-critical {
 			@include button.criticalGhost;
@@ -83,7 +83,7 @@
 @mixin hasDrag {
 	.resourceCard-layout-before-button.button {
 		@include button.S;
-		@include button.ghost;
+		@include button.ghostWithStates;
 		@include button.onlyIcon;
 		@include button.onlyIconS;
 	}
@@ -99,7 +99,7 @@
 
 @mixin add {
 	> .button {
-		@include button.outlined;
+		@include button.outlinedWithStates;
 		@include color.palette('product');
 	}
 }

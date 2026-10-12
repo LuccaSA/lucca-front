@@ -14,7 +14,7 @@
 
 	// need of a higher specificity
 	.popover-close {
-		@include button.outlined;
+		@include button.outlinedWithStates;
 		@include button.XS;
 		@include button.onlyIconXS;
 

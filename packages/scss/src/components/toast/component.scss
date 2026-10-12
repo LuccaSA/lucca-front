@@ -83,8 +83,8 @@
 				animation-name: timer;
 
 				@include button.onlyIcon;
-				@include button.ghost;
-				@include button.inverted;
+				@include button.ghostWithStates;
+				@include button.invertedWithStates;
 
 				@keyframes timer {
 				}

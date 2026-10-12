@@ -42,7 +42,7 @@
 @mixin withBackButton {
 	.pageHeader-content-title-back {
 		.button {
-			@include button.outlined;
+			@include button.outlinedWithStates;
 			@include button.S;
 			@include button.onlyIconS;
 		}

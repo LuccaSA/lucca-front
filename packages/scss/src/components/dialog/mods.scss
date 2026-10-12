@@ -101,7 +101,7 @@
 }
 
 @mixin withCloseButton {
-	@include button.ghost;
+	@include button.ghostWithStates;
 	@include button.S;
 	@include button.onlyIconS;
 
@@ -149,7 +149,7 @@
 	}
 
 	.dialog-inside-header-button.button {
-		@include button.outlined;
+		@include button.outlinedWithStates;
 		@include button.M;
 	}
 }
