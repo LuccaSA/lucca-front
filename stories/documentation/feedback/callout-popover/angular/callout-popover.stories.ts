@@ -106,12 +106,12 @@ export default {
 			table: { category: 'inputs' },
 		},
 		palette: {
-			options: setStoryOptions(PALETTE),
+			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
 			control: {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au callout.',
-			table: { category: 'inputs', defaultValue: { summary: 'none' } },
+			table: { category: 'inputs' },
 		},
 		popoverTrigger: {
 			options: ['click', 'click+hover', 'hover+focus'],
@@ -158,7 +158,6 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number; custo
 	name: 'Basic',
 	args: {
 		icon: 'signInfo',
-		palette: 'none',
 		buttonLabel: '2',
 		buttonAlt: '2 errors',
 		customText: '',

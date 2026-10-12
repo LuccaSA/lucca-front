@@ -25,7 +25,7 @@ export default {
 	],
 	render: (args, context) => {
 		const { palette, heading, hx, actions, actionsInline, ...inputs } = args;
-		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
+		const paletteArg = palette ? ` palette="${palette}"` : '';
 		const headingArg = heading ? ` heading="${heading}"` : ``;
 		const hxArg = heading && hx ? ` hx="${hx}"` : ``;
 
@@ -58,7 +58,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		palette: {
-			options: setStoryOptions(PALETTE),
+			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
 			control: {
 				type: 'select',
 			},
@@ -141,7 +141,6 @@ export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsIn
 	name: 'Basic',
 	args: {
 		heading: '',
-		palette: 'none',
 		removable: false,
 		removed: false,
 		AI: false,

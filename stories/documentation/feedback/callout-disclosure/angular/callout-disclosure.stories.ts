@@ -15,7 +15,7 @@ export default {
 	],
 	render: (args, { argTypes }) => {
 		const { palette, ...inputs } = args;
-		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
+		const paletteArg = palette ? ` palette="${palette}"` : '';
 
 		return {
 			props: {
@@ -70,7 +70,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		palette: {
-			options: setStoryOptions(PALETTE),
+			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
 			control: {
 				type: 'select',
 			},
@@ -106,7 +106,6 @@ export const Template: StoryObj<CalloutDisclosureComponent> = {
 	name: 'Basic',
 	args: {
 		heading: 'List title',
-		palette: 'none',
 		open: false,
 	},
 };
