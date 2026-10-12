@@ -15,8 +15,8 @@ $keysMax: 6;
 	align-items: center;
 	background-color: var(--palettes-neutral-0);
 	border: 1px solid var(--palettes-neutral-200);
-	border-block-end-width: 2px;
 	border-radius: var(--pr-t-border-radius-small);
+	box-shadow: inset 0 -1px 0 var(--palettes-neutral-200);
 	color: var(--pr-t-color-text-subtle);
 	display: inline-flex;
 	font: var(--pr-t-font-body-XS);
@@ -49,12 +49,12 @@ $keysMax: 6;
 		@keyframes kbdHold {
 			#{$holdPress},
 			#{$holdRelease} {
-				border-block-end-width: 1px;
+				box-shadow: inset 0 0 0 var(--palettes-neutral-200);
 				translate: 0 1px;
 			}
 
 			#{$holdEnd} {
-				border-block-end-width: 2px;
+				box-shadow: inset 0 -1px 0 var(--palettes-neutral-200);
 				translate: 0;
 			}
 		}
@@ -62,12 +62,12 @@ $keysMax: 6;
 		@keyframes kbdTap {
 			#{$tapStart},
 			#{$tapEnd} {
-				border-block-end-width: 2px;
+				box-shadow: inset 0 -1px 0 var(--palettes-neutral-200);
 				translate: 0;
 			}
 
 			#{$tapPeak} {
-				border-block-end-width: 1px;
+				box-shadow: inset 0 0 0 var(--palettes-neutral-200);
 				translate: 0 1px;
 			}
 		}
