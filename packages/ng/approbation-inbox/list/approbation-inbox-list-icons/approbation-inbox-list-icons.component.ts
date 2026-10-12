@@ -19,8 +19,5 @@ export interface ApprobationInboxIcon {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxIconsComponent {
-	/**
-	 * Icons displayed in the additional data of an item
-	 */
 	readonly icons = input<readonly ApprobationInboxIcon[]>([]);
 }

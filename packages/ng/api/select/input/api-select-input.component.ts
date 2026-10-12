@@ -25,14 +25,8 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	extends ALuSelectInputComponent<T, LuOptionPickerAdvancedComponent<T, ILuOptionItem<T>>>
 	implements ControlValueAccessor, AfterViewInit
 {
-	/**
-	 * Standard of the Lucca API to query: `v3` or `v4`
-	 */
 	readonly standard = input<'v3' | 'v4'>('v3');
 
-	/**
-	 * Url of the API to query
-	 */
 	readonly api = input<string>();
 
 	/**
@@ -40,9 +34,6 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	 */
 	readonly fields = input<string>();
 
-	/**
-	 * Filters added to the query string of the API call
-	 */
 	readonly filters = input<string[]>();
 
 	/**

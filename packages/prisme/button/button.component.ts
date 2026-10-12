@@ -65,9 +65,6 @@ export class ButtonComponent {
 	 */
 	readonly state = input<ButtonState>('default');
 
-	/**
-	 * Modifies the hierarchy or the style of the Button
-	 */
 	readonly luButton = input<ButtonType>('');
 
 	/**

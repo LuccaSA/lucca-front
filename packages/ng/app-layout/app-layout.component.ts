@@ -13,8 +13,5 @@ import { luBooleanAttribute } from '@lucca-front/ng/core';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppLayoutComponent {
-	/**
-	 * Moves the navigation side to the bottom of the screen on mobile
-	 */
 	readonly mobileNavSideBottom = input(false, { transform: luBooleanAttribute });
 }

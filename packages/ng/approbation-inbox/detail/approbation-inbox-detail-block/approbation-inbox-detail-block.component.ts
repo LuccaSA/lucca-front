@@ -12,8 +12,5 @@ import { DividerComponent } from '@lucca-front/ng/divider';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxDetailMainBlockComponent {
-	/**
-	 * Title of the block
-	 */
 	readonly label = input.required<string>();
 }
