@@ -37,7 +37,7 @@ export default {
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
 		const startParam = args.start !== 1 && args.start !== undefined ? ` start="${start}"` : ``;
 		const reversedParam = args.reversed ? ` reversed` : ``;
-		const paletteParam = args.palette !== 'none' ? ` palette="${palette}"` : ``;
+		const paletteParam = palette ? ` palette="${palette}"` : ``;
 		return {
 			template: `<lu-listing${checklistParam}${orderedParam}${orderedFancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>item</lu-listing-item>
@@ -115,7 +115,11 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			description: 'Présente la liste avec des icônes (piloté par le contrôle <code>type</code>).',
 			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
-		palette: { ...PaletteAllArgType, table: { category: 'inputs', defaultValue: { summary: 'none' } } },
+		palette: {
+			...PaletteAllArgType,
+			options: PaletteAllArgType.options.filter((option) => option !== 'none'),
+			table: { category: 'inputs' },
+		},
 		critical: {
 			control: false,
 			description: 'Applique le style critique à un élément de la liste.',
@@ -125,7 +129,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 
 	args: {
 		type: '',
-		palette: 'none',
 		defaultIcon: 'heart',
 		icon: 'foodCroissant',
 		start: 1,

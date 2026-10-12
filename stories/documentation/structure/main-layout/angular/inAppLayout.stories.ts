@@ -101,8 +101,9 @@ export default {
 		},
 		palette: {
 			...PaletteArgType,
+			options: PaletteArgType.options.filter((option) => option !== 'none'),
 			description: 'Applique une palette de couleurs au layout.',
-			table: { category: 'inputs', defaultValue: { summary: 'none' } },
+			table: { category: 'inputs' },
 		},
 		responsive: {
 			options: ['', 'wideM'],
@@ -145,7 +146,7 @@ export default {
 			args.bubblesEndStart && !(args.bubblesEndStart === 1 && args.illustrationEndStart) ? (args.bubblesEndStart === 1 ? ` bubblesEndStart` : ` bubblesEndStart="${args.bubblesEndStart}"`) : ``;
 		const illustrationStartEndParam = args.illustrationStartEnd ? ` illustrationStartEnd="${args.illustrationStartEnd}"` : ``;
 		const illustrationEndStartParam = args.illustrationEndStart ? ` illustrationEndStart="${args.illustrationEndStart}"` : ``;
-		const paletteParam = args.palette && args.palette !== 'none' ? ` palette="${args.palette}"` : ``;
+		const paletteParam = args.palette ? ` palette="${args.palette}"` : ``;
 		const responsiveParam = args.responsive ? ` responsive="${args.responsive}"` : ``;
 		const sidebarContainer = args.sidebar
 			? `
@@ -312,7 +313,7 @@ export const Basic = {
 		bubblesEndStart: null,
 		illustrationStartEnd: '',
 		illustrationEndStart: '',
-		palette: 'none',
+		palette: '',
 		responsive: '',
 	},
 };

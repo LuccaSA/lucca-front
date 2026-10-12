@@ -30,7 +30,7 @@ export default {
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
 		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
-		const paletteParam = palette && palette !== 'none' ? ` palette="${palette}"` : ``;
+		const paletteParam = palette ? ` palette="${palette}"` : ``;
 		return {
 			template: `<lu-listing inline${checklistParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>Lorem ipsum</lu-listing-item>
@@ -56,9 +56,10 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		},
 		palette: {
 			...PaletteAllArgType,
+			options: PaletteAllArgType.options.filter((option) => option !== 'none'),
 			if: { arg: 'type', truthy: true },
 			description: 'Modifie la couleur des icônes.',
-			table: { category: 'inputs', defaultValue: { summary: 'none' } },
+			table: { category: 'inputs' },
 		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
@@ -89,7 +90,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 	args: {
 		type: '',
 		divider: false,
-		palette: 'none',
 		defaultIcon: 'heart',
 		icon: 'foodCroissant',
 	},

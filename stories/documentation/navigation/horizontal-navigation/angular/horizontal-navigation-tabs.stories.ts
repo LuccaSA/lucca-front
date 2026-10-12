@@ -29,6 +29,7 @@ export default {
 		},
 		palette: {
 			...PaletteAllArgType,
+			options: PaletteAllArgType.options.filter((option) => option !== 'none'),
 			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		currentIndex: {

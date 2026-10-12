@@ -9,7 +9,11 @@ interface HighlightBasicStory {}
 export default {
 	title: 'Documentation/Texts/Highlight Text/Angular/Basic',
 	argTypes: {
-		palette: { ...PaletteAllArgType, table: { category: 'inputs', defaultValue: { summary: 'product' } } },
+		palette: {
+			...PaletteAllArgType,
+			options: PaletteAllArgType.options.filter((option) => option !== 'none'),
+			table: { category: 'inputs', defaultValue: { summary: 'product' } },
+		},
 	},
 	decorators: [
 		moduleMetadata({
