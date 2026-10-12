@@ -14,9 +14,7 @@
 					@include sizeNumericBadge($size);
 				}
 
-				&::after {
-					@include sizeStatusIcon($size);
-				}
+				@include sizeStatusIcon($size);
 			}
 		}
 	}

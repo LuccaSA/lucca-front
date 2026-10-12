@@ -30,5 +30,7 @@
 }
 
 @mixin moreButtonChevron {
-	content: none;
+	&::after {
+		content: none;
+	}
 }

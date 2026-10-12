@@ -5,9 +5,7 @@
 		&.mod-more {
 			@include more;
 
-			&::after {
-				@include moreChevron;
-			}
+			@include moreChevron;
 
 			@each $size in S, XS {
 				&.mod-#{$size} {

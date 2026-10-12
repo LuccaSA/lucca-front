@@ -133,9 +133,7 @@
 			@include button.sizeNumericBadge(S);
 		}
 
-		&::after {
-			@include button.sizeStatusIcon(S);
-		}
+		@include button.sizeStatusIcon(S);
 
 		pointer-events: auto;
 		padding: var(--pr-t-spacings-50);
@@ -156,8 +154,6 @@
 			@include button.sizeNumericBadge(XS);
 		}
 
-		&::after {
-			@include button.sizeStatusIcon(XS);
-		}
+		@include button.sizeStatusIcon(XS);
 	}
 }

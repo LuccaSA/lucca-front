@@ -48,10 +48,12 @@ $spacings: (
 	}
 }
 
-// Status icon (::after)
+// Status icon
 @mixin sizeStatusIcon($size) {
-	font-size: var(--pr-t-font-body-#{$size}-lineHeight);
-	block-size: var(--pr-t-font-body-#{$size}-lineHeight);
+	&::after {
+		font-size: var(--pr-t-font-body-#{$size}-lineHeight);
+		block-size: var(--pr-t-font-body-#{$size}-lineHeight);
+	}
 }
 
 // Layout
@@ -85,14 +87,16 @@ $spacings: (
 	}
 }
 
-// Chevron (::after)
+// Chevron
 @mixin moreChevron {
-	@include icon.generate('arrow_chevron_bottom');
+	&::after {
+		@include icon.generate('arrow_chevron_bottom');
 
-	font-size: var(--icon-size);
-	block-size: 0;
-	order: -1;
-	vertical-align: text-top;
+		font-size: var(--icon-size);
+		block-size: 0;
+		order: -1;
+		vertical-align: text-top;
+	}
 }
 
 // Chevron icon
@@ -208,7 +212,7 @@ $spacings: (
 
 // AI
 
-// Gradient border (::before)
+// Gradient border
 @mixin aiBorder {
 	@include color.borderGradient($gradient: var(--pr-t-color-border-ai));
 }

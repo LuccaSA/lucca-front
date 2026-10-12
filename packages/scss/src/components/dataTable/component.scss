@@ -152,9 +152,7 @@
 				@include button.sizeNumericBadge(S);
 			}
 
-			&::after {
-				@include button.sizeStatusIcon(S);
-			}
+			@include button.sizeStatusIcon(S);
 
 			@include button.onlyIcon;
 			@include button.ghost;

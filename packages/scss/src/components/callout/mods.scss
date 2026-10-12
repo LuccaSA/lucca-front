@@ -21,9 +21,7 @@
 				@include button.sizeNumericBadge(XS);
 			}
 
-			&::after {
-				@include button.sizeStatusIcon(XS);
-			}
+			@include button.sizeStatusIcon(XS);
 		}
 	}
 
@@ -60,9 +58,7 @@
 			@include button.sizeNumericBadge(S);
 		}
 
-		&::after {
-			@include button.sizeStatusIcon(S);
-		}
+		@include button.sizeStatusIcon(S);
 
 		&.mod-outlined,
 		&.mod-ghost {
@@ -89,9 +85,7 @@
 			@include button.sizeNumericBadge(XS);
 		}
 
-		&::after {
-			@include button.sizeStatusIcon(XS);
-		}
+		@include button.sizeStatusIcon(XS);
 
 		&.mod-onlyIcon {
 			@include button.onlyIcon(XS);

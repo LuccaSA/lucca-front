@@ -294,9 +294,7 @@
 			@include button.sizeNumericBadge(S);
 		}
 
-		&::after {
-			@include button.sizeStatusIcon(S);
-		}
+		@include button.sizeStatusIcon(S);
 
 		@include button.ghost;
 
@@ -412,9 +410,7 @@
 				@include button.sizeNumericBadge(S);
 			}
 
-			&::after {
-				@include button.sizeStatusIcon(S);
-			}
+			@include button.sizeStatusIcon(S);
 		}
 	}
 }
@@ -471,9 +467,7 @@
 		@include button.sizeNumericBadge(S);
 	}
 
-	&::after {
-		@include button.sizeStatusIcon(S);
-	}
+	@include button.sizeStatusIcon(S);
 
 	@include button.onlyIcon(S);
 

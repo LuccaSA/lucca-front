@@ -12,9 +12,7 @@
 				@include successLabel;
 			}
 
-			&::after {
-				@include successStatusIcon;
-			}
+			@include successStatusIcon;
 
 			.numericBadge {
 				@include numericBadgeState;

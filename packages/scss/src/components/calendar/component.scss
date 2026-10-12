@@ -60,9 +60,7 @@
 				@include button.sizeNumericBadge(S);
 			}
 
-			&::after {
-				@include button.sizeStatusIcon(S);
-			}
+			@include button.sizeStatusIcon(S);
 
 			justify-content: flex-start;
 			font-weight: var(--pr-t-font-fontWeight-regular);

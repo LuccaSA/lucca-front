@@ -11,9 +11,7 @@
 			@include button.sizeNumericBadge(S);
 		}
 
-		&::after {
-			@include button.sizeStatusIcon(S);
-		}
+		@include button.sizeStatusIcon(S);
 	}
 
 	.lucca-icon {

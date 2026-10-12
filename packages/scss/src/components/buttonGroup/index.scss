@@ -27,9 +27,7 @@
 				}
 
 				// The chevron is an icon inside the button
-				&::after {
-					@include moreButtonChevron;
-				}
+				@include moreButtonChevron;
 			}
 		}
 	}

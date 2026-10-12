@@ -100,9 +100,11 @@
 	background-image: none !important;
 }
 
-// Removes the AI gradient border (::before)
+// Removes the AI gradient border
 @mixin noAIBorder {
-	content: none;
+	&::before {
+		content: none;
+	}
 }
 
 // Success
@@ -119,16 +121,18 @@
 	--components-button-color: transparent;
 }
 
-// Check mark (::after)
+// Check mark
 @mixin successStatusIcon {
-	@include icon.generate('sign_confirm');
+	&::after {
+		@include icon.generate('sign_confirm');
 
-	color: var(--components-button-statusIcon-color);
-	font-size: calc(1.5 * var(--components-button-font-size));
-	block-size: var(--components-button-line-height);
-	inset: 0;
-	margin: auto;
-	position: absolute;
+		color: var(--components-button-statusIcon-color);
+		font-size: calc(1.5 * var(--components-button-font-size));
+		block-size: var(--components-button-line-height);
+		inset: 0;
+		margin: auto;
+		position: absolute;
+	}
 }
 
 @mixin successOutlined {
@@ -147,9 +151,11 @@
 	@include icons.transparent;
 }
 
-// Gradient check mark (::after)
+// Gradient check mark
 @mixin successAIStatusIcon {
-	@include icons.AI;
+	&::after {
+		@include icons.AI;
+	}
 }
 
 // Error

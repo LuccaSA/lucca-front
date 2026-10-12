@@ -11,9 +11,7 @@
 			@include button.sizeNumericBadge(XS);
 		}
 
-		&::after {
-			@include button.sizeStatusIcon(XS);
-		}
+		@include button.sizeStatusIcon(XS);
 	}
 
 	// Deprecated
