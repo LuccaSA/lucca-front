@@ -1,6 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
+interface QAGroupType {
+	label: string;
+	modifier: '' | 'mod-outlined' | 'mod-ghost';
+}
+
+interface QAGroupState {
+	label: string;
+	/** Row class targeted by the forced pseudo-states */
+	rowClass: string;
+	/** Applied to the second button of each group */
+	disabled?: 'disabled' | 'aria-disabled';
+}
+
 @Component({
 	selector: 'button-group-stories',
 	templateUrl: './button-group.stories.html',
@@ -12,7 +25,35 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class ButtonGroupStory {}
+class ButtonGroupStory {
+	readonly types: QAGroupType[] = [
+		{ label: 'Default', modifier: '' },
+		{ label: 'Outlined', modifier: 'mod-outlined' },
+		{ label: 'Ghost', modifier: 'mod-ghost' },
+	];
+
+	readonly sizes = ['', 'mod-S', 'mod-XS'];
+
+	readonly states: QAGroupState[] = [
+		{ label: 'Hover', rowClass: 'qa-hover' },
+		{ label: 'Active', rowClass: 'qa-active' },
+		{ label: 'Focus visible', rowClass: 'qa-focusVisible' },
+		{ label: 'Disabled', rowClass: '', disabled: 'disabled' },
+		{ label: 'Aria-disabled', rowClass: 'qa-ariaDisabled', disabled: 'aria-disabled' },
+	];
+
+	readonly groupButtons = [0, 1, 2];
+
+	// Every type at rest, then every type in every state
+	readonly rows: { label: string; type: QAGroupType; state?: QAGroupState }[] = [
+		...this.types.map((type) => ({ label: type.label, type })),
+		...this.types.flatMap((type) => this.states.map((state) => ({ label: `${type.label} ${state.label}`, type, state }))),
+	];
+
+	buttonClasses(type: QAGroupType, size: string): string {
+		return ['button', type.modifier, size].filter(Boolean).join(' ');
+	}
+}
 
 export default {
 	title: 'QA/ButtonGroup',
