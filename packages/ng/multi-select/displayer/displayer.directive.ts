@@ -7,9 +7,6 @@ import { LuMultiSelectInputComponent } from '../input';
 	selector: '[luMultiDisplayer]',
 })
 export class LuMultiDisplayerDirective<T> {
-	/**
-	 * Multi select whose selected values are displayed with this template.
-	 */
 	readonly select = input<LuMultiSelectInputComponent<T>>(undefined, { alias: 'luMultiDisplayerSelect' });
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<T[]>>) {

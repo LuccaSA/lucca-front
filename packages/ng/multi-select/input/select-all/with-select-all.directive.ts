@@ -33,9 +33,6 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	 * @deprecated use withSelectAllDisplayerLabelFn
 	 */
 	readonly displayerLabel = input<string>(undefined, { alias: 'withSelectAllDisplayerLabel' });
-	/**
-	 * Function returning the label displayed after the count of selected values when some or all options are selected. It can return a string or plural forms resolved with the current locale.
-	 */
 	readonly displayerLabelFn = input<(count: number) => string | LuPluralForms>(undefined, { alias: 'withSelectAllDisplayerLabelFn' });
 
 	readonly displayerLabelValue = computed(() => {
