@@ -5,6 +5,11 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # A single browser page crashes after ~550 story files: keep each shard well below that
+        shard: [1, 2]
     container:
       image: mcr.microsoft.com/playwright@sha256:5b8f294aff9041b7191c34a4bab3ac270157a28774d4b0660e9743297b697e48 # v1.61.1-noble
     steps:
@@ -24,4 +29,4 @@ jobs:
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on tcp:127.0.0.1:6006 && yarn test-storybook"
+            "npx wait-on tcp:127.0.0.1:6006 && yarn test-storybook --shard=${{ matrix.shard }}/2"
