@@ -9,8 +9,5 @@ import { luBooleanAttribute } from '@lucca-front/ng/core';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeComponent {
-	/**
-	 * Displays the code as a block, allowing it to span multiple lines
-	 */
 	readonly block = input(false, { transform: luBooleanAttribute });
 }

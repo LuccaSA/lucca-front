@@ -40,7 +40,7 @@ export class ChipComponent {
 	readonly unkillable = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Applies the product palette to the chip when set to `product`, any other value has no effect.
+	 * Which palette should be used for the entire chip.
 	 * Defaults to none (inherits parent palette)
 	 */
 	readonly palette = input<string>();

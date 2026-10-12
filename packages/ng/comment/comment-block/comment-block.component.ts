@@ -26,9 +26,6 @@ export class CommentBlockComponent {
 
 	readonly comments = contentChildren(CommentComponent, { read: CommentComponent, descendants: true });
 
-	/**
-	 * Only displays the author infos on the first comment of the block
-	 */
 	readonly compact = input(false, { transform: luBooleanAttribute });
 
 	/**
@@ -38,19 +35,10 @@ export class CommentBlockComponent {
 	 */
 	readonly small = input(false, { transform: luBooleanAttribute });
 
-	/**
-	 * Displays the block as an answer in a `lu-comment-chat` (aligned to the end, product background)
-	 */
 	readonly chatAnswer = input(false, { transform: luBooleanAttribute });
 
-	/**
-	 * Name of the author, displayed in the infos of the comments
-	 */
 	readonly authorName = input<PortalContent>();
 
-	/**
-	 * Template of the author avatar (usually a `lu-user-picture`). Without it, no avatar is displayed
-	 */
 	readonly avatar = input<TemplateRef<unknown>>();
 
 	/**
