@@ -1,7 +1,23 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, forwardRef, input, Signal, signal, TemplateRef, viewChild, ViewEncapsulation, WritableSignal } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	contentChildren,
+	effect,
+	forwardRef,
+	inject,
+	input,
+	LOCALE_ID,
+	Signal,
+	signal,
+	TemplateRef,
+	viewChild,
+	ViewEncapsulation,
+	WritableSignal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
+import { getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuOptionComparer, LuOptionDirective, LuOptionGroupByContext, LuOptionGrouping } from '@lucca-front/ng/core-select';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
@@ -31,7 +47,7 @@ export interface FilterBarSegmentedControlTabs {
 
 @Component({
 	selector: 'lu-filter-bar',
-	imports: [DividerComponent, ScrollBoxComponent, FormsModule, NgTemplateOutlet, FilterPillComponent, LuMultiSelectInputComponent, LuOptionDirective],
+	imports: [DividerComponent, ScrollBoxComponent, FormsModule, NgTemplateOutlet, FilterPillComponent, LuMultiSelectInputComponent, LuOptionDirective, IntlParamsPipe],
 	templateUrl: './filter-bar.component.html',
 	styleUrl: './filter-bar.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -62,6 +78,27 @@ export class FilterBarComponent {
 	 * The `luFilterPillAddonAfter` addon is displayed after the tabs, separated by a divider.
 	 */
 	readonly segmentedControlTabs = input<FilterBarSegmentedControlTabs | null>(null);
+
+	/**
+	 * Number of results matching the filters, displayed after the filters and announced to assistive technology
+	 * users when it changes. Keep the previous count while results are loading: hiding it with `null` then displaying
+	 * it again prevents the new count from being announced.
+	 */
+	readonly resultsCount = input<number | null>(null);
+
+	readonly #pluralRules = inject(LOCALE_PLURAL_RULES);
+
+	readonly #numberFormat = new Intl.NumberFormat(inject(LOCALE_ID));
+
+	protected readonly formattedResultsCount = computed(() => {
+		const count = this.resultsCount();
+		return count === null ? '' : this.#numberFormat.format(count);
+	});
+
+	protected readonly resultsCountLabel = computed(() => {
+		const count = this.resultsCount();
+		return count === 0 ? this.intl().noResults : getIntlPluralLabel(this.#pluralRules, this.intl().resultsCount, count ?? 0);
+	});
 
 	readonly autoApplyAnnouncementId = `filterBar-autoApplyAnnouncement-${nextId++}`;
 

@@ -26,6 +26,12 @@
 		}
 
 		<ng-content />
+
+		@if (resultsCount() !== null) {
+			<span class="filterBar-scrollBox-group-results" role="status">{{
+				resultsCountLabel() | intlParams: { count: formattedResultsCount() }
+			}}</span>
+		}
 	</div>
 
 	@if (segmentedControlTabs(); as segmentedControlTabs) {

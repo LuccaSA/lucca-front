@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, LOCALE_ID, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
 import { FilterBarComponent } from './filter-bar.component';
@@ -98,5 +98,69 @@ describe('FilterBarComponent: segmentedControlTabs', () => {
 		expect(segmentedControlTabs().querySelector('[role="tablist"]')).not.toBeNull();
 		expect(filterBar().querySelector('.filterBar-scrollBox-divider')).toBeNull();
 		expect(filterBar().querySelector('.addonAfter')).not.toBeNull();
+	});
+});
+
+@Component({
+	template: `
+		<lu-filter-bar [resultsCount]="resultsCount()">
+			<span class="pill">Pill</span>
+			<button class="addonAfter" *luFilterPillAddonAfter type="button">Export</button>
+		</lu-filter-bar>
+	`,
+	imports: [FilterBarComponent, FilterPillAddonAfterDirective],
+})
+class HostWithResultsCountComponent {
+	readonly resultsCount = signal<number | null>(24);
+}
+
+describe('FilterBarComponent: resultsCount', () => {
+	let fixture: ComponentFixture<HostWithResultsCountComponent>;
+
+	const results = () => (fixture.nativeElement as HTMLElement).querySelector('.filterBar-scrollBox-group-results');
+
+	const setResultsCount = (count: number | null) => {
+		fixture.componentInstance.resultsCount.set(count);
+		fixture.detectChanges();
+	};
+
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [HostWithResultsCountComponent],
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		});
+		fixture = TestBed.createComponent(HostWithResultsCountComponent);
+		fixture.detectChanges();
+	});
+
+	it('displays the count after the filters, before the actions, in a status region', () => {
+		expect(results()?.textContent?.trim()).toBe('24\u00A0résultats');
+		expect(results()?.getAttribute('role')).toBe('status');
+		expect(results()?.previousElementSibling?.classList).toContain('pill');
+		expect(results()?.parentElement?.nextElementSibling?.classList).toContain('filterBar-scrollBox-export');
+	});
+
+	it('uses the singular form for a single result', () => {
+		setResultsCount(1);
+
+		expect(results()?.textContent?.trim()).toBe('1\u00A0résultat');
+	});
+
+	it('displays a dedicated label when there is no result', () => {
+		setResultsCount(0);
+
+		expect(results()?.textContent?.trim()).toBe('Aucun résultat');
+	});
+
+	it('formats the count according to the locale', () => {
+		setResultsCount(1250);
+
+		expect(results()?.textContent?.trim()).toBe(`${new Intl.NumberFormat('fr-FR').format(1250)}\u00A0résultats`);
+	});
+
+	it('hides the count when it is null', () => {
+		setResultsCount(null);
+
+		expect(results()).toBeNull();
 	});
 });

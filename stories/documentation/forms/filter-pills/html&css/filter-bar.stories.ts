@@ -112,6 +112,8 @@ function getTemplate(args: FilterBarBasicStory): string {
 					</div>
 
 					<button type="submit" class="button mod-ghost mod-S palette-product">Appliquer les filtres</button>
+
+					<span class="filterBar-scrollBox-group-results" role="status">24 résultats</span>
 				</div>
 				<div class="filterBar-scrollBox-export">
 					<button type="submit" class="button mod-S mod-outlined">Exporter</button>
