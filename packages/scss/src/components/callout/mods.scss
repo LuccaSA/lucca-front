@@ -15,7 +15,15 @@
 
 	.callout-content-description-actions {
 		.button {
-			@include button.XS;
+			@include button.size(XS);
+
+			.numericBadge {
+				@include button.sizeNumericBadge(XS);
+			}
+
+			&::after {
+				@include button.sizeStatusIcon(XS);
+			}
 		}
 	}
 
@@ -46,7 +54,15 @@
 @mixin actions {
 	.button {
 		@include color.palette('neutral');
-		@include button.S;
+		@include button.size(S);
+
+		.numericBadge {
+			@include button.sizeNumericBadge(S);
+		}
+
+		&::after {
+			@include button.sizeStatusIcon(S);
+		}
 
 		&.mod-outlined,
 		&.mod-ghost {
@@ -56,7 +72,7 @@
 		}
 
 		&.mod-onlyIcon {
-			@include button.onlyIconS;
+			@include button.onlyIcon(S);
 		}
 	}
 }
@@ -67,10 +83,18 @@
 	--components-callout-content-description-action-paddingBlock: 0;
 
 	.button {
-		@include button.XS;
+		@include button.size(XS);
+
+		.numericBadge {
+			@include button.sizeNumericBadge(XS);
+		}
+
+		&::after {
+			@include button.sizeStatusIcon(XS);
+		}
 
 		&.mod-onlyIcon {
-			@include button.onlyIconXS;
+			@include button.onlyIcon(XS);
 		}
 	}
 }

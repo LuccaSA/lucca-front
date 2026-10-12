@@ -5,7 +5,15 @@
 	--components-calloutFeedbackList-font: var(--pr-t-font-body-S);
 
 	.button {
-		@include button.XS;
+		@include button.size(XS);
+
+		.numericBadge {
+			@include button.sizeNumericBadge(XS);
+		}
+
+		&::after {
+			@include button.sizeStatusIcon(XS);
+		}
 	}
 
 	// Deprecated

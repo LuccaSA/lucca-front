@@ -58,9 +58,31 @@
 
 		.sortableList-item-handler {
 			&.button {
-				@include button.S;
+				@include button.size(S);
+
+				.numericBadge {
+					@include button.sizeNumericBadge(S);
+				}
+
+				&::after {
+					@include button.sizeStatusIcon(S);
+				}
+
 				@include button.onlyIcon;
-				@include button.ghostWithStates;
+				@include button.ghost;
+
+				&:hover,
+				&:focus-visible {
+					@include button.ghostHover;
+				}
+
+				&:active {
+					@include button.ghostActive;
+				}
+
+				&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+					@include button.ghostDisabled;
+				}
 
 				--components-button-padding: var(--pr-t-spacings-50);
 			}

@@ -83,8 +83,34 @@
 				animation-name: timer;
 
 				@include button.onlyIcon;
-				@include button.ghostWithStates;
-				@include button.invertedWithStates;
+				@include button.ghost;
+
+				&:hover,
+				&:focus-visible {
+					@include button.ghostHover;
+				}
+
+				&:active {
+					@include button.ghostActive;
+				}
+
+				&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+					@include button.ghostDisabled;
+				}
+
+				@include button.inverted;
+
+				// A disabled button can still be focused (aria-disabled)
+				&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
+					&:hover,
+					&:focus-visible {
+						@include button.invertedHover;
+					}
+
+					&:active {
+						@include button.invertedActive;
+					}
+				}
 
 				@keyframes timer {
 				}

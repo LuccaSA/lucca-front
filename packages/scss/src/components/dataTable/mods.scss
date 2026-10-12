@@ -34,9 +34,31 @@
 	}
 
 	.dataTable-body-row-cell-expand-button.button {
-		@include button.S;
-		@include button.onlyIconS;
-		@include button.ghostWithStates;
+		@include button.size(S);
+
+		.numericBadge {
+			@include button.sizeNumericBadge(S);
+		}
+
+		&::after {
+			@include button.sizeStatusIcon(S);
+		}
+
+		@include button.onlyIcon(S);
+		@include button.ghost;
+
+		&:hover,
+		&:focus-visible {
+			@include button.ghostHover;
+		}
+
+		&:active {
+			@include button.ghostActive;
+		}
+
+		&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+			@include button.ghostDisabled;
+		}
 
 		--components-button-padding: var(--pr-t-spacings-25);
 		--components-button-color: var(--palettes-neutral-800);
@@ -119,20 +141,48 @@
 	white-space: nowrap;
 
 	.button {
-		@include button.S;
+		@include button.size(S);
+
+		.numericBadge {
+			@include button.sizeNumericBadge(S);
+		}
+
+		&::after {
+			@include button.sizeStatusIcon(S);
+		}
+
 		@include button.onlyIcon;
-		@include button.onlyIconS;
-		@include button.ghostWithStates;
+		@include button.onlyIcon(S);
+		@include button.ghost;
+
+		&:hover,
+		&:focus-visible {
+			@include button.ghostHover;
+		}
+
+		&:active {
+			@include button.ghostActive;
+		}
+
+		&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+			@include button.ghostDisabled;
+		}
 
 		// .mod-delete is deprecated
 		&.mod-critical,
 		&.mod-delete {
 			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components
-			@include button.critical;
+			&:hover {
+				@include button.criticalHover;
+			}
+
+			&:active {
+				@include button.criticalActive;
+			}
 		}
 
 		&.is-loading {
-			@include button.loadingS;
+			@include button.loadingSpinner(S);
 			@include button.loadingGhost;
 		}
 

@@ -16,3 +16,19 @@
 		}
 	}
 }
+
+// More button of a list group: as tall as the group
+@mixin moreButton($size: M) {
+	@if $size == M {
+		block-size: 100%;
+		min-block-size: 2.25rem;
+	} @else if $size == S {
+		min-block-size: 2rem;
+	} @else {
+		min-block-size: 1.5rem;
+	}
+}
+
+@mixin moreButtonChevron {
+	content: none;
+}

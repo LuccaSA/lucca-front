@@ -16,7 +16,20 @@
 
 		&:is(ul) {
 			.button.mod-more {
-				@include button.moreInsideUl;
+				@include moreButton;
+
+				&.mod-S {
+					@include moreButton(S);
+				}
+
+				&.mod-XS {
+					@include moreButton(XS);
+				}
+
+				// The chevron is an icon inside the button
+				&::after {
+					@include moreButtonChevron;
+				}
 			}
 		}
 	}

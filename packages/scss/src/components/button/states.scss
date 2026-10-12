@@ -163,13 +163,3 @@
 @mixin errorKeyframes {
 	@include keyframe.shake;
 }
-
-// Aggregates kept for the components reusing the button style: prefer the elementary mixins
-
-@mixin loadingS {
-	@include loadingSpinner(S);
-}
-
-@mixin loadingXS {
-	@include loadingSpinner(XS);
-}

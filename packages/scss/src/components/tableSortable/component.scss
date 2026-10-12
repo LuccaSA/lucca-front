@@ -18,7 +18,20 @@
 	line-height: var(--components-sortable-lineHeight);
 	color: currentColor;
 
-	@include button.ghostWithStates;
+	@include button.ghost;
+
+	&:hover,
+	&:focus-visible {
+		@include button.ghostHover;
+	}
+
+	&:active {
+		@include button.ghostActive;
+	}
+
+	&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+		@include button.ghostDisabled;
+	}
 
 	@at-root ($atRoot) {
 		.tableSortable-label {

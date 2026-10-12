@@ -5,7 +5,15 @@
 	--components-divider-font: var(--pr-t-font-body-S);
 
 	.button {
-		@include button.S;
+		@include button.size(S);
+
+		.numericBadge {
+			@include button.sizeNumericBadge(S);
+		}
+
+		&::after {
+			@include button.sizeStatusIcon(S);
+		}
 	}
 
 	.lucca-icon {

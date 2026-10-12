@@ -93,7 +93,24 @@
 			display: var(--components-fileUpload-button-display);
 
 			&:not(.mod-filled) {
-				@include button.outlinedWithStates;
+				@include button.outlined;
+
+				&:hover {
+					@include button.outlinedHover;
+				}
+
+				&:active {
+					@include button.outlinedActive;
+				}
+
+				&:focus-visible {
+					@include button.outlinedFocusVisible;
+				}
+
+				&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+					@include button.outlinedDisabled;
+				}
+
 				@include color.palette('product');
 			}
 		}

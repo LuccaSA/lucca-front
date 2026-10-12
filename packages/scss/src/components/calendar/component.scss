@@ -39,8 +39,30 @@
 
 		.calendarShortcutsButton-item-button.button {
 			@include button.block;
-			@include button.ghostWithStates;
-			@include button.S;
+			@include button.ghost;
+
+			&:hover,
+			&:focus-visible {
+				@include button.ghostHover;
+			}
+
+			&:active {
+				@include button.ghostActive;
+			}
+
+			&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+				@include button.ghostDisabled;
+			}
+
+			@include button.size(S);
+
+			.numericBadge {
+				@include button.sizeNumericBadge(S);
+			}
+
+			&::after {
+				@include button.sizeStatusIcon(S);
+			}
 
 			justify-content: flex-start;
 			font-weight: var(--pr-t-font-fontWeight-regular);
@@ -99,8 +121,22 @@
 
 		.calendarWrapper-navigation-button {
 			&.button {
-				@include button.ghostWithStates;
-				@include button.onlyIconXS;
+				@include button.ghost;
+
+				&:hover,
+				&:focus-visible {
+					@include button.ghostHover;
+				}
+
+				&:active {
+					@include button.ghostActive;
+				}
+
+				&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+					@include button.ghostDisabled;
+				}
+
+				@include button.onlyIcon(XS);
 			}
 		}
 

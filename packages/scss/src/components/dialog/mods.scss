@@ -101,9 +101,32 @@
 }
 
 @mixin withCloseButton {
-	@include button.ghostWithStates;
-	@include button.S;
-	@include button.onlyIconS;
+	@include button.ghost;
+
+	&:hover,
+	&:focus-visible {
+		@include button.ghostHover;
+	}
+
+	&:active {
+		@include button.ghostActive;
+	}
+
+	&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+		@include button.ghostDisabled;
+	}
+
+	@include button.size(S);
+
+	.numericBadge {
+		@include button.sizeNumericBadge(S);
+	}
+
+	&::after {
+		@include button.sizeStatusIcon(S);
+	}
+
+	@include button.onlyIcon(S);
 
 	align-self: start;
 	justify-self: end;
@@ -149,8 +172,29 @@
 	}
 
 	.dialog-inside-header-button.button {
-		@include button.outlinedWithStates;
-		@include button.M;
+		@include button.outlined;
+
+		&:hover {
+			@include button.outlinedHover;
+		}
+
+		&:active {
+			@include button.outlinedActive;
+		}
+
+		&:focus-visible {
+			@include button.outlinedFocusVisible;
+		}
+
+		&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+			@include button.outlinedDisabled;
+		}
+
+		@include button.size(M);
+
+		.numericBadge {
+			@include button.sizeNumericBadge(M);
+		}
 	}
 }
 

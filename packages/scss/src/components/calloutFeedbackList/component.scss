@@ -15,7 +15,15 @@
 
 	.button {
 		@include color.palette('neutral');
-		@include button.S;
+		@include button.size(S);
+
+		.numericBadge {
+			@include button.sizeNumericBadge(S);
+		}
+
+		&::after {
+			@include button.sizeStatusIcon(S);
+		}
 	}
 
 	@at-root ($atRoot) {

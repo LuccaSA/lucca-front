@@ -1,14 +1,42 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin button {
-	@include button.ghostWithStates;
-	@include button.S;
+	@include button.ghost;
+
+	&:hover,
+	&:focus-visible {
+		@include button.ghostHover;
+	}
+
+	&:active {
+		@include button.ghostActive;
+	}
+
+	&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+		@include button.ghostDisabled;
+	}
+
+	@include button.size(S);
+
+	.numericBadge {
+		@include button.sizeNumericBadge(S);
+	}
+
+	&::after {
+		@include button.sizeStatusIcon(S);
+	}
 
 	--components-button-borderRadius: 4px;
 	--components-button-padding: var(--pr-t-spacings-75);
 
 	&:has(.icon-trashDelete) {
-		@include button.critical;
+		&:hover {
+			@include button.criticalHover;
+		}
+
+		&:active {
+			@include button.criticalActive;
+		}
 	}
 }
 
