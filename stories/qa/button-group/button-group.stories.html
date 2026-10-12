@@ -1,0 +1,62 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+		</tr>
+		@for (row of rows; track row.label) {
+			<tr>
+				<td>{{ row.label }}</td>
+				<td>
+					<div class="demo-QAtable-list" [class]="row.state?.rowClass">
+						@for (size of sizes; track size) {
+							<ul class="button-group" [class]="row.type.modifier">
+								@for (index of groupButtons; track index) {
+									<li class="button-group-item">
+										<button
+											type="button"
+											[class]="buttonClasses(row.type, size)"
+											[disabled]="index === 1 && row.state?.disabled === 'disabled'"
+											[attr.aria-disabled]="index === 1 && row.state?.disabled === 'aria-disabled' ? 'true' : null"
+										>
+											Group
+										</button>
+									</li>
+								}
+								<li class="button-group-item">
+									<button type="button" [class]="buttonClasses(row.type, size) + ' mod-more'">
+										<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+										<span class="pr-u-mask">Plus d'actions</span>
+									</button>
+								</li>
+							</ul>
+						}
+					</div>
+				</td>
+			</tr>
+		}
+		<tr>
+			<td>Div group (legacy)</td>
+			<td>
+				<div class="demo-QAtable-list">
+					@for (size of sizes; track size) {
+						<div class="button-group mod-more">
+							@for (index of groupButtons; track index) {
+								<button type="button" [class]="buttonClasses(types[0], size)">Group</button>
+							}
+							<!-- The chevron is generated in CSS: the masked text gives the button its accessible name -->
+							<button type="button" [class]="buttonClasses(types[0], size) + ' mod-more'">
+								<span class="pr-u-mask">Plus d'actions</span>
+							</button>
+						</div>
+					}
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
