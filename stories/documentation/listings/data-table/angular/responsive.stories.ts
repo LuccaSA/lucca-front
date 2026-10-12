@@ -30,8 +30,8 @@ export default {
 		},
 		responsive: {
 			description:
-				'Applique <code>layoutFixed</code> à partir d’un breakpoint (<code>ResponsiveConfig</code>, ex. <code>{ layoutFixedAtMediaMinS: true }</code>). Dans la story, la configuration est déclarée via <code>@let</code> puis liée à l’input.',
-			table: { category: 'inputs', type: { summary: "ResponsiveConfig<'layoutFixed', true>" } },
+				'Déclaration <code>@let</code> insérée avant le tableau. Elle définit la configuration (<code>ResponsiveConfig&lt;\'layoutFixed\', true&gt;</code>, ex. <code>{ layoutFixedAtMediaMinS: true }</code>) liée à l’input <code>responsive</code> via <code>[responsive]="layoutfixed"</code>.',
+			table: { category: 'story', type: { summary: 'string' } },
 		},
 	},
 	decorators: [
