@@ -11,8 +11,5 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownGroupComponent {
-	/**
-	 * Label of the group of actions.
-	 */
 	readonly label = input<string | null>(null);
 }

@@ -16,13 +16,7 @@ export class EmptyStateSectionComponent {
 	readonly icon = input<string | null>(null);
 	readonly actionIllustration = computed(() => this.action() || (this.icon()?.includes('Action.svg') ?? false));
 
-	/**
-	 * Bubble illustration displayed above the title.
-	 */
 	readonly illustration = input<BubbleIllustration | string | null>(null);
-	/**
-	 * Adds an action badge (+) to the illustration.
-	 */
 	readonly action = input(false, { transform: luBooleanAttribute });
 
 	readonly iconOrIllustration = computed(() => {
@@ -48,9 +42,6 @@ export class EmptyStateSectionComponent {
 	 */
 	readonly palette = input<Palette>('none');
 
-	/**
-	 * Centers the content horizontally.
-	 */
 	readonly center = input(false, { transform: luBooleanAttribute });
 
 	/**
