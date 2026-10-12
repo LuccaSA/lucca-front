@@ -36,9 +36,6 @@ import { LuRouterLink } from './lu-router-link';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
-	/**
-	 * Override the default translations of the component
-	 */
 	readonly intl = input(...intlInputOptions(LU_LINK_TRANSLATIONS));
 	readonly routerLink = inject(LuRouterLink);
 	#injector = inject(Injector);

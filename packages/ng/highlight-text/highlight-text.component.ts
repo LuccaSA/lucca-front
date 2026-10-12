@@ -14,9 +14,6 @@ import { DecorativePalette, Palette } from '@lucca/prisme/core';
 	},
 })
 export class HighlightTextComponent {
-	/**
-	 * Apply a color palette to the highlighted text
-	 */
 	readonly palette = input<Palette | DecorativePalette>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 }

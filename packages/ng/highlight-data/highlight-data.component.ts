@@ -20,12 +20,12 @@ export class HighlightDataComponent {
 	#luClass = inject(LuClass);
 
 	/**
-	 * The title of the highlight data
+	 * The title of the highlight date
 	 */
 	readonly heading = input.required<PortalContent>();
 
 	/**
-	 * The content of the highlight data
+	 * The content of the highlight date
 	 */
 	readonly value = input.required<PortalContent>();
 
