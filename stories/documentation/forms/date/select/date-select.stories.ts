@@ -50,6 +50,13 @@ const generateStory = getStoryGenerator<StoryComponent>({
 	},
 });
 
+const dateSelectArgs = ['selectedDate', 'secondSelectedDate', 'startOn', 'min', 'max', 'granularity', 'hideClearer', 'placeholder', 'disabled', 'pickerOverlap'] as const;
+
+// Hides the controls that the story template does not bind, so that the Controls panel only exposes working controls
+function hideUnboundArgTypes(...boundArgs: (typeof dateSelectArgs)[number][]) {
+	return Object.fromEntries(dateSelectArgs.filter((arg) => !boundArgs.includes(arg)).map((arg) => [arg, { table: { disable: true } }]));
+}
+
 const description = `Avant d'utiliser ce composant, il faut fournir un \`ALuDateAdapter\` parmis ceux fournis (\`LuNativeDateAdapter\`, \`LuStringDateAdapter\`).
 De plus, \`provideAnimations\` est également requis.
 
@@ -89,6 +96,9 @@ export const Select = generateStory({
 	neededImports: {
 		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
 	},
+	storyPartial: {
+		argTypes: hideUnboundArgTypes('selectedDate', 'startOn', 'min', 'max', 'granularity', 'hideClearer', 'placeholder', 'disabled', 'pickerOverlap'),
+	},
 });
 
 export const Minimal = generateStory({
@@ -102,6 +112,9 @@ export const Minimal = generateStory({
 	`,
 	neededImports: {
 		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
+	},
+	storyPartial: {
+		argTypes: hideUnboundArgTypes('selectedDate'),
 	},
 });
 
@@ -130,6 +143,9 @@ export const DualSelect = generateStory({
 	neededImports: {
 		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
 	},
+	storyPartial: {
+		argTypes: hideUnboundArgTypes('selectedDate', 'secondSelectedDate'),
+	},
 });
 
 export const SelectWithDisplayer = generateStory({
@@ -146,6 +162,9 @@ export const SelectWithDisplayer = generateStory({
 	neededImports: {
 		'@lucca-front/ng/input': ['LuInputDisplayerDirective'],
 		'@lucca-front/ng/date': ['LuDateSelectInputComponent'],
+	},
+	storyPartial: {
+		argTypes: hideUnboundArgTypes('selectedDate'),
 	},
 });
 
@@ -168,6 +187,7 @@ export const SelectMonthWithDisplayer = generateStory({
 		args: {
 			granularity: ELuDateGranularity.month,
 		},
+		argTypes: hideUnboundArgTypes('selectedDate', 'granularity'),
 	},
 });
 
