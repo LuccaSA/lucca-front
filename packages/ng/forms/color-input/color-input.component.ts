@@ -22,9 +22,6 @@ import { LU_COLOR_TRANSLATIONS } from './color.translate';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorInputComponent {
-	/**
-	 * Overrides the default translations (partial overrides are merged with the defaults)
-	 */
 	readonly intl = input(...intlInputOptions(LU_COLOR_TRANSLATIONS));
 
 	readonly pointerNavigation = ɵinjectPointerNavigation();
@@ -39,17 +36,8 @@ export class ColorInputComponent {
 	});
 
 	readonly clue = signal<string>('');
-	/**
-	 * Colors available in the select
-	 */
 	readonly colors = input.required<ColorOption[]>();
-	/**
-	 * Allows the selected color to be cleared
-	 */
 	readonly clearable = input(false, { transform: luBooleanAttribute });
-	/**
-	 * Displays a compact select showing only the selected color
-	 */
 	readonly compact = input(false, { transform: luBooleanAttribute });
 
 	ngControl = injectNgControl();
