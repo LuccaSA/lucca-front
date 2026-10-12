@@ -35,7 +35,7 @@ export const Template: StoryObj = {
 			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		palette: {
-			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
+			options: setStoryOptions(PALETTE),
 			control: {
 				type: 'select',
 			},
