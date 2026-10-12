@@ -6,16 +6,15 @@
 
 		&:is(.is-success, .success) {
 			@include success;
-
-			&,
-			&:focus-visible {
-				@include successLabel;
-			}
-
 			@include successStatusIcon;
 
 			.numericBadge {
 				@include numericBadgeState;
+			}
+
+			&,
+			&:focus-visible {
+				@include successLabel;
 			}
 
 			&.mod-AI:where(:not(.mod-invert)),

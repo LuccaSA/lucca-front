@@ -4,7 +4,6 @@
 	@layer mods {
 		&.mod-more {
 			@include more;
-
 			@include moreChevron;
 
 			@each $size in S, XS {

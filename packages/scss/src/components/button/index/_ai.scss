@@ -9,12 +9,12 @@
 				@include outlinedHover;
 			}
 
-			&:active {
-				@include outlinedActive;
-			}
-
 			&:focus-visible {
 				@include outlinedFocusVisible;
+			}
+
+			&:active {
+				@include outlinedActive;
 			}
 
 			&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
@@ -36,7 +36,10 @@
 
 				// A disabled button can still be focused (aria-disabled)
 				&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
-					&:hover,
+					&:hover {
+						@include aiInvertHover;
+					}
+
 					&:focus-visible {
 						@include aiInvertHover;
 					}
@@ -53,17 +56,16 @@
 
 			&.is-success {
 				@include successAI;
-
-				&,
-				&:focus-visible {
-					@include successLabel;
-				}
+				@include successAIStatusIcon;
 
 				.lucca-icon {
 					@include successAIIcon;
 				}
 
-				@include successAIStatusIcon;
+				&,
+				&:focus-visible {
+					@include successLabel;
+				}
 			}
 
 			&.is-loading {

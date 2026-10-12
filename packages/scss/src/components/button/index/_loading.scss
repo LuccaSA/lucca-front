@@ -8,6 +8,10 @@
 			@include loading;
 			@include loadingSpinner;
 
+			.numericBadge {
+				@include numericBadgeState;
+			}
+
 			&,
 			&:disabled {
 				@include loadingLabel;
@@ -15,10 +19,6 @@
 				.lucca-icon {
 					@include loadingIcon;
 				}
-			}
-
-			.numericBadge {
-				@include numericBadgeState;
 			}
 
 			@each $size in S, XS {

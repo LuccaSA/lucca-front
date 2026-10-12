@@ -9,7 +9,10 @@
 
 			// A disabled button can still be focused (aria-disabled)
 			&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
-				&:hover,
+				&:hover {
+					@include invertedHover;
+				}
+
 				&:focus-visible {
 					@include invertedHover;
 				}

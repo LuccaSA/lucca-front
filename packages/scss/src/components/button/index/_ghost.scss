@@ -8,7 +8,10 @@
 			&:where(:not(.is-success)) {
 				@include ghost;
 
-				&:hover,
+				&:hover {
+					@include ghostHover;
+				}
+
 				&:focus-visible {
 					@include ghostHover;
 				}

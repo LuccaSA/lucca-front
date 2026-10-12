@@ -17,7 +17,10 @@
 
 				// .mod-text and .mod-link are deprecated
 				&:is(.mod-ghost, .mod-text, .mod-link) {
-					&:hover,
+					&:hover {
+						@include criticalHover;
+					}
+
 					&:focus-visible {
 						@include criticalHover;
 					}

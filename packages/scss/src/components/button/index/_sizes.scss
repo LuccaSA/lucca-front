@@ -9,12 +9,11 @@
 		@each $size in S, XS {
 			&.mod-#{$size} {
 				@include size($size);
+				@include sizeStatusIcon($size);
 
 				.numericBadge {
 					@include sizeNumericBadge($size);
 				}
-
-				@include sizeStatusIcon($size);
 			}
 		}
 	}
