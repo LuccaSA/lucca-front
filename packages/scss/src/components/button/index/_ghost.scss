@@ -1,0 +1,26 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		// .mod-text and .mod-link are deprecated
+
+		&:is(.mod-ghost, .mod-text, .mod-link) {
+			&:where(:not(.is-success)) {
+				@include ghost;
+
+				&:hover,
+				&:focus-visible {
+					@include ghostHover;
+				}
+
+				&:active {
+					@include ghostActive;
+				}
+
+				&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+					@include ghostDisabled;
+				}
+			}
+		}
+	}
+}

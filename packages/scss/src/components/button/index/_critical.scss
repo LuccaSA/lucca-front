@@ -1,0 +1,70 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		// .mod-delete is deprecated
+
+		&:is(.mod-critical, .mod-delete) {
+			// An aria-disabled button can be hovered: it must not look critical
+			&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
+				&:hover {
+					@include criticalHover;
+				}
+
+				&:active {
+					@include criticalActive;
+				}
+
+				// .mod-text and .mod-link are deprecated
+				&:is(.mod-ghost, .mod-text, .mod-link) {
+					&:hover,
+					&:focus-visible {
+						@include criticalHover;
+					}
+
+					&:active {
+						@include criticalActive;
+					}
+				}
+
+				// .mod-outline is deprecated
+				&:is(.mod-outlined, .mod-outline) {
+					&:hover {
+						@include criticalOutlinedHover;
+					}
+
+					&:focus-visible {
+						@include criticalOutlinedFocusVisible;
+					}
+
+					&:active {
+						@include criticalActive;
+					}
+				}
+
+				// AI invert is built on outlined
+				&.mod-AI.mod-invert {
+					&:hover {
+						@include criticalOutlinedHover;
+					}
+
+					&:focus-visible {
+						@include criticalOutlinedFocusVisible;
+					}
+
+					&:active {
+						@include criticalActive;
+					}
+
+					&:is(:hover, :focus-visible, :active) {
+						@include criticalAIInvert;
+					}
+
+					&:focus-visible {
+						@include criticalAIInvertFocusVisible;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,40 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		// .loading is deprecated
+
+		&:is(.is-loading, .loading) {
+			@include loading;
+			@include loadingSpinner;
+
+			&,
+			&:disabled {
+				@include loadingLabel;
+
+				.lucca-icon {
+					@include loadingIcon;
+				}
+			}
+
+			.numericBadge {
+				@include numericBadgeState;
+			}
+
+			@each $size in S, XS {
+				&.mod-#{$size} {
+					@include loadingSpinner($size);
+				}
+			}
+
+			&.mod-outlined {
+				@include loadingOutlined;
+			}
+
+			// .mod-text and .mod-link are deprecated
+			&:is(.mod-ghost, .mod-text, .mod-link) {
+				@include loadingGhost;
+			}
+		}
+	}
+}

@@ -1,0 +1,12 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		// .error is deprecated
+
+		&:is(.is-error, .error) {
+			@include error;
+			@include errorKeyframes;
+		}
+	}
+}

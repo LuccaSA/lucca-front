@@ -1,0 +1,53 @@
+@use '../exports' as *;
+
+.button {
+	@layer components {
+		@include vars;
+		@include component;
+
+		&,
+		&:is(a) {
+			@include componentColor;
+		}
+
+		.lucca-icon {
+			@include componentIcon;
+		}
+
+		// .button-icon is deprecated
+		.button-icon {
+			@include componentLegacyIcon;
+		}
+
+		// .mod-outline is deprecated
+		&:not(.mod-outlined, .mod-outline) {
+			.numericBadge {
+				@include numericBadgeInherit;
+			}
+		}
+
+		&:hover {
+			@include hover;
+		}
+
+		&:focus-visible {
+			@include focusVisible;
+		}
+
+		&:active {
+			@include active;
+		}
+
+		&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+			@include disabled;
+
+			.numericBadge {
+				@include numericBadgeDisabled;
+			}
+		}
+
+		&:is(:disabled, [disabled], .is-disabled, .disabled) {
+			@include disabledPointer;
+		}
+	}
+}

@@ -1,0 +1,35 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		&.mod-block {
+			@include block;
+		}
+
+		@each $size in S, XS {
+			&.mod-#{$size} {
+				@include size($size);
+
+				.numericBadge {
+					@include sizeNumericBadge($size);
+				}
+
+				&::after {
+					@include sizeStatusIcon($size);
+				}
+			}
+		}
+
+		&.mod-disclosure {
+			@include iconOnRight;
+
+			.icon-arrowChevronBottom {
+				@include disclosureIcon;
+			}
+
+			&[aria-expanded='true'] {
+				@include disclosureExpanded;
+			}
+		}
+	}
+}

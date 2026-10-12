@@ -1,0 +1,29 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		// .mod-outline is deprecated
+
+		&:is(.mod-outlined, .mod-outline) {
+			&:where(:not(.is-success)) {
+				@include outlined;
+
+				&:hover {
+					@include outlinedHover;
+				}
+
+				&:active {
+					@include outlinedActive;
+				}
+
+				&:focus-visible {
+					@include outlinedFocusVisible;
+				}
+
+				&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+					@include outlinedDisabled;
+				}
+			}
+		}
+	}
+}

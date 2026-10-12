@@ -1,0 +1,34 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		// .success is deprecated
+
+		&:is(.is-success, .success) {
+			@include success;
+
+			&,
+			&:focus-visible {
+				@include successLabel;
+			}
+
+			&::after {
+				@include successStatusIcon;
+			}
+
+			.numericBadge {
+				@include numericBadgeState;
+			}
+
+			&.mod-AI:where(:not(.mod-invert)),
+			&.mod-outlined {
+				@include successOutlined;
+			}
+
+			// .mod-text and .mod-link are deprecated
+			&:is(.mod-ghost, .mod-text, .mod-link) {
+				@include successGhost;
+			}
+		}
+	}
+}

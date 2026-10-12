@@ -1,0 +1,23 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		// .mod-inverted is an alias of .mod-invert (the name used by the clear and newBadge components)
+
+		&:is(.mod-invert, .mod-inverted) {
+			@include inverted;
+
+			// A disabled button can still be focused (aria-disabled)
+			&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
+				&:hover,
+				&:focus-visible {
+					@include invertedHover;
+				}
+
+				&:active {
+					@include invertedActive;
+				}
+			}
+		}
+	}
+}

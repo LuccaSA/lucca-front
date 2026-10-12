@@ -1,0 +1,47 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		&.mod-withIcon {
+			&.mod-iconOnLeft {
+				@include iconOnLeft;
+
+				@each $size in S, XS {
+					&.mod-#{$size} {
+						@include iconOnLeft($size);
+					}
+				}
+			}
+
+			&.mod-iconOnRight {
+				@include iconOnRight;
+
+				@each $size in S, XS {
+					&.mod-#{$size} {
+						@include iconOnRight($size);
+					}
+				}
+			}
+		}
+
+		&.mod-onlyIcon {
+			@include onlyIcon;
+
+			@each $size in S, XS {
+				&.mod-#{$size} {
+					@include onlyIcon($size);
+				}
+			}
+		}
+
+		&:has(.numericBadge) {
+			@include counter;
+
+			@each $size in S, XS {
+				&.mod-#{$size} {
+					@include counter($size);
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,86 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		&.mod-AI {
+			@include outlined;
+
+			&:hover {
+				@include outlinedHover;
+			}
+
+			&:active {
+				@include outlinedActive;
+			}
+
+			&:focus-visible {
+				@include outlinedFocusVisible;
+			}
+
+			&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+				@include outlinedDisabled;
+			}
+
+			&:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+				@include aiBorder;
+
+				&:where(:not(.mod-invert)) {
+					.lucca-icon {
+						@include aiIcon;
+					}
+				}
+			}
+
+			&.mod-invert {
+				@include aiInvert;
+
+				// A disabled button can still be focused (aria-disabled)
+				&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
+					&:hover,
+					&:focus-visible {
+						@include aiInvertHover;
+					}
+
+					&:active {
+						@include aiInvertActive;
+					}
+				}
+
+				&:where(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled):where(:not(.is-loading)) {
+					@include aiInvertDisabled;
+				}
+			}
+
+			&.is-success {
+				&,
+				&:focus-visible {
+					@include successLabel;
+				}
+
+				.lucca-icon {
+					@include successAIIcon;
+				}
+
+				&::before {
+					@include noAIBorder;
+				}
+
+				&::after {
+					@include successAIStatusIcon;
+				}
+			}
+
+			&.is-loading {
+				@include loadingAI;
+
+				.lucca-icon {
+					@include loadingAIIcon;
+				}
+
+				&::before {
+					@include noAIBorder;
+				}
+			}
+		}
+	}
+}

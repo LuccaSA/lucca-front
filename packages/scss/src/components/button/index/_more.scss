@@ -1,0 +1,19 @@
+@use '../exports' as *;
+
+.button {
+	@layer mods {
+		&.mod-more {
+			@include more;
+
+			&::after {
+				@include moreChevron;
+			}
+
+			@each $size in S, XS {
+				&.mod-#{$size} {
+					@include more($size);
+				}
+			}
+		}
+	}
+}
