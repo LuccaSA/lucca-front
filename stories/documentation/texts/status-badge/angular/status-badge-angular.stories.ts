@@ -19,7 +19,7 @@ export default {
 	],
 	argTypes: {
 		palette: {
-			options: setStoryOptions(PALETTE),
+			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
 			control: {
 				type: 'select',
 			},
