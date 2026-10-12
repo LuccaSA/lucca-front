@@ -1,9 +1,28 @@
 @use 'exports' as *;
 
+// Every selector of the button lives here: the mixins only hold declarations.
+// A disabled button is any of `:disabled` (browser state, e.g. inside a disabled fieldset), `[disabled]` (attribute set
+// on non-form hosts such as `a` and `span`), `[aria-disabled='true']`, `.is-disabled` and `.disabled` (deprecated).
+// The order of the blocks matters: it settles the selectors of equal specificity.
+
 .button {
 	@layer components {
 		@include vars;
 		@include component;
+
+		&,
+		&:is(a) {
+			@include componentColor;
+		}
+
+		.lucca-icon {
+			@include componentIcon;
+		}
+
+		// .button-icon is deprecated
+		.button-icon {
+			@include componentLegacyIcon;
+		}
 
 		// .mod-outline is deprecated
 		&:not(.mod-outlined, .mod-outline) {
@@ -11,6 +30,8 @@
 				@include numericBadgeInherit;
 			}
 		}
+
+		// Interaction
 
 		&:hover {
 			@include hover;
@@ -24,90 +45,205 @@
 			@include active;
 		}
 
-		// .disabled is deprecated
+		// Disabled
+
 		&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
 			@include disabled;
+
+			.numericBadge {
+				@include numericBadgeDisabled;
+			}
 		}
 
-		// .disabled is deprecated
+		// aria-disabled keeps the pointer (tooltips)
 		&:is(:disabled, [disabled], .is-disabled, .disabled) {
 			@include disabledPointer;
 		}
 	}
 
 	@layer mods {
+		// AI, built on outlined
+
 		&.mod-AI {
-			// AI invert also gets the AI style (outlined base, gradient border), then its own overrides
-			@include AI;
+			@include outlinedRest;
+
+			&:hover {
+				@include outlinedHover;
+			}
+
+			&:active {
+				@include outlinedActive;
+			}
+
+			&:focus-visible {
+				@include outlinedFocusVisible;
+			}
+
+			&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+				@include outlinedDisabled;
+			}
+
+			&:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+				@include aiBorder;
+
+				&:where(:not(.mod-invert)) {
+					.lucca-icon {
+						@include aiIcon;
+					}
+				}
+			}
 
 			&.mod-invert {
-				@include invertIA;
+				@include aiInvert;
+
+				// A disabled button can still be focused (aria-disabled)
+				&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
+					&:hover,
+					&:focus-visible {
+						@include aiInvertHover;
+					}
+
+					&:active {
+						@include aiInvertActive;
+					}
+				}
+
+				&:where(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled):where(:not(.is-loading)) {
+					@include aiInvertDisabled;
+				}
 			}
 
 			&.is-success {
-				@include successAI;
+				&,
+				&:focus-visible {
+					@include successLabel;
+				}
+
+				.lucca-icon {
+					@include successAIIcon;
+				}
+
+				&::before {
+					@include noAIBorder;
+				}
+
+				&::after {
+					@include successAIStatusIcon;
+				}
 			}
 
 			&.is-loading {
 				@include loadingAI;
+
+				.lucca-icon {
+					@include loadingAIIcon;
+				}
+
+				&::before {
+					@include noAIBorder;
+				}
 			}
 		}
+
+		// Sizes and layout
 
 		&.mod-block {
 			@include block;
 		}
 
-		&.mod-S {
-			@include S;
-		}
+		@each $size in S, XS {
+			&.mod-#{$size} {
+				@include size($size);
 
-		&.mod-XS {
-			@include XS;
+				.numericBadge {
+					@include sizeNumericBadge($size);
+				}
+
+				&::after {
+					@include sizeStatusIcon($size);
+				}
+			}
 		}
 
 		&.mod-disclosure {
-			@include disclosure;
+			@include iconOnRight;
+
+			.icon-arrowChevronBottom {
+				@include disclosureIcon;
+			}
+
+			&[aria-expanded='true'] {
+				@include disclosureExpanded;
+			}
 		}
 
+		// Outlined
 		// .mod-outline is deprecated
-		&.mod-outline,
-		&.mod-outlined {
+
+		&:is(.mod-outlined, .mod-outline) {
 			&:where(:not(.is-success)) {
-				@include outlined;
+				@include outlinedRest;
+
+				&:hover {
+					@include outlinedHover;
+				}
+
+				&:active {
+					@include outlinedActive;
+				}
+
+				&:focus-visible {
+					@include outlinedFocusVisible;
+				}
+
+				&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+					@include outlinedDisabled;
+				}
 			}
 		}
 
-		// .mod-link .mod-text deprecated
-		&.mod-link,
-		&.mod-text,
-		&.mod-ghost {
+		// Ghost
+		// .mod-text and .mod-link are deprecated
+
+		&:is(.mod-ghost, .mod-text, .mod-link) {
 			&:where(:not(.is-success)) {
-				@include ghost;
+				@include ghostRest;
+
+				&:hover,
+				&:focus-visible {
+					@include ghostHover;
+				}
+
+				&:active {
+					@include ghostActive;
+				}
+
+				&:is(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled) {
+					@include ghostDisabled;
+				}
 			}
 		}
+
+		// Icons and counter
 
 		&.mod-withIcon {
 			&.mod-iconOnLeft {
 				@include iconOnLeft;
 
-				&.mod-S {
-					@include iconOnLeftS;
-				}
-
-				&.mod-XS {
-					@include iconOnLeftXS;
+				@each $size in S, XS {
+					&.mod-#{$size} {
+						@include iconOnLeft($size);
+					}
 				}
 			}
 
 			&.mod-iconOnRight {
 				@include iconOnRight;
 
-				&.mod-S {
-					@include iconOnRightS;
-				}
-
-				&.mod-XS {
-					@include iconOnRightXS;
+				@each $size in S, XS {
+					&.mod-#{$size} {
+						@include iconOnRight($size);
+					}
 				}
 			}
 		}
@@ -115,125 +251,194 @@
 		&.mod-onlyIcon {
 			@include onlyIcon;
 
-			&.mod-S {
-				@include onlyIconS;
-			}
-
-			&.mod-XS {
-				@include onlyIconXS;
+			@each $size in S, XS {
+				&.mod-#{$size} {
+					@include onlyIcon($size);
+				}
 			}
 		}
 
 		&:has(.numericBadge) {
 			@include counter;
 
-			&.mod-S {
-				@include counterS;
-			}
-
-			&.mod-XS {
-				@include counterXS;
+			@each $size in S, XS {
+				&.mod-#{$size} {
+					@include counter($size);
+				}
 			}
 		}
 
+		// Critical
 		// .mod-delete is deprecated
-		&.mod-delete,
-		&.mod-critical {
+
+		&:is(.mod-critical, .mod-delete) {
 			// An aria-disabled button can be hovered: it must not look critical
 			&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
-				@include critical;
+				&:hover {
+					@include criticalHover;
+				}
 
-				// .mod-link is deprecated
-				&.mod-link,
-				&.mod-text,
-				&.mod-ghost {
-					@include criticalGhost;
+				&:active {
+					@include criticalActive;
+				}
+
+				// .mod-text and .mod-link are deprecated
+				&:is(.mod-ghost, .mod-text, .mod-link) {
+					&:hover,
+					&:focus-visible {
+						@include criticalHover;
+					}
+
+					&:active {
+						@include criticalActive;
+					}
 				}
 
 				// .mod-outline is deprecated
-				&.mod-outline,
-				&.mod-outlined {
-					@include criticalOutlined;
-				}
-
-				// AI invert is built on outlined: outlined critical border, with a light background on focus too for contrast
-				&.mod-AI.mod-invert {
-					@include criticalOutlined;
-
-					&:is(:hover, :focus-visible, :active) {
-						--components-button-AI-background-opacity: 0%;
+				&:is(.mod-outlined, .mod-outline) {
+					&:hover {
+						@include criticalOutlinedHover;
 					}
 
 					&:focus-visible {
-						--components-button-backgroundColor: var(--palettes-error-100);
+						@include criticalOutlinedFocusVisible;
+					}
+
+					&:active {
+						@include criticalActive;
+					}
+				}
+
+				// AI invert is built on outlined
+				&.mod-AI.mod-invert {
+					&:hover {
+						@include criticalOutlinedHover;
+					}
+
+					&:focus-visible {
+						@include criticalOutlinedFocusVisible;
+					}
+
+					&:active {
+						@include criticalActive;
+					}
+
+					&:is(:hover, :focus-visible, :active) {
+						@include criticalAIInvert;
+					}
+
+					&:focus-visible {
+						@include criticalAIInvertFocusVisible;
 					}
 				}
 			}
 		}
 
+		// Invert
 		// .mod-inverted is an alias of .mod-invert (the name used by the clear and newBadge components)
-		&.mod-invert,
-		&.mod-inverted {
-			@include inverted;
+
+		&:is(.mod-invert, .mod-inverted) {
+			@include invertedRest;
+
+			// A disabled button can still be focused (aria-disabled)
+			&:where(:not(:disabled, [disabled], [aria-disabled='true'], .is-disabled, .disabled)) {
+				&:hover,
+				&:focus-visible {
+					@include invertedHover;
+				}
+
+				&:active {
+					@include invertedActive;
+				}
+			}
 		}
+
+		// More
 
 		&.mod-more {
 			@include more;
 
-			&.mod-S {
-				@include moreS;
+			&::after {
+				@include moreChevron;
 			}
 
-			&.mod-XS {
-				@include moreXS;
+			@each $size in S, XS {
+				&.mod-#{$size} {
+					@include more($size);
+				}
 			}
 		}
 
+		// Loading
 		// .loading is deprecated
-		&.loading,
-		&.is-loading {
-			@include loading;
 
-			&.mod-S {
-				@include loadingS;
+		&:is(.is-loading, .loading) {
+			@include loading;
+			@include loadingSpinner;
+
+			&,
+			&:disabled {
+				@include loadingLabel;
+
+				.lucca-icon {
+					@include loadingIcon;
+				}
 			}
 
-			&.mod-XS {
-				@include loadingXS;
+			.numericBadge {
+				@include numericBadgeState;
+			}
+
+			@each $size in S, XS {
+				&.mod-#{$size} {
+					@include loadingSpinner($size);
+				}
 			}
 
 			&.mod-outlined {
 				@include loadingOutlined;
 			}
 
-			// .mod-link .mod-text deprecated
-			&.mod-link,
-			&.mod-text,
-			&.mod-ghost {
+			// .mod-text and .mod-link are deprecated
+			&:is(.mod-ghost, .mod-text, .mod-link) {
 				@include loadingGhost;
 			}
 		}
 
+		// Error
 		// .error is deprecated
-		&.error,
-		&.is-error {
+
+		&:is(.is-error, .error) {
 			@include error;
+			@include errorKeyframes;
 		}
 
+		// Success
 		// .success is deprecated
-		&.success,
-		&.is-success {
+
+		&:is(.is-success, .success) {
 			@include success;
+
+			&,
+			&:focus-visible {
+				@include successLabel;
+			}
+
+			&::after {
+				@include successStatusIcon;
+			}
+
+			.numericBadge {
+				@include numericBadgeState;
+			}
 
 			&.mod-AI:where(:not(.mod-invert)),
 			&.mod-outlined {
 				@include successOutlined;
 			}
 
-			// .mod-link .mod-text deprecated
-			&.mod-link,
-			&.mod-text,
-			&.mod-ghost {
+			// .mod-text and .mod-link are deprecated
+			&:is(.mod-ghost, .mod-text, .mod-link) {
 				@include successGhost;
 			}
 		}

@@ -4,6 +4,7 @@
 	@include icon.M;
 
 	background-color: var(--components-button-backgroundColor);
+	background-image: var(--components-button-backgroundImage);
 	box-shadow: var(--components-button-boxShadow);
 	border-radius: var(--components-button-borderRadius);
 	padding: var(--components-button-padding);
@@ -30,18 +31,21 @@
 	text-wrap: balance;
 	text-align: center;
 	border: 0;
+	animation-name: var(--components-button-animationName);
+	animation-iteration-count: var(--components-button-animationIterationCount);
+	animation-duration: var(--components-button-animationDuration);
+}
 
-	&,
-	&:is(a) {
-		color: var(--components-button-color);
-	}
+// Also on links, to override their own color
+@mixin componentColor {
+	color: var(--components-button-color);
+}
 
-	.lucca-icon {
-		display: block;
-	}
+@mixin componentIcon {
+	display: block;
+}
 
-	// deprecated
-	.button-icon {
-		@include icon.M;
-	}
+// Deprecated
+@mixin componentLegacyIcon {
+	@include icon.M;
 }
