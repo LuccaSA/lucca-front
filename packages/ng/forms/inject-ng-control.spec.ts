@@ -138,6 +138,31 @@ describe('injectNgControl', () => {
 		expect(host.value()).toBe('Changed');
 	});
 
+	it('should reset the field when reset is called on the control when using formField', () => {
+		// Arrange
+		@Component({
+			selector: 'lu-form-field-reset-host',
+			imports: [CustomControl, FormField],
+			template: `<lu-custom-control [formField]="form" />`,
+			changeDetection: ChangeDetectionStrategy.OnPush,
+		})
+		class FormFieldResetHost {
+			readonly value = signal<string | null>('Initial');
+			readonly form = form(this.value);
+			readonly customControl = viewChild(CustomControl);
+		}
+
+		const { fixture, host, nativeInput } = createHost(FormFieldResetHost);
+
+		// Act: what the text, number and number-format inputs' clearer does
+		host.customControl()!.ngControl.reset();
+		fixture.detectChanges();
+
+		// Assert
+		expect(host.value()).toBeNull();
+		expect(nativeInput().value).toBe('');
+	});
+
 	it('should mirror field validity into the control when using formField', () => {
 		// Arrange: field starts with a valid (non-empty) value
 		@Component({
