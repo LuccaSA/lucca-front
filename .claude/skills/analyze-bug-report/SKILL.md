@@ -57,13 +57,15 @@ Vérifier que les labels n'ont pas changé avant de commencer :
 - Les compteurs `total_count` de l'API search ne savent pas appliquer ce filtre : compter les PR d'icônes à part et les **soustraire** (`fix_net = total_count − icônes`). Pour les listes `gh pr list`, filtrer avec `$ICONS_JQ` :
 
 ```bash
+# Prédicat jq « PR d'ajout d'icônes » : le mot fix (bornes de mot, pour ne pas capter « suffix » ou « fixture »)
+IS_ICON_JQ='(.title | test("^\\[icons?\\]"; "i")) and (.title | test("\\bfix(es|ed)?\\b"; "i") | not)'
 # Filtre jq à brancher sur toute liste de PR FIX (gh pr list --json number,title,...)
-ICONS_JQ='select((.title | test("^\\[icons?\\]"; "i")) and (.title | test("fix"; "i") | not) | not)'
+ICONS_JQ="select(($IS_ICON_JQ) | not)"
 
 # Nombre de PR d'ajout d'icônes à soustraire d'un total_count (adapter created:/merged: et --state)
 icons(){ gh pr list --repo LuccaSA/lucca-front --state "$2" --limit 500 \
   --search "$1 label:\":bookmark::bug: FIX\"" --json title \
-  --jq "[.[] | select(.title | test(\"^\\\\[icons?\\\\]\"; \"i\")) | select(.title | test(\"fix\"; \"i\") | not)] | length"; }
+  --jq "[.[] | select($IS_ICON_JQ)] | length"; }
 icons "merged:<RANGE>" merged   # à soustraire des PR mergées
 icons "created:<RANGE>" all     # à soustraire des PR créées
 ```
@@ -73,14 +75,17 @@ Mentionner dans le rapport le nombre de PR d'icônes exclues.
 *Exclusion — outillage, tests, stories, release*
 - Des PR FIX ne corrigent aucun bug livré aux utilisateurs : skills, stylelint, tests/e2e, stories et pages QA, release/sync. Les correctifs de **schematics** restent comptés (catégorie « Schematics / migrations ») : ce sont des migrations livrées aux équipes produit, sauf quand la PR ne touche que leurs tests. Les **exclure aussi de tous les compteurs et listes de PR FIX** (§1, §2, §4, §5, §6).
 - Critère : le classement par type du §5 C, catégories « Outillage / tests / stories » et « Release / versionning ». **Charger la fonction `classify` ci-dessous avant de commencer** (heuristique détaillée au §5 C) : elle filtre déjà les icônes et sort `numéro⇥catégorie⇥titre`. Un titre « fix X + story » ou « + QA » reste un correctif.
-- Comme pour les icônes, soustraire ces PR des `total_count` (`fix_net = total_count − icônes − hors_bug`). `classify` interroge les fichiers de chaque PR mal classée par son titre : la lancer **une fois** par plage et par état, et réutiliser le résultat.
+- Comme pour les icônes, soustraire ces PR des `total_count` (`fix_net = total_count − icônes − hors_bug`). `classify` interroge les fichiers de chaque PR de la catégorie par défaut ou des schematics : ne pas l'appeler directement, passer par `classified` (et donc `nonbug`/`bugs`), qui la lance **une fois** par plage et par état et met le résultat en cache dans `$BUG_CACHE`. Un échec de l'API interrompt le calcul au lieu de classer la PR en outillage.
 
 ```bash
 # classify <qualifier> <state> → numéro⇥catégorie⇥titre (icônes déjà exclues)
 classify(){
-gh pr list --repo LuccaSA/lucca-front --state "$2" \
+local list
+list=$(gh pr list --repo LuccaSA/lucca-front --state "$2" \
   --search "$1 label:\":bookmark::bug: FIX\"" --limit 500 \
-  --json number,title,labels --jq ".[] | $ICONS_JQ"' | "\(.number)\t\([.labels[].name]|join(","))\t\(.title)"' \
+  --json number,title,labels --jq ".[] | $ICONS_JQ"' | "\(.number)\t\([.labels[].name]|join(","))\t\(.title)"') || return 1
+[ -n "$list" ] || return 0
+printf '%s\n' "$list" \
 | awk -F'\t' '
 {
   l=tolower($2); t=tolower($3); cat="Comportement / logique";
@@ -99,19 +104,33 @@ gh pr list --repo LuccaSA/lucca-front --state "$2" \
   else if (t ~ /style|css|scss|visual|display|spacing|align|margin|padding|colo|palette|theme|background|border|shadow|z-index|overflow|ellipsis|truncat|wrap|scroll|icon|layout|responsive|position|width|height|[- ]size| ui|slot|panel|design|shrink|linebreak|indent/) cat="Correction graphique / visuelle";
   printf "%s\t%s\t%s\n", $1, cat, $3
 }' \
-| while IFS=$'\t' read -r n cat title; do
-    # Filet de la catégorie par défaut : reclasser d'après les fichiers modifiés
-    if [ "$cat" = "Comportement / logique" ]; then
-      code=$(gh pr view "$n" --repo LuccaSA/lucca-front --json files --jq '.files[].path' | grep -v '^stories/')
+| ( while IFS=$'\t' read -r n cat title; do   # sous-shell explicite : en zsh, exit fermerait le shell courant
+    # Filet par les fichiers modifiés : catégorie par défaut, et schematics (souvent des PR de tests seuls)
+    if [ "$cat" = "Comportement / logique" ] || [ "$cat" = "Schematics / migrations" ]; then
+      # Échec de l'API ≠ PR sans code : on s'arrête au lieu de la classer en outillage
+      files=$(gh pr view "$n" --repo LuccaSA/lucca-front --json files --jq '.files[].path') \
+        || { echo "classify: cannot fetch files of #$n" >&2; exit 1; }
+      code=$(grep -vE '^stories/|\.spec\.ts$|/tests/' <<<"$files")
       if [ -z "$code" ]; then cat="Outillage / tests / stories"
-      elif ! grep -qvE '\.(scss|css|html)$' <<<"$code"; then cat="Correction graphique / visuelle"; fi
+      elif [ "$cat" = "Comportement / logique" ] && ! grep -qvE '\.(scss|css|html)$' <<<"$code"; then cat="Correction graphique / visuelle"; fi
     fi
     printf '%s\t%s\t%s\n' "$n" "$cat" "$title"
-  done
+  done )
 }
 
-nonbug(){ classify "$1" "$2" | grep -cE $'\t(Outillage|Release)'; }  # à soustraire d'un total_count
-bugs(){ classify "$1" "$2" | grep -vE $'\t(Outillage|Release)'; }     # vrais correctifs : numéro⇥catégorie⇥titre
+# classified <qualifier> <state> : résultat de classify mis en cache (un appel API par PR, une seule fois)
+BUG_CACHE=${BUG_CACHE:-$(mktemp -d)}
+classified(){
+  local f="$BUG_CACHE/$(printf '%s_%s' "$1" "$2" | tr -c 'A-Za-z0-9.-' '_').tsv"
+  if [ ! -e "$f" ]; then
+    classify "$1" "$2" > "$f.tmp" || { rm -f "$f.tmp"; echo "classify $1 $2: failed" >&2; return 1; }
+    mv "$f.tmp" "$f"
+  fi
+  cat "$f"
+}
+
+nonbug(){ local out; out=$(classified "$1" "$2") || return 1; [ -n "$out" ] || { echo 0; return; }; grep -cE $'\t(Outillage|Release)' <<<"$out"; }  # à soustraire d'un total_count
+bugs(){ local out; out=$(classified "$1" "$2") || return 1; [ -n "$out" ] || return 0; grep -vE $'\t(Outillage|Release)' <<<"$out"; }     # vrais correctifs : numéro⇥catégorie⇥titre
 nonbug "merged:<RANGE>" merged   # à soustraire des PR mergées
 nonbug "created:<RANGE>" all     # à soustraire des PR créées
 ```
@@ -233,10 +252,10 @@ bugs "merged:<RANGE>" merged | cut -f3 \
 
 L'**ordre des tests = priorité** : placer technique/perf/logique **avant** le graphique évite que des mots comme `header`/`display`/`size` (présents dans des noms de composants ou des bugs logiques) ne gonflent à tort le visuel.
 
-« Comportement / logique » est la **catégorie par défaut** : toute PR dont le titre ne matche aucun motif y tombe (titres `[Composant] fix …`, formulations vagues). Le titre seul ne suffit donc pas : la boucle finale de `classify` (voir *Exclusion — outillage, tests, stories, release*) **reclasse ces PR d'après leurs fichiers modifiés** — uniquement des stories → outillage ; uniquement du `.scss`/`.css`/`.html` → visuel. Sans ce filet, environ un tiers de la catégorie est mal classé (16 PR sur 47 au Q3 2026).
+« Comportement / logique » est la **catégorie par défaut** : toute PR dont le titre ne matche aucun motif y tombe (titres `[Composant] fix …`, formulations vagues). Le titre seul ne suffit donc pas : la boucle finale de `classify` (voir *Exclusion — outillage, tests, stories, release*) **reclasse ces PR d'après leurs fichiers modifiés** — uniquement des stories ou des tests (`*.spec.ts`, dossiers `tests/`) → outillage ; uniquement du `.scss`/`.css`/`.html` → visuel. Le même filet « tests seuls » s'applique aux PR « Schematics / migrations ». Sans ce filet, environ un tiers de la catégorie est mal classé (16 PR sur 47 au Q3 2026).
 
 ```bash
-classify "merged:<RANGE>" merged > all-types.tsv
+classified "merged:<RANGE>" merged > all-types.tsv   # réutilise le cache des §1–§4
 grep -vE $'\t(Outillage|Release)' all-types.tsv > types.tsv   # vrais correctifs : base des sous-découpages ci-dessous
 cut -f2 all-types.tsv | sort | uniq -c | sort -rn              # Outillage + Release = PR exclues du rapport
 ```
@@ -374,6 +393,7 @@ Un rapport Markdown concis :
 | Champs de saisie : valeur et édition | … |
 | Overlays (tooltip, dialog, modal, popover) | … |
 | Typage et API publique | … |
+| Autre logique *(motif à ajouter dans `subl`)* | … |
 
 #### Autres types — N PR
 
