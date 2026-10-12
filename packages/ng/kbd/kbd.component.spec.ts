@@ -69,13 +69,17 @@ describe(KbdComponent.name, () => {
 		expect(getKeys(fixture)).toEqual(['Alt', 'flèche haut']);
 	});
 
-	it('should display Backspace as an icon with a translated alternative', () => {
+	it('should display the editing and page keys as icons with a translated alternative', () => {
 		// Act
-		const fixture = render('Backspace', 'fr-FR');
+		const fixture = render(['Shift', 'Tab', 'Enter', 'Backspace', 'Delete', 'PageUp', 'PageDown'], 'fr-FR');
 
 		// Assert
-		expect((fixture.nativeElement as HTMLElement).querySelector('.kbd .lucca-icon.icon-arrowBackspace')).not.toBeNull();
-		expect(getKeys(fixture)).toEqual(['Retour arrière']);
+		expect(
+			Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('.kbd .lucca-icon')).map((icon) =>
+				Array.from(icon.classList).find((name) => name.startsWith('icon-') && !name.startsWith('icon-color')),
+			),
+		).toEqual(['icon-arrowShift', 'icon-arrowLineRight', 'icon-arrowEnter', 'icon-arrowBackspace', 'icon-arrowDelete', 'icon-arrowPageUp', 'icon-arrowPageDown']);
+		expect(getKeys(fixture)).toEqual(['Maj', 'Tab', 'Entrée', 'Retour arrière', 'Suppr', 'Page préc', 'Page suiv']);
 	});
 
 	it('should display any other key as is', () => {
@@ -86,7 +90,7 @@ describe(KbdComponent.name, () => {
 		expect(getKeys(fixture)).toEqual(['F2', 'PrintScreen']);
 	});
 
-	it('should display Alt as Option and Meta as Cmd on Mac', () => {
+	it('should display Alt as the Option icon and Meta as the Command icon on Mac', () => {
 		// Arrange
 		vi.spyOn(navigator, 'userAgent', 'get').mockReturnValue('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)');
 
@@ -94,26 +98,23 @@ describe(KbdComponent.name, () => {
 		const fixture = render(['Alt', 'Meta']);
 
 		// Assert
+		expect(
+			Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('.kbd .lucca-icon')).map((icon) =>
+				Array.from(icon.classList).find((name) => name.startsWith('icon-') && !name.startsWith('icon-color')),
+			),
+		).toEqual(['icon-keyboardOption', 'icon-keyboardCommand']);
 		expect(getKeys(fixture)).toEqual(['Option', 'Cmd']);
 	});
 
-	it('should display Home, End and the page keys as Fn and an arrow on Mac', () => {
+	it('should display Home and End by their name, on Mac too', () => {
 		// Arrange
 		vi.spyOn(navigator, 'userAgent', 'get').mockReturnValue('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)');
 
 		// Act
-		const fixture = render(['Alt', 'Home'], 'fr-FR');
+		const fixture = render(['Alt', 'Home', 'End'], 'fr-FR');
 
 		// Assert
-		expect(getKeys(fixture)).toEqual(['Fn', 'Option', 'flèche gauche']);
-	});
-
-	it('should display Home and the page keys by their name elsewhere', () => {
-		// Act
-		const fixture = render(['Home', 'PageUp'], 'fr-FR');
-
-		// Assert
-		expect(getKeys(fixture)).toEqual(['Début', 'Page préc']);
+		expect(getKeys(fixture)).toEqual(['Option', 'Début', 'Fin']);
 	});
 
 	it('should display the modifiers first, in the Mac order on Mac', () => {

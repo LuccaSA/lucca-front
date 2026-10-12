@@ -41,7 +41,7 @@ export const KBD_ARG_TYPES: ArgTypes = {
 		name: 'keys (modifiers)',
 		control: {
 			type: 'check',
-			labels: { Control: 'Control (Ctrl)', Alt: 'Alt (Mac: Option, Windows: Alt)', Meta: 'Meta (Mac: Cmd, Windows: Win)', Shift: 'Shift' },
+			labels: { Control: 'Control (Ctrl)', Alt: 'Alt (Mac: ⌥ icon, Windows: Alt)', Meta: 'Meta (Mac: ⌘ icon, Windows: Win)', Shift: 'Shift (icon)' },
 		},
 		options: MODIFIERS,
 		description: 'Modificateurs de la combinaison. Quel que soit leur ordre en code, ils s’affichent en premier, dans l’ordre conventionnel du système.',
@@ -53,11 +53,12 @@ export const KBD_ARG_TYPES: ArgTypes = {
 			type: 'select',
 			labels: {
 				' ': 'Space',
+				Enter: 'Enter (icon)',
+				Tab: 'Tab (icon)',
+				Delete: 'Delete (icon)',
 				Backspace: 'Backspace (icon)',
-				Home: 'Home (Mac: Fn + ←, Windows: Home)',
-				End: 'End (Mac: Fn + →, Windows: End)',
-				PageUp: 'PageUp (Mac: Fn + ↑, Windows: Page Up)',
-				PageDown: 'PageDown (Mac: Fn + ↓, Windows: Page Down)',
+				PageUp: 'PageUp (icon)',
+				PageDown: 'PageDown (icon)',
 				ArrowUp: 'ArrowUp (icon)',
 				ArrowDown: 'ArrowDown (icon)',
 				ArrowLeft: 'ArrowLeft (icon)',
@@ -67,7 +68,7 @@ export const KBD_ARG_TYPES: ArgTypes = {
 		},
 		options: KEYS,
 		description:
-			'Touche, nommée comme `KeyboardEvent.key` : n’importe quelle valeur est acceptée en code. Les touches nommées sont traduites, les flèches et Retour arrière affichés en icônes, et sur Mac Début, Fin, Page préc / suiv s’affichent Fn + une flèche.',
+			'Touche, nommée comme `KeyboardEvent.key` : n’importe quelle valeur est acceptée en code. Les touches nommées sont traduites, et certaines s’affichent en icônes avec une alternative traduite (Maj, Tab, Entrée, Retour arrière, Suppr, Page préc / suiv, flèches, et Option / Cmd sur Mac).',
 		table: { category: 'inputs', type: { summary: 'KbdKey' } },
 	},
 	otherKey: {

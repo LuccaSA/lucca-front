@@ -8,35 +8,36 @@ import { KbdKey } from './kbd.type';
 type DisplayedKey = { type: 'text'; label: string } | { type: 'icon'; label: string; icon: LuccaIcon };
 
 const LABELS: Partial<Record<KbdKey, keyof LuKbdTranslations>> = {
+	Alt: 'alt',
 	Control: 'control',
-	Shift: 'shift',
-	Tab: 'tab',
+	Meta: 'meta',
 	' ': 'space',
-	Enter: 'enter',
 	Escape: 'escape',
-	Delete: 'delete',
 	Home: 'home',
 	End: 'end',
-	PageUp: 'pageUp',
-	PageDown: 'pageDown',
 };
 
 const ICONS: Partial<Record<KbdKey, [LuccaIcon, keyof LuKbdTranslations]>> = {
+	Shift: ['arrowShift', 'shift'],
+	Tab: ['arrowLineRight', 'tab'],
+	Enter: ['arrowEnter', 'enter'],
+	Backspace: ['arrowBackspace', 'backspace'],
+	Delete: ['arrowDelete', 'delete'],
+	PageUp: ['arrowPageUp', 'pageUp'],
+	PageDown: ['arrowPageDown', 'pageDown'],
 	ArrowUp: ['arrowTop', 'arrowUp'],
 	ArrowDown: ['arrowBottom', 'arrowDown'],
 	ArrowLeft: ['arrowLeft', 'arrowLeft'],
 	ArrowRight: ['arrowRight', 'arrowRight'],
-	Backspace: ['arrowBackspace', 'backspace'],
 };
 
 /**
- * Mac laptops have no Home, End, Page up and Page down keys: they are typed with Fn and an arrow
+ * Apple displays its modifiers as symbols: ⌥ Option and ⌘ Command
  */
-const MAC_FN_ARROWS: Partial<Record<KbdKey, KbdKey>> = {
-	Home: 'ArrowLeft',
-	End: 'ArrowRight',
-	PageUp: 'ArrowUp',
-	PageDown: 'ArrowDown',
+const MAC_ICONS: Partial<Record<KbdKey, [LuccaIcon, keyof LuKbdTranslations]>> = {
+	...ICONS,
+	Alt: ['keyboardOption', 'option'],
+	Meta: ['keyboardCommand', 'command'],
 };
 
 /**
@@ -47,7 +48,7 @@ const MAC_MODIFIERS: KbdKey[] = ['Control', 'Alt', 'Shift', 'Meta'];
 const MODIFIERS: KbdKey[] = ['Meta', 'Control', 'Alt', 'Shift'];
 
 /**
- * Whether the page runs on Apple platforms, whose keys and shortcuts differ (Option, Cmd, Fn)
+ * Whether the page runs on Apple platforms, whose modifiers differ (Option, Command)
  */
 function isMacPlatform(): boolean {
 	return typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.userAgent);
@@ -66,7 +67,7 @@ export class KbdComponent {
 
 	/**
 	 * Key, or combination of keys, to display, as named by `KeyboardEvent.key` (`'Escape'`, `['Control', 'n']`…).
-	 * Keys follow the platform (Option, Cmd and Fn on Mac).
+	 * Keys follow the platform (Option and Command on Mac).
 	 * Modifiers are displayed first, in the conventional order of the platform.
 	 */
 	readonly keys = input.required<KbdKey | readonly KbdKey[]>();
@@ -81,22 +82,13 @@ export class KbdComponent {
 		const intl = this.intl();
 		const modifiers = this.#mac ? MAC_MODIFIERS : MODIFIERS;
 		const given = typeof keys === 'string' ? [keys] : keys;
-		const list = [...modifiers.filter((modifier) => given.includes(modifier)), ...given.filter((key) => !modifiers.includes(key))];
-		const fnArrows = list.map((key) => (this.#mac ? MAC_FN_ARROWS[key] : undefined));
-		// Fn comes first, as it is pressed before the other modifiers on Mac (Fn + Option + ↑)
-		return [...(fnArrows.some(Boolean) ? ['Fn'] : []), ...list.map((key, index) => fnArrows[index] ?? key)].map((key) => this.#display(key, intl));
+		return [...modifiers.filter((modifier) => given.includes(modifier)), ...given.filter((key) => !modifiers.includes(key))].map((key) => this.#display(key, intl));
 	});
 
 	#display(key: KbdKey, intl: LuKbdTranslations): DisplayedKey {
-		const icon = ICONS[key];
+		const icon = (this.#mac ? MAC_ICONS : ICONS)[key];
 		if (icon) {
 			return { type: 'icon', icon: icon[0], label: intl[icon[1]] };
-		}
-		if (key === 'Alt') {
-			return { type: 'text', label: this.#mac ? intl.option : intl.alt };
-		}
-		if (key === 'Meta') {
-			return { type: 'text', label: this.#mac ? intl.command : intl.meta };
 		}
 		const label = LABELS[key];
 		if (label) {
