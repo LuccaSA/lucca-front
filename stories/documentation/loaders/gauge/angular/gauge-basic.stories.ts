@@ -7,7 +7,7 @@ export default {
 	title: 'Documentation/Loaders/Gauge/Angular/Basic',
 	argTypes: {
 		palette: {
-			options: setStoryOptions(PALETTE),
+			options: setStoryOptions(PALETTE.filter((palette) => palette !== 'none')),
 			control: {
 				type: 'select',
 			},
