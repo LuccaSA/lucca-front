@@ -47,7 +47,7 @@ export class SortableListItemComponent {
 	readonly drag = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Applies small size to the sortable list item (e.g. for its drag preview, rendered outside of the list)
+	 * Applies small size to segmented control tabs
 	 */
 	readonly small = input(false, { transform: luBooleanAttribute });
 

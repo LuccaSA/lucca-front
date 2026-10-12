@@ -23,9 +23,6 @@ export class SkeletonIndexTableComponent {
 	 */
 	readonly cols = input(5, { transform: numberAttribute });
 
-	/**
-	 * Defines the horizontal alignment of each column content, keyed by column index (starting at 0)
-	 */
 	readonly colsAlign = input<Record<number, SkeletonColsAlign>>({});
 
 	/**
