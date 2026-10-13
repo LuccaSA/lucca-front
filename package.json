@@ -51,7 +51,8 @@
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts",
     "typography:update-font-coverage": "ts-node --project scripts/generate-typography-font-coverage/tsconfig.json scripts/generate-typography-font-coverage/index.ts",
     "build:e2e-harness": "tsc -p packages/e2e-harness/tsconfig.lib.json && tsc -p packages/e2e-harness/tsconfig.lib.cjs.json",
-    "test:e2e-harness": "playwright test --config packages/e2e-harness/tests/playwright.config.ts"
+    "test:e2e-harness": "playwright test --config packages/e2e-harness/tests/playwright.config.ts",
+    "demo:e2e-harness": "npm run test:e2e-harness -- --trace on"
   },
   "dependencies": {
     "@angular/animations": "^22.0.1",

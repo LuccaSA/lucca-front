@@ -19,7 +19,9 @@ export default defineConfig({
 	timeout: 90_000,
 	forbidOnly: isCi,
 	retries: isCi ? 1 : 0,
-	reporter: isCi ? [['list'], ['github']] : [['list']],
+	// Locally the HTML report is always written, never opened: run the suite with `--trace on` and
+	// it becomes a step-by-step recording of what each harness does — see `npm run demo:e2e-harness`.
+	reporter: isCi ? [['list'], ['github']] : [['list'], ['html', { outputFolder: resolve(repositoryRoot, 'test-results', 'e2e-harness-report'), open: 'never' }]],
 	use: {
 		baseURL: storybookUrl,
 		trace: 'on-first-retry',

@@ -15,7 +15,9 @@ function getAbsolutePath(value: string): any {
 }
 
 const config: StorybookConfig = {
-	stories: ['../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+	// `.mdx` for the documentation pages that are prose rather than a component — the e2e harnesses,
+	// which have no story of their own to attach to.
+	stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 	addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-docs'), getAbsolutePath('@storybook/addon-mcp'), getAbsolutePath('@storybook/addon-vitest')],
 	framework: {
 		name: '@storybook/angular-vite',

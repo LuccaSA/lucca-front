@@ -1,0 +1,248 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as MultiSelectStories from '../../forms/select/multi-select.stories';
+import * as SimpleSelectStories from '../../forms/select/simple-select.stories';
+
+<Meta title="Documentation/Integration/Testing/E2E harness" />
+
+# End-to-end harnesses
+
+`@lucca-front/e2e-harness` gives your Playwright tests a vocabulary for our components.
+
+A harness wraps one component instance and exposes what a test actually means — `selectOption`,
+`selectedLabel`, `isDisabled` — instead of the markup the component happens to be made of today.
+Your product stops writing CSS selectors against our internals, and we stop breaking your test
+suite whenever a class name or a DOM structure changes.
+
+```ts
+// Before: coupled to our DOM, broken by any refactor of the select.
+await page.click('lu-simple-select .simpleSelect-field');
+await page.click('.cdk-overlay-pane [role="option"]:has-text("Lucca Paris")');
+await expect(page.locator('.simpleSelect-field-value')).toHaveText('Lucca Paris');
+
+// After: coupled to the behaviour, which is what the test was about.
+const establishment = LuSimpleSelectHarness.byLabel(page, 'Établissement');
+await establishment.selectOption('Lucca Paris');
+await expect.poll(() => establishment.selectedLabel()).toBe('Lucca Paris');
+```
+
+This page documents the MVP: two harnesses, both selects. **What the MVP does not cover**, at the
+bottom, lists what is still missing and how to ask for it.
+
+## Install
+
+```bash
+npm install --save-dev @lucca-front/e2e-harness
+```
+
+`@playwright/test` is a peer dependency. Pin the harness on the same major as `@lucca-front/ng`:
+the two are released together, and a harness only knows the components of its own version.
+
+## A first test
+
+```ts
+import { expect, test } from '@playwright/test';
+import { LuSimpleSelectHarness } from '@lucca-front/e2e-harness/simple-select';
+
+test('picks an establishment', async ({ page }) => {
+	await page.goto('/employees/new');
+
+	const establishment = LuSimpleSelectHarness.byLabel(page, 'Établissement');
+
+	await establishment.search('Par');
+	await establishment.selectOption('Lucca Paris');
+
+	await expect.poll(() => establishment.selectedLabel()).toBe('Lucca Paris');
+});
+```
+
+## Finding a component
+
+Every harness is found the same three ways:
+
+- `byLabel(scope, label)` — through the label of the form field wrapping the component;
+- `byTestId(scope, testId)` — through a `data-testid` carried by the component element itself;
+- `from(locator)` — around a locator you built yourself.
+
+`scope` is a `Page` to search the whole document, or a `Locator` to search inside a dialog, a form
+section or a table row:
+
+```ts
+const dialog = page.getByRole('dialog');
+const country = LuSimpleSelectHarness.byLabel(dialog, 'Pays');
+```
+
+Labels are matched the Playwright way — case-insensitive, trimmed, as a substring — because
+several of our selects fold their current value into the accessible name of their control. A
+`RegExp` works anywhere a label is expected.
+
+## Simple select
+
+<Canvas of={SimpleSelectStories.Basic} sourceState="none" />
+
+The select above is the very story the harness tests run against. Driven by a harness:
+
+```ts
+const legume = LuSimpleSelectHarness.byLabel(page, 'Label');
+
+await legume.open();
+expect(await legume.panel().optionLabels()).toContain('Carotte');
+
+await legume.selectOption('Carotte'); // opens if needed, then waits for the panel to close
+await expect.poll(() => legume.selectedLabel()).toBe('Carotte');
+
+await legume.clear();
+await expect.poll(() => legume.hasValue()).toBe(false);
+```
+
+- `selectOption(label)` — picks an option, waiting for the panel to close;
+- `selectedLabel()` — the text of the current value, `null` when empty;
+- `hasValue()` — whether the select holds a value;
+- `clear()` / `canClear()` — empties it through its clear button, and whether one is offered;
+- `open()` / `close()` — drives the panel, doing nothing when it is already in that state;
+- `isOpen()` / `isDisabled()` — state of the select;
+- `isSearchable()` — whether typing filters the options;
+- `search(clue)` — opens the panel and types a clue;
+- `panel()` — the panel harness, see below;
+- `highlightedOptionLabel()` — the option the keyboard is on, the one `Enter` would pick.
+
+The full member-by-member reference lives in the
+[package README](https://github.com/LuccaSA/lucca-front/blob/master/packages/e2e-harness/README.md),
+which is also what npm shows.
+
+## Multi select
+
+<Canvas of={MultiSelectStories.Basic} sourceState="none" />
+
+A multi select holds several values at once, so it reads them as a list and toggles them one by
+one — the panel stays open, as it does for a user picking values in a row:
+
+```ts
+const legumes = LuMultiSelectHarness.byLabel(page, 'Label');
+
+await legumes.selectOption('Carotte');
+await legumes.selectOption('Betterave');
+await legumes.deselectOption('Carotte');
+await legumes.removeValue('Betterave'); // through the chip's own button, no panel needed
+
+await expect.poll(() => legumes.selectedLabels()).toEqual([]);
+```
+
+`selectOption` and `deselectOption` state where the value should end up and do nothing when it is
+already there; `toggleOption` flips it whichever state it is in. To set the whole value at once,
+whatever the select already holds:
+
+```ts
+await legumes.setValue(['Carotte', 'Betterave']);
+await legumes.setValue([]); // empties it
+```
+
+`setValue` reads what is held off the panel, not off the chips, so it is right on a select given a
+`maxValuesShown` that displays only part of its value — `hiddenValuesCount()` reports the rest.
+The resulting order is the select's own: an option already held keeps its place.
+
+## The panel and its options
+
+`select.panel()` is only meaningful while that select's panel is open. The panel lives in an
+overlay shared by the whole page, and opening a select closes any other one, so there is at most
+one at a time.
+
+```ts
+const panel = legumes.panel();
+
+await panel.optionLabels(); // every option, in display order
+await panel.option('Carotte').isSelected();
+await panel.option('Carotte').isDisabled();
+await panel.isLoading(); // showing skeletons
+await panel.isEmpty(); // showing its empty state
+await panel.statusMessage(); // the message shown in place of the options
+await panel.scrollToEnd(); // asks a paginated select for its next page
+```
+
+## Rows that are not options
+
+A panel can offer two rows that look like options and are not: the one that makes an option out of
+the current search, and the one that takes every option at once. They are actions, so they are
+driven from the select in a single call and left out of `options()` and `optionLabels()`:
+
+```ts
+await select.addOption('Rutabaga'); // searches, then takes the row the panel offers
+await select.canAddOption();
+
+await legumes.selectAll();
+await legumes.selectAllState(); // 'none' | 'some' | 'all', or null without a select-all row
+```
+
+`addOption` only reports the clue to the select: what the new option becomes is your own
+`addOption` handler, so wait on the value rather than assuming it is there.
+
+## Tree selects
+
+<Canvas of={MultiSelectStories.Tree} sourceState="none" />
+
+`treeSelect` is a directive, not a component: there is no `lu-tree-select` to wrap, and a tree is
+driven through the simple or multi select harness it is applied to. What changes is the panel,
+which takes the `tree` role and nests its options:
+
+```ts
+const panel = legumes.panel();
+await legumes.open();
+
+expect(await panel.isTree()).toBe(true);
+expect(await panel.option('Carotte').hasChildren()).toBe(true);
+await panel.rootOptions(); // the top level, each node holding its own children
+
+// Picks the node and its whole subtree. The two shortcuts the panel offers on a node:
+await panel.option('Carotte').selectOnlyParent();
+await panel.option('Carotte').selectOnlyChildren();
+```
+
+A node renders its children inside its own element, so an option is always matched, read and
+clicked on its own row — `option('Carotte')` never resolves to one of its children, and
+`optionLabels()` lists each node's own label.
+
+## Waiting, and what to assert on
+
+A harness method returns a value, not a locator, so Playwright's auto-retrying `expect(locator)`
+does not apply to it. Read a state through `expect.poll` whenever the component may not have
+caught up yet — after a selection, after a search, after anything your own code answers
+asynchronously:
+
+```ts
+await expect.poll(() => select.selectedLabel()).toBe('Carotte');
+```
+
+A plain `expect(await select.isOpen())` is right only for a state the previous call already waited
+on: `open()`, `close()` and `selectOption()` all return once the panel has settled.
+
+Filtering is your job — it happens in whatever `clueChange` is wired to — so `search()` returns as
+soon as the clue is typed. Wait on the resulting options rather than assuming they are there.
+
+## The escape hatch
+
+`harness.locator` is a plain Playwright locator on the component root, for what the harness does
+not cover yet — a screenshot, a bounding box, an assertion on a detail of the markup:
+
+```ts
+await expect(select.locator).toHaveScreenshot();
+```
+
+Anything expressed through it is coupled to our DOM again, and nothing protects it from our next
+refactor. Prefer asking for a harness method.
+
+## What the MVP does not cover
+
+Today the package ships `LuSimpleSelectHarness` and `LuMultiSelectHarness` only. Everything else —
+date inputs, dialogs, filter pills, tables, popovers — still needs your own selectors.
+
+Which component comes next is driven by what products ask for: open an issue on
+[lucca-front](https://github.com/LuccaSA/lucca-front/issues) describing the test you are trying to
+write, not the markup you are trying to reach. A harness is designed from the intentions a test
+needs, so the test you cannot write today is the useful part of the request.
+
+## How these are kept honest
+
+A harness has to know something about our markup — a few ARIA attributes, and the handful of class
+names for the parts that expose nothing else. That knowledge is protected by a Playwright suite
+living in the repository: it drives the harnesses against the real components, rendered by the
+Storybook of the very same commit. Change a class name, drop a role, move the value out of its
+element, and the harness tests fail on our side — before your suite does.
