@@ -46,6 +46,16 @@ class CalendarModeHostComponent {
 	readonly calendarMode = signal<CalendarMode | null>(null);
 }
 
+@Component({
+	template: `<lu-date-input [formControl]="formControl" [(calendarMode)]="calendarMode" />`,
+	imports: [ReactiveFormsModule, DateInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class CalendarModeTwoWayHostComponent {
+	readonly formControl = new FormControl<Date | null>(null);
+	readonly calendarMode = signal<CalendarMode | null>(null);
+}
+
 describe('DateInputComponent', () => {
 	let fixture: ComponentFixture<HostComponent>;
 
@@ -471,6 +481,22 @@ describe('DateInputComponent', () => {
 			host.detectChanges();
 
 			expect(dateInput.calendarMode()).toBe('month');
+		});
+
+		it('should write the calendar navigation back through [(calendarMode)]', () => {
+			TestBed.configureTestingModule({
+				imports: [CalendarModeTwoWayHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+			const host = TestBed.createComponent(CalendarModeTwoWayHostComponent);
+			host.detectChanges();
+			const dateInput = host.debugElement.query(By.directive(DateInputComponent)).componentInstance as DateInputComponent & { changeCalendarMode(calendarMode: CalendarMode | null): void };
+
+			dateInput.changeCalendarMode('year');
+			host.detectChanges();
+
+			expect(host.componentInstance.calendarMode()).toBe('year');
+			expect(dateInput.calendarMode()).toBe('year');
 		});
 	});
 });

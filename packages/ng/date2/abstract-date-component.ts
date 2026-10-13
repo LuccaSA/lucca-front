@@ -65,6 +65,8 @@ export abstract class AbstractDateComponent {
 	readonly calendarModeInput = input<CalendarMode | null>(null, { alias: 'calendarMode' });
 	readonly calendarMode = linkedSignal<CalendarMode>(() => this.calendarModeInput() ?? this.mode());
 
+	readonly calendarModeChange = output<CalendarMode>();
+
 	readonly panelOpened = output<void>();
 
 	readonly panelClosed = output<void>();
@@ -74,6 +76,13 @@ export abstract class AbstractDateComponent {
 	protected readonly currentDate = signal(new Date());
 
 	protected readonly tabbableDate = signal<Date | null>(null);
+
+	protected changeCalendarMode(calendarMode: CalendarMode | null): void {
+		if (calendarMode && calendarMode !== this.calendarMode()) {
+			this.calendarMode.set(calendarMode);
+			this.calendarModeChange.emit(calendarMode);
+		}
+	}
 
 	protected constructor() {
 		effect(() => {

@@ -86,7 +86,8 @@
 				(dateClicked)="dateClicked($event, popoverRef)"
 				(nextPage)="move(1, calendarMode())"
 				(previousPage)="move(-1, calendarMode())"
-				[(displayMode)]="calendarMode"
+				[displayMode]="calendarMode()"
+				(displayModeChange)="changeCalendarMode($event)"
 				[mode]="mode()"
 				[hideWeekend]="hideWeekend()"
 			/>
