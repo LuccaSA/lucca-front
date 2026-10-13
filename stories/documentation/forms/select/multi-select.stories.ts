@@ -136,7 +136,7 @@ export const InputWidth = generateStory({
 	template: `<lu-form-field label="Légumes" inlineMessage="Ce message d’aide est volontairement long pour vérifier qu’il occupe toute la largeur du form field et ne se cale pas sur la largeur réduite du select." [width]="widthOnInput ? null : width">
 	<lu-multi-select
 		[width]="widthOnInput ? width : null"
-		[(ngModel)]="selectedLegumes"
+		[(value)]="selectedLegumes"
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 	/>
@@ -177,7 +177,7 @@ export const WithFormField = generateStory({
 		[clearable]="clearable"
 		[loading]="loading"
 		[keepSearchAfterSelection]="keepSearchAfterSelection"
-		[(ngModel)]="selectedLegumes"
+		[(value)]="selectedLegumes"
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[maxValuesShown]="maxValuesShown"

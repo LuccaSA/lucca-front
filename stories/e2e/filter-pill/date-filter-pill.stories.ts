@@ -79,7 +79,7 @@ function periodWithSelection(examplePeriod: DateRange): StoryObj<FilterPillCompo
 	return {
 		render: () => ({
 			props: { examplePeriod },
-			template: `<lu-filter-pill label="Période" name="periode"><lu-date-range-input [(ngModel)]="examplePeriod" clearable /></lu-filter-pill>`,
+			template: `<lu-filter-pill label="Période" name="periode"><lu-date-range-input [(value)]="examplePeriod" clearable /></lu-filter-pill>`,
 		}),
 	};
 }

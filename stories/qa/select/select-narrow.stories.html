@@ -10,14 +10,14 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légume">
-						<lu-simple-select [options]="legumes | filterLegumes: simpleClue" (clueChange)="simpleClue = $event" [(ngModel)]="simpleValue" />
+						<lu-simple-select [options]="legumes | filterLegumes: simpleClue" (clueChange)="simpleClue = $event" [(value)]="simpleValue" />
 					</lu-form-field>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légumes">
-						<lu-multi-select [options]="legumes | filterLegumes: multiClue" (clueChange)="multiClue = $event" [(ngModel)]="multiValue" />
+						<lu-multi-select [options]="legumes | filterLegumes: multiClue" (clueChange)="multiClue = $event" [(value)]="multiValue" />
 					</lu-form-field>
 				</div>
 			</td>
@@ -27,14 +27,14 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légume">
-						<lu-simple-select [options]="legumes | filterLegumes: simpleClue" (clueChange)="simpleClue = $event" [(ngModel)]="simpleFilled" />
+						<lu-simple-select [options]="legumes | filterLegumes: simpleClue" (clueChange)="simpleClue = $event" [(value)]="simpleFilled" />
 					</lu-form-field>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légumes">
-						<lu-multi-select [options]="legumes | filterLegumes: multiClue" (clueChange)="multiClue = $event" [(ngModel)]="multiFilled" />
+						<lu-multi-select [options]="legumes | filterLegumes: multiClue" (clueChange)="multiClue = $event" [(value)]="multiFilled" />
 					</lu-form-field>
 				</div>
 			</td>
@@ -44,14 +44,24 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légume">
-						<lu-simple-select clearable [options]="legumes | filterLegumes: simpleClue" (clueChange)="simpleClue = $event" [(ngModel)]="simpleFilled" />
+						<lu-simple-select
+							clearable
+							[options]="legumes | filterLegumes: simpleClue"
+							(clueChange)="simpleClue = $event"
+							[(value)]="simpleFilled"
+						/>
 					</lu-form-field>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légumes">
-						<lu-multi-select clearable [options]="legumes | filterLegumes: multiClue" (clueChange)="multiClue = $event" [(ngModel)]="multiFilled" />
+						<lu-multi-select
+							clearable
+							[options]="legumes | filterLegumes: multiClue"
+							(clueChange)="multiClue = $event"
+							[(value)]="multiFilled"
+						/>
 					</lu-form-field>
 				</div>
 			</td>
@@ -62,7 +72,12 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légumes">
-						<lu-multi-select [options]="legumes | filterLegumes: multiClue" (clueChange)="multiClue = $event" [(ngModel)]="multiFilled" #counterSelectRef>
+						<lu-multi-select
+							[options]="legumes | filterLegumes: multiClue"
+							(clueChange)="multiClue = $event"
+							[(value)]="multiFilled"
+							#counterSelectRef
+						>
 							<ng-container *luMultiDisplayer="let values; select: counterSelectRef">
 								<lu-multi-select-counter-displayer [selected]="values" label="légumes sélectionnés" />
 							</ng-container>
@@ -76,14 +91,14 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légume" inlineMessage="Error message" inlineMessageState="error" invalid>
-						<lu-simple-select [options]="legumes | filterLegumes: simpleClue" (clueChange)="simpleClue = $event" [(ngModel)]="simpleFilled" />
+						<lu-simple-select [options]="legumes | filterLegumes: simpleClue" (clueChange)="simpleClue = $event" [(value)]="simpleFilled" />
 					</lu-form-field>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légumes" inlineMessage="Error message" inlineMessageState="error" invalid>
-						<lu-multi-select [options]="legumes | filterLegumes: multiClue" (clueChange)="multiClue = $event" [(ngModel)]="multiFilled" />
+						<lu-multi-select [options]="legumes | filterLegumes: multiClue" (clueChange)="multiClue = $event" [(value)]="multiFilled" />
 					</lu-form-field>
 				</div>
 			</td>
@@ -93,14 +108,24 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légume">
-						<lu-simple-select disabled [options]="legumes | filterLegumes: simpleClue" (clueChange)="simpleClue = $event" [(ngModel)]="simpleFilled" />
+						<lu-simple-select
+							disabled
+							[options]="legumes | filterLegumes: simpleClue"
+							(clueChange)="simpleClue = $event"
+							[(value)]="simpleFilled"
+						/>
 					</lu-form-field>
 				</div>
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<lu-form-field label="Légumes">
-						<lu-multi-select disabled [options]="legumes | filterLegumes: multiClue" (clueChange)="multiClue = $event" [(ngModel)]="multiFilled" />
+						<lu-multi-select
+							disabled
+							[options]="legumes | filterLegumes: multiClue"
+							(clueChange)="multiClue = $event"
+							[(value)]="multiFilled"
+						/>
 					</lu-form-field>
 				</div>
 			</td>

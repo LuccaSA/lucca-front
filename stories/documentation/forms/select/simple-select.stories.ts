@@ -85,7 +85,7 @@ export const InputWidth = generateStory({
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[width]="widthOnInput ? width : null"
-		[(ngModel)]="selectedLegume"
+		[(value)]="selectedLegume"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 	</lu-simple-select>
@@ -127,7 +127,7 @@ export const WithFormField = generateStory({
 		(clueChange)="clue = $event"
 		[clearable]="clearable"
 		[loading]="loading"
-		[(ngModel)]="selectedLegume"
+		[(value)]="selectedLegume"
 		(addOption)="something = true"
 		addOptionStrategy="always"
 	>

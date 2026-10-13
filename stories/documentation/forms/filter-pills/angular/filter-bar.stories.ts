@@ -291,17 +291,16 @@ ${saveViewDropdownTemplate}`,
 	},
 } as Meta;
 
-export const Basic: StoryObj<
-	FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; groupedOptionalFilters: boolean; actionButton: boolean }
-> = {
-	args: {
-		views: false,
-		saveView: false,
-		filterViewSelector: false,
-		optionalFilter: false,
-		groupedOptionalFilters: false,
-		actionButton: false,
-		manualApply: false,
-		resultsCount: null,
-	},
-};
+export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; groupedOptionalFilters: boolean; actionButton: boolean }> =
+	{
+		args: {
+			views: false,
+			saveView: false,
+			filterViewSelector: false,
+			optionalFilter: false,
+			groupedOptionalFilters: false,
+			actionButton: false,
+			manualApply: false,
+			resultsCount: null,
+		},
+	};

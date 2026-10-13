@@ -1,7 +1,6 @@
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiDisplayerDirective, LuMultiSelectCounterDisplayerComponent, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -25,7 +24,7 @@ const forceNarrowBreakpoint = { provide: BreakpointObserver, useValue: new Stati
 @Component({
 	selector: 'select-narrow-stories',
 	templateUrl: './select-narrow.stories.html',
-	imports: [LuSimpleSelectInputComponent, LuMultiSelectInputComponent, FormsModule, FilterLegumesPipe, FormFieldComponent, LuMultiDisplayerDirective, LuMultiSelectCounterDisplayerComponent],
+	imports: [LuSimpleSelectInputComponent, LuMultiSelectInputComponent, FilterLegumesPipe, FormFieldComponent, LuMultiDisplayerDirective, LuMultiSelectCounterDisplayerComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [forceNarrowBreakpoint],
 })
