@@ -1,4 +1,4 @@
-import { ButtonComponent } from '@lucca/prisme/button';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 

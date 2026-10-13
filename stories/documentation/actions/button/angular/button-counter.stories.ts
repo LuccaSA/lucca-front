@@ -1,4 +1,4 @@
-import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca/prisme/button';
+import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-front/ng/button';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
