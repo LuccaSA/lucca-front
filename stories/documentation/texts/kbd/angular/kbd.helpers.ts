@@ -11,7 +11,7 @@ export type KbdModifier = 'Control' | 'Alt' | 'Meta' | 'Shift';
 
 export interface KbdStory {
 	modifiers: KbdModifier[];
-	key: KbdKey;
+	key?: KbdKey;
 	otherKey: string;
 	inDropdown: boolean;
 }
@@ -25,13 +25,17 @@ const KEYS: KbdKey[] = ['Escape', 'Enter', 'Tab', ' ', 'Delete', 'Home', 'End', 
 
 /**
  * A single key is written as a plain attribute, a combination as a bound array, modifiers first in their conventional order.
- * Keys are escaped, as any value can be typed in the free text control
+ * Keys are escaped, as any value can be typed in the free text control.
+ * The key is missing when the empty option of its select control is picked: `null` when there is nothing to display
  */
-function keysInput(modifiers: KbdModifier[] = [], key: KbdKey): string {
-	const keys = [...MODIFIERS.filter((modifier) => modifiers.includes(modifier)), key];
+function keysInput(modifiers: KbdModifier[] = [], key: KbdKey | undefined): string | null {
+	const keys = [...MODIFIERS.filter((modifier) => modifiers.includes(modifier)), ...(key === undefined ? [] : [key])];
 	const attribute = (value: string) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 	const string = (value: string) => `'${value.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
-	return keys.length === 1 ? `keys="${attribute(key)}"` : `[keys]="${attribute(`[${keys.map(string).join(', ')}]`)}"`;
+	if (keys.length === 0) {
+		return null;
+	}
+	return keys.length === 1 ? `keys="${attribute(keys[0])}"` : `[keys]="${attribute(`[${keys.map(string).join(', ')}]`)}"`;
 }
 
 export const KBD_DECORATORS = [moduleMetadata({ imports: [KbdComponent] }), applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }] })];
@@ -89,7 +93,8 @@ export const KBD_ARG_TYPES: ArgTypes = {
 
 export const renderKbd = ({ modifiers, key, otherKey, inDropdown, ...inputs }: KbdStory, { argTypes }) => {
 	const kbdInputs = generateInputs(inputs, argTypes);
-	const kbd = `<lu-kbd ${keysInput(modifiers, key === OTHER ? otherKey || 'S' : key)}${kbdInputs} />`;
+	const keys = keysInput(modifiers, key === OTHER ? otherKey || 'S' : key);
+	const kbd = keys ? `<lu-kbd ${keys}${kbdInputs} />` : '';
 	if (!inDropdown) {
 		return { template: kbd };
 	}
