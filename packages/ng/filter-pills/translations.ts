@@ -11,6 +11,11 @@
 		saveView: 'Enregistrer la vue',
 		saveModification: 'Enregistrer les modifications',
 		saveNewView: 'Enregistrer en tant que nouvelle vue',
+		resultsCount: {
+			one: '{{count}} résultat',
+			other: '{{count}} résultats',
+		},
+		noResults: 'Aucun résultat',
 	},
 	pt: {
 		clear: 'Esvaziar este campo',
@@ -24,6 +29,11 @@
 		saveView: 'Guardar a vista',
 		saveModification: 'Guardar as alterações',
 		saveNewView: 'Guardar como nova vista',
+		resultsCount: {
+			one: '{{count}} resultado',
+			other: '{{count}} resultados',
+		},
+		noResults: 'Nenhum resultado',
 	},
 	es: {
 		clear: 'Vaciar este campo',
@@ -37,6 +47,11 @@
 		saveView: 'Guardar vista',
 		saveModification: 'Guardar los cambios',
 		saveNewView: 'Guardar como vista nueva',
+		resultsCount: {
+			one: '{{count}} resultado',
+			other: '{{count}} resultados',
+		},
+		noResults: 'Ningún resultado',
 	},
 	'nl-BE': {
 		clear: 'Dit veld leegmaken',
@@ -50,6 +65,11 @@
 		saveView: 'De weergave opslaan',
 		saveModification: 'Wijzigingen opslaan',
 		saveNewView: 'Opslaan als nieuwe weergave',
+		resultsCount: {
+			one: '{{count}} resultaat',
+			other: '{{count}} resultaten',
+		},
+		noResults: 'Geen resultaten',
 	},
 	nl: {
 		clear: 'Dit veld leegmaken',
@@ -63,6 +83,11 @@
 		saveView: 'De weergave opslaan',
 		saveModification: 'Wijzigingen opslaan',
 		saveNewView: 'Opslaan als nieuwe weergave',
+		resultsCount: {
+			one: '{{count}} resultaat',
+			other: '{{count}} resultaten',
+		},
+		noResults: 'Geen resultaten',
 	},
 	it: {
 		clear: 'Vuotare questo campo',
@@ -76,6 +101,11 @@
 		saveView: 'Salva la vista',
 		saveModification: 'Salva le modifiche',
 		saveNewView: 'Salva come nuova vista',
+		resultsCount: {
+			one: '{{count}} risultato',
+			other: '{{count}} risultati',
+		},
+		noResults: 'Nessun risultato',
 	},
 	de: {
 		clear: 'Den Inhalt aus diesem Feld entfernen',
@@ -89,6 +119,11 @@
 		saveView: 'Ansicht speichern',
 		saveModification: 'Änderungen speichern',
 		saveNewView: 'Als neue Ansicht speichern',
+		resultsCount: {
+			one: '{{count}} Ergebnis',
+			other: '{{count}} Ergebnisse',
+		},
+		noResults: 'Keine Ergebnisse',
 	},
 	en: {
 		clear: 'Empty this field',
@@ -102,6 +137,11 @@
 		saveView: 'Save view',
 		saveModification: 'Save changes',
 		saveNewView: 'Save as new view',
+		resultsCount: {
+			one: '{{count}} result',
+			other: '{{count}} results',
+		},
+		noResults: 'No results',
 	},
 	pl: {
 		clear: 'Wyczyść to pole',
@@ -115,5 +155,12 @@
 		saveView: 'Save view',
 		saveModification: 'Save changes',
 		saveNewView: 'Save as new view',
+		resultsCount: {
+			one: '{{count}} wynik',
+			few: '{{count}} wyniki',
+			many: '{{count}} wyników',
+			other: '{{count}} wyniku',
+		},
+		noResults: 'Brak wyników',
 	},
 };

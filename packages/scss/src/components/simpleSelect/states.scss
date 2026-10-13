@@ -63,6 +63,10 @@
 	--components-simpleSelect-placeholder: var(--pr-t-color-input-text-placeholder-critical);
 }
 
+@mixin invalidHover {
+	--components-simpleSelect-border-color: var(--pr-t-color-input-border-critical-hover);
+}
+
 @mixin disabled {
 	--components-simpleSelect-background: var(--pr-t-color-input-background-disabled);
 	--components-simpleSelect-placeholder: var(--commons-disabled-placeholder); // Deprecated: no placeholder with disabled state

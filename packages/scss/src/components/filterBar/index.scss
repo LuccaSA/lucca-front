@@ -19,5 +19,9 @@
 		@include media.pointer(coarse, $reversed: true) {
 			@include notTouch;
 		}
+
+		.filterBar-scrollBox-tabs ~ .filterBar-scrollBox-export {
+			@include exportAfterTabs;
+		}
 	}
 }

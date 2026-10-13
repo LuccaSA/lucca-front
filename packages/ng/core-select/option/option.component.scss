@@ -26,6 +26,7 @@
 
 	.optionItem-icons {
 		position: absolute;
+		display: flex;
 		inset-block-start: var(--pr-t-spacings-50);
 		inset-inline-end: var(--pr-t-spacings-100);
 		opacity: 0;
@@ -33,6 +34,7 @@
 	}
 
 	.optionItem-icon {
+		display: flex;
 		cursor: pointer;
 		opacity: 0.66;
 		margin-inline-start: var(--pr-t-spacings-100);

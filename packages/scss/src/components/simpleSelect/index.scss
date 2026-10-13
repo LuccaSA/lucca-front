@@ -28,6 +28,10 @@
 
 		&:has(.simpleSelect-field-input[aria-invalid='true']) {
 			@include invalid;
+
+			.simpleSelect-field:hover {
+				@include invalidHover;
+			}
 		}
 
 		&:has(.simpleSelect-field-input:disabled) {
@@ -64,5 +68,11 @@
 				@include selectedSearchFilled;
 			}
 		}
+	}
+}
+
+@layer mods {
+	.dialog.mod-select {
+		@include select;
 	}
 }

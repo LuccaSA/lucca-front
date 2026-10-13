@@ -38,12 +38,18 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
-			table: { category: 'models' },
+			table: { category: 'inputs' },
 		},
 		sortWithEllipsis: {
 			if: { arg: 'sort', truthy: true },
 			description: 'Tronque le libellé du header avec une ellipsis si la colonne n’offre pas assez de largeur.',
 			table: { category: 'inputs' },
+		},
+		sortChange: {
+			description: 'Événement déclenché lorsque l’utilisateur change le tri de la cellule d’en-tête.',
+			action: 'sortChange',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'DataTableSort' } },
 		},
 		align: {
 			options: setStoryOptions(DATA_TABLE_ALIGN),
@@ -234,6 +240,7 @@ export default {
 			hover,
 			sort,
 			sortWithEllipsis,
+			sortChange,
 			cellBorder,
 			inlineSize,
 			inlineSizeValue,
@@ -253,7 +260,7 @@ export default {
 		const layoutFixedAttr = layoutFixed ? ` layoutFixed` : ``;
 		const hoverAttr = hover ? ` hover` : ``;
 		const cellBorderAttr = cellBorder ? ` cellBorder` : ``;
-		const sortAttr = sort ? ` sort="${sort}"` : ``;
+		const sortAttr = sort ? ` sort="${sort}" (sortChange)="sortChange($event)"` : ``;
 		const sortWithEllipsisAttr = sortWithEllipsis ? ` sortWithEllipsis` : ``;
 		const inlineSizeAttr = inlineSize && inlineSizeValue !== `` ? ` inlineSize="${inlineSizeValue}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
@@ -353,7 +360,7 @@ export default {
 		</tr>`;
 
 		return {
-			props: { example: text },
+			props: { example: text, sortChange },
 			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}${draggable}${emptyAttr}>
 	<thead luDataTableHead>
 		<tr luDataTableRow${selectableLabelHeadAttr}${mixedAttr}>

@@ -6,6 +6,7 @@ import { LOCALE_ID } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Calendar2Component } from './calendar2.component';
 import { DateRange } from './date-range';
+import { OpenDateRange } from './open-date-range';
 
 registerLocaleData(localeFr, 'fr-FR');
 
@@ -20,14 +21,15 @@ class HostComponent {
 }
 
 describe(Calendar2Component.name, () => {
-	function createHost(ranges: readonly DateRange[]): ComponentFixture<HostComponent> {
+	function createHost(ranges: readonly OpenDateRange[]): ComponentFixture<HostComponent> {
 		TestBed.configureTestingModule({
 			imports: [HostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		});
 
 		const fixture = TestBed.createComponent(HostComponent);
-		fixture.componentInstance.ranges = ranges;
+		// The public input type still requires a start date, the date range input gives open ranges the same way
+		fixture.componentInstance.ranges = ranges as readonly DateRange[];
 		fixture.detectChanges();
 
 		return fixture;

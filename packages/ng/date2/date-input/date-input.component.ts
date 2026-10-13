@@ -21,7 +21,7 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { isNil, isNotNil, luBooleanAttribute, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills/core';
 import { InputDirective, PresentationDisplayDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -251,15 +251,9 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			});
 		});
 
-		ɵeffectWithDeps([this.mode, this.calendarMode], (mode, calendarMode) => {
-			if (mode && isNil(calendarMode)) {
-				this.calendarMode.set(mode);
-			}
-		});
-
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
-			if (tabbableDate && !comparePeriods(calendarMode ?? null, tabbableDate, this.currentDate(), this.weekOptions)) {
-				this.currentDate.set(startOfPeriod(calendarMode ?? null, tabbableDate));
+			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate(), this.weekOptions)) {
+				this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
 			}
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
 				this.calendar()?.blurTabbableDate();

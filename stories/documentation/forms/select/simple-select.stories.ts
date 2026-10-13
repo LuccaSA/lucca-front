@@ -118,6 +118,35 @@ export const InputWidth = generateStory({
 	},
 });
 
+export const WithFormField = generateStory({
+	name: 'With form field',
+	description: `Encapsulé dans un \`lu-form-field\`, le select est associé à son label, qui reste la façon recommandée de nommer le champ. Sous le breakpoint S, le panneau s’ouvre en bottom sheet et reprend ce label comme titre.`,
+	template: `<lu-form-field label="Légume" tooltip="Un seul légume à la fois" inlineMessage="Choisissez votre légume préféré">
+	<lu-simple-select
+		#selectRef
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+		[clearable]="clearable"
+		[loading]="loading"
+		[(ngModel)]="selectedLegume"
+		(addOption)="something = true"
+		addOptionStrategy="always"
+	>
+		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
+	</lu-simple-select>
+</lu-form-field>`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/form-field': ['FormFieldComponent'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+	storyPartial: {
+		argTypes: {
+			clearable: { control: { type: 'boolean' } },
+		},
+	},
+});
+
 export const ScrollOnOpen = generateStory({
 	name: 'Scroll on open',
 	description: `À l’ouverture, le panneau doit être positionné en haut de la liste (aucun défilement parasite), même si aucune valeur n’est sélectionnée.`,
@@ -798,6 +827,7 @@ const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAlias
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 				TreeSelectDirective,
+				FormFieldComponent,
 				IconComponent,
 				LuUserPictureComponent,
 			],

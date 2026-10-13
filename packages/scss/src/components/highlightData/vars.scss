@@ -18,4 +18,13 @@
 	--components-highlightData-illustrations-width: 86px;
 	--components-highlightData-illustrations-height: 72px;
 	--components-highlightData-illustrations-display: grid;
+	--components-highlightData-bubble-primary-light: var(--palettes-assets-primary-light);
+	--components-highlightData-bubble-primary-dark: var(--palettes-assets-primary-dark);
+	--components-highlightData-bubble-secondary-light: var(--palettes-assets-secondary-light);
+	--components-highlightData-bubble-secondary-dark: var(--palettes-assets-secondary-lighter);
+	--components-highlightData-bubble-brand-light: var(--palettes-assets-brand-dark);
+	--components-highlightData-bubble-brand-dark: var(--palettes-assets-brand-lighter);
+	--palettes-assets-primary: var(--components-highlightData-bubble-primary-light);
+	--palettes-assets-secondary: var(--components-highlightData-bubble-secondary-light);
+	--palettes-assets-brand: var(--components-highlightData-bubble-brand-light);
 }

@@ -1,6 +1,5 @@
 import { Directive, inject, TemplateRef } from '@angular/core';
-import { FilterPillComponent } from '../filter-pill/filter-pill.component';
-import { FILTER_PILL_INPUT_COMPONENT } from './tokens';
+import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT } from './tokens';
 
 interface FilterPillLabelContext {
 	label: string;
@@ -13,7 +12,7 @@ interface FilterPillLabelContext {
 	selector: '[luFilterPillLabel]',
 })
 export class FilterPillLabelDirective {
-	#filterPillComponentRef = inject(FilterPillComponent, { optional: true });
+	#filterPillComponentRef = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 	#parentComponentRef = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 
 	#templateRef = inject(TemplateRef);

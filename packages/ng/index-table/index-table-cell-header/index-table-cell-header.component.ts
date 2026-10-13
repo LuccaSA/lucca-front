@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, model, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, linkedSignal, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
@@ -25,7 +25,7 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 		'[class.mod-alignStart]': 'align() === "start" || alignCol() === "start"',
 		'[class.mod-alignCenter]': 'align() === "center" || alignCol() === "center"',
 		'[class.mod-alignEnd]': 'align() === "end" || alignCol() === "end"',
-		'[attr.aria-sort]': 'sort()',
+		'[attr.aria-sort]': 'currentSort()',
 		'[attr.scope]': 'bodyRef !== null ? "row" : "col"',
 		'[class.mod-selectable]': 'selectable()',
 		'[class.mod-actions]': 'actions()',
@@ -43,7 +43,11 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	readonly sort = model<IndexTableSort | null>(null);
+	readonly sort = input<IndexTableSort | null>(null);
+
+	readonly sortChange = output<IndexTableSort>();
+
+	protected readonly currentSort = linkedSignal(() => this.sort());
 	readonly selectable = input(false, { transform: luBooleanAttribute });
 	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 	readonly actions = input(false, { transform: luBooleanAttribute });
@@ -55,8 +59,11 @@ export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	protected readonly sortButtonRef = viewChild<unknown, ElementRef<HTMLElement>>('sortButton', { read: ElementRef });
 
 	toggleSort(): void {
-		if (this.sort()) {
-			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort() ?? 'none') + 1) % SORT_VALUES.length]);
+		const sort = this.currentSort();
+		if (sort) {
+			const next = SORT_VALUES[(SORT_VALUES.indexOf(sort) + 1) % SORT_VALUES.length];
+			this.currentSort.set(next);
+			this.sortChange.emit(next);
 		}
 	}
 }

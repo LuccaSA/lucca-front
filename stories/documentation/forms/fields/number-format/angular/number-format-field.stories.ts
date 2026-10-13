@@ -1,7 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { luNumberFormatFieldTranslations, NumberFormatInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -128,6 +128,23 @@ export default {
 			if: { arg: 'formatStyle', eq: 'unit' },
 			table: { category: 'inputs' },
 		},
+		width: {
+			options: setStoryOptions(FORM_FIELD_WIDTH),
+			control: {
+				type: 'select',
+			},
+			description: 'Applique une largeur fixe au FormField.',
+			table: { category: 'inputs' },
+		},
+		widthOnInput: {
+			name: '↳ widthOnInput',
+			if: { arg: 'width', truthy: true },
+			control: {
+				type: 'boolean',
+			},
+			description: 'Applique la largeur sur l’input plutôt que sur le FormField, afin que le label et le message d’aide conservent toute la largeur disponible.',
+			table: { category: 'inputs' },
+		},
 		intl: intlArgType(luNumberFormatFieldTranslations, 'LuNumberFormatFieldLabel'),
 	},
 } as Meta;
@@ -136,10 +153,13 @@ export const Basic: StoryObj<
 	NumberFormatInputComponent & {
 		disabled: boolean;
 		required: boolean;
+		widthOnInput: boolean;
 	} & FormFieldComponent
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, widthOnInput, ...inputArgs } = args;
+		const formFieldWidth = widthOnInput ? undefined : width;
+		const inputWidth = widthOnInput ? width : undefined;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -149,10 +169,11 @@ export const Basic: StoryObj<
 					inlineMessage,
 					inlineMessageState,
 					size,
+					width: formFieldWidth,
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-number-format-input [(ngModel)]="example"${generateInputs({ ...inputArgs, width: inputWidth }, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
@@ -174,6 +195,8 @@ export const Basic: StoryObj<
 		currency: 'EUR',
 		useAutoPrefixSuffix: true,
 		valueAlignRight: false,
+		width: '',
+		widthOnInput: false,
 	},
 };
 

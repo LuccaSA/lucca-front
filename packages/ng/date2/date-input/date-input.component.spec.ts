@@ -1,8 +1,9 @@
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
-import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID, signal } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { addDays } from 'date-fns';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { DATE_FORMAT, DateFormat } from '../date2.type';
@@ -32,6 +33,27 @@ class HostComponent {
 class WeekHostComponent {
 	formControl = new FormControl<Date | null>(null);
 	min: Date | null = null;
+}
+
+@Component({
+	template: `<lu-date-input [formControl]="formControl" [mode]="mode()" [calendarMode]="calendarMode()" />`,
+	imports: [ReactiveFormsModule, DateInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class CalendarModeHostComponent {
+	readonly formControl = new FormControl<Date | null>(null);
+	readonly mode = signal<CalendarMode>('day');
+	readonly calendarMode = signal<CalendarMode | null>(null);
+}
+
+@Component({
+	template: `<lu-date-input [formControl]="formControl" [(calendarMode)]="calendarMode" />`,
+	imports: [ReactiveFormsModule, DateInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class CalendarModeTwoWayHostComponent {
+	readonly formControl = new FormControl<Date | null>(null);
+	readonly calendarMode = signal<CalendarMode | null>(null);
 }
 
 describe('DateInputComponent', () => {
@@ -392,6 +414,89 @@ describe('DateInputComponent', () => {
 			createHost(formControl, null, null, { humanized: true });
 
 			expect(formControl.valid).toBe(true);
+		});
+	});
+
+	describe('calendarMode', () => {
+		function createCalendarModeHost(): { host: ComponentFixture<CalendarModeHostComponent>; dateInput: DateInputComponent } {
+			TestBed.configureTestingModule({
+				imports: [CalendarModeHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+
+			const host = TestBed.createComponent(CalendarModeHostComponent);
+			host.detectChanges();
+
+			return { host, dateInput: host.debugElement.query(By.directive(DateInputComponent)).componentInstance as DateInputComponent };
+		}
+
+		it('should fall back to mode when calendarMode is not set', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			host.componentInstance.mode.set('month');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('month');
+		});
+
+		it('should follow mode when it changes after init', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			host.componentInstance.mode.set('year');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('year');
+		});
+
+		it('should give precedence to an explicit calendarMode over mode', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			host.componentInstance.calendarMode.set('year');
+			host.componentInstance.mode.set('month');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('year');
+		});
+
+		it('should fall back to mode when calendarMode is reset to null', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			host.componentInstance.calendarMode.set('year');
+			host.detectChanges();
+			host.componentInstance.calendarMode.set(null);
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('day');
+		});
+
+		it('should keep an internal navigation until its sources change', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			dateInput.calendarMode.set('year');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('year');
+
+			host.componentInstance.mode.set('month');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('month');
+		});
+
+		it('should write the calendar navigation back through [(calendarMode)]', () => {
+			TestBed.configureTestingModule({
+				imports: [CalendarModeTwoWayHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+			const host = TestBed.createComponent(CalendarModeTwoWayHostComponent);
+			host.detectChanges();
+			const dateInput = host.debugElement.query(By.directive(DateInputComponent)).componentInstance as DateInputComponent & { changeCalendarMode(calendarMode: CalendarMode | null): void };
+
+			dateInput.changeCalendarMode('year');
+			host.detectChanges();
+
+			expect(host.componentInstance.calendarMode()).toBe('year');
+			expect(dateInput.calendarMode()).toBe('year');
 		});
 	});
 });

@@ -153,10 +153,12 @@
 		}
 
 		@each $productName, $productMap in config.$palettesAssets {
+			$productPalette: map.get(config.$palettesInterpolation, $productName);
+
 			.palette-#{$productName} {
-				--palettes-assets-primary-lighter: var(--palettes-#{$productName}-50);
-				--palettes-assets-primary-light: var(--palettes-#{$productName}-100);
-				--palettes-assets-primary-dark: var(--palettes-#{$productName}-200);
+				--palettes-assets-primary-lighter: var(--palettes-#{$productName}-50, #{map.get($productPalette, 50)});
+				--palettes-assets-primary-light: var(--palettes-#{$productName}-100, #{map.get($productPalette, 100)});
+				--palettes-assets-primary-dark: var(--palettes-#{$productName}-200, #{map.get($productPalette, 200)});
 
 				@each $level, $palette in $productMap {
 					@if $level == 'secondary' {

@@ -1,8 +1,8 @@
 import { CellStatus } from './cell-status';
-import { DateRange } from './date-range';
+import { OpenDateRange } from './open-date-range';
 
 export interface RangeInfo {
-	range?: DateRange;
+	range?: OpenDateRange;
 	/**
 	 * Bound the range is anchored on: its start when it has one, its end otherwise.
 	 * A range without start date is rendered from its end, the same way an incomplete
