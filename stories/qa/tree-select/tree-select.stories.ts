@@ -1,6 +1,5 @@
 import { allLegumes, ILegume } from '@/stories/forms/select/select.utils';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -10,7 +9,7 @@ import { Meta } from '@storybook/angular-vite';
 @Component({
 	selector: 'tree-select-stories',
 	templateUrl: './tree-select.stories.html',
-	imports: [LuSimpleSelectInputComponent, LuMultiSelectInputComponent, TreeSelectDirective, FormFieldComponent, FormsModule],
+	imports: [LuSimpleSelectInputComponent, LuMultiSelectInputComponent, TreeSelectDirective, FormFieldComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TreeSelectStory {

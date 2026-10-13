@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { SwitchInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -7,7 +6,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 @Component({
 	selector: 'forms-switch-stories',
 	templateUrl: './switch.stories.html',
-	imports: [FormsModule, FormFieldComponent, SwitchInputComponent],
+	imports: [FormFieldComponent, SwitchInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SwitchStory {

@@ -13,7 +13,7 @@
 					placeholder="Placeholder"
 					[options]="asyncOptions()"
 					[loading]="loading()"
-					[(ngModel)]="simpleValue"
+					[(value)]="simpleValue"
 					(clueChange)="clue = $event"
 					(panelOpened)="loadOptions()"
 				/>
@@ -25,7 +25,7 @@
 					data-testid="target"
 					placeholder="Placeholder"
 					[options]="syncOptions"
-					[(ngModel)]="simpleValue"
+					[(value)]="simpleValue"
 					(clueChange)="clue = $event"
 				/>
 			</lu-form-field>
@@ -37,7 +37,7 @@
 					placeholder="Placeholder"
 					[options]="asyncOptions()"
 					[loading]="loading()"
-					[(ngModel)]="multiValue"
+					[(value)]="multiValue"
 					(clueChange)="clue = $event"
 					(panelOpened)="loadOptions()"
 				/>

@@ -32,7 +32,7 @@
 				</ul>
 			</td>
 			<td>
-				<lu-segmented-control [ariaLabel]="'Lorem ipsum'" [(ngModel)]="filtersValue">
+				<lu-segmented-control [ariaLabel]="'Lorem ipsum'" [(value)]="filtersValue">
 					<lu-segmented-control-filter label="Lorem" value="0" />
 					<lu-segmented-control-filter label="Ipsum" value="1" />
 					<lu-segmented-control-filter label="Dolor sit" value="2" />
@@ -73,7 +73,7 @@
 				<ng-template #filtersNumericLabel2>Ipsum <lu-numeric-badge value="2" /></ng-template>
 				<ng-template #filtersNumericLabel3>Dolor sit <lu-numeric-badge value="34" /></ng-template>
 				<ng-template #filtersNumericLabel4>Lorem Consectetur <lu-numeric-badge value="567" /></ng-template>
-				<lu-segmented-control [ariaLabel]="'Lorem ipsum'" [(ngModel)]="filtersNumericValue">
+				<lu-segmented-control [ariaLabel]="'Lorem ipsum'" [(value)]="filtersNumericValue">
 					<lu-segmented-control-filter [label]="filtersNumericLabel1" value="0" />
 					<lu-segmented-control-filter [label]="filtersNumericLabel2" value="1" />
 					<lu-segmented-control-filter [label]="filtersNumericLabel3" value="2" />
@@ -116,7 +116,7 @@
 				<ng-template #filtersLoadingLabel2>Ipsum <lu-numeric-badge value="2" loading /></ng-template>
 				<ng-template #filtersLoadingLabel3>Dolor sit <lu-numeric-badge value="34" loading /></ng-template>
 				<ng-template #filtersLoadingLabel4>Lorem Consectetur <lu-numeric-badge value="567" loading /></ng-template>
-				<lu-segmented-control [ariaLabel]="'Lorem ipsum'" [(ngModel)]="filtersLoadingValue">
+				<lu-segmented-control [ariaLabel]="'Lorem ipsum'" [(value)]="filtersLoadingValue">
 					<lu-segmented-control-filter [label]="filtersLoadingLabel1" value="0" />
 					<lu-segmented-control-filter [label]="filtersLoadingLabel2" value="1" />
 					<lu-segmented-control-filter [label]="filtersLoadingLabel3" value="2" />
@@ -157,7 +157,7 @@
 				<ng-template #filtersSmallLabel2>Ipsum <lu-numeric-badge value="2" /></ng-template>
 				<ng-template #filtersSmallLabel3>Dolor sit <lu-numeric-badge value="34" loading /></ng-template>
 				<ng-template #filtersSmallLabel4>Lorem Consectetur <lu-numeric-badge value="567" /></ng-template>
-				<lu-segmented-control small [ariaLabel]="'Lorem ipsum'" [(ngModel)]="filtersSmallValue">
+				<lu-segmented-control small [ariaLabel]="'Lorem ipsum'" [(value)]="filtersSmallValue">
 					<lu-segmented-control-filter [label]="filtersSmallLabel1" value="0" />
 					<lu-segmented-control-filter [label]="filtersSmallLabel2" value="1" />
 					<lu-segmented-control-filter [label]="filtersSmallLabel3" value="2" />

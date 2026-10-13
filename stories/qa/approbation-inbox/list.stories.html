@@ -844,7 +844,7 @@
 				<div class="demo-QAtable-list">
 					<lu-approbation-inbox-list [detailsComponent]="detailRef">
 						<lu-filter-bar approbationInboxListFilterBar>
-							<lu-segmented-control [ngModel]="'0'" [ngModelOptions]="{ standalone: true }">
+							<lu-segmented-control [value]="'0'">
 								<lu-segmented-control-filter label="By you" value="0" />
 								<lu-segmented-control-filter label="By others" value="1" />
 							</lu-segmented-control>

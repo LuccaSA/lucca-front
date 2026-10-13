@@ -153,7 +153,7 @@ export const ScrollOnOpen = generateStory({
 	#selectRef
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 </lu-simple-select>`,
@@ -321,7 +321,7 @@ export const WithCustomOptionTemplate = generateStory({
 	description: 'Le template d’option occupe toute la largeur de la ligne : un contenu réparti avec `justify-content: space-between` aligne bien sa partie droite sur le bord de l’option.',
 	template: `<lu-simple-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(value)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 >
@@ -653,7 +653,7 @@ export const LegalUnits = generateStory({
 	description: 'Pour saisir une entité légale, il suffit d’utiliser la directive `legalUnits`',
 	template: `<lu-simple-select
 	legalUnits
-	[(ngModel)]="selectedLegalUnit"
+	[(value)]="selectedLegalUnit"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -667,7 +667,7 @@ export const LegalUnitsWithArchived = generateStory({
 	template: `<lu-simple-select
 	legalUnits
 	[enableArchivedLegalUnits]="true"
-	[(ngModel)]="selectedLegalUnit"
+	[(value)]="selectedLegalUnit"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],

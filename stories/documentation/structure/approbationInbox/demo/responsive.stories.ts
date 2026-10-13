@@ -1,5 +1,4 @@
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import {
 	ApprobationInboxDetailComponent,
@@ -46,7 +45,6 @@ export default {
 				IconComponent,
 				CheckboxInputComponent,
 				FormFieldComponent,
-				FormsModule,
 				DividerComponent,
 				CalloutComponent,
 				FilterBarComponent,
@@ -116,14 +114,14 @@ export default {
 				<ng-container mainLayoutSidebar>
             <lu-approbation-inbox-list selectable [detailsComponent]="detailComponentRef">
 					<lu-filter-bar approbationInboxListFilterBar>
-						<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
+						<lu-segmented-control *luFilterPillAddonBefore [(value)]="example">
 							<ng-template #label0>Par vous <lu-numeric-badge [value]="12" /></ng-template>
 							<ng-template #label1>Par d’autres <lu-numeric-badge [value]="5" /></ng-template>
 							<lu-segmented-control-filter [label]="label0" value="0" />
 							<lu-segmented-control-filter [label]="label1" value="1" />
 						</lu-segmented-control>
 						<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
-							<lu-checkbox-input [ngModel]="false" />
+							<lu-checkbox-input [checked]="false" />
 						</lu-filter-pill>
 					</lu-filter-bar>
 					<lu-approbation-inbox-list-group label="Group label">

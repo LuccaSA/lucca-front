@@ -1,6 +1,5 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { LuOptionGroupDirective, SelectDataSource, SelectDataSourceParams } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
@@ -27,10 +26,10 @@ function buildDataSource(): SelectDataSource<ILegume, LegumeColor> {
 
 @Component({
 	selector: 'multi-select-group-datasource-story',
-	imports: [JsonPipe, FormsModule, LuMultiSelectInputComponent, FormFieldComponent, LuOptionGroupDirective],
+	imports: [JsonPipe, LuMultiSelectInputComponent, FormFieldComponent, LuOptionGroupDirective],
 	template: `
 		<lu-form-field label="Légumes par couleur">
-			<lu-multi-select #selectRef placeholder="Choisir des légumes" clearable [(ngModel)]="selectedLegumes" [dataSource]="dataSource">
+			<lu-multi-select #selectRef placeholder="Choisir des légumes" clearable [(value)]="selectedLegumes" [dataSource]="dataSource">
 				<ng-container *luOptionGroup="let group; by: legumeColor; select: selectRef">
 					{{ colorNameByColor[group.key] }}
 				</ng-container>

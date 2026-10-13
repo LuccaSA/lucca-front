@@ -228,7 +228,7 @@ export const ScrollOnOpen = generateStory({
 	description: `À l’ouverture, le panneau doit être positionné en haut de la liste (aucun défilement parasite), même si aucune valeur n’est sélectionnée.`,
 	template: `<lu-multi-select
 	#selectRef
-	[(ngModel)]="selectedLegumes"
+	[(value)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 />`,
@@ -387,7 +387,7 @@ export const WithCustomOptionTemplate = generateStory({
 	description: 'Le template d’option occupe toute la largeur de la ligne : un contenu réparti avec `justify-content: space-between` aligne bien sa partie droite sur le bord de l’option.',
 	template: `<lu-multi-select
 	#selectRef
-	[(ngModel)]="selectedLegumes"
+	[(value)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
@@ -620,7 +620,7 @@ export const LegalUnits = generateStory({
 	description: 'Pour saisir une entité légale, il suffit d’utiliser la directive `legalUnits`',
 	template: `<lu-multi-select
 	legalUnits
-	[(ngModel)]="selectedLegalUnits"
+	[(value)]="selectedLegalUnits"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />
 <pr-story-model-display>{{ selectedLegalUnits | json }}</pr-story-model-display>`,
@@ -641,7 +641,7 @@ export const LegalUnitsWithArchived = generateStory({
 	template: `<lu-multi-select
 	legalUnits
 	[enableArchivedLegalUnits]="true"
-	[(ngModel)]="selectedLegalUnits"
+	[(value)]="selectedLegalUnits"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />
 <pr-story-model-display>{{ selectedLegalUnits | json }}</pr-story-model-display>`,

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import {
 	DataTableBodyComponent,
 	DataTableComponent,
@@ -64,7 +63,6 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 		FormFieldComponent,
 		TextInputComponent,
 		TextareaInputComponent,
-		FormsModule,
 		IndexTableActionComponent,
 		IndexTableActionFileComponent,
 		IndexTableBodyComponent,

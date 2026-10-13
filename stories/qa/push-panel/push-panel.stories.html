@@ -32,10 +32,10 @@
 						</button>
 					</div>
 					<lu-form-field label="Simple select">
-						<lu-simple-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="simpleExample" />
+						<lu-simple-select placeholder="Placeholder" clearable [options]="allLegumes" [(value)]="simpleExample" />
 					</lu-form-field>
 					<lu-form-field label="Multi select">
-						<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [(ngModel)]="multiExample" />
+						<lu-multi-select placeholder="Placeholder" clearable [options]="allLegumes" [(value)]="multiExample" />
 					</lu-form-field>
 				</div>
 			</lu-container>

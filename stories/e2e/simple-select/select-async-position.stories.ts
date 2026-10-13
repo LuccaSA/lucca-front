@@ -1,7 +1,6 @@
 import { HiddenArgType } from '@/helpers/common-arg-types';
 import { allLegumes, ILegume } from '@/stories/forms/select/select.utils';
 import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -12,7 +11,7 @@ import { sleep, waitForAngular } from '@/helpers/test';
 @Component({
 	selector: 'select-async-position-stories',
 	templateUrl: './select-async-position.stories.html',
-	imports: [LuSimpleSelectInputComponent, LuMultiSelectInputComponent, FormFieldComponent, FormsModule],
+	imports: [LuSimpleSelectInputComponent, LuMultiSelectInputComponent, FormFieldComponent],
 	styles: [
 		`
 			.repro {

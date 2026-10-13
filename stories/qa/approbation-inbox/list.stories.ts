@@ -1,6 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import {
 	ApprobationInboxDetailComponent,
 	ApprobationInboxGroupComponent,
@@ -21,7 +20,6 @@ import { applicationConfig, Meta } from '@storybook/angular-vite';
 	selector: 'approbation-inbox-list-stories',
 	templateUrl: './list.stories.html',
 	imports: [
-		FormsModule,
 		ApprobationInboxDetailComponent,
 		ApprobationInboxListComponent,
 		ApprobationInboxItemComponent,
