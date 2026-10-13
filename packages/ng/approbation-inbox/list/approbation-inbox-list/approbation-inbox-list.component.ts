@@ -1,6 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { generateId, getIntl, getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
@@ -20,7 +19,7 @@ interface SelectableItem {
 	templateUrl: './approbation-inbox-list.component.html',
 	styleUrl: './approbation-inbox-list.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [PortalDirective, FormsModule, FormFieldComponent, CheckboxInputComponent, DividerComponent, ButtonComponent, BubbleIllustrationComponent, NgTemplateOutlet, IntlParamsPipe],
+	imports: [PortalDirective, FormFieldComponent, CheckboxInputComponent, DividerComponent, ButtonComponent, BubbleIllustrationComponent, NgTemplateOutlet, IntlParamsPipe],
 	host: {
 		class: 'approbationInbox-list',
 		role: 'region',

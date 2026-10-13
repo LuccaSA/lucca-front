@@ -1,7 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChild, viewChildren, ViewContainerRef } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { mergeRegister } from '@lexical/utils';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { ChipComponent } from '@lucca-front/ng/chip';
@@ -23,7 +21,7 @@ const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.s
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './tag.component.html',
 	styleUrl: './tag.component.scss',
-	imports: [ButtonComponent, ChipComponent, IconComponent, LuSimpleSelectInputComponent, LuOptionGroupDirective, LuOptionDirective, ReactiveFormsModule, FilterPillComponent],
+	imports: [ButtonComponent, ChipComponent, IconComponent, LuSimpleSelectInputComponent, LuOptionGroupDirective, LuOptionDirective, FilterPillComponent],
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,
@@ -52,7 +50,6 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 	});
 	readonly secondaryHasGroup = computed(() => this.secondaryTags().some((s) => isNotNil(s.group)));
 	readonly tagSearch = signal<string>('');
-	readonly selectedTagControl = new FormControl<Tag | null>(null);
 
 	// Anchor the dropdown to the trigger button, opening below it (flipping above if there isn't room).
 	readonly popoverPositions: ConnectionPositionPair[] = [
@@ -93,13 +90,14 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 				{ tag: [SKIP_DOM_SELECTION_TAG, INITIAL_UPDATE_TAG] },
 			);
 		});
+	}
 
-		this.selectedTagControl.valueChanges.pipe(takeUntilDestroyed()).subscribe((tag) => {
-			if (tag) {
-				this.selectedTagControl.reset();
-				this.insertTag(tag);
-			}
-		});
+	selectTag(tag: Tag | null, select: LuSimpleSelectInputComponent<Tag>): void {
+		if (tag) {
+			// The select only triggers the insertion, it never keeps the picked tag
+			select.value.set(null);
+			this.insertTag(tag);
+		}
 	}
 
 	setEditorInstance(editor: LexicalEditor): void {

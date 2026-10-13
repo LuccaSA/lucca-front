@@ -6,12 +6,7 @@
 				hiddenLabel
 				class="approbationInbox-list-content-groupOptional-header-formfieldOptional"
 			>
-				<lu-checkbox-input
-					[ngModel]="allChecked()"
-					[ngModelOptions]="{ standalone: true }"
-					[mixed]="groupMixed()"
-					(ngModelChange)="onGroupChange($event)"
-				/>
+				<lu-checkbox-input [checked]="allChecked()" [mixed]="groupMixed()" (checkedChange)="onGroupChange($event)" />
 			</lu-form-field>
 		}
 		<button

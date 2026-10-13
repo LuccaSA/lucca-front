@@ -14,7 +14,6 @@ import {
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -25,7 +24,7 @@ import { LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS } from './approbation-inbox
 	selector: 'lu-approbation-inbox-list-item',
 	templateUrl: './approbation-inbox-list-item.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [FormFieldComponent, CheckboxInputComponent, FormsModule, IntlParamsPipe],
+	imports: [FormFieldComponent, CheckboxInputComponent, IntlParamsPipe],
 	host: {
 		class: 'approbationInbox-list-content-items-item',
 		role: 'listitem',
