@@ -3,5 +3,9 @@
 lu-tag,
 pr-tag {
 	display: inline-flex;
-	max-inline-size: 100%;
+
+	&.mod-withEllipsis {
+		max-inline-size: 100%;
+		min-inline-size: 0;
+	}
 }
