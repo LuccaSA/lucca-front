@@ -2,3 +2,7 @@
 	--components-presentation-font: var(--pr-t-font-body-S);
 	--components-presentation-term-font: var(--pr-t-font-body-XS);
 }
+
+@mixin wrapperS {
+	--components-presentation-wrapper-gap: var(--pr-t-spacings-50);
+}
