@@ -1,7 +1,6 @@
 import { provideRouter } from '@angular/router';
 import { ERROR_PAGE_ILLUSTRATION, ErrorPageComponent } from '@lucca-front/ng/error-page';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/ErrorPage/Angular/Basic',
@@ -14,10 +13,10 @@ export default {
 			providers: [provideRouter([])],
 		}),
 	],
-	render: (args: ErrorPageComponent, context) => {
-		const { ...inputs } = args;
+	render: (args: ErrorPageComponent) => {
+		// `heading` and `illustration` are required inputs: always render them, even when empty
 		return {
-			template: `<lu-error-page${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-error-page heading="${args.heading ?? ''}" illustration="${args.illustration ?? ''}">
 	<p>La page que vous cherchez n’existe pas.</p>
 	<p><a href="#">Revenir à la page précédente</a></p>
 </lu-error-page>`,
