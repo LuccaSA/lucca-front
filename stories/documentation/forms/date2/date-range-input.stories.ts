@@ -1,7 +1,17 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, LOCALE_ID, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { CALENDAR_MODE, CalendarShortcut, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateRange, DateRangeInputComponent, luDate2Translations, PremadeShortcuts, validDateRange } from '@lucca-front/ng/date2';
+import {
+	CALENDAR_MODE,
+	CalendarShortcut,
+	DATE2_CLEAR_BEHAVIOR,
+	DATE_FORMAT_CONST,
+	DateRange,
+	DateRangeInputComponent,
+	luDate2Translations,
+	PremadeShortcuts,
+	validDateRange,
+} from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 

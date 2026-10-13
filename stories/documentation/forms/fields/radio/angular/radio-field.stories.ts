@@ -91,7 +91,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 				},
 				argTypes,
 			)}>
-	<lu-radio-group-input${generateInputs(inputArgs, argTypes)} [(value)]="example">
+	<lu-radio-group-input${generateInputs(inputArgs, argTypes)} [(value)]="model.example">
 		<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 		<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
 		<ng-template #template><strong>Option</strong> text</ng-template>

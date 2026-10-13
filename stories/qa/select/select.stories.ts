@@ -8,14 +8,7 @@ import { Meta } from '@storybook/angular-vite';
 @Component({
 	selector: 'select-stories',
 	templateUrl: './select.stories.html',
-	imports: [
-		LuSimpleSelectInputComponent,
-		LuMultiSelectInputComponent,
-		LuMultiSelectCounterDisplayerComponent,
-		LuMultiSelectDisplayerInputDirective,
-		LuMultiDisplayerDirective,
-		FormFieldComponent,
-	],
+	imports: [LuSimpleSelectInputComponent, LuMultiSelectInputComponent, LuMultiSelectCounterDisplayerComponent, LuMultiSelectDisplayerInputDirective, LuMultiDisplayerDirective, FormFieldComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SelectStory {

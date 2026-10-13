@@ -93,7 +93,7 @@ export const Basic: StoryObj<ColorInputComponent & FormFieldComponent & { requir
 				},
 				argTypes,
 			)}>
-	<lu-color-input [(value)]="example" [colors]="colors"${generateInputs(inputArgs, argTypes)} />
+	<lu-color-input [(value)]="model.example" [colors]="colors"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ model.example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
