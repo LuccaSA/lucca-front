@@ -12,9 +12,6 @@ import { TagSize } from './tag.type';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, RouterLink, LuTooltipModule],
-	host: {
-		'[class.mod-withEllipsis]': 'withEllipsis() && !link()',
-	},
 })
 export class TagComponent {
 	/**

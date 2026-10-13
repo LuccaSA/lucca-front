@@ -4,8 +4,7 @@ lu-tag,
 pr-tag {
 	display: inline-flex;
 
-	&.mod-withEllipsis {
+	&:has(> .tag > .tag-content.pr-u-ellipsis) {
 		max-inline-size: 100%;
-		min-inline-size: 0;
 	}
 }
