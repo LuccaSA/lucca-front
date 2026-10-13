@@ -1,8 +1,8 @@
+import { setStoryOptions } from '@/helpers/stories';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DIVIDER_SIZE, DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { setStoryOptions } from '@/helpers/stories';
 
 interface DividerBasicStory {
 	size: string;
@@ -40,7 +40,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Ajoute `role="separator"` au composant pour qu’il soit restitué comme un séparateur par les technologies d’assistance.',
+			description: 'Ajoute `role="separator"` au composant pour qu’il soit restitué comme un séparateur par les technologies d’assistance. Son éventuel contenu textuel ne sera alors plus restitué.',
 			table: { category: 'inputs' },
 		},
 		button: {
