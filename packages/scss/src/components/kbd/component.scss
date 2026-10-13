@@ -31,7 +31,7 @@ $keysMax: 6;
 	animation-duration: var(--components-kbd-animationDuration);
 	animation-iteration-count: infinite;
 	animation-name: var(--components-kbd-animationName);
-	animation-timing-function: ease-in-out;
+	animation-timing-function: step-end;
 
 	&:has(.lucca-icon) {
 		--components-kbd-paddingInline: 0;
