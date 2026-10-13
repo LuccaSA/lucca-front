@@ -251,15 +251,9 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			});
 		});
 
-		ɵeffectWithDeps([this.mode, this.calendarMode], (mode, calendarMode) => {
-			if (mode && isNil(calendarMode)) {
-				this.calendarMode.set(mode);
-			}
-		});
-
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
-			if (tabbableDate && !comparePeriods(calendarMode ?? null, tabbableDate, this.currentDate(), this.weekOptions)) {
-				this.currentDate.set(startOfPeriod(calendarMode ?? null, tabbableDate));
+			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate(), this.weekOptions)) {
+				this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
 			}
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
 				this.calendar()?.blurTabbableDate();
