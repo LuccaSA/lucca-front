@@ -22,6 +22,7 @@
 			position: relative;
 			text-decoration: none;
 			gap: var(--pr-t-spacings-100);
+			user-select: var(--components-sortableList-item-userSelect);
 
 			// required to overload the cdk padding reset
 			padding: var(--components-sortableList-padding) !important;
