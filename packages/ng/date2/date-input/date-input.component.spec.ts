@@ -208,7 +208,6 @@ describe('DateInputComponent', () => {
 		});
 	});
 
-	});
 	describe('humanized', () => {
 		const numericFormat = (date: Date) => new Intl.DateTimeFormat('fr-FR').format(date);
 

@@ -78,7 +78,7 @@ describe('FilterBarComponent: the optional pills selector', () => {
 		expect(trigger.querySelector('.filterPill-label, .filterPill-value')).toBeNull();
 		expect(labels()).toEqual(['Date']);
 		expect(select.options()?.map((pill) => pill.label())).toEqual(['Période', 'Établissement']);
-		expect(select.value).toEqual([]);
+		expect(select.value()).toEqual([]);
 	});
 
 	it('displays the pills selected in the multi-select', () => {

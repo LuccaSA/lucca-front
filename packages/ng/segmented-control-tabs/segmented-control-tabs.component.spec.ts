@@ -6,7 +6,7 @@ import { SegmentedControlTabsComponent } from './segmented-control-tabs.componen
 
 @Component({
 	template: `
-		<lu-segmented-control-tabs [(active)]="active">
+		<lu-segmented-control-tabs [(value)]="active">
 			<lu-segmented-control-tabs-panel label="List" value="list">List content</lu-segmented-control-tabs-panel>
 			<lu-segmented-control-tabs-panel label="Grid view" icon="tiles" hiddenLabel value="grid">Grid content</lu-segmented-control-tabs-panel>
 			<lu-segmented-control-tabs-panel label="Map" icon="mapPlan" value="map">Map content</lu-segmented-control-tabs-panel>
