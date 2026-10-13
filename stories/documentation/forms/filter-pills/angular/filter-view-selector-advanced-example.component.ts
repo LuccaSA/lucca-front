@@ -1,6 +1,5 @@
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
@@ -37,7 +36,7 @@ export interface SavedView {
 			<lu-dialog-header><h1>Modifier le nom de la vue</h1></lu-dialog-header>
 			<lu-dialog-content>
 				<lu-form-field label="Nom de la vue">
-					<lu-text-input [ngModel]="view.name" />
+					<lu-text-input [value]="view.name" />
 				</lu-form-field>
 			</lu-dialog-content>
 			<lu-dialog-footer>
@@ -48,7 +47,7 @@ export interface SavedView {
 			</lu-dialog-footer>
 		</lu-dialog>
 	`,
-	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, DialogDismissDirective, ButtonComponent, FormFieldComponent, TextInputComponent, FormsModule],
+	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, DialogDismissDirective, ButtonComponent, FormFieldComponent, TextInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RenameViewDialogComponent {
@@ -117,19 +116,19 @@ const emptyState = (): FilterState => ({
 			(deleteView)="openDelete($event)"
 		/>
 		<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
-			<lu-checkbox-input [(ngModel)]="state.includeFormerEmployees" />
+			<lu-checkbox-input [(checked)]="state.includeFormerEmployees" />
 		</lu-filter-pill>
 		<lu-filter-pill label="Légume (multi)" name="legumes">
-			<lu-multi-select [(ngModel)]="state.legumes" [options]="legumes | filterLegumes: clue" [totalCount]="legumes.length" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" />
+			<lu-multi-select [(value)]="state.legumes" [options]="legumes | filterLegumes: clue" [totalCount]="legumes.length" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" />
 		</lu-filter-pill>
 		<lu-filter-pill label="Catégorie (simple)" optional name="category">
-			<lu-simple-select [(ngModel)]="state.category" [options]="legumes | filterLegumes: clue" (clueChange)="clue = $event" />
+			<lu-simple-select [(value)]="state.category" [options]="legumes | filterLegumes: clue" (clueChange)="clue = $event" />
 		</lu-filter-pill>
 		<lu-filter-pill label="Date de début" optional name="startingDate">
-			<lu-date-input [(ngModel)]="state.startingDate" />
+			<lu-date-input [(value)]="state.startingDate" />
 		</lu-filter-pill>
 		<lu-filter-pill label="Période" optional name="period">
-			<lu-date-range-input [(ngModel)]="state.period" />
+			<lu-date-range-input [(value)]="state.period" />
 		</lu-filter-pill>
 		<ng-container *luFilterPillAddonAfter>
 			<button type="submit" size="S" luButton="outlined">Exporter</button>
@@ -149,7 +148,6 @@ const emptyState = (): FilterState => ({
 		LuCoreSelectTotalCountDirective,
 		LuSimpleSelectInputComponent,
 		FilterLegumesPipe,
-		FormsModule,
 	],
 	providers: [provideLuDialog()],
 	changeDetection: ChangeDetectionStrategy.OnPush,

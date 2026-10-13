@@ -306,10 +306,10 @@ export const CustomizationTEST = createTestStory(
 		render: () => ({
 			props: { legumes: allLegumes },
 			template: `<lu-filter-pill label="Légume" placeholder="Tous" icon="heart">
-	<lu-simple-select [ngModel]="null" [options]="legumes" />
+	<lu-simple-select [value]="null" [options]="legumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
-	<lu-date-input [ngModel]="null" />
+	<lu-date-input [value]="null" />
 </lu-filter-pill>`,
 		}),
 	},

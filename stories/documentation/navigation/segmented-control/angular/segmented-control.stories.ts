@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -15,7 +14,7 @@ interface segmentedControlBasicStory {
 export default {
 	decorators: [
 		moduleMetadata({
-			imports: [NumericBadgeComponent, SegmentedControlComponent, SegmentedControlFilterComponent, FormsModule, StoryModelDisplayComponent],
+			imports: [NumericBadgeComponent, SegmentedControlComponent, SegmentedControlFilterComponent, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -48,7 +47,7 @@ function getTemplate(args: segmentedControlBasicStory): string {
 	return `<ng-template #label>
 	Lorem${numericBadgeComponent}
 </ng-template>
-<lu-segmented-control${size}${vertical}${ariaLabel} [(ngModel)]="sample">
+<lu-segmented-control${size}${vertical}${ariaLabel} [(value)]="sample">
 	<lu-segmented-control-filter [label]="label" value="0" />
 	<lu-segmented-control-filter label="Ipsum" value="1" />
 	<lu-segmented-control-filter label="Dolor sit amet" value="2" />

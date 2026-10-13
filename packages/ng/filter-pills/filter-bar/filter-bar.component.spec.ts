@@ -10,7 +10,7 @@ import { FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective } from '.
 			<span class="addonBefore" *luFilterPillAddonBefore>Before</span>
 			<button class="addonAfter" *luFilterPillAddonAfter type="button">Export</button>
 		</lu-filter-bar>
-		<lu-segmented-control-tabs #tabs [(active)]="active">
+		<lu-segmented-control-tabs #tabs [(value)]="active">
 			<lu-segmented-control-tabs-panel label="List" value="list">List content</lu-segmented-control-tabs-panel>
 			<lu-segmented-control-tabs-panel label="Grid" value="grid">Grid content</lu-segmented-control-tabs-panel>
 		</lu-segmented-control-tabs>

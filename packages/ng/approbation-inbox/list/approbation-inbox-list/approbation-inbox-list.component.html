@@ -9,10 +9,9 @@
 		@if (selectable() && !empty()) {
 			<lu-form-field [label]="intl().selectAll" class="approbationInbox-list-formSelectionOptional-formfield">
 				<lu-checkbox-input
-					[ngModel]="selectAllState() === true"
-					[ngModelOptions]="{ standalone: true }"
+					[checked]="selectAllState() === true"
 					[mixed]="selectAllState() === 'mixed'"
-					(ngModelChange)="toggleSelectAll()"
+					(checkedChange)="toggleSelectAll()"
 				/>
 			</lu-form-field>
 			<lu-divider />

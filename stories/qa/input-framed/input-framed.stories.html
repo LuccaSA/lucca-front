@@ -50,7 +50,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-radio-group-input [(ngModel)]="radioDefault" framed>
+					<lu-radio-group-input [(value)]="radioDefault" framed>
 						<lu-radio value="A">Option A</lu-radio>
 						<lu-radio value="B">Option B</lu-radio>
 					</lu-radio-group-input>
@@ -94,12 +94,12 @@
 					<div class="inputFramedWrapper">
 						<lu-input-framed>
 							<lu-form-field label="Option A">
-								<lu-checkbox-input [(ngModel)]="checkboxA" />
+								<lu-checkbox-input [(checked)]="checkboxA" />
 							</lu-form-field>
 						</lu-input-framed>
 						<lu-input-framed>
 							<lu-form-field label="Option B">
-								<lu-checkbox-input [(ngModel)]="checkboxB" />
+								<lu-checkbox-input [(checked)]="checkboxB" />
 							</lu-form-field>
 						</lu-input-framed>
 					</div>
@@ -179,7 +179,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-radio-group-input [(ngModel)]="radioDisabled" framed>
+					<lu-radio-group-input [(value)]="radioDisabled" framed>
 						<lu-radio value="A" disabled>Option A (radio)</lu-radio>
 						<lu-radio value="B" disabled>Option B (radio)</lu-radio>
 					</lu-radio-group-input>
@@ -188,12 +188,12 @@
 					<div class="inputFramedWrapper">
 						<lu-input-framed>
 							<lu-form-field label="Option A (checkbox)">
-								<lu-checkbox-input [(ngModel)]="checkboxDisabledA" disabled />
+								<lu-checkbox-input [(checked)]="checkboxDisabledA" disabled />
 							</lu-form-field>
 						</lu-input-framed>
 						<lu-input-framed>
 							<lu-form-field label="Option B (checkbox)">
-								<lu-checkbox-input [(ngModel)]="checkboxDisabledB" disabled />
+								<lu-checkbox-input [(checked)]="checkboxDisabledB" disabled />
 							</lu-form-field>
 						</lu-input-framed>
 					</div>
@@ -246,7 +246,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-radio-group-input [(ngModel)]="radioTag" framed>
+					<lu-radio-group-input [(value)]="radioTag" framed>
 						<lu-radio value="A" tag="Tag">Option A</lu-radio>
 						<lu-radio value="B" tag="Tag">Option B</lu-radio>
 					</lu-radio-group-input>
@@ -295,7 +295,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-radio-group-input [(ngModel)]="radioInfo" framed>
+					<lu-radio-group-input [(value)]="radioInfo" framed>
 						<lu-radio value="A">
 							Option A
 							<ng-container info>Additional information for option A</ng-container>
@@ -350,7 +350,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-radio-group-input [(ngModel)]="radioPanel" framed>
+					<lu-radio-group-input [(value)]="radioPanel" framed>
 						<lu-radio value="A" framedPortal="Lorem ipsum dolor sit amet">Option A</lu-radio>
 						<lu-radio value="B" framedPortal="Lorem ipsum dolor sit amet">Option B</lu-radio>
 					</lu-radio-group-input>
@@ -413,7 +413,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-radio-group-input [(ngModel)]="radioIllustration" framed>
+					<lu-radio-group-input [(value)]="radioIllustration" framed>
 						<lu-radio value="A">
 							Option A
 							<ng-container illustration>
@@ -474,7 +474,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-radio-group-input [(ngModel)]="radioSizeL" framed framedSize="L">
+					<lu-radio-group-input [(value)]="radioSizeL" framed framedSize="L">
 						<lu-radio value="A">Option A</lu-radio>
 						<lu-radio value="B">Option B</lu-radio>
 					</lu-radio-group-input>
@@ -537,7 +537,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-radio-group-input [(ngModel)]="radioIllustration" framed framedCenter>
+					<lu-radio-group-input [(value)]="radioIllustration" framed framedCenter>
 						<lu-radio value="A">
 							Option A with a longer label text
 							<ng-container illustration>
@@ -638,7 +638,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
-					<lu-radio-group-input [(ngModel)]="radioDefault" framed>
+					<lu-radio-group-input [(value)]="radioDefault" framed>
 						<lu-grid columns="2">
 							<lu-grid-column [responsive]="{ colspanAtMediaMinXS: 1 }">
 								<lu-radio value="A">Option A</lu-radio>

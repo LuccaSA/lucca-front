@@ -16,9 +16,8 @@
 					#optionalPillsSelect
 					[options]="optionalPillOptions()"
 					[optionComparer]="optionalPillComparer"
-					[ngModel]="displayedOptionalPills()"
-					[ngModelOptions]="{ standalone: true }"
-					(ngModelChange)="displayOptionalPills($event)"
+					[value]="displayedOptionalPills()"
+					(valueChange)="displayOptionalPills($event)"
 					(clueChange)="clue.set($event)"
 				>
 					<ng-container *luOption="let pill; select: optionalPillsSelect">{{ pill.label() }}</ng-container>

@@ -1,6 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
@@ -38,7 +37,6 @@ export default {
 				DateRangeInputComponent,
 				ButtonComponent,
 				IconComponent,
-				FormsModule,
 				AdvancedFilterViewStoryComponent,
 			],
 		}),
@@ -72,13 +70,13 @@ export default {
 		(deleteView)="onDelete($event)"
 	/>
 	<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
-		<lu-checkbox-input [ngModel]="false" />
+		<lu-checkbox-input [checked]="false" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Date de début" optional name="startingDate">
-		<lu-date-input [(ngModel)]="example1" />
+		<lu-date-input [(value)]="example1" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Période">
-		<lu-date-range-input [(ngModel)]="examplePeriod" />
+		<lu-date-range-input [(value)]="examplePeriod" />
 	</lu-filter-pill>
 	<ng-container *luFilterPillAddonAfter>
 		<button type="submit" size="S" luButton="outlined">Exporter</button>

@@ -10,7 +10,7 @@
 			<td>Simple tree empty</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-simple-select placeholder="Placeholder" clearable [treeSelect]="groupingFn" [options]="allLegumes" [ngModel]="null" />
+					<lu-simple-select placeholder="Placeholder" clearable [treeSelect]="groupingFn" [options]="allLegumes" [value]="null" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -23,7 +23,7 @@
 						clearable
 						[treeSelect]="groupingFn"
 						[options]="allLegumes"
-						[(ngModel)]="simpleExample"
+						[(value)]="simpleExample"
 					/>
 				</lu-form-field>
 			</td>
@@ -32,7 +32,7 @@
 			<td>Multi tree empty</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-multi-select placeholder="Placeholder" clearable [treeSelect]="groupingFn" [options]="allLegumes" [ngModel]="[]" />
+					<lu-multi-select placeholder="Placeholder" clearable [treeSelect]="groupingFn" [options]="allLegumes" [value]="[]" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -40,13 +40,7 @@
 			<td>Multi tree filled</td>
 			<td>
 				<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-					<lu-multi-select
-						placeholder="Placeholder"
-						clearable
-						[treeSelect]="groupingFn"
-						[options]="allLegumes"
-						[(ngModel)]="multiExample"
-					/>
+					<lu-multi-select placeholder="Placeholder" clearable [treeSelect]="groupingFn" [options]="allLegumes" [(value)]="multiExample" />
 				</lu-form-field>
 			</td>
 		</tr>
@@ -60,7 +54,7 @@
 						disabled
 						[treeSelect]="groupingFn"
 						[options]="allLegumes"
-						[ngModel]="simpleExample"
+						[value]="simpleExample"
 					/>
 				</lu-form-field>
 			</td>

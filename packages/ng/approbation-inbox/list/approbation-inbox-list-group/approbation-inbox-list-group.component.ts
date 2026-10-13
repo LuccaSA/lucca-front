@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, model, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -12,7 +11,7 @@ import { LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS } from './approbation-inbo
 	selector: 'lu-approbation-inbox-list-group',
 	templateUrl: './approbation-inbox-list-group.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, FormFieldComponent, CheckboxInputComponent, FormsModule, IntlParamsPipe],
+	imports: [IconComponent, FormFieldComponent, CheckboxInputComponent, IntlParamsPipe],
 	host: {
 		class: 'approbationInbox-list-content-groupOptional',
 		role: 'listitem',

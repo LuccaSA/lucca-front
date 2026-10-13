@@ -1,5 +1,5 @@
 import { LOCALE_ID } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { luNumberFormatFieldTranslations, NumberFormatInputComponent } from '@lucca-front/ng/forms';
@@ -12,7 +12,7 @@ export default {
 	title: 'Documentation/Forms/Fields/NumberFormatField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
+			imports: [NumberFormatInputComponent, FormFieldComponent, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -173,11 +173,11 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input [(ngModel)]="example"${generateInputs({ ...inputArgs, width: inputWidth }, argTypes)} />
+	<lu-number-format-input [(value)]="example"${generateInputs({ ...inputArgs, width: inputWidth }, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberFormatInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -220,11 +220,11 @@ export const WithCurrency: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-number-format-input [(value)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberFormatInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -266,11 +266,11 @@ export const WithUnitKm: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-number-format-input [(value)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberFormatInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -312,11 +312,11 @@ export const WithPercent: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-format-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
+	<lu-number-format-input [(value)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberFormatInputComponent, FormFieldComponent, BrowserAnimationsModule],
 			},
 		};
 	},

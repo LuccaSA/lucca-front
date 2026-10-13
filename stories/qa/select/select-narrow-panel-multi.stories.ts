@@ -1,7 +1,6 @@
 import { allLegumes, ILegume } from '@/stories/forms/select/select.utils';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, StoryObj } from '@storybook/angular-vite';
@@ -25,10 +24,10 @@ const forceNarrowBreakpoint = { provide: BreakpointObserver, useValue: new Stati
 	selector: 'select-narrow-panel-multi',
 	template: `
 		<lu-form-field label="Légumes">
-			<lu-multi-select [options]="legumes" [(ngModel)]="value" />
+			<lu-multi-select [options]="legumes" [(value)]="value" />
 		</lu-form-field>
 	`,
-	imports: [LuMultiSelectInputComponent, FormsModule, FormFieldComponent],
+	imports: [LuMultiSelectInputComponent, FormFieldComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [forceNarrowBreakpoint],
 })

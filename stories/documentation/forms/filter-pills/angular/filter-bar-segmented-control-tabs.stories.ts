@@ -36,13 +36,13 @@ export const SegmentedControlTabs: StoryObj<FilterBarComponent & { actionButton:
 			},
 			template: `<lu-filter-bar [segmentedControlTabs]="tabs"${args['manualApply'] ? ' manualApply' : ''}>
 	<lu-filter-pill label="Établissement" name="establishment">
-		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
+		<lu-simple-select [value]="null" apiV4="/organization/structure/api/establishments" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Départements" name="departments">
-		<lu-multi-select [ngModel]="[]" departments [filterPillLabelPluralFn]="departmentsPluralFn" />
+		<lu-multi-select [value]="[]" departments [filterPillLabelPluralFn]="departmentsPluralFn" />
 	</lu-filter-pill>
 	<lu-form-field label="Rechercher" hiddenLabel>
-		<lu-text-input [ngModel]="null" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+		<lu-text-input [value]="null" hasSearchIcon hasClearer />
 	</lu-form-field>${applyButton}${actionButton}
 </lu-filter-bar>
 <lu-segmented-control-tabs #tabs ariaLabel="Affichage">

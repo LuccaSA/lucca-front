@@ -1,7 +1,6 @@
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input, LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department'; // v20.2
@@ -35,7 +34,6 @@ interface SavedView {
 		DateRangeInputComponent,
 		LuCoreSelectDepartmentsDirective,
 		TreeSelectDirective,
-		FormsModule,
 		FilterLegumesPipe,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,

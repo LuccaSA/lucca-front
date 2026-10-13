@@ -79,7 +79,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	readonly optionKey = this.selectInput.optionKey;
 	intl = this.selectInput.intl;
 
-	selectedOptions: T[] = this.selectInput.value || [];
+	selectedOptions: T[] = this.selectInput.selectedOptions();
 	readonly optionTpl = this.selectInput.optionTpl;
 
 	readonly options = signal<ɵCoreSelectPanelElement<T>[]>([]);

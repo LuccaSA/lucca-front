@@ -1,6 +1,5 @@
 import { allLegumes } from '@/stories/forms/select/select.utils';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	DialogComponent,
@@ -27,16 +26,16 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular-vite';
 
 			<lu-dialog-content>
 				<lu-form-field label="Test">
-					<lu-simple-select ngModel [options]="legumes" />
+					<lu-simple-select [options]="legumes" />
 				</lu-form-field>
 				<lu-form-field label="Test">
-					<lu-simple-select ngModel [options]="legumes" />
+					<lu-simple-select [options]="legumes" />
 				</lu-form-field>
 				<lu-form-field label="Test">
-					<lu-simple-select ngModel [options]="legumes" />
+					<lu-simple-select [options]="legumes" />
 				</lu-form-field>
 				<lu-form-field label="Test">
-					<lu-simple-select ngModel [options]="legumes" />
+					<lu-simple-select [options]="legumes" />
 				</lu-form-field>
 			</lu-dialog-content>
 
@@ -49,17 +48,7 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular-vite';
 			</lu-dialog-footer>
 		</lu-dialog>
 	`,
-	imports: [
-		DialogFooterComponent,
-		DialogContentComponent,
-		DialogHeaderComponent,
-		DialogComponent,
-		ButtonComponent,
-		DialogDismissDirective,
-		FormFieldComponent,
-		LuSimpleSelectInputComponent,
-		FormsModule,
-	],
+	imports: [DialogFooterComponent, DialogContentComponent, DialogHeaderComponent, DialogComponent, ButtonComponent, DialogDismissDirective, FormFieldComponent, LuSimpleSelectInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DialogContentStoryComponent {

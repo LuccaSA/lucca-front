@@ -37,8 +37,12 @@
 				[attr.autocomplete]="autocomplete() ? autocomplete() : null"
 				class="textField-input-value"
 				[placeholder]="placeholder()"
-				[formControl]="ngControl.control"
-				(blur)="blur.emit($event)"
+				[ngModel]="value()"
+				(ngModelChange)="value.set($event)"
+				[ngModelOptions]="{ standalone: true }"
+				[disabled]="disabled()"
+				[required]="required()"
+				(blur)="blur.emit($event); touch.emit()"
 				[mask]="mask"
 				[attr.minlength]="minlength() > 0 ? minlength() : null"
 				[attr.maxlength]="maxlength() > 0 ? maxlength() : null"
@@ -51,8 +55,12 @@
 				[attr.autocomplete]="autocomplete() ? autocomplete() : null"
 				class="textField-input-value"
 				[placeholder]="placeholder()"
-				[formControl]="ngControl.control"
-				(blur)="blur.emit($event)"
+				[ngModel]="value()"
+				(ngModelChange)="value.set($event)"
+				[ngModelOptions]="{ standalone: true }"
+				[disabled]="disabled()"
+				[required]="required()"
+				(blur)="blur.emit($event); touch.emit()"
 				[attr.minlength]="minlength() > 0 ? minlength() : null"
 				[attr.maxlength]="maxlength() > 0 ? maxlength() : null"
 				#inputElement
@@ -91,7 +99,7 @@
 	}
 </div>
 <ng-container *luPresentationDisplayDefault>
-	@if (ngControl.value) {
+	@if (value()) {
 		@if (prefix(); as prefix) {
 			<ng-container
 				*ngTemplateOutlet="
@@ -103,7 +111,7 @@
 				"
 			/>
 		}
-		{{ ngControl.value }}
+		{{ value() }}
 		@if (suffix()) {
 			<ng-container
 				*ngTemplateOutlet="

@@ -8,3 +8,4 @@ export * from './date-range-input/calendar-shortcut';
 export * from './date-range-input/date-range-input.component';
 export * from './date2.type';
 export * from './date2.translate';
+export * from './validators';

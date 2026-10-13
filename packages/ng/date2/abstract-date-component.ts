@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, linkedSignal, LOCALE_ID, output, signal } from '@angular/core';
-import { intlInputOptions, isNotNil, luBooleanAttribute, luNullableBooleanAttribute } from '@lucca-front/ng/core';
+import { intlInputOptions, isNil, isNotNil, luBooleanAttribute, luNullableBooleanAttribute } from '@lucca-front/ng/core';
 import { addMonths, addYears, FirstWeekContainsDateOptions, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
 import { WEEK_INFO } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
@@ -33,11 +33,11 @@ export abstract class AbstractDateComponent {
 
 	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
-	onTouched?: () => void;
-	readonly disabled = signal<boolean>(false);
+	readonly disabled = input(false, { transform: luBooleanAttribute });
+
+	readonly touch = output<void>();
 
 	readonly format = input<DateFormat>(DATE_FORMAT.DATE);
-	protected readonly inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
 
 	readonly ranges = input([], {
 		transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange).filter((range): range is DateRange => range !== null),
@@ -52,11 +52,11 @@ export abstract class AbstractDateComponent {
 
 	readonly getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 
-	readonly min = input(new Date('1/1/1000'), {
-		transform: transformDateInputToDate,
+	readonly min = input<Date | undefined, Date | string | null | undefined>(new Date('1/1/1000'), {
+		transform: (value) => (isNil(value) ? undefined : transformDateInputToDate(value)),
 	});
-	readonly max = input(null, {
-		transform: transformDateInputToDate,
+	readonly max = input<Date | undefined, Date | string | null | undefined>(undefined, {
+		transform: (value) => (isNil(value) ? undefined : transformDateInputToDate(value)),
 	});
 	readonly focusedDate = input(null, {
 		transform: transformDateInputToDate,
@@ -139,14 +139,6 @@ export abstract class AbstractDateComponent {
 
 	next(mode: CalendarMode) {
 		this.move(1, mode);
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
-	}
-
-	setDisabledState?(isDisabled: boolean): void {
-		this.disabled.set(isDisabled);
 	}
 
 	move(direction: 1 | -1, mode: CalendarMode): void {

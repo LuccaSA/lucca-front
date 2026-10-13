@@ -1,6 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
@@ -35,7 +34,6 @@ export default {
 				FilterPillComponent,
 				FilterViewSelectorComponent,
 				CheckboxInputComponent,
-				FormsModule,
 				DateRangeInputComponent,
 				DateInputComponent,
 				ButtonComponent,
@@ -154,22 +152,22 @@ export default {
 		const applyFiltersButton = args['manualApply'] ? `<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>` : '';
 		const periodFilter = args['optionalFilter']
 			? `<lu-filter-pill label="Période" optional name="period"${args['groupedOptionalFilters'] ? ' grouping="Dates"' : ''}>
-		<lu-date-range-input [(ngModel)]="examplePeriod" />
+		<lu-date-range-input [(value)]="examplePeriod" />
 	</lu-filter-pill>`
 			: '';
 		const groupedFilters =
 			args['optionalFilter'] && args['groupedOptionalFilters']
 				? `<lu-filter-pill label="Date d’entrée" optional name="hireDate" grouping="Dates">
-		<lu-date-input [(ngModel)]="exampleHireDate" />
+		<lu-date-input [(value)]="exampleHireDate" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Départements" optional name="optionalDepartments" grouping="Organisation">
-		<lu-multi-select [ngModel]="[]" departments filterPillLabelPlural="départements" />
+		<lu-multi-select [value]="[]" departments filterPillLabelPlural="départements" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Établissement" optional name="optionalEstablishment" grouping="Organisation">
-		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
+		<lu-simple-select [value]="null" apiV4="/organization/structure/api/establishments" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Collaborateurs partis" optional name="formerEmployees" grouping="Organisation">
-		<lu-checkbox-input [ngModel]="false" />
+		<lu-checkbox-input [checked]="false" />
 	</lu-filter-pill>`
 				: '';
 		const filterViewSelectorEnabled = args['views'] && args['filterViewSelector'];
@@ -233,7 +231,7 @@ export default {
 			(renameView)="renameView($event)"
 			(deleteView)="deleteView($event)"
 		/>`
-				: `<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
+				: `<lu-segmented-control *luFilterPillAddonBefore [(value)]="example">
 		<ng-template #label0>Tous <lu-numeric-badge [value]="12" /></ng-template>
 		<ng-template #label2>Approuvés <lu-numeric-badge [value]="3" /></ng-template>
 		<lu-segmented-control-filter [label]="label0" value="0" />
@@ -269,21 +267,21 @@ export default {
 			template: `<lu-filter-bar${args['manualApply'] ? ' manualApply' : ''} [resultsCount]="resultsCount">
 	${views}
 	<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
-		<lu-checkbox-input [ngModel]="false" />
+		<lu-checkbox-input [checked]="false" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Établissement" name="establishment">
-		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
+		<lu-simple-select [value]="null" apiV4="/organization/structure/api/establishments" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Départements" name="departments">
-		<lu-multi-select [ngModel]="[]" departments [filterPillLabelPluralFn]="departmentsPluralFn" />
+		<lu-multi-select [value]="[]" departments [filterPillLabelPluralFn]="departmentsPluralFn" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Date de début" name="startingDate">
-		<lu-date-input [(ngModel)]="example1" />
+		<lu-date-input [(value)]="example1" />
 	</lu-filter-pill>
 	${periodFilter}
 	${groupedFilters}
 	<lu-form-field label="Test" hiddenLabel>
-		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+		<lu-text-input [value]="example2" hasSearchIcon hasClearer />
 	</lu-form-field>
 	${applyFiltersButton}
 	${addonAfter}
@@ -293,17 +291,16 @@ ${saveViewDropdownTemplate}`,
 	},
 } as Meta;
 
-export const Basic: StoryObj<
-	FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; groupedOptionalFilters: boolean; actionButton: boolean }
-> = {
-	args: {
-		views: false,
-		saveView: false,
-		filterViewSelector: false,
-		optionalFilter: false,
-		groupedOptionalFilters: false,
-		actionButton: false,
-		manualApply: false,
-		resultsCount: null,
-	},
-};
+export const Basic: StoryObj<FilterBarComponent & { views: boolean; saveView: boolean; filterViewSelector: boolean; optionalFilter: boolean; groupedOptionalFilters: boolean; actionButton: boolean }> =
+	{
+		args: {
+			views: false,
+			saveView: false,
+			filterViewSelector: false,
+			optionalFilter: false,
+			groupedOptionalFilters: false,
+			actionButton: false,
+			manualApply: false,
+			resultsCount: null,
+		},
+	};

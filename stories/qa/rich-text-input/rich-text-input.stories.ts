@@ -1,6 +1,5 @@
 import { ITALIC_STAR, ITALIC_UNDERSCORE, LINK } from '@lexical/markdown';
 import { ChangeDetectionStrategy, Component, Directive } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { provideRouter } from '@angular/router';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LinkComponent, RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent, TextStyleComponent } from '@lucca-front/ng/forms/rich-text-input';
@@ -26,7 +25,6 @@ class ReducedMarkdownFormatterDirective {}
 		TextStyleComponent,
 		LinkComponent,
 		ReducedMarkdownFormatterDirective,
-		FormsModule,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

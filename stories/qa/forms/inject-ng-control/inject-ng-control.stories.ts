@@ -131,6 +131,13 @@ class InjectNgControlFormFieldStory {
 
 export default {
 	title: 'QA/Forms/InjectNgControl',
+	parameters: {
+		docs: {
+			description: {
+				component: 'injectNgControl / NoopValueAccessorDirective (legacy, déprécié — utiliser signal forms / [(value)]).',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [InjectNgControlFormControlStory, InjectNgControlFormFieldStory],

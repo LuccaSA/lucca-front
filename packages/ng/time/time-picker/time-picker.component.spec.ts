@@ -2,47 +2,34 @@ import { registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { ISO8601Time } from '../core/date-primitives';
 import { TimePickerComponent } from './time-picker.component';
 
 @Component({
-	selector: 'lu-time-picker-ngmodel-test',
-	imports: [TimePickerComponent, FormFieldComponent, FormsModule],
+	selector: 'lu-time-picker-test',
+	imports: [TimePickerComponent, FormFieldComponent],
 	template: `
 		<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-			<lu-time-picker [(ngModel)]="value" />
+			<lu-time-picker [(value)]="value" />
 		</lu-form-field>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class TimePickerNgModelTestComponent {
-	value: string | null = null;
-}
-
-@Component({
-	selector: 'lu-time-picker-formcontrol-test',
-	imports: [TimePickerComponent, FormFieldComponent, ReactiveFormsModule],
-	template: `
-		<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-			<lu-time-picker [formControl]="control" />
-		</lu-form-field>
-	`,
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class TimePickerFormControlTestComponent {
-	control = new FormControl<string | null>(null);
+class TimePickerTestComponent {
+	value: ISO8601Time | null = null;
 }
 
 @Component({
 	selector: 'lu-time-picker-standalone-test',
-	imports: [TimePickerComponent, ReactiveFormsModule],
-	template: `<lu-time-picker [formControl]="control" [forceMeridiemDisplay]="forceMeridiemDisplay" />`,
+	imports: [TimePickerComponent],
+	template: `<lu-time-picker [(value)]="value" [disabled]="disabled" [forceMeridiemDisplay]="forceMeridiemDisplay" />`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TimePickerStandaloneTestComponent {
-	control = new FormControl<string | null>(null);
+	value: ISO8601Time | null = null;
+	disabled = false;
 	forceMeridiemDisplay: boolean | null = null;
 }
 
@@ -77,8 +64,8 @@ function pressKey(key: string, input: HTMLInputElement, fixture: ComponentFixtur
 }
 
 describe('TimePickerComponent', () => {
-	it('should render with empty ngModel (null)', async () => {
-		const fixture = TestBed.createComponent(TimePickerNgModelTestComponent);
+	it('should render with empty value (null)', async () => {
+		const fixture = TestBed.createComponent(TimePickerTestComponent);
 		fixture.componentInstance.value = null;
 		fixture.detectChanges();
 		await fixture.whenStable();
@@ -88,8 +75,8 @@ describe('TimePickerComponent', () => {
 		expect(minutes).toBe('––');
 	});
 
-	it('should render with filled ngModel', async () => {
-		const fixture = TestBed.createComponent(TimePickerNgModelTestComponent);
+	it('should render with filled value', async () => {
+		const fixture = TestBed.createComponent(TimePickerTestComponent);
 		fixture.componentInstance.value = '12:30:00';
 		fixture.detectChanges();
 		await fixture.whenStable();
@@ -100,30 +87,8 @@ describe('TimePickerComponent', () => {
 		expect(minutes).toBe('30');
 	});
 
-	it('should render with empty formControl (null)', async () => {
-		const fixture = TestBed.createComponent(TimePickerFormControlTestComponent);
-		fixture.detectChanges();
-		await fixture.whenStable();
-
-		const { hours, minutes } = getDisplayTexts(fixture);
-		expect(hours).toBe('––');
-		expect(minutes).toBe('––');
-	});
-
-	it('should render with filled formControl', async () => {
-		const fixture = TestBed.createComponent(TimePickerFormControlTestComponent);
-		fixture.componentInstance.control = new FormControl('12:30:00');
-		fixture.detectChanges();
-		await fixture.whenStable();
-		fixture.detectChanges();
-
-		const { hours, minutes } = getDisplayTexts(fixture);
-		expect(hours).toBe('12');
-		expect(minutes).toBe('30');
-	});
-
 	it('should display 00 for minutes after typing hours', async () => {
-		const fixture = TestBed.createComponent(TimePickerNgModelTestComponent);
+		const fixture = TestBed.createComponent(TimePickerTestComponent);
 		fixture.detectChanges();
 		await fixture.whenStable();
 
@@ -138,7 +103,7 @@ describe('TimePickerComponent', () => {
 	});
 
 	it('should register typing 0 in hours when the value is empty', async () => {
-		const fixture = TestBed.createComponent(TimePickerNgModelTestComponent);
+		const fixture = TestBed.createComponent(TimePickerTestComponent);
 		fixture.detectChanges();
 		await fixture.whenStable();
 
@@ -158,7 +123,7 @@ describe('TimePickerComponent', () => {
 	describe('value emission', () => {
 		it('should emit the ISO time once hours and minutes are entered', async () => {
 			// Arrange
-			const fixture = TestBed.createComponent(TimePickerNgModelTestComponent);
+			const fixture = TestBed.createComponent(TimePickerTestComponent);
 			fixture.detectChanges();
 			await fixture.whenStable();
 			const inputs = getInputs(fixture);
@@ -170,24 +135,6 @@ describe('TimePickerComponent', () => {
 
 			// Assert
 			expect(fixture.componentInstance.value).toBe('09:45:00');
-		});
-
-		it('should emit the ISO time on the form control once hours and minutes are entered', async () => {
-			// Arrange
-			const valueChanges = vi.fn();
-			const fixture = TestBed.createComponent(TimePickerFormControlTestComponent);
-			fixture.componentInstance.control.valueChanges.subscribe((value) => valueChanges(value));
-			fixture.detectChanges();
-			await fixture.whenStable();
-			const inputs = getInputs(fixture);
-
-			// Act
-			typeInPart('9', inputs.hours, fixture);
-			typeInPart('45', inputs.minutes, fixture);
-
-			// Assert
-			expect(fixture.componentInstance.control.value).toBe('09:45:00');
-			expect(valueChanges).toHaveBeenLastCalledWith('09:45:00');
 		});
 
 		it('should emit a timeChange event with its source when typing', async () => {
@@ -205,7 +152,7 @@ describe('TimePickerComponent', () => {
 
 			// Assert
 			expect(timeChange).toHaveBeenCalledExactlyOnceWith({
-				previousValue: '––:––:––',
+				previousValue: null,
 				value: '09:00:00',
 				source: 'input',
 			});
@@ -216,7 +163,7 @@ describe('TimePickerComponent', () => {
 		function createStandaloneHost(value: string | null): ComponentFixture<TimePickerStandaloneTestComponent> {
 			TestBed.configureTestingModule({ imports: [TimePickerStandaloneTestComponent] });
 			const fixture = TestBed.createComponent(TimePickerStandaloneTestComponent);
-			fixture.componentInstance.control = new FormControl(value);
+			fixture.componentInstance.value = value;
 			fixture.detectChanges();
 			return fixture;
 		}
@@ -229,7 +176,7 @@ describe('TimePickerComponent', () => {
 			pressKey('ArrowUp', getInputs(fixture).hours, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('11:30:00');
+			expect(fixture.componentInstance.value).toBe('11:30:00');
 		});
 
 		it('should decrement the minutes on ArrowDown', () => {
@@ -240,7 +187,7 @@ describe('TimePickerComponent', () => {
 			pressKey('ArrowDown', getInputs(fixture).minutes, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('10:29:00');
+			expect(fixture.componentInstance.value).toBe('10:29:00');
 		});
 
 		it('should move the focus from hours to minutes on ArrowRight', () => {
@@ -277,7 +224,7 @@ describe('TimePickerComponent', () => {
 			pressKey('Backspace', getInputs(fixture).minutes, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('10:00:00');
+			expect(fixture.componentInstance.value).toBe('10:00:00');
 		});
 	});
 
@@ -288,7 +235,7 @@ describe('TimePickerComponent', () => {
 				providers: [{ provide: LOCALE_ID, useValue: locale }],
 			});
 			const fixture = TestBed.createComponent(TimePickerStandaloneTestComponent);
-			fixture.componentInstance.control = new FormControl(value);
+			fixture.componentInstance.value = value;
 			fixture.componentInstance.forceMeridiemDisplay = forceMeridiemDisplay;
 			fixture.detectChanges();
 			return fixture;
@@ -340,17 +287,17 @@ describe('TimePickerComponent', () => {
 			fixture.detectChanges();
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('13:30:00');
+			expect(fixture.componentInstance.value).toBe('13:30:00');
 		});
 	});
 
 	describe('disabled state', () => {
-		it('should disable the fieldset when the control is disabled', async () => {
+		it('should disable the fieldset when disabled is set', async () => {
 			// Arrange
 			TestBed.configureTestingModule({ imports: [TimePickerStandaloneTestComponent] });
 			const fixture = TestBed.createComponent(TimePickerStandaloneTestComponent);
-			fixture.componentInstance.control = new FormControl('10:30:00');
-			fixture.componentInstance.control.disable();
+			fixture.componentInstance.value = '10:30:00';
+			fixture.componentInstance.disabled = true;
 
 			// Act
 			fixture.detectChanges();
@@ -360,17 +307,17 @@ describe('TimePickerComponent', () => {
 			expect(((fixture.nativeElement as HTMLElement).querySelector('.timePicker-fieldset') as HTMLFieldSetElement).disabled).toBe(true);
 		});
 
-		it('should enable the fieldset back when the control is enabled', async () => {
+		it('should enable the fieldset back when disabled is unset', async () => {
 			// Arrange
 			TestBed.configureTestingModule({ imports: [TimePickerStandaloneTestComponent] });
 			const fixture = TestBed.createComponent(TimePickerStandaloneTestComponent);
-			fixture.componentInstance.control = new FormControl('10:30:00');
-			fixture.componentInstance.control.disable();
+			fixture.componentInstance.value = '10:30:00';
+			fixture.componentInstance.disabled = true;
 			fixture.detectChanges();
 			await fixture.whenStable();
 
 			// Act
-			fixture.componentInstance.control.enable();
+			fixture.componentInstance.disabled = false;
 			fixture.detectChanges();
 			await fixture.whenStable();
 

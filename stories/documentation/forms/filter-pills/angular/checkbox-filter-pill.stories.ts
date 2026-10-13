@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent, luFilterPillsTranslations } from '@lucca-front/ng/filter-pills';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -13,7 +12,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [FilterPillComponent, DateInputComponent, FormsModule, StoryModelDisplayComponent, DateRangeInputComponent, CheckboxInputComponent],
+			imports: [FilterPillComponent, DateInputComponent, StoryModelDisplayComponent, DateRangeInputComponent, CheckboxInputComponent],
 		}),
 	],
 	render: (args, context) => {
@@ -24,7 +23,7 @@ export default {
 				checkboxValue: false,
 			},
 			template: `<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
-	<lu-checkbox-input [(ngModel)]="checkboxValue" />
+	<lu-checkbox-input [(checked)]="checkboxValue" />
 </lu-filter-pill>
 
 <pr-story-model-display>{{ checkboxValue }}</pr-story-model-display>

@@ -1,3 +1,11 @@
-<input luInput type="checkbox" class="switchField-input" [formControl]="ngControl.control" />
+<input
+	luInput
+	type="checkbox"
+	class="switchField-input"
+	[checked]="checked()"
+	[disabled]="disabled()"
+	(change)="checked.set($any($event.target).checked)"
+	(blur)="touch.emit()"
+/>
 <span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
-<ng-container *luPresentationDisplayDefault>{{ ngControl.value ? intl.yes : intl.no }}</ng-container>
+<ng-container *luPresentationDisplayDefault>{{ checked() ? intl.yes : intl.no }}</ng-container>

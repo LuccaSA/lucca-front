@@ -4,15 +4,15 @@
 	/></label>
 	<span class="radioField">
 		<input
-			[formControl]="formControl"
-			[attr.disabled]="formControl.disabled || disabled() ? 'disabled' : null"
+			[attr.disabled]="isDisabled() ? 'disabled' : null"
 			type="radio"
 			class="radioField-input"
 			[class.inputFramed-header-input]="framed()"
 			id="{{ id }}-input"
-			[attr.name]="name"
-			[name]="name"
-			[value]="value()"
+			[name]="name()"
+			[checked]="checked()"
+			(change)="onChange()"
+			(blur)="onBlur()"
 			luInput
 			luInputStandalone
 			attr.aria-labelledby="{{ id }}-label"
@@ -41,6 +41,6 @@
 
 <ng-template #contentProjection><ng-content /></ng-template>
 
-@if (ngControl.value === value()) {
+@if (checked()) {
 	<ng-container *luPresentationDisplayDefault><ng-container *ngTemplateOutlet="contentProjection" /></ng-container>
 }

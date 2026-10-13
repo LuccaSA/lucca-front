@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { DateRange, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta } from '@storybook/angular-vite';
@@ -7,7 +6,7 @@ import { applicationConfig, Meta } from '@storybook/angular-vite';
 @Component({
 	selector: 'date-range-input-stories',
 	templateUrl: './date-range-input.stories.html',
-	imports: [FormFieldComponent, DateRangeInputComponent, FormsModule],
+	imports: [FormFieldComponent, DateRangeInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DateRangeInputStory {

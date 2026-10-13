@@ -1,5 +1,5 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { ApplicationRef, ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -35,9 +35,9 @@ class FakeBreakpointObserver {
 
 @Component({
 	selector: 'lu-simple-select-bare-host',
-	imports: [FormsModule, LuSimpleSelectInputComponent],
+	imports: [LuSimpleSelectInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	template: ` <lu-simple-select [ngModel]="selected" [options]="options" /> `,
+	template: ` <lu-simple-select [value]="selected" [options]="options" /> `,
 })
 class BareHostComponent {
 	selected: Entity | null = null;
@@ -47,22 +47,25 @@ class BareHostComponent {
 
 @Component({
 	selector: 'lu-simple-select-form-field-host',
-	imports: [FormsModule, LuSimpleSelectInputComponent, FormFieldComponent],
+	imports: [LuSimpleSelectInputComponent, FormFieldComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<lu-form-field label="Country">
-			<lu-simple-select [ngModel]="selected" [options]="options" />
+			<lu-simple-select [value]="selected" [options]="options" [disabled]="disabled()" />
 		</lu-form-field>
 	`,
 })
 class FormFieldHostComponent {
 	selected: Entity | null = null;
 
+	readonly disabled = signal(false);
+
 	options: Entity[] = options;
 }
 
 @Component({
 	selector: 'lu-simple-select-required-form-field-host',
+	// The form field detects the required state through the RequiredValidator of the control directive
 	imports: [FormsModule, LuSimpleSelectInputComponent, FormFieldComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
@@ -79,14 +82,14 @@ class RequiredFormFieldHostComponent {
 
 @Component({
 	selector: 'lu-simple-select-label-host',
-	imports: [FormsModule, LuSimpleSelectInputComponent],
+	imports: [LuSimpleSelectInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<label>
 			<span>Wrapping label</span>
 			<span role="button">Additional info</span>
 			<span class="pr-u-mask">screen reader only</span>
-			<lu-simple-select [ngModel]="selected" [options]="options" />
+			<lu-simple-select [value]="selected" [options]="options" />
 		</label>
 	`,
 })
@@ -102,9 +105,9 @@ class LabelHostComponent {
  */
 @Component({
 	selector: 'lu-simple-select-paginated-host',
-	imports: [FormsModule, LuSimpleSelectInputComponent],
+	imports: [LuSimpleSelectInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	template: ` <lu-simple-select [ngModel]="selected" [options]="options" (nextPage)="loadNextPage()" /> `,
+	template: ` <lu-simple-select [value]="selected" [options]="options" (nextPage)="loadNextPage()" /> `,
 })
 class PaginatedHostComponent {
 	readonly allOptions: Entity[] = Array.from({ length: 25 }, (_, index) => ({ id: index, name: `test ${index}` }));
@@ -231,7 +234,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			const fixture = createHost(FormFieldHostComponent, true);
 
 			// Act
-			selectOf(fixture).writeValue(options[0]);
+			selectOf(fixture).value.set(options[0]);
 			fixture.detectChanges();
 
 			// Assert
@@ -243,7 +246,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			const fixture = createHost(FormFieldHostComponent, true);
 
 			// Act
-			selectOf(fixture).setDisabledState(true);
+			fixture.componentInstance.disabled.set(true);
 			fixture.detectChanges();
 
 			// Assert
@@ -280,7 +283,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			// Arrange
 			const fixture = createHost(BareHostComponent, true);
 			const select = selectOf(fixture);
-			select.writeValue(options[0]);
+			select.value.set(options[0]);
 			fixture.detectChanges();
 
 			// Act
@@ -639,7 +642,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			vi.stubGlobal('innerHeight', 800);
 			const scrollIntoView = vi.spyOn(Element.prototype, 'scrollIntoView').mockImplementation(() => {});
 			const fixture = createHost(FormFieldHostComponent, true);
-			selectOf(fixture).writeValue(options[1]);
+			selectOf(fixture).value.set(options[1]);
 			fixture.detectChanges();
 
 			// Act

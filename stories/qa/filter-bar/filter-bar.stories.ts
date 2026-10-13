@@ -1,7 +1,6 @@
 import { allLegumes } from '@/stories/forms/select/select.utils';
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
@@ -28,7 +27,6 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 		FilterPillComponent,
 		FilterViewSelectorComponent,
 		CheckboxInputComponent,
-		FormsModule,
 		DateRangeInputComponent,
 		DateInputComponent,
 		StoryModelDisplayComponent,

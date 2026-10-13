@@ -9,14 +9,14 @@
 			<td>Active</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" ngModel>
+					<lu-rich-text-input placeholder="Placeholder…">
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
 			</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value">
+					<lu-rich-text-input placeholder="Placeholder…" [value]="value">
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
@@ -26,7 +26,7 @@
 			<td>Custom toolbar</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" ngModel luWithReducedMarkdownFormatter>
+					<lu-rich-text-input placeholder="Placeholder…" luWithReducedMarkdownFormatter>
 						<div class="richTextField-toolbar-formatting">
 							<div class="richTextField-toolbar-col">
 								<lu-rich-text-plugin-text-style icon="formatTextItalic" tooltip="Italic" format="italic" />
@@ -38,7 +38,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" luWithReducedMarkdownFormatter>
+					<lu-rich-text-input placeholder="Placeholder…" [value]="value" luWithReducedMarkdownFormatter>
 						<div class="richTextField-toolbar-formatting">
 							<div class="richTextField-toolbar-col">
 								<lu-rich-text-plugin-text-style icon="formatTextItalic" tooltip="Italic" format="italic" />
@@ -53,7 +53,7 @@
 			<td>Tag plugin</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" ngModel luWithMarkdownTagsFormatter>
+					<lu-rich-text-input placeholder="Placeholder…" luWithMarkdownTagsFormatter>
 						<lu-rich-text-input-toolbar />
 						<lu-rich-text-plugin-tag [tags]="tags" />
 					</lu-rich-text-input>
@@ -61,7 +61,7 @@
 			</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" luWithMarkdownTagsFormatter>
+					<lu-rich-text-input placeholder="Placeholder…" [value]="value" luWithMarkdownTagsFormatter>
 						<lu-rich-text-input-toolbar />
 						<lu-rich-text-plugin-tag [tags]="tags" />
 					</lu-rich-text-input>
@@ -72,14 +72,14 @@
 			<td>Spellcheck disabled</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" ngModel disableSpellcheck>
+					<lu-rich-text-input placeholder="Placeholder…" disableSpellcheck>
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
 			</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" disableSpellcheck>
+					<lu-rich-text-input placeholder="Placeholder…" [value]="value" disableSpellcheck>
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
@@ -89,14 +89,14 @@
 			<td>Auto resize</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" ngModel autoResize>
+					<lu-rich-text-input placeholder="Placeholder…" autoResize>
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
 			</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" autoResize>
+					<lu-rich-text-input placeholder="Placeholder…" [value]="value" autoResize>
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
@@ -106,14 +106,14 @@
 			<td>Disabled</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" ngModel [disabled]="true">
+					<lu-rich-text-input placeholder="Placeholder…" [disabled]="true">
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
 			</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" [disabled]="true">
+					<lu-rich-text-input placeholder="Placeholder…" [value]="value" [disabled]="true">
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
@@ -123,14 +123,14 @@
 			<td>No toolbar</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" ngModel hideToolbar>
+					<lu-rich-text-input placeholder="Placeholder…" hideToolbar>
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
 			</td>
 			<td>
 				<lu-form-field label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" hideToolbar>
+					<lu-rich-text-input placeholder="Placeholder…" [value]="value" hideToolbar>
 						<lu-rich-text-input-toolbar />
 					</lu-rich-text-input>
 				</lu-form-field>
@@ -140,7 +140,7 @@
 			<td>Presentation mode</td>
 			<td>
 				<lu-form-field presentation label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" ngModel luWithMarkdownTagsFormatter>
+					<lu-rich-text-input placeholder="Placeholder…" luWithMarkdownTagsFormatter>
 						<lu-rich-text-input-toolbar />
 						<lu-rich-text-plugin-tag [tags]="tags" />
 					</lu-rich-text-input>
@@ -148,7 +148,7 @@
 			</td>
 			<td>
 				<lu-form-field presentation label="Label">
-					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" luWithMarkdownTagsFormatter>
+					<lu-rich-text-input placeholder="Placeholder…" [value]="value" luWithMarkdownTagsFormatter>
 						<lu-rich-text-input-toolbar />
 						<lu-rich-text-plugin-tag [tags]="tags" />
 					</lu-rich-text-input>

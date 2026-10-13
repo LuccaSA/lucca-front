@@ -20,7 +20,7 @@
 		<div class="richTextInputTag-addTag">
 			<lu-filter-pill [label]="intl().selectTag" class="richTextInputTag-addTag-select" tabindex="-1" aria-hidden="true" #filterPillRef>
 				<lu-simple-select
-					[formControl]="selectedTagControl"
+					(valueChange)="selectTag($event, tagsSelect)"
 					[options]="filteredSecondaryTags()"
 					[disabled]="isDisabled()"
 					(clueChange)="tagSearch.set($event)"
