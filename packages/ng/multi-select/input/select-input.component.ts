@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -40,17 +40,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [
-		AsyncPipe,
-		LuTooltipModule,
-		ɵLuOptionOutletDirective,
-		FilterPillDisplayerDirective,
-		FilterPillLabelDirective,
-		ClearComponent,
-		CommonModule,
-		ɵPresentationDisplayDefaultDirective,
-		IconComponent,
-	],
+	imports: [LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective, ClearComponent, CommonModule, ɵPresentationDisplayDefaultDirective, IconComponent],
 	providers: [
 		{
 			provide: ALuSelectInputComponent,

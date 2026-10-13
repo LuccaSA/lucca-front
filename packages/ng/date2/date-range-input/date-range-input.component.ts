@@ -443,7 +443,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Om
 			this.highlightedField.set(isEditingEnd ? 0 : 1);
 		}
 
-		this.value.set(newRange);
+		this.#emitRange(newRange);
 	}
 
 	arrowDown(popoverRef: PopoverDirective, fieldToFocus: 'start' | 'end'): void {
@@ -458,7 +458,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Om
 	clear() {
 		const newValue = this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : null;
 		this.selectedRange.set(newValue);
-		this.value.set(this.selectedRange());
+		this.#emitRange(this.selectedRange());
 		this.touch.emit();
 		this.startTextInputRef()?.nativeElement.focus();
 	}
@@ -487,7 +487,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Om
 
 	selectShortcut(shortcut: CalendarShortcut, popover: PopoverDirective): void {
 		this.selectedRange.set(shortcut.range);
-		this.value.set(this.selectedRange());
+		this.#emitRange(this.selectedRange());
 		popover?.close();
 		this.filterPillPopoverCloseFn?.();
 	}
@@ -548,6 +548,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Om
 		} else {
 			this.selectedRange.set(currentRange);
 		}
-		this.value.set(this.selectedRange());
+		this.#emitRange(this.selectedRange());
+	}
+
+	#emitRange(range: OpenDateRange | null): void {
+		// The emitted range can be open on one side, but the public type still requires a start date
+		this.value.set(range as DateRange | null);
 	}
 }

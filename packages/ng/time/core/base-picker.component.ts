@@ -8,7 +8,7 @@ import { TimePickerPartComponent } from './time-picker-part.component';
 	template: '',
 })
 export abstract class BasePickerComponent {
-	readonly step = input<ISO8601Duration>(null);
+	readonly step = input<ISO8601Duration | null>(null);
 
 	readonly disabled = input(false, { transform: booleanAttribute });
 
@@ -25,7 +25,7 @@ export abstract class BasePickerComponent {
 
 	abstract getHoursIncrement(): number;
 
-	abstract getMinutesIncrement(): number;
+	abstract getMinutesIncrement(): number | null;
 
 	protected focusPart(type: 'hours' | 'minutes') {
 		if (type === 'hours') {

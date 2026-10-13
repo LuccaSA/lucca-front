@@ -76,7 +76,7 @@ export class TimePickerComponent extends BasePickerComponent implements FormValu
 	readonly nextPicker = output<void>();
 	readonly nonDigitKeyPressed = output<void>();
 
-	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.#time(), this.enableMeridiemDisplay()));
+	protected readonly hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.#time(), this.enableMeridiemDisplay() ?? false));
 	protected readonly minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.#time()));
 
 	protected readonly hours = computed(() => getHoursPartFromIsoTime(this.#time()));

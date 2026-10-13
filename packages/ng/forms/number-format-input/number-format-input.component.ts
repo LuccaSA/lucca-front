@@ -70,8 +70,6 @@ export class NumberFormatInputComponent implements FormValueControl<number | nul
 
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
-	readonly #suffixPrefixValue = signal(1);
-
 	readonly #numberFormat = computed(() => new NumberFormat(this.formatOptions()));
 	readonly prefixAddon = computed(() => {
 		if (this.useAutoPrefixSuffix() === false) {

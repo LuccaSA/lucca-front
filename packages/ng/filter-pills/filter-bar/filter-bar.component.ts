@@ -16,7 +16,6 @@ import {
 	ViewEncapsulation,
 	WritableSignal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, luBooleanAttribute, luNullableNumberAttribute } from '@lucca-front/ng/core';
 import { LuOptionComparer, LuOptionDirective, LuOptionGroupByContext, LuOptionGrouping } from '@lucca-front/ng/core-select';
 import { DividerComponent } from '@lucca-front/ng/divider';
@@ -47,7 +46,7 @@ export interface FilterBarSegmentedControlTabs {
 
 @Component({
 	selector: 'lu-filter-bar',
-	imports: [DividerComponent, ScrollBoxComponent, FormsModule, NgTemplateOutlet, FilterPillComponent, LuMultiSelectInputComponent, LuOptionDirective],
+	imports: [DividerComponent, ScrollBoxComponent, NgTemplateOutlet, FilterPillComponent, LuMultiSelectInputComponent, LuOptionDirective],
 	templateUrl: './filter-bar.component.html',
 	styleUrl: './filter-bar.component.scss',
 	encapsulation: ViewEncapsulation.None,

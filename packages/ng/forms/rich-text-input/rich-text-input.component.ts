@@ -204,7 +204,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, FormValueContr
 			this.#editor?.read(() => {
 				let result = '';
 				// ignore empty nodes
-				if (!$isRootTextContentEmpty(isComposing, false)) {
+				if (!$isRootTextContentEmpty(isComposing ?? false, false) && this.#editor) {
 					result = this.#richTextFormatter.format(this.#editor);
 				}
 				this.touch.emit();
@@ -212,7 +212,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, FormValueContr
 				this.value.set(result);
 			});
 		}
-		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing));
-		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
+		const currentCanShowPlaceholder = this.#editor?.getEditorState().read($canShowPlaceholderCurry(isComposing ?? false));
+		this.currentCanShowPlaceholder.set(currentCanShowPlaceholder ?? false);
 	}
 }
