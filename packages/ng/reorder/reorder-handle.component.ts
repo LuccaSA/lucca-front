@@ -190,8 +190,15 @@ export class ReorderHandleComponent {
 		this.#elementRef.nativeElement.focus();
 	}
 
+	/**
+	 * Name of its item, used in the announcement made after a move
+	 */
+	itemLabel(): string {
+		return this.#itemLabel?.luReorderItemLabel() || this.intl().itemFallback;
+	}
+
 	moveTo(currentIndex: number, target?: ReorderDirective): void {
-		this.#reorder?.move(this.#drag, currentIndex, this.#itemLabel?.luReorderItemLabel() || this.intl().itemFallback, target);
+		this.#reorder?.move(this.#drag, currentIndex, this.itemLabel(), target);
 	}
 
 	/**
