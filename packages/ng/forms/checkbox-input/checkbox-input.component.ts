@@ -45,14 +45,14 @@ export class CheckboxInputComponent implements FormCheckboxControl, FilterPillIn
 	 */
 	readonly mixed = input(false, { transform: luBooleanAttribute });
 
-	isFilterPill = signal<boolean>(false);
+	readonly isFilterPill = signal<boolean>(false);
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
 
-	filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
-	isFilterPillEmpty: Signal<boolean> = signal(true);
-	isFilterPillClearable: Signal<boolean> = signal(false);
-	hideCombobox: Signal<boolean> = signal(true);
-	showColon: Signal<boolean> = signal(false);
+	readonly filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
+	readonly isFilterPillEmpty: Signal<boolean> = signal(true);
+	readonly isFilterPillClearable: Signal<boolean> = signal(false);
+	readonly hideCombobox: Signal<boolean> = signal(true);
+	readonly showColon: Signal<boolean> = signal(false);
 
 	constructor() {
 		if (this.formField) {

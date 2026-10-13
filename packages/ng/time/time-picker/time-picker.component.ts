@@ -43,7 +43,7 @@ export class TimePickerComponent extends BasePickerComponent implements FormValu
 
 	readonly postMeridiemRef = viewChild<ElementRef<HTMLInputElement>>('postMeridiemRef');
 
-	value = model<ISO8601Time | null>(DEFAULT_MIN_TIME);
+	readonly value = model<ISO8601Time | null>(DEFAULT_MIN_TIME);
 
 	readonly #time = computed(() => this.value() ?? DEFAULT_MIN_TIME);
 
@@ -53,7 +53,7 @@ export class TimePickerComponent extends BasePickerComponent implements FormValu
 
 	readonly forceMeridiemDisplay = input(null, { transform: luNullableBooleanAttribute });
 
-	keyPressed = signal(false);
+	readonly keyPressed = signal(false);
 
 	readonly enableMeridiemDisplay = computed(() => {
 		if (this.forceMeridiemDisplay() !== null) {
@@ -92,7 +92,7 @@ export class TimePickerComponent extends BasePickerComponent implements FormValu
 			'pr-u-animatedShake': this.keyPressed() && isNil(this.#timeRangePicker),
 		};
 	});
-	protected separator = computed(() => this.intl().timePickerTimeSeparator);
+	protected readonly separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 

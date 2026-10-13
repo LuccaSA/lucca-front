@@ -29,6 +29,9 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly #pluralRules = inject(LOCALE_PLURAL_RULES);
 
+	/**
+	 * @deprecated use withSelectAllDisplayerLabelFn
+	 */
 	readonly displayerLabel = input<string>(undefined, { alias: 'withSelectAllDisplayerLabel' });
 	readonly displayerLabelFn = input<(count: number) => string | LuPluralForms>(undefined, { alias: 'withSelectAllDisplayerLabelFn' });
 
@@ -104,7 +107,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			if (this.#showPanelHeader()) {
 				this.select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
 			} else {
-				this.select.panelHeaderTpl.set(null);
+				this.select.panelHeaderTpl.set(undefined);
 			}
 		});
 
@@ -201,7 +204,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.#values.set(values);
 	}
 
-	clearValue($event: Event): void {
+	clearValue($event?: Event): void {
 		this.#mode.set('none');
 		this.#selectClearValue($event);
 	}

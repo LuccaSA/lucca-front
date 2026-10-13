@@ -22,7 +22,7 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 export class DurationPickerComponent extends BasePickerComponent implements FormValueControl<ISO8601Duration | null> {
 	readonly intl = input(...intlInputOptions(LU_DURATION_PICKER_TRANSLATIONS));
 
-	value = model<ISO8601Duration | null>('PT0S');
+	readonly value = model<ISO8601Duration | null>('PT0S');
 	readonly #duration = computed(() => this.value() ?? 'PT0S');
 	readonly max = input<ISO8601Duration | undefined>('PT99H');
 
@@ -34,7 +34,7 @@ export class DurationPickerComponent extends BasePickerComponent implements Form
 
 	readonly durationChange = output<DurationChangeEvent>();
 
-	keyPressed = signal(false);
+	readonly keyPressed = signal(false);
 
 	protected readonly hours = computed(() => getHoursPartFromDuration(this.#duration()));
 	protected readonly minutes = computed(() => getMinutesPartFromDuration(this.#duration()));
@@ -62,7 +62,7 @@ export class DurationPickerComponent extends BasePickerComponent implements Form
 			'pr-u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
-	protected separator = computed(() => this.intl().timePickerTimeSeparator);
+	protected readonly separator = computed(() => this.intl().timePickerTimeSeparator);
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 

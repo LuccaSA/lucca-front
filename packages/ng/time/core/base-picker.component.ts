@@ -8,20 +8,20 @@ import { TimePickerPartComponent } from './time-picker-part.component';
 	template: '',
 })
 export abstract class BasePickerComponent {
-	step = input<ISO8601Duration>(null);
+	readonly step = input<ISO8601Duration>(null);
 
-	disabled = input(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: booleanAttribute });
 
-	size = input<BasePickerSize>();
+	readonly size = input<BasePickerSize>();
 
 	readonly touch = output<void>();
 
-	hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
+	readonly hoursPart = viewChild<TimePickerPartComponent>('hoursPart');
 
-	minutesPart = viewChild<TimePickerPartComponent>('minutesPart');
+	readonly minutesPart = viewChild<TimePickerPartComponent>('minutesPart');
 
-	protected hoursIncrement = computed(() => this.getHoursIncrement());
-	protected minutesIncrement = computed(() => this.getMinutesIncrement());
+	protected readonly hoursIncrement = computed(() => this.getHoursIncrement());
+	protected readonly minutesIncrement = computed(() => this.getMinutesIncrement());
 
 	abstract getHoursIncrement(): number;
 

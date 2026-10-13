@@ -16,7 +16,7 @@ import { CHECKBOX_INPUT_TRANSLATIONS } from '../checkbox-input/checkbox-input.tr
 	},
 })
 export class SwitchInputComponent implements FormCheckboxControl {
-	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
+	readonly formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	readonly checked = model(false);
 
@@ -24,7 +24,7 @@ export class SwitchInputComponent implements FormCheckboxControl {
 
 	readonly touch = output<void>();
 
-	intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
+	readonly intl = getIntl(CHECKBOX_INPUT_TRANSLATIONS);
 
 	constructor() {
 		if (this.formField) {

@@ -83,7 +83,7 @@ export class PhoneNumberInputComponent implements FormValueControl<string> {
 			prefix: getCountryCallingCode(country),
 			name: this.#displayNames.of(country),
 		}))
-		.sort((a, b) => a.name?.localeCompare(b.name));
+		.sort((a, b) => (a.name && b.name ? a.name.localeCompare(b.name) : 0));
 
 	readonly #prefixEntries = computed(() => {
 		const whitelist = this.allowedCountries();
@@ -93,9 +93,9 @@ export class PhoneNumberInputComponent implements FormValueControl<string> {
 		return this.prefixEntries.filter((e) => whitelist.includes(e.country));
 	});
 
-	query = signal('');
+	readonly query = signal('');
 
-	protected prefixesDisplay = computed(() => {
+	protected readonly prefixesDisplay = computed(() => {
 		const query = this.query();
 		if (query === '') {
 			return this.#prefixEntries();
@@ -115,10 +115,11 @@ export class PhoneNumberInputComponent implements FormValueControl<string> {
 		},
 	});
 
-	countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
+	readonly countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
 
-	placeholder = computed(() => {
-		const exampleNumber = this.noAutoPlaceholder() === false ? getExampleNumber(this.countryCode(), examples) : undefined;
+	readonly placeholder = computed(() => {
+		const countryCode = this.countryCode();
+		const exampleNumber = this.noAutoPlaceholder() === false && countryCode ? getExampleNumber(countryCode, examples) : undefined;
 		return exampleNumber?.formatNational() ?? '';
 	});
 

@@ -16,7 +16,7 @@ export class LinkDialogComponent {
 	public readonly dialogData = injectDialogData<{ url: string; canDelete: boolean }>();
 	public readonly dialogRef = injectDialogRef<string | undefined>();
 
-	intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_RICH_TEXT_INPUT_TRANSLATIONS));
 
 	public readonly href = signal<string>(this.dialogData.url);
 

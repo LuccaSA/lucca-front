@@ -54,7 +54,7 @@ export class TimeRangePickerComponent implements Omit<FormValueControl<TimeRange
 
 	readonly touch = output<void>();
 
-	keyPressed = signal(false);
+	readonly keyPressed = signal(false);
 
 	readonly startValue = computed(() => this.value()?.start ?? DEFAULT_TIME_VALUE);
 	readonly endValue = computed(() => this.value()?.end ?? DEFAULT_TIME_VALUE);

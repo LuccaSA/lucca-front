@@ -25,13 +25,13 @@ export abstract class AbstractDateComponent {
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	protected dateFormat = getDateFormat(this.locale);
 	protected separator = getSeparator(this.locale);
-	protected dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
+	protected readonly dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
 
 	intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.locale, { month: 'numeric', year: 'numeric' });
 	intlDateTimeFormatYear = new Intl.DateTimeFormat(this.locale, { year: 'numeric' });
 
-	intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_DATE2_TRANSLATIONS));
 
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 
@@ -71,9 +71,9 @@ export abstract class AbstractDateComponent {
 
 	readonly dateFormatLocalized = computed(() => getLocalizedDateFormat(this.locale, this.mode(), this.intl().weekPrefix));
 
-	protected currentDate = signal(new Date());
+	protected readonly currentDate = signal(new Date());
 
-	protected tabbableDate = signal<Date | null>(null);
+	protected readonly tabbableDate = signal<Date | null>(null);
 
 	protected constructor() {
 		effect(() => {
