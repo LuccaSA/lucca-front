@@ -155,6 +155,32 @@ describe(ReorderDirective.name, () => {
 			expect(document.activeElement).toBe(handles[2]);
 			expect(announce).toHaveBeenCalledExactlyOnceWith('"A": position 3 of 3');
 		});
+
+		it('should announce the new position of an item dropped with a pointer', async () => {
+			// Arrange
+			const dropList = host.reorder().dropList;
+
+			// Act
+			dropList.dropped.emit({ item: host.drags()[0], previousIndex: 0, currentIndex: 2, previousContainer: dropList, container: dropList } as CdkDragDrop<unknown>);
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(announce).toHaveBeenCalledExactlyOnceWith('"A": position 3 of 3');
+		});
+
+		it('should not announce an item dropped back at its position', async () => {
+			// Arrange
+			const dropList = host.reorder().dropList;
+
+			// Act
+			dropList.dropped.emit({ item: host.drags()[1], previousIndex: 1, currentIndex: 1, previousContainer: dropList, container: dropList } as CdkDragDrop<unknown>);
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(announce).not.toHaveBeenCalled();
+		});
 	});
 
 	describe('with connected lists', () => {
@@ -249,6 +275,25 @@ describe(ReorderDirective.name, () => {
 
 			// Act
 			todo.move(host.drags()[0], 1, 'A', doing);
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(announce).toHaveBeenCalledExactlyOnceWith('"A": "Doing", position 2 of 2');
+		});
+
+		it('should announce the target list of an item dropped with a pointer in another list', async () => {
+			// Arrange
+			const [todo, doing] = host.lists();
+
+			// Act
+			doing.dropList.dropped.emit({
+				item: host.drags()[0],
+				previousIndex: 0,
+				currentIndex: 1,
+				previousContainer: todo.dropList,
+				container: doing.dropList,
+			} as CdkDragDrop<string[]>);
 			fixture.detectChanges();
 			await fixture.whenStable();
 

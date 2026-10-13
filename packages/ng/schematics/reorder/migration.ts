@@ -113,9 +113,12 @@ export function migrateComponent(path: string, content: string, tree: Tree): str
 	// Imports are inserted one symbol at a time: every insertion shifts the offsets the next one relies on.
 	tree.overwrite(path, result);
 
+	const standalone = !isStandaloneFalse(component);
+
 	// Each TS import is inserted before the existing ones: going backwards keeps them sorted.
+	// The directives of a non-standalone component are imported by its NgModule, not by the component file.
 	['ReorderItemLabelDirective', 'ReorderEvent', 'ReorderDirective']
-		.filter((symbol) => state.symbolsToImport.has(symbol))
+		.filter((symbol) => state.symbolsToImport.has(symbol) && (standalone || symbol === 'ReorderEvent'))
 		.forEach((symbol) => {
 			const updatedSourceFile = createSourceFile(path, tree.readText(path), ScriptTarget.ESNext, true);
 			const recorder = tree.beginUpdate(path);
@@ -125,7 +128,7 @@ export function migrateComponent(path: string, content: string, tree: Tree): str
 
 	const angularSymbols = ['ReorderDirective', 'ReorderItemLabelDirective'].filter((symbol) => state.symbolsToImport.has(symbol));
 
-	if (isStandaloneFalse(component)) {
+	if (!standalone) {
 		currentSchematicContext.warn(`${path}: this component is not standalone, add ${angularSymbols.join(' and ')} to the imports of its NgModule.`);
 	} else {
 		angularSymbols.forEach((symbol) => {
@@ -160,20 +163,45 @@ function migrateTemplate(path: string, template: string, component: ClassDeclara
 			}
 		});
 
-		lists.forEach((list) => {
+		const candidates = lists.flatMap((list) => {
 			const dropped = list.outputs.find((output) => output.name === 'cdkDropListDropped');
 			const cdkDropList = list.attributes.find((attribute) => attribute.name === 'cdkDropList');
 
-			if (!dropped || !cdkDropList || hasBinding(list, 'luReorder')) {
-				return;
+			if (!dropped || !cdkDropList) {
+				return [];
 			}
 
 			const listSnippet = getOpeningTagSnippet(template, list);
-			const handler = dropped.handler instanceof currentSchematicContext.angularCompiler.ASTWithSource ? (dropped.handler.source ?? '') : '';
-			const analysis = analyzeHandler(component, handler);
 
+			if (hasBinding(list, 'luReorder')) {
+				currentSchematicContext.warn(
+					`${path}: ${listSnippet} already has luReorder but still listens to (cdkDropListDropped): move its handler to (luReorder), which also emits for the moves made with the keyboard or the handle menu.`,
+				);
+				return [];
+			}
+
+			const handler = dropped.handler instanceof currentSchematicContext.angularCompiler.ASTWithSource ? (dropped.handler.source ?? '') : '';
+			return [{ list, dropped, cdkDropList, listSnippet, analysis: analyzeHandler(component, handler) }];
+		});
+
+		// A handler is retyped once for all its lists: it cannot be when they pass `$event` at different positions
+		const eventIndexes = new Map<string, Set<number>>();
+		candidates.forEach(({ analysis }) => {
+			if (analysis.migratable && analysis.retype) {
+				eventIndexes.set(analysis.call.methodName, (eventIndexes.get(analysis.call.methodName) ?? new Set()).add(analysis.call.eventIndex));
+			}
+		});
+
+		candidates.forEach(({ list, dropped, cdkDropList, listSnippet, analysis }) => {
 			if (!analysis.migratable) {
 				currentSchematicContext.warn(`${path}: ${listSnippet} was not migrated to luReorder, ${analysis.reason}.`);
+				return;
+			}
+
+			if (analysis.retype && (eventIndexes.get(analysis.call.methodName)?.size ?? 0) > 1) {
+				currentSchematicContext.warn(
+					`${path}: ${listSnippet} was not migrated to luReorder, ${analysis.call.methodName}() receives $event at different positions in its lists.`,
+				);
 				return;
 			}
 

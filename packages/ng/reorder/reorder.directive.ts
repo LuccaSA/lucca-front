@@ -70,10 +70,17 @@ export class ReorderDirective<T = unknown> {
 		this.#registry.lists.add(this);
 		inject(DestroyRef).onDestroy(() => this.#registry.lists.delete(this));
 
-		this.dropList.dropped.pipe(takeUntilDestroyed()).subscribe(({ previousIndex, currentIndex, previousContainer, container }) => {
+		this.dropList.dropped.pipe(takeUntilDestroyed()).subscribe(({ item, previousIndex, currentIndex, previousContainer, container }) => {
 			// The CDK types the origin list as `CdkDropList<any>`, as a connected list could hold another data type.
 			// Connected lists share their data type in practice, which lets `transferArrayItem` be called without any cast
 			this.luReorder.emit({ previousIndex, currentIndex, previousContainer: previousContainer as CdkDropList<T>, container });
+
+			// A pointer move is announced like the other ones: a screen reader can be running while dragging
+			if (previousContainer !== container || previousIndex !== currentIndex) {
+				const origin = [...this.#registry.lists].find((list) => list.dropList === previousContainer) ?? this;
+				const itemLabel = this.#registry.handles.get(item)?.itemLabel() ?? this.luReorderIntl().itemFallback;
+				afterNextRender(() => origin.#announce(item, currentIndex, itemLabel, this), { injector: this.#injector });
+			}
 		});
 	}
 
@@ -146,15 +153,21 @@ export class ReorderDirective<T = unknown> {
 				if (moved) {
 					this.#registry.handles.get(moved)?.focus();
 				}
-
-				const intl = target.luReorderIntl();
-				const params = { item: itemLabel, position: currentIndex + 1, count: items.length };
-				const message =
-					target === this ? intlParams.transform(intl.announceMove, params) : intlParams.transform(intl.announceMoveTo, { ...params, list: this.listLabel(target, this.connectedLists(drag)) });
-				void this.#announcer.announce(message);
+				this.#announce(drag, currentIndex, itemLabel, target);
 			},
 			{ injector: this.#injector },
 		);
+	}
+
+	/**
+	 * Announces the new position of an item moved from this list, once the target list displays it
+	 */
+	#announce(drag: CdkDrag, currentIndex: number, itemLabel: string, target: ReorderDirective): void {
+		const intl = target.luReorderIntl();
+		const params = { item: itemLabel, position: currentIndex + 1, count: target.items().length };
+		const message =
+			target === this ? intlParams.transform(intl.announceMove, params) : intlParams.transform(intl.announceMoveTo, { ...params, list: this.listLabel(target, this.connectedLists(drag)) });
+		void this.#announcer.announce(message);
 	}
 }
 
