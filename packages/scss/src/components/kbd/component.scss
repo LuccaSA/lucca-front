@@ -87,6 +87,7 @@ $keysMax: 6;
 	display: inline-flex;
 	font: var(--pr-t-font-body-S);
 	gap: var(--pr-t-spacings-25);
+	vertical-align: middle;
 	white-space: nowrap;
 
 	@for $keys from 2 through $keysMax {
