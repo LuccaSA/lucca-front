@@ -15,6 +15,10 @@
 
 .sortableList-item {
 	@layer mods {
+		&:has(> .sortableList-item-handler) {
+			@include draggable;
+		}
+
 		&.mod-clickable {
 			@include clickable;
 		}
