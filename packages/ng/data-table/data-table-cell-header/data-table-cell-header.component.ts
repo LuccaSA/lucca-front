@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, forwardRef, inject, input, model, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, forwardRef, inject, input, linkedSignal, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -27,7 +27,7 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 		'[class.mod-alignCenter]': 'align() === "center"',
 		'[class.mod-alignEnd]': 'align() === "end"',
 		'[class.mod-stickyColumn]': 'isStickyStart() || isStickyEnd()',
-		'[attr.aria-sort]': 'sort()',
+		'[attr.aria-sort]': 'currentSort()',
 		'[class.mod-editable]': 'editable()',
 		'[attr.scope]': 'bodyRef !== null ? "row" : "col"',
 		'[style.--dataTable-layoutFixed-width]': 'inlineSize() || fixedWidth()',
@@ -47,7 +47,11 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 	#destroyRef = inject(DestroyRef);
 
-	readonly sort = model<DataTableSort | null>(null);
+	readonly sort = input<DataTableSort | null>(null);
+
+	readonly sortChange = output<DataTableSort>();
+
+	protected readonly currentSort = linkedSignal(() => this.sort());
 	readonly fixedWidth = input<string | null>(null);
 	readonly inlineSize = input<string | null>(null);
 	readonly sortWithEllipsis = input(false, { transform: luBooleanAttribute });
@@ -97,9 +101,11 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	}
 
 	toggleSort(): void {
-		const sort = this.sort();
+		const sort = this.currentSort();
 		if (isNotNil(sort)) {
-			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(sort) + 1) % SORT_VALUES.length]);
+			const next = SORT_VALUES[(SORT_VALUES.indexOf(sort) + 1) % SORT_VALUES.length];
+			this.currentSort.set(next);
+			this.sortChange.emit(next);
 		}
 	}
 }

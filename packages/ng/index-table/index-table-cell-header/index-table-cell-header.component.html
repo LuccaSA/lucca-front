@@ -1,4 +1,4 @@
-@if (sort()) {
+@if (currentSort()) {
 	<button luButton type="button" class="tableSortable" [class.mod-ellipsis]="sortWithEllipsis()" (click)="toggleSort()" #sortButton>
 		<span
 			class="tableSortable-label"
