@@ -40,7 +40,7 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 				type: 'select',
 			},
 			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '' } },
 		},
 		block: {
 			description: 'Applique <code>display: block</code>.',
@@ -61,7 +61,7 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'default' } },
 		},
 		critical: {
 			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
@@ -73,7 +73,7 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 		},
 		delete: {
 			description: '[Deprecated] Remplacé par <code>critical</code>.',
-			table: { category: 'inputs' },
+			table: { disable: true },
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
@@ -86,7 +86,6 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 	},
 	args: {
 		block: false,
-		palette: 'none',
 		state: 'default',
 		luButton: '',
 		label: 'Button',

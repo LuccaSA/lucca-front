@@ -13,6 +13,14 @@ export default {
 			description: 'Ajoute un bouton de fermeture.',
 			table: { category: 'inputs' },
 		},
+		toggle: {
+			description: 'Applique le style « toggle » (classe <code>mod-toggle</code>, dépréciée). Préférer <code>withArrow</code>.',
+			table: { category: 'inputs' },
+		},
+		withArrow: {
+			description: 'Ajoute une flèche pointant vers le champ placé au-dessus de la box (voir la story Arrow).',
+			table: { category: 'inputs' },
+		},
 		killed: {
 			description: 'Événement déclenché lorsque la box est fermée.',
 			action: 'killed',
@@ -43,5 +51,7 @@ export const Basic: StoryObj<BoxComponent> = {
 	args: {
 		neutral: false,
 		killable: false,
+		toggle: false,
+		withArrow: false,
 	},
 };

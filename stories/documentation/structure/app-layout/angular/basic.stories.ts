@@ -8,7 +8,13 @@ interface AppLayoutAngularBasicStory {
 
 export default {
 	title: 'Documentation/Structure/App Layout/Angular/Basic',
-	argTypes: {},
+	argTypes: {
+		mobileNavSideBottom: {
+			control: 'boolean',
+			description: 'Déplace la navigation latérale en bas de l’écran sur mobile.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [AppLayoutComponent],
