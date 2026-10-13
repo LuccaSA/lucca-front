@@ -37,11 +37,6 @@ $keysMax: 6;
 		--components-kbd-paddingInline: 0;
 	}
 
-	.lucca-icon {
-		inset-block-start: -1px;
-		position: relative;
-	}
-
 	@for $index from 2 through $keysMax {
 		&:nth-of-type(#{$index}) {
 			--components-kbd-animationOffset: calc(var(--commons-animations-durations-fast) / 2 * #{$index - 1});
