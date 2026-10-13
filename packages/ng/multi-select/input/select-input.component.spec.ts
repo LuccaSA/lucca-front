@@ -116,11 +116,11 @@ class MultiSelectSelectAllPresentationHostComponent {
 
 @Component({
 	selector: 'lu-multi-select-form-field-host',
-	imports: [FormsModule, LuMultiSelectInputComponent, FormFieldComponent],
+	imports: [LuMultiSelectInputComponent, FormFieldComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<lu-form-field label="Options">
-			<lu-multi-select [(ngModel)]="selectedOptions" [options]="options" />
+			<lu-multi-select [(value)]="selectedOptions" [options]="options" />
 		</lu-form-field>
 	`,
 })
@@ -510,7 +510,6 @@ describe('LuMultiSelectInputComponent', () => {
 			const hostFixture = TestBed.createComponent(host);
 			writeValue(hostFixture.componentInstance);
 			hostFixture.detectChanges();
-			// ngModel writes its value asynchronously
 			await hostFixture.whenStable();
 			hostFixture.detectChanges();
 
@@ -557,7 +556,6 @@ describe('LuMultiSelectInputComponent', () => {
 
 			// Act
 			await firstValueFrom(formField.ready$.pipe(filter(Boolean)));
-			// ngModel writes its value asynchronously
 			await hostFixture.whenStable();
 			hostFixture.detectChanges();
 

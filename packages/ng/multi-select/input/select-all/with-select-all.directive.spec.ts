@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
@@ -26,11 +25,11 @@ const compareById: LuOptionComparer<Entity> = (a, b) => a.id === b.id;
 
 @Component({
 	selector: 'lu-multi-select-with-select-all-host',
-	imports: [ReactiveFormsModule, LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
+	imports: [LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<lu-multi-select
-			[formControl]="formControl"
+			[(value)]="selection"
 			[options]="options"
 			[optionComparer]="optionComparer()"
 			withSelectAll
@@ -46,14 +45,14 @@ class WithSelectAllHostComponent {
 	readonly displayerLabelFn = input<((count: number) => string) | undefined>(undefined);
 	readonly optionComparer = input<LuOptionComparer<Entity>>((a, b) => a === b);
 
-	readonly formControl = new FormControl<LuMultiSelection<Entity> | null>({ mode: 'none' });
+	readonly selection = signal<LuMultiSelection<Entity> | null>({ mode: 'none' });
 
 	readonly options = options;
 }
 
 describe(LuMultiSelectWithSelectAllDirective.name, () => {
 	let fixture: ComponentFixture<WithSelectAllHostComponent>;
-	let formControl: FormControl<LuMultiSelection<Entity> | null>;
+	let selection: WritableSignal<LuMultiSelection<Entity> | null>;
 	let directive: LuMultiSelectWithSelectAllDirective<Entity>;
 	let select: LuMultiSelectInputComponent<Entity>;
 
@@ -66,7 +65,16 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 	};
 
 	/** Mimics the panel emitting the options checked one by one by the user. */
-	const checkOptions = (values: Entity[]) => select.updateValue(values, true);
+	const checkOptions = (values: Entity[]) => {
+		select.updateValue(values, true);
+		fixture.detectChanges();
+	};
+
+	/** Writes the selection from the host, as a form would. */
+	const setSelection = (value: LuMultiSelection<Entity> | null) => {
+		selection.set(value);
+		fixture.detectChanges();
+	};
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -74,7 +82,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 		});
 
 		fixture = TestBed.createComponent(WithSelectAllHostComponent);
-		formControl = fixture.componentInstance.formControl;
+		selection = fixture.componentInstance.selection;
 	});
 
 	describe('isSelected', () => {
@@ -89,7 +97,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 			[{ mode: 'exclude', values: [options[1]] }, [options[1]], true],
 		])('should consider the first option selected for %j: %s', (selection, selectedOptions, expected) => {
 			// Arrange
-			formControl.setValue(selection);
+			setSelection(selection);
 			// Act
 			const result = directive.isSelected(options[0], selectedOptions, compareById);
 			// Assert
@@ -109,7 +117,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 			[{ mode: 'exclude', values: [options[0]] }, [], false],
 		])('should compute group selection for %j with not selected options %j: %s', (selection, notSelectedOptions, expected) => {
 			// Arrange
-			formControl.setValue(selection);
+			setSelection(selection);
 			// Act
 			const result = directive.isGroupSelected(options, notSelectedOptions);
 			// Assert
@@ -127,7 +135,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 			// Arrange
 			setup();
 			// Act
-			formControl.setValue(selection);
+			setSelection(selection);
 			// Assert
 			expect(directive.displayerCount()).toBe(expected);
 			expect(select.valueLength()).toBe(expected ?? 0);
@@ -137,7 +145,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 			// Arrange
 			setup({ totalCount: 42 });
 			// Act
-			formControl.setValue({ mode: 'exclude', values: [options[0]] });
+			setSelection({ mode: 'exclude', values: [options[0]] });
 			// Assert
 			expect(directive.displayerCount()).toBe(41);
 		});
@@ -146,7 +154,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 			// Arrange
 			setup({ displayerLabel: 'items' });
 			// Act
-			formControl.setValue({ mode: 'all' });
+			setSelection({ mode: 'all' });
 			// Assert
 			expect(directive.displayerLabelValue()).toBe('5 items');
 		});
@@ -155,7 +163,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 			// Arrange
 			setup({ displayerLabel: 'items', displayerLabelFn: (count: number) => `${count} selected` });
 			// Act
-			formControl.setValue({ mode: 'include', values: options.slice(0, 3) });
+			setSelection({ mode: 'include', values: options.slice(0, 3) });
 			// Assert
 			expect(directive.displayerLabelValue()).toBe('3 selected');
 		});
@@ -164,7 +172,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 			// Arrange
 			setup();
 			// Act
-			formControl.setValue({ mode: 'exclude', values: [options[0]] });
+			setSelection({ mode: 'exclude', values: [options[0]] });
 			fixture.detectChanges();
 			// Assert
 			expect((fixture.nativeElement as HTMLElement).querySelector('.multipleSelect-displayer-chip')?.textContent?.trim()).toBe('4 items');
@@ -176,7 +184,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 
 		it('should consider the select empty in "none" mode', () => {
 			// Act
-			formControl.setValue({ mode: 'none' });
+			setSelection({ mode: 'none' });
 			// Assert
 			expect(select.hasValue()).toBe(false);
 			expect(select.isFilterPillEmpty()).toBe(true);
@@ -184,39 +192,39 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 
 		it('should consider the select filled in "all" mode even without values', () => {
 			// Act
-			formControl.setValue({ mode: 'all' });
+			setSelection({ mode: 'all' });
 			// Assert
 			expect(select.hasValue()).toBe(true);
 			expect(select.isFilterPillEmpty()).toBe(false);
 		});
 	});
 
-	describe('writeValue', () => {
+	describe('value', () => {
 		beforeEach(() => setup());
 
 		it('should treat a null value as an empty selection', () => {
 			// Act
-			formControl.setValue(null);
+			setSelection(null);
 			// Assert
 			expect(directive.mode()).toBe('none');
 			expect(directive.values()).toEqual([]);
-			expect(select.value).toEqual([]);
+			expect(select.selectedOptions()).toEqual([]);
 		});
 
 		it('should not pass any value to the select in "all" mode', () => {
 			// Act
-			formControl.setValue({ mode: 'all' });
+			setSelection({ mode: 'all' });
 			// Assert
 			expect(directive.mode()).toBe('all');
-			expect(select.value).toEqual([]);
+			expect(select.selectedOptions()).toEqual([]);
 		});
 
 		it('should pass the excluded values to the select in "exclude" mode', () => {
 			// Act
-			formControl.setValue({ mode: 'exclude', values: [options[0]] });
+			setSelection({ mode: 'exclude', values: [options[0]] });
 			// Assert
 			expect(directive.mode()).toBe('exclude');
-			expect(select.value).toEqual([options[0]]);
+			expect(select.selectedOptions()).toEqual([options[0]]);
 		});
 	});
 
@@ -225,48 +233,48 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 
 		it('should stay in "include" mode when checking more options', () => {
 			// Arrange
-			formControl.setValue({ mode: 'include', values: [options[0]] });
+			setSelection({ mode: 'include', values: [options[0]] });
 			// Act
 			checkOptions(options.slice(0, 2));
 			// Assert
-			expect(formControl.value).toEqual({ mode: 'include', values: options.slice(0, 2) });
+			expect(selection()).toEqual({ mode: 'include', values: options.slice(0, 2) });
 		});
 
 		it('should switch from "include" to "none" when unchecking the last option', () => {
 			// Arrange
-			formControl.setValue({ mode: 'include', values: [options[0]] });
+			setSelection({ mode: 'include', values: [options[0]] });
 			// Act
 			checkOptions([]);
 			// Assert
-			expect(formControl.value).toEqual({ mode: 'none' });
+			expect(selection()).toEqual({ mode: 'none' });
 		});
 
 		it('should stay in "exclude" mode when unchecking more options', () => {
 			// Arrange
-			formControl.setValue({ mode: 'exclude', values: [options[0]] });
+			setSelection({ mode: 'exclude', values: [options[0]] });
 			// Act
 			checkOptions(options.slice(0, 2));
 			// Assert
-			expect(formControl.value).toEqual({ mode: 'exclude', values: options.slice(0, 2) });
+			expect(selection()).toEqual({ mode: 'exclude', values: options.slice(0, 2) });
 		});
 
 		it('should switch from "exclude" to "all" when checking back every excluded option', () => {
 			// Arrange
-			formControl.setValue({ mode: 'exclude', values: [options[0]] });
+			setSelection({ mode: 'exclude', values: [options[0]] });
 			// Act
 			checkOptions([]);
 			// Assert
-			expect(formControl.value).toEqual({ mode: 'all' });
+			expect(selection()).toEqual({ mode: 'all' });
 		});
 
 		it('should reset the select inner value once every option has been checked one by one', () => {
 			// Arrange
-			formControl.setValue({ mode: 'include', values: options.slice(0, 4) });
+			setSelection({ mode: 'include', values: options.slice(0, 4) });
 			// Act
 			checkOptions(options);
 			// Assert
-			expect(formControl.value).toEqual({ mode: 'all' });
-			expect(select.value).toEqual([]);
+			expect(selection()).toEqual({ mode: 'all' });
+			expect(select.selectedOptions()).toEqual([]);
 		});
 	});
 
@@ -275,22 +283,22 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 
 		it('should drop the included values when selecting all', () => {
 			// Arrange
-			formControl.setValue({ mode: 'include', values: [options[0]] });
+			setSelection({ mode: 'include', values: [options[0]] });
 			// Act
 			directive.setSelectAll(true);
 			// Assert
-			expect(formControl.value).toEqual({ mode: 'all' });
+			expect(selection()).toEqual({ mode: 'all' });
 			expect(directive.values()).toEqual([]);
-			expect(select.value).toEqual([]);
+			expect(select.selectedOptions()).toEqual([]);
 		});
 
 		it('should drop the excluded values when unselecting all', () => {
 			// Arrange
-			formControl.setValue({ mode: 'exclude', values: [options[0]] });
+			setSelection({ mode: 'exclude', values: [options[0]] });
 			// Act
 			directive.setSelectAll(false);
 			// Assert
-			expect(formControl.value).toEqual({ mode: 'none' });
+			expect(selection()).toEqual({ mode: 'none' });
 			expect(directive.values()).toEqual([]);
 		});
 
@@ -364,7 +372,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 			// Arrange
 			setup({ optionComparer: compareById });
 			// Act
-			formControl.setValue({ mode: 'exclude', values: options.slice(1).map((option) => ({ ...option })) });
+			setSelection({ mode: 'exclude', values: options.slice(1).map((option) => ({ ...option })) });
 			// Assert
 			expect(directive.singleRemainingOption()).toBe(options[0]);
 		});
@@ -373,7 +381,7 @@ describe(LuMultiSelectWithSelectAllDirective.name, () => {
 			// Arrange
 			setup();
 			// Act
-			formControl.setValue({ mode: 'include', values: [options[0]] });
+			setSelection({ mode: 'include', values: [options[0]] });
 			// Assert
 			expect(directive.singleRemainingOption()).toBeUndefined();
 		});
