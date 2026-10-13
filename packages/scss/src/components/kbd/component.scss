@@ -1,15 +1,15 @@
 @use 'sass:math';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
-$holdPress: 6%;
-$holdRelease: 34%;
+$holdPress: 10%;
+$holdRelease: 35%;
 $holdEnd: 40%;
-$tapStart: 14%;
+$tapStart: 15%;
 $tapPeak: 20%;
-$tapEnd: 26%;
+$tapEnd: 25%;
 $holdIdle: math.div(100% - $holdEnd, 100%);
 $tapIdle: math.div(100% - ($tapEnd - $tapStart), 100%);
-$keysMax: 6;
+$keysMax: 5;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	align-items: center;
