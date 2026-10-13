@@ -1,6 +1,8 @@
 @if (!manualApply()) {
 	<span class="pr-u-mask" [attr.id]="autoApplyAnnouncementId">{{ intl().autoApplyAnnouncement }}</span>
 }
+<!-- Always rendered so that the first count, received after loading, is announced -->
+<span class="pr-u-mask" role="status">{{ resultsCountLabel() }}</span>
 <lu-scroll-box class="filterBar-scrollBox">
 	<div class="filterBar-scrollBox-group">
 		@if (addonBefore()) {
@@ -26,6 +28,10 @@
 		}
 
 		<ng-content />
+
+		@if (resultsCount() !== null) {
+			<span class="filterBar-scrollBox-group-results" aria-hidden="true">{{ resultsCountLabel() }}</span>
+		}
 	</div>
 
 	@if (segmentedControlTabs(); as segmentedControlTabs) {

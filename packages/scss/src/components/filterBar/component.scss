@@ -50,6 +50,12 @@
 			flex-shrink: 1 !important;
 		}
 
+		.filterBar-scrollBox-group-results {
+			align-self: center;
+			color: var(--pr-t-color-text-subtle);
+			white-space: nowrap;
+		}
+
 		.filterBar-scrollBox-export {
 			margin-inline-start: var(--components-filterBar-scrollBox-export-marginInlineStart);
 			padding-inline-start: var(--components-filterBar-scrollBox-export-paddingInlineStart);

@@ -138,6 +138,15 @@ export default {
 			},
 			table: { category: 'inputs' },
 		},
+		resultsCount: {
+			description:
+				'Nombre de résultats correspondant aux filtres, affiché à la fin de la FilterBar (avant l’addon `luFilterPillAddonAfter`) et annoncé aux technologies d’assistance quand il change. `null` le masque.',
+			control: {
+				type: 'number',
+				min: 0,
+			},
+			table: { category: 'inputs' },
+		},
 		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
 	},
 	render: (args, { argTypes }) => {
@@ -255,8 +264,9 @@ export default {
 				selectedFilterView: filterViews[0],
 				renameView: (view: (typeof filterViews)[number]) => args['renameView']?.(view),
 				deleteView: (view: (typeof filterViews)[number]) => args['deleteView']?.(view),
+				resultsCount: args['resultsCount'] ?? null,
 			},
-			template: `<lu-filter-bar${args['manualApply'] ? ' manualApply' : ''}>
+			template: `<lu-filter-bar${args['manualApply'] ? ' manualApply' : ''} [resultsCount]="resultsCount">
 	${views}
 	<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false" />
@@ -294,5 +304,6 @@ export const Basic: StoryObj<
 		groupedOptionalFilters: false,
 		actionButton: false,
 		manualApply: false,
+		resultsCount: null,
 	},
 };

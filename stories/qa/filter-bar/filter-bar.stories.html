@@ -137,6 +137,31 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Results count</td>
+			<td>
+				<div class="demo-QAtable-list">
+					@for (count of [0, 1, 1250]; track count) {
+						<lu-filter-bar [resultsCount]="count">
+							<lu-filter-pill label="Arroser" [name]="'resultsCountFormerEmployees' + count">
+								<lu-checkbox-input [ngModel]="false" />
+							</lu-filter-pill>
+						</lu-filter-bar>
+					}
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Results count + actions</td>
+			<td>
+				<lu-filter-bar [resultsCount]="24">
+					<lu-filter-pill label="Arroser" name="resultsCountActionsFormerEmployees">
+						<lu-checkbox-input [ngModel]="false" />
+					</lu-filter-pill>
+					<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Cueillir</button>
+				</lu-filter-bar>
+			</td>
+		</tr>
+		<tr>
 			<td>Manual apply</td>
 			<td>
 				<lu-filter-bar manualApply>
@@ -242,7 +267,7 @@
 		<tr>
 			<td>All options</td>
 			<td>
-				<lu-filter-bar manualApply>
+				<lu-filter-bar manualApply [resultsCount]="24">
 					<lu-segmented-control *luFilterPillAddonBefore [ngModel]="'0'">
 						<ng-template #allOptionsLabel0>Tous <lu-numeric-badge [value]="12" /></ng-template>
 						<ng-template #allOptionsLabel1>À semer <lu-numeric-badge [value]="5" /></ng-template>
@@ -277,7 +302,7 @@
 			<td>Narrow (simulated)</td>
 			<td>
 				<div class="demo-filterBar-narrow">
-					<lu-filter-bar manualApply>
+					<lu-filter-bar manualApply [resultsCount]="24">
 						<lu-segmented-control *luFilterPillAddonBefore [ngModel]="'0'">
 							<ng-template #narrowLabel0>Tous <lu-numeric-badge [value]="12" /></ng-template>
 							<ng-template #narrowLabel1>À semer <lu-numeric-badge [value]="5" /></ng-template>
@@ -340,7 +365,7 @@
 			<td>Touch (simulated)</td>
 			<td>
 				<div class="demo-filterBar-touch">
-					<lu-filter-bar manualApply>
+					<lu-filter-bar manualApply [resultsCount]="24">
 						<lu-segmented-control *luFilterPillAddonBefore [ngModel]="'0'">
 							<ng-template #touchLabel0>Tous <lu-numeric-badge [value]="12" /></ng-template>
 							<ng-template #touchLabel1>À semer <lu-numeric-badge [value]="5" /></ng-template>

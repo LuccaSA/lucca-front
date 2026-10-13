@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, LOCALE_ID, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
 import { FilterBarComponent } from './filter-bar.component';
@@ -98,5 +98,99 @@ describe('FilterBarComponent: segmentedControlTabs', () => {
 		expect(segmentedControlTabs().querySelector('[role="tablist"]')).not.toBeNull();
 		expect(filterBar().querySelector('.filterBar-scrollBox-divider')).toBeNull();
 		expect(filterBar().querySelector('.addonAfter')).not.toBeNull();
+	});
+});
+
+@Component({
+	template: `
+		<lu-filter-bar [resultsCount]="resultsCount()">
+			<span class="pill">Pill</span>
+			<button class="addonAfter" *luFilterPillAddonAfter type="button">Export</button>
+		</lu-filter-bar>
+	`,
+	imports: [FilterBarComponent, FilterPillAddonAfterDirective],
+})
+class HostWithResultsCountComponent {
+	readonly resultsCount = signal<number | null>(24);
+}
+
+@Component({
+	template: `<lu-filter-bar resultsCount="0" />`,
+	imports: [FilterBarComponent],
+})
+class HostWithStaticResultsCountComponent {}
+
+describe('FilterBarComponent: resultsCount', () => {
+	let fixture: ComponentFixture<HostWithResultsCountComponent>;
+
+	const results = () => (fixture.nativeElement as HTMLElement).querySelector('.filterBar-scrollBox-group-results');
+	const status = () => (fixture.nativeElement as HTMLElement).querySelector('[role="status"]');
+
+	const setResultsCount = (count: number | null) => {
+		fixture.componentInstance.resultsCount.set(count);
+		fixture.detectChanges();
+	};
+
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [HostWithResultsCountComponent, HostWithStaticResultsCountComponent],
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		});
+		fixture = TestBed.createComponent(HostWithResultsCountComponent);
+		fixture.detectChanges();
+	});
+
+	it('displays the count after the filters, before the actions, hidden from assistive technologies', () => {
+		expect(results()?.textContent?.trim()).toBe('24\u00A0résultats');
+		expect(results()?.getAttribute('aria-hidden')).toBe('true');
+		expect(results()?.previousElementSibling?.classList).toContain('pill');
+		expect(results()?.parentElement?.nextElementSibling?.classList).toContain('filterBar-scrollBox-export');
+	});
+
+	it('copies the count in a status region', () => {
+		expect(status()?.textContent?.trim()).toBe('24\u00A0résultats');
+	});
+
+	it('uses the singular form for a single result', () => {
+		setResultsCount(1);
+
+		expect(results()?.textContent?.trim()).toBe('1\u00A0résultat');
+	});
+
+	it('displays a dedicated label when there is no result', () => {
+		setResultsCount(0);
+
+		expect(results()?.textContent?.trim()).toBe('Aucun résultat');
+	});
+
+	it('formats the count according to the locale', () => {
+		setResultsCount(1250);
+
+		expect(results()?.textContent?.trim()).toBe(`${new Intl.NumberFormat('fr-FR').format(1250)}\u00A0résultats`);
+	});
+
+	it('hides the count when it is null, but keeps the status region mounted and empty', () => {
+		const statusBefore = status();
+		setResultsCount(null);
+
+		expect(results()).toBeNull();
+		expect(status()).toBe(statusBefore);
+		expect(status()?.textContent?.trim()).toBe('');
+	});
+
+	it('fills the same status region when the count arrives after loading', () => {
+		setResultsCount(null);
+		const statusWhileLoading = status();
+		setResultsCount(3);
+
+		expect(status()).toBe(statusWhileLoading);
+		expect(status()?.textContent?.trim()).toBe('3\u00A0résultats');
+	});
+
+	it('accepts a static numeric attribute', () => {
+		const staticFixture = TestBed.createComponent(HostWithStaticResultsCountComponent);
+		staticFixture.detectChanges();
+
+		expect((staticFixture.nativeElement as HTMLElement).querySelector('.filterBar-scrollBox-group-results')?.textContent?.trim()).toBe('Aucun résultat');
 	});
 });

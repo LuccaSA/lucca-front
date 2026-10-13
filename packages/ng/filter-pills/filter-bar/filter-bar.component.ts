@@ -1,7 +1,23 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, forwardRef, input, Signal, signal, TemplateRef, viewChild, ViewEncapsulation, WritableSignal } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	contentChildren,
+	effect,
+	forwardRef,
+	inject,
+	input,
+	LOCALE_ID,
+	Signal,
+	signal,
+	TemplateRef,
+	viewChild,
+	ViewEncapsulation,
+	WritableSignal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
+import { getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, luBooleanAttribute, luNullableNumberAttribute } from '@lucca-front/ng/core';
 import { LuOptionComparer, LuOptionDirective, LuOptionGroupByContext, LuOptionGrouping } from '@lucca-front/ng/core-select';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
@@ -62,6 +78,29 @@ export class FilterBarComponent {
 	 * The `luFilterPillAddonAfter` addon is displayed after the tabs, separated by a divider.
 	 */
 	readonly segmentedControlTabs = input<FilterBarSegmentedControlTabs | null>(null);
+
+	/**
+	 * Number of results matching the filters, displayed after the filters and announced to assistive technology
+	 * users when it changes. `null` hides it, for instance while results are loading.
+	 */
+	readonly resultsCount = input(null, { transform: luNullableNumberAttribute });
+
+	readonly #pluralRules = inject(LOCALE_PLURAL_RULES);
+
+	readonly #numberFormat = new Intl.NumberFormat(inject(LOCALE_ID));
+
+	readonly #intlParams = new IntlParamsPipe();
+
+	protected readonly resultsCountLabel = computed(() => {
+		const count = this.resultsCount();
+		if (count === null) {
+			return '';
+		}
+		if (count === 0) {
+			return this.intl().noResults;
+		}
+		return this.#intlParams.transform(getIntlPluralLabel(this.#pluralRules, this.intl().resultsCount, count), { count: this.#numberFormat.format(count) });
+	});
 
 	readonly autoApplyAnnouncementId = `filterBar-autoApplyAnnouncement-${nextId++}`;
 

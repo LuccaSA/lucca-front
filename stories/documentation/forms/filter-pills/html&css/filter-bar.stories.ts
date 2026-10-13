@@ -50,6 +50,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 	return `
 	<form>
 		<div class="filterBar">
+			<span class="pr-u-mask" role="status">24 résultats</span>
 			<lu-scroll-box class="filterBar-scrollBox">
 				<div class="filterBar-scrollBox-group">
 					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
@@ -112,6 +113,8 @@ function getTemplate(args: FilterBarBasicStory): string {
 					</div>
 
 					<button type="submit" class="button mod-ghost mod-S palette-product">Appliquer les filtres</button>
+
+					<span class="filterBar-scrollBox-group-results" aria-hidden="true">24 résultats</span>
 				</div>
 				<div class="filterBar-scrollBox-export">
 					<button type="submit" class="button mod-S mod-outlined">Exporter</button>
