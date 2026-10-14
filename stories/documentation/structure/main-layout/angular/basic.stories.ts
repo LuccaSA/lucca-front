@@ -4,6 +4,7 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { MAIN_LAYOUT_ILLUSTRATION_END_START, MAIN_LAYOUT_ILLUSTRATION_START_END, MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 
+import { PALETTE, PRODUCT_PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
 
 interface MainLayoutAngularBasicStory {
@@ -102,6 +103,8 @@ export default {
 		},
 		palette: {
 			...PaletteArgType,
+			// Product palettes are not part of the `Palette` type but are supported by the main layout styles
+			options: setStoryOptions([...PALETTE, ...PRODUCT_PALETTE]),
 			description: 'Applique une palette de couleurs au layout.',
 			table: { category: 'inputs' },
 		},
