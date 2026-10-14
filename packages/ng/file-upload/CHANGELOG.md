@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Fixed
+
+- `type` and `size` of a `FileEntry` now accept `null`, and `lu-file-entry` no longer displays them when they are `null`.
+
 ### 22.0.0
 
 #### Added

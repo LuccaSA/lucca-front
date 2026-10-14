@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Fixed
+
+- No more extra scrollable space or unneeded scrollbar in Chrome.
+
 ### 22.0.4
 
 #### Fixed
