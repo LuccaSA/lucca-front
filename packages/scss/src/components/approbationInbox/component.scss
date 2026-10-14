@@ -235,6 +235,7 @@
 
 		.approbationInbox-detail-main-block-title {
 			@include title.h3;
+			margin-block-end: var(--pr-t-spacings-150);
 		}
 
 		.approbationInbox-list-content-items {
