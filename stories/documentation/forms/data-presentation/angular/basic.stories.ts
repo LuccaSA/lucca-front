@@ -7,7 +7,7 @@ export default {
 	argTypes: {
 		label: {
 			control: { type: 'text' },
-			description: 'Libellé de la donnée (terme). La valeur correspond au contenu projeté. [PortalContent]',
+			description: 'Libellé de la donnée. La valeur correspond au contenu projeté. [PortalContent]',
 			table: { category: 'inputs' },
 		},
 		size: {
