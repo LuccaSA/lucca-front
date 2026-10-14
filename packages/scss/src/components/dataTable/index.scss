@@ -58,6 +58,7 @@
 			@include layoutFixedCells;
 		}
 
+		// .mod-hover is deprecated
 		&.mod-hover {
 			:is(.mod-selectable, .dataTable-body-row:not(.mod-group)) {
 				&:hover {

@@ -123,7 +123,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Marque la ligne au survol pour faciliter la lisibilité des tableaux larges (ne sous-entend pas une interaction).',
+			description: '[Deprecated] Sans remplacement : une ligne sans action ne doit pas avoir d’effet de survol.',
 			table: { category: 'inputs' },
 		},
 		cellBorder: {
