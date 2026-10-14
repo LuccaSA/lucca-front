@@ -1,5 +1,4 @@
 import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { _getEventTarget } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	DestroyRef,
@@ -293,7 +292,7 @@ export class PopoverDirective implements OnDestroy {
 					// an input opening on focus). Ignore those here, otherwise we'd close on pointerdown
 					// then immediately reopen on click.
 					// `event.target` is retargeted to the shadow host when the trigger lives in a shadow root.
-					const target = _getEventTarget(event);
+					const target = event.composedPath()[0] ?? event.target;
 					if (target instanceof Node && (this.elementRef.nativeElement.contains(target) || this.#anchorElement?.contains(target) || this.#isIgnoredOutsidePointerTarget(target))) {
 						return;
 					}
