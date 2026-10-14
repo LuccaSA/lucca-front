@@ -434,6 +434,16 @@ Source: [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/
 			<td>–</td>
 			<td>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…) (<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)</td>
 		</tr>
+		<tr>
+			<td>
+					<ul>
+					<li><code>.dataTable</code> <strong>+</strong> <code>.mod-hover</code></li>
+					</ul>
+				</td>
+			<td>22.0.6</td>
+			<td>–</td>
+			<td>Retirer la classe <code>.mod-hover</code> et l’input Angular <code>hover</code>, sans remplacement : une ligne sans action ne doit pas avoir d’effet de survol.</td>
+		</tr>
 	</tbody>
 </table>
 
