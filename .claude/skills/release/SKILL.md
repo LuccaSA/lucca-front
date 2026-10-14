@@ -25,7 +25,11 @@ Sans argument, demander la version et s'arrêter. Accepter `22.1`, `22.1.0`, `v2
 | **Mineure** | `X.Y.0`, `Y > 0` | `22.1` | `22.1` |
 | **Patch** | `X.Y.Z`, `Z > 0` | `22.0.6` | `22.0.6` |
 
-Vérifier que le milestone existe (`gh api repos/LuccaSA/lucca-front/milestones -q '.[].title'`), sinon s'arrêter et le signaler.
+Vérifier que le milestone existe, sinon s'arrêter et le signaler. La liste est paginée : toujours passer `--paginate`, sinon un milestone au-delà de la première page passe pour absent.
+
+```bash
+gh api repos/LuccaSA/lucca-front/milestones --paginate -q '.[] | "\(.number)\t\(.title)\t\(.state)"'
+```
 
 ### Branche source et version précédente
 
@@ -34,13 +38,28 @@ git fetch origin --tags --prune
 ```
 
 - **Mineure / majeure** : branche source `origin/release/X.Y` (sans `v`). Si elle n'existe pas, s'arrêter.
-- **Patch** : `origin/master` si `X.Y` est la ligne courante de master ; sinon la branche de maintenance `origin/vX.Y-lts` (jamais `release/X.Y`, ces branches sont des snapshots dormants une fois la mineure sortie). Vérifier qu'elle contient bien le dernier tag publié de la ligne : `git merge-base --is-ancestor <dernier tag vX.Y.*> <branche>`. Si non, s'arrêter.
+- **Patch** : `origin/master` si `X.Y` est la ligne courante de master, c'est-à-dire celle de son dernier tag stable :
 
-Version précédente (`PREV_TAG`), toujours un tag stable (sans `rc`/`alpha`/`beta`) :
+  ```bash
+  git describe --tags --abbrev=0 --match 'v*' --exclude '*-*' origin/master   # ex. v22.0.5 → ligne 22.0
+  ```
 
-- **Patch** : le tag `vX.Y.(Z-1)`.
-- **Mineure** : le dernier tag stable de `X.(Y-1)` — `git tag -l "vX.$((Y-1)).*" | grep -vE 'rc|alpha|beta|experimental' | sort -V | tail -1`.
-- **Majeure** : le dernier tag stable de la majeure précédente.
+  Sinon, la branche de maintenance `origin/vX.Y-lts` (jamais `release/X.Y`, ces branches sont des snapshots dormants une fois la mineure sortie). Si aucune des deux ne correspond, s'arrêter.
+
+Version précédente (`PREV_TAG`), toujours un tag stable : sans suffixe (`rc`, `alpha`, `beta`, `experimental`…), et strictement inférieur à `vX.Y.Z`. Ne jamais calculer le numéro (`Z-1`, `Y-1`) : un patch peut avoir été sauté, et une mineure précédente n'existe pas toujours (`X.0.0`).
+
+```bash
+{ git tag -l 'v*' | awk '!/-/'; echo "vX.Y.Z"; } | sort -uV \
+  | awk -v cur="vX.Y.Z" '$0 == cur { print p; exit } { p = $0 }'
+```
+
+On insère `vX.Y.Z` (pas encore tagué) dans la liste triée des tags stables, et on lit celui qui le précède. Contrôler ensuite qu'il est cohérent avec le type :
+
+- **Patch** : un tag `vX.Y.*`. Sinon (premier patch sur une ligne sans tag), s'arrêter.
+- **Mineure** : un tag de la même majeure (`vX.*`).
+- **Majeure** : un tag de la majeure précédente.
+
+Vérifier enfin que la branche source contient `PREV_TAG` : `git merge-base --is-ancestor <PREV_TAG> origin/<branche source>`. Si non, la branche est périmée : s'arrêter.
 
 Annoncer en une ligne : type, branche source, `PREV_TAG`, étapes qui vont s'exécuter.
 
@@ -79,6 +98,8 @@ git diff --name-only <PREV_TAG>..origin/<branche source> -- packages/ng packages
 
 Rapprocher les noms SCSS (camelCase) des entrypoints Angular (kebab-case) et ne garder que ceux qui ont un `CHANGELOG.md` (`find packages -name CHANGELOG.md -not -path '*/node_modules/*'`). Un composant sans CHANGELOG.md est listé dans le rapport, pas créé.
 
+Si la liste est vide (release purement technique ou documentaire), le dire, supprimer la branche locale (`git switch - && git branch -d docs/components-changelog-X.Y.Z`) et passer à l'étape suivante sans PR.
+
 ### Mise à jour
 
 Appliquer le skill `update-components-changelog` à chacun de ces composants, avec **une seule adaptation** : la version `X.Y.Z` n'est pas encore taguée, mais c'est elle qu'on documente. Les commits de `<PREV_TAG>..origin/<branche source>` vont sous `### X.Y.Z`, au lieu d'être écartés comme « non publiés ». Les versions déjà publiées et non documentées suivent la règle normale du skill.
@@ -87,7 +108,13 @@ Recouper avec le changelog de l'étape 1 : une entrée de composant sans PR corr
 
 ### PR
 
-Montrer le `git diff --stat` et demander confirmation, puis :
+Montrer le `git diff --stat` et demander confirmation :
+
+- **Refus** : ne rien commiter, laisser les modifications sur la branche locale et le noter dans le rapport.
+- **Accord partiel** (« pousse », sans parler de PR) : ne faire que ce qui a été validé, et proposer le reste dans le rapport.
+- **Les modifications ont déjà été commitées par l'utilisateur** (`git status` propre, commit en avance sur la base) : ne pas recommiter, reprendre directement au push.
+
+Pour chaque étape validée :
 
 ```bash
 git add -- ':(glob)packages/**/CHANGELOG.md'
