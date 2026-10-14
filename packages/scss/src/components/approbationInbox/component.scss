@@ -16,14 +16,12 @@
 			margin-inline: var(--components-approbationInbox-list-marginInlineStart) var(--components-approbationInbox-list-marginInlineEnd);
 			display: flex;
 			flex-direction: column;
-			gap: var(--pr-t-spacings-50);
 		}
 
 		.approbationInbox-list-formSelectionOptional {
 			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
-			gap: var(--pr-t-spacings-50);
 			min-block-size: 0;
 		}
 
@@ -36,6 +34,7 @@
 			border-radius: var(--pr-t-border-radius-structure);
 			overflow: auto;
 			flex-grow: 1;
+			margin-block-start: var(--pr-t-spacings-200);
 
 			&:focus-visible {
 				@include a11y.focusVisible;
@@ -88,7 +87,7 @@
 		}
 
 		.approbationInbox-list-header-title {
-			@include title.h3;
+			@include title.h2;
 
 			.numericBadge {
 				vertical-align: center;
@@ -96,8 +95,6 @@
 		}
 
 		.approbationInbox-list-header-filterBar {
-			margin-block-end: var(--pr-t-spacings-100);
-
 			&:empty {
 				display: none;
 			}
