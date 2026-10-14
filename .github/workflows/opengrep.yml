@@ -1,0 +1,20 @@
+name: Opengrep
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  opengrep:
+    uses: LuccaSA/actions/.github/workflows/opengrep.yml@c4c56ac0bbce16483bc4f0ad09ea50fcaaa5cd75 # v3.0.1
+    secrets: inherit
+    permissions:
+      actions: read
+      contents: read
+      packages: write
+      pull-requests: write
+      security-events: write
+    with:
+      runs-on: lucca-ci
