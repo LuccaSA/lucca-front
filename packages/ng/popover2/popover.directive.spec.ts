@@ -470,6 +470,32 @@ describe(PopoverDirective.name, () => {
 			// Assert
 			expect(directive.opened()).toBe(true);
 		}));
+
+		it('should stay closed when the close button is clicked right after a mouseenter on the popover', fakeAsync(() => {
+			// Arrange
+			setup({ trigger: 'click+hover' });
+			triggerElement.click();
+			fixture.detectChanges();
+			// Act
+			getPopover()!.dispatchEvent(new MouseEvent('mouseenter'));
+			getCloseButton()!.click();
+			tick(1000);
+			// Assert
+			expect(directive.opened()).toBe(false);
+		}));
+
+		it('should stay closed when close() is called right after a mouseenter on the popover', fakeAsync(() => {
+			// Arrange
+			setup({ trigger: 'click+hover' });
+			triggerElement.click();
+			fixture.detectChanges();
+			// Act
+			getPopover()!.dispatchEvent(new MouseEvent('mouseenter'));
+			directive.close();
+			tick(1000);
+			// Assert
+			expect(directive.opened()).toBe(false);
+		}));
 	});
 
 	describe('focus trigger', () => {

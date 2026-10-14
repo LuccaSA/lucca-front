@@ -326,6 +326,8 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
 			this.#componentRef.closed$.pipe(take(1), takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 				this.opened.set(false);
+				// Replaces any open still pending in the debounce, e.g. from the mouseenter a tap fires on the panel
+				this.close$.next();
 				this.#skipNextFocus = false;
 				this.luPopoverClosed.emit();
 				this.#listenToMouseLeave = false;
