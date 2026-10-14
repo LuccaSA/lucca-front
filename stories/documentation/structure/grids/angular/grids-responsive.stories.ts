@@ -53,7 +53,7 @@ export default {
 				'autoAtMediaMinXXL',
 				'autoAtMediaMinXXXL',
 			],
-			table: { category: 'inputs (grid)' },
+			table: { category: 'story' },
 		},
 		modeContainer: {
 			if: { arg: 'container', eq: true },
