@@ -31,12 +31,17 @@ export default {
 		},
 		selected: {
 			control: 'date',
-			description: 'Définit une date sélectionnée.',
-			table: { category: 'inputs' },
+			description: 'Date sélectionnée, liée via `ngModel`.',
+			table: { category: 'ngModel' },
 		},
 		hideToday: {
 			control: 'boolean',
 			description: 'Retire la mise en valeur de la date du jour.',
+			table: { category: 'inputs' },
+		},
+		hasTodayButton: {
+			control: 'boolean',
+			description: 'Ajoute un bouton pour sélectionner la date du jour.',
 			table: { category: 'inputs' },
 		},
 		clearable: {
@@ -48,19 +53,25 @@ export default {
 			control: 'select',
 			options: setStoryOptions(DATE2_CLEAR_BEHAVIOR),
 			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'clear' } },
 		},
 		format: {
 			control: 'select',
 			options: setStoryOptions(DATE_FORMAT_CONST),
 			description: 'Modifie le format de date.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'date' } },
 		},
 		mode: {
 			control: 'select',
 			options: setStoryOptions(CALENDAR_MODE),
 			description: "Modifie le mode de sélection à la semaine, au mois ou à l'année.",
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'day' } },
+		},
+		calendarMode: {
+			control: 'select',
+			options: setStoryOptions(CALENDAR_MODE),
+			description: 'Vue affichée par le calendrier à l’ouverture (jour, mois ou année), indépendamment du mode de sélection. Vaut `mode` par défaut. Two-way.',
+			table: { category: 'models', type: { summary: 'CalendarMode | null' } },
 		},
 		focusedDate: {
 			control: 'date',
@@ -72,6 +83,27 @@ export default {
 			description: 'Applique une pleine largeur au composant.',
 			table: { category: 'inputs' },
 		},
+		autocomplete: {
+			control: 'select',
+			options: ['off', 'on'],
+			description: 'Applique une valeur d’autocomplete au champ.',
+			table: { category: 'inputs', defaultValue: { summary: 'off' } },
+		},
+		placeholder: {
+			control: 'text',
+			description: 'Modifie le placeholder du champ. Par défaut, le format de date localisé.',
+			table: { category: 'inputs' },
+		},
+		ranges: {
+			control: false,
+			description: 'Périodes à mettre en valeur dans le calendrier.',
+			table: { category: 'inputs', type: { summary: 'readonly DateRange[] | readonly DateRangeInput[]' } },
+		},
+		getCellInfo: {
+			control: false,
+			description: 'Fonction appelée pour chaque cellule du calendrier afin de personnaliser son statut : classes, désactivation, sélection.',
+			table: { category: 'inputs', type: { summary: '(day: Date, mode: CalendarMode) => CellStatus' } },
+		},
 		disableOverflow: {
 			description: 'Empêche la sélection des jours du mois précédent ou suivant visibles sur le mois en cours.',
 			table: { category: 'inputs' },
@@ -82,12 +114,12 @@ export default {
 			table: { category: 'inputs' },
 		},
 		hideWeekend: {
-			description: 'Retire l’effet grisé visible sur les jours du isWeekend.',
+			description: 'Retire l’effet grisé visible sur les jours du week-end.',
 			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		panelOpened: {
 			description: "Événement déclenché à l'ouverture du calendrier.",
@@ -104,7 +136,8 @@ export default {
 		intl: intlArgType(luDate2Translations, 'Date2Translate'),
 	},
 	render: (args, { argTypes }) => {
-		const { min, max, focusedDate, presentation, ...flags } = args;
+		// `selected` is the ngModel value: keep it out of the generated inputs
+		const { min, max, focusedDate, presentation, selected: _selected, ...flags } = args;
 		const selected = args['selected'] ? new Date(args['selected']) : null;
 		const defaultDate = args['format'] === 'date' ? selected : selected?.toISOString().substring(0, 10);
 		const minValue = args['format'] === 'date' ? new Date(args['min']) : new Date(args['min'] ?? 0)?.toISOString().substring(0, 10);
@@ -120,7 +153,7 @@ export default {
 			},
 			template: `
 			<lu-form-field label="Date input example" inlineMessage="Inline message example"${generateInputs({ presentation }, argTypes)}>
-				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="off"${generateInputs(flags, argTypes)} (panelOpened)="panelOpened()" (panelClosed)="panelClosed()" />
+				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate"${generateInputs(flags, argTypes)} (panelOpened)="panelOpened()" (panelClosed)="panelClosed()" />
 			</lu-form-field>
 
 			<pr-story-model-display>{{ selected }}</pr-story-model-display>

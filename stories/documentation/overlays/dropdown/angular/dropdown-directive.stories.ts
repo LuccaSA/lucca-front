@@ -5,7 +5,7 @@ import { PopoverPosition } from '@lucca-front/ng/popover2';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 export interface DropdownBasicStory {
-	luPopoverPosition: PopoverPosition;
+	luDropdownPosition: PopoverPosition;
 	luDropdownDisabled: boolean;
 }
 
@@ -28,16 +28,36 @@ export default {
 		}),
 	],
 	argTypes: {
-		luPopoverPosition: {
+		luDropdownPosition: {
 			description: 'Modifie la position du dropdown par rapport à son déclencheur.',
 			control: 'select',
 			options: ['above', 'below', 'before', 'after'],
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'below' } },
 		},
 		luDropdownDisabled: {
 			description: 'Empêche le dropdown de s’ouvrir.',
 			control: 'boolean',
 			table: { category: 'inputs' },
+		},
+		customPositions: {
+			description: 'Liste de positions personnalisées (`ConnectionPositionPair[]`) qui remplace `luDropdownPosition`.',
+			control: false,
+			table: { category: 'inputs', type: { summary: 'ConnectionPositionPair[]' } },
+		},
+		disabled: {
+			description: 'Désactive l’action : elle ne peut plus être déclenchée et ne ferme pas le dropdown. Utilisé dans le template de la story.',
+			control: false,
+			table: { category: 'inputs (dropdown-action)', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+		},
+		critical: {
+			description: 'Applique un style critique à l’action (ex. suppression). Utilisé dans le template de la story.',
+			control: false,
+			table: { category: 'inputs (dropdown-action)', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+		},
+		label: {
+			description: 'Libellé du groupe d’actions. Utilisé dans le template de la story.',
+			control: false,
+			table: { category: 'inputs (dropdown-group)', type: { summary: 'string' } },
 		},
 		luDropdownOnOpen: {
 			description: "Événement déclenché à l'ouverture du dropdown.",
@@ -55,7 +75,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: DropdownBasicStory): string {
-	const direction = args.luPopoverPosition !== 'below' ? ` luDropdownPosition="${args.luPopoverPosition}"` : ``;
+	const direction = args.luDropdownPosition !== 'below' ? ` luDropdownPosition="${args.luDropdownPosition}"` : ``;
 	const disabled = args.luDropdownDisabled ? ` luDropdownDisabled` : ``;
 	return `<div class="demo">
 	<button type="button" luButton disclosure [luDropdown]="dropdownSample"${direction}${disabled} (luDropdownOnOpen)="luDropdownOnOpen()" (luDropdownOnClose)="luDropdownOnClose()">Dropdown<lu-icon icon="arrowChevronBottom" /></button>
@@ -123,7 +143,7 @@ const Template = (args) => ({
 
 export const Directive: StoryObj<DropdownBasicStory> = {
 	args: {
-		luPopoverPosition: 'below',
+		luDropdownPosition: 'below',
 		luDropdownDisabled: false,
 	},
 	render: Template,

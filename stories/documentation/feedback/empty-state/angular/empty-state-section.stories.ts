@@ -16,7 +16,7 @@ export default {
 	],
 	render: (args) => {
 		const { heading, description, center, palette, hx, illustration, action } = args;
-		const paletteArg = palette !== 'none' ? ` palette="${palette}"` : ``;
+		const paletteArg = palette ? ` palette="${palette}"` : ``;
 		const actionArg = action ? ` action` : ``;
 		return {
 			template: `<lu-empty-state-section illustration="${illustration}" hx="${hx}" heading="${heading}" description="${description}"${actionArg}${paletteArg}${center ? ' center' : ''}>
@@ -50,7 +50,7 @@ export default {
 				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
 			},
 			description: 'Définit le niveau sémantique du titre.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '3' } },
 		},
 		heading: {
 			description: 'Titre de l’empty state.',
@@ -70,7 +70,6 @@ export const Section: StoryObj<EmptyStateSectionComponent> = {
 		heading: 'Empty state section',
 		description: 'Description can be a string or a ng-template',
 		center: false,
-		palette: 'none',
 		hx: 3,
 	},
 };
