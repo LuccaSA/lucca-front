@@ -21,7 +21,7 @@ export default {
 			table: { category: 'inputs', defaultValue: { summary: '80 Mo' } },
 		},
 		illustration: {
-			options: ['invoice', 'picture'],
+			options: ['invoice', 'picture', 'paper'],
 			control: {
 				type: 'select',
 			},
