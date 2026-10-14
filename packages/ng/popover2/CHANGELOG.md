@@ -1,3 +1,10 @@
+### 22.0.6
+
+#### Fixed
+
+- On touch devices, a popover with a `hover` trigger no longer reopens right after being closed from inside it.
+- Clicking the trigger of an open popover inside a shadow root now closes it instead of reopening it.
+
 ### 22.0.0
 
 #### Added

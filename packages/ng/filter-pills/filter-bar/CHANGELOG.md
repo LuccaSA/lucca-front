@@ -1,3 +1,10 @@
+### 22.0.6
+
+#### Fixed
+
+- Filter bar buttons no longer wrap on two lines in touch mode.
+- Divider height is reduced.
+
 ### 22.0.0
 
 #### Added
