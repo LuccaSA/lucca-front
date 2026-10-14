@@ -3,8 +3,5 @@
 lu-tag,
 pr-tag {
 	display: inline-flex;
-
-	&:has(> .tag > .tag-content.pr-u-ellipsis) {
-		max-inline-size: 100%;
-	}
+	max-inline-size: 100%;
 }
