@@ -11,9 +11,6 @@
 		max-block-size: 20rem;
 		padding: var(--pr-t-spacings-50);
 		overflow-y: auto;
-
-		// the panel scrolls its highlighted option into view itself; native anchoring would jump
-		// the list whenever options are re-rendered under groups that stay in place
 		overflow-anchor: none;
 		background-color: var(--pr-t-elevation-surface-raised);
 		box-shadow: var(--pr-t-elevation-shadow-overlay);
