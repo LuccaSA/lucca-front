@@ -35,7 +35,10 @@
 }
 
 <ng-template #sheetSearch>
-	<div class="textField">
+	<!-- A select with no search has nothing to type into, so its field is masked rather than rendered as a
+	dead read-only input. It stays in the DOM: it carries the combobox semantics, it is the element
+	`openSelectPanelSheet` focuses, and its `keydown` handler is what drives keyboard navigation. -->
+	<div class="textField" [class.pr-u-mask]="!searchable">
 		<div class="textField-input">
 			<input
 				class="textField-input-value"

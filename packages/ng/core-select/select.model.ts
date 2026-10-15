@@ -59,6 +59,16 @@ export type LuOptionComparer<T> = (a: T, b: T) => boolean;
 
 export type CoreSelectAddOptionStrategy = 'never' | 'always' | 'if-empty-clue' | 'if-not-empty-clue';
 
+/**
+ * Feature flag gating the responsive dialog system as a whole: below the `S` breakpoint the select
+ * trigger becomes a button and its panel opens as a bottom sheet instead of a popover anchored to the
+ * field.
+ *
+ * It defaults to `false`, so a consumer that provides nothing keeps the anchored popover at every
+ * viewport size. Turn it on application-wide with `{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true }`.
+ */
+export const SELECT_RESPONSIVE_DIALOG = new InjectionToken<boolean>('SELECT_RESPONSIVE_DIALOG', { factory: () => false });
+
 export const SELECT_ID = new InjectionToken<number>('LuSelectPanelData');
 export const SELECT_LABEL = new InjectionToken<HTMLLabelElement | undefined>('LuSelectLabel');
 export const SELECT_LABEL_ID = new InjectionToken<string>('LuSelectLabelId');

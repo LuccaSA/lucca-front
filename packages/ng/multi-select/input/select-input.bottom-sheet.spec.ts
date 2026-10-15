@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
+import { SELECT_RESPONSIVE_DIALOG } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { vi } from 'vitest';
@@ -67,6 +68,25 @@ class RequiredHostComponent {
 }
 
 @Component({
+	selector: 'lu-multi-select-searchable-bottom-sheet-host',
+	imports: [FormsModule, LuMultiSelectInputComponent, FormFieldComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	// Binding `clueChange` is what makes a select searchable: `searchable` is `clueChange$.observed`.
+	template: `
+		<lu-form-field label="Options">
+			<lu-multi-select [ngModel]="selected" [options]="options" (clueChange)="clue = $event" />
+		</lu-form-field>
+	`,
+})
+class SearchableHostComponent {
+	selected: Entity[] = [];
+
+	options: Entity[] = options;
+
+	clue = '';
+}
+
+@Component({
 	selector: 'lu-multi-select-all-bottom-sheet-host',
 	imports: [FormsModule, LuMultiSelectInputComponent, FormFieldComponent, LuMultiSelectWithSelectAllDirective, LuCoreSelectTotalCountDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -112,8 +132,12 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 
 	beforeEach(() => {
 		breakpointObserver = new FakeBreakpointObserver();
+		// The whole system is behind `SELECT_RESPONSIVE_DIALOG`, which is off unless the app provides it.
 		TestBed.configureTestingModule({
-			providers: [{ provide: BreakpointObserver, useValue: breakpointObserver }],
+			providers: [
+				{ provide: BreakpointObserver, useValue: breakpointObserver },
+				{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true },
+			],
 		});
 	});
 
@@ -142,6 +166,21 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			// flow) so they don't leak onto unrelated `lu-dialog-header` usages elsewhere in the app.
 			expect(pane).toHaveClass('mod-select');
 			expect(document.querySelector('.dialog_backdrop')).not.toBeNull();
+		});
+
+		it('should keep anchoring the panel to the field when the SELECT_RESPONSIVE_DIALOG flag is left to its default', () => {
+			// Arrange — what a consumer providing nothing gets: the flag defaults to false
+			TestBed.resetTestingModule();
+			breakpointObserver = new FakeBreakpointObserver();
+			TestBed.configureTestingModule({ providers: [{ provide: BreakpointObserver, useValue: breakpointObserver }] });
+			const { select } = createSelect(true);
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(select.bottomSheetMode()).toBe(false);
+			expect(document.querySelector('.cdk-overlay-pane')).not.toHaveClass('mod-sheet');
 		});
 
 		it('should keep anchoring the panel to the field above the S breakpoint', () => {
@@ -379,6 +418,38 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			const searchInput = sheet()?.querySelector('.textField-input-value');
 			expect(searchInput).not.toBeNull();
 			expect(document.activeElement).toBe(searchInput);
+		});
+
+		it('should mask its search field when the select has no search, there being nothing to type into', () => {
+			// Arrange
+			const { fixture, select } = createSelect(true);
+
+			// Act
+			select.openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(sheet()?.querySelector('.textField')).toHaveClass('pr-u-mask');
+			// Masked, not removed: the input still carries the combobox semantics, is still the element the
+			// sheet focuses, and its `keydown` handler is still what navigates the options.
+			expect(sheet()?.querySelector('.textField-input-value')).not.toBeNull();
+		});
+
+		it('should show its search field when the select is searchable', () => {
+			// Arrange
+			breakpointObserver.belowSmallBreakpoint.next(true);
+			const fixture = TestBed.createComponent(SearchableHostComponent);
+			fixture.detectChanges();
+			const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Entity>;
+
+			// Act
+			select.openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(sheet()?.querySelector('.textField')).not.toHaveClass('pr-u-mask');
 		});
 
 		it('should not render a sheet above the S breakpoint', () => {

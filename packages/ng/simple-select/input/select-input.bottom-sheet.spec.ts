@@ -3,6 +3,7 @@ import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/cor
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { SELECT_RESPONSIVE_DIALOG } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { vi } from 'vitest';
@@ -78,6 +79,25 @@ class RequiredFormFieldHostComponent {
 }
 
 @Component({
+	selector: 'lu-simple-select-searchable-host',
+	imports: [FormsModule, LuSimpleSelectInputComponent, FormFieldComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	// Binding `clueChange` is what makes a select searchable: `searchable` is `clueChange$.observed`.
+	template: `
+		<lu-form-field label="Country">
+			<lu-simple-select [ngModel]="selected" [options]="options" (clueChange)="clue = $event" />
+		</lu-form-field>
+	`,
+})
+class SearchableFormFieldHostComponent {
+	selected: Entity | null = null;
+
+	options: Entity[] = options;
+
+	clue = '';
+}
+
+@Component({
 	selector: 'lu-simple-select-label-host',
 	imports: [FormsModule, LuSimpleSelectInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -126,8 +146,12 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 
 	beforeEach(() => {
 		breakpointObserver = new FakeBreakpointObserver();
+		// The whole system is behind `SELECT_RESPONSIVE_DIALOG`, which is off unless the app provides it.
 		TestBed.configureTestingModule({
-			providers: [{ provide: BreakpointObserver, useValue: breakpointObserver }],
+			providers: [
+				{ provide: BreakpointObserver, useValue: breakpointObserver },
+				{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true },
+			],
 		});
 	});
 
@@ -165,6 +189,19 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 
 			// Assert
 			expect(selectOf(fixture).bottomSheetMode()).toBe(true);
+		});
+
+		it('should not use bottom sheet mode when the SELECT_RESPONSIVE_DIALOG flag is left to its default', () => {
+			// Arrange — what a consumer providing nothing gets: the flag defaults to false
+			TestBed.resetTestingModule();
+			breakpointObserver = new FakeBreakpointObserver();
+			TestBed.configureTestingModule({ providers: [{ provide: BreakpointObserver, useValue: breakpointObserver }] });
+
+			// Act
+			const fixture = createHost(BareHostComponent, true);
+
+			// Assert
+			expect(selectOf(fixture).bottomSheetMode()).toBe(false);
 		});
 
 		it('should not use bottom sheet mode in a filter pill, which brings its own overlay', () => {
@@ -494,6 +531,30 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			const searchInput = sheet()?.querySelector('.textField-input-value');
 			expect(searchInput).not.toBeNull();
 			expect(document.activeElement).toBe(searchInput);
+		});
+
+		it('should mask its search field when the select has no search, there being nothing to type into', () => {
+			// Act
+			openSheet();
+
+			// Assert
+			expect(sheet()?.querySelector('.textField')).toHaveClass('pr-u-mask');
+			// Masked, not removed: the input still carries the combobox semantics, is still the element the
+			// sheet focuses, and its `keydown` handler is still what navigates the options.
+			expect(sheet()?.querySelector('.textField-input-value')).not.toBeNull();
+		});
+
+		it('should show its search field when the select is searchable', () => {
+			// Arrange
+			const fixture = createHost(SearchableFormFieldHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+			fixture.detectChanges();
+			TestBed.inject(ApplicationRef).tick();
+
+			// Assert
+			expect(sheet()?.querySelector('.textField')).not.toHaveClass('pr-u-mask');
 		});
 
 		it('should let the dialog header bring its own close button', () => {
