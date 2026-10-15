@@ -27,7 +27,7 @@ import { FORM_FIELD_INSTANCE, FormFieldComponent, FormFieldWidth } from '@lucca-
 import { BehaviorSubject, defer, map, of, ReplaySubject, startWith, Subject, switchMap } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
-import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SelectDataSource } from '../select.model';
+import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, LuOptionGrouping, SELECT_LABEL, SELECT_LABEL_ID, SELECT_RESPONSIVE_DIALOG, SelectDataSource } from '../select.model';
 import { LuCoreSelectLabel } from '../select.translate';
 import { TreeNode } from './model';
 import { buildOptionsFromDataSource } from './select-input.utils';
@@ -145,12 +145,19 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	private readonly belowSmallBreakpoint = injectMediaMinBreakpoint('S', true);
 
+	/** Feature flag turning the whole responsive dialog system on; off unless the app provides it. */
+	private readonly responsiveDialog = inject(SELECT_RESPONSIVE_DIALOG);
+
 	/**
 	 * Below the `S` breakpoint (800px) the panel opens as a dialog in `sheet` mode that embeds its own
 	 * search input, instead of a popover anchored to the field — mirroring how filter pills move the input
 	 * inside their overlay. Filter pills already provide their own overlay, so they keep their behavior.
+	 *
+	 * This is the single gate of the system: everything else — the button trigger, the sheet panel ref,
+	 * the sheet template of the panels, the displayers — reads it, so a `false` {@link SELECT_RESPONSIVE_DIALOG}
+	 * leaves the select exactly as it was at every viewport size.
 	 */
-	readonly bottomSheetMode = computed(() => (this.belowSmallBreakpoint() ?? false) && !this.filterPillMode);
+	readonly bottomSheetMode = computed(() => this.responsiveDialog && (this.belowSmallBreakpoint() ?? false) && !this.filterPillMode);
 
 	/**
 	 * Whether the currently open panel is a sheet, snapshotted when it opens rather than tracking
