@@ -1,3 +1,9 @@
+### 22.1.0
+
+#### Added
+
+- The `random` bubble direction is drawn from the `LU_RANDOM` injection token (`@lucca-front/ng/core`).
+
 ### 22.0.0
 
 #### Added

@@ -1,3 +1,9 @@
+### 22.1.0
+
+#### Added
+
+- Text widths are drawn from the `LU_RANDOM` injection token (`@lucca-front/ng/core`), which defaults to `Math.random` — provide a constant function, e.g. `() => 0.5`, to get stable widths in visual regression screenshots.
+
 ### 22.0.0
 
 #### Added

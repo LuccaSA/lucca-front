@@ -7,6 +7,7 @@ import { LinkComponent } from '@lucca-front/ng/link';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
 import { SkeletonUserPopoverComponent } from '@lucca-front/ng/skeleton';
 import { ILuUser } from '@lucca-front/ng/user';
+import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
@@ -34,7 +35,9 @@ export class LuUserPopoverComponent {
 
 	readonly #errorImage$ = new BehaviorSubject<boolean>(false);
 
-	skeletonWidths = [this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent()];
+	readonly #randomPercent = ɵinjectRandomPercent(33, 66);
+
+	skeletonWidths = [this.#randomPercent(), this.#randomPercent(), this.#randomPercent(), this.#randomPercent()];
 
 	public readonly employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
 		switchMap((user) =>
@@ -78,9 +81,5 @@ export class LuUserPopoverComponent {
 
 	pictureError() {
 		this.#errorImage$.next(true);
-	}
-
-	getRandomPercent(min: number = 33, max: number = 66): string {
-		return `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 	}
 }

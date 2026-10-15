@@ -5,6 +5,7 @@ export * from './id/index';
 export * from './misc';
 export * from './overlay/index';
 export * from './portal/index';
+export * from './random';
 export * from './route';
 export * from './signal';
 export * from './string';
