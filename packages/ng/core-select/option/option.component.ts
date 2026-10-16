@@ -84,13 +84,14 @@ export class LuOptionComponent<T> implements OnInit {
 			}
 		});
 
-		ɵeffectWithDeps([this.optionContext], (optionContext, onCleanup) => {
+		ɵeffectWithDeps([this.optionContext, this.selectableItem.disabledInput], (optionContext, disabledInput, onCleanup) => {
 			if (isNil(optionContext)) {
 				return;
 			}
 
+			// `luDisabledOption` must not override a `[disabled]` set by the panel
 			const subscription = optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
-				this.selectableItem.disabled = isDisabled;
+				this.selectableItem.disabled = isDisabled || disabledInput;
 				this.cdr.markForCheck();
 			});
 			onCleanup(() => subscription.unsubscribe());

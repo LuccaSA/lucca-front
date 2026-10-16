@@ -567,6 +567,69 @@ describe('LuMultiSelectInputComponent', () => {
 		});
 	});
 
+	describe('disabled options', () => {
+		let fixture: ComponentFixture<LuMultiSelectInputComponent<Entity>>;
+		let emittedValues: Entity[][];
+
+		beforeEach(() => {
+			emittedValues = [];
+			fixture = createComponent();
+			fixture.componentInstance.registerOnChange((value: Entity[]) => emittedValues.push(value));
+			fixture.componentRef.setInput('options', options);
+			fixture.componentRef.setInput('clearable', true);
+			fixture.componentRef.setInput('disabledOptionFn', (option: Entity) => option.id === 1);
+			fixture.componentInstance.writeValue([options[0], options[1]]);
+			fixture.detectChanges();
+		});
+
+		function chips(): HTMLElement[] {
+			fixture.detectChanges();
+			return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.multipleSelect-displayer-chip'));
+		}
+
+		it('should not display the kill button on a disabled option chip', () => {
+			// Assert
+			const [disabledChip, enabledChip] = chips();
+			expect(disabledChip.querySelector('.chip-kill')).toBeNull();
+			expect(enabledChip.querySelector('.chip-kill')).not.toBeNull();
+		});
+
+		it('should skip disabled options when pressing backspace', () => {
+			// Arrange
+			fixture.componentInstance.writeValue([options[1], options[0]]);
+			fixture.detectChanges();
+			const input = (fixture.nativeElement as HTMLElement).querySelector<HTMLInputElement>('.multipleSelect-displayer input');
+
+			// Act
+			input?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace' }));
+			input?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace' }));
+
+			// Assert
+			expect(emittedValues).toEqual([[options[0]]]);
+		});
+
+		it('should keep disabled options when clearing the value', () => {
+			// Act
+			fixture.componentInstance.clearValue();
+
+			// Assert
+			expect(emittedValues).toEqual([[options[0]]]);
+		});
+
+		it('should hide the clear button when only disabled options are selected', () => {
+			// Arrange
+			const clearButton = () => (fixture.nativeElement as HTMLElement).querySelector('.multipleSelect-clear');
+			expect(clearButton()).not.toBeNull();
+
+			// Act
+			fixture.componentInstance.writeValue([options[0]]);
+			fixture.detectChanges();
+
+			// Assert
+			expect(clearButton()).toBeNull();
+		});
+	});
+
 	describe('accessible name', () => {
 		it('should label the combobox with the form field label then the selected values', async () => {
 			// Arrange

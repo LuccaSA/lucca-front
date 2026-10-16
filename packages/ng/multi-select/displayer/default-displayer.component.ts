@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, Injector, input, OnInit, viewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { intlInputOptions } from '@lucca-front/ng/core';
@@ -39,7 +39,7 @@ let nextID = 0;
 			</div>
 
 			@for (option of displayedOptions$ | async; track option; let index = $index) {
-				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="(select.disabled$ | async) ?? false">
+				<lu-chip aria-hidden="true" class="multipleSelect-displayer-chip" withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="isUnkillable(option)">
 					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
 				</lu-chip>
 			}
@@ -68,6 +68,8 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 
 	readonly context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
+	readonly #selectDisabled = toSignal(this.select.disabled$, { initialValue: false });
+
 	readonly displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
 			const maxValuesShown = this.select.maxValuesShown();
@@ -83,6 +85,10 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			return Math.max(0, (options || []).length - this.select.maxValuesShown());
 		}),
 	);
+
+	isUnkillable(option: T): boolean {
+		return this.#selectDisabled() || this.select.disabledOptionFn()(option);
+	}
 
 	unselectOption(option: T, $event?: Event): void {
 		if ($event) {
@@ -105,8 +111,12 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	}
 
 	inputBackspace(): void {
-		if (this.value.length > 0 && this.inputElementRef()?.nativeElement.value.length === 0) {
-			this.unselectOption(this.value[this.value.length - 1]);
+		if (this.inputElementRef()?.nativeElement.value.length !== 0) {
+			return;
+		}
+		const lastRemovableOption = this.value.filter((option) => !this.select.disabledOptionFn()(option)).at(-1);
+		if (lastRemovableOption !== undefined) {
+			this.unselectOption(lastRemovableOption);
 			this.select.panelRef?.updateSelectedOptions(this.value);
 		}
 	}

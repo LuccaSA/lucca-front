@@ -77,6 +77,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	searchable = this.selectInput.searchable;
 	readonly optionComparer = this.selectInput.optionComparer;
 	readonly optionKey = this.selectInput.optionKey;
+	readonly disabledOptionFn = this.selectInput.disabledOptionFn;
 	intl = this.selectInput.intl;
 
 	selectedOptions: T[] = this.selectInput.value || [];
@@ -95,7 +96,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 				.map((o) => o.option())
 				.filter(isNotNil)
 				.map((option) => this.optionKey()(option));
-			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey()(option)));
+			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey()(option)) && !this.disabledOptionFn()(option));
 		};
 	});
 
@@ -191,8 +192,9 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 			.map((o) => o.option())
 			.filter(isNotNil)
 			.map((option) => this.optionKey()(option));
-		const enabledNotSelectedOptions = notSelectedOptions.filter((o) => !disabledOptionIds.includes(this.optionKey()(o)));
-		const enabledGroupOptions = groupOptions.filter((o) => !disabledOptionIds.includes(this.optionKey()(o)));
+		const isEnabled = (o: T) => !disabledOptionIds.includes(this.optionKey()(o)) && !this.disabledOptionFn()(o);
+		const enabledNotSelectedOptions = notSelectedOptions.filter(isEnabled);
+		const enabledGroupOptions = groupOptions.filter(isEnabled);
 
 		if (enabledNotSelectedOptions.length) {
 			// If some options are not selected, select them all

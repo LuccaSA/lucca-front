@@ -88,6 +88,11 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	readonly keepSearchAfterSelection = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Tells whether an option is disabled: it cannot be toggled from the panel, its chip cannot be removed and it is kept when the value is cleared.
+	 */
+	readonly disabledOptionFn = input<(option: T) => boolean>(() => false);
+
 	private readonly pluralRules = inject(LOCALE_PLURAL_RULES);
 
 	/**
@@ -210,15 +215,17 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	hasValue(): boolean {
-		return !!this.value?.length;
+		// Locked options cannot be cleared, so they don't count as a clearable value
+		return !!this.value?.some((option) => !this.disabledOptionFn()(option));
 	}
 
 	override clearValue(event?: Event): void {
 		event?.stopPropagation();
-		this.onChange?.([]);
-		this.value = [];
+		const value = this.value?.filter((option) => this.disabledOptionFn()(option)) ?? [];
+		this.onChange?.(value);
+		this.value = value;
 		this.focusInput$.next({ keepClue: true });
-		this.panelRef?.updateSelectedOptions([]);
+		this.panelRef?.updateSelectedOptions(value);
 	}
 
 	override ngOnDestroy() {

@@ -101,6 +101,28 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 		expect(onChange).toHaveBeenLastCalledWith([options[0]]);
 	}));
 
+	it('should disable the options matched by disabledOptionFn', fakeAsync(() => {
+		fixture.componentRef.setInput('disabledOptionFn', (option: Entity) => option.id === 1);
+		openPanel();
+
+		const listboxOptions = overlayContainerElement.querySelectorAll('lu-listbox-option');
+		expect(listboxOptions[0].getAttribute('aria-disabled')).toBe('true');
+		expect(listboxOptions[1].getAttribute('aria-disabled')).not.toBe('true');
+	}));
+
+	it('should not unselect an option matched by disabledOptionFn when it is clicked', fakeAsync(() => {
+		const onChange = vi.fn();
+		fixture.componentRef.setInput('disabledOptionFn', (option: Entity) => option.id === 1);
+		component.writeValue([options[0]]);
+		component.registerOnChange(onChange);
+		openPanel();
+
+		overlayContainerElement.querySelector<HTMLElement>('lu-listbox-option')!.click();
+		fixture.detectChanges();
+
+		expect(onChange).not.toHaveBeenCalled();
+	}));
+
 	it('should display the empty state and keep the add option visible outside the listbox', fakeAsync(() => {
 		fixture.componentRef.setInput('addOptionStrategy', 'always');
 		openPanel([]);
