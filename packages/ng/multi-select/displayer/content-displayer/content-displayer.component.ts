@@ -7,7 +7,11 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 	imports: [LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter">
-			<input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
+			@if (select.bottomSheetMode()) {
+				<button type="button" #inputElement luMultiSelectDisplayerInput #trigger="luMultiSelectDisplayerInput">{{ trigger.placeholder }}</button>
+			} @else {
+				<input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
+			}
 			<div class="multipleSelect-displayer-filter">
 				<ng-content />
 			</div>

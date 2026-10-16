@@ -1,3 +1,10 @@
+### 22.1.0
+
+#### Added
+
+- The `random` bubble direction is drawn from the `LU_RANDOM` injection token (`@lucca-front/ng/core`).
+- `LU_BUBBLE_ICON_DEFAULT_DIRECTION` injection token to change the default value of the `bubbleDirection` input, which stays `random` when it is not provided — e.g. a fixed direction keeps visual regression screenshots stable.
+
 ### 22.0.0
 
 #### Added

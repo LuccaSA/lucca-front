@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, input, output
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions, isNotNil, luBooleanAttribute, luNumberAttribute, PortalDirective } from '@lucca-front/ng/core';
-import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { intlInputOptions, isNotNil, luBooleanAttribute, luNullableNumberAttribute, luNumberAttribute, PortalDirective } from '@lucca-front/ng/core';
+import { FormFieldWidth, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
@@ -27,7 +27,7 @@ export class TextInputComponent {
 	readonly intl = input(...intlInputOptions(LU_TEXTFIELD_TRANSLATIONS));
 	readonly ngControl = injectNgControl();
 
-	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+	readonly inputElementRef = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
 	readonly mask = input<string | null>(null);
 
@@ -55,6 +55,11 @@ export class TextInputComponent {
 
 	readonly type = input<TextFieldType>('text');
 
+	/**
+	 * Width of the input itself, using the same scale as the form field width
+	 */
+	readonly width = input(null, { transform: luNullableNumberAttribute<FormFieldWidth> });
+
 	// eslint-disable-next-line @angular-eslint/no-output-native
 	readonly blur = output<FocusEvent>();
 
@@ -64,6 +69,8 @@ export class TextInputComponent {
 
 	protected readonly hasTogglePasswordVisibilityIcon = computed(() => this.type() === 'password');
 
+	protected readonly widthClass = computed(() => (this.width() ? `mod-width${this.width()}` : null));
+
 	protected hasValue(): boolean {
 		const value: unknown = this.ngControl.value;
 		return isNotNil(value) && value !== '';
@@ -71,7 +78,7 @@ export class TextInputComponent {
 
 	clearValue(): void {
 		this.ngControl.reset();
-		this.inputElementRef()?.nativeElement.focus();
+		this.inputElementRef().nativeElement.focus();
 	}
 
 	togglePasswordVisibility() {

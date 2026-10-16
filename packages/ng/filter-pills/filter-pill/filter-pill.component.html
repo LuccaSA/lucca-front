@@ -1,5 +1,26 @@
 @if (!isHidden()) {
-	@if (layout() === "default") {
+	@if (iconOnly()) {
+		<button
+			type="button"
+			class="filterPill mod-button"
+			[attr.disabled]="disabled() ? 'disabled' : null"
+			[attr.aria-expanded]="popoverRef.opened()"
+			[luTooltip]="label()"
+			luTooltipOnlyForDisplay
+			(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover()"
+			(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover()"
+			[luPopover2]="pillContent"
+			[luPopoverAnchor]="elementRef"
+			[luPopoverNoCloseButton]="true"
+			[luPopoverBackdrop]="backdrop()"
+			[customPositions]="popoverPositions"
+			(luPopoverOpened)="popoverOpened()"
+			(luPopoverClosed)="popoverClosed()"
+			#popoverRef="luPopover2"
+		>
+			<lu-icon class="filterPill-icon" [icon]="displayedIcon()" [alt]="label()" />
+		</button>
+	} @else if (layout() === "default") {
 		<button
 			type="button"
 			class="filterPill"
@@ -11,6 +32,7 @@
 			[luPopover2]="pillContent"
 			[luPopoverAnchor]="elementRef"
 			[luPopoverNoCloseButton]="true"
+			[luPopoverBackdrop]="backdrop()"
 			[customPositions]="popoverPositions"
 			(luPopoverOpened)="popoverOpened()"
 			(luPopoverClosed)="popoverClosed()"

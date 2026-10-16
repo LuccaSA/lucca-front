@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { LuTranslation } from '@lucca-front/ng/core';
+import { LuPluralForms, LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_FILTER_PILLS_TRANSLATIONS = new InjectionToken('LuFilterPillsTranslations', {
@@ -15,6 +15,8 @@ export interface LuFilterPillsLabel {
 	viewOptions: string;
 	renameView: string;
 	deleteView: string;
+	resultsCount: LuPluralForms;
+	noResults: string;
 }
 
 export const luFilterPillsTranslations: LuTranslation<LuFilterPillsLabel> = Translations;

@@ -1,3 +1,8 @@
+### 22.1.0
+
+#### Changed
+
+- The `bubble` is now rendered as an inline SVG coloured with CSS variables: its colours follow the `palette` and `theme` inputs, and a single bubble file per number is used for every palette (`highlight-data/bubbles/<n>.svg`).
 ### 21.4.1
 
 #### Fixed

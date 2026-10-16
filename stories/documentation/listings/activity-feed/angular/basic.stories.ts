@@ -1,5 +1,8 @@
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
+import { IconsList } from '@/stories/icons-list';
 import { finn } from '@/stories/users/user.mocks';
 import { LOCALE_ID } from '@angular/core';
+import { LuccaIcon } from '@lucca-front/icons';
 import {
 	ACTIVITY_FEED_STEP_STATUS,
 	ActivityFeedComponent,
@@ -15,11 +18,11 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, ArgTypes, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 
 interface ActivityFeedBasicStory {
 	statusStep: boolean;
 	pendingStep: boolean;
+	icon: LuccaIcon | null;
 	updated: boolean;
 	attachedContent: 'none' | 'file' | 'readMore';
 	addAction: boolean;
@@ -41,6 +44,14 @@ export default {
 			control: 'boolean',
 			description: 'Exemple avec une étape en attente.',
 			table: { category: 'story' },
+		},
+		icon: {
+			options: setStoryOptions(IconsList.map((i) => i.icon)),
+			control: {
+				type: 'select',
+			},
+			description: 'Étape identifiée par une icône.',
+			table: { category: 'inputs (activity-feed-step)' },
 		},
 		updated: {
 			control: 'boolean',
@@ -122,6 +133,10 @@ function getTemplate(args: ActivityFeedBasicStory, argTypes: ArgTypes): string {
 		? `
 	<lu-activity-feed-step status="pending" [user]="user" label="En attente d'approbation par Daniel Hernandez. " />`
 		: '';
+	const iconStep = args.icon
+		? `
+	<lu-activity-feed-step icon="${args.icon}" [date]="date" label="Lorem ipsum dolor." />`
+		: '';
 	const updatedStep = args.updated
 		? `
 	<lu-activity-feed-step [user]="user" [date]="date" label="Daniel Hernandez a modifié une demande.">
@@ -166,7 +181,7 @@ function getTemplate(args: ActivityFeedBasicStory, argTypes: ArgTypes): string {
 	</lu-activity-feed-step>`
 		: '';
 	return `<lu-activity-feed>
-	<lu-activity-feed-step [user]="user" [date]="date"${generateInputs({ label, status, datePipeFormat }, argTypes)} />${attachedContentStep}${statusSteps}${pendingStep}${updatedStep}${addActionStep}
+	<lu-activity-feed-step [user]="user" [date]="date"${generateInputs({ label, status, datePipeFormat }, argTypes)} />${attachedContentStep}${statusSteps}${pendingStep}${iconStep}${updatedStep}${addActionStep}
 </lu-activity-feed>`;
 }
 
@@ -183,6 +198,7 @@ export const Basic: StoryObj<ActivityFeedBasicStory> = {
 		datePipeFormat: '',
 		statusStep: false,
 		pendingStep: false,
+		icon: null,
 		updated: false,
 		attachedContent: 'none',
 		addAction: false,

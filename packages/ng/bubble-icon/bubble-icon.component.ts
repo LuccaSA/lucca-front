@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, Palette, ProductPalette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { BubbleIconSize } from './bubble-icon.type';
+import { LU_RANDOM } from '@lucca/prisme/core';
+import { LU_BUBBLE_ICON_DEFAULT_DIRECTION } from './bubble-icon.token';
+import { BubbleIconDirection, BubbleIconSize } from './bubble-icon.type';
 
 @Component({
 	selector: 'lu-bubble-icon',
@@ -31,9 +33,9 @@ export class BubbleIconComponent {
 	readonly palette = input<Palette | DecorativePalette | ProductPalette>('product');
 	readonly paletteClass = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 
-	readonly bubbleDirection = input<'top' | 'bottom' | 'left' | 'right' | 'random'>('random');
+	readonly bubbleDirection = input<BubbleIconDirection>(inject(LU_BUBBLE_ICON_DEFAULT_DIRECTION));
 
-	readonly randomNumber = signal<number>(Math.floor(Math.random() * 4) + 1);
+	readonly randomNumber = signal<number>(Math.floor(inject(LU_RANDOM)() * 4) + 1);
 
 	readonly direction = computed(() => {
 		switch (this.bubbleDirection()) {

@@ -73,6 +73,12 @@ export default {
 			description: 'Vue affichée par le calendrier à l’ouverture (jour, mois ou année), indépendamment du mode de sélection. Vaut `mode` par défaut. Two-way.',
 			table: { category: 'models', type: { summary: 'CalendarMode | null' } },
 		},
+		humanized: {
+			control: 'boolean',
+			description:
+				'[v22.0] Affiche la date sélectionnée en langage naturel lorsque le champ n’a pas le focus : « Hier », « Aujourd’hui » ou « Demain » en mode `day`, « Mars 2026 » en mode `month`. Les autres dates, ainsi que les modes `week` et `year`, conservent leur format numérique. La saisie reste toujours numérique.',
+			table: { category: 'inputs' },
+		},
 		focusedDate: {
 			control: 'date',
 			description: 'Définit la date préselectionnée à l’ouverture du calendrier.',
@@ -171,6 +177,7 @@ export const Basic: StoryObj<DateInputComponent & { selected: Date; presentation
 		clearable: false,
 		clearBehavior: 'clear',
 		widthAuto: false,
+		humanized: false,
 		mode: 'day',
 		format: 'date',
 		presentation: false,
@@ -188,12 +195,31 @@ export const StartFromYear: StoryObj<DateInputComponent & { selected: Date; pres
 		clearable: false,
 		clearBehavior: 'clear',
 		widthAuto: false,
+		humanized: false,
 		mode: 'day',
 		calendarMode: 'year',
 		format: 'date',
 		presentation: false,
 		// Underlying ngModel
 		selected: null,
+	},
+};
+
+export const Humanized: StoryObj<DateInputComponent & { selected: Date; presentation: boolean }> = {
+	args: {
+		disableOverflow: false,
+		hideOverflow: false,
+		hideToday: false,
+		hideWeekend: false,
+		clearable: false,
+		clearBehavior: 'clear',
+		widthAuto: false,
+		humanized: true,
+		mode: 'day',
+		format: 'date',
+		presentation: false,
+		// Underlying ngModel
+		selected: new Date(),
 	},
 };
 
@@ -207,6 +233,7 @@ export const Week: StoryObj<DateInputComponent & { selected: Date; presentation:
 		clearable: false,
 		clearBehavior: 'clear',
 		widthAuto: false,
+		humanized: false,
 		mode: 'week',
 		format: 'date',
 		presentation: false,

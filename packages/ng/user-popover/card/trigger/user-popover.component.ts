@@ -3,9 +3,11 @@ import { ChangeDetectionStrategy, Component, inject, input, Signal } from '@angu
 import { toObservable } from '@angular/core/rxjs-interop';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LinkComponent } from '@lucca-front/ng/link';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
 import { SkeletonUserPopoverComponent } from '@lucca-front/ng/skeleton';
 import { ILuUser } from '@lucca-front/ng/user';
+import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
@@ -19,7 +21,7 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 	selector: 'lu-user-popover-content',
 	templateUrl: './user-popover.component.html',
 	styleUrl: './user-popover.component.scss',
-	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, SkeletonUserPopoverComponent],
+	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, LinkComponent, SkeletonUserPopoverComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserPopoverComponent {
@@ -33,7 +35,9 @@ export class LuUserPopoverComponent {
 
 	readonly #errorImage$ = new BehaviorSubject<boolean>(false);
 
-	skeletonWidths = [this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent()];
+	readonly #randomPercent = ɵinjectRandomPercent(33, 66);
+
+	skeletonWidths = [this.#randomPercent(), this.#randomPercent(), this.#randomPercent(), this.#randomPercent()];
 
 	public readonly employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
 		switchMap((user) =>
@@ -77,9 +81,5 @@ export class LuUserPopoverComponent {
 
 	pictureError() {
 		this.#errorImage$.next(true);
-	}
-
-	getRandomPercent(min: number = 33, max: number = 66): string {
-		return `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 	}
 }

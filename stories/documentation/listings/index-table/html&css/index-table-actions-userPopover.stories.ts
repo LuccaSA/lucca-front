@@ -1,6 +1,7 @@
 import { finn } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -15,7 +16,7 @@ export default {
 			imports: [LuUserPopoverDirective, LuUserDisplayModule, LuUserPictureComponent],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient()],
+			providers: [provideAnimations(), provideHttpClient(), provideRouter([])],
 		}),
 	],
 } as Meta;

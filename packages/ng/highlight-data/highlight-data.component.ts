@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { luBooleanAttribute, LuClass, luOptionalNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { HighlightDataBubble, HighlightDataIllustration, HighlightDataPalette, HighlightDataSize, HighlightDataTheme } from './highlight-data.type';
 
 @Component({
@@ -8,7 +9,7 @@ import { HighlightDataBubble, HighlightDataIllustration, HighlightDataPalette, H
 	styleUrl: './highlight-data.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [PortalDirective],
+	imports: [PortalDirective, LuSafeExternalSvgPipe],
 	providers: [LuClass],
 	host: {
 		class: 'highlightData',
@@ -45,7 +46,7 @@ export class HighlightDataComponent {
 	readonly theme = input<HighlightDataTheme>('white');
 
 	/**
-	 * Apply product name to illustration URL and CSS component palette
+	 * Apply a palette to the component and its bubble colors
 	 * This specific palette must be set up on config.scss
 	 */
 	readonly palette = input<HighlightDataPalette | string>('lucca');
@@ -75,9 +76,7 @@ export class HighlightDataComponent {
 		this.illustration()?.includes('/') ? this.illustration() : `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`,
 	);
 
-	readonly bubbleSrc = computed(() => `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/${this.palette()}/bubbles-${this.bubbleTheme()}-${this.bubble()}.svg`);
-
-	readonly bubbleTheme = computed(() => (this.theme() === 'dark' ? 'dark' : 'light'));
+	readonly bubbleSrc = computed(() => `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/${this.bubble()}.svg`);
 
 	constructor() {
 		effect(() => {

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
 
 import { luBooleanAttribute } from '@lucca-front/ng/core';
+import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 import { ListboxState } from './listbox.type';
 import { OptionComponent } from './option/option.component';
 import { LISTBOX_INSTANCE } from './tokens';
@@ -46,5 +47,7 @@ export class ListboxComponent {
 
 	readonly listboxId = `listbox${nextId++}`;
 
-	readonly skeletonWidth = computed(() => (this.state() === 'loading' ? `${Math.floor(Math.random() * 60 + 20)}%` : null));
+	readonly #randomPercent = ɵinjectRandomPercent(20, 80);
+
+	readonly skeletonWidth = computed(() => (this.state() === 'loading' ? this.#randomPercent() : null));
 }

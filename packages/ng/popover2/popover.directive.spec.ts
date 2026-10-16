@@ -1,4 +1,5 @@
-import { ConnectionPositionPair, FlexibleConnectedPositionStrategy, OverlayContainer } from '@angular/cdk/overlay';
+import { ConnectionPositionPair, FlexibleConnectedPositionStrategy, Overlay, OverlayContainer, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, ElementRef, input, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -256,8 +257,8 @@ describe(PopoverDirective.name, () => {
 		});
 
 		it('should close on Escape', () => {
-			// Act
-			window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+			// Act — CDK's keyboard dispatcher, which routes Escape to the topmost overlay, listens on `body`
+			document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
 			fixture.detectChanges();
 			// Assert
 			expect(directive.opened()).toBe(false);
@@ -295,6 +296,60 @@ describe(PopoverDirective.name, () => {
 			fixture.destroy();
 			// Assert
 			expect(getPopover()).toBeNull();
+		});
+	});
+
+	describe('overlays stacked above the popover', () => {
+		// Anything the popover's own content opens — a select panel, a dialog, a date picker — lands in the
+		// overlay container above the popover, i.e. outside its element. Dismissing it is that overlay's
+		// own business; it must not take the popover (and the content owning it) down with it.
+		let stackedOverlay: OverlayRef;
+
+		beforeEach(() => {
+			setup();
+			triggerElement.click();
+			fixture.detectChanges();
+			stackedOverlay = TestBed.inject(Overlay).create({ hasBackdrop: true });
+			stackedOverlay.attach(new ComponentPortal(PopoverTestContentComponent));
+			fixture.detectChanges();
+		});
+
+		afterEach(() => stackedOverlay.dispose());
+
+		it('should stay open on a pointer interaction inside an overlay stacked above it', () => {
+			// Act
+			pointerClick(stackedOverlay.overlayElement);
+			fixture.detectChanges();
+			// Assert
+			expect(directive.opened()).toBe(true);
+		});
+
+		it('should stay open on a pointer interaction on the backdrop of an overlay stacked above it', () => {
+			// Act
+			pointerClick(stackedOverlay.backdropElement!);
+			fixture.detectChanges();
+			// Assert
+			expect(directive.opened()).toBe(true);
+		});
+
+		it('should leave Escape to the overlay stacked above it', () => {
+			// Arrange
+			const keydowns: KeyboardEvent[] = [];
+			stackedOverlay.keydownEvents().subscribe((event) => keydowns.push(event));
+			// Act
+			document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+			fixture.detectChanges();
+			// Assert
+			expect(keydowns).toHaveLength(1);
+			expect(directive.opened()).toBe(true);
+		});
+
+		it('should close on a pointer interaction outside every overlay', () => {
+			// Act
+			pointerClick(host.outsideRef().nativeElement);
+			fixture.detectChanges();
+			// Assert
+			expect(directive.opened()).toBe(false);
 		});
 	});
 

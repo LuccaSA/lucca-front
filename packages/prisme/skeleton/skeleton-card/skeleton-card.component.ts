@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
+import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 
 @Component({
 	selector: 'lu-skeleton-card',
@@ -14,5 +15,5 @@ export class SkeletonCardComponent {
 
 	readonly lines = computed(() => Array.from({ length: this.descriptionLines() }));
 
-	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
+	readonly getRandomPercent = ɵinjectRandomPercent(33, 66);
 }

@@ -20,6 +20,10 @@
 			}
 		}
 
+		&.mod-neutral {
+			@include neutral;
+		}
+
 		@include media.isNotTouchDevice {
 			&.mod-hiddenIcon {
 				&:not(:hover, :focus-visible) {

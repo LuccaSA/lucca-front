@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { IconComponent, LuccaIcon } from '@lucca-front/ng/icon';
 import { ILuUser, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ActivityFeedStepStatus } from '../activity-feed-step.type';
 import { LU_ACTIVITY_FEED_TRANSLATIONS } from '../activity-feed.translate';
@@ -10,7 +11,7 @@ import { LU_ACTIVITY_FEED_TRANSLATIONS } from '../activity-feed.translate';
 	templateUrl: './activity-feed-step.component.html',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [LuUserPictureComponent, DatePipe, PortalDirective],
+	imports: [LuUserPictureComponent, DatePipe, PortalDirective, IconComponent],
 	host: {
 		role: 'listitem',
 		class: 'activityFeed-step',
@@ -34,6 +35,8 @@ export class ActivityFeedStepComponent {
 	readonly user = input<ILuUser | null>(null);
 
 	readonly status = input<ActivityFeedStepStatus | null>(null);
+
+	readonly icon = input<LuccaIcon | null>(null);
 
 	readonly date = input<Date | string | null>(null);
 

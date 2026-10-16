@@ -27,6 +27,7 @@
 					[attr.aria-controls]="popoverRef.ariaControls"
 					role="combobox"
 					(click)="editedField.set(0); openPopover(popoverRef, 'start')"
+					[attr.cdkFocusInitial]="isFilterPill && missingBoundField() === 0 ? '' : null"
 					(keydown.arrowDown)="arrowDown(popoverRef, 'start')"
 					(keydown.escape)="popoverRef.close()"
 					[disabled]="disabled()"
@@ -53,6 +54,7 @@
 					[attr.aria-controls]="popoverRef.ariaControls"
 					role="combobox"
 					(click)="editedField.set(1); openPopover(popoverRef, 'end')"
+					[attr.cdkFocusInitial]="isFilterPill && missingBoundField() === 1 ? '' : null"
 					(keydown.arrowDown)="arrowDown(popoverRef, 'end')"
 					(keydown.escape)="popoverRef.close()"
 					[disabled]="disabled()"
@@ -166,10 +168,16 @@
 
 <ng-container *luFilterPillDisplayer="let empty = isEmpty">
 	@if (!empty) {
-		<span class="pr-u-mask">{{ intl().from }}</span>
-		{{ startLabel() }}
-		<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
-		{{ endLabel() }}
+		@if (startLabel() && endLabel()) {
+			<span class="pr-u-mask">{{ intl().from }}</span>
+			{{ startLabel() }}
+			<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl().to" />
+			{{ endLabel() }}
+		} @else if (startLabel()) {
+			{{ intl().fromDate }} {{ startLabel() }}
+		} @else if (endLabel()) {
+			{{ intl().untilDate }} {{ endLabel() }}
+		}
 	}
 </ng-container>
 

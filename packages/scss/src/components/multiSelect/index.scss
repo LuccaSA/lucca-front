@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/config';
+
 @use 'exports' as *;
 
 .multiSelect {
@@ -7,6 +9,12 @@
 	}
 
 	@layer mods {
+		@each $value in config.$fieldsWidth {
+			&.mod-width#{$value} {
+				@include width($value);
+			}
+		}
+
 		&.mod-S {
 			@include S;
 		}
@@ -41,6 +49,10 @@
 
 		&:has(.multipleSelect-displayer-search[aria-invalid='true']) {
 			@include invalid;
+
+			&:hover {
+				@include invalidHover;
+			}
 		}
 
 		&:has(.multipleSelect-displayer-search:disabled) {
@@ -71,5 +83,11 @@
 		&:empty {
 			display: none;
 		}
+	}
+}
+
+@layer mods {
+	.dialog.mod-select {
+		@include select;
 	}
 }

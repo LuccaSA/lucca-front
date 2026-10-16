@@ -20,6 +20,7 @@ import { LuRouterLink } from './lu-router-link';
 		'[attr.href]': 'routerLink.publicReactiveHref()',
 		'[class.mod-decorationHover]': 'decorationHover()',
 		'[class.mod-icon]': 'external()',
+		'[class.mod-neutral]': 'neutral()',
 		'[class.mod-hiddenIcon]': 'hiddenIcon() || (this.insideIndexTable && external()) || (this.insideDataTable && external())',
 		'[class.is-disabled]': 'this.disabled()',
 		'[attr.rel]': 'external() && !disabled() ? "noopener noreferrer" : null',
@@ -75,6 +76,11 @@ export class LinkComponent {
 	 * External icon only visible on hover/focus
 	 */
 	readonly hiddenIcon = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Renders the link with the default text color instead of the link color
+	 */
+	readonly neutral = input(false, { transform: luBooleanAttribute });
 
 	hrefBackup: string;
 

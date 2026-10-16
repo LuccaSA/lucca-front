@@ -10,6 +10,11 @@
 	--components-link-color-hover: var(--palettes-brand-800);
 }
 
+@mixin neutral {
+	--components-link-color: var(--pr-t-color-text);
+	--components-link-color-hover: var(--palettes-neutral-900);
+}
+
 @mixin hasLinkText {
 	--components-link-textDecoration: none;
 }

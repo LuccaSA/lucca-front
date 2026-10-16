@@ -32,15 +32,14 @@ function getTemplate(): string {
 						<span class="userPopover-details-info-detail-link-state">Parti(e)</span>
 					</span>
 					-->
-					<a class="userPopover-details-info-detail-workplace" href="#">
-						<span
-							aria-hidden="true"
-							class="lucca-icon icon-calendarPlanning mod-S"
-						></span>
-						<span class="userPopover-details-info-detail-workplace-state">
-							Absent(e) – <span class="pr-u-textLight">Jusqu’au 28/02/2024 inclus</span>
-						</span>
-					</a>
+					<span class="userPopover-details-info-detail-workplace">
+						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
+						<a class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state" href="#"
+							><span class="link-text">Absent(e) – <span class="pr-u-textLight">Jusqu’au 28/02/2024 inclus</span></span
+							><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+							><span class="pr-u-mask">(Open in a new window.)</span>
+						</a>
+					</span>
 				</p>
 			</div>
 		</div>

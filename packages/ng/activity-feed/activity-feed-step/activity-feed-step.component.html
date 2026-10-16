@@ -1,4 +1,6 @@
-@if (status() === "critical" || status() === "success") {
+@if (icon(); as icon) {
+	<div class="activityFeed-step-state mod-icon"><lu-icon [icon]="icon" /></div>
+} @else if (status() === "critical" || status() === "success") {
 	<div class="activityFeed-step-state" [class.mod-critical]="status() === 'critical'" [class.mod-success]="status() === 'success'"></div>
 } @else {
 	@if (user(); as user) {

@@ -2,7 +2,7 @@ import { isNil } from '@lucca-front/ng/core';
 import { Day, FirstWeekContainsDate, format, isSameDay, isSameMonth, isSameWeek, isSameYear, parse, startOfDecade, startOfMonth, startOfYear, WeekOptions } from 'date-fns';
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
-import { DateRange, DateRangeInput } from './calendar2/date-range';
+import { OpenDateRange, OpenDateRangeInput } from './calendar2/open-date-range';
 import { DATE_ISO_FORMAT } from './date2.type';
 
 export function getIntlWeekDay(date: Date): CalendarWeekDay {
@@ -86,11 +86,11 @@ export function transformDateToDateISO(value: Date | null): string | null {
 	return format(value, DATE_ISO_FORMAT);
 }
 
-function isDateRangeInput(value: DateRangeInput | DateRange): value is DateRangeInput {
-	return !(value.start instanceof Date);
+function isDateRangeInput(value: OpenDateRangeInput | OpenDateRange): value is OpenDateRangeInput {
+	return typeof value.start === 'string' || typeof value.end === 'string';
 }
 
-export function transformDateRangeInputToDateRange(value: DateRange | null | undefined | DateRangeInput): DateRange | null {
+export function transformDateRangeInputToDateRange(value: OpenDateRange | null | undefined | OpenDateRangeInput): OpenDateRange | null {
 	if (isNil(value)) {
 		return null;
 	}
@@ -99,20 +99,25 @@ export function transformDateRangeInputToDateRange(value: DateRange | null | und
 		return value;
 	}
 
-	const valueEnd = value.end ? transformDateInputToDate(value.end) : null;
-
 	return {
 		...value,
-		start: transformDateInputToDate(value.start),
-		end: valueEnd,
+		start: value.start ? transformDateInputToDate(value.start) : null,
+		end: value.end ? transformDateInputToDate(value.end) : null,
 	};
 }
 
-export function transformDateRangeToDateRangeInput(value: DateRange): DateRangeInput {
-	const valueEnd = value.end ? transformDateToDateISO(value.end) : null;
+/**
+ * Bound a range is anchored on: its start when it has one, its end otherwise. A range open on
+ * its start is displayed from its end, the same way an incomplete one is displayed from its start.
+ */
+export function getDateRangeAnchor(range: OpenDateRange | null | undefined): Date | null {
+	return range?.start ?? range?.end ?? null;
+}
+
+export function transformDateRangeToDateRangeInput(value: OpenDateRange): OpenDateRangeInput {
 	return {
 		...value,
-		start: transformDateToDateISO(value.start),
-		end: valueEnd,
+		start: value.start ? transformDateToDateISO(value.start) : null,
+		end: value.end ? transformDateToDateISO(value.end) : null,
 	};
 }

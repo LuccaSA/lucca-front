@@ -1,8 +1,13 @@
+@use 'sass:math';
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 @use '@lucca-front/scss/src/components/chip/exports' as chip;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+
+@mixin width($value) {
+	--components-multiSelect-width: #{math.div($value, 2) * 1rem};
+}
 
 @mixin S {
 	--components-multiSelect-font: var(--pr-t-font-body-S);
@@ -74,5 +79,33 @@
 		lu-simple-select-default-option.pr-u-ellipsis {
 			white-space: normal !important;
 		}
+	}
+}
+
+@mixin select {
+	--components-dialog-animationDuration: 0s;
+	--components-dialog-insideHeaderTitleAlign: center;
+	--components-dialog-insideHeaderTitleFont: var(--pr-t-font-heading-4);
+	--components-dialog-insideHeaderColumns: 1fr auto 1fr;
+	--components-dialog-inside-header-button-justifySelf: end;
+	--components-dialog-insideHeaderAreas:
+		'spacer  container close  '
+		'content content   content';
+	--components-dialog-inside-header-paddingInline: var(--pr-t-spacings-200);
+	--components-dialog-inside-header-content-paddingBlockStart: var(--pr-t-spacings-100);
+	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-50);
+	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50);
+
+	// The sheet is how the select is reached on a touch device, where there is no hover to reveal
+	// either the tree's onlyParent/onlyChildren buttons or a group's « select all » link: inside a
+	// sheet both are shown for good. The tree buttons also leave their absolute position on the way,
+	// so that being there all the time shortens the option's label instead of covering it.
+	.optionItem-icons {
+		position: static;
+		opacity: 1;
+	}
+
+	.listboxOption-content {
+		--components-listboxOption-content-link-opacity: 1;
 	}
 }

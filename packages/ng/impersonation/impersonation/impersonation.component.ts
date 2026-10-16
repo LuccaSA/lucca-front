@@ -9,7 +9,7 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { ILuUser, LuUserDisplayPipe, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { IconComponent } from '@lucca/prisme/icon';
 import { LU_IMPERSONATION_TRANSLATIONS } from './impersonation.translate';
-import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, luNullableNumberAttribute } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-impersonation',
@@ -34,6 +34,22 @@ export class ImpersonationComponent {
 	readonly selectedUser = model<ILuUser>();
 
 	readonly enableFormerEmployees = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Restricts the users to the ones reachable through these operations, scoped by `appInstanceId`.
+	 */
+	readonly operationIds = input<readonly number[] | null>(null);
+
+	/**
+	 * Restricts the users to the ones reachable through these unique operations.
+	 * Takes precedence over `operationIds` / `appInstanceId`, which the API then ignores.
+	 */
+	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+
+	/**
+	 * Application instance the `operationIds` are scoped to. Unused with `uniqueOperationIds`.
+	 */
+	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
 
 	readonly isNotMe = computed(() => this.selectedUser()?.id !== this.currentUserId);
 	readonly clear = output<void>();

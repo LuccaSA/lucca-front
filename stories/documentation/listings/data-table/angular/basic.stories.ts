@@ -46,6 +46,12 @@ export default {
 			description: 'Tronque le libellé du header avec une ellipsis si la colonne n’offre pas assez de largeur.',
 			table: { category: 'inputs (th[luDataTableCell])' },
 		},
+		sortChange: {
+			description: 'Événement déclenché lorsque l’utilisateur change le tri de la cellule d’en-tête.',
+			action: 'sortChange',
+			control: false,
+			table: { category: 'outputs (th[luDataTableCell])', type: { summary: 'DataTableSort' } },
+		},
 		align: {
 			options: setStoryOptions(DATA_TABLE_ALIGN),
 			control: {
@@ -238,6 +244,7 @@ export default {
 			hover,
 			sort,
 			sortWithEllipsis,
+			sortChange,
 			cellBorder,
 			inlineSize,
 			inlineSizeValue,
@@ -257,7 +264,7 @@ export default {
 		const layoutFixedAttr = layoutFixed ? ` layoutFixed` : ``;
 		const hoverAttr = hover ? ` hover` : ``;
 		const cellBorderAttr = cellBorder ? ` cellBorder` : ``;
-		const sortAttr = sort ? ` sort="${sort}"` : ``;
+		const sortAttr = sort ? ` sort="${sort}" (sortChange)="sortChange($event)"` : ``;
 		const sortWithEllipsisAttr = sortWithEllipsis ? ` sortWithEllipsis` : ``;
 		const inlineSizeAttr = inlineSize && inlineSizeValue !== `` ? ` inlineSize="${inlineSizeValue}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
@@ -357,7 +364,7 @@ export default {
 		</tr>`;
 
 		return {
-			props: { example: text },
+			props: { example: text, sortChange },
 			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}${draggable}${emptyAttr}>
 	<thead luDataTableHead>
 		<tr luDataTableRow${selectableLabelHeadAttr}${mixedAttr}>

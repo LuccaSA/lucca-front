@@ -1,10 +1,10 @@
-import { LoadingComponent } from '@lucca-front/ng/loading';
+import { LoadingComponent, luLoadingTranslations } from '@lucca-front/ng/loading';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
-import { cleanupTemplate } from '@/helpers/stories';
+import { cleanupTemplate, intlArgType } from '@/helpers/stories';
 
 interface LoadingsBasicStory {
 	label: string;
-	hiddenLabel: boolean;
+	hiddenLabel: '' | 'true' | 'false';
 	L: boolean;
 	block: boolean;
 	invert: boolean;
@@ -15,12 +15,18 @@ export default {
 	title: 'Documentation/Loaders/Loading/Angular/Basic',
 	argTypes: {
 		label: {
-			description: '[Story] Modifie le texte affiché par le composant.',
+			description: '[Story] Modifie le texte affiché par le composant. Vide, le texte par défaut traduit est utilisé.',
 			control: 'text',
 			table: { category: 'inputs' },
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écrans.',
+			description:
+				'Masque le label en le conservant dans le DOM pour les lecteurs d’écrans. Non défini, le texte par défaut est masqué et le contenu projeté est affiché. `false` affiche le texte par défaut.',
+			options: ['', 'true', 'false'],
+			control: {
+				type: 'select',
+				labels: { '': 'non défini', true: 'true', false: 'false' },
+			},
 			table: { category: 'inputs' },
 		},
 		L: {
@@ -44,6 +50,7 @@ export default {
 			},
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luLoadingTranslations, 'LuLoadingLabel'),
 	},
 	decorators: [
 		moduleMetadata({
@@ -54,7 +61,7 @@ export default {
 		const lParam = args.L ? ` size="L"` : ``;
 		const blockParam = args.block ? ` block` : ``;
 		const invertParam = args.invert ? ` invert` : ``;
-		const hiddenLabelParam = args.hiddenLabel ? ` hiddenLabel` : ``;
+		const hiddenLabelParam = args.hiddenLabel === 'true' ? ` hiddenLabel` : args.hiddenLabel === 'false' ? ` [hiddenLabel]="false"` : ``;
 		const templateParam = args.template ? ` template="${args.template}"` : ``;
 		if (args.label) {
 			return {
@@ -62,7 +69,7 @@ export default {
 			};
 		} else {
 			return {
-				template: cleanupTemplate(`<lu-loading${lParam}${invertParam}${blockParam}${templateParam} />`),
+				template: cleanupTemplate(`<lu-loading${lParam}${hiddenLabelParam}${invertParam}${blockParam}${templateParam} />`),
 			};
 		}
 	},
@@ -70,8 +77,8 @@ export default {
 
 export const Basic = {
 	args: {
-		label: 'Chargement…',
-		hiddenLabel: true,
+		label: '',
+		hiddenLabel: '',
 		L: false,
 		block: false,
 		invert: false,

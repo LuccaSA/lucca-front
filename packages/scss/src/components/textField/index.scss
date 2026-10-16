@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/config';
+
 @use 'exports' as *;
 
 .textField {
@@ -21,6 +23,12 @@
 
 		&.mod-XS {
 			@include XS;
+		}
+
+		@each $value in config.$fieldsWidth {
+			&.mod-width#{$value} {
+				@include width($value);
+			}
 		}
 
 		&.mod-valueAlignRight {

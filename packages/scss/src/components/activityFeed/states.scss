@@ -24,3 +24,9 @@
 		@include icon.generate('sign_close');
 	}
 }
+
+@mixin withIcon {
+	@include color.palette('product');
+
+	color: var(--palettes-product-700);
+}

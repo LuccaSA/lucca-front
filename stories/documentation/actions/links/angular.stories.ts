@@ -18,21 +18,22 @@ export default {
 	],
 
 	render: (args) => {
-		const { label, disabled, external, href, routerLink, decorationHover, ...inputs } = args;
+		const { label, disabled, external, href, routerLink, decorationHover, neutral, ...inputs } = args;
 		const disable = disabled ? ' disabled' : '';
 		const decoration = decorationHover ? ' decorationHover' : '';
+		const neutralColor = neutral ? ' neutral' : '';
 
 		return {
 			props: {
 				tick$: timer(0, 1000),
 			},
-			template: `Routing : <a luLink="${routerLink}"${disable}${decoration}>${label}</a><br />
-Routing (nouvelle fenêtre) : <a luLink="${routerLink}" external${disable}${decoration}>${label}</a><br />
-Routing (nouvelle fenêtre) uniquement au survol/focus/touch : <a luLink="${routerLink}" external hiddenIcon${disable}${decoration}>${label}</a><br />
+			template: `Routing : <a luLink="${routerLink}"${disable}${decoration}${neutralColor}>${label}</a><br />
+Routing (nouvelle fenêtre) : <a luLink="${routerLink}" external${disable}${decoration}${neutralColor}>${label}</a><br />
+Routing (nouvelle fenêtre) uniquement au survol/focus/touch : <a luLink="${routerLink}" external hiddenIcon${disable}${decoration}${neutralColor}>${label}</a><br />
 <br />
-Lien : <a href="${href}" luLink${disable}${decoration}>${label}</a><br />
-Lien (nouvelle fenêtre) : <a href="${href}" luLink external${disable}${decoration}>${label}</a><br />
-Lien (nouvelle fenêtre) uniquement au survol/focus/touch : <a href="${href}" luLink external hiddenIcon${disable}${decoration}>${label}</a><br />`,
+Lien : <a href="${href}" luLink${disable}${decoration}${neutralColor}>${label}</a><br />
+Lien (nouvelle fenêtre) : <a href="${href}" luLink external${disable}${decoration}${neutralColor}>${label}</a><br />
+Lien (nouvelle fenêtre) uniquement au survol/focus/touch : <a href="${href}" luLink external hiddenIcon${disable}${decoration}${neutralColor}>${label}</a><br />`,
 		};
 	},
 	argTypes: {
@@ -62,6 +63,10 @@ Lien (nouvelle fenêtre) uniquement au survol/focus/touch : <a href="${href}" l
 			table: { category: 'inputs' },
 		},
 		intl: intlArgType(luLinkTranslations, 'LinkTranslate'),
+		neutral: {
+			description: 'Affiche le lien dans la couleur de texte par défaut plutôt que dans la couleur de lien.',
+			table: { category: 'inputs' },
+		},
 	},
 } as Meta;
 
@@ -72,5 +77,6 @@ export const Basic: StoryObj = {
 		href: `https://www.example.org`,
 		disabled: false,
 		decorationHover: false,
+		neutral: false,
 	},
 };

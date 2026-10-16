@@ -1,6 +1,15 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<div class="demo-QAtable-list">
@@ -30,6 +39,13 @@
 							<p class="inlineMessage-content">Helper text</p>
 						</div>
 					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text">
+						<lu-text-input required placeholder="Placeholder" [formControl]="empty" />
+					</lu-form-field>
 				</div>
 			</td>
 		</tr>
@@ -115,6 +131,19 @@
 							<p class="inlineMessage-content">Helper text</p>
 						</div>
 					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text">
+						<lu-text-input required placeholder="Placeholder" [formControl]="empty" />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" size="S">
+						<lu-text-input required placeholder="Placeholder" [formControl]="empty" />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" size="XS">
+						<lu-text-input required placeholder="Placeholder" [formControl]="empty" />
+					</lu-form-field>
 				</div>
 			</td>
 		</tr>
@@ -207,6 +236,19 @@
 					</div>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label" tooltip="Tooltip message">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" hasClearer hasSearchIcon />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" size="S">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" hasClearer hasSearchIcon />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" size="XS">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" hasClearer hasSearchIcon />
+					</lu-form-field>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>Clear</td>
@@ -292,6 +334,19 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label" tooltip="Tooltip message">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" hasClearer />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" size="S">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" hasClearer />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" size="XS">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" hasClearer />
+					</lu-form-field>
 				</div>
 			</td>
 		</tr>
@@ -385,6 +440,19 @@
 					</div>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label" tooltip="Tooltip message">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" [prefix]="prefix" [suffix]="suffix" />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" size="S">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" [prefix]="prefix" [suffix]="suffix" />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" size="XS">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" [prefix]="prefix" [suffix]="suffix" />
+					</lu-form-field>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>Align right</td>
@@ -464,6 +532,19 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label" tooltip="Tooltip message">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" valueAlignRight />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" [prefix]="prefix" [suffix]="suffix" valueAlignRight />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" valueAlignRight hasClearer hasSearchIcon />
+					</lu-form-field>
 				</div>
 			</td>
 		</tr>
@@ -597,6 +678,22 @@
 					</div>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-form-field label="Label" tooltip="Tooltip message" invalid inlineMessage="Helper text">
+						<lu-text-input required placeholder="Placeholder" [formControl]="empty" />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" invalid inlineMessage="Helper text">
+						<lu-text-input required placeholder="Placeholder" [formControl]="filled" [prefix]="prefix" [suffix]="suffix" hasClearer />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text">
+						<lu-text-input required placeholder="Placeholder" [formControl]="disabledEmpty" />
+					</lu-form-field>
+					<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text">
+						<lu-text-input required placeholder="Placeholder" [formControl]="disabledFilled" [prefix]="prefix" [suffix]="suffix" />
+					</lu-form-field>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>Everything</td>
@@ -642,86 +739,282 @@
 					</div>
 				</div>
 			</td>
-		</tr>
-		<tr>
-			<td>Width</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<div class="form-field mod-width20">
-						<label class="formLabel" id="fieldWidth20Label" for="fieldWidth20">20 (160px)</label>
-						<div class="textField">
-							<div class="textField-input">
-								<input
-									type="text"
-									id="fieldWidth20"
-									class="textField-input-value"
-									aria-labelledby="fieldWidth20label"
-									aria-invalid="false"
-								/>
-							</div>
+					<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text">
+						<lu-text-input
+							required
+							placeholder="Placeholder"
+							[formControl]="filled"
+							[prefix]="prefix"
+							[suffix]="suffix"
+							hasClearer
+							hasSearchIcon
+						/>
+					</lu-form-field>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Field width</td>
+			<td>
+				<div class="form-field mod-width10">
+					<label class="formLabel" id="fieldWidth10Label" for="fieldWidth10">10 (80px)</label>
+					<div class="textField">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidth10"
+								class="textField-input-value"
+								aria-labelledby="fieldWidth10label"
+								aria-describedby="fieldWidth10Message"
+								aria-invalid="false"
+							/>
 						</div>
 					</div>
-
-					<div class="form-field mod-width30">
-						<label class="formLabel" id="fieldWidth30Label" for="fieldWidth30">30 (240px)</label>
-						<div class="textField">
-							<div class="textField-input">
-								<input
-									type="text"
-									id="fieldWidth30"
-									class="textField-input-value"
-									aria-labelledby="fieldWidth30label"
-									aria-invalid="false"
-								/>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-field mod-width40">
-						<label class="formLabel" id="fieldWidth40Label" for="fieldWidth40">40 (320px)</label>
-						<div class="textField">
-							<div class="textField-input">
-								<input
-									type="text"
-									id="fieldWidth40"
-									class="textField-input-value"
-									aria-labelledby="fieldWidth40label"
-									aria-invalid="false"
-								/>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-field mod-width50">
-						<label class="formLabel" id="fieldWidth50Label" for="fieldWidth50">50 (400px)</label>
-						<div class="textField">
-							<div class="textField-input">
-								<input
-									type="text"
-									id="fieldWidth50"
-									class="textField-input-value"
-									aria-labelledby="fieldWidth50label"
-									aria-invalid="false"
-								/>
-							</div>
-						</div>
-					</div>
-
-					<div class="form-field mod-width60">
-						<label class="formLabel" id="fieldWidth60Label" for="fieldWidth60">60 (480px)</label>
-						<div class="textField">
-							<div class="textField-input">
-								<input
-									type="text"
-									id="fieldWidth60"
-									class="textField-input-value"
-									aria-labelledby="fieldWidth60label"
-									aria-invalid="false"
-								/>
-							</div>
-						</div>
+					<div class="inlineMessage" id="fieldWidth10Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
 					</div>
 				</div>
+
+				<div class="form-field mod-width20">
+					<label class="formLabel" id="fieldWidth20Label" for="fieldWidth20">20 (160px)</label>
+					<div class="textField">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidth20"
+								class="textField-input-value"
+								aria-labelledby="fieldWidth20label"
+								aria-describedby="fieldWidth20Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidth20Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+
+				<div class="form-field mod-width30">
+					<label class="formLabel" id="fieldWidth30Label" for="fieldWidth30">30 (240px)</label>
+					<div class="textField">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidth30"
+								class="textField-input-value"
+								aria-labelledby="fieldWidth30label"
+								aria-describedby="fieldWidth30Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidth30Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+
+				<div class="form-field mod-width40">
+					<label class="formLabel" id="fieldWidth40Label" for="fieldWidth40">40 (320px)</label>
+					<div class="textField">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidth40"
+								class="textField-input-value"
+								aria-labelledby="fieldWidth40label"
+								aria-describedby="fieldWidth40Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidth40Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+
+				<div class="form-field mod-width50">
+					<label class="formLabel" id="fieldWidth50Label" for="fieldWidth50">50 (400px)</label>
+					<div class="textField">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidth50"
+								class="textField-input-value"
+								aria-labelledby="fieldWidth50label"
+								aria-describedby="fieldWidth50Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidth50Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+
+				<div class="form-field mod-width60">
+					<label class="formLabel" id="fieldWidth60Label" for="fieldWidth60">60 (480px)</label>
+					<div class="textField">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidth60"
+								class="textField-input-value"
+								aria-labelledby="fieldWidth60label"
+								aria-describedby="fieldWidth60Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidth60Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+			</td>
+			<td>
+				@for (width of widths; track width.value) {
+					<lu-form-field [label]="width.label" [width]="width.value" [inlineMessage]="longHelperText">
+						<lu-text-input placeholder="Placeholder" [formControl]="empty" />
+					</lu-form-field>
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>Input width</td>
+			<td>
+				<div class="form-field">
+					<label class="formLabel" id="fieldWidthBis10Label" for="fieldWidthBis10">10 (80px)</label>
+					<div class="textField mod-width10">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidthBis10"
+								class="textField-input-value"
+								aria-labelledby="fieldWidthBis10label"
+								aria-describedby="fieldWidthBis10Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidthBis10Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+
+				<div class="form-field">
+					<label class="formLabel" id="fieldWidthBis20Label" for="fieldWidthBis20">20 (160px)</label>
+					<div class="textField mod-width20">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidthBis20"
+								class="textField-input-value"
+								aria-labelledby="fieldWidthBis20label"
+								aria-describedby="fieldWidthBis20Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidthBis20Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+
+				<div class="form-field">
+					<label class="formLabel" id="fieldWidthBis30Label" for="fieldWidthBis30">30 (240px)</label>
+					<div class="textField mod-width30">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidthBis30"
+								class="textField-input-value"
+								aria-labelledby="fieldWidthBis30label"
+								aria-describedby="fieldWidthBis30Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidthBis30Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+
+				<div class="form-field">
+					<label class="formLabel" id="fieldWidthBis40Label" for="fieldWidthBis40">40 (320px)</label>
+					<div class="textField mod-width40">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidthBis40"
+								class="textField-input-value"
+								aria-labelledby="fieldWidthBis40label"
+								aria-describedby="fieldWidthBis40Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidthBis40Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+
+				<div class="form-field">
+					<label class="formLabel" id="fieldWidthBis50Label" for="fieldWidthBis50">50 (400px)</label>
+					<div class="textField mod-width50">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidthBis50"
+								class="textField-input-value"
+								aria-labelledby="fieldWidthBis50label"
+								aria-describedby="fieldWidthBis50Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidthBis50Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+
+				<div class="form-field">
+					<label class="formLabel" id="fieldWidthBis60Label" for="fieldWidthBis60">60 (480px)</label>
+					<div class="textField mod-width60">
+						<div class="textField-input">
+							<input
+								type="text"
+								id="fieldWidthBis60"
+								class="textField-input-value"
+								aria-labelledby="fieldWidthBis60label"
+								aria-describedby="fieldWidthBis60Message"
+								aria-invalid="false"
+							/>
+						</div>
+					</div>
+					<div class="inlineMessage" id="fieldWidthBis60Message">
+						<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+						<p class="inlineMessage-content">Helper text that is long enough to wrap onto several lines</p>
+					</div>
+				</div>
+			</td>
+			<td>
+				@for (width of widths; track width.value) {
+					<lu-form-field [label]="width.label" [inlineMessage]="longHelperText">
+						<lu-text-input placeholder="Placeholder" [width]="width.value" [formControl]="empty" />
+					</lu-form-field>
+				}
 			</td>
 		</tr>
 	</tbody>

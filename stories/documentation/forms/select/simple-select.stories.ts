@@ -21,6 +21,7 @@ import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-sel
 import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent, luSimpleSelectTranslations } from '@lucca-front/ng/simple-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
@@ -72,6 +73,76 @@ export const Basic = generateStory({
 	storyPartial: {
 		argTypes: {
 			clearable: { control: { type: 'boolean' }, table: { category: 'inputs' } },
+		},
+	},
+});
+
+export const InputWidth = generateStory({
+	name: 'Input Width',
+	description: `L’input \`width\` contraint la largeur du select lui-même, sur la même échelle que le \`width\` du form field : la valeur correspond à des demi-rem (30 → 15rem, soit 240px). Le label et l’inline message du form field, eux, gardent la largeur du form field.`,
+	template: `<lu-form-field label="Légume" inlineMessage="Ce message d’aide est volontairement long pour vérifier qu’il occupe toute la largeur du form field et ne se cale pas sur la largeur réduite du select." [width]="widthOnInput ? null : width">
+	<lu-simple-select
+		#selectRef
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+		[width]="widthOnInput ? width : null"
+		[(ngModel)]="selectedLegume"
+	>
+		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
+	</lu-simple-select>
+</lu-form-field>`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/form-field': ['FormFieldComponent'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			width: 30,
+			widthOnInput: true,
+		},
+		argTypes: {
+			width: {
+				control: { type: 'select' },
+				options: [null, 10, 20, 30, 40, 50, 60],
+				table: { category: 'inputs', type: { summary: 'FormFieldWidth | null' } },
+			},
+			widthOnInput: {
+				name: '↳ widthOnInput',
+				if: { arg: 'width', truthy: true },
+				control: { type: 'boolean' },
+				description: 'Applique la largeur sur le select plutôt que sur le <lu-form-field>, afin que le label et le message d’aide conservent toute la largeur disponible.',
+				table: { category: 'inputs' },
+			},
+		},
+	},
+});
+
+export const WithFormField = generateStory({
+	name: 'With form field',
+	description: `Encapsulé dans un \`lu-form-field\`, le select est associé à son label, qui reste la façon recommandée de nommer le champ. Sous le breakpoint S, le panneau s’ouvre en bottom sheet et reprend ce label comme titre.`,
+	template: `<lu-form-field label="Légume" tooltip="Un seul légume à la fois" inlineMessage="Choisissez votre légume préféré">
+	<lu-simple-select
+		#selectRef
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+		[clearable]="clearable"
+		[loading]="loading"
+		[(ngModel)]="selectedLegume"
+		(addOption)="something = true"
+		addOptionStrategy="always"
+	>
+		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
+	</lu-simple-select>
+</lu-form-field>`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/form-field': ['FormFieldComponent'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+	storyPartial: {
+		argTypes: {
+			clearable: { control: { type: 'boolean' } },
 		},
 	},
 });
@@ -735,6 +806,7 @@ const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAlias
 				LuOptionDirective,
 				LuUserDisplayPipe,
 				FilterLegumesPipe,
+				FormFieldComponent,
 				SortLegumesPipe,
 				SlicePipe,
 				LuCoreSelectApiV3Directive,
@@ -755,6 +827,7 @@ const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAlias
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 				TreeSelectDirective,
+				FormFieldComponent,
 				IconComponent,
 				LuUserPictureComponent,
 			],

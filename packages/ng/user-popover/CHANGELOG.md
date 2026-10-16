@@ -1,3 +1,9 @@
+### 22.1.0
+
+#### Added
+
+- The loading skeleton widths are drawn from the `LU_RANDOM` injection token (`@lucca-front/ng/core`).
+
 ### 21.3.0
 
 #### Changed

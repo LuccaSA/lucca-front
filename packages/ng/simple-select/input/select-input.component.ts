@@ -5,7 +5,8 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, isNotNil, luBooleanAttribute, PortalDirective } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills';
+import { provideLuDialog } from '@lucca-front/ng/dialog';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills/core';
 import { InputDirective, PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
@@ -48,6 +49,8 @@ let nextID = 0;
 			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
 		},
 		LuSimpleSelectPanelRefFactory,
+		// Below the `S` breakpoint the panel opens as a dialog in `sheet` mode.
+		provideLuDialog(),
 		provideLuSelectLabelsAndIds(),
 		{
 			provide: FILTER_PILL_INPUT_COMPONENT,

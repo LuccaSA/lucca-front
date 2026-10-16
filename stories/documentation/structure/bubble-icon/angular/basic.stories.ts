@@ -13,7 +13,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Définit une direction de la bulle. Aléatoire par défaut.',
+			description: 'Définit une direction de la bulle. Aléatoire par défaut, modifiable via le token `LU_BUBBLE_ICON_DEFAULT_DIRECTION`.',
 			table: { category: 'inputs', defaultValue: { summary: 'random' } },
 		},
 		size: {

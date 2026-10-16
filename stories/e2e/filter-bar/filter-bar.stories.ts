@@ -5,7 +5,7 @@ import meta, { Basic } from '@/stories/forms/filter-pills/angular/filter-bar.sto
 
 export default {
 	...meta,
-	title: 'E2E/FilterBar',
+	title: 'E2E/FilterBar/Basic',
 	tags: ['!autodocs'],
 };
 
@@ -25,21 +25,18 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	});
 });
 
-export const ManualApplyTEST = createTestStory(
-	{ ...Basic, name: 'Manual apply', args: { ...Basic.args, manualApply: true } },
-	async ({ canvasElement, step }) => {
-		await waitForAngular();
+export const ManualApplyTEST = createTestStory({ ...Basic, name: 'Manual apply', args: { ...Basic.args, manualApply: true } }, async ({ canvasElement, step }) => {
+	await waitForAngular();
 
-		const canvas = within(canvasElement);
+	const canvas = within(canvasElement);
 
-		await step('With an apply button, results are not announced as updating automatically', async () => {
-			await expect(canvas.getByRole('button', { name: 'Appliquer les filtres' })).toBeVisible();
-			const filterBar = canvasElement.querySelector('lu-filter-bar')!;
-			await expect(filterBar).not.toHaveAttribute('aria-describedby');
-			await expect(canvas.queryByText('La liste des résultats se met à jour automatiquement.')).not.toBeInTheDocument();
-		});
-	},
-);
+	await step('With an apply button, results are not announced as updating automatically', async () => {
+		await expect(canvas.getByRole('button', { name: 'Appliquer les filtres' })).toBeVisible();
+		const filterBar = canvasElement.querySelector('lu-filter-bar')!;
+		await expect(filterBar).not.toHaveAttribute('aria-describedby');
+		await expect(canvas.queryByText('La liste des résultats se met à jour automatiquement.')).not.toBeInTheDocument();
+	});
+});
 
 export const OptionalFilterTEST = createTestStory({ ...Basic, name: 'Optional filter', args: { ...Basic.args, optionalFilter: true } }, async ({ canvasElement, step }) => {
 	await waitForAngular();
@@ -48,13 +45,22 @@ export const OptionalFilterTEST = createTestStory({ ...Basic, name: 'Optional fi
 	const getAddFiltersButton = () => canvas.getByRole('button', { name: 'Filtres supplémentaires' });
 	const getPeriodPill = () => canvas.getByRole('button', { name: /Période/ });
 	const queryPeriodPill = () => canvas.queryByRole('button', { name: /Période/ });
-	const togglePeriodOption = async () => {
+	const openAdditionalFilters = async () => {
 		await userEvent.click(getAddFiltersButton());
 		await waitForAngular();
-		await userEvent.click(screen.getByRole('checkbox', { name: 'Période' }));
-		await waitForAngular();
+		return await screen.findByRole('option', { name: 'Période' });
+	};
+	const closeAdditionalFilters = async () => {
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('option', { name: 'Période' })).not.toBeInTheDocument());
+		await waitFor(() => expect(getAddFiltersButton()).toHaveAttribute('aria-expanded', 'false'));
+	};
+	const togglePeriodOption = async () => {
+		const option = await openAdditionalFilters();
+		await userEvent.click(option);
+		await waitForAngular();
+		await closeAdditionalFilters();
 	};
 
 	await step('An optional pill is hidden until it is added', async () => {
@@ -62,18 +68,14 @@ export const OptionalFilterTEST = createTestStory({ ...Basic, name: 'Optional fi
 		await expect(queryPeriodPill()).not.toBeInTheDocument();
 	});
 
-	await step('Checking the optional pill in the additional filters displays it', async () => {
-		await userEvent.click(getAddFiltersButton());
-		await waitForAngular();
-		const option = screen.getByRole('checkbox', { name: 'Période' });
-		await expect(option).not.toBeChecked();
+	await step('Selecting the optional pill in the additional filters displays it', async () => {
+		const option = await openAdditionalFilters();
+		await expect(option).toHaveAttribute('aria-selected', 'false');
 		await userEvent.click(option);
 		await waitForAngular();
-		await expect(option).toBeChecked();
+		await expect(option).toHaveAttribute('aria-selected', 'true');
 		await expect(getPeriodPill()).toBeVisible();
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		await waitFor(() => expect(screen.queryByRole('checkbox', { name: 'Période' })).not.toBeInTheDocument());
+		await closeAdditionalFilters();
 	});
 
 	await step('The displayed optional pill can be filled', async () => {
@@ -87,7 +89,7 @@ export const OptionalFilterTEST = createTestStory({ ...Basic, name: 'Optional fi
 		await expect(getPeriodPill()).not.toHaveTextContent('Aucune valeur sélectionnée');
 	});
 
-	await step('Unchecking the optional pill hides it', async () => {
+	await step('Unselecting the optional pill hides it', async () => {
 		await togglePeriodOption();
 		await expect(queryPeriodPill()).not.toBeInTheDocument();
 	});
@@ -101,16 +103,14 @@ export const OptionalFilterTEST = createTestStory({ ...Basic, name: 'Optional fi
 		getAddFiltersButton().focus();
 		await userEvent.keyboard('{Enter}');
 		await waitForAngular();
-		const option = screen.getByRole('checkbox', { name: 'Période' });
-		await expect(option).toBeChecked();
-		option.focus();
-		await userEvent.keyboard(' ');
+		const option = await screen.findByRole('option', { name: 'Période' });
+		await expect(option).toHaveAttribute('aria-selected', 'true');
+		await userEvent.keyboard('{ArrowDown}');
+		await userEvent.keyboard('{Enter}');
 		await waitForAngular();
-		await expect(option).not.toBeChecked();
+		await expect(option).toHaveAttribute('aria-selected', 'false');
 		await expect(queryPeriodPill()).not.toBeInTheDocument();
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		await waitFor(() => expect(screen.queryByRole('checkbox', { name: 'Période' })).not.toBeInTheDocument());
+		await closeAdditionalFilters();
 		await expect(getAddFiltersButton()).toHaveFocus();
 	});
 });
