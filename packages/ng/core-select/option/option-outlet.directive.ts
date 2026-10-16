@@ -1,4 +1,5 @@
 import { ComponentRef, Directive, EmbeddedViewRef, inject, Injector, input, OnDestroy, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { isNotNil, luBooleanAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LuOptionContext } from '../select.model';
 import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
@@ -10,19 +11,23 @@ function hasRenderableValue<T>(value: T | undefined, showNull: boolean): value i
 @Directive({
 	selector: '[luOptionOutlet]',
 	providers: [provideOptionContext()],
+	exportAs: 'ɵluOptionOutlet',
 })
 export class LuOptionOutletDirective<T> implements OnDestroy {
+	private viewContainerRef = inject(ViewContainerRef);
+	private injector = inject(Injector);
+	private optionContext = inject(LU_OPTION_CONTEXT);
+
 	readonly luOptionOutlet = input<Type<unknown> | TemplateRef<LuOptionContext<T>>>();
 
 	readonly luOptionOutletValue = input<T | undefined>();
 
 	readonly luOptionShowNull = input(false, { transform: luBooleanAttribute });
 
-	private viewContainerRef = inject(ViewContainerRef);
-	private injector = inject(Injector);
+	readonly isDisabled = toSignal(this.optionContext.isDisabled$, { requireSync: true });
+
 	private embeddedViewRef?: EmbeddedViewRef<LuOptionContext<T>>;
 	private componentRef?: ComponentRef<unknown>;
-	private optionContext = inject(LU_OPTION_CONTEXT);
 
 	constructor() {
 		let previousOutlet: Type<unknown> | TemplateRef<LuOptionContext<T>> | undefined;
