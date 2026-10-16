@@ -1,7 +1,7 @@
 import { createTestStory } from '@/helpers/stories';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { ensurePickerPanelStyles, findPanelOptions, getPanelScrollContainer, isFullyVisibleInPanel, isSelectAllOption, waitForAngular } from '@/helpers/test';
-import meta, { SelectAll, Basic, WithClue, ScrollOnOpen, Establishment } from '@/stories/forms/select/multi-select.stories';
+import meta, { SelectAll, Basic, WithClue, ScrollOnOpen, Establishment, WithDisabledOptionFn } from '@/stories/forms/select/multi-select.stories';
 
 export default {
 	...meta,
@@ -398,5 +398,63 @@ export const EstablishmentTEST = createTestStory(Establishment, async ({ canvasE
 		await waitFor(() => {
 			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 		});
+	});
+});
+
+export const WithDisabledOptionFnTEST = createTestStory(WithDisabledOptionFn, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+	const input = canvas.getByRole('combobox');
+	// Chips are aria-hidden: the combobox exposes the value to assistive technologies
+	const chip = (name: string) => Array.from(canvasElement.querySelectorAll<HTMLElement>('lu-chip')).find((el) => el.textContent?.includes(name));
+	const clearButton = () => canvas.queryAllByRole('button').find((button) => button.className.includes('clear'));
+
+	await step('Disabled option chip has no remove button', async () => {
+		await expect(within(chip('Artichaut')).queryByRole('button', { hidden: true })).toBeInTheDocument();
+		await expect(within(chip('Asperge')).queryByRole('button', { hidden: true })).not.toBeInTheDocument();
+	});
+
+	await step('Disabled option cannot be unchecked from the panel', async () => {
+		await userEvent.click(input);
+		await waitForAngular();
+		const disabledOption = (await findPanelOptions()).find((option) => option.textContent?.includes('Asperge'));
+		await expect(disabledOption).toHaveAttribute('aria-disabled', 'true');
+		await expect(disabledOption).toHaveAttribute('aria-selected', 'true');
+		await userEvent.click(disabledOption);
+		await waitForAngular();
+		await expect(disabledOption).toHaveAttribute('aria-selected', 'true');
+		// Clicking a disabled option doesn't give the focus back to the input
+		input.focus();
+		await userEvent.keyboard('{Escape}');
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	});
+
+	await step('Backspace skips the disabled option', async () => {
+		input.focus();
+		await userEvent.keyboard('{Backspace}');
+		await waitForAngular();
+		await expect(chip('Artichaut')).toBeUndefined();
+		await userEvent.keyboard('{Backspace}');
+		await waitForAngular();
+		await expect(chip('Asperge')).toBeDefined();
+		await userEvent.keyboard('{Escape}');
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+	});
+
+	await step('Clear keeps the disabled option', async () => {
+		await expect(clearButton()).toBeUndefined();
+		await userEvent.click(input);
+		await waitForAngular();
+		const enabledOption = (await findPanelOptions()).find((option) => option.textContent?.includes('Artichaut'));
+		await userEvent.click(enabledOption);
+		await userEvent.keyboard('{Escape}');
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		await expect(chip('Artichaut')).toBeDefined();
+		await expect(clearButton()).toBeDefined();
+
+		await userEvent.click(clearButton());
+		await waitFor(() => expect(chip('Artichaut')).toBeUndefined());
+		await expect(chip('Asperge')).toBeDefined();
+		await expect(clearButton()).toBeUndefined();
 	});
 });

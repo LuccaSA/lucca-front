@@ -397,6 +397,7 @@ export const WithDisabledOptionFn = generateStory({
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[disabledOptionFn]="isLegumeDisabled"
+	[clearable]="clearable"
 	[maxValuesShown]="maxValuesShown"
 >
 	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
