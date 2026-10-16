@@ -1,4 +1,5 @@
 <lu-dialog>
+	<!-- eslint-disable-next-line @lucca-front/no-deprecated-classes -- .dialog-form is deprecated since LF 18.3.0 (removed in 22.0.0), to be replaced by .dialog-inside-formOptional -->
 	<form class="dialog-form" (submit)="save()" [formGroup]="formGroup">
 		<lu-dialog-content>
 			<lu-form-field [label]="intl().linksHref">
