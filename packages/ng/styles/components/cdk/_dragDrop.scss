@@ -73,6 +73,10 @@
 	rotate: 1deg;
 	cursor: grabbing;
 
+	&.resourceCard {
+		--components-resourceCard-before-backgroundColor: transparent;
+	}
+
 	&.dataTable-body-row {
 		display: table;
 

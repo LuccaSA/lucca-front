@@ -93,6 +93,7 @@
 			&:first-child {
 				inline-size: var(--components-dataTable-cellFirst-width);
 				inset-inline-start: 0;
+				user-select: var(--components-dataTable-cellFirst-userSelect);
 
 				.checkboxField {
 					--component-checkboxField-top: 0;
