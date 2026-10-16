@@ -73,7 +73,7 @@
 			block-size: var(--components-fancyBox-content-foregroundEndStart-blockSize);
 		}
 
-		// deprecated
+		// stylelint-disable-next-line selector-disallowed-list -- .fancyBox-content-foreground is deprecated
 		.fancyBox-content-foreground {
 			inset-block-start: var(--components-fancyBox-content-foregroundStartEnd-insetBlockStart);
 			inset-inline-end: var(--components-fancyBox-content-foregroundStartEnd-insetInlineEnd);

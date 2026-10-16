@@ -267,4 +267,9 @@ export default [
 		versionDeprecated: '22.0.6',
 		actions: `Retirer la classe \`.mod-hover\` et l’input Angular \`hover\`, sans remplacement : une ligne sans action ne doit pas avoir d’effet de survol.`,
 	},
+	{
+		objectPattern: /\.fancyBox-content-foreground(?![\w-])/,
+		versionDeprecated: '22.1.0',
+		actions: `Remplacer par \`.fancyBox-content-foregroundStartEnd\`, et l’input Angular \`foreground\` par \`foregroundStartEnd\`.`,
+	},
 ];
