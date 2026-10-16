@@ -22,7 +22,8 @@
     "packages/scss",
     "packages/prisme",
     "packages/ng",
-    "packages/eslint-plugin"
+    "packages/eslint-plugin",
+    "packages/e2e-harness"
   ],
   "scripts": {
     "build": "npm run build:ng && npm run build:remaining && npm run docs:llms-pack",
@@ -49,7 +50,10 @@
     "icons:update": "node ./packages/icons/update-icons.js",
     "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts",
-    "typography:update-font-coverage": "ts-node --project scripts/generate-typography-font-coverage/tsconfig.json scripts/generate-typography-font-coverage/index.ts"
+    "typography:update-font-coverage": "ts-node --project scripts/generate-typography-font-coverage/tsconfig.json scripts/generate-typography-font-coverage/index.ts",
+    "build:e2e-harness": "tsc -p packages/e2e-harness/tsconfig.lib.json && tsc -p packages/e2e-harness/tsconfig.lib.cjs.json",
+    "test:e2e-harness": "playwright test --config packages/e2e-harness/tests/playwright.config.ts",
+    "demo:e2e-harness": "npm run test:e2e-harness -- --trace on"
   },
   "dependencies": {
     "@angular/animations": "^22.2.1",
@@ -94,6 +98,7 @@
     "@compodoc/compodoc": "2.0.0",
     "@lucca-front/eslint-plugin": "workspace:*",
     "@lucca/stylelint-config-prisme": "file:packages/stylelint-config",
+    "@playwright/test": "1.61.1",
     "@storybook/addon-a11y": "~10.5.0-alpha.9",
     "@storybook/addon-docs": "~10.5.0-alpha.9",
     "@storybook/addon-mcp": "~0.6.0",
