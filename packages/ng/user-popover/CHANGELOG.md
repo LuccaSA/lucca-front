@@ -4,6 +4,14 @@
 
 - The loading skeleton widths are drawn from the `LU_RANDOM` injection token (`@lucca-front/ng/core`).
 
+#### Changed
+
+- The user name and the work location links now open in a new tab, as external links (`luLink`).
+
+#### Removed
+
+- `USER_POPOVER_IS_ACTIVATED` token, deprecated since 21.1.2.
+
 ### 21.3.0
 
 #### Changed

@@ -1,3 +1,14 @@
+### 22.1.0
+
+#### Added
+
+- Opt-in bottom sheet below the `S` breakpoint (800px), enabled with `{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true }` (`@lucca-front/ng/core-select`): the trigger becomes a button and the panel opens as a dialog titled with the field label, with its own search input. Selects inside a filter pill keep their behavior.
+- `width` input to size the select itself, using the form field width scale, including the new `10` value.
+
+#### Fixed
+
+- Border of an invalid select keeps its critical color on hover.
+
 ### 22.0.6
 
 #### Fixed

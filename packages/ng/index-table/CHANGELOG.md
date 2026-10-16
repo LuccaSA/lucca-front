@@ -1,3 +1,21 @@
+### 22.1.0
+
+#### Changed
+
+- `sort` on `th[luIndexTableCell]` is now an input paired with a `sortChange` output that never emits `null`. `[(sort)]` keeps working, but `sort` is no longer a `ModelSignal` and can't be set from outside with `.set()`.
+
+### 22.0.5
+
+#### Added
+
+- `sortWithEllipsis` input on `th[luIndexTableCell]` to truncate a long sortable header label with an ellipsis and show the full label in a tooltip (`tableSortable mod-ellipsis`).
+
+### 22.0.1
+
+#### Fixed
+
+- `lu-tag` and `pr-tag` in cells are now top-aligned, like `.tag`.
+
 ### 22.0.0
 
 #### Added

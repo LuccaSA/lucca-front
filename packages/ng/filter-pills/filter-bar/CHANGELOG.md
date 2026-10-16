@@ -1,3 +1,14 @@
+### 22.1.0
+
+#### Added
+
+- `resultsCount` input to display the number of results after the filters, announced to screen readers when it changes (`null` hides it, for instance while results are loading).
+- `segmentedControlTabs` input to display the tabs of a `lu-segmented-control-tabs` at the end of the bar, its panels staying where they are declared. The `luFilterPillAddonAfter` actions are displayed after the tabs, separated by a divider.
+
+#### Changed
+
+- Optional filters are now picked from a searchable multi-select, and grouped according to the `grouping` input of their `lu-filter-pill`.
+
 ### 22.0.6
 
 #### Fixed

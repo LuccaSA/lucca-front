@@ -1,3 +1,19 @@
+### 22.1.0
+
+#### Changed
+
+- Icons are displayed in small size in a `small` segmented control.
+
+### 22.0.5
+
+#### Added
+
+- `ariaLabel` input to give the group of options an accessible name.
+
+#### Changed
+
+- `lu-segmented-control` now has the `radiogroup` role, and `lu-segmented-control-filter` no longer has the `listitem` role.
+
 ### 22.0.6
 
 #### Fixed

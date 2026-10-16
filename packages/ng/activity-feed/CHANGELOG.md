@@ -1,3 +1,20 @@
+### 22.1.0
+
+#### Added
+
+- `icon` input on `lu-activity-feed-step` to display an icon in the step state, on a `product` palette background (`activityFeed-step-state mod-icon`).
+
+#### Changed
+
+- Step state icons are now displayed at size `S`.
+
+### 22.0.5
+
+#### Fixed
+
+- `lu-activity-feed-update-item` content now wraps when space is limited or the content is long.
+- Spacing before the colon after the `lu-activity-feed-update-item` label: none outside French, a single space for every French locale (e.g. `fr-FR`).
+
 ### 22.0.3
 
 #### Fixed

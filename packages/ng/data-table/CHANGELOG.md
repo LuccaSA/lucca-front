@@ -1,14 +1,34 @@
+### 22.1.0
+
+#### Added
+
+- Group rows are now sticky along with sticky columns (`mod-stickyColumn`): their expand button stays visible while the table scrolls horizontally.
+
+#### Changed
+
+- `sort` on `th[luDataTableCell]` is now an input paired with a `sortChange` output that never emits `null`. `[(sort)]` keeps working, but `sort` is no longer a `ModelSignal` and can't be set from outside with `.set()`.
+
 ### 22.0.6
 
 #### Deprecated
 
 - `hover` input and `.dataTable.mod-hover` class, with no replacement: rows without an action should not have a hover effect.
 
+### 22.0.5
+
+#### Added
+
+- `sortWithEllipsis` input on `th[luDataTableCell]` to truncate a long sortable header label with an ellipsis and show the full label in a tooltip (`tableSortable mod-ellipsis`).
+
 ### 22.0.1
 
 #### Added
 
 - `empty` input on `lu-data-table` to mark the table as empty: it is then exposed as `role="presentation"` and its header becomes inert.
+
+#### Fixed
+
+- `lu-tag` and `pr-tag` in cells are now top-aligned, like `.tag`.
 
 ### 22.0.0
 

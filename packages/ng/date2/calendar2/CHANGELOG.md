@@ -1,3 +1,9 @@
+### 22.1.0
+
+#### Changed
+
+- `ranges` with a single bound are now rendered as open-ended when no date is hovered: every period from the start onwards (or up to the end) is highlighted, and only the known bound is selected.
+
 ### 22.0.0
 
 #### Added

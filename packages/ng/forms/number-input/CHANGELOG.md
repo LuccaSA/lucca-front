@@ -1,3 +1,9 @@
+### 22.1.0
+
+#### Added
+
+- `width` input to size the input itself, using the form field width scale.
+
 ### 22.0.6
 
 #### Fixed

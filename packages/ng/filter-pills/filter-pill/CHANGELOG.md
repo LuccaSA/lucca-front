@@ -1,3 +1,16 @@
+### 22.1.0
+
+#### Added
+
+- `grouping` input to group the pill with the ones sharing the same value in the optional filters list of the filter bar.
+- `iconOnly` input to display the pill as an icon-only button, its label being shown as a tooltip.
+- `backdrop` input to catch the click that closes the pill popover instead of letting it through to the page.
+- `@lucca-front/ng/filter-pills/core` entrypoint exposing the tokens and directives used by the inputs hosted in a pill (`FILTER_PILL_INPUT_COMPONENT`, `FILTER_PILL_HOST_COMPONENT`, `luFilterPillDisplayer`, `luFilterPillLabel`…), still re-exported by `@lucca-front/ng/filter-pills`.
+
+#### Changed
+
+- `FILTER_PILL_HOST_COMPONENT` token is now typed with the `FilterPillHostComponent` interface instead of `FilterPillComponent`.
+
 ### 22.0.6
 
 #### Fixed
