@@ -1,6 +1,6 @@
 import { ConnectionPositionPair, FlexibleConnectedPositionStrategy, Overlay, OverlayContainer, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, Component, ElementRef, input, TemplateRef, Type, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, input, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { vi } from 'vitest';
@@ -63,6 +63,20 @@ class PopoverTestComponent {
 
 	openedCount = 0;
 	closedCount = 0;
+}
+
+@Component({
+	selector: 'lu-popover-shadow-dom-test',
+	imports: [PopoverDirective],
+	template: `
+		<button #triggerButton type="button" [luPopover2]="contentTpl">Trigger</button>
+		<ng-template #contentTpl>Template content</ng-template>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.ShadowDom,
+})
+class PopoverShadowDomTestComponent {
+	readonly triggerRef = viewChild.required<ElementRef<HTMLButtonElement>>('triggerButton');
 }
 
 describe(PopoverDirective.name, () => {
@@ -525,6 +539,32 @@ describe(PopoverDirective.name, () => {
 			// Assert
 			expect(directive.opened()).toBe(true);
 		}));
+
+		it('should stay closed when the close button is clicked right after a mouseenter on the popover', fakeAsync(() => {
+			// Arrange
+			setup({ trigger: 'click+hover' });
+			triggerElement.click();
+			fixture.detectChanges();
+			// Act
+			getPopover()!.dispatchEvent(new MouseEvent('mouseenter'));
+			getCloseButton()!.click();
+			tick(1000);
+			// Assert
+			expect(directive.opened()).toBe(false);
+		}));
+
+		it('should stay closed when close() is called right after a mouseenter on the popover', fakeAsync(() => {
+			// Arrange
+			setup({ trigger: 'click+hover' });
+			triggerElement.click();
+			fixture.detectChanges();
+			// Act
+			getPopover()!.dispatchEvent(new MouseEvent('mouseenter'));
+			directive.close();
+			tick(1000);
+			// Assert
+			expect(directive.opened()).toBe(false);
+		}));
 	});
 
 	describe('focus trigger', () => {
@@ -615,6 +655,37 @@ describe(PopoverDirective.name, () => {
 			triggerElement.dispatchEvent(event);
 			// Assert
 			expect(event.defaultPrevented).toBe(false);
+		});
+	});
+
+	describe('inside a shadow root', () => {
+		/**
+		 * Mimics a real pointer interaction inside a shadow root. Browsers retarget `event.target` to the shadow host
+		 * for listeners outside of it (such as the CDK outside-click dispatcher), while `composedPath()` keeps the
+		 * actual target. happy-dom does not retarget, so the retargeted `target` is simulated here.
+		 */
+		const shadowPointerClick = (target: HTMLElement, shadowHost: HTMLElement) => {
+			target.dispatchEvent(new Event('pointerdown', { bubbles: true, composed: true }));
+			const click = new MouseEvent('click', { bubbles: true, composed: true });
+			Object.defineProperty(click, 'target', { get: () => shadowHost });
+			target.dispatchEvent(click);
+		};
+
+		it('should close the popover on a second click on the trigger', () => {
+			// Arrange
+			const shadowFixture = TestBed.createComponent(PopoverShadowDomTestComponent);
+			shadowFixture.detectChanges();
+			const shadowTrigger = shadowFixture.componentInstance.triggerRef().nativeElement;
+			const shadowDirective = shadowFixture.debugElement.query(By.directive(PopoverDirective)).injector.get(PopoverDirective);
+			const shadowHost = shadowFixture.nativeElement as HTMLElement;
+			shadowPointerClick(shadowTrigger, shadowHost);
+			shadowFixture.detectChanges();
+			// Act
+			shadowPointerClick(shadowTrigger, shadowHost);
+			shadowFixture.detectChanges();
+			// Assert
+			expect(shadowDirective.opened()).toBe(false);
+			expect(getPopover()).toBeNull();
 		});
 	});
 });

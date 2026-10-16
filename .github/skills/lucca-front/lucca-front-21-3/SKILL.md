@@ -25,8 +25,9 @@ La documentation `references/` reflète le **dernier patch publié : 21.3.1**. S
 **Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
 
 - la **mineure** détectée n'est pas `21.3` ni l'une des mineures techniques couvertes ci-dessus (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
-- le **patch** détecté est **postérieur** à 21.3.1 — ou, pour une mineure technique, postérieur à son dernier patch connu (`21.4.2`) (dernier patch connu de cette skill → skill périmée, l'API réelle peut différer) ;
 - le patch (ou la version `@lucca-front/ng`) **ne peut pas être déterminé**.
+
+Si le **patch** détecté est **postérieur** à 21.3.1 — ou, pour une mineure technique, postérieur à son dernier patch connu (`21.4.2`), **signale-le en une ligne et continue** ; en cas de comportement inattendu, lis les notes de release des patchs postérieurs (`gh release view v<patch> --repo LuccaSA/lucca-front`) : le paquet `@lucca-front/ng` n'embarque pas de CHANGELOG.
 
 ## 2. Chemins
 

@@ -265,6 +265,11 @@ export const DisabledTEST = createTestStory({ ...Basic, name: 'Disabled', args: 
 		await expect(pill).not.toHaveTextContent('Aucune valeur sélectionnée');
 	});
 
+	await step('A disabled pill keeps its value and offers no clear button', async () => {
+		await expect(pill).toHaveTextContent('Artichaut');
+		await expect(pill.closest('lu-filter-pill')!.querySelector('lu-clear')).toBeNull();
+	});
+
 	await step('A disabled pill does not open its popover', async () => {
 		await userEvent.click(pill);
 		await waitForAngular();

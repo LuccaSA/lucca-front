@@ -24,6 +24,14 @@ export default mergeConfig(createBaseConfig(__dirname), {
 			// Schematics project: runs the `ng add`/`ng update` migration specs in a
 			// Node environment with a ts-node loader (see vitest.schematics.config.ts).
 			'./vitest.schematics.config.ts',
+			{
+				// Plain Node ESM scripts: deliberately not extending the Angular base config.
+				test: {
+					name: 'llms-skill',
+					environment: 'node',
+					include: ['scripts/llms-skill/**/*.spec.mjs'],
+				},
+			},
 			// Skills generator project: pure Node specs for scripts/generate-skills
 			// (see vitest.generate-skills.config.ts).
 			'./vitest.generate-skills.config.ts',

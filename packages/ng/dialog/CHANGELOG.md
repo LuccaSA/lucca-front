@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Fixed
+
+- Routed dialogs now run their `canDeactivate` guards when dismissed with Escape or a backdrop click.
+
 ### 22.0.3
 
 #### Fixed

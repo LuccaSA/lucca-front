@@ -29,9 +29,9 @@ export class CommentBlockComponent {
 	readonly compact = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Small is a shorthand to set the size to small
+	 * Apply the small size to the comment block wrapper
 	 *
-	 * If the size input is filled along with the small input, their values will have the priority
+	 * Independent from the size input, which applies to each comment of the block
 	 */
 	readonly small = input(false, { transform: luBooleanAttribute });
 
@@ -42,7 +42,7 @@ export class CommentBlockComponent {
 	readonly avatar = input<TemplateRef<unknown>>();
 
 	/**
-	 * Which size should the block comment be? Defaults or small
+	 * Which size should each comment of the block be? `S` applies the small size
 	 */
 	readonly size = input<CommentBlockSize>();
 

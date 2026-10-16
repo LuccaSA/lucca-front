@@ -33,7 +33,7 @@ import { LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS } from './approbation-inbox
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxItemComponent implements OnInit {
-	protected readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS));
 
 	private readonly list = inject(ApprobationInboxListComponent, { optional: true });
 	private readonly destroyRef = inject(DestroyRef);

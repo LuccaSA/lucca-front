@@ -1,3 +1,10 @@
+### 22.0.6
+
+#### Fixed
+
+- Clearing an input bound with `[formField]` (signal forms) now resets its value instead of throwing `this.ngControl.reset is not a function`.
+- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
+
 ### 21.1.3
 
 #### Fixed

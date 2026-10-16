@@ -261,4 +261,10 @@ export default [
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
 		},
 	},
+	{
+		// Any combination of .dataTable and .mod-hover, with any non-whitespace character between
+		objectPattern: /(?=\S*\.dataTable(?![\w-]))(?=\S*\.mod-hover(?![\w-]))\S*/,
+		versionDeprecated: '22.0.6',
+		actions: `Retirer la classe \`.mod-hover\` et l’input Angular \`hover\`, sans remplacement : une ligne sans action ne doit pas avoir d’effet de survol.`,
+	},
 ];

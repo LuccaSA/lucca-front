@@ -69,10 +69,15 @@
 	}
 
 	&::after {
+		inline-size: var(--components-scrollBox-after-inlineSize);
 		opacity: var(--components-scrollBox-afterOpacity);
-		margin-inline-start: calc(var(--components-scrollBox-paddingInline) - var(--components-scrollBox-shadowSize) - var(--components-scrollBox-gap));
+		margin-inline-start: calc(var(--components-scrollBox-paddingInline) - var(--components-scrollBox-after-inlineSize) - var(--components-scrollBox-gap));
 		margin-inline-end: calc(var(--components-scrollBox-paddingInline) * -1);
 		background-position: 100% 50%;
+		background-size:
+			calc(var(--components-scrollBox-shadowSize) * 0.75) 100%,
+			calc(var(--components-scrollBox-shadowSize) * 0.25) 100%,
+			1px 100%;
 		background-image:
 			radial-gradient(
 				farthest-side at 100% 50%,

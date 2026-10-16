@@ -41,12 +41,12 @@ export class ReadMoreComponent {
 	readonly plainText = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Change the background color under the "Read more / less" button
+	 * Apply the spacing of the Text Flow component
 	 */
 	readonly textFlow = input(false, { transform: luBooleanAttribute });
 
 	/**
-	 * Apply the spacing of the Text Flow component
+	 * Change the background color under the "Read more / less" button
 	 */
 	readonly surface = input<ReadMoreSurface | string | null>(null);
 

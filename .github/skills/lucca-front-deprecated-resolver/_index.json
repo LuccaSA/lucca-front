@@ -36,11 +36,11 @@
     "category": "Deprecated"
   },
   "LuModalModule": {
-    "description": "NgModules dépréciés LuModalModule, LuPopupModule, LuPopoverModule, LuPopoverPanelModule. Remplacer par imports/providers directs.",
+    "description": "NgModules dépréciés LuModalModule, LuPopupModule, LuPopoverModule, LuPopoverPanelModule. LuModalModule/LuPopupModule n'apportent que des providers : les placer là où ils reproduisent l'injecteur d'origine (route, racine), jamais mécaniquement sur le composant.",
     "category": "Deprecated"
   },
   "LuTooltipModule": {
-    "description": "NgModules dépréciés LuTooltipModule, LuTooltipTriggerModule. Remplacer par LuTooltipTriggerDirective, LuTooltipPanelComponent.",
+    "description": "NgModules dépréciés LuTooltipModule, LuTooltipTriggerModule (déclarés dans @lucca/prisme/tooltip, ré-exportés par @lucca-front/ng/tooltip). Remplacer par LuTooltipTriggerDirective si le template utilise luTooltip ; ne pas importer LuTooltipPanelComponent.",
     "category": "Deprecated"
   },
   "LuInputModule": {
@@ -48,11 +48,11 @@
     "category": "Deprecated"
   },
   "LuTitleModule": {
-    "description": "LuTitleModule, LuTitleService, LuTitleStrategy (classe), APP_TITLE dépréciés. Migrer vers provideLuTitleStrategy().",
+    "description": "LuTitleModule, LuTitleService, APP_TITLE dépréciés. Migrer vers provideLuTitleStrategy({ appTitle, translateService }). LuTitleStrategy n'est PAS déprécié : garder ses injections.",
     "category": "Deprecated"
   },
   "NgModulesSimples": {
-    "description": "NgModules dépréciés simples : LuToastsModule → LuToastsComponent, LuNumberModule → LuNumberPipe, LuScrollModule → LuScrollDirective, LuSafeContentModule → LuSafeHtmlPipe, LuFormlyModule → provideLuFormly().",
+    "description": "NgModules dépréciés simples : LuToastsModule, LuNumberModule, LuScrollModule, LuSafeContentModule, LuFormlyModule. Dans les imports d'un composant → déclarable standalone utilisé par le template ; dans importProvidersFrom/providers → supprimer (provideLuFormly() pour LuFormlyModule).",
     "category": "Deprecated"
   },
   "DividerComponent": {

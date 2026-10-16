@@ -1,5 +1,11 @@
 # NG
 
+## Documentation
+
+- [Storybook](https://lucca-front.lucca.io): components, stories and API, one deployment per version (`https://lucca-front.lucca.io/v<version>/storybook/`)
+- [Prisme](https://prisme.lucca.io): the design system reference (usage, design guidelines, tokens)
+- For coding agents: `node_modules/@lucca-front/ng/llms.txt` indexes the documentation of the installed version, shipped in this package under `llms/`
+
 ## About
 
 `@lucca-front/ng` is a comprehensive Angular library containing business components and domain-specific logic for Lucca applications.

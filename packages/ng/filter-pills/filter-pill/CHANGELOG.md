@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Fixed
+
+- A disabled filter pill no longer shows its clear button.
+
 ### 22.0.0
 
 #### Changed

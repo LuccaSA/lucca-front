@@ -105,7 +105,7 @@ export default {
 
 export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; required: boolean; value: string } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, value, presentation, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, value, presentation, ...inputArgs } = args;
 		return {
 			props: { model: useControlledStoryModel(value) },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
@@ -121,7 +121,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 				},
 				argTypes,
 			)}>
-	<lu-textarea-input autoResizeScrollIntoView="${autoResizeScrollIntoView}" autoResize="${autoResize}"
+	<lu-textarea-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="model.example" />
 </lu-form-field>

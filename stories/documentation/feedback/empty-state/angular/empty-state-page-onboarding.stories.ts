@@ -77,15 +77,15 @@ lu-empty-state-page {
 				max: 6,
 			},
 			description: 'Définit le niveau sémantique du titre.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '1' } },
 		},
 		src: {
 			description: 'URL de l’illustration.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (empty-state-page-illustration)' },
 		},
 		alt: {
 			description: 'Texte alternatif de l’illustration restitué par les lecteurs d’écran.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (empty-state-page-illustration)', defaultValue: { summary: "''" } },
 		},
 	},
 } as Meta;

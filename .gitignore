@@ -30,8 +30,9 @@ demo/ng
 documentation.json
 storybook-static
 
-# compodoc
-compodoc-static
+# copied from .github/skills by `npm run docs:llms`
+.storybook/public/llms.txt
+.storybook/public/llms/
 
 /.angular/cache
 

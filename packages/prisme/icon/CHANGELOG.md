@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Added
+
+- `arrowDelete`, `arrowEnter`, `arrowLineRight`, `arrowPageDown`, `arrowPageUp`, `arrowShift`, `keyboardCommand` and `keyboardOption` icons.
+
 ### 22.0.4
 
 #### Fixed

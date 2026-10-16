@@ -26,6 +26,7 @@ class TestFilterPillInputComponent implements FilterPillInputComponent {
 
 	isFilterPillEmpty = signal(true);
 	isFilterPillClearable = signal(false);
+	filterPillDisabled = signal(false);
 
 	closePopover?: () => void;
 
@@ -96,5 +97,21 @@ describe(FilterPillComponent.name, () => {
 		fixture.detectChanges();
 
 		expect(input.onFilterPillClosed).toHaveBeenCalledTimes(1);
+	});
+
+	it('should not offer to clear a disabled input', () => {
+		const input = openPopover();
+		pill.popoverRef()?.close();
+
+		input.isFilterPillEmpty.set(false);
+		input.isFilterPillClearable.set(true);
+		fixture.detectChanges();
+
+		expect(fixture.nativeElement.querySelector('lu-clear')).not.toBeNull();
+
+		input.filterPillDisabled.set(true);
+		fixture.detectChanges();
+
+		expect(fixture.nativeElement.querySelector('lu-clear')).toBeNull();
 	});
 });

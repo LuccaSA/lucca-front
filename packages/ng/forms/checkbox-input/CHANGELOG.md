@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Fixed
+
+- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
+
 ### 21.4.1
 
 #### Fixed

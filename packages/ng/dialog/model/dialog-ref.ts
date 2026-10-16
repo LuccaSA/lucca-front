@@ -61,6 +61,23 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 		if (this.config.alert) {
 			return;
 		}
+
+		this.canDismiss$()
+			.pipe(take(1))
+			.subscribe((close) => {
+				if (close) {
+					this.detachSubscription?.unsubscribe();
+					this.cdkRef.close(DISMISSED_VALUE);
+				}
+			});
+	}
+
+	/**
+	 * @internal
+	 * Resolves whether the dialog can be dismissed, shared by every dismiss trigger (header button, escape key, backdrop click).
+	 * A dialog rendering a template (e.g. a routed dialog) has no component instance, so it relies on `canDismiss`.
+	 */
+	canDismiss$(): Observable<boolean> {
 		let canClose: boolean | Observable<boolean> = true;
 
 		try {
@@ -73,13 +90,7 @@ export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 			canClose = true;
 		}
 
-		const canClose$ = isObservable(canClose) ? canClose : of(canClose);
-		canClose$.pipe(take(1)).subscribe((close) => {
-			if (close) {
-				this.detachSubscription?.unsubscribe();
-				this.cdkRef.close(DISMISSED_VALUE);
-			}
-		});
+		return isObservable(canClose) ? canClose : of(canClose);
 	}
 
 	close(res: LuDialogResult<C>): void {
