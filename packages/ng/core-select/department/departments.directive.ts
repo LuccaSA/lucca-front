@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { computed, Directive, forwardRef, inject, input, OnInit } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { isNotNil, luNullableNumberAttribute } from '@lucca-front/ng/core';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LU_OPTION_TRANSLATIONS, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { ILuDepartment } from '@lucca-front/ng/department';
 import { map, Observable, of } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
+import { luCoreSelectDepartmentTranslations } from './department.translate';
 import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 
 @Directive({
@@ -18,6 +19,10 @@ import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 		{
 			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
 			useExisting: forwardRef(() => LuCoreSelectDepartmentsDirective),
+		},
+		{
+			provide: LU_OPTION_TRANSLATIONS,
+			useValue: luCoreSelectDepartmentTranslations,
 		},
 	],
 	hostDirectives: [NoopTreeSelectDirective],

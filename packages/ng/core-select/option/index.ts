@@ -6,3 +6,4 @@ export { LuOptionOutletDirective as ɵLuOptionOutletDirective } from './option-o
 export { LuOptionComponent as ɵLuOptionComponent } from './option.component';
 export * from './option.directive';
 export * from './option.token';
+export * from './option.translate';
