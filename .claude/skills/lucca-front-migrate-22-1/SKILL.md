@@ -7,7 +7,7 @@ description: "Skill de migration vers Lucca Front 22.1. Charge ce skill pour mig
 
 Ce skill guide la migration d'un projet **consommateur** de `@lucca-front/ng` de la version **22.0.x** vers **22.1.x**.
 
-**Périmètre — iso-comportement et iso-rendu.** La 22.1 est une mineure : un seul changement cassant (le token `USER_POPOVER_IS_ACTIVATED`), le reste est une dépréciation qui fonctionne toujours. On corrige ce qui casse, on remplace ce qui est déprécié **seulement quand le rendu ne bouge pas**, et on signale le reste. Pas de modernisation, pas de refacto d'opportunité, pas d'adoption des nouvelles fonctionnalités de la 22.1 (illustrations nommées, `palette`, `foregroundEndStart`…) : les lister dans le rapport si l'occasion se présente.
+**Périmètre — iso-comportement et iso-rendu.** La 22.1 est une mineure : un seul changement cassant (le token `USER_POPOVER_IS_ACTIVATED`), le reste est une dépréciation qui fonctionne toujours. On corrige ce qui casse, on remplace ce qui est déprécié **seulement quand le rendu ne bouge pas**, et on signale le reste. Seule exception : les illustrations du CDN Prisme passent à leur nom typé, dont les bulles suivent la palette du produit (voir [FancyBox.md](./references/FancyBox.md) §2). Pas de modernisation, pas de refacto d'opportunité, pas d'adoption des autres nouveautés de la 22.1 (`palette`, `foregroundEndStart`…) : les lister dans le rapport si l'occasion se présente.
 
 **Ce skill s'exécute dans le dépôt du projet consommateur**, pas dans `lucca-front` (voir « Installation » plus bas).
 
@@ -81,18 +81,18 @@ Après la première FancyBox migrée, vérifier le prérequis `HttpClient` (§5)
 1. Lancer le build (`ng build` ou `tsc --noEmit`), puis les scripts de vérification du `package.json` (lint, tests unitaires, e2e/Storybook).
 2. Distinguer les erreurs causées par cette migration (à corriger) des erreurs préexistantes (à signaler, sans les corriger).
 3. Vérifier qu'il ne reste aucune occurrence de `USER_POPOVER_IS_ACTIVATED`.
-4. Les FancyBox migrées ne se valident pas au build : le rendu passe d'une image de fond à un SVG inline chargé à l'exécution. Lister dans le rapport chaque écran à contrôler visuellement.
+4. Les FancyBox migrées ne se valident pas au build : le rendu passe d'une image de fond à un SVG inline chargé à l'exécution. Lister dans le rapport chaque écran à contrôler visuellement, en signalant celles passées à un nom typé : leurs bulles suivent maintenant la palette du produit.
 
 ---
 
 ## Étape 5 — Rapport
 
 - **UserPopover** : providers supprimés (fichier, ligne), et ceux qui valaient `false` ou une expression.
-- **FancyBox migrées** : fichier, ligne, inputs renommés, valeurs transformées. Écrans à contrôler visuellement.
+- **FancyBox migrées** : fichier, ligne, inputs renommés, valeurs transformées, URL remplacées par un nom typé. Écrans à contrôler visuellement.
 - **FancyBox laissées en l'état**, une par une avec fichier et ligne, et la raison : surcharge de l'ancien rendu (citer le fichier SCSS et le sélecteur), valeur non SVG, `http://`, markup hors Angular. Rappeler qu'elles fonctionnent toujours, mais qu'il faudra les traiter avant la majeure qui supprimera les anciens inputs.
 - **Prérequis `HttpClient`** : présent, ajouté, ou intercepteurs à vérifier (§5).
 - **Erreurs préexistantes** rencontrées au build/lint : listées, non corrigées.
-- **Pistes hors périmètre** : illustrations nommées du CDN, `palette`, `foregroundEndStart` pour remplacer une illustration ajoutée en SCSS… Listées, jamais appliquées.
+- **Pistes hors périmètre** : `palette`, `foregroundEndStart` pour remplacer une illustration ajoutée en SCSS… Listées, jamais appliquées.
 
 ---
 

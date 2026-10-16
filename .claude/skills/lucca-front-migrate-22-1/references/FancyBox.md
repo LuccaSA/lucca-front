@@ -36,21 +36,39 @@ Les tailles et positions par défaut de l'ancien rendu dérivent des nouvelles v
 
 Même renommage pour les bindings : `[backgroundLeft]="x"` → `[backgroundEndStart]="x"`. Ne pas renommer les propriétés du composant hôte qui portent ces valeurs : hors périmètre.
 
-Ne pas en profiter pour remplacer une URL par un nom d'illustration du CDN, même quand le fichier semble identique : signaler la piste dans le rapport.
+Une URL d'illustration du CDN Prisme devient son nom typé (§2) : c'est la première option à appliquer.
 
 ## 2. Valeurs
 
 Une nouvelle valeur est lue comme une **URL** si elle commence par `https://`, `/` ou `./`, et comme un **nom d'illustration du CDN** sinon. Une URL qui ne commence pas ainsi pointerait donc vers un fichier du CDN qui n'existe pas, sans erreur visible.
 
+### Illustrations du CDN Prisme : nom typé en priorité
+
+Les URL `https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/…` documentées en 22.0 sont remplacées par le nom typé de l'illustration (`FancyBoxBackgroundEndStart`, `FancyBoxBackgroundStartEnd`, `FancyBoxForegroundStartEnd`), à condition que l'ancien input corresponde à la nouvelle position :
+
+| Ancien input | Fichier 22.0 (`…/visuals/fancy-box/`) | Nouvel input |
+|---|---|---|
+| `backgroundLeft` | `background-left-bubbles.svg` | Supprimer l'attribut : `backgroundEndStart` vaut `bubbles` par défaut |
+| `backgroundLeft` | `background-left-plant.svg` | `backgroundEndStart="plant"` |
+| `backgroundRight` | `background-right-bubbles.svg` | Supprimer l'attribut : `backgroundStartEnd` vaut `bubbles` par défaut |
+| `backgroundRight` | `background-right-candies.svg` | `backgroundStartEnd="candies"` |
+| `foreground` | `foreground-right-pizza.svg` | `foregroundStartEnd="pizza"` |
+
+Dans tous les autres cas, ne pas utiliser de nom typé : reprendre l'URL telle quelle, selon le tableau suivant. C'est le cas d'un fichier placé sur un autre input que celui de la table (par exemple `foreground-left-clips.svg` sur `foreground`, qui s'affichait en haut à droite), d'un fichier absent de la table ou d'une URL hors CDN.
+
+**Le rendu change.** La forme des illustrations est la même, mais les nouveaux fichiers colorent les bulles avec les variables de palette (`--palettes-assets-*`) alors que les anciens utilisaient des couleurs fixes. Les bulles suivent donc la `palette` du composant (`product` par défaut) : dans une application produit, elles prennent ses couleurs. C'est le rendu attendu par le Design System, mais il faut le contrôler visuellement (étape 4).
+
+### Autres valeurs
+
 | Valeur d'origine | Action |
 |---|---|
-| `https://…`, `/…`, `//…`, `./…` | Reprendre telle quelle. |
+| `https://…`, `/…`, `//…`, `./…` hors table ci-dessus | Reprendre telle quelle. |
 | Chemin relatif sans `./` : `assets/x.svg`, `../x.svg` | Préfixer par `./` (`./assets/x.svg`, `./../x.svg`) : la résolution est la même. |
 | `foreground=""` | Supprimer l'attribut : la chaîne vide n'affichait rien, l'absence d'input non plus. |
 | `backgroundLeft=""` / `backgroundRight=""` | **Ne pas migrer** : les nouveaux inputs affichent `bubbles` par défaut, aucune valeur ne permet de retrouver l'absence d'image. |
 | `http://…`, `data:…` | **Ne pas migrer** : lus comme un nom d'illustration. |
 | Image non SVG (`.png`, `.jpg`, `.webp`, `.gif`…) | **Ne pas migrer** : le pipe ne sait injecter que du SVG. |
-| Binding `[…]="expr"` | Remonter à la source de l'expression (constante, propriété, `input()`). Si toutes ses valeurs possibles relèvent de la première ligne, renommer. Sinon (valeur issue d'une API, d'une concaténation inconnue, chaîne vide possible), **ne pas migrer**. |
+| Binding `[…]="expr"` | Remonter à la source de l'expression (constante, propriété, `input()`). Si toutes ses valeurs possibles sont migrables, renommer, et remplacer par le nom typé les constantes qui portent une URL de la table. Sinon (valeur issue d'une API, d'une concaténation inconnue, chaîne vide possible), **ne pas migrer**. |
 
 ## 3. Surcharges de l'ancien rendu (bloquantes)
 
