@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Fixed
+
+- `AI` buttons in success state now hide their label and icon, and only show the check mark.
+
 ### 22.0.0
 
 #### Fixed

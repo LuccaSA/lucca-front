@@ -20,7 +20,7 @@ import { LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS } from './approbation-inbo
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxGroupComponent {
-	protected readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS));
 
 	private readonly list = inject(ApprobationInboxListComponent);
 

@@ -45,6 +45,9 @@ export class DataTableComponent implements OnInit {
 	readonly tableRef = viewChild<ElementRef<Element>>('tableRef');
 	#destroyRef = inject(DestroyRef);
 
+	/**
+	 * @deprecated No replacement: rows without an action should not have a hover effect.
+	 */
 	readonly hover = input(false, { transform: luBooleanAttribute });
 	readonly selectable = input(false, { transform: luBooleanAttribute });
 	readonly layoutFixed = input(false, { transform: luBooleanAttribute });

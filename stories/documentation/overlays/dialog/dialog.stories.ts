@@ -55,6 +55,7 @@ export default {
 	],
 	render: (args) => {
 		const fancyIllustrationParam = args['fancyIllustration'] ? ` fancyIllustration="${args['fancyIllustration']}"` : ``;
+		const stackedParam = args['stacked'] ? ` stacked` : ``;
 		return {
 			props: {
 				config: args,
@@ -64,7 +65,7 @@ export default {
 <button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog</button>
 
 <ng-template #dialogTpl>
-	<lu-dialog #dialog${fancyIllustrationParam}>
+	<lu-dialog #dialog${fancyIllustrationParam}${stackedParam}>
 		<lu-dialog-header>
 			<h1>Template driven header</h1>
 			<p dialogHeaderSubtitle>Subtitle</p>
@@ -85,12 +86,12 @@ export default {
 	},
 	argTypes: {
 		mode: {
-			options: ['default', 'drawer', 'drawer-from-bottom', 'fancy'],
+			options: ['default', 'drawer', 'drawer-from-bottom', 'sheet', 'fancy'],
 			control: {
 				type: 'select',
 			},
-			description: 'Permet d’afficher la fenêtre de dialogue en mode drawer.',
-			table: { category: 'inputs' },
+			description: 'Permet d’afficher la fenêtre de dialogue en mode drawer, drawer depuis le bas, sheet ou fancy.',
+			table: { category: 'inputs (luDialogConfig)', defaultValue: { summary: 'default' } },
 		},
 		autoFocus: {
 			options: ['first-tabbable', 'first-input'],
@@ -98,24 +99,44 @@ export default {
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs (luDialogConfig)', defaultValue: { summary: 'first-tabbable' } },
 		},
 		size: {
-			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'XXL', 'maxContent', 'fullScreen'],
+			options: ['fitContent', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'maxContent', 'fullScreen'],
 			control: {
 				type: 'select',
 			},
 			description: 'Largeur de la fenêtre de dialogue.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (luDialogConfig)', defaultValue: { summary: 'M' } },
 		},
 		panelClasses: {
 			description: 'Permet d’ajouter des classes CSS à la racine de la fenêtre de dialogue.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (luDialogConfig)' },
 		},
 		alert: {
 			description:
 				'Transforme la fenêtre de dialogue en alerte en obligeant l’utilisateur à faire un choix. L’utilisateur ne peut alors plus la fermer en cliquant sur le backdrop ou en appuyant sur la touche Échap.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (luDialogConfig)', defaultValue: { summary: 'false' } },
+		},
+		modal: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Affiche un backdrop et rend la fenêtre de dialogue modale.',
+			table: { category: 'inputs (luDialogConfig)', defaultValue: { summary: 'true' } },
+		},
+		ariaLabel: {
+			control: {
+				type: 'text',
+			},
+			description: 'Nom accessible de la fenêtre de dialogue, à renseigner en l’absence de `lu-dialog-header` (remplace `aria-labelledby` par `aria-label`).',
+			table: { category: 'inputs (luDialogConfig)' },
+		},
+		canDismiss: {
+			control: false,
+			description:
+				'Fonction appelée avant la fermeture par annulation (Échap, backdrop, bouton de fermeture) : la fenêtre n’est fermée que si elle renvoie `true` (ou un `Observable<boolean>` qui émet `true`).',
+			table: { category: 'inputs (luDialogConfig)', type: { summary: '() => boolean | Observable<boolean>' } },
 		},
 		fancyIllustration: {
 			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
@@ -136,7 +157,14 @@ export default {
 				type: 'boolean',
 			},
 			description: 'Applique le fond de surface neutre (`--pr-t-elevation-surface-default`) au contenu de la fenêtre de dialogue.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (luDialogConfig)', defaultValue: { summary: 'false' } },
+		},
+		stacked: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Indique que la fenêtre de dialogue peut être empilée sur une autre : les fenêtres sous-jacentes sont alors décalées visuellement (voir la story Multiple).',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		intl: intlArgType(luDialogHeaderTranslations, 'LuDialogHeaderTranslations', 'lu-dialog-header'),
 	},
@@ -279,13 +307,19 @@ export const Fancy: StoryObj = {
 		alert: { table: { disable: true } },
 		autoFocus: { table: { disable: true } },
 		panelClasses: { table: { disable: true } },
+		size: { table: { disable: true } },
+		surfaceDefault: { table: { disable: true } },
+		modal: { table: { disable: true } },
+		ariaLabel: { table: { disable: true } },
+		canDismiss: { table: { disable: true } },
+		stacked: { table: { disable: true } },
 		palette: {
 			options: ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'],
 			control: {
 				type: 'select',
 			},
-			description: 'Applique une palette de couleurs au callout.',
-			table: { category: 'inputs' },
+			description: 'Applique une palette de couleurs à la fenêtre de dialogue (classe `palette-*` posée sur `lu-dialog`).',
+			table: { category: 'story' },
 		},
 		fancyIllustration: {
 			options: setStoryOptions(DIALOG_FANCY_ILLUSTRATION),
@@ -328,7 +362,6 @@ export const Fancy: StoryObj = {
 		};
 	},
 	args: {
-		size: 'M',
 		mode: 'fancy',
 		fancyIllustration: 'install',
 		fancyIllustrationUrl: '',

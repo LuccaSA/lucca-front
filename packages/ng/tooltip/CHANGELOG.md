@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Fixed
+
+- No more `NG0600` error when the trigger gets disabled while focused, the tooltip now closes.
+
 ### 22.0.1
 
 #### Fixed

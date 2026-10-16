@@ -138,6 +138,139 @@ describe('injectNgControl', () => {
 		expect(host.value()).toBe('Changed');
 	});
 
+	it('should reset the field when reset is called on the control when using formField', () => {
+		// Arrange
+		@Component({
+			selector: 'lu-form-field-reset-host',
+			imports: [CustomControl, FormField],
+			template: `<lu-custom-control [formField]="form" />`,
+			changeDetection: ChangeDetectionStrategy.OnPush,
+		})
+		class FormFieldResetHost {
+			readonly value = signal<string | null>('Initial');
+			readonly form = form(this.value);
+			readonly customControl = viewChild(CustomControl);
+		}
+
+		const { fixture, host, nativeInput } = createHost(FormFieldResetHost);
+
+		// Act: what the text, number and number-format inputs' clearer does
+		host.customControl()!.ngControl.reset();
+		fixture.detectChanges();
+
+		// Assert
+		expect(host.value()).toBeNull();
+		expect(nativeInput().value).toBe('');
+	});
+
+	it('should mark the field untouched and pristine when reset is called on the control when using formField', () => {
+		// Arrange
+		@Component({
+			selector: 'lu-form-field-reset-state-host',
+			imports: [CustomControl, FormField],
+			template: `<lu-custom-control [formField]="form" />`,
+			changeDetection: ChangeDetectionStrategy.OnPush,
+		})
+		class FormFieldResetStateHost {
+			readonly value = signal<string | null>('Initial');
+			readonly form = form(this.value);
+			readonly customControl = viewChild(CustomControl);
+		}
+
+		const { fixture, host } = createHost(FormFieldResetStateHost);
+		host.form().markAsTouched();
+		host.form().markAsDirty();
+		fixture.detectChanges();
+
+		// Act
+		host.customControl()!.ngControl.reset();
+		fixture.detectChanges();
+
+		// Assert: as a reactive control reset does
+		expect(host.form().touched()).toBe(false);
+		expect(host.form().dirty()).toBe(false);
+		expect(host.customControl()!.ngControl.control.touched).toBe(false);
+	});
+
+	it('should keep the field pristine until the user changes the value when using formField', () => {
+		// Arrange
+		@Component({
+			selector: 'lu-form-field-pristine-host',
+			imports: [CustomControl, FormField],
+			template: `<lu-custom-control [formField]="form" />`,
+			changeDetection: ChangeDetectionStrategy.OnPush,
+		})
+		class FormFieldPristineHost {
+			readonly value = signal('Initial');
+			readonly form = form(this.value);
+			readonly customControl = viewChild(CustomControl);
+		}
+
+		const { fixture, host } = createHost(FormFieldPristineHost);
+
+		// Act
+		host.value.set('Changed by the model');
+		fixture.detectChanges();
+
+		// Assert
+		expect(host.form().dirty()).toBe(false);
+	});
+
+	it('should mark the field dirty when the user changes the value when using formField', () => {
+		// Arrange
+		@Component({
+			selector: 'lu-form-field-dirty-host',
+			imports: [CustomControl, FormField],
+			template: `<lu-custom-control [formField]="form" />`,
+			changeDetection: ChangeDetectionStrategy.OnPush,
+		})
+		class FormFieldDirtyHost {
+			readonly value = signal('Initial');
+			readonly form = form(this.value);
+			readonly customControl = viewChild(CustomControl);
+		}
+
+		const { fixture, host, nativeInput } = createHost(FormFieldDirtyHost);
+
+		// Act
+		nativeInput().value = 'Changed';
+		nativeInput().dispatchEvent(new Event('input'));
+		fixture.detectChanges();
+
+		// Assert
+		expect(host.form().dirty()).toBe(true);
+	});
+
+	it('should mark the field dirty again when the user changes the value after a reset when using formField', () => {
+		// Arrange
+		@Component({
+			selector: 'lu-form-field-dirty-after-reset-host',
+			imports: [CustomControl, FormField],
+			template: `<lu-custom-control [formField]="form" />`,
+			changeDetection: ChangeDetectionStrategy.OnPush,
+		})
+		class FormFieldDirtyAfterResetHost {
+			readonly value = signal<string | null>('Initial');
+			readonly form = form(this.value);
+			readonly customControl = viewChild(CustomControl);
+		}
+
+		const { fixture, host, nativeInput } = createHost(FormFieldDirtyAfterResetHost);
+		nativeInput().value = 'Changed';
+		nativeInput().dispatchEvent(new Event('input'));
+		fixture.detectChanges();
+		host.customControl()!.ngControl.reset();
+		fixture.detectChanges();
+
+		// Act
+		nativeInput().value = 'Changed again';
+		nativeInput().dispatchEvent(new Event('input'));
+		fixture.detectChanges();
+
+		// Assert
+		expect(host.form().dirty()).toBe(true);
+	});
+
 	it('should mirror field validity into the control when using formField', () => {
 		// Arrange: field starts with a valid (non-empty) value
 		@Component({

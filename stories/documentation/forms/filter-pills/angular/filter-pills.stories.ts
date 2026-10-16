@@ -68,7 +68,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		disabled: {
-			description: 'Désactive le filtre.',
+			description: 'Désactive le filtre « Légume (multi) », renseigné avec une valeur : un filtre désactivé ne peut pas être vidé.',
 			control: {
 				type: 'boolean',
 			},
@@ -85,6 +85,7 @@ export default {
 			props: {
 				simpleSelect: null,
 				multiSelect: [],
+				disabledLegumes: [allLegumes[0]],
 				date: null,
 				dateRange: null,
 				legumes: allLegumes,
@@ -104,7 +105,7 @@ export default {
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
 <lu-filter-pill label="${label} (multi)" name="legume">
-	<lu-multi-select [ngModel]="[]" ${clearableProperty}[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" ${disabledPill} />
+	<lu-multi-select [ngModel]="${args['disabled'] ? 'disabledLegumes' : '[]'}" ${clearableProperty}[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" ${disabledPill} />
 </lu-filter-pill>
 <lu-filter-pill label="Legume (simple)" name="department">
 	<lu-simple-select [ngModel]="null" ${clearableProperty}[options]="legumes | filterLegumes:clue" />

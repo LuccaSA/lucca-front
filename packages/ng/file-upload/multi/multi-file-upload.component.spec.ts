@@ -1,3 +1,5 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -22,6 +24,13 @@ class FormFieldHostComponent {
 }
 
 describe(MultiFileUploadComponent.name, () => {
+	// The bubble illustration fetches its SVG through HttpClient: keep it off the network
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			providers: [provideHttpClient(), provideHttpClientTesting()],
+		});
+	});
+
 	function instructionId(element: HTMLElement): string {
 		return element.querySelector('.fileUpload-instruction')?.id ?? '';
 	}

@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Deprecated
+
+- `hover` input and `.dataTable.mod-hover` class, with no replacement: rows without an action should not have a hover effect.
+
 ### 22.0.1
 
 #### Added

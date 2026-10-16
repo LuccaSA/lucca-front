@@ -27,6 +27,7 @@ import {
 	OnDestroy,
 	Renderer2,
 	signal,
+	untracked,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
@@ -198,13 +199,15 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		effect((onCleanup) => {
 			const trigger = this.#resolveTriggerAnchorElement() ?? this.#host.nativeElement;
 
+			const listen = <T>(eventName: string, callback: (event: T) => void) => this.#renderer.listen(trigger, eventName, (event: T) => untracked(() => callback(event)));
+
 			const unlisten = [
-				this.#renderer.listen(trigger, 'mouseenter', () => this.onMouseEnter()),
-				this.#renderer.listen(trigger, 'mouseleave', () => this.onMouseLeave()),
-				this.#renderer.listen(trigger, 'focus', () => this.onFocus()),
-				this.#renderer.listen(trigger, 'blur', () => this.onBlur()),
-				this.#renderer.listen(trigger, 'focusout', (event: FocusEvent) => this.onFocusOut(event)),
-				this.#renderer.listen(trigger, 'keydown', (event: KeyboardEvent) => {
+				listen('mouseenter', () => this.onMouseEnter()),
+				listen('mouseleave', () => this.onMouseLeave()),
+				listen('focus', () => this.onFocus()),
+				listen('blur', () => this.onBlur()),
+				listen('focusout', (event: FocusEvent) => this.onFocusOut(event)),
+				listen('keydown', (event: KeyboardEvent) => {
 					if (event.key === 'Escape') {
 						this.onEscape(event);
 					}

@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Fixed
+
+- No more error on `keydown` events without `key`, as fired by browser autofill.
+
 ### 22.0.4
 
 #### Fixed

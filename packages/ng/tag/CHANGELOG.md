@@ -1,3 +1,9 @@
+### 22.0.6
+
+#### Fixed
+
+- `withEllipsis` now truncates the label when the container is narrower than the label.
+
 ### 22.0.1
 
 #### Fixed

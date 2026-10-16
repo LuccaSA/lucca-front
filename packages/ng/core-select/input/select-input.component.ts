@@ -431,7 +431,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				// For any other key, forward it to the panel if it's open
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);
-				} else if ($event.key.length === 1) {
+				} else if ($event.key?.length === 1) {
 					this.openPanel($event.key);
 				}
 				break;

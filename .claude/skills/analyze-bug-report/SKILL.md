@@ -25,12 +25,14 @@ Convertir la période demandée en une plage de dates `AAAA-MM-JJ..AAAA-MM-JJ` :
 
 | Trimestre | Plage |
 |---|---|
-| T1 | `AAAA-01-01..AAAA-03-31` |
-| T2 | `AAAA-04-01..AAAA-06-30` |
-| T3 | `AAAA-07-01..AAAA-09-30` |
-| T4 | `AAAA-10-01..AAAA-12-31` |
+| Q1 | `AAAA-01-01..AAAA-03-31` |
+| Q2 | `AAAA-04-01..AAAA-06-30` |
+| Q3 | `AAAA-07-01..AAAA-09-30` |
+| Q4 | `AAAA-10-01..AAAA-12-31` |
 
 Noter la plage une fois pour toutes ; toutes les requêtes la réutilisent.
+
+Dans le rapport, nommer les trimestres **Q1 à Q4** (`Q3 2026`), jamais T1 à T4, y compris dans les titres, tableaux et graphiques.
 
 ## Taxonomie des labels (source de vérité)
 
@@ -48,6 +50,92 @@ Vérifier que les labels n'ont pas changé avant de commencer :
 *Côté PR (correctif livré) — label `:bookmark::bug: FIX`*
 - Une correction livrée = une **PR portant le label `:bookmark::bug: FIX`** (bug / fix visuel). Signal fiable pour tout ce qui touche à la livraison : volume de correctifs et sujets.
 - Recherche : `is:pr label:":bookmark::bug: FIX"` (ajouter `is:merged merged:<RANGE>` pour les correctifs livrés sur la période).
+
+*Exclusion — ajouts d'icônes*
+- Les PR d'**ajout d'icônes** (`[icons] add circle half`, `[icons] 3 new icons`…) portent le label FIX pour partir dans une release de fix, mais **ne sont ni des correctifs ni des régressions** : les **exclure de tous les compteurs et listes de PR FIX** (§1, §2, §4, §5, §6).
+- Critère : titre préfixé `[icons]`/`[icon]` **sans** le mot `fix` (une PR `[icons] fix component selector` reste un correctif). Contrôle : ces PR régénèrent la police (`packages/icons/font/`). Ne pas exclure sur le seul critère des fichiers : les PR de release/sync touchent aussi la police.
+- Les compteurs `total_count` de l'API search ne savent pas appliquer ce filtre : compter les PR d'icônes à part et les **soustraire** (`fix_net = total_count − icônes`). Pour les listes `gh pr list`, filtrer avec `$ICONS_JQ` :
+
+```bash
+# Prédicat jq « PR d'ajout d'icônes » : le mot fix (bornes de mot, pour ne pas capter « suffix » ou « fixture »)
+IS_ICON_JQ='(.title | test("^\\[icons?\\]"; "i")) and (.title | test("\\bfix(es|ed)?\\b"; "i") | not)'
+# Filtre jq à brancher sur toute liste de PR FIX (gh pr list --json number,title,...)
+ICONS_JQ="select(($IS_ICON_JQ) | not)"
+
+# Nombre de PR d'ajout d'icônes à soustraire d'un total_count (adapter created:/merged: et --state)
+icons(){ gh pr list --repo LuccaSA/lucca-front --state "$2" --limit 500 \
+  --search "$1 label:\":bookmark::bug: FIX\"" --json title \
+  --jq "[.[] | select($IS_ICON_JQ)] | length"; }
+icons "merged:<RANGE>" merged   # à soustraire des PR mergées
+icons "created:<RANGE>" all     # à soustraire des PR créées
+```
+
+Mentionner dans le rapport le nombre de PR d'icônes exclues.
+
+*Exclusion — outillage, tests, stories, release*
+- Des PR FIX ne corrigent aucun bug livré aux utilisateurs : skills, stylelint, tests/e2e, stories et pages QA, release/sync. Les correctifs de **schematics** restent comptés (catégorie « Schematics / migrations ») : ce sont des migrations livrées aux équipes produit, sauf quand la PR ne touche que leurs tests. Les **exclure aussi de tous les compteurs et listes de PR FIX** (§1, §2, §4, §5, §6).
+- Critère : le classement par type du §5 C, catégories « Outillage / tests / stories » et « Release / versionning ». **Charger la fonction `classify` ci-dessous avant de commencer** (heuristique détaillée au §5 C) : elle filtre déjà les icônes et sort `numéro⇥catégorie⇥titre`. Un titre « fix X + story » ou « + QA » reste un correctif.
+- Comme pour les icônes, soustraire ces PR des `total_count` (`fix_net = total_count − icônes − hors_bug`). `classify` interroge les fichiers de chaque PR de la catégorie par défaut ou des schematics : ne pas l'appeler directement, passer par `classified` (et donc `nonbug`/`bugs`), qui la lance **une fois** par plage et par état et met le résultat en cache dans `$BUG_CACHE`. Un échec de l'API interrompt le calcul au lieu de classer la PR en outillage.
+
+```bash
+# classify <qualifier> <state> → numéro⇥catégorie⇥titre (icônes déjà exclues)
+classify(){
+local list
+list=$(gh pr list --repo LuccaSA/lucca-front --state "$2" \
+  --search "$1 label:\":bookmark::bug: FIX\"" --limit 500 \
+  --json number,title,labels --jq ".[] | $ICONS_JQ"' | "\(.number)\t\([.labels[].name]|join(","))\t\(.title)"') || return 1
+[ -n "$list" ] || return 0
+printf '%s\n' "$list" \
+| awk -F'\t' '
+{
+  l=tolower($2); t=tolower($3); cat="Comportement / logique";
+  gsub(/ *\+ *(story|stories|qa)/, "", t)   # « fix X + story / + QA » = un vrai correctif livré avec sa story
+  if      (t ~ /release|update rc|^v[0-9]|^\[?[0-9]+\.[0-9]+\.[0-9]+\]|chore\(sync\)|^sync/)       cat="Release / versionning";
+  else if (t ~ /stories|(^|[^i])story|e2e|qa|test|msw|mock|stylelint|peer dep|description|skill/) cat="Outillage / tests / stories";
+  else if (t ~ /schematic|migration/)                                                             cat="Schematics / migrations";
+  else if (t ~ /vulnerab|security|cve|xss/)                                                       cat="Sécurité";
+  else if (t ~ /^\[?revert|regression|régression/)                                               cat="Régression";
+  else if (t ~ /perf\(|memory|leak|re-measuring|debounce/)                                        cat="Performance";
+  else if (l ~ /accessibility/ || t ~ /a11y|accessib|aria|keyboard|focus|escape key|contrast|screen ?reader|alt|announce|voiceover| vo /) cat="Accessibilité";
+  else if (t ~ /translat|i18n|locale|plural/)                                                     cat="i18n / traduction";
+  else if (t ~ /import|selector|component name|typo|package|dependenc|token|encapsulation/)       cat="Technique / intégration";
+  else if (t ~ /crash|undefined|infinite|not displayed|no first or last|does not|doesn.t|remove .*(setting|header)/) cat="Comportement / logique";
+  else if (t ~ /signal|zoneless|change detection|computed|two-way|model\(|reactivit|value initialization|pending value|binding|ngmodel|not triggered|mark as touched|value not/) cat="Réactivité / signaux / état";
+  else if (t ~ /style|css|scss|visual|display|spacing|align|margin|padding|colo|palette|theme|background|border|shadow|z-index|overflow|ellipsis|truncat|wrap|scroll|icon|layout|responsive|position|width|height|[- ]size| ui|slot|panel|design|shrink|linebreak|indent/) cat="Correction graphique / visuelle";
+  printf "%s\t%s\t%s\n", $1, cat, $3
+}' \
+| ( while IFS=$'\t' read -r n cat title; do   # sous-shell explicite : en zsh, exit fermerait le shell courant
+    # Filet par les fichiers modifiés : catégorie par défaut, et schematics (souvent des PR de tests seuls)
+    if [ "$cat" = "Comportement / logique" ] || [ "$cat" = "Schematics / migrations" ]; then
+      # Échec de l'API ≠ PR sans code : on s'arrête au lieu de la classer en outillage
+      files=$(gh pr view "$n" --repo LuccaSA/lucca-front --json files --jq '.files[].path') \
+        || { echo "classify: cannot fetch files of #$n" >&2; exit 1; }
+      code=$(grep -vE '^stories/|\.spec\.ts$|/tests/' <<<"$files")
+      if [ -z "$code" ]; then cat="Outillage / tests / stories"
+      elif [ "$cat" = "Comportement / logique" ] && ! grep -qvE '\.(scss|css|html)$' <<<"$code"; then cat="Correction graphique / visuelle"; fi
+    fi
+    printf '%s\t%s\t%s\n' "$n" "$cat" "$title"
+  done )
+}
+
+# classified <qualifier> <state> : résultat de classify mis en cache (un appel API par PR, une seule fois)
+BUG_CACHE=${BUG_CACHE:-$(mktemp -d)}
+classified(){
+  local f="$BUG_CACHE/$(printf '%s_%s' "$1" "$2" | tr -c 'A-Za-z0-9.-' '_').tsv"
+  if [ ! -e "$f" ]; then
+    classify "$1" "$2" > "$f.tmp" || { rm -f "$f.tmp"; echo "classify $1 $2: failed" >&2; return 1; }
+    mv "$f.tmp" "$f"
+  fi
+  cat "$f"
+}
+
+nonbug(){ local out; out=$(classified "$1" "$2") || return 1; [ -n "$out" ] || { echo 0; return; }; grep -cE $'\t(Outillage|Release)' <<<"$out"; }  # à soustraire d'un total_count
+bugs(){ local out; out=$(classified "$1" "$2") || return 1; [ -n "$out" ] || return 0; grep -vE $'\t(Outillage|Release)' <<<"$out"; }     # vrais correctifs : numéro⇥catégorie⇥titre
+nonbug "merged:<RANGE>" merged   # à soustraire des PR mergées
+nonbug "created:<RANGE>" all     # à soustraire des PR créées
+```
+
+Mentionner dans le rapport le nombre de PR exclues à ce titre.
 
 **Criticité** — uniquement les labels de priorité :
 - `🔴 P0 - Urgent` — déclenche une release au plus vite.
@@ -79,12 +167,12 @@ gh api -X GET search/issues \
 - **Correctifs ouverts (PR)** : `is:pr label:":bookmark::bug: FIX" created:<RANGE>`.
 - **Correctifs livrés (PR mergées)** : `is:pr is:merged label:":bookmark::bug: FIX" merged:<RANGE>`.
 
-Présenter les trois et commenter l'écart issues ↔ PR (le nombre de PR FIX est en général bien supérieur au nombre d'issues `Bug` : beaucoup de corrections n'ont pas d'issue dédiée).
+Pour les deux compteurs de PR, soustraire les ajouts d'icônes et les PR hors bug (voir les deux *Exclusions*). Présenter les trois et commenter l'écart issues ↔ PR (le nombre de PR FIX est en général bien supérieur au nombre d'issues `Bug` : beaucoup de corrections n'ont pas d'issue dédiée).
 
 ### 2. Bugs traités sur la période
 Deux angles, à présenter tous les deux :
 - **Issues de bug fermées** : `is:issue type:Bug closed:<RANGE>`.
-- **PR de fix mergées** : `is:pr is:merged merged:<RANGE> label:":bookmark::bug: FIX"` — reflète les corrections réellement livrées.
+- **PR de fix mergées** : `is:pr is:merged merged:<RANGE> label:":bookmark::bug: FIX"`, moins les ajouts d'icônes et les PR hors bug — reflète les corrections réellement livrées.
 
 ### 3. Bugs restants
 `is:issue type:Bug is:open created:<RANGE>` (bugs de la période non encore résolus).
@@ -106,7 +194,7 @@ done
 printf "issues  %-20s %s\n" "Non trié" "$((tot-sum))"
 
 # 2) Correctifs livrés (PR FIX) et leur priorité — attendus sans priorité
-pr=$(cnt "repo:$R is:pr is:merged label:\":bookmark::bug: FIX\" merged:$RANGE")
+pr=$(( $(cnt "repo:$R is:pr is:merged label:\":bookmark::bug: FIX\" merged:$RANGE") - $(icons "merged:$RANGE" merged) - $(nonbug "merged:$RANGE" merged) ))
 prp=0
 for L in "🔴 P0 - Urgent" "🟠 P1 - Important" "🟡 P2 - Subsidiary"; do
   prp=$((prp + $(cnt "repo:$R is:pr is:merged label:\":bookmark::bug: FIX\" merged:$RANGE label:\"$L\"")))
@@ -123,23 +211,23 @@ Commenter explicitement : « la criticité n'est renseignée que sur N issues, s
 
 Les labels de sujet n'étant pas fiables, mesurer les sujets à partir des **correctifs réellement livrés**. Le signal de référence : les **PR mergées portant le label `:bookmark::bug: FIX`** sur la période (c'est le marqueur officiel d'un correctif). Trois angles : **A** et **B** répondent « quel composant » (A par fichiers modifiés = le plus fiable, B par scope du titre), **C** répond « quel type de bug ».
 
-**A. Par dossier de composant modifié (le plus fiable).** Partir des PR de fix mergées, puis tallier les dossiers de composant modifiés par chacune. ⚠️ **Certains packages sont des conteneurs** (`packages/ng/forms/`, `packages/ng/date2/`, `packages/ng/date/`) qui regroupent plusieurs composants : y descendre **d'un niveau** pour ne pas masquer le détail (ex. `forms/checkbox-input`, `forms/radio-group-input`… plutôt qu'un « forms » fourre-tout). Le motif ci-dessous capture ce niveau grâce à l'ordre des alternatives (leftmost-longest) :
+**A. Par dossier de composant modifié (le plus fiable).** Partir des PR de fix mergées (hors bug exclues), puis tallier les dossiers de composant modifiés par chacune — **une fois par PR**, même si elle modifie plusieurs fichiers du composant. ⚠️ **Certains packages sont des conteneurs** (`packages/ng/forms/`, `packages/ng/date2/`, `packages/ng/date/`) qui regroupent plusieurs composants : y descendre **d'un niveau** pour ne pas masquer le détail (ex. `forms/checkbox-input`, `forms/radio-group-input`… plutôt qu'un « forms » fourre-tout). Le motif ci-dessous capture ce niveau grâce à l'ordre des alternatives (leftmost-longest) :
 
 ```bash
-# 1) PR de fix mergées sur la période (numéros)
-gh pr list --repo LuccaSA/lucca-front --state merged \
-  --search 'merged:<RANGE> label:":bookmark::bug: FIX"' --limit 500 --json number --jq '.[].number' \
-  # 2) pour chaque PR, les dossiers de composant touchés, puis on cumule
+# 1) PR de fix mergées sur la période, hors icônes et hors bug (numéros)
+# 2) pour chaque PR, ses dossiers de composant (dédoublonnés par clé normalisée), puis on cumule
+bugs "merged:<RANGE>" merged | cut -f1 \
   | while read -r n; do
-      gh api "repos/LuccaSA/lucca-front/pulls/$n/files" --paginate --jq '.[].filename'
+      gh api "repos/LuccaSA/lucca-front/pulls/$n/files" --paginate --jq '.[].filename' \
+      | grep -oE 'packages/(ng/(forms|date2|date)/[^/]+|ng/[^/]+|scss/src/components/[^/]+)' \
+      | sed -E 's#packages/(ng/|scss/src/components/)##' \
+      | awk '{ k=tolower($0); gsub(/-/,"",k); print k "\t" $0 }' | sort -u -t$'\t' -k1,1
     done \
-  | grep -oE 'packages/(ng/(forms|date2|date)/[^/]+|ng/[^/]+|scss/src/components/[^/]+)' \
-  | sed -E 's#packages/(ng/|scss/src/components/)##' \
-  | awk '{ k=tolower($0); gsub(/-/,"",k); c[k]++; if ($0 ~ /-/ || !(k in d)) d[k]=$0 }
+  | awk -F'\t' '{ c[$1]++; if ($2 ~ /-/ || !($1 in d)) d[$1]=$2 }
          END{ for (x in c) printf "%3d  %s\n", c[x], d[x] }' | sort -rn | head -25
 ```
 
-> **Regroupement des variantes** : un même composant vit souvent dans deux dossiers (SCSS en camelCase `multiSelect`, Angular en kebab `multi-select`). L'`awk` ci-dessus les fusionne en normalisant la clé (minuscules + suppression des tirets) et affiche l'étiquette kebab quand elle existe. Les sous-composants `forms/*` restent distincts (préfixe conservé).
+> **Regroupement des variantes** : un même composant vit souvent dans deux dossiers (SCSS en camelCase `multiSelect`, Angular en kebab `multi-select`). Le premier `awk` les fusionne en normalisant la clé (minuscules + suppression des tirets), le second cumule et affiche l'étiquette kebab quand elle existe. Les sous-composants `forms/*` restent distincts (préfixe conservé).
 
 Fallback hors ligne (dépôt cloné, si `gh` indisponible) : produire la même liste de fichiers via git, puis brancher le **même** `grep | sed | awk` que ci-dessus. Moins fiable car dépend des conventions de message (`fix(<scope>): …`, ancien style `[Composant] fix …`) :
 
@@ -153,45 +241,29 @@ git -C <repo> log --since=<START> --until=<END> --pretty=format:'%H %s' \
 **B. Par scope du titre (complément rapide).** Extraire le scope conventionnel des titres des PR de fix mergées :
 
 ```bash
-gh pr list --repo LuccaSA/lucca-front --state merged \
-  --search 'merged:<RANGE> label:":bookmark::bug: FIX"' --limit 500 --json title --jq '.[].title' \
+bugs "merged:<RANGE>" merged | cut -f3 \
   | grep -oiE 'fix\(([^)]+)\)' | sed -E 's/fix\(([^)]+)\)/\1/I' \
   | sort | uniq -c | sort -rn
 ```
 
 > Un même fix peut toucher plusieurs composants : le total par sujet dépasse le nombre de PR. Le préciser. Réconcilier A et B (le dossier modifié prime sur le scope déclaré si les deux divergent).
 
-**C. Par type de bug** (correction graphique, comportement/logique, réactivité/état, accessibilité, technique, i18n, sécurité, régression, outillage/tests, release…). Classer les PR FIX par **heuristique sur le titre** (+ label `👥 Accessibility`), une PR = une catégorie (premier motif qui matche, l'ordre compte). Beaucoup de PR FIX sont de l'outillage/tests/stories ou du versionning : les isoler pour ne pas fausser les vrais types.
+**C. Par type de bug** (correction graphique, comportement/logique, réactivité/état, accessibilité, technique, schematics, i18n, sécurité, régression, outillage/tests, release…). Classer les PR FIX par **heuristique sur le titre** (+ label `👥 Accessibility`), une PR = une catégorie (premier motif qui matche, l'ordre compte). Beaucoup de PR FIX sont de l'outillage/tests/stories ou du versionning : ce classement les repère pour les **exclure** de tout le rapport (voir *Exclusion — outillage, tests, stories, release*).
 
 L'**ordre des tests = priorité** : placer technique/perf/logique **avant** le graphique évite que des mots comme `header`/`display`/`size` (présents dans des noms de composants ou des bugs logiques) ne gonflent à tort le visuel.
 
+« Comportement / logique » est la **catégorie par défaut** : toute PR dont le titre ne matche aucun motif y tombe (titres `[Composant] fix …`, formulations vagues). Le titre seul ne suffit donc pas : la boucle finale de `classify` (voir *Exclusion — outillage, tests, stories, release*) **reclasse ces PR d'après leurs fichiers modifiés** — uniquement des stories ou des tests (`*.spec.ts`, dossiers `tests/`) → outillage ; uniquement du `.scss`/`.css`/`.html` → visuel. Le même filet « tests seuls » s'applique aux PR « Schematics / migrations ». Sans ce filet, environ un tiers de la catégorie est mal classé (16 PR sur 47 au Q3 2026).
+
 ```bash
-gh pr list --repo LuccaSA/lucca-front --state merged \
-  --search 'merged:<RANGE> label:":bookmark::bug: FIX"' --limit 500 \
-  --json number,title,labels --jq '.[] | "\(.number)\t\([.labels[].name]|join(","))\t\(.title)"' \
-| awk -F'\t' '
-{
-  l=tolower($2); t=tolower($3); cat="Comportement / logique";
-  if      (t ~ /release|update rc|^v[0-9]|^\[?[0-9]+\.[0-9]+\.[0-9]+\]/)                          cat="Release / versionning";
-  else if (t ~ /schematic|stories|story|storybook|e2e|qa|cleanup|test|msw|mock|stylelint|peer dep|description/) cat="Outillage / tests / stories";
-  else if (t ~ /vulnerab|security|cve|xss/)                                                       cat="Sécurité";
-  else if (t ~ /^\[?revert|regression|régression/)                                               cat="Régression";
-  else if (t ~ /perf\(|memory|leak|re-measuring|debounce/)                                        cat="Performance";
-  else if (l ~ /accessibility/ || t ~ /a11y|accessib|aria|keyboard|focus|escape key|contrast|screen ?reader|alt|announce/) cat="Accessibilité";
-  else if (t ~ /translat|i18n|locale/)                                                            cat="i18n / traduction";
-  else if (t ~ /import|selector|component name|typo|package|dependenc|token|encapsulation/)       cat="Technique / intégration";
-  else if (t ~ /crash|undefined|infinite|prevent|not displayed|no first or last|does not|doesn.t|remove .*(setting|header)/) cat="Comportement / logique";
-  else if (t ~ /signal|zoneless|change detection|computed|two-way|model\(|reactivit|value initialization|pending value|binding|ngmodel|not triggered|mark as touched|value not/) cat="Réactivité / signaux / état";
-  else if (t ~ /style|css|scss|visual|display|spacing|align|margin|padding|colo|palette|theme|background|border|shadow|z-index|overflow|ellipsis|truncat|wrap|scroll|icon|layout|responsive|position|width|height|[- ]size| ui|slot|panel|design/) cat="Correction graphique / visuelle";
-  c[cat]++
-}
-END{ for (k in c) printf "%3d  %s\n", c[k], k | "sort -rn" }'
+classified "merged:<RANGE>" merged > all-types.tsv   # réutilise le cache des §1–§4
+grep -vE $'\t(Outillage|Release)' all-types.tsv > types.tsv   # vrais correctifs : base des sous-découpages ci-dessous
+cut -f2 all-types.tsv | sort | uniq -c | sort -rn              # Outillage + Release = PR exclues du rapport
 ```
 
-**Sous-découpage de « Correction graphique / visuelle »** : ne garder que les PR classées « graphique » (mêmes tests que ci-dessus, renvoyant vrai pour le visuel), puis les ventiler avec le sous-classement ci-dessous. Ces sous-types s'affichent **dans le même tableau** « Par type de bug » (lignes indentées `↳` sous la ligne visuelle), pas dans un second tableau.
+**Sous-découpage de « Correction graphique / visuelle »** : ne garder que les lignes « graphique » de `types.tsv`, puis les ventiler avec le sous-classement ci-dessous. Ces sous-types forment le premier des trois tableaux « Par type de bug » (voir *Format de sortie attendu*).
 
 ```bash
-# ... même extraction gh | awk, en ne gardant que les PR du visuel, puis :
+awk -F'\t' '
 function subg(t){
   if (t~/colo|palette|theme|background|contrast/)                      return "Couleur / palette / thème";
   if (t~/spacing|margin|padding|align|gap/)                            return "Espacement / alignement";
@@ -201,25 +273,44 @@ function subg(t){
   if (t~/[- ]size|width|height|layout|responsive|position|display/)    return "Dimension / layout / responsive";
   return "Autre UI (style, slot, panel…)";
 }
+$2 ~ /graphique/ { c[subg(tolower($3))]++ }
+END{ for (k in c) printf "%3d  %s\n", c[k], k | "sort -rn" }' types.tsv
 ```
 
-> Classement **heuristique** (mots-clés de titre), une PR = une seule catégorie (ordre = priorité). Portables : **ne pas** utiliser les bornes de mot `\<`/`\>` (non supportées par l'awk macOS), ni nommer une fonction `sub` (réservée). Toujours signaler l'approximation et ajuster les motifs.
+**Sous-découpage de « Comportement / logique »** : même principe, sur les lignes « Comportement » de `types.tsv`, affiché dans le deuxième tableau « Par type de bug ». Une PR qui finit en « Autre logique » signale un motif à ajouter.
+
+```bash
+awk -F'\t' '
+function subl(t){
+  if (t~/tooltip|dialog|modal|popover|dropdown|popup/)                                                   return "Overlays (tooltip, dialog, modal, popover)";
+  if (t~/select|filter.?pill/ && t~/request|lookup|loader|total|paginat|reload|data source|homonym|api/) return "Selects : chargement et requêtes API";
+  if (t~/select|filter.?pill|option/)                                                                    return "Selects et filter pills : sélection et valeur";
+  if (t~/input|date|rich.?text|duration|caret|paste|erase|comment|read-more/)                           return "Champs de saisie : valeur et édition";
+  if (t~/transform|typing|link|optional/)                                                                return "Typage et API publique";
+  return "Autre logique";
+}
+$2 ~ /Comportement/ { c[subl(tolower($3))]++ }
+END{ for (k in c) printf "%3d  %s\n", c[k], k | "sort -rn" }' types.tsv
+```
+
+> Classement **heuristique** (mots-clés de titre, puis fichiers modifiés pour la catégorie par défaut), une PR = une seule catégorie (ordre = priorité). Portables : **ne pas** utiliser les bornes de mot `\<`/`\>` (non supportées par l'awk macOS), ni nommer une fonction `sub` (réservée). Toujours signaler l'approximation et ajuster les motifs.
 >
-> **Tag équipe** : taguer chaque type `[UI]` (HTML/CSS/design, label `👥 UI`) ou `[Front]` (Angular/logique, label `👥 Front`). Convention : graphique/visuel et accessibilité = `[UI]` ; comportement, réactivité, technique, perf, sécurité, régression, outillage, release = `[Front]`.
+> **Tag équipe** : taguer chaque type `[UI]` (HTML/CSS/design, label `👥 UI`) ou `[Front]` (Angular/logique, label `👥 Front`). Convention : graphique/visuel et accessibilité = `[UI]` ; comportement, réactivité, technique, schematics, perf, sécurité, régression = `[Front]`.
 
 ### 6. Comparatif avec le trimestre précédent
 
-Ces chiffres **alimentent directement la table de synthèse** en tête de rapport (colonnes *Précédente* et *Δ*) : il n'y a **pas de section de sortie dédiée**. Confronter la période à **la période précédente** de même durée. Un solde net positif (ouverts > traités) = l'arriéré grossit. Attention au passage d'année : le trimestre précédant T1 `AAAA` est T4 `AAAA-1`.
+Ces chiffres **alimentent directement la table de synthèse** en tête de rapport (colonnes *Précédente* et *Δ*) : il n'y a **pas de section de sortie dédiée**. Confronter la période à **la période précédente** de même durée. Un solde net positif (ouverts > traités) = l'arriéré grossit. Attention au passage d'année : le trimestre précédant Q1 `AAAA` est Q4 `AAAA-1`.
 
 Le script ci-dessous couvre ouverts / traités / net / PR FIX mergées ; pour compléter les autres lignes de la synthèse (restants, taux de résorption, PR ouvertes), relancer les requêtes des §1–§3 sur la plage précédente.
 
 ```bash
-# Déterminer la plage du trimestre précédent (ex. T2 2026 -> T1 2026)
+# Déterminer la plage du trimestre précédent (ex. Q2 2026 -> Q1 2026)
 CUR="2026-04-01..2026-06-30"; PREV="2026-01-01..2026-03-31"
 for R in "$PREV" "$CUR"; do
   o=$(gh api -X GET search/issues -f q="repo:LuccaSA/lucca-front is:issue type:Bug created:$R" --jq '.total_count')
   c=$(gh api -X GET search/issues -f q="repo:LuccaSA/lucca-front is:issue type:Bug closed:$R"  --jq '.total_count')
   f=$(gh api -X GET search/issues -f q="repo:LuccaSA/lucca-front is:pr is:merged label:\":bookmark::bug: FIX\" merged:$R" --jq '.total_count')
+  f=$((f - $(icons "merged:$R" merged) - $(nonbug "merged:$R" merged)))   # hors icônes et hors bug
   printf "%s  bugs_ouverts=%s  bugs_traités=%s  net=%+d  PR_FIX_mergées=%s\n" "$R" "$o" "$c" "$((o-c))" "$f"
 done
 ```
@@ -231,6 +322,8 @@ Calculer la variation (%) de chaque indicateur entre les deux trimestres. Donner
 - Certains bugs n'ont aucune priorité : compter explicitement les bugs **non triés** (sans label P0/P1/P2) pour ne pas les masquer.
 - Rate-limit : l'API **search non authentifiée** ≈ 10 req/min (et l'API REST 60 req/h). Préférer `gh` (authentifié : 30 req/min pour search) ou espacer les appels `curl`.
 - La somme par criticité/sujet peut dépasser le total (une issue peut porter plusieurs labels) ou être inférieure (issues non labellisées) : le préciser.
+- Les PR FIX d'**ajout d'icônes** et les PR **hors bug** (outillage, tests, stories, release) sont exclues partout (compteurs, criticité, sujets, comparatif) : vérifier que chaque compteur de PR a bien été corrigé.
+- Relire la liste des PR exclues comme hors bug : un mot-clé d'outillage peut se cacher dans un vrai correctif (`story` dans « history » a ainsi capté deux correctifs). Un faux positif = un motif à corriger.
 - Bien séparer les **deux populations** dans les compteurs : issues `type:Bug` (demande) vs PR `FIX` (livraison). Ne jamais additionner les deux dans un même total ; les présenter côte à côte et commenter leur écart.
 
 ## Format de sortie attendu
@@ -276,25 +369,41 @@ Un rapport Markdown concis :
 | core-select | … |
 | … | … |
 
-### Par type de bug *(classement heuristique par titre, une PR = une catégorie)*
-*Tag `[UI]` = HTML/CSS/design · `[Front]` = Angular/logique. La ligne « Correction graphique / visuelle » est éclatée en sous-types dans le **même** tableau (lignes indentées `↳`) — ne pas faire de second tableau séparé.*
+### Par type de bug *(classement heuristique par titre et fichiers, une PR = une catégorie)*
+*Tag `[UI]` = HTML/CSS/design · `[Front]` = Angular/logique. Trois tableaux, dans cet ordre : les deux catégories subdivisées (titre = catégorie, tag et total), puis un tableau « Autres types » pour le reste. Lignes triées par volume décroissant.*
 
-| Type | Tag | Fix |
+#### Correction graphique / visuelle [UI] — N PR
+
+| Sous-type | PR FIX |
+|---|---|
+| Autre UI (style, slot, panel…) | … |
+| Débordement / scroll / troncature | … |
+| Dimension / layout / responsive | … |
+| Icône | … |
+| Espacement / alignement | … |
+| Couleur / palette / thème | … |
+| Bordure / ombre | … |
+
+#### Comportement / logique [Front] — N PR
+
+| Sous-type | PR FIX |
+|---|---|
+| Selects : chargement et requêtes API | … |
+| Selects et filter pills : sélection et valeur | … |
+| Champs de saisie : valeur et édition | … |
+| Overlays (tooltip, dialog, modal, popover) | … |
+| Typage et API publique | … |
+| Autre logique *(motif à ajouter dans `subl`)* | … |
+
+#### Autres types — N PR
+
+| Type | Tag | PR FIX |
 |---|---|---|
-| **Correction graphique / visuelle** | [UI] | **…** |
-| ↳ Dimension / layout / responsive | [UI] | … |
-| ↳ Couleur / palette / thème | [UI] | … |
-| ↳ Débordement / scroll / troncature | [UI] | … |
-| ↳ Autre UI (style, slot, panel…) | [UI] | … |
-| ↳ Icône | [UI] | … |
-| ↳ Espacement / alignement | [UI] | … |
-| ↳ Bordure / ombre | [UI] | … |
-| Comportement / logique | [Front] | … |
-| Outillage / tests / stories | [Front] | … |
-| Release / versionning | [Front] | … |
 | Accessibilité | [UI] | … |
-| Technique / intégration | [Front] | … |
+| i18n / traduction | [Front] | … |
 | Réactivité / signaux / état | [Front] | … |
+| Technique / intégration | [Front] | … |
+| Schematics / migrations | [Front] | … |
 | Sécurité | [Front] | … |
 | Régression | [Front] | … |
 | Performance | [Front] | … |

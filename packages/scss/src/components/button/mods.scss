@@ -282,7 +282,7 @@
 	&:not(:disabled) {
 		@include color.borderGradient($gradient: var(--pr-t-color-border-ai));
 
-		&:not(.mod-invert) {
+		&:where(:not(.mod-invert)) {
 			.lucca-icon {
 				@include icons.AI;
 			}
