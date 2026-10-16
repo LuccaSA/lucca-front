@@ -22,7 +22,13 @@
 <ng-template #input>
 	@if (!footRef && selectedLabel()) {
 		<lu-form-field [label]="selectedLabel() ?? ''" hiddenLabel>
-			<lu-checkbox-input [(ngModel)]="selected" [disabled]="disabled()" [mixed]="mixed()" />
+			<lu-checkbox-input
+				[(ngModel)]="selected"
+				[disabled]="disabled()"
+				[mixed]="mixed()"
+				[luRangeSelection]="bodyRef ? tableRef?.rangeSelection : null"
+				[luRangeSelectionItem]="this"
+			/>
 		</lu-form-field>
 	}
 </ng-template>
