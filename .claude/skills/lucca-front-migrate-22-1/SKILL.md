@@ -1,13 +1,13 @@
 ---
 name: lucca-front-migrate-22-1
-description: "Skill de migration vers Lucca Front 22.1. Charge ce skill pour migrer un projet consommateur de @lucca-front/ng 22.0.x vers 22.1.x. Couvre : la suppression du token USER_POPOVER_IS_ACTIVATED (seul changement cassant de la 22.1), et le renommage des inputs dépréciés de lu-fancy-box (foreground → foregroundStartEnd, backgroundLeft → backgroundEndStart, backgroundRight → backgroundStartEnd), avec la détection des surcharges SCSS qui empêchent ce renommage à iso-rendu et le remplacement du markup HTML .fancyBox par lu-fancy-box. Use when migrating a project to lucca-front 22.1."
+description: "Skill de migration vers Lucca Front 22.1. Charge ce skill pour migrer un projet consommateur de @lucca-front/ng 22.0.x vers 22.1.x. Couvre : la suppression du token USER_POPOVER_IS_ACTIVATED, le passage de toute lu-fancy-box au rendu SVG dès l'upgrade (prérequis HttpClient, surcharges SCSS et images non SVG devenues des régressions), le renommage des inputs dépréciés de lu-fancy-box (foreground → foregroundStartEnd, backgroundLeft → backgroundEndStart, backgroundRight → backgroundStartEnd) avec les illustrations du CDN Prisme en noms typés, et le remplacement à iso-rendu du markup HTML .fancyBox par lu-fancy-box. Use when migrating a project to lucca-front 22.1."
 ---
 
 # lucca-front-migrate-22-1
 
 Ce skill guide la migration d'un projet **consommateur** de `@lucca-front/ng` de la version **22.0.x** vers **22.1.x**.
 
-**Périmètre — iso-comportement et iso-rendu.** La 22.1 est une mineure : un seul changement cassant (le token `USER_POPOVER_IS_ACTIVATED`), le reste est une dépréciation qui fonctionne toujours. On corrige ce qui casse, on remplace ce qui est déprécié **seulement quand le rendu ne bouge pas**, et on signale le reste. Seule exception : les illustrations du CDN Prisme passent à leur nom typé, dont les bulles suivent la palette du produit (voir [FancyBox.md](./references/FancyBox.md) §2). Pas de modernisation, pas de refacto d'opportunité, pas d'adoption des autres nouveautés de la 22.1 (`palette`, `foregroundEndStart`…) : les lister dans le rapport si l'occasion se présente.
+**Périmètre — iso-comportement et iso-rendu.** La 22.1 est une mineure, mais elle casse deux choses : le token `USER_POPOVER_IS_ACTIVATED` est supprimé, et toute `lu-fancy-box` passe au nouveau rendu SVG dès l'upgrade, anciens inputs compris (prérequis `HttpClient`, surcharges SCSS et images non SVG à corriger). Le reste est une dépréciation qui fonctionne toujours. On corrige ce qui casse, on remplace ce qui est déprécié **seulement quand le rendu ne bouge pas**, et on signale le reste. Seule exception : les illustrations du CDN Prisme passent à leur nom typé, dont les bulles suivent la palette du produit (voir [FancyBox.md](./references/FancyBox.md) §2). Pas de modernisation, pas de refacto d'opportunité, pas d'adoption des autres nouveautés de la 22.1 (`palette`, `foregroundEndStart`…) : les lister dans le rapport si l'occasion se présente.
 
 **Ce skill s'exécute dans le dépôt du projet consommateur**, pas dans `lucca-front` (voir « Installation » plus bas).
 
@@ -15,7 +15,7 @@ Ce skill guide la migration d'un projet **consommateur** de `@lucca-front/ng` de
 
 | Référence | Ce qu'elle couvre |
 |---|---|
-| [FancyBox.md](./references/FancyBox.md) | Correspondance des inputs et du markup, transformation des valeurs, surcharges SCSS bloquantes, remplacement du HTML pur par `lu-fancy-box`, prérequis `HttpClient`. |
+| [FancyBox.md](./references/FancyBox.md) | Régressions à l'upgrade, correspondance des inputs et du markup, transformation des valeurs, surcharges SCSS, remplacement du HTML pur par `lu-fancy-box`, prérequis `HttpClient`. |
 
 Utiliser `TodoWrite` pour suivre les étapes 0 à 5 : chaque étape devient une tâche, marquée `completed` au fur et à mesure.
 
@@ -37,7 +37,8 @@ Utiliser `TodoWrite` pour suivre les étapes 0 à 5 : chaque étape devient une 
 | `USER_POPOVER_IS_ACTIVATED` | `.ts` | Étape 2 |
 | `<lu-fancy-box` portant `foreground`, `backgroundLeft` ou `backgroundRight` (statiques ou bindés `[…]`) | `.html`, templates inline des `.ts` | Étape 3 |
 | Markup HTML `class="fancyBox"` (sans `lu-fancy-box`), classe `.fancyBox-content-foreground` | `.html`, `.ts` | Étape 3 |
-| Surcharges de l'ancien rendu : `.fancyBox-content` avec `::before`/`::after`, `.fancyBox-content-foreground`, variables `--components-fancyBox-(offsetInline\|offsetBlock\|imageWidth\|imageHeight\|background-left\|background-right\|foreground)` | `.scss`, `.css`, `styles` inline | Étape 3 (bloquant) |
+| Surcharges de l'ancien rendu : `.fancyBox-content` avec `::before`/`::after`, `.fancyBox-content-foreground`, variables `--components-fancyBox-(offsetInline\|offsetBlock\|imageWidth\|imageHeight\|background-left\|background-right\|foreground)` | `.scss`, `.css`, `styles` inline | Étape 3 (régression ou conversion bloquée) |
+| `provideHttpClient` / `HttpClientModule` (si une FancyBox est trouvée) | config de l'application (`app.config.ts`, `main.ts`, module racine) | Étape 3 |
 
 Pour chaque FancyBox trouvée, rattacher les surcharges SCSS qui la touchent : le SCSS du composant hôte, mais aussi les fichiers globaux (`shame`, `styles.scss`…) qui ciblent `.fancyBox` ou une classe posée sur l'hôte. Une surcharge globale touche **toutes** les FancyBox de l'application.
 
@@ -58,21 +59,20 @@ Si le provider valait `false` ou une expression (feature flag, factory) : il n'a
 
 ---
 
-## Étape 3 — FancyBox (dépréciation)
+## Étape 3 — FancyBox (cassant pour `lu-fancy-box`, dépréciation pour le markup HTML)
 
-Suivre [FancyBox.md](./references/FancyBox.md). En résumé, pour chaque FancyBox :
+Suivre [FancyBox.md](./references/FancyBox.md). Commencer par le prérequis `HttpClient` (§5) dès qu'une `lu-fancy-box` existe : sans lui, l'application plante au rendu du composant depuis l'upgrade, migration ou non.
+
+Puis, pour chaque FancyBox :
 
 | Cas | Action |
 |---|---|
-| `lu-fancy-box` sans surcharge de l'ancien rendu | Renommer les inputs (§1), en transformant les valeurs si besoin (§2). |
-| `lu-fancy-box` avec une surcharge de l'ancien rendu | **Ne pas toucher.** Les anciens inputs fonctionnent toujours ; les nouveaux désactivent `::before`/`::after`, la surcharge ne s'appliquerait plus. Signaler (§3). |
-| Valeur non SVG ou non transformable | **Ne pas toucher.** Signaler (§2). |
-| Markup HTML `.fancyBox` dans un template Angular, sans surcharge | Remplacer par `lu-fancy-box` (§4). |
-| Markup HTML hors template Angular, ou avec surcharge | **Ne pas toucher.** Signaler (§4). |
+| `lu-fancy-box` avec des valeurs migrables | Renommer les inputs (§1), en transformant les valeurs si besoin (§2). Une surcharge de l'ancien rendu ne bloque pas : elle est déjà inactive, la signaler comme régression (§3). |
+| `lu-fancy-box` avec une valeur non SVG ou non transformable | **Ne pas renommer.** Signaler comme régression à corriger : elle s'affiche déjà mal depuis l'upgrade (§2). |
+| Markup HTML `.fancyBox` qui remplit toutes les conditions du §4 | Remplacer par `lu-fancy-box` (§4). |
+| Autre markup HTML (hors Angular, surcharge, arrière-plan manquant, SVG trop haut ou illisible…) | **Ne pas toucher.** Il garde l'ancien rendu. Signaler la raison (§4). |
 
 Ne jamais mélanger anciens et nouveaux inputs sur un même `lu-fancy-box` : une FancyBox est migrée entièrement ou pas du tout.
-
-Après la première FancyBox migrée, vérifier le prérequis `HttpClient` (§5) : sans lui, l'application plante au rendu du composant.
 
 ---
 
@@ -89,7 +89,8 @@ Après la première FancyBox migrée, vérifier le prérequis `HttpClient` (§5)
 
 - **UserPopover** : providers supprimés (fichier, ligne), et ceux qui valaient `false` ou une expression.
 - **FancyBox migrées** : fichier, ligne, inputs renommés, valeurs transformées, URL remplacées par un nom typé. Écrans à contrôler visuellement.
-- **FancyBox laissées en l'état**, une par une avec fichier et ligne, et la raison : surcharge de l'ancien rendu (citer le fichier SCSS et le sélecteur), valeur non SVG, `http://`, markup hors Angular. Rappeler qu'elles fonctionnent toujours, mais qu'il faudra les traiter avant la majeure qui supprimera les anciens inputs.
+- **Régressions `lu-fancy-box` à corriger**, une par une avec fichier et ligne : surcharge de l'ancien rendu devenue inactive (citer le fichier SCSS et le sélecteur), valeur non SVG, `http://`, chaîne vide, binding non vérifiable. Elles sont cassées depuis l'upgrade, renommage ou non.
+- **Markup HTML laissé en l'état**, avec fichier, ligne et raison (hors Angular, surcharge, arrière-plan manquant, SVG trop haut ou illisible, valeur non migrable). Il fonctionne toujours, mais devra être traité avant la majeure qui supprimera l'ancien rendu.
 - **Prérequis `HttpClient`** : présent, ajouté, ou intercepteurs à vérifier (§5).
 - **Erreurs préexistantes** rencontrées au build/lint : listées, non corrigées.
 - **Pistes hors périmètre** : `palette`, `foregroundEndStart` pour remplacer une illustration ajoutée en SCSS… Listées, jamais appliquées.
