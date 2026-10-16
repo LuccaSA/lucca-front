@@ -1,3 +1,9 @@
+### 22.1.0
+
+#### Added
+
+- Default translated label ("Loading…") rendered when no content is projected, visually hidden unless `hiddenLabel` is set to `false`. It can be changed through the new `intl` input or the `LU_LOADING_TRANSLATIONS` token.
+
 ### 21.3.0
 
 #### Added

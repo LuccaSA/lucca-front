@@ -1,8 +1,8 @@
-### Unreleased
+### 22.1.0
 
 #### Added
 
-- `neutral` renders the link with the default text color instead of the link color.
+- `neutral` input (`mod-neutral`) to render the link with the default text color instead of the link color.
 
 ### 21.4.1
 

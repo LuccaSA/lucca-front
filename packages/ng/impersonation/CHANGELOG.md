@@ -1,3 +1,9 @@
+### 22.1.0
+
+#### Added
+
+- `operationIds`, `uniqueOperationIds` and `appInstanceId` inputs to restrict the selectable users to the ones reachable through these operations.
+
 ### 21.3.0
 
 #### Added

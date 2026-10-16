@@ -1,3 +1,9 @@
+### 22.1.0
+
+#### Added
+
+- `focusInvalidOnSubmit` input on `form[luForm]` to move focus to the first invalid field when the form is submitted while invalid. Disabled by default.
+
 ### 21.3.0
 
 #### Changed

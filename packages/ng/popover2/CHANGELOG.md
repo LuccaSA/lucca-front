@@ -1,3 +1,14 @@
+### 22.1.0
+
+#### Added
+
+- `luPopoverBackdrop` input to render a transparent backdrop catching the outside click, for menu-like popovers.
+
+#### Fixed
+
+- `Escape` only closes the topmost overlay: a select panel or a dialog opened from a popover no longer closes the popover too.
+- Clicking inside an overlay opened from the popover content (select panel, dialog, date picker…) no longer closes the popover.
+
 ### 22.0.6
 
 #### Fixed

@@ -1,3 +1,9 @@
+### 22.1.0
+
+#### Added
+
+- Keyboard shortcuts (`.kbdWrapper` / `.kbd`) can be displayed in dropdown actions: they are aligned to the end and animated on hover and focus.
+
 ### 22.0.3
 
 #### Fixed

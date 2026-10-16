@@ -1,3 +1,15 @@
+### 22.1.0
+
+#### Added
+
+- `hiddenLabel` input to visually hide the label while keeping it available to screen readers. Requires an `icon`.
+- `label` is now optional, so a tag can display an icon only.
+- Icon-only tags (without label, with an empty label or with `hiddenLabel`) get a reduced inline padding.
+
+#### Changed
+
+- A tag with neither a label nor an icon is no longer displayed.
+
 ### 22.0.6
 
 #### Fixed

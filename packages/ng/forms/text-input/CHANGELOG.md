@@ -1,3 +1,13 @@
+### 22.1.0
+
+#### Added
+
+- `width` input to size the input itself, using the form field width scale, including the new `10` value.
+
+#### Changed
+
+- `inputElementRef()` is now typed as non-nullable; calling it before the view is rendered throws instead of returning `undefined`.
+
 ### 22.0.6
 
 #### Fixed

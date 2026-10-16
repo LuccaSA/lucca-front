@@ -1,3 +1,13 @@
+### 22.1.0
+
+#### Added
+
+- `humanized` input to display the selected date in natural language while the field is not focused: "Yesterday", "Today" or "Tomorrow" in `day` mode, the month name and year in `month` mode. Other dates and modes keep the numeric format.
+
+#### Changed
+
+- `calendarMode` is no longer nullable: it defaults to `mode` and follows it when `mode` changes. `calendarModeChange` is only emitted when the calendar navigation actually changes the mode.
+
 ### 22.0.0
 
 #### Added

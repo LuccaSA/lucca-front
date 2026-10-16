@@ -1,3 +1,13 @@
+### 22.1.0
+
+#### Added
+
+- Ranges with only a start or an end date are now supported: picking a date while the end field is focused fills the end bound, and such a range no longer makes the control invalid. As a filter pill, a partial range reads "from …" or "until …".
+
+#### Changed
+
+- `calendarMode` is no longer nullable: it defaults to `mode` and follows it when `mode` changes.
+
 ### 22.0.0
 
 #### Fixed
