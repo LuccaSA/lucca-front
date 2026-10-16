@@ -241,7 +241,9 @@
 		"figmaName": "pr-DataPresentation (v21.1)  🎉",
 		"ngPackageOverride": "form-field",
 		"ngSelectors": [
-			"lu-data-presentation"
+			"lu-data-presentation",
+			"[luDataPresentation]",
+			"lu-data-presentation-list"
 		],
 		"scssComponent": ""
 	},
