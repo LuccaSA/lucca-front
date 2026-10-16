@@ -1,0 +1,95 @@
+@use 'sass:math';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+$holdPress: 10%;
+$holdRelease: 35%;
+$holdEnd: 40%;
+$tapStart: 15%;
+$tapPeak: 20%;
+$tapEnd: 25%;
+$holdIdle: math.div(100% - $holdEnd, 100%);
+$tapIdle: math.div(100% - ($tapEnd - $tapStart), 100%);
+$keysMax: 5;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	align-items: center;
+	background-color: var(--palettes-neutral-0);
+	border: 1px solid var(--palettes-neutral-200);
+	border-radius: var(--pr-t-border-radius-small);
+	box-shadow: inset 0 -1px 0 var(--palettes-neutral-200);
+	color: var(--pr-t-color-text-subtle);
+	display: inline-flex;
+	font: var(--pr-t-font-body-XS);
+	inset-block-start: 0;
+	justify-content: center;
+	min-block-size: var(--pr-t-spacings-250);
+	min-inline-size: var(--pr-t-spacings-250);
+	padding-inline: var(--components-kbd-paddingInline);
+	position: relative;
+	white-space: nowrap;
+	animation-delay: calc(var(--components-kbd-animationDelay) + var(--components-kbd-animationOffset));
+	animation-duration: var(--components-kbd-animationDuration);
+	animation-iteration-count: infinite;
+	animation-name: var(--components-kbd-animationName);
+	animation-timing-function: step-end;
+
+	&:has(.lucca-icon) {
+		--components-kbd-paddingInline: 0;
+	}
+
+	@for $index from 2 through $keysMax {
+		&:nth-of-type(#{$index}) {
+			--components-kbd-animationOffset: calc(var(--commons-animations-durations-fast) / 2 * #{$index - 1});
+		}
+	}
+
+	&:last-of-type {
+		--components-kbd-animationName: var(--components-kbd-last-animationName);
+	}
+
+	@at-root ($atRoot) {
+		@keyframes kbdHold {
+			#{$holdPress},
+			#{$holdRelease} {
+				box-shadow: inset 0 0 0 var(--palettes-neutral-200);
+				inset-block-start: 1px;
+			}
+
+			#{$holdEnd} {
+				box-shadow: inset 0 -1px 0 var(--palettes-neutral-200);
+				inset-block-start: 0;
+			}
+		}
+
+		@keyframes kbdTap {
+			#{$tapStart},
+			#{$tapEnd} {
+				box-shadow: inset 0 -1px 0 var(--palettes-neutral-200);
+				inset-block-start: 0;
+			}
+
+			#{$tapPeak} {
+				box-shadow: inset 0 0 0 var(--palettes-neutral-200);
+				inset-block-start: 1px;
+			}
+		}
+	}
+}
+
+@mixin wrapper {
+	align-items: center;
+	color: var(--pr-t-color-text-subtle);
+	display: inline-flex;
+	font: var(--pr-t-font-body-S);
+	gap: var(--pr-t-spacings-25);
+	vertical-align: middle;
+	white-space: nowrap;
+
+	@for $keys from 2 through $keysMax {
+		$lastModifierOffset: calc(var(--commons-animations-durations-fast) / 2 * #{$keys - 2});
+
+		&:has(.kbd:nth-of-type(#{$keys})) .kbd {
+			--components-kbd-animationDuration: calc((var(--components-kbd-animationPause) + #{$lastModifierOffset}) / #{$holdIdle});
+		}
+	}
+}
