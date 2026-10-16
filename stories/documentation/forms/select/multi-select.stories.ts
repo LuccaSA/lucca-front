@@ -56,6 +56,7 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegalUnits: { id: number; name: string }[];
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 	groupingFn?: TreeGroupingFn<ILegume>;
+	isLegumeDisabled: (legume: ILegume) => boolean;
 } & LuMultiSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
@@ -71,6 +72,8 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 		valuesTpl: HiddenArgType,
 		panelHeaderTpl: HiddenArgType,
 		optionKey: HiddenArgType,
+		disabledOptionFn: HiddenArgType,
+		isLegumeDisabled: HiddenArgType,
 		maxValuesShown: HiddenArgType,
 		selectLegume: HiddenArgType,
 	},
@@ -361,7 +364,8 @@ export const WithPagination = generateStory({
 
 export const WithDisabledOptions = generateStory({
 	name: 'Disabled options',
-	description: 'Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l’option.',
+	description:
+		'Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l’option. Elle ne s’applique qu’au panel : pour empêcher aussi de retirer une option sélectionnée depuis le champ, utiliser `disabledOptionFn`.',
 	template: `<lu-multi-select
 	#selectRef
 	[(ngModel)]="selectedLegumes"
@@ -379,6 +383,32 @@ export const WithDisabledOptions = generateStory({
 	},
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuDisabledOptionDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+});
+
+export const WithDisabledOptionFn = generateStory({
+	name: 'Disabled options with disabledOptionFn',
+	description:
+		'L’input `disabledOptionFn` reçoit une fonction qui indique si une option est désactivée. Une option désactivée ne peut pas être cochée ni décochée dans le panel. Si elle est sélectionnée, sa chip n’a pas de bouton de suppression, elle est ignorée par la touche Retour arrière et elle est conservée quand on vide le champ. Déclarer la fonction en fonction fléchée (`isLegumeDisabled = (legume) => …`) pour qu’elle garde son `this`.',
+	template: `<lu-multi-select
+	#selectRef
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[disabledOptionFn]="isLegumeDisabled"
+	[maxValuesShown]="maxValuesShown"
+>
+	<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
+</lu-multi-select>`,
+	storyPartial: {
+		args: {
+			selectedLegumes: allLegumes.slice(0, 2),
+			isLegumeDisabled: (legume: ILegume) => legume.index % 2 === 0,
+		},
+	},
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 	},
 });
