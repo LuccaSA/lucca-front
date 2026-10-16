@@ -1,7 +1,7 @@
 import { createTestStory } from '@/helpers/stories';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { ensurePickerPanelStyles, findPanelOptions, getPanelScrollContainer, isFullyVisibleInPanel, isSelectAllOption, waitForAngular } from '@/helpers/test';
-import meta, { SelectAll, Basic, WithClue, ScrollOnOpen, Establishment } from '@/stories/forms/select/multi-select.stories';
+import meta, { SelectAll, Basic, WithClue, ScrollOnOpen, Establishment, WithDisabledOptions } from '@/stories/forms/select/multi-select.stories';
 
 export default {
 	...meta,
@@ -398,5 +398,19 @@ export const EstablishmentTEST = createTestStory(Establishment, async ({ canvasE
 		await waitFor(() => {
 			expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 		});
+	});
+});
+
+export const WithDisabledOptionsTEST = createTestStory(WithDisabledOptions, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	await step('Chips of disabled selected options cannot be killed', async () => {
+		const chips = Array.from(canvasElement.querySelectorAll<HTMLElement>('.multipleSelect-displayer-chip'));
+		const artichaut = chips.find((chip) => chip.textContent?.includes('Artichaut'));
+		const asperge = chips.find((chip) => chip.textContent?.includes('Asperge'));
+
+		await expect(artichaut?.querySelector('.chip-kill')).not.toBeNull();
+		await expect(asperge).toBeDefined();
+		await expect(asperge?.querySelector('.chip-kill')).toBeNull();
 	});
 });
