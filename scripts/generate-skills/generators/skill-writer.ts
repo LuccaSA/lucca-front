@@ -184,6 +184,13 @@ export function writeFixFile(skillsDir: string, patchVersion: string, content: s
 	return writeFile(dir, `${patchVersion.replace(/\./g, '-')}.md`, content);
 }
 
+/** Removes the content of the skill (references/, fixes/), keeping SKILL.md until it is rewritten. */
+export function clearSkillContent(skillsDir: string): void {
+	for (const dir of ['references', 'fixes']) {
+		fs.rmSync(path.join(skillRoot(skillsDir), dir), { recursive: true, force: true });
+	}
+}
+
 /** Removes the fixes/ folder before a fresh generation (stale fix files). */
 export function cleanFixesDirectory(skillsDir: string): void {
 	const dir = path.join(skillRoot(skillsDir), 'fixes');

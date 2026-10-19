@@ -285,7 +285,9 @@ scripts/generate-skills/
    ZH release ID, Storybook base URL
 2 bis. Pré-flight (preflight.ts + zh-release-guard.ts) : mineure de la branche, existence de la
    release, token Figma, IDs de release ZeroHeight — cf. « Parcours pré-flight »
-2 ter. Instantané de la skill committée (dossier temporaire), base du diff de review
+2 ter. Instantané de la skill committée (dossier temporaire), base du diff de review ; sur une
+   nouvelle mineure, `references/` et `fixes/` sont vidés (une page que la mineure n'émet plus
+   ne doit pas survivre avec le contenu de la précédente)
 3. Doc transverse        → references/documentation/<category>/   (ZH fetch)
 4. Dépréciés             → references/documentation/deprecated/deprecated.md  (ZH "Cycle de vie")
 5. Schematics            → references/migrations.md                (git collection.json, codemods cumulatifs ≤ cible)
@@ -559,11 +561,15 @@ npm run skills:generate -- --version 22.1
 
 Le commit de génération part dans la PR suivante ; le tag de patch suivant le distribue.
 
+Après un **patch**, régénérer la même mineure n'est pas obligatoire : le `SKILL.md` d'un projet sur un patch postérieur au dernier documenté le signale et continue. Le faire met `references/` au niveau du dernier patch et ajoute son `fixes/<M-m-p>.md`.
+
 ### Depuis les anciens chemins par mineure
 
 Jusqu'à `v22.1.0`, chaque mineure avait son dossier (`.github/skills/lucca-front/lucca-front-<M>-<m>/`) et une skill agrégat `lucca-front-all/` routait selon la version détectée. Ces dossiers restent lisibles dans les tags existants : un projet épinglé sur `v22.1.0` ou un SHA antérieur n'est pas affecté. Pour migrer :
 
 | Dépendance actuelle | Nouvelle dépendance |
 |---|---|
-| `LuccaSA/lucca-front/.github/skills/lucca-front/lucca-front-22-0` (ou `…/lucca-front-all` sur un projet 22.x) | `LuccaSA/lucca-front/.github/skills/lucca-front#<premier tag qui porte la skill de sa mineure>` |
-| `LuccaSA/lucca-front/.github/skills/lucca-front/lucca-front-21-<m>` (ou `…/lucca-front-all` sur un projet 21.x) | le même chemin, épinglé : `…/lucca-front-21-<m>#v22.1.0`, en attendant une skill 21.x sur `v21.4-lts` |
+| `LuccaSA/lucca-front/.github/skills/lucca-front/lucca-front-<M>-<m>` (ou `…/lucca-front-all`), projet en 22.0 ou avant | le même chemin, épinglé : `…/lucca-front-<M>-<m>#v22.1.0` (ou `…/lucca-front-all#v22.1.0`) |
+| projet monté en 22.1 ou après | `LuccaSA/lucca-front/.github/skills/lucca-front#<premier tag qui porte la skill de sa mineure>` |
+
+La skill 22.0 en dossier unique n'est portée par aucun tag fiable : la 22.1 la remplacera sur `master` avant le prochain tag. Une skill 21.x en dossier unique pourra être générée sur `v21.4-lts`.

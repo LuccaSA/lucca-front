@@ -68,6 +68,7 @@ import {
 	writeFigmaSkill,
 	figmaSkillExists,
 	writeSkillManifest,
+	clearSkillContent,
 	writeSharedType,
 	SKILL_NAME,
 	readSkillManifest,
@@ -386,6 +387,11 @@ async function main(): Promise<void> {
 
 	// Taken before anything is written: the review changelog diffs the run's output against it.
 	const previousSkill = flags.dryRun || flags.component ? null : snapshotSkill(config.output.skillsDir, committed);
+	// The writers only clean what they regenerate: on a new minor, a page the minor no longer emits
+	// would survive with the previous minor's content, and SKILL.md §6 would still list it.
+	if (previousSkill && committed?.minor !== flags.versions[0]) {
+		clearSkillContent(config.output.skillsDir);
+	}
 
 	// Phase 3 — every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
 	// the confirmed latest online. Aborts before any heavy work if an unpinned, superseded minor is
@@ -584,6 +590,11 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 
 	const touched: MinorResolution[] = [];
 	for (const [minorKey, items] of byVersion) {
+		const refusal = refuseMinorForThisBranch(minorKey, readSkillManifest(config.output.skillsDir)?.minor ?? null);
+		if (refusal) {
+			console.error(`❌ ${refusal}`);
+			process.exit(1);
+		}
 		const resolution = resolveMinorVersion(minorKey);
 		const version = resolution.version;
 		const componentSlugs = new Set(items.filter((f) => (f.scope ?? 'component') === 'component').map((f) => f.slug));
