@@ -277,20 +277,21 @@ describe(`${LuTooltipTriggerDirective.name}: trigger disabled while focused`, ()
 });
 
 describe(`${LuTooltipTriggerDirective.name}: trigger hidden from under the pointer`, () => {
-	// happy-dom's ResizeObserver never notifies: this one hands its callback over to the test
-	let notifyResize: (() => void) | undefined;
+	// the test environment's IntersectionObserver never notifies: this one hands its callback over to the test
+	let notifyIntersection: ((isIntersecting: boolean) => void) | undefined;
 
 	beforeEach(() => {
-		notifyResize = undefined;
+		notifyIntersection = undefined;
 		vi.stubGlobal(
-			'ResizeObserver',
+			'IntersectionObserver',
 			class {
-				constructor(callback: () => void) {
-					notifyResize = callback;
+				constructor(callback: (entries: Partial<IntersectionObserverEntry>[]) => void) {
+					notifyIntersection = (isIntersecting) => callback([{ isIntersecting }]);
 				}
 				observe() {}
+				unobserve() {}
 				disconnect() {
-					notifyResize = undefined;
+					notifyIntersection = undefined;
 				}
 			},
 		);
@@ -301,34 +302,61 @@ describe(`${LuTooltipTriggerDirective.name}: trigger hidden from under the point
 		TestBed.inject(OverlayContainer).getContainerElement().remove();
 	});
 
-	it('closes when its trigger is hidden while displayed, as the CDK drag does with the dragged element', fakeAsync(() => {
+	function hover(fixture: ComponentFixture<PlainHostComponent>): HTMLElement {
+		const host = fixture.nativeElement.querySelector('span') as HTMLElement;
+		host.dispatchEvent(new MouseEvent('mouseenter'));
+		tick(150);
+		return host;
+	}
+
+	it('closes when its trigger is hidden while displayed', fakeAsync(() => {
 		const fixture = TestBed.createComponent(PlainHostComponent);
 		fixture.detectChanges();
 		const directive = directiveOf(fixture);
-		const host = fixture.nativeElement.querySelector('span') as HTMLElement;
-
-		host.dispatchEvent(new MouseEvent('mouseenter'));
-		tick(150);
+		const host = hover(fixture);
 		expect(directive.overlayRef?.hasAttached()).toBe(true);
 
 		// no mouseleave: the trigger leaves from under a still pointer
 		host.style.display = 'none';
-		notifyResize?.();
+		notifyIntersection?.(false);
 		tick(150);
 		expect(directive.overlayRef?.hasAttached()).toBe(false);
 	}));
 
-	it('stays open on a resize that leaves its trigger visible', fakeAsync(() => {
+	it('stays open on a notification that leaves its trigger visible', fakeAsync(() => {
 		const fixture = TestBed.createComponent(PlainHostComponent);
 		fixture.detectChanges();
 		const directive = directiveOf(fixture);
-		const host = fixture.nativeElement.querySelector('span') as HTMLElement;
+		hover(fixture);
 
-		host.dispatchEvent(new MouseEvent('mouseenter'));
+		notifyIntersection?.(true);
+		tick(150);
+		expect(directive.overlayRef?.hasAttached()).toBe(true);
+	}));
+
+	it('closes when its trigger is moved out of the viewport while displayed, as the CDK drag does with the dragged element', fakeAsync(() => {
+		const fixture = TestBed.createComponent(PlainHostComponent);
+		fixture.detectChanges();
+		const directive = directiveOf(fixture);
+		hover(fixture);
+
+		// still rendered, only moved away
+		notifyIntersection?.(false);
+		tick(150);
+		expect(directive.overlayRef?.hasAttached()).toBe(false);
+	}));
+
+	it('opens again once its hidden trigger is shown and hovered', fakeAsync(() => {
+		const fixture = TestBed.createComponent(PlainHostComponent);
+		fixture.detectChanges();
+		const directive = directiveOf(fixture);
+		const host = hover(fixture);
+		host.style.display = 'none';
+		notifyIntersection?.(false);
 		tick(150);
 
-		notifyResize?.();
-		tick(150);
+		host.style.display = '';
+		hover(fixture);
 		expect(directive.overlayRef?.hasAttached()).toBe(true);
 	}));
 
@@ -339,26 +367,32 @@ describe(`${LuTooltipTriggerDirective.name}: trigger hidden from under the point
 		const host = fixture.nativeElement.querySelector('span') as HTMLElement;
 
 		host.style.display = 'none';
-		host.dispatchEvent(new MouseEvent('mouseenter'));
-		tick(150);
+		hover(fixture);
 		expect(directive.overlayRef?.hasAttached() ?? false).toBe(false);
 	}));
 
-	it('opens again once its hidden trigger is shown and hovered', fakeAsync(() => {
+	it('opens once a trigger hidden at the opening is shown and hovered again, with no mouseleave in between', fakeAsync(() => {
 		const fixture = TestBed.createComponent(PlainHostComponent);
 		fixture.detectChanges();
 		const directive = directiveOf(fixture);
 		const host = fixture.nativeElement.querySelector('span') as HTMLElement;
 
-		host.dispatchEvent(new MouseEvent('mouseenter'));
-		tick(150);
 		host.style.display = 'none';
-		notifyResize?.();
-		tick(150);
+		hover(fixture);
 
 		host.style.display = '';
-		host.dispatchEvent(new MouseEvent('mouseenter'));
-		tick(150);
+		hover(fixture);
 		expect(directive.overlayRef?.hasAttached()).toBe(true);
+	}));
+
+	it('stops watching its trigger when the overlay is detached without closing the tooltip, as on scroll', fakeAsync(() => {
+		const fixture = TestBed.createComponent(PlainHostComponent);
+		fixture.detectChanges();
+		const directive = directiveOf(fixture);
+		hover(fixture);
+		expect(notifyIntersection).toBeDefined();
+
+		directive.overlayRef?.detach();
+		expect(notifyIntersection).toBeUndefined();
 	}));
 });

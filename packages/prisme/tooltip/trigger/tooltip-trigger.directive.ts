@@ -170,7 +170,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	#focusLeftToPane: Element | null = null;
 
 	// watches the trigger while the tooltip is displayed, see #closeWhenTriggerHidden
-	#triggerVisibilityObserver?: ResizeObserver;
+	#triggerVisibilityObserver?: IntersectionObserver;
 
 	constructor() {
 		this.#destroyRef.onDestroy(() => (this.#destroyed = true));
@@ -421,6 +421,11 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			.detachments()
 			.pipe(takeUntilDestroyed(this.#destroyRef))
 			.subscribe({
+				// every detachment, including the CDK's own (close on scroll, dispose on navigation)
+				next: () => {
+					this.#triggerVisibilityObserver?.disconnect();
+					this.#triggerVisibilityObserver = undefined;
+				},
 				complete: () => {
 					if (this.overlayRef === overlayRef) {
 						delete this.overlayRef;
@@ -448,6 +453,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		const trigger = this.#resolveTriggerAnchorElement() ?? this.#host.nativeElement;
 		// A late opening (enter delay, debounced action) must not show a tooltip for a trigger that is gone meanwhile
 		if (!trigger.checkVisibility()) {
+			// forget the rejected opening, or hovering the trigger once shown would write the same action and open nothing
+			this.#action.set(null);
 			return;
 		}
 		const position = this.legacyPositionBuilder();
@@ -486,15 +493,19 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		this.#closeWhenTriggerHidden(trigger);
 	}
 
-	// An element that leaves from under a still pointer receives no mouseleave. A trigger hidden or
-	// detached while its tooltip is displayed — e.g. the element dragged by the CDK, which hides it
-	// for the whole drag — would otherwise keep the tooltip open where the trigger was.
-	// Hiding or detaching an element empties its box, which notifies the ResizeObserver.
+	// An element that leaves from under a still pointer receives no mouseleave. A trigger hidden,
+	// detached or moved away while its tooltip is displayed would otherwise keep the tooltip open
+	// where the trigger was: e.g. the element dragged by the CDK, which it moves out of the viewport
+	// (`position: fixed; left: -999em`) for the whole drag, so that it stays rendered.
+	// Unlike a ResizeObserver, an IntersectionObserver also notifies for an inline trigger, whose content
+	// box is always empty, and for a trigger moved without being resized.
+	// Disconnected on every detachment of the overlay, see prepareOverlay.
 	#closeWhenTriggerHidden(trigger: HTMLElement): void {
 		this.#triggerVisibilityObserver?.disconnect();
-		this.#triggerVisibilityObserver = new ResizeObserver(() => {
-			// the box size alone would also close the tooltip of a `display: contents` trigger, which has no box
-			if (!trigger.checkVisibility()) {
+		this.#triggerVisibilityObserver = new IntersectionObserver((entries) => {
+			// A `display: contents` trigger never intersects: it has no box of its own
+			const outOfViewport = !entries.at(-1)?.isIntersecting && trigger.getClientRects().length > 0;
+			if (outOfViewport || !trigger.checkVisibility()) {
 				this.#action.set(null);
 				this.closeTooltip();
 			}
@@ -507,8 +518,6 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			this.overlayRef.detach();
 		}
 		this.#effectRef?.destroy();
-		this.#triggerVisibilityObserver?.disconnect();
-		this.#triggerVisibilityObserver = undefined;
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
