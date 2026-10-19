@@ -26,7 +26,7 @@ export default {
 			control: {
 				type: 'object',
 			},
-			description: "Restreint les utilisateurs à ceux accessibles via ces opérations, dans le périmètre de l'appInstanceId",
+			description: "[Deprecated] Remplacé par <code>uniqueOperationIds</code>. Restreint les utilisateurs à ceux accessibles via ces opérations, dans le périmètre de l'appInstanceId",
 			table: { category: 'inputs' },
 		},
 		uniqueOperationIds: {
@@ -40,7 +40,7 @@ export default {
 			control: {
 				type: 'number',
 			},
-			description: "Instance d'application dans laquelle les operationIds sont résolus ; sans effet avec uniqueOperationIds",
+			description: "[Deprecated] Remplacé par <code>uniqueOperationIds</code>. Instance d'application dans laquelle les operationIds sont résolus ; sans effet avec uniqueOperationIds",
 			table: { category: 'inputs' },
 		},
 	},
