@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.priorityLevels {
+.priorityLevel {
 	@layer components {
 		@include vars;
 		@include component;

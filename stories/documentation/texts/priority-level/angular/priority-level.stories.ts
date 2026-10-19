@@ -1,10 +1,10 @@
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
-import { PRIORITY_LEVELS, PRIORITY_LEVELS_SIZES, PriorityLevelsComponent, PriorityLevelsSize } from '@lucca-front/ng/priority-levels';
+import { PRIORITY_LEVELS, PRIORITY_LEVEL_SIZES, PriorityLevelComponent, PriorityLevelSize } from '@lucca-front/ng/priority-level';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
-	title: 'Documentation/Texts/Priority levels/Angular',
-	component: PriorityLevelsComponent,
+	title: 'Documentation/Texts/Priority level/Angular',
+	component: PriorityLevelComponent,
 	argTypes: {
 		level: {
 			options: PRIORITY_LEVELS,
@@ -13,7 +13,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		size: {
-			options: setStoryOptions(PRIORITY_LEVELS_SIZES),
+			options: setStoryOptions(PRIORITY_LEVEL_SIZES),
 			control: { type: 'select' },
 			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs' },
@@ -25,11 +25,11 @@ export default {
 		},
 	},
 	render: (args, { argTypes }) => ({
-		template: `<lu-priority-levels${generateInputs(args, argTypes)} />`,
+		template: `<lu-priority-level${generateInputs(args, argTypes)} />`,
 	}),
 } as Meta;
 
-export const Template: StoryObj<Omit<PriorityLevelsComponent, 'size'> & { size: PriorityLevelsSize | '' }> = {
+export const Template: StoryObj<Omit<PriorityLevelComponent, 'size'> & { size: PriorityLevelSize | '' }> = {
 	args: {
 		level: 1,
 		size: '',
