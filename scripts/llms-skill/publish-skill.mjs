@@ -4,7 +4,8 @@ import { dirname, join, posix, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
-const skillsRoot = join(root, '.github/skills/lucca-front');
+const skillDir = join(root, '.github/skills/lucca-front');
+const manifestPath = join(root, '.github/skills/_lucca-front/versions.json');
 
 export const STORYBOOK_URL = 'https://lucca-front.lucca.io';
 export const PRISME_URL = 'https://prisme.lucca.io';
@@ -14,20 +15,10 @@ const TARGETS = {
 	npm: { outDir: 'dist/ng', pack: true, linkRemoteOnly: true },
 };
 
-/** Documented minor whose skill covers `version` (a technical minor resolves to the minor covering it), or null. */
-export function resolveSkillMinor(manifest, version) {
+/** Whether the committed skill covers `version`: its own minor, or a technical minor it covers. */
+export function skillCovers(manifest, version) {
 	const minor = /^v?(\d+\.\d+)\./.exec(version)?.[1];
-	if (!minor) {
-		return null;
-	}
-	if (manifest.minors[minor]) {
-		return minor;
-	}
-	return Object.keys(manifest.minors).find((key) => manifest.minors[key].technicalMinors?.[minor]) ?? null;
-}
-
-export function skillDirName(minor) {
-	return `lucca-front-${minor.replace('.', '-')}`;
+	return !!minor && (manifest.minor === minor || !!manifest.technicalMinors?.[minor]);
 }
 
 /** Design, Figma and UX-writing content follows ZeroHeight and Figma, not the code version: the npm package links it on the deploy. */
@@ -135,15 +126,13 @@ function publish(targetName) {
 	rmSync(join(outDir, 'llms.txt'), { force: true });
 	rmSync(join(outDir, 'llms'), { recursive: true, force: true });
 
-	const manifest = JSON.parse(readFileSync(join(skillsRoot, '_versions.json'), 'utf8'));
+	const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
 	const tag = currentTag();
 	const ref = tag ?? 'master';
-	const version = tag ?? `${manifest.latest}.0`;
-	const minor = resolveSkillMinor(manifest, version);
-	const skillDir = minor && join(skillsRoot, skillDirName(minor));
-	if (!skillDir || !existsSync(join(skillDir, 'SKILL.md'))) {
+	const version = tag ?? `${manifest.minor}.0`;
+	if (!skillCovers(manifest, version) || !existsSync(join(skillDir, 'SKILL.md'))) {
 		console.log(
-			`::warning::[llms] no generated skill covers ${version} (.github/skills/lucca-front/_versions.json): ${target.outDir} ships no LLM documentation.`,
+			`::warning::[llms] the committed skill documents ${manifest.minor}, not ${version} (.github/skills/_lucca-front/versions.json): ${target.outDir} ships no LLM documentation.`,
 		);
 		return;
 	}
@@ -156,7 +145,7 @@ function publish(targetName) {
 	} else {
 		cpSync(skillDir, join(outDir, 'llms'), { recursive: true });
 	}
-	writeFileSync(join(outDir, 'llms.txt'), renderIndex(minor, files, { ref, linkRemoteOnly: target.linkRemoteOnly }));
+	writeFileSync(join(outDir, 'llms.txt'), renderIndex(manifest.minor, files, { ref, linkRemoteOnly: target.linkRemoteOnly }));
 
 	if (target.pack) {
 		const packed = packedFiles(outDir);
@@ -165,9 +154,7 @@ function publish(targetName) {
 			throw new Error(`${missing.join(', ')} written to ${target.outDir} but absent from the npm tarball, check "files" / .npmignore`);
 		}
 	}
-	console.log(
-		`[llms] ${version} → skill ${skillDirName(minor)} (${shipped}/${files.length} files shipped) → ${target.outDir}/llms.txt + llms/`,
-	);
+	console.log(`[llms] ${version} → skill ${manifest.minor} (${shipped}/${files.length} files shipped) → ${target.outDir}/llms.txt + llms/`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

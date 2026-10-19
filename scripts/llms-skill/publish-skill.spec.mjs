@@ -3,40 +3,35 @@ import { join, posix, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
-import {
-	deployedSkillUrl,
-	isRemoteOnly,
-	RELATIVE_MD_PATH,
-	renderIndex,
-	resolveSkillMinor,
-	rewriteRemoteLinks,
-	skillDirName,
-} from './publish-skill.mjs';
+import { deployedSkillUrl, isRemoteOnly, RELATIVE_MD_PATH, renderIndex, rewriteRemoteLinks, skillCovers } from './publish-skill.mjs';
 
-const skillsRoot = resolve(fileURLToPath(import.meta.url), '..', '..', '..', '.github/skills/lucca-front');
-const manifest = JSON.parse(readFileSync(join(skillsRoot, '_versions.json'), 'utf8'));
+const repoRoot = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
+const skillDir = join(repoRoot, '.github/skills/lucca-front');
+const manifest = JSON.parse(readFileSync(join(repoRoot, '.github/skills/_lucca-front/versions.json'), 'utf8'));
 
-describe('resolveSkillMinor', () => {
+describe('skillCovers', () => {
+	const skill22 = { minor: '22.0' };
+	const skill21 = { minor: '21.3', technicalMinors: { 21.4: { reason: 'compatibilité Angular 22' } } };
+
 	it.each`
-		version           | expected
-		${'v22.0.5'}      | ${'22.0'}
-		${'22.0.0'}       | ${'22.0'}
-		${'v21.4.2'}      | ${'21.3'}
-		${'v22.1.0-rc.1'} | ${null}
-		${'v99.0.0'}      | ${null}
-		${'master'}       | ${null}
-	`('resolves $version to $expected', ({ version, expected }) => {
-		expect(resolveSkillMinor(manifest, version)).toBe(expected);
+		skill      | version           | expected
+		${skill22} | ${'v22.0.5'}      | ${true}
+		${skill22} | ${'22.0.0'}       | ${true}
+		${skill22} | ${'v22.1.0-rc.1'} | ${false}
+		${skill22} | ${'v99.0.0'}      | ${false}
+		${skill22} | ${'master'}       | ${false}
+		${skill21} | ${'v21.4.2'}      | ${true}
+		${skill21} | ${'v21.3.1'}      | ${true}
+	`('$version against the $skill.minor skill: $expected', ({ skill, version, expected }) => {
+		expect(skillCovers(skill, version)).toBe(expected);
 	});
 
-	it('resolves the manifest latest minor to a committed skill', () => {
-		const minor = resolveSkillMinor(manifest, `${manifest.latest}.0`);
-
-		expect(readdirSync(join(skillsRoot, skillDirName(minor)))).toContain('SKILL.md');
+	it('is given a manifest whose minor the committed skill documents', () => {
+		expect(skillCovers(manifest, `${manifest.minor}.0`)).toBe(true);
+		expect(readdirSync(skillDir)).toContain('SKILL.md');
 	});
 });
 
-const skillDir = join(skillsRoot, skillDirName(manifest.latest));
 const files = readdirSync(skillDir, { recursive: true, withFileTypes: true })
 	.filter((entry) => entry.isFile())
 	.map((entry) => relative(skillDir, join(entry.parentPath, entry.name)).split('\\').join('/'));
@@ -46,13 +41,13 @@ describe('renderIndex', () => {
 	const localLinks = (index) => [...index.matchAll(/\]\(llms\/([^)]+)\)/g)].map(([, path]) => path);
 
 	it('links only files that exist in the skill', () => {
-		const links = localLinks(renderIndex(manifest.latest, files, { ref: 'master', linkRemoteOnly: false }));
+		const links = localLinks(renderIndex(manifest.minor, files, { ref: 'master', linkRemoteOnly: false }));
 
 		expect(links.filter((path) => !files.includes(path))).toEqual([]);
 	});
 
 	it('links the guide and each component entry once', () => {
-		const links = localLinks(renderIndex(manifest.latest, files, { ref: 'master', linkRemoteOnly: false }));
+		const links = localLinks(renderIndex(manifest.minor, files, { ref: 'master', linkRemoteOnly: false }));
 
 		expect(links).toContain('SKILL.md');
 		expect(links).toContain('references/components/button/button.md');
@@ -61,7 +56,7 @@ describe('renderIndex', () => {
 	});
 
 	it('links remote-only files on the deploy of the ref when they are not shipped', () => {
-		const index = renderIndex(manifest.latest, files, { ref: 'v22.0.5', linkRemoteOnly: true });
+		const index = renderIndex(manifest.minor, files, { ref: 'v22.0.5', linkRemoteOnly: true });
 
 		expect(localLinks(index).filter(isRemoteOnly)).toEqual([]);
 		expect(index).toContain(`](${remote}/references/documentation/`);
@@ -82,7 +77,7 @@ describe('rewriteRemoteLinks', () => {
 		expect(rewriteRemoteLinks(content, file, remote)).toBe(expected);
 	});
 
-	it('leaves every relative path of a shipped file of the latest skill on a shipped file', () => {
+	it('leaves every relative path of a shipped file of the committed skill on a shipped file', () => {
 		const shipped = files.filter((file) => !isRemoteOnly(file));
 		const dangling = shipped
 			.filter((file) => file.endsWith('.md'))

@@ -210,7 +210,7 @@ const UNPUBLISHED_TAGS = new Set(['v21.1.5', 'v21.2.3']);
 //     CSS vars…), so each gets a `fixes/<tech-M-m-p>.md` in the covering minor's skill, generated
 //     from git exactly like the covering minor's own fixes (resolveMinorVersion exposes the
 //     technical patch tags on MinorResolution.technicalMinors).
-//   - the covering minor's SKILL.md and the aggregate router declare the technical minor, and the
+//   - the covering minor's SKILL.md and the skill manifest declare the technical minor, and the
 //     coherence guard lets a project on ANY listed `<tech>.x` patch through.
 //
 // Key format: "major.minor" (the technical minor) → its covering minor + human-readable reason.
