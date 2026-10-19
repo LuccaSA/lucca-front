@@ -248,6 +248,7 @@ export default {
 		${actionButton}
 	</ng-container>`
 				: '';
+		const resultsCount = args['resultsCount'] != null ? ` [resultsCount]="${args['resultsCount']}"` : '';
 		const filterViews = [
 			{ id: 1, name: 'Tous' },
 			{ id: 2, name: 'Approuvés' },
@@ -264,9 +265,8 @@ export default {
 				selectedFilterView: filterViews[0],
 				renameView: (view: (typeof filterViews)[number]) => args['renameView']?.(view),
 				deleteView: (view: (typeof filterViews)[number]) => args['deleteView']?.(view),
-				resultsCount: args['resultsCount'] ?? null,
 			},
-			template: `<lu-filter-bar${args['manualApply'] ? ' manualApply' : ''} [resultsCount]="resultsCount">
+			template: `<lu-filter-bar${args['manualApply'] ? ' manualApply' : ''}${resultsCount}>
 	${views}
 	<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false" />
