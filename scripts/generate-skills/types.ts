@@ -429,8 +429,10 @@ export interface PatchManifestEntry {
 	generatedAt: string;
 }
 
-/** One generated minor skill. references/ documents `latestPatch`; fixes/ covers the others. */
-export interface MinorManifestEntry {
+/** The minor the committed skill documents. references/ documents `latestPatch`; fixes/ covers the others. */
+export interface SkillManifest {
+	/** The documented minor, e.g. "22.0". */
+	minor: string;
 	/** Latest published patch of the minor, e.g. "21.2.5" — what references/ documents. */
 	latestPatch: string;
 	tag: string;
@@ -451,10 +453,4 @@ export interface TechnicalMinorManifestEntry {
 	latestPatch: string;
 	/** Every published patch of the technical minor, ascending. Patches > .0 have a fixes/ file. */
 	patches: Record<string, PatchManifestEntry>;
-}
-
-export interface VersionManifest {
-	/** Latest generated minor, e.g. "21.3". */
-	latest: string;
-	minors: Record<string, MinorManifestEntry>;
 }

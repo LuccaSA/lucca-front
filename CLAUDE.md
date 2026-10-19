@@ -92,5 +92,5 @@ Attentes détaillées côté relecture : [contributing.md](contributing.md#pull-
 ## Docs & skills
 
 - `docs/*.md` — documents de conception internes de certains composants.
-- `.github/skills/` — skills agents générés (changelogs par release, infos de dépréciation), produits par `npm run skills:generate` depuis `scripts/generate-skills/`.
+- `.github/skills/lucca-front/` — skill agent du Design System, générée par `npm run skills:generate` depuis `scripts/generate-skills/` (métadonnées du générateur dans `.github/skills/_lucca-front/`). Un seul dossier, sans version dans son nom : la version est le tag git que les projets consommateurs épinglent avec APM. Les autres dossiers de `.github/skills/` sont écrits à la main.
 - La référence du Design System vit sur zeroheight (Prisme).

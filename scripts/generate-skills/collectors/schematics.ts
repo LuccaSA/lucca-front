@@ -116,7 +116,7 @@ export function collectSchematics(skillsDir: string, version: VersionConfig): { 
 	}
 	md += `\n`;
 
-	const result = writeMigrationsPage(skillsDir, version, md);
+	const result = writeMigrationsPage(skillsDir, md);
 	console.log(`     ✅ migrations.md — ${result.status} (${names.length} codemod(s), ${nouveaux.length} nouveau(x))`);
 	return { written: 1, errors: 0 };
 }

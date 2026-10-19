@@ -37,6 +37,26 @@ export class PreflightAbort extends Error {
 	}
 }
 
+/**
+ * Whether this branch may (re)generate `requested` (e.g. "22.1") over the skill it already carries,
+ * which documents `committed` (null before the first generation). Returns the refusal shown to the
+ * operator, or null when the run may proceed.
+ *
+ * The skill is a single folder rewritten in place: generating a minor overwrites the one committed
+ * here, and the next tag cut from this branch ships it to every consumer pinned on that tag.
+ */
+export function refuseMinorForThisBranch(requested: string, committed: string | null): string | null {
+	if (committed === null) return null;
+	const [reqMajor, reqMinor] = requested.split('.').map(Number);
+	const [comMajor, comMinor] = committed.split('.').map(Number);
+	const isOlder = reqMajor < comMajor || (reqMajor === comMajor && reqMinor < comMinor);
+	if (!isOlder) return null;
+	return (
+		`--version ${requested} : cette branche porte la skill ${committed}, la générer ici l'écraserait et le prochain tag la livrerait aux projets en ${committed}. ` +
+		`Génère ${requested} sur la branche de maintenance de sa majeure (ex : v21.4-lts pour la 21.x).`
+	);
+}
+
 /** The npm package whose publication proves a tag actually shipped. */
 const NG_PACKAGE_NAME = '@lucca-front/ng';
 

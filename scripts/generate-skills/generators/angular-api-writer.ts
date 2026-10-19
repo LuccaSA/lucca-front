@@ -140,5 +140,5 @@ export function writeAngularApiPage(skillsDir: string, version: VersionConfig, a
 		`(package sans composant, ou symbole éloigné des composants du package). ` +
 		`Extraits du code source au tag \`${version.tag}\` (JSDoc \`@deprecated\` inclus).\n\n`;
 
-	return writeToolsPage(skillsDir, version, 'angular-api.md', header + sections.join('\n\n') + '\n');
+	return writeToolsPage(skillsDir, 'angular-api.md', header + sections.join('\n\n') + '\n');
 }
