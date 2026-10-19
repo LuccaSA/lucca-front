@@ -169,6 +169,9 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	// pane the focus moved into when it last left this trigger, or null
 	#focusLeftToPane: Element | null = null;
 
+	// watches the trigger while the tooltip is displayed, see #closeWhenTriggerHidden
+	#triggerVisibilityObserver?: ResizeObserver;
+
 	constructor() {
 		this.#destroyRef.onDestroy(() => (this.#destroyed = true));
 
@@ -442,6 +445,11 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		if (this.#destroyed || this.overlayRef?.hasAttached()) {
 			return;
 		}
+		const trigger = this.#resolveTriggerAnchorElement() ?? this.#host.nativeElement;
+		// A late opening (enter delay, debounced action) must not show a tooltip for a trigger that is gone meanwhile
+		if (!trigger.checkVisibility()) {
+			return;
+		}
 		const position = this.legacyPositionBuilder();
 		const overlayRef = this.prepareOverlay();
 		overlayRef.updatePositionStrategy(position);
@@ -474,6 +482,24 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.#action.set('close'));
 		ref.instance.mouseEnter$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.#action.set('open'));
+
+		this.#closeWhenTriggerHidden(trigger);
+	}
+
+	// An element that leaves from under a still pointer receives no mouseleave. A trigger hidden or
+	// detached while its tooltip is displayed — e.g. the element dragged by the CDK, which hides it
+	// for the whole drag — would otherwise keep the tooltip open where the trigger was.
+	// Hiding or detaching an element empties its box, which notifies the ResizeObserver.
+	#closeWhenTriggerHidden(trigger: HTMLElement): void {
+		this.#triggerVisibilityObserver?.disconnect();
+		this.#triggerVisibilityObserver = new ResizeObserver(() => {
+			// the box size alone would also close the tooltip of a `display: contents` trigger, which has no box
+			if (!trigger.checkVisibility()) {
+				this.#action.set(null);
+				this.closeTooltip();
+			}
+		});
+		this.#triggerVisibilityObserver.observe(trigger);
 	}
 
 	private closeTooltip(): void {
@@ -481,6 +507,8 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 			this.overlayRef.detach();
 		}
 		this.#effectRef?.destroy();
+		this.#triggerVisibilityObserver?.disconnect();
+		this.#triggerVisibilityObserver = undefined;
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
