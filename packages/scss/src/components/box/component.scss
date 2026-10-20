@@ -13,6 +13,45 @@
 	}
 
 	@at-root ($atRoot) {
+		.box-header {
+			align-items: center;
+			display: flex;
+			gap: var(--components-box-header-gap);
+			margin-block-end: var(--components-box-header-marginBlockEnd);
+		}
+
+		.box-header-text {
+			display: flex;
+			flex-direction: column;
+			min-inline-size: 0;
+		}
+
+		.box-header-title {
+			color: var(--pr-t-color-text-heading);
+			font: var(--components-box-title-font);
+		}
+
+		.box-header-description {
+			color: var(--pr-t-color-text-subtle);
+			font: var(--components-box-description-font);
+			margin: 0;
+		}
+
+		.box-illustrations {
+			display: grid;
+			inset-block-end: 0;
+			inset-inline-end: 0;
+			place-content: center;
+			position: absolute;
+		}
+
+		.box-illustrations-back,
+		.box-illustrations-front {
+			block-size: var(--components-box-illustrations-height);
+			grid-area: 1 / 1;
+			inline-size: var(--components-box-illustrations-width);
+		}
+
 		.box-close {
 			position: absolute;
 			font-size: var(--pr-t-font-body-M-fontSize);

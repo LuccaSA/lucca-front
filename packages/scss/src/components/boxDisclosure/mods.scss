@@ -1,0 +1,15 @@
+@mixin neutral {
+	--components-boxDisclosure-background: var(--pr-t-elevation-surface-default);
+}
+
+@mixin sunken {
+	--components-boxDisclosure-background: var(--pr-t-elevation-surface-sunken);
+}
+
+@mixin fancyLight {
+	--components-boxDisclosure-background: var(--palettes-50, var(--palettes-product-50));
+}
+
+@mixin fancyDark {
+	--components-boxDisclosure-background: var(--palettes-100, var(--palettes-product-100));
+}

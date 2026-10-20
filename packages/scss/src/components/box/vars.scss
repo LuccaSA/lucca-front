@@ -3,6 +3,21 @@
 	--components-box-margin: 0 0 var(--pr-t-spacings-200);
 	--components-box-padding: var(--pr-t-spacings-300);
 	--components-box-borderRadius: var(--pr-t-border-radius-structure);
+	--components-box-header-gap: var(--pr-t-spacings-150);
+	--components-box-header-marginBlockEnd: var(--pr-t-spacings-200);
+	--components-box-title-font: var(--pr-t-font-heading-4);
+	--components-box-description-font: var(--pr-t-font-body-M);
+	--components-box-illustrations-width: 86px;
+	--components-box-illustrations-height: 72px;
+	--components-box-bubble-primary-light: var(--palettes-assets-primary-light);
+	--components-box-bubble-primary-dark: var(--palettes-assets-primary-dark);
+	--components-box-bubble-secondary-light: var(--palettes-assets-secondary-light);
+	--components-box-bubble-secondary-dark: var(--palettes-assets-secondary-lighter);
+	--components-box-bubble-brand-light: var(--palettes-assets-brand-dark);
+	--components-box-bubble-brand-dark: var(--palettes-assets-brand-lighter);
 	--components-box-toggle-arrow-size: 0.8rem;
 	--components-box-toggle-arrow-left: 2.5rem;
+	--palettes-assets-primary: var(--components-box-bubble-primary-light);
+	--palettes-assets-secondary: var(--components-box-bubble-secondary-light);
+	--palettes-assets-brand: var(--components-box-bubble-brand-light);
 }
