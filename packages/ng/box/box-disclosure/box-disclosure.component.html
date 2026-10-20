@@ -1,0 +1,17 @@
+<details class="boxDisclosure" [class]="themeClasses()" [open]="open()" (toggle)="onToggle($event)">
+	<summary class="boxDisclosure-summary">
+		@if (bubbleIcon(); as bubbleIcon) {
+			<lu-bubble-icon class="boxDisclosure-summary-icon" [icon]="bubbleIcon" />
+		}
+		<span class="boxDisclosure-summary-text">
+			<span class="boxDisclosure-summary-title"><ng-container *luPortal="heading()" /></span>
+			@if (description(); as description) {
+				<span class="boxDisclosure-summary-description"><ng-container *luPortal="description" /></span>
+			}
+		</span>
+		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
+	</summary>
+	<div class="boxDisclosure-details">
+		<ng-content />
+	</div>
+</details>
