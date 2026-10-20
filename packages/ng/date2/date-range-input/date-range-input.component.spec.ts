@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -539,6 +539,59 @@ describe('DateRangeInputComponent', () => {
 
 			// Assert
 			expect(formControl.value).toEqual({ end: new Date(2025, 5, 20), scope: 'day' });
+		});
+	});
+
+	describe('touched state', () => {
+		// The calendar is rendered in the overlay container, outside of the fixture
+		function getDayButton(): HTMLButtonElement {
+			return document.querySelector('.calendar-table-body-row-cell-action:not([aria-disabled])') as HTMLButtonElement;
+		}
+
+		it('should mark the control as touched when the focus leaves the inputs', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null, Validators.required);
+			const fixture = createFormControlHost(formControl);
+			const startInput = getInput(fixture, 'start');
+
+			// Act
+			startInput.focus();
+			startInput.blur();
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.touched).toBe(true);
+		});
+
+		it('should not mark the control as touched when the focus moves from the start input to the end input', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null, Validators.required);
+			const fixture = createFormControlHost(formControl);
+
+			// Act
+			getInput(fixture, 'start').focus();
+			getInput(fixture, 'end').focus();
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.touched).toBe(false);
+		});
+
+		it('should not mark the control as touched when the focus moves from the input to the calendar', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null, Validators.required);
+			const fixture = createFormControlHost(formControl);
+			const startInput = getInput(fixture, 'start');
+			startInput.focus();
+			startInput.click();
+			fixture.detectChanges();
+
+			// Act
+			getDayButton().focus();
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.touched).toBe(false);
 		});
 	});
 
