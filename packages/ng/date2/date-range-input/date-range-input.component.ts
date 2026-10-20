@@ -132,6 +132,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	readonly inputFocused = signal(false);
 
+	readonly panelOpen = signal(false);
+
 	readonly editedField = signal<-1 | 0 | 1>(-1);
 
 	readonly highlightedField = signal<-1 | 0 | 1>(-1);
@@ -329,21 +331,38 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	popoverClosed(): void {
+		this.panelOpen.set(false);
 		this.panelClosed.emit();
 		if (this.editedField() === 1) {
 			this.endTextInputRef()?.nativeElement.focus();
 		} else if (this.editedField() === 0) {
 			this.startTextInputRef()?.nativeElement.focus();
 		}
+		this.markAsTouchedIfFocusLeft();
 	}
 
 	inputBlur(): void {
-		this.onTouched?.();
 		this.inputFocused.set(false);
 		this.startUserTextInput.set('ɵ');
 		this.endUserTextInput.set('ɵ');
 		this.highlightedField.set(-1);
 		this.fixOrderIfNeeded();
+		this.markAsTouchedIfFocusLeft();
+	}
+
+	/**
+	 * The control is touched once the focus leaves both inputs and the calendar.
+	 * Checked after render, as picking a date blurs the input before the value is set and the focus restored.
+	 */
+	markAsTouchedIfFocusLeft(): void {
+		afterNextRender(
+			() => {
+				if (!this.inputFocused() && !this.panelOpen()) {
+					this.onTouched?.();
+				}
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	fixOrderIfNeeded(): void {
