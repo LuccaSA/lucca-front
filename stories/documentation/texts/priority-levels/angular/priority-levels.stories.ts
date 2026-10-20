@@ -1,5 +1,5 @@
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
-import { PRIORITY_LEVELS, PRIORITY_LEVELS_SIZES, PriorityLevelsComponent } from '@lucca-front/ng/priority-levels';
+import { PRIORITY_LEVELS, PRIORITY_LEVELS_SIZES, PriorityLevelsComponent, PriorityLevelsSize } from '@lucca-front/ng/priority-levels';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
@@ -29,10 +29,10 @@ export default {
 	}),
 } as Meta;
 
-export const Template: StoryObj<PriorityLevelsComponent> = {
+export const Template: StoryObj<Omit<PriorityLevelsComponent, 'size'> & { size: PriorityLevelsSize | '' }> = {
 	args: {
 		level: 1,
-		size: 'M',
+		size: '',
 		hiddenLabel: false,
 	},
 };
