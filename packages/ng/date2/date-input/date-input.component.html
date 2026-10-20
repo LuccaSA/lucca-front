@@ -10,7 +10,7 @@
 			luInput
 			class="textField-input-value"
 			(input)="userTextInput.set(date.value)"
-			(blur)="inputBlurred()"
+			(blur)="inputBlurred($event)"
 			(focus)="inputFocused.set(true)"
 			aria-haspopup="dialog"
 			[attr.aria-expanded]="popoverRef.opened()"
@@ -61,7 +61,7 @@
 <div *luFilterPillDisplayer>{{ displayValue() }}</div>
 
 <ng-template #calendar>
-	<div class="calendarWrapper" role="dialog" aria-modal="true" [attr.aria-label]="intl().pickDate">
+	<div class="calendarWrapper" role="dialog" aria-modal="true" [attr.aria-label]="intl().pickDate" #calendarDialog>
 		<div class="calendarWrapper-navigation pr-u-left0">
 			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())" #previousButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">{{ intl().previous }}</span>

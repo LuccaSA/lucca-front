@@ -593,6 +593,54 @@ describe('DateRangeInputComponent', () => {
 			// Assert
 			expect(formControl.touched).toBe(false);
 		});
+
+		describe('while the calendar is open', () => {
+			let outsideField: HTMLInputElement;
+
+			beforeEach(() => {
+				outsideField = document.createElement('input');
+				document.body.appendChild(outsideField);
+			});
+
+			afterEach(() => outsideField.remove());
+
+			function openCalendar(fixture: ComponentFixture<unknown>): HTMLInputElement {
+				const startInput = getInput(fixture, 'start');
+				startInput.focus();
+				startInput.click();
+				fixture.detectChanges();
+				return startInput;
+			}
+
+			it('should mark the control as touched when the focus leaves the inputs with the keyboard', () => {
+				// Arrange
+				const formControl = new FormControl<DateRange | null>(null, Validators.required);
+				const fixture = createFormControlHost(formControl);
+				const startInput = openCalendar(fixture);
+
+				// Act
+				startInput.dispatchEvent(new FocusEvent('blur', { relatedTarget: outsideField }));
+				fixture.detectChanges();
+
+				// Assert
+				expect(formControl.touched).toBe(true);
+			});
+
+			it('should not mark the control as touched when the newly focused element is unknown', () => {
+				// Arrange
+				const formControl = new FormControl<DateRange | null>(null, Validators.required);
+				const fixture = createFormControlHost(formControl);
+				const startInput = openCalendar(fixture);
+
+				// Act
+				// Safari does not focus clicked buttons, so clicking a day blurs the input without related target
+				startInput.dispatchEvent(new FocusEvent('blur', { relatedTarget: null }));
+				fixture.detectChanges();
+
+				// Assert
+				expect(formControl.touched).toBe(false);
+			});
+		});
 	});
 
 	describe('opening a filter pill with a single date selected', () => {

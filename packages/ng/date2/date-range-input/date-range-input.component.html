@@ -20,7 +20,7 @@
 					class="textField-input-value dateRangeField-fieldset-input-value"
 					[ngModel]="startLabel()"
 					(input)="textInputChange(start.value, 'start')"
-					(blur)="inputBlur()"
+					(blur)="inputBlur($event)"
 					(focus)="inputFocused.set(true); editedField.set(0); highlightedField.set(0)"
 					aria-haspopup="dialog"
 					[attr.aria-expanded]="popoverRef.opened()"
@@ -47,7 +47,7 @@
 					class="textField-input-value dateRangeField-fieldset-input-value"
 					[ngModel]="endLabel()"
 					(input)="textInputChange(end.value, 'end')"
-					(blur)="inputBlur()"
+					(blur)="inputBlur($event)"
 					(focus)="inputFocused.set(true); editedField.set(1); highlightedField.set(1)"
 					aria-haspopup="dialog"
 					[attr.aria-expanded]="popoverRef.opened()"
@@ -92,7 +92,7 @@
 </fieldset>
 
 <ng-template #calendar>
-	<div class="calendarShortcutsOptional" role="dialog" aria-modal="true" [attr.aria-label]="intl().pickDate">
+	<div class="calendarShortcutsOptional" role="dialog" aria-modal="true" [attr.aria-label]="intl().pickDate" #calendarDialog>
 		@if ((shortcuts()?.length ?? 0) > 0) {
 			<ul
 				class="calendarShortcuts"
