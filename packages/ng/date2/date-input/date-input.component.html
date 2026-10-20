@@ -41,7 +41,7 @@
 				[luPopoverDisabled]="isFilterPill"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
-				(luPopoverClosed)="panelOpen.set(false); panelClosed.emit()"
+				(luPopoverClosed)="popoverClosed()"
 				(luPopoverOpened)="panelOpen.set(true); panelOpened.emit()"
 				tabindex="-1"
 				type="button"

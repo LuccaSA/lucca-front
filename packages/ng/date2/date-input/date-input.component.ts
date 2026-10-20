@@ -450,8 +450,29 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	}
 
 	inputBlurred(): void {
-		this.onTouched?.();
 		this.inputFocused.set(false);
 		this.userTextInput.set('ɵ');
+		this.markAsTouchedIfFocusLeft();
+	}
+
+	popoverClosed(): void {
+		this.panelOpen.set(false);
+		this.panelClosed.emit();
+		this.markAsTouchedIfFocusLeft();
+	}
+
+	/**
+	 * The control is touched once the focus leaves both the input and the calendar.
+	 * Checked after render, as picking a date blurs the input before the value is set and the focus restored.
+	 */
+	markAsTouchedIfFocusLeft(): void {
+		afterNextRender(
+			() => {
+				if (!this.inputFocused() && !this.panelOpen()) {
+					this.onTouched?.();
+				}
+			},
+			{ injector: this.#injector },
+		);
 	}
 }
