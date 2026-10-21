@@ -144,4 +144,20 @@ describe(Calendar2Component.name, () => {
 
 		expect(calendar.getRangeInfo(new Date(2025, 5, 20), 'day')).toBeNull();
 	});
+
+	it('should emit dateClicked once when a day is picked with the space key', () => {
+		// Arrange
+		const fixture = createHost([]);
+		const calendar = getCalendar(fixture);
+		const emitted: Date[] = [];
+		calendar.dateClicked.subscribe((date) => emitted.push(date));
+		const dayButton = fixture.debugElement.queryAll(By.css('.calendar-table-body-row-cell-action')).find((button) => button.nativeElement.textContent.trim().startsWith('20'));
+
+		// Act: a native button fires its click on space, after the keydown
+		dayButton!.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+		dayButton!.nativeElement.click();
+
+		// Assert
+		expect(emitted).toEqual([new Date(2025, 5, 20)]);
+	});
 });
