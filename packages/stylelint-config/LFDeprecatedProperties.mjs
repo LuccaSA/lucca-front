@@ -21,7 +21,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/BRi8Yi.
-		objectPattern: /--palettes-(grey|primary|secondary|lucca)-(25|50|100|200|300|400|500|600|700|800|900)(?![\w-])/,
+		objectPattern: /--palettes-(grey|primary|secondary|lucca)-(0|text|25|50|100|200|300|400|500|600|700|800|900)(?![\w-])/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
@@ -34,10 +34,51 @@ export default [
 		},
 	},
 	{
+		// SEE https://regex101.com/r/FvCjd5.
+		objectPattern: /--commons-background-base(?![\w-])/,
+		versionDeprecated: '17.3.0',
+		actions: `Remplacer par le token \`--pr-t-elevation-surface-default\`.`,
+	},
+	{
+		// Alert of the navSide items, deleted in 18.1.0: these variables are no longer read
+		// SEE https://regex101.com/r/BYj50i.
+		objectPattern: /--components-navSide-fullwidth-palette-alert-(color|text)(?![\w-])/,
+		versionDeprecated: '17.3.2',
+		actions: `Retirer la variable : l’alerte est remplacée par le composant Numeric badge.`,
+	},
+	{
+		// SEE https://regex101.com/r/lu9vUK.
+		objectPattern: [/--colors-white-rgb(?![\w-])/, /--colors-(grey|neutral)-(400|900)-rgb(?![\w-])/],
+		versionDeprecated: '17.4.0',
+		versionDeleted: '22.0.0',
+		actions: `
+			Remplacer par une transparence calculée sur la palette :
+
+			* \`color.transparentize(var(--palettes-neutral-900), …)\`.
+			* \`color-mix()\`.
+		`,
+	},
+	{
 		// SEE https://regex101.com/r/WqLllN.
-		objectPattern: /--spacings-X*(S|M|L)(?![\w-])/,
+		objectPattern: /--spacings-(0|X{0,2}S|M|X{0,2}L|auto)(?![\w-])/,
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
+		actions: `
+			Remplacer par les tokens \`--pr-t-spacings-*\` :
+
+			* \`--spacings-0\` → \`--pr-t-spacings-0\`.
+			* \`--spacings-XXS\` → \`--pr-t-spacings-50\`.
+			* \`--spacings-XS\` → \`--pr-t-spacings-100\`.
+			* \`--spacings-S\` → \`--pr-t-spacings-200\`.
+			* \`--spacings-M\` → \`--pr-t-spacings-300\`.
+			* \`--spacings-L\` → \`--pr-t-spacings-400\`.
+			* \`--spacings-XL\` → \`--pr-t-spacings-600\`.
+			* \`--spacings-XXL\` → \`--pr-t-spacings-800\`.
+			* \`--spacings-auto\` → \`--pr-t-spacings-auto\`.
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+		},
 	},
 	{
 		// SEE https://regex101.com/r/iMddaz.
@@ -50,10 +91,130 @@ export default [
 		`,
 	},
 	{
+		// Toast UI refactor: these variables are no longer read
+		// SEE https://regex101.com/r/IqtE6x.
+		objectPattern: /--components-toasts-(background|padding)(?![\w-])/,
+		versionDeprecated: '18.1.0',
+		actions: `Retirer la variable, sans remplacement.`,
+	},
+	{
+		// `text` shade of every palette, and of the current palette (`--palettes-text`)
+		// SEE https://regex101.com/r/23TY3b.
+		objectPattern: /--palettes-(\w+-)?text(?![\w-])/,
+		versionDeprecated: '18.2.0',
+		actions: `
+			Remplacer la nuance \`text\` par \`0\` :
+
+			* \`--palettes-product-text\` → \`--palettes-product-0\`.
+			* \`--palettes-text\` → \`--palettes-0\`.
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+		},
+	},
+	{
+		// SEE https://regex101.com/r/YFRiS1.
+		objectPattern: /--commons-disabled-opacity(?![\w-])/,
+		versionDeprecated: '18.2.0',
+		actions: `
+			Remplacer l’opacité par les couleurs désactivées :
+
+			* \`--pr-t-color-text-disabled\`.
+			* \`--commons-disabled-color\`.
+			* \`--commons-disabled-background\`.
+		`,
+	},
+	{
 		// SEE https://regex101.com/r/xx7vjW.
 		objectPattern: /--commons-navSide-compact-width(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
+	},
+	{
+		// No longer read: overriding them has no effect
+		// SEE https://regex101.com/r/BwNNLw.
+		objectPattern: /--components-container-(max-width|padding)(?![\w-])/,
+		versionDeprecated: '18.3.0',
+		actions: `Remplacer par \`--commons-container-maxWidth\` & \`--commons-container-padding\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/uKwykc.
+		objectPattern: /--commons-font-family(-brand|-cursive)?(?![\w-])/,
+		versionDeprecated: '20.1.0',
+		actions: `
+			Remplacer par les tokens \`--pr-t-font-family*\` :
+
+			* \`--commons-font-family\` → \`--pr-t-font-family\`.
+			* \`--commons-font-family-brand\` → \`--pr-t-font-family-brand\`.
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+		},
+	},
+	{
+		// SEE https://regex101.com/r/MXjE6d.
+		objectPattern: [
+			// Font sizes and line heights
+			/--sizes-(XS|S|M|L|XL|XXL|XXXL)-(fontSize|lineHeight)(?![\w-])/,
+			// Vertical paddings, only read with `$deprecatedSpacings: true`
+			/--sizes-((XS|S|M|L|XL|XXL|XXXL)-)?verticalPadding(?![\w-])/,
+		],
+		versionDeprecated: '20.1.0',
+		actions: `
+			Remplacer par les [tokens typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) :
+
+			* \`--sizes-XXL-*\` → \`--pr-t-font-heading-1-*\`.
+			* \`--sizes-XL-*\` → \`--pr-t-font-heading-2-*\`.
+			* \`--sizes-L-*\` → \`--pr-t-font-heading-3-*\`.
+			* \`--sizes-M-*\` → \`--pr-t-font-body-M-*\`, ou \`--pr-t-font-heading-4-*\` pour un titre.
+			* \`--sizes-S-*\` → \`--pr-t-font-body-S-*\`.
+			* \`--sizes-XS-*\` → \`--pr-t-font-body-XS-*\`.
+			* \`--sizes-*-verticalPadding\` → \`--pr-t-spacings-*\`.
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+		},
+	},
+	{
+		// Font size and line height of the title component, replaced by its font shorthand
+		// SEE https://regex101.com/r/7hOMye.
+		objectPattern: /--sizes-(fontSize|lineHeight)(?![\w-])/,
+		versionDeleted: '20.1.0',
+		actions: `Remplacer par \`--components-title-font\`.`,
+	},
+	{
+		// Component font sizes and line heights, replaced by each component's `-font` shorthand
+		// SEE https://regex101.com/r/6qyCXX.
+		objectPattern: [
+			/--components-button-(font-size|line-height)(?![\w-])/,
+			/--components-(callout|calloutFeedbackList|chip|comment-text|divider|formLabel|sortableList-description|tag)-(fontSize|lineHeight)(?![\w-])/,
+			/--component-textField-(fontSize|lineHeight)(?![\w-])/,
+		],
+		versionDeprecated: '20.1.0',
+		actions: `
+			Remplacer la paire \`fontSize\` / \`lineHeight\` par la variable \`font\` du composant :
+
+			* \`--components-tag-fontSize\` → \`--components-tag-font\`.
+			* \`--components-tag-lineHeight\` → \`--components-tag-font\`.
+		`,
+	},
+	{
+		// Component font sizes and line heights deleted without deprecation, replaced by each component's `-font` shorthand
+		// SEE https://regex101.com/r/VEXU28.
+		objectPattern: [
+			/--components-(inlineMessage|simpleSelect|multiSelect|segmentedControl|timepicker|sortableList-helper)-(fontSize|lineHeight)(?![\w-])/,
+			/--component-switchField-label-(fontSize|lineHeight)(?![\w-])/,
+			/--components-horizontalNavigation-listItemAction(FontSize|LineHeight)(?![\w-])/,
+			/--components-title-weight(?![\w-])/,
+		],
+		versionDeleted: '20.1.0',
+		actions: `
+			Remplacer par la variable \`font\` du composant :
+
+			* \`--components-simpleSelect-fontSize\` → \`--components-simpleSelect-font\`.
+			* \`--components-simpleSelect-lineHeight\` → \`--components-simpleSelect-font\`.
+			* \`--components-title-weight\` → \`--components-title-font\`.
+		`,
 	},
 	{
 		// SEE https://regex101.com/r/1P70OB.
@@ -64,5 +225,66 @@ export default [
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0',
 		},
+	},
+	{
+		// SEE https://regex101.com/r/eOaxoa.
+		objectPattern: /--pr-t-radius-input(?![\w-])/,
+		versionDeleted: '20.2.0',
+		actions: `Remplacer par \`--pr-t-border-radius-input\`.`,
+	},
+	{
+		// Still read as a fallback of `--components-gauge-blockSize`
+		// SEE https://regex101.com/r/09aS7Z.
+		objectPattern: /--components-gauge-height(?![\w-])/,
+		versionDeprecated: '20.3.0',
+		actions: `Remplacer par \`--components-gauge-blockSize\`.`,
+	},
+	{
+		// Still read as fallbacks of their `-content-` names
+		// SEE https://regex101.com/r/njxlDv.
+		objectPattern: /--components-richTextField-(resize|height|minHeight|maxHeight)(?![\w-])/,
+		versionDeprecated: '21.2.0',
+		actions: `
+			Ajouter \`content\` :
+
+			* \`--components-richTextField-resize\` → \`--components-richTextField-content-resize\`.
+			* \`--components-richTextField-height\` → \`--components-richTextField-content-height\`.
+			* \`--components-richTextField-minHeight\` → \`--components-richTextField-content-minHeight\`.
+			* \`--components-richTextField-maxHeight\` → \`--components-richTextField-content-maxHeight\`.
+		`,
+	},
+	{
+		// AI palette, renamed Orchid; `--palettes-ai-*` (lower case) is the AI gradient
+		// SEE https://regex101.com/r/IFX5bZ.
+		objectPattern: /--palettes-AI-\d+(?![\w-])/,
+		versionDeleted: '21.3.0',
+		actions: `
+			Remplacer selon l’usage :
+
+			* \`--palettes-orchid-*\` pour une couleur.
+			* \`--palettes-ai-*\` pour un dégradé.
+		`,
+	},
+	{
+		// SEE https://regex101.com/r/cFClO2.
+		objectPattern: /--components-numericBadge-(fontSize|lineHeight)(?![\w-])/,
+		versionDeprecated: '20.1.0',
+		versionDeleted: '21.3.0',
+		actions: `Remplacer par \`--components-numericBadge-font\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/mSg9Vi.
+		objectPattern:
+			/--components-fancyBox-(offsetInline|offsetBlock|imageWidth|imageHeight|background-left|background-right|foreground)(?![\w-])/,
+		versionDeprecated: '22.1.0',
+		actions: `
+			* Remplacer \`--components-fancyBox-offsetInline\` par \`--components-fancyBox-content-foregroundStartEnd-insetInlineEnd\`.
+			* Remplacer \`--components-fancyBox-offsetBlock\` par \`--components-fancyBox-content-foregroundStartEnd-insetBlockStart\`.
+			* Remplacer \`--components-fancyBox-imageWidth\` par \`--components-fancyBox-content-foregroundStartEnd-inlineSize\`.
+			* Remplacer \`--components-fancyBox-imageHeight\` par \`--components-fancyBox-content-foregroundStartEnd-blockSize\`.
+			* Remplacer l’image \`--components-fancyBox-background-left\` par l’élément \`.fancyBox-content-backgroundEndStart\` (input Angular \`backgroundEndStart\`).
+			* Remplacer l’image \`--components-fancyBox-background-right\` par l’élément \`.fancyBox-content-backgroundStartEnd\` (input Angular \`backgroundStartEnd\`).
+			* Remplacer l’image \`--components-fancyBox-foreground\` par l’élément \`.fancyBox-content-foregroundStartEnd\` (input Angular \`foregroundStartEnd\`).
+		`,
 	},
 ];
