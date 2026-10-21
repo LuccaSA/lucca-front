@@ -117,7 +117,7 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 		},
 		country: {
 			control: { type: 'text' },
-			description: 'Pays sélectionné par défaut (code ISO, ex. <code>FR</code>). Alias de <code>defaultCountryCode</code>. Par défaut, déduit de la locale.',
+			description: 'Pays utilisé par défaut (code ISO, ex. <code>FR</code>). Alias de <code>defaultCountryCode</code>. Aucun pays par défaut. Le pays déduit du numéro ou sélectionné par l’utilisateur est prioritaire.',
 			table: { category: 'inputs', type: { summary: 'CountryCode' } },
 		},
 		allowedCountries: {
