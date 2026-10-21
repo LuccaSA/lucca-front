@@ -156,6 +156,8 @@ export default [
 		actions: `
 			[Tokens typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) :
 
+			* \`*sizes-XXXL-*\` →
+			  aucun token équivalent
 			* \`*sizes-XXL-*\` →
 			  \`*pr-t-font-heading-1-*\`
 			* \`*sizes-XL-*\` →

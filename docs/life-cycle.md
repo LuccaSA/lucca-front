@@ -1341,6 +1341,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>
 				<p><a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">Tokens typographie</a> :</p>
 				<ul>
+					<li><code>*sizes-XXXL-*</code> →<br>aucun token équivalent</li>
 					<li><code>*sizes-XXL-*</code> →<br><code>*pr-t-font-heading-1-*</code></li>
 					<li><code>*sizes-XL-*</code> →<br><code>*pr-t-font-heading-2-*</code></li>
 					<li><code>*sizes-L-*</code> →<br><code>*pr-t-font-heading-3-*</code></li>
