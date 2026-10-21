@@ -43,7 +43,7 @@ export default {
 	<lu-listing-item${iconParam}>item</lu-listing-item>
 	<lu-listing-item>
 		item
-		<lu-listing${checklistParam}${orderedParam}${orderedFancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
+		<lu-listing${checklistParam}${orderedParam}${orderedFancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item critical>item</lu-listing-item>
