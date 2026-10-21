@@ -259,7 +259,7 @@ export default [
 		objectPattern: /--palettes-AI-\d+(?![\w-])/,
 		versionDeleted: '21.3.0',
 		actions: `
-			Remplacer selon l’usage :
+			Remplacer selon l’usage (\`*\`: 50-900) :
 
 			* \`--palettes-orchid-*\` pour une couleur.
 			* \`--palettes-ai-*\` pour un dégradé.

@@ -154,12 +154,21 @@ export default [
 		objectPattern: [
 			// SEE https://regex101.com/r/YCDDc8.
 			/\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])/,
-			// Zero border utilities, deleted with the t-shirt utilities
+			// Zero border utilities: `.u-` names deleted with the t-shirt utilities, `.pr-u-` names still shipping
 			// SEE https://regex101.com/r/nLOfQY.
 			/\.u-border(Top|Right|Bottom|Left|Inline|Block)?0(?![\w-])/,
 		],
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
+		actions: `
+			Remplacer par les utilitaires \`.pr-u-\` :
+
+			* \`.u-border0\` → \`.pr-u-border0\`.
+			* \`.u-marginS\` → \`.pr-u-margin200\`, les tailles t-shirt devenant des tokens.
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+		},
 	},
 	{
 		// Zero spacing utilities with the deprecated `.u-` prefix, renamed `.pr-u-` in 20.2.0
