@@ -52,10 +52,9 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			Remplacer par une transparence calculée sur la palette :
-
-			* \`color.transparentize(var(--palettes-neutral-900), …)\`.
-			* \`color-mix()\`.
+			* \`--colors-*-rgb\` →
+				* Sass : \`color.transparentize(var(--palettes-neutral-900), …)\`
+				* CSS : \`color-mix()\`
 		`,
 	},
 	{
@@ -112,11 +111,10 @@ export default [
 		objectPattern: /--commons-disabled-opacity(?![\w-])/,
 		versionDeprecated: '18.2.0',
 		actions: `
-			Remplacer l’opacité par les couleurs désactivées :
-
-			* \`--pr-t-color-text-disabled\`.
-			* \`--commons-disabled-color\`.
-			* \`--commons-disabled-background\`.
+			* \`--commons-disabled-opacity\` →
+				* token de texte : \`--pr-t-color-text-disabled\`
+				* couleur : \`--commons-disabled-color\`
+				* fond : \`--commons-disabled-background\`
 		`,
 	},
 	{

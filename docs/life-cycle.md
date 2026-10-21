@@ -236,11 +236,14 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>16.4.0</td>
 			<td>–</td>
 			<td>
-				<p>Remplacer par <code>.form-field</code> et les composants de champ :</p>
 				<ul>
-					<li><code>lu-text-input</code>.</li>
-					<li><code>lu-checkbox-input</code>.</li>
-					<li>…</li>
+					<li>
+						<code>.form-group</code> →
+						<ul>
+							<li>sélecteur : <code>.form-field</code></li>
+							<li>composants Angular : <code>lu-text-input</code>, <code>lu-checkbox-input</code>…</li>
+						</ul>
+					</li>
 				</ul>
 			</td>
 		</tr>
@@ -273,10 +276,14 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>17.2.0</td>
 			<td>19.1.0</td>
 			<td>
-				<p>Remplacer par <code>.button.mod-onlyIcon</code>, avec l’une de ces classes :</p>
 				<ul>
-					<li><code>.mod-ghost</code>.</li>
-					<li><code>.mod-outlined</code>.</li>
+					<li>
+						<code>.actionIcon</code> →
+						<ul>
+							<li>sans bordure : <code>.button.mod-onlyIcon.mod-ghost</code></li>
+							<li>avec bordure : <code>.button.mod-onlyIcon.mod-outlined</code></li>
+						</ul>
+					</li>
 				</ul>
 			</td>
 		</tr>
@@ -766,10 +773,28 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>20.2.0</td>
 			<td>22.0.0</td>
 			<td>
-				<p>Remplacer par :</p>
 				<ul>
-					<li>les classes <code>.mod-ghost</code> &amp; <code>.mod-critical</code>.</li>
-					<li>les inputs Angular <code>critical</code>, <code>ghost</code> &amp; <code>ghost-invert</code>.</li>
+					<li>
+						<code>.mod-text</code> →
+						<ul>
+							<li>sélecteur : <code>.mod-ghost</code></li>
+							<li>input Angular : <code>luButton="ghost"</code> ou <code>luButton="ghost-invert"</code></li>
+						</ul>
+					</li>
+					<li>
+						<code>.mod-deleted</code> →
+						<ul>
+							<li>sélecteur : <code>.mod-critical</code></li>
+							<li>input Angular : <code>critical</code></li>
+						</ul>
+					</li>
+					<li>
+						<code>.loading</code> →
+						<ul>
+							<li>sélecteur : <code>.is-loading</code></li>
+							<li>input Angular : <code>state="loading"</code></li>
+						</ul>
+					</li>
 				</ul>
 			</td>
 		</tr>
@@ -920,10 +945,14 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>22.1.0</td>
 			<td>–</td>
 			<td>
-				<p>Remplacer par :</p>
 				<ul>
-					<li><code>.fancyBox-content-foregroundStartEnd</code>.</li>
-					<li><code>.fancyBox-content-foregroundEndStart</code>.</li>
+					<li>
+						<code>*-foreground</code> →
+						<ul>
+							<li>haut, fin de ligne : <code>*-foregroundStartEnd</code></li>
+							<li>bas, début de ligne : <code>*-foregroundEndStart</code></li>
+						</ul>
+					</li>
 				</ul>
 			</td>
 		</tr>
@@ -999,10 +1028,14 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>–</td>
 			<td>
-				<p>Remplacer par :</p>
 				<ul>
-					<li><a href="https://prisme.lucca.io/94310e217/p/4263a5-data-table">Data table</a>.</li>
-					<li><a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table">Index table</a>.</li>
+					<li>
+						<code>.table</code> →
+						<ul>
+							<li><a href="https://prisme.lucca.io/94310e217/p/4263a5-data-table">Data table</a></li>
+							<li><a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table">Index table</a></li>
+						</ul>
+					</li>
 				</ul>
 			</td>
 		</tr>
@@ -1147,10 +1180,14 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.4.0</td>
 			<td>22.0.0</td>
 			<td>
-				<p>Remplacer par une transparence calculée sur la palette :</p>
 				<ul>
-					<li><code>color.transparentize(var(--palettes-neutral-900), …)</code>.</li>
-					<li><code>color-mix()</code>.</li>
+					<li>
+						<code>--colors-*-rgb</code> →
+						<ul>
+							<li>Sass : <code>color.transparentize(var(--palettes-neutral-900), …)</code></li>
+							<li>CSS : <code>color-mix()</code></li>
+						</ul>
+					</li>
 				</ul>
 			</td>
 		</tr>
@@ -1233,11 +1270,15 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>18.2.0</td>
 			<td>–</td>
 			<td>
-				<p>Remplacer l’opacité par les couleurs désactivées :</p>
 				<ul>
-					<li><code>--pr-t-color-text-disabled</code>.</li>
-					<li><code>--commons-disabled-color</code>.</li>
-					<li><code>--commons-disabled-background</code>.</li>
+					<li>
+						<code>--commons-disabled-opacity</code> →
+						<ul>
+							<li>token de texte : <code>--pr-t-color-text-disabled</code></li>
+							<li>couleur : <code>--commons-disabled-color</code></li>
+							<li>fond : <code>--commons-disabled-background</code></li>
+						</ul>
+					</li>
 				</ul>
 			</td>
 		</tr>

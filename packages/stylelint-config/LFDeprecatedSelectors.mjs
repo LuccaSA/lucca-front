@@ -76,11 +76,9 @@ export default [
 		objectPattern: /\.form-group\b/,
 		versionDeprecated: '16.4.0',
 		actions: `
-			Remplacer par \`.form-field\` et les composants de champ :
-
-			* \`lu-text-input\`.
-			* \`lu-checkbox-input\`.
-			* …
+			* \`.form-group\` →
+				* sélecteur : \`.form-field\`
+				* composants Angular : \`lu-text-input\`, \`lu-checkbox-input\`…
 		`,
 	},
 	{
@@ -103,10 +101,9 @@ export default [
 		versionDeprecated: '17.2.0',
 		versionDeleted: '19.1.0',
 		actions: `
-			Remplacer par \`.button.mod-onlyIcon\`, avec l’une de ces classes :
-
-			* \`.mod-ghost\`.
-			* \`.mod-outlined\`.
+			* \`.actionIcon\` →
+				* sans bordure : \`.button.mod-onlyIcon.mod-ghost\`
+				* avec bordure : \`.button.mod-onlyIcon.mod-outlined\`
 		`,
 	},
 	{
@@ -427,10 +424,15 @@ export default [
 		versionDeprecated: '20.2.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			Remplacer par :
-
-			* les classes \`.mod-ghost\` & \`.mod-critical\`.
-			* les inputs Angular \`critical\`, \`ghost\` & \`ghost-invert\`.
+			* \`.mod-text\` →
+				* sélecteur : \`.mod-ghost\`
+				* input Angular : \`luButton="ghost"\` ou \`luButton="ghost-invert"\`
+			* \`.mod-deleted\` →
+				* sélecteur : \`.mod-critical\`
+				* input Angular : \`critical\`
+			* \`.loading\` →
+				* sélecteur : \`.is-loading\`
+				* input Angular : \`state="loading"\`
 		`,
 	},
 	{
@@ -575,10 +577,9 @@ export default [
 		objectPattern: /\.fancyBox-content-foreground(?![\w-])/,
 		versionDeprecated: '22.1.0',
 		actions: `
-			Remplacer par :
-
-			* \`.fancyBox-content-foregroundStartEnd\`.
-			* \`.fancyBox-content-foregroundEndStart\`.
+			* \`*-foreground\` →
+				* haut, fin de ligne : \`*-foregroundStartEnd\`
+				* bas, début de ligne : \`*-foregroundEndStart\`
 		`,
 	},
 
@@ -619,10 +620,9 @@ export default [
 		// SEE https://regex101.com/r/ZPhMSh.
 		objectPattern: /\.table\b/,
 		actions: `
-			Remplacer par :
-
-			* [Data table](https://prisme.lucca.io/94310e217/p/4263a5-data-table).
-			* [Index table](https://prisme.lucca.io/94310e217/p/24fc14-index-table).
+			* \`.table\` →
+				* [Data table](https://prisme.lucca.io/94310e217/p/4263a5-data-table)
+				* [Index table](https://prisme.lucca.io/94310e217/p/24fc14-index-table)
 		`,
 	},
 	{
