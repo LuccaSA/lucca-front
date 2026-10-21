@@ -1402,6 +1402,8 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<ul>
 					<li><code>*-fontSize</code> → <code>*-font</code></li>
 					<li><code>*-lineHeight</code> → <code>*-font</code></li>
+					<li><code>*FontSize</code> → <code>*Font</code></li>
+					<li><code>*LineHeight</code> → <code>*Font</code></li>
 					<li><code>*-weight</code> → <code>*-font</code></li>
 				</ul>
 			</td>

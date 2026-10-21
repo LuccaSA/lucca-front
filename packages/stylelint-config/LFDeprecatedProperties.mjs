@@ -212,6 +212,8 @@ export default [
 		actions: `
 			* \`*-fontSize\` → \`*-font\`
 			* \`*-lineHeight\` → \`*-font\`
+			* \`*FontSize\` → \`*Font\`
+			* \`*LineHeight\` → \`*Font\`
 			* \`*-weight\` → \`*-font\`
 		`,
 	},
