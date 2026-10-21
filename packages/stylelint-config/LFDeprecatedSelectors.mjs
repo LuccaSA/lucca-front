@@ -272,4 +272,9 @@ export default [
 		versionDeprecated: '22.1.0',
 		actions: `Angular : remplacer l’input \`foreground\` par \`foregroundStartEnd\`. HTML : passer au composant \`lu-fancy-box\` ; renommer la classe seule fait disparaître les illustrations.`,
 	},
+	{
+		objectPattern: /\.highlightSection\b/,
+		versionDeprecated: '22.1.0',
+		actions: `Le composant Highlight section (\`.highlightSection\` et \`<lu-highlight-section>\`) sera remplacé en 22.2 par une évolution du composant Box.`,
+	},
 ];
