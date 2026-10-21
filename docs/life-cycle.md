@@ -947,14 +947,24 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<ul>
 					<li>
-						<code>*-foreground</code> →
+						<code>.fancyBox-content-foreground</code> →
 						<ul>
-							<li>haut, fin de ligne : <code>*-foregroundStartEnd</code></li>
-							<li>bas, début de ligne : <code>*-foregroundEndStart</code></li>
+							<li>HTML : composant <code>lu-fancy-box</code>, renommer la classe seule fait disparaître les illustrations</li>
+							<li>input Angular : <code>foregroundStartEnd</code> à la place de <code>foreground</code></li>
 						</ul>
 					</li>
 				</ul>
 			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.highlightSection</code></li>
+				</ul>
+			</td>
+			<td>22.1.0</td>
+			<td>–</td>
+			<td>Le composant Highlight section (<code>.highlightSection</code> et <code><lu-highlight-section></code>) sera remplacé en 22.2 par une évolution du composant Box.</td>
 		</tr>
 		<tr>
 			<td>

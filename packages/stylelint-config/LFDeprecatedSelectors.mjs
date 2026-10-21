@@ -577,10 +577,15 @@ export default [
 		objectPattern: /\.fancyBox-content-foreground(?![\w-])/,
 		versionDeprecated: '22.1.0',
 		actions: `
-			* \`*-foreground\` →
-				* haut, fin de ligne : \`*-foregroundStartEnd\`
-				* bas, début de ligne : \`*-foregroundEndStart\`
+			* \`.fancyBox-content-foreground\` →
+				* HTML : composant \`lu-fancy-box\`, renommer la classe seule fait disparaître les illustrations
+				* input Angular : \`foregroundStartEnd\` à la place de \`foreground\`
 		`,
+	},
+	{
+		objectPattern: /\.highlightSection\b/,
+		versionDeprecated: '22.1.0',
+		actions: `Le composant Highlight section (\`.highlightSection\` et \`<lu-highlight-section>\`) sera remplacé en 22.2 par une évolution du composant Box.`,
 	},
 
 	// Deprecated components, including their children (`.textfield-input`…)
