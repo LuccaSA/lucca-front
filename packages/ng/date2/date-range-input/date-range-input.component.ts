@@ -341,15 +341,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		} else if (this.editedField() === 0) {
 			this.startTextInputRef()?.nativeElement.focus();
 		}
-		// Checked after render, as picking a date closes the calendar before the focus is restored to an input
-		afterNextRender(
-			() => {
-				if (!this.inputFocused()) {
-					this.onTouched?.();
-				}
-			},
-			{ injector: this.#injector },
-		);
+		// Closing the calendar ends the interaction with it, even though the focus is given back to an input.
+		// Deferred, as picking a date closes the calendar before the value is emitted
+		afterNextRender(() => this.onTouched?.(), { injector: this.#injector });
 	}
 
 	inputBlur(event: FocusEvent): void {

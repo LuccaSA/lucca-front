@@ -461,15 +461,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	popoverClosed(): void {
 		this.panelOpen.set(false);
 		this.panelClosed.emit();
-		// Checked after render, as picking a date closes the calendar before the focus is restored to the input
-		afterNextRender(
-			() => {
-				if (!this.inputFocused()) {
-					this.onTouched?.();
-				}
-			},
-			{ injector: this.#injector },
-		);
+		// Closing the calendar ends the interaction with it. Deferred, as picking a date closes the calendar before the value is emitted
+		afterNextRender(() => this.onTouched?.(), { injector: this.#injector });
 	}
 
 	/**

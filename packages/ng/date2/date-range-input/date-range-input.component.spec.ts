@@ -640,6 +640,24 @@ describe('DateRangeInputComponent', () => {
 				// Assert
 				expect(formControl.touched).toBe(false);
 			});
+
+			it('should mark the control as touched when the calendar closes, even though the focus is given back to an input', () => {
+				// Arrange
+				const formControl = new FormControl<DateRange | null>(null, Validators.required);
+				const fixture = createFormControlHost(formControl);
+				const startInput = openCalendar(fixture);
+				// An outside click on an element that does not take the focus blurs the input without related target
+				startInput.dispatchEvent(new FocusEvent('blur', { relatedTarget: null }));
+				fixture.detectChanges();
+
+				// Act
+				fixture.debugElement.query(By.directive(PopoverDirective)).injector.get(PopoverDirective).close();
+				fixture.detectChanges();
+
+				// Assert
+				expect(startInput).toBe(document.activeElement);
+				expect(formControl.touched).toBe(true);
+			});
 		});
 	});
 

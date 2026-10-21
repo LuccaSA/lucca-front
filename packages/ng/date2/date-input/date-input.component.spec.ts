@@ -452,7 +452,7 @@ describe('DateInputComponent', () => {
 			expect(formControl.touched).toBe(false);
 		});
 
-		it('should mark the control as touched with the picked date once the focus leaves the input', () => {
+		it('should mark the control as touched with the picked date once the calendar closes', () => {
 			const formControl = new FormControl<Date | null>(null, Validators.required);
 			const input = createHost(formControl);
 			openCalendar(input);
@@ -460,11 +460,6 @@ describe('DateInputComponent', () => {
 			dayButton.focus();
 			fixture.detectChanges();
 			dayButton.click();
-			fixture.detectChanges();
-
-			expect(formControl.touched).toBe(false);
-
-			input.blur();
 			fixture.detectChanges();
 
 			expect(formControl.touched).toBe(true);
