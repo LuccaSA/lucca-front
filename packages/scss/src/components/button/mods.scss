@@ -89,10 +89,12 @@
 	--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
 	--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-neutral-200);
 
-	&:hover {
-		--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
-		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
-		--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50));
+	@media (hover: hover) {
+		&:hover {
+			--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
+			--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
+			--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50));
+		}
 	}
 
 	&:active {
@@ -115,7 +117,13 @@
 	--components-button-color: var(--palettes-700, var(--pr-t-color-text-subtle));
 	--components-button-boxShadow: none;
 
-	&:hover,
+	@media (hover: hover) {
+		&:hover {
+			--components-button-color: var(--palettes-700, var(--pr-t-color-text-subtle));
+			--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50));
+		}
+	}
+
 	&:focus-visible {
 		--components-button-color: var(--palettes-700, var(--pr-t-color-text-subtle));
 		--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50));
@@ -134,7 +142,13 @@
 @mixin inverted {
 	--components-button-color: var(--palettes-neutral-0);
 
-	&:hover,
+	@media (hover: hover) {
+		&:hover {
+			--components-button-color: var(--palettes-neutral-0);
+			--components-button-backgroundColor: var(--palettes-neutral-900);
+		}
+	}
+
 	&:focus-visible {
 		--components-button-color: var(--palettes-neutral-0);
 		--components-button-backgroundColor: var(--palettes-neutral-900);
@@ -184,9 +198,11 @@
 }
 
 @mixin critical {
-	&:hover {
-		--components-button-color: var(--palettes-error-700);
-		--components-button-backgroundColor: var(--palettes-error-100);
+	@media (hover: hover) {
+		&:hover {
+			--components-button-color: var(--palettes-error-700);
+			--components-button-backgroundColor: var(--palettes-error-100);
+		}
 	}
 
 	&:active {
@@ -196,7 +212,13 @@
 }
 
 @mixin criticalGhost {
-	&:hover,
+	@media (hover: hover) {
+		&:hover {
+			--components-button-color: var(--palettes-error-700);
+			--components-button-backgroundColor: var(--palettes-error-100);
+		}
+	}
+
 	&:focus-visible {
 		--components-button-color: var(--palettes-error-700);
 		--components-button-backgroundColor: var(--palettes-error-100);
@@ -209,10 +231,12 @@
 }
 
 @mixin criticalOutlined {
-	&:hover {
-		--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
-		--components-button-color: var(--palettes-error-700);
-		--components-button-backgroundColor: var(--palettes-error-100);
+	@media (hover: hover) {
+		&:hover {
+			--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
+			--components-button-color: var(--palettes-error-700);
+			--components-button-backgroundColor: var(--palettes-error-100);
+		}
 	}
 
 	&:focus-visible {
@@ -301,7 +325,13 @@
 			color-mix(in srgb, var(--palettes-brand-200) var(--components-button-AI-background-opacity), transparent)
 		);
 
-	&:hover,
+	@media (hover: hover) {
+		&:hover {
+			--components-button-AI-background-opacity: 15%;
+			--components-button-color: var(--palettes-neutral-0);
+		}
+	}
+
 	&:focus-visible {
 		--components-button-AI-background-opacity: 15%;
 		--components-button-color: var(--palettes-neutral-0);
