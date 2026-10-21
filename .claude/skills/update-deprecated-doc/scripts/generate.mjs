@@ -65,7 +65,7 @@ const parse = (file) => {
 		});
 };
 
-const esc = (t) => t.replace(/&/g, '&amp;');
+const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const inline = (t) =>
 	esc(t)
 		.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
