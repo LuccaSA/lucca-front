@@ -26,8 +26,10 @@ them:
 
 ## Workflow
 
-1. `git diff` the two `.mjs` files; edit the matching rows. Full rewrite only if
-   the file is missing or entry order changed.
+1. Run `node .claude/skills/update-deprecated-doc/scripts/generate.mjs` from the repository root.
+   - It rewrites *Classes* and *Variables CSS* and keeps everything above them.
+   - A pattern too complex to expand stops it: add the `Nom` cell to [nom-overrides.mjs](scripts/nom-overrides.mjs).
+   - Overrides are keyed by the entry's first regex source.
 2. Verify: every `.mjs` entry has exactly one row, in source order.
 3. To refresh **Composants** — ⚠ *temporary while this skill is under test; the
    data will later be fed directly as a local source, replacing this step* —
@@ -62,9 +64,31 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
 
 - **Widths via the `<style>` block** (`table-layout: fixed`, last `th` 39%) — no
   `<colgroup>`, no inline `style`.
-- **`Action à réaliser`: `actions` markdown → HTML** — `` `code` `` → `<code>`,
-  `[text](url)` → `<a>`, `*` lists → `<ul><li>`, blank-line paragraphs → `<p>`,
-  `&` → `&amp;`. Append `urls.schematics` as `(<a href="…">schematics</a>)`.
+- **`Action à réaliser`: `actions` markdown converts to HTML.**
+  - `` `code` `` becomes `<code>`.
+  - `[text](url)` becomes `<a>`.
+  - `*` lists become `<ul><li>`.
+  - Tab-indented `*` items become a nested `<ul>`.
+  - Blank-line paragraphs become `<p>`.
+  - A two-space continuation line becomes `<br>`.
+  - A `*` legend paragraph is wrapped in `<p><small>`.
+  - `&` becomes `&amp;`.
+  - `urls.schematics` always goes on its own line, as `(<a href="…">schematics</a>)`.
+- **Writing `actions`** in the `.mjs` files, in French markdown:
+  - Show only the part that changes.
+  - `*` stands for the unchanged prefix or suffix.
+    - Example: `.u-*` becomes `.pr-u-*`.
+  - Code-only items take no final period.
+  - Sentences keep their final period.
+  - A list holding a mapping over 40 characters breaks every mapping after its arrow.
+  - The new value then starts the next line, indented by two spaces.
+  - One name with several targets ends its line with the arrow.
+    - A sub-list of `label : value` items follows.
+  - A `*` legend such as `` `*` = `--components-tag` `` follows the examples.
+  - "Remplacer par" appears at most once per action.
+  - No list item starts with "Remplacer".
+  - A no-break space precedes `:`.
+- **All doc text is French**, labels and qualifiers included.
 - **Empty cells: en dash `–`** (U+2013); never the em dash `—`, anywhere.
   Schematics-only entry → just the `(schematics)` link. Prisme's `-` and
   `Non défini` both become `–`.
@@ -72,8 +96,8 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
   but normalize versions to semver (`19.2` → `19.2.0`) and correct obvious
   typos (e.g. Establishment, Data table, the Select schematics link →
   `…/b/15c256`) — flag them so Prisme can be fixed too.
-- **`Nom` for Classes / Variables CSS: a `<ul>`, one `<li><code>…</code></li>`
-  per item — never prose.** Qualifiers like `(2–3 digits)` follow the `</ul>`.
+- **`Nom` for Classes / Variables CSS: a `<ul>` with one `<li><code>…</code></li>` per item, never prose.**
+  - Qualifiers like `(partout dans un sélecteur)` follow the `</ul>`.
   - Expand alternations into separate items; drop glob prefixes
     (`X*(S|M|L)` → `S`, `M`, `L`); truncate non-enumerable tails with `…`
     (`.u-elevate…`).
