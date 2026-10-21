@@ -17,7 +17,7 @@ import { LuRouterLink } from './lu-router-link';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'link',
-		'[attr.href]': 'routerLink.publicReactiveHref()',
+		'[attr.href]': 'routerLink.resolvedHref()',
 		'[class.mod-decorationHover]': 'decorationHover()',
 		'[class.mod-icon]': 'external()',
 		'[class.mod-neutral]': 'neutral()',
