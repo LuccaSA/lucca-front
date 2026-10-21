@@ -121,8 +121,12 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
 - **Comments inside an `objectPattern` array are content**: each becomes a
   markdown `<p>` (`**bold**` → `<strong>`, links → `<a>`) before the `<ul>` it
   labels; a standalone comment is a lone `<p>`.
-- **One row per source object, in source order** — a merged object stays one
-  row, structured by its comment labels.
+- **One row per source object**: a merged object stays one row, structured by its comment labels.
+- **Rows run newest first, in all three tables.**
+  - The primary key is *Depuis*.
+  - *Suppression* breaks ties.
+  - Rows without any version come last.
+  - The `.mjs` order never changes: Stylelint uses the first matching entry.
 - **Historical entries are kept.** The `.mjs` files (and therefore Classes /
   Variables CSS) retain deprecations whose deletion already shipped; Prisme
   prunes those. This divergence is **by design** — don't flag or "fix" it. The

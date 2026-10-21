@@ -208,8 +208,19 @@ const thead = [
 	'\t</thead>',
 	'\t<tbody>',
 ].join('\n');
+// Newest first: by deprecation version, then deletion version; unversioned rows last, in source order.
+// The `.mjs` order stays untouched, since Stylelint uses the first matching entry.
+const semver = (v) => (v ? v.split('.').map(Number) : null);
+const compareDesc = (a, b) => {
+	if (!a || !b) return (a ? 0 : 1) - (b ? 0 : 1);
+	for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return b[i] - a[i];
+	return 0;
+};
+const byVersionDesc = (x, y) =>
+	compareDesc(semver(x.versionDeprecated ?? x.versionDeleted), semver(y.versionDeprecated ?? y.versionDeleted)) ||
+	compareDesc(semver(x.versionDeleted ?? x.versionDeprecated), semver(y.versionDeleted ?? y.versionDeprecated));
 const section = (title, file) =>
-	`## ${title}\n\nSource\u00a0: [${file}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${file})\n\n${thead}\n${parse(file).map(row).join('\n')}\n\t</tbody>\n</table>\n`;
+	`## ${title}\n\nSource\u00a0: [${file}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${file})\n\n${thead}\n${parse(file).sort(byVersionDesc).map(row).join('\n')}\n\t</tbody>\n</table>\n`;
 
 const head = readFileSync(docPath, 'utf8').split('## Classes')[0].trimEnd();
 writeFileSync(
