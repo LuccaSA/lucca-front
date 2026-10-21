@@ -418,16 +418,16 @@ export default [
 		`,
 	},
 	{
-		// Any combination of .button and .mod-text, .mod-deleted or .loading, with any non-whitespace character between
+		// Any combination of .button and .mod-text, .mod-delete or .loading, with any non-whitespace character between
 		// SEE https://regex101.com/r/5qB2gm.
-		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.(mod-text|mod-deleted|loading)(?![\w-]))\S*/,
+		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.(mod-text|mod-delete|loading)(?![\w-]))\S*/,
 		versionDeprecated: '20.2.0',
 		versionDeleted: '22.0.0',
 		actions: `
 			* \`.mod-text\` →
 				* sélecteur : \`.mod-ghost\`
 				* input Angular : \`luButton="ghost"\` ou \`luButton="ghost-invert"\`
-			* \`.mod-deleted\` →
+			* \`.mod-delete\` →
 				* sélecteur : \`.mod-critical\`
 				* input Angular : \`critical\`
 			* \`.loading\` →

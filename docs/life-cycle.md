@@ -766,7 +766,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<ul>
 					<li><code>.button</code> <strong>+</strong> <code>.mod-text</code></li>
-					<li><code>.button</code> <strong>+</strong> <code>.mod-deleted</code></li>
+					<li><code>.button</code> <strong>+</strong> <code>.mod-delete</code></li>
 					<li><code>.button</code> <strong>+</strong> <code>.loading</code></li>
 				</ul>
 			</td>
@@ -782,7 +782,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 						</ul>
 					</li>
 					<li>
-						<code>.mod-deleted</code> →
+						<code>.mod-delete</code> →
 						<ul>
 							<li>sélecteur : <code>.mod-critical</code></li>
 							<li>input Angular : <code>critical</code></li>
