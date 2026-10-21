@@ -28,9 +28,12 @@ them:
 
 1. Run `node .claude/skills/update-deprecated-doc/scripts/generate.mjs` from the repository root.
    - It rewrites *Classes* and *Variables CSS* and keeps everything above them.
-   - A pattern too complex to expand stops it: add the `Nom` cell to [nom-overrides.mjs](scripts/nom-overrides.mjs).
-   - Overrides are keyed by the entry's first regex source.
-2. Verify: every `.mjs` entry has exactly one row, in source order.
+   - It derives simple *Nom* cells itself: up to 10 plain items, no comment label.
+   - It keeps every agent-written *Nom* cell, tagged `<td data-pattern="…">` with the entry's first regex source.
+   - It lists the cells to write and exits with code 1 when a tagged cell is missing.
+2. Write each listed cell in place of its TODO comment, following the *Nom* conventions below.
+   - Translate comment labels into French.
+   - Run the script again: it must exit with code 0.
 3. To refresh **Composants** — ⚠ *temporary while this skill is under test; the
    data will later be fed directly as a local source, replacing this step* —
    fetch Prisme via its internal API (it's a zeroheight SPA; plain fetch returns
@@ -52,7 +55,7 @@ them:
 ## Output format
 
 Title, reference link, one `<style>` block (before the first section), then the
-three `##` sections in the order above. Each section: heading, `Source:` line
+three `##` sections in the order above. Each section: heading, `Source :` line
 (Composants → the Prisme page; the others → their `.mjs` as an absolute GitHub
 blob URL on `master`, never relative), and an HTML `<table>` — never a Markdown
 table. All tables share the same `<thead>`, mirroring Prisme's headers:
@@ -89,6 +92,7 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
   - No list item starts with "Remplacer".
   - A no-break space precedes `:`.
 - **All doc text is French**, labels and qualifiers included.
+  - Component names never get translated: *Data table* stays *Data table*.
 - **Empty cells: en dash `–`** (U+2013); never the em dash `—`, anywhere.
   Schematics-only entry → just the `(schematics)` link. Prisme's `-` and
   `Non défini` both become `–`.
@@ -154,7 +158,7 @@ then, per section:
 ```html
 ## Composants
 
-Source: [Cycle de vie des composants > Composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f)
+Source : [Cycle de vie des composants > Composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f)
 
 <table>
 	<thead>

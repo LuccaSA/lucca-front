@@ -3,7 +3,6 @@
 // Everything before `## Classes` (title, note, style, Composants) is kept as is.
 // Usage, from the repository root: node .claude/skills/update-deprecated-doc/scripts/generate.mjs
 import { readFileSync, writeFileSync } from 'fs';
-import overrides from './nom-overrides.mjs';
 
 const dir = 'packages/stylelint-config/';
 const docPath = 'docs/life-cycle.md';
@@ -16,7 +15,7 @@ const parse = (file) => {
 		.map((chunk) => {
 			chunk = chunk.split(/\n\t\},?/)[0];
 			const lines = chunk.split('\n');
-			const entry = { comments: [], groups: [{ label: null, sources: [] }], actions: null, schematics: null };
+			const entry = { groups: [{ label: null, sources: [] }], actions: null, schematics: null };
 			let inPattern = false,
 				inActions = false,
 				actionsBuf = [];
@@ -36,7 +35,6 @@ const parse = (file) => {
 					const c = l.replace(/^\/\/\s?/, '');
 					if (/^SEE http/.test(c)) continue;
 					if (inPattern) entry.groups.push({ label: c, sources: [] });
-					else entry.comments.push(c);
 					continue;
 				}
 				const vm = l.match(/^version(Deprecated|Deleted): '([^']+)'/);
@@ -69,7 +67,7 @@ const parse = (file) => {
 
 const esc = (t) => t.replace(/&/g, '&amp;');
 const inline = (t) =>
-	esc(t.replace(/\\`/g, '`'))
+	esc(t)
 		.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
 		.replace(/`([^`]+)`/g, '<code>$1</code>')
 		.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -77,6 +75,7 @@ const inline = (t) =>
 const actionsHtml = (e) => {
 	const schem = e.schematics ? `(<a href="${e.schematics}">schematics</a>)` : '';
 	if (!e.actions) return schem || '–';
+	// Template literals in the `.mjs` files escape their backticks.
 	const blocks = e.actions
 		.replace(/\\`/g, '`')
 		.split(/\n\s*\n/)
@@ -86,22 +85,24 @@ const actionsHtml = (e) => {
 		if (b.startsWith('* ')) {
 			const items = [];
 			for (const l of b.split('\n')) {
-				if (/^ {2}\S/.test(l)) items[items.length - 1].text += '\u0000' + l.trim();
-				else if (/^\t\* /.test(l)) items[items.length - 1].children.push(l.replace(/^\t\*\s+/, ''));
-				else items.push({ text: l.replace(/^\*\s+/, ''), children: [] });
+				// A two-space continuation line goes on a new line of the same item; a tab-indented item nests.
+				if (/^ {2}\S/.test(l)) items.at(-1).lines.push(l.trim());
+				else if (/^\t\* /.test(l)) items.at(-1).children.push(l.replace(/^\t\*\s+/, ''));
+				else items.push({ lines: [l.replace(/^\*\s+/, '')], children: [] });
 			}
-			const lis = items.map((it) =>
-				it.children.length
-					? `\t<li>\n\t\t${inline(it.text).replace(/\u0000/g, '<br>')}\n\t\t<ul>\n${it.children.map((ch) => `\t\t\t<li>${inline(ch)}</li>`).join('\n')}\n\t\t</ul>\n\t</li>`
-					: `\t<li>${inline(it.text).replace(/\u0000/g, '<br>')}</li>`,
-			);
+			const lis = items.map(({ lines, children }) => {
+				const text = lines.map(inline).join('<br>');
+				if (!children.length) return `\t<li>${text}</li>`;
+				const sub = children.map((ch) => `\t\t\t<li>${inline(ch)}</li>`).join('\n');
+				return `\t<li>\n\t\t${text}\n\t\t<ul>\n${sub}\n\t\t</ul>\n\t</li>`;
+			});
 			return `<ul>\n${lis.join('\n')}\n</ul>`;
 		}
 		if (/^(`\*` = |\(`\*`: )/.test(b)) return `<p><small>${inline(b)}</small></p>`;
-		if (b.includes('\n')) return `<p>${b.split('\n').map(inline).join('<br>')}</p>`;
-		return blocks.length === 1 && !schem ? inline(b) : `<p>${inline(b)}</p>`;
+		return `<p>${b.split('\n').map(inline).join('<br>')}</p>`;
 	});
-	if (blocks.length === 1 && !blocks[0].startsWith('* ') && !schem) return parts[0];
+	// A lone one-line sentence without schematics stays bare in its cell.
+	if (blocks.length === 1 && !schem && !/^\* |\n/.test(blocks[0])) return inline(blocks[0]);
 	if (schem) parts.push(schem);
 	return parts.join('\n');
 };
@@ -141,42 +142,39 @@ const nomItems = (src) => {
 	const ex = ex0 && [...new Set(ex0)];
 	return ex && ex.length <= 10 ? ex.map(li) : null;
 };
-const FR = new Map([
-	[
-		'Legacy grid columns and offsets, always suffixed with a breakpoint (`.grid-6\\@mediaMinS`)',
-		'Colonnes et offsets de l’ancienne grille, toujours suffixés d’un breakpoint (`.grid-6\\@mediaMinS`)',
-	],
-	[
-		'Legacy grid mods: any combination of .grid and an alignment or reverse mod, with any non-whitespace character between',
-		'Mods de l’ancienne grille, combinés à `.grid`',
-	],
-	['Legacy grid ordering utilities', 'Utilitaires d’ordre de l’ancienne grille'],
-	[
-		'Any combination of .box, .card or .section and .mod-grey, with any non-whitespace character between',
-		'Toute combinaison de `.box`, `.card` ou `.section` avec `.mod-grey`',
-	],
-	[
-		'Zero border utilities: `.u-` names deleted with the t-shirt utilities, `.pr-u-` names still shipping',
-		'Utilitaires de bordure à zéro : noms `.u-` supprimés avec les utilitaires t-shirt, noms `.pr-u-` toujours livrés',
-	],
-	['Font sizes and line heights', 'Tailles de police et hauteurs de ligne'],
-	['Vertical paddings, only read with `$deprecatedSpacings: true`', 'Paddings verticaux, lus uniquement avec `$deprecatedSpacings: true`'],
-]);
+// Derives the Nom cell when every pattern expands to a short plain list and no comment labels it.
+const autoNom = (e) => {
+	if (e.groups.some((g) => g.label)) return null;
+	const items = [];
+	for (const src of e.groups.flatMap((g) => g.sources)) {
+		const it = nomItems(src);
+		if (!it) return null;
+		items.push(...it);
+	}
+	// Longer lists need factoring, which the agent writes.
+	if (items.length > 10) return null;
+	return `<ul>\n${items.map((i) => '\t' + i).join('\n')}\n</ul>`;
+};
+// Agent-written Nom cells from the current doc, keyed by their `data-pattern`.
+const escAttr = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+const unescAttr = (t) => t.replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+const written = new Map(
+	[...readFileSync(docPath, 'utf8').matchAll(/<td data-pattern="([^"]*)">\n([\s\S]*?)\n\t\t\t<\/td>/g)].map(([, key, body]) => [
+		unescAttr(key),
+		body.replace(/^\t{4}/gm, ''),
+	]),
+);
+const missing = [];
+
+// Returns the Nom cell, plus the pattern key when the agent writes it.
 const nomHtml = (e) => {
 	const key = e.groups.flatMap((g) => g.sources)[0];
-	if (overrides[key]) return overrides[key];
-	const parts = [];
-	for (const g of e.groups) {
-		const items = [];
-		for (const src of g.sources) {
-			const it = nomItems(src);
-			if (!it) throw new Error(`Nom override needed for /${key}/ in nom-overrides.mjs`);
-			items.push(...it);
-		}
-		if (g.label) parts.push(`<p>${inline(FR.get(g.label) ?? g.label)}</p>`);
-		if (items.length) parts.push(`<ul>\n${items.map((i) => '\t' + i).join('\n')}\n</ul>`);
-	}
-	return parts.join('\n');
+	const kept = written.get(key);
+	if (kept) return { html: kept, key };
+	const auto = autoNom(e);
+	if (auto) return { html: auto };
+	missing.push(key);
+	return { html: '<!-- TODO: write this Nom cell, see SKILL.md -->', key };
 };
 
 const indent = (html, tabs) =>
@@ -184,17 +182,19 @@ const indent = (html, tabs) =>
 		.split('\n')
 		.map((l) => '\t'.repeat(tabs) + l)
 		.join('\n');
-const cell = (html) =>
-	html.includes('\n') || html.startsWith('<') ? `\t\t\t<td>\n${indent(html, 4)}\n\t\t\t</td>` : `\t\t\t<td>${html}</td>`;
-const row = (e) =>
-	[
+const cell = (html, attrs = '') =>
+	html.includes('\n') || html.startsWith('<') ? `\t\t\t<td${attrs}>\n${indent(html, 4)}\n\t\t\t</td>` : `\t\t\t<td${attrs}>${html}</td>`;
+const row = (e) => {
+	const nom = nomHtml(e);
+	return [
 		'\t\t<tr>',
-		cell(nomHtml(e)),
+		cell(nom.html, nom.key ? ` data-pattern="${escAttr(nom.key)}"` : ''),
 		`\t\t\t<td>${e.versionDeprecated ?? '–'}</td>`,
 		`\t\t\t<td>${e.versionDeleted ?? '–'}</td>`,
 		cell(actionsHtml(e)),
 		'\t\t</tr>',
 	].join('\n');
+};
 
 const thead = [
 	'<table>',
@@ -216,3 +216,7 @@ writeFileSync(
 	docPath,
 	`${head}\n\n${section('Classes', 'LFDeprecatedSelectors.mjs')}\n${section('Variables CSS', 'LFDeprecatedProperties.mjs')}`,
 );
+if (missing.length) {
+	console.error(`Write these Nom cells in ${docPath}, following SKILL.md:\n${missing.map((k) => `- /${k}/`).join('\n')}`);
+	process.exit(1);
+}

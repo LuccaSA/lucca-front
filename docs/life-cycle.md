@@ -202,7 +202,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.grid(-(offset)?\d+)?\\@mediaMin">
 				<p>Colonnes et offsets de l’ancienne grille, toujours suffixés d’un breakpoint (<code>.grid-6\@mediaMinS</code>)</p>
 				<ul>
 					<li><code>.grid\@mediaMin…</code></li>
@@ -319,7 +319,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="(?=\S*\.(box|card|section)(?![\w-]))(?=\S*\.mod-grey(?![\w-]))\S*">
 				<p>Toute combinaison de <code>.box</code>, <code>.card</code> ou <code>.section</code> avec <code>.mod-grey</code></p>
 				<ul>
 					<li><code>.box</code> <strong>+</strong> <code>.mod-grey</code></li>
@@ -340,7 +340,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])">
 				<ul>
 					<li><code>.u-gap(0|Auto|XXS|XS|…)</code></li>
 					<li><code>.u-columnGap(0|Auto|XXS|XS|…)</code></li>
@@ -383,7 +383,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.u-(inset0|(margin|padding|inset)(Inline|Block)(-(start|end)|Start|End)?0)(?![\w-])">
 				<ul>
 					<li><code>.u-inset0</code></li>
 					<li><code>.u-(margin|padding|inset)(Inline|Block)0</code></li>
@@ -398,7 +398,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0(?![\w-])">
 				<ul>
 					<li><code>.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0</code></li>
 				</ul>
@@ -528,7 +528,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="(?=\S*\.userTile(?![\w-]))(?=\S*\.mod-X{1,3}L(?![\w-]))\S*">
 				<ul>
 					<li><code>.userTile</code> <strong>+</strong> <code>.mod-XL</code></li>
 					<li><code>.userTile</code> <strong>+</strong> <code>.mod-XXL</code></li>
@@ -601,7 +601,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.u-elevate.*">
 				<ul>
 					<li><code>.u-elevate…</code></li>
 				</ul>
@@ -634,7 +634,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.pr-u-(margin|padding)(Top|Right|Bottom|Left)(\d+|Auto)(?![\w-])">
 				<p>Espacements : <code>Top</code> → <code>BlockStart</code>, <code>Right</code> → <code>InlineEnd</code>, <code>Bottom</code> → <code>BlockEnd</code>, <code>Left</code> → <code>InlineStart</code></p>
 				<ul>
 					<li><code>.pr-u-margin(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></li>
@@ -697,7 +697,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.u-text(X?S|M|X{0,3}L)(?![\w-])">
 				<ul>
 					<li><code>.u-text(XS|S|M|L|…)</code></li>
 				</ul>
@@ -720,7 +720,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])">
 				<ul>
 					<li><code>.pr-u-text(XS|S|M|L|…)</code></li>
 				</ul>
@@ -742,7 +742,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.pr-u-h[56](?![\w-])">
 				<ul>
 					<li><code>.pr-u-h5</code></li>
 					<li><code>.pr-u-h6</code></li>
@@ -809,7 +809,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>Remplacer par <code>.mod-ghost</code>.</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.pr-u-border(StartStart|StartEnd|EndStart|EndEnd)?Radius(M|L|XL)(?![\w-])">
 				<ul>
 					<li><code>.pr-u-borderRadius(M|L|XL)</code></li>
 					<li><code>.pr-u-border(StartStart|StartEnd|EndStart|EndEnd)Radius(M|L|XL)</code></li>
@@ -827,7 +827,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.pr-u-textPrimary(?![\w-])">
 				<ul>
 					<li><code>.pr-u-text(Primary|Product|…)</code></li>
 				</ul>
@@ -841,7 +841,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.pr-u-textSuccessContrasted(?![\w-])">
 				<ul>
 					<li><code>.pr-u-text(AI|Cc|Kiwi|Lime|…)</code></li>
 				</ul>
@@ -1064,7 +1064,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.active(?![\w-])">
 				<ul>
 					<li><code>.active</code></li>
 					<li><code>.disabled</code></li>
@@ -1084,7 +1084,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.u-[a-zA-Z]">
 				<ul>
 					<li><code>.u-…</code></li>
 				</ul>
@@ -1115,7 +1115,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 	</thead>
 	<tbody>
 		<tr>
-			<td>
+			<td data-pattern="--commons-elevations-elevation-[1-6](?![\w-])">
 				<ul>
 					<li><code>--commons-elevations-elevation-(1|2|3|4|…)</code></li>
 				</ul>
@@ -1125,7 +1125,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="--commons-boxShadow-X*(S|M|L)(?![\w-])">
 				<ul>
 					<li><code>--commons-boxShadow-S</code></li>
 					<li><code>--commons-boxShadow-M</code></li>
@@ -1137,7 +1137,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="--palettes-(grey|primary|secondary|lucca)-(0|text|25|50|100|200|300|400|500|600|700|800|900)(?![\w-])">
 				<ul>
 					<li><code>--palettes-grey-(0|text|25|50|…)</code></li>
 					<li><code>--palettes-primary-(0|text|25|50|…)</code></li>
@@ -1202,7 +1202,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="--spacings-(0|X{0,2}S|M|X{0,2}L|auto)(?![\w-])">
 				<ul>
 					<li><code>--spacings-(0|auto|XXS|XS|…)</code></li>
 				</ul>
@@ -1257,7 +1257,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>Retirer la variable, sans remplacement.</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="--palettes-(\w+-)?text(?![\w-])">
 				<ul>
 					<li><code>--palettes-…-text</code></li>
 					<li><code>--palettes-text</code></li>
@@ -1334,7 +1334,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="--sizes-(XS|S|M|L|XL|XXL|XXXL)-(fontSize|lineHeight)(?![\w-])">
 				<p>Tailles de police et hauteurs de ligne</p>
 				<ul>
 					<li><code>--sizes-(XS|S|M|L|…)-fontSize</code></li>
@@ -1381,7 +1381,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>Remplacer par <code>--components-title-font</code>.</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="--components-button-(font-size|line-height)(?![\w-])">
 				<ul>
 					<li><code>--components-button-(font-size|line-height)</code></li>
 					<li><code>--components-(callout|calloutFeedbackList|…)-(fontSize|lineHeight)</code></li>
@@ -1398,7 +1398,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="--components-(inlineMessage|simpleSelect|multiSelect|segmentedControl|timepicker|sortableList-helper)-(fontSize|lineHeight)(?![\w-])">
 				<ul>
 					<li><code>--components-(timepicker|multiSelect|…)-(fontSize|lineHeight)</code></li>
 					<li><code>--component-switchField-label-(fontSize|lineHeight)</code></li>
@@ -1467,7 +1467,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="--palettes-AI-\d+(?![\w-])">
 				<ul>
 					<li><code>--palettes-AI-*</code></li>
 				</ul>
