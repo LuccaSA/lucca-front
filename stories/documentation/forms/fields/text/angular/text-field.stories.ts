@@ -145,6 +145,7 @@ export default {
 		},
 		counter: {
 			description: 'Indique le nombre de caractères maximum du champ. Cette information n’est présente qu’à titre indicatif. La longueur du champ doit également être limitée via formControl.',
+			control: { type: 'number' },
 			table: { category: 'inputs (form-field)', defaultValue: { summary: '0' } },
 		},
 		presentation: {
