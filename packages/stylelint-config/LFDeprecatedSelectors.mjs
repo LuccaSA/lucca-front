@@ -76,9 +76,8 @@ export default [
 		objectPattern: /\.form-group\b/,
 		versionDeprecated: '16.4.0',
 		actions: `
-			* \`.form-group\` →
-				* sélecteur : \`.form-field\`
-				* composants Angular : \`lu-text-input\`, \`lu-checkbox-input\`…
+			* sélecteur : \`.form-field\`
+			* composants Angular : \`lu-text-input\`, \`lu-checkbox-input\`…
 		`,
 	},
 	{
@@ -101,9 +100,8 @@ export default [
 		versionDeprecated: '17.2.0',
 		versionDeleted: '19.1.0',
 		actions: `
-			* \`.actionIcon\` →
-				* sans bordure : \`.button.mod-onlyIcon.mod-ghost\`
-				* avec bordure : \`.button.mod-onlyIcon.mod-outlined\`
+			* sans bordure : \`.button.mod-onlyIcon.mod-ghost\`
+			* avec bordure : \`.button.mod-onlyIcon.mod-outlined\`
 		`,
 	},
 	{
@@ -118,9 +116,9 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`*-grey\` → \`*-neutral\`
-			* \`*-primary\` & \`*-secondary\` → \`*-product\`
-			* \`*-lucca\` → \`*-brand\`
+			* \`*-grey\` ⇒ \`*-neutral\`
+			* \`*-primary\` & \`*-secondary\` ⇒ \`*-product\`
+			* \`*-lucca\` ⇒ \`*-brand\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -136,8 +134,8 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`*-grey\` → \`*-neutral\`
-			* \`*-primary\` & \`*-secondary\` → \`*-product\`
+			* \`*-grey\` ⇒ \`*-neutral\`
+			* \`*-primary\` & \`*-secondary\` ⇒ \`*-product\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -158,14 +156,14 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 		actions: `
-			* \`.u-*\` → \`.pr-u-*\`
-			* \`*XXS\` → \`*50\`
-			* \`*XS\` → \`*100\`
-			* \`*S\` → \`*200\`
-			* \`*M\` → \`*300\`
-			* \`*L\` → \`*400\`
-			* \`*XL\` → \`*600\`
-			* \`*XXL\` → \`*800\`
+			* \`.u-*\` ⇒ \`.pr-u-*\`
+			* \`*XXS\` ⇒ \`*50\`
+			* \`*XS\` ⇒ \`*100\`
+			* \`*S\` ⇒ \`*200\`
+			* \`*M\` ⇒ \`*300\`
+			* \`*L\` ⇒ \`*400\`
+			* \`*XL\` ⇒ \`*600\`
+			* \`*XXL\` ⇒ \`*800\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -181,7 +179,7 @@ export default [
 		// SEE https://regex101.com/r/GwCS3W.
 		objectPattern: /\.u-(inset0|(margin|padding|inset)(Inline|Block)(-(start|end)|Start|End)?0)(?![\w-])/,
 		versionDeprecated: '20.2.0',
-		actions: `\`.u-*\` → \`.pr-u-*\``,
+		actions: `\`.u-*\` ⇒ \`.pr-u-*\``,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
@@ -195,8 +193,8 @@ export default [
 		actions: `
 			Passer en camelCase :
 
-			* \`*-start0\` → \`*Start0\`
-			* \`*-end0\` → \`*End0\`
+			* \`*-start0\` ⇒ \`*Start0\`
+			* \`*-end0\` ⇒ \`*End0\`
 		`,
 	},
 	{
@@ -204,7 +202,7 @@ export default [
 		// SEE https://regex101.com/r/RnSmNe.
 		objectPattern: /\.pr-u-(inset|top|bottom|left|right)Reset(?![\w-])/,
 		versionDeprecated: '17.4.0',
-		actions: `\`*Reset\` → \`*0\``,
+		actions: `\`*Reset\` ⇒ \`*0\``,
 	},
 	{
 		// SEE https://regex101.com/r/y2kYBk.
@@ -214,9 +212,9 @@ export default [
 		actions: `
 			Doublon :
 
-			* \`.u-text*\` → \`.pr-u-textAlign*\`
-			* \`*Left\` → \`*Start\`
-			* \`*Right\` → \`*End\`
+			* \`.u-text*\` ⇒ \`.pr-u-textAlign*\`
+			* \`*Left\` ⇒ \`*Start\`
+			* \`*Right\` ⇒ \`*End\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -230,9 +228,9 @@ export default [
 		actions: `
 			Doublon :
 
-			* \`*text*\` → \`*textAlign*\`
-			* \`*Left\` → \`*Start\`
-			* \`*Right\` → \`*End\`
+			* \`*text*\` ⇒ \`*textAlign*\`
+			* \`*Left\` ⇒ \`*Start\`
+			* \`*Right\` ⇒ \`*End\`
 		`,
 	},
 	{
@@ -241,8 +239,8 @@ export default [
 		objectPattern: /(?=\S*\.loading(?![\w-]))(?=\S*\.mod-(dialog|sidePanel)(?![\w-]))\S*/,
 		versionDeprecated: '18.1.0',
 		actions: `
-			* \`*dialog\` → \`*popin\`
-			* \`*sidePanel\` → \`*drawer\`
+			* \`*dialog\` ⇒ \`*popin\`
+			* \`*sidePanel\` ⇒ \`*drawer\`
 		`,
 	},
 	{
@@ -299,8 +297,8 @@ export default [
 		actions: `
 			Segmented control :
 
-			* \`*viewTabs*\` → \`*segmentedControl*\`
-			* \`*-item-tab\` → \`*-item-action\`
+			* \`*viewTabs*\` ⇒ \`*segmentedControl*\`
+			* \`*-item-tab\` ⇒ \`*-item-action\`
 		`,
 	},
 	{
@@ -342,25 +340,25 @@ export default [
 		// Physical utilities, replaced by their logical names
 		// SEE https://regex101.com/r/w7DSuO.
 		objectPattern: [
-			// Spacings: `Top` → `BlockStart`, `Right` → `InlineEnd`, `Bottom` → `BlockEnd`, `Left` → `InlineStart`
+			// Spacings: `Top` ⇒ `BlockStart`, `Right` ⇒ `InlineEnd`, `Bottom` ⇒ `BlockEnd`, `Left` ⇒ `InlineStart`
 			/\.pr-u-(margin|padding)(Top|Right|Bottom|Left)(\d+|Auto)(?![\w-])/,
 			/\.pr-u-border(Top|Right|Bottom|Left)0(?![\w-])/,
 			// Corners: no logical utility, use the `--pr-t-border-radius-*` tokens
 			/\.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius[A-Z]\w*(?![\w-])/,
-			// Alignment, float & clear: `Left` → `Start` / `InlineStart`, `Right` → `End` / `InlineEnd`
+			// Alignment, float & clear: `Left` ⇒ `Start` / `InlineStart`, `Right` ⇒ `End` / `InlineEnd`
 			/\.pr-u-(textAlign|float|clear)(Left|Right)(?![\w-])/,
 		],
 		versionDeprecated: '19.2.0',
 		actions: `
 			Utilitaires logiques :
 
-			* \`*Top*\` → \`*BlockStart*\`
-			* \`*Bottom*\` → \`*BlockEnd*\`
-			* \`*Left*\` → \`*InlineStart*\`
-			* \`*Right*\` → \`*InlineEnd*\`
-			* \`*textAlignLeft\` → \`*textAlignStart\`
-			* \`*textAlignRight\` → \`*textAlignEnd\`
-			* Angles physiques → tokens \`--pr-t-border-radius-*\`.
+			* \`*Top*\` ⇒ \`*BlockStart*\`
+			* \`*Bottom*\` ⇒ \`*BlockEnd*\`
+			* \`*Left*\` ⇒ \`*InlineStart*\`
+			* \`*Right*\` ⇒ \`*InlineEnd*\`
+			* \`*textAlignLeft\` ⇒ \`*textAlignStart\`
+			* \`*textAlignRight\` ⇒ \`*textAlignEnd\`
+			* Angles physiques ⇒ tokens \`--pr-t-border-radius-*\`.
 		`,
 	},
 	{
@@ -376,9 +374,8 @@ export default [
 		objectPattern: /\.mod-withMenu(?![\w-])/,
 		versionDeprecated: '19.3.0',
 		actions: `
-			* \`*withMenu\` →
-				* remplacement : \`*withHorizontalNavigation\`
-				* suppression : \`.pageHeader\` détecte automatiquement \`.horizontalNavigation\`
+			* remplacement : \`*withHorizontalNavigation\`
+			* suppression : \`.pageHeader\` détecte automatiquement \`.horizontalNavigation\`
 		`,
 	},
 	{
@@ -387,8 +384,8 @@ export default [
 		versionDeprecated: '20.1.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* XS, S & M : \`.u-text*\` → \`.pr-u-body*\`
-			* L ~ XXXL →
+			* XS, S & M : \`.u-text*\` ⇒ \`.pr-u-body*\`
+			* L ~ XXXL ⇒
 				* utilitaire de titre : \`.pr-u-hx\`
 				* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
 
@@ -401,8 +398,8 @@ export default [
 		objectPattern: /\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])/,
 		versionDeprecated: '20.1.0',
 		actions: `
-			* XS, S & M : \`*text*\` → \`*body*\`
-			* L ~ XXXL →
+			* XS, S & M : \`*text*\` ⇒ \`*body*\`
+			* L ~ XXXL ⇒
 				* utilitaire de titre : \`.pr-u-hx\`
 				* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
 		`,
@@ -412,9 +409,8 @@ export default [
 		objectPattern: /\.pr-u-h[56](?![\w-])/,
 		versionDeprecated: '20.1.0',
 		actions: `
-			* \`*h5\` & \`*h6\` →
-				* utilitaire : \`*h4\`
-				* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
+			* utilitaire : \`*h4\`
+			* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
 		`,
 	},
 	{
@@ -424,13 +420,13 @@ export default [
 		versionDeprecated: '20.2.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`.mod-text\` →
+			* \`.mod-text\` ⇒
 				* sélecteur : \`.mod-ghost\`
 				* input Angular : \`luButton="ghost"\` ou \`luButton="ghost-invert"\`
-			* \`.mod-delete\` →
+			* \`.mod-delete\` ⇒
 				* sélecteur : \`.mod-critical\`
 				* input Angular : \`critical\`
-			* \`.loading\` →
+			* \`.loading\` ⇒
 				* sélecteur : \`.is-loading\`
 				* input Angular : \`state="loading"\`
 		`,
@@ -451,9 +447,9 @@ export default [
 		],
 		versionDeprecated: '20.2.0',
 		actions: `
-			* \`*RadiusM\` & \`*RadiusL\` → \`*RadiusDefault\`
-			* \`*RadiusXL\` → \`*RadiusStructure\`
-			* Angles → tokens \`--pr-t-border-radius-*\`.
+			* \`*RadiusM\` & \`*RadiusL\` ⇒ \`*RadiusDefault\`
+			* \`*RadiusXL\` ⇒ \`*RadiusStructure\`
+			* Angles ⇒ tokens \`--pr-t-border-radius-*\`.
 		`,
 	},
 	{
@@ -535,11 +531,11 @@ export default [
 		versionDeprecated: '21.0.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`*Grey\` →
+			* \`*Grey\` ⇒
 				* neutre : \`*Neutral\`
 				* défaut : \`*\`
-			* \`*Primary\` & \`*Secondary\` → \`*Product\`
-			* \`*Lucca\` → \`*Brand\`
+			* \`*Primary\` & \`*Secondary\` ⇒ \`*Product\`
+			* \`*Lucca\` ⇒ \`*Brand\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -551,8 +547,8 @@ export default [
 		objectPattern: [/\.palette-AI(?![\w-])/, /\.pr-u-colorTextAI(?![\w-])/],
 		versionDeleted: '21.3.0',
 		actions: `
-			* \`*-AI\` → \`*-orchid\`
-			* \`*TextAI\` → \`*TextOrchid\`
+			* \`*-AI\` ⇒ \`*-orchid\`
+			* \`*TextAI\` ⇒ \`*TextOrchid\`
 		`,
 	},
 	{
@@ -567,9 +563,8 @@ export default [
 		objectPattern: /\.mod-neutralBackground(?![\w-])/,
 		versionDeprecated: '22.0.0',
 		actions: `
-			* \`.dialog.mod-neutralBackground\` →
-				* sélecteur : \`.dialog.mod-surfaceDefault\`
-				* option de \`LuDialogService.open()\` : \`surfaceDefault: true\`
+			* sélecteur : \`.dialog.mod-surfaceDefault\`
+			* option de \`LuDialogService.open()\` : \`surfaceDefault: true\`
 		`,
 	},
 	{
@@ -577,9 +572,8 @@ export default [
 		objectPattern: /\.fancyBox-content-foreground(?![\w-])/,
 		versionDeprecated: '22.1.0',
 		actions: `
-			* \`.fancyBox-content-foreground\` →
-				* HTML : composant \`lu-fancy-box\`, renommer la classe seule fait disparaître les illustrations
-				* input Angular : \`foregroundStartEnd\` à la place de \`foreground\`
+			* HTML : composant \`lu-fancy-box\`, renommer la classe seule fait disparaître les illustrations
+			* input Angular : \`foregroundStartEnd\` à la place de \`foreground\`
 		`,
 	},
 	{
@@ -625,9 +619,8 @@ export default [
 		// SEE https://regex101.com/r/ZPhMSh.
 		objectPattern: /\.table\b/,
 		actions: `
-			* \`.table\` →
-				* [Data table](https://prisme.lucca.io/94310e217/p/4263a5-data-table)
-				* [Index table](https://prisme.lucca.io/94310e217/p/24fc14-index-table)
+			* [Data table](https://prisme.lucca.io/94310e217/p/4263a5-data-table)
+			* [Index table](https://prisme.lucca.io/94310e217/p/24fc14-index-table)
 		`,
 	},
 	{
@@ -661,7 +654,7 @@ export default [
 		// SEE https://regex101.com/r/Yf9bsZ.
 		objectPattern: /\.u-[a-zA-Z]/,
 		versionDeprecated: '20.2.0',
-		actions: `\`.u-*\` → \`.pr-u-*\``,
+		actions: `\`.u-*\` ⇒ \`.pr-u-*\``,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},

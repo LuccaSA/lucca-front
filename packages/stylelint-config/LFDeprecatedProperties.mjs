@@ -25,9 +25,9 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`*-grey-*\` → \`*-neutral-*\`
-			* \`*-primary-*\` & \`*-secondary-*\` → \`*-product-*\`
-			* \`*-lucca-*\` → \`*-brand-*\`
+			* \`*-grey-*\` ⇒ \`*-neutral-*\`
+			* \`*-primary-*\` & \`*-secondary-*\` ⇒ \`*-product-*\`
+			* \`*-lucca-*\` ⇒ \`*-brand-*\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -52,9 +52,8 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`--colors-*-rgb\` →
-				* Sass : \`color.transparentize(var(--palettes-neutral-900), …)\`
-				* CSS : \`color-mix()\`
+			* Sass : \`color.transparentize(var(--palettes-neutral-900), …)\`
+			* CSS : \`color-mix()\`
 		`,
 	},
 	{
@@ -63,14 +62,14 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 		actions: `
-			* \`--spacings-*\` → \`--pr-t-spacings-*\`
-			* \`*XXS\` → \`*50\`
-			* \`*XS\` → \`*100\`
-			* \`*S\` → \`*200\`
-			* \`*M\` → \`*300\`
-			* \`*L\` → \`*400\`
-			* \`*XL\` → \`*600\`
-			* \`*XXL\` → \`*800\`
+			* \`--spacings-*\` ⇒ \`--pr-t-spacings-*\`
+			* \`*XXS\` ⇒ \`*50\`
+			* \`*XS\` ⇒ \`*100\`
+			* \`*S\` ⇒ \`*200\`
+			* \`*M\` ⇒ \`*300\`
+			* \`*L\` ⇒ \`*400\`
+			* \`*XL\` ⇒ \`*600\`
+			* \`*XXL\` ⇒ \`*800\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -82,10 +81,10 @@ export default [
 		versionDeprecated: '18.2.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`--colors-white-color\` →
+			* \`--colors-white-color\` ⇒
 				* couleur : \`--palettes-neutral-0\`
 				* surface : \`--pr-t-elevation-surface-raised\`
-			* \`--colors-black-color\` →
+			* \`--colors-black-color\` ⇒ \\
 			  \`--palettes-neutral-900\`
 		`,
 	},
@@ -101,7 +100,7 @@ export default [
 		// SEE https://regex101.com/r/23TY3b.
 		objectPattern: /--palettes-(\w+-)?text(?![\w-])/,
 		versionDeprecated: '18.2.0',
-		actions: `\`*text\` → \`*0\``,
+		actions: `\`*text\` ⇒ \`*0\``,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
@@ -111,10 +110,9 @@ export default [
 		objectPattern: /--commons-disabled-opacity(?![\w-])/,
 		versionDeprecated: '18.2.0',
 		actions: `
-			* \`--commons-disabled-opacity\` →
-				* token de texte : \`--pr-t-color-text-disabled\`
-				* couleur : \`--commons-disabled-color\`
-				* fond : \`--commons-disabled-background\`
+			* token de texte : \`--pr-t-color-text-disabled\`
+			* couleur : \`--commons-disabled-color\`
+			* fond : \`--commons-disabled-background\`
 		`,
 	},
 	{
@@ -129,9 +127,9 @@ export default [
 		objectPattern: /--components-container-(max-width|padding)(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		actions: `
-			* \`--components-container-max-width\` →
+			* \`--components-container-max-width\` ⇒ \\
 			  \`--commons-container-maxWidth\`
-			* \`--components-container-padding\` →
+			* \`--components-container-padding\` ⇒ \\
 			  \`--commons-container-padding\`
 		`,
 	},
@@ -139,7 +137,7 @@ export default [
 		// SEE https://regex101.com/r/uKwykc.
 		objectPattern: /--commons-font-family(-brand|-cursive)?(?![\w-])/,
 		versionDeprecated: '20.1.0',
-		actions: `\`--commons-*\` → \`--pr-t-*\``,
+		actions: `\`--commons-*\` ⇒ \`--pr-t-*\``,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
@@ -156,22 +154,22 @@ export default [
 		actions: `
 			[Tokens typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) :
 
-			* \`*sizes-XXXL-*\` →
+			* \`*sizes-XXXL-*\` ⇒ \\
 			  aucun token équivalent
-			* \`*sizes-XXL-*\` →
+			* \`*sizes-XXL-*\` ⇒ \\
 			  \`*pr-t-font-heading-1-*\`
-			* \`*sizes-XL-*\` →
+			* \`*sizes-XL-*\` ⇒ \\
 			  \`*pr-t-font-heading-2-*\`
-			* \`*sizes-L-*\` →
+			* \`*sizes-L-*\` ⇒ \\
 			  \`*pr-t-font-heading-3-*\`
-			* \`*sizes-M-*\` →
+			* \`*sizes-M-*\` ⇒
 				* texte : \`*pr-t-font-body-M-*\`
 				* titre : \`*pr-t-font-heading-4-*\`
-			* \`*sizes-S-*\` →
+			* \`*sizes-S-*\` ⇒ \\
 			  \`*pr-t-font-body-S-*\`
-			* \`*sizes-XS-*\` →
+			* \`*sizes-XS-*\` ⇒ \\
 			  \`*pr-t-font-body-XS-*\`
-			* \`--sizes-*-verticalPadding\` →
+			* \`--sizes-*-verticalPadding\` ⇒ \\
 			  tokens \`--pr-t-spacings-*\`
 		`,
 		urls: {
@@ -195,8 +193,8 @@ export default [
 		],
 		versionDeprecated: '20.1.0',
 		actions: `
-			* \`*-fontSize\` → \`*-font\`
-			* \`*-lineHeight\` → \`*-font\`
+			* \`*-fontSize\` ⇒ \`*-font\`
+			* \`*-lineHeight\` ⇒ \`*-font\`
 		`,
 	},
 	{
@@ -210,11 +208,11 @@ export default [
 		],
 		versionDeleted: '20.1.0',
 		actions: `
-			* \`*-fontSize\` → \`*-font\`
-			* \`*-lineHeight\` → \`*-font\`
-			* \`*FontSize\` → \`*Font\`
-			* \`*LineHeight\` → \`*Font\`
-			* \`*-weight\` → \`*-font\`
+			* \`*-fontSize\` ⇒ \`*-font\`
+			* \`*-lineHeight\` ⇒ \`*-font\`
+			* \`*FontSize\` ⇒ \`*Font\`
+			* \`*LineHeight\` ⇒ \`*Font\`
+			* \`*-weight\` ⇒ \`*-font\`
 		`,
 	},
 	{
@@ -246,7 +244,7 @@ export default [
 		objectPattern: /--components-richTextField-(resize|height|minHeight|maxHeight)(?![\w-])/,
 		versionDeprecated: '21.2.0',
 		actions: `
-			\`--components-richTextField-*\` →
+			\`--components-richTextField-*\` ⇒ \\
 			\`--components-richTextField-content-*\`
 		`,
 	},
@@ -256,9 +254,8 @@ export default [
 		objectPattern: /--palettes-AI-\d+(?![\w-])/,
 		versionDeleted: '21.3.0',
 		actions: `
-			* \`--palettes-AI-*\` →
-				* couleur : \`--palettes-orchid-*\`
-				* dégradé : \`--palettes-ai-*\`
+			* couleur : \`--palettes-orchid-*\`
+			* dégradé : \`--palettes-ai-*\`
 
 			(\`*\`: 50-900)
 		`,
@@ -278,21 +275,21 @@ export default [
 		actions: `
 			Avec \`*\` = \`--components-fancyBox\` :
 
-			* \`*-offsetInline\` →
+			* \`*-offsetInline\` ⇒ \\
 			  \`*-content-foregroundStartEnd-insetInlineEnd\`
-			* \`*-offsetBlock\` →
+			* \`*-offsetBlock\` ⇒ \\
 			  \`*-content-foregroundStartEnd-insetBlockStart\`
-			* \`*-imageWidth\` →
+			* \`*-imageWidth\` ⇒ \\
 			  \`*-content-foregroundStartEnd-inlineSize\`
-			* \`*-imageHeight\` →
+			* \`*-imageHeight\` ⇒ \\
 			  \`*-content-foregroundStartEnd-blockSize\`
-			* Image \`*-background-left\` →
+			* Image \`*-background-left\` ⇒
 				* sélecteur : \`.fancyBox-content-backgroundEndStart\`
 				* input Angular : \`backgroundEndStart\`
-			* Image \`*-background-right\` →
+			* Image \`*-background-right\` ⇒
 				* sélecteur : \`.fancyBox-content-backgroundStartEnd\`
 				* input Angular : \`backgroundStartEnd\`
-			* Image \`*-foreground\` →
+			* Image \`*-foreground\` ⇒
 				* sélecteur : \`.fancyBox-content-foregroundStartEnd\`
 				* input Angular : \`foregroundStartEnd\`
 		`,

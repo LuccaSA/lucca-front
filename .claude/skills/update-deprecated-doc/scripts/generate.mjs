@@ -3,6 +3,7 @@
 // Everything before `## Classes` (title, note, style, Composants) is kept as is.
 // Usage, from the repository root: node .claude/skills/update-deprecated-doc/scripts/generate.mjs
 import { readFileSync, writeFileSync } from 'fs';
+import { marked } from 'marked';
 
 const dir = 'packages/stylelint-config/';
 const docPath = 'docs/life-cycle.md';
@@ -66,45 +67,19 @@ const parse = (file) => {
 };
 
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const inline = (t) =>
-	esc(t)
-		.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-		.replace(/`([^`]+)`/g, '<code>$1</code>')
-		.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-
 const actionsHtml = (e) => {
 	const schem = e.schematics ? `(<a href="${e.schematics}">schematics</a>)` : '';
 	if (!e.actions) return schem || '–';
-	// Template literals in the `.mjs` files escape their backticks.
-	const blocks = e.actions
-		.replace(/\\`/g, '`')
-		.split(/\n\s*\n/)
-		.map((b) => b.trim())
-		.filter(Boolean);
-	const parts = blocks.map((b) => {
-		if (b.startsWith('* ')) {
-			const items = [];
-			for (const l of b.split('\n')) {
-				// A two-space continuation line goes on a new line of the same item; a tab-indented item nests.
-				if (/^ {2}\S/.test(l)) items.at(-1).lines.push(l.trim());
-				else if (/^\t\* /.test(l)) items.at(-1).children.push(l.replace(/^\t\*\s+/, ''));
-				else items.push({ lines: [l.replace(/^\*\s+/, '')], children: [] });
-			}
-			const lis = items.map(({ lines, children }) => {
-				const text = lines.map(inline).join('<br>');
-				if (!children.length) return `\t<li>${text}</li>`;
-				const sub = children.map((ch) => `\t\t\t<li>${inline(ch)}</li>`).join('\n');
-				return `\t<li>\n\t\t${text}\n\t\t<ul>\n${sub}\n\t\t</ul>\n\t</li>`;
-			});
-			return `<ul>\n${lis.join('\n')}\n</ul>`;
-		}
-		if (/^(`\*` = |\(`\*`: )/.test(b)) return `<p><small>${inline(b)}</small></p>`;
-		return `<p>${b.split('\n').map(inline).join('<br>')}</p>`;
-	});
+	const md = e.actions
+		// The `.mjs` files hold template literals: undo their escapes.
+		.replace(/\\([\\`$])/g, '$1')
+		// A `*` legend renders small.
+		.replace(/^((?:`\*` = |\(`\*`: ).*)$/gm, '<small>$1</small>')
+		.trim();
 	// A lone one-line sentence without schematics stays bare in its cell.
-	if (blocks.length === 1 && !schem && !/^\* |\n/.test(blocks[0])) return inline(blocks[0]);
-	if (schem) parts.push(schem);
-	return parts.join('\n');
+	if (!schem && !/\n|^\* /.test(md)) return marked.parseInline(md);
+	const html = marked.parse(md).trim();
+	return schem ? `${html}\n${schem}` : html;
 };
 
 // --- Nom derivation ---

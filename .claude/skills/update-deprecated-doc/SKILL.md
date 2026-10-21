@@ -67,15 +67,9 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
 
 - **Widths via the `<style>` block** (`table-layout: fixed`, last `th` 39%) — no
   `<colgroup>`, no inline `style`.
-- **`Action à réaliser`: `actions` markdown converts to HTML.**
-  - `` `code` `` becomes `<code>`.
-  - `[text](url)` becomes `<a>`.
-  - `*` lists become `<ul><li>`.
-  - Tab-indented `*` items become a nested `<ul>`.
-  - Blank-line paragraphs become `<p>`.
-  - A two-space continuation line becomes `<br>`.
+- **`Action à réaliser`: `marked` converts the `actions` Markdown to HTML.**
+  - The script undoes the template-literal escapes first.
   - A `*` legend paragraph is wrapped in `<p><small>`.
-  - `&` becomes `&amp;`.
   - `urls.schematics` always goes on its own line, as `(<a href="…">schematics</a>)`.
 - **Writing `actions`** in the `.mjs` files, in French markdown:
   - Show only the part that changes.
@@ -83,8 +77,12 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
     - Example: `.u-*` becomes `.pr-u-*`.
   - Code-only items take no final period.
   - Sentences keep their final period.
+  - Mappings use `⇒` as their arrow.
   - A list holding a mapping over 40 characters breaks every mapping after its arrow.
+  - The arrow line ends with a Markdown hard break: a backslash, written `\\` in the template literal.
   - The new value then starts the next line, indented by two spaces.
+  - A list with a single item drops the list: the item becomes a plain line.
+  - A line that only repeats the *Nom* goes away: the targets list stands alone.
   - One name with several targets ends its line with the arrow.
     - A sub-list of `label : value` items follows.
   - A `*` legend such as `` `*` = `--components-tag` `` follows the examples.
