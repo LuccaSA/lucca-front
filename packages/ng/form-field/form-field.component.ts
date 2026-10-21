@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
+	ApplicationRef,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
@@ -72,6 +73,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
+	#appRef = inject(ApplicationRef);
 	#renderer = inject(Renderer2);
 	protected parentForm = inject(LU_FORM_INSTANCE, { optional: true });
 
@@ -181,7 +183,9 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	public removeInput(input: InputDirective): void {
 		this.#inputs = this.#inputs.filter((existing) => existing !== input);
-		if (this.#inputs.length > 0) {
+		// When the whole application is being torn down, its injector is destroyed before the views: there is
+		// nothing left to update, and scheduling a render would throw (NG0205).
+		if (this.#inputs.length > 0 && !this.#appRef.injector.destroyed) {
 			afterNextRender(
 				() => {
 					this.prepareInput();
