@@ -270,6 +270,6 @@ export default [
 	{
 		objectPattern: /\.fancyBox-content-foreground(?![\w-])/,
 		versionDeprecated: '22.1.0',
-		actions: `Remplacer par \`.fancyBox-content-foregroundStartEnd\`, et l’input Angular \`foreground\` par \`foregroundStartEnd\`.`,
+		actions: `Angular : remplacer l’input \`foreground\` par \`foregroundStartEnd\`. HTML : passer au composant \`lu-fancy-box\` ; renommer la classe seule fait disparaître les illustrations.`,
 	},
 ];
