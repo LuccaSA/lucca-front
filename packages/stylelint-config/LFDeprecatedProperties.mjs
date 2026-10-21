@@ -25,9 +25,9 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* Remplacer \`grey\` par \`neutral\`.
-			* Remplacer \`primary\` & \`secondary\` par \`product\`.
-			* Remplacer \`lucca\` par \`brand\`.
+			* \`*-grey-*\` → \`*-neutral-*\`
+			* \`*-primary-*\` & \`*-secondary-*\` → \`*-product-*\`
+			* \`*-lucca-*\` → \`*-brand-*\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -64,17 +64,14 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 		actions: `
-			Remplacer par les tokens \`--pr-t-spacings-*\` :
-
-			* \`--spacings-0\` → \`--pr-t-spacings-0\`.
-			* \`--spacings-XXS\` → \`--pr-t-spacings-50\`.
-			* \`--spacings-XS\` → \`--pr-t-spacings-100\`.
-			* \`--spacings-S\` → \`--pr-t-spacings-200\`.
-			* \`--spacings-M\` → \`--pr-t-spacings-300\`.
-			* \`--spacings-L\` → \`--pr-t-spacings-400\`.
-			* \`--spacings-XL\` → \`--pr-t-spacings-600\`.
-			* \`--spacings-XXL\` → \`--pr-t-spacings-800\`.
-			* \`--spacings-auto\` → \`--pr-t-spacings-auto\`.
+			* \`--spacings-*\` → \`--pr-t-spacings-*\`
+			* \`*XXS\` → \`*50\`
+			* \`*XS\` → \`*100\`
+			* \`*S\` → \`*200\`
+			* \`*M\` → \`*300\`
+			* \`*L\` → \`*400\`
+			* \`*XL\` → \`*600\`
+			* \`*XXL\` → \`*800\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -86,8 +83,11 @@ export default [
 		versionDeprecated: '18.2.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* Remplacer \`--colors-white-color\` par \`--palettes-neutral-0\` ou \`--pr-t-elevation-surface-raised\` selon si la couleur en question est considérée comme une couleur ou une surface.
-			* Remplacer \`--colors-black-color\` par \`--palettes-neutral-900\`.
+			* \`--colors-white-color\` →
+				* couleur : \`--palettes-neutral-0\`
+				* surface : \`--pr-t-elevation-surface-raised\`
+			* \`--colors-black-color\` →
+			  \`--palettes-neutral-900\`
 		`,
 	},
 	{
@@ -102,12 +102,7 @@ export default [
 		// SEE https://regex101.com/r/23TY3b.
 		objectPattern: /--palettes-(\w+-)?text(?![\w-])/,
 		versionDeprecated: '18.2.0',
-		actions: `
-			Remplacer la nuance \`text\` par \`0\` :
-
-			* \`--palettes-product-text\` → \`--palettes-product-0\`.
-			* \`--palettes-text\` → \`--palettes-0\`.
-		`,
+		actions: `\`*text\` → \`*0\``,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
@@ -135,18 +130,18 @@ export default [
 		// SEE https://regex101.com/r/BwNNLw.
 		objectPattern: /--components-container-(max-width|padding)(?![\w-])/,
 		versionDeprecated: '18.3.0',
-		actions: `Remplacer par \`--commons-container-maxWidth\` & \`--commons-container-padding\`.`,
+		actions: `
+			* \`--components-container-max-width\` →
+			  \`--commons-container-maxWidth\`
+			* \`--components-container-padding\` →
+			  \`--commons-container-padding\`
+		`,
 	},
 	{
 		// SEE https://regex101.com/r/uKwykc.
 		objectPattern: /--commons-font-family(-brand|-cursive)?(?![\w-])/,
 		versionDeprecated: '20.1.0',
-		actions: `
-			Remplacer par les tokens \`--pr-t-font-family*\` :
-
-			* \`--commons-font-family\` → \`--pr-t-font-family\`.
-			* \`--commons-font-family-brand\` → \`--pr-t-font-family-brand\`.
-		`,
+		actions: `\`--commons-*\` → \`--pr-t-*\``,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
@@ -161,15 +156,23 @@ export default [
 		],
 		versionDeprecated: '20.1.0',
 		actions: `
-			Remplacer par les [tokens typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) :
+			[Tokens typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) :
 
-			* \`--sizes-XXL-*\` → \`--pr-t-font-heading-1-*\`.
-			* \`--sizes-XL-*\` → \`--pr-t-font-heading-2-*\`.
-			* \`--sizes-L-*\` → \`--pr-t-font-heading-3-*\`.
-			* \`--sizes-M-*\` → \`--pr-t-font-body-M-*\`, ou \`--pr-t-font-heading-4-*\` pour un titre.
-			* \`--sizes-S-*\` → \`--pr-t-font-body-S-*\`.
-			* \`--sizes-XS-*\` → \`--pr-t-font-body-XS-*\`.
-			* \`--sizes-*-verticalPadding\` → \`--pr-t-spacings-*\`.
+			* \`*sizes-XXL-*\` →
+			  \`*pr-t-font-heading-1-*\`
+			* \`*sizes-XL-*\` →
+			  \`*pr-t-font-heading-2-*\`
+			* \`*sizes-L-*\` →
+			  \`*pr-t-font-heading-3-*\`
+			* \`*sizes-M-*\` →
+				* texte : \`*pr-t-font-body-M-*\`
+				* titre : \`*pr-t-font-heading-4-*\`
+			* \`*sizes-S-*\` →
+			  \`*pr-t-font-body-S-*\`
+			* \`*sizes-XS-*\` →
+			  \`*pr-t-font-body-XS-*\`
+			* \`--sizes-*-verticalPadding\` →
+			  tokens \`--pr-t-spacings-*\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -192,10 +195,8 @@ export default [
 		],
 		versionDeprecated: '20.1.0',
 		actions: `
-			Remplacer la paire \`fontSize\` / \`lineHeight\` par la variable \`font\` du composant :
-
-			* \`--components-tag-fontSize\` → \`--components-tag-font\`.
-			* \`--components-tag-lineHeight\` → \`--components-tag-font\`.
+			* \`*-fontSize\` → \`*-font\`
+			* \`*-lineHeight\` → \`*-font\`
 		`,
 	},
 	{
@@ -209,11 +210,9 @@ export default [
 		],
 		versionDeleted: '20.1.0',
 		actions: `
-			Remplacer par la variable \`font\` du composant :
-
-			* \`--components-simpleSelect-fontSize\` → \`--components-simpleSelect-font\`.
-			* \`--components-simpleSelect-lineHeight\` → \`--components-simpleSelect-font\`.
-			* \`--components-title-weight\` → \`--components-title-font\`.
+			* \`*-fontSize\` → \`*-font\`
+			* \`*-lineHeight\` → \`*-font\`
+			* \`*-weight\` → \`*-font\`
 		`,
 	},
 	{
@@ -245,12 +244,8 @@ export default [
 		objectPattern: /--components-richTextField-(resize|height|minHeight|maxHeight)(?![\w-])/,
 		versionDeprecated: '21.2.0',
 		actions: `
-			Ajouter \`content\` :
-
-			* \`--components-richTextField-resize\` → \`--components-richTextField-content-resize\`.
-			* \`--components-richTextField-height\` → \`--components-richTextField-content-height\`.
-			* \`--components-richTextField-minHeight\` → \`--components-richTextField-content-minHeight\`.
-			* \`--components-richTextField-maxHeight\` → \`--components-richTextField-content-maxHeight\`.
+			\`--components-richTextField-*\` →
+			\`--components-richTextField-content-*\`
 		`,
 	},
 	{
@@ -259,10 +254,11 @@ export default [
 		objectPattern: /--palettes-AI-\d+(?![\w-])/,
 		versionDeleted: '21.3.0',
 		actions: `
-			Remplacer selon l’usage (\`*\`: 50-900) :
+			* \`--palettes-AI-*\` →
+				* couleur : \`--palettes-orchid-*\`
+				* dégradé : \`--palettes-ai-*\`
 
-			* \`--palettes-orchid-*\` pour une couleur.
-			* \`--palettes-ai-*\` pour un dégradé.
+			(\`*\`: 50-900)
 		`,
 	},
 	{
@@ -278,13 +274,25 @@ export default [
 			/--components-fancyBox-(offsetInline|offsetBlock|imageWidth|imageHeight|background-left|background-right|foreground)(?![\w-])/,
 		versionDeprecated: '22.1.0',
 		actions: `
-			* Remplacer \`--components-fancyBox-offsetInline\` par \`--components-fancyBox-content-foregroundStartEnd-insetInlineEnd\`.
-			* Remplacer \`--components-fancyBox-offsetBlock\` par \`--components-fancyBox-content-foregroundStartEnd-insetBlockStart\`.
-			* Remplacer \`--components-fancyBox-imageWidth\` par \`--components-fancyBox-content-foregroundStartEnd-inlineSize\`.
-			* Remplacer \`--components-fancyBox-imageHeight\` par \`--components-fancyBox-content-foregroundStartEnd-blockSize\`.
-			* Remplacer l’image \`--components-fancyBox-background-left\` par l’élément \`.fancyBox-content-backgroundEndStart\` (input Angular \`backgroundEndStart\`).
-			* Remplacer l’image \`--components-fancyBox-background-right\` par l’élément \`.fancyBox-content-backgroundStartEnd\` (input Angular \`backgroundStartEnd\`).
-			* Remplacer l’image \`--components-fancyBox-foreground\` par l’élément \`.fancyBox-content-foregroundStartEnd\` (input Angular \`foregroundStartEnd\`).
+			Avec \`*\` = \`--components-fancyBox\` :
+
+			* \`*-offsetInline\` →
+			  \`*-content-foregroundStartEnd-insetInlineEnd\`
+			* \`*-offsetBlock\` →
+			  \`*-content-foregroundStartEnd-insetBlockStart\`
+			* \`*-imageWidth\` →
+			  \`*-content-foregroundStartEnd-inlineSize\`
+			* \`*-imageHeight\` →
+			  \`*-content-foregroundStartEnd-blockSize\`
+			* Image \`*-background-left\` →
+				* sélecteur : \`.fancyBox-content-backgroundEndStart\`
+				* input Angular : \`backgroundEndStart\`
+			* Image \`*-background-right\` →
+				* sélecteur : \`.fancyBox-content-backgroundStartEnd\`
+				* input Angular : \`backgroundStartEnd\`
+			* Image \`*-foreground\` →
+				* sélecteur : \`.fancyBox-content-foregroundStartEnd\`
+				* input Angular : \`foregroundStartEnd\`
 		`,
 	},
 ];

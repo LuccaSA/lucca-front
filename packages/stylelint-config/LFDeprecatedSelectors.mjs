@@ -121,9 +121,9 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* Remplacer \`grey\` par \`neutral\`.
-			* Remplacer \`primary\` & \`secondary\` par \`product\`.
-			* Remplacer \`lucca\` par \`brand\`.
+			* \`*-grey\` → \`*-neutral\`
+			* \`*-primary\` & \`*-secondary\` → \`*-product\`
+			* \`*-lucca\` → \`*-brand\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -139,8 +139,8 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* Remplacer \`.mod-grey\` par \`.mod-neutral\`.
-			* Remplacer \`primary\` & \`secondary\` par \`product\`.
+			* \`*-grey\` → \`*-neutral\`
+			* \`*-primary\` & \`*-secondary\` → \`*-product\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -161,10 +161,14 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 		actions: `
-			Remplacer par les utilitaires \`.pr-u-\` :
-
-			* \`.u-border0\` → \`.pr-u-border0\`.
-			* \`.u-marginS\` → \`.pr-u-margin200\`, les tailles t-shirt devenant des tokens.
+			* \`.u-*\` → \`.pr-u-*\`
+			* \`*XXS\` → \`*50\`
+			* \`*XS\` → \`*100\`
+			* \`*S\` → \`*200\`
+			* \`*M\` → \`*300\`
+			* \`*L\` → \`*400\`
+			* \`*XL\` → \`*600\`
+			* \`*XXL\` → \`*800\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -180,7 +184,7 @@ export default [
 		// SEE https://regex101.com/r/GwCS3W.
 		objectPattern: /\.u-(inset0|(margin|padding|inset)(Inline|Block)(-(start|end)|Start|End)?0)(?![\w-])/,
 		versionDeprecated: '20.2.0',
-		actions: `Remplacer le préfixe \`.u-\` par \`.pr-u-\`.`,
+		actions: `\`.u-*\` → \`.pr-u-*\``,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
@@ -192,10 +196,10 @@ export default [
 		objectPattern: /\.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0(?![\w-])/,
 		versionDeleted: '22.0.0',
 		actions: `
-			Remplacer par le nom en camelCase :
+			Passer en camelCase :
 
-			* \`.pr-u-marginInline-start0\` → \`.pr-u-marginInlineStart0\`.
-			* \`.pr-u-paddingBlock-end0\` → \`.pr-u-paddingBlockEnd0\`.
+			* \`*-start0\` → \`*Start0\`
+			* \`*-end0\` → \`*End0\`
 		`,
 	},
 	{
@@ -203,12 +207,7 @@ export default [
 		// SEE https://regex101.com/r/RnSmNe.
 		objectPattern: /\.pr-u-(inset|top|bottom|left|right)Reset(?![\w-])/,
 		versionDeprecated: '17.4.0',
-		actions: `
-			Remplacer \`Reset\` par \`0\` :
-
-			* \`.pr-u-insetReset\` → \`.pr-u-inset0\`.
-			* \`.pr-u-topReset\` → \`.pr-u-top0\`.
-		`,
+		actions: `\`*Reset\` → \`*0\``,
 	},
 	{
 		// SEE https://regex101.com/r/y2kYBk.
@@ -216,11 +215,11 @@ export default [
 		versionDeprecated: '18.1.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			Doublon. Remplacer par :
+			Doublon :
 
-			* \`.pr-u-textAlignStart\`.
-			* \`.pr-u-textAlignCenter\`.
-			* \`.pr-u-textAlignEnd\`.
+			* \`.u-text*\` → \`.pr-u-textAlign*\`
+			* \`*Left\` → \`*Start\`
+			* \`*Right\` → \`*End\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -232,11 +231,11 @@ export default [
 		objectPattern: /\.pr-u-text(Left|Center|Right)(?![\w-])/,
 		versionDeprecated: '18.1.0',
 		actions: `
-			Doublon. Remplacer par :
+			Doublon :
 
-			* \`.pr-u-textAlignStart\`.
-			* \`.pr-u-textAlignCenter\`.
-			* \`.pr-u-textAlignEnd\`.
+			* \`*text*\` → \`*textAlign*\`
+			* \`*Left\` → \`*Start\`
+			* \`*Right\` → \`*End\`
 		`,
 	},
 	{
@@ -245,8 +244,8 @@ export default [
 		objectPattern: /(?=\S*\.loading(?![\w-]))(?=\S*\.mod-(dialog|sidePanel)(?![\w-]))\S*/,
 		versionDeprecated: '18.1.0',
 		actions: `
-			* Remplacer \`.mod-dialog\` par \`.mod-popin\`.
-			* Remplacer \`.mod-sidePanel\` par \`.mod-drawer\`.
+			* \`*dialog\` → \`*popin\`
+			* \`*sidePanel\` → \`*drawer\`
 		`,
 	},
 	{
@@ -301,12 +300,10 @@ export default [
 		objectPattern: /\.viewTabs(-item(-tab)?|_panel)?(?![\w-])/,
 		versionDeprecated: '18.2.1',
 		actions: `
-			Remplacer par les classes de Segmented control :
+			Segmented control :
 
-			* \`.viewTabs\` → \`.segmentedControl\`.
-			* \`.viewTabs-item\` → \`.segmentedControl-item\`.
-			* \`.viewTabs-item-tab\` → \`.segmentedControl-item-action\`.
-			* \`.viewTabs_panel\` → \`.segmentedControl_panel\`.
+			* \`*viewTabs*\` → \`*segmentedControl*\`
+			* \`*-item-tab\` → \`*-item-action\`
 		`,
 	},
 	{
@@ -358,15 +355,15 @@ export default [
 		],
 		versionDeprecated: '19.2.0',
 		actions: `
-			Remplacer par les utilitaires logiques :
+			Utilitaires logiques :
 
-			* \`Top\` → \`BlockStart\`.
-			* \`Bottom\` → \`BlockEnd\`.
-			* \`Left\` → \`InlineStart\`.
-			* \`Right\` → \`InlineEnd\`.
-			* \`textAlignLeft\` → \`textAlignStart\`.
-			* \`textAlignRight\` → \`textAlignEnd\`.
-			* Angles physiques : utiliser les tokens \`--pr-t-border-radius-*\`.
+			* \`*Top*\` → \`*BlockStart*\`
+			* \`*Bottom*\` → \`*BlockEnd*\`
+			* \`*Left*\` → \`*InlineStart*\`
+			* \`*Right*\` → \`*InlineEnd*\`
+			* \`*textAlignLeft\` → \`*textAlignStart\`
+			* \`*textAlignRight\` → \`*textAlignEnd\`
+			* Angles physiques → tokens \`--pr-t-border-radius-*\`.
 		`,
 	},
 	{
@@ -382,10 +379,9 @@ export default [
 		objectPattern: /\.mod-withMenu(?![\w-])/,
 		versionDeprecated: '19.3.0',
 		actions: `
-			Au choix :
-
-			* Remplacer par \`.mod-withHorizontalNavigation\`.
-			* Retirer la classe : \`.pageHeader\` détecte automatiquement \`.horizontalNavigation\`.
+			* \`*withMenu\` →
+				* remplacement : \`*withHorizontalNavigation\`
+				* suppression : \`.pageHeader\` détecte automatiquement \`.horizontalNavigation\`
 		`,
 	},
 	{
@@ -394,9 +390,10 @@ export default [
 		versionDeprecated: '20.1.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			Remplacer par les classes \`.pr-u-bodyXS\`, \`.pr-u-bodyS\`, \`.pr-u-bodyM\`.
-
-			Les utilitaires L ~ XXXL peuvent être remplacés par un utilitaire de titre \`.pr-u-hx\` ou le [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) correspondant.
+			* XS, S & M : \`.u-text*\` → \`.pr-u-body*\`
+			* L ~ XXXL →
+				* utilitaire de titre : \`.pr-u-hx\`
+				* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
 
 			[Plus d’informations sur le sujet](https://www.notion.so/luccasoftware/Tokens-Typo-1ebd278ab26e808a9b58d1017514ecb9).
 		`,
@@ -407,9 +404,10 @@ export default [
 		objectPattern: /\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])/,
 		versionDeprecated: '20.1.0',
 		actions: `
-			Remplacer par les classes \`.pr-u-bodyXS\`, \`.pr-u-bodyS\`, \`.pr-u-bodyM\`.
-
-			Les utilitaires L ~ XXXL peuvent être remplacés par un utilitaire de titre \`.pr-u-hx\` ou le [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) correspondant.
+			* XS, S & M : \`*text*\` → \`*body*\`
+			* L ~ XXXL →
+				* utilitaire de titre : \`.pr-u-hx\`
+				* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
 		`,
 	},
 	{
@@ -417,10 +415,9 @@ export default [
 		objectPattern: /\.pr-u-h[56](?![\w-])/,
 		versionDeprecated: '20.1.0',
 		actions: `
-			Remplacer par :
-
-			* \`.pr-u-h4\`.
-			* le [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) correspondant.
+			* \`*h5\` & \`*h6\` →
+				* utilitaire : \`*h4\`
+				* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
 		`,
 	},
 	{
@@ -452,9 +449,9 @@ export default [
 		],
 		versionDeprecated: '20.2.0',
 		actions: `
-			* Remplacer \`.pr-u-borderRadiusM\` & \`.pr-u-borderRadiusL\` par \`.pr-u-borderRadiusDefault\`.
-			* Remplacer \`.pr-u-borderRadiusXL\` par \`.pr-u-borderRadiusStructure\`.
-			* Angles : utiliser les tokens \`--pr-t-border-radius-*\`.
+			* \`*RadiusM\` & \`*RadiusL\` → \`*RadiusDefault\`
+			* \`*RadiusXL\` → \`*RadiusStructure\`
+			* Angles → tokens \`--pr-t-border-radius-*\`.
 		`,
 	},
 	{
@@ -536,9 +533,11 @@ export default [
 		versionDeprecated: '21.0.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* Remplacer \`.pr-u-colorTextGrey\` par \`.pr-u-colorText\` ou \`.pr-u-colorTextNeutral\`.
-			* Remplacer \`.pr-u-colorTextPrimary\` & \`.pr-u-colorTextSecondary\` par \`.pr-u-colorTextProduct\`.
-			* Remplacer \`.pr-u-colorTextLucca\` par \`.pr-u-colorTextBrand\`.
+			* \`*Grey\` →
+				* neutre : \`*Neutral\`
+				* défaut : \`*\`
+			* \`*Primary\` & \`*Secondary\` → \`*Product\`
+			* \`*Lucca\` → \`*Brand\`
 		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
@@ -550,10 +549,8 @@ export default [
 		objectPattern: [/\.palette-AI(?![\w-])/, /\.pr-u-colorTextAI(?![\w-])/],
 		versionDeleted: '21.3.0',
 		actions: `
-			Remplacer \`AI\` par \`orchid\` :
-
-			* \`.palette-AI\` → \`.palette-orchid\`.
-			* \`.pr-u-colorTextAI\` → \`.pr-u-colorTextOrchid\`.
+			* \`*-AI\` → \`*-orchid\`
+			* \`*TextAI\` → \`*TextOrchid\`
 		`,
 	},
 	{
@@ -568,10 +565,9 @@ export default [
 		objectPattern: /\.mod-neutralBackground(?![\w-])/,
 		versionDeprecated: '22.0.0',
 		actions: `
-			Remplacer par :
-
-			* \`.mod-surfaceDefault\`.
-			* l’option \`surfaceDefault\` de la dialog Angular.
+			* \`.dialog.mod-neutralBackground\` →
+				* sélecteur : \`.dialog.mod-surfaceDefault\`
+				* option de \`LuDialogService.open()\` : \`surfaceDefault: true\`
 		`,
 	},
 	{
@@ -660,7 +656,7 @@ export default [
 		// SEE https://regex101.com/r/Yf9bsZ.
 		objectPattern: /\.u-[a-zA-Z]/,
 		versionDeprecated: '20.2.0',
-		actions: `Remplacer le préfixe \`.u-\` par \`.pr-u-\`.`,
+		actions: `\`.u-*\` → \`.pr-u-*\``,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
