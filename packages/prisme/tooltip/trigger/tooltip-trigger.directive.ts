@@ -452,7 +452,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		}
 		const trigger = this.#resolveTriggerAnchorElement() ?? this.#host.nativeElement;
 		// A late opening (enter delay, debounced action) must not show a tooltip for a trigger that is gone meanwhile
-		if (!trigger.checkVisibility()) {
+		if (trigger.checkVisibility?.() === false) {
 			// forget the rejected opening, or hovering the trigger once shown would write the same action and open nothing
 			this.#action.set(null);
 			return;
