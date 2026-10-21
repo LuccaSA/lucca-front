@@ -159,7 +159,7 @@ export default {
 		},
 		maxlength: {
 			control: { type: 'number' },
-			description: 'Longueur maximale autorisée pour la valeur du champ. 0 désactive la contrainte.',
+			description: 'Longueur maximale autorisée pour la valeur du champ. Laisser le contrôle vide pour désactiver la contrainte.',
 			table: { category: 'inputs', defaultValue: { summary: '0' } },
 		},
 		mask: {
