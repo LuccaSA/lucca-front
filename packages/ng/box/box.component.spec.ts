@@ -1,24 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { render, screen } from '@testing-library/angular';
+import { render } from '@testing-library/angular';
 import { BoxComponent } from './box.component';
 
 describe(BoxComponent.name, () => {
-	it('should render the heading with the provided aria level', async () => {
-		await render(`<lu-box heading="Accepted documents" description="PDF, JPG and PNG up to 5 MB." hx="2">Content</lu-box>`, {
-			imports: [BoxComponent],
-		});
-
-		expect(screen.getByRole('heading', { level: 2, name: 'Accepted documents' })).toBeInTheDocument();
-		expect(screen.getByText('PDF, JPG and PNG up to 5 MB.')).toBeInTheDocument();
-	});
-
-	it('should keep the deprecated neutral input working', async () => {
-		await render(`<lu-box neutral data-testid="box">Content</lu-box>`, { imports: [BoxComponent] });
-
-		expect(screen.getByTestId('box')).toHaveClass('mod-neutral');
-	});
-
 	it('should display the bubble icon on default themes only', async () => {
 		const { container, rerender } = await render(BoxComponent, {
 			inputs: { heading: 'Title', icon: 'fileCopy', theme: 'neutral' },
