@@ -3,6 +3,7 @@ import { createCustomElement } from '@angular/elements';
 import { NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { ElementControl } from './element-control';
+import { closestComponent, ELEMENT_COMPONENT, ElementComponent, ElementComponentHost } from './element-component';
 
 // Fields of Angular Elements' `NgElementImpl` and `ComponentNgElementStrategy` used below
 interface NgElementInternals {
@@ -20,22 +21,7 @@ interface Subscribable {
 // Set by Angular on the elements it renders
 const NG_CONTEXT = '__ngContext__';
 
-const COMPONENT_REF = Symbol('componentRef');
-
 type ElementProperties = Record<string, unknown>;
-
-/**
- * The component rendered by the closest ancestor element registered by this bundle and matching `predicate`, if any.
- */
-function closestComponentRef(element: HTMLElement, predicate: (componentRef: ComponentRef<unknown>) => boolean = () => true): ComponentRef<unknown> | null {
-	for (let ancestor = element.parentElement; ancestor; ancestor = ancestor.parentElement) {
-		const componentRef = (ancestor as unknown as { [COMPONENT_REF]?: () => ComponentRef<unknown> | null })[COMPONENT_REF]?.();
-		if (componentRef && predicate(componentRef)) {
-			return componentRef;
-		}
-	}
-	return null;
-}
 
 let pendingFirstConnects: { element: HTMLElement; connect: () => void }[] = [];
 
@@ -76,7 +62,7 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 	const exposesValue = !inputs.some(({ templateName }) => templateName === 'value');
 	const NgElementClass = createCustomElement(component, { injector }) as unknown as typeof HTMLElement;
 
-	class PrismeElement extends NgElementClass {
+	class PrismeElement extends NgElementClass implements ElementComponentHost {
 		readonly #control = new ElementControl(this, exposesValue);
 
 		constructor() {
@@ -85,7 +71,7 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			// lookup since the parent is only known once connected
 			const parent = {
 				get: <T>(token: ProviderToken<T>, notFoundValue?: T, options?: InjectOptions): T =>
-					(closestComponentRef(this)?.injector ?? injector).get(token, notFoundValue, options as InjectOptions & { optional?: false }),
+					(closestComponent(this)?.injector ?? injector).get(token, notFoundValue, options as InjectOptions & { optional?: false }),
 			};
 			// Must be set before anything creates the Angular Elements strategy, which reads it once
 			(this as unknown as NgElementInternals).injector = createEnvironmentInjector(
@@ -117,6 +103,8 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 		 */
 		#renderedByAngular: boolean | null = null;
 
+		#pageClasses: string[] | null = null;
+
 		connectedCallback(): void {
 			if (this.#renderedByAngular === null) {
 				// Deferred: Angular marks the elements it renders right after inserting them
@@ -135,7 +123,10 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			}
 
 			const internals = this as unknown as NgElementInternals;
+			// Angular replaces the `class` attribute with the component's host class: keep the page's (`pr-u-*` utilities…)
+			this.#pageClasses ??= [...this.classList];
 			(NgElementClass.prototype as unknown as NgElementInternals).connectedCallback.call(this);
+			this.classList.add(...this.#pageClasses);
 
 			// Angular Elements subscribes to every output: only the listened ones are subscribed below
 			internals.ngElementEventsSubscription?.unsubscribe();
@@ -145,7 +136,8 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			const accessors = internals.ngElementStrategy.componentRef?.injector.get(NG_VALUE_ACCESSOR, null);
 			if (accessors?.length) {
 				this.#control.connect(accessors[0], (this as unknown as ElementProperties)['value']);
-				this.#control.linkFormField(closestComponentRef(this, ({ instance }) => instance instanceof FormFieldComponent) as ComponentRef<FormFieldComponent> | null);
+				const formField = closestComponent(this, ({ instance }) => instance instanceof FormFieldComponent);
+				this.#control.linkFormField(formField && { element: formField.element, instance: formField.instance as FormFieldComponent });
 			}
 		}
 
@@ -154,7 +146,7 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 		#subscribedOutputs = new WeakMap<object, Set<string>>();
 
 		#subscribeOutput(name: string): void {
-			const instance = this[COMPONENT_REF]()?.instance as Record<string, Subscribable> | undefined;
+			const instance = this[ELEMENT_COMPONENT]()?.instance as Record<string, Subscribable> | undefined;
 			if (!instance) {
 				return;
 			}
@@ -182,8 +174,9 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			}
 		}
 
-		[COMPONENT_REF](): ComponentRef<unknown> | null {
-			return this.#renderedByAngular === false ? (this as unknown as NgElementInternals).ngElementStrategy.componentRef : null;
+		[ELEMENT_COMPONENT](): ElementComponent | null {
+			const componentRef = this.#renderedByAngular === false ? (this as unknown as NgElementInternals).ngElementStrategy.componentRef : null;
+			return componentRef && { injector: componentRef.injector, instance: componentRef.instance };
 		}
 
 		get value(): unknown {

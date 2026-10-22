@@ -1,4 +1,3 @@
-import { ComponentRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, Validators } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { Subscription } from 'rxjs';
@@ -62,7 +61,7 @@ export class ElementControl extends NgControl {
 	 * `lu-form-field` reads the required and invalid states from the controls of its template, which a control in another
 	 * custom element is not: set them on the closest form field instead.
 	 */
-	linkFormField(formField: ComponentRef<FormFieldComponent> | null): void {
+	linkFormField(formField: { element: HTMLElement; instance: FormFieldComponent } | null): void {
 		this.#formFieldSubscription?.unsubscribe();
 		this.#formFieldSubscription = null;
 
@@ -75,11 +74,12 @@ export class ElementControl extends NgControl {
 		}
 		formField.instance.forceInputRequired.set(required);
 		// The page controls the invalid state itself
-		if ((formField.location.nativeElement as HTMLElement).hasAttribute('invalid')) {
+		if (formField.element.hasAttribute('invalid')) {
 			return;
 		}
-		// Like a form field around `ngModel`: invalid once touched
-		const updateInvalid = () => formField.setInput('invalid', this.#control.invalid && this.#control.touched);
+		// Like a form field around `ngModel`: invalid once touched. Set through the element's `invalid` input.
+		const fieldElement = formField.element as HTMLElement & { invalid: boolean };
+		const updateInvalid = () => (fieldElement.invalid = this.#control.invalid && this.#control.touched);
 		updateInvalid();
 		this.#formFieldSubscription = this.#control.events.subscribe(updateInvalid);
 	}

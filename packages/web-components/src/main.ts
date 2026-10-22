@@ -11,6 +11,7 @@ import { LOCALE_ID, Type } from '@angular/core';
 import { createApplication } from '@angular/platform-browser';
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { configureLuDialog, DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, provideLuDialog } from '@lucca-front/ng/dialog';
 import { EmptyStatePageComponent, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -22,7 +23,10 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
+import { LuToastsComponent } from '@lucca-front/ng/toast';
 import { defineElement } from './define-element';
+import { createDialogApi } from './dialog';
+import { createToastsApi } from './toasts';
 
 /**
  * Components rendered by Angular at runtime, keyed by the name used in `window.Prisme`.
@@ -52,11 +56,17 @@ const ELEMENTS: Record<string, { tagName: string; component: Type<unknown> }> = 
 	ReadMore: { tagName: 'lu-read-more', component: ReadMoreComponent },
 	ScrollBox: { tagName: 'lu-scroll-box', component: ScrollBoxComponent },
 	SkipLinks: { tagName: 'lu-skip-links', component: LuSkipLinksComponent },
+	// Overlays: opened with `Prisme.dialog` and `Prisme.toasts`
+	Dialog: { tagName: 'lu-dialog', component: DialogComponent },
+	DialogContent: { tagName: 'lu-dialog-content', component: DialogContentComponent },
+	DialogFooter: { tagName: 'lu-dialog-footer', component: DialogFooterComponent },
+	DialogHeader: { tagName: 'lu-dialog-header', component: DialogHeaderComponent },
+	Toasts: { tagName: 'lu-toasts', component: LuToastsComponent },
 };
 
 declare global {
 	interface Window {
-		Prisme: Record<string, string>;
+		Prisme: Record<string, unknown>;
 	}
 }
 
@@ -67,10 +77,10 @@ declare const PRISME_VERSION: string;
 
 createApplication({
 	// Translations and formats follow the page language, like the brand font does
-	providers: [{ provide: LOCALE_ID, useFactory: () => document.documentElement.lang || 'fr-FR' }],
+	providers: [{ provide: LOCALE_ID, useFactory: () => document.documentElement.lang || 'fr-FR' }, configureLuDialog(), provideLuDialog()],
 })
 	.then(({ injector }) => {
-		window.Prisme = { version: PRISME_VERSION };
+		window.Prisme = { version: PRISME_VERSION, dialog: createDialogApi(injector), toasts: createToastsApi(injector) };
 		for (const [name, { tagName, component }] of Object.entries(ELEMENTS)) {
 			if (!customElements.get(tagName)) {
 				defineElement(tagName, component, injector);

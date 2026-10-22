@@ -38,9 +38,36 @@ npm run build:web-components   # → dist/web-components/bundle.{js,css}
 - Form components expose `value` and a `valueChange` event, replacing `ngModel`. In a `lu-form-field`, the `required` attribute shows the required mark, and the field turns invalid once touched while empty, unless the page sets `invalid` on the field itself.
 - Angular outputs are dispatched as `CustomEvent`s with the same name, once listened with `addEventListener`. As in a template, some components change when an output is listened: `clueChange` makes a select searchable, `deleteFile` shows the delete button of a file entry.
 - Elements render once the page is parsed, so properties set by page scripts are there from the first render.
-- Nested elements work as in a template (`lu-grid-column` in `lu-grid`).
+- Nested elements work as in a template (`lu-grid-column` in `lu-grid`), and classes set by the page (`pr-u-*`…) are kept.
 - `<html lang>` sets the locale (translations, date formats).
-- `window.Prisme` lists the available elements and the bundle `version`.
+- `window.Prisme` lists the available elements, the bundle `version`, and the `dialog` and `toasts` services.
+
+## Dialogs and toasts
+
+Write the dialog in a `<template>`, with the same markup as the Angular template, and open it with `luDialogOpen` (the template id) or `Prisme.dialog.open`:
+
+```html
+<button class="button" luDialogOpen="delete">Delete</button>
+
+<template id="delete">
+  <lu-dialog>
+    <lu-dialog-header><h1>Delete the expense?</h1></lu-dialog-header>
+    <lu-dialog-content><p>This cannot be undone.</p></lu-dialog-content>
+    <lu-dialog-footer>
+      <div class="footer-actions">
+        <button class="button palette-critical" luDialogClose>Delete</button>
+        <button class="button mod-ghost" luDialogDismiss>Cancel</button>
+      </div>
+    </lu-dialog-footer>
+  </lu-dialog>
+</template>
+
+<script>
+  const ref = Prisme.dialog.open('#delete', { size: 'S' }); // same options as LuDialogService.open: size, mode, alert…
+  ref.closed.then((result) => console.log(result)); // undefined when dismissed
+  Prisme.toasts.add({ type: 'Success', title: 'Deleted', message: 'The expense was deleted.' });
+</script>
+```
 
 ## Available elements
 
@@ -49,6 +76,8 @@ Forms: `lu-date-input`, `lu-date-range-input`, `lu-duration-picker`, `lu-form-fi
 Files: `lu-file-entry`, `lu-multi-file-upload`, `lu-single-file-upload`.
 
 Structure and content: `lu-empty-state-page`, `lu-empty-state-section`, `lu-grid`, `lu-grid-column`, `lu-read-more`, `lu-scroll-box`, `lu-skip-links`.
+
+Overlays: `lu-dialog`, `lu-dialog-header`, `lu-dialog-content`, `lu-dialog-footer` (in a dialog template), `lu-toasts` (added by `Prisme.toasts` if missing).
 
 To add one, register it in `ELEMENTS` in [src/main.ts](src/main.ts).
 
@@ -60,4 +89,4 @@ On every stable tag (`vX.Y.Z`), [deploy.yml](../../.github/workflows/deploy.yml)
 
 - Relies on Angular internals (`injector`, `ngElementStrategy`, `ngElementEventsSubscription`, `__ngContext__`, see [src/define-element.ts](src/define-element.ts)): check them on each Angular major.
 - No `disabled` state on form components yet, and `required` is the only validation.
-- Not exposed yet: services (dialog, modal, toasts), directives (user popover), filter pills, `lu-color-input` and `lu-rich-text-input` (they need a host `ngModel` or directive), `lu-listbox`.
+- Not exposed: the deprecated modal. Not exposed yet: directives (user popover), filter pills, `lu-color-input` and `lu-rich-text-input` (they need a host `ngModel` or directive), `lu-listbox`.
