@@ -83,7 +83,7 @@ export default [
 		versionDeprecated: '17.3.1',
 		versionDeleted: '22.0.0',
 		actions: `
-			* Sass : \`color.transparentize(var(--palettes-neutral-900), …)\`
+			* Sass : \`color.transparentize(var(--palettes-neutral-400), …)\`
 			* CSS : \`color-mix()\`
 		`,
 	},
@@ -95,8 +95,10 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* Sass : \`color.transparentize(var(--palettes-neutral-900), …)\`
+			* Sass : \`color.transparentize(var(--palettes-neutral-*), …)\`
 			* CSS : \`color-mix()\`
+
+			\`*\` = \`0\` pour \`white\`, sinon la nuance d'origine
 		`,
 	},
 	{

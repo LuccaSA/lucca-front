@@ -1539,9 +1539,10 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>22.0.0</td>
 			<td>
 				<ul>
-				<li>Sass : <code>color.transparentize(var(--palettes-neutral-900), …)</code></li>
+				<li>Sass : <code>color.transparentize(var(--palettes-neutral-*), …)</code></li>
 				<li>CSS : <code>color-mix()</code></li>
 				</ul>
+				<p><small><code>*</code> = <code>0</code> pour <code>white</code>, sinon la nuance d&#39;origine</small></p>
 			</td>
 		</tr>
 		<tr>
@@ -1565,7 +1566,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>22.0.0</td>
 			<td>
 				<ul>
-				<li>Sass : <code>color.transparentize(var(--palettes-neutral-900), …)</code></li>
+				<li>Sass : <code>color.transparentize(var(--palettes-neutral-400), …)</code></li>
 				<li>CSS : <code>color-mix()</code></li>
 				</ul>
 			</td>
