@@ -1,14 +1,21 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, Routes } from '@angular/router';
+import { provideRouter, RouterOutlet, Routes } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { vi } from 'vitest';
 import { LinkComponent } from './link.component';
 
 @Component({
+	selector: 'lu-link-child',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: 'child',
+})
+class ChildComponent {}
+
+@Component({
 	selector: 'lu-link-host',
-	imports: [LinkComponent],
+	imports: [LinkComponent, RouterOutlet],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<!-- external links -->
@@ -24,12 +31,15 @@ import { LinkComponent } from './link.component';
 
 		<!-- plain href -->
 		<a class="plain-href" href="https://example.com/docs">plain href</a>
+		<a class="lu-href" luLink href="https://example.com/docs">luLink href</a>
 
 		<!-- modifiers -->
 		<a class="disabled-ext" [luLink]="['/goals/team']" [external]="true" [disabled]="true">disabled external</a>
 		<a class="disabled-int" [luLink]="['/dashboard']" [disabled]="true">disabled internal</a>
 		<a class="decoration" [luLink]="['/dashboard']" [decorationHover]="true">decoration hover</a>
 		<a class="hidden-icon" [luLink]="['/goals/team']" [external]="true" [hiddenIcon]="true">hidden icon</a>
+
+		<router-outlet />
 	`,
 })
 class HostComponent {}
@@ -37,7 +47,7 @@ class HostComponent {}
 const routes: Routes = [
 	{
 		path: 'luccafront/reviews/:id',
-		children: [{ path: 'review', component: HostComponent }],
+		children: [{ path: 'review', component: HostComponent, children: [{ path: 'child', component: ChildComponent }] }],
 	},
 ];
 
@@ -183,6 +193,22 @@ describe(LinkComponent.name, () => {
 			} finally {
 				openSpy.mockRestore();
 			}
+		});
+	});
+
+	describe('navigation', () => {
+		it('keeps the href of every link after navigating to a child route and back', async () => {
+			const harness = await setup();
+			const selectors = ['.ext-array', '.lu-href', '.int-absolute', '.int-relative', '.disabled-ext'];
+			const initialHrefs = selectors.map((selector) => hrefOf(harness, selector));
+
+			await harness.navigateByUrl('/luccafront/reviews/42/review/child');
+			harness.detectChanges();
+			expect(selectors.map((selector) => hrefOf(harness, selector))).toEqual(initialHrefs);
+
+			await harness.navigateByUrl('/luccafront/reviews/42/review');
+			harness.detectChanges();
+			expect(selectors.map((selector) => hrefOf(harness, selector))).toEqual(initialHrefs);
 		});
 	});
 });
