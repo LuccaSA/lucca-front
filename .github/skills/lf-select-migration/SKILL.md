@@ -38,10 +38,9 @@ Read the whole SKILL.md once, then open the reference that matches the step you 
 
 ## 1. Inventory and cut
 
-Run `node scripts/inventory.mjs <front-src-dir>` (default `src/app`); it prints the deprecated
-imports per file, the deprecated elements per template, the home-made wrappers, and byte-identical
-duplicates (legacy tiers often carry a copied page or banner: migrate one, copy the diff to the
-other).
+Run `scripts/inventory.sh <front-root>`; it prints the deprecated imports per file, the deprecated
+elements per template, and byte-identical duplicates (legacy tiers often carry a copied page or
+banner: migrate one, copy the diff to the other).
 
 Cut into three clusters, in this order, one PR each:
 
