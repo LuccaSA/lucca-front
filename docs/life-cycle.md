@@ -1351,7 +1351,16 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 			<td>20.2.0</td>
 			<td>–</td>
-			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0">schematics</a>)</td>
+			<td>
+				<ul>
+				<li><code>*-M</code> ⇒ <code>--pr-t-border-radius-50</code></li>
+				<li><code>*-L</code> ⇒ <code>--pr-t-border-radius-100</code></li>
+				<li><code>*-XL</code> ⇒ <code>--pr-t-border-radius-150</code></li>
+				<li><code>*-full</code> ⇒ <code>--pr-t-border-radius-full</code></li>
+				</ul>
+				<p><small><code>*</code> = <code>--commons-borderRadius</code></small></p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0">schematics</a>)
+			</td>
 		</tr>
 		<tr>
 			<td>

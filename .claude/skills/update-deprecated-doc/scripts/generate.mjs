@@ -52,6 +52,8 @@ const parse = (file) => {
 					entry.actions = am[1];
 					continue;
 				}
+				// Any other actions form would be dropped silently: refuse it.
+				if (l.startsWith('actions:')) throw new Error(`${file}: actions must be a template literal, got: ${l}`);
 				const sm = l.match(/^schematics: '([^']+)'/);
 				if (sm) {
 					entry.schematics = sm[1];

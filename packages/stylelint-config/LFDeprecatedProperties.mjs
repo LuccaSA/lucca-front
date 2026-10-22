@@ -288,7 +288,14 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bb80e0bf0e1f3ffaaff8b4ef573f653dc1d3472e/packages/scss/src/commons/config.scss#L750.
 		objectPattern: /--commons-borderRadius-(M|L|XL|full)(?![\w-])/,
 		versionDeprecated: '20.2.0',
-		actions: 'Remplacer par \`--pr-t-border-radius-XXX\`',
+		actions: `
+			* \`*-M\` ⇒ \`--pr-t-border-radius-50\`
+			* \`*-L\` ⇒ \`--pr-t-border-radius-100\`
+			* \`*-XL\` ⇒ \`--pr-t-border-radius-150\`
+			* \`*-full\` ⇒ \`--pr-t-border-radius-full\`
+
+			\`*\` = \`--commons-borderRadius\`
+		`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0',
 		},
