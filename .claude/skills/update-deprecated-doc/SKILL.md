@@ -125,10 +125,22 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
   - *Suppression* breaks ties.
   - Rows without any version come last.
   - The `.mjs` order never changes: Stylelint uses the first matching entry.
-- **Rows removed before 20.4.0 move to a collapsed table** under the main one.
-  - The table sits in a `<details>` element, summarised `Suppressions antérieures à la 20.4.0`.
-  - The threshold is `collapseBelow` in the script: every running project but a few legacy ones uses it or later.
+- **Rows whose deletion affects under 25% of the org's projects move to a collapsed table** under the main one.
+  - The table sits in a `<details>` element, summarised `Suppressions jusqu’à la <collapseUpTo>`.
+  - The threshold is `collapseUpTo` in the script.
   - Composants follows the same rule.
+  - Refresh `collapseUpTo` on each run:
+    1. List every org `package.json` pinning `@lucca-front/scss`, all result pages included:
+
+       ```bash
+       gh api -X GET search/code -H 'Accept: application/vnd.github.text-match+json' \
+         -f q='"@lucca-front/scss" org:LuccaSA filename:package.json' -f per_page=100 --paginate \
+         --jq '.items[] | [.repository.full_name, .path, ([.text_matches[]?.fragment] | join(" "))] | @tsv'
+       ```
+
+    2. Count one project per `package.json` with a pinned version, `lucca-front` excluded.
+    3. Sort the pins oldest first.
+    4. Set `collapseUpTo` to the pin at the 25th percentile, rounded up.
 - **Historical entries are kept.** The `.mjs` files (and therefore Classes /
   Variables CSS) retain deprecations whose deletion already shipped; Prisme
   prunes those. This divergence is **by design** — don't flag or "fix" it. The

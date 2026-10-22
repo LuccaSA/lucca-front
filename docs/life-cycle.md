@@ -1004,7 +1004,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 </table>
 
 <details>
-<summary>Suppressions antérieures à la 20.4.0</summary>
+<summary>Suppressions jusqu’à la 21.2.2</summary>
 
 <table>
 	<thead>
@@ -1610,7 +1610,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 </table>
 
 <details>
-<summary>Suppressions antérieures à la 20.4.0</summary>
+<summary>Suppressions jusqu’à la 21.2.2</summary>
 
 <table>
 	<thead>
