@@ -182,7 +182,26 @@ jobs:
           VERSION="${VERSION#v}"
 
           # Only the latest bundle is kept: a backport tagged after a newer release must not replace it.
-          CURRENT="$(rclone cat "r2:${R2_BUCKET}/web-components/version.txt" 2>/dev/null || true)"
+          # A missing version.txt (first publication) is confirmed by a listing; any other read failure aborts, so that a
+          # failed read is never mistaken for a first publication.
+          set +e
+          LISTING="$(rclone lsf "r2:${R2_BUCKET}/web-components/" --files-only --include version.txt)"
+          STATUS=$?
+          set -e
+          if [ "$STATUS" -eq 3 ] || { [ "$STATUS" -eq 0 ] && [ -z "$LISTING" ]; }; then
+            # rclone exit code 3: directory not found
+            CURRENT=""
+          elif [ "$STATUS" -eq 0 ]; then
+            CURRENT="$(rclone cat "r2:${R2_BUCKET}/web-components/version.txt")"
+            if ! [[ "$CURRENT" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "Unexpected published version: '${CURRENT}'" >&2
+              exit 1
+            fi
+          else
+            echo "Cannot read the published version (rclone exit code ${STATUS})" >&2
+            exit 1
+          fi
+
           if [ -n "$CURRENT" ] && [ "$(printf '%s\n%s\n' "$VERSION" "$CURRENT" | sort -V | tail -n 1)" != "$VERSION" ]; then
             echo "Skipping web components ${VERSION}: ${CURRENT} is already published"
             exit 0
