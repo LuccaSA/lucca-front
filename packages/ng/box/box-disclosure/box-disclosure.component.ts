@@ -26,7 +26,12 @@ export class BoxDisclosureComponent {
 	/**
 	 * Text displayed below the title, visible when the disclosure box is closed
 	 */
-	readonly description = input<PortalContent>();
+	readonly subtitle = input<PortalContent>();
+
+	/**
+	 * Short information displayed before the chevron, visible when the disclosure box is closed
+	 */
+	readonly metadata = input<PortalContent>();
 
 	/**
 	 * Is the disclosure box open by default

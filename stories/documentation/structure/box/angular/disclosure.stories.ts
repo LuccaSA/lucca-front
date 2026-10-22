@@ -17,9 +17,14 @@ export default {
 			description: 'Titre affiché dans la zone cliquable. [PortalContent]',
 			table: { category: 'inputs' },
 		},
-		description: {
+		subtitle: {
 			type: 'string',
 			description: 'Sous-titre visible panneau replié : y placer les informations critiques. [PortalContent]',
+			table: { category: 'inputs' },
+		},
+		metadata: {
+			type: 'string',
+			description: 'Information courte affichée avant le chevron, visible panneau replié. [PortalContent]',
 			table: { category: 'inputs' },
 		},
 		open: {
@@ -51,6 +56,8 @@ export default {
 
 export const Basic: StoryObj<BoxDisclosureComponent> = {
 	args: {
-		heading: 'Titre',
+		heading: 'Configurer les notifications',
+		subtitle: 'À compléter avant le 3 mars.',
+		metadata: '3 tâches',
 	},
 };

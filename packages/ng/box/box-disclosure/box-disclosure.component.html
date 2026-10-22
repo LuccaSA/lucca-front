@@ -2,10 +2,13 @@
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
 			<span class="boxDisclosure-summary-title"><ng-container *luPortal="heading()" /></span>
-			@if (description(); as description) {
-				<span class="boxDisclosure-summary-description"><ng-container *luPortal="description" /></span>
+			@if (subtitle(); as subtitle) {
+				<span class="boxDisclosure-summary-description"><ng-container *luPortal="subtitle" /></span>
 			}
 		</span>
+		@if (metadata(); as metadata) {
+			<span class="boxDisclosure-summary-metadata"><ng-container *luPortal="metadata" /></span>
+		}
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
 	<div class="boxDisclosure-details">
