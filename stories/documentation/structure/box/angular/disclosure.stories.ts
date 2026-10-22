@@ -22,11 +22,6 @@ export default {
 			description: 'Sous-titre visible panneau replié : y placer les informations critiques. [PortalContent]',
 			table: { category: 'inputs' },
 		},
-		icon: {
-			type: 'string',
-			description: 'Icône affichée dans une bulle à côté du titre. Indisponible sur les thèmes <code>fancy*</code>.',
-			table: { category: 'inputs' },
-		},
 		open: {
 			description: 'Place la box dans son état déplié.',
 			table: { category: 'inputs' },

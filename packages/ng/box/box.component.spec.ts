@@ -4,18 +4,6 @@ import { render } from '@testing-library/angular';
 import { BoxComponent } from './box.component';
 
 describe(BoxComponent.name, () => {
-	it('should display the bubble icon on default themes only', async () => {
-		const { container, rerender } = await render(BoxComponent, {
-			inputs: { heading: 'Title', icon: 'fileCopy', theme: 'neutral' },
-		});
-
-		expect(container.querySelector('lu-bubble-icon')).not.toBeNull();
-
-		await rerender({ inputs: { heading: 'Title', icon: 'fileCopy', theme: 'fancyLight' }, partialUpdate: true });
-
-		expect(container.querySelector('lu-bubble-icon')).toBeNull();
-	});
-
 	it('should display ornaments on fancy themes only', async () => {
 		const { container, rerender } = await render(BoxComponent, {
 			inputs: { theme: 'fancyLight', bubble: 1, illustration: 'calendar' },

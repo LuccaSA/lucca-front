@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
-import { LuccaIcon } from '@lucca-front/icons';
-import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { BoxTheme } from '../box.type';
 
 @Component({
 	selector: 'lu-box-disclosure',
-	imports: [IconComponent, BubbleIconComponent, PortalDirective],
+	imports: [IconComponent, PortalDirective],
 	templateUrl: './box-disclosure.component.html',
 	styleUrl: './box-disclosure.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,11 +29,6 @@ export class BoxDisclosureComponent {
 	readonly description = input<PortalContent>();
 
 	/**
-	 * Icon displayed in a bubble next to the title. Not available with fancy themes.
-	 */
-	readonly icon = input<LuccaIcon>();
-
-	/**
 	 * Is the disclosure box open by default
 	 */
 	readonly open = input(false, { transform: luBooleanAttribute });
@@ -44,8 +37,6 @@ export class BoxDisclosureComponent {
 	 * Emit boolean event when the disclosure box is toggled
 	 */
 	readonly openChange = output<boolean>();
-
-	readonly bubbleIcon = computed(() => (this.theme().startsWith('fancy') ? undefined : this.icon()));
 
 	readonly themeClasses = computed(() => {
 		const theme = this.theme();

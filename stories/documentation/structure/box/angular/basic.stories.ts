@@ -35,11 +35,6 @@ export default {
 			description: 'Niveau aria du titre.',
 			table: { category: 'inputs' },
 		},
-		icon: {
-			type: 'string',
-			description: 'Icône affichée dans une bulle à côté du titre. Indisponible sur les thèmes <code>fancy*</code>.',
-			table: { category: 'inputs' },
-		},
 		bubble: {
 			options: setStoryOptions(HIGHLIGHT_DATA_BUBBLE),
 			control: { type: 'select' },

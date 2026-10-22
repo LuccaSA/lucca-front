@@ -27,10 +27,6 @@
 			@include S;
 		}
 
-		&:has(.box-icon) {
-			@include icon;
-		}
-
 		&:has(.box-illustrations) {
 			@include illustrations;
 		}

@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
-import { LuccaIcon } from '@lucca-front/icons';
-import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions, luBooleanAttribute, luNumberAttribute, luOptionalNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { HighlightDataBubble, HighlightDataIllustration } from '@lucca-front/ng/highlight-data';
@@ -15,7 +13,7 @@ import { BoxHx, BoxSize, BoxTheme } from './box.type';
 	styleUrl: './box.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, ButtonComponent, BubbleIconComponent, PortalDirective, LuSafeExternalSvgPipe],
+	imports: [IconComponent, ButtonComponent, PortalDirective, LuSafeExternalSvgPipe],
 	host: {
 		class: 'box',
 		'[class.mod-toggle]': 'toggle()',
@@ -57,11 +55,6 @@ export class BoxComponent {
 	readonly hx = input(3, { transform: luNumberAttribute<BoxHx> });
 
 	/**
-	 * Icon displayed in a bubble next to the title. Not available with fancy themes.
-	 */
-	readonly icon = input<LuccaIcon>();
-
-	/**
 	 * Decorative bubble displayed on the right, based on the CDN image bubble number. Only available with fancy themes.
 	 */
 	readonly bubble = input<HighlightDataBubble | number>(undefined, { transform: luOptionalNumberAttribute });
@@ -98,8 +91,6 @@ export class BoxComponent {
 	readonly killed = output();
 
 	readonly isFancy = computed(() => this.theme().startsWith('fancy'));
-
-	readonly bubbleIcon = computed(() => (this.isFancy() ? undefined : this.icon()));
 
 	readonly bubbleSrc = computed(() => {
 		const bubble = this.bubble();

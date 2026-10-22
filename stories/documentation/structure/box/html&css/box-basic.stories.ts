@@ -1,20 +1,13 @@
-import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 
 interface BoxBasicStory {
 	theme: string;
 	heading: boolean;
 	description: boolean;
-	icon: boolean;
 }
 
 export default {
 	title: 'Documentation/Structure/Box/HTML&CSS/Basic',
-	decorators: [
-		moduleMetadata({
-			imports: [BubbleIconComponent],
-		}),
-	],
 	argTypes: {
 		theme: {
 			options: ['', 'neutral', 'sunken', 'fancyLight', 'fancyDark'],
@@ -27,18 +20,14 @@ export default {
 		description: {
 			description: 'Ajoute un sous-titre.',
 		},
-		icon: {
-			description: 'Ajoute une icône dans une bulle. Indisponible sur les thèmes <code>fancy*</code>.',
-		},
 	},
 } as Meta;
 
 function getTemplate(args: BoxBasicStory): string {
 	const theme = args.theme ? ` mod-${args.theme}` : '';
-	const icon = args.icon ? `\n\t<lu-bubble-icon class="box-icon" icon="fileCopy" />` : '';
 	const description = args.description ? `\n\t\t<p class="box-header-description">Lucca lit les formats PDF, JPG et PNG jusqu’à 5 Mo.</p>` : '';
 	const header = args.heading
-		? `${icon}\n\t<div class="box-header">
+		? `\n\t<div class="box-header">
 		<div role="heading" aria-level="3" class="box-header-title">Titre</div>${description}
 	</div>`
 		: '';
@@ -54,6 +43,6 @@ const Template = (args: BoxBasicStory) => ({
 });
 
 export const Basic: StoryObj<BoxBasicStory> = {
-	args: { theme: '', heading: true, description: false, icon: false },
+	args: { theme: '', heading: true, description: false },
 	render: Template,
 };

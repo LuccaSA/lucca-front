@@ -6,9 +6,6 @@
 	</div>
 }
 @if (heading(); as heading) {
-	@if (bubbleIcon(); as bubbleIcon) {
-		<lu-bubble-icon class="box-icon" [icon]="bubbleIcon" />
-	}
 	<div class="box-header">
 		<div role="heading" class="box-header-title" [attr.aria-level]="hx()"><ng-container *luPortal="heading" /></div>
 		@if (subtitle(); as subtitle) {
