@@ -1,6 +1,6 @@
 import { createTestStory } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
-import meta, { Basic } from '@/stories/structure/box/angular/disclosure.stories';
+import meta, { Basic } from '@/stories/structure/box-disclosure/angular/basic.stories';
 import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 
 export default {
@@ -17,7 +17,7 @@ export const BasicTEST = createTestStory({ ...Basic, args: { ...Basic.args, open
 	const getDetails = () => canvasElement.querySelector('details') as HTMLDetailsElement;
 
 	await step('Renders closed, with only the heading visible', async () => {
-		await expect(canvas.getByText('Titre')).toBeVisible();
+		await expect(canvas.getByText('Configurer les notifications')).toBeVisible();
 		await expect(getDetails()).not.toHaveAttribute('open');
 		await expect(canvas.getByText('Lorem ipsum dolor sit amet')).not.toBeVisible();
 	});

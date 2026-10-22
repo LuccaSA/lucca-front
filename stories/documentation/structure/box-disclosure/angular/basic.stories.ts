@@ -3,14 +3,14 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
-	title: 'Documentation/Structure/Box/Angular/Disclosure',
+	title: 'Documentation/Structure/BoxDisclosure/Angular/Basic',
 	component: BoxDisclosureComponent,
 	argTypes: {
 		theme: {
 			options: setStoryOptions(BOX_THEME),
 			control: { type: 'select' },
 			description: 'Couleur de fond de la box. Les thèmes <code>fancy*</code> mettent la box en avant.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'white' } },
 		},
 		heading: {
 			type: 'string',
@@ -32,7 +32,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		openChange: {
-			description: "Événement déclenché lors du changement d'état déplié/replié de la box.",
+			description: 'Événement déclenché lors du changement d’état déplié/replié de la box.',
 			action: 'openChange',
 			control: false,
 			table: { category: 'outputs', type: { summary: 'boolean' } },
@@ -47,9 +47,9 @@ export default {
 		return {
 			props: {
 				...args,
-				openChange,
+				onOpenChange: (open: boolean) => openChange?.(open),
 			},
-			template: cleanupTemplate(`<lu-box-disclosure ${generateInputs(args, argTypes)} (openChange)="openChange($event)">Lorem ipsum dolor sit amet</lu-box-disclosure>`),
+			template: cleanupTemplate(`<lu-box-disclosure ${generateInputs(args, argTypes)} (openChange)="onOpenChange($event)">Lorem ipsum dolor sit amet</lu-box-disclosure>`),
 		};
 	},
 } as Meta;
@@ -59,5 +59,7 @@ export const Basic: StoryObj<BoxDisclosureComponent> = {
 		heading: 'Configurer les notifications',
 		subtitle: 'À compléter avant le 3 mars.',
 		metadata: '3 tâches',
+		theme: 'white',
+		open: false,
 	},
 };

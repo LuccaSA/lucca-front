@@ -1,14 +1,14 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
-interface BoxDisclosureStory {
+interface BoxDisclosureBasicStory {
 	theme: string;
 	open: boolean;
 	metadata: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Box/HTML&CSS/Disclosure',
+	title: 'Documentation/Structure/BoxDisclosure/HTML&CSS/Basic',
 	decorators: [
 		moduleMetadata({
 			imports: [IconComponent],
@@ -29,7 +29,7 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: BoxDisclosureStory): string {
+function getTemplate(args: BoxDisclosureBasicStory): string {
 	const theme = args.theme ? ` mod-${args.theme}` : '';
 	const open = args.open ? ' open' : '';
 	const metadata = args.metadata ? `\n\t\t<span class="boxDisclosure-summary-metadata">3 tâches</span>` : '';
@@ -48,12 +48,12 @@ function getTemplate(args: BoxDisclosureStory): string {
 </details>`;
 }
 
-const Template = (args: BoxDisclosureStory) => ({
+const Template = (args: BoxDisclosureBasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Disclosure: StoryObj<BoxDisclosureStory> = {
+export const Basic: StoryObj<BoxDisclosureBasicStory> = {
 	args: { theme: '', open: false, metadata: true },
 	render: Template,
 };
