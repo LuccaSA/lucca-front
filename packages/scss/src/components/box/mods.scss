@@ -17,9 +17,16 @@
 	--palettes-assets-brand: var(--components-box-bubble-brand-dark);
 }
 
+@mixin icon {
+	align-items: center;
+	column-gap: var(--components-box-icon-gap);
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+}
+
 @mixin illustrations {
 	overflow: hidden;
-	padding-inline-end: calc(var(--components-box-illustrations-width) + var(--components-box-padding));
+	padding-inline-end: calc(var(--components-box-illustrations-width) + var(--components-box-padding-inline));
 }
 
 @mixin toggle {

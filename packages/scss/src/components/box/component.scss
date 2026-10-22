@@ -12,20 +12,12 @@
 		margin: var(--components-box-margin);
 	}
 
+	&:has(.box-slot) {
+		display: grid;
+		row-gap: var(--components-box-gap);
+	}
+
 	@at-root ($atRoot) {
-		.box-header {
-			align-items: center;
-			display: flex;
-			gap: var(--components-box-header-gap);
-			margin-block-end: var(--components-box-header-marginBlockEnd);
-		}
-
-		.box-header-text {
-			display: flex;
-			flex-direction: column;
-			min-inline-size: 0;
-		}
-
 		.box-header-title {
 			color: var(--pr-t-color-text-heading);
 			font: var(--components-box-title-font);
@@ -35,6 +27,14 @@
 			color: var(--pr-t-color-text-subtle);
 			font: var(--components-box-description-font);
 			margin: 0;
+		}
+
+		.box-slot {
+			grid-column: 1 / -1;
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.box-illustrations {

@@ -35,18 +35,16 @@ export default {
 
 function getTemplate(args: BoxBasicStory): string {
 	const theme = args.theme ? ` mod-${args.theme}` : '';
-	const icon = args.icon ? `\n\t\t<lu-bubble-icon class="box-header-icon" icon="fileCopy" />` : '';
-	const description = args.description ? `\n\t\t\t<p class="box-header-description">Lucca lit les formats PDF, JPG et PNG jusqu’à 5 Mo.</p>` : '';
+	const icon = args.icon ? `\n\t<lu-bubble-icon class="box-icon" icon="fileCopy" />` : '';
+	const description = args.description ? `\n\t\t<p class="box-header-description">Lucca lit les formats PDF, JPG et PNG jusqu’à 5 Mo.</p>` : '';
 	const header = args.heading
-		? `\n\t<div class="box-header">${icon}
-		<div class="box-header-text">
-			<div role="heading" aria-level="3" class="box-header-title">Titre</div>${description}
-		</div>
+		? `${icon}\n\t<div class="box-header">
+		<div role="heading" aria-level="3" class="box-header-title">Titre</div>${description}
 	</div>`
 		: '';
 
 	return `<div class="box${theme}">${header}
-	Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll.
+	<div class="box-slot">Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll.</div>
 </div>`;
 }
 

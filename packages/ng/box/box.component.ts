@@ -43,7 +43,7 @@ export class BoxComponent {
 	/**
 	 * Text displayed below the title
 	 */
-	readonly description = input<PortalContent>();
+	readonly subtitle = input<PortalContent>();
 
 	/**
 	 * Define the aria level of the title. Defaults to 3.

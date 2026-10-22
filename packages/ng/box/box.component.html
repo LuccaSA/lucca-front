@@ -6,19 +6,17 @@
 	</div>
 }
 @if (heading(); as heading) {
+	@if (bubbleIcon(); as bubbleIcon) {
+		<lu-bubble-icon class="box-icon" [icon]="bubbleIcon" />
+	}
 	<div class="box-header">
-		@if (bubbleIcon(); as bubbleIcon) {
-			<lu-bubble-icon class="box-header-icon" [icon]="bubbleIcon" />
+		<div role="heading" class="box-header-title" [attr.aria-level]="hx()"><ng-container *luPortal="heading" /></div>
+		@if (subtitle(); as subtitle) {
+			<p class="box-header-description"><ng-container *luPortal="subtitle" /></p>
 		}
-		<div class="box-header-text">
-			<div role="heading" class="box-header-title" [attr.aria-level]="hx()"><ng-container *luPortal="heading" /></div>
-			@if (description(); as description) {
-				<p class="box-header-description"><ng-container *luPortal="description" /></p>
-			}
-		</div>
 	</div>
 }
-<ng-content />
+<div class="box-slot"><ng-content /></div>
 @if (bubbleSrc() || illustrationSrc()) {
 	<div class="box-illustrations">
 		@if (bubbleSrc(); as bubbleSrc) {

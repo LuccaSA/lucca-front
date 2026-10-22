@@ -27,12 +27,10 @@ function getTemplate(args: BoxOrnamentsStory): string {
 
 	return `<div class="box${theme}">
 	<div class="box-header">
-		<div class="box-header-text">
-			<div role="heading" aria-level="3" class="box-header-title">Nouveauté</div>
-			<p class="box-header-description">Les notes de frais se déclarent désormais depuis l’application mobile.</p>
-		</div>
+		<div role="heading" aria-level="3" class="box-header-title">Nouveauté</div>
+		<p class="box-header-description">Les notes de frais se déclarent désormais depuis l’application mobile.</p>
 	</div>
-	Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll.
+	<div class="box-slot">Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll.</div>
 	<div class="box-illustrations">
 		<div class="box-illustrations-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
 		<img alt="" class="box-illustrations-front" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/calendar.svg" />

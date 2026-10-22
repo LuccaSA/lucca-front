@@ -18,7 +18,7 @@ export default {
 			description: 'Titre de la box. [PortalContent]',
 			table: { category: 'inputs' },
 		},
-		description: {
+		subtitle: {
 			type: 'string',
 			description: 'Sous-titre affiché sous le titre. [PortalContent]',
 			table: { category: 'inputs' },
