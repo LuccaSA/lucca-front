@@ -40,7 +40,10 @@ export class ElementControl extends NgControl {
 		}
 		this.#accessor = accessor;
 		this.valueAccessor = accessor;
-		accessor.writeValue(this.#exposesValue ? this.#control.value : ownValue);
+		if (!this.#exposesValue) {
+			this.syncOwnValue(ownValue);
+		}
+		accessor.writeValue(this.#control.value);
 		accessor.registerOnChange((value: unknown) => {
 			this.#control.setValue(value, { emitModelToViewChange: false });
 			if (this.#exposesValue) {
@@ -53,6 +56,14 @@ export class ElementControl extends NgControl {
 	setValue(value: unknown): void {
 		this.#control.setValue(value);
 		this.#accessor?.writeValue(value);
+	}
+
+	/**
+	 * For components with their own `value` model: keeps the control in sync with a value set on the component
+	 * (required state included).
+	 */
+	syncOwnValue(value: unknown): void {
+		this.#control.setValue(value, { emitModelToViewChange: false });
 	}
 
 	#formFieldSubscription: Subscription | null = null;

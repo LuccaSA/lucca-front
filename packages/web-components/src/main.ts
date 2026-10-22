@@ -12,7 +12,7 @@ import { LOCALE_ID, Type } from '@angular/core';
 import { createApplication } from '@angular/platform-browser';
 import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { configureLuDialog, DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, provideLuDialog } from '@lucca-front/ng/dialog';
+import { configureLuDialog, DialogComponent, DialogContentComponent, DialogFooterComponent, provideLuDialog } from '@lucca-front/ng/dialog';
 import { EmptyStatePageComponent, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { FilterBarComponent, FilterPillComponent } from '@lucca-front/ng/filter-pills';
@@ -29,7 +29,7 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 import { LuToastsComponent } from '@lucca-front/ng/toast';
 import { defineElement } from './define-element';
 import { ColorInputElementComponent, RichTextInputElementComponent } from './ng-model-wrappers';
-import { createDialogApi } from './dialog';
+import { createDialogApi, DialogHeaderElementComponent } from './dialog';
 import { createToastsApi } from './toasts';
 import { activateUserPopovers, userPopoverInterceptor } from './user-popover';
 
@@ -71,7 +71,7 @@ const ELEMENTS: Record<string, { tagName: string; component: Type<unknown> }> = 
 	Dialog: { tagName: 'lu-dialog', component: DialogComponent },
 	DialogContent: { tagName: 'lu-dialog-content', component: DialogContentComponent },
 	DialogFooter: { tagName: 'lu-dialog-footer', component: DialogFooterComponent },
-	DialogHeader: { tagName: 'lu-dialog-header', component: DialogHeaderComponent },
+	DialogHeader: { tagName: 'lu-dialog-header', component: DialogHeaderElementComponent },
 	Toasts: { tagName: 'lu-toasts', component: LuToastsComponent },
 };
 

@@ -25,17 +25,24 @@ const NG_CONTEXT = '__ngContext__';
 type ElementProperties = Record<string, unknown>;
 
 const CONNECT_DETACHED = Symbol('connectDetached');
+const DESTROY_DETACHED = Symbol('destroyDetached');
+
+interface DetachedElement {
+	[CONNECT_DETACHED](parent: HTMLElement): void;
+	[DESTROY_DETACHED](): void;
+}
 
 /**
  * Connects the elements registered by this bundle in a detached `node`, outside of other registered elements, which
- * connect their own content.
+ * connect their own content. Returns them.
  */
-function connectDetachedElements(node: Node, parent: HTMLElement): void {
+function connectDetachedElements(node: Node, parent: HTMLElement): DetachedElement[] {
 	if (CONNECT_DETACHED in node) {
-		(node as unknown as { [CONNECT_DETACHED](parent: HTMLElement): void })[CONNECT_DETACHED](parent);
-	} else {
-		node.childNodes.forEach((child) => connectDetachedElements(child, parent));
+		const element = node as unknown as DetachedElement;
+		element[CONNECT_DETACHED](parent);
+		return [element];
 	}
+	return [...node.childNodes].flatMap((child) => connectDetachedElements(child, parent));
 }
 
 let pendingFirstConnects: { element: HTMLElement; connect: () => void }[] = [];
@@ -76,8 +83,10 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 	const aliasedInputs = inputs.filter(({ propName, templateName }) => propName !== templateName);
 	const exposesValue = !inputs.some(({ templateName }) => templateName === 'value');
 	const NgElementClass = createCustomElement(component, { injector }) as unknown as typeof HTMLElement;
+	// The accessor Angular Elements defines for a component with its own `value` input (`lu-duration-picker`)
+	const ngValueAccessor = exposesValue ? undefined : Object.getOwnPropertyDescriptor(NgElementClass.prototype, 'value');
 
-	class PrismeElement extends NgElementClass implements ElementComponentHost {
+	class PrismeElement extends NgElementClass implements ElementComponentHost, DetachedElement {
 		readonly #control = new ElementControl(this, exposesValue);
 
 		constructor() {
@@ -154,6 +163,17 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			this.#connect();
 		}
 
+		/**
+		 * Destroys the component of an element connected by `CONNECT_DETACHED`, along with its logical parent's.
+		 */
+		[DESTROY_DETACHED](): void {
+			delete (this as HTMLElement & { [LOGICAL_PARENT]?: HTMLElement })[LOGICAL_PARENT];
+			(NgElementClass.prototype as unknown as NgElementInternals).disconnectedCallback.call(this);
+		}
+
+		// Components already destroying their logical children with them
+		readonly #destroyHooks = new WeakSet<object>();
+
 		#connect(): void {
 			const internals = this as unknown as NgElementInternals;
 			// Angular replaces the `class` attribute with the component's host class: keep the page's (`pr-u-*` utilities…)
@@ -182,7 +202,13 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 				(pill.instance as FilterPillComponent).registerInput(pillInput);
 			}
 
-			this.#pageContent.filter((node) => !node.isConnected).forEach((node) => connectDetachedElements(node, this));
+			const detachedChildren = this.#pageContent.filter((node) => !node.isConnected).flatMap((node) => connectDetachedElements(node, this));
+			// They outlive the template rendering them, not this component, as in Angular
+			const componentRef = internals.ngElementStrategy.componentRef;
+			if (detachedChildren.length && componentRef && !this.#destroyHooks.has(componentRef)) {
+				this.#destroyHooks.add(componentRef);
+				componentRef.onDestroy(() => detachedChildren.forEach((child) => child[DESTROY_DETACHED]()));
+			}
 		}
 
 		readonly #listenedOutputs = new Set<string>();
@@ -225,11 +251,17 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 		}
 
 		get value(): unknown {
-			return this.#control.control.value;
+			return ngValueAccessor ? (ngValueAccessor.get?.call(this) as unknown) : this.#control.control.value;
 		}
 
 		set value(value: unknown) {
-			this.#control.setValue(value);
+			if (ngValueAccessor) {
+				// The component's own `value` input, kept in sync with the control
+				ngValueAccessor.set?.call(this, value);
+				this.#control.syncOwnValue(value);
+			} else {
+				this.#control.setValue(value);
+			}
 		}
 	}
 
@@ -244,11 +276,6 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			configurable: true,
 			enumerable: true,
 		});
-	}
-
-	if (!exposesValue) {
-		// The component has its own `value` input: keep the accessor Angular Elements defined for it
-		delete (PrismeElement.prototype as unknown as ElementProperties)['value'];
 	}
 
 	customElements.define(tagName, PrismeElement);

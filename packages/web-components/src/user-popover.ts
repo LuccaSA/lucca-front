@@ -33,7 +33,8 @@ export const userPopoverInterceptor: HttpInterceptorFn = (request, next) => {
  */
 export function activateUserPopovers(injector: EnvironmentInjector): void {
 	const appRef = injector.get(ApplicationRef);
-	const activated = new WeakSet<Element>();
+	// Destroys the component of each activated trigger
+	const activated = new Map<HTMLElement, () => void>();
 
 	const activate = (element: HTMLElement) => {
 		if (activated.has(element)) {
@@ -43,17 +44,33 @@ export function activateUserPopovers(injector: EnvironmentInjector): void {
 		if (!user) {
 			return;
 		}
-		activated.add(element);
 		users.set(user.id, user);
+		const content = [...element.childNodes];
 		const componentRef = createComponent(UserPopoverHostComponent, {
 			environmentInjector: injector,
 			hostElement: element,
 			// The host content is replaced by the component's: project it back
-			projectableNodes: [[...element.childNodes]],
+			projectableNodes: [content],
 			bindings: [inputBinding('luUserPopover', () => user)],
 		});
 		appRef.attachView(componentRef.hostView);
+		activated.set(element, () => {
+			componentRef.destroy();
+			// Ready to be activated again if inserted back
+			element.replaceChildren(...content);
+		});
 	};
+
+	// Removed triggers: checked once the mutations are done, so that a trigger moved elsewhere is kept
+	const destroyRemoved = () =>
+		queueMicrotask(() =>
+			activated.forEach((destroy, element) => {
+				if (!element.isConnected) {
+					activated.delete(element);
+					destroy();
+				}
+			}),
+		);
 
 	const activateWithin = (root: ParentNode) => {
 		if (root instanceof HTMLElement && root.hasAttribute('luUserPopover')) {
@@ -64,10 +81,12 @@ export function activateUserPopovers(injector: EnvironmentInjector): void {
 
 	const start = () => {
 		activateWithin(document.body);
-		new MutationObserver((mutations) => mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => node instanceof HTMLElement && activateWithin(node)))).observe(document.body, {
-			childList: true,
-			subtree: true,
-		});
+		new MutationObserver((mutations) => {
+			mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => node instanceof HTMLElement && activateWithin(node)));
+			if (mutations.some((mutation) => mutation.removedNodes.length > 0)) {
+				destroyRemoved();
+			}
+		}).observe(document.body, { childList: true, subtree: true });
 	};
 	if (document.readyState === 'loading') {
 		// Let the page scripts set the `luUserPopover` properties first

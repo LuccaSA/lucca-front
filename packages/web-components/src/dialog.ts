@@ -1,8 +1,8 @@
 import { DIALOG_DATA } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, ElementRef, EnvironmentInjector, inject, Injector, ViewEncapsulation } from '@angular/core';
-import { LuDialogConfig, LuDialogRef, LuDialogService } from '@lucca-front/ng/dialog';
+import { ChangeDetectionStrategy, Component, Directive, ElementRef, EnvironmentInjector, inject, Injector, input, OnInit, ViewEncapsulation } from '@angular/core';
+import { DialogHeaderAction, DialogHeaderComponent, DialogHeaderSubtitle, LuDialogConfig, LuDialogRef, LuDialogService } from '@lucca-front/ng/dialog';
 import { firstValueFrom } from 'rxjs';
-import { ELEMENT_COMPONENT, ElementComponentHost } from './element-component';
+import { ELEMENT_COMPONENT, ELEMENT_PAGE_CONTENT, ElementComponentHost } from './element-component';
 
 /**
  * Options of `LuDialogService.open`, without the content.
@@ -51,6 +51,56 @@ class TemplateDialogComponent {
 			this.#dialogRef.dismiss();
 		}
 	}
+}
+
+/**
+ * Moves nodes of the page into its host, before the first render.
+ */
+@Directive({
+	selector: '[luWebComponentsNodes]',
+	host: { style: 'display: contents' },
+})
+export class NodesDirective implements OnInit {
+	readonly #host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+
+	readonly nodes = input.required<readonly Node[]>({ alias: 'luWebComponentsNodes' });
+
+	ngOnInit(): void {
+		this.#host.append(...this.nodes());
+	}
+}
+
+const isMarked = (attribute: string) => (node: Node) => node instanceof Element && node.hasAttribute(attribute);
+
+/**
+ * `lu-dialog-header` renders its action and subtitle slots when content queries find the `dialogHeaderAction` and
+ * `dialogHeaderSubtitle` directives, which page markup does not create: puts the page nodes in elements carrying them.
+ */
+@Component({
+	selector: 'lu-web-components-dialog-header',
+	imports: [DialogHeaderComponent, DialogHeaderAction, DialogHeaderSubtitle, NodesDirective],
+	template: `
+		<lu-dialog-header>
+			@if (action.length) {
+				<div dialogHeaderAction [luWebComponentsNodes]="action"></div>
+			}
+			<div [luWebComponentsNodes]="title"></div>
+			@if (subtitle.length) {
+				<div dialogHeaderSubtitle [luWebComponentsNodes]="subtitle"></div>
+			}
+			<div dialogHeaderContent [luWebComponentsNodes]="content"></div>
+		</lu-dialog-header>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+})
+export class DialogHeaderElementComponent {
+	readonly #nodes = inject(ELEMENT_PAGE_CONTENT);
+
+	protected readonly action = this.#nodes.filter(isMarked('dialogHeaderAction'));
+	protected readonly subtitle = this.#nodes.filter(isMarked('dialogHeaderSubtitle'));
+	protected readonly content = this.#nodes.filter(isMarked('dialogHeaderContent'));
+	protected readonly title = this.#nodes.filter((node) => ![this.action, this.subtitle, this.content].some((slot) => slot.includes(node)));
 }
 
 function findTemplate(selector: string | HTMLTemplateElement): HTMLTemplateElement {
