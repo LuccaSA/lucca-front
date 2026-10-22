@@ -31,6 +31,7 @@ import { defineElement } from './define-element';
 import { ColorInputElementComponent, RichTextInputElementComponent } from './ng-model-wrappers';
 import { createDialogApi, DialogHeaderElementComponent } from './dialog';
 import { createToastsApi } from './toasts';
+import { imagesInterceptor, resolveImages } from './images';
 import { activateUserPopovers, userPopoverInterceptor } from './user-popover';
 
 /**
@@ -92,12 +93,13 @@ createApplication({
 		{ provide: LOCALE_ID, useFactory: () => document.documentElement.lang || 'fr-FR' },
 		configureLuDialog(),
 		provideLuDialog(),
-		provideHttpClient(withInterceptors([userPopoverInterceptor])),
+		provideHttpClient(withInterceptors([imagesInterceptor, userPopoverInterceptor])),
 	],
 })
 	.then(({ injector }) => {
 		window.Prisme = { version: PRISME_VERSION, dialog: createDialogApi(injector), toasts: createToastsApi(injector) };
 		activateUserPopovers(injector);
+		resolveImages();
 		for (const [name, { tagName, component }] of Object.entries(ELEMENTS)) {
 			if (!customElements.get(tagName)) {
 				defineElement(tagName, component, injector);

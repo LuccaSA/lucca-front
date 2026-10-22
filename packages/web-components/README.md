@@ -10,7 +10,7 @@ CSS-only components (`.button`, `.tag`…) are not included: use their HTML mark
 npm run build:web-components   # → dist/web-components/bundle.{js,css}
 ```
 
-`bundle.css` contains the whole design system CSS (all product palettes) with the icon and text fonts inlined, so the bundle needs no network access.
+`bundle.css` contains the whole design system CSS (all product palettes) with the icon and text fonts inlined. `bundle.js` embeds the images of the exposed components (flags, file icons, bubble and fancy dialog illustrations, empty state backgrounds) and serves them in place of the CDN. The bundle needs no network access, and the build downloads these fonts and images from the CDN.
 
 ## Usage
 
