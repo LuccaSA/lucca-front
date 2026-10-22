@@ -23,6 +23,10 @@
 			@include fancyDark;
 		}
 
+		&.mod-S {
+			@include S;
+		}
+
 		&:has(.box-icon) {
 			@include icon;
 		}

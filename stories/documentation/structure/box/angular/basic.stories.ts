@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { BOX_HX, BOX_THEME, BoxComponent, luBoxTranslations } from '@lucca-front/ng/box';
+import { BOX_HX, BOX_SIZE, BOX_THEME, BoxComponent, luBoxTranslations } from '@lucca-front/ng/box';
 import { HIGHLIGHT_DATA_BUBBLE, HIGHLIGHT_DATA_ILLUSTRATION } from '@lucca-front/ng/highlight-data';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { cleanupTemplate, generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
@@ -11,6 +11,12 @@ export default {
 			options: setStoryOptions(BOX_THEME),
 			control: { type: 'select' },
 			description: 'Couleur de fond de la box. Les thèmes <code>fancy*</code> mettent la box en avant.',
+			table: { category: 'inputs' },
+		},
+		size: {
+			options: setStoryOptions(BOX_SIZE),
+			control: { type: 'select' },
+			description: 'Taille de la box.',
 			table: { category: 'inputs' },
 		},
 		heading: {

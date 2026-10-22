@@ -7,7 +7,7 @@ import { HighlightDataBubble, HighlightDataIllustration } from '@lucca-front/ng/
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LU_BOX_TRANSLATIONS } from './box.translate';
-import { BoxHx, BoxTheme } from './box.type';
+import { BoxHx, BoxSize, BoxTheme } from './box.type';
 
 @Component({
 	selector: 'lu-box',
@@ -23,6 +23,7 @@ import { BoxHx, BoxTheme } from './box.type';
 		'[class.mod-sunken]': 'theme() === "sunken"',
 		'[class.mod-fancyLight]': 'theme() === "fancyLight"',
 		'[class.mod-fancyDark]': 'theme() === "fancyDark"',
+		'[class.mod-S]': 'size() === "S"',
 		'[class.mod-withArrow]': 'withArrow()',
 	},
 })
@@ -34,6 +35,11 @@ export class BoxComponent {
 	 * Defaults to white.
 	 */
 	readonly theme = input<BoxTheme>('white');
+
+	/**
+	 * Size of the box. Defaults to M.
+	 */
+	readonly size = input<BoxSize>('M');
 
 	/**
 	 * The title of the box
