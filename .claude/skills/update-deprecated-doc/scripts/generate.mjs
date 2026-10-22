@@ -194,8 +194,18 @@ const compareDesc = (a, b) => {
 const byVersionDesc = (x, y) =>
 	compareDesc(semver(x.versionDeprecated ?? x.versionDeleted), semver(y.versionDeprecated ?? y.versionDeleted)) ||
 	compareDesc(semver(x.versionDeleted ?? x.versionDeprecated), semver(y.versionDeleted ?? y.versionDeprecated));
-const section = (title, file) =>
-	`## ${title}\n\nSource\u00a0: [${file}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${file})\n\n${thead}\n${parse(file).sort(byVersionDesc).map(row).join('\n')}\n\t</tbody>\n</table>\n`;
+// Every running project but a few legacy ones uses this version or a later one.
+const collapseBelow = '20.4.0';
+const removedBefore = (e) => e.versionDeleted && compareDesc(semver(e.versionDeleted), semver(collapseBelow)) > 0;
+const table = (entries) => `${thead}\n${entries.map(row).join('\n')}\n\t</tbody>\n</table>\n`;
+const section = (title, file) => {
+	const entries = parse(file).sort(byVersionDesc);
+	const removed = entries.filter(removedBefore);
+	const collapsed = removed.length
+		? `\n<details>\n<summary>Suppressions ant\u00e9rieures \u00e0 la ${collapseBelow}</summary>\n\n${table(removed)}\n</details>\n`
+		: '';
+	return `## ${title}\n\nSource\u00a0: [${file}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${file})\n\n${table(entries.filter((e) => !removedBefore(e)))}${collapsed}`;
+};
 
 const head = readFileSync(docPath, 'utf8').split('## Classes')[0].trimEnd();
 writeFileSync(

@@ -738,16 +738,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.comment-content-textContainer</code></li>
-				</ul>
-			</td>
-			<td>18.3.0</td>
-			<td>20.1.0</td>
-			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
 					<li><code>.mod-withMenuCompact</code></li>
 				</ul>
 			</td>
@@ -783,54 +773,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>*-item-tab</code> ⇒ <code>*-item-action</code></li>
 				</ul>
 			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.user-info</code></li>
-					<li><code>.user-tile</code></li>
-					<li><code>.user-tile-title</code></li>
-					<li><code>.user-tile-label</code></li>
-					<li><code>.user-tile-footnote</code></li>
-					<li><code>.picture</code></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>20.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.mod-columnSticky-shadowMask</code></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>20.1.0</td>
-			<td>Remplacer par <code>.mod-stickyColumn-shadowMask</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.indexTable-head-row-cell-sortableButton</code></li>
-					<li><code>.table-head-row-cell-sortableButton</code></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>20.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.mod-sortable</code></li>
-					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.sortedAscending</code></li>
-					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.sortedDescending</code></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>20.1.0</td>
-			<td>–</td>
 		</tr>
 		<tr>
 			<td data-pattern="(?=\S*\.userTile(?![\w-]))(?=\S*\.mod-X{1,3}L(?![\w-]))\S*">
@@ -878,60 +820,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>*dialog</code> ⇒ <code>*popin</code></li>
 				<li><code>*sidePanel</code> ⇒ <code>*drawer</code></li>
 				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.u-comma</code></li>
-					<li><code>.u-unit</code></li>
-				</ul>
-			</td>
-			<td>17.4.0</td>
-			<td>19.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])">
-				<ul>
-					<li><code>.u-gap(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-columnGap(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-rowGap(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-margin(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginBlock(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginBottom(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginInline(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginLeft(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginRight(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginTop(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-padding(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingBlock(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingBottom(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingInline(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingLeft(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingRight(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingTop(0|Auto|XXS|XS|…)</code></li>
-				</ul>
-				<p>Utilitaires de bordure à zéro : noms <code>.u-</code> supprimés avec les utilitaires t-shirt, noms <code>.pr-u-</code> toujours livrés</p>
-				<ul>
-					<li><code>.u-border0</code></li>
-					<li><code>.u-border(Top|Right|Bottom|Left|…)0</code></li>
-				</ul>
-			</td>
-			<td>17.4.0</td>
-			<td>19.1.0</td>
-			<td>
-				<ul>
-				<li><code>.u-*</code> ⇒ <code>.pr-u-*</code></li>
-				<li><code>*XXS</code> ⇒ <code>*50</code></li>
-				<li><code>*XS</code> ⇒ <code>*100</code></li>
-				<li><code>*S</code> ⇒ <code>*200</code></li>
-				<li><code>*M</code> ⇒ <code>*300</code></li>
-				<li><code>*L</code> ⇒ <code>*400</code></li>
-				<li><code>*XL</code> ⇒ <code>*600</code></li>
-				<li><code>*XXL</code> ⇒ <code>*800</code></li>
-				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -1049,6 +937,200 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
+					<li><code>.button-icon</code></li>
+				</ul>
+			</td>
+			<td>16.5.0</td>
+			<td>–</td>
+			<td>Retirer la classe : <code>.button</code> applique déjà la taille d’icône.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.form-group</code></li>
+				</ul>
+			</td>
+			<td>16.4.0</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li>sélecteur : <code>.form-field</code></li>
+				<li>composants Angular : <code>lu-text-input</code>, <code>lu-checkbox-input</code>…</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.label(?![\w-])">
+				<ul>
+					<li><code>.label</code></li>
+				</ul>
+				(partout dans un sélecteur)
+			</td>
+			<td>16.3.0</td>
+			<td>–</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.list</code></li>
+				</ul>
+			</td>
+			<td>16.2.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/883e34-sortable-list">Sortable list</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.checkboxesfield</code></li>
+				</ul>
+			</td>
+			<td>–</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/42c88e-checkbox">Checkbox</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.radiosfield</code></li>
+				</ul>
+			</td>
+			<td>–</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
+		</tr>
+	</tbody>
+</table>
+
+<details>
+<summary>Suppressions antérieures à la 20.4.0</summary>
+
+<table>
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Depuis</th>
+			<th>Suppression</th>
+			<th>Action à réaliser</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.comment-content-textContainer</code></li>
+				</ul>
+			</td>
+			<td>18.3.0</td>
+			<td>20.1.0</td>
+			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.user-info</code></li>
+					<li><code>.user-tile</code></li>
+					<li><code>.user-tile-title</code></li>
+					<li><code>.user-tile-label</code></li>
+					<li><code>.user-tile-footnote</code></li>
+					<li><code>.picture</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>20.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.mod-columnSticky-shadowMask</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>20.1.0</td>
+			<td>Remplacer par <code>.mod-stickyColumn-shadowMask</code>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.indexTable-head-row-cell-sortableButton</code></li>
+					<li><code>.table-head-row-cell-sortableButton</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>20.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.mod-sortable</code></li>
+					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.sortedAscending</code></li>
+					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.sortedDescending</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>20.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.u-comma</code></li>
+					<li><code>.u-unit</code></li>
+				</ul>
+			</td>
+			<td>17.4.0</td>
+			<td>19.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])">
+				<ul>
+					<li><code>.u-gap(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-columnGap(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-rowGap(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-margin(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginBlock(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginBottom(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginInline(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginLeft(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginRight(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginTop(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-padding(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingBlock(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingBottom(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingInline(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingLeft(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingRight(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingTop(0|Auto|XXS|XS|…)</code></li>
+				</ul>
+				<p>Utilitaires de bordure à zéro : noms <code>.u-</code> supprimés avec les utilitaires t-shirt, noms <code>.pr-u-</code> toujours livrés</p>
+				<ul>
+					<li><code>.u-border0</code></li>
+					<li><code>.u-border(Top|Right|Bottom|Left|…)0</code></li>
+				</ul>
+			</td>
+			<td>17.4.0</td>
+			<td>19.1.0</td>
+			<td>
+				<ul>
+				<li><code>.u-*</code> ⇒ <code>.pr-u-*</code></li>
+				<li><code>*XXS</code> ⇒ <code>*50</code></li>
+				<li><code>*XS</code> ⇒ <code>*100</code></li>
+				<li><code>*S</code> ⇒ <code>*200</code></li>
+				<li><code>*M</code> ⇒ <code>*300</code></li>
+				<li><code>*L</code> ⇒ <code>*400</code></li>
+				<li><code>*XL</code> ⇒ <code>*600</code></li>
+				<li><code>*XXL</code> ⇒ <code>*800</code></li>
+				</ul>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
 					<li><code>.button</code> <strong>+</strong> <code>.mod-icon</code></li>
 				</ul>
 			</td>
@@ -1084,31 +1166,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.button-icon</code></li>
-				</ul>
-			</td>
-			<td>16.5.0</td>
-			<td>–</td>
-			<td>Retirer la classe : <code>.button</code> applique déjà la taille d’icône.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.form-group</code></li>
-				</ul>
-			</td>
-			<td>16.4.0</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li>sélecteur : <code>.form-field</code></li>
-				<li>composants Angular : <code>lu-text-input</code>, <code>lu-checkbox-input</code>…</li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
 					<li><code>.button</code> <strong>+</strong> <code>.mod-counter</code></li>
 				</ul>
 			</td>
@@ -1129,17 +1186,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.label(?![\w-])">
-				<ul>
-					<li><code>.label</code></li>
-				</ul>
-				(partout dans un sélecteur)
-			</td>
-			<td>16.3.0</td>
-			<td>–</td>
-			<td>–</td>
-		</tr>
-		<tr>
 			<td>
 				<ul>
 					<li><code>.textfield-actionClear</code></li>
@@ -1148,16 +1194,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>16.2.2</td>
 			<td>18.1.0</td>
 			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.list</code></li>
-				</ul>
-			</td>
-			<td>16.2.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/883e34-sortable-list">Sortable list</a>.</td>
 		</tr>
 		<tr>
 			<td data-pattern="\.grid(-(offset)?\d+)?\\@mediaMin">
@@ -1205,28 +1241,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>18.1.0</td>
 			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/425d98-status-badge">Status badge</a>.</td>
 		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.checkboxesfield</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/42c88e-checkbox">Checkbox</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.radiosfield</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
-		</tr>
 	</tbody>
 </table>
+
+</details>
 
 ## Variables CSS
 
@@ -1338,16 +1356,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 		<tr>
 			<td>
 				<ul>
-					<li><code>--pr-t-radius-input</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>20.2.0</td>
-			<td>Remplacer par <code>--pr-t-border-radius-input</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
 					<li><code>--components-numericBadge-fontSize</code></li>
 					<li><code>--components-numericBadge-lineHeight</code></li>
 				</ul>
@@ -1406,17 +1414,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<ul>
-					<li><code>--sizes-fontSize</code></li>
-					<li><code>--sizes-lineHeight</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>20.1.0</td>
-			<td>Remplacer par <code>--components-title-font</code>.</td>
-		</tr>
-		<tr>
 			<td data-pattern="--components-button-(font-size|line-height)(?![\w-])">
 				<ul>
 					<li><code>--components-button-(font-size|line-height)</code></li>
@@ -1430,27 +1427,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<ul>
 				<li><code>*-fontSize</code> ⇒ <code>*-font</code></li>
 				<li><code>*-lineHeight</code> ⇒ <code>*-font</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="--components-(inlineMessage|simpleSelect|multiSelect|segmentedControl|timepicker|sortableList-helper)-(fontSize|lineHeight)(?![\w-])">
-				<ul>
-					<li><code>--components-(timepicker|multiSelect|…)-(fontSize|lineHeight)</code></li>
-					<li><code>--component-switchField-label-(fontSize|lineHeight)</code></li>
-					<li><code>--components-horizontalNavigation-listItemAction(FontSize|LineHeight)</code></li>
-					<li><code>--components-title-weight</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>20.1.0</td>
-			<td>
-				<ul>
-				<li><code>*-fontSize</code> ⇒ <code>*-font</code></li>
-				<li><code>*-lineHeight</code> ⇒ <code>*-font</code></li>
-				<li><code>*FontSize</code> ⇒ <code>*Font</code></li>
-				<li><code>*LineHeight</code> ⇒ <code>*Font</code></li>
-				<li><code>*-weight</code> ⇒ <code>*-font</code></li>
 				</ul>
 			</td>
 		</tr>
@@ -1560,28 +1536,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="--spacings-(0|X{0,2}S|M|X{0,2}L|auto)(?![\w-])">
-				<ul>
-					<li><code>--spacings-(0|auto|XXS|XS|…)</code></li>
-				</ul>
-			</td>
-			<td>17.4.0</td>
-			<td>19.1.0</td>
-			<td>
-				<ul>
-				<li><code>--spacings-*</code> ⇒ <code>--pr-t-spacings-*</code></li>
-				<li><code>*XXS</code> ⇒ <code>*50</code></li>
-				<li><code>*XS</code> ⇒ <code>*100</code></li>
-				<li><code>*S</code> ⇒ <code>*200</code></li>
-				<li><code>*M</code> ⇒ <code>*300</code></li>
-				<li><code>*L</code> ⇒ <code>*400</code></li>
-				<li><code>*XL</code> ⇒ <code>*600</code></li>
-				<li><code>*XXL</code> ⇒ <code>*800</code></li>
-				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
-		</tr>
-		<tr>
 			<td>
 				<ul>
 					<li><code>--components-navSide-fullwidth-palette-alert-color</code></li>
@@ -1643,6 +1597,96 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
+			<td>
+				<ul>
+					<li><code>--commons-background-base</code></li>
+				</ul>
+			</td>
+			<td>17.3.0</td>
+			<td>–</td>
+			<td>Remplacer par le token <code>--pr-t-elevation-surface-default</code>.</td>
+		</tr>
+	</tbody>
+</table>
+
+<details>
+<summary>Suppressions antérieures à la 20.4.0</summary>
+
+<table>
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Depuis</th>
+			<th>Suppression</th>
+			<th>Action à réaliser</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--pr-t-radius-input</code></li>
+				</ul>
+			</td>
+			<td>–</td>
+			<td>20.2.0</td>
+			<td>Remplacer par <code>--pr-t-border-radius-input</code>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--sizes-fontSize</code></li>
+					<li><code>--sizes-lineHeight</code></li>
+				</ul>
+			</td>
+			<td>–</td>
+			<td>20.1.0</td>
+			<td>Remplacer par <code>--components-title-font</code>.</td>
+		</tr>
+		<tr>
+			<td data-pattern="--components-(inlineMessage|simpleSelect|multiSelect|segmentedControl|timepicker|sortableList-helper)-(fontSize|lineHeight)(?![\w-])">
+				<ul>
+					<li><code>--components-(timepicker|multiSelect|…)-(fontSize|lineHeight)</code></li>
+					<li><code>--component-switchField-label-(fontSize|lineHeight)</code></li>
+					<li><code>--components-horizontalNavigation-listItemAction(FontSize|LineHeight)</code></li>
+					<li><code>--components-title-weight</code></li>
+				</ul>
+			</td>
+			<td>–</td>
+			<td>20.1.0</td>
+			<td>
+				<ul>
+				<li><code>*-fontSize</code> ⇒ <code>*-font</code></li>
+				<li><code>*-lineHeight</code> ⇒ <code>*-font</code></li>
+				<li><code>*FontSize</code> ⇒ <code>*Font</code></li>
+				<li><code>*LineHeight</code> ⇒ <code>*Font</code></li>
+				<li><code>*-weight</code> ⇒ <code>*-font</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="--spacings-(0|X{0,2}S|M|X{0,2}L|auto)(?![\w-])">
+				<ul>
+					<li><code>--spacings-(0|auto|XXS|XS|…)</code></li>
+				</ul>
+			</td>
+			<td>17.4.0</td>
+			<td>19.1.0</td>
+			<td>
+				<ul>
+				<li><code>--spacings-*</code> ⇒ <code>--pr-t-spacings-*</code></li>
+				<li><code>*XXS</code> ⇒ <code>*50</code></li>
+				<li><code>*XS</code> ⇒ <code>*100</code></li>
+				<li><code>*S</code> ⇒ <code>*200</code></li>
+				<li><code>*M</code> ⇒ <code>*300</code></li>
+				<li><code>*L</code> ⇒ <code>*400</code></li>
+				<li><code>*XL</code> ⇒ <code>*600</code></li>
+				<li><code>*XXL</code> ⇒ <code>*800</code></li>
+				</ul>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
+		</tr>
+		<tr>
 			<td data-pattern="--commons-boxShadow-(X?S|M|X*L)(?![\w-])">
 				<ul>
 					<li><code>--commons-boxShadow-S</code></li>
@@ -1653,16 +1697,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.3.0</td>
 			<td>19.1.0</td>
 			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--commons-background-base</code></li>
-				</ul>
-			</td>
-			<td>17.3.0</td>
-			<td>–</td>
-			<td>Remplacer par le token <code>--pr-t-elevation-surface-default</code>.</td>
 		</tr>
 		<tr>
 			<td data-pattern="--commons-elevations-elevation-[1-6](?![\w-])">
@@ -1686,3 +1720,5 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 	</tbody>
 </table>
+
+</details>
