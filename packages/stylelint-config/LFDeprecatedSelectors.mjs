@@ -251,9 +251,10 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/HoanMW.
-		objectPattern: /\.mod-columnSticky(?![\w-])/,
+		objectPattern: /\.mod-columnSticky-shadowMask(?![\w-])/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
+		actions: `Remplacer par \`.mod-stickyColumn-shadowMask\`.`,
 	},
 	// SEE https://regex101.com/r/1EfDam
 	{

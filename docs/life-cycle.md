@@ -581,12 +581,12 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.mod-columnSticky</code></li>
+					<li><code>.mod-columnSticky-shadowMask</code></li>
 				</ul>
 			</td>
 			<td>18.2.0</td>
 			<td>20.1.0</td>
-			<td>–</td>
+			<td>Remplacer par <code>.mod-stickyColumn-shadowMask</code>.</td>
 		</tr>
 		<tr>
 			<td>
