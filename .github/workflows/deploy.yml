@@ -70,16 +70,9 @@ jobs:
             fi
           fi
 
-          # The web components bundle is only published by a pushed *stable* tag: never by master, a prerelease or a manual run.
-          WEB_COMPONENTS_VERSION=""
-          if [ "$GITHUB_EVENT_NAME" = "push" ] && [ "$GITHUB_REF_TYPE" = "tag" ] && [[ "$RAW" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            WEB_COMPONENTS_VERSION="${RAW#v}"
-          fi
-
           echo "primary-path=${PRIMARY}" >> "$GITHUB_OUTPUT"
           echo "alias-path=${ALIAS}" >> "$GITHUB_OUTPUT"
-          echo "web-components-version=${WEB_COMPONENTS_VERSION}" >> "$GITHUB_OUTPUT"
-          echo "Ref: ${RAW}    Primary: ${PRIMARY}    Alias: ${ALIAS:-<none>}    Web components: ${WEB_COMPONENTS_VERSION:-<none>}"
+          echo "Ref: ${RAW}    Primary: ${PRIMARY}    Alias: ${ALIAS:-<none>}"
 
       - run: npm ci
       - run: npm run build-storybook
@@ -126,19 +119,67 @@ jobs:
               --fast-list --checksum --transfers 8 --checkers 8
           fi
 
-      # After the Storybook upload, so that a failing bundle build does not block it
+  deploy-web-components:
+    # Only a pushed *stable* tag publishes the bundle: never master, a prerelease or a manual run.
+    if: github.event_name == 'push' && github.ref_type == 'tag' && !contains(github.ref_name, '-')
+    runs-on: ubuntu-latest
+    name: Deploy web components bundle
+    environment: production
+    permissions:
+      contents: read
+    # One publisher at a time, whatever the tag: the version check and the uploads below must not interleave with
+    # another release's. An active upload is never cancelled.
+    concurrency:
+      group: deploy-web-components
+      cancel-in-progress: false
+
+    env:
+      R2_BUCKET: ${{ vars.R2_BUCKET }}
+      VERSION: ${{ github.ref_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: 24.15.0
+
+      - run: npm ci
+
       - name: Build web components bundle
-        if: steps.vars.outputs.web-components-version != ''
+        run: |
+          export VERSION="${VERSION#v}"
+          npm run build:web-components
+
+      - name: Install rclone
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rclone
+
+      - name: Configure rclone
         env:
-          VERSION: ${{ steps.vars.outputs.web-components-version }}
-        run: npm run build:web-components
+          # Secrets/vars via env, not interpolated into the script.
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_KEY }}
+          R2_ENDPOINT: ${{ vars.CLOUDFLARE_R2_ENDPOINT }}
+        run: |
+          mkdir -p ~/.config/rclone
+          cat > ~/.config/rclone/rclone.conf << EOF
+          [r2]
+          type = s3
+          provider = Cloudflare
+          access_key_id = $R2_ACCESS_KEY_ID
+          secret_access_key = $R2_SECRET_ACCESS_KEY
+          endpoint = $R2_ENDPOINT
+          acl = private
+          no_check_bucket = true
+          EOF
 
       - name: Upload web components bundle to R2
-        if: steps.vars.outputs.web-components-version != ''
-        env:
-          VERSION: ${{ steps.vars.outputs.web-components-version }}
         run: |
           set -euo pipefail
+          VERSION="${VERSION#v}"
 
           # Only the latest bundle is kept: a backport tagged after a newer release must not replace it.
           CURRENT="$(rclone cat "r2:${R2_BUCKET}/web-components/version.txt" 2>/dev/null || true)"
