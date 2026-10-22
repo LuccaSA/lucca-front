@@ -1,0 +1,9 @@
+// The whole CSS of the design system, as loaded by Storybook: every product palette is available through `.palette-<product>`.
+// The icon font is inlined by `build.js`.
+@use '@lucca-front/scss/src/commons/config' with (
+	$palettesOtherProduct: 'all'
+);
+
+@use '@lucca-front/icons/src/main' as icons;
+@use '@lucca-front/scss/src/main-all' as scss;
+@use '../../ng/styles/main' as ng;

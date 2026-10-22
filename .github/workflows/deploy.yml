@@ -70,9 +70,16 @@ jobs:
             fi
           fi
 
+          # The web components bundle is only published by a pushed *stable* tag: never by master, a prerelease or a manual run.
+          WEB_COMPONENTS_VERSION=""
+          if [ "$GITHUB_EVENT_NAME" = "push" ] && [ "$GITHUB_REF_TYPE" = "tag" ] && [[ "$RAW" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            WEB_COMPONENTS_VERSION="${RAW#v}"
+          fi
+
           echo "primary-path=${PRIMARY}" >> "$GITHUB_OUTPUT"
           echo "alias-path=${ALIAS}" >> "$GITHUB_OUTPUT"
-          echo "Ref: ${RAW}    Primary: ${PRIMARY}    Alias: ${ALIAS:-<none>}"
+          echo "web-components-version=${WEB_COMPONENTS_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Ref: ${RAW}    Primary: ${PRIMARY}    Alias: ${ALIAS:-<none>}    Web components: ${WEB_COMPONENTS_VERSION:-<none>}"
 
       - run: npm ci
       - run: npm run build-storybook
@@ -118,3 +125,31 @@ jobs:
             rclone sync "r2:${R2_BUCKET}/${PRIMARY}" "r2:${R2_BUCKET}/${ALIAS}" \
               --fast-list --checksum --transfers 8 --checkers 8
           fi
+
+      # After the Storybook upload, so that a failing bundle build does not block it
+      - name: Build web components bundle
+        if: steps.vars.outputs.web-components-version != ''
+        env:
+          VERSION: ${{ steps.vars.outputs.web-components-version }}
+        run: npm run build:web-components
+
+      - name: Upload web components bundle to R2
+        if: steps.vars.outputs.web-components-version != ''
+        env:
+          VERSION: ${{ steps.vars.outputs.web-components-version }}
+        run: |
+          set -euo pipefail
+
+          # Only the latest bundle is kept: a backport tagged after a newer release must not replace it.
+          CURRENT="$(rclone cat "r2:${R2_BUCKET}/web-components/version.txt" 2>/dev/null || true)"
+          if [ -n "$CURRENT" ] && [ "$(printf '%s\n%s\n' "$VERSION" "$CURRENT" | sort -V | tail -n 1)" != "$VERSION" ]; then
+            echo "Skipping web components ${VERSION}: ${CURRENT} is already published"
+            exit 0
+          fi
+
+          echo "Uploading web components ${VERSION} (replacing ${CURRENT:-<none>})"
+          for file in bundle.js bundle.css; do
+            rclone copyto "dist/web-components/${file}" "r2:${R2_BUCKET}/web-components/${file}" --checksum
+          done
+          # Written last: it records a complete upload
+          rclone copyto dist/web-components/version.txt "r2:${R2_BUCKET}/web-components/version.txt" --checksum
