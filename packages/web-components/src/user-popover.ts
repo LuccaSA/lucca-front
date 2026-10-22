@@ -35,9 +35,19 @@ export function activateUserPopovers(injector: EnvironmentInjector): void {
 	const appRef = injector.get(ApplicationRef);
 	// Destroys the component of each activated trigger
 	const activated = new Map<HTMLElement, () => void>();
+	const rejected = new WeakSet<HTMLElement>();
 
 	const activate = (element: HTMLElement) => {
 		if (activated.has(element)) {
+			return;
+		}
+		// The popover host component would take over a custom element's host, which its own component owns
+		// (`lu-listbox-option` would lose its option): the directive needs a native element.
+		if (element.localName.includes('-')) {
+			if (!rejected.has(element)) {
+				rejected.add(element);
+				console.warn(`luUserPopover is not supported on <${element.localName}>: put it on a native element inside it.`, element);
+			}
 			return;
 		}
 		const user = (element as HTMLElement & { luUserPopover?: ILuUser }).luUserPopover ?? (JSON.parse(element.getAttribute('luUserPopover') || 'null') as ILuUser | null);

@@ -72,7 +72,7 @@ Write the dialog in a `<template>`, with the same markup as the Angular template
 
 ## User popover
 
-Prototypes have no API: the card shows the data of the user given to the trigger, as a property or as JSON in the attribute.
+Prototypes have no API: the card shows the data of the user given to the trigger, as a property or as JSON in the attribute. The trigger must be a native element: on a `lu-*` element, put it on an element inside.
 
 ```html
 <span class="link" tabindex="0" luUserPopover id="marie">Marie Durand</span>
