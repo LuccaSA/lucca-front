@@ -9,8 +9,18 @@ import localePl from '@angular/common/locales/pl';
 import localePt from '@angular/common/locales/pt';
 import { LOCALE_ID, Type } from '@angular/core';
 import { createApplication } from '@angular/platform-browser';
-import { DateInputComponent } from '@lucca-front/ng/date2';
+import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
+import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { EmptyStatePageComponent, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { MultilanguageInputComponent } from '@lucca-front/ng/forms';
+import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
+import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { ReadMoreComponent } from '@lucca-front/ng/read-more';
+import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
 import { defineElement } from './define-element';
 
 /**
@@ -18,8 +28,28 @@ import { defineElement } from './define-element';
  * CSS-only components are not exposed: prototypes use their HTML markup, as in production.
  */
 const ELEMENTS: Record<string, { tagName: string; component: Type<unknown> }> = {
+	// Forms
 	DateInput: { tagName: 'lu-date-input', component: DateInputComponent },
+	DateRangeInput: { tagName: 'lu-date-range-input', component: DateRangeInputComponent },
+	DurationPicker: { tagName: 'lu-duration-picker', component: DurationPickerComponent },
+	MultiSelect: { tagName: 'lu-multi-select', component: LuMultiSelectInputComponent },
+	MultilanguageInput: { tagName: 'lu-multilanguage-input', component: MultilanguageInputComponent },
+	PhoneNumberInput: { tagName: 'lu-phone-number-input', component: PhoneNumberInputComponent },
 	SimpleSelect: { tagName: 'lu-simple-select', component: LuSimpleSelectInputComponent },
+	TimePicker: { tagName: 'lu-time-picker', component: TimePickerComponent },
+	TimeRangePicker: { tagName: 'lu-time-range-picker', component: TimeRangePickerComponent },
+	// Files
+	FileEntry: { tagName: 'lu-file-entry', component: FileEntryComponent },
+	MultiFileUpload: { tagName: 'lu-multi-file-upload', component: MultiFileUploadComponent },
+	SingleFileUpload: { tagName: 'lu-single-file-upload', component: SingleFileUploadComponent },
+	// Structure and content
+	EmptyStatePage: { tagName: 'lu-empty-state-page', component: EmptyStatePageComponent },
+	EmptyStateSection: { tagName: 'lu-empty-state-section', component: EmptyStateSectionComponent },
+	Grid: { tagName: 'lu-grid', component: GridComponent },
+	GridColumn: { tagName: 'lu-grid-column', component: GridColumnComponent },
+	ReadMore: { tagName: 'lu-read-more', component: ReadMoreComponent },
+	ScrollBox: { tagName: 'lu-scroll-box', component: ScrollBoxComponent },
+	SkipLinks: { tagName: 'lu-skip-links', component: LuSkipLinksComponent },
 };
 
 declare global {
