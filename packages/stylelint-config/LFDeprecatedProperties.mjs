@@ -119,7 +119,6 @@ export default [
 		// SEE https://regex101.com/r/xx7vjW.
 		objectPattern: /--commons-navSide-compact-width(?![\w-])/,
 		versionDeprecated: '18.3.0',
-		versionDeleted: '20.1.0',
 	},
 	{
 		// No longer read: overriding them has no effect
@@ -219,7 +218,6 @@ export default [
 		// SEE https://regex101.com/r/1P70OB.
 		objectPattern: /--commons-borderRadius-(M|L|XL|full)(?![\w-])/,
 		versionDeprecated: '20.2.0',
-		versionDeleted: '22.0.0',
 		actions: 'Remplacer par \`--pr-t-border-radius-XXX\`',
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0',

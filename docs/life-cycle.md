@@ -288,6 +288,21 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
+			<td data-pattern="\.u-(inset0|(margin|padding|inset)(Inline|Block)(-(start|end)|Start|End)?0)(?![\w-])">
+				<ul>
+					<li><code>.u-inset0</code></li>
+					<li><code>.u-(margin|padding|inset)(Inline|Block)0</code></li>
+					<li><code>.u-(margin|padding|inset)(Inline|Block)(-start|-end|Start|End)0</code></li>
+				</ul>
+			</td>
+			<td>20.2.0</td>
+			<td>–</td>
+			<td>
+				<p><code>.u-*</code> ⇒ <code>.pr-u-*</code></p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
+		</tr>
+		<tr>
 			<td>
 				<ul>
 					<li><code>.button</code> <strong>+</strong> <code>.mod-text</code></li>
@@ -296,7 +311,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				</ul>
 			</td>
 			<td>20.2.0</td>
-			<td>22.0.0</td>
+			<td>–</td>
 			<td>
 				<ul>
 				<li><code>.mod-text</code> ⇒<ul>
@@ -315,21 +330,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				</ul>
 				</li>
 				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.u-(inset0|(margin|padding|inset)(Inline|Block)(-(start|end)|Start|End)?0)(?![\w-])">
-				<ul>
-					<li><code>.u-inset0</code></li>
-					<li><code>.u-(margin|padding|inset)(Inline|Block)0</code></li>
-					<li><code>.u-(margin|padding|inset)(Inline|Block)(-start|-end|Start|End)0</code></li>
-				</ul>
-			</td>
-			<td>20.2.0</td>
-			<td>–</td>
-			<td>
-				<p><code>.u-*</code> ⇒ <code>.pr-u-*</code></p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -375,27 +375,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.u-text(X?S|M|X{0,3}L)(?![\w-])">
-				<ul>
-					<li><code>.u-text(XS|S|M|L|…)</code></li>
-				</ul>
-				(utilitaires de taille)
-			</td>
-			<td>20.1.0</td>
-			<td>22.0.0</td>
-			<td>
-				<ul>
-				<li>XS, S &amp; M : <code>.u-text*</code> ⇒ <code>.pr-u-body*</code></li>
-				<li>L ~ XXXL ⇒<ul>
-				<li>utilitaire de titre : <code>.pr-u-hx</code></li>
-				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
-				</ul>
-				</li>
-				</ul>
-				<p><a href="https://www.notion.so/luccasoftware/Tokens-Typo-1ebd278ab26e808a9b58d1017514ecb9">Plus d’informations sur le sujet</a>.</p>
-			</td>
-		</tr>
-		<tr>
 			<td>
 				<ul>
 					<li><code>.user-info</code></li>
@@ -409,6 +388,27 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>20.1.0</td>
 			<td>–</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.u-text(X?S|M|X{0,3}L)(?![\w-])">
+				<ul>
+					<li><code>.u-text(XS|S|M|L|…)</code></li>
+				</ul>
+				(utilitaires de taille)
+			</td>
+			<td>20.1.0</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li>XS, S &amp; M : <code>.u-text*</code> ⇒ <code>.pr-u-body*</code></li>
+				<li>L ~ XXXL ⇒<ul>
+				<li>utilitaire de titre : <code>.pr-u-hx</code></li>
+				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
+				</ul>
+				</li>
+				</ul>
+				<p><a href="https://www.notion.so/luccasoftware/Tokens-Typo-1ebd278ab26e808a9b58d1017514ecb9">Plus d’informations sur le sujet</a>.</p>
+			</td>
 		</tr>
 		<tr>
 			<td data-pattern="\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])">
@@ -453,7 +453,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				</ul>
 			</td>
 			<td>19.3.0</td>
-			<td>22.0.0</td>
+			<td>–</td>
 			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation">Horizontal navigation</a>.</td>
 		</tr>
 		<tr>
@@ -481,7 +481,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				</ul>
 			</td>
 			<td>19.2.0</td>
-			<td>22.0.0</td>
+			<td>–</td>
 			<td>Remplacer par le nouveau DOM du composant <a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>.</td>
 		</tr>
 		<tr>
@@ -491,7 +491,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				</ul>
 			</td>
 			<td>19.2.0</td>
-			<td>22.0.0</td>
+			<td>–</td>
 			<td>–</td>
 		</tr>
 		<tr>
@@ -540,17 +540,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.dialog-form</code></li>
-					<li><code>.dialog-formOptional</code></li>
-				</ul>
-			</td>
-			<td>18.3.0</td>
-			<td>22.0.0</td>
-			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
 					<li><code>.comment-content-textContainer</code></li>
 					<li><code>.mod-withMenuCompact</code></li>
 				</ul>
@@ -558,6 +547,17 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>18.3.0</td>
 			<td>20.1.0</td>
 			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.dialog-form</code></li>
+					<li><code>.dialog-formOptional</code></li>
+				</ul>
+			</td>
+			<td>18.3.0</td>
+			<td>–</td>
+			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -612,16 +612,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
-				<ul>
-					<li><code>.indexTable-body-row-cell-action</code></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>20.1.0</td>
-			<td>Remplacer par <code>.indexTable-body-row-cell-link</code>, un véritable lien vers la ligne.</td>
-		</tr>
-		<tr>
 			<td data-pattern="(?=\S*\.userTile(?![\w-]))(?=\S*\.mod-X{1,3}L(?![\w-]))\S*">
 				<ul>
 					<li><code>.userTile</code> <strong>+</strong> <code>.mod-XL</code></li>
@@ -646,32 +636,22 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
+					<li><code>.indexTable-body-row-cell-action</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>–</td>
+			<td>Remplacer par <code>.indexTable-body-row-cell-link</code>, un véritable lien vers la ligne.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
 					<li><code>.pr-u-clear</code></li>
 				</ul>
 			</td>
 			<td>18.1.2</td>
 			<td>–</td>
 			<td>Remplacer par <code>.pr-u-clearBoth</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.u-textLeft</code></li>
-					<li><code>.u-textCenter</code></li>
-					<li><code>.u-textRight</code></li>
-				</ul>
-			</td>
-			<td>18.1.0</td>
-			<td>22.0.0</td>
-			<td>
-				<p>Doublon :</p>
-				<ul>
-				<li><code>.u-text*</code> ⇒ <code>.pr-u-textAlign*</code></li>
-				<li><code>*Left</code> ⇒ <code>*Start</code></li>
-				<li><code>*Right</code> ⇒ <code>*End</code></li>
-				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
 		</tr>
 		<tr>
 			<td>
@@ -705,6 +685,26 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>18.1.0</td>
 			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.u-textLeft</code></li>
+					<li><code>.u-textCenter</code></li>
+					<li><code>.u-textRight</code></li>
+				</ul>
+			</td>
+			<td>18.1.0</td>
+			<td>–</td>
+			<td>
+				<p>Doublon :</p>
+				<ul>
+				<li><code>.u-text*</code> ⇒ <code>.pr-u-textAlign*</code></li>
+				<li><code>*Left</code> ⇒ <code>*Start</code></li>
+				<li><code>*Right</code> ⇒ <code>*End</code></li>
+				</ul>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -1157,7 +1157,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				</ul>
 			</td>
 			<td>20.2.0</td>
-			<td>22.0.0</td>
+			<td>–</td>
 			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0">schematics</a>)</td>
 		</tr>
 		<tr>
@@ -1286,7 +1286,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				</ul>
 			</td>
 			<td>18.3.0</td>
-			<td>20.1.0</td>
+			<td>–</td>
 			<td>–</td>
 		</tr>
 		<tr>

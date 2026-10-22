@@ -208,7 +208,6 @@ export default [
 		// SEE https://regex101.com/r/y2kYBk.
 		objectPattern: [/\.u-textLeft(?![\w-])/, /\.u-textCenter(?![\w-])/, /\.u-textRight(?![\w-])/],
 		versionDeprecated: '18.1.0',
-		versionDeleted: '22.0.0',
 		actions: `
 			Doublon :
 
@@ -287,7 +286,6 @@ export default [
 		// SEE https://regex101.com/r/BktIjm.
 		objectPattern: /\.indexTable-body-row-cell-action(?![\w-])/,
 		versionDeprecated: '18.2.0',
-		versionDeleted: '20.1.0',
 		actions: `Remplacer par \`.indexTable-body-row-cell-link\`, un véritable lien vers la ligne.`,
 	},
 	{
@@ -315,7 +313,6 @@ export default [
 		// SEE https://regex101.com/r/Ndh0bQ.
 		objectPattern: [/\.dialog-form(?![\w-])/, /\.dialog-formOptional(?![\w-])/],
 		versionDeprecated: '18.3.0',
-		versionDeleted: '22.0.0',
 		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
 	},
 	{
@@ -328,14 +325,12 @@ export default [
 		// SEE https://regex101.com/r/7wO4Oc.
 		objectPattern: /\.lu-dropdown-(content|options|options-item|options-item-action)(?![\w-])/,
 		versionDeprecated: '19.2.0',
-		versionDeleted: '22.0.0',
 		actions: `Remplacer par le nouveau DOM du composant [Dropdown](https://prisme.lucca.io/94310e217/p/557682-dropdown).`,
 	},
 	{
 		// SEE https://regex101.com/r/VqPdDw.
 		objectPattern: /\.filterBarDeprecated\b/,
 		versionDeprecated: '19.2.0',
-		versionDeleted: '22.0.0',
 	},
 	{
 		// Physical utilities, replaced by their logical names
@@ -366,7 +361,6 @@ export default [
 		// SEE https://regex101.com/r/1eWJ0d.
 		objectPattern: /\.menu\b/,
 		versionDeprecated: '19.3.0',
-		versionDeleted: '22.0.0',
 		actions: `Remplacer par [Horizontal navigation](https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation).`,
 	},
 	{
@@ -383,7 +377,6 @@ export default [
 		// SEE https://regex101.com/r/rOqMxE.
 		objectPattern: /\.u-text(X?S|M|X{0,3}L)(?![\w-])/,
 		versionDeprecated: '20.1.0',
-		versionDeleted: '22.0.0',
 		actions: `
 			* XS, S & M : \`.u-text*\` ⇒ \`.pr-u-body*\`
 			* L ~ XXXL ⇒
@@ -419,7 +412,6 @@ export default [
 		// SEE https://regex101.com/r/5qB2gm.
 		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.(mod-text|mod-delete|loading)(?![\w-]))\S*/,
 		versionDeprecated: '20.2.0',
-		versionDeleted: '22.0.0',
 		actions: `
 			* \`.mod-text\` ⇒
 				* sélecteur : \`.mod-ghost\`
