@@ -14,8 +14,14 @@ export default [
 		versionDeleted: '19.1.0',
 	},
 	{
+		// SEE https://regex101.com/r/g6tsSx.
+		objectPattern: /--commons-boxShadow-XXS(?![\w-])/,
+		versionDeprecated: '16.1.0',
+		versionDeleted: '19.1.0',
+	},
+	{
 		// SEE https://regex101.com/r/Y00E16.
-		objectPattern: /--commons-boxShadow-X*(S|M|L)(?![\w-])/,
+		objectPattern: /--commons-boxShadow-(X?S|M|X*L)(?![\w-])/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '19.1.0',
 	},
@@ -47,8 +53,28 @@ export default [
 		actions: `Retirer la variable : l’alerte est remplacée par le composant Numeric badge.`,
 	},
 	{
+		// SEE https://regex101.com/r/QullaC.
+		objectPattern: /--colors-grey-900-rgb(?![\w-])/,
+		versionDeprecated: '17.3.0',
+		versionDeleted: '22.0.0',
+		actions: `
+			* Sass : \`color.transparentize(var(--palettes-neutral-900), …)\`
+			* CSS : \`color-mix()\`
+		`,
+	},
+	{
+		// SEE https://regex101.com/r/YS7uCx.
+		objectPattern: /--colors-grey-400-rgb(?![\w-])/,
+		versionDeprecated: '17.3.1',
+		versionDeleted: '22.0.0',
+		actions: `
+			* Sass : \`color.transparentize(var(--palettes-neutral-900), …)\`
+			* CSS : \`color-mix()\`
+		`,
+	},
+	{
 		// SEE https://regex101.com/r/lu9vUK.
-		objectPattern: [/--colors-white-rgb(?![\w-])/, /--colors-(grey|neutral)-(400|900)-rgb(?![\w-])/],
+		objectPattern: [/--colors-white-rgb(?![\w-])/, /--colors-neutral-(400|900)-rgb(?![\w-])/],
 		versionDeprecated: '17.4.0',
 		versionDeleted: '22.0.0',
 		actions: `

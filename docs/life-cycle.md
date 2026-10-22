@@ -210,6 +210,20 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
+			<td data-pattern="\.pr-u-textOrchid(?![\w-])">
+				<ul>
+					<li><code>.pr-u-textOrchid</code></li>
+				</ul>
+				(utilitaires renommés peu ou pas utilisés)
+			</td>
+			<td>21.3.0</td>
+			<td>–</td>
+			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
+		</tr>
+		<tr>
 			<td>
 				<ul>
 					<li><code>.palette-AI</code></li>
@@ -224,6 +238,41 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>*TextAI</code> ⇒ <code>*TextOrchid</code></li>
 				</ul>
 			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-textPineappleContrasted(?![\w-])">
+				<ul>
+					<li><code>.pr-u-textPineappleContrasted</code></li>
+				</ul>
+				(utilitaires renommés peu ou pas utilisés)
+			</td>
+			<td>21.2.4</td>
+			<td>–</td>
+			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.checkbox</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/42c88e-checkbox">Checkbox</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.radio</code></li>
+					<li><code>.radioButtons</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -285,6 +334,17 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
+			<td data-pattern="\.label-icon(?![\w-])">
+				<ul>
+					<li><code>.label-icon</code></li>
+				</ul>
+				(partout dans un sélecteur)
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>–</td>
+		</tr>
+		<tr>
 			<td>
 				<ul>
 					<li><code>.container</code> <strong>+</strong> <code>.mod-S</code></li>
@@ -293,6 +353,23 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>21.1.0</td>
 			<td>–</td>
 			<td>Retirer la classe <code>.mod-S</code>, sans remplacement.</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-textPrimary(?![\w-])">
+				<ul>
+					<li><code>.pr-u-textPrimary</code></li>
+					<li><code>.pr-u-textSecondary</code></li>
+					<li><code>.pr-u-textGrey</code></li>
+					<li><code>.pr-u-textLucca</code></li>
+				</ul>
+				(utilitaires renommés très utilisés)
+			</td>
+			<td>21.0.0</td>
+			<td>22.0.0</td>
+			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -319,9 +396,32 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.pr-u-textPrimary(?![\w-])">
+			<td data-pattern="\.pr-u-textAI(?![\w-])">
 				<ul>
-					<li><code>.pr-u-text(Primary|Product|…)</code></li>
+					<li><code>.pr-u-textAI</code></li>
+				</ul>
+				(utilitaires renommés peu ou pas utilisés)
+			</td>
+			<td>21.0.0</td>
+			<td>21.3.0</td>
+			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-textProduct(?![\w-])">
+				<ul>
+					<li><code>.pr-u-textProduct</code></li>
+					<li><code>.pr-u-textBrand</code></li>
+					<li><code>.pr-u-textCritical</code></li>
+					<li><code>.pr-u-textDefault</code></li>
+					<li><code>.pr-u-textError</code></li>
+					<li><code>.pr-u-textLight</code></li>
+					<li><code>.pr-u-textNeutral</code></li>
+					<li><code>.pr-u-textPlaceholder</code></li>
+					<li><code>.pr-u-textSuccess</code></li>
+					<li><code>.pr-u-textWarning</code></li>
 				</ul>
 				(utilitaires renommés très utilisés)
 			</td>
@@ -335,7 +435,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.pr-u-textSuccessContrasted(?![\w-])">
 				<ul>
-					<li><code>.pr-u-text(AI|Cc|Kiwi|Lime|…)</code></li>
+					<li><code>.pr-u-text(Cc|Kiwi|Lime|Mint|…)</code></li>
 				</ul>
 				(utilitaires renommés peu ou pas utilisés)
 			</td>
@@ -407,6 +507,31 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>Remplacer par <code>.pr-u-clearBoth</code>.</td>
 		</tr>
 		<tr>
+			<td data-pattern="\.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius[A-Z]\w*(?![\w-])">
+				<p>Angles : pas d’utilitaire logique, utiliser les tokens <code>--pr-t-border-radius-*</code></p>
+				<ul>
+					<li><code>.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius…</code></li>
+				</ul>
+				<p>Alignement, float &amp; clear : <code>Left</code> : <code>Start</code> / <code>InlineStart</code>, <code>Right</code> : <code>End</code> / <code>InlineEnd</code></p>
+				<ul>
+					<li><code>.pr-u-(textAlign|float|clear)Left</code></li>
+					<li><code>.pr-u-(textAlign|float|clear)Right</code></li>
+				</ul>
+			</td>
+			<td>20.2.0</td>
+			<td>–</td>
+			<td>
+				<p>Utilitaires logiques :</p>
+				<ul>
+				<li><code>*Left</code> ⇒ <code>*InlineStart</code></li>
+				<li><code>*Right</code> ⇒ <code>*InlineEnd</code></li>
+				<li><code>*textAlignLeft</code> ⇒ <code>*textAlignStart</code></li>
+				<li><code>*textAlignRight</code> ⇒ <code>*textAlignEnd</code></li>
+				<li>Angles physiques ⇒ tokens <code>--pr-t-border-radius-*</code>.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
 			<td data-pattern="\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])">
 				<ul>
 					<li><code>.pr-u-text(XS|S|M|L|…)</code></li>
@@ -447,7 +572,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<ul>
 					<li><code>.button</code> <strong>+</strong> <code>.mod-text</code></li>
 					<li><code>.button</code> <strong>+</strong> <code>.mod-delete</code></li>
-					<li><code>.button</code> <strong>+</strong> <code>.loading</code></li>
 				</ul>
 			</td>
 			<td>20.2.0</td>
@@ -462,11 +586,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>.mod-delete</code> ⇒<ul>
 				<li>sélecteur : <code>.mod-critical</code></li>
 				<li>input Angular : <code>critical</code></li>
-				</ul>
-				</li>
-				<li><code>.loading</code> ⇒<ul>
-				<li>sélecteur : <code>.is-loading</code></li>
-				<li>input Angular : <code>state=&quot;loading&quot;</code></li>
 				</ul>
 				</li>
 				</ul>
@@ -499,6 +618,18 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li>Angles ⇒ tokens <code>--pr-t-border-radius-*</code>.</li>
 				</ul>
 			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.mod-delete(?![\w-])">
+				<ul>
+					<li><code>.mod-delete</code></li>
+					<li><code>.u-textLight</code></li>
+				</ul>
+				(partout dans un sélecteur)
+			</td>
+			<td>20.2.0</td>
+			<td>–</td>
+			<td>–</td>
 		</tr>
 		<tr>
 			<td data-pattern="\.u-[a-zA-Z]">
@@ -591,15 +722,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 					<li><code>.pr-u-padding(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></li>
 					<li><code>.pr-u-border(Top|Right|Bottom|Left)0</code></li>
 				</ul>
-				<p>Angles : pas d’utilitaire logique, utiliser les tokens <code>--pr-t-border-radius-*</code></p>
-				<ul>
-					<li><code>.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius…</code></li>
-				</ul>
-				<p>Alignement, float &amp; clear : <code>Left</code> : <code>Start</code> / <code>InlineStart</code>, <code>Right</code> : <code>End</code> / <code>InlineEnd</code></p>
-				<ul>
-					<li><code>.pr-u-(textAlign|float|clear)Left</code></li>
-					<li><code>.pr-u-(textAlign|float|clear)Right</code></li>
-				</ul>
 			</td>
 			<td>19.2.0</td>
 			<td>–</td>
@@ -610,9 +732,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>*Bottom*</code> ⇒ <code>*BlockEnd*</code></li>
 				<li><code>*Left*</code> ⇒ <code>*InlineStart*</code></li>
 				<li><code>*Right*</code> ⇒ <code>*InlineEnd*</code></li>
-				<li><code>*textAlignLeft</code> ⇒ <code>*textAlignStart</code></li>
-				<li><code>*textAlignRight</code> ⇒ <code>*textAlignEnd</code></li>
-				<li>Angles physiques ⇒ tokens <code>--pr-t-border-radius-*</code>.</li>
 				</ul>
 			</td>
 		</tr>
@@ -620,7 +739,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<ul>
 					<li><code>.comment-content-textContainer</code></li>
-					<li><code>.mod-withMenuCompact</code></li>
 				</ul>
 			</td>
 			<td>18.3.0</td>
@@ -630,7 +748,16 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.dialog-form</code></li>
+					<li><code>.mod-withMenuCompact</code></li>
+				</ul>
+			</td>
+			<td>18.3.0</td>
+			<td>–</td>
+			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
 					<li><code>.dialog-formOptional</code></li>
 				</ul>
 			</td>
@@ -740,19 +867,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.button-counter</code></li>
-					<li><code>.navSide-item-alert</code></li>
-					<li><code>.textfield-actionClear</code></li>
-					<li><code>.lu-select-value .label</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>18.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
 					<li><code>.loading</code> <strong>+</strong> <code>.mod-dialog</code></li>
 					<li><code>.loading</code> <strong>+</strong> <code>.mod-sidePanel</code></li>
 				</ul>
@@ -841,6 +955,27 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
+			<td data-pattern="\.active(?![\w-])">
+				<ul>
+					<li><code>.active</code></li>
+				</ul>
+				(partout dans un sélecteur)
+			</td>
+			<td>17.4.0</td>
+			<td>–</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.dialog-form</code></li>
+				</ul>
+			</td>
+			<td>17.3.5</td>
+			<td>–</td>
+			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
+		</tr>
+		<tr>
 			<td>
 				<ul>
 					<li><code>.palette-grey</code></li>
@@ -880,6 +1015,36 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				</ul>
 				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.button</code> <strong>+</strong> <code>.loading</code></li>
+				</ul>
+			</td>
+			<td>17.3.0</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li>sélecteur : <code>.is-loading</code></li>
+				<li>input Angular : <code>state=&quot;loading&quot;</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.disabled(?![\w-])">
+				<ul>
+					<li><code>.disabled</code></li>
+					<li><code>.error</code></li>
+					<li><code>.mod-link</code></li>
+					<li><code>.mod-outline</code></li>
+					<li><code>.success</code></li>
+				</ul>
+				(partout dans un sélecteur)
+			</td>
+			<td>17.3.0</td>
+			<td>–</td>
+			<td>–</td>
 		</tr>
 		<tr>
 			<td>
@@ -954,6 +1119,39 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
+					<li><code>.button-counter</code></li>
+					<li><code>.navSide-item-alert</code></li>
+					<li><code>.lu-select-value .label</code></li>
+				</ul>
+			</td>
+			<td>16.3.0</td>
+			<td>18.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.label(?![\w-])">
+				<ul>
+					<li><code>.label</code></li>
+				</ul>
+				(partout dans un sélecteur)
+			</td>
+			<td>16.3.0</td>
+			<td>–</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.textfield-actionClear</code></li>
+				</ul>
+			</td>
+			<td>16.2.2</td>
+			<td>18.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
 					<li><code>.list</code></li>
 				</ul>
 			</td>
@@ -1010,7 +1208,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.checkbox</code></li>
 					<li><code>.checkboxesfield</code></li>
 				</ul>
 			</td>
@@ -1021,34 +1218,12 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.radio</code></li>
 					<li><code>.radiosfield</code></li>
-					<li><code>.radioButtons</code></li>
 				</ul>
 			</td>
 			<td>–</td>
 			<td>–</td>
 			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.active(?![\w-])">
-				<ul>
-					<li><code>.active</code></li>
-					<li><code>.disabled</code></li>
-					<li><code>.error</code></li>
-					<li><code>.label</code></li>
-					<li><code>.label-icon</code></li>
-					<li><code>.mod-delete</code></li>
-					<li><code>.mod-link</code></li>
-					<li><code>.mod-outline</code></li>
-					<li><code>.success</code></li>
-					<li><code>.u-textLight</code></li>
-				</ul>
-				(partout dans un sélecteur)
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>–</td>
 		</tr>
 	</tbody>
 </table>
@@ -1371,8 +1546,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>
 				<ul>
 					<li><code>--colors-white-rgb</code></li>
-					<li><code>--colors-grey-400-rgb</code></li>
-					<li><code>--colors-grey-900-rgb</code></li>
 					<li><code>--colors-neutral-400-rgb</code></li>
 					<li><code>--colors-neutral-900-rgb</code></li>
 				</ul>
@@ -1420,6 +1593,21 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>Retirer la variable : l’alerte est remplacée par le composant Numeric badge.</td>
 		</tr>
 		<tr>
+			<td>
+				<ul>
+					<li><code>--colors-grey-400-rgb</code></li>
+				</ul>
+			</td>
+			<td>17.3.1</td>
+			<td>22.0.0</td>
+			<td>
+				<ul>
+				<li>Sass : <code>color.transparentize(var(--palettes-neutral-900), …)</code></li>
+				<li>CSS : <code>color-mix()</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
 			<td data-pattern="--palettes-(grey|primary|secondary|lucca)-(0|text|25|50|100|200|300|400|500|600|700|800|900)(?![\w-])">
 				<ul>
 					<li><code>--palettes-grey-(0|text|25|50|…)</code></li>
@@ -1440,7 +1628,22 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="--commons-boxShadow-X*(S|M|L)(?![\w-])">
+			<td>
+				<ul>
+					<li><code>--colors-grey-900-rgb</code></li>
+				</ul>
+			</td>
+			<td>17.3.0</td>
+			<td>22.0.0</td>
+			<td>
+				<ul>
+				<li>Sass : <code>color.transparentize(var(--palettes-neutral-900), …)</code></li>
+				<li>CSS : <code>color-mix()</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="--commons-boxShadow-(X?S|M|X*L)(?![\w-])">
 				<ul>
 					<li><code>--commons-boxShadow-S</code></li>
 					<li><code>--commons-boxShadow-M</code></li>
@@ -1465,6 +1668,16 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td data-pattern="--commons-elevations-elevation-[1-6](?![\w-])">
 				<ul>
 					<li><code>--commons-elevations-elevation-(1|2|3|4|…)</code></li>
+				</ul>
+			</td>
+			<td>16.1.0</td>
+			<td>19.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--commons-boxShadow-XXS</code></li>
 				</ul>
 			</td>
 			<td>16.1.0</td>

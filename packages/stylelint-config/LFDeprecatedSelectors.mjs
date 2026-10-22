@@ -26,12 +26,14 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/AUlf21.
-		objectPattern: [
-			/\.button-counter(?![\w-])/,
-			/\.navSide-item-alert(?![\w-])/,
-			/\.textfield-actionClear(?![\w-])/,
-			/\.lu-select-value \.label(?![\w-])/,
-		],
+		objectPattern: [/\.button-counter(?![\w-])/, /\.navSide-item-alert(?![\w-])/, /\.lu-select-value \.label(?![\w-])/],
+		versionDeprecated: '16.3.0',
+		versionDeleted: '18.1.0',
+	},
+	{
+		// SEE https://regex101.com/r/yt2aCa.
+		objectPattern: /\.textfield-actionClear(?![\w-])/,
+		versionDeprecated: '16.2.2',
 		versionDeleted: '18.1.0',
 	},
 	{
@@ -305,7 +307,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/8f4B4g.
-		objectPattern: [/\.comment-content-textContainer(?![\w-])/, /\.mod-withMenuCompact(?![\w-])/],
+		objectPattern: /\.comment-content-textContainer(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
 		urls: {
@@ -313,8 +315,22 @@ export default [
 		},
 	},
 	{
+		// SEE https://regex101.com/r/Ct4jxl.
+		objectPattern: /\.mod-withMenuCompact(?![\w-])/,
+		versionDeprecated: '18.3.0',
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
+		},
+	},
+	{
 		// SEE https://regex101.com/r/Ndh0bQ.
-		objectPattern: [/\.dialog-form(?![\w-])/, /\.dialog-formOptional(?![\w-])/],
+		objectPattern: /\.dialog-form(?![\w-])/,
+		versionDeprecated: '17.3.5',
+		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/WOAbdM.
+		objectPattern: /\.dialog-formOptional(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
 	},
@@ -342,10 +358,6 @@ export default [
 			// Spacings: `Top` ⇒ `BlockStart`, `Right` ⇒ `InlineEnd`, `Bottom` ⇒ `BlockEnd`, `Left` ⇒ `InlineStart`
 			/\.pr-u-(margin|padding)(Top|Right|Bottom|Left)(\d+|Auto)(?![\w-])/,
 			/\.pr-u-border(Top|Right|Bottom|Left)0(?![\w-])/,
-			// Corners: no logical utility, use the `--pr-t-border-radius-*` tokens
-			/\.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius[A-Z]\w*(?![\w-])/,
-			// Alignment, float & clear: `Left` ⇒ `Start` / `InlineStart`, `Right` ⇒ `End` / `InlineEnd`
-			/\.pr-u-(textAlign|float|clear)(Left|Right)(?![\w-])/,
 		],
 		versionDeprecated: '19.2.0',
 		actions: `
@@ -355,6 +367,23 @@ export default [
 			* \`*Bottom*\` ⇒ \`*BlockEnd*\`
 			* \`*Left*\` ⇒ \`*InlineStart*\`
 			* \`*Right*\` ⇒ \`*InlineEnd*\`
+		`,
+	},
+	{
+		// Physical utilities, born deprecated with the `.pr-u-` prefix
+		// SEE https://regex101.com/r/BcMSPB.
+		objectPattern: [
+			// Corners: no logical utility, use the `--pr-t-border-radius-*` tokens
+			/\.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius[A-Z]\w*(?![\w-])/,
+			// Alignment, float & clear: `Left` ⇒ `Start` / `InlineStart`, `Right` ⇒ `End` / `InlineEnd`
+			/\.pr-u-(textAlign|float|clear)(Left|Right)(?![\w-])/,
+		],
+		versionDeprecated: '20.2.0',
+		actions: `
+			Utilitaires logiques :
+
+			* \`*Left\` ⇒ \`*InlineStart\`
+			* \`*Right\` ⇒ \`*InlineEnd\`
 			* \`*textAlignLeft\` ⇒ \`*textAlignStart\`
 			* \`*textAlignRight\` ⇒ \`*textAlignEnd\`
 			* Angles physiques ⇒ tokens \`--pr-t-border-radius-*\`.
@@ -411,9 +440,19 @@ export default [
 		`,
 	},
 	{
-		// Any combination of .button and .mod-text, .mod-delete or .loading, with any non-whitespace character between
+		// Any combination of .button and .loading, with any non-whitespace character between
+		// SEE https://regex101.com/r/2L0Pw4.
+		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.loading(?![\w-]))\S*/,
+		versionDeprecated: '17.3.0',
+		actions: `
+			* sélecteur : \`.is-loading\`
+			* input Angular : \`state="loading"\`
+		`,
+	},
+	{
+		// Any combination of .button and .mod-text or .mod-delete, with any non-whitespace character between
 		// SEE https://regex101.com/r/5qB2gm.
-		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.(mod-text|mod-delete|loading)(?![\w-]))\S*/,
+		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.(mod-text|mod-delete)(?![\w-]))\S*/,
 		versionDeprecated: '20.2.0',
 		actions: `
 			* \`.mod-text\` ⇒
@@ -422,9 +461,6 @@ export default [
 			* \`.mod-delete\` ⇒
 				* sélecteur : \`.mod-critical\`
 				* input Angular : \`critical\`
-			* \`.loading\` ⇒
-				* sélecteur : \`.is-loading\`
-				* input Angular : \`state="loading"\`
 		`,
 	},
 	{
@@ -452,22 +488,60 @@ export default [
 		// Utilitaires renommés très utilisés
 		// SEE https://regex101.com/r/TdUmb8.
 		objectPattern: [
-			/\.pr-u-textPrimary(?![\w-])/,
 			/\.pr-u-textProduct(?![\w-])/,
-			/\.pr-u-textSecondary(?![\w-])/,
 			/\.pr-u-textBrand(?![\w-])/,
 			/\.pr-u-textCritical(?![\w-])/,
 			/\.pr-u-textDefault(?![\w-])/,
 			/\.pr-u-textError(?![\w-])/,
-			/\.pr-u-textGrey(?![\w-])/,
 			/\.pr-u-textLight(?![\w-])/,
-			/\.pr-u-textLucca(?![\w-])/,
 			/\.pr-u-textNeutral(?![\w-])/,
 			/\.pr-u-textPlaceholder(?![\w-])/,
 			/\.pr-u-textSuccess(?![\w-])/,
 			/\.pr-u-textWarning(?![\w-])/,
 		],
 		versionDeprecated: '21.0.0',
+		actions: `
+			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+		},
+	},
+	{
+		// Utilitaires renommés très utilisés
+		// SEE https://regex101.com/r/j7pw92.
+		objectPattern: [
+			/\.pr-u-textPrimary(?![\w-])/,
+			/\.pr-u-textSecondary(?![\w-])/,
+			/\.pr-u-textGrey(?![\w-])/,
+			/\.pr-u-textLucca(?![\w-])/,
+		],
+		versionDeprecated: '21.0.0',
+		versionDeleted: '22.0.0',
+		actions: `
+			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+		},
+	},
+	{
+		// Utilitaires renommés peu ou pas utilisés
+		// SEE https://regex101.com/r/Ucp3l2.
+		objectPattern: /\.pr-u-textOrchid(?![\w-])/,
+		versionDeprecated: '21.3.0',
+		actions: `
+			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+		},
+	},
+	{
+		// Utilitaires renommés peu ou pas utilisés
+		// SEE https://regex101.com/r/10xX2L.
+		objectPattern: /\.pr-u-textPineappleContrasted(?![\w-])/,
+		versionDeprecated: '21.2.4',
 		actions: `
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
 		`,
@@ -483,7 +557,6 @@ export default [
 			/\.pr-u-textWarningContrasted(?![\w-])/,
 			/\.pr-u-textBrandContrasted(?![\w-])/,
 			/\.pr-u-textNavigation(?![\w-])/,
-			/\.pr-u-textAI(?![\w-])/,
 			/\.pr-u-textPagga(?![\w-])/,
 			/\.pr-u-textPoplee(?![\w-])/,
 			/\.pr-u-textCoreHR(?![\w-])/,
@@ -502,10 +575,21 @@ export default [
 			/\.pr-u-textWatermelon(?![\w-])/,
 			/\.pr-u-textPumpkin(?![\w-])/,
 			/\.pr-u-textPineapple(?![\w-])/,
-			/\.pr-u-textPineappleContrasted(?![\w-])/,
-			/\.pr-u-textOrchid(?![\w-])/,
 		],
 		versionDeprecated: '21.0.0',
+		actions: `
+			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
+		`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+		},
+	},
+	{
+		// Utilitaires renommés peu ou pas utilisés
+		// SEE https://regex101.com/r/CjaRkK.
+		objectPattern: /\.pr-u-textAI(?![\w-])/,
+		versionDeprecated: '21.0.0',
+		versionDeleted: '21.3.0',
 		actions: `
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
 		`,
@@ -588,12 +672,24 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/UiBvDM.
-		objectPattern: [/\.checkbox\b/, /\.checkboxesfield\b/],
+		objectPattern: /\.checkbox\b/,
+		versionDeprecated: '21.1.2',
+		actions: `Remplacer par [Checkbox](https://prisme.lucca.io/94310e217/p/42c88e-checkbox).`,
+	},
+	{
+		// SEE https://regex101.com/r/2KOjjU.
+		objectPattern: /\.checkboxesfield\b/,
 		actions: `Remplacer par [Checkbox](https://prisme.lucca.io/94310e217/p/42c88e-checkbox).`,
 	},
 	{
 		// SEE https://regex101.com/r/e1p3sA.
-		objectPattern: [/\.radio\b/, /\.radiosfield\b/, /\.radioButtons\b/],
+		objectPattern: [/\.radio\b/, /\.radioButtons\b/],
+		versionDeprecated: '21.1.2',
+		actions: `Remplacer par [Radio](https://prisme.lucca.io/94310e217/p/45f82a-radio).`,
+	},
+	{
+		// SEE https://regex101.com/r/XtUtpZ.
+		objectPattern: /\.radiosfield\b/,
 		actions: `Remplacer par [Radio](https://prisme.lucca.io/94310e217/p/45f82a-radio).`,
 	},
 	{
@@ -634,18 +730,24 @@ export default [
 	// Kept after the specific entries (`.lu-select-value .label`…), which must win, and before the `.u-` catch-all: `.u-textLight` must still report here.
 	// SEE https://regex101.com/r/OTnSEg
 	{
-		objectPattern: [
-			/\.active(?![\w-])/,
-			/\.disabled(?![\w-])/,
-			/\.error(?![\w-])/,
-			/\.label(?![\w-])/,
-			/\.label-icon(?![\w-])/,
-			/\.mod-delete(?![\w-])/,
-			/\.mod-link(?![\w-])/,
-			/\.mod-outline(?![\w-])/,
-			/\.success(?![\w-])/,
-			/\.u-textLight(?![\w-])/,
-		],
+		objectPattern: /\.label-icon(?![\w-])/,
+		versionDeprecated: '21.1.2',
+	},
+	{
+		objectPattern: [/\.mod-delete(?![\w-])/, /\.u-textLight(?![\w-])/],
+		versionDeprecated: '20.2.0',
+	},
+	{
+		objectPattern: /\.active(?![\w-])/,
+		versionDeprecated: '17.4.0',
+	},
+	{
+		objectPattern: [/\.disabled(?![\w-])/, /\.error(?![\w-])/, /\.mod-link(?![\w-])/, /\.mod-outline(?![\w-])/, /\.success(?![\w-])/],
+		versionDeprecated: '17.3.0',
+	},
+	{
+		objectPattern: /\.label(?![\w-])/,
+		versionDeprecated: '16.3.0',
 	},
 
 	// Catch-all, keep last
