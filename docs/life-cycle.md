@@ -228,6 +228,65 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
+					<li><code>.switch</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/39c7b7-switch">Switch</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.textfield</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/459eda-textfield">Textfield</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.file</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/8282a5-file-upload">File upload</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.table</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li><a href="https://prisme.lucca.io/94310e217/p/4263a5-data-table">Data table</a></li>
+				<li><a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table">Index table</a></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.main</code></li>
+					<li><code>.layout</code></li>
+					<li><code>.header</code></li>
+					<li><code>.filters</code></li>
+					<li><code>.notchBox</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
 					<li><code>.container</code> <strong>+</strong> <code>.mod-S</code></li>
 				</ul>
 			</td>
@@ -305,6 +364,87 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
+					<li><code>.pr-u-insetReset</code></li>
+					<li><code>.pr-u-topReset</code></li>
+					<li><code>.pr-u-bottomReset</code></li>
+					<li><code>.pr-u-leftReset</code></li>
+					<li><code>.pr-u-rightReset</code></li>
+				</ul>
+			</td>
+			<td>20.2.0</td>
+			<td>–</td>
+			<td>
+				<code>*Reset</code> ⇒ <code>*0</code>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.pr-u-textLeft</code></li>
+					<li><code>.pr-u-textCenter</code></li>
+					<li><code>.pr-u-textRight</code></li>
+				</ul>
+			</td>
+			<td>20.2.0</td>
+			<td>–</td>
+			<td>
+				<p>Doublon :</p>
+				<ul>
+				<li><code>*text*</code> ⇒ <code>*textAlign*</code></li>
+				<li><code>*Left</code> ⇒ <code>*Start</code></li>
+				<li><code>*Right</code> ⇒ <code>*End</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.pr-u-clear</code></li>
+				</ul>
+			</td>
+			<td>20.2.0</td>
+			<td>–</td>
+			<td>Remplacer par <code>.pr-u-clearBoth</code>.</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])">
+				<ul>
+					<li><code>.pr-u-text(XS|S|M|L|…)</code></li>
+				</ul>
+				(utilitaires de taille)
+			</td>
+			<td>20.2.0</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li>XS, S &amp; M : <code>*text*</code> ⇒ <code>*body*</code></li>
+				<li>L ~ XXXL ⇒<ul>
+				<li>utilitaire de titre : <code>.pr-u-hx</code></li>
+				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
+				</ul>
+				</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-h[56](?![\w-])">
+				<ul>
+					<li><code>.pr-u-h5</code></li>
+					<li><code>.pr-u-h6</code></li>
+				</ul>
+			</td>
+			<td>20.2.0</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li>utilitaire : <code>*h4</code></li>
+				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
 					<li><code>.button</code> <strong>+</strong> <code>.mod-text</code></li>
 					<li><code>.button</code> <strong>+</strong> <code>.mod-delete</code></li>
 					<li><code>.button</code> <strong>+</strong> <code>.loading</code></li>
@@ -375,21 +515,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<ul>
-					<li><code>.user-info</code></li>
-					<li><code>.user-tile</code></li>
-					<li><code>.user-tile-title</code></li>
-					<li><code>.user-tile-label</code></li>
-					<li><code>.user-tile-footnote</code></li>
-					<li><code>.picture</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>20.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
 			<td data-pattern="\.u-text(X?S|M|X{0,3}L)(?![\w-])">
 				<ul>
 					<li><code>.u-text(XS|S|M|L|…)</code></li>
@@ -408,42 +533,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				</li>
 				</ul>
 				<p><a href="https://www.notion.so/luccasoftware/Tokens-Typo-1ebd278ab26e808a9b58d1017514ecb9">Plus d’informations sur le sujet</a>.</p>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])">
-				<ul>
-					<li><code>.pr-u-text(XS|S|M|L|…)</code></li>
-				</ul>
-				(utilitaires de taille)
-			</td>
-			<td>20.1.0</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li>XS, S &amp; M : <code>*text*</code> ⇒ <code>*body*</code></li>
-				<li>L ~ XXXL ⇒<ul>
-				<li>utilitaire de titre : <code>.pr-u-hx</code></li>
-				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
-				</ul>
-				</li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.pr-u-h[56](?![\w-])">
-				<ul>
-					<li><code>.pr-u-h5</code></li>
-					<li><code>.pr-u-h6</code></li>
-				</ul>
-			</td>
-			<td>20.1.0</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li>utilitaire : <code>*h4</code></li>
-				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
-				</ul>
 			</td>
 		</tr>
 		<tr>
@@ -528,16 +617,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.u-elevate.*">
-				<ul>
-					<li><code>.u-elevate…</code></li>
-				</ul>
-			</td>
-			<td>19.1.0</td>
-			<td>19.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
 			<td>
 				<ul>
 					<li><code>.comment-content-textContainer</code></li>
@@ -577,6 +656,21 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>*-item-tab</code> ⇒ <code>*-item-action</code></li>
 				</ul>
 			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.user-info</code></li>
+					<li><code>.user-tile</code></li>
+					<li><code>.user-tile-title</code></li>
+					<li><code>.user-tile-label</code></li>
+					<li><code>.user-tile-footnote</code></li>
+					<li><code>.picture</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>20.1.0</td>
+			<td>–</td>
 		</tr>
 		<tr>
 			<td>
@@ -646,26 +740,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.pr-u-clear</code></li>
-				</ul>
-			</td>
-			<td>18.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <code>.pr-u-clearBoth</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.button</code> <strong>+</strong> <code>.mod-counter</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>18.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
 					<li><code>.button-counter</code></li>
 					<li><code>.navSide-item-alert</code></li>
 					<li><code>.textfield-actionClear</code></li>
@@ -675,55 +749,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>18.1.0</td>
 			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.callout</code> <strong>+</strong> <code>.mod-tiny</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>18.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.u-textLeft</code></li>
-					<li><code>.u-textCenter</code></li>
-					<li><code>.u-textRight</code></li>
-				</ul>
-			</td>
-			<td>18.1.0</td>
-			<td>–</td>
-			<td>
-				<p>Doublon :</p>
-				<ul>
-				<li><code>.u-text*</code> ⇒ <code>.pr-u-textAlign*</code></li>
-				<li><code>*Left</code> ⇒ <code>*Start</code></li>
-				<li><code>*Right</code> ⇒ <code>*End</code></li>
-				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.pr-u-textLeft</code></li>
-					<li><code>.pr-u-textCenter</code></li>
-					<li><code>.pr-u-textRight</code></li>
-				</ul>
-			</td>
-			<td>18.1.0</td>
-			<td>–</td>
-			<td>
-				<p>Doublon :</p>
-				<ul>
-				<li><code>*text*</code> ⇒ <code>*textAlign*</code></li>
-				<li><code>*Left</code> ⇒ <code>*Start</code></li>
-				<li><code>*Right</code> ⇒ <code>*End</code></li>
-				</ul>
-			</td>
 		</tr>
 		<tr>
 			<td>
@@ -740,6 +765,17 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>*sidePanel</code> ⇒ <code>*drawer</code></li>
 				</ul>
 			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.u-comma</code></li>
+					<li><code>.u-unit</code></li>
+				</ul>
+			</td>
+			<td>17.4.0</td>
+			<td>19.1.0</td>
+			<td>–</td>
 		</tr>
 		<tr>
 			<td data-pattern="\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])">
@@ -787,17 +823,21 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.pr-u-insetReset</code></li>
-					<li><code>.pr-u-topReset</code></li>
-					<li><code>.pr-u-bottomReset</code></li>
-					<li><code>.pr-u-leftReset</code></li>
-					<li><code>.pr-u-rightReset</code></li>
+					<li><code>.u-textLeft</code></li>
+					<li><code>.u-textCenter</code></li>
+					<li><code>.u-textRight</code></li>
 				</ul>
 			</td>
 			<td>17.4.0</td>
 			<td>–</td>
 			<td>
-				<code>*Reset</code> ⇒ <code>*0</code>
+				<p>Doublon :</p>
+				<ul>
+				<li><code>.u-text*</code> ⇒ <code>.pr-u-textAlign*</code></li>
+				<li><code>*Left</code> ⇒ <code>*Start</code></li>
+				<li><code>*Right</code> ⇒ <code>*End</code></li>
+				</ul>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -844,17 +884,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.u-comma</code></li>
-					<li><code>.u-unit</code></li>
-				</ul>
-			</td>
-			<td>17.3.0</td>
-			<td>19.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
 					<li><code>.button</code> <strong>+</strong> <code>.mod-icon</code></li>
 				</ul>
 			</td>
@@ -880,6 +909,16 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
+					<li><code>.callout</code> <strong>+</strong> <code>.mod-tiny</code></li>
+				</ul>
+			</td>
+			<td>16.5.0</td>
+			<td>18.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
 					<li><code>.button-icon</code></li>
 				</ul>
 			</td>
@@ -901,6 +940,16 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li>composants Angular : <code>lu-text-input</code>, <code>lu-checkbox-input</code>…</li>
 				</ul>
 			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.button</code> <strong>+</strong> <code>.mod-counter</code></li>
+				</ul>
+			</td>
+			<td>16.3.0</td>
+			<td>18.1.0</td>
+			<td>–</td>
 		</tr>
 		<tr>
 			<td>
@@ -939,6 +988,16 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
+			<td data-pattern="\.u-elevate.*">
+				<ul>
+					<li><code>.u-elevate…</code></li>
+				</ul>
+			</td>
+			<td>16.2.0</td>
+			<td>19.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
 			<td>
 				<ul>
 					<li><code>.status</code></li>
@@ -970,65 +1029,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>–</td>
 			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.switch</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/39c7b7-switch">Switch</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.textfield</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/459eda-textfield">Textfield</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.file</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/8282a5-file-upload">File upload</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.table</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li><a href="https://prisme.lucca.io/94310e217/p/4263a5-data-table">Data table</a></li>
-				<li><a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table">Index table</a></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.main</code></li>
-					<li><code>.layout</code></li>
-					<li><code>.header</code></li>
-					<li><code>.filters</code></li>
-					<li><code>.notchBox</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>–</td>
 		</tr>
 		<tr>
 			<td data-pattern="\.active(?![\w-])">
@@ -1440,16 +1440,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="--commons-elevations-elevation-[1-6](?![\w-])">
-				<ul>
-					<li><code>--commons-elevations-elevation-(1|2|3|4|…)</code></li>
-				</ul>
-			</td>
-			<td>17.3.0</td>
-			<td>19.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
 			<td data-pattern="--commons-boxShadow-X*(S|M|L)(?![\w-])">
 				<ul>
 					<li><code>--commons-boxShadow-S</code></li>
@@ -1470,6 +1460,16 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.3.0</td>
 			<td>–</td>
 			<td>Remplacer par le token <code>--pr-t-elevation-surface-default</code>.</td>
+		</tr>
+		<tr>
+			<td data-pattern="--commons-elevations-elevation-[1-6](?![\w-])">
+				<ul>
+					<li><code>--commons-elevations-elevation-(1|2|3|4|…)</code></li>
+				</ul>
+			</td>
+			<td>16.1.0</td>
+			<td>19.1.0</td>
+			<td>–</td>
 		</tr>
 	</tbody>
 </table>

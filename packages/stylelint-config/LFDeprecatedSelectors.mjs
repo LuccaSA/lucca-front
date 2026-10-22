@@ -21,6 +21,7 @@ export default [
 		// Any combination of .button and .mod-counter, with any non-whitespace character between
 		// SEE https://regex101.com/r/9WOlXc.
 		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.mod-counter(?![\w-]))\S*/,
+		versionDeprecated: '16.3.0',
 		versionDeleted: '18.1.0',
 	},
 	{
@@ -37,6 +38,7 @@ export default [
 		// Any combination of .callout and .mod-tiny, with any non-whitespace character between
 		// SEE https://regex101.com/r/rW039S.
 		objectPattern: /(?=\S*\.callout(?![\w-]))(?=\S*\.mod-tiny(?![\w-]))\S*/,
+		versionDeprecated: '16.5.0',
 		versionDeleted: '18.1.0',
 	},
 	{
@@ -51,6 +53,7 @@ export default [
 		// Any occurrence of one of these selectors in any part of a selector
 		// SEE https://regex101.com/r/VHfdte.
 		objectPattern: [/\.user-info\b/, /\.user-tile(-(title|label|footnote))?(?![\w-])/, /\.picture(?![\w-])/],
+		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 	},
 	{
@@ -107,7 +110,7 @@ export default [
 	{
 		// SEE https://regex101.com/r/VGtzuM.
 		objectPattern: [/\.u-comma(?![\w-])/, /\.u-unit(?![\w-])/],
-		versionDeprecated: '17.3.0',
+		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 	},
 	{
@@ -201,13 +204,13 @@ export default [
 		// Reset position utilities, duplicates of their `0` names
 		// SEE https://regex101.com/r/RnSmNe.
 		objectPattern: /\.pr-u-(inset|top|bottom|left|right)Reset(?![\w-])/,
-		versionDeprecated: '17.4.0',
+		versionDeprecated: '20.2.0',
 		actions: `\`*Reset\` ⇒ \`*0\``,
 	},
 	{
 		// SEE https://regex101.com/r/y2kYBk.
 		objectPattern: [/\.u-textLeft(?![\w-])/, /\.u-textCenter(?![\w-])/, /\.u-textRight(?![\w-])/],
-		versionDeprecated: '18.1.0',
+		versionDeprecated: '17.4.0',
 		actions: `
 			Doublon :
 
@@ -223,7 +226,7 @@ export default [
 		// `.pr-u-` names of the entry above, still shipping
 		// SEE https://regex101.com/r/bskIde.
 		objectPattern: /\.pr-u-text(Left|Center|Right)(?![\w-])/,
-		versionDeprecated: '18.1.0',
+		versionDeprecated: '20.2.0',
 		actions: `
 			Doublon :
 
@@ -245,7 +248,7 @@ export default [
 	{
 		// SEE https://regex101.com/r/qlYGD2.
 		objectPattern: /\.pr-u-clear(?![\w-])/,
-		versionDeprecated: '18.1.2',
+		versionDeprecated: '20.2.0',
 		actions: `Remplacer par \`.pr-u-clearBoth\`.`,
 	},
 	{
@@ -318,7 +321,7 @@ export default [
 	{
 		// SEE https://regex101.com/r/43OspP.
 		objectPattern: /\.u-elevate.*/,
-		versionDeprecated: '19.1.0',
+		versionDeprecated: '16.2.0',
 		versionDeleted: '19.1.0',
 	},
 	{
@@ -390,7 +393,7 @@ export default [
 		// `.pr-u-` names of the entry above, still shipping
 		// SEE https://regex101.com/r/zdllLi.
 		objectPattern: /\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])/,
-		versionDeprecated: '20.1.0',
+		versionDeprecated: '20.2.0',
 		actions: `
 			* XS, S & M : \`*text*\` ⇒ \`*body*\`
 			* L ~ XXXL ⇒
@@ -401,7 +404,7 @@ export default [
 	{
 		// SEE https://regex101.com/r/aDlJ0h.
 		objectPattern: /\.pr-u-h[56](?![\w-])/,
-		versionDeprecated: '20.1.0',
+		versionDeprecated: '20.2.0',
 		actions: `
 			* utilitaire : \`*h4\`
 			* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
@@ -596,21 +599,25 @@ export default [
 	{
 		// SEE https://regex101.com/r/jMc1iX.
 		objectPattern: /\.switch\b/,
+		versionDeprecated: '21.1.2',
 		actions: `Remplacer par [Switch](https://prisme.lucca.io/94310e217/p/39c7b7-switch).`,
 	},
 	{
 		// SEE https://regex101.com/r/w9keCn.
 		objectPattern: /\.textfield\b/,
+		versionDeprecated: '21.1.2',
 		actions: `Remplacer par [Textfield](https://prisme.lucca.io/94310e217/p/459eda-textfield).`,
 	},
 	{
 		// SEE https://regex101.com/r/i6H9hf.
 		objectPattern: /\.file\b/,
+		versionDeprecated: '21.1.2',
 		actions: `Remplacer par [File upload](https://prisme.lucca.io/94310e217/p/8282a5-file-upload).`,
 	},
 	{
 		// SEE https://regex101.com/r/ZPhMSh.
 		objectPattern: /\.table\b/,
+		versionDeprecated: '21.1.2',
 		actions: `
 			* [Data table](https://prisme.lucca.io/94310e217/p/4263a5-data-table)
 			* [Index table](https://prisme.lucca.io/94310e217/p/24fc14-index-table)
@@ -620,6 +627,7 @@ export default [
 		// Listed in the deprecated components of highlight-prisme.scss, with no documented replacement
 		// SEE https://regex101.com/r/Sg9PR8.
 		objectPattern: [/\.main\b/, /\.layout\b/, /\.header\b/, /\.filters\b/, /\.notchBox\b/],
+		versionDeprecated: '21.1.2',
 	},
 
 	// Any occurrence of one of these selectors in any part of a selector.

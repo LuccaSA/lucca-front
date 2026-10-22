@@ -10,7 +10,7 @@ export default [
 	{
 		// SEE https://regex101.com/r/Qkq3ok.
 		objectPattern: /--commons-elevations-elevation-[1-6](?![\w-])/,
-		versionDeprecated: '17.3.0',
+		versionDeprecated: '16.1.0',
 		versionDeleted: '19.1.0',
 	},
 	{
@@ -40,7 +40,7 @@ export default [
 		actions: `Remplacer par le token \`--pr-t-elevation-surface-default\`.`,
 	},
 	{
-		// Alert of the navSide items, deleted in 18.1.0: these variables are no longer read
+		// Alert of the navSide items, removed in 18.1.0: these variables are still emitted but no longer read
 		// SEE https://regex101.com/r/BYj50i.
 		objectPattern: /--components-navSide-fullwidth-palette-alert-(color|text)(?![\w-])/,
 		versionDeprecated: '17.3.2',
