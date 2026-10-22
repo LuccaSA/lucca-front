@@ -136,10 +136,10 @@ const autoNom = (e) => {
 const escAttr = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 const unescAttr = (t) => t.replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 const written = new Map(
-	[...readFileSync(docPath, 'utf8').matchAll(/<td data-pattern="([^"]*)">\n([\s\S]*?)\n\t\t\t<\/td>/g)].map(([, key, body]) => [
-		unescAttr(key),
-		body.replace(/^\t{4}/gm, ''),
-	]),
+	[...readFileSync(docPath, 'utf8').matchAll(/<td data-pattern="([^"]*)">\n([\s\S]*?)\n\t\t\t<\/td>/g)]
+		// A leftover TODO placeholder is not a written cell: keep reporting it until the agent fills it.
+		.filter(([, , body]) => !body.includes('<!-- TODO'))
+		.map(([, key, body]) => [unescAttr(key), body.replace(/^\t{4}/gm, '')]),
 );
 const missing = [];
 
