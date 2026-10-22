@@ -1,6 +1,7 @@
-import { ComponentRef, createEnvironmentInjector, EnvironmentInjector, InjectOptions, Injector, ProviderToken, reflectComponentType, Type } from '@angular/core';
+import { ComponentRef, createEnvironmentInjector, EnvironmentInjector, InjectOptions, ProviderToken, reflectComponentType, Type } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { ElementControl } from './element-control';
 
 // Fields of Angular Elements' `NgElementImpl` and `ComponentNgElementStrategy` used below
@@ -24,22 +25,46 @@ const COMPONENT_REF = Symbol('componentRef');
 type ElementProperties = Record<string, unknown>;
 
 /**
- * The injector of the component rendered by the closest ancestor element registered by this bundle, if any.
+ * The component rendered by the closest ancestor element registered by this bundle and matching `predicate`, if any.
  */
-function closestComponentInjector(element: HTMLElement): Injector | null {
+function closestComponentRef(element: HTMLElement, predicate: (componentRef: ComponentRef<unknown>) => boolean = () => true): ComponentRef<unknown> | null {
 	for (let ancestor = element.parentElement; ancestor; ancestor = ancestor.parentElement) {
 		const componentRef = (ancestor as unknown as { [COMPONENT_REF]?: () => ComponentRef<unknown> | null })[COMPONENT_REF]?.();
-		if (componentRef) {
-			return componentRef.injector;
+		if (componentRef && predicate(componentRef)) {
+			return componentRef;
 		}
 	}
 	return null;
 }
 
+let pendingFirstConnects: { element: HTMLElement; connect: () => void }[] = [];
+
+/**
+ * Runs the first connection of elements in document order, so that a parent element's component exists before its
+ * descendants inject from it: elements are upgraded in the order they are defined, not in document order.
+ * While the document is parsed, waits for the page scripts to set properties first (`entry`, `options`…): a required
+ * input read before throws.
+ */
+function scheduleFirstConnect(element: HTMLElement, connect: () => void): void {
+	if (pendingFirstConnects.length === 0) {
+		const flush = () => {
+			const pending = pendingFirstConnects;
+			pendingFirstConnects = [];
+			pending.sort((a, b) => (a.element.compareDocumentPosition(b.element) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1)).forEach((item) => item.connect());
+		};
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', flush, { once: true });
+		} else {
+			queueMicrotask(flush);
+		}
+	}
+	pendingFirstConnects.push({ element, connect });
+}
+
 /**
  * Registers `component` as the custom element `tagName`, on top of Angular Elements:
  * - aliased inputs are exposed as properties named after the alias (Angular Elements uses the class field name),
- * - form components get a `value` property and a `valueChange` event, see `ElementControl`,
+ * - form components get a `value` property, a `valueChange` event and a `required` attribute, see `ElementControl`,
  * - nested elements inject what their parent element's component provides (`lu-grid-column` in `lu-grid`), as in a template,
  * - an output is only subscribed once the page listens to its event, as in a template: some components check whether
  *   an output is bound (`clueChange` makes a select searchable).
@@ -60,7 +85,7 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			// lookup since the parent is only known once connected
 			const parent = {
 				get: <T>(token: ProviderToken<T>, notFoundValue?: T, options?: InjectOptions): T =>
-					(closestComponentInjector(this) ?? injector).get(token, notFoundValue, options as InjectOptions & { optional?: false }),
+					(closestComponentRef(this)?.injector ?? injector).get(token, notFoundValue, options as InjectOptions & { optional?: false }),
 			};
 			// Must be set before anything creates the Angular Elements strategy, which reads it once
 			(this as unknown as NgElementInternals).injector = createEnvironmentInjector(
@@ -94,21 +119,15 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 
 		connectedCallback(): void {
 			if (this.#renderedByAngular === null) {
-				const firstConnect = () => {
+				// Deferred: Angular marks the elements it renders right after inserting them
+				scheduleFirstConnect(this, () => {
 					if (this.#renderedByAngular === null) {
 						this.#renderedByAngular = Object.hasOwn(this, NG_CONTEXT);
 						if (this.isConnected) {
 							this.connectedCallback();
 						}
 					}
-				};
-				if (document.readyState === 'loading') {
-					// Let the page scripts set properties first (`entry`, `options`…): a required input read before throws
-					document.addEventListener('DOMContentLoaded', firstConnect, { once: true });
-				} else {
-					// Angular marks the elements it renders right after inserting them: decide once it is done
-					queueMicrotask(firstConnect);
-				}
+				});
 				return;
 			}
 			if (this.#renderedByAngular) {
@@ -126,6 +145,7 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			const accessors = internals.ngElementStrategy.componentRef?.injector.get(NG_VALUE_ACCESSOR, null);
 			if (accessors?.length) {
 				this.#control.connect(accessors[0], (this as unknown as ElementProperties)['value']);
+				this.#control.linkFormField(closestComponentRef(this, ({ instance }) => instance instanceof FormFieldComponent) as ComponentRef<FormFieldComponent> | null);
 			}
 		}
 

@@ -18,7 +18,9 @@ npm run build:web-components   # → dist/web-components/bundle.{js,css}
 <html lang="fr">
   <link rel="stylesheet" href="bundle.css" />
 
-  <lu-simple-select id="city" placeholder="Choose a city"></lu-simple-select>
+  <lu-form-field label="City" error-inline-message="Choose a city">
+    <lu-simple-select id="city" required placeholder="Choose a city"></lu-simple-select>
+  </lu-form-field>
 
   <script src="bundle.js"></script>
   <script>
@@ -33,7 +35,7 @@ npm run build:web-components   # → dist/web-components/bundle.{js,css}
 ```
 
 - Tag and input names are the Angular ones. String inputs can be attributes (`placeholder`), objects and arrays must be properties (`options`).
-- Form components expose `value` and a `valueChange` event, replacing `ngModel`.
+- Form components expose `value` and a `valueChange` event, replacing `ngModel`. In a `lu-form-field`, the `required` attribute shows the required mark, and the field turns invalid once touched while empty, unless the page sets `invalid` on the field itself.
 - Angular outputs are dispatched as `CustomEvent`s with the same name, once listened with `addEventListener`. As in a template, some components change when an output is listened: `clueChange` makes a select searchable, `deleteFile` shows the delete button of a file entry.
 - Elements render once the page is parsed, so properties set by page scripts are there from the first render.
 - Nested elements work as in a template (`lu-grid-column` in `lu-grid`).
@@ -42,7 +44,7 @@ npm run build:web-components   # → dist/web-components/bundle.{js,css}
 
 ## Available elements
 
-Forms: `lu-date-input`, `lu-date-range-input`, `lu-duration-picker`, `lu-multi-select`, `lu-multilanguage-input`, `lu-phone-number-input`, `lu-simple-select`, `lu-time-picker`, `lu-time-range-picker`.
+Forms: `lu-date-input`, `lu-date-range-input`, `lu-duration-picker`, `lu-form-field`, `lu-multi-select`, `lu-multilanguage-input`, `lu-phone-number-input`, `lu-simple-select`, `lu-time-picker`, `lu-time-range-picker`.
 
 Files: `lu-file-entry`, `lu-multi-file-upload`, `lu-single-file-upload`.
 
@@ -57,5 +59,5 @@ On every stable tag (`vX.Y.Z`), [deploy.yml](../../.github/workflows/deploy.yml)
 ## Limitations
 
 - Relies on Angular internals (`injector`, `ngElementStrategy`, `ngElementEventsSubscription`, `__ngContext__`, see [src/define-element.ts](src/define-element.ts)): check them on each Angular major.
-- No `disabled` state or validation on form components yet.
-- Not exposed yet: services (dialog, modal, toasts), directives (user popover), `lu-form-field`, filter pills, `lu-color-input` and `lu-rich-text-input` (they need a host `ngModel` or directive), `lu-listbox`.
+- No `disabled` state on form components yet, and `required` is the only validation.
+- Not exposed yet: services (dialog, modal, toasts), directives (user popover), filter pills, `lu-color-input` and `lu-rich-text-input` (they need a host `ngModel` or directive), `lu-listbox`.

@@ -1,9 +1,12 @@
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { ComponentRef } from '@angular/core';
+import { ControlValueAccessor, FormControl, NgControl, Validators } from '@angular/forms';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { Subscription } from 'rxjs';
 
 /**
  * Stands in for `ngModel` / `formControl` on a custom element: form components inject `NgControl` and
  * expose their value through `ControlValueAccessor` only. Exposes that value to the page as `element.value`
- * and a `valueChange` event.
+ * and a `valueChange` event, and supports the `required` attribute.
  */
 export class ElementControl extends NgControl {
 	readonly #element: HTMLElement;
@@ -51,5 +54,33 @@ export class ElementControl extends NgControl {
 	setValue(value: unknown): void {
 		this.#control.setValue(value);
 		this.#accessor?.writeValue(value);
+	}
+
+	#formFieldSubscription: Subscription | null = null;
+
+	/**
+	 * `lu-form-field` reads the required and invalid states from the controls of its template, which a control in another
+	 * custom element is not: set them on the closest form field instead.
+	 */
+	linkFormField(formField: ComponentRef<FormFieldComponent> | null): void {
+		this.#formFieldSubscription?.unsubscribe();
+		this.#formFieldSubscription = null;
+
+		const required = this.#element.hasAttribute('required');
+		this.#control.setValidators(required ? Validators.required : null);
+		this.#control.updateValueAndValidity({ emitEvent: false });
+
+		if (!formField) {
+			return;
+		}
+		formField.instance.forceInputRequired.set(required);
+		// The page controls the invalid state itself
+		if ((formField.location.nativeElement as HTMLElement).hasAttribute('invalid')) {
+			return;
+		}
+		// Like a form field around `ngModel`: invalid once touched
+		const updateInvalid = () => formField.setInput('invalid', this.#control.invalid && this.#control.touched);
+		updateInvalid();
+		this.#formFieldSubscription = this.#control.events.subscribe(updateInvalid);
 	}
 }

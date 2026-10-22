@@ -13,6 +13,7 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { EmptyStatePageComponent, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { MultilanguageInputComponent } from '@lucca-front/ng/forms';
 import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
@@ -32,6 +33,7 @@ const ELEMENTS: Record<string, { tagName: string; component: Type<unknown> }> = 
 	DateInput: { tagName: 'lu-date-input', component: DateInputComponent },
 	DateRangeInput: { tagName: 'lu-date-range-input', component: DateRangeInputComponent },
 	DurationPicker: { tagName: 'lu-duration-picker', component: DurationPickerComponent },
+	FormField: { tagName: 'lu-form-field', component: FormFieldComponent },
 	MultiSelect: { tagName: 'lu-multi-select', component: LuMultiSelectInputComponent },
 	MultilanguageInput: { tagName: 'lu-multilanguage-input', component: MultilanguageInputComponent },
 	PhoneNumberInput: { tagName: 'lu-phone-number-input', component: PhoneNumberInputComponent },
