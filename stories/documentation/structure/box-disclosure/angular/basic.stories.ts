@@ -49,16 +49,16 @@ export default {
 				...args,
 				onOpenChange: (open: boolean) => openChange?.(open),
 			},
-			template: cleanupTemplate(`<lu-box-disclosure ${generateInputs(args, argTypes)} (openChange)="onOpenChange($event)">Lorem ipsum dolor sit amet</lu-box-disclosure>`),
+			template: cleanupTemplate(`<lu-box-disclosure ${generateInputs(args, argTypes)} (openChange)="onOpenChange($event)">Custom content</lu-box-disclosure>`),
 		};
 	},
 } as Meta;
 
 export const Basic: StoryObj<BoxDisclosureComponent> = {
 	args: {
-		heading: 'Configurer les notifications',
-		subtitle: 'À compléter avant le 3 mars.',
-		metadata: '3 tâches',
+		heading: 'Title',
+		subtitle: 'Subtitle',
+		metadata: 'Metadata',
 		theme: 'white',
 		open: false,
 	},

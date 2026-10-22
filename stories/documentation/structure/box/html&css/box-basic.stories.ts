@@ -25,15 +25,15 @@ export default {
 
 function getTemplate(args: BoxBasicStory): string {
 	const theme = args.theme ? ` mod-${args.theme}` : '';
-	const description = args.description ? `\n\t\t<p class="box-header-description">Lucca lit les formats PDF, JPG et PNG jusqu’à 5 Mo.</p>` : '';
+	const description = args.description ? `\n\t\t<p class="box-header-description">Subtitle</p>` : '';
 	const header = args.heading
 		? `\n\t<div class="box-header">
-		<div role="heading" aria-level="3" class="box-header-title">Titre</div>${description}
+		<div role="heading" aria-level="3" class="box-header-title">Title</div>${description}
 	</div>`
 		: '';
 
 	return `<div class="box${theme}">${header}
-	<div class="box-slot">Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll.</div>
+	<div class="box-slot">Custom content</div>
 </div>`;
 }
 

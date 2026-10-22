@@ -32,18 +32,18 @@ export default {
 function getTemplate(args: BoxDisclosureBasicStory): string {
 	const theme = args.theme ? ` mod-${args.theme}` : '';
 	const open = args.open ? ' open' : '';
-	const metadata = args.metadata ? `\n\t\t<span class="boxDisclosure-summary-metadata">3 tâches</span>` : '';
+	const metadata = args.metadata ? `\n\t\t<span class="boxDisclosure-summary-metadata">Metadata</span>` : '';
 
 	return `<details class="boxDisclosure${theme}"${open}>
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
-			<span class="boxDisclosure-summary-title">Configurer les notifications</span>
-			<span class="boxDisclosure-summary-description">À compléter avant le 3 mars.</span>
+			<span class="boxDisclosure-summary-title">Title</span>
+			<span class="boxDisclosure-summary-description">Subtitle</span>
 		</span>${metadata}
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
 	<div class="boxDisclosure-details">
-		Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll.
+		Custom content
 	</div>
 </details>`;
 }

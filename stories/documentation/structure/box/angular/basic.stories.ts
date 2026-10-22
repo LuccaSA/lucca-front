@@ -108,7 +108,7 @@ export default {
 				onKilled: () => killed?.(),
 			},
 			// `killed` is deprecated and only emits on a killable box: don't advertise it in the displayed code otherwise
-			template: cleanupTemplate(`<lu-box ${generateInputs(inputs, argTypes)}${args['killable'] ? ' (killed)="onKilled()"' : ''}>Lorem ipsum dolor sit amet</lu-box>`),
+			template: cleanupTemplate(`<lu-box ${generateInputs(inputs, argTypes)}${args['killable'] ? ' (killed)="onKilled()"' : ''}>Custom content</lu-box>`),
 		};
 	},
 } as Meta;
@@ -120,8 +120,8 @@ export const Basic: StoryObj<BoxComponent & { fancyTheme: boolean }> = {
 		illustration: 'piggy-bank',
 		fancyTheme: false,
 		size: 'M',
-		heading: 'Titre',
-		subtitle: 'Sous-titre',
+		heading: 'Title',
+		subtitle: 'Subtitle',
 		neutral: false,
 		killable: false,
 		toggle: false,

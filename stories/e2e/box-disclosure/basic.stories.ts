@@ -17,16 +17,16 @@ export const BasicTEST = createTestStory({ ...Basic, args: { ...Basic.args, open
 	const getDetails = () => canvasElement.querySelector('details') as HTMLDetailsElement;
 
 	await step('Renders closed, with only the heading visible', async () => {
-		await expect(canvas.getByText('Configurer les notifications')).toBeVisible();
+		await expect(canvas.getByText('Title')).toBeVisible();
 		await expect(getDetails()).not.toHaveAttribute('open');
-		await expect(canvas.getByText('Lorem ipsum dolor sit amet')).not.toBeVisible();
+		await expect(canvas.getByText('Custom content')).not.toBeVisible();
 	});
 
 	await step('Clicking the summary opens the box and emits openChange(true)', async () => {
 		await userEvent.click(getSummary());
 		await waitForAngular();
 		await expect(getDetails()).toHaveAttribute('open');
-		await expect(canvas.getByText('Lorem ipsum dolor sit amet')).toBeVisible();
+		await expect(canvas.getByText('Custom content')).toBeVisible();
 		await waitFor(() => expect(args['openChange']).toHaveBeenLastCalledWith(true));
 	});
 
