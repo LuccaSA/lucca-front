@@ -107,6 +107,8 @@ export class LinkComponent {
 				// External router links must not wire up the `RouterLink` directive (it would navigate in-place),
 				// but they still need an `href` so the anchor is keyboard-focusable and its destination is previewable.
 				// Actual navigation is handled natively by `target="_blank"` (anchors) or by `redirect()` (buttons).
+				// Commands set while the link was internal are cleared, otherwise `RouterLink` keeps intercepting the click.
+				this.routerLink.routerLink = null;
 				this.routerLink.hrefOverride.set(this.#serializeExternalUrl());
 			} else if (!href() && this.hrefBackup) {
 				this.routerLink.hrefOverride.set(this.hrefBackup);

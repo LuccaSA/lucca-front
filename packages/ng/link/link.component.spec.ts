@@ -1,7 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { ApplicationRef, ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, RouterOutlet, Routes } from '@angular/router';
+import { provideRouter, Router, RouterOutlet, Routes } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { vi } from 'vitest';
 import { LinkComponent } from './link.component';
@@ -28,6 +28,9 @@ class ChildComponent {}
 		<!-- internal links -->
 		<a class="int-absolute" [luLink]="['/dashboard']">internal absolute</a>
 		<a class="int-relative" [luLink]="['../settings']">internal relative</a>
+		<a class="int-merge" [luLink]="['/dashboard']" queryParamsHandling="merge">internal merge</a>
+		<a class="int-fragment" [luLink]="['/dashboard']" [preserveFragment]="true">internal fragment</a>
+		<button type="button" class="int-button" [luLink]="['/dashboard']">internal button</button>
 
 		<!-- plain href -->
 		<a class="plain-href" href="https://example.com/docs">plain href</a>
@@ -44,7 +47,21 @@ class ChildComponent {}
 })
 class HostComponent {}
 
+@Component({
+	selector: 'lu-link-dynamic-host',
+	imports: [LinkComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `<a class="dynamic" [luLink]="commands()" [disabled]="disabled()" [external]="external()">dynamic</a>`,
+})
+class DynamicHostComponent {
+	readonly commands = signal(['/dashboard']);
+	readonly disabled = signal(false);
+	readonly external = signal(false);
+}
+
 const routes: Routes = [
+	{ path: 'dashboard', component: ChildComponent },
+	{ path: 'dynamic/:id', component: DynamicHostComponent },
 	{
 		path: 'luccafront/reviews/:id',
 		children: [{ path: 'review', component: HostComponent, children: [{ path: 'child', component: ChildComponent }] }],
@@ -57,6 +74,22 @@ function query(harness: RouterTestingHarness, selector: string): HTMLElement {
 
 function hrefOf(harness: RouterTestingHarness, selector: string): string | null {
 	return query(harness, selector).getAttribute('href');
+}
+
+/**
+ * Clicks the link and returns the router URL once the click is handled.
+ * The browser default action is cancelled so that links left to the browser do not trigger a real network request.
+ */
+async function click(harness: RouterTestingHarness, selector: string, init: MouseEventInit = {}): Promise<string> {
+	const preventBrowserNavigation = (event: Event) => event.preventDefault();
+	window.addEventListener('click', preventBrowserNavigation);
+	try {
+		query(harness, selector).dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0, ...init }));
+		await harness.fixture.whenStable();
+		return TestBed.inject(Router).url;
+	} finally {
+		window.removeEventListener('click', preventBrowserNavigation);
+	}
 }
 
 describe(LinkComponent.name, () => {
@@ -209,6 +242,107 @@ describe(LinkComponent.name, () => {
 			await harness.navigateByUrl('/luccafront/reviews/42/review');
 			harness.detectChanges();
 			expect(selectors.map((selector) => hrefOf(harness, selector))).toEqual(initialHrefs);
+		});
+
+		it('follows the query params when queryParamsHandling is merge', async () => {
+			const harness = await setup();
+
+			await harness.navigateByUrl('/luccafront/reviews/42/review?tab=a');
+			harness.detectChanges();
+			expect(hrefOf(harness, '.int-merge')).toBe('/dashboard?tab=a');
+
+			await harness.navigateByUrl('/luccafront/reviews/42/review?tab=b');
+			harness.detectChanges();
+			expect(hrefOf(harness, '.int-merge')).toBe('/dashboard?tab=b');
+		});
+
+		it('follows the fragment when preserveFragment is set', async () => {
+			const harness = await setup();
+
+			await harness.navigateByUrl('/luccafront/reviews/42/review#a');
+			harness.detectChanges();
+			expect(hrefOf(harness, '.int-fragment')).toBe('/dashboard#a');
+
+			await harness.navigateByUrl('/luccafront/reviews/42/review#b');
+			harness.detectChanges();
+			expect(hrefOf(harness, '.int-fragment')).toBe('/dashboard#b');
+		});
+	});
+
+	describe('click', () => {
+		it('navigates in-app on an internal anchor', async () => {
+			const harness = await setup();
+			expect(await click(harness, '.int-absolute')).toBe('/dashboard');
+		});
+
+		it('navigates in-app on an internal button', async () => {
+			const harness = await setup();
+			expect(await click(harness, '.int-button')).toBe('/dashboard');
+		});
+
+		it('lets the browser handle modifier clicks on an anchor', async () => {
+			const harness = await setup();
+			expect(await click(harness, '.int-absolute', { ctrlKey: true })).toBe('/luccafront/reviews/42/review');
+			expect(await click(harness, '.int-absolute', { metaKey: true })).toBe('/luccafront/reviews/42/review');
+			expect(await click(harness, '.int-absolute', { button: 1 })).toBe('/luccafront/reviews/42/review');
+		});
+
+		it('does not navigate in-app on a disabled link', async () => {
+			const harness = await setup();
+			expect(await click(harness, '.disabled-int')).toBe('/luccafront/reviews/42/review');
+		});
+
+		it('does not navigate in-app on an external anchor', async () => {
+			const harness = await setup();
+			expect(await click(harness, '.ext-array')).toBe('/luccafront/reviews/42/review');
+		});
+	});
+
+	describe('inputs updated after a navigation', () => {
+		async function setupDynamic() {
+			TestBed.configureTestingModule({ providers: [provideRouter(routes)] });
+			const harness = await RouterTestingHarness.create();
+			const host = await harness.navigateByUrl('/dynamic/1', DynamicHostComponent);
+			// Same route config: the host component is reused, only the router state changes.
+			await harness.navigateByUrl('/dynamic/2');
+			harness.detectChanges();
+			return { harness, host };
+		}
+
+		it('updates the href when the commands change', async () => {
+			const { harness, host } = await setupDynamic();
+
+			host.commands.set(['/settings']);
+			harness.detectChanges();
+
+			expect(hrefOf(harness, '.dynamic')).toBe('/settings');
+		});
+
+		it('restores the router href when the link is re-enabled', async () => {
+			const { harness, host } = await setupDynamic();
+
+			host.disabled.set(true);
+			harness.detectChanges();
+			expect(hrefOf(harness, '.dynamic')).toBeNull();
+
+			host.disabled.set(false);
+			harness.detectChanges();
+			expect(hrefOf(harness, '.dynamic')).toBe('/dashboard');
+		});
+
+		it('switches to the external URL and back', async () => {
+			const { harness, host } = await setupDynamic();
+
+			host.external.set(true);
+			harness.detectChanges();
+			expect(hrefOf(harness, '.dynamic')).toBe('/dashboard');
+			expect(query(harness, '.dynamic').getAttribute('target')).toBe('_blank');
+			expect(await click(harness, '.dynamic')).toBe('/dynamic/2');
+
+			host.external.set(false);
+			harness.detectChanges();
+			expect(query(harness, '.dynamic').getAttribute('target')).toBeNull();
+			expect(await click(harness, '.dynamic')).toBe('/dashboard');
 		});
 	});
 });
