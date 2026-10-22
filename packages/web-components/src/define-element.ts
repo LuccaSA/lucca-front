@@ -1,9 +1,10 @@
 import { ComponentRef, createEnvironmentInjector, EnvironmentInjector, InjectOptions, ProviderToken, reflectComponentType, Type } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { ElementControl } from './element-control';
-import { closestComponent, ELEMENT_COMPONENT, ElementComponent, ElementComponentHost } from './element-component';
+import { closestComponent, ELEMENT_COMPONENT, ELEMENT_PAGE_CONTENT, ElementComponent, ElementComponentHost, LOGICAL_PARENT } from './element-component';
 
 // Fields of Angular Elements' `NgElementImpl` and `ComponentNgElementStrategy` used below
 interface NgElementInternals {
@@ -22,6 +23,20 @@ interface Subscribable {
 const NG_CONTEXT = '__ngContext__';
 
 type ElementProperties = Record<string, unknown>;
+
+const CONNECT_DETACHED = Symbol('connectDetached');
+
+/**
+ * Connects the elements registered by this bundle in a detached `node`, outside of other registered elements, which
+ * connect their own content.
+ */
+function connectDetachedElements(node: Node, parent: HTMLElement): void {
+	if (CONNECT_DETACHED in node) {
+		(node as unknown as { [CONNECT_DETACHED](parent: HTMLElement): void })[CONNECT_DETACHED](parent);
+	} else {
+		node.childNodes.forEach((child) => connectDetachedElements(child, parent));
+	}
+}
 
 let pendingFirstConnects: { element: HTMLElement; connect: () => void }[] = [];
 
@@ -75,7 +90,10 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			};
 			// Must be set before anything creates the Angular Elements strategy, which reads it once
 			(this as unknown as NgElementInternals).injector = createEnvironmentInjector(
-				[{ provide: NgControl, useValue: this.#control }],
+				[
+					{ provide: NgControl, useValue: this.#control },
+					{ provide: ELEMENT_PAGE_CONTENT, useFactory: () => this.#pageContent ?? [] },
+				],
 				// Only used for lookups, which is all an environment injector needs from its parent
 				parent as unknown as EnvironmentInjector,
 			);
@@ -105,6 +123,8 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 
 		#pageClasses: string[] | null = null;
 
+		#pageContent: Node[] | null = null;
+
 		connectedCallback(): void {
 			if (this.#renderedByAngular === null) {
 				// Deferred: Angular marks the elements it renders right after inserting them
@@ -121,10 +141,24 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			if (this.#renderedByAngular) {
 				return;
 			}
+			this.#connect();
+		}
 
+		/**
+		 * Connects an element the page wrote in `parent`, which projects it in a template rendered later (the popover of a
+		 * filter pill): as in Angular, its component exists anyway, and outlives the template.
+		 */
+		[CONNECT_DETACHED](parent: HTMLElement): void {
+			(this as HTMLElement & { [LOGICAL_PARENT]?: HTMLElement })[LOGICAL_PARENT] = parent;
+			this.#renderedByAngular = false;
+			this.#connect();
+		}
+
+		#connect(): void {
 			const internals = this as unknown as NgElementInternals;
 			// Angular replaces the `class` attribute with the component's host class: keep the page's (`pr-u-*` utilities…)
 			this.#pageClasses ??= [...this.classList];
+			this.#pageContent ??= [...this.childNodes];
 			(NgElementClass.prototype as unknown as NgElementInternals).connectedCallback.call(this);
 			this.classList.add(...this.#pageClasses);
 
@@ -133,12 +167,22 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 			internals.ngElementEventsSubscription = null;
 			this.#listenedOutputs.forEach((name) => this.#subscribeOutput(name));
 
-			const accessors = internals.ngElementStrategy.componentRef?.injector.get(NG_VALUE_ACCESSOR, null);
+			const componentInjector = internals.ngElementStrategy.componentRef?.injector;
+			const accessors = componentInjector?.get(NG_VALUE_ACCESSOR, null);
 			if (accessors?.length) {
 				this.#control.connect(accessors[0], (this as unknown as ElementProperties)['value']);
 				const formField = closestComponent(this, ({ instance }) => instance instanceof FormFieldComponent);
 				this.#control.linkFormField(formField && { element: formField.element, instance: formField.instance as FormFieldComponent });
 			}
+
+			// A filter pill finds its input with a content query, which does not see another custom element
+			const pillInput = componentInjector?.get(FILTER_PILL_INPUT_COMPONENT, null, { self: true });
+			const pill = pillInput && closestComponent(this, ({ instance }) => instance instanceof FilterPillComponent);
+			if (pill) {
+				(pill.instance as FilterPillComponent).registerInput(pillInput);
+			}
+
+			this.#pageContent.filter((node) => !node.isConnected).forEach((node) => connectDetachedElements(node, this));
 		}
 
 		readonly #listenedOutputs = new Set<string>();
@@ -169,7 +213,8 @@ export function defineElement(tagName: string, component: Type<unknown>, injecto
 		}
 
 		disconnectedCallback(): void {
-			if (this.#renderedByAngular === false) {
+			// An element rendered in a template of its logical parent outlives the template
+			if (this.#renderedByAngular === false && !(LOGICAL_PARENT in this)) {
 				(NgElementClass.prototype as unknown as NgElementInternals).disconnectedCallback.call(this);
 			}
 		}

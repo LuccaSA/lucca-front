@@ -38,7 +38,8 @@ npm run build:web-components   # → dist/web-components/bundle.{js,css}
 - Form components expose `value` and a `valueChange` event, replacing `ngModel`. In a `lu-form-field`, the `required` attribute shows the required mark, and the field turns invalid once touched while empty, unless the page sets `invalid` on the field itself.
 - Angular outputs are dispatched as `CustomEvent`s with the same name, once listened with `addEventListener`. As in a template, some components change when an output is listened: `clueChange` makes a select searchable, `deleteFile` shows the delete button of a file entry.
 - Elements render once the page is parsed, so properties set by page scripts are there from the first render.
-- Nested elements work as in a template (`lu-grid-column` in `lu-grid`), and classes set by the page (`pr-u-*`…) are kept.
+- Nested elements work as in a template (`lu-grid-column` in `lu-grid`, an input in `lu-filter-pill`), and classes set by the page (`pr-u-*`…) are kept.
+- Directives and formatters keep their Angular attribute: `luWithMarkdownFormatter` on `lu-rich-text-input`, `luUserPopover` on any element (see below).
 - `<html lang>` sets the locale (translations, date formats).
 - `window.Prisme` lists the available elements, the bundle `version`, and the `dialog` and `toasts` services.
 
@@ -69,9 +70,20 @@ Write the dialog in a `<template>`, with the same markup as the Angular template
 </script>
 ```
 
+## User popover
+
+Prototypes have no API: the card shows the data of the user given to the trigger, as a property or as JSON in the attribute.
+
+```html
+<span class="link" tabindex="0" luUserPopover id="marie">Marie Durand</span>
+<script>
+  marie.luUserPopover = { id: 1, firstName: 'Marie', lastName: 'Durand', jobTitle: 'HR manager', userDepartment: { id: 3, name: 'HR' } };
+</script>
+```
+
 ## Available elements
 
-Forms: `lu-date-input`, `lu-date-range-input`, `lu-duration-picker`, `lu-form-field`, `lu-multi-select`, `lu-multilanguage-input`, `lu-phone-number-input`, `lu-simple-select`, `lu-time-picker`, `lu-time-range-picker`.
+Forms: `lu-color-input`, `lu-date-input`, `lu-date-range-input`, `lu-duration-picker`, `lu-filter-bar`, `lu-filter-pill`, `lu-form-field`, `lu-listbox`, `lu-listbox-option`, `lu-multi-select`, `lu-multilanguage-input`, `lu-phone-number-input`, `lu-rich-text-input` (and its `lu-rich-text-input-toolbar` child), `lu-simple-select`, `lu-time-picker`, `lu-time-range-picker`.
 
 Files: `lu-file-entry`, `lu-multi-file-upload`, `lu-single-file-upload`.
 
@@ -89,4 +101,5 @@ On every stable tag (`vX.Y.Z`), [deploy.yml](../../.github/workflows/deploy.yml)
 
 - Relies on Angular internals (`injector`, `ngElementStrategy`, `ngElementEventsSubscription`, `__ngContext__`, see [src/define-element.ts](src/define-element.ts)): check them on each Angular major.
 - No `disabled` state on form components yet, and `required` is the only validation.
-- Not exposed: the deprecated modal. Not exposed yet: directives (user popover), filter pills, `lu-color-input` and `lu-rich-text-input` (they need a host `ngModel` or directive), `lu-listbox`.
+- `lu-filter-bar` does not see `optional` pills, which it finds with a content query: they are not supported.
+- Not exposed: the deprecated modal.
