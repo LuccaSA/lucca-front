@@ -157,6 +157,10 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
   > *Variables CSS* conservent les dépréciations dont la suppression est
   > effective. Prisme purge les entrées une fois la suppression livrée ; le
   > linter (et cette page) les conserve pour signaler l'usage résiduel.
+- **A class used in LF HTML for structural consistency without SCSS is not a deprecation.**
+  - Its rule may not exist while the component template emits it.
+  - It gets no entry.
+  - It is not dead markup either.
 
 ## Skeleton
 
