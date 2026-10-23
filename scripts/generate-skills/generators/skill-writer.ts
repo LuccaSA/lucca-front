@@ -134,16 +134,14 @@ export function writeSkillManifest(
 	patchTags: string[],
 	technicalMinors: TechnicalMinorPatches[] = [],
 ): void {
-	const generatedAt = new Date().toISOString();
 	const manifest: SkillManifest = {
 		minor: `${version.major}.${version.minor}`,
 		latestPatch: `${version.major}.${version.minor}.${version.patch}`,
 		tag: version.tag,
 		zhReleaseId: version.zhReleaseId,
 		storybookBaseUrl: version.storybookBaseUrl,
-		generatedAt,
 		componentCount,
-		patches: patchesEntry(patchTags, generatedAt),
+		patches: patchesEntry(patchTags),
 	};
 	if (technicalMinors.length > 0) {
 		manifest.technicalMinors = Object.fromEntries(
@@ -154,7 +152,7 @@ export function writeSkillManifest(
 					// A technical minor can have no local tag (a clone without `fetch --tags`, or an entry
 					// added to TECHNICAL_MINORS before its first tag) — and this ran after 126 components.
 					latestPatch: t.patchTags.at(-1)?.replace(/^v/, '') ?? null,
-					patches: patchesEntry(t.patchTags, generatedAt),
+					patches: patchesEntry(t.patchTags),
 				},
 			]),
 		);
@@ -164,11 +162,11 @@ export function writeSkillManifest(
 	fs.writeFileSync(manifestPath(skillsDir), JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
 }
 
-function patchesEntry(patchTags: string[], generatedAt: string): Record<string, PatchManifestEntry> {
+function patchesEntry(patchTags: string[]): Record<string, PatchManifestEntry> {
 	return Object.fromEntries(
 		patchTags.map((tag) => {
 			const bare = tag.replace(/^v/, '');
-			return [bare, { tag, storybookBaseUrl: `https://lucca-front.lucca.io/${tag}/storybook`, generatedAt }];
+			return [bare, { tag, storybookBaseUrl: `https://lucca-front.lucca.io/${tag}/storybook` }];
 		}),
 	);
 }

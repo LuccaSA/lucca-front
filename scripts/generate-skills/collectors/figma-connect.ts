@@ -158,11 +158,16 @@ interface FigmaNodeResponse {
 // disappearances (properties or variant options gone vs the last generation) so a
 // legitimate-but-uncommon deletion gets a human look. `--accept-shrink` updates the baseline
 // and silences the warning.
+//
+// Offline (`--offline`), the baseline is the source. Entries written before `types` existed cannot
+// render a .figma.md: those nodes resolve to nothing, so the committed file is kept as is.
 
 interface FigmaBaselineEntry {
 	componentName: string;
 	/** Property name → variant options (null for non-variant properties). */
 	properties: Record<string, string[] | null>;
+	/** Property name → type. Absent from entries no online run has refreshed since it was added. */
+	types?: Record<string, FigmaProperty['type']>;
 }
 
 const BASELINE_FILE = path.join(__dirname, '..', 'baselines', 'figma.json');
@@ -194,10 +199,31 @@ function saveBaseline(): void {
 
 function toBaselineEntry(tokens: FigmaDesignTokens): FigmaBaselineEntry {
 	const properties: Record<string, string[] | null> = {};
+	const types: Record<string, FigmaProperty['type']> = {};
 	for (const p of tokens.properties) {
 		properties[p.name] = p.variantOptions ?? null;
+		types[p.name] = p.type;
 	}
-	return { componentName: tokens.componentName, properties };
+	return { componentName: tokens.componentName, properties, types };
+}
+
+function fromBaselineEntry(nodeId: string, entry: FigmaBaselineEntry): FigmaDesignTokens | null {
+	if (!entry.types) return null;
+	return {
+		componentName: entry.componentName,
+		nodeId,
+		properties: Object.entries(entry.properties).map(([name, options]) => ({
+			name,
+			type: entry.types![name],
+			variantOptions: options ?? undefined,
+		})),
+	};
+}
+
+let offline = false;
+
+export function setOffline(value: boolean): void {
+	offline = value;
 }
 
 /** Compares fresh tokens against the node's baseline; reports disappearances (report-only). */
@@ -316,9 +342,14 @@ export async function prefetchFigmaNodes(fileKey: string, nodeIds: string[], tok
  * @param nodeId — Node ID of the component set (e.g. "6854:42773")
  * @param token — Figma Personal Access Token
  */
-export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, token: string): Promise<FigmaDesignTokens | null> {
+export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, token: string | undefined): Promise<FigmaDesignTokens | null> {
 	const cacheKey = `${fileKey}:${nodeId}`;
 	if (figmaCache.has(cacheKey)) return figmaCache.get(cacheKey)!;
+
+	if (offline) {
+		const entry = loadBaseline()[nodeId];
+		return entry ? fromBaselineEntry(nodeId, entry) : null;
+	}
 
 	const res = await figmaRequest(nodesUrl(fileKey, [nodeId]), token);
 
@@ -347,9 +378,11 @@ export async function fetchFigmaDesignTokens(fileKey: string, nodeId: string, to
 export async function fetchFigmaDesignTokensMerged(
 	fileKey: string,
 	nodeIds: string[],
-	token: string,
+	token: string | undefined,
 ): Promise<FigmaDesignTokens | null> {
 	if (nodeIds.length === 0) return null;
+	// One incomplete node would render a .figma.md missing that node's properties over the committed one.
+	if (offline && nodeIds.some((id) => loadBaseline()[id] && !loadBaseline()[id].types)) return null;
 
 	const allProperties = new Map<string, FigmaProperty>();
 	let componentName = '';
