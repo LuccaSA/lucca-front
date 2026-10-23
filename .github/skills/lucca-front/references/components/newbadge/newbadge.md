@@ -22,7 +22,6 @@ import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
 
 - 📝 [Code & implementation](./newbadge.component.md)
 - 🎨 [Design guidelines](./newbadge.design.md)
-- 🎯 [Figma design tokens](./newbadge.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-newbadge-angular-basic--docs)
 
 ## Changelog

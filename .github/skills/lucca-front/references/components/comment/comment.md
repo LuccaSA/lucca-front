@@ -65,7 +65,6 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 
 - 📝 [Code & implementation](./comment.component.md)
 - 🎨 [Design guidelines](./comment.design.md)
-- 🎯 [Figma design tokens](./comment.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-comment-angular-ai--docs)
 
 ## Changelog

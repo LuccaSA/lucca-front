@@ -164,7 +164,6 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 
 - 📝 [Code & implementation](./fileentry.component.md)
 - 🎨 [Design guidelines](./fileentry.design.md)
-- 🎯 [Figma design tokens](./fileentry.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-file-fileentry-angular-basic--docs)
 
 ## Changelog

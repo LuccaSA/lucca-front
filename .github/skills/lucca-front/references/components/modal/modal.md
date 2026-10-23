@@ -49,7 +49,6 @@ import { LuModalPanelComponent, LuModalPanelComponentDefaultCD } from '@lucca-fr
 
 - 📝 [Code & implementation](./modal.component.md)
 - 🎨 [Design guidelines](./modal.design.md)
-
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-modal--docs)
 
 ## Changelog

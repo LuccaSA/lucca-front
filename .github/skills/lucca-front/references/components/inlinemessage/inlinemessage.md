@@ -25,7 +25,6 @@ import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 
 - 📝 [Code & implementation](./inlinemessage.component.md)
 
-- 🎯 [Figma design tokens](./inlinemessage.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-inlinemessage-angular-basic--docs)
 
 ## Changelog

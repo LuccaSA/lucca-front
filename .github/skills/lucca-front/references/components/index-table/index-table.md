@@ -146,7 +146,6 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 - 📝 [Code & implementation](./index-table.component.md)
 - 🎨 [Design guidelines](./index-table.design.md)
-- 🎯 [Figma design tokens](./index-table.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
 
 ## Changelog

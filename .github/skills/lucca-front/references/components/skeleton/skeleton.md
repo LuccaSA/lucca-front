@@ -132,7 +132,6 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 - 📝 [Code & implementation](./skeleton.component.md)
 - 🎨 [Design guidelines](./skeleton.design.md)
-- 🎯 [Figma design tokens](./skeleton.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-skeleton--docs)
 
 ## Changelog

@@ -25,9 +25,9 @@ export function skillCovers(manifest, version) {
 	return !!minor && (manifest.minor === minor || !!manifest.technicalMinors?.[minor]);
 }
 
-/** Design, Figma and UX-writing content follows ZeroHeight and Figma, not the code version: the npm package links it on the deploy. */
+/** Design and UX-writing content follows ZeroHeight, not the code version: the npm package links it on the deploy. */
 export function isRemoteOnly(path) {
-	return /\.(design|figma)\.md$/.test(path) || path.startsWith('references/documentation/');
+	return /\.design\.md$/.test(path) || path.startsWith('references/documentation/');
 }
 
 export function deployedSkillUrl(ref) {

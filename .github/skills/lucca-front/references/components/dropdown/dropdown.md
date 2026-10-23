@@ -117,7 +117,6 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 
 - 📝 [Code & implementation](./dropdown.component.md)
 
-- 🎯 [Figma design tokens](./dropdown.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-dropdown-angular-basic--docs)
 
 ## Changelog

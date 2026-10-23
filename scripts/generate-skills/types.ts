@@ -5,24 +5,15 @@
  * - AST extraction (ts-morph) → Angular API
  * - ZeroHeight .md URLs → design guidelines
  * - Storybook index.json → story links & source code
- * - Figma Code Connect context → design variant tokens
  */
 
 // ─── Config ──────────────────────────────────────────────────────────────────
-
-export interface FigmaConfig {
-	/** Figma Personal Access Token (only needed if Figma collection is enabled). */
-	token?: string;
-	/** Figma file key for the component library. */
-	fileKey: string;
-}
 
 export interface OutputConfig {
 	skillsDir: string;
 }
 
 export interface Config {
-	figma: FigmaConfig;
 	output: OutputConfig;
 	/** Concurrency limit for parallel operations. */
 	concurrency: number;
@@ -67,12 +58,6 @@ export interface ComponentEntry {
 	 * differ: `date2` → `dateField`, `input` → `textField`). Set to "" for a component with no SCSS
 	 * counterpart, to silence the resolution warning. */
 	scssComponent?: string;
-	/** Primary Figma component name, e.g. "pr-Button". */
-	figmaName?: string;
-	/** All Figma names that map to this slug (many-to-one). */
-	figmaAliases?: string[];
-	/** Figma node IDs for Code Connect context retrieval. */
-	figmaNodeIds?: string[];
 	/** Additional Storybook story paths to include in examples. */
 	extraStories?: string[];
 	/** Category label, e.g. "Actions", "Forms". */
@@ -366,23 +351,6 @@ export interface ZeroHeightData {
 	sections: Record<string, string>;
 }
 
-// ─── Figma design tokens ─────────────────────────────────────────────────────
-
-export interface FigmaProperty {
-	name: string;
-	type: 'VARIANT' | 'TEXT' | 'INSTANCE_SWAP' | 'BOOLEAN';
-	variantOptions?: string[];
-}
-
-export interface FigmaDesignTokens {
-	/** Figma component name, e.g. "pr-Button". */
-	componentName: string;
-	/** Figma node ID, e.g. "6854:42773". */
-	nodeId: string;
-	/** Structured properties with variant options. */
-	properties: FigmaProperty[];
-}
-
 // ─── Collected data (per component, ready for template rendering) ────────────
 
 export interface ComponentData {
@@ -399,8 +367,6 @@ export interface ComponentData {
 	storyExamples: StoryExample[] | null;
 	/** Minimal working HTML template extracted from the "basic" story. */
 	basicUsage: string | null;
-	/** Figma design tokens (not versioned — current state only). */
-	figma: FigmaDesignTokens | null;
 }
 
 // ─── Skill writer ─────────────────────────────────────────────────────────────

@@ -35,7 +35,6 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 
 - 📝 [Code & implementation](./gauge.component.md)
 
-- 🎯 [Figma design tokens](./gauge.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-gauge-angular-basic--docs)
 
 ## Changelog

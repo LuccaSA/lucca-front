@@ -109,7 +109,6 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 
 - 📝 [Code & implementation](./multi-select.component.md)
 - 🎨 [Design guidelines](./multi-select.design.md)
-- 🎯 [Figma design tokens](./multi-select.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-multi-select-angular--docs)
 
 ## Changelog

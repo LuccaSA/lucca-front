@@ -36,7 +36,6 @@ import { TextareaInputComponent } from '@lucca-front/ng/forms';
 
 - 📝 [Code & implementation](./textareafield.component.md)
 - 🎨 [Design guidelines](./textareafield.design.md)
-- 🎯 [Figma design tokens](./textareafield.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-textareafield-angular--docs)
 
 ## Changelog

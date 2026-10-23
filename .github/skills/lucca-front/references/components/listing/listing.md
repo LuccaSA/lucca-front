@@ -66,7 +66,6 @@ import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing'
 
 - 📝 [Code & implementation](./listing.component.md)
 - 🎨 [Design guidelines](./listing.design.md)
-- 🎯 [Figma design tokens](./listing.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-listing-angular-basic--docs)
 
 ## Changelog

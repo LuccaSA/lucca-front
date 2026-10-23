@@ -4,7 +4,6 @@
  * Sources:
  * - ZeroHeight page paths: hardcoded from Prisme MCP list-pages (stable page IDs)
  * - ngPackageOverride: computed from Storybook slug vs git `packages/ng/`
- * - Figma data: preserved from existing metadata (manual, not auto-discoverable)
  *
  * Usage:
  *   npx ts-node scripts/generate-skills/sync-metadata.ts --version 21.2.1
@@ -260,7 +259,6 @@ export interface SyncResult {
  * - Adds new entries for newly discovered components
  * - Computes ngPackageOverride where auto-resolution fails
  * - Resolves ZH page paths from the hardcoded ZH page map
- * - Preserves Figma data (manual, not auto-discoverable)
  *
  * @param storybookMap - Storybook index groups
  * @param version - Version config for git tag access

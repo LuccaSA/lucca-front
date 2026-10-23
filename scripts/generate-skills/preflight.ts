@@ -1,26 +1,18 @@
 /**
  * Pre-flight of a generation run.
  *
- * Runs before any collection, in three phases, ordered by two rules:
- *
- *   1. **No question while a non-interactive check can still stop the run.** Otherwise the operator
- *      answers prompts for a generation that will not happen.
- *   2. **No side effect before the last abort door.** The ZeroHeight guard persists a release ID the
- *      instant it is typed (`addZhReleaseId` writes `zh-release-ids.json`), so the Figma gate — whose
- *      "no" leaves nothing behind — is asked first.
+ * Runs before any collection, in two phases. No question is asked while a non-interactive check can
+ * still stop the run: otherwise the operator answers prompts for a generation that will not happen.
  *
  * Phase 1 (`ensureReleasesExist`, non-interactive): the requested release really exists — git tag,
  * clone up to date, npm publication, deployed Storybook.
- * Phase 2 (`ensureFigmaAccess`, interactive): a usable Figma token, or a deliberate yes to generate
- * without one.
- * Phase 3 (`zh-release-guard.ts`): the ZeroHeight release IDs.
+ * Phase 2 (`zh-release-guard.ts`): the ZeroHeight release IDs.
  *
  * Every refusal leaves through `PreflightAbort`, so a decision never reads like a crash.
  */
 
 import { execFileSync } from 'child_process';
 import { fetchWithTimeout } from './collectors/http';
-import { ask, isInteractive, isYes } from './prompt';
 import { MinorResolution, compareTags } from './version-config';
 import { VersionConfig } from './types';
 
@@ -228,76 +220,4 @@ async function checkStorybookDeployed(version: VersionConfig): Promise<void> {
 		);
 	}
 	console.log(line('✅', 'Storybook', version.storybookBaseUrl));
-}
-
-// ─── Phase 2 — Figma token ───────────────────────────────────────────────────
-
-type TokenVerdict = 'valid' | 'invalid' | 'unknown';
-
-/**
- * One request to prove the token works. Presence is not validity: a 401/403 is never retried and
- * produces no design tokens at all (see collectors/figma-connect.ts), which is how an expired token
- * once went undiagnosed across ~90 nodes.
- *
- * The probe hits the SAME endpoint the collector uses — the design file's nodes — and not `/v1/me`.
- * Measured: a personal access token scoped `file_content:read`, which is exactly what the README
- * recommends ("lecture seule suffit"), reads the file fine but gets a 403 on `/v1/me` ("Invalid
- * scope … requires file_read"). Validating there would have rejected every correctly-scoped token.
- * Asking for the document root (`0:1`) keeps the payload to nothing while proving both the token and
- * access to that particular file.
- */
-async function validateFigmaToken(token: string, fileKey: string): Promise<TokenVerdict> {
-	const url = `https://api.figma.com/v1/files/${fileKey}/nodes?ids=0%3A1&depth=1`;
-	try {
-		const res = await fetchWithTimeout(url, { headers: { 'X-Figma-Token': token } });
-		if (res.status === 200) return 'valid';
-		if (res.status === 401 || res.status === 403) return 'invalid';
-		return 'unknown';
-	} catch {
-		return 'unknown';
-	}
-}
-
-/**
- * Gate on the Figma token: generating without it silently drops every `<slug>.figma.md`, so the
- * default answer is to stop. Continuing has to be a deliberate `y` — or an explicit `--skip-figma`,
- * which is the same decision stated up front.
- */
-export async function ensureFigmaAccess(figma: { token?: string; fileKey: string }, opts: { skipFigma: boolean }): Promise<void> {
-	if (opts.skipFigma) {
-		console.log(line('⏭️', 'Figma', 'ignoré (--skip-figma)'));
-		return;
-	}
-
-	let reason: string | null = null;
-	if (!figma.token) {
-		reason = 'aucun token (ni generate-skills-config.json, ni FIGMA_TOKEN)';
-	} else {
-		const verdict = await validateFigmaToken(figma.token, figma.fileKey);
-		if (verdict === 'invalid') reason = `token refusé sur le fichier ${figma.fileKey} (401/403) — expiré, révoqué, ou sans accès à ce fichier`;
-		// A network hiccup on /v1/me is not evidence against the token: the collectors retry on their
-		// own, so an unverifiable token is accepted rather than turned into a false alarm.
-		else if (verdict === 'unknown') console.log(line('ℹ️', 'Figma', 'token non vérifiable (réseau) — accepté tel quel'));
-		else console.log(line('✅', 'Figma', 'token valide'));
-	}
-	if (!reason) return;
-
-	console.log(line('⚠️', 'Figma', reason));
-	console.log('        Sans token, aucun <slug>.figma.md ne sera écrit : la skill partira sans les tokens de design.');
-
-	if (!isInteractive()) {
-		throw new PreflightAbort(
-			`Figma — ${reason}.\n   → En non-interactif, relance avec --skip-figma pour générer sciemment sans Figma.`,
-		);
-	}
-
-	const answer = await ask('  ↳ Générer quand même sans Figma ? (N/y) : ');
-	if (!isYes(answer)) {
-		throw new PreflightAbort(
-			`token Figma absent ou invalide.\n` +
-				`   → Renseigne-le (cp generate-skills-config.json.example generate-skills-config.json), ` +
-				`ou relance avec --skip-figma pour générer sciemment sans Figma.`,
-		);
-	}
-	console.log(line('ℹ️', 'Figma', 'poursuite sans Figma (choix explicite)'));
 }

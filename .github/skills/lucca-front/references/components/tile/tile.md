@@ -30,7 +30,6 @@ import { LuUserTileComponent } from '@lucca-front/ng/user';
 
 - 📝 [Code & implementation](./tile.component.md)
 
-- 🎯 [Figma design tokens](./tile.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-users-tile-angular-basic--docs)
 
 ## Changelog

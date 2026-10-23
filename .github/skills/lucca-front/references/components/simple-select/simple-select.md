@@ -46,7 +46,6 @@ import { LuSimpleSelectInputComponent, LuSelectPanelComponent } from '@lucca-fro
 
 - 📝 [Code & implementation](./simple-select.component.md)
 - 🎨 [Design guidelines](./simple-select.design.md)
-- 🎯 [Figma design tokens](./simple-select.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-simple-select-angular--docs)
 
 ## Changelog

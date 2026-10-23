@@ -17,10 +17,6 @@ export function loadConfig(): Config {
 	}
 
 	return {
-		figma: {
-			token: cfg.figma?.token || process.env['FIGMA_TOKEN'] || undefined,
-			fileKey: cfg.figma?.fileKey || 'PQEOcUF9CYfKNqaejAGLWP',
-		},
 		output: {
 			// SKILLS_DIR redirects the whole run to another folder — the way to do a control generation
 			// without overwriting the committed skills.

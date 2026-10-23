@@ -1,7 +1,7 @@
 /**
  * Fetch-failure registry & replay manifest.
  *
- * The generator pulls live data from ZeroHeight and Figma. Those fetchers RETRY transient
+ * The generator pulls live data from ZeroHeight. Its fetchers RETRY transient
  * problems (network, 5xx, 429, HTML-instead-of-markdown); when retries are exhausted they throw a
  * `TransientFetchError` so the caller can record *what* failed and *why* — instead of silently
  * dropping content and producing a different output on the next run.
@@ -9,7 +9,7 @@
  * At the end of a run, the collected failures are printed (so you know immediately) and written to
  * a manifest. `--retry-failed` reads that manifest and re-generates only the affected components.
  *
- * Definitive absences (404 / node missing from a 200 response) are NOT failures: the data simply
+ * Definitive absences (404) are NOT failures: the data simply
  * doesn't exist for that component/version, and the fetchers return null without recording anything.
  */
 
@@ -30,7 +30,7 @@ export class TransientFetchError extends Error {
 export type FetchScope = 'component' | 'documentation' | 'tools' | 'deprecated';
 
 export interface FetchFailure {
-	source: 'zeroheight' | 'figma';
+	source: 'zeroheight';
 	/**
 	 * Replay scope. Absent in manifests written before this field existed — treat as 'component'.
 	 */
@@ -39,7 +39,7 @@ export interface FetchFailure {
 	slug: string;
 	/** Bare version, e.g. "21.1.2". */
 	version: string;
-	/** What was requested: ZH page path or Figma node id. */
+	/** What was requested: the ZH page path. */
 	ref: string;
 	/** HTTP status or a symbolic code ("network", "html", "empty", "shrink"). */
 	status: string;
@@ -49,11 +49,11 @@ export interface FetchFailure {
 
 /**
  * Report-only anomaly: surfaced at the end of the run but NOT written to the replay manifest
- * (replaying wouldn't fix it — e.g. a property genuinely removed in Figma).
+ * (replaying wouldn't fix it — e.g. a page with no baseline offline).
  */
 export interface FetchWarning {
-	source: 'zeroheight' | 'figma';
-	/** What the warning is about (slug, page path or node id). */
+	source: 'zeroheight';
+	/** What the warning is about (slug or page path). */
 	label: string;
 	/** Human-readable reason. */
 	reason: string;
@@ -89,19 +89,14 @@ export function reportFailures(): void {
 	}
 
 	if (failures.length === 0) {
-		console.log('\n✅ Aucune récupération ZH/Figma en échec.');
+		console.log('\n✅ Aucune récupération ZH en échec.');
 		return;
 	}
 
 	console.warn(`\n⚠️  ${failures.length} récupération(s) en échec (contenu manquant) :\n`);
-	for (const source of ['zeroheight', 'figma'] as const) {
-		const group = failures.filter((f) => f.source === source);
-		if (group.length === 0) continue;
-		console.warn(`  ${source} (${group.length}) :`);
-		for (const f of group.sort((a, b) => a.version.localeCompare(b.version) || a.slug.localeCompare(b.slug))) {
-			const scope = f.scope && f.scope !== 'component' ? ` [${f.scope}]` : '';
-			console.warn(`    • ${f.version}${scope} ${f.slug} — ${f.status} (${f.ref}) : ${f.reason}`);
-		}
+	for (const f of failures.sort((a, b) => a.version.localeCompare(b.version) || a.slug.localeCompare(b.slug))) {
+		const scope = f.scope && f.scope !== 'component' ? ` [${f.scope}]` : '';
+		console.warn(`    • ${f.version}${scope} ${f.slug} — ${f.status} (${f.ref}) : ${f.reason}`);
 	}
 	const hasShrink = failures.some((f) => f.status === 'shrink');
 	console.warn(`\n  → Rejoue ces unités : npm run skills:generate -- --retry-failed`);

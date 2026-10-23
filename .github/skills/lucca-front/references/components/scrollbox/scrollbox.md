@@ -37,7 +37,6 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 
 - 📝 [Code & implementation](./scrollbox.component.md)
 - 🎨 [Design guidelines](./scrollbox.design.md)
-- 🎯 [Figma design tokens](./scrollbox.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-scrollbox--docs)
 
 ## Changelog

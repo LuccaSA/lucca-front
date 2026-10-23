@@ -50,7 +50,6 @@ import { SortableListItemComponent, SortableListComponent } from '@lucca-front/n
 
 - 📝 [Code & implementation](./sortable-list.component.md)
 
-- 🎯 [Figma design tokens](./sortable-list.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-sortable-list-angular-basic--docs)
 
 ## Changelog
