@@ -530,4 +530,30 @@ export default [
 		versionDeleted: '22.1.1',
 		actions: `Remplacer par \`--components-priorityLevel-*\`.`,
 	},
+	{
+		// SEE https://regex101.com/r/Nct1a0.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/commons/vars.scss#L19.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/commons/config.scss#L111.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/commons/config.scss#L179.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/66e12140f271c541e74db3ec79af116c72c69889.
+		objectPattern: [
+			/--breakpoints-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)-breakAt(?![\w-])/,
+			/--commons-box-shadow-(hard|xxs|xs|s|m|l|xl|xxl)(?![\w-])/,
+			/--spacings-(reset|smallest|smaller|small|standard|big|bigger|biggest)(?![\w-])/,
+		],
+		versionDeleted: '15.1.0',
+		actions: `
+			* \`--breakpoints-*-breakAt\` ⇒ point de rupture en majuscules (\`l\` ⇒ \`L\`)
+			* \`--commons-box-shadow-*\` ⇒ \`--commons-boxShadow-*\` en majuscules
+			* \`--spacings-*\` ⇒ échelle en majuscules :
+				* \`reset\` ⇒ \`0\`
+				* \`smallest\` ⇒ \`XXS\`
+				* \`smaller\` ⇒ \`XS\`
+				* \`small\` ⇒ \`S\`
+				* \`standard\` ⇒ \`M\`
+				* \`big\` ⇒ \`L\`
+				* \`bigger\` ⇒ \`XL\`
+				* \`biggest\` ⇒ \`XXL\`
+		`,
+	},
 ];

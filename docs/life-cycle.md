@@ -1893,6 +1893,34 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 	</thead>
 	<tbody>
 		<tr>
+			<td data-pattern="--breakpoints-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)-breakAt(?![\w-])">
+				<ul>
+					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)--breakpoints-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)-breakAt(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)--commons-box-shadow-(hard%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)--spacings-(reset%7Csmallest%7Csmaller%7Csmall%7Cstandard%7Cbig%7Cbigger%7Cbiggest)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--breakpoints-(xxxs|xxs|xs|s|…)-breakAt</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)--breakpoints-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)-breakAt(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)--commons-box-shadow-(hard%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)--spacings-(reset%7Csmallest%7Csmaller%7Csmall%7Cstandard%7Cbig%7Cbigger%7Cbiggest)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--commons-box-shadow-(hard|xxs|xs|s|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)--breakpoints-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)-breakAt(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)--commons-box-shadow-(hard%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)--spacings-(reset%7Csmallest%7Csmaller%7Csmall%7Cstandard%7Cbig%7Cbigger%7Cbiggest)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--spacings-(reset|smallest|…)</code></a></li>
+				</ul>
+			</td>
+			<td>–</td>
+			<td>15.1.0</td>
+			<td>
+				<ul>
+				<li><code>--breakpoints-*-breakAt</code> ⇒ point de rupture en majuscules (<code>l</code> ⇒ <code>L</code>)</li>
+				<li><code>--commons-box-shadow-*</code> ⇒ <code>--commons-boxShadow-*</code> en majuscules</li>
+				<li><code>--spacings-*</code> ⇒ échelle en majuscules :<ul>
+				<li><code>reset</code> ⇒ <code>0</code></li>
+				<li><code>smallest</code> ⇒ <code>XXS</code></li>
+				<li><code>smaller</code> ⇒ <code>XS</code></li>
+				<li><code>small</code> ⇒ <code>S</code></li>
+				<li><code>standard</code> ⇒ <code>M</code></li>
+				<li><code>big</code> ⇒ <code>L</code></li>
+				<li><code>bigger</code> ⇒ <code>XL</code></li>
+				<li><code>biggest</code> ⇒ <code>XXL</code></li>
+				</ul>
+				</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
 			<td data-pattern="--commons-elevations-elevation-[1-6](?![\w-])">
 				<ul>
 					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)--commons-elevations-elevation-%5B1-6%5D(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--commons-elevations-elevation-(1|2|3|4|…)</code></a></li>
