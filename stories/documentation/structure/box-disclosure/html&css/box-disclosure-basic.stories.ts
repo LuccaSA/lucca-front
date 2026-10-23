@@ -1,11 +1,7 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
-interface BoxDisclosureBasicStory {
-	theme: string;
-	open: boolean;
-	metadata: boolean;
-}
+interface BasicStory {}
 
 export default {
 	title: 'Documentation/Structure/BoxDisclosure/HTML&CSS/Basic',
@@ -14,46 +10,29 @@ export default {
 			imports: [IconComponent],
 		}),
 	],
-	argTypes: {
-		theme: {
-			options: ['', 'neutral', 'sunken', 'fancyLight', 'fancyDark'],
-			control: { type: 'select' },
-			description: 'Applique un thème via la classe <code>mod-[theme]</code>.',
-		},
-		open: {
-			description: 'Place la box dans son état déplié.',
-		},
-		metadata: {
-			description: 'Ajoute une information courte avant le chevron.',
-		},
-	},
+	argTypes: {},
 } as Meta;
 
-function getTemplate(args: BoxDisclosureBasicStory): string {
-	const theme = args.theme ? ` mod-${args.theme}` : '';
-	const open = args.open ? ' open' : '';
-	const metadata = args.metadata ? `\n\t\t<span class="boxDisclosure-summary-metadata">Metadata</span>` : '';
-
-	return `<details class="boxDisclosure${theme}"${open}>
+function getTemplate(args: BasicStory): string {
+	return `<details class="boxDisclosure">
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
 			<span class="boxDisclosure-summary-title">Title</span>
 			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
-		</span>${metadata}
+		</span>
+		<span class="boxDisclosure-summary-metadata">Metadata</span>
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
-	<div class="boxDisclosure-details">
-		Custom content
-	</div>
+	<div class="boxDisclosure-details">Custom content</div>
 </details>`;
 }
 
-const Template = (args: BoxDisclosureBasicStory) => ({
+const Template = (args: BasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic: StoryObj<BoxDisclosureBasicStory> = {
-	args: { theme: '', open: false, metadata: true },
+export const Basic: StoryObj<BasicStory> = {
+	args: {},
 	render: Template,
 };
