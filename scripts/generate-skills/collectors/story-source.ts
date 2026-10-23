@@ -50,7 +50,7 @@ export function readStorySourceFromGit(
 		seen.add(normalizedImport);
 
 		try {
-			const content = gitShowFile(version.tag, normalizedImport);
+			const content = gitShowFile(version.source, normalizedImport);
 			if (!content) continue;
 
 			const extracted = extractStoryEssentials(content);
@@ -79,7 +79,7 @@ export function readStorySourceFromGit(
 
 			// Last resort: the markup lives in a sibling .html file.
 			if (templates.length === 0) {
-				templates = readTemplateUrlFile(content, normalizedImport, version.tag);
+				templates = readTemplateUrlFile(content, normalizedImport, version.source);
 			}
 
 			// A story with no markup has nothing to show: its section would be a heading over an import
@@ -239,7 +239,7 @@ export function readStoryTemplates(importPath: string, version: VersionConfig): 
 	const normalizedImport = importPath.replace(/^[./\\]+/, '');
 	if (/\.\./.test(normalizedImport)) return null;
 
-	const content = gitShowFile(version.tag, normalizedImport);
+	const content = gitShowFile(version.source, normalizedImport);
 	if (!content) return null;
 
 	// Prefer `const code = \`` documentation literals when present:
@@ -257,7 +257,7 @@ export function readStoryTemplates(importPath: string, version: VersionConfig): 
 	if (rendered && rendered.length > 0) return rendered;
 
 	// Last resort: the markup lives in a sibling .html file (templateUrl).
-	const fromFile = readTemplateUrlFile(content, normalizedImport, version.tag);
+	const fromFile = readTemplateUrlFile(content, normalizedImport, version.source);
 	return fromFile.length > 0 ? fromFile : null;
 }
 
@@ -377,7 +377,7 @@ export function resolveStoryFrameworks(stories: StorybookStory[], version: Versi
 		// Several stories share one file — classify it once.
 		let resolved = byPath.get(normalizedImport);
 		if (resolved === undefined) {
-			const content = gitShowFile(version.tag, normalizedImport);
+			const content = gitShowFile(version.source, normalizedImport);
 			if (!content) continue; // absent from this tag — leave the index's default untouched
 			resolved = detectFrameworkFromSource(content);
 			byPath.set(normalizedImport, resolved);
@@ -654,7 +654,7 @@ export function extractBasicUsage(
 	if (/\.\./.test(normalizedImport)) return null;
 
 	try {
-		const content = gitShowFile(version.tag, normalizedImport);
+		const content = gitShowFile(version.source, normalizedImport);
 		if (!content) return null;
 
 		// Prefer the evaluated render — it produces a real, fully-resolved snippet.

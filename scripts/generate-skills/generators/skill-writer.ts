@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { SkillManifest, VersionConfig, WriteResult, PatchManifestEntry } from '../types';
-import { TechnicalMinorPatches } from '../version-config';
+import { TechnicalMinorPatches, followsCode } from '../version-config';
 
 /**
  * Folder = SKILL.md `name:` = install dir leaf. One skill, no version in its name: the version is the
@@ -134,6 +134,12 @@ export function writeSkillManifest(
 	patchTags: string[],
 	technicalMinors: TechnicalMinorPatches[] = [],
 ): void {
+	if (followsCode(version)) {
+		const manifest: SkillManifest = { minor: `${version.major}.${version.minor}`, followsCode: true, zhReleaseId: version.zhReleaseId, componentCount };
+		fs.mkdirSync(generatorRoot(skillsDir), { recursive: true });
+		fs.writeFileSync(manifestPath(skillsDir), JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
+		return;
+	}
 	const manifest: SkillManifest = {
 		minor: `${version.major}.${version.minor}`,
 		latestPatch: `${version.major}.${version.minor}.${version.patch}`,

@@ -25,6 +25,7 @@
     "packages/eslint-plugin"
   ],
   "scripts": {
+    "prepare": "node scripts/install-hooks.mjs",
     "build": "npm run build:ng && npm run build:remaining && npm run docs:llms-pack",
     "build:ng": "npm run build:prisme && ng run ng:build",
     "build:prisme": "ng run prisme:build",
@@ -49,6 +50,8 @@
     "icons:update": "node ./packages/icons/update-icons.js",
     "i18n:update": "lucca translate && prettier --write 'packages/ng/**/translations.ts'",
     "skills:generate": "ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts",
+    "skills:update": "npm run --silent skills:generate -- --offline --ref HEAD",
+    "skills:check": "npm run --silent skills:update && node scripts/check-skills.mjs",
     "typography:update-font-coverage": "ts-node --project scripts/generate-typography-font-coverage/tsconfig.json scripts/generate-typography-font-coverage/index.ts"
   },
   "dependencies": {

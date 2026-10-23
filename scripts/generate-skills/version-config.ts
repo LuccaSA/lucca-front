@@ -7,7 +7,7 @@
  * - Git tags for source code access
  */
 
-import { execSync } from 'child_process';
+import { execFileSync, execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { VersionConfig } from './types';
@@ -155,11 +155,55 @@ export function resolveVersion(versionStr: string): VersionConfig {
 
 	return {
 		tag,
+		source: tag,
 		major,
 		minor,
 		patch,
 		zhReleaseId,
 		storybookBaseUrl,
+	};
+}
+
+/** SKILL.md tells the agent to replace `{version}` with the @lucca-front/ng version the project installs. */
+export const STORYBOOK_URL_OF_INSTALLED_VERSION = 'https://lucca-front.lucca.io/v{version}/storybook';
+
+/**
+ * Whether the skill follows the code rather than a release: generated from a ref (`--ref`), it is
+ * committed with the code it describes, and the consumer's APM ref is its only version.
+ */
+export function followsCode(version: VersionConfig): boolean {
+	return version.source !== version.tag;
+}
+
+/**
+ * Resolves a git ref that is not a release (`HEAD`, or the tree `git write-tree` builds from the
+ * index) to the minor of the last published tag it contains. The code and stories are read from the
+ * ref; the name, the links and the changelogs stay those of that tag, which already exists and never
+ * moves, so two commits between the same two tags write the same names.
+ */
+export function resolveSourceVersion(ref: string): MinorResolution {
+	const source = execFileSync('git', ['rev-parse', `${ref}^{tree}`], { encoding: 'utf-8' }).trim();
+	// A tree has no history: its tags are those of the commit it will be committed on top of.
+	const isTree = execFileSync('git', ['cat-file', '-t', ref], { encoding: 'utf-8' }).trim() === 'tree';
+	const reachable = new Set(
+		execFileSync('git', ['tag', '--merged', isTree ? 'HEAD' : ref, 'v*'], { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 })
+			.split('\n')
+			.map((t) => t.trim()),
+	);
+	const tag = listStableMajors()
+		.flatMap((major) => listStableTags(major))
+		.filter((t) => reachable.has(t))
+		.sort(compareTags)
+		.at(-1);
+	if (!tag) {
+		throw new Error(`${ref} ne contient aucun tag publié : impossible de nommer la skill.`);
+	}
+
+	const resolution = resolveMinorVersion(tag.replace(/^v/, '').split('.').slice(0, 2).join('.'));
+	return {
+		...resolution,
+		version: { ...resolveVersion(tag), source, storybookBaseUrl: STORYBOOK_URL_OF_INSTALLED_VERSION },
+		patchTags: resolution.patchTags.filter((t) => compareTags(t, tag) <= 0),
 	};
 }
 
