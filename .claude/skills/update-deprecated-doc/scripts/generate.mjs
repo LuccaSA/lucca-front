@@ -7,9 +7,11 @@ import { marked } from 'marked';
 
 const dir = 'packages/stylelint-config/';
 const docPath = 'docs/life-cycle.md';
+// A Windows checkout (`core.autocrlf`) brings CRLF: every parser below matches LF only.
+const read = (path) => readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
 
 const parse = (file) => {
-	const text = readFileSync(dir + file, 'utf8');
+	const text = read(dir + file);
 	return text
 		.split(/\n\t\{\n/)
 		.slice(1)
@@ -136,7 +138,7 @@ const autoNom = (e) => {
 const escAttr = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 const unescAttr = (t) => t.replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 const written = new Map(
-	[...readFileSync(docPath, 'utf8').matchAll(/<td data-pattern="([^"]*)">\n([\s\S]*?)\n\t\t\t<\/td>/g)]
+	[...read(docPath).matchAll(/<td data-pattern="([^"]*)">\n([\s\S]*?)\n\t\t\t<\/td>/g)]
 		// A leftover TODO placeholder is not a written cell: keep reporting it until the agent fills it.
 		.filter(([, , body]) => !body.includes('<!-- TODO'))
 		.map(([, key, body]) => [unescAttr(key), body.replace(/^\t{4}/gm, '')]),
@@ -209,7 +211,7 @@ const section = (title, file) => {
 	return `## ${title}\n\nSource\u00a0: [${file}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${file})\n\n${table(entries.filter((e) => !removedUpTo(e)))}${collapsed}`;
 };
 
-const head = readFileSync(docPath, 'utf8').split('## Classes')[0].trimEnd();
+const head = read(docPath).split('## Classes')[0].trimEnd();
 writeFileSync(
 	docPath,
 	`${head}\n\n${section('Classes', 'LFDeprecatedSelectors.mjs')}\n${section('Variables CSS', 'LFDeprecatedProperties.mjs')}`,
