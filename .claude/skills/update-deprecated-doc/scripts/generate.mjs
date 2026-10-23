@@ -202,14 +202,26 @@ const indent = (html, tabs) =>
 		.join('\n');
 const cell = (html, attrs = '') =>
 	html.includes('\n') || html.startsWith('<') ? `\t\t\t<td${attrs}>\n${indent(html, 4)}\n\t\t\t</td>` : `\t\t\t<td${attrs}>${html}</td>`;
+// A cell holding a single item takes no list. A kept Nom cell may come back list-less from the doc:
+// it is wrapped again so that `linkNom` finds its item.
+// A `(qualifier)` after the list stays after the item.
+const unlist = (html) => {
+	const m = html.match(/^<ul>\s*<li>([\s\S]*?)<\/li>\s*<\/ul>(\s+\([\s\S]*\))?$/);
+	return m && !m[1].includes('<li>') ? m[1] + (m[2] ?? '') : html;
+};
+const relist = (html) => {
+	if (html.includes('<li>') || !html.includes('<code>')) return html;
+	const [, item, qualifier = ''] = html.match(/^([\s\S]*<\/code>(?:<\/a>)?)(\s+\([\s\S]*\))?$/) ?? [, html];
+	return `<ul>\n\t<li>${item}</li>\n</ul>${qualifier}`;
+};
 const row = (e) => {
 	const nom = nomHtml(e);
 	return [
 		'\t\t<tr>',
-		cell(linkNom(nom.html, e), nom.key ? ` data-pattern="${escAttr(nom.key)}"` : ''),
+		cell(unlist(linkNom(relist(nom.html), e)), nom.key ? ` data-pattern="${escAttr(nom.key)}"` : ''),
 		`\t\t\t<td>${e.versionDeprecated ?? '–'}</td>`,
 		`\t\t\t<td>${e.versionDeleted ?? '–'}</td>`,
-		cell(actionsHtml(e)),
+		cell(unlist(actionsHtml(e))),
 		'\t\t</tr>',
 	].join('\n');
 };

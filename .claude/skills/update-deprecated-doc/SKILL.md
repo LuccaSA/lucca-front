@@ -100,6 +100,7 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
   `…/b/15c256`) — flag them so Prisme can be fixed too.
 - **`Nom` for Classes / Variables CSS: a `<ul>` with one `<li><code>…</code></li>` per item, never prose.**
   - Qualifiers like `(partout dans un sélecteur)` follow the `</ul>`.
+  - A cell with a single item takes no list, in every column: the script unwraps it.
   - Expand alternations into separate items; drop glob prefixes
     (`X*(S|M|L)` → `S`, `M`, `L`); truncate non-enumerable tails with `…`
     (`.u-elevate…`).
