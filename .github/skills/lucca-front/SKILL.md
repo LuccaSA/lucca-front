@@ -1,8 +1,9 @@
 ---
 name: lucca-front
 description: >
-  Design system Lucca Front / Prisme (Angular). À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
-  ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
+  Design system Lucca Front / Prisme (Angular) : API et exemples des composants, changelog, codemods de migration,
+  variantes Figma, tokens CSS, guidelines de design et de rédaction. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
+  ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm), et pour intégrer ou créer une maquette Figma Prisme.
 ---
 
 # Design System Prisme — Lucca Front
