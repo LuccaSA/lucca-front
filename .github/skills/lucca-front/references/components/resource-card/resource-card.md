@@ -1,5 +1,18 @@
 # resource-card
 
+**Sommaire**
+
+- Import
+- API Reference
+  - ResourceCardButtonComponent (component)
+  - ResourceCardLinkComponent (component)
+  - ResourceCardComponent (component)
+  - ResourceCardWrapperComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

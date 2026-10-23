@@ -1,5 +1,24 @@
 # Identification des pages
 
+**Sommaire**
+
+- Règles d'usage
+    - En bref
+  - Favicon
+  - Titres & URL
+    - Relation avec le titre de l’interface
+    - Hiérarchiser les titres
+    - Chargement et internationalisation
+- Angular
+- LuTitleStrategy
+  - Usage
+    - Dynamic titles
+  - Quickstart
+    - Naming Strategy
+    - Handling translations
+    - Adapt `app.module.ts` config
+    - Example with lucca-cdk
+
 # Règles d'usage
 
 ### **En bref**

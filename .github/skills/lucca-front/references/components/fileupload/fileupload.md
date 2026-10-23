@@ -1,5 +1,22 @@
 # fileupload
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - FileDropzoneComponent (component)
+  - FileEntryComponent (component)
+  - FileEntryWrapperComponent (component)
+  - MultiFileUploadComponent (component)
+  - SingleFileUploadComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

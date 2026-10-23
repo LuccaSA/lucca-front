@@ -1,5 +1,23 @@
 # filterpills
 
+**Sommaire**
+
+- Import
+- API Reference
+  - FilterPillComponent (component)
+  - FilterBarComponent (component)
+  - FilterViewSelectorComponent (component)
+  - FilterPillAddonBeforeDirective (directive)
+  - FilterPillAddonAfterDirective (directive)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

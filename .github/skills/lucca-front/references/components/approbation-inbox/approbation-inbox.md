@@ -1,5 +1,24 @@
 # approbation-inbox
 
+**Sommaire**
+
+- Import
+- API Reference
+  - ApprobationInboxDetailMainBlockComponent (component)
+  - ApprobationInboxHeaderComponent (component)
+  - ApprobationInboxDetailComponent (component)
+  - ApprobationInboxLinkComponent (component)
+  - ApprobationInboxGroupComponent (component)
+  - ApprobationInboxIconsComponent (component)
+  - ApprobationInboxItemComponent (component)
+  - ApprobationInboxSubtleComponent (component)
+  - ApprobationInboxListComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+
 ## Import
 
 ```typescript

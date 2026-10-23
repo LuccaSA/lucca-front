@@ -1,5 +1,24 @@
 # Traduction d'un formulaire
 
+**Sommaire**
+
+- Content
+  - Définition des langues
+  - Définition des langues
+    - Format du code langue
+    - Paramètres d'utilisation des langues
+  - Création d'une ressource
+  - Traduire un formulaire
+  - Champs traduisibles
+    - Anatomie
+    - Cas particulier
+    - Traductions incomplètes
+  - Traduire un champ
+  - Traduction automatique
+    - Relancer une traduction
+    - Modification d'un champ dans la langue de rédaction
+    - Animation de chargement
+
 # Content
 
 ## Définition des langues

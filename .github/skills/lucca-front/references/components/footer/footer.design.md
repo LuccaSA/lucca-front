@@ -1,5 +1,42 @@
 # footer — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Règles d’utilisation
+    - Ordre d’affichage des boutons
+    - Utilisation des icônes
+  - Cas d'usage
+    - Contenu non modifiable
+    - Parcours de création de ressource
+    - Dialog de confirmation d'abandon
+    - Enregistrement automatique
+    - Actions en masse
+- Design (iOS)
+  - Anatomie
+  - Options
+    - Bouton secondaire
+    - Contenu additionnel
+  - Cas d'usage
+    - Parcours de création de ressource
+    - Actions en masse
+    - Filtres
+  - Règles d'utilisation
+    - Taille du Footer
+    - Bouton Annuler
+- Design (Android)
+  - Anatomie
+  - Options
+    - Bouton secondaire
+    - Contenu additionnel
+  - Cas d'usage
+    - Parcours de création de ressource
+    - Actions en masse
+    - Filtres
+  - Règles d'utilisation
+    - Taille du Footer
+    - Bouton Annuler
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/419504)
 
 # Design

@@ -1,5 +1,19 @@
 # chip — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Basic
+- HTML/CSS
+  - Ellipse
+  - Basic
+  - Disabled
+  - Feedback
+  - Focusable
+  - Palettes
+  - Small
+  - Unkillable
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-chip-angular-basic--docs)
 
 ## Angular

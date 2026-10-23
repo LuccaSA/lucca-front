@@ -1,5 +1,48 @@
 # Utilitaires CSS
 
+**Sommaire**
+
+- Textes
+  - Tailles
+  - Graisse
+  - Couleurs
+    - Couleurs produits
+  - Typographie
+  - Style
+  - Ellipses
+- Spacings
+  - Margins
+  - Paddings
+  - Gaps
+- Bordures et ombres
+  - Border radius
+  - Suppression de bordures
+- Display
+  - Changement de display
+  - Cacher un élément responsive
+  - Flex
+  - Masquer un élément
+  - Visibilité
+  - Print
+- Positionnement
+  - Block
+  - Inline
+  - Vertical
+  - Position
+  - Tailles
+- Animations
+- Reset
+- Divers
+  - White Space
+  - Spin
+  - Aide
+  - Pointer event
+  - Overflow
+  - Hauteur et largeur
+  - Focus
+  - Data content
+  - Curseur
+
 # Textes
 
 ## Tailles

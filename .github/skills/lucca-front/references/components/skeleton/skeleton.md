@@ -1,5 +1,24 @@
 # skeleton
 
+**Sommaire**
+
+- Import
+- API Reference
+  - SkeletonButtonComponent (component)
+  - SkeletonCardComponent (component)
+  - SkeletonDataTableComponent (component)
+  - SkeletonFancyBoxComponent (component)
+  - SkeletonFieldComponent (component)
+  - SkeletonHeaderComponent (component)
+  - SkeletonHighlightDataComponent (component)
+  - SkeletonIndexTableComponent (component)
+  - SkeletonTableComponent (component)
+  - SkeletonUserPopoverComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

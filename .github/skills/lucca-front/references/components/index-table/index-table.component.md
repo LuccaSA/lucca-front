@@ -1,5 +1,41 @@
 # index-table — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Lien vers un nouvelle page
+  - Actions
+  - Basic
+  - Scrollbox
+  - Tooltips
+- HTML/CSS
+  - Table actions dropdown
+  - Table actions selectable
+  - Table actions subAction
+  - Table actions tooltipsCell
+  - Table actions tooltipsRow
+  - Table actions userPopover
+  - Table basic
+  - Table empty state
+  - Table footer
+  - Table input
+  - Table interactive nested selectable
+  - Table layout fixed responsive
+  - Table layout fixed
+  - Table mass selection and pagination
+  - Table nested selectable
+  - Table nested sub totals
+  - Table nested
+  - Table pagination
+  - Table responsive card list custom
+  - Table responsive card list label
+  - Table responsive card list nested
+  - Table responsive card list
+  - Table selectable
+  - Table sortable
+  - Table stackable
+  - Table sticky header
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
 
 ## Angular

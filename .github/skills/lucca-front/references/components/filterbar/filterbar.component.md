@@ -1,5 +1,17 @@
 # filterbar — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Filter pills optionnelles
+  - luFilterPillAddonBefore et luFilterPillAddonAfter
+  - Traductions
+  - Bar segmented control tabs
+  - Bar
+- HTML/CSS
+  - Bar segmented control tabs
+  - Bar
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-filterspills-filterbar-angular-segmented-control-tabs--docs)
 
 ## Angular

@@ -1,5 +1,17 @@
 # dropdown — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Basic
+  - Component
+  - Dialog
+  - Directive legacy
+  - Directive
+- HTML/CSS
+  - Basic
+  - WithoutIcons
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-dropdown-angular-basic--docs)
 
 ## Angular

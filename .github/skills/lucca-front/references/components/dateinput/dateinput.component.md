@@ -1,5 +1,14 @@
 # dateinput — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Utilisation
+  - Configuration
+  - Configuration avancée
+  - Input
+  - Input field
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date2-dateinput--docs)
 
 ## Angular

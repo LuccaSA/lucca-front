@@ -1,5 +1,15 @@
 # textareafield
 
+**Sommaire**
+
+- Import
+- API Reference
+  - TextareaInputComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

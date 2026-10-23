@@ -1,5 +1,26 @@
 # empty-state — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Illustrations
+  - Typologie des messages
+    - Aucun contenu
+    - Aucun contenu mais action possible
+    - Erreur
+    - Empty state positif (succès)
+- Content
+  - Titre du message
+    - Intention principale
+    - Recommandations
+  - Description
+    - Intention principale
+    - Recommandations
+  - Actions
+    - Intention principale
+    - Recommandations
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/49b0ef)
 
 # Design

@@ -1,5 +1,15 @@
 # highlight-section — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Basic
+- HTML/CSS
+  - Basic
+  - Illustration
+  - Ornaments
+  - Themes
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-highlight-section-angular-basic--docs)
 
 ## Angular

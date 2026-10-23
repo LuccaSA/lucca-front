@@ -1,5 +1,18 @@
 # popover
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuPopoverPanelComponent (component)
+  - LuPopoverTargetDirective (directive)
+  - LuPopoverTriggerDirective (directive)
+  - Modules dépréciés
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

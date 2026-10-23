@@ -1,5 +1,26 @@
 # richtextinput
 
+**Sommaire**
+
+- Import
+- API Reference
+  - ClearFormatComponent (component)
+  - HeadingsComponent (component)
+  - LinkComponent (component)
+  - ListStyleToolbarComponent (component)
+  - RichTextPluginTagComponent (component)
+  - TextStyleComponent (component)
+  - TextStyleToolbarComponent (component)
+  - RichTextInputToolbarComponent (component)
+  - RichTextInputComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

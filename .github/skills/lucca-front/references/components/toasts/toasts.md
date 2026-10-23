@@ -1,5 +1,18 @@
 # toasts
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuToastsComponent (component)
+  - Injection tokens
+  - Services
+  - Modules dépréciés
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

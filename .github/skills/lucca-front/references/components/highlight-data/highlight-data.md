@@ -1,5 +1,17 @@
 # highlight-data
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - HighlightDataComponent (component)
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

@@ -1,5 +1,19 @@
 # tooltip
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuTooltipPanelComponent (component)
+  - LuTooltipTriggerDirective (directive)
+  - Modules dépréciés
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.1
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

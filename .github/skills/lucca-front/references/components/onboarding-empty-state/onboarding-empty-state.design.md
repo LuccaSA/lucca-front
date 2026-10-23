@@ -1,5 +1,19 @@
 # onboarding-empty-state — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Cas d’usage
+    - Déploiement et parcours de création
+    - Fonctionnalité payante
+- Content
+  - Contenu et rédaction
+    - En bref
+    - Titre
+    - Description
+    - Illustration
+    - Bouton
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/9490c7)
 
 # Design

@@ -1,5 +1,19 @@
 # chip
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - ChipComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

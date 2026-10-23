@@ -1,5 +1,18 @@
 # horizontalnavigation
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - HorizontalNavigationLinkDirective (directive)
+  - HorizontalNavigationTabComponent (component)
+  - HorizontalNavigationComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

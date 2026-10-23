@@ -1,5 +1,16 @@
 # fieldset
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - FieldsetComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

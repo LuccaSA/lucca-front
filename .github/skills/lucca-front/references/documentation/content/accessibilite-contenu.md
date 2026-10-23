@@ -1,5 +1,22 @@
 # Accessibilité
 
+**Sommaire**
+
+- Content
+  - Sens et hiérarchie des informations d’une page
+    - Sens des informations
+    - Titres et hiérarchie des informations
+  - Pas de termes indiquant une position
+  - Couleurs : soignons-les
+  - Vidéo, audio, infographie, graphique
+    - Proposer une transcription
+    - Rédiger un bon *alt text*
+  - Liens hypertexte et boutons
+  - Texte
+  - Accents sur les lettres en capitale
+  - Format web de l’information
+  - Ressources sur l’accessibilité
+
 # Content
 
 ## Sens et hiérarchie des informations d’une page

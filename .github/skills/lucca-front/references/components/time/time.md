@@ -1,5 +1,18 @@
 # time
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - DurationPickerComponent (component)
+  - TimePickerComponent (component)
+  - TimeRangePickerComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.0
+
 ## Import
 
 ```typescript

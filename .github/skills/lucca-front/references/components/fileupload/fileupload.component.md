@@ -1,5 +1,15 @@
 # fileupload — Code & Implementation
 
+**Sommaire**
+
+- Angular
+- Mise en place
+  - Utilisation
+  - Single File Upload
+  - Layout of the entries
+  - Details
+  - Basic
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-file-fileupload-angular-basic--docs)
 
 ## Angular

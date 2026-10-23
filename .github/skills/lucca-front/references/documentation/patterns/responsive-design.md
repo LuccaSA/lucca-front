@@ -1,5 +1,18 @@
 # Responsive design
 
+**Sommaire**
+
+- Introduction
+  - Le design responsive, c'est quoi ?
+  - Pourquoi c'est important ?
+    - D’un point de vue utilisateur
+    - D'un point de vue stratégique
+    - D'un point de vue technique
+- Implémentation
+    - Pour les Dev UI
+    - Pour les designers
+    - Mobile ou desktop-first ?
+
 # Introduction
 
 ⏱ **TL;DR**

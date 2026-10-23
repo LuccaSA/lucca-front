@@ -1,5 +1,24 @@
 # select-templating
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuCoreSelectTotalCountDirective (directive)
+  - LuCoreSelectNoClueDirective (directive)
+  - LuDisabledOptionDirective (directive)
+  - LuOptionGroupDirective (directive)
+  - LuOptionDirective (directive)
+  - LuCoreSelectPanelHeaderDirective (directive)
+  - Providers
+  - Injection tokens
+  - Pipes
+  - Services
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.0
+
 ## Import
 
 ```typescript

@@ -1,5 +1,16 @@
 # time-picker
 
+**Sommaire**
+
+- Import
+- API Reference
+  - TimePickerComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
