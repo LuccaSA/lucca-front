@@ -398,7 +398,8 @@ async function main(): Promise<void> {
 			console.error(`❌ --version ${v} : le pipeline génère par mineure. Utilise --version ${v.split('.').slice(0, 2).join('.')} (le contenu reflète le dernier patch publié, les patchs sont couverts par fixes/).`);
 			process.exit(1);
 		}
-		const tech = getTechnicalMinor(v.replace(/^v/, ''));
+		// --ref documents the code of a tag, technical or not: there is no minor-wide skill to point at.
+		const tech = flags.ref ? null : getTechnicalMinor(v.replace(/^v/, ''));
 		if (tech) {
 			console.error(
 				`❌ --version ${v} : mineure technique (${tech.reason}) couverte par la skill ${tech.coveredBy} — aucune skill dédiée (cf. TECHNICAL_MINORS dans version-config.ts) ; ses patchs > .0 sont documentés par les fixes/ de la skill ${tech.coveredBy}. Utilise --version ${tech.coveredBy}. Si cette mineure a désormais sa propre release ZeroHeight et de vrais changements de doc, retire-la de la table avant de la générer.`,
@@ -465,7 +466,9 @@ async function main(): Promise<void> {
 	// unresolved (would otherwise pull "latest" = a newer version and corrupt its design sections).
 	if (!flags.skipZeroheight && !flags.dryRun && !flags.offline) {
 		try {
-			await ensureZhReleaseIds(flags.versions, config.output.skillsDir, { zhIds: flags.zhIds, zhLatest: flags.zhLatest });
+			// Only --ref reaches here with a technical minor: it reads its covering minor's release.
+			const zhMinors = flags.versions.map((v) => getTechnicalMinor(v)?.coveredBy ?? v);
+			await ensureZhReleaseIds(zhMinors, config.output.skillsDir, { zhIds: flags.zhIds, zhLatest: flags.zhLatest });
 		} catch (err: any) {
 			console.error(`\n❌ Garde-fou ZeroHeight : ${err.message}`);
 			process.exit(1);

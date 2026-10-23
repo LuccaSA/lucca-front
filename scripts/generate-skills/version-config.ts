@@ -199,10 +199,13 @@ export function resolveSourceVersion(ref: string): MinorResolution {
 		throw new Error(`${ref} ne contient aucun tag publié : impossible de nommer la skill.`);
 	}
 
-	const resolution = resolveMinorVersion(tag.replace(/^v/, '').split('.').slice(0, 2).join('.'));
+	const minorKey = tag.replace(/^v/, '').split('.').slice(0, 2).join('.');
+	const resolution = resolveMinorVersion(minorKey);
+	// A technical minor has no ZeroHeight release of its own: its design content is its covering minor's.
+	const zhMinor = getTechnicalMinor(minorKey)?.coveredBy ?? minorKey;
 	return {
 		...resolution,
-		version: { ...resolveVersion(tag), source, storybookBaseUrl: STORYBOOK_URL_OF_INSTALLED_VERSION },
+		version: { ...resolveVersion(tag), source, storybookBaseUrl: STORYBOOK_URL_OF_INSTALLED_VERSION, zhReleaseId: ZH_RELEASE_IDS[zhMinor] ?? null },
 		patchTags: resolution.patchTags.filter((t) => compareTags(t, tag) <= 0),
 	};
 }
