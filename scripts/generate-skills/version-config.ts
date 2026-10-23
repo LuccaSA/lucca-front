@@ -176,20 +176,38 @@ export function followsCode(version: VersionConfig): boolean {
 }
 
 /**
+ * The minor a skill that follows the code documents: its last published tag's, unless the branch
+ * already prepares a newer one. The release PR of a minor declares it (`--minor`, then kept in the
+ * committed manifest) before the `.0` tag exists, so that tag ships the skill of its own minor.
+ */
+export function documentedMinor(taggedMinor: string, preparedMinor: string | null): string {
+	if (!preparedMinor) return taggedMinor;
+	const [preparedMajor, preparedMinorNumber] = preparedMinor.split('.').map(Number);
+	const [taggedMajor, taggedMinorNumber] = taggedMinor.split('.').map(Number);
+	const isNewer = preparedMajor > taggedMajor || (preparedMajor === taggedMajor && preparedMinorNumber > taggedMinorNumber);
+	return isNewer ? preparedMinor : taggedMinor;
+}
+
+/**
  * Resolves a git ref that is not a release (`HEAD`, or the tree `git write-tree` builds from the
  * index) to the minor of the last published tag it contains. The code and stories are read from the
  * ref; the name, the links and the changelogs stay those of that tag, which already exists and never
  * moves, so two commits between the same two tags write the same names.
  */
-export function resolveSourceVersion(ref: string): MinorResolution {
+export function resolveSourceVersion(ref: string, preparedMinor: string | null = null): MinorResolution {
 	const source = execFileSync('git', ['rev-parse', `${ref}^{tree}`], { encoding: 'utf-8' }).trim();
 	// A tree has no history: its tags are those of the commit it will be committed on top of.
 	const isTree = execFileSync('git', ['cat-file', '-t', ref], { encoding: 'utf-8' }).trim() === 'tree';
-	const reachable = new Set(
-		execFileSync('git', ['tag', '--merged', isTree ? 'HEAD' : ref, 'v*'], { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 })
-			.split('\n')
-			.map((t) => t.trim()),
-	);
+	const tagsOf = (args: string[]) =>
+		new Set(
+			execFileSync('git', ['tag', ...args, 'v*'], { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 })
+				.split('\n')
+				.map((t) => t.trim()),
+		);
+	const reachable = tagsOf(['--merged', isTree ? 'HEAD' : ref]);
+	// A tag cut on this very commit would rewrite its committed skill ("jusqu'à vX" on every page) and
+	// turn its CI red: the commit keeps the skill it was committed with, the next one picks the tag up.
+	if (!isTree) for (const ownTag of tagsOf(['--points-at', ref])) reachable.delete(ownTag);
 	const tag = listStableMajors()
 		.flatMap((major) => listStableTags(major))
 		.filter((t) => reachable.has(t))
@@ -199,14 +217,25 @@ export function resolveSourceVersion(ref: string): MinorResolution {
 		throw new Error(`${ref} ne contient aucun tag publié : impossible de nommer la skill.`);
 	}
 
-	const minorKey = tag.replace(/^v/, '').split('.').slice(0, 2).join('.');
-	const resolution = resolveMinorVersion(minorKey);
+	const taggedMinor = tag.replace(/^v/, '').split('.').slice(0, 2).join('.');
+	const resolution = resolveMinorVersion(taggedMinor);
+	const minorKey = documentedMinor(taggedMinor, preparedMinor);
+	// A prepared minor has no tag yet: `tag` stays the last published one, where the changelogs stop.
+	const isPrepared = minorKey !== taggedMinor;
+	const { major, minor } = parseMinor(minorKey)!;
 	// A technical minor has no ZeroHeight release of its own: its design content is its covering minor's.
 	const zhMinor = getTechnicalMinor(minorKey)?.coveredBy ?? minorKey;
 	return {
-		...resolution,
-		version: { ...resolveVersion(tag), source, storybookBaseUrl: STORYBOOK_URL_OF_INSTALLED_VERSION, zhReleaseId: ZH_RELEASE_IDS[zhMinor] ?? null },
-		patchTags: resolution.patchTags.filter((t) => compareTags(t, tag) <= 0),
+		minorKey,
+		version: {
+			...resolveVersion(tag),
+			...(isPrepared && { major, minor, patch: 0 }),
+			source,
+			storybookBaseUrl: STORYBOOK_URL_OF_INSTALLED_VERSION,
+			zhReleaseId: ZH_RELEASE_IDS[zhMinor] ?? null,
+		},
+		patchTags: isPrepared ? [] : resolution.patchTags.filter((t) => compareTags(t, tag) <= 0),
+		technicalMinors: isPrepared ? [] : resolution.technicalMinors,
 	};
 }
 
