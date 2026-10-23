@@ -1,66 +1,51 @@
 ---
 name: update-deprecated-doc
-description: Regenerate docs/life-cycle.md from the Prisme "Cycle de vie des composants" page (Composants) and the LFDeprecatedSelectors.mjs / LFDeprecatedProperties.mjs source arrays (Classes, Variables CSS). Use whenever those sources change, or when asked to update / sync / rebuild / refresh the deprecation documentation.
+description: Regenerate docs/life-cycle.md from the LFDeprecatedSelectors.mjs / LFDeprecatedProperties.mjs source arrays (Composants, Classes, Variables CSS). Use whenever those sources change, or when asked to update / sync / rebuild / refresh the deprecation documentation.
 ---
 
 # Update the deprecation doc
 
-`docs/life-cycle.md` is **derived** from three sources — never edit it against
+`docs/life-cycle.md` is **derived** from two sources — never edit it against
 them:
 
-1. [Cycle de vie des composants > Composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f) → `## Composants`
-2. [LFDeprecatedSelectors.mjs](../../../packages/stylelint-config/LFDeprecatedSelectors.mjs) → `## Classes`
-3. [LFDeprecatedProperties.mjs](../../../packages/stylelint-config/LFDeprecatedProperties.mjs) → `## Variables CSS`
+1. [LFDeprecatedSelectors.mjs](../../../packages/stylelint-config/LFDeprecatedSelectors.mjs) → `## Composants` and `## Classes`
+2. [LFDeprecatedProperties.mjs](../../../packages/stylelint-config/LFDeprecatedProperties.mjs) → `## Variables CSS`
+
+It replaces the Prisme page [Cycle de vie des composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f).
+The code wins over Prisme whenever they disagree.
 
 `.mjs` entry shape:
 
 ```js
 {
   name: 'Checkbox',                  // optional, see Composants below
-  objectPattern: /regex/ | [/regex/, ...] | 'string',
+  objectPattern: /regex/ | [/regex/, ...] | 'string', // optional with a name
   versionDeprecated: '17.3.0',       // optional
   versionDeleted: '19.1.0',          // optional
   actions: `markdown string`,        // optional
-  urls: { schematics: 'https://…' }, // optional
+  urls: {                           // optional
+    prisme: 'https://…',             // Composants only
+    schematics: 'https://…',
+  },
 }
 ```
 
 ## Workflow
 
 1. Run `node .claude/skills/update-deprecated-doc/scripts/generate.mjs` from the repository root.
-   - It rewrites *Classes* and *Variables CSS* and keeps everything above them.
-   - It merges every entry holding a `name` into *Composants*.
+   - It rewrites the three sections and keeps everything above them.
    - It derives simple *Nom* cells itself: up to 10 plain items, no comment label.
    - It keeps every agent-written *Nom* cell, tagged `<td data-pattern="…">` with the entry's first regex source.
    - It lists the cells to write and exits with code 1 when a tagged cell is missing.
 2. Write each listed cell in place of its TODO comment, following the *Nom* conventions below.
    - Translate comment labels into French.
    - Run the script again: it must exit with code 0.
-3. To refresh **Composants** — ⚠ *temporary while this skill is under test; the
-   data will later be fed directly as a local source, replacing this step* —
-   fetch Prisme via its internal API (it's a zeroheight SPA; plain fetch returns
-   an empty shell):
-
-   ```bash
-   curl -sc jar.txt "https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f" -o shell.html
-   TOK=$(grep -oE '"token":"[A-Za-z0-9_-]+"' shell.html | head -1 | cut -d'"' -f4)
-   CSRF=$(grep -oE 'name="csrf-token" content="[^"]+"' shell.html | cut -d'"' -f4)
-   curl -sb jar.txt -X POST "https://prisme.lucca.io/api/load_page" \
-     -H "Content-Type: application/json" -H "Authorization: Token token=\"$TOK\"" \
-     -H "X-CSRF-Token: $CSRF" -d '{"id":4753501,"styleguide_id":77645}' -o page.json
-   ```
-
-   Tables are in `page.content_node.tabs["95175f"]` as a ProseMirror doc
-   (`heading`/`table`/`tableRow`/`tableCell`; marks `link`/`code`/`strong`/`em`);
-   take the table under the `Composants` heading.
-
 ## Output format
 
 Title, reference link, one `<style>` block (before the first section), then the
-three `##` sections in the order above. Each section: heading, `Source :` line
-(Composants → the Prisme page; the others → their `.mjs` as an absolute GitHub
-blob URL on `master`, never relative), and an HTML `<table>` — never a Markdown
-table. All tables share the same `<thead>`, mirroring Prisme's headers:
+three `##` sections: Composants, Classes, Variables CSS. Each section: heading, `Source :` line
+(its `.mjs` as an absolute GitHub blob URL on `master`, never relative), and an HTML `<table>` — never a Markdown
+table. All tables share the same `<thead>`, kept from Prisme's headers:
 
 `Nom` (component, or from `objectPattern`) | `Depuis` (`versionDeprecated`) |
 `Suppression` (`versionDeleted`) | `Action à réaliser` (`actions` + `urls`).
@@ -84,7 +69,8 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
   - The arrow line ends with a Markdown hard break: a backslash, written `\\` in the template literal.
   - The new value then starts the next line, indented by two spaces.
   - A list with a single item drops the list: the item becomes a plain line.
-  - A line that only repeats the *Nom* goes away: the targets list stands alone.
+  - A line that only repeats the *Nom* goes away.
+  - A list of targets follows a `Remplacer par :` line.
   - One name with several targets ends its line with the arrow.
     - A sub-list of `label : value` items follows.
   - A `*` legend such as `` `*` = `--components-tag` `` follows the examples.
@@ -94,24 +80,28 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
 - **All doc text is French**, labels and qualifiers included.
   - Component names never get translated: *Data table* stays *Data table*.
 - **Empty cells: en dash `–`** (U+2013); never the em dash `—`, anywhere.
-  Schematics-only entry → just the `(schematics)` link. Prisme's `-` and
-  `Non défini` both become `–`.
-- **An entry with a `name` deprecates a whole component: it leaves *Classes* for *Composants*.**
-  - The `name` matches the Prisme row text without its `Deprecated` prefix: `Checkbox`.
-  - Every *Composants* row drops that prefix: the whole table lists deprecations.
-  - The row keeps its Prisme name line.
-  - One root class per pattern follows it: its shortest form, such as `.status`.
-  - A single root sits inline after the name, behind a comma: `List, .list`.
-  - Prisme's "À remplacer par" becomes "Remplacer par", the `.mjs` wording.
-  - Every root links to one search of all the row's patterns.
+  Schematics-only entry → just the `(schematics)` link.
+- **An entry with a `name` deprecates a whole component: it goes to *Composants*, not *Classes*.**
+  - The `name` is plain text: the component name, alphanumeric only.
+  - `urls.prisme` links it to the Prisme page of the deprecated component.
+  - It carries no `Deprecated` prefix: the whole table lists deprecations.
   - Entries sharing a `name` share the row.
-  - The entry's dates win: Prisme fills the missing ones.
-  - The Prisme action wins: the entry's fills a missing one.
-  - A `name` missing from Prisme gets its own row, marked `data-name`: each run rebuilds it.
-- **Composants mirrors Prisme** (as HTML): `Nom` stays inline (links, `<code>`),
-  but normalize versions to semver (`19.2` → `19.2.0`) and correct obvious
-  typos (e.g. Establishment, Data table, the Select schematics link →
-  `…/b/15c256`) — flag them so Prisme can be fixed too.
+  - One root class per pattern follows the name: its shortest form, such as `.status`.
+  - A single root sits inline after the name, behind a comma: `List, .list`.
+  - Every root links to one search of all the row's patterns.
+  - Its pattern covers only the CSS hooks exclusive to deprecated code: its element and the classes nothing else emits.
+  - A deprecated Angular component can share its CSS with a live one: check every emitter of a class before matching it.
+    - `LuModal` in side panel mode still emits the `.lu-sidepanel-*` classes of the deprecated Side panel.
+  - An element selector opens with `(?<![\w.#-])`: classes and ids then stay out.
+  - A component without such a hook has no entry: the `.mjs` files hold selectors only.
+- **A component without a CSS hook comes from its Angular `@deprecated` marker**, which the script reads in `packages/ng`.
+  - The marker follows one convention: `@deprecated since X.Y.Z, replaced by Symbol.`
+  - An `@see` line gives the Prisme page of the deprecated component: it names the row and links it.
+  - The action cites the symbol as code: "Remplacer par `PopoverDirective`."
+  - Classes sharing a page share the row, which takes the earliest version.
+  - The version is the release carrying the first live replacement when the code offered none before.
+    - Without one, the release in which the last live LF component left it, sourced by its PR.
+  - Prisme's past releases serve as a fallback: `https://prisme.lucca.io/94310e217/v/<release>/p/<page>.md`.
 - **`Nom` for Classes / Variables CSS: a `<ul>` with one `<li><code>…</code></li>` per item, never prose.**
   - Qualifiers like `(partout dans un sélecteur)` follow the `</ul>`.
   - A cell with a single item takes no list, in every column: the script unwraps it.
@@ -186,7 +176,7 @@ then, per section:
 ```html
 ## Composants
 
-Source : [Cycle de vie des composants > Composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f)
+Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs)
 
 <table>
 	<thead>

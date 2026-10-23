@@ -9,6 +9,10 @@ import { ALuPopoverPanel, ILuPopoverPanel, LuPopoverScrollStrategy } from './pop
 
 // import { standardPopoverTemplate } from './popover.template';
 
+/**
+ * @deprecated since 21.0.0, replaced by PopoverDirective.
+ * @see https://prisme.lucca.io/94310e217/p/7693f3-popover
+ */
 @Component({
 	selector: 'lu-popover',
 	templateUrl: './popover-panel.component.html',

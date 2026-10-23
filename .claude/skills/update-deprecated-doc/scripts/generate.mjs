@@ -1,9 +1,9 @@
-// Regenerates the Classes and Variables CSS sections of docs/life-cycle.md
+// Regenerates the Composants, Classes and Variables CSS sections of docs/life-cycle.md
 // from LFDeprecatedSelectors.mjs and LFDeprecatedProperties.mjs.
-// Composants keeps the Prisme rows and merges the entries holding a `name` into them.
-// Everything else before `## Classes` (title, note, style) is kept as is.
+// Composants lists the entries holding a `name`.
+// Everything before `## Composants` (title, note, style) is kept as is.
 // Usage, from the repository root: node .claude/skills/update-deprecated-doc/scripts/generate.mjs
-import { readFileSync, writeFileSync } from 'fs';
+import { readdirSync, readFileSync, writeFileSync } from 'fs';
 import { marked } from 'marked';
 
 const dir = 'packages/stylelint-config/';
@@ -62,6 +62,11 @@ const parse = (file) => {
 					entry.name = nm[1];
 					continue;
 				}
+				const pm = l.match(/^prisme: '([^']+)'/);
+				if (pm) {
+					entry.prisme = pm[1];
+					continue;
+				}
 				const sm = l.match(/^schematics: '([^']+)'/);
 				if (sm) {
 					entry.schematics = sm[1];
@@ -93,8 +98,11 @@ const actionsHtml = (e) => {
 };
 
 // --- Nom derivation ---
+// An element selector opens with the lookbehind `(?<![\w.#-])`: it keeps classes and ids out.
+const elementStart = /^\(\?<!\[\\w\.#-\]\)/;
 const clean = (src) =>
 	src
+		.replace(elementStart, '')
 		.replace(/\(\?!\[\\w-\]\)/g, '')
 		.replace(/\\b/g, '')
 		.replace(/\\([.@-])/g, '$1');
@@ -145,17 +153,12 @@ const escAttr = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 const unescAttr = (t) => t.replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 const doc = read(docPath);
 const [docHead, docTail = ''] = doc.split('## Classes');
-const composantsText = docHead.slice(docHead.indexOf('## Composants'));
 const writtenIn = (text) =>
 	[...text.matchAll(/<td data-pattern="([^"]*)">\n([\s\S]*?)\n\t\t\t<\/td>/g)]
 		// A leftover TODO placeholder is not a written cell: keep reporting it until the agent fills it.
 		.filter(([, , body]) => !body.includes('<!-- TODO'))
 		.map(([, key, body]) => [unescAttr(key), body.replace(/^\t{4}/gm, '')]);
-const written = new Map([
-	...writtenIn(docTail),
-	// A Composants Nom cell starts with the component name line: the written part follows it.
-	...writtenIn(composantsText).map(([key, body]) => [key, body.split('\n').slice(1).join('\n')]),
-]);
+const written = new Map(writtenIn(docTail));
 const missing = [];
 
 // Returns the Nom cell, plus the pattern key when the agent writes it.
@@ -179,6 +182,7 @@ const ghToken = (src) =>
 	(src.startsWith('\\.') ? ghClassBefore : ghBefore) +
 	src
 		.replace(/^\\\./, '')
+		.replace(elementStart, '')
 		.replace(/\(\?!\[\\w-\]\)/g, ghAfter)
 		.replace(/\\b/g, ghAfter)
 		// `\@` in a Sass selector is a plain `@` in markup.
@@ -276,7 +280,7 @@ const section = (title) =>
 		entries[title].filter((e) => !e.name).sort(byVersionAsc),
 	)}`;
 
-// --- Composants: the Prisme rows, merged with the named entries ---
+// --- Composants: the entries holding a `name` ---
 // Entries sharing a name merge into one: their patterns add up, the first defined value wins otherwise.
 const named = new Map();
 for (const e of Object.values(entries)
@@ -286,33 +290,36 @@ for (const e of Object.values(entries)
 	if (!m) named.set(e.name, { ...e, groups: [...e.groups] });
 	else {
 		m.groups.push(...e.groups);
-		for (const k of ['versionDeprecated', 'versionDeleted', 'actions', 'schematics']) m[k] ??= e[k];
+		for (const k of ['versionDeprecated', 'versionDeleted', 'actions', 'prisme', 'schematics']) m[k] ??= e[k];
 	}
 }
-const plainText = (html) => unesc(html.replace(/<[^>]*>/g, '')).trim();
-const tdRe = /\t\t\t<td[^>]*>(?:\n([\s\S]*?)\n\t\t\t<\/td>|(.*?)<\/td>)/g;
-const dash = (v) => (v === '–' ? undefined : v);
-// A row the generator added carries `data-name`: each run rebuilds it.
-const prismeRows = [...composantsText.matchAll(/\t\t<tr( data-name="[^"]*")?>\n([\s\S]*?)\n\t\t<\/tr>/g)]
-	.filter(([, marker, body]) => !marker && body.includes('<td'))
-	.map(([raw, , body]) => {
-		const tds = [...body.matchAll(tdRe)];
-		const content = tds.map((m) => (m[1] !== undefined ? m[1].replace(/^\t{4}/gm, '') : m[2]));
-		// Every row is a deprecation: Prisme's `Deprecated` prefix goes.
-		// A single root sits inline after the name: it goes too, each run adds it back.
-		const line = content[0]
-			.split('\n')[0]
-			.replace(/^Deprecated /, '')
-			.replace(/, <a href="https:\/\/github\.com\/search[^"]*"><code>[^<]*<\/code><\/a>$/, '');
-		return {
-			raw,
-			tds: tds.map((m) => m[0]),
-			line,
-			versionDeprecated: dash(content[1]),
-			versionDeleted: dash(content[2]),
-			action: content[3],
-		};
-	});
+// --- Composants: the Angular `@deprecated` markers pointing to a Prisme page ---
+// Convention: `@deprecated since X.Y.Z, replaced by Symbol…` plus `@see <Prisme page of the deprecated component>`.
+// Classes sharing a page share the row, which takes the earliest version.
+const ngDir = 'packages/ng';
+const ngFiles = readdirSync(ngDir, { recursive: true })
+	.filter((f) => f.endsWith('.ts') && !/\.spec\.ts$|\.module\.ts$|\/schematics\//.test(`/${f}`))
+	.map((f) => `${ngDir}/${f}`);
+const slugName = (url) =>
+	url
+		.split('/')
+		.pop()
+		.replace(/^[0-9a-f]{6}-/, '')
+		.replace(/-/g, ' ')
+		.replace(/^./, (c) => c.toUpperCase());
+for (const f of ngFiles) {
+	for (const [, doc] of read(f).matchAll(/\/\*\*([\s\S]*?)\*\//g)) {
+		const dep = doc.match(/@deprecated since (\d+\.\d+\.\d+), replaced by (\w+)/);
+		const see = doc.match(/@see (https:\/\/prisme\.lucca\.io\/\S+)/);
+		if (!dep || !see) continue;
+		const name = slugName(see[1]);
+		const e = named.get(name) ?? { name, groups: [], actions: null, schematics: null };
+		named.set(name, e);
+		e.prisme ??= see[1];
+		e.actions ??= `Remplacer par \`${dep[2]}\`.`;
+		if (!e.versionDeprecated || compareAsc(semver(dep[1]), semver(e.versionDeprecated)) < 0) e.versionDeprecated = dep[1];
+	}
+}
 // A component shows one root class per pattern, its shortest form: the search still covers every class.
 const root = (src) => {
 	const ex = expand(clean(src));
@@ -320,47 +327,32 @@ const root = (src) => {
 };
 const tokens = (e) => {
 	const roots = [...new Set(e.groups.flatMap((g) => g.sources).map(root))];
+	// A component without a CSS pattern shows its name only.
+	if (!roots.length) return '';
 	const html = unlist(linkNom(`<ul>\n${roots.map((r) => '\t' + li(r)).join('\n')}\n</ul>`, e, true));
 	// A single root sits inline after the name, behind a comma.
 	return html.startsWith('<ul>') ? `\n${html}` : `, ${html}`;
 };
-const compRow = ({ line, tds, action }, e, marker = '') => {
-	return [
-		`\t\t<tr${marker}>`,
-		cell(line + tokens(e)),
+// The name links to its Prisme page when `urls.prisme` gives one.
+const nameHtml = (e) => (e.prisme ? `<a href="${e.prisme}">${esc(e.name)}</a>` : esc(e.name));
+const compRow = (e) =>
+	[
+		'\t\t<tr>',
+		cell(nameHtml(e) + tokens(e)),
 		`\t\t\t<td>${e.versionDeprecated ?? '–'}</td>`,
 		`\t\t\t<td>${e.versionDeleted ?? '–'}</td>`,
-		// The Prisme action wins: the entry's fills a missing one.
-		tds && action !== '–' ? tds[3] : cell(unlist(actionsHtml(e))),
+		cell(unlist(actionsHtml(e))),
 		'\t\t</tr>',
 	].join('\n');
-};
-const compRows = prismeRows.map((r) => {
-	const e = named.get(plainText(r.line));
-	if (!e) return { ...r, html: r.raw.replace(/(\t\t\t<td[^>]*>(?:\n\t{4})?)Deprecated /, '$1') };
-	named.delete(plainText(r.line));
-	// The entry's dates win: Prisme fills the missing ones.
-	const merged = {
-		...e,
-		versionDeprecated: e.versionDeprecated ?? r.versionDeprecated,
-		versionDeleted: e.versionDeleted ?? r.versionDeleted,
-	};
-	return { ...merged, html: compRow(r, merged) };
-});
-for (const [name, e] of named) compRows.push({ ...e, html: compRow({ line: esc(name) }, e, ` data-name="${escAttr(name)}"`) });
-const composants = composantsText.replace(
-	/(<tbody>\n)[\s\S]*(\n\t<\/tbody>)/,
-	(_, open, close) =>
-		`${open}${compRows
-			.sort(byVersionAsc)
-			.map((r) => r.html)
-			.join('\n')
-			// Prisme's actions match the `.mjs` wording.
-			.replace(/À remplacer par/g, 'Remplacer par')}${close}`,
-);
+const composants = `## Composants\n\nSources\u00a0: [${files.Classes}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${files.Classes}) et les marqueurs \`@deprecated\` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)\n\n${thead}\n${[
+	...named.values(),
+]
+	.sort(byVersionAsc)
+	.map(compRow)
+	.join('\n')}\n\t</tbody>\n</table>\n`;
 
-const head = (docHead.slice(0, docHead.indexOf('## Composants')) + composants).trimEnd();
-writeFileSync(docPath, `${head}\n\n${section('Classes')}\n${section('Variables CSS')}`);
+const head = docHead.slice(0, docHead.indexOf('## Composants')).trimEnd();
+writeFileSync(docPath, `${head}\n\n${composants}\n${section('Classes')}\n${section('Variables CSS')}`);
 if (missing.length) {
 	console.error(`Write these Nom cells in ${docPath}, following SKILL.md:\n${missing.map((k) => `- /${k}/`).join('\n')}`);
 	process.exit(1);

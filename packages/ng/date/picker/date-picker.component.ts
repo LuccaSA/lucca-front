@@ -11,6 +11,10 @@ import { luTransformPopover } from '@lucca-front/ng/popover';
 import { LuCalendarInputComponent } from '../calendar';
 import { LuDateInputDirective } from '../input';
 
+/**
+ * @deprecated since 18.3.0, replaced by DateInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/10c73a-date-picker
+ */
 @Component({
 	selector: 'lu-date-picker',
 	templateUrl: './date-picker.component.html',

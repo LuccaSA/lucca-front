@@ -2,6 +2,10 @@ import { Directive, ElementRef, input } from '@angular/core';
 import { syncInputSignal } from '@lucca-front/ng/core';
 import { ALuPopoverTarget, LuPopoverAlignment, LuPopoverPosition } from './popover-target.model';
 
+/**
+ * @deprecated since 21.0.0, replaced by PopoverDirective.
+ * @see https://prisme.lucca.io/94310e217/p/7693f3-popover
+ */
 @Directive({
 	selector: '[luPopoverTarget]',
 	exportAs: 'LuPopoverTarget',

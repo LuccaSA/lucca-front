@@ -5,8 +5,37 @@
 // Boundary convention:
 // - Each pattern ends with `(?![\w-])`: matches the exact token only; the guard blocks a trailing word char OR `-`.
 //   --token ✓ | --token-x ✗ | --tokenX ✗
+//
+// Sorted by version: `versionDeprecated`, else `versionDeleted`.
+// ==============================================================================================
 
 export default [
+	{
+		// SEE https://regex101.com/r/Nct1a0.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/commons/vars.scss#L19.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/commons/config.scss#L111.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/commons/config.scss#L179.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/66e12140f271c541e74db3ec79af116c72c69889.
+		objectPattern: [
+			/--breakpoints-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)-breakAt(?![\w-])/,
+			/--commons-box-shadow-(hard|xxs|xs|s|m|l|xl|xxl)(?![\w-])/,
+			/--spacings-(reset|smallest|smaller|small|standard|big|bigger|biggest)(?![\w-])/,
+		],
+		versionDeleted: '15.1.0',
+		actions: `
+			* \`--breakpoints-*-breakAt\` ⇒ point de rupture en majuscules (\`l\` ⇒ \`L\`)
+			* \`--commons-box-shadow-*\` ⇒ \`--commons-boxShadow-*\` en majuscules
+			* \`--spacings-*\` ⇒ échelle en majuscules :
+				* \`reset\` ⇒ \`0\`
+				* \`smallest\` ⇒ \`XXS\`
+				* \`smaller\` ⇒ \`XS\`
+				* \`small\` ⇒ \`S\`
+				* \`standard\` ⇒ \`M\`
+				* \`big\` ⇒ \`L\`
+				* \`bigger\` ⇒ \`XL\`
+				* \`biggest\` ⇒ \`XXL\`
+		`,
+	},
 	{
 		// SEE https://regex101.com/r/Qkq3ok.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/7aafc39f8c79a749bc1d670fe4f05ea86c300923/packages/scss/src/commons/config.scss#L166.
@@ -22,6 +51,13 @@ export default [
 		objectPattern: /--commons-boxShadow-XXS(?![\w-])/,
 		versionDeprecated: '16.1.0',
 		versionDeleted: '19.1.0',
+	},
+	{
+		// SEE https://regex101.com/r/FvCjd5.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/17961899b2b1c17e69612708b9e6d068b7801fb0/packages/scss/src/commons/vars.scss#L50.
+		objectPattern: /--commons-background-base(?![\w-])/,
+		versionDeprecated: '17.3.0',
+		actions: `Remplacer par le token \`--pr-t-elevation-surface-default\`.`,
 	},
 	{
 		// SEE https://regex101.com/r/Y00E16.
@@ -49,21 +85,6 @@ export default [
 		},
 	},
 	{
-		// SEE https://regex101.com/r/FvCjd5.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/17961899b2b1c17e69612708b9e6d068b7801fb0/packages/scss/src/commons/vars.scss#L50.
-		objectPattern: /--commons-background-base(?![\w-])/,
-		versionDeprecated: '17.3.0',
-		actions: `Remplacer par le token \`--pr-t-elevation-surface-default\`.`,
-	},
-	{
-		// Alert of the navSide items, removed in 18.1.0: these variables are still emitted but no longer read
-		// SEE https://regex101.com/r/BYj50i.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/6c69e981609f39d15617f8b8cf5a70c7b4028499/packages/scss/src/components/navside/vars.scss#L24.
-		objectPattern: /--components-navSide-fullwidth-palette-alert-(color|text)(?![\w-])/,
-		versionDeprecated: '17.3.2',
-		actions: `Retirer la variable : l’alerte est remplacée par le composant Numeric badge.`,
-	},
-	{
 		// SEE https://regex101.com/r/QullaC.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/scss/src/commons/config.scss#L320.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
@@ -88,18 +109,12 @@ export default [
 		`,
 	},
 	{
-		// SEE https://regex101.com/r/lu9vUK.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/f83d03c46a036e58aed46a4ee9046ae34115dd6f/packages/scss/src/commons/config.scss#L321.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
-		objectPattern: [/--colors-white-rgb(?![\w-])/, /--colors-neutral-(400|900)-rgb(?![\w-])/],
-		versionDeprecated: '17.4.0',
-		versionDeleted: '22.0.0',
-		actions: `
-			* Sass : \`color.transparentize(var(--palettes-neutral-*), …)\`
-			* CSS : \`color-mix()\`
-
-			\`*\` = \`0\` pour \`white\`, sinon la nuance d'origine
-		`,
+		// Alert of the navSide items, removed in 18.1.0: these variables are still emitted but no longer read
+		// SEE https://regex101.com/r/BYj50i.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/6c69e981609f39d15617f8b8cf5a70c7b4028499/packages/scss/src/components/navside/vars.scss#L24.
+		objectPattern: /--components-navSide-fullwidth-palette-alert-(color|text)(?![\w-])/,
+		versionDeprecated: '17.3.2',
+		actions: `Retirer la variable : l’alerte est remplacée par le composant Numeric badge.`,
 	},
 	{
 		// SEE https://regex101.com/r/WqLllN.
@@ -124,18 +139,17 @@ export default [
 		},
 	},
 	{
-		// SEE https://regex101.com/r/iMddaz.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/dd76138530436ecabe4f4752836a0f5e4cd14517/packages/scss/src/commons/config.scss#L369.
+		// SEE https://regex101.com/r/lu9vUK.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/f83d03c46a036e58aed46a4ee9046ae34115dd6f/packages/scss/src/commons/config.scss#L321.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
-		objectPattern: /--colors-(black|white)-color(?![\w-])/,
-		versionDeprecated: '18.2.0',
+		objectPattern: [/--colors-white-rgb(?![\w-])/, /--colors-neutral-(400|900)-rgb(?![\w-])/],
+		versionDeprecated: '17.4.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`--colors-white-color\` ⇒
-				* couleur : \`--palettes-neutral-0\`
-				* surface : \`--pr-t-elevation-surface-raised\`
-			* \`--colors-black-color\` ⇒ \\
-			  \`--palettes-neutral-900\`
+			* Sass : \`color.transparentize(var(--palettes-neutral-*), …)\`
+			* CSS : \`color-mix()\`
+
+			\`*\` = \`0\` pour \`white\`, sinon la nuance d'origine
 		`,
 	},
 	{
@@ -166,6 +180,21 @@ export default [
 			* token de texte : \`--pr-t-color-text-disabled\`
 			* couleur : \`--commons-disabled-color\`
 			* fond : \`--commons-disabled-background\`
+		`,
+	},
+	{
+		// SEE https://regex101.com/r/iMddaz.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/dd76138530436ecabe4f4752836a0f5e4cd14517/packages/scss/src/commons/config.scss#L369.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
+		objectPattern: /--colors-(black|white)-color(?![\w-])/,
+		versionDeprecated: '18.2.0',
+		versionDeleted: '22.0.0',
+		actions: `
+			* \`--colors-white-color\` ⇒
+				* couleur : \`--palettes-neutral-0\`
+				* surface : \`--pr-t-elevation-surface-raised\`
+			* \`--colors-black-color\` ⇒ \\
+			  \`--palettes-neutral-900\`
 		`,
 	},
 	{
@@ -286,6 +315,24 @@ export default [
 		`,
 	},
 	{
+		// SEE https://regex101.com/r/aK08Za.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/filterBar/mods.scss#L32.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/scrollBox/states.scss#L10.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/90aa5c65c1644ce779cdf86ae85530e212b79c71.
+		objectPattern: /--components-(filterBar-extremitiesDisplay|scrollBox-wrap)(?![\w-])/,
+		versionDeleted: '20.1.0',
+	},
+	{
+		// SEE https://regex101.com/r/cFClO2.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/numericBadge/mods.scss#L8.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/e199f114fbb08f565328ea62658b2190b82a840d.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/numericBadge/component.scss#L11.
+		objectPattern: /--components-numericBadge-(fontSize|lineHeight)(?![\w-])/,
+		versionDeprecated: '20.1.0',
+		versionDeleted: '21.3.0',
+		actions: `Remplacer par \`--components-numericBadge-font\`.`,
+	},
+	{
 		// SEE https://regex101.com/r/1P70OB.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bb80e0bf0e1f3ffaaff8b4ef573f653dc1d3472e/packages/scss/src/commons/config.scss#L750.
 		objectPattern: /--commons-borderRadius-(M|L|XL|full)(?![\w-])/,
@@ -310,84 +357,6 @@ export default [
 		actions: `Remplacer par \`--pr-t-border-radius-input\`.`,
 	},
 	{
-		// Still read as a fallback of `--components-gauge-blockSize`
-		// SEE https://regex101.com/r/09aS7Z.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/465bd91d82d8de1d0512643f175ce817135b83f7/packages/scss/src/components/gauge/vars.scss#L1.
-		objectPattern: /--components-gauge-height(?![\w-])/,
-		versionDeprecated: '20.3.0',
-		actions: `Remplacer par \`--components-gauge-blockSize\`.`,
-	},
-	{
-		// Still read as fallbacks of their `-content-` names
-		// SEE https://regex101.com/r/njxlDv.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/3cd2c7dcf6e46bf1f2a28eef623252e7748d978a/packages/scss/src/components/richText/vars.scss#L9.
-		objectPattern: /--components-richTextField-(resize|height|minHeight|maxHeight)(?![\w-])/,
-		versionDeprecated: '21.2.0',
-		actions: `
-			\`--components-richTextField-*\` ⇒ \\
-			\`--components-richTextField-content-*\`
-		`,
-	},
-	{
-		// AI palette, renamed Orchid; `--palettes-ai-*` (lower case) is the AI gradient
-		// SEE https://regex101.com/r/IFX5bZ.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/f0b73e151f73e805500788cdaac6e65fcff20b7a.
-		objectPattern: /--palettes-AI-\d+(?![\w-])/,
-		versionDeleted: '21.3.0',
-		actions: `
-			* couleur : \`--palettes-orchid-*\`
-			* dégradé : \`--palettes-ai-*\`
-
-			(\`*\`: 50-900)
-		`,
-	},
-	{
-		// SEE https://regex101.com/r/cFClO2.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/numericBadge/mods.scss#L8.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/e199f114fbb08f565328ea62658b2190b82a840d.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/numericBadge/component.scss#L11.
-		objectPattern: /--components-numericBadge-(fontSize|lineHeight)(?![\w-])/,
-		versionDeprecated: '20.1.0',
-		versionDeleted: '21.3.0',
-		actions: `Remplacer par \`--components-numericBadge-font\`.`,
-	},
-	{
-		// SEE https://regex101.com/r/mSg9Vi.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/db08f46234ab6e5717d83b3c72d36dedfd180a43/packages/scss/src/components/fancyBox/vars.scss#L29.
-		objectPattern:
-			/--components-fancyBox-(offsetInline|offsetBlock|imageWidth|imageHeight|background-left|background-right|foreground)(?![\w-])/,
-		versionDeprecated: '22.1.0',
-		actions: `
-			Avec \`*\` = \`--components-fancyBox\` :
-
-			* \`*-offsetInline\` ⇒ \\
-			  \`*-content-foregroundStartEnd-insetInlineEnd\`
-			* \`*-offsetBlock\` ⇒ \\
-			  \`*-content-foregroundStartEnd-insetBlockStart\`
-			* \`*-imageWidth\` ⇒ \\
-			  \`*-content-foregroundStartEnd-inlineSize\`
-			* \`*-imageHeight\` ⇒ \\
-			  \`*-content-foregroundStartEnd-blockSize\`
-			* Image \`*-background-left\` ⇒
-				* sélecteur : \`.fancyBox-content-backgroundEndStart\`
-				* input Angular : \`backgroundEndStart\`
-			* Image \`*-background-right\` ⇒
-				* sélecteur : \`.fancyBox-content-backgroundStartEnd\`
-				* input Angular : \`backgroundStartEnd\`
-			* Image \`*-foreground\` ⇒
-				* sélecteur : \`.fancyBox-content-foregroundStartEnd\`
-				* input Angular : \`foregroundStartEnd\`
-		`,
-	},
-	{
-		// SEE https://regex101.com/r/aK08Za.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/filterBar/mods.scss#L32.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/scrollBox/states.scss#L10.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/90aa5c65c1644ce779cdf86ae85530e212b79c71.
-		objectPattern: /--components-(filterBar-extremitiesDisplay|scrollBox-wrap)(?![\w-])/,
-		versionDeleted: '20.1.0',
-	},
-	{
 		// SEE https://regex101.com/r/JRoWlQ.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/9eb5311e28d89a9a3f74069d4922c3cb58611464/packages/scss/src/components/box/mods.scss#L47.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/9eb5311e28d89a9a3f74069d4922c3cb58611464/packages/scss/src/components/fileEntry/mods.scss#L9.
@@ -395,6 +364,14 @@ export default [
 		objectPattern: /--components-(box-(arrow-horizontalMargin|border-radius)|fileEntry-status-borderRadius)(?![\w-])/,
 		versionDeleted: '20.2.0',
 		actions: `Utiliser les tokens \`--pr-t-border-radius-*\`.`,
+	},
+	{
+		// Still read as a fallback of `--components-gauge-blockSize`
+		// SEE https://regex101.com/r/09aS7Z.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/465bd91d82d8de1d0512643f175ce817135b83f7/packages/scss/src/components/gauge/vars.scss#L1.
+		objectPattern: /--components-gauge-height(?![\w-])/,
+		versionDeprecated: '20.3.0',
+		actions: `Remplacer par \`--components-gauge-blockSize\`.`,
 	},
 	{
 		// SEE https://regex101.com/r/G1g20C.
@@ -456,6 +433,17 @@ export default [
 		actions: `Remplacer par \`--components-timepicker-input-padding-(block|inline)\`.`,
 	},
 	{
+		// Still read as fallbacks of their `-content-` names
+		// SEE https://regex101.com/r/njxlDv.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/3cd2c7dcf6e46bf1f2a28eef623252e7748d978a/packages/scss/src/components/richText/vars.scss#L9.
+		objectPattern: /--components-richTextField-(resize|height|minHeight|maxHeight)(?![\w-])/,
+		versionDeprecated: '21.2.0',
+		actions: `
+			\`--components-richTextField-*\` ⇒ \\
+			\`--components-richTextField-content-*\`
+		`,
+	},
+	{
 		// SEE https://regex101.com/r/iAXt8A.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bb7fe9c16f8e2daee9602c6964724ad38a806944/packages/scss/src/components/emptyState/vars.scss#L15.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/ecb3bc42bee4e3c1d1c36d440a38ba0efa81dd06.
@@ -468,6 +456,19 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/commit/c4c9231bb7df90f2def39a85ea7bb1a40b34128b.
 		objectPattern: /--components-loading-padding(?![\w-])/,
 		versionDeleted: '21.2.0',
+	},
+	{
+		// AI palette, renamed Orchid; `--palettes-ai-*` (lower case) is the AI gradient
+		// SEE https://regex101.com/r/IFX5bZ.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/f0b73e151f73e805500788cdaac6e65fcff20b7a.
+		objectPattern: /--palettes-AI-\d+(?![\w-])/,
+		versionDeleted: '21.3.0',
+		actions: `
+			* couleur : \`--palettes-orchid-*\`
+			* dégradé : \`--palettes-ai-*\`
+
+			(\`*\`: 50-900)
+		`,
 	},
 	{
 		// SEE https://regex101.com/r/kusrdB.
@@ -523,37 +524,39 @@ export default [
 		versionDeleted: '22.0.0',
 	},
 	{
+		// SEE https://regex101.com/r/mSg9Vi.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/db08f46234ab6e5717d83b3c72d36dedfd180a43/packages/scss/src/components/fancyBox/vars.scss#L29.
+		objectPattern:
+			/--components-fancyBox-(offsetInline|offsetBlock|imageWidth|imageHeight|background-left|background-right|foreground)(?![\w-])/,
+		versionDeprecated: '22.1.0',
+		actions: `
+			Avec \`*\` = \`--components-fancyBox\` :
+
+			* \`*-offsetInline\` ⇒ \\
+			  \`*-content-foregroundStartEnd-insetInlineEnd\`
+			* \`*-offsetBlock\` ⇒ \\
+			  \`*-content-foregroundStartEnd-insetBlockStart\`
+			* \`*-imageWidth\` ⇒ \\
+			  \`*-content-foregroundStartEnd-inlineSize\`
+			* \`*-imageHeight\` ⇒ \\
+			  \`*-content-foregroundStartEnd-blockSize\`
+			* Image \`*-background-left\` ⇒
+				* sélecteur : \`.fancyBox-content-backgroundEndStart\`
+				* input Angular : \`backgroundEndStart\`
+			* Image \`*-background-right\` ⇒
+				* sélecteur : \`.fancyBox-content-backgroundStartEnd\`
+				* input Angular : \`backgroundStartEnd\`
+			* Image \`*-foreground\` ⇒
+				* sélecteur : \`.fancyBox-content-foregroundStartEnd\`
+				* input Angular : \`foregroundStartEnd\`
+		`,
+	},
+	{
 		// SEE https://regex101.com/r/7wE80G.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/be7004c7c16edd0cbb658c01e46781554bec1ae4/packages/scss/src/components/priorityLevels/mods.scss#L20.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/9ba2d000396a4c4f81d71309dd8eb9c71fc5a913.
 		objectPattern: /--components-priorityLevels-(font|gap|minBlockSize|icon-color[1-3])(?![\w-])/,
 		versionDeleted: '22.1.1',
 		actions: `Remplacer par \`--components-priorityLevel-*\`.`,
-	},
-	{
-		// SEE https://regex101.com/r/Nct1a0.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/commons/vars.scss#L19.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/commons/config.scss#L111.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/commons/config.scss#L179.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/66e12140f271c541e74db3ec79af116c72c69889.
-		objectPattern: [
-			/--breakpoints-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)-breakAt(?![\w-])/,
-			/--commons-box-shadow-(hard|xxs|xs|s|m|l|xl|xxl)(?![\w-])/,
-			/--spacings-(reset|smallest|smaller|small|standard|big|bigger|biggest)(?![\w-])/,
-		],
-		versionDeleted: '15.1.0',
-		actions: `
-			* \`--breakpoints-*-breakAt\` ⇒ point de rupture en majuscules (\`l\` ⇒ \`L\`)
-			* \`--commons-box-shadow-*\` ⇒ \`--commons-boxShadow-*\` en majuscules
-			* \`--spacings-*\` ⇒ échelle en majuscules :
-				* \`reset\` ⇒ \`0\`
-				* \`smallest\` ⇒ \`XXS\`
-				* \`smaller\` ⇒ \`XS\`
-				* \`small\` ⇒ \`S\`
-				* \`standard\` ⇒ \`M\`
-				* \`big\` ⇒ \`L\`
-				* \`bigger\` ⇒ \`XL\`
-				* \`biggest\` ⇒ \`XXL\`
-		`,
 	},
 ];
