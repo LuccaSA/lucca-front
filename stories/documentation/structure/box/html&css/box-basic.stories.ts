@@ -25,7 +25,7 @@ export default {
 
 function getTemplate(args: BoxBasicStory): string {
 	const theme = args.theme ? ` mod-${args.theme}` : '';
-	const description = args.description ? `\n\t\t<p class="box-header-description">Subtitle</p>` : '';
+	const description = args.description ? `\n\t\t<p class="box-header-subtitle">Subtitle</p>` : '';
 	const header = args.heading
 		? `\n\t<div class="box-header">
 		<div role="heading" aria-level="3" class="box-header-title">Title</div>${description}

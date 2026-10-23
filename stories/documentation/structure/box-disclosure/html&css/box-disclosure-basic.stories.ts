@@ -38,7 +38,7 @@ function getTemplate(args: BoxDisclosureBasicStory): string {
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
 			<span class="boxDisclosure-summary-title">Title</span>
-			<span class="boxDisclosure-summary-description">Subtitle</span>
+			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
 		</span>${metadata}
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>

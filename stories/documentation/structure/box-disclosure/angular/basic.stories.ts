@@ -24,7 +24,7 @@ export default {
 		},
 		metadata: {
 			type: 'string',
-			description: 'Information courte affichée avant le chevron, visible panneau replié. [PortalContent]',
+			description: 'Information courte affichée avant le chevron, visible panneau replié.',
 			table: { category: 'inputs' },
 		},
 		open: {

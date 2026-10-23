@@ -31,7 +31,7 @@ export class BoxDisclosureComponent {
 	/**
 	 * Short information displayed before the chevron, visible when the disclosure box is closed
 	 */
-	readonly metadata = input<PortalContent>();
+	readonly metadata = input<string>();
 
 	/**
 	 * Is the disclosure box open by default
