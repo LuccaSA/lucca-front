@@ -7,10 +7,16 @@
 }
 @if (heading(); as heading) {
 	<div class="box-header">
-		<div role="heading" class="box-header-title" [attr.aria-level]="hx()"><ng-container *luPortal="heading" /></div>
-		@if (subtitle(); as subtitle) {
-			<p class="box-header-subtitle"><ng-container *luPortal="subtitle" /></p>
+		@if (bubbleIcon(); as bubbleIcon) {
+			<lu-bubble-icon [icon]="bubbleIcon" />
 		}
+		<ng-content select="[boxHeaderStartSlot]" />
+		<div class="box-header-text">
+			<div role="heading" class="box-header-title" [attr.aria-level]="hx()"><ng-container *luPortal="heading" /></div>
+			@if (subtitle(); as subtitle) {
+				<p class="box-header-subtitle"><ng-container *luPortal="subtitle" /></p>
+			}
+		</div>
 	</div>
 }
 <div class="box-slot"><ng-content /></div>

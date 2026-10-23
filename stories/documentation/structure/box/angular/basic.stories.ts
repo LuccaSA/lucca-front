@@ -4,6 +4,7 @@ import { HIGHLIGHT_DATA_BUBBLE, HIGHLIGHT_DATA_ILLUSTRATION } from '@lucca-front
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { useArgs } from 'storybook/preview-api';
 import { HiddenArgType } from '@/helpers/common-arg-types';
+import { IconsList } from '@/stories/icons-list';
 import { cleanupTemplate, generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 
 export default {
@@ -48,6 +49,14 @@ export default {
 			if: { arg: 'heading', truthy: true },
 			type: 'string',
 			description: 'Sous-titre affiché sous le titre. [PortalContent]',
+			table: { category: 'inputs' },
+		},
+		bubbleIcon: {
+			name: '↳ bubbleIcon',
+			if: { arg: 'heading', truthy: true },
+			options: setStoryOptions(IconsList.filter((i) => !i.deprecated).map((i) => i.icon)),
+			control: { type: 'select' },
+			description: 'Icône décorative affichée dans une bulle avant le titre. Pour un autre contenu, projeter un élément portant l’attribut <code>boxHeaderStartSlot</code>.',
 			table: { category: 'inputs' },
 		},
 		hx: {

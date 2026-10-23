@@ -15,8 +15,10 @@
 				<div class="demo-QAtable-list">
 					<div class="box" style="inline-size: 100%">
 						<div class="box-header">
-							<div role="heading" aria-level="3" class="box-header-title">Title</div>
-							<p class="box-header-subtitle">Subtitle</p>
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
 						</div>
 						<div class="box-slot">Custom content</div>
 					</div>
@@ -29,13 +31,61 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Bubble icon</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="box" style="inline-size: 100%">
+						<div class="box-header">
+							<lu-bubble-icon icon="fileCopy" />
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
+						</div>
+						<div class="box-slot">Custom content</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-box heading="Title" subtitle="Subtitle" bubbleIcon="fileCopy" style="inline-size: 100%">Custom content</lu-box>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Header start slot</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="box" style="inline-size: 100%">
+						<div class="box-header">
+							<lu-bubble-icon icon="heart" palette="kiwi" />
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
+						</div>
+						<div class="box-slot">Custom content</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-box heading="Title" subtitle="Subtitle" style="inline-size: 100%"
+						><lu-bubble-icon boxHeaderStartSlot icon="heart" palette="kiwi" />Custom content</lu-box
+					>
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Theme neutral</td>
 			<td>
 				<div class="demo-QAtable-list mod-white">
 					<div class="box mod-neutral" style="inline-size: 100%">
 						<div class="box-header">
-							<div role="heading" aria-level="3" class="box-header-title">Title</div>
-							<p class="box-header-subtitle">Subtitle</p>
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
 						</div>
 						<div class="box-slot">Custom content</div>
 					</div>
@@ -53,8 +103,10 @@
 				<div class="demo-QAtable-list">
 					<div class="box mod-sunken" style="inline-size: 100%">
 						<div class="box-header">
-							<div role="heading" aria-level="3" class="box-header-title">Title</div>
-							<p class="box-header-subtitle">Subtitle</p>
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
 						</div>
 						<div class="box-slot">Custom content</div>
 					</div>
@@ -72,8 +124,10 @@
 				<div class="demo-QAtable-list">
 					<div class="box" style="inline-size: 100%">
 						<div class="box-header">
-							<div role="heading" aria-level="3" class="box-header-title">Title</div>
-							<p class="box-header-subtitle">Subtitle</p>
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
 						</div>
 						<div class="box-slot">Custom content</div>
 						<div class="box-illustrations">
@@ -105,8 +159,10 @@
 				<div class="demo-QAtable-list mod-white">
 					<div class="box mod-fancyLight" style="inline-size: 100%">
 						<div class="box-header">
-							<div role="heading" aria-level="3" class="box-header-title">Title</div>
-							<p class="box-header-subtitle">Subtitle</p>
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
 						</div>
 						<div class="box-slot">Custom content</div>
 						<div class="box-illustrations">
@@ -138,8 +194,10 @@
 				<div class="demo-QAtable-list">
 					<div class="box mod-fancyDark" style="inline-size: 100%">
 						<div class="box-header">
-							<div role="heading" aria-level="3" class="box-header-title">Title</div>
-							<p class="box-header-subtitle">Subtitle</p>
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
 						</div>
 						<div class="box-slot">Custom content</div>
 						<div class="box-illustrations">
@@ -171,8 +229,10 @@
 				<div class="demo-QAtable-list">
 					<div class="box mod-fancyDark" style="inline-size: 100%">
 						<div class="box-header">
-							<div role="heading" aria-level="3" class="box-header-title">Lorem ipsum dolor sit amet consectetur</div>
-							<p class="box-header-subtitle">Accusantium cumque nisi excepturi eius corporis</p>
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Lorem ipsum dolor sit amet consectetur</div>
+								<p class="box-header-subtitle">Accusantium cumque nisi excepturi eius corporis</p>
+							</div>
 						</div>
 						<div class="box-slot">Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll.</div>
 						<div class="box-illustrations">
@@ -225,8 +285,10 @@
 				<div class="demo-QAtable-list">
 					<div class="box mod-sunken mod-S" style="inline-size: 100%">
 						<div class="box-header">
-							<div role="heading" aria-level="3" class="box-header-title">Title</div>
-							<p class="box-header-subtitle">Subtitle</p>
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
 						</div>
 						<div class="box-slot">Custom content</div>
 					</div>
@@ -244,8 +306,10 @@
 				<div class="demo-QAtable-list">
 					<div class="box mod-fancyDark mod-S" style="inline-size: 100%">
 						<div class="box-header">
-							<div role="heading" aria-level="3" class="box-header-title">Title</div>
-							<p class="box-header-subtitle">Subtitle</p>
+							<div class="box-header-text">
+								<div role="heading" aria-level="3" class="box-header-title">Title</div>
+								<p class="box-header-subtitle">Subtitle</p>
+							</div>
 						</div>
 						<div class="box-slot">Custom content</div>
 						<div class="box-illustrations">

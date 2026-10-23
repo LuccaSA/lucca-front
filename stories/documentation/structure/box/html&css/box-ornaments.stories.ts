@@ -27,8 +27,10 @@ function getTemplate(args: BoxOrnamentsStory): string {
 
 	return `<div class="box${theme}">
 	<div class="box-header">
-		<div role="heading" aria-level="3" class="box-header-title">Title</div>
-		<p class="box-header-subtitle">Subtitle</p>
+		<div class="box-header-text">
+			<div role="heading" aria-level="3" class="box-header-title">Title</div>
+			<p class="box-header-subtitle">Subtitle</p>
+		</div>
 	</div>
 	<div class="box-slot">Custom content</div>
 	<div class="box-illustrations">

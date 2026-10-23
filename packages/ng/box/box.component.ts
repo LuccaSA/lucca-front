@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
+import { LuccaIcon } from '@lucca-front/icons';
+import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions, luBooleanAttribute, luNumberAttribute, luOptionalNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { HighlightDataBubble, HighlightDataIllustration } from '@lucca-front/ng/highlight-data';
@@ -13,7 +15,7 @@ import { BoxHx, BoxSize, BoxTheme } from './box.type';
 	styleUrl: './box.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, ButtonComponent, PortalDirective, LuSafeExternalSvgPipe],
+	imports: [IconComponent, ButtonComponent, BubbleIconComponent, PortalDirective, LuSafeExternalSvgPipe],
 	host: {
 		class: 'box',
 		'[class.mod-toggle]': 'toggle()',
@@ -48,6 +50,12 @@ export class BoxComponent {
 	 * Text displayed below the title
 	 */
 	readonly subtitle = input<PortalContent>();
+
+	/**
+	 * Decorative icon displayed in a bubble before the title.
+	 * Project an element with the `boxHeaderStartSlot` attribute to display custom content instead.
+	 */
+	readonly bubbleIcon = input<LuccaIcon>();
 
 	/**
 	 * Define the aria level of the title. Defaults to 3.
