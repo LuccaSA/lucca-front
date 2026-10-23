@@ -12,9 +12,11 @@
 		margin: var(--components-box-margin);
 	}
 
+	// Raw HTML boxes without slot keep their block layout
 	&:has(.box-slot) {
-		display: grid;
-		row-gap: var(--components-box-gap);
+		display: flex;
+		flex-direction: column;
+		gap: var(--components-box-gap);
 	}
 
 	@at-root ($atRoot) {
@@ -30,8 +32,6 @@
 		}
 
 		.box-slot {
-			grid-column: 1 / -1;
-
 			&:empty {
 				display: none;
 			}
