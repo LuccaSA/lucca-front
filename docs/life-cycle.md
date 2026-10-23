@@ -233,13 +233,16 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.label(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label</code></a>
-				(partout dans un sélecteur)
+			<td data-pattern="\.(menu|horizontalNavigation)(-[\w-]+)?\s(.*\s)?\.label(?![\w-])">
+				<p>Compteur dans un élément de navigation :</p>
+				<ul>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)(menu%7ChorizontalNavigation)(-%5B%5Cw-%5D%2B)%3F%5Cs(.*%5Cs)%3F%5C.label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.menu… .label</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)(menu%7ChorizontalNavigation)(-%5B%5Cw-%5D%2B)%3F%5Cs(.*%5Cs)%3F%5C.label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.horizontalNavigation… .label</code></a></li>
+				</ul>
 			</td>
 			<td>16.3.0</td>
 			<td>–</td>
-			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -1123,6 +1126,20 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label</code></a>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li><a href="https://prisme.lucca.io/94310e217/p/3960bc-chip">Chip</a></li>
+				<li><a href="https://prisme.lucca.io/94310e217/p/6036ad-tag">Tag</a></li>
+				<li><a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<ul>
 					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)main(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.main</code></a></li>
 					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)layout(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.layout</code></a></li>
@@ -1130,15 +1147,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filters(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filters</code></a></li>
 					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)notchBox(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.notchBox</code></a></li>
 				</ul>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.label-icon(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)label-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label-icon</code></a>
-				(partout dans un sélecteur)
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>

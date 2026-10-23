@@ -794,6 +794,16 @@ export default [
 		versionDeprecated: '22.1.0',
 		actions: `Le composant Highlight section (\`.highlightSection\` et \`<lu-highlight-section>\`) sera remplacé en 22.2 par une évolution du composant Box.`,
 	},
+	{
+		// Label used as a counter in a menu or horizontal navigation item, replaced by Numeric badge in 16.3.0.
+		// Kept before the Label component entry, which matches it too.
+		// SEE https://regex101.com/r/ag9QK4.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/2358bf0f58eb26a5a85dd7e8b90a0cc99e87bbd6/packages/scss/src/components/menu/component.scss#L25.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/2358bf0f58eb26a5a85dd7e8b90a0cc99e87bbd6.
+		objectPattern: /\.(menu|horizontalNavigation)(-[\w-]+)?\s(.*\s)?\.label(?![\w-])/,
+		versionDeprecated: '16.3.0',
+		actions: `Remplacer par [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge).`,
+	},
 
 	// Deprecated components, including their children (`.textfield-input`…)
 	// Keep them after the entries targeting their children, so those messages win.
@@ -862,6 +872,17 @@ export default [
 		`,
 	},
 	{
+		// SEE https://regex101.com/r/7rtb5G.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L258.
+		objectPattern: /\.label\b/,
+		versionDeprecated: '21.1.2',
+		actions: `
+			* [Chip](https://prisme.lucca.io/94310e217/p/3960bc-chip)
+			* [Tag](https://prisme.lucca.io/94310e217/p/6036ad-tag)
+			* [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge)
+		`,
+	},
+	{
 		// Listed in the deprecated components of highlight-prisme.scss, with no documented replacement
 		// SEE https://regex101.com/r/Sg9PR8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L262.
@@ -874,13 +895,8 @@ export default [
 	},
 
 	// Any occurrence of one of these selectors in any part of a selector.
-	// Kept after the specific entries (`.lu-select-value .label`…), which must win.
+	// Kept after the specific entries (`.button.mod-delete`…), which must win.
 	// SEE https://regex101.com/r/OTnSEg
-	{
-		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L258.
-		objectPattern: /\.label-icon(?![\w-])/,
-		versionDeprecated: '21.1.2',
-	},
 	{
 		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/button/index.scss#L90.
 		objectPattern: /\.mod-delete(?![\w-])/,
@@ -900,11 +916,6 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L132.
 		objectPattern: [/\.disabled(?![\w-])/, /\.error(?![\w-])/, /\.mod-link(?![\w-])/, /\.mod-outline(?![\w-])/, /\.success(?![\w-])/],
 		versionDeprecated: '17.3.0',
-	},
-	{
-		// SEE https://github.com/LuccaSA/lucca-front/blob/2358bf0f58eb26a5a85dd7e8b90a0cc99e87bbd6/packages/scss/src/components/menu/component.scss#L25.
-		objectPattern: /\.label(?![\w-])/,
-		versionDeprecated: '16.3.0',
 	},
 
 	// Catch-all, keep last
