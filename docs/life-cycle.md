@@ -1013,6 +1013,17 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
+					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)priorityLevels(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)priorityLevels-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels-icon</code></a></li>
+				</ul>
+			</td>
+			<td>–</td>
+			<td>22.1.1</td>
+			<td>Remplacer par <code>.priorityLevel</code> et <code>.priorityLevel-icon</code>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
 					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)checkboxesfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkboxesfield</code></a></li>
 				</ul>
 			</td>
@@ -1029,17 +1040,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>–</td>
 			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)priorityLevels(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)priorityLevels-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels-icon</code></a></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>Remplacer par <code>.priorityLevel</code> et <code>.priorityLevel-icon</code>.</td>
 		</tr>
 	</tbody>
 </table>
@@ -1847,7 +1847,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				</ul>
 			</td>
 			<td>–</td>
-			<td>–</td>
+			<td>22.1.1</td>
 			<td>Remplacer par <code>--components-priorityLevel-*</code>.</td>
 		</tr>
 	</tbody>

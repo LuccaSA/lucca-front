@@ -527,6 +527,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/be7004c7c16edd0cbb658c01e46781554bec1ae4/packages/scss/src/components/priorityLevels/mods.scss#L20.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/9ba2d000396a4c4f81d71309dd8eb9c71fc5a913.
 		objectPattern: /--components-priorityLevels-(font|gap|minBlockSize|icon-color[1-3])(?![\w-])/,
+		versionDeleted: '22.1.1',
 		actions: `Remplacer par \`--components-priorityLevel-*\`.`,
 	},
 ];
