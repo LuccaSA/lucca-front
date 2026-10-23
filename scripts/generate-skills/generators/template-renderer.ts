@@ -72,7 +72,7 @@ export function renderComponentMd(
 		// silently drop the link.
 		hasFigma: opts?.hasFigma ?? (data.figma != null),
 		// Section-level changelog content appended as the LAST `## Changelog` section — the
-		// aggregate writer relies on it being last to strip it before override comparison.
+		// review changelog relies on it being last to strip it before comparison.
 		// null/empty for CSS-only components with no API history and no ZH prose.
 		changelog: opts?.changelog?.trim() || null,
 		expandedTypeDefs: collectExpandedTypeDefs(data),
