@@ -27,7 +27,7 @@ Référence : [Cycle de vie des composants](https://prisme.lucca.io/94310e217/p
 
 ## Composants
 
-Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs) et les marqueurs `@deprecated` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)
+Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs), [LFDeprecatedScss.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedScss.mjs) et les marqueurs `@deprecated` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)
 
 <table>
 	<thead>
@@ -48,6 +48,12 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/425d98-status-badge">Status badge</a>.</td>
 		</tr>
 		<tr>
+			<td>Override composants Material, <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)%40lucca-front%5C%2Fng%5C%2Fmaterial%5C%2Fstyle(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>@lucca-front/ng/material/style</code></a></td>
+			<td>16.3.0</td>
+			<td>18.1.0</td>
+			<td>Retirer l’import : ces feuilles de style n’étaient plus actives, des composants LF les remplacent.</td>
+		</tr>
+		<tr>
 			<td>Action icon, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)actionIcon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.actionIcon</code></a></td>
 			<td>17.2.0</td>
 			<td>19.1.0</td>
@@ -56,6 +62,21 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<li>sans bordure : <code>.button.mod-onlyIcon.mod-ghost</code></li>
 				<li>avec bordure : <code>.button.mod-onlyIcon.mod-outlined</code></li>
 				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>Empty state, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)emptyState-(title%7Cdescription)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.emptyState-title</code></a></td>
+			<td>17.2.0</td>
+			<td>19.1.0</td>
+			<td>Remplacer par le nouveau composant <a href="https://prisme.lucca.io/94310e217/p/77bb47-empty-state">Empty state</a>.</td>
+		</tr>
+		<tr>
+			<td>Qualification picker, <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)lu-qualification-select(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>lu-qualification-select</code></a></td>
+			<td>17.3.2</td>
+			<td>20.1.0</td>
+			<td>
+				<p>Remplacer par les directives de <a href="https://prisme.lucca.io/94310e217/p/587833-select-simple/b/991e87">Simple</a> et <a href="https://prisme.lucca.io/94310e217/p/927519-select-multiple-new/b/39e067">Multiple Select</a>.</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -125,7 +146,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>16.2.2</td>
 			<td>18.1.0</td>
-			<td>–</td>
+			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/80fb2d-clear">Clear</a>. <a href="https://prisme.lucca.io/94310e217/p/55f101-text-field-deprecated/t/page-55f101-47914164-17">Voir l’exemple</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -133,7 +154,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>16.3.0</td>
 			<td>18.1.0</td>
-			<td>–</td>
+			<td>Inutile depuis le composant <a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a>. <a href="https://prisme.lucca.io/94310e217/p/098404-button/t/page-098404-82776006-50af19-6">Voir l’exemple</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -145,7 +166,13 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>16.3.0</td>
 			<td>18.1.0</td>
-			<td>–</td>
+			<td>
+				<ul>
+				<li><code>.button-counter</code> ⇒ <a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a></li>
+				<li><code>.navSide-item-alert</code> ⇒ <a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a> ou <a href="https://prisme.lucca.io/94310e217/p/36bcdf-new-badge">New badge</a></li>
+				<li><code>.lu-select-value .label</code> ⇒ <a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a> ou le sous-composant dédié de Select Multiple</li>
+				</ul>
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -153,7 +180,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>16.5.0</td>
 			<td>18.1.0</td>
-			<td>–</td>
+			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/64c8d8-callout">Callout popover</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -194,7 +221,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>16.2.0</td>
 			<td>19.1.0</td>
-			<td>–</td>
+			<td>Remplacer par les tokens <a href="https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449">elevations</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -202,7 +229,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>17.2.0</td>
 			<td>19.1.0</td>
-			<td>–</td>
+			<td>Remplacer par <code>.mod-withIcon</code>, pour éviter la confusion avec <code>.mod-onlyIcon</code>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -213,7 +240,12 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>17.4.0</td>
 			<td>19.1.0</td>
-			<td>–</td>
+			<td>
+				<ul>
+				<li><code>.u-comma</code> ⇒ virgules dans le HTML, pour l’accessibilité</li>
+				<li><code>.u-unit</code> ⇒ aucun remplacement, à reprendre côté produit si nécessaire</li>
+				</ul>
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -273,7 +305,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>18.2.0</td>
 			<td>20.1.0</td>
-			<td>–</td>
+			<td>Remplacer par le sous-composant tableSortable commun à <a href="https://prisme.lucca.io/94310e217/p/75b1ea-table/t/page-75b1ea-67463914-5">Table</a> et <a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table-new/t/page-24fc14-90701228-74b8e8-3">Index table</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -287,7 +319,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>18.2.0</td>
 			<td>20.1.0</td>
-			<td>–</td>
+			<td>Remplacer par le sous-composant tableSortable commun à <a href="https://prisme.lucca.io/94310e217/p/75b1ea-table/t/page-75b1ea-67463914-5">Table</a> et <a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table-new/t/page-24fc14-90701228-74b8e8-3">Index table</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -311,7 +343,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>18.3.0</td>
 			<td>20.1.0</td>
-			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
+			<td>
+				<p>Remplacer par <code>.comment-content-textContainerOptional</code>.</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -566,7 +601,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 			<td>16.1.0</td>
 			<td>19.1.0</td>
-			<td>–</td>
+			<td>Remplacer par les tokens <a href="https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449">elevations</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -574,7 +609,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 			<td>16.1.0</td>
 			<td>19.1.0</td>
-			<td>–</td>
+			<td>Remplacer par les tokens <a href="https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449">elevations</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -587,7 +622,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 			<td>17.3.0</td>
 			<td>19.1.0</td>
-			<td>–</td>
+			<td>Remplacer par les tokens <a href="https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449">elevations</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -930,6 +965,39 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>–</td>
 			<td>22.0.0</td>
 			<td>–</td>
+		</tr>
+	</tbody>
+</table>
+
+## Mixins
+
+Source : [LFDeprecatedScss.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedScss.mjs)
+
+<table>
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Depuis</th>
+			<th>Suppression</th>
+			<th>Action à réaliser</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userTileStyle(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>userTileStyle</code></a>
+			</td>
+			<td>18.2.0</td>
+			<td>20.1.0</td>
+			<td>Remplacer par <code>@forward &#39;@lucca-front/scss/src/components/userTile&#39;</code>.</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userPicture(Style%7CVars)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>userPicture(Style|Vars)</code></a>
+			</td>
+			<td>18.2.0</td>
+			<td>20.1.0</td>
+			<td>Remplacer par <code>@forward &#39;@lucca-front/scss/src/components/avatar&#39;</code>.</td>
 		</tr>
 	</tbody>
 </table>

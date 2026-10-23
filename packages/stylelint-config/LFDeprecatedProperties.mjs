@@ -43,6 +43,7 @@ export default [
 		objectPattern: /--commons-elevations-elevation-[1-6](?![\w-])/,
 		versionDeprecated: '16.1.0',
 		versionDeleted: '19.1.0',
+		actions: `Remplacer par les tokens [elevations](https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449).`,
 	},
 	{
 		// SEE https://regex101.com/r/g6tsSx.
@@ -51,6 +52,7 @@ export default [
 		objectPattern: /--commons-boxShadow-XXS(?![\w-])/,
 		versionDeprecated: '16.1.0',
 		versionDeleted: '19.1.0',
+		actions: `Remplacer par les tokens [elevations](https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449).`,
 	},
 	{
 		// SEE https://regex101.com/r/FvCjd5.
@@ -67,6 +69,7 @@ export default [
 		objectPattern: /--commons-boxShadow-(X?S|M|X*L)(?![\w-])/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '19.1.0',
+		actions: `Remplacer par les tokens [elevations](https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449).`,
 	},
 	{
 		// SEE https://regex101.com/r/BRi8Yi.

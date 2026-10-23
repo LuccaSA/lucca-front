@@ -1,6 +1,6 @@
 ---
 name: update-deprecated-doc
-description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from the LFDeprecatedSelectors.mjs / LFDeprecatedProperties.mjs source arrays (Composants, Classes, Variables CSS). Use whenever those sources change, or when asked to update / sync / rebuild / refresh the deprecation documentation.
+description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from the LFDeprecatedSelectors.mjs / LFDeprecatedProperties.mjs / LFDeprecatedScss.mjs source arrays (Composants, Classes, Variables CSS, Mixins). Use whenever those sources change, or when asked to update / sync / rebuild / refresh the deprecation documentation.
 ---
 
 # Update the deprecation doc
@@ -10,6 +10,9 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 * Sources:
 	* [LFDeprecatedSelectors.mjs](../../../packages/stylelint-config/LFDeprecatedSelectors.mjs) feeds *Composants* and *Classes*.
 	* [LFDeprecatedProperties.mjs](../../../packages/stylelint-config/LFDeprecatedProperties.mjs) feeds *Variables CSS*.
+	* [LFDeprecatedScss.mjs](../../../packages/stylelint-config/LFDeprecatedScss.mjs) feeds *Composants* and *Mixins*.
+		* It holds SCSS APIs: mixins and stylesheet imports.
+		* Stylelint does not read it: only the doc does.
 	* The Angular `@deprecated` markers of `packages/ng` feed *Composants*.
 * The doc replaces the Prisme page [Cycle de vie des composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f).
 * The code wins over Prisme whenever they disagree.
@@ -17,7 +20,8 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 ## Workflow
 
 1. Run `node .claude/skills/update-deprecated-doc/scripts/generate.mjs` from the repository root.
-	* It rewrites the three sections and keeps the header above them.
+	* It rewrites the sections and keeps the header above them.
+	* A section without rows is left out.
 	* It derives every cell from the sources: nothing in the doc is written by hand.
 2. Review the doc diff.
 	* A wrong cell gets fixed in its source: a label, an `actions` text or a pattern.
@@ -167,7 +171,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* *Suppression* breaks ties.
 	* Rows without any version come last.
 	* The deleted doc swaps the keys: *Suppression* first, *Depuis* breaking ties.
-* Entries whose deletion shipped go to `docs/life-cycle-deleted.md`, with the same three tables.
+* Entries whose deletion shipped go to `docs/life-cycle-deleted.md`, with the same tables.
 	* "Shipped" means at or below the latest stable tag reachable from `HEAD`.
 	* The `.mjs` files keep them: the linter still flags residual use.
 	* Prisme drops them: this divergence is by design.
@@ -186,7 +190,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	2. A `Source :` line.
 	3. An HTML `<table>`, never a Markdown table.
 * Source links are absolute GitHub blob URLs on `master`.
-	* *Composants* cites two sources: its `.mjs` and the `packages/ng` markers.
+	* *Composants* cites three sources: two `.mjs` files and the `packages/ng` markers.
 * All tables share one `<thead>`, kept from Prisme:
 	1. *Nom*: the component, or the `objectPattern`.
 	2. *Depuis*: `versionDeprecated`.
@@ -220,7 +224,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 ```html
 ## Composants
 
-Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs) et les marqueurs `@deprecated` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)
+Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs), [LFDeprecatedScss.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedScss.mjs) et les marqueurs `@deprecated` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)
 
 <table>
 	<thead>

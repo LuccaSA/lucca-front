@@ -82,6 +82,7 @@ export default [
 		objectPattern: /\.u-elevate.*/,
 		versionDeprecated: '16.2.0',
 		versionDeleted: '19.1.0',
+		actions: `Remplacer par les tokens [elevations](https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449).`,
 	},
 	{
 		// SEE https://regex101.com/r/yt2aCa.
@@ -90,6 +91,7 @@ export default [
 		objectPattern: /\.textfield-actionClear(?![\w-])/,
 		versionDeprecated: '16.2.2',
 		versionDeleted: '18.1.0',
+		actions: `Remplacer par le composant [Clear](https://prisme.lucca.io/94310e217/p/80fb2d-clear). [Voir l’exemple](https://prisme.lucca.io/94310e217/p/55f101-text-field-deprecated/t/page-55f101-47914164-17).`,
 	},
 	{
 		// Label used as a counter in a menu or horizontal navigation item, replaced by Numeric badge in 16.3.0.
@@ -112,6 +114,7 @@ export default [
 		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.mod-counter(?![\w-]))\S*/,
 		versionDeprecated: '16.3.0',
 		versionDeleted: '18.1.0',
+		actions: `Inutile depuis le composant [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge). [Voir l’exemple](https://prisme.lucca.io/94310e217/p/098404-button/t/page-098404-82776006-50af19-6).`,
 	},
 	{
 		// SEE https://regex101.com/r/AUlf21.
@@ -122,6 +125,11 @@ export default [
 		objectPattern: [/\.button-counter(?![\w-])/, /\.navSide-item-alert(?![\w-])/, /\.lu-select-value \.label(?![\w-])/],
 		versionDeprecated: '16.3.0',
 		versionDeleted: '18.1.0',
+		actions: `
+			* \`.button-counter\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge)
+			* \`.navSide-item-alert\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou [New badge](https://prisme.lucca.io/94310e217/p/36bcdf-new-badge)
+			* \`.lu-select-value .label\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou le sous-composant dédié de Select Multiple
+		`,
 	},
 	{
 		// Legacy form layout, including its children (`.form-group-line-col`…)
@@ -149,6 +157,7 @@ export default [
 		objectPattern: /(?=\S*\.callout(?![\w-]))(?=\S*\.mod-tiny(?![\w-]))\S*/,
 		versionDeprecated: '16.5.0',
 		versionDeleted: '18.1.0',
+		actions: `Remplacer par le composant [Callout popover](https://prisme.lucca.io/94310e217/p/64c8d8-callout).`,
 	},
 	{
 		// Any combination of .button and .mod-icon, with any non-whitespace character between
@@ -158,6 +167,7 @@ export default [
 		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.mod-icon(?![\w-]))\S*/,
 		versionDeprecated: '17.2.0',
 		versionDeleted: '19.1.0',
+		actions: `Remplacer par \`.mod-withIcon\`, pour éviter la confusion avec \`.mod-onlyIcon\`.`,
 	},
 	{
 		// Action icon component, merged into Button
@@ -172,6 +182,16 @@ export default [
 			* sans bordure : \`.button.mod-onlyIcon.mod-ghost\`
 			* avec bordure : \`.button.mod-onlyIcon.mod-outlined\`
 		`,
+	},
+	{
+		// SEE https://regex101.com/r/9yDStD.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1ca4668b25117075485ce1ad0c2beba9876b134e/packages/scss/src/components/emptyStateDeprecated/component.scss#L9.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/5da372590.
+		name: 'Empty state',
+		objectPattern: /\.emptyState-(title|description)(?![\w-])/,
+		versionDeprecated: '17.2.0',
+		versionDeleted: '19.1.0',
+		actions: `Remplacer par le nouveau composant [Empty state](https://prisme.lucca.io/94310e217/p/77bb47-empty-state).`,
 	},
 	{
 		// Any combination of .button and .loading, with any non-whitespace character between
@@ -256,6 +276,20 @@ export default [
 		},
 	},
 	{
+		// SEE https://regex101.com/r/LKOdgf.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/307429b94f4b3e5cb2809a4153201417a6115711/packages/ng/qualification/select/input/qualification-select-input.component.ts#L15.
+		// SEE https://github.com/LuccaSA/lucca-front/pull/2614.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
+		name: 'Qualification picker',
+		objectPattern: /(?<![\w.#-])lu-qualification-select(?![\w-])/,
+		versionDeprecated: '17.3.2',
+		versionDeleted: '20.1.0',
+		actions: `Remplacer par les directives de [Simple](https://prisme.lucca.io/94310e217/p/587833-select-simple/b/991e87) et [Multiple Select](https://prisme.lucca.io/94310e217/p/927519-select-multiple-new/b/39e067).`,
+		urls: {
+			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+		},
+	},
+	{
 		// SEE https://regex101.com/r/Ndh0bQ.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/d1f911b8d34cbba6945d16538b58eb558feda634/packages/scss/src/components/dialog/component.scss#L37.
 		objectPattern: /\.dialog-form(?![\w-])/,
@@ -293,6 +327,10 @@ export default [
 		objectPattern: [/\.u-comma(?![\w-])/, /\.u-unit(?![\w-])/],
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
+		actions: `
+			* \`.u-comma\` ⇒ virgules dans le HTML, pour l’accessibilité
+			* \`.u-unit\` ⇒ aucun remplacement, à reprendre côté produit si nécessaire
+		`,
 	},
 	{
 		// Old t-shirt sized utilities
@@ -402,6 +440,7 @@ export default [
 		objectPattern: [/\.(indexT|t)able-head-row-cell-sortableButton(-arrows-(ascending|descending))?(?![\w-])/],
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
+		actions: `Remplacer par le sous-composant tableSortable commun à [Table](https://prisme.lucca.io/94310e217/p/75b1ea-table/t/page-75b1ea-67463914-5) et [Index table](https://prisme.lucca.io/94310e217/p/24fc14-index-table-new/t/page-24fc14-90701228-74b8e8-3).`,
 	},
 	{
 		// Any combination of .table-head-row-cell or .indexTable-head-row-cell and a sort mod or state (.mod-sortable, .sortedAscending, .sortedDescending, .is-sorted-ascending, .is-sorted-descending), with any non-whitespace character between
@@ -412,6 +451,7 @@ export default [
 			/(?=\S*\.(indexT|t)able-head-row-cell(?![\w-]))(?=\S*\.(mod-sortable|sortedAscending|sortedDescending|is-sorted-(ascending|descending))(?![\w-]))\S*/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
+		actions: `Remplacer par le sous-composant tableSortable commun à [Table](https://prisme.lucca.io/94310e217/p/75b1ea-table/t/page-75b1ea-67463914-5) et [Index table](https://prisme.lucca.io/94310e217/p/24fc14-index-table-new/t/page-24fc14-90701228-74b8e8-3).`,
 	},
 	{
 		// Any combination of .userTile and .mod-nameOnly, with any non-whitespace character between
@@ -471,6 +511,7 @@ export default [
 		objectPattern: /\.comment-content-textContainer(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
+		actions: `Remplacer par \`.comment-content-textContainerOptional\`.`,
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
 		},
