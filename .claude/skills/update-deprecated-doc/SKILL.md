@@ -184,7 +184,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 
 ## Output format
 
-* A title, a reference link and one `<style>` block come before the first section.
+* A title, an intro note and one `<style>` block come before the first section.
 * Each section holds three parts:
 	1. A heading.
 	2. A `Source :` line.

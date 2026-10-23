@@ -1,7 +1,5 @@
 # Propriétés et sélecteurs supprimés
 
-Référence : [Cycle de vie des composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f) – section « Liste des éléments dépréciés ».
-
 > **Note :** Prisme ne liste plus ces éléments supprimés.
 > Le linter les signale toujours pour repérer l’usage résiduel.
 > Les éléments encore disponibles figurent dans [Propriétés et sélecteurs dépréciés](life-cycle.md).
