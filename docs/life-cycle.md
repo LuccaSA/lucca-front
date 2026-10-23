@@ -146,7 +146,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
+					<li><code>.fancyBox-content-box</code></li>
 					<li><code>.fancyBox-content-foreground</code></li>
+					<li><code>.fancyBox-content-box-foreground</code></li>
 				</ul>
 			</td>
 			<td>22.1.0</td>
@@ -746,9 +748,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.dialog-formOptionn?al(?![\w-])">
 				<ul>
 					<li><code>.dialog-formOptional</code></li>
+					<li><code>.dialog-formOptionnal</code></li>
 				</ul>
 			</td>
 			<td>18.3.0</td>
@@ -1019,6 +1022,17 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
+					<li><code>.calendarWrapper-navigation</code> <strong>+</strong> <code>.mod-prev</code></li>
+					<li><code>.calendarWrapper-navigation</code> <strong>+</strong> <code>.mod-next</code></li>
+				</ul>
+			</td>
+			<td>–</td>
+			<td>19.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
 					<li><code>.comment-content-textContainer</code></li>
 				</ul>
 			</td>
@@ -1055,7 +1069,11 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<ul>
 					<li><code>.indexTable-head-row-cell-sortableButton</code></li>
+					<li><code>.indexTable-head-row-cell-sortableButton-arrows-ascending</code></li>
+					<li><code>.indexTable-head-row-cell-sortableButton-arrows-descending</code></li>
 					<li><code>.table-head-row-cell-sortableButton</code></li>
+					<li><code>.table-head-row-cell-sortableButton-arrows-ascending</code></li>
+					<li><code>.table-head-row-cell-sortableButton-arrows-descending</code></li>
 				</ul>
 			</td>
 			<td>18.2.0</td>
@@ -1063,11 +1081,18 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="(?=\S*\.(indexT|t)able-head-row-cell(?![\w-]))(?=\S*\.(mod-sortable|sortedAscending|sortedDescending|is-sorted-(ascending|descending))(?![\w-]))\S*">
 				<ul>
+					<li><code>.indexTable-head-row-cell</code> <strong>+</strong> <code>.mod-sortable</code></li>
+					<li><code>.indexTable-head-row-cell</code> <strong>+</strong> <code>.sortedAscending</code></li>
+					<li><code>.indexTable-head-row-cell</code> <strong>+</strong> <code>.sortedDescending</code></li>
+					<li><code>.indexTable-head-row-cell</code> <strong>+</strong> <code>.is-sorted-ascending</code></li>
+					<li><code>.indexTable-head-row-cell</code> <strong>+</strong> <code>.is-sorted-descending</code></li>
 					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.mod-sortable</code></li>
 					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.sortedAscending</code></li>
 					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.sortedDescending</code></li>
+					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.is-sorted-ascending</code></li>
+					<li><code>.table-head-row-cell</code> <strong>+</strong> <code>.is-sorted-descending</code></li>
 				</ul>
 			</td>
 			<td>18.2.0</td>
@@ -1235,6 +1260,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<ul>
 					<li><code>.status</code></li>
+					<li><code>.status-dot</code></li>
+					<li><code>.status-label</code></li>
+					<li><code>.status-dot-important</code></li>
 				</ul>
 			</td>
 			<td>16.2.0</td>

@@ -58,7 +58,7 @@ export default [
 		// SEE https://regex101.com/r/ZFxNkG.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
-		objectPattern: /\.status(?![\w-])/,
+		objectPattern: /\.status(-dot(-important)?|-label)?(?![\w-])/,
 		versionDeprecated: '16.2.0',
 		versionDeleted: '18.1.0',
 		actions: `Remplacer par le composant [Status badge](https://prisme.lucca.io/94310e217/p/425d98-status-badge).`,
@@ -91,6 +91,14 @@ export default [
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
+	},
+	{
+		// Any combination of .calendarWrapper-navigation and .mod-prev or .mod-next, with any non-whitespace character between
+		// SEE https://regex101.com/r/oye8NK.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/0d474e96786a71f224b9e0d57397f8c50399a457/packages/scss/src/components/calendar/component.scss#L54.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/1ca565527cdf4bcf7abab16cddacded11a9eef65.
+		objectPattern: /(?=\S*\.calendarWrapper-navigation(?![\w-]))(?=\S*\.mod-(prev|next)(?![\w-]))\S*/,
+		versionDeleted: '19.1.0',
 	},
 	{
 		// Legacy form layout, including its children (`.form-group-line-col`…)
@@ -307,16 +315,17 @@ export default [
 		// SEE https://regex101.com/r/1EfDam
 		// SEE https://github.com/LuccaSA/lucca-front/blob/a69b1c834c8f73d80d105a936343910891c244b7/packages/scss/src/components/tableSortable/index.scss#L3.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
-		objectPattern: [/\.(indexT|t)able-head-row-cell-sortableButton(?![\w-])/],
+		objectPattern: [/\.(indexT|t)able-head-row-cell-sortableButton(-arrows-(ascending|descending))?(?![\w-])/],
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 	},
 	{
-		// Any combination of .table-head-row-cell and .mod-sortable, .sortedAscending or .sortedDescending, with any non-whitespace character between
+		// Any combination of .table-head-row-cell or .indexTable-head-row-cell and a sort mod or state (.mod-sortable, .sortedAscending, .sortedDescending, .is-sorted-ascending, .is-sorted-descending), with any non-whitespace character between
 		// SEE https://regex101.com/r/NFrjBF.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/a69b1c834c8f73d80d105a936343910891c244b7/packages/scss/src/components/tableSortable/index.scss#L55.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
-		objectPattern: /(?=\S*\.table-head-row-cell(?![\w-]))(?=\S*\.(mod-sortable|sortedAscending|sortedDescending)(?![\w-]))\S*/,
+		objectPattern:
+			/(?=\S*\.(indexT|t)able-head-row-cell(?![\w-]))(?=\S*\.(mod-sortable|sortedAscending|sortedDescending|is-sorted-(ascending|descending))(?![\w-]))\S*/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 	},
@@ -384,9 +393,11 @@ export default [
 		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
 	},
 	{
+		// The double-n spelling shipped until v18.1.5.
 		// SEE https://regex101.com/r/WOAbdM.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/13ef1a517c8a6016df65d8dc106c676d120b33cf/packages/scss/src/components/dialog/component.scss#L32.
-		objectPattern: /\.dialog-formOptional(?![\w-])/,
+		// SEE https://github.com/LuccaSA/lucca-front/commit/0b0e564717726988df6b5f3ea52a46cff841864d.
+		objectPattern: /\.dialog-formOptionn?al(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
 	},
@@ -742,10 +753,12 @@ export default [
 		`,
 	},
 	{
+		// The -box era (.fancyBox-content-box, .fancyBox-content-box-foreground) shipped until v20.4.1.
 		// SEE https://regex101.com/r/HRgrNj.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/db08f46234ab6e5717d83b3c72d36dedfd180a43/packages/scss/src/components/fancyBox/component.scss#L76.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/44cc1f8955d65494d6ccfbdd1cf6ff04379363d4/packages/ng/fancy-box/CHANGELOG.md#L19.
-		objectPattern: /\.fancyBox-content-foreground(?![\w-])/,
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c950a979482bda7cd43333f4cc31aadd37ed8e3a/packages/scss/src/components/fancyBox/component.scss#L23.
+		objectPattern: /\.fancyBox-content-(box(-foreground)?|foreground)(?![\w-])/,
 		versionDeprecated: '22.1.0',
 		actions: `
 			* HTML : composant \`lu-fancy-box\`, renommer la classe seule fait disparaître les illustrations
