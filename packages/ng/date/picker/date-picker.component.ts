@@ -12,7 +12,7 @@ import { LuCalendarInputComponent } from '../calendar';
 import { LuDateInputDirective } from '../input';
 
 /**
- * @deprecated since 18.3.0, replaced by DateInputComponent.
+ * @deprecated since 18.3.0; use DateInputComponent.
  * @see https://prisme.lucca.io/94310e217/p/10c73a-date-picker
  */
 @Component({

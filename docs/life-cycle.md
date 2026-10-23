@@ -112,7 +112,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				Dropdown
+				<a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>
 				<ul>
 				<li><a href="https://github.com/search?q=(%2F(%5E%7C%5B%5E%5Cw-%5D)lu-dropdown(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-dropdown-panel(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>lu-dropdown</code></a></li>
 				<li><a href="https://github.com/search?q=(%2F(%5E%7C%5B%5E%5Cw-%5D)lu-dropdown(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-dropdown-panel(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-panel</code></a></li>

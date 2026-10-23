@@ -21,7 +21,8 @@ import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 
 /* eslint-disable @angular-eslint/prefer-signals */
 /**
- * @deprecated prefer the new menu approach: https://prisme.lucca.io/94310e217/p/557682-dropdown
+ * @deprecated since 20.3.1; use DropdownMenuComponent.
+ * @see https://prisme.lucca.io/94310e217/p/557682-dropdown
  */
 @Component({
 	selector: 'lu-dropdown',

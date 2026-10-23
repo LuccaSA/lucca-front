@@ -7,7 +7,7 @@ import { ILuPopoverTarget, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarge
 import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './popover-trigger.model';
 
 /**
- * @deprecated since 21.0.0, replaced by PopoverDirective.
+ * @deprecated since 21.0.0; use PopoverDirective.
  * @see https://prisme.lucca.io/94310e217/p/7693f3-popover
  */
 @Directive({

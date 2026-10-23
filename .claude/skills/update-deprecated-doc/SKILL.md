@@ -78,8 +78,12 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* A single root sits inline after the name, behind a comma: `List, .list`.
 	* Every root links to one search of all the row's patterns.
 * A component without such a hook has no `.mjs` entry: its Angular marker feeds the row.
-	* The marker reads `@deprecated since X.Y.Z, replaced by Symbol` and ends with a period.
+	* The marker reads `@deprecated since X.Y.Z; use Symbol` and ends with a period.
+		* Two replacements read `use A or B`.
+		* Extra guidance follows on the next line, such as a directive to add.
 	* An `@see` line gives the Prisme page of the deprecated component: it names and links the row.
+		* A row whose `urls.prisme` matches that page takes the marker, whatever its name.
+		* A component without a Prisme page omits `@see`: the generator skips its marker.
 	* The action reads "Remplacer par" followed by the symbol as code.
 	* Classes sharing a page share the row, which takes the earliest version.
 * Version sources, in order:

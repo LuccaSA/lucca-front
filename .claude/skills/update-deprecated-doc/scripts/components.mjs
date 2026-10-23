@@ -23,22 +23,23 @@ export const components = (entries) => {
 			for (const k of ['versionDeprecated', 'versionDeleted', 'actions', 'prisme', 'schematics']) m[k] ??= e[k];
 		}
 	}
-	// Convention: `@deprecated since X.Y.Z, replaced by Symbol…` plus `@see <Prisme page of the deprecated component>`.
+	// Convention: `@deprecated since X.Y.Z; use Symbol…` plus `@see <Prisme page of the deprecated component>`.
 	// Classes sharing a page share the row, which takes the earliest version.
 	const ngFiles = readdirSync(ngDir, { recursive: true }).filter(
 		(f) => f.endsWith('.ts') && !/\.spec\.ts$|\.module\.ts$|\/schematics\//.test(`/${f}`),
 	);
 	for (const f of ngFiles) {
 		for (const [, doc] of readFileSync(`${ngDir}/${f}`, 'utf8').matchAll(/\/\*\*([\s\S]*?)\*\//g)) {
-			const dep = doc.match(/@deprecated since (\d+\.\d+\.\d+), replaced by (\w+)/);
+			const dep = doc.match(/@deprecated since (\d+\.\d+\.\d+); use (\w+)(?: or (\w+))?/);
 			const see = doc.match(/@see (https:\/\/prisme\.lucca\.io\/\S+)/);
 			if (!dep || !see) continue;
-			const name = slugName(see[1]);
+			// The `@see` URL finds the row first: a slug like "Select deprecated" differs from the row name.
+			const name = [...named.values()].find((x) => x.prisme === see[1])?.name ?? slugName(see[1]);
 			const e = named.get(name) ?? { name, groups: [], sources: [], actions: null, schematics: null };
 			named.set(name, e);
 			if (!e.sources.includes('ng')) e.sources.push('ng');
 			e.prisme ??= see[1];
-			e.actions ??= `Remplacer par \`${dep[2]}\`.`;
+			e.actions ??= `Remplacer par \`${dep[2]}\`${dep[3] ? ` ou \`${dep[3]}\`` : ''}.`;
 			if (!e.versionDeprecated || earlier(dep[1], e.versionDeprecated)) e.versionDeprecated = dep[1];
 		}
 	}
