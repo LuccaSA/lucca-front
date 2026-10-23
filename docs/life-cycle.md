@@ -662,7 +662,12 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>20.2.0</td>
 			<td>–</td>
-			<td>–</td>
+			<td>
+				<ul>
+				<li><code>.mod-delete</code> ⇒ <code>.mod-critical</code></li>
+				<li><code>.u-textLight</code> ⇒ <code>.pr-u-textLight</code></li>
+				</ul>
+			</td>
 		</tr>
 		<tr>
 			<td data-pattern="\.u-[a-zA-Z]">

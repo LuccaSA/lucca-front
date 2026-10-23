@@ -864,6 +864,10 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/button/index.scss#L90.
 		objectPattern: [/\.mod-delete(?![\w-])/, /\.u-textLight(?![\w-])/],
 		versionDeprecated: '20.2.0',
+		actions: `
+			* \`.mod-delete\` ⇒ \`.mod-critical\`
+			* \`.u-textLight\` ⇒ \`.pr-u-textLight\`
+		`,
 	},
 	{
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5f325acbb26f67993d110ccd13e08ae63e1f9ab4/packages/scss/src/components/breadcrumbs/index.scss#L13.
