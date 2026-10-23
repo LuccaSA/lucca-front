@@ -21,7 +21,8 @@ const mergeBase = git('merge-base', base, 'HEAD');
 
 const present = [...new Set([...lines(git('diff', '--name-only', '--diff-filter=d', mergeBase)), ...lines(git('ls-files', '--others', '--exclude-standard'))])];
 const specs = present.filter((p) => /^packages\/.+\.spec\.ts$/.test(p));
-const sources = present.filter((p) => /^packages\/.+\.ts$/.test(p) && !/\.spec\.ts$/.test(p));
+// Templates and styles count too: a rendering fix may change no TypeScript at all.
+const sources = present.filter((p) => /^packages\/.+\.(ts|html|scss)$/.test(p) && !/\.spec\.ts$/.test(p));
 
 console.log(`regression-check · ${specs.length} spec(s) vs ${base} (${mergeBase.slice(0, 9)})\n`);
 if (!specs.length || !sources.length) {
@@ -52,8 +53,8 @@ try {
 		else unevaluable.push(name);
 	}
 	// Only tests added or modified by the branch matter: an untouched test passing on both sides is expected.
-	const touched = touchedTestNames();
-	const keep = (name) => !touched || [...touched].some((t) => name.endsWith(t));
+	const touched = touchedTests();
+	const keep = (name) => touched.newSpec || touched.titles.some((title) => title.test(name));
 
 	if (withoutFix.loadErrors.length) {
 		console.log(`ℹ️  Could not load without the fix (not evaluable): ${withoutFix.loadErrors.join(', ')}`);
@@ -65,7 +66,10 @@ try {
 	if (suspicious.length) {
 		console.log(`⚠️  Passes without the fix too (does not cover the bug?): ${suspicious.map(short).join(' · ')}`);
 	}
-	if (!proven.length && !suspicious.length && !withoutFix.loadErrors.length) {
+	if (!proven.length && !suspicious.length && touched.outside && !withoutFix.loadErrors.length) {
+		// The changes could not be tied to a test (helper, setup, test component): no test proves the fix
+		console.log('⚠️  No test fails without the fix (spec changes outside any identified test)');
+	} else if (!proven.length && !suspicious.length && !withoutFix.loadErrors.length) {
 		console.log(`ℹ️  Not evaluable: ${unevaluable.length ? unevaluable.map(short).join(' · ') : 'no passing test with the fix'}`);
 	}
 } catch (error) {
@@ -83,7 +87,8 @@ try {
 async function vitest(cwd, label) {
 	const output = join(tmpdir(), `recette-vitest-${label}-${process.pid}.json`);
 	try {
-		await run('npx', ['vitest', 'run', '--project', 'lucca-front', '--reporter=json', `--outputFile=${output}`, ...specs], { cwd, maxBuffer: 64 * 1024 * 1024 });
+		// No --project: each spec runs in the project that owns it (schematics specs live in their own one)
+		await run('npx', ['vitest', 'run', '--reporter=json', `--outputFile=${output}`, ...specs], { cwd, maxBuffer: 64 * 1024 * 1024 });
 	} catch {
 		// Non-zero exit on failing tests: the JSON report is still written
 	}
@@ -99,17 +104,35 @@ async function vitest(cwd, label) {
 	return { tests, loadErrors };
 }
 
-// Titles of it()/test() blocks on lines added by the branch; null when the specs are new files (every test counts).
-function touchedTestNames() {
-	const names = new Set();
+// Tests enclosing each line changed by the branch (it/test, .each, .only…): { titles, outside, newSpec }.
+// `outside`: some changes sit outside any test (helper, setup, test component); `newSpec`: every test is new.
+function touchedTests() {
+	const declaration = /^\s*(?:it|test)(?:\.\w+)*(?:\.each\s*(?:\([^)]*\)|`[^`]*`))?\s*\(\s*(['"`])(.+?)\1/;
+	const titles = new Set();
+	let outside = false;
 	for (const spec of specs) {
-		if (!lines(git('ls-tree', '--name-only', mergeBase, '--', spec)).length) return null;
-		for (const l of lines(git('diff', '-U0', mergeBase, '--', spec))) {
-			const m = /^\+\s*(?:it|test)\(\s*['"`](.+?)['"`]/.exec(l);
-			if (m) names.add(m[1]);
+		if (!lines(git('ls-tree', '--name-only', mergeBase, '--', spec)).length) return { titles: [], outside: false, newSpec: true };
+		const fileLines = readFileSync(join(root, spec), 'utf8').split('\n');
+		const changedLines = lines(git('diff', '-U0', mergeBase, '--', spec))
+			.filter((l) => l.startsWith('@@'))
+			.flatMap((l) => {
+				const [, start, count = '1'] = /\+(\d+)(?:,(\d+))?/.exec(l);
+				// A pure deletion (count 0) still changes the test around its position
+				return Number(count) ? Array.from({ length: Number(count) }, (_, i) => Number(start) + i) : [Math.max(1, Number(start))];
+			});
+		for (const n of changedLines) {
+			// Blank lines and lone closing brackets belong to no test: they would be attributed to the test above
+			if (/^\s*[})\];,]*\s*$/.test(fileLines[n - 1] ?? '')) continue;
+			let i = n - 1;
+			// Leaving the enclosing block upwards (describe, hook or file top) means the change is outside any test
+			while (i >= 0 && !declaration.test(fileLines[i]) && !/^\s*(?:describe|beforeEach|afterEach|beforeAll|afterAll)\b|^\S/.test(fileLines[i])) i--;
+			if (i >= 0 && declaration.test(fileLines[i])) titles.add(declaration.exec(fileLines[i])[2]);
+			else outside = true;
 		}
 	}
-	return names;
+	// it.each titles hold placeholders (%s, %d, $name): match them loosely against the reported full names
+	const matchers = [...titles].map((t) => new RegExp(`${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/%[sdifjo#%]|\\\$\w+/g, '.*')}$`));
+	return { titles: matchers, outside, newSpec: false };
 }
 
 function short(fullName) {

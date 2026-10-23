@@ -39,15 +39,14 @@ MB=$(git merge-base <base> HEAD)
 FILES=$( (git diff --name-only --diff-filter=d $MB; git ls-files --others --exclude-standard) | sort -u)
 TS=$(echo "$FILES" | grep -E '^packages/.+\.(ts|mjs|js)$')
 SCSS=$(echo "$FILES" | grep -E '^packages/.+\.scss$')
-SRC=$(echo "$TS" | grep -vE '\.spec\.ts$')
 [ -n "$TS" ] && npx eslint --quiet ${=TS}
 [ -n "$SCSS" ] && npx stylelint ${=SCSS}
-[ -n "$SRC" ] && npx vitest related --run ${=SRC}
+[ -n "$TS" ] && npx vitest related --run ${=TS}
 ```
 
 (`${=VAR}` : découpage en mots sous zsh ; sous bash, `$VAR` suffit.)
 
-Sauter une commande dont la liste est vide. Pas de build, pas de `tsc` (la config `tsconfig.src.json` remonte des erreurs de `rootDir` sans rapport avec le diff) : la compilation est vérifiée par la CI.
+`vitest related` reçoit sources **et** specs : il lance les specs qui dépendent des sources modifiées, et les specs modifiés eux-mêmes — y compris quand le fix ne touche que du HTML ou du SCSS. Sauter une commande dont la liste est vide. Pas de build, pas de `tsc` (la config `tsconfig.src.json` remonte des erreurs de `rootDir` sans rapport avec le diff) : la compilation est vérifiée par la CI.
 
 ## 3. Points de vigilance et test manuel
 
@@ -99,13 +98,16 @@ Ne jamais cocher « Functional review » : elle appartient au relecteur.
 
 Prérequis : `gh` ≥ 2.99.0 (`gh pr comment --help | grep -q -- --attach`). En dessous, laisser les fichiers à l'utilisateur pour un glisser-déposer et le dire.
 
-1. **Attendre la preview** de la PR, en arrière-plan, sans bloquer l'utilisateur : le workflow `Deploy Lucca Front staging` doit être terminé **sur le dernier commit** (environ 3 à 4 minutes), sinon la capture montre un état antérieur.
+1. **Attendre la preview** de la PR, en arrière-plan, sans bloquer l'utilisateur : le job `Deploy Lucca Front staging` doit avoir **réussi sur le dernier commit** (environ 3 à 4 minutes). Le job `qa` du même workflow ne compte pas.
 
    ```bash
-   SHA=$(git rev-parse HEAD); for i in $(seq 40); do
-     R=$(gh run list --workflow deploy-staging.yml --commit $SHA --json status,conclusion --jq '.[0] | "\(.status) \(.conclusion)"')
-     [[ "$R" == completed* ]] && { echo "$R"; break; }; sleep 20; done
+   SHA=$(git rev-parse HEAD); STATE=timeout; for i in $(seq 40); do
+     RUN=$(gh run list --workflow deploy-staging.yml --commit $SHA --json databaseId --jq '.[0].databaseId')
+     [ -n "$RUN" ] && S=$(gh run view $RUN --json jobs --jq '.jobs[] | select(.name == "Deploy Lucca Front staging") | if .status == "completed" then .conclusion else .status end')
+     [[ "$S" == success || "$S" == failure || "$S" == cancelled || "$S" == skipped ]] && { STATE=$S; break; }; sleep 20; done; echo "deploy: $STATE"
    ```
+
+   **Ne capturer que sur `deploy: success`.** Sur un échec, une annulation ou `timeout` (environ 13 minutes), la preview peut encore montrer un commit précédent : ne rien publier, et le dire dans « Non vérifié ».
 
 2. **URLs** : l'après est la preview de la PR, `<domaine>/PR-<n>`, le domaine se lit dans le commentaire du bot (« Storybook preview deployed »). L'avant est `<domaine>/master` **seulement si la base est `master`** : `release/*` et `*-lts` ne sont pas déployés, dans ce cas capturer l'après seul et le dire dans « Non vérifié ».
 3. **Choisir une à trois stories** parmi celles des composants touchés (lignes `ℹ️` de `branch-context`) — la story de doc HTML&CSS qui montre la variante concernée d'abord, la story QA ensuite :
@@ -120,9 +122,9 @@ Prérequis : `gh` ≥ 2.99.0 (`gh pr comment --help | grep -q -- --attach`). En 
    node .claude/skills/recette-pr-fix/scripts/visual-proof.mjs --before <before> --after <after> --out <dossier> [--hover <sélecteur>] [--touch] <storyId>...
    ```
 
-   Même cadrage pour l'avant et l'après, recadré sur le contenu peint. `--hover` survole un élément avant la capture ; `--touch` émule un appareil tactile (`hover: none`). Un fix d'état (survol, focus, tactile) ne se voit pas sur une capture au repos : choisir les options qui reproduisent le cas corrigé, et ajouter le cas témoin qui doit rester identique (par exemple `--hover` sans `--touch`).
+   Même cadrage pour l'avant et l'après, recadré sur le contenu peint, overlays compris (tooltips, menus). `--hover` survole un élément avant la capture — il s'applique à toutes les stories de l'appel : un appel par sélecteur ; `--touch` émule un appareil tactile (`hover: none`). Un fix d'état (survol, focus, tactile) ne se voit pas sur une capture au repos : choisir les options qui reproduisent le cas corrigé, et ajouter le cas témoin qui doit rester identique (par exemple `--hover` sans `--touch`).
 
-5. **Regarder chaque image** avant d'écrire sa légende. Une paire marquée `⚠️ identical` n'est pas une preuve du changement : changer d'état ou de story, ou la garder seulement comme cas témoin (« inchangé à la souris »). `❌ not found` : la story n'existe pas dans cette preview.
+5. **Regarder chaque image** avant d'écrire sa légende. Une paire marquée `⚠️ identical` n'est pas une preuve du changement : changer d'état ou de story, ou la garder seulement comme cas témoin (« inchangé à la souris »). `❌ not found` : la story n'existe pas dans cette preview. `❌ hover … failed` : le sélecteur n'a pas pu être survolé, rien n'est capturé pour cette story — corriger le sélecteur plutôt que de publier un état au repos.
 6. **Publier** en commentaire de la PR, en anglais, après avoir montré le brouillon à l'utilisateur et obtenu son accord. Écrire `<dossier>/comment.md`, puis :
 
    ```bash

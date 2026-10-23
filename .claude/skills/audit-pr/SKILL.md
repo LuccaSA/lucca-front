@@ -28,10 +28,10 @@ Mode PR :
 
 ```bash
 gh pr view <url|numéro> --json number,title,body,author,state,isDraft,baseRefName,headRefName,labels,url,additions,deletions,changedFiles,reviews,comments
-gh pr diff <numéro>
+gh pr diff <url|numéro>
 ```
 
-`gh pr diff` n'accepte qu'un seul argument : pour filtrer, écrire le diff complet dans un fichier du scratchpad et l'y découper. Si le diff dépasse quelques centaines de lignes, cadrer d'abord avec `gh pr diff --name-only`, puis ne lire que les fichiers qui portent le comportement (pas les stories, snapshots, translations, lockfiles).
+`gh pr diff` n'accepte qu'un seul argument : pour filtrer, écrire le diff complet dans un fichier du scratchpad et l'y découper. Si le diff dépasse quelques centaines de lignes, cadrer d'abord avec `gh pr diff <url|numéro> --name-only` (toujours passer la même référence que pour `gh pr view` : sans elle, `gh` prend la PR de la branche courante, et un simple numéro est cherché dans le repo courant), puis ne lire que les fichiers qui portent le comportement (pas les stories, snapshots, translations, lockfiles).
 
 Signaux à ne pas manquer :
 

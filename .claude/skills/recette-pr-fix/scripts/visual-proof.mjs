@@ -46,12 +46,27 @@ try {
 		const sides = before ? { before, after } : { after };
 		const opened = await Promise.all(Object.entries(sides).map(async ([side, url]) => [side, await open(url, id)]));
 		const pages = Object.fromEntries(opened);
+		const result = { id, files: {} };
 		if (hover) {
-			await Promise.all(Object.values(pages).map((p) => p?.hover(hover).catch(() => {})));
+			// A hover that does not happen would silently capture the resting state: fail the story instead
+			const failures = (
+				await Promise.all(
+					Object.entries(pages).map(([side, p]) =>
+						p
+							?.hover(hover, { timeout: 5000 })
+							.then(() => null)
+							.catch(() => side),
+					),
+				)
+			).filter(Boolean);
+			if (failures.length) {
+				await Promise.all(Object.values(pages).map((p) => p?.close()));
+				results.push({ ...result, error: `hover "${hover}" failed (${failures.join(', ')})` });
+				continue;
+			}
 		}
 		const boxes = await Promise.all(Object.values(pages).map((p) => (p ? contentBox(p) : null)));
 		const clip = union(boxes.filter(Boolean));
-		const result = { id, files: {} };
 		for (const [side, page] of Object.entries(pages)) {
 			if (!page) {
 				result.files[side] = null;
@@ -70,11 +85,22 @@ try {
 }
 
 for (const r of results) {
+	if (r.error) {
+		console.log(`❌ ${r.error} ${r.id}`);
+		continue;
+	}
 	const files = Object.entries(r.files).map(([side, f]) => `${side}: ${f ? f.path : 'story not found'}`);
 	const status = !r.files.after ? '❌ not found' : r.identical ? '⚠️  identical' : '✅';
 	console.log(`${status} ${r.id}\n   ${files.join('\n   ')}`);
 }
-writeFileSync(join(out, 'captures.json'), JSON.stringify(results.map(({ id, identical, files }) => ({ id, identical, files: Object.fromEntries(Object.entries(files).map(([s, f]) => [s, f?.path ?? null])) })), null, '\t'));
+writeFileSync(
+	join(out, 'captures.json'),
+	JSON.stringify(
+		results.map(({ id, identical, error, files }) => ({ id, identical, error, files: Object.fromEntries(Object.entries(files).map(([s, f]) => [s, f?.path ?? null])) })),
+		null,
+		'\t',
+	),
+);
 
 // Opens a story in its iframe and waits for a stable render; null when the story does not exist in that preview.
 async function open(previewUrl, id) {
@@ -93,6 +119,7 @@ async function open(previewUrl, id) {
 }
 
 // Union of what is actually painted (text, leaf elements, backgrounds, borders, shadows) — not full-width wrappers.
+// Overlays (tooltips, dropdowns, dialogs) are rendered by the CDK outside #storybook-root: they are measured too.
 function contentBox(page) {
 	return page.evaluate(() => {
 		const r = { x1: Infinity, y1: Infinity, x2: -Infinity, y2: -Infinity };
@@ -103,22 +130,29 @@ function contentBox(page) {
 			r.x2 = Math.max(r.x2, b.right + scrollX);
 			r.y2 = Math.max(r.y2, b.bottom + scrollY);
 		};
-		const root = document.querySelector('#storybook-root');
-		const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
-		while (walker.nextNode()) {
-			const node = walker.currentNode;
-			if (node.nodeType === Node.TEXT_NODE) {
-				if (!node.textContent.trim()) continue;
-				const range = document.createRange();
-				range.selectNodeContents(node);
-				for (const b of range.getClientRects()) add(b);
-				continue;
+		for (const root of document.querySelectorAll('#storybook-root, .cdk-overlay-container')) {
+			const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+			while (walker.nextNode()) {
+				const node = walker.currentNode;
+				if (node.nodeType === Node.TEXT_NODE) {
+					if (!node.textContent.trim()) continue;
+					const range = document.createRange();
+					range.selectNodeContents(node);
+					for (const b of range.getClientRects()) add(b);
+					continue;
+				}
+				// The backdrop covers the whole viewport: measuring it would undo the crop
+				if (node.classList.contains('cdk-overlay-backdrop')) continue;
+				const s = getComputedStyle(node);
+				if (s.display === 'none' || s.visibility === 'hidden') continue;
+				const border = ['Top', 'Right', 'Bottom', 'Left'].some((side) => parseFloat(s[`border${side}Width`]) > 0 && s[`border${side}Style`] !== 'none');
+				// Text is measured through its text nodes; an empty leaf (live region, positioning box) paints nothing.
+				// Icons draw through ::before/::after content, media and form controls through their own box.
+				const pseudo = ['::before', '::after'].some((p) => !['none', 'normal'].includes(getComputedStyle(node, p).content));
+				const replaced = /^(IMG|SVG|svg|VIDEO|CANVAS|INPUT|TEXTAREA|SELECT|BUTTON)$/.test(node.tagName);
+				const painted = pseudo || replaced || border || s.backgroundColor !== 'rgba(0, 0, 0, 0)' || s.backgroundImage !== 'none' || s.boxShadow !== 'none';
+				if (painted) add(node.getBoundingClientRect());
 			}
-			const s = getComputedStyle(node);
-			if (s.display === 'none' || s.visibility === 'hidden') continue;
-			const border = ['Top', 'Right', 'Bottom', 'Left'].some((side) => parseFloat(s[`border${side}Width`]) > 0 && s[`border${side}Style`] !== 'none');
-			const painted = !node.children.length || border || s.backgroundColor !== 'rgba(0, 0, 0, 0)' || s.backgroundImage !== 'none' || s.boxShadow !== 'none';
-			if (painted) add(node.getBoundingClientRect());
 		}
 		return Number.isFinite(r.x1) ? r : null;
 	});
