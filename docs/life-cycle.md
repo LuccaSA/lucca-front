@@ -34,10 +34,13 @@ Source : [Cycle de vie des composants > Composants](https://prisme.lucca.io/943
 	</thead>
 	<tbody>
 		<tr>
-			<td><code>&lt;lu-dropdown&gt;</code></td>
-			<td>20.3.0</td>
+			<td><a href="https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated">Select</a> et variations (<a href="https://prisme.lucca.io/94310e217/p/699694-api-select">API</a>, <a href="https://prisme.lucca.io/94310e217/p/70d7eb-establishment">Establishment</a>, <a href="https://prisme.lucca.io/94310e217/p/479237-department-select-">Department</a>, <a href="https://prisme.lucca.io/94310e217/p/691517-select">User</a>, <a href="https://prisme.lucca.io/94310e217/p/69f87f-qualification">Qualification</a>, etc.)</td>
+			<td>17.3.0</td>
 			<td>–</td>
-			<td>À remplacer par un template, comme présenté sur l'exemple de la page <a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>.</td>
+			<td>
+				<p>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/587833-select-simple">Simple</a> &amp; <a href="https://prisme.lucca.io/94310e217/p/927519-select-multiple-new">Multiple Select</a> et leurs directives.</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
 		</tr>
 		<tr>
 			<td>Deprecated <a href="https://prisme.lucca.io/94310e217/p/334d4a-filter-bar">Filter bar</a></td>
@@ -46,13 +49,10 @@ Source : [Cycle de vie des composants > Composants](https://prisme.lucca.io/943
 			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/053be4-filter-pill">Filter Pills</a> &amp; <a href="https://prisme.lucca.io/94310e217/p/13044b-filter-bar-">Filter Bar</a>.</td>
 		</tr>
 		<tr>
-			<td><a href="https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated">Select</a> et variations (<a href="https://prisme.lucca.io/94310e217/p/699694-api-select">API</a>, <a href="https://prisme.lucca.io/94310e217/p/70d7eb-establishment">Establishment</a>, <a href="https://prisme.lucca.io/94310e217/p/479237-department-select-">Department</a>, <a href="https://prisme.lucca.io/94310e217/p/691517-select">User</a>, <a href="https://prisme.lucca.io/94310e217/p/69f87f-qualification">Qualification</a>, etc.)</td>
-			<td>17.3.0</td>
+			<td><code>&lt;lu-dropdown&gt;</code></td>
+			<td>20.3.0</td>
 			<td>–</td>
-			<td>
-				<p>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/587833-select-simple">Simple</a> &amp; <a href="https://prisme.lucca.io/94310e217/p/927519-select-multiple-new">Multiple Select</a> et leurs directives.</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
+			<td>À remplacer par un template, comme présenté sur l'exemple de la page <a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>.</td>
 		</tr>
 		<tr>
 			<td><a href="https://prisme.lucca.io/94310e217/p/66df2f-list">List</a></td>
@@ -146,306 +146,337 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.fancyBox-content-box</code></li>
-					<li><code>.fancyBox-content-foreground</code></li>
-					<li><code>.fancyBox-content-box-foreground</code></li>
+					<li><code>.list</code></li>
 				</ul>
 			</td>
-			<td>22.1.0</td>
+			<td>16.2.2</td>
 			<td>–</td>
-			<td>
-				<ul>
-				<li>HTML : composant <code>lu-fancy-box</code>, renommer la classe seule fait disparaître les illustrations</li>
-				<li>input Angular : <code>foregroundStartEnd</code> à la place de <code>foreground</code></li>
-				</ul>
-			</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/883e34-sortable-list">Sortable list</a>.</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.label(?![\w-])">
 				<ul>
-					<li><code>.highlightSection</code></li>
-				</ul>
-			</td>
-			<td>22.1.0</td>
-			<td>–</td>
-			<td>Le composant Highlight section (<code>.highlightSection</code> et <code>&lt;lu-highlight-section&gt;</code>) sera remplacé en 22.2 par une évolution du composant Box.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.dataTable</code> <strong>+</strong> <code>.mod-hover</code></li>
-				</ul>
-			</td>
-			<td>22.0.6</td>
-			<td>–</td>
-			<td>Retirer la classe <code>.mod-hover</code> et l’input Angular <code>hover</code>, sans remplacement : une ligne sans action ne doit pas avoir d’effet de survol.</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0(?![\w-])">
-				<ul>
-					<li><code>.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>22.0.0</td>
-			<td>
-				<p>Passer en camelCase :</p>
-				<ul>
-				<li><code>*-start0</code> ⇒ <code>*Start0</code></li>
-				<li><code>*-end0</code> ⇒ <code>*End0</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.mod-neutralBackground</code></li>
-				</ul>
-			</td>
-			<td>22.0.0</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li>sélecteur : <code>.dialog.mod-surfaceDefault</code></li>
-				<li>option de <code>LuDialogService.open()</code> : <code>surfaceDefault: true</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.pr-u-textOrchid(?![\w-])">
-				<ul>
-					<li><code>.pr-u-textOrchid</code></li>
-				</ul>
-				(utilitaires renommés peu ou pas utilisés)
-			</td>
-			<td>21.3.0</td>
-			<td>–</td>
-			<td>
-				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.palette-AI</code></li>
-					<li><code>.pr-u-colorTextAI</code></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>21.3.0</td>
-			<td>
-				<ul>
-				<li><code>*-AI</code> ⇒ <code>*-orchid</code></li>
-				<li><code>*TextAI</code> ⇒ <code>*TextOrchid</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.pr-u-textPineappleContrasted(?![\w-])">
-				<ul>
-					<li><code>.pr-u-textPineappleContrasted</code></li>
-				</ul>
-				(utilitaires renommés peu ou pas utilisés)
-			</td>
-			<td>21.2.4</td>
-			<td>–</td>
-			<td>
-				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.checkbox</code></li>
-				</ul>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/42c88e-checkbox">Checkbox</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.radio</code></li>
-					<li><code>.radioButtons</code></li>
-				</ul>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.switch</code></li>
-				</ul>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/39c7b7-switch">Switch</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.textfield</code></li>
-				</ul>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/459eda-textfield">Textfield</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.file</code></li>
-				</ul>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/8282a5-file-upload">File upload</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.table</code></li>
-				</ul>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li><a href="https://prisme.lucca.io/94310e217/p/4263a5-data-table">Data table</a></li>
-				<li><a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table">Index table</a></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.main</code></li>
-					<li><code>.layout</code></li>
-					<li><code>.header</code></li>
-					<li><code>.filters</code></li>
-					<li><code>.notchBox</code></li>
-				</ul>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.label-icon(?![\w-])">
-				<ul>
-					<li><code>.label-icon</code></li>
+					<li><code>.label</code></li>
 				</ul>
 				(partout dans un sélecteur)
 			</td>
-			<td>21.1.2</td>
+			<td>16.3.0</td>
 			<td>–</td>
 			<td>–</td>
 		</tr>
 		<tr>
 			<td>
 				<ul>
-					<li><code>.container</code> <strong>+</strong> <code>.mod-S</code></li>
+					<li><code>.form-group</code></li>
 				</ul>
 			</td>
-			<td>21.1.0</td>
+			<td>16.4.0</td>
 			<td>–</td>
-			<td>Retirer la classe <code>.mod-S</code>, sans remplacement.</td>
+			<td>
+				<ul>
+				<li>sélecteur : <code>.form-field</code></li>
+				<li>composants Angular : <code>lu-text-input</code>, <code>lu-checkbox-input</code>…</li>
+				</ul>
+			</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.pr-u-textPrimary(?![\w-])">
+			<td>
 				<ul>
-					<li><code>.pr-u-textPrimary</code></li>
-					<li><code>.pr-u-textSecondary</code></li>
-					<li><code>.pr-u-textGrey</code></li>
-					<li><code>.pr-u-textLucca</code></li>
+					<li><code>.button-icon</code></li>
 				</ul>
-				(utilitaires renommés très utilisés)
 			</td>
-			<td>21.0.0</td>
+			<td>16.5.0</td>
+			<td>–</td>
+			<td>Retirer la classe : <code>.button</code> applique déjà la taille d’icône.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.button</code> <strong>+</strong> <code>.loading</code></li>
+				</ul>
+			</td>
+			<td>17.3.0</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li>sélecteur : <code>.is-loading</code></li>
+				<li>input Angular : <code>state=&quot;loading&quot;</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.disabled(?![\w-])">
+				<ul>
+					<li><code>.disabled</code></li>
+					<li><code>.error</code></li>
+					<li><code>.mod-link</code></li>
+					<li><code>.mod-outline</code></li>
+					<li><code>.success</code></li>
+				</ul>
+				(partout dans un sélecteur)
+			</td>
+			<td>17.3.0</td>
+			<td>–</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.palette-grey</code></li>
+					<li><code>.palette-primary</code></li>
+					<li><code>.palette-secondary</code></li>
+					<li><code>.palette-lucca</code></li>
+				</ul>
+			</td>
+			<td>17.3.0</td>
 			<td>22.0.0</td>
 			<td>
-				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<ul>
-					<li><code>.pr-u-colorTextGrey</code></li>
-					<li><code>.pr-u-colorTextLucca</code></li>
-					<li><code>.pr-u-colorTextPrimary</code></li>
-					<li><code>.pr-u-colorTextSecondary</code></li>
-				</ul>
-			</td>
-			<td>21.0.0</td>
-			<td>22.0.0</td>
-			<td>
-				<ul>
-				<li><code>*Grey</code> ⇒<ul>
-				<li>neutre : <code>*Neutral</code></li>
-				<li>défaut : <code>*</code></li>
-				</ul>
-				</li>
-				<li><code>*Primary</code> &amp; <code>*Secondary</code> ⇒ <code>*Product</code></li>
-				<li><code>*Lucca</code> ⇒ <code>*Brand</code></li>
+				<li><code>*-grey</code> ⇒ <code>*-neutral</code></li>
+				<li><code>*-primary</code> &amp; <code>*-secondary</code> ⇒ <code>*-product</code></li>
+				<li><code>*-lucca</code> ⇒ <code>*-brand</code></li>
 				</ul>
 				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.pr-u-textAI(?![\w-])">
+			<td data-pattern="(?=\S*\.(box|card|section)(?![\w-]))(?=\S*\.mod-grey(?![\w-]))\S*">
+				<p>Toute combinaison de <code>.box</code>, <code>.card</code> ou <code>.section</code> avec <code>.mod-grey</code></p>
 				<ul>
-					<li><code>.pr-u-textAI</code></li>
+					<li><code>.box</code> <strong>+</strong> <code>.mod-grey</code></li>
+					<li><code>.card</code> <strong>+</strong> <code>.mod-grey</code></li>
+					<li><code>.section</code> <strong>+</strong> <code>.mod-grey</code></li>
+					<li><code>.icon-color-primary</code></li>
+					<li><code>.icon-color-secondary</code></li>
 				</ul>
-				(utilitaires renommés peu ou pas utilisés)
 			</td>
-			<td>21.0.0</td>
-			<td>21.3.0</td>
+			<td>17.3.0</td>
+			<td>22.0.0</td>
 			<td>
-				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+				<ul>
+				<li><code>*-grey</code> ⇒ <code>*-neutral</code></li>
+				<li><code>*-primary</code> &amp; <code>*-secondary</code> ⇒ <code>*-product</code></li>
+				</ul>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.pr-u-textProduct(?![\w-])">
+			<td>
 				<ul>
-					<li><code>.pr-u-textProduct</code></li>
-					<li><code>.pr-u-textBrand</code></li>
-					<li><code>.pr-u-textCritical</code></li>
-					<li><code>.pr-u-textDefault</code></li>
-					<li><code>.pr-u-textError</code></li>
-					<li><code>.pr-u-textLight</code></li>
-					<li><code>.pr-u-textNeutral</code></li>
-					<li><code>.pr-u-textPlaceholder</code></li>
-					<li><code>.pr-u-textSuccess</code></li>
-					<li><code>.pr-u-textWarning</code></li>
+					<li><code>.dialog-form</code></li>
 				</ul>
-				(utilitaires renommés très utilisés)
 			</td>
-			<td>21.0.0</td>
+			<td>17.3.5</td>
+			<td>–</td>
+			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.u-textLeft</code></li>
+					<li><code>.u-textCenter</code></li>
+					<li><code>.u-textRight</code></li>
+				</ul>
+			</td>
+			<td>17.4.0</td>
 			<td>–</td>
 			<td>
-				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+				<p>Doublon :</p>
+				<ul>
+				<li><code>.u-text*</code> ⇒ <code>.pr-u-textAlign*</code></li>
+				<li><code>*Left</code> ⇒ <code>*Start</code></li>
+				<li><code>*Right</code> ⇒ <code>*End</code></li>
+				</ul>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.pr-u-textSuccessContrasted(?![\w-])">
+			<td data-pattern="\.active(?![\w-])">
 				<ul>
-					<li><code>.pr-u-text(Cc|Kiwi|Lime|Mint|…)</code></li>
+					<li><code>.active</code></li>
 				</ul>
-				(utilitaires renommés peu ou pas utilisés)
+				(partout dans un sélecteur)
 			</td>
-			<td>21.0.0</td>
+			<td>17.4.0</td>
+			<td>–</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.loading</code> <strong>+</strong> <code>.mod-dialog</code></li>
+					<li><code>.loading</code> <strong>+</strong> <code>.mod-sidePanel</code></li>
+				</ul>
+			</td>
+			<td>18.1.0</td>
 			<td>–</td>
 			<td>
-				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+				<ul>
+				<li><code>*dialog</code> ⇒ <code>*popin</code></li>
+				<li><code>*sidePanel</code> ⇒ <code>*drawer</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="(?=\S*\.userTile(?![\w-]))(?=\S*\.mod-X{1,3}L(?![\w-]))\S*">
+				<ul>
+					<li><code>.userTile</code> <strong>+</strong> <code>.mod-XL</code></li>
+					<li><code>.userTile</code> <strong>+</strong> <code>.mod-XXL</code></li>
+					<li><code>.userTile</code> <strong>+</strong> <code>.mod-XXXL</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>–</td>
+			<td>Remplacer par <code>.mod-L</code>, la plus grande taille de <a href="https://prisme.lucca.io/94310e217/p/56d611-user-tile">User tile</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.lu-user-picture</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>–</td>
+			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/42b330-avatar">Avatar</a> et sa classe <code>.avatar</code>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.indexTable-body-row-cell-action</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>–</td>
+			<td>Remplacer par <code>.indexTable-body-row-cell-link</code>, un véritable lien vers la ligne.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.viewTabs</code></li>
+					<li><code>.viewTabs-item</code></li>
+					<li><code>.viewTabs_panel</code></li>
+					<li><code>.viewTabs-item-tab</code></li>
+				</ul>
+			</td>
+			<td>18.2.1</td>
+			<td>–</td>
+			<td>
+				<p>Segmented control :</p>
+				<ul>
+				<li><code>*viewTabs*</code> ⇒ <code>*segmentedControl*</code></li>
+				<li><code>*-item-tab</code> ⇒ <code>*-item-action</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.mod-withMenuCompact</code></li>
+				</ul>
+			</td>
+			<td>18.3.0</td>
+			<td>–</td>
+			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.dialog-formOptionn?al(?![\w-])">
+				<ul>
+					<li><code>.dialog-formOptional</code></li>
+					<li><code>.dialog-formOptionnal</code></li>
+				</ul>
+			</td>
+			<td>18.3.0</td>
+			<td>–</td>
+			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.lu-dropdown-content</code></li>
+					<li><code>.lu-dropdown-options</code></li>
+					<li><code>.lu-dropdown-options-item</code></li>
+					<li><code>.lu-dropdown-options-item-action</code></li>
+				</ul>
+			</td>
+			<td>19.2.0</td>
+			<td>–</td>
+			<td>Remplacer par le nouveau DOM du composant <a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.filterBarDeprecated</code></li>
+				</ul>
+			</td>
+			<td>19.2.0</td>
+			<td>–</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-(margin|padding)(Top|Right|Bottom|Left)(\d+|Auto)(?![\w-])">
+				<p>Espacements : <code>Top</code> : <code>BlockStart</code>, <code>Right</code> : <code>InlineEnd</code>, <code>Bottom</code> : <code>BlockEnd</code>, <code>Left</code> : <code>InlineStart</code></p>
+				<ul>
+					<li><code>.pr-u-margin(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></li>
+					<li><code>.pr-u-padding(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></li>
+					<li><code>.pr-u-border(Top|Right|Bottom|Left)0</code></li>
+				</ul>
+			</td>
+			<td>19.2.0</td>
+			<td>–</td>
+			<td>
+				<p>Utilitaires logiques :</p>
+				<ul>
+				<li><code>*Top*</code> ⇒ <code>*BlockStart*</code></li>
+				<li><code>*Bottom*</code> ⇒ <code>*BlockEnd*</code></li>
+				<li><code>*Left*</code> ⇒ <code>*InlineStart*</code></li>
+				<li><code>*Right*</code> ⇒ <code>*InlineEnd*</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.menu</code></li>
+				</ul>
+			</td>
+			<td>19.3.0</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation">Horizontal navigation</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.mod-withMenu</code></li>
+				</ul>
+			</td>
+			<td>19.3.0</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li>remplacement : <code>*withHorizontalNavigation</code></li>
+				<li>suppression : <code>.pageHeader</code> détecte automatiquement <code>.horizontalNavigation</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.u-text(X?S|M|X{0,3}L)(?![\w-])">
+				<ul>
+					<li><code>.u-text(XS|S|M|L|…)</code></li>
+				</ul>
+				(utilitaires de taille)
+			</td>
+			<td>20.1.0</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li>XS, S &amp; M : <code>.u-text*</code> ⇒ <code>.pr-u-body*</code></li>
+				<li>L ~ XXXL ⇒<ul>
+				<li>utilitaire de titre : <code>.pr-u-hx</code></li>
+				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
+				</ul>
+				</li>
+				</ul>
+				<p><a href="https://www.notion.so/luccasoftware/Tokens-Typo-1ebd278ab26e808a9b58d1017514ecb9">Plus d’informations sur le sujet</a>.</p>
 			</td>
 		</tr>
 		<tr>
@@ -648,340 +679,309 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.u-text(X?S|M|X{0,3}L)(?![\w-])">
+			<td data-pattern="\.pr-u-textProduct(?![\w-])">
 				<ul>
-					<li><code>.u-text(XS|S|M|L|…)</code></li>
+					<li><code>.pr-u-textProduct</code></li>
+					<li><code>.pr-u-textBrand</code></li>
+					<li><code>.pr-u-textCritical</code></li>
+					<li><code>.pr-u-textDefault</code></li>
+					<li><code>.pr-u-textError</code></li>
+					<li><code>.pr-u-textLight</code></li>
+					<li><code>.pr-u-textNeutral</code></li>
+					<li><code>.pr-u-textPlaceholder</code></li>
+					<li><code>.pr-u-textSuccess</code></li>
+					<li><code>.pr-u-textWarning</code></li>
 				</ul>
-				(utilitaires de taille)
+				(utilitaires renommés très utilisés)
 			</td>
-			<td>20.1.0</td>
+			<td>21.0.0</td>
 			<td>–</td>
 			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-textSuccessContrasted(?![\w-])">
 				<ul>
-				<li>XS, S &amp; M : <code>.u-text*</code> ⇒ <code>.pr-u-body*</code></li>
-				<li>L ~ XXXL ⇒<ul>
-				<li>utilitaire de titre : <code>.pr-u-hx</code></li>
-				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
+					<li><code>.pr-u-text(Cc|Kiwi|Lime|Mint|…)</code></li>
+				</ul>
+				(utilitaires renommés peu ou pas utilisés)
+			</td>
+			<td>21.0.0</td>
+			<td>–</td>
+			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-textAI(?![\w-])">
+				<ul>
+					<li><code>.pr-u-textAI</code></li>
+				</ul>
+				(utilitaires renommés peu ou pas utilisés)
+			</td>
+			<td>21.0.0</td>
+			<td>21.3.0</td>
+			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-textPrimary(?![\w-])">
+				<ul>
+					<li><code>.pr-u-textPrimary</code></li>
+					<li><code>.pr-u-textSecondary</code></li>
+					<li><code>.pr-u-textGrey</code></li>
+					<li><code>.pr-u-textLucca</code></li>
+				</ul>
+				(utilitaires renommés très utilisés)
+			</td>
+			<td>21.0.0</td>
+			<td>22.0.0</td>
+			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.pr-u-colorTextGrey</code></li>
+					<li><code>.pr-u-colorTextLucca</code></li>
+					<li><code>.pr-u-colorTextPrimary</code></li>
+					<li><code>.pr-u-colorTextSecondary</code></li>
+				</ul>
+			</td>
+			<td>21.0.0</td>
+			<td>22.0.0</td>
+			<td>
+				<ul>
+				<li><code>*Grey</code> ⇒<ul>
+				<li>neutre : <code>*Neutral</code></li>
+				<li>défaut : <code>*</code></li>
 				</ul>
 				</li>
-				</ul>
-				<p><a href="https://www.notion.so/luccasoftware/Tokens-Typo-1ebd278ab26e808a9b58d1017514ecb9">Plus d’informations sur le sujet</a>.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.menu</code></li>
-				</ul>
-			</td>
-			<td>19.3.0</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation">Horizontal navigation</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.mod-withMenu</code></li>
-				</ul>
-			</td>
-			<td>19.3.0</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li>remplacement : <code>*withHorizontalNavigation</code></li>
-				<li>suppression : <code>.pageHeader</code> détecte automatiquement <code>.horizontalNavigation</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.lu-dropdown-content</code></li>
-					<li><code>.lu-dropdown-options</code></li>
-					<li><code>.lu-dropdown-options-item</code></li>
-					<li><code>.lu-dropdown-options-item-action</code></li>
-				</ul>
-			</td>
-			<td>19.2.0</td>
-			<td>–</td>
-			<td>Remplacer par le nouveau DOM du composant <a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.filterBarDeprecated</code></li>
-				</ul>
-			</td>
-			<td>19.2.0</td>
-			<td>–</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.pr-u-(margin|padding)(Top|Right|Bottom|Left)(\d+|Auto)(?![\w-])">
-				<p>Espacements : <code>Top</code> : <code>BlockStart</code>, <code>Right</code> : <code>InlineEnd</code>, <code>Bottom</code> : <code>BlockEnd</code>, <code>Left</code> : <code>InlineStart</code></p>
-				<ul>
-					<li><code>.pr-u-margin(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></li>
-					<li><code>.pr-u-padding(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></li>
-					<li><code>.pr-u-border(Top|Right|Bottom|Left)0</code></li>
-				</ul>
-			</td>
-			<td>19.2.0</td>
-			<td>–</td>
-			<td>
-				<p>Utilitaires logiques :</p>
-				<ul>
-				<li><code>*Top*</code> ⇒ <code>*BlockStart*</code></li>
-				<li><code>*Bottom*</code> ⇒ <code>*BlockEnd*</code></li>
-				<li><code>*Left*</code> ⇒ <code>*InlineStart*</code></li>
-				<li><code>*Right*</code> ⇒ <code>*InlineEnd*</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.mod-withMenuCompact</code></li>
-				</ul>
-			</td>
-			<td>18.3.0</td>
-			<td>–</td>
-			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.dialog-formOptionn?al(?![\w-])">
-				<ul>
-					<li><code>.dialog-formOptional</code></li>
-					<li><code>.dialog-formOptionnal</code></li>
-				</ul>
-			</td>
-			<td>18.3.0</td>
-			<td>–</td>
-			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.viewTabs</code></li>
-					<li><code>.viewTabs-item</code></li>
-					<li><code>.viewTabs_panel</code></li>
-					<li><code>.viewTabs-item-tab</code></li>
-				</ul>
-			</td>
-			<td>18.2.1</td>
-			<td>–</td>
-			<td>
-				<p>Segmented control :</p>
-				<ul>
-				<li><code>*viewTabs*</code> ⇒ <code>*segmentedControl*</code></li>
-				<li><code>*-item-tab</code> ⇒ <code>*-item-action</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="(?=\S*\.userTile(?![\w-]))(?=\S*\.mod-X{1,3}L(?![\w-]))\S*">
-				<ul>
-					<li><code>.userTile</code> <strong>+</strong> <code>.mod-XL</code></li>
-					<li><code>.userTile</code> <strong>+</strong> <code>.mod-XXL</code></li>
-					<li><code>.userTile</code> <strong>+</strong> <code>.mod-XXXL</code></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>–</td>
-			<td>Remplacer par <code>.mod-L</code>, la plus grande taille de <a href="https://prisme.lucca.io/94310e217/p/56d611-user-tile">User tile</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.lu-user-picture</code></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>–</td>
-			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/42b330-avatar">Avatar</a> et sa classe <code>.avatar</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.indexTable-body-row-cell-action</code></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>–</td>
-			<td>Remplacer par <code>.indexTable-body-row-cell-link</code>, un véritable lien vers la ligne.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.loading</code> <strong>+</strong> <code>.mod-dialog</code></li>
-					<li><code>.loading</code> <strong>+</strong> <code>.mod-sidePanel</code></li>
-				</ul>
-			</td>
-			<td>18.1.0</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li><code>*dialog</code> ⇒ <code>*popin</code></li>
-				<li><code>*sidePanel</code> ⇒ <code>*drawer</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.u-textLeft</code></li>
-					<li><code>.u-textCenter</code></li>
-					<li><code>.u-textRight</code></li>
-				</ul>
-			</td>
-			<td>17.4.0</td>
-			<td>–</td>
-			<td>
-				<p>Doublon :</p>
-				<ul>
-				<li><code>.u-text*</code> ⇒ <code>.pr-u-textAlign*</code></li>
-				<li><code>*Left</code> ⇒ <code>*Start</code></li>
-				<li><code>*Right</code> ⇒ <code>*End</code></li>
+				<li><code>*Primary</code> &amp; <code>*Secondary</code> ⇒ <code>*Product</code></li>
+				<li><code>*Lucca</code> ⇒ <code>*Brand</code></li>
 				</ul>
 				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.active(?![\w-])">
+			<td>
 				<ul>
-					<li><code>.active</code></li>
+					<li><code>.container</code> <strong>+</strong> <code>.mod-S</code></li>
+				</ul>
+			</td>
+			<td>21.1.0</td>
+			<td>–</td>
+			<td>Retirer la classe <code>.mod-S</code>, sans remplacement.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.checkbox</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/42c88e-checkbox">Checkbox</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.radio</code></li>
+					<li><code>.radioButtons</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.switch</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/39c7b7-switch">Switch</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.textfield</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/459eda-textfield">Textfield</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.file</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/8282a5-file-upload">File upload</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.table</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li><a href="https://prisme.lucca.io/94310e217/p/4263a5-data-table">Data table</a></li>
+				<li><a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table">Index table</a></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.main</code></li>
+					<li><code>.layout</code></li>
+					<li><code>.header</code></li>
+					<li><code>.filters</code></li>
+					<li><code>.notchBox</code></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.label-icon(?![\w-])">
+				<ul>
+					<li><code>.label-icon</code></li>
 				</ul>
 				(partout dans un sélecteur)
 			</td>
-			<td>17.4.0</td>
+			<td>21.1.2</td>
 			<td>–</td>
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>
+			<td data-pattern="\.pr-u-textPineappleContrasted(?![\w-])">
 				<ul>
-					<li><code>.dialog-form</code></li>
+					<li><code>.pr-u-textPineappleContrasted</code></li>
 				</ul>
+				(utilitaires renommés peu ou pas utilisés)
 			</td>
-			<td>17.3.5</td>
+			<td>21.2.4</td>
 			<td>–</td>
-			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
+			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-textOrchid(?![\w-])">
+				<ul>
+					<li><code>.pr-u-textOrchid</code></li>
+				</ul>
+				(utilitaires renommés peu ou pas utilisés)
+			</td>
+			<td>21.3.0</td>
+			<td>–</td>
+			<td>
+				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
+			</td>
 		</tr>
 		<tr>
 			<td>
 				<ul>
-					<li><code>.palette-grey</code></li>
-					<li><code>.palette-primary</code></li>
-					<li><code>.palette-secondary</code></li>
-					<li><code>.palette-lucca</code></li>
+					<li><code>.palette-AI</code></li>
+					<li><code>.pr-u-colorTextAI</code></li>
 				</ul>
 			</td>
-			<td>17.3.0</td>
+			<td>–</td>
+			<td>21.3.0</td>
+			<td>
+				<ul>
+				<li><code>*-AI</code> ⇒ <code>*-orchid</code></li>
+				<li><code>*TextAI</code> ⇒ <code>*TextOrchid</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0(?![\w-])">
+				<ul>
+					<li><code>.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0</code></li>
+				</ul>
+			</td>
+			<td>–</td>
 			<td>22.0.0</td>
 			<td>
+				<p>Passer en camelCase :</p>
 				<ul>
-				<li><code>*-grey</code> ⇒ <code>*-neutral</code></li>
-				<li><code>*-primary</code> &amp; <code>*-secondary</code> ⇒ <code>*-product</code></li>
-				<li><code>*-lucca</code> ⇒ <code>*-brand</code></li>
+				<li><code>*-start0</code> ⇒ <code>*Start0</code></li>
+				<li><code>*-end0</code> ⇒ <code>*End0</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="(?=\S*\.(box|card|section)(?![\w-]))(?=\S*\.mod-grey(?![\w-]))\S*">
-				<p>Toute combinaison de <code>.box</code>, <code>.card</code> ou <code>.section</code> avec <code>.mod-grey</code></p>
+			<td>
 				<ul>
-					<li><code>.box</code> <strong>+</strong> <code>.mod-grey</code></li>
-					<li><code>.card</code> <strong>+</strong> <code>.mod-grey</code></li>
-					<li><code>.section</code> <strong>+</strong> <code>.mod-grey</code></li>
-					<li><code>.icon-color-primary</code></li>
-					<li><code>.icon-color-secondary</code></li>
+					<li><code>.mod-neutralBackground</code></li>
 				</ul>
 			</td>
-			<td>17.3.0</td>
 			<td>22.0.0</td>
+			<td>–</td>
 			<td>
 				<ul>
-				<li><code>*-grey</code> ⇒ <code>*-neutral</code></li>
-				<li><code>*-primary</code> &amp; <code>*-secondary</code> ⇒ <code>*-product</code></li>
+				<li>sélecteur : <code>.dialog.mod-surfaceDefault</code></li>
+				<li>option de <code>LuDialogService.open()</code> : <code>surfaceDefault: true</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<ul>
-					<li><code>.button</code> <strong>+</strong> <code>.loading</code></li>
+					<li><code>.dataTable</code> <strong>+</strong> <code>.mod-hover</code></li>
 				</ul>
 			</td>
-			<td>17.3.0</td>
+			<td>22.0.6</td>
 			<td>–</td>
-			<td>
-				<ul>
-				<li>sélecteur : <code>.is-loading</code></li>
-				<li>input Angular : <code>state=&quot;loading&quot;</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.disabled(?![\w-])">
-				<ul>
-					<li><code>.disabled</code></li>
-					<li><code>.error</code></li>
-					<li><code>.mod-link</code></li>
-					<li><code>.mod-outline</code></li>
-					<li><code>.success</code></li>
-				</ul>
-				(partout dans un sélecteur)
-			</td>
-			<td>17.3.0</td>
-			<td>–</td>
-			<td>–</td>
+			<td>Retirer la classe <code>.mod-hover</code> et l’input Angular <code>hover</code>, sans remplacement : une ligne sans action ne doit pas avoir d’effet de survol.</td>
 		</tr>
 		<tr>
 			<td>
 				<ul>
-					<li><code>.button-icon</code></li>
+					<li><code>.fancyBox-content-box</code></li>
+					<li><code>.fancyBox-content-foreground</code></li>
+					<li><code>.fancyBox-content-box-foreground</code></li>
 				</ul>
 			</td>
-			<td>16.5.0</td>
+			<td>22.1.0</td>
 			<td>–</td>
-			<td>Retirer la classe : <code>.button</code> applique déjà la taille d’icône.</td>
+			<td>
+				<ul>
+				<li>HTML : composant <code>lu-fancy-box</code>, renommer la classe seule fait disparaître les illustrations</li>
+				<li>input Angular : <code>foregroundStartEnd</code> à la place de <code>foreground</code></li>
+				</ul>
+			</td>
 		</tr>
 		<tr>
 			<td>
 				<ul>
-					<li><code>.form-group</code></li>
+					<li><code>.highlightSection</code></li>
 				</ul>
 			</td>
-			<td>16.4.0</td>
+			<td>22.1.0</td>
 			<td>–</td>
-			<td>
-				<ul>
-				<li>sélecteur : <code>.form-field</code></li>
-				<li>composants Angular : <code>lu-text-input</code>, <code>lu-checkbox-input</code>…</li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.label(?![\w-])">
-				<ul>
-					<li><code>.label</code></li>
-				</ul>
-				(partout dans un sélecteur)
-			</td>
-			<td>16.3.0</td>
-			<td>–</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.list</code></li>
-				</ul>
-			</td>
-			<td>16.2.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/883e34-sortable-list">Sortable list</a>.</td>
+			<td>Le composant Highlight section (<code>.highlightSection</code> et <code>&lt;lu-highlight-section&gt;</code>) sera remplacé en 22.2 par une évolution du composant Box.</td>
 		</tr>
 		<tr>
 			<td>
@@ -1022,23 +1022,172 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.calendarWrapper-navigation</code> <strong>+</strong> <code>.mod-prev</code></li>
-					<li><code>.calendarWrapper-navigation</code> <strong>+</strong> <code>.mod-next</code></li>
+					<li><code>.status</code></li>
+					<li><code>.status-dot</code></li>
+					<li><code>.status-label</code></li>
+					<li><code>.status-dot-important</code></li>
 				</ul>
 			</td>
-			<td>–</td>
+			<td>16.2.0</td>
+			<td>18.1.0</td>
+			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/425d98-status-badge">Status badge</a>.</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.grid(-(offset)?\d+)?\\@mediaMin">
+				<p>Colonnes et offsets de l’ancienne grille, toujours suffixés d’un breakpoint (<code>.grid-6\@mediaMinS</code>)</p>
+				<ul>
+					<li><code>.grid\@mediaMin…</code></li>
+					<li><code>.grid-(1|2|3|4|…)\@mediaMin…</code></li>
+					<li><code>.grid-offset(1|2|3|4|…)\@mediaMin…</code></li>
+				</ul>
+				<p>Mods de l’ancienne grille, combinés à <code>.grid</code></p>
+				<ul>
+					<li><code>.grid</code> <strong>+</strong> <code>.mod-reverse</code></li>
+					<li><code>.grid</code> <strong>+</strong> <code>.mod-(start|center|end|top|…)\@mediaMin…</code></li>
+				</ul>
+				<p>Utilitaires d’ordre de l’ancienne grille</p>
+				<ul>
+					<li><code>.u-first\@mediaMin…</code></li>
+					<li><code>.u-last\@mediaMin…</code></li>
+				</ul>
+			</td>
+			<td>16.2.0</td>
+			<td>19.1.0</td>
+			<td>
+				<p>Remplacer par le nouveau composant <a href="https://prisme.lucca.io/94310e217/p/955d69-grid">Grid</a>.</p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.u-elevate.*">
+				<ul>
+					<li><code>.u-elevate…</code></li>
+				</ul>
+			</td>
+			<td>16.2.0</td>
 			<td>19.1.0</td>
 			<td>–</td>
 		</tr>
 		<tr>
 			<td>
 				<ul>
-					<li><code>.comment-content-textContainer</code></li>
+					<li><code>.textfield-actionClear</code></li>
 				</ul>
 			</td>
-			<td>18.3.0</td>
-			<td>20.1.0</td>
-			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
+			<td>16.2.2</td>
+			<td>18.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.button</code> <strong>+</strong> <code>.mod-counter</code></li>
+				</ul>
+			</td>
+			<td>16.3.0</td>
+			<td>18.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.button-counter</code></li>
+					<li><code>.navSide-item-alert</code></li>
+					<li><code>.lu-select-value .label</code></li>
+				</ul>
+			</td>
+			<td>16.3.0</td>
+			<td>18.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.callout</code> <strong>+</strong> <code>.mod-tiny</code></li>
+				</ul>
+			</td>
+			<td>16.5.0</td>
+			<td>18.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.button</code> <strong>+</strong> <code>.mod-icon</code></li>
+				</ul>
+			</td>
+			<td>17.2.0</td>
+			<td>19.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.actionIcon</code></li>
+				</ul>
+			</td>
+			<td>17.2.0</td>
+			<td>19.1.0</td>
+			<td>
+				<ul>
+				<li>sans bordure : <code>.button.mod-onlyIcon.mod-ghost</code></li>
+				<li>avec bordure : <code>.button.mod-onlyIcon.mod-outlined</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.u-comma</code></li>
+					<li><code>.u-unit</code></li>
+				</ul>
+			</td>
+			<td>17.4.0</td>
+			<td>19.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td data-pattern="\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])">
+				<ul>
+					<li><code>.u-gap(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-columnGap(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-rowGap(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-margin(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginBlock(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginBottom(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginInline(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginLeft(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginRight(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-marginTop(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-padding(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingBlock(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingBottom(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingInline(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingLeft(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingRight(0|Auto|XXS|XS|…)</code></li>
+					<li><code>.u-paddingTop(0|Auto|XXS|XS|…)</code></li>
+				</ul>
+				<p>Utilitaires de bordure à zéro : noms <code>.u-</code> supprimés avec les utilitaires t-shirt, noms <code>.pr-u-</code> toujours livrés</p>
+				<ul>
+					<li><code>.u-border0</code></li>
+					<li><code>.u-border(Top|Right|Bottom|Left|…)0</code></li>
+				</ul>
+			</td>
+			<td>17.4.0</td>
+			<td>19.1.0</td>
+			<td>
+				<ul>
+				<li><code>.u-*</code> ⇒ <code>.pr-u-*</code></li>
+				<li><code>*XXS</code> ⇒ <code>*50</code></li>
+				<li><code>*XS</code> ⇒ <code>*100</code></li>
+				<li><code>*S</code> ⇒ <code>*200</code></li>
+				<li><code>*M</code> ⇒ <code>*300</code></li>
+				<li><code>*L</code> ⇒ <code>*400</code></li>
+				<li><code>*XL</code> ⇒ <code>*600</code></li>
+				<li><code>*XXL</code> ⇒ <code>*800</code></li>
+				</ul>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -1102,172 +1251,23 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><code>.u-comma</code></li>
-					<li><code>.u-unit</code></li>
+					<li><code>.comment-content-textContainer</code></li>
 				</ul>
 			</td>
-			<td>17.4.0</td>
+			<td>18.3.0</td>
+			<td>20.1.0</td>
+			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>.calendarWrapper-navigation</code> <strong>+</strong> <code>.mod-prev</code></li>
+					<li><code>.calendarWrapper-navigation</code> <strong>+</strong> <code>.mod-next</code></li>
+				</ul>
+			</td>
+			<td>–</td>
 			<td>19.1.0</td>
 			<td>–</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])">
-				<ul>
-					<li><code>.u-gap(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-columnGap(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-rowGap(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-margin(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginBlock(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginBottom(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginInline(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginLeft(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginRight(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-marginTop(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-padding(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingBlock(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingBottom(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingInline(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingLeft(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingRight(0|Auto|XXS|XS|…)</code></li>
-					<li><code>.u-paddingTop(0|Auto|XXS|XS|…)</code></li>
-				</ul>
-				<p>Utilitaires de bordure à zéro : noms <code>.u-</code> supprimés avec les utilitaires t-shirt, noms <code>.pr-u-</code> toujours livrés</p>
-				<ul>
-					<li><code>.u-border0</code></li>
-					<li><code>.u-border(Top|Right|Bottom|Left|…)0</code></li>
-				</ul>
-			</td>
-			<td>17.4.0</td>
-			<td>19.1.0</td>
-			<td>
-				<ul>
-				<li><code>.u-*</code> ⇒ <code>.pr-u-*</code></li>
-				<li><code>*XXS</code> ⇒ <code>*50</code></li>
-				<li><code>*XS</code> ⇒ <code>*100</code></li>
-				<li><code>*S</code> ⇒ <code>*200</code></li>
-				<li><code>*M</code> ⇒ <code>*300</code></li>
-				<li><code>*L</code> ⇒ <code>*400</code></li>
-				<li><code>*XL</code> ⇒ <code>*600</code></li>
-				<li><code>*XXL</code> ⇒ <code>*800</code></li>
-				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.button</code> <strong>+</strong> <code>.mod-icon</code></li>
-				</ul>
-			</td>
-			<td>17.2.0</td>
-			<td>19.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.actionIcon</code></li>
-				</ul>
-			</td>
-			<td>17.2.0</td>
-			<td>19.1.0</td>
-			<td>
-				<ul>
-				<li>sans bordure : <code>.button.mod-onlyIcon.mod-ghost</code></li>
-				<li>avec bordure : <code>.button.mod-onlyIcon.mod-outlined</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.callout</code> <strong>+</strong> <code>.mod-tiny</code></li>
-				</ul>
-			</td>
-			<td>16.5.0</td>
-			<td>18.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.button</code> <strong>+</strong> <code>.mod-counter</code></li>
-				</ul>
-			</td>
-			<td>16.3.0</td>
-			<td>18.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.button-counter</code></li>
-					<li><code>.navSide-item-alert</code></li>
-					<li><code>.lu-select-value .label</code></li>
-				</ul>
-			</td>
-			<td>16.3.0</td>
-			<td>18.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.textfield-actionClear</code></li>
-				</ul>
-			</td>
-			<td>16.2.2</td>
-			<td>18.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.grid(-(offset)?\d+)?\\@mediaMin">
-				<p>Colonnes et offsets de l’ancienne grille, toujours suffixés d’un breakpoint (<code>.grid-6\@mediaMinS</code>)</p>
-				<ul>
-					<li><code>.grid\@mediaMin…</code></li>
-					<li><code>.grid-(1|2|3|4|…)\@mediaMin…</code></li>
-					<li><code>.grid-offset(1|2|3|4|…)\@mediaMin…</code></li>
-				</ul>
-				<p>Mods de l’ancienne grille, combinés à <code>.grid</code></p>
-				<ul>
-					<li><code>.grid</code> <strong>+</strong> <code>.mod-reverse</code></li>
-					<li><code>.grid</code> <strong>+</strong> <code>.mod-(start|center|end|top|…)\@mediaMin…</code></li>
-				</ul>
-				<p>Utilitaires d’ordre de l’ancienne grille</p>
-				<ul>
-					<li><code>.u-first\@mediaMin…</code></li>
-					<li><code>.u-last\@mediaMin…</code></li>
-				</ul>
-			</td>
-			<td>16.2.0</td>
-			<td>19.1.0</td>
-			<td>
-				<p>Remplacer par le nouveau composant <a href="https://prisme.lucca.io/94310e217/p/955d69-grid">Grid</a>.</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="\.u-elevate.*">
-				<ul>
-					<li><code>.u-elevate…</code></li>
-				</ul>
-			</td>
-			<td>16.2.0</td>
-			<td>19.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>.status</code></li>
-					<li><code>.status-dot</code></li>
-					<li><code>.status-label</code></li>
-					<li><code>.status-dot-important</code></li>
-				</ul>
-			</td>
-			<td>16.2.0</td>
-			<td>18.1.0</td>
-			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/425d98-status-badge">Status badge</a>.</td>
 		</tr>
 	</tbody>
 </table>
@@ -1291,115 +1291,179 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 		<tr>
 			<td>
 				<ul>
-					<li><code>--components-fancyBox-offsetInline</code></li>
-					<li><code>--components-fancyBox-offsetBlock</code></li>
-					<li><code>--components-fancyBox-imageWidth</code></li>
-					<li><code>--components-fancyBox-imageHeight</code></li>
-					<li><code>--components-fancyBox-background-left</code></li>
-					<li><code>--components-fancyBox-background-right</code></li>
-					<li><code>--components-fancyBox-foreground</code></li>
+					<li><code>--commons-background-base</code></li>
 				</ul>
 			</td>
-			<td>22.1.0</td>
+			<td>17.3.0</td>
+			<td>–</td>
+			<td>Remplacer par le token <code>--pr-t-elevation-surface-default</code>.</td>
+		</tr>
+		<tr>
+			<td data-pattern="--palettes-(grey|primary|secondary|lucca)-(0|text|25|50|100|200|300|400|500|600|700|800|900)(?![\w-])">
+				<ul>
+					<li><code>--palettes-grey-(0|text|25|50|…)</code></li>
+					<li><code>--palettes-primary-(0|text|25|50|…)</code></li>
+					<li><code>--palettes-secondary-(0|text|25|50|…)</code></li>
+					<li><code>--palettes-lucca-(0|text|25|50|…)</code></li>
+				</ul>
+			</td>
+			<td>17.3.0</td>
+			<td>22.0.0</td>
+			<td>
+				<ul>
+				<li><code>*-grey-*</code> ⇒ <code>*-neutral-*</code></li>
+				<li><code>*-primary-*</code> &amp; <code>*-secondary-*</code> ⇒ <code>*-product-*</code></li>
+				<li><code>*-lucca-*</code> ⇒ <code>*-brand-*</code></li>
+				</ul>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--colors-grey-900-rgb</code></li>
+				</ul>
+			</td>
+			<td>17.3.0</td>
+			<td>22.0.0</td>
+			<td>
+				<ul>
+				<li>Sass : <code>color.transparentize(var(--palettes-neutral-900), …)</code></li>
+				<li>CSS : <code>color-mix()</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--colors-grey-400-rgb</code></li>
+				</ul>
+			</td>
+			<td>17.3.1</td>
+			<td>22.0.0</td>
+			<td>
+				<ul>
+				<li>Sass : <code>color.transparentize(var(--palettes-neutral-400), …)</code></li>
+				<li>CSS : <code>color-mix()</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--components-navSide-fullwidth-palette-alert-color</code></li>
+					<li><code>--components-navSide-fullwidth-palette-alert-text</code></li>
+				</ul>
+			</td>
+			<td>17.3.2</td>
+			<td>–</td>
+			<td>Retirer la variable : l’alerte est remplacée par le composant Numeric badge.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--colors-white-rgb</code></li>
+					<li><code>--colors-neutral-400-rgb</code></li>
+					<li><code>--colors-neutral-900-rgb</code></li>
+				</ul>
+			</td>
+			<td>17.4.0</td>
+			<td>22.0.0</td>
+			<td>
+				<ul>
+				<li>Sass : <code>color.transparentize(var(--palettes-neutral-*), …)</code></li>
+				<li>CSS : <code>color-mix()</code></li>
+				</ul>
+				<p><small><code>*</code> = <code>0</code> pour <code>white</code>, sinon la nuance d&#39;origine</small></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--components-toasts-background</code></li>
+					<li><code>--components-toasts-padding</code></li>
+				</ul>
+			</td>
+			<td>18.1.0</td>
+			<td>–</td>
+			<td>Retirer la variable, sans remplacement.</td>
+		</tr>
+		<tr>
+			<td data-pattern="--palettes-(\w+-)?text(?![\w-])">
+				<ul>
+					<li><code>--palettes-…-text</code></li>
+					<li><code>--palettes-text</code></li>
+				</ul>
+				(toutes les palettes)
+			</td>
+			<td>18.2.0</td>
 			<td>–</td>
 			<td>
-				<p>Avec <code>*</code> = <code>--components-fancyBox</code> :</p>
+				<p><code>*text</code> ⇒ <code>*0</code></p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<ul>
-				<li><code>*-offsetInline</code> ⇒ <br><code>*-content-foregroundStartEnd-insetInlineEnd</code></li>
-				<li><code>*-offsetBlock</code> ⇒ <br><code>*-content-foregroundStartEnd-insetBlockStart</code></li>
-				<li><code>*-imageWidth</code> ⇒ <br><code>*-content-foregroundStartEnd-inlineSize</code></li>
-				<li><code>*-imageHeight</code> ⇒ <br><code>*-content-foregroundStartEnd-blockSize</code></li>
-				<li>Image <code>*-background-left</code> ⇒<ul>
-				<li>sélecteur : <code>.fancyBox-content-backgroundEndStart</code></li>
-				<li>input Angular : <code>backgroundEndStart</code></li>
+					<li><code>--commons-disabled-opacity</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>–</td>
+			<td>
+				<ul>
+				<li>token de texte : <code>--pr-t-color-text-disabled</code></li>
+				<li>couleur : <code>--commons-disabled-color</code></li>
+				<li>fond : <code>--commons-disabled-background</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--colors-black-color</code></li>
+					<li><code>--colors-white-color</code></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>22.0.0</td>
+			<td>
+				<ul>
+				<li><code>--colors-white-color</code> ⇒<ul>
+				<li>couleur : <code>--palettes-neutral-0</code></li>
+				<li>surface : <code>--pr-t-elevation-surface-raised</code></li>
 				</ul>
 				</li>
-				<li>Image <code>*-background-right</code> ⇒<ul>
-				<li>sélecteur : <code>.fancyBox-content-backgroundStartEnd</code></li>
-				<li>input Angular : <code>backgroundStartEnd</code></li>
-				</ul>
-				</li>
-				<li>Image <code>*-foreground</code> ⇒<ul>
-				<li>sélecteur : <code>.fancyBox-content-foregroundStartEnd</code></li>
-				<li>input Angular : <code>foregroundStartEnd</code></li>
-				</ul>
-				</li>
+				<li><code>--colors-black-color</code> ⇒ <br><code>--palettes-neutral-900</code></li>
 				</ul>
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="--palettes-AI-\d+(?![\w-])">
+			<td>
 				<ul>
-					<li><code>--palettes-AI-*</code></li>
+					<li><code>--commons-navSide-compact-width</code></li>
 				</ul>
 			</td>
+			<td>18.3.0</td>
 			<td>–</td>
-			<td>21.3.0</td>
-			<td>
-				<ul>
-				<li>couleur : <code>--palettes-orchid-*</code></li>
-				<li>dégradé : <code>--palettes-ai-*</code></li>
-				</ul>
-				<p><small>(<code>*</code>: 50-900)</small></p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--components-richTextField-resize</code></li>
-					<li><code>--components-richTextField-height</code></li>
-					<li><code>--components-richTextField-minHeight</code></li>
-					<li><code>--components-richTextField-maxHeight</code></li>
-				</ul>
-			</td>
-			<td>21.2.0</td>
 			<td>–</td>
-			<td>
-				<p><code>--components-richTextField-*</code> ⇒ <br><code>--components-richTextField-content-*</code></p>
-			</td>
 		</tr>
 		<tr>
 			<td>
 				<ul>
-					<li><code>--components-gauge-height</code></li>
+					<li><code>--components-container-max-width</code></li>
+					<li><code>--components-container-padding</code></li>
 				</ul>
 			</td>
-			<td>20.3.0</td>
-			<td>–</td>
-			<td>Remplacer par <code>--components-gauge-blockSize</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--commons-borderRadius-M</code></li>
-					<li><code>--commons-borderRadius-L</code></li>
-					<li><code>--commons-borderRadius-XL</code></li>
-					<li><code>--commons-borderRadius-full</code></li>
-				</ul>
-			</td>
-			<td>20.2.0</td>
+			<td>18.3.0</td>
 			<td>–</td>
 			<td>
 				<ul>
-				<li><code>*-M</code> ⇒ <code>--pr-t-border-radius-50</code></li>
-				<li><code>*-L</code> ⇒ <code>--pr-t-border-radius-100</code></li>
-				<li><code>*-XL</code> ⇒ <code>--pr-t-border-radius-150</code></li>
-				<li><code>*-full</code> ⇒ <code>--pr-t-border-radius-full</code></li>
-				</ul>
-				<p><small><code>*</code> = <code>--commons-borderRadius</code></small></p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--components-numericBadge-fontSize</code></li>
-					<li><code>--components-numericBadge-lineHeight</code></li>
+				<li><code>--components-container-max-width</code> ⇒ <br><code>--commons-container-maxWidth</code></li>
+				<li><code>--components-container-padding</code> ⇒ <br><code>--commons-container-padding</code></li>
 				</ul>
 			</td>
-			<td>20.1.0</td>
-			<td>21.3.0</td>
-			<td>Remplacer par <code>--components-numericBadge-font</code>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -1470,179 +1534,115 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 		<tr>
 			<td>
 				<ul>
-					<li><code>--commons-navSide-compact-width</code></li>
+					<li><code>--components-numericBadge-fontSize</code></li>
+					<li><code>--components-numericBadge-lineHeight</code></li>
 				</ul>
 			</td>
-			<td>18.3.0</td>
-			<td>–</td>
-			<td>–</td>
+			<td>20.1.0</td>
+			<td>21.3.0</td>
+			<td>Remplacer par <code>--components-numericBadge-font</code>.</td>
 		</tr>
 		<tr>
 			<td>
 				<ul>
-					<li><code>--components-container-max-width</code></li>
-					<li><code>--components-container-padding</code></li>
+					<li><code>--commons-borderRadius-M</code></li>
+					<li><code>--commons-borderRadius-L</code></li>
+					<li><code>--commons-borderRadius-XL</code></li>
+					<li><code>--commons-borderRadius-full</code></li>
 				</ul>
 			</td>
-			<td>18.3.0</td>
+			<td>20.2.0</td>
 			<td>–</td>
 			<td>
 				<ul>
-				<li><code>--components-container-max-width</code> ⇒ <br><code>--commons-container-maxWidth</code></li>
-				<li><code>--components-container-padding</code> ⇒ <br><code>--commons-container-padding</code></li>
+				<li><code>*-M</code> ⇒ <code>--pr-t-border-radius-50</code></li>
+				<li><code>*-L</code> ⇒ <code>--pr-t-border-radius-100</code></li>
+				<li><code>*-XL</code> ⇒ <code>--pr-t-border-radius-150</code></li>
+				<li><code>*-full</code> ⇒ <code>--pr-t-border-radius-full</code></li>
 				</ul>
+				<p><small><code>*</code> = <code>--commons-borderRadius</code></small></p>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0">schematics</a>)
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<ul>
-					<li><code>--colors-black-color</code></li>
-					<li><code>--colors-white-color</code></li>
+					<li><code>--components-gauge-height</code></li>
 				</ul>
 			</td>
-			<td>18.2.0</td>
-			<td>22.0.0</td>
+			<td>20.3.0</td>
+			<td>–</td>
+			<td>Remplacer par <code>--components-gauge-blockSize</code>.</td>
+		</tr>
+		<tr>
 			<td>
 				<ul>
-				<li><code>--colors-white-color</code> ⇒<ul>
-				<li>couleur : <code>--palettes-neutral-0</code></li>
-				<li>surface : <code>--pr-t-elevation-surface-raised</code></li>
+					<li><code>--components-richTextField-resize</code></li>
+					<li><code>--components-richTextField-height</code></li>
+					<li><code>--components-richTextField-minHeight</code></li>
+					<li><code>--components-richTextField-maxHeight</code></li>
+				</ul>
+			</td>
+			<td>21.2.0</td>
+			<td>–</td>
+			<td>
+				<p><code>--components-richTextField-*</code> ⇒ <br><code>--components-richTextField-content-*</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td data-pattern="--palettes-AI-\d+(?![\w-])">
+				<ul>
+					<li><code>--palettes-AI-*</code></li>
+				</ul>
+			</td>
+			<td>–</td>
+			<td>21.3.0</td>
+			<td>
+				<ul>
+				<li>couleur : <code>--palettes-orchid-*</code></li>
+				<li>dégradé : <code>--palettes-ai-*</code></li>
+				</ul>
+				<p><small>(<code>*</code>: 50-900)</small></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--components-fancyBox-offsetInline</code></li>
+					<li><code>--components-fancyBox-offsetBlock</code></li>
+					<li><code>--components-fancyBox-imageWidth</code></li>
+					<li><code>--components-fancyBox-imageHeight</code></li>
+					<li><code>--components-fancyBox-background-left</code></li>
+					<li><code>--components-fancyBox-background-right</code></li>
+					<li><code>--components-fancyBox-foreground</code></li>
+				</ul>
+			</td>
+			<td>22.1.0</td>
+			<td>–</td>
+			<td>
+				<p>Avec <code>*</code> = <code>--components-fancyBox</code> :</p>
+				<ul>
+				<li><code>*-offsetInline</code> ⇒ <br><code>*-content-foregroundStartEnd-insetInlineEnd</code></li>
+				<li><code>*-offsetBlock</code> ⇒ <br><code>*-content-foregroundStartEnd-insetBlockStart</code></li>
+				<li><code>*-imageWidth</code> ⇒ <br><code>*-content-foregroundStartEnd-inlineSize</code></li>
+				<li><code>*-imageHeight</code> ⇒ <br><code>*-content-foregroundStartEnd-blockSize</code></li>
+				<li>Image <code>*-background-left</code> ⇒<ul>
+				<li>sélecteur : <code>.fancyBox-content-backgroundEndStart</code></li>
+				<li>input Angular : <code>backgroundEndStart</code></li>
 				</ul>
 				</li>
-				<li><code>--colors-black-color</code> ⇒ <br><code>--palettes-neutral-900</code></li>
+				<li>Image <code>*-background-right</code> ⇒<ul>
+				<li>sélecteur : <code>.fancyBox-content-backgroundStartEnd</code></li>
+				<li>input Angular : <code>backgroundStartEnd</code></li>
+				</ul>
+				</li>
+				<li>Image <code>*-foreground</code> ⇒<ul>
+				<li>sélecteur : <code>.fancyBox-content-foregroundStartEnd</code></li>
+				<li>input Angular : <code>foregroundStartEnd</code></li>
+				</ul>
+				</li>
 				</ul>
 			</td>
-		</tr>
-		<tr>
-			<td data-pattern="--palettes-(\w+-)?text(?![\w-])">
-				<ul>
-					<li><code>--palettes-…-text</code></li>
-					<li><code>--palettes-text</code></li>
-				</ul>
-				(toutes les palettes)
-			</td>
-			<td>18.2.0</td>
-			<td>–</td>
-			<td>
-				<p><code>*text</code> ⇒ <code>*0</code></p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--commons-disabled-opacity</code></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li>token de texte : <code>--pr-t-color-text-disabled</code></li>
-				<li>couleur : <code>--commons-disabled-color</code></li>
-				<li>fond : <code>--commons-disabled-background</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--components-toasts-background</code></li>
-					<li><code>--components-toasts-padding</code></li>
-				</ul>
-			</td>
-			<td>18.1.0</td>
-			<td>–</td>
-			<td>Retirer la variable, sans remplacement.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--colors-white-rgb</code></li>
-					<li><code>--colors-neutral-400-rgb</code></li>
-					<li><code>--colors-neutral-900-rgb</code></li>
-				</ul>
-			</td>
-			<td>17.4.0</td>
-			<td>22.0.0</td>
-			<td>
-				<ul>
-				<li>Sass : <code>color.transparentize(var(--palettes-neutral-*), …)</code></li>
-				<li>CSS : <code>color-mix()</code></li>
-				</ul>
-				<p><small><code>*</code> = <code>0</code> pour <code>white</code>, sinon la nuance d&#39;origine</small></p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--components-navSide-fullwidth-palette-alert-color</code></li>
-					<li><code>--components-navSide-fullwidth-palette-alert-text</code></li>
-				</ul>
-			</td>
-			<td>17.3.2</td>
-			<td>–</td>
-			<td>Retirer la variable : l’alerte est remplacée par le composant Numeric badge.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--colors-grey-400-rgb</code></li>
-				</ul>
-			</td>
-			<td>17.3.1</td>
-			<td>22.0.0</td>
-			<td>
-				<ul>
-				<li>Sass : <code>color.transparentize(var(--palettes-neutral-400), …)</code></li>
-				<li>CSS : <code>color-mix()</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="--palettes-(grey|primary|secondary|lucca)-(0|text|25|50|100|200|300|400|500|600|700|800|900)(?![\w-])">
-				<ul>
-					<li><code>--palettes-grey-(0|text|25|50|…)</code></li>
-					<li><code>--palettes-primary-(0|text|25|50|…)</code></li>
-					<li><code>--palettes-secondary-(0|text|25|50|…)</code></li>
-					<li><code>--palettes-lucca-(0|text|25|50|…)</code></li>
-				</ul>
-			</td>
-			<td>17.3.0</td>
-			<td>22.0.0</td>
-			<td>
-				<ul>
-				<li><code>*-grey-*</code> ⇒ <code>*-neutral-*</code></li>
-				<li><code>*-primary-*</code> &amp; <code>*-secondary-*</code> ⇒ <code>*-product-*</code></li>
-				<li><code>*-lucca-*</code> ⇒ <code>*-brand-*</code></li>
-				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--colors-grey-900-rgb</code></li>
-				</ul>
-			</td>
-			<td>17.3.0</td>
-			<td>22.0.0</td>
-			<td>
-				<ul>
-				<li>Sass : <code>color.transparentize(var(--palettes-neutral-900), …)</code></li>
-				<li>CSS : <code>color-mix()</code></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--commons-background-base</code></li>
-				</ul>
-			</td>
-			<td>17.3.0</td>
-			<td>–</td>
-			<td>Remplacer par le token <code>--pr-t-elevation-surface-default</code>.</td>
 		</tr>
 	</tbody>
 </table>
@@ -1661,14 +1661,58 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 	</thead>
 	<tbody>
 		<tr>
-			<td>
+			<td data-pattern="--commons-elevations-elevation-[1-6](?![\w-])">
 				<ul>
-					<li><code>--pr-t-radius-input</code></li>
+					<li><code>--commons-elevations-elevation-(1|2|3|4|…)</code></li>
 				</ul>
 			</td>
+			<td>16.1.0</td>
+			<td>19.1.0</td>
 			<td>–</td>
-			<td>20.2.0</td>
-			<td>Remplacer par <code>--pr-t-border-radius-input</code>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><code>--commons-boxShadow-XXS</code></li>
+				</ul>
+			</td>
+			<td>16.1.0</td>
+			<td>19.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td data-pattern="--commons-boxShadow-(X?S|M|X*L)(?![\w-])">
+				<ul>
+					<li><code>--commons-boxShadow-S</code></li>
+					<li><code>--commons-boxShadow-M</code></li>
+					<li><code>--commons-boxShadow-L</code></li>
+				</ul>
+			</td>
+			<td>17.3.0</td>
+			<td>19.1.0</td>
+			<td>–</td>
+		</tr>
+		<tr>
+			<td data-pattern="--spacings-(0|X{0,2}S|M|X{0,2}L|auto)(?![\w-])">
+				<ul>
+					<li><code>--spacings-(0|auto|XXS|XS|…)</code></li>
+				</ul>
+			</td>
+			<td>17.4.0</td>
+			<td>19.1.0</td>
+			<td>
+				<ul>
+				<li><code>--spacings-*</code> ⇒ <code>--pr-t-spacings-*</code></li>
+				<li><code>*XXS</code> ⇒ <code>*50</code></li>
+				<li><code>*XS</code> ⇒ <code>*100</code></li>
+				<li><code>*S</code> ⇒ <code>*200</code></li>
+				<li><code>*M</code> ⇒ <code>*300</code></li>
+				<li><code>*L</code> ⇒ <code>*400</code></li>
+				<li><code>*XL</code> ⇒ <code>*600</code></li>
+				<li><code>*XXL</code> ⇒ <code>*800</code></li>
+				</ul>
+				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -1703,58 +1747,14 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td data-pattern="--spacings-(0|X{0,2}S|M|X{0,2}L|auto)(?![\w-])">
-				<ul>
-					<li><code>--spacings-(0|auto|XXS|XS|…)</code></li>
-				</ul>
-			</td>
-			<td>17.4.0</td>
-			<td>19.1.0</td>
 			<td>
 				<ul>
-				<li><code>--spacings-*</code> ⇒ <code>--pr-t-spacings-*</code></li>
-				<li><code>*XXS</code> ⇒ <code>*50</code></li>
-				<li><code>*XS</code> ⇒ <code>*100</code></li>
-				<li><code>*S</code> ⇒ <code>*200</code></li>
-				<li><code>*M</code> ⇒ <code>*300</code></li>
-				<li><code>*L</code> ⇒ <code>*400</code></li>
-				<li><code>*XL</code> ⇒ <code>*600</code></li>
-				<li><code>*XXL</code> ⇒ <code>*800</code></li>
-				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
-		</tr>
-		<tr>
-			<td data-pattern="--commons-boxShadow-(X?S|M|X*L)(?![\w-])">
-				<ul>
-					<li><code>--commons-boxShadow-S</code></li>
-					<li><code>--commons-boxShadow-M</code></li>
-					<li><code>--commons-boxShadow-L</code></li>
+					<li><code>--pr-t-radius-input</code></li>
 				</ul>
 			</td>
-			<td>17.3.0</td>
-			<td>19.1.0</td>
 			<td>–</td>
-		</tr>
-		<tr>
-			<td data-pattern="--commons-elevations-elevation-[1-6](?![\w-])">
-				<ul>
-					<li><code>--commons-elevations-elevation-(1|2|3|4|…)</code></li>
-				</ul>
-			</td>
-			<td>16.1.0</td>
-			<td>19.1.0</td>
-			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><code>--commons-boxShadow-XXS</code></li>
-				</ul>
-			</td>
-			<td>16.1.0</td>
-			<td>19.1.0</td>
-			<td>–</td>
+			<td>20.2.0</td>
+			<td>Remplacer par <code>--pr-t-border-radius-input</code>.</td>
 		</tr>
 	</tbody>
 </table>

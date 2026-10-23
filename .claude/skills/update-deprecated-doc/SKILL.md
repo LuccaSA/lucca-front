@@ -120,7 +120,7 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
   markdown `<p>` (`**bold**` → `<strong>`, links → `<a>`) before the `<ul>` it
   labels; a standalone comment is a lone `<p>`.
 - **One row per source object**: a merged object stays one row, structured by its comment labels.
-- **Rows run newest first, in all three tables.**
+- **Rows run oldest first, in all three tables.**
   - The primary key is *Depuis*.
   - *Suppression* breaks ties.
   - Rows without any version come last.

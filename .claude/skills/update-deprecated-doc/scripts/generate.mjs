@@ -187,7 +187,7 @@ const thead = [
 	'\t</thead>',
 	'\t<tbody>',
 ].join('\n');
-// Newest first: by deprecation version, then deletion version; unversioned rows last, in source order.
+// Oldest first: by deprecation version, then deletion version; unversioned rows last, in source order.
 // The `.mjs` order stays untouched, since Stylelint uses the first matching entry.
 const semver = (v) => (v ? v.split('.').map(Number) : null);
 const compareDesc = (a, b) => {
@@ -195,15 +195,16 @@ const compareDesc = (a, b) => {
 	for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return b[i] - a[i];
 	return 0;
 };
-const byVersionDesc = (x, y) =>
-	compareDesc(semver(x.versionDeprecated ?? x.versionDeleted), semver(y.versionDeprecated ?? y.versionDeleted)) ||
-	compareDesc(semver(x.versionDeleted ?? x.versionDeprecated), semver(y.versionDeleted ?? y.versionDeprecated));
+const compareAsc = (a, b) => (!a || !b ? compareDesc(a, b) : compareDesc(b, a));
+const byVersionAsc = (x, y) =>
+	compareAsc(semver(x.versionDeprecated ?? x.versionDeleted), semver(y.versionDeprecated ?? y.versionDeleted)) ||
+	compareAsc(semver(x.versionDeleted ?? x.versionDeprecated), semver(y.versionDeleted ?? y.versionDeprecated));
 // Deletions up to this version affect under 25% of the org's projects: SKILL.md gives the refresh steps.
 const collapseUpTo = '21.2.2';
 const removedUpTo = (e) => e.versionDeleted && compareDesc(semver(e.versionDeleted), semver(collapseUpTo)) >= 0;
 const table = (entries) => `${thead}\n${entries.map(row).join('\n')}\n\t</tbody>\n</table>\n`;
 const section = (title, file) => {
-	const entries = parse(file).sort(byVersionDesc);
+	const entries = parse(file).sort(byVersionAsc);
 	const removed = entries.filter(removedUpTo);
 	const collapsed = removed.length
 		? `\n<details>\n<summary>Suppressions jusqu\u2019\u00e0 la ${collapseUpTo}</summary>\n\n${table(removed)}\n</details>\n`
