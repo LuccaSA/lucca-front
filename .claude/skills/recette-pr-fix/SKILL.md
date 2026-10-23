@@ -1,6 +1,6 @@
 ---
 name: recette-pr-fix
-description: "Recette d'une branche de fix Lucca Front avant ouverture de la PR : contexte de la branche et conventions du repo (script), lint et tests ciblés sur le diff, points de vigilance et marche à suivre pour tester. Rapide (~30 s) : build et suites complètes restent à la CI. À lancer avant tout `gh pr create` d'une branche fix/*, ou quand l'utilisateur demande une recette / une vérification de sa branche de fix."
+description: "Recette d'une branche de fix Lucca Front avant ouverture de la PR : contexte de la branche et conventions du repo (script), lint et tests ciblés sur le diff, points de vigilance et marche à suivre pour tester. Rapide (~30 s) : build et suites complètes restent à la CI. Une fois la PR ouverte, preuves visuelles avant/après depuis les previews Storybook, publiées en commentaire de la PR. À lancer avant tout `gh pr create` d'une branche fix/*, ou quand l'utilisateur demande une recette / une vérification de sa branche de fix."
 argument-hint: "[--base origin/<branche>]"
 ---
 
@@ -76,8 +76,71 @@ Attendre la fin de l'étape 2, puis répondre en français, court, sans préambu
 
 ### Comment tester
 1. …
+
+### Non vérifié
+- <ce que la recette n'a pas contrôlé et pourquoi : build et e2e (CI), preuve visuelle à venir ou sans objet, état ou thème non capturé…>
 ```
+
+« Non vérifié » est toujours présent : un manque passé sous silence se lit comme « couvert ».
 
 Verdict, en un mot : **✅ Prête** (aucun ❌, aucun 🔴), **⚠️ À vérifier** (des ⚠️ ou 🟡 seulement), **❌ À corriger** (au moins un ❌ ou 🔴).
 
 Si le verdict est ❌, ne pas ouvrir la PR : proposer les corrections et attendre l'accord de l'utilisateur. Sinon, la PR peut être ouverte (template `bugfix.md`), en reprenant « Comment tester » dans le second bloc (contexte pour les relecteurs). Dans la checklist du template, ne cocher que ce que la recette a réellement vérifié (« E2E test or UI diff is added » si le script a vu un test) — jamais `npm run build`, jamais `npm run lint` (seul le lint ciblé a tourné) : la CI fait foi.
+
+## 5. Preuves visuelles (après ouverture de la PR)
+
+**Seulement si le rendu change** : SCSS, template ou style d'un composant. Un fix de pure logique (aucun rendu modifié) n'a pas de capture : sa preuve est `regression-check`, et la recette le dit dans « Non vérifié » plutôt que de publier une capture qui ne prouve rien.
+
+Prérequis : `gh` ≥ 2.99.0 (`gh pr comment --help | grep -q -- --attach`). En dessous, laisser les fichiers à l'utilisateur pour un glisser-déposer et le dire.
+
+1. **Attendre la preview** de la PR, en arrière-plan, sans bloquer l'utilisateur : le workflow `Deploy Lucca Front staging` doit être terminé **sur le dernier commit** (environ 3 à 4 minutes), sinon la capture montre un état antérieur.
+
+   ```bash
+   SHA=$(git rev-parse HEAD); for i in $(seq 40); do
+     R=$(gh run list --workflow deploy-staging.yml --commit $SHA --json status,conclusion --jq '.[0] | "\(.status) \(.conclusion)"')
+     [[ "$R" == completed* ]] && { echo "$R"; break; }; sleep 20; done
+   ```
+
+2. **URLs** : l'après est la preview de la PR, `<domaine>/PR-<n>`, le domaine se lit dans le commentaire du bot (« Storybook preview deployed »). L'avant est `<domaine>/master` **seulement si la base est `master`** : `release/*` et `*-lts` ne sont pas déployés, dans ce cas capturer l'après seul et le dire dans « Non vérifié ».
+3. **Choisir une à trois stories** parmi celles des composants touchés (lignes `ℹ️` de `branch-context`) — la story de doc HTML&CSS qui montre la variante concernée d'abord, la story QA ensuite :
+
+   ```bash
+   node .claude/skills/recette-pr-fix/scripts/visual-proof.mjs --list <after> <composant>...
+   ```
+
+4. **Capturer** dans un dossier du scratchpad, **en chemin absolu** :
+
+   ```bash
+   node .claude/skills/recette-pr-fix/scripts/visual-proof.mjs --before <before> --after <after> --out <dossier> [--hover <sélecteur>] [--touch] <storyId>...
+   ```
+
+   Même cadrage pour l'avant et l'après, recadré sur le contenu peint. `--hover` survole un élément avant la capture ; `--touch` émule un appareil tactile (`hover: none`). Un fix d'état (survol, focus, tactile) ne se voit pas sur une capture au repos : choisir les options qui reproduisent le cas corrigé, et ajouter le cas témoin qui doit rester identique (par exemple `--hover` sans `--touch`).
+
+5. **Regarder chaque image** avant d'écrire sa légende. Une paire marquée `⚠️ identical` n'est pas une preuve du changement : changer d'état ou de story, ou la garder seulement comme cas témoin (« inchangé à la souris »). `❌ not found` : la story n'existe pas dans cette preview.
+6. **Publier** en commentaire de la PR, en anglais, après avoir montré le brouillon à l'utilisateur et obtenu son accord. Écrire `<dossier>/comment.md`, puis :
+
+   ```bash
+   gh pr comment <n> --body-file <dossier>/comment.md --attach <dossier>/<id>--before.png --attach <dossier>/<id>--after.png
+   ```
+
+   Chaque image est référencée dans le body **avec exactement le même chemin absolu** que dans `--attach` : `gh` remplace la référence par l'URL de l'image envoyée. Une image attachée mais non référencée, ou référencée avec un autre chemin (`~`, chemin relatif), atterrit en fin de commentaire.
+
+Anatomie du commentaire :
+
+```markdown
+## Visual proof
+
+**1. <what the reviewer should check, e.g. "On touch devices, a tapped primary button no longer keeps its hover color">**
+
+| Before (`master`) | After (this PR) |
+| --- | --- |
+| ![](<dossier>/<id>--before.png) | ![](<dossier>/<id>--after.png) |
+
+**2. <control case, e.g. "Unchanged with a mouse">** …
+
+<sub>Captured from the Storybook previews `master` and `PR-<n>` · story `<storyId>` · 1280×800 @2x · <options: hover `.button`, touch emulation></sub>
+
+**Not covered:** <states, themes or stories not captured, and why>
+```
+
+Une légende par capture, qui dit **ce que le relecteur doit vérifier** ; l'environnement et les options de capture en pied, pour que n'importe qui puisse la refaire.
