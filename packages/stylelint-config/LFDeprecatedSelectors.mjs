@@ -414,11 +414,18 @@ export default [
 		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
 	},
 	{
-		// The double-n spelling shipped until v18.1.5.
+		// Misspelt class, renamed `.dialog-formOptional` in 18.2.0 without a deprecation.
+		// SEE https://regex101.com/r/XC32QA.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/3bc06c234/packages/scss/src/components/dialog/component.scss#L46.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/0b0e564717726988df6b5f3ea52a46cff841864d.
+		objectPattern: /\.dialog-formOptionnal(?![\w-])/,
+		versionDeleted: '18.2.0',
+		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
+	},
+	{
 		// SEE https://regex101.com/r/WOAbdM.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/13ef1a517c8a6016df65d8dc106c676d120b33cf/packages/scss/src/components/dialog/component.scss#L32.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/0b0e564717726988df6b5f3ea52a46cff841864d.
-		objectPattern: /\.dialog-formOptionn?al(?![\w-])/,
+		objectPattern: /\.dialog-formOptional(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
 	},

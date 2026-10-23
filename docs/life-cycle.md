@@ -359,11 +359,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.dialog-formOptionn?al(?![\w-])">
-				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)dialog-formOptional(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-formOptional</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)dialog-formOptionnal(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-formOptionnal</code></a></li>
-				</ul>
+			<td>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)dialog-formOptional(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-formOptional</code></a>
 			</td>
 			<td>18.3.0</td>
 			<td>–</td>
@@ -1167,6 +1164,14 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				</ul>
 				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)dialog-formOptionnal(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-formOptionnal</code></a>
+			</td>
+			<td>–</td>
+			<td>18.2.0</td>
+			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
 		</tr>
 		<tr>
 			<td>
