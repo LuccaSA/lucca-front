@@ -1,5 +1,18 @@
 # loading
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - LoadingComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

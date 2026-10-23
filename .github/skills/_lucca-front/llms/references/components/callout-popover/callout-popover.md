@@ -1,5 +1,17 @@
 # callout-popover
 
+**Sommaire**
+
+- Import
+- API Reference
+  - CalloutPopoverComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

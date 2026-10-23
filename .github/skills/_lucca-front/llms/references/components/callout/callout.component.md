@@ -1,5 +1,22 @@
 # callout — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Ai action
+  - Ai event
+  - Ai suggestion
+  - Ai
+  - Basic
+- HTML/CSS
+  - Actions
+  - ActionsInline
+  - Basic
+  - Ia
+  - Icons
+  - Killable
+  - Title
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-angular-ai--docs)
 
 ## Angular

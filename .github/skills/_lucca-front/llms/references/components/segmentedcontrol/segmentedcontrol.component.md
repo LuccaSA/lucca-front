@@ -1,5 +1,15 @@
 # segmentedcontrol — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Control tabs
+  - Control
+- HTML/CSS
+  - Onglets
+  - Control filter
+  - Control tabs
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-segmentedcontrol-angular-tabs--docs)
 
 ## Angular

@@ -1,5 +1,15 @@
 # switchfield — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Field
+- HTML/CSS
+  - Field disabled
+  - Field invalid
+  - Field size
+  - Field
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-switchfield-angular--docs)
 
 ## Angular

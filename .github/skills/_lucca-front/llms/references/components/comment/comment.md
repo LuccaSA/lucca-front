@@ -1,5 +1,18 @@
 # comment
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - CommentBlockComponent (component)
+  - CommentChatComponent (component)
+  - CommentComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

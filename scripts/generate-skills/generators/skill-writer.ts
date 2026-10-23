@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { SkillManifest, VersionConfig, WriteResult, PatchManifestEntry } from '../types';
 import { TechnicalMinorPatches, followsCode } from '../version-config';
+import { withTableOfContents } from './table-of-contents';
 
 /**
  * The generated documentation of one minor, no version in its path: the @lucca-front/ng package of
@@ -268,7 +269,7 @@ function writeFile(dir: string, filename: string, content: string): WriteResult 
 
 	const isUpdate = fs.existsSync(filePath);
 	fs.mkdirSync(dir, { recursive: true });
-	fs.writeFileSync(filePath, content, 'utf-8');
+	fs.writeFileSync(filePath, withTableOfContents(content), 'utf-8');
 
 	return { status: isUpdate ? 'updated' : 'created', path: filePath };
 }

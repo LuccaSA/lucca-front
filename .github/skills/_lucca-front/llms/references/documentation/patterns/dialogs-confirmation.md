@@ -1,5 +1,28 @@
 # Dialogs de confirmation
 
+**Sommaire**
+
+- Suppression
+  - Contexte d’utilisation
+  - Contenu et rédaction
+    - Niveau 1 : impact faible
+    - Niveau 2 : impact moyen
+    - Niveau 3 : impact élevé
+    - Bonnes pratiques de rédaction
+- Modifications non sauvegardées
+  - Contexte d’utilisation
+  - Contenu et rédaction
+    - Sans action de diffusion
+    - Avec action de diffusion
+- Validation
+  - Contexte d’utilisation
+  - Contenu et rédaction
+    - Niveau 1 : impact faible
+    - Niveau 2 : impact moyen
+    - Niveau 3 : impact élevé
+    - Bonnes pratiques de rédaction
+  - Règles d'utilisation
+
 # Suppression
 
 ## **Contexte d’utilisation**

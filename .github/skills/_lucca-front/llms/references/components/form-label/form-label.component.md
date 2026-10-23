@@ -1,5 +1,15 @@
 # form-label — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Label basic
+- HTML/CSS
+  - Label basic
+  - Label counter
+  - Label error
+  - Label size
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-form-label-angular-basic--docs)
 
 ## Angular

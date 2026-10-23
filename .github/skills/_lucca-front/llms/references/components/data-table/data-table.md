@@ -1,5 +1,27 @@
 # data-table
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - DataTableBodyComponent (component)
+  - DataTableRowCellHeaderComponent (component)
+  - DataTableRowCellComponent (component)
+  - DataTableFootComponent (component)
+  - DataTableHeadComponent (component)
+  - DataTableRowComponent (component)
+  - DataTableComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.6
+  - 22.0.5
+  - 22.0.1
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

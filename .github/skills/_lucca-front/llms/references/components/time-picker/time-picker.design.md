@@ -1,5 +1,23 @@
 # time-picker — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Message d'aide
+    - Champ obligatoire
+    - Inactif
+  - Comportement
+    - Utilisation dans un formulaire
+    - Utilisation “Standalone”
+    - Incrémentation selon un pas pré-défini
+    - Valeur maximale et minimale
+    - Comportement sur mobile
+  - Contenu & internationalisation
+    - Système horaire sur 12 heures
+    - Heures et minutes
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/2473a1)
 
 # Design

@@ -1,5 +1,42 @@
 # data-table — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Sélection
+  - Lien vers un nouvelle page
+  - Basic
+  - Draggable
+  - Inject
+  - Overflow
+  - Responsive
+- HTML/CSS
+  - Alignement horizontal
+  - Alignement vertical
+  - Basic
+  - Border
+  - Draggable
+  - Editable
+  - State
+  - Columns responsive
+  - Fixed columns
+  - Group
+  - Hover
+  - Nested
+  - Both
+  - Overflow horizontal
+  - Overflow vertical
+  - Pagination
+  - Actions
+  - Selectable hover
+  - Selectable
+  - Sort
+  - Columns multiple
+  - Sticky columns
+  - Header columns
+  - Header
+  - Tree
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
 
 ## Angular

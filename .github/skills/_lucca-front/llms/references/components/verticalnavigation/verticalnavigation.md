@@ -1,5 +1,19 @@
 # verticalnavigation
 
+**Sommaire**
+
+- Import
+- API Reference
+  - VerticalNavigationLinkComponent (component)
+  - VerticalNavigationComponent (component)
+  - VerticalNavigationGroupComponent (component)
+  - VerticalNavigationItemComponent (component)
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

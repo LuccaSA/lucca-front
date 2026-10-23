@@ -1,5 +1,15 @@
 # callout-disclosure — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Disclosure
+- HTML/CSS
+  - Basic
+  - Iconless
+  - Size
+  - Status
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular-basic--docs)
 
 ## Angular

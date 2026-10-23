@@ -1,5 +1,20 @@
 # Parcours de création de ressource : sans action de diffusion
 
+**Sommaire**
+
+- Création
+  - Types de parcours
+    - Formulaire simple
+    - Formulaire en étapes
+    - Création de ressources contextuelles
+  - Gestion des erreurs
+  - Sortie de parcours
+- Consultation et modification
+  - Affichage des ressources
+  - Consultation d’une ressource
+    - Consultation en Dialog
+    - Consultation en pleine page
+
 # Création
 
 ## Types de parcours

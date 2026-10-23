@@ -1,5 +1,26 @@
 # fancy-dialog
 
+**Sommaire**
+
+- Import
+- API Reference
+  - DialogContentComponent (component)
+  - DialogFooterComponent (component)
+  - DialogHeaderAction (directive)
+  - DialogHeaderSubtitle (directive)
+  - DialogHeaderComponent (component)
+  - DialogRoutingContainerComponent (component)
+  - DialogComponent (component)
+  - DialogCloseDirective (directive)
+  - DialogDismissDirective (directive)
+  - DialogOpenDirective (directive)
+  - Providers
+  - Injection tokens
+  - Services
+- Related files
+- Changelog
+  - 22.0.0
+
 ## Import
 
 ```typescript

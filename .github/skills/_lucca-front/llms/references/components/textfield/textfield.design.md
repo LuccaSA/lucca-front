@@ -1,5 +1,31 @@
 # textfield — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Placeholder
+    - Message d'aide
+    - Champ obligatoire
+    - Inactif
+    - Préfixe et suffixe
+    - Icône
+    - Compteur de caractères
+    - Champ nombre
+  - Comportement
+    - Débordement
+    - États spécifiques (erreur, avertissement, succès)
+  - Règles d'utilisation
+    - Toujours afficher le Label
+    - Écrire un Label court et précis
+    - Textfield ou Textarea
+    - Choisir une largeur appropriée
+    - Effacer le contenu du champ
+    - Alignement du contenu à droite
+    - Utilisation dans un tableau
+    - Utilisation dans les titres
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/459eda)
 
 # Design

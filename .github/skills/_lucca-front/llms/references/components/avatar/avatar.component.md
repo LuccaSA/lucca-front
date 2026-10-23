@@ -1,5 +1,18 @@
 # avatar — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Basic
+  - Group
+- HTML/CSS
+  - Avatars basic
+  - Display
+  - Group basic
+  - Clickable
+  - More
+  - Sizes
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-users-avatar-angular-basic--docs)
 
 ## Angular

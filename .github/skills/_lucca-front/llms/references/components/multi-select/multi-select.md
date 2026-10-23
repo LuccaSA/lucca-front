@@ -1,5 +1,22 @@
 # multi-select
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuMultiSelectContentDisplayerComponent (component)
+  - LuMultiSelectCounterDisplayerComponent (component)
+  - LuMultiSelectDefaultDisplayerComponent (component)
+  - LuMultiSelectDisplayerInputDirective (directive)
+  - LuMultiDisplayerDirective (directive)
+  - LuMultiSelectWithSelectAllDirective (directive)
+  - LuMultiSelectInputComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

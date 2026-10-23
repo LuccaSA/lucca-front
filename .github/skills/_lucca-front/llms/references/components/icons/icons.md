@@ -1,5 +1,16 @@
 # icons
 
+**Sommaire**
+
+- Import
+- API Reference
+  - IconComponent (component)
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

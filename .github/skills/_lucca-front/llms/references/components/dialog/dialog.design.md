@@ -1,5 +1,26 @@
 # dialog — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Couleur de fond
+    - HorizontalNavigation
+  - Règle d’utilisation
+    - Positionnement des actions
+  - Cas d’usage
+    - Création et édition d’un objet
+    - Comportement responsive
+    - Dialog de confirmation
+    - FancyDialog
+- Content
+  - Titre
+    - Recommandations
+    - Exemples
+  - Bouton d’action
+    - Recommandations
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/841b0b)
 
 # Design

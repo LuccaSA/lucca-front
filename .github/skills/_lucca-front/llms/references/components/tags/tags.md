@@ -1,5 +1,17 @@
 # tags
 
+**Sommaire**
+
+- Import
+- API Reference
+  - TagComponent (component)
+- Type definitions
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

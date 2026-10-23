@@ -1,5 +1,23 @@
 # dropdown
 
+**Sommaire**
+
+- Import
+- API Reference
+  - DropdownActionComponent (component)
+  - DropdownDividerComponent (component)
+  - DropdownGroupComponent (component)
+  - DropdownItemComponent (component)
+  - DropdownMenuComponent (component)
+  - LuDropdownItemDirective (directive)
+  - LuDropdownPanelComponent (component)
+  - LuDropdownTriggerDirective (directive)
+  - Modules dépréciés
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

@@ -1,5 +1,18 @@
 # daterangeinput
 
+**Sommaire**
+
+- Import
+- API Reference
+  - DateRangeInputComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

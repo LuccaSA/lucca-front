@@ -1,5 +1,60 @@
 # multi-select — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Placeholder
+    - Champ désactivé
+    - Faux indicateur de sélection
+    - Tout sélectionner
+    - Regroupements d'options
+    - Structure arborescente
+    - Bouton d'ajout d'option
+    - Sélection de collaborateurs
+  - Comportement
+    - Affichage des résultats
+    - Recherche
+    - État vide
+    - Chargement
+    - États spécifiques
+    - Responsive
+  - Règles d'utilisation
+    - Checkbox ou Select
+    - Affichage du label
+    - Choisir une largeur appropriée
+    - Largeur du menu déroulant
+- Design (iOS)
+  - Anatomie
+  - Options
+    - Bouton d'ajout d'option
+  - Comportement
+    - Recherche
+    - État vide
+    - Nombre d'options sélectionnées
+    - Affichage des résultats
+  - Règles d'utilisation
+    - Résumé de sélection
+    - Orientation du chevron
+- Design (Android)
+  - Anatomie
+  - Options
+    - Bouton d'ajout d'option
+  - Comportement
+    - Recherche
+    - État vide
+    - Nombre d'options sélectionnées
+    - Affichage des résultats
+  - Règles d'utilisation
+    - Positionnement du label
+    - Résumé de sélection
+    - Orientation du chevron
+- Content
+  - Contenu et rédaction
+    - Label
+    - Message
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/927519)
 
 # Design

@@ -1,5 +1,35 @@
 # approbation-inbox — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Detail
+  - List
+- HTML/CSS
+  - Detail basic
+  - Block insideDialog
+  - Block
+  - Header all
+  - Header delegation
+  - Header description
+  - Header illustration
+  - Header insideDialog
+  - Header moreActions
+  - Header
+  - InsideDialog
+  - List basic
+  - Filterable
+  - Group basic
+  - Group collapsed
+  - Group selectable
+  - Item centered
+  - Item current
+  - Item data
+  - Item selectable
+  - Item
+  - Selectable
+  - Selected
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-approbation-inbox-angular-detail--docs)
 
 ## Angular

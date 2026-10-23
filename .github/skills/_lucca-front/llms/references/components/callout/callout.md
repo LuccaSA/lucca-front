@@ -1,5 +1,22 @@
 # callout
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - CalloutActionsComponent (component)
+  - CalloutFeedbackItemDescriptionDirective (directive)
+  - CalloutFeedbackItemComponent (component)
+  - CalloutFeedbackListComponent (component)
+  - CalloutComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript

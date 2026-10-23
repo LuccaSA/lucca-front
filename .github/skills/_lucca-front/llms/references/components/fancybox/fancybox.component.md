@@ -1,5 +1,16 @@
 # fancybox — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Box basic
+  - Box deprecated
+- HTML/CSS
+  - Box basic
+  - Box deprecated
+  - Box only bubbles
+  - Box size
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-fancybox-angular-basic--docs)
 
 ## Angular

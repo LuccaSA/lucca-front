@@ -1,5 +1,20 @@
 # tags — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Tag
+- HTML/CSS
+  - Basic
+  - Clickable
+  - HiddenLabel
+  - Ia
+  - Icon
+  - OnlyIcon
+  - Outlined
+  - Palettes
+  - Sizes
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-tags-angular-basic--docs)
 
 ## Angular
