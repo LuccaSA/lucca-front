@@ -70,7 +70,6 @@ import { ResourceCardButtonComponent, ResourceCardLinkComponent, ResourceCardCom
 
 - 📝 [Code & implementation](./resource-card.component.md)
 
-- 🎯 [Figma design tokens](./resource-card.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-resource-card-angular-basic--docs)
 
 ## Changelog

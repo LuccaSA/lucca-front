@@ -49,7 +49,6 @@ import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-in
 
 - 📝 [Code & implementation](./phonenumberfield.component.md)
 - 🎨 [Design guidelines](./phonenumberfield.design.md)
-- 🎯 [Figma design tokens](./phonenumberfield.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-phonenumberfield-angular--docs)
 
 ## Changelog

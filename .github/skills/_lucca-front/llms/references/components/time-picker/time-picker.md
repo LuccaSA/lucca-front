@@ -61,7 +61,6 @@ import { TimePickerComponent } from '@lucca-front/ng/time';
 ## Related files
 
 - 🎨 [Design guidelines](./time-picker.design.md)
-- 🎯 [Figma design tokens](./time-picker.figma.md)
 
 ## Changelog
 

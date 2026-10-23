@@ -52,7 +52,6 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 
 - 📝 [Code & implementation](./loading.component.md)
 - 🎨 [Design guidelines](./loading.design.md)
-- 🎯 [Figma design tokens](./loading.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-loading-angular-basic--docs)
 
 ## Changelog

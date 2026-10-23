@@ -41,7 +41,6 @@ import { LuUserPictureComponent } from '@lucca-front/ng/user';
 
 - 📝 [Code & implementation](./avatar.component.md)
 
-- 🎯 [Figma design tokens](./avatar.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-users-avatar-angular-basic--docs)
 
 ## Changelog

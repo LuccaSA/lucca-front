@@ -85,7 +85,6 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 
 - 📝 [Code & implementation](./form-field.component.md)
 
-- 🎯 [Figma design tokens](./form-field.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-form-field--docs)
 
 ## Changelog

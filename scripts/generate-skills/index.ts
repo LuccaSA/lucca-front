@@ -8,7 +8,6 @@
  * - AST extraction → Angular API (inputs, selectors, types)
  * - ZeroHeight .md → Design guidelines
  * - Storybook index.json → Story links + source code
- * - Figma REST API → Design variant tokens (optional)
  *
  * Usage:
  *   npx ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts [options]
@@ -18,15 +17,14 @@
  *                        a branch carries one minor of it, the npm package of that minor ships it.
  *                        references/ = latest published patch, fixes/ = per-patch deltas.
  *   --component <slug>   Generate only the specified component
- *   --skip-figma         Skip Figma data collection
  *   --skip-zeroheight    Skip ZeroHeight data collection
  *   --dry-run            Print what would be generated without writing files
  *   --validate           Validate ZH coverage of component-map.json (no generation)
- *   --retry-failed       Replay only the units whose ZH/Figma fetch failed in a previous run
+ *   --retry-failed       Replay only the units whose ZH fetch failed in a previous run
  *   --accept-shrink      Accept content regressions vs the baselines (legitimate deletions)
  *   --accept-output-violations
  *                        Do not fail the run on output-guard violations (see generators/output-guard.ts)
- *   --offline            No network: ZeroHeight and Figma are read from the committed baselines,
+ *   --offline            No network: ZeroHeight is read from the committed baselines,
  *                        the Storybook index from --storybook-index, and no pre-flight runs.
  *   --storybook-index <file>
  *                        Storybook index.json to read instead of the deployed one (required by --offline
@@ -43,12 +41,6 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import { extractPackageAPI } from './collectors/ast-extractor';
-import {
-	fetchFigmaDesignTokensMerged,
-	prefetchFigmaNodes,
-	setAcceptShrink as setFigmaAcceptShrink,
-	setOffline as setFigmaOffline,
-} from './collectors/figma-connect';
 import { promoteEagerly } from './collectors/git-snapshot';
 import { fetchStorybookIndex, restrictToStoryFamily, setStorybookIndexFile } from './collectors/storybook';
 import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates, resolveScssComponentName, listScssComponentNames, sanitizeScssForwards } from './collectors/story-source';
@@ -71,7 +63,6 @@ import {
 	renderDesignMd,
 	renderComponentPageMd,
 	renderChangelogMd,
-	renderFigmaMd,
 	collectSharedTypeDefs,
 	renderSharedTypeMd,
 } from './generators/template-renderer';
@@ -80,8 +71,6 @@ import {
 	cleanComponentDirectory,
 	writeDesign,
 	writeComponentPage,
-	writeFigmaSkill,
-	figmaSkillExists,
 	writeSkillManifest,
 	clearSkillContent,
 	cleanFixesDirectory,
@@ -96,7 +85,7 @@ import { writeFixes } from './generators/fixes-writer';
 import { snapshotSkill, writeReviewChangelog } from './generators/version-diff-writer';
 import { auditStoryExamples, clearOutputViolations, reportOutputViolations } from './generators/output-guard';
 import { ensureZhReleaseIds } from './zh-release-guard';
-import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist, isNewMinor, refuseMinorForThisBranch, refuseOfflineRunOnNewMinor, refusePartialRunOnNewMinor } from './preflight';
+import { PreflightAbort, ensureReleasesExist, isNewMinor, refuseMinorForThisBranch, refuseOfflineRunOnNewMinor, refusePartialRunOnNewMinor } from './preflight';
 import { MinorResolution, followsCode, getTechnicalMinor, parseVersion, resolveMinorVersion, resolveSourceVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
@@ -129,7 +118,6 @@ function getFlags(name: string): string[] {
 const flags = {
 	versions: getFlags('version'),
 	component: getFlag('component'),
-	skipFigma: args.includes('--skip-figma'),
 	skipZeroheight: args.includes('--skip-zeroheight'),
 	skipDocumentation: args.includes('--skip-documentation'),
 	skipTools: args.includes('--skip-tools'),
@@ -350,7 +338,6 @@ async function main(): Promise<void> {
 	// Shrink policy: with --accept-shrink, a content regression vs the baseline is taken as a
 	// legitimate deletion (fresh content written, baselines updated) instead of being held back.
 	setZhAcceptShrink(flags.acceptShrink);
-	setFigmaAcceptShrink(flags.acceptShrink);
 
 	if (flags.offline) {
 		const refused = [flags.retryFailed && '--retry-failed', flags.acceptShrink && '--accept-shrink'].filter(Boolean);
@@ -363,7 +350,6 @@ async function main(): Promise<void> {
 			process.exit(1);
 		}
 		setZhOffline(true);
-		setFigmaOffline(true);
 	}
 	if (flags.minor && !/^\d+\.\d+$/.test(flags.minor)) {
 		console.error(`❌ --minor ${flags.minor} : attendu une mineure « M.m » (ex : 22.2).`);
@@ -466,21 +452,16 @@ async function main(): Promise<void> {
 	}
 
 	// ── Pre-flight ────────────────────────────────────────────────────────────
-	// Three phases, ordered so that no question is asked while a check can still stop the run, and
-	// so nothing is persisted before the last abort door (the ZeroHeight prompt writes an ID to
-	// zh-release-ids.json the instant it is typed — see preflight.ts).
+	// Two phases, ordered so that no question is asked while a check can still stop the run.
 
 	// Phase 1 — the release exists: tag, clone up to date, npm publication, deployed Storybook.
 	// Read-only, so it runs under --dry-run too: learning that the release is not ready is exactly
 	// what a dry run is for.
-	// Phase 2 — a usable Figma token, or a deliberate yes to generate without one. A question, so it
-	// is skipped when nothing will be written, like the ZeroHeight guard below.
 	// Offline, every check here is a network call with nothing to ask: the tag itself is already
 	// proven by resolveMinorVersion.
 	try {
 		// --ref reads a commit, not the release: its tag is long published, its Storybook built locally.
 		if (!flags.offline && !flags.ref) await ensureReleasesExist([...resolutions.values()]);
-		if (!flags.dryRun && !flags.offline) await ensureFigmaAccess(config.figma, { skipFigma: flags.skipFigma });
 	} catch (err: any) {
 		if (!(err instanceof PreflightAbort)) throw err;
 		// A refusal is a decision, not a crash — but nothing was generated, so it still exits 1,
@@ -489,7 +470,7 @@ async function main(): Promise<void> {
 		process.exit(1);
 	}
 
-	// Phase 3 — every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
+	// Phase 2 — every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
 	// the confirmed latest online. Aborts before any heavy work if an unpinned, superseded minor is
 	// unresolved (would otherwise pull "latest" = a newer version and corrupt its design sections).
 	if (!flags.skipZeroheight && !flags.dryRun && !flags.offline) {
@@ -514,7 +495,7 @@ async function main(): Promise<void> {
 	// Taken before anything is written: the review changelog diffs the run's output against it.
 	const previousSkill = flags.dryRun || flags.component ? null : snapshotSkill(config.output.skillsDir, committed);
 	// The writers only clean what they regenerate: on a new minor, a page the minor no longer emits
-	// would survive with the previous minor's content, and SKILL.md §6 would still list it.
+	// would survive with the previous minor's content, and SKILL.md §5 would still list it.
 	if (previousSkill && isNewMinor(flags.versions[0], committed?.minor ?? null)) {
 		clearSkillContent(config.output.skillsDir);
 	}
@@ -637,7 +618,7 @@ async function main(): Promise<void> {
 		console.log(`📝 Review changelog: ${path.relative(config.output.skillsDir, clPath)}`);
 	}
 
-	// Surface ZH/Figma fetch failures (content missing) and persist them for replay. Offline fetches
+	// Surface ZH fetch failures (content missing) and persist them for replay. Offline fetches
 	// nothing, so it leaves the manifest of the last online run alone.
 	if (!flags.dryRun && !flags.component) {
 		reportFailures();
@@ -670,7 +651,7 @@ async function main(): Promise<void> {
 }
 
 /**
- * Replays only the units whose ZH/Figma fetch failed in a previous run (read from the manifest):
+ * Replays only the units whose ZH fetch failed in a previous run (read from the manifest):
  * components, documentation pages, tool pages and the deprecated page — each through its own
  * collector. Then refreshes the SKILL.md.
  * Rewrites the manifest with whatever still fails — so it can be replayed again until empty.
@@ -742,7 +723,7 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 		touched.push(resolution);
 	}
 
-	// fixes/ are NOT rewritten here: they are git-sourced only, unaffected by ZH/Figma retries.
+	// fixes/ are NOT rewritten here: they are git-sourced only, unaffected by ZH retries.
 	if (!flags.dryRun) {
 		for (const resolution of touched) {
 			writeToc(config.output.skillsDir, resolution.version, resolution.patchTags, resolution.technicalMinors);
@@ -815,15 +796,6 @@ async function processVersion(
 
 	// Process each component
 	const entries: [string, ComponentEntry][] = discovered.map(c => [c.slug, c.entry]);
-
-	// Batched Figma prefetch: all node ids in a handful of Tier-1 requests, filling the process
-	// cache so the per-component fetches below are network no-ops (cache persists across versions).
-	if (!flags.skipFigma && !flags.offline && config.figma.token) {
-		const allNodeIds = entries.flatMap(([, entry]) => entry.figmaNodeIds ?? []);
-		if (allNodeIds.length > 0) {
-			await prefetchFigmaNodes(config.figma.fileKey, allNodeIds, config.figma.token);
-		}
-	}
 
 	console.log(`\n⚙️  Processing ${entries.length} components...\n`);
 
@@ -964,26 +936,6 @@ async function processVersion(
 				await formatStoryTemplates(storyExamples);
 			}
 
-			// 5. Figma tokens (optional, unversioned) — ALL node ids merged (aliases, split sets)
-			let figmaTokens = null;
-			if (!flags.skipFigma && entry.figmaNodeIds && entry.figmaNodeIds.length > 0 && (config.figma.token || flags.offline)) {
-				try {
-					figmaTokens = await fetchFigmaDesignTokensMerged(config.figma.fileKey, entry.figmaNodeIds, config.figma.token);
-				} catch (err: any) {
-					if (err instanceof TransientFetchError) {
-						recordFailure({
-							source: 'figma',
-							slug,
-							version: `${version.major}.${version.minor}.${version.patch}`,
-							ref: entry.figmaNodeIds.join(','),
-							status: err.status,
-							reason: err.message,
-						});
-					}
-					console.warn(`     ⚠️  Figma: ${err.message}`);
-				}
-			}
-
 			// Build component data
 			const data: ComponentData = {
 				slug,
@@ -994,7 +946,6 @@ async function processVersion(
 				storybook: sbGroup,
 				storyExamples,
 				basicUsage,
-				figma: figmaTokens,
 			};
 
 			if (flags.dryRun) {
@@ -1019,10 +970,6 @@ async function processVersion(
 				zhProse: renderChangelogMd(data),
 			});
 
-			// Main API reference — the changelog (structural API diff + ZH prose layer) is embedded
-			// as its trailing ## Changelog section. hasFigma: tokens fetched this run, or a .figma.md
-			// kept from a previous run (figma skipped/unavailable) — the link must survive either way.
-			const hasFigma = figmaTokens !== null || figmaSkillExists(config.output.skillsDir, slug);
 			// Design guidelines, merged into a single <slug>.design.md (designResult computed above)
 			let codeSections: DesignSection[] = [];
 			if (designResult) {
@@ -1051,23 +998,17 @@ async function processVersion(
 			// code section ended up with a page nobody linked to.
 			const componentPageMd = renderComponentPageMd(data, codeSections, scssImport);
 
-			const mdContent = renderComponentMd(data, { hasDesign, changelog: clMd, hasFigma, hasComponentPage: componentPageMd !== null });
+			const mdContent = renderComponentMd(data, { hasDesign, changelog: clMd, hasComponentPage: componentPageMd !== null });
 			const result = writeComponentApi(config.output.skillsDir, slug, mdContent);
 
 			if (componentPageMd) {
 				writeComponentPage(config.output.skillsDir, slug, componentPageMd);
 			}
 
-			// Figma skill
-			if (figmaTokens) {
-				const figmaMd = renderFigmaMd(slug, [figmaTokens], config.figma.fileKey);
-				writeFigmaSkill(config.output.skillsDir, slug, figmaMd);
-			}
-
 			const nDesign = hasDesign && designResult ? designResult.designSections.length : 0;
 			const nStories = storyExamples?.length ?? 0;
 			processed++;
-			console.log(`  [${processed}/${totalComponents}] ✅ ${slug} — ${nStories} stories, ${nDesign} design${figmaTokens ? ', figma' : ''}`);
+			console.log(`  [${processed}/${totalComponents}] ✅ ${slug} — ${nStories} stories, ${nDesign} design`);
 			successCount++;
 			return { slug, status: result.status, data };
 		} catch (err: any) {

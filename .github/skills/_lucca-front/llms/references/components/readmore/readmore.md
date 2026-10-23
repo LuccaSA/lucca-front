@@ -34,7 +34,6 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 
 - 📝 [Code & implementation](./readmore.component.md)
 
-- 🎯 [Figma design tokens](./readmore.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-readmore-angular-ai--docs)
 
 ## Changelog

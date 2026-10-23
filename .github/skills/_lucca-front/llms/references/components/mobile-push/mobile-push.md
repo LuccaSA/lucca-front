@@ -42,7 +42,6 @@ import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
 
 - 📝 [Code & implementation](./mobile-push.component.md)
 
-- 🎯 [Figma design tokens](./mobile-push.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-mobile-push-angular-basic--docs)
 
 ## Changelog

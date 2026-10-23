@@ -89,7 +89,6 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 
 - 📝 [Code & implementation](./userpopover.component.md)
 - 🎨 [Design guidelines](./userpopover.design.md)
-- 🎯 [Figma design tokens](./userpopover.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-users-display-userpopover--docs)
 
 ## Changelog

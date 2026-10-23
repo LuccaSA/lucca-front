@@ -49,7 +49,6 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 
 - 📝 [Code & implementation](./button.component.md)
 - 🎨 [Design guidelines](./button.design.md)
-- 🎯 [Figma design tokens](./button.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-actions-button-angular-ai--docs)
 
 ## Changelog

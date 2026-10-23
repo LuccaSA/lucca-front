@@ -101,7 +101,6 @@ import { CalloutActionsComponent, CalloutFeedbackItemDescriptionDirective, Callo
 
 - 📝 [Code & implementation](./callout.component.md)
 - 🎨 [Design guidelines](./callout.design.md)
-- 🎯 [Figma design tokens](./callout.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-angular-ai--docs)
 
 ## Changelog
