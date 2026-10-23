@@ -1,6 +1,6 @@
 # API Angular hors composants
 
-> Providers, injection tokens, pipes et services exportés par `@lucca-front/ng/*` qui ne sont documentés sur la page d'aucun composant (package sans composant, ou symbole éloigné des composants du package). Extraits du code source au tag `v22.0.0` (JSDoc `@deprecated` inclus).
+> Providers, injection tokens, pipes et services exportés par `@lucca-front/ng/*` qui ne sont documentés sur la page d'aucun composant (package sans composant, ou symbole éloigné des composants du package). Extraits du code source (JSDoc `@deprecated` inclus).
 
 ## api (`@lucca-front/ng/api`)
 
@@ -122,6 +122,15 @@ bind to a string with iso 26001 format YYYY-MM-DD
 #### LuEstablishmentService
 
 #### LuLegalUnitService
+
+## filter-pills/core (`@lucca-front/ng/filter-pills/core`)
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `FILTER_PILL_INPUT_COMPONENT` | `FilterPillInputComponent` | — |
+| `FILTER_PILL_HOST_COMPONENT` | `FilterPillHostComponent` | — |
 
 ## formly (`@lucca-front/ng/formly`)
 

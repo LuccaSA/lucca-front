@@ -36,11 +36,11 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 - 📝 [Code & implementation](./gauge.component.md)
 
 - 🎯 [Figma design tokens](./gauge.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-loaders-gauge-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-gauge-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -52,6 +52,12 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 ~ `size` : transform numberAttribute → luNumberAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
 
 #### 20.3.1
 

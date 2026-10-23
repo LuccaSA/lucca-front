@@ -1,6 +1,6 @@
 # segmentedcontrol — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-segmentedcontrol-angular-tabs--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-segmentedcontrol-angular-tabs--docs)
 
 ## Angular
 
@@ -16,7 +16,7 @@ import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } fro
 
 ```html
 <ng-template #label>Lorem</ng-template>
-<lu-segmented-control-tabs>
+<lu-segmented-control-tabs [ariaLabel]="ariaLabel">
 	<lu-segmented-control-tabs-panel [label]="label" value="0">
 		<div class="demo">Content Lorem</div>
 	</lu-segmented-control-tabs-panel>
@@ -40,7 +40,7 @@ import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@luc
 
 ```html
 <ng-template #label>Lorem</ng-template>
-<lu-segmented-control [(ngModel)]="sample">
+<lu-segmented-control [ariaLabel]="ariaLabel" [(ngModel)]="sample">
 	<lu-segmented-control-filter [label]="label" value="0" />
 	<lu-segmented-control-filter label="Ipsum" value="1" />
 	<lu-segmented-control-filter label="Dolor sit amet" value="2" />
@@ -68,20 +68,20 @@ Les filtres s’appliquent à un même jeu de données. Ce sont des options de f
 ```
 
 ```html
-<ul class="segmentedControl" role="presentation">
-	<li class="segmentedControl-item">
+<ul class="segmentedControl" role="radiogroup" aria-label="Lorem ipsum">
+	<li class="segmentedControl-item" role="presentation">
 		<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
 		<label for="tab1" class="segmentedControl-item-action">Lorem</label>
 	</li>
-	<li class="segmentedControl-item">
+	<li class="segmentedControl-item" role="presentation">
 		<input type="radio" class="segmentedControl-item-input" name="tab" id="tab2" />
 		<label for="tab2" class="segmentedControl-item-action">Ipsum</label>
 	</li>
-	<li class="segmentedControl-item">
+	<li class="segmentedControl-item" role="presentation">
 		<input type="radio" class="segmentedControl-item-input" name="tab" id="tab3" />
 		<label for="tab3" class="segmentedControl-item-action">Dolor sit amet</label>
 	</li>
-	<li class="segmentedControl-item">
+	<li class="segmentedControl-item" role="presentation">
 		<input type="radio" class="segmentedControl-item-input" name="tab" id="tab4" />
 		<label for="tab4" class="segmentedControl-item-action">Consectetur adipisicing elit</label>
 	</li>
@@ -95,7 +95,7 @@ Les filtres s’appliquent à un même jeu de données. Ce sont des options de f
 ```
 
 ```html
-<ul class="segmentedControl" role="tablist">
+<ul class="segmentedControl" role="tablist" [attr.aria-label]="ariaLabel">
 	<li class="segmentedControl-item" role="presentation">
 		<button
 			class="segmentedControl-item-action"

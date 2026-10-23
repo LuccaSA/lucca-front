@@ -9,7 +9,7 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 ## Basic Usage
 
 ```html
-<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank"></lu-highlight-data>
+<lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" />
 ```
 
 ## API Reference
@@ -27,7 +27,7 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 | `subText` | `subText` | `PortalContent` | — | — | — | Texte secondaire. [PortalContent] |
 | `bubble` | `bubble` | `HighlightDataBubble \| number` | `undefined` | — | `luOptionalNumberAttribute` | — |
 | `theme` | `theme` | `'white' \| 'light' \| 'dark'` | `'white'` | — | — | — |
-| `palette` | `palette` | `HighlightDataPalette \| string` | `'lucca'` | — | — | La palette influençant également la couleur du SVG des bubbles et donc l’URL associée, il est nécessaire de renseigner l… |
+| `palette` | `palette` | `HighlightDataPalette \| string` | `'lucca'` | — | — | La palette influence également la couleur des bubbles. |
 | `illustration` | `illustration` | `HighlightDataIllustration \| string` | — | — | — | Il est également possible de renseigner une URL. |
 | `size` | `size` | `HighlightDataSize \| null` | `null` | — | — | — |
 | `valueFirst` | `valueFirst` | `boolean` | `false` | — | `luBooleanAttribute` | — |
@@ -42,11 +42,11 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 - 📝 [Code & implementation](./highlight-data.component.md)
 - 🎨 [Design guidelines](./highlight-data.design.md)
 - 🎯 [Figma design tokens](./highlight-data.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-highlight-data-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-highlight-data-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -55,6 +55,18 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 ~ `nested` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Changed
+
+- The `bubble` is now rendered as an inline SVG coloured with CSS variables: its colours follow the `palette` and `theme` inputs, and a single bubble file per number is used for every palette (`highlight-data/bubbles/<n>.svg`).
+
+#### 21.4.1
+
+##### Fixed
+
+- Palette of outlined buttons inside the component.
 
 #### 21.3.1
 

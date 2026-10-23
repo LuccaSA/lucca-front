@@ -1,5 +1,5 @@
 ---
-title: Animations
+title: Animations (provideAnimations) 👀
 ---
 
 # Content

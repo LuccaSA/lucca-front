@@ -14,7 +14,7 @@
 
 ### Avec label
 
-Si le commentaire est proche du contenu mais pas immédiatement visible (par exemple, si l’utilisateur doit scroller pour retrouver ces informations), envisagez d'utiliser un label "Commentaire".
+Si le commentaire est proche du contenu mais pas immédiatement visible (par exemple, si l’utilisateur doit scroller pour retrouver ces informations), envisagez d'utiliser un Label "Commentaire".
 
 ### Hauteur maximale
 
@@ -42,7 +42,7 @@ Les commentaires dans un fil d’activité sont intégrés dans un historique d�
 
 Ce contexte correspond à une conversation entre plusieurs collaborateurs. Les utilisateurs peuvent ajouter des commentaires et y répondre, avec des échanges plus interactifs, facilitant la collaboration autour d’un sujet spécifique.
 
-Lorsque plusieurs messages sont laissé par une même personne, ils s'affichent sans répétition de l'avatar.
+Lorsque plusieurs messages sont laissé par une même personne, ils s'affichent sans répétition de l'Avatar.
 
 # Content
 

@@ -52,6 +52,8 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `standalone` | `luInputStandalone` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `labelledBy` | `luInputLabelledBy` | `string \| null` | `null` | — | — | — |
+| `describedBy` | `luInputDescribedBy` | `string \| null` | `null` | — | — | — |
 
 ### PresentationDisplayDirective (directive)
 
@@ -70,11 +72,17 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 - 📝 [Code & implementation](./form-field.component.md)
 
 - 🎯 [Figma design tokens](./form-field.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-form-field--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-form-field--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
+`InputDirective` :
+  + `luInputLabelledBy` : string | null
+  + `luInputDescribedBy` : string | null
 
 ### 22.0.0
 
@@ -90,6 +98,39 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
   ~ `luInputStandalone` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- `10` value for the `width` input (`FORM_FIELD_WIDTH`).
+
+##### Fixed
+
+- An `luInput` element destroyed while its form field stays (e.g. swapped by an `@if`) is now unregistered, so its stale ids no longer pile up in `aria-labelledby`.
+
+#### 22.0.5
+
+##### Added
+
+- `luInputLabelledBy` and `luInputDescribedBy` inputs on `luInput` to add ids to the ones provided by the form field, instead of binding `aria-labelledby` or `aria-describedby`, which the form field would override.
+
+##### Fixed
+
+- `aria-describedby` of the input only references the inline message when it is displayed.
+- Fieldset legend is no longer hidden from screen readers when `hiddenLabel` is set.
+
+#### 22.0.0
+
+##### Changed
+
+- `standalone` input of `luInput` (`luInputStandalone`) is now a signal input.
+
+#### 21.3.1
+
+##### Added
+
+- `pl` translations for the Polish locale.
 
 #### 21.3.0
 

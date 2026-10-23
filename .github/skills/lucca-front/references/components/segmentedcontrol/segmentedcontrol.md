@@ -30,17 +30,23 @@ import { SegmentedControlFilterComponent, SegmentedControlComponent } from '@luc
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie la taille du composant. |
 | `vertical` | `vertical` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le composant en vue verticale. |
+| `ariaLabel` | `ariaLabel` | `string \| null` | `null` | — | — | Nom accessible du groupe d'onglets, restitué aux technologies d'assistance. |
 
 ## Related files
 
 - 📝 [Code & implementation](./segmentedcontrol.component.md)
 
 - 🎯 [Figma design tokens](./segmentedcontrol.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-segmentedcontrol-angular-tabs--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-segmentedcontrol-angular-tabs--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
+`SegmentedControlComponent` :
+  + `ariaLabel` : string | null
 
 ### 22.0.0
 
@@ -51,6 +57,34 @@ import { SegmentedControlFilterComponent, SegmentedControlComponent } from '@luc
   ~ `vertical` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Changed
+
+- Icons are displayed in small size in a `small` segmented control.
+
+#### 22.0.5
+
+##### Added
+
+- `ariaLabel` input to give the group of options an accessible name.
+
+##### Changed
+
+- `lu-segmented-control` now has the `radiogroup` role, and `lu-segmented-control-filter` no longer has the `listitem` role.
+
+#### 22.0.6
+
+##### Fixed
+
+- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
+
+#### 22.0.0
+
+##### Changed
+
+- A segmented control nested in a `lu-filter-bar` now adapts its style to the filter bar.
 
 #### 21.3.0
 

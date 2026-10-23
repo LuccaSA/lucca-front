@@ -14,7 +14,7 @@ Le formulaire est présenté dans une Dialog latérale (`drawer`). L’utilisate
 
 La ressource est immédiatement créée à la validation du formulaire.
 
-Le formulaire peut être structuré en plusieurs fieldsets pour maintenir une bonne lisibilité. Une guideline sur les formulaire est disponible pour aider à construire un formulaire.
+Le formulaire peut être structuré en plusieurs Fieldsets pour maintenir une bonne lisibilité. Une guideline sur les formulaire est disponible pour aider à construire un formulaire.
 
 #### Contenu et rédaction
 
@@ -34,7 +34,7 @@ Un découpage du formulaire en étapes (via un ProgressStepper) s’impose pour 
 * **Création séquentielle de plusieurs objets :** le parcours nécessite d'enchaîner la création de plusieurs entités ou objets distincts (qui seront généralement présentés sous forme d'onglets dans la vue finale).
 * **Réduction de la charge cognitive :** la ressource à créer comporte un grand nombre de champs. Diviser sa saisie en plusieurs sous-parties thématiques plutôt qu’en Fieldset permet d'alléger l'effort mental de l'administrateur en focalisant son attention sur un seul sujet à la fois.
 
-Le parcours se déroule dans une Dialog latérale (`drawer`) avec un Progress stepper visible indiquant la progression. Au-delà de 6 étapes la charge cognitive devient trop élevée pour l'utilisateur. Il est impératif de simplifier le processus ou de le découper en sous-tâches plus petites au sein des étapes existantes.
+Le parcours se déroule dans une Dialog latérale (`drawer`) avec un ProgressStepper visible indiquant la progression. Au-delà de 6 étapes la charge cognitive devient trop élevée pour l'utilisateur. Il est impératif de simplifier le processus ou de le découper en sous-tâches plus petites au sein des étapes existantes.
 
 #### Contenu et rédaction
 
@@ -82,11 +82,30 @@ Quel que soit le mode de création (directe ou via Dialog), la validation de l'a
 
 Dans **le cas d'un parcours sans étapes** (formulaire court ou long), les erreurs sont détectées au moment de la soumission du formulaire, c'est-à-dire au clic sur le bouton de validation.
 
-Dans **le cas d'un parcours en étapes**, la validation des données est **manuelle** et se fait à chaque changement d’étape. Elle est déclenchée soit via le bouton permettant de passer à l’étape suivante, soit via une Dialog de confirmation lorsque l’utilisateur navigue via le composant Progress stepper. Si des erreurs sont détectées lors de la tentative de passage à l'étape suivante, elles sont immédiatement remontées à l’utilisateur via un Callout popover dans le Footer et bloquent la progression tant qu'elles ne sont pas corrigées.
+Dans **le cas d'un parcours en étapes**, la validation des données est **manuelle** et se fait à chaque changement d’étape. Elle est déclenchée soit via le bouton permettant de passer à l’étape suivante, soit via une Dialog de confirmation lorsque l’utilisateur navigue via le composant ProgressStepper. Si des erreurs sont détectées lors de la tentative de passage à l'étape suivante, elles sont immédiatement remontées à l’utilisateur via un CalloutPopover dans le Footer et bloquent la progression tant qu'elles ne sont pas corrigées.
 
 Pour certains champs avec un format spécifique imposé (email, url, date, mot de passe, etc.), qu’il soit obligatoire ou non, les erreurs sont déclenchées au `blur` lorsque le format n’est pas respecté.
 
 Pour en savoir, vous pouvez consulter la guideline dédiée à la gestion des erreurs dans un formulaire.
+
+## Sortie de parcours
+
+Dans un parcours sans action finale de diffusion, la ressource n'existe pas en base de données tant que l'étape ultime n'est pas validée. Quitter le parcours entraîne donc la perte définitive du travail en cours.
+
+Quand l'utilisateur tente de sortir (via la croix de fermeture, un clic en dehors de la Dialog, ou le bouton « Annuler »), le déclenchement de la Dialog de confirmation dépend de l'état du formulaire :
+
+* si le **formulaire est modifié** (au moins un champ rempli), il est impératif d’afficher une Dialog de confirmation,
+* si le **formulaire est vide**, il faut fermer immédiatement le parcours pour éviter une friction inutile.
+
+Le contenu de la Dialog reprend ce qui est mentionné dans la guideline sur les Dialog de confirmation :
+
+| Élément | Standard |
+| --- | --- |
+| Titre de la Dialog | « **Quitter sans enregistrer ?** » |
+| Description | «  **Si vous quittez ce parcours, les modifications non enregistrées seront définitivement perdues.** » |
+|   |   |
+| Bouton principal | «  **Quitter sans enregistrer** » en `filled` |
+| Bouton secondaire | « **Reprendre les modifications** » en `outlined` et palette `neutral` |
 
 # Consultation et modification
 
@@ -146,7 +165,7 @@ Ce mode d’affichage doit être privilégié pour les ressources issues d’un 
 
 L'utilisateur clique sur la ressource et accède à une **pleine page dédiée**, organisée en plusieurs sections reflétant la structure du parcours de création. Les informations renseignées lors de la création y apparaissent en mode `presentation`.
 
-Certaines données, non demandées lors du parcours de création, peuvent être ajoutées à posteriori dans la vue détaillée. L'interface affiche un Empty state section tant que l'utilisateur n'y a rien renseigné.
+Certaines données, non demandées lors du parcours de création, peuvent être ajoutées à posteriori dans la vue détaillée. L'interface affiche un EmptyStateSection tant que l'utilisateur n'y a rien renseigné.
 
 #### Modification des données
 
@@ -166,5 +185,5 @@ Les actions génériques sont disponibles directement depuis la liste des ressou
 
 Lorsque l’utilisateur consulte une ressource, les actions génériques doivent être accessible depuis un menu contextuel situé dans le PageHeader.
 
-- **Don't** : N’affichons pas les actions génériques via des Button Icon.
+- **Don't** : N’affichons pas les actions génériques via des ButtonIcon.
 - **Don't** : N’affichons pas les actions génériques dans un menu contextuel situé dans une Dialog de modification.

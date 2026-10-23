@@ -4,65 +4,67 @@
 
 ## Règles générales
 
-Le placeholder n'est pas un substitut au label. Le label reste l'élément principal pour identifier un champ de formulaire.
+Le Placeholder n'est pas un substitut au label. 
+
+Le Label reste l'élément principal pour identifier un champ de formulaire.
 
 ### **Cas d'utilisation**
 
 * Pour indiquer un **format attendu** (exemples : 01 23 45 67 89, JJ/MM/AAAA)
 * Pour donner un **exemple de saisie** (exemple : mdupont@monentreprise.com)
-* Nous ne l’utilisons pas pour indiquer une action à l’utilisateur. Nous évitons ainsi une surcharge visuelle des formulaires avec des placeholders inutiles.
+* Nous ne l’utilisons pas pour indiquer une action à l’utilisateur. Nous évitons ainsi une surcharge visuelle des formulaires avec des Placeholders inutiles.
 * **Exception unique :** les champs Select intègrent "Sélectionner…" pour les différencier des champs de saisie libre.
 
 ## Utilisation dans les composants
 
 ### Textfield
 
-- **Do** : Privilégions un label explicite et laisser le champ vide.
-- **Don't** : N'utilisons pas de placeholder dans les textfields.
+- **Do** : Privilégions un Label explicite et laissons le champ vide.
+- **Don't** : N'utilisons pas de Placeholder dans les Textfields.
 
-- **Do** : Utilisons le placeholder "Rechercher" suivi de nom de la ressource dans les barres de recherche.
-- **Don't** : Le placeholder est obligatoire dans les barres de recherche.
-- **Do** : Utilisons un placeholder dans les champs d’adresse e-mail pour expliciter le format attendu.
+- **Do** : Utilisons le Placeholder "Rechercher" suivi du nom de la ressource dans les barres de recherche.
+- **Don't** : Le Placeholder est obligatoire dans les barres de recherche.
+- **Do** : Utilisons un Placeholder dans les champs d’adresse e-mail pour expliciter le format attendu.
 
 ### Textarea
 
-- **Do** : Privilégions un label explicite et laisser le champ vide.
-- **Don't** : N'utilisons pas le placeholder pour donner des instructions ou répéter le label.
+- **Do** : Privilégions un Label explicite et laisser le champ vide.
+- **Don't** : N'utilisons pas le Placeholder pour donner des instructions ou répéter le Label.
 
-### Rich textfield
+### RichTextfield
 
-- **Do** : Privilégions un label explicite et laisser le champ vide.
-- **Don't** : N'utilisons pas le placeholder pour donner des instructions.
+- **Do** : Privilégions un Label explicite et laisser le champ vide.
+- **Don't** : N'utilisons pas le Placeholder pour donner des instructions.
 
 ### Select
 
-- **Do** : Utilisons seulement "Sélectionner…" comme placeholder dans les Select.
-- **Don't** : N’utilisons pas de placeholder pour indiquer un état vide.
-- **Don't** : N’indiquons pas l'objet de la sélection dans le placeholder.
-- **Don't** : Le placeholder "Sélectionner…" est obligatoire.
+- **Do** : Utilisons seulement "Sélectionner…" comme Placeholder dans les Select.
+- **Don't** : N’utilisons pas de Placeholder pour indiquer un état vide.
+- **Don't** : N’indiquons pas l'objet de la sélection dans le Placeholder.
+- **Don't** : Le Placeholder "Sélectionner…" est obligatoire.
 
-### Date picker
+### DatePicker
 
-- **Do** : Utilisons un placeholder pour indiquer le format attendu.
-- **Don't** : Le placeholder est obligatoire.
+- **Do** : Utilisons un Placeholder pour indiquer le format attendu.
+- **Don't** : Le Placeholder est obligatoire.
 
-### Duration picker
+### DurationPicker
 
-- **Do** : Utilisons un état vide sans placeholder tout en conservant la lettre "h" entre les heures et les minutes.
-- **Do** : Utilisons un état vide sans placeholder sans la lettre "h" si le champ est redondant sur l'interface (Lucca Feuilles de temps par exemple).
-- **Don't** : N'utilisons pas de placeholder pour indiquer le format attendu.
+- **Do** : Utilisons un état vide sans Placeholder tout en conservant la lettre "h" entre les heures et les minutes.
+- **Do** : Utilisons un état vide sans Placeholder sans la lettre "h" si le champ est redondant sur l'interface (Lucca Feuilles de temps par exemple).
+- **Don't** : N'utilisons pas de Placeholder pour indiquer le format attendu.
 
-### Time picker
+### TimePicker
 
 - **Do** : Utilisons des tirets demi-cadratin pour représenter l'état vide.
-- **Don't** : N'utilisons pas de placeholder pour indiquer le format attendu.
+- **Don't** : N'utilisons pas de Placeholder pour indiquer le format attendu.
 
-### Date range picker
+### DateRangePicker
 
-- **Do** : Le placeholder est obligatoire, il indique le format attendu.
-- **Don't** : Ne masquons jamais le placeholder dans un Date range picker.
+- **Do** : Le Placeholder est obligatoire, il indique le format attendu.
+- **Don't** : Ne masquons jamais le Placeholder dans un DateRangePicker.
 
-### Phone number field
+### PhoneNumberField
 
-- **Do** : Utilisons un placeholder pour indiquer le format attendu
-- **Don't** : Le placeholder indiquant le format attendu est obligatoire.
+- **Do** : Utilisons un Placeholder pour indiquer le format attendu
+- **Don't** : Le Placeholder indiquant le format attendu est obligatoire.

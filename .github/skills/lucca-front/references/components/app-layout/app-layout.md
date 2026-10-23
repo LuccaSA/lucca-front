@@ -23,18 +23,18 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `mobileNavSideBottom` | `mobileNavSideBottom` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `mobileNavSideBottom` | `mobileNavSideBottom` | `boolean` | `false` | — | `luBooleanAttribute` | Déplace la navigation latérale en bas de l’écran sur mobile. |
 
 ## Related files
 
 - 📝 [Code & implementation](./app-layout.component.md)
 - 🎨 [Design guidelines](./app-layout.design.md)
 - 🎯 [Figma design tokens](./app-layout.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-app-layout-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-app-layout-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -54,6 +54,15 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 
 - `lu-app-layout` component (`appLayout`) to lay out an application shell, with the `[appLayoutBanner]` and `[appLayoutNavSide]` content slots.
 - `mobileNavSideBottom` input to move the navigation side to the bottom of the screen on mobile (`mod-mobileNavSideBottom`).
+
+#### 22.0.0
+
+##### Added
+
+- `bubblesStartEnd` and `bubblesEndStart` inputs (`1`, `2` or `3`) to display decorative bubbles in the corresponding corner.
+- `illustrationStartEnd` and `illustrationEndStart` inputs to display a predefined illustration from `MAIN_LAYOUT_ILLUSTRATION_START_END` or `MAIN_LAYOUT_ILLUSTRATION_END_START`, or one supplied by an absolute HTTPS or root-relative URL.
+- `palette` and `responsive` (`wideM`) inputs.
+- `LU_MAIN_LAYOUT_INSTANCE` token and the layout types are now publicly exported.
 
 #### 21.1.2
 

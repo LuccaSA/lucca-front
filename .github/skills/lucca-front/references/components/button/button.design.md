@@ -92,7 +92,7 @@ Cette animation empêche l’utilisateur de cliquer plusieurs fois et informe qu
 
 #### Succès
 
-Un bouton déclenche une action qui aboutit ou échoue. Le feedback de succès est affiché directement dans le composant. En revanche, le feedback d’erreur est affiché à travers d’autres composants (Toast, Callout, Inline message), et non directement sur le bouton lui-même.
+Un bouton déclenche une action qui aboutit ou échoue. Le feedback de succès est affiché directement dans le composant. En revanche, le feedback d’erreur est affiché à travers d’autres composants (Toast, Callout, InlineMessage), et non directement sur le bouton lui-même.
 
 - **Do** : Utilisons l’état succès du bouton pour indiquer à l’utilisateur la réussite de l’action réalisée.
 - **Don't** : Nous évitons l'aplat en couleur Success pour indiquer l'état de succès : c'est visuellement très lourd et ça ne fonctionne pas dans tous les cas (exemple : avec un bouton de confirmation critique).

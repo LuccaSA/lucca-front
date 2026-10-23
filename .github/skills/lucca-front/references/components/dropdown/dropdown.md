@@ -16,8 +16,8 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `critical` | `critical` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive l’action : elle ne peut plus être déclenchée et ne ferme pas le dropdown. Utilisé dans le template de la story… |
+| `critical` | `critical` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un style critique à l’action (ex. suppression). Utilisé dans le template de la story. |
 
 ### DropdownDividerComponent (component)
 
@@ -31,7 +31,7 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `string \| null` | `null` | — | — | — |
+| `label` | `label` | `string \| null` | `null` | — | — | Libellé du groupe d’actions. Utilisé dans le template de la story. |
 
 ### DropdownItemComponent (component)
 
@@ -100,11 +100,11 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 - 📝 [Code & implementation](./dropdown.component.md)
 
 - 🎯 [Figma design tokens](./dropdown.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-dropdown-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-dropdown-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -118,6 +118,30 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
   ~ `luDropdown` : défaut ∅ → undefined
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- Keyboard shortcuts (`.kbdWrapper` / `.kbd`) can be displayed in dropdown actions: they are aligned to the end and animated on hover and focus.
+
+#### 22.0.3
+
+##### Fixed
+
+- Clicking a disabled action no longer closes the panel.
+
+#### 21.2.0
+
+##### Fixed
+
+- Legacy positions of `luDropdownTrigger` are now recomputed when the popover position changes.
+
+#### 21.1.4
+
+##### Fixed
+
+- Disabled `lu-dropdown-action` now carries the `disabled` attribute.
 
 #### 21.0.4
 

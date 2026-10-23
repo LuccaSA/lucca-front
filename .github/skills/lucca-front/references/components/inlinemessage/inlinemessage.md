@@ -26,17 +26,23 @@ import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 - 📝 [Code & implementation](./inlinemessage.component.md)
 
 - 🎯 [Figma design tokens](./inlinemessage.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-inlinemessage-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-inlinemessage-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
 ~ `withTooltip` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 19.3.0
+
+##### Added
+
+- `withTooltip` input to truncate the label and display it in a tooltip when it overflows.
 
 #### 18.2.4
 

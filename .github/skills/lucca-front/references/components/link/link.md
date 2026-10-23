@@ -23,6 +23,7 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 | `decorationHover` | `decorationHover` | `boolean` | `false` | — | `luBooleanAttribute` | Souligne le lien seulement au survol. |
 | `external` | `external` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `hiddenIcon` | `hiddenIcon` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `neutral` | `neutral` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le lien dans la couleur de texte par défaut plutôt que dans la couleur de lien. |
 
 ### LuRouterLink (directive)
 
@@ -33,17 +34,27 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 | Token | Type | Description |
 |-------|------|-------------|
 | `LU_LINK_INSTANCE` | `boolean` | — |
+| `LU_LINK_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./link.component.md)
 - 🎨 [Design guidelines](./link.design.md)
 - 🎯 [Figma design tokens](./link.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+`LinkComponent` :
+  + `neutral` : boolean
+
+### 22.0.5
+
++ token `LU_LINK_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
@@ -54,6 +65,19 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
   ~ `hiddenIcon` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- `neutral` input (`mod-neutral`) to render the link with the default text color instead of the link color.
+
+#### 21.4.1
+
+##### Fixed
+
+- Relative commands of `luLink` are now resolved against the current route, like `routerLink` does.
+- Application `baseHref` is now applied to the generated URL whatever the shape of the commands (string, array or `UrlTree`).
 
 #### 21.3.1
 

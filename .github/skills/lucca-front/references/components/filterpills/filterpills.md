@@ -3,7 +3,7 @@
 ## Import
 
 ```typescript
-import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, FilterPillAddonBeforeDirective, FilterPillAddonAfterDirective, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
+import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, FilterPillAddonBeforeDirective, FilterPillAddonAfterDirective } from '@lucca-front/ng/filter-pills';
 ```
 
 ## API Reference
@@ -19,6 +19,9 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `name` | `name` | `string` | — | — | — | Dans le cas d’un filtre optionnel, permet de faire le lien entre la liste de filtres disponible et l’affichage du filtre… |
 | `optional` | `optional` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `grouping` | `grouping` | `string` | `''` | — | — | — |
+| `iconOnly` | `iconOnly` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `backdrop` | `backdrop` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `label` | `label` | `string` | — | ✅ | — | Modifie le label du filtre. |
 | `placeholderOverride` | `placeholder` | `string \| null` | `null` | — | — | — |
 | `icon` | `icon` | `LuccaIcon` | — | — | — | — |
@@ -38,6 +41,9 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
+| `manualApply` | `manualApply` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `segmentedControlTabs` | `segmentedControlTabs` | `FilterBarSegmentedControlTabs \| null` | `null` | — | — | — |
+| `resultsCount` | `resultsCount` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
 
 ### FilterViewSelectorComponent (component)
 
@@ -74,36 +80,47 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 
 **Selector:** `[luFilterPillAddonAfter]`
 
-### FilterPillDisplayerDirective (directive)
-
-**Selector:** `[luFilterPillDisplayer]`
-
-### FilterPillLabelDirective (directive)
-
-**Selector:** `[luFilterPillLabel]`
-
 ### Injection tokens
 
 | Token | Type | Description |
 |-------|------|-------------|
 | `LU_FILTER_BAR_INSTANCE` | `FilterBarComponent` | — |
-| `FILTER_PILL_INPUT_COMPONENT` | `FilterPillInputComponent` | — |
-| `FILTER_PILL_HOST_COMPONENT` | `FilterPillComponent` | — |
+| `LU_FILTER_PILLS_TRANSLATIONS` | `unknown` | — |
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./filterpills.component.md)
 - 🎨 [Design guidelines](./filterpills.design.md)
 - 🎯 [Figma design tokens](./filterpills.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-filterspills-filterpills-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-filterspills-filterpills-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+- directive `FilterPillDisplayerDirective` retiré
+- directive `FilterPillLabelDirective` retiré
+`FilterPillComponent` :
+  + `grouping` : string
+  + `iconOnly` : boolean
+  + `backdrop` : boolean
+`FilterBarComponent` :
+  + `segmentedControlTabs` : FilterBarSegmentedControlTabs | null
+  + `resultsCount` : unknown
+- token `FILTER_PILL_INPUT_COMPONENT` retiré
+- token `FILTER_PILL_HOST_COMPONENT` retiré
+
+### 22.0.5
+
+`FilterBarComponent` :
+  + `manualApply` : boolean
++ token `LU_FILTER_PILLS_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
@@ -113,6 +130,38 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 + token `LU_FILTER_BAR_INSTANCE` : FilterBarComponent
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- `grouping` input to group the pill with the ones sharing the same value in the optional filters list of the filter bar.
+- `iconOnly` input to display the pill as an icon-only button, its label being shown as a tooltip.
+- `backdrop` input to catch the click that closes the pill popover instead of letting it through to the page.
+- `@lucca-front/ng/filter-pills/core` entrypoint exposing the tokens and directives used by the inputs hosted in a pill (`FILTER_PILL_INPUT_COMPONENT`, `FILTER_PILL_HOST_COMPONENT`, `luFilterPillDisplayer`, `luFilterPillLabel`…), still re-exported by `@lucca-front/ng/filter-pills`.
+
+##### Changed
+
+- `FILTER_PILL_HOST_COMPONENT` token is now typed with the `FilterPillHostComponent` interface instead of `FilterPillComponent`.
+
+#### 22.0.6
+
+##### Fixed
+
+- A disabled filter pill no longer shows its clear button.
+
+#### 22.0.0
+
+##### Changed
+
+- Pill popover no longer opens with a blocking backdrop: the rest of the page stays interactive while it is open.
+
+#### 21.4.1
+
+##### Fixed
+
+- Non-breaking space before the colon is now applied to every French locale (`fr-BE`, `fr-CA`…), not only `fr`.
+- Margins of a clearable pill.
 
 #### 21.3.0
 

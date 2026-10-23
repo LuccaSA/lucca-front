@@ -26,7 +26,7 @@ Si ces conditions ne sont pas remplies, l’affiche horizontal rend la lecture d
 
 ### Tag
 
-Le Radio peut porter un Tag, notamment pour indiquer une option recommandée. Ce Tag est positionnée près du label et porte la couleur Product.
+Le Radio peut porter un Tag, notamment pour indiquer une option recommandée. Ce Tag est positionnée près du Label et porte la couleur `Product`.
 
 Seule une des options peut porter un Tag pour la distinguer des autres.
 
@@ -88,7 +88,7 @@ Il est possible de sélectionner ou non une valeur par défaut en fonction du co
 
 ### Champ optionnel
 
-L’option “Aucun/Aucune” doit être utilisée lorsque le Radio fieldset est facultatif dans un formulaire. Elle permet à l’utilisateur de revenir facilement à un état non sélectionné, tout en conservant le principe de sélection unique propre aux Radios.
+L’option “Aucun/Aucune” doit être utilisée lorsque le RadioFieldset est facultatif dans un formulaire. Elle permet à l’utilisateur de revenir facilement à un état non sélectionné, tout en conservant le principe de sélection unique propre aux Radios.
 
 Si l'option "Aucun/Aucune" est sélectionnée par défaut, alors il n'est pas nécessaire de marquer le champ comme obligatoire.
 
@@ -101,7 +101,7 @@ Utilisons un Radio pour un choix exclusif (une seule option possible). Lorsque p
 
 - **Do** : Utilisons des Radio si les deux réponses doivent être mises en regard pour que l’utilisateur les consulte avant de faire un choix.
 - **Don't** : Évitons d’utiliser une Checkbox si le label est long et/ou la formulation ambigüe.
-- **Do** : Utilisons une Checkbox quand le choix est explicite et quand le label peut être formulé de façon affirmative, simple.
+- **Do** : Utilisons une Checkbox quand le choix est explicite et quand le Label peut être formulé de façon affirmative, simple.
 - **Don't** : N'utilisons pas de Radio avec deux options, dont l'une ne fait que décliner l’autre sous la forme négative.
 - **Do** : Utilisons des réponses "Oui/Non" à la place d'une Checkbox si l'on souhaite que l'utilisateur fasse un choix clair et assumé entre les deux options.
 - **Don't** : La Checkbox étant par défaut cochée ou non, évitons de l'utiliser si l'on souhaite que l'utilisateur fasse un choix.

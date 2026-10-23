@@ -1,6 +1,6 @@
 # mobile-push — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-feedback-mobile-push-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-mobile-push-angular-basic--docs)
 
 ## Angular
 
@@ -10,11 +10,13 @@ Component selector : `lu-mobile-push`
 
 ```js
 import { IconComponent } from '@lucca-front/ng/icon';
-import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
+import { luMobilePushTranslations, MobilePushComponent } from '@lucca-front/ng/mobile-push';
 ```
 
 ```html
-<lu-mobile-push>Posez une absence depuis n’importe où avec l’application Lucca.</lu-mobile-push>
+<lu-mobile-push (appStoreLinkClicked)="appStoreLinkClicked()" (googlePlayLinkClicked)="googlePlayLinkClicked()">
+	Posez une absence depuis n’importe où avec l’application Lucca.
+</lu-mobile-push>
 ```
 
 ## HTML/CSS

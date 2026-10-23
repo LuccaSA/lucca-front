@@ -114,18 +114,18 @@ L’utilisation des capitales (petites capitales inclues) est proscrite, mis à 
 
 ## Shorthands
 
-| Token | Valeur |
-| :--- | :--- |
-| `--pr-t-font-heading-1` | `var(--pr-t-font-heading-1-fontWeight)` `var(--pr-t-font-heading-1-fontSize)` `var(--pr-t-font-heading-1-lineHeight)` `var(--pr-t-font-family-brand)` |
-| `--pr-t-font-heading-2` | `var(--pr-t-font-heading-2-fontWeight)` `var(--pr-t-font-heading-2-fontSize)` `var(--pr-t-font-heading-2-lineHeight)` `var(--pr-t-font-family-brand)` |
-| `--pr-t-font-heading-3` | `var(--pr-t-font-heading-3-fontWeight)``var(--pr-t-font-heading-3-fontSize` `var(--pr-t-font-heading-3-lineHeight)` `var(--pr-t-font-family)` |
-| `--pr-t-font-heading-4` | `var(--pr-t-font-heading-4-fontWeight)` `var(--pr-t-font-heading-4-fontSize)` `var(--pr-t-font-heading-4-lineHeight)` `var(--pr-t-font-family)` |
-| `--pr-t-font-highlight-XXL` | `var(--pr-t-font-highlight-XXL-fontWeight)` `var(--pr-t-font-highlight-XXL-fontSize)` `var(--pr-t-font-highlight-XXL-lineHeight)` `var(--pr-t-font-family-brand)` |
-| `--pr-t-font-highlight-XL` | `var(--pr-t-font-highlight-XL-fontWeight)` `var(--pr-t-font-highlight-XL-fontSize)` `var(--pr-t-font-highlight-XL-lineHeight)` `var(--pr-t-font-family-brand)` |
-| `--pr-t-font-highlight-L` | `var(--pr-t-font-highlight-L-fontWeight)` `var(--pr-t-font-highlight-L-fontSize)` `var(--pr-t-font-highlight-L-lineHeight)` `var(--pr-t-font-family-brand)` |
-| `--pr-t-font-body-M` | `var(--pr-t-font-body-M-fontSize)` `var(--pr-t-font-body-M-lineHeight)` `var(--pr-t-font-family);` |
-| `--pr-t-font-body-S` | `var(--pr-t-font-body-S-fontSize)` `var(--pr-t-font-body-S-lineHeight)` `var(--pr-t-font-family)` |
-| `--pr-t-font-body-XS` | `var(--pr-t-font-body-XS-fontSize)` `var(--pr-t-font-body-XS-lineHeight)` `var(--pr-t-font-family)` |
+| Token | Valeur | Utilitaire CSS |
+| :--- | :--- | --- |
+| `--pr-t-font-heading-1` | `var(--pr-t-font-heading-1-fontWeight)` `var(--pr-t-font-heading-1-fontSize)` `var(--pr-t-font-heading-1-lineHeight)` `var(--pr-t-font-family-brand)` | `.pr-u-h1` |
+| `--pr-t-font-heading-2` | `var(--pr-t-font-heading-2-fontWeight)` `var(--pr-t-font-heading-2-fontSize)` `var(--pr-t-font-heading-2-lineHeight)` `var(--pr-t-font-family-brand)` | `.pr-u-h2` |
+| `--pr-t-font-heading-3` | `var(--pr-t-font-heading-3-fontWeight)``var(--pr-t-font-heading-3-fontSize` `var(--pr-t-font-heading-3-lineHeight)` `var(--pr-t-font-family)` | `.pr-u-h3` |
+| `--pr-t-font-heading-4` | `var(--pr-t-font-heading-4-fontWeight)` `var(--pr-t-font-heading-4-fontSize)` `var(--pr-t-font-heading-4-lineHeight)` `var(--pr-t-font-family)` | `.pr-u-h4` |
+| `--pr-t-font-highlight-XXL` | `var(--pr-t-font-highlight-XXL-fontWeight)` `var(--pr-t-font-highlight-XXL-fontSize)` `var(--pr-t-font-highlight-XXL-lineHeight)` `var(--pr-t-font-family-brand)` |   |
+| `--pr-t-font-highlight-XL` | `var(--pr-t-font-highlight-XL-fontWeight)` `var(--pr-t-font-highlight-XL-fontSize)` `var(--pr-t-font-highlight-XL-lineHeight)` `var(--pr-t-font-family-brand)` |   |
+| `--pr-t-font-highlight-L` | `var(--pr-t-font-highlight-L-fontWeight)` `var(--pr-t-font-highlight-L-fontSize)` `var(--pr-t-font-highlight-L-lineHeight)` `var(--pr-t-font-family-brand)` |   |
+| `--pr-t-font-body-M` | `var(--pr-t-font-body-M-fontSize)` `var(--pr-t-font-body-M-lineHeight)` `var(--pr-t-font-family);` | `.pr-u-bodyM` |
+| `--pr-t-font-body-S` | `var(--pr-t-font-body-S-fontSize)` `var(--pr-t-font-body-S-lineHeight)` `var(--pr-t-font-family)` | `.pr-u-bodyS` |
+| `--pr-t-font-body-XS` | `var(--pr-t-font-body-XS-fontSize)` `var(--pr-t-font-body-XS-lineHeight)` `var(--pr-t-font-family)` | `.pr-u-bodyXS` |
 
 ## Sémantiques
 

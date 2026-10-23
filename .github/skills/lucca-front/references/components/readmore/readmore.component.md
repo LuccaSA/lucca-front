@@ -1,6 +1,6 @@
 # readmore — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-readmore-angular-ai--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-readmore-angular-ai--docs)
 
 ## Angular
 
@@ -9,7 +9,7 @@ Component selector : `lu-read-more`
 ### More ai
 
 ```js
-import { ReadMoreComponent } from '@lucca-front/ng/read-more';
+import { luReadMoreTranslations, ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { TagComponent } from '@lucca-front/ng/tag';
 ```
 
@@ -39,7 +39,7 @@ import { TagComponent } from '@lucca-front/ng/tag';
 ### More
 
 ```js
-import { READ_MORE_SURFACE, ReadMoreComponent } from '@lucca-front/ng/read-more';
+import { luReadMoreTranslations, READ_MORE_SURFACE, ReadMoreComponent } from '@lucca-front/ng/read-more';
 ```
 
 ```html

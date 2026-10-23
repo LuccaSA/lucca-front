@@ -1,6 +1,6 @@
 # calendar — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-date-calendar--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date-calendar--docs)
 
 ## Angular
 
@@ -9,16 +9,17 @@
 ```js
 import { registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
-import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, LuNativeDateAdapter } from '@lucca-front/ng/core';
+import { LuCalendarInputComponent, luCalendarInputTranslations, LuDateAdapterPipe } from '@lucca-front/ng/date';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
-import { LuCalendarInputComponent, LuDateAdapterPipe } from '@lucca-front/ng/date';
 import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 ```
 
 ```html
-<lu-calendar [(ngModel)]="date" />
+<lu-calendar [(ngModel)]="date" [min]="min()" [max]="max()" [granularity]="granularity()" [startOn]="startOn()" />
 
 <button type="button" class="button mod-outlined pr-u-marginInlineEnd200" (click)="random()">Random</button>
 
@@ -30,7 +31,7 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
@@ -40,7 +41,9 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 	[enableOverflow]="true"
 	[date]="currentMonth"
 	mode="year"
-	(dateClicked)="selected($event)"
+	(dateClicked)="dateClicked($event)"
+	(nextPage)="nextPage()"
+	(previousPage)="previousPage()"
 />
 ```
 
@@ -49,7 +52,7 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
@@ -59,7 +62,7 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 	[enableOverflow]="true"
 	[date]="currentMonth"
 	mode="week"
-	(dateClicked)="selected($event)"
+	(dateClicked)="dateClicked($event)"
 />
 ```
 
@@ -68,7 +71,7 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
@@ -78,7 +81,9 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 	[enableOverflow]="true"
 	[date]="currentMonth"
 	mode="month"
-	(dateClicked)="selected($event)"
+	(dateClicked)="dateClicked($event)"
+	(nextPage)="nextPage()"
+	(previousPage)="previousPage()"
 />
 ```
 
@@ -87,17 +92,17 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { CALENDAR_MODE, Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
 <lu-calendar2
-	[hideToday]="false"
-	[showOverflow]="true"
-	[enableOverflow]="true"
 	[date]="currentMonth"
-	mode="day"
-	(dateClicked)="selected($event)"
+	showOverflow
+	enableOverflow
+	(dateClicked)="dateClicked($event)"
+	(nextPage)="nextPage()"
+	(previousPage)="previousPage()"
 />
 ```
 
@@ -106,7 +111,7 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
@@ -116,7 +121,9 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 	[enableOverflow]="false"
 	[date]="currentMonth"
 	mode="day"
-	(dateClicked)="selected($event)"
+	(dateClicked)="dateClicked($event)"
+	(nextPage)="nextPage()"
+	(previousPage)="previousPage()"
 />
 ```
 
@@ -125,7 +132,7 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
@@ -134,7 +141,9 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 	[showOverflow]="false"
 	[date]="currentMonth"
 	mode="day"
-	(dateClicked)="selected($event)"
+	(dateClicked)="dateClicked($event)"
+	(nextPage)="nextPage()"
+	(previousPage)="previousPage()"
 />
 ```
 
@@ -143,7 +152,7 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
@@ -153,7 +162,9 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 	[enableOverflow]="true"
 	[date]="currentMonth"
 	mode="day"
-	(dateClicked)="selected($event)"
+	(dateClicked)="dateClicked($event)"
+	(nextPage)="nextPage()"
+	(previousPage)="previousPage()"
 />
 ```
 
@@ -162,7 +173,7 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
@@ -172,7 +183,9 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 	[enableOverflow]="true"
 	[date]="currentMonth"
 	mode="day"
-	(dateClicked)="selected($event)"
+	(dateClicked)="dateClicked($event)"
+	(nextPage)="nextPage()"
+	(previousPage)="previousPage()"
 />
 ```
 
@@ -181,7 +194,7 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component, CalendarMode } from '@lucca-front/ng/date2';
+import { Calendar2Component, CalendarMode, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
@@ -192,7 +205,9 @@ import { Calendar2Component, CalendarMode } from '@lucca-front/ng/date2';
 	[getCellInfo]="getDayInfo"
 	[date]="currentMonth"
 	mode="day"
-	(dateClicked)="selected($event)"
+	(dateClicked)="dateClicked($event)"
+	(nextPage)="nextPage()"
+	(previousPage)="previousPage()"
 />
 ```
 
@@ -201,13 +216,19 @@ import { Calendar2Component, CalendarMode } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component, CalendarMode } from '@lucca-front/ng/date2';
+import { Calendar2Component, CalendarMode, luDate2Translations } from '@lucca-front/ng/date2';
 ```
 
 ```html
 <div class="calendarWrapper">
 	<div class="calendarWrapper-content palette-watermelon">
-		<lu-calendar2 [date]="date" [getCellInfo]="getDayInfo" />
+		<lu-calendar2
+			[date]="date"
+			[getCellInfo]="getDayInfo"
+			(dateClicked)="dateClicked($event)"
+			(nextPage)="nextPage()"
+			(previousPage)="previousPage()"
+		/>
 	</div>
 </div>
 ```
@@ -217,7 +238,7 @@ import { Calendar2Component, CalendarMode } from '@lucca-front/ng/date2';
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Calendar2Component } from '@lucca-front/ng/date2';
+import { Calendar2Component, luDate2Translations } from '@lucca-front/ng/date2';
 import { setDate } from 'date-fns';
 ```
 
@@ -229,7 +250,9 @@ import { setDate } from 'date-fns';
 	[ranges]="ranges"
 	[date]="currentMonth"
 	mode="day"
-	(dateClicked)="selected($event)"
+	(dateClicked)="dateClicked($event)"
+	(nextPage)="nextPage()"
+	(previousPage)="previousPage()"
 />
 ```
 

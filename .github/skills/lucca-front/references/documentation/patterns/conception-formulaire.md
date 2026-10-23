@@ -22,15 +22,15 @@ La grille, via le composant Grid, permet de structurer efficacement la dispositi
 ### Bonnes pratiques
 
 * La grille se compose de **4 colonnes**. De manière générale, il n’est pas recommandé d’avoir plus de 2 champs sur une même ligne.
-* Des champs comme le Textarea, le Rich textfield ou encore le Select multiple doivent utiliser les 4 colonnes de la grille.
+* Des champs comme le Textarea, le RichTextfield ou encore le SelectMultiple doivent utiliser les 4 colonnes de la grille.
 * La largeur du champ doit refléter la valeur attendue. Un champ seul sur une ligne peut être affiché sur une ou deux colonnes.
 * La largeur maximum du formulaire est de **800px**.
 * Dans le cadre d’une utilisation mobile, la répartition des champs peut se faire uniquement sur 1 ou 2 colonnes.
 
-- **Do** : Utilisons la pleine largeur de la grille pour les champs comme le Textarea ou le Rich textfield.
+- **Do** : Utilisons la pleine largeur de la grille pour les champs comme le Textarea ou le RichTextfield.
 - **Do** : Pour l’ensemble des champs, comme les Select ou les Textfield, utilisons la pleine largeur lorsque nous ne maitrisons pas le contenu. Cela sera notamment pratique pour l’internationalisation.
 - **Do** : Lorsque des champs sont étroitement liés, nous pouvons les afficher sur une même ligne.
-- **Don't** : Les composants comme le Datepicker ne doivent pas utiliser toute la largeur de la grille.
+- **Don't** : Les composants comme le DatePicker ne doivent pas utiliser toute la largeur de la grille.
 
 ## Découpage en Fieldsets
 
@@ -62,7 +62,7 @@ Il n'est pas recommandé d'alterner les Fieldset avec ou sans titre.
 
 Cela permet de ne pas afficher certains champs lors de la première lecture pour optimiser l'espacement ou pour afficher des champs optionnels.
 
-Un fieldset rétractable ne **doit pas comporter de champs obligatoires**.
+Un Fieldset rétractable ne **doit pas comporter de champs obligatoires**.
 
 ### Fieldset narratif
 

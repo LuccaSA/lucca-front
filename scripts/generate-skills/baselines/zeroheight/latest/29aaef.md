@@ -1,11 +1,11 @@
 ---
-title: Horizontal navigation
-description: Le composant Horizontal navigation permet une navigation facile et organisée, vers différentes sous-pages d’une interface, facilitant l'accès aux informations ou aux fonctionnalités spécifiques.
+title: HorizontalNavigation
+description: Le composant HorizontalNavigation permet une navigation facile et organisée, vers différentes sous-pages d’une interface, facilitant l'accès aux informations ou aux fonctionnalités spécifiques.
 ---
 
 # Angular
 
-## Horizontal navigation Angular
+## HorizontalNavigation Angular
 
 Component selector : `lu-horizontal-navigation`
 
@@ -38,7 +38,7 @@ import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from 
 
 # HTML
 
-## Horizontal navigation HTML
+## HorizontalNavigation HTML
 
 Classe CSS : `.horizontalNavigation`
 
@@ -111,7 +111,13 @@ Dans le composant :
 
 # Changelog
 
-## Horizontal navigation changelog
+## HorizontalNavigation changelog
+
+### 21.4.1
+
+#### Fixed
+
+- Content height no longer overflows when the navigation is displayed inside a dialog.
 
 ### 21.3.0
 
