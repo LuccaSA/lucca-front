@@ -55,11 +55,11 @@ import { HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent, Ho
 - 📝 [Code & implementation](./horizontalnavigation.component.md)
 
 - 🎯 [Figma design tokens](./horizontalnavigation.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-horizontalnavigation-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-horizontalnavigation-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -71,6 +71,12 @@ import { HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent, Ho
   ~ `vertical` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 21.4.1
+
+##### Fixed
+
+- Content height no longer overflows when the navigation is displayed inside a dialog.
 
 #### 21.3.0
 

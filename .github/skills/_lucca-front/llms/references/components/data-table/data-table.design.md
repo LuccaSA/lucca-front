@@ -60,7 +60,7 @@ Si des filtres sont appliqués sur le contenu du tableau, ils restent appliqués
 
 Dans un tableau avec des lignes sélectionnables, si des lignes sont sélectionnées, la sélection est conservée lorsque l’utilisateur navigue entre les pages.
 
-### Empty state
+### EmptyState
 
 Si un tableau est vide, il faut utiliser le composant EmptyStateSection. Il indique à l’utilisateur qu’aucune donnée n’existe.
 

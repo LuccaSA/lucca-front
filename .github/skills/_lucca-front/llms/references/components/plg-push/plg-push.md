@@ -33,16 +33,26 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 |----------|------|----------|-------|
 | `removed` | `unknown` | — | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_PLG_PUSH_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./plg-push.component.md)
 - 🎨 [Design guidelines](./plg-push.design.md)
 - 🎯 [Figma design tokens](./plg-push.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-feedback-plg-push-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-plg-push-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_PLG_PUSH_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

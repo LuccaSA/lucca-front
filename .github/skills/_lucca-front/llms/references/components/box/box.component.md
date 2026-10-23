@@ -1,12 +1,37 @@
 # box — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-box-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-box-angular-arrow--docs)
 
 ## Angular
 
 Mots-clés : boîte, conteneur, encadré
 
 Component selector : `lu-box`
+
+### Arrow
+
+```js
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BoxComponent } from '@lucca-front/ng/box';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+```
+
+```html
+<lu-form-field label="Légende" hiddenLabel inline>
+	<lu-radio-group-input [(ngModel)]="example" arrow="neutral">
+		<lu-radio [value]="1">Option A</lu-radio>
+		<lu-radio [value]="2">Option B</lu-radio>
+		<lu-radio [value]="3">Option C</lu-radio>
+	</lu-radio-group-input>
+</lu-form-field>
+<lu-box withArrow neutral>
+	Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi
+	excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam!
+	Vitae!
+</lu-box>
+```
 
 ### Basic
 

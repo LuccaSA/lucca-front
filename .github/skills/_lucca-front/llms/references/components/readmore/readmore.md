@@ -24,16 +24,26 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 | `surface` | `surface` | `ReadMoreSurface \| string \| null` | `null` | — | — | Modifie la couleur de fond sous le bouton "Lire plus / moins" |
 | `innerContent` | `innerContent` | `null \| string` | `null` | — | — | Permet de passer le contenu via un innerHTML |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_READMORE_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./readmore.component.md)
 
 - 🎯 [Figma design tokens](./readmore.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-readmore-angular-ai--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-readmore-angular-ai--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_READMORE_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
@@ -43,6 +53,16 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 ~ `textFlow` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Added
+
+- `plainText` input to display the line breaks of the content instead of collapsing them.
+
+##### Fixed
+
+- Read less label is now correctly quoted when built from a signal.
 
 #### 21.3.0
 

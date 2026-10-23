@@ -11,30 +11,25 @@
 ### 2. Objet du mail
 
 * **Nom du logiciel** (pas de mention de "Lucca").
-* **Séparateur** : deux-points (:). Il est précédé d’une espace insécable en français.
-* **Message** : une phrase claire commençant par une minuscule, finissant par un point.
-* **Format :** `Nom du logiciel : notre message court et précis`.
+* **Séparateur** : tiret Moyen (demi-cadratin : **`–`**). Il est précédé d’une espace insécable en français.
+* **Message** : une phrase claire commençant par une majuscule. 
+* **Format :** `Nom du logiciel` **`–`** `Notre message court et précis`
 
 **Exemples :**
 
-✅ `Absences : approbation de votre demande du jeudi 18 septembre 2025.`
+✅ `Absences `**`– `**`Approbation de votre demande du jeudi 18 septembre 2025`
 
-✅ `Bulletins de paie : votre code de téléchargement.`
+✅ `Bulletins de paie – Votre code de téléchargement`
 
-✅ `Formation : évaluer la formation Lean Management.`
+✅ `Formation `**`– `**`Évaluer la formation Lean Management`
 
 * **Cas particulier : 2 deux-points dans l'objet ?** On remplace le deuxième deux-points par un **tiret moyen, ou demi-cadratin** (–), signe qui sert à distinguer les changements d’éléments.
-✅ `Performance : rappel – vous avez des entretiens à réaliser.`
+✅ `Performance – Rappel : vous avez des entretiens à réaliser`
 ❌ `Performance : rappel : vous avez des entretiens à réaliser.`
 
 ### **3. En-tête du mail**
 
-**Format :** `Nom du logiciel - Catégorie`
-
-Sur une seule ligne, afficher :
-
-* **Nom du logiciel**
-* **Catégorie** (elle peut ou non rappeler le contenu de l’objet du mail)
+**Format :** Pour les paramètres généraux : `Lucca - Catégorie`Pour les logiciels : `Nom du logiciel - Catégorie`
 
 La catégorie permet d'identifier **instantanément** le type d'action ou d’information communiqué.
 

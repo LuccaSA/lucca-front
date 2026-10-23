@@ -105,21 +105,26 @@ import { ClearFormatComponent, HeadingsComponent, LinkComponent, ListStyleToolba
 |-------|------|-------------|
 | `RICH_TEXT_FORMATTER` | `RichTextFormatter` | — |
 | `RICH_TEXT_PLUGIN_COMPONENT` | `RichTextPluginComponent` | — |
+| `LU_RICH_TEXT_INPUT_TRANSLATIONS` | `unknown` | — |
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./richtextinput.component.md)
 - 🎨 [Design guidelines](./richtextinput.design.md)
 - 🎯 [Figma design tokens](./richtextinput.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-richtextinput-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-richtextinput-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_RICH_TEXT_INPUT_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
@@ -131,6 +136,33 @@ import { ClearFormatComponent, HeadingsComponent, LinkComponent, ListStyleToolba
   ~ `hideToolbar` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.1
+
+##### Fixed
+
+- Tags copy/paste and undo in plain-text mode.
+- Editable area is now exposed as multiline (`aria-multiline`).
+
+#### 22.0.0
+
+##### Added
+
+- `secondary` and `group` properties on a tag: secondary tags are no longer displayed inline but offered in a searchable dropdown, grouped when a `group` is set.
+
+##### Changed
+
+- Link template context is now typed by `LinkTemplateContext` and exposes `isAutoLink` alongside `href`, `title` and `target`.
+
+##### Fixed
+
+- Delete button is no longer displayed in the link popover of an autolink.
+
+#### 21.4.1
+
+##### Fixed
+
+- Links are displayed as external ones in presentation mode.
 
 #### 21.3.1
 

@@ -1,6 +1,6 @@
 # bubble-icon — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-bubble-icon-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-bubble-icon-angular-basic--docs)
 
 ## Angular
 
@@ -14,10 +14,10 @@ import { DECORATIVE_PALETTE, PALETTE, PRODUCT_PALETTE } from '@lucca/prisme/core
 ```
 
 ```html
-<lu-bubble-icon icon="app" />
-<lu-bubble-icon icon="app" />
-<lu-bubble-icon icon="app" />
-<lu-bubble-icon icon="app" />
+<lu-bubble-icon icon="app" bubbleDirection="random" />
+<lu-bubble-icon icon="app" bubbleDirection="random" />
+<lu-bubble-icon icon="app" bubbleDirection="random" />
+<lu-bubble-icon icon="app" bubbleDirection="random" />
 ```
 
 ## HTML/CSS

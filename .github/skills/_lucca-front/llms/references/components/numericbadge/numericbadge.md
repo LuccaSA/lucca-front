@@ -19,8 +19,8 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 | `value` | `value` | `number \| string` | — | ✅ | — | Valeur affichée par le composant. Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "999+", etc.) |
 | `size` | `size` | `'XS' \| 'S' \| 'M'` | — | — | — | Modifie la taille du composant. |
 | `palette` | `palette` | `'success' \| 'warning' \| 'error' \| 'product' \| 'neutral' \| 'none' \| 'brand'` | `'none'` | — | — | Applique une palette de couleurs au composant. |
-| `loading` | `loading` | `boolean` | `false` | — | `booleanAttribute` | [v19.1] Applique l’état de chargement. |
-| `maxValue` | `maxValue` | `number` | `999` | — | `numberAttribute` | [v19.2] Valeur maximale affichée au format "999+". |
+| `loading` | `loading` | `boolean` | `false` | — | `booleanAttribute` | Applique l’état de chargement. |
+| `maxValue` | `maxValue` | `number` | `999` | — | `numberAttribute` | Valeur maximale affichée au format "999+". |
 | `disableTooltip` | `disableTooltip` | `boolean` | `false` | — | `booleanAttribute` | Empêche le déclenchement d’une tooltip si la valeur est supérieure à maxValue. |
 
 ## Related files
@@ -28,11 +28,11 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 - 📝 [Code & implementation](./numericbadge.component.md)
 
 - 🎯 [Figma design tokens](./numericbadge.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-numericbadge-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-numericbadge-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -41,6 +41,12 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ~ `maxValue` : transform ∅ → numberAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
 
 #### 21.3.0
 

@@ -25,6 +25,7 @@ import { NumberInputComponent } from '@lucca-front/ng/forms';
 | `min` | `min` | `unknown` | `undefined` | — | `luOptionalNumberAttribute` | — |
 | `max` | `max` | `unknown` | `undefined` | — | `luOptionalNumberAttribute` | — |
 | `valueAlignRight` | `valueAlignRight` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `width` | `width` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
 | `intl` | `intl` | `unknown` | — | — | — | — |
 
 ### Injection tokens
@@ -37,7 +38,11 @@ import { NumberInputComponent } from '@lucca-front/ng/forms';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
++ `width` : unknown
 
 ### 22.0.0
 

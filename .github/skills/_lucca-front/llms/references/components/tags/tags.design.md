@@ -4,7 +4,7 @@
 
 # Design
 
-**Mots-clés :**étiquette
+**Mots-clés :** étiquette
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
@@ -22,6 +22,10 @@ Le Tag utilise exclusivement une apparence `outlined`, déclinable selon trois p
 
 L’affichage d'une icône à gauche du label est optionnelle. Son utilisation doit être limitée et réservée aux **situations où l'icône apporte une réelle valeur d'identification sémantique**, sous peine de surcharger inutilement l'interface.
 
+### **Icône seule**
+
+Une option permet de n'afficher qu'une icône seule dans le Tag. Il peut être utilisé comme une légende lorsque sa signification est expliqué ailleurs dans l'interface. Le Label doit être accessible au survol via un Tooltip.
+
 ## Cas d’usage
 
 ### **Mise en avant d'un attribut ou d'une nouveauté**
@@ -38,7 +42,7 @@ Un objet ne doit porter qu'**un seul Tag de mise en avant** à la fois afin de g
 
 Le Tag peut être utilisé pour identifier des objets similaires au sein d'une liste ou d'un tableau. Il est possible de faire cohabiter plusieurs couleurs pour distinguer des concepts distincts, l’utilisation de l’icône est optionnelle. Cependant, pour créer un repère visuel fiable, une même catégorie doit **toujours** conserver la même couleur.
 
-En cas de grand nombre de catégories, privilégiez l'utilisation de la couleur `neutral` pour l'ensemble des tags.
+En cas de grand nombre de catégories, privilégiez l'utilisation de la couleur `neutral` pour l'ensemble des Tags.
 
 - **Do** : Privilégions les Tags en neutral lorsqu’il existe un grand nombre de catégories.
 - **Caution** : Évitons d’utiliser des Tag en couleur lorsqu’il existe un grand nombre de catégories. Cela peut perturber la lecture.
@@ -81,4 +85,4 @@ Utilisez des termes très courts (1 à 2 mots maximum) pour que l’information 
 Évitez de saturer l'écran avec une profusion de Tags. Trop de Tags côte à côte annulent l'effet de catégorisation et fatiguent l'utilisateur.
 
 - **Do** : Limitons le nombre de Tags affichés simultanément sur un même objet.
-- **Don't** : Évitons de cumulez les tags sur un objet.
+- **Don't** : Évitons de cumulez les Tags sur un objet.

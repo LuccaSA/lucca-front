@@ -114,11 +114,11 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 - 📝 [Code & implementation](./skeleton.component.md)
 - 🎨 [Design guidelines](./skeleton.design.md)
 - 🎯 [Figma design tokens](./skeleton.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-loaders-skeleton--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-skeleton--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -149,6 +149,22 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
   ~ `rows` : transform ∅ → numberAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- Text widths are drawn from the `LU_RANDOM` injection token (`@lucca-front/ng/core`), which defaults to `Math.random` — provide a constant function, e.g. `() => 0.5`, to get stable widths in visual regression screenshots.
+
+#### 22.0.0
+
+##### Added
+
+- `lu-skeleton-card`, `lu-skeleton-fancy-box` and `lu-skeleton-highlight-data` components.
+
+##### Removed
+
+- `lu-skeleton-resource-card` — use `lu-skeleton-card` instead.
 
 #### 21.3.0
 

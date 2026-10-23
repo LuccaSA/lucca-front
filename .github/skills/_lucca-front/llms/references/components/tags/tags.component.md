@@ -1,6 +1,6 @@
 # tags — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-tags-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-tags-angular-basic--docs)
 
 ## Angular
 
@@ -40,6 +40,19 @@ Classe CSS : `.tag`
 <a href="#" class="tag">Text</a>
 ```
 
+### HiddenLabel
+
+```css
+@forward '@lucca-front/scss/src/components/tag';
+```
+
+```html
+<span class="tag">
+	<span class="lucca-icon icon-heart" aria-hidden="true"></span>
+	<span class="tag-content pr-u-mask">Text</span>
+</span>
+```
+
 ### Ia
 
 ```css
@@ -60,6 +73,18 @@ Classe CSS : `.tag`
 <span class="tag">
 	<span class="lucca-icon icon-heart" aria-hidden="true"></span>
 	<span class="tag-content">Text</span>
+</span>
+```
+
+### OnlyIcon
+
+```css
+@forward '@lucca-front/scss/src/components/tag';
+```
+
+```html
+<span class="tag">
+	<span class="lucca-icon icon-heart" aria-hidden="true"></span>
 </span>
 ```
 

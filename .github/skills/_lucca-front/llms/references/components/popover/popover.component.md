@@ -1,6 +1,6 @@
 # popover — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-popover--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover--docs)
 
 ## Angular
 
@@ -66,6 +66,7 @@ import { LuPopoverModule } from '@lucca-front/ng/popover';
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 import { ILuUser } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 ```
@@ -88,6 +89,7 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 ```css
 @forward '@lucca-front/scss/src/components/popover';
 @forward '@lucca-front/scss/src/components/avatar';
+@forward '@lucca-front/scss/src/components/link';
 @forward '@lucca-front/scss/src/components/userPopover';
 ```
 
@@ -116,13 +118,20 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 						<span class="userPopover-details-info-detail-link-state">Parti(e)</span>
 					</span>
 					-->
-				<a class="userPopover-details-info-detail-workplace" href="#">
+				<span class="userPopover-details-info-detail-workplace">
 					<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
-					<span class="userPopover-details-info-detail-workplace-state">
-						Absent(e) –
-						<span class="pr-u-textLight">Jusqu’au 28/02/2024 inclus</span>
-					</span>
-				</a>
+					<a
+						class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+						href="#"
+					>
+						<span class="link-text">
+							Absent(e) –
+							<span class="pr-u-textLight">Jusqu’au 28/02/2024 inclus</span>
+						</span>
+						<span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>
+						<span class="pr-u-mask">(Open in a new window.)</span>
+					</a>
+				</span>
 			</p>
 		</div>
 	</div>

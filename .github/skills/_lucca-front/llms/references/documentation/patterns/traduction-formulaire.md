@@ -57,19 +57,19 @@ Une fois l'objet créé, l'utilisateur peut modifier les paramètres à tout mom
 
 ## Traduire un formulaire
 
-Dans le formulaire, l'utilisateur navigue entre les différentes langues via un Segmented control.
+Dans le formulaire, l'utilisateur navigue entre les différentes langues via un SegmentedControl.
 
 Dès lors que l'utilisateur sélectionne des langues disponibles pour les collaborateurs, la traduction de la ressource dans ces langues devient obligatoire.
 
-Ce composant doit être positionné à proximité immédiate des champs concernés : soit à droite du titre d'un Fieldset, soit dans l'en-tête d'une Dialog ou d’un drawer (à condition de laisser le header fixe).
+Ce composant doit être positionné à proximité immédiate des champs concernés : soit à droite du titre d'un Fieldset, soit dans l'en-tête d'une Dialog ou d’un Drawer (à condition de laisser le header fixe).
 
 À partir de cinq langues sélectionnées, l'affichage bascule automatiquement vers un Select pour optimiser l'espace.
 
-Les langues affichées dans le Segmented control se limiteront au code de la langue, sans distinction de culture (variantes régionales). En pratique, l'usage d'une langue générique (par exemple un seul anglais) est privilégié pour simplifier le travail de traduction de l’utilisateur. Dans le cas d'un Select, nous affichons le nom complet de la langue suivi de son code entre parenthèses, par exemple : “Français (FR)”.
+Les langues affichées dans le SegmentedControl se limiteront au code de la langue, sans distinction de culture (variantes régionales). En pratique, l'usage d'une langue générique (par exemple un seul anglais) est privilégié pour simplifier le travail de traduction de l’utilisateur. Dans le cas d'un Select, nous affichons le nom complet de la langue suivi de son code entre parenthèses, par exemple : “Français (FR)”.
 
 ## Champs traduisibles
 
-Chaque champ de saisie multilingue est identifiable par le rappel du code de la langue (ex : FR, EN, ES) accolé au label. Ce rappel visuel permet à l'utilisateur de savoir instantanément dans quelle langue il rédige, même lorsqu'il fait défiler de longs formulaires.
+Chaque champ de saisie multilingue est identifiable par le rappel du code de la langue (ex : FR, EN, ES) accolé au Label. Ce rappel visuel permet à l'utilisateur de savoir instantanément dans quelle langue il rédige, même lorsqu'il fait défiler de longs formulaires.
 
 ### Anatomie
 
@@ -79,34 +79,34 @@ Chaque champ de saisie multilingue est identifiable par le rappel du code de la 
 
 ### Cas particulier
 
-La structure mentionnée précédemment ne s'applique pas aux composants de saisie de texte long (Textarea, Rich textfield). En effet, la longueur du contenu ne permet pas de garantir la visibilité permanente d'un Inline message pour rappeler la langue de rédaction. Par conséquent, nous n'utiliserons pas d’Inline message dans ce cas précis.
+La structure mentionnée précédemment ne s'applique pas aux composants de saisie de texte long (Textarea, RichTextfield). En effet, la longueur du contenu ne permet pas de garantir la visibilité permanente d'un Inline message pour rappeler la langue de rédaction. Par conséquent, nous n'utiliserons pas d’InlineMessage dans ce cas précis.
 
 ### Traductions incomplètes
 
 Si l'utilisateur tente de soumettre le formulaire sans avoir complété toutes les **traductions** **obligatoires** alors nous lui proposons de générer automatiquement l'intégralité des traductions manquantes avant de finaliser l'enregistrement. Cela permet de prévenir toute erreur liée au processus de traduction.
 
-Si l'utilisateur choisit la traduction manuelle, nous le redirigions automatiquement vers le premier champ non traduit du formulaire. Une icône d'erreur s'affiche dans le Segmented control au niveau des langues concernés, accompagnée d'un Callout popover pour signaler précisément les langues où les traductions font défaut.
+Si l'utilisateur choisit la traduction manuelle, nous le redirigions automatiquement vers le premier champ non traduit du formulaire. Une icône d'erreur s'affiche dans le SegmentedControl au niveau des langues concernés, accompagnée d'un CalloutPopover pour signaler précisément les langues où les traductions font défaut.
 
 Dans le cas où le traitement des données serait long, l'affichage d'une barre de progression sera nécessaire pour permettre à l'utilisateur de suivre l'avancement.
 
 ## Traduire un champ
 
-Lorsqu'un formulaire ne contient qu'un seul champ nécessitant une traduction, il convient d'utiliser le composant Multilanguage TextField.
+Lorsqu'un formulaire ne contient qu'un seul champ nécessitant une traduction, il convient d'utiliser le composant MultilanguageTextField.
 
-- **Do** : Utilisons un Multilanguge Textfield.
-- **Don't** : N’utilisons pas de Segmented Control.
+- **Do** : Utilisons un MultilangugeTextfield.
+- **Don't** : N’utilisons pas de SegmentedControl.
 
-Cette règle ne s'applique pas si le champ est un Textarea ou Rich textfield. Pour ces composants, on utilisera un Segmented control positionné à droite du titre du fieldset.
+Cette règle ne s'applique pas si le champ est un Textarea ou RichTextfield. Pour ces composants, on utilisera un SegmentedControl positionné à droite du titre du Fieldset.
 
 ## Traduction automatique
 
-Pour garantir une expérience fluide, les traductions sont générées automatiquement dans les champs vides dès que l'utilisateur sélectionne une langue dans le Segmented control. Ce mécanisme permet un gain de temps considérable : l'utilisateur a la liberté de modifier le contenu ou de le remplacer intégralement si nécessaire.
+Pour garantir une expérience fluide, les traductions sont générées automatiquement dans les champs vides dès que l'utilisateur sélectionne une langue dans le SegmentedControl. Ce mécanisme permet un gain de temps considérable : l'utilisateur a la liberté de modifier le contenu ou de le remplacer intégralement si nécessaire.
 
 ### Relancer une traduction
 
 Si tous les champs dans la langue à traduire sont déjà renseignés, la traduction automatique ne se déclenche plus lors de la navigation entre les onglets. Si l'utilisateur souhaite relancer une traduction pour une langue autre que la langue de rédaction, il peut utiliser le bouton dédié. Ce bouton est exclusivement visible lors de la consultation des langues cibles. Son activation déclenche la traduction automatique de l'intégralité des champs traduisibles pour la langue sélectionnée.
 
-En fonction de la place disponible, il est possible d’utiliser le bouton un label “traduire”, ou bouton icône.
+En fonction de la place disponible, il est possible d’utiliser le bouton un Label “traduire”, ou bouton icône.
 
 ### Modification d'un champ dans la langue de rédaction
 

@@ -23,11 +23,11 @@ import { NewBadgeComponent } from '@lucca-front/ng/new-badge';
 - 📝 [Code & implementation](./newbadge.component.md)
 - 🎨 [Design guidelines](./newbadge.design.md)
 - 🎯 [Figma design tokens](./newbadge.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-newbadge-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-newbadge-angular-basic--docs)
 
 ## Changelog
 
-_Aucun changement d'API entre v21.4.2 et v22.0.0._
+_Aucun changement d'API entre v21.4.4 et v22.1.0._
 
 ### Notes de release (ZeroHeight)
 

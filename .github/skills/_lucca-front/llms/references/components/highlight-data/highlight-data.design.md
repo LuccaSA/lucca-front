@@ -24,7 +24,7 @@ Plusieurs thèmes existent pour que le composant puisse s’utiliser sur différ
 
 La couleur des bulles constituants l’ornementation s’adapte au thème utilisé.
 
-Si les Highlight data sont utilisés pour remonter le résultat d’un processus (analyse, import, etc.), il est alors possible d’utiliser les palettes Success, Error ou Warning pour afficher l’information.
+Si les HighlightData sont utilisés pour remonter le résultat d’un processus (analyse, import, etc.), il est alors possible d’utiliser les palettes `Success`, `Error` ou `Warning` pour afficher l’information.
 
 ### Ornements
 
@@ -32,7 +32,7 @@ Les ornements ont pour but d’apporter de la vie et d’illustrer le composant,
 
 L’ornementation peut être modulée selon l’importance que l’on souhaite donner à la donnée affichée (illustration et bulles, bulles seules, ni illustration ni bulles).
 
-Il est possible d’utiliser une illustration pour mettre en exergue un Highlight data parmi d’autres.
+Il est possible d’utiliser une illustration pour mettre en exergue un HighlightData parmi d’autres.
 
 Les ornements sont toujours à droite du bloc pour ne pas décaler le contenu.
 
@@ -41,7 +41,7 @@ Les ornements sont toujours à droite du bloc pour ne pas décaler le contenu.
 
 ### Actions
 
-Il est possible d’ajouter une action dans une box. Elle se matérialisera par un Button ou un Link.
+Il est possible d’ajouter une action dans une Box. Elle se matérialisera par un Button ou un Link.
 
 L’ornementation ne doit pas entrer en conflit avec le contenu. Si un bouton ou un lien est positionné à droite, alors il ne faut pas afficher d’ornementation.
 
@@ -53,7 +53,7 @@ Le composant est disponible en **trois tailles (M, S et XS)** pour donner plus d
 
 ### Mise en exergue
 
-Dans un regroupement de Highlight data, il est possible de mettre en exergue une donnée via :
+Dans un regroupement de HighlightData, il est possible de mettre en exergue une donnée via :
 
 * l’utilisation du thème “Dark”,
 * une illustration pour un seul des blocs.
@@ -63,8 +63,8 @@ Dans un regroupement de Highlight data, il est possible de mettre en exergue une
 La cohérence entre les blocs doit être maintenue lors de l’assemblage :
 
 * ne pas juxtaposer des contenus différents (donnée textuelle et donnée numérique),
-* garder une hauteur de contenu cohérente entre tous les Highlight data,
-* ne pas juxtaposer des Highlight data en S et en M,
+* garder une hauteur de contenu cohérente entre tous les HighlightData,
+* ne pas juxtaposer des HighlightData en S et en M,
 * si un bloc contient un bouton, il doit être placé tout à gauche ou tout à droite pour éviter de noyer l’interaction au milieu des informations.
 
 Quand plusieurs blocs sont juxtaposés, leur contenu respecte la même hiérarchie d’informations.
@@ -73,13 +73,13 @@ Quand plusieurs blocs sont juxtaposés, leur contenu respecte la même hiérarch
 
 ### Petits écrans et mobile
 
-Sur les petits écrans et mobile, les Highlight data s’affichent les uns en dessous des autres. Les illustrations peuvent être masquées si la largeur est trop petite et que cela nuit à la lisibilité.
+Sur les petits écrans et mobile, les HighlightData s’affichent les uns en dessous des autres. Les illustrations peuvent être masquées si la largeur est trop petite et que cela nuit à la lisibilité.
 
 ## Spécifications
 
-Plusieurs Highlight data peuvent être affichés les uns à côté des autres, **dans un maximum de quatre**. Il faut alors les **espacer de 12px** pour garantir une bonne lisibilité.
+Plusieurs HighlightData peuvent être affichés les uns à côté des autres, **dans un maximum de quatre**. Il faut alors les **espacer de 12px** pour garantir une bonne lisibilité.
 
-Ils ne doivent pas systématiquement avoir la même largeur. Il est possible que l’un des Highlight data prenne plus de place pour mettre en avant la donnée qu’il contient.
+Ils ne doivent pas systématiquement avoir la même largeur. Il est possible que l’un des HighlightData prenne plus de place pour mettre en avant la donnée qu’il contient.
 
 Dans une Dialog, le composant peut prendre toute la largeur disponible.
 
@@ -94,4 +94,4 @@ Elles doivent toujours respecter une taille fixe de **96x80px**. La taille s’a
 Le composant répond à deux types de besoin :
 
 * Mise en avant d’une **donnée numérique** (montant, nombre de collaborateurs, pourcentage, rémunération, etc.). Cette donnée peut être affichée en premier ou après un label. Les guidelines sur les nombres doivent être utilisées.
-* Mise en avant du **label** pour attirer l’attention de l’utilisateur sur le type de donnée affichée plutôt que sur la valeur. Les guidelines sur le titre doivent être utilisées, sauf si ce label arrive après une donnée numérique et qu’il complète une phrase (exemple : “+3,22 % entre 2023 et 2024” et pas “Entre 2023 et 2024”).
+* Mise en avant du **Label** pour attirer l’attention de l’utilisateur sur le type de donnée affichée plutôt que sur la valeur. Les guidelines sur le titre doivent être utilisées, sauf si ce label arrive après une donnée numérique et qu’il complète une phrase (exemple : “+3,22 % entre 2023 et 2024” et pas “Entre 2023 et 2024”).

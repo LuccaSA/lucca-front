@@ -24,11 +24,12 @@ import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 | `clearable` | `clearable` | `unknown` | `null` | — | `luNullableBooleanAttribute` | Ajoute un bouton de suppression lorsqu’une date est sélectionnée. |
 | `clearBehavior` | `clearBehavior` | `'clear' \| 'reset'` | `'clear'` | — | — | [v20.1] Change le comportement au clic sur la croix de suppression |
 | `hideWeekend` | `hideWeekend` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `mode` | `mode` | `'day' \| 'week' \| 'month' \| 'year'` | `'day'` | — | — | Modifie le mode de sélection au mois ou à l'année. |
+| `mode` | `mode` | `'day' \| 'week' \| 'month' \| 'year'` | `'day'` | — | — | Modifie le mode de sélection à la semaine, au mois ou à l'année. |
 | `getCellInfo` | `getCellInfo` | `((day: Date, mode: CalendarMode) => CellStatus) \| null` | — | — | — | — |
 | `min` | `min` | `unknown` | `new Date('1/1/1000')` | — | `transformDateInputToDate` | Définit une date minimum de sélection. |
 | `max` | `max` | `unknown` | `null` | — | `transformDateInputToDate` | Définit une date maximum de sélection. |
-| `focusedDate` | `focusedDate` | `unknown` | `null` | — | `transformDateInputToDate` | Définit la date préselectionnée à l’ouverture du calendrier. |
+| `focusedDate` | `focusedDate` | `unknown` | `null` | — | `transformDateInputToDate` | — |
+| `calendarModeInput` | `calendarMode` | `CalendarMode \| null` | `null` | — | — | Vue affichée par le calendrier à l’ouverture (jour, mois ou année), indépendamment du mode de sélection. Vaut `mode` par… |
 | `placeholder` | `placeholder` | `string` | — | — | — | — |
 | `widthAuto` | `widthAuto` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `shortcuts` | `shortcuts` | `readonly CalendarShortcut[]` | — | — | — | — |
@@ -38,25 +39,36 @@ import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 
 | Property | Binding name | Type | Notes |
 |----------|-------------|------|-------|
+| `calendarModeChange` | `calendarModeChange` | `CalendarMode` | — |
 | `panelOpened` | `panelOpened` | `void` | — |
 | `panelClosed` | `panelClosed` | `void` | — |
 
-#### Models (two-way binding)
+### Injection tokens
 
-| Property | Type | Required | Notes |
-|----------|------|----------|-------|
-| `calendarMode` | `CalendarMode \| null` | — | — |
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DATE2_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./daterangeinput.component.md)
 - 🎨 [Design guidelines](./daterangeinput.design.md)
 - 🎯 [Figma design tokens](./daterangeinput.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-date2-daterangeinput--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date2-daterangeinput--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
++ `calendarMode` : CalendarMode | null
++ (output) `calendarModeChange` : CalendarMode
+- (model) `calendarMode`
+
+### 22.0.5
+
++ token `LU_DATE2_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
@@ -69,6 +81,23 @@ import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 ~ (model) `calendarMode` : CalendarMode → CalendarMode | null
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- Ranges with only a start or an end date are now supported: picking a date while the end field is focused fills the end bound, and such a range no longer makes the control invalid. As a filter pill, a partial range reads "from …" or "until …".
+
+##### Changed
+
+- `calendarMode` is no longer nullable: it defaults to `mode` and follows it when `mode` changes.
+
+#### 22.0.0
+
+##### Fixed
+
+- Calendar now opens on the end bound when the range has no start.
+- Calendar overlay is now exposed as a labelled dialog (`aria-haspopup="dialog"`, `aria-expanded` and `aria-controls` on the triggers).
 
 #### 21.3.0
 

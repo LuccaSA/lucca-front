@@ -1,6 +1,6 @@
 # dropdown — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-dropdown-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-dropdown-angular-basic--docs)
 
 ## Angular
 
@@ -80,6 +80,30 @@ import { LuDropdownModule } from '@lucca-front/ng/dropdown';
 </lu-dropdown>
 ```
 
+### Dialog
+
+```js
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { configureLuDialog, DialogComponent, DialogContentComponent, DialogOpenDirective } from '@lucca-front/ng/dialog';
+import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
+```
+
+```html
+<button type="button" luButton disclosure [luDropdown]="dropdownSample">Dropdown</button>
+<ng-template #dropdownSample>
+	<lu-dropdown-menu>
+		<lu-dropdown-item>
+			<button lu-dropdown-action type="button" [luDialogOpen]="dialogTpl">Open dialog</button>
+		</lu-dropdown-item>
+	</lu-dropdown-menu>
+</ng-template>
+<ng-template #dialogTpl>
+	<lu-dialog>
+		<lu-dialog-content>Backdrop click and Escape close this dialog.</lu-dialog-content>
+	</lu-dialog>
+</ng-template>
+```
+
 ### Directive legacy
 
 ```js
@@ -124,7 +148,14 @@ import { PopoverPosition } from '@lucca-front/ng/popover2';
 
 ```html
 <div class="demo">
-	<button type="button" luButton disclosure [luDropdown]="dropdownSample">
+	<button
+		type="button"
+		luButton
+		disclosure
+		[luDropdown]="dropdownSample"
+		(luDropdownOnOpen)="luDropdownOnOpen()"
+		(luDropdownOnClose)="luDropdownOnClose()"
+	>
 		Dropdown
 		<lu-icon icon="arrowChevronBottom" />
 	</button>

@@ -1,6 +1,6 @@
 # approbation-inbox — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-approbation-inbox-angular-detail--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-approbation-inbox-angular-detail--docs)
 
 ## Angular
 
@@ -18,7 +18,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 
 ```html
 <lu-approbation-inbox-detail>
-	<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Title">
+	<lu-approbation-inbox-detail-header approbationInboxDetailHeader>
 		<ng-container approbationInboxDetailActions>
 			<button luButton type="button">Approve</button>
 			<button luButton type="button">Reject</button>
@@ -34,8 +34,10 @@ import { IconComponent } from '@lucca/prisme/icon';
 
 ```js
 import { FormsModule } from '@angular/forms';
-import { ApprobationInboxGroupComponent, ApprobationInboxIcon, ApprobationInboxIconsComponent, ApprobationInboxItemComponent, ApprobationInboxLinkComponent, ApprobationInboxListComponent, ApprobationInboxSubtleComponent } from '@lucca-front/ng/approbation-inbox';
+import { ApprobationInboxDetailComponent, ApprobationInboxGroupComponent, ApprobationInboxIcon, ApprobationInboxIconsComponent, ApprobationInboxItemComponent, ApprobationInboxLinkComponent, ApprobationInboxListComponent, ApprobationInboxSubtleComponent, luApprobationInboxListGroupTranslations, luApprobationInboxListItemTranslations, luApprobationInboxListTranslations } from '@lucca-front/ng/approbation-inbox';
+import { BUBBLE_ILLUSTRATION } from '@lucca-front/ng/bubble-illustration';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -45,12 +47,18 @@ import { IconComponent } from '@lucca/prisme/icon';
 ```
 
 ```html
-<lu-approbation-inbox-list>
+<lu-approbation-inbox-list
+	[detailsComponent]="detailRef"
+	(submitEvent)="submitEvent($event)"
+	(resetEvent)="resetEvent($event)"
+	(forwardEvent)="forwardEvent($event)"
+>
 	<lu-approbation-inbox-list-item>
 		<a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
 		Metadata
 	</lu-approbation-inbox-list-item>
 </lu-approbation-inbox-list>
+<lu-approbation-inbox-detail #detailRef />
 ```
 
 ## HTML/CSS

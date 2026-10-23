@@ -1,14 +1,6 @@
 {
-  "minor": "22.0",
-  "latestPatch": "22.0.0",
-  "tag": "v22.0.0",
+  "minor": "22.1",
+  "followsCode": true,
   "zhReleaseId": null,
-  "storybookBaseUrl": "https://lucca-front.lucca.io/v22.0.0/storybook",
-  "componentCount": 128,
-  "patches": {
-    "22.0.0": {
-      "tag": "v22.0.0",
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v22.0.0/storybook"
-    }
-  }
+  "componentCount": 131
 }

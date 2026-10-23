@@ -37,24 +37,35 @@ import { CalloutDisclosureComponent } from '@lucca-front/ng/callout';
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./callout-disclosure.component.md)
 - 🎨 [Design guidelines](./callout-disclosure.design.md)
 - 🎯 [Figma design tokens](./callout-disclosure.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
 ~ `open` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+##### Fixed
+
+- `mod-S` — actions placed in the description no longer add extra vertical spacing.
+- Outlined and ghost buttons in the actions now show a focus ring when focused with the keyboard.
 
 #### 21.3.0
 

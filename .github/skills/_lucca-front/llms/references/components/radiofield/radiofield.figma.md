@@ -15,7 +15,7 @@
 | `label` | BOOLEAN | — |
 | `size` | VARIANT | `M` · `S` |
 | `checked` | VARIANT | `false` · `true` |
-| `state` | VARIANT | `default` · `hover` · `focus` · `active` · `disabled` |
+| `state` | VARIANT | `default` · `hover` · `focus` · `active` · `disable` |
 | `error` | VARIANT | `false` · `true` |
 | `presentation` | VARIANT | `false` · `true` |
 | `alignment` | VARIANT | `vertical` · `horizontal` |

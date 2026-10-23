@@ -1,6 +1,6 @@
 # link — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
 
 ## Angular
 
@@ -38,7 +38,7 @@ import { LinkComponent } from '@lucca-front/ng/link';
 ```js
 import { AsyncPipe } from '@angular/common';
 import { provideRouter, RouterLink } from '@angular/router';
-import { LinkComponent } from '@lucca-front/ng/link';
+import { LinkComponent, luLinkTranslations } from '@lucca-front/ng/link';
 import { timer } from 'rxjs';
 ```
 

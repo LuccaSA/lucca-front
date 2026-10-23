@@ -1,6 +1,6 @@
 # departmentselect — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-departmentselect--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-departmentselect--docs)
 
 ## Angular
 
@@ -10,6 +10,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { LuDepartmentSelectInputComponent, luDepartmentSelectInputTranslations } from '@lucca-front/ng/department';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 ```
 

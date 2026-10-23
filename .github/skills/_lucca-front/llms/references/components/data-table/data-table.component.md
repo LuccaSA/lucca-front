@@ -1,6 +1,6 @@
 # data-table — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
 
 ## Angular
 
@@ -21,7 +21,7 @@ Dans un tableau, privilégiez l'attribut `external` sur vos liens. L'icône asso
 ```js
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { DATA_TABLE_ALIGN, DATA_TABLE_SORT, DATA_TABLE_VERTICAL_ALIGN, DataTableBodyComponent, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
+import { DATA_TABLE_ALIGN, DATA_TABLE_SORT, DATA_TABLE_VERTICAL_ALIGN, DataTableBodyComponent, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent, luDataTableTranslations } from '@lucca-front/ng/data-table';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -69,7 +69,7 @@ import { DataTableBodyComponent, DataTableComponent, DataTableFootComponent, Dat
 			<th luDataTableCell>Cell</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="drop($event)">
+	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="onDrop($event)">
 		@for (item of listItem; track $index) {
 			<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag>
 				<th luDataTableCell>{{ item.header }}</th>
@@ -145,6 +145,7 @@ import { DataTableBodyComponent, DataTableComponent, DataTableFootComponent, Dat
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 ```
 
@@ -510,8 +511,8 @@ Classe CSS : `.dataTable`
 
 ```html
 <div class="dataTableWrapper">
-	<table class="dataTable">
-		<thead class="dataTable-head">
+	<table class="dataTable" role="presentation">
+		<thead class="dataTable-head" inert="inert">
 			<tr class="dataTable-head-row">
 				<th class="dataTable-head-row-cell">Label</th>
 				<th class="dataTable-head-row-cell">Label</th>
@@ -1234,8 +1235,10 @@ Classe CSS : `.dataTable`
 		<thead class="dataTable-head">
 			<tr class="dataTable-head-row">
 				<th class="dataTable-head-row-cell">
-					<button type="button" class="tableSortable button">
-						Label
+					<button type="button" class="tableSortable button mod-ellipsis" #sortBtn1>
+						<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn1">
+							Label
+						</span>
 						<span class="tableSortable-arrows">
 							<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 							<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -1243,8 +1246,10 @@ Classe CSS : `.dataTable`
 					</button>
 				</th>
 				<th class="dataTable-head-row-cell" aria-sort="ascending">
-					<button type="button" class="tableSortable button">
-						Label
+					<button type="button" class="tableSortable button mod-ellipsis" #sortBtn2>
+						<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn2">
+							Label
+						</span>
 						<span class="tableSortable-arrows">
 							<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 							<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -1252,8 +1257,10 @@ Classe CSS : `.dataTable`
 					</button>
 				</th>
 				<th class="dataTable-head-row-cell" aria-sort="descending">
-					<button type="button" class="tableSortable button">
-						Label
+					<button type="button" class="tableSortable button mod-ellipsis" #sortBtn3>
+						<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn3">
+							Label
+						</span>
 						<span class="tableSortable-arrows">
 							<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 							<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -1545,6 +1552,7 @@ Classe CSS : `.dataTable`
 				<th class="dataTable-head-row-cell">Label</th>
 			</tr>
 		</thead>
+		<!-- Un tbody par nœud racine -->
 		<tbody class="dataTable-body">
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-tree">
@@ -1578,6 +1586,7 @@ Classe CSS : `.dataTable`
 				<td class="dataTable-body-row-cell">Text</td>
 			</tr>
 		</tbody>
+		<!-- Un tbody par nœud racine -->
 		<tbody class="dataTable-body">
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-tree">
