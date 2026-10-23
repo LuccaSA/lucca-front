@@ -40,11 +40,11 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 ```
 
 * Stylelint reports the first matching entry: the order is precedence.
-* The selectors file holds four sections, each opened by its comment and a `// ====` line:
+* The selectors file holds three sections, each opened by its comment and a `// ====` line:
 	1. The entries sorted by version.
 	2. The deprecated components, after the entries targeting their children.
-	3. The "any part of a selector" entries, after the specific entries.
-	4. The `.u-` catch-all, last.
+	3. The `.u-` catch-all, last.
+* A modifier or state class gets a combination with its component: `.button.disabled` instead of `.disabled`.
 * The properties file holds the sorted section only.
 * Sort key:
 	1. `versionDeprecated`, or `versionDeleted` without it.

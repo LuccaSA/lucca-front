@@ -185,6 +185,17 @@ export default [
 		`,
 	},
 	{
+		// Any combination of .button and .disabled, .error, .mod-link, .mod-outline or .success, with any non-whitespace character between
+		// SEE https://regex101.com/r/OTnSEg.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L24.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L126.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L31.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L19.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L132.
+		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.(disabled|error|mod-link|mod-outline|success)(?![\w-]))\S*/,
+		versionDeprecated: '17.3.0',
+	},
+	{
 		// SEE https://regex101.com/r/nPMyQZ.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/scss/src/commons/config.scss#L11.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
@@ -266,6 +277,13 @@ export default [
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
+	},
+	{
+		// Any combination of .breadcrumbs-list-item-action and .active, with any non-whitespace character between
+		// SEE https://regex101.com/r/puV4bl.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/5f325acbb26f67993d110ccd13e08ae63e1f9ab4/packages/scss/src/components/breadcrumbs/index.scss#L13.
+		objectPattern: /(?=\S*\.breadcrumbs-list-item-action(?![\w-]))(?=\S*\.active(?![\w-]))\S*/,
+		versionDeprecated: '17.4.0',
 	},
 	{
 		// SEE https://regex101.com/r/VGtzuM.
@@ -621,10 +639,21 @@ export default [
 		`,
 	},
 	{
-		// Any combination of .button and .mod-text or .mod-delete, with any non-whitespace character between
+		// Any combination, with any non-whitespace character between, of:
+		// .button and .mod-text or .mod-delete;
+		// .button-group and .mod-text;
+		// a dropdown option action and .mod-delete.
 		// SEE https://regex101.com/r/5qB2gm.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/button/index.scss#L31.
-		objectPattern: /(?=\S*\.button(?![\w-]))(?=\S*\.(mod-text|mod-delete)(?![\w-]))\S*/,
+		// SEE https://regex101.com/r/zjVUrO.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/buttonGroup/index.scss#L11.
+		// SEE https://regex101.com/r/B2oF7e.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/dropdown/index.scss#L16.
+		objectPattern: [
+			/(?=\S*\.button(?![\w-]))(?=\S*\.(mod-text|mod-delete)(?![\w-]))\S*/,
+			/(?=\S*\.button-group(?![\w-]))(?=\S*\.mod-text(?![\w-]))\S*/,
+			/(?=\S*\.(dropdown-list-option-action|lu-dropdown-options-item-action)(?![\w-]))(?=\S*\.mod-delete(?![\w-]))\S*/,
+		],
 		versionDeprecated: '20.2.0',
 		actions: `
 			* \`.mod-text\` ⇒
@@ -634,14 +663,6 @@ export default [
 				* sélecteur : \`.mod-critical\`
 				* input Angular : \`critical\`
 		`,
-	},
-	{
-		// Any combination of .button-group and .mod-text, with any non-whitespace character between
-		// SEE https://regex101.com/r/zjVUrO.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/buttonGroup/index.scss#L11.
-		objectPattern: /(?=\S*\.button-group(?![\w-]))(?=\S*\.mod-text(?![\w-]))\S*/,
-		versionDeprecated: '20.2.0',
-		actions: `Remplacer par \`.mod-ghost\`.`,
 	},
 	{
 		// Former radius scale (M, L, XL), on the whole box or on logical corners
@@ -1098,38 +1119,41 @@ export default [
 		// Listed in the deprecated components of highlight-prisme.scss, with no documented replacement
 		// SEE https://regex101.com/r/Sg9PR8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L262.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L265.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L266.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L263.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L264.
-		objectPattern: [/\.main\b/, /\.layout\b/, /\.header\b/, /\.filters\b/, /\.notchBox\b/],
+		name: 'Main',
+		objectPattern: /\.main\b/,
 		versionDeprecated: '21.1.2',
 	},
-
-	// Any occurrence of one of these selectors in any part of a selector.
-	// Kept after the specific entries (`.button.mod-delete`…), which must win.
-	// SEE https://regex101.com/r/OTnSEg
-	// ==============================================================================================
-
 	{
-		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/button/index.scss#L90.
-		objectPattern: /\.mod-delete(?![\w-])/,
-		versionDeprecated: '20.2.0',
-		actions: `Remplacer par \`.mod-critical\`.`,
+		// Listed in the deprecated components of highlight-prisme.scss, with no documented replacement
+		// SEE https://regex101.com/r/Sg9PR8.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L265.
+		name: 'Layout',
+		objectPattern: /\.layout\b/,
+		versionDeprecated: '21.1.2',
 	},
 	{
-		// SEE https://github.com/LuccaSA/lucca-front/blob/5f325acbb26f67993d110ccd13e08ae63e1f9ab4/packages/scss/src/components/breadcrumbs/index.scss#L13.
-		objectPattern: /\.active(?![\w-])/,
-		versionDeprecated: '17.4.0',
+		// Listed in the deprecated components of highlight-prisme.scss, with no documented replacement
+		// SEE https://regex101.com/r/Sg9PR8.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L266.
+		name: 'Header',
+		objectPattern: /\.header\b/,
+		versionDeprecated: '21.1.2',
 	},
 	{
-		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L24.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L126.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L31.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L19.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L132.
-		objectPattern: [/\.disabled(?![\w-])/, /\.error(?![\w-])/, /\.mod-link(?![\w-])/, /\.mod-outline(?![\w-])/, /\.success(?![\w-])/],
-		versionDeprecated: '17.3.0',
+		// Listed in the deprecated components of highlight-prisme.scss, with no documented replacement
+		// SEE https://regex101.com/r/Sg9PR8.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L263.
+		name: 'Filters',
+		objectPattern: /\.filters\b/,
+		versionDeprecated: '21.1.2',
+	},
+	{
+		// Listed in the deprecated components of highlight-prisme.scss, with no documented replacement
+		// SEE https://regex101.com/r/Sg9PR8.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L264.
+		name: 'Notch box',
+		objectPattern: /\.notchBox\b/,
+		versionDeprecated: '21.1.2',
 	},
 
 	// Catch-all, keep last
