@@ -232,9 +232,9 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/0726fe674636af589d3b14f641d67723f20ff890/packages/ng/schematics/tokens-typo/index.ts#L22.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/title/mods.scss#L8.
 		objectPattern: [
-			// Font sizes and line heights
+			// Tailles de police et hauteurs de ligne
 			/--sizes-(XS|S|M|L|XL|XXL|XXXL)-(fontSize|lineHeight)(?![\w-])/,
-			// Vertical paddings, only read with `$deprecatedSpacings: true`
+			// Paddings verticaux, lus uniquement avec `$deprecatedSpacings: true`
 			/--sizes-((XS|S|M|L|XL|XXL|XXXL)-)?verticalPadding(?![\w-])/,
 		],
 		versionDeprecated: '20.1.0',

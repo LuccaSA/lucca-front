@@ -61,11 +61,11 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/79401000ea2b96ce82a5ad2965952a04ea980703/packages/scss/src/components/index.scss#L54.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
 		objectPattern: [
-			// Legacy grid columns and offsets, always suffixed with a breakpoint (`.grid-6\@mediaMinS`)
+			// Colonnes et offsets de l’ancienne grille, toujours suffixés d’un breakpoint (`.grid-6\@mediaMinS`)
 			/\.grid(-(offset)?\d+)?\\@mediaMin/,
-			// Legacy grid mods: any combination of .grid and an alignment or reverse mod, with any non-whitespace character between
+			// Mods de l’ancienne grille, combinés à `.grid`
 			/(?=\S*\.grid(?![\w-]))(?=\S*\.mod-(reverse|(start|center|end|top|middle|bottom|around|between)\\@mediaMin\w*)(?![\w-]))\S*/,
-			// Legacy grid ordering utilities
+			// Utilitaires de placement de l’ancienne grille
 			/\.u-(first|last)\\@mediaMin/,
 		],
 		versionDeprecated: '16.2.0',
@@ -97,7 +97,10 @@ export default [
 		// SEE https://regex101.com/r/ag9QK4.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/2358bf0f58eb26a5a85dd7e8b90a0cc99e87bbd6/packages/scss/src/components/menu/component.scss#L25.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/2358bf0f58eb26a5a85dd7e8b90a0cc99e87bbd6.
-		objectPattern: /\.(menu|horizontalNavigation)(-[\w-]+)?\s(.*\s)?\.label(?![\w-])/,
+		objectPattern: [
+			// Compteur dans un élément de navigation :
+			/\.(menu|horizontalNavigation)(-[\w-]+)?\s(.*\s)?\.label(?![\w-])/,
+		],
 		versionDeprecated: '16.3.0',
 		actions: `Remplacer par [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge).`,
 	},
@@ -203,7 +206,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/ng/icon/icon.component.scss#L7.
 		objectPattern: [
-			// Any combination of .box, .card or .section and .mod-grey, with any non-whitespace character between
+			// Toute combinaison de `.box`, `.card` ou `.section` avec `.mod-grey`
 			/(?=\S*\.(box|card|section)(?![\w-]))(?=\S*\.mod-grey(?![\w-]))\S*/,
 			/\.icon-color-(primary|secondary)(?![\w-])/,
 		],
@@ -283,7 +286,7 @@ export default [
 		objectPattern: [
 			// SEE https://regex101.com/r/YCDDc8.
 			/\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])/,
-			// Zero border utilities: `.u-` names deleted with the t-shirt utilities, `.pr-u-` names still shipping
+			// Utilitaires de bordure nulle : `.u-` supprimés avec les utilitaires t-shirt, `.pr-u-` toujours présents
 			// SEE https://regex101.com/r/nLOfQY.
 			/\.u-border(Top|Right|Bottom|Left|Inline|Block)?0(?![\w-])/,
 		],
@@ -481,7 +484,7 @@ export default [
 		// SEE https://regex101.com/r/w7DSuO.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/24575bdd120778f19e0cbb2b47ffc9b6e4491bba/packages/scss/src/commons/core.scss#L12.
 		objectPattern: [
-			// Spacings: `Top` ⇒ `BlockStart`, `Right` ⇒ `InlineEnd`, `Bottom` ⇒ `BlockEnd`, `Left` ⇒ `InlineStart`
+			// Espacements : `Top` ⇒ `BlockStart`, `Right` ⇒ `InlineEnd`, `Bottom` ⇒ `BlockEnd`, `Left` ⇒ `InlineStart`
 			/\.pr-u-(margin|padding)(Top|Right|Bottom|Left)(\d+|Auto)(?![\w-])/,
 			/\.pr-u-border(Top|Right|Bottom|Left)0(?![\w-])/,
 		],
@@ -578,9 +581,9 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/core.scss#L85.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/utils/index.scss#L311.
 		objectPattern: [
-			// Corners: no logical utility, use the `--pr-t-border-radius-*` tokens
+			// Coins : pas d’utilitaire logique, utiliser les tokens `--pr-t-border-radius-*`
 			/\.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius[A-Z]\w*(?![\w-])/,
-			// Alignment, float & clear: `Left` ⇒ `Start` / `InlineStart`, `Right` ⇒ `End` / `InlineEnd`
+			// Alignement, float & clear : `Left` ⇒ `Start` / `InlineStart`, `Right` ⇒ `End` / `InlineEnd`
 			/\.pr-u-(textAlign|float|clear)(Left|Right)(?![\w-])/,
 		],
 		versionDeprecated: '20.2.0',
@@ -591,7 +594,7 @@ export default [
 			* \`*Right\` ⇒ \`*InlineEnd\`
 			* \`*textAlignLeft\` ⇒ \`*textAlignStart\`
 			* \`*textAlignRight\` ⇒ \`*textAlignEnd\`
-			* Angles physiques ⇒ tokens \`--pr-t-border-radius-*\`.
+			* Coins physiques ⇒ tokens \`--pr-t-border-radius-*\`.
 		`,
 	},
 	{
@@ -652,7 +655,7 @@ export default [
 		actions: `
 			* \`*RadiusM\` & \`*RadiusL\` ⇒ \`*RadiusDefault\`
 			* \`*RadiusXL\` ⇒ \`*RadiusStructure\`
-			* Angles ⇒ tokens \`--pr-t-border-radius-*\`.
+			* Coins ⇒ tokens \`--pr-t-border-radius-*\`.
 		`,
 	},
 	{
@@ -665,13 +668,13 @@ export default [
 		actions: `Remplacer \`<lu-dropdown>\` par un template, comme présenté sur l’exemple de la page [Dropdown](https://prisme.lucca.io/94310e217/p/557682-dropdown).`,
 	},
 	{
-		// Utilitaires renommés très utilisés
 		// SEE https://regex101.com/r/TdUmb8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/utils/index.scss#L408.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/utils/index.scss#L398.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/utils/index.scss#L403.
 		objectPattern: [
+			// Utilitaires renommés très utilisés
 			/\.pr-u-textProduct(?![\w-])/,
 			/\.pr-u-textBrand(?![\w-])/,
 			/\.pr-u-textCritical(?![\w-])/,
@@ -692,10 +695,10 @@ export default [
 		},
 	},
 	{
-		// Utilitaires renommés peu ou pas utilisés
 		// SEE https://regex101.com/r/Dk4cFs.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
 		objectPattern: [
+			// Utilitaires renommés peu ou pas utilisés
 			/\.pr-u-textSuccessContrasted(?![\w-])/,
 			/\.pr-u-textWarningContrasted(?![\w-])/,
 			/\.pr-u-textBrandContrasted(?![\w-])/,
@@ -764,11 +767,13 @@ export default [
 		actions: `Remplacer par \`.richTextField-toolbar-chips-chip\`.`,
 	},
 	{
-		// Utilitaires renommés peu ou pas utilisés
 		// SEE https://regex101.com/r/CjaRkK.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/f0b73e151f73e805500788cdaac6e65fcff20b7a.
-		objectPattern: /\.pr-u-textAI(?![\w-])/,
+		objectPattern: [
+			// Utilitaires renommés peu ou pas utilisés
+			/\.pr-u-textAI(?![\w-])/,
+		],
 		versionDeprecated: '21.0.0',
 		versionDeleted: '21.3.0',
 		actions: `
@@ -779,11 +784,11 @@ export default [
 		},
 	},
 	{
-		// Utilitaires renommés très utilisés
 		// SEE https://regex101.com/r/j7pw92.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
 		objectPattern: [
+			// Utilitaires renommés très utilisés
 			/\.pr-u-textPrimary(?![\w-])/,
 			/\.pr-u-textSecondary(?![\w-])/,
 			/\.pr-u-textGrey(?![\w-])/,
@@ -836,11 +841,13 @@ export default [
 		actions: `Remplacer par \`.mod-compact\`.`,
 	},
 	{
-		// Utilitaires renommés peu ou pas utilisés
 		// SEE https://regex101.com/r/10xX2L.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/ae64895accfc9eba74ca24b4c0d294435b261244/packages/scss/src/commons/config.scss#L119.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/ae64895accfc9eba74ca24b4c0d294435b261244/packages/scss/src/commons/core.scss#L129.
-		objectPattern: /\.pr-u-textPineappleContrasted(?![\w-])/,
+		objectPattern: [
+			// Utilitaires renommés peu ou pas utilisés
+			/\.pr-u-textPineappleContrasted(?![\w-])/,
+		],
 		versionDeprecated: '21.2.4',
 		actions: `
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
@@ -850,11 +857,13 @@ export default [
 		},
 	},
 	{
-		// Utilitaires renommés peu ou pas utilisés
 		// SEE https://regex101.com/r/Ucp3l2.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/f0b73e151f73e805500788cdaac6e65fcff20b7a/packages/scss/src/commons/config.scss#L123.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/f0b73e151f73e805500788cdaac6e65fcff20b7a/packages/scss/src/commons/core.scss#L129.
-		objectPattern: /\.pr-u-textOrchid(?![\w-])/,
+		objectPattern: [
+			// Utilitaires renommés peu ou pas utilisés
+			/\.pr-u-textOrchid(?![\w-])/,
+		],
 		versionDeprecated: '21.3.0',
 		actions: `
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)

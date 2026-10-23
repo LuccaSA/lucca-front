@@ -5,6 +5,7 @@
 // Usage, from the repository root: node .claude/skills/update-deprecated-doc/scripts/generate.mjs
 import { readdirSync, readFileSync, writeFileSync } from 'fs';
 import { marked } from 'marked';
+import { comboRe, nomItems, rootToken } from './nom.mjs';
 
 const dir = 'packages/stylelint-config/';
 const docPath = 'docs/life-cycle.md';
@@ -100,76 +101,25 @@ const actionsHtml = (e) => {
 // --- Nom derivation ---
 // An element selector opens with the lookbehind `(?<![\w.#-])`: it keeps classes and ids out.
 const elementStart = /^\(\?<!\[\\w\.#-\]\)/;
-const clean = (src) =>
-	src
-		.replace(elementStart, '')
-		.replace(/\(\?!\[\\w-\]\)/g, '')
-		.replace(/\\b/g, '')
-		.replace(/\\([.@-])/g, '$1');
-const expand = (s) => {
-	// expand one (a|b|c) group (optionally suffixed ?) recursively; bail on regex syntax leftovers
-	const m = s.match(/\(([^()]*)\)(\?)?/);
-	if (!m) return /[\[\]{}?*+|\\]/.test(s.replace(/\\@/g, '@')) ? null : [s];
-	const alts = m[1].split('|');
-	if (m[1].includes('(') || alts.some((a) => /[\[\]{}?*+]/.test(a))) return null;
-	const opts = m[2] ? ['', ...alts] : alts;
-	const out = [];
-	for (const o of opts) {
-		const sub = expand(s.slice(0, m.index) + o + s.slice(m.index + m[0].length));
-		if (!sub) return null;
-		out.push(...sub);
-	}
-	return out;
-};
-const li = (t) => `<li><code>${esc(t)}</code></li>`;
-const comboRe = /^\(\?=\\S\*(.+?)\)\(\?=\\S\*(.+?)\)\\S\*$/;
-const nomItems = (src) => {
-	const cm = src.match(comboRe);
-	if (cm) {
-		const a = expand(clean(cm[1])),
-			b = expand(clean(cm[2]));
-		if (!a || !b) return null;
-		return a.flatMap((x) => b.map((y) => `<li><code>${esc(x)}</code> <strong>+</strong> <code>${esc(y)}</code></li>`));
-	}
-	const ex0 = expand(clean(src));
-	const ex = ex0 && [...new Set(ex0)];
-	return ex && ex.length <= 10 ? ex.map(li) : null;
-};
-// Derives the Nom cell when every pattern expands to a short plain list and no comment labels it.
-const autoNom = (e) => {
-	if (e.groups.some((g) => g.label)) return null;
-	const items = [];
-	for (const src of e.groups.flatMap((g) => g.sources)) {
-		const it = nomItems(src);
-		if (!it) return null;
-		items.push(...it);
-	}
-	// Longer lists need factoring, which the agent writes.
-	if (items.length > 10) return null;
-	return `<ul>\n${items.map((i) => '\t' + i).join('\n')}\n</ul>`;
-};
-// Agent-written Nom cells from the current doc, keyed by their `data-pattern`.
-const escAttr = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
-const unescAttr = (t) => t.replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+// Nom cells are built in Markdown, then rendered by `marked`: no blank line survives inside a cell.
+const code = (t) => `\`${t}\``;
+const render = (md) => marked.parse(md).replace(/\n+/g, '\n').trim();
 const doc = read(docPath);
-const [docHead, docTail = ''] = doc.split('## Classes');
-const writtenIn = (text) =>
-	[...text.matchAll(/<td data-pattern="([^"]*)">\n([\s\S]*?)\n\t\t\t<\/td>/g)]
-		// A leftover TODO placeholder is not a written cell: keep reporting it until the agent fills it.
-		.filter(([, , body]) => !body.includes('<!-- TODO'))
-		.map(([, key, body]) => [unescAttr(key), body.replace(/^\t{4}/gm, '')]);
-const written = new Map(writtenIn(docTail));
-const missing = [];
-
-// Returns the Nom cell, plus the pattern key when the agent writes it.
+const docHead = doc.split('## Composants')[0];
+// A cell holds one list per group of patterns, each after its label: an unlabeled entry is a single group.
 const nomHtml = (e) => {
-	const key = e.groups.flatMap((g) => g.sources)[0];
-	const kept = written.get(key);
-	if (kept) return { html: kept, key };
-	const auto = autoNom(e);
-	if (auto) return { html: auto };
-	missing.push(key);
-	return { html: '<!-- TODO: write this Nom cell, see SKILL.md -->', key };
+	const groups = e.groups.some((g) => g.label) ? e.groups : [{ label: null, sources: e.groups.flatMap((g) => g.sources) }];
+	const md = groups.flatMap((g) => [
+		...(g.label ? [g.label] : []),
+		...(g.sources.length
+			? [
+					nomItems(g.sources)
+						.map((i) => `* ${i}`)
+						.join('\n'),
+				]
+			: []),
+	]);
+	return render(md.join('\n\n'));
 };
 
 // --- Search links: each Nom token links to a GitHub code search of the org's consumers ---
@@ -223,23 +173,15 @@ const indent = (html, tabs) =>
 		.join('\n');
 const cell = (html, attrs = '') =>
 	html.includes('\n') || html.startsWith('<') ? `\t\t\t<td${attrs}>\n${indent(html, 4)}\n\t\t\t</td>` : `\t\t\t<td${attrs}>${html}</td>`;
-// A cell holding a single item takes no list. A kept Nom cell may come back list-less from the doc:
-// it is wrapped again so that `linkNom` finds its item.
-// A `(qualifier)` after the list stays after the item.
+// A cell holding a single item takes no list.
 const unlist = (html) => {
 	const m = html.match(/^<ul>\s*<li>([\s\S]*?)<\/li>\s*<\/ul>(\s+\([\s\S]*\))?$/);
 	return m && !m[1].includes('<li>') ? m[1] + (m[2] ?? '') : html;
 };
-const relist = (html) => {
-	if (html.includes('<li>') || !html.includes('<code>')) return html;
-	const [, item, qualifier = ''] = html.match(/^([\s\S]*<\/code>(?:<\/a>)?)(\s+\([\s\S]*\))?$/) ?? [, html];
-	return `<ul>\n\t<li>${item}</li>\n</ul>${qualifier}`;
-};
 const row = (e) => {
-	const nom = nomHtml(e);
 	return [
 		'\t\t<tr>',
-		cell(unlist(linkNom(relist(nom.html), e)), nom.key ? ` data-pattern="${escAttr(nom.key)}"` : ''),
+		cell(unlist(linkNom(nomHtml(e), e))),
 		`\t\t\t<td>${e.versionDeprecated ?? '–'}</td>`,
 		`\t\t\t<td>${e.versionDeleted ?? '–'}</td>`,
 		cell(unlist(actionsHtml(e))),
@@ -321,15 +263,11 @@ for (const f of ngFiles) {
 	}
 }
 // A component shows one root class per pattern, its shortest form: the search still covers every class.
-const root = (src) => {
-	const ex = expand(clean(src));
-	return ex ? ex.reduce((a, b) => (b.length < a.length ? b : a)) : clean(src);
-};
 const tokens = (e) => {
-	const roots = [...new Set(e.groups.flatMap((g) => g.sources).map(root))];
+	const roots = [...new Set(e.groups.flatMap((g) => g.sources).map(rootToken))];
 	// A component without a CSS pattern shows its name only.
 	if (!roots.length) return '';
-	const html = unlist(linkNom(`<ul>\n${roots.map((r) => '\t' + li(r)).join('\n')}\n</ul>`, e, true));
+	const html = unlist(linkNom(render(roots.map((r) => `* ${code(r)}`).join('\n')), e, true));
 	// A single root sits inline after the name, behind a comma.
 	return html.startsWith('<ul>') ? `\n${html}` : `, ${html}`;
 };
@@ -351,9 +289,4 @@ const composants = `## Composants\n\nSources\u00a0: [${files.Classes}](https://g
 	.map(compRow)
 	.join('\n')}\n\t</tbody>\n</table>\n`;
 
-const head = docHead.slice(0, docHead.indexOf('## Composants')).trimEnd();
-writeFileSync(docPath, `${head}\n\n${composants}\n${section('Classes')}\n${section('Variables CSS')}`);
-if (missing.length) {
-	console.error(`Write these Nom cells in ${docPath}, following SKILL.md:\n${missing.map((k) => `- /${k}/`).join('\n')}`);
-	process.exit(1);
-}
+writeFileSync(docPath, `${docHead.trimEnd()}\n\n${composants}\n${section('Classes')}\n${section('Variables CSS')}`);
