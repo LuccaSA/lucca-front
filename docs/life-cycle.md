@@ -33,98 +33,179 @@ Source : [Cycle de vie des composants > Composants](https://prisme.lucca.io/943
 		</tr>
 	</thead>
 	<tbody>
+		<tr data-name="Status">
+			<td>Status, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)status(-dot(-important)%3F%7C-label)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status</code></a></td>
+			<td>16.2.0</td>
+			<td>18.1.0</td>
+			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/425d98-status-badge">Status badge</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/66df2f-list">List</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)list(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.list</code></a>
+			</td>
+			<td>16.2.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/883e34-sortable-list">Sortable list</a>.</td>
+		</tr>
+		<tr data-name="Action icon">
+			<td>Action icon, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)actionIcon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.actionIcon</code></a></td>
+			<td>17.2.0</td>
+			<td>19.1.0</td>
+			<td>
+				<ul>
+				<li>sans bordure : <code>.button.mod-onlyIcon.mod-ghost</code></li>
+				<li>avec bordure : <code>.button.mod-onlyIcon.mod-outlined</code></li>
+				</ul>
+			</td>
+		</tr>
 		<tr>
 			<td><a href="https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated">Select</a> et variations (<a href="https://prisme.lucca.io/94310e217/p/699694-api-select">API</a>, <a href="https://prisme.lucca.io/94310e217/p/70d7eb-establishment">Establishment</a>, <a href="https://prisme.lucca.io/94310e217/p/479237-department-select-">Department</a>, <a href="https://prisme.lucca.io/94310e217/p/691517-select">User</a>, <a href="https://prisme.lucca.io/94310e217/p/69f87f-qualification">Qualification</a>, etc.)</td>
 			<td>17.3.0</td>
 			<td>–</td>
 			<td>
-				<p>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/587833-select-simple">Simple</a> &amp; <a href="https://prisme.lucca.io/94310e217/p/927519-select-multiple-new">Multiple Select</a> et leurs directives.</p>
+				<p>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/587833-select-simple">Simple</a> &amp; <a href="https://prisme.lucca.io/94310e217/p/927519-select-multiple-new">Multiple Select</a> et leurs directives.</p>
 				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
+		<tr data-name="User picture">
+			<td>User picture, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-user-picture(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-user-picture</code></a></td>
+			<td>18.2.0</td>
+			<td>–</td>
+			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/42b330-avatar">Avatar</a> et sa classe <code>.avatar</code>.</td>
+		</tr>
+		<tr data-name="User tile">
+			<td>
+				User tile
+				<ul>
+					<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-info(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile(-(title%7Clabel%7Cfootnote))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)picture(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-info</code></a></li>
+					<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-info(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile(-(title%7Clabel%7Cfootnote))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)picture(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile</code></a></li>
+					<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-info(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile(-(title%7Clabel%7Cfootnote))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)picture(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.picture</code></a></li>
+				</ul>
+			</td>
+			<td>18.2.0</td>
+			<td>20.1.0</td>
+			<td>
+				<ul>
+				<li><code>.user-info</code> &amp; <code>.user-tile*</code> ⇒ <br><a href="https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/00d3d8">User tile</a> : composant Angular ou <a href="https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/771576">classes HTML</a></li>
+				<li><code>.picture</code> ⇒ <a href="https://prisme.lucca.io/94310e217/p/42b330-avatar/b/915f82">Avatar</a></li>
+				</ul>
+			</td>
+		</tr>
 		<tr>
-			<td>Deprecated <a href="https://prisme.lucca.io/94310e217/p/334d4a-filter-bar">Filter bar</a></td>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/334d4a-filter-bar">Filter bar</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filterBarDeprecated(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBarDeprecated</code></a>
+			</td>
 			<td>19.2.0</td>
 			<td>22.0.0</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/053be4-filter-pill">Filter Pills</a> &amp; <a href="https://prisme.lucca.io/94310e217/p/13044b-filter-bar-">Filter Bar</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/053be4-filter-pill">Filter Pills</a> &amp; <a href="https://prisme.lucca.io/94310e217/p/13044b-filter-bar-">Filter Bar</a>.</td>
+		</tr>
+		<tr data-name="Menu">
+			<td>Menu, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)menu(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.menu</code></a></td>
+			<td>19.3.0</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation">Horizontal navigation</a>.</td>
 		</tr>
 		<tr>
 			<td><code>&lt;lu-dropdown&gt;</code></td>
 			<td>20.3.0</td>
 			<td>–</td>
-			<td>À remplacer par un template, comme présenté sur l'exemple de la page <a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>.</td>
+			<td>Remplacer par un template, comme présenté sur l'exemple de la page <a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>.</td>
 		</tr>
 		<tr>
-			<td><a href="https://prisme.lucca.io/94310e217/p/66df2f-list">List</a></td>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/04061d-checkbox">Checkbox</a>
+				<ul>
+					<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkbox(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkboxesfield(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkbox</code></a></li>
+					<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkbox(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkboxesfield(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkboxesfield</code></a></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
 			<td>–</td>
-			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/883e34-sortable-list">Sortable list</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/42c88e-checkbox">Checkbox</a>.</td>
 		</tr>
 		<tr>
-			<td>Deprecated <a href="https://prisme.lucca.io/94310e217/p/04061d-checkbox">Checkbox</a></td>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/07849c-radio">Radio</a>
+				<ul>
+					<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radio(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radiosfield(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radio</code></a></li>
+					<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radio(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radiosfield(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radiosfield</code></a></li>
+				</ul>
+			</td>
+			<td>21.1.2</td>
 			<td>–</td>
-			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/42c88e-checkbox">Checkbox</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
 		</tr>
 		<tr>
-			<td>Deprecated <a href="https://prisme.lucca.io/94310e217/p/07849c-radio">Radio</a></td>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/15149b-switch">Switch</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)switch(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.switch</code></a>
+			</td>
+			<td>21.1.2</td>
 			<td>–</td>
-			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/39c7b7-switch">Switch</a>.</td>
 		</tr>
 		<tr>
-			<td>Deprecated <a href="https://prisme.lucca.io/94310e217/p/15149b-switch">Switch</a></td>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/55805e-radio-buttons">Radio buttons</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radioButtons(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radioButtons</code></a>
+			</td>
+			<td>21.1.2</td>
 			<td>–</td>
-			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/39c7b7-switch">Switch</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
 		</tr>
 		<tr>
-			<td><a href="https://prisme.lucca.io/94310e217/p/55805e-radio-buttons">Radio buttons</a></td>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/55f101-text-field">Textfield</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)textfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.textfield</code></a>
+			</td>
+			<td>21.1.2</td>
 			<td>–</td>
-			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/459eda-textfield">Textfield</a>.</td>
 		</tr>
 		<tr>
-			<td>Deprecated <a href="https://prisme.lucca.io/94310e217/p/55f101-text-field">Textfield</a></td>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/99e88e-file-upload">File upload</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)file(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.file</code></a>
+			</td>
+			<td>21.1.2</td>
 			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/8282a5-file-upload">File upload</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/640fae-label">Label</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label</code></a>
+			</td>
+			<td>21.1.2</td>
 			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/459eda-textfield">Textfield</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/3960bc-chip">Chip</a>, <a href="https://prisme.lucca.io/94310e217/p/6036ad-tag">Tag</a> ou <a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a>.</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/75b1ea-table-">Table</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table</code></a>
+			</td>
+			<td>21.1.2</td>
+			<td>–</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/4263a5-data-table">Data table</a> ou <a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table">Index table</a>.</td>
+		</tr>
+		<tr data-name="Highlight section">
+			<td>Highlight section, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)highlightSection(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.highlightSection</code></a></td>
+			<td>22.1.0</td>
+			<td>–</td>
+			<td>Le composant Highlight section (<code>.highlightSection</code> et <code>&lt;lu-highlight-section&gt;</code>) sera remplacé en 22.2 par une évolution du composant Box.</td>
 		</tr>
 		<tr>
 			<td><a href="https://prisme.lucca.io/94310e217/p/10c73a-date-picker">Date picker</a></td>
 			<td>–</td>
 			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/87a48d-date-picker">Date input</a>.</td>
-		</tr>
-		<tr>
-			<td>Deprecated <a href="https://prisme.lucca.io/94310e217/p/99e88e-file-upload">File upload</a></td>
-			<td>–</td>
-			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/8282a5-file-upload">File upload</a>.</td>
-		</tr>
-		<tr>
-			<td><a href="https://prisme.lucca.io/94310e217/p/640fae-label">Label</a></td>
-			<td>–</td>
-			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/3960bc-chip">Chip</a>, <a href="https://prisme.lucca.io/94310e217/p/6036ad-tag">Tag</a> ou <a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/87a48d-date-picker">Date input</a>.</td>
 		</tr>
 		<tr>
 			<td><a href="https://prisme.lucca.io/94310e217/p/7693f3-popover">Popover</a></td>
 			<td>–</td>
 			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/129fae-popover">Popover2</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/129fae-popover">Popover2</a>.</td>
 		</tr>
 		<tr>
 			<td><a href="https://prisme.lucca.io/94310e217/p/863d99-side-panel">Side panel</a></td>
 			<td>–</td>
 			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/841b0b-dialogs">Dialog</a>.</td>
-		</tr>
-		<tr>
-			<td><a href="https://prisme.lucca.io/94310e217/p/75b1ea-table-">Table</a></td>
-			<td>–</td>
-			<td>–</td>
-			<td>À remplacer par <a href="https://prisme.lucca.io/94310e217/p/4263a5-data-table">Data table</a> ou <a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table">Index table</a>.</td>
+			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/841b0b-dialogs">Dialog</a>.</td>
 		</tr>
 	</tbody>
 </table>
@@ -170,19 +251,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>Écrire le point de rupture en majuscules (<code>l</code> ⇒ <code>L</code>), puis appliquer les dépréciations suivantes du composant.</td>
 		</tr>
 		<tr>
-			<td>
-				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)status(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)status-dot(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status-dot</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)status-label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status-label</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)status-dot-important(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status-dot-important</code></a></li>
-				</ul>
-			</td>
-			<td>16.2.0</td>
-			<td>18.1.0</td>
-			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/425d98-status-badge">Status badge</a>.</td>
-		</tr>
-		<tr>
 			<td data-pattern="\.grid(-(offset)?\d+)?\\@mediaMin">
 				<p>Colonnes et offsets de l’ancienne grille, toujours suffixés d’un breakpoint (<code>.grid-6\@mediaMinS</code>)</p>
 				<ul>
@@ -215,14 +283,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>16.2.0</td>
 			<td>19.1.0</td>
 			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)list(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.list</code></a>
-			</td>
-			<td>16.2.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/883e34-sortable-list">Sortable list</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -300,19 +360,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>17.2.0</td>
 			<td>19.1.0</td>
 			<td>–</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)actionIcon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.actionIcon</code></a>
-			</td>
-			<td>17.2.0</td>
-			<td>19.1.0</td>
-			<td>
-				<ul>
-				<li>sans bordure : <code>.button.mod-onlyIcon.mod-ghost</code></li>
-				<li>avec bordure : <code>.button.mod-onlyIcon.mod-outlined</code></li>
-				</ul>
-			</td>
 		</tr>
 		<tr>
 			<td>
@@ -504,14 +551,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-user-picture(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-user-picture</code></a>
-			</td>
-			<td>18.2.0</td>
-			<td>–</td>
-			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/42b330-avatar">Avatar</a> et sa classe <code>.avatar</code>.</td>
-		</tr>
-		<tr>
-			<td>
 				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-body-row-cell-action(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-body-row-cell-action</code></a>
 			</td>
 			<td>18.2.0</td>
@@ -525,21 +564,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>18.2.0</td>
 			<td>Remplacer par la classe unique <code>.dialog-inside-formOptional</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-info(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-info</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile-title(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile-title</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile-label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile-label</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile-footnote(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile-footnote</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)picture(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.picture</code></a></li>
-				</ul>
-			</td>
-			<td>18.2.0</td>
-			<td>20.1.0</td>
-			<td>–</td>
 		</tr>
 		<tr>
 			<td>
@@ -667,14 +691,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>Remplacer par le nouveau DOM du composant <a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>.</td>
 		</tr>
 		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filterBarDeprecated(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBarDeprecated</code></a>
-			</td>
-			<td>19.2.0</td>
-			<td>–</td>
-			<td>–</td>
-		</tr>
-		<tr>
 			<td data-pattern="\.pr-u-(margin|padding)(Top|Right|Bottom|Left)(\d+|Auto)(?![\w-])">
 				<ul>
 					<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-(margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)(%5Cd%2B%7CAuto)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-border(Top%7CRight%7CBottom%7CLeft)0(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-margin(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></a></li>
@@ -693,14 +709,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>*Right*</code> ⇒ <code>*InlineEnd*</code></li>
 				</ul>
 			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)menu(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.menu</code></a>
-			</td>
-			<td>19.3.0</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation">Horizontal navigation</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -1070,76 +1078,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkbox(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkbox</code></a>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/42c88e-checkbox">Checkbox</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radio(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radio</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radioButtons(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radioButtons</code></a></li>
-				</ul>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)switch(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.switch</code></a>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/39c7b7-switch">Switch</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)textfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.textfield</code></a>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/459eda-textfield">Textfield</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)file(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.file</code></a>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/8282a5-file-upload">File upload</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table</code></a>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li><a href="https://prisme.lucca.io/94310e217/p/4263a5-data-table">Data table</a></li>
-				<li><a href="https://prisme.lucca.io/94310e217/p/24fc14-index-table">Index table</a></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label</code></a>
-			</td>
-			<td>21.1.2</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li><a href="https://prisme.lucca.io/94310e217/p/3960bc-chip">Chip</a></li>
-				<li><a href="https://prisme.lucca.io/94310e217/p/6036ad-tag">Tag</a></li>
-				<li><a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a></li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<ul>
 					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)main(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.main</code></a></li>
 					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)layout(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.layout</code></a></li>
@@ -1270,14 +1208,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)highlightSection(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.highlightSection</code></a>
-			</td>
-			<td>22.1.0</td>
-			<td>–</td>
-			<td>Le composant Highlight section (<code>.highlightSection</code> et <code>&lt;lu-highlight-section&gt;</code>) sera remplacé en 22.2 par une évolution du composant Box.</td>
-		</tr>
-		<tr>
-			<td>
 				<ul>
 					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)priorityLevels(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels</code></a></li>
 					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)priorityLevels-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels-icon</code></a></li>
@@ -1286,22 +1216,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>22.1.1</td>
 			<td>Remplacer par <code>.priorityLevel</code> et <code>.priorityLevel-icon</code>.</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkboxesfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkboxesfield</code></a>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/42c88e-checkbox">Checkbox</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radiosfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radiosfield</code></a>
-			</td>
-			<td>–</td>
-			<td>–</td>
-			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/45f82a-radio">Radio</a>.</td>
 		</tr>
 	</tbody>
 </table>

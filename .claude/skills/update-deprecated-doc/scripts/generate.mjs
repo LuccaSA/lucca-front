@@ -1,6 +1,7 @@
 // Regenerates the Classes and Variables CSS sections of docs/life-cycle.md
 // from LFDeprecatedSelectors.mjs and LFDeprecatedProperties.mjs.
-// Everything before `## Classes` (title, note, style, Composants) is kept as is.
+// Composants keeps the Prisme rows and merges the entries holding a `name` into them.
+// Everything else before `## Classes` (title, note, style) is kept as is.
 // Usage, from the repository root: node .claude/skills/update-deprecated-doc/scripts/generate.mjs
 import { readFileSync, writeFileSync } from 'fs';
 import { marked } from 'marked';
@@ -56,6 +57,11 @@ const parse = (file) => {
 				}
 				// Any other actions form would be dropped silently: refuse it.
 				if (l.startsWith('actions:')) throw new Error(`${file}: actions must be a template literal, got: ${l}`);
+				const nm = l.match(/^name: '([^']+)'/);
+				if (nm) {
+					entry.name = nm[1];
+					continue;
+				}
 				const sm = l.match(/^schematics: '([^']+)'/);
 				if (sm) {
 					entry.schematics = sm[1];
@@ -137,12 +143,19 @@ const autoNom = (e) => {
 // Agent-written Nom cells from the current doc, keyed by their `data-pattern`.
 const escAttr = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 const unescAttr = (t) => t.replace(/&quot;/g, '"').replace(/&amp;/g, '&');
-const written = new Map(
-	[...read(docPath).matchAll(/<td data-pattern="([^"]*)">\n([\s\S]*?)\n\t\t\t<\/td>/g)]
+const doc = read(docPath);
+const [docHead, docTail = ''] = doc.split('## Classes');
+const composantsText = docHead.slice(docHead.indexOf('## Composants'));
+const writtenIn = (text) =>
+	[...text.matchAll(/<td data-pattern="([^"]*)">\n([\s\S]*?)\n\t\t\t<\/td>/g)]
 		// A leftover TODO placeholder is not a written cell: keep reporting it until the agent fills it.
 		.filter(([, , body]) => !body.includes('<!-- TODO'))
-		.map(([, key, body]) => [unescAttr(key), body.replace(/^\t{4}/gm, '')]),
-);
+		.map(([, key, body]) => [unescAttr(key), body.replace(/^\t{4}/gm, '')]);
+const written = new Map([
+	...writtenIn(docTail),
+	// A Composants Nom cell starts with the component name line: the written part follows it.
+	...writtenIn(composantsText).map(([key, body]) => [key, body.split('\n').slice(1).join('\n')]),
+]);
 const missing = [];
 
 // Returns the Nom cell, plus the pattern key when the agent writes it.
@@ -179,7 +192,8 @@ const ghDisplayed = (text) => `/${text.startsWith('.') ? ghClassBefore : ghBefor
 // Alternatives are grouped: the repository filters must apply to every one of them.
 const searchUrl = (q) => `https://github.com/search?q=${encodeURIComponent(`${q.includes(' OR ') ? `(${q})` : q} org:LuccaSA NOT repo:LuccaSA/lucca-front`)}&amp;type=code`;
 const unesc = (t) => t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-const linkNom = (html, e) => {
+// `shared` links every item to the search of all the entry's patterns.
+const linkNom = (html, e, shared = false) => {
 	const sources = e.groups.flatMap((g) => g.sources);
 	const fallback = sources.map((s) => (sources.length > 1 && comboRe.test(s) ? `(${ghCombo(s)})` : ghCombo(s))).join(' OR ');
 	const link = (q, code) => `<a href="${searchUrl(q)}">${code}</a>`;
@@ -188,11 +202,12 @@ const linkNom = (html, e) => {
 		.replace(/<li>([\s\S]*?)<\/li>/g, (whole, inner) => {
 			const codes = [...inner.matchAll(/<code>([\s\S]*?)<\/code>/g)].map((m) => unesc(m[1]));
 			if (!codes.length) return whole;
-			const query = codes.some((c) => c.includes('…'))
-				? fallback
-				: codes.length === 2 && inner.includes('<strong>+</strong>')
-					? codes.map(ghDisplayed).join(' AND ')
-					: ghDisplayed(codes[0]);
+			const query =
+				shared || codes.some((c) => c.includes('…'))
+					? fallback
+					: codes.length === 2 && inner.includes('<strong>+</strong>')
+						? codes.map(ghDisplayed).join(' AND ')
+						: ghDisplayed(codes[0]);
 			return `<li>${inner.replace(/<code>[\s\S]*?<\/code>/g, (code) => link(query, code))}</li>`;
 		});
 };
@@ -253,14 +268,99 @@ const byVersionAsc = (x, y) =>
 	compareAsc(semver(x.versionDeprecated ?? x.versionDeleted), semver(y.versionDeprecated ?? y.versionDeleted)) ||
 	compareAsc(semver(x.versionDeleted ?? x.versionDeprecated), semver(y.versionDeleted ?? y.versionDeprecated));
 const table = (entries) => `${thead}\n${entries.map(row).join('\n')}\n\t</tbody>\n</table>\n`;
-const section = (title, file) =>
-	`## ${title}\n\nSource\u00a0: [${file}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${file})\n\n${table(parse(file).sort(byVersionAsc))}`;
+const files = { Classes: 'LFDeprecatedSelectors.mjs', 'Variables CSS': 'LFDeprecatedProperties.mjs' };
+const entries = Object.fromEntries(Object.entries(files).map(([title, file]) => [title, parse(file)]));
+// An entry with a `name` deprecates a whole component: it goes to Composants.
+const section = (title) =>
+	`## ${title}\n\nSource\u00a0: [${files[title]}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${files[title]})\n\n${table(
+		entries[title].filter((e) => !e.name).sort(byVersionAsc),
+	)}`;
 
-const head = read(docPath).split('## Classes')[0].trimEnd();
-writeFileSync(
-	docPath,
-	`${head}\n\n${section('Classes', 'LFDeprecatedSelectors.mjs')}\n${section('Variables CSS', 'LFDeprecatedProperties.mjs')}`,
+// --- Composants: the Prisme rows, merged with the named entries ---
+// Entries sharing a name merge into one: their patterns add up, the first defined value wins otherwise.
+const named = new Map();
+for (const e of Object.values(entries)
+	.flat()
+	.filter((e) => e.name)) {
+	const m = named.get(e.name);
+	if (!m) named.set(e.name, { ...e, groups: [...e.groups] });
+	else {
+		m.groups.push(...e.groups);
+		for (const k of ['versionDeprecated', 'versionDeleted', 'actions', 'schematics']) m[k] ??= e[k];
+	}
+}
+const plainText = (html) => unesc(html.replace(/<[^>]*>/g, '')).trim();
+const tdRe = /\t\t\t<td[^>]*>(?:\n([\s\S]*?)\n\t\t\t<\/td>|(.*?)<\/td>)/g;
+const dash = (v) => (v === '–' ? undefined : v);
+// A row the generator added carries `data-name`: each run rebuilds it.
+const prismeRows = [...composantsText.matchAll(/\t\t<tr( data-name="[^"]*")?>\n([\s\S]*?)\n\t\t<\/tr>/g)]
+	.filter(([, marker, body]) => !marker && body.includes('<td'))
+	.map(([raw, , body]) => {
+		const tds = [...body.matchAll(tdRe)];
+		const content = tds.map((m) => (m[1] !== undefined ? m[1].replace(/^\t{4}/gm, '') : m[2]));
+		// Every row is a deprecation: Prisme's `Deprecated` prefix goes.
+		// A single root sits inline after the name: it goes too, each run adds it back.
+		const line = content[0]
+			.split('\n')[0]
+			.replace(/^Deprecated /, '')
+			.replace(/, <a href="https:\/\/github\.com\/search[^"]*"><code>[^<]*<\/code><\/a>$/, '');
+		return {
+			raw,
+			tds: tds.map((m) => m[0]),
+			line,
+			versionDeprecated: dash(content[1]),
+			versionDeleted: dash(content[2]),
+			action: content[3],
+		};
+	});
+// A component shows one root class per pattern, its shortest form: the search still covers every class.
+const root = (src) => {
+	const ex = expand(clean(src));
+	return ex ? ex.reduce((a, b) => (b.length < a.length ? b : a)) : clean(src);
+};
+const tokens = (e) => {
+	const roots = [...new Set(e.groups.flatMap((g) => g.sources).map(root))];
+	const html = unlist(linkNom(`<ul>\n${roots.map((r) => '\t' + li(r)).join('\n')}\n</ul>`, e, true));
+	// A single root sits inline after the name, behind a comma.
+	return html.startsWith('<ul>') ? `\n${html}` : `, ${html}`;
+};
+const compRow = ({ line, tds, action }, e, marker = '') => {
+	return [
+		`\t\t<tr${marker}>`,
+		cell(line + tokens(e)),
+		`\t\t\t<td>${e.versionDeprecated ?? '–'}</td>`,
+		`\t\t\t<td>${e.versionDeleted ?? '–'}</td>`,
+		// The Prisme action wins: the entry's fills a missing one.
+		tds && action !== '–' ? tds[3] : cell(unlist(actionsHtml(e))),
+		'\t\t</tr>',
+	].join('\n');
+};
+const compRows = prismeRows.map((r) => {
+	const e = named.get(plainText(r.line));
+	if (!e) return { ...r, html: r.raw.replace(/(\t\t\t<td[^>]*>(?:\n\t{4})?)Deprecated /, '$1') };
+	named.delete(plainText(r.line));
+	// The entry's dates win: Prisme fills the missing ones.
+	const merged = {
+		...e,
+		versionDeprecated: e.versionDeprecated ?? r.versionDeprecated,
+		versionDeleted: e.versionDeleted ?? r.versionDeleted,
+	};
+	return { ...merged, html: compRow(r, merged) };
+});
+for (const [name, e] of named) compRows.push({ ...e, html: compRow({ line: esc(name) }, e, ` data-name="${escAttr(name)}"`) });
+const composants = composantsText.replace(
+	/(<tbody>\n)[\s\S]*(\n\t<\/tbody>)/,
+	(_, open, close) =>
+		`${open}${compRows
+			.sort(byVersionAsc)
+			.map((r) => r.html)
+			.join('\n')
+			// Prisme's actions match the `.mjs` wording.
+			.replace(/À remplacer par/g, 'Remplacer par')}${close}`,
 );
+
+const head = (docHead.slice(0, docHead.indexOf('## Composants')) + composants).trimEnd();
+writeFileSync(docPath, `${head}\n\n${section('Classes')}\n${section('Variables CSS')}`);
 if (missing.length) {
 	console.error(`Write these Nom cells in ${docPath}, following SKILL.md:\n${missing.map((k) => `- /${k}/`).join('\n')}`);
 	process.exit(1);

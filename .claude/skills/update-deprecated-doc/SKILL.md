@@ -16,6 +16,7 @@ them:
 
 ```js
 {
+  name: 'Checkbox',                  // optional, see Composants below
   objectPattern: /regex/ | [/regex/, ...] | 'string',
   versionDeprecated: '17.3.0',       // optional
   versionDeleted: '19.1.0',          // optional
@@ -28,6 +29,7 @@ them:
 
 1. Run `node .claude/skills/update-deprecated-doc/scripts/generate.mjs` from the repository root.
    - It rewrites *Classes* and *Variables CSS* and keeps everything above them.
+   - It merges every entry holding a `name` into *Composants*.
    - It derives simple *Nom* cells itself: up to 10 plain items, no comment label.
    - It keeps every agent-written *Nom* cell, tagged `<td data-pattern="…">` with the entry's first regex source.
    - It lists the cells to write and exits with code 1 when a tagged cell is missing.
@@ -94,6 +96,18 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
 - **Empty cells: en dash `–`** (U+2013); never the em dash `—`, anywhere.
   Schematics-only entry → just the `(schematics)` link. Prisme's `-` and
   `Non défini` both become `–`.
+- **An entry with a `name` deprecates a whole component: it leaves *Classes* for *Composants*.**
+  - The `name` matches the Prisme row text without its `Deprecated` prefix: `Checkbox`.
+  - Every *Composants* row drops that prefix: the whole table lists deprecations.
+  - The row keeps its Prisme name line.
+  - One root class per pattern follows it: its shortest form, such as `.status`.
+  - A single root sits inline after the name, behind a comma: `List, .list`.
+  - Prisme's "À remplacer par" becomes "Remplacer par", the `.mjs` wording.
+  - Every root links to one search of all the row's patterns.
+  - Entries sharing a `name` share the row.
+  - The entry's dates win: Prisme fills the missing ones.
+  - The Prisme action wins: the entry's fills a missing one.
+  - A `name` missing from Prisme gets its own row, marked `data-name`: each run rebuilds it.
 - **Composants mirrors Prisme** (as HTML): `Nom` stays inline (links, `<code>`),
   but normalize versions to semver (`19.2` → `19.2.0`) and correct obvious
   typos (e.g. Establishment, Data table, the Select schematics link →
