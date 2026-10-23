@@ -2,9 +2,9 @@
 
 Pipeline **déterministe** (zéro IA) qui génère la documentation des composants Lucca Front pour les **Agent Skills**.
 
-Le pipeline produit **une seule skill**, `.github/skills/lucca-front/` (`name: lucca-front`) : un `SKILL.md`, les fichiers `references/` du **dernier patch publié** de la mineure, et un dossier `fixes/` avec un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories — **aucune information patch-level n'est perdue**).
+Le pipeline produit **une seule skill**, `.github/skills/lucca-front/` (`name: lucca-front`) : un `SKILL.md` et ses fichiers `references/`. Sur une branche qui suit le code (`master`), la skill décrit le code du commit qui la porte (cf. [Une skill qui suit le code](#une-skill-qui-suit-le-code)). En mode par tag (`--version`, pour une `vX.Y-lts`), `references/` documente le **dernier patch publié** de la mineure, et un dossier `fixes/` porte un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories).
 
-Le nom de la skill ne porte **aucune version** : comme pour [`lucca-cdk`](https://github.com/LuccaSA/lucca-cdk/tree/main/scripts/generate-skills), le versionnement est délégué à [APM](https://microsoft.github.io/apm/). Un projet épingle le **tag git** de lucca-front qui porte la mineure de son `@lucca-front/ng` (cf. [Consommation via APM](#consommation-via-apm)). Une branche porte donc **une** mineure de la skill : `master` la plus récente, `v21.4-lts` la 21.x.
+Le nom de la skill ne porte **aucune version** : comme pour [`lucca-cdk`](https://github.com/LuccaSA/lucca-cdk/tree/main/scripts/generate-skills), le versionnement est délégué à [APM](https://microsoft.github.io/apm/). Un projet épingle le **tag git** de lucca-front qui correspond à son `@lucca-front/ng` (cf. [Consommation via APM](#consommation-via-apm)).
 
 ## Prérequis
 
@@ -75,7 +75,8 @@ npx ts-node ... --validate
 | `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH/Figma) |
 | `--accept-output-violations` | Ne pas faire échouer le run sur les violations du garde-fou de sortie. Cf. garde-fou de sortie. |
 | `--offline` | Aucun accès réseau : ZeroHeight et Figma sont lus dans les baselines committées, l'index Storybook dans `--storybook-index`, et le pré-flight est sauté. Cf. [Mode hors ligne](#mode-hors-ligne). Incompatible avec `--retry-failed` et `--accept-shrink`. |
-| `--storybook-index <fichier>` | `index.json` Storybook lu à la place de celui du Storybook déployé. **Requis** avec `--offline`. Les liens de la skill pointent toujours vers le Storybook versionné. |
+| `--storybook-index <fichier>` | `index.json` Storybook lu à la place de celui du Storybook déployé. **Requis** avec `--offline` sans `--ref`. Les liens de la skill pointent toujours vers le Storybook versionné. |
+| `--ref <ref git>` | Lit le code et les stories depuis ce ref (`HEAD`, ou l'arbre de `git write-tree`) au lieu du tag de la mineure, et construit l'index Storybook en local. La skill suit alors le code : cf. [Une skill qui suit le code](#une-skill-qui-suit-le-code). `--version` devient inutile. |
 
 Variable d'environnement complémentaire : **`FETCH_TIMEOUT_MS`** — deadline des fetchs, 10 000 ms par défaut. Le bon réglage dépend de ce que le run fait bloquer la boucle d'événements : une génération complète le veut **bas** (une page est différée puis rejouée, plutôt que d'immobiliser un worker), une passe `--retry-failed` le veut **haut** (quelques dizaines d'unités seulement, et son but est de les obtenir, pas de les différer à nouveau). Cf. `collectors/http.ts`.
 | `--zh-latest <minor>` | Affirme que `<minor>` (ex. `21.3`) est la dernière version en ligne → autorisée en « latest » non pinné. Répétable. Cf. garde-fou ZeroHeight. |
@@ -560,33 +561,52 @@ Il est **opaque** (non déductible du repo, de git ou de npm) :
 
 ## Consommation via APM
 
-Un projet déclare la skill dans son `apm.yml` en épinglant un **tag** de lucca-front, jamais une branche ni un chemin versionné :
+Un projet déclare la skill dans son `apm.yml` en épinglant le **tag exact** de la version de `@lucca-front/ng` qu'il installe, jamais une branche ni un chemin versionné :
 
 ```yaml
 dependencies:
   apm:
-    - LuccaSA/lucca-front/.github/skills/lucca-front#v22.1.1
+    - LuccaSA/lucca-front/.github/skills/lucca-front#v22.1.3
 ```
 
-`apm install` la déploie sous `.claude/skills/lucca-front/` (et `.github/skills/` pour Copilot) ; `apm.lock.yaml` fige le commit. Le `SKILL.md` installé dit quelle mineure il documente et s'arrête si le projet est sur une autre.
+Pas de plage semver (`#^22.1.0`) : APM la résout sur tous les tags `v*`, RC comprises, et livrerait la skill d'une `22.2.0-rc.1`. À chaque montée de `@lucca-front/ng`, déplacer le tag avec elle.
 
-### Quel tag épingler
+`apm install` la déploie sous `.claude/skills/lucca-front/` (et `.github/skills/` pour Copilot) ; `apm.lock.yaml` fige le commit.
 
-La génération a besoin de la release **publiée** (npm, Storybook déployé, release ZeroHeight — cf. [pré-flight](#parcours-pré-flight)) : la skill d'une mineure est donc commitée **après** le tag `vX.Y.0`, et le **premier tag coupé après ce commit** est le premier qui la porte. Concrètement, la skill 22.1 entre dans `v22.1.1` (ou le tag suivant si la génération tarde). Un projet en `X.Y.p` épingle le **dernier tag de sa mineure qui porte la skill X.Y** : le contenu reflète le dernier patch généré et `fixes/` décrit les patchs postérieurs à sa version.
+### Une skill qui suit le code
 
-`git ls-tree <tag> .github/skills/lucca-front/SKILL.md` puis `git show <tag>:.github/skills/_lucca-front/versions.json` disent quelle mineure un tag porte.
+La skill committée décrit le code du commit qui la porte : chaque tag porte donc la skill de sa propre version, sans génération à lancer après la release. Elle ne déclare aucune version : la ref APM en tient lieu, et le `SKILL.md` demande la version installée seulement pour compléter les liens Storybook (`https://lucca-front.lucca.io/v{version}/storybook/…`). Pas de `fixes/` non plus : chaque patch a sa skill.
 
-### Quand générer
+`npm run skills:update` la régénère hors ligne depuis `HEAD` (`--offline --ref HEAD`) : le code et les stories viennent du commit, l'index Storybook est construit en local, ZeroHeight et Figma viennent des baselines. Le manifeste `versions.json` le signale par `"followsCode": true` ; `scripts/llms-skill` embarque alors la skill sur n'importe quel tag.
 
-Une fois la mineure publiée (npm + Storybook), sur la branche qui la porte (`master`, ou `vX.Y-lts` pour une ancienne majeure) :
+La mineure est celle du dernier tag publié que contient le commit, sauf si la branche en **prépare** une plus récente. Le tag `vX.Y.0` est posé sur un commit qui ne le contient pas encore : sans rien déclarer, sa skill porterait la mineure précédente, et un tag ne se corrige plus. La PR de release d'une mineure ou d'une majeure la déclare donc avant le tag :
 
 ```bash
-npm run skills:generate -- --version 22.1
+npm run skills:update -- --minor 22.2
 ```
 
-Le commit de génération part dans la PR suivante ; le tag de patch suivant le distribue.
+`versions.json` garde `"minor": "22.2"`, et les runs suivants (hook, CI) la conservent tant que le dernier tag est plus ancien. Le code est lu tel quel ; les changelogs s'arrêtent au dernier tag publié.
 
-Après un **patch**, régénérer la même mineure n'est pas obligatoire : le `SKILL.md` d'un projet sur un patch postérieur au dernier documenté le signale et continue. Le faire met `references/` au niveau du dernier patch et ajoute son `fixes/<M-m-p>.md`.
+Trois garde-fous, comme sur `@lucca/cdk` :
+
+- **Hook pre-commit** (`.git-hooks/pre-commit`, installé par `npm install` via `prepare`) : dès qu'un fichier de `packages/ng`, `packages/scss`, `stories` ou du générateur est indexé, il régénère depuis l'index (`--ref "$(git write-tree)"`) et ajoute la skill au commit. Compter une quarantaine de secondes ; `git commit --no-verify` le saute.
+- **CI** (`skills` dans `build.yml`) : `npm run skills:check` régénère et échoue sur tout écart, fichiers nouveaux compris, car un hook reste contournable.
+- **Baselines** : ZeroHeight et Figma ne bougent qu'au rafraîchissement en ligne, qui ouvre un diff de baselines relisible. Sans rafraîchissement, la skill garde le dernier contenu design récupéré.
+
+### Rafraîchir le contenu ZeroHeight et Figma
+
+Un run en ligne depuis `HEAD` met les baselines à jour, puis le run hors ligne régénère la skill à partir d'elles :
+
+```bash
+FIGMA_TOKEN=… npm run skills:generate -- --ref HEAD --zh-latest 22.1
+npm run skills:update
+```
+
+`--zh-latest` affirme que la mineure du dernier tag est la dernière en ligne sur ZeroHeight. Le run en ligne écrit aussi la skill : seule compte celle du run hors ligne qui suit, que la CI compare.
+
+### Générer la skill d'une release
+
+Le mode par tag reste disponible pour une branche qui ne suit pas le code, une `vX.Y-lts` par exemple : `npm run skills:generate -- --version 21.4`. `references/` y documente alors le dernier patch de la mineure et `fixes/` les patchs précédents.
 
 ### Depuis les anciens chemins par mineure
 

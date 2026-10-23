@@ -1,6 +1,16 @@
 # form-label — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-form-label-angular-basic--docs)
+**Sommaire**
+
+- Angular
+  - Label basic
+- HTML/CSS
+  - Label basic
+  - Label counter
+  - Label error
+  - Label size
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-form-label-angular-basic--docs)
 
 ## Angular
 
@@ -12,7 +22,7 @@ Component selector : `luFormLabel`
 
 ```js
 import { LOCALE_ID } from '@angular/core';
-import { FORM_LABEL_SIZE, FormLabelComponent } from '@lucca-front/ng/form-label';
+import { FORM_LABEL_SIZE, FormLabelComponent, luFormLabelTranslations } from '@lucca-front/ng/form-label';
 ```
 
 ```html

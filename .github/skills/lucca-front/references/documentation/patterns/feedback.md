@@ -1,5 +1,16 @@
 # Feedback
 
+**Sommaire**
+
+- Content
+  - Animations
+  - Button
+  - InlineMessage
+  - Dialog
+  - Callout
+  - Empty state
+  - Toast
+
 # Content
 
 ## Animations
@@ -21,7 +32,7 @@ Dans de nombreux cas, le feedback peut être intégré directement dans l'interf
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Button.
 
-## Inline message
+## InlineMessage
 
 **Quand l'utiliser :**
 
@@ -33,7 +44,7 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Button.
 * Utilisez une couleur et une icône appropriées pour indiquer la nature du message (succès, avertissement ou erreur).
 * Gardez le message concis et clair, en fournissant des indications précises sur la façon de corriger une erreur
 
-Pour en savoir plus, vous pouvez consulter la guideline sur le composant Inline message.
+Pour en savoir plus, vous pouvez consulter la guideline sur le composant InlineMessage.
 
 ## Dialog
 
@@ -60,7 +71,7 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Dialog.
 **Comment l'utiliser :**
 
 * Placez le Callout dans une position visible.
-* Dans un footer, à côté des actions, pour informer l’utilisateur de certaines erreurs.
+* Dans un Footer, à côté des actions, pour informer l’utilisateur de certaines erreurs.
 * Utilisez des couleurs et des icônes pour attirer l'attention sans perturber l'utilisateur.
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Callout.
@@ -69,7 +80,7 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Callout
 
 **Quand l'utiliser :**
 
-* Lorsque des données ou des contenus sont absents ou non disponibles. Pour cela, deux options sont possibles en fonction du contexte : Les Empty State de section et ceux de début de parcours.
+* Lorsque des données ou des contenus sont absents ou non disponibles. Pour cela, deux options sont possibles en fonction du contexte : Les EmptyStateSection et ceux de début de parcours.
 * Pour guider l'utilisateur sur ce qu'il doit faire.
 * Pour indiquer à l’utilisateur qu’il a terminé de traiter une liste d’éléments.
 * Pour indiquer à l’utilisateur qu’un accès est restreint.
@@ -81,7 +92,7 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Callout
 * Ajoutez des instructions ou des suggestions sur ce que l'utilisateur doit faire ensuite.
 * Incluez des boutons ou des liens pour des actions possibles.
 
-Pour en savoir plus, vous pouvez consulter la guideline sur le composant Empty state.
+Pour en savoir plus, vous pouvez consulter la guideline sur le composant EmptyState.
 
 ## Toast
 

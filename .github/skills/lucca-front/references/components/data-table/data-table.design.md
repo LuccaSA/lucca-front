@@ -1,5 +1,33 @@
 # data-table — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Lignes sélectionnables
+    - Lignes éditables
+    - Colonnes obligatoires
+    - Arborescence
+    - Regroupement
+    - Liens de redirection
+    - Bordures sur les cellules
+    - Actions rapides
+  - Comportement
+    - Pagination
+    - EmptyState
+    - Affichage en plein écran
+  - Règles d’utilisation
+    - Alignements des en-têtes
+    - Double ligne dans une cellule
+  - Contenu et rédaction
+    - Intitulé des en-têtes
+    - Noms et prénoms
+    - Emphase
+    - Valeurs manquantes
+- Content
+  - Contenu & rédaction
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/4263a5)
 
 # Design
@@ -60,7 +88,7 @@ Si des filtres sont appliqués sur le contenu du tableau, ils restent appliqués
 
 Dans un tableau avec des lignes sélectionnables, si des lignes sont sélectionnées, la sélection est conservée lorsque l’utilisateur navigue entre les pages.
 
-### Empty state
+### EmptyState
 
 Si un tableau est vide, il faut utiliser le composant EmptyStateSection. Il indique à l’utilisateur qu’aucune donnée n’existe.
 

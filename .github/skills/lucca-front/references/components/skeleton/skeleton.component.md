@@ -1,6 +1,18 @@
 # skeleton — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-loaders-skeleton--docs)
+**Sommaire**
+
+- Angular
+- HTML/CSS
+  - Align
+  - Circle
+  - Dark
+  - Square
+  - Texts
+  - Titles
+  - Width
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-skeleton--docs)
 
 ## Angular
 

@@ -1,5 +1,22 @@
 # callout
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - CalloutActionsComponent (component)
+  - CalloutFeedbackItemDescriptionDirective (directive)
+  - CalloutFeedbackItemComponent (component)
+  - CalloutFeedbackListComponent (component)
+  - CalloutComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -9,7 +26,7 @@ import { CalloutActionsComponent, CalloutFeedbackItemDescriptionDirective, Callo
 ## Basic Usage
 
 ```html
-<lu-callout> <p>Feedback description</p>
+<lu-callout (removedChange)="removedChange($event)"> <p>Feedback description</p>
 </lu-callout>
 ```
 
@@ -58,10 +75,10 @@ import { CalloutActionsComponent, CalloutFeedbackItemDescriptionDirective, Callo
 | `palette` | `palette` | `Palette` | `'none'` | — | — | Applique une palette de couleurs au callout. |
 | `size` | `size` | `'M' \| 'S'` | — | — | — | Modifie la taille du callout. |
 | `state` | `state` | `'success' \| 'warning' \| 'error'` | — | — | — | État du callout. |
-| `icon` | `icon` | `LuccaIcon` | — | — | — | Ajoute une icône au callout. |
+| `icon` | `icon` | `LuccaIcon` | — | — | — | Modifie l’icône IA du callout. |
 | `removable` | `removable` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute un bouton de suppression au callout. |
 | `removed` | `removed` | `boolean` | `false` | — | `luBooleanAttribute` | Masque le callout. |
-| `iconAlt` | `iconAlt` | `string \| null` | `null` | — | — | Information de l’icône restituée par le lecteur d’écran. |
+| `iconAlt` | `iconAlt` | `string \| null` | `null` | — | — | Information restituée par le lecteur d’écran pour l’icône. |
 | `AI` | `AI` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 #### Outputs
@@ -78,18 +95,18 @@ import { CalloutActionsComponent, CalloutFeedbackItemDescriptionDirective, Callo
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./callout.component.md)
 - 🎨 [Design guidelines](./callout.design.md)
 - 🎯 [Figma design tokens](./callout.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-feedback-callout-angular-ai--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-angular-ai--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -102,6 +119,17 @@ import { CalloutActionsComponent, CalloutFeedbackItemDescriptionDirective, Callo
   ~ `AI` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+##### Fixed
+
+- `mod-S` — actions placed in the description no longer add extra vertical spacing.
+- Outlined and ghost buttons in the actions now show a focus ring when focused with the keyboard.
 
 #### 21.3.0
 

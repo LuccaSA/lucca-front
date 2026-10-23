@@ -1,5 +1,23 @@
 # time-picker — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Message d'aide
+    - Champ obligatoire
+    - Inactif
+  - Comportement
+    - Utilisation dans un formulaire
+    - Utilisation “Standalone”
+    - Incrémentation selon un pas pré-défini
+    - Valeur maximale et minimale
+    - Comportement sur mobile
+  - Contenu & internationalisation
+    - Système horaire sur 12 heures
+    - Heures et minutes
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/2473a1)
 
 # Design
@@ -29,7 +47,7 @@ Un champ inactif indique qu'un champ de saisie existe, mais qu'il n'est pas disp
 
 ### Utilisation dans un formulaire
 
-Dans un formulaire, le composant peut être utilisé avec un label et/ou un message d’aide comme tous les champs de formulaires (Select, Text field, Date picker, etc.).
+Dans un formulaire, le composant peut être utilisé avec un Label et/ou un message d’aide comme tous les champs de formulaires (Select, Textfield, DatePicker, etc.).
 
 Les flèches permettant d’incrémenter/décrémenter la valeur saisie ne doivent pas être utilisées dans le cas d'un formulaire.
 
@@ -55,7 +73,7 @@ Dans le cas d’un formulaire, la largeur du champ peut s’adapter à la grille
 
 ### Utilisation “Standalone”
 
-Le Time picker et Duration picker existent aussi en “Standalone”. Des flèches au-dessus et en dessous du champ permettent d’incrémenter/décrémenter la valeur saisie.
+Le TimePicker et DurationPicker existent aussi en “Standalone”. Des flèches au-dessus et en dessous du champ permettent d’incrémenter/décrémenter la valeur saisie.
 
 Il s’agit d’un cas très particulier utilisé par les applications de gestion des temps comme Timmi Temps. Cette option peut s’avérer pertinente lorsque la saisie à la souris est à privilégier pour apporter un aspect ludique à l’interface.
 
@@ -69,7 +87,7 @@ Le comportement du champ au clavier est le même en Standalone que pour une util
 
 Le composant ne peut pas être utilisé avec le label, le message d’aide ET les flèches d’incrémentation.
 
-Le format avec label est à privilégier pour une utilisation dans les formulaires alors que le format avec les flèches est à privilégier lorsque l’interface comprends une majorité de champs de ce type (cf. Timmi Temps).
+Le format avec Label est à privilégier pour une utilisation dans les formulaires alors que le format avec les flèches est à privilégier lorsque l’interface comprends une majorité de champs de ce type (cf. Timmi Temps).
 
 ### Incrémentation selon un pas pré-défini
 
@@ -83,7 +101,7 @@ Si le pas est défini en heures (ex: P0DT1H), alors il n’est pas possible pour
 
 ### Valeur maximale et minimale
 
-Pour le Duration picker, il est possible de définir une durée maximale ainsi qu’une durée minimale. Lorsque c’est le cas, il faut l’indiquer à l’utilisateur via le message d’aide.
+Pour le DurationPicker, il est possible de définir une durée maximale ainsi qu’une durée minimale. Lorsque c’est le cas, il faut l’indiquer à l’utilisateur via le message d’aide.
 
 Si l’utilisateur saisit une valeur au clavier qui se trouve hors de ces bornes, la valeur est corrigée automatiquement en ramenant à la valeur maximale ou minimale. Le champ ne peut donc pas se trouver en erreur.
 

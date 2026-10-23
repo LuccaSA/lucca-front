@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { SkillManifest, VersionConfig, WriteResult, PatchManifestEntry } from '../types';
-import { TechnicalMinorPatches } from '../version-config';
+import { TechnicalMinorPatches, followsCode } from '../version-config';
+import { withTableOfContents } from './table-of-contents';
 
 /**
  * Folder = SKILL.md `name:` = install dir leaf. One skill, no version in its name: the version is the
@@ -134,6 +135,18 @@ export function writeSkillManifest(
 	patchTags: string[],
 	technicalMinors: TechnicalMinorPatches[] = [],
 ): void {
+	if (followsCode(version)) {
+		const manifest: SkillManifest = {
+			minor: `${version.major}.${version.minor}`,
+			followsCode: true,
+			lastTag: version.tag,
+			zhReleaseId: version.zhReleaseId,
+			componentCount,
+		};
+		fs.mkdirSync(generatorRoot(skillsDir), { recursive: true });
+		fs.writeFileSync(manifestPath(skillsDir), JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
+		return;
+	}
 	const manifest: SkillManifest = {
 		minor: `${version.major}.${version.minor}`,
 		latestPatch: `${version.major}.${version.minor}.${version.patch}`,
@@ -256,7 +269,7 @@ function writeFile(dir: string, filename: string, content: string): WriteResult 
 
 	const isUpdate = fs.existsSync(filePath);
 	fs.mkdirSync(dir, { recursive: true });
-	fs.writeFileSync(filePath, content, 'utf-8');
+	fs.writeFileSync(filePath, withTableOfContents(content), 'utf-8');
 
 	return { status: isUpdate ? 'updated' : 'created', path: filePath };
 }

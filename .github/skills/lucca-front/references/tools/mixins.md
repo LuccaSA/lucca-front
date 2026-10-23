@@ -1,5 +1,18 @@
 # Mixins SCSS
 
+**Sommaire**
+
+- Icônes
+- Loadings
+  - Spinner
+  - Gradient
+- Media et container queries
+- Masquage
+- Focus
+- Colors
+  - Transparantize
+- Overflow scrollblock [v19.2]
+
 # Icônes
 
 Génère une icône grâce à la mixin `icon.generate`.

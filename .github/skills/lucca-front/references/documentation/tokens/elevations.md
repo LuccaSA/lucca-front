@@ -6,7 +6,7 @@
 
 ### **Sunken**
 
-C’est la plus basse élévation disponible. Elle est utilisée pour créer un renfoncement permettant d’accueillir des ressources. C'est le cas pour les ResourceCarWrapper et pour les IndexTable.
+C’est la plus basse élévation disponible. Elle est utilisée pour créer un renfoncement permettant d’accueillir des ressources. C'est le cas pour les ResourceCardWrapper et pour les IndexTable.
 
 Il s’agit du style :`--pr-t-elevation-surface-sunken`
 

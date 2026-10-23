@@ -1,5 +1,16 @@
 # radiofield
 
+**Sommaire**
+
+- Import
+- API Reference
+  - RadioGroupInputComponent (component)
+  - RadioComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -41,11 +52,11 @@ import { RadioGroupInputComponent, RadioComponent } from '@lucca-front/ng/forms'
 - 📝 [Code & implementation](./radiofield.component.md)
 - 🎨 [Design guidelines](./radiofield.design.md)
 - 🎯 [Figma design tokens](./radiofield.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-radiofield-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-radiofield-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -56,6 +67,18 @@ import { RadioGroupInputComponent, RadioComponent } from '@lucca-front/ng/forms'
   ~ `disabled` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.6
+
+##### Fixed
+
+- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
+
+#### 21.3.0
+
+##### Fixed
+
+- Group is now exposed as a `radiogroup` to assistive technologies.
 
 #### 21.1.0
 

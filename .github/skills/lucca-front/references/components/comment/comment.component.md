@@ -1,6 +1,21 @@
 # comment — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-comment-angular-ai--docs)
+**Sommaire**
+
+- Angular
+  - Ai
+  - Basic
+  - Chat
+- HTML/CSS
+  - Basic
+  - Chat
+  - Avatar
+  - RichText
+  - Small
+  - Compact
+  - Wrapper
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-comment-angular-ai--docs)
 
 ## Angular
 
@@ -40,7 +55,7 @@ import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment
 ```
 
 ```html
-<lu-comment-block [avatar]="avatarTpl" authorName="Marie Bragoulet">
+<lu-comment-block [avatar]="avatarTpl">
 	<ng-template #avatarTpl>
 		<lu-user-picture [user]="{ firstName: 'Marie', lastName: 'Bragoulet' }" />
 	</ng-template>
@@ -69,7 +84,7 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 
 ```html
 <lu-comment-chat>
-	<lu-comment-block [avatar]="avatarTpl" authorName="Marie Bragoulet">
+	<lu-comment-block [avatar]="avatarTpl">
 		<ng-template #avatarTpl>
 			<lu-user-picture [user]="{ firstName: 'Marie', lastName: 'Bragoulet' }" />
 		</ng-template>

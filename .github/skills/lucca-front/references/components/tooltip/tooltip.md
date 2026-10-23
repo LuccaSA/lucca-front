@@ -1,5 +1,19 @@
 # tooltip
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuTooltipPanelComponent (component)
+  - LuTooltipTriggerDirective (directive)
+  - Modules dépréciés
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.1
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -24,20 +38,22 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `luTooltipInput` | `luTooltip` | `string \| SafeHtml` | `''` | — | — | — |
 | `prTooltipInput` | `prTooltip` | `string \| SafeHtml` | `''` | — | — | — |
-| `luTooltipEnterDelay` | `luTooltipEnterDelay` | `number` | `300` | — | `numberAttribute` | Délai d’apparition du tooltip au survol (en ms). |
+| `luTooltipEnterDelay` | `luTooltipEnterDelay` | `number` | `0` | — | `numberAttribute` | Délai d’apparition du tooltip (en ms). |
 | `prTooltipEnterDelay` | `prTooltipEnterDelay` | `number` | `300` | — | `numberAttribute` | — |
-| `luTooltipLeaveDelay` | `luTooltipLeaveDelay` | `number` | `100` | — | `numberAttribute` | Délai de disparition du tooltip après la fin du survol (en ms). |
+| `luTooltipLeaveDelay` | `luTooltipLeaveDelay` | `number` | `0` | — | `numberAttribute` | Délai de disparition du tooltip après la fin du survol (en ms). |
 | `prTooltipLeaveDelay` | `prTooltipLeaveDelay` | `number` | `100` | — | `numberAttribute` | — |
 | `luTooltipDisabled` | `luTooltipDisabled` | `boolean` | `false` | — | `booleanAttribute` | Désactive le tooltip. |
 | `prTooltipDisabled` | `prTooltipDisabled` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `luTooltipOnlyForDisplay` | `luTooltipOnlyForDisplay` | `boolean` | `false` | — | `booleanAttribute` | Affiche un tooltip non restituée par les lecteurs d’écran. À utiliser si la réstitution est déjà portée par l’élément dé… |
 | `prTooltipOnlyForDisplay` | `prTooltipOnlyForDisplay` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `luTooltipPosition` | `luTooltipPosition` | `'above' \| 'below' \| 'before' \| 'after'` | `'above'` | — | — | Position du tooltip par rapport à son élément déclencheur. |
+| `luTooltipPosition` | `luTooltipPosition` | `TooltipPosition \| null` | `null` | — | — | Position du tooltip par rapport à son élément déclencheur. |
 | `prTooltipPosition` | `prTooltipPosition` | `'above' \| 'below' \| 'before' \| 'after'` | `'above'` | — | — | — |
 | `luTooltipWhenEllipsisInput` | `luTooltipWhenEllipsis` | `boolean` | `false` | — | `booleanAttribute` | N’affiche le tooltip que lorsque le contenu de l’élément déclencheur est tronqué par une ellipse. |
 | `prTooltipWhenEllipsisInput` | `prTooltipWhenEllipsis` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `luTooltipAnchor` | `luTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `this.#host` | — | — | — |
+| `luTooltipAnchor` | `luTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | — |
 | `prTooltipAnchor` | `prTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `this.#host` | — | — | — |
+| `luTooltipTriggerAnchor` | `luTooltipTriggerAnchor` | `ElementRef<HTMLElement> \| HTMLElement \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | — |
+| `prTooltipTriggerAnchor` | `prTooltipTriggerAnchor` | `ElementRef<HTMLElement> \| HTMLElement \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | — |
 | `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`` | — | — | — |
 
 ### Modules dépréciés
@@ -50,11 +66,25 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 - 📝 [Code & implementation](./tooltip.component.md)
 - 🎨 [Design guidelines](./tooltip.design.md)
 - 🎯 [Figma design tokens](./tooltip.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-tooltip-html-css--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-tooltip-html-css--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
+`LuTooltipTriggerDirective` :
+  + `luTooltipTriggerAnchor` : ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined
+  + `prTooltipTriggerAnchor` : ElementRef<HTMLElement> | HTMLElement | LuTooltipAnchorRef | null | undefined
+
+### 22.0.1
+
+`LuTooltipTriggerDirective` :
+  ~ `luTooltipEnterDelay` : défaut 300 → 0
+  ~ `luTooltipLeaveDelay` : défaut 100 → 0
+  ~ `luTooltipPosition` : 'above' | 'below' | 'before' | 'after' → TooltipPosition | null, défaut 'above' → null
+  ~ `luTooltipAnchor` : défaut this.#host → null
 
 ### 22.0.0
 
@@ -73,6 +103,31 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
   ~ `luTooltipPosition` : LuPopoverPosition → 'above' | 'below' | 'before' | 'after'
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.6
+
+##### Fixed
+
+- No more `NG0600` error when the trigger gets disabled while focused, the tooltip now closes.
+
+#### 22.0.1
+
+##### Fixed
+
+- VoiceOver support.
+
+#### 22.0.0
+
+##### Fixed
+
+- Tooltip no longer reopens when a closing overlay gives the focus back to its trigger.
+- Position measurement while the trigger is animated or transformed.
+
+#### 21.4.1
+
+##### Fixed
+
+- A pending tooltip no longer opens after its trigger has been destroyed.
 
 #### 21.3.1
 

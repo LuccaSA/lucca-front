@@ -1,5 +1,16 @@
 # icons
 
+**Sommaire**
+
+- Import
+- API Reference
+  - IconComponent (component)
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -24,18 +35,18 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./icons.component.md)
 - 🎨 [Design guidelines](./icons.design.md)
 - 🎯 [Figma design tokens](./icons.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-icons-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-icons-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -43,6 +54,42 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ~ `AI` : boolean → boolean, boolean | `${boolean}` | ''
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.6
+
+##### Added
+
+- `arrowDelete`, `arrowEnter`, `arrowLineRight`, `arrowPageDown`, `arrowPageUp`, `arrowShift`, `keyboardCommand` and `keyboardOption` icons.
+
+#### 22.0.4
+
+##### Fixed
+
+- Component styles now also apply to the `pr-icon` selector.
+
+#### 22.0.1
+
+##### Added
+
+- `chartTree` and `capCrownFilled` icons.
+
+#### 22.0.0
+
+##### Removed
+
+- `primary` and `secondary` values of the `color` input — use `product` instead.
+
+#### 21.4.1
+
+##### Added
+
+- `arrowUndo`, `arrowRedo` and `signShieldCancel` icons.
+
+#### 21.3.1
+
+##### Added
+
+- `window`, `windowAside`, `windowCornerBottom`, `windowCornerTop` and `windowAsideLarge` icons.
 
 #### 21.2.2
 

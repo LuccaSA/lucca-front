@@ -1,5 +1,28 @@
 # dialog
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - DialogContentComponent (component)
+  - DialogFooterComponent (component)
+  - DialogHeaderAction (directive)
+  - DialogHeaderSubtitle (directive)
+  - DialogHeaderComponent (component)
+  - DialogRoutingContainerComponent (component)
+  - DialogComponent (component)
+  - DialogCloseDirective (directive)
+  - DialogDismissDirective (directive)
+  - DialogOpenDirective (directive)
+  - Providers
+  - Injection tokens
+  - Services
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -105,11 +128,11 @@ import { DialogContentComponent, DialogFooterComponent, DialogHeaderAction, Dial
 - 📝 [Code & implementation](./dialog.component.md)
 - 🎨 [Design guidelines](./dialog.design.md)
 - 🎯 [Figma design tokens](./dialog.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-dialog-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-dialog-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -117,6 +140,45 @@ import { DialogContentComponent, DialogFooterComponent, DialogHeaderAction, Dial
   ~ `stacked` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.6
+
+##### Fixed
+
+- Routed dialogs now run their `canDeactivate` guards when dismissed with Escape or a backdrop click.
+
+#### 22.0.3
+
+##### Fixed
+
+- Dialog can now be opened from a trigger that is destroyed by the same click.
+
+#### 22.0.1
+
+##### Fixed
+
+- Routed dialog stays open on history navigation as long as its route is still active.
+- `dialog-inside-header-actionOptional` is now placed in its own grid area.
+
+#### 22.0.0
+
+##### Added
+
+- `surfaceDefault` option in the dialog config to display the dialog on a neutral background (`mod-surfaceDefault`).
+- `canDismiss` option in the dialog config: a hook to allow or block closing without requiring a component instance, suitable for template-based dialogs, unlike `canClose`.
+
+##### Fixed
+
+- Scroll is no longer left blocked when a routed dialog is closed.
+- Stacking context is now set on the overlay wrapper instead of the backdrop's parent, so overlays opened from a dialog are no longer hidden.
+- `mod-fancy` padding.
+
+#### 21.4.1
+
+##### Fixed
+
+- Dialog title `aria-labelledby` now stays in sync when the title appears, disappears or is swapped after the dialog is opened.
+- Content height no longer overflows when the dialog hosts tabs.
 
 #### 21.3.0
 

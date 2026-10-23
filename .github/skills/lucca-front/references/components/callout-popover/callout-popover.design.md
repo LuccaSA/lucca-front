@@ -1,10 +1,28 @@
 # callout-popover — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Palettes
+  - Callout
+    - Options
+  - Callout popover
+    - Options
+    - Comportement
+  - Callout disclosure
+    - Options
+  - Règles d’utilisation
+    - Boutons ou liens ?
+- Content
+  - Contenu et rédaction
+    - Callout default
+    - CalloutDisclosure et Popover
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/64c8d8)
 
 # Design
 
-**Mots-clés**alerte, avertissement, notification
+**Mots-clés :** alerte, avertissement, notification
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
@@ -13,7 +31,7 @@
 Il existe 5 variantes : neutre, informative, succès, alerte et erreur. Pour chacune, le Callout utilise une icône et une couleur d’arrière-plan spécifique afin d’appuyer le message.
 
 * **Variante “Neutre”** pour le message a un ton neutre.
-* **Variante “Informative”** pour un message nécessitant une attention particulière par rapport à la variante neutre. Cette variante s'affiche dans la couleur Product.
+* **Variante “Informative”** pour un message nécessitant une attention particulière par rapport à la variante neutre. Cette variante s'affiche dans la couleur `Product`.
 * **Variante “Succès”** pour informer l’utilisateur du succès d’une action ou d’un processus de l’outil.
 * **Variante “Alerte”** pour avertir l’utilisateur d'une situation qui pourrait nécessiter une intervention prochaine mais non-critique dans son utilisation de l’outil.
 * **Variante “Erreur”** pour indiquer une erreur ou un échec, ou pour transmettre quelque chose qui doit être immédiatement reconnu ou résolu.
@@ -171,7 +189,7 @@ Formulons toutes les phrases :
 - **Do** : Utilisons un titre s'il est nécessaire de décrire de manière brève et concise l'information.
 - **Don't** : N'utilisons pas de titre s'il n'apporte pas plus d'information que la decription.
 
-### **Callout disclosure et popover**
+### **CalloutDisclosure et Popover**
 
 * Le titre est **obligatoire s'il y a plusieurs messages de succès, d'alerte ou d'erreur**. Il décrit le fait qu’il y a plusieurs informations, en explicitant leur nombre.
 * Une description précise est **obligatoire** pour chacune de ces informations de la liste. 

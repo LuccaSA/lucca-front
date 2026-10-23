@@ -1,5 +1,31 @@
 # textfield — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Placeholder
+    - Message d'aide
+    - Champ obligatoire
+    - Inactif
+    - Préfixe et suffixe
+    - Icône
+    - Compteur de caractères
+    - Champ nombre
+  - Comportement
+    - Débordement
+    - États spécifiques (erreur, avertissement, succès)
+  - Règles d'utilisation
+    - Toujours afficher le Label
+    - Écrire un Label court et précis
+    - Textfield ou Textarea
+    - Choisir une largeur appropriée
+    - Effacer le contenu du champ
+    - Alignement du contenu à droite
+    - Utilisation dans un tableau
+    - Utilisation dans les titres
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/459eda)
 
 # Design
@@ -10,17 +36,17 @@
 
 ### Placeholder 
 
-L'utilisation d'un *Placeholder* est facultative. Son utilisation peut donner à l'utilisateur une indication sur le format ou un exemple de la donnée attendue.
+L'utilisation d'un Placeholder est facultative. Son utilisation peut donner à l'utilisateur une indication sur le format ou un exemple de la donnée attendue.
 
 Il est conseillé d'utiliser en premier lieu l'option de message d'aide pour éviter une perte d'indication suite à un clic dans le champ.
 
-Le *Placeholder* ne doit pas répéter le label.
+Le Placeholder ne doit pas répéter le label.
 
 ### Message d'aide
 
-Un *Textfield* peut comporter deux messages d'aide pour fournir des informations contextuelles supplémentaires ou des instructions sur ce que l'utilisateur doit saisir.
+Un Textfield peut comporter deux messages d'aide pour fournir des informations contextuelles supplémentaires ou des instructions sur ce que l'utilisateur doit saisir.
 
-1. L’utilisation d’une icône juxtaposée au *Label* permet de clarifier l'intitulé du champ via un *Tooltip* lorsque cela est nécessaire.
+1. L’utilisation d’une icône juxtaposée au Label permet de clarifier l'intitulé du champ via un Tooltip lorsque cela est nécessaire.
 2. Situé sous le champ, le message d’aide fournit une description informative pour donner plus de contexte à l'utilisateur sur ce qu'il doit saisir.
 
 ### Champ obligatoire
@@ -33,13 +59,13 @@ Si un champ obligatoire n’est pas renseigné, une erreur sera remontée à la 
 
 Un champ inactif indique qu'un champ de saisie existe, mais qu'il n'est pas disponible dans ce contexte, à un instant donné. Cela peut être utilisé pour maintenir la continuité de la mise en page et indiquer qu'un champ peut devenir disponible ultérieurement.
 
-Un champ inactif ne peut pas porter de *Placeholder*, le champ est soit vide, soit rempli.
+Un champ inactif ne peut pas porter de Placeholder, le champ est soit vide, soit rempli.
 
 ### Préfixe et suffixe
 
 L’utilisation de préfixes et de suffixes permet de fournir des indications contextuelles à l’utilisateur. Par exemple, un préfixe peut être utilisé pour indiquer une devise (comme "$" pour les dollars), tandis qu'un suffixe peut spécifier une unité de mesure (comme "cm" pour centimètres). Ils contribuent à améliorer la lisibilité et la compréhension des données entrées dans le champ de texte.
 
-Si l’unité peut-être modifiée, cela doit se faire via un composant Select au sein du formulaire, juxtaposé au *Textfield*.
+Si l’unité peut-être modifiée, cela doit se faire via un composant Select au sein du formulaire, juxtaposé au Textfield.
 
 ### Icône
 
@@ -51,7 +77,7 @@ L’icône peut aussi être cliquable lorsque l’utilisateur peut interagir ave
 
 Le compteur de caractère affiche le nombre de caractères saisis dans ce champ. Il est utilisé pour aider les utilisateurs à respecter des limites de longueur de texte ou à surveiller la quantité de texte soumise.
 
-Lorsque cette limite est atteinte ou dépassée, le compteur s’affiche avec la couleur *Critical*. Si l’utilisateur ne corrige pas sa saisie et sort du champ, alors le champ passe en erreur.
+Lorsque cette limite est atteinte ou dépassée, le compteur s’affiche avec la couleur `Critical`. Si l’utilisateur ne corrige pas sa saisie et sort du champ, alors le champ passe en erreur.
 
 ### Champ nombre
 
@@ -65,9 +91,9 @@ Le rendu des boutons d’incrémentation sont natifs et diffère donc d’un nav
 
 Lorsque l’utilisateur saisit une valeur plus longue que l’espace disponible, le curseur reste à droite pour permettre à l’utilisateur de voir le texte qu’il est en train d’écrire.
 
-Une fois le champ quitté, le texte est tronqué mais reste accessible via un *Tooltip* au survol.
+Une fois le champ quitté, le texte est tronqué mais reste accessible via un Tooltip au survol.
 
-Si on attend de l’utilisateur qu’il saisisse une plus importante quantité de texte, il est préférable d’utiliser le composant *Textarea*.
+Si on attend de l’utilisateur qu’il saisisse une plus importante quantité de texte, il est préférable d’utiliser le composant Textarea.
 
 ### États spécifiques (erreur, avertissement, succès)
 
@@ -79,19 +105,19 @@ Le **message de validité** s'affiche pour rassurer l'utilisateur sur les donné
 
 ## Règles d'utilisation
 
-### Toujours afficher le label
+### Toujours afficher le Label
 
-Chaque *Textfield* doit avoir un *Label*. Un *Textfield* sans Label est ambigu et non accessible. Le *Placeholder* ne doit pas remplacer le *Label*.
+Chaque Textfield doit avoir un Label. Un Textfield sans Label est ambigu et non accessible. Le Placeholder ne doit pas remplacer le Label.
 
-Les champs de recherche peuvent cependant être utilisé sans *Label*. L’icône de loupe étant devenu un élément récurrent des interfaces web. En revanche, l’utilisation d’un *Placeholder* est obligatoire.
+Les champs de recherche peuvent cependant être utilisé sans Label. L’icône de loupe étant devenu un élément récurrent des interfaces web. En revanche, l’utilisation d’un Placeholder est obligatoire.
 
-### Écrire un label court et précis
+### Écrire un Label court et précis
 
-Le Label doit être le plus succinct possible. S’il est difficile de réduire le texte à quelques mots, le *Label* peut alors dépasser la largeur du champ si l’espace est suffisant et qu’aucun champ ne se trouve à sa droite. Dans le cas contraire, le *Label* peut être affiché sur plusieurs lignes.
+Le Label doit être le plus succinct possible. S’il est difficile de réduire le texte à quelques mots, le Label peut alors dépasser la largeur du champ si l’espace est suffisant et qu’aucun champ ne se trouve à sa droite. Dans le cas contraire, le Label peut être affiché sur plusieurs lignes.
 
 ### Textfield ou Textarea
 
-Le format de la donnée attendue permet de choisir entre les deux composants. Le *Textfield* permet de renseigner un très court texte là où le *Textarea* permet de saisir une plus grande quantité de texte.
+Le format de la donnée attendue permet de choisir entre les deux composants. Le Textfield permet de renseigner un très court texte là où le Textarea permet de saisir une plus grande quantité de texte.
 
 ### Choisir une largeur appropriée
 
@@ -103,20 +129,20 @@ Dans le cas d’une utilisation au sein d’un formulaire, la largeur doit être
 
 ### Effacer le contenu du champ
 
-Il ne faut pas utiliser le composant *Clear* dans les *Textfield*, cela alourdit grandement les formulaires. Il est préférable de laisser l’utilisateur effacer sa saisie manuellement.
+Il ne faut pas utiliser le composant Clear dans les Textfield, cela alourdit grandement les formulaires. Il est préférable de laisser l’utilisateur effacer sa saisie manuellement.
 
-Exception cependant pour les champs de recherche. L’utilisateur doit pouvoir rapidement effacer sa recherche pour réinitialiser le contenu de l’interface qu’il consulte. Le *Clear* n’apparaît que lorsqu’une valeur est saisie dans le champ de recherche.
+Exception cependant pour les champs de recherche. L’utilisateur doit pouvoir rapidement effacer sa recherche pour réinitialiser le contenu de l’interface qu’il consulte. Le Clear n’apparaît que lorsqu’une valeur est saisie dans le champ de recherche.
 
-Le bouton *Clear* ne doit apparaître que lorsque l’utilisateur a saisit quelque chose.
+Le bouton Clear ne doit apparaître que lorsque l’utilisateur a saisit quelque chose.
 
 ### Alignement du contenu à droite
 
-Il est possible de ferrer le texte à droite, notamment pour les données numériques lorsqu’un *Textfield* est affiché dans un tableau. Cela est aussi valable lorsque le *Textfield* contient un préfixe.
+Il est possible de ferrer le texte à droite, notamment pour les données numériques lorsqu’un Textfield est affiché dans un tableau. Cela est aussi valable lorsque le Textfield contient un préfixe.
 
 ### Utilisation dans un tableau
 
-Lorsque des champs de texte sont présents dans un *Data table*, ils doivent être en taille M pour garder une cohérence visuelle avec la taille de texte du reste des informations sur tableau.
+Lorsque des champs de texte sont présents dans un DataTable, ils doivent être en taille M pour garder une cohérence visuelle avec la taille de texte du reste des informations sur tableau.
 
 ### Utilisation dans les titres
 
-Le *Textfield* ne doit pas être utilisé pour changer le titre d’une interface. Il faut pour cela privilégier une *Dialog* de modification.
+Le Textfield ne doit pas être utilisé pour changer le titre d’une interface. Il faut pour cela privilégier une Dialog de modification.

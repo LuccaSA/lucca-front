@@ -1,6 +1,6 @@
 # filedropzone — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-file-filedropzone-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-file-filedropzone-angular-basic--docs)
 
 ## Angular
 

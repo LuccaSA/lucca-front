@@ -1,5 +1,26 @@
 # Parcours de création de ressource : avec action de diffusion
 
+**Sommaire**
+
+- Création
+  - Description du parcours
+    - Étape d'initialisation
+    - Étapes intermédiaires
+    - Création de ressources enfants
+    - Étape récapitulative
+  - Gestion des erreurs
+    - Complétion séquentielle
+    - Complétion libre
+  - Enregistrement
+  - Sortie de parcours
+  - Actions secondaires
+- Consultation et modification
+  - Affichage des ressources
+    - Ressources en cours de création
+  - Modification d’une ressource
+    - Ressources en cours de création
+    - Ressources diffusées
+
 # Création
 
 ## Description du parcours
@@ -68,15 +89,15 @@ La gestion des erreurs diffère entre les deux types de complétion.
 
 L'utilisateur doit compléter chaque étape dans l'ordre avant de passer à la suivante. La navigation est contrainte : il n'est pas possible d'accéder à l'étape 2 sans avoir validé l'étape 1.
 
-La validation des données est **manuelle** et se fait à chaque changement d’étape. Elle est déclenchée via le bouton permettant de passer à l’étape suivante. Si des erreurs sont détectées lors de la tentative de passage à l'étape suivante, elles sont immédiatement remontées via un Callout popover à l'utilisateur et bloquent la progression tant qu'elles ne sont pas corrigées.
+La validation des données est **manuelle** et se fait à chaque changement d’étape. Elle est déclenchée via le bouton permettant de passer à l’étape suivante. Si des erreurs sont détectées lors de la tentative de passage à l'étape suivante, elles sont immédiatement remontées via un CalloutPopover à l'utilisateur et bloquent la progression tant qu'elles ne sont pas corrigées.
 
-Le composant Progress stepper indique un état « Succès » pour les étapes validées.
+Le composant ProgressStepper indique un état « Succès » pour les étapes validées.
 
 ### Complétion libre
 
 Dans ce contexte de création de ressource, la complétion des paramètres est guidée mais n’est pas imposée. C’est à dire que l’utilisateur peut naviguer entre les étapes, même si des informations ne sont pas renseignées.
 
-Il est d’ailleurs tout à fait possible que certaines étapes soit déjà considérées comme validées dès le début du parcours car déjà pré-paramétrées, comme pour les mails de notification par exemple. Le composant Progress stepper indique un état “Succès” pour ces étapes.
+Il est d’ailleurs tout à fait possible que certaines étapes soit déjà considérées comme validées dès le début du parcours car déjà pré-paramétrées, comme pour les mails de notification par exemple. Le composant ProgressStepper indique un état “Succès” pour ces étapes.
 
 Dans ce cas, aucune validation n'est effectuée pendant les étapes intermédiaires. Les erreurs sont détectées et bloquantes uniquement au moment de l'action finale (dernière étape du parcours). L’étape récapitulative permet de les exposer à l’utilisateur pour qu’il puisse les corriger.
 
@@ -84,11 +105,29 @@ Exception faite pour certains champs avec un format spécifique imposé (email, 
 
 ## Enregistrement
 
-Un enregistrement de la ressource est effectué à chaque étape, lorsque l’utilisateur change d’étape, via le bouton « Étape suivante » ou via le Progress stepper. Le bouton « Étape suivante » passe en état `loading` le temps de l'enregistrement.
+Un enregistrement de la ressource est effectué à chaque étape, lorsque l’utilisateur change d’étape, via le bouton « Étape suivante » ou via le ProgressStepper. Le bouton « Étape suivante » passe en état `loading` le temps de l'enregistrement.
 
 Un bouton « **Continuer plus tard** » est proposé à chaque étape pour permettre à l’utilisateur de quitter le parcours à tout moment tout en sauvegardant l’état actuel de sa saisie. La ressource reste alors en statut « En cours de création ».
 
 Lorsque l'utilisateur clique sur une ressource « En cours de création », il est automatiquement renvoyé dans le parcours de création (Dialog latérale (`drawer`)) à la **première étape non validée**, avec possibilité de continuer la configuration et de finaliser la diffusion.
+
+## Sortie de parcours
+
+Dans un parcours avec action de diffusion, la ressource a déjà été initialisée et existe en base de données. L’enregistrement se fait quand on passe à l’étape suivante.
+
+Un bouton « **Continuer plus tard** » est proposé à chaque étape pour permettre à l’utilisateur de quitter le parcours, tout en sauvegardant l’état actuel de la saisie. Il n’est pas nécessaire d’afficher une Dialog de confirmation dans ce contexte.
+
+Si l'utilisateur tente de sortir (via la croix de fermeture, un clic en dehors de la Dialog), le déclenchement de la Dialog de confirmation dépend de l'état du formulaire :
+
+* si le **formulaire est modifié**, il est impératif d’afficher une Dialog de confirmation,
+* si le **formulaire n’est pas modifié**, il faut fermer immédiatement le parcours pour éviter une friction inutile.
+
+| Élément | Standard |
+| --- | --- |
+| Titre de la Dialog | « **Enregistrer et quitter ?** » |
+| Description | «  **Si vous quittez ce parcours, les modifications non enregistrées seront définitivement perdues.** » |
+| Bouton principal | «  **Enregistrer et quitter** » en `filled` |
+| Bouton secondaire | « **Reprendre les modifications** » en `outlined` et palette `neutral` |
 
 ## Actions secondaires
 
@@ -137,7 +176,7 @@ Les ressources « En cours de création » doivent impérativement apparaître e
 
 #### Identification visuelle
 
-Dans tous les cas, chaque ressource « En cours de création » doit être identifiée par un Status badge en couleur `product` visible, situé à la suite du nom de la ressource. Ce badge permet de distinguer rapidement l'état de la ressource.
+Dans tous les cas, chaque ressource « En cours de création » doit être identifiée par un StatusBadge en couleur `product` visible, situé à la suite du nom de la ressource. Ce badge permet de distinguer rapidement l'état de la ressource.
 
 ## Modification d’une ressource
 

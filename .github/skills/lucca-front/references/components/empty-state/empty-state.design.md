@@ -1,5 +1,26 @@
 # empty-state — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Illustrations
+  - Typologie des messages
+    - Aucun contenu
+    - Aucun contenu mais action possible
+    - Erreur
+    - Empty state positif (succès)
+- Content
+  - Titre du message
+    - Intention principale
+    - Recommandations
+  - Description
+    - Intention principale
+    - Recommandations
+  - Actions
+    - Intention principale
+    - Recommandations
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/49b0ef)
 
 # Design
@@ -67,13 +88,13 @@ Dans ce contexte, l’absence de contenu est une bonne nouvelle : cela signifie 
 * Les titres peuvent contenir de la ponctuation (une virgule ou un deux-points), mais il est d'usage de ne jamais leur mettre de point final.
 * On peut mettre une ponctuation finale (autre que le point), comme un point d'interrogation. Évitons le point d'exclamation.
 * Les points de suspension (…) sont à manier avec prudence, car ils peuvent sous-entendre qu’on n’arrive pas à tout dire.
-* Si l’empty state ne relaie aucune urgence, ou s’il ne vise pas à susciter de vigilance, d’urgence, on peut réfléchir à une accroche plus “légère”, une expression d’un registre familier, mais restant brève, courtoise, positive.
+* Si l’EmptyState ne relaie aucune urgence, ou s’il ne vise pas à susciter de vigilance, d’urgence, on peut réfléchir à une accroche plus “légère”, une expression d’un registre familier, mais restant brève, courtoise, positive.
 
 ## **Description**
 
 ### **Intention principale**
 
-* La description offre une information complémentaire et utile à celle du titre et explicite davantage la raison de cet *empty state*. Il n'y a vraiment aucune info complémentaire utile à communiquer ? Alors limitons-nous au titre.
+* La description offre une information complémentaire et utile à celle du titre et explicite davantage la raison de cet EmptyState. Il n'y a vraiment aucune info complémentaire utile à communiquer ? Alors limitons-nous au titre.
 * Guidons l’utilisateur, encourageons-le à une action alternative, utile.
 * Lui montrer le bénéfice de sa prochaine action, s’il y en a une opportune à effectuer de suite.
 

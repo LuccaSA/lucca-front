@@ -1,5 +1,24 @@
 # Identification des pages
 
+**Sommaire**
+
+- Règles d'usage
+    - En bref
+  - Favicon
+  - Titres & URL
+    - Relation avec le titre de l’interface
+    - Hiérarchiser les titres
+    - Chargement et internationalisation
+- Angular
+- LuTitleStrategy
+  - Usage
+    - Dynamic titles
+  - Quickstart
+    - Naming Strategy
+    - Handling translations
+    - Adapt `app.module.ts` config
+    - Example with lucca-cdk
+
 # Règles d'usage
 
 ### **En bref**
@@ -9,7 +28,7 @@
 
 ## Favicon
 
-Le favicon doit contenir le logo Lucca en blanc sur fond coloré. Le fond doit être de la couleur de la gamme (Temps et activités, Talent, Dépenses professionnelles, Rémunérations et avantages, Gestion administrative & Lucca), correspondant à la nuance Product 700.
+Le Favicon doit contenir le logo Lucca en blanc sur fond coloré. Le fond doit être de la couleur de la gamme (Temps et activités, Talent, Dépenses professionnelles, Rémunérations et avantages, Gestion administrative & Lucca), correspondant à la nuance Product 700.
 
 L’utilisateur peut alors identifier rapidement les onglets et la marque Lucca parmi d’autres, tout en rattachant ces onglets à un produit à l’aide de la couleur.
 
@@ -48,7 +67,7 @@ Le regroupement de plusieurs modules ont un impact sur le sitemap et donc sur le
 
 #### Navigation dans un module
 
-Le composant Horizontal navigation utilise un pattern de navigation : l’URL et le titre de la page s’en trouvent donc impactés.
+Le composant HorizontalNavigation utilise un pattern de navigation : l’URL et le titre de la page s’en trouvent donc impactés.
 
 #### Dialogs
 
@@ -76,15 +95,11 @@ Add `title` properties in your routes config:
 const routes: Routes = [
   {
     path: '',
-    data: {
-      title: 'Parent title',
-    },
+    title: 'Parent title',
     children: [
       {
         path: ':requestId',
-        data: {
-          title: 'Sub route title',
-        },
+        title: 'Sub route title',
       },
     ],
   },
@@ -95,7 +110,26 @@ The service should now be able to collect all `title` properties defined for the
 
 ex: `Sub route title – Parent title – Lucca YourAppName`
 
-For dynamic titles, the `prependTitle` method from `LuTitleStrategy` enables you to add a custom title.
+### Dynamic titles
+
+A `title` can also be a function, which is how Lucca apps declare their titles:
+
+```typescript
+const routes: Routes = [
+  {
+    path: 'requests',
+    title: () => translate('Requests_Title'),
+  },
+  {
+    path: 'requests/:requestId',
+    title: (route) => translate('Request_Title', { id: route.paramMap.get('requestId') }),
+  },
+];
+```
+
+Each resolved title is then handed to your `translateService` as a translation key, along with the route params and the route data (including resolved data) as interpolation arguments. So a static `title: 'Request {{requestId}}'` works too, as long as your translation library interpolates. Params and resolved data of the parent routes are available as well, as long as the router keeps its default `paramsInheritanceStrategy: 'always'`.
+
+When the title is only known from inside a component, the `prependTitle` method from `LuTitleStrategy` enables you to add a custom title.
 In a component, you could do the following:
 
 ```typescript

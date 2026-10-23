@@ -1,5 +1,29 @@
 # checkbox — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Message d’aide
+    - Champ obligatoire
+    - Groupe de Checkbox
+    - Checklist
+  - Comportement
+    - Navigation au clavier
+    - Débordement
+    - Champ en erreur
+    - Zone interactive
+  - Règles d'utilisation
+    - Checkbox ou Radio ?
+    - Checkbox ou Select
+- Content
+- iOS
+  - Checkbox iOS
+    - LuccaToggleCheckboxStyle
+    - Style
+    - Mixed state (iOS 16+)
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/42c88e)
 
 # Design
@@ -38,7 +62,7 @@ Si ces conditions ne sont pas remplies, l’affiche horizontal rend la lecture d
 
 Une version checklist est disponible. Cette version doit être utilisé comme une *to do list*, lorsque l'utilisateur coche quelque chose pour signifier que c'est réalisé.
 
-La coche peut aussi être utilisée seule en début de ligne dans un Index table ou une Card.
+La coche peut aussi être utilisée seule en début de ligne dans un IndexTable ou une Card.
 
 ## Comportement
 
@@ -55,7 +79,7 @@ Si le Label ou le contenu des messages d’aide est plus long que l’espace dis
 
 ### Champ en erreur
 
-Un message d'erreur s'affiche lorsque le champ est indiqué comme obligatoire et qu’il n’est pas sélectionné. La Checkbox porte la couleur Critical.
+Un message d'erreur s'affiche lorsque le champ est indiqué comme obligatoire et qu’il n’est pas sélectionné. La Checkbox porte la couleur `critical`.
 
 ### Zone interactive
 

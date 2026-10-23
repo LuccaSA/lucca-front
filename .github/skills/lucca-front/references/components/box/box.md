@@ -1,5 +1,18 @@
 # box
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - BoxComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -23,10 +36,10 @@ import { BoxComponent } from '@lucca-front/ng/box';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `toggle` | `toggle` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `toggle` | `toggle` | `boolean` | `false` | — | `luBooleanAttribute` | Applique le style « toggle » (classe mod-toggle, dépréciée). Préférer withArrow. |
 | `neutral` | `neutral` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un fond gris. |
 | `killable` | `killable` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute un bouton de fermeture. |
-| `withArrow` | `withArrow` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `withArrow` | `withArrow` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute une flèche pointant vers le champ placé au-dessus de la box (voir la story Arrow). |
 
 #### Outputs
 
@@ -34,15 +47,25 @@ import { BoxComponent } from '@lucca-front/ng/box';
 |----------|-------------|------|-------|
 | `killed` | `killed` | `void` | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_BOX_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./box.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-box-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-box-angular-arrow--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_BOX_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
@@ -52,6 +75,12 @@ import { BoxComponent } from '@lucca-front/ng/box';
 ~ `withArrow` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `mod-grey` variant — use `mod-neutral` instead.
 
 #### 21.3.1
 

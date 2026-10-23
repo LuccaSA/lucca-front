@@ -33,6 +33,8 @@ export interface Config {
 export interface VersionConfig {
 	/** Full semver tag, e.g. "v21.2.1". */
 	tag: string;
+	/** Git object the code and stories are read from: the tag itself, or the ref given by `--ref`. */
+	source: string;
 	major: number;
 	minor: number;
 	patch: number;
@@ -428,18 +430,25 @@ export interface PatchManifestEntry {
 	storybookBaseUrl: string;
 }
 
-/** The minor the committed skill documents. references/ documents `latestPatch`; fixes/ covers the others. */
+/**
+ * What the committed skill documents: either a minor (references/ documents `latestPatch`, fixes/
+ * covers the others), or, with `followsCode`, the code of the commit it is committed with.
+ */
 export interface SkillManifest {
-	/** The documented minor, e.g. "22.0". */
+	/** The documented minor, e.g. "22.0" — for a skill that follows the code, the last published tag's. */
 	minor: string;
+	/** Regenerated on every commit (`--ref`): the consumer's APM ref is its version, the fields below are absent. */
+	followsCode?: true;
+	/** With `followsCode`: the last published tag the changelogs reach. The pre-commit hook regenerates when it moves. */
+	lastTag?: string;
 	/** Latest published patch of the minor, e.g. "21.2.5" — what references/ documents. */
-	latestPatch: string;
-	tag: string;
+	latestPatch?: string;
+	tag?: string;
 	zhReleaseId: number | null;
-	storybookBaseUrl: string;
+	storybookBaseUrl?: string;
 	componentCount: number;
 	/** Every published patch of the minor, ascending ("21.2.0" → …). */
-	patches: Record<string, PatchManifestEntry>;
+	patches?: Record<string, PatchManifestEntry>;
 	/** Technical minors covered by this minor's skill (e.g. "21.4" for 21.3), if any. */
 	technicalMinors?: Record<string, TechnicalMinorManifestEntry>;
 }

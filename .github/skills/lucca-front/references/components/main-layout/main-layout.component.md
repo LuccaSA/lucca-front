@@ -1,6 +1,15 @@
 # main-layout — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-main-layout-angular-basic--docs)
+**Sommaire**
+
+- Angular
+  - Basic
+  - InAppLayout
+- HTML/CSS
+  - Basic
+  - InAppLayout
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-main-layout-angular-basic--docs)
 
 ## Angular
 

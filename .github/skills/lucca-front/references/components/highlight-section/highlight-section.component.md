@@ -1,6 +1,16 @@
 # highlight-section — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-highlight-section-angular-basic--docs)
+**Sommaire**
+
+- Angular
+  - Basic
+- HTML/CSS
+  - Basic
+  - Illustration
+  - Ornaments
+  - Themes
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-highlight-section-angular-basic--docs)
 
 ## Angular
 

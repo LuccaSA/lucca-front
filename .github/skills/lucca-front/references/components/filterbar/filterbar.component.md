@@ -1,6 +1,18 @@
 # filterbar — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-filterspills-filterbar-angular--docs)
+**Sommaire**
+
+- Angular
+  - Filter pills optionnelles
+  - luFilterPillAddonBefore et luFilterPillAddonAfter
+  - Traductions
+  - Bar segmented control tabs
+  - Bar
+- HTML/CSS
+  - Bar segmented control tabs
+  - Bar
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-filterspills-filterbar-angular-segmented-control-tabs--docs)
 
 ## Angular
 
@@ -20,133 +32,44 @@ Deux directives structurelles permettent de projeter du contenu aux extrémités
 | --- | --- |
 | **`*`**`luFilterPillAddonAfter` | Placé **après** les pills, aligné à droite. Exemple : un bouton d'export. |
 
-### Bar save
+### Traductions
+
+`lu-filter-bar`et `lu-filter-view-selector` exposent leur propre input `intl()`, qui donne accès à un ensemble de clés de traduction utilisables directement dans vos templates.
+
+| Clé | Traduction FR |
+| --- | --- |
+| `FilterViewSelectorComponent.intl().renameView` | Modifier le nom |
+| `FilterViewSelectorComponent.intl().deleteView` | Supprimer |
+| `FilterBarComponent.intl().saveView` | Enregistrer la vue |
+| `FilterBarComponent.intl().saveModification` | Enregistrer les modifications |
+| `FilterBarComponent.intl().saveNewView` | Enregistrer en tant que nouvelle vue |
+
+### Bar segmented control tabs
 
 ```js
-import { provideHttpClient } from '@angular/common/http';
-import { LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { DividerComponent } from '@lucca-front/ng/divider';
-import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
-import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { IconComponent } from '@lucca/prisme/icon';
+import { FilterBarComponent } from '@lucca-front/ng/filter-pills';
 ```
 
 ```html
-<lu-filter-bar>
-	<lu-segmented-control class="filterBar-segmentedControl" *luFilterPillAddonBefore [(ngModel)]="example">
-		<ng-template #label0>
-			Tous
-			<lu-numeric-badge [value]="12" />
-		</ng-template>
-		<ng-template #label1>
-			En cours d’approbation
-			<lu-numeric-badge [value]="5" />
-		</ng-template>
-		<ng-template #label2>
-			Approuvés
-			<lu-numeric-badge [value]="3" />
-		</ng-template>
-		<ng-template #label3>
-			Clos
-			<lu-numeric-badge [value]="4" />
-		</ng-template>
-		<ng-template #label4>
-			Produit
-			<button type="button" size="XS" luButton="ghost" aria-expanded="false" disclosure [luDropdown]="optionsDropdown">
-				<lu-icon alt="Options" icon="menuDots" />
-			</button>
-			<ng-template #optionsDropdown>
-				<lu-dropdown-menu>
-					<lu-dropdown-item>
-						<button lu-dropdown-action type="button">
-							<lu-icon icon="edit" />
-							Modifier le nom
-						</button>
-					</lu-dropdown-item>
-					<lu-dropdown-item>
-						<button lu-dropdown-action type="button" critical>
-							<lu-icon icon="trash" />
-							Supprimer
-						</button>
-					</lu-dropdown-item>
-				</lu-dropdown-menu>
-			</ng-template>
-		</ng-template>
-		<lu-segmented-control-filter [label]="label0" value="0" />
-		<lu-segmented-control-filter [label]="label1" value="1" />
-		<lu-segmented-control-filter [label]="label2" value="2" />
-		<lu-segmented-control-filter [label]="label3" value="3" />
-		<lu-segmented-control-filter [label]="label4" value="4" />
-	</lu-segmented-control>
-	<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
-		<lu-checkbox-input [ngModel]="false" />
+<lu-filter-bar [segmentedControlTabs]="tabs">
+	<lu-filter-pill label="Établissement" name="establishment">
+		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
 	</lu-filter-pill>
-	<lu-filter-pill label="Date de début" optional name="startingDate">
-		<lu-date-input [(ngModel)]="example1" />
+	<lu-filter-pill label="Départements" name="departments">
+		<lu-multi-select [ngModel]="[]" departments [filterPillLabelPluralFn]="departmentsPluralFn" />
 	</lu-filter-pill>
-	<lu-filter-pill label="Période">
-		<lu-date-range-input [(ngModel)]="examplePeriod" />
-	</lu-filter-pill>
-	<lu-filter-pill label="Multi ApiV4" optional name="multiv4">
-		<lu-multi-select
-			[ngModel]="[]"
-			apiV4="/organization/structure/api/establishments"
-			filterPillLabelPlural="établissements"
-		/>
-	</lu-filter-pill>
-	<lu-form-field label="Test" hiddenLabel>
-		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
+	<lu-form-field label="Rechercher" hiddenLabel>
+		<lu-text-input [ngModel]="null" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 	</lu-form-field>
-	<ng-container *luFilterPillAddonAfter>
-		<button
-			type="button"
-			size="S"
-			luButton="outlined"
-			palette="product"
-			disclosure
-			aria-expanded="false"
-			[luDropdown]="saveDropdown"
-		>
-			<!--Enregistrer en tant que nouvelle vue-->
-			Enregistrer la vue
-			<lu-icon icon="arrowChevronBottom" />
-		</button>
-		<button type="submit" size="S" luButton="outlined">Exporter</button>
-	</ng-container>
 </lu-filter-bar>
-<ng-template #saveDropdown>
-	<lu-dropdown-menu>
-		<lu-dropdown-item>
-			<button lu-dropdown-action type="button">
-				<lu-icon icon="save" />
-				Enregistrer les modifications
-			</button>
-		</lu-dropdown-item>
-		<lu-dropdown-item>
-			<button
-				lu-dropdown-action
-				type="button"
-				aria-disabled="true"
-				class="is-disabled"
-				luTooltip="Supprimer des vues pour en créer des nouvelles"
-			>
-				<lu-icon icon="mathsPlus" />
-				Enregistrer en tant que nouvelle vue
-			</button>
-		</lu-dropdown-item>
-	</lu-dropdown-menu>
-</ng-template>
+<lu-segmented-control-tabs #tabs ariaLabel="Affichage">
+	<lu-segmented-control-tabs-panel label="Liste" icon="list" hiddenLabel value="list">
+		Liste des collaborateurs
+	</lu-segmented-control-tabs-panel>
+	<lu-segmented-control-tabs-panel label="Grille" icon="tiles" hiddenLabel value="grid">
+		Grille des collaborateurs
+	</lu-segmented-control-tabs-panel>
+</lu-segmented-control-tabs>
 ```
 
 ### Bar
@@ -157,65 +80,143 @@ import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { DividerComponent } from '@lucca-front/ng/divider';
-import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
+import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent, FilterViewSelectorComponent, luFilterPillsTranslations } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
+import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { IconComponent } from '@lucca/prisme/icon';
 ```
 
 ```html
-<lu-filter-bar>
-	<lu-segmented-control *luFilterPillAddonBefore [(ngModel)]="example">
-		<ng-template #label0>
-			Tous
-			<lu-numeric-badge [value]="12" />
-		</ng-template>
-		<ng-template #label1>
-			En cours d’approbation
-			<lu-numeric-badge [value]="5" />
-		</ng-template>
-		<ng-template #label2>
-			Approuvés
-			<lu-numeric-badge [value]="3" />
-		</ng-template>
-		<ng-template #label3>
-			Clos
-			<lu-numeric-badge [value]="4" />
-		</ng-template>
-		<lu-segmented-control-filter [label]="label0" value="0" />
-		<lu-segmented-control-filter [label]="label1" value="1" />
-		<lu-segmented-control-filter [label]="label2" value="2" />
-		<lu-segmented-control-filter [label]="label3" value="3" />
-	</lu-segmented-control>
-	<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
+<lu-filter-bar [resultsCount]="resultsCount">
+	<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false" />
 	</lu-filter-pill>
-	<lu-filter-pill label="Date de début" optional name="startingDate">
+	<lu-filter-pill label="Établissement" name="establishment">
+		<lu-simple-select [ngModel]="null" apiV4="/organization/structure/api/establishments" />
+	</lu-filter-pill>
+	<lu-filter-pill label="Départements" name="departments">
+		<lu-multi-select [ngModel]="[]" departments [filterPillLabelPluralFn]="departmentsPluralFn" />
+	</lu-filter-pill>
+	<lu-filter-pill label="Date de début" name="startingDate">
 		<lu-date-input [(ngModel)]="example1" />
 	</lu-filter-pill>
-	<lu-filter-pill label="Période">
-		<lu-date-range-input [(ngModel)]="examplePeriod" />
-	</lu-filter-pill>
-	<lu-filter-pill label="Multi ApiV4" optional name="multiv4">
-		<lu-multi-select
-			[ngModel]="[]"
-			apiV4="/organization/structure/api/establishments"
-			filterPillLabelPlural="établissements"
-		/>
-	</lu-filter-pill>
+
 	<lu-form-field label="Test" hiddenLabel>
 		<lu-text-input [ngModel]="example2" [ngModelOptions]="{ standalone: true }" hasSearchIcon hasClearer />
 	</lu-form-field>
-	<button *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
 </lu-filter-bar>
 ```
 
 ## HTML/CSS
+
+### Bar segmented control tabs
+
+```css
+@forward '@lucca-front/scss/src/components/filterBar';
+@forward '@lucca-front/scss/src/components/clear';
+@forward '@lucca-front/scss/src/components/divider';
+@forward '@lucca-front/scss/src/components/filterPill';
+@forward '@lucca-front/scss/src/components/formLabel';
+@forward '@lucca-front/scss/src/components/segmentedControl';
+@forward '@lucca-front/scss/src/components/textField';
+```
+
+```html
+<div class="filterBar">
+	<lu-scroll-box class="filterBar-scrollBox">
+		<div class="filterBar-scrollBox-group">
+			<div class="filterPillWrapper">
+				<button type="button" class="filterPill" aria-expanded="false">
+					<span class="filterPill-label">Établissement</span>
+					<span class="filterPill-value"></span>
+					<span class="filterPill-toggle">
+						<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom mod-S"></span>
+					</span>
+				</button>
+				<button type="button" class="filterPill_clear clear"><span class="pr-u-mask">Vider ce champ</span></button>
+			</div>
+			<div class="filterPillWrapper">
+				<button type="button" class="filterPill" aria-expanded="false">
+					<span class="filterPill-label">Départements</span>
+					<span class="filterPill-value"></span>
+					<span class="filterPill-toggle">
+						<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom mod-S"></span>
+					</span>
+				</button>
+				<button type="button" class="filterPill_clear clear"><span class="pr-u-mask">Vider ce champ</span></button>
+			</div>
+			<div class="form-field">
+				<label class="formLabel pr-u-mask" for="filterBarSearch">Rechercher</label>
+				<div class="textField">
+					<div class="textField-input">
+						<input class="textField-input-value" type="text" id="filterBarSearch" />
+						<div class="textField-input-affix">
+							<span aria-hidden="true" class="lucca-icon icon-searchMagnifyingGlass textField-input-affix-icon"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="filterBar-scrollBox-tabs">
+			<ul class="segmentedControl" role="tablist" aria-label="Affichage">
+				<li class="segmentedControl-item" role="presentation">
+					<button
+						class="segmentedControl-item-action"
+						type="button"
+						role="tab"
+						id="filterBarTab1"
+						aria-controls="filterBarPanel1"
+						luTooltip="Liste"
+						luTooltipOnlyForDisplay
+						aria-selected="true"
+					>
+						<span aria-hidden="true" class="lucca-icon icon-list"></span>
+						<span class="pr-u-mask">Liste</span>
+					</button>
+				</li>
+				<li class="segmentedControl-item" role="presentation">
+					<button
+						class="segmentedControl-item-action"
+						type="button"
+						role="tab"
+						id="filterBarTab2"
+						aria-controls="filterBarPanel2"
+						luTooltip="Grille"
+						luTooltipOnlyForDisplay
+						aria-selected="false"
+						tabindex="-1"
+					>
+						<span aria-hidden="true" class="lucca-icon icon-tiles"></span>
+						<span class="pr-u-mask">Grille</span>
+					</button>
+				</li>
+			</ul>
+		</div>
+		<div class="divider filterBar-scrollBox-divider"></div>
+	</lu-scroll-box>
+</div>
+<div
+	class="segmentedControl_panel is-active"
+	role="tabpanel"
+	tabindex="0"
+	id="filterBarPanel1"
+	aria-labelledby="filterBarTab1"
+>
+	Liste des collaborateurs
+</div>
+<div class="segmentedControl_panel" role="tabpanel" tabindex="0" id="filterBarPanel2" aria-labelledby="filterBarTab2">
+	Grille des collaborateurs
+</div>
+```
 
 ### Bar
 
@@ -232,6 +233,7 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 ```html
 <form>
 	<div class="filterBar">
+		<span class="pr-u-mask" role="status">24 résultats</span>
 		<lu-scroll-box class="filterBar-scrollBox">
 			<div class="filterBar-scrollBox-group">
 				<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
@@ -263,14 +265,19 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 
 				<div class="divider filterBar-divider"></div>
 
-				<button type="button" class="filterPill mod-checkbox">
+				<button type="button" class="filterPill mod-checkbox" #button>
 					<span class="filterPill-checkbox">
 						<span class="filterPill-checkbox-input"></span>
 						<span class="filterPill-checkbox-icon" aria-hidden="true">
 							<span class="filterPill-checkbox-icon-check"></span>
 						</span>
 					</span>
-					<span class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis>
+					<span
+						class="filterPill-label"
+						luTooltip="Inclure les collaborateurs partis"
+						luTooltipWhenEllipsis
+						[luTooltipTriggerAnchor]="button"
+					>
 						Inclure les collaborateurs partis
 						<span
 							class="filterPill-label-placeholder"
@@ -292,6 +299,8 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 				</div>
 
 				<button type="submit" class="button mod-ghost mod-S palette-product">Appliquer les filtres</button>
+
+				<span class="filterBar-scrollBox-group-results" aria-hidden="true">24 résultats</span>
 			</div>
 			<div class="filterBar-scrollBox-export">
 				<button type="submit" class="button mod-S mod-outlined">Exporter</button>

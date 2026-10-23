@@ -1,6 +1,42 @@
 # index-table — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
+**Sommaire**
+
+- Angular
+  - Lien vers un nouvelle page
+  - Actions
+  - Basic
+  - Scrollbox
+  - Tooltips
+- HTML/CSS
+  - Table actions dropdown
+  - Table actions selectable
+  - Table actions subAction
+  - Table actions tooltipsCell
+  - Table actions tooltipsRow
+  - Table actions userPopover
+  - Table basic
+  - Table empty state
+  - Table footer
+  - Table input
+  - Table interactive nested selectable
+  - Table layout fixed responsive
+  - Table layout fixed
+  - Table mass selection and pagination
+  - Table nested selectable
+  - Table nested sub totals
+  - Table nested
+  - Table pagination
+  - Table responsive card list custom
+  - Table responsive card list label
+  - Table responsive card list nested
+  - Table responsive card list
+  - Table selectable
+  - Table sortable
+  - Table stackable
+  - Table sticky header
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
 
 ## Angular
 
@@ -2319,13 +2355,15 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 ```
 
 ```html
-<table class="indexTable">
+<table class="indexTable mod-layoutFixed">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col">Not sortable</th>
 			<th class="indexTable-head-row-cell" scope="col">
-				<button type="button" class="tableSortable button">
-					Sortable
+				<button type="button" class="tableSortable button mod-ellipsis" #sortBtn1>
+					<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn1">
+						Sortable
+					</span>
 					<span class="tableSortable-arrows">
 						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -2333,8 +2371,10 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 				</button>
 			</th>
 			<th class="indexTable-head-row-cell" scope="col" aria-sort="ascending">
-				<button type="button" class="tableSortable button">
-					Sorted ascending
+				<button type="button" class="tableSortable button mod-ellipsis" #sortBtn2>
+					<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn2">
+						Sorted ascending
+					</span>
 					<span class="tableSortable-arrows">
 						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -2342,8 +2382,10 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 				</button>
 			</th>
 			<th class="indexTable-head-row-cell" scope="col" aria-sort="descending">
-				<button type="button" class="tableSortable button">
-					Sorted descending
+				<button type="button" class="tableSortable button mod-ellipsis" #sortBtn3>
+					<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn3">
+						Sorted descending
+					</span>
 					<span class="tableSortable-arrows">
 						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
@@ -2353,7 +2395,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 			<th class="indexTable-head-row-cell" scope="col" aria-sort="none">
 				<button
 					type="button"
-					class="tableSortable button"
+					class="tableSortable button mod-ellipsis"
 					onclick="
 						switch (this.parentNode.getAttribute('aria-sort')) {
 							case 'ascending':
@@ -2366,8 +2408,11 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 								this.parentNode.setAttribute('aria-sort', 'ascending');
 						}
 					"
+					#sortBtn4
 				>
-					Interactive
+					<span class="tableSortable-label" luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="sortBtn4">
+						Interactive
+					</span>
 					<span class="tableSortable-arrows">
 						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
 						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>

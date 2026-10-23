@@ -1,5 +1,16 @@
 # footer
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - FooterComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -35,11 +46,11 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 - 📝 [Code & implementation](./footer.component.md)
 - 🎨 [Design guidelines](./footer.design.md)
 - 🎯 [Figma design tokens](./footer.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-cards-footer--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-cards-footer--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -49,6 +60,12 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 ~ `dialog` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 21.4.1
+
+##### Fixed
+
+- Empty footer content no longer takes space.
 
 #### 21.3.0
 

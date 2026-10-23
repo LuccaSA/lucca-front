@@ -24,11 +24,11 @@ import { TextFlowComponent } from '@lucca-front/ng/text-flow';
 - 📝 [Code & implementation](./text-flow.component.md)
 - 🎨 [Design guidelines](./text-flow.design.md)
 - 🎯 [Figma design tokens](./text-flow.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-text-flow-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-text-flow-angular-basic--docs)
 
 ## Changelog
 
-_Aucun changement d'API entre v21.4.2 et v22.0.0._
+_Aucun changement d'API entre v21.4.4 et v22.1.0._
 
 ### Notes de release (ZeroHeight)
 

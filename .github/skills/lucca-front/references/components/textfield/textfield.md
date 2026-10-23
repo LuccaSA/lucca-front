@@ -1,5 +1,18 @@
 # textfield
 
+**Sommaire**
+
+- Import
+- API Reference
+  - TextInputComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -29,6 +42,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 | `maxlength` | `maxlength` | `number` | `0` | — | `luNumberAttribute` | — |
 | `searchIcon` | `searchIcon` | `LuccaIcon` | `'searchMagnifyingGlass'` | — | — | — |
 | `type` | `type` | `TextFieldType` | `'text'` | — | — | — |
+| `width` | `width` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
 
 #### Outputs
 
@@ -44,18 +58,22 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./textfield.component.md)
 - 🎨 [Design guidelines](./textfield.design.md)
 - 🎯 [Figma design tokens](./textfield.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
++ `width` : unknown
 
 ### 22.0.0
 
@@ -66,6 +84,35 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 ~ `valueAlignRight` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- `width` input to size the input itself, using the form field width scale, including the new `10` value.
+
+##### Changed
+
+- `inputElementRef()` is now typed as non-nullable; calling it before the view is rendered throws instead of returning `undefined`.
+
+#### 22.0.6
+
+##### Fixed
+
+- Clearing an input bound with `[formField]` (signal forms) now resets its value instead of throwing `this.ngControl.reset is not a function`.
+- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
+
+#### 22.0.0
+
+##### Added
+
+- `minlength` and `maxlength` inputs, forwarded to the native field.
+
+#### 21.4.1
+
+##### Fixed
+
+- Clear button can now be triggered with the keyboard.
 
 #### 21.3.1
 

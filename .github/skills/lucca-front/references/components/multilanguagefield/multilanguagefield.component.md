@@ -1,6 +1,6 @@
 # multilanguagefield — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-multilanguagefield-angular--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-multilanguagefield-angular--docs)
 
 ## Angular
 
@@ -67,7 +67,7 @@ import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
+import { luMultilanguageInputTranslations, MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 

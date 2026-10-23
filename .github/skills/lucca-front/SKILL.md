@@ -1,31 +1,27 @@
 ---
 name: lucca-front
 description: >
-  Design system Lucca Front / Prisme (Angular), versions 22.0.x. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
-  ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
+  Design system Lucca Front / Prisme (Angular) : API et exemples des composants, changelog, codemods de migration,
+  variantes Figma, tokens CSS, guidelines de design et de rédaction. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
+  ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm), et pour intégrer ou créer une maquette Figma Prisme.
 ---
 
-# Design System Prisme — Lucca Front 22.0
+# Design System Prisme — Lucca Front
 
 **RÈGLE** : Avant toute génération ou modification de code impliquant `lu-*`, `luX` ou `pr-*`, consulte la documentation du composant ci-dessous. Sans cette consultation, toute réponse est invalide.
 
 ## 1. Version
 
-Cette skill couvre **Lucca Front 22.0.x** (patchs publiés : 22.0.0). La **mineure** est celle installée sur le projet — tous les chemins ci-dessous lui sont relatifs, il n'y a pas de mineure à résoudre.
+Cette skill ne porte pas de numéro de version : elle est régénérée à chaque modification du code de lucca-front, et le projet l'épingle dans son `apm.yml` sur le tag exact de la version de `@lucca-front/ng` qu'il installe (`LuccaSA/lucca-front/.github/skills/lucca-front#v<version>`). Elle décrit le code de ce tag.
 
-**Détecte le patch installé** (obligatoire, ne le suppose jamais) :
+**Détecte la version de `@lucca-front/ng` installée** (ne la suppose jamais) :
 
-1. en priorité `node_modules/@lucca-front/ng/package.json` → champ `version` (version résolue exacte, ex: `22.0.0`) ;
-2. à défaut, la dépendance `@lucca-front/ng` (ou `@lucca-front/scss`) dans le `package.json` du projet (ex: `^22.0.0` → `22.0.0`).
+1. en priorité `node_modules/@lucca-front/ng/package.json` → champ `version` ;
+2. à défaut, la dépendance `@lucca-front/ng` (ou `@lucca-front/scss`) dans le `package.json` du projet.
 
-La documentation `references/` reflète le **dernier patch publié : 22.0.0**. Si le patch du projet est **antérieur**, les correctifs livrés après sa version sont décrits dans `fixes/` (voir §2) — ils ne sont **pas** dans son code : consulte tous les `fixes/<M-m-p>.md` de version **strictement supérieure** au patch installé et ignore ces changements.
+Elle sert à ouvrir le Storybook : les liens sont écrits `https://lucca-front.lucca.io/v{version}/storybook/…`. Remplace `{version}` par la version détectée avant de les suivre.
 
-**Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
-
-- la **mineure** détectée n'est pas `22.0` (ex: le projet est monté de version sans que la ref APM de la skill suive — elle doit pointer un tag lucca-front qui porte la skill de sa mineure) ;
-- le patch (ou la version `@lucca-front/ng`) **ne peut pas être déterminé**.
-
-Si le **patch** détecté est **postérieur** à 22.0.0, **signale-le en une ligne et continue** ; en cas de comportement inattendu, lis les notes de release des patchs postérieurs (`gh release view v<patch> --repo LuccaSA/lucca-front`) : le paquet `@lucca-front/ng` n'embarque pas de CHANGELOG.
+Si la mineure installée diffère de celle du tag épinglé dans `apm.yml`, signale-le en une ligne et continue : la documentation peut décrire une API que le projet n'a pas encore, ou plus.
 
 ## 2. Chemins
 
@@ -61,13 +57,7 @@ Slugs : animations, mixins, numbers, scrollbox, utilitaires, angular-api (provid
 
 ### Migrations (montée de version)
 
-`./references/migrations.md` — codemods de migration (`ng generate @lucca-front/ng:<nom>`) cumulatifs jusqu'à cette version, avec leur version d'introduction.
-
-### Correctifs de patch (fixes/)
-
-`./fixes/<M-m-p>.md` — un fichier par patch publié de la mineure (delta vs le patch précédent : API, types partagés, codemods, sources de stories). _(aucun patch publié après le .0 pour l'instant)_
-
-À consulter quand : le projet est sur un patch **antérieur** à 22.0.0 (les fixes postérieurs à sa version décrivent des correctifs absents de son code), ou pour comprendre ce qu'un patch précis a changé.
+`./references/migrations.md` — codemods de migration (`ng generate @lucca-front/ng:<nom>`) cumulatifs, avec leur version d'introduction.
 
 ### Exemple
 
@@ -87,7 +77,6 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 | Mixins / animations SCSS | Outils (dossier `tools/`) |
 | Composant déprécié | `./references/documentation/deprecated/deprecated.md` |
 | Monter de version | `./references/migrations.md` + la section `## Changelog` du `<slug>.md` de chaque composant touché |
-| Projet sur un patch antérieur à 22.0.0 / comportement inattendu sur un patch | `./fixes/<M-m-p>.md` |
 
 ## 4. Workflow Code
 
@@ -175,11 +164,13 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 - index-table
 - inlinemessage
 - input-framed
+- kbd
 - link
 - listbox
 - listing
 - loading
 - main-layout
+- markdown
 - mobile-push
 - mobileheader
 - mobilenavigation
@@ -198,6 +189,7 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 - plg-push
 - popover
 - popover2
+- priority-levels
 - progress-bar
 - progress-stepper
 - radiofield

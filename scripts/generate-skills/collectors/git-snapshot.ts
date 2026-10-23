@@ -12,7 +12,7 @@
  * `git show`. Break-even is ~17 reads. Archiving unconditionally made a `--component button` run go
  * from 7.0 s to 23.7 s, because the changelog walk touches ~18 tags and most of them are read only a
  * dozen times each. So each `(tag, pathspec)` starts on `git show` and is snapshotted only after
- * `PROMOTION_THRESHOLD` reads, where the archive has already paid for itself.
+ * `promotionThreshold` reads, where the archive has already paid for itself.
  *
  * Reads always have an answer: a tag that fails to archive stays on `git show` for the rest of the
  * run. Degrading to the previous behaviour is always preferred over returning wrong content.
@@ -37,11 +37,21 @@ const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
  * Its value appears at full-run scale, where each tag of the changelog walk is read by ~120 packages
  * instead of one. 128 is the value that costs nothing on a small run while still promoting early
  * enough on a large one (128 reads ≈ 3.7 s of `git show` before a 0.5 s archive takes over).
- * Override with `GIT_SNAPSHOT_THRESHOLD`. Validated rather than `Number(env) || 128`, which would
+ * A full `--ref` run promotes at once instead (see `promoteEagerly`). Override with
+ * `GIT_SNAPSHOT_THRESHOLD`. Validated rather than `Number(env) || 128`, which would
  * swallow a typo silently and could not express a deliberate 0 (promote immediately) — the very
  * shape called out as a mistake in http.ts.
  */
-const PROMOTION_THRESHOLD = readThresholdEnv(128);
+let promotionThreshold = readThresholdEnv(128);
+
+/**
+ * A full `--ref` run reads each tag of the changelog walk ~173 times, past 128 anyway: the first
+ * 128 reads are spawns the archive would have saved. Measured on `skills:update`: 92 s → 33 s, same
+ * output. An explicit `GIT_SNAPSHOT_THRESHOLD` still wins.
+ */
+export function promoteEagerly(): void {
+	if (!process.env['GIT_SNAPSHOT_THRESHOLD']?.trim()) promotionThreshold = 0;
+}
 
 function readThresholdEnv(fallback: number): number {
 	const raw = process.env['GIT_SNAPSHOT_THRESHOLD'];
@@ -123,7 +133,7 @@ export function readAtTag(tag: string, filePath: string): string | null {
 		const seen = (readCounts.get(key) ?? 0) + 1;
 		readCounts.set(key, seen);
 
-		if (seen > PROMOTION_THRESHOLD) {
+		if (seen > promotionThreshold) {
 			const root = snapshotRoot(tag, pathspec);
 			if (root) {
 				const full = path.join(root, filePath);

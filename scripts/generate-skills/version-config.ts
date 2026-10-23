@@ -7,7 +7,7 @@
  * - Git tags for source code access
  */
 
-import { execSync } from 'child_process';
+import { execFileSync, execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { VersionConfig } from './types';
@@ -155,11 +155,87 @@ export function resolveVersion(versionStr: string): VersionConfig {
 
 	return {
 		tag,
+		source: tag,
 		major,
 		minor,
 		patch,
 		zhReleaseId,
 		storybookBaseUrl,
+	};
+}
+
+/** SKILL.md tells the agent to replace `{version}` with the @lucca-front/ng version the project installs. */
+export const STORYBOOK_URL_OF_INSTALLED_VERSION = 'https://lucca-front.lucca.io/v{version}/storybook';
+
+/**
+ * Whether the skill follows the code rather than a release: generated from a ref (`--ref`), it is
+ * committed with the code it describes, and the consumer's APM ref is its only version.
+ */
+export function followsCode(version: VersionConfig): boolean {
+	return version.source !== version.tag;
+}
+
+/**
+ * The minor a skill that follows the code documents: its last published tag's, unless the branch
+ * already prepares a newer one. The release PR of a minor declares it (`--minor`, then kept in the
+ * committed manifest) before the `.0` tag exists, so that tag ships the skill of its own minor.
+ */
+export function documentedMinor(taggedMinor: string, preparedMinor: string | null): string {
+	if (!preparedMinor) return taggedMinor;
+	const [preparedMajor, preparedMinorNumber] = preparedMinor.split('.').map(Number);
+	const [taggedMajor, taggedMinorNumber] = taggedMinor.split('.').map(Number);
+	const isNewer = preparedMajor > taggedMajor || (preparedMajor === taggedMajor && preparedMinorNumber > taggedMinorNumber);
+	return isNewer ? preparedMinor : taggedMinor;
+}
+
+/**
+ * Resolves a git ref that is not a release (`HEAD`, or the tree `git write-tree` builds from the
+ * index) to the minor of the last published tag it contains. The code and stories are read from the
+ * ref; the name, the links and the changelogs stay those of that tag, which already exists and never
+ * moves, so two commits between the same two tags write the same names.
+ */
+export function resolveSourceVersion(ref: string, preparedMinor: string | null = null): MinorResolution {
+	const source = execFileSync('git', ['rev-parse', `${ref}^{tree}`], { encoding: 'utf-8' }).trim();
+	// A tree has no history: its tags are those of the commit it will be committed on top of.
+	const isTree = execFileSync('git', ['cat-file', '-t', ref], { encoding: 'utf-8' }).trim() === 'tree';
+	const tagsOf = (args: string[]) =>
+		new Set(
+			execFileSync('git', ['tag', ...args, 'v*'], { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 })
+				.split('\n')
+				.map((t) => t.trim()),
+		);
+	const reachable = tagsOf(['--merged', isTree ? 'HEAD' : ref]);
+	// A tag cut on this very commit would rewrite its committed skill ("jusqu'à vX" on every page) and
+	// turn its CI red: the commit keeps the skill it was committed with, the next one picks the tag up.
+	if (!isTree) for (const ownTag of tagsOf(['--points-at', ref])) reachable.delete(ownTag);
+	const tag = listStableMajors()
+		.flatMap((major) => listStableTags(major))
+		.filter((t) => reachable.has(t))
+		.sort(compareTags)
+		.at(-1);
+	if (!tag) {
+		throw new Error(`${ref} ne contient aucun tag publié : impossible de nommer la skill.`);
+	}
+
+	const taggedMinor = tag.replace(/^v/, '').split('.').slice(0, 2).join('.');
+	const resolution = resolveMinorVersion(taggedMinor);
+	const minorKey = documentedMinor(taggedMinor, preparedMinor);
+	// A prepared minor has no tag yet: `tag` stays the last published one, where the changelogs stop.
+	const isPrepared = minorKey !== taggedMinor;
+	const { major, minor } = parseMinor(minorKey)!;
+	// A technical minor has no ZeroHeight release of its own: its design content is its covering minor's.
+	const zhMinor = getTechnicalMinor(minorKey)?.coveredBy ?? minorKey;
+	return {
+		minorKey,
+		version: {
+			...resolveVersion(tag),
+			...(isPrepared && { major, minor, patch: 0 }),
+			source,
+			storybookBaseUrl: STORYBOOK_URL_OF_INSTALLED_VERSION,
+			zhReleaseId: ZH_RELEASE_IDS[zhMinor] ?? null,
+		},
+		patchTags: isPrepared ? [] : resolution.patchTags.filter((t) => compareTags(t, tag) <= 0),
+		technicalMinors: isPrepared ? [] : resolution.technicalMinors,
 	};
 }
 

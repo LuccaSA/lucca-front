@@ -22,7 +22,7 @@ import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `illustration` | `illustration` | `BubbleIllustration \| string` | — | ✅ | — | Modifie l’illustration. |
+| `illustration` | `illustration` | `BubbleIllustration \| string` | — | ✅ | — | Modifie l’illustration. Accepte aussi l’URL d’un SVG personnalisé, commençant par https:// ou /. Requis. |
 | `palette` | `palette` | `Palette \| DecorativePalette` | `'product'` | — | — | Applique une palette de couleurs au composant. |
 | `size` | `size` | `'S' \| 'M' \| 'L'` | `'M'` | — | — | Modifie la taille du composant. |
 | `action` | `action` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute une icône d’action (+) à l’illustration. |
@@ -36,17 +36,27 @@ import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration
 - 📝 [Code & implementation](./bubble-illustration.component.md)
 - 🎨 [Design guidelines](./bubble-illustration.design.md)
 - 🎯 [Figma design tokens](./bubble-illustration.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-bubble-illustration-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-bubble-illustration-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
 ~ `action` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+##### Fixed
+
+- Component now renders a `span` instead of a `div`, so it can be nested inside a button without producing invalid markup.
 
 #### 21.3.0
 

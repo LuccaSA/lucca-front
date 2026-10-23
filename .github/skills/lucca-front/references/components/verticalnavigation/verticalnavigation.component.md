@@ -1,6 +1,17 @@
 # verticalnavigation — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-verticalnavigation-angular-disabled--docs)
+**Sommaire**
+
+- Angular
+  - Navigation disabled
+  - Navigation iconless
+  - Navigation
+- HTML/CSS
+  - Navigation disabled
+  - Navigation iconless
+  - Navigation
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-verticalnavigation-angular-disabled--docs)
 
 ## Angular
 

@@ -1,5 +1,22 @@
 # multi-select
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuMultiSelectContentDisplayerComponent (component)
+  - LuMultiSelectCounterDisplayerComponent (component)
+  - LuMultiSelectDefaultDisplayerComponent (component)
+  - LuMultiSelectDisplayerInputDirective (directive)
+  - LuMultiDisplayerDirective (directive)
+  - LuMultiSelectWithSelectAllDirective (directive)
+  - LuMultiSelectInputComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -36,6 +53,8 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 ### LuMultiSelectDisplayerInputDirective (directive)
 
 **Selector:** `[luMultiSelectDisplayerInput]`
+
+**exportAs:** `luMultiSelectDisplayerInput`
 
 ### LuMultiDisplayerDirective (directive)
 
@@ -91,11 +110,11 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 - 📝 [Code & implementation](./multi-select.component.md)
 - 🎨 [Design guidelines](./multi-select.design.md)
 - 🎯 [Figma design tokens](./multi-select.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-multi-select-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-multi-select-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -112,6 +131,67 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
   ~ `filterPillLabelPluralFn` : (count: number) => string → (count: number) => string | LuPluralForms, défaut undefined → ∅
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- Opt-in bottom sheet below the `S` breakpoint (800px), enabled with `{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true }` (`@lucca-front/ng/core-select`): the trigger becomes a button and the panel opens as a dialog titled with the field label, with its own search input. In the bottom sheet, the "select all" link of groups and the tree parent/children buttons are always visible. Selects inside a filter pill keep their behavior.
+- `width` input to size the select itself, using the form field width scale, including the new `10` value.
+
+##### Fixed
+
+- Border of an invalid select keeps its critical color on hover.
+
+#### 22.0.6
+
+##### Fixed
+
+- No more error on `keydown` events without `key`, as fired by browser autofill.
+
+#### 22.0.4
+
+##### Fixed
+
+- Counter of the selected options no longer wraps onto a new line.
+- Icon position when the select is displayed in a filter pill.
+
+#### 22.0.1
+
+##### Fixed
+
+- Selecting a group through "select all" now selects every option of that group.
+- Selects stay non-searchable when no `clueChange` binding is provided.
+
+#### 22.0.0
+
+##### Added
+
+- `dataSource` input accepting a `SelectDataSource` (`getOptions`, `getTotalCount`, `getGroupOptions`, `reset`, `paramsChange`, `clueDebounceMs`) to feed the options, next to the existing `options` input.
+
+##### Changed
+
+- Panel is now built on the `listbox` component and its shared panel layout.
+
+##### Removed
+
+- `previousPage` output — pagination is now driven by the data source.
+
+##### Fixed
+
+- Clear button is now displayed in filter pill mode.
+- A failing "me" lookup no longer keeps a user select loading forever.
+- Loader is no longer started again when a filter pill is reopened.
+
+#### 21.4.1
+
+##### Added
+
+- Presentation mode now formats the selected options with `Intl.ListFormat`.
+
+##### Fixed
+
+- Extra spacing when the select is displayed in a filter pill.
 
 #### 21.3.1
 

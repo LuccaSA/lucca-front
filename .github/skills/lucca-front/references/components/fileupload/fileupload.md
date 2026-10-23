@@ -1,5 +1,22 @@
 # fileupload
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - FileDropzoneComponent (component)
+  - FileEntryComponent (component)
+  - FileEntryWrapperComponent (component)
+  - MultiFileUploadComponent (component)
+  - SingleFileUploadComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -9,7 +26,10 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 ## Basic Usage
 
 ```html
-<lu-form-field label="Label"> <lu-multi-file-upload fileMaxSize="5000000" illustration="paper" (filePicked)="fileUploadFeature.uploadFiles([$event])" /> </lu-form-field> <lu-file-entry-wrapper> @for(fileUpload of fileUploadFeature.fileUploads(); track $index) { <lu-file-entry [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" /> } </lu-file-entry-wrapper>
+<lu-form-field label="Label"> <lu-multi-file-upload fileMaxSize="5000000" illustration="paper" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+</lu-form-field>
+<lu-file-entry-wrapper> @for(fileUpload of fileUploadFeature.fileUploads(); track $index) { <lu-file-entry [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" /> }
+</lu-file-entry-wrapper>
 ```
 
 ## API Reference
@@ -137,16 +157,26 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 | `filePicked` | `filePicked` | `File` | — |
 | `deleteFile` | `deleteFile` | `void` | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_FILE_UPLOAD_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./fileupload.component.md)
 - 🎨 [Design guidelines](./fileupload.design.md)
 - 🎯 [Figma design tokens](./fileupload.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-file-fileupload-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-file-fileupload-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_FILE_UPLOAD_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
@@ -177,6 +207,24 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
   ~ `displayFileName` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.6
+
+##### Fixed
+
+- `type` and `size` of a `FileEntry` now accept `null`, and `lu-file-entry` no longer displays them when they are `null`.
+
+#### 22.0.0
+
+##### Added
+
+- `lu-file-entry-wrapper` component to group several `lu-file-entry` in a single display block.
+- `structure` input on `lu-multi-file-upload`, to display the structured variant already available on `lu-single-file-upload`.
+
+##### Changed
+
+- `size` input of the file upload components and of `lu-file-entry` now accepts `L` instead of `S`: the compact variant became the default (unset) size and `L` is the large one. `FILE_UPLOAD_SIZE` and `FILE_ENTRY_SIZE` are updated accordingly.
+- `lu-single-file-upload` no longer renders the uploaded file itself; display a `lu-file-entry` next to it instead. Its former `entry`, `state`, `previewUrl`, `inlineMessageError` and `displayFileName` inputs and `deleteFile` output remain exposed but no longer affect rendering.
 
 #### 21.3.1
 

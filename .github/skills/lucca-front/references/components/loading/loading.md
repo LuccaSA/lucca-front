@@ -1,5 +1,18 @@
 # loading
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - LoadingComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -9,7 +22,7 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 ## Basic Usage
 
 ```html
-<lu-loading hiddenLabel>Chargement…</lu-loading>
+<lu-loading />
 ```
 
 ## API Reference
@@ -22,22 +35,35 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
 | `size` | `size` | `LoadingSize \| null` | `null` | — | — | — |
 | `invert` | `invert` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie les couleurs du loading pour un usage sur fond foncé. |
 | `block` | `block` | `boolean` | `false` | — | `luBooleanAttribute` | Centre le loading dans son conteneur pour une utilisation en pleine page, dialog, section, etc. |
-| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | Masque le label en le conservant dans le DOM pour les lecteurs d’écrans. |
+| `hiddenLabel` | `hiddenLabel` | `unknown` | `null` | — | `luNullableBooleanAttribute` | Masque le label en le conservant dans le DOM pour les lecteurs d’écran. |
 | `template` | `template` | `DisplayMode \| null` | `null` | — | — | Applique une mise en forme adaptée à certains contextes (pleine page, dialog, etc.). |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_LOADING_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./loading.component.md)
 - 🎨 [Design guidelines](./loading.design.md)
 - 🎯 [Figma design tokens](./loading.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-loaders-loading-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-loading-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
++ `intl` : unknown
+~ `hiddenLabel` : boolean → unknown, défaut false → null, transform luBooleanAttribute → luNullableBooleanAttribute
++ token `LU_LOADING_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
@@ -46,6 +72,12 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 ~ `hiddenLabel` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- Default translated label ("Loading…") rendered when no content is projected, visually hidden unless `hiddenLabel` is set to `false`. It can be changed through the new `intl` input or the `LU_LOADING_TRANSLATIONS` token.
 
 #### 21.3.0
 

@@ -30,9 +30,9 @@ Ici s'applique notre principe Don't make me think :
 
 ## Affichage dans un formulaire
 
-Le champ conditionnel se place dans le flux du formulaire, sous ou a proximité immédiate du champ qui le déclenche. Pour en regrouper plusieurs, utilisons un Input framed.
+Le champ conditionnel se place dans le flux du formulaire, sous ou a proximité immédiate du champ qui le déclenche. Pour en regrouper plusieurs, utilisons un InputFramed.
 
 - **Do** : Affichons le champ conditionnel directement sous le champ déclencheur, dans le flux du formulaire, pour conserver une lecture fluide et naturelle.
-- **Don't** : Ne plaçons pas un champ conditionnel dans un fieldset contextuel. Cela alourdit inutilement l’interface.
-- **Do** : Privilégions l’utilisation du composant Input framed pour afficher plusieurs champs conditionnels.
+- **Don't** : Ne plaçons pas un champ conditionnel dans un Fieldset contextuel. Cela alourdit inutilement l’interface.
+- **Do** : Privilégions l’utilisation du composant InputFramed pour afficher plusieurs champs conditionnels.
 - **Don't** : N’utilisons pas le Fieldset contextuel pour afficher plusieurs champs conditionnels.

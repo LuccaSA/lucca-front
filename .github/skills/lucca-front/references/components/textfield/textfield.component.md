@@ -1,6 +1,25 @@
 # textfield — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
+**Sommaire**
+
+- Angular
+  - Field
+  - ngx-mask
+- HTML/CSS
+  - Field AI
+  - Field counter
+  - Field disabled
+  - Field info
+  - Field invalid
+  - Field prefix suffix
+  - Field required
+  - Field search clear
+  - Field sizes
+  - Field valueAlignRight
+  - Field width
+  - Field
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
 
 ## Angular
 
@@ -20,7 +39,7 @@ import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TextInputComponent } from '@lucca-front/ng/forms';
+import { luTextfieldTranslations, TextInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 
@@ -34,7 +53,13 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 	iconAItooltip="Donnée remplie automatiquement"
 	iconAIalt="Assistant IA"
 >
-	<lu-text-input required placeholder="Placeholder" [(ngModel)]="model.example"></lu-text-input>
+	<lu-text-input
+		required
+		placeholder="Placeholder"
+		minlength="0"
+		maxlength="0"
+		[(ngModel)]="model.example"
+	></lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```

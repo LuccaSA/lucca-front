@@ -1,5 +1,22 @@
 # Règles de ponctuation, de typographie
 
+**Sommaire**
+
+- Content
+    - Guillemets
+    - Utilisation
+    - Apostrophes et guillemets typographiques
+    - Espaces
+    - Accent sur les majuscules, ou capitalisation
+    - Esperluette (&)
+    - Titres toujours sans point
+    - Texte tronqué, points de suspension
+    - Format des nombres
+    - Deux-points, listes
+    - Ligatures
+    - Traits d'union, tirets et signes arithmétiques
+    - Lokalise
+
 # Content
 
 ### Guillemets

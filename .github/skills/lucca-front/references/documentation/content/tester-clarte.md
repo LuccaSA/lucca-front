@@ -1,5 +1,23 @@
 # Tester clarté et efficacité du contenu
 
+**Sommaire**
+
+- Content
+  - 1. Objectifs des tests
+    - A. Clarté limpide du contenu
+    - B. Engagement accru
+    - C. Adaptation aux besoins réels
+    - D. Anticipation des contenus déclinés
+  - 2. Timing des tests
+  - 3. Guide des tests par besoin
+    - Besoin : s'assurer que l'utilisateur comprend des éléments
+    - Besoin : cibler le bon mot, la bonne hiérarchie d'informations
+  - 4. Questions clés à poser lors des tests
+    - Pour tester la compréhension
+    - Pour évaluer l'exhaustivité des informations
+    - Pour anticiper les attentes utilisateur
+  - 5. Consolider et partager les résultats
+
 # Content
 
 ## 1. Objectifs des tests

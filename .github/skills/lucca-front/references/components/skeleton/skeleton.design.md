@@ -4,7 +4,7 @@
 
 # Design
 
-Le Skeleton est un composant visuel temporaire qui imite la structure de la page finale en cours de chargement. Il projette l'utilisateur dans l'interface à venir, rendant l'attente plus active et fluide. Les composants les plus utilisés possèdent leur état skeleton.
+Le Skeleton est un composant visuel temporaire qui imite la structure de la page finale en cours de chargement. Il projette l'utilisateur dans l'interface à venir, rendant l'attente plus active et fluide. Les composants les plus utilisés possèdent leur état Skeleton.
 
 ## Skeleton item
 
@@ -53,7 +53,7 @@ Si le tableau est paginé avec un scroll infini, nous faisons apparaître une li
 
 ### Card
 
-Le Skeleton Card doit être utilisé pour tous les composant ressemblant à des Card (ResourceCard, ApprobationItem, etc.). Il représente le titre de la ressource et une ligne de sous-texte.
+Le SkeletonCard doit être utilisé pour tous les composant ressemblant à des Cards (ResourceCard, ApprobationItem, etc.). Il représente le titre de la ressource et une ligne de sous-texte.
 
 Lorsque plusieurs ressources sont attendus dans la page, il est possible d’utiliser un Skeleton pour le composant ResourceCardWrapper.
 

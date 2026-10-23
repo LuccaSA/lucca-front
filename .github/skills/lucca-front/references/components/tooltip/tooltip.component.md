@@ -1,6 +1,6 @@
 # tooltip — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-tooltip-html-css--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-tooltip-html-css--docs)
 
 ## Angular
 
@@ -20,40 +20,33 @@ import { ButtonComponent } from '@lucca/prisme/button';
 
 ```html
 <h3>Tooltip simple</h3>
-<button
-	id="random-story-id"
-	type="button"
-	luButton
-	luTooltip="👋 Hello"
-	luTooltipEnterDelay="300"
-	luTooltipLeaveDelay="100"
->
-	Tooltip au survol
+<button id="random-story-id" type="button" luButton luTooltip="👋 Hello" luTooltipPosition="above">
+	Tooltip au survol ou au focus
 </button>
 <h3>Tooltip sur un texte</h3>
-<span luTooltip="👋 Hello" luTooltipEnterDelay="300" luTooltipLeaveDelay="100">Tooltip au survol</span>
+<span class="pr-u-focusVisible pr-u-borderRadiusSmall" luTooltip="👋 Hello" luTooltipPosition="above">
+	Tooltip au survol ou au focus
+</span>
 <h3>Tooltip et ellipse</h3>
 <div
 	data-testid="ellipsis-truncated"
-	class="pr-u-ellipsis"
+	class="pr-u-ellipsis pr-u-focusVisible pr-u-borderRadiusSmall"
 	style="inline-size: 10rem"
 	tabindex="0"
-	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
-	luTooltipEnterDelay="300"
-	luTooltipLeaveDelay="100"
+	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol ou au focus."
+	luTooltipPosition="above"
 	[luTooltipWhenEllipsis]="true"
 >
-	Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.
+	Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol ou au focus.
 </div>
 <div
 	data-testid="ellipsis-not-truncated"
-	class="pr-u-ellipsis"
-	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
-	luTooltipEnterDelay="300"
-	luTooltipLeaveDelay="100"
+	class="pr-u-ellipsis pr-u-focusVisible pr-u-borderRadiusSmall"
+	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait ni au survol ni au focus."
+	luTooltipPosition="above"
 	[luTooltipWhenEllipsis]="true"
 >
-	Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.
+	Ce texte est affiché entièrement. Le tooltip n'apparait ni au survol, ni au focus.
 </div>
 <h3>Tooltip et icône (avec alternative)</h3>
 <lu-icon
@@ -61,13 +54,17 @@ import { ButtonComponent } from '@lucca/prisme/button';
 	icon="star"
 	alt="Favoris"
 	luTooltip="Favoris"
-	luTooltipEnterDelay="300"
-	luTooltipLeaveDelay="100"
+	luTooltipPosition="above"
 	luTooltipOnlyForDisplay="true"
+	class="pr-u-focusVisible pr-u-borderRadiusSmall"
 />
 
 <h3>Tooltip affiché avec un host séparé</h3>
-<span class="pr-u-marginInlineEnd800" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">
+<span
+	class="pr-u-marginInlineEnd800 pr-u-focusVisible pr-u-borderRadiusSmall"
+	luTooltip="… mais apparait là !"
+	[luTooltipAnchor]="target"
+>
 	Tooltip déclenché ici…
 </span>
 <span aria-hidden="true" #target class="lucca-icon icon-target"></span>

@@ -1,5 +1,27 @@
 # index-table
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - IndexTableActionFileComponent (component)
+  - IndexTableActionComponent (component)
+  - IndexTableBodyComponent (component)
+  - IndexTableRowCellHeaderComponent (component)
+  - IndexTableRowCellComponent (component)
+  - IndexTableFootComponent (component)
+  - IndexTableHeadComponent (component)
+  - IndexTableRowComponent (component)
+  - IndexTableComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -49,16 +71,18 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `align` | `align` | `IndexTableAlign \| null` | `null` | — | — | — |
+| `sort` | `sort` | `IndexTableSort \| null` | `null` | — | — | — |
 | `selectable` | `selectable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes du tableau sélectionnables via des checkbox. |
 | `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | Masque les cellules d’en-tête du tableau. |
 | `actions` | `actions` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `inlineSize` | `inlineSize` | `number` | `0` | — | `luNumberAttribute` | — |
+| `sortWithEllipsis` | `sortWithEllipsis` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
-#### Models (two-way binding)
+#### Outputs
 
-| Property | Type | Required | Notes |
-|----------|------|----------|-------|
-| `sort` | `IndexTableSort \| null` | — | — |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `sortChange` | `sortChange` | `IndexTableSort` | — |
 
 ### IndexTableRowCellComponent (component)
 
@@ -123,11 +147,23 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 - 📝 [Code & implementation](./index-table.component.md)
 - 🎨 [Design guidelines](./index-table.design.md)
 - 🎯 [Figma design tokens](./index-table.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+`IndexTableRowCellHeaderComponent` :
+  + `sort` : IndexTableSort | null
+  + (output) `sortChange` : IndexTableSort
+  - (model) `sort`
+
+### 22.0.5
+
+`IndexTableRowCellHeaderComponent` :
+  + `sortWithEllipsis` : boolean
 
 ### 22.0.0
 
@@ -149,6 +185,35 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
   ~ `empty` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Changed
+
+- `sort` on `th[luIndexTableCell]` is now an input paired with a `sortChange` output that never emits `null`. `[(sort)]` keeps working, but `sort` is no longer a `ModelSignal` and can't be set from outside with `.set()`.
+
+#### 22.0.5
+
+##### Added
+
+- `sortWithEllipsis` input on `th[luIndexTableCell]` to truncate a long sortable header label with an ellipsis and show the full label in a tooltip (`tableSortable mod-ellipsis`).
+
+#### 22.0.1
+
+##### Fixed
+
+- `lu-tag` and `pr-tag` in cells are now top-aligned, like `.tag`.
+
+#### 22.0.0
+
+##### Added
+
+- `mixed` input on `tr[luIndexTableRow]` to display the row checkbox in the indeterminate state.
+
+##### Fixed
+
+- Empty pagination wrapper no longer takes space below the table.
+- Ghost buttons used as row actions no longer change size nor keep their icon visible while loading.
 
 #### 21.3.0
 

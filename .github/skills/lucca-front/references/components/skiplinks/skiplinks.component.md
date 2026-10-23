@@ -1,6 +1,6 @@
 # skiplinks — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-skiplinks-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-skiplinks-angular-basic--docs)
 
 ## Angular
 
@@ -34,11 +34,11 @@ L'input `luSkipLinkLabel` est obligatoire : il renseigne l'intitulé du lien aff
 
 ```js
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LuSkipLinksComponent, SkipLinkDirective } from '@lucca-front/ng/a11y';
+import { LuSkipLinksComponent, luSkipLinksTranslations, SkipLinkDirective } from '@lucca-front/ng/a11y';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
-import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
+import { LuSkipLinksComponent, SkipLinkDirective } from '@lucca-front/ng/a11y';
 ```
 
 ```html

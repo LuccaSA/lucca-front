@@ -1,5 +1,19 @@
 # calendar
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - LuCalendarInputComponent (component)
+  - Injection tokens
+  - Modules dépréciés
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -9,7 +23,7 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 ## Basic Usage
 
 ```html
-<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [date]="currentMonth" mode="year" (dateClicked)="selected($event)" />
+<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [date]="currentMonth" mode="year" (dateClicked)="dateClicked($event)" (nextPage)="nextPage()" (previousPage)="previousPage()" />
 ```
 
 ## API Reference
@@ -23,10 +37,16 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `min` | `min` | `D` | — | — | — | — |
-| `max` | `max` | `D` | — | — | — | — |
-| `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | — |
-| `startOn` | `startOn` | `D` | — | — | — | — |
+| `min` | `min` | `D` | — | — | — | Date minimale sélectionnable. |
+| `max` | `max` | `D` | — | — | — | Date maximale sélectionnable. |
+| `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | Granularité de la valeur sélectionnée. |
+| `startOn` | `startOn` | `D` | — | — | — | Date affichée par le calendrier en l’absence de valeur. Par défaut : aujourd’hui. |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CALENDARINPUT_TRANSLATIONS` | `unknown` | — |
 
 ### Modules dépréciés
 
@@ -37,11 +57,15 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 - 📝 [Code & implementation](./calendar.component.md)
 - 🎨 [Design guidelines](./calendar.design.md)
 - 🎯 [Figma design tokens](./calendar.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-date-calendar--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date-calendar--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_CALENDARINPUT_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
@@ -50,6 +74,18 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 ~ `startOn` : défaut this._adapter.forgeToday() → ∅
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Changed
+
+- `ranges` with a single bound are now rendered as open-ended when no date is hovered: every period from the start onwards (or up to the end) is highlighted, and only the known bound is selected.
+
+#### 22.0.0
+
+##### Added
+
+- `week` value on the `mode` input: the calendar displays week numbers, selects a whole week and emits its first day.
 
 #### 21.1.0
 

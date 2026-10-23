@@ -22,7 +22,7 @@ import { SkipLinkDirective, LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `luSkipLinkLabel` | `luSkipLinkLabel` | `string` | — | ✅ | — | — |
+| `luSkipLinkLabel` | `luSkipLinkLabel` | `string` | — | ✅ | — | Libellé du lien d’évitement affiché dans `lu-skip-links`. |
 | `luSkipLinkTarget` | `luSkipLinkTarget` | `string` | `''` | — | — | — |
 
 ### LuSkipLinksComponent (component)
@@ -52,11 +52,11 @@ import { SkipLinkDirective, LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 
 - 📝 [Code & implementation](./skiplinks.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-skiplinks-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-skiplinks-angular-basic--docs)
 
 ## Changelog
 
-_Aucun changement d'API entre v21.4.2 et v22.0.0._
+_Aucun changement d'API entre v21.4.4 et v22.1.0._
 
 ### Notes de release (ZeroHeight)
 

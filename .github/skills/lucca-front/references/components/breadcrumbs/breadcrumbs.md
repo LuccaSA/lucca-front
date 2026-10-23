@@ -9,7 +9,7 @@ import { BreadcrumbsLinkDirective, BreadcrumbsComponent } from '@lucca-front/ng/
 ## Basic Usage
 
 ```html
-<lu-breadcrumbs > <a *luBreadcrumbsLink routerLink="/" ariaCurrentWhenActive="page">You</a> <a *luBreadcrumbsLink ariaCurrentWhenActive="page" href="#2">are</a> <a *luBreadcrumbsLink aria-current="page">here</a>
+<lu-breadcrumbs > <a *luBreadcrumbsLink routerLink="/">You</a> <a *luBreadcrumbsLink href="#2">are</a> <a *luBreadcrumbsLink aria-current="page">here</a>
 </lu-breadcrumbs>
 ```
 
@@ -28,18 +28,28 @@ import { BreadcrumbsLinkDirective, BreadcrumbsComponent } from '@lucca-front/ng/
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `disableCompact` | `disableCompact` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `disableCompact` | `disableCompact` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive l’affichage compact, appliqué automatiquement lorsque le fil d’Ariane contient 2 liens ou moins. |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_BREADCRUMBS_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./breadcrumbs.component.md)
 - 🎨 [Design guidelines](./breadcrumbs.design.md)
 - 🎯 [Figma design tokens](./breadcrumbs.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-breadcrumbs-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-breadcrumbs-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_BREADCRUMBS_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

@@ -17,13 +17,19 @@ import { SwitchInputComponent } from '@lucca-front/ng/forms';
 - 📝 [Code & implementation](./switchfield.component.md)
 
 - 🎯 [Figma design tokens](./switchfield.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-switchfield-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-switchfield-angular--docs)
 
 ## Changelog
 
-_Aucun changement d'API entre v21.4.2 et v22.0.0._
+_Aucun changement d'API entre v21.4.4 et v22.1.0._
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.6
+
+##### Fixed
+
+- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
 
 #### 21.1.0
 

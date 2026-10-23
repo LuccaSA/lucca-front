@@ -7,9 +7,21 @@
 
 ## Changelog
 
-_Aucun changement d'API entre v21.4.2 et v22.0.0._
+_Aucun changement d'API entre v21.4.4 et v22.1.0._
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Fixed
+
+- Nil titles are no longer passed to the translate service.
+
+#### 21.4.1
+
+##### Added
+
+- `appTitle` of `provideLuTitleStrategy` now also accepts a `Signal<string>`.
 
 #### 21.3.1
 

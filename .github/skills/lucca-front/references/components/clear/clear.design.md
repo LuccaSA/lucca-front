@@ -10,7 +10,7 @@
 
 De manière générale, le Clear n’apparaît que lorsqu’une valeur est saisie ou sélectionnée dans un champ optionnel. Si le champ est obligatoire, alors on ne permet pas à l'utilisateur d'en effacer le contenu.
 
- Il ne doit pas être visible quand le champ est vide (avec ou sans placeholder).
+ Il ne doit pas être visible quand le champ est vide (avec ou sans Placeholder).
 
 ## Dans un Textfield
 

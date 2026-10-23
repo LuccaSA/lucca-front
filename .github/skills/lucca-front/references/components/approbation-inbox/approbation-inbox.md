@@ -1,5 +1,24 @@
 # approbation-inbox
 
+**Sommaire**
+
+- Import
+- API Reference
+  - ApprobationInboxDetailMainBlockComponent (component)
+  - ApprobationInboxHeaderComponent (component)
+  - ApprobationInboxDetailComponent (component)
+  - ApprobationInboxLinkComponent (component)
+  - ApprobationInboxGroupComponent (component)
+  - ApprobationInboxIconsComponent (component)
+  - ApprobationInboxItemComponent (component)
+  - ApprobationInboxSubtleComponent (component)
+  - ApprobationInboxListComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+
 ## Import
 
 ```typescript
@@ -16,7 +35,7 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `string` | — | ✅ | — | Titre affiché dans l’en-tête du composant. |
+| `label` | `label` | `string` | — | ✅ | — | Titre affiché dans l’en-tête du composant. Requis. |
 
 ### ApprobationInboxHeaderComponent (component)
 
@@ -26,8 +45,8 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `string` | — | ✅ | — | Titre affiché dans l’en-tête du composant. |
-| `delegatedBy` | `delegatedBy` | `string \| null` | `null` | — | — | Nom de la personne à l’origine de la délégation si elle à lieu. |
+| `label` | `label` | `string` | — | ✅ | — | Titre affiché dans l’en-tête du composant. Requis. |
+| `delegatedBy` | `delegatedBy` | `string \| null` | `null` | — | — | Nom de la personne à l’origine de la délégation si elle a lieu. |
 
 ### ApprobationInboxDetailComponent (component)
 
@@ -47,7 +66,7 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `current` | `current` | `boolean` | `false` | — | `booleanAttribute` | Définit le lien (ou le bouton) comme l’élément courant affiché. |
+| `current` | `current` | `boolean` | `false` | — | `booleanAttribute` | — |
 
 ### ApprobationInboxGroupComponent (component)
 
@@ -58,7 +77,7 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `label` | `label` | `string` | — | ✅ | — | Titre affiché dans l’en-tête du composant. |
+| `label` | `label` | `string` | — | ✅ | — | Titre affiché dans l’en-tête du composant. Requis. |
 
 #### Models (two-way binding)
 
@@ -106,11 +125,11 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `label` | `label` | `PortalContent` | `getIntl(LU_APPROBATION_INBOX_LIST_TRANSLATIONS).label` | — | — | Titre affiché dans l’en-tête du composant. |
+| `label` | `label` | `PortalContent` | `getIntl(LU_APPROBATION_INBOX_LIST_TRANSLATIONS).label` | — | — | Titre affiché dans l’en-tête du composant. Requis. |
 | `selectable` | `selectable` | `boolean` | `false` | — | `booleanAttribute` | Active la sélection multiple |
-| `detailsComponent` | `detailsComponent` | `ApprobationInboxDetailComponent` | — | ✅ | — | — |
+| `detailsComponent` | `detailsComponent` | `ApprobationInboxDetailComponent` | — | ✅ | — | Référence du composant lu-approbation-inbox-detail associé, affiché dans une modale lorsqu’un élément est ouvert sous le… |
 | `emptyIllustration` | `emptyIllustration` | `BubbleIllustration \| string` | `'magnifyingGlass'` | — | — | Illustration affichée lorsque la liste est vide. |
-| `emptyResetButton` | `emptyResetButton` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `emptyResetButton` | `emptyResetButton` | `boolean` | `false` | — | `booleanAttribute` | Affiche un bouton de réinitialisation lorsque la liste est vide. |
 
 #### Outputs
 
@@ -120,15 +139,29 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 | `resetEvent` | `resetEvent` | `void` | — |
 | `forwardEvent` | `forwardEvent` | `void` | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS` | `unknown` | — |
+| `LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS` | `unknown` | — |
+| `LU_APPROBATION_INBOX_LIST_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./approbation-inbox.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-approbation-inbox-angular-detail--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-approbation-inbox-angular-detail--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS` : unknown
++ token `LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS` : unknown
++ token `LU_APPROBATION_INBOX_LIST_TRANSLATIONS` : unknown
 
 ### 22.0.0
 
