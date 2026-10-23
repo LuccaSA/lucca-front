@@ -156,6 +156,45 @@ const nomHtml = (e) => {
 	return { html: '<!-- TODO: write this Nom cell, see SKILL.md -->', key };
 };
 
+// --- Search links: each Nom token links to a GitHub code search of the org's consumers ---
+// GitHub code search regexes have no lookaround: a token boundary is a non-token character or a line edge.
+const ghBefore = '(^|[^\\w-])';
+const ghAfter = '([^\\w-]|$)';
+// The `.` of a class is dropped: markup writes `class="name"`, not `.name`.
+const ghToken = (src) =>
+	ghBefore +
+	src
+		.replace(/^\\\./, '')
+		.replace(/\(\?!\[\\w-\]\)/g, ghAfter)
+		.replace(/\\b/g, ghAfter)
+		// `\@` in a Sass selector is a plain `@` in markup.
+		.replace(/\\\\@/g, '\\\\?@');
+const ghCombo = (src) => {
+	const m = src.match(comboRe);
+	return (m ? [m[1], m[2]] : [src]).map((s) => `/${ghToken(s)}/`).join(' AND ');
+};
+// A displayed token: `(a|b)` groups stay alternations, `…` crops fall back to the entry patterns.
+const ghDisplayed = (text) => `/${ghBefore}${text.replace(/^\./, '').replace(/[.*+[\]{}^$\\]/g, '\\$&')}${ghAfter}/`;
+const searchUrl = (q) => `https://github.com/search?q=${encodeURIComponent(`${q} org:LuccaSA NOT repo:LuccaSA/lucca-front`)}&amp;type=code`;
+const unesc = (t) => t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+const linkNom = (html, e) => {
+	const sources = e.groups.flatMap((g) => g.sources);
+	const fallback = sources.map((s) => (sources.length > 1 && comboRe.test(s) ? `(${ghCombo(s)})` : ghCombo(s))).join(' OR ');
+	const link = (q, code) => `<a href="${searchUrl(q)}">${code}</a>`;
+	return html
+		.replace(/<a href="https:\/\/github\.com\/search[^"]*">(<code>[\s\S]*?<\/code>)<\/a>/g, '$1')
+		.replace(/<li>([\s\S]*?)<\/li>/g, (whole, inner) => {
+			const codes = [...inner.matchAll(/<code>([\s\S]*?)<\/code>/g)].map((m) => unesc(m[1]));
+			if (!codes.length) return whole;
+			const query = codes.some((c) => c.includes('…'))
+				? fallback
+				: codes.length === 2 && inner.includes('<strong>+</strong>')
+					? codes.map(ghDisplayed).join(' AND ')
+					: ghDisplayed(codes[0]);
+			return `<li>${inner.replace(/<code>[\s\S]*?<\/code>/g, (code) => link(query, code))}</li>`;
+		});
+};
+
 const indent = (html, tabs) =>
 	html
 		.split('\n')
@@ -167,7 +206,7 @@ const row = (e) => {
 	const nom = nomHtml(e);
 	return [
 		'\t\t<tr>',
-		cell(nom.html, nom.key ? ` data-pattern="${escAttr(nom.key)}"` : ''),
+		cell(linkNom(nom.html, e), nom.key ? ` data-pattern="${escAttr(nom.key)}"` : ''),
 		`\t\t\t<td>${e.versionDeprecated ?? '–'}</td>`,
 		`\t\t\t<td>${e.versionDeleted ?? '–'}</td>`,
 		cell(actionsHtml(e)),

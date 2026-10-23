@@ -116,6 +116,12 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
     alphabetically — `gap, columnGap, rowGap, margin, marginBlock, …, padding, …`.
   - Lookahead "combined" patterns: one `<li>` per combination —
     `<code>.button</code> <strong>+</strong> <code>.mod-icon</code>`.
+- **Each `Nom` token links to a GitHub code search of the org, lucca-front excluded.**
+  - The script adds the links: write hand-made cells without them.
+  - The search is a regex: GitHub has no lookaround, so token boundaries become `(^|[^\w-])` and `([^\w-]|$)`.
+  - A class searches without its `.`: markup writes `class="name"`.
+  - A combination searches both tokens with `AND`.
+  - A cropped item (`…`) searches the entry's own patterns.
 - **Comments inside an `objectPattern` array are content**: each becomes a
   markdown `<p>` (`**bold**` → `<strong>`, links → `<a>`) before the `<ul>` it
   labels; a standalone comment is a lone `<p>`.
