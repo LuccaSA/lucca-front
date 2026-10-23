@@ -386,10 +386,11 @@ export default [
 		`,
 	},
 	{
+		// Any combination of .table-head-row-cell and .mod-columnSticky-shadowMask, with any non-whitespace character between
 		// SEE https://regex101.com/r/HoanMW.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/69d12b5e0e526a763ebf43d8d4443bd35addb8f9/packages/scss/src/components/tableStickedDeprecated/mods.scss#L65.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
-		objectPattern: /\.mod-columnSticky-shadowMask(?![\w-])/,
+		objectPattern: /(?=\S*\.table-head-row-cell(?![\w-]))(?=\S*\.mod-columnSticky-shadowMask(?![\w-]))\S*/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 		actions: `Remplacer par \`.mod-stickyColumn-shadowMask\`.`,
@@ -447,7 +448,10 @@ export default [
 	{
 		// SEE https://regex101.com/r/Ct4jxl.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/d66db6850f4393a4b7dbe61c15207d1185516ec8/packages/scss/src/components/navside/mods.scss#L11.
-		objectPattern: /\.mod-withMenuCompact(?![\w-])/,
+		objectPattern: [
+			// Largeur compacte de `.navSide`, sur n’importe quel élément de la page
+			/\.mod-withMenuCompact(?![\w-])/,
+		],
 		versionDeprecated: '18.3.0',
 		urls: {
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
@@ -526,9 +530,10 @@ export default [
 	},
 	{
 		// Page header layout for the deprecated `.menu`
+		// Any combination of .pageHeader and .mod-withMenu, with any non-whitespace character between
 		// SEE https://regex101.com/r/aF0wRq.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/63324c9df3d6955360f0d0e2843ea441d9f8f92f/packages/scss/src/components/pageHeader/index.scss#L7.
-		objectPattern: /\.mod-withMenu(?![\w-])/,
+		objectPattern: /(?=\S*\.pageHeader(?![\w-]))(?=\S*\.mod-withMenu(?![\w-]))\S*/,
 		versionDeprecated: '19.3.0',
 		actions: `
 			* remplacement : \`*withHorizontalNavigation\`
@@ -927,9 +932,10 @@ export default [
 		`,
 	},
 	{
+		// Any combination of .dialog and .mod-neutralBackground, with any non-whitespace character between
 		// SEE https://regex101.com/r/DWKCa8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/fd1d1cc502f9468a3e01a90f992978c36ac113d4/packages/scss/src/components/dialog/index.scss#L40.
-		objectPattern: /\.mod-neutralBackground(?![\w-])/,
+		objectPattern: /(?=\S*\.dialog(?![\w-]))(?=\S*\.mod-neutralBackground(?![\w-]))\S*/,
 		versionDeprecated: '22.0.0',
 		actions: `
 			* sélecteur : \`.dialog.mod-surfaceDefault\`
