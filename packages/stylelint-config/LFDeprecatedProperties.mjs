@@ -379,4 +379,154 @@ export default [
 				* input Angular : \`foregroundStartEnd\`
 		`,
 	},
+	{
+		// SEE https://regex101.com/r/aK08Za.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/filterBar/mods.scss#L32.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/scrollBox/states.scss#L10.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/90aa5c65c1644ce779cdf86ae85530e212b79c71.
+		objectPattern: /--components-(filterBar-extremitiesDisplay|scrollBox-wrap)(?![\w-])/,
+		versionDeleted: '20.1.0',
+	},
+	{
+		// SEE https://regex101.com/r/JRoWlQ.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/9eb5311e28d89a9a3f74069d4922c3cb58611464/packages/scss/src/components/box/mods.scss#L47.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/9eb5311e28d89a9a3f74069d4922c3cb58611464/packages/scss/src/components/fileEntry/mods.scss#L9.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/bb80e0bf0e1f3ffaaff8b4ef573f653dc1d3472e.
+		objectPattern: /--components-(box-(arrow-horizontalMargin|border-radius)|fileEntry-status-borderRadius)(?![\w-])/,
+		versionDeleted: '20.2.0',
+		actions: `Utiliser les tokens \`--pr-t-border-radius-*\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/G1g20C.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c4bab5a387fa9bc7d52f45d3f7b336820dd1fba8/packages/scss/src/components/dropdown/vars.scss#L4.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/73f0b8df78b82c137d2a9e3109afb9ccf3710487.
+		objectPattern: /--components-dropdown-(max-height|max-width|min-width|option-action(Background|Color|Events)|optionColor)(?![\w-])/,
+		versionDeleted: '20.3.0',
+		actions: `
+			* \`max-height\` ⇒ \`maxBlockSize\`
+			* \`max-width\` ⇒ \`maxInlineSize\`
+			* \`min-width\` ⇒ \`minInlineSize\`
+			* \`option-actionBackground\` ⇒ \`list-option-action-backgroundColor\`
+			* \`option-actionColor\` ⇒ \`list-option-action-color\`
+			* \`option-actionEvents\` et \`optionColor\` : sans remplacement
+		`,
+	},
+	{
+		// SEE https://regex101.com/r/cnSAat.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c4bab5a387fa9bc7d52f45d3f7b336820dd1fba8/packages/scss/src/components/tag/mods.scss#L25.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/93518054cb3bc3edc5375e9beef87d458e2da8a6.
+		objectPattern: /--components-tag-iconBottom(?![\w-])/,
+		versionDeleted: '20.3.0',
+	},
+	{
+		// SEE https://regex101.com/r/C1r4Cn.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c950a979482bda7cd43333f4cc31aadd37ed8e3a/packages/scss/src/components/calloutPopover/mods.scss#L27.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/4f579d6c87c6dc65382bcbfba9a48cd8d2cbf892.
+		objectPattern: /--components-calloutPopover-content-margin(?![\w-])/,
+		versionDeleted: '21.0.0',
+	},
+	{
+		// SEE https://regex101.com/r/AnEdZn.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c950a979482bda7cd43333f4cc31aadd37ed8e3a/packages/scss/src/components/dataTable/vars.scss#L14.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/f92d243dfe61cd440720118448b214844edee954.
+		objectPattern: /--components-dataTable-overflow(?![\w-])/,
+		versionDeleted: '21.0.0',
+	},
+	{
+		// SEE https://regex101.com/r/C9CUAp.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c950a979482bda7cd43333f4cc31aadd37ed8e3a/packages/scss/src/components/filterPill/states.scss#L69.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/03c7cf23f5d3761a919381e6905ca07e0958305c.
+		objectPattern: /--components-filterPill-clear-display(?![\w-])/,
+		versionDeleted: '21.0.0',
+		actions: `Remplacer par \`--components-clear-display\` du composant Clear.`,
+	},
+	{
+		// SEE https://regex101.com/r/npX0eh.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/75af93ed2e949cc8b35ff40bcd8738596c398bf3/packages/scss/src/components/inputFramed/mods.scss#L6.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/8cb4c7a43ff67906ab8affeb079db4cd763018f7.
+		objectPattern: /--components-inputFramed-header-label-fontWeight(?![\w-])/,
+		versionDeleted: '21.1.0',
+	},
+	{
+		// SEE https://regex101.com/r/WtJsNP.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/75af93ed2e949cc8b35ff40bcd8738596c398bf3/packages/scss/src/components/timepicker/mods.scss#L5.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/759e426e5fb0d8b8614da5b4e95255bff31f5e0f.
+		objectPattern: /--components-timepicker-paddingInput-(block|inline)(?![\w-])/,
+		versionDeleted: '21.1.0',
+		actions: `Remplacer par \`--components-timepicker-input-padding-(block|inline)\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/iAXt8A.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/bb7fe9c16f8e2daee9602c6964724ad38a806944/packages/scss/src/components/emptyState/vars.scss#L15.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/ecb3bc42bee4e3c1d1c36d440a38ba0efa81dd06.
+		objectPattern: /--(background|foreground)-(left|right)-01(?![\w-])/,
+		versionDeleted: '21.2.0',
+	},
+	{
+		// SEE https://regex101.com/r/KBcVWs.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/bb7fe9c16f8e2daee9602c6964724ad38a806944/packages/scss/src/components/loading/component.scss#L17.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/c4c9231bb7df90f2def39a85ea7bb1a40b34128b.
+		objectPattern: /--components-loading-padding(?![\w-])/,
+		versionDeleted: '21.2.0',
+	},
+	{
+		// SEE https://regex101.com/r/kusrdB.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/14c0ed50fb2720526069764f36028510e1d9851a/packages/scss/src/components/pageHeader/mods.scss#L40.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/519a1d0cc0022b69f136795bc47f90565180c537.
+		objectPattern: /--components-pageHeader-content-(action-flexShrink|flexWrap)(?![\w-])/,
+		versionDeleted: '21.3.0',
+	},
+	{
+		// SEE https://regex101.com/r/ZjwOCu.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/14c0ed50fb2720526069764f36028510e1d9851a/packages/scss/src/components/filterPill/states.scss#L111.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/0212e264c42b9d4592399fc47bbd73be3c2f0327.
+		objectPattern: /--components-filterPill-display(?![\w-])/,
+		versionDeleted: '21.3.0',
+	},
+	{
+		// SEE https://regex101.com/r/9hVovc.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/14c0ed50fb2720526069764f36028510e1d9851a/packages/scss/src/components/timepicker/mods.scss#L5.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/5c8278c2f8fc871a6beb1993803d05d544f7c435.
+		objectPattern: /--components-timepicker-display-padding-(block|inline)(?![\w-])/,
+		versionDeleted: '21.3.0',
+		actions: `Remplacer par \`--components-timepicker-display-inset-(block|inline)\`.`,
+	},
+	{
+		// The typo shipped as the fallback of `--components-richTextField-content-minHeight`
+		// SEE https://regex101.com/r/X2AuBX.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/14c0ed50fb2720526069764f36028510e1d9851a/packages/scss/src/components/richText/vars.scss#L12.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/e574d8d7dde020fa22d21ff4d5162e2cd2fdff55.
+		objectPattern: /--components-richTextField-minHeigh(?![\w-])/,
+		versionDeleted: '21.3.1',
+		actions: `Remplacer par \`--components-richTextField-minHeight\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/S9RZi0.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c2efa49aefd376b8f45a311aaedb299d534e74e2/packages/scss/src/components/activityFeed/states.scss#L5.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/ca6461d40ecbe63bb5dd61f47185d1d66a0511ab.
+		objectPattern: /--components-activityFeed-content-update-(icon-)?display(?![\w-])/,
+		versionDeleted: '22.0.0',
+		actions: `Remplacer par \`--components-activityFeed-content-update-item-(icon-)?display\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/ymHwKF.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c2efa49aefd376b8f45a311aaedb299d534e74e2/packages/scss/src/components/dropdown/states.scss#L4.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/4d940c5754728a00d9410eb01cedbabfd1e004dc.
+		objectPattern: /--components-dropdown-list-option-action-pointerEvents(?![\w-])/,
+		versionDeleted: '22.0.0',
+	},
+	{
+		// SEE https://regex101.com/r/WzOw25.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c2efa49aefd376b8f45a311aaedb299d534e74e2/packages/scss/src/components/listboxOption/mods.scss#L58.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/2813c500edb19adc570285fe72837ef5aba9016e.
+		objectPattern: /--components-listboxOption-content-opacity(?![\w-])/,
+		versionDeleted: '22.0.0',
+	},
+	{
+		// SEE https://regex101.com/r/7wE80G.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/be7004c7c16edd0cbb658c01e46781554bec1ae4/packages/scss/src/components/priorityLevels/mods.scss#L20.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/9ba2d000396a4c4f81d71309dd8eb9c71fc5a913.
+		objectPattern: /--components-priorityLevels-(font|gap|minBlockSize|icon-color[1-3])(?![\w-])/,
+		actions: `Remplacer par \`--components-priorityLevel-*\`.`,
+	},
 ];

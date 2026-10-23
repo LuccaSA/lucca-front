@@ -899,4 +899,93 @@ export default [
 			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
 	},
+	{
+		// SEE https://regex101.com/r/BXnpmG.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/filterBar/component.scss#L34.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/90aa5c65c1644ce779cdf86ae85530e212b79c71.
+		objectPattern: /\.filterBar-scrollBox-(first|last)(?![\w-])/,
+		versionDeleted: '20.1.0',
+	},
+	{
+		// SEE https://regex101.com/r/N2e4Ox.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/indexTable/mods.scss#L301.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/b1cecc4633547398360f37a4a761ac11545e4aa3.
+		objectPattern: /\.indexTable-body-row-cell-subAction(DropdownTrigger)?(?![\w-])/,
+		versionDeleted: '20.1.0',
+	},
+	{
+		// Any combination of .userTile and .mod-nameOnly, with any non-whitespace character between
+		// SEE https://regex101.com/r/M2HhEJ.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/userTile/index.scss#L7.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/22716b6cf5747cdc3172d2e33b1d3a45ecad9ec6.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
+		objectPattern: /(?=\S*\.userTile(?![\w-]))(?=\S*\.mod-nameOnly(?![\w-]))\S*/,
+		versionDeprecated: '18.2.0',
+		versionDeleted: '20.1.0',
+	},
+	{
+		// SEE https://regex101.com/r/vgycmM.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/avatar/mods.scss#L89.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/dc0da551b981fe0e351baf56e57dce711d7e6880.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
+		objectPattern: /\.userPicture-initials(?![\w-])/,
+		versionDeprecated: '18.2.0',
+		versionDeleted: '20.1.0',
+	},
+	{
+		// SEE https://regex101.com/r/3NshwA.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c950a979482bda7cd43333f4cc31aadd37ed8e3a/packages/scss/src/components/calloutPopover/component.scss#L46.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/4f579d6c87c6dc65382bcbfba9a48cd8d2cbf892.
+		objectPattern: /\.calloutPopover-overlay-head-icon(?![\w-])/,
+		versionDeleted: '21.0.0',
+		actions: `Remplacer par \`.calloutPopover-overlay-icon\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/bw43dW.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c950a979482bda7cd43333f4cc31aadd37ed8e3a/packages/scss/src/components/multiSelect/mods.scss#L40.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/89b70c7aa5e7990c258c7f47c01e2bda12e68f3b.
+		objectPattern: /\.multipleSelect-displayer-numericBadge(?![\w-])/,
+		versionDeleted: '21.0.0',
+		actions: `Remplacer par le composant \`lu-chip\`, utilisé par le displayer depuis la 21.0.`,
+	},
+	{
+		// SEE https://regex101.com/r/W4YQT4.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c950a979482bda7cd43333f4cc31aadd37ed8e3a/packages/scss/src/components/richText/component.scss#L105.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/9c09d4c3ee58af16441a4416821950f4b13a8b38.
+		objectPattern: /\.richTextField-toolbar-chips-item(?![\w-])/,
+		versionDeleted: '21.0.0',
+		actions: `Remplacer par \`.richTextField-toolbar-chips-chip\`.`,
+	},
+	{
+		// Any combination of .pagination and the .mod-mods typo, with any non-whitespace character between
+		// SEE https://regex101.com/r/aNEGrV.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/75af93ed2e949cc8b35ff40bcd8738596c398bf3/packages/scss/src/components/pagination/index.scss#L10.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/c8281421ca1a8b59693374c6dbfe1f01370adbd1.
+		objectPattern: /(?=\S*\.pagination(?![\w-]))(?=\S*\.mod-mods(?![\w-]))\S*/,
+		versionDeleted: '21.1.4',
+		actions: `Remplacer par \`.mod-compact\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/qthxj5.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/14c0ed50fb2720526069764f36028510e1d9851a/packages/scss/src/components/filterPill/component.scss#L122.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/0212e264c42b9d4592399fc47bbd73be3c2f0327.
+		objectPattern: /\.filterPill-combobox(?![\w-])/,
+		versionDeleted: '21.3.0',
+		actions: `Remplacer par \`.filterPill-value\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/MzbUXJ.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c2efa49aefd376b8f45a311aaedb299d534e74e2/packages/scss/src/components/activityFeed/component.scss#L78.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/ca6461d40ecbe63bb5dd61f47185d1d66a0511ab.
+		objectPattern: /\.activityFeed-content-update-(after|before|icon)(?![\w-])/,
+		versionDeleted: '22.0.0',
+		actions: `Remplacer par \`.activityFeed-content-update-item-(after|before|icon)\`.`,
+	},
+	{
+		// SEE https://regex101.com/r/UwHko8.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/be7004c7c16edd0cbb658c01e46781554bec1ae4/packages/scss/src/components/priorityLevels/index.scss#L3.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/9ba2d000396a4c4f81d71309dd8eb9c71fc5a913.
+		objectPattern: /\.priorityLevels(-icon)?(?![\w-])/,
+		actions: `Remplacer par \`.priorityLevel\` et \`.priorityLevel-icon\`.`,
+	},
 ];
