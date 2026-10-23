@@ -11,6 +11,27 @@
 			@include neutral;
 		}
 
+		&.mod-sunken {
+			@include sunken;
+		}
+
+		&.mod-fancyLight {
+			@include fancyLight;
+		}
+
+		&.mod-fancyDark {
+			@include fancyDark;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&:has(.box-illustrations) {
+			@include illustrations;
+		}
+
+		// .mod-withArrow is deprecated
 		&.mod-withArrow {
 			@include withArrow;
 		}

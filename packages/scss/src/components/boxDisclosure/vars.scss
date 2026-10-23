@@ -1,0 +1,13 @@
+@mixin vars {
+	--components-boxDisclosure-background: var(--pr-t-elevation-surface-raised);
+	--components-boxDisclosure-padding: var(--pr-t-spacings-200);
+	--components-boxDisclosure-details-padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
+	--components-boxDisclosure-borderRadius: var(--pr-t-border-radius-structure);
+	--components-boxDisclosure-gap: var(--pr-t-spacings-150);
+	--components-boxDisclosure-title-font: var(--pr-t-font-heading-4);
+	--components-boxDisclosure-description-font: var(--pr-t-font-body-S);
+	--components-boxDisclosure-metadata-font: var(--pr-t-font-body-S);
+	--components-boxDisclosure-hover-borderColor: var(--palettes-neutral-100);
+	--components-boxDisclosure-divider: var(--commons-divider-border);
+	--components-boxDisclosure-divider-marginInline: var(--pr-t-spacings-200);
+}

@@ -1,5 +1,32 @@
 @mixin neutral {
-	--components-box-background: var(--palettes-neutral-25);
+	--components-box-background: var(--pr-t-elevation-surface-default);
+}
+
+@mixin sunken {
+	--components-box-background: var(--pr-t-elevation-surface-sunken);
+}
+
+@mixin fancyLight {
+	--components-box-background: var(--palettes-50, var(--palettes-product-50));
+}
+
+@mixin fancyDark {
+	--components-box-background: var(--palettes-100, var(--palettes-product-100));
+	--palettes-assets-primary: var(--components-box-bubble-primary-dark);
+	--palettes-assets-secondary: var(--components-box-bubble-secondary-dark);
+	--palettes-assets-brand: var(--components-box-bubble-brand-dark);
+}
+
+@mixin S {
+	--components-box-title-font: var(--pr-t-font-heading-4);
+	--components-box-description-font: var(--pr-t-font-body-S);
+	--components-box-illustrations-width: 82px;
+	--components-box-illustrations-height: 68px;
+}
+
+@mixin illustrations {
+	overflow: hidden;
+	padding-inline-end: calc(var(--components-box-illustrations-width) + var(--components-box-padding-inline));
 }
 
 @mixin toggle {
