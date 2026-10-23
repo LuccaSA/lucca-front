@@ -31,7 +31,7 @@ export default {
 			control: { type: 'range', min: 32, max: 160, step: 8 },
 			if: { arg: 'circular', truthy: true },
 			description: 'Taille du composant pour sa forme circulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '40' } },
 		},
 		value: {
 			control: { type: 'range', min: 0, max: 100, step: 1 },
@@ -53,13 +53,15 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { alt, value, palette, ...inputs } = args;
+		const { alt, value, palette, size, ...inputs } = args;
+		// `size` only applies to the circular gauge, and is left out at its default value.
+		const sizeAttr = inputs['circular'] && size !== 40 ? ` size="${size}"` : ``;
 		const alternative = alt ? ` alt="${alt}"` : ``;
 		const val = value ? ` value="${value}"` : ``;
 		const pal = palette ? ` palette="${palette}"` : ``;
 
 		return {
-			template: `<lu-gauge${generateInputs(inputs, argTypes)}${alternative}${val}${pal} />`,
+			template: `<lu-gauge${generateInputs(inputs, argTypes)}${sizeAttr}${alternative}${val}${pal} />`,
 		};
 	},
 } as Meta;

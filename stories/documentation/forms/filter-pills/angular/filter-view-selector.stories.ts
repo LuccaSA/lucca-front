@@ -23,6 +23,43 @@ import { intlArgType } from '@/helpers/stories';
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterViewSelector/Angular',
 	argTypes: {
+		views: {
+			description: 'Liste des vues enregistrées proposées à la sélection. Obligatoire.',
+			control: false,
+			table: { category: 'inputs', type: { summary: 'T[]' } },
+		},
+		viewLabel: {
+			description: 'Fonction retournant le libellé d’une vue. Lit sa propriété <code>name</code> par défaut.',
+			control: false,
+			table: { category: 'inputs', type: { summary: '(view: T) => string' } },
+		},
+		optionComparer: {
+			description: 'Fonction de comparaison de deux vues pour la sélection. Même convention que <code>lu-simple-select</code> : comparaison structurelle par défaut.',
+			control: false,
+			table: { category: 'inputs', type: { summary: 'LuOptionComparer<T>' } },
+		},
+		optionKey: {
+			description: 'Identité stable d’une vue, utilisée pour le suivi du <code>@for</code>. Identité de l’objet par défaut.',
+			control: false,
+			table: { category: 'inputs', type: { summary: '(view: T) => unknown' } },
+		},
+		selectedView: {
+			description: 'Vue actuellement sélectionnée. Two-way.',
+			control: false,
+			table: { category: 'models', type: { summary: 'T | null' }, defaultValue: { summary: 'null' } },
+		},
+		renameView: {
+			description: 'Événement déclenché lorsque l’utilisateur demande à renommer une vue.',
+			action: 'renameView',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'T' } },
+		},
+		deleteView: {
+			description: 'Événement déclenché lorsque l’utilisateur demande à supprimer une vue.',
+			action: 'deleteView',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'T' } },
+		},
 		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
 	},
 	decorators: [
@@ -44,7 +81,7 @@ export default {
 		}),
 		applicationConfig({ providers: [provideHttpClient(), provideAnimations(), configureLuDialog(), { provide: LOCALE_ID, useValue: 'fr-FR' }] }),
 	],
-	render: () => {
+	render: (args) => {
 		const views: SavedView[] = [
 			{ id: 1, name: 'Product manager' },
 			{ id: 2, name: 'Product designer' },
@@ -59,8 +96,8 @@ export default {
 				selectedView: views[0],
 				example1: new Date(),
 				examplePeriod: null,
-				onRename: (view: SavedView) => console.log('rename', view),
-				onDelete: (view: SavedView) => console.log('delete', view),
+				renameView: (view: SavedView) => args['renameView']?.(view),
+				deleteView: (view: SavedView) => args['deleteView']?.(view),
 			},
 			// The consumer decides when to swap the segmented control for the view selector (5+ views here).
 			template: `<lu-filter-bar>
@@ -68,8 +105,8 @@ export default {
 		*luFilterPillAddonBefore
 		[views]="views"
 		[(selectedView)]="selectedView"
-		(renameView)="onRename($event)"
-		(deleteView)="onDelete($event)"
+		(renameView)="renameView($event)"
+		(deleteView)="deleteView($event)"
 	/>
 	<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false" />
