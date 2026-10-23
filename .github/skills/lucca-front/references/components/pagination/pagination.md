@@ -53,7 +53,6 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 - 📝 [Code & implementation](./pagination.component.md)
 
-- 🎯 [Figma design tokens](./pagination.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-pagination-angular--docs)
 
 ## Changelog

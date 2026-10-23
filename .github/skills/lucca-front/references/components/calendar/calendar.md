@@ -56,7 +56,6 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 
 - 📝 [Code & implementation](./calendar.component.md)
 - 🎨 [Design guidelines](./calendar.design.md)
-- 🎯 [Figma design tokens](./calendar.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date-calendar--docs)
 
 ## Changelog

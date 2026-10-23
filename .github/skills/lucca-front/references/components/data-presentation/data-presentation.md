@@ -37,7 +37,6 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 
 - 📝 [Code & implementation](./data-presentation.component.md)
 
-- 🎯 [Figma design tokens](./data-presentation.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-data-presentation-angular-basic--docs)
 
 ## Changelog

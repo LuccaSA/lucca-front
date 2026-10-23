@@ -77,7 +77,6 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateItemComponent, ActivityFee
 
 - 📝 [Code & implementation](./activity-feed.component.md)
 - 🎨 [Design guidelines](./activity-feed.design.md)
-
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-activity-feed-angular-basic--docs)
 
 ## Changelog

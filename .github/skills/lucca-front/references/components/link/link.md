@@ -54,7 +54,6 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 
 - 📝 [Code & implementation](./link.component.md)
 - 🎨 [Design guidelines](./link.design.md)
-- 🎯 [Figma design tokens](./link.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
 
 ## Changelog

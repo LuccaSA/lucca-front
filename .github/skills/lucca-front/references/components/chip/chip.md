@@ -65,7 +65,6 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 
 - 📝 [Code & implementation](./chip.component.md)
 
-- 🎯 [Figma design tokens](./chip.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-chip-angular-basic--docs)
 
 ## Changelog

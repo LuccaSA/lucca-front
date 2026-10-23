@@ -101,7 +101,6 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 
 - 📝 [Code & implementation](./popover.component.md)
 
-- 🎯 [Figma design tokens](./popover.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover--docs)
 
 ## Changelog

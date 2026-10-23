@@ -15,8 +15,7 @@ import { withTableOfContents } from './table-of-contents';
  * │   ├── components/<slug>/
  * │   │   ├── <slug>.md                  (API + trailing ## Changelog section)
  * │   │   ├── <slug>.component.md        (implementation notes + every story inline)
- * │   │   ├── <slug>.design.md           (all ZH design sections inline)
- * │   │   └── <slug>.figma.md
+ * │   │   └── <slug>.design.md           (all ZH design sections inline)
  * │   ├── types/<TypeName>.md
  * │   ├── documentation/<category>/<file>.md
  * │   ├── tools/<file>.md
@@ -100,25 +99,6 @@ export function writeDesign(skillsDir: string, slug: string, content: string): W
 export function writeComponentPage(skillsDir: string, slug: string, content: string): WriteResult {
 	validateSlug(slug);
 	return writeFile(componentBaseDir(skillsDir, slug), `${slug}.component.md`, content);
-}
-
-/**
- * Writes a Figma design tokens file, per component.
- * Output: lucca-front/references/components/<slug>/<slug>.figma.md
- */
-export function writeFigmaSkill(skillsDir: string, slug: string, content: string): WriteResult {
-	validateSlug(slug);
-	return writeFile(componentBaseDir(skillsDir, slug), `${slug}.figma.md`, content);
-}
-
-/**
- * Whether a `<slug>.figma.md` from a previous run exists on disk. Used so a run without Figma
- * (--skip-figma, missing token, transient failure) keeps linking the existing file instead of
- * silently dropping the link from `<slug>.md`.
- */
-export function figmaSkillExists(skillsDir: string, slug: string): boolean {
-	validateSlug(slug);
-	return fs.existsSync(path.join(componentBaseDir(skillsDir, slug), `${slug}.figma.md`));
 }
 
 /**

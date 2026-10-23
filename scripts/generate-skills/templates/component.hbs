@@ -129,7 +129,6 @@ import { {{#each api.apis}}{{className}}{{#unless @last}}, {{/unless}}{{/each}} 
 
 {{#if hasExamples}}- 📝 [Code & implementation](./{{slug}}.component.md){{/if}}
 {{#if hasDesign}}- 🎨 [Design guidelines](./{{slug}}.design.md){{/if}}
-{{#if hasFigma}}- 🎯 [Figma design tokens](./{{slug}}.figma.md){{/if}}
 {{#if storybook}}{{#if storybook.docsEntry}}- 📖 [Storybook documentation]({{storybook.docsEntry.url}}){{/if}}{{/if}}
 {{#if changelog}}
 

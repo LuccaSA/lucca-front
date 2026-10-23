@@ -55,7 +55,7 @@ describe('renderIndex', () => {
 
 		expect(links).toContain('SKILL.md');
 		expect(links).toContain('references/components/button/button.md');
-		expect(links).not.toContain('references/components/button/button.figma.md');
+		expect(links).not.toContain('references/components/button/button.design.md');
 		expect(new Set(links).size).toBe(links.length);
 	});
 
@@ -72,7 +72,7 @@ describe('renderIndex', () => {
 describe('rewriteRemoteLinks', () => {
 	it.each`
 		file                                        | content                                                | expected
-		${'references/components/button/button.md'} | ${'[Figma](./button.figma.md)'}                        | ${`[Figma](${remote}/references/components/button/button.figma.md)`}
+		${'references/components/button/button.md'} | ${'[Design](./button.design.md)'}                      | ${`[Design](${remote}/references/components/button/button.design.md)`}
 		${'references/components/button/button.md'} | ${'[Code](./button.component.md)'}                     | ${'[Code](./button.component.md)'}
 		${'SKILL.md'}                               | ${'`./references/documentation/<dossier>/<slug>.md`'}  | ${`\`${remote}/references/documentation/<dossier>/<slug>.md\``}
 		${'SKILL.md'}                               | ${'`./references/components/<slug>/<slug>.design.md`'} | ${`\`${remote}/references/components/<slug>/<slug>.design.md\``}

@@ -57,7 +57,6 @@ import { DurationPickerComponent } from '@lucca-front/ng/time';
 ## Related files
 
 - 🎨 [Design guidelines](./duration-picker.design.md)
-- 🎯 [Figma design tokens](./duration-picker.figma.md)
 
 ## Changelog
 

@@ -25,7 +25,6 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 
 - 📝 [Code & implementation](./statusbadge.component.md)
 - 🎨 [Design guidelines](./statusbadge.design.md)
-- 🎯 [Figma design tokens](./statusbadge.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-statusbadge-angular--docs)
 
 ## Changelog

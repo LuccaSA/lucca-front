@@ -16,7 +16,6 @@ import { SwitchInputComponent } from '@lucca-front/ng/forms';
 
 - 📝 [Code & implementation](./switchfield.component.md)
 
-- 🎯 [Figma design tokens](./switchfield.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-switchfield-angular--docs)
 
 ## Changelog

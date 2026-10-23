@@ -44,7 +44,6 @@ import { EmptyStatePageIllustration, EmptyStatePageComponent } from '@lucca-fron
 
 - 📝 [Code & implementation](./empty-state.component.md)
 - 🎨 [Design guidelines](./empty-state.design.md)
-- 🎯 [Figma design tokens](./empty-state.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-empty-state-angular-onboarding-page--docs)
 
 ## Changelog

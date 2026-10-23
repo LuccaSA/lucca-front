@@ -43,7 +43,6 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 
 - 📝 [Code & implementation](./plg-push.component.md)
 - 🎨 [Design guidelines](./plg-push.design.md)
-- 🎯 [Figma design tokens](./plg-push.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-plg-push-angular-basic--docs)
 
 ## Changelog

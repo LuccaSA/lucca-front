@@ -113,7 +113,6 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 
 - 📝 [Code & implementation](./filterpills.component.md)
 - 🎨 [Design guidelines](./filterpills.design.md)
-- 🎯 [Figma design tokens](./filterpills.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-filterspills-filterpills-angular--docs)
 
 ## Changelog
