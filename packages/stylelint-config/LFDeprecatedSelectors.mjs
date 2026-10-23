@@ -237,23 +237,6 @@ export default [
 		},
 	},
 	{
-		// Zero spacing utilities with the deprecated `.u-` prefix, renamed `.pr-u-` in 20.2.0
-		// - Box models: margin, padding, inset. Directions: Inline, Block, and their start/end children.
-		// - Directional children are hyphenated up to 21.x (`.u-marginInline-start0`) and camelCased since 22.0.0 (`.u-marginInlineStart0`).
-		// - Bare `.u-inset0` has no direction.
-		// SEE https://github.com/LuccaSA/lucca-front/pull/3814.
-		// SEE https://github.com/LuccaSA/lucca-front/pull/5257.
-		// SEE https://regex101.com/r/GwCS3W.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/utils/index.scss#L525.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/utils/index.scss#L683.
-		objectPattern: /\.u-(inset0|(margin|padding|inset)(Inline|Block)(-(start|end)|Start|End)?0)(?![\w-])/,
-		versionDeprecated: '20.2.0',
-		actions: `\`.u-*\` ⇒ \`.pr-u-*\``,
-		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
-		},
-	},
-	{
 		// Hyphenated zero spacing utilities, duplicates of their camelCase names
 		// SEE https://github.com/LuccaSA/lucca-front/pull/5257.
 		// SEE https://regex101.com/r/0nhYQP.
@@ -891,7 +874,7 @@ export default [
 	},
 
 	// Any occurrence of one of these selectors in any part of a selector.
-	// Kept after the specific entries (`.lu-select-value .label`…), which must win, and before the `.u-` catch-all: `.u-textLight` must still report here.
+	// Kept after the specific entries (`.lu-select-value .label`…), which must win.
 	// SEE https://regex101.com/r/OTnSEg
 	{
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L258.
@@ -900,12 +883,9 @@ export default [
 	},
 	{
 		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/button/index.scss#L90.
-		objectPattern: [/\.mod-delete(?![\w-])/, /\.u-textLight(?![\w-])/],
+		objectPattern: /\.mod-delete(?![\w-])/,
 		versionDeprecated: '20.2.0',
-		actions: `
-			* \`.mod-delete\` ⇒ \`.mod-critical\`
-			* \`.u-textLight\` ⇒ \`.pr-u-textLight\`
-		`,
+		actions: `Remplacer par \`.mod-critical\`.`,
 	},
 	{
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5f325acbb26f67993d110ccd13e08ae63e1f9ab4/packages/scss/src/components/breadcrumbs/index.scss#L13.

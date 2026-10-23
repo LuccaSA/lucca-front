@@ -754,21 +754,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 		</tr>
 		<tr>
-			<td data-pattern="\.u-(inset0|(margin|padding|inset)(Inline|Block)(-(start|end)|Start|End)?0)(?![\w-])">
-				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-inset0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-inset0</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(margin%7Cpadding%7Cinset)(Inline%7CBlock)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-(margin|padding|inset)(Inline|Block)0</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(margin%7Cpadding%7Cinset)(Inline%7CBlock)(-start%7C-end%7CStart%7CEnd)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-(margin|padding|inset)(Inline|Block)(-start|-end|Start|End)0</code></a></li>
-				</ul>
-			</td>
-			<td>20.2.0</td>
-			<td>–</td>
-			<td>
-				<p><code>.u-*</code> ⇒ <code>.pr-u-*</code></p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
-		</tr>
-		<tr>
 			<td>
 				<ul>
 					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-insetReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-insetReset</code></a></li>
@@ -930,12 +915,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>20.2.0</td>
 			<td>–</td>
-			<td>
-				<ul>
-				<li><code>.mod-delete</code> ⇒ <code>.mod-critical</code></li>
-				<li><code>.u-textLight</code> ⇒ <code>.pr-u-textLight</code></li>
-				</ul>
-			</td>
+			<td>Remplacer par <code>.mod-critical</code>.</td>
 		</tr>
 		<tr>
 			<td data-pattern="\.u-[a-zA-Z]">
