@@ -1,11 +1,11 @@
 ---
 name: update-deprecated-doc
-description: Regenerate docs/life-cycle.md from the LFDeprecatedSelectors.mjs / LFDeprecatedProperties.mjs source arrays (Composants, Classes, Variables CSS). Use whenever those sources change, or when asked to update / sync / rebuild / refresh the deprecation documentation.
+description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from the LFDeprecatedSelectors.mjs / LFDeprecatedProperties.mjs source arrays (Composants, Classes, Variables CSS). Use whenever those sources change, or when asked to update / sync / rebuild / refresh the deprecation documentation.
 ---
 
 # Update the deprecation doc
 
-`docs/life-cycle.md` is derived: never edit it against its sources.
+`docs/life-cycle.md` and `docs/life-cycle-deleted.md` are derived: never edit them against their sources.
 
 * Sources:
 	* [LFDeprecatedSelectors.mjs](../../../packages/stylelint-config/LFDeprecatedSelectors.mjs) feeds *Composants* and *Classes*.
@@ -166,16 +166,11 @@ description: Regenerate docs/life-cycle.md from the LFDeprecatedSelectors.mjs / 
 	* The primary key is *Depuis*.
 	* *Suppression* breaks ties.
 	* Rows without any version come last.
-* Historical entries stay: the tables keep deprecations whose deletion already shipped.
-	* This divergence from Prisme is by design: never flag or "fix" it.
-	* The doc intro note explains it: keep it verbatim, without any version number.
-
-```md
-> **Note :** contrairement à la page Prisme, les tables *Classes* et
-> *Variables CSS* conservent les dépréciations dont la suppression est
-> effective. Prisme purge les entrées une fois la suppression livrée ; le
-> linter (et cette page) les conserve pour signaler l'usage résiduel.
-```
+* Entries whose deletion shipped go to `docs/life-cycle-deleted.md`, with the same three tables.
+	* "Shipped" means at or below the latest stable tag reachable from `HEAD`.
+	* The `.mjs` files keep them: the linter still flags residual use.
+	* Prisme drops them: this divergence is by design.
+* Each doc's intro note links to the other one: keep it free of version numbers.
 
 * A class emitted by LF HTML for structural consistency without SCSS is not a deprecation.
 	* Its rule may not exist while the component template emits it.

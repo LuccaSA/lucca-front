@@ -1,8 +1,8 @@
 // Regenerates the Composants, Classes and Variables CSS sections of docs/life-cycle.md
-// from LFDeprecatedSelectors.mjs and LFDeprecatedProperties.mjs.
-// Composants lists the entries holding a `name`.
-// Everything before `## Composants` (title, note, style) is kept as is.
+// and of docs/life-cycle-deleted.md, which gets the entries whose deletion shipped,
+// from LFDeprecatedSelectors.mjs, LFDeprecatedProperties.mjs and the Angular `@deprecated` markers.
 // Usage, from the repository root: node .claude/skills/update-deprecated-doc/scripts/generate.mjs
+import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 import { marked } from 'marked';
 import { pathToFileURL } from 'url';
@@ -11,7 +11,6 @@ import { linkNom } from './links.mjs';
 import { nomItems, rootToken } from './nom.mjs';
 
 const dir = 'packages/stylelint-config/';
-const docPath = 'docs/life-cycle.md';
 // A Windows checkout (`core.autocrlf`) brings CRLF: every parser below matches LF only.
 const read = (path) => readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
 
@@ -114,26 +113,26 @@ const section = (title, source, entries, nom) =>
 const blob = (file) => `[${file}](https://github.com/LuccaSA/lucca-front/blob/master/${dir}${file})`;
 
 const [selectors, properties] = await Promise.all(['LFDeprecatedSelectors.mjs', 'LFDeprecatedProperties.mjs'].map(load));
+// A deletion has shipped once its version is at or below the latest stable tag reachable from `HEAD`.
+const shipped = execSync("git describe --tags --abbrev=0 --match 'v[0-9]*' --exclude '*-*' HEAD").toString().trim().slice(1);
+const deleted = (e) => !!e.versionDeleted && compare(e.versionDeleted, shipped) <= 0;
+const named = components([...selectors, ...properties]);
 // An entry with a `name` deprecates a whole component: it goes to Composants.
 const nom = (e) => unlist(linkNom(nomHtml(e), e));
-const sections = [
-	section(
-		'Composants',
-		`Sources : ${blob('LFDeprecatedSelectors.mjs')} et les marqueurs \`@deprecated\` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)`,
-		components([...selectors, ...properties]),
-		(e) => nameHtml(e) + tokens(e),
-	),
-	section(
-		'Classes',
-		`Source : ${blob('LFDeprecatedSelectors.mjs')}`,
-		selectors.filter((e) => !e.name),
-		nom,
-	),
-	section(
-		'Variables CSS',
-		`Source : ${blob('LFDeprecatedProperties.mjs')}`,
-		properties.filter((e) => !e.name),
-		nom,
-	),
-];
-writeFileSync(docPath, `${read(docPath).split('## Composants')[0].trimEnd()}\n\n${sections.join('\n')}`);
+// Each doc keeps everything before `## Composants`: its title, note and style.
+const write = (path, keep) => {
+	const pick = (entries) => entries.filter((e) => deleted(e) === keep);
+	const sections = [
+		section(
+			'Composants',
+			`Sources : ${blob('LFDeprecatedSelectors.mjs')} et les marqueurs \`@deprecated\` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)`,
+			pick(named),
+			(e) => nameHtml(e) + tokens(e),
+		),
+		section('Classes', `Source : ${blob('LFDeprecatedSelectors.mjs')}`, pick(selectors.filter((e) => !e.name)), nom),
+		section('Variables CSS', `Source : ${blob('LFDeprecatedProperties.mjs')}`, pick(properties.filter((e) => !e.name)), nom),
+	];
+	writeFileSync(path, `${read(path).split('## Composants')[0].trimEnd()}\n\n${sections.join('\n')}`);
+};
+write('docs/life-cycle.md', false);
+write('docs/life-cycle-deleted.md', true);
