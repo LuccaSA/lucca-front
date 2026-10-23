@@ -428,6 +428,11 @@ async function main(): Promise<void> {
 			console.error(`\n❌ Garde-fou ZeroHeight : ${err.message}`);
 			process.exit(1);
 		}
+		// The resolutions above were taken before the guard could pin an ID (--zh-id or the prompt):
+		// left as is, they keep zhReleaseId null and the run fetches "latest", a newer minor.
+		for (const v of flags.versions) {
+			resolutions.set(v, resolveMinorVersion(v));
+		}
 	}
 
 	clearFailures();
