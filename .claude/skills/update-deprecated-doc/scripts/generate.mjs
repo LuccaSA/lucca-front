@@ -5,6 +5,7 @@
 // Usage, from the repository root: node .claude/skills/update-deprecated-doc/scripts/generate.mjs
 import { readFileSync, writeFileSync } from 'fs';
 import { marked } from 'marked';
+import { pathToFileURL } from 'url';
 import { components } from './components.mjs';
 import { linkNom } from './links.mjs';
 import { nomItems, rootToken } from './nom.mjs';
@@ -14,74 +15,30 @@ const docPath = 'docs/life-cycle.md';
 // A Windows checkout (`core.autocrlf`) brings CRLF: every parser below matches LF only.
 const read = (path) => readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
 
-const parse = (file) => {
-	const text = read(dir + file);
-	return text
+// Comments inside an `objectPattern` array label the patterns after them: only the source text keeps them.
+const groupsOf = (chunk) => {
+	const lines = chunk.split('\n').map((l) => l.trim());
+	const start = lines.findIndex((l) => l.startsWith('objectPattern:'));
+	if (start < 0) return [];
+	// A pattern ends its line with a comma, an array closes on a `]` line: Prettier may wrap either.
+	const array = lines[start].endsWith('[');
+	const end = lines.findIndex((l, k) => (array ? k > start && /^\],?$/.test(l) : k >= start && l.endsWith(',')));
+	const groups = [{ label: null, sources: [] }];
+	for (const l of lines.slice(start, end + 1)) {
+		if (l.startsWith('//')) {
+			if (!l.startsWith('// SEE http')) groups.push({ label: l.replace(/^\/\/\s?/, ''), sources: [] });
+		} else for (const m of l.matchAll(/\/((?:\\.|[^/])+)\/[gimsuy]*/g)) groups.at(-1).sources.push(m[1]);
+	}
+	return groups.filter((g) => g.sources.length || g.label);
+};
+// The data comes from the modules themselves, the labels from their text: both list the entries in the same order.
+const load = async (file) => {
+	const chunks = read(dir + file)
 		.split(/\n\t\{\n/)
-		.slice(1)
-		.map((chunk) => {
-			chunk = chunk.split(/\n\t\},?/)[0];
-			const lines = chunk.split('\n');
-			const entry = { groups: [{ label: null, sources: [] }], actions: null, schematics: null };
-			let inPattern = false,
-				inActions = false,
-				actionsBuf = [];
-			for (const raw of lines) {
-				const l = raw.trim();
-				if (inActions) {
-					if (l === '`,') {
-						entry.actions = actionsBuf.join('\n');
-						inActions = false;
-						continue;
-					}
-					actionsBuf.push(raw.replace(/^\t\t\t/, ''));
-					continue;
-				}
-				if (l.startsWith('objectPattern:')) inPattern = true;
-				if (l.startsWith('//')) {
-					const c = l.replace(/^\/\/\s?/, '');
-					if (/^SEE http/.test(c)) continue;
-					if (inPattern) entry.groups.push({ label: c, sources: [] });
-					continue;
-				}
-				const vm = l.match(/^version(Deprecated|Deleted): '([^']+)'/);
-				if (vm) {
-					entry['version' + vm[1]] = vm[2];
-					continue;
-				}
-				if (/^actions: `$/.test(l)) {
-					inActions = true;
-					continue;
-				}
-				const am = l.match(/^actions: `(.*)`,$/);
-				if (am) {
-					entry.actions = am[1];
-					continue;
-				}
-				// Any other actions form would be dropped silently: refuse it.
-				if (l.startsWith('actions:')) throw new Error(`${file}: actions must be a template literal, got: ${l}`);
-				const nm = l.match(/^name: '([^']+)'/);
-				if (nm) {
-					entry.name = nm[1];
-					continue;
-				}
-				const pm = l.match(/^prisme: '([^']+)'/);
-				if (pm) {
-					entry.prisme = pm[1];
-					continue;
-				}
-				const sm = l.match(/^schematics: '([^']+)'/);
-				if (sm) {
-					entry.schematics = sm[1];
-					continue;
-				}
-				// regex literals on the line
-				for (const rm of l.matchAll(/\/((?:\\.|[^\/])+)\/[gimsuy]*/g)) entry.groups[entry.groups.length - 1].sources.push(rm[1]);
-				if (inPattern && /\],?$/.test(l) && !l.includes('[')) inPattern = false;
-			}
-			entry.groups = entry.groups.filter((g) => g.sources.length || g.label);
-			return entry;
-		});
+		.slice(1);
+	const { default: data } = await import(pathToFileURL(dir + file));
+	if (chunks.length !== data.length) throw new Error(`${file}: ${chunks.length} entry blocks for ${data.length} entries`);
+	return data.map(({ urls, ...e }, k) => ({ ...e, ...urls, groups: groupsOf(chunks[k]) }));
 };
 
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -89,8 +46,9 @@ const actionsHtml = (e) => {
 	const schem = e.schematics ? `(<a href="${e.schematics}">schematics</a>)` : '';
 	if (!e.actions) return schem || '–';
 	const md = e.actions
-		// The `.mjs` files hold template literals: undo their escapes.
-		.replace(/\\([\\`$])/g, '$1')
+		// A multi-line template literal keeps the indentation of its `.mjs` entry.
+		.replace(/\r/g, '')
+		.replace(/^\t{3}/gm, '')
 		// A `*` legend renders small.
 		.replace(/^((?:`\*` = |\(`\*`: ).*)$/gm, '<small>$1</small>')
 		.trim();
@@ -104,79 +62,21 @@ const actionsHtml = (e) => {
 // Nom cells are built in Markdown, then rendered by `marked`: no blank line survives inside a cell.
 const code = (t) => `\`${t}\``;
 const render = (md) => marked.parse(md).replace(/\n+/g, '\n').trim();
-const doc = read(docPath);
-const docHead = doc.split('## Composants')[0];
 // A cell holds one list per group of patterns, each after its label: an unlabeled entry is a single group.
 const nomHtml = (e) => {
-	const groups = e.groups.some((g) => g.label) ? e.groups : [{ label: null, sources: e.groups.flatMap((g) => g.sources) }];
-	const md = groups.flatMap((g) => [
-		...(g.label ? [g.label] : []),
-		...(g.sources.length
-			? [
-					nomItems(g.sources)
-						.map((i) => `* ${i}`)
-						.join('\n'),
-				]
-			: []),
-	]);
-	return render(md.join('\n\n'));
+	const groups = e.groups.some((g) => g.label) ? e.groups : [{ sources: e.groups.flatMap((g) => g.sources) }];
+	const list = (sources) =>
+		sources.length &&
+		nomItems(sources)
+			.map((i) => `* ${i}`)
+			.join('\n');
+	return render(groups.flatMap((g) => [g.label, list(g.sources)].filter(Boolean)).join('\n\n'));
 };
-
-const indent = (html, tabs) =>
-	html
-		.split('\n')
-		.map((l) => '\t'.repeat(tabs) + l)
-		.join('\n');
-const cell = (html, attrs = '') =>
-	html.includes('\n') || html.startsWith('<') ? `\t\t\t<td${attrs}>\n${indent(html, 4)}\n\t\t\t</td>` : `\t\t\t<td${attrs}>${html}</td>`;
 // A cell holding a single item takes no list.
 const unlist = (html) => {
 	const m = html.match(/^<ul>\s*<li>([\s\S]*?)<\/li>\s*<\/ul>(\s+\([\s\S]*\))?$/);
 	return m && !m[1].includes('<li>') ? m[1] + (m[2] ?? '') : html;
 };
-const row = (e) => {
-	return [
-		'\t\t<tr>',
-		cell(unlist(linkNom(nomHtml(e), e))),
-		`\t\t\t<td>${e.versionDeprecated ?? '–'}</td>`,
-		`\t\t\t<td>${e.versionDeleted ?? '–'}</td>`,
-		cell(unlist(actionsHtml(e))),
-		'\t\t</tr>',
-	].join('\n');
-};
-
-const thead = [
-	'<table>',
-	'\t<thead>',
-	'\t\t<tr>',
-	'\t\t\t<th>Nom</th>',
-	'\t\t\t<th>Depuis</th>',
-	'\t\t\t<th>Suppression</th>',
-	'\t\t\t<th>Action à réaliser</th>',
-	'\t\t</tr>',
-	'\t</thead>',
-	'\t<tbody>',
-].join('\n');
-// Oldest first: by deprecation version, then deletion version; unversioned rows last, in source order.
-// The `.mjs` order stays untouched, since Stylelint uses the first matching entry.
-const semver = (v) => (v ? v.split('.').map(Number) : null);
-const compareDesc = (a, b) => {
-	if (!a || !b) return (a ? 0 : 1) - (b ? 0 : 1);
-	for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return b[i] - a[i];
-	return 0;
-};
-const compareAsc = (a, b) => (!a || !b ? compareDesc(a, b) : compareDesc(b, a));
-const byVersionAsc = (x, y) =>
-	compareAsc(semver(x.versionDeprecated ?? x.versionDeleted), semver(y.versionDeprecated ?? y.versionDeleted)) ||
-	compareAsc(semver(x.versionDeleted ?? x.versionDeprecated), semver(y.versionDeleted ?? y.versionDeprecated));
-const table = (entries, toRow = row) => `${thead}\n${entries.map(toRow).join('\n')}\n\t</tbody>\n</table>\n`;
-const files = { Classes: 'LFDeprecatedSelectors.mjs', 'Variables CSS': 'LFDeprecatedProperties.mjs' };
-const entries = Object.fromEntries(Object.entries(files).map(([title, file]) => [title, parse(file)]));
-// An entry with a `name` deprecates a whole component: it goes to Composants.
-const section = (title) =>
-	`## ${title}\n\nSource\u00a0: [${files[title]}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${files[title]})\n\n${table(
-		entries[title].filter((e) => !e.name).sort(byVersionAsc),
-	)}`;
 
 // --- Composants ---
 // A component shows one root class per pattern, its shortest form: the search still covers every class.
@@ -190,15 +90,50 @@ const tokens = (e) => {
 };
 // The name links to its Prisme page when `urls.prisme` gives one.
 const nameHtml = (e) => (e.prisme ? `<a href="${e.prisme}">${esc(e.name)}</a>` : esc(e.name));
-const compRow = (e) =>
-	[
-		'\t\t<tr>',
-		cell(nameHtml(e) + tokens(e)),
-		`\t\t\t<td>${e.versionDeprecated ?? '–'}</td>`,
-		`\t\t\t<td>${e.versionDeleted ?? '–'}</td>`,
-		cell(unlist(actionsHtml(e))),
-		'\t\t</tr>',
-	].join('\n');
-const composants = `## Composants\n\nSources\u00a0: [${files.Classes}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${files.Classes}) et les marqueurs \`@deprecated\` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)\n\n${table(components(Object.values(entries).flat()).sort(byVersionAsc), compRow)}`;
 
-writeFileSync(docPath, `${docHead.trimEnd()}\n\n${composants}\n${section('Classes')}\n${section('Variables CSS')}`);
+// --- Tables ---
+const cell = (html) =>
+	html.includes('\n') || html.startsWith('<')
+		? `\t\t\t<td>\n${html.replace(/^/gm, '\t'.repeat(4))}\n\t\t\t</td>`
+		: `\t\t\t<td>${html}</td>`;
+const version = (v) => `\t\t\t<td>${v ?? '–'}</td>`;
+const row = (nom, e) =>
+	['\t\t<tr>', cell(nom), version(e.versionDeprecated), version(e.versionDeleted), cell(unlist(actionsHtml(e))), '\t\t</tr>'].join('\n');
+const heads = ['Nom', 'Depuis', 'Suppression', 'Action à réaliser'].map((h) => `\t\t\t<th>${h}</th>`).join('\n');
+// Oldest first: by deprecation version, then deletion version; unversioned rows last, in source order.
+// The `.mjs` order stays untouched, since Stylelint uses the first matching entry.
+const compare = (a, b) => (a && b ? a.localeCompare(b, undefined, { numeric: true }) : !a - !b);
+const byVersion = (x, y) =>
+	compare(x.versionDeprecated ?? x.versionDeleted, y.versionDeprecated ?? y.versionDeleted) ||
+	compare(x.versionDeleted ?? x.versionDeprecated, y.versionDeleted ?? y.versionDeprecated);
+const section = (title, source, entries, nom) =>
+	`## ${title}\n\n${source}\n\n<table>\n\t<thead>\n\t\t<tr>\n${heads}\n\t\t</tr>\n\t</thead>\n\t<tbody>\n${entries
+		.sort(byVersion)
+		.map((e) => row(nom(e), e))
+		.join('\n')}\n\t</tbody>\n</table>\n`;
+const blob = (file) => `[${file}](https://github.com/LuccaSA/lucca-front/blob/master/${dir}${file})`;
+
+const [selectors, properties] = await Promise.all(['LFDeprecatedSelectors.mjs', 'LFDeprecatedProperties.mjs'].map(load));
+// An entry with a `name` deprecates a whole component: it goes to Composants.
+const nom = (e) => unlist(linkNom(nomHtml(e), e));
+const sections = [
+	section(
+		'Composants',
+		`Sources : ${blob('LFDeprecatedSelectors.mjs')} et les marqueurs \`@deprecated\` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)`,
+		components([...selectors, ...properties]),
+		(e) => nameHtml(e) + tokens(e),
+	),
+	section(
+		'Classes',
+		`Source : ${blob('LFDeprecatedSelectors.mjs')}`,
+		selectors.filter((e) => !e.name),
+		nom,
+	),
+	section(
+		'Variables CSS',
+		`Source : ${blob('LFDeprecatedProperties.mjs')}`,
+		properties.filter((e) => !e.name),
+		nom,
+	),
+];
+writeFileSync(docPath, `${read(docPath).split('## Composants')[0].trimEnd()}\n\n${sections.join('\n')}`);

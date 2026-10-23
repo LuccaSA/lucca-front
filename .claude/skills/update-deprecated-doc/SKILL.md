@@ -133,7 +133,7 @@ description: Regenerate docs/life-cycle.md from the LFDeprecatedSelectors.mjs / 
 
 ## Actions
 
-* `marked` converts the `actions` Markdown to HTML once the template-literal escapes are undone.
+* `marked` converts the `actions` Markdown to HTML.
 * A `*` legend paragraph renders in `<small>`.
 * `urls.schematics` goes on its own line: `(<a href="…">schematics</a>)`.
 * Writing rules, in French Markdown:
