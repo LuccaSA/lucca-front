@@ -476,6 +476,7 @@ export default [
 		// View tabs, renamed Segmented control
 		// SEE https://regex101.com/r/a3WT2V.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/1ebcfb26f56530a1f918f3ddec4dacba290b8898/packages/scss/src/components/segmentedControl/index.scss#L4.
+		name: 'View tabs',
 		objectPattern: /\.viewTabs(-item(-tab)?|_panel)?(?![\w-])/,
 		versionDeprecated: '18.2.1',
 		actions: `
@@ -1024,6 +1025,7 @@ export default [
 		// SEE https://regex101.com/r/UwHko8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/be7004c7c16edd0cbb658c01e46781554bec1ae4/packages/scss/src/components/priorityLevels/index.scss#L3.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/9ba2d000396a4c4f81d71309dd8eb9c71fc5a913.
+		name: 'Priority levels',
 		objectPattern: /\.priorityLevels(-icon)?(?![\w-])/,
 		versionDeleted: '22.1.1',
 		actions: `Remplacer par \`.priorityLevel\` et \`.priorityLevel-icon\`.`,

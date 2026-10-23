@@ -77,6 +77,18 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/42b330-avatar">Avatar</a> et sa classe <code>.avatar</code>.</td>
 		</tr>
 		<tr>
+			<td>View tabs, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)viewTabs(-item(-tab)%3F%7C_panel)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs</code></a></td>
+			<td>18.2.1</td>
+			<td>–</td>
+			<td>
+				<p>Segmented control :</p>
+				<ul>
+				<li><code>*viewTabs*</code> ⇒ <code>*segmentedControl*</code></li>
+				<li><code>*-item-tab</code> ⇒ <code>*-item-action</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
 			<td>
 				<a href="https://prisme.lucca.io/94310e217/p/10c73a-date-picker">Date picker</a>
 			</td>
@@ -239,6 +251,12 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>–</td>
 			<td>Le composant Highlight section (<code>.highlightSection</code> et <code>&lt;lu-highlight-section&gt;</code>) sera remplacé en 22.2 par une évolution du composant Box.</td>
 		</tr>
+		<tr>
+			<td>Priority levels, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)priorityLevels(-icon)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels</code></a></td>
+			<td>–</td>
+			<td>22.1.1</td>
+			<td>Remplacer par <code>.priorityLevel</code> et <code>.priorityLevel-icon</code>.</td>
+		</tr>
 	</tbody>
 </table>
 
@@ -383,25 +401,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>18.2.0</td>
 			<td>–</td>
 			<td>Remplacer par <code>.indexTable-body-row-cell-link</code>, un véritable lien vers la ligne.</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)viewTabs(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs</code></a></li>
-				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)viewTabs-item(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs-item</code></a></li>
-				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)viewTabs-item-tab(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs-item-tab</code></a></li>
-				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)viewTabs_panel(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs_panel</code></a></li>
-				</ul>
-			</td>
-			<td>18.2.1</td>
-			<td>–</td>
-			<td>
-				<p>Segmented control :</p>
-				<ul>
-				<li><code>*viewTabs*</code> ⇒ <code>*segmentedControl*</code></li>
-				<li><code>*-item-tab</code> ⇒ <code>*-item-action</code></li>
-				</ul>
-			</td>
 		</tr>
 		<tr>
 			<td>
@@ -738,17 +737,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li>input Angular : <code>foregroundStartEnd</code> à la place de <code>foreground</code></li>
 				</ul>
 			</td>
-		</tr>
-		<tr>
-			<td>
-				<ul>
-				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)priorityLevels(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels</code></a></li>
-				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)priorityLevels-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels-icon</code></a></li>
-				</ul>
-			</td>
-			<td>–</td>
-			<td>22.1.1</td>
-			<td>Remplacer par <code>.priorityLevel</code> et <code>.priorityLevel-icon</code>.</td>
 		</tr>
 	</tbody>
 </table>
