@@ -1018,7 +1018,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/718668a2d0f78be779a47ae747a0602a47e5b1c6/packages/scss/src/commons/utils/highlight-prisme.scss#L299.
 		name: 'Highlight section',
 		objectPattern: /\.highlightSection\b/,
-		versionDeprecated: '22.1.0',
+		versionDeprecated: '22.1.1',
 		actions: `Le composant Highlight section (\`.highlightSection\` et \`<lu-highlight-section>\`) sera remplacé en 22.2 par une évolution du composant Box.`,
 	},
 	{

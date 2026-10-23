@@ -247,7 +247,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>Highlight section, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)highlightSection(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.highlightSection</code></a></td>
-			<td>22.1.0</td>
+			<td>22.1.1</td>
 			<td>–</td>
 			<td>Le composant Highlight section (<code>.highlightSection</code> et <code>&lt;lu-highlight-section&gt;</code>) sera remplacé en 22.2 par une évolution du composant Box.</td>
 		</tr>
