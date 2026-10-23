@@ -21,7 +21,11 @@ const output = path.resolve(outputFile);
 
 try {
 	const tarball = path.join(tree, 'tree.tar');
-	execFileSync('git', ['archive', '--format=tar', '-o', tarball, treeish, '--', '.storybook', 'stories', 'packages', 'package.json', 'tsconfig.json', 'tsconfig.base.json'], { cwd: repo });
+	// `git archive` fails on any path absent from the tree, and the root tsconfigs changed across majors.
+	const entries = execFileSync('git', ['ls-tree', '--name-only', treeish], { cwd: repo, encoding: 'utf8' })
+		.split('\n')
+		.filter((entry) => ['.storybook', 'stories', 'packages', 'package.json'].includes(entry) || /^tsconfig.*\.json$/.test(entry));
+	execFileSync('git', ['archive', '--format=tar', '-o', tarball, treeish, '--', ...entries], { cwd: repo });
 	execFileSync('tar', ['-xf', tarball, '-C', tree]);
 	fs.rmSync(tarball);
 	fs.symlinkSync(path.join(repo, 'node_modules'), path.join(tree, 'node_modules'));
