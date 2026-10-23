@@ -176,7 +176,8 @@ const ghCombo = (src) => {
 };
 // A displayed token: `(a|b)` groups stay alternations, `…` crops fall back to the entry patterns.
 const ghDisplayed = (text) => `/${text.startsWith('.') ? ghClassBefore : ghBefore}${text.replace(/^\./, '').replace(/[.*+[\]{}^$\\]/g, '\\$&')}${ghAfter}/`;
-const searchUrl = (q) => `https://github.com/search?q=${encodeURIComponent(`${q} org:LuccaSA NOT repo:LuccaSA/lucca-front`)}&amp;type=code`;
+// Alternatives are grouped: the repository filters must apply to every one of them.
+const searchUrl = (q) => `https://github.com/search?q=${encodeURIComponent(`${q.includes(' OR ') ? `(${q})` : q} org:LuccaSA NOT repo:LuccaSA/lucca-front`)}&amp;type=code`;
 const unesc = (t) => t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 const linkNom = (html, e) => {
 	const sources = e.groups.flatMap((g) => g.sources);
