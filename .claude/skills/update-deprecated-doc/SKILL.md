@@ -120,7 +120,8 @@ table. All tables share the same `<thead>`, mirroring Prisme's headers:
 - **Each `Nom` token links to a GitHub code search of the org, lucca-front excluded.**
   - The script adds the links: write hand-made cells without them.
   - The search is a regex: GitHub has no lookaround, so token boundaries become `(^|[^\w-])` and `([^\w-]|$)`.
-  - A class searches without its `.`: markup writes `class="name"`.
+  - A class searches as a selector or as a `class` attribute token: `(\.|class="([^"]*\s)?)name`.
+    - The bare word would match any identifier: `list` or `label` for example.
   - A combination searches both tokens with `AND`.
   - A cropped item (`…`) searches the entry's own patterns.
 - **Comments inside an `objectPattern` array are content**: each becomes a

@@ -145,7 +145,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 	<tbody>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)list(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.list</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)list(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.list</code></a>
 			</td>
 			<td>16.2.2</td>
 			<td>–</td>
@@ -153,7 +153,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.label(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label</code></a>
 				(partout dans un sélecteur)
 			</td>
 			<td>16.3.0</td>
@@ -162,7 +162,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)form-group(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.form-group</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)form-group(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.form-group</code></a>
 			</td>
 			<td>16.4.0</td>
 			<td>–</td>
@@ -175,7 +175,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button-icon</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button-icon</code></a>
 			</td>
 			<td>16.5.0</td>
 			<td>–</td>
@@ -183,7 +183,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.loading</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.loading</code></a>
 			</td>
 			<td>17.3.0</td>
 			<td>–</td>
@@ -197,11 +197,11 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.disabled(?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)disabled(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.disabled</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)error(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.error</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)mod-link(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-link</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)mod-outline(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-outline</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)success(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.success</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)disabled(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.disabled</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)error(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.error</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-link(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-link</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-outline(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-outline</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)success(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.success</code></a></li>
 				</ul>
 				(partout dans un sélecteur)
 			</td>
@@ -212,10 +212,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)palette-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-grey</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)palette-primary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-primary</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)palette-secondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-secondary</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)palette-lucca(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-lucca</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)palette-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-grey</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)palette-primary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-primary</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)palette-secondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-secondary</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)palette-lucca(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-lucca</code></a></li>
 				</ul>
 			</td>
 			<td>17.3.0</td>
@@ -233,11 +233,11 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td data-pattern="(?=\S*\.(box|card|section)(?![\w-]))(?=\S*\.mod-grey(?![\w-]))\S*">
 				<p>Toute combinaison de <code>.box</code>, <code>.card</code> ou <code>.section</code> avec <code>.mod-grey</code></p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)box(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.box</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)box(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-grey</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)card(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.card</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)card(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-grey</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)section(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.section</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)section(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-grey</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)icon-color-primary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.icon-color-primary</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)icon-color-secondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.icon-color-secondary</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)box(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.box</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)box(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-grey</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)card(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.card</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)card(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-grey</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)section(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.section</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)section(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-grey</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)icon-color-primary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.icon-color-primary</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)icon-color-secondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.icon-color-secondary</code></a></li>
 				</ul>
 			</td>
 			<td>17.3.0</td>
@@ -252,7 +252,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)dialog-form(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-form</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)dialog-form(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-form</code></a>
 			</td>
 			<td>17.3.5</td>
 			<td>–</td>
@@ -261,9 +261,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-textLeft(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-textLeft</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-textCenter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-textCenter</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-textRight(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-textRight</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-textLeft(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-textLeft</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-textCenter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-textCenter</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-textRight(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-textRight</code></a></li>
 				</ul>
 			</td>
 			<td>17.4.0</td>
@@ -280,7 +280,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.active(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)active(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.active</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)active(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.active</code></a>
 				(partout dans un sélecteur)
 			</td>
 			<td>17.4.0</td>
@@ -290,8 +290,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-dialog(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.loading</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-dialog(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-dialog</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-sidePanel(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.loading</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-sidePanel(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-sidePanel</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-dialog(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.loading</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-dialog(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-dialog</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-sidePanel(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.loading</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)loading(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-sidePanel(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-sidePanel</code></a></li>
 				</ul>
 			</td>
 			<td>18.1.0</td>
@@ -306,9 +306,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="(?=\S*\.userTile(?![\w-]))(?=\S*\.mod-X{1,3}L(?![\w-]))\S*">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-XL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userTile</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-XL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-XL</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-XXL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userTile</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-XXL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-XXL</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-XXXL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userTile</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-XXXL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-XXXL</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-XL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userTile</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-XL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-XL</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-XXL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userTile</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-XXL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-XXL</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-XXXL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userTile</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-XXXL(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-XXXL</code></a></li>
 				</ul>
 			</td>
 			<td>18.2.0</td>
@@ -317,7 +317,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)lu-user-picture(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-user-picture</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-user-picture(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-user-picture</code></a>
 			</td>
 			<td>18.2.0</td>
 			<td>–</td>
@@ -325,7 +325,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-body-row-cell-action(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-body-row-cell-action</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-body-row-cell-action(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-body-row-cell-action</code></a>
 			</td>
 			<td>18.2.0</td>
 			<td>–</td>
@@ -334,10 +334,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)viewTabs(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)viewTabs-item(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs-item</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)viewTabs_panel(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs_panel</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)viewTabs-item-tab(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs-item-tab</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)viewTabs(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)viewTabs-item(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs-item</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)viewTabs_panel(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs_panel</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)viewTabs-item-tab(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.viewTabs-item-tab</code></a></li>
 				</ul>
 			</td>
 			<td>18.2.1</td>
@@ -352,7 +352,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)mod-withMenuCompact(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-withMenuCompact</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-withMenuCompact(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-withMenuCompact</code></a>
 			</td>
 			<td>18.3.0</td>
 			<td>–</td>
@@ -361,8 +361,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.dialog-formOptionn?al(?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)dialog-formOptional(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-formOptional</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)dialog-formOptionnal(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-formOptionnal</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)dialog-formOptional(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-formOptional</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)dialog-formOptionnal(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dialog-formOptionnal</code></a></li>
 				</ul>
 			</td>
 			<td>18.3.0</td>
@@ -372,10 +372,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)lu-dropdown-content(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-content</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)lu-dropdown-options(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-options</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)lu-dropdown-options-item(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-options-item</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)lu-dropdown-options-item-action(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-options-item-action</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-dropdown-content(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-content</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-dropdown-options(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-options</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-dropdown-options-item(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-options-item</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-dropdown-options-item-action(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-options-item-action</code></a></li>
 				</ul>
 			</td>
 			<td>19.2.0</td>
@@ -384,7 +384,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)filterBarDeprecated(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBarDeprecated</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filterBarDeprecated(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBarDeprecated</code></a>
 			</td>
 			<td>19.2.0</td>
 			<td>–</td>
@@ -393,9 +393,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.pr-u-(margin|padding)(Top|Right|Bottom|Left)(\d+|Auto)(?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-(margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)(%5Cd%2B%7CAuto)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-border(Top%7CRight%7CBottom%7CLeft)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-margin(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-(margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)(%5Cd%2B%7CAuto)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-border(Top%7CRight%7CBottom%7CLeft)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-padding(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-border(Top%7CRight%7CBottom%7CLeft)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-border(Top|Right|Bottom|Left)0</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-(margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)(%5Cd%2B%7CAuto)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-border(Top%7CRight%7CBottom%7CLeft)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-margin(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-(margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)(%5Cd%2B%7CAuto)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-border(Top%7CRight%7CBottom%7CLeft)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-padding(Top|Right|Bottom|Left)(0|Auto|25|50|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-border(Top%7CRight%7CBottom%7CLeft)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-border(Top|Right|Bottom|Left)0</code></a></li>
 				</ul>
 			</td>
 			<td>19.2.0</td>
@@ -412,7 +412,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)menu(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.menu</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)menu(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.menu</code></a>
 			</td>
 			<td>19.3.0</td>
 			<td>–</td>
@@ -420,7 +420,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)mod-withMenu(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-withMenu</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-withMenu(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-withMenu</code></a>
 			</td>
 			<td>19.3.0</td>
 			<td>–</td>
@@ -433,7 +433,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.u-text(X?S|M|X{0,3}L)(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-text(X%3FS%7CM%7CX%7B0%2C3%7DL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-text(XS|S|M|L|…)</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-text(X%3FS%7CM%7CX%7B0%2C3%7DL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-text(XS|S|M|L|…)</code></a>
 				(utilitaires de taille)
 			</td>
 			<td>20.1.0</td>
@@ -453,9 +453,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.u-(inset0|(margin|padding|inset)(Inline|Block)(-(start|end)|Start|End)?0)(?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-inset0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-inset0</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-(margin%7Cpadding%7Cinset)(Inline%7CBlock)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-(margin|padding|inset)(Inline|Block)0</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-(margin%7Cpadding%7Cinset)(Inline%7CBlock)(-start%7C-end%7CStart%7CEnd)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-(margin|padding|inset)(Inline|Block)(-start|-end|Start|End)0</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-inset0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-inset0</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(margin%7Cpadding%7Cinset)(Inline%7CBlock)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-(margin|padding|inset)(Inline|Block)0</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(margin%7Cpadding%7Cinset)(Inline%7CBlock)(-start%7C-end%7CStart%7CEnd)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-(margin|padding|inset)(Inline|Block)(-start|-end|Start|End)0</code></a></li>
 				</ul>
 			</td>
 			<td>20.2.0</td>
@@ -468,11 +468,11 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-insetReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-insetReset</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-topReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-topReset</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-bottomReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-bottomReset</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-leftReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-leftReset</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-rightReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-rightReset</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-insetReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-insetReset</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-topReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-topReset</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-bottomReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-bottomReset</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-leftReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-leftReset</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-rightReset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-rightReset</code></a></li>
 				</ul>
 			</td>
 			<td>20.2.0</td>
@@ -484,9 +484,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textLeft(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textLeft</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textCenter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textCenter</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textRight(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textRight</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textLeft(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textLeft</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textCenter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textCenter</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textRight(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textRight</code></a></li>
 				</ul>
 			</td>
 			<td>20.2.0</td>
@@ -502,7 +502,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-clear(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-clear</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-clear(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-clear</code></a>
 			</td>
 			<td>20.2.0</td>
 			<td>–</td>
@@ -512,12 +512,12 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td data-pattern="\.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius[A-Z]\w*(?![\w-])">
 				<p>Angles : pas d’utilitaire logique, utiliser les tokens <code>--pr-t-border-radius-*</code></p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-border(TopLeft%7CTopRight%7CBottomLeft%7CBottomRight)Radius%5BA-Z%5D%5Cw*(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-(textAlign%7Cfloat%7Cclear)(Left%7CRight)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius…</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-border(TopLeft%7CTopRight%7CBottomLeft%7CBottomRight)Radius%5BA-Z%5D%5Cw*(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-(textAlign%7Cfloat%7Cclear)(Left%7CRight)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius…</code></a></li>
 				</ul>
 				<p>Alignement, float &amp; clear : <code>Left</code> : <code>Start</code> / <code>InlineStart</code>, <code>Right</code> : <code>End</code> / <code>InlineEnd</code></p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-(textAlign%7Cfloat%7Cclear)Left(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-(textAlign|float|clear)Left</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-(textAlign%7Cfloat%7Cclear)Right(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-(textAlign|float|clear)Right</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-(textAlign%7Cfloat%7Cclear)Left(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-(textAlign|float|clear)Left</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-(textAlign%7Cfloat%7Cclear)Right(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-(textAlign|float|clear)Right</code></a></li>
 				</ul>
 			</td>
 			<td>20.2.0</td>
@@ -535,7 +535,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-text(X%3FS%7CM%7CX%7B0%2C3%7DL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-text(XS|S|M|L|…)</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-text(X%3FS%7CM%7CX%7B0%2C3%7DL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-text(XS|S|M|L|…)</code></a>
 				(utilitaires de taille)
 			</td>
 			<td>20.2.0</td>
@@ -554,8 +554,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.pr-u-h[56](?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-h5(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-h5</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-h6(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-h6</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-h5(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-h5</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-h6(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-h6</code></a></li>
 				</ul>
 			</td>
 			<td>20.2.0</td>
@@ -570,8 +570,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-text(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-text(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-text</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-delete(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-delete(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-delete</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-text(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-text(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-text</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-delete(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-delete(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-delete</code></a></li>
 				</ul>
 			</td>
 			<td>20.2.0</td>
@@ -593,7 +593,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button-group(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-text(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button-group</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button-group(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-text(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-text</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button-group(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-text(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button-group</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button-group(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-text(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-text</code></a>
 			</td>
 			<td>20.2.0</td>
 			<td>–</td>
@@ -602,9 +602,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.pr-u-border(StartStart|StartEnd|EndStart|EndEnd)?Radius(M|L|XL)(?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-borderRadius(M%7CL%7CXL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-borderRadius(M|L|XL)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-border(StartStart%7CStartEnd%7CEndStart%7CEndEnd)Radius(M%7CL%7CXL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-border(StartStart|StartEnd|EndStart|EndEnd)Radius(M|L|XL)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-border(StartStart%7CStartEnd%7CEndStart%7CEndEnd)RadiusFull(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-border(StartStart|StartEnd|EndStart|EndEnd)RadiusFull</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-borderRadius(M%7CL%7CXL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-borderRadius(M|L|XL)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-border(StartStart%7CStartEnd%7CEndStart%7CEndEnd)Radius(M%7CL%7CXL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-border(StartStart|StartEnd|EndStart|EndEnd)Radius(M|L|XL)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-border(StartStart%7CStartEnd%7CEndStart%7CEndEnd)RadiusFull(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-border(StartStart|StartEnd|EndStart|EndEnd)RadiusFull</code></a></li>
 				</ul>
 			</td>
 			<td>20.2.0</td>
@@ -620,8 +620,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.mod-delete(?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)mod-delete(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-delete</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-textLight(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-textLight</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-delete(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-delete</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-textLight(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-textLight</code></a></li>
 				</ul>
 				(partout dans un sélecteur)
 			</td>
@@ -636,7 +636,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.u-[a-zA-Z]">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-%5Ba-zA-Z%5D%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-…</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-%5Ba-zA-Z%5D%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-…</code></a>
 				(tout utilitaire préfixé <code>.u-</code>)
 			</td>
 			<td>20.2.0</td>
@@ -649,16 +649,16 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.pr-u-textProduct(?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textProduct(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textProduct</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textBrand(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textBrand</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textCritical(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textCritical</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textDefault(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textDefault</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textError(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textError</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textLight(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textLight</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textNeutral(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textNeutral</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textPlaceholder(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textPlaceholder</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textSuccess(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textSuccess</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textWarning(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textWarning</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textProduct(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textProduct</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textBrand(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textBrand</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textCritical(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textCritical</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textDefault(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textDefault</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textError(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textError</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textLight(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textLight</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textNeutral(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textNeutral</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textPlaceholder(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textPlaceholder</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textSuccess(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textSuccess</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textWarning(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textWarning</code></a></li>
 				</ul>
 				(utilitaires renommés très utilisés)
 			</td>
@@ -671,7 +671,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.pr-u-textSuccessContrasted(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textSuccessContrasted(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textWarningContrasted(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textBrandContrasted(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textNavigation(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textPagga(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textPoplee(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textCoreHR(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textTimmi(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textCleemy(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textCc(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textKiwi(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textLime(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textCucumber(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textMint(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textGlacier(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textLagoon(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textBlueberry(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textLavender(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textGrape(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textWatermelon(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textPumpkin(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textPineapple(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-text(Cc|Kiwi|Lime|Mint|…)</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textSuccessContrasted(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textWarningContrasted(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textBrandContrasted(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textNavigation(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textPagga(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textPoplee(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textCoreHR(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textTimmi(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textCleemy(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textCc(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textKiwi(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textLime(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textCucumber(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textMint(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textGlacier(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textLagoon(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textBlueberry(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textLavender(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textGrape(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textWatermelon(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textPumpkin(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textPineapple(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-text(Cc|Kiwi|Lime|Mint|…)</code></a>
 				(utilitaires renommés peu ou pas utilisés)
 			</td>
 			<td>21.0.0</td>
@@ -683,7 +683,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.pr-u-textAI(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textAI(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textAI</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textAI(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textAI</code></a>
 				(utilitaires renommés peu ou pas utilisés)
 			</td>
 			<td>21.0.0</td>
@@ -696,10 +696,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.pr-u-textPrimary(?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textPrimary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textPrimary</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textSecondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textSecondary</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textGrey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textGrey</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textLucca(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textLucca</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textPrimary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textPrimary</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textSecondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textSecondary</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textGrey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textGrey</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textLucca(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textLucca</code></a></li>
 				</ul>
 				(utilitaires renommés très utilisés)
 			</td>
@@ -713,10 +713,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-colorTextGrey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextGrey</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-colorTextLucca(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextLucca</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-colorTextPrimary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextPrimary</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-colorTextSecondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextSecondary</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-colorTextGrey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextGrey</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-colorTextLucca(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextLucca</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-colorTextPrimary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextPrimary</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-colorTextSecondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextSecondary</code></a></li>
 				</ul>
 			</td>
 			<td>21.0.0</td>
@@ -736,7 +736,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)container(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-S(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.container</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)container(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-S(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-S</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)container(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-S(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.container</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)container(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-S(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-S</code></a>
 			</td>
 			<td>21.1.0</td>
 			<td>–</td>
@@ -744,7 +744,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)checkbox(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkbox</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkbox(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkbox</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -753,8 +753,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)radio(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radio</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)radioButtons(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radioButtons</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radio(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radio</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radioButtons(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radioButtons</code></a></li>
 				</ul>
 			</td>
 			<td>21.1.2</td>
@@ -763,7 +763,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)switch(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.switch</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)switch(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.switch</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -771,7 +771,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)textfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.textfield</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)textfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.textfield</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -779,7 +779,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)file(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.file</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)file(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.file</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -787,7 +787,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -801,11 +801,11 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)main(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.main</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)layout(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.layout</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)header(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.header</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)filters(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filters</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)notchBox(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.notchBox</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)main(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.main</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)layout(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.layout</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)header(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.header</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filters(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filters</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)notchBox(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.notchBox</code></a></li>
 				</ul>
 			</td>
 			<td>21.1.2</td>
@@ -814,7 +814,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.label-icon(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)label-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label-icon</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)label-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label-icon</code></a>
 				(partout dans un sélecteur)
 			</td>
 			<td>21.1.2</td>
@@ -823,7 +823,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.pr-u-textPineappleContrasted(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textPineappleContrasted(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textPineappleContrasted</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textPineappleContrasted(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textPineappleContrasted</code></a>
 				(utilitaires renommés peu ou pas utilisés)
 			</td>
 			<td>21.2.4</td>
@@ -835,7 +835,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.pr-u-textOrchid(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-textOrchid(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textOrchid</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-textOrchid(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-textOrchid</code></a>
 				(utilitaires renommés peu ou pas utilisés)
 			</td>
 			<td>21.3.0</td>
@@ -848,8 +848,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)palette-AI(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-AI</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-colorTextAI(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextAI</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)palette-AI(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.palette-AI</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-colorTextAI(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-colorTextAI</code></a></li>
 				</ul>
 			</td>
 			<td>–</td>
@@ -863,7 +863,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)filterPill-combobox(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterPill-combobox</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filterPill-combobox(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterPill-combobox</code></a>
 			</td>
 			<td>–</td>
 			<td>21.3.0</td>
@@ -871,7 +871,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0(?![\w-])">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pr-u-(margin%7Cpadding%7Cinset)(Inline%7CBlock)-(start%7Cend)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-(margin%7Cpadding%7Cinset)(Inline%7CBlock)-(start%7Cend)0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-(margin|padding|inset)(Inline|Block)-(start|end)0</code></a>
 			</td>
 			<td>–</td>
 			<td>22.0.0</td>
@@ -885,7 +885,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)mod-neutralBackground(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-neutralBackground</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-neutralBackground(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-neutralBackground</code></a>
 			</td>
 			<td>22.0.0</td>
 			<td>–</td>
@@ -899,9 +899,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)activityFeed-content-update-after(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.activityFeed-content-update-after</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)activityFeed-content-update-before(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.activityFeed-content-update-before</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)activityFeed-content-update-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.activityFeed-content-update-icon</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)activityFeed-content-update-after(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.activityFeed-content-update-after</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)activityFeed-content-update-before(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.activityFeed-content-update-before</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)activityFeed-content-update-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.activityFeed-content-update-icon</code></a></li>
 				</ul>
 			</td>
 			<td>–</td>
@@ -910,7 +910,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)dataTable(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-hover(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dataTable</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)dataTable(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-hover(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-hover</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)dataTable(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-hover(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.dataTable</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)dataTable(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-hover(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-hover</code></a>
 			</td>
 			<td>22.0.6</td>
 			<td>–</td>
@@ -919,9 +919,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)fancyBox-content-box(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.fancyBox-content-box</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)fancyBox-content-foreground(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.fancyBox-content-foreground</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)fancyBox-content-box-foreground(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.fancyBox-content-box-foreground</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)fancyBox-content-box(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.fancyBox-content-box</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)fancyBox-content-foreground(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.fancyBox-content-foreground</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)fancyBox-content-box-foreground(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.fancyBox-content-box-foreground</code></a></li>
 				</ul>
 			</td>
 			<td>22.1.0</td>
@@ -935,7 +935,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)highlightSection(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.highlightSection</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)highlightSection(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.highlightSection</code></a>
 			</td>
 			<td>22.1.0</td>
 			<td>–</td>
@@ -944,8 +944,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)priorityLevels(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)priorityLevels-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels-icon</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)priorityLevels(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)priorityLevels-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.priorityLevels-icon</code></a></li>
 				</ul>
 			</td>
 			<td>–</td>
@@ -954,7 +954,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)checkboxesfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkboxesfield</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkboxesfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkboxesfield</code></a>
 			</td>
 			<td>–</td>
 			<td>–</td>
@@ -962,7 +962,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)radiosfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radiosfield</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radiosfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radiosfield</code></a>
 			</td>
 			<td>–</td>
 			<td>–</td>
@@ -988,22 +988,22 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td data-pattern="\.grid-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)(\d+|Offset\d+)?(?![\w-])">
 				<p>Colonnes de grille</p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-(xxxs|xxs|xs|s|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-(xxxs|xxs|xs|s|…)(1|2|3|4|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-(xxxs|xxs|xs|s|…)Offset(1|2|3|4|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-(xxxs|xxs|xs|s|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-(xxxs|xxs|xs|s|…)(1|2|3|4|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-(xxxs|xxs|xs|s|…)Offset(1|2|3|4|…)</code></a></li>
 				</ul>
 				<p>Alignements de grille</p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-(xxxs|xxs|xs|s|…)(Start|Center|End|Top|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-(xxxs|xxs|xs|s|…)(Start|Center|End|Top|…)</code></a></li>
 				</ul>
 				<p>Colonnes de formulaire</p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-(xxxs|xxs|xs|s|…)(1|2|3|4|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-(xxxs|xxs|xs|s|…)(1|2|3|4|…)</code></a></li>
 				</ul>
 				<p>Tableaux</p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-stickyColumn-(xxxs|xxs|xs|s|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-layoutFixed-(xxxs|xxs|xs|s|…)(2|3|4|5|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-stickyColumn-(xxxs|xxs|xs|s|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(%5Cd%2B%7COffset%5Cd%2B)%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)(Start%7CCenter%7CEnd%7CTop%7CMiddle%7CBottom%7CAround%7CBetween)(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(stickyColumn-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%7ClayoutFixed-(xxxs%7Cxxs%7Cxs%7Cs%7Cm%7Cl%7Cxl%7Cxxl%7Cxxxl)%5Cd%2B)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-layoutFixed-(xxxs|xxs|xs|s|…)(2|3|4|5|…)</code></a></li>
 				</ul>
 			</td>
 			<td>–</td>
@@ -1013,10 +1013,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)status(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)status-dot(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status-dot</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)status-label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status-label</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)status-dot-important(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status-dot-important</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)status(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)status-dot(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status-dot</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)status-label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status-label</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)status-dot-important(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.status-dot-important</code></a></li>
 				</ul>
 			</td>
 			<td>16.2.0</td>
@@ -1027,19 +1027,19 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td data-pattern="\.grid(-(offset)?\d+)?\\@mediaMin">
 				<p>Colonnes et offsets de l’ancienne grille, toujours suffixés d’un breakpoint (<code>.grid-6\@mediaMinS</code>)</p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5E%7C%5B%5E%5Cw-%5D)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid\@mediaMin…</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5E%7C%5B%5E%5Cw-%5D)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-(1|2|3|4|…)\@mediaMin…</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5E%7C%5B%5E%5Cw-%5D)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-offset(1|2|3|4|…)\@mediaMin…</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid\@mediaMin…</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-(1|2|3|4|…)\@mediaMin…</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid-offset(1|2|3|4|…)\@mediaMin…</code></a></li>
 				</ul>
 				<p>Mods de l’ancienne grille, combinés à <code>.grid</code></p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-reverse(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-reverse(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-reverse</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5E%7C%5B%5E%5Cw-%5D)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5E%7C%5B%5E%5Cw-%5D)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-(start|center|end|top|…)\@mediaMin…</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-reverse(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-reverse(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-reverse</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.grid</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-(start|center|end|top|…)\@mediaMin…</code></a></li>
 				</ul>
 				<p>Utilitaires d’ordre de l’ancienne grille</p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5E%7C%5B%5E%5Cw-%5D)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-first\@mediaMin…</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5E%7C%5B%5E%5Cw-%5D)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-last\@mediaMin…</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-first\@mediaMin…</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(-(offset)%3F%5Cd%2B)%3F%5C%5C%3F%40mediaMin%2F%20OR%20(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)grid(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-(reverse%7C(start%7Ccenter%7Cend%7Ctop%7Cmiddle%7Cbottom%7Caround%7Cbetween)%5C%5C%3F%40mediaMin%5Cw*)(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-(first%7Clast)%5C%5C%3F%40mediaMin%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-last\@mediaMin…</code></a></li>
 				</ul>
 			</td>
 			<td>16.2.0</td>
@@ -1051,7 +1051,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td data-pattern="\.u-elevate.*">
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-elevate.*%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-elevate…</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-elevate.*%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-elevate…</code></a>
 			</td>
 			<td>16.2.0</td>
 			<td>19.1.0</td>
@@ -1059,7 +1059,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)textfield-actionClear(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.textfield-actionClear</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)textfield-actionClear(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.textfield-actionClear</code></a>
 			</td>
 			<td>16.2.2</td>
 			<td>18.1.0</td>
@@ -1067,7 +1067,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-counter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-counter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-counter</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-counter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-counter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-counter</code></a>
 			</td>
 			<td>16.3.0</td>
 			<td>18.1.0</td>
@@ -1076,9 +1076,9 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button-counter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button-counter</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)navSide-item-alert(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.navSide-item-alert</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)lu-select-value%20%5C.label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-select-value .label</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button-counter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button-counter</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)navSide-item-alert(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.navSide-item-alert</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-select-value%20%5C.label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-select-value .label</code></a></li>
 				</ul>
 			</td>
 			<td>16.3.0</td>
@@ -1087,7 +1087,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)callout(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-tiny(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.callout</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)callout(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-tiny(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-tiny</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)callout(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-tiny(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.callout</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)callout(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-tiny(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-tiny</code></a>
 			</td>
 			<td>16.5.0</td>
 			<td>18.1.0</td>
@@ -1095,7 +1095,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-icon</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-icon</code></a>
 			</td>
 			<td>17.2.0</td>
 			<td>19.1.0</td>
@@ -1103,7 +1103,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)actionIcon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.actionIcon</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)actionIcon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.actionIcon</code></a>
 			</td>
 			<td>17.2.0</td>
 			<td>19.1.0</td>
@@ -1117,8 +1117,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-comma(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-comma</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-unit(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-unit</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-comma(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-comma</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-unit(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-unit</code></a></li>
 				</ul>
 			</td>
 			<td>17.4.0</td>
@@ -1128,28 +1128,28 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-gap(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-columnGap(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-rowGap(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-margin(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginBlock(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginBottom(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginInline(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginLeft(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginRight(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginTop(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-padding(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingBlock(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingBottom(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingInline(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingLeft(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingRight(0|Auto|XXS|XS|…)</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingTop(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-gap(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-columnGap(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-rowGap(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-margin(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginBlock(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginBottom(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginInline(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginLeft(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginRight(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-marginTop(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-padding(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingBlock(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingBottom(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingInline(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingLeft(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingRight(0|Auto|XXS|XS|…)</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-paddingTop(0|Auto|XXS|XS|…)</code></a></li>
 				</ul>
 				<p>Utilitaires de bordure à zéro : noms <code>.u-</code> supprimés avec les utilitaires t-shirt, noms <code>.pr-u-</code> toujours livrés</p>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-border0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-border0</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-border(Top|Right|Bottom|Left|…)0</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-border0</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-((margin%7Cpadding)(Top%7CRight%7CBottom%7CLeft)%3F(Auto%7C0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(margin%7Cpadding)(Inline%7CBlock)(Auto%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D)%7C(columnGap%7CrowGap%7Cgap)(0%7CX%7B1%2C2%7D%5BSL%5D%7C%5BSML%5D))(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-border(Top%7CRight%7CBottom%7CLeft%7CInline%7CBlock)%3F0(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-border(Top|Right|Bottom|Left|…)0</code></a></li>
 				</ul>
 			</td>
 			<td>17.4.0</td>
@@ -1171,12 +1171,12 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)user-info(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-info</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)user-tile(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)user-tile-title(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile-title</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)user-tile-label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile-label</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)user-tile-footnote(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile-footnote</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)picture(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.picture</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-info(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-info</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile-title(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile-title</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile-label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile-label</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)user-tile-footnote(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.user-tile-footnote</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)picture(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.picture</code></a></li>
 				</ul>
 			</td>
 			<td>18.2.0</td>
@@ -1185,7 +1185,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)mod-columnSticky-shadowMask(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-columnSticky-shadowMask</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-columnSticky-shadowMask(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-columnSticky-shadowMask</code></a>
 			</td>
 			<td>18.2.0</td>
 			<td>20.1.0</td>
@@ -1194,12 +1194,12 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell-sortableButton(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell-sortableButton</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell-sortableButton-arrows-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell-sortableButton-arrows-ascending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell-sortableButton-arrows-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell-sortableButton-arrows-descending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell-sortableButton(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell-sortableButton</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell-sortableButton-arrows-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell-sortableButton-arrows-ascending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell-sortableButton-arrows-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell-sortableButton-arrows-descending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell-sortableButton(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell-sortableButton</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell-sortableButton-arrows-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell-sortableButton-arrows-ascending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell-sortableButton-arrows-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell-sortableButton-arrows-descending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell-sortableButton(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell-sortableButton</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell-sortableButton-arrows-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell-sortableButton-arrows-ascending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell-sortableButton-arrows-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell-sortableButton-arrows-descending</code></a></li>
 				</ul>
 			</td>
 			<td>18.2.0</td>
@@ -1209,16 +1209,16 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td data-pattern="(?=\S*\.(indexT|t)able-head-row-cell(?![\w-]))(?=\S*\.(mod-sortable|sortedAscending|sortedDescending|is-sorted-(ascending|descending))(?![\w-]))\S*">
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-sortable(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-sortable(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-sortable</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)sortedAscending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)sortedAscending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.sortedAscending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)sortedDescending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)sortedDescending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.sortedDescending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)is-sorted-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)is-sorted-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.is-sorted-ascending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)is-sorted-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)is-sorted-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.is-sorted-descending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-sortable(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-sortable(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-sortable</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)sortedAscending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)sortedAscending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.sortedAscending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)sortedDescending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)sortedDescending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.sortedDescending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)is-sorted-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)is-sorted-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.is-sorted-ascending</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)is-sorted-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)is-sorted-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.is-sorted-descending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-sortable(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-sortable(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-sortable</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)sortedAscending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)sortedAscending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.sortedAscending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)sortedDescending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)sortedDescending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.sortedDescending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)is-sorted-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)is-sorted-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.is-sorted-ascending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)is-sorted-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)is-sorted-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.is-sorted-descending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-sortable(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-sortable(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-sortable</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)sortedAscending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)sortedAscending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.sortedAscending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)sortedDescending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)sortedDescending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.sortedDescending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)is-sorted-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)is-sorted-ascending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.is-sorted-ascending</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)is-sorted-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)is-sorted-descending(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.is-sorted-descending</code></a></li>
 				</ul>
 			</td>
 			<td>18.2.0</td>
@@ -1227,7 +1227,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-nameOnly(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userTile</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-nameOnly(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-nameOnly</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-nameOnly(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userTile</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)userTile(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-nameOnly(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-nameOnly</code></a>
 			</td>
 			<td>18.2.0</td>
 			<td>20.1.0</td>
@@ -1235,7 +1235,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)userPicture-initials(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userPicture-initials</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)userPicture-initials(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.userPicture-initials</code></a>
 			</td>
 			<td>18.2.0</td>
 			<td>20.1.0</td>
@@ -1243,7 +1243,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)comment-content-textContainer(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.comment-content-textContainer</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)comment-content-textContainer(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.comment-content-textContainer</code></a>
 			</td>
 			<td>18.3.0</td>
 			<td>20.1.0</td>
@@ -1252,8 +1252,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)calendarWrapper-navigation(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-prev(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.calendarWrapper-navigation</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)calendarWrapper-navigation(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-prev(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-prev</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)calendarWrapper-navigation(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-next(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.calendarWrapper-navigation</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)calendarWrapper-navigation(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-next(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-next</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)calendarWrapper-navigation(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-prev(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.calendarWrapper-navigation</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)calendarWrapper-navigation(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-prev(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-prev</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)calendarWrapper-navigation(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-next(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.calendarWrapper-navigation</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)calendarWrapper-navigation(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-next(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-next</code></a></li>
 				</ul>
 			</td>
 			<td>–</td>
@@ -1263,8 +1263,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)filterBar-scrollBox-first(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBar-scrollBox-first</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)filterBar-scrollBox-last(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBar-scrollBox-last</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filterBar-scrollBox-first(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBar-scrollBox-first</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filterBar-scrollBox-last(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBar-scrollBox-last</code></a></li>
 				</ul>
 			</td>
 			<td>–</td>
@@ -1274,8 +1274,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		<tr>
 			<td>
 				<ul>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-body-row-cell-subAction(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-body-row-cell-subAction</code></a></li>
-					<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)indexTable-body-row-cell-subActionDropdownTrigger(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-body-row-cell-subActionDropdownTrigger</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-body-row-cell-subAction(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-body-row-cell-subAction</code></a></li>
+					<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)indexTable-body-row-cell-subActionDropdownTrigger(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.indexTable-body-row-cell-subActionDropdownTrigger</code></a></li>
 				</ul>
 			</td>
 			<td>–</td>
@@ -1284,7 +1284,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)calloutPopover-overlay-head-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.calloutPopover-overlay-head-icon</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)calloutPopover-overlay-head-icon(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.calloutPopover-overlay-head-icon</code></a>
 			</td>
 			<td>–</td>
 			<td>21.0.0</td>
@@ -1292,7 +1292,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)multipleSelect-displayer-numericBadge(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.multipleSelect-displayer-numericBadge</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)multipleSelect-displayer-numericBadge(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.multipleSelect-displayer-numericBadge</code></a>
 			</td>
 			<td>–</td>
 			<td>21.0.0</td>
@@ -1300,7 +1300,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)richTextField-toolbar-chips-item(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.richTextField-toolbar-chips-item</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)richTextField-toolbar-chips-item(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.richTextField-toolbar-chips-item</code></a>
 			</td>
 			<td>–</td>
 			<td>21.0.0</td>
@@ -1308,7 +1308,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pagination(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-mods(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pagination</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)pagination(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5E%7C%5B%5E%5Cw-%5D)mod-mods(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-mods</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pagination(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-mods(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pagination</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pagination(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-mods(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-mods</code></a>
 			</td>
 			<td>–</td>
 			<td>21.1.4</td>
