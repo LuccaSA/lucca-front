@@ -16,16 +16,13 @@ Optional: root cause and where to start reading.
 
 -----
 
-### Contribution
+### Recette
 
-- [ ] Root cause of the bug is identified and understood
-- [ ] Fix is proven: a test fails without it, or a visual proof is posted for a rendering fix
-- [ ] Targeted lint and tests pass locally (build and full suites run in CI)
+Done by the author before asking for a review.
 
-### Functional review
-
+- [ ] Root cause is identified and understood
+- [ ] A test fails without the fix, or a before/after visual proof is posted
 - [ ] Bug is no longer reproducible on the Storybook preview
-- [ ] Visual proof and UI diff (QA Webservice check) are OK
-- [ ] All related impacted functionalities are manually tested and show no regression
+- [ ] Related features show no regression, and the UI diff (QA Webservice check) is OK
 
 -----
