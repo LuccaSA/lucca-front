@@ -101,6 +101,27 @@ export default [
 		versionDeleted: '19.1.0',
 	},
 	{
+		// Lowercase breakpoints, renamed in uppercase in 15.1.0: placed before `.form-group` and `.table`, which also match these selectors.
+		// SEE https://regex101.com/r/uw6m3P.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/components/grid/index.scss#L51.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/components/form/index.scss#L24.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/components/tableSticked/index.scss#L14.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a7fd39f92ff5e7d68c4ae07935bb96196fe50815/packages/scss/src/components/tableFixed/index.scss#L15.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/66e12140f271c541e74db3ec79af116c72c69889.
+		objectPattern: [
+			// Colonnes de grille
+			/\.grid-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)(\d+|Offset\d+)?(?![\w-])/,
+			// Alignements de grille
+			/\.mod-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)(Start|Center|End|Top|Middle|Bottom|Around|Between)(?![\w-])/,
+			// Colonnes de formulaire
+			/\.mod-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)\d+(?![\w-])/,
+			// Tableaux
+			/\.mod-(stickyColumn-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)|layoutFixed-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)\d+)(?![\w-])/,
+		],
+		versionDeleted: '15.1.0',
+		actions: `Écrire le point de rupture en majuscules (\`l\` ⇒ \`L\`), puis appliquer les dépréciations suivantes du composant.`,
+	},
+	{
 		// Legacy form layout, including its children (`.form-group-line-col`…)
 		// SEE https://regex101.com/r/s4mzfl.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3cf38ef202523f291b06db60aadc47efd2e7c15a/packages/scss/src/components/form/index.scss#L38.
