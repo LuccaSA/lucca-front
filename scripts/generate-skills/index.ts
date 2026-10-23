@@ -26,6 +26,10 @@
  *   --accept-shrink      Accept content regressions vs the baselines (legitimate deletions)
  *   --accept-output-violations
  *                        Do not fail the run on output-guard violations (see generators/output-guard.ts)
+ *   --offline            No network: ZeroHeight and Figma are read from the committed baselines,
+ *                        the Storybook index from --storybook-index, and no pre-flight runs.
+ *   --storybook-index <file>
+ *                        Storybook index.json to read instead of the deployed one (required by --offline)
  */
 
 import path from 'path';
@@ -34,11 +38,12 @@ import {
 	fetchFigmaDesignTokensMerged,
 	prefetchFigmaNodes,
 	setAcceptShrink as setFigmaAcceptShrink,
+	setOffline as setFigmaOffline,
 } from './collectors/figma-connect';
-import { fetchStorybookIndex, restrictToStoryFamily } from './collectors/storybook';
+import { fetchStorybookIndex, restrictToStoryFamily, setStorybookIndexFile } from './collectors/storybook';
 import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates, resolveScssComponentName, listScssComponentNames, sanitizeScssForwards } from './collectors/story-source';
 import { buildInputDefaults } from './collectors/story-eval';
-import { fetchZeroHeightPageGuarded, setAcceptShrink as setZhAcceptShrink } from './collectors/zeroheight-fetch';
+import { fetchZeroHeightPageGuarded, setAcceptShrink as setZhAcceptShrink, setOffline as setZhOffline } from './collectors/zeroheight-fetch';
 import {
 	FetchFailure,
 	TransientFetchError,
@@ -124,6 +129,8 @@ const flags = {
 	retryFailed: args.includes('--retry-failed'),
 	acceptShrink: args.includes('--accept-shrink'),
 	acceptOutputViolations: args.includes('--accept-output-violations'),
+	offline: args.includes('--offline'),
+	storybookIndex: getFlag('storybook-index'),
 	// ZeroHeight release-ID guard: supply IDs / assert "latest" non-interactively (CI).
 	zhIds: Object.fromEntries(
 		getFlags('zh-id')
@@ -311,6 +318,21 @@ async function main(): Promise<void> {
 	setZhAcceptShrink(flags.acceptShrink);
 	setFigmaAcceptShrink(flags.acceptShrink);
 
+	if (flags.offline) {
+		const refused = [flags.retryFailed && '--retry-failed', flags.acceptShrink && '--accept-shrink'].filter(Boolean);
+		if (refused.length > 0) {
+			console.error(`❌ --offline ne fetch rien : ${refused.join(', ')} n'a pas de sens ici.`);
+			process.exit(1);
+		}
+		if (!flags.storybookIndex) {
+			console.error('❌ --offline exige --storybook-index <fichier> : la liste des composants est construite à partir de l\'index.');
+			process.exit(1);
+		}
+		setZhOffline(true);
+		setFigmaOffline(true);
+	}
+	setStorybookIndexFile(flags.storybookIndex);
+
 	// Replay only the fetches that failed in a previous run (from the manifest).
 	if (flags.retryFailed) {
 		await retryFailedRun(config, FAILURES_MANIFEST);
@@ -383,9 +405,11 @@ async function main(): Promise<void> {
 	// what a dry run is for.
 	// Phase 2 — a usable Figma token, or a deliberate yes to generate without one. A question, so it
 	// is skipped when nothing will be written, like the ZeroHeight guard below.
+	// Offline, every check here is a network call with nothing to ask: the tag itself is already
+	// proven by resolveMinorVersion.
 	try {
-		await ensureReleasesExist([...resolutions.values()]);
-		if (!flags.dryRun) await ensureFigmaAccess(config.figma, { skipFigma: flags.skipFigma });
+		if (!flags.offline) await ensureReleasesExist([...resolutions.values()]);
+		if (!flags.dryRun && !flags.offline) await ensureFigmaAccess(config.figma, { skipFigma: flags.skipFigma });
 	} catch (err: any) {
 		if (!(err instanceof PreflightAbort)) throw err;
 		// A refusal is a decision, not a crash — but nothing was generated, so it still exits 1,
@@ -397,7 +421,7 @@ async function main(): Promise<void> {
 	// Phase 3 — every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
 	// the confirmed latest online. Aborts before any heavy work if an unpinned, superseded minor is
 	// unresolved (would otherwise pull "latest" = a newer version and corrupt its design sections).
-	if (!flags.skipZeroheight && !flags.dryRun) {
+	if (!flags.skipZeroheight && !flags.dryRun && !flags.offline) {
 		try {
 			await ensureZhReleaseIds(flags.versions, config.output.skillsDir, { zhIds: flags.zhIds, zhLatest: flags.zhLatest });
 		} catch (err: any) {
@@ -531,10 +555,11 @@ async function main(): Promise<void> {
 		console.log(`📝 Review changelog: ${path.relative(config.output.skillsDir, clPath)}`);
 	}
 
-	// Surface ZH/Figma fetch failures (content missing) and persist them for replay.
+	// Surface ZH/Figma fetch failures (content missing) and persist them for replay. Offline fetches
+	// nothing, so it leaves the manifest of the last online run alone.
 	if (!flags.dryRun && !flags.component) {
 		reportFailures();
-		writeFailureManifest(FAILURES_MANIFEST);
+		if (!flags.offline) writeFailureManifest(FAILURES_MANIFEST);
 	}
 
 	console.log(`\n🎉 All done! ${flags.versions.length} version(s), ${totalSuccess} generated, ${totalErrors} errors`);
@@ -711,7 +736,7 @@ async function processVersion(
 
 	// Batched Figma prefetch: all node ids in a handful of Tier-1 requests, filling the process
 	// cache so the per-component fetches below are network no-ops (cache persists across versions).
-	if (!flags.skipFigma && config.figma.token) {
+	if (!flags.skipFigma && !flags.offline && config.figma.token) {
 		const allNodeIds = entries.flatMap(([, entry]) => entry.figmaNodeIds ?? []);
 		if (allNodeIds.length > 0) {
 			await prefetchFigmaNodes(config.figma.fileKey, allNodeIds, config.figma.token);
@@ -859,7 +884,7 @@ async function processVersion(
 
 			// 5. Figma tokens (optional, unversioned) — ALL node ids merged (aliases, split sets)
 			let figmaTokens = null;
-			if (!flags.skipFigma && entry.figmaNodeIds && entry.figmaNodeIds.length > 0 && config.figma.token) {
+			if (!flags.skipFigma && entry.figmaNodeIds && entry.figmaNodeIds.length > 0 && (config.figma.token || flags.offline)) {
 				try {
 					figmaTokens = await fetchFigmaDesignTokensMerged(config.figma.fileKey, entry.figmaNodeIds, config.figma.token);
 				} catch (err: any) {
