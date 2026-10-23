@@ -210,6 +210,10 @@ description: Regenerate docs/life-cycle.md from the LFDeprecatedSelectors.mjs / 
     inline-size: 39% !important;
   }
 
+  table :is(th, td):is(:nth-child(2), :nth-child(3)) {
+    text-align: center !important;
+  }
+
   td > :is(ol, ul) {
     list-style-position: outside !important;
     padding-inline-start: 0.5rem !important;

@@ -13,6 +13,10 @@ Référence : [Cycle de vie des composants](https://prisme.lucca.io/94310e217/p
     inline-size: 39% !important;
   }
 
+  table :is(th, td):is(:nth-child(2), :nth-child(3)) {
+    text-align: center !important;
+  }
+
   td > :is(ol, ul) {
     list-style-position: outside !important;
     padding-inline-start: 0.5rem !important;
