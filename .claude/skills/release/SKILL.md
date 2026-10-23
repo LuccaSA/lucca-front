@@ -1,6 +1,6 @@
 ---
 name: release
-description: 'Prépare la sortie d’une version Lucca Front (`/release 22.1`, `/release 22.0.6`) : changelog GitHub, CHANGELOG.md des composants, PR de sync vers les releases en cours pour un patch et, pour une mineure ou une majeure, PR release → master, utilitaire highlight-prisme et propositions de migrations.'
+description: 'Prépare la sortie d’une version Lucca Front (`/release 22.1`, `/release 22.0.6`) : changelog GitHub, CHANGELOG.md des composants, contenu ZeroHeight de la skill lucca-front, PR de sync vers les releases en cours pour un patch et, pour une mineure ou une majeure, PR release → master, utilitaire highlight-prisme et propositions de migrations.'
 argument-hint: '<version> (ex. 22.1, 23.0, 22.0.6)'
 disable-model-invocation: true
 ---
@@ -73,7 +73,7 @@ Il produit un bloc markdown à copier-coller : le reprendre tel quel dans le rap
 
 ---
 
-## Étape 2 — CHANGELOG.md des composants (tous types)
+## Étape 2 — CHANGELOG.md des composants et contenu ZeroHeight de la skill (tous types)
 
 ### Branche
 
@@ -98,13 +98,55 @@ git diff --name-only <PREV_TAG>..origin/<branche source> -- packages/ng packages
 
 Rapprocher les noms SCSS (camelCase) des entrypoints Angular (kebab-case) et ne garder que ceux qui ont un `CHANGELOG.md` (`find packages -name CHANGELOG.md -not -path '*/node_modules/*'`). Un composant sans CHANGELOG.md est listé dans le rapport, pas créé.
 
-Si la liste est vide (release purement technique ou documentaire), le dire, supprimer la branche locale (`git switch - && git branch -d docs/components-changelog-X.Y.Z`) et passer à l'étape suivante sans PR.
+Si la liste est vide (release purement technique ou documentaire), le dire et passer directement à « Contenu ZeroHeight de la skill » : la branche ne porte alors que ce rafraîchissement.
 
 ### Mise à jour
 
 Appliquer le skill `update-components-changelog` à chacun de ces composants, avec **une seule adaptation** : la version `X.Y.Z` n'est pas encore taguée, mais c'est elle qu'on documente. Les commits de `<PREV_TAG>..origin/<branche source>` vont sous `### X.Y.Z`, au lieu d'être écartés comme « non publiés ». Les versions déjà publiées et non documentées suivent la règle normale du skill.
 
 Recouper avec le changelog de l'étape 1 : une entrée de composant sans PR correspondante dans le milestone (ou l'inverse) est signalée, pas tranchée en silence.
+
+### Contenu ZeroHeight de la skill
+
+Le hook pre-commit et la CI régénèrent la skill `lucca-front` hors ligne, depuis les baselines committées (`scripts/generate-skills/baselines/zeroheight/`) : sans ce rafraîchissement, le tag livre le contenu ZeroHeight du dernier run en ligne, aussi ancien soit-il. Ne jamais lancer `npm run skills:generate -- --version X.Y` ici : sur une branche qui suit le code, ce mode écrit une skill de release que `skills:check` rejette.
+
+Sauter cette sous-étape, et le dire dans le rapport, si `.github/skills/_lucca-front/versions.json` ne porte pas `"followsCode": true` (cas des `vX.Y-lts`).
+
+**Choisir la release ZeroHeight.** Le run nomme la skill d'après le dernier tag stable de la branche, `M.m` :
+
+```bash
+git describe --tags --abbrev=0 --match 'v*' --exclude '*-*'   # ex. v22.1.3 → M.m = 22.1
+```
+
+Ouvrir le sélecteur de versions de Prisme (https://prisme.lucca.io/94310e217/) et regarder `M.m` dans `scripts/generate-skills/zh-release-ids.json` :
+
+| Situation | Option |
+|---|---|
+| Patch, et Prisme n'a pas de release `vM.m` | `--zh-latest M.m` |
+| Patch, et Prisme a déjà figé `vM.m` (il documente la mineure suivante en « latest ») | `--zh-id M.m=<id>`, l'ID lu dans l'URL `/v/<id>/` de la release |
+| Mineure ou majeure, `M.m` (la mineure précédente) absent de `zh-release-ids.json` | `--zh-latest M.m` : « latest » documente la nouvelle mineure, celle du code de `release/X.Y` |
+| Mineure ou majeure, `M.m` présent dans `zh-release-ids.json` | sauter : le run lirait la release figée de la mineure précédente. Le rafraîchissement se fera au premier patch |
+
+Une mineure déjà dans `zh-release-ids.json` n'a besoin d'aucune option.
+
+**Rafraîchir**, depuis la branche `docs/components-changelog-X.Y.Z` :
+
+```bash
+npm run skills:generate -- --ref HEAD --zh-latest M.m   # ou --zh-id M.m=<id>
+npm run skills:generate -- --retry-failed               # tant que .github/skills/_fetch-failures.json liste des échecs, 3 passes au plus
+npm run skills:update
+```
+
+Un échec `shrink` restant signale une page ZeroHeight qui a perdu une section ou plus de 20 % de son contenu. Ne passer `--accept-shrink` (sur le premier run) qu'après avoir vérifié sur Prisme que la suppression est voulue ; sinon, garder la baseline et le noter dans le rapport.
+
+Lister les pages dont le contenu a changé, pour la PR et le rapport :
+
+```bash
+git status --porcelain -- scripts/generate-skills/baselines/zeroheight | awk '{print $NF}' \
+  | xargs -I{} sh -c 'grep -m1 "^title:" "{}" 2>/dev/null || echo "{} (supprimée)"'
+```
+
+Si rien n'a changé et que la liste des composants était vide, supprimer la branche locale (`git switch - && git branch -d docs/components-changelog-X.Y.Z`) et passer à l'étape suivante sans PR.
 
 ### PR
 
@@ -117,15 +159,20 @@ Montrer le `git diff --stat` et demander confirmation :
 Pour chaque étape validée :
 
 ```bash
+git add -- scripts/generate-skills/baselines/zeroheight scripts/generate-skills/zh-release-ids.json .github/skills/lucca-front .github/skills/_lucca-front/versions.json scripts/generate-skills/component-metadata.json
+git commit -m "chore(skills): refresh the ZeroHeight content for X.Y.Z"
 git add -- ':(glob)packages/**/CHANGELOG.md'
 git commit -m "docs(changelog): update components changelog for X.Y.Z"
+npm run skills:check
 git push -u origin docs/components-changelog-X.Y.Z
 gh pr create --base <release/X.Y | master | vX.Y-lts> --template feature.md \
   --title "docs(changelog): update components changelog for X.Y.Z" \
   --label ":book: Documentation changes" --label "🤖 Produced by AI"
 ```
 
-Remplir le template sans retirer les séparateurs `-----` : une phrase dans le premier bloc, la liste des composants touchés dans le second. Ajouter le milestone de la version (`--milestone X.Y` / `X.Y.Z`).
+Ne faire que le commit qui a quelque chose à commiter. S'il ne reste que le rafraîchissement, titrer la PR `chore(skills): refresh the ZeroHeight content for X.Y.Z` avec le label `:hammer: Technical`. Le rafraîchissement passe en premier : le hook pre-commit relit les baselines sur le disque, et les commits suivants régénèrent la skill avec elles. `npm run skills:check` doit passer avant le push : c'est le contrôle que la CI refera.
+
+Remplir le template sans retirer les séparateurs `-----` : une phrase dans le premier bloc, la liste des composants touchés et des pages ZeroHeight modifiées dans le second. Ajouter le milestone de la version (`--milestone X.Y` / `X.Y.Z`).
 
 **Pour une mineure ou une majeure, passer à l'étape 3.** Un patch continue à l'étape 2 bis.
 
@@ -266,7 +313,8 @@ Un tableau, une ligne par changement : composant, changement, PR, proposition (s
 Court, dans cet ordre :
 
 1. Le changelog GitHub en bloc markdown à copier-coller (étape 1), avec le compte de PRs et les PRs encore ouvertes.
-2. Les liens des PR ouvertes ou existantes : changelog des composants, sync vers les releases en cours, release → master, highlight-prisme.
+2. Les liens des PR ouvertes ou existantes : changelog des composants et contenu ZeroHeight, sync vers les releases en cours, release → master, highlight-prisme.
 3. Les écarts relevés : composants sans CHANGELOG.md, divergences changelog GitHub / CHANGELOG des composants, étapes sautées et pourquoi.
 4. Mineure / majeure : le tableau des migrations proposées, en attente de décision.
-5. Mineure / majeure : déclarer la mineure de la documentation LLM dans la PR release → master, **avant** le tag `vX.Y.0` : `npm run skills:update -- --minor X.Y`, puis committer `.github/skills/_lucca-front/llms` et `.github/skills/_lucca-front/versions.json`. Sans ça, le package `.0` livre une documentation nommée d'après la mineure précédente (cf. `scripts/generate-skills/README.md`, « Une documentation qui suit le code »).
+5. Le rafraîchissement ZeroHeight de la skill : l'option utilisée (`--zh-latest` ou `--zh-id`), les pages modifiées, ou pourquoi il a été sauté. Le tag coupé après le merge de la PR est celui dont le package npm livre ce contenu.
+6. Mineure / majeure : déclarer la mineure de la documentation LLM dans la PR release → master, **avant** le tag `vX.Y.0` : `npm run skills:update -- --minor X.Y`, puis committer `.github/skills/_lucca-front/llms` et `.github/skills/_lucca-front/versions.json`. Sans ça, le package `.0` livre une documentation nommée d'après la mineure précédente (cf. `scripts/generate-skills/README.md`, « Une documentation qui suit le code »).
