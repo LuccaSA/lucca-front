@@ -105,9 +105,9 @@ const compare = (a, b) => (a && b ? a.localeCompare(b, undefined, { numeric: tru
 const byVersion = (x, y) =>
 	compare(x.versionDeprecated ?? x.versionDeleted, y.versionDeprecated ?? y.versionDeleted) ||
 	compare(x.versionDeleted ?? x.versionDeprecated, y.versionDeleted ?? y.versionDeprecated);
+const byDeletion = (x, y) => compare(x.versionDeleted, y.versionDeleted) || compare(x.versionDeprecated, y.versionDeprecated);
 const section = (title, source, entries, nom) =>
 	`## ${title}\n\n${source}\n\n<table>\n\t<thead>\n\t\t<tr>\n${heads}\n\t\t</tr>\n\t</thead>\n\t<tbody>\n${entries
-		.sort(byVersion)
 		.map((e) => row(nom(e), e))
 		.join('\n')}\n\t</tbody>\n</table>\n`;
 const blob = (file) => `[${file}](https://github.com/LuccaSA/lucca-front/blob/master/${dir}${file})`;
@@ -121,7 +121,8 @@ const named = components([...selectors, ...properties]);
 const nom = (e) => unlist(linkNom(nomHtml(e), e));
 // Each doc keeps everything before `## Composants`: its title, note and style.
 const write = (path, keep) => {
-	const pick = (entries) => entries.filter((e) => deleted(e) === keep);
+	// The deleted doc sorts by deletion first.
+	const pick = (entries) => entries.filter((e) => deleted(e) === keep).sort(keep ? byDeletion : byVersion);
 	const sections = [
 		section(
 			'Composants',

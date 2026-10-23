@@ -162,10 +162,11 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 * Empty cells hold an en dash `–` (U+2013), never the em dash.
 	* A schematics-only entry shows just the `(schematics)` link.
 * One row per source object: a merged object stays one row, structured by its comment labels.
-* Rows run oldest first in all three tables.
+* Rows run oldest first in every table.
 	* The primary key is *Depuis*.
 	* *Suppression* breaks ties.
 	* Rows without any version come last.
+	* The deleted doc swaps the keys: *Suppression* first, *Depuis* breaking ties.
 * Entries whose deletion shipped go to `docs/life-cycle-deleted.md`, with the same three tables.
 	* "Shipped" means at or below the latest stable tag reachable from `HEAD`.
 	* The `.mjs` files keep them: the linter still flags residual use.
