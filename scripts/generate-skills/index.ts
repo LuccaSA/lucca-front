@@ -47,6 +47,7 @@ import {
 	setAcceptShrink as setFigmaAcceptShrink,
 	setOffline as setFigmaOffline,
 } from './collectors/figma-connect';
+import { promoteEagerly } from './collectors/git-snapshot';
 import { fetchStorybookIndex, restrictToStoryFamily, setStorybookIndexFile } from './collectors/storybook';
 import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates, resolveScssComponentName, listScssComponentNames, sanitizeScssForwards } from './collectors/story-source';
 import { buildInputDefaults } from './collectors/story-eval';
@@ -372,6 +373,7 @@ async function main(): Promise<void> {
 		}
 		flags.versions.splice(0, flags.versions.length, resolved.minorKey);
 		if (!flags.storybookIndex) flags.storybookIndex = buildStorybookIndex(resolved.version.source);
+		if (!flags.component) promoteEagerly();
 	}
 	setStorybookIndexFile(flags.storybookIndex);
 
