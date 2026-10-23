@@ -3,9 +3,11 @@
 // Composants lists the entries holding a `name`.
 // Everything before `## Composants` (title, note, style) is kept as is.
 // Usage, from the repository root: node .claude/skills/update-deprecated-doc/scripts/generate.mjs
-import { readdirSync, readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { marked } from 'marked';
-import { comboRe, nomItems, rootToken } from './nom.mjs';
+import { components } from './components.mjs';
+import { linkNom } from './links.mjs';
+import { nomItems, rootToken } from './nom.mjs';
 
 const dir = 'packages/stylelint-config/';
 const docPath = 'docs/life-cycle.md';
@@ -99,8 +101,6 @@ const actionsHtml = (e) => {
 };
 
 // --- Nom derivation ---
-// An element selector opens with the lookbehind `(?<![\w.#-])`: it keeps classes and ids out.
-const elementStart = /^\(\?<!\[\\w\.#-\]\)/;
 // Nom cells are built in Markdown, then rendered by `marked`: no blank line survives inside a cell.
 const code = (t) => `\`${t}\``;
 const render = (md) => marked.parse(md).replace(/\n+/g, '\n').trim();
@@ -120,50 +120,6 @@ const nomHtml = (e) => {
 			: []),
 	]);
 	return render(md.join('\n\n'));
-};
-
-// --- Search links: each Nom token links to a GitHub code search of the org's consumers ---
-// GitHub code search regexes have no lookaround: a token boundary is a non-token character or a line edge.
-const ghBefore = '(^|[^\\w-])';
-const ghAfter = '([^\\w-]|$)';
-// A class is searched as a selector (`.name`) or as a token of a `class` attribute: the bare word would match any identifier.
-const ghClassBefore = '(\\.|class="([^"]*\\s)?)';
-const ghToken = (src) =>
-	(src.startsWith('\\.') ? ghClassBefore : ghBefore) +
-	src
-		.replace(/^\\\./, '')
-		.replace(elementStart, '')
-		.replace(/\(\?!\[\\w-\]\)/g, ghAfter)
-		.replace(/\\b/g, ghAfter)
-		// `\@` in a Sass selector is a plain `@` in markup.
-		.replace(/\\\\@/g, '\\\\?@');
-const ghCombo = (src) => {
-	const m = src.match(comboRe);
-	return (m ? [m[1], m[2]] : [src]).map((s) => `/${ghToken(s)}/`).join(' AND ');
-};
-// A displayed token: `(a|b)` groups stay alternations, `…` crops fall back to the entry patterns.
-const ghDisplayed = (text) => `/${text.startsWith('.') ? ghClassBefore : ghBefore}${text.replace(/^\./, '').replace(/[.*+[\]{}^$\\]/g, '\\$&')}${ghAfter}/`;
-// Alternatives are grouped: the repository filters must apply to every one of them.
-const searchUrl = (q) => `https://github.com/search?q=${encodeURIComponent(`${q.includes(' OR ') ? `(${q})` : q} org:LuccaSA NOT repo:LuccaSA/lucca-front`)}&amp;type=code`;
-const unesc = (t) => t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-// `shared` links every item to the search of all the entry's patterns.
-const linkNom = (html, e, shared = false) => {
-	const sources = e.groups.flatMap((g) => g.sources);
-	const fallback = sources.map((s) => (sources.length > 1 && comboRe.test(s) ? `(${ghCombo(s)})` : ghCombo(s))).join(' OR ');
-	const link = (q, code) => `<a href="${searchUrl(q)}">${code}</a>`;
-	return html
-		.replace(/<a href="https:\/\/github\.com\/search[^"]*">(<code>[\s\S]*?<\/code>)<\/a>/g, '$1')
-		.replace(/<li>([\s\S]*?)<\/li>/g, (whole, inner) => {
-			const codes = [...inner.matchAll(/<code>([\s\S]*?)<\/code>/g)].map((m) => unesc(m[1]));
-			if (!codes.length) return whole;
-			const query =
-				shared || codes.some((c) => c.includes('…'))
-					? fallback
-					: codes.length === 2 && inner.includes('<strong>+</strong>')
-						? codes.map(ghDisplayed).join(' AND ')
-						: ghDisplayed(codes[0]);
-			return `<li>${inner.replace(/<code>[\s\S]*?<\/code>/g, (code) => link(query, code))}</li>`;
-		});
 };
 
 const indent = (html, tabs) =>
@@ -213,7 +169,7 @@ const compareAsc = (a, b) => (!a || !b ? compareDesc(a, b) : compareDesc(b, a));
 const byVersionAsc = (x, y) =>
 	compareAsc(semver(x.versionDeprecated ?? x.versionDeleted), semver(y.versionDeprecated ?? y.versionDeleted)) ||
 	compareAsc(semver(x.versionDeleted ?? x.versionDeprecated), semver(y.versionDeleted ?? y.versionDeprecated));
-const table = (entries) => `${thead}\n${entries.map(row).join('\n')}\n\t</tbody>\n</table>\n`;
+const table = (entries, toRow = row) => `${thead}\n${entries.map(toRow).join('\n')}\n\t</tbody>\n</table>\n`;
 const files = { Classes: 'LFDeprecatedSelectors.mjs', 'Variables CSS': 'LFDeprecatedProperties.mjs' };
 const entries = Object.fromEntries(Object.entries(files).map(([title, file]) => [title, parse(file)]));
 // An entry with a `name` deprecates a whole component: it goes to Composants.
@@ -222,46 +178,7 @@ const section = (title) =>
 		entries[title].filter((e) => !e.name).sort(byVersionAsc),
 	)}`;
 
-// --- Composants: the entries holding a `name` ---
-// Entries sharing a name merge into one: their patterns add up, the first defined value wins otherwise.
-const named = new Map();
-for (const e of Object.values(entries)
-	.flat()
-	.filter((e) => e.name)) {
-	const m = named.get(e.name);
-	if (!m) named.set(e.name, { ...e, groups: [...e.groups] });
-	else {
-		m.groups.push(...e.groups);
-		for (const k of ['versionDeprecated', 'versionDeleted', 'actions', 'prisme', 'schematics']) m[k] ??= e[k];
-	}
-}
-// --- Composants: the Angular `@deprecated` markers pointing to a Prisme page ---
-// Convention: `@deprecated since X.Y.Z, replaced by Symbol…` plus `@see <Prisme page of the deprecated component>`.
-// Classes sharing a page share the row, which takes the earliest version.
-const ngDir = 'packages/ng';
-const ngFiles = readdirSync(ngDir, { recursive: true })
-	.filter((f) => f.endsWith('.ts') && !/\.spec\.ts$|\.module\.ts$|\/schematics\//.test(`/${f}`))
-	.map((f) => `${ngDir}/${f}`);
-const slugName = (url) =>
-	url
-		.split('/')
-		.pop()
-		.replace(/^[0-9a-f]{6}-/, '')
-		.replace(/-/g, ' ')
-		.replace(/^./, (c) => c.toUpperCase());
-for (const f of ngFiles) {
-	for (const [, doc] of read(f).matchAll(/\/\*\*([\s\S]*?)\*\//g)) {
-		const dep = doc.match(/@deprecated since (\d+\.\d+\.\d+), replaced by (\w+)/);
-		const see = doc.match(/@see (https:\/\/prisme\.lucca\.io\/\S+)/);
-		if (!dep || !see) continue;
-		const name = slugName(see[1]);
-		const e = named.get(name) ?? { name, groups: [], actions: null, schematics: null };
-		named.set(name, e);
-		e.prisme ??= see[1];
-		e.actions ??= `Remplacer par \`${dep[2]}\`.`;
-		if (!e.versionDeprecated || compareAsc(semver(dep[1]), semver(e.versionDeprecated)) < 0) e.versionDeprecated = dep[1];
-	}
-}
+// --- Composants ---
 // A component shows one root class per pattern, its shortest form: the search still covers every class.
 const tokens = (e) => {
 	const roots = [...new Set(e.groups.flatMap((g) => g.sources).map(rootToken))];
@@ -282,11 +199,6 @@ const compRow = (e) =>
 		cell(unlist(actionsHtml(e))),
 		'\t\t</tr>',
 	].join('\n');
-const composants = `## Composants\n\nSources\u00a0: [${files.Classes}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${files.Classes}) et les marqueurs \`@deprecated\` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)\n\n${thead}\n${[
-	...named.values(),
-]
-	.sort(byVersionAsc)
-	.map(compRow)
-	.join('\n')}\n\t</tbody>\n</table>\n`;
+const composants = `## Composants\n\nSources\u00a0: [${files.Classes}](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/${files.Classes}) et les marqueurs \`@deprecated\` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)\n\n${table(components(Object.values(entries).flat()).sort(byVersionAsc), compRow)}`;
 
 writeFileSync(docPath, `${docHead.trimEnd()}\n\n${composants}\n${section('Classes')}\n${section('Variables CSS')}`);
