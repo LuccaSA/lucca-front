@@ -64,7 +64,7 @@ export default {
 			if: { arg: 'heading', truthy: true },
 			options: setStoryOptions(BOX_HX),
 			control: { type: 'select' },
-			description: 'Niveau aria du titre. 3 par défaut.',
+			description: 'Applique un niveau sémantique au titre.',
 			table: { category: 'inputs' },
 		},
 		intl: intlArgType(luBoxTranslations, 'LuBoxLabel'),

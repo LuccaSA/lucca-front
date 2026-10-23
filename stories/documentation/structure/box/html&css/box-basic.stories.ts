@@ -11,7 +11,7 @@ function getTemplate(args: BasicStory): string {
 	return `<div class="box">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div role="heading" aria-level="3" class="box-header-title">Title</div>
+			<div class="box-header-title">Title</div>
 			<p class="box-header-subtitle">Subtitle</p>
 		</div>
 	</div>
