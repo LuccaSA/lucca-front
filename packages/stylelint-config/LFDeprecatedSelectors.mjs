@@ -781,12 +781,22 @@ export default [
 		`,
 	},
 	{
-		// The -box era (.fancyBox-content-box, .fancyBox-content-box-foreground) shipped until v20.4.1.
+		// Renamed in 21.0.0 without a deprecation.
+		// SEE https://regex101.com/r/28zhPD.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/c950a979482bda7cd43333f4cc31aadd37ed8e3a/packages/scss/src/components/fancyBox/component.scss#L23.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/3375eeb460e7ed71fbdbfad39f3fd8b7e3fd7ab2.
+		objectPattern: /\.fancyBox-content-box(-foreground)?(?![\w-])/,
+		versionDeleted: '21.0.0',
+		actions: `
+			* \`.fancyBox-content-box\` ⇒ \`.fancyBox-content\`
+			* \`.fancyBox-content-box-foreground\` ⇒ \`.fancyBox-content-foreground\`, elle-même dépréciée en 22.1.0
+		`,
+	},
+	{
 		// SEE https://regex101.com/r/HRgrNj.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/db08f46234ab6e5717d83b3c72d36dedfd180a43/packages/scss/src/components/fancyBox/component.scss#L76.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/44cc1f8955d65494d6ccfbdd1cf6ff04379363d4/packages/ng/fancy-box/CHANGELOG.md#L19.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/c950a979482bda7cd43333f4cc31aadd37ed8e3a/packages/scss/src/components/fancyBox/component.scss#L23.
-		objectPattern: /\.fancyBox-content-(box(-foreground)?|foreground)(?![\w-])/,
+		objectPattern: /\.fancyBox-content-foreground(?![\w-])/,
 		versionDeprecated: '22.1.0',
 		actions: `
 			* HTML : composant \`lu-fancy-box\`, renommer la classe seule fait disparaître les illustrations
