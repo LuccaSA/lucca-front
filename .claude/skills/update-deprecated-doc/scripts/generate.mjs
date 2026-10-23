@@ -37,7 +37,7 @@ const load = async (file) => {
 		.slice(1);
 	const { default: data } = await import(pathToFileURL(dir + file));
 	if (chunks.length !== data.length) throw new Error(`${file}: ${chunks.length} entry blocks for ${data.length} entries`);
-	return data.map(({ urls, ...e }, k) => ({ ...e, ...urls, groups: groupsOf(chunks[k]) }));
+	return data.map(({ urls, ...e }, k) => ({ ...e, ...urls, groups: groupsOf(chunks[k]), sources: [file] }));
 };
 
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -106,11 +106,18 @@ const byVersion = (x, y) =>
 	compare(x.versionDeprecated ?? x.versionDeleted, y.versionDeprecated ?? y.versionDeleted) ||
 	compare(x.versionDeleted ?? x.versionDeprecated, y.versionDeleted ?? y.versionDeprecated);
 const byDeletion = (x, y) => compare(x.versionDeleted, y.versionDeleted) || compare(x.versionDeprecated, y.versionDeprecated);
+// A section cites only the sources of its rows, in a fixed order.
+const ngMarkers = 'les marqueurs `@deprecated` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)';
+const sourceOrder = ['LFDeprecatedSelectors.mjs', 'LFDeprecatedProperties.mjs', 'LFDeprecatedScss.mjs', 'ng'];
+const sourceLine = (entries) => {
+	const used = sourceOrder.filter((s) => entries.some((e) => e.sources.includes(s))).map((s) => (s === 'ng' ? ngMarkers : blob(s)));
+	return `${used.length > 1 ? 'Sources' : 'Source'} : ${used.length > 1 ? `${used.slice(0, -1).join(', ')} et ${used.at(-1)}` : used[0]}`;
+};
 // A section without rows is left out.
-const section = (title, source, entries, nom) =>
+const section = (title, entries, nom) =>
 	!entries.length
 		? ''
-		: `## ${title}\n\n${source}\n\n<table>\n\t<thead>\n\t\t<tr>\n${heads}\n\t\t</tr>\n\t</thead>\n\t<tbody>\n${entries
+		: `## ${title}\n\n${sourceLine(entries)}\n\n<table>\n\t<thead>\n\t\t<tr>\n${heads}\n\t\t</tr>\n\t</thead>\n\t<tbody>\n${entries
 				.map((e) => row(nom(e), e))
 				.join('\n')}\n\t</tbody>\n</table>\n`;
 const blob = (file) => `[${file}](https://github.com/LuccaSA/lucca-front/blob/master/${dir}${file})`;
@@ -129,15 +136,10 @@ const write = (path, keep) => {
 	// The deleted doc sorts by deletion first.
 	const pick = (entries) => entries.filter((e) => deleted(e) === keep).sort(keep ? byDeletion : byVersion);
 	const sections = [
-		section(
-			'Composants',
-			`Sources : ${blob('LFDeprecatedSelectors.mjs')}, ${blob('LFDeprecatedScss.mjs')} et les marqueurs \`@deprecated\` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)`,
-			pick(named),
-			(e) => nameHtml(e) + tokens(e),
-		),
-		section('Classes', `Source : ${blob('LFDeprecatedSelectors.mjs')}`, pick(selectors.filter((e) => !e.name)), nom),
-		section('Variables CSS', `Source : ${blob('LFDeprecatedProperties.mjs')}`, pick(properties.filter((e) => !e.name)), nom),
-		section('Mixins', `Source : ${blob('LFDeprecatedScss.mjs')}`, pick(scss.filter((e) => !e.name)), nom),
+		section('Composants', pick(named), (e) => nameHtml(e) + tokens(e)),
+		section('Classes', pick(selectors.filter((e) => !e.name)), nom),
+		section('Variables CSS', pick(properties.filter((e) => !e.name)), nom),
+		section('Mixins', pick(scss.filter((e) => !e.name)), nom),
 	];
 	writeFileSync(path, `${read(path).split('## Composants')[0].trimEnd()}\n\n${sections.filter(Boolean).join('\n')}`);
 };

@@ -190,7 +190,8 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	2. A `Source :` line.
 	3. An HTML `<table>`, never a Markdown table.
 * Source links are absolute GitHub blob URLs on `master`.
-	* *Composants* cites three sources: two `.mjs` files and the `packages/ng` markers.
+	* Each line cites only the sources of its rows, in a fixed order.
+	* *Composants* can mix `.mjs` files and the `packages/ng` markers.
 * All tables share one `<thead>`, kept from Prisme:
 	1. *Nom*: the component, or the `objectPattern`.
 	2. *Depuis*: `versionDeprecated`.
@@ -224,7 +225,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 ```html
 ## Composants
 
-Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs), [LFDeprecatedScss.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedScss.mjs) et les marqueurs `@deprecated` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)
+Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs) et les marqueurs `@deprecated` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)
 
 <table>
 	<thead>
