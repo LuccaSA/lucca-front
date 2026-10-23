@@ -45,15 +45,38 @@ function isRich(data: ZeroHeightData): boolean {
 //   re-fetches, so ZH edits within a release are picked up.
 //
 // • Baseline (disk, COMMITTED — scope = repo): the last-known-good raw markdown per
-//   (releaseId, pagePath). It is NEVER used as a source — every run fetches fresh. It is only an
+//   (releaseId, pagePath). An online run never uses it as a source — it fetches fresh. It is an
 //   oracle: if the fresh content *shrinks* suspiciously (lost H1 sections, or large size drop),
 //   we keep the baseline content for output and record a 'shrink' failure for human review.
 //   `--accept-shrink` accepts the fresh content and updates the baseline (a deletion can be
 //   legitimate, just uncommon). Additions/modifications always pass through silently and refresh
 //   the baseline. Committed so the guard does not depend on which machine generated last, and an
 //   accepted shrink is accepted for everyone.
+//
+// • Offline (`--offline`): the baseline IS the source, and nothing is written. An online run
+//   removes the baseline of a page that answers 404, so a page with no baseline reads as absent.
 
 const runCache = new Map<string, ZeroHeightData | null>();
+
+let offline = false;
+
+export function setOffline(value: boolean): void {
+	offline = value;
+}
+
+/**
+ * Offline, a page with no baseline: either it answered 404 at the last online run (the baseline was
+ * removed), or no online run ever fetched it (a page path added to the maps since). The two cannot
+ * be told apart from the disk.
+ */
+function onMissingBaseline(pagePath: string, zhReleaseId: number | null, ctx: ZhFetchContext): ZeroHeightData | null {
+	recordWarning({
+		source: 'zeroheight',
+		label: `${ctx.scope} ${ctx.slug}`,
+		reason: `aucune baseline pour ${pagePath} (release ${zhReleaseId ?? 'latest'}) — lue comme absente ; un run en ligne la crée si la page existe`,
+	});
+	return null;
+}
 
 /** Minimum size drop (vs baseline) considered suspicious when no section disappeared. */
 const SHRINK_RATIO = 0.8;
@@ -147,6 +170,12 @@ export async function fetchZeroHeightPageGuarded(
 	if (runCache.has(cacheKey)) return runCache.get(cacheKey)!;
 
 	const baselineRaw = readBaseline(pagePath, zhReleaseId);
+
+	if (offline) {
+		const result = baselineRaw === null ? onMissingBaseline(pagePath, zhReleaseId, ctx) : { raw: baselineRaw, sections: parseSections(baselineRaw) };
+		runCache.set(cacheKey, result);
+		return result;
+	}
 
 	let fresh: ZeroHeightData | null;
 	try {

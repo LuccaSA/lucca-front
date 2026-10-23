@@ -4,13 +4,11 @@
   "tag": "v22.0.0",
   "zhReleaseId": null,
   "storybookBaseUrl": "https://lucca-front.lucca.io/v22.0.0/storybook",
-  "generatedAt": "2026-09-09T19:14:15.119Z",
   "componentCount": 128,
   "patches": {
     "22.0.0": {
       "tag": "v22.0.0",
-      "storybookBaseUrl": "https://lucca-front.lucca.io/v22.0.0/storybook",
-      "generatedAt": "2026-09-09T19:14:15.119Z"
+      "storybookBaseUrl": "https://lucca-front.lucca.io/v22.0.0/storybook"
     }
   }
 }

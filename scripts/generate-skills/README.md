@@ -74,6 +74,8 @@ npx ts-node ... --validate
 | `--retry-failed` | Rejouer uniquement les unités (composants, pages doc/outils, deprecated) dont le fetch a échoué au run précédent (manifeste `_fetch-failures.json`) |
 | `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH/Figma) |
 | `--accept-output-violations` | Ne pas faire échouer le run sur les violations du garde-fou de sortie. Cf. garde-fou de sortie. |
+| `--offline` | Aucun accès réseau : ZeroHeight et Figma sont lus dans les baselines committées, l'index Storybook dans `--storybook-index`, et le pré-flight est sauté. Cf. [Mode hors ligne](#mode-hors-ligne). Incompatible avec `--retry-failed` et `--accept-shrink`. |
+| `--storybook-index <fichier>` | `index.json` Storybook lu à la place de celui du Storybook déployé. **Requis** avec `--offline`. Les liens de la skill pointent toujours vers le Storybook versionné. |
 
 Variable d'environnement complémentaire : **`FETCH_TIMEOUT_MS`** — deadline des fetchs, 10 000 ms par défaut. Le bon réglage dépend de ce que le run fait bloquer la boucle d'événements : une génération complète le veut **bas** (une page est différée puis rejouée, plutôt que d'immobiliser un worker), une passe `--retry-failed` le veut **haut** (quelques dizaines d'unités seulement, et son but est de les obtenir, pas de les différer à nouveau). Cf. `collectors/http.ts`.
 | `--zh-latest <minor>` | Affirme que `<minor>` (ex. `21.3`) est la dernière version en ligne → autorisée en « latest » non pinné. Répétable. Cf. garde-fou ZeroHeight. |
@@ -160,8 +162,9 @@ Trois mécanismes garantissent un rendu reproductible malgré des sources distan
    contenu connu par page ZH (`zeroheight/<releaseId>/<page>.md`) / node Figma (`figma.json`).
    Committées pour que la protection ne dépende pas de la machine qui génère (un poste vierge serait
    sans garde au premier run) et qu'un `--accept-shrink` entériné vaille pour tout le monde — leur
-   diff dans une PR montre au passage le contenu source brut qui a changé. Jamais utilisées comme
-   source — uniquement comme oracle :
+   diff dans une PR montre au passage le contenu source brut qui a changé. Un run en ligne ne les
+   utilise jamais comme source — uniquement comme oracle (le [mode hors ligne](#mode-hors-ligne), lui,
+   les lit comme source) :
    - **ZH** : si le contenu frais *rétrécit* (section H1 disparue, ou taille < 80 % de la baseline),
      la baseline est conservée en sortie et un échec `shrink` est enregistré (rejouable). Un ajout ou
      une modification passe silencieusement et met à jour la baseline. Les titres de sections sont
@@ -178,6 +181,28 @@ Trois mécanismes garantissent un rendu reproductible malgré des sources distan
 Côté Figma, la défense principale contre le rate limit (Tier 1 : ~10-20 req/min) est le **prefetch
 batché** ; la sérialisation + cadence + retries `Retry-After` ne restent qu'en filet de sécurité
 (fallback unitaire si un chunk échoue).
+
+## Mode hors ligne
+
+`--offline --storybook-index <fichier>` régénère la skill sans le moindre accès réseau, à partir de ce
+que le dépôt contient déjà. Deux runs sur les mêmes entrées produisent la même sortie, octet pour octet.
+
+| Source | En ligne | Hors ligne |
+|---|---|---|
+| Git (AST, stories, schematics) | `git show <tag>` | inchangé |
+| Storybook | `GET <storybookBaseUrl>/index.json` | le fichier `--storybook-index` |
+| ZeroHeight | fetch, la baseline sert d'oracle | la baseline `zeroheight/<releaseId\|latest>/<page>.md` |
+| Figma | API REST avec token | l'entrée de `figma.json`, si elle porte `types` |
+| npm, `ls-remote`, pré-flight | contrôlés | sautés |
+
+Un run en ligne réussi tient les baselines à jour : il écrit la page fraîche, et **supprime** la
+baseline d'une page qui répond 404. Hors ligne, une page sans baseline se lit donc comme absente.
+
+Côté Figma, `types` n'existe que dans les entrées écrites par un run en ligne postérieur à son ajout.
+Un composant dont un node n'a pas encore `types` garde son `.figma.md` committé, sans le réécrire. Un
+run en ligne avec token remplit le champ pour tous les nodes.
+
+Le run hors ligne n'écrit ni baselines, ni manifeste d'échecs.
 
 ## Structure de sortie
 
