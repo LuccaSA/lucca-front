@@ -54,9 +54,11 @@
 		}
 	}
 
-	&:hover {
-		--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
-		--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
+	@media (hover: hover) {
+		&:hover {
+			--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
+			--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
+		}
 	}
 
 	&:focus-visible {
