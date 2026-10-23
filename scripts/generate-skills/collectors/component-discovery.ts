@@ -138,7 +138,7 @@ export function discoverComponents(
 	version: VersionConfig,
 ): DiscoveredComponent[] {
 	const metadata = loadMetadataMap();
-	const ngPackages = listNgPackages(version.tag);
+	const ngPackages = listNgPackages(version.source);
 
 	console.log(`  🔍 Discovery: ${storybookMap.size} Storybook groups, ${ngPackages.size} ng packages, ${Object.keys(metadata).length} metadata entries`);
 

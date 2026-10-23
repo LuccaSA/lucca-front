@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Regenerates the lucca-front skill when its sources are staged, then stages the result in the
+# commit being made. The code is read from the index (`git write-tree`), so changes left unstaged
+# stay out of the skill as they stay out of the commit.
+#
+set -e
+
+git diff --cached --name-only | grep -Eq '^(packages/(ng|scss)/|stories/|scripts/generate-skills/)' || exit 0
+
+echo "Sources de la skill lucca-front modifiées → régénération…"
+npm run --silent skills:generate -- --offline --ref "$(git write-tree)"
+git add .github/skills/lucca-front .github/skills/_lucca-front/versions.json scripts/generate-skills/component-metadata.json
