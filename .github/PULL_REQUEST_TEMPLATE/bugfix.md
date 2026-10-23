@@ -1,25 +1,28 @@
 ## Description
 
-Functional description, published in the changelog. Keep it short, it is read by humans.
-Keep the blank lines and the `-----` separators, our bot parses them.
+What was broken, in one sentence. Published in the changelog.
+Keep the `-----` separators, our bot parses them.
 
 -----
 
-Optional context for reviewers: which file to start reading, why this approach, and for a UI change a link to the impacted stories in the Storybook preview.
+Optional: root cause and where to start reading.
+
+### How to test
+
+1. Story to open in the Storybook preview
+2. What to do, and what you should see
+
+<!-- For a rendering fix, post before/after captures in a "Visual proof" comment. With Claude Code, the recette-pr-fix skill runs the checks below and posts it. -->
 
 -----
 
-### Contribution
+### Recette
 
-- [ ] Root cause of the bug is identified and understood
-- [ ] Bug is no longer reproducible
-- [ ] E2E test or UI diff is added if required
-- [ ] `npm run build` is OK
-- [ ] `npm run lint` is OK
+Done by the author before asking for a review.
 
-### Functional review
-
-- [ ] UI diff is OK
-- [ ] All related impacted functionalities are manually tested and show no regression
+- [ ] Root cause is identified and understood
+- [ ] A test fails without the fix, or a before/after visual proof is posted
+- [ ] Bug is no longer reproducible on the Storybook preview
+- [ ] Related features show no regression, and the UI diff (QA Webservice check) is OK
 
 -----
