@@ -2,9 +2,9 @@
 
 Pipeline **déterministe** (zéro IA) qui génère la documentation des composants Lucca Front pour les **Agent Skills**.
 
-Le pipeline produit **une seule documentation**, `.github/skills/_lucca-front/llms/` : un `SKILL.md` (le guide d'entrée), les fichiers `references/` du **dernier patch publié** de la mineure, et un dossier `fixes/` avec un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories — **aucune information patch-level n'est perdue**).
+Le pipeline produit **une seule skill**, `.github/skills/lucca-front/` (`name: lucca-front`) : un `SKILL.md` et ses fichiers `references/`. Sur une branche qui suit le code (`master`), la skill décrit le code du commit qui la porte (cf. [Une skill qui suit le code](#une-skill-qui-suit-le-code)). En mode par tag (`--version`, pour une `vX.Y-lts`), `references/` documente le **dernier patch publié** de la mineure, et un dossier `fixes/` porte un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories).
 
-Le chemin ne porte **aucune version** : `scripts/llms-skill` copie cette documentation dans le package `@lucca-front/ng` (`llms.txt` + `llms/`), qui la livre donc à la version installée. Les projets n'installent avec [APM](https://microsoft.github.io/apm/) que `.github/skills/lucca-front/`, une skill **écrite à la main** qui renvoie vers `node_modules/@lucca-front/ng/llms.txt` (cf. [Consommation](#consommation)). Une branche porte **une** mineure de la documentation : `master` la plus récente, `v21.4-lts` la 21.x.
+Le nom de la skill ne porte **aucune version** : comme pour [`lucca-cdk`](https://github.com/LuccaSA/lucca-cdk/tree/main/scripts/generate-skills), le versionnement est délégué à [APM](https://microsoft.github.io/apm/). Un projet épingle le **tag git** de lucca-front qui correspond à son `@lucca-front/ng` (cf. [Consommation via APM](#consommation-via-apm)).
 
 ## Prérequis
 
@@ -567,21 +567,31 @@ Il est **opaque** (non déductible du repo, de git ou de npm) :
 
 ## Consommation
 
-Un projet déclare la skill dans son `apm.yml` en épinglant un **tag** de lucca-front, ou une plage semver que APM résout sur les tags `v*`, jamais une branche ni un chemin versionné :
+Un projet déclare la skill dans son `apm.yml` en épinglant le **tag exact** de la version de `@lucca-front/ng` qu'il installe, jamais une branche ni un chemin versionné :
 
 ```yaml
 dependencies:
   apm:
-    - LuccaSA/lucca-front/.github/skills/lucca-front#^22.1.0
+    - LuccaSA/lucca-front/.github/skills/lucca-front#v22.1.3
 ```
 
-`apm install` la déploie sous `.claude/skills/lucca-front/` (et `.github/skills/` pour Copilot) ; `apm.lock.yaml` fige le commit. La même plage que `@lucca-front/ng` dans le `package.json` donne la skill de la version installée.
+Pas de plage semver (`#^22.1.0`) : APM la résout sur tous les tags `v*`, RC comprises, et livrerait la skill d'une `22.2.0-rc.1`. À chaque montée de `@lucca-front/ng`, déplacer le tag avec elle.
+
+`apm install` la déploie sous `.claude/skills/lucca-front/` (et `.github/skills/` pour Copilot) ; `apm.lock.yaml` fige le commit.
 
 ### Une skill qui suit le code
 
 La skill committée décrit le code du commit qui la porte : chaque tag porte donc la skill de sa propre version, sans génération à lancer après la release. Elle ne déclare aucune version : la ref APM en tient lieu, et le `SKILL.md` demande la version installée seulement pour compléter les liens Storybook (`https://lucca-front.lucca.io/v{version}/storybook/…`). Pas de `fixes/` non plus : chaque patch a sa skill.
 
 `npm run skills:update` la régénère hors ligne depuis `HEAD` (`--offline --ref HEAD`) : le code et les stories viennent du commit, l'index Storybook est construit en local, ZeroHeight et Figma viennent des baselines. Le manifeste `versions.json` le signale par `"followsCode": true` ; `scripts/llms-skill` embarque alors la skill sur n'importe quel tag.
+
+La mineure est celle du dernier tag publié que contient le commit, sauf si la branche en **prépare** une plus récente. Le tag `vX.Y.0` est posé sur un commit qui ne le contient pas encore : sans rien déclarer, sa skill porterait la mineure précédente, et un tag ne se corrige plus. La PR de release d'une mineure ou d'une majeure la déclare donc avant le tag :
+
+```bash
+npm run skills:update -- --minor 22.2
+```
+
+`versions.json` garde `"minor": "22.2"`, et les runs suivants (hook, CI) la conservent tant que le dernier tag est plus ancien. Le code est lu tel quel ; les changelogs s'arrêtent au dernier tag publié.
 
 Trois garde-fous, comme sur `@lucca/cdk` :
 

@@ -142,7 +142,13 @@ export function writeSkillManifest(
 	technicalMinors: TechnicalMinorPatches[] = [],
 ): void {
 	if (followsCode(version)) {
-		const manifest: SkillManifest = { minor: `${version.major}.${version.minor}`, followsCode: true, zhReleaseId: version.zhReleaseId, componentCount };
+		const manifest: SkillManifest = {
+			minor: `${version.major}.${version.minor}`,
+			followsCode: true,
+			lastTag: version.tag,
+			zhReleaseId: version.zhReleaseId,
+			componentCount,
+		};
 		fs.mkdirSync(generatorRoot(skillsDir), { recursive: true });
 		fs.writeFileSync(manifestPath(skillsDir), JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
 		return;

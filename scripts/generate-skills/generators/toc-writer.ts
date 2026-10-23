@@ -85,7 +85,7 @@ export function writeToc(skillsDir: string, version: VersionConfig, patchTags: s
 	const versionSection = codeSkill
 		? `## 1. Version
 
-Cette skill ne porte pas de numéro de version : elle est régénérée à chaque modification du code de lucca-front, et le projet l'épingle sur un tag dans son \`apm.yml\` (\`LuccaSA/lucca-front/.github/skills/lucca-front#<tag ou plage semver>\`). Elle décrit le code de ce tag.
+Cette skill ne porte pas de numéro de version : elle est régénérée à chaque modification du code de lucca-front, et le projet l'épingle dans son \`apm.yml\` sur le tag exact de la version de \`@lucca-front/ng\` qu'il installe (\`LuccaSA/lucca-front/.github/skills/lucca-front#v<version>\`). Elle décrit le code de ce tag.
 
 **Détecte la version de \`@lucca-front/ng\` installée** (ne la suppose jamais) :
 

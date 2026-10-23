@@ -31,6 +31,8 @@
  *   --storybook-index <file>
  *                        Storybook index.json to read instead of the deployed one (required by --offline
  *                        without --ref)
+ *   --minor <M.m>        With --ref: the minor the branch prepares, before its `.0` tag exists. Kept in the
+ *                        committed manifest, so later runs keep it until the tag catches up.
  *   --ref <git ref>      Read the code and stories from this ref (HEAD, or a tree from `git write-tree`)
  *                        instead of the minor's tag. The skill keeps the name, links and changelogs of
  *                        the last published tag the ref contains, and builds its Storybook index locally.
@@ -141,6 +143,7 @@ const flags = {
 	offline: args.includes('--offline'),
 	storybookIndex: getFlag('storybook-index'),
 	ref: getFlag('ref'),
+	minor: getFlag('minor'),
 	// ZeroHeight release-ID guard: supply IDs / assert "latest" non-interactively (CI).
 	zhIds: Object.fromEntries(
 		getFlags('zh-id')
@@ -151,8 +154,11 @@ const flags = {
 	zhLatest: new Set(getFlags('zh-latest')),
 };
 
+/** With --ref: the minor the branch prepares (`--minor`, or the committed manifest's), if newer than its last tag. */
+let preparedMinor: string | null = null;
+
 function resolveTarget(minor: string): MinorResolution {
-	return flags.ref ? resolveSourceVersion(flags.ref) : resolveMinorVersion(minor);
+	return flags.ref ? resolveSourceVersion(flags.ref, preparedMinor) : resolveMinorVersion(minor);
 }
 
 /** Builds the Storybook index of a git tree into a temp file, removed when the run exits. */
@@ -359,12 +365,25 @@ async function main(): Promise<void> {
 		setZhOffline(true);
 		setFigmaOffline(true);
 	}
+	if (flags.minor && !/^\d+\.\d+$/.test(flags.minor)) {
+		console.error(`❌ --minor ${flags.minor} : attendu une mineure « M.m » (ex : 22.2).`);
+		process.exit(1);
+	}
+	if (flags.minor && !flags.ref) {
+		console.error('❌ --minor déclare la mineure que prépare une branche qui suit le code : il exige --ref.');
+		process.exit(1);
+	}
 	if (flags.ref) {
 		let resolved: MinorResolution;
+		preparedMinor = flags.minor ?? readSkillManifest(config.output.skillsDir)?.minor ?? null;
 		try {
-			resolved = resolveSourceVersion(flags.ref);
+			resolved = resolveSourceVersion(flags.ref, preparedMinor);
 		} catch (err: any) {
 			console.error(`❌ ${err.message}`);
+			process.exit(1);
+		}
+		if (flags.minor && resolved.minorKey !== flags.minor) {
+			console.error(`❌ --minor ${flags.minor} : ${flags.ref} porte déjà le tag ${resolved.version.tag}, d'une mineure plus récente.`);
 			process.exit(1);
 		}
 		if (flags.versions.some((v) => v !== resolved.minorKey)) {

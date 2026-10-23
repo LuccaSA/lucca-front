@@ -1,13 +1,24 @@
 #!/bin/sh
 #
-# Regenerates the lucca-front skill when its sources are staged, then stages the result in the
-# commit being made. The code is read from the index (`git write-tree`), so changes left unstaged
-# stay out of the skill as they stay out of the commit.
+# Regenerates the lucca-front skill when its sources are staged, or when a tag was cut since its last
+# generation (its changelogs stop at the last tag), then stages the result in the commit being made.
+# The code is read from the index (`git write-tree`), so changes left unstaged stay out of the skill
+# as they stay out of the commit.
 #
 set -e
 
-git diff --cached --name-only | grep -Eq '^(packages/(ng|scss)/|stories/|scripts/generate-skills/)' || exit 0
+sources_staged() {
+	git diff --cached --name-only | grep -Eq '^(packages/(ng|scss)/|stories/|scripts/generate-skills/)'
+}
 
-echo "Sources de la skill lucca-front modifiées → régénération…"
+new_tag() {
+	last=$(git tag --merged HEAD --list 'v*' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
+	recorded=$(node -p "require('./.github/skills/_lucca-front/versions.json').lastTag ?? ''")
+	[ "$last" != "$recorded" ]
+}
+
+sources_staged || new_tag || exit 0
+
+echo "Skill lucca-front à régénérer…"
 npm run --silent skills:generate -- --offline --ref "$(git write-tree)"
 git add .github/skills/lucca-front .github/skills/_lucca-front/versions.json scripts/generate-skills/component-metadata.json
