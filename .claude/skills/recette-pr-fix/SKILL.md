@@ -85,7 +85,13 @@ Attendre la fin de l'étape 2, puis répondre en français, court, sans préambu
 
 Verdict, en un mot : **✅ Prête** (aucun ❌, aucun 🔴), **⚠️ À vérifier** (des ⚠️ ou 🟡 seulement), **❌ À corriger** (au moins un ❌ ou 🔴).
 
-Si le verdict est ❌, ne pas ouvrir la PR : proposer les corrections et attendre l'accord de l'utilisateur. Sinon, la PR peut être ouverte (template `bugfix.md`), en reprenant « Comment tester » dans le second bloc (contexte pour les relecteurs). Dans la checklist du template, ne cocher que ce que la recette a réellement vérifié (« E2E test or UI diff is added » si le script a vu un test) — jamais `npm run build`, jamais `npm run lint` (seul le lint ciblé a tourné) : la CI fait foi.
+Si le verdict est ❌, ne pas ouvrir la PR : proposer les corrections et attendre l'accord de l'utilisateur. Sinon, la PR peut être ouverte (template `bugfix.md`), en traduisant « Comment tester » en anglais dans sa section `### How to test` (second bloc). Dans la checklist « Contribution », ne cocher que ce que la recette a réellement vérifié :
+
+- « Fix is proven » : `regression-check` en ✅ — ou, pour un fix de rendu, seulement une fois le commentaire « Visual proof » publié (étape 5) ;
+- « Targeted lint and tests pass locally » : lint et tests ciblés de l'étape 2 en ✅ ;
+- « Root cause… » : laisser à l'auteur, c'est un engagement humain.
+
+Ne jamais cocher « Functional review » : elle appartient au relecteur.
 
 ## 5. Preuves visuelles (après ouverture de la PR)
 
