@@ -73,7 +73,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 * Its pattern covers only the CSS hooks exclusive to deprecated code: its element and the classes nothing live emits.
 	* A deprecated Angular component can share its CSS with a live one: check every emitter of a class before matching it.
 	* `LuModal` in side panel mode still emits the `.lu-sidepanel-*` classes of the deprecated Side panel.
-	* An element selector opens with `(?<![\w.#-])`: classes and ids stay out.
+	* An element selector opens with `(?<![\w.#="'-])`: classes, ids and attribute values stay out.
 * The row shows one root class per pattern: its shortest form, such as `.status`.
 	* A single root sits inline after the name, behind a comma: `List, .list`.
 	* Every root links to one search of all the row's patterns.

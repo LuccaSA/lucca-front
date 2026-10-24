@@ -215,7 +215,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-elevate.*%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-elevate…</code></a>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-elevate%5B1-6%5D(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-elevate(1|2|3|4|…)</code></a>
 			</td>
 			<td>16.2.0</td>
 			<td>19.1.0</td>

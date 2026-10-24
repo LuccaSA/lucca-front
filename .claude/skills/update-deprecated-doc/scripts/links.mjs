@@ -1,8 +1,8 @@
 // Links each Nom token to a GitHub code search of the org's consumers.
 import { comboRe } from './nom.mjs';
 
-// An element selector opens with the lookbehind `(?<![\w.#-])`: it keeps classes and ids out.
-const elementStart = /^\(\?<!\[\\w\.#-\]\)/;
+// An element selector opens with the lookbehind `(?<![\w.#="'-])`: it keeps classes, ids and attribute values out.
+const elementStart = /^\(\?<!\[\\w\.#="'-\]\)/;
 // GitHub code search regexes have no lookaround: a token boundary is a non-token character or a line edge.
 const ghBefore = '(^|[^\\w-])';
 const ghAfter = '([^\\w-]|$)';

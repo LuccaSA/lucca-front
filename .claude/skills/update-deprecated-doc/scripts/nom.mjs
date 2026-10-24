@@ -131,7 +131,8 @@ const patternItems = (src, max = 10) => {
 	return items.map(tidy);
 };
 
-export const comboRe = /^\(\?=\\S\*(.+?)\)\(\?=\\S\*(.+?)\)\\S\*$/;
+// A combination: two lookaheads, each scanning one compound selector.
+export const comboRe = /^\(\?=\[\^\\s>\+~\]\*(.+?)\)\(\?=\[\^\\s>\+~\]\*(.+?)\)\[\^\\s>\+~\]\*$/;
 const code = (t) => `\`${t}\``;
 const byText = (a, b) => (a.replace(/`/g, '') < b.replace(/`/g, '') ? -1 : 1);
 
