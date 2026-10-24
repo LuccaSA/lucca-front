@@ -433,8 +433,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>21.3.0</td>
 			<td>
 				<ul>
-				<li><code>*-AI</code> ⇒ <code>*-orchid</code></li>
-				<li><code>*TextAI</code> ⇒ <code>*TextOrchid</code></li>
+				<li><code>.palette-AI</code> ⇒ <code>.palette-orchid</code></li>
+				<li><code>.pr-u-colorTextAI</code> ⇒ <code>.pr-u-colorTextOrchid</code></li>
 				</ul>
 			</td>
 		</tr>
@@ -461,7 +461,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li><code>*-grey</code> ⇒ <code>*-neutral</code></li>
-				<li><code>*-primary</code> &amp; <code>*-secondary</code> ⇒ <code>*-product</code></li>
+				<li><code>*-(primary|secondary)</code> ⇒ <code>*-product</code></li>
 				<li><code>*-lucca</code> ⇒ <code>*-brand</code></li>
 				</ul>
 			</td>
@@ -480,8 +480,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
-				<li><code>*-grey</code> ⇒ <code>*-neutral</code></li>
-				<li><code>*-primary</code> &amp; <code>*-secondary</code> ⇒ <code>*-product</code></li>
+				<li><code>.mod-grey</code> ⇒ <code>.mod-neutral</code></li>
+				<li><code>.icon-color-(primary|secondary)</code> ⇒ <code>.icon-color-product</code></li>
 				</ul>
 			</td>
 		</tr>
@@ -516,7 +516,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li>défaut : <code>*</code></li>
 				</ul>
 				</li>
-				<li><code>*Primary</code> &amp; <code>*Secondary</code> ⇒ <code>*Product</code></li>
+				<li><code>*(Primary|Secondary)</code> ⇒ <code>*Product</code></li>
 				<li><code>*Lucca</code> ⇒ <code>*Brand</code></li>
 				</ul>
 			</td>
@@ -867,7 +867,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li><code>*-grey-*</code> ⇒ <code>*-neutral-*</code></li>
-				<li><code>*-primary-*</code> &amp; <code>*-secondary-*</code> ⇒ <code>*-product-*</code></li>
+				<li><code>*-(primary|secondary)-*</code> ⇒ <code>*-product-*</code></li>
 				<li><code>*-lucca-*</code> ⇒ <code>*-brand-*</code></li>
 				</ul>
 			</td>

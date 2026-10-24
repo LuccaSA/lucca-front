@@ -207,7 +207,7 @@ export default [
 			* \`.disabled\` ⇒
 				* sélecteur : \`.is-disabled\`
 				* input Angular : \`disabled\`
-			* \`.error\`, \`.loading\` & \`.success\` ⇒
+			* \`.(error|loading|success)\` ⇒
 				* sélecteur : \`.is-*\`
 				* input Angular : \`state="*"\`
 			* \`.mod-link\` ⇒
@@ -227,7 +227,7 @@ export default [
 		versionDeleted: '22.0.0',
 		actions: `
 			* \`*-grey\` ⇒ \`*-neutral\`
-			* \`*-primary\` & \`*-secondary\` ⇒ \`*-product\`
+			* \`*-(primary|secondary)\` ⇒ \`*-product\`
 			* \`*-lucca\` ⇒ \`*-brand\`
 		`,
 		urls: {
@@ -247,8 +247,8 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`*-grey\` ⇒ \`*-neutral\`
-			* \`*-primary\` & \`*-secondary\` ⇒ \`*-product\`
+			* \`.mod-grey\` ⇒ \`.mod-neutral\`
+			* \`.icon-color-(primary|secondary)\` ⇒ \`.icon-color-product\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
@@ -653,10 +653,12 @@ export default [
 		actions: `
 			Utilitaires logiques :
 
-			* \`*Left\` ⇒ \`*InlineStart\`
-			* \`*Right\` ⇒ \`*InlineEnd\`
-			* \`*textAlignLeft\` ⇒ \`*textAlignStart\`
-			* \`*textAlignRight\` ⇒ \`*textAlignEnd\`
+			* \`.pr-u-textAlignLeft\` ⇒ \`.pr-u-textAlignStart\`
+			* \`.pr-u-textAlignRight\` ⇒ \`.pr-u-textAlignEnd\`
+			* \`.pr-u-floatLeft\` ⇒ \`.pr-u-floatInlineStart\`
+			* \`.pr-u-floatRight\` ⇒ \`.pr-u-floatInlineEnd\`
+			* \`.pr-u-clearLeft\` ⇒ \`.pr-u-clearInlineStart\`
+			* \`.pr-u-clearRight\` ⇒ \`.pr-u-clearInlineEnd\`
 			* Coins physiques ⇒ tokens \`--pr-t-border-radius-*\`.
 		`,
 	},
@@ -719,7 +721,7 @@ export default [
 		],
 		versionDeprecated: '20.2.0',
 		actions: `
-			* \`*RadiusM\` & \`*RadiusL\` ⇒ \`*RadiusDefault\`
+			* \`*Radius(M|L)\` ⇒ \`*RadiusDefault\`
 			* \`*RadiusXL\` ⇒ \`*RadiusStructure\`
 			* Coins ⇒ tokens \`--pr-t-border-radius-*\`.
 		`,
@@ -881,7 +883,7 @@ export default [
 			* \`*Grey\` ⇒
 				* neutre : \`*Neutral\`
 				* défaut : \`*\`
-			* \`*Primary\` & \`*Secondary\` ⇒ \`*Product\`
+			* \`*(Primary|Secondary)\` ⇒ \`*Product\`
 			* \`*Lucca\` ⇒ \`*Brand\`
 		`,
 		urls: {
@@ -939,8 +941,8 @@ export default [
 		objectPattern: [/\.palette-AI(?![\w-])/, /\.pr-u-colorTextAI(?![\w-])/],
 		versionDeleted: '21.3.0',
 		actions: `
-			* \`*-AI\` ⇒ \`*-orchid\`
-			* \`*TextAI\` ⇒ \`*TextOrchid\`
+			* \`.palette-AI\` ⇒ \`.palette-orchid\`
+			* \`.pr-u-colorTextAI\` ⇒ \`.pr-u-colorTextOrchid\`
 		`,
 	},
 	{

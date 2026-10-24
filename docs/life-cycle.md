@@ -330,7 +330,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li>input Angular : <code>disabled</code></li>
 				</ul>
 				</li>
-				<li><code>.error</code>, <code>.loading</code> &amp; <code>.success</code> ⇒<ul>
+				<li><code>.(error|loading|success)</code> ⇒<ul>
 				<li>sélecteur : <code>.is-*</code></li>
 				<li>input Angular : <code>state=&quot;*&quot;</code></li>
 				</ul>
@@ -551,10 +551,12 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<p>Utilitaires logiques :</p>
 				<ul>
-				<li><code>*Left</code> ⇒ <code>*InlineStart</code></li>
-				<li><code>*Right</code> ⇒ <code>*InlineEnd</code></li>
-				<li><code>*textAlignLeft</code> ⇒ <code>*textAlignStart</code></li>
-				<li><code>*textAlignRight</code> ⇒ <code>*textAlignEnd</code></li>
+				<li><code>.pr-u-textAlignLeft</code> ⇒ <code>.pr-u-textAlignStart</code></li>
+				<li><code>.pr-u-textAlignRight</code> ⇒ <code>.pr-u-textAlignEnd</code></li>
+				<li><code>.pr-u-floatLeft</code> ⇒ <code>.pr-u-floatInlineStart</code></li>
+				<li><code>.pr-u-floatRight</code> ⇒ <code>.pr-u-floatInlineEnd</code></li>
+				<li><code>.pr-u-clearLeft</code> ⇒ <code>.pr-u-clearInlineStart</code></li>
+				<li><code>.pr-u-clearRight</code> ⇒ <code>.pr-u-clearInlineEnd</code></li>
 				<li>Coins physiques ⇒ tokens <code>--pr-t-border-radius-*</code>.</li>
 				</ul>
 			</td>
@@ -628,7 +630,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>
 				<ul>
-				<li><code>*RadiusM</code> &amp; <code>*RadiusL</code> ⇒ <code>*RadiusDefault</code></li>
+				<li><code>*Radius(M|L)</code> ⇒ <code>*RadiusDefault</code></li>
 				<li><code>*RadiusXL</code> ⇒ <code>*RadiusStructure</code></li>
 				<li>Coins ⇒ tokens <code>--pr-t-border-radius-*</code>.</li>
 				</ul>

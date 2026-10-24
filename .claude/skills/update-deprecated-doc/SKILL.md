@@ -153,6 +153,8 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 * Writing rules, in French Markdown:
 	* Show only the part that changes.
 	* `*` stands for the unchanged prefix or suffix: `.u-*` becomes `.pr-u-*`.
+	* A leading `*` only when every item of the action shares one prefix: write full names otherwise.
+	* Names sharing a target group their varying part: `.icon-color-(primary|secondary)` becomes `.icon-color-product`.
 	* Mappings use `⇒` as their arrow.
 	* A list holding a mapping over 40 characters breaks every mapping after its arrow.
 		* The arrow line ends with a Markdown hard break, written `\\` in the template literal.

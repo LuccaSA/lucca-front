@@ -80,7 +80,7 @@ export default [
 		versionDeleted: '22.0.0',
 		actions: `
 			* \`*-grey-*\` ⇒ \`*-neutral-*\`
-			* \`*-primary-*\` & \`*-secondary-*\` ⇒ \`*-product-*\`
+			* \`*-(primary|secondary)-*\` ⇒ \`*-product-*\`
 			* \`*-lucca-*\` ⇒ \`*-brand-*\`
 		`,
 		urls: {
