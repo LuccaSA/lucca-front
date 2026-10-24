@@ -577,6 +577,15 @@ export default [
 		actions: `Remplacer par [Horizontal navigation](https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation).`,
 	},
 	{
+		// Misspelt class, renamed `.horizontalNavigation-containerOptional` in 19.3.0 without a deprecation.
+		// SEE https://regex101.com/r/WYNajf.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/5cd06d48ed77f4cf801baf7c897edbd646ca2bf4/packages/scss/src/components/menu/component.scss#L31.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/63324c9df3d6955360f0d0e2843ea441d9f8f92f.
+		objectPattern: /\.menu-containerOptionnal(?![\w-])/,
+		versionDeleted: '19.3.0',
+		actions: `Remplacer par \`.horizontalNavigation-containerOptional\` du composant [Horizontal navigation](https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation).`,
+	},
+	{
 		// Page header layout for the deprecated `.menu`
 		// Any combination of .pageHeader and .mod-withMenu, within one compound selector
 		// SEE https://regex101.com/r/aF0wRq.

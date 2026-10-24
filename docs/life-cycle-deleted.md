@@ -285,6 +285,14 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)menu-containerOptionnal(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.menu-containerOptionnal</code></a>
+			</td>
+			<td>–</td>
+			<td>19.3.0</td>
+			<td>Remplacer par <code>.horizontalNavigation-containerOptional</code> du composant <a href="https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation">Horizontal navigation</a>.</td>
+		</tr>
+		<tr>
+			<td>
 				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-columnSticky-shadowMask(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table-head-row-cell</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table-head-row-cell(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-columnSticky-shadowMask(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-columnSticky-shadowMask</code></a>
 			</td>
 			<td>18.2.0</td>
