@@ -192,26 +192,31 @@ export default [
 		actions: `Remplacer par le nouveau composant [Empty state](https://prisme.lucca.io/94310e217/p/77bb47-empty-state).`,
 	},
 	{
-		// Any combination of .button and .loading, within one compound selector
-		// SEE https://regex101.com/r/2L0Pw4.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L116.
-		objectPattern: /(?=[^\s>+~]*\.button(?![\w-]))(?=[^\s>+~]*\.loading(?![\w-]))[^\s>+~]*/,
-		versionDeprecated: '17.3.0',
-		actions: `
-			* sélecteur : \`.is-loading\`
-			* input Angular : \`state="loading"\`
-		`,
-	},
-	{
-		// Any combination of .button and .disabled, .error, .mod-link, .mod-outline or .success, within one compound selector
+		// Any combination of .button and .disabled, .error, .loading, .mod-link, .mod-outline or .success, within one compound selector
 		// SEE https://regex101.com/r/OTnSEg.
+		// SEE https://github.com/LuccaSA/lucca-front/pull/2548.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L116.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L24.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L126.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L31.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L19.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/0bb0a5c0bbf2ec141c1cb3d11578161545ef4bc9/packages/scss/src/components/button/index.scss#L132.
-		objectPattern: /(?=[^\s>+~]*\.button(?![\w-]))(?=[^\s>+~]*\.(disabled|error|mod-link|mod-outline|success)(?![\w-]))[^\s>+~]*/,
+		objectPattern: /(?=[^\s>+~]*\.button(?![\w-]))(?=[^\s>+~]*\.(disabled|error|loading|mod-link|mod-outline|success)(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '17.3.0',
+		actions: `
+			* \`.disabled\` ⇒
+				* sélecteur : \`.is-disabled\`
+				* input Angular : \`disabled\`
+			* \`.error\`, \`.loading\` & \`.success\` ⇒
+				* sélecteur : \`.is-*\`
+				* input Angular : \`state="*"\`
+			* \`.mod-link\` ⇒
+				* sélecteur : \`.mod-ghost\`
+				* input Angular : \`luButton="ghost"\`
+			* \`.mod-outline\` ⇒
+				* sélecteur : \`.mod-outlined\`
+				* input Angular : \`luButton="outlined"\`
+		`,
 	},
 	{
 		// SEE https://regex101.com/r/nPMyQZ.
