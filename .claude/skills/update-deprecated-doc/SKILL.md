@@ -38,7 +38,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	urls: {
 		// optional
 		prisme: 'https://…', // Composants only
-		schematics: 'https://…',
+		schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/…',
 	},
 }
 ```
@@ -146,7 +146,10 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 
 * `marked` converts the `actions` Markdown to HTML.
 * A `*` legend paragraph renders in `<small>`.
-* `urls.schematics` goes on its own line: `(<a href="…">schematics</a>)`.
+* `urls.schematics` opens the cell on its own line: `<a href="…"><strong>Schematic</strong> : palettes</a>`.
+	* The name is the one `collection.json` registers for the linked folder.
+	* It links the schematic folder on GitHub: Prisme drops its anchors on load.
+	* Link a schematic only when its code rewrites the entry's exact classes or variables.
 * Writing rules, in French Markdown:
 	* Show only the part that changes.
 	* `*` stands for the unchanged prefix or suffix: `.u-*` becomes `.pr-u-*`.
@@ -171,7 +174,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 * All doc text is French, labels and qualifiers included.
 	* Component names stay untranslated: *Data table* stays *Data table*.
 * Empty cells hold an en dash `–` (U+2013), never the em dash.
-	* A schematics-only entry shows just the `(schematics)` link.
+	* A schematics-only entry shows just its schematic link.
 * One row per source object: a merged object stays one row, structured by its comment labels.
 * Rows run oldest first in every table.
 	* The primary key is *Depuis*.

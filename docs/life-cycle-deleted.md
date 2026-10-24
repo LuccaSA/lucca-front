@@ -56,6 +56,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.2.0</td>
 			<td>19.1.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/action-icon"><strong>Schematic</strong> : action-icon</a>
 				<ul>
 				<li>sans bordure : <code>.button.mod-onlyIcon.mod-ghost</code></li>
 				<li>avec bordure : <code>.button.mod-onlyIcon.mod-outlined</code></li>
@@ -73,8 +74,8 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.3.2</td>
 			<td>20.1.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select"><strong>Schematic</strong> : lu-select</a>
 				<p>Remplacer par les directives de <a href="https://prisme.lucca.io/94310e217/p/587833-select-simple/b/991e87">Simple</a> et <a href="https://prisme.lucca.io/94310e217/p/927519-select-multiple-new/b/39e067">Multiple Select</a>.</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -208,10 +209,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>16.2.0</td>
 			<td>19.1.0</td>
-			<td>
-				<p>Remplacer par le nouveau composant <a href="https://prisme.lucca.io/94310e217/p/955d69-grid">Grid</a>.</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
-			</td>
+			<td>Remplacer par le nouveau composant <a href="https://prisme.lucca.io/94310e217/p/955d69-grid">Grid</a>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -264,6 +262,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>17.4.0</td>
 			<td>19.1.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-spacing"><strong>Schematic</strong> : tokens-spacings</a>
 				<ul>
 				<li><code>.u-*</code> ⇒ <code>.pr-u-*</code></li>
 				<li><code>*XXS</code> ⇒ <code>*50</code></li>
@@ -274,7 +273,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>*XL</code> ⇒ <code>*600</code></li>
 				<li><code>*XXL</code> ⇒ <code>*800</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -341,10 +339,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>18.3.0</td>
 			<td>20.1.0</td>
-			<td>
-				<p>Remplacer par <code>.comment-content-textContainerOptional</code>.</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)
-			</td>
+			<td>Remplacer par <code>.comment-content-textContainerOptional</code>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -423,8 +418,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>21.0.0</td>
 			<td>21.3.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/color-text"><strong>Schematic</strong> : color-text</a>
 				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -463,12 +458,12 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>17.3.0</td>
 			<td>22.0.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li><code>*-grey</code> ⇒ <code>*-neutral</code></li>
 				<li><code>*-primary</code> &amp; <code>*-secondary</code> ⇒ <code>*-product</code></li>
 				<li><code>*-lucca</code> ⇒ <code>*-brand</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -483,11 +478,11 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>17.3.0</td>
 			<td>22.0.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li><code>*-grey</code> ⇒ <code>*-neutral</code></li>
 				<li><code>*-primary</code> &amp; <code>*-secondary</code> ⇒ <code>*-product</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -503,8 +498,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>21.0.0</td>
 			<td>22.0.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/color-text"><strong>Schematic</strong> : color-text</a>
 				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -514,6 +509,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>21.0.0</td>
 			<td>22.0.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li><code>*Grey</code> ⇒<ul>
 				<li>neutre : <code>*Neutral</code></li>
@@ -523,7 +519,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><code>*Primary</code> &amp; <code>*Secondary</code> ⇒ <code>*Product</code></li>
 				<li><code>*Lucca</code> ⇒ <code>*Brand</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -629,6 +624,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.4.0</td>
 			<td>19.1.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-spacing"><strong>Schematic</strong> : tokens-spacings</a>
 				<ul>
 				<li><code>--spacings-*</code> ⇒ <code>--pr-t-spacings-*</code></li>
 				<li><code>*XXS</code> ⇒ <code>*50</code></li>
@@ -639,7 +635,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<li><code>*XL</code> ⇒ <code>*600</code></li>
 				<li><code>*XXL</code> ⇒ <code>*800</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -869,12 +864,12 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.3.0</td>
 			<td>22.0.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li><code>*-grey-*</code> ⇒ <code>*-neutral-*</code></li>
 				<li><code>*-primary-*</code> &amp; <code>*-secondary-*</code> ⇒ <code>*-product-*</code></li>
 				<li><code>*-lucca-*</code> ⇒ <code>*-brand-*</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -884,6 +879,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.3.0</td>
 			<td>22.0.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li>Sass : <code>color.transparentize(var(--palettes-neutral-900), …)</code></li>
 				<li>CSS : <code>color-mix()</code></li>
@@ -897,6 +893,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.3.1</td>
 			<td>22.0.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li>Sass : <code>color.transparentize(var(--palettes-neutral-400), …)</code></li>
 				<li>CSS : <code>color-mix()</code></li>
@@ -913,6 +910,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.4.0</td>
 			<td>22.0.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li>Sass : <code>color.transparentize(var(--palettes-neutral-*), …)</code></li>
 				<li>CSS : <code>color-mix()</code></li>
@@ -927,6 +925,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>18.2.0</td>
 			<td>22.0.0</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<ul>
 				<li><code>--colors-white-color</code> ⇒<ul>
 				<li>couleur : <code>--palettes-neutral-0</code></li>

@@ -58,6 +58,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>17.3.2</td>
 			<td>–</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select"><strong>Schematic</strong> : lu-select</a>
 				<p>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/587833-select-simple">Simple</a> &amp; <a href="https://prisme.lucca.io/94310e217/p/927519-select-multiple-new">Multiple Select</a> et leurs directives.</p>
 				<p>Variations concernées :</p>
 				<ul>
@@ -67,7 +68,6 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<li><a href="https://prisme.lucca.io/94310e217/p/691517-select">User</a></li>
 				<li><a href="https://prisme.lucca.io/94310e217/p/69f87f-qualification">Qualification</a></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -367,13 +367,13 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>17.4.0</td>
 			<td>–</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/alignment-utilities"><strong>Schematic</strong> : alignment-utilities</a>
 				<p>Doublon :</p>
 				<ul>
 				<li><code>.u-text*</code> ⇒ <code>.pr-u-textAlign*</code></li>
 				<li><code>*Left</code> ⇒ <code>*Start</code></li>
 				<li><code>*Right</code> ⇒ <code>*End</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -425,7 +425,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>18.3.0</td>
 			<td>–</td>
-			<td>(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f">schematics</a>)</td>
+			<td>–</td>
 		</tr>
 		<tr>
 			<td>
@@ -641,8 +641,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>20.2.0</td>
 			<td>–</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/class-prefix"><strong>Schematic</strong> : class-prefix</a>
 				<p><code>.u-*</code> ⇒ <code>.pr-u-*</code></p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -664,8 +664,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>21.0.0</td>
 			<td>–</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/color-text"><strong>Schematic</strong> : color-text</a>
 				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -678,8 +678,8 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>21.0.0</td>
 			<td>–</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/color-text"><strong>Schematic</strong> : color-text</a>
 				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -699,10 +699,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>21.2.4</td>
 			<td>–</td>
-			<td>
-				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
-			</td>
+			<td>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</td>
 		</tr>
 		<tr>
 			<td>
@@ -713,10 +710,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			</td>
 			<td>21.3.0</td>
 			<td>–</td>
-			<td>
-				<p>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf">schematics</a>)
-			</td>
+			<td>Remplacer par les <a href="https://prisme.lucca.io/94310e217/p/21a286-utilitaires">nouvelles classes</a> liées aux tokens (<code>.pr-u-color</code>…)</td>
 		</tr>
 		<tr>
 			<td>
@@ -806,8 +800,8 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>18.2.0</td>
 			<td>–</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
 				<p><code>*text</code> ⇒ <code>*0</code></p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -858,8 +852,8 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>20.1.0</td>
 			<td>–</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-typo"><strong>Schematic</strong> : tokens-typo</a>
 				<p><code>--commons-*</code> ⇒ <code>--pr-t-*</code></p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -878,6 +872,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>20.1.0</td>
 			<td>–</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-typo"><strong>Schematic</strong> : tokens-typo</a>
 				<p><a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">Tokens typographie</a> :</p>
 				<ul>
 				<li><code>*sizes-XXXL-*</code> ⇒ <br>aucun token équivalent</li>
@@ -893,7 +888,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<li><code>*sizes-XS-*</code> ⇒ <br><code>*pr-t-font-body-XS-*</code></li>
 				<li><code>--sizes-*-verticalPadding</code> ⇒ <br>tokens <code>--pr-t-spacings-*</code></li>
 				</ul>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256">schematics</a>)
 			</td>
 		</tr>
 		<tr>
@@ -923,6 +917,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>20.2.0</td>
 			<td>–</td>
 			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-radius"><strong>Schematic</strong> : tokens-radius</a>
 				<ul>
 				<li><code>*-M</code> ⇒ <code>--pr-t-border-radius-50</code></li>
 				<li><code>*-L</code> ⇒ <code>--pr-t-border-radius-100</code></li>
@@ -930,7 +925,6 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<li><code>*-full</code> ⇒ <code>--pr-t-border-radius-full</code></li>
 				</ul>
 				<p><small><code>*</code> = <code>--commons-borderRadius</code></small></p>
-				(<a href="https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0">schematics</a>)
 			</td>
 		</tr>
 		<tr>

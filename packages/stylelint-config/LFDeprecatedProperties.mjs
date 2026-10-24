@@ -84,7 +84,7 @@ export default [
 			* \`*-lucca-*\` ⇒ \`*-brand-*\`
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
 		},
 	},
 	{
@@ -98,6 +98,9 @@ export default [
 			* Sass : \`color.transparentize(var(--palettes-neutral-900), …)\`
 			* CSS : \`color-mix()\`
 		`,
+		urls: {
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
+		},
 	},
 	{
 		// SEE https://regex101.com/r/YS7uCx.
@@ -110,6 +113,9 @@ export default [
 			* Sass : \`color.transparentize(var(--palettes-neutral-400), …)\`
 			* CSS : \`color-mix()\`
 		`,
+		urls: {
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
+		},
 	},
 	{
 		// Alert of the navSide items, removed in 18.1.0: these variables are still emitted but no longer read
@@ -138,7 +144,7 @@ export default [
 			* \`*XXL\` ⇒ \`*800\`
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-spacing',
 		},
 	},
 	{
@@ -154,6 +160,9 @@ export default [
 
 			\`*\` = \`0\` pour \`white\`, sinon la nuance d'origine
 		`,
+		urls: {
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
+		},
 	},
 	{
 		// Toast UI refactor: these variables are no longer read
@@ -171,7 +180,7 @@ export default [
 		versionDeprecated: '18.2.0',
 		actions: `\`*text\` ⇒ \`*0\``,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
 		},
 	},
 	{
@@ -199,6 +208,9 @@ export default [
 			* \`--colors-black-color\` ⇒ \\
 			  \`--palettes-neutral-900\`
 		`,
+		urls: {
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
+		},
 	},
 	{
 		// SEE https://regex101.com/r/xx7vjW.
@@ -227,7 +239,7 @@ export default [
 		versionDeprecated: '20.1.0',
 		actions: `\`--commons-*\` ⇒ \`--pr-t-*\``,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-typo',
 		},
 	},
 	{
@@ -263,7 +275,7 @@ export default [
 			  tokens \`--pr-t-spacings-*\`
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-typo',
 		},
 	},
 	{
@@ -349,7 +361,7 @@ export default [
 			\`*\` = \`--commons-borderRadius\`
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/page-40c515-88288181-15c256-0',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-radius',
 		},
 	},
 	{

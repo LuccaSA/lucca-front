@@ -40,9 +40,21 @@ const load = async (file) => {
 	return data.map(({ urls, ...e }, k) => ({ ...e, ...urls, groups: groupsOf(chunks[k]), sources: [file] }));
 };
 
+// A schematics link shows the schematic name `collection.json` registers for its folder: `tokens-spacing/` holds `tokens-spacings`.
+const schematicNames = Object.fromEntries(
+	Object.entries(JSON.parse(read('packages/ng/schematics/collection.json')).schematics).map(([name, { factory }]) => [
+		factory.split('/')[1],
+		name,
+	]),
+);
+const schematicLink = (url) => {
+	const name = schematicNames[url.split('/').pop()];
+	if (!name) throw new Error(`No registered schematic at ${url}`);
+	return `<a href="${url}"><strong>Schematic</strong> : ${name}</a>`;
+};
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const actionsHtml = (e) => {
-	const schem = e.schematics ? `(<a href="${e.schematics}">schematics</a>)` : '';
+	const schem = e.schematics ? schematicLink(e.schematics) : '';
 	if (!e.actions) return schem || '–';
 	const md = e.actions
 		// A multi-line template literal keeps the indentation of its `.mjs` entry.
@@ -54,7 +66,7 @@ const actionsHtml = (e) => {
 	// A lone one-line sentence without schematics stays bare in its cell.
 	if (!schem && !/\n|^\* /.test(md)) return marked.parseInline(md);
 	const html = marked.parse(md).trim();
-	return schem ? `${html}\n${schem}` : html;
+	return schem ? `${schem}\n${html}` : html;
 };
 
 // --- Nom derivation ---

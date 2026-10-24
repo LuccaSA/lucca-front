@@ -69,9 +69,6 @@ export default [
 		versionDeprecated: '16.2.0',
 		versionDeleted: '19.1.0',
 		actions: `Remplacer par le nouveau composant [Grid](https://prisme.lucca.io/94310e217/p/955d69-grid).`,
-		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
-		},
 	},
 	{
 		// SEE https://regex101.com/r/43OspP.
@@ -180,6 +177,9 @@ export default [
 			* sans bordure : \`.button.mod-onlyIcon.mod-ghost\`
 			* avec bordure : \`.button.mod-onlyIcon.mod-outlined\`
 		`,
+		urls: {
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/action-icon',
+		},
 	},
 	{
 		// SEE https://regex101.com/r/9yDStD.
@@ -231,7 +231,7 @@ export default [
 			* \`*-lucca\` ⇒ \`*-brand\`
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
 		},
 	},
 	{
@@ -251,7 +251,7 @@ export default [
 			* \`*-primary\` & \`*-secondary\` ⇒ \`*-product\`
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
 		},
 	},
 	{
@@ -274,8 +274,8 @@ export default [
 			* [Qualification](https://prisme.lucca.io/94310e217/p/69f87f-qualification)
 		`,
 		urls: {
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select',
 			prisme: 'https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated',
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
 		},
 	},
 	{
@@ -289,7 +289,7 @@ export default [
 		versionDeleted: '20.1.0',
 		actions: `Remplacer par les directives de [Simple](https://prisme.lucca.io/94310e217/p/587833-select-simple/b/991e87) et [Multiple Select](https://prisme.lucca.io/94310e217/p/927519-select-multiple-new/b/39e067).`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select',
 		},
 	},
 	{
@@ -312,7 +312,7 @@ export default [
 			* \`*Right\` ⇒ \`*End\`
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/alignment-utilities',
 		},
 	},
 	{
@@ -362,7 +362,7 @@ export default [
 			* \`*XXL\` ⇒ \`*800\`
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-spacing',
 		},
 	},
 	{
@@ -497,9 +497,6 @@ export default [
 			/\.mod-withMenuCompact(?![\w-])/,
 		],
 		versionDeprecated: '18.3.0',
-		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
-		},
 	},
 	{
 		// SEE https://regex101.com/r/WOAbdM.
@@ -516,9 +513,6 @@ export default [
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
 		actions: `Remplacer par \`.comment-content-textContainerOptional\`.`,
-		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
-		},
 	},
 	{
 		// Any combination of .calendarWrapper-navigation and .mod-prev or .mod-next, within one compound selector
@@ -763,7 +757,7 @@ export default [
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/color-text',
 		},
 	},
 	{
@@ -799,7 +793,7 @@ export default [
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/color-text',
 		},
 	},
 	{
@@ -852,7 +846,7 @@ export default [
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/color-text',
 		},
 	},
 	{
@@ -872,7 +866,7 @@ export default [
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/color-text',
 		},
 	},
 	{
@@ -891,7 +885,7 @@ export default [
 			* \`*Lucca\` ⇒ \`*Brand\`
 		`,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
 		},
 	},
 	{
@@ -924,9 +918,6 @@ export default [
 		actions: `
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
 		`,
-		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
-		},
 	},
 	{
 		// SEE https://regex101.com/r/Ucp3l2.
@@ -940,9 +931,6 @@ export default [
 		actions: `
 			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
 		`,
-		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/t/17d7fdfdaf',
-		},
 	},
 	{
 		// AI palette, renamed Orchid
@@ -1227,7 +1215,7 @@ export default [
 		versionDeprecated: '20.2.0',
 		actions: `\`.u-*\` ⇒ \`.pr-u-*\``,
 		urls: {
-			schematics: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/15c256',
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/class-prefix',
 		},
 	},
 ];
