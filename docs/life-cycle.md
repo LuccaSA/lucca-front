@@ -83,7 +83,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>
 				<p>Segmented control :</p>
 				<ul>
-				<li><code>*viewTabs*</code> ⇒ <code>*segmentedControl*</code></li>
+				<li><code>.viewTabs*</code> ⇒ <code>.segmentedControl*</code></li>
 				<li><code>*-item-tab</code> ⇒ <code>*-item-action</code></li>
 				</ul>
 			</td>

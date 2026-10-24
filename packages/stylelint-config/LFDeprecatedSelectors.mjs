@@ -482,7 +482,7 @@ export default [
 		actions: `
 			Segmented control :
 
-			* \`*viewTabs*\` ⇒ \`*segmentedControl*\`
+			* \`.viewTabs*\` ⇒ \`.segmentedControl*\`
 			* \`*-item-tab\` ⇒ \`*-item-action\`
 		`,
 	},
