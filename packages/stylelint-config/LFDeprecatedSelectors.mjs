@@ -8,8 +8,6 @@
 // Boundary conventions:
 // - Exact token — `\.token(?![\w-])`: matches the token only; the guard blocks a trailing word char OR `-`.
 //   .token ✓ | .token-x ✗ | .tokenX ✗
-// - Component root — `\.token\b`: also flags hyphen-children (`\b` counts `-` as a boundary); not camelCase or plural.
-//   .token ✓ | .token-child ✓ | .tokens ✗
 // - Enumerated children — `\.token(-(a|b))?(?![\w-])`: base plus only its known children (avoids a broad root).
 //   .token ✓ | .token-a ✓ | .token-c ✗
 // - Order-independent combo — `(?=[^\s>+~]*\.a(?![\w-]))(?=[^\s>+~]*\.b(?![\w-]))[^\s>+~]*`: both tokens, any order; `[^\s>+~]*` stays within one compound selector.
@@ -135,7 +133,7 @@ export default [
 		// Legacy form layout, including its children (`.form-group-line-col`…)
 		// SEE https://regex101.com/r/s4mzfl.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3cf38ef202523f291b06db60aadc47efd2e7c15a/packages/scss/src/components/form/index.scss#L38.
-		objectPattern: /\.form-group\b/,
+		objectPattern: /\.form-group(-(line-col|legend|label|title|line))?(?![\w-])/,
 		versionDeprecated: '16.4.0',
 		actions: `
 			* sélecteur : \`.form-field\`
@@ -175,7 +173,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/243a5f40578079a235982456ee8f9f772aefeead/packages/scss/src/components/actionIcon/index.scss#L1.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
 		name: 'Action icon',
-		objectPattern: /\.actionIcon\b/,
+		objectPattern: /\.actionIcon(?![\w-])/,
 		versionDeprecated: '17.2.0',
 		versionDeleted: '19.1.0',
 		actions: `
@@ -414,7 +412,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/dc0da551b981fe0e351baf56e57dce711d7e6880/packages/scss/src/components/avatar/component.scss#L12.
 		// SEE https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/16627d.
 		name: 'User tile',
-		objectPattern: [/\.user-info\b/, /\.user-tile(-(title|label|footnote))?(?![\w-])/, /\.picture(?![\w-])/],
+		objectPattern: [/\.user-info(?![\w-])/, /\.user-tile(-(title|label|footnote))?(?![\w-])/, /\.picture(?![\w-])/],
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 		actions: `
@@ -536,7 +534,8 @@ export default [
 		// SEE https://regex101.com/r/VqPdDw.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/48b4f20edc03b38a32f23058ea8cd5ff3de983dc/packages/scss/src/components/filterBarDeprecated/index.scss#L3.
 		name: 'Filter bar',
-		objectPattern: /\.filterBarDeprecated\b/,
+		objectPattern:
+			/\.filterBarDeprecated(-(footer-toggleButton-labelAlternative|footer-toggleButton-label|footer-toggleButton|footer-actions|toggledFilters|footer))?(?![\w-])/,
 		versionDeprecated: '19.2.0',
 		actions: `Remplacer par [Filter Pills](https://prisme.lucca.io/94310e217/p/053be4-filter-pill) & [Filter Bar](https://prisme.lucca.io/94310e217/p/13044b-filter-bar-).`,
 		urls: {
@@ -566,7 +565,7 @@ export default [
 		// SEE https://regex101.com/r/1eWJ0d.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/63324c9df3d6955360f0d0e2843ea441d9f8f92f/packages/scss/src/components/horizontalNavigation/index.scss#L3.
 		name: 'Menu',
-		objectPattern: /\.menu\b/,
+		objectPattern: /\.menu(-(containerOptional|link-placeholder|list-item-action|link|list))?(?![\w-])/,
 		versionDeprecated: '19.3.0',
 		actions: `Remplacer par [Horizontal navigation](https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation).`,
 	},
@@ -1017,7 +1016,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/718668a2d0f78be779a47ae747a0602a47e5b1c6/packages/ng/highlight-section/highlight-section.component.ts#L9.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/718668a2d0f78be779a47ae747a0602a47e5b1c6/packages/scss/src/commons/utils/highlight-prisme.scss#L299.
 		name: 'Highlight section',
-		objectPattern: /\.highlightSection\b/,
+		objectPattern: /\.highlightSection(-(content-illustration|content-slot|bubbleStart|bubbleEnd|content))?(?![\w-])/,
 		versionDeprecated: '22.1.1',
 		actions: `Le composant Highlight section (\`.highlightSection\` et \`<lu-highlight-section>\`) sera remplacé en 22.2 par une évolution du composant Box.`,
 	},
@@ -1040,7 +1039,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a798b838d6555af1008398825dc471baf34b86fb.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L257.
 		name: 'List',
-		objectPattern: /\.list\b/,
+		objectPattern: /\.list(-(item-content-description|item-content-title|item-actions|item-content|item-handler|item))?(?![\w-])/,
 		versionDeprecated: '16.2.2',
 		actions: `Remplacer par [Sortable list](https://prisme.lucca.io/94310e217/p/883e34-sortable-list).`,
 		urls: {
@@ -1051,7 +1050,7 @@ export default [
 		// SEE https://regex101.com/r/UiBvDM.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L253.
 		name: 'Checkbox',
-		objectPattern: /\.checkbox\b/,
+		objectPattern: /\.checkbox(-(label-helper|input|label|mixed))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `Remplacer par [Checkbox](https://prisme.lucca.io/94310e217/p/42c88e-checkbox).`,
 		urls: {
@@ -1061,7 +1060,8 @@ export default [
 	{
 		// SEE https://regex101.com/r/2KOjjU.
 		name: 'Checkbox',
-		objectPattern: /\.checkboxesfield\b/,
+		objectPattern:
+			/\.checkboxesfield(-(messages-success|messages-warning|messages-helper|messages-error|messages-valid|messages|suffix|input|label))?(?![\w-])/,
 		actions: `Remplacer par [Checkbox](https://prisme.lucca.io/94310e217/p/42c88e-checkbox).`,
 		urls: {
 			prisme: 'https://prisme.lucca.io/94310e217/p/04061d-checkbox',
@@ -1071,7 +1071,7 @@ export default [
 		// SEE https://regex101.com/r/e1p3sA.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L255.
 		name: 'Radio',
-		objectPattern: /\.radio\b/,
+		objectPattern: /\.radio(-(label-helper|input|label))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `Remplacer par [Radio](https://prisme.lucca.io/94310e217/p/45f82a-radio).`,
 		urls: {
@@ -1082,7 +1082,7 @@ export default [
 		// SEE https://regex101.com/r/e1p3sA.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L259.
 		name: 'Radio buttons',
-		objectPattern: /\.radioButtons\b/,
+		objectPattern: /\.radioButtons(-(item-input|item-label|item))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `Remplacer par [Radio](https://prisme.lucca.io/94310e217/p/45f82a-radio).`,
 		urls: {
@@ -1092,7 +1092,8 @@ export default [
 	{
 		// SEE https://regex101.com/r/XtUtpZ.
 		name: 'Radio',
-		objectPattern: /\.radiosfield\b/,
+		objectPattern:
+			/\.radiosfield(-(messages-success|messages-warning|messages-helper|messages-error|messages-valid|messages|suffix|input|label))?(?![\w-])/,
 		actions: `Remplacer par [Radio](https://prisme.lucca.io/94310e217/p/45f82a-radio).`,
 		urls: {
 			prisme: 'https://prisme.lucca.io/94310e217/p/07849c-radio',
@@ -1102,7 +1103,7 @@ export default [
 		// SEE https://regex101.com/r/jMc1iX.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L254.
 		name: 'Switch',
-		objectPattern: /\.switch\b/,
+		objectPattern: /\.switch(-(label-helper|input|label))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `Remplacer par [Switch](https://prisme.lucca.io/94310e217/p/39c7b7-switch).`,
 		urls: {
@@ -1113,7 +1114,8 @@ export default [
 		// SEE https://regex101.com/r/w9keCn.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L260.
 		name: 'Textfield',
-		objectPattern: /\.textfield\b/,
+		objectPattern:
+			/\.textfield(-(messages-success|messages-warning|messages-helper|messages-error|messages-valid|options-entry|suffix-action|options-mark|messages|options|suffix|clear|input|label))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `Remplacer par [Textfield](https://prisme.lucca.io/94310e217/p/459eda-textfield).`,
 		urls: {
@@ -1124,7 +1126,7 @@ export default [
 		// SEE https://regex101.com/r/i6H9hf.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L256.
 		name: 'File upload',
-		objectPattern: /\.file\b/,
+		objectPattern: /\.file(-(progress|content|formats|button|input|title|icon|name|or))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `Remplacer par [File upload](https://prisme.lucca.io/94310e217/p/8282a5-file-upload).`,
 		urls: {
@@ -1135,7 +1137,8 @@ export default [
 		// SEE https://regex101.com/r/ZPhMSh.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L261.
 		name: 'Table',
-		objectPattern: /\.table\b/,
+		objectPattern:
+			/\.table(-(head-row-cell-secondLine|body-row-cell-handler|foot-row-cell-handler|head-row-cell-wrapper|body-row-cell-action|foot-row-cell-action|body-row-cell|foot-row-cell|head-row-cell|body-row|foot-row|head-row|body|foot|head))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `
 			Remplacer par :
@@ -1151,7 +1154,7 @@ export default [
 		// SEE https://regex101.com/r/7rtb5G.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L258.
 		name: 'Label',
-		objectPattern: /\.label\b/,
+		objectPattern: /\.label(-(icon))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `
 			Remplacer par :
@@ -1169,7 +1172,7 @@ export default [
 		// SEE https://regex101.com/r/Sg9PR8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L262.
 		name: 'Main',
-		objectPattern: /\.main\b/,
+		objectPattern: /\.main(-(content))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 	},
 	{
@@ -1177,7 +1180,8 @@ export default [
 		// SEE https://regex101.com/r/Sg9PR8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L265.
 		name: 'Layout',
-		objectPattern: /\.layout\b/,
+		objectPattern:
+			/\.layout(-(content-headers-subheader|content-headers-header|navside-content-inner|aside-content-inner|content-container|content-headers|navside-content|content-footer|navside-footer|navside-toggle|aside-content|content-inner|aside-footer|content|navside|banner|footer|aside))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 	},
 	{
@@ -1185,7 +1189,7 @@ export default [
 		// SEE https://regex101.com/r/Sg9PR8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L266.
 		name: 'Header',
-		objectPattern: /\.header\b/,
+		objectPattern: /\.header(-(contentRight|nav-category|contentLeft|nav-title|nav-back|nav))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 	},
 	{
@@ -1193,7 +1197,7 @@ export default [
 		// SEE https://regex101.com/r/Sg9PR8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L263.
 		name: 'Filters',
-		objectPattern: /\.filters\b/,
+		objectPattern: /\.filters(-(sectionRight|sectionLeft))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 	},
 	{
@@ -1201,7 +1205,7 @@ export default [
 		// SEE https://regex101.com/r/Sg9PR8.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/525a713baf00a378a92ed0a39d3a60f563e9e1cc/packages/scss/src/commons/utils/highlight-prisme.scss#L264.
 		name: 'Notch box',
-		objectPattern: /\.notchBox\b/,
+		objectPattern: /\.notchBox(-(wrapper|badge))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 	},
 

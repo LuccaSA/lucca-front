@@ -37,7 +37,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 	<tbody>
 		<tr>
 			<td>
-				<a href="https://prisme.lucca.io/94310e217/p/66df2f-list">List</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)list(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.list</code></a>
+				<a href="https://prisme.lucca.io/94310e217/p/66df2f-list">List</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)list(-(item-content-description%7Citem-content-title%7Citem-actions%7Citem-content%7Citem-handler%7Citem))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.list</code></a>
 			</td>
 			<td>16.2.2</td>
 			<td>–</td>
@@ -98,14 +98,14 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				<a href="https://prisme.lucca.io/94310e217/p/334d4a-filter-bar">Filter bar</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filterBarDeprecated(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBarDeprecated</code></a>
+				<a href="https://prisme.lucca.io/94310e217/p/334d4a-filter-bar">Filter bar</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filterBarDeprecated(-(footer-toggleButton-labelAlternative%7Cfooter-toggleButton-label%7Cfooter-toggleButton%7Cfooter-actions%7CtoggledFilters%7Cfooter))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filterBarDeprecated</code></a>
 			</td>
 			<td>19.2.0</td>
 			<td>–</td>
 			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/053be4-filter-pill">Filter Pills</a> &amp; <a href="https://prisme.lucca.io/94310e217/p/13044b-filter-bar-">Filter Bar</a>.</td>
 		</tr>
 		<tr>
-			<td>Menu, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)menu(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.menu</code></a></td>
+			<td>Menu, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)menu(-(containerOptional%7Clink-placeholder%7Clist-item-action%7Clink%7Clist))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.menu</code></a></td>
 			<td>19.3.0</td>
 			<td>–</td>
 			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation">Horizontal navigation</a>.</td>
@@ -134,8 +134,8 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>
 				<a href="https://prisme.lucca.io/94310e217/p/04061d-checkbox">Checkbox</a>
 				<ul>
-				<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkbox(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkboxesfield(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkbox</code></a></li>
-				<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkbox(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkboxesfield(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkboxesfield</code></a></li>
+				<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkbox(-(label-helper%7Cinput%7Clabel%7Cmixed))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkboxesfield(-(messages-success%7Cmessages-warning%7Cmessages-helper%7Cmessages-error%7Cmessages-valid%7Cmessages%7Csuffix%7Cinput%7Clabel))%3F(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkbox</code></a></li>
+				<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkbox(-(label-helper%7Cinput%7Clabel%7Cmixed))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)checkboxesfield(-(messages-success%7Cmessages-warning%7Cmessages-helper%7Cmessages-error%7Cmessages-valid%7Cmessages%7Csuffix%7Cinput%7Clabel))%3F(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.checkboxesfield</code></a></li>
 				</ul>
 			</td>
 			<td>21.1.2</td>
@@ -146,8 +146,8 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>
 				<a href="https://prisme.lucca.io/94310e217/p/07849c-radio">Radio</a>
 				<ul>
-				<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radio(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radiosfield(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radio</code></a></li>
-				<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radio(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radiosfield(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radiosfield</code></a></li>
+				<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radio(-(label-helper%7Cinput%7Clabel))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radiosfield(-(messages-success%7Cmessages-warning%7Cmessages-helper%7Cmessages-error%7Cmessages-valid%7Cmessages%7Csuffix%7Cinput%7Clabel))%3F(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radio</code></a></li>
+				<li><a href="https://github.com/search?q=(%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radio(-(label-helper%7Cinput%7Clabel))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radiosfield(-(messages-success%7Cmessages-warning%7Cmessages-helper%7Cmessages-error%7Cmessages-valid%7Cmessages%7Csuffix%7Cinput%7Clabel))%3F(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radiosfield</code></a></li>
 				</ul>
 			</td>
 			<td>21.1.2</td>
@@ -156,7 +156,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				<a href="https://prisme.lucca.io/94310e217/p/55805e-radio-buttons">Radio buttons</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radioButtons(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radioButtons</code></a>
+				<a href="https://prisme.lucca.io/94310e217/p/55805e-radio-buttons">Radio buttons</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)radioButtons(-(item-input%7Citem-label%7Citem))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.radioButtons</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -164,7 +164,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				<a href="https://prisme.lucca.io/94310e217/p/15149b-switch">Switch</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)switch(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.switch</code></a>
+				<a href="https://prisme.lucca.io/94310e217/p/15149b-switch">Switch</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)switch(-(label-helper%7Cinput%7Clabel))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.switch</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -172,7 +172,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				<a href="https://prisme.lucca.io/94310e217/p/55f101-text-field">Textfield</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)textfield(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.textfield</code></a>
+				<a href="https://prisme.lucca.io/94310e217/p/55f101-text-field">Textfield</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)textfield(-(messages-success%7Cmessages-warning%7Cmessages-helper%7Cmessages-error%7Cmessages-valid%7Coptions-entry%7Csuffix-action%7Coptions-mark%7Cmessages%7Coptions%7Csuffix%7Cclear%7Cinput%7Clabel))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.textfield</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -180,7 +180,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				<a href="https://prisme.lucca.io/94310e217/p/99e88e-file-upload">File upload</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)file(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.file</code></a>
+				<a href="https://prisme.lucca.io/94310e217/p/99e88e-file-upload">File upload</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)file(-(progress%7Ccontent%7Cformats%7Cbutton%7Cinput%7Ctitle%7Cicon%7Cname%7Cor))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.file</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -188,7 +188,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				<a href="https://prisme.lucca.io/94310e217/p/75b1ea-table-">Table</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table</code></a>
+				<a href="https://prisme.lucca.io/94310e217/p/75b1ea-table-">Table</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)table(-(head-row-cell-secondLine%7Cbody-row-cell-handler%7Cfoot-row-cell-handler%7Chead-row-cell-wrapper%7Cbody-row-cell-action%7Cfoot-row-cell-action%7Cbody-row-cell%7Cfoot-row-cell%7Chead-row-cell%7Cbody-row%7Cfoot-row%7Chead-row%7Cbody%7Cfoot%7Chead))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.table</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -202,7 +202,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				<a href="https://prisme.lucca.io/94310e217/p/640fae-label">Label</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)label(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label</code></a>
+				<a href="https://prisme.lucca.io/94310e217/p/640fae-label">Label</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)label(-(icon))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.label</code></a>
 			</td>
 			<td>21.1.2</td>
 			<td>–</td>
@@ -216,37 +216,37 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 		</tr>
 		<tr>
-			<td>Main, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)main(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.main</code></a></td>
+			<td>Main, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)main(-(content))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.main</code></a></td>
 			<td>21.1.2</td>
 			<td>–</td>
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>Layout, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)layout(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.layout</code></a></td>
+			<td>Layout, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)layout(-(content-headers-subheader%7Ccontent-headers-header%7Cnavside-content-inner%7Caside-content-inner%7Ccontent-container%7Ccontent-headers%7Cnavside-content%7Ccontent-footer%7Cnavside-footer%7Cnavside-toggle%7Caside-content%7Ccontent-inner%7Caside-footer%7Ccontent%7Cnavside%7Cbanner%7Cfooter%7Caside))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.layout</code></a></td>
 			<td>21.1.2</td>
 			<td>–</td>
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>Header, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)header(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.header</code></a></td>
+			<td>Header, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)header(-(contentRight%7Cnav-category%7CcontentLeft%7Cnav-title%7Cnav-back%7Cnav))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.header</code></a></td>
 			<td>21.1.2</td>
 			<td>–</td>
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>Filters, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filters(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filters</code></a></td>
+			<td>Filters, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)filters(-(sectionRight%7CsectionLeft))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.filters</code></a></td>
 			<td>21.1.2</td>
 			<td>–</td>
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>Notch box, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)notchBox(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.notchBox</code></a></td>
+			<td>Notch box, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)notchBox(-(wrapper%7Cbadge))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.notchBox</code></a></td>
 			<td>21.1.2</td>
 			<td>–</td>
 			<td>–</td>
 		</tr>
 		<tr>
-			<td>Highlight section, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)highlightSection(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.highlightSection</code></a></td>
+			<td>Highlight section, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)highlightSection(-(content-illustration%7Ccontent-slot%7CbubbleStart%7CbubbleEnd%7Ccontent))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.highlightSection</code></a></td>
 			<td>22.1.1</td>
 			<td>–</td>
 			<td>Le composant Highlight section (<code>.highlightSection</code> et <code>&lt;lu-highlight-section&gt;</code>) sera remplacé en 22.2 par une évolution du composant Box.</td>
@@ -288,7 +288,10 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)form-group(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.form-group</code></a>
+				<ul>
+				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)form-group(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.form-group</code></a></li>
+				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)form-group(-(line-col%7Clegend%7Clabel%7Ctitle%7Cline))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.form-group-(line-col|legend|…)</code></a></li>
+				</ul>
 			</td>
 			<td>16.4.0</td>
 			<td>–</td>
