@@ -316,11 +316,18 @@ export default [
 		},
 	},
 	{
-		// Any combination of .breadcrumbs-list-item-action and .active, within one compound selector
+		// Any combination of .breadcrumbs-list-item-action and .active, within one compound selector,
+		// or .active on a link child of .breadcrumbs-list-item
 		// SEE https://regex101.com/r/puV4bl.
+		// SEE https://regex101.com/r/YZvBfE.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5f325acbb26f67993d110ccd13e08ae63e1f9ab4/packages/scss/src/components/breadcrumbs/index.scss#L13.
-		objectPattern: /(?=[^\s>+~]*\.breadcrumbs-list-item-action(?![\w-]))(?=[^\s>+~]*\.active(?![\w-]))[^\s>+~]*/,
+		// SEE https://github.com/LuccaSA/lucca-front/blob/ebab96f82085c2f887c5ba9cff13e19e2d42cf9d/packages/scss/src/components/breadcrumbs/index.scss#L18.
+		objectPattern: [
+			/(?=[^\s>+~]*\.breadcrumbs-list-item-action(?![\w-]))(?=[^\s>+~]*\.active(?![\w-]))[^\s>+~]*/,
+			/\.breadcrumbs-list-item > a\.active(?![\w-])/,
+		],
 		versionDeprecated: '17.4.0',
+		actions: `Remplacer par \`.is-active\`.`,
 	},
 	{
 		// SEE https://regex101.com/r/VGtzuM.
@@ -579,6 +586,18 @@ export default [
 		actions: `
 			* remplacement : \`*withHorizontalNavigation\`
 			* suppression : \`.pageHeader\` détecte automatiquement \`.horizontalNavigation\`
+		`,
+	},
+	{
+		// Any combination of .horizontalNavigation-list-item-action and .active or .disabled, within one compound selector
+		// SEE https://regex101.com/r/9K8U43.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/63324c9df3d6955360f0d0e2843ea441d9f8f92f/packages/scss/src/components/horizontalNavigation/index.scss#L44.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/63324c9df3d6955360f0d0e2843ea441d9f8f92f/packages/scss/src/components/horizontalNavigation/index.scss#L50.
+		objectPattern: /(?=[^\s>+~]*\.horizontalNavigation-list-item-action(?![\w-]))(?=[^\s>+~]*\.(active|disabled)(?![\w-]))[^\s>+~]*/,
+		versionDeprecated: '19.3.0',
+		actions: `
+			* \`.active\` ⇒ \`.is-active\`
+			* \`.disabled\` ⇒ \`.is-disabled\`
 		`,
 	},
 	{
@@ -908,6 +927,44 @@ export default [
 		objectPattern: /(?=[^\s>+~]*\.pagination(?![\w-]))(?=[^\s>+~]*\.mod-mods(?![\w-]))[^\s>+~]*/,
 		versionDeleted: '21.1.4',
 		actions: `Remplacer par \`.mod-compact\`.`,
+	},
+	{
+		// Bare states of components that alias them with their `.is-*` form:
+		// any combination, within one compound selector, of:
+		// .card and .disabled;
+		// .navSide-item-link or .navSide-item-subMenu-link and .active;
+		// .progress and .error or .success;
+		// .segmentedControl_panel and .active;
+		// .tableOfContent-list-item-action and .disabled.
+		// Also .disabled on a link child of .tableOfContent-list-item.
+		// SEE https://regex101.com/r/rO6TIM.
+		// SEE https://regex101.com/r/P3OOpp.
+		// SEE https://regex101.com/r/wyeFkU.
+		// SEE https://regex101.com/r/SzKt7G.
+		// SEE https://regex101.com/r/Z4zBWI.
+		// SEE https://regex101.com/r/rhLCgE.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1b72eb1ebf7294adddc8c8952b796faf5ca0cd44/packages/scss/src/components/card/index.scss#L36.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1b72eb1ebf7294adddc8c8952b796faf5ca0cd44/packages/scss/src/components/navside/index.scss#L107.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1b72eb1ebf7294adddc8c8952b796faf5ca0cd44/packages/scss/src/components/progress/index.scss#L14.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1b72eb1ebf7294adddc8c8952b796faf5ca0cd44/packages/scss/src/components/progress/index.scss#L18.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1b72eb1ebf7294adddc8c8952b796faf5ca0cd44/packages/scss/src/components/segmentedControl/index.scss#L45.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1b72eb1ebf7294adddc8c8952b796faf5ca0cd44/packages/scss/src/components/tableOfContent/index.scss#L44.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1b72eb1ebf7294adddc8c8952b796faf5ca0cd44/packages/stylelint-config/LFDeprecatedSelectors.mjs#L3.
+		objectPattern: [
+			/(?=[^\s>+~]*\.card(?![\w-]))(?=[^\s>+~]*\.disabled(?![\w-]))[^\s>+~]*/,
+			/(?=[^\s>+~]*\.navSide-item-(link|subMenu-link)(?![\w-]))(?=[^\s>+~]*\.active(?![\w-]))[^\s>+~]*/,
+			/(?=[^\s>+~]*\.progress(?![\w-]))(?=[^\s>+~]*\.(error|success)(?![\w-]))[^\s>+~]*/,
+			/(?=[^\s>+~]*\.segmentedControl_panel(?![\w-]))(?=[^\s>+~]*\.active(?![\w-]))[^\s>+~]*/,
+			/(?=[^\s>+~]*\.tableOfContent-list-item-action(?![\w-]))(?=[^\s>+~]*\.disabled(?![\w-]))[^\s>+~]*/,
+			/\.tableOfContent-list-item > a\.disabled(?![\w-])/,
+		],
+		versionDeprecated: '21.2.0',
+		actions: `
+			* \`.active\` ⇒ \`.is-active\`
+			* \`.disabled\` ⇒ \`.is-disabled\`
+			* \`.error\` ⇒ \`.is-error\`
+			* \`.success\` ⇒ \`.is-success\`
+		`,
 	},
 	{
 		// SEE https://regex101.com/r/10xX2L.
