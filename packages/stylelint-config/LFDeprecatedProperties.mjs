@@ -38,18 +38,11 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/Qkq3ok.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/7aafc39f8c79a749bc1d670fe4f05ea86c300923/packages/scss/src/commons/config.scss#L166.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
-		objectPattern: /--commons-elevations-elevation-[1-6](?![\w-])/,
-		versionDeprecated: '16.1.0',
-		versionDeleted: '19.1.0',
-		actions: `Remplacer par les tokens [elevations](https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449).`,
-	},
-	{
 		// SEE https://regex101.com/r/g6tsSx.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/7aafc39f8c79a749bc1d670fe4f05ea86c300923/packages/scss/src/commons/config.scss#L166.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/7aafc39f8c79a749bc1d670fe4f05ea86c300923/packages/scss/src/commons/config.scss#L181.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
-		objectPattern: /--commons-boxShadow-XXS(?![\w-])/,
+		objectPattern: [/--commons-elevations-elevation-[1-6](?![\w-])/, /--commons-boxShadow-XXS(?![\w-])/],
 		versionDeprecated: '16.1.0',
 		versionDeleted: '19.1.0',
 		actions: `Remplacer par les tokens [elevations](https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449).`,

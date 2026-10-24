@@ -590,15 +590,10 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)--commons-elevations-elevation-%5B1-6%5D(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--commons-elevations-elevation-(1|2|3|4|…)</code></a>
-			</td>
-			<td>16.1.0</td>
-			<td>19.1.0</td>
-			<td>Remplacer par les tokens <a href="https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449">elevations</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)--commons-boxShadow-XXS(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--commons-boxShadow-XXS</code></a>
+				<ul>
+				<li><a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)--commons-boxShadow-XXS(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--commons-boxShadow-XXS</code></a></li>
+				<li><a href="https://github.com/search?q=(%2F(%5E%7C%5B%5E%5Cw-%5D)--commons-elevations-elevation-%5B1-6%5D(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5E%7C%5B%5E%5Cw-%5D)--commons-boxShadow-XXS(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--commons-elevations-elevation-(1|2|3|4|…)</code></a></li>
+				</ul>
 			</td>
 			<td>16.1.0</td>
 			<td>19.1.0</td>
