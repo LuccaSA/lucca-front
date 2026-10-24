@@ -474,9 +474,10 @@ export default [
 	},
 	{
 		// AI palette, renamed Orchid; `--palettes-ai-*` (lower case) is the AI gradient
+		// The palette only ever defined 500 and 600
 		// SEE https://regex101.com/r/IFX5bZ.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/f0b73e151f73e805500788cdaac6e65fcff20b7a.
-		objectPattern: /--palettes-AI-\d+(?![\w-])/,
+		objectPattern: /--palettes-AI-(500|600)(?![\w-])/,
 		versionDeleted: '21.3.0',
 		actions: `
 			* couleur : \`--palettes-orchid-*\`

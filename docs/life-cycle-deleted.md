@@ -805,7 +805,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)--palettes-AI-%5Cd%2B(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--palettes-AI-(1|2|3|4|…)</code></a>
+				<a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)--palettes-AI-(500%7C600)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>--palettes-AI-(500|600)</code></a>
 			</td>
 			<td>–</td>
 			<td>21.3.0</td>
