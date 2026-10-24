@@ -66,6 +66,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 ## Composants
 
 * An entry with a `name` deprecates a whole component: it goes to *Composants*, not *Classes*.
+	* A whole component renamed stays a component: View tabs became Segmented control.
 	* The `name` is plain text: the component name, alphanumeric only.
 	* It carries no `Deprecated` prefix: the whole table lists deprecations.
 	* `urls.prisme` links it to the Prisme page of the deprecated component.
