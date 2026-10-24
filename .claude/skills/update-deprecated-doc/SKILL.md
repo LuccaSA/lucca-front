@@ -49,6 +49,10 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	2. The deprecated components, after the entries targeting their children.
 	3. The `.u-` catch-all, last.
 * A modifier or state class gets a combination with its component: `.button.disabled` instead of `.disabled`.
+* A number lists only the values LF shipped, never `\d+`.
+	* Download the release package from `https://registry.npmjs.org/@lucca-front/scss/-/scss-<version>.tgz`.
+	* Search its `package/dist/lucca-front.min.css` file for the class.
+* `Auto` opens a choice of values: `(Auto|0|25|50|…)`.
 * The properties file holds the sorted section only.
 * Sort key:
 	1. `versionDeprecated`, or `versionDeleted` without it.

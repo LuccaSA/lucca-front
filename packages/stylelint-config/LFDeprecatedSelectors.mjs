@@ -29,13 +29,13 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/commit/66e12140f271c541e74db3ec79af116c72c69889.
 		objectPattern: [
 			// Colonnes de grille
-			/\.grid-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)(\d+|Offset\d+)?(?![\w-])/,
+			/\.grid-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)((Offset)?(1|2|3|4|5|6|7|8|9|10|11|12))?(?![\w-])/,
 			// Alignements de grille
 			/\.mod-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)(Start|Center|End|Top|Middle|Bottom|Around|Between)(?![\w-])/,
 			// Colonnes de formulaire
-			/\.mod-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)\d+(?![\w-])/,
+			/\.mod-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)(1|2|3|4|5|6|7|8|9|10|11|12)(?![\w-])/,
 			// Tableaux
-			/\.mod-(stickyColumn-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)|layoutFixed-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)\d+)(?![\w-])/,
+			/\.mod-(stickyColumn-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)|layoutFixed-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)(2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20))(?![\w-])/,
 		],
 		versionDeleted: '15.1.0',
 		actions: `Écrire le point de rupture en majuscules (\`l\` ⇒ \`L\`), puis appliquer les dépréciations suivantes du composant.`,
@@ -60,7 +60,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
 		objectPattern: [
 			// Colonnes et offsets de l’ancienne grille, toujours suffixés d’un breakpoint (`.grid-6\@mediaMinS`)
-			/\.grid(-(offset)?\d+)?\\@mediaMin/,
+			/\.grid(-(offset)?(1|2|3|4|5|6|7|8|9|10|11|12))?\\@mediaMin/,
 			// Mods de l’ancienne grille, combinés à `.grid`
 			/(?=[^\s>+~]*\.grid(?![\w-]))(?=[^\s>+~]*\.mod-(reverse|(start|center|end|top|middle|bottom|around|between)\\@mediaMin\w*)(?![\w-]))[^\s>+~]*/,
 			// Utilitaires de placement de l’ancienne grille
@@ -547,7 +547,8 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/24575bdd120778f19e0cbb2b47ffc9b6e4491bba/packages/scss/src/commons/core.scss#L12.
 		objectPattern: [
 			// Espacements : `Top` ⇒ `BlockStart`, `Right` ⇒ `InlineEnd`, `Bottom` ⇒ `BlockEnd`, `Left` ⇒ `InlineStart`
-			/\.pr-u-(margin|padding)(Top|Right|Bottom|Left)(\d+|Auto)(?![\w-])/,
+			/\.pr-u-margin(Top|Right|Bottom|Left)(Auto|0|25|50|75|100|150|200|250|300|400|500|600|700|800)(?![\w-])/,
+			/\.pr-u-padding(Top|Right|Bottom|Left)(0|25|50|75|100|150|200|250|300|400|500|600|700|800)(?![\w-])/,
 			/\.pr-u-border(Top|Right|Bottom|Left)0(?![\w-])/,
 		],
 		versionDeprecated: '19.2.0',
