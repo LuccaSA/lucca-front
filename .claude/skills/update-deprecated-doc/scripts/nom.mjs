@@ -2,6 +2,7 @@
 // Enumerable parts expand into items, the largest groups stay factored, the rest becomes `…`: SKILL.md gives the rules.
 
 import { RegExpParser } from '@eslint-community/regexpp';
+import { comboScan } from '../../../../packages/stylelint-config/LFDeprecatedSelectors.mjs';
 
 const OPEN = { open: true };
 const DIGITS = { fixed: '(1|2|3|4|…)' };
@@ -131,8 +132,11 @@ const patternItems = (src, max = 10) => {
 	return items.map(tidy);
 };
 
-// A combination: two lookaheads, each scanning one compound selector.
-export const comboRe = /^\(\?=\[\^\\s>\+~\]\*(.+?)\)\(\?=\[\^\\s>\+~\]\*(.+?)\)\[\^\\s>\+~\]\*$/;
+// A combination built by `combo()`: two lookaheads, each scanning one compound selector.
+const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+export const comboRe = new RegExp(
+	`^\\(\\?=${escape(comboScan)}(.+?)\\)\\(\\?=${escape(comboScan)}(.+?)\\)${escape(String.raw`[^\s>+~]*`)}$`,
+);
 const code = (t) => `\`${t}\``;
 const byText = (a, b) => (a.replace(/`/g, '') < b.replace(/`/g, '') ? -1 : 1);
 

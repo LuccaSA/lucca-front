@@ -49,6 +49,9 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	2. The deprecated components, after the entries targeting their children.
 	3. The `.u-` catch-all, last.
 * A modifier or state class gets a combination with its component: `.button.disabled` instead of `.disabled`.
+	* A `combo()` call builds it: `combo(/\.button/, /\.disabled/)`.
+	* Both tokens match in any order within one compound selector.
+	* `.button:not(.disabled)` matches, while `.button:has(.disabled)` does not.
 * A number lists only the values LF shipped, never `\d+`.
 	* Download the release package from `https://registry.npmjs.org/@lucca-front/scss/-/scss-<version>.tgz`.
 	* Search its `package/dist/lucca-front.min.css` file for the class.

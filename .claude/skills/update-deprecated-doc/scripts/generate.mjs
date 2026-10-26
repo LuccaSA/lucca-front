@@ -14,8 +14,14 @@ const dir = 'packages/stylelint-config/';
 // A Windows checkout (`core.autocrlf`) brings CRLF: every parser below matches LF only.
 const read = (path) => readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
 
+// A `combo(/\.a/, /\.b/)` call builds one pattern out of two literals.
+const comboCall = /\bcombo\(\/(?:\\.|[^/])+\/[gimsuy]*,\s*\/(?:\\.|[^/])+\/[gimsuy]*\)/g;
+const literal = /\/((?:\\.|[^/])+)\/[gimsuy]*/g;
+const patternCount = (l) => (l.match(comboCall) ?? []).length + (l.replace(comboCall, '').match(literal) ?? []).length;
+
 // Comments inside an `objectPattern` array label the patterns after them: only the source text keeps them.
-const groupsOf = (chunk) => {
+// The text gives each label its pattern count, the module gives the sources.
+const groupsOf = (chunk, sources) => {
 	const lines = chunk.split('\n').map((l) => l.trim());
 	const start = lines.findIndex((l) => l.startsWith('objectPattern:'));
 	if (start < 0) return [];
@@ -23,11 +29,14 @@ const groupsOf = (chunk) => {
 	const array = lines[start].endsWith('[');
 	const end = lines.findIndex((l, k) => (array ? k > start && /^\],?$/.test(l) : k >= start && l.endsWith(',')));
 	const groups = [{ label: null, sources: [] }];
+	let next = 0;
 	for (const l of lines.slice(start, end + 1)) {
 		if (l.startsWith('//')) {
 			if (!l.startsWith('// SEE http')) groups.push({ label: l.replace(/^\/\/\s?/, ''), sources: [] });
-		} else for (const m of l.matchAll(/\/((?:\\.|[^/])+)\/[gimsuy]*/g)) groups.at(-1).sources.push(m[1]);
+		} else groups.at(-1).sources.push(...sources.slice(next, (next += patternCount(l))));
 	}
+	if (next !== sources.length)
+		throw new Error(`${chunk.split('\n')[0].trim()}: ${next} patterns in the text for ${sources.length} in the module`);
 	return groups.filter((g) => g.sources.length || g.label);
 };
 // The data comes from the modules themselves, the labels from their text: both list the entries in the same order.
@@ -37,7 +46,8 @@ const load = async (file) => {
 		.slice(1);
 	const { default: data } = await import(pathToFileURL(dir + file));
 	if (chunks.length !== data.length) throw new Error(`${file}: ${chunks.length} entry blocks for ${data.length} entries`);
-	return data.map(({ urls, ...e }, k) => ({ ...e, ...urls, groups: groupsOf(chunks[k]), sources: [file] }));
+	const sourcesOf = (e) => (Array.isArray(e.objectPattern) ? e.objectPattern : [e.objectPattern]).filter(Boolean).map((p) => p.source);
+	return data.map(({ urls, ...e }, k) => ({ ...e, ...urls, groups: groupsOf(chunks[k], sourcesOf(e)), sources: [file] }));
 };
 
 // A schematics link shows the schematic name `collection.json` registers for its folder: `tokens-spacing/` holds `tokens-spacings`.
