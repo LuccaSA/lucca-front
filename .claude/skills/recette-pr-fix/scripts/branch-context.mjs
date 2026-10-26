@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Collects the context of a fix branch (base, impacted scope, lint targets) and checks the repo conventions CI does not cover.
 // Compares the working tree (committed + uncommitted + untracked) against the merge-base with the base branch.
-// Usage: node .claude/skills/recette-pr-fix/scripts/branch-context.mjs [--base origin/<branch>]
+// Usage: node .claude/skills/recette-pr-fix/scripts/branch-context.mjs [--base origin/<branch>] [--issue <n>]
 // Without --base: the open PR's base, otherwise the closest of master / release/* / *-lts.
 // Exit code: 1 if at least one ❌, 0 otherwise.
 
@@ -108,7 +108,46 @@ const lintable = present.filter((p) => /^packages\/.+\.(ts|mjs|js)$/.test(p));
 const stylable = present.filter((p) => /^packages\/.+\.scss$/.test(p));
 info(`Lint targets: ${lintable.length} ts/js, ${stylable.length} scss`);
 
+// 4. Linked issue (the audit checks the fix against its intent, the bug replay reuses its reproduction steps)
+const issues = linkedIssues();
+if (issues.length) {
+	for (const i of issues) info(`Linked issue: #${i.number} "${i.title}" (${i.state.toLowerCase()}) — gh issue view ${i.number}`);
+} else {
+	info('No linked issue (PR closing reference, "Fixes #n" in a commit, or --issue <n>)');
+}
+
 print();
+
+// Issues from --issue, the open PR's closing references and closing keywords in the branch's commits.
+function linkedIssues() {
+	const numbers = new Set();
+	if (args.includes('--issue')) numbers.add(args[args.indexOf('--issue') + 1]);
+	try {
+		const refs = execFileSync('gh', ['pr', 'view', '--json', 'closingIssuesReferences', '--jq', '.closingIssuesReferences[].number'], {
+			encoding: 'utf8',
+			stdio: ['ignore', 'pipe', 'ignore'],
+		});
+		lines(refs.trim()).forEach((n) => numbers.add(n));
+	} catch {
+		// No PR yet
+	}
+	const messages = git('log', '--format=%B', `${mergeBase}..HEAD`);
+	for (const m of messages.matchAll(/\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s*:?\s+(?:[\w.-]+\/[\w.-]+)?#(\d+)/gi)) numbers.add(m[1]);
+	// "#n" may be a pull request: keep actual issues only
+	return [...numbers].flatMap((n) => {
+		try {
+			const issue = JSON.parse(
+				execFileSync('gh', ['issue', 'view', n, '--json', 'number,title,state,url'], {
+					encoding: 'utf8',
+					stdio: ['ignore', 'pipe', 'ignore'],
+				}),
+			);
+			return issue.url.includes('/issues/') ? [issue] : [];
+		} catch {
+			return [];
+		}
+	});
+}
 
 function print() {
 	console.log(`recette-pr-fix · ${branch} vs ${base} (${mergeBase.slice(0, 9)}) · ${changed.size} files\n`);

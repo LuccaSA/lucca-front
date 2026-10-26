@@ -36,6 +36,7 @@ gh pr diff <url|numéro>
 Signaux à ne pas manquer :
 
 - la **description** de la PR (premier bloc = description fonctionnelle destinée au changelog) et le ticket ou la PR liée s'il y en a ;
+- l'**issue liée** (référence de fermeture de la PR, `Fixes #n` dans un commit, ou celle que `branch-context.mjs` a trouvée) : `gh issue view <n> --json title,body,labels,comments`. C'est la meilleure source de l'intention — ce que l'utilisateur constatait, ce qu'il attendait, comment reproduire — à confronter au diff ;
 - la **base** : `master` = fix, `release/vX.X` = feature du cycle en cours ;
 - les **labels** (`FIX`, `Feature`, `Technical`, `🤖 Produced by AI`) et l'état (draft, reviews en attente) ;
 - les **commentaires automatiques** : celui de `github-actions` donne l'URL de la preview Storybook déployée pour la PR — c'est le moyen de test le moins coûteux, à citer en priorité ;
@@ -65,6 +66,7 @@ En cas d'hésitation entre deux niveaux, prendre le moins grave : un audit qui c
 
 Pistes à examiner :
 
+- **Intention de l'issue** : le diff corrige-t-il le cas que l'issue décrit, et tout ce cas ? Un fix qui traite un cas voisin, une partie seulement des étapes de reproduction, ou un autre comportement que celui attendu est un 🟡 au plus — c'est une appréciation, pas un constat : citer l'écart précis (« l'issue décrit X au clavier, le fix ne traite que la souris »). Pas d'issue liée : ne rien dire.
 - **Contrat public** : un input/output ajouté, renommé ou dont le type change, une classe CSS ou un token supprimé → breaking change pour les consommateurs.
 - **Dépendance externe** : la PR suppose un déploiement, une PR liée, une version d'API ou un asset CDN déjà en ligne. Si ce n'est pas le cas, qu'est-ce qui casse et jusqu'où ?
 - **Effet de bord hors périmètre** : le changement touche un composant partagé (`core-select`, `core/*`, SCSS commun) ou modifie un défaut appliqué à d'autres cas que celui visé.

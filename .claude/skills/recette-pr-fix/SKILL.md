@@ -52,7 +52,7 @@ SCSS=$(echo "$FILES" | grep -E '^packages/.+\.scss$')
 
 Appliquer le skill `audit-pr` **en mode branche locale** (sans argument), avec la base donnée par le script, en ne produisant que deux de ses sections :
 
-- **Points de vigilance** — mêmes critères et même échelle 🔴🟡🔵, trois points au maximum, section omise s'il n'y a rien. Pour un fix, regarder en priorité si le fix change un comportement pour d'autres cas que celui visé. La couverture du cas corrigé est donnée par `regression-check` : ne pas la réévaluer à la main. Ne pas proposer de backport.
+- **Points de vigilance** — mêmes critères et même échelle 🔴🟡🔵, trois points au maximum, section omise s'il n'y a rien. Pour un fix, regarder en priorité si le diff traite bien le cas décrit par l'issue liée (ligne `ℹ️ Linked issue` du script ; sans issue, l'utilisateur peut en donner une avec `--issue <n>`), puis s'il change un comportement pour d'autres cas que celui visé. La couverture du cas corrigé est donnée par `regression-check` : ne pas la réévaluer à la main. Ne pas proposer de backport.
 - **Comment tester** — trois à cinq étapes, utilisables telles quelles dans la description de la PR.
 
 Ne pas répéter un constat déjà fait par le script. Ne lire au-delà du diff que si c'est nécessaire pour comprendre le comportement antérieur.
@@ -121,7 +121,7 @@ Prérequis : `gh` ≥ 2.99.0 (`gh pr comment --help | grep -q -- --attach`). En 
 5. **Regarder chaque image** avant d'écrire sa légende. Une paire marquée `⚠️ identical` n'est pas une preuve du changement : changer d'état ou de story, ou la garder seulement comme cas témoin (« inchangé à la souris »). `❌ not found` : la story n'existe pas dans cette preview. `❌ hover … failed` : le sélecteur n'a pas pu être survolé, rien n'est capturé pour cette story — corriger le sélecteur plutôt que de publier un état au repos.
 
    Chaque story capturée passe aussi un **audit d'accessibilité axe** (le moteur de l'addon a11y de Storybook, dont les violations ne font jamais échouer la CI), dans le même état que la capture. La ligne `a11y` ne compte que ce que la PR change : `⚠️ n new` — violations ajoutées par le fix, à signaler dans le rapport et le commentaire, en 🔴 si elles touchent le clavier ou les lecteurs d'écran ; `✅ n fixed` — violations corrigées ; les violations `already on the base` ne sont pas le fait du fix et ne se rapportent pas. Seules les stories capturées sont auditées : le dire dans « Non vérifié ».
-6. **Rejouer le bug (facultatif)** — pour un fix qu'aucun spec ne reproduit (`regression-check` sauté ou non évaluable) et dont le bug tient à un comportement du navigateur : focus, clavier, overlay, survol, mise en page réelle, cycle de vie Storybook. Écrire un scénario d'après « Comment tester », dans `<dossier>/scenario.mjs` :
+6. **Rejouer le bug (facultatif)** — pour un fix qu'aucun spec ne reproduit (`regression-check` sauté ou non évaluable) et dont le bug tient à un comportement du navigateur : focus, clavier, overlay, survol, mise en page réelle, cycle de vie Storybook. Écrire un scénario d'après les étapes de reproduction de l'issue liée s'il y en a — c'est le bug tel qu'il a été constaté —, sinon d'après « Comment tester », dans `<dossier>/scenario.mjs` :
 
    ```js
    // <the bug, in one sentence>
