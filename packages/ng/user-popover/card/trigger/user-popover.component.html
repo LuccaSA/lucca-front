@@ -105,6 +105,11 @@
 				</p>
 			</div>
 		</section>
+		@if (customContent?.(); as customContentTemplate) {
+			<section>
+				<ng-container *ngTemplateOutlet="customContentTemplate; context: { $implicit: luUser() }" />
+			</section>
+		}
 	</div>
 } @else {
 	<lu-skeleton-user-popover />

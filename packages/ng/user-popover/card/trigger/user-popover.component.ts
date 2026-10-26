@@ -13,7 +13,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 import { LuUserPopoverStore } from '../../service/user-popover.store';
 import { LuUserPopover } from '../../user-popover.model';
-import { LU_USER_POPOVER_USER } from '../../user-popover.providers';
+import { LU_USER_POPOVER_CUSTOM_CONTENT, LU_USER_POPOVER_USER } from '../../user-popover.providers';
 import { IsFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 
@@ -26,6 +26,8 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 })
 export class LuUserPopoverComponent {
 	luUser = inject<Signal<ILuUser>>(LU_USER_POPOVER_USER);
+
+	customContent = inject(LU_USER_POPOVER_CUSTOM_CONTENT, { optional: true });
 
 	#popoverRef = inject(POPOVER_CONFIG).ref;
 
