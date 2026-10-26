@@ -16,8 +16,9 @@ export default {
 			providers: [provideAnimations(), provideHttpClient()],
 		}),
 	],
-	render: ({ user, sizes, placeholder, displayFormat, AI }) => {
+	render: ({ user, sizes, placeholder, displayFormat, AI, informative }) => {
 		const argAI = AI ? ` AI` : ``;
+		const argInformative = informative ? ` informative` : ``;
 		const argSize = sizes ? ` size="${sizes}"` : ``;
 		return {
 			template: `<button class="userPopover_trigger" type="button" [luUserPopover]="user">
@@ -26,7 +27,7 @@ export default {
 		[displayFormat]="displayFormat"
 		data-testid="lu-user-picture"
 		[class.mod-placeholder]="placeholder"
-		${argSize}${argAI}/>
+		${argSize}${argAI}${argInformative}/>
 </button>`,
 			props: {
 				user,
@@ -34,6 +35,7 @@ export default {
 				placeholder,
 				displayFormat,
 				AI,
+				informative,
 			},
 		};
 	},
@@ -74,15 +76,23 @@ export default {
 			},
 			table: { category: 'inputs' },
 		},
+		informative: {
+			description: 'Expose le nom complet de l’utilisateur aux technologies d’assistance. À utiliser quand aucun texte visible n’identifie l’utilisateur (ici, le bouton ne contient que l’avatar).',
+			control: {
+				type: 'boolean',
+			},
+			table: { category: 'inputs' },
+		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuUserPictureComponent & { sizes: string; placeholder: boolean; AI: boolean }> = {
+export const Basic: StoryObj<LuUserPictureComponent & { sizes: string; placeholder: boolean; AI: boolean; informative: boolean }> = {
 	args: {
 		user: finn,
 		sizes: '',
 		placeholder: false,
 		displayFormat: LuDisplayInitials.firstlast,
 		AI: false,
+		informative: false,
 	},
 };
