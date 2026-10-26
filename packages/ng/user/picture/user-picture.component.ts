@@ -49,8 +49,8 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 		'[class.mod-XL]': 'size() === "XL"',
 		'[class.mod-XXL]': 'size() === "XXL"',
 		'[class.mod-XXXL]': 'size() === "XXXL"',
-		'[attr.role]': 'informative() ? "img" : null',
-		'[attr.aria-label]': 'informative() ? fullName() || null : null',
+		'[attr.role]': 'withAlt() ? "img" : null',
+		'[attr.aria-label]': 'withAlt() ? fullName() || null : null',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -73,10 +73,10 @@ export class LuUserPictureComponent {
 	readonly size = input<UserPictureSize>('M');
 
 	/**
-	 * Exposes the user's full name to assistive technologies.
+	 * Exposes the user's full name as text alternative to assistive technologies.
 	 * By default the picture is decorative, use it when no visible text identifies the user.
 	 */
-	readonly informative = input(false, { transform: luBooleanAttribute });
+	readonly withAlt = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Image loading attribute
