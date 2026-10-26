@@ -87,6 +87,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 * A component without such a hook has no `.mjs` entry: its Angular marker feeds the row.
 	* The marker reads `@deprecated since X.Y.Z; use Symbol` and ends with a period.
 		* Two replacements read `use A or B`.
+		* A required call reads `` use A with `call()` ``: the action adds "avec" and the call as code.
 		* Extra guidance follows on the next line, such as a directive to add.
 	* An `@see` line gives the Prisme page of the deprecated component: it names and links the row.
 		* A row whose `urls.prisme` matches that page takes the marker, whatever its name.

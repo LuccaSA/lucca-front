@@ -49,7 +49,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			</td>
 			<td>16.3.0</td>
 			<td>–</td>
-			<td>Remplacer par <code>LuModal</code>.</td>
+			<td>Remplacer par <code>LuModal</code> avec <code>modal.open(component, data, { mode: &#39;sidepanel&#39; })</code>.</td>
 		</tr>
 		<tr>
 			<td>
