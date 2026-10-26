@@ -549,15 +549,17 @@ export default [
 			  \`*-content-foregroundStartEnd-inlineSize\`
 			* \`*-imageHeight\` ⇒ \\
 			  \`*-content-foregroundStartEnd-blockSize\`
-			* Image \`*-background-left\` ⇒
-				* sélecteur : \`.fancyBox-content-backgroundEndStart\`
-				* input Angular : \`backgroundEndStart\`
-			* Image \`*-background-right\` ⇒
-				* sélecteur : \`.fancyBox-content-backgroundStartEnd\`
-				* input Angular : \`backgroundStartEnd\`
-			* Image \`*-foreground\` ⇒
-				* sélecteur : \`.fancyBox-content-foregroundStartEnd\`
-				* input Angular : \`foregroundStartEnd\`
+
+			Images :
+
+			* Angular : input de \`lu-fancy-box\` :
+				* \`*-background-left\` ⇒ \`backgroundEndStart\`
+				* \`*-background-right\` ⇒ \`backgroundStartEnd\`
+				* \`*-foreground\` ⇒ \`foregroundStartEnd\`
+			* HTML : SVG dans un enfant de \`.fancyBox-content\` :
+				* \`*-background-left\` ⇒ \`.fancyBox-content-backgroundEndStart\`
+				* \`*-background-right\` ⇒ \`.fancyBox-content-backgroundStartEnd\`
+				* \`*-foreground\` ⇒ \`.fancyBox-content-foregroundStartEnd\`
 		`,
 	},
 	{

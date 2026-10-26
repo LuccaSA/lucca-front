@@ -1012,19 +1012,19 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<li><code>*-offsetBlock</code> ⇒ <br><code>*-content-foregroundStartEnd-insetBlockStart</code></li>
 				<li><code>*-imageWidth</code> ⇒ <br><code>*-content-foregroundStartEnd-inlineSize</code></li>
 				<li><code>*-imageHeight</code> ⇒ <br><code>*-content-foregroundStartEnd-blockSize</code></li>
-				<li>Image <code>*-background-left</code> ⇒<ul>
-				<li>sélecteur : <code>.fancyBox-content-backgroundEndStart</code></li>
-				<li>input Angular : <code>backgroundEndStart</code></li>
+				</ul>
+				<p>Images :</p>
+				<ul>
+				<li>Angular : input de <code>lu-fancy-box</code> :<ul>
+				<li><code>*-background-left</code> ⇒ <code>backgroundEndStart</code></li>
+				<li><code>*-background-right</code> ⇒ <code>backgroundStartEnd</code></li>
+				<li><code>*-foreground</code> ⇒ <code>foregroundStartEnd</code></li>
 				</ul>
 				</li>
-				<li>Image <code>*-background-right</code> ⇒<ul>
-				<li>sélecteur : <code>.fancyBox-content-backgroundStartEnd</code></li>
-				<li>input Angular : <code>backgroundStartEnd</code></li>
-				</ul>
-				</li>
-				<li>Image <code>*-foreground</code> ⇒<ul>
-				<li>sélecteur : <code>.fancyBox-content-foregroundStartEnd</code></li>
-				<li>input Angular : <code>foregroundStartEnd</code></li>
+				<li>HTML : SVG dans un enfant de <code>.fancyBox-content</code> :<ul>
+				<li><code>*-background-left</code> ⇒ <code>.fancyBox-content-backgroundEndStart</code></li>
+				<li><code>*-background-right</code> ⇒ <code>.fancyBox-content-backgroundStartEnd</code></li>
+				<li><code>*-foreground</code> ⇒ <code>.fancyBox-content-foregroundStartEnd</code></li>
 				</ul>
 				</li>
 				</ul>
