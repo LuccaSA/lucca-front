@@ -1,7 +1,7 @@
-import { Directive, input, linkedSignal } from '@angular/core';
+import { Directive, input, linkedSignal, TemplateRef } from '@angular/core';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ILuUser } from '@lucca-front/ng/user';
-import { LU_USER_POPOVER_USER } from '../../user-popover.providers';
+import { LU_USER_POPOVER_CUSTOM_CONTENT, LU_USER_POPOVER_USER, LuUserPopoverCustomContentContext } from '../../user-popover.providers';
 import { LuUserPopoverComponent } from './user-popover.component';
 
 @Directive({
@@ -18,7 +18,15 @@ export class LuUserPopoverDirective extends PopoverDirective {
 
 	override readonly luPopoverDisabled = linkedSignal(() => this.luUserPopoverDisabled());
 
-	override readonly additionalProviders = [{ provide: LU_USER_POPOVER_USER, useValue: this.luUserPopover }];
+	/**
+	 * Template displayed at the bottom of the popover, below the user details. Its implicit context is the user.
+	 */
+	readonly luUserPopoverCustomContent = input<TemplateRef<LuUserPopoverCustomContentContext> | null>(null);
+
+	override readonly additionalProviders = [
+		{ provide: LU_USER_POPOVER_USER, useValue: this.luUserPopover },
+		{ provide: LU_USER_POPOVER_CUSTOM_CONTENT, useValue: this.luUserPopoverCustomContent },
+	];
 
 	constructor() {
 		super();
