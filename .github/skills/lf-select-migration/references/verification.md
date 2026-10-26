@@ -19,7 +19,11 @@ async (page) => {
   const requests = [];
   page.on('console', (m) => { if (m.type() === 'error' && !/404|Failed to load resource|Amplitude/.test(m.text())) errors.push(m.text().slice(0, 160)); });
   page.on('pageerror', (e) => errors.push('PAGEERROR ' + String(e).slice(0, 160)));
-  page.on('request', (r) => { if (/\/api\/.*(matrix|report|employees)/.test(r.url())) requests.push(decodeURIComponent(r.url().replace(/^https?:\/\/[^/]+/, '')).slice(0, 400)); });
+  page.on('request', (r) => {
+    if (/\/api\/.*(matrix|report|employees)/.test(r.url())) {
+      requests.push({ method: r.method(), url: decodeURIComponent(r.url().replace(/^https?:\/\/[^/]+/, '')), body: r.postData() ?? null });
+    }
+  });
 
   await page.goto(BASE + '/app/screen', { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(5000);
@@ -31,7 +35,7 @@ async (page) => {
   requests.length = 0;
   await page.getByRole('button', { name: /Afficher/ }).click();
   await page.waitForTimeout(4000);
-  out.push('requests=' + JSON.stringify(requests));
+  requests.forEach((r) => out.push('request=' + JSON.stringify(r)));
   out.push('control=' + (await page.evaluate(() => JSON.stringify(window.ng.getComponent(document.querySelector('prem-my-screen')).departmentCtrl.value))));
   await page.screenshot({ path: PROOFS + TAG + '-screen.png' });
   out.push('errors=' + JSON.stringify(errors));
@@ -45,10 +49,12 @@ useful to assert the `LuMultiSelection` mode or a directive's `params`.
 ## Payload diff routine
 
 1. Run the script on `main` (or the deployed app) for: several items, one exclusion after select
-   all, the empty selection. Save the request lines.
-2. Run the same script on the branch. `diff` the request lines. Ids order may differ when the
-   source list is sorted differently; compare as sets only if the back is order-insensitive (read
-   the back).
+   all, the empty selection. Save the `request=` lines: one per call, with method, full URL and
+   body, never truncated.
+2. Run the same script on the branch. `diff` the request lines: method, query string and body
+   must all match (a POST/PUT body may switch from ids to objects behind an identical URL). Ids
+   order may differ when the source list is sorted differently; compare as sets only if the back
+   is order-insensitive (read the back).
 3. Paste both lines in the PR attention point of that screen.
 
 ## Errors are part of green
