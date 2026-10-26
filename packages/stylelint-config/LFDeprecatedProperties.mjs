@@ -148,10 +148,10 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '22.0.0',
 		actions: `
+			Avec \`*\` = nuance d'origine (\`0\` pour \`white\`) :
+
 			* Sass : \`color.transparentize(var(--palettes-neutral-*), …)\`
 			* CSS : \`color-mix()\`
-
-			\`*\` = \`0\` pour \`white\`, sinon la nuance d'origine
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
@@ -346,12 +346,12 @@ export default [
 		objectPattern: /--commons-borderRadius-(M|L|XL|full)(?![\w-])/,
 		versionDeprecated: '20.2.0',
 		actions: `
+			Avec \`*\` = \`--commons-borderRadius\` :
+
 			* \`*-M\` ⇒ \`--pr-t-border-radius-50\`
 			* \`*-L\` ⇒ \`--pr-t-border-radius-100\`
 			* \`*-XL\` ⇒ \`--pr-t-border-radius-150\`
 			* \`*-full\` ⇒ \`--pr-t-border-radius-full\`
-
-			\`*\` = \`--commons-borderRadius\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-radius',
@@ -473,10 +473,10 @@ export default [
 		objectPattern: /--palettes-AI-(500|600)(?![\w-])/,
 		versionDeleted: '21.3.0',
 		actions: `
+			Avec \`*\` = 50-900 :
+
 			* couleur : \`--palettes-orchid-*\`
 			* dégradé : \`--palettes-ai-*\`
-
-			(\`*\`: 50-900)
 		`,
 	},
 	{

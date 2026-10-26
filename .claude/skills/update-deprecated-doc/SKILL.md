@@ -150,7 +150,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 ## Actions
 
 * `marked` converts the `actions` Markdown to HTML.
-* A `*` legend paragraph renders in `<small>`.
+* A `*` legend opens the action as its own paragraph: ``Avec `*` = … :``.
 * `urls.schematics` opens the cell on its own line: `<a href="…"><strong>Schematic</strong> : palettes</a>`.
 	* The name is the one `collection.json` registers for the linked folder.
 	* It links the schematic folder on GitHub: Prisme drops its anchors on load.

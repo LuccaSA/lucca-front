@@ -959,13 +959,13 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>–</td>
 			<td>
 				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-radius"><strong>Schematic</strong> : tokens-radius</a>
+				<p>Avec <code>*</code> = <code>--commons-borderRadius</code> :</p>
 				<ul>
 				<li><code>*-M</code> ⇒ <code>--pr-t-border-radius-50</code></li>
 				<li><code>*-L</code> ⇒ <code>--pr-t-border-radius-100</code></li>
 				<li><code>*-XL</code> ⇒ <code>--pr-t-border-radius-150</code></li>
 				<li><code>*-full</code> ⇒ <code>--pr-t-border-radius-full</code></li>
 				</ul>
-				<p><small><code>*</code> = <code>--commons-borderRadius</code></small></p>
 			</td>
 		</tr>
 		<tr>

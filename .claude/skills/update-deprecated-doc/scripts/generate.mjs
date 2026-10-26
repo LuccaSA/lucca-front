@@ -60,8 +60,6 @@ const actionsHtml = (e) => {
 		// A multi-line template literal keeps the indentation of its `.mjs` entry.
 		.replace(/\r/g, '')
 		.replace(/^\t{3}/gm, '')
-		// A `*` legend renders small.
-		.replace(/^((?:`\*` = |\(`\*`: ).*)$/gm, '<small>$1</small>')
 		.trim();
 	// A lone one-line sentence without schematics stays bare in its cell.
 	if (!schem && !/\n|^\* /.test(md)) return marked.parseInline(md);

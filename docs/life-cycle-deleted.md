@@ -813,11 +813,11 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>–</td>
 			<td>21.3.0</td>
 			<td>
+				<p>Avec <code>*</code> = 50-900 :</p>
 				<ul>
 				<li>couleur : <code>--palettes-orchid-*</code></li>
 				<li>dégradé : <code>--palettes-ai-*</code></li>
 				</ul>
-				<p><small>(<code>*</code>: 50-900)</small></p>
 			</td>
 		</tr>
 		<tr>
@@ -914,11 +914,11 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>22.0.0</td>
 			<td>
 				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
+				<p>Avec <code>*</code> = nuance d&#39;origine (<code>0</code> pour <code>white</code>) :</p>
 				<ul>
 				<li>Sass : <code>color.transparentize(var(--palettes-neutral-*), …)</code></li>
 				<li>CSS : <code>color-mix()</code></li>
 				</ul>
-				<p><small><code>*</code> = <code>0</code> pour <code>white</code>, sinon la nuance d&#39;origine</small></p>
 			</td>
 		</tr>
 		<tr>
