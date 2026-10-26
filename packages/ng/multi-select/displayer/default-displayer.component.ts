@@ -44,9 +44,13 @@ let nextID = 0;
 					class="multipleSelect-displayer-chip"
 					withEllipsis
 					(kill)="unselectOption(option, $event)"
-					[unkillable]="outlet.isDisabled() || ((select.disabled$ | async) ?? false)"
+					[unkillable]="outlet.isDisabled() || optionOutlet.isDisabled() || ((select.disabled$ | async) ?? false)"
 				>
 					<ng-template #outlet="ɵluOptionOutlet" [luOptionOutlet]="select.displayerTpl()" [luOptionOutletValue]="option" />
+					<!-- luDisabledOption may be declared only on the option template: with a custom displayer, render it hidden to read its disabled state -->
+					<span hidden>
+						<ng-template #optionOutlet="ɵluOptionOutlet" [luOptionOutlet]="select.valueTpl() ? select.optionTpl() : undefined" [luOptionOutletValue]="option" />
+					</span>
 				</lu-chip>
 			}
 			@if (overflowOptions$ | async; as overflow) {

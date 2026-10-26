@@ -43,6 +43,22 @@ class DisabledDisplayerTplHostComponent {
 	selected = options;
 }
 
+@Component({
+	selector: 'lu-multi-select-disabled-option-tpl-custom-displayer-host',
+	imports: [FormsModule, LuMultiSelectInputComponent, LuOptionDirective, LuDisplayerDirective, LuDisabledOptionDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-multi-select #selectRef [(ngModel)]="selected" [options]="options">
+			<ng-container *luDisplayer="let option; select: selectRef">{{ option.name }}</ng-container>
+			<ng-container *luOption="let option; select: selectRef" [luDisabledOption]="option.disabled">{{ option.name }}</ng-container>
+		</lu-multi-select>
+	`,
+})
+class DisabledOptionTplCustomDisplayerHostComponent {
+	options = options;
+	selected = options;
+}
+
 describe(LuMultiSelectInputComponent.name + ' displayer chips', () => {
 	async function render<THost>(host: new () => THost): Promise<ComponentFixture<THost>> {
 		const fixture = TestBed.createComponent(host);
@@ -87,6 +103,16 @@ describe(LuMultiSelectInputComponent.name + ' displayer chips', () => {
 			const fixture = await render(DisabledDisplayerTplHostComponent);
 
 			expect(getChips(fixture).map(hasKillButton)).toEqual([true, false, true]);
+		});
+	});
+
+	describe('with a disabled option declared in the option template and a plain custom displayer', () => {
+		it('should remove the kill button on disabled options only', async () => {
+			const fixture = await render(DisabledOptionTplCustomDisplayerHostComponent);
+
+			const chips = getChips(fixture);
+			expect(chips.map((chip, index) => chip.textContent?.includes(options[index].name))).toEqual([true, true, true]);
+			expect(chips.map(hasKillButton)).toEqual([true, false, true]);
 		});
 	});
 });
