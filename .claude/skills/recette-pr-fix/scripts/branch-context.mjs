@@ -16,12 +16,23 @@ const [base, baseSource] = args.includes('--base') ? [args[args.indexOf('--base'
 // Base of the open PR if any, otherwise the candidate branch the current branch is the fewest commits ahead of.
 function detectBase() {
 	try {
-		const prBase = execFileSync('gh', ['pr', 'view', '--json', 'baseRefName', '--jq', '.baseRefName'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+		const prBase = execFileSync('gh', ['pr', 'view', '--json', 'baseRefName', '--jq', '.baseRefName'], {
+			encoding: 'utf8',
+			stdio: ['ignore', 'pipe', 'ignore'],
+		}).trim();
 		if (prBase) return [`origin/${prBase}`, 'PR'];
 	} catch {
 		// No PR for this branch (or gh unavailable): fall back to detection
 	}
-	const candidates = lines(git('for-each-ref', '--format=%(refname:short)', 'refs/remotes/origin/master', 'refs/remotes/origin/release/*', 'refs/remotes/origin/*-lts'));
+	const candidates = lines(
+		git(
+			'for-each-ref',
+			'--format=%(refname:short)',
+			'refs/remotes/origin/master',
+			'refs/remotes/origin/release/*',
+			'refs/remotes/origin/*-lts',
+		),
+	);
 	const [closest] = candidates
 		.map((ref) => ({ ref, ahead: Number(git('rev-list', '--count', `${ref}..HEAD`)) }))
 		.sort((a, b) => a.ahead - b.ahead); // stable sort: master wins ties
@@ -79,9 +90,16 @@ if (srcChanged.length && !testsChanged.length) {
 }
 
 // 3. Impacted scope (used by the skill to pick stories and assess risk)
-const entrypoints = new Set(present.map((p) => /^packages\/(ng|prisme)\/([^/]+)\//.exec(p)).filter(Boolean).map((m) => `@lucca-front/${m[1]}/${m[2]}`));
+const entrypoints = new Set(
+	present
+		.map((p) => /^packages\/(ng|prisme)\/([^/]+)\//.exec(p))
+		.filter(Boolean)
+		.map((m) => `@lucca-front/${m[1]}/${m[2]}`),
+);
 const scssComponents = new Set(present.map((p) => /^packages\/scss\/src\/components\/([^/]+)\//.exec(p)?.[1]).filter(Boolean));
-const shared = present.filter((p) => /^packages\/(ng\/core|prisme\/core|ng\/core-select|scss\/src\/commons)\//.test(p) && !p.endsWith('/highlight-prisme.scss'));
+const shared = present.filter(
+	(p) => /^packages\/(ng\/core|prisme\/core|ng\/core-select|scss\/src\/commons)\//.test(p) && !p.endsWith('/highlight-prisme.scss'),
+);
 if (entrypoints.size) info(`Entrypoints: ${[...entrypoints].join(', ')}`);
 if (scssComponents.size) info(`SCSS components: ${[...scssComponents].join(', ')}`);
 if (shared.length) warn(`Shared code touched (wide blast radius): ${shared.join(', ')}`);

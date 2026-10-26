@@ -10,17 +10,26 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { chromium } from 'playwright';
+import { contextOptions, openStory, trimPreviewUrl as trim } from './lib/storybook.mjs';
 
 const args = process.argv.slice(2);
 const option = (name) => (args.includes(name) ? args.splice(args.indexOf(name), 2)[1] : undefined);
-const trim = (url) => url?.replace(/\/(index\.html)?$/, '');
 
 const list = trim(option('--list'));
 if (list) {
 	const index = await (await fetch(`${list}/index.json`)).json();
 	const keywords = args.map((k) => k.toLowerCase().replace(/[^a-z0-9]/g, ''));
 	const matches = Object.values(index.entries).filter(
-		(e) => e.type === 'story' && keywords.some((k) => e.id.replace(/[^a-z0-9]/g, '').includes(k) || e.importPath.toLowerCase().replace(/[^a-z0-9/]/g, '').includes(k)),
+		(e) =>
+			e.type === 'story' &&
+			keywords.some(
+				(k) =>
+					e.id.replace(/[^a-z0-9]/g, '').includes(k) ||
+					e.importPath
+						.toLowerCase()
+						.replace(/[^a-z0-9/]/g, '')
+						.includes(k),
+			),
 	);
 	for (const e of matches) console.log(`${e.id}\t${e.title} / ${e.name}`);
 	if (!matches.length) console.log(`No story matches ${args.join(', ')}`);
@@ -33,18 +42,20 @@ const out = option('--out');
 const hover = option('--hover'); // CSS selector hovered before the capture
 const touch = args.includes('--touch') ? Boolean(args.splice(args.indexOf('--touch'), 1)) : false; // touch device: (hover: none), (pointer: coarse)
 if (!after || !out || !args.length) {
-	console.error('Usage: visual-proof.mjs --after <previewUrl> [--before <previewUrl>] --out <dir> [--hover <selector>] [--touch] <storyId>...');
+	console.error(
+		'Usage: visual-proof.mjs --after <previewUrl> [--before <previewUrl>] --out <dir> [--hover <selector>] [--touch] <storyId>...',
+	);
 	process.exit(2);
 }
 mkdirSync(out, { recursive: true });
 
 const browser = await chromium.launch();
-const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 2, reducedMotion: 'reduce', hasTouch: touch, isMobile: touch });
+const context = await browser.newContext(contextOptions({ touch }));
 const results = [];
 try {
 	for (const id of args) {
 		const sides = before ? { before, after } : { after };
-		const opened = await Promise.all(Object.entries(sides).map(async ([side, url]) => [side, await open(url, id)]));
+		const opened = await Promise.all(Object.entries(sides).map(async ([side, url]) => [side, await openStory(context, url, id)]));
 		const pages = Object.fromEntries(opened);
 		const result = { id, files: {} };
 		if (hover) {
@@ -96,27 +107,16 @@ for (const r of results) {
 writeFileSync(
 	join(out, 'captures.json'),
 	JSON.stringify(
-		results.map(({ id, identical, error, files }) => ({ id, identical, error, files: Object.fromEntries(Object.entries(files).map(([s, f]) => [s, f?.path ?? null])) })),
+		results.map(({ id, identical, error, files }) => ({
+			id,
+			identical,
+			error,
+			files: Object.fromEntries(Object.entries(files).map(([s, f]) => [s, f?.path ?? null])),
+		})),
 		null,
 		'\t',
 	),
 );
-
-// Opens a story in its iframe and waits for a stable render; null when the story does not exist in that preview.
-async function open(previewUrl, id) {
-	const page = await context.newPage();
-	await page.goto(`${previewUrl}/iframe.html?id=${id}&viewMode=story`, { waitUntil: 'networkidle' });
-	const rendered = await page
-		.waitForFunction(() => document.querySelector('#storybook-root')?.children.length || document.querySelector('.sb-show-errordisplay'), null, { timeout: 15000 })
-		.then(() => page.evaluate(() => !document.body.classList.contains('sb-show-errordisplay')))
-		.catch(() => false);
-	if (!rendered) {
-		await page.close();
-		return null;
-	}
-	await page.evaluate(() => document.fonts.ready);
-	return page;
-}
 
 // Union of what is actually painted (text, leaf elements, backgrounds, borders, shadows) — not full-width wrappers.
 // Overlays (tooltips, dropdowns, dialogs) are rendered by the CDK outside #storybook-root: they are measured too.
@@ -145,12 +145,20 @@ function contentBox(page) {
 				if (node.classList.contains('cdk-overlay-backdrop')) continue;
 				const s = getComputedStyle(node);
 				if (s.display === 'none' || s.visibility === 'hidden') continue;
-				const border = ['Top', 'Right', 'Bottom', 'Left'].some((side) => parseFloat(s[`border${side}Width`]) > 0 && s[`border${side}Style`] !== 'none');
+				const border = ['Top', 'Right', 'Bottom', 'Left'].some(
+					(side) => parseFloat(s[`border${side}Width`]) > 0 && s[`border${side}Style`] !== 'none',
+				);
 				// Text is measured through its text nodes; an empty leaf (live region, positioning box) paints nothing.
 				// Icons draw through ::before/::after content, media and form controls through their own box.
 				const pseudo = ['::before', '::after'].some((p) => !['none', 'normal'].includes(getComputedStyle(node, p).content));
 				const replaced = /^(IMG|SVG|svg|VIDEO|CANVAS|INPUT|TEXTAREA|SELECT|BUTTON)$/.test(node.tagName);
-				const painted = pseudo || replaced || border || s.backgroundColor !== 'rgba(0, 0, 0, 0)' || s.backgroundImage !== 'none' || s.boxShadow !== 'none';
+				const painted =
+					pseudo ||
+					replaced ||
+					border ||
+					s.backgroundColor !== 'rgba(0, 0, 0, 0)' ||
+					s.backgroundImage !== 'none' ||
+					s.boxShadow !== 'none';
 				if (painted) add(node.getBoundingClientRect());
 			}
 		}

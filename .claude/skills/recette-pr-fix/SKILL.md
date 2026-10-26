@@ -1,6 +1,6 @@
 ---
 name: recette-pr-fix
-description: "Recette d'une branche de fix Lucca Front avant ouverture de la PR : contexte de la branche et conventions du repo (script), lint et tests ciblés sur le diff, points de vigilance et marche à suivre pour tester. Rapide (~30 s) : build et suites complètes restent à la CI. Une fois la PR ouverte, preuves visuelles avant/après depuis les previews Storybook, publiées en commentaire de la PR. À lancer avant tout `gh pr create` d'une branche fix/*, ou quand l'utilisateur demande une recette / une vérification de sa branche de fix."
+description: "Recette d'une branche de fix Lucca Front avant ouverture de la PR : contexte de la branche et conventions du repo (script), lint et tests ciblés sur le diff, points de vigilance et marche à suivre pour tester. Rapide (~30 s) : build et suites complètes restent à la CI. Une fois la PR ouverte, preuves visuelles avant/après depuis les previews Storybook, et rejeu du bug dans Chromium quand aucun spec ne le reproduit, publiés en commentaire de la PR. À lancer avant tout `gh pr create` d'une branche fix/*, ou quand l'utilisateur demande une recette / une vérification de sa branche de fix."
 argument-hint: "[--base origin/<branche>]"
 ---
 
@@ -119,13 +119,35 @@ Prérequis : `gh` ≥ 2.99.0 (`gh pr comment --help | grep -q -- --attach`). En 
    Même cadrage pour l'avant et l'après, recadré sur le contenu peint, overlays compris (tooltips, menus). `--hover` survole un élément avant la capture — il s'applique à toutes les stories de l'appel : un appel par sélecteur ; `--touch` émule un appareil tactile (`hover: none`). Un fix d'état (survol, focus, tactile) ne se voit pas sur une capture au repos : choisir les options qui reproduisent le cas corrigé, et ajouter le cas témoin qui doit rester identique (par exemple `--hover` sans `--touch`).
 
 5. **Regarder chaque image** avant d'écrire sa légende. Une paire marquée `⚠️ identical` n'est pas une preuve du changement : changer d'état ou de story, ou la garder seulement comme cas témoin (« inchangé à la souris »). `❌ not found` : la story n'existe pas dans cette preview. `❌ hover … failed` : le sélecteur n'a pas pu être survolé, rien n'est capturé pour cette story — corriger le sélecteur plutôt que de publier un état au repos.
-6. **Publier** en commentaire de la PR, en anglais, après avoir montré le brouillon à l'utilisateur et obtenu son accord. Écrire `<dossier>/comment.md`, puis :
+6. **Rejouer le bug (facultatif)** — pour un fix qu'aucun spec ne reproduit (`regression-check` sauté ou non évaluable) et dont le bug tient à un comportement du navigateur : focus, clavier, overlay, survol, mise en page réelle, cycle de vie Storybook. Écrire un scénario d'après « Comment tester », dans `<dossier>/scenario.mjs` :
 
-   ```bash
-   gh pr comment <n> --body-file <dossier>/comment.md --attach <dossier>/<id>--before.png --attach <dossier>/<id>--after.png
+   ```js
+   // <the bug, in one sentence>
+   export default async function ({ page, consoleErrors, settle }) {
+   	// act on the rendered story, then read an observable fact: computed style, focused element, DOM, console errors
+   	await settle(); // finishes CSS transitions before reading computed styles
+   	return { reproduced: <the bug happened>, detail: '<what was observed>' };
+   }
    ```
 
-   Chaque image est référencée dans le body **avec exactement le même chemin absolu** que dans `--attach` : `gh` remplace la référence par l'URL de l'image envoyée. Une image attachée mais non référencée, ou référencée avec un autre chemin (`~`, chemin relatif), atterrit en fin de commentaire.
+   ```bash
+   node .claude/skills/recette-pr-fix/scripts/bug-repro.mjs --before <before> --after <after> --story <storyId> --scenario <dossier>/scenario.mjs [--touch] --video <dossier>
+   ```
+
+   Lancer le scénario **dans les conditions du bug** (`--touch` pour un bug tactile) : hors de ces conditions, il ne décrit plus un bug. Lire le verdict :
+   - `✅ Reproduced without the fix, no longer with it` : la preuve est faite, la vidéo des deux côtés rejoint le commentaire ;
+   - `⚠️ … does not reproduce the bug without the fix` : le scénario ne prouve rien, quel que soit le résultat avec le fix — le corriger (souvent : lire l'état avant la fin d'une transition, sans `settle()`) ou y renoncer, jamais le publier ;
+   - `❌ … still reproduced with the fix` : le fix ne corrige pas ce cas, ou le scénario lit autre chose que le bug — à creuser avant tout ;
+   - `ℹ️ … no "before"` : base non déployée, la reproduction seule ne prouve rien.
+
+   Un scénario en ✅ qui protégerait durablement contre la régression mérite de devenir un test e2e : le proposer à l'utilisateur, via le skill `generate-e2e-test` (`stories/e2e/`), pour que la CI le rejoue à chaque PR.
+7. **Publier** en commentaire de la PR, en anglais, après avoir montré le brouillon à l'utilisateur et obtenu son accord. Écrire `<dossier>/comment.md`, puis :
+
+   ```bash
+   gh pr comment <n> --body-file <dossier>/comment.md --attach <dossier>/<id>--before.png --attach <dossier>/<id>--after.png [--attach <dossier>/<id>--before.webm --attach <dossier>/<id>--after.webm]
+   ```
+
+   Chaque image ou vidéo est référencée dans le body **avec exactement le même chemin absolu** que dans `--attach` : `gh` remplace la référence par l'URL du fichier envoyé. Un fichier attaché mais non référencé, ou référencé avec un autre chemin (`~`, chemin relatif), atterrit en fin de commentaire. Une vidéo n'est lue que si sa référence est **seule dans son paragraphe** (pas dans un tableau), et doit rester sous 10 Mo.
 
 Anatomie du commentaire :
 
@@ -141,6 +163,16 @@ Anatomie du commentaire :
 **2. <control case, e.g. "Unchanged with a mouse">** …
 
 <sub>Captured from the Storybook previews `master` and `PR-<n>` · story `<storyId>` · 1280×800 @2x · <options: hover `.button`, touch emulation></sub>
+
+**Bug replay** ← only with a ✅ replay: <scenario in one sentence, and what was observed on each side>
+
+Before (`master`):
+
+![](<dossier>/<id>--before.webm)
+
+After (this PR):
+
+![](<dossier>/<id>--after.webm)
 
 **Not covered:** <states, themes or stories not captured, and why>
 ```

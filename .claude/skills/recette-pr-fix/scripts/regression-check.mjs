@@ -19,7 +19,12 @@ const base = args.includes('--base') ? args[args.indexOf('--base') + 1] : 'origi
 const root = git('rev-parse', '--show-toplevel');
 const mergeBase = git('merge-base', base, 'HEAD');
 
-const present = [...new Set([...lines(git('diff', '--name-only', '--diff-filter=d', mergeBase)), ...lines(git('ls-files', '--others', '--exclude-standard'))])];
+const present = [
+	...new Set([
+		...lines(git('diff', '--name-only', '--diff-filter=d', mergeBase)),
+		...lines(git('ls-files', '--others', '--exclude-standard')),
+	]),
+];
 const specs = present.filter((p) => /^packages\/.+\.spec\.ts$/.test(p));
 // Templates and styles count too: a rendering fix may change no TypeScript at all.
 const sources = present.filter((p) => /^packages\/.+\.(ts|html|scss)$/.test(p) && !/\.spec\.ts$/.test(p));
@@ -125,7 +130,12 @@ function touchedTests() {
 			if (/^\s*[})\];,]*\s*$/.test(fileLines[n - 1] ?? '')) continue;
 			let i = n - 1;
 			// Leaving the enclosing block upwards (describe, hook or file top) means the change is outside any test
-			while (i >= 0 && !declaration.test(fileLines[i]) && !/^\s*(?:describe|beforeEach|afterEach|beforeAll|afterAll)\b|^\S/.test(fileLines[i])) i--;
+			while (
+				i >= 0 &&
+				!declaration.test(fileLines[i]) &&
+				!/^\s*(?:describe|beforeEach|afterEach|beforeAll|afterAll)\b|^\S/.test(fileLines[i])
+			)
+				i--;
 			if (i >= 0 && declaration.test(fileLines[i])) titles.add(declaration.exec(fileLines[i])[2]);
 			else outside = true;
 		}
