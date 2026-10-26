@@ -45,3 +45,27 @@ Basic.parameters = {
 		include: ['luUserPopover', 'luUserPopoverEnterDelay', 'luUserPopoverLeaveDelay', 'luUserPopoverDisabled'],
 	},
 };
+
+@Component({
+	selector: 'user-popover-custom-content-story',
+	template: `
+		<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover()" [luUserPopoverCustomContent]="customContent">Survolez-moi !</button>
+		<ng-template #customContent let-user> Custom content for {{ user.firstName }} </ng-template>
+	`,
+	imports: [LuUserPopoverDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class UserPopoverCustomContentStory {
+	luUserPopover = input<ILuUser>();
+}
+
+export const CustomContent: StoryObj<UserPopoverCustomContentStory> = {
+	render: (args) => ({
+		props: args,
+		moduleMetadata: { imports: [UserPopoverCustomContentStory] },
+		template: '<user-popover-custom-content-story [luUserPopover]="luUserPopover" />',
+	}),
+	args: {
+		luUserPopover: { id: 1, firstName: 'Chloe', lastName: 'Alibert' },
+	},
+};
