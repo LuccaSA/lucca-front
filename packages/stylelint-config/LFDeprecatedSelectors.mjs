@@ -11,7 +11,7 @@
 // - Enumerated children — `\.token(-(a|b))?(?![\w-])`: base plus only its known children (avoids a broad root).
 //   .token ✓ | .token-a ✓ | .token-c ✗
 // - Order-independent combo — `combo(/\.a/, /\.b/)`: both tokens, any order, within one compound selector.
-//   .a.b ✓ | .b.a ✓ | .a:not(.b) ✓ | .a .b ✗ | .a>.b ✗ | .a:has(.b) ✗
+//   .a.b ✓ | .b.a ✓ | .a:not(.b) ✓ | .a:is(.x, .b) ✓ | .a .b ✗ | .a>.b ✗ | .a,.b ✗ | .a:has(.b) ✗
 // - Catch-all — `\.token.*`: base plus any suffix.
 //   .token ✓ | .tokenX ✓ | .other ✗
 
@@ -19,7 +19,10 @@
 // - It skips a parenthesized group as a whole.
 // - It enters a group only after a pseudo-class other than `:has`, such as `:not(`.
 // - It never leaves a group it started in.
-export const comboScan = String.raw`(?::(?!has\()[\w-]+\(|\([^()]*\)|[^\s>+~()])*`;
+// - It crosses a comma only inside a group it entered, such as `:is(.x, .b)`.
+const skipGroup = String.raw`\([^()]*\)`;
+const enterGroup = String.raw`:(?!has\()[\w-]+\(`;
+export const comboScan = String.raw`(?:${skipGroup}|[^\s>+~(),])*(?:${enterGroup}(?:${enterGroup}|${skipGroup}|,\s*|[^\s>+~(),])*)?`;
 
 const combo = (a, b) => new RegExp(String.raw`(?=${comboScan}${a.source}(?![\w-]))(?=${comboScan}${b.source}(?![\w-]))[^\s>+~]*`);
 
