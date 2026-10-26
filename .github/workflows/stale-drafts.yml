@@ -53,7 +53,8 @@ jobs:
             const pulls = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
             for (const pr of pulls.filter((p) => p.draft)) {
               const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: pr.number, per_page: 100 });
-              const warning = comments.filter((c) => c.body?.includes(MARKER)).at(-1);
+              // Only the workflow's own comment: a human reply quoting the warning is activity, not a warning
+              const warning = comments.filter((c) => c.user?.login === 'github-actions[bot]' && c.body?.includes(MARKER)).at(-1);
               const labeled = pr.labels.some((l) => l.name === LABEL);
               const lastActivity = new Date(pr.updated_at).getTime();
 
