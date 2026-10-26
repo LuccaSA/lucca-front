@@ -10,6 +10,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { chromium } from 'playwright';
+import { auditA11y, diffA11y, summarize } from './lib/a11y.mjs';
 import { contextOptions, openStory, trimPreviewUrl as trim } from './lib/storybook.mjs';
 
 const args = process.argv.slice(2);
@@ -57,7 +58,7 @@ try {
 		const sides = before ? { before, after } : { after };
 		const opened = await Promise.all(Object.entries(sides).map(async ([side, url]) => [side, await openStory(context, url, id)]));
 		const pages = Object.fromEntries(opened);
-		const result = { id, files: {} };
+		const result = { id, files: {}, a11y: {} };
 		if (hover) {
 			// A hover that does not happen would silently capture the resting state: fail the story instead
 			const failures = (
@@ -85,6 +86,8 @@ try {
 			}
 			const path = join(out, `${id}--${side}.png`);
 			result.files[side] = { path, buffer: await page.screenshot({ path, clip, fullPage: true, animations: 'disabled' }) };
+			// Same state as the capture (hover, touch): the audit covers what the reviewer sees
+			result.a11y[side] = await auditA11y(page).catch((error) => ({ error: String(error.message ?? error).split('\n')[0] }));
 			await page.close();
 		}
 		const [b, a] = [result.files.before?.buffer, result.files.after?.buffer];
@@ -103,14 +106,29 @@ for (const r of results) {
 	const files = Object.entries(r.files).map(([side, f]) => `${side}: ${f ? f.path : 'story not found'}`);
 	const status = !r.files.after ? '❌ not found' : r.identical ? '⚠️  identical' : '✅';
 	console.log(`${status} ${r.id}\n   ${files.join('\n   ')}`);
+	if (r.files.after) console.log(`   a11y: ${a11yLine(r.a11y)}`);
+}
+
+// Only what the change adds or fixes matters: violations already on the base are not the fix's doing.
+function a11yLine({ before, after }) {
+	if (after?.error || before?.error) return `ℹ️  audit failed: ${after?.error ?? before?.error}`;
+	if (!before) return `ℹ️  ${after.length ? `${after.length} violation(s): ${summarize(after)}` : 'no violation'} (no "before" to compare)`;
+	const { added, fixed, existing } = diffA11y(before, after);
+	const parts = [];
+	if (added.length) parts.push(`⚠️  ${added.length} new: ${summarize(added)}`);
+	if (fixed.length) parts.push(`✅ ${fixed.length} fixed: ${summarize(fixed)}`);
+	if (!added.length && !fixed.length) parts.push('✅ no new violation');
+	if (existing.length) parts.push(`${existing.length} already on the base`);
+	return parts.join(' · ');
 }
 writeFileSync(
 	join(out, 'captures.json'),
 	JSON.stringify(
-		results.map(({ id, identical, error, files }) => ({
+		results.map(({ id, identical, error, files, a11y }) => ({
 			id,
 			identical,
 			error,
+			a11y: a11y?.after && !a11y.after.error && a11y.before && !a11y.before.error ? diffA11y(a11y.before, a11y.after) : a11y,
 			files: Object.fromEntries(Object.entries(files).map(([s, f]) => [s, f?.path ?? null])),
 		})),
 		null,

@@ -1,6 +1,6 @@
 ---
 name: recette-pr-fix
-description: "Recette d'une branche de fix Lucca Front avant ouverture de la PR : contexte de la branche et conventions du repo (script), lint et tests ciblés sur le diff, points de vigilance et marche à suivre pour tester. Rapide (~30 s) : build et suites complètes restent à la CI. Une fois la PR ouverte, preuves visuelles avant/après depuis les previews Storybook, et rejeu du bug dans Chromium quand aucun spec ne le reproduit, publiés en commentaire de la PR. À lancer avant tout `gh pr create` d'une branche fix/*, ou quand l'utilisateur demande une recette / une vérification de sa branche de fix."
+description: "Recette d'une branche de fix Lucca Front avant ouverture de la PR : contexte de la branche et conventions du repo (script), lint et tests ciblés sur le diff, points de vigilance et marche à suivre pour tester. Rapide (~30 s) : build et suites complètes restent à la CI. Une fois la PR ouverte, preuves visuelles avant/après depuis les previews Storybook, audit d'accessibilité axe des stories capturées, et rejeu du bug dans Chromium quand aucun spec ne le reproduit, publiés en commentaire de la PR. À lancer avant tout `gh pr create` d'une branche fix/*, ou quand l'utilisateur demande une recette / une vérification de sa branche de fix."
 argument-hint: "[--base origin/<branche>]"
 ---
 
@@ -119,6 +119,8 @@ Prérequis : `gh` ≥ 2.99.0 (`gh pr comment --help | grep -q -- --attach`). En 
    Même cadrage pour l'avant et l'après, recadré sur le contenu peint, overlays compris (tooltips, menus). `--hover` survole un élément avant la capture — il s'applique à toutes les stories de l'appel : un appel par sélecteur ; `--touch` émule un appareil tactile (`hover: none`). Un fix d'état (survol, focus, tactile) ne se voit pas sur une capture au repos : choisir les options qui reproduisent le cas corrigé, et ajouter le cas témoin qui doit rester identique (par exemple `--hover` sans `--touch`).
 
 5. **Regarder chaque image** avant d'écrire sa légende. Une paire marquée `⚠️ identical` n'est pas une preuve du changement : changer d'état ou de story, ou la garder seulement comme cas témoin (« inchangé à la souris »). `❌ not found` : la story n'existe pas dans cette preview. `❌ hover … failed` : le sélecteur n'a pas pu être survolé, rien n'est capturé pour cette story — corriger le sélecteur plutôt que de publier un état au repos.
+
+   Chaque story capturée passe aussi un **audit d'accessibilité axe** (le moteur de l'addon a11y de Storybook, dont les violations ne font jamais échouer la CI), dans le même état que la capture. La ligne `a11y` ne compte que ce que la PR change : `⚠️ n new` — violations ajoutées par le fix, à signaler dans le rapport et le commentaire, en 🔴 si elles touchent le clavier ou les lecteurs d'écran ; `✅ n fixed` — violations corrigées ; les violations `already on the base` ne sont pas le fait du fix et ne se rapportent pas. Seules les stories capturées sont auditées : le dire dans « Non vérifié ».
 6. **Rejouer le bug (facultatif)** — pour un fix qu'aucun spec ne reproduit (`regression-check` sauté ou non évaluable) et dont le bug tient à un comportement du navigateur : focus, clavier, overlay, survol, mise en page réelle, cycle de vie Storybook. Écrire un scénario d'après « Comment tester », dans `<dossier>/scenario.mjs` :
 
    ```js
@@ -163,6 +165,8 @@ Anatomie du commentaire :
 **2. <control case, e.g. "Unchanged with a mouse">** …
 
 <sub>Captured from the Storybook previews `master` and `PR-<n>` · story `<storyId>` · 1280×800 @2x · <options: hover `.button`, touch emulation></sub>
+
+**Accessibility (axe):** <"no new violation on the captured stories", or the new and fixed rules per story>
 
 **Bug replay** ← only with a ✅ replay: <scenario in one sentence, and what was observed on each side>
 
