@@ -26,6 +26,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		<button class="button mod-delete" type="button">Delete</button>
 		<button class="button mod-critical" type="button">Delete</button>
 		<button class="button loading" type="button">Save</button>
+		<button class="button error" type="button">Save</button>
+		<button class="button success" type="button">Save</button>
 	`,
 	imports: [
 		IconComponent

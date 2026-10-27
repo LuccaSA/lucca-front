@@ -78,8 +78,10 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 							`is-${button.inputs.state}`,
 							`mod-delete`,
 							`mod-critical`,
-							// .loading is the deprecated name of .is-loading
+							// Bare state classes are deprecated aliases of .is-*
 							'loading',
+							'error',
+							'success',
 							`mod-${button.inputs.size}`
 						].includes(c);
 					}).join(' ');
@@ -115,7 +117,7 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 							critical: classes.includes(`mod-delete`) || classes.includes(`mod-critical`),
 							disclosure: classes.includes(`mod-disclosure`),
 							palette: classes.split(' ').find(c => /palette-(\w+)/.test(c))?.replace('palette-', ''),
-							state: classes.split(' ').find(c => /is-(\w+)/.test(c) || c === 'loading')?.replace('is-', ''),
+							state: classes.split(' ').find(c => /is-(\w+)/.test(c) || ['loading', 'error', 'success'].includes(c))?.replace('is-', ''),
 						};
 						const button: CssButton = {
 							node: node,

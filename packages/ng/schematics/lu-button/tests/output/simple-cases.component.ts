@@ -27,6 +27,8 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 		<button luButton critical  type="button">Delete</button>
 		<button luButton critical  type="button">Delete</button>
 		<button luButton state="loading"  type="button">Save</button>
+		<button luButton state="error"  type="button">Save</button>
+		<button luButton state="success"  type="button">Save</button>
 	`,
 	imports: [
 		IconComponent, ButtonComponent
