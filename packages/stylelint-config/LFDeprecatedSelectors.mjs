@@ -756,11 +756,12 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/yrt0XY.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/ec0b5de7eec2d6e2a1a0ea711d69d25a62de4401.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/9154c555b6a417bf1193f469246e6af8e4c71fee/packages/ng/dropdown/panel/dropdown-panel.component.html.
 		name: 'Dropdown',
 		objectPattern: [/(?<![\w.#="'-])lu-dropdown(?![\w-])/, /\.lu-dropdown-panel(?![\w-])/],
-		versionDeprecated: '20.3.1',
+		versionDeprecated: '20.3.0',
 		actions: `Remplacer \`<lu-dropdown>\` par un template, comme présenté sur l’exemple de la page [Dropdown](https://prisme.lucca.io/94310e217/p/557682-dropdown).`,
 	},
 	{

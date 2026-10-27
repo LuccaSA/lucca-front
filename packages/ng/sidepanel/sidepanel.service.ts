@@ -4,7 +4,7 @@ import { ILuModalContent, luDefaultSidepanelConfig, LuModal, LuModalConfig, LuMo
 import { ILuSidepanelRef } from './sidepanel.model';
 
 /**
- * @deprecated since 16.3.0; use LuModal with `modal.open(component, data, { mode: 'sidepanel' })`.
+ * @deprecated since 15.2.0; use LuModal with `modal.open(component, data, { mode: 'sidepanel' })`.
  * @see https://prisme.lucca.io/94310e217/p/863d99-side-panel
  */
 @Injectable()

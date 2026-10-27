@@ -60,8 +60,9 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	3. Source order, versionless entries last.
 * `// SEE <url>.` comments cite the sources, in this order:
 	1. The regex101 fixture.
-	2. The code, pinned at its deprecation commit.
-	3. The deletion commit or PR.
+	2. The release note declaring the deprecation, when one exists.
+	3. The code, pinned at its deprecation commit.
+	4. The deletion commit or PR.
 * A comment inside an `objectPattern` array labels the patterns after it.
 	* It is doc content: French Markdown.
 	* The script renders it as a `<p>` before the list of its patterns.
@@ -95,7 +96,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* The action reads "Remplacer par" followed by the symbol as code.
 	* Classes sharing a page share the row, which takes the earliest version.
 * Version sources, in order:
-	1. The release carrying the first live replacement, when the code offered none before.
+	1. The release note or commit declaring the deprecation.
 	2. The release in which the last live LF component left it, sourced by its PR.
 	3. Prisme's past releases: `https://prisme.lucca.io/94310e217/v/<release>/p/<page>.md`.
 

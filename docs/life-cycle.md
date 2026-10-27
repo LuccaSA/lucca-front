@@ -41,19 +41,19 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 	<tbody>
 		<tr>
 			<td>
+				<a href="https://prisme.lucca.io/94310e217/p/863d99-side-panel">Side panel</a>
+			</td>
+			<td>15.2.0</td>
+			<td>–</td>
+			<td>Remplacer par <code>LuModal</code> avec <code>modal.open(component, data, { mode: &#39;sidepanel&#39; })</code>.</td>
+		</tr>
+		<tr>
+			<td>
 				<a href="https://prisme.lucca.io/94310e217/p/66df2f-list">List</a>, <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)list(-(item-content-description%7Citem-content-title%7Citem-actions%7Citem-content%7Citem-handler%7Citem))%3F(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.list</code></a>
 			</td>
 			<td>16.2.2</td>
 			<td>–</td>
 			<td>Remplacer par <a href="https://prisme.lucca.io/94310e217/p/883e34-sortable-list">Sortable list</a>.</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="https://prisme.lucca.io/94310e217/p/863d99-side-panel">Side panel</a>
-			</td>
-			<td>16.3.0</td>
-			<td>–</td>
-			<td>Remplacer par <code>LuModal</code> avec <code>modal.open(component, data, { mode: &#39;sidepanel&#39; })</code>.</td>
 		</tr>
 		<tr>
 			<td>
@@ -122,7 +122,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<li><a href="https://github.com/search?q=(%2F(%5E%7C%5B%5E%5Cw-%5D)lu-dropdown(%5B%5E%5Cw-%5D%7C%24)%2F%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)lu-dropdown-panel(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.lu-dropdown-panel</code></a></li>
 				</ul>
 			</td>
-			<td>20.3.1</td>
+			<td>20.3.0</td>
 			<td>–</td>
 			<td>Remplacer <code>&lt;lu-dropdown&gt;</code> par un template, comme présenté sur l’exemple de la page <a href="https://prisme.lucca.io/94310e217/p/557682-dropdown">Dropdown</a>.</td>
 		</tr>
