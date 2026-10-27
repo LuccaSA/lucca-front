@@ -19,7 +19,7 @@ export class LuUserPopoverDirective extends PopoverDirective {
 	override readonly luPopoverDisabled = linkedSignal(() => this.luUserPopoverDisabled());
 
 	/**
-	 * Template displayed at the bottom of the popover, below the user details. Its implicit context is the user.
+	 * Template displayed at the bottom of the popover, below the user details.
 	 */
 	readonly luUserPopoverCustomContent = input<TemplateRef<LuUserPopoverCustomContentContext> | null>(null);
 
