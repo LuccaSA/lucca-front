@@ -4,7 +4,7 @@
 	<div class="activityFeed-step-state" [class.mod-critical]="status() === 'critical'" [class.mod-success]="status() === 'success'"></div>
 } @else if (user() || avatarPlaceholder()) {
 	<div class="activityFeed-step-avatar">
-		<lu-user-picture size="S" [user]="user()" [placeholder]="avatarPlaceholder()" />
+		<lu-user-picture size="S" [user]="user() ?? undefined" [placeholder]="avatarPlaceholder()" />
 	</div>
 }
 <div class="activityFeed-step-description">
