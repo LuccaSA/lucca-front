@@ -214,8 +214,7 @@ export default [
 			* \`--colors-white-color\` ⇒
 				* couleur : \`--palettes-neutral-0\`
 				* surface : \`--pr-t-elevation-surface-raised\`
-			* \`--colors-black-color\` ⇒ \\
-			  \`--palettes-neutral-900\`
+			* \`--colors-black-color\` ⇒ \`--palettes-neutral-900\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
@@ -236,10 +235,8 @@ export default [
 		objectPattern: /--components-container-(max-width|padding)(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		actions: `
-			* \`--components-container-max-width\` ⇒ \\
-			  \`--commons-container-maxWidth\`
-			* \`--components-container-padding\` ⇒ \\
-			  \`--commons-container-padding\`
+			* \`--components-container-max-width\` ⇒ \`--commons-container-maxWidth\`
+			* \`--components-container-padding\` ⇒ \`--commons-container-padding\`
 		`,
 	},
 	{
@@ -267,23 +264,16 @@ export default [
 		actions: `
 			[Tokens typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) :
 
-			* \`*sizes-XXXL-*\` ⇒ \\
-			  aucun token équivalent
-			* \`*sizes-XXL-*\` ⇒ \\
-			  \`*pr-t-font-heading-1-*\`
-			* \`*sizes-XL-*\` ⇒ \\
-			  \`*pr-t-font-heading-2-*\`
-			* \`*sizes-L-*\` ⇒ \\
-			  \`*pr-t-font-heading-3-*\`
+			* \`*sizes-XXXL-*\` ⇒ aucun token équivalent
+			* \`*sizes-XXL-*\` ⇒ \`*pr-t-font-heading-1-*\`
+			* \`*sizes-XL-*\` ⇒ \`*pr-t-font-heading-2-*\`
+			* \`*sizes-L-*\` ⇒ \`*pr-t-font-heading-3-*\`
 			* \`*sizes-M-*\` ⇒
 				* texte : \`*pr-t-font-body-M-*\`
 				* titre : \`*pr-t-font-heading-4-*\`
-			* \`*sizes-S-*\` ⇒ \\
-			  \`*pr-t-font-body-S-*\`
-			* \`*sizes-XS-*\` ⇒ \\
-			  \`*pr-t-font-body-XS-*\`
-			* \`--sizes-*-verticalPadding\` ⇒ \\
-			  tokens \`--pr-t-spacings-*\`
+			* \`*sizes-S-*\` ⇒ \`*pr-t-font-body-S-*\`
+			* \`*sizes-XS-*\` ⇒ \`*pr-t-font-body-XS-*\`
+			* \`--sizes-*-verticalPadding\` ⇒ tokens \`--pr-t-spacings-*\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-typo',
@@ -466,8 +456,7 @@ export default [
 		objectPattern: /--components-richTextField-(resize|height|minHeight|maxHeight)(?![\w-])/,
 		versionDeprecated: '21.2.0',
 		actions: `
-			\`--components-richTextField-*\` ⇒ \\
-			\`--components-richTextField-content-*\`
+			\`--components-richTextField-*\` ⇒ \`--components-richTextField-content-*\`
 		`,
 	},
 	{
@@ -561,14 +550,10 @@ export default [
 		actions: `
 			Avec \`*\` = \`--components-fancyBox\` :
 
-			* \`*-offsetInline\` ⇒ \\
-			  \`*-content-foregroundStartEnd-insetInlineEnd\`
-			* \`*-offsetBlock\` ⇒ \\
-			  \`*-content-foregroundStartEnd-insetBlockStart\`
-			* \`*-imageWidth\` ⇒ \\
-			  \`*-content-foregroundStartEnd-inlineSize\`
-			* \`*-imageHeight\` ⇒ \\
-			  \`*-content-foregroundStartEnd-blockSize\`
+			* \`*-offsetInline\` ⇒ \`*-content-foregroundStartEnd-insetInlineEnd\`
+			* \`*-offsetBlock\` ⇒ \`*-content-foregroundStartEnd-insetBlockStart\`
+			* \`*-imageWidth\` ⇒ \`*-content-foregroundStartEnd-inlineSize\`
+			* \`*-imageHeight\` ⇒ \`*-content-foregroundStartEnd-blockSize\`
 
 			Images :
 

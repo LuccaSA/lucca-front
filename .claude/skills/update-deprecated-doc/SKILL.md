@@ -130,9 +130,6 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* A leading `*` only when every item of the action shares one prefix: write full names otherwise.
 	* Names sharing a target group their varying part: `.icon-color-(primary|secondary)` becomes `.icon-color-product`.
 	* Mappings use `⇒` as their arrow.
-	* A list holding a mapping over 40 characters breaks every mapping after its arrow.
-		* The arrow line ends with a Markdown hard break, written `\\` in the template literal.
-		* The new value starts the next line, indented by two spaces.
 	* One name with several targets ends its line with the arrow.
 		* A sub-list of `label : value` items follows.
 	* A list of targets follows a `Remplacer par :` line.

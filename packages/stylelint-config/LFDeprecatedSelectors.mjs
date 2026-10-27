@@ -468,8 +468,7 @@ export default [
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 		actions: `
-			* \`.user-info\` & \`.user-tile*\` ⇒ \\
-			  [User tile](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/00d3d8) : composant Angular ou [classes HTML](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/771576)
+			* \`.user-info\` & \`.user-tile*\` ⇒ [User tile](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/00d3d8) : composant Angular ou [classes HTML](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/771576)
 			* \`.picture\` ⇒ [Avatar](https://prisme.lucca.io/94310e217/p/42b330-avatar/b/915f82)
 		`,
 	},

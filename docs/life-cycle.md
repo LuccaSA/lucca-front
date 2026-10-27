@@ -852,8 +852,8 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>–</td>
 			<td>
 				<ul>
-				<li><code>--components-container-max-width</code> ⇒ <br><code>--commons-container-maxWidth</code></li>
-				<li><code>--components-container-padding</code> ⇒ <br><code>--commons-container-padding</code></li>
+				<li><code>--components-container-max-width</code> ⇒ <code>--commons-container-maxWidth</code></li>
+				<li><code>--components-container-padding</code> ⇒ <code>--commons-container-padding</code></li>
 				</ul>
 			</td>
 		</tr>
@@ -890,18 +890,18 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-typo"><strong>Schematic</strong> : tokens-typo</a>
 				<p><a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">Tokens typographie</a> :</p>
 				<ul>
-				<li><code>*sizes-XXXL-*</code> ⇒ <br>aucun token équivalent</li>
-				<li><code>*sizes-XXL-*</code> ⇒ <br><code>*pr-t-font-heading-1-*</code></li>
-				<li><code>*sizes-XL-*</code> ⇒ <br><code>*pr-t-font-heading-2-*</code></li>
-				<li><code>*sizes-L-*</code> ⇒ <br><code>*pr-t-font-heading-3-*</code></li>
+				<li><code>*sizes-XXXL-*</code> ⇒ aucun token équivalent</li>
+				<li><code>*sizes-XXL-*</code> ⇒ <code>*pr-t-font-heading-1-*</code></li>
+				<li><code>*sizes-XL-*</code> ⇒ <code>*pr-t-font-heading-2-*</code></li>
+				<li><code>*sizes-L-*</code> ⇒ <code>*pr-t-font-heading-3-*</code></li>
 				<li><code>*sizes-M-*</code> ⇒<ul>
 				<li>texte : <code>*pr-t-font-body-M-*</code></li>
 				<li>titre : <code>*pr-t-font-heading-4-*</code></li>
 				</ul>
 				</li>
-				<li><code>*sizes-S-*</code> ⇒ <br><code>*pr-t-font-body-S-*</code></li>
-				<li><code>*sizes-XS-*</code> ⇒ <br><code>*pr-t-font-body-XS-*</code></li>
-				<li><code>--sizes-*-verticalPadding</code> ⇒ <br>tokens <code>--pr-t-spacings-*</code></li>
+				<li><code>*sizes-S-*</code> ⇒ <code>*pr-t-font-body-S-*</code></li>
+				<li><code>*sizes-XS-*</code> ⇒ <code>*pr-t-font-body-XS-*</code></li>
+				<li><code>--sizes-*-verticalPadding</code> ⇒ tokens <code>--pr-t-spacings-*</code></li>
 				</ul>
 			</td>
 		</tr>
@@ -962,7 +962,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>21.2.0</td>
 			<td>–</td>
 			<td>
-				<p><code>--components-richTextField-*</code> ⇒ <br><code>--components-richTextField-content-*</code></p>
+				<code>--components-richTextField-*</code> ⇒ <code>--components-richTextField-content-*</code>
 			</td>
 		</tr>
 		<tr>
@@ -982,10 +982,10 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>
 				<p>Avec <code>*</code> = <code>--components-fancyBox</code> :</p>
 				<ul>
-				<li><code>*-offsetInline</code> ⇒ <br><code>*-content-foregroundStartEnd-insetInlineEnd</code></li>
-				<li><code>*-offsetBlock</code> ⇒ <br><code>*-content-foregroundStartEnd-insetBlockStart</code></li>
-				<li><code>*-imageWidth</code> ⇒ <br><code>*-content-foregroundStartEnd-inlineSize</code></li>
-				<li><code>*-imageHeight</code> ⇒ <br><code>*-content-foregroundStartEnd-blockSize</code></li>
+				<li><code>*-offsetInline</code> ⇒ <code>*-content-foregroundStartEnd-insetInlineEnd</code></li>
+				<li><code>*-offsetBlock</code> ⇒ <code>*-content-foregroundStartEnd-insetBlockStart</code></li>
+				<li><code>*-imageWidth</code> ⇒ <code>*-content-foregroundStartEnd-inlineSize</code></li>
+				<li><code>*-imageHeight</code> ⇒ <code>*-content-foregroundStartEnd-blockSize</code></li>
 				</ul>
 				<p>Images :</p>
 				<ul>

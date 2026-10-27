@@ -95,7 +95,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>20.1.0</td>
 			<td>
 				<ul>
-				<li><code>.user-info</code> &amp; <code>.user-tile*</code> ⇒ <br><a href="https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/00d3d8">User tile</a> : composant Angular ou <a href="https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/771576">classes HTML</a></li>
+				<li><code>.user-info</code> &amp; <code>.user-tile*</code> ⇒ <a href="https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/00d3d8">User tile</a> : composant Angular ou <a href="https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/771576">classes HTML</a></li>
 				<li><code>.picture</code> ⇒ <a href="https://prisme.lucca.io/94310e217/p/42b330-avatar/b/915f82">Avatar</a></li>
 				</ul>
 			</td>
@@ -952,7 +952,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<li>surface : <code>--pr-t-elevation-surface-raised</code></li>
 				</ul>
 				</li>
-				<li><code>--colors-black-color</code> ⇒ <br><code>--palettes-neutral-900</code></li>
+				<li><code>--colors-black-color</code> ⇒ <code>--palettes-neutral-900</code></li>
 				</ul>
 			</td>
 		</tr>
