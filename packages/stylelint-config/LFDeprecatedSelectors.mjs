@@ -359,7 +359,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
 		objectPattern: [
 			// SEE https://regex101.com/r/YCDDc8.
-			/\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|X{1,2}[SL]|[SML])|(margin|padding)(Inline|Block)(Auto|X{1,2}[SL]|[SML])|(columnGap|rowGap|gap)(0|X{1,2}[SL]|[SML]))(?![\w-])/,
+			/\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|XXS|XS|S|M|L|XL|XXL)|(margin|padding)(Inline|Block)(Auto|XXS|XS|S|M|L|XL|XXL)|(columnGap|rowGap|gap)(0|XXS|XS|S|M|L|XL|XXL))(?![\w-])/,
 			// Utilitaires de bordure nulle : `.u-` supprimés avec les utilitaires t-shirt, `.pr-u-` toujours présents
 			// SEE https://regex101.com/r/nLOfQY.
 			/\.u-border(Top|Right|Bottom|Left|Inline|Block)?0(?![\w-])/,
@@ -395,7 +395,7 @@ export default [
 		// Any combination of .userTile and .mod-XL, .mod-XXL or .mod-XXXL, within one compound selector
 		// SEE https://regex101.com/r/E0zGze.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/22716b6cf5747cdc3172d2e33b1d3a45ecad9ec6/packages/scss/src/components/userTile/index.scss#L28.
-		objectPattern: /(?=[^\s>+~]*\.userTile(?![\w-]))(?=[^\s>+~]*\.mod-X{1,3}L(?![\w-]))[^\s>+~]*/,
+		objectPattern: /(?=[^\s>+~]*\.userTile(?![\w-]))(?=[^\s>+~]*\.mod-(XL|XXL|XXXL)(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '18.2.0',
 		actions: `Remplacer par \`.mod-L\`, la plus grande taille de [User tile](https://prisme.lucca.io/94310e217/p/56d611-user-tile).`,
 	},
@@ -621,7 +621,7 @@ export default [
 		// SEE https://regex101.com/r/rOqMxE.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/commons/core.scss#L148.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/bf00a13340eaea7a433a3e64100204381d193676.
-		objectPattern: /\.u-text(X?S|M|X{0,3}L)(?![\w-])/,
+		objectPattern: /\.u-text(XS|S|M|L|XL|XXL|XXXL)(?![\w-])/,
 		versionDeprecated: '20.1.0',
 		versionDeleted: '20.2.0',
 		actions: `
@@ -705,7 +705,7 @@ export default [
 		// `.pr-u-` names of the entry above, still shipping
 		// SEE https://regex101.com/r/zdllLi.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/core.scss#L173.
-		objectPattern: /\.pr-u-text(X?S|M|X{0,3}L)(?![\w-])/,
+		objectPattern: /\.pr-u-text(XS|S|M|L|XL|XXL|XXXL)(?![\w-])/,
 		versionDeprecated: '20.2.0',
 		actions: `
 			* XS, S & M : \`*text*\` ⇒ \`*body*\`

@@ -52,7 +52,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 * A number lists only the values LF shipped, never `\d+`.
 	* Download the release package from `https://registry.npmjs.org/@lucca-front/scss/-/scss-<version>.tgz`.
 	* Search its `package/dist/lucca-front.min.css` file for the class.
-* `Auto` opens a choice of values: `(Auto|0|25|50|…)`.
+* A choice lists its non-serial values first, then its series in order: `(Auto|0|25|50|…)`.
 * The properties file holds the sorted section only.
 * Sort key:
 	1. `versionDeprecated`, or `versionDeleted` without it.
@@ -116,7 +116,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* An optional unknown elsewhere keeps both forms: `--palettes-text` and `--palettes-…-text`.
 	* A pattern without an end guard ends with `…`: `.grid\@mediaMin…`.
 * Grouping:
-	* A choice of variants always stays grouped: `.u-margin(Top|Right|Bottom|Left)(Auto|0|XS|XL|…)`.
+	* A choice of variants always stays grouped: `.u-margin(Top|Right|Bottom|Left)(Auto|0|XXS|XS|…)`.
 		* A variant choice suffixes a word: `margin(Top|Left)`.
 		* A choice of values of 8 characters or fewer is one too: `.(indexT|t)able`.
 	* A choice of distinct names expands: `--components-priorityLevels-font` then `-gap`.

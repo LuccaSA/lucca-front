@@ -59,7 +59,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/17961899b2b1c17e69612708b9e6d068b7801fb0/packages/scss/src/commons/vars.scss#L32.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/17961899b2b1c17e69612708b9e6d068b7801fb0/packages/scss/src/commons/config.scss#L455.
-		objectPattern: /--commons-boxShadow-(X?S|M|X*L)(?![\w-])/,
+		objectPattern: /--commons-boxShadow-(XXS|XS|S|M|L|XL|XXL)(?![\w-])/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '19.1.0',
 		actions: `Remplacer par les tokens [elevations](https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449).`,
@@ -123,7 +123,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6f83f82a5f0dcfbf3ad08742ca577889802b8385/packages/scss/src/commons/config.scss#L403.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6f83f82a5f0dcfbf3ad08742ca577889802b8385/packages/scss/src/commons/vars.scss#L32.
-		objectPattern: /--spacings-(0|X{0,2}S|M|X{0,2}L|auto)(?![\w-])/,
+		objectPattern: /--spacings-(auto|0|XXS|XS|S|M|L|XL|XXL)(?![\w-])/,
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 		actions: `
