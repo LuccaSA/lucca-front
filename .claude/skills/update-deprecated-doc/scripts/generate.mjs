@@ -2,7 +2,7 @@
 // and of docs/life-cycle-deleted.md, which gets the entries whose deletion shipped,
 // from LFDeprecatedSelectors.mjs, LFDeprecatedProperties.mjs, LFDeprecatedScss.mjs and the Angular `@deprecated` markers.
 // Usage, from the repository root: node .claude/skills/update-deprecated-doc/scripts/generate.mjs
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 import { marked } from 'marked';
 import { pathToFileURL } from 'url';
@@ -136,7 +136,11 @@ const [selectors, properties, scss] = await Promise.all(
 	['LFDeprecatedSelectors.mjs', 'LFDeprecatedProperties.mjs', 'LFDeprecatedScss.mjs'].map(load),
 );
 // A deletion has shipped once its version is at or below the latest stable tag reachable from `HEAD`.
-const shipped = execSync("git describe --tags --abbrev=0 --match 'v[0-9]*' --exclude '*-*' HEAD").toString().trim().slice(1);
+// `execFileSync` skips the shell: `cmd.exe` would pass the quotes of a shell command to git.
+const shipped = execFileSync('git', ['describe', '--tags', '--abbrev=0', '--match', 'v[0-9]*', '--exclude', '*-*', 'HEAD'])
+	.toString()
+	.trim()
+	.slice(1);
 const deleted = (e) => !!e.versionDeleted && compare(e.versionDeleted, shipped) <= 0;
 const named = components([...selectors, ...properties, ...scss]);
 // An entry with a `name` deprecates a whole component: it goes to Composants.
