@@ -58,10 +58,10 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	1. `versionDeprecated`, or `versionDeleted` without it.
 	2. `versionDeleted`.
 	3. Source order, versionless entries last.
-* `// SEE <url>.` comments cite the sources.
-	* The regex101 fixture.
-	* The code.
-	* The commit.
+* `// SEE <url>.` comments cite the sources, in this order:
+	1. The regex101 fixture.
+	2. The code, pinned at its deprecation commit.
+	3. The deletion commit or PR.
 * A comment inside an `objectPattern` array labels the patterns after it.
 	* It is doc content: French Markdown.
 	* The script renders it as a `<p>` before the list of its patterns.
