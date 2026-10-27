@@ -334,6 +334,34 @@ describe('dialog-routing.utils', () => {
 			expect($dialogRef().dismiss).not.toHaveBeenCalled();
 		});
 
+		it('should cancel the navigation when canDeactivate completes without a value', async () => {
+			// Arrange
+			const emptyGuard = vi.fn(() => EMPTY);
+
+			const route = addTestRoute({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					canDeactivate: [emptyGuard],
+				},
+			});
+			const { router, fixture } = initTest(route);
+
+			// Act
+			await router.navigateByUrl('/test/bar');
+			fixture.detectChanges();
+			await fixture.whenStable();
+			await vi.runAllTimersAsync();
+
+			// Navigate away to trigger canDeactivate
+			const navigated = router.navigateByUrl('/');
+
+			// Assert
+			await expect(navigated).resolves.toBe(false);
+			expect(emptyGuard).toHaveBeenCalledTimes(1);
+			expect($dialogRef().dismiss).not.toHaveBeenCalled();
+		});
+
 		describe.each([
 			{ trigger: 'header close button', dismissDialog: () => $dialogRef().dismiss() },
 			{ trigger: 'escape key', dismissDialog: () => document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })) },
