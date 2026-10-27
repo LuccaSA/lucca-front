@@ -29,6 +29,10 @@
 			gap: var(--pr-t-spacings-200);
 		}
 
+		.userPopover-divider {
+			--components-divider-marginBlock: var(--pr-t-spacings-150);
+		}
+
 		.userPopover-details-info {
 			min-inline-size: 0;
 			flex-grow: 1;

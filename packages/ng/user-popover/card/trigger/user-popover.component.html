@@ -106,6 +106,7 @@
 			</div>
 		</section>
 		@if (customContent?.(); as customContentTemplate) {
+			<lu-divider class="userPopover-divider" />
 			<section>
 				<ng-container *ngTemplateOutlet="customContentTemplate; context: { $implicit: luUser() }" />
 			</section>
