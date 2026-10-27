@@ -10,7 +10,7 @@ interface CssButton {
 	inputs: {
 		size?: string;
 		block: boolean;
-		delete: boolean;
+		critical: boolean;
 		disclosure: boolean;
 		palette?: string;
 		state?: string;
@@ -46,6 +46,9 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				if (button.inputs.palette) {
 					thingsToAdd += `palette="${button.inputs.palette}" `;
 				}
+				if (button.inputs.critical) {
+					thingsToAdd += "critical ";
+				}
 				if (button.inputs.block) {
 					thingsToAdd += "block ";
 				}
@@ -74,6 +77,9 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 							`mod-withIcon`,
 							`is-${button.inputs.state}`,
 							`mod-delete`,
+							`mod-critical`,
+							// .loading is the deprecated name of .is-loading
+							'loading',
 							`mod-${button.inputs.size}`
 						].includes(c);
 					}).join(' ');
@@ -106,10 +112,10 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 						const inputs = {
 							size: classes.split(' ').find(c => /mod-(XS|S|M|L|XL|XXL)/.test(c))?.replace('mod-', ''),
 							block: classes.includes(`mod-block`),
-							delete: classes.includes(`mod-delete`),
+							critical: classes.includes(`mod-delete`) || classes.includes(`mod-critical`),
 							disclosure: classes.includes(`mod-disclosure`),
 							palette: classes.split(' ').find(c => /palette-(\w+)/.test(c))?.replace('palette-', ''),
-							state: classes.split(' ').find(c => /is-(\w+)/.test(c))?.replace('is-', ''),
+							state: classes.split(' ').find(c => /is-(\w+)/.test(c) || c === 'loading')?.replace('is-', ''),
 						};
 						const button: CssButton = {
 							node: node,

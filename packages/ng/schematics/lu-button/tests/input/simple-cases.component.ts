@@ -23,6 +23,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		<button luButton class="something-but-already-button" type="button" [class.is-loading]="saving$ | async" (click)="save()">
 			{{translations.ADMIN_SAVE}}
 		</button>
+		<button class="button mod-delete" type="button">Delete</button>
+		<button class="button mod-critical" type="button">Delete</button>
+		<button class="button loading" type="button">Save</button>
 	`,
 	imports: [
 		IconComponent
