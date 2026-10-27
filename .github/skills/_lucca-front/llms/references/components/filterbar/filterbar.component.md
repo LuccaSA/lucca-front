@@ -5,7 +5,6 @@
 - Angular
   - Filter pills optionnelles
   - luFilterPillAddonBefore et luFilterPillAddonAfter
-  - Traductions
   - Bar segmented control tabs
   - Bar
 - HTML/CSS
@@ -31,18 +30,6 @@ Deux directives structurelles permettent de projeter du contenu aux extrémités
 | **`*`**`luFilterPillAddonBefore` | Placé **avant** les pills, dans la zone scrollable, avec un séparateur vertical automatique. Exemple : un SegmentedControl ou un sélecteur de vues. |
 | --- | --- |
 | **`*`**`luFilterPillAddonAfter` | Placé **après** les pills, aligné à droite. Exemple : un bouton d'export. |
-
-### Traductions
-
-`lu-filter-bar`et `lu-filter-view-selector` exposent leur propre input `intl()`, qui donne accès à un ensemble de clés de traduction utilisables directement dans vos templates.
-
-| Clé | Traduction FR |
-| --- | --- |
-| `FilterViewSelectorComponent.intl().renameView` | Modifier le nom |
-| `FilterViewSelectorComponent.intl().deleteView` | Supprimer |
-| `FilterBarComponent.intl().saveView` | Enregistrer la vue |
-| `FilterBarComponent.intl().saveModification` | Enregistrer les modifications |
-| `FilterBarComponent.intl().saveNewView` | Enregistrer en tant que nouvelle vue |
 
 ### Bar segmented control tabs
 

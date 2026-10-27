@@ -61,55 +61,6 @@ import { LuSimpleSelectInputComponent, LuSelectPanelComponent } from '@lucca-fro
 
 ### Notes de release (ZeroHeight)
 
-#### 22.1.0
-
-##### Added
-
-- Opt-in bottom sheet below the `S` breakpoint (800px), enabled with `{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true }` (`@lucca-front/ng/core-select`): the trigger becomes a button and the panel opens as a dialog titled with the field label, with its own search input. Selects inside a filter pill keep their behavior.
-- `width` input to size the select itself, using the form field width scale, including the new `10` value.
-
-##### Fixed
-
-- Border of an invalid select keeps its critical color on hover.
-
-#### 22.0.6
-
-##### Fixed
-
-- No more error on `keydown` events without `key`, as fired by browser autofill.
-
-#### 22.0.4
-
-##### Fixed
-
-- No option is highlighted any more when the control has no value.
-
-#### 22.0.1
-
-##### Fixed
-
-- Selects stay non-searchable when no `clueChange` binding is provided.
-
-#### 22.0.0
-
-##### Added
-
-- `dataSource` input accepting a `SelectDataSource` (`getOptions`, `getTotalCount`, `getGroupOptions`, `reset`, `paramsChange`, `clueDebounceMs`) to feed the options, next to the existing `options` input.
-
-##### Changed
-
-- Panel is now built on the `listbox` component and its shared panel layout.
-
-##### Removed
-
-- `previousPage` output — pagination is now driven by the data source.
-
-##### Fixed
-
-- Clear button is now displayed in filter pill mode.
-- A failing "me" lookup no longer keeps a user select loading forever.
-- Loader is no longer started again when a filter pill is reopened.
-
 #### 21.3.1
 
 ##### Added

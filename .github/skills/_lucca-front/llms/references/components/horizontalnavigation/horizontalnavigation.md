@@ -1,18 +1,5 @@
 # horizontalnavigation
 
-**Sommaire**
-
-- Import
-- Basic Usage
-- API Reference
-  - HorizontalNavigationLinkDirective (directive)
-  - HorizontalNavigationTabComponent (component)
-  - HorizontalNavigationComponent (component)
-- Related files
-- Changelog
-  - 22.0.0
-  - Notes de release (ZeroHeight)
-
 ## Import
 
 ```typescript
@@ -84,12 +71,6 @@ import { HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent, Ho
   ~ `vertical` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
-
-#### 21.4.1
-
-##### Fixed
-
-- Content height no longer overflows when the navigation is displayed inside a dialog.
 
 #### 21.3.0
 

@@ -44,7 +44,7 @@ Ce sont les étapes non encore atteintes, elles peuvent parfois être déjà val
 
 ### Navigation
 
-L’utilisateur peut revenir aux étapes précédentes en cliquant sur l’étape dans le Stepper. Il peut également peut naviguer dans le futur avec le Stepper si celui-ci est inscrit dans un parcours non-linéaire.
+L’utilisateur peut revenir aux étapes précédentes en cliquant sur l’étape dans le stepper. Il peut également peut naviguer dans le futur avec la stepper si celui-ci est inscrit dans un parcours non-linéaire.
 
 ### Ellipse
 

@@ -6,14 +6,14 @@
   - Anatomie
   - Options
     - Couleur de fond
-    - HorizontalNavigation
+    - Horizontal navigation
   - Règle d’utilisation
     - Positionnement des actions
   - Cas d’usage
     - Création et édition d’un objet
     - Comportement responsive
     - Dialog de confirmation
-    - FancyDialog
+    - Fancy dialog
 - Content
   - Titre
     - Recommandations
@@ -43,7 +43,7 @@ Le choix de la couleur de fond du conteneur s'adapte à la complexité de son co
 
 **Fond gris** (`-pr-t-elevation-surface-default`) : à utiliser uniquement lorsque le contenu est complexe, c'est-à-dire qu'il nécessite d'être structuré en plusieurs sections ou qu'il intègre des blocs visuellement distincts (ex. : résumé, liste, formulaire combiné).
 
-### HorizontalNavigation
+### Horizontal navigation
 
 L'intégration d'une HorizontalNavigation dans l’entête permet de catégoriser des informations denses au sein d'un même contexte, tout en restant fixe lors du défilement du contenu pour garantir une navigation rapide.
 
@@ -78,19 +78,15 @@ Pour en savoir plus sur ce cas d’usage consulter le pattern du cycle de vie d'
 
 ### Comportement responsive
 
-Dans le cadre d’une création ou d’une édition d’objet sur petit écran, nous utilisons systématiquement le mode `drawer-from-bottom`.
-
-#### Ouverture d'un Select
-
-Sur un petit écran et lorsque l'utilisateur ouvre la liste d'options d'un Select, nous affichons le mode `sheet` de la dialog. Le mode `sheet` est réservé à l'ouverture d'un Select.
+Dans le cadre d’une création ou d’une édition d’objet sur petit écran, utilisez systématiquement le mode `drawer-from-bottom`.
 
 ### Dialog de confirmation
 
-À utiliser pour interrompre l’utilisateur lorsqu’il s’apprête à effectuer une action ayant un impact important. Les Dialogs de confirmation ajoutent une friction volontaire afin d’éviter les erreurs, en lui demandant de confirmer explicitement son intention.
+À utiliser pour interrompre l’utilisateur lorsqu’il s’apprête à effectuer une action ayant un impact important. Les dialogs de confirmation ajoutent une friction volontaire afin d’éviter les erreurs, en lui demandant de confirmer explicitement son intention.
 
 Les règles spécifiques à ce cas d’usage sont disponibles dans le pattern Dialog de confirmation.
 
-### FancyDialog
+### Fancy dialog
 
 En fin de parcours complexe, l’apparition d’une FancyDialog permet de féliciter l’utilisateur et de lui récapituler ce qu’il s’est passé tout en le guidant vers ce qu’il peut faire ensuite.
 

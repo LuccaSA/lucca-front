@@ -14,10 +14,10 @@ Dans certains cas, il doit être possible pour l’utilisateur de supprimer la c
 
 #### Règles de réapparition
 
-* **Le rejet explicite (clic sur la croix) :** si l'utilisateur efface le composant, il indique un désintérêt. Ce choix est respecté et entraînera un « cool-down » progressif avant une nouvelle apparition du PLGPush :
+* **Le rejet explicite (clic sur la croix) :** si l'utilisateur efface le composant, il indique un désintérêt. Ce choix est respecté et entraînera un « cool-down » progressif avant une nouvelle apparition du PLG Push:
     * 1re fermeture : réapparition après 14 jours.
     * 2e fermeture : réapparition après 60 jours.
-* **La complétion :** si l'utilisateur clique sur le lien, le PLGPush ne doit plus jamais apparaître pour cette fonctionnalité spécifique.
+* **La complétion :** si l'utilisateur clique sur le lien, le PLG Push ne doit plus jamais apparaître pour cette fonctionnalité spécifique.
 
 ## Règles d'utilisation
 

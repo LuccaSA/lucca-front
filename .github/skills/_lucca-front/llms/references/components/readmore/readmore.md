@@ -1,17 +1,5 @@
 # readmore
 
-**Sommaire**
-
-- Import
-- API Reference
-  - ReadMoreComponent (component)
-  - Injection tokens
-- Related files
-- Changelog
-  - 22.0.5
-  - 22.0.0
-  - Notes de release (ZeroHeight)
-
 ## Import
 
 ```typescript
@@ -65,16 +53,6 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 ~ `textFlow` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
-
-#### 22.0.0
-
-##### Added
-
-- `plainText` input to display the line breaks of the content instead of collapsing them.
-
-##### Fixed
-
-- Read less label is now correctly quoted when built from a signal.
 
 #### 21.3.0
 

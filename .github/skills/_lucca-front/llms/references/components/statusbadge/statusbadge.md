@@ -38,12 +38,6 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 
 ### Notes de release (ZeroHeight)
 
-#### 22.0.0
-
-##### Removed
-
-- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
-
 #### 20.3.0
 
 ##### Added

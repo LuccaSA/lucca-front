@@ -12,7 +12,6 @@
     - Étape en cours
     - État de succès
     - État de refus
-    - Action automatique
   - Comportement
     - Ordre d'affichage
     - Chargement
@@ -22,8 +21,8 @@
     - Fil de discussion
 - Content
   - Contenu & rédaction
+    - En-tête
     - Description d'une action
-    - Description d'une action automatique
     - Description d'un statut
     - L'horodatage
 
@@ -41,7 +40,7 @@
 
 ### Commentaire
 
-L'option `Comment` est utilisée pour capturer et afficher la justification ou l'explication fournie par un utilisateur au moment où il effectue une action. Le commentaire se place systématiquement en dernière position de l'étape, sous le statut et les éventuelles pièces jointes.
+L'option Commentaire est utilisée pour capturer et afficher la justification ou l'explication fournie par un utilisateur au moment où il effectue une action. Le commentaire se place systématiquement en dernière position de l'étape, sous le statut et les éventuelles pièces jointes.
 
 Si le commentaire dépasse une certaine longueur, il est recommandé d'intégrer le composant `read-more` pour ne pas étirer la timeline de manière excessive.
 
@@ -76,12 +75,6 @@ Utilisez le jalon de succès pour marquer la fin positive d'un processus de déc
 
 Le jalon de refus marque la clôture d'un workflow avec une issue négative. Il utilise les codes visuels d’erreur pour signaler que la ressource n'a pas atteint l'objectif escompté.
 
-### Action automatique
-
-Une action automatique est une étape réalisée sans l'intervention directe d'un utilisateur : par un acteur externe, un canal d'import ou le logiciel lui-même.
-
-Elle se distingue d'une action utilisateur, portée par un avatar, et d'un statut, qui décrit l'état de la ressource. L'avatar est remplacé par une icône  en `product700` sur un fond en couleur `product100`.
-
 ## Comportement
 
 ### Ordre d'affichage
@@ -101,60 +94,44 @@ Le bouton de chargement est utilisé lorsque le fil d'activité dépasse un cert
 
 ### Numérotation
 
-- **Do** : Utilisons les Avatars ou les états succès et erreur dans l’en-tête de chaque étape du fil d’activité.
+- **Do** : Utilisons les avatars ou les états succès et erreur dans l’en-tête de chaque étape du fil d’activité.
 - **Don't** : N’utilisons pas de numéros pour indiquer l’ordre des étapes.
 
 ### Fil de discussion
 
-- **Do** : Utilisons le composant Comment lorsque l’on est dans une interface de conversation.
+- **Do** : Utilisons le composant Comment chat lorsque l’on est dans une interface de conversation.
 - **Don't** : N’utilisons pas un fil d’activité si l’interface est purement conversationnelle.
 
 # Content
 
 ## Contenu & rédaction
 
+### En-tête
+
 ### Description d'une action
 
-L'en-tête se lit comme une phrase simple, à la voix active : **[Auteur] + [Verbe d'action] + [Objet]**.
+L'entête se lit comme une phrase simple : **[Auteur] + [Verbe d'action] + [Objet]**.
 
-1. **L'auteur de l'action**
-    * **Utilisateur :** utiliser le `Prénom` + `Nom`.
-    * **Acteur externe** (plateforme tierce, organisme, connecteur partenaire) : le nommer explicitement (*« La Plateforme Agréée a importé l'avoir »*).
-2. **Le verbe d'action**
-    * **Temps :** toujours utiliser le **passé composé** (*« a modifié »*, *« a transmis »*, *« a supprimé »*, *« a importé »*).
-    * **Précision :** choisir un verbe spécifique (*modifié, transmis, supprimé, importé, créé, confirmé, transféré, associé, validé*). Voir Verbes d'action.
-    * **À bannir :** les formulations vagues ou impersonnelles (*« a été »*, *« peut être »*, *« a permis de »*, *« il est possible de »*).
-3. **L'objet**
+1. **L’auteur de l’action :**
+    * **Utilisateur :** utiliser le `Prénom` + `Nom`. Éviter les pseudos ou les initiales seules pour garantir la traçabilité.
+2. **Le verbe d'action :**
+    * **Temps :** toujours utiliser le **passé composé** pour les actions terminées (*"a modifié"*, *"a transmis"*, *"a supprimé"*).
+3. **L'objet :**
     * Être spécifique mais concis.
-    * Dans le cas d'un changement, ne pas mentionner la valeur finale (ex. : le nom du statut) dans l'en-tête si elle est déjà explicitée par un composant dédié (Badge, Tag, Comparaison) situé juste en dessous.
+    * Formulation des descriptions des étapes doivent être identique pour toutes les étapes.
+    * Dans le cas d’un changement : ne mentionnez pas la valeur finale du changement (ex: le nom du statut) dans l'entête si celle-ci est déjà explicitée par un composant dédié (Badge, Tag, Comparaison) situé juste en dessous.
 
 - **Do** : Gardons une en-tête simple et consice.
 - **Don't** : Ne mentionnons pas la valeur finale du changement dans l’en-ête.
 
-### Description d'une action automatique
-
-Une action automatique est une étape réalisée sans l'intervention directe d'un utilisateur : par un acteur externe, un canal d'import ou le logiciel lui-même.
-
-L'en-tête se lit : **[Objet] + [Participe passé] + [Source ou « automatiquement »]**.
-
-1. **L'objet**
-    * Placé en début de phrase, sans article (*« Facture »*, *« Avoir »*, *« Rémunération »*).
-2. **Le participe passé**
-    * Sans auxiliaire : on n'écrit jamais *« a été »*.
-    * Accordé avec l'objet (*« Facture importée »*, *« Avoir importé »*).
-3. **La source ou le contexte d'origine**
-    * **Obligatoire** pour les imports et les créations dérivées. C'est une information utile au diagnostic, pour l'utilisateur comme pour le support (*« Facture importée par email »*, *« Rémunération créée automatiquement depuis l'élément théorique »*).
-    * **Sans source**, l'adverbe *« automatiquement »* est indispensable : c'est lui qui indique que personne n'est intervenu (*« Facture confirmée automatiquement »*).
-
 ### Description d'un statut
 
-Un statut décrit l'état de la ressource à un moment donné, pas une action. L'en-tête se lit : **[Objet] + [État]**.
+L'entête se lit comme une phrase simple : **[Nom de l’objet] + [Verbe d'action]**.
 
-1. **L'objet**
+1. **L'objet :**
     * Être spécifique mais concis.
-2. **L'état**
-    * Utiliser un **participe passé** (*« Tâche créée »*, *« Demande approuvée »*) ou une **locution d'état** (*« Tâche en cours »*, *« Facture prête pour paiement »*).
-    * Se concentrer sur l'état atteint, pas sur ce qu'il permet de faire.
+2. **Le verbe d'action :**
+    * **Temps :** Toujours utiliser le **présent** (*"approuvé"*).
 
 ### L'horodatage
 

@@ -65,40 +65,6 @@ import { TagComponent } from '@lucca-front/ng/tag';
 
 ### Notes de release (ZeroHeight)
 
-#### 22.1.0
-
-##### Added
-
-- `hiddenLabel` input to visually hide the label while keeping it available to screen readers. Requires an `icon`.
-- `label` is now optional, so a tag can display an icon only.
-- Icon-only tags (without label, with an empty label or with `hiddenLabel`) get a reduced inline padding.
-
-##### Changed
-
-- A tag with neither a label nor an icon is no longer displayed.
-
-#### 22.0.6
-
-##### Fixed
-
-- `withEllipsis` now truncates the label when the container is narrower than the label.
-
-#### 22.0.1
-
-##### Fixed
-
-- `lu-tag` now renders as `inline-flex` instead of `display: contents`, so a tooltip can be anchored on it.
-
-#### 22.0.0
-
-##### Removed
-
-- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
-
-##### Fixed
-
-- Vertical alignment of the tag content.
-
 #### 20.3.0
 
 ##### Added

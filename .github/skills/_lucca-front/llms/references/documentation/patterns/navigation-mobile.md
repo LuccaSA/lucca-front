@@ -103,7 +103,7 @@ Pour montrer que la page secondaire est une navigation depuis la page principale
 
 ### Affichage du menu
 
-Pour aider l’utilisateur à se situer et naviguer dans l’application, il est recommandé d'afficher aussi le menu depuis une page secondaire. 
+Pour aider l’utilisateur à se situer et naviguer dans l’application, nous affichons aussi le menu depuis une page secondaire.
 
 # Fullscreen cover
 

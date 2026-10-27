@@ -11,18 +11,6 @@
 
 ### Notes de release (ZeroHeight)
 
-#### 22.0.6
-
-##### Fixed
-
-- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
-
-#### 21.3.0
-
-##### Fixed
-
-- Highlighted option no longer follows the pointer while navigating with the keyboard.
-
 #### 21.1.3
 
 ##### Fixed

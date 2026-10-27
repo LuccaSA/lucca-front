@@ -12,7 +12,7 @@
 
 ## Illustrations
 
-Les BubblesIllustrations doivent s'adapter automatiquement à la palette de couleurs du logiciel. Cela garantit une intégration harmonieuse et cohérente avec le reste de l'interface.
+Les Bubbles illustrations doivent s'adapter automatiquement à la palette de couleurs du logiciel. Cela garantit une intégration harmonieuse et cohérente avec le reste de l'interface.
 
 ## Typologie des messages
 
@@ -24,7 +24,7 @@ L'illustration affiche donc un objet représentant le type de ressource attendue
 
 ### Aucun contenu mais action possible
 
-Dans certains cas, l’EmptyState ne se limite pas à informer l’utilisateur d’une absence de contenu, mais doit aussi l’inciter à agir directement pour créer ou ajouter des ressources.
+Dans certains cas, l’Empty state ne se limite pas à informer l’utilisateur d’une absence de contenu, mais doit aussi l’inciter à agir directement pour créer ou ajouter des ressources.
 
 Nous ajoutons alors un petit symbole [+] sur l’illustration pour indiquer visuellement que l’utilisateur peut initier une action d’ajout ou de création.
 
@@ -42,9 +42,9 @@ Cette état signale qu’un problème technique ou fonctionnel empêche l’affi
 
 L'illustration utilisée doit être `illustration-Error`et un bouton peut être ajouté au message pour lancer à nouveau la requête.
 
-### EmptyState positif (succès)
+### Empty state positif (succès)
 
-Dans ce contexte, l’absence de contenu est une bonne nouvelle : cela signifie que l’utilisateur a accompli ce qu’il devait faire. On profite donc de l'EmptyState pour le féliciter.
+Dans ce contexte, l’absence de contenu est une bonne nouvelle : cela signifie que l’utilisateur a accompli ce qu’il devait faire. On profite donc de l'Empty state pour le féliciter.
 
 Plusieurs illustrations sont disponibles pour indiquer des états de succès. Il est possible de choisir parmi ces trois illustrations : `illustration-Party`, `illustration-AwardRibbon` et `illustration-ThumbUp`
 
@@ -60,7 +60,7 @@ Lorsque le message est succinct, un titre n'est pas nécessaire. Il est envisage
 
 ### Animation de chargement
 
-L'EmptyState peut aussi être utilisé pour indiquer un état de chargement. Dans ce cas, l'illustration est remplacée par une animation et le texte est aussi adapté.
+L'Empty state peut aussi être utilisé pour indiquer un état de chargement. Dans ce cas, l'illustration est remplacée par une animation et le texte est aussi adapté.
 
 # Content
 

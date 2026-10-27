@@ -51,7 +51,7 @@ Le Popover est recommandé pour une description plus longue, du texte formaté e
 - **Do** : Utilisons le Popover lorsque le contenu est riche et/ou nécessite d'être mis en forme.
 - **Don't** : Le Tooltip ne peut contenir que du texte. Ne l'utilisons pas pour mettre en forme du contenu.
 
-**Sont aussi nommés Tooltips les messages gérés avec notre outil** **[Userflow 🏷](https://www.notion.so/Userflow-22e2f73cfeb1478dbabf7952a5f95f21?pvs=21)**, qui aident à des parcours de type « onboarding », « new feature », « step by step » ou « sondage ». À ne pas confondre donc.
+**Sont aussi nommés tooltips les messages gérés avec notre outil** **[Userflow 🏷](https://www.notion.so/Userflow-22e2f73cfeb1478dbabf7952a5f95f21?pvs=21)**, qui aident à des parcours de type « onboarding », « new feature », « step by step » ou « sondage ». À ne pas confondre donc.
 
 # Content
 

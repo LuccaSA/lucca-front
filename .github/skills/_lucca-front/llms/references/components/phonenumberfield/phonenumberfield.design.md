@@ -40,7 +40,7 @@ Pour rechercher un indicatif, l’utilisateur peut rechercher directement le num
 
 ### Placeholder
 
-Le Placeholder est modifié au changement de pays. Cela permet de donner une information supplémentaire à l’utilisateur sur le format attendu. Le Placeholder ne doit pas mentionner l’indicatif.
+Le placeholder est modifié au changement de pays. Cela permet de donner une information supplémentaire à l’utilisateur sur le format attendu. Le *placeholder* ne doit pas mentionner l’indicatif.
 
 ### Formatage du numéro
 

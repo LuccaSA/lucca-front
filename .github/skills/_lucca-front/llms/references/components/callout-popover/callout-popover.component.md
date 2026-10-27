@@ -16,10 +16,12 @@
 
 ### Popover
 
-Component selector : `lu-callout-popover`
-
 ```js
-import { CalloutPopoverComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective } from "@lucca-front/ng/callout";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { CALLOUT_POPOVER_SIZE, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutPopoverComponent, CalloutStates } from '@lucca-front/ng/callout';
+import { PopoverPosition } from '@lucca-front/ng/popover2';
+import { PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html

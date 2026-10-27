@@ -45,13 +45,13 @@ L’analyse de contenu utilise l’IA pour extraire automatiquement des informat
 
 #### Import de document
 
-L’analyse se lance automatiquement dès qu’un utilisateur importe un document via un FileUpload. Le Tag "Scan intelligent" signale que le fichier sera traité par l’IA pour extraire les informations clés.
+L’analyse se lance automatiquement dès qu’un utilisateur importe un document via un File upload. Le Tag "Scan intelligent" signale que le fichier sera traité par l’IA pour extraire les informations clés.
 
 #### Déclenchement automatique
 
-Dans certains cas, l’analyse est différée et programmée à une date précise. L’utilisateur est informé de cette échéance via un message clair dans un EmptyState.
+Dans certains cas, l’analyse est différée et programmée à une date précise. L’utilisateur est informé de cette échéance via un message clair dans un Empty state.
 
-L'illustration utilisée doit rester la même que dans les EmptyState habituels, **sans porter les codes graphiques utilisés pour l'IA** chez Lucca.
+L'illustration utilisée doit rester la même que dans les Empty state habituels, **sans porter les codes graphiques utilisés pour l'IA** chez Lucca.
 
 ### Animation d'analyse
 

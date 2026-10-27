@@ -16,10 +16,10 @@
 
 ### Disclosure
 
-Component selector : `lu-callout-disclosure`
-
 ```js
-import { CalloutDisclosureComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective } from "@lucca-front/ng/callout";
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { CALLOUT_SIZE, CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
+import { PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html

@@ -100,26 +100,6 @@ import { DateInputComponent } from '@lucca-front/ng/date2';
 
 ### Notes de release (ZeroHeight)
 
-#### 22.1.0
-
-##### Added
-
-- `humanized` input to display the selected date in natural language while the field is not focused: "Yesterday", "Today" or "Tomorrow" in `day` mode, the month name and year in `month` mode. Other dates and modes keep the numeric format.
-
-##### Changed
-
-- `calendarMode` is no longer nullable: it defaults to `mode` and follows it when `mode` changes. `calendarModeChange` is only emitted when the calendar navigation actually changes the mode.
-
-#### 22.0.0
-
-##### Added
-
-- `week` mode: the input displays and parses a week as `<weekPrefix><week number>/<year>`, and the selected value is normalized to that week.
-
-##### Fixed
-
-- Calendar overlay is now exposed as a labelled dialog (`aria-haspopup="dialog"`, `aria-expanded` and `aria-controls` on the trigger).
-
 #### 21.2.3
 
 ##### Fixed

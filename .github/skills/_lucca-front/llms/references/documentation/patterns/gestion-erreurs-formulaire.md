@@ -41,7 +41,7 @@ Les messages d’erreurs sont supprimés au *change* dès que les champs repasse
 
 ### Au niveau du formulaire
 
-Lorsqu'une ou plusieurs erreurs sont remontées dans le formulaires, nous affichons un CalloutPopover dans le Footer, précisant le nombre d’erreur dans l’ensemble du formulaire.
+Lorsqu'une ou plusieurs erreurs sont remontées dans le formulaires, nous affichons un Callout popover dans le Footer, précisant le nombre d’erreur dans l’ensemble du formulaire.
 
 Il n'apparaît qu'à la soumission du formulaire et disparaît lorsque l’utilisateur corriges les erreurs remontées. Son contenu change au fur et à mesure que l'utilisateur corrige les erreurs.
 

@@ -26,7 +26,7 @@ Si un champ obligatoire n’est pas renseigné, une erreur sera remontée à la 
 
 Un champ inactif indique qu'un champ de saisie existe, mais qu'il n'est pas disponible dans ce contexte, à un instant donné. Cela peut être utilisé pour maintenir la continuité de la mise en page et indiquer qu'un champ peut devenir disponible ultérieurement.
 
-**⚠️**  Un champ inactif ne peut pas porter de Placeholder.
+**⚠️**  Un champ inactif ne peut pas porter de placeholder.
 
 ### Compteur de caractères
 
@@ -73,13 +73,11 @@ Le format de la donnée attendue permet de choisir entre les deux composants. Le
 - **Do** : Utilisons le Textarea pour la saisie d’un texte libre un peu long.
 - **Don't** : N’utilisons le Textfield que pour des saisies très courtes. Il est inadapté à des contenus sur plusieurs lignes.
 
-### **Textarea vs RichTextfield**
+### **Textarea vs Rich textfield**
 
-Si le contexte ne nécessite pas de pouvoir formater du texte (graisse, italique, tailles, etc.) alors il faut utiliser le composant Textarea. 
+Si le contexte ne nécessite pas de pouvoir formater du texte (graisse, italique, tailles, etc.) alors il faut utiliser le composant Textarea.
 
-Si le champ propose des balises, nous utilisons aussi le RichTextfield, même si le texte ne nécessite aucune mise en forme.
-
-- **Do** : Utilisons le RichTextfield lorsque l’utilisateur a besoin de mise en forme (gras, listes, liens…).
+- **Do** : Utilisons le Rich textfield lorsque l’utilisateur a besoin de mise en forme (gras, listes, liens…).
 - **Don't** : N'utilisons pas un Textarea si le contenu nécessite une structure ou une hiérarchie visuelle.
 
 ### Choisir une largeur appropriée

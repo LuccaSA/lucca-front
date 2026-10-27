@@ -67,29 +67,6 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 
 ### Notes de release (ZeroHeight)
 
-#### 22.0.6
-
-##### Fixed
-
-- `AI` buttons in success state now hide their label and icon, and only show the check mark.
-
-#### 22.0.0
-
-##### Fixed
-
-- Success checkmark is now centered on the `S` and `XS` sizes.
-- Icon of a loading button is no longer visible through the loader.
-
-#### 21.3.1
-
-##### Added
-
-- `disabled` input.
-
-##### Changed
-
-- A button in the `loading` state is now disabled automatically.
-
 #### 21.2.0
 
 ##### Added

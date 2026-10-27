@@ -14,12 +14,12 @@ De manière générale, le Clear n’apparaît que lorsqu’une valeur est saisi
 
 ### Textfield
 
-- **Do** : De manière générale, n'affichons pas le Clear dans les Textfield. Il est préférable de laisser l’utilisateur effacer sa saisie manuellement.
+- **Do** : De manière générale, n'affichons pas le Clear dans les Text field. Il est préférable de laisser l’utilisateur effacer sa saisie manuellement.
 - **Don't** : Ne surchargeons pas les formulaires avec des boutons Clear dans chaque champ. Cela alourdit visuellement l’interface, notamment lorsque le formulaire contient beaucoup de champs.
 - **Do** : Utilisons le Clear dans les champs de recherche. Il permet à l’utilisateur de réinitialiser facilement sa recherche.
 - **Don't** : N’utilisons pas de Clear dans un champ de recherche vide. Le bouton doit apparaître uniquement si une valeur est saisie.
 
-### DatePicker
+### Date picker
 
 - **Do** : Affichons le Clear uniquement si le champ est optionnel. Cela permet à l’utilisateur d'effacer la date.
 - **Don't** : Ne proposons pas de Clear si la date est obligatoire. L’utilisateur ne doit pas pouvoir effacer une date requise.

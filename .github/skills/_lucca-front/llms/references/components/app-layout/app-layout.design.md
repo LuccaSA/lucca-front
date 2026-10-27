@@ -8,11 +8,11 @@ Mots-clés : application, mise en page, structure
 
 ## Structure globale de l’application
 
-Le Layout de base d’une application Lucca, `AppLayout`, est composé de trois zones principales :
+Le layout de base d’une application Lucca, `AppLayout`, est composé de trois zones principales :
 
 * **Banner** : en-tête fixe et transverse à toutes les applications Lucca permettant de naviguer entre les différentes applications.
-* **SideNavigation** : menu de navigation latéral, fixe à gauche de l’écran permettant de naviguer entre les différentes sections d’une application.
-* **MainLayout** : zone principale de l’interface avec laquelle l’utilisateur interagit pour réaliser ses tâches.
+* **Side navigation** : menu de navigation latéral, fixe à gauche de l’écran permettant de naviguer entre les différentes sections d’une application.
+* **Main layout** : zone principale de l’interface avec laquelle l’utilisateur interagit pour réaliser ses tâches.
 
 ## Principes de construction du layout
 

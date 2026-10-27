@@ -60,12 +60,6 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 
 ### Notes de release (ZeroHeight)
 
-#### 22.0.0
-
-##### Removed
-
-- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
-
 #### 21.3.0
 
 ##### Added

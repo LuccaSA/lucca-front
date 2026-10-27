@@ -20,7 +20,7 @@ Un champ `readonly` est visible et non modifiable, mais il peut recevoir le focu
 
 Cet état est adapté pour afficher des données en lecture seule, comme des champs complétés automatiquement sur lesquels l'utilisateur n'a pas la main.
 
-Son apparence est la même que celle du champ `disabled`.
+Son apparence est la même que celle du champ disabled.
 
 ### Champ en présentation
 

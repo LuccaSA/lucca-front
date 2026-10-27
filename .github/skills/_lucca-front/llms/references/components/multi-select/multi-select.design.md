@@ -19,7 +19,6 @@
     - État vide
     - Chargement
     - États spécifiques
-    - Responsive
   - Règles d'utilisation
     - Checkbox ou Select
     - Affichage du label
@@ -69,12 +68,12 @@
 
 ### Placeholder
 
-Le Placeholder "**Sélectionner…**" est obligatoire. Il incite l'utilisateur à choisir une option dans le menu de sélection et disparaît une fois que l'utilisateur a fait son choix.
+Le placeholder "**Sélectionner…**" est obligatoire. Il incite l'utilisateur à choisir une option dans le menu de sélection et disparaît une fois que l'utilisateur a fait son choix.
 
-- **Do** : Utilisons seulement "Sélectionner…" comme Placeholder dans les Select.
-- **Don't** : N’utilisons pas de Placeholder pour indiquer un état vide dans un Select.
-- **Don't** : Nous n’indiquons pas l'objet de la sélection dans le Placeholder du Select.
-- **Don't** : Le Placeholder "Sélectionner…" est obligatoire dans un Select.
+- **Do** : Utilisons seulement "Sélectionner…" comme placeholder dans les Select.
+- **Don't** : N’utilisons pas de placeholder pour indiquer un état vide dans un Select.
+- **Don't** : Nous n’indiquons pas l'objet de la sélection dans le placeholder du Select.
+- **Don't** : Le placeholder "Sélectionner…" est obligatoire dans un Select.
 
 ### Champ désactivé
 
@@ -82,12 +81,12 @@ Un champ désactivé indique que l’utilisateur ne peut pas interagir avec : il
 
 Un Tooltip doit s'afficher au survol, indiquant à l'utilisateur les raisons de cet état.
 
-- **Don't** : Un champ désactivé vide ne doit pas afficher de Placeholder.
+- **Don't** : Un champ désactivé vide ne doit pas afficher de placeholder.
 - **Don't** : Un champ désactivé rempli ne doit pas afficher de Clear. L'utilisateur ne peut pas interagir avec le champ.
 
 ### Faux indicateur de sélection
 
-Dans les formulaires de paramétrage, le composant SelectMultiple est fréquemment utilisé comme un filtre pour délimiter des populations (établissements, départements, métiers, qualifications, etc.).
+Dans les formulaires de paramétrage, le composant Select Multiple est fréquemment utilisé comme un filtre pour délimiter des populations (établissements, départements, métiers, qualifications, etc.).
 
 Si **aucune option n'est sélectionnée**, toutes les options disponibles sont implicitement considérées comme sélectionnées. Cette règle est essentielle pour garantir que le filtre n'exclut aucune donnée par défaut.
 
@@ -151,7 +150,7 @@ La recherche se fait directement dans le champ de saisie. Le menu déroulant se 
 
 Par défaut, lorsque l'utilisateur sélectionne une option, la recherche se réinitialise et le menu déroulant affiche l’ensemble des options.
 
-Une option`keepSearchAfterSelection` permet de ne pas réinitialiser la recherche après la sélection.
+Une option `keepSearchAfterSelection` permet de ne pas réinitialiser la recherche après la sélection.
 
 C'est intéressant pour des données comme les métiers ou les qualifications, quand l'utilisateur peut vouloir sélectionner plusieurs options correspondants à sa recherche.
 
@@ -179,10 +178,6 @@ Si un message d'aide était présent, le texte du message d'erreur doit fournir 
 
 Il est possible que certaines alertes ou erreurs soient liées à une ou plusieurs options sélectionnées par l'utilisateur. Dans ce cas, la Chip correspondant à cette valeur porte le feedback d'alerte ou d'erreur (couleur + icône).
 
-### Responsive
-
-Sur petit écran, le menu déroulant est remplacé par une Dialog en mode `sheet` à l'ouverture du Select.
-
 ## Règles d'utilisation
 
 ### Checkbox ou Select
@@ -199,17 +194,17 @@ Utilisons un groupe de Checkbox plutôt qu’un Select lorsque :
 
 ### Affichage du label
 
-Chaque Select doit avoir un Label. Un Select sans label est ambigu et non accessible.
+Chaque Select doit avoir un label. Un Select sans label est ambigu et non accessible.
 
-- **Do** : Affichons systématiquement un Label aux champs de formulaire.
-- **Don't** : Un Select sans Label est ambigu et non accessible.
+- **Do** : Affichons systématiquement un label aux champs de formulaire.
+- **Don't** : Un Select sans label est ambigu et non accessible.
 
 ### Choisir une largeur appropriée
 
 La largeur doit être basée sur la grille de construction d'un formulaire et prendre la largeur maximale possible (4 colonnes). De manière générale, le champ doit prendre la plus grande largeur possible sur l’interface.
 
-- **Do** : Le SelectMultiple doit utiliser toute la largeur disponible dans un formulaire, soit les 4 colonnes de la grille de construction.
-- **Don't** : N'affichons pas un SelectMultiple sur 1, 2 ou 3 colonnes. Le rendu n'est pas optimal pour afficher les options sélectionnées.
+- **Do** : Le Select multiple doit utiliser toute la largeur disponible dans un formulaire, soit les 4 colonnes de la grille de construction.
+- **Don't** : N'affichons pas un Select multiple sur 1, 2 ou 3 colonnes. Le rendu n'est pas optimal pour afficher les options sélectionnées.
 
 ### **Largeur du menu déroulant**
 

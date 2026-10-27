@@ -89,12 +89,6 @@ import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing'
 
 ### Notes de release (ZeroHeight)
 
-#### 22.0.0
-
-##### Removed
-
-- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
-
 #### 21.2.0
 
 ##### Added

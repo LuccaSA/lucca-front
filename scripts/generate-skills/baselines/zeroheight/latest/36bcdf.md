@@ -1,11 +1,11 @@
 ---
-title: NewBadge
+title: New badge
 description: Ce composant permet d’indiquer une fonctionnalité comme étant nouvelle dans la navigation de l’application.
 ---
 
 # Angular
 
-## NewBadge Angular
+## New badge Angular
 
 Mots-clés : nouveau, nouveauté
 
@@ -41,7 +41,7 @@ N'affichons jamais plus de 2 intitulés de badge différents sur un même menu d
 
 # HTML
 
-## NewBadge HTML
+## New badge HTML
 
 Classe CSS : `.newBadge`
 
@@ -53,7 +53,7 @@ Classe CSS : `.newBadge`
 
 # Changelog
 
-## NewBadge changelog
+## New badge changelog
 
 ### 19.3.0
 

@@ -70,34 +70,6 @@ import { SegmentedControlFilterComponent, SegmentedControlComponent } from '@luc
 
 ### Notes de release (ZeroHeight)
 
-#### 22.1.0
-
-##### Changed
-
-- Icons are displayed in small size in a `small` segmented control.
-
-#### 22.0.5
-
-##### Added
-
-- `ariaLabel` input to give the group of options an accessible name.
-
-##### Changed
-
-- `lu-segmented-control` now has the `radiogroup` role, and `lu-segmented-control-filter` no longer has the `listitem` role.
-
-#### 22.0.6
-
-##### Fixed
-
-- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
-
-#### 22.0.0
-
-##### Changed
-
-- A segmented control nested in a `lu-filter-bar` now adapts its style to the filter bar.
-
 #### 21.3.0
 
 ##### Added

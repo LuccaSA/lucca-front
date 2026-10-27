@@ -61,12 +61,6 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 
 ### Notes de release (ZeroHeight)
 
-#### 21.4.1
-
-##### Fixed
-
-- Empty footer content no longer takes space.
-
 #### 21.3.0
 
 ##### Added

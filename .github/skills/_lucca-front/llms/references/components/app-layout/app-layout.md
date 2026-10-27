@@ -55,15 +55,6 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 - `lu-app-layout` component (`appLayout`) to lay out an application shell, with the `[appLayoutBanner]` and `[appLayoutNavSide]` content slots.
 - `mobileNavSideBottom` input to move the navigation side to the bottom of the screen on mobile (`mod-mobileNavSideBottom`).
 
-#### 22.0.0
-
-##### Added
-
-- `bubblesStartEnd` and `bubblesEndStart` inputs (`1`, `2` or `3`) to display decorative bubbles in the corresponding corner.
-- `illustrationStartEnd` and `illustrationEndStart` inputs to display a predefined illustration from `MAIN_LAYOUT_ILLUSTRATION_START_END` or `MAIN_LAYOUT_ILLUSTRATION_END_START`, or one supplied by an absolute HTTPS or root-relative URL.
-- `palette` and `responsive` (`wideM`) inputs.
-- `LU_MAIN_LAYOUT_INSTANCE` token and the layout types are now publicly exported.
-
 #### 21.1.2
 
 ##### Fixed

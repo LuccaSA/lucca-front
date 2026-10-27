@@ -1,15 +1,5 @@
 # fileupload — Code & Implementation
 
-**Sommaire**
-
-- Angular
-- Mise en place
-  - Utilisation
-  - Single File Upload
-  - Layout of the entries
-  - Details
-  - Basic
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-file-fileupload-angular-basic--docs)
 
 ## Angular
@@ -35,20 +25,6 @@ will be emitted per file.
 Then, you'll just need to manage the upload of these files via LuccaFiles for most cases.
 
 Once the files are sent, the display management changes depending on the approach, single or multi.
-
-### Single File Upload
-
-Just like the multi variant, you render the `lu-file-entry` yourself, as a sibling of
-`lu-single-file-upload` rather than projected inside it. The single variant only ever holds one
-file, so once it's uploaded you hide the dropzone and show the entry in its place — you own that
-toggle, the component does not do it for you.
-
-### Layout of the entries
-
-`lu-file-entry-wrapper` (from `@lucca-front/ng/file-upload`) is the container laying out the
-`lu-file-entry`. It replaces the former `fileEntryDisplayWrapper` CSS class, collapses itself when it holds no entry,
-and handles the spacing with a preceding `lu-form-field` containing a file upload. Use it in both the single and the
-multi variants.
 
 ### Details
 

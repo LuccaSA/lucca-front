@@ -1,19 +1,5 @@
 # bubble-icon
 
-**Sommaire**
-
-- Import
-- Basic Usage
-- API Reference
-  - BubbleIconComponent (component)
-  - Injection tokens
-- Type definitions
-- Related files
-- Changelog
-  - 22.1.0
-  - 22.0.0
-  - Notes de release (ZeroHeight)
-
 ## Import
 
 ```typescript
@@ -77,23 +63,6 @@ import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 ~ `palette` : Palette | DecorativePalette → Palette | DecorativePalette | ProductPalette
 
 ### Notes de release (ZeroHeight)
-
-#### 22.1.0
-
-##### Added
-
-- The `random` bubble direction is drawn from the `LU_RANDOM` injection token (`@lucca-front/ng/core`).
-- `LU_BUBBLE_ICON_DEFAULT_DIRECTION` injection token to change the default value of the `bubbleDirection` input, which stays `random` when it is not provided — e.g. a fixed direction keeps visual regression screenshots stable.
-
-#### 22.0.0
-
-##### Added
-
-- `palette` input now accepts the product palettes (`pagga`, `poplee`, `coreHR`, `timmi`, `cleemy`, `cc`), in addition to the existing ones.
-
-##### Removed
-
-- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
 
 #### 21.3.0
 

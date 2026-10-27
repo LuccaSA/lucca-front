@@ -84,16 +84,6 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 
 ### Notes de release (ZeroHeight)
 
-#### 22.0.0
-
-##### Added
-
-- `plainText` input to preserve the line breaks of the comment content.
-
-##### Fixed
-
-- Separator before the date is no longer displayed when the author name is empty.
-
 #### 21.3.0
 
 ##### Fixed

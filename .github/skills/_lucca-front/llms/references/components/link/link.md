@@ -80,19 +80,6 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 
 ### Notes de release (ZeroHeight)
 
-#### 22.1.0
-
-##### Added
-
-- `neutral` input (`mod-neutral`) to render the link with the default text color instead of the link color.
-
-#### 21.4.1
-
-##### Fixed
-
-- Relative commands of `luLink` are now resolved against the current route, like `routerLink` does.
-- Application `baseHref` is now applied to the generated URL whatever the shape of the commands (string, array or `UrlTree`).
-
 #### 21.3.1
 
 ##### Fixed

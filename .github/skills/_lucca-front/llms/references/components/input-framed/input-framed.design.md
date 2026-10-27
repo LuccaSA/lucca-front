@@ -12,7 +12,7 @@
 
 ### Choix à enjeu ou impact fort
 
-On utilise l'InputFramed lorsque l’impact du choix sur le parcours utilisateur ou la logique métier est forte.
+On utilise l'Input framed lorsque l’impact du choix sur le parcours utilisateur ou la logique métier est forte.
 
 Dans ce contexte, **l’utilisation de l'Input framed en taille L**, plutôt que du composant Radio ou Checkbox, permet de :
 
@@ -22,23 +22,23 @@ Dans ce contexte, **l’utilisation de l'Input framed en taille L**, plutôt que
 
 ### Dans un formulaire
 
-Les InputFramed peuvent tout à fait être utilisés dans un formulaire contenant d’autres champs. Ils servent donc à appuyer l’importance de cette section du formulaire.
+Les Input framed peuvent tout à fait être utilisés dans un formulaire contenant d’autres champs. Ils servent donc à appuyer l’importance de cette section du formulaire.
 
 Nous privilégions **une utilisation du composant en taille M** pour ce cas d'usage. Cela permet de ne pas alourdir le formulaire.
 
-**⚠️**  Un formulaire ne doit comporter qu’une seule question utilisant des InputFramed pour éviter d’alourdir le formulaire visuellement. **Il doit être utilisé pour mettre en avant une question importante**.
+**⚠️**  Un formulaire ne doit comporter qu’une seule question utilisant des Input framed pour éviter d’alourdir le formulaire visuellement. **Il doit être utilisé pour mettre en avant une question importante**.
 
 ## Options
 
 ### Icône
 
-L'InputFramed propose un espace dans sa partie droite pour y afficher une icône ou une image (logo, illustration spécifique fournit par l’équipe Brand) si celle-ci est pertinente et porteuse de sens.
+L'Input framed propose un espace dans sa partie droite pour y afficher une icône ou une image (logo, illustration spécifique fournit par l’équipe Brand) si celle-ci est pertinente et porteuse de sens.
 
 ### Tag
 
 Les options peuvent porter un Tag, notamment pour indiquer une option recommandée ou une catégorie. Ce Tag est positionnée près du label et :
 
-* porte la couleur `Product` s'il n'y en a qu'un seul,
+* porte la couleur Product s'il n'y en a qu'un seul,
 * utilise les couleurs Decoratives s'il est utilisé pour catégoriser les options.
 
 ### Informations supplémentaires
@@ -49,7 +49,7 @@ Il est possible d’afficher du contenu supplémentaire permettant de donner plu
 
 ### Formulaire contextuel
 
-L'inputFramed, une fois sélectionné, peut s’étendre pour présenter des champs supplémentaires.
+L'input framed, une fois sélectionné, peut s’étendre pour présenter des champs supplémentaires.
 
 **⚠️**  Ne peut pas être cumulé avec l’option “Informations supplémentaires”.
 
@@ -71,11 +71,11 @@ Il est possible de sélectionner ou non une valeur par défaut en fonction du co
 
 ### Champ en erreur
 
-Un message d'erreur s'affiche lorsque le champ est indiqué comme obligatoire et qu’aucune option n’est sélectionnée. Les InputFramed portent alors la couleur `Critical`.
+Un message d'erreur s'affiche lorsque le champ est indiqué comme obligatoire et qu’aucune option n’est sélectionnée. Les Input framed portent alors la couleur Critical.
 
 ### Disposition
 
-L'InputFramed peut être disposé selon plusieurs orientations en fonction du contexte et de l’espace disponible, en suivant les recommandations liées au composant Fieldset :
+L'Input framed peut être disposé selon plusieurs orientations en fonction du contexte et de l’espace disponible, en suivant les recommandations liées au composant Fieldset :
 
 * **disposition verticale** pour une utilisation au sein d’un formulaire,
 * **disposition horizontale** quand les options sont visuellement simples et équilibrées ou quand on veut un rendu plus compact (dans un maximum de 4 par ligne),
@@ -85,7 +85,7 @@ L’espacement entre les options est de 12px, aussi bien horizontalement que ver
 
 - **Do** : Nous utilisons la disposition verticale si le choix d’une option déclenche un formulaire contextuel.
 - **Don't** : Nous n’utilisons pas la disposition en grille si le choix d’une option déclenche un formulaire contextuel.
-- **Do** : En disposition grille, la hauteur de tous les InputFramed disposés sur une même ligne doit être la même.
+- **Do** : En disposition grille, la hauteur de tous les Input framed disposés sur une même ligne doit être la même.
 
 # Content
 

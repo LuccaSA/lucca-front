@@ -85,35 +85,6 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 
 ### Notes de release (ZeroHeight)
 
-#### 22.1.0
-
-##### Added
-
-- `width` input to size the input itself, using the form field width scale, including the new `10` value.
-
-##### Changed
-
-- `inputElementRef()` is now typed as non-nullable; calling it before the view is rendered throws instead of returning `undefined`.
-
-#### 22.0.6
-
-##### Fixed
-
-- Clearing an input bound with `[formField]` (signal forms) now resets its value instead of throwing `this.ngControl.reset is not a function`.
-- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
-
-#### 22.0.0
-
-##### Added
-
-- `minlength` and `maxlength` inputs, forwarded to the native field.
-
-#### 21.4.1
-
-##### Fixed
-
-- Clear button can now be triggered with the keyboard.
-
 #### 21.3.1
 
 ##### Fixed

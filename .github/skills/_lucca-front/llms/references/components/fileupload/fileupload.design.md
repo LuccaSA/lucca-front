@@ -26,6 +26,8 @@
 
 **Des questions, commentaires ou retours ?**Laisser un commentaire sur Figma ou contactez-nous sur Slack :*#design-system-public*
 
+/
+
 ## Anatomie
 
 Le composant est disponible en deux tailles :
@@ -37,7 +39,7 @@ Le composant est disponible en deux tailles :
 
 ### Formulaire
 
-Utilisé dans un formulaire, le composant FileUpload nécessite un bouton de validation en bas du formulaire. La **taille** **`S`** est a privilégier pour gagner en densité.
+Utilisé dans un formulaire, le composant File upload nécessite un bouton de validation en bas du formulaire. La **taille** **`S`** est a privilégier pour gagner en densité.
 
 Lorsque l’import de fichier est l’élément central d’une interface ou d’un formulaire, il est possible d’utiliser la **taille** **`M`** pour lui donner plus d’importance. Il peut aussi être positionné sur la gauche du formulaire.
 
@@ -71,7 +73,7 @@ Si le champ est obligatoire et que l'utilisateur n’a importé aucun fichier, l
 
 En cas de fichier protégé, l’utilisateur doit saisir et valider le mot de passe avant de pouvoir soumettre le formulaire.
 
-Une fois le mot de passe validé, le Fieldset contextuel disparait. Si le mot de passe saisi est erroné, un message d’erreur s’affiche sous le champ.
+Une fois le mot de passe validé, le fieldset contextuel disparait. Si le mot de passe saisi est erroné, un message d’erreur s’affiche sous le champ.
 
 ### Parcours d’analyse de document
 
@@ -83,7 +85,7 @@ Des informations supplémentaires peuvent être demandées, ce cas d’usage se 
 
 ## Illustrations
 
-Le FileUpload utilise les BubbleIllustrations, permettant de guider l’utilisateur en illustrant clairement la zone d’upload et dynamiser l’interface pour rendre l’action plus engageante.
+Le File upload utilise les Bubble Illustrations, permettant de guider l’utilisateur en illustrant clairement la zone d’upload et dynamiser l’interface pour rendre l’action plus engageante.
 
 Cette illustration peut être modifiée en fonction de la nature des fichiers à importer (photographie, justificatif de dépense, archive, bulletins de paie, etc.).
 

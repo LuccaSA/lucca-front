@@ -17,7 +17,6 @@
     - Chargement
     - États spécifiques
     - Débordement
-    - Responsive
   - Règles d'utilisation
     - Radio ou Select
     - Affichage du label
@@ -73,10 +72,10 @@
 
 Le placeholder "**Sélectionner…**" est obligatoire. Il incite l'utilisateur à choisir une option dans le menu de sélection et disparaît une fois que l'utilisateur a fait son choix.
 
-- **Do** : Utilisons seulement "Sélectionner…" comme Placeholder dans les Select.
-- **Don't** : N’utilisons pas de Placeholder pour indiquer un état vide dans un Select.
-- **Don't** : Nous n’indiquons pas l'objet de la sélection dans le Placeholder du Select.
-- **Don't** : Le Placeholder "Sélectionner…" est obligatoire dans un Select.
+- **Do** : Utilisons seulement "Sélectionner…" comme placeholder dans les Select.
+- **Don't** : N’utilisons pas de placeholder pour indiquer un état vide dans un Select.
+- **Don't** : Nous n’indiquons pas l'objet de la sélection dans le placeholder du Select.
+- **Don't** : Le placeholder "Sélectionner…" est obligatoire dans un Select.
 
 ### Champ désactivé
 
@@ -84,7 +83,7 @@ Un champ désactivé indique que l’utilisateur ne peut pas interagir avec : il
 
 Un Tooltip doit s'afficher au survol, indiquant à l'utilisateur les raisons de cet état.
 
-- **Don't** : Un champ désactivé vide ne doit pas afficher de Placeholder.
+- **Don't** : Un champ désactivé vide ne doit pas afficher de placeholder.
 - **Don't** : Un champ désactivé rempli ne doit pas afficher de Clear. L'utilisateur ne peut pas interagir avec le champ.
 
 ### Regroupements d'options
@@ -166,10 +165,6 @@ Lorsque le nom d’une option sélectionnée est trop long, le texte est tronqu�
 
 Le texte est tout de même visible dans son entièreté à l’intérieur du menu déroulant. Dans le cas d’un Select peu large, le menu déroulant peut avoir une largeur plus importante si les options qu’il contient sont longues. La largeur maximal du menu déroulant est de 560px.
 
-### Responsive
-
-Sur petit écran, le menu déroulant est remplacé par une Dialog en mode `sheet` à l'ouverture du Select.
-
 ## Règles d'utilisation
 
 ### Radio ou Select
@@ -189,10 +184,10 @@ Utilisez des Radio plutôt qu’un Select lorsque :
 
 ### Affichage du label
 
-Chaque Select doit avoir un Label. Un Select sans Label est ambigu et non accessible.
+Chaque Select doit avoir un label. Un Select sans label est ambigu et non accessible.
 
-- **Do** : Affichons systématiquement un Label aux champs de formulaire.
-- **Don't** : Un Select sans Label est ambigu et non accessible.
+- **Do** : Affichons systématiquement un label aux champs de formulaire.
+- **Don't** : Un Select sans label est ambigu et non accessible.
 
 ### Choisir une largeur appropriée
 

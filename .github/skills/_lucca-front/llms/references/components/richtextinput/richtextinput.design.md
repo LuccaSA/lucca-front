@@ -24,10 +24,6 @@ La liste des balises est définie et personnalisées en fonction du contexte.
 
 Lorsque la liste des balises disponibles est trop longue pour être affichée intégralement, il est possible d'afficher un bouton d'ajout de balise permettant à l'utilisateur d'accéder à toutes les balises via une liste déroulante et un champ de recherche.
 
-Dès qu'un champ propose des balises, nous utilisons le RichTextfield, même sans mise en forme du texte. Dans ce cas, nous masquons la barre d'outils.
-
-- **Do** : Utilisons le RichTextfield pour proposer des balises, même lorsque le texte ne nécessite aucune mise en forme.
-
 ### Mention d’un collaborateur (non disponible pour le moment)
 
 Un bouton “@” permet de mentionner un collaborateur. La mention s’affiche au format “@Prénom” dans le corps de texte.
@@ -38,13 +34,13 @@ Il est aussi possible de mentionner une personne en écrivant “@” dans le co
 
 ### Styles de texte
 
-Les styles de texte sont définis par le composant TextFlow. Les styles appliquées seront les styles utilisés lorsque le texte sera affiché dans un autre contexte (WYSIWYG : “What you see is what you get”).
+Les styles de texte sont définis par le composant Text flow. Les styles appliquées seront les styles utilisés lorsque le texte sera affiché dans un autre contexte (WYSIWYG : “What you see is what you get”).
 
 ### Redimensionnement
 
 #### Hauteur par défaut
 
-La hauteur du RichTextfield est fixe par défaut. Cette hauteur correspond à 3 lignes de texte (hauteur minimale) mais peut-être personnalisée en fonction du contexte.
+La hauteur du Rich textfield est fixe par défaut. Cette hauteur correspond à 3 lignes de texte (hauteur minimale) mais peut-être personnalisée en fonction du contexte.
 
 Lorsque le contenu est plus long, une barre de scroll s’affiche dans le composant permettant ainsi à l’utilisateur de consulter l’entièreté du message.
 
@@ -56,7 +52,7 @@ L’utilisateur ne pourra pas donner une hauteur plus petite que celle par défa
 
 #### Redimensionnement automatique
 
-Dans certains contexte, il est possible d’activer cette option. Le RichTextfield se redimensionne automatiquement lorsque l’utilisateur saisit son texte.
+Dans certains contexte, il est possible d’activer cette option. Le Rich textfield se redimensionne automatiquement lorsque l’utilisateur saisit son texte.
 
 ### Champ en erreur
 
@@ -68,10 +64,8 @@ Le message d'erreur s'affiche lorsque les exigences du champ ne sont pas remplie
 
 Si le contexte ne nécessite pas de pouvoir formater du texte (graisse, italique, tailles, etc.) alors il faut utiliser le composant Textarea.
 
-Si le champ propose des balises, nous utilisons aussi le RichTextfield, même si le texte ne nécessite aucune mise en forme.
-
-- **Do** : Utilisons le RichTextfield lorsqu'il est intéressant pour l'utilisateur de mettre son texte en forme.
-- **Don't** : N'utilisons pas le RichTextfield si aucune mise en forme du contenu n'est nécessaire.
+- **Do** : Utilisons le Rich textfield lorsqu'il est intéressant pour l'utilisateur de mettre son texte en forme.
+- **Don't** : N'utilisons pas le Rich textfield si aucune mise en forme du contenu n'est nécessaire.
 
 ### Choisir une largeur appropriée
 
@@ -79,8 +73,8 @@ La largeur doit être basée sur la grille et prendre la largeur maximale possib
 
 De manière générale, le champ doit prendre la plus grande largeur possible sur l’interface.
 
-- **Do** : Utilisons la largeur maximale disponible pour afficher le RichTextfield. Cette largeur sera de 640px dans le cas d'un formulaire.
-- **Don't** : Si le RichTextfield n'est pas assez large, il est difficile pour l'utilisateur de saisir et éditer son texte comme il le souhaite. De plus, certaines fonctionnalités risquent d'être masquées dans la barre d'outils.
+- **Do** : Utilisons la largeur maximale disponible pour afficher le Rich textfield. Cette largeur sera de 640px dans le cas d'un formulaire.
+- **Don't** : Si le Rich textfield n'est pas assez large, il est difficile pour l'utilisateur de saisir et éditer son texte comme il le souhaite. De plus, certaines fonctionnalités risquent d'être masquées dans la barre d'outils.
 
 # Content
 

@@ -10,7 +10,7 @@ Les Cards sont généralement organisées sous la forme de rectangles blancs ave
 
 ## Interactivité
 
-Par définition, une Card est un lien permettant d’accéder à une ressource. Ce lien doit changer l’URL de l’application, que ce soit dans une dialog, un panel ou une nouvelle page. L’interaction avec la Card doit donc mettre en avant son comportement cliquable.
+Par définition, une Card est un lien permettant d’accéder à une ressource. Ce lien doit changer l’URL de l’application, que ce soit dans une modal, un panel ou une nouvelle page. L’interaction avec la Card doit donc mettre en avant son comportement cliquable.
 
 Deux points principaux à retenir :
 

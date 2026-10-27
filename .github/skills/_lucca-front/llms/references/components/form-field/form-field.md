@@ -113,39 +113,6 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 
 ### Notes de release (ZeroHeight)
 
-#### 22.1.0
-
-##### Added
-
-- `10` value for the `width` input (`FORM_FIELD_WIDTH`).
-
-##### Fixed
-
-- An `luInput` element destroyed while its form field stays (e.g. swapped by an `@if`) is now unregistered, so its stale ids no longer pile up in `aria-labelledby`.
-
-#### 22.0.5
-
-##### Added
-
-- `luInputLabelledBy` and `luInputDescribedBy` inputs on `luInput` to add ids to the ones provided by the form field, instead of binding `aria-labelledby` or `aria-describedby`, which the form field would override.
-
-##### Fixed
-
-- `aria-describedby` of the input only references the inline message when it is displayed.
-- Fieldset legend is no longer hidden from screen readers when `hiddenLabel` is set.
-
-#### 22.0.0
-
-##### Changed
-
-- `standalone` input of `luInput` (`luInputStandalone`) is now a signal input.
-
-#### 21.3.1
-
-##### Added
-
-- `pl` translations for the Polish locale.
-
 #### 21.3.0
 
 ##### Added

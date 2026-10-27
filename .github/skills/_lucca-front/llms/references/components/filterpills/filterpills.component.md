@@ -4,7 +4,7 @@
 
 ## Angular
 
-🧩 Les FilterPills sont conçus pour être utilisés au sein d'une FilterBar. Cette dernière couvre notamment les besoins d'ajout de filtre et de recherche.
+🧩 Les Filter Pills sont conçus pour être utilisés au sein d'une Filter Bar. Cette dernière couvre notamment les besoins d'ajout de filtre et de recherche.
 
 Component selector : `lu-filter-pill`
 

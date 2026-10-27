@@ -1,18 +1,5 @@
 # box
 
-**Sommaire**
-
-- Import
-- Basic Usage
-- API Reference
-  - BoxComponent (component)
-  - Injection tokens
-- Related files
-- Changelog
-  - 22.0.5
-  - 22.0.0
-  - Notes de release (ZeroHeight)
-
 ## Import
 
 ```typescript
@@ -75,12 +62,6 @@ import { BoxComponent } from '@lucca-front/ng/box';
 ~ `withArrow` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
-
-#### 22.0.0
-
-##### Removed
-
-- `mod-grey` variant — use `mod-neutral` instead.
 
 #### 21.3.1
 
