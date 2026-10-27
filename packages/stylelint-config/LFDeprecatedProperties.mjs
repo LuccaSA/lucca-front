@@ -335,11 +335,8 @@ export default [
 		],
 		versionDeleted: '20.1.0',
 		actions: `
-			* \`*-fontSize\` ⇒ \`*-font\`
-			* \`*-lineHeight\` ⇒ \`*-font\`
-			* \`*FontSize\` ⇒ \`*Font\`
-			* \`*LineHeight\` ⇒ \`*Font\`
-			* \`*-weight\` ⇒ \`*-font\`
+			* \`*-(fontSize|lineHeight|weight)\` ⇒ \`*-font\`
+			* \`*(FontSize|LineHeight)\` ⇒ \`*Font\`
 		`,
 	},
 	{

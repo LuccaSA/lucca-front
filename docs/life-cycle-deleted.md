@@ -686,11 +686,8 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>20.1.0</td>
 			<td>
 				<ul>
-				<li><code>*-fontSize</code> ⇒ <code>*-font</code></li>
-				<li><code>*-lineHeight</code> ⇒ <code>*-font</code></li>
-				<li><code>*FontSize</code> ⇒ <code>*Font</code></li>
-				<li><code>*LineHeight</code> ⇒ <code>*Font</code></li>
-				<li><code>*-weight</code> ⇒ <code>*-font</code></li>
+				<li><code>*-(fontSize|lineHeight|weight)</code> ⇒ <code>*-font</code></li>
+				<li><code>*(FontSize|LineHeight)</code> ⇒ <code>*Font</code></li>
 				</ul>
 			</td>
 		</tr>
