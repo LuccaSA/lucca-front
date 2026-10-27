@@ -35,7 +35,7 @@ export class ActivityFeedStepComponent {
 	readonly user = input<ILuUser | null>(null);
 
 	/**
-	 * Displays a placeholder avatar, with or without `user`
+	 * Displays a placeholder avatar instead of the `user` one
 	 */
 	readonly avatarPlaceholder = input(false, { transform: luBooleanAttribute });
 

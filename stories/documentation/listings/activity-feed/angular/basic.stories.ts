@@ -81,7 +81,7 @@ export default {
 		},
 		avatarPlaceholder: {
 			control: 'boolean',
-			description: 'Affiche un avatar placeholder, avec ou sans `user` (ex. auteur anonyme).',
+			description: 'Affiche un avatar placeholder à la place de celui du `user` (ex. auteur anonyme).',
 			table: { category: 'inputs (activity-feed-step)' },
 		},
 		status: {
