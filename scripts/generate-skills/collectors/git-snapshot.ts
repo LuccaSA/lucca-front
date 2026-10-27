@@ -65,7 +65,7 @@ function readThresholdEnv(fallback: number): number {
 }
 
 /** Top-level trees the collectors read from a tag. A path outside them is never snapshotted. */
-const PATHSPECS = ['packages/ng', 'packages/scss', 'stories'];
+const PATHSPECS = ['packages/ng', 'packages/prisme', 'packages/icons', 'packages/scss', 'stories'];
 
 const readCounts = new Map<string, number>();
 /** `(tag, pathspec)` → extraction root, or null once archiving has failed for it. */
