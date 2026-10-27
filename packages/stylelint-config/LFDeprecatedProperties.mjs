@@ -23,18 +23,18 @@ export default [
 		],
 		versionDeleted: '15.1.0',
 		actions: `
-			* \`--breakpoints-*-breakAt\` ⇒ point de rupture en majuscules (\`l\` ⇒ \`L\`)
-			* \`--commons-box-shadow-*\` ⇒ \`--commons-boxShadow-*\` en majuscules
-			* \`--commons-box-shadow-hard\` ⇒ \`--commons-boxShadow-XXS\`
-			* \`--spacings-*\` ⇒ échelle en majuscules :
-				* \`reset\` ⇒ \`0\`
-				* \`smallest\` ⇒ \`XXS\`
-				* \`smaller\` ⇒ \`XS\`
-				* \`small\` ⇒ \`S\`
-				* \`standard\` ⇒ \`M\`
-				* \`big\` ⇒ \`L\`
-				* \`bigger\` ⇒ \`XL\`
-				* \`biggest\` ⇒ \`XXL\`
+			* \`--breakpoints-*-breakAt\` => point de rupture en majuscules (\`l\` => \`L\`)
+			* \`--commons-box-shadow-*\` => \`--commons-boxShadow-*\` en majuscules
+			* \`--commons-box-shadow-hard\` => \`--commons-boxShadow-XXS\`
+			* \`--spacings-*\` => échelle en majuscules :
+				* \`reset\` => \`0\`
+				* \`smallest\` => \`XXS\`
+				* \`smaller\` => \`XS\`
+				* \`small\` => \`S\`
+				* \`standard\` => \`M\`
+				* \`big\` => \`L\`
+				* \`bigger\` => \`XL\`
+				* \`biggest\` => \`XXL\`
 		`,
 	},
 	{
@@ -78,9 +78,9 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`*-grey-*\` ⇒ \`*-neutral-*\`
-			* \`*-(primary|secondary)-*\` ⇒ \`*-product-*\`
-			* \`*-lucca-*\` ⇒ \`*-brand-*\`
+			* \`*-grey-*\` => \`*-neutral-*\`
+			* \`*-(primary|secondary)-*\` => \`*-product-*\`
+			* \`*-lucca-*\` => \`*-brand-*\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
@@ -139,14 +139,14 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 		actions: `
-			* \`--spacings-*\` ⇒ \`--pr-t-spacings-*\`
-			* \`*XXS\` ⇒ \`*50\`
-			* \`*XS\` ⇒ \`*100\`
-			* \`*S\` ⇒ \`*200\`
-			* \`*M\` ⇒ \`*300\`
-			* \`*L\` ⇒ \`*400\`
-			* \`*XL\` ⇒ \`*600\`
-			* \`*XXL\` ⇒ \`*800\`
+			* \`--spacings-*\` => \`--pr-t-spacings-*\`
+			* \`*XXS\` => \`*50\`
+			* \`*XS\` => \`*100\`
+			* \`*S\` => \`*200\`
+			* \`*M\` => \`*300\`
+			* \`*L\` => \`*400\`
+			* \`*XL\` => \`*600\`
+			* \`*XXL\` => \`*800\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-spacing',
@@ -185,7 +185,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/dd76138530436ecabe4f4752836a0f5e4cd14517/packages/scss/src/commons/config.scss#L8.
 		objectPattern: /--palettes-(\w+-)?text(?![\w-])/,
 		versionDeprecated: '18.2.0',
-		actions: `\`*text\` ⇒ \`*0\``,
+		actions: `\`*text\` => \`*0\``,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
 		},
@@ -211,10 +211,10 @@ export default [
 		versionDeprecated: '18.2.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`--colors-white-color\` ⇒
+			* \`--colors-white-color\` =>
 				* couleur : \`--palettes-neutral-0\`
 				* surface : \`--pr-t-elevation-surface-raised\`
-			* \`--colors-black-color\` ⇒ \`--palettes-neutral-900\`
+			* \`--colors-black-color\` => \`--palettes-neutral-900\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
@@ -235,8 +235,8 @@ export default [
 		objectPattern: /--components-container-(max-width|padding)(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		actions: `
-			* \`--components-container-max-width\` ⇒ \`--commons-container-maxWidth\`
-			* \`--components-container-padding\` ⇒ \`--commons-container-padding\`
+			* \`--components-container-max-width\` => \`--commons-container-maxWidth\`
+			* \`--components-container-padding\` => \`--commons-container-padding\`
 		`,
 	},
 	{
@@ -245,7 +245,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/0726fe674636af589d3b14f641d67723f20ff890/packages/ng/schematics/tokens-typo/index.ts#L21.
 		objectPattern: /--commons-font-family(-brand|-cursive)?(?![\w-])/,
 		versionDeprecated: '20.1.0',
-		actions: `\`--commons-*\` ⇒ \`--pr-t-*\``,
+		actions: `\`--commons-*\` => \`--pr-t-*\``,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-typo',
 		},
@@ -264,16 +264,16 @@ export default [
 		actions: `
 			[Tokens typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311) :
 
-			* \`*sizes-XXXL-*\` ⇒ aucun token équivalent
-			* \`*sizes-XXL-*\` ⇒ \`*pr-t-font-heading-1-*\`
-			* \`*sizes-XL-*\` ⇒ \`*pr-t-font-heading-2-*\`
-			* \`*sizes-L-*\` ⇒ \`*pr-t-font-heading-3-*\`
-			* \`*sizes-M-*\` ⇒
+			* \`*sizes-XXXL-*\` => aucun token équivalent
+			* \`*sizes-XXL-*\` => \`*pr-t-font-heading-1-*\`
+			* \`*sizes-XL-*\` => \`*pr-t-font-heading-2-*\`
+			* \`*sizes-L-*\` => \`*pr-t-font-heading-3-*\`
+			* \`*sizes-M-*\` =>
 				* texte : \`*pr-t-font-body-M-*\`
 				* titre : \`*pr-t-font-heading-4-*\`
-			* \`*sizes-S-*\` ⇒ \`*pr-t-font-body-S-*\`
-			* \`*sizes-XS-*\` ⇒ \`*pr-t-font-body-XS-*\`
-			* \`--sizes-*-verticalPadding\` ⇒ tokens \`--pr-t-spacings-*\`
+			* \`*sizes-S-*\` => \`*pr-t-font-body-S-*\`
+			* \`*sizes-XS-*\` => \`*pr-t-font-body-XS-*\`
+			* \`--sizes-*-verticalPadding\` => tokens \`--pr-t-spacings-*\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-typo',
@@ -308,8 +308,8 @@ export default [
 		],
 		versionDeprecated: '20.1.0',
 		actions: `
-			* \`*-fontSize\` ⇒ \`*-font\`
-			* \`*-lineHeight\` ⇒ \`*-font\`
+			* \`*-fontSize\` => \`*-font\`
+			* \`*-lineHeight\` => \`*-font\`
 		`,
 	},
 	{
@@ -325,8 +325,8 @@ export default [
 		],
 		versionDeleted: '20.1.0',
 		actions: `
-			* \`*-(fontSize|lineHeight|weight)\` ⇒ \`*-font\`
-			* \`*(FontSize|LineHeight)\` ⇒ \`*Font\`
+			* \`*-(fontSize|lineHeight|weight)\` => \`*-font\`
+			* \`*(FontSize|LineHeight)\` => \`*Font\`
 		`,
 	},
 	{
@@ -357,10 +357,10 @@ export default [
 		actions: `
 			Avec \`*\` = \`--commons-borderRadius\` :
 
-			* \`*-M\` ⇒ \`--pr-t-border-radius-50\`
-			* \`*-L\` ⇒ \`--pr-t-border-radius-100\`
-			* \`*-XL\` ⇒ \`--pr-t-border-radius-150\`
-			* \`*-full\` ⇒ \`--pr-t-border-radius-full\`
+			* \`*-M\` => \`--pr-t-border-radius-50\`
+			* \`*-L\` => \`--pr-t-border-radius-100\`
+			* \`*-XL\` => \`--pr-t-border-radius-150\`
+			* \`*-full\` => \`--pr-t-border-radius-full\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-radius',
@@ -397,11 +397,11 @@ export default [
 		objectPattern: /--components-dropdown-(max-height|max-width|min-width|option-action(Background|Color|Events)|optionColor)(?![\w-])/,
 		versionDeleted: '20.3.0',
 		actions: `
-			* \`max-height\` ⇒ \`maxBlockSize\`
-			* \`max-width\` ⇒ \`maxInlineSize\`
-			* \`min-width\` ⇒ \`minInlineSize\`
-			* \`option-actionBackground\` ⇒ \`list-option-action-backgroundColor\`
-			* \`option-actionColor\` ⇒ \`list-option-action-color\`
+			* \`max-height\` => \`maxBlockSize\`
+			* \`max-width\` => \`maxInlineSize\`
+			* \`min-width\` => \`minInlineSize\`
+			* \`option-actionBackground\` => \`list-option-action-backgroundColor\`
+			* \`option-actionColor\` => \`list-option-action-color\`
 			* \`option-actionEvents\` et \`optionColor\` : sans remplacement
 		`,
 	},
@@ -456,7 +456,7 @@ export default [
 		objectPattern: /--components-richTextField-(resize|height|minHeight|maxHeight)(?![\w-])/,
 		versionDeprecated: '21.2.0',
 		actions: `
-			\`--components-richTextField-*\` ⇒ \`--components-richTextField-content-*\`
+			\`--components-richTextField-*\` => \`--components-richTextField-content-*\`
 		`,
 	},
 	{
@@ -550,21 +550,21 @@ export default [
 		actions: `
 			Avec \`*\` = \`--components-fancyBox\` :
 
-			* \`*-offsetInline\` ⇒ \`*-content-foregroundStartEnd-insetInlineEnd\`
-			* \`*-offsetBlock\` ⇒ \`*-content-foregroundStartEnd-insetBlockStart\`
-			* \`*-imageWidth\` ⇒ \`*-content-foregroundStartEnd-inlineSize\`
-			* \`*-imageHeight\` ⇒ \`*-content-foregroundStartEnd-blockSize\`
+			* \`*-offsetInline\` => \`*-content-foregroundStartEnd-insetInlineEnd\`
+			* \`*-offsetBlock\` => \`*-content-foregroundStartEnd-insetBlockStart\`
+			* \`*-imageWidth\` => \`*-content-foregroundStartEnd-inlineSize\`
+			* \`*-imageHeight\` => \`*-content-foregroundStartEnd-blockSize\`
 
 			Images :
 
 			* Angular : input de \`lu-fancy-box\` :
-				* \`*-background-left\` ⇒ \`backgroundEndStart\`
-				* \`*-background-right\` ⇒ \`backgroundStartEnd\`
-				* \`*-foreground\` ⇒ \`foregroundStartEnd\`
+				* \`*-background-left\` => \`backgroundEndStart\`
+				* \`*-background-right\` => \`backgroundStartEnd\`
+				* \`*-foreground\` => \`foregroundStartEnd\`
 			* HTML : SVG dans un enfant de \`.fancyBox-content\` :
-				* \`*-background-left\` ⇒ \`.fancyBox-content-backgroundEndStart\`
-				* \`*-background-right\` ⇒ \`.fancyBox-content-backgroundStartEnd\`
-				* \`*-foreground\` ⇒ \`.fancyBox-content-foregroundStartEnd\`
+				* \`*-background-left\` => \`.fancyBox-content-backgroundEndStart\`
+				* \`*-background-right\` => \`.fancyBox-content-backgroundStartEnd\`
+				* \`*-foreground\` => \`.fancyBox-content-foregroundStartEnd\`
 		`,
 	},
 	{

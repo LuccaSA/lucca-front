@@ -129,7 +129,8 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* `*` stands for the unchanged prefix or suffix: `.u-*` becomes `.pr-u-*`.
 	* A leading `*` only when every item of the action shares one prefix: write full names otherwise.
 	* Names sharing a target group their varying part: `.icon-color-(primary|secondary)` becomes `.icon-color-product`.
-	* Mappings use `⇒` as their arrow.
+	* Mappings use `=>` as their arrow.
+		* The docs show it as `⇒`.
 	* One name with several targets ends its line with the arrow.
 		* A sub-list of `label : value` items follows.
 	* A list of targets follows a `Remplacer par :` line.

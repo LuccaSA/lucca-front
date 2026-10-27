@@ -38,7 +38,7 @@ export default [
 			/\.mod-(stickyColumn-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)|layoutFixed-(xxxs|xxs|xs|s|m|l|xl|xxl|xxxl)(2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20))(?![\w-])/,
 		],
 		versionDeleted: '15.1.0',
-		actions: `Écrire le point de rupture en majuscules (\`l\` ⇒ \`L\`), puis appliquer les dépréciations suivantes du composant.`,
+		actions: `Écrire le point de rupture en majuscules (\`l\` => \`L\`), puis appliquer les dépréciations suivantes du composant.`,
 	},
 	{
 		// Status component
@@ -90,9 +90,9 @@ export default [
 		versionDeprecated: '16.2.0',
 		versionDeleted: '18.1.0',
 		actions: `
-			* \`.button-counter\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge)
-			* \`.navSide-item-alert\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou [New badge](https://prisme.lucca.io/94310e217/p/36bcdf-new-badge)
-			* \`.lu-select-value .label\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou le sous-composant dédié de Select Multiple
+			* \`.button-counter\` => [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge)
+			* \`.navSide-item-alert\` => [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou [New badge](https://prisme.lucca.io/94310e217/p/36bcdf-new-badge)
+			* \`.lu-select-value .label\` => [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou le sous-composant dédié de Select Multiple
 		`,
 	},
 	{
@@ -221,16 +221,16 @@ export default [
 		objectPattern: /(?=[^\s>+~]*\.button(?![\w-]))(?=[^\s>+~]*\.(disabled|error|loading|mod-link|mod-outline|success)(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '17.3.0',
 		actions: `
-			* \`.disabled\` ⇒
+			* \`.disabled\` =>
 				* sélecteur : \`.is-disabled\`
 				* input Angular : \`disabled\`
-			* \`.(error|loading|success)\` ⇒
+			* \`.(error|loading|success)\` =>
 				* sélecteur : \`.is-*\`
 				* input Angular : \`state="*"\`
-			* \`.mod-link\` ⇒
+			* \`.mod-link\` =>
 				* sélecteur : \`.mod-ghost\`
 				* input Angular : \`luButton="ghost"\`
-			* \`.mod-outline\` ⇒
+			* \`.mod-outline\` =>
 				* sélecteur : \`.mod-outlined\`
 				* input Angular : \`luButton="outlined"\`
 		`,
@@ -271,8 +271,8 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '19.1.0',
 		actions: `
-			* \`.u-comma\` ⇒ virgules dans le HTML, pour l’accessibilité
-			* \`.u-unit\` ⇒ aucun remplacement, à reprendre côté produit si nécessaire
+			* \`.u-comma\` => virgules dans le HTML, pour l’accessibilité
+			* \`.u-unit\` => aucun remplacement, à reprendre côté produit si nécessaire
 		`,
 	},
 	{
@@ -315,9 +315,9 @@ export default [
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`*-grey\` ⇒ \`*-neutral\`
-			* \`*-(primary|secondary)\` ⇒ \`*-product\`
-			* \`*-lucca\` ⇒ \`*-brand\`
+			* \`*-grey\` => \`*-neutral\`
+			* \`*-(primary|secondary)\` => \`*-product\`
+			* \`*-lucca\` => \`*-brand\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
@@ -354,9 +354,9 @@ export default [
 		objectPattern: [/\.u-textLeft(?![\w-])/, /\.u-textCenter(?![\w-])/, /\.u-textRight(?![\w-])/],
 		versionDeprecated: '17.4.0',
 		actions: `
-			* \`.u-text*\` ⇒ \`.pr-u-textAlign*\`
-			* \`*Left\` ⇒ \`*Start\`
-			* \`*Right\` ⇒ \`*End\`
+			* \`.u-text*\` => \`.pr-u-textAlign*\`
+			* \`*Left\` => \`*Start\`
+			* \`*Right\` => \`*End\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/alignment-utilities',
@@ -395,14 +395,14 @@ export default [
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
 		actions: `
-			* \`.u-*\` ⇒ \`.pr-u-*\`
-			* \`*XXS\` ⇒ \`*50\`
-			* \`*XS\` ⇒ \`*100\`
-			* \`*S\` ⇒ \`*200\`
-			* \`*M\` ⇒ \`*300\`
-			* \`*L\` ⇒ \`*400\`
-			* \`*XL\` ⇒ \`*600\`
-			* \`*XXL\` ⇒ \`*800\`
+			* \`.u-*\` => \`.pr-u-*\`
+			* \`*XXS\` => \`*50\`
+			* \`*XS\` => \`*100\`
+			* \`*S\` => \`*200\`
+			* \`*M\` => \`*300\`
+			* \`*L\` => \`*400\`
+			* \`*XL\` => \`*600\`
+			* \`*XXL\` => \`*800\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/tokens-spacing',
@@ -415,8 +415,8 @@ export default [
 		objectPattern: /(?=[^\s>+~]*\.loading(?![\w-]))(?=[^\s>+~]*\.mod-(dialog|sidePanel)(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '18.1.0',
 		actions: `
-			* \`*dialog\` ⇒ \`*popin\`
-			* \`*sidePanel\` ⇒ \`*drawer\`
+			* \`*dialog\` => \`*popin\`
+			* \`*sidePanel\` => \`*drawer\`
 		`,
 	},
 	{
@@ -468,8 +468,8 @@ export default [
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 		actions: `
-			* \`.user-info\` & \`.user-tile*\` ⇒ [User tile](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/00d3d8) : composant Angular ou [classes HTML](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/771576)
-			* \`.picture\` ⇒ [Avatar](https://prisme.lucca.io/94310e217/p/42b330-avatar/b/915f82)
+			* \`.user-info\` & \`.user-tile*\` => [User tile](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/00d3d8) : composant Angular ou [classes HTML](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/771576)
+			* \`.picture\` => [Avatar](https://prisme.lucca.io/94310e217/p/42b330-avatar/b/915f82)
 		`,
 	},
 	{
@@ -528,8 +528,8 @@ export default [
 		actions: `
 			Segmented control :
 
-			* \`.viewTabs*\` ⇒ \`.segmentedControl*\`
-			* \`*-item-tab\` ⇒ \`*-item-action\`
+			* \`.viewTabs*\` => \`.segmentedControl*\`
+			* \`*-item-tab\` => \`*-item-action\`
 		`,
 	},
 	{
@@ -595,7 +595,7 @@ export default [
 		// SEE https://regex101.com/r/w7DSuO.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/24575bdd120778f19e0cbb2b47ffc9b6e4491bba/packages/scss/src/commons/core.scss#L12.
 		objectPattern: [
-			// Espacements : `Top` ⇒ `BlockStart`, `Right` ⇒ `InlineEnd`, `Bottom` ⇒ `BlockEnd`, `Left` ⇒ `InlineStart`
+			// Espacements : `Top` => `BlockStart`, `Right` => `InlineEnd`, `Bottom` => `BlockEnd`, `Left` => `InlineStart`
 			/\.pr-u-margin(Top|Right|Bottom|Left)(Auto|0|25|50|75|100|150|200|250|300|400|500|600|700|800)(?![\w-])/,
 			/\.pr-u-padding(Top|Right|Bottom|Left)(0|25|50|75|100|150|200|250|300|400|500|600|700|800)(?![\w-])/,
 			/\.pr-u-border(Top|Right|Bottom|Left)0(?![\w-])/,
@@ -604,10 +604,10 @@ export default [
 		actions: `
 			Utilitaires logiques :
 
-			* \`*Top*\` ⇒ \`*BlockStart*\`
-			* \`*Bottom*\` ⇒ \`*BlockEnd*\`
-			* \`*Left*\` ⇒ \`*InlineStart*\`
-			* \`*Right*\` ⇒ \`*InlineEnd*\`
+			* \`*Top*\` => \`*BlockStart*\`
+			* \`*Bottom*\` => \`*BlockEnd*\`
+			* \`*Left*\` => \`*InlineStart*\`
+			* \`*Right*\` => \`*InlineEnd*\`
 		`,
 	},
 	{
@@ -648,8 +648,8 @@ export default [
 		objectPattern: /(?=[^\s>+~]*\.horizontalNavigation-list-item-action(?![\w-]))(?=[^\s>+~]*\.(active|disabled)(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '19.3.0',
 		actions: `
-			* \`.active\` ⇒ \`.is-active\`
-			* \`.disabled\` ⇒ \`.is-disabled\`
+			* \`.active\` => \`.is-active\`
+			* \`.disabled\` => \`.is-disabled\`
 		`,
 	},
 	{
@@ -660,8 +660,8 @@ export default [
 		versionDeprecated: '20.1.0',
 		versionDeleted: '20.2.0',
 		actions: `
-			* XS, S & M : \`.u-text*\` ⇒ \`.pr-u-body*\`
-			* L ~ XXXL ⇒
+			* XS, S & M : \`.u-text*\` => \`.pr-u-body*\`
+			* L ~ XXXL =>
 				* utilitaire de titre : \`.pr-u-hx\`
 				* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
 
@@ -690,7 +690,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/utils/index.scss#L497.
 		objectPattern: /\.pr-u-(inset|top|bottom|left|right)Reset(?![\w-])/,
 		versionDeprecated: '20.2.0',
-		actions: `\`*Reset\` ⇒ \`*0\``,
+		actions: `\`*Reset\` => \`*0\``,
 	},
 	{
 		// `.pr-u-` names of the entry above, still shipping
@@ -699,9 +699,9 @@ export default [
 		objectPattern: /\.pr-u-text(Left|Center|Right)(?![\w-])/,
 		versionDeprecated: '20.2.0',
 		actions: `
-			* \`*text*\` ⇒ \`*textAlign*\`
-			* \`*Left\` ⇒ \`*Start\`
-			* \`*Right\` ⇒ \`*End\`
+			* \`*text*\` => \`*textAlign*\`
+			* \`*Left\` => \`*Start\`
+			* \`*Right\` => \`*End\`
 		`,
 	},
 	{
@@ -720,20 +720,20 @@ export default [
 		objectPattern: [
 			// Coins : pas d’utilitaire logique, utiliser les tokens `--pr-t-border-radius-*`
 			/\.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius[A-Z]\w*(?![\w-])/,
-			// Alignement, float & clear : `Left` ⇒ `Start` / `InlineStart`, `Right` ⇒ `End` / `InlineEnd`
+			// Alignement, float & clear : `Left` => `Start` / `InlineStart`, `Right` => `End` / `InlineEnd`
 			/\.pr-u-(textAlign|float|clear)(Left|Right)(?![\w-])/,
 		],
 		versionDeprecated: '20.2.0',
 		actions: `
 			Utilitaires logiques :
 
-			* \`.pr-u-textAlignLeft\` ⇒ \`.pr-u-textAlignStart\`
-			* \`.pr-u-textAlignRight\` ⇒ \`.pr-u-textAlignEnd\`
-			* \`.pr-u-floatLeft\` ⇒ \`.pr-u-floatInlineStart\`
-			* \`.pr-u-floatRight\` ⇒ \`.pr-u-floatInlineEnd\`
-			* \`.pr-u-clearLeft\` ⇒ \`.pr-u-clearInlineStart\`
-			* \`.pr-u-clearRight\` ⇒ \`.pr-u-clearInlineEnd\`
-			* Coins physiques ⇒ tokens \`--pr-t-border-radius-*\`.
+			* \`.pr-u-textAlignLeft\` => \`.pr-u-textAlignStart\`
+			* \`.pr-u-textAlignRight\` => \`.pr-u-textAlignEnd\`
+			* \`.pr-u-floatLeft\` => \`.pr-u-floatInlineStart\`
+			* \`.pr-u-floatRight\` => \`.pr-u-floatInlineEnd\`
+			* \`.pr-u-clearLeft\` => \`.pr-u-clearInlineStart\`
+			* \`.pr-u-clearRight\` => \`.pr-u-clearInlineEnd\`
+			* Coins physiques => tokens \`--pr-t-border-radius-*\`.
 		`,
 	},
 	{
@@ -743,8 +743,8 @@ export default [
 		objectPattern: /\.pr-u-text(XS|S|M|L|XL|XXL|XXXL)(?![\w-])/,
 		versionDeprecated: '20.2.0',
 		actions: `
-			* XS, S & M : \`*text*\` ⇒ \`*body*\`
-			* L ~ XXXL ⇒
+			* XS, S & M : \`*text*\` => \`*body*\`
+			* L ~ XXXL =>
 				* utilitaire de titre : \`.pr-u-hx\`
 				* token : [token typographie](https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311)
 		`,
@@ -778,10 +778,10 @@ export default [
 		],
 		versionDeprecated: '20.2.0',
 		actions: `
-			* \`.mod-text\` ⇒
+			* \`.mod-text\` =>
 				* sélecteur : \`.mod-ghost\`
 				* input Angular : \`luButton="ghost"\` ou \`luButton="ghost-invert"\`
-			* \`.mod-delete\` ⇒
+			* \`.mod-delete\` =>
 				* sélecteur : \`.mod-critical\`
 				* input Angular : \`critical\`
 		`,
@@ -796,9 +796,9 @@ export default [
 		],
 		versionDeprecated: '20.2.0',
 		actions: `
-			* \`*Radius(M|L)\` ⇒ \`*RadiusDefault\`
-			* \`*RadiusXL\` ⇒ \`*RadiusStructure\`
-			* Coins ⇒ tokens \`--pr-t-border-radius-*\`.
+			* \`*Radius(M|L)\` => \`*RadiusDefault\`
+			* \`*RadiusXL\` => \`*RadiusStructure\`
+			* Coins => tokens \`--pr-t-border-radius-*\`.
 		`,
 	},
 	{
@@ -871,8 +871,8 @@ export default [
 		objectPattern: /\.fancyBox-content-box(-foreground)?(?![\w-])/,
 		versionDeleted: '21.0.0',
 		actions: `
-			* \`.fancyBox-content-box\` ⇒ \`.fancyBox-content\`
-			* \`.fancyBox-content-box-foreground\` ⇒ \`.fancyBox-content-foreground\`, elle-même dépréciée en 22.1.0
+			* \`.fancyBox-content-box\` => \`.fancyBox-content\`
+			* \`.fancyBox-content-box-foreground\` => \`.fancyBox-content-foreground\`, elle-même dépréciée en 22.1.0
 		`,
 	},
 	{
@@ -948,11 +948,11 @@ export default [
 		versionDeprecated: '21.0.0',
 		versionDeleted: '22.0.0',
 		actions: `
-			* \`*Grey\` ⇒
+			* \`*Grey\` =>
 				* neutre : \`*Neutral\`
 				* défaut : \`*\`
-			* \`*(Primary|Secondary)\` ⇒ \`*Product\`
-			* \`*Lucca\` ⇒ \`*Brand\`
+			* \`*(Primary|Secondary)\` => \`*Product\`
+			* \`*Lucca\` => \`*Brand\`
 		`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
@@ -1008,10 +1008,10 @@ export default [
 		],
 		versionDeprecated: '21.2.0',
 		actions: `
-			* \`.active\` ⇒ \`.is-active\`
-			* \`.disabled\` ⇒ \`.is-disabled\`
-			* \`.error\` ⇒ \`.is-error\`
-			* \`.success\` ⇒ \`.is-success\`
+			* \`.active\` => \`.is-active\`
+			* \`.disabled\` => \`.is-disabled\`
+			* \`.error\` => \`.is-error\`
+			* \`.success\` => \`.is-success\`
 		`,
 	},
 	{
@@ -1047,8 +1047,8 @@ export default [
 		objectPattern: [/\.palette-AI(?![\w-])/, /\.pr-u-colorTextAI(?![\w-])/],
 		versionDeleted: '21.3.0',
 		actions: `
-			* \`.palette-AI\` ⇒ \`.palette-orchid\`
-			* \`.pr-u-colorTextAI\` ⇒ \`.pr-u-colorTextOrchid\`
+			* \`.palette-AI\` => \`.palette-orchid\`
+			* \`.pr-u-colorTextAI\` => \`.pr-u-colorTextOrchid\`
 		`,
 	},
 	{
@@ -1069,8 +1069,8 @@ export default [
 		actions: `
 			Passer en camelCase :
 
-			* \`*-start0\` ⇒ \`*Start0\`
-			* \`*-end0\` ⇒ \`*End0\`
+			* \`*-start0\` => \`*Start0\`
+			* \`*-end0\` => \`*End0\`
 		`,
 	},
 	{
@@ -1324,7 +1324,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/config.scss#L9.
 		objectPattern: /\.u-[a-zA-Z]/,
 		versionDeprecated: '20.2.0',
-		actions: `\`.u-*\` ⇒ \`.pr-u-*\``,
+		actions: `\`.u-*\` => \`.pr-u-*\``,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/class-prefix',
 		},

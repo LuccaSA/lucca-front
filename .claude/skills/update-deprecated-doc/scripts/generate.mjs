@@ -155,7 +155,12 @@ const write = (path, keep) => {
 		section('Variables CSS', pick(properties.filter((e) => !e.name)), nom),
 		section('Mixins', pick(scss.filter((e) => !e.name)), nom),
 	];
-	writeFileSync(path, `${read(path).split('## Composants')[0].trimEnd()}\n\n${sections.filter(Boolean).join('\n')}`);
+	// The sources write their mapping arrows `=>`: the docs show them as `⇒`.
+	const body = sections
+		.filter(Boolean)
+		.join('\n')
+		.replace(/ =&gt;(?= |<)/g, ' ⇒');
+	writeFileSync(path, `${read(path).split('## Composants')[0].trimEnd()}\n\n${body}`);
 };
 write('docs/life-cycle.md', false);
 write('docs/life-cycle-deleted.md', true);

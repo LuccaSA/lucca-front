@@ -19,10 +19,6 @@
   table :is(th, td) {
     vertical-align: baseline !important;
   }
-
-  td > :is(ol, ul) {
-    list-style-position: outside !important;
-  }
 </style>
 
 ## Composants
