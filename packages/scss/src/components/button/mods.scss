@@ -16,9 +16,10 @@
 		@include numericBadge.M;
 	}
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-button-font-size: var(--pr-t-font-body-M-fontSize);
 	--components-button-line-height: var(--pr-t-font-body-M-lineHeight);
+	// stylelint-enable property-disallowed-list
 }
 
 @mixin S {
@@ -33,9 +34,10 @@
 		@include numericBadge.S;
 	}
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-button-font-size: var(--pr-t-font-body-S-fontSize);
 	--components-button-line-height: var(--pr-t-font-body-S-lineHeight);
+	// stylelint-enable property-disallowed-list
 
 	// status icon
 	&::after {
@@ -57,9 +59,10 @@
 		@include numericBadge.XS;
 	}
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-button-font-size: var(--pr-t-font-body-XS-fontSize);
 	--components-button-line-height: var(--pr-t-font-body-XS-lineHeight);
+	// stylelint-enable property-disallowed-list
 
 	// status icon
 	&::after {

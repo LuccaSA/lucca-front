@@ -406,21 +406,21 @@
 		@extend %clearfix;
 	}
 
-	// clear is deprecated
-	.pr-u-clearBoth,
-	.pr-u-clear {
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-clear.
+	.pr-u-clear,
+	.pr-u-clearBoth {
 		@extend %clearBoth;
 	}
 
-	// clearLeft is deprecated
-	.pr-u-clearInlineStart,
-	.pr-u-clearLeft {
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-clearLeft.
+	.pr-u-clearLeft,
+	.pr-u-clearInlineStart {
 		@extend %clearInlineStart;
 	}
 
-	// clearRight is deprecated
-	.pr-u-clearInlineEnd,
-	.pr-u-clearRight {
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-clearRight.
+	.pr-u-clearRight,
+	.pr-u-clearInlineEnd {
 		@extend %clearInlineEnd;
 	}
 
@@ -460,13 +460,13 @@
 		@extend %h4;
 	}
 
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 	.pr-u-h5 {
-		// Deprecated
 		@extend %h5;
 	}
 
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 	.pr-u-h6 {
-		// Deprecated
 		@extend %h6;
 	}
 
@@ -482,33 +482,33 @@
 		@extend %bodyXS;
 	}
 
-	// textLeft is deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 	.pr-u-textLeft {
 		@extend %textLeft;
 	}
 
-	// textRight is deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 	.pr-u-textRight {
 		@extend %textRight;
 	}
 
-	// textCenter is deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 	.pr-u-textCenter {
 		@extend %textCenter;
 	}
 
-	// textLight is deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 	.pr-u-textLight {
 		@extend %textLight;
 	}
 
-	// textPlaceholder is deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-textPlaceholder.
 	.pr-u-textPlaceholder,
 	.pr-u-colorInputTextPlaceholder {
 		@extend %textPlaceholder;
 	}
 
-	// textDefault is deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 	.pr-u-textDefault {
 		@extend %textDefault;
 	}
@@ -642,9 +642,9 @@
 
 	@each $direction in core.$boxDirection {
 		@if $direction == '' {
-			// insetReset is deprecated
-			.pr-u-inset0,
-			.pr-u-insetReset {
+			// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-insetReset.
+			.pr-u-insetReset,
+			.pr-u-inset0 {
 				@extend %inset0;
 			}
 		} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
@@ -662,8 +662,8 @@
 	@include core.palettes;
 	@include core.borderRadiusTokens;
 
-	// Deprecated .u- utilities
 	// Delete when all utilities are prefixed in .pr-u-
+	// stylelint-disable selector-disallowed-list -- Deprecated .u- utilities.
 	@if config.$deprecatedUtilityPrefix {
 		[class*='u-animated'] {
 			@extend %animatedAll;
@@ -757,22 +757,18 @@
 			@extend %bodyXS;
 		}
 
-		// stylelint-disable-next-line selector-disallowed-list -- textLeft is deprecated
 		.u-textLeft {
 			@extend %textLeft;
 		}
 
-		// stylelint-disable-next-line selector-disallowed-list -- textRight is deprecated
 		.u-textRight {
 			@extend %textRight;
 		}
 
-		// stylelint-disable-next-line selector-disallowed-list -- textCenter is deprecated
 		.u-textCenter {
 			@extend %textCenter;
 		}
 
-		// stylelint-disable-next-line selector-disallowed-list -- textLight is deprecated
 		.u-textLight {
 			@extend %textLight;
 		}
@@ -841,4 +837,5 @@
 			}
 		}
 	}
+	// stylelint-enable selector-disallowed-list
 }

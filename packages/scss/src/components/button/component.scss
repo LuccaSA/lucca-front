@@ -14,8 +14,10 @@
 	inline-size: var(--components-button-width);
 	min-inline-size: var(--components-button-minWidth);
 	font: var(--components-button-font);
-	font-size: var(--components-button-font-size); // Deprecated
-	line-height: var(--components-button-line-height); // Deprecated
+	// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
+	font-size: var(--components-button-font-size);
+	line-height: var(--components-button-line-height);
+	// stylelint-enable declaration-property-value-disallowed-list
 	font-weight: var(--pr-t-font-fontWeight-semibold);
 	gap: var(--components-button-gap);
 	pointer-events: var(--components-button-pointerEvents);
@@ -42,7 +44,7 @@
 		display: block;
 	}
 
-	// deprecated
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 	.button-icon {
 		@include icon.M;
 	}
@@ -55,6 +57,7 @@
 	}
 
 	&:hover {
+		// stylelint-disable-next-line declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 		--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
 		--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
 	}

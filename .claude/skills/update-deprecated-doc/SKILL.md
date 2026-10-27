@@ -72,6 +72,13 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 		* "Utilitaires renommés très utilisés" stays: no token shows how much it is used.
 		* "Utilitaires de taille" goes: `.u-text(S|XS|M|L|…)` shows it.
 * One source object makes one doc row: merge objects to merge rows.
+* A new entry makes `npm run lint:style` flag the SCSS of LF itself: silence it where that SCSS is the deprecated code.
+	* A folder that is deprecated as a whole joins the override of the root `stylelint.config.mjs`.
+	* A deprecated section of a live file takes a block disable, a single line a `next-line` one.
+		* Stylelint ignores a comment inside a selector list: put the deprecated selector first.
+	* The reason reads `Deprecated.` on deprecated code, `Deprecated. Kept for consumer overrides.` on a live usage of it.
+		* A selector mixing live and deprecated tokens names the deprecated ones: `Deprecated: .viewTabs.`.
+	* A live reference to a deprecated token outside those cases stays visible: it is residual usage to migrate.
 * A class emitted by LF HTML for structural consistency without SCSS is not a deprecation.
 	* Its rule may not exist while the component template emits it.
 	* It gets no entry.

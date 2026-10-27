@@ -1,29 +1,34 @@
 @mixin XXXL {
 	--components-title-font: 900 2.25rem/2.5rem var(--pr-t-font-family-brand);
+	// stylelint-disable-next-line property-disallowed-list, declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 	--sizes-verticalPadding: var(--sizes-XXXL-verticalPadding);
 }
 
 @mixin h1 {
 	--components-title-font: var(--pr-t-font-heading-1);
-	--sizes-verticalPadding: var(--sizes-XXL-verticalPadding); // Deprecated
+	// stylelint-disable-next-line property-disallowed-list, declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
+	--sizes-verticalPadding: var(--sizes-XXL-verticalPadding);
 }
 
 @mixin h2 {
 	--components-title-font: var(--pr-t-font-heading-2);
-	--sizes-verticalPadding: var(--sizes-XL-verticalPadding); // Deprecated
+	// stylelint-disable-next-line property-disallowed-list, declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
+	--sizes-verticalPadding: var(--sizes-XL-verticalPadding);
 }
 
 @mixin h3 {
 	--components-title-font: var(--pr-t-font-heading-3);
-	--sizes-verticalPadding: var(--sizes-L-verticalPadding); // Deprecated
+	// stylelint-disable-next-line property-disallowed-list, declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
+	--sizes-verticalPadding: var(--sizes-L-verticalPadding);
 }
 
 @mixin h4 {
 	--components-title-font: var(--pr-t-font-heading-4);
-	--sizes-verticalPadding: var(--sizes-M-verticalPadding); // Deprecated
+	// stylelint-disable-next-line property-disallowed-list, declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
+	--sizes-verticalPadding: var(--sizes-M-verticalPadding);
 }
 
-// Deprecated
+// stylelint-disable property-disallowed-list, declaration-property-value-disallowed-list -- Deprecated.
 @mixin h5 {
 	--components-title-font: 600 var(--pr-t-font-fontSize-175) / var(--pr-t-font-lineHeight-250) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-S-verticalPadding);
@@ -33,6 +38,7 @@
 	--components-title-font: 600 var(--pr-t-font-fontSize-150) / var(--pr-t-font-lineHeight-200) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-XS-verticalPadding);
 }
+// stylelint-enable property-disallowed-list, declaration-property-value-disallowed-list
 
 @mixin elementAfterText {
 	display: flex;

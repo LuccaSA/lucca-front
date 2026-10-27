@@ -1,5 +1,6 @@
 // --components-gauge-height is deprecated
 @mixin vars {
+	// stylelint-disable-next-line declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 	--components-gauge-blockSize: var(--components-gauge-height, var(--pr-t-spacings-100));
 	--components-gauge-inlineSize: auto;
 	--components-gauge-background: var(--palettes-neutral-100);
