@@ -606,6 +606,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 				<ul>
 				<li><code>--breakpoints-*-breakAt</code> ⇒ point de rupture en majuscules (<code>l</code> ⇒ <code>L</code>)</li>
 				<li><code>--commons-box-shadow-*</code> ⇒ <code>--commons-boxShadow-*</code> en majuscules</li>
+				<li><code>--commons-box-shadow-hard</code> ⇒ <code>--commons-boxShadow-XXS</code></li>
 				<li><code>--spacings-*</code> ⇒ échelle en majuscules :<ul>
 				<li><code>reset</code> ⇒ <code>0</code></li>
 				<li><code>smallest</code> ⇒ <code>XXS</code></li>

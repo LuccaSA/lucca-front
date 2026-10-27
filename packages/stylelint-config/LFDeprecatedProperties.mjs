@@ -25,6 +25,7 @@ export default [
 		actions: `
 			* \`--breakpoints-*-breakAt\` ⇒ point de rupture en majuscules (\`l\` ⇒ \`L\`)
 			* \`--commons-box-shadow-*\` ⇒ \`--commons-boxShadow-*\` en majuscules
+			* \`--commons-box-shadow-hard\` ⇒ \`--commons-boxShadow-XXS\`
 			* \`--spacings-*\` ⇒ échelle en majuscules :
 				* \`reset\` ⇒ \`0\`
 				* \`smallest\` ⇒ \`XXS\`
