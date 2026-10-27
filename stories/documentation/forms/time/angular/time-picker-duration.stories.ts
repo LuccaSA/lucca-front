@@ -2,7 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { BASE_PICKER_SIZE, DurationPickerComponent, luDurationPickerTranslations } from '@lucca-front/ng/time';
+import { BASE_PICKER_SIZE, DURATION_PICKER_UNIT, DurationPickerComponent, luDurationPickerTranslations } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
@@ -86,14 +86,22 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description: 'Modifie le pas d’incrémentation.',
+			description: 'Modifie le pas d’incrémentation. En unité `days`, les pas prévus sont `P1D`, `P0.5D`, `P0.25D`, `P0.125D` et `P0.1D`.',
 			table: { category: 'inputs' },
 		},
 		max: {
 			control: {
 				type: 'text',
 			},
-			description: '[v21.1] Définit une valeur maximale.',
+			description: '[v21.1] Définit une valeur maximale. Par défaut `PT99H` en unité `hoursMinutes`, `P99D` en unité `days`.',
+			table: { category: 'inputs' },
+		},
+		unit: {
+			options: setStoryOptions(DURATION_PICKER_UNIT),
+			control: {
+				type: 'select',
+			},
+			description: '[v22.2] Bascule le champ entre heures/minutes et un unique champ comptant des jours.',
 			table: { category: 'inputs' },
 		},
 		presentation: {
@@ -137,7 +145,19 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 		displayArrows: false,
 		disabled: false,
 		presentation: false,
+		unit: 'hoursMinutes',
 		step: 'PT1M',
 		max: 'PT99H',
+	},
+};
+
+export const Days: StoryObj<DurationPickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
+	...Basic,
+	args: {
+		...Basic.args,
+		unit: 'days',
+		step: 'P0.5D',
+		max: 'P99D',
+		displayArrows: true,
 	},
 };

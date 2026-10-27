@@ -10,6 +10,8 @@ export type DurationPickerTranslations = {
 	timePickerHours: string;
 	timePickerTimeSeparator: string;
 	timePickerMinutes: string;
+	durationPickerDays: string;
+	durationPickerDaysUnit: string;
 };
 
 export const luDurationPickerTranslations: LuTranslation<DurationPickerTranslations> = Translations;

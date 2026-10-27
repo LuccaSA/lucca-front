@@ -1,3 +1,14 @@
+### 22.2.0
+
+#### Added
+
+- `lu-duration-picker`: new `unit` input. In `days` unit, the picker renders a single decimal field suffixed with the day unit, emits its value as a number of days (`P0.5D`), steps by `step` (`P1D`, `P0.5D`, `P0.25D`, `P0.125D` or `P0.1D`) and clamps the value between 0 and `max`.
+
+#### Changed
+
+- `lu-duration-picker`: `max` now defaults to `P99D` in `days` unit, `PT99H` in `hoursMinutes` unit as before.
+- `lu-duration-picker`: the `part` of a `durationChange` event whose source is `control` can now be `days`.
+
 ### 21.3.1
 
 #### Changed
