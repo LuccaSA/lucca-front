@@ -2,12 +2,10 @@
 	<div class="activityFeed-step-state mod-icon"><lu-icon [icon]="icon" /></div>
 } @else if (status() === "critical" || status() === "success") {
 	<div class="activityFeed-step-state" [class.mod-critical]="status() === 'critical'" [class.mod-success]="status() === 'success'"></div>
-} @else {
-	@if (user(); as user) {
-		<div class="activityFeed-step-avatar">
-			<lu-user-picture size="S" [user]="user" />
-		</div>
-	}
+} @else if (user() || avatarPlaceholder()) {
+	<div class="activityFeed-step-avatar">
+		<lu-user-picture size="S" [user]="user()" [placeholder]="avatarPlaceholder()" />
+	</div>
 }
 <div class="activityFeed-step-description">
 	@if (label(); as label) {

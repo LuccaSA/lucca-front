@@ -27,6 +27,7 @@ interface ActivityFeedBasicStory {
 	attachedContent: 'none' | 'file' | 'readMore';
 	addAction: boolean;
 	user: unknown;
+	avatarPlaceholder: boolean;
 	label: string;
 	status: ActivityFeedStepStatus | '';
 	datePipeFormat: string;
@@ -78,6 +79,11 @@ export default {
 			description: 'Permet de définir l’utilisateur présenté dans l’avatar (masqué pour les statuts `success` et `critical`).',
 			table: { category: 'inputs (activity-feed-step)', type: { summary: 'ILuUser' } },
 		},
+		avatarPlaceholder: {
+			control: 'boolean',
+			description: 'Affiche un avatar placeholder, avec ou sans `user` (ex. auteur anonyme).',
+			table: { category: 'inputs (activity-feed-step)' },
+		},
 		status: {
 			options: setStoryOptions(ACTIVITY_FEED_STEP_STATUS),
 			control: { type: 'select' },
@@ -123,7 +129,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ActivityFeedBasicStory, argTypes: ArgTypes): string {
-	const { label, status, datePipeFormat } = args;
+	const { label, avatarPlaceholder, status, datePipeFormat } = args;
 	const statusSteps = args.statusStep
 		? `
 	<lu-activity-feed-step status="success" [date]="date" label="Lorem ipsum dolor." />
@@ -181,7 +187,7 @@ function getTemplate(args: ActivityFeedBasicStory, argTypes: ArgTypes): string {
 	</lu-activity-feed-step>`
 		: '';
 	return `<lu-activity-feed>
-	<lu-activity-feed-step [user]="user" [date]="date"${generateInputs({ label, status, datePipeFormat }, argTypes)} />${attachedContentStep}${statusSteps}${pendingStep}${iconStep}${updatedStep}${addActionStep}
+	<lu-activity-feed-step [user]="user" [date]="date"${generateInputs({ label, avatarPlaceholder, status, datePipeFormat }, argTypes)} />${attachedContentStep}${statusSteps}${pendingStep}${iconStep}${updatedStep}${addActionStep}
 </lu-activity-feed>`;
 }
 
@@ -194,6 +200,7 @@ export const Basic: StoryObj<ActivityFeedBasicStory> = {
 	args: {
 		label: 'Lorem ipsum dolor.',
 		user: finn,
+		avatarPlaceholder: false,
 		status: '',
 		datePipeFormat: '',
 		statusStep: false,
