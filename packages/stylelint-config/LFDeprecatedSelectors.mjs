@@ -655,10 +655,8 @@ export default [
 	{
 		// SEE https://regex101.com/r/rOqMxE.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/commons/core.scss#L148.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/bf00a13340eaea7a433a3e64100204381d193676.
 		objectPattern: /\.u-text(XS|S|M|L|XL|XXL|XXXL)(?![\w-])/,
 		versionDeprecated: '20.1.0',
-		versionDeleted: '20.2.0',
 		actions: `
 			* XS, S & M : \`.u-text*\` => \`.pr-u-body*\`
 			* L ~ XXXL =>
