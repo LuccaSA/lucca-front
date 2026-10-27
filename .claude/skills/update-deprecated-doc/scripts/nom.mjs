@@ -35,6 +35,8 @@ const parseRegex = (src) => {
 		}
 	};
 	const quantify = ({ element, min, max, end }) => {
+		// Optional or repeated whitespace around a combinator shows as the one space of its canonical form.
+		if (element.type === 'CharacterSet' && element.kind === 'space' && !element.negate) return { lit: ' ' };
 		const node = convert(element);
 		if (!node || node === DIGITS) return node;
 		if (max === Infinity || node === OPEN) return OPEN;

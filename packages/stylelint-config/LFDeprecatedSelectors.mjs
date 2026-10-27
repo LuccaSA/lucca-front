@@ -86,7 +86,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5cb11aa50a56e8cbc844f5f683c91e50b429f6c4/packages/scss/src/components/navside/component.scss#L114.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/ac3cbedd153698001ffe054d81c8b97b7a1877ba/packages/ng/styles/definitions/select/_select-input.scss#L133.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
-		objectPattern: [/\.button-counter(?![\w-])/, /\.navSide-item-alert(?![\w-])/, /\.lu-select-value \.label(?![\w-])/],
+		objectPattern: [/\.button-counter(?![\w-])/, /\.navSide-item-alert(?![\w-])/, /\.lu-select-value\s+\.label(?![\w-])/],
 		versionDeprecated: '16.2.0',
 		versionDeleted: '18.1.0',
 		actions: `
@@ -371,7 +371,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/a268fb879d6a07eafcbf01a3f81558c74fb43ec6/packages/scss/src/components/breadcrumbs/index.scss#L13.
 		objectPattern: [
 			/(?=[^\s>+~]*\.breadcrumbs-list-item-action(?![\w-]))(?=[^\s>+~]*\.active(?![\w-]))[^\s>+~]*/,
-			/\.breadcrumbs-list-item > a\.active(?![\w-])/,
+			/\.breadcrumbs-list-item\s*>\s*a\.active(?![\w-])/,
 		],
 		versionDeprecated: '17.4.0',
 		actions: `Remplacer par \`.is-active\`.`,
@@ -1005,7 +1005,7 @@ export default [
 			/(?=[^\s>+~]*\.progress(?![\w-]))(?=[^\s>+~]*\.(error|success)(?![\w-]))[^\s>+~]*/,
 			/(?=[^\s>+~]*\.segmentedControl_panel(?![\w-]))(?=[^\s>+~]*\.active(?![\w-]))[^\s>+~]*/,
 			/(?=[^\s>+~]*\.tableOfContent-list-item-action(?![\w-]))(?=[^\s>+~]*\.disabled(?![\w-]))[^\s>+~]*/,
-			/\.tableOfContent-list-item > a\.disabled(?![\w-])/,
+			/\.tableOfContent-list-item\s*>\s*a\.disabled(?![\w-])/,
 		],
 		versionDeprecated: '21.2.0',
 		actions: `
