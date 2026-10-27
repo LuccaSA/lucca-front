@@ -17,7 +17,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/51bb17c582e21295003a3a2a10ca1bc735b306af/packages/ng/styles/definitions/user/user-tile.scss#L3.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/2940.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/3685.
-		objectPattern: /userTileStyle(?![\w-])/,
+		objectPattern: /(?<![\w-])userTileStyle(?![\w-])/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 		actions: `Remplacer par \`@forward '@lucca-front/scss/src/components/userTile'\`.`,
@@ -27,7 +27,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/51bb17c582e21295003a3a2a10ca1bc735b306af/packages/ng/styles/definitions/user/user-picture.scss#L5.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/3015.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/3685.
-		objectPattern: /userPicture(Style|Vars)(?![\w-])/,
+		objectPattern: /(?<![\w-])userPicture(Style|Vars)(?![\w-])/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 		actions: `Remplacer par \`@forward '@lucca-front/scss/src/components/avatar'\`.`,

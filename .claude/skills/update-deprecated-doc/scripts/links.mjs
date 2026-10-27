@@ -1,8 +1,8 @@
 // Links each Nom token to a GitHub code search of the org's consumers.
 import { comboRe } from './nom.mjs';
 
-// An element selector opens with the lookbehind `(?<![\w.#="'-])`: it keeps classes, ids and attribute values out.
-const elementStart = /^\(\?<!\[\\w\.#="'-\]\)/;
+// A token can open with a negative lookbehind, such as the `(?<![\w.#="'-])` of an element selector.
+const leadingGuard = /^\(\?<!\[[^\]]*\]\)/;
 // GitHub code search regexes have no lookaround: a token boundary is a non-token character or a line edge.
 const ghBefore = '(^|[^\\w-])';
 const ghAfter = '([^\\w-]|$)';
@@ -12,7 +12,7 @@ const ghToken = (src) =>
 	(src.startsWith('\\.') ? ghClassBefore : ghBefore) +
 	src
 		.replace(/^\\\./, '')
-		.replace(elementStart, '')
+		.replace(leadingGuard, '')
 		.replace(/\(\?!\[\\w-\]\)/g, ghAfter)
 		.replace(/\\b/g, ghAfter)
 		// `\@` in a Sass selector is a plain `@` in markup.
