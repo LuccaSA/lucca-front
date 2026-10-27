@@ -550,7 +550,7 @@ npm run skills:generate -- --ref HEAD --zh-latest 22.1
 npm run skills:update
 ```
 
-`--zh-latest` affirme que la mineure du dernier tag est la dernière en ligne sur ZeroHeight. Le run en ligne écrit aussi la documentation : seule compte celle du run hors ligne qui suit, que la CI compare.
+`--zh-latest` affirme que la mineure de la documentation (celle de `versions.json` : la mineure déclarée par `--minor`, sinon celle du dernier tag publié) est la dernière en ligne sur ZeroHeight. Le run en ligne écrit aussi la documentation : seule compte celle du run hors ligne qui suit, que la CI compare.
 
 ### Générer la documentation d'une release
 

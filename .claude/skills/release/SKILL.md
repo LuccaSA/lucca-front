@@ -112,20 +112,25 @@ Le hook pre-commit et la CI régénèrent la skill `lucca-front` hors ligne, dep
 
 Sauter cette sous-étape, et le dire dans le rapport, si `.github/skills/_lucca-front/versions.json` ne porte pas `"followsCode": true` (cas des `vX.Y-lts`).
 
-**Choisir la release ZeroHeight.** Le run nomme la skill d'après le dernier tag stable de la branche, `M.m` :
+**Mineure ou majeure : déclarer la mineure d'abord.** Le tag `vX.Y.0` n'existe pas encore : sans déclaration, la skill prendrait la mineure du dernier tag publié, la précédente, et le tag `.0` la livrerait sous ce nom. La déclaration part dans le même commit que le rafraîchissement :
 
 ```bash
-git describe --tags --abbrev=0 --match 'v*' --exclude '*-*'   # ex. v22.1.3 → M.m = 22.1
+npm run skills:update -- --minor X.Y
+```
+
+**Choisir la release ZeroHeight.** La mineure que documente la skill, `M.m`, est celle de son manifeste (la mineure déclarée, ou celle du dernier tag publié pour un patch) :
+
+```bash
+node -p "require('./.github/skills/_lucca-front/versions.json').minor"   # ex. 22.2
 ```
 
 Ouvrir le sélecteur de versions de Prisme (https://prisme.lucca.io/94310e217/) et regarder `M.m` dans `scripts/generate-skills/zh-release-ids.json` :
 
 | Situation | Option |
 |---|---|
-| Patch, et Prisme n'a pas de release `vM.m` | `--zh-latest M.m` |
+| Patch, et Prisme n'a pas figé de release `vM.m` | `--zh-latest M.m` |
 | Patch, et Prisme a déjà figé `vM.m` (il documente la mineure suivante en « latest ») | `--zh-id M.m=<id>`, l'ID lu dans l'URL `/v/<id>/` de la release |
-| Mineure ou majeure, `M.m` (la mineure précédente) absent de `zh-release-ids.json` | `--zh-latest M.m` : « latest » documente la nouvelle mineure, celle du code de `release/X.Y` |
-| Mineure ou majeure, `M.m` présent dans `zh-release-ids.json` | sauter : le run lirait la release figée de la mineure précédente. Le rafraîchissement se fera au premier patch |
+| Mineure ou majeure (`M.m` = la mineure déclarée) | `--zh-latest M.m` : « latest » documente la nouvelle mineure. Si Prisme a figé la mineure précédente et qu'elle manque à `zh-release-ids.json`, l'y épingler en ajoutant `--zh-id <précédente>=<id>` |
 
 Une mineure déjà dans `zh-release-ids.json` n'a besoin d'aucune option.
 
@@ -159,7 +164,7 @@ Montrer le `git diff --stat` et demander confirmation :
 Pour chaque étape validée :
 
 ```bash
-git add -- scripts/generate-skills/baselines/zeroheight scripts/generate-skills/zh-release-ids.json .github/skills/lucca-front .github/skills/_lucca-front/versions.json scripts/generate-skills/component-metadata.json
+git add -- scripts/generate-skills/baselines/zeroheight scripts/generate-skills/zh-release-ids.json .github/skills/_lucca-front/llms .github/skills/_lucca-front/versions.json scripts/generate-skills/component-metadata.json
 git commit -m "chore(skills): refresh the ZeroHeight content for X.Y.Z"
 git add -- ':(glob)packages/**/CHANGELOG.md'
 git commit -m "docs(changelog): update components changelog for X.Y.Z"
@@ -317,4 +322,4 @@ Court, dans cet ordre :
 3. Les écarts relevés : composants sans CHANGELOG.md, divergences changelog GitHub / CHANGELOG des composants, étapes sautées et pourquoi.
 4. Mineure / majeure : le tableau des migrations proposées, en attente de décision.
 5. Le rafraîchissement ZeroHeight de la skill : l'option utilisée (`--zh-latest` ou `--zh-id`), les pages modifiées, ou pourquoi il a été sauté. Le tag coupé après le merge de la PR est celui dont le package npm livre ce contenu.
-6. Mineure / majeure : déclarer la mineure de la documentation LLM dans la PR release → master, **avant** le tag `vX.Y.0` : `npm run skills:update -- --minor X.Y`, puis committer `.github/skills/_lucca-front/llms` et `.github/skills/_lucca-front/versions.json`. Sans ça, le package `.0` livre une documentation nommée d'après la mineure précédente (cf. `scripts/generate-skills/README.md`, « Une documentation qui suit le code »).
+6. Mineure / majeure : la mineure déclarée pour la documentation LLM (`--minor X.Y`, étape 2), ou pourquoi elle ne l'a pas été. Sans elle, le package `.0` livre une documentation nommée d'après la mineure précédente (cf. `scripts/generate-skills/README.md`, « Une documentation qui suit le code »).
