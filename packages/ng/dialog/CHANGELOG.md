@@ -1,3 +1,9 @@
+### 22.1.1
+
+#### Fixed
+
+- A routed dialog no longer closes when one of its `canDeactivate` guards completes without a value (header close button, Escape key and backdrop click).
+
 ### 22.0.6
 
 #### Fixed
