@@ -45,6 +45,7 @@ export default [
 		// SEE https://regex101.com/r/ZFxNkG.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
 		name: 'Status',
 		objectPattern: /\.status(-dot(-important)?|-label)?(?![\w-])/,
 		versionDeprecated: '16.2.0',
@@ -56,8 +57,10 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/wa8g0O.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/79401000ea2b96ce82a5ad2965952a04ea980703/packages/scss/src/components/index.scss#L54.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		objectPattern: [
 			// Colonnes et offsets de l’ancienne grille, toujours suffixés d’un breakpoint (`.grid-6\@mediaMinS`)
 			/\.grid(-(offset)?(1|2|3|4|5|6|7|8|9|10|11|12))?\\@mediaMin/,
@@ -74,6 +77,7 @@ export default [
 		// SEE https://regex101.com/r/43OspP.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5bbf9a6ff0f01b15a5485401d0dd4cf5142c05c9/packages/scss/src/components/util/index.scss#L19.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		objectPattern: /\.u-elevate[1-6](?![\w-])/,
 		versionDeprecated: '16.2.0',
 		versionDeleted: '19.1.0',
@@ -81,8 +85,10 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/yt2aCa.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/aeac8903fc82846f9e8cab4533ece52926831de1/packages/scss/src/components/textfield/mods.scss#L35.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
 		objectPattern: /\.textfield-actionClear(?![\w-])/,
 		versionDeprecated: '16.2.2',
 		versionDeleted: '18.1.0',
@@ -104,8 +110,10 @@ export default [
 	{
 		// Any combination of .button and .mod-counter, within one compound selector
 		// SEE https://regex101.com/r/9WOlXc.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/4c9e247a76f34292090b22991a24ae603142f7c7/packages/scss/src/components/button/index.scss#L33.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
 		objectPattern: /(?=[^\s>+~]*\.button(?![\w-]))(?=[^\s>+~]*\.mod-counter(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '16.3.0',
 		versionDeleted: '18.1.0',
@@ -113,10 +121,12 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/AUlf21.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/4c9e247a76f34292090b22991a24ae603142f7c7/packages/scss/src/components/button/mods.scss#L59.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5cb11aa50a56e8cbc844f5f683c91e50b429f6c4/packages/scss/src/components/navside/component.scss#L114.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/ac3cbedd153698001ffe054d81c8b97b7a1877ba/packages/ng/styles/definitions/select/_select-input.scss#L133.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
 		objectPattern: [/\.button-counter(?![\w-])/, /\.navSide-item-alert(?![\w-])/, /\.lu-select-value \.label(?![\w-])/],
 		versionDeprecated: '16.3.0',
 		versionDeleted: '18.1.0',
@@ -147,8 +157,10 @@ export default [
 	{
 		// Any combination of .callout and .mod-tiny, within one compound selector
 		// SEE https://regex101.com/r/rW039S.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.5.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/674535dace069360d6103adae0d468fbc7421736/stories/qa/callout/callout.stories.html#L330.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
 		objectPattern: /(?=[^\s>+~]*\.callout(?![\w-]))(?=[^\s>+~]*\.mod-tiny(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '16.5.0',
 		versionDeleted: '18.1.0',
@@ -157,8 +169,10 @@ export default [
 	{
 		// Any combination of .button and .mod-icon, within one compound selector
 		// SEE https://regex101.com/r/6yQzje.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/243a5f40578079a235982456ee8f9f772aefeead/packages/scss/src/components/button/index.scss#L41.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		objectPattern: /(?=[^\s>+~]*\.button(?![\w-]))(?=[^\s>+~]*\.mod-icon(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '17.2.0',
 		versionDeleted: '19.1.0',
@@ -167,8 +181,10 @@ export default [
 	{
 		// Action icon component, merged into Button
 		// SEE https://regex101.com/r/XSreTf.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/243a5f40578079a235982456ee8f9f772aefeead/packages/scss/src/components/actionIcon/index.scss#L1.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		name: 'Action icon',
 		objectPattern: /\.actionIcon(?![\w-])/,
 		versionDeprecated: '17.2.0',
@@ -185,6 +201,7 @@ export default [
 		// SEE https://regex101.com/r/9yDStD.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/1ca4668b25117075485ce1ad0c2beba9876b134e/packages/scss/src/components/emptyStateDeprecated/component.scss#L9.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/5da372590.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		name: 'Empty state',
 		objectPattern: /\.emptyState-(title|description)(?![\w-])/,
 		versionDeprecated: '17.2.0',
@@ -220,6 +237,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/7JXwlm.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/ng/icon/icon.component.scss#L7.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0305f0dbd5c6694181bbbbc849b488de7af113aa.
@@ -233,8 +251,10 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/nPMyQZ.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/scss/src/commons/config.scss#L11.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.0.0.
 		objectPattern: /\.palette-(grey|primary|secondary|lucca)(?![\w-])/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
@@ -251,6 +271,7 @@ export default [
 		// SEE https://regex101.com/r/7JXwlm.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/scss/src/components/box/index.scss#L7.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.0.0.
 		objectPattern: [
 			// Toute combinaison de `.box`, `.card` ou `.section` avec `.mod-grey`
 			/(?=[^\s>+~]*\.(box|card|section)(?![\w-]))(?=[^\s>+~]*\.mod-grey(?![\w-]))[^\s>+~]*/,
@@ -265,6 +286,7 @@ export default [
 	{
 		// The `.lu-select-*` classes stay out: the API and date selects, not deprecated, still emit them.
 		// SEE https://regex101.com/r/dwPyNk.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/9b71a76ca515ad8ae2d675bcba5ae39882beeaf7.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/9154c555b6a417bf1193f469246e6af8e4c71fee/packages/ng/select/input/select-input.component.ts#L203.
 		name: 'Select',
@@ -288,9 +310,11 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/LKOdgf.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/307429b94f4b3e5cb2809a4153201417a6115711/packages/ng/qualification/select/input/qualification-select-input.component.ts#L15.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/2614.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		name: 'Qualification picker',
 		objectPattern: /(?<![\w.#="'-])lu-qualification-select(?![\w-])/,
 		versionDeprecated: '17.3.2',
@@ -302,6 +326,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/Ndh0bQ.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/d1f911b8d34cbba6945d16538b58eb558feda634/packages/scss/src/components/dialog/component.scss#L37.
 		objectPattern: /\.dialog-form(?![\w-])/,
 		versionDeprecated: '17.3.5',
@@ -309,6 +334,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/y2kYBk.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/38b47f6750491ded25c0d835f703d5d9da3d32df/packages/scss/src/commons/utils/index.scss#L204.
 		objectPattern: [/\.u-textLeft(?![\w-])/, /\.u-textCenter(?![\w-])/, /\.u-textRight(?![\w-])/],
 		versionDeprecated: '17.4.0',
@@ -337,9 +363,11 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/VGtzuM.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/38b47f6750491ded25c0d835f703d5d9da3d32df/packages/scss/src/commons/utils/index.scss#L236.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/38b47f6750491ded25c0d835f703d5d9da3d32df/packages/scss/src/commons/utils/index.scss#L231.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		objectPattern: [/\.u-comma(?![\w-])/, /\.u-unit(?![\w-])/],
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
@@ -353,8 +381,10 @@ export default [
 		// - Sizes: 0, XXS-XXL, Auto (margins only).
 		// - Directions: physical, Inline, Block. Gaps: gap, rowGap, columnGap.
 		// - Excluded: `.u-{margin|padding}{Inline|Block}0`, still shipping (SEE next entry).
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.4.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6f83f82a5f0dcfbf3ad08742ca577889802b8385/packages/scss/src/commons/config.scss#L4.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		objectPattern: [
 			// SEE https://regex101.com/r/YCDDc8.
 			/\.u-((margin|padding)(Top|Right|Bottom|Left)?(Auto|0|XXS|XS|S|M|L|XL|XXL)|(margin|padding)(Inline|Block)(Auto|XXS|XS|S|M|L|XL|XXL)|(columnGap|rowGap|gap)(0|XXS|XS|S|M|L|XL|XXL))(?![\w-])/,
@@ -400,6 +430,7 @@ export default [
 	{
 		// Former host class of the User picture component
 		// SEE https://regex101.com/r/6xEhms.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/dc0da551b981fe0e351baf56e57dce711d7e6880/packages/scss/src/components/avatar/index.scss#L3.
 		name: 'User picture',
 		objectPattern: /\.lu-user-picture(?![\w-])/,
@@ -418,6 +449,7 @@ export default [
 		// SEE https://regex101.com/r/XC32QA.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3bc06c234/packages/scss/src/components/dialog/component.scss#L46.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0b0e564717726988df6b5f3ea52a46cff841864d.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.2.0.
 		objectPattern: /\.dialog-formOptionnal(?![\w-])/,
 		versionDeleted: '18.2.0',
 		actions: `Remplacer par la classe unique \`.dialog-inside-formOptional\`.`,
@@ -425,10 +457,12 @@ export default [
 	{
 		// Any occurrence of one of these selectors in any part of a selector
 		// SEE https://regex101.com/r/VHfdte.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/22716b6cf5747cdc3172d2e33b1d3a45ecad9ec6/packages/scss/src/components/userTile/component.scss#L8.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/dc0da551b981fe0e351baf56e57dce711d7e6880/packages/scss/src/components/avatar/component.scss#L12.
 		// SEE https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/16627d.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		name: 'User tile',
 		objectPattern: [/\.user-info(?![\w-])/, /\.user-tile(-(title|label|footnote))?(?![\w-])/, /\.picture(?![\w-])/],
 		versionDeprecated: '18.2.0',
@@ -444,6 +478,7 @@ export default [
 		// SEE https://regex101.com/r/HoanMW.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/69d12b5e0e526a763ebf43d8d4443bd35addb8f9/packages/scss/src/components/tableStickedDeprecated/mods.scss#L65.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		objectPattern: /(?=[^\s>+~]*\.table-head-row-cell(?![\w-]))(?=[^\s>+~]*\.mod-columnSticky-shadowMask(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
@@ -452,9 +487,11 @@ export default [
 	{
 		// SEE https://regex101.com/r/1EfDam.
 		// SEE https://regex101.com/r/NFrjBF.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/a69b1c834c8f73d80d105a936343910891c244b7/packages/scss/src/components/tableSortable/index.scss#L3.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/a69b1c834c8f73d80d105a936343910891c244b7/packages/scss/src/components/tableSortable/index.scss#L55.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		objectPattern: [
 			/\.(indexT|t)able-head-row-cell-sortableButton(-arrows-(ascending|descending))?(?![\w-])/,
 			// Toute combinaison de la cellule d’en-tête avec un modificateur ou un état de tri
@@ -472,6 +509,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/commit/22716b6cf5747cdc3172d2e33b1d3a45ecad9ec6.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/dc0da551b981fe0e351baf56e57dce711d7e6880.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		objectPattern: [
 			// Toute combinaison de `.userTile` avec `.mod-nameOnly`
 			/(?=[^\s>+~]*\.userTile(?![\w-]))(?=[^\s>+~]*\.mod-nameOnly(?![\w-]))[^\s>+~]*/,
@@ -497,6 +535,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/Ct4jxl.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/d66db6850f4393a4b7dbe61c15207d1185516ec8/packages/scss/src/components/navside/mods.scss#L11.
 		objectPattern: [
 			// Largeur compacte de `.navSide`, sur n’importe quel élément de la page
@@ -506,6 +545,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/WOAbdM.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/13ef1a517c8a6016df65d8dc106c676d120b33cf/packages/scss/src/components/dialog/component.scss#L32.
 		objectPattern: /\.dialog-formOptional(?![\w-])/,
 		versionDeprecated: '18.3.0',
@@ -515,6 +555,7 @@ export default [
 		// SEE https://regex101.com/r/8f4B4g.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/835878ba8719c693b63123293c5cbcd224447e63/packages/scss/src/components/comment/component.scss#L81.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		objectPattern: /\.comment-content-textContainer(?![\w-])/,
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
@@ -525,11 +566,13 @@ export default [
 		// SEE https://regex101.com/r/oye8NK.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/0d474e96786a71f224b9e0d57397f8c50399a457/packages/scss/src/components/calendar/component.scss#L54.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/1ca565527cdf4bcf7abab16cddacded11a9eef65.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		objectPattern: /(?=[^\s>+~]*\.calendarWrapper-navigation(?![\w-]))(?=[^\s>+~]*\.mod-(prev|next)(?![\w-]))[^\s>+~]*/,
 		versionDeleted: '19.1.0',
 	},
 	{
 		// SEE https://regex101.com/r/7wO4Oc.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/ae4ffb558579b73a0543e670fada6f8cd31d6a98/packages/scss/src/components/dropdown/index.scss#L3.
 		objectPattern: /\.lu-dropdown-(content|options|options-item|options-item-action)(?![\w-])/,
 		versionDeprecated: '19.2.0',
@@ -537,6 +580,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/VqPdDw.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/48b4f20edc03b38a32f23058ea8cd5ff3de983dc/packages/scss/src/components/filterBarDeprecated/index.scss#L3.
 		name: 'Filter bar',
 		objectPattern:
@@ -569,6 +613,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/1eWJ0d.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/63324c9df3d6955360f0d0e2843ea441d9f8f92f/packages/scss/src/components/horizontalNavigation/index.scss#L3.
 		name: 'Menu',
 		objectPattern: /\.menu(-(containerOptional|link-placeholder|list-item-action|link|list))?(?![\w-])/,
@@ -628,6 +673,7 @@ export default [
 		// SEE https://regex101.com/r/BXnpmG.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/filterBar/component.scss#L34.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/90aa5c65c1644ce779cdf86ae85530e212b79c71.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		objectPattern: /\.filterBar-scrollBox-(first|last)(?![\w-])/,
 		versionDeleted: '20.1.0',
 	},
@@ -635,6 +681,7 @@ export default [
 		// SEE https://regex101.com/r/N2e4Ox.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/indexTable/mods.scss#L301.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/b1cecc4633547398360f37a4a761ac11545e4aa3.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		objectPattern: /\.indexTable-body-row-cell-subAction(DropdownTrigger)?(?![\w-])/,
 		versionDeleted: '20.1.0',
 	},
@@ -719,6 +766,7 @@ export default [
 		// .button-group and .mod-text;
 		// a dropdown option action and .mod-delete.
 		// SEE https://regex101.com/r/5qB2gm.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/button/index.scss#L31.
 		// SEE https://regex101.com/r/zjVUrO.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/00f3b927aede5f55a94620cb0dfb7d43ee7bdaff/packages/scss/src/components/buttonGroup/index.scss#L11.
@@ -767,6 +815,7 @@ export default [
 	{
 		// SEE https://regex101.com/r/TdUmb8.
 		// SEE https://regex101.com/r/Dk4cFs.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v21.0.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/utils/index.scss#L408.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/utils/index.scss#L398.
@@ -853,6 +902,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/CjaRkK.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v21.0.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/f0b73e151f73e805500788cdaac6e65fcff20b7a.
 		objectPattern: [
@@ -870,6 +920,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/j7pw92.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v21.0.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
 		objectPattern: [
@@ -891,6 +942,7 @@ export default [
 	{
 		// Text color utilities generated from the palettes deleted in 22.0.0
 		// SEE https://regex101.com/r/6PWygU.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v21.0.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
 		objectPattern: /\.pr-u-colorText(Grey|Lucca|Primary|Secondary)(?![\w-])/,
@@ -1044,6 +1096,7 @@ export default [
 	{
 		// Any combination of .dataTable and .mod-hover, within one compound selector
 		// SEE https://regex101.com/r/IaLzf6.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.0.6.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/84d01a52c1d45326c76a182dae241d02b8566cc9/packages/scss/src/components/dataTable/index.scss#L61.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/84d01a52c1d45326c76a182dae241d02b8566cc9/packages/ng/data-table/data-table.component.ts#L49.
 		objectPattern: /(?=[^\s>+~]*\.dataTable(?![\w-]))(?=[^\s>+~]*\.mod-hover(?![\w-]))[^\s>+~]*/,
@@ -1052,6 +1105,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/HRgrNj.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.1.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/db08f46234ab6e5717d83b3c72d36dedfd180a43/packages/scss/src/components/fancyBox/component.scss#L76.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/44cc1f8955d65494d6ccfbdd1cf6ff04379363d4/packages/ng/fancy-box/CHANGELOG.md#L19.
 		objectPattern: /\.fancyBox-content-foreground(?![\w-])/,
@@ -1264,6 +1318,7 @@ export default [
 
 	{
 		// Any utility with the `.u-` prefix, renamed `.pr-u-` in 20.2.0 and only emitted with `$deprecatedUtilityPrefix: true` since
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/3814.
 		// SEE https://regex101.com/r/Yf9bsZ.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/core.scss#L89.

@@ -42,6 +42,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/7aafc39f8c79a749bc1d670fe4f05ea86c300923/packages/scss/src/commons/config.scss#L166.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/7aafc39f8c79a749bc1d670fe4f05ea86c300923/packages/scss/src/commons/config.scss#L181.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		objectPattern: [/--commons-elevations-elevation-[1-6](?![\w-])/, /--commons-boxShadow-XXS(?![\w-])/],
 		versionDeprecated: '16.1.0',
 		versionDeleted: '19.1.0',
@@ -56,9 +57,11 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/Y00E16.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/17961899b2b1c17e69612708b9e6d068b7801fb0/packages/scss/src/commons/vars.scss#L32.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/17961899b2b1c17e69612708b9e6d068b7801fb0/packages/scss/src/commons/config.scss#L455.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		objectPattern: /--commons-boxShadow-(XXS|XS|S|M|L|XL|XXL)(?![\w-])/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '19.1.0',
@@ -66,8 +69,10 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/BRi8Yi.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/scss/src/commons/config.scss#L11.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.0.0.
 		objectPattern: /--palettes-(grey|primary|secondary|lucca)-(0|text|25|50|100|200|300|400|500|600|700|800|900)(?![\w-])/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
@@ -82,8 +87,10 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/QullaC.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/scss/src/commons/config.scss#L320.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.0.0.
 		objectPattern: /--colors-grey-900-rgb(?![\w-])/,
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
@@ -97,8 +104,10 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/YS7uCx.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.1.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/1f043f630075d20b2a1298f8b2382435583275b2/packages/scss/src/commons/config.scss#L320.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.0.0.
 		objectPattern: /--colors-grey-400-rgb(?![\w-])/,
 		versionDeprecated: '17.3.1',
 		versionDeleted: '22.0.0',
@@ -120,9 +129,11 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/WqLllN.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.4.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6f83f82a5f0dcfbf3ad08742ca577889802b8385/packages/scss/src/commons/config.scss#L403.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6f83f82a5f0dcfbf3ad08742ca577889802b8385/packages/scss/src/commons/vars.scss#L32.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		objectPattern: /--spacings-(auto|0|XXS|XS|S|M|L|XL|XXL)(?![\w-])/,
 		versionDeprecated: '17.4.0',
 		versionDeleted: '19.1.0',
@@ -142,8 +153,10 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/lu9vUK.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.4.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/f83d03c46a036e58aed46a4ee9046ae34115dd6f/packages/scss/src/commons/config.scss#L321.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.0.0.
 		objectPattern: [/--colors-white-rgb(?![\w-])/, /--colors-neutral-(400|900)-rgb(?![\w-])/],
 		versionDeprecated: '17.4.0',
 		versionDeleted: '22.0.0',
@@ -189,8 +202,10 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/iMddaz.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/dd76138530436ecabe4f4752836a0f5e4cd14517/packages/scss/src/commons/config.scss#L369.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.0.0.
 		objectPattern: /--colors-(black|white)-color(?![\w-])/,
 		versionDeprecated: '18.2.0',
 		versionDeleted: '22.0.0',
@@ -207,6 +222,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/xx7vjW.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/d66db6850f4393a4b7dbe61c15207d1185516ec8/packages/scss/src/components/navside/vars.scss#L9.
 		objectPattern: /--commons-navSide-compact-width(?![\w-])/,
 		versionDeprecated: '18.3.0',
@@ -214,6 +230,7 @@ export default [
 	{
 		// No longer read: overriding them has no effect
 		// SEE https://regex101.com/r/BwNNLw.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/14abe50720b75c678361778195dc782cbd6aa035/packages/scss/src/components/container/vars.scss#L4.
 		objectPattern: /--components-container-(max-width|padding)(?![\w-])/,
 		versionDeprecated: '18.3.0',
@@ -275,6 +292,7 @@ export default [
 		// Font size and line height of the title component, replaced by its font shorthand
 		// SEE https://regex101.com/r/7hOMye.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		objectPattern: /--sizes-(fontSize|lineHeight)(?![\w-])/,
 		versionDeleted: '20.1.0',
 		actions: `Remplacer par \`--components-title-font\`.`,
@@ -307,6 +325,7 @@ export default [
 		// Component font sizes and line heights deleted without deprecation, replaced by each component's `-font` shorthand
 		// SEE https://regex101.com/r/VEXU28.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		objectPattern: [
 			/--components-(inlineMessage|simpleSelect|multiSelect|segmentedControl|timepicker|sortableList-helper)-(fontSize|lineHeight)(?![\w-])/,
 			/--component-switchField-label-(fontSize|lineHeight)(?![\w-])/,
@@ -327,6 +346,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/filterBar/mods.scss#L32.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/scrollBox/states.scss#L10.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/90aa5c65c1644ce779cdf86ae85530e212b79c71.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
 		objectPattern: /--components-(filterBar-extremitiesDisplay|scrollBox-wrap)(?![\w-])/,
 		versionDeleted: '20.1.0',
 	},
@@ -342,6 +362,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/1P70OB.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bb80e0bf0e1f3ffaaff8b4ef573f653dc1d3472e/packages/scss/src/commons/config.scss#L750.
 		objectPattern: /--commons-borderRadius-(M|L|XL|full)(?![\w-])/,
 		versionDeprecated: '20.2.0',
@@ -534,6 +555,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/mSg9Vi.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v22.1.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/db08f46234ab6e5717d83b3c72d36dedfd180a43/packages/scss/src/components/fancyBox/vars.scss#L29.
 		objectPattern:
 			/--components-fancyBox-(offsetInline|offsetBlock|imageWidth|imageHeight|background-left|background-right|foreground)(?![\w-])/,
