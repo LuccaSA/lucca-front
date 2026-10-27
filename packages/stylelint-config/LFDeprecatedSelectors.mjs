@@ -313,8 +313,6 @@ export default [
 		objectPattern: [/\.u-textLeft(?![\w-])/, /\.u-textCenter(?![\w-])/, /\.u-textRight(?![\w-])/],
 		versionDeprecated: '17.4.0',
 		actions: `
-			Doublon :
-
 			* \`.u-text*\` ⇒ \`.pr-u-textAlign*\`
 			* \`*Left\` ⇒ \`*Start\`
 			* \`*Right\` ⇒ \`*End\`
@@ -452,41 +450,34 @@ export default [
 		actions: `Remplacer par \`.mod-stickyColumn-shadowMask\`.`,
 	},
 	{
-		// SEE https://regex101.com/r/1EfDam
-		// SEE https://github.com/LuccaSA/lucca-front/blob/a69b1c834c8f73d80d105a936343910891c244b7/packages/scss/src/components/tableSortable/index.scss#L3.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
-		objectPattern: [/\.(indexT|t)able-head-row-cell-sortableButton(-arrows-(ascending|descending))?(?![\w-])/],
-		versionDeprecated: '18.2.0',
-		versionDeleted: '20.1.0',
-		actions: `Remplacer par le sous-composant tableSortable commun à [Table](https://prisme.lucca.io/94310e217/p/75b1ea-table/t/page-75b1ea-67463914-5) et [Index table](https://prisme.lucca.io/94310e217/p/24fc14-index-table-new/t/page-24fc14-90701228-74b8e8-3).`,
-	},
-	{
-		// Any combination of .table-head-row-cell or .indexTable-head-row-cell and a sort mod or state (.mod-sortable, .sortedAscending, .sortedDescending, .is-sorted-ascending, .is-sorted-descending), within one compound selector
+		// SEE https://regex101.com/r/1EfDam.
 		// SEE https://regex101.com/r/NFrjBF.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a69b1c834c8f73d80d105a936343910891c244b7/packages/scss/src/components/tableSortable/index.scss#L3.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/a69b1c834c8f73d80d105a936343910891c244b7/packages/scss/src/components/tableSortable/index.scss#L55.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
-		objectPattern:
+		objectPattern: [
+			/\.(indexT|t)able-head-row-cell-sortableButton(-arrows-(ascending|descending))?(?![\w-])/,
+			// Toute combinaison de la cellule d’en-tête avec un modificateur ou un état de tri
 			/(?=[^\s>+~]*\.(indexT|t)able-head-row-cell(?![\w-]))(?=[^\s>+~]*\.(mod-sortable|sortedAscending|sortedDescending|is-sorted-(ascending|descending))(?![\w-]))[^\s>+~]*/,
+		],
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 		actions: `Remplacer par le sous-composant tableSortable commun à [Table](https://prisme.lucca.io/94310e217/p/75b1ea-table/t/page-75b1ea-67463914-5) et [Index table](https://prisme.lucca.io/94310e217/p/24fc14-index-table-new/t/page-24fc14-90701228-74b8e8-3).`,
 	},
 	{
-		// Any combination of .userTile and .mod-nameOnly, within one compound selector
 		// SEE https://regex101.com/r/M2HhEJ.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/userTile/index.scss#L7.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/22716b6cf5747cdc3172d2e33b1d3a45ecad9ec6.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
-		objectPattern: /(?=[^\s>+~]*\.userTile(?![\w-]))(?=[^\s>+~]*\.mod-nameOnly(?![\w-]))[^\s>+~]*/,
-		versionDeprecated: '18.2.0',
-		versionDeleted: '20.1.0',
-	},
-	{
 		// SEE https://regex101.com/r/vgycmM.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/userTile/index.scss#L7.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/avatar/mods.scss#L89.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/22716b6cf5747cdc3172d2e33b1d3a45ecad9ec6.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/dc0da551b981fe0e351baf56e57dce711d7e6880.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
-		objectPattern: /\.userPicture-initials(?![\w-])/,
+		objectPattern: [
+			// Toute combinaison de `.userTile` avec `.mod-nameOnly`
+			/(?=[^\s>+~]*\.userTile(?![\w-]))(?=[^\s>+~]*\.mod-nameOnly(?![\w-]))[^\s>+~]*/,
+			// Initiales de User picture
+			/\.userPicture-initials(?![\w-])/,
+		],
 		versionDeprecated: '18.2.0',
 		versionDeleted: '20.1.0',
 	},
@@ -662,8 +653,6 @@ export default [
 		objectPattern: /\.pr-u-text(Left|Center|Right)(?![\w-])/,
 		versionDeprecated: '20.2.0',
 		actions: `
-			Doublon :
-
 			* \`*text*\` ⇒ \`*textAlign*\`
 			* \`*Left\` ⇒ \`*Start\`
 			* \`*Right\` ⇒ \`*End\`
@@ -776,6 +765,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/TdUmb8.
+		// SEE https://regex101.com/r/Dk4cFs.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/utils/index.scss#L408.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/utils/index.scss#L398.
@@ -792,19 +782,6 @@ export default [
 			/\.pr-u-textPlaceholder(?![\w-])/,
 			/\.pr-u-textSuccess(?![\w-])/,
 			/\.pr-u-textWarning(?![\w-])/,
-		],
-		versionDeprecated: '21.0.0',
-		actions: `
-			Remplacer par les [nouvelles classes](https://prisme.lucca.io/94310e217/p/21a286-utilitaires) liées aux tokens (\`.pr-u-color\`…)
-		`,
-		urls: {
-			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/color-text',
-		},
-	},
-	{
-		// SEE https://regex101.com/r/Dk4cFs.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/5928f58cf09961a2a2cbc28ee13fed939be472ec/packages/scss/src/commons/core.scss#L111.
-		objectPattern: [
 			// Utilitaires renommés peu ou pas utilisés
 			/\.pr-u-textSuccessContrasted(?![\w-])/,
 			/\.pr-u-textWarningContrasted(?![\w-])/,
