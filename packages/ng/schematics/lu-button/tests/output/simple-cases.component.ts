@@ -38,6 +38,8 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 		<button luButton class="mod-inverted" type="button">Invert</button>
 		<button luButton disabled  type="button">Disabled</button>
 		<button luButton disabled  type="button">Disabled</button>
+		<a luButton class="is-disabled" href="#">Disabled link</a>
+		<a luButton class="is-disabled" href="#">Disabled link</a>
 	`,
 	imports: [
 		IconComponent, ButtonComponent

@@ -83,19 +83,22 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 						`is-${button.inputs.state}`,
 						`mod-delete`,
 						`mod-critical`,
-						`is-disabled`,
 						// Bare state classes are deprecated aliases of .is-*
 						'loading',
 						'error',
 						'success',
-						'disabled',
 						`mod-${button.inputs.size}`
 					];
 					// Invert is only carried by the ghost-invert and AI-invert types, otherwise the class is kept
 					const invertedByType = button.type.endsWith('-invert');
+					if (button.inputs.disabled) {
+						removedClasses.push('disabled', 'is-disabled');
+					}
 					const cleanedClasses = classes.split(' ').filter(c => !removedClasses.includes(c) && !(invertedByType && INVERT_CLASSES.includes(c)))
 						// .mod-invert is a deprecated alias of .mod-inverted
 						.map(c => c === 'mod-invert' ? 'mod-inverted' : c)
+						// .disabled is a deprecated alias of .is-disabled
+						.map(c => c === 'disabled' ? 'is-disabled' : c)
 						.join(' ');
 					templateUpdate.remove(button.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
 					if (cleanedClasses) {
@@ -128,7 +131,8 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 							size: classList.find(c => /^mod-(XS|S|M|L|XL|XXL)$/.test(c))?.replace('mod-', ''),
 							block: classList.includes(`mod-block`),
 							critical: classList.includes(`mod-delete`) || classList.includes(`mod-critical`),
-							disabled: classList.includes(`disabled`) || classList.includes(`is-disabled`),
+							// The disabled input only works on a <button>, links keep the .is-disabled class
+							disabled: node.name === 'button' && (classList.includes(`disabled`) || classList.includes(`is-disabled`)),
 							disclosure: classList.includes(`mod-disclosure`),
 							palette: classList.find(c => /palette-(\w+)/.test(c))?.replace('palette-', ''),
 							state: classList.find(c => /^(is-)?(loading|error|success)$/.test(c))?.replace('is-', ''),
