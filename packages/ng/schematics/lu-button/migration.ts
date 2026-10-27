@@ -11,6 +11,7 @@ interface CssButton {
 		size?: string;
 		block: boolean;
 		critical: boolean;
+		disabled: boolean;
 		disclosure: boolean;
 		palette?: string;
 		state?: string;
@@ -49,6 +50,9 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				if (button.inputs.critical) {
 					thingsToAdd += "critical ";
 				}
+				if (button.inputs.disabled) {
+					thingsToAdd += "disabled ";
+				}
 				if (button.inputs.block) {
 					thingsToAdd += "block ";
 				}
@@ -63,28 +67,36 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				 * Modify classes
 				 */
 					const classes = classesNode.value;
-					const cleanedClasses = classes.split(' ').filter(c => {
-						return ![
-							'button',
-							`mod-block`,
-							`mod-disclosure`,
-							`palette-${button.inputs.palette}`,
-							`mod-text`,
-							`mod-ghost`,
-							`mod-outlined`,
-							`mod-inverted`,
-							`mod-onlyIcon`,
-							`mod-withIcon`,
-							`is-${button.inputs.state}`,
-							`mod-delete`,
-							`mod-critical`,
-							// Bare state classes are deprecated aliases of .is-*
-							'loading',
-							'error',
-							'success',
-							`mod-${button.inputs.size}`
-						].includes(c);
-					}).join(' ');
+					const removedClasses = [
+						'button',
+						`mod-block`,
+						`mod-disclosure`,
+						`palette-${button.inputs.palette}`,
+						`mod-text`,
+						`mod-link`,
+						`mod-ghost`,
+						`mod-outline`,
+						`mod-outlined`,
+						`mod-AI`,
+						`mod-onlyIcon`,
+						`mod-withIcon`,
+						`is-${button.inputs.state}`,
+						`mod-delete`,
+						`mod-critical`,
+						`is-disabled`,
+						// Bare state classes are deprecated aliases of .is-*
+						'loading',
+						'error',
+						'success',
+						'disabled',
+						`mod-${button.inputs.size}`
+					];
+					// Invert is only carried by the ghost-invert and AI-invert types, otherwise the class is kept
+					const invertedByType = button.type.endsWith('-invert');
+					const cleanedClasses = classes.split(' ').filter(c => !removedClasses.includes(c) && !(invertedByType && INVERT_CLASSES.includes(c)))
+						// .mod-invert is a deprecated alias of .mod-inverted
+						.map(c => c === 'mod-invert' ? 'mod-inverted' : c)
+						.join(' ');
 					templateUpdate.remove(button.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
 					if (cleanedClasses) {
 						templateUpdate.insertRight(button.nodeOffset + classesNode.keySpan.start.offset,`class="${cleanedClasses}"`);
@@ -111,17 +123,19 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 			if (isInterestingNode(node) && ["button", "a"].includes(node.name)) {
 				const classes = node.attributes.find(attr => attr.name === 'class')?.value || "";
 				if (classes.split(" ").includes("button")) {
+						const classList = classes.split(' ');
 						const inputs = {
-							size: classes.split(' ').find(c => /mod-(XS|S|M|L|XL|XXL)/.test(c))?.replace('mod-', ''),
-							block: classes.includes(`mod-block`),
-							critical: classes.split(' ').some(c => c === 'mod-delete' || c === 'mod-critical'),
-							disclosure: classes.includes(`mod-disclosure`),
-							palette: classes.split(' ').find(c => /palette-(\w+)/.test(c))?.replace('palette-', ''),
-							state: classes.split(' ').find(c => /is-(\w+)/.test(c) || ['loading', 'error', 'success'].includes(c))?.replace('is-', ''),
+							size: classList.find(c => /^mod-(XS|S|M|L|XL|XXL)$/.test(c))?.replace('mod-', ''),
+							block: classList.includes(`mod-block`),
+							critical: classList.includes(`mod-delete`) || classList.includes(`mod-critical`),
+							disabled: classList.includes(`disabled`) || classList.includes(`is-disabled`),
+							disclosure: classList.includes(`mod-disclosure`),
+							palette: classList.find(c => /palette-(\w+)/.test(c))?.replace('palette-', ''),
+							state: classList.find(c => /^(is-)?(loading|error|success)$/.test(c))?.replace('is-', ''),
 						};
 						const button: CssButton = {
 							node: node,
-							type: getButtonType(classes),
+							type: getButtonType(classList),
 							inputs,
 							nodeOffset: template.offsetStart,
 							filePath: template.filePath,
@@ -136,18 +150,20 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 	return buttons;
 }
 
-function getButtonType(classes: string): string {
-	if(classes.includes('mod-outlined')) {
+const INVERT_CLASSES = ['mod-invert', 'mod-inverted'];
+
+function getButtonType(classList: string[]): string {
+	const inverted = INVERT_CLASSES.some(c => classList.includes(c));
+	// .mod-outline is a deprecated alias of .mod-outlined
+	if(classList.includes('mod-outlined') || classList.includes('mod-outline')) {
 		return 'outlined';
 	}
-	if(classes.includes('mod-ghost')) {
-		return 'ghost';
+	if(classList.includes('mod-AI')) {
+		return inverted ? 'AI-invert' : 'AI';
 	}
-	if(classes.includes('mod-text')) {
-		if(classes.includes('mod-invert')) {
-			return 'ghost-invert';
-		}
-		return 'ghost';
+	// .mod-text and .mod-link are deprecated aliases of .mod-ghost
+	if(['mod-ghost', 'mod-text', 'mod-link'].some(c => classList.includes(c))) {
+		return inverted ? 'ghost-invert' : 'ghost';
 	}
 	return '';
 }

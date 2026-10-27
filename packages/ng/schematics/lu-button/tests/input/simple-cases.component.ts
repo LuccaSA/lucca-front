@@ -28,6 +28,15 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		<button class="button loading" type="button">Save</button>
 		<button class="button error" type="button">Save</button>
 		<button class="button success" type="button">Save</button>
+		<button class="button mod-text" type="button">Text</button>
+		<button class="button mod-link" type="button">Link</button>
+		<button class="button mod-text mod-invert" type="button">Text invert</button>
+		<button class="button mod-ghost mod-inverted" type="button">Ghost inverted</button>
+		<button class="button mod-outline" type="button">Outline</button>
+		<button class="button mod-outline mod-delete" type="button">Delete</button>
+		<button class="button mod-invert" type="button">Invert</button>
+		<button class="button disabled" type="button">Disabled</button>
+		<button class="button is-disabled" type="button">Disabled</button>
 	`,
 	imports: [
 		IconComponent

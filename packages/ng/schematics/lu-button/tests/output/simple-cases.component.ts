@@ -29,6 +29,15 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 		<button luButton state="loading"  type="button">Save</button>
 		<button luButton state="error"  type="button">Save</button>
 		<button luButton state="success"  type="button">Save</button>
+		<button luButton="ghost"  type="button">Text</button>
+		<button luButton="ghost"  type="button">Link</button>
+		<button luButton="ghost-invert"  type="button">Text invert</button>
+		<button luButton="ghost-invert"  type="button">Ghost inverted</button>
+		<button luButton="outlined"  type="button">Outline</button>
+		<button luButton="outlined" critical  type="button">Delete</button>
+		<button luButton class="mod-inverted" type="button">Invert</button>
+		<button luButton disabled  type="button">Disabled</button>
+		<button luButton disabled  type="button">Disabled</button>
 	`,
 	imports: [
 		IconComponent, ButtonComponent
