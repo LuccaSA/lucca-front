@@ -4,20 +4,24 @@
 
 <style>
   table {
+    inline-size: 100% !important;
     table-layout: fixed !important;
   }
 
   table thead th:last-of-type {
-    inline-size: 39% !important;
+    inline-size: 42% !important;
   }
 
   table :is(th, td):is(:nth-child(2), :nth-child(3)) {
     text-align: center !important;
   }
 
+  table :is(th, td) {
+    vertical-align: baseline !important;
+  }
+
   td > :is(ol, ul) {
     list-style-position: outside !important;
-    padding-inline-start: 0.5rem !important;
   }
 </style>
 
