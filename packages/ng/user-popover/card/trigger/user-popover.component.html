@@ -103,14 +103,14 @@
 						</span>
 					}
 				</p>
+				@if (customContent?.(); as customContentTemplate) {
+					<lu-divider class="userPopover-divider" />
+					<div>
+						<ng-container *ngTemplateOutlet="customContentTemplate; context: { $implicit: luUser() }" />
+					</div>
+				}
 			</div>
 		</section>
-		@if (customContent?.(); as customContentTemplate) {
-			<lu-divider class="userPopover-divider" />
-			<section>
-				<ng-container *ngTemplateOutlet="customContentTemplate; context: { $implicit: luUser() }" />
-			</section>
-		}
 	</div>
 } @else {
 	<lu-skeleton-user-popover />
