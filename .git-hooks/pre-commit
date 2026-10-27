@@ -8,7 +8,7 @@
 set -e
 
 sources_staged() {
-	git diff --cached --name-only | grep -Eq '^(packages/(ng|scss)/|stories/|scripts/generate-skills/)'
+	git diff --cached --name-only | grep -Eq '^(packages/(ng|prisme|scss)/|stories/|scripts/generate-skills/)'
 }
 
 new_tag() {
