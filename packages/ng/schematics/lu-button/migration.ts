@@ -114,7 +114,7 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 						const inputs = {
 							size: classes.split(' ').find(c => /mod-(XS|S|M|L|XL|XXL)/.test(c))?.replace('mod-', ''),
 							block: classes.includes(`mod-block`),
-							critical: classes.includes(`mod-delete`) || classes.includes(`mod-critical`),
+							critical: classes.split(' ').some(c => c === 'mod-delete' || c === 'mod-critical'),
 							disclosure: classes.includes(`mod-disclosure`),
 							palette: classes.split(' ').find(c => /palette-(\w+)/.test(c))?.replace('palette-', ''),
 							state: classes.split(' ').find(c => /is-(\w+)/.test(c) || ['loading', 'error', 'success'].includes(c))?.replace('is-', ''),
