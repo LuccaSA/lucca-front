@@ -1,7 +1,7 @@
 import { createTestStory } from '@/helpers/stories';
 import { expectNgModelDisplay, mapInputs, repeatKeyboardUserEvent, waitForAngular } from '@/helpers/test';
 import { expect, userEvent, within } from 'storybook/test';
-import meta, { Basic } from '@/stories/forms/time/angular/time-picker-duration.stories';
+import meta, { Basic, Days } from '@/stories/forms/time/angular/time-picker-duration.stories';
 
 export default {
 	...meta,
@@ -61,4 +61,38 @@ const basePlay = async ({ canvasElement, step }) => {
 	});
 };
 
+const daysPlay = async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const days = canvas.getByRole('textbox');
+
+	await step('Mouse interactions', async () => {
+		await userEvent.click(days);
+		await waitForAngular();
+		await expect(days).toHaveFocus();
+		await userEvent.type(days, '2');
+		await waitForAngular();
+		await expectNgModelDisplay(canvasElement, 'P2D');
+	});
+
+	await step('Keyboard interactions', async () => {
+		// The story steps by half a day
+		await userEvent.keyboard('{ArrowUp}');
+		await waitForAngular();
+		await expectNgModelDisplay(canvasElement, 'P2.5D');
+
+		await repeatKeyboardUserEvent('{ArrowDown}', 2);
+		await waitForAngular();
+		await expectNgModelDisplay(canvasElement, 'P1.5D');
+
+		// Decrementing below zero clamps instead of wrapping around max
+		await repeatKeyboardUserEvent('{ArrowDown}', 4);
+		await waitForAngular();
+		await expectNgModelDisplay(canvasElement, 'P0D');
+	});
+};
+
 export const BasicTEST = createTestStory(Basic, basePlay);
+
+export const DaysTEST = createTestStory(Days, daysPlay);

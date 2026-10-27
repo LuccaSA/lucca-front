@@ -1,6 +1,6 @@
 import { TimeRangePickerRange } from '../time-range-picker/time-range-picker';
 import { ISO8601Time } from './date-primitives';
-import { getTotalSeconds, isEndTimeBeforeStartTime, isValidTimeRangePicker } from './duration.utils';
+import { createDurationFromMilliDays, getDecimalsFromMilliDays, getTotalSeconds, isEndTimeBeforeStartTime, isISO8601Duration, isoDurationToMilliDays, isValidTimeRangePicker } from './duration.utils';
 
 describe('DurationUtils', () => {
 	describe('getTotalSeconds', () => {
@@ -24,6 +24,63 @@ describe('DurationUtils', () => {
 
 			// Assert
 			expect(totalSeconds).toBe(9330);
+		});
+	});
+
+	describe('isISO8601Duration', () => {
+		it('should accept a decimal number of days', () => {
+			// Arrange & Act & Assert
+			expect(isISO8601Duration('P0.5D')).toBe(true);
+			expect(isISO8601Duration('P0.125D')).toBe(true);
+		});
+
+		it('should still reject a non duration', () => {
+			// Arrange & Act & Assert
+			expect(isISO8601Duration('0.5')).toBe(false);
+		});
+	});
+
+	describe('isoDurationToMilliDays', () => {
+		it('should convert a decimal number of days', () => {
+			// Arrange & Act & Assert
+			expect(isoDurationToMilliDays('P0.5D')).toBe(500);
+			expect(isoDurationToMilliDays('P0.125D')).toBe(125);
+			expect(isoDurationToMilliDays('P1D')).toBe(1000);
+		});
+
+		it('should convert a duration expressed in hours', () => {
+			// Arrange & Act & Assert
+			expect(isoDurationToMilliDays('PT12H')).toBe(500);
+			expect(isoDurationToMilliDays('PT0S')).toBe(0);
+		});
+	});
+
+	describe('createDurationFromMilliDays', () => {
+		it('should serialize milli-days as a number of days', () => {
+			// Arrange & Act & Assert
+			expect(createDurationFromMilliDays(0)).toBe('P0D');
+			expect(createDurationFromMilliDays(125)).toBe('P0.125D');
+			expect(createDurationFromMilliDays(300)).toBe('P0.3D');
+			expect(createDurationFromMilliDays(2000)).toBe('P2D');
+		});
+
+		it('should round-trip every supported step', () => {
+			// Arrange
+			const steps = [1000, 500, 250, 125, 100];
+
+			// Act & Assert
+			steps.forEach((step) => expect(isoDurationToMilliDays(createDurationFromMilliDays(step))).toBe(step));
+		});
+	});
+
+	describe('getDecimalsFromMilliDays', () => {
+		it('should derive the number of decimals from the step', () => {
+			// Arrange & Act & Assert
+			expect(getDecimalsFromMilliDays(1000)).toBe(0);
+			expect(getDecimalsFromMilliDays(500)).toBe(1);
+			expect(getDecimalsFromMilliDays(100)).toBe(1);
+			expect(getDecimalsFromMilliDays(250)).toBe(2);
+			expect(getDecimalsFromMilliDays(125)).toBe(3);
 		});
 	});
 
