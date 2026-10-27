@@ -219,6 +219,19 @@ export default [
 		`,
 	},
 	{
+		// SEE https://regex101.com/r/7JXwlm.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/ng/icon/icon.component.scss#L7.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/0305f0dbd5c6694181bbbbc849b488de7af113aa.
+		objectPattern: /\.icon-color-(primary|secondary)(?![\w-])/,
+		versionDeprecated: '17.3.0',
+		versionDeleted: '21.1.0',
+		actions: `Remplacer par \`.icon-color-product\`.`,
+		urls: {
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
+		},
+	},
+	{
 		// SEE https://regex101.com/r/nPMyQZ.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/scss/src/commons/config.scss#L11.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
@@ -238,18 +251,13 @@ export default [
 		// SEE https://regex101.com/r/7JXwlm.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/scss/src/components/box/index.scss#L7.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/0851903943d9c4060e1a5a4e30a0d558124fb527.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/ng/icon/icon.component.scss#L7.
 		objectPattern: [
 			// Toute combinaison de `.box`, `.card` ou `.section` avec `.mod-grey`
 			/(?=[^\s>+~]*\.(box|card|section)(?![\w-]))(?=[^\s>+~]*\.mod-grey(?![\w-]))[^\s>+~]*/,
-			/\.icon-color-(primary|secondary)(?![\w-])/,
 		],
 		versionDeprecated: '17.3.0',
 		versionDeleted: '22.0.0',
-		actions: `
-			* \`.mod-grey\` ⇒ \`.mod-neutral\`
-			* \`.icon-color-(primary|secondary)\` ⇒ \`.icon-color-product\`
-		`,
+		actions: `Remplacer par \`.mod-neutral\`.`,
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes',
 		},
@@ -612,8 +620,10 @@ export default [
 	{
 		// SEE https://regex101.com/r/rOqMxE.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/commons/core.scss#L148.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/bf00a13340eaea7a433a3e64100204381d193676.
 		objectPattern: /\.u-text(X?S|M|X{0,3}L)(?![\w-])/,
 		versionDeprecated: '20.1.0',
+		versionDeleted: '20.2.0',
 		actions: `
 			* XS, S & M : \`.u-text*\` ⇒ \`.pr-u-body*\`
 			* L ~ XXXL ⇒

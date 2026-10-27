@@ -370,6 +370,24 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
+				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-text(X%3FS%7CM%7CX%7B0%2C3%7DL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-text(S|XS|M|L|…)</code></a>
+			</td>
+			<td>20.1.0</td>
+			<td>20.2.0</td>
+			<td>
+				<ul>
+				<li>XS, S &amp; M : <code>.u-text*</code> ⇒ <code>.pr-u-body*</code></li>
+				<li>L ~ XXXL ⇒<ul>
+				<li>utilitaire de titre : <code>.pr-u-hx</code></li>
+				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
+				</ul>
+				</li>
+				</ul>
+				<p><a href="https://www.notion.so/luccasoftware/Tokens-Typo-1ebd278ab26e808a9b58d1017514ecb9">Plus d’informations sur le sujet</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<ul>
 				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)fancyBox-content-box(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.fancyBox-content-box</code></a></li>
 				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)fancyBox-content-box-foreground(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.fancyBox-content-box-foreground</code></a></li>
@@ -407,6 +425,20 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>–</td>
 			<td>21.0.0</td>
 			<td>Remplacer par <code>.richTextField-toolbar-chips-chip</code>.</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)icon-color-primary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.icon-color-primary</code></a></li>
+				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)icon-color-secondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.icon-color-secondary</code></a></li>
+				</ul>
+			</td>
+			<td>17.3.0</td>
+			<td>21.1.0</td>
+			<td>
+				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
+				<p>Remplacer par <code>.icon-color-product</code>.</p>
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -478,19 +510,14 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<p>Toute combinaison de <code>.box</code>, <code>.card</code> ou <code>.section</code> avec <code>.mod-grey</code></p>
 				<ul>
-				<li><a href="https://github.com/search?q=((%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)(box%7Ccard%7Csection)(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)icon-color-(primary%7Csecondary)(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.(box|card|…)</code></a> <strong>+</strong> <a href="https://github.com/search?q=((%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)(box%7Ccard%7Csection)(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F)%20OR%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)icon-color-(primary%7Csecondary)(%5B%5E%5Cw-%5D%7C%24)%2F)%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-grey</code></a></li>
-				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)icon-color-primary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.icon-color-primary</code></a></li>
-				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)icon-color-secondary(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.icon-color-secondary</code></a></li>
+				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)(box%7Ccard%7Csection)(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.(box|card|…)</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)(box%7Ccard%7Csection)(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-grey(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-grey</code></a></li>
 				</ul>
 			</td>
 			<td>17.3.0</td>
 			<td>22.0.0</td>
 			<td>
 				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/palettes"><strong>Schematic</strong> : palettes</a>
-				<ul>
-				<li><code>.mod-grey</code> ⇒ <code>.mod-neutral</code></li>
-				<li><code>.icon-color-(primary|secondary)</code> ⇒ <code>.icon-color-product</code></li>
-				</ul>
+				<p>Remplacer par <code>.mod-neutral</code>.</p>
 			</td>
 		</tr>
 		<tr>

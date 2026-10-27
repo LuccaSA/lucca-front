@@ -500,24 +500,6 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 		</tr>
 		<tr>
 			<td>
-				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-text(X%3FS%7CM%7CX%7B0%2C3%7DL)(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-text(S|XS|M|L|…)</code></a>
-			</td>
-			<td>20.1.0</td>
-			<td>–</td>
-			<td>
-				<ul>
-				<li>XS, S &amp; M : <code>.u-text*</code> ⇒ <code>.pr-u-body*</code></li>
-				<li>L ~ XXXL ⇒<ul>
-				<li>utilitaire de titre : <code>.pr-u-hx</code></li>
-				<li>token : <a href="https://prisme.lucca.io/94310e217/p/73bd2f-typographie/b/23f311">token typographie</a></li>
-				</ul>
-				</li>
-				</ul>
-				<p><a href="https://www.notion.so/luccasoftware/Tokens-Typo-1ebd278ab26e808a9b58d1017514ecb9">Plus d’informations sur le sujet</a>.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)pr-u-(inset%7Ctop%7Cbottom%7Cleft%7Cright)Reset(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.pr-u-(inset|top|bottom|left|…)Reset</code></a>
 			</td>
 			<td>20.2.0</td>
