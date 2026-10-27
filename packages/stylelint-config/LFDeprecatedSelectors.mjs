@@ -199,7 +199,7 @@ export default [
 	},
 	{
 		// SEE https://regex101.com/r/9yDStD.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/1ca4668b25117075485ce1ad0c2beba9876b134e/packages/scss/src/components/emptyStateDeprecated/component.scss#L9.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/8bb27f4efd25e886a45ab2a7d223d98d2ae7f985/packages/scss/src/components/emptyStateDeprecated/component.scss#L7.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/5da372590.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
 		name: 'Empty state',
@@ -240,7 +240,7 @@ export default [
 		// SEE https://regex101.com/r/dwPyNk.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/9b71a76ca515ad8ae2d675bcba5ae39882beeaf7.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/9154c555b6a417bf1193f469246e6af8e4c71fee/packages/ng/select/input/select-input.component.ts#L203.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/9b71a76ca515ad8ae2d675bcba5ae39882beeaf7/packages/ng/select/input/select-input.component.ts#L191.
 		name: 'Select',
 		objectPattern: /(?<![\w.#="'-])lu-select(?![\w-])/,
 		versionDeprecated: '17.3.0',
@@ -278,7 +278,7 @@ export default [
 	{
 		// SEE https://regex101.com/r/LKOdgf.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/307429b94f4b3e5cb2809a4153201417a6115711/packages/ng/qualification/select/input/qualification-select-input.component.ts#L15.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/9b71a76ca515ad8ae2d675bcba5ae39882beeaf7/packages/ng/qualification/select/input/qualification-select-input.component.ts#L15.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/2614.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
@@ -368,7 +368,7 @@ export default [
 		// SEE https://regex101.com/r/puV4bl.
 		// SEE https://regex101.com/r/YZvBfE.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/5f325acbb26f67993d110ccd13e08ae63e1f9ab4/packages/scss/src/components/breadcrumbs/index.scss#L13.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/ebab96f82085c2f887c5ba9cff13e19e2d42cf9d/packages/scss/src/components/breadcrumbs/index.scss#L18.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/a268fb879d6a07eafcbf01a3f81558c74fb43ec6/packages/scss/src/components/breadcrumbs/index.scss#L13.
 		objectPattern: [
 			/(?=[^\s>+~]*\.breadcrumbs-list-item-action(?![\w-]))(?=[^\s>+~]*\.active(?![\w-]))[^\s>+~]*/,
 			/\.breadcrumbs-list-item > a\.active(?![\w-])/,
@@ -504,8 +504,8 @@ export default [
 	{
 		// SEE https://regex101.com/r/M2HhEJ.
 		// SEE https://regex101.com/r/vgycmM.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/userTile/index.scss#L7.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/e74c51df4acd967cb2f64e7702dd79569f60bbc0/packages/scss/src/components/avatar/mods.scss#L89.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/8276b1a8c5dd3e98a4bfae50c1757ea55be41fbc/packages/scss/src/components/userTile/index.scss#L7.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/8276b1a8c5dd3e98a4bfae50c1757ea55be41fbc/packages/scss/src/components/avatar/mods.scss#L86.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/22716b6cf5747cdc3172d2e33b1d3a45ecad9ec6.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/dc0da551b981fe0e351baf56e57dce711d7e6880.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
@@ -806,7 +806,7 @@ export default [
 		// SEE https://regex101.com/r/yrt0XY.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/ec0b5de7eec2d6e2a1a0ea711d69d25a62de4401.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/9154c555b6a417bf1193f469246e6af8e4c71fee/packages/ng/dropdown/panel/dropdown-panel.component.html.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/85cb7ff46915467aae9ee0758dfe6d44a3575944/packages/ng/dropdown/panel/dropdown-panel.component.html.
 		name: 'Dropdown',
 		objectPattern: [/(?<![\w.#="'-])lu-dropdown(?![\w-])/, /\.lu-dropdown-panel(?![\w-])/],
 		versionDeprecated: '20.3.0',

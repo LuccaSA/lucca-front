@@ -17,7 +17,7 @@ export default [
 	{
 		// SEE https://regex101.com/r/2v32By.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.2.0.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/51bb17c582e21295003a3a2a10ca1bc735b306af/packages/ng/styles/definitions/user/user-tile.scss#L3.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/8276b1a8c5dd3e98a4bfae50c1757ea55be41fbc/packages/ng/styles/definitions/user/user-tile.scss#L3.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/2940.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/3685.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
@@ -29,7 +29,7 @@ export default [
 	{
 		// SEE https://regex101.com/r/nJzVC7.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.2.0.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/51bb17c582e21295003a3a2a10ca1bc735b306af/packages/ng/styles/definitions/user/user-picture.scss#L5.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/8276b1a8c5dd3e98a4bfae50c1757ea55be41fbc/packages/ng/styles/definitions/user/user-picture.scss#L5.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/3015.
 		// SEE https://github.com/LuccaSA/lucca-front/pull/3685.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
