@@ -59,7 +59,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 			<td>
 				<a href="https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated">Select</a>, <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)lu-select(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>lu-select</code></a>
 			</td>
-			<td>17.3.2</td>
+			<td>17.3.0</td>
 			<td>–</td>
 			<td>
 				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select"><strong>Schematic</strong> : lu-select</a>

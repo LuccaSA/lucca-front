@@ -56,6 +56,46 @@ export default [
 		},
 	},
 	{
+		// SEE https://regex101.com/r/yt2aCa.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/aeac8903fc82846f9e8cab4533ece52926831de1/packages/scss/src/components/textfield/mods.scss#L35.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
+		objectPattern: /\.textfield-actionClear(?![\w-])/,
+		versionDeprecated: '16.2.0',
+		versionDeleted: '18.1.0',
+		actions: `Remplacer par le composant [Clear](https://prisme.lucca.io/94310e217/p/80fb2d-clear). [Voir l’exemple](https://prisme.lucca.io/94310e217/p/55f101-text-field-deprecated/t/page-55f101-47914164-17).`,
+	},
+	{
+		// Any combination of .button and .mod-counter, within one compound selector
+		// SEE https://regex101.com/r/9WOlXc.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/4c9e247a76f34292090b22991a24ae603142f7c7/packages/scss/src/components/button/index.scss#L33.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
+		objectPattern: /(?=[^\s>+~]*\.button(?![\w-]))(?=[^\s>+~]*\.mod-counter(?![\w-]))[^\s>+~]*/,
+		versionDeprecated: '16.2.0',
+		versionDeleted: '18.1.0',
+		actions: `Inutile depuis le composant [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge). [Voir l’exemple](https://prisme.lucca.io/94310e217/p/098404-button/t/page-098404-82776006-50af19-6).`,
+	},
+	{
+		// SEE https://regex101.com/r/AUlf21.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/4c9e247a76f34292090b22991a24ae603142f7c7/packages/scss/src/components/button/mods.scss#L59.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/5cb11aa50a56e8cbc844f5f683c91e50b429f6c4/packages/scss/src/components/navside/component.scss#L114.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/ac3cbedd153698001ffe054d81c8b97b7a1877ba/packages/ng/styles/definitions/select/_select-input.scss#L133.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
+		objectPattern: [/\.button-counter(?![\w-])/, /\.navSide-item-alert(?![\w-])/, /\.lu-select-value \.label(?![\w-])/],
+		versionDeprecated: '16.2.0',
+		versionDeleted: '18.1.0',
+		actions: `
+			* \`.button-counter\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge)
+			* \`.navSide-item-alert\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou [New badge](https://prisme.lucca.io/94310e217/p/36bcdf-new-badge)
+			* \`.lu-select-value .label\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou le sous-composant dédié de Select Multiple
+		`,
+	},
+	{
 		// SEE https://regex101.com/r/wa8g0O.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/79401000ea2b96ce82a5ad2965952a04ea980703/packages/scss/src/components/index.scss#L54.
@@ -84,17 +124,6 @@ export default [
 		actions: `Remplacer par les tokens [elevations](https://prisme.lucca.io/94310e217/p/673d94-elevations/b/043449).`,
 	},
 	{
-		// SEE https://regex101.com/r/yt2aCa.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/aeac8903fc82846f9e8cab4533ece52926831de1/packages/scss/src/components/textfield/mods.scss#L35.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
-		objectPattern: /\.textfield-actionClear(?![\w-])/,
-		versionDeprecated: '16.2.2',
-		versionDeleted: '18.1.0',
-		actions: `Remplacer par le composant [Clear](https://prisme.lucca.io/94310e217/p/80fb2d-clear). [Voir l’exemple](https://prisme.lucca.io/94310e217/p/55f101-text-field-deprecated/t/page-55f101-47914164-17).`,
-	},
-	{
 		// Label used as a counter in a menu or horizontal navigation item, replaced by Numeric badge in 16.3.0.
 		// Kept before the Label component entry, which matches it too.
 		// SEE https://regex101.com/r/ag9QK4.
@@ -106,35 +135,6 @@ export default [
 		],
 		versionDeprecated: '16.3.0',
 		actions: `Remplacer par [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge).`,
-	},
-	{
-		// Any combination of .button and .mod-counter, within one compound selector
-		// SEE https://regex101.com/r/9WOlXc.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/4c9e247a76f34292090b22991a24ae603142f7c7/packages/scss/src/components/button/index.scss#L33.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
-		objectPattern: /(?=[^\s>+~]*\.button(?![\w-]))(?=[^\s>+~]*\.mod-counter(?![\w-]))[^\s>+~]*/,
-		versionDeprecated: '16.3.0',
-		versionDeleted: '18.1.0',
-		actions: `Inutile depuis le composant [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge). [Voir l’exemple](https://prisme.lucca.io/94310e217/p/098404-button/t/page-098404-82776006-50af19-6).`,
-	},
-	{
-		// SEE https://regex101.com/r/AUlf21.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v16.2.0.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/4c9e247a76f34292090b22991a24ae603142f7c7/packages/scss/src/components/button/mods.scss#L59.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/cbd937b606666f1f7c8b076495f9d44b483d237a.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/5cb11aa50a56e8cbc844f5f683c91e50b429f6c4/packages/scss/src/components/navside/component.scss#L114.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/ac3cbedd153698001ffe054d81c8b97b7a1877ba/packages/ng/styles/definitions/select/_select-input.scss#L133.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.1.0.
-		objectPattern: [/\.button-counter(?![\w-])/, /\.navSide-item-alert(?![\w-])/, /\.lu-select-value \.label(?![\w-])/],
-		versionDeprecated: '16.3.0',
-		versionDeleted: '18.1.0',
-		actions: `
-			* \`.button-counter\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge)
-			* \`.navSide-item-alert\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou [New badge](https://prisme.lucca.io/94310e217/p/36bcdf-new-badge)
-			* \`.lu-select-value .label\` ⇒ [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge) ou le sous-composant dédié de Select Multiple
-		`,
 	},
 	{
 		// Legacy form layout, including its children (`.form-group-line-col`…)
@@ -236,6 +236,62 @@ export default [
 		`,
 	},
 	{
+		// The `.lu-select-*` classes stay out: the API and date selects, not deprecated, still emit them.
+		// SEE https://regex101.com/r/dwPyNk.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/9b71a76ca515ad8ae2d675bcba5ae39882beeaf7.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/9154c555b6a417bf1193f469246e6af8e4c71fee/packages/ng/select/input/select-input.component.ts#L203.
+		name: 'Select',
+		objectPattern: /(?<![\w.#="'-])lu-select(?![\w-])/,
+		versionDeprecated: '17.3.0',
+		actions: `
+			Remplacer par [Simple](https://prisme.lucca.io/94310e217/p/587833-select-simple) & [Multiple Select](https://prisme.lucca.io/94310e217/p/927519-select-multiple-new) et leurs directives.
+
+			Variations concernées :
+
+			* [API](https://prisme.lucca.io/94310e217/p/699694-api-select)
+			* [Establishment](https://prisme.lucca.io/94310e217/p/70d7eb-establishment)
+			* [Department](https://prisme.lucca.io/94310e217/p/479237-department-select-)
+			* [User](https://prisme.lucca.io/94310e217/p/691517-select)
+			* [Qualification](https://prisme.lucca.io/94310e217/p/69f87f-qualification)
+		`,
+		urls: {
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select',
+			prisme: 'https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated',
+		},
+	},
+	{
+		// SEE https://regex101.com/r/VGtzuM.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/38b47f6750491ded25c0d835f703d5d9da3d32df/packages/scss/src/commons/utils/index.scss#L236.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/38b47f6750491ded25c0d835f703d5d9da3d32df/packages/scss/src/commons/utils/index.scss#L231.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
+		objectPattern: [/\.u-comma(?![\w-])/, /\.u-unit(?![\w-])/],
+		versionDeprecated: '17.3.0',
+		versionDeleted: '19.1.0',
+		actions: `
+			* \`.u-comma\` ⇒ virgules dans le HTML, pour l’accessibilité
+			* \`.u-unit\` ⇒ aucun remplacement, à reprendre côté produit si nécessaire
+		`,
+	},
+	{
+		// SEE https://regex101.com/r/LKOdgf.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/307429b94f4b3e5cb2809a4153201417a6115711/packages/ng/qualification/select/input/qualification-select-input.component.ts#L15.
+		// SEE https://github.com/LuccaSA/lucca-front/pull/2614.
+		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
+		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
+		name: 'Qualification picker',
+		objectPattern: /(?<![\w.#="'-])lu-qualification-select(?![\w-])/,
+		versionDeprecated: '17.3.0',
+		versionDeleted: '20.1.0',
+		actions: `Remplacer par les directives de [Simple](https://prisme.lucca.io/94310e217/p/587833-select-simple/b/991e87) et [Multiple Select](https://prisme.lucca.io/94310e217/p/927519-select-multiple-new/b/39e067).`,
+		urls: {
+			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select',
+		},
+	},
+	{
 		// SEE https://regex101.com/r/7JXwlm.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/6be50a4dac63e15378ae529426817c4e6be5fb84/packages/ng/icon/icon.component.scss#L7.
@@ -284,47 +340,6 @@ export default [
 		},
 	},
 	{
-		// The `.lu-select-*` classes stay out: the API and date selects, not deprecated, still emit them.
-		// SEE https://regex101.com/r/dwPyNk.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/9b71a76ca515ad8ae2d675bcba5ae39882beeaf7.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/9154c555b6a417bf1193f469246e6af8e4c71fee/packages/ng/select/input/select-input.component.ts#L203.
-		name: 'Select',
-		objectPattern: /(?<![\w.#="'-])lu-select(?![\w-])/,
-		versionDeprecated: '17.3.2',
-		actions: `
-			Remplacer par [Simple](https://prisme.lucca.io/94310e217/p/587833-select-simple) & [Multiple Select](https://prisme.lucca.io/94310e217/p/927519-select-multiple-new) et leurs directives.
-
-			Variations concernées :
-
-			* [API](https://prisme.lucca.io/94310e217/p/699694-api-select)
-			* [Establishment](https://prisme.lucca.io/94310e217/p/70d7eb-establishment)
-			* [Department](https://prisme.lucca.io/94310e217/p/479237-department-select-)
-			* [User](https://prisme.lucca.io/94310e217/p/691517-select)
-			* [Qualification](https://prisme.lucca.io/94310e217/p/69f87f-qualification)
-		`,
-		urls: {
-			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select',
-			prisme: 'https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated',
-		},
-	},
-	{
-		// SEE https://regex101.com/r/LKOdgf.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/307429b94f4b3e5cb2809a4153201417a6115711/packages/ng/qualification/select/input/qualification-select-input.component.ts#L15.
-		// SEE https://github.com/LuccaSA/lucca-front/pull/2614.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/a273d572892c957de5be340926db885576c41d89.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v20.1.0.
-		name: 'Qualification picker',
-		objectPattern: /(?<![\w.#="'-])lu-qualification-select(?![\w-])/,
-		versionDeprecated: '17.3.2',
-		versionDeleted: '20.1.0',
-		actions: `Remplacer par les directives de [Simple](https://prisme.lucca.io/94310e217/p/587833-select-simple/b/991e87) et [Multiple Select](https://prisme.lucca.io/94310e217/p/927519-select-multiple-new/b/39e067).`,
-		urls: {
-			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select',
-		},
-	},
-	{
 		// SEE https://regex101.com/r/Ndh0bQ.
 		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v18.3.0.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/d1f911b8d34cbba6945d16538b58eb558feda634/packages/scss/src/components/dialog/component.scss#L37.
@@ -360,21 +375,6 @@ export default [
 		],
 		versionDeprecated: '17.4.0',
 		actions: `Remplacer par \`.is-active\`.`,
-	},
-	{
-		// SEE https://regex101.com/r/VGtzuM.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v17.3.0.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/38b47f6750491ded25c0d835f703d5d9da3d32df/packages/scss/src/commons/utils/index.scss#L236.
-		// SEE https://github.com/LuccaSA/lucca-front/commit/3ae878c48cd6344f155dbba44b4d409b3ab1d6bf.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/38b47f6750491ded25c0d835f703d5d9da3d32df/packages/scss/src/commons/utils/index.scss#L231.
-		// SEE https://github.com/LuccaSA/lucca-front/releases/tag/v19.1.0.
-		objectPattern: [/\.u-comma(?![\w-])/, /\.u-unit(?![\w-])/],
-		versionDeprecated: '17.4.0',
-		versionDeleted: '19.1.0',
-		actions: `
-			* \`.u-comma\` ⇒ virgules dans le HTML, pour l’accessibilité
-			* \`.u-unit\` ⇒ aucun remplacement, à reprendre côté produit si nécessaire
-		`,
 	},
 	{
 		// Old t-shirt sized utilities

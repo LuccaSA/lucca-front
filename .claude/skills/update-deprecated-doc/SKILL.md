@@ -96,7 +96,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* The action reads "Remplacer par" followed by the symbol as code.
 	* Classes sharing a page share the row, which takes the earliest version.
 * Version sources, in order:
-	1. The release note or commit declaring the deprecation.
+	1. The release note or commit declaring the deprecation, whichever shipped first.
 	2. The release in which the last live LF component left it, sourced by its PR.
 	3. Prisme's past releases: `https://prisme.lucca.io/94310e217/v/<release>/p/<page>.md`.
 

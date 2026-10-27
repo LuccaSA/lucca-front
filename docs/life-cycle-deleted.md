@@ -75,7 +75,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 		</tr>
 		<tr>
 			<td>Qualification picker, <a href="https://github.com/search?q=%2F(%5E%7C%5B%5E%5Cw-%5D)lu-qualification-select(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>lu-qualification-select</code></a></td>
-			<td>17.3.2</td>
+			<td>17.3.0</td>
 			<td>20.1.0</td>
 			<td>
 				<a href="https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/lu-select"><strong>Schematic</strong> : lu-select</a>
@@ -147,7 +147,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)textfield-actionClear(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.textfield-actionClear</code></a>
 			</td>
-			<td>16.2.2</td>
+			<td>16.2.0</td>
 			<td>18.1.0</td>
 			<td>Remplacer par le composant <a href="https://prisme.lucca.io/94310e217/p/80fb2d-clear">Clear</a>. <a href="https://prisme.lucca.io/94310e217/p/55f101-text-field-deprecated/t/page-55f101-47914164-17">Voir l’exemple</a>.</td>
 		</tr>
@@ -155,7 +155,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 			<td>
 				<a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-counter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.button</code></a> <strong>+</strong> <a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)button(%5B%5E%5Cw-%5D%7C%24)%2F%20AND%20%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)mod-counter(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.mod-counter</code></a>
 			</td>
-			<td>16.3.0</td>
+			<td>16.2.0</td>
 			<td>18.1.0</td>
 			<td>Inutile depuis le composant <a href="https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge">Numeric badge</a>. <a href="https://prisme.lucca.io/94310e217/p/098404-button/t/page-098404-82776006-50af19-6">Voir l’exemple</a>.</td>
 		</tr>
@@ -167,7 +167,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)navSide-item-alert(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.navSide-item-alert</code></a></li>
 				</ul>
 			</td>
-			<td>16.3.0</td>
+			<td>16.2.0</td>
 			<td>18.1.0</td>
 			<td>
 				<ul>
@@ -238,7 +238,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 				<li><a href="https://github.com/search?q=%2F(%5C.%7Cclass%3D%22(%5B%5E%22%5D*%5Cs)%3F)u-unit(%5B%5E%5Cw-%5D%7C%24)%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&amp;type=code"><code>.u-unit</code></a></li>
 				</ul>
 			</td>
-			<td>17.4.0</td>
+			<td>17.3.0</td>
 			<td>19.1.0</td>
 			<td>
 				<ul>
