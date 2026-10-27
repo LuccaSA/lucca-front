@@ -95,4 +95,4 @@ Attentes détaillées côté relecture : [contributing.md](contributing.md#pull-
 - `docs/*.md` — documents de conception internes de certains composants.
 - `.github/skills/` — skills agents générés (changelogs par release, infos de dépréciation), produits par `npm run skills:generate` depuis `scripts/generate-skills/`.
 - La référence du Design System vit sur zeroheight (Prisme).
-- **Scripts de skills** — tout script embarqué ou appelé par un skill est écrit en **Node** (JS/TS) ou en **C#/.NET** — jamais en Python, shell ou autre langage, pour garder une cohérence globale entre les dépôts.
+- **Scripts de skills** — tout script embarqué ou appelé par un skill est écrit en **Node** (JS/TS), en **C#/.NET** ou en **shell** — jamais en Python ou autre langage, pour garder une cohérence globale entre les dépôts.
