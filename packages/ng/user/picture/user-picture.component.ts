@@ -49,8 +49,6 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 		'[class.mod-XL]': 'size() === "XL"',
 		'[class.mod-XXL]': 'size() === "XXL"',
 		'[class.mod-XXXL]': 'size() === "XXXL"',
-		'[attr.role]': 'withAlt() ? "img" : null',
-		'[attr.aria-label]': 'withAlt() ? fullName() || null : null',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
