@@ -22,6 +22,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { IconComponent } from '@lucca/prisme/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { intlArgType } from '@/helpers/stories';
@@ -58,6 +59,7 @@ export default {
 				DropdownItemComponent,
 				DropdownActionComponent,
 				LuDropdownTriggerDirective,
+				LuTooltipTriggerDirective,
 			],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), { provide: LOCALE_ID, useValue: 'fr-FR' }] }),
@@ -69,29 +71,29 @@ export default {
 	},
 	argTypes: {
 		views: {
-			description: 'Affiche les vues via SegmentedControl.',
+			description: '[Story] Affiche les vues via SegmentedControl.',
 			control: {
 				type: 'boolean',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		saveView: {
 			name: '↳ saveView',
-			description: 'Ajoute une vue personnalisée ainsi qu’un dropdown pour enregistrer la vue.',
+			description: '[Story] Ajoute une vue personnalisée ainsi qu’un dropdown pour enregistrer la vue.',
 			control: {
 				type: 'boolean',
 			},
 			if: { arg: 'views', truthy: true },
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		filterViewSelector: {
 			name: '↳ filterViewSelector',
-			description: 'Bascule la sélection de vue en dropdown (grand nombre de vues).',
+			description: '[Story] Bascule la sélection de vue en dropdown (grand nombre de vues).',
 			control: {
 				type: 'boolean',
 			},
 			if: { arg: 'views', truthy: true },
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		renameView: {
 			description: 'Événement déclenché lorsque l’utilisateur demande à renommer une vue.',
@@ -108,11 +110,33 @@ export default {
 			table: { category: 'outputs (filter-view-selector)', type: { summary: 'T' } },
 		},
 		optionalFilter: {
-			description: 'Ajoute une FilterPill optionnelle. Celle-ci déclenche automatiquement l’apparition du bouton d’ajout de filtres.',
+			description: '[Story] Ajoute une FilterPill optionnelle. Celle-ci déclenche automatiquement l’apparition du bouton d’ajout de filtres.',
 			control: {
 				type: 'boolean',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'story' },
+		},
+		optional: {
+			name: '↳ optional',
+			description:
+				'Rend disponible le filtre via le bouton d’ajout de filtre. Celui-ci est masqué par défaut. Lorsqu’un filtre est optionnel, celui-ci doit obligatoirement porter un attribut <code>name</code>.',
+			control: false,
+			if: { arg: 'optionalFilter', truthy: true },
+			table: { category: 'inputs (filter-pill)' },
+		},
+		name: {
+			name: '↳ name',
+			description: 'Dans le cas d’un filtre optionnel, permet de faire le lien entre la liste de filtres disponibles et l’affichage du filtre.',
+			control: false,
+			if: { arg: 'optionalFilter', truthy: true },
+			table: { category: 'inputs (filter-pill)' },
+		},
+		displayed: {
+			name: '↳ displayed',
+			description: 'Indique si un filtre optionnel est affiché. Two-way.',
+			control: false,
+			if: { arg: 'optionalFilter', truthy: true },
+			table: { category: 'models (filter-pill)', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
 		},
 		groupedOptionalFilters: {
 			name: '↳ groupedOptionalFilters',
@@ -124,11 +148,11 @@ export default {
 			table: { category: 'inputs' },
 		},
 		actionButton: {
-			description: 'Affiche un bouton d’action associé à la FilterBar.',
+			description: '[Story] Affiche un bouton d’action associé à la FilterBar.',
 			control: {
 				type: 'boolean',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		manualApply: {
 			description:
