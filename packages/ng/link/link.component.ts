@@ -17,7 +17,7 @@ import { LuRouterLink } from './lu-router-link';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'link',
-		'[attr.href]': 'routerLink.publicReactiveHref()',
+		'[attr.href]': 'routerLink.resolvedHref()',
 		'[class.mod-decorationHover]': 'decorationHover()',
 		'[class.mod-icon]': 'external()',
 		'[class.mod-neutral]': 'neutral()',
@@ -90,15 +90,16 @@ export class LinkComponent {
 		effect(() => {
 			if (href()) {
 				this.hrefBackup = href();
-				this.routerLink.publicReactiveHref.set(this.hrefBackup);
+				this.routerLink.hrefOverride.set(this.hrefBackup);
 			}
 			if (this.disabled()) {
 				if (this.routerLinkCommands()) {
 					this.routerLink.routerLink = null;
 				}
-				this.routerLink.publicReactiveHref.set(null);
+				this.routerLink.hrefOverride.set(null);
 			} else if (this.routerLinkCommands() && !this.external()) {
 				this.routerLink.routerLink = this.routerLinkCommands();
+				this.routerLink.hrefOverride.set(undefined);
 				// We need to do this in order to have `routerLink` update the value for `href`:
 				// See https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link.ts#L281
 				this.routerLink.ngOnChanges({});
@@ -106,9 +107,11 @@ export class LinkComponent {
 				// External router links must not wire up the `RouterLink` directive (it would navigate in-place),
 				// but they still need an `href` so the anchor is keyboard-focusable and its destination is previewable.
 				// Actual navigation is handled natively by `target="_blank"` (anchors) or by `redirect()` (buttons).
-				this.routerLink.publicReactiveHref.set(this.#serializeExternalUrl());
+				// Commands set while the link was internal are cleared, otherwise `RouterLink` keeps intercepting the click.
+				this.routerLink.routerLink = null;
+				this.routerLink.hrefOverride.set(this.#serializeExternalUrl());
 			} else if (!href() && this.hrefBackup) {
-				this.routerLink.publicReactiveHref.set(this.hrefBackup);
+				this.routerLink.hrefOverride.set(this.hrefBackup);
 			}
 		});
 	}
