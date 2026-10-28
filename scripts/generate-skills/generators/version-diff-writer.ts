@@ -328,6 +328,14 @@ function detectRenames(removed: FileDiff[], added: FileDiff[], prevRoot: string,
  * Returns the written path.
  */
 export function writeReviewChangelog(skillsDir: string, version: VersionConfig, previous: SkillSnapshot | null): string {
+	try {
+		return writeChangelogAgainst(skillsDir, version, previous);
+	} finally {
+		if (previous) fs.rmSync(previous.root, { recursive: true, force: true });
+	}
+}
+
+function writeChangelogAgainst(skillsDir: string, version: VersionConfig, previous: SkillSnapshot | null): string {
 	const minorKey = `${version.major}.${version.minor}`;
 	const changelogDir = path.join(generatorRoot(skillsDir), 'changelog');
 	fs.mkdirSync(changelogDir, { recursive: true });

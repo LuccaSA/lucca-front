@@ -80,7 +80,7 @@ import { writeFixes } from './generators/fixes-writer';
 import { snapshotSkill, writeReviewChangelog } from './generators/version-diff-writer';
 import { auditStoryExamples, clearOutputViolations, reportOutputViolations } from './generators/output-guard';
 import { ensureZhReleaseIds } from './zh-release-guard';
-import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist, refuseMinorForThisBranch } from './preflight';
+import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist, refuseMinorForThisBranch, refusePartialRunOnNewMinor } from './preflight';
 import { MinorResolution, getTechnicalMinor, parseVersion, resolveMinorVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
@@ -360,6 +360,17 @@ async function main(): Promise<void> {
 		console.error(`❌ ${refusal}`);
 		process.exit(1);
 	}
+	const partialFlags = [
+		flags.skipDocumentation && '--skip-documentation',
+		flags.skipTools && '--skip-tools',
+		flags.skipSchematics && '--skip-schematics',
+		flags.documentationOnly && '--documentation-only',
+	].filter((flag): flag is string => !!flag);
+	const partialRefusal = flags.dryRun || flags.component ? null : refusePartialRunOnNewMinor(flags.versions[0], committed?.minor ?? null, partialFlags);
+	if (partialRefusal) {
+		console.error(`❌ ${partialRefusal}`);
+		process.exit(1);
+	}
 
 	// ── Pre-flight ────────────────────────────────────────────────────────────
 	// Three phases, ordered so that no question is asked while a check can still stop the run, and
@@ -382,17 +393,6 @@ async function main(): Promise<void> {
 		process.exit(1);
 	}
 
-	clearFailures();
-	clearOutputViolations();
-
-	// Taken before anything is written: the review changelog diffs the run's output against it.
-	const previousSkill = flags.dryRun || flags.component ? null : snapshotSkill(config.output.skillsDir, committed);
-	// The writers only clean what they regenerate: on a new minor, a page the minor no longer emits
-	// would survive with the previous minor's content, and SKILL.md §6 would still list it.
-	if (previousSkill && committed?.minor !== flags.versions[0]) {
-		clearSkillContent(config.output.skillsDir);
-	}
-
 	// Phase 3 — every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
 	// the confirmed latest online. Aborts before any heavy work if an unpinned, superseded minor is
 	// unresolved (would otherwise pull "latest" = a newer version and corrupt its design sections).
@@ -403,6 +403,17 @@ async function main(): Promise<void> {
 			console.error(`\n❌ Garde-fou ZeroHeight : ${err.message}`);
 			process.exit(1);
 		}
+	}
+
+	clearFailures();
+	clearOutputViolations();
+
+	// Taken before anything is written: the review changelog diffs the run's output against it.
+	const previousSkill = flags.dryRun || flags.component ? null : snapshotSkill(config.output.skillsDir, committed);
+	// The writers only clean what they regenerate: on a new minor, a page the minor no longer emits
+	// would survive with the previous minor's content, and SKILL.md §6 would still list it.
+	if (previousSkill && committed?.minor !== flags.versions[0]) {
+		clearSkillContent(config.output.skillsDir);
 	}
 
 	let totalSuccess = 0;

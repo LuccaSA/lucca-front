@@ -43,17 +43,29 @@ export class PreflightAbort extends Error {
  * operator, or null when the run may proceed.
  *
  * The skill is a single folder rewritten in place: generating a minor overwrites the one committed
- * here, and the next tag cut from this branch ships it to every consumer pinned on that tag.
+ * here, and the next tag cut from this branch ships it in the npm package of that tag.
  */
 export function refuseMinorForThisBranch(requested: string, committed: string | null): string | null {
 	if (committed === null) return null;
-	const [reqMajor, reqMinor] = requested.split('.').map(Number);
+	const [reqMajor, reqMinor] = requested.replace(/^v/, '').split('.').map(Number);
 	const [comMajor, comMinor] = committed.split('.').map(Number);
 	const isOlder = reqMajor < comMajor || (reqMajor === comMajor && reqMinor < comMinor);
 	if (!isOlder) return null;
 	return (
 		`--version ${requested} : cette branche porte la skill ${committed}, la générer ici l'écraserait et le prochain tag la livrerait aux projets en ${committed}. ` +
 		`Génère ${requested} sur la branche de maintenance de sa majeure (ex : v21.4-lts pour la 21.x).`
+	);
+}
+
+/**
+ * Moving the skill to a new minor empties references/ and fixes/ before regenerating them (see
+ * clearSkillContent), so the pages a partial run skips would be missing from the new minor.
+ */
+export function refusePartialRunOnNewMinor(requested: string, committed: string | null, partialFlags: string[]): string | null {
+	if (committed === null || partialFlags.length === 0 || committed === requested.replace(/^v/, '')) return null;
+	return (
+		`${partialFlags.join(', ')} : la skill passe de ${committed} à ${requested}, ce run vide references/ et fixes/ et ne régénérerait pas les pages que ces options sautent. ` +
+		`Relance sans elles.`
 	);
 }
 
