@@ -25,6 +25,22 @@ export function skillCovers(manifest, version) {
 	return !!minor && (manifest.minor === minor || !!manifest.technicalMinors?.[minor]);
 }
 
+/**
+ * Null when the committed skill can ship for `version`. Otherwise a tagged build, which the publish workflow
+ * runs, throws so the release fails instead of going out without its docs; an untagged build gets a warning.
+ */
+export function checkShippable(manifest, { version, tag, skillPresent }) {
+	let gap = null;
+	if (!skillPresent) {
+		gap = `.github/skills/_lucca-front/llms has no SKILL.md`;
+	} else if (!skillCovers(manifest, version)) {
+		gap = `the committed skill documents ${manifest.minor}, not ${version} (.github/skills/_lucca-front/versions.json)`;
+	}
+	if (!gap) return null;
+	if (tag) throw new Error(`[llms] ${gap}: ${tag} would ship no LLM documentation`);
+	return `::warning::[llms] ${gap}: this build ships no LLM documentation.`;
+}
+
 /** Design and UX-writing content follows ZeroHeight, not the code version: a target with `linkRemoteOnly` links it on the deploy instead of shipping it. */
 export function isRemoteOnly(path) {
 	return /\.design\.md$/.test(path) || path.startsWith('references/documentation/');
@@ -134,10 +150,9 @@ function publish(targetName) {
 	const tag = currentTag();
 	const ref = tag ?? 'master';
 	const version = tag ?? `${manifest.minor}.0`;
-	if (!skillCovers(manifest, version) || !existsSync(join(skillDir, 'SKILL.md'))) {
-		console.log(
-			`::warning::[llms] the committed skill documents ${manifest.minor}, not ${version} (.github/skills/_lucca-front/versions.json): ${target.outDir} ships no LLM documentation.`,
-		);
+	const warning = checkShippable(manifest, { version, tag, skillPresent: existsSync(join(skillDir, 'SKILL.md')) });
+	if (warning) {
+		console.log(warning);
 		return;
 	}
 
