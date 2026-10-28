@@ -16,12 +16,15 @@
 						Open Bottom Drawer
 					</button>
 					<button luButton="outlined" size="S" (click)="showToast()">Show Toast</button>
+					<button luButton="outlined" size="S" (click)="openDeprecatedModal()">Open Deprecated Modal</button>
+					<button luButton="outlined" size="S" (click)="openDeprecatedSidepanel()">Open Deprecated Sidepanel</button>
 				</div>
 
 				<!-- Connected overlays anchored to the inline-end edge: they must be pushed out of the pushPanel zone, never overflow into it -->
 				<div class="pr-u-marginTop400 pr-u-displayFlex pr-u-flexDirectionColumn pr-u-alignItemsFlexEnd pr-u-gap100 connectedOverlays">
 					<div class="pr-u-displayFlex pr-u-gap100">
 						<button luButton="outlined" size="S" [luPopover2]="popover" luPopoverPosition="after">Open Popover</button>
+						<button luButton="outlined" size="S" [luPopover2]="popoverLarge" luPopoverPosition="after">Open Large Popover</button>
 						<button
 							luButton="outlined"
 							size="S"
@@ -104,6 +107,12 @@
 
 <ng-template #popover>
 	<p style="inline-size: 24rem">This popover is intentionally wide so it would overflow into the push panel zone unless it gets pushed back to the inline-start.</p>
+</ng-template>
+
+<ng-template #popoverLarge>
+	<p style="max-inline-size: 800px">
+		This popover can grow up to 800px, wider than the space left beside the push panel: it must shrink to fit that space instead of overflowing into the push panel zone. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+	</p>
 </ng-template>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->

@@ -62,7 +62,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		},
 		provideLuSelectLabelsAndIds(),
 		LuMultiSelectPanelRefFactory,
-		// Below the `S` breakpoint the panel opens as a dialog in `sheet` mode.
+		// Below the `XS` breakpoint the panel opens as a dialog in `sheet` mode.
 		provideLuDialog(),
 		{
 			provide: FILTER_PILL_INPUT_COMPONENT,

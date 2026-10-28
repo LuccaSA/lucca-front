@@ -41,7 +41,7 @@
 		max-inline-size: 30rem;
 	}
 
-	// Caps the panel anchored to the field only: below the `S` breakpoint the panel is rendered by the
+	// Caps the panel anchored to the field only: below the `XS` breakpoint the panel is rendered by the
 	// dialog as a sheet, which spans the whole viewport and sizes itself.
 	&:not(.dialog):has(> lu-select-panel) {
 		max-inline-size: 35rem !important;

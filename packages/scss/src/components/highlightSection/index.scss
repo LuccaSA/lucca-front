@@ -1,6 +1,7 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
 
+// stylelint-disable selector-disallowed-list -- Selectors are all deprecated.
 .highlightSection {
 	@layer components {
 		@include vars;

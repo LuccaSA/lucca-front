@@ -118,3 +118,98 @@ jobs:
             rclone sync "r2:${R2_BUCKET}/${PRIMARY}" "r2:${R2_BUCKET}/${ALIAS}" \
               --fast-list --checksum --transfers 8 --checkers 8
           fi
+
+  deploy-web-components:
+    # Only a pushed *stable* tag publishes the bundle: never master, a prerelease or a manual run.
+    if: github.event_name == 'push' && github.ref_type == 'tag' && !contains(github.ref_name, '-')
+    runs-on: ubuntu-latest
+    name: Deploy web components bundle
+    environment: production
+    permissions:
+      contents: read
+    # One publisher at a time, whatever the tag: the version check and the uploads below must not interleave with
+    # another release's. An active upload is never cancelled.
+    concurrency:
+      group: deploy-web-components
+      cancel-in-progress: false
+
+    env:
+      R2_BUCKET: ${{ vars.R2_BUCKET }}
+      VERSION: ${{ github.ref_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: 24.15.0
+
+      - run: npm ci
+
+      - name: Build web components bundle
+        run: |
+          export VERSION="${VERSION#v}"
+          npm run build:web-components
+
+      - name: Install rclone
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rclone
+
+      - name: Configure rclone
+        env:
+          # Secrets/vars via env, not interpolated into the script.
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_KEY }}
+          R2_ENDPOINT: ${{ vars.CLOUDFLARE_R2_ENDPOINT }}
+        run: |
+          mkdir -p ~/.config/rclone
+          cat > ~/.config/rclone/rclone.conf << EOF
+          [r2]
+          type = s3
+          provider = Cloudflare
+          access_key_id = $R2_ACCESS_KEY_ID
+          secret_access_key = $R2_SECRET_ACCESS_KEY
+          endpoint = $R2_ENDPOINT
+          acl = private
+          no_check_bucket = true
+          EOF
+
+      - name: Upload web components bundle to R2
+        run: |
+          set -euo pipefail
+          VERSION="${VERSION#v}"
+
+          # Only the latest bundle is kept: a backport tagged after a newer release must not replace it.
+          # A missing version.txt (first publication) is confirmed by a listing; any other read failure aborts, so that a
+          # failed read is never mistaken for a first publication.
+          set +e
+          LISTING="$(rclone lsf "r2:${R2_BUCKET}/web-components/" --files-only --include version.txt)"
+          STATUS=$?
+          set -e
+          if [ "$STATUS" -eq 3 ] || { [ "$STATUS" -eq 0 ] && [ -z "$LISTING" ]; }; then
+            # rclone exit code 3: directory not found
+            CURRENT=""
+          elif [ "$STATUS" -eq 0 ]; then
+            CURRENT="$(rclone cat "r2:${R2_BUCKET}/web-components/version.txt")"
+            if ! [[ "$CURRENT" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "Unexpected published version: '${CURRENT}'" >&2
+              exit 1
+            fi
+          else
+            echo "Cannot read the published version (rclone exit code ${STATUS})" >&2
+            exit 1
+          fi
+
+          if [ -n "$CURRENT" ] && [ "$(printf '%s\n%s\n' "$VERSION" "$CURRENT" | sort -V | tail -n 1)" != "$VERSION" ]; then
+            echo "Skipping web components ${VERSION}: ${CURRENT} is already published"
+            exit 0
+          fi
+
+          echo "Uploading web components ${VERSION} (replacing ${CURRENT:-<none>})"
+          for file in bundle.js bundle.css; do
+            rclone copyto "dist/web-components/${file}" "r2:${R2_BUCKET}/web-components/${file}" --checksum
+          done
+          # Written last: it records a complete upload
+          rclone copyto dist/web-components/version.txt "r2:${R2_BUCKET}/web-components/version.txt" --checksum

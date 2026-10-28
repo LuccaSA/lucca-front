@@ -53,6 +53,104 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Header overdue</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="approbationInbox-detail">
+						<div class="container approbationInbox-detail-container">
+							<header class="approbationInbox-detail-header">
+								<div class="approbationInbox-detail-header-main">
+									<div class="approbationInbox-detail-header-main-infos">
+										<div class="approbationInbox-detail-header-main-infos-headingOptional">
+											<h1 class="approbationInbox-detail-header-main-infos-title">
+												<span class="approbationInbox-detail-header-main-infos-title-content">Title</span>
+											</h1>
+											<div class="statusBadge palette-warning">En retard</div>
+										</div>
+									</div>
+									<div class="approbationInbox-detail-header-main-actions">
+										<button type="button" class="button">Approve</button>
+										<button type="button" class="button">Reject</button>
+									</div>
+								</div>
+							</header>
+							<div class="approbationInbox-detail-main">
+								<div class="approbationInbox-detail-main-block">
+									<h2 class="approbationInbox-detail-main-block-title">Approval process</h2>
+									<div class="approbationInbox-detail-main-block-content">Dolor sit amet</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-approbation-inbox-detail>
+						<lu-approbation-inbox-detail-header approbationInboxDetailHeader label="Title" overdue>
+							<ng-container approbationInboxDetailActions>
+								<button luButton type="button">Approve</button>
+								<button luButton type="button">Reject</button>
+							</ng-container>
+						</lu-approbation-inbox-detail-header>
+						<lu-approbation-inbox-detail-main-block label="Approval process">Dolor sit amet</lu-approbation-inbox-detail-main-block>
+					</lu-approbation-inbox-detail>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Header overdue with long title</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="approbationInbox-detail">
+						<div class="container approbationInbox-detail-container">
+							<header class="approbationInbox-detail-header">
+								<div class="approbationInbox-detail-header-main">
+									<div class="approbationInbox-detail-header-main-infos">
+										<div class="approbationInbox-detail-header-main-infos-headingOptional">
+											<h1 class="approbationInbox-detail-header-main-infos-title">
+												<span class="approbationInbox-detail-header-main-infos-title-content"
+													>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore</span
+												>
+											</h1>
+											<div class="statusBadge palette-warning">En retard</div>
+										</div>
+									</div>
+									<div class="approbationInbox-detail-header-main-actions">
+										<button type="button" class="button">Approve</button>
+										<button type="button" class="button">Reject</button>
+									</div>
+								</div>
+							</header>
+							<div class="approbationInbox-detail-main">
+								<div class="approbationInbox-detail-main-block">
+									<h2 class="approbationInbox-detail-main-block-title">Approval process</h2>
+									<div class="approbationInbox-detail-main-block-content">Dolor sit amet</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-approbation-inbox-detail>
+						<lu-approbation-inbox-detail-header
+							approbationInboxDetailHeader
+							label="Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore"
+							overdue
+						>
+							<ng-container approbationInboxDetailActions>
+								<button luButton type="button">Approve</button>
+								<button luButton type="button">Reject</button>
+							</ng-container>
+						</lu-approbation-inbox-detail-header>
+						<lu-approbation-inbox-detail-main-block label="Approval process">Dolor sit amet</lu-approbation-inbox-detail-main-block>
+					</lu-approbation-inbox-detail>
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Header with illustration</td>
 			<td>
 				<div class="demo-QAtable-list">

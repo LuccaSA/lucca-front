@@ -1,3 +1,9 @@
+### 22.1.1
+
+#### Deprecated
+
+- `operationIds` and `appInstanceId` inputs — use `uniqueOperationIds` instead.
+
 ### 22.1.0
 
 #### Added

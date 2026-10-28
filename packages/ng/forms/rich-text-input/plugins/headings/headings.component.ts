@@ -76,9 +76,10 @@ export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 
 	setDisabledState(isDisabled: boolean) {
 		if (isDisabled) {
-			this.formControl.disable();
+			this.formControl.disable({ emitEvent: false });
 		} else {
-			this.formControl.enable();
+			// Emitting would dispatch FORMAT_HEADINGS on the block holding the selection
+			this.formControl.enable({ emitEvent: false });
 		}
 	}
 }

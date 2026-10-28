@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { intlInputOptions, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent, LuccaIcon } from '@lucca-front/ng/icon';
 import { ILuUser, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ActivityFeedStepStatus } from '../activity-feed-step.type';
@@ -33,6 +33,11 @@ export class ActivityFeedStepComponent {
 	readonly label = input<PortalContent | null>(null);
 
 	readonly user = input<ILuUser | null>(null);
+
+	/**
+	 * Displays a placeholder avatar instead of the `user` one
+	 */
+	readonly avatarPlaceholder = input(false, { transform: luBooleanAttribute });
 
 	readonly status = input<ActivityFeedStepStatus | null>(null);
 

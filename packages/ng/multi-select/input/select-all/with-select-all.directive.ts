@@ -39,7 +39,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		const label = this.displayerLabelFn();
 		const count = this.displayerCount();
 		if (label) {
-			const result = label(count);
+			const result = label(count ?? 0);
 			return typeof result === 'string' ? result : getIntlPluralLabel(this.pluralRules, result, count ?? 0);
 		}
 		return `${count} ${this.displayerLabel()}`;
