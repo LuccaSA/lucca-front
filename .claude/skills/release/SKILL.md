@@ -269,4 +269,4 @@ Court, dans cet ordre :
 2. Les liens des PR ouvertes ou existantes : changelog des composants, sync vers les releases en cours, release → master, highlight-prisme.
 3. Les écarts relevés : composants sans CHANGELOG.md, divergences changelog GitHub / CHANGELOG des composants, étapes sautées et pourquoi.
 4. Mineure / majeure : le tableau des migrations proposées, en attente de décision.
-5. Mineure / majeure : le rappel de régénérer la skill `lucca-front` une fois la version publiée (npm + Storybook déployé), `npm run skills:generate -- --version X.Y` sur la branche qui porte la mineure. Le premier tag coupé après ce commit est celui que les projets épinglent dans leur `apm.yml` (cf. `scripts/generate-skills/README.md`).
+5. Mineure / majeure : le rappel de régénérer la documentation LLM une fois la version publiée (npm + Storybook déployé), `npm run skills:generate -- --version X.Y` sur la branche qui porte la mineure. Le premier tag coupé après ce commit est le premier dont `@lucca-front/ng` livre `llms.txt` pour cette mineure (cf. `scripts/generate-skills/README.md`).

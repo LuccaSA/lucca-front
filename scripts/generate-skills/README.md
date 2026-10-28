@@ -2,9 +2,9 @@
 
 Pipeline **déterministe** (zéro IA) qui génère la documentation des composants Lucca Front pour les **Agent Skills**.
 
-Le pipeline produit **une seule skill**, `.github/skills/lucca-front/` (`name: lucca-front`) : un `SKILL.md`, les fichiers `references/` du **dernier patch publié** de la mineure, et un dossier `fixes/` avec un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories — **aucune information patch-level n'est perdue**).
+Le pipeline produit **une seule documentation**, `.github/skills/_lucca-front/llms/` : un `SKILL.md` (le guide d'entrée), les fichiers `references/` du **dernier patch publié** de la mineure, et un dossier `fixes/` avec un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories — **aucune information patch-level n'est perdue**).
 
-Le nom de la skill ne porte **aucune version** : comme pour [`lucca-cdk`](https://github.com/LuccaSA/lucca-cdk/tree/main/scripts/generate-skills), le versionnement est délégué à [APM](https://microsoft.github.io/apm/). Un projet épingle le **tag git** de lucca-front qui porte la mineure de son `@lucca-front/ng` (cf. [Consommation via APM](#consommation-via-apm)). Une branche porte donc **une** mineure de la skill : `master` la plus récente, `v21.4-lts` la 21.x.
+Le chemin ne porte **aucune version** : `scripts/llms-skill` copie cette documentation dans le package `@lucca-front/ng` (`llms.txt` + `llms/`), qui la livre donc à la version installée. Les projets n'installent avec [APM](https://microsoft.github.io/apm/) que `.github/skills/lucca-front/`, une skill **écrite à la main** qui renvoie vers `node_modules/@lucca-front/ng/llms.txt` (cf. [Consommation](#consommation)). Une branche porte **une** mineure de la documentation : `master` la plus récente, `v21.4-lts` la 21.x.
 
 ## Prérequis
 
@@ -183,25 +183,27 @@ batché** ; la sérialisation + cadence + retries `Retry-After` ne restent qu'en
 
 ```
 .github/skills/
-├── lucca-front/                      # LA skill (dossier = name = leaf d'install), installée via APM
-│   ├── SKILL.md                      # Point d'entrée : mineure implicite, chemins relatifs
-│   ├── fixes/
-│   │   ├── 22-1-1.md                 # Delta du patch 22.1.1 vs 22.1.0 (API, types, codemods, stories)
-│   │   └── …                         # Un fichier par patch publié > .0
-│   └── references/                   # Contenu du DERNIER patch publié de la mineure
-│       ├── components/
-│       │   └── button/
-│       │       ├── button.md         # API Angular + liens + section ## Changelog (diff structurel cumulatif + prose ZH)
-│       │       ├── button.component.md  # Notes d'implémentation + toutes les stories inline (### <nom>)
-│       │       ├── button.design.md  # Guidelines design ZH fusionnées (overview + sections)
-│       │       └── button.figma.md   # Tokens Figma
-│       ├── types/<TypeName>.md       # Types énumérés partagés (ex: LuccaIcon)
-│       ├── documentation/            # Doc transverse
-│       │   ├── tokens/  content/  guidelines/  patterns/
-│       │   └── deprecated/deprecated.md
-│       ├── tools/{animations,mixins,numbers,scrollbox,utilitaires}.md
-│       └── migrations.md             # Codemods de migration (ng generate) cumulatifs ≤ cette version
-└── _lucca-front/                     # Métadonnées du générateur : hors skill, jamais installées
+├── lucca-front/                      # Skill pointeur écrite à la main, installée via APM (non générée)
+│   └── SKILL.md                      # Renvoie vers node_modules/@lucca-front/ng/llms.txt
+└── _lucca-front/                     # Généré : jamais installé par APM
+    ├── llms/                         # Copié dans @lucca-front/ng (llms/) par scripts/llms-skill
+    │   ├── SKILL.md                  # Guide d'entrée : mineure implicite, chemins relatifs
+    │   ├── fixes/
+    │   │   ├── 22-1-1.md             # Delta du patch 22.1.1 vs 22.1.0 (API, types, codemods, stories)
+    │   │   └── …                     # Un fichier par patch publié > .0
+    │   └── references/               # Contenu du DERNIER patch publié de la mineure
+    │       ├── components/
+    │       │   └── button/
+    │       │       ├── button.md     # API Angular + liens + section ## Changelog (diff structurel cumulatif + prose ZH)
+    │       │       ├── button.component.md  # Notes d'implémentation + toutes les stories inline (### <nom>)
+    │       │       ├── button.design.md  # Guidelines design ZH fusionnées (overview + sections)
+    │       │       └── button.figma.md   # Tokens Figma
+    │       ├── types/<TypeName>.md   # Types énumérés partagés (ex: LuccaIcon)
+    │       ├── documentation/        # Doc transverse
+    │       │   ├── tokens/  content/  guidelines/  patterns/
+    │       │   └── deprecated/deprecated.md
+    │       ├── tools/{animations,mixins,numbers,scrollbox,utilitaires}.md
+    │       └── migrations.md         # Codemods de migration (ng generate) cumulatifs ≤ cette version
     ├── versions.json                 # Manifeste : la mineure documentée, ses patchs (lu par scripts/llms-skill)
     └── changelog/<M.m>.md            # Diff de review du run (avant → après), non distribué
 ```
@@ -533,23 +535,23 @@ Il est **opaque** (non déductible du repo, de git ou de npm) :
 
 **✅ À faire dès qu'une version est publiée** : récupérer son ID (méthode ci-dessus) et l'ajouter dans `zh-release-ids.json` (clé `"major.minor"`). Une mineure déjà pinnée **ne déclenche jamais le garde-fou** — pinner de façon proactive évite d'avoir à passer `--zh-latest` / `--zh-id` (ou de répondre au prompt) aux régénérations suivantes.
 
-## Consommation via APM
+## Consommation
 
-Un projet déclare la skill dans son `apm.yml` en épinglant un **tag** de lucca-front, jamais une branche ni un chemin versionné :
+Un projet déclare la skill pointeur dans son `apm.yml`, sans ref : son contenu ne dépend pas de la version de Lucca Front.
 
 ```yaml
 dependencies:
   apm:
-    - LuccaSA/lucca-front/.github/skills/lucca-front#v22.1.1
+    - LuccaSA/lucca-front/.github/skills/lucca-front
 ```
 
-`apm install` la déploie sous `.claude/skills/lucca-front/` (et `.github/skills/` pour Copilot) ; `apm.lock.yaml` fige le commit. Le `SKILL.md` installé dit quelle mineure il documente et s'arrête si le projet est sur une autre.
+`apm install` la déploie sous `.claude/skills/lucca-front/` (et `.github/skills/` pour Copilot). Elle renvoie vers `node_modules/@lucca-front/ng/llms.txt` : la documentation lue est celle du package installé, et rien n'est à mettre à jour quand le projet monte de version. Si le package ne livre pas `llms.txt`, elle lit la documentation déployée de sa version (`https://lucca-front.lucca.io/v<version>/storybook/llms.txt`), puis les types du package.
 
-### Quel tag épingler
+### Quelle version livre la documentation
 
-La génération a besoin de la release **publiée** (npm, Storybook déployé, release ZeroHeight — cf. [pré-flight](#parcours-pré-flight)) : la skill d'une mineure est donc commitée **après** le tag `vX.Y.0`, et le **premier tag coupé après ce commit** est le premier qui la porte. Concrètement, la skill 22.1 entre dans `v22.1.1` (ou le tag suivant si la génération tarde). Un projet en `X.Y.p` épingle le **dernier tag de sa mineure qui porte la skill X.Y** : le contenu reflète le dernier patch généré et `fixes/` décrit les patchs postérieurs à sa version.
+Au build, `scripts/llms-skill/publish-skill.mjs npm` copie `_lucca-front/llms/` dans le package quand `versions.json` documente la mineure du tag. La génération a besoin de la release **publiée** (npm, Storybook déployé, release ZeroHeight — cf. [pré-flight](#parcours-pré-flight)) : la documentation d'une mineure est donc commitée **après** le tag `vX.Y.0`, et le **premier tag coupé après ce commit** est le premier dont le package la livre (pour 22.1 : `v22.1.1`, ou le tag suivant si la génération tarde).
 
-`git ls-tree <tag> .github/skills/lucca-front/SKILL.md` puis `git show <tag>:.github/skills/_lucca-front/versions.json` disent quelle mineure un tag porte.
+`git show <tag>:.github/skills/_lucca-front/versions.json` dit quelle mineure un tag documente.
 
 ### Quand générer
 
@@ -569,7 +571,7 @@ Jusqu'à `v22.1.0`, chaque mineure avait son dossier (`.github/skills/lucca-fron
 
 | Dépendance actuelle | Nouvelle dépendance |
 |---|---|
-| `LuccaSA/lucca-front/.github/skills/lucca-front/lucca-front-<M>-<m>` (ou `…/lucca-front-all`), projet en 22.0 ou avant | le même chemin, épinglé : `…/lucca-front-<M>-<m>#v22.1.0` (ou `…/lucca-front-all#v22.1.0`) |
-| projet monté en 22.1 ou après | `LuccaSA/lucca-front/.github/skills/lucca-front#<premier tag qui porte la skill de sa mineure>` |
+| `LuccaSA/lucca-front/.github/skills/lucca-front/lucca-front-<M>-<m>` (ou `…/lucca-front-all`), sans ref ou sur `master` | **avant le merge**, le même chemin épinglé : `…/lucca-front-<M>-<m>#v22.1.0` (ou `…/lucca-front-all#v22.1.0`), sans quoi `apm install --update` échoue |
+| n'importe quel chemin, projet dont `node_modules/@lucca-front/ng/llms.txt` existe | `LuccaSA/lucca-front/.github/skills/lucca-front`, sans ref |
 
-La skill 22.0 en dossier unique n'est portée par aucun tag fiable : la 22.1 la remplacera sur `master` avant le prochain tag. Une skill 21.x en dossier unique pourra être générée sur `v21.4-lts`.
+Un projet dont le package ne livre pas encore `llms.txt` (21.x, 22.1.0, une partie des patchs 22.0) peut passer au pointeur, qui se replie sur la documentation déployée puis sur les types, ou garder la skill complète de sa mineure épinglée sur `#v22.1.0`.

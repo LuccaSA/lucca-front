@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 import { deployedSkillUrl, isRemoteOnly, RELATIVE_MD_PATH, renderIndex, rewriteRemoteLinks, skillCovers } from './publish-skill.mjs';
 
 const repoRoot = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
-const skillDir = join(repoRoot, '.github/skills/lucca-front');
+const skillDir = join(repoRoot, '.github/skills/_lucca-front/llms');
 const manifest = JSON.parse(readFileSync(join(repoRoot, '.github/skills/_lucca-front/versions.json'), 'utf8'));
 
 describe('skillCovers', () => {

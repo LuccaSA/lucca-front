@@ -7,9 +7,9 @@ import { skillRoot, SKILL_NAME } from './skill-writer';
 /**
  * Writes the SKILL.md — the entry point of the skill.
  *
- * Output: lucca-front/SKILL.md
+ * Output: _lucca-front/llms/SKILL.md
  *
- * The minor is implicit (the consumer pins the git ref that carries it): no package.json detection,
+ * The minor is implicit (the npm package of that minor ships it): no package.json detection,
  * no version guardrail. references/ documents the minor's LATEST published patch; fixes/ carries the
  * per-patch deltas. All paths are flat and relative to this folder. The component list (§6) is
  * sourced from the generated folders on disk — the single source of truth, so every listed slug
@@ -136,7 +136,7 @@ La documentation \`references/\` reflète le **dernier patch publié : ${latestP
 ${techBlock}
 **Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
 
-- la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: le projet est monté de version sans que la ref APM de la skill suive — elle doit pointer un tag lucca-front qui porte la skill de sa mineure) ;
+- la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: cette documentation est lue ailleurs que dans le \`node_modules/@lucca-front/ng/llms/\` du projet, qui correspond toujours au package installé) ;
 - le patch (ou la version \`@lucca-front/ng\`) **ne peut pas être déterminé**.
 
 Si le **patch** détecté est **postérieur** à ${latestPatch}${techPatchGuardSuffix}, **signale-le en une ligne et continue** ; en cas de comportement inattendu, lis les notes de release des patchs postérieurs (\`gh release view v<patch> --repo LuccaSA/lucca-front\`) : le paquet \`@lucca-front/ng\` n'embarque pas de CHANGELOG.

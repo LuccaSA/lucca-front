@@ -4,11 +4,12 @@ import { SkillManifest, VersionConfig, WriteResult, PatchManifestEntry } from '.
 import { TechnicalMinorPatches } from '../version-config';
 
 /**
- * Folder = SKILL.md `name:` = install dir leaf. One skill, no version in its name: the version is the
- * git ref a consumer pins with APM (`LuccaSA/lucca-front/.github/skills/lucca-front#v22.1.1`), so a
- * branch carries exactly one minor of it.
+ * The generated documentation of one minor, no version in its path: the @lucca-front/ng package of
+ * that minor ships it as `llms/` (scripts/llms-skill), so a branch carries exactly one minor of it.
+ * Consumers install `.github/skills/lucca-front`, a hand-written pointer to that `llms/`, with APM:
+ * the output stays under the generator's folder so APM never installs it.
  *
- * lucca-front/
+ * _lucca-front/llms/
  * ├── SKILL.md
  * ├── references/                        ← content of the LATEST published patch of the minor
  * │   ├── components/<slug>/
@@ -24,11 +25,10 @@ import { TechnicalMinorPatches } from '../version-config';
  */
 export const SKILL_NAME = 'lucca-front';
 
-/** Generator metadata (manifest, review changelog): beside the skill, so APM never installs it. */
 const GENERATOR_DIR = '_lucca-front';
 
 export function skillRoot(skillsDir: string): string {
-	return path.resolve(skillsDir, SKILL_NAME);
+	return path.resolve(skillsDir, GENERATOR_DIR, 'llms');
 }
 
 export function generatorRoot(skillsDir: string): string {

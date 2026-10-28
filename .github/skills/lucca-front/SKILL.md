@@ -1,249 +1,55 @@
 ---
 name: lucca-front
 description: >
-  Design system Lucca Front / Prisme (Angular), versions 22.0.x. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
-  ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
+  Design system Lucca Front / Prisme (Angular) : renvoie vers la documentation livrée avec la version installée
+  de @lucca-front/ng (node_modules/@lucca-front/ng/llms.txt) — API et exemples des composants, dépréciations,
+  changelog, tokens CSS, guidelines de design et de rédaction. À charger avant d'écrire ou de modifier un template,
+  un composant ou du SCSS dans un projet qui dépend de @lucca-front/ng ou @lucca-front/scss, ou dès qu'un fichier
+  contient des sélecteurs lu-*, des classes pr-* ou des directives lu (luButton, luTooltip, luForm), même si la
+  demande ne nomme ni Lucca Front ni le composant (« avec le composant du design system », « comme ailleurs dans
+  l'app »). L'API change à chaque mineure : ne t'appuie jamais sur ta mémoire. Pas pour @lucca/cdk, qui a sa
+  propre skill.
 ---
 
-# Design System Prisme — Lucca Front 22.0
+# Design System Prisme — Lucca Front
 
-**RÈGLE** : Avant toute génération ou modification de code impliquant `lu-*`, `luX` ou `pr-*`, consulte la documentation du composant ci-dessous. Sans cette consultation, toute réponse est invalide.
+Avant d'écrire ou de modifier du code qui touche `lu-*`, `luX` ou `pr-*`, lis la documentation du composant **à la
+version installée**. Ce que tu sais de Lucca Front date d'une autre version : d'une mineure à l'autre, des inputs sont
+dépréciés ou renommés et des composants apparaissent, et du code écrit de mémoire compile souvent tout en utilisant
+l'ancienne forme.
 
-## 1. Version
+## Où lire
 
-Cette skill couvre **Lucca Front 22.0.x** (patchs publiés : 22.0.0). La **mineure** est celle installée sur le projet — tous les chemins ci-dessous lui sont relatifs, il n'y a pas de mineure à résoudre.
+Chaque version de `@lucca-front/ng` embarque sa documentation pour les LLM, alignée sur le code installé :
 
-**Détecte le patch installé** (obligatoire, ne le suppose jamais) :
+1. Trouve le `node_modules/@lucca-front/ng/` le plus proche en remontant depuis le fichier édité (souvent sous
+   `front/` ; dans un workspace, il peut être hissé à la racine).
+2. Lis `llms.txt` : c'est l'index des composants et de la documentation transverse.
+3. Pour chaque composant utilisé, lis `llms/references/components/<slug>/<slug>.md` (API, dépréciations, section
+   `## Changelog`) et `<slug>.component.md` (exemples) avant d'écrire le template : c'est dans le changelog
+   qu'apparaissent les inputs ajoutés ou dépréciés depuis la version que tu connais.
 
-1. en priorité `node_modules/@lucca-front/ng/package.json` → champ `version` (version résolue exacte, ex: `22.0.0`) ;
-2. à défaut, la dépendance `@lucca-front/ng` (ou `@lucca-front/scss`) dans le `package.json` du projet (ex: `^22.0.0` → `22.0.0`).
+Pour le design, les tokens CSS ou la rédaction, `llms/SKILL.md` dit quoi lire selon la tâche (son tableau « Quand
+consulter quoi ») ; pour du code de composant, l'index et les pages du composant suffisent.
 
-La documentation `references/` reflète le **dernier patch publié : 22.0.0**. Si le patch du projet est **antérieur**, les correctifs livrés après sa version sont décrits dans `fixes/` (voir §2) — ils ne sont **pas** dans son code : consulte tous les `fixes/<M-m-p>.md` de version **strictement supérieure** au patch installé et ignore ces changements.
+## Choisir le composant
 
-**Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
+L'index ne donne que des noms de dossier, et plusieurs composants peuvent répondre au même besoin (`callout` et
+`inlinemessage` affichent tous deux un message de statut, par exemple). Quand plus d'un candidat convient, ouvre la
+page API de chacun avant de choisir : la description des inputs dit à quoi sert le composant, son nom ne le dit pas.
 
-- la **mineure** détectée n'est pas `22.0` (ex: le projet est monté de version sans que la ref APM de la skill suive — elle doit pointer un tag lucca-front qui porte la skill de sa mineure) ;
-- le patch (ou la version `@lucca-front/ng`) **ne peut pas être déterminé**.
+## Comment lire
 
-Si le **patch** détecté est **postérieur** à 22.0.0, **signale-le en une ligne et continue** ; en cas de comportement inattendu, lis les notes de release des patchs postérieurs (`gh release view v<patch> --repo LuccaSA/lucca-front`) : le paquet `@lucca-front/ng` n'embarque pas de CHANGELOG.
+Ouvre les fichiers par leur chemin absolu avec l'outil Read, plutôt qu'avec `cd … && cat`. Une commande composée qui
+change de répertoire demande une approbation : refusée d'office en mode non interactif, elle interrompt l'utilisateur
+en mode interactif, et dans les deux cas elle coûte un tour pour rien.
 
-## 2. Chemins
+## Si `llms.txt` est absent
 
-Compose le chemin du fichier à partir du slug du composant. **Ne devine jamais un chemin** : seuls les fichiers réellement présents font foi. Si un chemin composé n'existe pas, ne le remplace pas par une supposition — vérifie le slug dans la liste §6.
+Le package installé est antérieur à la documentation embarquée, ou n'est pas installé :
 
-### Composant `<slug>`
-
-| Fichier | Chemin |
-|---------|--------|
-| API Angular + Changelog | `./references/components/<slug>/<slug>.md` |
-| Exemples (Angular + HTML, stories incluses) | `./references/components/<slug>/<slug>.component.md` |
-| Design (do/don't, usage) | `./references/components/<slug>/<slug>.design.md` |
-| Figma (variantes, node IDs) | `./references/components/<slug>/<slug>.figma.md` |
-
-Le changelog du composant est la **dernière section `## Changelog`** du fichier API `<slug>.md` (diff structurel cumulatif + notes de release).
-
-### Types partagés
-
-Certaines propriétés d'API référencent un type énuméré documenté à part (ex: `LuccaIcon`, `BubbleIllustration`) :
-
-`./references/types/<TypeName>.md`
-
-Le lien exact (nom et chemin du type) est donné dans la section « Type definitions » du fichier API du composant. Tous les composants n'ont pas de types partagés.
-
-### Documentation transverse
-
-`./references/documentation/<dossier>/<slug>.md`
-
-### Outils
-
-`./references/tools/<slug>.md`
-Slugs : animations, mixins, numbers, scrollbox, utilitaires, angular-api (providers/tokens/pipes/services des packages sans composant, avec leurs dépréciations)
-
-### Migrations (montée de version)
-
-`./references/migrations.md` — codemods de migration (`ng generate @lucca-front/ng:<nom>`) cumulatifs jusqu'à cette version, avec leur version d'introduction.
-
-### Correctifs de patch (fixes/)
-
-`./fixes/<M-m-p>.md` — un fichier par patch publié de la mineure (delta vs le patch précédent : API, types partagés, codemods, sources de stories). _(aucun patch publié après le .0 pour l'instant)_
-
-À consulter quand : le projet est sur un patch **antérieur** à 22.0.0 (les fixes postérieurs à sa version décrivent des correctifs absents de son code), ou pour comprendre ce qu'un patch précis a changé.
-
-### Exemple
-
-Bouton → API : `./references/components/button/button.md`, Figma : `./references/components/button/button.figma.md`
-
-## 3. Quand consulter quoi
-
-| Cas d'usage | Consulter |
-|-------------|-----------|
-| Écrire du code Angular | API (.md) → Exemples (.component.md) → section `## Changelog` du .md |
-| Intégrer depuis maquette Figma | Figma (.figma.md) → Tokens → Guidelines dev UI |
-| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (`<slug>.design.md`) |
-| Review de code | API → Guidelines dev UI → Contenu (si textes) → Patterns (si UX) |
-| Conventions de rédaction | Contenu (dossier `content/`) |
-| Design patterns | Patterns (dossier `patterns/`) |
-| Tokens CSS | Tokens (dossier `tokens/`) |
-| Mixins / animations SCSS | Outils (dossier `tools/`) |
-| Composant déprécié | `./references/documentation/deprecated/deprecated.md` |
-| Monter de version | `./references/migrations.md` + la section `## Changelog` du `<slug>.md` de chaque composant touché |
-| Projet sur un patch antérieur à 22.0.0 / comportement inattendu sur un patch | `./fixes/<M-m-p>.md` |
-
-## 4. Workflow Code
-
-1. Lis l'API du composant (`<slug>.md`) — selectors, inputs, types exacts.
-2. Consulte les exemples (`<slug>.component.md`) — chaque story est une section `###`.
-3. Vérifie la section `## Changelog` (fin du `<slug>.md`) si comportement inattendu.
-
-⚠️ Ne te fie **jamais** à ta mémoire pour les noms de propriétés ou types. Seul le `.md` fait foi.
-
-## 5. Workflow Code → Figma
-
-1. Lis le fichier Figma (`<slug>.figma.md`) — variantes, node IDs, liens Figma.
-2. Utilise les **noms Figma** (pas Angular) pour les propriétés. Ils peuvent différer.
-3. Pour les guidelines visuelles → `<slug>.design.md`.
-
-⚠️ Les `.figma.md` reflètent l'état actuel de Figma.
-
-## 6. Composants
-
-- activity-feed
-- animations
-- api-select
-- app-layout
-- approbation-inbox
-- avatar
-- box
-- breadcrumbs
-- bubble-icon
-- bubble-illustration
-- button
-- calendar
-- calendar2
-- callout
-- callout-disclosure
-- callout-popover
-- card
-- checkbox
-- chip
-- clear
-- code
-- color
-- color-input
-- color-picker
-- comment
-- container
-- core-select-department
-- core-select-establishment
-- core-select-job-qualification
-- core-select-occupation-category
-- core-select-user
-- data-presentation
-- data-table
-- date
-- dateinput
-- daterangeinput
-- departmentselect
-- dialog
-- divider
-- dropdown
-- duration-picker
-- empty-state
-- errorpage
-- establishmentselect
-- fancy-dialog
-- fancybox
-- fieldset
-- filedropzone
-- fileentry
-- fileupload
-- filterbar
-- filterpills
-- footer
-- form
-- form-field
-- form-header
-- form-label
-- gauge
-- grid
-- highlight-data
-- highlight-section
-- highlight-text
-- horizontalnavigation
-- icons
-- impersonation
-- index-table
-- inlinemessage
-- input-framed
-- link
-- listbox
-- listing
-- loading
-- main-layout
-- mobile-push
-- mobileheader
-- mobilenavigation
-- modal
-- multi-select
-- multilanguagefield
-- newbadge
-- number-format-input
-- number-input
-- numbers
-- numericbadge
-- onboarding-empty-state
-- pageheader
-- pagination
-- phonenumberfield
-- plg-push
-- popover
-- popover2
-- progress-bar
-- progress-stepper
-- radiofield
-- readmore
-- resource-card
-- richtextinput
-- scroll
-- scrollbox
-- section-empty-state
-- segmented-control-tabs
-- segmentedcontrol
-- select
-- select-templating
-- sidepanel
-- simple-select
-- skeleton
-- skiplinks
-- software-icon
-- sortable-list
-- statusbadge
-- switchfield
-- tableofcontent
-- tags
-- text-flow
-- textareafield
-- textfield
-- tile
-- time
-- time-picker
-- timelines
-- title-and-text
-- toasts
-- tooltip
-- treeselect
-- user-select
-- userpopover
-- verticalnavigation
-
-## 7. Documentation transverse
-
-- **Tokens** (dossier `tokens/`) : Couleurs (`couleurs`), Typographie (`typographie`), Espacements (`espacements`), Élévations (`elevations`), Arrondis (`arrondis`), Design tokens (`design-tokens`), Noms des logiciels (`noms-de-logiciels`)
-- **Contenu & Rédaction** (dossier `content/`) : Notre voix, 100 % humaine (`voix-humaine`), Règles de ponctuation, de typographie (`ponctuation-typographie`), Grammaire, orthographe (`grammaire-orthographe`), Singulier ou pluriel ? (`singulier-pluriel`), Possessifs « mon, ma, mes, votre, vos » et pronoms « je, vous » (`possessifs-pronoms`), Infinitif ou impératif ? (`infinitif-imperatif`), Verbes d'action à utiliser (`verbes-action`), Nombres (`nombres`), Dates (`dates`), Accessibilité (`accessibilite-contenu`), 4 critères essentiels pour notre contenu (`criteres-essentiels`), Blocage sur le contenu ? (`blocage-contenu`), Face au jargon, que faire ? (`jargon`), Ressources pour définitions (`ressources-definitions`), Tester clarté et efficacité du contenu (`tester-clarte`), Messages d'erreur (`messages-erreur`)
-- **Guidelines** (dossier `guidelines/`) : Guidelines dev UI (`guidelines-dev-ui`)
-- **Design Patterns** (dossier `patterns/`) : Nos 10 principes Design (`regles-or`), Identification des pages (`identification-pages`), Card et box (`card-et-box`), Dialogs de confirmation (`dialogs-confirmation`), Actions de suppression (`actions-suppression`), Emails (`emails`), Feedback (`feedback`), Vues, filtres et navigation dans une page (`vues-filtres-navigation`), Structure en accordéon (`structure-accordeon`), Responsive design (`responsive-design`), Pattern IA (`pattern-ia`), Widgets (`widgets`), Cycle de vie d'une ressource (`cycle-vie-ressource`), Parcours de création de ressource : avec action de diffusion (`parcours-creation-ressource`), Parcours de création de ressource : sans action de diffusion (`parcours-creation-ressource-sans-diffusion`), Conception d'un formulaire (`conception-formulaire`), Gestion des erreurs (`gestion-erreurs-formulaire`), Champs conditionnels (`champs-conditionnels`), Quitter un formulaire (`quitter-formulaire`), Aide contextuelle (`aide-contextuelle`), Champs effaçables (`champs-effacables`), Placeholders (`placeholders`), Modes d’affichage (`modes-affichage`), Traduction d'un formulaire (`traduction-formulaire`), Navigation mobile (`navigation-mobile`), Push Notification mobile (`push-notification-mobile`)
-
-## 8. Composants dépréciés
-
-Consulte `./references/documentation/deprecated/deprecated.md` avant d'utiliser un composant inconnu.
-Ne génère **jamais** de code utilisant un composant déprécié — propose son remplacement.
+1. Prends la version de `@lucca-front/ng` dans `node_modules/@lucca-front/ng/package.json`, à défaut dans le lockfile,
+   à défaut dans `package.json` (et dis alors qu'elle est déclarée, pas installée).
+2. Lis la documentation déployée de cette version : `https://lucca-front.lucca.io/v<version>/storybook/llms.txt`.
+3. Si elle n'existe pas, les types du package (`node_modules/@lucca-front/ng/**/*.d.ts`) font foi pour les inputs ; ne
+   complète pas avec ta mémoire.

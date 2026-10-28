@@ -14,8 +14,8 @@
  *   npx ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts [options]
  *
  * Options:
- *   --version <M.m>      Minor to generate (e.g. "22.1"), required. The skill is a single folder:
- *                        a branch carries one minor of it, consumers pin the git ref with APM.
+ *   --version <M.m>      Minor to generate (e.g. "22.1"), required. The docs are a single folder:
+ *                        a branch carries one minor of it, the npm package of that minor ships it.
  *                        references/ = latest published patch, fixes/ = per-patch deltas.
  *   --component <slug>   Generate only the specified component
  *   --skip-figma         Skip Figma data collection

@@ -4,7 +4,7 @@ import { dirname, join, posix, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
-const skillDir = join(root, '.github/skills/lucca-front');
+const skillDir = join(root, '.github/skills/_lucca-front/llms');
 const manifestPath = join(root, '.github/skills/_lucca-front/versions.json');
 
 export const STORYBOOK_URL = 'https://lucca-front.lucca.io';
