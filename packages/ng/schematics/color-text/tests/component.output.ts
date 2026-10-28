@@ -10,7 +10,7 @@ import { Component, HostBinding } from '@angular/core';
 export class TestComponent {}
 
 export const byProp = {
-	classes: 'pr-u-colorTextAI',
+	classes: 'pr-u-colorTextOrchid',
 };
 
 @Component({
