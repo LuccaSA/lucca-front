@@ -1,6 +1,6 @@
 ---
 name: release
-description: 'Prépare la sortie d’une version Lucca Front (`/release 22.1`, `/release 22.0.6`) : changelog GitHub, CHANGELOG.md des composants et, pour une mineure ou une majeure, PR release → master, utilitaire highlight-prisme et propositions de migrations.'
+description: 'Prépare la sortie d’une version Lucca Front (`/release 22.1`, `/release 22.0.6`) : changelog GitHub, CHANGELOG.md des composants, PR de sync vers les releases en cours pour un patch et, pour une mineure ou une majeure, PR release → master, utilitaire highlight-prisme et propositions de migrations.'
 argument-hint: '<version> (ex. 22.1, 23.0, 22.0.6)'
 disable-model-invocation: true
 ---
@@ -127,6 +127,51 @@ gh pr create --base <release/X.Y | master | vX.Y-lts> --template feature.md \
 
 Remplir le template sans retirer les séparateurs `-----` : une phrase dans le premier bloc, la liste des composants touchés dans le second. Ajouter le milestone de la version (`--milestone X.Y` / `X.Y.Z`).
 
+**Pour une mineure ou une majeure, passer à l'étape 3.** Un patch continue à l'étape 2 bis.
+
+---
+
+## Étape 2 bis — PR de sync vers les releases en cours (patch depuis master)
+
+Un fix publié depuis `master` doit redescendre dans chaque branche `release/A.B` d'une version supérieure à `X.Y`, sinon il manque à la prochaine mineure. Un patch publié depuis `vX.Y-lts` n'est pas concerné : il rétroporte un fix déjà sur `master`. Le dire et aller au rapport final.
+
+### Branches cibles
+
+```bash
+git branch -r --list 'origin/release/*' | sed 's#^ *origin/release/##' \
+  | awk -F. -v x=X -v y=Y '$1 > x || ($1 == x && $2 > y)' | sort -V
+```
+
+Écarter une branche dont la version est déjà sortie (`git tag -l 'vA.B.0'` non vide) : c'est un snapshot dormant. Si aucune branche ne reste, le dire et aller au rapport final.
+
+### Une PR par branche cible
+
+Pour chaque `release/A.B`, chercher d'abord une sync déjà ouverte :
+
+```bash
+gh pr list -R LuccaSA/lucca-front --base release/A.B --state open --json number,url,headRefName \
+  -q '.[] | select(.headRefName | startswith("chore/sync")) | "\(.number)\t\(.headRefName)\t\(.url)"'
+```
+
+- **Elle existe** : y merger `origin/master` (sur sa branche) au lieu d'en ouvrir une autre, après confirmation.
+- **Elle n'existe pas** : après confirmation, la créer.
+
+```bash
+git switch -c chore/sync-X.Y.Z-to-A.B origin/release/A.B
+git merge --no-ff origin/master -m "chore(sync): X.Y.Z to A.B"
+git push -u origin chore/sync-X.Y.Z-to-A.B
+gh pr create --base release/A.B --title "chore(sync): X.Y.Z to A.B" --template feature.md \
+  --label ":hammer: Technical" --label "🤖 Produced by AI"
+```
+
+Corps : le template `feature.md` avec `Sync X.Y.Z to A.B` dans le premier bloc, séparateurs `-----` conservés.
+
+En cas de conflit, s'arrêter et montrer les fichiers en conflit : ne pas les résoudre sans validation.
+
+Si la PR de l'étape 2 n'est pas encore mergée, la sync ne contient pas le changelog des composants. Le signaler et proposer d'attendre son merge, ou de pousser maintenant puis de re-merger `origin/master` dans la branche de sync.
+
+Rappeler dans le rapport que ces PR se mergent en **merge commit, jamais en squash**.
+
 **Pour un patch, le skill s'arrête ici** → aller au rapport final.
 
 ---
@@ -219,6 +264,6 @@ Un tableau, une ligne par changement : composant, changement, PR, proposition (s
 Court, dans cet ordre :
 
 1. Le changelog GitHub en bloc markdown à copier-coller (étape 1), avec le compte de PRs et les PRs encore ouvertes.
-2. Les liens des PR ouvertes ou existantes : changelog des composants, release → master, highlight-prisme.
+2. Les liens des PR ouvertes ou existantes : changelog des composants, sync vers les releases en cours, release → master, highlight-prisme.
 3. Les écarts relevés : composants sans CHANGELOG.md, divergences changelog GitHub / CHANGELOG des composants, étapes sautées et pourquoi.
 4. Mineure / majeure : le tableau des migrations proposées, en attente de décision.
