@@ -216,8 +216,8 @@ Bouton → API : \`./references/components/button/button.md\`, Design : \`./refe
 | Cas d'usage | Consulter |
 |-------------|-----------|
 | Écrire du code Angular | API (.md) → Exemples (.component.md) → section \`## Changelog\` du .md |
-| Intégrer depuis maquette Figma | Tokens → Guidelines dev UI |
-| Créer une maquette Figma (Code → Figma) | Design (\`<slug>.design.md\`) |
+| Intégrer depuis maquette Figma | La maquette avec le MCP Figma (accès du développeur), puis Tokens → Guidelines dev UI |
+| Créer une maquette Figma (Code → Figma) | Design (\`<slug>.design.md\`), puis le MCP Figma pour l'écrire |
 | Review de code | API → Guidelines dev UI → Contenu (si textes) → Patterns (si UX) |
 | Conventions de rédaction | Contenu (dossier \`content/\`) |
 | Design patterns | Patterns (dossier \`patterns/\`) |

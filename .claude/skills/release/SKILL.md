@@ -108,7 +108,7 @@ Recouper avec le changelog de l'étape 1 : une entrée de composant sans PR corr
 
 ### Contenu ZeroHeight de la skill
 
-Le hook pre-commit et la CI régénèrent la skill `lucca-front` hors ligne, depuis les baselines committées (`scripts/generate-skills/baselines/zeroheight/`) : sans ce rafraîchissement, le tag livre le contenu ZeroHeight du dernier run en ligne, aussi ancien soit-il. Ne jamais lancer `npm run skills:generate -- --version X.Y` ici : sur une branche qui suit le code, ce mode écrit une skill de release que `skills:check` rejette.
+Le hook pre-commit et la CI régénèrent la documentation LLM (`.github/skills/_lucca-front/llms`) hors ligne, depuis les baselines committées (`scripts/generate-skills/baselines/zeroheight/`) : sans ce rafraîchissement, le tag livre le contenu ZeroHeight du dernier run en ligne, aussi ancien soit-il. Ne jamais lancer `npm run skills:generate -- --version X.Y` ici : sur une branche qui suit le code, ce mode écrit une skill de release que `skills:check` rejette.
 
 Sauter cette sous-étape, et le dire dans le rapport, si `.github/skills/_lucca-front/versions.json` ne porte pas `"followsCode": true` (cas des `vX.Y-lts`).
 
@@ -138,7 +138,7 @@ Une mineure déjà dans `zh-release-ids.json` n'a besoin d'aucune option.
 
 ```bash
 npm run skills:generate -- --ref HEAD --zh-latest M.m   # ou --zh-id M.m=<id>
-npm run skills:generate -- --retry-failed               # tant que .github/skills/_fetch-failures.json liste des échecs, 3 passes au plus
+npm run skills:generate -- --retry-failed --zh-latest M.m   # même option ZH que le premier run (inutile après --zh-id) ; mineure pas encore taguée : relancer la ligne précédente. 3 passes au plus tant que .github/skills/_fetch-failures.json liste des échecs
 npm run skills:update
 ```
 
@@ -147,7 +147,7 @@ Un échec `shrink` restant signale une page ZeroHeight qui a perdu une section o
 Lister les pages dont le contenu a changé, pour la PR et le rapport :
 
 ```bash
-git status --porcelain -- scripts/generate-skills/baselines/zeroheight | awk '{print $NF}' \
+git status --porcelain --untracked-files=all -- scripts/generate-skills/baselines/zeroheight | awk '{print $NF}' \
   | xargs -I{} sh -c 'grep -m1 "^title:" "{}" 2>/dev/null || echo "{} (supprimée)"'
 ```
 
