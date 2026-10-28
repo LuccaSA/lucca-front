@@ -3,15 +3,22 @@
 </div>
 <div class="approbationInbox-detail-header-main">
 	<div class="approbationInbox-detail-header-main-infos">
-		<h1 class="approbationInbox-detail-header-main-infos-title" [id]="titleId">
-			<span class="approbationInbox-detail-header-main-infos-title-content" luTooltip luTooltipWhenEllipsis>{{ label() }}</span>
-		</h1>
+		<div class="approbationInbox-detail-header-main-infos-headingOptional">
+			<h1 class="approbationInbox-detail-header-main-infos-title" [id]="titleId">
+				<span class="approbationInbox-detail-header-main-infos-title-content" luTooltip luTooltipWhenEllipsis>{{ label() }}</span>
+			</h1>
+			<ng-content select="[approbationInboxDetailTitleTrailing]">
+				@if (overdue()) {
+					<lu-status-badge [label]="intl().overdue" palette="warning" />
+				}
+			</ng-content>
+		</div>
 		<div class="approbationInbox-detail-header-main-infos-description">
 			<ng-content />
 		</div>
 		@if (delegatedBy(); as delegatedBy) {
 			<div class="approbationInbox-detail-header-main-delegation">
-				<lu-tag withEllipsis [label]="intl.delegation | intlParams: { name: delegatedBy }" />
+				<lu-tag withEllipsis [label]="intl().delegation | intlParams: { name: delegatedBy }" />
 			</div>
 		}
 	</div>
