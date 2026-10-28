@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Regenerates the lucca-front skill when its sources are staged, or when a tag was cut since its last
+# Regenerates the lucca-front LLM docs (.github/skills/_lucca-front/llms) when their sources are staged, or when a tag was cut since its last
 # generation (its changelogs stop at the last tag), then stages the result in the commit being made.
 # The code is read from the index (`git write-tree`), so changes left unstaged stay out of the skill
 # as they stay out of the commit.
@@ -12,13 +12,15 @@ sources_staged() {
 }
 
 new_tag() {
+	command -v node >/dev/null 2>&1 || return 1
 	last=$(git tag --merged HEAD --list 'v*' | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
+	[ -n "$last" ] || return 1
 	recorded=$(node -p "require('./.github/skills/_lucca-front/versions.json').lastTag ?? ''")
 	[ "$last" != "$recorded" ]
 }
 
 sources_staged || new_tag || exit 0
 
-echo "Skill lucca-front à régénérer…"
+echo "Documentation LLM lucca-front à régénérer…"
 npm run --silent skills:generate -- --offline --ref "$(git write-tree)"
-git add .github/skills/lucca-front .github/skills/_lucca-front/versions.json scripts/generate-skills/component-metadata.json
+git add .github/skills/_lucca-front/llms .github/skills/_lucca-front/versions.json scripts/generate-skills/component-metadata.json

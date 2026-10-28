@@ -2,9 +2,9 @@
 
 Pipeline **déterministe** (zéro IA) qui génère la documentation des composants Lucca Front pour les **Agent Skills**.
 
-Le pipeline produit **une seule skill**, `.github/skills/lucca-front/` (`name: lucca-front`) : un `SKILL.md` et ses fichiers `references/`. Sur une branche qui suit le code (`master`), la skill décrit le code du commit qui la porte (cf. [Une skill qui suit le code](#une-skill-qui-suit-le-code)). En mode par tag (`--version`, pour une `vX.Y-lts`), `references/` documente le **dernier patch publié** de la mineure, et un dossier `fixes/` porte un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories).
+Le pipeline produit **une seule documentation**, `.github/skills/_lucca-front/llms/` : un `SKILL.md` (le guide d'entrée) et ses fichiers `references/`. Sur une branche qui suit le code (`master`), elle décrit le code du commit qui la porte (cf. [Une documentation qui suit le code](#une-documentation-qui-suit-le-code)). En mode par tag (`--version`, pour une `vX.Y-lts`), `references/` documente le **dernier patch publié** de la mineure, et un dossier `fixes/` porte un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories).
 
-Le nom de la skill ne porte **aucune version** : comme pour [`lucca-cdk`](https://github.com/LuccaSA/lucca-cdk/tree/main/scripts/generate-skills), le versionnement est délégué à [APM](https://microsoft.github.io/apm/). Un projet épingle le **tag git** de lucca-front qui correspond à son `@lucca-front/ng` (cf. [Consommation via APM](#consommation-via-apm)).
+Le chemin ne porte **aucune version** : `scripts/llms-skill` copie cette documentation dans le package `@lucca-front/ng` (`llms.txt` + `llms/`), qui la livre donc à la version installée. Les projets n'installent avec [APM](https://microsoft.github.io/apm/) que `.github/skills/lucca-front/`, une skill **écrite à la main** qui renvoie vers `node_modules/@lucca-front/ng/llms.txt` (cf. [Consommation](#consommation)).
 
 ## Prérequis
 
@@ -91,7 +91,7 @@ Avant la moindre collecte, le run passe une porte puis trois phases. L'ordre sui
 
 ### Phase 0 — la mineure de la branche (`preflight.ts`, non interactif)
 
-La skill est un dossier unique réécrit sur place : générer une mineure écrase celle que la branche porte, et le prochain tag coupé depuis cette branche la livre à tous les projets épinglés dessus. `refuseMinorForThisBranch` compare la mineure demandée à celle du manifeste committé (`_lucca-front/versions.json`) et refuse le run, sortie 1, quand la branche ne peut pas la porter.
+La skill est un dossier unique réécrit sur place : générer une mineure écrase celle que la branche porte, et le prochain tag coupé depuis cette branche la livre dans son package npm. `refuseMinorForThisBranch` compare la mineure demandée à celle du manifeste committé (`_lucca-front/versions.json`) et refuse le run, sortie 1, quand la branche ne peut pas la porter.
 
 ### Phase 1 — la release existe (`preflight.ts`, non interactif)
 
@@ -567,25 +567,23 @@ Il est **opaque** (non déductible du repo, de git ou de npm) :
 
 ## Consommation
 
-Un projet déclare la skill dans son `apm.yml` en épinglant le **tag exact** de la version de `@lucca-front/ng` qu'il installe, jamais une branche ni un chemin versionné :
+Un projet déclare la skill pointeur dans son `apm.yml`, sans ref : son contenu ne dépend pas de la version de Lucca Front.
 
 ```yaml
 dependencies:
   apm:
-    - LuccaSA/lucca-front/.github/skills/lucca-front#v22.1.3
+    - LuccaSA/lucca-front/.github/skills/lucca-front
 ```
 
-Pas de plage semver (`#^22.1.0`) : APM la résout sur tous les tags `v*`, RC comprises, et livrerait la skill d'une `22.2.0-rc.1`. À chaque montée de `@lucca-front/ng`, déplacer le tag avec elle.
+`apm install` la déploie sous `.claude/skills/lucca-front/` (et `.github/skills/` pour Copilot). Elle renvoie vers `node_modules/@lucca-front/ng/llms.txt` : la documentation lue est celle du package installé, et rien n'est à mettre à jour quand le projet monte de version. Si le package ne livre pas `llms.txt`, elle lit la documentation déployée de sa version (`https://lucca-front.lucca.io/v<version>/storybook/llms.txt`), puis les types du package.
 
-`apm install` la déploie sous `.claude/skills/lucca-front/` (et `.github/skills/` pour Copilot) ; `apm.lock.yaml` fige le commit.
+### Une documentation qui suit le code
 
-### Une skill qui suit le code
+La documentation committée décrit le code du commit qui la porte : chaque tag la livre donc, à sa propre version, dans le package npm, sans génération à lancer après la release. Elle ne déclare aucune version : le package qui la livre en tient lieu, et le `SKILL.md` demande la version installée seulement pour compléter les liens Storybook (`https://lucca-front.lucca.io/v{version}/storybook/…`). Pas de `fixes/` non plus : chaque patch a sa documentation.
 
-La skill committée décrit le code du commit qui la porte : chaque tag porte donc la skill de sa propre version, sans génération à lancer après la release. Elle ne déclare aucune version : la ref APM en tient lieu, et le `SKILL.md` demande la version installée seulement pour compléter les liens Storybook (`https://lucca-front.lucca.io/v{version}/storybook/…`). Pas de `fixes/` non plus : chaque patch a sa skill.
+`npm run skills:update` la régénère hors ligne depuis `HEAD` (`--offline --ref HEAD`) : le code et les stories viennent du commit, l'index Storybook est construit en local, ZeroHeight et Figma viennent des baselines. Le manifeste `versions.json` le signale par `"followsCode": true` ; `scripts/llms-skill` embarque alors la documentation sur n'importe quel tag.
 
-`npm run skills:update` la régénère hors ligne depuis `HEAD` (`--offline --ref HEAD`) : le code et les stories viennent du commit, l'index Storybook est construit en local, ZeroHeight et Figma viennent des baselines. Le manifeste `versions.json` le signale par `"followsCode": true` ; `scripts/llms-skill` embarque alors la skill sur n'importe quel tag.
-
-La mineure est celle du dernier tag publié que contient le commit, sauf si la branche en **prépare** une plus récente. Le tag `vX.Y.0` est posé sur un commit qui ne le contient pas encore : sans rien déclarer, sa skill porterait la mineure précédente, et un tag ne se corrige plus. La PR de release d'une mineure ou d'une majeure la déclare donc avant le tag :
+La mineure est celle du dernier tag publié que contient le commit, sauf si la branche en **prépare** une plus récente. Le tag `vX.Y.0` est posé sur un commit qui ne le contient pas encore : sans rien déclarer, sa documentation porterait la mineure précédente, et un tag ne se corrige plus. La PR de release d'une mineure ou d'une majeure la déclare donc avant le tag :
 
 ```bash
 npm run skills:update -- --minor 22.2
@@ -595,24 +593,24 @@ npm run skills:update -- --minor 22.2
 
 Trois garde-fous, comme sur `@lucca/cdk` :
 
-- **Hook pre-commit** (`.git-hooks/pre-commit`, installé par `npm install` via `prepare`) : dès qu'un fichier de `packages/ng`, `packages/prisme`, `packages/scss`, `stories` ou du générateur est indexé, il régénère depuis l'index (`--ref "$(git write-tree)"`) et ajoute la skill au commit. Compter une quarantaine de secondes ; `git commit --no-verify` le saute.
+- **Hook pre-commit** (`.git-hooks/pre-commit`, installé par `npm install` via `prepare`) : dès qu'un fichier de `packages/ng`, `packages/prisme`, `packages/scss`, `stories` ou du générateur est indexé, il régénère depuis l'index (`--ref "$(git write-tree)"`) et ajoute la documentation au commit. Compter une quarantaine de secondes ; `git commit --no-verify` le saute. Sans `node` dans le `PATH` ni tag atteignable, il ne fait rien.
 - **CI** (`skills` dans `build.yml`) : `npm run skills:check` régénère et échoue sur tout écart, fichiers nouveaux compris, car un hook reste contournable.
-- **Baselines** : ZeroHeight et Figma ne bougent qu'au rafraîchissement en ligne, qui ouvre un diff de baselines relisible. Sans rafraîchissement, la skill garde le dernier contenu design récupéré.
+- **Baselines** : ZeroHeight et Figma ne bougent qu'au rafraîchissement en ligne, qui ouvre un diff de baselines relisible. Sans rafraîchissement, la documentation garde le dernier contenu design récupéré.
 
 ### Rafraîchir le contenu ZeroHeight et Figma
 
-Un run en ligne depuis `HEAD` met les baselines à jour, puis le run hors ligne régénère la skill à partir d'elles :
+Un run en ligne depuis `HEAD` met les baselines à jour, puis le run hors ligne régénère la documentation à partir d'elles :
 
 ```bash
 FIGMA_TOKEN=… npm run skills:generate -- --ref HEAD --zh-latest 22.1
 npm run skills:update
 ```
 
-`--zh-latest` affirme que la mineure du dernier tag est la dernière en ligne sur ZeroHeight. Le run en ligne écrit aussi la skill : seule compte celle du run hors ligne qui suit, que la CI compare.
+`--zh-latest` affirme que la mineure du dernier tag est la dernière en ligne sur ZeroHeight. Le run en ligne écrit aussi la documentation : seule compte celle du run hors ligne qui suit, que la CI compare.
 
-### Générer la skill d'une release
+### Générer la documentation d'une release
 
-Le mode par tag reste disponible pour une branche qui ne suit pas le code, une `vX.Y-lts` par exemple : `npm run skills:generate -- --version 21.4`. `references/` y documente alors le dernier patch de la mineure et `fixes/` les patchs précédents.
+Le mode par tag reste disponible pour une branche qui ne suit pas le code, une `vX.Y-lts` par exemple : `npm run skills:generate -- --version 21.4`. `references/` y documente alors le dernier patch de la mineure et `fixes/` les patchs précédents. Le package n'embarque cette documentation que sur les tags de la mineure qu'elle documente.
 
 ### Depuis les anciens chemins par mineure
 

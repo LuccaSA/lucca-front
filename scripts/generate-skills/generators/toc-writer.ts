@@ -9,9 +9,9 @@ import { skillRoot, SKILL_NAME } from './skill-writer';
  *
  * Output: _lucca-front/llms/SKILL.md
  *
- * The minor is implicit (the consumer pins the git ref that carries it). references/ documents the
- * minor's LATEST published patch; fixes/ carries the per-patch deltas. A skill that follows the code
- * (`--ref`) names no version at all: the APM ref is its version, and the installed one only fills in
+ * The minor is implicit (the npm package of that minor ships it). references/ documents the
+ * minor's LATEST published patch; fixes/ carries the per-patch deltas. Docs that follow the code
+ * (`--ref`) name no version at all: the package that ships them is their version, and the installed one only fills in
  * the Storybook links. All paths are flat and relative to this folder. The component list (§6) is
  * sourced from the generated folders on disk — the single source of truth, so every listed slug
  * is a navigable path.
@@ -85,7 +85,7 @@ export function writeToc(skillsDir: string, version: VersionConfig, patchTags: s
 	const versionSection = codeSkill
 		? `## 1. Version
 
-Cette skill ne porte pas de numéro de version : elle est régénérée à chaque modification du code de lucca-front, et le projet l'épingle dans son \`apm.yml\` sur le tag exact de la version de \`@lucca-front/ng\` qu'il installe (\`LuccaSA/lucca-front/.github/skills/lucca-front#v<version>\`). Elle décrit le code de ce tag.
+Cette documentation ne porte pas de numéro de version : elle est régénérée à chaque modification du code de lucca-front, et chaque version de \`@lucca-front/ng\` la livre dans \`node_modules/@lucca-front/ng/llms/\`. Elle décrit le code de cette version : l'API d'un composant est à jour, mais sa section \`## Changelog\` s'arrête au tag précédent (dans le package \`X.Y.0\`, elle ne liste pas encore \`X.Y.0\`).
 
 **Détecte la version de \`@lucca-front/ng\` installée** (ne la suppose jamais) :
 
@@ -94,7 +94,7 @@ Cette skill ne porte pas de numéro de version : elle est régénérée à chaqu
 
 Elle sert à ouvrir le Storybook : les liens sont écrits \`${version.storybookBaseUrl}/…\`. Remplace \`{version}\` par la version détectée avant de les suivre.
 
-Si la mineure installée diffère de celle du tag épinglé dans \`apm.yml\`, signale-le en une ligne et continue : la documentation peut décrire une API que le projet n'a pas encore, ou plus.
+Lue dans le \`node_modules\` du projet, elle correspond toujours au package installé. Lue ailleurs (dépôt lucca-front, Storybook d'une autre version), signale en une ligne si la mineure installée diffère et continue : la documentation peut décrire une API que le projet n'a pas encore, ou plus.
 `
 		: `## 1. Version
 
@@ -109,7 +109,7 @@ La documentation \`references/\` reflète le **dernier patch publié : ${latestP
 ${techBlock}
 **Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
 
-- la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: le projet est monté de version sans que la ref APM de la skill suive — elle doit pointer un tag lucca-front qui porte la skill de sa mineure) ;
+- la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: cette documentation est lue ailleurs que dans le \`node_modules/@lucca-front/ng/llms/\` du projet, qui correspond toujours au package installé) ;
 - le patch (ou la version \`@lucca-front/ng\`) **ne peut pas être déterminé**.
 
 Si le **patch** détecté est **postérieur** à ${latestPatch}${techPatchGuardSuffix}, **signale-le en une ligne et continue** ; en cas de comportement inattendu, lis les notes de release des patchs postérieurs (\`gh release view v<patch> --repo LuccaSA/lucca-front\`) : le paquet \`@lucca-front/ng\` n'embarque pas de CHANGELOG.

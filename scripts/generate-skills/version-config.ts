@@ -169,7 +169,7 @@ export const STORYBOOK_URL_OF_INSTALLED_VERSION = 'https://lucca-front.lucca.io/
 
 /**
  * Whether the skill follows the code rather than a release: generated from a ref (`--ref`), it is
- * committed with the code it describes, and the consumer's APM ref is its only version.
+ * committed with the code it describes, and the npm package that ships it is its only version.
  */
 export function followsCode(version: VersionConfig): boolean {
 	return version.source !== version.tag;

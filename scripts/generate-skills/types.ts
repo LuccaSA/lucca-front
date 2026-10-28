@@ -437,7 +437,7 @@ export interface PatchManifestEntry {
 export interface SkillManifest {
 	/** The documented minor, e.g. "22.0" — for a skill that follows the code, the last published tag's. */
 	minor: string;
-	/** Regenerated on every commit (`--ref`): the consumer's APM ref is its version, the fields below are absent. */
+	/** Regenerated on every commit (`--ref`): the npm package that ships it is its version, the fields below are absent. */
 	followsCode?: true;
 	/** With `followsCode`: the last published tag the changelogs reach. The pre-commit hook regenerates when it moves. */
 	lastTag?: string;
