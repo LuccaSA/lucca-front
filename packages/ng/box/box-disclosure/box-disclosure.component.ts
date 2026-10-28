@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
-import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, input, model, ViewEncapsulation } from '@angular/core';
+import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { BoxTheme } from '../box.type';
 
@@ -34,14 +34,9 @@ export class BoxDisclosureComponent {
 	readonly metadata = input<string>();
 
 	/**
-	 * Is the disclosure box open by default
+	 * Whether the disclosure box is open.
 	 */
-	readonly open = input(false, { transform: luBooleanAttribute });
-
-	/**
-	 * Emit boolean event when the disclosure box is toggled
-	 */
-	readonly openChange = output<boolean>();
+	readonly open = model(false);
 
 	readonly themeClasses = computed(() => {
 		const theme = this.theme();
@@ -55,7 +50,7 @@ export class BoxDisclosureComponent {
 
 	public onToggle(event: Event) {
 		if (event.target instanceof HTMLDetailsElement) {
-			this.openChange.emit(event.target.open);
+			this.open.set(event.target.open);
 		}
 	}
 }

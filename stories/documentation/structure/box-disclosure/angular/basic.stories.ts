@@ -29,7 +29,7 @@ export default {
 		},
 		open: {
 			description: 'Place la box dans son état déplié.',
-			table: { category: 'inputs' },
+			table: { category: 'models' },
 		},
 		openChange: {
 			description: 'Événement déclenché lors du changement d’état déplié/replié de la box.',
