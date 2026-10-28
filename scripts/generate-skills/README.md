@@ -184,8 +184,8 @@ batché** ; la sérialisation + cadence + retries `Retry-After` ne restent qu'en
 
 ## Mode hors ligne
 
-`--offline --storybook-index <fichier>` régénère la skill sans le moindre accès réseau, à partir de ce
-que le dépôt contient déjà. Deux runs sur les mêmes entrées produisent la même sortie, octet pour octet.
+`--offline --storybook-index <fichier>` régénère la skill sans le moindre accès réseau, à partir du dépôt
+et d'un `index.json` Storybook fourni par l'appelant, qui doit correspondre au tag résolu. Deux runs sur les mêmes entrées produisent la même sortie, octet pour octet.
 
 | Source | En ligne | Hors ligne |
 |---|---|---|
