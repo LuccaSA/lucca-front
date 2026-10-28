@@ -3,7 +3,15 @@ import { join, posix, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
-import { deployedSkillUrl, isRemoteOnly, RELATIVE_MD_PATH, renderIndex, rewriteRemoteLinks, skillCovers } from './publish-skill.mjs';
+import {
+	checkShippable,
+	deployedSkillUrl,
+	isRemoteOnly,
+	RELATIVE_MD_PATH,
+	renderIndex,
+	rewriteRemoteLinks,
+	skillCovers,
+} from './publish-skill.mjs';
 
 const repoRoot = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
 const skillDir = join(repoRoot, '.github/skills/_lucca-front/llms');
@@ -33,6 +41,28 @@ describe('skillCovers', () => {
 	it('is given a manifest whose minor the committed skill documents', () => {
 		expect(skillCovers(manifest, `${manifest.minor}.0`)).toBe(true);
 		expect(readdirSync(skillDir)).toContain('SKILL.md');
+	});
+});
+
+describe('checkShippable', () => {
+	const skill22 = { minor: '22.0' };
+
+	it('lets a covered version through', () => {
+		expect(checkShippable(skill22, { version: 'v22.0.5', tag: 'v22.0.5', skillPresent: true })).toBeNull();
+	});
+
+	it('fails a tagged release the skill does not cover, so it is not published without its docs', () => {
+		expect(() => checkShippable(skill22, { version: 'v22.1.0', tag: 'v22.1.0', skillPresent: true })).toThrow(
+			/documents 22\.0, not v22\.1\.0/,
+		);
+	});
+
+	it('fails a tagged release whose skill folder has no SKILL.md', () => {
+		expect(() => checkShippable(skill22, { version: 'v22.0.5', tag: 'v22.0.5', skillPresent: false })).toThrow(/no SKILL\.md/);
+	});
+
+	it('only warns on an untagged build', () => {
+		expect(checkShippable(skill22, { version: '22.1.0', tag: null, skillPresent: true })).toMatch(/^::warning::\[llms\] /);
 	});
 });
 
