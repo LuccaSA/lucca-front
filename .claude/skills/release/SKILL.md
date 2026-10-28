@@ -142,16 +142,18 @@ git branch -r --list 'origin/release/*' | sed 's#^ *origin/release/##' \
   | awk -F. -v x=X -v y=Y '$1 > x || ($1 == x && $2 > y)' | sort -V
 ```
 
-Écarter une branche dont la version est déjà sortie (`git tag -l 'vA.B.0'` non vide) : c'est un snapshot dormant. Si aucune branche ne reste, le dire et aller au rapport final.
+Écarter une branche dont la version est déjà sortie (`git tag -l 'vA.B.0'` non vide) : c'est un snapshot dormant. Écarter aussi une branche qui contient déjà `master` (`git merge-base --is-ancestor origin/master origin/release/A.B` réussit) : le merge serait vide et `gh pr create` échouerait faute de commit. Si aucune branche ne reste, le dire et aller au rapport final.
 
 ### Une PR par branche cible
 
 Pour chaque `release/A.B`, chercher d'abord une sync déjà ouverte :
 
 ```bash
-gh pr list -R LuccaSA/lucca-front --base release/A.B --state open --json number,url,headRefName \
+gh pr list -R LuccaSA/lucca-front --base release/A.B --state open --limit 500 --json number,url,headRefName \
   -q '.[] | select(.headRefName | startswith("chore/sync")) | "\(.number)\t\(.headRefName)\t\(.url)"'
 ```
+
+`--limit` est nécessaire : par défaut `gh pr list` ne renvoie que 30 PR, et le filtre s'applique après cette limite.
 
 - **Elle existe** : y merger `origin/master` (sur sa branche) au lieu d'en ouvrir une autre, après confirmation.
 - **Elle n'existe pas** : après confirmation, la créer.
@@ -168,7 +170,7 @@ Corps : le template `feature.md` avec `Sync X.Y.Z to A.B` dans le premier bloc, 
 
 En cas de conflit, s'arrêter et montrer les fichiers en conflit : ne pas les résoudre sans validation.
 
-Si la PR de l'étape 2 n'est pas encore mergée, la sync ne contient pas le changelog des composants. Le signaler et proposer d'attendre son merge, ou de pousser maintenant puis de re-merger `origin/master` dans la branche de sync.
+Si la PR de l'étape 2 n'est pas encore mergée, la sync ne contient pas le changelog des composants. Le signaler et proposer d'attendre son merge, ou de pousser maintenant puis de la compléter plus tard. Dans les deux cas, lancer `git fetch origin` après le merge de cette PR, avant de merger `origin/master` dans la branche de sync : sinon la référence locale est périmée et le changelog manque toujours.
 
 Rappeler dans le rapport que ces PR se mergent en **merge commit, jamais en squash**.
 
