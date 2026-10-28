@@ -39,7 +39,7 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	readonly #injector = inject(Injector);
 
 	/**
-	 * Below the `S` breakpoint the panel opens as a modal sheet carrying its own search input, so this
+	 * Below the `XS` breakpoint the panel opens as a modal sheet carrying its own search input, so this
 	 * element is only ever a trigger and the displayers render it as a `<button>`. Typing into it is
 	 * impossible by then, and an `<input>` would make iOS raise the software keyboard on a field the
 	 * sheet is about to cover.
