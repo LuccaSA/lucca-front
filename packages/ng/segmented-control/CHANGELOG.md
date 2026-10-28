@@ -1,3 +1,9 @@
+### 22.1.1
+
+#### Changed
+
+- Item padding is now `8px 12px` by default and `6px 8px` in size `S`.
+
 ### 22.1.0
 
 #### Changed

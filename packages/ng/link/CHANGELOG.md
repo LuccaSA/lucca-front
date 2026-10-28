@@ -1,3 +1,10 @@
+### 22.1.1
+
+#### Fixed
+
+- `luLink` no longer loses its `href` after a navigation when it uses `href` or `external`.
+- A `luLink` that becomes `external` after rendering now opens in a new tab instead of navigating in the app.
+
 ### 22.1.0
 
 #### Added
