@@ -24,16 +24,16 @@ function getTemplate(): string {
 				<p class="userPopover-details-info-detail">
 					<!--
 					<span class="userPopover-details-info-detail-workplace">
-						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
+						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"></span>
 						<span class="userPopover-details-info-detail-link-state">Arrivée prévue le 3 mai</span>
 					</span>
 					<span class="userPopover-details-info-detail-workplace">
-						<span aria-hidden="true" class="lucca-icon icon-calendarStrikethrough mod-S"></span>
+						<span aria-hidden="true" class="lucca-icon icon-calendarStrikethrough mod-XS userPopover-details-info-detail-workplace-icon"></span>
 						<span class="userPopover-details-info-detail-link-state">Parti(e)</span>
 					</span>
 					-->
 					<span class="userPopover-details-info-detail-workplace">
-						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
+						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"></span>
 						<a class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state" href="#"
 							><span class="link-text">Absent(e) – <span class="pr-u-textLight">Jusqu’au 28/02/2024 inclus</span></span
 							><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
