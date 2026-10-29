@@ -78,6 +78,18 @@ export function refusePartialRunOnNewMinor(requested: string, committed: string 
 	);
 }
 
+/**
+ * The committed baselines document the minor this branch carries. Offline, another minor would empty
+ * references/ (see clearSkillContent) and read ZeroHeight "latest" with no guard to say which minor it documents.
+ */
+export function refuseOfflineRunOnNewMinor(requested: string, committed: string | null): string | null {
+	if (!isNewMinor(requested, committed)) return null;
+	return (
+		`--offline : les baselines committées documentent ${committed ?? 'aucune mineure'}, ce run passerait la skill à ${requested} sans vérifier ce que ZeroHeight « latest » documente. ` +
+		`Lance d'abord un run en ligne de ${requested}.`
+	);
+}
+
 /** The npm package whose publication proves a tag actually shipped. */
 const NG_PACKAGE_NAME = '@lucca-front/ng';
 

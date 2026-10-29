@@ -204,6 +204,10 @@ run en ligne avec token remplit le champ pour tous les nodes.
 
 Le run hors ligne n'écrit ni baselines, ni manifeste d'échecs.
 
+Il ne régénère que la mineure committée (`_lucca-front/versions.json`) : passer à une autre viderait
+`references/` et lirait ZeroHeight « latest » sans le garde-fou qui l'épingle. `--offline` refuse donc
+toute autre `--version` ; une nouvelle mineure passe d'abord par un run en ligne.
+
 ## Structure de sortie
 
 ```

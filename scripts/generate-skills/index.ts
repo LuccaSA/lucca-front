@@ -85,7 +85,7 @@ import { writeFixes } from './generators/fixes-writer';
 import { snapshotSkill, writeReviewChangelog } from './generators/version-diff-writer';
 import { auditStoryExamples, clearOutputViolations, reportOutputViolations } from './generators/output-guard';
 import { ensureZhReleaseIds } from './zh-release-guard';
-import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist, isNewMinor, refuseMinorForThisBranch, refusePartialRunOnNewMinor } from './preflight';
+import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist, isNewMinor, refuseMinorForThisBranch, refuseOfflineRunOnNewMinor, refusePartialRunOnNewMinor } from './preflight';
 import { MinorResolution, getTechnicalMinor, parseVersion, resolveMinorVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
@@ -392,6 +392,11 @@ async function main(): Promise<void> {
 	const partialRefusal = flags.dryRun ? null : refusePartialRunOnNewMinor(flags.versions[0], committed?.minor ?? null, partialFlags);
 	if (partialRefusal) {
 		console.error(`❌ ${partialRefusal}`);
+		process.exit(1);
+	}
+	const offlineRefusal = flags.offline ? refuseOfflineRunOnNewMinor(flags.versions[0], committed?.minor ?? null) : null;
+	if (offlineRefusal) {
+		console.error(`❌ ${offlineRefusal}`);
 		process.exit(1);
 	}
 
