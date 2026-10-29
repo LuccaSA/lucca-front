@@ -1,4 +1,5 @@
 @mixin vars {
 	--components-presentation-font: var(--pr-t-font-body-M);
 	--components-presentation-term-font: var(--pr-t-font-body-S);
+	--components-presentation-wrapper-gap: var(--pr-t-spacings-100);
 }
