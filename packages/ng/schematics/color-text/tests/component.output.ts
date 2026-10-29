@@ -9,10 +9,6 @@ import { Component, HostBinding } from '@angular/core';
 })
 export class TestComponent {}
 
-export const byProp = {
-	classes: 'pr-u-colorTextOrchid',
-};
-
 @Component({
 	selector: 'lu-test2',
 	templateUrl: './template.input.html',
