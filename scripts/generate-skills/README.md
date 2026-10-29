@@ -207,7 +207,9 @@ Le run hors ligne n'écrit ni baselines, ni manifeste d'échecs.
 
 Il ne régénère que la mineure committée (`_lucca-front/versions.json`) : passer à une autre viderait
 `references/` et lirait ZeroHeight « latest » sans le garde-fou qui l'épingle. `--offline` refuse donc
-toute autre `--version` ; une nouvelle mineure passe d'abord par un run en ligne.
+toute autre `--version` ; une nouvelle mineure passe d'abord par un run en ligne. Avec `--ref`, c'est
+le commit qui fixe la mineure, et `skills:update` en change hors ligne quand un tag ou `--minor` la
+fait avancer (cf. [Une documentation qui suit le code](#une-documentation-qui-suit-le-code)).
 
 ## Structure de sortie
 

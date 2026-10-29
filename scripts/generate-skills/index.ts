@@ -458,7 +458,8 @@ async function main(): Promise<void> {
 		console.error(`❌ ${partialRefusal}`);
 		process.exit(1);
 	}
-	const offlineRefusal = flags.offline ? refuseOfflineRunOnNewMinor(flags.versions[0], committed?.minor ?? null) : null;
+	// --ref takes its minor from the commit: the hook after a new tag, and a release PR's --minor, move it offline on purpose.
+	const offlineRefusal = flags.offline && !flags.ref ? refuseOfflineRunOnNewMinor(flags.versions[0], committed?.minor ?? null) : null;
 	if (offlineRefusal) {
 		console.error(`❌ ${offlineRefusal}`);
 		process.exit(1);
