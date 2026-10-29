@@ -6,8 +6,16 @@
 				<span class="boxDisclosure-summary-subtitle"><ng-container *luPortal="subtitle" /></span>
 			}
 		</span>
-		@if (metadata(); as metadata) {
-			<span class="boxDisclosure-summary-metadata">{{ metadata }}</span>
+		@if (metadataItems(); as metadataItems) {
+			<span class="boxDisclosure-summary-metadata">
+				<lu-listing inline divider>
+					@for (item of metadataItems; track $index) {
+						<lu-listing-item>{{ item }}</lu-listing-item>
+					}
+				</lu-listing>
+			</span>
+		} @else if (metadata(); as metadata) {
+			<span class="boxDisclosure-summary-metadata"><ng-container *luPortal="metadata" /></span>
 		}
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>

@@ -1,4 +1,5 @@
 import { BOX_THEME, BoxDisclosureComponent } from '@lucca-front/ng/box';
+import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
 
@@ -23,9 +24,10 @@ export default {
 			table: { category: 'inputs' },
 		},
 		metadata: {
-			type: 'string',
-			description: 'Information courte affichée avant le chevron, visible panneau replié.',
-			table: { category: 'inputs' },
+			control: { type: 'object' },
+			description:
+				'Informations courtes affichées avant le chevron, visible panneau replié. Un tableau de chaînes est affiché sous forme de listing inline. Un template peut être passé pour les cas particuliers : il est rendu dans la zone cliquable et ne doit donc contenir aucun élément interactif. [PortalContent]',
+			table: { category: 'inputs', type: { summary: 'string[] | PortalContent' } },
 		},
 		open: {
 			description: 'Place la box dans son état déplié.',
@@ -40,16 +42,17 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [BoxDisclosureComponent],
+			imports: [BoxDisclosureComponent, StatusBadgeComponent],
 		}),
 	],
-	render: ({ openChange, ...args }, { argTypes }) => {
+	render: ({ openChange, metadata, ...args }, { argTypes }) => {
 		return {
 			props: {
 				...args,
+				metadata,
 				onOpenChange: (open: boolean) => openChange?.(open),
 			},
-			template: cleanupTemplate(`<lu-box-disclosure ${generateInputs(args, argTypes)} (openChange)="onOpenChange($event)">Custom content</lu-box-disclosure>`),
+			template: cleanupTemplate(`<lu-box-disclosure ${generateInputs(args, argTypes)} [metadata]="metadata" (openChange)="onOpenChange($event)">Custom content</lu-box-disclosure>`),
 		};
 	},
 } as Meta;
@@ -58,8 +61,32 @@ export const Basic: StoryObj<BoxDisclosureComponent> = {
 	args: {
 		heading: 'Title',
 		subtitle: 'Subtitle',
-		metadata: 'Metadata',
+		metadata: ['Metadata', 'Metadata'],
 		theme: 'white',
 		open: false,
+	},
+};
+
+export const CustomMetadata: StoryObj<BoxDisclosureComponent> = {
+	args: {
+		heading: 'Title',
+		subtitle: 'Subtitle',
+		theme: 'white',
+		open: false,
+	},
+	argTypes: {
+		metadata: { control: false },
+	},
+	render: ({ openChange, metadata, ...args }, { argTypes }) => {
+		return {
+			props: {
+				...args,
+				onOpenChange: (open: boolean) => openChange?.(open),
+			},
+			template: cleanupTemplate(`<lu-box-disclosure ${generateInputs(args, argTypes)} [metadata]="customMetadata" (openChange)="onOpenChange($event)">Custom content</lu-box-disclosure>
+<ng-template #customMetadata>
+	<lu-status-badge label="Status" palette="success" />
+</ng-template>`),
+		};
 	},
 };

@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, input, model, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { BoxTheme } from '../box.type';
 
 @Component({
 	selector: 'lu-box-disclosure',
-	imports: [IconComponent, PortalDirective],
+	imports: [IconComponent, PortalDirective, ListingComponent, ListingItemComponent],
 	templateUrl: './box-disclosure.component.html',
 	styleUrl: './box-disclosure.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,9 +30,16 @@ export class BoxDisclosureComponent {
 	readonly subtitle = input<PortalContent>();
 
 	/**
-	 * Short information displayed before the chevron, visible when the disclosure box is closed
+	 * Short information displayed before the chevron, visible when the disclosure box is closed.
+	 * An array of strings is rendered as an inline listing.
+	 * A template can be given for specific cases: it is rendered inside the summary, so it must not contain interactive elements.
 	 */
-	readonly metadata = input<string>();
+	readonly metadata = input<string[] | PortalContent>();
+
+	readonly metadataItems = computed(() => {
+		const metadata = this.metadata();
+		return Array.isArray(metadata) ? metadata : null;
+	});
 
 	/**
 	 * Whether the disclosure box is open.

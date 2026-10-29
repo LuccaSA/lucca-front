@@ -20,7 +20,12 @@ function getTemplate(args: ThemesStory): string {
 			<span class="boxDisclosure-summary-title">Title</span>
 			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
 		</span>
-		<span class="boxDisclosure-summary-metadata">Metadata</span>
+		<span class="boxDisclosure-summary-metadata">
+			<ul class="listing mod-inline mod-divider">
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+			</ul>
+		</span>
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
 	<div class="boxDisclosure-details">Custom content</div>
@@ -31,7 +36,12 @@ function getTemplate(args: ThemesStory): string {
 			<span class="boxDisclosure-summary-title">Title</span>
 			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
 		</span>
-		<span class="boxDisclosure-summary-metadata">Metadata</span>
+		<span class="boxDisclosure-summary-metadata">
+			<ul class="listing mod-inline mod-divider">
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+			</ul>
+		</span>
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
 	<div class="boxDisclosure-details">Custom content</div>
@@ -42,7 +52,12 @@ function getTemplate(args: ThemesStory): string {
 			<span class="boxDisclosure-summary-title">Title</span>
 			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
 		</span>
-		<span class="boxDisclosure-summary-metadata">Metadata</span>
+		<span class="boxDisclosure-summary-metadata">
+			<ul class="listing mod-inline mod-divider">
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+			</ul>
+		</span>
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
 	<div class="boxDisclosure-details">Custom content</div>
@@ -53,7 +68,12 @@ function getTemplate(args: ThemesStory): string {
 			<span class="boxDisclosure-summary-title">Title</span>
 			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
 		</span>
-		<span class="boxDisclosure-summary-metadata">Metadata</span>
+		<span class="boxDisclosure-summary-metadata">
+			<ul class="listing mod-inline mod-divider">
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+			</ul>
+		</span>
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
 	<div class="boxDisclosure-details">Custom content</div>
@@ -64,7 +84,12 @@ function getTemplate(args: ThemesStory): string {
 			<span class="boxDisclosure-summary-title">Title</span>
 			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
 		</span>
-		<span class="boxDisclosure-summary-metadata">Metadata</span>
+		<span class="boxDisclosure-summary-metadata">
+			<ul class="listing mod-inline mod-divider">
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+				<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+			</ul>
+		</span>
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
 	<div class="boxDisclosure-details">Custom content</div>
