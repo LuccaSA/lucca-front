@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/components/bubbleIcon/exports' as bubbleIcon;
+
 @mixin neutral {
 	--components-box-background: var(--pr-t-elevation-surface-default);
 }
@@ -22,6 +24,10 @@
 	--components-box-description-font: var(--pr-t-font-body-S);
 	--components-box-illustrations-width: 82px;
 	--components-box-illustrations-height: 68px;
+
+	.bubbleIcon {
+		@include bubbleIcon.S;
+	}
 }
 
 @mixin illustrations {
