@@ -32,7 +32,6 @@ export default (options?: SchematicContextOpts): Rule => {
 					'pr-u-textWarningContrasted': 'pr-u-colorTextWarningContrasted',
 					'pr-u-textBrandContrasted': 'pr-u-colorTextBrandContrasted',
 					'pr-u-textNavigation': 'pr-u-colorTextNavigation',
-					'pr-u-textAI': 'pr-u-colorTextAI',
 					'pr-u-textPagga': 'pr-u-colorTextPagga',
 					'pr-u-textPoplee': 'pr-u-colorTextPoplee',
 					'pr-u-textCoreHR': 'pr-u-colorTextCoreHR',
