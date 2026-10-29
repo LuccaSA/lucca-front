@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
+	afterRenderEffect,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
@@ -17,6 +18,7 @@ import {
 	Renderer2,
 	signal,
 	TemplateRef,
+	untracked,
 	ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
@@ -148,6 +150,12 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	#inputs: InputDirective[] = [];
 
+	// Bumped on every registration/unregistration, read by the `afterRenderEffect` set up in the constructor:
+	// the ids can only be wired once the inputs are in the DOM, and the effect being registered up front means
+	// neither `addInput` nor `removeInput` has to schedule anything — `removeInput` runs while the view is being
+	// torn down, where the injector `afterNextRender` needs may already be destroyed (NG0205).
+	readonly #inputsRevision = signal(0);
+
 	/**
 	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
 	 */
@@ -165,12 +173,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
-		afterNextRender(
-			() => {
-				this.prepareInput();
-			},
-			{ injector: this.#injector },
-		);
+		this.#inputsRevision.update((revision) => revision + 1);
 	}
 
 	/**
@@ -181,14 +184,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	public removeInput(input: InputDirective): void {
 		this.#inputs = this.#inputs.filter((existing) => existing !== input);
-		if (this.#inputs.length > 0) {
-			afterNextRender(
-				() => {
-					this.prepareInput();
-				},
-				{ injector: this.#injector },
-			);
-		}
+		this.#inputsRevision.update((revision) => revision + 1);
 	}
 
 	public get inputs(): InputDirective[] {
@@ -227,6 +223,17 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#selfLabelledById: string | null = null;
 
 	constructor() {
+		// `prepareInput` reads the inputs back from the DOM and writes signals the template depends on, so it
+		// runs after render, and untracked: its own reads must not subscribe the effect to the field state.
+		afterRenderEffect(() => {
+			this.#inputsRevision();
+			untracked(() => {
+				if (this.#inputs.length > 0) {
+					this.prepareInput();
+				}
+			});
+		});
+
 		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus], () => {
 			this.updateAria();
 		});

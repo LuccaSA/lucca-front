@@ -1,4 +1,4 @@
-import { ApplicationRef, ChangeDetectionStrategy, Component, computed, input, viewChild } from '@angular/core';
+import { ApplicationRef, ChangeDetectionStrategy, Component, computed, createComponent, createEnvironmentInjector, EnvironmentInjector, input, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormFieldIdDirective, TextInputComponent } from '@lucca-front/ng/forms';
@@ -88,6 +88,19 @@ class FormFieldAriaTestComponent {
 class FormFieldSwapTestComponent {
 	readonly useButton = input(false);
 }
+
+@Component({
+	selector: 'lu-form-field-multi-input-test',
+	imports: [FormFieldComponent, InputDirective],
+	template: `
+		<lu-form-field label="Duration" layout="fieldset">
+			<input luInput type="text" />
+			<input luInput type="text" />
+		</lu-form-field>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FormFieldMultiInputTestComponent {}
 
 describe('FormFieldComponent', () => {
 	let fixture: ComponentFixture<FormFieldComponentTestComponent>;
@@ -365,6 +378,23 @@ describe('FormFieldComponent', () => {
 			const ids = current?.getAttribute('aria-labelledby')?.split(' ') ?? [];
 			expect(ids).not.toHaveLength(0);
 			expect(ids.every((id) => document.getElementById(id) !== null)).toBe(true);
+		});
+	});
+
+	describe('when the injector is destroyed before the views it created', () => {
+		// Mirrors a Storybook story switching templates: the environment injector goes away first, then the
+		// views are torn down — anything scheduled from a destroy hook then injects from a dead injector.
+		it('should not schedule work while the inputs are unregistering', () => {
+			// Arrange
+			const environmentInjector = createEnvironmentInjector([], TestBed.inject(EnvironmentInjector));
+			const componentRef = createComponent(FormFieldMultiInputTestComponent, { environmentInjector });
+			componentRef.changeDetectorRef.detectChanges();
+
+			// Act
+			environmentInjector.destroy();
+
+			// Assert
+			expect(() => componentRef.destroy()).not.toThrow();
 		});
 	});
 });
