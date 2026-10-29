@@ -38,17 +38,17 @@ export class NumericBadgeComponent {
 	/**
 	 * Applies the loading state
 	 */
-	readonly loading = input(false, { transform: booleanAttribute });
+	readonly loading = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * Indicates the maximum value of number for the numeric badge
 	 */
-	readonly maxValue = input(999, { transform: numberAttribute });
+	readonly maxValue = input<number, number | `${number}`>(999, { transform: numberAttribute });
 
 	/**
 	 * Disabled tooltip on numeric badge
 	 */
-	readonly disableTooltip = input(false, { transform: booleanAttribute });
+	readonly disableTooltip = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	readonly #initialAriaHidden = inject(new HostAttributeToken('aria-hidden'), { optional: true });
 

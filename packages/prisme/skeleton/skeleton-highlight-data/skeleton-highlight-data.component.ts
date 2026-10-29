@@ -11,7 +11,7 @@ export class SkeletonHighlightDataComponent {
 	/**
 	 * Applies dark color for skeleton
 	 */
-	readonly dark = input(false, { transform: booleanAttribute });
+	readonly dark = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	readonly getRandomPercent = ɵinjectRandomPercent(25, 75);
 }

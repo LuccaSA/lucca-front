@@ -33,7 +33,7 @@ export class TagComponent {
 	/**
 	 * Should display be outlined?
 	 */
-	readonly outlined = input(false, { transform: booleanAttribute });
+	readonly outlined = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * For routerLink usage
@@ -49,17 +49,17 @@ export class TagComponent {
 	/**
 	 * Visually hides the label while keeping it in the DOM for screen readers. Requires an icon.
 	 */
-	readonly hiddenLabel = input(false, { transform: booleanAttribute });
+	readonly hiddenLabel = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * Truncates the text with an ellipsis and adds a tooltip when the label is too long
 	 */
-	readonly withEllipsis = input(false, { transform: booleanAttribute });
+	readonly withEllipsis = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * Applies AI colors
 	 */
-	readonly AI = input(false, { transform: booleanAttribute });
+	readonly AI = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	readonly tagClasses = computed(() => {
 		const size = this.size();

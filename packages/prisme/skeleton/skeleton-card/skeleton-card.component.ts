@@ -11,7 +11,7 @@ export class SkeletonCardComponent {
 	/**
 	 * Defines the number of description lines in card
 	 */
-	readonly descriptionLines = input(1, { transform: numberAttribute });
+	readonly descriptionLines = input<number, number | `${number}`>(1, { transform: numberAttribute });
 
 	readonly lines = computed(() => Array.from({ length: this.descriptionLines() }));
 
