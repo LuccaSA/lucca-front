@@ -10,5 +10,5 @@ export class SkeletonHeaderComponent {
 	/**
 	 * Applies dark color for skeleton
 	 */
-	readonly dark = input(false, { transform: booleanAttribute });
+	readonly dark = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 }

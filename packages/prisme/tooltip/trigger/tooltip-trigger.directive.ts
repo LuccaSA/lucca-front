@@ -69,28 +69,28 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltip = linkedSignal<string | SafeHtml>(() => this.prTooltipInput());
 	readonly tooltipContent = computed(() => this.luTooltip() || this.prTooltip());
 
-	readonly luTooltipEnterDelay = input(0, { transform: numberAttribute });
-	readonly prTooltipEnterDelay = input(300, { transform: numberAttribute });
+	readonly luTooltipEnterDelay = input<number, number | `${number}`>(0, { transform: numberAttribute });
+	readonly prTooltipEnterDelay = input<number, number | `${number}`>(300, { transform: numberAttribute });
 	readonly tooltipEnterDelay = computed(() => this.luTooltipEnterDelay() || this.prTooltipEnterDelay());
 
-	readonly luTooltipLeaveDelay = input(0, { transform: numberAttribute });
-	readonly prTooltipLeaveDelay = input(100, { transform: numberAttribute });
+	readonly luTooltipLeaveDelay = input<number, number | `${number}`>(0, { transform: numberAttribute });
+	readonly prTooltipLeaveDelay = input<number, number | `${number}`>(100, { transform: numberAttribute });
 	readonly tooltipLeaveDelay = computed(() => this.luTooltipLeaveDelay() || this.prTooltipLeaveDelay());
 
-	readonly luTooltipDisabled = input(false, { transform: booleanAttribute });
-	readonly prTooltipDisabled = input(false, { transform: booleanAttribute });
+	readonly luTooltipDisabled = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly prTooltipDisabled = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 	readonly tooltipDisabled = computed(() => this.prTooltipDisabled() || this.luTooltipDisabled());
 
-	readonly luTooltipOnlyForDisplay = input(false, { transform: booleanAttribute });
-	readonly prTooltipOnlyForDisplay = input(false, { transform: booleanAttribute });
+	readonly luTooltipOnlyForDisplay = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly prTooltipOnlyForDisplay = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 	readonly tooltipOnlyForDisplay = computed(() => this.prTooltipOnlyForDisplay() || this.luTooltipOnlyForDisplay());
 
 	readonly luTooltipPosition = input<TooltipPosition | null>(null);
 	readonly prTooltipPosition = input<TooltipPosition>('above');
 	readonly tooltipPosition = computed(() => this.luTooltipPosition() ?? this.prTooltipPosition());
 
-	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
-	readonly prTooltipWhenEllipsisInput = input(false, { alias: 'prTooltipWhenEllipsis', transform: booleanAttribute });
+	readonly luTooltipWhenEllipsisInput = input<boolean, boolean | `${boolean}` | ''>(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
+	readonly prTooltipWhenEllipsisInput = input<boolean, boolean | `${boolean}` | ''>(false, { alias: 'prTooltipWhenEllipsis', transform: booleanAttribute });
 
 	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
 	readonly prTooltipWhenEllipsis = linkedSignal(() => this.prTooltipWhenEllipsisInput());

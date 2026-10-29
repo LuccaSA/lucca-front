@@ -14,19 +14,19 @@ export class SkeletonDataTableComponent {
 	/**
 	 * Skeleton only show in data table body
 	 */
-	readonly dataTableBodyOnly = input(false, { transform: booleanAttribute });
+	readonly dataTableBodyOnly = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * Defines the number of cols (5 by default)
 	 */
-	readonly cols = input(5, { transform: numberAttribute });
+	readonly cols = input<number, number | `${number}`>(5, { transform: numberAttribute });
 
 	readonly colsAlign = input<Record<number, SkeletonColsAlign>>({});
 
 	/**
 	 * Defines the number of row (8 by default)
 	 */
-	readonly rows = input(8, { transform: numberAttribute });
+	readonly rows = input<number, number | `${number}`>(8, { transform: numberAttribute });
 
 	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));
 	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));

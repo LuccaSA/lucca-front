@@ -17,19 +17,19 @@ export class SkeletonIndexTableComponent {
 	/**
 	 * Skeleton only show in index table body
 	 */
-	readonly tableBodyOnly = input(false, { transform: booleanAttribute });
+	readonly tableBodyOnly = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
 
 	/**
 	 * Defines the number of cols (5 by default)
 	 */
-	readonly cols = input(5, { transform: numberAttribute });
+	readonly cols = input<number, number | `${number}`>(5, { transform: numberAttribute });
 
 	readonly colsAlign = input<Record<number, SkeletonColsAlign>>({});
 
 	/**
 	 * Defines the number of row (8 by default)
 	 */
-	readonly rows = input(8, { transform: numberAttribute });
+	readonly rows = input<number, number | `${number}`>(8, { transform: numberAttribute });
 
 	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));
