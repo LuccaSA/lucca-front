@@ -2,6 +2,7 @@ import { AsyncPipe, DatePipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, Signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
@@ -13,7 +14,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 import { LuUserPopoverStore } from '../../service/user-popover.store';
 import { LuUserPopover } from '../../user-popover.model';
-import { LU_USER_POPOVER_USER } from '../../user-popover.providers';
+import { LU_USER_POPOVER_CUSTOM_CONTENT, LU_USER_POPOVER_USER } from '../../user-popover.providers';
 import { IsFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 
@@ -21,11 +22,25 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 	selector: 'lu-user-popover-content',
 	templateUrl: './user-popover.component.html',
 	styleUrl: './user-popover.component.scss',
-	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, LinkComponent, SkeletonUserPopoverComponent],
+	imports: [
+		AsyncPipe,
+		NgTemplateOutlet,
+		DatePipe,
+		IntlParamsPipe,
+		IsFuturePipe,
+		IsFutureOrTodayPipe,
+		LeaveEndsDisplayPipe,
+		IconComponent,
+		LinkComponent,
+		SkeletonUserPopoverComponent,
+		DividerComponent,
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserPopoverComponent {
 	luUser = inject<Signal<ILuUser>>(LU_USER_POPOVER_USER);
+
+	customContent = inject(LU_USER_POPOVER_CUSTOM_CONTENT, { optional: true });
 
 	#popoverRef = inject(POPOVER_CONFIG).ref;
 
