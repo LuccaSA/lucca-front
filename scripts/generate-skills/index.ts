@@ -70,7 +70,7 @@ import {
 	writeSkillManifest,
 	clearSkillContent,
 	writeSharedType,
-	SKILL_NAME,
+	skillRoot,
 	readSkillManifest,
 } from './generators/skill-writer';
 import { writeToc } from './generators/toc-writer';
@@ -549,10 +549,11 @@ async function main(): Promise<void> {
 	// Output guard: assert the emitted markdown is coherent. A violation is a generator bug, so it
 	// fails the run — but only after everything is written, so the offending output can be read.
 	if (!flags.dryRun) {
-		// Only the generated skill is blocking: the hand-written skills beside it (lucca-front-scss…)
-		// are reported, not thrown at whoever runs the generator.
+		// Only the generated skill is blocking: the hand-written skills beside it (the lucca-front
+		// pointer, lucca-front-scss…) are reported, not thrown at whoever runs the generator.
 		const target = resolutions.get(flags.versions[0])!.version;
-		const violations = reportOutputViolations(config.output.skillsDir, [SKILL_NAME], listScssComponentNames(target.tag));
+		const generatedScope = path.relative(config.output.skillsDir, skillRoot(config.output.skillsDir));
+		const violations = reportOutputViolations(config.output.skillsDir, [generatedScope], listScssComponentNames(target.tag));
 		if (violations.length > 0 && !flags.acceptOutputViolations) {
 			console.error('\n❌ Génération refusée : corrige le générateur (jamais les .md), ou relance avec --accept-output-violations si tu assumes ces écarts.');
 			process.exitCode = 1;

@@ -3,6 +3,7 @@ import os from 'os';
 import path from 'path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { auditGeneratedMarkdown, auditStoryExamples, clearOutputViolations, reportOutputViolations } from './output-guard';
+import { skillRoot } from './skill-writer';
 
 let dir: string;
 
@@ -76,6 +77,15 @@ describe('auditGeneratedMarkdown', () => {
 		write('lucca-front-21-0/references/components/dialog/dialog.component.md', "```css\nimport { A } from 'x';\n```\n");
 
 		expect(reportOutputViolations(dir, ['lucca-front-21-3'])).toEqual([]);
+	});
+
+	it('blocks on the generated docs and not on the hand-written pointer beside them', () => {
+		write('_lucca-front/llms/references/components/dialog/dialog.component.md', "```css\nimport { A } from 'x';\n```\n");
+		write('lucca-front/SKILL.md', "```css\nimport { B } from 'y';\n```\n");
+
+		const blocking = reportOutputViolations(dir, [path.relative(dir, skillRoot(dir))]);
+
+		expect(blocking.map((v) => v.where.split(path.sep).slice(0, 2).join('/'))).toEqual(['_lucca-front/llms']);
 	});
 });
 

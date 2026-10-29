@@ -426,7 +426,7 @@ y déclencherait 211 faux positifs — seul un `import … from` n'est jamais du
 `changelog/` est exclu de la relecture : ces fichiers citent du markdown généré dans des blocs
 ````diff, donc toute violation y est l'écho d'une autre déjà signalée à sa source.
 
-**Périmètre** : seul `lucca-front/` est bloquant. Les violations trouvées dans les skills écrites à la main à côté (`lucca-front-scss/`…) sont signalées comme « hors périmètre » : un run du générateur ne doit pas échouer sur du contenu qu'il n'a pas produit.
+**Périmètre** : seule la doc générée (`_lucca-front/llms/`) est bloquante. Les violations trouvées dans les skills écrites à la main à côté (le pointeur `lucca-front/`, `lucca-front-scss/`…) sont signalées comme « hors périmètre » : un run du générateur ne doit pas échouer sur du contenu qu'il n'a pas produit.
 
 ## Changelog structurel
 
