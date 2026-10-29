@@ -29,8 +29,8 @@
 			gap: var(--pr-t-spacings-200);
 		}
 
-		.userPopover-divider {
-			--components-divider-marginBlock: var(--pr-t-spacings-150);
+		.userPopover-divider.divider {
+			--components-divider-marginBlock: var(--pr-t-spacings-100);
 		}
 
 		.userPopover-details-info {
