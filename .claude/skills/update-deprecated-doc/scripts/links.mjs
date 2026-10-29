@@ -25,25 +25,22 @@ const ghCombo = (src) => {
 const ghDisplayed = (text) =>
 	`/${text.startsWith('.') ? ghClassBefore : ghBefore}${text.replace(/^\./, '').replace(/[.*+[\]{}^$\\]/g, '\\$&')}${ghAfter}/`;
 // Alternatives are grouped: the repository filters must apply to every one of them.
+// Parentheses are encoded too: an unbalanced one would end the Markdown link destination.
 const searchUrl = (q) =>
-	`https://github.com/search?q=${encodeURIComponent(`${q.includes(' OR ') ? `(${q})` : q} org:LuccaSA NOT repo:LuccaSA/lucca-front`)}&amp;type=code`;
-const unesc = (t) => t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+	`https://github.com/search?q=${encodeURIComponent(`${q.includes(' OR ') ? `(${q})` : q} org:LuccaSA NOT repo:LuccaSA/lucca-front`).replace(/[()]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)}&type=code`;
 // `shared` links every item to the search of all the entry's patterns.
-export const linkNom = (html, e, shared = false) => {
+export const linkNom = (items, e, shared = false) => {
 	const sources = e.groups.flatMap((g) => g.sources);
 	const fallback = sources.map((s) => (sources.length > 1 && comboRe.test(s) ? `(${ghCombo(s)})` : ghCombo(s))).join(' OR ');
-	const link = (q, code) => `<a href="${searchUrl(q)}">${code}</a>`;
-	return html
-		.replace(/<a href="https:\/\/github\.com\/search[^"]*">(<code>[\s\S]*?<\/code>)<\/a>/g, '$1')
-		.replace(/<li>([\s\S]*?)<\/li>/g, (whole, inner) => {
-			const codes = [...inner.matchAll(/<code>([\s\S]*?)<\/code>/g)].map((m) => unesc(m[1]));
-			if (!codes.length) return whole;
-			const query =
-				shared || codes.some((c) => c.includes('…'))
-					? fallback
-					: codes.length === 2 && inner.includes('<strong>+</strong>')
-						? codes.map(ghDisplayed).join(' AND ')
-						: ghDisplayed(codes[0]);
-			return `<li>${inner.replace(/<code>[\s\S]*?<\/code>/g, (code) => link(query, code))}</li>`;
-		});
+	return items.map((item) => {
+		const codes = [...item.matchAll(/`([^`]+)`/g)].map((m) => m[1]);
+		if (!codes.length) return item;
+		const query =
+			shared || codes.some((c) => c.includes('…'))
+				? fallback
+				: codes.length === 2 && item.includes('**+**')
+					? codes.map(ghDisplayed).join(' AND ')
+					: ghDisplayed(codes[0]);
+		return item.replace(/`[^`]+`/g, (code) => `[${code}](${searchUrl(query)})`);
+	});
 };
