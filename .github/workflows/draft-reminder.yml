@@ -1,0 +1,48 @@
+name: Remind draft pull request authors
+
+# Reviewers skip drafts: tell the author once, when the pull request becomes a draft, that it is
+# up to them to mark it ready or to say what is left. pull_request_target so that pull requests
+# from forks can be commented too; no code is checked out.
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - converted_to_draft
+
+permissions: {}
+
+jobs:
+  draft-reminder:
+    if: github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const MARKER = '<!-- draft-reminder -->';
+            const { owner, repo } = context.repo;
+            const pr = context.payload.pull_request;
+
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: pr.number, per_page: 100 });
+            if (comments.some((c) => c.user?.login === 'github-actions[bot]' && c.body?.includes(MARKER))) {
+              core.info(`#${pr.number}: already reminded`);
+              return;
+            }
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: pr.number,
+              body: [
+                MARKER,
+                `@${pr.user.login} this pull request is a draft, so reviewers will not look at it yet.`,
+                '',
+                '- Ready to be reviewed? Click **Ready for review**.',
+                '- Not yet? Say in the description what is left to do.',
+                '',
+                'Drafts without any activity are closed after 60 days (the branch is kept).',
+              ].join('\n'),
+            });
