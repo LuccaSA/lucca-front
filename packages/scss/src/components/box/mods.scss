@@ -17,6 +17,10 @@
 	--palettes-assets-primary: var(--components-box-bubble-primary-dark);
 	--palettes-assets-secondary: var(--components-box-bubble-secondary-dark);
 	--palettes-assets-brand: var(--components-box-bubble-brand-dark);
+
+	.bubbleIcon {
+		--components-bubbleIcon-bubble-path-fill: var(--palettes-200, var(--palettes-product-200));
+	}
 }
 
 @mixin S {
