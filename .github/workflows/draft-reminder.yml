@@ -1,11 +1,11 @@
 name: Remind draft pull request authors
 
 # Reviewers skip drafts: tell the author once, when the pull request becomes a draft, that it is
-# up to them to mark it ready or to say what is left. pull_request_target so that pull requests
-# from forks can be commented too; no code is checked out.
+# up to them to mark it ready or to say what is left. Pull requests from forks get a read-only
+# token and are left to the 7-day reminder of stale-drafts.yml.
 
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
       - converted_to_draft
@@ -14,7 +14,7 @@ permissions: {}
 
 jobs:
   draft-reminder:
-    if: github.event.pull_request.draft
+    if: github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
