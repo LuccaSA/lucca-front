@@ -80,7 +80,15 @@ export class DurationDaysPartComponent {
 
 	protected readonly inputValue = computed(() => (this.hideValue() || !this.isValueSet() ? null : this.formattedValue()));
 
-	protected readonly digitNumber = computed(() => Math.max(2, this.valueLabel().length));
+	/**
+	 * Width reserved for the longest value the field accepts (integer digits, separator and decimals),
+	 * so the field does not resize while typing.
+	 */
+	protected readonly digitNumber = computed(() => {
+		const decimals = this.decimals();
+
+		return Math.max(2, this.maxDigits() + (decimals > 0 ? decimals + 1 : 0));
+	});
 
 	protected inputHandler(event: Event): void {
 		if (!(event.target instanceof HTMLInputElement)) {
