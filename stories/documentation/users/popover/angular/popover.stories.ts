@@ -1,71 +1,58 @@
+import { finn } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { ILuUser } from '@lucca-front/ng/user';
+import { ILuUser, LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
-@Component({
-	selector: 'user-popover-story',
-	template: '<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover()" [luUserPopoverDisabled]="luUserPopoverDisabled()">Survolez-moi !</button>',
-	imports: [LuUserPopoverDirective],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class UserPopoverStory {
-	luUserPopover = input<ILuUser>();
-	luUserPopoverEnterDelay = input<number>(300);
-	luUserPopoverLeaveDelay = input<number>(200);
-	luUserPopoverDisabled = input<boolean>(false);
+interface UserPopoverStory {
+	luUserPopover: ILuUser;
+	luUserPopoverDisabled: boolean;
 }
 
 export default {
-	title: 'Documentation/Users/Popover/Angular',
-	component: UserPopoverStory,
-	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient(), provideRouter([])] })],
-	argsTypes: {
+	title: 'Documentation/Users/UserPopover/Angular',
+	component: LuUserPopoverDirective,
+	decorators: [moduleMetadata({ imports: [LuUserPopoverDirective, LuUserDisplayModule] }), applicationConfig({ providers: [provideAnimations(), provideHttpClient(), provideRouter([])] })],
+	argTypes: {
 		luUserPopover: { control: { type: 'object' } },
-		luUserPopoverEnterDelay: { control: { type: 'number' } },
-		luUserPopoverLeaveDelay: { control: { type: 'number' } },
 		luUserPopoverDisabled: { control: { type: 'boolean' } },
 	},
 } as Meta;
 
 export const Basic: StoryObj<UserPopoverStory> = {
-	args: {
-		luUserPopover: { id: 1, firstName: 'Chloe', lastName: 'Alibert' },
-		luUserPopoverEnterDelay: 300,
-		luUserPopoverLeaveDelay: 200,
-		luUserPopoverDisabled: false,
-	},
-};
-
-Basic.parameters = {
-	controls: {
-		include: ['luUserPopover', 'luUserPopoverEnterDelay', 'luUserPopoverLeaveDelay', 'luUserPopoverDisabled'],
-	},
-};
-
-@Component({
-	selector: 'user-popover-custom-content-story',
-	template: `
-		<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover()" [luUserPopoverCustomContent]="customContent">Survolez-moi !</button>
-		<ng-template #customContent let-user> Custom content for {{ user.firstName }} </ng-template>
-	`,
-	imports: [LuUserPopoverDirective],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class UserPopoverCustomContentStory {
-	luUserPopover = input<ILuUser>();
-}
-
-export const CustomContent: StoryObj<UserPopoverCustomContentStory> = {
 	render: (args) => ({
 		props: args,
-		moduleMetadata: { imports: [UserPopoverCustomContentStory] },
-		template: '<user-popover-custom-content-story [luUserPopover]="luUserPopover" />',
+		template: `<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover" [luUserPopoverDisabled]="luUserPopoverDisabled" translate="no">{{ luUserPopover | luUserDisplay: 'lf' }}</button>`,
 	}),
 	args: {
-		luUserPopover: { id: 1, firstName: 'Chloe', lastName: 'Alibert' },
+		luUserPopover: finn,
+		luUserPopoverDisabled: false,
+	},
+	parameters: {
+		controls: {
+			include: ['luUserPopover', 'luUserPopoverDisabled'],
+		},
+	},
+};
+
+export const CustomContent: StoryObj<UserPopoverStory & { customContent: string }> = {
+	render: ({ customContent, ...args }) => ({
+		props: args,
+		template: `<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover" [luUserPopoverCustomContent]="customContent">Survolez-moi !</button>
+<ng-template #customContent let-user>${customContent}</ng-template>`,
+	}),
+	argTypes: {
+		customContent: { control: { type: 'text' }, description: 'Template content, `user` is available in the template context.' },
+	},
+	args: {
+		luUserPopover: finn,
+		customContent: 'Custom content for {{ user.firstName }}',
+	},
+	parameters: {
+		controls: {
+			include: ['customContent'],
+		},
 	},
 };

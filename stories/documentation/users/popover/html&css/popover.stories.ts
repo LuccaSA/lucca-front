@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
-	title: 'Documentation/Users/Popover/HTML&CSS',
+	title: 'Documentation/Users/UserPopover/HTML&CSS',
 } as Meta;
 
 function getTemplate(): string {
