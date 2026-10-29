@@ -189,7 +189,7 @@ Bouton → API : `./references/components/button/button.md`, Figma : `./referenc
 - plg-push
 - popover
 - popover2
-- priority-levels
+- priority-level
 - progress-bar
 - progress-stepper
 - radiofield

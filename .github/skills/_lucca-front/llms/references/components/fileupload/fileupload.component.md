@@ -49,8 +49,8 @@ import { MultiFileUploadComponent } from '@lucca-front/ng/file-upload';
 <lu-form-field label="Label">
 	<lu-multi-file-upload
 		fileMaxSize="5000000"
-		illustration="paper"
-		(filePicked)="fileUploadFeature.uploadFiles([$event])"
+		[accept]="accept"
+		(filePicked)="filePicked($event); fileUploadFeature.uploadFiles([$event])"
 	/>
 </lu-form-field>
 <lu-file-entry-wrapper>
@@ -84,7 +84,7 @@ import { MultiFileUploadComponent } from '@lucca-front/ng/file-upload';
 		<lu-single-file-upload
 			fileMaxSize="5000000"
 			[accept]="accept"
-			(filePicked)="fileUploadFeature.uploadFiles([$event])"
+			(filePicked)="filePicked($event); fileUploadFeature.uploadFiles([$event])"
 		/>
 	}
 </lu-form-field>

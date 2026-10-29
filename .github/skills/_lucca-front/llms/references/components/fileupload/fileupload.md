@@ -26,7 +26,7 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 ## Basic Usage
 
 ```html
-<lu-form-field label="Label"> <lu-multi-file-upload fileMaxSize="5000000" illustration="paper" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+<lu-form-field label="Label"> <lu-multi-file-upload fileMaxSize="5000000" [accept]="accept" (filePicked)="filePicked($event); fileUploadFeature.uploadFiles([$event])" />
 </lu-form-field>
 <lu-file-entry-wrapper> @for(fileUpload of fileUploadFeature.fileUploads(); track $index) { <lu-file-entry [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" /> }
 </lu-file-entry-wrapper>
@@ -52,7 +52,7 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 | `size` | `size` | `FileUploadSize \| null` | `null` | — | — | Modifie la taille du composant. |
 | `password` | `password` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `illustration` | `illustration` | `/** @deprecated use 'invoice' instead */
-		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. |
+		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. La valeur paper est dépréciée au profit de invoice. |
 | `required` | `required` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `buttonFilled` | `buttonFilled` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le bouton comme action principale de la page. |
 
@@ -113,7 +113,7 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 | `size` | `size` | `FileUploadSize \| null` | `null` | — | — | Modifie la taille du composant. |
 | `password` | `password` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `illustration` | `illustration` | `/** @deprecated use 'invoice' instead */
-		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. |
+		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. La valeur paper est dépréciée au profit de invoice. |
 | `required` | `required` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `buttonFilled` | `buttonFilled` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le bouton comme action principale de la page. |
 
@@ -141,7 +141,7 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 | `size` | `size` | `FileUploadSize \| null` | `null` | — | — | Modifie la taille du composant. |
 | `password` | `password` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `illustration` | `illustration` | `/** @deprecated use 'invoice' instead */
-		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. |
+		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. La valeur paper est dépréciée au profit de invoice. |
 | `required` | `required` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `buttonFilled` | `buttonFilled` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le bouton comme action principale de la page. |
 | `entry` | `entry` | `FileEntry \| null` | `null` | — | — | — |
@@ -172,7 +172,7 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.5
 

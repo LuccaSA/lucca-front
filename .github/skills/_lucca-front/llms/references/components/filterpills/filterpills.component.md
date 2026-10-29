@@ -60,6 +60,6 @@ import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 	<lu-date-input [ngModel]="null" />
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input [ngModel]="null" [(ngModel)]="dateRange" />
+	<lu-date-range-input [(ngModel)]="dateRange" />
 </lu-filter-pill>
 ```

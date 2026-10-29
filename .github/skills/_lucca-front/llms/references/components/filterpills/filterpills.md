@@ -35,14 +35,14 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `name` | `name` | `string` | — | — | — | Dans le cas d’un filtre optionnel, permet de faire le lien entre la liste de filtres disponible et l’affichage du filtre… |
+| `name` | `name` | `string` | — | — | — | — |
 | `optional` | `optional` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `grouping` | `grouping` | `string` | `''` | — | — | — |
 | `iconOnly` | `iconOnly` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `backdrop` | `backdrop` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `label` | `label` | `string` | — | ✅ | — | Modifie le label du filtre. |
-| `placeholderOverride` | `placeholder` | `string \| null` | `null` | — | — | — |
-| `icon` | `icon` | `LuccaIcon` | — | — | — | — |
+| `placeholderOverride` | `placeholder` | `string \| null` | `null` | — | — | Remplace le texte affiché lorsque le filtre est vide. |
+| `icon` | `icon` | `LuccaIcon` | — | — | — | Remplace l’icône affichée à droite du filtre. |
 
 #### Models (two-way binding)
 
@@ -118,7 +118,7 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.1.0
 

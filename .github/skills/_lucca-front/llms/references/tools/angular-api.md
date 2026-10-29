@@ -326,7 +326,7 @@ bind to a string with iso 26001 format YYYY-MM-DD
 
 ### Services
 
-#### LuSidepanel — ⚠️ Déprécié : Use LuModal with `modal.open(component, data, { mode: 'sidepanel' })` instead.
+#### LuSidepanel — ⚠️ Déprécié : since 15.2.0; use LuModal with `modal.open(component, data, { mode: 'sidepanel' })`.
 
 - `open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D | undefined = undefined, config: Partial<LuModalConfig> = {}): ILuSidepanelRef<D, LuModalContentResult<T>>`
 

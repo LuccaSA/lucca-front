@@ -37,12 +37,12 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 | `heading` | `heading` | `PortalContent` | — | ✅ | — | Titre du composant. [PortalContent] |
 | `value` | `value` | `PortalContent` | — | ✅ | — | Valeur affichée. [PortalContent] |
 | `subText` | `subText` | `PortalContent` | — | — | — | Texte secondaire. [PortalContent] |
-| `bubble` | `bubble` | `HighlightDataBubble \| number` | `undefined` | — | `luOptionalNumberAttribute` | — |
-| `theme` | `theme` | `'white' \| 'light' \| 'dark'` | `'white'` | — | — | — |
-| `palette` | `palette` | `HighlightDataPalette \| string` | `'lucca'` | — | — | La palette influence également la couleur des bubbles. |
+| `bubble` | `bubble` | `HighlightDataBubble \| number` | `undefined` | — | `luOptionalNumberAttribute` | Ajoute une "bulle" de décoration (derrière l’illustration s’il y en a une). |
+| `theme` | `theme` | `'white' \| 'light' \| 'dark'` | `'white'` | — | — | Modifie le fond du composant (white par défaut). |
+| `palette` | `palette` | `HighlightDataPalette \| string` | `'lucca'` | — | — | — |
 | `illustration` | `illustration` | `HighlightDataIllustration \| string` | — | — | — | Il est également possible de renseigner une URL. |
-| `size` | `size` | `HighlightDataSize \| null` | `null` | — | — | — |
-| `valueFirst` | `valueFirst` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `size` | `size` | `HighlightDataSize \| null` | `null` | — | — | Modifie la taille du composant. |
+| `valueFirst` | `valueFirst` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche la valeur avant le titre. |
 | `nested` | `nested` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 ## Type definitions
@@ -58,7 +58,7 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

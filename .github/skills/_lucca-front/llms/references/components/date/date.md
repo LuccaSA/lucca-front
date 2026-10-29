@@ -57,6 +57,8 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 
 **Selector:** `lu-date-picker`
 
+> ⚠️ **Déprécié** : since 18.3.0; use DateInputComponent.
+
 **exportAs:** `LuDatePicker`
 
 #### Inputs
@@ -127,7 +129,7 @@ import { LuCalendarInputComponent, LuDateInputDirective, LuDatePickerComponent, 
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.5
 

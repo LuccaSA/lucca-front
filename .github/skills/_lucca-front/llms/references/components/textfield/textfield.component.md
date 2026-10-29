@@ -44,85 +44,53 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Je suis un message d’aide"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
-	iconAItooltip="Donnée remplie automatiquement"
-	iconAIalt="Assistant IA"
->
+<lu-form-field>
+	<lu-text-input placeholder="Placeholder" [(ngModel)]="model.example" (blur)="onBlur($event)"></lu-text-input>
+</lu-form-field>
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>
+```
+
+```html
+<lu-form-field>
 	<lu-text-input
-		required
+		mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99"
 		placeholder="Placeholder"
-		minlength="0"
-		maxlength="0"
 		[(ngModel)]="model.example"
+		(blur)="onBlur($event)"
 	></lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Je suis un message d’aide"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
->
+<lu-form-field>
 	<lu-text-input
-		required
-		placeholder="Placeholder"
-		[(ngModel)]="model.example"
-		mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99"
-	></lu-text-input>
-</lu-form-field>
-{{ model.example }}
-```
-
-```html
-<lu-form-field
-	label="Label"
-	tooltip="Je suis un message d’aide"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
->
-	<lu-text-input
-		required
 		hasClearer
 		placeholder="Placeholder"
 		type="password"
 		[(ngModel)]="model.example"
+		(blur)="onBlur($event)"
 	></lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Tooltip message"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
->
+<lu-form-field>
 	<lu-text-input
-		required
 		placeholder="Placeholder"
 		[prefix]="prefix"
 		[suffix]="suffix"
 		[(ngModel)]="model.example"
+		(blur)="onBlur($event)"
 	></lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
 ```html
-<lu-form-field AI label="Label" iconAItooltip="Donnée remplie automatiquement" iconAIalt="Assistant IA">
-	<lu-text-input [(ngModel)]="model.example" />
+<lu-form-field>
+	<lu-text-input [(ngModel)]="model.example" (blur)="onBlur($event)" />
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```

@@ -12,6 +12,7 @@
   - Injection tokens
 - Related files
 - Changelog
+  - 22.1.1
   - 22.1.0
   - 22.0.5
   - 22.0.0
@@ -43,6 +44,7 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateItemComponent, ActivityFee
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `label` | `label` | `PortalContent \| null` | `null` | — | — | Description de l’étape. [PortalContent] |
 | `user` | `user` | `ILuUser \| null` | `null` | — | — | Permet de définir l’utilisateur présenté dans l’avatar (masqué pour les statuts `success` et `critical`). |
+| `avatarPlaceholder` | `avatarPlaceholder` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `status` | `status` | `ActivityFeedStepStatus \| null` | `null` | — | — | — |
 | `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Étape identifiée par une icône. |
 | `date` | `date` | `Date \| string \| null` | `null` | — | — | — |
@@ -82,7 +84,12 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateItemComponent, ActivityFee
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.1
+
+`ActivityFeedStepComponent` :
+  + `avatarPlaceholder` : boolean
 
 ### 22.1.0
 

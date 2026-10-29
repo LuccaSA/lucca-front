@@ -37,13 +37,13 @@ import { FormLabelComponent } from '@lucca-front/ng/form-label';
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `required` | `required` | `boolean` | `false` | — | `luBooleanAttribute` | Marque le champ comme obligatoire. |
-| `error` | `error` | `boolean` | `false` | — | `luBooleanAttribute` | Applique l’état d’erreur au label. |
+| `error` | `error` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `tooltip` | `tooltip` | `string \| SafeHtml \| null` | `null` | — | — | Affiche une icône (?) associée à une info-bulle. |
 | `tag` | `tag` | `string \| null` | `null` | — | — | Ajoute un tag associé au label. |
 | `size` | `size` | `FormLabelSize \| null` | `null` | — | — | Modifie la taille du composant. |
 | `counterStatus` | `counterStatus` | `number` | `0` | — | `luNumberAttribute` | Nombre de caractères actuellement saisis. |
 | `counterMax` | `counterMax` | `number` | `0` | — | `luNumberAttribute` | Définit la valeur maximale du compteur de caractères. |
-| `counterId` | `counterId` | `string \| null` | `null` | — | — | — |
+| `counterId` | `counterId` | `string \| null` | `null` | — | — | Id appliqué au compteur, à référencer dans l’aria-describedby du champ. |
 
 ### Injection tokens
 
@@ -59,7 +59,7 @@ import { FormLabelComponent } from '@lucca-front/ng/form-label';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.5
 

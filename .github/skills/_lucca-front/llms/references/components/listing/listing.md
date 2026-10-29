@@ -10,6 +10,7 @@
 - Type definitions
 - Related files
 - Changelog
+  - 22.1.1
   - 22.0.0
   - Notes de release (ZeroHeight)
 
@@ -57,6 +58,7 @@ import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing'
 | `inline` | `inline` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `divider` | `divider` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute un séparateur vertical entre les éléments. |
 | `reversed` | `reversed` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste sous forme décroissante. |
+| `size` | `size` | `ListingSize \| null` | `null` | — | — | Modifie la taille du composant. |
 
 ## Type definitions
 
@@ -71,7 +73,12 @@ import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing'
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.1
+
+`ListingComponent` :
+  + `size` : ListingSize | null
 
 ### 22.0.0
 

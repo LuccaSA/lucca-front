@@ -26,13 +26,13 @@ import { FileDropzoneComponent } from '@lucca-front/ng/file-upload';
 | `accept` | `accept` | `Array<{
 			format: string;
 			name?: string;
-		}>` | `[]` | — | — | — |
+		}>` | `[]` | — | — | Liste des formats de fichiers acceptés. |
 | `structure` | `structure` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `fileMaxSize` | `fileMaxSize` | `unknown` | `80 * MEGA_BYTE` | — | `luNumberAttribute` | — |
+| `fileMaxSize` | `fileMaxSize` | `unknown` | `80 * MEGA_BYTE` | — | `luNumberAttribute` | Limite le poids des fichiers importables (en octets). |
 | `size` | `size` | `FileUploadSize \| null` | `null` | — | — | — |
 | `password` | `password` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `illustration` | `illustration` | `/** @deprecated use 'invoice' instead */
-		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | — |
+		'paper' \| 'picture' \| 'invoice'` | `'invoice'` | — | — | Modifie l’illustration de l’icône dans la zone de drop. La valeur paper est dépréciée au profit de invoice. |
 | `required` | `required` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `buttonFilled` | `buttonFilled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
@@ -56,7 +56,7 @@ import { FileDropzoneComponent } from '@lucca-front/ng/file-upload';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.5
 

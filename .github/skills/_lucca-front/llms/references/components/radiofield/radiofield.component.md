@@ -43,13 +43,13 @@ Il est également possible de désactiver une option via l'input `disabled` sur 
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { RADIO_GROUP_INPUT_SIZE, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { RADIO_GROUP_INPUT_ARROW, RADIO_GROUP_INPUT_FRAMED_SIZE, RADIO_GROUP_INPUT_SIZE, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 
 ```html
-<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper message" inlineMessageState="default">
-	<lu-radio-group-input required [(ngModel)]="model.example">
+<lu-form-field>
+	<lu-radio-group-input [(ngModel)]="model.example">
 		<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 		<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
 		<ng-template #template>

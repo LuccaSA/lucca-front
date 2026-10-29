@@ -24,7 +24,7 @@ import { TableOfContentLinkDirective, TableOfContentComponent } from '@lucca-fro
 
 ## Changelog
 
-_Aucun changement d'API entre v21.4.4 et v22.1.0._
+_Aucun changement d'API entre v21.4.4 et v22.1.1._
 
 ### Notes de release (ZeroHeight)
 

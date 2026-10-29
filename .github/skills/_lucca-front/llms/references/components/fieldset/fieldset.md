@@ -35,7 +35,7 @@ import { FieldsetComponent } from '@lucca-front/ng/forms';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `heading` | `heading` | `PortalContent \| null` | `null` | — | — | Titre du fieldset. [PortalContent] |
-| `helper` | `helper` | `PortalContent \| null` | `null` | — | — | Ajoute un sous-titre au fieldset. [PortalContent] |
+| `helper` | `helper` | `PortalContent \| null` | `null` | — | — | Ajoute un sous-titre au fieldset. |
 | `action` | `action` | `PortalContent \| null` | `null` | — | — | — |
 | `size` | `size` | `FieldsetSize \| null` | `null` | — | — | Modifie la taille du fieldset. |
 | `horizontal` | `horizontal` | `boolean` | `false` | — | `luBooleanAttribute` | Place le titre du fieldset à gauche des champs. |
@@ -57,7 +57,7 @@ import { FieldsetComponent } from '@lucca-front/ng/forms';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

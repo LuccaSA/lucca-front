@@ -1,16 +1,16 @@
-# priority-levels
+# priority-level
 
 ## Import
 
 ```typescript
-import { PriorityLevelsComponent } from '@lucca-front/ng/priority-levels';
+import { PriorityLevelComponent } from '@lucca-front/ng/priority-level';
 ```
 
 ## API Reference
 
-### PriorityLevelsComponent (component)
+### PriorityLevelComponent (component)
 
-**Selector:** `lu-priority-levels`
+**Selector:** `lu-priority-level`
 
 #### Inputs
 
@@ -23,14 +23,14 @@ import { PriorityLevelsComponent } from '@lucca-front/ng/priority-levels';
 
 ## Related files
 
-- 📝 [Code & implementation](./priority-levels.component.md)
+- 📝 [Code & implementation](./priority-level.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-priority-levels-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-priority-level-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
-### 22.1.0
+### 22.1.1
 
-Composant introduit (`PriorityLevelsComponent`).
+Composant introduit (`PriorityLevelComponent`).

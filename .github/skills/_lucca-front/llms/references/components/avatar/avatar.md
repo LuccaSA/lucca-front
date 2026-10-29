@@ -29,6 +29,7 @@ import { LuUserPictureComponent } from '@lucca-front/ng/user';
 | `placeholder` | `placeholder` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un placeholder d’avatar. |
 | `softRounded` | `softRounded` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `size` | `size` | `'XS' \| 'S' \| 'M' \| 'L' \| 'XL' \| 'XXL' \| 'XXXL'` | `'M'` | — | — | — |
+| `withAlt` | `withAlt` | `boolean` | `false` | — | `luBooleanAttribute` | Restitue le nom de l’utilisateur aux lecteurs d’écran, quand il n’est pas affiché à côté. |
 | `imageLoadingAttribute` | `imageLoadingAttribute` | `HTMLImageElement['loading']` | `'lazy'` | — | — | — |
 
 ### Modules dépréciés
@@ -45,7 +46,11 @@ import { LuUserPictureComponent } from '@lucca-front/ng/user';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.1
+
++ `withAlt` : boolean
 
 ### 22.0.0
 

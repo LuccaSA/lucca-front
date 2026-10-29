@@ -22,7 +22,7 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 
 ```html
-<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+<lu-form-field>
 	<lu-color-input [(ngModel)]="model.example" [colors]="colors" clearable />
 </lu-form-field>
 <pr-story-model-display>{{ model.example | json }}</pr-story-model-display>

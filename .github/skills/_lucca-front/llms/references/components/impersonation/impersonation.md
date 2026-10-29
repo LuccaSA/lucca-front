@@ -24,9 +24,9 @@ import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `enableFormerEmployees` | `enableFormerEmployees` | `boolean` | `false` | — | `luBooleanAttribute` | Inclus les collaborateurs partis |
-| `operationIds` | `operationIds` | `readonly number[] \| null` | `null` | — | — | Restreint les utilisateurs à ceux accessibles via ces opérations, dans le périmètre de l'appInstanceId |
+| `operationIds` | `operationIds` | `readonly number[] \| null` | `null` | — | — | ⚠️ **Déprécié** : use `uniqueOperationIds` instead [Deprecated] Remplacé par uniqueOperationIds. Restreint les utilisateurs à ceux accessibles via ces opérations, dans le … |
 | `uniqueOperationIds` | `uniqueOperationIds` | `readonly number[] \| null` | `null` | — | — | Restreint les utilisateurs à ceux accessibles via ces opérations uniques ; prioritaire sur operationIds / appInstanceId,… |
-| `appInstanceId` | `appInstanceId` | `unknown` | `null` | — | `luNullableNumberAttribute` | Instance d'application dans laquelle les operationIds sont résolus ; sans effet avec uniqueOperationIds |
+| `appInstanceId` | `appInstanceId` | `unknown` | `null` | — | `luNullableNumberAttribute` | ⚠️ **Déprécié** : use `uniqueOperationIds` instead [Deprecated] Remplacé par uniqueOperationIds. Instance d'application dans laquelle les operationIds sont résolus ; sans … |
 
 #### Outputs
 
@@ -54,7 +54,12 @@ import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.1
+
+~ `operationIds` : devient déprécié (use `uniqueOperationIds` instead)
+~ `appInstanceId` : devient déprécié (use `uniqueOperationIds` instead)
 
 ### 22.1.0
 

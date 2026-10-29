@@ -16,7 +16,7 @@ import { PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html
-<lu-gauge size="40" value="33" />
+<lu-gauge value="33" />
 ```
 
 ## HTML/CSS

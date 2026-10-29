@@ -15,6 +15,7 @@
   - Header illustration
   - Header insideDialog
   - Header moreActions
+  - Header overdue
   - Header
   - InsideDialog
   - List basic
@@ -40,6 +41,7 @@
 import { ApprobationInboxDetailComponent, ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderComponent } from '@lucca-front/ng/approbation-inbox';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
+import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ButtonComponent } from '@lucca/prisme/button';
@@ -369,6 +371,35 @@ import { IconComponent } from '@lucca/prisme/icon';
 					<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
 					<span class="pr-u-mask">Other options</span>
 				</button>
+			</div>
+		</div>
+	</header>
+</div>
+```
+
+### Header overdue
+
+```css
+@forward '@lucca-front/scss/src/components/approbationInbox';
+@forward '@lucca-front/scss/src/components/button';
+@forward '@lucca-front/scss/src/components/statusBadge';
+```
+
+```html
+<div class="approbationInbox-detail">
+	<header class="approbationInbox-detail-header">
+		<div class="approbationInbox-detail-header-main">
+			<div class="approbationInbox-detail-header-main-infos">
+				<div class="approbationInbox-detail-header-main-infos-headingOptional">
+					<h1 class="approbationInbox-detail-header-main-infos-title">
+						<span class="approbationInbox-detail-header-main-infos-title-content">Title</span>
+					</h1>
+					<div class="statusBadge palette-warning">En retard</div>
+				</div>
+			</div>
+			<div class="approbationInbox-detail-header-main-actions">
+				<button type="button" class="button">Approuver</button>
+				<button type="button" class="button">Refuser</button>
 			</div>
 		</div>
 	</header>

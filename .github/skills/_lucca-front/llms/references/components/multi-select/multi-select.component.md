@@ -26,7 +26,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 ```
 
 ```html
-<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+<lu-form-field>
 	<lu-multi-select
 		[(ngModel)]="model.example"
 		[options]="legumes | filterLegumes: clue"

@@ -95,7 +95,7 @@ import { LuCoreSelectTotalCountDirective, LuCoreSelectNoClueDirective, LuDisable
 |-------|------|-------------|
 | `LU_OPTION_CONTEXT` | `ILuOptionContext<unknown>` | — |
 | `SELECT_PANEL_INSTANCE` | `CoreSelectPanelInstance` | — |
-| `SELECT_RESPONSIVE_DIALOG` | `boolean` | Feature flag gating the responsive dialog system as a whole: below the `S` breakpoint the select trigger becomes a button and its panel opens as a bottom sheet instead of a popover anchored to the field. It defaults to `false`, so a consumer that provides nothing keeps the anchored popover at every viewport size. Turn it on application-wide with `{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true }`. |
+| `SELECT_RESPONSIVE_DIALOG` | `boolean` | Feature flag gating the responsive dialog system as a whole: below the `XS` breakpoint the select trigger becomes a button and its panel opens as a bottom sheet instead of a popover anchored to the field. It defaults to `false`, so a consumer that provides nothing keeps the anchored popover at every viewport size. Turn it on application-wide with `{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true }`. |
 | `SELECT_ID` | `number` | — |
 | `SELECT_LABEL` | `HTMLLabelElement \| undefined` | — |
 | `SELECT_LABEL_ID` | `string` | — |
@@ -124,7 +124,7 @@ import { LuCoreSelectTotalCountDirective, LuCoreSelectNoClueDirective, LuDisable
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.1.0
 

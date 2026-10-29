@@ -22,8 +22,8 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `PortalContent` | — | ✅ | — | Valeur affichée. [PortalContent] |
-| `noValue` | `noValue` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `label` | `label` | `PortalContent` | — | ✅ | — | Libellé de la donnée. La valeur correspond au contenu projeté. [PortalContent] |
+| `noValue` | `noValue` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche un tiret lorsqu’aucune valeur n’est renseignée. |
 | `size` | `size` | `'S' \| null` | `null` | — | — | Taille du composant. |
 
 ### Injection tokens
@@ -42,7 +42,7 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

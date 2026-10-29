@@ -75,7 +75,7 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 
 **Selector:** `lu-dropdown`
 
-> ⚠️ **Déprécié** : prefer the new menu approach: https://prisme.lucca.io/94310e217/p/557682-dropdown
+> ⚠️ **Déprécié** : since 20.3.0; use DropdownMenuComponent.
 
 **exportAs:** `LuDropdownPanel`
 
@@ -122,7 +122,7 @@ import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupCompone
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

@@ -14,7 +14,7 @@ import { FOOTER_CONTAINER_MAX, FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } fro
 ```
 
 ```html
-<lu-footer narrowAtMediaMax="XXS">
+<lu-footer>
 	<ng-container footerContent>Content</ng-container>
 	<button type="button" luButton>Button</button>
 	<button type="button" luButton="outlined">Button</button>

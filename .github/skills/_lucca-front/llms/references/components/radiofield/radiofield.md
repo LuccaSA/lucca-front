@@ -27,11 +27,11 @@ import { RadioGroupInputComponent, RadioComponent } from '@lucca-front/ng/forms'
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du radio. |
-| `framed` | `framed` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `framedCenter` | `framedCenter` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `framedSize` | `framedSize` | `RadioGroupInputFramedSize \| null` | `null` | — | — | — |
-| `arrow` | `arrow` | `'neutral' \| 'default'` | — | — | — | — |
+| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille des boutons radio. |
+| `framed` | `framed` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche chaque option dans un cadre (input framed). |
+| `framedCenter` | `framedCenter` | `boolean` | `false` | — | `luBooleanAttribute` | Centre le contenu des cadres. |
+| `framedSize` | `framedSize` | `RadioGroupInputFramedSize \| null` | `null` | — | — | Modifie la taille des cadres. |
+| `arrow` | `arrow` | `'neutral' \| 'default'` | — | — | — | Ajoute une flèche sous chaque option, pour la relier à un contenu affiché en dessous. |
 
 ### RadioComponent (component)
 
@@ -41,9 +41,9 @@ import { RadioGroupInputComponent, RadioComponent } from '@lucca-front/ng/forms'
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `value` | `value` | `T` | — | ✅ | — | — |
-| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `inlineMessage` | `inlineMessage` | `PortalContent` | — | — | — | Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire. |
+| `value` | `value` | `T` | — | ✅ | — | Valeur de l’option, affectée au modèle lorsqu’elle est sélectionnée. Requis. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive l’option. |
+| `inlineMessage` | `inlineMessage` | `PortalContent` | — | — | — | — |
 | `tag` | `tag` | `string` | — | — | — | — |
 | `framedPortal` | `framedPortal` | `PortalContent` | — | — | — | — |
 
@@ -56,7 +56,7 @@ import { RadioGroupInputComponent, RadioComponent } from '@lucca-front/ng/forms'
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

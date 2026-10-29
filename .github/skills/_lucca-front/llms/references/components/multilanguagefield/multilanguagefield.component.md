@@ -66,19 +66,18 @@ Même avec `hasNoInvariant`, prévoyez donc une ligne `invariant` dans la valeur
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { luMultilanguageInputTranslations, MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Je suis un message d’aide"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
->
-	<lu-multilanguage-input [formControl]="formControl" required placeholder="Placeholder" displayLocale="en-US" />
+<lu-form-field>
+	<lu-multilanguage-input
+		[formControl]="formControl"
+		placeholder="Placeholder"
+		(translateWithAI)="onTranslateWithAI($event)"
+	/>
 </lu-form-field>
 <pr-story-model-display>{{ formControl.value | json }}</pr-story-model-display>
 ```

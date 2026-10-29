@@ -35,7 +35,7 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `name` | `name` | `string` | — | — | — | — |
+| `name` | `name` | `string` | — | — | — | Dans le cas d’un filtre optionnel, permet de faire le lien entre la liste de filtres disponibles et l’affichage du filtr… |
 | `optional` | `optional` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `grouping` | `grouping` | `string` | `''` | — | — | — |
 | `iconOnly` | `iconOnly` | `boolean` | `false` | — | `luBooleanAttribute` | — |
@@ -72,7 +72,7 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `views` | `views` | `T[]` | — | ✅ | — | Affiche les vues via SegmentedControl. |
+| `views` | `views` | `T[]` | — | ✅ | — | [Story] Affiche les vues via SegmentedControl. |
 | `viewLabel` | `viewLabel` | `(view: T) => string` | `(view) => (view as { name: string }).name` | — | — | — |
 | `optionComparer` | `optionComparer` | `(a: T, b: T) => boolean` | `filterViewDefaultOptionComparer` | — | — | — |
 | `optionKey` | `optionKey` | `(view: T) => unknown` | `filterViewDefaultOptionKey` | — | — | — |
@@ -118,7 +118,7 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.1.0
 

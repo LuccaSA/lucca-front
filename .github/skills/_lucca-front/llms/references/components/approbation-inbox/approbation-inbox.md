@@ -16,6 +16,7 @@
   - Injection tokens
 - Related files
 - Changelog
+  - 22.1.1
   - 22.0.5
   - 22.0.0
 
@@ -47,6 +48,8 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `label` | `label` | `string` | — | ✅ | — | Titre affiché dans l’en-tête du composant. Requis. |
 | `delegatedBy` | `delegatedBy` | `string \| null` | `null` | — | — | Nom de la personne à l’origine de la délégation si elle a lieu. |
+| `overdue` | `overdue` | `boolean` | `false` | — | `booleanAttribute` | Affiche un badge de statut « En retard » à droite du titre. Ignoré si du contenu est projeté via `approbationInboxDetail… |
+| `intl` | `intl` | `unknown` | — | — | — | — |
 
 ### ApprobationInboxDetailComponent (component)
 
@@ -155,7 +158,13 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.1
+
+`ApprobationInboxHeaderComponent` :
+  + `overdue` : boolean
+  + `intl` : unknown
 
 ### 22.0.5
 

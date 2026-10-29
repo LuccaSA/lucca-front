@@ -17,15 +17,10 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Je suis un message d’aide"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
->
-	<lu-textarea-input required placeholder="Placeholder" rows="3" [(ngModel)]="model.example" />
+<lu-form-field>
+	<lu-textarea-input placeholder="Placeholder" [(ngModel)]="model.example" />
 </lu-form-field>
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
 ## HTML/CSS

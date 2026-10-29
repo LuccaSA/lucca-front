@@ -11,5 +11,5 @@ import { MarkdownComponent } from '@lucca-front/ng/markdown';
 ```
 
 ```html
-<lu-markdown [content]="content" [headingLevel]="headingLevel" />
+<lu-markdown [content]="content" headingLevel="1" />
 ```

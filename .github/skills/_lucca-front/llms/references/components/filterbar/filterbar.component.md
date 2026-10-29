@@ -79,11 +79,12 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { IconComponent } from '@lucca/prisme/icon';
 ```
 
 ```html
-<lu-filter-bar [resultsCount]="resultsCount">
+<lu-filter-bar>
 	<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false" />
 	</lu-filter-pill>
