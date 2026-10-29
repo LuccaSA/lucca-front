@@ -10,28 +10,10 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
-import {
-	afterRenderEffect,
-	booleanAttribute,
-	computed,
-	DestroyRef,
-	Directive,
-	effect,
-	EffectRef,
-	ElementRef,
-	inject,
-	Injector,
-	input,
-	linkedSignal,
-	numberAttribute,
-	OnDestroy,
-	Renderer2,
-	signal,
-	untracked,
-} from '@angular/core';
+import { afterRenderEffect, computed, DestroyRef, Directive, effect, EffectRef, ElementRef, inject, Injector, input, linkedSignal, OnDestroy, Renderer2, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
-import { getPushPanelViewportMargin, isNil, isNotNil, ɵeffectWithDeps } from '@lucca/prisme/core';
+import { getPushPanelViewportMargin, isNil, isNotNil, luBooleanAttribute, luNumberAttribute, ɵeffectWithDeps } from '@lucca/prisme/core';
 import { startWith, timer } from 'rxjs';
 import { debounce, filter, map, tap } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
@@ -69,28 +51,28 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly prTooltip = linkedSignal<string | SafeHtml>(() => this.prTooltipInput());
 	readonly tooltipContent = computed(() => this.luTooltip() || this.prTooltip());
 
-	readonly luTooltipEnterDelay = input<number, number | `${number}`>(0, { transform: numberAttribute });
-	readonly prTooltipEnterDelay = input<number, number | `${number}`>(300, { transform: numberAttribute });
+	readonly luTooltipEnterDelay = input(0, { transform: luNumberAttribute });
+	readonly prTooltipEnterDelay = input(300, { transform: luNumberAttribute });
 	readonly tooltipEnterDelay = computed(() => this.luTooltipEnterDelay() || this.prTooltipEnterDelay());
 
-	readonly luTooltipLeaveDelay = input<number, number | `${number}`>(0, { transform: numberAttribute });
-	readonly prTooltipLeaveDelay = input<number, number | `${number}`>(100, { transform: numberAttribute });
+	readonly luTooltipLeaveDelay = input(0, { transform: luNumberAttribute });
+	readonly prTooltipLeaveDelay = input(100, { transform: luNumberAttribute });
 	readonly tooltipLeaveDelay = computed(() => this.luTooltipLeaveDelay() || this.prTooltipLeaveDelay());
 
-	readonly luTooltipDisabled = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
-	readonly prTooltipDisabled = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly luTooltipDisabled = input(false, { transform: luBooleanAttribute });
+	readonly prTooltipDisabled = input(false, { transform: luBooleanAttribute });
 	readonly tooltipDisabled = computed(() => this.prTooltipDisabled() || this.luTooltipDisabled());
 
-	readonly luTooltipOnlyForDisplay = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
-	readonly prTooltipOnlyForDisplay = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly luTooltipOnlyForDisplay = input(false, { transform: luBooleanAttribute });
+	readonly prTooltipOnlyForDisplay = input(false, { transform: luBooleanAttribute });
 	readonly tooltipOnlyForDisplay = computed(() => this.prTooltipOnlyForDisplay() || this.luTooltipOnlyForDisplay());
 
 	readonly luTooltipPosition = input<TooltipPosition | null>(null);
 	readonly prTooltipPosition = input<TooltipPosition>('above');
 	readonly tooltipPosition = computed(() => this.luTooltipPosition() ?? this.prTooltipPosition());
 
-	readonly luTooltipWhenEllipsisInput = input<boolean, boolean | `${boolean}` | ''>(false, { alias: 'luTooltipWhenEllipsis', transform: booleanAttribute });
-	readonly prTooltipWhenEllipsisInput = input<boolean, boolean | `${boolean}` | ''>(false, { alias: 'prTooltipWhenEllipsis', transform: booleanAttribute });
+	readonly luTooltipWhenEllipsisInput = input(false, { alias: 'luTooltipWhenEllipsis', transform: luBooleanAttribute });
+	readonly prTooltipWhenEllipsisInput = input(false, { alias: 'prTooltipWhenEllipsis', transform: luBooleanAttribute });
 
 	readonly luTooltipWhenEllipsis = linkedSignal(() => this.luTooltipWhenEllipsisInput());
 	readonly prTooltipWhenEllipsis = linkedSignal(() => this.prTooltipWhenEllipsisInput());
