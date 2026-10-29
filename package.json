@@ -94,6 +94,7 @@
     "@angular/compiler-cli": "^22.2.3",
     "@angular/elements": "^22.2.3",
     "@compodoc/compodoc": "2.0.0",
+    "@eslint-community/regexpp": "^4.12.2",
     "@lucca-front/eslint-plugin": "workspace:*",
     "@lucca/stylelint-config-prisme": "file:packages/stylelint-config",
     "@storybook/addon-a11y": "~10.5.0-alpha.9",

@@ -1,155 +1,165 @@
 ---
 name: update-deprecated-doc
-description: Regenerate docs/life-cycle.md from the Prisme "Cycle de vie des composants" page (Composants) and the LFDeprecatedSelectors.mjs / LFDeprecatedProperties.mjs source arrays (Classes, Variables CSS). Use whenever those sources change, or when asked to update / sync / rebuild / refresh the deprecation documentation.
+description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from the LFDeprecatedSelectors.mjs / LFDeprecatedProperties.mjs / LFDeprecatedScss.mjs source arrays (Composants, Classes, Variables CSS, Mixins). Use whenever those sources change, or when asked to update / sync / rebuild / refresh the deprecation documentation.
 ---
 
 # Update the deprecation doc
 
-`docs/life-cycle.md` is **derived** from three sources — never edit it against
-them:
+`docs/life-cycle.md` and `docs/life-cycle-deleted.md` are derived: never edit them against their sources.
 
-1. [Cycle de vie des composants > Composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f) → `## Composants`
-2. [LFDeprecatedSelectors.mjs](../../../packages/stylelint-config/LFDeprecatedSelectors.mjs) → `## Classes`
-3. [LFDeprecatedProperties.mjs](../../../packages/stylelint-config/LFDeprecatedProperties.mjs) → `## Variables CSS`
-
-`.mjs` entry shape:
-
-```js
-{
-  objectPattern: /regex/ | [/regex/, ...] | 'string',
-  versionDeprecated: '17.3.0',       // optional
-  versionDeleted: '19.1.0',          // optional
-  actions: `markdown string`,        // optional
-  urls: { schematics: 'https://…' }, // optional
-}
-```
+* Sources:
+	* [LFDeprecatedSelectors.mjs](../../../packages/stylelint-config/LFDeprecatedSelectors.mjs) feeds *Composants* and *Classes*.
+	* [LFDeprecatedProperties.mjs](../../../packages/stylelint-config/LFDeprecatedProperties.mjs) feeds *Variables CSS*.
+	* [LFDeprecatedScss.mjs](../../../packages/stylelint-config/LFDeprecatedScss.mjs) feeds *Composants* and *Mixins*.
+		* It holds SCSS APIs: mixins and stylesheet imports.
+		* Stylelint does not read it: only the doc does.
+	* The Angular `@deprecated` markers of `packages/ng` feed *Composants*.
+* The doc replaces the Prisme page [Cycle de vie des composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f).
+* The code wins over Prisme whenever they disagree.
 
 ## Workflow
 
-1. `git diff` the two `.mjs` files; edit the matching rows. Full rewrite only if
-   the file is missing or entry order changed.
-2. Verify: every `.mjs` entry has exactly one row, in source order.
-3. To refresh **Composants** — ⚠ *temporary while this skill is under test; the
-   data will later be fed directly as a local source, replacing this step* —
-   fetch Prisme via its internal API (it's a zeroheight SPA; plain fetch returns
-   an empty shell):
+1. Run `node .claude/skills/update-deprecated-doc/scripts/generate.mjs` from the repository root.
+	* It rewrites the sections and keeps the header above them.
+	* A section without rows is left out.
+	* It derives every cell from the sources: nothing in the doc is written by hand.
+2. Review the doc diff.
+	* A wrong cell gets fixed in its source: a label, an `actions` text or a pattern.
 
-   ```bash
-   curl -sc jar.txt "https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f" -o shell.html
-   TOK=$(grep -oE '"token":"[A-Za-z0-9_-]+"' shell.html | head -1 | cut -d'"' -f4)
-   CSRF=$(grep -oE 'name="csrf-token" content="[^"]+"' shell.html | cut -d'"' -f4)
-   curl -sb jar.txt -X POST "https://prisme.lucca.io/api/load_page" \
-     -H "Content-Type: application/json" -H "Authorization: Token token=\"$TOK\"" \
-     -H "X-CSRF-Token: $CSRF" -d '{"id":4753501,"styleguide_id":77645}' -o page.json
-   ```
+## `.mjs` entries
 
-   Tables are in `page.content_node.tabs["95175f"]` as a ProseMirror doc
-   (`heading`/`table`/`tableRow`/`tableCell`; marks `link`/`code`/`strong`/`em`);
-   take the table under the `Composants` heading.
-
-## Output format
-
-Title, reference link, one `<style>` block (before the first section), then the
-three `##` sections in the order above. Each section: heading, `Source:` line
-(Composants → the Prisme page; the others → their `.mjs` as an absolute GitHub
-blob URL on `master`, never relative), and an HTML `<table>` — never a Markdown
-table. All tables share the same `<thead>`, mirroring Prisme's headers:
-
-`Nom` (component, or from `objectPattern`) | `Depuis` (`versionDeprecated`) |
-`Suppression` (`versionDeleted`) | `Action à réaliser` (`actions` + `urls`).
-
-## Conventions (match these exactly)
-
-- **Widths via the `<style>` block** (`table-layout: fixed`, last `th` 39%) — no
-  `<colgroup>`, no inline `style`.
-- **`Action à réaliser`: `actions` markdown → HTML** — `` `code` `` → `<code>`,
-  `[text](url)` → `<a>`, `*` lists → `<ul><li>`, blank-line paragraphs → `<p>`,
-  `&` → `&amp;`. Append `urls.schematics` as `(<a href="…">schematics</a>)`.
-- **Empty cells: en dash `–`** (U+2013); never the em dash `—`, anywhere.
-  Schematics-only entry → just the `(schematics)` link. Prisme's `-` and
-  `Non défini` both become `–`.
-- **Composants mirrors Prisme** (as HTML): `Nom` stays inline (links, `<code>`),
-  but normalize versions to semver (`19.2` → `19.2.0`) and correct obvious
-  typos (e.g. Establishment, Data table, the Select schematics link →
-  `…/b/15c256`) — flag them so Prisme can be fixed too.
-- **`Nom` for Classes / Variables CSS: a `<ul>`, one `<li><code>…</code></li>`
-  per item — never prose.** Qualifiers like `(2–3 digits)` follow the `</ul>`.
-  - Expand alternations into separate items; drop glob prefixes
-    (`X*(S|M|L)` → `S`, `M`, `L`); truncate non-enumerable tails with `…`
-    (`.u-elevate…`).
-  - Factor the trailing group when expansion exceeds 10 items (per
-    comment-labeled group), prefixes enumerated:
-    `.u-marginBottom(0|Auto|XXS|XS|…)`.
-  - Also factor when >5 items differ by ≤3 chars:
-    `--commons-elevations-elevation-(1|2|3|4|…)`, `.u-text(XS|S|M|L|…)`.
-  - Crop factored sets in source order: 4 values, stop at 2 once values exceed
-    6 chars (`.pr-u-text(Primary|Product|…)`); if the first two source values
-    exceed 8 chars, sort shortest-first, ties alphabetical
-    (`.pr-u-text(AI|Cc|Kiwi|Lime|…)`).
-  - Family-sort repeating properties: shared core first, variants after,
-    alphabetically — `gap, columnGap, rowGap, margin, marginBlock, …, padding, …`.
-  - Lookahead "combined" patterns: one `<li>` per combination —
-    `<code>.button</code> <strong>+</strong> <code>.mod-icon</code>`.
-- **Comments inside an `objectPattern` array are content**: each becomes a
-  markdown `<p>` (`**bold**` → `<strong>`, links → `<a>`) before the `<ul>` it
-  labels; a standalone comment is a lone `<p>`.
-- **One row per source object, in source order** — a merged object stays one
-  row, structured by its comment labels.
-- **Historical entries are kept.** The `.mjs` files (and therefore Classes /
-  Variables CSS) retain deprecations whose deletion already shipped; Prisme
-  prunes those. This divergence is **by design** — don't flag or "fix" it. The
-  doc intro carries a note explaining it — keep it verbatim, and never pin a
-  version number in it (it would go stale):
-
-  > **Note :** contrairement à la page Prisme, les tables *Classes* et
-  > *Variables CSS* conservent les dépréciations dont la suppression est
-  > effective. Prisme purge les entrées une fois la suppression livrée ; le
-  > linter (et cette page) les conserve pour signaler l'usage résiduel.
-
-## Skeleton
-
-```html
-<style>
-  table {
-    table-layout: fixed !important;
-  }
-
-  table thead th:last-of-type {
-    inline-size: 39% !important;
-  }
-
-  td > :is(ol, ul) {
-    list-style-position: outside !important;
-    padding-inline-start: 0.5rem !important;
-  }
-</style>
+```js
+{
+	name: 'Checkbox', // optional, see Composants below
+	objectPattern: /regex/ | [/regex/, ...] | 'string', // optional with a name
+	versionDeprecated: '17.3.0', // optional
+	versionDeleted: '19.1.0', // optional
+	actions: `markdown string`, // optional
+	urls: {
+		// optional
+		prisme: 'https://…', // Composants only
+		schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/…',
+	},
+}
 ```
 
-then, per section:
+* Stylelint reports the first matching entry: the order is precedence.
+* The selectors file holds three sections, each opened by its comment and a `// ====` line:
+	1. The entries sorted by version.
+	2. The deprecated components, after the entries targeting their children.
+	3. The `.u-` catch-all, last.
+* A modifier or state class gets a combination with its component: `.button.disabled` instead of `.disabled`.
+* A number lists only the values LF shipped, never `\d+`.
+	* Download the release package from `https://registry.npmjs.org/@lucca-front/scss/-/scss-<version>.tgz`.
+	* Search its `package/dist/lucca-front.min.css` file for the class.
+* A choice lists its non-serial values first.
+	* Its series follow, in order: `(Auto|0|25|50|…)`.
+* The properties file holds the sorted section only.
+* Sort key:
+	1. `versionDeprecated`, or `versionDeleted` without it.
+	2. `versionDeleted`.
+	3. Source order, versionless entries last.
+* `// SEE <url>.` comments cite the sources, in this order:
+	1. The regex101 fixture.
+	2. The release note declaring the deprecation, when one exists.
+	3. The code, pinned at its deprecation commit.
+	4. The deletion release note, commit or PR.
+* A comment inside an `objectPattern` array labels the patterns after it.
+	* It is doc content: French Markdown.
+	* The script renders it as a `<p>` before the list of its patterns.
+	* A label with no pattern after it renders alone.
+	* A label stays only when the tokens don't already say it.
+		* "Utilitaires renommés très utilisés" stays: no token shows how much it is used.
+		* "Utilitaires de taille" goes: `.u-text(S|XS|M|L|…)` shows it.
+* One source object makes one doc row: merge objects to merge rows.
+* A new entry makes `npm run lint:style` flag the SCSS of LF itself: silence it where that SCSS is the deprecated code.
+	* A folder that is deprecated as a whole joins the override of the root `stylelint.config.mjs`.
+	* A deprecated section of a live file takes a block disable, a single line a `next-line` one.
+		* Stylelint ignores a comment inside a selector list: put the deprecated selector first.
+	* The reason reads `Deprecated.` on deprecated code, `Deprecated. Kept for consumer overrides.` on a live usage of it.
+		* A selector mixing live and deprecated tokens names the deprecated ones: `Deprecated: .viewTabs.`.
+	* A live reference to a deprecated token outside those cases stays visible: it is residual usage to migrate.
+* A class emitted by LF HTML for structural consistency without SCSS is not a deprecation.
+	* Its rule may not exist while the component template emits it.
+	* It gets no entry.
+	* It is not dead markup either.
+	* Ex: `.priorityLevel-label` has no rule, yet the Priority level template and its HTML stories emit it.
 
-```html
 ## Composants
 
-Source: [Cycle de vie des composants > Composants](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f)
+* An entry with a `name` deprecates a whole component: it goes to *Composants*, not *Classes*.
+	* A whole component renamed stays a component: View tabs became Segmented control.
+	* The `name` is plain text: the component name, alphanumeric only.
+	* It carries no `Deprecated` prefix: the whole table lists deprecations.
+	* `urls.prisme` links it to the Prisme page of the deprecated component.
+	* Entries sharing a `name` share the row.
+* Its pattern covers only the CSS hooks exclusive to deprecated code: its element and the classes nothing live emits.
+	* A deprecated Angular component can share its CSS with a live one: check every emitter of a class before matching it.
+	* `LuModal` in side panel mode still emits the `.lu-sidepanel-*` classes of the deprecated Side panel.
+	* An element selector opens with `(?<![\w.#="'-])`: classes, ids and attribute values stay out.
+	* A class root lists its real children from the component SCSS: `\.list(-(item|item-content))?(?![\w-])`.
+		* A `\b` ending would also match a consumer's own `.list-custom`.
+* The row shows one root class per pattern: its shortest form, such as `.status`.
+	* A single root sits inline after the name, behind a comma: `List, .list`.
+	* Every root links to one search of all the row's patterns.
+* A component without such a hook has no `.mjs` entry: its Angular marker feeds the row.
+	* The marker reads `@deprecated since X.Y.Z; use Symbol` and ends with a period.
+		* Two replacements read `use A or B`.
+		* A required call reads `` use A with `call()` ``: the action adds "avec" and the call as code.
+		* Extra guidance follows on the next line, such as a directive to add.
+	* An `@see` line gives the Prisme page of the deprecated component: it names and links the row.
+		* A row whose `urls.prisme` matches that page takes the marker, whatever its name.
+		* A component without a Prisme page omits `@see`: the generator skips its marker.
+	* The action reads "Remplacer par" followed by the symbol as code.
+	* Classes sharing a page share the row, which takes the earliest version.
+* Version sources, in order:
+	1. The release note or commit declaring the deprecation, whichever shipped first.
+	2. The release in which the last live LF component left it, sourced by its PR.
+	3. Prisme's past releases: `https://prisme.lucca.io/94310e217/v/<release>/p/<page>.md`.
 
-<table>
-	<thead>
-		<tr>
-			<th>Nom</th>
-			<th>Depuis</th>
-			<th>Suppression</th>
-			<th>Action à réaliser</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>…</td><td>…</td><td>…</td><td>…</td>
-		</tr>
-	</tbody>
-</table>
-```
+## Generated cells
 
-## Caveat
+* The scripts build every cell: read their code before changing a rule.
+	* [nom.mjs](scripts/nom.mjs) expands, groups and crops the *Nom* tokens.
+	* [links.mjs](scripts/links.mjs) links each token to a GitHub code search of the org.
+	* [components.mjs](scripts/components.mjs) reads the Angular markers.
+	* [generate.mjs](scripts/generate.mjs) renders the actions, sorts the rows and splits the deleted entries.
 
-GitHub strips `<style>` and inline styles — widths only render in viewers that
-honor them (VSCode preview, Prisme…); GitHub auto-sizes.
+## Actions
+
+* A `*` legend opens the action as its own paragraph.
+	* It reads ``Avec `*` = `--components-tag` :``.
+* `urls.schematics` links the schematic folder on GitHub: Prisme drops its anchors on load.
+	* Link a schematic only when its code rewrites the entry's exact classes or variables.
+* Writing rules, in French Markdown:
+	* Show only the part that changes.
+	* `*` stands for the unchanged prefix or suffix: `.u-*` becomes `.pr-u-*`.
+	* A leading `*` only when every item of the action shares one prefix: write full names otherwise.
+	* Names sharing a target group their varying part: `.icon-color-(primary|secondary)` becomes `.icon-color-product`.
+	* Mappings use `=>` as their arrow.
+		* The docs show it as `⇒`.
+	* One name with several targets ends its line with the arrow.
+		* A sub-list of `label : value` items follows.
+	* A list of targets follows a `Remplacer par :` line.
+	* "Remplacer par" appears at most once per action.
+	* No list item starts with "Remplacer".
+	* A line that only repeats the *Nom* goes away.
+	* A list with a single item becomes a plain line.
+	* A `*` legend such as `` `*` = `--components-tag` `` follows the examples.
+	* Code-only items take no final period.
+	* Sentences keep their final period.
+	* A no-break space precedes `:`.
+
+## Doc rules
+
+* All doc text is French, labels and qualifiers included.
+	* Component names stay untranslated: *Data table* stays *Data table*.
+* Entries whose deletion shipped move to `docs/life-cycle-deleted.md`.
+	* The `.mjs` files keep them: the linter still flags residual use.
+	* Prisme drops them: this divergence is by design.
+* Each doc's intro note links to the other one: keep it free of version numbers.
+
+## Header
+
+* The script keeps everything above the first section: the title, the intro note and the `<style>` block.
+* GitHub strips `<style>`: widths render only in viewers that honor it, such as the VSCode preview or Prisme.

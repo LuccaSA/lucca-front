@@ -10,6 +10,7 @@
 	z-index: 9999;
 	inset: var(--components-toasts-inset);
 
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .main-content. Kept for consumer overrides.
 	html:has(.main-content .footer.mod-sticky, .dialog.mod-drawer .dialog-inside-footer) & {
 		// Provide extra bottom spacing when a footer is sticked
 		// Will only work on desktop with standard footer layout

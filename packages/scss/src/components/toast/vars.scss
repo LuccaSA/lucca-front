@@ -9,7 +9,8 @@
 	--components-toasts-inset: var(--components-toasts-top) var(--components-toasts-right) auto auto;
 	--components-toasts-footerHeight: 4.5rem;
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-toasts-background: var(--palettes-neutral-800);
 	--components-toasts-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+	// stylelint-enable property-disallowed-list
 }

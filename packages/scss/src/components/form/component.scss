@@ -78,7 +78,7 @@
 			}
 		}
 
-		// deprecated
+		// stylelint-disable selector-disallowed-list -- Deprecated form layout.
 
 		.form-group-label,
 		.form-group-legend,
@@ -156,5 +156,6 @@
 			font: var(--pr-t-font-body-S);
 			color: var(--pr-t-color-text-subtle);
 		}
+		// stylelint-enable selector-disallowed-list
 	}
 }

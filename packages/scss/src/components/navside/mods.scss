@@ -11,7 +11,7 @@
 				--commons-navSide-width: 15rem;
 			}
 
-			// .mod-withMenuCompact is deprecated
+			// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .mod-withMenuCompact. Kept for consumer overrides.
 			&:has(.navSide.mod-compact, .mod-withMenuCompact) {
 				--commons-navSide-width: 7.5rem;
 			}

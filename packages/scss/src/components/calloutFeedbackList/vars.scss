@@ -2,7 +2,8 @@
 	--components-calloutFeedbackList-font: var(--pr-t-font-body-M);
 	--components-calloutFeedbackList-gap: var(--pr-t-spacings-150);
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-calloutFeedbackList-fontSize: var(--pr-t-font-body-M-fontSize);
 	--components-calloutFeedbackList-lineHeight: var(--pr-t-font-body-M-lineHeight);
+	// stylelint-enable property-disallowed-list
 }

@@ -111,11 +111,12 @@
 	--commons-border-200: var(--palettes-neutral-200);
 	--commons-pushPanel-inlineSize: 0px;
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
 	--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 
 	--commons-background-base: var(--pr-t-elevation-surface-default);
+	// stylelint-enable property-disallowed-list
 
 	--commons-divider-color: var(--palettes-neutral-200);
 
@@ -130,6 +131,7 @@
 	--commons-navSide-mobile-toggle-height: 3.5rem;
 
 	@if (config.$fontFamilyCursive) {
+		// stylelint-disable-next-line property-disallowed-list -- Deprecated.
 		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
 	}
 
@@ -149,6 +151,7 @@
 		--commons-container-maxWidth: 85rem; // 85 + 15 = 100
 	}
 
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .mod-withMenuCompact. Kept for consumer overrides.
 	&:has(.navSide.mod-compact, .mod-withMenuCompact) {
 		--commons-container-maxWidth: 92.5rem; // 92.5 + 7.5 = 100
 	}
@@ -175,12 +178,13 @@
 		@extend %prefersContrastMore;
 	}
 
-	// Deprecated .u- utilities
+	// stylelint-disable selector-disallowed-list -- Deprecated .u- utilities.
 	@if config.$deprecatedUtilityPrefix {
 		.u-prefersContrastMore {
 			@extend %prefersContrastMore;
 		}
 	}
+	// stylelint-enable selector-disallowed-list
 
 	body:has(.lucca-banner-wrapper.pr-u-prefersContrastMore) {
 		@extend %prefersContrastMore;

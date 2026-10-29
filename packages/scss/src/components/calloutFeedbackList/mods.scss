@@ -8,7 +8,8 @@
 		@include button.XS;
 	}
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-calloutFeedbackList-fontSize: var(--pr-t-font-body-S-fontSize);
 	--components-calloutFeedbackList-lineHeight: var(--pr-t-font-body-S-lineHeight);
+	// stylelint-enable property-disallowed-list
 }
