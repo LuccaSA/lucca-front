@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DecorativePalette, Palette } from '@lucca/prisme/core';
+import { DecorativePalette, luBooleanAttribute, Palette } from '@lucca/prisme/core';
 import { IconComponent, LuccaIcon } from '@lucca/prisme/icon';
 import { LuTooltipModule } from '@lucca/prisme/tooltip';
 import { TagSize } from './tag.type';
@@ -33,7 +33,7 @@ export class TagComponent {
 	/**
 	 * Should display be outlined?
 	 */
-	readonly outlined = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly outlined = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * For routerLink usage
@@ -49,17 +49,17 @@ export class TagComponent {
 	/**
 	 * Visually hides the label while keeping it in the DOM for screen readers. Requires an icon.
 	 */
-	readonly hiddenLabel = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Truncates the text with an ellipsis and adds a tooltip when the label is too long
 	 */
-	readonly withEllipsis = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly withEllipsis = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Applies AI colors
 	 */
-	readonly AI = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly AI = input(false, { transform: luBooleanAttribute });
 
 	readonly tagClasses = computed(() => {
 		const size = this.size();
