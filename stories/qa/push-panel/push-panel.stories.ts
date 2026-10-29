@@ -8,12 +8,24 @@ import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogH
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { SwitchInputComponent } from '@lucca-front/ng/forms';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
+import { ILuModalContent, LuModal, provideLuModal } from '@lucca-front/ng/modal';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { LuSidepanel } from '@lucca-front/ng/sidepanel';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuToastsComponent, LuToastsService } from '@lucca-front/ng/toast';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { Meta } from '@storybook/angular-vite';
+
+@Component({
+	selector: 'push-panel-deprecated-content',
+	template: '<p>This is a deprecated LuModal / LuSidepanel content.</p>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class DeprecatedContentComponent implements ILuModalContent {
+	title = 'Deprecated overlay';
+	submitAction = () => {};
+}
 
 @Component({
 	selector: 'push-panel-stories',
@@ -38,6 +50,7 @@ import { Meta } from '@storybook/angular-vite';
 		LuSimpleSelectInputComponent,
 		LuMultiSelectInputComponent,
 	],
+	providers: [provideLuModal(), LuSidepanel],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [
 		`
@@ -145,6 +158,8 @@ import { Meta } from '@storybook/angular-vite';
 })
 class PushPanelStory {
 	private toasts = inject(LuToastsService);
+	private modal = inject(LuModal);
+	private sidepanel = inject(LuSidepanel);
 
 	allLegumes = allLegumes;
 	simpleExample = allLegumes[0];
@@ -158,6 +173,14 @@ class PushPanelStory {
 			type: 'Info',
 			duration: null,
 		});
+	}
+
+	openDeprecatedModal() {
+		this.modal.legacyOpen(DeprecatedContentComponent);
+	}
+
+	openDeprecatedSidepanel() {
+		this.sidepanel.legacyOpen(DeprecatedContentComponent);
 	}
 
 	togglePushPanel() {

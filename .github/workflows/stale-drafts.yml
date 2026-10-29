@@ -1,0 +1,93 @@
+name: Close inactive draft pull requests
+
+# Draft pull requests only: labeled `stale` with a comment after 45 days without activity,
+# closed after 60. Any activity (push, comment, review, reopening) removes the label and restarts
+# the count. actions/stale cannot target drafts only (it can merely exempt them), hence this script.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Only log what would be done'
+        type: boolean
+        default: true
+
+permissions: {}
+
+concurrency:
+  group: stale-drafts
+
+jobs:
+  stale-drafts:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        env:
+          DRY_RUN: ${{ inputs.dry-run }}
+        with:
+          script: |
+            const STALE_DAYS = 45;
+            const CLOSE_DAYS = 60;
+            const LABEL = 'stale';
+            const MARKER = '<!-- stale-draft -->';
+            const DAY = 24 * 60 * 60 * 1000;
+            const dryRun = process.env.DRY_RUN === 'true';
+            const { owner, repo } = context.repo;
+            const now = Date.now();
+            const act = async (message, action) => {
+              core.info(`${dryRun ? '[dry-run] ' : ''}${message}`);
+              if (!dryRun) await action();
+            };
+
+            if (!dryRun) {
+              await github.rest.issues.getLabel({ owner, repo, name: LABEL }).catch(() =>
+                github.rest.issues.createLabel({ owner, repo, name: LABEL, color: 'BFBFBF', description: 'Inactive draft pull request, closed after 60 days' }),
+              );
+            }
+
+            const pulls = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
+            for (const pr of pulls.filter((p) => p.draft)) {
+              const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: pr.number, per_page: 100 });
+              // Only the workflow's own comment: a human reply quoting the warning is activity, not a warning
+              const warning = comments.filter((c) => c.user?.login === 'github-actions[bot]' && c.body?.includes(MARKER)).at(-1);
+              const labeled = pr.labels.some((l) => l.name === LABEL);
+              const lastActivity = new Date(pr.updated_at).getTime();
+
+              if (labeled && warning) {
+                // The label and the warning themselves bump updated_at: only later activity counts
+                const warnedAt = new Date(warning.created_at).getTime();
+                if (lastActivity > warnedAt + 60 * 1000) {
+                  await act(`#${pr.number}: active again, removing the label`, () =>
+                    github.rest.issues.removeLabel({ owner, repo, issue_number: pr.number, name: LABEL }),
+                  );
+                } else if (now - warnedAt >= (CLOSE_DAYS - STALE_DAYS) * DAY) {
+                  await act(`#${pr.number}: inactive for ${CLOSE_DAYS} days, closing`, async () => {
+                    await github.rest.issues.createComment({
+                      owner,
+                      repo,
+                      issue_number: pr.number,
+                      body: `This draft has been inactive for ${CLOSE_DAYS} days, so it is now closed. The branch is kept: reopen the pull request whenever you want to resume.`,
+                    });
+                    await github.rest.pulls.update({ owner, repo, pull_number: pr.number, state: 'closed' });
+                  });
+                }
+                continue;
+              }
+
+              if (now - lastActivity >= STALE_DAYS * DAY) {
+                await act(`#${pr.number}: inactive for ${STALE_DAYS} days, labeling`, async () => {
+                  await github.rest.issues.addLabels({ owner, repo, issue_number: pr.number, labels: [LABEL] });
+                  await github.rest.issues.createComment({
+                    owner,
+                    repo,
+                    issue_number: pr.number,
+                    body: `${MARKER}\nThis draft has been inactive for ${STALE_DAYS} days. Without any activity (a push, a comment, a review), it will be closed in ${CLOSE_DAYS - STALE_DAYS} days. Closing keeps the branch, and you can reopen the pull request at any time.`,
+                  });
+                });
+              }
+            }

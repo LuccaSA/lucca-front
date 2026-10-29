@@ -37,6 +37,7 @@ export class ImpersonationComponent {
 
 	/**
 	 * Restricts the users to the ones reachable through these operations, scoped by `appInstanceId`.
+	 * @deprecated use `uniqueOperationIds` instead
 	 */
 	readonly operationIds = input<readonly number[] | null>(null);
 
@@ -48,6 +49,7 @@ export class ImpersonationComponent {
 
 	/**
 	 * Application instance the `operationIds` are scoped to. Unused with `uniqueOperationIds`.
+	 * @deprecated use `uniqueOperationIds` instead
 	 */
 	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
 

@@ -444,6 +444,16 @@ Source: [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/
 			<td>–</td>
 			<td>Retirer la classe <code>.mod-hover</code> et l’input Angular <code>hover</code>, sans remplacement : une ligne sans action ne doit pas avoir d’effet de survol.</td>
 		</tr>
+		<tr>
+			<td>
+					<ul>
+					<li><code>.highlightSection</code></li>
+					</ul>
+				</td>
+			<td>22.1.0</td>
+			<td>–</td>
+			<td>Le composant Highlight section (<code>.highlightSection</code> et <code>&lt;lu-highlight-section&gt;</code>) sera remplacé en 22.2 par une évolution du composant Box.</td>
+		</tr>
 	</tbody>
 </table>
 

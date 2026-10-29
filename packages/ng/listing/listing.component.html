@@ -4,6 +4,7 @@
 		[class.mod-icons]="icons()"
 		[class.mod-checklist]="checklist()"
 		[class.mod-fancy]="orderedFancy()"
+		[class.mod-S]="size() === 'S'"
 		[class]="paletteClass()"
 		[attr.start]="start() !== 1 ? start() : null"
 		[attr.reversed]="reversed() ? 'reversed' : null"
@@ -17,6 +18,7 @@
 		[class.mod-checklist]="checklist()"
 		[class.mod-inline]="inline()"
 		[class.mod-divider]="divider()"
+		[class.mod-S]="size() === 'S'"
 		[class]="paletteClass()"
 	>
 		<ng-container *ngTemplateOutlet="content" />

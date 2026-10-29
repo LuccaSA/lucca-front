@@ -1,3 +1,10 @@
+### 22.1.1
+
+#### Fixed
+
+- An empty required field no longer briefly shows as invalid when a date is picked in the calendar: it is marked as touched only once the focus leaves both the inputs and the calendar.
+- The end date can be chosen with the Space key again, instead of both bounds receiving the same date.
+
 ### 22.1.0
 
 #### Added

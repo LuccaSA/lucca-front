@@ -43,6 +43,8 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await userEvent.clear(startInput);
 		await userEvent.type(startInput, 'not a date');
 		await userEvent.keyboard('{Escape}');
+		// Escape gives the focus back to the field, it is only flagged as invalid once the focus leaves it
+		await userEvent.click(document.body);
 		await waitForAngular();
 		await expect(startInput).toHaveAttribute('aria-invalid', 'true');
 	});

@@ -17,20 +17,20 @@ const options: Entity[] = [
 ];
 
 /**
- * The select observes `injectMediaMinBreakpoint('S', true)`, which matches while the viewport is *below*
- * the S breakpoint, so this single subject drives bottom sheet mode.
+ * The select observes `injectMediaMinBreakpoint('XS', true)`, which matches while the viewport is *below*
+ * the XS breakpoint, so this single subject drives bottom sheet mode.
  */
 class FakeBreakpointObserver {
-	readonly belowSmallBreakpoint = new BehaviorSubject(false);
+	readonly belowExtraSmallBreakpoint = new BehaviorSubject(false);
 	readonly observedQueries: string[] = [];
 
 	observe(query: string | readonly string[]): Observable<BreakpointState> {
 		this.observedQueries.push(...(typeof query === 'string' ? [query] : query));
-		return this.belowSmallBreakpoint.pipe(map((matches) => ({ matches, breakpoints: {} })));
+		return this.belowExtraSmallBreakpoint.pipe(map((matches) => ({ matches, breakpoints: {} })));
 	}
 
 	isMatched(): boolean {
-		return this.belowSmallBreakpoint.value;
+		return this.belowExtraSmallBreakpoint.value;
 	}
 }
 
@@ -155,8 +155,8 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 		});
 	});
 
-	function createHost<THost>(host: new () => THost, belowSmallBreakpoint: boolean): ComponentFixture<THost> {
-		breakpointObserver.belowSmallBreakpoint.next(belowSmallBreakpoint);
+	function createHost<THost>(host: new () => THost, belowExtraSmallBreakpoint: boolean): ComponentFixture<THost> {
+		breakpointObserver.belowExtraSmallBreakpoint.next(belowExtraSmallBreakpoint);
 		const fixture = TestBed.createComponent(host);
 		fixture.detectChanges();
 		return fixture;
@@ -167,15 +167,15 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 	}
 
 	describe('mode detection', () => {
-		it('should watch the viewport for the S breakpoint', () => {
+		it('should watch the viewport for the XS breakpoint', () => {
 			// Act
 			createHost(BareHostComponent, false);
 
 			// Assert
-			expect(breakpointObserver.observedQueries).toContain('not all and (min-width: 50em)');
+			expect(breakpointObserver.observedQueries).toContain('not all and (min-width: 40em)');
 		});
 
-		it('should not use bottom sheet mode above the S breakpoint', () => {
+		it('should not use bottom sheet mode above the XS breakpoint', () => {
 			// Act
 			const fixture = createHost(BareHostComponent, false);
 
@@ -183,7 +183,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(selectOf(fixture).bottomSheetMode()).toBe(false);
 		});
 
-		it('should use bottom sheet mode below the S breakpoint', () => {
+		it('should use bottom sheet mode below the XS breakpoint', () => {
 			// Act
 			const fixture = createHost(BareHostComponent, true);
 
@@ -222,7 +222,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			return fixture.nativeElement.querySelector('.simpleSelect-field-input');
 		}
 
-		it('should be a button below the S breakpoint, so tapping it on iOS does not raise the keyboard', () => {
+		it('should be a button below the XS breakpoint, so tapping it on iOS does not raise the keyboard', () => {
 			// Act
 			const fixture = createHost(FormFieldHostComponent, true);
 
@@ -232,7 +232,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(trigger(fixture)).toHaveAttribute('type', 'button');
 		});
 
-		it('should stay a searchable text input above the S breakpoint', () => {
+		it('should stay a searchable text input above the XS breakpoint', () => {
 			// Act
 			const fixture = createHost(FormFieldHostComponent, false);
 
@@ -333,7 +333,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			return document.querySelector<HTMLElement>('.cdk-overlay-pane');
 		}
 
-		it('should open the panel as a dialog in sheet mode below the S breakpoint', () => {
+		it('should open the panel as a dialog in sheet mode below the XS breakpoint', () => {
 			// Arrange
 			const fixture = createHost(BareHostComponent, true);
 
@@ -350,7 +350,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(document.querySelector('.dialog_backdrop')).not.toBeNull();
 		});
 
-		it('should keep anchoring the panel to the field above the S breakpoint', () => {
+		it('should keep anchoring the panel to the field above the XS breakpoint', () => {
 			// Arrange
 			const fixture = createHost(BareHostComponent, false);
 
@@ -370,7 +370,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 		 * surface it renders (it was never actually attached as a CDK dialog), which used to crash with
 		 * `NG0201: No provider found for LuDialogRef`. Instead, the panel closes outright.
 		 */
-		it('should close, rather than crash, when going from the desktop overlay to below the S breakpoint', () => {
+		it('should close, rather than crash, when going from the desktop overlay to below the XS breakpoint', () => {
 			// Arrange
 			const fixture = createHost(BareHostComponent, false);
 			const select = selectOf(fixture);
@@ -378,14 +378,14 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(select.isPanelOpen).toBe(true);
 
 			// Act
-			breakpointObserver.belowSmallBreakpoint.next(true);
+			breakpointObserver.belowExtraSmallBreakpoint.next(true);
 			expect(() => fixture.detectChanges()).not.toThrow();
 
 			// Assert
 			expect(select.isPanelOpen).toBe(false);
 		});
 
-		it('should close, rather than crash, when going from the sheet to above the S breakpoint', () => {
+		it('should close, rather than crash, when going from the sheet to above the XS breakpoint', () => {
 			// Arrange
 			const fixture = createHost(BareHostComponent, true);
 			const select = selectOf(fixture);
@@ -393,7 +393,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(select.isPanelOpen).toBe(true);
 
 			// Act
-			breakpointObserver.belowSmallBreakpoint.next(false);
+			breakpointObserver.belowExtraSmallBreakpoint.next(false);
 			expect(() => fixture.detectChanges()).not.toThrow();
 
 			// Assert
@@ -408,10 +408,10 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(select.panelTitle()).toBe('Country');
 
 			// Act — round trip through desktop, which auto-closes the panel and rebuilds the trigger
-			// (button below the S breakpoint, input above it) each way
-			breakpointObserver.belowSmallBreakpoint.next(false);
+			// (button below the XS breakpoint, input above it) each way
+			breakpointObserver.belowExtraSmallBreakpoint.next(false);
 			fixture.detectChanges();
-			breakpointObserver.belowSmallBreakpoint.next(true);
+			breakpointObserver.belowExtraSmallBreakpoint.next(true);
 			fixture.detectChanges();
 			select.openPanel();
 			TestBed.inject(ApplicationRef).tick();
@@ -422,7 +422,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 	});
 
 	describe('focus', () => {
-		it('should not focus the covered field below the S breakpoint', () => {
+		it('should not focus the covered field below the XS breakpoint', () => {
 			// Arrange
 			const fixture = createHost(BareHostComponent, true);
 			const select = selectOf(fixture);
@@ -435,7 +435,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(focusInput).not.toHaveBeenCalled();
 		});
 
-		it('should focus the field above the S breakpoint', () => {
+		it('should focus the field above the XS breakpoint', () => {
 			// Arrange
 			const fixture = createHost(BareHostComponent, false);
 			const select = selectOf(fixture);
@@ -461,7 +461,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(select.isPanelOpen).toBe(true);
 		});
 
-		it('should close the panel on Tab above the S breakpoint', () => {
+		it('should close the panel on Tab above the XS breakpoint', () => {
 			// Arrange
 			const fixture = createHost(BareHostComponent, false);
 			const select = selectOf(fixture);
@@ -565,7 +565,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(sheet()?.querySelector('.dialog-inside-header-button')).not.toBeNull();
 		});
 
-		it('should not render a sheet above the S breakpoint', () => {
+		it('should not render a sheet above the XS breakpoint', () => {
 			// Arrange
 			const fixture = createHost(FormFieldHostComponent, false);
 
@@ -714,8 +714,8 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 		});
 	});
 	describe('pagination', () => {
-		function createPaginatedSelect(belowSmallBreakpoint: boolean): { fixture: ComponentFixture<PaginatedHostComponent>; select: LuSimpleSelectInputComponent<Entity> } {
-			breakpointObserver.belowSmallBreakpoint.next(belowSmallBreakpoint);
+		function createPaginatedSelect(belowExtraSmallBreakpoint: boolean): { fixture: ComponentFixture<PaginatedHostComponent>; select: LuSimpleSelectInputComponent<Entity> } {
+			breakpointObserver.belowExtraSmallBreakpoint.next(belowExtraSmallBreakpoint);
 			const fixture = TestBed.createComponent(PaginatedHostComponent);
 			fixture.detectChanges();
 			const select = fixture.debugElement.query(By.directive(LuSimpleSelectInputComponent)).componentInstance as LuSimpleSelectInputComponent<Entity>;
@@ -751,7 +751,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(fixture.componentInstance.nextPageCount).toBe(3);
 		});
 
-		it('should leave pagination to the scroll handler above the S breakpoint', async () => {
+		it('should leave pagination to the scroll handler above the XS breakpoint', async () => {
 			// Arrange
 			const { fixture, select } = createPaginatedSelect(false);
 
