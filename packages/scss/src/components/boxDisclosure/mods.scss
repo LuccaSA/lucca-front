@@ -1,0 +1,19 @@
+@mixin neutral {
+	--components-boxDisclosure-background: var(--pr-t-elevation-surface-default);
+	--components-boxDisclosure-hover-borderColor: var(--palettes-neutral-400);
+}
+
+@mixin sunken {
+	--components-boxDisclosure-background: var(--pr-t-elevation-surface-sunken);
+	--components-boxDisclosure-hover-borderColor: var(--palettes-neutral-400);
+}
+
+@mixin fancyLight {
+	--components-boxDisclosure-background: var(--palettes-50, var(--palettes-product-50));
+	--components-boxDisclosure-hover-borderColor: var(--palettes-100, var(--palettes-product-100));
+}
+
+@mixin fancyDark {
+	--components-boxDisclosure-background: var(--palettes-100, var(--palettes-product-100));
+	--components-boxDisclosure-hover-borderColor: var(--palettes-200, var(--palettes-product-200));
+}

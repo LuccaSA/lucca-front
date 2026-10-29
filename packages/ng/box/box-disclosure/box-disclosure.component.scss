@@ -1,0 +1,8 @@
+@use '@lucca-front/scss/src/components/boxDisclosure';
+@use '@lucca-front/scss/src/components/listing';
+
+@layer base {
+	lu-box-disclosure {
+		display: block;
+	}
+}

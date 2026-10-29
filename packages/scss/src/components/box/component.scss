@@ -12,7 +12,59 @@
 		margin: var(--components-box-margin);
 	}
 
+	// Raw HTML boxes without slot keep their block layout
+	&:has(.box-slot) {
+		display: flex;
+		flex-direction: column;
+		gap: var(--components-box-gap);
+	}
+
 	@at-root ($atRoot) {
+		.box-header {
+			align-items: center;
+			display: flex;
+			gap: var(--components-box-header-gap);
+		}
+
+		.box-header-text {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			min-inline-size: 0;
+		}
+
+		.box-header-title {
+			color: var(--pr-t-color-text-heading);
+			font: var(--components-box-title-font);
+		}
+
+		.box-header-subtitle {
+			color: var(--pr-t-color-text-subtle);
+			font: var(--components-box-description-font);
+			margin: 0;
+		}
+
+		.box-slot {
+			&:empty {
+				display: none;
+			}
+		}
+
+		.box-illustrations {
+			display: grid;
+			inset-block-end: 0;
+			inset-inline-end: 0;
+			place-content: center;
+			position: absolute;
+		}
+
+		.box-illustrations-back,
+		.box-illustrations-front {
+			block-size: var(--components-box-illustrations-height);
+			grid-area: 1 / 1;
+			inline-size: var(--components-box-illustrations-width);
+		}
+
 		.box-close {
 			position: absolute;
 			font-size: var(--pr-t-font-body-M-fontSize);

@@ -1,32 +1,30 @@
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
-interface BoxBasicStory {
-	neutral: boolean;
-}
+interface BasicStory {}
 
 export default {
 	title: 'Documentation/Structure/Box/HTML&CSS/Basic',
-	argTypes: {
-		neutral: {
-			description: 'Applique un fond gris.',
-		},
-	},
+	argTypes: {},
 } as Meta;
 
-function getTemplate(args: BoxBasicStory): string {
-	const neutral = args.neutral ? `mod-neutral` : '';
-
-	return `<div class="box ${neutral}">
-		Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
+function getTemplate(args: BasicStory): string {
+	return `<div class="box">
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-title">Title</div>
+			<p class="box-header-subtitle">Subtitle</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
 </div>`;
 }
 
-const Template = (args: BoxBasicStory) => ({
+const Template = (args: BasicStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic: StoryObj<BoxBasicStory> = {
-	args: { neutral: false },
+export const Basic: StoryObj<BasicStory> = {
+	args: {},
 	render: Template,
 };

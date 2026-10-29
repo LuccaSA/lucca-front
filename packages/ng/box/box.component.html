@@ -5,4 +5,30 @@
 		</button>
 	</div>
 }
-<ng-content />
+@if (heading(); as heading) {
+	<div class="box-header">
+		@if (bubbleIcon(); as bubbleIcon) {
+			<lu-bubble-icon [icon]="bubbleIcon" />
+		}
+		<ng-content select="[boxHeaderStartSlot]" />
+		<div class="box-header-text">
+			<div class="box-header-title" [attr.role]="hx() ? 'heading' : null" [attr.aria-level]="hx()">
+				<ng-container *luPortal="heading" />
+			</div>
+			@if (subtitle(); as subtitle) {
+				<p class="box-header-subtitle"><ng-container *luPortal="subtitle" /></p>
+			}
+		</div>
+	</div>
+}
+<div class="box-slot"><ng-content /></div>
+@if (bubbleSrc() || illustrationSrc()) {
+	<div class="box-illustrations">
+		@if (bubbleSrc(); as bubbleSrc) {
+			<div class="box-illustrations-back" aria-hidden="true" [innerHtml]="bubbleSrc | luSafeExternalSvg"></div>
+		}
+		@if (illustrationSrc(); as illustrationSrc) {
+			<img alt="" class="box-illustrations-front" [attr.src]="illustrationSrc" />
+		}
+	</div>
+}
