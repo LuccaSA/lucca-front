@@ -21,38 +21,25 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<UserPopoverStory> = {
-	render: (args) => ({
-		props: args,
-		template: `<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover" [luUserPopoverDisabled]="luUserPopoverDisabled" translate="no">{{ luUserPopover | luUserDisplay: 'lf' }}</button>`,
-	}),
-	args: {
-		luUserPopover: finn,
-		luUserPopoverDisabled: false,
-	},
-	parameters: {
-		controls: {
-			include: ['luUserPopover', 'luUserPopoverDisabled'],
-		},
-	},
-};
-
-export const CustomContent: StoryObj<UserPopoverStory & { customContent: string }> = {
+export const Basic: StoryObj<UserPopoverStory & { customContent: string }> = {
 	render: ({ customContent, ...args }) => ({
 		props: args,
-		template: `<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover" [luUserPopoverCustomContent]="customContent">Survolez-moi !</button>
-<ng-template #customContent let-user>${customContent}</ng-template>`,
+		template: customContent
+			? `<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover" [luUserPopoverDisabled]="luUserPopoverDisabled" [luUserPopoverCustomContent]="customContent" translate="no">{{ luUserPopover | luUserDisplay: 'lf' }}</button>
+<ng-template #customContent let-user>${customContent}</ng-template>`
+			: `<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover" [luUserPopoverDisabled]="luUserPopoverDisabled" translate="no">{{ luUserPopover | luUserDisplay: 'lf' }}</button>`,
 	}),
 	argTypes: {
 		customContent: { control: { type: 'text' }, description: 'Template content, `user` is available in the template context.' },
 	},
 	args: {
 		luUserPopover: finn,
-		customContent: 'Custom content for {{ user.firstName }}',
+		luUserPopoverDisabled: false,
+		customContent: '',
 	},
 	parameters: {
 		controls: {
-			include: ['customContent'],
+			include: ['luUserPopover', 'luUserPopoverDisabled', 'customContent'],
 		},
 	},
 };
