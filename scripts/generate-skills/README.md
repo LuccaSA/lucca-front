@@ -595,7 +595,7 @@ npm run skills:update -- --minor 22.2
 
 Trois garde-fous, comme sur `@lucca/cdk` :
 
-- **Hook pre-commit** (`.git-hooks/pre-commit`, installé par `npm install` via `prepare`) : dès qu'un fichier de `packages/ng`, `packages/prisme`, `packages/scss`, `stories` ou du générateur est indexé, il régénère depuis l'index (`--ref "$(git write-tree)"`) et ajoute la documentation au commit. Compter une quarantaine de secondes ; `git commit --no-verify` le saute. Sans `node` dans le `PATH` ni tag atteignable, il ne fait rien.
+- **Hook pre-commit** (`.git-hooks/pre-commit`, installé par `npm install` via `prepare`) : dès qu'un fichier de `packages/ng`, `packages/prisme`, `packages/scss`, `stories` ou du générateur est indexé, il régénère depuis l'index (`--ref "$(git write-tree)"`) et ajoute la documentation au commit. Compter une vingtaine de secondes au premier commit, une dizaine ensuite : les tags publiés lus par les changelogs sont extraits une fois dans `node_modules/.cache/lf-skills-tags` (~10 Mo par tag, vidé par `npm ci`). `git commit --no-verify` le saute. Sans `node` dans le `PATH` ni tag atteignable, il ne fait rien.
 - **CI** (`skills` dans `build.yml`) : `npm run skills:check` régénère et échoue sur tout écart, fichiers nouveaux compris, car un hook reste contournable.
 - **Baselines** : ZeroHeight et Figma ne bougent qu'au rafraîchissement en ligne, qui ouvre un diff de baselines relisible. Sans rafraîchissement, la documentation garde le dernier contenu design récupéré.
 
