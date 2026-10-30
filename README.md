@@ -169,8 +169,6 @@ apm install
 
 The skill is deployed under `.claude/skills/lucca-front/` (and `.github/skills/` for Copilot). It is a pointer to the documentation of the installed package, so there is nothing to change when you update Lucca Front.
 
-If you prefer to pin the skill to a release, add a tag to the path. Any tag that ships the pointer works, whatever your installed version:
-
 ```yaml
 dependencies:
   apm:
