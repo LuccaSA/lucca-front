@@ -62,6 +62,17 @@ Une guideline contient souvent plusieurs versions ou brouillons (« Première ve
 
 Si un lien Figma est fourni, en tirer les points visuels via le MCP Figma (`get_design_context` / `get_screenshot`). Ne pas bloquer si l’outil est indisponible : garder le lien.
 
+### Proposition d’API (dès qu’un lien Figma est fourni)
+
+Lancer le skill `draft-component-api` avec le lien Figma, la guideline déjà lue et le composant identifié : il ne redemande pas ces sources. Sa sortie sert à deux choses :
+
+- **affiner l’issue** : un breaking change ou une contrainte a11y qu’il relève va dans `Mistakes to avoid` ; une question ouverte qui bloque le périmètre va dans la relance ;
+- **alimenter le bloc `API proposal`** du corps (voir étape 4).
+
+Les renommages Figma suggérés restent **dans la conversation** (voir étape 6) : ils s’adressent au designer, pas à l’issue.
+
+Sans lien Figma, ne pas lancer le skill et ne pas proposer d’API.
+
 ### Code (repérage léger)
 
 L’issue décrit **quoi**, pas **comment**. Ne pas investiguer l’implémentation. Se limiter à un repérage :
@@ -70,7 +81,7 @@ L’issue décrit **quoi**, pas **comment**. Ne pas investiguer l’implémentat
 - s’il existe, relever son API publique actuelle (inputs / outputs) pour signaler dans `Mistakes to avoid` les usages à ne pas casser ;
 - repérer les composants existants que la demande recoupe (sans proposer comment les réutiliser).
 
-**Ne pas** proposer d’API, d’interfaces, de plan de dépréciation ni de découpage technique, sauf si l’utilisateur le demande explicitement. Dans ce cas, consulter le code et la page Prisme (MCP zeroheight `search-pages` → `get-page`), et présenter l’API comme une **suggestion** (« Could be: ») dans `Design`.
+En dehors du bloc `API proposal` produit par `draft-component-api`, **ne pas** proposer d’API, d’interfaces, de plan de dépréciation ni de découpage technique. Si l’utilisateur demande une API sans fournir de lien Figma, lui demander le lien plutôt que d’improviser le contrat.
 
 ### Relance
 
@@ -138,6 +149,18 @@ Figma: <Figma link>
 
 ### Mistakes to avoid
 - <Constraint or pitfall>
+
+<details>
+<summary>API proposal (draft, to be discussed)</summary>
+
+| Name | Kind | Type | Default | Figma source |
+|---|---|---|---|---|
+| `<name>` | input | `<type>` | `<default>` | <Figma property> |
+
+Open questions:
+1. <question>
+
+</details>
 ```
 
 Règles :
@@ -148,6 +171,7 @@ Règles :
 - `Mistakes to avoid` ne garde que les contraintes qui changent l’implémentation (interdits fonctionnels, a11y, rétrocompatibilité), pas les conseils d’usage destinés aux designers ;
 - omettre une ligne de lien absente (pas de `Figma: -`) ; garder toujours le placeholder des visuels (`> [!NOTE]` / `> 📸 Visuals to add`) : il doit être **visible** dans l’issue affichée (jamais un commentaire HTML, invisible hors édition). L’utilisateur le remplace par ses captures ;
 - supprimer `Mistakes to avoid` s’il n’y a rien de concret à dire plutôt que d’y mettre des banalités ;
+- le bloc `API proposal` n’apparaît que si `draft-component-api` a tourné (lien Figma fourni). Il reprend, traduits en anglais, le tableau du contrat (colonne `Note` comprise si elle apporte quelque chose) et les questions ouvertes ; pas de signature TS, pas de renommages Figma. Il reste replié : les sections `Intention` / `Key points` gardent leur niveau macro ;
 - signaler explicitement un risque de breaking change ou un impact accessibilité.
 
 ## 5. Proposer les métadonnées
@@ -177,7 +201,7 @@ Taxonomie à jour : `gh label list --repo LuccaSA/lucca-front --limit 100`.
 
 ## 6. Montrer le brouillon
 
-Présenter dans la conversation : le titre, le corps complet en bloc markdown, les labels proposés (avec une demi-phrase de justification), et les hypothèses faites ou les sources non lues.
+Présenter dans la conversation : le titre, le corps complet en bloc markdown, les labels proposés (avec une demi-phrase de justification), et les hypothèses faites ou les sources non lues. Si `draft-component-api` a tourné, ajouter après le corps les **renommages Figma suggérés** (son tableau), à relayer au designer : ils ne vont pas dans l’issue.
 
 Terminer par le **choix de la milestone** via l’outil `AskUserQuestion` (choix unique, header `Milestone`) :
 
