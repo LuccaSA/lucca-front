@@ -62,11 +62,13 @@ Une guideline contient souvent plusieurs versions ou brouillons (« Première ve
 
 Si un lien Figma est fourni, en tirer les points visuels via le MCP Figma (`get_design_context` / `get_screenshot`). Ne pas bloquer si l’outil est indisponible : garder le lien.
 
-### Proposition d’API (dès qu’un lien Figma est fourni)
+### Proposition d’API (dès que Figma a pu être lu)
 
-Lancer le skill `draft-component-api` avec le lien Figma, la guideline déjà lue et le composant identifié : il ne redemande pas ces sources. Sa sortie sert à deux choses :
+Si le MCP Figma a pu lire la maquette, lancer le skill `draft-component-api` avec le lien Figma, la guideline déjà lue et le composant identifié : il ne redemande pas ces sources. Si Figma n’a pas pu être lu, ne pas le lancer : garder le lien, omettre le bloc `API proposal` et le signaler dans les hypothèses du brouillon. La proposition d’API ne doit jamais bloquer la rédaction de l’issue.
 
-- **affiner l’issue** : un breaking change ou une contrainte a11y qu’il relève va dans `Mistakes to avoid` ; une question ouverte qui bloque le périmètre va dans la relance ;
+Sa sortie sert à deux choses :
+
+- **affiner l’issue** : un breaking change (y compris un nouvel input obligatoire) ou une contrainte a11y qu’il relève va dans `Mistakes to avoid` ; une question ouverte qui bloque le périmètre va dans la relance ;
 - **alimenter le bloc `API proposal`** du corps (voir étape 4).
 
 Les renommages Figma suggérés restent **dans la conversation** (voir étape 6) : ils s’adressent au designer, pas à l’issue.

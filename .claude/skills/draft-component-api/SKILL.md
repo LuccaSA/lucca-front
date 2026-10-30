@@ -99,7 +99,7 @@ Puis appliquer la correspondance et les conventions observées ci-dessous. Chaqu
 | Variant de taille (`Size` : S / M / L) | `size = input<XxxSize>(<défaut>)`, type tiré d’un tableau `as const` (`export const XXX_SIZE = ['S', 'M', 'L'] as const;` dans `<composant>.type.ts`). Valeurs en notation courte (`XS`, `S`, `M`, `L`, `XL`). |
 | Variant de couleur | `palette = input<Palette \| DecorativePalette>('none')` (types de `@lucca/prisme/core`), restreint aux palettes réellement prévues par la maquette. |
 | Variant d’apparence à valeurs exclusives | Une union de strings (`'outlined' \| 'filled'`), **pas** plusieurs booléens qui peuvent se contredire. |
-| Booléen Figma qui active un comportement / une option | `input(false, { transform: booleanAttribute })`, nommé d’après ce qu’il active (`hiddenLabel`, `outlined`, `withEllipsis`) — jamais `showX` à `true` par défaut. |
+| Booléen Figma qui active un comportement / une option | `input(false, { transform: luBooleanAttribute })` (`contributing.md#dx`) ; dans `packages/prisme`, qui ne dépend pas de `@lucca-front/ng`, la forme typée ``input<boolean, boolean \| `${boolean}` \| ''>(false, { transform: booleanAttribute })`` (voir `prisme/button`). Nommé d’après ce qu’il active (`hiddenLabel`, `outlined`, `withEllipsis`) — jamais `showX` à `true` par défaut. |
 | Booléen « Show icon » + instance swap d’icône | Un seul `icon = input<LuccaIcon \| null>(null)` : la présence de la valeur remplace le booléen. Idem pour tout booléen qui ne fait qu’afficher un contenu optionnel. |
 | Texte simple | `input<string>()`, ou `input.required<string>()` s’il est indispensable (a11y comprise). |
 | Texte pouvant contenir du contenu riche | `input<PortalContent>()` (ex. `heading`, `helper`, `action`) ou `ng-content` si c’est le contenu principal du composant. |
@@ -126,8 +126,8 @@ Lister les points que les sources ne permettent pas de trancher (valeur par déf
 Pour chaque élément du contrat proposé, indiquer :
 
 - **inchangé** ;
-- **ajout** (non breaking) ;
-- **⚠️ breaking** : input / output renommé ou supprimé, type restreint, valeur par défaut modifiée, sélecteur ou slot changé.
+- **ajout** (non breaking) : nouvel input **facultatif**, output, model facultatif ou slot ;
+- **⚠️ breaking** : input / output renommé ou supprimé, type restreint, valeur par défaut modifiée, sélecteur ou slot changé, **nouvel `input.required()`** ou input existant devenu obligatoire (tout template qui ne le renseigne pas cesse de compiler).
 
 Pour chaque breaking change, proposer la voie non cassante quand elle existe : garder l’ancien input en `@deprecated` (JSDoc) et le faire pointer vers le nouveau, le temps d’une majeure. Ne pas proposer de breaking change là où un ajout suffit.
 
