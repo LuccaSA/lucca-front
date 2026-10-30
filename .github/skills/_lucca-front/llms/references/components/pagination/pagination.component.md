@@ -1,5 +1,14 @@
 # pagination — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Mod `default`
+  - Mod `compact`
+  - Pagination
+- HTML/CSS
+  - Basic
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-pagination-angular--docs)
 
 ## Angular
@@ -52,7 +61,14 @@ import { luPaginationTranslations, PAGINATION_MOD, PaginationComponent } from '@
 ```
 
 ```html
-<lu-pagination from="1" to="20" itemsCount="27" isFirstPage />
+<lu-pagination
+	from="1"
+	to="20"
+	itemsCount="27"
+	isFirstPage
+	(previousPage)="previousPage($event)"
+	(nextPage)="nextPage($event)"
+/>
 ```
 
 ## HTML/CSS

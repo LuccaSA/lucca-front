@@ -98,7 +98,8 @@ function baselineFile(pagePath: string, zhReleaseId: number | null): string {
 
 function readBaseline(pagePath: string, zhReleaseId: number | null): string | null {
 	try {
-		return fs.readFileSync(baselineFile(pagePath, zhReleaseId), 'utf-8');
+		// A Windows checkout (`core.autocrlf`) hands baselines over with CRLF; the section parsers only know LF.
+		return fs.readFileSync(baselineFile(pagePath, zhReleaseId), 'utf-8').replace(/\r\n/g, '\n');
 	} catch {
 		return null;
 	}

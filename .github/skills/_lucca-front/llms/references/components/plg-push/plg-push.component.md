@@ -14,7 +14,7 @@ import { LuPlgPushTranslations, PLGPushComponent } from '@lucca-front/ng/plg-pus
 ```
 
 ```html
-<lu-plg-push>
+<lu-plg-push [(removed)]="removed" (removedChange)="removedChange($event)">
 	Bénéficiez de toutes les options liées au télétravail avec Timmi Office.
 	<a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer">
 		<span class="link-text">Demander un essai gratuit</span>

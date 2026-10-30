@@ -28,12 +28,17 @@ Handlebars.registerHelper('escapePipe', (str: string) => {
 // Template cache
 const templateCache = new Map<string, HandlebarsTemplateDelegate>();
 
+// A Windows checkout (`core.autocrlf`) hands templates over with CRLF; the markdown post-processing only knows LF.
+function readTemplate(file: string): string {
+	return fs.readFileSync(path.join(TEMPLATES_DIR, file), 'utf-8').replace(/\r\n/g, '\n');
+}
+
 // Story body partial — shared markup for a story inlined in <slug>.component.md.
-Handlebars.registerPartial('storyBody', fs.readFileSync(path.join(TEMPLATES_DIR, 'story-body.hbs'), 'utf-8'));
+Handlebars.registerPartial('storyBody', readTemplate('story-body.hbs'));
 
 function getTemplate(name: string): HandlebarsTemplateDelegate {
 	if (!templateCache.has(name)) {
-		const src = fs.readFileSync(path.join(TEMPLATES_DIR, `${name}.hbs`), 'utf-8');
+		const src = readTemplate(`${name}.hbs`);
 		templateCache.set(name, Handlebars.compile(src, { noEscape: true }));
 	}
 	return templateCache.get(name)!;

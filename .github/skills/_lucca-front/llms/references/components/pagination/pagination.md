@@ -31,7 +31,7 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `isFirstPage` | `isFirstPage` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le bouton précédent. |
 | `isLastPage` | `isLastPage` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le bouton suivant. |
-| `from` | `from` | `unknown` | `undefined` | — | `luOptionalNullableNumberAttribute` | Numéro du dernier élément affiché. |
+| `from` | `from` | `unknown` | `undefined` | — | `luOptionalNullableNumberAttribute` | Numéro du premier élément affiché. |
 | `to` | `to` | `unknown` | `undefined` | — | `luOptionalNullableNumberAttribute` | Numéro du dernier élément affiché. |
 | `itemsCount` | `itemsCount` | `unknown` | `undefined` | — | `luOptionalNullableNumberAttribute` | Nombre total d’éléments. |
 | `mod` | `mod` | `'default' \| 'compact'` | `'default'` | — | — | Affiche la pagination en vue compacte (seulement avec les boutons précédent et suivant). |

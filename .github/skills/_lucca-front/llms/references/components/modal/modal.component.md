@@ -12,7 +12,7 @@
 import { ChangeDetectionStrategy, Component, inject, input, Type } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
+import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, provideLuModal } from '@lucca-front/ng/modal';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { map, shareReplay, timer } from 'rxjs';
 import { ILuModalContent } from '@lucca-front/ng/modal';

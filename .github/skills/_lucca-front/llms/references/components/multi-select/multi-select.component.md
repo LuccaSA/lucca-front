@@ -35,6 +35,8 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 		clearable
 		(panelOpened)="panelOpened()"
 		(panelClosed)="panelClosed()"
+		(highlightedOption)="highlightedOption($event)"
+		(addOption)="addOption($event)"
 	/>
 </lu-form-field>
 <pr-story-model-display>{{ model.example | json }}</pr-story-model-display>
