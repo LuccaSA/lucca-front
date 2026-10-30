@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, ElementRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
-import { Palette, PrClass, ɵeffectWithDeps } from '@lucca/prisme/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, ElementRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, Palette, PrClass, ɵeffectWithDeps } from '@lucca/prisme/core';
 import { IconComponent } from '@lucca/prisme/icon';
 import { ButtonSize, ButtonState, ButtonType } from './button.type';
 
@@ -33,27 +33,27 @@ export class ButtonComponent {
 	/**
 	 * Apply block display
 	 */
-	readonly block = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly block = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Disables the Button. Also applied automatically when `state` is `loading`
 	 */
-	readonly disabled = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly disabled = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Indicates an action with significant or irreversible consequences on hover and focus. Only compatible with outlined and ghost
 	 */
-	readonly critical = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly critical = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * @deprecated use `critical` input instead
 	 */
-	readonly delete = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly delete = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Indicates the presence of a menu
 	 */
-	readonly disclosure = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly disclosure = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Applies a color palette to the Button
