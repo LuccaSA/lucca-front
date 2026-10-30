@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isNewMinor, refuseMinorForThisBranch, refusePartialRunOnNewMinor } from './preflight';
+import { isNewMinor, refuseMinorForThisBranch, refuseOfflineRunOnNewMinor, refusePartialRunOnNewMinor } from './preflight';
 
 describe('isNewMinor', () => {
 	it.each`
@@ -53,5 +53,24 @@ describe('refusePartialRunOnNewMinor', () => {
 
 	it('refuses a partial run that moves the skill to a new minor', () => {
 		expect(refusePartialRunOnNewMinor('22.1', '22.0', ['--skip-documentation', '--skip-tools'])).toContain('--skip-documentation, --skip-tools : la skill passe de 22.0 à 22.1');
+	});
+});
+
+describe('refuseOfflineRunOnNewMinor', () => {
+	it.each`
+		requested  | committed
+		${'22.0'}  | ${'22.0'}
+		${'v22.0'} | ${'22.0'}
+	`('lets $requested over $committed through', ({ requested, committed }) => {
+		expect(refuseOfflineRunOnNewMinor(requested, committed)).toBeNull();
+	});
+
+	it.each`
+		requested | committed | documented
+		${'22.1'} | ${'22.0'} | ${'22.0'}
+		${'21.3'} | ${'22.0'} | ${'22.0'}
+		${'22.0'} | ${null}   | ${'aucune mineure'}
+	`('refuses $requested over $committed', ({ requested, committed, documented }) => {
+		expect(refuseOfflineRunOnNewMinor(requested, committed)).toContain(`les baselines committées documentent ${documented}`);
 	});
 });

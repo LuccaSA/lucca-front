@@ -426,7 +426,6 @@ export interface SharedTypeDef {
 export interface PatchManifestEntry {
 	tag: string;
 	storybookBaseUrl: string;
-	generatedAt: string;
 }
 
 /** The minor the committed skill documents. references/ documents `latestPatch`; fixes/ covers the others. */
@@ -438,7 +437,6 @@ export interface SkillManifest {
 	tag: string;
 	zhReleaseId: number | null;
 	storybookBaseUrl: string;
-	generatedAt: string;
 	componentCount: number;
 	/** Every published patch of the minor, ascending ("21.2.0" → …). */
 	patches: Record<string, PatchManifestEntry>;
