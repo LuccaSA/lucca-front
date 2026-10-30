@@ -66,7 +66,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	4. The deletion release note, commit or PR.
 * A comment inside an `objectPattern` array labels the patterns after it.
 	* It is doc content: French Markdown.
-	* The script renders it as a `<p>` before the list of its patterns.
+	* The script renders it as a plain line before the list of its patterns.
 	* A label with no pattern after it renders alone.
 	* A label stays only when the tokens don't already say it.
 		* "Utilitaires renommés très utilisés" stays: no token shows how much it is used.
@@ -125,6 +125,18 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* [components.mjs](scripts/components.mjs) reads the Angular markers.
 	* [generate.mjs](scripts/generate.mjs) renders the actions, sorts the rows and splits the deleted entries.
 
+## Format
+
+* ZeroHeight publishes the docs: it renders no HTML in Markdown, except `<br>`.
+* Each section is a GFM pipe table.
+	* The version columns are centered.
+* A cell stacks its lines with `<br>`.
+	* A list item opens with `- `.
+	* A sub-item opens with `• `, indented by no-break spaces.
+	* A `|` is escaped as `\|`, even inside a code span.
+* The links encode their parentheses: an unbalanced one would end the link.
+* Prettier would pad every column to its longest cell: never format the docs.
+
 ## Actions
 
 * A `*` legend opens the action as its own paragraph.
@@ -161,5 +173,5 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 
 ## Header
 
-* The script keeps everything above the first section: the title, the intro note and the `<style>` block.
-* GitHub strips `<style>`: widths render only in viewers that honor it, such as the VSCode preview or Prisme.
+* The script keeps everything above the first section: the title and the intro note.
+* The header holds no HTML either: ZeroHeight would print it as text.

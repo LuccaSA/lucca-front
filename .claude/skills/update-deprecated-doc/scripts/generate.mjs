@@ -50,65 +50,67 @@ const schematicNames = Object.fromEntries(
 const schematicLink = (url) => {
 	const name = schematicNames[url.split('/').pop()];
 	if (!name) throw new Error(`No registered schematic at ${url}`);
-	return `<a href="${url}"><strong>Schematic</strong> : ${name}</a>`;
+	return `[**Schematic** : ${name}](${url})`;
 };
-const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const actionsHtml = (e) => {
-	const schem = e.schematics ? schematicLink(e.schematics) : '';
-	if (!e.actions) return schem || '–';
+
+// --- Cells ---
+// ZeroHeight renders no HTML in Markdown but `<br>`: a cell stacks its lines with it.
+// A line is a paragraph (`depth` -1) or a list item: items open with `-`, sub-items with `•` behind no-break spaces.
+const line = (md, depth = -1) => ({ md, depth });
+const marker = (depth) => (depth < 0 ? '' : depth ? `${'\u00A0'.repeat(4 * depth)}• ` : '- ');
+const cell = (lines) =>
+	lines
+		// The sources write their mapping arrows `=>`: the docs show them as `⇒`.
+		.map(({ md, depth }) => marker(depth) + md.replace(/ =>(?= |$)/g, ' ⇒'))
+		.join('<br>')
+		// A pipe ends the cell, even inside a code span.
+		.replace(/\|/g, '\\|') || '–';
+// A cell holding a single item takes no list.
+const unlist = (lines) => (lines.length === 1 && lines[0].depth === 0 ? [line(lines[0].md)] : lines);
+// A list item keeps its text, its sub-list goes one level deeper.
+const mdLines = (tokens, depth = -1) =>
+	tokens.flatMap((t) => {
+		if (t.type === 'space') return [];
+		if (t.type === 'paragraph' || t.type === 'text') return [line(t.text.replace(/\n/g, ' '), depth)];
+		if (t.type === 'list') return t.items.flatMap((i) => mdLines(i.tokens, depth + 1));
+		throw new Error(`Unsupported Markdown block in actions: ${t.type}`);
+	});
+const actionLines = (e) => {
+	const schem = e.schematics ? [line(schematicLink(e.schematics))] : [];
+	if (!e.actions) return schem;
 	const md = e.actions
 		// A multi-line template literal keeps the indentation of its `.mjs` entry.
 		.replace(/\r/g, '')
 		.replace(/^\t{3}/gm, '')
 		.trim();
-	// A lone one-line sentence without schematics stays bare in its cell.
-	if (!schem && !/\n|^\* /.test(md)) return marked.parseInline(md);
-	const html = marked.parse(md).trim();
-	return schem ? `${schem}\n${html}` : html;
+	return [...schem, ...mdLines(marked.lexer(md))];
 };
 
 // --- Nom derivation ---
-// Nom cells are built in Markdown, then rendered by `marked`: no blank line survives inside a cell.
 const code = (t) => `\`${t}\``;
-const render = (md) => marked.parse(md).replace(/\n+/g, '\n').trim();
 // A cell holds one list per group of patterns, each after its label: an unlabeled entry is a single group.
-const nomHtml = (e) => {
+const nomLines = (e) => {
 	const groups = e.groups.some((g) => g.label) ? e.groups : [{ sources: e.groups.flatMap((g) => g.sources) }];
-	const list = (sources) =>
-		sources.length &&
-		nomItems(sources)
-			.map((i) => `* ${i}`)
-			.join('\n');
-	return render(groups.flatMap((g) => [g.label, list(g.sources)].filter(Boolean)).join('\n\n'));
-};
-// A cell holding a single item takes no list.
-const unlist = (html) => {
-	const m = html.match(/^<ul>\s*<li>([\s\S]*?)<\/li>\s*<\/ul>(\s+\([\s\S]*\))?$/);
-	return m && !m[1].includes('<li>') ? m[1] + (m[2] ?? '') : html;
+	return groups.flatMap((g) => [
+		...(g.label ? [line(g.label)] : []),
+		...(g.sources.length ? linkNom(nomItems(g.sources), e) : []).map((md) => line(md, 0)),
+	]);
 };
 
 // --- Composants ---
 // A component shows one root class per pattern, its shortest form: the search still covers every class.
-const tokens = (e) => {
-	const roots = [...new Set(e.groups.flatMap((g) => g.sources).map(rootToken))];
-	// A component without a CSS pattern shows its name only.
-	if (!roots.length) return '';
-	const html = unlist(linkNom(render(roots.map((r) => `* ${code(r)}`).join('\n')), e, true));
-	// A single root sits inline after the name, behind a comma.
-	return html.startsWith('<ul>') ? `\n${html}` : `, ${html}`;
-};
 // The name links to its Prisme page when `urls.prisme` gives one.
-const nameHtml = (e) => (e.prisme ? `<a href="${e.prisme}">${esc(e.name)}</a>` : esc(e.name));
+const componentLines = (e) => {
+	const name = e.prisme ? `[${e.name}](${e.prisme})` : e.name;
+	const roots = linkNom([...new Set(e.groups.flatMap((g) => g.sources).map(rootToken))].map(code), e, true);
+	// A single root sits inline after the name, behind a comma: a component without a CSS pattern shows its name only.
+	return roots.length === 1 ? [line(`${name}, ${roots[0]}`)] : [line(name), ...roots.map((md) => line(md, 0))];
+};
 
 // --- Tables ---
-const cell = (html) =>
-	html.includes('\n') || html.startsWith('<')
-		? `\t\t\t<td>\n${html.replace(/^/gm, '\t'.repeat(4))}\n\t\t\t</td>`
-		: `\t\t\t<td>${html}</td>`;
-const version = (v) => `\t\t\t<td>${v ?? '–'}</td>`;
-const row = (nom, e) =>
-	['\t\t<tr>', cell(nom), version(e.versionDeprecated), version(e.versionDeleted), cell(unlist(actionsHtml(e))), '\t\t</tr>'].join('\n');
-const heads = ['Nom', 'Depuis', 'Suppression', 'Action à réaliser'].map((h) => `\t\t\t<th>${h}</th>`).join('\n');
+const row = (nom, e) => `| ${[cell(nom), e.versionDeprecated ?? '–', e.versionDeleted ?? '–', cell(unlist(actionLines(e)))].join(' | ')} |`;
+// The version columns are centered.
+const heads = '| Nom | Depuis | Suppression | Action à réaliser |\n| --- | :---: | :---: | --- |';
 // Oldest first: by deprecation version, then deletion version; unversioned rows last, in source order.
 // The `.mjs` order stays untouched, since Stylelint uses the first matching entry.
 const compare = (a, b) => (a && b ? a.localeCompare(b, undefined, { numeric: true }) : !a - !b);
@@ -125,11 +127,7 @@ const sourceLine = (entries) => {
 };
 // A section without rows is left out.
 const section = (title, entries, nom) =>
-	!entries.length
-		? ''
-		: `## ${title}\n\n${sourceLine(entries)}\n\n<table>\n\t<thead>\n\t\t<tr>\n${heads}\n\t\t</tr>\n\t</thead>\n\t<tbody>\n${entries
-				.map((e) => row(nom(e), e))
-				.join('\n')}\n\t</tbody>\n</table>\n`;
+	!entries.length ? '' : `## ${title}\n\n${sourceLine(entries)}\n\n${heads}\n${entries.map((e) => row(nom(e), e)).join('\n')}\n`;
 const blob = (file) => `[${file}](https://github.com/LuccaSA/lucca-front/blob/master/${dir}${file})`;
 
 const [selectors, properties, scss] = await Promise.all(
@@ -144,22 +142,18 @@ const shipped = execFileSync('git', ['describe', '--tags', '--abbrev=0', '--matc
 const deleted = (e) => !!e.versionDeleted && compare(e.versionDeleted, shipped) <= 0;
 const named = components([...selectors, ...properties, ...scss]);
 // An entry with a `name` deprecates a whole component: it goes to Composants.
-const nom = (e) => unlist(linkNom(nomHtml(e), e));
-// Each doc keeps everything before `## Composants`: its title, note and style.
+const nom = (e) => unlist(nomLines(e));
+// Each doc keeps everything before `## Composants`: its title and note.
 const write = (path, keep) => {
 	// The deleted doc sorts by deletion first.
 	const pick = (entries) => entries.filter((e) => deleted(e) === keep).sort(keep ? byDeletion : byVersion);
 	const sections = [
-		section('Composants', pick(named), (e) => nameHtml(e) + tokens(e)),
+		section('Composants', pick(named), componentLines),
 		section('Classes', pick(selectors.filter((e) => !e.name)), nom),
 		section('Variables CSS', pick(properties.filter((e) => !e.name)), nom),
 		section('Mixins', pick(scss.filter((e) => !e.name)), nom),
 	];
-	// The sources write their mapping arrows `=>`: the docs show them as `⇒`.
-	const body = sections
-		.filter(Boolean)
-		.join('\n')
-		.replace(/ =&gt;(?= |<)/g, ' ⇒');
+	const body = sections.filter(Boolean).join('\n');
 	writeFileSync(path, `${read(path).split('## Composants')[0].trimEnd()}\n\n${body}`);
 };
 write('docs/life-cycle.md', false);
