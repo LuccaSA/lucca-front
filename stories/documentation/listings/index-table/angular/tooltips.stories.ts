@@ -69,7 +69,7 @@ function getTemplate(args: BasicStory): string {
 					Tooltip when ellipsis
 				</div>
 			</td>
-			<td luIndexTableCell selectable>
+			<td luIndexTableCell allowTextSelection>
 				Selectable
 			</td>
 			<td luIndexTableCell>
