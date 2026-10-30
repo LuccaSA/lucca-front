@@ -30,8 +30,8 @@ import { PopoverDirective, PopoverContentComponent } from '@lucca-front/ng/popov
 | `luPopoverAnchor` | `luPopoverAnchor` | `FlexibleConnectedPositionStrategyOrigin` | `this.elementRef` | — | — | — |
 | `luPopoverBackdrop` | `luPopoverBackdrop` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `luPopoverIgnoredOutsidePointerTargets` | `luPopoverIgnoredOutsidePointerTargets` | `HTMLElement \| HTMLElement[] \| null` | `null` | — | — | — |
-| `luPopoverOpenDelay` | `luPopoverOpenDelay` | `number` | `300` | — | `luNumberAttribute` | Délai en millisecondes avant ouverture du popover. |
-| `luPopoverCloseDelay` | `luPopoverCloseDelay` | `number` | `100` | — | `luNumberAttribute` | Délai en millisecondes avant fermeture du popover. |
+| `luPopoverOpenDelay` | `luPopoverOpenDelay` | `number` | `300` | — | `luNumberAttribute` | Délai en millisecondes avant ouverture du popover, lorsque `luPopoverTrigger` inclut `hover` ou `focus`. |
+| `luPopoverCloseDelay` | `luPopoverCloseDelay` | `number` | `100` | — | `luNumberAttribute` | Délai en millisecondes avant fermeture du popover, lorsque `luPopoverTrigger` inclut `hover` ou `focus`. |
 
 #### Outputs
 

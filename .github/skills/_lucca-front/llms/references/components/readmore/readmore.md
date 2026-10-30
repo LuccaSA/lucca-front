@@ -19,10 +19,10 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `lineClamp` | `lineClamp` | `number` | `5` | — | `luNumberAttribute` | Modifie le nombre de lignes affichées à l’état replié. |
 | `openOnly` | `openOnly` | `boolean` | `false` | — | `luBooleanAttribute` | Empêche la fermeture du composant en masquant le bouton "Lire moins" |
-| `plainText` | `plainText` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `plainText` | `plainText` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche les retours à la ligne (`\ `) du contenu au lieu de les fusionner en espaces. Destiné à du texte brut, comme la … |
 | `textFlow` | `textFlow` | `boolean` | `false` | — | `luBooleanAttribute` | Applique les espacements du composant Text flow |
 | `surface` | `surface` | `ReadMoreSurface \| string \| null` | `null` | — | — | Modifie la couleur de fond sous le bouton "Lire plus / moins" |
-| `innerContent` | `innerContent` | `null \| string` | `null` | — | — | Permet de passer le contenu via un innerHTML |
+| `innerContent` | `innerContent` | `null \| string` | `null` | — | — | Passe le contenu de l’exemple via l’input `innerContent` (`string | null`, injecté en innerHTML) au lieu de le projeter … |
 
 ### Injection tokens
 

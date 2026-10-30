@@ -28,9 +28,9 @@ import { SegmentedControlFilterComponent, SegmentedControlComponent } from '@luc
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `value` | `value` | `T` | — | ✅ | — | — |
-| `label` | `label` | `PortalContent` | — | — | — | — |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le filtre. |
+| `value` | `value` | `T` | — | ✅ | — | Valeur de l’onglet (obligatoire). |
+| `label` | `label` | `PortalContent` | — | — | — | Libellé de l’onglet. |
 
 ### SegmentedControlComponent (component)
 

@@ -26,7 +26,7 @@ import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } fro
 
 ```html
 <ng-template #label>Lorem</ng-template>
-<lu-segmented-control-tabs [ariaLabel]="ariaLabel">
+<lu-segmented-control-tabs [ariaLabel]="ariaLabel" [(active)]="active">
 	<lu-segmented-control-tabs-panel [label]="label" value="0">
 		<div class="demo">Content Lorem</div>
 	</lu-segmented-control-tabs-panel>

@@ -31,13 +31,13 @@ import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `vertical` | `vertical` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `vertical` | `vertical` | `boolean` | `false` | — | `luBooleanAttribute` | Calcule la visibilité du premier et du dernier élément sur l’axe vertical plutôt qu’horizontal. À utiliser lorsque le co… |
 
 ## Related files
 
 - 📝 [Code & implementation](./scrollbox.component.md)
 - 🎨 [Design guidelines](./scrollbox.design.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-scrollbox--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-scrollbox-angular--docs)
 
 ## Changelog
 
