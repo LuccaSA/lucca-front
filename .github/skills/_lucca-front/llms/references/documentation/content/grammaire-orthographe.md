@@ -13,10 +13,6 @@
   - Privilégions le langage neutre
   - Évitons les intitulés d’action neutres
 
-title: Grammaire, orthographe
-description: Utilisons ces règles pour rendre notre écriture claire, cohérente et adaptée aux enjeux de la localisation.
----
-
 # Content
 
 ## Utilisons la voix active et la conjugaison au présent de l'indicatif
@@ -82,7 +78,6 @@ Ils n'apportent que peu à votre information.
 | Votre entretien a été publié. | Votre entretien a été correctement publié. |
 
 ## Évitons la double négation
-
 
 ## 1 phrase = 1 seule information
 

@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-code`
+
 ### Code
 
 ```js
@@ -14,8 +16,9 @@ import { CodeComponent } from '@lucca-front/ng/code';
 <lu-code>ipsum dolor sit</lu-code>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.code`
 
 ### Code
 

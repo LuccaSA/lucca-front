@@ -12,10 +12,13 @@
   - State section palette
   - State section
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-empty-state-angular-onboarding-page--docs)
 
 ## Angular
+
+🔗 [Spécifique Lucca — Page — Liste des illustrations](https://www.notion.so/c12d6c3bf8dc4cc391ad1e5bc80655ab?v=ea7b24dd88d742ccbbb0d87424560c51)
+
+Component selector : `lu-empty-state-page`
 
 ### State page onboarding
 
@@ -97,8 +100,11 @@ import { EMPTY_STATE_HX, EmptyStateSectionComponent } from '@lucca-front/ng/empt
 </lu-empty-state-section>
 ```
 
-
 ## HTML/CSS
+
+🔗 [Spécifique Lucca — Page — Liste des illustrations](https://www.notion.so/c12d6c3bf8dc4cc391ad1e5bc80655ab?v=ea7b24dd88d742ccbbb0d87424560c51)
+
+Classe CSS : `.emptyState`
 
 ### State page
 

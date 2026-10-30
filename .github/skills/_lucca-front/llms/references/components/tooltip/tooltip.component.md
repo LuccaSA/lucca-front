@@ -4,6 +4,10 @@
 
 ## Angular
 
+Directive selector : `luTooltip`
+
+Un tooltip ne devrait pas contenir de HTML. Si une mise en forme est nécessaire, le popover est à privilégier.
+
 ### Tooltip
 
 ```js
@@ -65,7 +69,6 @@ import { ButtonComponent } from '@lucca/prisme/button';
 </span>
 <span aria-hidden="true" #target class="lucca-icon icon-target"></span>
 ```
-
 
 ## HTML/CSS
 

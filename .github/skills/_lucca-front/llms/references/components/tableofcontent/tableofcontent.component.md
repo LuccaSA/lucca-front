@@ -4,6 +4,10 @@
 
 ## Angular
 
+Mots-clés : table des matières, sommaire, ancres
+
+Component selector : `lu-table-of-content`
+
 ### Of content
 
 ```js
@@ -19,8 +23,11 @@ import { TableOfContentComponent, TableOfContentLinkDirective } from '@lucca-fro
 </lu-table-of-content>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.tableOfContent`
+
+La table des matière est sticky par défaut. Ajoutez une valeur top à `tableOfContent` pour l'activer.
 
 ### Of content
 

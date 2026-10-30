@@ -31,6 +31,8 @@ import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 
 ## Related files
 
+- 🎨 [Design guidelines](./onboarding-empty-state.design.md)
+
 ## Changelog
 
 > Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.

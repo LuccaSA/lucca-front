@@ -1,9 +1,5 @@
 # Blocage sur le contenu ?
 
-title: Blocage sur le contenu ?
-description: Des difficultés à exprimer nos idées avec clarté et précision ? “Trop de choses” à mentionner dans l'écran ou le composant ? Quelques recommandations.
----
-
 # Content
 
 ## Incarnons les produits Lucca

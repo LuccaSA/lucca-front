@@ -34,7 +34,7 @@ import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration
 ## Related files
 
 - 📝 [Code & implementation](./bubble-illustration.component.md)
-
+- 🎨 [Design guidelines](./bubble-illustration.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-bubble-illustration-angular-basic--docs)
 
 ## Changelog

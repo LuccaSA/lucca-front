@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-progress-bar`
+
 ### Bar
 
 ```js
@@ -14,8 +16,9 @@ import { PROGRESS_BAR_STATE, ProgressBarComponent } from '@lucca-front/ng/progre
 <lu-progress-bar value="33" />
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.progress`
 
 ### Bar
 

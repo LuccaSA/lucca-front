@@ -40,7 +40,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ## Related files
 
 - 📝 [Code & implementation](./icons.component.md)
-
+- 🎨 [Design guidelines](./icons.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-icons-angular-basic--docs)
 
 ## Changelog

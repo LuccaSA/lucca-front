@@ -10,10 +10,6 @@
   - Affichage en tableau
   - Horaire et durée
 
-title: Nombres
-description: Durées, heures ou encore données monétaires, ces formats varient en fonction des cultures.
----
-
 # Content
 
 ## Séparateur de milliers et de décimales (radix)

@@ -10,7 +10,6 @@
   - Ornaments
   - Themes
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-highlight-section-angular-basic--docs)
 
 ## Angular
@@ -24,7 +23,6 @@ import { HIGHLIGHT_SECTION_BUBBLE, HIGHLIGHT_SECTION_ILLUSTRATION, HIGHLIGHT_SEC
 ```html
 <lu-highlight-section theme="light">Content</lu-highlight-section>
 ```
-
 
 ## HTML/CSS
 

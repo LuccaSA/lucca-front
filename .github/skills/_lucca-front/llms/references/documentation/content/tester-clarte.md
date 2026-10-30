@@ -18,10 +18,6 @@
     - Pour anticiper les attentes utilisateur
   - 5. Consolider et partager les résultats
 
-title: Tester clarté et efficacité du contenu
-description: Vérifions que le langage de nos logiciels fournit suffisamment de contexte, pour aider les utilisateurs à accomplir leurs tâches avec succès.
----
-
 # Content
 
 ## 1. Objectifs des tests
@@ -46,8 +42,6 @@ Permettre aux Product Designers et Product Managers de produire un parcours **é
 
 Alimenter les contenus marketing ou support client avec des notions et messages clefs adaptés aux différents contextes.
 
----
-
 ## 2. Timing des tests
 
 | **Moment** | **Contexte** | **Ressource** |
@@ -55,8 +49,6 @@ Alimenter les contenus marketing ou support client avec des notions et messages 
 | **Dès le cadrage** | Poser les hypothèses et les confronter au plus tôt aux utilisateurs. | Fiche Notion « [Cadrage UX Research](https://www.notion.so/Cadrage-UXR-Nom-du-projet-df52fed6795f4315bcd88652263a8a6a?pvs=21) » |
 | **En phase de design** | Consolider les user flows et wireframes avec des contenus testés. | — |
 | **Sur l'existant** | Améliorer un parcours, résoudre une problématique utilisateur ou business. | — |
-
----
 
 ## 3. Guide des tests par besoin
 
@@ -76,8 +68,6 @@ Alimenter les contenus marketing ou support client avec des notions et messages 
 * Afficher uniquement les titres (reste flouté).
 * Permet d'évaluer aussi la **hiérarchisation de l'information.**
 
----
-
 #### **Conseils d'animation**
 
 Si un participant peine à trouver, stresse ou "bloque" :
@@ -85,8 +75,6 @@ Si un participant peine à trouver, stresse ou "bloque" :
 * ✅ Rassurer et évoquer ses tâches quotidiennes.
 * ✅ Valoriser les indices non-verbaux : silence, hésitations, expressions faciales, gestes.
 * ❌ Ne pas intervenir ni guider.
-
----
 
 ### **Besoin : cibler le bon mot, la bonne hiérarchie d'informations**
 
@@ -109,8 +97,6 @@ Utile pour un menu de navigation ou un ensemble de contenus à organiser.**Prép
 | Flexibilité maximale. | Structure guidée. |
 
 > 📌 **À noter :** un tri par cartes fournit une base de hiérarchie à affiner ensuite.
-
----
 
 ## 4. Questions clés à poser lors des tests
 
@@ -141,8 +127,6 @@ Utile pour un menu de navigation ou un ensemble de contenus à organiser.**Prép
 |   | Que pensez-vous qu'il se passera après avoir cliqué ? |
 
 > 📌 Ressource : **Fiche Notion sur l'****[animation d'un test utilisateur](https://www.notion.so/Animer-un-test-56745bae8c554d58a02a987a8bcdc704?pvs=21)**.
-
----
 
 ## 5. Consolider et partager les résultats
 

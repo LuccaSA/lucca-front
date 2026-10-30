@@ -19,10 +19,6 @@
     - Bonnes pratiques
   - Affichage dans une Dialog
 
-title: Conception d'un formulaire
-description: Cette guideline définit les règles de conception qui assurent la cohérence et l'utilisabilité de tous nos formulaires.
----
-
 # Content
 
 ## **Principes généraux**
@@ -36,15 +32,11 @@ description: Cette guideline définit les règles de conception qui assurent la 
     * Chronologie naturelle : suivons l'ordre temporel des actions à paramétrer, s'il existe.
     * Réutiliser les données existantes : nous évitons de demander des informations déjà disponibles et pré-remplissons les champs lorsque c’est possible.
 
----
-
 ## Grille
 
 ### Anatomie
 
 La grille, via le composant Grid, permet de structurer efficacement la disposition des champs. Son objectif principal est de garantir un alignement cohérent, une lisibilité optimale et une adaptabilité parfaite en responsive.
-
-
 
 ### Bonnes pratiques
 
@@ -59,15 +51,11 @@ La grille, via le composant Grid, permet de structurer efficacement la dispositi
 - **Do** : Lorsque des champs sont étroitement liés, nous pouvons les afficher sur une même ligne.
 - **Don't** : Les composants comme le Datepicker ne doivent pas utiliser toute la largeur de la grille.
 
----
-
 ## Découpage en Fieldsets
 
 Découpons un formulaire en Fieldsets pour structurer efficacement des formulaires longs. Cela permet de regrouper logiquement les champs lorsque l'utilisateur renseigne un seul objet principal qui comporte de nombreux champs.
 
 ### Anatomie
-
-
 
 ### Séparations des Fieldsets
 
@@ -95,15 +83,11 @@ Cela permet de ne pas afficher certains champs lors de la première lecture pour
 
 Un fieldset rétractable ne **doit pas comporter de champs obligatoires**.
 
-
-
 ### Fieldset narratif
 
 Le Fieldset narratif présente les champs du formulaire directement intégrés dans une phrase. L’utilisateur construit ainsi une règle ou une condition sous une forme proche du langage naturel. Cela rend la logique métier plus claire et lisible.
 
 À utiliser **uniquement en dernier recours.** 
-
-
 
 ### Fieldset requis
 
@@ -114,10 +98,6 @@ Un astérisque s’affiche dans le titre du Fieldset (non répété sur les cham
 En cas d’oubli, une erreur identique est affichée sur chaque champ du Fieldset, listant les options possibles. Elle disparaît dès qu’un champ est renseigné.
 
 Si tous les champs d’un Fieldset sont obligatoires, alors l’astérisque doit se trouver à côté du label de chacun des champs.
-
-
-
----
 
 ## **Découpage en é**tapes
 
@@ -148,11 +128,7 @@ L’utilisateur doit pouvoir revenir en arrière sans perte de données.
 * L’intitulé de chaque étape se limite à 1-2 mots-clefs explicites.
 * Éviter les titres génériques comme « Étape 1 », « Paramètres », qui n’apportent pas de sens.
 
-
-
 ⚠️ Travail complémentaire en cours pour définir le fonctionnement standardisé de formulaires en étapes.
-
----
 
 ## Affichage dans une Dialog
 

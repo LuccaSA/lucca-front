@@ -10,7 +10,6 @@
   - Size
   - Status
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-popover-angular-basic--docs)
 
 ## Angular
@@ -42,7 +41,6 @@ import { PALETTE } from '@lucca/prisme/core';
 </lu-callout-popover>
 ```
 
-
 ## HTML/CSS
 
 ### Basic
@@ -51,8 +49,6 @@ Classe CSS : `.calloutPopover`
 
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
-@forward '@lucca-front/scss/src/components/calloutFeedbackList';
 @forward '@lucca-front/scss/src/components/calloutPopover';
 ```
 
@@ -119,8 +115,6 @@ Classe CSS : `.calloutPopover`
 
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
-@forward '@lucca-front/scss/src/components/calloutFeedbackList';
 @forward '@lucca-front/scss/src/components/calloutPopover';
 ```
 

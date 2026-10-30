@@ -4,6 +4,8 @@
 
 ## Angular
 
+🚧 Modal utilise aujourd'hui le nouveau service Dialog par défaut. Il est prévu de la conserver en tant qu'outil permettant de créer rapidement une fenêtre de dialogue et sera ainsi renommée dans le futur.
+
 ### Modal
 
 ```js

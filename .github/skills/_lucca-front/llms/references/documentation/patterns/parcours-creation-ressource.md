@@ -20,10 +20,6 @@
     - Ressources en cours de création
     - Ressources diffusées
 
-title: Avec action de diffusion
-description: Ce pattern s'applique aux ressources nécessitant une étape finale explicite pour être lancées ou diffusées auprès des utilisateurs (ex : campagnes, enquêtes).
----
-
 # Création
 
 ## Description du parcours
@@ -34,11 +30,7 @@ L'étape d'initialisation est **obligatoire** dans ce type de parcours. Elle per
 
 Cette première étape contient **deux à trois champs essentiels** pour identifier la ressource
 
-
-
 Si le parcours de création nécessite de traduire le contenu en plusieurs langues, les paramètres des langues sont accessibles depuis cette première étape d’initialisation. Pour en savoir plus, consultez la guideline sur les traductions de formulaire.
-
-
 
 #### Contenu et rédaction
 
@@ -55,8 +47,6 @@ Une fois la ressource créée via l’étape d’initialisation, l'utilisateur c
 Chaque étape traite un aspect spécifique de la ressource, ce qui permet de focaliser l'attention de l'utilisateur sur un point précis.
 
 Dans ce contexte de création de ressource, la complétion des étapes peut être séquentielle (l’utilisateur doit suivre un ordre définit) ou libre (l’utilisateur peut naviguer entre les étapes à sa guise).
-
-
 
 #### Contenu et rédaction
 
@@ -75,15 +65,11 @@ Ces ressources enfants sont créées dans une Dialog latérale (`drawer`) superp
 
 La Dialog enfant se ferme après validation, ramenant l'utilisateur à la Dialog parente.
 
-
-
 ### Étape récapitulative
 
 Cette étape récapitulative est **optionnelle**. L'ajout d'un récapitulatif dépend de la criticité de l'action, ses conséquences en cas d'erreur, la difficulté à corriger et le stress généré pour l'utilisateur.
 
 Une fois toutes les étapes complétées, l'utilisateur accède à un écran présentant l'ensemble des informations saisies avant la validation finale. Cet écran permet de vérifier les paramètres configurés et de les corriger si nécessaire avant de confirmer l'action.
-
-
 
 #### Contenu et rédaction
 
@@ -93,8 +79,6 @@ Une fois toutes les étapes complétées, l'utilisateur accède à un écran pr�
 | Bouton précédent | «  **Étape précédente** » en `leftIcon` `outlined`Iavec l'cône `arrow-left` |
 | Bouton d’action final | « **{Infinitif} le/la {ressource}** » en `filled`. |
 | Bouton secondaire | « **Continuer plus tard** » en `outlined` et palette `product` |
-
----
 
 ## Gestion des erreurs
 
@@ -108,8 +92,6 @@ La validation des données est **manuelle** et se fait à chaque changement d’
 
 Le composant Progress stepper indique un état « Succès » pour les étapes validées.
 
-
-
 ### Complétion libre
 
 Dans ce contexte de création de ressource, la complétion des paramètres est guidée mais n’est pas imposée. C’est à dire que l’utilisateur peut naviguer entre les étapes, même si des informations ne sont pas renseignées.
@@ -120,21 +102,13 @@ Dans ce cas, aucune validation n'est effectuée pendant les étapes intermédiai
 
 Exception faite pour certains champs avec un format spécifique imposé (email, url, etc.), les erreurs peuvent être déclenchées au `blur` lorsque le format n'est pas respecté. Cela aide l'utilisateur à corriger immédiatement sans attendre la fin du parcours.
 
-
-
----
-
 ## Enregistrement
 
 Un enregistrement de la ressource est effectué à chaque étape, lorsque l’utilisateur change d’étape, via le bouton « Étape suivante » ou via le Progress stepper. Le bouton « Étape suivante » passe en état `loading` le temps de l'enregistrement.
 
-
-
 Un bouton « **Continuer plus tard** » est proposé à chaque étape pour permettre à l’utilisateur de quitter le parcours à tout moment tout en sauvegardant l’état actuel de sa saisie. La ressource reste alors en statut « En cours de création ».
 
 Lorsque l'utilisateur clique sur une ressource « En cours de création », il est automatiquement renvoyé dans le parcours de création (Dialog latérale (`drawer`)) à la **première étape non validée**, avec possibilité de continuer la configuration et de finaliser la diffusion.
-
----
 
 ## Actions secondaires
 
@@ -146,8 +120,6 @@ Un bouton est toujours présent dans l'entête de la Dialog pour que l'utilisate
 * supprimer la ressource en cours de création.
 
 Des actions spécifiques à la ressource peuvent aussi y trouver place.
-
-
 
 # Consultation et modification
 
@@ -187,8 +159,6 @@ Les ressources « En cours de création » doivent impérativement apparaître e
 
 Dans tous les cas, chaque ressource « En cours de création » doit être identifiée par un Status badge en couleur `product` visible, situé à la suite du nom de la ressource. Ce badge permet de distinguer rapidement l'état de la ressource.
 
----
-
 ## Modification d’une ressource
 
 ### Ressources en cours de création
@@ -199,19 +169,13 @@ Lorsque l'utilisateur clique sur une ressource « En cours de création », il e
 
 Si des actions génériques comme l’archivage, la duplication ou la suppression sont disponibles, celles-ci sont disponibles directement depuis la liste des ressources, que ce soit via un IndexTable ou des ResourceCard, via un bouton ouvrant un menu contextuel.
 
-
-
 L’utilisateur doit aussi pouvoir accéder à ces actions depuis le parcours de création. Un même bouton ouvrant un menu contextuel est disponible depuis l’entête de la Dialog.
-
-
 
 ### Ressources diffusées
 
 Lorsque le parcours de création est terminé et que la ressource est diffusée, les modifications possibles sont assez limitées car l’impact d’un changement peut-être assez élevé. Il s’agit donc plutôt d’un affichage de consultation que de modification.
 
 La ressource s’affiche en pleine page et peut-être découpée en plusieurs section via une HorizontalNavigation pour simplifier la navigation de l’utilisateur et l’analyse des résultats (campagne d’entretien, résultats d’une enquête, etc.).
-
-
 
 #### Actions génériques
 

@@ -4,15 +4,25 @@
 
 ## Angular
 
+Component selector : `lu-multi-select`
+
+### Appeler une API
+
+Pour un format de retour V3 ou V4 sans customisation de l'affichage (l'entité doit avoir une propriété `name`), il suffit de donner l'API à appeler :
+
+### Personnaliser l'affichage
+
+Dans le cas d'une personnalisation de l'option et/ou de la valeur affichée, il est nécessaire de créer votre propre directive en s'aidant de `LuCoreSelectApiV4Directive` ou de `LuCoreSelectApiV3Directive` :
+
+### API non conventionnelle (sans id)
+
+Dans le cas d'un appel API ne rentrant pas dans le moule habituel, il est nécessaire de créer votre propre directive en s'aidant de `ALuCoreSelectApiDirective` :
+
 ### Select
 
 ```js
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { luCoreSelectTranslations, LuOptionDirective } from '@lucca-front/ng/core-select';
-import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { LuMultiSelectInputComponent, luMultiSelectTranslations } from '@lucca-front/ng/multi-select';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 ```
 
 ```html

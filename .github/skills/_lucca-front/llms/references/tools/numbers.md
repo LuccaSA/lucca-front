@@ -1,8 +1,5 @@
 # Nombres / LuNumber
 
-title: Numbers
----
-
 # Content
 
 **Exemple : Base**

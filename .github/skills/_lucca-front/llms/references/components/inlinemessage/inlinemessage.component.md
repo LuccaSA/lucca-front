@@ -2,8 +2,15 @@
 
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-inlinemessage-angular-basic--docs)
 
+## Angular
+
+Mots-clés : helper, aide, contextuelle, error message, erreur, avertissement
+
+Component selector : `lu-inline-message`
 
 ## HTML/CSS
+
+Classe CSS : `.inlineMessage`
 
 ### Message basic
 

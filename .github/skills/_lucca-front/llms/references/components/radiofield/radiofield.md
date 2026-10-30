@@ -50,7 +50,7 @@ import { RadioGroupInputComponent, RadioComponent } from '@lucca-front/ng/forms'
 ## Related files
 
 - 📝 [Code & implementation](./radiofield.component.md)
-
+- 🎨 [Design guidelines](./radiofield.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-radiofield-angular--docs)
 
 ## Changelog

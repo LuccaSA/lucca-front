@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-loading`
+
 ### Basic
 
 ```js
@@ -14,8 +16,13 @@ import { LOADING_SIZE, LoadingComponent, luLoadingTranslations } from '@lucca-fr
 <lu-loading />
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.loading`
+
+La classe `mod-fullPage` permettent de centrer un loading dans une page entière.
+
+Les classes `mod-popin` et `mod-drawer` permettent de centrer un loading dans une fenêtre de dialogue en version classique ou drawer.
 
 ### Basic
 

@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-date-range-input`
+
 ### Range input
 
 ```js
@@ -11,6 +13,23 @@ import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CALENDAR_MODE, CalendarShortcut, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateRange, DateRangeInputComponent, luDate2Translations, PremadeShortcuts } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+```
+
+```ts
+shortcuts: [
+	{
+		label: 'Since start of week',
+		range: PremadeShortcuts['SinceStartOfWeek']('fr'),
+	},
+	{
+		label: 'Last week',
+		range: PremadeShortcuts['LastWeek']('fr'),
+	},
+	{
+		label: 'Last month',
+		range: PremadeShortcuts['LastMonth']('fr'),
+	},
+]
 ```
 
 ```html

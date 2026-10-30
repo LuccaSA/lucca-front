@@ -9,10 +9,15 @@
   - List
   - List basic
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-sortable-list-angular-basic--docs)
 
 ## Angular
+
+Le drag and drop est porté par Angular CDK [drag-drop](https://angular.dev/guide/drag-drop).
+
+Mots-clés : triable, drag and drop, réorganisation
+
+Component selector : `lu-sortable-list`
 
 ### Basic
 
@@ -43,8 +48,9 @@ import { SortableListComponent, SortableListItemComponent } from '@lucca-front/n
 </lu-sortable-list>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.sortableList`
 
 ### List
 

@@ -54,7 +54,7 @@ import { CalloutDisclosureComponent } from '@lucca-front/ng/callout';
 ## Related files
 
 - 📝 [Code & implementation](./callout-disclosure.component.md)
-
+- 🎨 [Design guidelines](./callout-disclosure.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular-basic--docs)
 
 ## Changelog

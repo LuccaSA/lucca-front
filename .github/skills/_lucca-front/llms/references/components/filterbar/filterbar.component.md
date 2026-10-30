@@ -3,16 +3,33 @@
 **Sommaire**
 
 - Angular
+  - Filter pills optionnelles
+  - luFilterPillAddonBefore et luFilterPillAddonAfter
   - Bar segmented control tabs
   - Bar
 - HTML/CSS
   - Bar segmented control tabs
   - Bar
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-filterspills-filterbar-angular-segmented-control-tabs--docs)
 
 ## Angular
+
+Component selector : `lu-filter-bar`
+
+### Filter pills optionnelles
+
+`optional` permet de conditionner l'affichage d'une filter pill. Elle sera masquée par défaut et accessible depuis le bouton filtre.
+
+Une filter pill optionnelle doit obligatoirement contenir un attribut `name` (dont la valeur est libre) afin de pouvoir être affichée.
+
+### luFilterPillAddonBefore et luFilterPillAddonAfter
+
+Deux directives structurelles permettent de projeter du contenu aux extrémités de la FilterBar.
+
+| **`*`**`luFilterPillAddonBefore` | Placé **avant** les pills, dans la zone scrollable, avec un séparateur vertical automatique. Exemple : un SegmentedControl ou un sélecteur de vues. |
+| --- | --- |
+| **`*`**`luFilterPillAddonAfter` | Placé **après** les pills, aligné à droite. Exemple : un bouton d'export. |
 
 ### Bar segmented control tabs
 
@@ -86,7 +103,6 @@ import { IconComponent } from '@lucca/prisme/icon';
 	</lu-form-field>
 </lu-filter-bar>
 ```
-
 
 ## HTML/CSS
 

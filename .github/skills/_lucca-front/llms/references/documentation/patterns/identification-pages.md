@@ -18,10 +18,6 @@
     - Adapt `app.module.ts` config
     - Example with lucca-cdk
 
-title: Identification des pages
-description: L'identification des pages concerne les titres de pages, tel qu’ils apparaissent dans les navigateurs internet, ainsi que leurs favicons.
----
-
 # Règles d'usage
 
 ### **En bref**
@@ -34,8 +30,6 @@ description: L'identification des pages concerne les titres de pages, tel qu’i
 Le favicon doit contenir le logo Lucca en blanc sur fond coloré. Le fond doit être de la couleur de la gamme (Temps et activités, Talent, Dépenses professionnelles, Rémunérations et avantages, Gestion administrative & Lucca), correspondant à la nuance Product 700.
 
 L’utilisateur peut alors identifier rapidement les onglets et la marque Lucca parmi d’autres, tout en rattachant ces onglets à un produit à l’aide de la couleur.
-
-
 
 ## Titres & URL
 
@@ -66,23 +60,13 @@ Exemples :
 * Rôles – Organisation – Administration – Lucca
 * Croissance – Tableaux de bord – Lucca
 
-
-
 #### Regroupement de modules
 
 Le regroupement de plusieurs modules ont un impact sur le sitemap et donc sur le titre de la page. Même s’il n’existe pas d’interface à proprement parler pour les regroupements, il est nécessaire de les faire figurer dans le titre.
 
-
-
-
-
 #### Navigation dans un module
 
 Le composant Horizontal navigation utilise un pattern de navigation : l’URL et le titre de la page s’en trouvent donc impactés.
-
-
-
-
 
 #### Dialogs
 
@@ -92,15 +76,11 @@ Les Dialogs ne doivent pas être considérés comme des pages à part entière e
 
 Dans certains cas, l’information permettant de différencier plusieurs onglets n’est pas l’objet le plus précis. Il est alors possible d’intervertir des données dans le titre pour identifier plus rapidement le bon onglet. C’est notamment le cas sur le Dossier RH où le nom du collaborateur reste le meilleur moyen d’identifier une page.
 
-
-
 ### Chargement et internationalisation
 
 Au chargement d’une application, la localisation et donc la langue ne sont pas connues. Il faut donc afficher un titre par défaut “Lucca” car cela permet de ne pas faire le choix d’une langue par défaut.
 
 Une fois l’application chargée, le titre de la page s’adapte en fonction de la localisation.
-
-
 
 # Angular
 

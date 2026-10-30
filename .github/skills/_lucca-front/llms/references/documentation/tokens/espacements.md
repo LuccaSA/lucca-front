@@ -1,9 +1,5 @@
 # Espacements
 
-title: Espacements
-description: Les tokens d'espacements sont basés sur une grille de 8px (à quelques subdivisions près). Ils sont utilisables sous forme de variables ou d'utilitaires et permettent d'assurer un équilibre entre les différents éléments d'une interface.
----
-
 # Content
 
 ## Tokens spacings

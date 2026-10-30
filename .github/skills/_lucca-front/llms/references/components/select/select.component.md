@@ -10,7 +10,6 @@
 - HTML/CSS
   - Basic
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-api-select-angular-basic--docs)
 
 ## Angular
@@ -224,7 +223,6 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 	</label>
 </div>
 ```
-
 
 ## HTML/CSS
 

@@ -1,9 +1,5 @@
 # Nos 10 principes Design
 
-title: Nos 10 principes Design
-description: Des principes et des exemples concrets, pour concevoir des logiciels 100% alignés sur notre ADN. 
----
-
 # Content
 
 ## 1. Don't make me think

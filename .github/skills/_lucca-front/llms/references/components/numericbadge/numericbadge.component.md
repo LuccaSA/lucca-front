@@ -4,6 +4,10 @@
 
 ## Angular
 
+Mots-clés : badge, numérique, compteur, count
+
+Component selector : `lu-numeric-badge`
+
 ### Badge
 
 ```js
@@ -15,8 +19,9 @@ import { PALETTE } from '@lucca/prisme/core';
 <lu-numeric-badge [value]="7" />
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.numericBadge`
 
 ### Badge basic
 

@@ -4,6 +4,10 @@
 
 ## Angular
 
+Mots-clés : jauge, score
+
+Component selector : `lu-gauge`
+
 ### Basic
 
 ```js
@@ -15,8 +19,11 @@ import { PALETTE } from '@lucca/prisme/core';
 <lu-gauge value="33" />
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.gauge`
+
+Pour un chargement de données, préférez l'utilisation de [progression](https://zeroheight.com/94310e217/p/916abd-progression).
 
 ### Circular
 

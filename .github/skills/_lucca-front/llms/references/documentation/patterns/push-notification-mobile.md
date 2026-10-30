@@ -1,20 +1,10 @@
 # Push Notification mobile
 
-title: Push Notification mobile
-description: La Push notification fournit un message bref, concernant une action à réaliser ou une information importante sur l’application mobile Lucca.
----
-
 # Content
 
 ## Anatomie
 
-
-
----
-
 ## Comportement 
-
-
 
 ### Appui sur la notification
 
@@ -46,8 +36,6 @@ Pourquoi ? Pour éviter la troncature du texte sur les petits appareils. Les v
 * Nous n’utilisons jamais de point d’exclamation, de point d’interrogation ni d’emojis.
 * L'utilisateur n'a pas besoin de lire la Body pour comprendre le contenu du Title. 
 * Nous évitons les phrase du type “Afficher les informations sur l’application” ou “Ouvrir l’application pour...”.
-
-
 
 | ✅ | ❌ |
 | --- | --- |

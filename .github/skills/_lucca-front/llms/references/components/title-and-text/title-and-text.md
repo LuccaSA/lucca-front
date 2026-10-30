@@ -2,6 +2,9 @@
 
 ## Related files
 
+- 📝 [Code & implementation](./title-and-text.component.md)
+- 🎨 [Design guidelines](./title-and-text.design.md)
+
 ## Changelog
 
 _Aucun changement d'API entre v21.4.4 et v22.1.1._

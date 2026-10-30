@@ -151,7 +151,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 ## Related files
 
 - 📝 [Code & implementation](./data-table.component.md)
-
+- 🎨 [Design guidelines](./data-table.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
 
 ## Changelog

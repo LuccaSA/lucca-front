@@ -23,10 +23,6 @@
     - Bonnes pratiques de rédaction
   - Règles d'utilisation
 
-title: Dialogs de confirmation
-description: Les Dialogs de confirmation sont utilisés pour interrompre l’utilisateur lorsqu’il s’apprête à effectuer une action ayant un impact important. Ils ajoutent une friction volontaire afin d’éviter les erreurs, en lui demandant de confirmer explicitement son intention.
----
-
 # Suppression
 
 ## **Contexte d’utilisation**
@@ -37,8 +33,6 @@ Leur rôle est d’éviter les erreurs en rendant l’intention explicite et en 
 
 Le contenu s'adapte au niveau de criticité de l'action et de ses conséquences.
 
----
-
 ## Contenu et rédaction
 
 ### Niveau 1 : impact faible
@@ -47,15 +41,11 @@ Le contenu s'adapte au niveau de criticité de l'action et de ses conséquences.
 * **Description :** « Si vous supprimez la/la {ressource}, {description des conséquences}. »
 * **Boutons :** « Supprimer le/la {ressource} »
 
-
-
 ### Niveau 2 : impact moyen
 
 * **Titre :** « Supprimer le/la {ressource} ? »
 * **Description :** « **La suppression est définitive.** Si vous supprimez la/la {ressource}, {description des conséquences}. »
 * **Boutons :** « Supprimer le/la {ressource} »
-
-
 
 ### Niveau 3 : impact élevé
 
@@ -63,8 +53,6 @@ Le contenu s'adapte au niveau de criticité de l'action et de ses conséquences.
 * **Description :** « **La suppression est définitive.** Si vous supprimez la/la {ressource}, {description des conséquences}. »
 * **Case à cocher :**  « J'ai bien compris les risques * »
 * **Boutons :** « Supprimer le/la {ressource} »
-
-
 
 ### Bonnes pratiques de rédaction
 
@@ -87,8 +75,6 @@ Elle peut apparaître :
 * lors d’un changement de page interrompant une action en cours.
 
 L’objectif est d’éviter toute **perte involontaire de données**, en informant l’utilisateur des conséquences de son action avant qu’elle ne soit confirmée.
-
----
 
 ## Contenu et rédaction
 
@@ -113,8 +99,6 @@ Le contenu de la Dialog reprend ce qui est mentionné dans la guideline sur les 
 | Bouton principal | «  **Quitter sans enregistrer** » en `filled` |
 | Bouton secondaire | « **Reprendre les modifications** » en `outlined` et palette `neutral` |
 
-
-
 ### Avec action de diffusion
 
 Dans un parcours avec action de diffusion, la ressource a déjà été initialisée et existe en base de données. L’enregistrement se fait quand on passe à l’étape suivante.
@@ -133,8 +117,6 @@ Si l'utilisateur tente de sortir (via la croix de fermeture, un clic en dehors d
 | Bouton principal | «  **Enregistrer et quitter** » en `filled` |
 | Bouton secondaire | « **Reprendre les modifications** » en `outlined` et palette `neutral` |
 
-
-
 # Validation
 
 ## **Contexte d’utilisation**
@@ -142,8 +124,6 @@ Si l'utilisateur tente de sortir (via la croix de fermeture, un clic en dehors d
 Les Dialogs de validation sont utilisées pour interpeller l'utilisateur avant l'exécution d'une action importante, sans perte de données, mais avec des conséquences significatives sur un ou plusieurs logiciels.
 
 Elles peuvent aussi interpeller l'utilisateur après la modification de paramètres servant au bon fonctionnement d'un logiciel, pour s'assurer des conséquences.
-
----
 
 ## Contenu et rédaction
 
@@ -153,15 +133,11 @@ Elles peuvent aussi interpeller l'utilisateur après la modification de paramèt
 * **Description :** « Si vous {verbe} le/la {ressource}, {description des conséquences}. »
 * **Boutons :** « {verbe à l'infinitif} le/la {ressource} » / « Annuler »
 
-
-
 ### Niveau 2 : impact moyen
 
 * **Titre :** « {verbe à l'infinitif} le/la {ressource} ? »
 * **Description :** « **Cette action est irréversible.** Si vous {verbe} le/la {ressource}, {description des conséquences}. »
 * **Boutons :** « {verbe à l'infinitif} le/la {ressource} » / « Annuler »
-
-
 
 ### Niveau 3 : impact élevé
 
@@ -169,8 +145,6 @@ Elles peuvent aussi interpeller l'utilisateur après la modification de paramèt
 * **Description :** « **Cette action est irréversible.** Si vous {verbe} le/la {ressource}, {description des conséquences}. »
 * **Case à cocher :** « J'ai bien compris les risques * »
 * **Boutons :** « {verbe à l'infinitif} le/la {ressource} » / « Annuler »
-
-
 
 ### Bonnes pratiques de rédaction
 
@@ -180,8 +154,6 @@ Elles peuvent aussi interpeller l'utilisateur après la modification de paramèt
 * Dans la description, utilisons le conditionnel (« Si... ») et le futur de l'indicatif, pour expliquer les conséquences de l'action. Cela rassure l'utilisateur sur le fait que l'action n'a pas encore été effectuée.
 * Si besoin, les conséquences peuvent être affichées sous forme de liste.
 * La phrase « **Cette action est irréversible.** » doit être en gras. Un saut de ligne la sépare de la description qui suit.
-
----
 
 ## Règles d'utilisation
 

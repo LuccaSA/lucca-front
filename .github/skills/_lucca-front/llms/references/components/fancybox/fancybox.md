@@ -35,7 +35,7 @@ import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 ## Related files
 
 - 📝 [Code & implementation](./fancybox.component.md)
-
+- 🎨 [Design guidelines](./fancybox.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-fancybox-angular-basic--docs)
 
 ## Changelog

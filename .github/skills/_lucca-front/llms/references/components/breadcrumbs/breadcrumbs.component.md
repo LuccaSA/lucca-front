@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-breadcrumbs`
+
 ### Basic
 
 ```js
@@ -19,8 +21,9 @@ import { BreadcrumbsComponent, BreadcrumbsLinkDirective, luBreadcrumbsTranslatio
 </lu-breadcrumbs>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.breadcrumbs`
 
 ### Basic
 

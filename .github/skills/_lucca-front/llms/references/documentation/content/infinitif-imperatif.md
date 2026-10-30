@@ -1,9 +1,5 @@
 # Infinitif ou impératif ?
 
-title: Infinitif ou impératif ?
-description: Le choix dépend de notre intention et du contexte utilisateur. 
----
-
 # Content
 
 ## Principe général
@@ -12,8 +8,6 @@ Infinitif et impératif peuvent être utilisés dans nos logiciels, les deux peu
 
 * **Infinitif** quand nous n'avons pas besoin de nous adresser directement à l'utilisateur. Un verbe à l'infinitif apporte une consigne à la tonalité neutre et impersonnelle. Il présente l'action sans s'adresser à quelqu'un en particulier.
 * **Impératif** quand nous guidons ou informons de manière directe l'utilisateur. Un verbe à l'impératif apporte de l'encouragement ou relaie une instruction, avec une tonalité de proximité. Sur nos interfaces, nous l'utilisons à la 2ème personne du pluriel.
-
----
 
 ## Dans nos interfaces
 

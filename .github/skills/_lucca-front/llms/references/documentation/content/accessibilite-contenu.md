@@ -17,10 +17,6 @@
   - Format web de l’information
   - Ressources sur l’accessibilité
 
-title: Accessibilité
-description: Prenons toujours en compte toute la diversité de nos utilisateurs.
----
-
 # Content
 
 ## Sens et hiérarchie des informations d’une page

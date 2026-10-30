@@ -1,9 +1,5 @@
 # Gestion des erreurs
 
-title: Gestion des erreurs
-description: La gestion des erreurs fait partie intégrante de l’expérience utilisateur d’un formulaire. Elle permet à l’utilisateur de comprendre ce qui bloque la validation, d’identifier rapidement les champs concernés, et de savoir comment corriger l’erreur.
----
-
 # Content
 
 ## Prévention des erreurs
@@ -11,8 +7,6 @@ description: La gestion des erreurs fait partie intégrante de l’expérience u
 En prévention des éventuelles erreurs, le label des champs obligatoires porte systématiquement un astérisque rouge (*).
 
 En plus de cet élément graphique, il faut également ajouter dans le code la propriété `aria-required="true"` sur les champs concernés.
-
----
 
 ## Déclenchement des erreurs
 
@@ -26,8 +20,6 @@ Ces différents états sont gérés grâce aux états `touched`/`invalid` des ch
 
 Une directive disponible prochainement dans Lucca Front, à placer sur les différents champs de formulaires, permettra de gérer le premier exemple du visuel ci-dessus.
 
-
-
 ### À la soumission du formulaire
 
 Dans l’idée d’un design optimiste, le bouton de validation d’un formulaire [doit toujours être actif](https://www.smashingmagazine.com/2021/08/frustrating-design-patterns-disabled-buttons/). On laisse la possibilité à l’utilisateur de cliquer dessus, quand bien même le formulaire n’est pas complet. Les erreurs sont alors remontées à l’utilisateur pour qu’il puisse les corriger.
@@ -36,8 +28,6 @@ Dans l’idée d’un design optimiste, le bouton de validation d’un formulair
 
 - **Do** : Nous affichons toujours le bouton actif.
 - **Don't** : Dans un formulaire, nous n'affichons jamais un bouton inactif.
-
----
 
 ## Affichage des erreurs
 
@@ -48,8 +38,6 @@ L’utilisateur doit pouvoir rapidement se rendre compte des champs en erreur da
 Un message adapté est affiché à côté de chaque champ en erreur en tâchant d'être le plus explicite possible.
 
 Les messages d’erreurs sont supprimés au *change* dès que les champs repassent à un état valide.
-
-
 
 ### Au niveau du formulaire
 

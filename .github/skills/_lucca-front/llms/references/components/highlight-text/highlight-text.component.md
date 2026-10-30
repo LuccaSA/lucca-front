@@ -18,7 +18,6 @@ import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 </h1>
 ```
 
-
 ## HTML/CSS
 
 ### Text sizes

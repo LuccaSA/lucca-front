@@ -13,10 +13,13 @@
   - More
   - Sizes
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-users-avatar-angular-basic--docs)
 
 ## Angular
+
+Mots-clés : photo profil, initiales, utilisateur
+
+Component selector : `lu-user-picture`
 
 ### Basic
 
@@ -268,8 +271,9 @@ import { jake } from '../../user.mocks';
 </ul>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.avatar`
 
 ### Avatars basic
 

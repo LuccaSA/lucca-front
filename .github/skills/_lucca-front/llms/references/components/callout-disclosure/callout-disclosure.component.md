@@ -10,7 +10,6 @@
   - Size
   - Status
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular-basic--docs)
 
 ## Angular
@@ -39,7 +38,6 @@ import { PALETTE } from '@lucca/prisme/core';
 </lu-callout-disclosure>
 ```
 
-
 ## HTML/CSS
 
 ### Basic
@@ -48,9 +46,7 @@ Classe CSS : `.calloutDisclosure`
 
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/calloutDisclosure';
-@forward '@lucca-front/scss/src/components/calloutFeedbackList';
 ```
 
 ```html
@@ -87,9 +83,7 @@ Classe CSS : `.calloutDisclosure`
 
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/calloutDisclosure';
-@forward '@lucca-front/scss/src/components/calloutFeedbackList';
 ```
 
 ```html
@@ -125,9 +119,7 @@ Classe CSS : `.calloutDisclosure`
 
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/calloutDisclosure';
-@forward '@lucca-front/scss/src/components/calloutFeedbackList';
 ```
 
 ```html
@@ -164,9 +156,7 @@ Classe CSS : `.calloutDisclosure`
 
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
 @forward '@lucca-front/scss/src/components/calloutDisclosure';
-@forward '@lucca-front/scss/src/components/calloutFeedbackList';
 ```
 
 ```html

@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-phone-number-input`
+
 ### Number input
 
 ```js

@@ -1,9 +1,5 @@
 # Face au jargon, que faire ?
 
-title: Face au jargon, que faire ?
-description: Éviter le jargon, au profit d’un langage simple, n'est pas toujours facile. Quelques conseils.
----
-
 # Content
 
 Le jargon, c'est le vocabulaire propre à une profession, à une discipline ou à une activité, généralement inconnu de quelqu'un de non initié. 

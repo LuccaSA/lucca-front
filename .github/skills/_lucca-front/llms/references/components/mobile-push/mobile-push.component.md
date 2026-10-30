@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-mobile-push`
+
 ### Push basic
 
 ```js
@@ -20,8 +22,9 @@ import { luMobilePushTranslations, MobilePushComponent } from '@lucca-front/ng/m
 </lu-mobile-push>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.mobilePush`
 
 ### Push basic
 

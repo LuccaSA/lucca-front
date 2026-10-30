@@ -22,7 +22,7 @@ import { TextFlowComponent } from '@lucca-front/ng/text-flow';
 ## Related files
 
 - 📝 [Code & implementation](./text-flow.component.md)
-
+- 🎨 [Design guidelines](./text-flow.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-text-flow-angular-basic--docs)
 
 ## Changelog

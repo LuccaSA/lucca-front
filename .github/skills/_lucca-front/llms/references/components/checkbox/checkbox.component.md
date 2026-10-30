@@ -2,8 +2,13 @@
 
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-checkbox-basic--docs)
 
+## Angular
+
+Component selector : `lu-checkbox-input`
 
 ## HTML/CSS
+
+Classe CSS : `.checkboxField`
 
 ### Basic
 

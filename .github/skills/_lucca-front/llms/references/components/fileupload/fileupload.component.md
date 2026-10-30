@@ -4,6 +4,36 @@
 
 ## Angular
 
+Les stories "Single file" et "Multiple files" simulent un usage avec Lucca Files. Consultez la section Mise en place en bas de page pour vous aider lors de l'implémentation.
+
+## Mise en place
+
+FileUpload is a component designed to manage file uploads. It aims to standardize both the technical and visual
+approaches to file uploads.
+
+### Utilisation
+
+For the purely visual and interactive part, you'll need `lu-single-file-upload` if you only want to manage
+one file at a time, or `lu-multiple-file-upload` if you want to manage multiple files at once.
+
+Both of these components come from `@lucca-front/ng/file-upload`.
+
+In both components, simply connect to the `filePicked` event to retrieve the files sent by the user, these are of
+the native Javascript File type, and each file will emit an event. In the case of multiple selections, an event
+will be emitted per file.
+
+Then, you'll just need to manage the upload of these files via LuccaFiles for most cases.
+
+Once the files are sent, the display management changes depending on the approach, single or multi.
+
+### Details
+
+In both cases, `fileUploadFeature` is simply the SignalStore provided by `@lucca/cdk` for interactions with LuccaFiles,
+`luFileEntry` is a pipe that transforms a `FileUpload` into a `LuccaFileEntry`.
+
+It's also possible to specify a list of accepted files, solely for UX purposes, as the file type is not enforced by the
+browser in any way, this list is an `Array<{ format: string; name?: string; }>`, `name` being used for display only.
+
 ### Basic
 
 Component selector : `lu-single-file-upload`
@@ -11,15 +41,8 @@ Component selector : `lu-single-file-upload`
 Component selector : `lu-multi-file-upload`
 
 ```js
-import { HttpErrorResponse, HttpStatusCode, provideHttpClient } from '@angular/common/http';
-import { Injectable, LOCALE_ID, Pipe, PipeTransform, signal } from '@angular/core';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { FILE_UPLOAD_SIZE, FileEntry, FileEntryComponent, FileEntryWrapperComponent, luFileUploadTranslations, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TextInputComponent } from '@lucca-front/ng/forms';
-import { LuInputDirective } from '@lucca-front/ng/input';
-import { TagComponent } from '@lucca-front/ng/tag';
-import { map, Observable, switchMap, throwError, timer } from 'rxjs';
+import { SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { MultiFileUploadComponent } from '@lucca-front/ng/file-upload';
 ```
 
 ```html

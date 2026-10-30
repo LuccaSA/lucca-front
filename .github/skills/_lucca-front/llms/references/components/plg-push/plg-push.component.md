@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-plg-push`
+
 ### Push basic
 
 ```js
@@ -24,8 +26,9 @@ import { LuPlgPushTranslations, PLGPushComponent } from '@lucca-front/ng/plg-pus
 </lu-plg-push>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.plgPush`
 
 ### Push basic
 

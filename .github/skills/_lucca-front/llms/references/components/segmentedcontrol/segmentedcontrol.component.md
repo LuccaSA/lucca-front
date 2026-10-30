@@ -6,19 +6,22 @@
   - Control tabs
   - Control
 - HTML/CSS
+  - Onglets
   - Control filter
   - Control tabs
-
 
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-segmentedcontrol-angular-tabs--docs)
 
 ## Angular
 
+Mots-clés : tabs, onglets
+
+Component selector : `lu-segmented-control`
+
 ### Control tabs
 
 ```js
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
+import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmentedControlTabs';
 ```
 
 ```html
@@ -42,8 +45,6 @@ import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } fro
 ### Control
 
 ```js
-import { FormsModule } from '@angular/forms';
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 ```
 
@@ -58,8 +59,15 @@ import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@luc
 <pr-story-model-display>{{ sample }}</pr-story-model-display>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.segmentedControl`
+
+Ce composant répond à deux *design pattern* : onglets et filtres.
+
+### Onglets
+
+Les onglets s’appliquent à des données différentes, dont une seule est affichée à la fois.
 
 ### Control filter
 

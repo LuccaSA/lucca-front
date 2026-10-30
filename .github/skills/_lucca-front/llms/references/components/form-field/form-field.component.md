@@ -4,6 +4,10 @@
 
 ## Angular
 
+Mots-clés : champ, formulaire, form-field, input
+
+Component selector : `lu-form-field`
+
 ### Field
 
 ```js
@@ -36,3 +40,7 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 	</div>
 </lu-form-field>
 ```
+
+## HTML/CSS
+
+Classe CSS : `.form-field`

@@ -1,9 +1,5 @@
 # Placeholders
 
-title: Placeholders
-description: Le placeholder est un texte informatif affiché à l'intérieur d'un champ de formulaire vide.
----
-
 # Content
 
 ## Règles générales
@@ -16,8 +12,6 @@ Le placeholder n'est pas un substitut au label. Le label reste l'élément princ
 * Pour donner un **exemple de saisie** (exemple : mdupont@monentreprise.com)
 * Nous ne l’utilisons pas pour indiquer une action à l’utilisateur. Nous évitons ainsi une surcharge visuelle des formulaires avec des placeholders inutiles.
 * **Exception unique :** les champs Select intègrent "Sélectionner…" pour les différencier des champs de saisie libre.
-
----
 
 ## Utilisation dans les composants
 

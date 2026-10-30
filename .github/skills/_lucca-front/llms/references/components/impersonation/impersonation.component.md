@@ -19,7 +19,6 @@ import { ImpersonationComponent, luImpersonationTranslations } from '@lucca-fron
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>
 ```
 
-
 ## HTML/CSS
 
 ### Basic

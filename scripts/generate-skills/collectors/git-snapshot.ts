@@ -153,7 +153,8 @@ function extractInto(dir: string, tag: string, pathspec: string): void {
 	const tarball = `${partial}.tar`;
 	try {
 		fs.mkdirSync(partial, { recursive: true });
-		git(['archive', '--format=tar', '-o', tarball, tag, '--', pathspec]);
+		// `git archive` applies `core.autocrlf` where `git show` does not: both must return the blob as committed.
+		git(['-c', 'core.autocrlf=false', '-c', 'core.eol=lf', 'archive', '--format=tar', '-o', tarball, tag, '--', pathspec]);
 		execFileSync('tar', ['-xf', tarball, '-C', partial], { stdio: ['pipe', 'pipe', 'pipe'] });
 		fs.renameSync(partial, dir);
 	} catch (err) {

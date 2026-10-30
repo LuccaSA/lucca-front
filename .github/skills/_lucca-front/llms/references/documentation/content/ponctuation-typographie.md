@@ -17,10 +17,6 @@
     - Traits d'union, tirets et signes arithmétiques
     - Lokalise
 
-title: Règles de ponctuation, de typographie
-description: Veillons au bon choix des caractères utilisés.
----
-
 # Content
 
 ### Guillemets

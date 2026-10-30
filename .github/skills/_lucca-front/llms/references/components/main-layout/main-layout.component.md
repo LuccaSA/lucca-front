@@ -9,7 +9,6 @@
   - Basic
   - InAppLayout
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-main-layout-angular-basic--docs)
 
 ## Angular
@@ -82,7 +81,6 @@ import { PALETTE, PRODUCT_PALETTE } from '@lucca/prisme/core';
 </lu-app-layout>
 <!-- <lu-toasts /> -->
 ```
-
 
 ## HTML/CSS
 

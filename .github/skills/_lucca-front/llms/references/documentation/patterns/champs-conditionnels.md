@@ -1,9 +1,5 @@
 # Champs conditionnels
 
-title: Champs conditionnels
-description: Un champ conditionnel s'affiche en fonction d'un choix fait en amont dans le formulaire. Il n'apparaît que si ce choix le rend pertinent.
----
-
 # Content
 
 ## Affichage direct ou conditionnel
@@ -18,8 +14,6 @@ L’affichage conditionnel doit être réservé aux champs qui, sans un choix pr
 - **Do** : Affichons directement le champ comme optionnel. L’utilisateur peut choisir de le renseigner ou de le laisser vide, sans étape supplémentaire.
 - **Don't** : N’utilisons pas une Checkbox dont le seul but est de révéler un champ optionnel. Cela ajoute de la friction inutilement.
 
----
-
 ## États du champ
 
 Un champ conditionnel connaît deux états : affiché ou masqué. **Il n'est jamais inactif**. Un champ inactif signale une restriction de droits, pas une absence de pertinence : l'utilisateur cherche alors l'action qui le débloquera, et elle n'existe pas.
@@ -33,8 +27,6 @@ Ici s'applique notre principe Don't make me think :
 
 - **Do** : Affichons le champ seulement au moment où il devient pertinent. L’utilisateur comprend ainsi naturellement la logique du formulaire, sans distraction inutile.
 - **Don't** : N’affichons pas un champ conditionnel de manière inactive. Cela brouille la lecture et donne une impression de blocage.
-
----
 
 ## Affichage dans un formulaire
 

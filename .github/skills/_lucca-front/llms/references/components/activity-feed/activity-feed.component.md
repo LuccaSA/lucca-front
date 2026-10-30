@@ -11,10 +11,11 @@
   - States
   - Updated
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-activity-feed-angular-basic--docs)
 
 ## Angular
+
+Component selector : `lu-activity-feed`
 
 ### Basic
 
@@ -36,8 +37,9 @@ import { ButtonComponent } from '@lucca/prisme/button';
 </lu-activity-feed>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.activityFeed`
 
 ### Add
 

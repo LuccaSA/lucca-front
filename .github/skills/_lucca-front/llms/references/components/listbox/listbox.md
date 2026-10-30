@@ -1,5 +1,18 @@
 # listbox
 
+**Sommaire**
+
+- Import
+- API Reference
+  - ListboxComponent (component)
+  - Treeitem (directive)
+  - OptionComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -53,6 +66,8 @@ import { ListboxComponent, Treeitem, OptionComponent } from '@lucca-front/ng/lis
 | `OPTION_INSTANCE` | `OptionComponent` | — |
 
 ## Related files
+
+- 📝 [Code & implementation](./listbox.component.md)
 
 ## Changelog
 

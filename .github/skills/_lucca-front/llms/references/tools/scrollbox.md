@@ -1,8 +1,5 @@
 # Scrollbox
 
-title: Scrollbox
----
-
 # Content
 
 ## Scrollbox Angular

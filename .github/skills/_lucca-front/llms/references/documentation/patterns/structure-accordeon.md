@@ -1,9 +1,5 @@
 # Structure en accordéon
 
-title: Structure en accordéon
-description: Elle permet d'afficher ou de masquer des sections de contenu. Ce comportement est couramment utilisé pour structurer des informations tout en optimisant l'espace disponible dans une interface utilisateur.
----
-
 # Content
 
 ## Cas d'usage
@@ -14,8 +10,6 @@ Cette interaction est utile dans plusieurs contextes :
 * **Menus et navigations secondaires :** Pour proposer des sous-menus sans surcharger l'interface.
 * **Affichages détaillés :** Permettre aux utilisateurs de consulter des détails spécifiques uniquement lorsqu'ils en ont besoin.
 * **FAQs :** Pour afficher des réponses sur demande sans encombrer l'écran.
-
----
 
 ## Icône et affordance
 
@@ -33,23 +27,15 @@ Toutefois, si le panneau s’ouvre vers le haut plutôt que vers le bas, le sens
 
 Cette convention suit [les recommandations de NNGroup](https://www.nngroup.com/articles/accordion-icons/) afin d’améliorer la compréhension des interactions.
 
-
-
----
-
 ## Comportement
 
 ### Navigation à la souris
 
 Le survol du panneau déroulant doit indiquer à l’utilisateur l’interactivité et l’aspect cliquable. Au clic, le panneau s’ouvre ou se ferme.
 
-
-
 ### Navigation au clavier
 
 De la même manière qu’au survol, il doit être possible de plier/déplier un panneau en naviguant au clavier. Le touche “Entrée” permet d’agir sur le panneau.Utiliser les attributs ARIA (`aria-expanded`, `aria-controls`) pour informer les lecteurs d’écran.
-
-
 
 ### Groupes d’accordéons
 

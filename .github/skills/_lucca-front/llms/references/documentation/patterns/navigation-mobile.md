@@ -47,23 +47,13 @@
     - Affichage du titre
     - Affichage du Grabber
 
-title: Navigation mobile
-description: Découvrez les différents layouts utilisés sur l'application mobile Lucca et leurs cas d’usages associés. Ces layouts se basent sur les recommandations de Material Design (Android) et Human Interface Guidelines (iOS).
----
-
 # Page principale
 
 ## Page principale
 
 La page principale est le premier niveau de navigation dans l’application. Il est possible de naviguer entre les logiciels à l’aide du menu de navigation positionné en bas de l'écran.
 
----
-
 ## Anatomie
-
-
-
----
 
 ## Comportement
 
@@ -73,8 +63,6 @@ La navigation entre des pages principales se fait uniquement au clic sur un des 
 
 Il est impossible de faire un swipe pour changer de page, afin d’éviter des conflits avec les interactions déjà présentes à l’intérieur des pages.
 
----
-
 ## Règles d'utilisation
 
 ### Entrées de la barre de navigation
@@ -83,11 +71,9 @@ Les entrées du menu sont utilisées exclusivement pour naviguer entre les solut
 
 Pour naviguer à travers toutes les solutions, une entrée "Menu" est positionnée à droite de la barre de navigation.
 
-
 ### Nombre d'entrées
 
 Le menu ayant une taille limitée, il doit contenir entre 1 et 4 solutions (en plus de l'entrée "Menu"). 
-
 
 # Page secondaire
 
@@ -95,13 +81,7 @@ Le menu ayant une taille limitée, il doit contenir entre 1 et 4 solutions (en p
 
 La page secondaire est le second niveau de navigation dans l’application. Elle est accessible depuis une page principale ou depuis le menu, et accueille du contenu lié à cette page.
 
----
-
 ## Anatomie
-
-
-
----
 
 ## Comportement
 
@@ -109,19 +89,11 @@ La page secondaire est le second niveau de navigation dans l’application. Elle
 
 L’utilisateur peut revenir à la page précédente au swipe sur le bord gauche de l’écran. Sur iOS, une transition de page lui indique que le swipe est en cours.
 
----
-
 ## Exemples d'usage
 
 Les objets en lecture seule sont affichés dans une page secondaire.
 
-
-
 La page secondaire permet d’afficher tous les éléments d’une liste lorsqu’une pagination est mise en place.
-
-
-
----
 
 ## Règles d'utilisation
 
@@ -129,11 +101,9 @@ La page secondaire permet d’afficher tous les éléments d’une liste lorsqu�
 
 Pour montrer que la page secondaire est une navigation depuis la page principale, nous affichons un chevron indiquant qu'un retour est possible.
 
-
 ### Affichage du menu
 
 Pour aider l’utilisateur à se situer et naviguer dans l’application, nous affichons aussi le menu depuis une page secondaire.
-
 
 # Fullscreen cover
 
@@ -141,13 +111,7 @@ Pour aider l’utilisateur à se situer et naviguer dans l’application, nous a
 
 La Fullscreen cover apparaît au dessus d’une page et occupe toute la hauteur de l’écran. Elle permet de concentrer l’attention de l’utilisateur sur une tâche complexe, une image, un fichier PDF, un plan…
 
----
-
 ## Anatomie
-
-
-
----
 
 ## Comportement
 
@@ -161,21 +125,13 @@ Un message de confirmation est affiché lorsqu’un utilisateur essaie de quitte
 
 Des messages standards de confirmation sont disponibles dans la section Contenu.
 
----
-
 ## Exemples d'usage
 
 Un formulaire complexe comme la déclaration d’un frais kilométrique doit être affiché dans une vue en plein écran pour éviter de perdre des modifications au retour à la page précédente.
 
-
-
 L’affichage d’un bulletin de paie se fait en plein écran pour que l’utilisateur puisse zoomer ou se déplacer dans l’image.
 
-
-
 La Fullscreen cover permet aussi de bloquer l’utilisateur sur une page spécifique, par exemple lors d’une erreur globale sur l’application. Dans ce cas, la barre de navigation n’est pas affichée.
-
-
 
 Ce format doit être utilisé avec parcimonie pour éviter de bloquer totalement l’utilisateur. Une porte de sortie doit toujours être proposée sur ce type d’écran.
 
@@ -187,13 +143,7 @@ La Fullscreen sheet apparaît au dessus d’une page en prenant toute la hauteur
 
 Ce composant n’est pas disponible sur Android. Pour des cas d’usage similaires, la meilleure alternative est d’utiliser une Fullscreen cover.
 
----
-
 ## Anatomie
-
-
-
----
 
 ## Comportement
 
@@ -207,23 +157,13 @@ Il est possible de bloquer le swipe pour éviter que l’utilisateur quitte la p
 
 Il est possible de naviguer au sein d’une même Fullscreen sheet. Dans ce cas, le titre de la barre de navigation peut changer et le bouton "Annuler" est remplacé par un bouton "Retour" indiquant qu'il est possible de revenir à l'étape précédente.
 
-
-
 ## Exemples d'usage
 
 La sélection d’une option parmi une liste longue est idéale dans une Fullscreen sheet. La barre de navigation peut y accueillir des filtres ou une barre de recherche.
 
-
-
 Les formulaires courts peuvent être affichés dans une Fullscreen sheet, tant que leur contenu ne dépasse pas la hauteur de l’écran.
 
-
-
 Certains parcours peuvent être découpés en plusieurs étapes d’une même Fullscreen sheet.
-
-
-
----
 
 ## Règles d'utilisation
 
@@ -231,20 +171,13 @@ Certains parcours peuvent être découpés en plusieurs étapes d’une même Fu
 
 Évitons d’empiler plusieurs Fullscreen sheet : cela complexifie la navigation pour l’utilisateur. Pour afficher du contenu complémentaire, privilégions une navigation à l’intérieur de la Fullscreen sheet.
 
-
 # Bottom sheet
 
 ## Bottom Sheet
 
 La Bottom sheet est affichée au dessus d’une page, mais ne masque pas le contenu derrière. Elle permet d’afficher de brèves informations supplémentaires
 
----
-
 ## Anatomie
-
-
-
----
 
 ## Comportement
 
@@ -262,23 +195,13 @@ Il est possible d’étendre la Bottom sheet pour qu’elle prenne toute la haut
 
 Cette option est recommandée lorsque la Bottom sheet comporte un contenu long ou un contenu secondaire.
 
----
-
 ## Exemples d'usage
 
 La Bottom sheet est principalement utilisée pour afficher des informations complémentaires sur un objet ou un utilisateur.
 
-
-
 Les informations textuelles simples comme des instructions sont affichées dans une Bottom sheet.
 
-
-
 La Bottom sheet peut aussi être utilisée pour informer l’utilisateur lors de la confirmation d’une action importante.
-
-
-
----
 
 ## Règles d'utilisation
 
@@ -288,11 +211,9 @@ Sur iOS, la hauteur de la Bottom sheet est fixée à la moitié de la hauteur de
 
 Sur Android, la Bottom sheet prend la hauteur de son contenu.
 
-
 ### Affichage du titre
 
 Le titre est facultatif : ne l'affichons pas si il n’apporte aucune information supplémentaire ou s’il est redondant avec le contenu en dessous.
-
 
 ### Affichage du Grabber
 

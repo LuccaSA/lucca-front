@@ -54,7 +54,7 @@ import { LuToastsComponent } from '@lucca-front/ng/toast';
 ## Related files
 
 - 📝 [Code & implementation](./toasts.component.md)
-
+- 🎨 [Design guidelines](./toasts.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-toasts--docs)
 
 ## Changelog

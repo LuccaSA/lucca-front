@@ -2,8 +2,15 @@
 
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-newbadge-angular-basic--docs)
 
+## Angular
+
+Mots-clés : nouveau, nouveauté
+
+Component selector : `lu-new-badge`
 
 ## HTML/CSS
+
+Classe CSS : `.newBadge`
 
 ### Badge
 

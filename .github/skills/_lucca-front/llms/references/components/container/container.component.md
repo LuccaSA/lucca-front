@@ -4,6 +4,10 @@
 
 ## Angular
 
+Mots-clés : conteneur, wrapper
+
+Component selector : `lu-container`
+
 ### Basic
 
 ```js
@@ -22,8 +26,9 @@ import { CONTAINER_SIZE, ContainerComponent } from '@lucca-front/ng/container';
 </lu-container>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.container`
 
 ### Basic
 

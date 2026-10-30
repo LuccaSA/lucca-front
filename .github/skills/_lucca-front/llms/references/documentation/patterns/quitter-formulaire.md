@@ -1,9 +1,5 @@
 # Quitter un formulaire
 
-title: Quitter un formulaire
-description: Lorsqu'un utilisateur quitte un formulaire en cours d'édition, il peut être nécessaire de lui demander confirmation.
----
-
 # Content
 
 ## **Contexte d’utilisation**
@@ -16,10 +12,6 @@ Elle peut apparaître :
 * lors d’un changement de page interrompant une action en cours.
 
 L’objectif est d’éviter toute **perte involontaire de données**, en informant l’utilisateur des conséquences de son action avant qu’elle ne soit confirmée.
-
-
-
----
 
 ## Contenu et rédaction
 

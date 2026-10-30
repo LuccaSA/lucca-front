@@ -42,7 +42,7 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 ## Related files
 
 - 📝 [Code & implementation](./plg-push.component.md)
-
+- 🎨 [Design guidelines](./plg-push.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-plg-push-angular-basic--docs)
 
 ## Changelog

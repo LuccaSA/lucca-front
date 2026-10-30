@@ -12,10 +12,15 @@
   - Basic
   - WithoutIcons
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-dropdown-angular-basic--docs)
 
 ## Angular
+
+Mots-clés : menu déroulant, actions contextuelles
+
+Directive selector : `luDropdown`
+
+Depuis la version [20.3](https://github.com/LuccaSA/lucca-front/releases/tag/v20.3.0), l'utilisation de `<lu-dropdown>` a été dépréciée au profit d'un template pour des questions de performances.
 
 ### Basic
 
@@ -211,7 +216,6 @@ import { PopoverPosition } from '@lucca-front/ng/popover2';
 	</ng-template>
 </div>
 ```
-
 
 ## HTML/CSS
 

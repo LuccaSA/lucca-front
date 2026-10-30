@@ -5,6 +5,7 @@
 - Angular
   - Basic
 - HTML/CSS
+  - Ellipse
   - Basic
   - Disabled
   - Feedback
@@ -13,10 +14,13 @@
   - Small
   - Unkillable
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-chip-angular-basic--docs)
 
 ## Angular
+
+Mots-clés : étiquette, filtres
+
+Component selector : `lu-chip`
 
 ### Basic
 
@@ -29,8 +33,13 @@ import { LuccaIcon } from '@lucca-front/icons';
 <lu-chip (kill)="kill($event)">Label</lu-chip>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.chip`
+
+### Ellipse
+
+Il est nécessaire d'ajouter une balise `span` avec l'utilitaire `u-ellipsis` ainsi qu'une largeur autour du label afin d'obtenir une ellipse.
 
 ### Basic
 

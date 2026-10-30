@@ -4,6 +4,10 @@
 
 ## Angular
 
+Mots-clés : séparateur, ligne, horizontale, hr
+
+Component selector : `lu-divider`
+
 ### Basic
 
 ```js
@@ -16,8 +20,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 <lu-divider>Text</lu-divider>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.divider`
 
 ### Basic
 

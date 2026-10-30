@@ -44,7 +44,7 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 ## Related files
 
 - 📝 [Code & implementation](./footer.component.md)
-
+- 🎨 [Design guidelines](./footer.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-cards-footer--docs)
 
 ## Changelog

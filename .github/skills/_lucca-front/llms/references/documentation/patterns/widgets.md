@@ -1,16 +1,8 @@
 # Widgets
 
-title: Widgets
-description: Un widget, sur la page d'accueil de Lucca, est un composant autonome qui affiche des informations pertinentes et peut proposer des interactions directes.
----
-
 # Design
 
 ## Anatomie
-
-
-
----
 
 ## Options
 
@@ -20,13 +12,9 @@ L’option filtres permet à l’utilisateur de filtrer les données affichées 
 
 Il est recommandé de persister les filtres sélectionnés (le filtre est mémorisé et appliqué à la prochaine visite), mais ce comportement est laissé à l’appréciation de chaque équipe.
 
-
-
 ### Pagination
 
 L’option pagination permet à l’utilisateur de faire **défiler horizontalement** une liste d’objets identiques dans un widget.
-
-
 
 ### Déploiement
 
@@ -36,11 +24,7 @@ La hauteur maximum du widget lors du déploiement est de 320px.
 
 ⚠️ Cette option est à utiliser avec précaution pour éviter d'afficher trop d'informations et de surcharger la page d'accueil.
 
-
-
 Dans le cas où des filtres appliqués ne donnent aucun résultat, l’icône de déploiement est maintenue pour éviter les sauts de mise en page.
-
-
 
 - **Don't** : L’option pagination et déploiement ne peuvent pas cohabiter.
 
@@ -57,17 +41,11 @@ Suite au clique la consultation se fait dans le même onglet.
 - **Don't** : N’affichons pas de lien au survol du titre du widget.
 - **Do** : Affichons un lien sur le nom de l’objet pour permettre à l’utilisateur d’être redirigé vers cet objet.
 
----
-
 ## Spécifications
 
 Les widgets sont conçus pour être utilisés uniquement sur la page d'accueil et non à l'intérieur des solutions. L'affichage des widgets sur la page d'accueil peut se faire en colonne ou en grille.
 
 L’espacement entre ces widgets est de 16px horizontalement et verticalement.
-
-
-
-
 
 # Content
 

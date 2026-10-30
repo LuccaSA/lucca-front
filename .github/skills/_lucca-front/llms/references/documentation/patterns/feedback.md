@@ -11,21 +11,11 @@
   - Empty state
   - Toast
 
-title: Feedback
-description: Les composants de feedback sont essentiels pour améliorer l'expérience utilisateur en fournissant des informations opportunes et pertinentes.
----
-
 # Content
-
----
 
 ## Animations
 
 Dans de nombreux cas, le feedback peut être intégré directement dans l'interface par l'apparition ou la disparition d'objets suite à une création, suppression ou un traitement spécifique sur l’objet. Cela permet une expérience plus fluide et évite la surcharge d'informations.
-
-
-
----
 
 ## Button
 
@@ -42,10 +32,6 @@ Dans de nombreux cas, le feedback peut être intégré directement dans l'interf
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Button.
 
-
-
----
-
 ## Inline message
 
 **Quand l'utiliser :**
@@ -59,10 +45,6 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Button.
 * Gardez le message concis et clair, en fournissant des indications précises sur la façon de corriger une erreur
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Inline message.
-
-
-
----
 
 ## Dialog
 
@@ -79,10 +61,6 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Inline 
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Dialog. Si vous voulez en savoir plus sur les comportements attendus lorsqu’un objet est supprimé, vous pouvez consulter la guideline à ce sujet.
 
-
-
----
-
 ## Callout
 
 **Quand l'utiliser :**
@@ -97,10 +75,6 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Dialog.
 * Utilisez des couleurs et des icônes pour attirer l'attention sans perturber l'utilisateur.
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Callout.
-
-
-
----
 
 ## Empty state
 
@@ -119,10 +93,6 @@ Pour en savoir plus, vous pouvez consulter la guideline sur le composant Callout
 * Incluez des boutons ou des liens pour des actions possibles.
 
 Pour en savoir plus, vous pouvez consulter la guideline sur le composant Empty state.
-
-
-
----
 
 ## Toast
 

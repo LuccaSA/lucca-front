@@ -10,7 +10,6 @@
   - Picker basic
   - Picker range
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-time-angular-basic--docs)
 
 ## Angular
@@ -90,7 +89,6 @@ import { luTimeRangePickerTranslations, TimePickerComponent, TimeRangePickerComp
 
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>
 ```
-
 
 ## HTML/CSS
 

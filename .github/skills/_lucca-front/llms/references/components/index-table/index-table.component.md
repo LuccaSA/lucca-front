@@ -3,6 +3,7 @@
 **Sommaire**
 
 - Angular
+  - Lien vers un nouvelle page
   - Actions
   - Basic
   - Scrollbox
@@ -35,10 +36,17 @@
   - Table stackable
   - Table sticky header
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
 
 ## Angular
+
+Component selector : `lu-index-table`
+
+Le comportement *responsive* du composant n’est pas encore pris en charge dans sa version Angular.
+
+### Lien vers un nouvelle page
+
+Dans un tableau, privilégiez l'attribut `external` sur vos liens. L'icône associée n'est alors visible qu'au survol : le tableau la masque automatiquement pour ne pas surcharger des cellules souvent denses.
 
 ### Actions
 
@@ -237,8 +245,11 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 </lu-index-table>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.indexTable`
+
+Le lien (ou bouton) redirigeant vers la version plus détaillée d'une ligne de l'indexTable doit être renseigné sur l'élément `indexTable-body-row-cell-link`. Ce lien est automatiquement étendu sur toute les cellules de la ligne pour les interactions au clic et prend le focus à la navigation clavier.
 
 ### Table actions dropdown
 
@@ -2340,8 +2351,7 @@ Le clic sur la cellule est automatiquement désactivée par le tooltip. Il est p
 
 ```css
 @forward '@lucca-front/scss/src/components/indexTable';
-@forward '@lucca-front/scss/src/components/button';
-@forward '@lucca-front/scss/src/components/tableSortable';
+@forward '@lucca-front/scss/src/components/tableSortable'; // Import additionnel
 ```
 
 ```html

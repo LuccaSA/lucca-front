@@ -1,9 +1,5 @@
 # Actions de suppression
 
-title: Actions de suppression
-description: Les produits Lucca manipulent des ressources bien précises parfois amenés à être supprimés, ce qui peut engendrer de potentielles erreurs ou dysfonctionnements. La suppression de ces objet est donc un sujet sensible.
----
-
 # Content
 
 ## Niveaux de friction
@@ -18,8 +14,6 @@ Si l’objet peut être recréé rapidement, aucune confirmation n’est requise
 
 Pour les suppressions dont l’impact est plus important, une Dialog interrompt l’utilisateur. Cela ajoute une friction supplémentaire, l’obligeant à valider explicitement l’action avant de continuer.
 
-
-
 ### Double confirmation
 
 La suppression impacte d’autres objets et/ou il est impossible de recréer exactement le même objet. Une demande de confirmation apparaît systématiquement pour demander confirmation à l’utilisateur. Une mesure de sécurité supplémentaire permet à l’utilisateur de certifier ce qu’il fait : une case à cocher (non cochée par défaut).
@@ -27,10 +21,6 @@ La suppression impacte d’autres objets et/ou il est impossible de recréer exa
 Le message doit préciser le caractère définitif de la suppression, le caractère critique de l’action et l’impact que cela a sur les autres ressources.
 
 **⚠️**  Il est préférable d’opter pour un système d’archivage pour ce type de données/ressources. Un système d’archivage permet de mieux sécuriser le bon fonctionnement du produit.
-
-
-
----
 
 ## **Comportement**
 
@@ -40,11 +30,7 @@ Une variante spécifique du bouton doit être utilisée pour toute action aux co
 
 Ce bouton critique est identifiable par sa couleur `Critical`.
 
-
-
 Dans certains contexte, il est préférable de mettre en retrait l’action de suppression. Pour cela il existe un `mod-delete` permettant de n’avoir l’aspect critique seulement au survol du composant. Ce mode est utilisable sur les boutons`Outlined`et `Ghost`en palette`Neutral`.
-
-
 
 Dans un Footer, l’action de destruction doit être systématiquement isolée à l'extrême gauche. Cette rupture d'alignement sert de garde-fou visuel et physique (Fitts's Law) pour prévenir toute perte de donnée accidentelle.
 

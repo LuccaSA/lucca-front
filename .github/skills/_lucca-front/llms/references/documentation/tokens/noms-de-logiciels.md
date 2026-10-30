@@ -1,9 +1,5 @@
 # Noms des logiciels
 
-title: Noms des logiciels
-description: Référentiel multilingue des noms de logiciels Lucca, destiné à assurer une terminologie cohérente dans les produits, interfaces et supports.
----
-
 # Content
 
 ## All products

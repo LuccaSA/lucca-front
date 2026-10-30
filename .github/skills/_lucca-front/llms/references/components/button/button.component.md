@@ -8,6 +8,8 @@
   - Counter
   - Icon
 - HTML/CSS
+  - Attributs
+  - Navigation clavier
   - Block
   - Counter
   - Disabled
@@ -21,10 +23,11 @@
   - With arrow
   - With icon
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-actions-button-angular-ai--docs)
 
 ## Angular
+
+Component selector : `luButton`
 
 ### Ai
 
@@ -45,8 +48,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 La directive `luButton` peut être utilisée sur un élément `<button>`, tout comme sur un élément `<a>` si le style du bouton nécessite d'être appliqué sur ce dernier.
 
 ```js
-import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca/prisme/button';
-import { PALETTE } from '@lucca/prisme/core';
+import { ButtonComponent } from "@lucca-front/ng/button";
 ```
 
 ```html
@@ -56,9 +58,8 @@ import { PALETTE } from '@lucca/prisme/core';
 ### Counter
 
 ```js
-import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-front/ng/button';
+import { ButtonComponent } from "@lucca-front/ng/button";
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html
@@ -71,9 +72,8 @@ import { PALETTE } from '@lucca/prisme/core';
 ### Icon
 
 ```js
-import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-front/ng/button';
+import { ButtonComponent } from "@lucca-front/ng/button";
 import { IconComponent } from '@lucca-front/ng/icon';
-import { PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html
@@ -83,8 +83,17 @@ import { PALETTE } from '@lucca/prisme/core';
 </button>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.button`
+
+### Attributs 
+
+Le `type` est obligatoire (`button`, `submit` ou `reset`)
+
+### Navigation clavier
+
+*Entrée* / *espace* (au focus) : Déclenche l'action liée.
 
 ### Block
 
@@ -145,7 +154,7 @@ import { PALETTE } from '@lucca/prisme/core';
 
 ```css
 @forward '@lucca-front/scss/src/components/button';
-@forward '@lucca-front/scss/src/components/buttonGroup';
+@forward '@lucca-front/scss/src/components/buttonGroup'; // Import suppémentaire
 ```
 
 ```html

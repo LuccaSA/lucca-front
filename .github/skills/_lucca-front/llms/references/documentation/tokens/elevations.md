@@ -1,9 +1,5 @@
 # Élévations
 
-title: Élévations
-description: La notion d’élévation permet d’établir une hiérarchie entre les différentes surfaces d’une même interface. Une utilisation judicieuse des couleurs d’arrière-plan et des ombrages permet de construire cette hiérarchie.
----
-
 # Principes
 
 ## **Types d’élévation**
@@ -14,15 +10,11 @@ C’est la plus basse élévation disponible. Elle est utilisée pour créer un 
 
 Il s’agit du style :`--pr-t-elevation-surface-sunken`
 
-
-
 ### **Default**
 
 Il s’agit de l’arrière-plan par défaut des interfaces Lucca.
 
 Il s’agit du tokens :`--pr-t-elevation-surface-default`
-
-
 
 ### **Raised**
 
@@ -32,15 +24,11 @@ Ce niveau d’élévation combine les tokens :`--pr-t-elevation-surface-raised``
 
 Au survol, ce niveau d’élévation reprend les tokens :`--pr-t-elevation-surface-raised``--pr-t-elevation-shadow-overlay`
 
-
-
 ### **Overflow**
 
 L'overflow indique que le contenu a défilé en-dessous d’une surface. Il peut être utilisé pour le défilement vertical ou horizontal. Il est utilisé pour les composants comme le banner ou le footer, mais aussi pour le défilement horizontal de certains tableaux.
 
 Il s’agit du token :`--pr-t-elevation-shadow-overflow`
-
-
 
 ### **Overlay**
 
@@ -48,25 +36,17 @@ C’est le niveau d’élévation le plus haut possible. Il est réservé à des
 
 Ce niveau d’élévation combine les tokens :`--pr-t-elevation-surface-raised``--pr-t-elevation-shadow-overlay`
 
-
-
 Un backdrop s’ajoute automatiquement à l’ouverture d’une dialog. Il s’agit d’une ombre de la taille de la zone d’affichage.
 
 Ce niveau d’élévation porte le token :`--pr-t-elevation-surface-backdrop`
 
 À noter que ce token n'existe pas sur Figma puisque le backdrop est directement porté parle composant Dialog.
 
-
-
 ### Button
 
 Les boutons utilisent un tokens d'élévation spécifique. Ce token s'applique aux Button et aux Filter pills.
 
 Il s’agit du tokens :`--pr-t-elevation-shadow-button`
-
-
-
----
 
 ## Comportement
 

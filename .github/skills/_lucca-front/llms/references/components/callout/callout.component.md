@@ -17,7 +17,6 @@
   - Killable
   - Title
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-angular-ai--docs)
 
 ## Angular
@@ -110,10 +109,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 Component selector : `lu-callout`
 
 ```js
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { CALLOUT_HX, CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutStates, luCalloutTranslations } from '@lucca-front/ng/callout';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { PALETTE } from '@lucca/prisme/core';
+import { CalloutComponent } from "@lucca-front/ng/callout";
+import { CalloutActionsComponent } from '@lucca-front/ng/callout'; /* [v20.3] Si <lu-callout-action> est utilisé */
 ```
 
 ```html
@@ -121,7 +118,6 @@ import { PALETTE } from '@lucca/prisme/core';
 	<p>Feedback description</p>
 </lu-callout>
 ```
-
 
 ## HTML/CSS
 
@@ -131,7 +127,6 @@ Classe CSS : `.callout`
 
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
 ```
 
 ```html
@@ -154,7 +149,6 @@ Classe CSS : `.callout`
 
 ```css
 @forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/button';
 ```
 
 ```html

@@ -1,24 +1,5 @@
 # Emails
 
-**Sommaire**
-
-- Content
-  - La structure des emails
-    - 1. Expéditeur
-    - 2. Objet du mail
-    - 3. En-tête du mail
-  - Règles de rédaction du message
-    - Contenu
-    - Mise en forme
-  - Types de mails
-    - Mail d’action
-    - Mail d’information
-    - Mail d'information ou d’action pour une groupe
-
-title: Emails
-description: Les emails fournissent des informations essentielles pour l'utilisation des logiciels Lucca.
----
-
 # Content
 
 ## La structure des emails
@@ -69,8 +50,6 @@ La catégorie permet d'identifier **instantanément** le type d'action ou d’in
 * Dates : `Demande du 05/03/2024`
 * Détails spécifiques : `Facture restaurant 45€`
 
----
-
 ## Règles de rédaction du message
 
 ### Contenu
@@ -85,8 +64,6 @@ La catégorie permet d'identifier **instantanément** le type d'action ou d’in
 * **Saut de ligne** avant chaque nouveau paragraphe.
 * **Jamais de retour à la ligne simple** (sauf dans les listes).
 
----
-
 ## Types de mails 
 
 ### Mail d’action
@@ -100,8 +77,6 @@ La catégorie permet d'identifier **instantanément** le type d'action ou d’in
 
 **Action possible :** depuis le mail ou en se connectant au logiciel.
 
-
-
 ### Mail d’information
 
 **Objectif :** transmettre une information sur un événement.
@@ -112,8 +87,6 @@ La catégorie permet d'identifier **instantanément** le type d'action ou d’in
 * Carte expédiée.
 
 **Caractéristiques :** destinataire unique. Le message se suffit généralement en lui-même.
-
-
 
 ### Mail d'information ou d’action pour une groupe
 

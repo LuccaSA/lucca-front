@@ -2,7 +2,6 @@
 
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-mobilenavigation-basic--docs)
 
-
 ## HTML/CSS
 
 ### Navigation basic

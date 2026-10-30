@@ -31,7 +31,6 @@
   - Selectable
   - Selected
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-approbation-inbox-angular-detail--docs)
 
 ## Angular
@@ -93,7 +92,6 @@ import { IconComponent } from '@lucca/prisme/icon';
 </lu-approbation-inbox-list>
 <lu-approbation-inbox-detail #detailRef />
 ```
-
 
 ## HTML/CSS
 

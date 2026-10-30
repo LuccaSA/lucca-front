@@ -4,9 +4,6 @@
 
 - Content
 
-title: Animations
----
-
 # Content
 
 **Exemple : Fade**

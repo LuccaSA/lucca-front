@@ -2,6 +2,7 @@
 
 **Sommaire**
 
+- Angular
 - HTML/CSS
   - Align
   - Circle
@@ -11,11 +12,19 @@
   - Titles
   - Width
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-skeleton--docs)
 
+## Angular
+
+Mots-clés : placeholder, chargement, loading
 
 ## HTML/CSS
+
+Classe CSS : `.skeleton`
+
+La classe `.skeleton` englobe les différents éléments enfants (`.skeleton-item`) qui seront affichés lors de la phase de chargement. 
+
+Le statut `.is-loading` active l'état de chargement des éléments enfants.
 
 ### Align
 
@@ -34,10 +43,6 @@
 ### Circle
 
 Les formes permettent de marquer le chargement de certains éléments spécifiques comme les [avatars](https://prisme.lucca.io/94310e217/p/42b330-avatar).
-
-
-
-
 
 Il est possible de contrôler les taille des formes plus précisement via les variables `--components-skeleton-shape-height` et `--components-skeleton-shape-width`.
 
@@ -60,8 +65,6 @@ Il est possible de contrôler les taille des formes plus précisement via les va
 
 L'option sombre permet d'optimiser l'affichage du skeleton sur un fond gris. 
 
-
-
 `.mod-dark` peut être utilisé sur `skeleton-item` pour une mise en forme plus fine.
 
 ```css
@@ -78,10 +81,6 @@ L'option sombre permet d'optimiser l'affichage du skeleton sur un fond gris.
 ### Square
 
 Les formes permettent de marquer le chargement de certains éléments spécifiques comme les [avatars](https://prisme.lucca.io/94310e217/p/42b330-avatar).
-
-
-
-
 
 Il est possible de contrôler les taille des formes plus précisement via les variables `--components-skeleton-shape-height` et `--components-skeleton-shape-width`.
 

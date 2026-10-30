@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-footer`
+
 ### Basic
 
 ```js
@@ -19,8 +21,9 @@ import { FOOTER_CONTAINER_MAX, FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } fro
 </lu-footer>
 ```
 
-
 ## HTML/CSS
+
+Classe CSS : `.footer`
 
 ### Footer
 

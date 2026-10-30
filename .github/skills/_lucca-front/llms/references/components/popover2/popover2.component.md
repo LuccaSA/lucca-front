@@ -5,7 +5,6 @@
 - Angular
   - Popover2
 
-
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover2-angular--docs)
 
 ## Angular

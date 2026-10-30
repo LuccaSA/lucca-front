@@ -13,10 +13,6 @@
     - Pour les designers
     - Mobile ou desktop-first ?
 
-title: Responsive design
-description: Le design responsive est un enjeu majeur pour rendre nos interfaces utilisables par un panel d'utilisateurs aux contextes très différents.
----
-
 # Introduction
 
 ⏱ **TL;DR**
