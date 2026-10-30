@@ -25,9 +25,11 @@ import { configureLuPopover, luPopoverTranslations, PopoverDirective } from '@lu
 	<button
 		luButton
 		[luPopover2]="contentRef"
-		luPopoverCloseDelay="300"
+		luPopoverCloseDelay="100"
 		luPopoverOpenDelay="300"
 		luPopoverPosition="above"
+		(luPopoverOpened)="luPopoverOpened()"
+		(luPopoverClosed)="luPopoverClosed()"
 	>
 		Cliquez-moi !
 	</button>
@@ -87,8 +89,10 @@ examplePosition:
 	luButton
 	[luPopover2]="contentRef"
 	[customPositions]="examplePosition"
-	luPopoverCloseDelay="300"
+	luPopoverCloseDelay="100"
 	luPopoverOpenDelay="300"
+	(luPopoverOpened)="luPopoverOpened()"
+	(luPopoverClosed)="luPopoverClosed()"
 >
 	Cliquez-moi !
 </button>

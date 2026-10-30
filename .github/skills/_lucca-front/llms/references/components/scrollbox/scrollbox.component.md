@@ -1,6 +1,6 @@
 # scrollbox — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-scrollbox--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-scrollbox-angular--docs)
 
 ## Angular
 

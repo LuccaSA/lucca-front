@@ -49,10 +49,10 @@ import { ResourceCardButtonComponent, ResourceCardLinkComponent, ResourceCardCom
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `draggable` | `draggable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `draggable` | `draggable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend la carte déplaçable. |
 | `grid` | `grid` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `headingLevel` | `headingLevel` | `'1' \| '2' \| '3' \| '4' \| '5' \| '6'` | `'3'` | — | — | — |
-| `size` | `size` | `ResourceCardSize \| null` | `null` | — | — | — |
+| `headingLevel` | `headingLevel` | `'1' \| '2' \| '3' \| '4' \| '5' \| '6'` | `'3'` | — | — | Niveau sémantique du titre de la carte. |
+| `size` | `size` | `ResourceCardSize \| null` | `null` | — | — | Modifie la taille de la carte. |
 
 ### ResourceCardWrapperComponent (component)
 
@@ -63,8 +63,8 @@ import { ResourceCardButtonComponent, ResourceCardLinkComponent, ResourceCardCom
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `grid` | `grid` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `draggable` | `draggable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `size` | `size` | `ResourceCardSize \| null` | `null` | — | — | — |
+| `draggable` | `draggable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend la carte déplaçable. |
+| `size` | `size` | `ResourceCardSize \| null` | `null` | — | — | Modifie la taille de la carte. |
 
 ## Related files
 
