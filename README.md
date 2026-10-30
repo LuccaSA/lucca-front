@@ -169,6 +169,14 @@ apm install
 
 The skill is deployed under `.claude/skills/lucca-front/` (and `.github/skills/` for Copilot). It is a pointer to the documentation of the installed package, so there is nothing to change when you update Lucca Front.
 
+If you prefer to pin the skill to a release, add a tag to the path. Any tag that ships the pointer works, whatever your installed version:
+
+```yaml
+dependencies:
+  apm:
+    - LuccaSA/lucca-front/.github/skills/lucca-front#vX.Y.Z
+```
+
 > Already using `lucca-front-<M>-<m>` or `lucca-front-all`? Those folders no longer exist on `master`. If your installed package ships `llms.txt`, switch to the line above. Otherwise, pin your current path on `#v22.1.0` until you update. See [Migrating from the per-minor paths](scripts/generate-skills/README.md#depuis-les-anciens-chemins-par-mineure).
 
 Other skills (migrations, deprecated APIs…) are listed in [.github/skills/README.md](.github/skills/README.md).
