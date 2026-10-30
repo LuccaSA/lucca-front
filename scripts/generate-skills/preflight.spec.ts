@@ -47,6 +47,10 @@ describe('refusePartialRunOnNewMinor', () => {
 		expect(refusePartialRunOnNewMinor(requested, committed, partialFlags)).toBeNull();
 	});
 
+	it('refuses a single-component run that moves the skill to a new minor', () => {
+		expect(refusePartialRunOnNewMinor('v22.1', '22.0', ['--component button'])).toContain('--component button : la skill passe de 22.0 à v22.1');
+	});
+
 	it('refuses a partial run that moves the skill to a new minor', () => {
 		expect(refusePartialRunOnNewMinor('22.1', '22.0', ['--skip-documentation', '--skip-tools'])).toContain('--skip-documentation, --skip-tools : la skill passe de 22.0 à 22.1');
 	});

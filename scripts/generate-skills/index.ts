@@ -365,8 +365,9 @@ async function main(): Promise<void> {
 		flags.skipTools && '--skip-tools',
 		flags.skipSchematics && '--skip-schematics',
 		flags.documentationOnly && '--documentation-only',
+		flags.component && `--component ${flags.component}`,
 	].filter((flag): flag is string => !!flag);
-	const partialRefusal = flags.dryRun || flags.component ? null : refusePartialRunOnNewMinor(flags.versions[0], committed?.minor ?? null, partialFlags);
+	const partialRefusal = flags.dryRun ? null : refusePartialRunOnNewMinor(flags.versions[0], committed?.minor ?? null, partialFlags);
 	if (partialRefusal) {
 		console.error(`❌ ${partialRefusal}`);
 		process.exit(1);

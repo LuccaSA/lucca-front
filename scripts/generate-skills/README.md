@@ -62,7 +62,7 @@ npx ts-node ... --validate
 | Flag | Description |
 |------|-------------|
 | `--version <M.m>` | **Mineure** à générer (ex: `22.1`) — `references/` reflète son dernier patch publié, `fixes/` porte les deltas par patch. Une version patch complète est refusée, comme une mineure que la branche ne peut pas porter (cf. [Phase 0](#phase-0--la-mineure-de-la-branche-preflightts-non-interactif)). **Requis, une seule fois** (sauf avec `--validate` et `--retry-failed`). |
-| `--component <slug>` | Générer uniquement ce composant (n'écrit pas le SKILL.md ni la doc transverse) |
+| `--component <slug>` | Générer uniquement ce composant (n'écrit pas le SKILL.md ni la doc transverse). Refusé quand la skill change de mineure : le composant serait seul dans la nouvelle. |
 | `--skip-figma` | Ignorer la collecte Figma |
 | `--skip-zeroheight` | Ignorer la collecte ZeroHeight |
 | `--skip-documentation` | Ignorer la doc transverse (tokens, contenu, guidelines, patterns, deprecated) |

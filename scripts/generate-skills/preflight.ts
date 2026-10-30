@@ -67,12 +67,13 @@ export function isNewMinor(requested: string, committed: string | null): boolean
 
 /**
  * Moving the skill to a new minor empties references/ and fixes/ before regenerating them (see
- * clearSkillContent), so the pages a partial run skips would be missing from the new minor.
+ * clearSkillContent), so the pages a partial run skips would be missing from the new minor. A
+ * --component run clears nothing: it would mix pages of both minors.
  */
 export function refusePartialRunOnNewMinor(requested: string, committed: string | null, partialFlags: string[]): string | null {
 	if (committed === null || partialFlags.length === 0 || !isNewMinor(requested, committed)) return null;
 	return (
-		`${partialFlags.join(', ')} : la skill passe de ${committed} à ${requested}, ce run vide references/ et fixes/ et ne régénérerait pas les pages que ces options sautent. ` +
+		`${partialFlags.join(', ')} : la skill passe de ${committed} à ${requested}, toutes ses pages doivent être régénérées et ces options en sautent une partie. ` +
 		`Relance sans elles.`
 	);
 }
