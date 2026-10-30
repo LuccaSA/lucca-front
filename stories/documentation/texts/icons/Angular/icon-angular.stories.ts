@@ -4,27 +4,34 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 
 export default {
-	title: 'Documentation/Texts/Icons/Angular',
+	title: 'Documentation/Texts/Icons/Angular/Basic',
 	component: IconComponent,
 	argTypes: {
 		alt: {
 			description: 'Information restituée par le lecteur d’écran.',
+			table: { category: 'inputs' },
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
 			control: 'select',
 			description: 'Modifie le glyphe de l’icône.',
+			table: { category: 'inputs' },
 		},
 		color: {
-			options: setStoryOptions(ICON_COLOR),
+			options: ICON_COLOR,
+			control: {
+				type: 'select',
+			},
 			if: { arg: 'AI', truthy: false },
 			description: 'Modifie la couleur de l’icône.',
+			table: { category: 'inputs', defaultValue: { summary: 'inherit' } },
 		},
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		size: {
 			options: setStoryOptions(ICON_SIZE),
@@ -32,6 +39,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 } as Meta;

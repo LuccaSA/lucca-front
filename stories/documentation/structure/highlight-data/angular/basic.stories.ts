@@ -72,6 +72,11 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			description: 'Affiche la valeur avant le titre.',
 			table: { category: 'inputs' },
 		},
+		nested: {
+			type: 'boolean',
+			description: 'Affiche le composant en mode imbriqué.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
 		size: {
 			options: setStoryOptions(HIGHLIGHT_DATA_SIZE),
 			control: {
@@ -85,8 +90,8 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie le fond du composant (<code>white</code> par défaut).',
-			table: { category: 'inputs' },
+			description: 'Modifie le fond du composant.',
+			table: { category: 'inputs', defaultValue: { summary: 'white' } },
 		},
 		palette: {
 			options: setStoryOptions(HIGHLIGHT_DATA_PALETTE),
@@ -94,7 +99,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 				type: 'select',
 			},
 			description: 'La palette influence également la couleur des bubbles.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'lucca' } },
 		},
 		action: {
 			options: ['', 'button', 'link'],
@@ -102,7 +107,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 				type: 'select',
 			},
 			description: '[Story] Ajoute une action (bouton ou lien), projetée dans le composant.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 	},
 
@@ -112,6 +117,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		bubble: 1,
 		illustration: 'piggy-bank',
 		valueFirst: false,
+		nested: false,
 		subText: '',
 	},
 };

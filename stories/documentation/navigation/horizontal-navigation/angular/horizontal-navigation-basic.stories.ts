@@ -1,11 +1,12 @@
-import { provideRouter } from '@angular/router';
+import { provideRouter, RouterLink } from '@angular/router';
 import { HORIZONTAL_NAVIGATION_SIZE, HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
+import { PaletteAllArgType } from '@/helpers/common-arg-types';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
-	title: 'Documentation/Navigation/HorizontalNavigation/Angular',
+	title: 'Documentation/Navigation/HorizontalNavigation/Angular/Basic',
 	argTypes: {
 		size: {
 			options: setStoryOptions(HORIZONTAL_NAVIGATION_SIZE),
@@ -13,24 +14,32 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du composant.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		noBorder: {
 			description: 'Retire la bordure sous le composant.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		container: {
 			description: 'Applique un container autour des liens pour aligner le composant avec le contenu de la page.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		vertical: {
+			description: 'Affiche la navigation verticalement.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		palette: {
+			...PaletteAllArgType,
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		numericBadge: {
-			description: 'Présente un exemple avec Numeric Badge.',
-			table: { category: 'inputs' },
+			description: '[Story] Présente un exemple avec Numeric Badge.',
+			table: { category: 'story' },
 		},
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective, NumericBadgeComponent],
+			imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective, NumericBadgeComponent, RouterLink],
 		}),
 		applicationConfig({
 			providers: [provideRouter([])],
@@ -54,6 +63,8 @@ export const Basic = {
 	args: {
 		noBorder: false,
 		container: false,
+		vertical: false,
+		palette: '',
 		numericBadge: false,
 	},
 };

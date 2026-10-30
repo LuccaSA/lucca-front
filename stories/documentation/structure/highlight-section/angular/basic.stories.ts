@@ -10,7 +10,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'white' } },
 		},
 		palette: {
 			options: setStoryOptions(HIGHLIGHT_SECTION_PALETTE),
@@ -18,7 +18,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une palette de couleurs au composant.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'lucca' } },
 		},
 		bubbleStart: {
 			options: setStoryOptions(HIGHLIGHT_SECTION_BUBBLE),
