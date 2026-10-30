@@ -29,7 +29,6 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 
 - 📝 [Code & implementation](./app-layout.component.md)
 - 🎨 [Design guidelines](./app-layout.design.md)
-- 🎯 [Figma design tokens](./app-layout.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-app-layout-angular-basic--docs)
 
 ## Changelog

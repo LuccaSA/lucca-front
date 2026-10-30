@@ -12,7 +12,7 @@ export const PRISME_URL = 'https://prisme.lucca.io';
 
 const TARGETS = {
 	storybook: { outDir: '.storybook/public', pack: false, linkRemoteOnly: false },
-	npm: { outDir: 'dist/ng', pack: true, linkRemoteOnly: true },
+	npm: { outDir: 'dist/ng', pack: true, linkRemoteOnly: false },
 };
 
 /**
@@ -25,9 +25,9 @@ export function skillCovers(manifest, version) {
 	return !!minor && (manifest.minor === minor || !!manifest.technicalMinors?.[minor]);
 }
 
-/** Design, Figma and UX-writing content follows ZeroHeight and Figma, not the code version: the npm package links it on the deploy. */
+/** Design and UX-writing content follows ZeroHeight, not the code version: a target with `linkRemoteOnly` links it on the deploy instead of shipping it. */
 export function isRemoteOnly(path) {
-	return /\.(design|figma)\.md$/.test(path) || path.startsWith('references/documentation/');
+	return /\.design\.md$/.test(path) || path.startsWith('references/documentation/');
 }
 
 export function deployedSkillUrl(ref) {

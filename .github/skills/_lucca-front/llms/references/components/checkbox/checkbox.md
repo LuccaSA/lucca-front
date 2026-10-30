@@ -23,7 +23,6 @@ import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 
 - 📝 [Code & implementation](./checkbox.component.md)
 - 🎨 [Design guidelines](./checkbox.design.md)
-- 🎯 [Figma design tokens](./checkbox.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-checkbox-basic--docs)
 
 ## Changelog

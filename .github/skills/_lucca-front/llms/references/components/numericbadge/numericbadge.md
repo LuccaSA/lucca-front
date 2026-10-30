@@ -27,7 +27,6 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 
 - 📝 [Code & implementation](./numericbadge.component.md)
 
-- 🎯 [Figma design tokens](./numericbadge.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-numericbadge-angular-basic--docs)
 
 ## Changelog

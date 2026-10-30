@@ -12,7 +12,7 @@ import { skillRoot, SKILL_NAME } from './skill-writer';
  * The minor is implicit (the npm package of that minor ships it). references/ documents the
  * minor's LATEST published patch; fixes/ carries the per-patch deltas. Docs that follow the code
  * (`--ref`) name no version at all: the package that ships them is their version, and the installed one only fills in
- * the Storybook links. All paths are flat and relative to this folder. The component list (§6) is
+ * the Storybook links. All paths are flat and relative to this folder. The component list (§5) is
  * sourced from the generated folders on disk — the single source of truth, so every listed slug
  * is a navigable path.
  */
@@ -163,7 +163,7 @@ Si le **patch** détecté est **postérieur** à ${latestPatch}${techPatchGuardS
 name: ${SKILL_NAME}
 description: >
   Design system Lucca Front / Prisme (Angular)${descriptionVersion} : API et exemples des composants, changelog, codemods de migration,
-  variantes Figma, tokens CSS, guidelines de design et de rédaction. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
+  tokens CSS, guidelines de design et de rédaction. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
   ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm), et pour intégrer ou créer une maquette Figma Prisme.
 ---
 
@@ -174,7 +174,7 @@ description: >
 ${versionSection}
 ## 2. Chemins
 
-Compose le chemin du fichier à partir du slug du composant. **Ne devine jamais un chemin** : seuls les fichiers réellement présents font foi. Si un chemin composé n'existe pas, ne le remplace pas par une supposition — vérifie le slug dans la liste §6.
+Compose le chemin du fichier à partir du slug du composant. **Ne devine jamais un chemin** : seuls les fichiers réellement présents font foi. Si un chemin composé n'existe pas, ne le remplace pas par une supposition — vérifie le slug dans la liste §5.
 
 ### Composant \`<slug>\`
 
@@ -183,7 +183,6 @@ Compose le chemin du fichier à partir du slug du composant. **Ne devine jamais 
 | API Angular + Changelog | \`./references/components/<slug>/<slug>.md\` |
 | Exemples (Angular + HTML, stories incluses) | \`./references/components/<slug>/<slug>.component.md\` |
 | Design (do/don't, usage) | \`./references/components/<slug>/<slug>.design.md\` |
-| Figma (variantes, node IDs) | \`./references/components/<slug>/<slug>.figma.md\` |
 
 Le changelog du composant est la **dernière section \`## Changelog\`** du fichier API \`<slug>.md\` (diff structurel cumulatif + notes de release).
 
@@ -210,15 +209,15 @@ Slugs : animations, mixins, numbers, scrollbox, utilitaires, angular-api (provid
 ${fixesSection}
 ### Exemple
 
-Bouton → API : \`./references/components/button/button.md\`, Figma : \`./references/components/button/button.figma.md\`
+Bouton → API : \`./references/components/button/button.md\`, Design : \`./references/components/button/button.design.md\`
 
 ## 3. Quand consulter quoi
 
 | Cas d'usage | Consulter |
 |-------------|-----------|
 | Écrire du code Angular | API (.md) → Exemples (.component.md) → section \`## Changelog\` du .md |
-| Intégrer depuis maquette Figma | Figma (.figma.md) → Tokens → Guidelines dev UI |
-| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (\`<slug>.design.md\`) |
+| Intégrer depuis maquette Figma | La maquette avec le MCP Figma (accès du développeur), puis Tokens → Guidelines dev UI |
+| Créer une maquette Figma (Code → Figma) | Design (\`<slug>.design.md\`), puis le MCP Figma pour l'écrire |
 | Review de code | API → Guidelines dev UI → Contenu (si textes) → Patterns (si UX) |
 | Conventions de rédaction | Contenu (dossier \`content/\`) |
 | Design patterns | Patterns (dossier \`patterns/\`) |
@@ -235,21 +234,13 @@ Bouton → API : \`./references/components/button/button.md\`, Figma : \`./refer
 
 ⚠️ Ne te fie **jamais** à ta mémoire pour les noms de propriétés ou types. Seul le \`.md\` fait foi.
 
-## 5. Workflow Code → Figma
-
-1. Lis le fichier Figma (\`<slug>.figma.md\`) — variantes, node IDs, liens Figma.
-2. Utilise les **noms Figma** (pas Angular) pour les propriétés. Ils peuvent différer.
-3. Pour les guidelines visuelles → \`<slug>.design.md\`.
-
-⚠️ Les \`.figma.md\` reflètent l'état actuel de Figma.
-
-## 6. Composants
+## 5. Composants
 
 ${compactComponentLines}
-## 7. Documentation transverse
+## 6. Documentation transverse
 
 ${compactDocLines || '_(aucune documentation générée)_'}
-## 8. Composants dépréciés
+## 7. Composants dépréciés
 
 Consulte \`./references/documentation/deprecated/deprecated.md\` avant d'utiliser un composant inconnu.
 Ne génère **jamais** de code utilisant un composant déprécié — propose son remplacement.

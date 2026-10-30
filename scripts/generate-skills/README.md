@@ -10,35 +10,18 @@ Le chemin ne porte **aucune version** : `scripts/llms-skill` copie cette documen
 
 - Node.js ≥ 18 avec `ts-node` (inclus dans les dépendances du projet ; le repo est calé sur Node 24 via Volta)
 - Accès aux git tags du repo (les API, stories, migrations sont extraites depuis le code source via `git show`)
-- Un **Figma Personal Access Token** (lecture seule) — voir [Configuration](#configuration) : requis pour produire les `.figma.md`, le pipeline tourne sans mais saute alors silencieusement la collecte Figma
 
 ZeroHeight et Storybook ne demandent **aucun token** : les URL publiques suffisent (le token de partage ZeroHeight est codé en dur dans `version-config.ts`).
 
 ## Configuration
 
-Seul le token Figma se configure. Deux moyens, au choix :
+Aucune configuration n'est requise. Un fichier local facultatif (gitignored) règle la concurrence et le dossier de sortie :
 
 ```bash
-# Variable d'environnement
-export FIGMA_TOKEN=figd_...
-
-# Ou fichier de config local (gitignored, prioritaire sur la variable d'environnement)
 cp scripts/generate-skills/generate-skills-config.json.example scripts/generate-skills/generate-skills-config.json
 ```
 
-Pour créer le token : Figma → Profil → Settings → Security → **Personal access tokens** (la lecture seule suffit).
-
-### Comportement sans token
-
-Sans token — ou avec un token expiré/révoqué — le **pré-flight arrête le run** et demande confirmation avant de continuer (cf. [Parcours pré-flight](#parcours-pré-flight)). Le token est validé en une requête (`/v1/me`) : sa simple présence ne suffit pas, un 401/403 ne produit aucun token de design et ne se voyait nulle part.
-
-En cas de poursuite explicite (`y`, ou `--skip-figma` d'emblée) :
-
-- les fichiers `.figma.md` (design tokens des variantes) ne sont **ni générés ni rafraîchis** ;
-- un `.figma.md` issu d'un run précédent est conservé sur disque et reste lié depuis `<slug>.md` ;
-- un composant jamais généré avec token n'aura **aucune** donnée Figma.
-
-Le token est donc optionnel pour développer ou tester le pipeline (AST, ZeroHeight et Storybook fonctionnent sans), mais **requis pour une génération complète destinée à être committée et distribuée**.
+La variable d'environnement `SKILLS_DIR` redirige tout le run vers un autre dossier, pour une génération de contrôle qui n'écrase pas la skill committée.
 
 ## Utilisation
 
@@ -50,8 +33,8 @@ npx ts-node --project scripts/generate-skills/tsconfig.json \
 # Générer tous les composants pour une mineure
 npx ts-node ... --version 22.1
 
-# Sans Figma / ZeroHeight (Storybook, lui, est obligatoire — cf. pré-flight)
-npx ts-node ... --version 22.1 --skip-figma --skip-zeroheight
+# Sans ZeroHeight (Storybook, lui, est obligatoire — cf. pré-flight)
+npx ts-node ... --version 22.1 --skip-zeroheight
 
 # Valider la couverture ZH (aucune génération)
 npx ts-node ... --validate
@@ -63,7 +46,6 @@ npx ts-node ... --validate
 |------|-------------|
 | `--version <M.m>` | **Mineure** à générer (ex: `22.1`) — `references/` reflète son dernier patch publié, `fixes/` porte les deltas par patch. Une version patch complète est refusée, comme une mineure que la branche ne peut pas porter (cf. [Phase 0](#phase-0--la-mineure-de-la-branche-preflightts-non-interactif)). **Requis, une seule fois** (sauf avec `--validate` et `--retry-failed`). |
 | `--component <slug>` | Générer uniquement ce composant (n'écrit pas le SKILL.md ni la doc transverse). Refusé quand la skill change de mineure : le composant serait seul dans la nouvelle. |
-| `--skip-figma` | Ignorer la collecte Figma |
 | `--skip-zeroheight` | Ignorer la collecte ZeroHeight |
 | `--skip-documentation` | Ignorer la doc transverse (tokens, contenu, guidelines, patterns, deprecated) |
 | `--skip-tools` | Ignorer les outils (SCSS + Angular tools) |
@@ -72,9 +54,9 @@ npx ts-node ... --validate
 | `--dry-run` | N'écrire aucun fichier |
 | `--validate` | Vérifier la couverture ZH de `component-map.json` (aucune génération) |
 | `--retry-failed` | Rejouer uniquement les unités (composants, pages doc/outils, deprecated) dont le fetch a échoué au run précédent (manifeste `_fetch-failures.json`) |
-| `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH/Figma) |
+| `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH) |
 | `--accept-output-violations` | Ne pas faire échouer le run sur les violations du garde-fou de sortie. Cf. garde-fou de sortie. |
-| `--offline` | Aucun accès réseau : ZeroHeight et Figma sont lus dans les baselines committées, l'index Storybook dans `--storybook-index`, et le pré-flight est sauté. Cf. [Mode hors ligne](#mode-hors-ligne). Incompatible avec `--retry-failed` et `--accept-shrink`. |
+| `--offline` | Aucun accès réseau : ZeroHeight est lu dans les baselines committées, l'index Storybook dans `--storybook-index`, et le pré-flight est sauté. Cf. [Mode hors ligne](#mode-hors-ligne). Incompatible avec `--retry-failed` et `--accept-shrink`. |
 | `--storybook-index <fichier>` | `index.json` Storybook lu à la place de celui du Storybook déployé. **Requis** avec `--offline` sans `--ref`. Les liens de la skill pointent toujours vers le Storybook versionné. |
 | `--ref <ref git>` | Lit le code et les stories depuis ce ref (`HEAD`, ou l'arbre de `git write-tree`) au lieu du tag de la mineure, et construit l'index Storybook en local. La skill suit alors le code : cf. [Une skill qui suit le code](#une-skill-qui-suit-le-code). `--version` devient inutile. |
 
@@ -84,10 +66,7 @@ Variable d'environnement complémentaire : **`FETCH_TIMEOUT_MS`** — deadline d
 
 ## Parcours pré-flight
 
-Avant la moindre collecte, le run passe une porte puis trois phases. L'ordre suit deux règles :
-
-1. **Aucune question tant qu'un contrôle non interactif peut encore tout arrêter** — sinon on répond à des prompts pour une génération qui n'aura pas lieu ;
-2. **Aucun effet de bord avant la dernière porte d'abandon** — le prompt ZeroHeight écrit l'ID dans `zh-release-ids.json` dès la saisie (`addZhReleaseId`), donc la question Figma, dont le « non » ne laisse rien derrière, passe avant.
+Avant la moindre collecte, le run passe une porte puis deux phases. **Aucune question n'est posée tant qu'un contrôle non interactif peut encore tout arrêter** — sinon on répond à des prompts pour une génération qui n'aura pas lieu.
 
 ### Phase 0 — la mineure de la branche (`preflight.ts`, non interactif)
 
@@ -110,21 +89,7 @@ Un tag local absent de `origin` (release jamais poussée) est signalé sans bloq
 
 > **Storybook est obligatoire.** Ce n'est pas une source parmi d'autres : la liste des composants est construite à partir de son index (`discoverComponents` part des groupes Storybook et ne rattrape en phase 2 que les entrées de `component-metadata.json` ayant un entrypoint Angular). Sans lui : aucun exemple de code, les composants CSS-only **disparaissent** de la skill, les survivants tombent en `category: 'Unknown'` — et rien ne le signale, le garde-fou de sortie n'inspectant que des exemples existants (zéro exemple = zéro violation, sortie 0, « All done! »). C'est pourquoi `--skip-storybook` a été supprimé et pourquoi un échec de l'index en cours de run est désormais fatal.
 
-### Phase 2 — token Figma (`preflight.ts`, interactif)
-
-Première question, parce que c'est la seule dont le « non » ne laisse aucune trace sur disque. Sautée sous `--skip-figma` (la même décision, énoncée d'avance) et sous `--dry-run` (rien ne sera écrit).
-
-Le token est **validé** (`GET /v1/me`) : présence ≠ validité, un 401/403 n'est jamais rejoué et ne produit aucun token de design. Token absent ou refusé → question à défaut négatif :
-
-```
-   ⚠️ Figma       aucun token (ni generate-skills-config.json, ni FIGMA_TOKEN)
-        Sans token, aucun <slug>.figma.md ne sera écrit : la skill partira sans les tokens de design.
-  ↳ Générer quand même sans Figma ? (N/y) :
-```
-
-Tout ce qui n'est pas `y`/`o` abandonne (sortie 1). Sans TTY : pas de prompt, échec dur renvoyant vers `--skip-figma`. Une erreur réseau sur `/v1/me` n'est pas une preuve contre le token : il est accepté avec un `ℹ️`.
-
-### Phase 3 — IDs de release ZeroHeight (`zh-release-guard.ts`)
+### Phase 2 — IDs de release ZeroHeight (`zh-release-guard.ts`)
 
 Inchangée, cf. [Garde-fou pré-flight](#garde-fou-pré-flight-zh-release-guardts). Il n'y a **pas** de contrôle automatique d'existence de la release ZH en phase 1 : une mineure non pinnée est servie en « latest », qui répond toujours 200 même si Prisme n'a pas encore publié la release. C'est la question humaine (« est-elle la dernière version disponible EN LIGNE ? ») qui tient ce rôle.
 
@@ -132,9 +97,8 @@ Inchangée, cf. [Garde-fou pré-flight](#garde-fou-pré-flight-zh-release-guardt
 
 | Ordre | Question | Posée quand | Défaut | Refus |
 |---|---|---|---|---|
-| 1 | Générer quand même sans Figma ? `(N/y)` | token absent ou refusé, hors `--skip-figma` / `--dry-run` | **N** | sortie 1 |
-| 2 | ID ZeroHeight de `<mineure>.x` ? | mineure supersédée non pinnée (0..n fois) | — | `abandon` → sortie 1 |
-| 3 | `<mineure>` est-elle la dernière en ligne ? `(y/n)` | mineure la plus récente du run, non pinnée | — | `n` → demande l'ID |
+| 1 | ID ZeroHeight de `<mineure>.x` ? | mineure supersédée non pinnée (0..n fois) | — | `abandon` → sortie 1 |
+| 2 | `<mineure>` est-elle la dernière en ligne ? `(y/n)` | mineure la plus récente du run, non pinnée | — | `n` → demande l'ID |
 
 Tous les abandons sortent en **1**, via `PreflightAbort` attrapé dans `main()` — jamais par un `process.exit(0)`, qui déclencherait le faux diagnostic « Génération interrompue avant la fin » du garde de sortie (`index.ts`). Le message d'abandon est préfixé 🛑 pour se distinguer d'un plantage.
 
@@ -148,7 +112,6 @@ Le pipeline agrège des sources **toutes déterministes** (pas d'IA) :
 | **AST diff** | Changelog structurel par composant | Diff de l'API entre tags stables consécutifs (`collectors/api-diff.ts`) |
 | **ZeroHeight** | Guidelines design, contenu, accessibilité, dépréciations, prose changelog | Fetch du `.md` versionné par release (`/v/<releaseId>/p/<page>.md`) |
 | **Storybook** | Liens + code source des stories Angular et HTML/CSS | `index.json` versionné + `git show` pour les templates |
-| **Figma REST API** | Propriétés des variantes (taille, palette, état…) | API REST Figma — reflète l'état courant. Prefetch **batché** (`ids` groupés, `depth=1`) : ~90 nodes en 2-3 requêtes Tier 1 |
 | **Schematics (git)** | Codemods de migration (`ng generate`) | `git show <tag>:packages/ng/schematics/collection.json` |
 
 ## Fiabilité des fetchs (cache, baselines, rejeu)
@@ -160,7 +123,7 @@ Trois mécanismes garantissent un rendu reproductible malgré des sources distan
    obtiennent un contenu identique octet pour octet. Jamais persisté : un run ultérieur re-fetch
    toujours frais (les éditions ZH au sein d'une release sont prises en compte).
 2. **Baselines anti-régression** (`scripts/generate-skills/baselines/`, **committées**) : le dernier
-   contenu connu par page ZH (`zeroheight/<releaseId>/<page>.md`) / node Figma (`figma.json`).
+   contenu connu par page ZH (`zeroheight/<releaseId>/<page>.md`).
    Committées pour que la protection ne dépende pas de la machine qui génère (un poste vierge serait
    sans garde au premier run) et qu'un `--accept-shrink` entériné vaille pour tout le monde — leur
    diff dans une PR montre au passage le contenu source brut qui a changé. Un run en ligne ne les
@@ -170,18 +133,12 @@ Trois mécanismes garantissent un rendu reproductible malgré des sources distan
      la baseline est conservée en sortie et un échec `shrink` est enregistré (rejouable). Un ajout ou
      une modification passe silencieusement et met à jour la baseline. Les titres de sections sont
      comparés sans casse ni ponctuation/emoji (`Changelog 🧪` → `Changelog` n'est pas une disparition).
-   - **Figma** : une réponse 200 fait foi (le frais est toujours écrit) ; la disparition de
-     propriétés/variantes est seulement **signalée** dans le rapport de fin de run.
    - `--accept-shrink` entérine : le frais est accepté et les baselines mises à jour.
 3. **Manifeste d'échecs + rejeu ciblé** : les échecs transients épuisés (réseau, 5xx, 429, HTML,
    shrink) sont écrits dans `.github/skills/_fetch-failures.json` avec leur *scope* (composant, page
    doc, outil, deprecated). `--retry-failed` rejoue uniquement ces unités via leur collecteur, puis
    rafraîchit SKILL.md. Itérable jusqu'à manifeste vide ; seuls les `shrink` légitimes
    nécessitent un `--accept-shrink` humain.
-
-Côté Figma, la défense principale contre le rate limit (Tier 1 : ~10-20 req/min) est le **prefetch
-batché** ; la sérialisation + cadence + retries `Retry-After` ne restent qu'en filet de sécurité
-(fallback unitaire si un chunk échoue).
 
 ## Mode hors ligne
 
@@ -193,15 +150,10 @@ et d'un `index.json` Storybook fourni par l'appelant, qui doit correspondre au t
 | Git (AST, stories, schematics) | `git show <tag>` | inchangé |
 | Storybook | `GET <storybookBaseUrl>/index.json` | le fichier `--storybook-index` |
 | ZeroHeight | fetch, la baseline sert d'oracle | la baseline `zeroheight/<releaseId\|latest>/<page>.md` |
-| Figma | API REST avec token | l'entrée de `figma.json`, si elle porte `types` |
 | npm, `ls-remote`, pré-flight | contrôlés | sautés |
 
 Un run en ligne réussi tient les baselines à jour : il écrit la page fraîche, et **supprime** la
 baseline d'une page qui répond 404. Hors ligne, une page sans baseline se lit donc comme absente.
-
-Côté Figma, `types` n'existe que dans les entrées écrites par un run en ligne postérieur à son ajout.
-Un composant dont un node n'a pas encore `types` garde son `.figma.md` committé, sans le réécrire. Un
-run en ligne avec token remplit le champ pour tous les nodes.
 
 Le run hors ligne n'écrit ni baselines, ni manifeste d'échecs.
 
@@ -228,8 +180,7 @@ fait avancer (cf. [Une documentation qui suit le code](#une-documentation-qui-su
     │       │   └── button/
     │       │       ├── button.md     # API Angular + liens + section ## Changelog (diff structurel cumulatif + prose ZH)
     │       │       ├── button.component.md  # Notes d'implémentation + toutes les stories inline (### <nom>)
-    │       │       ├── button.design.md  # Guidelines design ZH fusionnées (overview + sections)
-    │       │       └── button.figma.md   # Tokens Figma
+    │       │       └── button.design.md  # Guidelines design ZH fusionnées (overview + sections)
     │       ├── types/<TypeName>.md   # Types énumérés partagés (ex: LuccaIcon)
     │       ├── documentation/        # Doc transverse
     │       │   ├── tokens/  content/  guidelines/  patterns/
@@ -240,7 +191,7 @@ fait avancer (cf. [Une documentation qui suit le code](#une-documentation-qui-su
     └── changelog/<M.m>.md            # Diff de review du run (avant → après), non distribué
 ```
 
-Le fichier principal `button.md` contient l'import, le basic usage, la table d'API, les liens vers les fichiers frères, et se termine par la section `## Changelog` (toujours en **dernière position** — le diff de review s'appuie dessus pour l'ignorer dans les comparaisons). Les `.component.md` / `.design.md` / `.figma.md` / `migrations.md` / `fixes/*.md` sont lazy-loaded (lus seulement au besoin) ; chaque fichier reste sous ~80 Ko, lisible en une passe.
+Le fichier principal `button.md` contient l'import, le basic usage, la table d'API, les liens vers les fichiers frères, et se termine par la section `## Changelog` (toujours en **dernière position** — le diff de review s'appuie dessus pour l'ignorer dans les comparaisons). Les `.component.md` / `.design.md` / `migrations.md` / `fixes/*.md` sont lazy-loaded (lus seulement au besoin) ; chaque fichier reste sous ~80 Ko, lisible en une passe.
 
 ### Fixes par patch (aucune perte d'information)
 
@@ -273,7 +224,7 @@ scripts/generate-skills/
 ├── zh-release-ids.json               # Table mineure → ID de release ZeroHeight (writable)
 ├── zh-release-guard.ts               # Garde-fou pré-flight : exige un ID pour toute mineure supersédée
 ├── sync-metadata.ts                  # Synchronise component-metadata.json depuis Storybook
-├── component-metadata.json           # Métadonnées par slug (ZH path, Figma node IDs/name/aliases)
+├── component-metadata.json           # Métadonnées par slug (ZH path, overrides de package, sélecteurs)
 ├── component-map.json                # Registre legacy — uniquement pour --validate
 ├── documentation-map.json            # Registre des pages documentation
 ├── tools-map.json                    # Registre des pages outils
@@ -286,7 +237,6 @@ scripts/generate-skills/
 │   ├── story-source.ts               # Code source des stories via git show + classification framework (tier 3)
 │   ├── story-eval.ts                 # Évaluation déterministe du render() des stories
 │   ├── zeroheight-fetch.ts           # Fetch .md ZeroHeight (avec fallback HTML)
-│   ├── figma-connect.ts              # Fetch propriétés Figma via REST API (caché)
 │   ├── documentation.ts              # Doc transverse (tokens, contenu, guidelines, patterns)
 │   ├── deprecated.ts                 # Page "Cycle de vie" ZH (dépréciés + prose schematics)
 │   ├── tools.ts                      # Outils SCSS + Angular depuis git tags
@@ -307,8 +257,7 @@ scripts/generate-skills/
     ├── component-page.hbs            # Page implémentation (notes + stories inline)
     ├── story-body.hbs                # Partial : une story (utilisé par component-page)
     ├── type-definition.hbs           # Type énuméré partagé
-    ├── changelog.hbs                 # Prose ZH (couche "notes de release")
-    └── component-figma.hbs           # Tokens Figma
+    └── changelog.hbs                 # Prose ZH (couche "notes de release")
 ```
 
 ## Flux de génération (par mineure)
@@ -318,7 +267,7 @@ scripts/generate-skills/
 2. Résolution mineure → dernier tag stable publié (tags fantômes exclus) + liste des tags patch,
    ZH release ID, Storybook base URL
 2 bis. Pré-flight (preflight.ts + zh-release-guard.ts) : mineure de la branche, existence de la
-   release, token Figma, IDs de release ZeroHeight — cf. « Parcours pré-flight »
+   release, IDs de release ZeroHeight — cf. « Parcours pré-flight »
 2 ter. Instantané de la skill committée (dossier temporaire), base du diff de review ; sur une
    nouvelle mineure, `references/` et `fixes/` sont vidés (une page que la mineure n'émet plus
    ne doit pas survivre avec le contenu de la précédente)
@@ -330,10 +279,9 @@ scripts/generate-skills/
    a. AST extraction          → PackageAPI (inputs, outputs, models, selectors, types)
    b. ZeroHeight fetch        → design sections + prose changelog
    c. Storybook + story source/eval → exemples Angular + HTML/CSS (framework résolu, cf. ci-dessous)
-   d. Figma REST API          → tokens variantes
-   e. Changelog structurel    → AST diff sur tags stables ≤ cible (cumulatif) + prose ZH
-   f. Rendu Handlebars + écriture → references/components/<slug>/
-   g. Types partagés          → references/types/<TypeName>.md
+   d. Changelog structurel    → AST diff sur tags stables ≤ cible (cumulatif) + prose ZH
+   e. Rendu Handlebars + écriture → references/components/<slug>/
+   f. Types partagés          → references/types/<TypeName>.md
 8. Fixes                 → fixes/<M-m-p>.md par paire de tags patch consécutifs (fixes-writer)
 9. _lucca-front/versions.json (manifeste : mineure + sous-map patches)
 10. SKILL.md (toc-writer) — écrit après les fichiers (scanne les composants du disque)
@@ -484,9 +432,7 @@ La liste des composants est **découverte dynamiquement** (`collectors/component
 ```jsonc
 {
   "userpopover": {
-    "zeroheightPagePath": "85b183",
-    "figmaNodeIds": ["18202:1181"],
-    "figmaName": "pr-UserPopover"
+    "zeroheightPagePath": "85b183"
   }
 }
 ```
@@ -494,9 +440,6 @@ La liste des composants est **découverte dynamiquement** (`collectors/component
 | Champ | Description |
 |-------|-------------|
 | `zeroheightPagePath` | Segment de page ZeroHeight (stable entre versions) |
-| `figmaNodeIds` | Node IDs Figma pour les design tokens |
-| `figmaName` | Nom du composant dans Figma (peut différer du slug Angular) |
-| `figmaAliases` | Noms Figma alternatifs (many-to-one) |
 | `ngPackageOverride` | Force le mapping vers un package Angular si l'heuristique échoue |
 | `ngSelectors` | Restreint l'API extraite à ces sélecteurs (isole un composant d'un package multi-composants) |
 | `scssComponent` | Dossier SCSS sous `packages/scss/src/components`. À renseigner seulement quand ni `ngPackage` ni le slug ne s'y résolvent (`date2` → `dateField`). `""` déclare l'absence de contrepartie SCSS et éteint l'avertissement |
@@ -513,7 +456,6 @@ Ancien registre central, conservé uniquement pour `--validate` (couverture Zero
 - **ZeroHeight** : versionné par release mineure (mapping `ZH_RELEASE_IDS` dans `version-config.ts` — voir ci-dessous).
 - **Storybook** : versionné au fix près (`lucca-front.lucca.io/v21.2.4/storybook/`) — `references/` pointe l'URL du dernier patch, chaque `fixes/<M-m-p>.md` porte l'URL exacte de son patch.
 - **AST / stories / migrations** : versionné au fix près via git tags — l'historique patch est porté par les changelogs cumulatifs et `fixes/`.
-- **Figma** : reflète l'état courant.
 
 ### IDs de release ZeroHeight (`ZH_RELEASE_IDS`)
 
@@ -583,7 +525,7 @@ dependencies:
 
 La documentation committée décrit le code du commit qui la porte : chaque tag la livre donc, à sa propre version, dans le package npm, sans génération à lancer après la release. Elle ne déclare aucune version : le package qui la livre en tient lieu, et le `SKILL.md` demande la version installée seulement pour compléter les liens Storybook (`https://lucca-front.lucca.io/v{version}/storybook/…`). Pas de `fixes/` non plus : chaque patch a sa documentation.
 
-`npm run skills:update` la régénère hors ligne depuis `HEAD` (`--offline --ref HEAD`) : le code et les stories viennent du commit, l'index Storybook est construit en local, ZeroHeight et Figma viennent des baselines. Le manifeste `versions.json` le signale par `"followsCode": true` ; `scripts/llms-skill` embarque alors la documentation sur n'importe quel tag.
+`npm run skills:update` la régénère hors ligne depuis `HEAD` (`--offline --ref HEAD`) : le code et les stories viennent du commit, l'index Storybook est construit en local, ZeroHeight vient des baselines. Le manifeste `versions.json` le signale par `"followsCode": true` ; `scripts/llms-skill` embarque alors la documentation sur n'importe quel tag.
 
 La mineure est celle du dernier tag publié que contient le commit, sauf si la branche en **prépare** une plus récente. Le tag `vX.Y.0` est posé sur un commit qui ne le contient pas encore : sans rien déclarer, sa documentation porterait la mineure précédente, et un tag ne se corrige plus. La PR de release d'une mineure ou d'une majeure la déclare donc avant le tag :
 
@@ -597,18 +539,18 @@ Trois garde-fous, comme sur `@lucca/cdk` :
 
 - **Hook pre-commit** (`.git-hooks/pre-commit`, installé par `npm install` via `prepare`) : dès qu'un fichier de `packages/ng`, `packages/prisme`, `packages/scss`, `stories` ou du générateur est indexé, il régénère depuis l'index (`--ref "$(git write-tree)"`) et ajoute la documentation au commit. Compter une vingtaine de secondes au premier commit, une dizaine ensuite : les tags publiés lus par les changelogs sont extraits une fois dans `node_modules/.cache/lf-skills-tags` (~10 Mo par tag, vidé par `npm ci`). `git commit --no-verify` le saute. Sans `node` dans le `PATH` ni tag atteignable, il ne fait rien.
 - **CI** (`skills` dans `build.yml`) : `npm run skills:check` régénère et échoue sur tout écart, fichiers nouveaux compris, car un hook reste contournable.
-- **Baselines** : ZeroHeight et Figma ne bougent qu'au rafraîchissement en ligne, qui ouvre un diff de baselines relisible. Sans rafraîchissement, la documentation garde le dernier contenu design récupéré.
+- **Baselines** : ZeroHeight ne bouge qu'au rafraîchissement en ligne, qui ouvre un diff de baselines relisible. Sans rafraîchissement, la documentation garde le dernier contenu design récupéré.
 
-### Rafraîchir le contenu ZeroHeight et Figma
+### Rafraîchir le contenu ZeroHeight
 
 Un run en ligne depuis `HEAD` met les baselines à jour, puis le run hors ligne régénère la documentation à partir d'elles :
 
 ```bash
-FIGMA_TOKEN=… npm run skills:generate -- --ref HEAD --zh-latest 22.1
+npm run skills:generate -- --ref HEAD --zh-latest 22.1
 npm run skills:update
 ```
 
-`--zh-latest` affirme que la mineure du dernier tag est la dernière en ligne sur ZeroHeight. Le run en ligne écrit aussi la documentation : seule compte celle du run hors ligne qui suit, que la CI compare.
+`--zh-latest` affirme que la mineure de la documentation (celle de `versions.json` : la mineure déclarée par `--minor`, sinon celle du dernier tag publié) est la dernière en ligne sur ZeroHeight. Le run en ligne écrit aussi la documentation : seule compte celle du run hors ligne qui suit, que la CI compare.
 
 ### Générer la documentation d'une release
 

@@ -5,7 +5,7 @@
  * Components are auto-discovered from the Storybook index:
  *   - slug, category, storybookSlug come from the index grouping
  *   - ngPackage is auto-detected by scanning `packages/ng/` in the git tag
- *   - zeroheightPagePath and figmaNodeIds come from an optional metadata file
+ *   - zeroheightPagePath comes from an optional metadata file
  *
  * This replaces the need for a manually maintained component-map.json.
  */
@@ -20,11 +20,6 @@ import { ComponentEntry, StorybookGroup, VersionConfig } from '../types';
 export interface ComponentMetadata {
 	/** ZeroHeight page path segment, e.g. "098404-button". */
 	zeroheightPagePath?: string;
-	/** Figma node IDs for Code Connect. */
-	figmaNodeIds?: string[];
-	/** Figma component name(s). */
-	figmaName?: string;
-	figmaAliases?: string[];
 	/** Override ngPackage name (for irregular slug → package mappings).
 	 * May be a secondary entrypoint path with a slash, e.g. "forms/phone-number-input". */
 	ngPackageOverride?: string;
@@ -188,9 +183,6 @@ export function discoverComponents(
 			ngSelectors: meta?.ngSelectors,
 			scssComponent: meta?.scssComponent,
 			zeroheightPagePath: meta?.zeroheightPagePath,
-			figmaNodeIds: meta?.figmaNodeIds,
-			figmaName: meta?.figmaName,
-			figmaAliases: meta?.figmaAliases,
 		};
 
 		components.push({ slug: sbSlug, entry });
@@ -217,9 +209,6 @@ export function discoverComponents(
 			ngSelectors: meta.ngSelectors,
 			scssComponent: meta.scssComponent,
 			zeroheightPagePath: meta.zeroheightPagePath,
-			figmaNodeIds: meta.figmaNodeIds,
-			figmaName: meta.figmaName,
-			figmaAliases: meta.figmaAliases,
 		};
 
 		components.push({ slug, entry });
@@ -231,12 +220,11 @@ export function discoverComponents(
 	// Stats
 	const withNg = components.filter(c => c.entry.ngPackage).length;
 	const withZh = components.filter(c => c.entry.zeroheightPagePath).length;
-	const withFigma = components.filter(c => c.entry.figmaNodeIds?.length).length;
 	if (metadataSkipped > 0) {
 		console.log(`  🚫 ${metadataSkipped} metadata-only entries sans ngPackage ignorées (composant absent de cette version)`);
 	}
 	console.log(`  📊 ${components.length} composants (${skipped} groupes Storybook ignorés)`);
-	console.log(`     ${withNg} avec API Angular, ${withZh} avec ZeroHeight, ${withFigma} avec Figma`);
+	console.log(`     ${withNg} avec API Angular, ${withZh} avec ZeroHeight`);
 
 	return components;
 }

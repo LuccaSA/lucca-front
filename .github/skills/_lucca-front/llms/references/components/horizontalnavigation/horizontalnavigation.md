@@ -54,7 +54,6 @@ import { HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent, Ho
 
 - 📝 [Code & implementation](./horizontalnavigation.component.md)
 
-- 🎯 [Figma design tokens](./horizontalnavigation.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-horizontalnavigation-angular-basic--docs)
 
 ## Changelog

@@ -64,7 +64,6 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 
 - 📝 [Code & implementation](./textfield.component.md)
 - 🎨 [Design guidelines](./textfield.design.md)
-- 🎯 [Figma design tokens](./textfield.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
 
 ## Changelog

@@ -31,7 +31,6 @@ import { DividerComponent } from '@lucca-front/ng/divider';
 
 - 📝 [Code & implementation](./divider.component.md)
 
-- 🎯 [Figma design tokens](./divider.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-divider-angular--docs)
 
 ## Changelog

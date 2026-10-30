@@ -83,8 +83,8 @@ describe('readTimeoutEnv', () => {
 	});
 
 	it('rejects a value that is not a usable duration', () => {
-		// `Number(env) || fallback` — the shape used by the FIGMA_* knobs — would also land on the
-		// fallback here, but silently, and would equally ignore a deliberate 0. This warns instead.
+		// `Number(env) || fallback` would also land on the fallback here, but silently, and would
+		// equally ignore a deliberate 0. This warns instead.
 		for (const bad of ['nope', '-1', '0', 'Infinity']) {
 			process.env[KEY] = bad;
 			expect(readTimeoutEnv(10_000)).toBe(10_000);

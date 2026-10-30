@@ -38,7 +38,6 @@ import { InputFramedComponent } from '@lucca-front/ng/form-field';
 
 - 📝 [Code & implementation](./input-framed.component.md)
 - 🎨 [Design guidelines](./input-framed.design.md)
-- 🎯 [Figma design tokens](./input-framed.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-input-framed-angular-basic--docs)
 
 ## Changelog

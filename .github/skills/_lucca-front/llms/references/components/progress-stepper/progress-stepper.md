@@ -41,7 +41,6 @@ import { ProgressStepperStepComponent, ProgressStepperComponent } from '@lucca-f
 
 - 📝 [Code & implementation](./progress-stepper.component.md)
 - 🎨 [Design guidelines](./progress-stepper.design.md)
-
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-progress-stepper-angular-basic--docs)
 
 ## Changelog

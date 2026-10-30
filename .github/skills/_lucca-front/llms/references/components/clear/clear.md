@@ -40,7 +40,6 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 
 - 📝 [Code & implementation](./clear.component.md)
 - 🎨 [Design guidelines](./clear.design.md)
-- 🎯 [Figma design tokens](./clear.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-clear-angular-basic--docs)
 
 ## Changelog

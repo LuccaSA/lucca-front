@@ -56,7 +56,6 @@ import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 
 - 📝 [Code & implementation](./software-icon.component.md)
 - 🎨 [Design guidelines](./software-icon.design.md)
-- 🎯 [Figma design tokens](./software-icon.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-software-icon-angular-basic--docs)
 
 ## Changelog

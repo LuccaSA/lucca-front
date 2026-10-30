@@ -88,7 +88,6 @@ import { VerticalNavigationLinkComponent, VerticalNavigationComponent, VerticalN
 
 - 📝 [Code & implementation](./verticalnavigation.component.md)
 
-- 🎯 [Figma design tokens](./verticalnavigation.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-verticalnavigation-angular-disabled--docs)
 
 ## Changelog

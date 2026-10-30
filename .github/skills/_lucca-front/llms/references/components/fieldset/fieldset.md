@@ -52,7 +52,6 @@ import { FieldsetComponent } from '@lucca-front/ng/forms';
 
 - 📝 [Code & implementation](./fieldset.component.md)
 
-- 🎯 [Figma design tokens](./fieldset.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fieldset-angular-basic--docs)
 
 ## Changelog

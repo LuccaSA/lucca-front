@@ -127,7 +127,6 @@ import { DialogContentComponent, DialogFooterComponent, DialogHeaderAction, Dial
 
 - 📝 [Code & implementation](./dialog.component.md)
 - 🎨 [Design guidelines](./dialog.design.md)
-- 🎯 [Figma design tokens](./dialog.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-dialog-basic--docs)
 
 ## Changelog

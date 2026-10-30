@@ -48,7 +48,6 @@ import { SegmentedControlFilterComponent, SegmentedControlComponent } from '@luc
 
 - 📝 [Code & implementation](./segmentedcontrol.component.md)
 
-- 🎯 [Figma design tokens](./segmentedcontrol.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-segmentedcontrol-angular-tabs--docs)
 
 ## Changelog

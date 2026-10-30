@@ -38,7 +38,6 @@ import { HighlightSectionComponent } from '@lucca-front/ng/highlight-section';
 
 - 📝 [Code & implementation](./highlight-section.component.md)
 
-- 🎯 [Figma design tokens](./highlight-section.figma.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-highlight-section-angular-basic--docs)
 
 ## Changelog
