@@ -549,7 +549,7 @@ dependencies:
 
 ### Quelle version livre la documentation
 
-Au build, `scripts/llms-skill/publish-skill.mjs npm` copie `_lucca-front/llms/` dans le package quand `versions.json` documente la mineure du tag. La génération a besoin de la release **publiée** (npm, Storybook déployé, release ZeroHeight — cf. [pré-flight](#parcours-pré-flight)) : la documentation d'une mineure est donc commitée **après** le tag `vX.Y.0`, et le **premier tag coupé après ce commit** est le premier dont le package la livre (pour 22.1 : `v22.1.1`, ou le tag suivant si la génération tarde).
+Au build, `scripts/llms-skill/publish-skill.mjs npm` copie `_lucca-front/llms/` dans le package quand `versions.json` documente la mineure du tag. La génération a besoin de la release **publiée** (npm, Storybook déployé, release ZeroHeight — cf. [pré-flight](#parcours-pré-flight)) : la documentation d'une mineure est donc commitée **après** le tag `vX.Y.0`, et le **premier tag coupé après ce commit** est le premier dont le package la livre.
 
 `git show <tag>:.github/skills/_lucca-front/versions.json` dit quelle mineure un tag documente.
 
@@ -574,4 +574,4 @@ Jusqu'à `v22.1.0`, chaque mineure avait son dossier (`.github/skills/lucca-fron
 | `LuccaSA/lucca-front/.github/skills/lucca-front/lucca-front-<M>-<m>` (ou `…/lucca-front-all`), sans ref ou sur `master` | **avant le merge**, le même chemin épinglé : `…/lucca-front-<M>-<m>#v22.1.0` (ou `…/lucca-front-all#v22.1.0`), sans quoi `apm install --update` échoue |
 | n'importe quel chemin, projet dont `node_modules/@lucca-front/ng/llms.txt` existe | `LuccaSA/lucca-front/.github/skills/lucca-front`, sans ref |
 
-Un projet dont le package ne livre pas encore `llms.txt` (21.x, 22.1.0, une partie des patchs 22.0) peut passer au pointeur, qui se replie sur la documentation déployée puis sur les types, ou garder la skill complète de sa mineure épinglée sur `#v22.1.0`.
+Un projet dont le package ne livre pas encore `llms.txt` (21.x, 22.1.x, une partie des patchs 22.0) garde la skill complète de sa mineure épinglée sur `#v22.1.0` : le Storybook déployé de sa version ne sert pas non plus de `llms.txt`, le pointeur n'y trouverait que les types.
