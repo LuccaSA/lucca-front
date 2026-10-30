@@ -1,6 +1,17 @@
 # activity-feed — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-activity-feed-angular-basic--docs)
+**Sommaire**
+
+- Angular
+  - Basic
+- HTML/CSS
+  - Add
+  - Basic
+  - Icon
+  - States
+  - Updated
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-activity-feed-angular-basic--docs)
 
 ## Angular
 
@@ -10,7 +21,8 @@ Component selector : `lu-activity-feed`
 
 ```js
 import { LOCALE_ID } from '@angular/core';
-import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent, ActivityFeedUpdateItemComponent } from '@lucca-front/ng/activity-feed';
+import { LuccaIcon } from '@lucca-front/icons';
+import { ACTIVITY_FEED_STEP_STATUS, ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedStepStatus, ActivityFeedUpdateComponent, ActivityFeedUpdateItemComponent, luActivityFeedTranslations } from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
 import { FileEntryComponent } from '@lucca-front/ng/file-upload';
 import { ReadMoreComponent } from '@lucca-front/ng/read-more';
@@ -20,7 +32,7 @@ import { ButtonComponent } from '@lucca/prisme/button';
 
 ```html
 <lu-activity-feed>
-	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
+	<lu-activity-feed-step [user]="user" [date]="date" />
 	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
 </lu-activity-feed>
 ```
@@ -109,6 +121,41 @@ Classe CSS : `.activityFeed`
 			<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time">
 				<abbr>Mar.</abbr>
 				15 juillet 2025 à 08:56
+			</time>
+		</div>
+	</li>
+</ol>
+```
+
+### Icon
+
+```css
+@forward '@lucca-front/scss/src/components/activityFeed';
+```
+
+```html
+<ol class="activityFeed">
+	<li class="activityFeed-step">
+		<div class="activityFeed-step-state mod-icon">
+			<span class="lucca-icon icon-signInfo" aria-hidden="true"></span>
+		</div>
+		<div class="activityFeed-step-description">
+			<p class="activityFeed-step-description-content">Demande enregistrée.</p>
+			<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time">
+				<abbr>Mar.</abbr>
+				15 juillet 2025 à 08:56
+			</time>
+		</div>
+	</li>
+	<li class="activityFeed-step">
+		<div class="activityFeed-step-state mod-icon">
+			<span class="lucca-icon icon-timeHourglass" aria-hidden="true"></span>
+		</div>
+		<div class="activityFeed-step-description">
+			<p class="activityFeed-step-description-content">Demande en cours de traitement.</p>
+			<time datetime="2025-07-15 08:56" class="activityFeed-step-description-time">
+				<abbr>Mar.</abbr>
+				15 juillet 2025 à 08:56
 			</time>
 		</div>
 	</li>

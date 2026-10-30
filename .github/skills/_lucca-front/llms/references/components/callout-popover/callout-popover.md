@@ -1,5 +1,17 @@
 # callout-popover
 
+**Sommaire**
+
+- Import
+- API Reference
+  - CalloutPopoverComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -20,7 +32,7 @@ import { CalloutPopoverComponent } from '@lucca-front/ng/callout';
 | `closeDelay` | `closeDelay` | `number` | `500` | — | `luNumberAttribute` | — |
 | `buttonLabel` | `buttonLabel` | `string \| number` | — | — | — | Label du bouton. |
 | `buttonAlt` | `buttonAlt` | `string` | `''` | — | — | Information restituée par le bouton. |
-| `headingHiddenIfSingleItem` | `headingHiddenIfSingleItem` | `boolean` | `false` | — | `luBooleanAttribute` | Masque le titre si le popover ne contient qu’un élément. |
+| `headingHiddenIfSingleItem` | `headingHiddenIfSingleItem` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `popoverTrigger` | `popoverTrigger` | `'click' \| 'click+hover' \| 'hover+focus'` | `'click+hover'` | — | — | — |
 | `palette` | `palette` | `Palette` | `'none'` | — | — | — |
 | `size` | `size` | `'M' \| 'S' \| 'XS'` | — | — | — | — |
@@ -28,7 +40,7 @@ import { CalloutPopoverComponent } from '@lucca-front/ng/callout';
 | `state` | `state` | `'success' \| 'warning' \| 'error'` | — | — | — | État du callout. |
 | `heading` | `heading` | `PortalContent` | — | — | — | Ajoute un titre au popover. [PortalContent] |
 | `popoverPosition` | `popoverPosition` | `PopoverPosition` | `'above'` | — | — | Position du popover par rapport au bouton de déclenchement. |
-| `customPopoverPositions` | `customPopoverPositions` | `ConnectionPositionPair[]` | — | — | — | — |
+| `customPopoverPositions` | `customPopoverPositions` | `ConnectionPositionPair[]` | — | — | — | Positions personnalisées du popover, prioritaires sur popoverPosition. |
 | `popoverDisabled` | `popoverDisabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 ### Injection tokens
@@ -39,18 +51,18 @@ import { CalloutPopoverComponent } from '@lucca-front/ng/callout';
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./callout-popover.component.md)
 - 🎨 [Design guidelines](./callout-popover.design.md)
 - 🎯 [Figma design tokens](./callout-popover.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-feedback-callout-popover-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-popover-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

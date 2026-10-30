@@ -1,6 +1,6 @@
 # impersonation — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-impersonation-angular--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-impersonation-angular-basic--docs)
 
 ## Angular
 
@@ -9,13 +9,12 @@
 ```js
 import { JsonPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
-import { LOCALE_ID } from '@angular/core';
-import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
-import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
+import { luCoreSelectUserTranslations, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { ImpersonationComponent, luImpersonationTranslations } from '@lucca-front/ng/impersonation';
 ```
 
 ```html
-<lu-impersonation [(selectedUser)]="example" (clear)="example = me" />
+<lu-impersonation [(selectedUser)]="example" (clear)="example = me; onClear()" />
 
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>
 ```

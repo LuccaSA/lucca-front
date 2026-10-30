@@ -1,5 +1,26 @@
 # richtextinput
 
+**Sommaire**
+
+- Import
+- API Reference
+  - ClearFormatComponent (component)
+  - HeadingsComponent (component)
+  - LinkComponent (component)
+  - ListStyleToolbarComponent (component)
+  - RichTextPluginTagComponent (component)
+  - TextStyleComponent (component)
+  - TextStyleToolbarComponent (component)
+  - RichTextInputToolbarComponent (component)
+  - RichTextInputComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -105,21 +126,26 @@ import { ClearFormatComponent, HeadingsComponent, LinkComponent, ListStyleToolba
 |-------|------|-------------|
 | `RICH_TEXT_FORMATTER` | `RichTextFormatter` | — |
 | `RICH_TEXT_PLUGIN_COMPONENT` | `RichTextPluginComponent` | — |
+| `LU_RICH_TEXT_INPUT_TRANSLATIONS` | `unknown` | — |
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./richtextinput.component.md)
 - 🎨 [Design guidelines](./richtextinput.design.md)
 - 🎯 [Figma design tokens](./richtextinput.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-richtextinput-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-richtextinput-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_RICH_TEXT_INPUT_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

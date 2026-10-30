@@ -19,18 +19,18 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 | `withEllipsis` | `withEllipsis` | `boolean` | `false` | — | `luBooleanAttribute` | [v20.3] Ellipse le texte et ajoute une tooltip lorsque le label est trop long. |
 | `label` | `label` | `string` | — | ✅ | — | Modifie le texte affiché par le composant. |
 | `size` | `size` | `'L' \| 'M'` | `'M'` | — | — | Modifie la taille du composant.[v20.2] Ajout de la taille M |
-| `palette` | `palette` | `Palette \| null` | `null` | — | — | Applique une palette de couleurs au composant.[v19.2] Ajout de Neutral. |
+| `palette` | `palette` | `Palette \| null` | `null` | — | — | Applique une palette de couleurs au composant.Ajout de Neutral. |
 
 ## Related files
 
 - 📝 [Code & implementation](./statusbadge.component.md)
 - 🎨 [Design guidelines](./statusbadge.design.md)
 - 🎯 [Figma design tokens](./statusbadge.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-statusbadge-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-statusbadge-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

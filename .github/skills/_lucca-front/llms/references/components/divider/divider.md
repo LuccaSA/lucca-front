@@ -22,9 +22,9 @@ import { DividerComponent } from '@lucca-front/ng/divider';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `separatorRole` | `separatorRole` | `boolean` | `false` | — | `luBooleanAttribute` | Permet de restituer Divider comme un séparateur natif (hr). Son éventuel contenu textuel ne sera alors plus restitué. |
-| `vertical` | `vertical` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `size` | `size` | `DividerSize \| null` | `null` | — | — | — |
+| `separatorRole` | `separatorRole` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute `role="separator"` au composant pour qu’il soit restitué comme un séparateur par les technologies d’assistance. S… |
+| `vertical` | `vertical` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le séparateur verticalement. |
+| `size` | `size` | `DividerSize \| null` | `null` | — | — | Modifie la taille du séparateur. |
 | `withRole` | `withRole` | `boolean` | `false` | — | `luBooleanAttribute` | ⚠️ **Déprécié** : Déprécié.  |
 
 ## Related files
@@ -32,11 +32,11 @@ import { DividerComponent } from '@lucca-front/ng/divider';
 - 📝 [Code & implementation](./divider.component.md)
 
 - 🎯 [Figma design tokens](./divider.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-divider-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-divider-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

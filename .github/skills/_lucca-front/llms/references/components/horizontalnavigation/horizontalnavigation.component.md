@@ -1,6 +1,19 @@
 # horizontalnavigation — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-horizontalnavigation-angular--docs)
+**Sommaire**
+
+- Angular
+  - Navigation basic
+  - Navigation tabs
+- HTML/CSS
+  - Accessibilité
+  - Navigation basic
+  - Navigation container
+  - Navigation count
+  - Navigation scrollbox
+  - Navigation tabs
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-horizontalnavigation-angular-basic--docs)
 
 ## Angular
 
@@ -9,7 +22,9 @@ Component selector : `lu-horizontal-navigation`
 ### Navigation basic
 
 ```js
-import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
+import { provideRouter, RouterLink } from '@angular/router';
+import { HORIZONTAL_NAVIGATION_SIZE, HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ```
 
 ```html
@@ -34,7 +49,7 @@ import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from 
 ```
 
 ```html
-<lu-horizontal-navigation>
+<lu-horizontal-navigation [(currentIndex)]="model.example" (currentIndexChange)="onCurrentIndexChange($event)">
 	<lu-horizontal-navigation-tab label="Tab 1">Content 1</lu-horizontal-navigation-tab>
 	<lu-horizontal-navigation-tab label="Tab 2">Content 2</lu-horizontal-navigation-tab>
 	<lu-horizontal-navigation-tab label="Tab 3">Content 3</lu-horizontal-navigation-tab>

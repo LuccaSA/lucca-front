@@ -1,6 +1,6 @@
 # multi-select — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-multi-select-angular--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-multi-select-angular--docs)
 
 ## Angular
 
@@ -26,13 +26,15 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 ```
 
 ```html
-<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+<lu-form-field>
 	<lu-multi-select
 		[(ngModel)]="model.example"
 		[options]="legumes | filterLegumes: clue"
 		(clueChange)="clue = $event"
 		placeholder="Placeholder"
 		clearable
+		(panelOpened)="panelOpened()"
+		(panelClosed)="panelClosed()"
 	/>
 </lu-form-field>
 <pr-story-model-display>{{ model.example | json }}</pr-story-model-display>

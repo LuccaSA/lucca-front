@@ -1,6 +1,15 @@
 # dateinput — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-date2-dateinput--docs)
+**Sommaire**
+
+- Angular
+  - Utilisation
+  - Configuration
+  - Configuration avancée
+  - Input
+  - Input field
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date2-dateinput--docs)
 
 ## Angular
 
@@ -46,7 +55,7 @@ Enfin, il est possible de spécifier des `ranges` via l'input du même nom. Chaq
 ```js
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputComponent } from '@lucca-front/ng/date2';
+import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputComponent, luDate2Translations } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 ```
@@ -58,8 +67,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		[min]="min"
 		[max]="max"
 		[focusedDate]="focusedDate"
-		autocomplete="off"
 		format="date"
+		(panelOpened)="panelOpened()"
+		(panelClosed)="panelClosed()"
 	/>
 </lu-form-field>
 
@@ -73,9 +83,27 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		[min]="min"
 		[max]="max"
 		[focusedDate]="focusedDate"
-		autocomplete="off"
+		humanized
+		format="date"
+		(panelOpened)="panelOpened()"
+		(panelClosed)="panelClosed()"
+	/>
+</lu-form-field>
+
+<pr-story-model-display>{{ selected }}</pr-story-model-display>
+```
+
+```html
+<lu-form-field label="Date input example" inlineMessage="Inline message example">
+	<lu-date-input
+		[(ngModel)]="selected"
+		[min]="min"
+		[max]="max"
+		[focusedDate]="focusedDate"
 		mode="week"
 		format="date"
+		(panelOpened)="panelOpened()"
+		(panelClosed)="panelClosed()"
 	/>
 </lu-form-field>
 

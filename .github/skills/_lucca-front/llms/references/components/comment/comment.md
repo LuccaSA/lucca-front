@@ -1,5 +1,18 @@
 # comment
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - CommentBlockComponent (component)
+  - CommentChatComponent (component)
+  - CommentComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -9,7 +22,7 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 ## Basic Usage
 
 ```html
-<lu-comment-block [avatar]="avatarTpl" authorName="Marie Bragoulet"> <ng-template #avatarTpl> <lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}" /> </ng-template> <lu-comment [date]="date" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus a veniam necessitatibus aut facilis repellendus provident nulla iste neque ex?" /> <lu-comment [date]="date" content="Lorem ipsum dolor sit amet." /> <lu-comment [date]="date" content="<h3>Lorem, ipsum.</h3> <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. <strong>Facilis voluptates ex</strong> qui iste libero suscipit cum earum harum animi praesentium, quidem non incidunt vel illum sunt nihil reprehenderit a itaque. </p> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque numquam itaque at facilis iusto inventore.</p>" />
+<lu-comment-block [avatar]="avatarTpl" > <ng-template #avatarTpl> <lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}" /> </ng-template> <lu-comment [date]="date" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus a veniam necessitatibus aut facilis repellendus provident nulla iste neque ex?" /> <lu-comment [date]="date" content="Lorem ipsum dolor sit amet." /> <lu-comment [date]="date" content="<h3>Lorem, ipsum.</h3> <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. <strong>Facilis voluptates ex</strong> qui iste libero suscipit cum earum harum animi praesentium, quidem non incidunt vel illum sunt nihil reprehenderit a itaque. </p> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque numquam itaque at facilis iusto inventore.</p>" />
 </lu-comment-block>
 ```
 
@@ -24,10 +37,10 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `compact` | `compact` | `boolean` | `false` | — | `luBooleanAttribute` | N’affiche l’auteur que sur le premier commentaire de |
-| `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie la taille du composant. |
+| `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | Réduit la taille du texte de tous les commentaires du bloc. |
 | `chatAnswer` | `chatAnswer` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `authorName` | `authorName` | `PortalContent` | — | — | — | — |
-| `avatar` | `avatar` | `TemplateRef<unknown>` | — | — | — | — |
+| `authorName` | `authorName` | `PortalContent` | — | — | — | Nom de l’auteur des commentaires. [PortalContent] |
+| `avatar` | `avatar` | `TemplateRef<unknown>` | — | — | — | Template de l’avatar de l’auteur (généralement un lu-user-picture). Sans avatar, aucun n’est affiché. |
 | `size` | `size` | `'S' \| 'M'` | — | — | — | — |
 
 ### CommentChatComponent (component)
@@ -42,22 +55,22 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `content` | `content` | `PortalContent` | — | ✅ | — | — |
+| `content` | `content` | `PortalContent` | — | ✅ | — | Contenu du commentaire : chaîne de caractères (le HTML est interprété), TemplateRef ou composant. Requis. |
 | `date` | `date` | `Date` | — | — | — | Modifie la date du commentaire. |
-| `datePipeFormat` | `datePipeFormat` | `string \| undefined` | `undefined` | — | — | [v20.3] Modifie le format de date affiché, via Angular DatePipe. Exemples : 'mediumDate', 'YYYY', etc. |
-| `noInfos` | `noInfos` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `plainText` | `plainText` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `datePipeFormat` | `datePipeFormat` | `string \| undefined` | `undefined` | — | — | [v20.3] Modifie le format de date affiché, via Angular DatePipe. Exemples : 'mediumDate', 'YYYY', etc. |
+| `noInfos` | `noInfos` | `boolean` | `false` | — | `luBooleanAttribute` | Masque les informations du commentaire (avatar, auteur et date). |
+| `plainText` | `plainText` | `boolean` | `false` | — | `luBooleanAttribute` | Conserve les retours à la ligne d’un contenu en texte brut. |
 
 ## Related files
 
 - 📝 [Code & implementation](./comment.component.md)
 - 🎨 [Design guidelines](./comment.design.md)
 - 🎯 [Figma design tokens](./comment.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-comment-angular-ai--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-comment-angular-ai--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

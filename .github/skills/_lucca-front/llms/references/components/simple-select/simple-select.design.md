@@ -1,5 +1,61 @@
 # simple-select — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Placeholder
+    - Champ désactivé
+    - Regroupements d'options
+    - Structure arborescente
+    - Bouton d'ajout d'option
+    - Sélection d'un collaborateur
+    - Champ effaçable
+  - Comportement
+    - État vide
+    - Chargement
+    - États spécifiques
+    - Débordement
+  - Règles d'utilisation
+    - Radio ou Select
+    - Affichage du label
+    - Choisir une largeur appropriée
+    - Largeur du menu déroulant
+- Design (iOS)
+  - Anatomie
+  - Options
+    - Regroupement d'options
+    - Bouton d'ajout d'option
+  - Comportement
+    - Recherche
+    - État vide
+  - Règles d'utilisation
+    - Écran de sélection ou Menu
+    - Hauteur de l’écran de sélection
+    - Orientation du chevron
+- Design (Android)
+  - Anatomie
+  - Options
+    - Regroupement des options
+    - Bouton d'ajout d'options
+  - Comportement
+    - Recherche
+    - État vide
+  - Règles d'utilisation
+    - Positionnement du label
+    - Écran de sélection ou Menu
+    - Hauteur de l’écran de sélection
+    - Orientation du chevron
+- Content
+  - Contenu et rédaction
+    - Label
+    - Message d'aide
+    - Tous les intitulés
+  - Cas d'usage : le Select pour devise
+    - Format obligatoire
+    - Configuration
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/587833)
 
 # Design

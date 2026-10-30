@@ -1,5 +1,31 @@
 # activity-feed — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Commentaire
+    - Pièces jointes
+    - Modification d'un paramètre
+  - États
+    - Étape en cours
+    - État de succès
+    - État de refus
+  - Comportement
+    - Ordre d'affichage
+    - Chargement
+  - Règles d'utilisation
+    - Horizontal
+    - Numérotation
+    - Fil de discussion
+- Content
+  - Contenu & rédaction
+    - En-tête
+    - Description d'une action
+    - Description d'un statut
+    - L'horodatage
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/3541ee)
 
 # Design

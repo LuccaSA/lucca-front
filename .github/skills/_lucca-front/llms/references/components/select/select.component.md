@@ -1,6 +1,16 @@
 # select — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-api-select--docs)
+**Sommaire**
+
+- Angular
+  - Api select
+  - Date select
+  - Filter pill
+  - Select
+- HTML/CSS
+  - Basic
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-api-select-angular-basic--docs)
 
 ## Angular
 
@@ -91,7 +101,7 @@ import { ALuDateAdapter, LuStringDateAdapter } from '@lucca-front/ng/core';
 ```html
 <label class="textfield">
 	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate">
-		<ng-container *luDisplayer="let value">Birthday: {{ value | date: "LL" }}</ng-container>
+		<ng-container *luDisplayer="let value">Birthday: {{ value | date: "longDate" }}</ng-container>
 	</lu-date-select>
 	<span class="textfield-label">Label</span>
 </label>
@@ -114,7 +124,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
-import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { FilterPillComponent, luFilterPillsTranslations } from '@lucca-front/ng/filter-pills';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 ```
@@ -133,7 +143,7 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 		[(ngModel)]="examples"
 		[options]="legumes | filterLegumes: clue"
 		(clueChange)="clue = $event"
-		filterPillLabelPlural="légumes"
+		[filterPillLabelPluralFn]="legumesPluralFn"
 	/>
 </lu-filter-pill>
 

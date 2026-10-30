@@ -1,5 +1,16 @@
 # footer
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - FooterComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -9,7 +20,7 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 ## Basic Usage
 
 ```html
-<lu-footer narrowAtMediaMax=XXS> <ng-container footerContent> Content </ng-container> <button type="button" luButton>Button</button> <button type="button" luButton="outlined">Button</button>
+<lu-footer> <ng-container footerContent> Content </ng-container> <button type="button" luButton>Button</button> <button type="button" luButton="outlined">Button</button>
 </lu-footer>
 ```
 
@@ -27,7 +38,7 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 | `container` | `container` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un container autour du contenu du footer. |
 | `containerMax` | `containerMax` | `FooterContainerMax \| null` | — | — | — | Définit la largeur maximale du container. |
 | `forceNarrow` | `forceNarrow` | `boolean` | `false` | — | `luBooleanAttribute` | Force le mode narrow (responsive) du footer. |
-| `dialog` | `dialog` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `dialog` | `dialog` | `boolean` | `false` | — | `luBooleanAttribute` | Adapte le footer à son utilisation dans une dialog. |
 | `narrowAtMediaMax` | `narrowAtMediaMax` | `'XXS' \| 'XS' \| 'S' \| 'M'` | `'XXS'` | — | — | Définit le breakpoint pour lequel le mode narrow (responsive) est appliqué. |
 
 ## Related files
@@ -35,11 +46,11 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 - 📝 [Code & implementation](./footer.component.md)
 - 🎨 [Design guidelines](./footer.design.md)
 - 🎯 [Figma design tokens](./footer.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-cards-footer--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-cards-footer--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

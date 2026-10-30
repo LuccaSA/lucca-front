@@ -23,18 +23,18 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `mobileNavSideBottom` | `mobileNavSideBottom` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `mobileNavSideBottom` | `mobileNavSideBottom` | `boolean` | `false` | — | `luBooleanAttribute` | Déplace la navigation latérale en bas de l’écran sur mobile. |
 
 ## Related files
 
 - 📝 [Code & implementation](./app-layout.component.md)
 - 🎨 [Design guidelines](./app-layout.design.md)
 - 🎯 [Figma design tokens](./app-layout.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-app-layout-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-app-layout-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

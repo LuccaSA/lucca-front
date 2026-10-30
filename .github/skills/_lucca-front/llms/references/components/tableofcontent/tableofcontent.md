@@ -20,11 +20,11 @@ import { TableOfContentLinkDirective, TableOfContentComponent } from '@lucca-fro
 
 - 📝 [Code & implementation](./tableofcontent.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-tableofcontent-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-tableofcontent-angular-basic--docs)
 
 ## Changelog
 
-_Aucun changement d'API entre v21.4.2 et v22.0.0._
+_Aucun changement d'API entre v21.4.4 et v22.1.1._
 
 ### Notes de release (ZeroHeight)
 

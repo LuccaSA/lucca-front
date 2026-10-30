@@ -1,19 +1,29 @@
 # callout-disclosure — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular--docs)
+**Sommaire**
+
+- Angular
+  - Disclosure
+- HTML/CSS
+  - Basic
+  - Iconless
+  - Size
+  - Status
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular-basic--docs)
 
 ## Angular
 
 ### Disclosure
 
-Component selector : `lu-callout-disclosure`
-
 ```js
-import { CalloutDisclosureComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective } from "@lucca-front/ng/callout";
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { CALLOUT_SIZE, CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
+import { PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html
-<lu-callout-disclosure heading="List title">
+<lu-callout-disclosure heading="List title" (openChange)="openChange($event)">
 	<ul lu-callout-feedback-list palette="neutral">
 		<li lu-callout-feedback-item>
 			<lu-feedback-item-description>Feedback description.</lu-feedback-item-description>

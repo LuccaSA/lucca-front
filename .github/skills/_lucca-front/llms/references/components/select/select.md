@@ -12,16 +12,16 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
 **Selector:** `lu-select`
 
-> ⚠️ **Déprécié** : prefer SimpleSelect or MultipleSelect
+> ⚠️ **Déprécié** : since 17.3.2; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
 
 #### Inputs
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `pickerOverlap` | `pickerOverlap` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `placeholderInput` | `placeholder` | `string` | `''` | — | — | — |
+| `pickerOverlap` | `pickerOverlap` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le sélecteur de date par-dessus le champ (déjà activé à l’initialisation par lu-date-select). |
+| `placeholderInput` | `placeholder` | `string` | `''` | — | — | Texte affiché en l’absence de valeur. |
 | `multipleInput` | `multiple` | `boolean \| string` | `false` | — | — | — |
-| `disabledInput` | `disabled` | `boolean` | `false` | — | — | — |
+| `disabledInput` | `disabled` | `boolean` | `false` | — | — | Désactive le champ. |
 
 #### Outputs
 
@@ -39,11 +39,11 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
 - 📝 [Code & implementation](./select.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-api-select--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-api-select-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

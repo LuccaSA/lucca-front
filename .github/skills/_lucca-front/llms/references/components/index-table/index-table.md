@@ -1,5 +1,27 @@
 # index-table
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - IndexTableActionFileComponent (component)
+  - IndexTableActionComponent (component)
+  - IndexTableBodyComponent (component)
+  - IndexTableRowCellHeaderComponent (component)
+  - IndexTableRowCellComponent (component)
+  - IndexTableFootComponent (component)
+  - IndexTableHeadComponent (component)
+  - IndexTableRowComponent (component)
+  - IndexTableComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -31,7 +53,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `group` | `group` | `PortalContent \| null` | `null` | — | — | Regroupe des lignes de tableau en les rendant dépliables. |
+| `group` | `group` | `PortalContent \| null` | `null` | — | — | — |
 | `groupButtonAlt` | `groupButtonAlt` | `string \| null` | `null` | — | — | — |
 
 #### Models (two-way binding)
@@ -49,16 +71,18 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `align` | `align` | `IndexTableAlign \| null` | `null` | — | — | — |
+| `sort` | `sort` | `IndexTableSort \| null` | `null` | — | — | — |
 | `selectable` | `selectable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes du tableau sélectionnables via des checkbox. |
-| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | Masque les cellules d’en-tête du tableau. |
+| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `actions` | `actions` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `inlineSize` | `inlineSize` | `number` | `0` | — | `luNumberAttribute` | — |
+| `sortWithEllipsis` | `sortWithEllipsis` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
-#### Models (two-way binding)
+#### Outputs
 
-| Property | Type | Required | Notes |
-|----------|------|----------|-------|
-| `sort` | `IndexTableSort \| null` | — | — |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `sortChange` | `sortChange` | `IndexTableSort` | — |
 
 ### IndexTableRowCellComponent (component)
 
@@ -88,8 +112,8 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | — |
-| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | Libellé de la checkbox de sélection d’une ligne. La checkbox n’est affichée que si ce libellé est renseigné. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive la checkbox de sélection d’une ligne. |
 | `mixed` | `mixed` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un état de sélection mixte (-) à la checkbox d'une ligne. |
 | `stack` | `stack` | `number` | `1` | — | `luNumberAttribute` | — |
 
@@ -110,7 +134,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 | `selectable` | `selectable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes du tableau sélectionnables via des checkbox. |
 | `layoutFixed` | `layoutFixed` | `boolean` | `false` | — | `luBooleanAttribute` | Applique une largeur fixe aux colonnes. |
 | `empty` | `empty` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche un empty state à la place des lignes de tableau. |
-| `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | — |
+| `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | Applique des modificateurs selon la taille de l’écran (ex. : `{ layoutFixedAtMediaMinS: true }`). |
 
 ### Injection tokens
 
@@ -123,11 +147,23 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 - 📝 [Code & implementation](./index-table.component.md)
 - 🎨 [Design guidelines](./index-table.design.md)
 - 🎯 [Figma design tokens](./index-table.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-index-table-angular-actions--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+`IndexTableRowCellHeaderComponent` :
+  + `sort` : IndexTableSort | null
+  + (output) `sortChange` : IndexTableSort
+  - (model) `sort`
+
+### 22.0.5
+
+`IndexTableRowCellHeaderComponent` :
+  + `sortWithEllipsis` : boolean
 
 ### 22.0.0
 

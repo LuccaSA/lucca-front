@@ -1,5 +1,22 @@
 # Pattern IA
 
+**Sommaire**
+
+- Cas d'usage
+  - Aide à la rédaction et traduction
+    - Élément déclencheur
+    - Affichage des suggestions
+  - Analyse de contenu
+    - Élément déclencheur
+    - Animation d'analyse
+    - Affichage de l'analyse
+  - Assistant conversationnel
+- Codes graphiques
+  - Codes graphiques
+    - Iconographie
+    - Utilisation du dégradé
+- Content
+
 # Cas d'usage
 
 ## Aide à la rédaction et traduction

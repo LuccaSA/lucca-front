@@ -1,5 +1,39 @@
 # index-table — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+    - Cellules
+  - Options
+    - Sélectionnable
+    - Regroupement
+    - Affichage d’une ligne de total
+    - Empilement
+  - Comportement
+    - Interactions
+    - Pagination
+    - Empty state
+    - Débordement
+    - Sélection en masse
+    - Actions
+    - Tri
+    - Petits écrans et mobile
+  - Règles d’utilisation
+    - Nombre de colonnes
+    - Double ligne dans une cellule
+    - Alignements des en-têtes
+    - Alignement des données
+    - Alignement des cases à cocher
+    - Arborescence
+    - Défilement vertical
+  - Contenu & rédaction
+    - Intitulé des en-têtes
+    - Noms et prénoms
+    - Emphase
+    - Valeurs manquantes
+    - Séparateurs verticaux
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/24fc14)
 
 # Design

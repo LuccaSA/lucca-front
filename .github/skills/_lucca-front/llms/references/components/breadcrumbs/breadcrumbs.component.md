@@ -1,6 +1,6 @@
 # breadcrumbs — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-breadcrumbs-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-breadcrumbs-angular-basic--docs)
 
 ## Angular
 
@@ -9,13 +9,14 @@ Component selector : `lu-breadcrumbs`
 ### Basic
 
 ```js
-import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
+import { provideRouter, RouterLink } from '@angular/router';
+import { BreadcrumbsComponent, BreadcrumbsLinkDirective, luBreadcrumbsTranslations } from '@lucca-front/ng/breadcrumbs';
 ```
 
 ```html
 <lu-breadcrumbs>
-	<a *luBreadcrumbsLink routerLink="/" ariaCurrentWhenActive="page">You</a>
-	<a *luBreadcrumbsLink ariaCurrentWhenActive="page" href="#2">are</a>
+	<a *luBreadcrumbsLink routerLink="/">You</a>
+	<a *luBreadcrumbsLink href="#2">are</a>
 	<a *luBreadcrumbsLink aria-current="page">here</a>
 </lu-breadcrumbs>
 ```

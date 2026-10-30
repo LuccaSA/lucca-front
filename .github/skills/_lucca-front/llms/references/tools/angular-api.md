@@ -1,6 +1,67 @@
 # API Angular hors composants
 
-> Providers, injection tokens, pipes et services exportés par `@lucca-front/ng/*` qui ne sont documentés sur la page d'aucun composant (package sans composant, ou symbole éloigné des composants du package). Extraits du code source au tag `v22.0.0` (JSDoc `@deprecated` inclus).
+**Sommaire**
+
+- api (`@lucca-front/ng/api`)
+  - Services
+  - Modules dépréciés
+- core (`@lucca-front/ng/core`)
+  - Injection tokens
+  - Pipes
+  - Services
+- core-select/legal-units (`@lucca-front/ng/core-select/legal-units`)
+  - Injection tokens
+- department (`@lucca-front/ng/department`)
+  - Services
+- dialog/testing (`@lucca-front/ng/dialog/testing`)
+  - Providers
+- establishment (`@lucca-front/ng/establishment`)
+  - Services
+- filter-pills/core (`@lucca-front/ng/filter-pills/core`)
+  - Injection tokens
+- formly (`@lucca-front/ng/formly`)
+  - Providers
+  - Modules dépréciés
+- forms/rich-text-input/formatters/html (`@lucca-front/ng/forms/rich-text-input/formatters/html`)
+  - Providers
+- forms/rich-text-input/formatters/markdown (`@lucca-front/ng/forms/rich-text-input/formatters/markdown`)
+  - Providers
+- forms/rich-text-input/formatters/plain-text (`@lucca-front/ng/forms/rich-text-input/formatters/plain-text`)
+  - Providers
+- input (`@lucca-front/ng/input`)
+  - Modules dépréciés
+- number (`@lucca-front/ng/number`)
+  - Pipes
+  - Modules dépréciés
+- number-format (`@lucca-front/ng/number-format`)
+  - Pipes
+- option (`@lucca-front/ng/option`)
+  - Injection tokens
+  - Modules dépréciés
+- popup (`@lucca-front/ng/popup`)
+  - Injection tokens
+  - Services
+  - Modules dépréciés
+- safe-content (`@lucca-front/ng/safe-content`)
+  - Pipes
+  - Modules dépréciés
+- sidepanel (`@lucca-front/ng/sidepanel`)
+  - Services
+  - Modules dépréciés
+- software-icon-wrapper (`@lucca-front/ng/software-icon-wrapper`)
+  - Injection tokens
+- title (`@lucca-front/ng/title`)
+  - Providers
+  - Injection tokens
+  - Services
+  - Modules dépréciés
+- user (`@lucca-front/ng/user`)
+  - Injection tokens
+  - Pipes
+  - Services
+  - Modules dépréciés
+
+> Providers, injection tokens, pipes et services exportés par `@lucca-front/ng/*` qui ne sont documentés sur la page d'aucun composant (package sans composant, ou symbole éloigné des composants du package). Extraits du code source (JSDoc `@deprecated` inclus).
 
 ## api (`@lucca-front/ng/api`)
 
@@ -122,6 +183,15 @@ bind to a string with iso 26001 format YYYY-MM-DD
 #### LuEstablishmentService
 
 #### LuLegalUnitService
+
+## filter-pills/core (`@lucca-front/ng/filter-pills/core`)
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `FILTER_PILL_INPUT_COMPONENT` | `FilterPillInputComponent` | — |
+| `FILTER_PILL_HOST_COMPONENT` | `FilterPillHostComponent` | — |
 
 ## formly (`@lucca-front/ng/formly`)
 
@@ -256,7 +326,7 @@ bind to a string with iso 26001 format YYYY-MM-DD
 
 ### Services
 
-#### LuSidepanel — ⚠️ Déprécié : Use LuModal with `modal.open(component, data, { mode: 'sidepanel' })` instead.
+#### LuSidepanel — ⚠️ Déprécié : since 15.2.0; use LuModal with `modal.open(component, data, { mode: 'sidepanel' })`.
 
 - `open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D | undefined = undefined, config: Partial<LuModalConfig> = {}): ILuSidepanelRef<D, LuModalContentResult<T>>`
 

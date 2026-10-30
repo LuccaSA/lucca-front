@@ -1,15 +1,27 @@
 # callout-popover — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-feedback-callout-popover-angular--docs)
+**Sommaire**
+
+- Angular
+  - Popover
+- HTML/CSS
+  - Basic
+  - Custom
+  - Size
+  - Status
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-popover-angular-basic--docs)
 
 ## Angular
 
 ### Popover
 
-Component selector : `lu-callout-popover`
-
 ```js
-import { CalloutPopoverComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective } from "@lucca-front/ng/callout";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { CALLOUT_POPOVER_SIZE, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutPopoverComponent, CalloutStates } from '@lucca-front/ng/callout';
+import { PopoverPosition } from '@lucca-front/ng/popover2';
+import { PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html

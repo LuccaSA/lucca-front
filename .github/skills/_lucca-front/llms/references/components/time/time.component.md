@@ -1,6 +1,16 @@
 # time — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-time-angular-basic--docs)
+**Sommaire**
+
+- Angular
+  - Picker basic
+  - Picker duration
+  - Range picker
+- HTML/CSS
+  - Picker basic
+  - Picker range
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-time-angular-basic--docs)
 
 ## Angular
 
@@ -11,7 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { BASE_PICKER_SIZE, TimePickerComponent } from '@lucca-front/ng/time';
+import { BASE_PICKER_SIZE, luTimePickerTranslations, TimePickerComponent } from '@lucca-front/ng/time';
 ```
 
 ```html
@@ -45,7 +55,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { BASE_PICKER_SIZE, DurationPickerComponent } from '@lucca-front/ng/time';
+import { BASE_PICKER_SIZE, DurationPickerComponent, luDurationPickerTranslations } from '@lucca-front/ng/time';
 ```
 
 ```html
@@ -69,7 +79,7 @@ import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
+import { luTimeRangePickerTranslations, TimePickerComponent, TimeRangePickerComponent } from '@lucca-front/ng/time';
 ```
 
 ```html

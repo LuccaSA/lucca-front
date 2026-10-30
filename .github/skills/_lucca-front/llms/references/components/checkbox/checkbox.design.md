@@ -1,5 +1,29 @@
 # checkbox — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Message d’aide
+    - Champ obligatoire
+    - Groupe de Checkbox
+    - Checklist
+  - Comportement
+    - Navigation au clavier
+    - Débordement
+    - Champ en erreur
+    - Zone interactive
+  - Règles d'utilisation
+    - Checkbox ou Radio ?
+    - Checkbox ou Select
+- Content
+- iOS
+  - Checkbox iOS
+    - LuccaToggleCheckboxStyle
+    - Style
+    - Mixed state (iOS 16+)
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/42c88e)
 
 # Design

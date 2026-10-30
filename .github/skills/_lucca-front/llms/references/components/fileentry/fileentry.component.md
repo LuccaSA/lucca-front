@@ -1,6 +1,6 @@
 # fileentry — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-file-fileentry-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-file-fileentry-angular-basic--docs)
 
 ## Angular
 
@@ -50,8 +50,6 @@ import { FileEntry, FileEntryComponent } from '@lucca-front/ng/file-upload';
 		size: 28420,
 		type: 'image/png',
 	}"
-	withFileSize
-	withFileType
 	previewUrl="https://dummyimage.com/500"
 	inlineMessageError="Virus détecté dans le fichier."
 />

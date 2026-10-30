@@ -1,5 +1,22 @@
 # multi-select
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuMultiSelectContentDisplayerComponent (component)
+  - LuMultiSelectCounterDisplayerComponent (component)
+  - LuMultiSelectDefaultDisplayerComponent (component)
+  - LuMultiSelectDisplayerInputDirective (directive)
+  - LuMultiDisplayerDirective (directive)
+  - LuMultiSelectWithSelectAllDirective (directive)
+  - LuMultiSelectInputComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -36,6 +53,8 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 ### LuMultiSelectDisplayerInputDirective (directive)
 
 **Selector:** `[luMultiSelectDisplayerInput]`
+
+**exportAs:** `luMultiSelectDisplayerInput`
 
 ### LuMultiDisplayerDirective (directive)
 
@@ -91,11 +110,11 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 - 📝 [Code & implementation](./multi-select.component.md)
 - 🎨 [Design guidelines](./multi-select.design.md)
 - 🎯 [Figma design tokens](./multi-select.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-multi-select-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-multi-select-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

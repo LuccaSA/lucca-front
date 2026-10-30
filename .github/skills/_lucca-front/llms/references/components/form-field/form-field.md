@@ -1,5 +1,19 @@
 # form-field
 
+**Sommaire**
+
+- Import
+- API Reference
+  - FormFieldComponent (component)
+  - InputDirective (directive)
+  - PresentationDisplayDirective (directive)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -52,6 +66,8 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `standalone` | `luInputStandalone` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `labelledBy` | `luInputLabelledBy` | `string \| null` | `null` | — | — | — |
+| `describedBy` | `luInputDescribedBy` | `string \| null` | `null` | — | — | — |
 
 ### PresentationDisplayDirective (directive)
 
@@ -70,11 +86,17 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 - 📝 [Code & implementation](./form-field.component.md)
 
 - 🎯 [Figma design tokens](./form-field.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-form-field--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-form-field--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
+`InputDirective` :
+  + `luInputLabelledBy` : string | null
+  + `luInputDescribedBy` : string | null
 
 ### 22.0.0
 

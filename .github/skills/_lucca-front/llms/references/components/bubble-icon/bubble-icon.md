@@ -9,10 +9,10 @@ import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 ## Basic Usage
 
 ```html
-<lu-bubble-icon icon="app" />
-<lu-bubble-icon icon="app" />
-<lu-bubble-icon icon="app" />
-<lu-bubble-icon icon="app" />
+<lu-bubble-icon icon="app" bubbleDirection="random" />
+<lu-bubble-icon icon="app" bubbleDirection="random" />
+<lu-bubble-icon icon="app" bubbleDirection="random" />
+<lu-bubble-icon icon="app" bubbleDirection="random" />
 ```
 
 ## API Reference
@@ -29,22 +29,34 @@ import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 | `alt` | `alt` | `string \| null` | `null` | — | — | Information restituée par le lecteur d’écran. |
 | `size` | `size` | `'XS' \| 'S' \| 'M' \| 'L'` | `'M'` | — | — | Modifie la taille du composant. |
 | `palette` | `palette` | `Palette \| DecorativePalette \| ProductPalette` | `'product'` | — | — | Applique une palette de couleurs au composant. |
-| `bubbleDirection` | `bubbleDirection` | `'top' \| 'bottom' \| 'left' \| 'right' \| 'random'` | `'random'` | — | — | — |
+| `bubbleDirection` | `bubbleDirection` | `'top' \| 'bottom' \| 'left' \| 'right' \| 'random'` | `inject(LU_BUBBLE_ICON_DEFAULT_DIRECTION)` | — | — | Définit une direction de la bulle. Aléatoire par défaut, modifiable via le token `LU_BUBBLE_ICON_DEFAULT_DIRECTION`. |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_BUBBLE_ICON_DEFAULT_DIRECTION` | `BubbleIconDirection` | — |
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+- [`DecorativePalette`](../../types/DecorativePalette.md) — 12 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./bubble-icon.component.md)
 - 🎨 [Design guidelines](./bubble-icon.design.md)
 - 🎯 [Figma design tokens](./bubble-icon.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-bubble-icon-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-bubble-icon-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+~ `bubbleDirection` : défaut 'random' → inject(LU_BUBBLE_ICON_DEFAULT_DIRECTION)
++ token `LU_BUBBLE_ICON_DEFAULT_DIRECTION` : BubbleIconDirection
 
 ### 22.0.0
 

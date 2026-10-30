@@ -16,6 +16,7 @@ import { listFilesAtTag } from '../collectors/git-snapshot';
 import { extractPackageAPI, extractPackageSymbols } from '../collectors/ast-extractor';
 import { VersionConfig, WriteResult } from '../types';
 import { writeToolsPage } from './skill-writer';
+import { followsCode } from '../version-config';
 
 /** Documented components: their package + selector scope (from discovery). */
 export interface AngularApiAttachment {
@@ -55,7 +56,7 @@ function listPackageEntrypoints(tag: string): string[] {
 }
 
 export function writeAngularApiPage(skillsDir: string, version: VersionConfig, attachments: AngularApiAttachment[]): WriteResult | null {
-	const packages = listPackageEntrypoints(version.tag);
+	const packages = listPackageEntrypoints(version.source);
 	if (packages.length === 0) return null;
 
 	// Everything the documented components already render (same extraction, same scoping).
@@ -138,7 +139,7 @@ export function writeAngularApiPage(skillsDir: string, version: VersionConfig, a
 		`# API Angular hors composants\n\n` +
 		`> Providers, injection tokens, pipes et services exportés par \`@lucca-front/ng/*\` qui ne sont documentés sur la page d'aucun composant ` +
 		`(package sans composant, ou symbole éloigné des composants du package). ` +
-		`Extraits du code source au tag \`${version.tag}\` (JSDoc \`@deprecated\` inclus).\n\n`;
+		`Extraits du code source${followsCode(version) ? '' : ` au tag \`${version.tag}\``} (JSDoc \`@deprecated\` inclus).\n\n`;
 
 	return writeToolsPage(skillsDir, 'angular-api.md', header + sections.join('\n\n') + '\n');
 }

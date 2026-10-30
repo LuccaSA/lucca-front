@@ -1,6 +1,16 @@
 # switchfield — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-switchfield-angular--docs)
+**Sommaire**
+
+- Angular
+  - Field
+- HTML/CSS
+  - Field disabled
+  - Field invalid
+  - Field size
+  - Field
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-switchfield-angular--docs)
 
 ## Angular
 
@@ -14,13 +24,13 @@ Component selector : `lu-switch-input`
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/forms';
+import { SwitchInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 
 ```html
-<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
-	<lu-switch-input [(ngModel)]="model.example" required />
+<lu-form-field>
+	<lu-switch-input [(ngModel)]="model.example" />
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```

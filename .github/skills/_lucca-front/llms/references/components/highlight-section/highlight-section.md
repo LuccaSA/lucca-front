@@ -18,6 +18,8 @@ import { HighlightSectionComponent } from '@lucca-front/ng/highlight-section';
 
 **Selector:** `lu-highlight-section`
 
+> ⚠️ **Déprécié** : since 22.1.1; an evolution of BoxComponent will replace it in 22.2.
+
 #### Inputs
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
@@ -37,11 +39,15 @@ import { HighlightSectionComponent } from '@lucca-front/ng/highlight-section';
 - 📝 [Code & implementation](./highlight-section.component.md)
 
 - 🎯 [Figma design tokens](./highlight-section.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-highlight-section-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-highlight-section-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.1
+
+~ `HighlightSectionComponent` devient déprécié (Will be replaced by `lu-box` in v22.2.)
 
 ### 22.0.0
 

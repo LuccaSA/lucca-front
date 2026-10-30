@@ -1,6 +1,6 @@
 # software-icon — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-software-icon-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-software-icon-angular-basic--docs)
 
 ## Angular
 
@@ -20,7 +20,7 @@ import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE, SoftwareIconComponent } from '@lucca
 
 ```js
 import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
-import { SoftwareIconWrapperComponent, SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
+import { luSoftwareIconWrapperTranslations, SoftwareIconWrapperComponent, SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 ```
 

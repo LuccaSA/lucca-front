@@ -1,6 +1,11 @@
 # popover2 — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-popover2-angular--docs)
+**Sommaire**
+
+- Angular
+  - Popover2
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover2-angular--docs)
 
 ## Angular
 
@@ -12,7 +17,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
+import { configureLuPopover, luPopoverTranslations, PopoverDirective } from '@lucca-front/ng/popover2';
 ```
 
 ```html
@@ -20,7 +25,6 @@ import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
 	<button
 		luButton
 		[luPopover2]="contentRef"
-		luPopoverTrigger="click"
 		luPopoverCloseDelay="300"
 		luPopoverOpenDelay="300"
 		luPopoverPosition="above"
@@ -83,7 +87,6 @@ examplePosition:
 	luButton
 	[luPopover2]="contentRef"
 	[customPositions]="examplePosition"
-	luPopoverTrigger="click"
 	luPopoverCloseDelay="300"
 	luPopoverOpenDelay="300"
 >

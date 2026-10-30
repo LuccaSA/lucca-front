@@ -1,5 +1,18 @@
 # form-label
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - FormLabelComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -24,23 +37,33 @@ import { FormLabelComponent } from '@lucca-front/ng/form-label';
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `required` | `required` | `boolean` | `false` | — | `luBooleanAttribute` | Marque le champ comme obligatoire. |
-| `error` | `error` | `boolean` | `false` | — | `luBooleanAttribute` | Applique l’état d’erreur au label. |
+| `error` | `error` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `tooltip` | `tooltip` | `string \| SafeHtml \| null` | `null` | — | — | Affiche une icône (?) associée à une info-bulle. |
 | `tag` | `tag` | `string \| null` | `null` | — | — | Ajoute un tag associé au label. |
 | `size` | `size` | `FormLabelSize \| null` | `null` | — | — | Modifie la taille du composant. |
 | `counterStatus` | `counterStatus` | `number` | `0` | — | `luNumberAttribute` | Nombre de caractères actuellement saisis. |
 | `counterMax` | `counterMax` | `number` | `0` | — | `luNumberAttribute` | Définit la valeur maximale du compteur de caractères. |
-| `counterId` | `counterId` | `string \| null` | `null` | — | — | — |
+| `counterId` | `counterId` | `string \| null` | `null` | — | — | Id appliqué au compteur, à référencer dans l’aria-describedby du champ. |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_FORM_LABEL_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./form-label.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-form-label-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-form-label-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_FORM_LABEL_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

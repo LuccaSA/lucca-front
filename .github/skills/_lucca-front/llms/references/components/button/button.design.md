@@ -1,5 +1,30 @@
 # button — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Usage
+    - Hiérarchie
+    - Actions critiques
+    - Groupe de boutons
+  - Comportement
+    - États
+    - Largeur
+    - Ellipse
+  - Règles d’utilisation
+    - Ordre d’affichage
+    - Position
+    - Utilisation des icônes
+    - Button ou link ?
+- Content
+  - Contenu et rédaction
+- iOS
+  - Button iOS
+    - Style
+    - Icône & image
+    - États
+    - Taille
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/098404)
 
 # Design

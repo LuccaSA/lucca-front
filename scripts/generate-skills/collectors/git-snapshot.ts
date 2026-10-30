@@ -12,7 +12,7 @@
  * `git show`. Break-even is ~17 reads. Archiving unconditionally made a `--component button` run go
  * from 7.0 s to 23.7 s, because the changelog walk touches ~18 tags and most of them are read only a
  * dozen times each. So each `(tag, pathspec)` starts on `git show` and is snapshotted only after
- * `PROMOTION_THRESHOLD` reads, where the archive has already paid for itself.
+ * `promotionThreshold` reads, where the archive has already paid for itself.
  *
  * Reads always have an answer: a tag that fails to archive stays on `git show` for the rest of the
  * run. Degrading to the previous behaviour is always preferred over returning wrong content.
@@ -37,11 +37,21 @@ const WORKSPACE_ROOT = path.join(__dirname, '..', '..', '..');
  * Its value appears at full-run scale, where each tag of the changelog walk is read by ~120 packages
  * instead of one. 128 is the value that costs nothing on a small run while still promoting early
  * enough on a large one (128 reads ≈ 3.7 s of `git show` before a 0.5 s archive takes over).
- * Override with `GIT_SNAPSHOT_THRESHOLD`. Validated rather than `Number(env) || 128`, which would
+ * A full `--ref` run promotes at once instead (see `promoteEagerly`). Override with
+ * `GIT_SNAPSHOT_THRESHOLD`. Validated rather than `Number(env) || 128`, which would
  * swallow a typo silently and could not express a deliberate 0 (promote immediately) — the very
  * shape called out as a mistake in http.ts.
  */
-const PROMOTION_THRESHOLD = readThresholdEnv(128);
+let promotionThreshold = readThresholdEnv(128);
+
+/**
+ * A full `--ref` run reads each tag of the changelog walk ~173 times, past 128 anyway: the first
+ * 128 reads are spawns the archive would have saved. Measured on `skills:update`: 92 s → 33 s, same
+ * output. An explicit `GIT_SNAPSHOT_THRESHOLD` still wins.
+ */
+export function promoteEagerly(): void {
+	if (!process.env['GIT_SNAPSHOT_THRESHOLD']?.trim()) promotionThreshold = 0;
+}
 
 function readThresholdEnv(fallback: number): number {
 	const raw = process.env['GIT_SNAPSHOT_THRESHOLD'];
@@ -55,12 +65,36 @@ function readThresholdEnv(fallback: number): number {
 }
 
 /** Top-level trees the collectors read from a tag. A path outside them is never snapshotted. */
-const PATHSPECS = ['packages/ng', 'packages/scss', 'stories'];
+const PATHSPECS = ['packages/ng', 'packages/prisme', 'packages/icons', 'packages/scss', 'stories'];
 
 const readCounts = new Map<string, number>();
 /** `(tag, pathspec)` → extraction root, or null once archiving has failed for it. */
 const roots = new Map<string, string | null>();
 let tmpRoot: string | null = null;
+
+/** Release tags never change: their snapshots outlive the run. `npm ci` clears them with the rest of `node_modules`. */
+const CACHE_ROOT = path.join(WORKSPACE_ROOT, 'node_modules', '.cache', 'lf-skills-tags');
+/** `(tag, pathspec)` → its directory under CACHE_ROOT, or null when it stays in this run's temp dir. */
+const cacheDirs = new Map<string, string | null>();
+
+/**
+ * Directory name under CACHE_ROOT for a snapshot worth keeping across runs, or null to keep it in this
+ * run's temp dir. `tag` is a release tag (`v22.1.1`) or, with `--ref`, the tree SHA of the commit.
+ */
+function persistentKey(tag: string, pathspec: string): string | null {
+	// The hook's tree SHA changes on every commit: persisting it would grow the cache without bound.
+	if (!/^v\d+\.\d+\.\d+$/.test(tag)) return null;
+	return `${tag}__${pathspec}`.replace(/[^\w.-]/g, '_');
+}
+
+function cacheDirOf(tag: string, pathspec: string): string | null {
+	const key = `${tag}::${pathspec}`;
+	if (!cacheDirs.has(key)) {
+		const name = persistentKey(tag, pathspec);
+		cacheDirs.set(key, name === null ? null : path.join(CACHE_ROOT, name));
+	}
+	return cacheDirs.get(key)!;
+}
 
 function git(args: string[], maxBuffer = 8 * 1024 * 1024): string {
 	return execFileSync('git', args, { cwd: WORKSPACE_ROOT, encoding: 'utf-8', maxBuffer, stdio: ['pipe', 'pipe', 'pipe'] });
@@ -99,12 +133,8 @@ function snapshotRoot(tag: string, pathspec: string): string | null {
 
 	let root: string | null = null;
 	try {
-		const dir = path.join(ensureTmpRoot(), `${tag}__${pathspec}`.replace(/[^\w.-]/g, '_'));
-		fs.mkdirSync(dir, { recursive: true });
-		const tarball = `${dir}.tar`;
-		git(['archive', '--format=tar', '-o', tarball, tag, '--', pathspec]);
-		execFileSync('tar', ['-xf', tarball, '-C', dir], { stdio: ['pipe', 'pipe', 'pipe'] });
-		fs.rmSync(tarball, { force: true });
+		const dir = cacheDirOf(tag, pathspec) ?? path.join(ensureTmpRoot(), `${tag}__${pathspec}`.replace(/[^\w.-]/g, '_'));
+		if (!fs.existsSync(dir)) extractInto(dir, tag, pathspec);
 		root = dir;
 	} catch {
 		root = null;
@@ -112,6 +142,27 @@ function snapshotRoot(tag: string, pathspec: string): string | null {
 
 	roots.set(key, root);
 	return root;
+}
+
+/**
+ * Extracted beside `dir`, then renamed into place: a run killed mid-`tar` must not leave a partial
+ * tree that every later run would read as the whole tag.
+ */
+function extractInto(dir: string, tag: string, pathspec: string): void {
+	const partial = `${dir}.partial-${process.pid}`;
+	const tarball = `${partial}.tar`;
+	try {
+		fs.mkdirSync(partial, { recursive: true });
+		git(['archive', '--format=tar', '-o', tarball, tag, '--', pathspec]);
+		execFileSync('tar', ['-xf', tarball, '-C', partial], { stdio: ['pipe', 'pipe', 'pipe'] });
+		fs.renameSync(partial, dir);
+	} catch (err) {
+		// Another run renamed the same snapshot into place first.
+		if (!fs.existsSync(dir)) throw err;
+	} finally {
+		fs.rmSync(tarball, { force: true });
+		fs.rmSync(partial, { recursive: true, force: true });
+	}
 }
 
 /** Reads a file as it exists at `tag`, or null when it does not exist there. */
@@ -123,7 +174,9 @@ export function readAtTag(tag: string, filePath: string): string | null {
 		const seen = (readCounts.get(key) ?? 0) + 1;
 		readCounts.set(key, seen);
 
-		if (seen > PROMOTION_THRESHOLD) {
+		const cached = cacheDirOf(tag, pathspec);
+		// A snapshot an earlier run left on disk costs nothing to read: no reason to wait for the threshold.
+		if (roots.has(key) || seen > promotionThreshold || (cached !== null && fs.existsSync(cached))) {
 			const root = snapshotRoot(tag, pathspec);
 			if (root) {
 				const full = path.join(root, filePath);

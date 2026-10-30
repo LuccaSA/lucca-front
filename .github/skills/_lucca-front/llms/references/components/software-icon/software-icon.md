@@ -1,5 +1,17 @@
 # software-icon
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - SoftwareIconComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -45,11 +57,11 @@ import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 - 📝 [Code & implementation](./software-icon.component.md)
 - 🎨 [Design guidelines](./software-icon.design.md)
 - 🎯 [Figma design tokens](./software-icon.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-software-icon-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-software-icon-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

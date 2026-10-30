@@ -1,5 +1,25 @@
 # Parcours de création de ressource : avec action de diffusion
 
+**Sommaire**
+
+- Création
+  - Description du parcours
+    - Étape d'initialisation
+    - Étapes intermédiaires
+    - Création de ressources enfants
+    - Étape récapitulative
+  - Gestion des erreurs
+    - Complétion séquentielle
+    - Complétion libre
+  - Enregistrement
+  - Actions secondaires
+- Consultation et modification
+  - Affichage des ressources
+    - Ressources en cours de création
+  - Modification d’une ressource
+    - Ressources en cours de création
+    - Ressources diffusées
+
 # Création
 
 ## Description du parcours

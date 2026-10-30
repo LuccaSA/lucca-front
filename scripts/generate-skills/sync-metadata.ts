@@ -273,7 +273,7 @@ export function syncMetadata(
 	dryRun = false,
 ): SyncResult {
 	const existing = loadMetadataMap();
-	const ngPackages = listNgPackages(version.tag);
+	const ngPackages = listNgPackages(version.source);
 	const result: SyncResult = { added: [], updated: [], removed: [], warnings: [] };
 
 	// Collect all slugs from Storybook (use compact dedup like discovery)

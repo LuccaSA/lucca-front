@@ -1,5 +1,19 @@
 # listing
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - ListingItemComponent (component)
+  - ListingComponent (component)
+- Type definitions
+- Related files
+- Changelog
+  - 22.1.1
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -34,31 +48,37 @@ import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing'
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `ordered` | `ordered` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `orderedFancy` | `orderedFancy` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `checklist` | `checklist` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `icons` | `icons` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `ordered` | `ordered` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste sous forme ordonnée (piloté par le contrôle type). |
+| `orderedFancy` | `orderedFancy` | `boolean` | `false` | — | `luBooleanAttribute` | [v21.2] Présente la liste sous forme ordonnée stylisée (piloté par le contrôle type). |
+| `checklist` | `checklist` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste sous forme de checklist (piloté par le contrôle type). |
+| `icons` | `icons` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste avec des icônes (piloté par le contrôle type). |
 | `defaultIcon` | `defaultIcon` | `LuccaIcon` | `'signConfirm'` | — | — | Modifie l’icône par défaut. |
 | `palette` | `palette` | `Palette` | `'none'` | — | — | Modifie la couleur des icônes. |
 | `start` | `start` | `number` | `1` | — | `luNumberAttribute` | Modifie la valeur initiale de la liste. |
 | `inline` | `inline` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `divider` | `divider` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute un séparateur vertical entre les éléments. |
 | `reversed` | `reversed` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste sous forme décroissante. |
+| `size` | `size` | `ListingSize \| null` | `null` | — | — | Modifie la taille du composant. |
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./listing.component.md)
 - 🎨 [Design guidelines](./listing.design.md)
 - 🎯 [Figma design tokens](./listing.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-listing-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-listing-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.1
+
+`ListingComponent` :
+  + `size` : ListingSize | null
 
 ### 22.0.0
 

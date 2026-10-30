@@ -1,6 +1,6 @@
 # clear — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-clear-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-clear-angular-basic--docs)
 
 ## Angular
 
@@ -9,12 +9,12 @@ Component selector : `lu-clear`
 ### Clear
 
 ```js
-import { CLEAR_SIZE, ClearComponent } from '@lucca-front/ng/clear';
+import { CLEAR_SIZE, ClearComponent, luClearTranslations } from '@lucca-front/ng/clear';
 import { PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html
-<lu-clear>Clear</lu-clear>
+<lu-clear (onClear)="onClear($event)"><span #content>Clear</span></lu-clear>
 ```
 
 ## HTML/CSS

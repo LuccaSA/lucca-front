@@ -1,6 +1,6 @@
 # date — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-filterspills-date-angular--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-filterspills-date-angular--docs)
 
 ## Angular
 
@@ -10,7 +10,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { FilterPillComponent, luFilterPillsTranslations } from '@lucca-front/ng/filter-pills';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 ```
 

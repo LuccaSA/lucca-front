@@ -1,5 +1,16 @@
 # Feedback
 
+**Sommaire**
+
+- Content
+  - Animations
+  - Button
+  - Inline message
+  - Dialog
+  - Callout
+  - Empty state
+  - Toast
+
 # Content
 
 ## Animations

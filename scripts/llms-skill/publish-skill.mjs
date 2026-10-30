@@ -15,8 +15,12 @@ const TARGETS = {
 	npm: { outDir: 'dist/ng', pack: true, linkRemoteOnly: true },
 };
 
-/** Whether the committed skill covers `version`: its own minor, or a technical minor it covers. */
+/**
+ * Whether the committed skill covers `version`: a skill that follows the code covers whatever this
+ * commit is tagged, a minor's skill its own minor or a technical minor it covers.
+ */
 export function skillCovers(manifest, version) {
+	if (manifest.followsCode) return true;
 	const minor = /^v?(\d+\.\d+)\./.exec(version)?.[1];
 	return !!minor && (manifest.minor === minor || !!manifest.technicalMinors?.[minor]);
 }
@@ -145,7 +149,8 @@ function publish(targetName) {
 	} else {
 		cpSync(skillDir, join(outDir, 'llms'), { recursive: true });
 	}
-	writeFileSync(join(outDir, 'llms.txt'), renderIndex(manifest.minor, files, { ref, linkRemoteOnly: target.linkRemoteOnly }));
+	const documented = manifest.followsCode ? ref.replace(/^v/, '') : manifest.minor;
+	writeFileSync(join(outDir, 'llms.txt'), renderIndex(documented, files, { ref, linkRemoteOnly: target.linkRemoteOnly }));
 
 	if (target.pack) {
 		const packed = packedFiles(outDir);
@@ -154,7 +159,7 @@ function publish(targetName) {
 			throw new Error(`${missing.join(', ')} written to ${target.outDir} but absent from the npm tarball, check "files" / .npmignore`);
 		}
 	}
-	console.log(`[llms] ${version} → skill ${manifest.minor} (${shipped}/${files.length} files shipped) → ${target.outDir}/llms.txt + llms/`);
+	console.log(`[llms] ${version} → skill ${documented} (${shipped}/${files.length} files shipped) → ${target.outDir}/llms.txt + llms/`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

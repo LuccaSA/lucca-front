@@ -1,5 +1,19 @@
 # link
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LinkComponent (component)
+  - LuRouterLink (directive)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -18,11 +32,12 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `luHref` | `href` | `string` | `''` | — | — | Adresse de la page cible. À n’utiliser qu’en lien externe ou non connu par le routeur. |
-| `routerLinkCommands` | `luLink` | `LuRouterLink['routerLink'] \| null` | `null` | — | — | — |
+| `routerLinkCommands` | `luLink` | `LuRouterLink['routerLink'] \| null` | `null` | — | — | Adresse de la page cible (commandes du routeur). |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le lien. |
 | `decorationHover` | `decorationHover` | `boolean` | `false` | — | `luBooleanAttribute` | Souligne le lien seulement au survol. |
-| `external` | `external` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `hiddenIcon` | `hiddenIcon` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `external` | `external` | `boolean` | `false` | — | `luBooleanAttribute` | Ouvre le lien dans un nouvel onglet et affiche une icône. |
+| `hiddenIcon` | `hiddenIcon` | `boolean` | `false` | — | `luBooleanAttribute` | N’affiche l’icône de lien externe qu’au survol, focus ou touch. |
+| `neutral` | `neutral` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le lien dans la couleur de texte par défaut plutôt que dans la couleur de lien. |
 
 ### LuRouterLink (directive)
 
@@ -33,17 +48,27 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 | Token | Type | Description |
 |-------|------|-------------|
 | `LU_LINK_INSTANCE` | `boolean` | — |
+| `LU_LINK_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./link.component.md)
 - 🎨 [Design guidelines](./link.design.md)
 - 🎯 [Figma design tokens](./link.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+`LinkComponent` :
+  + `neutral` : boolean
+
+### 22.0.5
+
++ token `LU_LINK_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

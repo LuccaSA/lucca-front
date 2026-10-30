@@ -12,16 +12,20 @@ const manifest = JSON.parse(readFileSync(join(repoRoot, '.github/skills/_lucca-f
 describe('skillCovers', () => {
 	const skill22 = { minor: '22.0' };
 	const skill21 = { minor: '21.3', technicalMinors: { 21.4: { reason: 'compatibilité Angular 22' } } };
+	const codeSkill = { minor: '22.1', followsCode: true };
 
 	it.each`
-		skill      | version           | expected
-		${skill22} | ${'v22.0.5'}      | ${true}
-		${skill22} | ${'22.0.0'}       | ${true}
-		${skill22} | ${'v22.1.0-rc.1'} | ${false}
-		${skill22} | ${'v99.0.0'}      | ${false}
-		${skill22} | ${'master'}       | ${false}
-		${skill21} | ${'v21.4.2'}      | ${true}
-		${skill21} | ${'v21.3.1'}      | ${true}
+		skill        | version           | expected
+		${codeSkill} | ${'v22.2.0'}      | ${true}
+		${codeSkill} | ${'v23.0.0'}      | ${true}
+		${codeSkill} | ${'master'}       | ${true}
+		${skill22}   | ${'v22.0.5'}      | ${true}
+		${skill22}   | ${'22.0.0'}       | ${true}
+		${skill22}   | ${'v22.1.0-rc.1'} | ${false}
+		${skill22}   | ${'v99.0.0'}      | ${false}
+		${skill22}   | ${'master'}       | ${false}
+		${skill21}   | ${'v21.4.2'}      | ${true}
+		${skill21}   | ${'v21.3.1'}      | ${true}
 	`('$version against the $skill.minor skill: $expected', ({ skill, version, expected }) => {
 		expect(skillCovers(skill, version)).toBe(expected);
 	});

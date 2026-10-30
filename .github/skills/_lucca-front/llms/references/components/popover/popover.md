@@ -1,5 +1,18 @@
 # popover
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuPopoverPanelComponent (component)
+  - LuPopoverTargetDirective (directive)
+  - LuPopoverTriggerDirective (directive)
+  - Modules dépréciés
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -11,6 +24,8 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 ### LuPopoverPanelComponent (component)
 
 **Selector:** `lu-popover`
+
+> ⚠️ **Déprécié** : since 21.0.0; use PopoverDirective.
 
 **exportAs:** `LuPopoverPanel`
 
@@ -38,6 +53,8 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 
 **Selector:** `[luPopoverTarget]`
 
+> ⚠️ **Déprécié** : since 21.0.0; use PopoverDirective.
+
 **exportAs:** `LuPopoverTarget`
 
 #### Inputs
@@ -53,6 +70,8 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 ### LuPopoverTriggerDirective (directive)
 
 **Selector:** `[luPopover]`
+
+> ⚠️ **Déprécié** : since 21.0.0; use PopoverDirective.
 
 **exportAs:** `LuPopoverTrigger`
 
@@ -89,11 +108,11 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 - 📝 [Code & implementation](./popover.component.md)
 
 - 🎯 [Figma design tokens](./popover.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-popover--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

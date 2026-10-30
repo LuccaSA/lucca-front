@@ -28,6 +28,7 @@ import { PopoverDirective, PopoverContentComponent } from '@lucca-front/ng/popov
 | `customPositionsInput` | `customPositions` | `ConnectionPositionPair[] \| null` | `null` | — | — | — |
 | `luPopoverNoCloseButtonInput` | `luPopoverNoCloseButton` | `boolean` | `false` | — | `luBooleanAttribute` | Masque le bouton de fermeture du popover visible à la navigation clavier. |
 | `luPopoverAnchor` | `luPopoverAnchor` | `FlexibleConnectedPositionStrategyOrigin` | `this.elementRef` | — | — | — |
+| `luPopoverBackdrop` | `luPopoverBackdrop` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `luPopoverIgnoredOutsidePointerTargets` | `luPopoverIgnoredOutsidePointerTargets` | `HTMLElement \| HTMLElement[] \| null` | `null` | — | — | — |
 | `luPopoverOpenDelay` | `luPopoverOpenDelay` | `number` | `300` | — | `luNumberAttribute` | Délai en millisecondes avant ouverture du popover. |
 | `luPopoverCloseDelay` | `luPopoverCloseDelay` | `number` | `100` | — | `luNumberAttribute` | Délai en millisecondes avant fermeture du popover. |
@@ -72,11 +73,16 @@ import { PopoverDirective, PopoverContentComponent } from '@lucca-front/ng/popov
 
 - 📝 [Code & implementation](./popover2.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-popover2-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover2-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+`PopoverDirective` :
+  + `luPopoverBackdrop` : boolean
 
 ### 22.0.0
 

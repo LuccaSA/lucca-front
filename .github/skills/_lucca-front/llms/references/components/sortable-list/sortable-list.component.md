@@ -1,6 +1,15 @@
 # sortable-list — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-sortable-list-angular-basic--docs)
+**Sommaire**
+
+- Angular
+  - Basic
+  - Draggable
+- HTML/CSS
+  - List
+  - List basic
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-sortable-list-angular-basic--docs)
 
 ## Angular
 

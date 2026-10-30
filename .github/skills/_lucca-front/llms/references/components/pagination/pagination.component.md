@@ -1,6 +1,6 @@
 # pagination — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-navigation-pagination-angular--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-pagination-angular--docs)
 
 ## Angular
 
@@ -48,7 +48,7 @@ Voici un exemple d'utilisation de `LuPagination` en mode `compact` :
 ### Pagination
 
 ```js
-import { PAGINATION_MOD, PaginationComponent } from '@lucca-front/ng/pagination';
+import { luPaginationTranslations, PAGINATION_MOD, PaginationComponent } from '@lucca-front/ng/pagination';
 ```
 
 ```html

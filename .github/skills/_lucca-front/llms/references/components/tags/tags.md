@@ -1,5 +1,17 @@
 # tags
 
+**Sommaire**
+
+- Import
+- API Reference
+  - TagComponent (component)
+- Type definitions
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -16,30 +28,36 @@ import { TagComponent } from '@lucca-front/ng/tag';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `string` | — | ✅ | — | Modifie le texte affiché par le composant. |
+| `label` | `label` | `string \| null` | `null` | — | — | Modifie le texte affiché par le composant. |
 | `size` | `size` | `'S' \| 'M' \| 'L'` | `'M'` | — | — | Modifie la taille du tag. |
 | `palette` | `palette` | `Palette \| DecorativePalette` | `'none'` | — | — | — |
 | `outlined` | `outlined` | `boolean` | `false` | — | `booleanAttribute` | Applique un style secondaire au tag. |
 | `link` | `link` | `string` | — | — | — | — |
 | `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Ajoute une icône au tag. |
+| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `booleanAttribute` | Masque le label en le conservant dans le DOM pour les lecteurs d’écran |
 | `withEllipsis` | `withEllipsis` | `boolean` | `false` | — | `booleanAttribute` | [v20.3] Ellipse le texte et ajoute une tooltip lorsque le label est trop long. |
 | `AI` | `AI` | `boolean` | `false` | — | `booleanAttribute` | [v20.3] Applique les couleurs IA. |
 
 ## Type definitions
 
 - [`DecorativePalette`](../../types/DecorativePalette.md) — 12 available values
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./tags.component.md)
 - 🎨 [Design guidelines](./tags.design.md)
 - 🎯 [Figma design tokens](./tags.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-tags-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-tags-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
++ `hiddenLabel` : boolean
+~ `label` : string → string | null, devient optionnel, défaut ∅ → null
 
 ### 22.0.0
 

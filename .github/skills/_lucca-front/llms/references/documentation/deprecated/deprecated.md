@@ -1,5 +1,26 @@
 # Liste des éléments dépréciés
 
+**Sommaire**
+
+  - Composants
+  - Classes & inputs
+  - Variables CSS
+- Liste des éléments supprimés
+  - LF 22.0
+    - Classes
+    - Variables CSS
+  - LF 20.1
+    - Composants
+    - Classes
+    - Mixins
+  - LF 19.1
+    - Composants
+    - Classes
+    - Variables CSS
+  - LF 18.1
+    - Composants
+    - Classes
+
 ## Composants
 
 | Nom | Depuis | Suppression | Action à réaliser |

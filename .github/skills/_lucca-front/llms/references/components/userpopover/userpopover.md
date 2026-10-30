@@ -1,5 +1,19 @@
 # userpopover
 
+**Sommaire**
+
+- Import
+- API Reference
+  - LuUserPopoverComponent (component)
+  - LuUserPopoverDirective (directive)
+  - Providers
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -38,6 +52,7 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 | `customPositionsInput` | `customPositions` | `ConnectionPositionPair[] \| null` | `null` | — | — | — |
 | `luPopoverNoCloseButtonInput` | `luPopoverNoCloseButton` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `luPopoverAnchor` | `luPopoverAnchor` | `FlexibleConnectedPositionStrategyOrigin` | `this.elementRef` | — | — | — |
+| `luPopoverBackdrop` | `luPopoverBackdrop` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `luPopoverIgnoredOutsidePointerTargets` | `luPopoverIgnoredOutsidePointerTargets` | `HTMLElement \| HTMLElement[] \| null` | `null` | — | — | — |
 | `luPopoverOpenDelay` | `luPopoverOpenDelay` | `number` | `300` | — | `luNumberAttribute` | — |
 | `luPopoverCloseDelay` | `luPopoverCloseDelay` | `number` | `100` | — | `luNumberAttribute` | — |
@@ -69,18 +84,23 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 |-------|------|-------------|
 | `LU_POPUP_EMPLOYEE_TRANSLATIONS` | `unknown` | — |
 | `LU_USER_POPOVER_USER` | `Signal<ILuUser>` | — |
-| `USER_POPOVER_IS_ACTIVATED` | `Observable<boolean>` | ⚠️ **Déprécié** : no longer needed as popover is always activated  |
 
 ## Related files
 
 - 📝 [Code & implementation](./userpopover.component.md)
 - 🎨 [Design guidelines](./userpopover.design.md)
 - 🎯 [Figma design tokens](./userpopover.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-users-display-userpopover--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-users-display-userpopover--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+`LuUserPopoverDirective` :
+  + `luPopoverBackdrop` : boolean
+- token `USER_POPOVER_IS_ACTIVATED` retiré
 
 ### 22.0.0
 

@@ -1,6 +1,15 @@
 # main-layout — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-main-layout-angular-basic--docs)
+**Sommaire**
+
+- Angular
+  - Basic
+  - InAppLayout
+- HTML/CSS
+  - Basic
+  - InAppLayout
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-main-layout-angular-basic--docs)
 
 ## Angular
 
@@ -10,6 +19,7 @@
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { MAIN_LAYOUT_ILLUSTRATION_END_START, MAIN_LAYOUT_ILLUSTRATION_START_END, MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
+import { PALETTE, PRODUCT_PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html
@@ -40,6 +50,7 @@ import { MAIN_LAYOUT_ILLUSTRATION_END_START, MAIN_LAYOUT_ILLUSTRATION_START_END,
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { MAIN_LAYOUT_ILLUSTRATION_END_START, MAIN_LAYOUT_ILLUSTRATION_START_END, MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
+import { PALETTE, PRODUCT_PALETTE } from '@lucca/prisme/core';
 ```
 
 ```html

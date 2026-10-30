@@ -1,5 +1,15 @@
 # Nombres
 
+**Sommaire**
+
+- Content
+  - Séparateur de milliers et de décimales (radix)
+  - Montants de devises
+  - Absence de nombres
+  - Arrondis
+  - Affichage en tableau
+  - Horaire et durée
+
 # Content
 
 ## Séparateur de milliers et de décimales (radix)

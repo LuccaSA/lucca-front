@@ -1,6 +1,6 @@
 # footer — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-cards-footer--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-cards-footer--docs)
 
 ## Angular
 
@@ -14,7 +14,7 @@ import { FOOTER_CONTAINER_MAX, FOOTER_NARROW_AT_MEDIA_MAX, FooterComponent } fro
 ```
 
 ```html
-<lu-footer narrowAtMediaMax="XXS">
+<lu-footer>
 	<ng-container footerContent>Content</ng-container>
 	<button type="button" luButton>Button</button>
 	<button type="button" luButton="outlined">Button</button>

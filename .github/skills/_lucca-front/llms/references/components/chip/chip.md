@@ -1,5 +1,19 @@
 # chip
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - ChipComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -9,7 +23,7 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 ## Basic Usage
 
 ```html
-<lu-chip>Label</lu-chip>
+<lu-chip (kill)="kill($event)">Label</lu-chip>
 ```
 
 ## API Reference
@@ -25,10 +39,10 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `withEllipsis` | `withEllipsis` | `boolean` | `false` | — | `luBooleanAttribute` | [20.1] Ellipse le texte et ajoute une tooltip lorsque le label est trop long. |
 | `unkillable` | `unkillable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend le chip non supprimable. |
-| `palette` | `palette` | `string` | — | — | — | — |
+| `palette` | `palette` | `string` | — | — | — | Applique la palette product au composant. Seule la valeur product a un effet. |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le composant. |
-| `size` | `size` | `ChipSize \| null` | `null` | — | — | — |
-| `state` | `state` | `ChipState \| null` | `null` | — | — | — |
+| `size` | `size` | `ChipSize \| null` | `null` | — | — | Modifie la taille du composant. |
+| `state` | `state` | `ChipState \| null` | `null` | — | — | [20.1] Donne une information sur l'état du composant. |
 | `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Ajoute une icône au chip. |
 
 #### Outputs
@@ -37,20 +51,30 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 |----------|-------------|------|-------|
 | `kill` | `kill` | `Event` | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CHIP_TRANSLATIONS` | `unknown` | — |
+
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./chip.component.md)
 
 - 🎯 [Figma design tokens](./chip.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-chip-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-chip-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_CHIP_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

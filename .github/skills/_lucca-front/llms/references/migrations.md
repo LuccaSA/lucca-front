@@ -1,12 +1,10 @@
-# Migrations Lucca Front — jusqu'à v22.0.0
+# Migrations Lucca Front
 
 > Codemods exécutables via `ng generate @lucca-front/ng:<nom>`. Ils réécrivent automatiquement le code (templates, SCSS, imports) pour absorber un changement d'API, là où le changelog par composant ne fait que **décrire** le changement.
-> Source : `packages/ng/schematics/collection.json` au tag v22.0.0. Liste cumulative.
+> Source : `packages/ng/schematics/collection.json`. Liste cumulative.
 > Guidance prose (étapes manuelles, contexte) : `./documentation/deprecated/deprecated.md`.
 
-_Catalogue de base de la branche 21.x (pas de diff de prédécesseur)._
-
-## Catalogue complet (cumulatif ≤ v22.0.0)
+## Catalogue complet (cumulatif)
 
 | Codemod | Commande | Effet | Introduit |
 |---------|----------|-------|-----------|
@@ -17,6 +15,7 @@ _Catalogue de base de la branche 21.x (pas de diff de prédécesseur)._
 | color-text | `ng generate @lucca-front/ng:color-text` | Replace color text tokens. | — |
 | component-path | `ng generate @lucca-front/ng:component-path` | Update path component import | — |
 | deprecated-resolver | `ng generate @lucca-front/ng:deprecated-resolver` | Migrate deprecated NgModules, types and input output. | — |
+| file-upload | `ng generate @lucca-front/ng:file-upload` | Migrate file upload usages: size default, FileEntry rendering and fileEntryDisplayWrapper | 22.0.3 |
 | lu-button | `ng generate @lucca-front/ng:lu-button` | Migrate CSS-only buttons to the new luButton component | — |
 | lu-container | `ng generate @lucca-front/ng:lu-container` | Migrate HTML container to the new lu-container component | — |
 | lu-grid | `ng generate @lucca-front/ng:lu-grid` | Migrate HTML grid to the new lu-grid component | — |

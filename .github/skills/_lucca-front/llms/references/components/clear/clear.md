@@ -19,7 +19,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `size` | `size` | `ClearSize \| null` | `null` | — | — | Modifie la taille du bouton. |
+| `size` | `size` | `ClearSize \| null` | `null` | — | — | Modifie la taille du bouton. Par défaut : taille M. |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le bouton. |
 | `palette` | `palette` | `Palette` | `'none'` | — | — | Applique une palette de couleurs au bouton. |
 | `inverted` | `inverted` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie les couleurs du bouton pour un usage sur fond foncé. |
@@ -30,16 +30,26 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 |----------|-------------|------|-------|
 | `onClearOutput` | `onClearOutput` | `void` | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CLEAR_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./clear.component.md)
 - 🎨 [Design guidelines](./clear.design.md)
 - 🎯 [Figma design tokens](./clear.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-texts-clear-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-clear-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_CLEAR_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

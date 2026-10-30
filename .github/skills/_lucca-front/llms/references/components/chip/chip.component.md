@@ -1,6 +1,20 @@
 # chip — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-chip-angular-basic--docs)
+**Sommaire**
+
+- Angular
+  - Basic
+- HTML/CSS
+  - Ellipse
+  - Basic
+  - Disabled
+  - Feedback
+  - Focusable
+  - Palettes
+  - Small
+  - Unkillable
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-chip-angular-basic--docs)
 
 ## Angular
 
@@ -11,12 +25,12 @@ Component selector : `lu-chip`
 ### Basic
 
 ```js
-import { CHIP_STATE, ChipComponent } from '@lucca-front/ng/chip';
+import { CHIP_SIZE, CHIP_STATE, ChipComponent, ChipSize, ChipState, luChipTranslations } from '@lucca-front/ng/chip';
 import { LuccaIcon } from '@lucca-front/icons';
 ```
 
 ```html
-<lu-chip>Label</lu-chip>
+<lu-chip (kill)="kill($event)">Label</lu-chip>
 ```
 
 ## HTML/CSS

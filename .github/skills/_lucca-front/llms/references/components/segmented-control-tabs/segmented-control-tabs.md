@@ -17,6 +17,8 @@ import { SegmentedControlTabsPanelComponent, SegmentedControlTabsComponent } fro
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `label` | `label` | `PortalContent` | — | — | — | — |
+| `icon` | `icon` | `LuccaIcon` | — | — | — | — |
+| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `value` | `value` | `T` | — | ✅ | — | — |
 
 ### SegmentedControlTabsComponent (component)
@@ -29,6 +31,7 @@ import { SegmentedControlTabsPanelComponent, SegmentedControlTabsComponent } fro
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `vertical` | `vertical` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `ariaLabel` | `ariaLabel` | `string \| null` | `null` | — | — | — |
 
 #### Models (two-way binding)
 
@@ -36,11 +39,26 @@ import { SegmentedControlTabsPanelComponent, SegmentedControlTabsComponent } fro
 |----------|------|----------|-------|
 | `active` | `T \| null` | — | — |
 
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+
 ## Related files
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+`SegmentedControlTabsPanelComponent` :
+  + `icon` : LuccaIcon
+  + `hiddenLabel` : boolean
+
+### 22.0.5
+
+`SegmentedControlTabsComponent` :
+  + `ariaLabel` : string | null
 
 ### 22.0.0
 

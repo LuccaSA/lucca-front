@@ -1,6 +1,25 @@
 # textfield — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
+**Sommaire**
+
+- Angular
+  - Field
+  - ngx-mask
+- HTML/CSS
+  - Field AI
+  - Field counter
+  - Field disabled
+  - Field info
+  - Field invalid
+  - Field prefix suffix
+  - Field required
+  - Field search clear
+  - Field sizes
+  - Field valueAlignRight
+  - Field width
+  - Field
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
 
 ## Angular
 
@@ -20,84 +39,58 @@ import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { TextInputComponent } from '@lucca-front/ng/forms';
+import { luTextfieldTranslations, TextInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Je suis un message d’aide"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
-	iconAItooltip="Donnée remplie automatiquement"
-	iconAIalt="Assistant IA"
->
-	<lu-text-input required placeholder="Placeholder" [(ngModel)]="model.example"></lu-text-input>
+<lu-form-field>
+	<lu-text-input placeholder="Placeholder" [(ngModel)]="model.example" (blur)="onBlur($event)"></lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Je suis un message d’aide"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
->
+<lu-form-field>
 	<lu-text-input
-		required
+		mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99"
 		placeholder="Placeholder"
 		[(ngModel)]="model.example"
-		mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99"
+		(blur)="onBlur($event)"
 	></lu-text-input>
 </lu-form-field>
-{{ model.example }}
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Je suis un message d’aide"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
->
+<lu-form-field>
 	<lu-text-input
-		required
 		hasClearer
 		placeholder="Placeholder"
 		type="password"
 		[(ngModel)]="model.example"
+		(blur)="onBlur($event)"
 	></lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Tooltip message"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
->
+<lu-form-field>
 	<lu-text-input
-		required
 		placeholder="Placeholder"
 		[prefix]="prefix"
 		[suffix]="suffix"
 		[(ngModel)]="model.example"
+		(blur)="onBlur($event)"
 	></lu-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
 ```html
-<lu-form-field AI label="Label" iconAItooltip="Donnée remplie automatiquement" iconAIalt="Assistant IA">
-	<lu-text-input [(ngModel)]="model.example" />
+<lu-form-field>
+	<lu-text-input [(ngModel)]="model.example" (blur)="onBlur($event)" />
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```

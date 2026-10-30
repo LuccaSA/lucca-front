@@ -1,5 +1,18 @@
 # textfield
 
+**Sommaire**
+
+- Import
+- API Reference
+  - TextInputComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -29,6 +42,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 | `maxlength` | `maxlength` | `number` | `0` | — | `luNumberAttribute` | — |
 | `searchIcon` | `searchIcon` | `LuccaIcon` | `'searchMagnifyingGlass'` | — | — | — |
 | `type` | `type` | `TextFieldType` | `'text'` | — | — | — |
+| `width` | `width` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
 
 #### Outputs
 
@@ -44,18 +58,22 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 585 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 
 - 📝 [Code & implementation](./textfield.component.md)
 - 🎨 [Design guidelines](./textfield.design.md)
 - 🎯 [Figma design tokens](./textfield.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
++ `width` : unknown
 
 ### 22.0.0
 

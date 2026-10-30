@@ -12,7 +12,7 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 
 **Selector:** `lu-department-select`
 
-> ⚠️ **Déprécié** : Déprécié.
+> ⚠️ **Déprécié** : since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
 
 #### Inputs
 
@@ -40,4 +40,4 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 
 - 📝 [Code & implementation](./departmentselect.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-departmentselect--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-departmentselect--docs)

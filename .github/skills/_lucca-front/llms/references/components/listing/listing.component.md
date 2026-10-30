@@ -1,6 +1,23 @@
 # listing — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-listing-angular-basic--docs)
+**Sommaire**
+
+- Angular
+  - Basic
+  - Inline
+- HTML/CSS
+  - Basic
+  - Checklist
+  - Divider
+  - Icons
+  - Inline
+  - Fancy
+  - Ordered
+  - Reversed
+  - Size
+  - Start
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-listing-angular-basic--docs)
 
 ## Angular
 
@@ -9,7 +26,7 @@ Component selector : `lu-listing`
 ### Basic
 
 ```js
-import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
+import { LISTING_SIZE, ListingComponent, ListingItemComponent, ListingSize } from '@lucca-front/ng/listing';
 ```
 
 ```html
@@ -31,7 +48,7 @@ import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing'
 ### Inline
 
 ```js
-import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
+import { LISTING_SIZE, ListingComponent, ListingItemComponent, ListingSize } from '@lucca-front/ng/listing';
 ```
 
 ```html
@@ -330,6 +347,39 @@ Classe CSS : `.listing`
 		</div>
 	</li>
 </ol>
+```
+
+### Size
+
+```css
+@forward '@lucca-front/scss/src/components/listing';
+```
+
+```html
+<ul class="listing mod-S">
+	<li class="listing-item">
+		<div class="listing-item-content">item</div>
+	</li>
+	<li class="listing-item">
+		<div class="listing-item-content">item</div>
+	</li>
+	<li class="listing-item">
+		<div class="listing-item-content">
+			item
+			<ul class="listing">
+				<li class="listing-item">
+					<div class="listing-item-content">item</div>
+				</li>
+				<li class="listing-item">
+					<div class="listing-item-content">item</div>
+				</li>
+				<li class="listing-item">
+					<div class="listing-item-content">item</div>
+				</li>
+			</ul>
+		</div>
+	</li>
+</ul>
 ```
 
 ### Start

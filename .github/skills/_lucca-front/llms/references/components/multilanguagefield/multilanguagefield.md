@@ -1,5 +1,17 @@
 # multilanguagefield
 
+**Sommaire**
+
+- Import
+- API Reference
+  - MultilanguageInputComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -30,16 +42,26 @@ import { MultilanguageInputComponent } from '@lucca-front/ng/forms';
 |----------|-------------|------|-------|
 | `translateWithAI` | `translateWithAI` | `string` | — |
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_MULTILANGUAGE_INPUT_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./multilanguagefield.component.md)
 - 🎨 [Design guidelines](./multilanguagefield.design.md)
 - 🎯 [Figma design tokens](./multilanguagefield.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-multilanguagefield-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-multilanguagefield-angular--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_MULTILANGUAGE_INPUT_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

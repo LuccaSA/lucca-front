@@ -1,5 +1,27 @@
 # data-table
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - DataTableBodyComponent (component)
+  - DataTableRowCellHeaderComponent (component)
+  - DataTableRowCellComponent (component)
+  - DataTableFootComponent (component)
+  - DataTableHeadComponent (component)
+  - DataTableRowComponent (component)
+  - DataTableComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.6
+  - 22.0.5
+  - 22.0.1
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -23,7 +45,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `group` | `group` | `PortalContent \| null` | `null` | — | — | — |
+| `group` | `group` | `PortalContent \| null` | `null` | — | — | Présente un groupe de lignes dans la story. |
 | `groupButtonAlt` | `groupButtonAlt` | `string \| null` | `null` | — | — | — |
 
 #### Models (two-way binding)
@@ -41,15 +63,17 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `editable` | `editable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `align` | `align` | `DataTableAlign \| null` | `null` | — | — | Aligne le contenu des cellules horizontalement. |
+| `align` | `align` | `DataTableAlign \| null` | `null` | — | — | Aligne le contenu des cellules horizontalement. Posé sur une cellule d’en-tête, il s’applique à toute la colonne. |
+| `sort` | `sort` | `DataTableSort \| null` | `null` | — | — | Définit l’état de tri d’une cellule d’en-tête. |
 | `fixedWidth` | `fixedWidth` | `string \| null` | `null` | — | — | — |
-| `inlineSize` | `inlineSize` | `string \| null` | `null` | — | — | Modifie la largeur d’une colonne lorsque layoutFixed est activé. |
+| `inlineSize` | `inlineSize` | `string \| null` | `null` | — | — | Modifie la largeur d’une colonne lorsque layoutFixed est activé. La valeur est définie par inlineSizeValue dans la story… |
+| `sortWithEllipsis` | `sortWithEllipsis` | `boolean` | `false` | — | `luBooleanAttribute` | Tronque le libellé du header avec une ellipsis si la colonne n’offre pas assez de largeur. |
 
-#### Models (two-way binding)
+#### Outputs
 
-| Property | Type | Required | Notes |
-|----------|------|----------|-------|
-| `sort` | `DataTableSort \| null` | — | — |
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `sortChange` | `sortChange` | `DataTableSort` | — |
 
 ### DataTableRowCellComponent (component)
 
@@ -60,7 +84,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `editable` | `editable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `align` | `align` | `DataTableAlign \| null` | `null` | — | — | Aligne le contenu des cellules horizontalement. |
+| `align` | `align` | `DataTableAlign \| null` | `null` | — | — | Aligne le contenu des cellules horizontalement. Posé sur une cellule d’en-tête, il s’applique à toute la colonne. |
 | `actions` | `actions` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 ### DataTableFootComponent (component)
@@ -75,7 +99,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `sticky` | `sticky` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `sticky` | `sticky` | `boolean` | `false` | — | `luBooleanAttribute` | Fige le header lors du défilement vertical. |
 
 ### DataTableRowComponent (component)
 
@@ -86,7 +110,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | Texte alternatif restitué à la sélection d’une ligne. |
+| `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | Texte alternatif restitué à la sélection d’une ligne. La checkbox n’est affichée que s’il est renseigné. |
 | `mixed` | `mixed` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
@@ -104,16 +128,17 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `hover` | `hover` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `hover` | `hover` | `boolean` | `false` | — | `luBooleanAttribute` | ⚠️ **Déprécié** : No replacement: rows without an action should not have a hover effect.  |
 | `selectable` | `selectable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes du tableau sélectionnables via des checkbox. |
 | `layoutFixed` | `layoutFixed` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `cellBorder` | `cellBorder` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `nested` | `nested` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `drag` | `drag` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `noOverflow` | `noOverflow` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le défilement horizontal du tableau. Celui-ci prendra alors la place nécessaire pour afficher tout son contenu… |
+| `empty` | `empty` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | — |
 | `verticalAlign` | `verticalAlign` | `DataTableVerticalAlign \| null` | `null` | — | — | Aligne le contenu des cellules verticalement. |
-| `stickyColsStart` | `stickyColsStart` | `number` | `0` | — | `luNumberAttribute` | Nombre de colonnes figées depuis la gauche. Non compatible avec l’usage de colspan. |
+| `stickyColsStart` | `stickyColsStart` | `number` | `0` | — | `luNumberAttribute` | Nombre de colonnes figées depuis la gauche. Limité à 1 avec l’usage de colspan. |
 | `stickyColsEnd` | `stickyColsEnd` | `number` | `0` | — | `luNumberAttribute` | Nombre de colonnes figées depuis la droite. Non compatible avec l’usage de colspan. |
 
 ### Injection tokens
@@ -121,17 +146,41 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 | Token | Type | Description |
 |-------|------|-------------|
 | `LU_DATA_TABLE_INSTANCE` | `DataTableComponent` | — |
+| `LU_DATA_TABLE_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./data-table.component.md)
 - 🎨 [Design guidelines](./data-table.design.md)
 - 🎯 [Figma design tokens](./data-table.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
+`DataTableRowCellHeaderComponent` :
+  + `sort` : DataTableSort | null
+  + (output) `sortChange` : DataTableSort
+  - (model) `sort`
+
+### 22.0.6
+
+`DataTableComponent` :
+  ~ `hover` : devient déprécié (No replacement: rows without an action should not have a hover effect.)
+
+### 22.0.5
+
+`DataTableRowCellHeaderComponent` :
+  + `sortWithEllipsis` : boolean
++ token `LU_DATA_TABLE_TRANSLATIONS` : unknown
+
+### 22.0.1
+
+`DataTableComponent` :
+  + `empty` : boolean
 
 ### 22.0.0
 

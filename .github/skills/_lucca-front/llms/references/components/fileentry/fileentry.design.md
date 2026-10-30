@@ -1,5 +1,23 @@
 # fileentry — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Cas d’usage
+    - Formulaire
+    - Parcours d’analyse de document
+  - Illustrations
+  - Comportement
+    - Principe de l’import temporaire
+    - Détection des erreurs
+    - Aperçu des fichiers
+- Content
+  - Contenu et rédaction
+    - Messages initiaux et contraintes
+    - Choix du terme « Sélectionner »
+    - « Fichier » ou « Document » ?
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/8282a5)
 
 # Design

@@ -1,6 +1,6 @@
 # treeselect — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-treeselect--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-treeselect--docs)
 
 ## Angular
 
@@ -47,10 +47,10 @@ import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 <lu-divider />
 <lu-filter-bar>
 	<lu-filter-pill label="Légumes">
-		<lu-multi-select filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="allLegumes" />
+		<lu-multi-select [filterPillLabelPluralFn]="legumesPluralFn" [treeSelect]="groupingFn" [options]="allLegumes" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Départements">
-		<lu-multi-select departments filterPillLabelPlural="départements" />
+		<lu-multi-select departments [filterPillLabelPluralFn]="departmentsPluralFn" />
 	</lu-filter-pill>
 	<lu-filter-pill label="Légume">
 		<lu-simple-select [treeSelect]="groupingFn" [options]="allLegumes" />

@@ -21,7 +21,7 @@
 import { readAtTag } from './git-snapshot';
 import { VersionConfig } from '../types';
 import { writeMigrationsPage } from '../generators/skill-writer';
-import { listStableTags, compareTags } from '../version-config';
+import { listStableTags, compareTags, followsCode } from '../version-config';
 
 const COLLECTION_PATH = 'packages/ng/schematics/collection.json';
 
@@ -58,7 +58,7 @@ export function collectionAt(tag: string): Map<string, string> {
 }
 
 export function collectSchematics(skillsDir: string, version: VersionConfig): { written: number; errors: number } {
-	const target = collectionAt(version.tag);
+	const target = collectionAt(version.source);
 	if (target.size === 0) {
 		console.warn(`  ⚠️  ${COLLECTION_PATH} absent ou vide au tag ${version.tag}`);
 		return { written: 0, errors: 0 };
@@ -68,6 +68,8 @@ export function collectSchematics(skillsDir: string, version: VersionConfig): { 
 	const tags = listStableTags(version.major).filter((t) => compareTags(t, version.tag) <= 0);
 	const isFirstTag = tags.length > 0 && tags[0] === version.tag;
 	const predecessor = (() => {
+		// Code past its last tag: what is new is what that tag does not have yet.
+		if (followsCode(version)) return version.tag;
 		const i = tags.indexOf(version.tag);
 		return i > 0 ? tags[i - 1] : null;
 	})();
@@ -91,13 +93,14 @@ export function collectSchematics(skillsDir: string, version: VersionConfig): { 
 
 	const cmd = (n: string) => `\`ng generate @lucca-front/ng:${n}\``;
 
-	let md = `# Migrations Lucca Front — jusqu'à ${version.tag}\n\n`;
+	const upTo = followsCode(version) ? '' : ` — jusqu'à ${version.tag}`;
+	let md = `# Migrations Lucca Front${upTo}\n\n`;
 	md += `> Codemods exécutables via \`ng generate @lucca-front/ng:<nom>\`. Ils réécrivent automatiquement le code (templates, SCSS, imports) pour absorber un changement d'API, là où le changelog par composant ne fait que **décrire** le changement.\n`;
-	md += `> Source : \`${COLLECTION_PATH}\` au tag ${version.tag}. Liste cumulative.\n`;
+	md += `> Source : \`${COLLECTION_PATH}\`${followsCode(version) ? '' : ` au tag ${version.tag}`}. Liste cumulative.\n`;
 	md += `> Guidance prose (étapes manuelles, contexte) : \`./documentation/deprecated/deprecated.md\`.\n\n`;
 
 	if (nouveaux.length > 0) {
-		md += `## 🆕 Nouveaux codemods en ${version.major}.${version.minor}.${version.patch}\n\n`;
+		md += followsCode(version) ? `## 🆕 Nouveaux codemods depuis ${version.tag}\n\n` : `## 🆕 Nouveaux codemods en ${version.major}.${version.minor}.${version.patch}\n\n`;
 		md += `À envisager en montant **vers** cette version :\n\n`;
 		md += `| Codemod | Commande | Effet |\n|---------|----------|-------|\n`;
 		for (const n of nouveaux) {
@@ -108,7 +111,7 @@ export function collectSchematics(skillsDir: string, version: VersionConfig): { 
 		md += `_Catalogue de base de la branche 21.x (pas de diff de prédécesseur)._\n\n`;
 	}
 
-	md += `## Catalogue complet (cumulatif ≤ ${version.tag})\n\n`;
+	md += followsCode(version) ? `## Catalogue complet (cumulatif)\n\n` : `## Catalogue complet (cumulatif ≤ ${version.tag})\n\n`;
 	md += `| Codemod | Commande | Effet | Introduit |\n|---------|----------|-------|-----------|\n`;
 	for (const n of names) {
 		const intro = introTag(n);

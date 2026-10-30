@@ -19,18 +19,18 @@ import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 | `label` | `label` | `PortalContent` | — | ✅ | — | Modifie le texte affiché par le composant. [PortalContent] |
 | `state` | `state` | `'success' \| 'warning' \| 'error' \| 'default'` | — | — | — | Modifie l’état de l’inline message. |
 | `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du composant. |
-| `withTooltip` | `withTooltip` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `withTooltip` | `withTooltip` | `boolean` | `false` | — | `luBooleanAttribute` | Tronque le texte avec une ellipsis et l’affiche dans une tooltip au survol. |
 
 ## Related files
 
 - 📝 [Code & implementation](./inlinemessage.component.md)
 
 - 🎯 [Figma design tokens](./inlinemessage.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-inlinemessage-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-inlinemessage-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

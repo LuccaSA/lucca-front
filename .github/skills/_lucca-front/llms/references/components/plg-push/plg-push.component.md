@@ -1,6 +1,6 @@
 # plg-push — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-feedback-plg-push-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-plg-push-angular-basic--docs)
 
 ## Angular
 
@@ -10,7 +10,7 @@ Component selector : `lu-plg-push`
 
 ```js
 import { IconComponent } from '@lucca-front/ng/icon';
-import { PLGPushComponent } from '@lucca-front/ng/plg-push';
+import { LuPlgPushTranslations, PLGPushComponent } from '@lucca-front/ng/plg-push';
 ```
 
 ```html

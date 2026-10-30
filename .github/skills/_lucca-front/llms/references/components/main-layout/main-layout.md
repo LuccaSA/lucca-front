@@ -22,7 +22,7 @@ import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/m
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `overflow` | `overflow` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `overflow` | `overflow` | `boolean` | `false` | — | `luBooleanAttribute` | Permet de rendre un élément  scrollable horizontalement tout en conservant le comportement du reste du layout. |
 
 ### MainLayoutComponent (component)
 
@@ -56,11 +56,11 @@ import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/m
 
 - 📝 [Code & implementation](./main-layout.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-structure-main-layout-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-main-layout-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

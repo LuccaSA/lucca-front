@@ -1,5 +1,23 @@
 # callout-popover — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Palettes
+  - Callout
+    - Options
+  - Callout popover
+    - Options
+    - Comportement
+  - Callout disclosure
+    - Options
+  - Règles d’utilisation
+    - Boutons ou liens ?
+- Content
+  - Contenu et rédaction
+    - Callout default
+    - Callout disclosure et popover
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/64c8d8)
 
 # Design

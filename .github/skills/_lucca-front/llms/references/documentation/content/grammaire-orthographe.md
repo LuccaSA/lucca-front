@@ -1,5 +1,18 @@
 # Grammaire, orthographe
 
+**Sommaire**
+
+- Content
+  - Utilisons la voix active et la conjugaison au présent de l'indicatif
+  - Évitons le jargon technique ou métier
+  - Ne mélangeons pas les possessifs
+  - Préférer le nom au pronom ou au déterminant démonstratif
+  - Limitons l’utilisation d’adverbes
+  - Évitons la double négation
+  - 1 phrase = 1 seule information
+  - Privilégions le langage neutre
+  - Évitons les intitulés d’action neutres
+
 # Content
 
 ## Utilisons la voix active et la conjugaison au présent de l'indicatif

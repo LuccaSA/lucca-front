@@ -1,5 +1,23 @@
 # activity-feed
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - ActivityFeedStepComponent (component)
+  - ActivityFeedUpdateItemComponent (component)
+  - ActivityFeedUpdateComponent (component)
+  - ActivityFeedComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.1
+  - 22.1.0
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -9,7 +27,7 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateItemComponent, ActivityFee
 ## Basic Usage
 
 ```html
-<lu-activity-feed> <lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." /> <lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
+<lu-activity-feed> <lu-activity-feed-step [user]="user" [date]="date" /> <lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />
 </lu-activity-feed>
 ```
 
@@ -24,9 +42,11 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateItemComponent, ActivityFee
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `label` | `label` | `PortalContent \| null` | `null` | — | — | — |
-| `user` | `user` | `ILuUser \| null` | `null` | — | — | Permet de définir l’utilisateur présenté dans l’avatar |
+| `label` | `label` | `PortalContent \| null` | `null` | — | — | Description de l’étape. [PortalContent] |
+| `user` | `user` | `ILuUser \| null` | `null` | — | — | Permet de définir l’utilisateur présenté dans l’avatar (masqué pour les statuts `success` et `critical`). |
+| `avatarPlaceholder` | `avatarPlaceholder` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `status` | `status` | `ActivityFeedStepStatus \| null` | `null` | — | — | — |
+| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Étape identifiée par une icône. |
 | `date` | `date` | `Date \| string \| null` | `null` | — | — | — |
 | `datePipeFormat` | `datePipeFormat` | `string` | — | — | — | — |
 
@@ -39,7 +59,7 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateItemComponent, ActivityFee
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `label` | `label` | `string` | — | ✅ | — | — |
+| `label` | `label` | `string` | — | ✅ | — | Description de l’étape. [PortalContent] |
 
 ### ActivityFeedUpdateComponent (component)
 
@@ -49,16 +69,36 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateItemComponent, ActivityFee
 
 **Selector:** `lu-activity-feed`
 
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_ACTIVITY_FEED_TRANSLATIONS` | `unknown` | — |
+
 ## Related files
 
 - 📝 [Code & implementation](./activity-feed.component.md)
 - 🎨 [Design guidelines](./activity-feed.design.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-listings-activity-feed-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-activity-feed-angular-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.1
+
+`ActivityFeedStepComponent` :
+  + `avatarPlaceholder` : boolean
+
+### 22.1.0
+
+`ActivityFeedStepComponent` :
+  + `icon` : LuccaIcon | null
+
+### 22.0.5
+
++ token `LU_ACTIVITY_FEED_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

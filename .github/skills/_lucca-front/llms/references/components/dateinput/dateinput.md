@@ -1,5 +1,18 @@
 # dateinput
 
+**Sommaire**
+
+- Import
+- API Reference
+  - DateInputComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -20,44 +33,58 @@ import { DateInputComponent } from '@lucca-front/ng/date2';
 | `format` | `format` | `(typeof DATE_FORMAT)[keyof typeof DATE_FORMAT]` | `DATE_FORMAT.DATE` | — | — | Modifie le format de date. |
 | `ranges` | `ranges` | `unknown` | `[]` | — | — | — |
 | `hideToday` | `hideToday` | `boolean` | `false` | — | `luBooleanAttribute` | Retire la mise en valeur de la date du jour. |
-| `hasTodayButton` | `hasTodayButton` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `hasTodayButton` | `hasTodayButton` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute un bouton pour sélectionner la date du jour. |
 | `clearable` | `clearable` | `unknown` | `null` | — | `luNullableBooleanAttribute` | Ajoute un bouton de suppression lorsqu’une date est sélectionnée. |
 | `clearBehavior` | `clearBehavior` | `'clear' \| 'reset'` | `'clear'` | — | — | [v20.1] Change le comportement au clic sur la croix de suppression |
 | `hideWeekend` | `hideWeekend` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `mode` | `mode` | `'day' \| 'week' \| 'month' \| 'year'` | `'day'` | — | — | Modifie le mode de sélection au mois ou à l'année. |
+| `mode` | `mode` | `'day' \| 'week' \| 'month' \| 'year'` | `'day'` | — | — | — |
 | `getCellInfo` | `getCellInfo` | `((day: Date, mode: CalendarMode) => CellStatus) \| null` | — | — | — | — |
 | `min` | `min` | `unknown` | `new Date('1/1/1000')` | — | `transformDateInputToDate` | Définit une date minimum de sélection. |
 | `max` | `max` | `unknown` | `null` | — | `transformDateInputToDate` | Définit une date maximum de sélection. |
 | `focusedDate` | `focusedDate` | `unknown` | `null` | — | `transformDateInputToDate` | — |
+| `calendarModeInput` | `calendarMode` | `CalendarMode \| null` | `null` | — | — | — |
 | `autocomplete` | `autocomplete` | `AutoFill` | `'off'` | — | — | — |
 | `placeholder` | `placeholder` | `string` | — | — | — | — |
 | `disableOverflow` | `disableOverflow` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `hideOverflow` | `hideOverflow` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `widthAuto` | `widthAuto` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `humanized` | `humanized` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 #### Outputs
 
 | Property | Binding name | Type | Notes |
 |----------|-------------|------|-------|
+| `calendarModeChange` | `calendarModeChange` | `CalendarMode` | — |
 | `panelOpened` | `panelOpened` | `void` | — |
 | `panelClosed` | `panelClosed` | `void` | — |
 
-#### Models (two-way binding)
+### Injection tokens
 
-| Property | Type | Required | Notes |
-|----------|------|----------|-------|
-| `calendarMode` | `CalendarMode \| null` | — | — |
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DATE2_TRANSLATIONS` | `unknown` | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./dateinput.component.md)
 - 🎨 [Design guidelines](./dateinput.design.md)
 - 🎯 [Figma design tokens](./dateinput.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-date2-dateinput--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date2-dateinput--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
++ `calendarMode` : CalendarMode | null
++ `humanized` : boolean
++ (output) `calendarModeChange` : CalendarMode
+- (model) `calendarMode`
+
+### 22.0.5
+
++ token `LU_DATE2_TRANSLATIONS` : unknown
 
 ### 22.0.0
 

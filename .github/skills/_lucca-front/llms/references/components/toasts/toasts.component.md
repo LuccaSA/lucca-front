@@ -1,6 +1,6 @@
 # toasts — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-toasts--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-toasts--docs)
 
 ## Angular
 
@@ -12,7 +12,7 @@ Les toasts servent à afficher une information ou un callback dans un coin de l'
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { defaultToastDuration, LuToastInput, LuToastsComponent, LuToastsService, LuToastType } from '@lucca-front/ng/toast';
+import { defaultToastDuration, LuToastInput, LuToastsComponent, LuToastsService, luToastTranslations, LuToastType } from '@lucca-front/ng/toast';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 ```

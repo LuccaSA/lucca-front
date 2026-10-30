@@ -1,5 +1,33 @@
 # data-table — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Anatomie
+  - Options
+    - Lignes sélectionnables
+    - Lignes éditables
+    - Colonnes obligatoires
+    - Arborescence
+    - Regroupement
+    - Liens de redirection
+    - Bordures sur les cellules
+    - Actions rapides
+  - Comportement
+    - Pagination
+    - Empty state
+    - Affichage en plein écran
+  - Règles d’utilisation
+    - Alignements des en-têtes
+    - Double ligne dans une cellule
+  - Contenu et rédaction
+    - Intitulé des en-têtes
+    - Noms et prénoms
+    - Emphase
+    - Valeurs manquantes
+- Content
+  - Contenu & rédaction
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/4263a5)
 
 # Design

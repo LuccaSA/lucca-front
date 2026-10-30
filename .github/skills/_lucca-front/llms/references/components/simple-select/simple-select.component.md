@@ -1,6 +1,6 @@
 # simple-select — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-simple-select-angular--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-simple-select-angular--docs)
 
 ## Angular
 
@@ -26,10 +26,12 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 ```
 
 ```html
-<lu-form-field label="Label" tooltip="Tooltip message" inlineMessage="Helper text" inlineMessageState="default">
+<lu-form-field>
 	<lu-simple-select
 		placeholder="Placeholder"
 		clearable
+		(panelOpened)="panelOpened()"
+		(panelClosed)="panelClosed()"
 		[options]="legumes | filterLegumes: clue"
 		(clueChange)="clue = $event"
 		[(ngModel)]="model.example"

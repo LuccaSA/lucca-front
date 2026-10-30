@@ -1,5 +1,16 @@
 # button
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - ButtonComponent (component)
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -32,18 +43,18 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 | `palette` | `palette` | `'success' \| 'warning' \| 'error' \| 'product' \| 'neutral' \| 'none' \| 'brand'` | `'none'` | — | — | Applique une palette de couleurs au bouton. |
 | `state` | `state` | `'default' \| 'loading' \| 'error' \| 'success'` | `'default'` | — | — | Modifie l’état du bouton. |
 | `luButton` | `luButton` | `'' \| 'outlined' \| 'AI' \| 'AI-invert' \| 'ghost' \| 'ghost-invert' \| 'text' \| 'text-invert'` | `''` | — | — | Modifie la hierarchie ou le style du bouton.[v20.3] AI |
-| `prButton` | `prButton` | `'' \| 'outlined' \| 'AI' \| 'AI-invert' \| 'ghost' \| 'ghost-invert' \| 'text' \| 'text-invert'` | `''` | — | — | — |
+| `prButton` | `prButton` | `'' \| 'outlined' \| 'AI' \| 'AI-invert' \| 'ghost' \| 'ghost-invert' \| 'text' \| 'text-invert'` | `''` | — | — | Alias de luButton, pour une utilisation avec le sélecteur prButton. |
 
 ## Related files
 
 - 📝 [Code & implementation](./button.component.md)
 - 🎨 [Design guidelines](./button.design.md)
 - 🎯 [Figma design tokens](./button.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-actions-button-angular-ai--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-actions-button-angular-ai--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

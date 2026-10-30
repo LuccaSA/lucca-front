@@ -1,6 +1,6 @@
 # textareafield — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-forms-fields-textareafield-angular--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-textareafield-angular--docs)
 
 ## Angular
 
@@ -17,22 +17,10 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ```
 
 ```html
-<lu-form-field
-	label="Label"
-	tooltip="Je suis un message d’aide"
-	inlineMessage="Helper text"
-	inlineMessageState="default"
-	counter="0"
->
-	<lu-textarea-input
-		autoResizeScrollIntoView="false"
-		autoResize="false"
-		required
-		placeholder="Placeholder"
-		rows="3"
-		[(ngModel)]="model.example"
-	/>
+<lu-form-field>
+	<lu-textarea-input placeholder="Placeholder" [(ngModel)]="model.example" />
 </lu-form-field>
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
 ## HTML/CSS

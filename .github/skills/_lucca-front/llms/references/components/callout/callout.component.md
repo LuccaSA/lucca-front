@@ -1,6 +1,23 @@
 # callout — Code & Implementation
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-feedback-callout-angular-ai--docs)
+**Sommaire**
+
+- Angular
+  - Ai action
+  - Ai event
+  - Ai suggestion
+  - Ai
+  - Basic
+- HTML/CSS
+  - Actions
+  - ActionsInline
+  - Basic
+  - Ia
+  - Icons
+  - Killable
+  - Title
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-angular-ai--docs)
 
 ## Angular
 
@@ -8,12 +25,12 @@
 
 ```js
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, luCalloutTranslations } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-<lu-callout AI iconAlt="Assistant IA" icon="weatherStars">
+<lu-callout AI icon="weatherStars" iconAlt="Assistant IA">
 	<p>
 		<strong>Achat détecté :</strong>
 		la facture correspond à l’
@@ -30,12 +47,12 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 ```js
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, luCalloutTranslations } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-<lu-callout AI iconAlt="Assistant IA" icon="weatherStars">
+<lu-callout AI icon="weatherStars" iconAlt="Assistant IA">
 	<p>Fixer des objectifs SMART</p>
 	<lu-callout-actions inline>
 		<button luButton="outlined">Reformuler les objectifs</button>
@@ -48,7 +65,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ```js
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, luCalloutTranslations } from '@lucca-front/ng/callout';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -59,7 +76,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	<lu-form-field label="Intitulé" class="suggestion-form-field">
 		<lu-text-input required type="text" [(ngModel)]="example" />
 	</lu-form-field>
-	<lu-callout AI iconAlt="Assistant IA" icon="weatherStars" class="suggestion-callout">
+	<lu-callout AI icon="weatherStars" iconAlt="Assistant IA" class="suggestion-callout">
 		<div class="suggestion-callout-text">
 			<p>Optimiser l’utilisation des composants de formulaire selon les besoins</p>
 		</div>
@@ -77,12 +94,12 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 ```js
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, luCalloutTranslations } from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html
-<lu-callout AI iconAlt="Assistant IA" icon="weatherStars">
+<lu-callout AI icon="weatherStars" iconAlt="Assistant IA">
 	<p>Des champs ont été pré-remplis après analyse.</p>
 </lu-callout>
 ```
@@ -97,7 +114,7 @@ import { CalloutActionsComponent } from '@lucca-front/ng/callout'; /* [v20.3] Si
 ```
 
 ```html
-<lu-callout>
+<lu-callout (removedChange)="removedChange($event)">
 	<p>Feedback description</p>
 </lu-callout>
 ```

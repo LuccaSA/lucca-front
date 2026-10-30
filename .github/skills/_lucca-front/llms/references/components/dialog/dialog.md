@@ -1,5 +1,28 @@
 # dialog
 
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - DialogContentComponent (component)
+  - DialogFooterComponent (component)
+  - DialogHeaderAction (directive)
+  - DialogHeaderSubtitle (directive)
+  - DialogHeaderComponent (component)
+  - DialogRoutingContainerComponent (component)
+  - DialogComponent (component)
+  - DialogCloseDirective (directive)
+  - DialogDismissDirective (directive)
+  - DialogOpenDirective (directive)
+  - Providers
+  - Injection tokens
+  - Services
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -105,11 +128,11 @@ import { DialogContentComponent, DialogFooterComponent, DialogHeaderAction, Dial
 - 📝 [Code & implementation](./dialog.component.md)
 - 🎨 [Design guidelines](./dialog.design.md)
 - 🎯 [Figma design tokens](./dialog.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v22.0.0/storybook/?path=/docs/documentation-overlays-dialog-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-dialog-basic--docs)
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.2` jusqu'à `v22.0.0`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 

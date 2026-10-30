@@ -1,5 +1,24 @@
 # icons — Design Guidelines
 
+**Sommaire**
+
+- Design
+  - Règles d'utilisation
+    - Actions génériques
+    - Icônes sans libellé
+    - Dans les boutons
+    - Dans les menus déroulants
+    - Distinction "Clear" vs "Delete"
+  - Construction
+    - Grille
+    - Structure
+    - Angles
+    - Épaisseur
+    - Arrondis
+    - Tracés arrondis
+    - Découpe
+    - Remplissage
+
 > Sourced from [Prisme / ZeroHeight](https://prisme.lucca.io/94310e217/p/9826b3)
 
 # Design
