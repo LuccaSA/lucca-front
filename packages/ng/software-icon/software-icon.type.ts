@@ -43,6 +43,7 @@ export const SOFTWARE_ICON = [
 	'client-center',
 	'sandbox',
 	'store',
+	'integrations',
 	'lucca',
 ] as const;
 
