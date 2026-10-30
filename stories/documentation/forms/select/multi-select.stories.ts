@@ -4,6 +4,7 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 import { AsyncPipe, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
+import { LuPluralForms } from '@lucca-front/ng/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
@@ -56,6 +57,10 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegalUnits: { id: number; name: string }[];
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 	groupingFn?: TreeGroupingFn<ILegume>;
+	legumesPluralFn: (count: number) => LuPluralForms;
+	sectionsPluralFn: (count: number) => LuPluralForms;
+	establishmentsPluralFn: (count: number) => LuPluralForms;
+	usersPluralFn: (count: number) => LuPluralForms;
 } & LuMultiSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
@@ -73,6 +78,10 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 		optionKey: HiddenArgType,
 		maxValuesShown: HiddenArgType,
 		selectLegume: HiddenArgType,
+		legumesPluralFn: HiddenArgType,
+		sectionsPluralFn: HiddenArgType,
+		establishmentsPluralFn: HiddenArgType,
+		usersPluralFn: HiddenArgType,
 	},
 });
 
@@ -82,7 +91,7 @@ export const SelectAll = generateStory({
 	template: `<lu-multi-select
 	withSelectAll
 	[totalCount]="legumes.length"
-	withSelectAllDisplayerLabel="légumes"
+	[withSelectAllDisplayerLabelFn]="legumesPluralFn"
 	[clearable]="clearable"
 	[loading]="loading"
 	[(ngModel)]="legumeSelection"
@@ -93,7 +102,7 @@ export const SelectAll = generateStory({
 <pr-story-model-display>{{ legumeSelection | json }}</pr-story-model-display>`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
-		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective', 'LuCoreSelectTotalCountDirective'],
+		'@lucca-front/ng/core-select': ['LuCoreSelectTotalCountDirective'],
 	},
 	storyPartial: {
 		args: {
@@ -261,7 +270,7 @@ export const WithMultiDisplayer = generateStory({
 	</ng-container>
 </lu-multi-select>`,
 	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiDisplayerDirective', 'MultiSelectDisplayerInputDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiDisplayerDirective', 'LuMultiSelectCounterDisplayerComponent'],
 	},
 	storyPartial: {
 		args: {
@@ -292,13 +301,8 @@ export const AllAsDefaultValue = generateStory({
 	</ng-container>
 </lu-multi-select>`,
 	neededImports: {
-		'@lucca-front/ng/multi-select': [
-			'LuMultiSelectInputComponent',
-			'LuMultiDisplayerDirective',
-			'ɵLuOptionOutletDirective',
-			'MultiSelectDisplayerInputDirective',
-			'MultiSelectContentDisplayerComponent',
-		],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiDisplayerDirective', 'LuMultiSelectContentDisplayerComponent', 'LuMultiSelectDefaultDisplayerComponent'],
+		'@lucca-front/ng/core-select': ['ɵLuOptionOutletDirective'],
 	},
 	storyPartial: {
 		args: {
@@ -418,7 +422,7 @@ export const ApiV3 = generateStory({
 	template: `<lu-multi-select
 	apiV3="/api/v3/axisSections"
 	withSelectAll
-	withSelectAllDisplayerLabel="sections"
+	[withSelectAllDisplayerLabelFn]="sectionsPluralFn"
 	[(ngModel)]="selectedAxisSection"
 	[maxValuesShown]="maxValuesShown"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
@@ -440,7 +444,7 @@ export const ApiV4 = generateStory({
 	description: 'Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d’utiliser la directive `apiV4`.',
 	template: `<lu-multi-select
 	withSelectAll
-	withSelectAllDisplayerLabel="établissements"
+	[withSelectAllDisplayerLabelFn]="establishmentsPluralFn"
 	apiV4="/organization/structure/api/establishments"
 	[(ngModel)]="selectedEstablishment"
 	[maxValuesShown]="maxValuesShown"
@@ -548,7 +552,7 @@ export const UserWithSelectAll = generateStory({
 	template: `<lu-multi-select
 	users
 	withSelectAll
-	withSelectAllDisplayerLabel="utilisateurs"
+	[withSelectAllDisplayerLabelFn]="usersPluralFn"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	[(ngModel)]="selectedUsers"
 />`,
@@ -692,7 +696,7 @@ export const GroupBySelectAll = generateStory({
 	template: `<lu-multi-select
 	#selectRef
 	withSelectAll
-	withSelectAllDisplayerLabel="légumes"
+	[withSelectAllDisplayerLabelFn]="legumesPluralFn"
 	[totalCount]="legumes.length"
 	class="textfield-input"
 	[(ngModel)]="selectedLegumes"
@@ -777,9 +781,9 @@ export const AddOption = generateStory({
 			},
 			addOptionStrategy: {
 				description: 'Définit les conditions pour afficher le bouton d’ajout d’option.',
+				options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
 				control: {
 					type: 'select',
-					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
 				},
 				table: { category: 'inputs' },
 			},
@@ -802,10 +806,10 @@ export const AddOption = generateStory({
 
 export const CustomPanelHeader = generateStory({
 	name: 'Custom Panel Header',
-	description: 'Pour customiser l’en-tête du panel, il suffit d’utiliser la directive `luCoreSelectPanelHeader`.',
+	description: 'Pour customiser l’en-tête du panel, il suffit d’utiliser la directive `luSelectPanelHeader`.',
 	template: `<lu-multi-select
 	#selectRef
-	[(ngModel)]="selectedLegume"
+	[(ngModel)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[keepSearchAfterSelection]="keepSearchAfterSelection"
@@ -907,6 +911,10 @@ const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasI
 		maxValuesShown: 500,
 		selectedLegumes: [],
 		page: 1,
+		legumesPluralFn: (count: number) => ({ one: `${count} légume`, other: `${count} légumes` }),
+		sectionsPluralFn: (count: number) => ({ one: `${count} section`, other: `${count} sections` }),
+		establishmentsPluralFn: (count: number) => ({ one: `${count} établissement`, other: `${count} établissements` }),
+		usersPluralFn: (count: number) => ({ one: `${count} utilisateur`, other: `${count} utilisateurs` }),
 	},
 	parameters: {
 		docs: {
