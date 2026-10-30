@@ -11,6 +11,10 @@
 	}
 }
 
+@mixin draggable {
+	--components-sortableList-item-userSelect: none;
+}
+
 @mixin S {
 	--components-sortableList-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
 	--components-sortableList-handler-size: var(--pr-t-font-body-S-lineHeight);

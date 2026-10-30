@@ -1,13 +1,12 @@
 <div class="resourceCard-layout">
 	<div class="resourceCard-layout-before">
-		@if (wrapperRef) {
-			@if (!wrapperRef.grid() && wrapperRef.draggable()) {
-				<div class="button cdk-drag-handle resourceCard-layout-before-button" cdkDragHandle>
+		@let hasHandle = wrapperRef ? !wrapperRef.grid() && wrapperRef.draggable() : !grid() && draggable();
+		@if (hasHandle) {
+			@if (reorder) {
+				<button type="button" lu-reorder-handle class="button resourceCard-layout-before-button">
 					<lu-icon icon="dotsDrag" class="resourceCard-layout-before-button-icon" />
-				</div>
-			}
-		} @else {
-			@if (!grid() && draggable()) {
+				</button>
+			} @else {
 				<div class="button cdk-drag-handle resourceCard-layout-before-button" cdkDragHandle>
 					<lu-icon icon="dotsDrag" class="resourceCard-layout-before-button-icon" />
 				</div>
