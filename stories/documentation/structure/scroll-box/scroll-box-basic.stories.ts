@@ -4,7 +4,15 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 interface ScrollBoxBasicStory {}
 
 export default {
-	title: 'Documentation/Structure/ScrollBox',
+	title: 'Documentation/Structure/ScrollBox/Angular',
+	component: ScrollBoxComponent,
+	argTypes: {
+		vertical: {
+			control: false,
+			description: 'Calcule la visibilité du premier et du dernier élément sur l’axe vertical plutôt qu’horizontal. À utiliser lorsque le contenu de la scroll box défile verticalement.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [ScrollBoxComponent],

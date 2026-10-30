@@ -9,7 +9,7 @@ export default {
 			imports: [LuTooltipTriggerDirective],
 		}),
 	],
-	title: 'Documentation/Progress stepper/HTML&CSS/Basic',
+	title: 'Documentation/Listings/Progress stepper/HTML&CSS/Basic',
 	argTypes: {},
 	render: (args: Story) => {
 		return {
