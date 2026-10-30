@@ -2,7 +2,7 @@ name: Close inactive draft pull requests
 
 # Draft pull requests only: a reminder to the author after 7 days without activity, labeled `stale`
 # with a comment after 45 days, closed after 60. Any activity (push, comment, review, reopening)
-# removes the label and restarts the count. actions/stale cannot target drafts only (it can merely exempt them), hence this script.
+# removes the label and restarts the count. Release pull requests (release/*) stay drafts on purpose and are skipped. actions/stale cannot target drafts only (it can merely exempt them), hence this script.
 
 on:
   schedule:
@@ -53,7 +53,7 @@ jobs:
             }
 
             const pulls = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
-            for (const pr of pulls.filter((p) => p.draft)) {
+            for (const pr of pulls.filter((p) => p.draft && !p.head.ref.startsWith('release/'))) {
               const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: pr.number, per_page: 100 });
               // Only the workflow's own comment: a human reply quoting the warning is activity, not a warning
               const warning = comments.filter((c) => c.user?.login === 'github-actions[bot]' && c.body?.includes(MARKER)).at(-1);
