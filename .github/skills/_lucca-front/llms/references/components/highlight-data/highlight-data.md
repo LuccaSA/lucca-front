@@ -38,12 +38,12 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 | `value` | `value` | `PortalContent` | — | ✅ | — | Valeur affichée. [PortalContent] |
 | `subText` | `subText` | `PortalContent` | — | — | — | Texte secondaire. [PortalContent] |
 | `bubble` | `bubble` | `HighlightDataBubble \| number` | `undefined` | — | `luOptionalNumberAttribute` | Ajoute une "bulle" de décoration (derrière l’illustration s’il y en a une). |
-| `theme` | `theme` | `'white' \| 'light' \| 'dark'` | `'white'` | — | — | Modifie le fond du composant (white par défaut). |
+| `theme` | `theme` | `'white' \| 'light' \| 'dark'` | `'white'` | — | — | — |
 | `palette` | `palette` | `HighlightDataPalette \| string` | `'lucca'` | — | — | — |
 | `illustration` | `illustration` | `HighlightDataIllustration \| string` | — | — | — | Il est également possible de renseigner une URL. |
 | `size` | `size` | `HighlightDataSize \| null` | `null` | — | — | Modifie la taille du composant. |
 | `valueFirst` | `valueFirst` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche la valeur avant le titre. |
-| `nested` | `nested` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `nested` | `nested` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le composant en mode imbriqué. |
 
 ## Type definitions
 

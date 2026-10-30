@@ -19,7 +19,7 @@ import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 | `label` | `label` | `PortalContent` | — | ✅ | — | Modifie le texte affiché par le composant. [PortalContent] |
 | `state` | `state` | `'success' \| 'warning' \| 'error' \| 'default'` | — | — | — | Modifie l’état de l’inline message. |
 | `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du composant. |
-| `withTooltip` | `withTooltip` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `withTooltip` | `withTooltip` | `boolean` | `false` | — | `luBooleanAttribute` | Tronque le texte avec une ellipsis et l’affiche dans une tooltip au survol. |
 
 ## Related files
 

@@ -92,7 +92,7 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 ### Basic
 
 ```js
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
@@ -225,7 +225,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 					Tooltip when ellipsis
 				</div>
 			</td>
-			<td luIndexTableCell selectable>Selectable</td>
+			<td luIndexTableCell allowTextSelection>Selectable</td>
 			<td luIndexTableCell>
 				<div
 					class="pr-u-ellipsis pr-u-widthFitContent pr-u-focusVisible pr-u-borderRadiusM"

@@ -36,7 +36,7 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `size` | `size` | `LoadingSize \| null` | `null` | — | — | — |
+| `size` | `size` | `LoadingSize \| null` | `null` | — | — | Modifie la taille du loading. La taille L applique également automatiquement le mode block. |
 | `invert` | `invert` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie les couleurs du loading pour un usage sur fond foncé. |
 | `block` | `block` | `boolean` | `false` | — | `luBooleanAttribute` | Centre le loading dans son conteneur pour une utilisation en pleine page, dialog, section, etc. |
 | `hiddenLabel` | `hiddenLabel` | `unknown` | `null` | — | `luNullableBooleanAttribute` | Masque le label en le conservant dans le DOM pour les lecteurs d’écran. |

@@ -9,7 +9,7 @@ import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 ## Basic Usage
 
 ```html
-<lu-impersonation [(selectedUser)]="example" (clear)="example= me" /> <pr-story-model-display>{{example | json}}</pr-story-model-display>
+<lu-impersonation [(selectedUser)]="example" (clear)="example= me; onClear()" /> <pr-story-model-display>{{example | json}}</pr-story-model-display>
 ```
 
 ## API Reference
@@ -50,7 +50,7 @@ import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 
 - 📝 [Code & implementation](./impersonation.component.md)
 
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-impersonation-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-impersonation-angular-basic--docs)
 
 ## Changelog
 

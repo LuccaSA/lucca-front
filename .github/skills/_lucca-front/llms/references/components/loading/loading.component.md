@@ -9,7 +9,7 @@ Component selector : `lu-loading`
 ### Basic
 
 ```js
-import { LoadingComponent, luLoadingTranslations } from '@lucca-front/ng/loading';
+import { LOADING_SIZE, LoadingComponent, luLoadingTranslations } from '@lucca-front/ng/loading';
 ```
 
 ```html

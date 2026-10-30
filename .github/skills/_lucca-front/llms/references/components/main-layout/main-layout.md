@@ -22,7 +22,7 @@ import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/m
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `overflow` | `overflow` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `overflow` | `overflow` | `boolean` | `false` | — | `luBooleanAttribute` | Permet de rendre un élément  scrollable horizontalement tout en conservant le comportement du reste du layout. |
 
 ### MainLayoutComponent (component)
 

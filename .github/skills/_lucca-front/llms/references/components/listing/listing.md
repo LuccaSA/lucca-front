@@ -48,10 +48,10 @@ import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing'
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `ordered` | `ordered` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `orderedFancy` | `orderedFancy` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `checklist` | `checklist` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `icons` | `icons` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `ordered` | `ordered` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste sous forme ordonnée (piloté par le contrôle type). |
+| `orderedFancy` | `orderedFancy` | `boolean` | `false` | — | `luBooleanAttribute` | [v21.2] Présente la liste sous forme ordonnée stylisée (piloté par le contrôle type). |
+| `checklist` | `checklist` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste sous forme de checklist (piloté par le contrôle type). |
+| `icons` | `icons` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste avec des icônes (piloté par le contrôle type). |
 | `defaultIcon` | `defaultIcon` | `LuccaIcon` | `'signConfirm'` | — | — | Modifie l’icône par défaut. |
 | `palette` | `palette` | `Palette` | `'none'` | — | — | Modifie la couleur des icônes. |
 | `start` | `start` | `number` | `1` | — | `luNumberAttribute` | Modifie la valeur initiale de la liste. |

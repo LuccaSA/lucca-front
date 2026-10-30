@@ -53,7 +53,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `group` | `group` | `PortalContent \| null` | `null` | — | — | Regroupe des lignes de tableau en les rendant dépliables. |
+| `group` | `group` | `PortalContent \| null` | `null` | — | — | — |
 | `groupButtonAlt` | `groupButtonAlt` | `string \| null` | `null` | — | — | — |
 
 #### Models (two-way binding)
@@ -73,7 +73,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 | `align` | `align` | `IndexTableAlign \| null` | `null` | — | — | — |
 | `sort` | `sort` | `IndexTableSort \| null` | `null` | — | — | — |
 | `selectable` | `selectable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes du tableau sélectionnables via des checkbox. |
-| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | Masque les cellules d’en-tête du tableau. |
+| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `actions` | `actions` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `inlineSize` | `inlineSize` | `number` | `0` | — | `luNumberAttribute` | — |
 | `sortWithEllipsis` | `sortWithEllipsis` | `boolean` | `false` | — | `luBooleanAttribute` | — |
@@ -112,8 +112,8 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | — |
-| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | Libellé de la checkbox de sélection d’une ligne. La checkbox n’est affichée que si ce libellé est renseigné. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive la checkbox de sélection d’une ligne. |
 | `mixed` | `mixed` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un état de sélection mixte (-) à la checkbox d'une ligne. |
 | `stack` | `stack` | `number` | `1` | — | `luNumberAttribute` | — |
 
@@ -134,7 +134,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 | `selectable` | `selectable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes du tableau sélectionnables via des checkbox. |
 | `layoutFixed` | `layoutFixed` | `boolean` | `false` | — | `luBooleanAttribute` | Applique une largeur fixe aux colonnes. |
 | `empty` | `empty` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche un empty state à la place des lignes de tableau. |
-| `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | — |
+| `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | Applique des modificateurs selon la taille de l’écran (ex. : `{ layoutFixedAtMediaMinS: true }`). |
 
 ### Injection tokens
 

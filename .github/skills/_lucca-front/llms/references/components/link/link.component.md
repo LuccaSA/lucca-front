@@ -47,10 +47,8 @@ import { LinkComponent } from '@lucca-front/ng/link';
 ### Angular
 
 ```js
-import { AsyncPipe } from '@angular/common';
-import { provideRouter, RouterLink } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { LinkComponent, luLinkTranslations } from '@lucca-front/ng/link';
-import { timer } from 'rxjs';
 ```
 
 ```html

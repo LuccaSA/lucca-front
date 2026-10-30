@@ -32,11 +32,11 @@ import { LinkComponent, LuRouterLink } from '@lucca-front/ng/link';
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `luHref` | `href` | `string` | `''` | — | — | Adresse de la page cible. À n’utiliser qu’en lien externe ou non connu par le routeur. |
-| `routerLinkCommands` | `luLink` | `LuRouterLink['routerLink'] \| null` | `null` | — | — | — |
+| `routerLinkCommands` | `luLink` | `LuRouterLink['routerLink'] \| null` | `null` | — | — | Adresse de la page cible (commandes du routeur). |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le lien. |
 | `decorationHover` | `decorationHover` | `boolean` | `false` | — | `luBooleanAttribute` | Souligne le lien seulement au survol. |
-| `external` | `external` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `hiddenIcon` | `hiddenIcon` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `external` | `external` | `boolean` | `false` | — | `luBooleanAttribute` | Ouvre le lien dans un nouvel onglet et affiche une icône. |
+| `hiddenIcon` | `hiddenIcon` | `boolean` | `false` | — | `luBooleanAttribute` | N’affiche l’icône de lien externe qu’au survol, focus ou touch. |
 | `neutral` | `neutral` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le lien dans la couleur de texte par défaut plutôt que dans la couleur de lien. |
 
 ### LuRouterLink (directive)

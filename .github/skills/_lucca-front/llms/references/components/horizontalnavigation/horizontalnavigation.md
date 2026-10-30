@@ -27,7 +27,7 @@ import { HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent, Ho
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `PortalContent` | — | ✅ | — | — |
+| `label` | `label` | `PortalContent` | — | ✅ | — | Libellé de l’onglet. [PortalContent] |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive un onglet. |
 
 ### HorizontalNavigationComponent (component)
@@ -40,7 +40,7 @@ import { HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent, Ho
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `noBorder` | `noBorder` | `boolean` | `false` | — | `luBooleanAttribute` | Retire la bordure sous le composant. |
 | `container` | `container` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un container autour des liens pour aligner le composant avec le contenu de la page. |
-| `vertical` | `vertical` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `vertical` | `vertical` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche la navigation verticalement. |
 | `palette` | `palette` | `Palette \| DecorativePalette \| null` | `null` | — | — | — |
 | `size` | `size` | `HorizontalNavigationSize \| null` | `null` | — | — | Modifie la taille du composant. |
 
@@ -55,7 +55,7 @@ import { HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent, Ho
 - 📝 [Code & implementation](./horizontalnavigation.component.md)
 
 - 🎯 [Figma design tokens](./horizontalnavigation.figma.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-horizontalnavigation-angular--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-horizontalnavigation-angular-basic--docs)
 
 ## Changelog
 
