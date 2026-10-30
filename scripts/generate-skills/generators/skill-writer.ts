@@ -39,13 +39,19 @@ function manifestPath(skillsDir: string): string {
 	return path.join(generatorRoot(skillsDir), 'versions.json');
 }
 
-/** The manifest of the committed skill, or null before the first generation. */
+/**
+ * The manifest of the committed skill, or null before the first generation. An unreadable manifest
+ * throws: read as null, it would lift the branch guards and empty the skill.
+ */
 export function readSkillManifest(skillsDir: string): SkillManifest | null {
+	let raw: string;
 	try {
-		return JSON.parse(fs.readFileSync(manifestPath(skillsDir), 'utf-8'));
-	} catch {
-		return null;
+		raw = fs.readFileSync(manifestPath(skillsDir), 'utf-8');
+	} catch (err: any) {
+		if (err.code === 'ENOENT') return null;
+		throw err;
 	}
+	return JSON.parse(raw);
 }
 
 /**
