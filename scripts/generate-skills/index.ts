@@ -80,7 +80,7 @@ import { writeFixes } from './generators/fixes-writer';
 import { snapshotSkill, writeReviewChangelog } from './generators/version-diff-writer';
 import { auditStoryExamples, clearOutputViolations, reportOutputViolations } from './generators/output-guard';
 import { ensureZhReleaseIds } from './zh-release-guard';
-import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist, refuseMinorForThisBranch, refusePartialRunOnNewMinor } from './preflight';
+import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist, isNewMinor, refuseMinorForThisBranch, refusePartialRunOnNewMinor } from './preflight';
 import { MinorResolution, getTechnicalMinor, parseVersion, resolveMinorVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
@@ -412,7 +412,7 @@ async function main(): Promise<void> {
 	const previousSkill = flags.dryRun || flags.component ? null : snapshotSkill(config.output.skillsDir, committed);
 	// The writers only clean what they regenerate: on a new minor, a page the minor no longer emits
 	// would survive with the previous minor's content, and SKILL.md §6 would still list it.
-	if (previousSkill && committed?.minor !== flags.versions[0]) {
+	if (previousSkill && isNewMinor(flags.versions[0], committed?.minor ?? null)) {
 		clearSkillContent(config.output.skillsDir);
 	}
 

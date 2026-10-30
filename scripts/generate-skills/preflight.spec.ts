@@ -1,5 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { refuseMinorForThisBranch, refusePartialRunOnNewMinor } from './preflight';
+import { isNewMinor, refuseMinorForThisBranch, refusePartialRunOnNewMinor } from './preflight';
+
+describe('isNewMinor', () => {
+	it.each`
+		requested  | committed | expected
+		${'v22.1'} | ${'22.1'} | ${false}
+		${'22.1'}  | ${'22.1'} | ${false}
+		${'22.1'}  | ${'22.0'} | ${true}
+		${'22.1'}  | ${null}   | ${true}
+	`('$requested over $committed is a new minor: $expected', ({ requested, committed, expected }) => {
+		expect(isNewMinor(requested, committed)).toBe(expected);
+	});
+});
 
 describe('refuseMinorForThisBranch', () => {
 	it.each`

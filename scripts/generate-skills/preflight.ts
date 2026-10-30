@@ -58,11 +58,19 @@ export function refuseMinorForThisBranch(requested: string, committed: string | 
 }
 
 /**
+ * Whether generating `requested` ("22.1" or "v22.1") moves the skill off the minor it documents.
+ * True when no manifest records that minor.
+ */
+export function isNewMinor(requested: string, committed: string | null): boolean {
+	return committed !== requested.replace(/^v/, '');
+}
+
+/**
  * Moving the skill to a new minor empties references/ and fixes/ before regenerating them (see
  * clearSkillContent), so the pages a partial run skips would be missing from the new minor.
  */
 export function refusePartialRunOnNewMinor(requested: string, committed: string | null, partialFlags: string[]): string | null {
-	if (committed === null || partialFlags.length === 0 || committed === requested.replace(/^v/, '')) return null;
+	if (committed === null || partialFlags.length === 0 || !isNewMinor(requested, committed)) return null;
 	return (
 		`${partialFlags.join(', ')} : la skill passe de ${committed} à ${requested}, ce run vide references/ et fixes/ et ne régénérerait pas les pages que ces options sautent. ` +
 		`Relance sans elles.`
