@@ -88,6 +88,7 @@ Ne jamais commit ni push sans demande explicite. Les fix ciblent `master`, les f
 - **Écrire pour un humain** : la description est lue par des relecteurs, pas par un outil — elle doit être courte et facile à comprendre. Phrases simples, pas d'énumération du diff (le relecteur l'a sous les yeux). Un changement local et sans ambiguïté se résume en une phrase ; garder les descriptions détaillées pour ce qui touche plusieurs composants, modifie un comportement existant ou demande de justifier un choix d'implémentation. Relire et raccourcir avant de soumettre.
 - **Labels** : poser le label de type (`FIX`, `Feature`, `Technical`…) et, quand le code est majoritairement produit par IA, `🤖 Produced by AI` (l'autocomplétion ne compte pas).
 - **Scope maîtrisé** : rester dans le périmètre demandé, ne pas refactorer en passant. Si un changement hors périmètre paraît nécessaire, le signaler plutôt que de le faire. À la fin du travail, lister explicitement ce qui a été touché en dehors du périmètre demandé — fichier déplacé, helper introduit, nettoyage annexe, dépendance ajoutée — pour que l'auteur de la PR le voie avant de soumettre.
+- **Issues** : toute issue a un type (`Bug`, `Feature`, `Task`), qui sert au tri des issues entrantes. Les templates de `.github/ISSUE_TEMPLATE/` le posent quand l'issue est créée depuis GitHub, mais ce frontmatter est ignoré en CLI : toujours passer `gh issue create --type <Bug|Feature|Task>`, avec le corps du template correspondant.
 
 Attentes détaillées côté relecture : [contributing.md](contributing.md#pull-requests).
 
