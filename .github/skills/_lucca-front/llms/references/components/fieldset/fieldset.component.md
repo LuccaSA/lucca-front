@@ -4,10 +4,6 @@
 
 ## Angular
 
-Mots-clés : groupe, champs, section, formulaire
-
-Component selector : `lu-fieldset`
-
 ### Basic
 
 ```js
@@ -38,9 +34,8 @@ import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 </form>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.fieldset`
+## HTML/CSS
 
 ### Basic
 

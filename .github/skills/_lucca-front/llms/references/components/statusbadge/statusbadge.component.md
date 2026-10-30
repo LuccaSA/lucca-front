@@ -4,8 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-status-badge`
-
 ### Badge angular
 
 ```js
@@ -17,9 +15,8 @@ import { PALETTE } from '@lucca/prisme/core';
 <lu-status-badge label="Status" />
 ```
 
-## HTML/CSS
 
-Classe CSS : `.statusBadge`
+## HTML/CSS
 
 ### Badge basic
 

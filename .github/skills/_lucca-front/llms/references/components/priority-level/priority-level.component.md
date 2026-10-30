@@ -14,6 +14,7 @@ import { PRIORITY_LEVELS, PRIORITY_LEVEL_SIZES, PriorityLevelComponent, Priority
 <lu-priority-level level="1" />
 ```
 
+
 ## HTML/CSS
 
 ### Level basic

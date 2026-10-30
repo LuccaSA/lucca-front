@@ -1,5 +1,9 @@
 # Champs effaçables
 
+title: Champs effaçables
+description: Un utilisateur peut supprimer facilement le contenu des champs de formulaire.
+---
+
 # Content
 
 ## Règles générales
@@ -9,6 +13,8 @@ Pour indiquer que le contenu d'un champ est effaçable, nous utilisons le compos
 De manière générale, le Clear n’apparaît que lorsqu’une valeur est saisie ou sélectionnée dans un champ optionnel. Si le champ est obligatoire, alors on ne permet pas à l'utilisateur d'en effacer le contenu.
 
  Il ne doit pas être visible quand le champ est vide (avec ou sans placeholder).
+
+---
 
 ## Utilisation dans les composants
 

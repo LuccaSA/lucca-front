@@ -4,8 +4,6 @@
 
 ## Angular
 
-Les toasts servent à afficher une information ou un callback dans un coin de l'application.
-
 ### Toasts
 
 ```js

@@ -17,11 +17,10 @@
   - Size
   - Start
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-listing-angular-basic--docs)
 
 ## Angular
-
-Component selector : `lu-listing`
 
 ### Basic
 
@@ -62,9 +61,8 @@ import { LISTING_SIZE, ListingComponent, ListingItemComponent, ListingSize } fro
 </lu-listing>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.listing`
+## HTML/CSS
 
 ### Basic
 

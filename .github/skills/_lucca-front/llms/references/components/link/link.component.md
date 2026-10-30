@@ -3,27 +3,16 @@
 **Sommaire**
 
 - Angular
-  - Navigation interne et externe
   - Testing
   - Angular
   - Inside table
 - HTML/CSS
-  - Sécurité
   - Basic
+
 
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-actions-link-angular-test--docs)
 
 ## Angular
-
-Component selector : `luLink`
-
-### Navigation interne et externe 
-
-On privilégiera l'utilisation du routing Angular pour la navigation **interne** à l'application. Dans ce cas, la route est à passer directement via `luLink`.
-
-Dans le cas d'une navigation **externe** à l'application, l'URL est à renseigner via la propriété `href`.
-
-Dans les deux cas, l'ouverture du lien peut se faire dans la même page ou dans une nouvelle page. Dans le second cas, on utilisera la propriété `external`.
 
 ### Testing
 
@@ -135,13 +124,8 @@ import { timer } from 'rxjs';
 </lu-index-table>
 ```
 
+
 ## HTML/CSS
-
-Classe CSS : `.link`
-
-### Sécurité
-
-Pour des raisons de sécurité il convient de rajouter à nos liens externes, les attributs `rel="noopener noreferrer"`. Ceci évite au navigateur d'ouvrir la ressource cible en donnant au nouveau contexte de navigation l'accès au document précédent. Pour plus de précisions : [https://developer.mozilla.org/fr/docs/Web/HTML/Attributes/rel/noopener](https://developer.mozilla.org/fr/docs/Web/HTML/Attributes/rel/noopener)
 
 ### Basic
 

@@ -31,6 +31,10 @@
   - 1. Description
   - 2. Exemples
 
+title: Messages d'erreur
+description: La meilleure arme contre les messages d’erreur est la prévention de leur apparition. Mais le cas échéant, voici quelques outils pour écrire des messages efficaces.
+---
+
 # Recommandations générales
 
 ### **En bref** 
@@ -97,6 +101,7 @@ S'il y a une erreur, c'est souvent parce que le parcours ou les instructions ne 
 
 Si nous avons du mal à fournir toutes les informations nécessaires dans le composant choisi, on peut suggérer la possibilité de consulter la fiche d'aide (sous réserve de sa pertinence par rapport au problème rencontré).
 
+
 ### ... Sans dramatiser, ni s’excuser, ni plaisanter
 
 **Évitons le plus possible** les termes à la tonalité négative, qui apportent peu au message :
@@ -109,9 +114,11 @@ Si nous avons du mal à fournir toutes les informations nécessaires dans le com
 
  **Concentrons-nous sur la solution** au problème.
 
+
 ### Privilégions la franchise
 
 Pas de mensonge, ni de tentative d'atténuer l'erreur. 
+
 
 ### Adressons-nous directement à l'utilisateur
 
@@ -119,11 +126,14 @@ Pas de mensonge, ni de tentative d'atténuer l'erreur. 
 
 **Adressons-nous directement à l'utilisateur** dès que c'est possible.
 
+
 ### Méfions-nous du jargon
 
 Expliquons le problème le plus simplement possible.
 
 Utilisons les termes qu’utilisent, comprennent tous les utilisateurs. 
+
+
 
 *Des questions, des remarques, un témoignage ?* 
 
@@ -154,9 +164,11 @@ Utilisons les termes qu’utilisent, comprennent tous les utilisateurs.
 * **Si c’est possible**, éviter la négation.
 * La phrase se finit par un point.
 
+
 * La description peut signaler plusieurs problèmes, en explicitant :
     * Le nombre de problèmes à résoudre.
     * Ou le nombre d’actions à mener, dans le cas où plusieurs problèmes peuvent être résolus par une seule et même action.
+
 
 💡 **Cas particulier où plusieurs erreurs peuvent être corrigées avec 1 seule action**
 
@@ -165,6 +177,7 @@ Dans les cas où 1 seule action (donc 1 seul bouton d’action) permet de corrig
 Il nous faut alors formuler la phrase en énumérant les éléments posant problème. 
 
 NB : le titre est obligatoire.
+
 
 Si une notion est trop complexe à appréhender à travers le seul callout, **nous pouvons miser sur un lien** vers une fiche d’aide ou vers une page sur laquelle la notion problématique est clairement explicitée.
 
@@ -211,6 +224,7 @@ L’erreur est en dehors de la page ? Ajoutons un bouton, si l’erreur peut êt
 * Dans la mesure du possible, **incluons-y un lien** pour rediriger vers une action en ligne qui permet de résoudre le problème facilement, ou pour rafraîchir la page / renouveler l'action. **Ou bien incluons un bouton d'action :** il offre à l’utilisateur une prolongation - mais il faut s'interroger sur le fait qu'il soit indispensable ou non.
 
 ## 3. Exemples
+
 
 *Des questions, des remarques, un témoignage ?* 
 

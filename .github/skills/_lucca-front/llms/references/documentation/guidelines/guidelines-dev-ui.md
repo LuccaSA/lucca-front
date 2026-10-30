@@ -18,6 +18,10 @@
     - Où placer mon style ?
     - Résumé
 
+title: Guidelines dev UI
+description: Elles rendent le code lisible et facilement éditable afin de garantir la maintenabilité du design Lucca.
+---
+
 # Content
 
 ## Règles d’usage

@@ -1,6 +1,12 @@
 # Design tokens
 
+title: Design tokens
+description: Les Design tokens sont des variables qui représentent des décisions de design telles que la couleur, la typographie et l’espacement, de manière cohérente et réutilisable au travers des logiciels Lucca.
+---
+
 # Principes
+
+
 
 ### **1. System**
 
@@ -21,6 +27,8 @@ Indique l’élément graphique sur lequel le Design Token s’applique : `borde
 ### **5. Modifiers**
 
 Appelés seuls ou combinés, ils permettent de définir une typologie riche et fonctionnelle. On y trouve les *variants* (`critical`, `informative`, `warning`, `title`, `body`, `placeholder`, etc.), les *states* (`hover`, `active`, `disabled`, etc.) ou les scales (`50`, `100`, `150`, `200`, etc.).
+
+---
 
 ## Exemples
 

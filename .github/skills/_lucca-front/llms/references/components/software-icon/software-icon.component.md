@@ -4,8 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-software-icon`
-
 ### Basic
 
 ```js
@@ -41,9 +39,8 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 </lu-software-icon-wrapper>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.softwareIcon`
+## HTML/CSS
 
 ### Basic
 

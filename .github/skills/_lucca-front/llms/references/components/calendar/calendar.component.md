@@ -19,6 +19,7 @@
   - Basic html
   - Week html
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date-calendar--docs)
 
 ## Angular
@@ -275,9 +276,8 @@ import { setDate } from 'date-fns';
 />
 ```
 
-## HTML/CSS
 
-Classe CSS : `.calendar`
+## HTML/CSS
 
 ### Basic html
 

@@ -11,11 +11,10 @@
   - Box only bubbles
   - Box size
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-fancybox-angular-basic--docs)
 
 ## Angular
-
-Component selector : `lu-fancy-box`
 
 ### Box basic
 
@@ -70,9 +69,8 @@ import { FANCY_BOX_SIZE, FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 </lu-fancy-box>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.fancyBox`
+## HTML/CSS
 
 ### Box basic
 

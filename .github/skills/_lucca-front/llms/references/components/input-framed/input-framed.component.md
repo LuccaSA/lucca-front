@@ -17,11 +17,10 @@
   - States
   - Tag
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-input-framed-angular-basic--docs)
 
 ## Angular
-
-Component selector : `lu-input-framed`
 
 ### Basic
 
@@ -44,9 +43,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 </lu-form-field>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.inputFramed`
+## HTML/CSS
 
 ### Center
 

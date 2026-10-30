@@ -23,7 +23,7 @@ import { ProgressBarComponent } from '@lucca-front/ng/progress-bar';
 ## Related files
 
 - 📝 [Code & implementation](./progress-bar.component.md)
-- 🎨 [Design guidelines](./progress-bar.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-progress-bar-angular-basic--docs)
 
 ## Changelog

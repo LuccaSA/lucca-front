@@ -4,8 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-clear`
-
 ### Clear
 
 ```js
@@ -17,13 +15,8 @@ import { PALETTE } from '@lucca/prisme/core';
 <lu-clear (onClear)="onClear($event)"><span #content>Clear</span></lu-clear>
 ```
 
+
 ## HTML/CSS
-
-Classe CSS : `.clear`
-
-Le clear est construit avec un faux lien car il se retrouve parfois imbriqué dans un label et activé par erreur quand on l’actionne.
-
-Son ancre ne doit pas être activée et on assure ainsi la navigation clavier.
 
 ### Clear
 

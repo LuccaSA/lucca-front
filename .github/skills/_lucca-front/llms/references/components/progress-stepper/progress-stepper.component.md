@@ -10,11 +10,10 @@
   - States
   - Steps
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-progress-stepper-angular-basic--docs)
 
 ## Angular
-
-Component selector : `lu-progress-stepper`
 
 ### Basic
 
@@ -51,9 +50,8 @@ import { ProgressStepperComponent, ProgressStepperStepComponent } from '@lucca-f
 </lu-progress-stepper>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.progressStepper`
+## HTML/CSS
 
 ### Basic
 

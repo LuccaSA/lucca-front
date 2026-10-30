@@ -3,7 +3,7 @@
 ## Related files
 
 - 📝 [Code & implementation](./color-picker.component.md)
-- 🎨 [Design guidelines](./color-picker.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-color-picker-angular--docs)
 
 ## Changelog

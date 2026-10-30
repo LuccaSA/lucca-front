@@ -1,5 +1,9 @@
 # 4 critères essentiels pour notre contenu
 
+title: 4 critères essentiels pour notre contenu
+description: Un bon contenu répond à ces critères : clarté, précision, concision, utilité.
+---
+
 # Content
 
 ## **1. Clarté** 

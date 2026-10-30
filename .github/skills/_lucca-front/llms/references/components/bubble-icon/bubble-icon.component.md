@@ -4,8 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-bubble-icon`
-
 ### Basic
 
 ```js
@@ -20,9 +18,8 @@ import { DECORATIVE_PALETTE, PALETTE, PRODUCT_PALETTE } from '@lucca/prisme/core
 <lu-bubble-icon icon="app" bubbleDirection="random" />
 ```
 
-## HTML/CSS
 
-Classe CSS : `.bubbleIcon`
+## HTML/CSS
 
 ### Basic
 

@@ -9,7 +9,7 @@ import { MobilePushComponent } from '@lucca-front/ng/mobile-push';
 ## Basic Usage
 
 ```html
-<lu-mobile-push (appStoreLinkClicked)="appStoreLinkClicked()" (googlePlayLinkClicked)="googlePlayLinkClicked()"> Posez une absence depuis n’importe où avec l’application Lucca.
+<lu-mobile-push (appStoreLinkClicked)="appStoreLinkClicked($event)" (googlePlayLinkClicked)="googlePlayLinkClicked($event)"> Posez une absence depuis n’importe où avec l’application Lucca.
 </lu-mobile-push>
 ```
 

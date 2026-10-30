@@ -135,7 +135,7 @@ import { ClearFormatComponent, HeadingsComponent, LinkComponent, ListStyleToolba
 ## Related files
 
 - 📝 [Code & implementation](./richtextinput.component.md)
-- 🎨 [Design guidelines](./richtextinput.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-richtextinput-angular--docs)
 
 ## Changelog

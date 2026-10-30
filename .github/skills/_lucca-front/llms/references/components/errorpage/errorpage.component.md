@@ -4,10 +4,6 @@
 
 ## Angular
 
-Mots-clés : page d'erreur, 404, 500
-
-Component selector : `lu-error-page`
-
 ### Page basic
 
 ```js
@@ -22,11 +18,8 @@ import { ERROR_PAGE_ILLUSTRATION, ErrorPageComponent } from '@lucca-front/ng/err
 </lu-error-page>
 ```
 
+
 ## HTML/CSS
-
-🔗 [Spécifique Lucca — Liste des illustrations d'erreur](https://www.notion.so/Error-page-c7a6edc9b2364d479b079359d9b7b838)
-
-Classe CSS : `.errorPage`
 
 ### Page basic
 

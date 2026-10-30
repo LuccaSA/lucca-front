@@ -15,11 +15,10 @@
   - Sizes
   - Themes
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-highlight-data-angular-basic--docs)
 
 ## Angular
-
-Component selector : `lu-highlight-data`
 
 ### Basic
 
@@ -34,9 +33,8 @@ import { LinkComponent } from '@lucca-front/ng/link';
 <lu-highlight-data heading="Title" value="Content" bubble="1" illustration="piggy-bank" />
 ```
 
-## HTML/CSS
 
-Classe CSS : `.highlightData`
+## HTML/CSS
 
 ### Action illustration
 

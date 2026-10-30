@@ -65,7 +65,7 @@ import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 ## Related files
 
 - 📝 [Code & implementation](./daterangeinput.component.md)
-- 🎨 [Design guidelines](./daterangeinput.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date2-daterangeinput--docs)
 
 ## Changelog

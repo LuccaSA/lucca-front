@@ -4,12 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-color-input`
-
-### Configuration des couleurs
-
-Les couleurs disponibles dans le color picker sont à renseigner dans `colors` via un tableau d'objets :
-
 ### Input field
 
 ```js

@@ -166,7 +166,7 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 ## Related files
 
 - 📝 [Code & implementation](./fileupload.component.md)
-- 🎨 [Design guidelines](./fileupload.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-file-fileupload-angular-basic--docs)
 
 ## Changelog

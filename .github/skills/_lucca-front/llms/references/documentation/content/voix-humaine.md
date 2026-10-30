@@ -1,5 +1,9 @@
 # Notre voix, 100 % humaine
 
+title: Notre voix, 100 % humaine
+description: La manière dont on s'adresse à nos utilisateurs doit être homogène, contextuelle et à l'image de Lucca.
+---
+
 # Content
 
 ## Imaginons une personne incarnant les solutions Lucca :
@@ -11,6 +15,8 @@
 * En somme, elle **fournit un excellent niveau de service, tout sauf gris, moche ou triste.** 
 
 	À nous de retranscrire fidèlement sa voix à travers les solutions Lucca.
+
+---
 
 ## Restons à la fois courtois, pro et simple
 
@@ -50,6 +56,7 @@ Jamais par "*M./Mme Nom*" ni par "*Nom Prénom*".
 | Vous avez des demandes de congés à approuver. | Vous n’avez pas approuvé toutes les demandes de congé de vos collaborateurs. |
 
 * **Expliquons toujours un acronyme**, soit dans le texte, soit via un **tooltip**.
+
 
 * Efforçons-nous toujours de **proposer une solution**.
 

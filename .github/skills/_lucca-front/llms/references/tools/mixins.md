@@ -13,6 +13,10 @@
   - Transparantize
 - Overflow scrollblock [v19.2]
 
+title: Mixins
+description: Les mixins servent à accéder à des fonctions CSS avancées.
+---
+
 # Icônes
 
 Génère une icône grâce à la mixin `icon.generate`.

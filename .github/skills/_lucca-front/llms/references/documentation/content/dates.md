@@ -1,5 +1,9 @@
 # Dates
 
+title: Dates
+description: Jours de la semaine, mois : ces formats varient en fonction des cultures.
+---
+
 # Content
 
 ## Format court
@@ -9,6 +13,8 @@ Ce format est à privilégier lorsque l'utilisateur n'a pas besoin de connaître
 Nous l’utilisons notamment dans les tableaux (Index tables et Data tables) mais aussi dans les composants de sélection de date (Date picker et Date range picker).
 
 Chaque locale a ses propres conventions (format et séparateur). L'objet `Intl.DateTimeFormat` permet le [formatage des dates et heures](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat) sensible à la langue.
+
+
 
 | **Locale** | **Format** | **Séparateur** | **Exemple** |
 | --- | --- | --- | --- |
@@ -24,9 +30,13 @@ Chaque locale a ses propres conventions (format et séparateur). L'objet `Intl.
 | nl-BE | `D/MM/JJJJ` | `/` | 1/04/2026 |
 | pt-PT | `DD/MM/AAAA` | `/` | 01/04/2026 |
 
+---
+
 ## Format long avec horodatage
 
 Ce format est à privilégier lorsque la temporalité et le contexte temporel sont importants pour l’utilisateur. C’est le cas dans les historiques (Activity feed) ou pour les commentaires (Comment, Chat).
+
+
 
 ### Règles d'affichage selon l'ancienneté
 
@@ -53,6 +63,8 @@ Ce format est à privilégier lorsque la temporalité et le contexte temporel so
 | nl-BE | `jour` `DD` `mois` `JJJJ` om `HH:mm` | donderdag 18 maart 2026 om 10:36 |
 | pt-PT | `jour` `DD` `mois` `AAAA` às `HH:mm` | quinta-feira 18 março 2026 às 10:36 |
 
+---
+
 ## Format relatif
 
 Ce format est à utiliser lorsque la précision de la date n'est pas critique. Cela apporte une proximité et facilite la compréhension rapide de l'ancienneté.
@@ -67,6 +79,8 @@ Ce format est à utiliser lorsque la précision de la date n'est pas critique. C
 | Moins de 30 jours | Il y a X semaines | Il y a 3 semaines |
 | Moins de 12 mois | Il y a X mois | Il y a 4 mois |
 | Au-delà | Il y a X ans | Il y a 5 ans |
+
+---
 
 ## Contexte d’un calendrier
 

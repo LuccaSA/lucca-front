@@ -19,11 +19,10 @@
   - Field width
   - Field
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-textfield-angular--docs)
 
 ## Angular
-
-Component selector : `lu-text-input`
 
 ### Field
 
@@ -95,9 +94,8 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.textField`
+## HTML/CSS
 
 ### Field AI
 

@@ -9,7 +9,7 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 ## Basic Usage
 
 ```html
-<lu-plg-push > Bénéficiez de toutes les options liées au télétravail avec Timmi Office. <a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer"> <span class="link-text">Demander un essai gratuit</span><!-- no text node here --><span class="link-icon"><lu-icon class="pr-u-displayContents" icon="arrowExternal" alt="Ouvrir dans une nouvelle fenêtre" /></span> </a>
+<lu-plg-push [(removed)]="removed" (removedChange)="removedChange($event)"> Bénéficiez de toutes les options liées au télétravail avec Timmi Office. <a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer"> <span class="link-text">Demander un essai gratuit</span><!-- no text node here --><span class="link-icon"><lu-icon class="pr-u-displayContents" icon="arrowExternal" alt="Ouvrir dans une nouvelle fenêtre" /></span> </a>
 </lu-plg-push>
 ```
 
@@ -42,7 +42,7 @@ import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 ## Related files
 
 - 📝 [Code & implementation](./plg-push.component.md)
-- 🎨 [Design guidelines](./plg-push.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-plg-push-angular-basic--docs)
 
 ## Changelog

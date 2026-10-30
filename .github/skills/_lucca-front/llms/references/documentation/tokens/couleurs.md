@@ -54,6 +54,10 @@
   - Text
   - Input
 
+title: Couleurs
+description: Les couleurs traduisent la personnalité et les valeurs de notre marque, mais aident également les utilisateurs à naviguer dans l'interface. Une bonne utilisation des couleurs peut influencer la façon dont ils se sentent, pensent et se comportent.
+---
+
 # Product
 
 ## **Utilisation**
@@ -99,6 +103,8 @@ Il est possible de charger une ou plusieurs palettes produits supplémentaires :
 ```
 
 Ces palettes seront accessibles via un lot de variables CSS (`--palettes-pagga-700`), une classe palette (`.palette-pagga`) applicable sur certains composants et via un jeu d'utilitaires.
+
+---
 
 ## **Palettes**
 
@@ -227,6 +233,8 @@ Pour apporter plus de contraste, les champs de formulaires (Textfield, Select, e
 
 Pour en savoir plus sur l'application du nuancier Neutral sur les textes, vous pouvez vous référer à la guideline dédiée à la typographie.
 
+---
+
 ## **Palette**
 
 | Token | Value | Description |
@@ -257,6 +265,8 @@ Les couleurs jouent un rôle essentiel dans la communication visuelle des interf
 ### **Accessibilité**
 
 Il est essentiel d’associer ces couleurs sémantiques avec un texte explicatif ou une icône claire pour assurer une compréhension universelle. Cela garantit que les utilisateurs ayant des difficultés à distinguer les couleurs puissent également comprendre la signification de manière précise.
+
+---
 
 ## **Palettes**
 
@@ -326,6 +336,8 @@ Toutes les palettes décoratives sont chargées par défaut. Afin d'alléger le 
 ```
 
 Ces palettes seront accessibles via un lot de variables CSS (`--palettes-mint-700`), une classe palette (`.palette-mint`) applicable sur certains composants et un via jeu d'utilitaires.
+
+---
 
 ## **Palettes**
 
@@ -517,13 +529,21 @@ Dans le cadre des recommandations sur l’accessibilité, nous avons travaillé 
 
 Cette grille à pour but d’aider les designers lors de la conception, notamment des composants et est valable pour l’ensemble des couleurs “Product” ce qui garanti une homogénéité.
 
+---
+
 ## Grilles
 
 ### **Neutral vs Product**
 
+
+
 ### **Product vs Product**
 
+
+
 ### Neutral vs Neutral
+
+
 
 # Tokens
 

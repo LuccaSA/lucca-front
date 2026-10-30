@@ -6,18 +6,16 @@
   - Navigation basic
   - Navigation tabs
 - HTML/CSS
-  - Accessibilité
   - Navigation basic
   - Navigation container
   - Navigation count
   - Navigation scrollbox
   - Navigation tabs
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-horizontalnavigation-angular-basic--docs)
 
 ## Angular
-
-Component selector : `lu-horizontal-navigation`
 
 ### Navigation basic
 
@@ -45,7 +43,8 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ### Navigation tabs
 
 ```js
-import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
+import { provideRouter } from '@angular/router';
+import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 ```
 
 ```html
@@ -57,18 +56,8 @@ import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from 
 </lu-horizontal-navigation>
 ```
 
+
 ## HTML/CSS
-
-Classe CSS : `.horizontalNavigation`
-
-### Accessibilité
-
-* L’attribut `aria-current="page"` permet d’indiquer la page courante à la fois sémantiquement et visuellement.
-* Si vous devez ajouter un titre sémantique HTML à votre menu d’onglets, préférez d'ajouter ce titre directement dans la section de chaque panneau en utilisant la class `pr-u-mask`. Ne mélangez pas la navigation et la sémantique de titres.
-
-Ma navigation :
-
-Dans le composant :
 
 ### Navigation basic
 

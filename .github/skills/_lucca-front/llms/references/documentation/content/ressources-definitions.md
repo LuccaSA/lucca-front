@@ -1,10 +1,16 @@
 # Ressources pour définitions
 
+title: Ressources pour définitions
+description: Une hésitation sur un nommage ou une formulation pour votre microcopie ? Cette page centralise toutes les ressources de référence à consulter.
+---
+
 # Content
 
 ## Objectif
 
 Assurer une **cohérence terminologique** dans tous nos contenus en s'appuyant sur des sources de référence fiables et hiérarchisées.
+
+---
 
 ## 1. Ressources Lucca (priorité absolue)
 
@@ -18,6 +24,8 @@ Assurer une **cohérence terminologique** dans tous nos contenus en s'appuyant s
     * Terminologie interne validée.
 
 **👉 Commencez toujours par le glossaire Lucca.**
+
+---
 
 ## 2. Dictionnaires de référence
 
@@ -43,12 +51,16 @@ disponible dans beaucoup de définitions du Robert, **l’onglet** « **Combina
 | Portugais | [Universal Priberam](https://dicionario.priberam.org/) |
 | Néerlandais | [Van Dale](https://www.vandale.nl/pages/van-dale-online) |
 
+---
+
 ## 3. Terminologie technique, réglementaire
 
 ### Ressources spécialisées
 
 * **[FranceTerme](https://www.culture.fr/franceterme)** - Base de données officielle du Ministère de la Culture pour les termes techniques en français.
 * **[IATE](https://iate.europa.eu/home)** - Base de données terminologique de l'Union Européenne, recommandée par l'équipe [Localisation](https://www.notion.so/International-Cooperation-174d278ab26e80ae9572d538843f3819?pvs=21) pour les termes légaux et réglementaires.
+
+---
 
 ## Contribuer
 

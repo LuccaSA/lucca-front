@@ -11,11 +11,10 @@
   - Navigation iconless
   - Navigation
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-verticalnavigation-angular-disabled--docs)
 
 ## Angular
-
-Component selector : `lu-vertical-navigation`
 
 ### Navigation disabled
 
@@ -94,9 +93,8 @@ import { VerticalNavigationComponent, VerticalNavigationGroupComponent, Vertical
 </lu-vertical-navigation>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.verticalNavigation`
+## HTML/CSS
 
 ### Navigation disabled
 

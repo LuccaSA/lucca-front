@@ -10,13 +10,10 @@
   - Field size
   - Field
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-switchfield-angular--docs)
 
 ## Angular
-
-Mots-clés : interrupteur, toggle, on, off, activation
-
-Component selector : `lu-switch-input`
 
 ### Field
 
@@ -35,9 +32,8 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.switchField`
+## HTML/CSS
 
 ### Field disabled
 

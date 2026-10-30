@@ -12,11 +12,10 @@
   - Header leading trailing
   - Header menu
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-pageheader-angular-basic--docs)
 
 ## Angular
-
-Component selector : `lu-page-header`
 
 ### Header basic
 
@@ -45,11 +44,8 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 />
 ```
 
+
 ## HTML/CSS
-
-Classe CSS : `.pageHeader`
-
-Les exemples ci-dessous sont affichés dans leur vue compact par défaut compte tenu de l'espace disponible :
 
 ### Header back
 

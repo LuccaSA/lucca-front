@@ -41,7 +41,7 @@ import { PageHeaderComponent } from '@lucca-front/ng/page-header';
 ## Related files
 
 - 📝 [Code & implementation](./pageheader.component.md)
-- 🎨 [Design guidelines](./pageheader.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-pageheader-angular-basic--docs)
 
 ## Changelog

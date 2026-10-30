@@ -4,8 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-user-tile`
-
 ### Tile
 
 ```js
@@ -21,9 +19,8 @@ import { of } from 'rxjs';
 <lu-user-tile [user]="user" />
 ```
 
-## HTML/CSS
 
-Classe CSS : `.userTile`
+## HTML/CSS
 
 ### Basic
 

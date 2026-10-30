@@ -52,7 +52,7 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 ## Related files
 
 - 📝 [Code & implementation](./highlight-data.component.md)
-- 🎨 [Design guidelines](./highlight-data.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-highlight-data-angular-basic--docs)
 
 ## Changelog

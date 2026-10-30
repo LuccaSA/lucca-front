@@ -9,13 +9,10 @@
   - Basic
   - Dnd
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-resource-card-angular-basic--docs)
 
 ## Angular
-
-Mots-clés : carte, fiche, tuile, ressource
-
-Component selector : `lu-resource-card`
 
 ### Basis
 
@@ -117,6 +114,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	</lu-resource-card>
 </lu-resource-card-wrapper>
 ```
+
 
 ## HTML/CSS
 

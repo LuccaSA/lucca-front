@@ -51,7 +51,7 @@ import { MultilanguageInputComponent } from '@lucca-front/ng/forms';
 ## Related files
 
 - 📝 [Code & implementation](./multilanguagefield.component.md)
-- 🎨 [Design guidelines](./multilanguagefield.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-multilanguagefield-angular--docs)
 
 ## Changelog

@@ -10,13 +10,10 @@
   - Label error
   - Label size
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-form-label-angular-basic--docs)
 
 ## Angular
-
-Mots-clés : label, legend, intitulé
-
-Component selector : `luFormLabel`
 
 ### Label basic
 
@@ -29,9 +26,8 @@ import { FORM_LABEL_SIZE, FormLabelComponent, luFormLabelTranslations } from '@l
 <label luFormLabel for="inputID">Label</label>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.formLabel`
+## HTML/CSS
 
 ### Label basic
 

@@ -15,13 +15,10 @@
   - Compact
   - Wrapper
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-comment-angular-ai--docs)
 
 ## Angular
-
-Component selector : `lu-comment`
-
-###
 
 ### Ai
 
@@ -51,7 +48,9 @@ import { LOCALE_ID } from '@angular/core';
 ### Basic
 
 ```js
-import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
+import { LOCALE_ID } from '@angular/core';
+import { COMMENT_BLOCK_SIZE, CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
+import { LuUserPictureModule } from '@lucca-front/ng/user';
 ```
 
 ```html
@@ -79,7 +78,9 @@ import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment
 ### Chat
 
 ```js
+import { LOCALE_ID } from '@angular/core';
 import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@lucca-front/ng/comment';
+import { LuUserPictureModule } from '@lucca-front/ng/user';
 ```
 
 ```html
@@ -115,9 +116,8 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 </lu-comment-chat>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.comment`
+## HTML/CSS
 
 ### Basic
 

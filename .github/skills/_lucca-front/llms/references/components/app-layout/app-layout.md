@@ -28,7 +28,7 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 ## Related files
 
 - 📝 [Code & implementation](./app-layout.component.md)
-- 🎨 [Design guidelines](./app-layout.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-app-layout-angular-basic--docs)
 
 ## Changelog
@@ -53,6 +53,8 @@ import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 
 - `lu-app-layout` component (`appLayout`) to lay out an application shell, with the `[appLayoutBanner]` and `[appLayoutNavSide]` content slots.
 - `mobileNavSideBottom` input to move the navigation side to the bottom of the screen on mobile (`mod-mobileNavSideBottom`).
+
+
 
 #### 21.1.2
 

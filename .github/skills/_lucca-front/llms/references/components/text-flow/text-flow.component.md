@@ -4,8 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-text-flow`
-
 ### Basic
 
 ```js
@@ -36,9 +34,8 @@ import { TextFlowComponent } from '@lucca-front/ng/text-flow';
 </lu-text-flow>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.textFlow`
+## HTML/CSS
 
 ### Basic
 

@@ -1,7 +1,6 @@
-# Liste des éléments dépréciés
-
 **Sommaire**
 
+- Liste des éléments dépréciés
   - Composants
   - Classes & inputs
   - Variables CSS
@@ -20,6 +19,12 @@
   - LF 18.1
     - Composants
     - Classes
+
+title: Cycle de vie des composants
+description: De "New" à "Deprecated", nos composants répondent à un cycle de vie afin de simplifier la mise à jour du Design System au sein des produits.
+---
+
+# Liste des éléments dépréciés
 
 ## Composants
 
@@ -59,6 +64,10 @@
 | --- | --- | --- | --- |
 | `--commons-borderRadius-XXX` | 20.2 | 22.0 | À remplacer par `--pr-t-border-radius-XXX` - Schematics |
 
+---
+
+title: Cycle de vie des composants
+description: De "New" à "Deprecated", nos composants répondent à un cycle de vie afin de simplifier la mise à jour du Design System au sein des produits.
 ---
 
 # Liste des éléments supprimés

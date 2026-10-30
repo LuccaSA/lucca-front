@@ -29,6 +29,10 @@
     - Line-height
     - Font-weight
 
+title: Typographie
+description: La typographie nous aide à créer de la hiérarchie, à organiser les informations et à guider les utilisateurs à travers les interfaces et les produits.
+---
+
 # Principes
 
 ## Nos polices de caractères
@@ -39,6 +43,8 @@ Nous utilisons trois polices de caractères complémentaires, chacune avec un r�
 * **Source Sans Pro :** la police par défaut pour le texte courant sur nos interfaces.
 * **Caveat :** aussi utilisé par l’équipe Brand, cette police de caractère manuscrite apporte un ton plus humain lorsqu’on l’utilise dans des illustrations (Empty state par exemple).
 
+
+
 ### Configuration CSS
 
 La police Caveat n'étant pas chargée par défaut, elle nécessite un import supplémentaire :
@@ -48,6 +54,8 @@ La police Caveat n'étant pas chargée par défaut, elle nécessite un import su
   $fontFamilyCursive: 'Caveat',
 );
 ```
+
+---
 
 ## Application de la typographie
 
@@ -93,6 +101,8 @@ L’utilisation de ces tokens permet une meilleure maintenabilité et une adapta
 | `--pr-t-color-text-warning` | Warning 700 | Texte portant une notion d’alerte |
 | `--pr-t-color-text-critical` | Critical 700 | Texte portant une notion d’erreur |
 
+---
+
 ## Règles d'utilisation
 
 ### Titres
@@ -137,7 +147,11 @@ Il existe une propriété CSS pour garantir un alignement des nombres :`font-var
 
 L’utilisation des capitales (petites capitales inclues) est proscrite, mis à part pour des acronymes.
 
+---
+
 ## Contenu associé
+
+
 
 # Tokens
 
@@ -155,6 +169,8 @@ L’utilisation des capitales (petites capitales inclues) est proscrite, mis à 
 | `--pr-t-font-body-M` | `var(--pr-t-font-body-M-fontSize)` `var(--pr-t-font-body-M-lineHeight)` `var(--pr-t-font-family);` |
 | `--pr-t-font-body-S` | `var(--pr-t-font-body-S-fontSize)` `var(--pr-t-font-body-S-lineHeight)` `var(--pr-t-font-family)` |
 | `--pr-t-font-body-XS` | `var(--pr-t-font-body-XS-fontSize)` `var(--pr-t-font-body-XS-lineHeight)` `var(--pr-t-font-family)` |
+
+---
 
 ## Sémantiques
 
@@ -216,6 +232,8 @@ L’utilisation des capitales (petites capitales inclues) est proscrite, mis à 
 | `--pr-t-color-text-success` | Success 700 |
 | `--pr-t-color-text-warning` | Warning 700 |
 | `--pr-t-color-text-critical` | Critical 700 |
+
+---
 
 ## Non sémantiques
 

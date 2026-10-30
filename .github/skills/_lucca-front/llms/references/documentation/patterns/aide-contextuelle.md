@@ -1,5 +1,9 @@
 # Aide contextuelle
 
+title: Aide contextuelle
+description: Un utilisateur peut consulter des messages d'aide sur les formulaires.
+---
+
 # Content
 
 ## **Bonnes pratiques**
@@ -18,6 +22,8 @@ Nous ajoutons de l'aide seulement quand elle est indispensable à l'utilisateur.
 - **Don't** : Nous évitons de donner des informations de même nature sur différents emplacements.
 - **Do** : Le libellé donne l’information essentielle sur la valeur du champ.
 - **Don't** : Nous évitons de donner des informations inutiles.
+
+---
 
 ## Types d'aide contextuelle
 

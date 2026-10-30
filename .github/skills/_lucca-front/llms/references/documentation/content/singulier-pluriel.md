@@ -1,5 +1,9 @@
 # Singulier ou pluriel ?
 
+title: Singulier ou pluriel ?
+description: Le choix entre singulier et pluriel dépend de la nature de ce que l'on désigne, du contexte utilisateur et du composant.
+---
+
 # Content
 
 ## Principe général

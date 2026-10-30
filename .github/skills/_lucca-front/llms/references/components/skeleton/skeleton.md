@@ -131,7 +131,7 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 ## Related files
 
 - 📝 [Code & implementation](./skeleton.component.md)
-- 🎨 [Design guidelines](./skeleton.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-loaders-skeleton--docs)
 
 ## Changelog

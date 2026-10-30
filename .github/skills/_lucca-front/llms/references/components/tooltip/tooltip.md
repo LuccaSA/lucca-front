@@ -64,7 +64,7 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 ## Related files
 
 - 📝 [Code & implementation](./tooltip.component.md)
-- 🎨 [Design guidelines](./tooltip.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-tooltip-html-css--docs)
 
 ## Changelog

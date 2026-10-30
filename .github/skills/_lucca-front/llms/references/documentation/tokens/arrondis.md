@@ -1,5 +1,9 @@
 # Arrondis
 
+title: Arrondis  🎉
+description: Les radius améliorent la cohérence visuelle et la hiérarchisation de l’information dans nos interfaces.
+---
+
 # Principes
 
 ## Application des radius
@@ -19,6 +23,8 @@ Chaque composant du Design System possède un radius défini en fonction de son 
 ### Modification des radius
 
 Certains composants peuvent voir leur radius s’adapter ponctuellement en fonction de leur niveau d’imbrication dans l’interface.
+
+
 
 #### Imbrication d’éléments structurants
 

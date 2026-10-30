@@ -1,5 +1,9 @@
 # Card et box
 
+title: Card et box
+description: Les Cards et les Box sont des éléments importants pour construire une interface Lucca. Elles permettent de naviguer, hiérarchiser l'information, structurer le contenu.
+---
+
 # Card
 
 Une Card est la représentation visuelle d’un lien de navigation. Il peut s’agir d’une ressource Lucca (un objectif, une formation, une dépense, etc.) ou d’un simple lien de navigation permettant d’accéder à un niveau plus profond d’une application. Par défaut, une carte est donc cliquable. Les Cards peuvent s’utiliser aussi bien dans une structure en grille qu’en liste (dans un tableau par exemple).

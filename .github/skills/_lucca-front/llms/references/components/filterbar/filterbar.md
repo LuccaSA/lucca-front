@@ -112,7 +112,7 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 ## Related files
 
 - 📝 [Code & implementation](./filterbar.component.md)
-- 🎨 [Design guidelines](./filterbar.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-filterspills-filterbar-angular-segmented-control-tabs--docs)
 
 ## Changelog

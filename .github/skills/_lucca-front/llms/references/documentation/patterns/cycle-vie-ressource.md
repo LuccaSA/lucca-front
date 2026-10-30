@@ -1,6 +1,12 @@
 # Cycle de vie d'une ressource
 
+title: Cycle de vie d'une ressource
+description: Une ressource suit un cycle de vie qui s'articule autour de deux grands types de parcours. Le choix entre ces deux approches dépend de la nécessité ou non d'une action métier explicite pour rendre la ressource active.
+---
+
 # Content
+
+---
 
 ## Qu'est-ce qu'une ressource ?
 
@@ -9,6 +15,8 @@ Dans les logiciels Lucca, une ressource désigne un objet métier manipulé par 
 Le cycle de vie d'une ressource englobe toutes les étapes par lesquelles elle passe dans le logiciel : sa création, sa consultation, sa modification au fil du temps et sa suppression ou son archivage.
 
 Pour garantir une expérience homogène à travers toutes nos applications, le cycle de vie s'articule autour de deux grands types de parcours. Le choix entre ces deux approches dépend de la nécessité ou non d'une action métier explicite pour rendre la ressource active.
+
+---
 
 ## Les parcours
 
@@ -22,6 +30,8 @@ Caractéristiques clés :
 * l'utilisateur peut sauvegarder et reprendre le parcours à tout moment,
 * elle possède un statut « En cours de création » jusqu'à l'action finale,
 * l’affichage de la ressource diffère entre la création et la consultation une fois l’action finale réalisée
+
+
 
 ### Sans action de diffusion
 

@@ -1,5 +1,25 @@
 # Verbes d'action à utiliser
 
+**Sommaire**
+
+- Content
+    - Afficher / Consulter / Voir
+    - Ajouter / Créer / Générer
+    - Archiver / Retirer / Supprimer
+    - Annuler / Fermer / Ignorer / Quitter
+    - Continuer / Poursuivre
+    - Déclarer / Publier / Approuver
+    - Enregistrer / Envoyer
+    - Déléguer / Transférer
+    - Lancer
+    - Marquer / Indiquer
+    - Modifier
+    - Sélectionner / Choisir
+
+title: Verbes d'action à utiliser
+description: Cette liste permet de rester cohérent et rigoureux dans l'emploi de notre vocabulaire en matière d'action. Notre but : limiter la confusion pour nos utilisateurs, tant internes qu'externes.
+---
+
 # Content
 
 💡 Luccasien·ne, vous avez accès à la page **[Vocabulaire Produit](https://www.notion.so/Vocabulaire-Produit-Lucca-53d4e3f8936f4b2081a5fe215ff8788b)****,** concernant chacun de nos logiciels.
@@ -10,6 +30,8 @@
     * Ces verbes manquent de précision et d’inclusion (cf. Utilisateurs malvoyants). **Préférons** **« afficher », « consulter »**. 
 * **« Afficher », c’est « faire apparaître ».**  L'utilisateur n'a aucune action à faire sur l'objet affiché.
 * **« Consulter », c’est « parcourir quelque chose pour y chercher une information »**. L’objet à consulter (une liste, un planning, des notifications…) n’est pas modifiable dans l’environnement de consultation. Pour modifier l'objet, indiquer "Modifier" dans l’environnement de consultation.
+
+---
 
 ### **Ajouter / Créer / Générer**
 
@@ -24,11 +46,15 @@
 | Créer une dépense | Créer une nouvelle dépense |
 | Ajouter un collaborateur / Ajouter un autre collaborateur | Ajouter un nouveau collaborateur |
 
+---
+
 ### **Archiver / Retirer / Supprimer** 
 
 * **« Archiver » :** la donnée n'est pas supprimable, on a besoin de la conserver mais on ne l'affiche pas à l'utilisateur.
 * **« Retirer » :** l'action ne détruit pas l'objet, mais le retire d'un contexte précis. C'est le pendant de « Ajouter ».
 * **On utilise « Supprimer » dans tous les autres cas**, quand des données sont en jeu. Si c'est au contraire une action qui est en jeu, on utilise **«** **Annuler** **».**
+
+---
 
 ### **Annuler / Fermer / Ignorer / Quitter**
 
@@ -38,6 +64,8 @@
 * **« Quitter »** : c’est abandonner un processus entamé sans que cela entraîne un non-enregistrement, ou le renoncement à une action décisive. Contrairement à « Annuler ». 
 
 « Quitter », c’est aussi revenir à un écran précédent. 
+
+---
 
 ### **Continuer / Poursuivre** 
 
@@ -50,6 +78,8 @@ Il n'entraîne pas d'action d'enregistrement, qui devrait être explicitée ("En
 Le sens de “poursuivre” est “continuer sans relâche.”
 
 *Poursuivre son chemin. Poursuivre des études. Poursuivez, cela m'intéresse ! La réunion se poursuivit jusqu'à l'aube, elle se prolongea.*
+
+---
 
 ### **Déclarer / Publier / Approuver**
 
@@ -64,29 +94,41 @@ Le sens de “poursuivre” est “continuer sans relâche.”
 | Déclarer une note de frais | Publier une note de frais |
 | Publier mes réponses | Déclarer mes réponses |
 
+---
+
 ### **Enregistrer / Envoyer**
 
 * **« Enregistrer »** : si on envoie un message au serveur, on utilise cette terminologie.
 * **« Envoyer » :** s'utilise lorsque l'on s'adresse à une seule personne.
+
+---
 
 ### **Déléguer / Transférer**
 
 * **« Déléguer » :** désigne une action qu'une personne peut ou doit réaliser au nom de l'utilisateur.
 * **« Transférer » :** indique une transmission d'information qui ne nécessite pas forcément d'action de la part de la personne qui la reçoit. L'information est transmise telle quelle, sans transformation.
 
+---
+
 ### **Lancer**
 
 * **« Lancer une campagne »** : désigne le fait de rendre publique une enquête collaborateur.
 * **Évitons l'utilisation du verbe « démarrer »** car il appartient au registre familier employé dans le sens de « mettre en train quelque chose, le lancer, le commencer, l'entreprendre ».
+
+---
 
 ### **Marquer / Indiquer**
 
 * **« Marquer comme » :** on effectue une action pour soi ou son "futur" soi.
 * **« Indiquer » :** s'adresse à une autre personne.
 
+---
+
 ### **Modifier**
 
 **Préférer « Modifier » à « Éditer »,** pour plus de clarté et de cohérence.
+
+---
 
 ### **Sélectionner / Choisir**
 

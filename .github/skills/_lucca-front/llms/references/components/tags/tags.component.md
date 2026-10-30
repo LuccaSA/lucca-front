@@ -15,11 +15,10 @@
   - Palettes
   - Sizes
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-tags-angular-basic--docs)
 
 ## Angular
-
-Component selector : `lu-tag`
 
 ### Tag
 
@@ -31,9 +30,8 @@ import { TAG_SIZE, TagComponent } from '@lucca-front/ng/tag';
 <lu-tag label="Text" />
 ```
 
-## HTML/CSS
 
-Classe CSS : `.tag`
+## HTML/CSS
 
 ### Basic
 

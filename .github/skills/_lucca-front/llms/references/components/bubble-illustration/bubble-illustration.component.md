@@ -4,8 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-bubble-illustration`
-
 ### Basic
 
 ```js
@@ -35,9 +33,8 @@ import { BUBBLE_ILLUSTRATION, BubbleIllustrationComponent } from '@lucca-front/n
 </div>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.bubbleIllustration`
+## HTML/CSS
 
 ### Basic
 

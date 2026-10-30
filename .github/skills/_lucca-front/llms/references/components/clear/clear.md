@@ -39,7 +39,7 @@ import { ClearComponent } from '@lucca-front/ng/clear';
 ## Related files
 
 - 📝 [Code & implementation](./clear.component.md)
-- 🎨 [Design guidelines](./clear.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-clear-angular-basic--docs)
 
 ## Changelog

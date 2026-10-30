@@ -3,8 +3,6 @@
 **Sommaire**
 
 - Angular
-  - Sélection
-  - Lien vers un nouvelle page
   - Basic
   - Draggable
   - Inject
@@ -37,21 +35,10 @@
   - Header
   - Tree
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-data-table-angular-basic--docs)
 
 ## Angular
-
-Component selector : `lu-data-table`
-
-### Sélection
-
-L'option `selected` ajoute seulement une checkbox à l'ensemble des lignes du tableau. La sélection en elle-même n'est pas couverte par Lucca Front. 
-
-`lucca-cdk` propose des outils de sélection, via [withSelectionFeature](https://github.com/LuccaSA/lucca-cdk/blob/c155fc21f98c9cac93e7b193046729702096966a/docs/src/content/docs/features/signal-store.md#withselectionfeature-exp%C3%A9rimental).
-
-### Lien vers un nouvelle page
-
-Dans un tableau, privilégiez l'attribut `external` sur vos liens. L'icône associée n'est alors visible qu'au survol : le tableau la masque automatiquement pour ne pas surcharger des cellules souvent denses.
 
 ### Basic
 
@@ -261,9 +248,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 </lu-data-table>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.dataTable`
+## HTML/CSS
 
 ### Alignement horizontal
 
@@ -626,7 +612,6 @@ Classe CSS : `.dataTable`
 
 ```css
 @forward '@lucca-front/scss/src/components/dataTable';
-@forward '@lucca-front/scss/src/components/dataTableSticked'; // Import additionnel
 ```
 
 ```html
@@ -1470,7 +1455,6 @@ Classe CSS : `.dataTable`
 
 ```css
 @forward '@lucca-front/scss/src/components/dataTable';
-@forward '@lucca-front/scss/src/components/dataTableSticked'; // Import additionne
 ```
 
 ```html
@@ -1533,7 +1517,6 @@ Classe CSS : `.dataTable`
 
 ```css
 @forward '@lucca-front/scss/src/components/dataTable';
-@forward '@lucca-front/scss/src/components/dataTableSticked'; // Import additionnel
 ```
 
 ```html

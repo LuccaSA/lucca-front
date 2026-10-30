@@ -4,10 +4,6 @@
 
 ## Angular
 
-Mots-clés : donnée, lecture seule, readonly
-
-Component selector : `lu-data-presentation`
-
 ### Basic
 
 ```js
@@ -17,6 +13,7 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 ```html
 <lu-data-presentation label="Label">Value</lu-data-presentation>
 ```
+
 
 ## HTML/CSS
 

@@ -46,7 +46,7 @@ import { TagComponent } from '@lucca-front/ng/tag';
 ## Related files
 
 - 📝 [Code & implementation](./tags.component.md)
-- 🎨 [Design guidelines](./tags.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-tags-angular-basic--docs)
 
 ## Changelog

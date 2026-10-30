@@ -56,7 +56,7 @@ import { CalloutPopoverComponent } from '@lucca-front/ng/callout';
 ## Related files
 
 - 📝 [Code & implementation](./callout-popover.component.md)
-- 🎨 [Design guidelines](./callout-popover.design.md)
+
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-popover-angular-basic--docs)
 
 ## Changelog

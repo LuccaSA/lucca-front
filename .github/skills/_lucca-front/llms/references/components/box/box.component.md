@@ -11,13 +11,10 @@
   - Killable
   - Toggle
 
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-box-angular-arrow--docs)
 
 ## Angular
-
-Mots-clés : boîte, conteneur, encadré
-
-Component selector : `lu-box`
 
 ### Arrow
 
@@ -47,16 +44,15 @@ import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms'
 ### Basic
 
 ```js
-import { BoxComponent } from '@lucca-front/ng/box';
+import { BoxComponent, luBoxTranslations } from '@lucca-front/ng/box';
 ```
 
 ```html
 <lu-box (killed)="onKilled()">Lorem ipsum dolor sit amet</lu-box>
 ```
 
-## HTML/CSS
 
-Classe CSS : `.box`
+## HTML/CSS
 
 ### Arrow
 

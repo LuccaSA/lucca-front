@@ -4,8 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-read-more`
-
 ### More ai
 
 ```js

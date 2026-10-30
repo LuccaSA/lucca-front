@@ -4,8 +4,6 @@
 
 ## Angular
 
-Component selector : `lu-textarea-input`
-
 ### Field
 
 ```js
@@ -22,6 +20,7 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>
 ```
+
 
 ## HTML/CSS
 
