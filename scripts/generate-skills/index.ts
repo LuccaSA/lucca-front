@@ -14,7 +14,8 @@
  *   npx ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts [options]
  *
  * Options:
- *   --version <M.m>      Minor(s) to generate (e.g. "21.2"), repeatable, required.
+ *   --version <M.m>      Minor to generate (e.g. "22.1"), required. The docs are a single folder:
+ *                        a branch carries one minor of it, the npm package of that minor ships it.
  *                        references/ = latest published patch, fixes/ = per-patch deltas.
  *   --component <slug>   Generate only the specified component
  *   --skip-figma         Skip Figma data collection
@@ -25,7 +26,6 @@
  *   --accept-shrink      Accept content regressions vs the baselines (legitimate deletions)
  *   --accept-output-violations
  *                        Do not fail the run on output-guard violations (see generators/output-guard.ts)
- *   --aggregate-only     Rebuild lucca-front-all from the minors already on disk, nothing else
  */
 
 import path from 'path';
@@ -61,25 +61,26 @@ import {
 	renderSharedTypeMd,
 } from './generators/template-renderer';
 import {
-	writeVersionedSkill,
-	cleanVersionDirectory,
+	writeComponentApi,
+	cleanComponentDirectory,
 	writeDesign,
 	writeComponentPage,
 	writeFigmaSkill,
 	figmaSkillExists,
-	writeVersionManifest,
+	writeSkillManifest,
+	clearSkillContent,
 	writeSharedType,
-	versionFolder,
+	skillRoot,
+	readSkillManifest,
 } from './generators/skill-writer';
 import { writeToc } from './generators/toc-writer';
 import { writeAngularApiPage } from './generators/angular-api-writer';
 import { buildComponentChangelog } from './generators/changelog-writer';
 import { writeFixes } from './generators/fixes-writer';
-import { writeVersionChangelog } from './generators/version-diff-writer';
-import { writeAggregateSkill, listGeneratedVersionStrings } from './generators/aggregate-writer';
+import { snapshotSkill, writeReviewChangelog } from './generators/version-diff-writer';
 import { auditStoryExamples, clearOutputViolations, reportOutputViolations } from './generators/output-guard';
 import { ensureZhReleaseIds } from './zh-release-guard';
-import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist } from './preflight';
+import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist, isNewMinor, refuseMinorForThisBranch, refusePartialRunOnNewMinor } from './preflight';
 import { MinorResolution, getTechnicalMinor, parseVersion, resolveMinorVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
@@ -117,14 +118,12 @@ const flags = {
 	skipDocumentation: args.includes('--skip-documentation'),
 	skipTools: args.includes('--skip-tools'),
 	skipSchematics: args.includes('--skip-schematics'),
-	skipAggregate: args.includes('--skip-aggregate'),
 	documentationOnly: args.includes('--documentation-only'),
 	dryRun: args.includes('--dry-run'),
 	validate: args.includes('--validate'),
 	retryFailed: args.includes('--retry-failed'),
 	acceptShrink: args.includes('--accept-shrink'),
 	acceptOutputViolations: args.includes('--accept-output-violations'),
-	aggregateOnly: args.includes('--aggregate-only'),
 	// ZeroHeight release-ID guard: supply IDs / assert "latest" non-interactively (CI).
 	zhIds: Object.fromEntries(
 		getFlags('zh-id')
@@ -312,19 +311,6 @@ async function main(): Promise<void> {
 	setZhAcceptShrink(flags.acceptShrink);
 	setFigmaAcceptShrink(flags.acceptShrink);
 
-	// Rebuild the aggregate alone. It is a pure copy of the per-minor folders, so refreshing it
-	// needed no network and no extraction — yet the only way to trigger it was a full generation of
-	// a minor, which rewrites every one of its files. That made a targeted fix impossible: correcting
-	// three components left the aggregate's copies of them stale.
-	if (flags.aggregateOnly) {
-		const bundled = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
-		const { skillPath, versionCount } = writeAggregateSkill(config.output.skillsDir, bundled);
-		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} mineure·s)`);
-		const violations = reportOutputViolations(config.output.skillsDir);
-		if (violations.length > 0 && !flags.acceptOutputViolations) process.exitCode = 1;
-		return;
-	}
-
 	// Replay only the fetches that failed in a previous run (from the manifest).
 	if (flags.retryFailed) {
 		await retryFailedRun(config, FAILURES_MANIFEST);
@@ -335,8 +321,8 @@ async function main(): Promise<void> {
 		return;
 	}
 
-	if (flags.versions.length === 0) {
-		console.error('❌ --version is required (e.g. --version 21.2 --version 21.1)');
+	if (flags.versions.length !== 1) {
+		console.error('❌ --version est requis, une seule fois (ex: --version 22.1) : la skill est un dossier unique, une branche porte une seule mineure.');
 		process.exit(1);
 	}
 
@@ -368,6 +354,25 @@ async function main(): Promise<void> {
 		}
 	}
 
+	const committed = readSkillManifest(config.output.skillsDir);
+	const refusal = refuseMinorForThisBranch(flags.versions[0], committed?.minor ?? null);
+	if (refusal) {
+		console.error(`❌ ${refusal}`);
+		process.exit(1);
+	}
+	const partialFlags = [
+		flags.skipDocumentation && '--skip-documentation',
+		flags.skipTools && '--skip-tools',
+		flags.skipSchematics && '--skip-schematics',
+		flags.documentationOnly && '--documentation-only',
+		flags.component && `--component ${flags.component}`,
+	].filter((flag): flag is string => !!flag);
+	const partialRefusal = flags.dryRun ? null : refusePartialRunOnNewMinor(flags.versions[0], committed?.minor ?? null, partialFlags);
+	if (partialRefusal) {
+		console.error(`❌ ${partialRefusal}`);
+		process.exit(1);
+	}
+
 	// ── Pre-flight ────────────────────────────────────────────────────────────
 	// Three phases, ordered so that no question is asked while a check can still stop the run, and
 	// so nothing is persisted before the last abort door (the ZeroHeight prompt writes an ID to
@@ -389,9 +394,6 @@ async function main(): Promise<void> {
 		process.exit(1);
 	}
 
-	clearFailures();
-	clearOutputViolations();
-
 	// Phase 3 — every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
 	// the confirmed latest online. Aborts before any heavy work if an unpinned, superseded minor is
 	// unresolved (would otherwise pull "latest" = a newer version and corrupt its design sections).
@@ -402,6 +404,17 @@ async function main(): Promise<void> {
 			console.error(`\n❌ Garde-fou ZeroHeight : ${err.message}`);
 			process.exit(1);
 		}
+	}
+
+	clearFailures();
+	clearOutputViolations();
+
+	// Taken before anything is written: the review changelog diffs the run's output against it.
+	const previousSkill = flags.dryRun || flags.component ? null : snapshotSkill(config.output.skillsDir, committed);
+	// The writers only clean what they regenerate: on a new minor, a page the minor no longer emits
+	// would survive with the previous minor's content, and SKILL.md §6 would still list it.
+	if (previousSkill && isNewMinor(flags.versions[0], committed?.minor ?? null)) {
+		clearSkillContent(config.output.skillsDir);
 	}
 
 	let totalSuccess = 0;
@@ -512,25 +525,10 @@ async function main(): Promise<void> {
 		}
 	}
 
-	// Minor-level review changelog (human PR-aid, not consumed by the skill) — run after the
-	// loop so every target minor's folder is on disk to diff against its predecessor.
+	// Review changelog (human PR-aid, not consumed by the skill): the skill after the run vs before it.
 	if (!flags.dryRun && !flags.component) {
-		for (const versionStr of flags.versions) {
-			const clPath = writeVersionChangelog(config.output.skillsDir, resolutions.get(versionStr)!.version);
-			if (clPath) console.log(`📝 Review changelog: ${path.relative(config.output.skillsDir, clPath)}`);
-		}
-	}
-
-	// Aggregate "all versions" skill (lucca-front-all): one content folder per MAJOR (base = the
-	// major's newest minor, older minors as override folders) + a router SKILL.md. Built after all
-	// per-minor folders are on disk. Skipped for single-component or partial runs.
-	if (!flags.dryRun && !flags.component && !flags.skipAggregate) {
-		// Bundle EVERY minor present on disk, not just this run's — writeAggregateSkill wipes the
-		// aggregate before rebuilding, so passing only flags.versions would drop the other minors
-		// (a single-minor run must not nuke the others from lucca-front-all).
-		const bundled = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
-		const { skillPath, versionCount } = writeAggregateSkill(config.output.skillsDir, bundled);
-		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} mineure·s)`);
+		const clPath = writeReviewChangelog(config.output.skillsDir, resolutions.get(flags.versions[0])!.version, previousSkill);
+		console.log(`📝 Review changelog: ${path.relative(config.output.skillsDir, clPath)}`);
 	}
 
 	// Surface ZH/Figma fetch failures (content missing) and persist them for replay.
@@ -552,16 +550,11 @@ async function main(): Promise<void> {
 	// Output guard: assert the emitted markdown is coherent. A violation is a generator bug, so it
 	// fails the run — but only after everything is written, so the offending output can be read.
 	if (!flags.dryRun) {
-		// Only this run's own minor folders are blocking: violations left in minors it did not rebuild
-		// are pre-existing and get reported, not thrown at whoever targeted a single version. The
-		// aggregate is deliberately out of scope — it is a copy, so every violation it holds is already
-		// reported against the minor folder it came from.
-		const scope = flags.versions.map((v) => versionFolder(resolutions.get(v)!.version));
-		// Rule 4 needs the SCSS folders that actually exist at the tag being generated. Only one
-		// listing is threaded through — the last target's — and the rule is scoped to `scope`
-		// anyway, so an older folder is never judged against a newer listing.
-		const lastTarget = resolutions.get(flags.versions[flags.versions.length - 1])!.version;
-		const violations = reportOutputViolations(config.output.skillsDir, scope, listScssComponentNames(lastTarget.tag));
+		// Only the generated skill is blocking: the hand-written skills beside it (the lucca-front
+		// pointer, lucca-front-scss…) are reported, not thrown at whoever runs the generator.
+		const target = resolutions.get(flags.versions[0])!.version;
+		const generatedScope = path.relative(config.output.skillsDir, skillRoot(config.output.skillsDir));
+		const violations = reportOutputViolations(config.output.skillsDir, [generatedScope], listScssComponentNames(target.tag));
 		if (violations.length > 0 && !flags.acceptOutputViolations) {
 			console.error('\n❌ Génération refusée : corrige le générateur (jamais les .md), ou relance avec --accept-output-violations si tu assumes ces écarts.');
 			process.exitCode = 1;
@@ -572,7 +565,7 @@ async function main(): Promise<void> {
 /**
  * Replays only the units whose ZH/Figma fetch failed in a previous run (read from the manifest):
  * components, documentation pages, tool pages and the deprecated page — each through its own
- * collector. Then refreshes the per-version SKILL.md of the touched versions and the aggregate.
+ * collector. Then refreshes the SKILL.md.
  * Rewrites the manifest with whatever still fails — so it can be replayed again until empty.
  */
 async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPath: string): Promise<void> {
@@ -610,6 +603,11 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 
 	const touched: MinorResolution[] = [];
 	for (const [minorKey, items] of byVersion) {
+		const refusal = refuseMinorForThisBranch(minorKey, readSkillManifest(config.output.skillsDir)?.minor ?? null);
+		if (refusal) {
+			console.error(`❌ ${refusal}`);
+			process.exit(1);
+		}
 		const resolution = resolveMinorVersion(minorKey);
 		const version = resolution.version;
 		const componentSlugs = new Set(items.filter((f) => (f.scope ?? 'component') === 'component').map((f) => f.slug));
@@ -637,16 +635,10 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 		touched.push(resolution);
 	}
 
-	// Refresh the touched minors' SKILL.md, then rebuild the aggregate from all on-disk minors.
 	// fixes/ are NOT rewritten here: they are git-sourced only, unaffected by ZH/Figma retries.
 	if (!flags.dryRun) {
 		for (const resolution of touched) {
 			writeToc(config.output.skillsDir, resolution.version, resolution.patchTags, resolution.technicalMinors);
-		}
-		if (!flags.skipAggregate) {
-			const all = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
-			const { versionCount } = writeAggregateSkill(config.output.skillsDir, all);
-			console.log(`\n📦 Agrégat reconstruit (${versionCount} mineure·s)`);
 		}
 	}
 
@@ -906,7 +898,7 @@ async function processVersion(
 			// ── Write all files ──────────────────────────────────────────
 
 			// Clean previous design/ and examples/ to avoid stale files
-			cleanVersionDirectory(config.output.skillsDir, slug, version);
+			cleanComponentDirectory(config.output.skillsDir, slug);
 
 			// Pre-compute design split + changelog so the API file links only to files actually
 			// written (avoids dead ./design/_index.md and ./<slug>.changelog.md).
@@ -923,14 +915,14 @@ async function processVersion(
 			// Main API reference — the changelog (structural API diff + ZH prose layer) is embedded
 			// as its trailing ## Changelog section. hasFigma: tokens fetched this run, or a .figma.md
 			// kept from a previous run (figma skipped/unavailable) — the link must survive either way.
-			const hasFigma = figmaTokens !== null || figmaSkillExists(config.output.skillsDir, slug, version);
+			const hasFigma = figmaTokens !== null || figmaSkillExists(config.output.skillsDir, slug);
 			// Design guidelines, merged into a single <slug>.design.md (designResult computed above)
 			let codeSections: DesignSection[] = [];
 			if (designResult) {
 				codeSections = designResult.codeSections;
 				if (designResult.designSections.length > 0) {
 					const designMd = renderDesignMd(slug, designResult.designSections, designResult.overviewContent, entry.zeroheightPagePath ?? '');
-					writeDesign(config.output.skillsDir, slug, version, designMd);
+					writeDesign(config.output.skillsDir, slug, designMd);
 				}
 			}
 
@@ -953,16 +945,16 @@ async function processVersion(
 			const componentPageMd = renderComponentPageMd(data, codeSections, scssImport);
 
 			const mdContent = renderComponentMd(data, { hasDesign, changelog: clMd, hasFigma, hasComponentPage: componentPageMd !== null });
-			const result = writeVersionedSkill(config.output.skillsDir, slug, version, mdContent);
+			const result = writeComponentApi(config.output.skillsDir, slug, mdContent);
 
 			if (componentPageMd) {
-				writeComponentPage(config.output.skillsDir, slug, version, componentPageMd);
+				writeComponentPage(config.output.skillsDir, slug, componentPageMd);
 			}
 
 			// Figma skill
 			if (figmaTokens) {
 				const figmaMd = renderFigmaMd(slug, [figmaTokens], config.figma.fileKey);
-				writeFigmaSkill(config.output.skillsDir, slug, version, figmaMd);
+				writeFigmaSkill(config.output.skillsDir, slug, figmaMd);
 			}
 
 			const nDesign = hasDesign && designResult ? designResult.designSections.length : 0;
@@ -987,7 +979,7 @@ async function processVersion(
 		const sharedTypes = collectSharedTypeDefs(allData);
 		for (const typeDef of sharedTypes) {
 			const typeMd = renderSharedTypeMd(typeDef);
-			const typeResult = writeSharedType(config.output.skillsDir, version, typeDef.typeName, typeMd);
+			const typeResult = writeSharedType(config.output.skillsDir, typeDef.typeName, typeMd);
 			console.log(`  📎 ${typeDef.typeName}.md — ${typeResult.status} (${typeDef.values.length} values)`);
 		}
 	}
@@ -995,8 +987,8 @@ async function processVersion(
 	// Write version manifest — full runs only: a component-scoped run (--component or replay)
 	// would overwrite componentCount with the partial count of this run.
 	if (!flags.dryRun && !componentScoped) {
-		writeVersionManifest(config.output.skillsDir, version, successCount, resolution.patchTags, resolution.technicalMinors);
-		console.log(`\n📋 Version manifest updated`);
+		writeSkillManifest(config.output.skillsDir, version, successCount, resolution.patchTags, resolution.technicalMinors);
+		console.log(`\n📋 Skill manifest updated`);
 	}
 
 	console.log(`\n✅ ${version.tag}: ${successCount} generated, ${errorCount} errors`);

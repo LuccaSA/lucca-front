@@ -2,24 +2,23 @@ import fs from 'fs';
 import path from 'path';
 import { DocumentationMap, VersionConfig } from '../types';
 import { TechnicalMinorPatches } from '../version-config';
-import { versionRoot, versionFolder } from './skill-writer';
+import { skillRoot, SKILL_NAME } from './skill-writer';
 
 /**
- * Writes the per-minor SKILL.md — the entry point of a single self-contained minor skill.
+ * Writes the SKILL.md — the entry point of the skill.
  *
- * Output: lucca-front/lucca-front-<M>-<m>/SKILL.md
+ * Output: _lucca-front/llms/SKILL.md
  *
- * The minor is implicit (one minor per installed skill): no package.json detection, no version
- * guardrail. references/ documents the minor's LATEST published patch; fixes/ carries the
+ * The minor is implicit (the npm package of that minor ships it): no package.json detection,
+ * no version guardrail. references/ documents the minor's LATEST published patch; fixes/ carries the
  * per-patch deltas. All paths are flat and relative to this folder. The component list (§6) is
  * sourced from the generated folders on disk — the single source of truth, so every listed slug
  * is a navigable path.
  */
 export function writeToc(skillsDir: string, version: VersionConfig, patchTags: string[], technicalMinors: TechnicalMinorPatches[] = []): string {
-	const root = versionRoot(skillsDir, version);
+	const root = skillRoot(skillsDir);
 	const minorVersion = `${version.major}.${version.minor}`;
 	const latestPatch = `${version.major}.${version.minor}.${version.patch}`;
-	const skillName = versionFolder(version);
 	const patchList = patchTags.map((t) => t.replace(/^v/, ''));
 	const fixPatches = patchList.slice(1); // every published patch > x.y.0 has a fix file
 
@@ -114,7 +113,7 @@ export function writeToc(skillsDir: string, version: VersionConfig, patchTags: s
 	// ── Build the SKILL.md content ─────────────────────────────────────────
 
 	const content = `---
-name: ${skillName}
+name: ${SKILL_NAME}
 description: >
   Design system Lucca Front / Prisme (Angular), versions ${minorVersion}.x${techDescription}. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
   ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
@@ -137,7 +136,7 @@ La documentation \`references/\` reflète le **dernier patch publié : ${latestP
 ${techBlock}
 **Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
 
-- la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
+- la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: cette documentation est lue ailleurs que dans le \`node_modules/@lucca-front/ng/llms/\` du projet, qui correspond toujours au package installé) ;
 - le patch (ou la version \`@lucca-front/ng\`) **ne peut pas être déterminé**.
 
 Si le **patch** détecté est **postérieur** à ${latestPatch}${techPatchGuardSuffix}, **signale-le en une ligne et continue** ; en cas de comportement inattendu, lis les notes de release des patchs postérieurs (\`gh release view v<patch> --repo LuccaSA/lucca-front\`) : le paquet \`@lucca-front/ng\` n'embarque pas de CHANGELOG.

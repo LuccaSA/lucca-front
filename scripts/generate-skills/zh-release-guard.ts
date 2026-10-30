@@ -9,7 +9,8 @@
  * silently corrupt that version's design sections.
  *
  * This guard runs before generation and enforces the invariant:
- *   a minor may be (re)generated unpinned ONLY if it is the newest minor involved (run ∪ on-disk).
+ *   a minor may be (re)generated unpinned ONLY if it is the newest minor involved (run ∪ the one the
+ *   committed skill documents).
  *
  * Resolution of an unpinned minor:
  *   - superseded (a newer minor exists) → MUST be pinned: --zh-id flag, else interactive prompt,
@@ -22,7 +23,7 @@
 
 import { parseMinor, parseVersion, getZeroHeightUrl, getZhReleaseIds, addZhReleaseId } from './version-config';
 import { ask, isInteractive, isYes } from './prompt';
-import { listGeneratedVersionStrings } from './generators/aggregate-writer';
+import { readSkillManifest } from './generators/skill-writer';
 import { fetchWithTimeout } from './collectors/http';
 
 export interface ZhGuardFlags {
@@ -122,7 +123,8 @@ async function resolveAndPin(minor: string, interactive: boolean, flags: ZhGuard
  */
 export async function ensureZhReleaseIds(runVersions: string[], skillsDir: string, flags: ZhGuardFlags): Promise<void> {
 	const runMinors = new Set(runVersions.map(minorKey));
-	const diskMinors = new Set(listGeneratedVersionStrings(skillsDir).map(minorKey));
+	const committedMinor = readSkillManifest(skillsDir)?.minor;
+	const diskMinors = new Set(committedMinor ? [committedMinor] : []);
 	const allMinors = [...new Set([...runMinors, ...diskMinors])].sort(compareMinors);
 	if (allMinors.length === 0) return;
 

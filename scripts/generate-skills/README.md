@@ -2,12 +2,9 @@
 
 Pipeline **déterministe** (zéro IA) qui génère la documentation des composants Lucca Front pour les **Agent Skills**.
 
-Chaque **mineure** produit une **skill self-contained** sous `.github/skills/lucca-front/lucca-front-<M>-<m>/` : un `SKILL.md`, les fichiers `references/` du **dernier patch publié** de la mineure, et un dossier `fixes/` avec un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories — **aucune information patch-level n'est perdue**). Le nom du dossier (tirets, pas de point) = `name:` du SKILL.md = dossier d'install (leaf), sans collision entre mineures.
+Le pipeline produit **une seule documentation**, `.github/skills/_lucca-front/llms/` : un `SKILL.md` (le guide d'entrée), les fichiers `references/` du **dernier patch publié** de la mineure, et un dossier `fixes/` avec un `.md` par patch publié (delta vs le patch précédent : API, types partagés, codemods, sources de stories — **aucune information patch-level n'est perdue**).
 
-Une passe finale assemble une skill **agrégat** `lucca-front-all/` : **un seul** `SKILL.md` routeur + **un dossier de contenu par majeure** sous `references/<majeure>/` — la mineure la plus récente en intégralité (base), les mineures antérieures en dossiers d'**overrides** `minors/<M-m>/` (fichiers complets à l'état de la mineure, uniquement ceux qui diffèrent substantiellement de la base ; URLs Storybook versionnées normalisées avant comparaison ; `migrations.md` exclu et section `## Changelog` des `<slug>.md` ignorée dans la comparaison car cumulatifs — la base les couvre, entrées étiquetées par version). Le routeur détecte la version de `@lucca-front/ng` (node_modules puis `package.json`) et résout : override s'il existe, base sinon. Deux usages couverts :
-
-- **install global** (machine) : installer `lucca-front-all` → n'importe quel repo obtient la bonne version automatiquement ;
-- **install par repo** : installer une/deux `lucca-front-<M>-<m>` précises (fetch plus léger, mineure figée).
+Le chemin ne porte **aucune version** : `scripts/llms-skill` copie cette documentation dans le package `@lucca-front/ng` (`llms.txt` + `llms/`), qui la livre donc à la version installée. Les projets n'installent avec [APM](https://microsoft.github.io/apm/) que `.github/skills/lucca-front/`, une skill **écrite à la main** qui renvoie vers `node_modules/@lucca-front/ng/llms.txt` (cf. [Consommation](#consommation)). Une branche porte **une** mineure de la documentation : `master` la plus récente, `v21.4-lts` la 21.x.
 
 ## Prérequis
 
@@ -48,16 +45,13 @@ Le token est donc optionnel pour développer ou tester le pipeline (AST, ZeroHei
 ```bash
 # Générer un composant pour une mineure
 npx ts-node --project scripts/generate-skills/tsconfig.json \
-  scripts/generate-skills/index.ts --version 21.2 --component button
+  scripts/generate-skills/index.ts --version 22.1 --component button
 
 # Générer tous les composants pour une mineure
-npx ts-node ... --version 21.2
-
-# Plusieurs mineures à la fois
-npx ts-node ... --version 21.2 --version 21.1
+npx ts-node ... --version 22.1
 
 # Sans Figma / ZeroHeight (Storybook, lui, est obligatoire — cf. pré-flight)
-npx ts-node ... --version 21.2 --skip-figma --skip-zeroheight
+npx ts-node ... --version 22.1 --skip-figma --skip-zeroheight
 
 # Valider la couverture ZH (aucune génération)
 npx ts-node ... --validate
@@ -67,21 +61,19 @@ npx ts-node ... --validate
 
 | Flag | Description |
 |------|-------------|
-| `--version <M.m>` | **Mineure** à générer (ex: `21.2`) — `references/` reflète son dernier patch publié, `fixes/` porte les deltas par patch. Une version patch complète est refusée. Répétable. **Requis** (sauf avec `--validate` et `--retry-failed`). |
-| `--component <slug>` | Générer uniquement ce composant (n'écrit pas le SKILL.md ni la doc transverse) |
+| `--version <M.m>` | **Mineure** à générer (ex: `22.1`) — `references/` reflète son dernier patch publié, `fixes/` porte les deltas par patch. Une version patch complète est refusée, comme une mineure que la branche ne peut pas porter (cf. [Phase 0](#phase-0--la-mineure-de-la-branche-preflightts-non-interactif)). **Requis, une seule fois** (sauf avec `--validate` et `--retry-failed`). |
+| `--component <slug>` | Générer uniquement ce composant (n'écrit pas le SKILL.md ni la doc transverse). Refusé quand la skill change de mineure : le composant serait seul dans la nouvelle. |
 | `--skip-figma` | Ignorer la collecte Figma |
 | `--skip-zeroheight` | Ignorer la collecte ZeroHeight |
 | `--skip-documentation` | Ignorer la doc transverse (tokens, contenu, guidelines, patterns, deprecated) |
 | `--skip-tools` | Ignorer les outils (SCSS + Angular tools) |
 | `--skip-schematics` | Ignorer les codemods de migration (`collection.json` git) |
-| `--skip-aggregate` | Ne pas (ré)assembler la skill agrégat `lucca-front-all/` |
 | `--documentation-only` | Ne collecter que doc/outils/schematics (pas les composants) |
 | `--dry-run` | N'écrire aucun fichier |
 | `--validate` | Vérifier la couverture ZH de `component-map.json` (aucune génération) |
 | `--retry-failed` | Rejouer uniquement les unités (composants, pages doc/outils, deprecated) dont le fetch a échoué au run précédent (manifeste `_fetch-failures.json`) |
 | `--accept-shrink` | Entériner les régressions de contenu vs les baselines (suppression légitime côté ZH/Figma) |
 | `--accept-output-violations` | Ne pas faire échouer le run sur les violations du garde-fou de sortie. Cf. garde-fou de sortie. |
-| `--aggregate-only` | Reconstruire `lucca-front-all/` depuis les mineures déjà sur disque, sans rien régénérer d'autre. L'agrégat n'étant qu'une copie des dossiers par mineure, il n'exige ni réseau ni extraction — mais sans ce flag, le rafraîchir imposait de régénérer une mineure entière, donc de réécrire tous ses fichiers. Nécessaire après une correction ciblée de quelques composants. |
 
 Variable d'environnement complémentaire : **`FETCH_TIMEOUT_MS`** — deadline des fetchs, 10 000 ms par défaut. Le bon réglage dépend de ce que le run fait bloquer la boucle d'événements : une génération complète le veut **bas** (une page est différée puis rejouée, plutôt que d'immobiliser un worker), une passe `--retry-failed` le veut **haut** (quelques dizaines d'unités seulement, et son but est de les obtenir, pas de les différer à nouveau). Cf. `collectors/http.ts`.
 | `--zh-latest <minor>` | Affirme que `<minor>` (ex. `21.3`) est la dernière version en ligne → autorisée en « latest » non pinné. Répétable. Cf. garde-fou ZeroHeight. |
@@ -89,10 +81,14 @@ Variable d'environnement complémentaire : **`FETCH_TIMEOUT_MS`** — deadline d
 
 ## Parcours pré-flight
 
-Avant la moindre collecte, le run passe trois phases. L'ordre suit deux règles :
+Avant la moindre collecte, le run passe une porte puis trois phases. L'ordre suit deux règles :
 
 1. **Aucune question tant qu'un contrôle non interactif peut encore tout arrêter** — sinon on répond à des prompts pour une génération qui n'aura pas lieu ;
 2. **Aucun effet de bord avant la dernière porte d'abandon** — le prompt ZeroHeight écrit l'ID dans `zh-release-ids.json` dès la saisie (`addZhReleaseId`), donc la question Figma, dont le « non » ne laisse rien derrière, passe avant.
+
+### Phase 0 — la mineure de la branche (`preflight.ts`, non interactif)
+
+La skill est un dossier unique réécrit sur place : générer une mineure écrase celle que la branche porte, et le prochain tag coupé depuis cette branche la livre à tous les projets épinglés dessus. `refuseMinorForThisBranch` compare la mineure demandée à celle du manifeste committé (`_lucca-front/versions.json`) et refuse le run, sortie 1, quand la branche ne peut pas la porter.
 
 ### Phase 1 — la release existe (`preflight.ts`, non interactif)
 
@@ -157,7 +153,7 @@ Le pipeline agrège des sources **toutes déterministes** (pas d'IA) :
 Trois mécanismes garantissent un rendu reproductible malgré des sources distantes faillibles :
 
 1. **Cache de run ZeroHeight** (mémoire, clé `(releaseId, pagePath)`) : ZH est versionné par mineure,
-   donc un run multi-versions fetch chaque page **une seule fois** — les patches d'une même mineure
+   donc un run fetch chaque page **une seule fois** — les patches d'une même mineure
    obtiennent un contenu identique octet pour octet. Jamais persisté : un run ultérieur re-fetch
    toujours frais (les éditions ZH au sein d'une release sont prises en compte).
 2. **Baselines anti-régression** (`scripts/generate-skills/baselines/`, **committées**) : le dernier
@@ -176,7 +172,7 @@ Trois mécanismes garantissent un rendu reproductible malgré des sources distan
 3. **Manifeste d'échecs + rejeu ciblé** : les échecs transients épuisés (réseau, 5xx, 429, HTML,
    shrink) sont écrits dans `.github/skills/_fetch-failures.json` avec leur *scope* (composant, page
    doc, outil, deprecated). `--retry-failed` rejoue uniquement ces unités via leur collecteur, puis
-   rafraîchit SKILL.md et l'agrégat. Itérable jusqu'à manifeste vide ; seuls les `shrink` légitimes
+   rafraîchit SKILL.md. Itérable jusqu'à manifeste vide ; seuls les `shrink` légitimes
    nécessitent un `--accept-shrink` humain.
 
 Côté Figma, la défense principale contre le rate limit (Tier 1 : ~10-20 req/min) est le **prefetch
@@ -185,44 +181,34 @@ batché** ; la sérialisation + cadence + retries `Retry-After` ne restent qu'en
 
 ## Structure de sortie
 
-Layout **flat self-contained par mineure** (aucun segment de version interne) :
-
 ```
-.github/skills/lucca-front/
-├── _versions.json                    # Manifeste des mineures générées + leurs patchs (métadonnée dist, hors skill)
-├── changelog/<M.m>.md                # Diff de review humain entre mineures (hors skill, non distribué)
-├── lucca-front-all/                  # Skill agrégat : UN seul SKILL.md + un dossier par MAJEURE
-│   ├── SKILL.md                      # Routeur : détecte la version → base ou overrides (voir plus haut)
-│   └── references/
-│       └── 21/                       # Base = references/ de la mineure la plus récente (ex: 21.3)
-│           ├── {components,documentation,tools,types,migrations.md}
-│           ├── fixes/                # Fixes de la mineure de base
-│           └── minors/
-│               ├── 21-2/             # Overrides de 21.2 : _manifest.md + fixes/ + fichiers différents
-│               └── 21-1/  …
-├── lucca-front-21-2/                 # Une skill complète par mineure (dossier = name = leaf d'install)
-│   ├── SKILL.md                      # Point d'entrée : mineure implicite, chemins relatifs
-│   ├── fixes/
-│   │   ├── 21-2-1.md                 # Delta du patch 21.2.1 vs 21.2.0 (API, types, codemods, stories)
-│   │   └── …                         # Un fichier par patch publié > .0
-│   └── references/                   # Contenu du DERNIER patch publié de la mineure
-│       ├── components/
-│       │   └── button/
-│       │       ├── button.md         # API Angular + liens + section ## Changelog (diff structurel cumulatif + prose ZH)
-│       │       ├── button.component.md  # Notes d'implémentation + toutes les stories inline (### <nom>)
-│       │       ├── button.design.md  # Guidelines design ZH fusionnées (overview + sections)
-│       │       └── button.figma.md   # Tokens Figma
-│       ├── types/<TypeName>.md       # Types énumérés partagés (ex: LuccaIcon)
-│       ├── documentation/            # Doc transverse
-│       │   ├── tokens/  content/  guidelines/  patterns/
-│       │   └── deprecated/deprecated.md
-│       ├── tools/{animations,mixins,numbers,scrollbox,utilitaires}.md
-│       └── migrations.md             # Codemods de migration (ng generate) cumulatifs ≤ cette version
-└── lucca-front-21-1/
-    └── …
+.github/skills/
+├── lucca-front/                      # Skill pointeur écrite à la main, installée via APM (non générée)
+│   └── SKILL.md                      # Renvoie vers node_modules/@lucca-front/ng/llms.txt
+└── _lucca-front/                     # Généré : jamais installé par APM
+    ├── llms/                         # Copié dans @lucca-front/ng (llms/) par scripts/llms-skill
+    │   ├── SKILL.md                  # Guide d'entrée : mineure implicite, chemins relatifs
+    │   ├── fixes/
+    │   │   ├── 22-1-1.md             # Delta du patch 22.1.1 vs 22.1.0 (API, types, codemods, stories)
+    │   │   └── …                     # Un fichier par patch publié > .0
+    │   └── references/               # Contenu du DERNIER patch publié de la mineure
+    │       ├── components/
+    │       │   └── button/
+    │       │       ├── button.md     # API Angular + liens + section ## Changelog (diff structurel cumulatif + prose ZH)
+    │       │       ├── button.component.md  # Notes d'implémentation + toutes les stories inline (### <nom>)
+    │       │       ├── button.design.md  # Guidelines design ZH fusionnées (overview + sections)
+    │       │       └── button.figma.md   # Tokens Figma
+    │       ├── types/<TypeName>.md   # Types énumérés partagés (ex: LuccaIcon)
+    │       ├── documentation/        # Doc transverse
+    │       │   ├── tokens/  content/  guidelines/  patterns/
+    │       │   └── deprecated/deprecated.md
+    │       ├── tools/{animations,mixins,numbers,scrollbox,utilitaires}.md
+    │       └── migrations.md         # Codemods de migration (ng generate) cumulatifs ≤ cette version
+    ├── versions.json                 # Manifeste : la mineure documentée, ses patchs (lu par scripts/llms-skill)
+    └── changelog/<M.m>.md            # Diff de review du run (avant → après), non distribué
 ```
 
-Le fichier principal `button.md` contient l'import, le basic usage, la table d'API, les liens vers les fichiers frères, et se termine par la section `## Changelog` (toujours en **dernière position** — l'agrégat et le diff de review s'appuient dessus pour l'ignorer dans les comparaisons). Les `.component.md` / `.design.md` / `.figma.md` / `migrations.md` / `fixes/*.md` sont lazy-loaded (lus seulement au besoin) ; chaque fichier reste sous ~80 Ko, lisible en une passe.
+Le fichier principal `button.md` contient l'import, le basic usage, la table d'API, les liens vers les fichiers frères, et se termine par la section `## Changelog` (toujours en **dernière position** — le diff de review s'appuie dessus pour l'ignorer dans les comparaisons). Les `.component.md` / `.design.md` / `.figma.md` / `migrations.md` / `fixes/*.md` sont lazy-loaded (lus seulement au besoin) ; chaque fichier reste sous ~80 Ko, lisible en une passe.
 
 ### Fixes par patch (aucune perte d'information)
 
@@ -242,7 +228,7 @@ Un tag git sans release npm (ex : `v21.1.5`, `v21.2.3`) ne doit produire **ni sk
 
 Une **mineure technique** est une release npm publiée dont le patch `.0` a pour seul objet la compatibilité framework (ex : `21.4.0` = support Angular 22 avant la majeure 22.0) : aucun changement d'API, de codemod ni de documentation, et en général **pas de release ZeroHeight dédiée** (Prisme passe directement à la majeure suivante — il n'existe pas de 21.4 sur ZH, mais une 22.0). Le cas revient avant chaque majeure. Générer une skill dédiée dupliquerait ~440 fichiers et, sans ID ZH, tirerait le contenu design « latest » (= la majeure suivante) : la table `TECHNICAL_MINORS` (`version-config.ts`) déclare donc la mineure couverte par une mineure documentée, et `--version <mineure technique>` est refusé.
 
-Les patchs **suivant** le `.0` (ex : `21.4.1`, `21.4.2`) ne sont en revanche **pas neutres** : c'est le tronc qui continue à livrer des correctifs et de petits ajouts d'API avant la majeure (inputs, icônes, variables CSS…). `resolveMinorVersion` expose donc leurs tags (`MinorResolution.technicalMinors`) et `fixes-writer.ts` génère pour chacun un `fixes/<tech-M-m-p>.md` **dans la skill de la mineure de couverture** (ex : `lucca-front-21-3/fixes/21-4-1.md`, `21-4-2.md`), avec le même diff structurel git que les fixes ordinaires. Leur en-tête inverse le sens de lecture : `references/` reflète `21.3.1`, `21.4.0` lui est équivalent, et un projet en `21.4.p` **possède** les changements de tous les `fixes/21-4-*.md` ≤ `p`. Le `.0` n'a pas de fichier (son delta vs `21.3.1` est le bump de framework : ~500 Ko de diff de stories, aucune API). Le SKILL.md de la mineure de couverture, le routeur de l'agrégat et `_versions.json` (`minors.<couverture>.technicalMinors`) listent la mineure technique et tous ses patchs ; le garde-fou de cohérence les laisse passer. Si la mineure obtient un jour sa propre release ZeroHeight et de vrais changements de doc, générer une vraie skill (retirer l'entrée de la table).
+Les patchs **suivant** le `.0` (ex : `21.4.1`, `21.4.2`) ne sont en revanche **pas neutres** : c'est le tronc qui continue à livrer des correctifs et de petits ajouts d'API avant la majeure (inputs, icônes, variables CSS…). `resolveMinorVersion` expose donc leurs tags (`MinorResolution.technicalMinors`) et `fixes-writer.ts` génère pour chacun un `fixes/<tech-M-m-p>.md` **dans la skill de la mineure de couverture** (ex : `fixes/21-4-1.md`, `21-4-2.md` dans la skill 21.3 de `v21.4-lts`), avec le même diff structurel git que les fixes ordinaires. Leur en-tête inverse le sens de lecture : `references/` reflète `21.3.1`, `21.4.0` lui est équivalent, et un projet en `21.4.p` **possède** les changements de tous les `fixes/21-4-*.md` ≤ `p`. Le `.0` n'a pas de fichier (son delta vs `21.3.1` est le bump de framework : ~500 Ko de diff de stories, aucune API). Le SKILL.md de la mineure de couverture et `_lucca-front/versions.json` (`technicalMinors`) listent la mineure technique et tous ses patchs ; le garde-fou de cohérence les laisse passer. Si la mineure obtient un jour sa propre release ZeroHeight et de vrais changements de doc, générer une vraie skill (retirer l'entrée de la table).
 
 ## Architecture du pipeline
 
@@ -281,8 +267,7 @@ scripts/generate-skills/
 │   ├── changelog-writer.ts           # Changelog cumulatif par composant (AST diff)
 │   ├── fixes-writer.ts               # fixes/<M-m-p>.md : delta par patch publié (git)
 │   ├── output-guard.ts               # Garde-fou de sortie : invariants sur le markdown émis
-│   ├── version-diff-writer.ts        # changelog/<M.m>.md : diff de review entre mineures
-│   └── aggregate-writer.ts           # lucca-front-all : base par majeure + overrides par mineure
+│   └── version-diff-writer.ts        # _lucca-front/changelog/<M.m>.md : diff de review avant → après le run
 │
 └── templates/
     ├── component.hbs                 # API Angular + liens + section ## Changelog
@@ -300,8 +285,11 @@ scripts/generate-skills/
 1. CLI parse (--version M.m, --component, flags) — une version patch est refusée
 2. Résolution mineure → dernier tag stable publié (tags fantômes exclus) + liste des tags patch,
    ZH release ID, Storybook base URL
-2 bis. Pré-flight (preflight.ts + zh-release-guard.ts) : existence de la release, token Figma,
-   IDs de release ZeroHeight — cf. « Parcours pré-flight »
+2 bis. Pré-flight (preflight.ts + zh-release-guard.ts) : mineure de la branche, existence de la
+   release, token Figma, IDs de release ZeroHeight — cf. « Parcours pré-flight »
+2 ter. Instantané de la skill committée (dossier temporaire), base du diff de review ; sur une
+   nouvelle mineure, `references/` et `fixes/` sont vidés (une page que la mineure n'émet plus
+   ne doit pas survivre avec le contenu de la précédente)
 3. Doc transverse        → references/documentation/<category>/   (ZH fetch)
 4. Dépréciés             → references/documentation/deprecated/deprecated.md  (ZH "Cycle de vie")
 5. Schematics            → references/migrations.md                (git collection.json, codemods cumulatifs ≤ cible)
@@ -315,8 +303,9 @@ scripts/generate-skills/
    f. Rendu Handlebars + écriture → references/components/<slug>/
    g. Types partagés          → references/types/<TypeName>.md
 8. Fixes                 → fixes/<M-m-p>.md par paire de tags patch consécutifs (fixes-writer)
-9. _versions.json (manifeste dist : mineure + sous-map patches)
-10. SKILL.md de la mineure (toc-writer) — écrit après les fichiers (scanne les composants du disque)
+9. _lucca-front/versions.json (manifeste : mineure + sous-map patches)
+10. SKILL.md (toc-writer) — écrit après les fichiers (scanne les composants du disque)
+11. _lucca-front/changelog/<M.m>.md — diff de review : la skill après le run vs l'instantané
 ```
 
 ## Membres hérités (`extends`)
@@ -437,11 +426,7 @@ y déclencherait 211 faux positifs — seul un `import … from` n'est jamais du
 `changelog/` est exclu de la relecture : ces fichiers citent du markdown généré dans des blocs
 ````diff, donc toute violation y est l'écho d'une autre déjà signalée à sa source.
 
-**Périmètre** : seules les mineures que le run a (re)générées sont bloquantes. Les violations restées
-dans les autres dossiers sont signalées comme « hors périmètre » — un run ciblé `--version 21.3` ne
-doit pas échouer sur du contenu qu'il n'a pas produit. `lucca-front-all/` est volontairement hors
-périmètre : c'est une copie, donc chaque violation qu'il porte est déjà signalée sur la mineure dont
-elle vient.
+**Périmètre** : seule la doc générée (`_lucca-front/llms/`) est bloquante. Les violations trouvées dans les skills écrites à la main à côté (le pointeur `lucca-front/`, `lucca-front-scss/`…) sont signalées comme « hors périmètre » : un run du générateur ne doit pas échouer sur du contenu qu'il n'a pas produit.
 
 ## Changelog structurel
 
@@ -550,7 +535,43 @@ Il est **opaque** (non déductible du repo, de git ou de npm) :
 
 **✅ À faire dès qu'une version est publiée** : récupérer son ID (méthode ci-dessus) et l'ajouter dans `zh-release-ids.json` (clé `"major.minor"`). Une mineure déjà pinnée **ne déclenche jamais le garde-fou** — pinner de façon proactive évite d'avoir à passer `--zh-latest` / `--zh-id` (ou de répondre au prompt) aux régénérations suivantes.
 
-Côté consommateur, deux modèles :
+## Consommation
 
-- **skill par mineure** (`lucca-front-<M>-<m>`) : la version n'est **pas détectée**, la skill installée **est** une mineure donnée (contenu = dernier patch, deltas dans `fixes/`). Pour un repo qui fige une/deux mineures.
-- **skill agrégat** (`lucca-front-all`) : un dossier de contenu par **majeure** (base = mineure la plus récente, mineures antérieures en overrides), son unique `SKILL.md` **détecte** la version (`node_modules/@lucca-front/ng` puis `package.json`) et résout override → base. Pour une install globale machine qui sert n'importe quel repo. C'est le seul cas où le check `package.json` est réintroduit (garde-fou « stop si version indéterminée »).
+Un projet déclare la skill pointeur dans son `apm.yml`, sans ref : son contenu ne dépend pas de la version de Lucca Front.
+
+```yaml
+dependencies:
+  apm:
+    - LuccaSA/lucca-front/.github/skills/lucca-front
+```
+
+`apm install` la déploie sous `.claude/skills/lucca-front/` (et `.github/skills/` pour Copilot). Elle renvoie vers `node_modules/@lucca-front/ng/llms.txt` : la documentation lue est celle du package installé, et rien n'est à mettre à jour quand le projet monte de version. Si le package ne livre pas `llms.txt`, elle lit la documentation déployée de sa version (`https://lucca-front.lucca.io/v<version>/storybook/llms.txt`), puis les types du package.
+
+### Quelle version livre la documentation
+
+Au build, `scripts/llms-skill/publish-skill.mjs npm` copie `_lucca-front/llms/` dans le package quand `versions.json` documente la mineure du tag. La génération a besoin de la release **publiée** (npm, Storybook déployé, release ZeroHeight — cf. [pré-flight](#parcours-pré-flight)) : la documentation d'une mineure est donc commitée **après** le tag `vX.Y.0`, et le **premier tag coupé après ce commit** est le premier dont le package la livre.
+
+`git show <tag>:.github/skills/_lucca-front/versions.json` dit quelle mineure un tag documente.
+
+### Quand générer
+
+Une fois la mineure publiée (npm + Storybook), sur la branche qui la porte (`master`, ou `vX.Y-lts` pour une ancienne majeure) :
+
+```bash
+npm run skills:generate -- --version 22.1
+```
+
+Le commit de génération part dans la PR suivante ; le tag de patch suivant le distribue.
+
+Après un **patch**, régénérer la même mineure n'est pas obligatoire : le `SKILL.md` d'un projet sur un patch postérieur au dernier documenté le signale et continue. Le faire met `references/` au niveau du dernier patch et ajoute son `fixes/<M-m-p>.md`.
+
+### Depuis les anciens chemins par mineure
+
+Jusqu'à `v22.1.0`, chaque mineure avait son dossier (`.github/skills/lucca-front/lucca-front-<M>-<m>/`) et une skill agrégat `lucca-front-all/` routait selon la version détectée. Ces dossiers restent lisibles dans les tags existants : un projet épinglé sur `v22.1.0` ou un SHA antérieur n'est pas affecté. Pour migrer :
+
+| Dépendance actuelle | Nouvelle dépendance |
+|---|---|
+| `LuccaSA/lucca-front/.github/skills/lucca-front/lucca-front-<M>-<m>` (ou `…/lucca-front-all`), sans ref ou sur `master` | **avant le merge**, le même chemin épinglé : `…/lucca-front-<M>-<m>#v22.1.0` (ou `…/lucca-front-all#v22.1.0`), sans quoi `apm install --update` échoue |
+| n'importe quel chemin, projet dont `node_modules/@lucca-front/ng/llms.txt` existe | `LuccaSA/lucca-front/.github/skills/lucca-front`, sans ref |
+
+Un projet dont le package ne livre pas encore `llms.txt` (21.x, 22.1.x, une partie des patchs 22.0) garde la skill complète de sa mineure épinglée sur `#v22.1.0` : le Storybook déployé de sa version ne sert pas non plus de `llms.txt`, le pointeur n'y trouverait que les types.

@@ -37,6 +37,47 @@ export class PreflightAbort extends Error {
 	}
 }
 
+/**
+ * Whether this branch may (re)generate `requested` (e.g. "22.1") over the skill it already carries,
+ * which documents `committed` (null before the first generation). Returns the refusal shown to the
+ * operator, or null when the run may proceed.
+ *
+ * The skill is a single folder rewritten in place: generating a minor overwrites the one committed
+ * here, and the next tag cut from this branch ships it in the npm package of that tag.
+ */
+export function refuseMinorForThisBranch(requested: string, committed: string | null): string | null {
+	if (committed === null) return null;
+	const [reqMajor, reqMinor] = requested.replace(/^v/, '').split('.').map(Number);
+	const [comMajor, comMinor] = committed.split('.').map(Number);
+	const isOlder = reqMajor < comMajor || (reqMajor === comMajor && reqMinor < comMinor);
+	if (!isOlder) return null;
+	return (
+		`--version ${requested} : cette branche porte la skill ${committed}, la générer ici l'écraserait et le prochain tag la livrerait aux projets en ${committed}. ` +
+		`Génère ${requested} sur la branche de maintenance de sa majeure (ex : v21.4-lts pour la 21.x).`
+	);
+}
+
+/**
+ * Whether generating `requested` ("22.1" or "v22.1") moves the skill off the minor it documents.
+ * True when no manifest records that minor.
+ */
+export function isNewMinor(requested: string, committed: string | null): boolean {
+	return committed !== requested.replace(/^v/, '');
+}
+
+/**
+ * Moving the skill to a new minor empties references/ and fixes/ before regenerating them (see
+ * clearSkillContent), so the pages a partial run skips would be missing from the new minor. A
+ * --component run clears nothing: it would mix pages of both minors.
+ */
+export function refusePartialRunOnNewMinor(requested: string, committed: string | null, partialFlags: string[]): string | null {
+	if (committed === null || partialFlags.length === 0 || !isNewMinor(requested, committed)) return null;
+	return (
+		`${partialFlags.join(', ')} : la skill passe de ${committed} à ${requested}, toutes ses pages doivent être régénérées et ces options en sautent une partie. ` +
+		`Relance sans elles.`
+	);
+}
+
 /** The npm package whose publication proves a tag actually shipped. */
 const NG_PACKAGE_NAME = '@lucca-front/ng';
 

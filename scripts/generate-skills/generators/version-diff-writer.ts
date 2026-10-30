@@ -1,22 +1,20 @@
 /**
- * Minor-level changelog — **human PR-review aid** (NOT consumed by the skill).
+ * Review changelog — **human PR-review aid** (NOT consumed by the skill).
  *
- * Diffs a generated minor folder against its predecessor MINOR and writes a summary to
- * `lucca-front/changelog/<minor>.md`. It helps reviewers confirm what changed between two
- * generated minors when generating a new one. For a re-generation of the SAME minor, git's own
- * diff of the PR is the review surface (the folder is rewritten in place).
+ * The skill folder is rewritten in place, so git's diff of the PR already shows every change — but
+ * across 3 000+ `linguist-generated` files, where a deletion caused by a partial fetch goes unseen.
+ * This diffs a snapshot of the skill taken before the run against what the run wrote, and writes a
+ * summary to `_lucca-front/changelog/<minor>.md` that puts removals and shrunken pages first.
  *
- * fixes/ files are excluded: two minors have entirely different fix sets by construction —
- * they are reviewed as their own files in the PR.
+ * fixes/ files are excluded: two minors have entirely different fix sets by construction — they are
+ * reviewed as their own files in the PR.
  */
 
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
-import { VersionConfig, VersionManifest } from '../types';
-import { versionRoot } from './skill-writer';
-import { resolveMinorVersion } from '../version-config';
-
-const SKILLS_BASE = 'lucca-front';
+import { SkillManifest, VersionConfig } from '../types';
+import { generatorRoot, skillRoot } from './skill-writer';
 
 interface FileDiff {
 	relativePath: string;
@@ -26,24 +24,19 @@ interface FileDiff {
 	inlineDiff?: string;
 }
 
-/** Finds the previous minor from the manifest (highest minor strictly lower than current). */
-function findPreviousVersion(manifest: VersionManifest, current: VersionConfig): string | null {
-	const currentKey = `${current.major}.${current.minor}`;
-	const sorted = Object.keys(manifest.minors ?? {})
-		.filter((v) => v !== currentKey)
-		.sort((a, b) => {
-			const [aMaj, aMin] = a.split('.').map(Number);
-			const [bMaj, bMin] = b.split('.').map(Number);
-			return aMaj !== bMaj ? bMaj - aMaj : bMin - aMin;
-		});
+/** The skill as it was before the run: what the review changelog diffs against. */
+export interface SkillSnapshot {
+	root: string;
+	manifest: SkillManifest | null;
+}
 
-	for (const v of sorted) {
-		const [maj, min] = v.split('.').map(Number);
-		if (maj < current.major || (maj === current.major && min < current.minor)) {
-			return v;
-		}
-	}
-	return null;
+/** Copies the committed skill aside before the run overwrites it. Null when there is none yet. */
+export function snapshotSkill(skillsDir: string, manifest: SkillManifest | null): SkillSnapshot | null {
+	const source = skillRoot(skillsDir);
+	if (!fs.existsSync(source)) return null;
+	const root = fs.mkdtempSync(path.join(os.tmpdir(), 'lucca-front-skill-'));
+	fs.cpSync(source, root, { recursive: true });
+	return { root, manifest };
 }
 
 function listFiles(dir: string, base: string = dir): string[] {
@@ -331,43 +324,31 @@ function detectRenames(removed: FileDiff[], added: FileDiff[], prevRoot: string,
 }
 
 /**
- * Generates the version-level review changelog comparing this version's folder against its
- * predecessor. Returns the written path, or null if the manifest is missing.
+ * Writes the review changelog of this run: the skill after it vs the snapshot taken before it.
+ * Returns the written path.
  */
-export function writeVersionChangelog(skillsDir: string, version: VersionConfig): string | null {
-	const baseDir = path.resolve(skillsDir, SKILLS_BASE);
-	const manifestPath = path.join(baseDir, '_versions.json');
-	if (!fs.existsSync(manifestPath)) return null;
-
-	let manifest: VersionManifest;
+export function writeReviewChangelog(skillsDir: string, version: VersionConfig, previous: SkillSnapshot | null): string {
 	try {
-		manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-	} catch {
-		return null;
+		return writeChangelogAgainst(skillsDir, version, previous);
+	} finally {
+		if (previous) fs.rmSync(previous.root, { recursive: true, force: true });
 	}
+}
 
+function writeChangelogAgainst(skillsDir: string, version: VersionConfig, previous: SkillSnapshot | null): string {
 	const minorKey = `${version.major}.${version.minor}`;
-	const changelogDir = path.join(baseDir, 'changelog');
+	const changelogDir = path.join(generatorRoot(skillsDir), 'changelog');
 	fs.mkdirSync(changelogDir, { recursive: true });
 	const outPath = path.join(changelogDir, `${minorKey}.md`);
 
-	const prevKey = findPreviousVersion(manifest, version);
-	if (!prevKey) {
-		fs.writeFileSync(outPath, `# ${minorKey} — première génération\n\nAucune mineure précédente dans le manifeste.\n`, 'utf-8');
+	if (!previous) {
+		fs.writeFileSync(outPath, `# ${minorKey} — première génération\n\nAucune skill sur le disque avant ce run.\n`, 'utf-8');
 		return outPath;
 	}
 
-	const currRoot = versionRoot(skillsDir, version);
-	const prevRoot = versionRoot(skillsDir, resolveMinorVersion(prevKey).version);
-
-	if (!fs.existsSync(prevRoot)) {
-		fs.writeFileSync(
-			outPath,
-			`# ${minorKey} vs ${prevKey}\n\nLe dossier de la mineure précédente (\`${prevKey}\`) n'est pas présent sur le disque — diff impossible. Régénère les deux mineures pour obtenir le diff de review.\n`,
-			'utf-8',
-		);
-		return outPath;
-	}
+	const prevLabel = previous.manifest ? `${previous.manifest.minor} (contenu ${previous.manifest.tag})` : 'la skill précédente';
+	const prevRoot = previous.root;
+	const currRoot = skillRoot(skillsDir);
 
 	// The per-component changelog (trailing ## Changelog section of <slug>.md) is stripped before
 	// comparison — see stripTrailingChangelog. Legacy `*.changelog.md` files are still filtered so
@@ -378,8 +359,8 @@ export function writeVersionChangelog(skillsDir: string, version: VersionConfig)
 		(d) => !d.relativePath.endsWith('.changelog.md') && !d.relativePath.startsWith(`fixes${path.sep}`),
 	);
 
-	let md = `# ${minorKey} (contenu ${version.tag}) vs ${prevKey}\n\n`;
-	md += `> Aide à la review (non consommé par la skill) : diff des fichiers générés entre les deux mineures.\n\n`;
+	let md = `# ${minorKey} (contenu ${version.tag}) vs ${prevLabel}\n\n`;
+	md += `> Aide à la review (non consommé par la skill) : diff des fichiers générés avant et après ce run.\n\n`;
 
 	if (diffs.length === 0) {
 		md += `Aucune différence détectée.\n`;

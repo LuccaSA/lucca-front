@@ -1,5 +1,5 @@
 # Skills LF générées
-.github/skills/lucca-front/** linguist-generated
+.github/skills/_lucca-front/** linguist-generated
 scripts/generate-skills/baselines/** linguist-generated
 
 # Traductions récupérées depuis Lokalise (npm run i18n:update)
