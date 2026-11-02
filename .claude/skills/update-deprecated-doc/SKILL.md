@@ -129,7 +129,10 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 
 * ZeroHeight publishes the docs: it renders no HTML in Markdown, except `<br>`.
 * Each section is a GFM pipe table.
-	* The version columns are centered.
+	* The centered *Déprécié<br>Supprimé* column stacks the deprecation version above the deletion version.
+		* A missing version shows `–`.
+		* `life-cycle.md` bolds the deprecation version.
+		* `life-cycle-deleted.md` bolds the deletion version.
 * A cell stacks its lines with `<br>`.
 	* A list item opens with `- `.
 	* A sub-item opens with `• `, indented by no-break spaces.
@@ -168,10 +171,12 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* Component names stay untranslated: *Data table* stays *Data table*.
 * Entries whose deletion shipped move to `docs/life-cycle-deleted.md`.
 	* The `.mjs` files keep them: the linter still flags residual use.
-	* Prisme drops them: this divergence is by design.
-* Each doc's intro note links to the other one: keep it free of version numbers.
+	* Prisme lists them in its *Liste des éléments supprimés* tab.
+* Neither doc's header links to the other one.
 
 ## Header
 
-* The script keeps everything above the first section: the title and the intro note.
+* The script keeps everything above the first section: the title and any intro note.
+* The title is an h2: Prisme embeds the doc under its own h1.
+* Each section is an h3.
 * The header holds no HTML either: ZeroHeight would print it as text.

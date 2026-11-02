@@ -108,9 +108,15 @@ const componentLines = (e) => {
 };
 
 // --- Tables ---
-const row = (nom, e) => `| ${[cell(nom), e.versionDeprecated ?? '–', e.versionDeleted ?? '–', cell(unlist(actionLines(e)))].join(' | ')} |`;
-// The version columns are centered.
-const heads = '| Nom | Depuis | Suppression | Action à réaliser |\n| --- | :---: | :---: | --- |';
+// The version cell stacks the deprecation version above the deletion version: a missing one shows `–`.
+// The bold part names the table: the deprecation version in the deprecated doc, the deletion version in the deleted one.
+const versionCell = (e, keep) => {
+	const bold = (v, on) => (v && on ? `**${v}**` : (v ?? '–'));
+	return `${bold(e.versionDeprecated, !keep)}<br>${bold(e.versionDeleted, keep)}`;
+};
+const row = (nom, e, keep) => `| ${[cell(nom), versionCell(e, keep), cell(unlist(actionLines(e)))].join(' | ')} |`;
+// The version column is centered.
+const heads = '| Nom | Déprécié<br>Supprimé | Action à réaliser |\n| --- | :---: | --- |';
 // Oldest first: by deprecation version, then deletion version; unversioned rows last, in source order.
 // The `.mjs` order stays untouched, since Stylelint uses the first matching entry.
 const compare = (a, b) => (a && b ? a.localeCompare(b, undefined, { numeric: true }) : !a - !b);
@@ -126,8 +132,8 @@ const sourceLine = (entries) => {
 	return `${used.length > 1 ? 'Sources' : 'Source'} : ${used.length > 1 ? `${used.slice(0, -1).join(', ')} et ${used.at(-1)}` : used[0]}`;
 };
 // A section without rows is left out.
-const section = (title, entries, nom) =>
-	!entries.length ? '' : `## ${title}\n\n${sourceLine(entries)}\n\n${heads}\n${entries.map((e) => row(nom(e), e)).join('\n')}\n`;
+const section = (title, entries, nom, keep) =>
+	!entries.length ? '' : `### ${title}\n\n${sourceLine(entries)}\n\n${heads}\n${entries.map((e) => row(nom(e), e, keep)).join('\n')}\n`;
 const blob = (file) => `[${file}](https://github.com/LuccaSA/lucca-front/blob/master/${dir}${file})`;
 
 const [selectors, properties, scss] = await Promise.all(
@@ -143,18 +149,18 @@ const deleted = (e) => !!e.versionDeleted && compare(e.versionDeleted, shipped) 
 const named = components([...selectors, ...properties, ...scss]);
 // An entry with a `name` deprecates a whole component: it goes to Composants.
 const nom = (e) => unlist(nomLines(e));
-// Each doc keeps everything before `## Composants`: its title and note.
+// Each doc keeps everything before `### Composants`: its title and any note.
 const write = (path, keep) => {
 	// The deleted doc sorts by deletion first.
 	const pick = (entries) => entries.filter((e) => deleted(e) === keep).sort(keep ? byDeletion : byVersion);
 	const sections = [
-		section('Composants', pick(named), componentLines),
-		section('Classes', pick(selectors.filter((e) => !e.name)), nom),
-		section('Variables CSS', pick(properties.filter((e) => !e.name)), nom),
-		section('Mixins', pick(scss.filter((e) => !e.name)), nom),
+		section('Composants', pick(named), componentLines, keep),
+		section('Classes', pick(selectors.filter((e) => !e.name)), nom, keep),
+		section('Variables CSS', pick(properties.filter((e) => !e.name)), nom, keep),
+		section('Mixins', pick(scss.filter((e) => !e.name)), nom, keep),
 	];
 	const body = sections.filter(Boolean).join('\n');
-	writeFileSync(path, `${read(path).split('## Composants')[0].trimEnd()}\n\n${body}`);
+	writeFileSync(path, `${read(path).split(/^### Composants/m)[0].trimEnd()}\n\n${body}`);
 };
 write('docs/life-cycle.md', false);
 write('docs/life-cycle-deleted.md', true);
