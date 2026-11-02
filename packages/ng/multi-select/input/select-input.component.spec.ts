@@ -174,6 +174,54 @@ describe('LuMultiSelectInputComponent', () => {
 		});
 	});
 
+	describe('defaultValue', () => {
+		function clearer(): HTMLElement | null {
+			fixture.detectChanges();
+			return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>('.multipleSelect-clear');
+		}
+
+		beforeEach(() => {
+			fixture = createComponent();
+			fixture.componentRef.setInput('clearable', true);
+			// Copies in another order, to check the comparison ignores order and references
+			fixture.componentRef.setInput('defaultValue', [{ ...options[1] }, { ...options[0] }]);
+			fixture.detectChanges();
+		});
+
+		it('should not offer to clear the default value', () => {
+			// Act
+			fixture.componentInstance.writeValue([options[0], options[1]]);
+
+			// Assert
+			expect(fixture.componentInstance.isFilterPillDefault()).toBe(true);
+			expect(clearer()).toBeNull();
+		});
+
+		it('should not consider duplicates of a default option as the default value', () => {
+			// Act
+			fixture.componentInstance.writeValue([options[0], options[0]]);
+
+			// Assert
+			expect(fixture.componentInstance.isFilterPillDefault()).toBe(false);
+			expect(clearer()).not.toBeNull();
+		});
+
+		it('should restore the default value when clearing', () => {
+			// Arrange
+			const onChange = vi.fn();
+			fixture.componentInstance.registerOnChange(onChange);
+			fixture.componentInstance.writeValue([options[0], options[2]]);
+
+			// Act
+			clearer()?.click();
+
+			// Assert
+			expect(onChange).toHaveBeenCalledExactlyOnceWith([options[1], options[0]]);
+			expect(fixture.componentInstance.isFilterPillDefault()).toBe(true);
+			expect(clearer()).toBeNull();
+		});
+	});
+
 	describe('Select all', () => {
 		let selectAllDirective: LuMultiSelectWithSelectAllDirective<Entity>;
 		let emittedSelectValues: Array<LuMultiSelection<TestEntity> | TestEntity[]>;

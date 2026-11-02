@@ -124,6 +124,22 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		return !valueSignal || valueSignal.length === 0;
 	});
 
+	// Not readonly: `withSelectAll` replaces it, the default value not being supported in that mode
+	isFilterPillDefault: Signal<boolean> = computed(() => {
+		const defaultValue = this.defaultValue();
+		const value = this.valueSignal();
+		if (!defaultValue || !value || defaultValue.length !== value.length) {
+			return false;
+		}
+		const comparer = this.optionComparer();
+		// Each default option matches a single selected one, so duplicates are counted
+		const unmatchedDefaults = [...defaultValue];
+		return value.every((option) => {
+			const index = unmatchedDefaults.findIndex((defaultOption) => comparer(option, defaultOption));
+			return index !== -1 && unmatchedDefaults.splice(index, 1).length > 0;
+		});
+	});
+
 	// eslint-disable-next-line @angular-eslint/prefer-signals
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
 	// eslint-disable-next-line @angular-eslint/prefer-signals
@@ -215,10 +231,11 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	override clearValue(event?: Event): void {
 		event?.stopPropagation();
-		this.onChange?.([]);
-		this.value = [];
+		const value = this.defaultValue() ?? [];
+		this.onChange?.(value);
+		this.value = value;
 		this.focusInput$.next({ keepClue: true });
-		this.panelRef?.updateSelectedOptions([]);
+		this.panelRef?.updateSelectedOptions(value);
 	}
 
 	override ngOnDestroy() {

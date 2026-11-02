@@ -61,3 +61,32 @@ export default {
 export const Basic: StoryObj<FilterPillComponent> = {
 	args: {},
 };
+
+export const DefaultValue: StoryObj<FilterPillComponent> = {
+	render: () => {
+		return {
+			props: {
+				legumes: allLegumes,
+				defaultLegume: allLegumes[0],
+				example: allLegumes[0],
+				defaultLegumes: allLegumes.slice(0, 2),
+				examples: allLegumes.slice(0, 2),
+				legumesPluralFn: (count: number) => ({ one: `${count} légume`, other: `${count} légumes` }),
+			},
+			template: `<lu-filter-pill label="Légume" name="legume">
+	<lu-simple-select [(ngModel)]="example" [defaultValue]="defaultLegume" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
+</lu-filter-pill>
+
+<pr-story-model-display>{{ example | json }}</pr-story-model-display>
+
+<hr class="divider pr-u-marginBlock400" />
+
+<lu-filter-pill label="Légumes" name="legumes">
+	<lu-multi-select [(ngModel)]="examples" [defaultValue]="defaultLegumes" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" />
+</lu-filter-pill>
+
+<pr-story-model-display>{{ examples | json }}</pr-story-model-display>
+`,
+		};
+	},
+};
