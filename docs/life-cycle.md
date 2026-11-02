@@ -1,6 +1,6 @@
 # Propriétés et sélecteurs dépréciés
 
-> **Note :** les éléments dont la suppression est livrée figurent dans [Propriétés et sélecteurs supprimés](life-cycle-deleted.md).
+> **Note :** les éléments dont la suppression est livrée figurent dans [Propriétés et sélecteurs supprimés](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/16627d).
 
 ## Composants
 

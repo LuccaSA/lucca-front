@@ -173,6 +173,10 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* The `.mjs` files keep them: the linter still flags residual use.
 	* Prisme drops them: this divergence is by design.
 * Each doc's intro note links to the other one: keep it free of version numbers.
+* The link targets the Prisme tab of the other doc: a relative path would break on ZeroHeight:
+	* `life-cycle.md` matches the tab `40c515-cycle-de-vie-des-composants/b/43d87b`.
+	* `life-cycle-deleted.md` matches the tab `40c515-cycle-de-vie-des-composants/b/16627d`.
+	* A doc without a Prisme tab links its GitHub file instead.
 
 ## Header
 
