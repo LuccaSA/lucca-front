@@ -15,7 +15,7 @@
 			gap: var(--components-boxDisclosure-gap);
 			padding: var(--components-boxDisclosure-padding);
 			position: relative;
-			transition: box-shadow var(--commons-animations-durations-fast) ease;
+			transition: box-shadow var(--commons-animations-durations-fast);
 			z-index: 1;
 
 			@media (prefers-reduced-motion: reduce) {
