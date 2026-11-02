@@ -10,9 +10,11 @@ import { OpenDateRange } from '../calendar2/open-date-range';
 import { getLocalizedDateFormat } from '../date-format';
 import { DateRangeInputComponent } from './date-range-input.component';
 import localeFr from '@angular/common/locales/fr';
+import localeDe from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
 
 registerLocaleData(localeFr, 'fr-FR');
+registerLocaleData(localeDe, 'de');
 
 @Component({
 	template: `<lu-date-range-input [(ngModel)]="selected" (ngModelChange)="ngModelChangeCallback($event)" />`,
@@ -248,24 +250,29 @@ describe('DateRangeInputComponent', () => {
 		});
 	});
 
-	it('should emit the month range when the user types months with a keyboard in month mode', () => {
-		TestBed.configureTestingModule({
-			imports: [MonthFormControlHostComponent],
-			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+	for (const { locale, start, end } of [
+		{ locale: 'fr-FR', start: '06/2025', end: '09/2025' },
+		{ locale: 'de', start: '6/2025', end: '9/2025' },
+	]) {
+		it(`should emit the month range when the user types months with a keyboard in month mode in ${locale}`, () => {
+			TestBed.configureTestingModule({
+				imports: [MonthFormControlHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: locale }],
+			});
+
+			const fixture = TestBed.createComponent(MonthFormControlHostComponent);
+			fixture.detectChanges();
+
+			typeInElement(start, getInput(fixture, 'start'), fixture);
+			typeInElement(end, getInput(fixture, 'end'), fixture);
+
+			expect(fixture.componentInstance.formControl.value).toEqual({
+				start: new Date('2025-06-01T00:00:00.000Z'),
+				end: new Date('2025-09-01T00:00:00.000Z'),
+				scope: 'month',
+			});
 		});
-
-		const fixture = TestBed.createComponent(MonthFormControlHostComponent);
-		fixture.detectChanges();
-
-		typeInElement('06/2025', getInput(fixture, 'start'), fixture);
-		typeInElement('09/2025', getInput(fixture, 'end'), fixture);
-
-		expect(fixture.componentInstance.formControl.value).toEqual({
-			start: new Date('2025-06-01T00:00:00.000Z'),
-			end: new Date('2025-09-01T00:00:00.000Z'),
-			scope: 'month',
-		});
-	});
+	}
 
 	it('should emit value when the user enters only the end date with a keyboard', () => {
 		// Arrange
