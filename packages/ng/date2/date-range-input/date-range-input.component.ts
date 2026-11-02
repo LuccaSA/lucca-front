@@ -577,7 +577,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 		let currentRange: OpenDateRange = this.selectedRange() || {};
 		if (inputValue?.length > 0) {
-			const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
+			const parsed = parse(inputValue, this.dateFormatWithMode(), startOfDay(new Date()));
 			if (parsed.getFullYear() > 999) {
 				currentRange = {
 					...currentRange,

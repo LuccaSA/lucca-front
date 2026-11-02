@@ -37,6 +37,15 @@ class FormControlHostComponent {
 }
 
 @Component({
+	template: `<lu-date-range-input mode="month" [formControl]="formControl" />`,
+	imports: [ReactiveFormsModule, DateRangeInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class MonthFormControlHostComponent {
+	formControl = new FormControl<DateRange | null>(null);
+}
+
+@Component({
 	template: `<lu-filter-pill label="Période"><lu-date-range-input [formControl]="formControl" /></lu-filter-pill>`,
 	imports: [ReactiveFormsModule, DateRangeInputComponent, FilterPillComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -236,6 +245,25 @@ describe('DateRangeInputComponent', () => {
 		expect(valueChanges).toHaveBeenCalledWith({
 			start: new Date('2025-06-18T00:00:00.000Z'),
 			scope: 'day',
+		});
+	});
+
+	it('should emit the month range when the user types months with a keyboard in month mode', () => {
+		TestBed.configureTestingModule({
+			imports: [MonthFormControlHostComponent],
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		});
+
+		const fixture = TestBed.createComponent(MonthFormControlHostComponent);
+		fixture.detectChanges();
+
+		typeInElement('06/2025', getInput(fixture, 'start'), fixture);
+		typeInElement('09/2025', getInput(fixture, 'end'), fixture);
+
+		expect(fixture.componentInstance.formControl.value).toEqual({
+			start: new Date('2025-06-01T00:00:00.000Z'),
+			end: new Date('2025-09-01T00:00:00.000Z'),
+			scope: 'month',
 		});
 	});
 
