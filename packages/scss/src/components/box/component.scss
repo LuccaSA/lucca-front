@@ -5,7 +5,9 @@
 	border-radius: var(--components-box-borderRadius);
 	padding: var(--components-box-padding);
 	background-color: var(--components-box-background, var(--pr-t-elevation-surface-raised));
-	display: block;
+	display: var(--components-box-display);
+	flex-direction: var(--components-box-flexDirection);
+	gap: var(--components-box-gap);
 	position: relative;
 
 	@if config.$deprecatedCardBoxMargin {
@@ -14,9 +16,7 @@
 
 	// Raw HTML boxes without slot keep their block layout
 	&:has(.box-slot) {
-		display: flex;
-		flex-direction: column;
-		gap: var(--components-box-gap);
+		--components-box-display: flex;
 	}
 
 	@at-root ($atRoot) {
