@@ -129,7 +129,10 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 
 * ZeroHeight publishes the docs: it renders no HTML in Markdown, except `<br>`.
 * Each section is a GFM pipe table.
-	* The version columns are centered.
+	* The centered *Déprécié<br>Supprimé* column stacks the deprecation version above the deletion version.
+		* A missing version shows `–`.
+		* `life-cycle.md` bolds the deprecation version.
+		* `life-cycle-deleted.md` bolds the deletion version.
 * A cell stacks its lines with `<br>`.
 	* A list item opens with `- `.
 	* A sub-item opens with `• `, indented by no-break spaces.
