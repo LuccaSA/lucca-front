@@ -171,7 +171,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* Component names stay untranslated: *Data table* stays *Data table*.
 * Entries whose deletion shipped move to `docs/life-cycle-deleted.md`.
 	* The `.mjs` files keep them: the linter still flags residual use.
-	* Prisme drops them: this divergence is by design.
+	* Prisme lists them in its *Liste des éléments supprimés* tab.
 * Each doc's intro note links to the other one: keep it free of version numbers.
 * The link targets the Prisme tab of the other doc: a relative path would break on ZeroHeight:
 	* `life-cycle.md` matches the tab `40c515-cycle-de-vie-des-composants/b/43d87b`.
