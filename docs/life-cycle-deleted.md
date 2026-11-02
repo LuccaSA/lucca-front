@@ -1,7 +1,6 @@
 # Propriétés et sélecteurs supprimés
 
 > **Note :** le linter signale toujours ces éléments supprimés pour repérer l’usage résiduel.
-> Les éléments encore disponibles figurent dans [Propriétés et sélecteurs dépréciés](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/43d87b).
 
 ## Composants
 

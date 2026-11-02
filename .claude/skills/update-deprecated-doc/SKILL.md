@@ -172,13 +172,9 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 * Entries whose deletion shipped move to `docs/life-cycle-deleted.md`.
 	* The `.mjs` files keep them: the linter still flags residual use.
 	* Prisme lists them in its *Liste des éléments supprimés* tab.
-* Each doc's intro note links to the other one: keep it free of version numbers.
-* The link targets the Prisme tab of the other doc: a relative path would break on ZeroHeight:
-	* `life-cycle.md` matches the tab `40c515-cycle-de-vie-des-composants/b/43d87b`.
-	* `life-cycle-deleted.md` matches the tab `40c515-cycle-de-vie-des-composants/b/16627d`.
-	* A doc without a Prisme tab links its GitHub file instead.
+* Neither doc's header links to the other one.
 
 ## Header
 
-* The script keeps everything above the first section: the title and the intro note.
+* The script keeps everything above the first section: the title and any intro note.
 * The header holds no HTML either: ZeroHeight would print it as text.

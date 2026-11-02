@@ -1,7 +1,5 @@
 # Propriétés et sélecteurs dépréciés
 
-> **Note :** les éléments dont la suppression est livrée figurent dans [Propriétés et sélecteurs supprimés](https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/16627d).
-
 ## Composants
 
 Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs) et les marqueurs `@deprecated` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)
