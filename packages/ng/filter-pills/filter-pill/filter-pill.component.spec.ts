@@ -131,7 +131,9 @@ describe(FilterPillComponent.name, () => {
 		input.isFilterPillDefault.set(true);
 		fixture.detectChanges();
 
-		expect(pillButton.classList).not.toContain('is-filled');
+		// Still filled so the value stays visible, the default state only neutralizes the colors
+		expect(pillButton.classList).toContain('is-filled');
+		expect(pillButton.classList).toContain('is-default');
 		expect(fixture.nativeElement.querySelector('lu-clear')).toBeNull();
 	});
 });

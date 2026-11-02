@@ -760,7 +760,7 @@ describe('DateRangeInputComponent', () => {
 		it('should display the pill as neutral while it holds its default value', () => {
 			const { fixture, pillButton } = createDefaultValueHost();
 
-			expect(pillButton.classList).not.toContain('is-filled');
+			expect(pillButton.classList).toContain('is-default');
 			expect((fixture.nativeElement as HTMLElement).querySelector('lu-clear')).toBeNull();
 		});
 
@@ -769,13 +769,13 @@ describe('DateRangeInputComponent', () => {
 			fixture.componentInstance.formControl.setValue({ start: new Date(2025, 5, 1), end: new Date(2025, 5, 30) });
 			fixture.detectChanges();
 
-			expect(pillButton.classList).toContain('is-filled');
+			expect(pillButton.classList).not.toContain('is-default');
 
 			pill.clear();
 			fixture.detectChanges();
 
 			expect(fixture.componentInstance.formControl.value).toEqual(defaultRange);
-			expect(pillButton.classList).not.toContain('is-filled');
+			expect(pillButton.classList).toContain('is-default');
 		});
 	});
 });
