@@ -31,7 +31,7 @@ export class BoxDisclosureComponent {
 
 	/**
 	 * Short information displayed before the chevron, visible when the disclosure box is closed.
-	 * An array of strings is rendered as an inline listing.
+	 * An array of several strings is rendered as an inline listing, a single-item array as plain text.
 	 * A template can be given for specific cases: it is rendered inside the summary, so it must not contain interactive elements.
 	 */
 	readonly metadata = input<string[] | PortalContent>();
