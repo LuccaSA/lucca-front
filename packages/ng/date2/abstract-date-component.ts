@@ -22,8 +22,6 @@ export abstract class AbstractDateComponent {
 	protected get weekOptions(): WeekOptions & FirstWeekContainsDateOptions {
 		return { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo), firstWeekContainsDate: 4 };
 	}
-	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	protected dateFormat = getDateFormat(this.locale);
 	protected separator = getSeparator(this.locale);
 	protected readonly dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
