@@ -74,9 +74,3 @@
 		}
 	}
 }
-
-@mixin wrapper {
-	display: grid;
-	gap: var(--components-boxWrapper-gap);
-	grid-template-columns: repeat(var(--components-boxWrapper-columns), minmax(0, 1fr));
-}

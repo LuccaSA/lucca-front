@@ -43,13 +43,6 @@
 	}
 }
 
-.boxWrapper {
-	@layer components {
-		@include wrapperVars;
-		@include wrapper;
-	}
-}
-
 .box-arrow {
 	@layer components {
 		@include arrow;

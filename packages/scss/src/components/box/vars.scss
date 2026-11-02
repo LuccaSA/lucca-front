@@ -23,8 +23,3 @@
 	--palettes-assets-secondary: var(--components-box-bubble-secondary-light);
 	--palettes-assets-brand: var(--components-box-bubble-brand-light);
 }
-
-@mixin wrapperVars {
-	--components-boxWrapper-columns: 1;
-	--components-boxWrapper-gap: var(--pr-t-spacings-150);
-}
