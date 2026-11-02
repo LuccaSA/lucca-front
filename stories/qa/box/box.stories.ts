@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BoxComponent } from '@lucca-front/ng/box';
+import { BoxComponent, BoxWrapperComponent } from '@lucca-front/ng/box';
 import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, StoryObj } from '@storybook/angular-vite';
@@ -7,7 +7,7 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 @Component({
 	selector: 'box-stories',
 	templateUrl: './box.stories.html',
-	imports: [BoxComponent, BubbleIconComponent, LuSafeExternalSvgPipe],
+	imports: [BoxComponent, BoxWrapperComponent, BubbleIconComponent, LuSafeExternalSvgPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class BoxStory {}

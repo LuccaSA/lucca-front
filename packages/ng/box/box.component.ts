@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 import { ButtonComponent } from '@lucca-front/ng/button';
@@ -8,6 +8,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LU_BOX_TRANSLATIONS } from './box.translate';
 import { BoxHx, BoxSize, BoxTheme } from './box.type';
+import { LU_BOX_WRAPPER_INSTANCE } from './wrapper/box-wrapper.token';
 
 @Component({
 	selector: 'lu-box',
@@ -28,6 +29,8 @@ import { BoxHx, BoxSize, BoxTheme } from './box.type';
 	},
 })
 export class BoxComponent {
+	readonly wrapperRef = inject(LU_BOX_WRAPPER_INSTANCE, { optional: true });
+
 	readonly intl = input(...intlInputOptions(LU_BOX_TRANSLATIONS));
 
 	/**
