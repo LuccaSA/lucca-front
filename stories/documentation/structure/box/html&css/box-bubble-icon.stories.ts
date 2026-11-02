@@ -18,7 +18,7 @@ function getTemplate(args: BubbleIconStory): string {
 	<div class="box-header">
 		<lu-bubble-icon icon="fileCopy" />
 		<div class="box-header-text">
-			<div class="box-header-text-heading">Title</div>
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
 			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>

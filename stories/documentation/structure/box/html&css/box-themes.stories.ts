@@ -18,7 +18,7 @@ function getTemplate(args: ThemesStory): string {
 	return `<div class="box">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-text-heading">Title</div>
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
 			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
@@ -27,7 +27,7 @@ function getTemplate(args: ThemesStory): string {
 <div class="box mod-neutral">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-text-heading">Title</div>
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
 			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
@@ -36,7 +36,7 @@ function getTemplate(args: ThemesStory): string {
 <div class="box mod-sunken">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-text-heading">Title</div>
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
 			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
@@ -45,7 +45,7 @@ function getTemplate(args: ThemesStory): string {
 <div class="box">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-text-heading">Title</div>
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
 			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
@@ -58,7 +58,7 @@ function getTemplate(args: ThemesStory): string {
 <div class="box mod-fancyLight">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-text-heading">Title</div>
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
 			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
@@ -71,7 +71,7 @@ function getTemplate(args: ThemesStory): string {
 <div class="box mod-fancyDark">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-text-heading">Title</div>
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
 			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>

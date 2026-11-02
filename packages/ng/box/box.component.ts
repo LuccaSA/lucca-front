@@ -58,9 +58,9 @@ export class BoxComponent {
 	readonly bubbleIcon = input<LuccaIcon>();
 
 	/**
-	 * Define the aria level of the title
+	 * Aria level of the title, exposed as a heading. Defaults to 2: set it when the box title is not an h2 in the page outline.
 	 */
-	readonly hx = input(null, { transform: luNumberAttribute<BoxHx> });
+	readonly hx = input(2, { transform: luNumberAttribute<BoxHx> });
 
 	/**
 	 * Decorative bubble displayed on the right, based on the CDN image bubble number. Only available with fancy themes.

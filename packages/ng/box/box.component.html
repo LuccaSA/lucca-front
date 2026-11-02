@@ -12,7 +12,7 @@
 		}
 		<ng-content select="[boxHeaderStartSlot]" />
 		<div class="box-header-text">
-			<div class="box-header-text-heading" [attr.role]="hx() ? 'heading' : null" [attr.aria-level]="hx()">
+			<div class="box-header-text-heading" role="heading" [attr.aria-level]="hx()">
 				<ng-container *luPortal="heading" />
 			</div>
 			@if (subheading(); as subheading) {

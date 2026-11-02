@@ -11,7 +11,7 @@ function getTemplate(args: SizeSStory): string {
 	return `<div class="box mod-S">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-text-heading">Title</div>
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
 			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
