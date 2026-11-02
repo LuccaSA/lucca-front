@@ -1,8 +1,8 @@
-# Propriétés et sélecteurs supprimés
+## Propriétés et sélecteurs supprimés
 
 > **Note :** le linter signale toujours ces éléments supprimés pour repérer l’usage résiduel.
 
-## Composants
+### Composants
 
 Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs) et [LFDeprecatedScss.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedScss.mjs)
 
@@ -16,7 +16,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 | User tile<br>- [`.user-info`](https://github.com/search?q=%28%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29user-info%28%5B%5E%5Cw-%5D%7C%24%29%2F%20OR%20%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29user-tile%28-%28title%7Clabel%7Cfootnote%29%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20OR%20%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29picture%28%5B%5E%5Cw-%5D%7C%24%29%2F%29%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code)<br>- [`.user-tile`](https://github.com/search?q=%28%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29user-info%28%5B%5E%5Cw-%5D%7C%24%29%2F%20OR%20%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29user-tile%28-%28title%7Clabel%7Cfootnote%29%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20OR%20%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29picture%28%5B%5E%5Cw-%5D%7C%24%29%2F%29%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code)<br>- [`.picture`](https://github.com/search?q=%28%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29user-info%28%5B%5E%5Cw-%5D%7C%24%29%2F%20OR%20%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29user-tile%28-%28title%7Clabel%7Cfootnote%29%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20OR%20%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29picture%28%5B%5E%5Cw-%5D%7C%24%29%2F%29%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | 18.2.0<br>**20.1.0** | - `.user-info` & `.user-tile*` ⇒ [User tile](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/00d3d8) : composant Angular ou [classes HTML](https://prisme.lucca.io/94310e217/p/56d611-user-tile/b/771576)<br>- `.picture` ⇒ [Avatar](https://prisme.lucca.io/94310e217/p/42b330-avatar/b/915f82) |
 | Priority levels, [`.priorityLevels`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29priorityLevels%28-icon%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | –<br>**22.1.1** | Remplacer par `.priorityLevel` et `.priorityLevel-icon`. |
 
-## Classes
+### Classes
 
 Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs)
 
@@ -57,7 +57,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 | [`.pr-u-(margin\|padding\|…)(Inline\|Block)-(start\|end)0`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29pr-u-%28margin%7Cpadding%7Cinset%29%28Inline%7CBlock%29-%28start%7Cend%290%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | –<br>**22.0.0** | Passer en camelCase :<br>- `*-start0` ⇒ `*Start0`<br>- `*-end0` ⇒ `*End0` |
 | [`.activityFeed-content-update-(after\|before\|icon)`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29activityFeed-content-update-%28after%7Cbefore%7Cicon%29%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | –<br>**22.0.0** | Remplacer par `.activityFeed-content-update-item-(after\|before\|icon)`. |
 
-## Variables CSS
+### Variables CSS
 
 Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedProperties.mjs)
 
@@ -97,7 +97,7 @@ Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/bl
 | [`--components-listboxOption-content-opacity`](https://github.com/search?q=%2F%28%5E%7C%5B%5E%5Cw-%5D%29--components-listboxOption-content-opacity%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | –<br>**22.0.0** | – |
 | - [`--components-priorityLevels-font`](https://github.com/search?q=%2F%28%5E%7C%5B%5E%5Cw-%5D%29--components-priorityLevels-font%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code)<br>- [`--components-priorityLevels-gap`](https://github.com/search?q=%2F%28%5E%7C%5B%5E%5Cw-%5D%29--components-priorityLevels-gap%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code)<br>- [`--components-priorityLevels-icon-color(1\|2\|3)`](https://github.com/search?q=%2F%28%5E%7C%5B%5E%5Cw-%5D%29--components-priorityLevels-icon-color%281%7C2%7C3%29%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code)<br>- [`--components-priorityLevels-minBlockSize`](https://github.com/search?q=%2F%28%5E%7C%5B%5E%5Cw-%5D%29--components-priorityLevels-minBlockSize%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | –<br>**22.1.1** | Remplacer par `--components-priorityLevel-*`. |
 
-## Mixins
+### Mixins
 
 Source : [LFDeprecatedScss.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedScss.mjs)
 

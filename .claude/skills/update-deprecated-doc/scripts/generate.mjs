@@ -133,7 +133,7 @@ const sourceLine = (entries) => {
 };
 // A section without rows is left out.
 const section = (title, entries, nom, keep) =>
-	!entries.length ? '' : `## ${title}\n\n${sourceLine(entries)}\n\n${heads}\n${entries.map((e) => row(nom(e), e, keep)).join('\n')}\n`;
+	!entries.length ? '' : `### ${title}\n\n${sourceLine(entries)}\n\n${heads}\n${entries.map((e) => row(nom(e), e, keep)).join('\n')}\n`;
 const blob = (file) => `[${file}](https://github.com/LuccaSA/lucca-front/blob/master/${dir}${file})`;
 
 const [selectors, properties, scss] = await Promise.all(
@@ -149,7 +149,7 @@ const deleted = (e) => !!e.versionDeleted && compare(e.versionDeleted, shipped) 
 const named = components([...selectors, ...properties, ...scss]);
 // An entry with a `name` deprecates a whole component: it goes to Composants.
 const nom = (e) => unlist(nomLines(e));
-// Each doc keeps everything before `## Composants`: its title and note.
+// Each doc keeps everything before `### Composants`: its title and any note.
 const write = (path, keep) => {
 	// The deleted doc sorts by deletion first.
 	const pick = (entries) => entries.filter((e) => deleted(e) === keep).sort(keep ? byDeletion : byVersion);
@@ -160,7 +160,7 @@ const write = (path, keep) => {
 		section('Mixins', pick(scss.filter((e) => !e.name)), nom, keep),
 	];
 	const body = sections.filter(Boolean).join('\n');
-	writeFileSync(path, `${read(path).split('## Composants')[0].trimEnd()}\n\n${body}`);
+	writeFileSync(path, `${read(path).split(/^### Composants/m)[0].trimEnd()}\n\n${body}`);
 };
 write('docs/life-cycle.md', false);
 write('docs/life-cycle-deleted.md', true);

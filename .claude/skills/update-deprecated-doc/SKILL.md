@@ -177,4 +177,6 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 ## Header
 
 * The script keeps everything above the first section: the title and any intro note.
+* The title is an h2: Prisme embeds the doc under its own h1.
+* Each section is an h3.
 * The header holds no HTML either: ZeroHeight would print it as text.

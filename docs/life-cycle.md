@@ -1,6 +1,6 @@
-# Propriétés et sélecteurs dépréciés
+## Propriétés et sélecteurs dépréciés
 
-## Composants
+### Composants
 
 Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs) et les marqueurs `@deprecated` de [packages/ng](https://github.com/LuccaSA/lucca-front/tree/master/packages/ng)
 
@@ -31,7 +31,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 | Notch box, [`.notchBox`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29notchBox%28-%28wrapper%7Cbadge%29%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | **21.1.2**<br>– | – |
 | Highlight section, [`.highlightSection`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29highlightSection%28-%28content-illustration%7Ccontent-slot%7CbubbleStart%7CbubbleEnd%7Ccontent%29%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | **22.1.1**<br>– | Le composant Highlight section (`.highlightSection` et `<lu-highlight-section>`) sera remplacé en 22.2 par une évolution du composant Box. |
 
-## Classes
+### Classes
 
 Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedSelectors.mjs)
 
@@ -72,7 +72,7 @@ Source : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/blo
 | [`.dataTable`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29dataTable%28%5B%5E%5Cw-%5D%7C%24%29%2F%20AND%20%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29mod-hover%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) **+** [`.mod-hover`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29dataTable%28%5B%5E%5Cw-%5D%7C%24%29%2F%20AND%20%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29mod-hover%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | **22.0.6**<br>– | Retirer la classe `.mod-hover` et l’input Angular `hover`, sans remplacement : une ligne sans action ne doit pas avoir d’effet de survol. |
 | [`.fancyBox-content-foreground`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29fancyBox-content-foreground%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | **22.1.0**<br>– | - HTML : composant `lu-fancy-box`, renommer la classe seule fait disparaître les illustrations<br>- input Angular : `foregroundStartEnd` à la place de `foreground` |
 
-## Variables CSS
+### Variables CSS
 
 Source : [LFDeprecatedProperties.mjs](https://github.com/LuccaSA/lucca-front/blob/master/packages/stylelint-config/LFDeprecatedProperties.mjs)
 
