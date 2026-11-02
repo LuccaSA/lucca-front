@@ -42,12 +42,12 @@
 			min-inline-size: 0;
 		}
 
-		.boxDisclosure-summary-title {
+		.boxDisclosure-summary-text-heading {
 			color: var(--pr-t-color-text-heading);
-			font: var(--components-boxDisclosure-title-font);
+			font: var(--components-boxDisclosure-heading-font);
 		}
 
-		.boxDisclosure-summary-subtitle {
+		.boxDisclosure-summary-text-subheading {
 			color: var(--pr-t-color-text-subtle);
 			font: var(--components-boxDisclosure-description-font);
 		}

@@ -49,7 +49,7 @@ export class BoxComponent {
 	/**
 	 * Text displayed below the title
 	 */
-	readonly subtitle = input<PortalContent>();
+	readonly subheading = input<PortalContent>();
 
 	/**
 	 * Decorative icon displayed in a bubble before the title.

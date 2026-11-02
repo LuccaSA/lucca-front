@@ -17,8 +17,8 @@ function getTemplate(args: ThemesStory): string {
 	return `<details class="boxDisclosure">
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
-			<span class="boxDisclosure-summary-title">Title</span>
-			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
+			<span class="boxDisclosure-summary-text-heading">Title</span>
+			<span class="boxDisclosure-summary-text-subheading">Subheading</span>
 		</span>
 		<span class="boxDisclosure-summary-metadata">
 			<ul class="listing mod-inline mod-divider">
@@ -33,8 +33,8 @@ function getTemplate(args: ThemesStory): string {
 <details class="boxDisclosure mod-neutral">
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
-			<span class="boxDisclosure-summary-title">Title</span>
-			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
+			<span class="boxDisclosure-summary-text-heading">Title</span>
+			<span class="boxDisclosure-summary-text-subheading">Subheading</span>
 		</span>
 		<span class="boxDisclosure-summary-metadata">
 			<ul class="listing mod-inline mod-divider">
@@ -49,8 +49,8 @@ function getTemplate(args: ThemesStory): string {
 <details class="boxDisclosure mod-sunken">
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
-			<span class="boxDisclosure-summary-title">Title</span>
-			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
+			<span class="boxDisclosure-summary-text-heading">Title</span>
+			<span class="boxDisclosure-summary-text-subheading">Subheading</span>
 		</span>
 		<span class="boxDisclosure-summary-metadata">
 			<ul class="listing mod-inline mod-divider">
@@ -65,8 +65,8 @@ function getTemplate(args: ThemesStory): string {
 <details class="boxDisclosure mod-fancyLight">
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
-			<span class="boxDisclosure-summary-title">Title</span>
-			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
+			<span class="boxDisclosure-summary-text-heading">Title</span>
+			<span class="boxDisclosure-summary-text-subheading">Subheading</span>
 		</span>
 		<span class="boxDisclosure-summary-metadata">
 			<ul class="listing mod-inline mod-divider">
@@ -81,8 +81,8 @@ function getTemplate(args: ThemesStory): string {
 <details class="boxDisclosure mod-fancyDark">
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
-			<span class="boxDisclosure-summary-title">Title</span>
-			<span class="boxDisclosure-summary-subtitle">Subtitle</span>
+			<span class="boxDisclosure-summary-text-heading">Title</span>
+			<span class="boxDisclosure-summary-text-subheading">Subheading</span>
 		</span>
 		<span class="boxDisclosure-summary-metadata">
 			<ul class="listing mod-inline mod-divider">

@@ -18,7 +18,7 @@ export default {
 			description: 'Titre affiché dans la zone cliquable. [PortalContent]',
 			table: { category: 'inputs' },
 		},
-		subtitle: {
+		subheading: {
 			type: 'string',
 			description: 'Sous-titre visible panneau replié : y placer les informations critiques. [PortalContent]',
 			table: { category: 'inputs' },
@@ -60,7 +60,7 @@ export default {
 export const Basic: StoryObj<BoxDisclosureComponent> = {
 	args: {
 		heading: 'Title',
-		subtitle: 'Subtitle',
+		subheading: 'Subheading',
 		metadata: ['Metadata', 'Metadata'],
 		theme: 'white',
 		open: false,
@@ -70,7 +70,7 @@ export const Basic: StoryObj<BoxDisclosureComponent> = {
 export const CustomMetadata: StoryObj<BoxDisclosureComponent> = {
 	args: {
 		heading: 'Title',
-		subtitle: 'Subtitle',
+		subheading: 'Subheading',
 		theme: 'white',
 		open: false,
 	},

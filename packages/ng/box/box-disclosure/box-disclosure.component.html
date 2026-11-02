@@ -1,9 +1,9 @@
 <details class="boxDisclosure" [class]="themeClasses()" [open]="open()" (toggle)="onToggle($event)">
 	<summary class="boxDisclosure-summary">
 		<span class="boxDisclosure-summary-text">
-			<span class="boxDisclosure-summary-title"><ng-container *luPortal="heading()" /></span>
-			@if (subtitle(); as subtitle) {
-				<span class="boxDisclosure-summary-subtitle"><ng-container *luPortal="subtitle" /></span>
+			<span class="boxDisclosure-summary-text-heading"><ng-container *luPortal="heading()" /></span>
+			@if (subheading(); as subheading) {
+				<span class="boxDisclosure-summary-text-subheading"><ng-container *luPortal="subheading" /></span>
 			}
 		</span>
 		@if (metadataItems(); as metadataItems) {

@@ -18,8 +18,8 @@ function getTemplate(args: ThemesStory): string {
 	return `<div class="box">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-title">Title</div>
-			<p class="box-header-subtitle">Subtitle</p>
+			<div class="box-header-text-heading">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
 	<div class="box-slot">Custom content</div>
@@ -27,8 +27,8 @@ function getTemplate(args: ThemesStory): string {
 <div class="box mod-neutral">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-title">Title</div>
-			<p class="box-header-subtitle">Subtitle</p>
+			<div class="box-header-text-heading">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
 	<div class="box-slot">Custom content</div>
@@ -36,8 +36,8 @@ function getTemplate(args: ThemesStory): string {
 <div class="box mod-sunken">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-title">Title</div>
-			<p class="box-header-subtitle">Subtitle</p>
+			<div class="box-header-text-heading">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
 	<div class="box-slot">Custom content</div>
@@ -45,8 +45,8 @@ function getTemplate(args: ThemesStory): string {
 <div class="box">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-title">Title</div>
-			<p class="box-header-subtitle">Subtitle</p>
+			<div class="box-header-text-heading">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
 	<div class="box-slot">Custom content</div>
@@ -58,8 +58,8 @@ function getTemplate(args: ThemesStory): string {
 <div class="box mod-fancyLight">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-title">Title</div>
-			<p class="box-header-subtitle">Subtitle</p>
+			<div class="box-header-text-heading">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
 	<div class="box-slot">Custom content</div>
@@ -71,8 +71,8 @@ function getTemplate(args: ThemesStory): string {
 <div class="box mod-fancyDark">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-title">Title</div>
-			<p class="box-header-subtitle">Subtitle</p>
+			<div class="box-header-text-heading">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
 	<div class="box-slot">Custom content</div>

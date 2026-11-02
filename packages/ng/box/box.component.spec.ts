@@ -7,13 +7,13 @@ describe(BoxComponent.name, () => {
 	it('should only expose the title as a heading when hx is set', async () => {
 		const { container, rerender } = await render(BoxComponent, { inputs: { heading: 'Title' } });
 
-		expect(container.querySelector('.box-header-title')).not.toHaveAttribute('role');
-		expect(container.querySelector('.box-header-title')).not.toHaveAttribute('aria-level');
+		expect(container.querySelector('.box-header-text-heading')).not.toHaveAttribute('role');
+		expect(container.querySelector('.box-header-text-heading')).not.toHaveAttribute('aria-level');
 
 		await rerender({ inputs: { heading: 'Title', hx: 2 }, partialUpdate: true });
 
-		expect(container.querySelector('.box-header-title')).toHaveAttribute('role', 'heading');
-		expect(container.querySelector('.box-header-title')).toHaveAttribute('aria-level', '2');
+		expect(container.querySelector('.box-header-text-heading')).toHaveAttribute('role', 'heading');
+		expect(container.querySelector('.box-header-text-heading')).toHaveAttribute('aria-level', '2');
 	});
 
 	it('should display the bubble icon before the title', async () => {

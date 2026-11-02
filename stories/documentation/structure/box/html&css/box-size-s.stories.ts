@@ -11,8 +11,8 @@ function getTemplate(args: SizeSStory): string {
 	return `<div class="box mod-S">
 	<div class="box-header">
 		<div class="box-header-text">
-			<div class="box-header-title">Title</div>
-			<p class="box-header-subtitle">Subtitle</p>
+			<div class="box-header-text-heading">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
 		</div>
 	</div>
 	<div class="box-slot">Custom content</div>

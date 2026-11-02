@@ -44,8 +44,8 @@ export default {
 			description: 'Titre de la box. [PortalContent]',
 			table: { category: 'inputs' },
 		},
-		subtitle: {
-			name: '↳ subtitle',
+		subheading: {
+			name: '↳ subheading',
 			if: { arg: 'heading', truthy: true },
 			type: 'string',
 			description: 'Sous-titre affiché sous le titre. [PortalContent]',
@@ -130,7 +130,7 @@ export const Basic: StoryObj<BoxComponent & { fancyTheme: boolean }> = {
 		fancyTheme: false,
 		size: 'M',
 		heading: 'Title',
-		subtitle: 'Subtitle',
+		subheading: 'Subheading',
 		neutral: false,
 		killable: false,
 		toggle: false,
