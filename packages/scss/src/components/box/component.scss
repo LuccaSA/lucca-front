@@ -4,7 +4,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--components-box-borderRadius);
 	padding: var(--components-box-padding);
-	background-color: var(--components-box-background, var(--pr-t-elevation-surface-raised));
+	background-color: var(--components-box-background, var(--components-box-backgroundColor));
 	display: var(--components-box-display);
 	flex-direction: var(--components-box-flexDirection);
 	gap: var(--components-box-gap);

@@ -1,19 +1,19 @@
 @use '@lucca-front/scss/src/components/bubbleIcon/exports' as bubbleIcon;
 
 @mixin neutral {
-	--components-box-background: var(--pr-t-elevation-surface-default);
+	--components-box-backgroundColor: var(--pr-t-elevation-surface-default);
 }
 
 @mixin sunken {
-	--components-box-background: var(--pr-t-elevation-surface-sunken);
+	--components-box-backgroundColor: var(--pr-t-elevation-surface-sunken);
 }
 
 @mixin fancyLight {
-	--components-box-background: var(--palettes-50, var(--palettes-product-50));
+	--components-box-backgroundColor: var(--palettes-50, var(--palettes-product-50));
 }
 
 @mixin fancyDark {
-	--components-box-background: var(--palettes-100, var(--palettes-product-100));
+	--components-box-backgroundColor: var(--palettes-100, var(--palettes-product-100));
 	--palettes-assets-primary: var(--components-box-bubble-primary-dark);
 	--palettes-assets-secondary: var(--components-box-bubble-secondary-dark);
 	--palettes-assets-brand: var(--components-box-bubble-brand-dark);
@@ -47,7 +47,7 @@
 		border-color: transparent;
 		border-style: solid;
 		border-width: var(--components-box-toggle-arrow-size);
-		border-block-end-color: var(--components-box-background, var(--pr-t-elevation-surface-raised));
+		border-block-end-color: var(--components-box-background, var(--components-box-backgroundColor));
 		border-block-start: 0;
 		block-size: 0;
 		inset-block-end: 100%;
