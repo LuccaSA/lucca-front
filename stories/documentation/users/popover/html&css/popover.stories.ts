@@ -21,7 +21,7 @@ function getTemplate(): string {
 				</h1>
 				<p class="userPopover-details-info-detail pr-u-ellipsis">Technicienne</p>
 				<p class="userPopover-details-info-detail pr-u-ellipsis">SAV</p>
-				<p class="userPopover-details-info-detail">
+				<p class="userPopover-details-info-detail pr-u-marginTop100">
 					<!--
 					<span class="userPopover-details-info-detail-workplace">
 						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"></span>
