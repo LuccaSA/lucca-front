@@ -53,7 +53,7 @@
 		}
 
 		.boxDisclosure-summary-metadata {
-			flex-shrink: 0;
+			max-inline-size: var(--components-boxDisclosure-metadata-maxInlineSize);
 		}
 
 		.boxDisclosure-summary-chevron {

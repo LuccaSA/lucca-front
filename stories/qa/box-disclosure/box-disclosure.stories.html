@@ -435,6 +435,59 @@
 				</div>
 			</td>
 		</tr>
+		<tr>
+			<td>Many metadata</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<details class="boxDisclosure" style="inline-size: 100%">
+						<summary class="boxDisclosure-summary">
+							<span class="boxDisclosure-summary-text">
+								<span class="boxDisclosure-summary-text-heading">Title</span>
+								<span class="boxDisclosure-summary-text-subheading">Subheading</span>
+							</span>
+							<span class="boxDisclosure-summary-metadata">
+								<ul class="listing mod-inline mod-divider">
+									<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+									<li class="listing-item"><div class="listing-item-content">Long metadata value</div></li>
+									<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+									<li class="listing-item"><div class="listing-item-content">Another metadata</div></li>
+									<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+									<li class="listing-item"><div class="listing-item-content">Metadata with more text</div></li>
+									<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+									<li class="listing-item"><div class="listing-item-content">Short</div></li>
+									<li class="listing-item"><div class="listing-item-content">Metadata</div></li>
+									<li class="listing-item"><div class="listing-item-content">Last metadata</div></li>
+								</ul>
+							</span>
+							<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
+						</summary>
+						<div class="boxDisclosure-details">Custom content</div>
+					</details>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-box-disclosure
+						style="inline-size: 100%"
+						heading="Title"
+						subheading="Subheading"
+						[metadata]="[
+							'Metadata',
+							'Long metadata value',
+							'Metadata',
+							'Another metadata',
+							'Metadata',
+							'Metadata with more text',
+							'Metadata',
+							'Short',
+							'Metadata',
+							'Last metadata',
+						]"
+						>Custom content</lu-box-disclosure
+					>
+				</div>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
