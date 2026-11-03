@@ -29,6 +29,7 @@ export const SOFTWARE_ICON = [
 	'payment-methods',
 	'accounting-assistant',
 	'certified-einvoicing-platform',
+	'business-trips',
 	// Compensation and Benefits
 	'compensation',
 	'payslip',
