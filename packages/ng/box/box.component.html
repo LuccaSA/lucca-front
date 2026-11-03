@@ -9,8 +9,9 @@
 	<div class="box-header">
 		@if (bubbleIcon(); as bubbleIcon) {
 			<lu-bubble-icon [icon]="bubbleIcon" />
+		} @else {
+			<ng-content select="[boxHeaderStartSlot]" />
 		}
-		<ng-content select="[boxHeaderStartSlot]" />
 		<div class="box-header-text">
 			<div class="box-header-text-heading" role="heading" [attr.aria-level]="hx()">
 				<ng-container *luPortal="heading" />
