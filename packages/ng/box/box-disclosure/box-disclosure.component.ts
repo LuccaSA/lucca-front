@@ -41,6 +41,11 @@ export class BoxDisclosureComponent {
 		return Array.isArray(metadata) ? metadata : null;
 	});
 
+	readonly metadataPortal = computed(() => {
+		const metadata = this.metadata();
+		return Array.isArray(metadata) ? null : metadata;
+	});
+
 	/**
 	 * Whether the disclosure box is open.
 	 */

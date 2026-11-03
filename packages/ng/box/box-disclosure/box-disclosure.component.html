@@ -18,8 +18,8 @@
 			} @else if (metadataItems.length === 1) {
 				<span class="boxDisclosure-summary-metadata">{{ metadataItems[0] }}</span>
 			}
-		} @else if (metadata(); as metadata) {
-			<span class="boxDisclosure-summary-metadata"><ng-container *luPortal="metadata" /></span>
+		} @else if (metadataPortal(); as metadataPortal) {
+			<span class="boxDisclosure-summary-metadata"><ng-container *luPortal="metadataPortal" /></span>
 		}
 		<lu-icon class="boxDisclosure-summary-chevron" icon="arrowChevronBottom" />
 	</summary>
