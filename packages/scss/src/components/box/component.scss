@@ -51,18 +51,14 @@
 		}
 
 		.box-illustrations {
-			display: grid;
 			inset-block-end: 0;
 			inset-inline-end: 0;
-			place-content: center;
 			position: absolute;
-		}
 
-		.box-illustrations-back,
-		.box-illustrations-front {
-			block-size: var(--components-box-illustrations-height);
-			grid-area: 1 / 1;
-			inline-size: var(--components-box-illustrations-width);
+			.ornament {
+				--components-ornament-blockSize: var(--components-box-illustrations-height);
+				--components-ornament-inlineSize: var(--components-box-illustrations-width);
+			}
 		}
 
 		.box-close {

@@ -23,13 +23,8 @@
 	</div>
 }
 <div class="box-slot"><ng-content /></div>
-@if (bubbleSrc() || illustrationSrc()) {
+@if (isFancy() && (bubble() || illustration())) {
 	<div class="box-illustrations">
-		@if (bubbleSrc(); as bubbleSrc) {
-			<div class="box-illustrations-back" aria-hidden="true" [innerHtml]="bubbleSrc | luSafeExternalSvg"></div>
-		}
-		@if (illustrationSrc(); as illustrationSrc) {
-			<img alt="" class="box-illustrations-front" [attr.src]="illustrationSrc" />
-		}
+		<lu-ornament [bubble]="bubble()" [illustration]="illustration()" />
 	</div>
 }

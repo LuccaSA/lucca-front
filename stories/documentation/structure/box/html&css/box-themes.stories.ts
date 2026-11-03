@@ -51,8 +51,10 @@ function getTemplate(args: ThemesStory): string {
 	</div>
 	<div class="box-slot">Custom content</div>
 	<div class="box-illustrations">
-		<div class="box-illustrations-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
-		<img alt="" class="box-illustrations-front" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg" />
+		<div class="ornament">
+			<div class="ornament-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
+			<img alt="" class="ornament-front" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg" />
+		</div>
 	</div>
 </div>
 <div class="box mod-fancyLight">
@@ -64,8 +66,10 @@ function getTemplate(args: ThemesStory): string {
 	</div>
 	<div class="box-slot">Custom content</div>
 	<div class="box-illustrations">
-		<div class="box-illustrations-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
-		<img alt="" class="box-illustrations-front" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg" />
+		<div class="ornament">
+			<div class="ornament-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
+			<img alt="" class="ornament-front" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg" />
+		</div>
 	</div>
 </div>
 <div class="box mod-fancyDark">
@@ -77,8 +81,10 @@ function getTemplate(args: ThemesStory): string {
 	</div>
 	<div class="box-slot">Custom content</div>
 	<div class="box-illustrations">
-		<div class="box-illustrations-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
-		<img alt="" class="box-illustrations-front" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg" />
+		<div class="ornament">
+			<div class="ornament-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
+			<img alt="" class="ornament-front" src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg" />
+		</div>
 	</div>
 </div>`;
 }

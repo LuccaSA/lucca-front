@@ -1,6 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { BOX_HX, BOX_SIZE, BOX_THEME, BoxComponent, luBoxTranslations } from '@lucca-front/ng/box';
-import { HIGHLIGHT_DATA_BUBBLE, HIGHLIGHT_DATA_ILLUSTRATION } from '@lucca-front/ng/highlight-data';
+import { ORNAMENT_BUBBLE, ORNAMENT_ILLUSTRATION } from '@lucca-front/ng/ornament';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { useArgs } from 'storybook/preview-api';
 import { HiddenArgType } from '@/helpers/common-arg-types';
@@ -19,7 +19,7 @@ export default {
 		bubble: {
 			name: '↳ bubble',
 			if: { arg: 'fancyTheme', truthy: true },
-			options: setStoryOptions(HIGHLIGHT_DATA_BUBBLE),
+			options: setStoryOptions(ORNAMENT_BUBBLE),
 			control: { type: 'select' },
 			description: 'Bulle décorative affichée à droite. Disponible uniquement sur les thèmes <code>fancy*</code>.',
 			table: { category: 'inputs' },
@@ -27,7 +27,7 @@ export default {
 		illustration: {
 			name: '↳ illustration',
 			if: { arg: 'fancyTheme', truthy: true },
-			options: setStoryOptions(HIGHLIGHT_DATA_ILLUSTRATION),
+			options: setStoryOptions(ORNAMENT_ILLUSTRATION),
 			control: { type: 'select' },
 			description: 'Illustration affichée à droite. Disponible uniquement sur les thèmes <code>fancy*</code>. Il est également possible de renseigner une URL.',
 			table: { category: 'inputs' },

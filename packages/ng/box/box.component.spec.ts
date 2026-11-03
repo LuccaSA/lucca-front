@@ -39,8 +39,8 @@ describe(BoxComponent.name, () => {
 			providers: [provideHttpClient(), provideHttpClientTesting()],
 		});
 
-		expect(container.querySelector('.box-illustrations-front')).toHaveAttribute('src', 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/calendar.svg');
-		expect(container.querySelector('.box-illustrations-back')).not.toBeNull();
+		expect(container.querySelector('.box-illustrations .ornament-front')).toHaveAttribute('src', 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/calendar.svg');
+		expect(container.querySelector('.box-illustrations .ornament-back')).not.toBeNull();
 
 		await rerender({ inputs: { theme: 'white', bubble: 1, illustration: 'calendar' }, partialUpdate: true });
 
