@@ -3,7 +3,7 @@ import { luOptionalNumberAttribute } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { OrnamentBubble, OrnamentIllustration } from './ornament.type';
 
-const ORNAMENT_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data';
+const ORNAMENT_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/ornament';
 
 @Component({
 	selector: 'lu-ornament',
