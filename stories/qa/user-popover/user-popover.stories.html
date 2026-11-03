@@ -1,0 +1,788 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(282, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">CA</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Chloé Alibert</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Technician</p>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">After-sales service</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Present</span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="1" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Picture</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<img class="avatar-picture" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" alt="FM" translate="no" />
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Finn Mertens</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Hero</p>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Adventurers</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Present</span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="2" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Picture error (initials fallback)</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(333, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">JD</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Jake Dog</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Hero</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Present</span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="3" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Name linked to HR card</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(180, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">MA</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis">
+											<a
+												class="link mod-icon mod-hiddenIcon userPopover-details-info-name-linkOptional"
+												href="#"
+												rel="noopener noreferrer"
+												target="_blank"
+												><span class="link-text"><span translate="no">Marceline Abadeer</span></span
+												><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+												><span class="pr-u-mask">(Open in a new window.)</span></a
+											>
+										</h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Vampire queen</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Present</span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="4" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Name only</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(318, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">BB</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Bonnibel Bubblegum</span></h1>
+										<p class="userPopover-details-info-detail pr-u-marginTop100"></p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="5" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Long content</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(34, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">MD</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis">
+											<span translate="no">Maximilienne-Alexandrine De La Rochefoucauld-Montmorency</span>
+										</h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">
+											Senior international business development and partnerships manager
+										</p>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">
+											Strategic partnerships and international business development
+										</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-mapPin mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text"
+														>Headquarters building<span class="pr-u-colorTextSubtle"> – Third floor, east wing, open space</span></span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="6" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Work location</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(322, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">SP</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Simon Petrikov</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Wizard</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-mapPin mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Ice Kingdom<span class="pr-u-colorTextSubtle"> – Floor 2</span></span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(32, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">PF</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Phoebe Flame</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Princess</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-mapPin mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Fire Kingdom</span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="7" />
+					<user-popover-panel [userId]="8" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Absent</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(339, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">LS</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Lumpy Space</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Princess</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Absent</span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(338, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">IK</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Ice King</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">King</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text"
+														>Absent<span class="pr-u-colorTextSubtle"> – Until February 28, 2099 inclusive</span></span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(355, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">FC</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Fionna Campbell</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Hero</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Absent<span class="pr-u-colorTextSubtle"> – Until February 28, 2099 morning</span></span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(324, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">CC</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Cake Cat</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Hero</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Absent<span class="pr-u-colorTextSubtle"> – Today</span></span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(50, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">ML</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Marshall Lee</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Vampire king</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Absent<span class="pr-u-colorTextSubtle"> – This morning</span></span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(274, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">PB</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Peppermint Butler</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Butler</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Absent<span class="pr-u-colorTextSubtle"> – Until tomorrow</span></span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(359, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">TT</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Tree Trunks</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Farmer</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Absent<span class="pr-u-colorTextSubtle"> – Until tomorrow morning</span></span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="9" />
+					<user-popover-panel [userId]="10" />
+					<user-popover-panel [userId]="11" />
+					<user-popover-panel [userId]="12" />
+					<user-popover-panel [userId]="13" />
+					<user-popover-panel [userId]="14" />
+					<user-popover-panel [userId]="15" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Upcoming arrival</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(307, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">GP</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Gunter Penguin</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Penguin</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><span class="userPopover-details-info-detail-link-state">Arrival expected on 5/3/99</span></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="16" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Left</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(230, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">BG</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Betty Grof</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Researcher</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarStrikethrough mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><span class="userPopover-details-info-detail-link-state">Left</span></span
+											>
+										</p>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="17" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Custom content</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover">
+								<section class="userPopover-details">
+									<div class="userPopover-details-avatar avatar">
+										<div class="avatar-picture" style="background-color: hsl(279, 60%, 60%)">
+											<span class="avatar-picture-initials" translate="no">LR</span>
+										</div>
+									</div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name pr-u-ellipsis"><span translate="no">Lady Rainicorn</span></h1>
+										<p class="userPopover-details-info-detail pr-u-ellipsis">Translator</p>
+										<p class="userPopover-details-info-detail pr-u-marginTop100">
+											<span class="userPopover-details-info-detail-workplace"
+												><span
+													aria-hidden="true"
+													class="lucca-icon icon-calendarPlanning mod-XS userPopover-details-info-detail-workplace-icon"
+												></span
+												><a
+													class="link mod-icon mod-hiddenIcon mod-decorationHover mod-neutral userPopover-details-info-detail-workplace-state"
+													href="#"
+													rel="noopener noreferrer"
+													target="_blank"
+													><span class="link-text">Present</span
+													><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span
+													><span class="pr-u-mask">(Open in a new window.)</span></a
+												></span
+											>
+										</p>
+										<div class="userPopover-divider divider"></div>
+										<div><p class="pr-u-bodyS pr-u-margin0">Custom content for Lady</p></div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="18" [customContent]="customContent" />
+					<ng-template #customContent let-user
+						><p class="pr-u-bodyS pr-u-margin0">Custom content for {{ user.firstName }}</p></ng-template
+					>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Loading</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="popover">
+						<div class="popover-content">
+							<div class="userPopover skeleton is-loading" aria-hidden="true">
+								<div class="userPopover-details">
+									<div
+										class="userPopover-details-avatar avatar skeleton-item mod-circle"
+										style="--components-skeleton-shape-width: 96px; --components-skeleton-shape-height: 96px"
+									></div>
+									<div class="userPopover-details-info">
+										<h1 class="userPopover-details-info-name skeleton-item pr-u-margin0" style="--components-skeleton-text-width: 75%"></h1>
+										<p class="userPopover-details-info-detail skeleton-item pr-u-bodyS" style="--components-skeleton-text-width: 75%"></p>
+										<p class="userPopover-details-info-detail skeleton-item pr-u-bodyS" style="--components-skeleton-text-width: 75%"></p>
+										<p class="userPopover-details-info-detail skeleton-item pr-u-bodyS" style="--components-skeleton-text-width: 75%"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<user-popover-panel [userId]="0" />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
