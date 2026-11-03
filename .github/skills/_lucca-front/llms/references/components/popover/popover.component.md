@@ -11,7 +11,7 @@
 - HTML/CSS
   - Popover
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover-angular--docs)
 
 ## Angular
 
@@ -51,10 +51,8 @@ component.html:
 ### Overlays popover
 
 ```js
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuPopoverAlignment, LuPopoverModule, LuPopoverPosition, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
-import { LuPopoverModule } from '@lucca-front/ng/popover';
+import { LuPopoverAlignment, LuPopoverPanelComponent, LuPopoverPosition, LuPopoverScrollStrategy, LuPopoverTriggerDirective, LuPopoverTriggerEvent } from '@lucca-front/ng/popover';
 ```
 
 ```html
@@ -62,13 +60,12 @@ import { LuPopoverModule } from '@lucca-front/ng/popover';
 	type="button"
 	class="button"
 	[luPopover]="popover"
-	[luPopoverPosition]="position()"
-	[luPopoverAlignment]="alignment()"
-	[luPopoverTrigger]="trigger()"
+	(luPopoverOnOpen)="luPopoverOnOpen()"
+	(luPopoverOnClose)="luPopoverOnClose()"
 >
-	{{ trigger() }} me
+	click me
 </button>
-<lu-popover #popover>{{ popoverContent() }}</lu-popover>
+<lu-popover #popover (open)="open()" (close)="close()" (hovered)="hovered($event)">🎉 popover content 🏖️</lu-popover>
 ```
 
 ### Users popover

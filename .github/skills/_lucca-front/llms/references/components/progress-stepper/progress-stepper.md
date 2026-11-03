@@ -23,9 +23,9 @@ import { ProgressStepperStepComponent, ProgressStepperComponent } from '@lucca-f
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `string` | — | ✅ | — | — |
-| `state` | `state` | `ProgressStepperStepState \| null` | `null` | — | — | — |
-| `routerLinkParam` | `routerLinkParam` | `RouterLinkParam \| string \| readonly string[] \| UrlTree \| null \| undefined` | `null` | — | — | — |
+| `label` | `label` | `string` | — | ✅ | — | Libellé de l’étape (obligatoire). |
+| `state` | `state` | `ProgressStepperStepState \| null` | `null` | — | — | État de l’étape. Appliqué à la première étape dans l’exemple. |
+| `routerLinkParam` | `routerLinkParam` | `RouterLinkParam \| string \| readonly string[] \| UrlTree \| null \| undefined` | `null` | — | — | Lien de navigation de l’étape : `RouterLinkParam` ou toute valeur acceptée par `routerLink`. Voir la story Route. |
 
 ### ProgressStepperComponent (component)
 
@@ -41,7 +41,7 @@ import { ProgressStepperStepComponent, ProgressStepperComponent } from '@lucca-f
 
 - 📝 [Code & implementation](./progress-stepper.component.md)
 - 🎨 [Design guidelines](./progress-stepper.design.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-progress-stepper-angular-basic--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-progress-stepper-angular-basic--docs)
 
 ## Changelog
 

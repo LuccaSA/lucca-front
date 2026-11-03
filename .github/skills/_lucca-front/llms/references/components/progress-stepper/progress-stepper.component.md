@@ -10,7 +10,7 @@
   - States
   - Steps
 
-📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-progress-stepper-angular-basic--docs)
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-progress-stepper-angular-basic--docs)
 
 ## Angular
 
@@ -20,7 +20,7 @@ Component selector : `lu-progress-stepper`
 
 ```js
 import { provideRouter, RouterLink } from '@angular/router';
-import { ProgressStepperComponent, ProgressStepperStepComponent } from '@lucca-front/ng/progress-stepper';
+import { PROGRESS_STEPPER_STEP_STATE, ProgressStepperComponent, ProgressStepperStepComponent, ProgressStepperStepState } from '@lucca-front/ng/progress-stepper';
 ```
 
 ```html
@@ -41,7 +41,7 @@ import { ProgressStepperComponent, ProgressStepperStepComponent } from '@lucca-f
 ```
 
 ```html
-<lu-progress-stepper current="2" steps="3">
+<lu-progress-stepper current="2">
 	<lu-progress-stepper-step [routerLinkParam]="{ commands: '/route/step-1', fragment: 'home' }" label="Home page" />
 	<lu-progress-stepper-step
 		[routerLinkParam]="{ commands: ['route', 'step', '2'], fragment: 'config' }"
