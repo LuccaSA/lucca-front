@@ -1,0 +1,23 @@
+@mixin vars {
+	--components-card2-alignItems: normal;
+	--components-card2-before-boxShadow: var(--pr-t-elevation-shadow-raised);
+	--components-card2-before-inset: 0;
+	--components-card2-color: inherit;
+	--components-card2-gridTemplate:
+		'illustration heading' auto
+		'illustration content' 1fr
+		/ auto        1fr;
+	--components-card2-heading-action-color: inherit;
+	--components-card2-heading-action-cursor: pointer;
+	--components-card2-heading-color: var(--pr-t-color-text-heading);
+	--components-card2-heading-font: var(--pr-t-font-heading-3);
+	--components-card2-heading-paddingBlockStart: 0;
+	--components-card2-illustration-paddingBlockStart: calc((var(--pr-t-font-heading-3-lineHeight) + var(--pr-t-spacings-50) + var(--pr-t-font-body-S-lineHeight) - var(--pr-t-spacings-500)) / 2);
+	--components-card2-rowGap: var(--pr-t-spacings-50);
+}
+
+@mixin varsWrapper {
+	--components-card2Wrapper-backgroundColor: var(--pr-t-elevation-surface-sunken);
+	--components-card2Wrapper-list-gridTemplateColumns: none;
+	--components-card2Wrapper-padding: var(--pr-t-spacings-100);
+}
