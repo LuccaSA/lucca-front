@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { luNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { luNullableNumberAttribute, luNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_MAIN_LAYOUT_INSTANCE } from '@lucca-front/ng/main-layout';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Hx, HxStyle } from '../empty-state.type';
+import { EmptyStateHeadingLevel, EmptyStateHeadingStyle } from '../empty-state.type';
 
 const DEFAULT_TOP_RIGHT_BACKGROUND = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg';
 const DEFAULT_TOP_RIGHT_FOREGROUND = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg';
@@ -84,9 +84,29 @@ export class EmptyStatePageComponent {
 
 	readonly description = input<PortalContent>();
 
-	readonly hx = input(1, { transform: luNumberAttribute<Hx> });
+	/**
+	 * Aria level of the title. Defaults to 1.
+	 */
+	readonly headingLevel = input(null, { transform: luNullableNumberAttribute<EmptyStateHeadingLevel> });
 
-	readonly hxStyle = input(1, { transform: luNumberAttribute<HxStyle> });
+	/**
+	 * Visual size of the title, as a heading level, when it differs from its aria level. Defaults to 1.
+	 */
+	readonly headingStyle = input(null, { transform: luNullableNumberAttribute<EmptyStateHeadingStyle> });
+
+	/**
+	 * @deprecated use `headingLevel` instead
+	 */
+	readonly hx = input(1, { transform: luNumberAttribute<EmptyStateHeadingLevel> });
+
+	/**
+	 * @deprecated use `headingStyle` instead
+	 */
+	readonly hxStyle = input(1, { transform: luNumberAttribute<EmptyStateHeadingStyle> });
+
+	readonly headingLevelValue = computed(() => this.headingLevel() ?? this.hx());
+
+	readonly headingStyleValue = computed(() => this.headingStyle() ?? this.hxStyle());
 
 	public isStringPortalContent(message: PortalContent): message is string {
 		return typeof message === 'string';

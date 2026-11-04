@@ -47,7 +47,7 @@ function getTemplate(args: TableBasicStory): string {
 				<tbody class="table-body">
 					<tr class="table-body-row">
 						<td colspan="6" class="table-body-row-cell">
-							<lu-empty-state-section hx="3" illustration="rocket" heading="Empty state section" description="Description can be a string or a ng-template Description can be a string or a ng-template Description can be a string or a ng-template">
+							<lu-empty-state-section headingLevel="3" illustration="rocket" heading="Empty state section" description="Description can be a string or a ng-template Description can be a string or a ng-template Description can be a string or a ng-template">
 								<button luButton type="button" palette="product">Button</button>
 							</lu-empty-state-section>
 						</td>
