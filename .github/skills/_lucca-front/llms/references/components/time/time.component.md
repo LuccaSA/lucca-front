@@ -25,20 +25,14 @@ import { BASE_PICKER_SIZE, luTimePickerTranslations, TimePickerComponent } from 
 ```
 
 ```html
-<lu-form-field
-	[label]="labelID"
-	[rolePresentationLabel]="true"
-	tooltip="Tooltip message"
-	inlineMessage="Helper message"
-	inlineMessageState="default"
->
+<lu-form-field [label]="labelID" [rolePresentationLabel]="true">
 	<lu-time-picker
 		label="Label"
 		required
 		step="PT1M"
 		max="23:59:59"
-		[forceMeridiemDisplay]="undefined"
 		[(ngModel)]="example"
+		(timeChange)="onTimeChange($event)"
 	/>
 	<ng-template #labelID>
 		<span aria-hidden="true">Label</span>
@@ -59,14 +53,15 @@ import { BASE_PICKER_SIZE, DurationPickerComponent, luDurationPickerTranslations
 ```
 
 ```html
-<lu-form-field
-	[rolePresentationLabel]="true"
-	label="Label"
-	tooltip="Tooltip message"
-	inlineMessage="Helper message"
-	inlineMessageState="default"
->
-	<lu-duration-picker label="Label" required step="PT1M" max="PT99H" [(ngModel)]="example" />
+<lu-form-field [rolePresentationLabel]="true" label="Label">
+	<lu-duration-picker
+		label="Label"
+		required
+		step="PT1M"
+		max="PT99H"
+		[(ngModel)]="example"
+		(durationChange)="onDurationChange($event)"
+	/>
 </lu-form-field>
 
 <pr-story-model-display>{{ example }}</pr-story-model-display>
@@ -83,8 +78,8 @@ import { luTimeRangePickerTranslations, TimePickerComponent, TimeRangePickerComp
 ```
 
 ```html
-<lu-form-field label="Period" inlineMessage="Helper message" inlineMessageState="default">
-	<lu-time-range-picker step="PT1M" max="23:59:59" [forceMeridiemDisplay]="false" [(ngModel)]="example" />
+<lu-form-field label="Period">
+	<lu-time-range-picker step="PT1M" max="23:59:59" [(ngModel)]="example" />
 </lu-form-field>
 
 <pr-story-model-display>{{ example | json }}</pr-story-model-display>

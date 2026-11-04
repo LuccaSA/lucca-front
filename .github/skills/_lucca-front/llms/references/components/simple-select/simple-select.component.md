@@ -30,10 +30,14 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 	<lu-simple-select
 		placeholder="Placeholder"
 		clearable
+		inputTabindex="0"
 		(panelOpened)="panelOpened()"
 		(panelClosed)="panelClosed()"
+		(highlightedOption)="highlightedOption($event)"
+		(nextPage)="nextPage()"
+		(addOption)="addOption($event)"
 		[options]="legumes | filterLegumes: clue"
-		(clueChange)="clue = $event"
+		(clueChange)="clue = $event; clueChange($event)"
 		[(ngModel)]="model.example"
 	></lu-simple-select>
 </lu-form-field>

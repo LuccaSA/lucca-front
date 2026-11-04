@@ -38,9 +38,9 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `luTooltipInput` | `luTooltip` | `string \| SafeHtml` | `''` | — | — | — |
 | `prTooltipInput` | `prTooltip` | `string \| SafeHtml` | `''` | — | — | — |
-| `luTooltipEnterDelay` | `luTooltipEnterDelay` | `number` | `0` | — | `numberAttribute` | Délai d’apparition du tooltip (en ms). |
+| `luTooltipEnterDelay` | `luTooltipEnterDelay` | `number` | `0` | — | `numberAttribute` | Délai d’apparition du tooltip (en ms). La valeur `0` (valeur par défaut de l’input) applique le délai par défaut de 300 … |
 | `prTooltipEnterDelay` | `prTooltipEnterDelay` | `number` | `300` | — | `numberAttribute` | — |
-| `luTooltipLeaveDelay` | `luTooltipLeaveDelay` | `number` | `0` | — | `numberAttribute` | Délai de disparition du tooltip après la fin du survol (en ms). |
+| `luTooltipLeaveDelay` | `luTooltipLeaveDelay` | `number` | `0` | — | `numberAttribute` | — |
 | `prTooltipLeaveDelay` | `prTooltipLeaveDelay` | `number` | `100` | — | `numberAttribute` | — |
 | `luTooltipDisabled` | `luTooltipDisabled` | `boolean` | `false` | — | `booleanAttribute` | Désactive le tooltip. |
 | `prTooltipDisabled` | `prTooltipDisabled` | `boolean` | `false` | — | `booleanAttribute` | — |
@@ -50,11 +50,11 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 | `prTooltipPosition` | `prTooltipPosition` | `'above' \| 'below' \| 'before' \| 'after'` | `'above'` | — | — | — |
 | `luTooltipWhenEllipsisInput` | `luTooltipWhenEllipsis` | `boolean` | `false` | — | `booleanAttribute` | N’affiche le tooltip que lorsque le contenu de l’élément déclencheur est tronqué par une ellipse. |
 | `prTooltipWhenEllipsisInput` | `prTooltipWhenEllipsis` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `luTooltipAnchor` | `luTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | — |
+| `luTooltipAnchor` | `luTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | Élément par rapport auquel le tooltip est positionné, à la place de l’élément déclencheur (voir l’exemple « Tooltip affi… |
 | `prTooltipAnchor` | `prTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `this.#host` | — | — | — |
-| `luTooltipTriggerAnchor` | `luTooltipTriggerAnchor` | `ElementRef<HTMLElement> \| HTMLElement \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | — |
+| `luTooltipTriggerAnchor` | `luTooltipTriggerAnchor` | `ElementRef<HTMLElement> \| HTMLElement \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | Élément dont le survol et le focus déclenchent le tooltip, à la place de l’élément portant la directive. |
 | `prTooltipTriggerAnchor` | `prTooltipTriggerAnchor` | `ElementRef<HTMLElement> \| HTMLElement \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | — |
-| `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`` | — | — | — |
+| `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`` | — | — | Identifiant de l’élément déclencheur, utilisé pour construire l’identifiant du tooltip référencé par `aria-describedby`.… |
 
 ### Modules dépréciés
 

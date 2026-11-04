@@ -22,7 +22,7 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 ## Basic Usage
 
 ```html
-<lu-form-field [label]="labelID" [rolePresentationLabel]="true" tooltip="Tooltip message" inlineMessage="Helper message" inlineMessageState="default"> <lu-time-picker label="Label" required step="PT1M" max="23:59:59" [forceMeridiemDisplay]="undefined" [(ngModel)]="example" /> <ng-template #labelID> <span aria-hidden="true">Label</span> </ng-template>
+<lu-form-field [label]="labelID" [rolePresentationLabel]="true"> <lu-time-picker label="Label" required step="PT1M" max="23:59:59" [(ngModel)]="example" (timeChange)="onTimeChange($event)" /> <ng-template #labelID> <span aria-hidden="true">Label</span> </ng-template>
 </lu-form-field> <pr-story-model-display>{{ example }}</pr-story-model-display>
 ```
 

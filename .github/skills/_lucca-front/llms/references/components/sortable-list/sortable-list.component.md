@@ -27,9 +27,9 @@ import { SortableListComponent, SortableListItemComponent } from '@lucca-front/n
 
 ```html
 <lu-sortable-list>
-	<lu-sortable-list-item label="Label" helperMessage="Helper message" />
-	<lu-sortable-list-item label="Label" helperMessage="Helper message" />
-	<lu-sortable-list-item label="Label" helperMessage="Helper message" />
+	<lu-sortable-list-item label="Label" helperMessage="Helper message" (delete)="delete()" />
+	<lu-sortable-list-item label="Label" helperMessage="Helper message" (delete)="delete()" />
+	<lu-sortable-list-item label="Label" helperMessage="Helper message" (delete)="delete()" />
 </lu-sortable-list>
 ```
 
