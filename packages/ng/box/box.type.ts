@@ -8,5 +8,5 @@ export type BoxTheme = (typeof BOX_THEME)[number];
 export const BOX_SIZE = ['M', 'S'] as const;
 export type BoxSize = (typeof BOX_SIZE)[number];
 
-export const BOX_HX = [1, 2, 3, 4, 5, 6] as const;
-export type BoxHx = (typeof BOX_HX)[number];
+export const BOX_HEADING_LEVEL = [1, 2, 3, 4, 5, 6] as const;
+export type BoxHeadingLevel = (typeof BOX_HEADING_LEVEL)[number];

@@ -18,24 +18,21 @@ Status: accepted · PR #5562
 
 **Revisit if** — Boxes of a set need shared settings (size, theme, layout tied to the box) that `lu-grid` cannot provide.
 
-## 2026-11-02 — Box title exposed as a heading, level 2 by default
+## 2026-11-02 — Box title exposed as a heading, level 3 by default
 
 Status: accepted · PR #5562
 
 **Context** — The box title must be a heading whose level is set by an input on the component root, since a box can sit anywhere in the page outline.
 
-**Decision** — The title is a `div` with `role="heading"` and `aria-level` bound to `hx`, which defaults to 2.
+**Decision** — The title is a `div` with `role="heading"` and `aria-level` bound to `headingLevel`, which defaults to 3.
 
-**Consequences** — The level changes without changing the markup, and the default is the one a heading gets without `aria-level`. This differs from `empty-state-section` (`hx`) and `resource-card` (`headingLevel`), which default to 3.
+**Consequences** — The level changes without changing the markup, and the input follows `resource-card` (`headingLevel`, 3 by default).
 
-**Rejected options** — Two alternatives:
+**Rejected options** — Three alternatives:
 
 - `h1`…`h6` elements: the template would need one branch per level to follow the input.
-- No heading by default (`hx = null`): tried, then dropped, since a box title is a section title.
-
-**Sources** — The fallback value of `aria-level`:
-
-- W3C, [WAI-ARIA 1.2, Handling Author Errors](https://www.w3.org/TR/wai-aria-1.2/#document-handling_author-errors_states-properties) (2023): `heading` falls back to `aria-level` 2.
+- No heading by default (`headingLevel = null`): tried, then dropped, since a box title is a section title.
+- `hx`, 2 by default, the [fallback value of `aria-level`](https://www.w3.org/TR/wai-aria-1.2/#document-handling_author-errors_states-properties) for `heading`: dropped to align with `resource-card`.
 
 ## 2026-11-04 — No CSS class for the fancyWhite theme
 

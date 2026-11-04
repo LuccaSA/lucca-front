@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { BOX_HX, BOX_SIZE, BOX_THEME, BoxComponent, luBoxTranslations } from '@lucca-front/ng/box';
+import { BOX_HEADING_LEVEL, BOX_SIZE, BOX_THEME, BoxComponent, luBoxTranslations } from '@lucca-front/ng/box';
 import { ORNAMENT_BUBBLE, ORNAMENT_ILLUSTRATION } from '@lucca-front/ng/ornament';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { useArgs } from 'storybook/preview-api';
@@ -59,12 +59,12 @@ export default {
 			description: 'Icône décorative affichée dans une bulle avant le titre. Pour un autre contenu, projeter un élément portant l’attribut <code>boxHeaderStartSlot</code>.',
 			table: { category: 'inputs' },
 		},
-		hx: {
-			name: '↳ hx',
+		headingLevel: {
+			name: '↳ headingLevel',
 			if: { arg: 'heading', truthy: true },
-			options: setStoryOptions(BOX_HX),
+			options: setStoryOptions(BOX_HEADING_LEVEL),
 			control: { type: 'select' },
-			description: 'Niveau sémantique du titre, exposé comme un titre (<code>role="heading"</code>). Vaut 2 par défaut : à définir si le titre de la box n’est pas un h2 dans la structure de la page.',
+			description: 'Niveau sémantique du titre, exposé comme un titre (<code>role="heading"</code>). Vaut 3 par défaut : à définir si le titre de la box n’est pas un h3 dans la structure de la page.',
 			table: { category: 'inputs' },
 		},
 		intl: intlArgType(luBoxTranslations, 'LuBoxLabel'),
@@ -129,7 +129,7 @@ export const Basic: StoryObj<BoxComponent & { fancyTheme: boolean }> = {
 		illustration: 'piggy-bank',
 		fancyTheme: false,
 		size: 'M',
-		hx: 2,
+		headingLevel: 3,
 		heading: 'Title',
 		subheading: 'Subheading',
 		neutral: false,

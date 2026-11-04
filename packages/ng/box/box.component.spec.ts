@@ -4,15 +4,15 @@ import { render } from '@testing-library/angular';
 import { BoxComponent } from './box.component';
 
 describe(BoxComponent.name, () => {
-	it('should expose the title as a level 2 heading by default, and follow hx', async () => {
+	it('should expose the title as a level 3 heading by default, and follow headingLevel', async () => {
 		const { container, rerender } = await render(BoxComponent, { inputs: { heading: 'Title' } });
 
 		expect(container.querySelector('.box-header-text-heading')).toHaveAttribute('role', 'heading');
-		expect(container.querySelector('.box-header-text-heading')).toHaveAttribute('aria-level', '2');
-
-		await rerender({ inputs: { heading: 'Title', hx: 3 }, partialUpdate: true });
-
 		expect(container.querySelector('.box-header-text-heading')).toHaveAttribute('aria-level', '3');
+
+		await rerender({ inputs: { heading: 'Title', headingLevel: 2 }, partialUpdate: true });
+
+		expect(container.querySelector('.box-header-text-heading')).toHaveAttribute('aria-level', '2');
 	});
 
 	it('should display the bubble icon before the title', async () => {

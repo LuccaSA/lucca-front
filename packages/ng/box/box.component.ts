@@ -6,7 +6,7 @@ import { intlInputOptions, luBooleanAttribute, luNumberAttribute, luOptionalNumb
 import { IconComponent } from '@lucca-front/ng/icon';
 import { OrnamentBubble, OrnamentComponent, OrnamentIllustration } from '@lucca-front/ng/ornament';
 import { LU_BOX_TRANSLATIONS } from './box.translate';
-import { BoxHx, BoxSize, BoxTheme } from './box.type';
+import { BoxHeadingLevel, BoxSize, BoxTheme } from './box.type';
 
 @Component({
 	selector: 'lu-box',
@@ -57,9 +57,9 @@ export class BoxComponent {
 	readonly bubbleIcon = input<LuccaIcon>();
 
 	/**
-	 * Aria level of the title, exposed as a heading. Defaults to 2: set it when the box title is not an h2 in the page outline.
+	 * Aria level of the title, exposed as a heading. Defaults to 3: set it when the box title is not an h3 in the page outline.
 	 */
-	readonly hx = input(2, { transform: luNumberAttribute<BoxHx> });
+	readonly headingLevel = input(3, { transform: luNumberAttribute<BoxHeadingLevel> });
 
 	/**
 	 * Decorative bubble displayed on the right, based on the CDN image bubble number. Only available with fancy themes.
