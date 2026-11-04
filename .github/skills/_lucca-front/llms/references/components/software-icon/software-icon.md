@@ -40,7 +40,7 @@ import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 	'analytics' \| 'employee-administration' \| 'shared-documents' \| 'faces' \| // Spend Management
 	'business-expenses' \| 'invoices' \| 'payment-methods' \| 'accounting-assistant' \| 'certified-einvoicing-platform' \| // Compensation and Benefits
 	'compensation' \| 'payslip' \| 'benefits' \| 'payroll-assistant' \| // Lucca
-	'cloud-control' \| 'ask-lucca' \| 'ask-salesforce' \| 'calendar' \| 'administration' \| 'client-center' \| 'sandbox' \| 'store' \| 'lucca'` | — | ✅ | — | Modifie l’icône produit. |
+	'cloud-control' \| 'ask-lucca' \| 'ask-salesforce' \| 'calendar' \| 'administration' \| 'client-center' \| 'sandbox' \| 'store' \| 'integrations' \| 'lucca'` | — | ✅ | — | Modifie l’icône produit. |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Marque le produit comme inactif. |
 | `withTooltip` | `withTooltip` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute une info-bulle qui reprend l’alternative textuelle de l’icône. (Ce paramètre est automatiquement activé quand l’i… |
 | `iconAlt` | `iconAlt` | `string` | `''` | — | — | Texte alternatif de l’illustration restitué par les lecteurs d’écran. |
