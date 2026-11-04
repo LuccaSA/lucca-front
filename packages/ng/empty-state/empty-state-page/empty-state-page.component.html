@@ -1,6 +1,6 @@
 <section
 	class="emptyState mod-page"
-	[class.mod-headingStyleH2]="hxStyle() === 2"
+	[class.mod-headingStyleH2]="headingStyleValue() === 2"
 	[attr.role]="heading() ? null : 'presentation'"
 	[style.--components-emptyState-background-color]="contentBackgroundColor()"
 	[style.--components-emptyState-illustration-background-bottom-left]="
@@ -28,7 +28,7 @@
 					</div>
 				}
 				@if (heading()) {
-					<div role="heading" [attr.aria-level]="hx()" class="emptyState-content-heading">{{ heading() }}</div>
+					<div role="heading" [attr.aria-level]="headingLevelValue()" class="emptyState-content-heading">{{ heading() }}</div>
 				}
 				@if (description(); as description) {
 					@if (isStringPortalContent(description)) {
