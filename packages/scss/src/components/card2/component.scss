@@ -30,7 +30,7 @@
 		.card2-illustration {
 			grid-area: illustration;
 			display: flex;
-			padding-block-start: var(--components-card2-illustration-paddingBlockStart);
+			padding-block: var(--components-card2-illustration-paddingBlock);
 			padding-inline-end: var(--pr-t-spacings-150);
 
 			&:empty {

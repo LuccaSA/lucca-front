@@ -4,7 +4,7 @@
 
 @mixin S {
 	--components-card2-heading-font: var(--pr-t-font-heading-4);
-	--components-card2-illustration-paddingBlockStart: calc((var(--pr-t-font-heading-4-lineHeight) + var(--pr-t-spacings-50) + var(--pr-t-font-body-S-lineHeight) - var(--pr-t-spacings-400)) / 2);
+	--components-card2-illustration-paddingBlock: calc((var(--pr-t-font-heading-4-lineHeight) + var(--pr-t-font-body-S-lineHeight) - var(--pr-t-spacings-400)) / 2);
 
 	.bubbleIcon {
 		@include bubbleIcon.S;
@@ -17,7 +17,8 @@
 		'illustration heading' auto
 		'content      content' auto
 		/ auto        1fr;
-	--components-card2-illustration-paddingBlockStart: 0;
+	--components-card2-illustration-paddingBlock: 0;
+	--components-card2-rowGap: var(--pr-t-spacings-50);
 }
 
 @mixin headingAlignedIllustration {
@@ -29,7 +30,7 @@
 }
 
 @mixin contentEmpty {
-	--components-card2-illustration-paddingBlockStart: 0;
+	--components-card2-illustration-paddingBlock: 0;
 	--components-card2-rowGap: 0;
 }
 
