@@ -9,7 +9,7 @@ import { SortableListItemComponent, SortableListComponent } from '@lucca-front/n
 ## Basic Usage
 
 ```html
-<lu-sortable-list> <lu-sortable-list-item label="Label" helperMessage="Helper message" /> <lu-sortable-list-item label="Label" helperMessage="Helper message" /> <lu-sortable-list-item label="Label" helperMessage="Helper message" />
+<lu-sortable-list> <lu-sortable-list-item label="Label" helperMessage="Helper message" (delete)="delete()" /> <lu-sortable-list-item label="Label" helperMessage="Helper message" (delete)="delete()" /> <lu-sortable-list-item label="Label" helperMessage="Helper message" (delete)="delete()" />
 </lu-sortable-list>
 ```
 
@@ -27,7 +27,7 @@ import { SortableListItemComponent, SortableListComponent } from '@lucca-front/n
 | `helperMessage` | `helperMessage` | `string` | — | — | — | Ajoute un texte secondaire à l’élément de liste. |
 | `clickable` | `clickable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes cliquables. |
 | `unclearable` | `unclearable` | `boolean` | `false` | — | `luBooleanAttribute` | Masque la croix de suppression. |
-| `drag` | `drag` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `drag` | `drag` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche la poignée de déplacement de l’élément de liste. À combiner avec la directive `cdkDrag`. |
 | `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie la taille du composant. |
 
 #### Outputs

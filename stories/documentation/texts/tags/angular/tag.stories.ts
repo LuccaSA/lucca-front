@@ -1,12 +1,18 @@
-import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
+import { PaletteAllArgType } from '@/helpers/common-arg-types';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { IconsList } from '@/stories/icons-list';
 import { TAG_SIZE, TagComponent } from '@lucca-front/ng/tag';
-import { Meta, StoryObj } from '@storybook/angular-vite';
+import { provideRouter, withHashLocation } from '@angular/router';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 
 export default {
 	title: 'Documentation/Texts/Tags/Angular/Basic',
 	component: TagComponent,
+	decorators: [
+		applicationConfig({
+			providers: [provideRouter([{ path: '**', children: [] }], withHashLocation())],
+		}),
+	],
 	render: (args, context) => {
 		return {
 			template: `<lu-tag${generateInputs(args, context.argTypes)} />`,
@@ -45,8 +51,15 @@ export const Template: StoryObj<TagComponent> = {
 			name: '↳ hiddenLabel',
 			if: { arg: 'icon', truthy: true },
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
-		link: HiddenArgType,
+		link: {
+			control: {
+				type: 'text',
+			},
+			description: 'Transforme le tag en lien vers la route indiquée (`routerLink`).',
+			table: { category: 'inputs' },
+		},
 		AI: {
 			description: '[v20.3] Applique les couleurs IA.',
 			table: { category: 'inputs' },
@@ -68,5 +81,6 @@ export const Template: StoryObj<TagComponent> = {
 		hiddenLabel: false,
 		withEllipsis: false,
 		AI: false,
+		link: '',
 	},
 };

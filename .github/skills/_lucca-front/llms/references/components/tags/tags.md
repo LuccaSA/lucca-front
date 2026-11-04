@@ -32,7 +32,7 @@ import { TagComponent } from '@lucca-front/ng/tag';
 | `size` | `size` | `'S' \| 'M' \| 'L'` | `'M'` | — | — | Modifie la taille du tag. |
 | `palette` | `palette` | `Palette \| DecorativePalette` | `'none'` | — | — | — |
 | `outlined` | `outlined` | `boolean` | `false` | — | `booleanAttribute` | Applique un style secondaire au tag. |
-| `link` | `link` | `string` | — | — | — | — |
+| `link` | `link` | `string` | — | — | — | Transforme le tag en lien vers la route indiquée (`routerLink`). |
 | `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Ajoute une icône au tag. |
 | `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `booleanAttribute` | Masque le label en le conservant dans le DOM pour les lecteurs d’écran |
 | `withEllipsis` | `withEllipsis` | `boolean` | `false` | — | `booleanAttribute` | [v20.3] Ellipse le texte et ajoute une tooltip lorsque le label est trop long. |

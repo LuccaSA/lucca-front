@@ -9,7 +9,7 @@ import { LuUserPictureComponent } from '@lucca-front/ng/user';
 ## Basic Usage
 
 ```html
-<button class="userPopover_trigger" type="button" [luUserPopover]="user"> <lu-user-picture [user]="user" [displayFormat]="displayFormat" data-testid="lu-user-picture" [class.mod-placeholder]="placeholder" />
+<button class="userPopover_trigger" type="button" [luUserPopover]="user"> <lu-user-picture [user]="user" [displayFormat]="displayFormat" data-testid="lu-user-picture" />
 </button>
 ```
 
@@ -27,10 +27,10 @@ import { LuUserPictureComponent } from '@lucca-front/ng/user';
 | `user` | `user` | `LuUserPictureUserInput` | — | — | — | [Story] Affiche la photo de l’utilisateur ou ses initiales. |
 | `AI` | `AI` | `boolean` | `false` | — | `luBooleanAttribute` | Avatar utilisé pour une réponse faite par IA. |
 | `placeholder` | `placeholder` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un placeholder d’avatar. |
-| `softRounded` | `softRounded` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `size` | `size` | `'XS' \| 'S' \| 'M' \| 'L' \| 'XL' \| 'XXL' \| 'XXXL'` | `'M'` | — | — | — |
+| `softRounded` | `softRounded` | `boolean` | `false` | — | `luBooleanAttribute` | Applique des coins légèrement arrondis à la place de la forme circulaire. |
+| `size` | `size` | `'XS' \| 'S' \| 'M' \| 'L' \| 'XL' \| 'XXL' \| 'XXXL'` | `'M'` | — | — | Taille de l'avatar. |
 | `withAlt` | `withAlt` | `boolean` | `false` | — | `luBooleanAttribute` | Restitue le nom de l’utilisateur aux lecteurs d’écran, quand il n’est pas affiché à côté. |
-| `imageLoadingAttribute` | `imageLoadingAttribute` | `HTMLImageElement['loading']` | `'lazy'` | — | — | — |
+| `imageLoadingAttribute` | `imageLoadingAttribute` | `HTMLImageElement['loading']` | `'lazy'` | — | — | Valeur de l’attribut `loading` de l’image. |
 
 ### Modules dépréciés
 

@@ -29,8 +29,8 @@ import { LuToastsComponent } from '@lucca-front/ng/toast';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `bottom` | `bottom` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `sources` | `sources` | `Array<Observable<LuToastInput>>` | — | — | — | — |
+| `bottom` | `bottom` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche les toasts en bas de l’écran plutôt qu’en haut. |
+| `sources` | `sources` | `Array<Observable<LuToastInput>>` | — | — | — | Flux de toasts à afficher, en complément de ceux ajoutés via `LuToastsService.addToast()`. |
 | `intl` | `intl` | `unknown` | — | — | — | — |
 
 ### Injection tokens

@@ -85,6 +85,8 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 	class="userPopover_trigger"
 	[luUserPopover]="luUserPopover()"
 	[luUserPopoverDisabled]="luUserPopoverDisabled()"
+	[luPopoverOpenDelay]="luPopoverOpenDelay()"
+	[luPopoverCloseDelay]="luPopoverCloseDelay()"
 >
 	Survolez-moi !
 </button>

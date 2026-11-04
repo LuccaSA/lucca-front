@@ -14,8 +14,8 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Désactive le lien d’un des éléments.',
-			table: { category: 'inputs' },
+			description: 'Désactive les liens des sections 2 à 4 via l’attribut HTML `disabled` posé sur les `<a>` (ni le composant ni la directive n’exposent d’input dédié).',
+			table: { category: 'story' },
 		},
 	},
 	decorators: [

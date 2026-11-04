@@ -25,6 +25,7 @@ Component selector : `lu-tag`
 
 ```js
 import { TAG_SIZE, TagComponent } from '@lucca-front/ng/tag';
+import { provideRouter, withHashLocation } from '@angular/router';
 ```
 
 ```html
