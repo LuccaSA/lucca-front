@@ -56,6 +56,8 @@
 			cursor: var(--components-card2-heading-action-cursor);
 			text-decoration: none;
 			outline: none;
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: color;
 
 			&::after {
 				content: '';
