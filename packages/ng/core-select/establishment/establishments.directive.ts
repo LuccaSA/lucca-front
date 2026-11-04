@@ -91,7 +91,11 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	#getLegalUnitOptions(legalUnitId: number, page: number): Observable<T[]> {
 		const params = { ...this.#restrictionParams(), legalUnitId, sort: 'name' };
 		return this.getOptions(params, page).pipe(
-			switchMap((options) => (options.length < this.pageSize ? of(options) : this.#getLegalUnitOptions(legalUnitId, page + 1).pipe(map((nextOptions) => [...options, ...nextOptions])))),
+			switchMap((options) => {
+				// A custom `url` may ignore `legalUnitId`: keep this legal unit only, but page on the raw size
+				const legalUnitOptions = options.filter((option) => option.legalUnitId === legalUnitId);
+				return options.length < this.pageSize ? of(legalUnitOptions) : this.#getLegalUnitOptions(legalUnitId, page + 1).pipe(map((nextOptions) => [...legalUnitOptions, ...nextOptions]));
+			}),
 		);
 	}
 

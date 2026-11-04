@@ -482,6 +482,26 @@ export const Establishment = generateStory({
 	},
 });
 
+export const EstablishmentCustomUrl = generateStory({
+	name: 'Establishment Select with custom url',
+	description: 'Une `url` personnalisée qui ignore `legalUnitId` : « Tout sélectionner » sur une unité légale ne doit cocher que ses établissements.',
+	template: `<lu-multi-select
+	establishments
+	url="/custom/api/establishments"
+	[(ngModel)]="selectedEstablishments"
+/>
+<pr-story-model-display>{{ selectedEstablishments | json }}</pr-story-model-display>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedEstablishment: { mode: 'none' },
+		},
+	},
+});
+
 export const Department = generateStory({
 	name: 'Departement Select',
 	description: 'Pour saisir un département, il suffit d’utiliser la directive `departments`',
