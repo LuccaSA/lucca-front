@@ -1,5 +1,5 @@
 <div class="skeletonCard skeleton is-loading" inert="inert">
-	<h3 class="skeleton-item skeletonCard-heading" [style.--components-skeleton-text-width]="getRandomPercent()"></h3>
+	<h3 class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></h3>
 	@if (descriptionLines() > 0) {
 		@for (line of lines(); track $index) {
 			<span class="skeleton-item pr-u-bodyS" [style.--components-skeleton-text-width]="getRandomPercent(98, 100)"></span>
