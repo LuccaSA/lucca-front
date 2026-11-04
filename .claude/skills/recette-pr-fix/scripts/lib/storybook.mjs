@@ -31,3 +31,6 @@ export const contextOptions = ({ touch = false } = {}) => ({
 	hasTouch: touch,
 	isMobile: touch,
 });
+
+// Finishes running CSS transitions and animations, so that computed styles read their end state.
+export const settle = (page) => page.evaluate(() => document.getAnimations().forEach((animation) => animation.finish()));
