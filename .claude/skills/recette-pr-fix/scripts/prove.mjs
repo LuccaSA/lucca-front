@@ -200,13 +200,15 @@ process.exit(verdict.startsWith('✅') ? 0 : 1);
 function verdictOf() {
 	if (failed.length) return '❌ Could not prove';
 	if (!b) return 'ℹ️  No "before" to compare: the values alone prove nothing';
+	const differs = proofs.image === 'differs' || proofs.changed.length > 0;
+	// A control case must stay unchanged, reproduction included: it is not a replay of the bug
+	if (control)
+		return differs || Boolean(a.reproduced) !== Boolean(b.reproduced) ? '⚠️  The control case changed' : '✅ Unchanged, as expected';
 	if (a.reproduced !== undefined || b.reproduced !== undefined) {
 		if (a.reproduced) return '❌ The bug is still reproduced with the fix';
 		if (!b.reproduced) return '⚠️  The scenario does not reproduce the bug without the fix: it proves nothing';
 		return '✅ Reproduced without the fix, no longer with it';
 	}
-	const differs = proofs.image === 'differs' || proofs.changed.length > 0;
-	if (control) return differs ? '⚠️  The control case changed' : '✅ Unchanged, as expected';
 	return differs
 		? `✅ Differs: ${[proofs.image === 'differs' && 'image', ...proofs.changed].filter(Boolean).join(', ')}`
 		: '⚠️  No observable difference: change the state or observe something else';
