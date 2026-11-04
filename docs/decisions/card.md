@@ -1,5 +1,7 @@
 # card
 
+Cross-cutting decisions: [heading level](heading-level.md).
+
 ## 2026-11-02 — `lu-card` in Angular, `card2` CSS class
 
 Status: accepted
