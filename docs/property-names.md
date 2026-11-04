@@ -29,6 +29,7 @@ Directory of the names shared across components. Before naming a new input, chec
 | `label`        | `string` or `PortalContent` | Changes the text displayed by the `<component>`.                                                                              | `text`, `content`                       |
 | `heading`      | `string` or `PortalContent` | Changes the title displayed by the `<component>`.                                                                             | `title` (native attribute)              |
 | `headingLevel` | number union (`1` … `6`)    | Aria level of the title, exposed as a heading. Defaults to `<n>`: set it when the title is not an `h<n>` in the page outline. | `hx`, `level`, `titleLevel`             |
+| `headingStyle` | number union (`1`, `2`…)    | Applies the visual style of an `h<n>` to the title, regardless of its `headingLevel`.                                         | `hxStyle`, `titleStyle`                 |
 | `hiddenLabel`  | `boolean`                   | Hides the label while keeping it in the DOM for screen readers.                                                               | `showLabel`, `hideLabel`, `labelHidden` |
 | `icon`         | `LuccaIcon`                 | Adds an icon to the `<component>`.                                                                                            | `iconName`, `glyph`                     |
 | `alt`          | `string`                    | Information conveyed by the screen reader.                                                                                    | `ariaLabel`, `altText`                  |
@@ -70,6 +71,7 @@ Directory of the names shared across components. Before naming a new input, chec
 Existing inputs that do not follow this directory yet. Renaming them is a breaking change: deprecate the old name and add the new one.
 
 - `hx` instead of `headingLevel`: `lu-callout`, `lu-empty-state-page`, `lu-empty-state-section`.
+- `hxStyle` instead of `headingStyle`: `lu-empty-state-page`.
 - `level` instead of `headingLevel`: `lu-vertical-navigation`.
 - `headingLevel` typed as a string (`'3'`) instead of a number: `lu-resource-card`.
 - `small` instead of `size="S"`: `lu-sortable-list`, `lu-sortable-list-item`, `lu-segmented-control`, `lu-segmented-control-tabs`, `lu-comment-block`.
