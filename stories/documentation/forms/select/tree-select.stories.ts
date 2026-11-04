@@ -30,7 +30,14 @@ export default {
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideAnimations(), provideHttpClient()],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		treeSelect: {
+			description:
+				'Fonction de regroupement appelée pour chaque option avec la liste de toutes les options : elle retourne l’option parente, ou `null` pour une option racine. À poser sur un `lu-simple-select` ou un `lu-multi-select`.',
+			control: false,
+			table: { category: 'inputs', type: { summary: 'TreeGroupingFn<T>', detail: '(value: T, array: T[]) => T | null' } },
+		},
+	},
 	render: (args, { argTypes }) => {
 		return {
 			props: {

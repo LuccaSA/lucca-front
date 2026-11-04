@@ -74,6 +74,16 @@ class ToastsStory implements OnInit, OnDestroy {
 export default {
 	title: 'Documentation/Overlays/Toasts',
 	argTypes: {
+		bottom: {
+			control: false,
+			description: 'Affiche les toasts en bas de l’écran plutôt qu’en haut.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		sources: {
+			control: false,
+			description: 'Flux de toasts à afficher, en complément de ceux ajoutés via `LuToastsService.addToast()`.',
+			table: { category: 'inputs', type: { summary: 'Observable<LuToastInput>[]' } },
+		},
 		intl: intlArgType(luToastTranslations, 'ILuToastLabel'),
 	},
 	component: ToastsStory,
@@ -101,6 +111,7 @@ class ToastsStory implements OnInit, OnDestroy {
   constructor(private toastsService: LuToastsService) {}
 
   public createToast(type: LuToastType, duration?: number | null): void {
+    const title = 'random-title';
     const message = 'random-message';
     this.toastsService.addToast({
     	type, /* LuToastType peut être : 'Info' | 'Error' | 'Success' | 'Warning' */
@@ -126,5 +137,5 @@ Basic.parameters = {
 			code,
 		},
 	},
-	controls: { include: [] },
+	controls: { include: ['bottom', 'sources', 'intl'] },
 };
