@@ -12,7 +12,6 @@ interface FormLabelBasicStory {
 	counterMax: number;
 	counterStatus: number;
 	counterId: string;
-	labelId: string;
 	error: boolean;
 }
 
@@ -56,16 +55,12 @@ export default {
 		counterId: {
 			name: '↳ counterId',
 			if: { arg: 'counterMax', truthy: true },
-			table: { category: 'inputs' },
-		},
-		labelId: {
-			name: '↳ labelId',
-			if: { arg: 'counterMax', truthy: true },
+			description: 'Id appliqué au compteur, à référencer dans l’<code>aria-describedby</code> du champ.',
 			table: { category: 'inputs' },
 		},
 		for: {
-			description: 'ID du champ de formulaire associé au label.',
-			table: { category: 'inputs' },
+			description: 'Attribut natif du <code>label</code> : ID du champ de formulaire associé.',
+			table: { category: 'attributes (label)' },
 		},
 		tooltip: {
 			description: 'Affiche une icône (?) associée à une info-bulle.',
@@ -95,10 +90,9 @@ function getTemplate(args: FormLabelBasicStory): string {
 	const counterMaxAttr = args.counterMax > 0 ? ` counterMax="${args.counterMax}"` : ``;
 	const counterStatusAttr = args.counterMax > 0 ? ` counterStatus="${args.counterStatus}"` : ``;
 	const counterIdAttr = args.counterMax > 0 ? ` counterId="${args.counterId}"` : ``;
-	const labelIdAttr = args.counterMax > 0 ? ` labelId="${args.labelId}"` : ``;
 	const errorAttr = args.error ? ` error` : ``;
 
-	return `<label luFormLabel for="${args.for}"${tooltipAttr}${tagAttr}${sizeAttr}${counterMaxAttr}${counterStatusAttr}${counterIdAttr}${labelIdAttr}${requiredAttr}${errorAttr}>Label</label>`;
+	return `<label luFormLabel for="${args.for}"${tooltipAttr}${tagAttr}${sizeAttr}${counterMaxAttr}${counterStatusAttr}${counterIdAttr}${requiredAttr}${errorAttr}>Label</label>`;
 }
 
 const Template = (args: FormLabelBasicStory) => ({
@@ -116,7 +110,6 @@ export const Basic: StoryObj<FormLabelBasicStory> = {
 		counterMax: 0,
 		counterStatus: 0,
 		counterId: 'counterID',
-		labelId: 'labelID',
 		error: false,
 	},
 	render: Template,

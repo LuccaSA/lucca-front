@@ -3,7 +3,6 @@
   "extends": "./tsconfig.lib.json",
   "compilerOptions": {
     "declarationMap": false,
-    "strictNullChecks": false,
     "paths": {
       "@lucca/prisme/*": ["../../dist/prisme/*", "../../dist/prisme"]
     }

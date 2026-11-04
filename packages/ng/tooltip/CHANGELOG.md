@@ -1,3 +1,9 @@
+### 22.1.1
+
+#### Fixed
+
+- The tooltip now closes when its trigger is hidden or removed while it is displayed, and no longer opens for a hidden trigger.
+
 ### 22.0.6
 
 #### Fixed

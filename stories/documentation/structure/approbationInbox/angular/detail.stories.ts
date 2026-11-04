@@ -2,6 +2,7 @@ import { generateInputs } from '@/helpers/stories';
 import { ApprobationInboxDetailComponent, ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderComponent } from '@lucca-front/ng/approbation-inbox';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
+import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ButtonComponent } from '@lucca/prisme/button';
@@ -30,6 +31,14 @@ export default {
 		delegatedBy: {
 			description: 'Nom de la personne à l’origine de la délégation si elle a lieu.',
 			table: { category: 'inputs (approbation-inbox-detail-header)' },
+		},
+		overdue: {
+			description: 'Affiche un badge de statut « En retard » à droite du titre. Ignoré si du contenu est projeté via `approbationInboxDetailTitleTrailing`.',
+			table: { category: 'inputs (approbation-inbox-detail-header)' },
+		},
+		titleTrailing: {
+			description: 'Exemple de contenu personnalisé projeté à droite du titre via `approbationInboxDetailTitleTrailing`. Remplace le badge `overdue`.',
+			table: { category: 'story' },
 		},
 		moreActions: {
 			description: 'Affiche un bouton d’actions tertaires sous forme de menu déroulant.',
@@ -65,6 +74,7 @@ export default {
 				ListingComponent,
 				ListingItemComponent,
 				CalloutComponent,
+				StatusBadgeComponent,
 				LuUserPictureComponent,
 				ButtonComponent,
 				IconComponent,
@@ -75,7 +85,7 @@ export default {
 			],
 		}),
 	],
-	render: ({ insideDialog, headerContent, callout, calloutLabel, blockLabel, blockCount, moreActions, illustration, ...args }, { argTypes }) => {
+	render: ({ insideDialog, headerContent, titleTrailing, callout, calloutLabel, blockLabel, blockCount, moreActions, illustration, ...args }, { argTypes }) => {
 		const insideDialogParam = insideDialog ? ` insideDialog` : ``;
 		const contentTpl = `
 	<lu-approbation-inbox-detail-main-block label="${blockLabel}">
@@ -93,6 +103,10 @@ export default {
 			<lu-listing-item>Lorem ipsum</lu-listing-item>
 			<lu-listing-item>Dolor sit amet</lu-listing-item>
 		</lu-listing>`
+			: ``;
+		const titleTrailingTpl = titleTrailing
+			? `
+		<lu-status-badge approbationInboxDetailTitleTrailing label="Urgent" palette="critical" />`
 			: ``;
 		const headerIllustrationTpl = illustration
 			? `
@@ -114,7 +128,7 @@ export default {
 		const headerTpl =
 			blockCount != 0
 				? `
-	<lu-approbation-inbox-detail-header approbationInboxDetailHeader${generateInputs(args, argTypes)}>${headerIllustrationTpl}${headerContentTpl}
+	<lu-approbation-inbox-detail-header approbationInboxDetailHeader${generateInputs(args, argTypes)}>${headerIllustrationTpl}${titleTrailingTpl}${headerContentTpl}
 		<ng-container approbationInboxDetailActions>
 			<button luButton type="button">Approve</button>
 			<button luButton type="button">Reject</button>${moreActionsTpl}
@@ -149,6 +163,7 @@ export const Basic: StoryObj<
 	ApprobationInboxHeaderComponent & {
 		insideDialog: boolean;
 		headerContent: boolean;
+		titleTrailing: boolean;
 		moreActions: boolean;
 		callout: boolean;
 		calloutLabel: string;
@@ -163,6 +178,8 @@ export const Basic: StoryObj<
 		illustration: false,
 		headerContent: false,
 		delegatedBy: '',
+		overdue: false,
+		titleTrailing: false,
 		moreActions: false,
 		callout: false,
 		calloutLabel: 'Callout feedback description. ',

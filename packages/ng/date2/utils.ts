@@ -121,3 +121,12 @@ export function transformDateRangeToDateRangeInput(value: OpenDateRange): OpenDa
 		end: value.end ? transformDateToDateISO(value.end) : null,
 	};
 }
+
+/**
+ * Whether the newly focused element still belongs to a date field: its host or its calendar.
+ * The whole overlay pane of the calendar is considered, to include the focus trap anchors around it.
+ */
+export function isFocusWithinField(focusedElement: Node, host: HTMLElement, calendar: HTMLElement | undefined): boolean {
+	const calendarArea = calendar?.closest('.cdk-overlay-pane') ?? calendar;
+	return host.contains(focusedElement) || !!calendarArea?.contains(focusedElement);
+}

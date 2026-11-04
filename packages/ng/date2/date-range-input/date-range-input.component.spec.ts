@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -539,6 +539,125 @@ describe('DateRangeInputComponent', () => {
 
 			// Assert
 			expect(formControl.value).toEqual({ end: new Date(2025, 5, 20), scope: 'day' });
+		});
+	});
+
+	describe('touched state', () => {
+		// The calendar is rendered in the overlay container, outside of the fixture
+		function getDayButton(): HTMLButtonElement {
+			return document.querySelector('.calendar-table-body-row-cell-action:not([aria-disabled])') as HTMLButtonElement;
+		}
+
+		it('should mark the control as touched when the focus leaves the inputs', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null, Validators.required);
+			const fixture = createFormControlHost(formControl);
+			const startInput = getInput(fixture, 'start');
+
+			// Act
+			startInput.focus();
+			startInput.blur();
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.touched).toBe(true);
+		});
+
+		it('should not mark the control as touched when the focus moves from the start input to the end input', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null, Validators.required);
+			const fixture = createFormControlHost(formControl);
+
+			// Act
+			getInput(fixture, 'start').focus();
+			getInput(fixture, 'end').focus();
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.touched).toBe(false);
+		});
+
+		it('should not mark the control as touched when the focus moves from the input to the calendar', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null, Validators.required);
+			const fixture = createFormControlHost(formControl);
+			const startInput = getInput(fixture, 'start');
+			startInput.focus();
+			startInput.click();
+			fixture.detectChanges();
+
+			// Act
+			getDayButton().focus();
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.touched).toBe(false);
+		});
+
+		describe('while the calendar is open', () => {
+			let outsideField: HTMLInputElement;
+
+			beforeEach(() => {
+				outsideField = document.createElement('input');
+				document.body.appendChild(outsideField);
+			});
+
+			afterEach(() => outsideField.remove());
+
+			function openCalendar(fixture: ComponentFixture<unknown>): HTMLInputElement {
+				const startInput = getInput(fixture, 'start');
+				startInput.focus();
+				startInput.click();
+				fixture.detectChanges();
+				return startInput;
+			}
+
+			it('should mark the control as touched when the focus leaves the inputs with the keyboard', () => {
+				// Arrange
+				const formControl = new FormControl<DateRange | null>(null, Validators.required);
+				const fixture = createFormControlHost(formControl);
+				const startInput = openCalendar(fixture);
+
+				// Act
+				startInput.dispatchEvent(new FocusEvent('blur', { relatedTarget: outsideField }));
+				fixture.detectChanges();
+
+				// Assert
+				expect(formControl.touched).toBe(true);
+			});
+
+			it('should not mark the control as touched when the newly focused element is unknown', () => {
+				// Arrange
+				const formControl = new FormControl<DateRange | null>(null, Validators.required);
+				const fixture = createFormControlHost(formControl);
+				const startInput = openCalendar(fixture);
+
+				// Act
+				// Safari does not focus clicked buttons, so clicking a day blurs the input without related target
+				startInput.dispatchEvent(new FocusEvent('blur', { relatedTarget: null }));
+				fixture.detectChanges();
+
+				// Assert
+				expect(formControl.touched).toBe(false);
+			});
+
+			it('should mark the control as touched when the calendar closes, even though the focus is given back to an input', () => {
+				// Arrange
+				const formControl = new FormControl<DateRange | null>(null, Validators.required);
+				const fixture = createFormControlHost(formControl);
+				const startInput = openCalendar(fixture);
+				// An outside click on an element that does not take the focus blurs the input without related target
+				startInput.dispatchEvent(new FocusEvent('blur', { relatedTarget: null }));
+				fixture.detectChanges();
+
+				// Act
+				fixture.debugElement.query(By.directive(PopoverDirective)).injector.get(PopoverDirective).close();
+				fixture.detectChanges();
+
+				// Assert
+				expect(startInput).toBe(document.activeElement);
+				expect(formControl.touched).toBe(true);
+			});
 		});
 	});
 

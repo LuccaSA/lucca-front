@@ -1,3 +1,9 @@
+### 22.1.1
+
+#### Added
+
+- `S` value for the `size` input (`.listing.mod-S`) for smaller text, numbers and icons. Nested listings follow the size of their parent.
+
 ### 22.0.0
 
 #### Removed

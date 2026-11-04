@@ -21,7 +21,7 @@
 	.newBadge,
 	.numericBadge,
 	.plgPush,
-	.priorityLevels,
+	.priorityLevel,
 	.readMore,
 	.statusBadge,
 	.tag,
@@ -102,7 +102,6 @@
 	.filterBar,
 	.grid,
 	.highlightData,
-	.highlightSection,
 	.mobileHeader,
 	.pageHeader,
 	.resourceCard,
@@ -162,7 +161,7 @@
 	lu-new-badge,
 	lu-numeric-badge,
 	lu-plg-push .plgPush,
-	lu-priority-levels,
+	lu-priority-level,
 	lu-read-more,
 	lu-status-badge,
 	lu-tag .tag,
@@ -301,6 +300,7 @@
 	.layout,
 	.header,
 	.filterBarDeprecated,
+	.highlightSection,
 	lu-skeleton-table {
 		outline: 2px solid red;
 		outline-offset: 3px;

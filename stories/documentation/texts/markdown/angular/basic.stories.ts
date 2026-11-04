@@ -1,6 +1,6 @@
 import { MarkdownComponent } from '@lucca-front/ng/markdown';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory } from '@/helpers/stories';
+import { createTestStory, generateInputs } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
 import { expect, within } from 'storybook/test';
 
@@ -56,9 +56,9 @@ export const Basic: StoryObj<MarkdownBasicStory> = {
 		content: defaultContent,
 		headingLevel: 1,
 	},
-	render: (args) => ({
-		props: args,
-		template: `<lu-markdown [content]="content" [headingLevel]="headingLevel" />`,
+	render: ({ content, ...inputs }, { argTypes }) => ({
+		props: { content },
+		template: `<lu-markdown [content]="content"${generateInputs(inputs, argTypes)} />`,
 	}),
 };
 

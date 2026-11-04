@@ -15,9 +15,9 @@
 		&.mod-sidepanel {
 			position: fixed !important;
 			inset-block: 0;
-			inset-inline-end: 0;
+			inset-inline-end: var(--commons-pushPanel-inlineSize);
 			inline-size: var(--components-sidepanel-M);
-			max-inline-size: 100%;
+			max-inline-size: calc(100% - var(--commons-pushPanel-inlineSize));
 			max-block-size: 100vb;
 			border-radius: 0;
 			animation-name: sidepanel;

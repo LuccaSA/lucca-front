@@ -8,6 +8,7 @@ export const LU_APPROBATION_INBOX_DETAIL_HEADER_TRANSLATIONS = new InjectionToke
 
 export interface LuApprobationInboxDetailHeaderTranslations {
 	delegation: string;
+	overdue: string;
 }
 
 export const luApprobationInboxDetailHeaderTranslations: LuTranslation<LuApprobationInboxDetailHeaderTranslations> = Translations;

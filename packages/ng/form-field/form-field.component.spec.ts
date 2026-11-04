@@ -1,8 +1,8 @@
-import { ApplicationRef, ChangeDetectionStrategy, Component, computed, input, viewChild } from '@angular/core';
+import { ApplicationRef, ChangeDetectionStrategy, Component, computed, createComponent, input, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormFieldIdDirective, TextInputComponent } from '@lucca-front/ng/forms';
-import { By } from '@angular/platform-browser';
+import { By, createApplication } from '@angular/platform-browser';
 import { InlineMessageState } from '@lucca-front/ng/inline-message';
 import { firstValueFrom } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -88,6 +88,19 @@ class FormFieldAriaTestComponent {
 class FormFieldSwapTestComponent {
 	readonly useButton = input(false);
 }
+
+@Component({
+	selector: 'lu-form-field-multiple-inputs-test',
+	imports: [FormFieldComponent, InputDirective],
+	template: `
+		<lu-form-field label="Period">
+			<input luInput type="text" />
+			<input luInput type="text" />
+		</lu-form-field>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FormFieldMultipleInputsTestComponent {}
 
 describe('FormFieldComponent', () => {
 	let fixture: ComponentFixture<FormFieldComponentTestComponent>;
@@ -365,6 +378,24 @@ describe('FormFieldComponent', () => {
 			const ids = current?.getAttribute('aria-labelledby')?.split(' ') ?? [];
 			expect(ids).not.toHaveLength(0);
 			expect(ids.every((id) => document.getElementById(id) !== null)).toBe(true);
+		});
+	});
+
+	describe('when the application is destroyed', () => {
+		// Mirrors Storybook re-bootstrapping a story on each control change: the application injector is
+		// destroyed before the views, so the remaining inputs must not schedule any work on it.
+		it('should not throw with several projected luInput', async () => {
+			// Arrange — a dedicated application, so that destroying it leaves the TestBed one untouched
+			const appRef = await createApplication();
+			const componentRef = createComponent(FormFieldMultipleInputsTestComponent, {
+				environmentInjector: appRef.injector,
+				hostElement: document.createElement('div'),
+			});
+			appRef.attachView(componentRef.hostView);
+			appRef.tick();
+
+			// Act & Assert
+			expect(() => appRef.destroy()).not.toThrow();
 		});
 	});
 });

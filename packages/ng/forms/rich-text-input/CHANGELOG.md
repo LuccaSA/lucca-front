@@ -1,3 +1,9 @@
+### 22.1.1
+
+#### Fixed
+
+- Enabling the form control with the headings plugin no longer turns the block holding the selection into a paragraph.
+
 ### 22.0.1
 
 #### Fixed

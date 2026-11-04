@@ -19,7 +19,10 @@
 	--components-listing-item-content-columnGap: 0;
 
 	--components-listing-item-number-display: none;
+	--components-listing-item-number-font: var(--pr-t-font-body-S);
+	--components-listing-item-number-size: var(--pr-t-spacings-250);
 	--components-listing-item-counterIncrement: listing;
 
 	--components-listing-item-icon-backgroundColor: transparent;
+	--components-listing-item-icon-size: var(--pr-t-spacings-250);
 }

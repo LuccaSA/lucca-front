@@ -45,34 +45,33 @@ export default {
 		}),
 	],
 	argTypes: {
-		clearable: {
-			description: 'Affiche une croix pour réinitialiser le filtre si celui-ci est renseigné.',
-			table: { category: 'inputs' },
-		},
 		label: {
 			description: 'Modifie le label du filtre.',
 			table: { category: 'inputs' },
 		},
+		placeholder: {
+			description: 'Remplace le texte affiché lorsque le filtre est vide.',
+			table: { category: 'inputs' },
+		},
+		icon: {
+			description: 'Remplace l’icône affichée à droite du filtre.',
+			table: { category: 'inputs' },
+		},
+		clearable: {
+			description: 'Affiche une croix pour réinitialiser le filtre si celui-ci est renseigné.',
+			table: { category: 'inputs (select, date)' },
+		},
 		filterPillLabelPlural: {
 			description:
-				'Dans le cas d’un multi select, le label affiché lorsque plusieurs éléments sont sélectionnés est fourni par l’input `filterPillLabelPluralFn`, une fonction recevant le nombre d’éléments sélectionnés. Ce contrôle alimente le nom utilisé par cette fonction.',
-			table: { category: 'inputs' },
-		},
-		optional: {
-			description:
-				'Rend disponible le filtre via le bouton d’ajout de filtre. Celui-ci est désactivé par défaut. Lorsque qu’un filtre est optionnel, celui-ci doit obligatoirement porter un attribut `name`. (Voir Filter bar)',
-			table: { category: 'inputs' },
-		},
-		name: {
-			description: 'Dans le cas d’un filtre optionnel, permet de faire le lien entre la liste de filtres disponible et l’affichage du filtre.',
-			table: { category: 'inputs' },
+				'[Story] Dans le cas d’un multi select, le label affiché lorsque plusieurs éléments sont sélectionnés est fourni par l’input `filterPillLabelPluralFn`, une fonction recevant le nombre d’éléments sélectionnés. Ce contrôle alimente le nom utilisé par cette fonction.',
+			table: { category: 'story' },
 		},
 		disabled: {
 			description: 'Désactive le filtre « Légume (multi) », renseigné avec une valeur : un filtre désactivé ne peut pas être vidé.',
 			control: {
 				type: 'boolean',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs (multi-select)' },
 		},
 		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
 	},
@@ -81,6 +80,8 @@ export default {
 		const disabledPill = args['disabled'] ? 'disabled' : '';
 		const label = args['label'];
 		const filterPillLabelPlural = args['filterPillLabelPlural'];
+		const placeholder = args['placeholder'] ? ` placeholder="${args['placeholder']}"` : '';
+		const icon = args['icon'] ? ` icon="${args['icon']}"` : '';
 		return {
 			props: {
 				simpleSelect: null,
@@ -104,7 +105,7 @@ export default {
 			template: `<lu-filter-pill label="Inclure les collaborateurs partis">
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
-<lu-filter-pill label="${label} (multi)" name="legume">
+<lu-filter-pill label="${label} (multi)" name="legume"${placeholder}${icon}>
 	<lu-multi-select [ngModel]="${args['disabled'] ? 'disabledLegumes' : '[]'}" ${clearableProperty}[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" [filterPillLabelPluralFn]="legumesPluralFn" ${disabledPill} />
 </lu-filter-pill>
 <lu-filter-pill label="Legume (simple)" name="department">
@@ -123,7 +124,7 @@ export default {
 	<lu-date-input [ngModel]="null" ${clearableProperty}/>
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input [ngModel]="null" ${clearableProperty}[(ngModel)]="dateRange" />
+	<lu-date-range-input ${clearableProperty}[(ngModel)]="dateRange" />
 </lu-filter-pill>`,
 			styles: [
 				`

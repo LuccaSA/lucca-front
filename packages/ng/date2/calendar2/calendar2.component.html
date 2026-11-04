@@ -41,7 +41,6 @@
 											type="button"
 											[attr.aria-disabled]="day.disabled ? 'true' : null"
 											(click)="day.disabled ? null : onCellClicked(day.date)"
-											(keydown.space)="day.disabled ? null : onCellClicked(day.date)"
 											(focus)="day.isOverflow ? null : dateHovered.set(day.date)"
 											(blur)="day.isOverflow ? null : dateHovered.set(null)"
 											[luTooltip]="day.label ?? ''"
@@ -134,7 +133,6 @@
 									[luCalendar2Date]="weekHeader.date"
 									luCalendar2Mode="week"
 									[attr.aria-disabled]="weekHeader.disabled ? 'true' : null"
-									(keydown.space)="!weekHeader.disabled ? onCellClicked(weekHeader.date) : null"
 									(focus)="dateHovered.set(weekHeader.date)"
 									(blur)="dateHovered.set(null)"
 								>
@@ -157,7 +155,6 @@
 											type="button"
 											[attr.aria-disabled]="day.disabled ? 'true' : null"
 											(click)="day.disabled ? null : onCellClicked(day.date)"
-											(keydown.space)="day.disabled ? null : onCellClicked(day.date)"
 											(focus)="day.isOverflow ? null : dateHovered.set(day.date)"
 											(blur)="day.isOverflow ? null : dateHovered.set(null)"
 											[luTooltip]="day.label ?? ''"
@@ -241,7 +238,6 @@
 										(focus)="dateHovered.set(month.date)"
 										(blur)="dateHovered.set(null)"
 										(click)="onCellClicked(month.date)"
-										(keydown.space)="onCellClicked(month.date)"
 										luCalendar2Mode="month"
 									>
 										<span class="pr-u-mask">{{ month.long }}</span>
@@ -283,7 +279,6 @@
 										(focus)="dateHovered.set(year.date)"
 										(blur)="dateHovered.set(null)"
 										(click)="onCellClicked(year.date)"
-										(keydown.space)="onCellClicked(year.date)"
 									>
 										{{ year.name }}
 										@if (year.isCurrent) {

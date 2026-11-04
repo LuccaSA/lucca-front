@@ -1,3 +1,9 @@
+### 22.1.1
+
+#### Fixed
+
+- No more `NG0205: Injector has already been destroyed` error when the application is destroyed with a form field holding several inputs.
+
 ### 22.1.0
 
 #### Added

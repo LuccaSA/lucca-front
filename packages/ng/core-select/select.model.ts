@@ -60,7 +60,7 @@ export type LuOptionComparer<T> = (a: T, b: T) => boolean;
 export type CoreSelectAddOptionStrategy = 'never' | 'always' | 'if-empty-clue' | 'if-not-empty-clue';
 
 /**
- * Feature flag gating the responsive dialog system as a whole: below the `S` breakpoint the select
+ * Feature flag gating the responsive dialog system as a whole: below the `XS` breakpoint the select
  * trigger becomes a button and its panel opens as a bottom sheet instead of a popover anchored to the
  * field.
  *

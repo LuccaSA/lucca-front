@@ -16,8 +16,9 @@ export default {
 			providers: [provideAnimations(), provideHttpClient()],
 		}),
 	],
-	render: ({ user, sizes, placeholder, displayFormat, AI }) => {
+	render: ({ user, sizes, placeholder, displayFormat, AI, withAlt }) => {
 		const argAI = AI ? ` AI` : ``;
+		const argWithAlt = withAlt ? ` withAlt` : ``;
 		const argSize = sizes ? ` size="${sizes}"` : ``;
 		return {
 			template: `<button class="userPopover_trigger" type="button" [luUserPopover]="user">
@@ -26,7 +27,7 @@ export default {
 		[displayFormat]="displayFormat"
 		data-testid="lu-user-picture"
 		[class.mod-placeholder]="placeholder"
-		${argSize}${argAI}/>
+		${argSize}${argAI}${argWithAlt}/>
 </button>`,
 			props: {
 				user,
@@ -34,6 +35,7 @@ export default {
 				placeholder,
 				displayFormat,
 				AI,
+				withAlt,
 			},
 		};
 	},
@@ -74,15 +76,23 @@ export default {
 			},
 			table: { category: 'inputs' },
 		},
+		withAlt: {
+			description: 'Restitue le nom de l’utilisateur aux lecteurs d’écran, quand il n’est pas affiché à côté.',
+			control: {
+				type: 'boolean',
+			},
+			table: { category: 'inputs' },
+		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuUserPictureComponent & { sizes: string; placeholder: boolean; AI: boolean }> = {
+export const Basic: StoryObj<LuUserPictureComponent & { sizes: string; placeholder: boolean; AI: boolean; withAlt: boolean }> = {
 	args: {
 		user: finn,
 		sizes: '',
 		placeholder: false,
 		displayFormat: LuDisplayInitials.firstlast,
 		AI: false,
+		withAlt: false,
 	},
 };

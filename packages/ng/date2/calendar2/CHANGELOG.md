@@ -1,3 +1,9 @@
+### 22.1.1
+
+#### Fixed
+
+- Selecting a date with the Space key no longer selects it twice.
+
 ### 22.1.0
 
 #### Changed

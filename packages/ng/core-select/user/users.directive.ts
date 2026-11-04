@@ -63,8 +63,10 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	readonly filters = input<Record<string, string | number | boolean>>({});
 	readonly url = input<string | null>(null);
 	readonly orderBy = input<string | null>(null);
+	/** @deprecated use `uniqueOperationIds` instead */
 	readonly operationIds = input<readonly number[] | null>(null);
 	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	/** @deprecated use `uniqueOperationIds` instead */
 	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
 	readonly enableFormerEmployees = input(false, { transform: luBooleanAttribute });
 	readonly displayMeOption = input(true, { transform: luBooleanAttribute });

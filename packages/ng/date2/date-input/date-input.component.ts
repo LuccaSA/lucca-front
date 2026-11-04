@@ -31,7 +31,7 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { humanizeDate } from '../date-format';
-import { comparePeriods, startOfPeriod, transformDateInputToDate, transformDateToDateISO } from '../utils';
+import { comparePeriods, isFocusWithinField, startOfPeriod, transformDateInputToDate, transformDateToDateISO } from '../utils';
 
 export type DateInputValidatorErrorType = {
 	min: true;
@@ -72,6 +72,7 @@ export type DateInputValidatorErrorType = {
 export class DateInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
 	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	#injector = inject(Injector);
+	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 	ngControl: NgControl; // Initialized in ngOnInit
 	weekParsingRegexp = /(\d{1,2})\D*(\d{4})?/;
 
@@ -179,6 +180,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	readonly previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
 
 	readonly nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
+
+	readonly calendarDialog = viewChild<ElementRef<HTMLElement>>('calendarDialog');
 
 	isFilterPill = false;
 
@@ -449,9 +452,28 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		this.filterPillPopoverCloseFn?.();
 	}
 
-	inputBlurred(): void {
-		this.onTouched?.();
+	inputBlurred(event: FocusEvent): void {
 		this.inputFocused.set(false);
 		this.userTextInput.set('ɵ');
+		this.markAsTouchedIfFocusLeft(event);
+	}
+
+	popoverClosed(): void {
+		this.panelOpen.set(false);
+		this.panelClosed.emit();
+		// Closing the calendar ends the interaction with it. Deferred, as picking a date closes the calendar before the value is emitted
+		afterNextRender(() => this.onTouched?.(), { injector: this.#injector });
+	}
+
+	/**
+	 * The control is touched once the focus leaves both the input and the calendar.
+	 * When the newly focused element is unknown (e.g. Safari does not focus clicked buttons) and the calendar is open,
+	 * the calendar closing takes over.
+	 */
+	markAsTouchedIfFocusLeft(event: FocusEvent): void {
+		const focusedElement = event.relatedTarget;
+		if (focusedElement instanceof Node ? !isFocusWithinField(focusedElement, this.#elementRef.nativeElement, this.calendarDialog()?.nativeElement) : !this.panelOpen()) {
+			this.onTouched?.();
+		}
 	}
 }

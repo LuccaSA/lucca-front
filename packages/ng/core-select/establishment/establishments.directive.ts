@@ -32,8 +32,10 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 
 	readonly url = input<string>('/organization/structure/api/establishments');
 	readonly filters = input<Record<string, string | number | boolean> | null>(null);
+	/** @deprecated use `uniqueOperationIds` instead */
 	readonly operationIds = input<readonly number[] | null>(null);
 	readonly uniqueOperationIds = input<readonly number[] | null>(null);
+	/** @deprecated use `uniqueOperationIds` instead */
 	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
 	readonly searchDelimiter = input<string>(' ');
 

@@ -1,3 +1,9 @@
+### 22.1.1
+
+#### Added
+
+- `avatarPlaceholder` input on `lu-activity-feed-step` to display a placeholder avatar instead of the `user` picture (e.g. an anonymous author).
+
 ### 22.1.0
 
 #### Added

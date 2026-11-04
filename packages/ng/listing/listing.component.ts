@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEn
 import { LuccaIcon } from '@lucca-front/icons';
 import { luBooleanAttribute, luNumberAttribute, Palette } from '@lucca-front/ng/core';
 import { LU_LISTING_INSTANCE } from './listing.token';
+import { ListingSize } from './listing.type';
 
 @Component({
 	selector: 'lu-listing',
@@ -69,6 +70,11 @@ export class ListingComponent {
 	 * Reversed the listing
 	 */
 	readonly reversed = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Modifies the size of the listing
+	 */
+	readonly size = input<ListingSize | null>(null);
 
 	readonly paletteClass = computed(() => ({
 		[`palette-${this.palette()}`]: !!this.palette(),

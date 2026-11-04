@@ -26,6 +26,10 @@
 	position: absolute;
 	z-index: 1000;
 
+	&.cdk-overlay-popover {
+		inline-size: calc(100% - var(--commons-pushPanel-inlineSize)) !important;
+	}
+
 	&.mod-stacked {
 		@for $i from 1 through 3 {
 			@include stacked($i);

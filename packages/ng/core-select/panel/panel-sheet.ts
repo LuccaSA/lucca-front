@@ -6,7 +6,7 @@ import { take } from 'rxjs';
 /**
  * Opens a select panel as a bottom sheet.
  *
- * Below the `S` breakpoint the panel stops being a popover anchored to the field and becomes a modal
+ * Below the `XS` breakpoint the panel stops being a popover anchored to the field and becomes a modal
  * surface pinned to the bottom of the viewport. That surface already exists as the dialog's `sheet`
  * mode — backdrop, blocked page scroll, focus trap, focus restoration and close button all come with
  * it — so the panel is opened as a dialog instead of as a bespoke overlay.

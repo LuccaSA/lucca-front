@@ -1,7 +1,16 @@
 @if (hasPicture()) {
-	<img class="avatar-picture" [src]="pictureHref()" alt="" (error)="pictureError()" [loading]="imageLoadingAttribute()" />
+	<img
+		class="avatar-picture"
+		[src]="pictureHref()"
+		[alt]="withAlt() ? fullName() : ''"
+		(error)="pictureError()"
+		[loading]="imageLoadingAttribute()"
+	/>
 } @else {
 	<div class="avatar-picture" [ngStyle]="AI() ? null : style()">
-		<span class="avatar-picture-initials" translate="no">{{ initials() }}</span>
+		<span class="avatar-picture-initials" translate="no" aria-hidden="true">{{ initials() }}</span>
+		@if (withAlt()) {
+			<span class="pr-u-mask">{{ fullName() }}</span>
+		}
 	</div>
 }

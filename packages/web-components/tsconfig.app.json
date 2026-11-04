@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc/web-components",
+    "skipLibCheck": true
+  },
+  "files": ["./src/main.ts"],
+  "angularCompilerOptions": {
+    // Same as the ng library build: these checks report on library code the bundle only consumes
+    "extendedDiagnostics": {
+      "checks": {
+        "controlFlowPreventingContentProjection": "suppress",
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    }
+  }
+}

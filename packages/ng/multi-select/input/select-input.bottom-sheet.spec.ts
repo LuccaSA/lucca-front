@@ -20,18 +20,18 @@ const options: Entity[] = [
 ];
 
 /**
- * The select observes `injectMediaMinBreakpoint('S', true)`, which matches while the viewport is *below*
- * the S breakpoint, so this single subject drives bottom sheet mode.
+ * The select observes `injectMediaMinBreakpoint('XS', true)`, which matches while the viewport is *below*
+ * the XS breakpoint, so this single subject drives bottom sheet mode.
  */
 class FakeBreakpointObserver {
-	readonly belowSmallBreakpoint = new BehaviorSubject(false);
+	readonly belowExtraSmallBreakpoint = new BehaviorSubject(false);
 
 	observe(): Observable<BreakpointState> {
-		return this.belowSmallBreakpoint.pipe(map((matches) => ({ matches, breakpoints: {} })));
+		return this.belowExtraSmallBreakpoint.pipe(map((matches) => ({ matches, breakpoints: {} })));
 	}
 
 	isMatched(): boolean {
-		return this.belowSmallBreakpoint.value;
+		return this.belowExtraSmallBreakpoint.value;
 	}
 }
 
@@ -141,8 +141,8 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 		});
 	});
 
-	function createSelect(belowSmallBreakpoint: boolean): { fixture: ComponentFixture<HostComponent>; select: LuMultiSelectInputComponent<Entity> } {
-		breakpointObserver.belowSmallBreakpoint.next(belowSmallBreakpoint);
+	function createSelect(belowExtraSmallBreakpoint: boolean): { fixture: ComponentFixture<HostComponent>; select: LuMultiSelectInputComponent<Entity> } {
+		breakpointObserver.belowExtraSmallBreakpoint.next(belowExtraSmallBreakpoint);
 		const fixture = TestBed.createComponent(HostComponent);
 		fixture.detectChanges();
 		const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Entity>;
@@ -150,7 +150,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 	}
 
 	describe('overlay', () => {
-		it('should open the panel as a dialog in sheet mode below the S breakpoint', () => {
+		it('should open the panel as a dialog in sheet mode below the XS breakpoint', () => {
 			// Arrange
 			const { select } = createSelect(true);
 
@@ -183,7 +183,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			expect(document.querySelector('.cdk-overlay-pane')).not.toHaveClass('mod-sheet');
 		});
 
-		it('should keep anchoring the panel to the field above the S breakpoint', () => {
+		it('should keep anchoring the panel to the field above the XS breakpoint', () => {
 			// Arrange
 			const { select } = createSelect(false);
 
@@ -203,28 +203,28 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 		 * surface it renders (it was never actually attached as a CDK dialog), which used to crash with
 		 * `NG0201: No provider found for LuDialogRef`. Instead, the panel closes outright.
 		 */
-		it('should close, rather than crash, when going from the desktop overlay to below the S breakpoint', () => {
+		it('should close, rather than crash, when going from the desktop overlay to below the XS breakpoint', () => {
 			// Arrange
 			const { fixture, select } = createSelect(false);
 			select.openPanel();
 			expect(select.isPanelOpen).toBe(true);
 
 			// Act
-			breakpointObserver.belowSmallBreakpoint.next(true);
+			breakpointObserver.belowExtraSmallBreakpoint.next(true);
 			expect(() => fixture.detectChanges()).not.toThrow();
 
 			// Assert
 			expect(select.isPanelOpen).toBe(false);
 		});
 
-		it('should close, rather than crash, when going from the sheet to above the S breakpoint', () => {
+		it('should close, rather than crash, when going from the sheet to above the XS breakpoint', () => {
 			// Arrange
 			const { fixture, select } = createSelect(true);
 			select.openPanel();
 			expect(select.isPanelOpen).toBe(true);
 
 			// Act
-			breakpointObserver.belowSmallBreakpoint.next(false);
+			breakpointObserver.belowExtraSmallBreakpoint.next(false);
 			expect(() => fixture.detectChanges()).not.toThrow();
 
 			// Assert
@@ -238,10 +238,10 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			expect(select.panelTitle()).toBe('Options');
 
 			// Act — round trip through desktop, which auto-closes the panel and rebuilds the trigger
-			// (button below the S breakpoint, input above it) each way
-			breakpointObserver.belowSmallBreakpoint.next(false);
+			// (button below the XS breakpoint, input above it) each way
+			breakpointObserver.belowExtraSmallBreakpoint.next(false);
 			fixture.detectChanges();
-			breakpointObserver.belowSmallBreakpoint.next(true);
+			breakpointObserver.belowExtraSmallBreakpoint.next(true);
 			fixture.detectChanges();
 			select.openPanel();
 			TestBed.inject(ApplicationRef).tick();
@@ -256,7 +256,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			return fixture.nativeElement.querySelector('.multipleSelect-displayer-search');
 		}
 
-		it('should be a button below the S breakpoint, so tapping it on iOS does not raise the keyboard', () => {
+		it('should be a button below the XS breakpoint, so tapping it on iOS does not raise the keyboard', () => {
 			// Act
 			const { fixture } = createSelect(true);
 
@@ -266,7 +266,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			expect(trigger(fixture)).toHaveAttribute('type', 'button');
 		});
 
-		it('should stay a searchable text input above the S breakpoint', () => {
+		it('should stay a searchable text input above the XS breakpoint', () => {
 			// Act
 			const { fixture } = createSelect(false);
 
@@ -310,10 +310,10 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 
 		// The select-all displayer is a fourth displayer variant, easy to leave behind when the three
 		// others swap their input for a button: it kept rendering an `<input>`, whose placeholder the
-		// directive nulls out below the S breakpoint, so the field showed nothing at all.
+		// directive nulls out below the XS breakpoint, so the field showed nothing at all.
 		it('should render the placeholder as text on the select-all displayer too', () => {
 			// Arrange
-			breakpointObserver.belowSmallBreakpoint.next(true);
+			breakpointObserver.belowExtraSmallBreakpoint.next(true);
 
 			// Act
 			const fixture = TestBed.createComponent(SelectAllHostComponent);
@@ -327,7 +327,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 	});
 
 	describe('focus', () => {
-		it('should not send focus back to the covered displayer below the S breakpoint', () => {
+		it('should not send focus back to the covered displayer below the XS breakpoint', () => {
 			// Arrange
 			const { select } = createSelect(true);
 			const focusRequest = vi.spyOn(select.focusInput$, 'next');
@@ -339,7 +339,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			expect(focusRequest).not.toHaveBeenCalled();
 		});
 
-		it('should send focus to the displayer above the S breakpoint', () => {
+		it('should send focus to the displayer above the XS breakpoint', () => {
 			// Arrange
 			const { select } = createSelect(false);
 			const focusRequest = vi.spyOn(select.focusInput$, 'next');
@@ -375,7 +375,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 
 		it('should echo the label required marker in the title when the field is required', () => {
 			// Arrange
-			breakpointObserver.belowSmallBreakpoint.next(true);
+			breakpointObserver.belowExtraSmallBreakpoint.next(true);
 			const fixture = TestBed.createComponent(RequiredHostComponent);
 			fixture.detectChanges();
 			const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Entity>;
@@ -438,7 +438,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 
 		it('should show its search field when the select is searchable', () => {
 			// Arrange
-			breakpointObserver.belowSmallBreakpoint.next(true);
+			breakpointObserver.belowExtraSmallBreakpoint.next(true);
 			const fixture = TestBed.createComponent(SearchableHostComponent);
 			fixture.detectChanges();
 			const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Entity>;
@@ -452,7 +452,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			expect(sheet()?.querySelector('.textField')).not.toHaveClass('pr-u-mask');
 		});
 
-		it('should not render a sheet above the S breakpoint', () => {
+		it('should not render a sheet above the XS breakpoint', () => {
 			// Arrange
 			const { fixture, select } = createSelect(false);
 
@@ -467,8 +467,8 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 		});
 	});
 	describe('pagination', () => {
-		function createPaginatedSelect(belowSmallBreakpoint: boolean): { fixture: ComponentFixture<PaginatedHostComponent>; select: LuMultiSelectInputComponent<Entity> } {
-			breakpointObserver.belowSmallBreakpoint.next(belowSmallBreakpoint);
+		function createPaginatedSelect(belowExtraSmallBreakpoint: boolean): { fixture: ComponentFixture<PaginatedHostComponent>; select: LuMultiSelectInputComponent<Entity> } {
+			breakpointObserver.belowExtraSmallBreakpoint.next(belowExtraSmallBreakpoint);
 			const fixture = TestBed.createComponent(PaginatedHostComponent);
 			fixture.detectChanges();
 			const select = fixture.debugElement.query(By.directive(LuMultiSelectInputComponent)).componentInstance as LuMultiSelectInputComponent<Entity>;
@@ -504,7 +504,7 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			expect(fixture.componentInstance.nextPageCount).toBe(3);
 		});
 
-		it('should leave pagination to the scroll handler above the S breakpoint', async () => {
+		it('should leave pagination to the scroll handler above the XS breakpoint', async () => {
 			// Arrange
 			const { fixture, select } = createPaginatedSelect(false);
 

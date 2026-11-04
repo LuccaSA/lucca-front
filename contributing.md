@@ -45,6 +45,7 @@ For a component to be used, it must be easy to use. Always prefer keeping the ha
 This includes, but not only:
 
 - Always use `luBooleanAttribute`/`luOptionalBooleanAttribute` transform when creating an input that should take boolean, to make it easier to use for everyone.
+- Boolean inputs must default to `false`: name them after the behavior they enable, so that omitting the attribute gives the default behavior (`hiddenLabel`, not `showLabel` defaulting to `true`). A boolean attribute can't be turned off from a template without a binding (`<lu-x hiddenLabel>` works, `<lu-x [showLabel]="false">` is needed otherwise).
 - Using meaningful input names, common names such as `config`, `param`, etc must be avoided and they're too generic, consumers need to know what your input does!
 - Properly typings inputs, using union strings when necessary, to provide code completion, this can also be done with a trailing `| string` that will make it become a list of suggestions instead.
 - Always use `luNumberAttribute`/`luOptionalNumberAttribute` transform when creating an input that should take numbers, to make it easier to use for everyone.
@@ -61,6 +62,7 @@ Many contributions are now written with the help of AI agents. That is fine, but
 - **Ask us if you need to.** We are glad to help before you start: an agent goes straight to the point without knowing about wider concerns or ongoing discussions with other teams, and a bit of context in your prompt can save everyone a few review round-trips.
 - **Understand what you are sending.** You should be able to explain every change in your pull request, and why it is there. Understanding the context you are working in often unlocks a better approach than the first one an agent finds.
 - **Review your own diff first.** Read the "Files changed" tab and leave an inline comment wherever a reviewer would ask "why?". Two or three are enough, and they beat a paragraph in the description because they sit where the question arises. It is also the cheapest way to catch what an agent did on the side, and if you cannot annotate a passage you probably should not send it yet.
+- **Check a fix before opening it.** Run `/recette-pr-fix` in Claude Code: in about 30 seconds it lints and tests what you changed, checks that your test fails without the fix, and lists what to watch. Once the PR is open, it posts before/after captures from the Storybook previews. Without Claude Code, the main checks run by hand: `node .claude/skills/recette-pr-fix/scripts/branch-context.mjs`, then `node .claude/skills/recette-pr-fix/scripts/regression-check.mjs --base origin/master` (or the base the first script reports). Then open the PR with the bugfix template, which holds the recette checklist: GitHub only applies it when you add `&template=bugfix.md` to the URL of the "Open a pull request" page (`…/compare/master...<branch>?expand=1`), or with `gh pr create --template bugfix.md`.
 - **Label it.** Use `🤖 Produced by AI` when the pull request was mostly produced with AI, autocompleted code does not count. It tells us to be more careful on specific points.
 
 ### Branches, titles and commit messages

@@ -1,8 +1,8 @@
 import { IconsList } from '@/stories/icons-list';
-import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
+import { LISTING_SIZE, ListingComponent, ListingItemComponent, ListingSize } from '@lucca-front/ng/listing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
-import { generateInputs } from '@/helpers/stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 interface ListingBasicStory {
 	checklist: boolean;
@@ -43,7 +43,7 @@ export default {
 	<lu-listing-item${iconParam}>item</lu-listing-item>
 	<lu-listing-item>
 		item
-		<lu-listing${checklistParam}${orderedParam}${orderedFancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}${generateInputs(inputs, context.argTypes)}>
+		<lu-listing${checklistParam}${orderedParam}${orderedFancyParam}${startParam}${reversedParam}${iconsParam}${defaultIconParam}${paletteParam}>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item critical>item</lu-listing-item>
@@ -55,7 +55,7 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string }> = {
+export const Template: StoryObj<Omit<ListingComponent, 'size'> & ListingItemComponent & { type: string; size: ListingSize | '' }> = {
 	argTypes: {
 		type: {
 			options: ['', 'checklist', 'ordered', 'orderedFancy', 'icons'],
@@ -97,6 +97,14 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		icons: HiddenArgType,
 		ordered: HiddenArgType,
 		palette: { ...PaletteAllArgType, table: { category: 'inputs' } },
+		size: {
+			options: setStoryOptions(LISTING_SIZE),
+			control: {
+				type: 'select',
+			},
+			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
+		},
 	},
 
 	args: {
@@ -106,5 +114,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		icon: 'foodCroissant',
 		start: 1,
 		reversed: false,
+		size: '',
 	},
 };

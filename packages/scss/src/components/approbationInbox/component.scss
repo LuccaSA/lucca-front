@@ -190,8 +190,16 @@
 			}
 		}
 
+		.approbationInbox-detail-header-main-infos-headingOptional {
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			align-items: center;
+		}
+
 		.approbationInbox-detail-header-main-infos-title {
 			@include title.h2;
+
+			min-inline-size: 0;
 		}
 
 		.approbationInbox-detail-header-main-infos-title-content {
@@ -235,6 +243,7 @@
 
 		.approbationInbox-detail-main-block-title {
 			@include title.h3;
+
 			margin-block-end: var(--pr-t-spacings-150);
 		}
 

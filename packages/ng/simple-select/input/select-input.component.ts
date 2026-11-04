@@ -49,7 +49,7 @@ let nextID = 0;
 			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
 		},
 		LuSimpleSelectPanelRefFactory,
-		// Below the `S` breakpoint the panel opens as a dialog in `sheet` mode.
+		// Below the `XS` breakpoint the panel opens as a dialog in `sheet` mode.
 		provideLuDialog(),
 		provideLuSelectLabelsAndIds(),
 		{
