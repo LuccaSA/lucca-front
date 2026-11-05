@@ -106,6 +106,25 @@ describe(NumberFormatInputComponent.name, () => {
 	});
 
 	describe('with minimumFractionDigits', () => {
+		it('should keep the fraction digits on focus', () => {
+			// Arrange
+			setup({ minimumFractionDigits: 2 });
+			// Act
+			focusInput();
+			// Assert
+			expect(inputElement.value).toBe('189.98');
+		});
+
+		it('should save the value with its fraction digits after a keystroke', () => {
+			// Arrange
+			setup({ minimumFractionDigits: 2 });
+			focusInput();
+			// Act
+			dispatchInput();
+			// Assert
+			expect(control.value).toBe(189.98);
+		});
+
 		it('should pad the fraction digits on blur', () => {
 			// Arrange
 			setup({ minimumFractionDigits: 2, maximumFractionDigits: 2 });

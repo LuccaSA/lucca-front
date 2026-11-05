@@ -14,6 +14,8 @@ export class NumberFormat {
 	readonly options: Intl.NumberFormatOptions;
 	readonly #focusIntlNumberFormat: Intl.NumberFormat;
 	readonly #intlNumberFormat: Intl.NumberFormat;
+	// Resolved by Intl, so it holds the currency default when no fraction digits are given
+	readonly #maximumFractionDigits: number;
 
 	constructor({ locale, min, max, ...options }: NumberFormatOptions) {
 		this.locale = locale;
@@ -21,9 +23,12 @@ export class NumberFormat {
 		this.max = max;
 		this.options = this.#applyBoundariesToDigitOptions(options);
 		this.#intlNumberFormat = new Intl.NumberFormat(this.locale, this.options);
+		// Intl leaves fraction digits out of resolvedOptions() when significant digits take precedence
+		this.#maximumFractionDigits = this.#intlNumberFormat.resolvedOptions().maximumFractionDigits ?? this.options.maximumFractionDigits ?? 2;
 		this.#focusIntlNumberFormat = new Intl.NumberFormat(this.locale, {
 			...this.options,
 			minimumFractionDigits: 0,
+			maximumFractionDigits: this.#maximumFractionDigits,
 		});
 	}
 
@@ -127,7 +132,7 @@ export class NumberFormat {
 			.slice(1)
 			.join('')
 			//ignore digits above maximumFractionDigits
-			.slice(0, this.options.maximumFractionDigits ?? 2);
+			.slice(0, this.#maximumFractionDigits);
 		const delimiter = parts.length > 1 ? '.' : '';
 
 		const splittedInput: NumberFormatSplittedInput = {

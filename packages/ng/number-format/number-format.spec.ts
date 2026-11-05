@@ -479,5 +479,23 @@ describe('NumberFormat', () => {
 			// Assert
 			expect(numberFormat.getBlurFormat(value)).toBe(formatted);
 		});
+
+		it('should keep the fraction digits of minimumFractionDigits on focus', () => {
+			// Arrange
+			const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'currency', currency: 'EUR', minimumFractionDigits: 3 });
+
+			// Act & Assert
+			expect(numberFormat.getBlurFormat(1.234)).toBe('1,234');
+			expect(numberFormat.getFocusFormat(1.234)).toBe('1.234');
+			expect(numberFormat.parse('1,234').value).toBe(1.234);
+		});
+
+		it('should cut the typed fraction to the currency default', () => {
+			// Arrange
+			const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'currency', currency: 'JPY' });
+
+			// Act & Assert
+			expect(numberFormat.parse('189,98').value).toBe(189);
+		});
 	});
 });
