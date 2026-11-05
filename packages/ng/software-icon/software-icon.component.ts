@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { luBooleanAttribute } from '@lucca-front/ng/core';
+import { CDN_URL, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LU_SOFTWARE_ICON_WRAPPER } from './software-icon-wrapper.token';
@@ -16,7 +16,7 @@ import { SoftwareIcon, SoftwareIconSize } from './software-icon.type';
 export class SoftwareIconComponent {
 	readonly wrapper = inject(LU_SOFTWARE_ICON_WRAPPER, { optional: true });
 
-	readonly domain = 'https://cdn.lucca.fr';
+	readonly domain = CDN_URL;
 	readonly path = '/transverse/prisme/visuals/software-icon/';
 	readonly extension = '.svg';
 
