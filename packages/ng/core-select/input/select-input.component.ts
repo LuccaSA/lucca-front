@@ -88,6 +88,18 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public selectParent$?: Subject<void>;
 	public selectChildren$?: Subject<void>;
 
+	/** Unfolds the highlighted row, for a panel whose rows can be collapsed. */
+	public expandOption$?: Subject<void>;
+	/** Folds the highlighted row back. */
+	public collapseOption$?: Subject<void>;
+
+	/**
+	 * A row was folded or unfolded. The panel is rebuilt on every opening, so the state cannot live
+	 * there: the tree generator owns it and listens here, which is also what lets an unfolded row
+	 * stay unfolded when the panel is closed and opened again.
+	 */
+	public readonly optionExpandedChange$ = new Subject<{ option: TOption; expanded: boolean }>();
+
 	public readonly panelClosed = output<void>();
 	public readonly panelOpened = output<void>();
 
@@ -407,6 +419,17 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				} else {
 					this.panelRef?.handleKeyManagerEvent($event);
 				}
+				break;
+			case 'ArrowRight':
+			case 'ArrowLeft':
+				// Folding a row with the arrow keys is what the tree pattern asks for, but this combobox
+				// owns a text field: while a clue is typed they have to keep moving the caret. With no
+				// clue there is no caret to move, so they fold the highlighted row instead.
+				if (!this.isPanelOpen || (this.clue?.length ?? 0) > 0) {
+					break;
+				}
+				$event.preventDefault();
+				($event.key === 'ArrowRight' ? this.expandOption$ : this.collapseOption$)?.next();
 				break;
 			case ' ':
 			case 'ArrowDown':

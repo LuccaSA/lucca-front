@@ -62,6 +62,19 @@
 	}
 }
 
+@mixin collapsed {
+	// The children stay in the DOM so the content query that detects them keeps resolving.
+	> .listboxOptionWrapper {
+		display: none;
+	}
+}
+
+@mixin expanded {
+	> .listboxOption-content {
+		--components-listboxOption-content-disclosure-rotate: 90deg;
+	}
+}
+
 @mixin busy {
 	.listboxOption {
 		&:has(.listboxOption-content-loading.loading) {

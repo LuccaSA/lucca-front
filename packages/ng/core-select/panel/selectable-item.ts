@@ -29,11 +29,25 @@ export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 
 	readonly isSelected = model(false);
 
+	/**
+	 * Partial selection of the rows this one stands for: a parent some — but not all — of whose
+	 * children are selected. Rendered as the checkbox mixed state, which the listbox option
+	 * exposes on `aria-checked` instead of `aria-selected`.
+	 */
+	readonly isMixed = model(false);
+
 	readonly option = input<T>();
 
 	readonly disabledInput = input<boolean>(false, { alias: 'disabled' });
 
 	readonly disabledRef = linkedSignal(() => this.disabledInput());
+
+	/**
+	 * Set on a row an ancestor keeps folded. Such a row is hidden by the stylesheet, so the key
+	 * manager has to skip it: it stays registered and in the DOM, which is what lets the content
+	 * query that detects children keep resolving.
+	 */
+	readonly isHidden = input(false);
 
 	readonly isHighlighted = signal(false);
 

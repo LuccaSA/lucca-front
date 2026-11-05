@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { DestroyRef, Directive, OnInit, computed, forwardRef, inject, input } from '@angular/core';
-import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { luNullableNumberAttribute } from '@lucca-front/ng/core';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
+import { Directive, Injector, OnInit, computed, forwardRef, inject, input } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { luNullableNumberAttribute, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LuOptionGrouping, applySearchDelimiter, luAccumulatePages } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, filter, map, of, switchMap } from 'rxjs';
+import { Observable, debounceTime, map, of, switchMap } from 'rxjs';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuCoreSelectEstablishment } from './models';
@@ -26,7 +26,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	implements OnInit, CoreSelectApiTotalCountProvider
 {
 	#groupingService = inject(EstablishmentGroupingService);
-	#destroyRef = inject(DestroyRef);
+	#injector = inject(Injector);
 
 	protected httpClient = inject(HttpClient);
 
@@ -39,7 +39,23 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
 	readonly searchDelimiter = input<string>(' ');
 
+	/**
+	 * Scopes the list to a single legal unit, server side. The establishments of the other legal
+	 * units are then neither listed nor reachable through a search, so a selection cannot mix two
+	 * legal units — the constraint is imposed rather than assumed. Grouping is dropped along with
+	 * it: a header repeating the one legal unit every option belongs to says nothing.
+	 */
+	readonly legalUnitId = input(null, { transform: luNullableNumberAttribute });
+
 	protected readonly clue = toSignal(this.clue$);
+
+	readonly #useGrouping = toSignal(this.#groupingService.useGrouping$, { initialValue: false });
+
+	// Built once, so the effect below can tell the grouping it installed from one a consumer set.
+	readonly #grouping: LuOptionGrouping<T, unknown> = {
+		selector: (option) => option.legalUnitId,
+		content: LuEstablishmentGroupingComponent,
+	};
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
@@ -47,12 +63,18 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	}
 
 	protected initGrouping() {
-		this.#groupingService.useGrouping$.pipe(filter(Boolean), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
-			this.select.groupingSignal.set({
-				selector: (option) => option.legalUnitId,
-				content: LuEstablishmentGroupingComponent,
-			});
-		});
+		ɵeffectWithDeps(
+			[this.#useGrouping, this.legalUnitId],
+			(useGrouping, legalUnitId) => {
+				if (useGrouping && legalUnitId === null) {
+					this.select.groupingSignal.set(this.#grouping);
+				} else if (this.select.groupingSignal() === this.#grouping) {
+					// Only ever clears the grouping it installed, never one the consumer declared.
+					this.select.groupingSignal.set(undefined);
+				}
+			},
+			{ injector: this.#injector },
+		);
 	}
 
 	/**
@@ -63,8 +85,10 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 		const operationIds = this.operationIds();
 		const uniqueOperationIds = this.uniqueOperationIds();
 		const appInstanceId = this.appInstanceId();
+		const legalUnitId = this.legalUnitId();
 		return {
 			...this.filters(),
+			...(legalUnitId === null ? {} : { legalUnitId }),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
@@ -86,13 +110,20 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	 * legal unit instead, page by page, so "select all" covers the options that are not rendered yet.
 	 * Groups are only displayed when the clue is empty, hence the clue-less params.
 	 */
-	protected override getGroupOptions = (legalUnitId: unknown): Observable<T[]> => this.#getLegalUnitOptions(legalUnitId as number, 0);
+	protected override getGroupOptions = (legalUnitId: unknown): Observable<T[]> => this.#getAllLegalUnitOptions(legalUnitId as number, 0);
 
-	#getLegalUnitOptions(legalUnitId: number, page: number): Observable<T[]> {
-		const params = { ...this.#restrictionParams(), legalUnitId, sort: 'name' };
-		return this.getOptions(params, page).pipe(
-			switchMap((options) => (options.length < this.pageSize ? of(options) : this.#getLegalUnitOptions(legalUnitId, page + 1).pipe(map((nextOptions) => [...options, ...nextOptions])))),
-		);
+	/**
+	 * One page of the establishments of a single legal unit, sorted by name. Public so a select
+	 * listing legal units and their establishments together can fetch a branch when it unfolds,
+	 * rather than pulling every page the way the group select-all has to. `isLastPage` is reported
+	 * because the page size is not part of the public surface.
+	 */
+	public getLegalUnitOptionsPage(legalUnitId: number, page: number): Observable<{ items: T[]; isLastPage: boolean }> {
+		return this.getOptions({ ...this.#restrictionParams(), legalUnitId, sort: 'name' }, page).pipe(map((items) => ({ items, isLastPage: items.length < this.pageSize })));
+	}
+
+	#getAllLegalUnitOptions(legalUnitId: number, page: number): Observable<T[]> {
+		return luAccumulatePages((nextPage) => this.getLegalUnitOptionsPage(legalUnitId, nextPage), page);
 	}
 
 	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
@@ -123,12 +154,13 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	});
 	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
 
-	public override readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters() }))).pipe(
+	public override readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), filters: this.filters(), legalUnitId: this.legalUnitId() }))).pipe(
 		debounceTime(250),
-		switchMap(({ url, filters }) =>
+		switchMap(({ url, filters, legalUnitId }) =>
 			this.httpClient.get<{ count: number }>(url, {
 				params: {
 					...filters,
+					...(legalUnitId === null ? {} : { legalUnitId }),
 					['fields.root']: 'count',
 				},
 			}),

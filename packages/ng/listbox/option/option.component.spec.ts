@@ -49,4 +49,55 @@ describe(OptionComponent.name, () => {
 
 		expect(host.hasAttribute('aria-checked')).toBe(false);
 	});
+
+	describe('disclosure', () => {
+		// treeitemLevel is what tells the option it holds children when none are projected,
+		// which is also how lu-select-option declares them.
+		function withChildren(collapsible: boolean): void {
+			fixture.componentRef.setInput('treeitemLevel', 1);
+			fixture.componentRef.setInput('collapsible', collapsible);
+			fixture.detectChanges();
+		}
+
+		function chevron(): HTMLElement | null {
+			return host.querySelector('.listboxOption-content-disclosure');
+		}
+
+		it('should start collapsed and render a chevron once collapsible', () => {
+			withChildren(true);
+
+			expect(chevron()!.getAttribute('aria-expanded')).toBe('false');
+			expect(chevron()).toBeTruthy();
+		});
+
+		it('should expand and collapse again when the chevron is clicked', () => {
+			withChildren(true);
+
+			chevron()!.click();
+			fixture.detectChanges();
+			expect(chevron()!.getAttribute('aria-expanded')).toBe('true');
+
+			chevron()!.click();
+			fixture.detectChanges();
+			expect(chevron()!.getAttribute('aria-expanded')).toBe('false');
+		});
+
+		it('should keep a chevron click away from the row, which toggles the selection', () => {
+			withChildren(true);
+			const onRowClick = vi.fn();
+			host.addEventListener('click', onRowClick);
+
+			chevron()!.click();
+
+			expect(onRowClick).not.toHaveBeenCalled();
+		});
+
+		it('should leave an always-open tree untouched when collapsible is not set', () => {
+			withChildren(false);
+
+			expect(host.querySelector('[aria-expanded]')).toBeNull();
+			expect(chevron()).toBeNull();
+			expect(host.querySelector('.listboxOptionWrapper')).toBeTruthy();
+		});
+	});
 });

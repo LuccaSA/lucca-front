@@ -184,6 +184,19 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 		this.#applyGroupToggle(notSelectedOptions, groupOptions);
 	}
 
+	/**
+	 * Swaps part of the selection in a single update: what goes out, and what comes in to replace it.
+	 * Used when a parent standing for its children is broken apart — the parent leaves the value and
+	 * the children it covered enter it. `toggleOptions` cannot express this: it either selects or
+	 * unselects, never both at once.
+	 */
+	swapSelection(select: T[], unselect: T[]): void {
+		const kept = this.selectedOptions.filter((option) => !unselect.some((removed) => this.optionComparer()(removed, option)));
+		this.selectedOptions = [...kept, ...select];
+		this.panelRef.emitValue(this.selectedOptions);
+		afterNextRender(() => this.panelRef.updatePosition(), { injector: this.#injector });
+	}
+
 	#applyGroupToggle(notSelectedOptions: T[], groupOptions: T[]): void {
 		// Filter out disabled options
 		const disabledOptionIds = this.options()

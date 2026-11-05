@@ -36,12 +36,13 @@ class TestEstablishmentsDirective extends LuCoreSelectEstablishmentsDirective {
 @Component({
 	selector: 'lu-establishments-directive-host',
 	imports: [LuMultiSelectInputComponent, TestEstablishmentsDirective],
-	template: `<lu-multi-select luTestEstablishments [filters]="filters()" [operationIds]="operationIds()" />`,
+	template: `<lu-multi-select luTestEstablishments [filters]="filters()" [operationIds]="operationIds()" [legalUnitId]="legalUnitId()" />`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LuEstablishmentsDirectiveHostComponent {
 	readonly filters = signal<Record<string, string | number | boolean> | null>(null);
 	readonly operationIds = signal<readonly number[] | null>(null);
+	readonly legalUnitId = signal<number | null>(null);
 	readonly multiSelect = viewChild.required<LuMultiSelectInputComponent<LuCoreSelectEstablishment>>(LuMultiSelectInputComponent);
 	readonly establishmentsDirective = viewChild.required<TestEstablishmentsDirective>(TestEstablishmentsDirective);
 }
@@ -62,6 +63,11 @@ describe(LuCoreSelectEstablishmentsDirective.name, () => {
 		const options: LuCoreSelectEstablishment[] = [];
 		dataSource.getGroupOptions!(legalUnitId).subscribe((groupOptions) => options.push(...groupOptions));
 		return options;
+	}
+
+	function loadFirstPage(): void {
+		const dataSource = host.multiSelect().dataSource() as SelectDataSource<LuCoreSelectEstablishment, unknown>;
+		dataSource.getOptions({ clue: '', page: 0 }).subscribe();
 	}
 
 	function expectGroupPage(legalUnitId: number, page: number) {
@@ -115,5 +121,45 @@ describe(LuCoreSelectEstablishmentsDirective.name, () => {
 		expect(req.request.params.get('search')).toBeNull();
 		req.flush([establishment(1, 7)]);
 		tick();
+	}));
+
+	it('should group by legal unit while the list spans several of them', () => {
+		fixture.detectChanges();
+
+		expect(host.multiSelect().groupingSignal()).toBeDefined();
+	});
+
+	it('should scope the list and drop the grouping when a legal unit is set', fakeAsync(() => {
+		host.legalUnitId.set(4);
+		fixture.detectChanges();
+
+		// Every option then belongs to the same legal unit, so a group header would say nothing
+		expect(host.multiSelect().groupingSignal()).toBeUndefined();
+
+		loadFirstPage();
+		const req = httpTestingController.expectOne((request) => request.url === establishmentsUrl && request.params.get('legalUnitId') === '4');
+		req.flush([establishment(1, 4)]);
+		tick();
+	}));
+
+	it('should report whether a legal unit page is the last one', fakeAsync(() => {
+		const pages: { items: LuCoreSelectEstablishment[]; isLastPage: boolean }[] = [];
+		// pageSize is 2 here, so a full page cannot be the last one
+		host
+			.establishmentsDirective()
+			.getLegalUnitOptionsPage(3, 0)
+			.subscribe((page) => pages.push(page));
+		expectGroupPage(3, 1).flush([establishment(1, 3), establishment(2, 3)]);
+		tick();
+
+		host
+			.establishmentsDirective()
+			.getLegalUnitOptionsPage(3, 1)
+			.subscribe((page) => pages.push(page));
+		expectGroupPage(3, 2).flush([establishment(3, 3)]);
+		tick();
+
+		expect(pages.map((page) => page.isLastPage)).toEqual([false, true]);
+		expect(pages.map((page) => page.items.length)).toEqual([2, 1]);
 	}));
 });

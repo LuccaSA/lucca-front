@@ -47,7 +47,7 @@
 		}
 
 		.multipleSelect-displayer-chip-value {
-			max-inline-size: 8.75rem;
+			max-inline-size: var(--components-multiSelect-displayerChip-maxInlineSize);
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;

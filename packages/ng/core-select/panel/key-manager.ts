@@ -41,7 +41,7 @@ export class CoreSelectKeyManager<T> {
 			});
 		});
 		this.#queryList$ = toObservable(this.#queryList, { injector: this.#injector });
-		this.#cdkKeyManager = new ActiveDescendantKeyManager(this.#queryList, this.#injector).withHomeAndEnd();
+		this.#cdkKeyManager = new ActiveDescendantKeyManager(this.#queryList, this.#injector).withHomeAndEnd().skipPredicate((item) => item.disabled || item.isHidden());
 		this.#bindClueChange(options.clueChange$);
 		this.#bindOptionsChange(options);
 		this.#bindActiveOptionIdChanged(options.activeOptionIdChanged$);

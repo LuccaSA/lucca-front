@@ -118,9 +118,13 @@
 						[selectedOptions]="selectedOptions"
 						[optionComparer]="optionComparer()"
 						[optionIndex]="index"
+						[collapsible]="!!treeGenerator.collapsible"
+						[parentStandsForChildren]="!!treeGenerator.parentStandsForChildren"
+						[disclosureLabel]="treeGenerator.disclosureLabel?.(branch.node, !!branch.expanded) ?? null"
 						(toggleOne)="toggleOption($event)"
 						(selectMany)="toggleOptions($event, [])"
 						(unselectMany)="toggleOptions([], $event)"
+						(parentSelectionBroken)="swapSelection($event.select, $event.unselect)"
 					/>
 				}
 			} @else {
