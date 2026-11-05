@@ -1,5 +1,21 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, contentChild, ElementRef, inject, Injector, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	contentChild,
+	ElementRef,
+	inject,
+	Injector,
+	input,
+	model,
+	OnInit,
+	output,
+	TemplateRef,
+	Type,
+	untracked,
+	viewChild,
+} from '@angular/core';
 import { intlInputOptions, isNil, luBooleanAttribute, luOptionalNumberAttribute, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { OptionComponent as ListboxOptionComponent, Treeitem } from '@lucca-front/ng/listbox';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -32,6 +48,15 @@ export class LuOptionComponent<T> implements OnInit {
 	readonly grouping = input<LuOptionGrouping<T, unknown>>();
 
 	readonly hasChildren = input(false, { transform: luBooleanAttribute });
+
+	/** Folds the projected `[treeitem]` children behind a chevron. See `lu-listbox-option`. */
+	readonly collapsible = input(false, { transform: luBooleanAttribute });
+
+	/** Whether the folded children are shown. The chevron of the listbox option toggles it. */
+	readonly expanded = model(false);
+
+	/** Accessible name of the chevron. See `lu-listbox-option`. */
+	readonly disclosureLabel = input<string | null>(null);
 
 	readonly onlyParent = output<void>();
 

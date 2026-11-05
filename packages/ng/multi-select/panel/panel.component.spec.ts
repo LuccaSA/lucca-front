@@ -1,7 +1,8 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, getDebugNode } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuMultiSelectInputComponent } from '../input/select-input.component';
 
@@ -74,6 +75,19 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 		expect(selected.length).toBe(1);
 		expect(selected[0].textContent).toContain('Poireau');
 		expect(selected[0].classList).toContain('is-selected');
+	}));
+
+	it('should expose a partially selected option through aria-checked rather than aria-selected', fakeAsync(() => {
+		openPanel();
+
+		const host = overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option')[1];
+		// The panel does not compute a partial state yet: drive it the way a parent row will
+		getDebugNode(host)!.injector.get(ɵCoreSelectPanelElement).isMixed.set(true);
+		fixture.detectChanges();
+
+		const listboxOption = host.querySelector('lu-listbox-option')!;
+		expect(listboxOption.getAttribute('aria-checked')).toBe('mixed');
+		expect(listboxOption.hasAttribute('aria-selected')).toBe(false);
 	}));
 
 	it('should toggle the clicked option in the emitted value', fakeAsync(() => {
@@ -178,10 +192,19 @@ describe('LuMultiSelectPanelComponent (tree mode)', () => {
 	const red: TreeNodeEntity = { id: 1, name: 'Red', parentId: null };
 	const tomato: TreeNodeEntity = { id: 2, name: 'Tomato', parentId: 1 };
 	const radish: TreeNodeEntity = { id: 3, name: 'Radish', parentId: 1 };
-	const tree = [red, tomato, radish];
+	// A second root, so collapsing the first branch leaves somewhere for the keyboard to land
+	const blue: TreeNodeEntity = { id: 4, name: 'Blue', parentId: null };
+	const tree = [red, tomato, radish, blue];
 
 	@Component({
-		template: `<lu-multi-select [treeSelect]="groupingFn" [options]="options" [optionKey]="optionKey" [(ngModel)]="value" />`,
+		template: `<lu-multi-select
+			[treeSelect]="groupingFn"
+			[collapsible]="collapsible"
+			[parentStandsForChildren]="parentStandsForChildren"
+			[options]="options"
+			[optionKey]="optionKey"
+			[(ngModel)]="value"
+		/>`,
 		imports: [LuMultiSelectInputComponent, TreeSelectDirective, FormsModule],
 		changeDetection: ChangeDetectionStrategy.OnPush,
 	})
@@ -190,10 +213,42 @@ describe('LuMultiSelectPanelComponent (tree mode)', () => {
 		readonly optionKey = (node: TreeNodeEntity) => node.id;
 		readonly groupingFn = (node: TreeNodeEntity): TreeNodeEntity | null => tree.find((candidate) => candidate.id === node.parentId) ?? null;
 		value: TreeNodeEntity[] = [];
+		collapsible = false;
+		parentStandsForChildren = false;
 	}
 
 	let fixture: ComponentFixture<HostComponent>;
 	let overlayContainerElement: HTMLElement;
+
+	function openPanel(): void {
+		fixture.detectChanges();
+		const select = fixture.debugElement.children[0].componentInstance as LuMultiSelectInputComponent<TreeNodeEntity>;
+		select.openPanel();
+		fixture.detectChanges();
+		tick(20);
+		fixture.detectChanges();
+	}
+
+	const KEY_CODES: Record<string, number> = { ArrowLeft: 37, ArrowRight: 39, ArrowDown: 40 };
+
+	function pressKey(key: string): KeyboardEvent {
+		const host = fixture.debugElement.children[0].nativeElement as HTMLElement;
+		// CDK's ActiveDescendantKeyManager reads event.keyCode, which happy-dom won't infer from `key`.
+		const event = new KeyboardEvent('keydown', { key, keyCode: KEY_CODES[key], bubbles: true, cancelable: true });
+		host.dispatchEvent(event);
+		fixture.detectChanges();
+		tick();
+		fixture.detectChanges();
+		return event;
+	}
+
+	function disclosureOf(row: HTMLElement): HTMLElement {
+		return row.querySelector<HTMLElement>('.listboxOption-content-disclosure')!;
+	}
+
+	function rootRow(): HTMLElement {
+		return overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option')[0].querySelector('lu-listbox-option')!;
+	}
 
 	function clickBranchRoot(): void {
 		// The first option is the root of the "Red" branch, its children are nested inside
@@ -222,5 +277,103 @@ describe('LuMultiSelectPanelComponent (tree mode)', () => {
 
 		clickBranchRoot();
 		expect(fixture.componentInstance.value).toEqual([]);
+	}));
+
+	it('should fold a branch that holds children when the tree select is collapsible', fakeAsync(() => {
+		fixture.componentInstance.collapsible = true;
+		openPanel();
+
+		const options = overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option');
+		const root = options[0].querySelector('lu-listbox-option')!;
+		expect(disclosureOf(root).getAttribute('aria-expanded')).toBe('false');
+		expect(root.querySelector('.listboxOption-content-disclosure')).toBeTruthy();
+
+		// A leaf has nothing to fold, so it gets neither the state nor the chevron
+		const leaf = options[1].querySelector('lu-listbox-option')!;
+		expect(leaf.querySelector('[aria-expanded]')).toBeNull();
+		expect(leaf.querySelector('.listboxOption-content-disclosure')).toBeNull();
+	}));
+
+	it('should unfold and fold the highlighted branch with the arrow keys', fakeAsync(() => {
+		fixture.componentInstance.collapsible = true;
+		openPanel();
+
+		// The first row is highlighted as soon as the panel opens
+		expect(disclosureOf(rootRow()).getAttribute('aria-expanded')).toBe('false');
+
+		expect(pressKey('ArrowRight').defaultPrevented).toBe(true);
+		expect(disclosureOf(rootRow()).getAttribute('aria-expanded')).toBe('true');
+
+		pressKey('ArrowLeft');
+		expect(disclosureOf(rootRow()).getAttribute('aria-expanded')).toBe('false');
+	}));
+
+	it('should leave the arrow keys to the caret while a clue is typed', fakeAsync(() => {
+		fixture.componentInstance.collapsible = true;
+		openPanel();
+
+		const select = fixture.debugElement.children[0].componentInstance as LuMultiSelectInputComponent<TreeNodeEntity>;
+		// Set straight on the field rather than through clueChanged, which also resets the highlight:
+		// what is pinned here is the guard alone, on an open panel whose first row is highlighted.
+		select.clue = 'red';
+		fixture.detectChanges();
+
+		expect(select.isPanelOpen).toBe(true);
+		// Not consumed: the caret must stay free to move through the text that was typed
+		expect(pressKey('ArrowRight').defaultPrevented).toBe(false);
+		expect(disclosureOf(rootRow()).getAttribute('aria-expanded')).toBe('false');
+	}));
+
+	it('should skip the rows a folded branch hides when navigating down', fakeAsync(() => {
+		fixture.componentInstance.collapsible = true;
+		openPanel();
+
+		const hosts = overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option');
+		// Red is folded, so Tomato and Radish are hidden and ArrowDown must reach the Blue root
+		pressKey('ArrowDown');
+
+		expect(hosts[1].classList).not.toContain('is-highlighted');
+		expect(hosts[2].classList).not.toContain('is-highlighted');
+		expect(hosts[3].textContent).toContain('Blue');
+		expect(hosts[3].classList).toContain('is-highlighted');
+	}));
+
+	it('should publish a branch alone when it stands for what it holds', fakeAsync(() => {
+		fixture.componentInstance.parentStandsForChildren = true;
+		openPanel();
+
+		clickBranchRoot();
+
+		// A rule covers its children, including the ones added later: expanding it into the children
+		// known right now would freeze the selection.
+		expect(fixture.componentInstance.value).toEqual([red]);
+	}));
+
+	it('should show the children a rule covers as checked, without putting them in the value', fakeAsync(() => {
+		fixture.componentInstance.parentStandsForChildren = true;
+		openPanel();
+
+		clickBranchRoot();
+
+		const child = overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option')[1].querySelector('lu-listbox-option')!;
+		// Covered by the rule, so it reads as checked — and stays actionable, unchecking it breaks the rule
+		expect(child.getAttribute('aria-selected')).toBe('true');
+		expect(child.getAttribute('aria-disabled')).toBe('false');
+		expect(fixture.componentInstance.value).toEqual([red]);
+	}));
+
+	it('should break the rule apart when one of the rows it covers is unchecked', fakeAsync(() => {
+		fixture.componentInstance.parentStandsForChildren = true;
+		openPanel();
+		clickBranchRoot();
+
+		// Tomato was covered by the rule; unchecking it turns that rule into the list it stood for,
+		// minus the row just unchecked — Radish alone.
+		overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option')[1].click();
+		fixture.detectChanges();
+		tick();
+		fixture.detectChanges();
+
+		expect(fixture.componentInstance.value).toEqual([radish]);
 	}));
 });

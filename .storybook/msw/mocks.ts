@@ -55,7 +55,7 @@ export const mockEstablishments = [
 		id: index + frCities.length + 1,
 		name: `Lucca ${city}`,
 		code: `LUCCA_${city.toUpperCase()}`,
-		legalUnitId: 3,
+		legalUnitId: 2,
 		legalUnit: { id: 2, name: 'Lucca US', code: 'LUCCA_US' },
 		legalIdentificationNumber: null,
 		activityCode: null,
