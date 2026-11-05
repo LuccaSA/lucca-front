@@ -1,3 +1,10 @@
+### 22.1.2
+
+#### Fixed
+
+- Non-currency styles now apply `minimumFractionDigits` and `maximumFractionDigits` when they are given, instead of letting the default significant digits take over.
+- `minimumFractionDigits` no longer pads the integer part with leading zeroes.
+
 ### 19.3.4
 
 #### Fixed

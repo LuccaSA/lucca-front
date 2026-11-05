@@ -436,6 +436,35 @@ describe('NumberFormat', () => {
 		expect(numberFormat.getBlurFormat(value)).toBe(formatted);
 	});
 
+	describe('fraction digits on non-currency styles', () => {
+		it('should pad the fraction without padding the integer', () => {
+			// Arrange
+			const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'decimal', minimumFractionDigits: 2 });
+
+			// Act & Assert
+			expect(numberFormat.getBlurFormat(5)).toBe('5,00');
+			expect(numberFormat.getFocusFormat(5)).toBe('5');
+		});
+
+		it('should round to maximumFractionDigits on display as on typing', () => {
+			// Arrange
+			const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'decimal', maximumFractionDigits: 0 });
+
+			// Act & Assert
+			expect(numberFormat.getBlurFormat(1.234)).toBe('1');
+			expect(numberFormat.getFocusFormat(1.234)).toBe('1');
+			expect(numberFormat.parse('1,234').value).toBe(1);
+		});
+
+		it('should round percent to maximumFractionDigits', () => {
+			// Arrange
+			const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'percent', maximumFractionDigits: 0 });
+
+			// Act & Assert
+			expect(numberFormat.getFocusFormat(0.1234)).toBe('12');
+		});
+	});
+
 	describe('currency style case', () => {
 		it.each<FormatTestData>(focusFormatTestsForCurrency)("should format '$value' for focus into '$formatted'", ({ value, formatted }) => {
 			const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'currency', currency: 'EUR' });
