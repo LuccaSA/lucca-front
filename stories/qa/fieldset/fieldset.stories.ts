@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { FieldsetActionDirective, FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'fieldset-stories',
 	templateUrl: './fieldset.stories.html',
-	imports: [FieldsetComponent, FormFieldComponent, TextInputComponent, FormsModule],
+	imports: [FieldsetComponent, FieldsetActionDirective, ButtonComponent, FormFieldComponent, TextInputComponent, FormsModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class fieldsetStory {}
