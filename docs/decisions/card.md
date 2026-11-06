@@ -163,3 +163,15 @@ Status: accepted
 **Decision** — A single `CardActionDirective` on `a[luCardAction], button[luCardAction]`, which only sets the class.
 
 **Rejected options** — Two components like `resourceCard`: duplicated code, an empty template and an ESLint exception on the selector, for no difference in behavior.
+
+## 2026-11-06 — Own wrapper and grid, unlike box
+
+Status: accepted
+
+**Context** — `box` has no wrapper and lays boxes out with `lu-grid` (`box.md`). Accepting a `lu-grid` inside `lu-card-wrapper` was prototyped, to bring both components closer.
+
+**Decision** — `card` keeps its own wrapper and automatic grid, and does not accept a `lu-grid` inside the wrapper. The gap with `box` was agreed on the design side: each approach matches the expected uses of its component.
+
+**Rejected options** — A `lu-grid` projected in the wrapper, which hands the layout over to it: it worked, list semantics included, but the expected uses do not need it.
+
+**Revisit if** — A use of `card` or `box` calls for another layout: both components can evolve then.
