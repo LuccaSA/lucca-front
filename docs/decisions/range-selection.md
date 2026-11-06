@@ -2,7 +2,7 @@
 
 ## 2026-11-06 — Shared logic in `core`, exported with the `ɵ` prefix
 
-Status: proposed · PR #5437
+Status: accepted · PR #5437
 
 **Context** — Range selection (⇧ Shift + click, or ⇧ Shift + Space) comes to three components: `lu-data-table`, `lu-index-table` and `lu-approbation-inbox-list`.
 
@@ -23,7 +23,7 @@ Status: proposed · PR #5437
 
 ## 2026-11-06 — Range limited to the displayed page and to selectable items
 
-Status: proposed · PR #5437
+Status: accepted · PR #5437
 
 **Context** — Between the last clicked checkbox and the one clicked with ⇧ Shift, some items should not change state, and others are not in the DOM.
 
