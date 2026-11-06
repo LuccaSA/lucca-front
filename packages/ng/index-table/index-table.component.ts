@@ -36,7 +36,9 @@ export class IndexTableComponent {
 
 	readonly cols = computed(() => this.header()?.cols());
 
-	readonly rangeSelection = new ɵRangeSelection(() => this.rows().filter((row) => row.bodyRef !== null && row.headRef === null && row.getElementRef().nativeElement.closest('table') === this.tableRef()?.nativeElement));
+	readonly rangeSelection = new ɵRangeSelection(() =>
+		this.rows().filter((row) => row.bodyRef !== null && row.headRef === null && row.getElementRef().nativeElement.closest('table') === this.tableRef()?.nativeElement),
+	);
 
 	readonly classMods = computed(() => {
 		return {
