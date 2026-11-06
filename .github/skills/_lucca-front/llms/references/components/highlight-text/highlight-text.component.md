@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-highlight-text`
+
 ### Text
 
 ```js
@@ -19,6 +21,8 @@ import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 ```
 
 ## HTML/CSS
+
+Classe CSS : `.highlightText`
 
 ### Text sizes
 

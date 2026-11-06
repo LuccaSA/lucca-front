@@ -49,7 +49,7 @@ import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 ## Related files
 
 - 📝 [Code & implementation](./impersonation.component.md)
-
+- 🎨 [Design guidelines](./impersonation.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-impersonation-angular-basic--docs)
 
 ## Changelog
@@ -74,3 +74,24 @@ import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
 ### 22.0.0
 
 ~ `enableFormerEmployees` : transform booleanAttribute → luBooleanAttribute
+
+### Notes de release (ZeroHeight)
+
+#### 22.1.1
+
+##### Deprecated
+
+- `operationIds` and `appInstanceId` inputs — use `uniqueOperationIds` instead.
+
+#### 22.1.0
+
+##### Added
+
+- `operationIds`, `uniqueOperationIds` and `appInstanceId` inputs to restrict the selectable users to the ones reachable through these operations.
+
+#### 21.3.0
+
+##### Added
+
+- `lu-impersonation` component (`impersonation`) to let an administrator browse the application as another user.
+- `selectedUser` model, plus the `enableFormerEmployees`, `clear` and `intl` inputs.

@@ -24,7 +24,7 @@ import { PriorityLevelComponent } from '@lucca-front/ng/priority-level';
 ## Related files
 
 - 📝 [Code & implementation](./priority-level.component.md)
-
+- 🎨 [Design guidelines](./priority-level.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-texts-priority-level-angular--docs)
 
 ## Changelog
