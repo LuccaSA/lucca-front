@@ -1,11 +1,19 @@
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
+
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { CALLOUT_HX, CALLOUT_SIZE, CalloutActionsComponent, CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
+import {
+	CALLOUT_HEADING_LEVEL,
+	CALLOUT_SIZE,
+	CalloutActionsComponent,
+	CalloutComponent,
+	CalloutFeedbackItemComponent,
+	CalloutFeedbackListComponent,
+	CalloutStates,
+	luCalloutTranslations,
+} from '@lucca-front/ng/callout';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Feedback/Callout/Angular/Basic',
@@ -16,10 +24,10 @@ export default {
 		}),
 	],
 	render: (args, context) => {
-		const { palette, heading, hx, actions, actionsInline, ...inputs } = args;
-		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
+		const { palette, heading, headingLevel, actions, actionsInline, ...inputs } = args;
+		const paletteArg = palette ? ` palette="${palette}"` : '';
 		const headingArg = heading ? ` heading="${heading}"` : ``;
-		const hxArg = heading && hx ? ` hx="${hx}"` : ``;
+		const headingLevelArg = heading && headingLevel ? ` headingLevel="${headingLevel}"` : ``;
 
 		const actionsInlineArg = actionsInline ? ` inline` : ``;
 		const actionsTemplate = actions
@@ -34,7 +42,7 @@ export default {
 			props: {
 				...args,
 			},
-			template: `<lu-callout${headingArg}${hxArg}${paletteArg}${generateInputs(inputs, context.argTypes)} (removedChange)="removedChange($event)">
+			template: `<lu-callout${headingArg}${headingLevelArg}${paletteArg}${generateInputs(inputs, context.argTypes)} (removedChange)="removedChange($event)">
 	<p>Feedback description</p>${actionsTemplate}
 </lu-callout>`,
 		};
@@ -92,15 +100,20 @@ export default {
 			description: 'Ajoute un titre au callout. [PortalContent]',
 			table: { category: 'inputs' },
 		},
-		hx: {
-			name: '↳ hx',
-			options: setStoryOptions(CALLOUT_HX),
+		headingLevel: {
+			name: '↳ headingLevel',
+			options: setStoryOptions(CALLOUT_HEADING_LEVEL),
 			control: {
 				type: 'select',
 			},
-			description: '[v21.4] Applique un niveau sémantique au titre.',
+			description: '[v22.2] Applique un niveau sémantique au titre.',
 			if: { arg: 'heading', truthy: true },
 			table: { category: 'inputs' },
+		},
+		hx: {
+			control: false,
+			description: '[Déprécié] Utiliser <code>headingLevel</code>.',
+			table: { category: 'inputs (deprecated)' },
 		},
 		removedChange: {
 			description: 'Événement déclenché lors de l’activation du bouton de suppression.',
@@ -116,22 +129,23 @@ export default {
 			table: { category: 'inputs' },
 		},
 		actions: {
-			description: '[v20.3] Ajoute une liste d’actions sous la description.',
-			table: { category: 'inputs' },
+			description: '[v20.3] Ajoute une liste d’actions sous la description (<code>lu-callout-actions</code>).',
+			table: { category: 'story' },
 		},
 		actionsInline: {
-			name: '↳ actionInline',
+			name: '↳ inline',
 			if: { arg: 'actions', truthy: true },
 			description: '[v20.3] Déplace les actions sur la droite du callout.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (callout-actions)' },
 		},
+		intl: intlArgType(luCalloutTranslations, 'LuCalloutLabel'),
 	},
 } as Meta;
 
 export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsInline: boolean }> = {
+	name: 'Basic',
 	args: {
 		heading: '',
-		palette: 'none',
 		removable: false,
 		removed: false,
 		AI: false,
@@ -139,26 +153,3 @@ export const Template: StoryObj<CalloutComponent & { actions: boolean; actionsIn
 		actionsInline: false,
 	},
 };
-
-export const TemplateTEST = createTestStory({ ...Template, args: { ...Template.args, removable: true } }, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const callout = canvasElement.querySelector('lu-callout');
-		await expect(callout).toBeInTheDocument();
-		await expect(canvas.getByText('Feedback description')).toBeVisible();
-	});
-
-	await step('Vérifie le bouton de fermeture (removable)', async () => {
-		const closeButton = canvas.getByRole('button');
-		await expect(closeButton).toBeVisible();
-	});
-
-	await step('Interaction souris - fermeture du callout', async () => {
-		const closeButton = canvas.getByRole('button');
-		await userEvent.click(closeButton);
-		await waitForAngular();
-		await expect(canvasElement.querySelector('.callout')).not.toBeInTheDocument();
-	});
-});

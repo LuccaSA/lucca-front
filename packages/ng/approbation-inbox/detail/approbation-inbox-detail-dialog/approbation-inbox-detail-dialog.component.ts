@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ViewEncapsulation } from '@angular/core';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { DialogComponent, DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, injectDialogData } from '@lucca-front/ng/dialog';
 import { ApprobationInboxDetailComponent } from '../approbation-inbox-detail/approbation-inbox-detail.component';
@@ -14,5 +14,6 @@ import { ApprobationInboxDetailComponent } from '../approbation-inbox-detail/app
 export class ApprobationInboxDetailDialogComponent {
 	dialogData = injectDialogData<{ detailsRef: ApprobationInboxDetailComponent }>();
 
-	readonly label = input.required<string>();
+	// The link opens this dialog without inputs: the title comes from the detail's own header.
+	readonly label = computed(() => this.dialogData.detailsRef.headerRef()?.label() ?? '');
 }

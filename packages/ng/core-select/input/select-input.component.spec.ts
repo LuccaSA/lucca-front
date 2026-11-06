@@ -121,6 +121,17 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		expect(clueChangeSpy).not.toHaveBeenCalled();
 	});
 
+	it('should not throw nor open the panel on a keydown event without key (e.g. browser autofill)', () => {
+		// Arrange
+		const event = new Event('keydown');
+
+		// Act
+		nativeElement.dispatchEvent(event);
+
+		// Assert
+		expect(component.isPanelOpen).toBe(false);
+	});
+
 	it('should stay non-searchable once the panel has been opened', async () => {
 		// Arrange — no `(clueChange)` binding, so the select must never turn searchable
 		const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });

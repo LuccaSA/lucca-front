@@ -1,3 +1,20 @@
+### 22.0.0
+
+#### Fixed
+
+- Displayed row now matches the current locale on its language part (`en-US` matches an `en` row).
+- Values now carry a `lang` attribute and `translate="no"`, in presentation mode too, so automatic translation tools leave them alone.
+
+### 21.4.1
+
+#### Changed
+
+- Culture prefix now displays the full culture code instead of its first two letters in uppercase.
+
+#### Fixed
+
+- Popover width in "no invariant" mode now accounts for the culture prefix.
+
 ### 21.3.0
 
 #### Added

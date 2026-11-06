@@ -3,3 +3,4 @@ export * from './activity-feed-step/activity-feed-step.component';
 export * from './activity-feed-update-item/activity-feed-update-item.component';
 export * from './activity-feed-update/activity-feed-update.component';
 export * from './activity-feed.component';
+export * from './activity-feed.translate';

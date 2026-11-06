@@ -10,12 +10,26 @@ export default {
 		}),
 	],
 	argTypes: {
+		label: {
+			description: 'Libellé du bouton.',
+			table: { category: 'story' },
+		},
+		hiddenLabel: {
+			description: 'Masque visuellement le libellé (bouton icône seule), qui reste restitué par le lecteur d’écran.',
+			table: { category: 'story' },
+		},
 		icon: {
 			options: ['weatherStars', 'officePenStar', 'bubbleStars'],
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			description: 'Modifie le glyphe de l’icône IA.',
+			table: { category: 'inputs (icon)' },
+		},
+		altIcon: {
+			name: 'alt',
+			description: 'Information restituée par le lecteur d’écran pour l’icône.',
+			table: { category: 'inputs (icon)' },
 		},
 	},
 	render: ({ label, icon, altIcon, hiddenLabel }) => {

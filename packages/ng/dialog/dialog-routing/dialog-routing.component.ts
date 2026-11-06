@@ -1,7 +1,7 @@
 import { assertInInjectionContext, ChangeDetectionStrategy, Component, DestroyRef, inject, Injector, OnDestroy, OnInit, runInInjectionContext, signal, TemplateRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, CanDeactivateFn, DeprecatedGuard, GuardResult, Router, RouterOutlet } from '@angular/router';
-import { combineLatest, concat, map, Observable, of } from 'rxjs';
+import { combineLatest, concat, defaultIfEmpty, defer, every, map, Observable, of, take } from 'rxjs';
 import { provideLuDialog } from '../dialog.providers';
 import { LuDialogService } from '../dialog.service';
 import { LuDialogData, LuDialogRef, LuDialogResult } from '../model';
@@ -147,9 +147,15 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 				return of(true);
 			}
 
-			const results$ = this.config.canDeactivate!.map((cD) => this.callCanDeactivateFn(cD));
+			// Like the router, guards run one after the other and the first veto stops the chain.
+			// Each guard counts once, and the whole chain resolves to a single boolean.
+			// A guard that completes without a value is a veto: the router rejects it too (`EmptyError`).
+			const results$ = this.config.canDeactivate!.map((cD) => defer(() => this.callCanDeactivateFn(cD)).pipe(take(1), defaultIfEmpty(false)));
 
-			return concat(...results$).pipe(map((guardResult) => (typeof guardResult === 'boolean' ? guardResult : true)));
+			return concat(...results$).pipe(
+				map((guardResult) => (typeof guardResult === 'boolean' ? guardResult : true)),
+				every((canDismiss) => canDismiss),
+			);
 		};
 	}
 

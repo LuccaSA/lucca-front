@@ -1,0 +1,30 @@
+@use '@lucca-front/scss/src/components/filterBar/exports' as filterBar;
+
+// Simulated narrow and touch layouts: the filter bar applies them through media queries
+// (viewport width and pointer), which a QA table at a single size cannot reach.
+.demo-filterBar-narrow,
+.demo-filterBar-touch {
+	max-inline-size: 25rem;
+}
+
+.demo-filterBar-narrow .filterBar {
+	@include filterBar.narrow;
+}
+
+// The scroll box overflows its parent by its inline padding: the wrapper compensates for it,
+// so that the visible area matches the narrow one
+.demo-filterBar-touch {
+	margin-inline: var(--pr-t-spacings-100);
+	max-inline-size: 23.5rem;
+}
+
+.demo-filterBar-touch .filterBar {
+	@include filterBar.touch;
+
+	// Undoes the `notTouch` mixin applied on a fine pointer, which disables the scroll box
+	.filterBar-scrollBox.scrollBox {
+		--components-scrollBox-pseudoElementsContent: '';
+		--components-scrollBox-display: flex;
+		--components-scrollBox-firstLast-display: block;
+	}
+}

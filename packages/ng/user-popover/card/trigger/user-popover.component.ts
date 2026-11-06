@@ -2,17 +2,19 @@ import { AsyncPipe, DatePipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, Signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
 import { SkeletonUserPopoverComponent } from '@lucca-front/ng/skeleton';
 import { ILuUser } from '@lucca-front/ng/user';
+import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 import { LuUserPopoverStore } from '../../service/user-popover.store';
 import { LuUserPopover } from '../../user-popover.model';
-import { LU_USER_POPOVER_USER } from '../../user-popover.providers';
+import { LU_USER_POPOVER_CUSTOM_CONTENT, LU_USER_POPOVER_USER } from '../../user-popover.providers';
 import { IsFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 
@@ -20,11 +22,25 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 	selector: 'lu-user-popover-content',
 	templateUrl: './user-popover.component.html',
 	styleUrl: './user-popover.component.scss',
-	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, LinkComponent, SkeletonUserPopoverComponent],
+	imports: [
+		AsyncPipe,
+		NgTemplateOutlet,
+		DatePipe,
+		IntlParamsPipe,
+		IsFuturePipe,
+		IsFutureOrTodayPipe,
+		LeaveEndsDisplayPipe,
+		IconComponent,
+		LinkComponent,
+		SkeletonUserPopoverComponent,
+		DividerComponent,
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserPopoverComponent {
 	luUser = inject<Signal<ILuUser>>(LU_USER_POPOVER_USER);
+
+	customContent = inject(LU_USER_POPOVER_CUSTOM_CONTENT, { optional: true });
 
 	#popoverRef = inject(POPOVER_CONFIG).ref;
 
@@ -34,7 +50,9 @@ export class LuUserPopoverComponent {
 
 	readonly #errorImage$ = new BehaviorSubject<boolean>(false);
 
-	skeletonWidths = [this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent()];
+	readonly #randomPercent = ɵinjectRandomPercent(33, 66);
+
+	skeletonWidths = [this.#randomPercent(), this.#randomPercent(), this.#randomPercent(), this.#randomPercent()];
 
 	public readonly employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
 		switchMap((user) =>
@@ -78,9 +96,5 @@ export class LuUserPopoverComponent {
 
 	pictureError() {
 		this.#errorImage$.next(true);
-	}
-
-	getRandomPercent(min: number = 33, max: number = 66): string {
-		return `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 	}
 }

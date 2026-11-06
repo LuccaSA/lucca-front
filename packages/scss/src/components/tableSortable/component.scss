@@ -7,7 +7,8 @@
 	font-weight: var(--components-sortable-fontWeight);
 	vertical-align: top;
 	align-items: flex-end;
-	white-space: wrap;
+	min-inline-size: var(--components-sortable-minInlineSize);
+	max-inline-size: var(--components-sortable-maxInlineSize);
 	inset-inline-start: var(--components-sortable-offset);
 	padding: 0 var(--pr-t-spacings-50);
 	gap: var(--pr-t-spacings-25);
@@ -20,11 +21,16 @@
 	@include button.ghost;
 
 	@at-root ($atRoot) {
+		.tableSortable-label {
+			min-inline-size: 0;
+		}
+
 		.tableSortable-arrows {
 			margin-block-end: var(--components-sortable-arrowsOffset);
 			position: relative;
 			inline-size: 1rem;
 			block-size: 1rem;
+			flex-shrink: 0;
 		}
 
 		.tableSortable-arrows-ascending,

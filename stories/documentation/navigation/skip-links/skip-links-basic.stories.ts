@@ -1,12 +1,10 @@
-import { createTestStory } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LuSkipLinksComponent, SkipLinkDirective } from '@lucca-front/ng/a11y';
+import { LuSkipLinksComponent, luSkipLinksTranslations, SkipLinkDirective } from '@lucca-front/ng/a11y';
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { ContainerComponent } from '@lucca-front/ng/container';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { Meta, StoryObj } from '@storybook/angular-vite';
-import { expect, within } from 'storybook/test';
+import { intlArgType } from '@/helpers/stories';
 
 @Component({
 	selector: 'skip-links-story',
@@ -188,16 +186,30 @@ import { expect, within } from 'storybook/test';
 class SkipLinksStory {}
 
 export default {
-	title: 'Documentation/Navigation/SkipLinks/Basic',
+	title: 'Documentation/Navigation/SkipLinks/Angular/Basic',
+	argTypes: {
+		luSkipLinkLabel: {
+			description: 'Libellé du lien d’évitement affiché dans `lu-skip-links`.',
+			control: false,
+			table: { category: 'inputs (luSkipLinkTarget)', type: { summary: 'string (required)' } },
+		},
+		luSkipLinkTarget: {
+			description:
+				'Id de l’élément cible. Vide par défaut : l’id existant de l’élément est utilisé, ou un id est généré s’il n’en a pas. Un id explicite (`luSkipLinkTarget="monId"`) écrase l’id existant de l’élément (avec un warning en console).',
+			control: false,
+			table: { category: 'inputs (luSkipLinkTarget)', type: { summary: 'string' }, defaultValue: { summary: "''" } },
+		},
+		intl: intlArgType(luSkipLinksTranslations, 'ILuSkipLinksLabel'),
+	},
 	component: SkipLinksStory,
 } as Meta;
 
 const Template = (props: SkipLinksStory) => ({ props });
 
 const code = `
-import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
+import { LuSkipLinksComponent, SkipLinkDirective } from '@lucca-front/ng/a11y';
 @Component({
-	imports: [LuSkipLinksComponent],
+	imports: [LuSkipLinksComponent, SkipLinkDirective],
 	selector: 'app-component',
 	template: \`
 <!-- Place this at the very top of the body (before the banner) -->
@@ -222,13 +234,3 @@ Basic.parameters = {
 		},
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial du composant', async () => {
-		const skipLink = canvas.getByRole('link', { name: /contenu/i });
-		await expect(skipLink).toBeInTheDocument();
-	});
-});

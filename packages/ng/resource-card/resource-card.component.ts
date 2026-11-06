@@ -1,8 +1,8 @@
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
-import { luBooleanAttribute } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { ResourceCardHeadingLevel, ResourceCardSize } from './resource-card.type';
+import { ResourceCardSize } from './resource-card.type';
 import { LU_RESOURCE_CARD_WRAPPER_INSTANCE } from './wrapper/resource-card-wrapper.token';
 
 @Component({
@@ -26,7 +26,10 @@ export class ResourceCardComponent {
 
 	readonly grid = input(false, { transform: luBooleanAttribute });
 
-	readonly headingLevel = input<ResourceCardHeadingLevel>('3');
+	/**
+	 * Aria level of the title. Defaults to 3.
+	 */
+	readonly headingLevel = input(3, { transform: luNumberAttribute<1 | 2 | 3 | 4 | 5 | 6> });
 
 	readonly size = input<ResourceCardSize | null>(null);
 }

@@ -1,9 +1,10 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
 import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, Injector, input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Subject } from 'rxjs';
+import { filter, Subject } from 'rxjs';
 import { PopoverFocusTrap } from '../../popover-focus-trap';
 import { POPOVER_CONFIG } from '../../popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
@@ -17,7 +18,6 @@ import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
 		'[attr.id]': 'contentId',
 		'(mouseenter)': 'mouseEnter()',
 		'(mouseleave)': 'mouseLeave()',
-		'(window:keydown.escape)': 'close()',
 	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,6 +51,19 @@ export class PopoverContentComponent implements AfterViewInit, OnDestroy {
 
 	mouseLeave(): void {
 		this.mouseLeave$.next();
+	}
+
+	constructor() {
+		// Escape is routed by CDK's keyboard dispatcher rather than listened to on `window`, so only the
+		// topmost overlay reacts to it: a select panel, a dialog or a bottom sheet opened from inside the
+		// popover consumes its own Escape, and the popover no longer closes underneath it.
+		this.config.ref
+			.keydownEvents()
+			.pipe(
+				filter((event) => event.key === 'Escape'),
+				takeUntilDestroyed(),
+			)
+			.subscribe(() => this.close());
 	}
 
 	contentChanged() {

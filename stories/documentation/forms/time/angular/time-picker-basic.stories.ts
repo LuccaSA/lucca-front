@@ -2,9 +2,9 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { BASE_PICKER_SIZE, TimePickerComponent } from '@lucca-front/ng/time';
+import { BASE_PICKER_SIZE, luTimePickerTranslations, TimePickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
@@ -101,6 +101,7 @@ export default {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luTimePickerTranslations, 'TimePickerTranslations'),
 	},
 } as Meta;
 

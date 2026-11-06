@@ -1,0 +1,38 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	align-items: center;
+	color: var(--pr-t-color-text);
+	font: var(--components-priorityLevel-font);
+	gap: var(--components-priorityLevel-gap);
+	min-block-size: var(--components-priorityLevel-minBlockSize);
+
+	@at-root ($atRoot) {
+		.priorityLevel-icon {
+			display: inline-flex;
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-small));
+			}
+		}
+
+		.priorityLevel-icon .lucca-icon {
+			&::before {
+				background:
+					linear-gradient(
+						to right,
+						var(--components-priorityLevel-icon-color1) 0%,
+						var(--components-priorityLevel-icon-color1) calc(100% / 3),
+						var(--components-priorityLevel-icon-color2) calc(100% / 3),
+						var(--components-priorityLevel-icon-color2) calc(100% / 3 * 2),
+						var(--components-priorityLevel-icon-color3) calc(100% / 3 * 2),
+						var(--components-priorityLevel-icon-color3) 100%
+					);
+				background-clip: text;
+				color: transparent;
+			}
+		}
+	}
+}

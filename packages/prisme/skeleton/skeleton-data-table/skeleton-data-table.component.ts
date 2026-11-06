@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
+import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 import { SkeletonColsAlign } from '../skeleton.type';
 
 @Component({
@@ -30,5 +31,5 @@ export class SkeletonDataTableComponent {
 	readonly colsNumber = computed<unknown[]>(() => new Array(this.cols()));
 	readonly rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 
-	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
+	readonly getRandomPercent = ɵinjectRandomPercent(33, 66);
 }

@@ -1,3 +1,9 @@
+### 21.4.1
+
+#### Fixed
+
+- Content height no longer overflows when the navigation is displayed inside a dialog.
+
 ### 21.3.0
 
 #### Added

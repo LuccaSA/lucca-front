@@ -1,3 +1,15 @@
+### 22.1.1
+
+#### Deprecated
+
+- `operationIds` and `appInstanceId` inputs — use `uniqueOperationIds` instead.
+
+### 22.1.0
+
+#### Added
+
+- `operationIds`, `uniqueOperationIds` and `appInstanceId` inputs to restrict the selectable users to the ones reachable through these operations.
+
 ### 21.3.0
 
 #### Added

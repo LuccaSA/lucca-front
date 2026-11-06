@@ -1,4 +1,3 @@
-import { HiddenArgType } from '@/helpers/common-arg-types';
 import { cleanupTemplate, generateInputs, setStoryOptions } from '@/helpers/stories';
 import { CONTAINER_SIZE, ContainerComponent } from '@lucca-front/ng/container';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
@@ -10,7 +9,11 @@ export default {
 			description: 'Centre horizontalement le container.',
 			table: { category: 'inputs' },
 		},
-		overflow: HiddenArgType,
+		overflow: {
+			description:
+				'Permet au container de s’élargir selon son contenu (<code>min-inline-size: fit-content</code>) au lieu de se réduire à l’espace disponible. Utile pour un contenu plus large que l’écran, comme un tableau.',
+			table: { category: 'inputs' },
+		},
 		max: {
 			description: 'Définit la largeur maximale du container.',
 			options: setStoryOptions(CONTAINER_SIZE),

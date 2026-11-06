@@ -71,6 +71,12 @@ export class LuUserPictureComponent {
 	readonly size = input<UserPictureSize>('M');
 
 	/**
+	 * Exposes the user's full name as text alternative to assistive technologies.
+	 * By default the picture is decorative, use it when no visible text identifies the user.
+	 */
+	readonly withAlt = input(false, { transform: luBooleanAttribute });
+
+	/**
 	 * Image loading attribute
 	 * It is set to 'lazy' by default
 	 *
@@ -79,6 +85,7 @@ export class LuUserPictureComponent {
 	readonly imageLoadingAttribute = input<HTMLImageElement['loading']>('lazy');
 
 	readonly initials = computed(() => luUserDisplay(this.user(), this.displayFormat()));
+	readonly fullName = computed(() => luUserDisplay(this.user(), LuDisplayFullname.firstlast));
 	readonly modSize = computed(() => `mod-${this.size()}`);
 	readonly hasPicture = linkedSignal(() => isNotNilOrEmptyString(this.pictureHref()));
 	readonly pictureHref = linkedSignal(() => {

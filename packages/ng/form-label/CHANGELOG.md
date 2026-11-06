@@ -1,3 +1,9 @@
+### 22.0.0
+
+#### Changed
+
+- `counterAlt` translation is now a plain string instead of plural forms: overriding it through `intl` no longer requires a `LuPluralForms` object.
+
 ### 21.3.1
 
 #### Added

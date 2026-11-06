@@ -5,6 +5,9 @@ import { HighlightSectionBubble, HighlightSectionIllustration, HighlightSectionP
 
 const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section';
 
+/**
+ * @deprecated Will be replaced by `lu-box` in v22.2.
+ */
 @Component({
 	selector: 'lu-highlight-section',
 	templateUrl: './highlight-section.component.html',

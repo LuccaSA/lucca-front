@@ -9,7 +9,7 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
@@ -20,7 +20,7 @@ interface FilterBarBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/FilterBar/HTML&CSS',
+	title: 'Documentation/Forms/FiltersPills/FilterBar/HTML&CSS/Basic',
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -36,7 +36,7 @@ export default {
 				CheckboxInputComponent,
 				TextInputComponent,
 				DividerComponent,
-				LuTooltipModule,
+				LuTooltipTriggerDirective,
 			],
 		}),
 		applicationConfig({
@@ -50,6 +50,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 	return `
 	<form>
 		<div class="filterBar">
+			<span class="pr-u-mask" role="status">24 résultats</span>
 			<lu-scroll-box class="filterBar-scrollBox">
 				<div class="filterBar-scrollBox-group">
 					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
@@ -87,14 +88,14 @@ function getTemplate(args: FilterBarBasicStory): string {
 
 					<div class="divider filterBar-divider"></div>
 
-					<button type="button" class="filterPill mod-checkbox">
+					<button type="button" class="filterPill mod-checkbox" #button>
 						<span class="filterPill-checkbox">
 							<span class="filterPill-checkbox-input"></span>
 							<span class="filterPill-checkbox-icon" aria-hidden="true">
 								<span class="filterPill-checkbox-icon-check"></span>
 							</span>
 						</span>
-						<span class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis>
+						<span class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis [luTooltipTriggerAnchor]="button">
 							Inclure les collaborateurs partis
 							<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="Inclure les collaborateurs partis"></span>
 						</span>
@@ -112,6 +113,8 @@ function getTemplate(args: FilterBarBasicStory): string {
 					</div>
 
 					<button type="submit" class="button mod-ghost mod-S palette-product">Appliquer les filtres</button>
+
+					<span class="filterBar-scrollBox-group-results" aria-hidden="true">24 résultats</span>
 				</div>
 				<div class="filterBar-scrollBox-export">
 					<button type="submit" class="button mod-S mod-outlined">Exporter</button>

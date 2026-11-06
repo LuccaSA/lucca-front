@@ -7,3 +7,4 @@ export * from './file-upload.type';
 export { formatFileSize } from './formatter';
 export * from './multi/multi-file-upload.component';
 export * from './single/single-file-upload.component';
+export * from './file-upload.translate';

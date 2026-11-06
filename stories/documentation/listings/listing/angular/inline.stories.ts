@@ -1,10 +1,9 @@
 import { HiddenArgType, PaletteAllArgType } from '@/helpers/common-arg-types';
-import { createTestStory, generateInputs } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
+
 import { IconsList } from '@/stories/icons-list';
-import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
+import { LISTING_SIZE, ListingComponent, ListingItemComponent, ListingSize } from '@lucca-front/ng/listing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, within } from 'storybook/test';
 
 interface ListingBasicStory {
 	checklist: boolean;
@@ -45,7 +44,7 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string }> = {
+export const Template: StoryObj<Omit<ListingComponent, 'size'> & ListingItemComponent & { type: string; size: ListingSize | '' }> = {
 	argTypes: {
 		type: {
 			options: ['', 'checklist', 'icons'],
@@ -88,6 +87,14 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 			description: 'Ajoute un séparateur vertical entre les éléments.',
 			table: { category: 'inputs' },
 		},
+		size: {
+			options: setStoryOptions(LISTING_SIZE),
+			control: {
+				type: 'select',
+			},
+			description: 'Modifie la taille du composant.',
+			table: { category: 'inputs' },
+		},
 	},
 
 	args: {
@@ -96,23 +103,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		palette: 'none',
 		defaultIcon: 'heart',
 		icon: 'foodCroissant',
+		size: '',
 	},
 };
-
-export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu de la liste inline', async () => {
-		const list = canvas.getByRole('list');
-		await expect(list).toBeVisible();
-	});
-
-	await step('Vérifie que les éléments de liste sont visibles', async () => {
-		const items = canvas.getAllByRole('listitem');
-		await expect(items.length).toBeGreaterThan(0);
-		for (const item of items) {
-			await expect(item).toBeVisible();
-		}
-	});
-});

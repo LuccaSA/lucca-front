@@ -1,7 +1,8 @@
 import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
-import { SoftwareIconWrapperComponent, SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
+import { luSoftwareIconWrapperTranslations, SoftwareIconWrapperComponent, SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Software icon/Angular/Wrapper',
@@ -23,6 +24,7 @@ export default {
 			description: 'Nombre maximum d’icônes à afficher. Les icônes supplémentaires sont cachées.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luSoftwareIconWrapperTranslations, 'SoftwareIconWrapperTranslations'),
 	},
 	decorators: [
 		moduleMetadata({

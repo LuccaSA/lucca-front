@@ -110,6 +110,10 @@
 			}
 		}
 
+		.segmentedControl-item-action-tooltip {
+			display: contents;
+		}
+
 		// .viewTabs_panel is deprecated
 		.segmentedControl_panel,
 		.viewTabs_panel {

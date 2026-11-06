@@ -1,0 +1,104 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Simple</div>
+			</td>
+			<td style="inline-size: 50%">
+				<div class="demo-QAtable-list">Multi</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Open</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="filterPill_popover-content popover-contentOptional">
+							<div class="simpleSelect mod-filterPill">
+								<div class="simpleSelect-field">
+									<span class="simpleSelect-field-prefix"></span>
+									<input
+										class="simpleSelect-field-input"
+										type="text"
+										role="combobox"
+										aria-haspopup="listbox"
+										aria-expanded="true"
+										placeholder="Artichaut"
+									/>
+									<div class="simpleSelect-field-value"></div>
+									<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />
+								</div>
+								<div class="selectPanel">
+									<lu-select-panel-layout>
+										<lu-listbox>
+											<lu-listbox-option checked><div class="listboxOption-content-value">Artichaut</div></lu-listbox-option>
+											<lu-listbox-option><div class="listboxOption-content-value">Asperge</div></lu-listbox-option>
+											<lu-listbox-option><div class="listboxOption-content-value">Carotte</div></lu-listbox-option>
+											<lu-listbox-option><div class="listboxOption-content-value">Épinard</div></lu-listbox-option>
+											<lu-listbox-option>
+												<div class="listboxOption-content-value">
+													TopinambourTopinambourTopinambourTopinambourTopinambourTopinambour Topinambour Topinambour Topinambour Topinambour
+													Topinambour
+												</div>
+											</lu-listbox-option>
+										</lu-listbox>
+									</lu-select-panel-layout>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="popover" style="inline-size: fit-content">
+					<div class="popover-content">
+						<div class="filterPill_popover-content popover-contentOptional">
+							<div class="multiSelect mod-filterPill">
+								<div class="multipleSelect-displayer">
+									<div class="multipleSelect-displayer-suffix">
+										<input
+											class="luNativeInput multipleSelect-displayer-search"
+											type="text"
+											role="combobox"
+											aria-haspopup="listbox"
+											aria-expanded="true"
+											readonly
+											placeholder=""
+										/>
+										<lu-icon icon="searchMagnifyingGlass" class="multiSelect-field-icon mod-search" />
+									</div>
+									<div class="chip multipleSelect-displayer-chip">
+										Artichaut
+										<button type="button" class="chip-kill">
+											<span class="pr-u-mask">Supprimer</span>
+										</button>
+									</div>
+								</div>
+								<div class="selectPanel">
+									<lu-select-panel-layout class="lu-option-picker-panel mod-multiple">
+										<lu-listbox multiple>
+											<lu-listbox-option checked><div class="listboxOption-content-value">Artichaut</div></lu-listbox-option>
+											<lu-listbox-option><div class="listboxOption-content-value">Asperge</div></lu-listbox-option>
+											<lu-listbox-option><div class="listboxOption-content-value">Carotte</div></lu-listbox-option>
+											<lu-listbox-option><div class="listboxOption-content-value">Épinard</div></lu-listbox-option>
+											<lu-listbox-option>
+												<div class="listboxOption-content-value">
+													TopinambourTopinambourTopinambourTopinambourTopinambourTopinambour Topinambour Topinambour Topinambour Topinambour
+													Topinambour
+												</div>
+											</lu-listbox-option>
+										</lu-listbox>
+									</lu-select-panel-layout>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

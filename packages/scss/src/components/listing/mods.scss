@@ -2,6 +2,18 @@
 
 @use '@lucca-front/icons/src/icon/exports' as icons;
 
+@mixin S {
+	--components-listing-inlineStart: var(--pr-t-spacings-300);
+	--components-listing-item-font: var(--pr-t-font-body-S);
+	--components-listing-item-number-font: var(--pr-t-font-body-XS);
+	--components-listing-item-number-size: var(--pr-t-spacings-200);
+	--components-listing-item-icon-size: var(--pr-t-spacings-200);
+
+	.listing-item-icon {
+		@include icons.XS;
+	}
+}
+
 @mixin ordered {
 	--components-listing-listStyleType: decimal;
 }

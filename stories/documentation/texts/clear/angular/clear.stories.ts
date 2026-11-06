@@ -1,10 +1,13 @@
-import { CLEAR_SIZE, ClearComponent } from '@lucca-front/ng/clear';
+import { CLEAR_SIZE, ClearComponent, luClearTranslations } from '@lucca-front/ng/clear';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Clear/Angular/Basic',
+	argTypes: {
+		intl: intlArgType(luClearTranslations, 'LuClearLabel'),
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [ClearComponent],
@@ -12,15 +15,15 @@ export default {
 	],
 
 	render: (args, { argTypes }) => {
-		const { size, alt, hidden, palette, ...inputArgs } = args;
-		const sizeAttr = size === 'S' ? ` size="S"` : ``;
+		const { alt, hidden, ...inputArgs } = args;
 		const hiddenAttr = hidden ? ` hidden` : ``;
-		const paletteAttr = palette ? ` palette="${palette}"` : ``;
+		// The projected label is only displayed when it carries the `#content` template ref (see ClearComponent.contentRef)
+		const altContent = alt ? `<span #content>${alt}</span>` : ``;
 		return {
 			props: {
 				...args,
 			},
-			template: `<lu-clear${hiddenAttr}${sizeAttr}${paletteAttr}${generateInputs(inputArgs, argTypes)} (onClear)="onClear($event)">${alt}</lu-clear>`,
+			template: `<lu-clear${hiddenAttr}${generateInputs(inputArgs, argTypes)} (onClear)="onClear($event)">${altContent}</lu-clear>`,
 		};
 	},
 } as Meta;
@@ -29,7 +32,7 @@ export const Template: StoryObj = {
 	argTypes: {
 		disabled: {
 			description: 'Désactive le bouton.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		palette: {
 			options: setStoryOptions(PALETTE),
@@ -42,29 +45,29 @@ export const Template: StoryObj = {
 		inverted: {
 			if: { arg: 'disabled', truthy: false },
 			description: 'Modifie les couleurs du bouton pour un usage sur fond foncé.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		size: {
 			options: setStoryOptions(CLEAR_SIZE),
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie la taille du bouton.',
+			description: 'Modifie la taille du bouton. Par défaut : taille M.',
 			table: { category: 'inputs' },
 		},
 		alt: {
-			description: 'Information restituée par le lecteur d’écran.',
-			table: { category: 'inputs' },
+			description: 'Information restituée par le lecteur d’écran (contenu projeté portant la référence <code>#content</code>). Par défaut : traduction <code>intl.clear</code>.',
+			table: { category: 'content' },
 		},
 		hidden: {
-			description: 'Masque le bouton.',
-			table: { category: 'inputs' },
+			description: 'Masque le bouton (attribut HTML natif).',
+			table: { category: 'attributes' },
 		},
 		onClear: {
 			description: 'Événement déclenché lors du clic sur le bouton.',
 			action: 'onClear',
 			control: false,
-			table: { category: 'outputs', type: { summary: 'T' } },
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 	},
 	args: {

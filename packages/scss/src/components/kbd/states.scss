@@ -1,0 +1,10 @@
+@mixin play {
+	--components-kbd-animationDelay: calc(var(--commons-animations-durations-slow) * 2.5);
+	--components-kbd-last-animationName: kbdTap;
+	--components-kbd-modifier-animationName: kbdHold;
+}
+
+@mixin reducedMotion {
+	--components-kbd-last-animationName: none;
+	--components-kbd-modifier-animationName: none;
+}

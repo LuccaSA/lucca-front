@@ -1,15 +1,13 @@
-import { Observable, of } from 'rxjs';
-import { InjectionToken, makeEnvironmentProviders, Signal } from '@angular/core';
+import { InjectionToken, makeEnvironmentProviders, Signal, TemplateRef } from '@angular/core';
 import { ILuUser } from '@lucca-front/ng/user';
 
 export const LU_USER_POPOVER_USER = new InjectionToken<Signal<ILuUser>>('user-popover-user');
 
-/**
- * @deprecated no longer needed as popover is always activated
- */
-export const USER_POPOVER_IS_ACTIVATED = new InjectionToken<Observable<boolean>>('user-popover-is-activated', {
-	factory: () => of(true),
-});
+export interface LuUserPopoverCustomContentContext {
+	$implicit: ILuUser;
+}
+
+export const LU_USER_POPOVER_CUSTOM_CONTENT = new InjectionToken<Signal<TemplateRef<LuUserPopoverCustomContentContext> | null>>('user-popover-custom-content');
 
 /**
  * @deprecated no longer needed as user popover uses `luPopover2`

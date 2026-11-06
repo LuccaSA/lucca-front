@@ -1,9 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, linkedSignal, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { BaseIndexTableCell } from '../base-index-table-cell';
 import { LU_INDEX_TABLE_CELL_INSTANCE } from '../index-table-cell.token';
 import { IndexTableSort } from '../index-table.type';
@@ -24,13 +25,13 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 		'[class.mod-alignStart]': 'align() === "start" || alignCol() === "start"',
 		'[class.mod-alignCenter]': 'align() === "center" || alignCol() === "center"',
 		'[class.mod-alignEnd]': 'align() === "end" || alignCol() === "end"',
-		'[attr.aria-sort]': 'sort()',
+		'[attr.aria-sort]': 'currentSort()',
 		'[attr.scope]': 'bodyRef !== null ? "row" : "col"',
 		'[class.mod-selectable]': 'selectable()',
 		'[class.mod-actions]': 'actions()',
 		'[style.--components-indexTable-cell-fixed-width]': 'inlineSize() !== 0 ? inlineSize() : null',
 	},
-	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule],
+	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule, LuTooltipTriggerDirective],
 	providers: [
 		{
 			provide: LU_INDEX_TABLE_CELL_INSTANCE,
@@ -42,15 +43,27 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 export class IndexTableRowCellHeaderComponent extends BaseIndexTableCell {
 	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 
-	readonly sort = model<IndexTableSort | null>(null);
+	readonly sort = input<IndexTableSort | null>(null);
+
+	readonly sortChange = output<IndexTableSort>();
+
+	protected readonly currentSort = linkedSignal(() => this.sort());
 	readonly selectable = input(false, { transform: luBooleanAttribute });
 	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 	readonly actions = input(false, { transform: luBooleanAttribute });
 	readonly inlineSize = input(0, { transform: luNumberAttribute });
+	readonly sortWithEllipsis = input(false, { transform: luBooleanAttribute });
+
+	// #sortButton hosts the luButton component, so the template ref resolves to that component
+	// instance rather than the native element — read it explicitly as an ElementRef instead.
+	protected readonly sortButtonRef = viewChild<unknown, ElementRef<HTMLElement>>('sortButton', { read: ElementRef });
 
 	toggleSort(): void {
-		if (this.sort()) {
-			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(this.sort() ?? 'none') + 1) % SORT_VALUES.length]);
+		const sort = this.currentSort();
+		if (sort) {
+			const next = SORT_VALUES[(SORT_VALUES.indexOf(sort) + 1) % SORT_VALUES.length];
+			this.currentSort.set(next);
+			this.sortChange.emit(next);
 		}
 	}
 }

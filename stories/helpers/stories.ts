@@ -1,4 +1,5 @@
 import { LOCALE_ID } from '@angular/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { applicationConfig, Args, ArgTypes, StoryObj } from '@storybook/angular-vite';
 import { useState } from 'storybook/preview-api';
 
@@ -125,6 +126,26 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 		}
 		return `${acc} ${name}="${value.toString()}"`;
 	}, '');
+}
+
+/**
+ * Builds the documentation-only argType of the `intl` input, in its own `translations` category.
+ * The available keys and their default (`en`) values are listed in an expandable detail of the Controls panel.
+ * @param translations the translations of the component, as exported by its entrypoint; several ones are merged in order, like `intlInputOptions`
+ * @param typeName the name of the translations interface, displayed as the arg type
+ * @param host the selector of the component owning the `intl` input, when it is not the main component of the story
+ */
+export function intlArgType(translations: LuTranslation<object> | LuTranslation<object>[], typeName: string, host?: string): ArgTypes[string] {
+	const defaults = [translations].flat().reduce((acc, translation) => ({ ...acc, ...translation['en'] }), {});
+	return {
+		name: 'intl',
+		control: false,
+		description: 'Il est possible de remplacer les traductions par défaut du composant. Seules les clés renseignées sont modifiées.',
+		table: {
+			category: host ? `translations (${host})` : 'translations',
+			type: { summary: `Partial<${typeName}>`, detail: JSON.stringify(defaults, null, 2) },
+		},
+	};
 }
 
 export interface StoryModel<T> {

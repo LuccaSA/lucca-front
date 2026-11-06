@@ -4,6 +4,33 @@
 
 @mixin dark {
 	--components-highlightData-background: var(--palettes-100, var(--palettes-product-100));
+	--palettes-assets-primary: var(--components-highlightData-bubble-primary-dark);
+	--palettes-assets-secondary: var(--components-highlightData-bubble-secondary-dark);
+	--palettes-assets-brand: var(--components-highlightData-bubble-brand-dark);
+}
+
+@mixin success {
+	--components-highlightData-bubble-primary-light: var(--palettes-success-100);
+	--components-highlightData-bubble-primary-dark: var(--palettes-success-300);
+	--components-highlightData-bubble-secondary-light: var(--palettes-brand-300);
+	--components-highlightData-bubble-secondary-dark: var(--palettes-brand-100);
+	--components-highlightData-bubble-brand-dark: var(--palettes-assets-primary-light);
+}
+
+@mixin warning {
+	--components-highlightData-bubble-primary-light: var(--palettes-warning-100);
+	--components-highlightData-bubble-primary-dark: var(--palettes-warning-300);
+	--components-highlightData-bubble-secondary-light: var(--palettes-brand-300);
+	--components-highlightData-bubble-secondary-dark: var(--palettes-assets-brand-lighter);
+	--components-highlightData-bubble-brand-dark: var(--palettes-assets-primary-dark);
+}
+
+@mixin critical {
+	--components-highlightData-bubble-primary-light: var(--palettes-critical-100);
+	--components-highlightData-bubble-primary-dark: var(--palettes-critical-300);
+	--components-highlightData-bubble-secondary-light: var(--palettes-brand-300);
+	--components-highlightData-bubble-secondary-dark: var(--palettes-assets-brand-lighter);
+	--components-highlightData-bubble-brand-dark: var(--palettes-brand-300);
 }
 
 @mixin valueFirst {

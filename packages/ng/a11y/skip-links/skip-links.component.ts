@@ -21,5 +21,6 @@ export class LuSkipLinksComponent {
 		e.preventDefault();
 		this.#document.location.hash = '';
 		this.#document.location.hash = hash;
+		this.#document.getElementById(hash.slice(1))?.focus();
 	}
 }

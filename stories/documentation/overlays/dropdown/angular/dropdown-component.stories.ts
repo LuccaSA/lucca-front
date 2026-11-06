@@ -33,7 +33,7 @@ const code = `
 
   /* Vous pouvez disable un enfant avec 'is-disabled' */
   <li class="dropdown-list-option">
-    <span class="dropdown-list-option-action is-disabled">Link 1</a>
+    <span class="dropdown-list-option-action is-disabled">Link 1</span>
   </li>
 
   /* Vous pouvez également utiliser un <button></button> au lieu d'un <a></a>. */
@@ -52,6 +52,10 @@ export const Component: StoryObj<DropdownComponentStories> = {
 Component.parameters = {
 	controls: { include: [] },
 	docs: {
+		description: {
+			story:
+				'**Déprécié** : `LuDropdownModule` et le composant `<lu-dropdown>` sont dépréciés. Utiliser la directive `[luDropdown]` avec `lu-dropdown-menu`, `lu-dropdown-item` et `[lu-dropdown-action]` (voir la story Angular/Directive).',
+		},
 		source: {
 			language: 'ts',
 			type: 'code',

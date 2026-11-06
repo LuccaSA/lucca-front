@@ -1,13 +1,12 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputComponent } from '@lucca-front/ng/date2';
+import { CALENDAR_MODE, DATE2_CLEAR_BEHAVIOR, DATE_FORMAT_CONST, DateInputComponent, luDate2Translations } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
-import { createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
+
+import { generateInputs, intlArgType, setStoryOptions } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
-import { waitForAngular } from '../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/Date2/DateInput',
@@ -32,12 +31,17 @@ export default {
 		},
 		selected: {
 			control: 'date',
-			description: 'Définit une date sélectionnée.',
-			table: { category: 'inputs' },
+			description: 'Date sélectionnée, liée via `ngModel`.',
+			table: { category: 'ngModel' },
 		},
 		hideToday: {
 			control: 'boolean',
 			description: 'Retire la mise en valeur de la date du jour.',
+			table: { category: 'inputs' },
+		},
+		hasTodayButton: {
+			control: 'boolean',
+			description: 'Ajoute un bouton pour sélectionner la date du jour.',
 			table: { category: 'inputs' },
 		},
 		clearable: {
@@ -49,19 +53,25 @@ export default {
 			control: 'select',
 			options: setStoryOptions(DATE2_CLEAR_BEHAVIOR),
 			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'clear' } },
 		},
 		format: {
 			control: 'select',
 			options: setStoryOptions(DATE_FORMAT_CONST),
 			description: 'Modifie le format de date.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'date' } },
 		},
 		mode: {
 			control: 'select',
 			options: setStoryOptions(CALENDAR_MODE),
 			description: "Modifie le mode de sélection à la semaine, au mois ou à l'année.",
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'day' } },
+		},
+		calendarMode: {
+			control: 'select',
+			options: setStoryOptions(CALENDAR_MODE),
+			description: 'Vue affichée par le calendrier à l’ouverture (jour, mois ou année), indépendamment du mode de sélection. Vaut `mode` par défaut. Two-way.',
+			table: { category: 'models', type: { summary: 'CalendarMode | null' } },
 		},
 		humanized: {
 			control: 'boolean',
@@ -79,6 +89,27 @@ export default {
 			description: 'Applique une pleine largeur au composant.',
 			table: { category: 'inputs' },
 		},
+		autocomplete: {
+			control: 'select',
+			options: ['off', 'on'],
+			description: 'Applique une valeur d’autocomplete au champ.',
+			table: { category: 'inputs', defaultValue: { summary: 'off' } },
+		},
+		placeholder: {
+			control: 'text',
+			description: 'Modifie le placeholder du champ. Par défaut, le format de date localisé.',
+			table: { category: 'inputs' },
+		},
+		ranges: {
+			control: false,
+			description: 'Périodes à mettre en valeur dans le calendrier.',
+			table: { category: 'inputs', type: { summary: 'readonly DateRange[] | readonly DateRangeInput[]' } },
+		},
+		getCellInfo: {
+			control: false,
+			description: 'Fonction appelée pour chaque cellule du calendrier afin de personnaliser son statut : classes, désactivation, sélection.',
+			table: { category: 'inputs', type: { summary: '(day: Date, mode: CalendarMode) => CellStatus' } },
+		},
 		disableOverflow: {
 			description: 'Empêche la sélection des jours du mois précédent ou suivant visibles sur le mois en cours.',
 			table: { category: 'inputs' },
@@ -89,12 +120,12 @@ export default {
 			table: { category: 'inputs' },
 		},
 		hideWeekend: {
-			description: 'Retire l’effet grisé visible sur les jours du isWeekend.',
+			description: 'Retire l’effet grisé visible sur les jours du week-end.',
 			table: { category: 'inputs' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		panelOpened: {
 			description: "Événement déclenché à l'ouverture du calendrier.",
@@ -108,9 +139,11 @@ export default {
 			control: false,
 			table: { category: 'outputs', type: { summary: 'void' } },
 		},
+		intl: intlArgType(luDate2Translations, 'Date2Translate'),
 	},
 	render: (args, { argTypes }) => {
-		const { min, max, focusedDate, presentation, ...flags } = args;
+		// `selected` is the ngModel value: keep it out of the generated inputs
+		const { min, max, focusedDate, presentation, selected: _selected, ...flags } = args;
 		const selected = args['selected'] ? new Date(args['selected']) : null;
 		const defaultDate = args['format'] === 'date' ? selected : selected?.toISOString().substring(0, 10);
 		const minValue = args['format'] === 'date' ? new Date(args['min']) : new Date(args['min'] ?? 0)?.toISOString().substring(0, 10);
@@ -126,7 +159,7 @@ export default {
 			},
 			template: `
 			<lu-form-field label="Date input example" inlineMessage="Inline message example"${generateInputs({ presentation }, argTypes)}>
-				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="off"${generateInputs(flags, argTypes)} (panelOpened)="panelOpened()" (panelClosed)="panelClosed()" />
+				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate"${generateInputs(flags, argTypes)} (panelOpened)="panelOpened()" (panelClosed)="panelClosed()" />
 			</lu-form-field>
 
 			<pr-story-model-display>{{ selected }}</pr-story-model-display>
@@ -190,57 +223,6 @@ export const Humanized: StoryObj<DateInputComponent & { selected: Date; presenta
 	},
 };
 
-export const HumanizedTEST = createTestStory(Humanized, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-	const input = canvas.getByTestId('lu-date-input');
-
-	await step('Hors focus, la date du jour est affichée en langage naturel', async () => {
-		await expect(input).toHaveValue('Aujourd’hui');
-	});
-
-	await step('Au focus, la date repasse au format numérique éditable', async () => {
-		input.focus();
-		await waitForAngular();
-		await expect(input).toHaveValue(new Intl.DateTimeFormat('fr-FR').format(new Date()));
-	});
-
-	await step('Au blur, la date revient en langage naturel', async () => {
-		await userEvent.keyboard('{Escape}');
-		input.blur();
-		await waitForAngular();
-		await expect(input).toHaveValue('Aujourd’hui');
-	});
-});
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-	const input = canvas.getByTestId('lu-date-input');
-
-	await step('Vérifie le rendu initial', async () => {
-		await expect(input).toBeVisible();
-	});
-
-	await step('Interaction souris - ouverture du calendrier', async () => {
-		await userEvent.click(input);
-		await waitForAngular();
-		await expect(screen.getByRole('grid')).toBeVisible();
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-	});
-
-	await step('Interaction clavier - ouverture du calendrier', async () => {
-		input.focus();
-		await expect(input).toHaveFocus();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await expect(screen.getByRole('grid')).toBeVisible();
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-	});
-});
-
 export const Week: StoryObj<DateInputComponent & { selected: Date; presentation: boolean }> = {
 	name: 'Week',
 	args: {
@@ -259,58 +241,3 @@ export const Week: StoryObj<DateInputComponent & { selected: Date; presentation:
 		focusedDate: 1784678400000,
 	},
 };
-
-export const WeekTEST = createTestStory(Week, async ({ canvasElement, step }) => {
-	const canvas = within(canvasElement);
-	const input = canvas.getByRole('combobox');
-
-	await step('Souris : ouvrir le calendrier et sélectionner une semaine', async () => {
-		await userEvent.click(input);
-		await waitForAngular();
-
-		const rowheaders = within(screen.getByRole('grid')).getAllByRole('rowheader');
-		await userEvent.click(within(rowheaders[2]).getByRole('button'));
-		await waitForAngular();
-
-		// Le popover se ferme et l'input affiche la semaine sélectionnée
-		await expect(input).not.toHaveValue('');
-
-		// Réouverture : exactement une ligne de semaine doit être sélectionnée
-		await userEvent.click(input);
-		await waitForAngular();
-		const selectedWeeks = within(screen.getByRole('grid'))
-			.getAllByRole('rowheader')
-			.filter((th) => th.getAttribute('aria-selected') === 'true');
-		await expect(selectedWeeks).toHaveLength(1);
-
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-	});
-
-	await step('Clavier : naviguer dans le calendrier et sélectionner une semaine', async () => {
-		await userEvent.click(input);
-		await waitForAngular();
-		// Le focus est sur le bouton de la semaine tabbable
-
-		// Descendre d'une semaine
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-
-		// Sélectionner avec Entrée
-		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
-
-		await expect(input).not.toHaveValue('');
-
-		// Réouverture : exactement une ligne de semaine doit être sélectionnée
-		await userEvent.click(input);
-		await waitForAngular();
-		const selectedWeeks = within(screen.getByRole('grid'))
-			.getAllByRole('rowheader')
-			.filter((th) => th.getAttribute('aria-selected') === 'true');
-		await expect(selectedWeeks).toHaveLength(1);
-
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-	});
-});

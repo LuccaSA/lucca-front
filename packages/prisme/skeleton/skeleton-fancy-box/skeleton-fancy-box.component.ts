@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 
 @Component({
 	selector: 'lu-skeleton-fancy-box',
@@ -7,5 +8,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonFancyBoxComponent {
-	readonly getRandomPercent = (min: number = 80, max: number = 100): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
+	readonly getRandomPercent = ɵinjectRandomPercent(80, 100);
 }

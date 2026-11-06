@@ -88,7 +88,18 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
-			table: { category: 'models' },
+			table: { category: 'inputs' },
+		},
+		sortWithEllipsis: {
+			if: { arg: 'sort', truthy: true },
+			description: 'Tronque le libellé du header avec une ellipsis si la colonne n’offre pas assez de largeur.',
+			table: { category: 'inputs' },
+		},
+		sortChange: {
+			description: 'Événement déclenché lorsque l’utilisateur change le tri de la cellule d’en-tête.',
+			action: 'sortChange',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'IndexTableSort' } },
 		},
 		align: {
 			options: setStoryOptions(INDEX_TABLE_ALIGN),
@@ -159,6 +170,8 @@ export default {
 			action,
 			hiddenLabel,
 			sort,
+			sortWithEllipsis,
+			sortChange,
 			align,
 			expanded,
 			pagination,
@@ -178,7 +191,8 @@ export default {
 		const allowActionTpl = allowAction ? `<a href="#">Content</a>` : `Content`;
 		const intermediateFooterAttr = intermediateFooter ? ` tfoot` : ``;
 		const hiddenLabelAttr = hiddenLabel ? ` hiddenLabel` : ``;
-		const sortAttr = sort ? ` sort="${sort}"` : ``;
+		const sortAttr = sort ? ` sort="${sort}" (sortChange)="sortChange($event)"` : ``;
+		const sortWithEllipsisAttr = sortWithEllipsis ? ` sortWithEllipsis` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
 		const groupExpandedAttr = expanded && group ? ` [expanded]="true"` : ``;
 		const groupButtonAltAttr = group ? ` groupButtonAlt="${groupButtonAlt}"` : ``;
@@ -224,7 +238,7 @@ export default {
 			? `<tr luIndexTableRow>
 			<th luIndexTableCell colspan="3">
 				<lu-empty-state-section
-					hx="3"
+					headingLevel="3"
 					illustration="magnifyingGlass"
 					heading="Empty State"
 					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
@@ -253,12 +267,13 @@ export default {
 			: ``;
 
 		return {
+			props: { sortChange },
 			template: `<lu-index-table${selectableAttr}${layoutFixedAttr}${emptyAttr}>
 	<thead luIndexTableHead>
 		<tr luIndexTableRow${selectableAllParam}${mixedAttr}>
 			<th luIndexTableCell>Label</th>
 			<th luIndexTableCell${hiddenLabelAttr}>Label</th>
-			<th luIndexTableCell${alignAttr}${sortAttr}>Label</th>
+			<th luIndexTableCell${alignAttr}${sortAttr}${sortWithEllipsisAttr}>Label</th>
 		</tr>
 	</thead>
 	<tbody luIndexTableBody${groupAttr}${groupButtonAltAttr}${groupExpandedAttr}>
@@ -279,6 +294,7 @@ export const Basic: StoryObj = {
 		mixed: false,
 
 		sort: '',
+		sortWithEllipsis: false,
 		align: '',
 		hiddenLabel: false,
 

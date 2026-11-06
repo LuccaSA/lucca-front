@@ -18,11 +18,11 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 						<img
 							alt=""
 							class="highlightData-illustrations-front"
@@ -44,11 +44,11 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 					</div>
 				</div>
 			</td>
@@ -76,11 +76,11 @@
 						<dd class="highlightData-content-action"><button type="button" class="button mod-outlined">Action</button></dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 						<img
 							alt=""
 							class="highlightData-illustrations-front"
@@ -152,11 +152,11 @@
 							<dd class="highlightData-content-value">Content</dd>
 						</dl>
 						<div class="highlightData-illustrations">
-							<img
-								alt=""
+							<div
 								class="highlightData-illustrations-back"
-								src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-							/>
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+							></div>
 							<img
 								alt=""
 								class="highlightData-illustrations-front"
@@ -200,11 +200,11 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-dark-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 						<img
 							alt=""
 							class="highlightData-illustrations-front"
@@ -218,6 +218,38 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Palettes</td>
+			<td>
+				<div class="demo-QAtable-list mod-white">
+					@for (palette of ["success", "warning", "critical", "timmi"]; track palette) {
+						@for (theme of ["light", "dark"]; track theme) {
+							<div class="highlightData mod-{{ theme }} palette-{{ palette }}" style="inline-size: 100%">
+								<dl class="highlightData-content">
+									<dt class="highlightData-content-title">{{ palette }}</dt>
+									<dd class="highlightData-content-value">{{ theme }}</dd>
+								</dl>
+								<div class="highlightData-illustrations">
+									<div
+										class="highlightData-illustrations-back"
+										aria-hidden="true"
+										[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+									></div>
+								</div>
+							</div>
+						}
+					}
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list mod-white">
+					@for (palette of ["success", "warning", "critical", "timmi"]; track palette) {
+						<lu-highlight-data [heading]="palette" value="light" bubble="1" theme="light" [palette]="palette" style="inline-size: 100%" />
+						<lu-highlight-data [heading]="palette" value="dark" bubble="1" theme="dark" [palette]="palette" style="inline-size: 100%" />
+					}
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Nested</td>
 			<td style="inline-size: 50%">
 				<div class="highlightData mod-nested mod-light">
@@ -226,11 +258,11 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 						<img
 							alt=""
 							class="highlightData-illustrations-front"
@@ -252,11 +284,11 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 						<img
 							alt=""
 							class="highlightData-illustrations-front"
@@ -289,11 +321,11 @@
 							<dd class="highlightData-content-value">Content</dd>
 						</dl>
 						<div class="highlightData-illustrations">
-							<img
-								alt=""
+							<div
 								class="highlightData-illustrations-back"
-								src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-							/>
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+							></div>
 							<img
 								alt=""
 								class="highlightData-illustrations-front"
@@ -308,11 +340,11 @@
 							<dd class="highlightData-content-value">Content</dd>
 						</dl>
 						<div class="highlightData-illustrations">
-							<img
-								alt=""
+							<div
 								class="highlightData-illustrations-back"
-								src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-							/>
+								aria-hidden="true"
+								[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+							></div>
 							<img
 								alt=""
 								class="highlightData-illustrations-front"
@@ -338,11 +370,11 @@
 						<dd class="highlightData-content-value">Content</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 						<img
 							alt=""
 							class="highlightData-illustrations-front"
@@ -365,11 +397,11 @@
 						<dd class="highlightData-content-subText">Subtext</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 						<img
 							alt=""
 							class="highlightData-illustrations-front"
@@ -391,15 +423,14 @@
 						<dt class="highlightData-content-title">Title</dt>
 						<dd class="highlightData-content-value">
 							Content Content Content Content Content Content Content Content Content Content Content Content Content Content
-							<br />Content<br />Content
 						</dd>
 					</dl>
 					<div class="highlightData-illustrations">
-						<img
-							alt=""
+						<div
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
-						/>
+							aria-hidden="true"
+							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"
+						></div>
 						<img
 							alt=""
 							class="highlightData-illustrations-front"

@@ -1,17 +1,18 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { FormsModule } from '@angular/forms';
+import { DateRange, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'date-range-input-stories',
 	templateUrl: './date-range-input.stories.html',
-	imports: [FormFieldComponent, DateRangeInputComponent, ReactiveFormsModule],
+	imports: [FormFieldComponent, DateRangeInputComponent, FormsModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DateRangeInputStory {
-	control = new FormControl(null);
+	emptyRange: DateRange | null = null;
+	filledRange: DateRange = { start: new Date(2024, 8, 16), end: new Date(2024, 8, 20) };
 }
 
 export default {
@@ -19,7 +20,7 @@ export default {
 	component: DateRangeInputStory,
 	decorators: [
 		applicationConfig({
-			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
 		}),
 	],
 } as Meta;

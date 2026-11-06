@@ -9,6 +9,10 @@
 		--components-segmentedControl-width: 100%;
 	}
 
+	.filterBar-scrollBox-tabs .segmentedControl {
+		--components-segmentedControl-direction: row;
+	}
+
 	.filterBar-divider.divider {
 		inline-size: 100%;
 	}
@@ -24,6 +28,11 @@
 		--components-segmentedControl-wrap: nowrap;
 	}
 
+	.filterBar-scrollBox-tabs .segmentedControl {
+		--components-segmentedControl-whiteSpace: nowrap;
+		--components-segmentedControl-wrap: nowrap;
+	}
+
 	.filterBar-scrollBox.scrollBox {
 		@include overflow.hide;
 		@include scrollBox.noBackground;
@@ -34,4 +43,9 @@
 	.filterBar-scrollBox.scrollBox {
 		@include scrollBox.disabled;
 	}
+}
+
+@mixin exportAfterTabs {
+	--components-filterBar-scrollBox-export-marginInlineStart: 0;
+	--components-filterBar-scrollBox-export-paddingInlineStart: 0;
 }

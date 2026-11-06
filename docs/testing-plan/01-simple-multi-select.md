@@ -23,8 +23,8 @@ subject here).
    in each component's own spec.
 2. Read existing specs and stories:
    `packages/ng/simple-select/**/*.spec.ts`, `packages/ng/multi-select/**/*.spec.ts`,
-   `stories/documentation/forms/select/*.stories.ts` (several already have play functions —
-   list them and do not duplicate).
+   `stories/documentation/forms/select/*.stories.ts` and the play functions in
+   `stories/e2e/simple-select/` and `stories/e2e/multi-select/` (list them and do not duplicate).
 3. Read both components' templates to get the real roles/testids (the trigger is a
    `combobox`, the panel a `listbox` with `option` children).
 
@@ -61,7 +61,7 @@ Forms contract (both, per conventions): value updates, `writeValue`, `disable()`
 ## Storybook play functions (real browser)
 
 Only where jsdom lies: panel positioning is not testable here — skip it. Add/extend play
-stories in `stories/documentation/forms/select/` for: focus returning to the combobox after
+stories in `stories/e2e/simple-select/` and `stories/e2e/multi-select/` for: focus returning to the combobox after
 Escape and after option selection (already partially covered — extend, don't duplicate),
 and multi-select chip removal via keyboard.
 

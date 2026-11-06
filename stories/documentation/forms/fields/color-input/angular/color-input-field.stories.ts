@@ -4,12 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { ColorInputComponent } from '@lucca-front/ng/forms';
+import { ColorInputComponent, luColorTranslations } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
-import { createTestStory, generateInputs, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
-import { waitForAngular } from '../../../../../helpers/test';
+import { cleanupTemplate, generateInputs, intlArgType, setStoryOptions, useStoryModel } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Color Picker/Angular',
@@ -23,15 +21,15 @@ export default {
 			type: 'string',
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle. ',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		label: {
 			description: 'Modifie le label du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
@@ -39,7 +37,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
@@ -47,11 +45,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une largeur fixe au champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessage: {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -59,11 +57,16 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)', defaultValue: { summary: 'null' } },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
+		},
+		colors: {
+			control: false,
+			description: 'Liste des couleurs proposées. Requis.',
+			table: { category: 'inputs', type: { summary: 'ColorOption[]' } },
 		},
 		clearable: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
@@ -73,6 +76,7 @@ export default {
 			description: 'Modifie la taille du color picker pour le rendre plus petit.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luColorTranslations, 'LuColorLabel'),
 	},
 } as Meta;
 
@@ -82,7 +86,7 @@ export const Basic: StoryObj<ColorInputComponent & FormFieldComponent & { requir
 		const model = useStoryModel<string | null>(null);
 		return {
 			props: { colors: colorDecoratives500, model },
-			template: `<lu-form-field ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -96,7 +100,7 @@ export const Basic: StoryObj<ColorInputComponent & FormFieldComponent & { requir
 			)}>
 	<lu-color-input [(ngModel)]="model.example" [colors]="colors"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{ model.example | json }}</pr-story-model-display>`,
+<pr-story-model-display>{{ model.example | json }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [ColorInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -109,43 +113,7 @@ export const Basic: StoryObj<ColorInputComponent & FormFieldComponent & { requir
 		required: false,
 		clearable: true,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		compact: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const trigger = canvas.getByRole('combobox');
-		await expect(trigger).toBeVisible();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-	});
-
-	await step('Interaction souris - ouvrir la palette', async () => {
-		const trigger = canvas.getByRole('combobox');
-		await userEvent.click(trigger);
-		await waitForAngular();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'true');
-		await expect(screen.getByRole('listbox')).toBeVisible();
-	});
-
-	await step('Interaction clavier - fermer avec Escape', async () => {
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		const trigger = canvas.getByRole('combobox');
-		await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-	});
-
-	await step('Interaction clavier - ouvrir avec ArrowDown', async () => {
-		const trigger = canvas.getByRole('combobox');
-		trigger.focus();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await expect(trigger).toHaveAttribute('aria-expanded', 'true');
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-	});
-});

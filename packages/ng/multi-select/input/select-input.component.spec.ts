@@ -4,7 +4,10 @@ import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angul
 import { isNotNil } from '@lucca-front/ng/core';
 import { LuCoreSelectTotalCountDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { By } from '@angular/platform-browser';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { firstValueFrom } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { vi } from 'vitest';
 import { TestEntity, runALuSelectInputComponentTestSuite } from '../../core-select/input/select-input.component.spec';
 import { LuMultiSelection } from '../select.model';
@@ -117,6 +120,22 @@ class MultiSelectCustomTplPresentationHostComponent implements PresentationHost 
 })
 class MultiSelectSelectAllPresentationHostComponent {
 	selection: LuMultiSelection<TestEntity> = { mode: 'none' };
+
+	options: TestEntity[] = options;
+}
+
+@Component({
+	selector: 'lu-multi-select-form-field-host',
+	imports: [FormsModule, LuMultiSelectInputComponent, FormFieldComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Options">
+			<lu-multi-select [(ngModel)]="selectedOptions" [options]="options" />
+		</lu-form-field>
+	`,
+})
+class MultiSelectFormFieldHostComponent {
+	selectedOptions: TestEntity[] = [options[0]];
 
 	options: TestEntity[] = options;
 }
@@ -545,6 +564,29 @@ describe('LuMultiSelectInputComponent', () => {
 			const fixtureText = await renderPresentation(MultiSelectSelectAllPresentationHostComponent, 'fr-FR', (hostComponent) => (hostComponent.selection = { mode: 'exclude', values: [options[0]] }));
 
 			expect(fixtureText).toBe('test 1');
+		});
+	});
+
+	describe('accessible name', () => {
+		it('should label the combobox with the form field label then the selected values', async () => {
+			// Arrange
+			const hostFixture = TestBed.createComponent(MultiSelectFormFieldHostComponent);
+			hostFixture.detectChanges();
+			const formField = hostFixture.debugElement.query(By.directive(FormFieldComponent)).componentInstance as FormFieldComponent;
+
+			// Act
+			await firstValueFrom(formField.ready$.pipe(filter(Boolean)));
+			// ngModel writes its value asynchronously
+			await hostFixture.whenStable();
+			hostFixture.detectChanges();
+
+			// Assert
+			const element = hostFixture.nativeElement as HTMLElement;
+			const combobox = element.querySelector<HTMLInputElement>('input.multipleSelect-displayer-search');
+			const value = element.querySelector('.multipleSelect-displayer .pr-u-mask');
+			expect(value?.id).toBeTruthy();
+			expect(combobox?.getAttribute('aria-labelledby')).toBe(`${combobox?.id}-label ${value?.id}`);
+			expect(value?.textContent).toContain('test 1');
 		});
 	});
 });

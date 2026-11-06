@@ -8,7 +8,7 @@
 			}
 			<div class="emptyState-content-text">
 				@if (heading()) {
-					<div role="heading" [attr.aria-level]="hx()" class="emptyState-content-heading">{{ heading() }}</div>
+					<div role="heading" [attr.aria-level]="headingLevelValue()" class="emptyState-content-heading">{{ heading() }}</div>
 				}
 				@if (description(); as description) {
 					@if (isStringPortalContent(description)) {

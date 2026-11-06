@@ -1,9 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, input, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions, luBooleanAttribute, luNumberAttribute, luOptionalNumberAttribute } from '@lucca-front/ng/core';
-import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { intlInputOptions, luBooleanAttribute, luNullableNumberAttribute, luNumberAttribute, luOptionalNumberAttribute } from '@lucca-front/ng/core';
+import { FormFieldWidth, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -40,6 +40,13 @@ export class NumberInputComponent {
 	readonly max = input(undefined, { transform: luOptionalNumberAttribute });
 
 	readonly valueAlignRight = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Width of the input itself, using the same scale as the form field width
+	 */
+	readonly width = input(null, { transform: luNullableNumberAttribute<FormFieldWidth> });
+
+	protected readonly widthClass = computed(() => (this.width() ? `mod-width${this.width()}` : null));
 
 	readonly intl = input(...intlInputOptions(LU_NUMBERFIELD_TRANSLATIONS));
 

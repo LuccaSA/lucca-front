@@ -34,7 +34,7 @@ import { LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS } from './approbation-inbox
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxItemComponent implements OnInit, ɵRangeSelectableItem {
-	protected readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS));
+	readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS));
 
 	protected readonly list = inject(ApprobationInboxListComponent, { optional: true });
 	private readonly group = inject(APPROBATION_INBOX_LIST_GROUP_INSTANCE, { optional: true });

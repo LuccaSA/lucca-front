@@ -1,0 +1,29 @@
+@if (displayedKeys().length === 1) {
+	<span class="kbdWrapper">
+		<kbd class="kbd">
+			<ng-container *ngTemplateOutlet="content; context: { $implicit: displayedKeys()[0] }" />
+		</kbd>
+	</span>
+} @else {
+	<kbd class="kbdWrapper">
+		@for (key of displayedKeys(); track $index) {
+			@if (!$first) {
+				+
+			}
+			<kbd class="kbd">
+				<ng-container *ngTemplateOutlet="content; context: { $implicit: key }" />
+			</kbd>
+		}
+	</kbd>
+}
+
+<ng-template #content let-key>
+	@switch (key.type) {
+		@case ("icon") {
+			<lu-icon [icon]="key.icon" size="XXS" [alt]="key.label" />
+		}
+		@default {
+			{{ key.label }}
+		}
+	}
+</ng-template>

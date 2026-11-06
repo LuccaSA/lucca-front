@@ -106,6 +106,30 @@
           }
         }
       }
+    },
+    "web-components": {
+      "root": "./packages/web-components/",
+      "sourceRoot": "./packages/web-components/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/web-components",
+            "browser": "packages/web-components/src/main.ts",
+            "tsConfig": "packages/web-components/tsconfig.app.json",
+            "index": false,
+            "polyfills": [],
+            "outputHashing": "none",
+            "sourceMap": false,
+            "extractLicenses": false,
+            "styles": ["packages/web-components/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules"]
+            }
+          }
+        }
+      }
     }
   }
 }

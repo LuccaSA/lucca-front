@@ -1,3 +1,15 @@
+### 22.1.0
+
+#### Added
+
+- The loading skeleton width is drawn from the `LU_RANDOM` injection token (`@lucca-front/ng/core`).
+
+### 22.0.0
+
+#### Fixed
+
+- Indentation of tree options beyond level 2.
+
 ### 21.3.0
 
 #### Added

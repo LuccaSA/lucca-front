@@ -1,3 +1,9 @@
+### 21.4.1
+
+#### Fixed
+
+- Layout when the error page is displayed inside a dialog.
+
 ### 21.3.0
 
 #### Added

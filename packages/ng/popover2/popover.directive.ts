@@ -17,7 +17,6 @@ import {
 	signal,
 	TemplateRef,
 	Type,
-	ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { getPushPanelViewportMargin, intlInputOptions, isNotNil, luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
@@ -72,7 +71,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	selector: '[luPopover2]',
 	host: {
 		'[attr.aria-expanded]': 'opened()',
-		'[attr.aria-controls]': 'ariaControls',
+		'[attr.aria-controls]': 'opened() ? ariaControls : null',
 		'(click)': 'onMouseClick()',
 		'(mouseleave)': 'onMouseLeave()',
 		'(focus)': 'onFocus()',
@@ -87,7 +86,7 @@ export class PopoverDirective implements OnDestroy {
 
 	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	#vcr = inject(ViewContainerRef);
+	#injector = inject(Injector);
 
 	#destroyRef = inject(DestroyRef);
 
@@ -121,6 +120,13 @@ export class PopoverDirective implements OnDestroy {
 	 * for placement purpose
 	 */
 	readonly luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
+
+	/**
+	 * Renders a transparent backdrop catching the outside click instead of letting it through to the page.
+	 * Reserved for menu-like popovers (a filter dropdown, where the click that closes the panel shouldn't
+	 * also hit what's underneath): a description popover must stay non-blocking, see #5012.
+	 */
+	readonly luPopoverBackdrop = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Extra element(s) to treat as "inside" the popover for outside-pointer detection. Pointer events
@@ -276,9 +282,9 @@ export class PopoverDirective implements OnDestroy {
 					.withPositions(this.customPositions() || this.#buildPositions())
 					.withGrowAfterOpen(true),
 				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy() ?? 'reposition'](),
-				// No blocking backdrop: outside interactions are handled via outsidePointerEvents() below.
-				hasBackdrop: false,
-				backdropClass: '',
+				// No blocking backdrop by default: outside interactions are handled via outsidePointerEvents() below.
+				hasBackdrop: this.luPopoverBackdrop(),
+				backdropClass: this.luPopoverBackdrop() ? 'cdk-overlay-transparent-backdrop' : '',
 				disposeOnNavigation: true,
 			});
 			// Close on outside interaction WITHOUT a blocking backdrop that would
@@ -292,8 +298,12 @@ export class PopoverDirective implements OnDestroy {
 					// controls, is handled by their own open handlers (e.g. the click() HostListener or
 					// an input opening on focus). Ignore those here, otherwise we'd close on pointerdown
 					// then immediately reopen on click.
-					const target = event.target;
-					if (target instanceof Node && (this.elementRef.nativeElement.contains(target) || this.#anchorElement?.contains(target) || this.#isIgnoredOutsidePointerTarget(target))) {
+					// `event.target` is retargeted to the shadow host when the trigger lives in a shadow root.
+					const target = event.composedPath()[0] ?? event.target;
+					if (
+						target instanceof Node &&
+						(this.elementRef.nativeElement.contains(target) || this.#anchorElement?.contains(target) || this.#isIgnoredOutsidePointerTarget(target) || this.#isInsideOverlayStackedAbove(target))
+					) {
 						return;
 					}
 					this.#componentRef?.close();
@@ -313,8 +323,10 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef = this.#overlayRef.attach(
 				new ComponentPortal(
 					PopoverContentComponent,
-					this.#vcr,
+					// No ViewContainerRef: the host must be created in the HTML namespace, even when the trigger is an SVG element
+					null,
 					Injector.create({
+						parent: this.#injector,
 						providers: [{ provide: POPOVER_CONFIG, useValue: config }, { provide: PopoverContentComponent, useValue: this.#componentRef }, ...this.additionalProviders],
 					}),
 				),
@@ -325,6 +337,8 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
 			this.#componentRef.closed$.pipe(take(1), takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 				this.opened.set(false);
+				// Replaces any open still pending in the debounce, e.g. from the mouseenter a tap fires on the panel
+				this.close$.next();
 				this.#skipNextFocus = false;
 				this.luPopoverClosed.emit();
 				this.#listenToMouseLeave = false;
@@ -351,6 +365,30 @@ export class PopoverDirective implements OnDestroy {
 
 	updatePosition() {
 		this.#overlayRef?.updatePosition();
+	}
+
+	/**
+	 * Whether the pointer event comes from an overlay stacked above this popover — typically one the
+	 * popover's own content opened: a select panel, a dialog, a date picker.
+	 *
+	 * CDK's outside-click dispatcher walks the attached overlays from the topmost down and only stops
+	 * at one that listens to `outsidePointerEvents` itself. Overlays that don't (every CDK dialog and
+	 * every plain connected overlay) are skipped, so the event reaches this popover — which, knowing
+	 * only its own element, reads it as a click outside and closes, destroying the content that owns
+	 * the overlay the user was actually interacting with. Anything rendered above us in the overlay
+	 * container is therefore treated as inside: the overlay it belongs to handles its own dismissal.
+	 *
+	 * Overlay hosts (and the backdrops inserted right before them) are all direct children of the
+	 * overlay container, so "stacked above" is just their DOM order inside it.
+	 */
+	#isInsideOverlayStackedAbove(target: Node): boolean {
+		const host = this.#overlayRef?.hostElement;
+		const overlayContainer = host?.parentElement;
+		if (!host || !overlayContainer) {
+			return false;
+		}
+		const targetOverlay = Array.from(overlayContainer.children).find((child) => child.contains(target));
+		return !!targetOverlay && targetOverlay !== host && !!(host.compareDocumentPosition(targetOverlay) & Node.DOCUMENT_POSITION_FOLLOWING);
 	}
 
 	#isIgnoredOutsidePointerTarget(target: Node): boolean {

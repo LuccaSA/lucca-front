@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
+import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 
 @Component({
 	selector: 'lu-skeleton-field,pr-skeleton-field',
@@ -29,5 +30,5 @@ export class SkeletonFieldComponent {
 
 	readonly lines = computed(() => Array.from({ length: this.rows() }));
 
-	readonly getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
+	readonly getRandomPercent = ɵinjectRandomPercent(33, 66);
 }

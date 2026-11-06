@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 
 @Component({
 	selector: 'lu-skeleton-highlight-data',
@@ -12,5 +13,5 @@ export class SkeletonHighlightDataComponent {
 	 */
 	readonly dark = input(false, { transform: booleanAttribute });
 
-	readonly getRandomPercent = (min: number = 25, max: number = 75): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
+	readonly getRandomPercent = ɵinjectRandomPercent(25, 75);
 }

@@ -1,3 +1,15 @@
+### 22.0.6
+
+#### Fixed
+
+- No more extra scrollable space or unneeded scrollbar in Chrome.
+
+### 22.0.4
+
+#### Fixed
+
+- Scroll shadows are now computed from the position of the first and last children, so they are displayed reliably in Chrome.
+
 ### 21.1.1
 
 #### Fixed

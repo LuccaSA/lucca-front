@@ -1,3 +1,9 @@
+### 22.0.0
+
+#### Removed
+
+- `mod-grey` variant — use `mod-neutral` instead.
+
 ### 21.3.1
 
 #### Added

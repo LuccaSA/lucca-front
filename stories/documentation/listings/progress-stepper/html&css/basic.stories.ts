@@ -16,9 +16,9 @@ export default {
 			template: `<div class="progressStepper">
 	<ol class="progressStepper-list">
 		<li class="progressStepper-list-step">
-			<a href="#" class="progressStepper-list-step-linkOptional">
+			<a href="#" class="progressStepper-list-step-linkOptional" #link>
 				<span class="progressStepper-list-step-number" aria-hidden="true"></span>
-				<span class="progressStepper-list-step-title"><span luTooltip luTooltipWhenEllipsis class="progressStepper-list-step-title-content">Step</span></span>
+				<span class="progressStepper-list-step-title"><span luTooltip luTooltipWhenEllipsis [luTooltipTriggerAnchor]="link" class="progressStepper-list-step-title-content">Step</span></span>
 			</a>
 		</li>
 		<li class="progressStepper-list-step" aria-current="step">

@@ -7,6 +7,12 @@
 	}
 }
 
+.tableSortable.mod-ellipsis {
+	@layer mods {
+		@include ellipsis;
+	}
+}
+
 .table-head-row-cell,
 .dataTable-head-row-cell,
 .indexTable-head-row-cell {

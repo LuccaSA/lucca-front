@@ -1,11 +1,12 @@
 ## Description
 
-Functional description for the changelog.
-Keep an empty line under your text, as well as the 5 lines that follow it.
+What changes for users, in one sentence. Published in the changelog.
+Keep the `-----` separators, our bot parses them.
+
+<!-- Fixing a bug or adding a feature? Use the dedicated template, it adds the recette checklist: add `&template=bugfix.md` (or `&template=feature.md`) to this page's URL, or run `gh pr create --template bugfix.md`. -->
 
 -----
 
-Optionally, technical or more in-depth description for reviewers.
-Keep an empty line under your text, as well as the 5 lines that follow it.
+Optional: context for reviewers, and where to start reading.
 
 -----

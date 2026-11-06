@@ -14,6 +14,21 @@ const options: TestEntity[] = [
 ];
 
 @Component({
+	selector: 'lu-multi-select-filter-pill-no-plural-label-host',
+	imports: [FormsModule, FilterPillComponent, LuMultiSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-filter-pill label="Filter">
+			<lu-multi-select [ngModel]="selectedOptions" [options]="options" />
+		</lu-filter-pill>
+	`,
+})
+class MultiSelectFilterPillNoPluralLabelHostComponent {
+	selectedOptions: TestEntity[] = [];
+	options: TestEntity[] = options;
+}
+
+@Component({
 	selector: 'lu-multi-select-filter-pill-plural-label-host',
 	imports: [FormsModule, FilterPillComponent, LuMultiSelectInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,6 +62,22 @@ describe('LuMultiSelectInputComponent filterPillLabelPluralFn', () => {
 
 		return (fixture.nativeElement as HTMLElement).querySelector('.multipleSelect-pill-displayer-label')?.textContent?.trim() ?? '';
 	}
+
+	describe('without any plural label input', () => {
+		it('should only display the number of selected values', async () => {
+			TestBed.resetTestingModule();
+			TestBed.configureTestingModule({ imports: [MultiSelectFilterPillNoPluralLabelHostComponent] });
+
+			const fixture = TestBed.createComponent(MultiSelectFilterPillNoPluralLabelHostComponent);
+			fixture.componentInstance.selectedOptions = options.slice(0, 2);
+			fixture.detectChanges();
+			await fixture.whenStable();
+			fixture.detectChanges();
+
+			const label = (fixture.nativeElement as HTMLElement).querySelector('.multipleSelect-pill-displayer-label')?.textContent?.trim();
+			expect(label).toBe('2');
+		});
+	});
 
 	describe('plural resolution of filterPillLabelPluralFn (via LuPluralForms)', () => {
 		it('should use the "few" form for 2 selected values', async () => {

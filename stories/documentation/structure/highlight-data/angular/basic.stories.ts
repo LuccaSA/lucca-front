@@ -1,9 +1,9 @@
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { HIGHLIGHT_DATA_BUBBLE, HIGHLIGHT_DATA_ILLUSTRATION, HIGHLIGHT_DATA_PALETTE, HIGHLIGHT_DATA_SIZE, HIGHLIGHT_DATA_THEME, HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { generateInputs, setStoryOptions } from '@/helpers/stories';
 export default {
 	title: 'Documentation/Structure/Highlight data/Angular/Basic',
 	component: HighlightDataComponent,
@@ -27,7 +27,9 @@ export default {
 		}
 
 		return {
-			template: `<lu-highlight-data${generateInputs(inputs, context.argTypes)}>${actionContent}</lu-highlight-data>`,
+			template: actionContent
+				? `<lu-highlight-data${generateInputs(inputs, context.argTypes)}>${actionContent}</lu-highlight-data>`
+				: `<lu-highlight-data${generateInputs(inputs, context.argTypes)} />`,
 		};
 	},
 } as Meta;
@@ -54,6 +56,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
+			description: 'Ajoute une "bulle" de décoration (derrière l’illustration s’il y en a une).',
 			table: { category: 'inputs' },
 		},
 		illustration: {
@@ -66,6 +69,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		},
 		valueFirst: {
 			type: 'boolean',
+			description: 'Affiche la valeur avant le titre.',
 			table: { category: 'inputs' },
 		},
 		size: {
@@ -73,6 +77,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs' },
 		},
 		theme: {
@@ -80,6 +85,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
+			description: 'Modifie le fond du composant (<code>white</code> par défaut).',
 			table: { category: 'inputs' },
 		},
 		palette: {
@@ -87,7 +93,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
-			description: 'La palette influençant également la couleur du SVG des bubbles et donc l’URL associée, il est nécessaire de renseigner la gamme.',
+			description: 'La palette influence également la couleur des bubbles.',
 			table: { category: 'inputs' },
 		},
 		action: {
@@ -95,6 +101,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
+			description: '[Story] Ajoute une action (bouton ou lien), projetée dans le composant.',
 			table: { category: 'inputs' },
 		},
 	},
@@ -105,6 +112,6 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		bubble: 1,
 		illustration: 'piggy-bank',
 		valueFirst: false,
-		subText: null,
+		subText: '',
 	},
 };

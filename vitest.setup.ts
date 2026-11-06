@@ -22,6 +22,14 @@ afterEach(() => {
 // otherwise scroll-related behaviors can't be tested at all.
 if (!('__vitest_browser__' in globalThis)) {
 	Element.prototype.scrollIntoView = () => {};
+
+	// Unit tests must never reach the network: a real request outliving its test file makes happy-dom
+	// throw once its window is torn down, and the error is reported against whichever file runs next.
+	// Mock HTTP calls instead (e.g. provideHttpClient() + provideHttpClientTesting()).
+	globalThis.fetch = (input: RequestInfo | URL) => {
+		const url = input instanceof Request ? input.url : String(input);
+		return Promise.reject(new Error(`Network access is forbidden in unit tests, mock this request: ${url}`));
+	};
 }
 
 const originalError = console.error;

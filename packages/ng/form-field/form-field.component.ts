@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
+	ApplicationRef,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
@@ -72,6 +73,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
+	#appRef = inject(ApplicationRef);
 	#renderer = inject(Renderer2);
 	protected parentForm = inject(LU_FORM_INSTANCE, { optional: true });
 
@@ -161,6 +163,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly presentationDisplayTpl = signal<TemplateRef<unknown> | null>(null);
 
+	readonly hasInlineMessage = computed(() => !this.presentationMode() && !!(this.inlineMessage() || (this.invalidStatus() ? this.errorInlineMessage() : false)));
+
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
 		afterNextRender(
@@ -169,6 +173,26 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			},
 			{ injector: this.#injector },
 		);
+	}
+
+	/**
+	 * Unregisters an input that's being destroyed — e.g. one side of an `@if`/`@else` toggling which
+	 * element carries `luInput` (a text field swapping for a button below a breakpoint, say). Without
+	 * this, the detached element lingers in `#inputs` forever: `prepareInput` keeps reassigning it a
+	 * fresh id on every future change, and each one gets added to `aria-labelledby` and never removed.
+	 */
+	public removeInput(input: InputDirective): void {
+		this.#inputs = this.#inputs.filter((existing) => existing !== input);
+		// When the whole application is being torn down, its injector is destroyed before the views: there is
+		// nothing left to update, and scheduling a render would throw (NG0205).
+		if (this.#inputs.length > 0 && !this.#appRef.injector.destroyed) {
+			afterNextRender(
+				() => {
+					this.prepareInput();
+				},
+				{ injector: this.#injector },
+			);
+		}
 	}
 
 	public get inputs(): InputDirective[] {
@@ -183,10 +207,31 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		return this.ready$.value;
 	}
 
-	#ariaLabelledBy: string[] = [];
+	readonly #ariaLabelledBy = signal<string[]>([]);
+
+	/**
+	 * Ids labelling the inputs of this field, applied by each non-standalone `luInput`
+	 */
+	readonly ariaLabelledBy = this.#ariaLabelledBy.asReadonly();
+
+	/**
+	 * Ids describing the inputs of this field, applied by each non-standalone `luInput`
+	 */
+	readonly ariaDescribedBy = computed(() => {
+		if (!this.id()) {
+			return [];
+		}
+		const message = this.hasInlineMessage() ? [`${this.id()}-message`] : [];
+		return [...message, ...this.extraDescribedBy().split(/\s+/).filter(Boolean)];
+	});
+
+	// The `-label` id `updateAria` contributes to `#ariaLabelledBy` on this field's own behalf, tracked so
+	// that a later, different id (`this.id()` changing, e.g. `prepareInput` reassigning ids after an input
+	// was added/removed) replaces it instead of piling up next to it.
+	#selfLabelledById: string | null = null;
 
 	constructor() {
-		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus, this.extraDescribedBy], () => {
+		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus], () => {
 			this.updateAria();
 		});
 
@@ -200,20 +245,11 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	}
 
 	addLabelledBy(id: string, prepend = false): void {
-		if (prepend) {
-			this.#ariaLabelledBy = [id, ...this.#ariaLabelledBy];
-		} else {
-			this.#ariaLabelledBy = [...this.#ariaLabelledBy, id];
-		}
-		this.#inputs.forEach((input) => {
-			if (!input.standalone()) {
-				this.#renderer.setAttribute(input.host.nativeElement, 'aria-labelledby', this.#ariaLabelledBy.join(' '));
-			}
-		});
+		this.#ariaLabelledBy.update((ids) => (prepend ? [id, ...ids] : [...ids, id]));
 	}
 
 	removeLabelledBy(id: string): void {
-		this.#ariaLabelledBy = this.#ariaLabelledBy.filter((labelledBy) => labelledBy !== id);
+		this.#ariaLabelledBy.update((ids) => ids.filter((labelledBy) => labelledBy !== id));
 	}
 
 	prepareInput(): void {
@@ -236,16 +272,16 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 		this.#inputs.forEach((input) => {
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalidStatus()?.toString());
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.isInputRequired()?.toString());
-			if (!input.standalone()) {
-				let ariaDescribedBy = `${input.host.nativeElement.id}-message`;
-				if (this.extraDescribedBy()) {
-					ariaDescribedBy += ` ${this.extraDescribedBy()}`;
-				}
-				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', ariaDescribedBy);
-			}
 		});
-		if (this.id() && !this.#ariaLabelledBy.includes(`${this.id()}-label`)) {
-			this.addLabelledBy(`${this.id()}-label`);
+		const selfLabelledById = this.id() ? `${this.id()}-label` : null;
+		if (selfLabelledById !== this.#selfLabelledById) {
+			if (this.#selfLabelledById) {
+				this.removeLabelledBy(this.#selfLabelledById);
+			}
+			if (selfLabelledById) {
+				this.addLabelledBy(selfLabelledById);
+			}
+			this.#selfLabelledById = selfLabelledById;
 		}
 	}
 

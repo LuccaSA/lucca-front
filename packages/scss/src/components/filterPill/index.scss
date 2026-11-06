@@ -19,11 +19,6 @@
 			@include active;
 		}
 
-		&:has(.filterPill-label:focus-visible),
-		&:has(.filterPill-value:focus-visible) {
-			@include focusVisible;
-		}
-
 		&[aria-expanded='true'] {
 			@include opened;
 		}

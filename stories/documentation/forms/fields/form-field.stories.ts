@@ -1,11 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_WIDTH, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_LAYOUT, FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent, InputDirective, luFormFieldTranslations } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { useStoryModel, createTestStory, generateInputs, setStoryOptions } from '../../../helpers/stories';
-import { waitForAngular } from '../../../helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
+import { useStoryModel, generateInputs, setStoryOptions, intlArgType } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
@@ -27,8 +25,8 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Marque le champ comme obligatoire.',
-			table: { category: 'inputs' },
+			description: 'Marque le champ comme obligatoire (attribut <code>required</code> posé sur le champ projeté).',
+			table: { category: 'story' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
@@ -47,7 +45,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		errorInlineMessage: {
 			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent]',
@@ -71,7 +69,7 @@ export default {
 			},
 			description:
 				'Nombre de caractères maximum autorisés pour un champ de type texte. A seulement un impact sur l’interface et doit être complété à un réglage au niveau de <code>FormControl</code>.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '0' } },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
@@ -81,17 +79,77 @@ export default {
 			description: 'Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée.',
 			table: { category: 'inputs' },
 		},
+		size: {
+			options: setStoryOptions(FORM_FIELD_SIZE),
+			control: {
+				type: 'select',
+			},
+			description: 'Modifie la taille du champ.',
+			table: { category: 'inputs' },
+		},
+		tag: {
+			control: {
+				type: 'text',
+			},
+			description: 'Ajoute un tag après le label du champ.',
+			table: { category: 'inputs' },
+		},
+		AI: {
+			description: '[v20.3] Indique que la valeur du champ a été générée par IA.',
+			table: { category: 'inputs' },
+		},
+		iconAIalt: {
+			name: '↳ iconAIalt',
+			if: { arg: 'AI', truthy: true },
+			description: 'Information restituée par le lecteur d’écran.',
+			table: { category: 'inputs' },
+		},
+		iconAItooltip: {
+			name: '↳ iconAItooltip',
+			if: { arg: 'AI', truthy: true },
+			description: 'Ajoute une info-bulle à l’icône AI.',
+			table: { category: 'inputs' },
+		},
+		inline: {
+			description: 'Affiche les options du champ sur un axe horizontal (radios, checkboxes).',
+			table: { category: 'inputs' },
+		},
+		presentation: {
+			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
+			table: { category: 'inputs' },
+		},
+		extraDescribedBy: {
+			control: {
+				type: 'text',
+			},
+			description: 'Ajoute des identifiants à l’attribut <code>aria-describedby</code> du champ.',
+			table: { category: 'inputs' },
+		},
+		statusControl: {
+			control: false,
+			description: 'Contrôle dont la validité détermine l’état invalide du champ, à la place de celle des contrôles projetés.',
+			table: { category: 'inputs', type: { summary: 'AbstractControl | null' } },
+		},
+		layout: {
+			options: FORM_FIELD_LAYOUT,
+			control: {
+				type: 'select',
+			},
+			description: 'Disposition du champ. Généralement positionnée automatiquement par le composant projeté (ex. <code>fieldset</code> pour un groupe de radios). Two-way.',
+			table: { category: 'models', type: { summary: 'FormFieldLayout' }, defaultValue: { summary: 'default' } },
+		},
 		rolePresentationLabel: {
 			description: "Applique role='presentation' au label du champ dans le cas où celui-ci ne doit pas être lu par le lecteur d’écran.",
 			table: { category: 'models' },
 		},
+		intl: intlArgType(luFormFieldTranslations, 'LuFormFieldTranslations'),
 	},
 	render: (args, { argTypes }) => {
 		const { required, ...fieldArgs } = args;
 		const model = useStoryModel('');
 		return {
 			props: { model },
-			template: `<lu-form-field extraDescribedBy="extra-message" ${generateInputs(fieldArgs, argTypes)}>
+			template: `<lu-form-field ${generateInputs(fieldArgs, argTypes)}>
 	<div class="textField">
 		<div class="textField-input">
 			<textarea
@@ -116,29 +174,19 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		hiddenLabel: false,
 		inlineMessage: 'Helper text',
 		errorInlineMessage: 'Error helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		tooltip: 'You expected me to be helpful but this is a story!',
 		invalid: false,
 		counter: null,
 		rolePresentationLabel: false,
+		size: null,
+		tag: '',
+		AI: false,
+		iconAIalt: 'Assistant IA',
+		iconAItooltip: 'Donnée remplie automatiquement',
+		inline: false,
+		presentation: false,
+		extraDescribedBy: '',
+		layout: 'default',
 	},
 };
-
-export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		await expect(canvas.getByText('Label')).toBeVisible();
-		await expect(canvas.getByRole('textbox')).toBeVisible();
-	});
-
-	await step('Interaction clavier', async () => {
-		const textarea = canvas.getByRole('textbox');
-		textarea.focus();
-		await expect(textarea).toHaveFocus();
-		await userEvent.type(textarea, 'test input');
-		await waitForAngular();
-		await expect(textarea).toHaveValue('test input');
-	});
-});

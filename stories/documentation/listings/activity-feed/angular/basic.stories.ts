@@ -1,17 +1,23 @@
-import { createTestStory, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
+import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 import { IconsList } from '@/stories/icons-list';
 import { finn } from '@/stories/users/user.mocks';
 import { LOCALE_ID } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { ActivityFeedComponent, ActivityFeedStepComponent, ActivityFeedUpdateComponent, ActivityFeedUpdateItemComponent } from '@lucca-front/ng/activity-feed';
+import {
+	ACTIVITY_FEED_STEP_STATUS,
+	ActivityFeedComponent,
+	ActivityFeedStepComponent,
+	ActivityFeedStepStatus,
+	ActivityFeedUpdateComponent,
+	ActivityFeedUpdateItemComponent,
+	luActivityFeedTranslations,
+} from '@lucca-front/ng/activity-feed';
 import { CommentComponent } from '@lucca-front/ng/comment';
 import { FileEntryComponent } from '@lucca-front/ng/file-upload';
 import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, within } from 'storybook/test';
+import { applicationConfig, ArgTypes, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface ActivityFeedBasicStory {
 	statusStep: boolean;
@@ -21,6 +27,10 @@ interface ActivityFeedBasicStory {
 	attachedContent: 'none' | 'file' | 'readMore';
 	addAction: boolean;
 	user: unknown;
+	avatarPlaceholder: boolean;
+	label: string;
+	status: ActivityFeedStepStatus | '';
+	datePipeFormat: string;
 }
 
 export default {
@@ -29,12 +39,12 @@ export default {
 		statusStep: {
 			control: 'boolean',
 			description: 'Exemple avec des étapes success et critical.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		pendingStep: {
 			control: 'boolean',
 			description: 'Exemple avec une étape en attente.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		icon: {
 			options: setStoryOptions(IconsList.map((i) => i.icon)),
@@ -42,28 +52,61 @@ export default {
 				type: 'select',
 			},
 			description: 'Étape identifiée par une icône.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (activity-feed-step)' },
 		},
 		updated: {
 			control: 'boolean',
 			description: 'Présente une étape avec des valeurs modifiées grâce aux sous-composant <code>lu-activity-feed-update</code> et <code>lu-activity-feed-update-item</code>.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		attachedContent: {
 			options: ['none', 'file', 'readMore'],
 			control: { type: 'select' },
 			description: 'Présente une étape avec un contenu attaché (fichier ou commentaire).',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		addAction: {
 			control: 'boolean',
 			description: 'Exemple avec un bouton d’action supplémentaire à la fin du fil d’activité.',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
+		},
+		label: {
+			control: 'text',
+			description: 'Description de l’étape. [PortalContent]',
+			table: { category: 'inputs (activity-feed-step)' },
 		},
 		user: {
-			description: 'Permet de définir l’utilisateur présenté dans l’avatar',
-			table: { category: 'inputs' },
+			description: 'Permet de définir l’utilisateur présenté dans l’avatar (masqué pour les statuts `success` et `critical`).',
+			table: { category: 'inputs (activity-feed-step)', type: { summary: 'ILuUser' } },
 		},
+		avatarPlaceholder: {
+			control: 'boolean',
+			description: 'Affiche un avatar placeholder à la place de celui du `user` (ex. auteur anonyme).',
+			table: { category: 'inputs (activity-feed-step)' },
+		},
+		status: {
+			options: setStoryOptions(ACTIVITY_FEED_STEP_STATUS),
+			control: { type: 'select' },
+			description: 'Statut de l’étape : `success` et `critical` remplacent l’avatar par un indicateur d’état.',
+			table: { category: 'inputs (activity-feed-step)', type: { summary: 'ActivityFeedStepStatus' } },
+		},
+		date: {
+			control: false,
+			description: 'Date de l’étape, affichée par défaut sous forme de date et heure complètes.',
+			table: { category: 'inputs (activity-feed-step)', type: { summary: 'Date | string' } },
+		},
+		datePipeFormat: {
+			control: 'text',
+			description: 'Format passé au `DatePipe` pour afficher la date (ex. `dd/MM/yyyy`). Voir <a href="https://angular.dev/api/common/DatePipe#custom-format-options">les options de format</a>.',
+			table: { category: 'inputs (activity-feed-step)' },
+		},
+		updateItemLabel: {
+			name: 'label',
+			control: false,
+			description: 'Libellé de la valeur modifiée (requis).',
+			table: { category: 'inputs (activity-feed-update-item)', type: { summary: 'string' } },
+		},
+		intl: intlArgType(luActivityFeedTranslations, 'ActivityFeedTranslate', 'lu-activity-feed-step, lu-activity-feed-update-item'),
 	},
 	decorators: [
 		moduleMetadata({
@@ -85,7 +128,8 @@ export default {
 	],
 } as Meta;
 
-function getTemplate(args: ActivityFeedBasicStory): string {
+function getTemplate(args: ActivityFeedBasicStory, argTypes: ArgTypes): string {
+	const { label, avatarPlaceholder, status, datePipeFormat } = args;
 	const statusSteps = args.statusStep
 		? `
 	<lu-activity-feed-step status="success" [date]="date" label="Lorem ipsum dolor." />
@@ -143,18 +187,22 @@ function getTemplate(args: ActivityFeedBasicStory): string {
 	</lu-activity-feed-step>`
 		: '';
 	return `<lu-activity-feed>
-	<lu-activity-feed-step [user]="user" [date]="date" label="Lorem ipsum dolor." />${attachedContentStep}${statusSteps}${pendingStep}${iconStep}${updatedStep}${addActionStep}
+	<lu-activity-feed-step [user]="user" [date]="date"${generateInputs({ label, avatarPlaceholder, status, datePipeFormat }, argTypes)} />${attachedContentStep}${statusSteps}${pendingStep}${iconStep}${updatedStep}${addActionStep}
 </lu-activity-feed>`;
 }
 
-const Template = (args: ActivityFeedBasicStory) => ({
-	props: { ...args, date: new Date() },
-	template: getTemplate(args),
+const Template = (args: ActivityFeedBasicStory, { argTypes }: { argTypes: ArgTypes }) => ({
+	props: { user: args.user, date: new Date() },
+	template: getTemplate(args, argTypes),
 });
 
 export const Basic: StoryObj<ActivityFeedBasicStory> = {
 	args: {
+		label: 'Lorem ipsum dolor.',
 		user: finn,
+		avatarPlaceholder: false,
+		status: '',
+		datePipeFormat: '',
 		statusStep: false,
 		pendingStep: false,
 		icon: null,
@@ -164,21 +212,3 @@ export const Basic: StoryObj<ActivityFeedBasicStory> = {
 	},
 	render: Template,
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step("Vérifie le rendu initial du fil d'activité", async () => {
-		const list = canvas.getByRole('list');
-		await expect(list).toBeVisible();
-	});
-
-	await step('Vérifie que les étapes sont visibles', async () => {
-		const items = canvas.getAllByRole('listitem');
-		await expect(items.length).toBeGreaterThan(0);
-		for (const item of items) {
-			await expect(item).toBeVisible();
-		}
-	});
-});

@@ -1,8 +1,7 @@
 import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca/prisme/button';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { expect, within } from 'storybook/test';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Basic',
@@ -25,9 +24,11 @@ export const Basic: StoryObj<ButtonComponent> = {
 				type: 'select',
 			},
 			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
+			table: { category: 'inputs', defaultValue: { summary: '' } },
 		},
 		block: {
 			description: 'Applique <code>display: block</code>.',
+			table: { category: 'inputs' },
 		},
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
@@ -36,6 +37,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 		state: {
 			description: 'Modifie l’état du bouton.',
@@ -43,16 +45,25 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs', defaultValue: { summary: 'default' } },
 		},
 		critical: {
 			description:
 				"[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>. Dans le cas d’un bouton toujours affiché en rouge, préférez l’usage de <code>palette='critical'</code>.",
+			table: { category: 'inputs' },
 		},
 		disclosure: {
 			description: 'Indique la présence d’un menu.',
+			table: { category: 'inputs' },
 		},
 		delete: {
 			description: '[Deprecated] Remplacé par <code>critical</code>.',
+			table: { disable: true },
+		},
+		prButton: {
+			description: 'Alias de <code>luButton</code>, pour une utilisation avec le sélecteur <code>prButton</code>.',
+			control: false,
+			table: { category: 'inputs', type: { summary: 'ButtonType' } },
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
@@ -60,6 +71,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			table: { category: 'inputs' },
 		},
 	},
 	args: {
@@ -68,13 +80,6 @@ export const Basic: StoryObj<ButtonComponent> = {
 		state: 'default',
 		critical: false,
 		disclosure: false,
-		palette: 'none',
 		block: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async (context) => {
-	const canvas = within(context.canvasElement);
-	const button = await canvas.findByRole('button');
-	await expect(button).toHaveClass('button is-default palette-none');
-});

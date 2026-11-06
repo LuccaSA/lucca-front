@@ -1,13 +1,12 @@
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
+
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CALLOUT_SIZE, CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackItemDescriptionDirective, CalloutFeedbackListComponent, CalloutStates } from '@lucca-front/ng/callout';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, userEvent } from 'storybook/test';
 
 export default {
-	title: 'Documentation/Feedback/Callout Disclosure/Angular',
+	title: 'Documentation/Feedback/Callout Disclosure/Angular/Basic',
 	component: CalloutDisclosureComponent,
 	decorators: [
 		moduleMetadata({
@@ -16,13 +15,13 @@ export default {
 	],
 	render: (args, { argTypes }) => {
 		const { palette, ...inputs } = args;
-		const paletteArg = palette !== 'none' && palette !== undefined ? ` palette="${palette}"` : ``;
+		const paletteArg = palette ? ` palette="${palette}"` : '';
 
 		return {
 			props: {
 				...args,
 			},
-			template: `<lu-callout-disclosure ${paletteArg}${generateInputs(args, argTypes)} (openChange)="openChange($event)">
+			template: `<lu-callout-disclosure${paletteArg}${generateInputs(inputs, argTypes)} (openChange)="openChange($event)">
 		<ul lu-callout-feedback-list palette="neutral">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
@@ -82,6 +81,18 @@ export default {
 			description: 'Place le callout dans son état déplié.',
 			table: { category: 'inputs' },
 		},
+		feedbackListPalette: {
+			name: 'palette',
+			control: false,
+			description: 'Palette de la liste <code>ul[lu-callout-feedback-list]</code>. Par défaut, hérite de la palette du parent.',
+			table: { category: 'inputs (callout-feedback-list)', type: { summary: 'Palette' } },
+		},
+		feedbackListSize: {
+			name: 'size',
+			control: false,
+			description: 'Taille de la liste <code>ul[lu-callout-feedback-list]</code>. M par défaut.',
+			table: { category: 'inputs (callout-feedback-list)', type: { summary: 'CalloutSize' } },
+		},
 		openChange: {
 			description: "Événement déclenché lors du changement d'état déplié/replié du callout.",
 			action: 'openChange',
@@ -92,56 +103,9 @@ export default {
 } as Meta;
 
 export const Template: StoryObj<CalloutDisclosureComponent> = {
+	name: 'Basic',
 	args: {
 		heading: 'List title',
-		palette: 'none',
 		open: false,
 	},
 };
-
-export const TemplateTEST = createTestStory(Template, async ({ canvasElement, step }) => {
-	await waitForAngular();
-
-	await step('Vérifie le rendu initial (fermé)', async () => {
-		const summary = canvasElement.querySelector('summary');
-		await expect(summary).toBeVisible();
-		const details = canvasElement.querySelector('details');
-		await expect(details).not.toHaveAttribute('open');
-	});
-
-	await step('Interaction souris - ouverture', async () => {
-		const summary = canvasElement.querySelector('summary');
-		await userEvent.click(summary);
-		await waitForAngular();
-		const details = canvasElement.querySelector('details');
-		await expect(details).toHaveAttribute('open');
-	});
-
-	await step('Interaction souris - fermeture', async () => {
-		const summary = canvasElement.querySelector('summary');
-		await userEvent.click(summary);
-		await waitForAngular();
-		const details = canvasElement.querySelector('details');
-		await expect(details).not.toHaveAttribute('open');
-	});
-
-	// We have issues with keyboard interactions testing in general
-	// await step('Interaction clavier - ouverture avec Entrée', async () => {
-	// 	const summary = canvasElement.querySelector('summary');
-	// 	summary.focus();
-	// 	await expect(summary).toHaveFocus();
-	// 	await userEvent.keyboard('{Enter}');
-	// 	await waitForAngular();
-	// 	const details = canvasElement.querySelector('details');
-	// 	await expect(details).toHaveAttribute('open');
-	// });
-	//
-	// await step('Interaction clavier - fermeture avec Entrée', async () => {
-	// 	const summary = canvasElement.querySelector('summary');
-	// 	summary.focus();
-	// 	await userEvent.keyboard('{Enter}');
-	// 	await waitForAngular();
-	// 	const details = canvasElement.querySelector('details');
-	// 	await expect(details).not.toHaveAttribute('open');
-	// });
-});

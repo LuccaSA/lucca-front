@@ -14,7 +14,11 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="isFilled()">
-			<input type="text" luMultiSelectDisplayerInput />
+			@if (select.bottomSheetMode()) {
+				<button type="button" luMultiSelectDisplayerInput #trigger="luMultiSelectDisplayerInput">{{ trigger.placeholder }}</button>
+			} @else {
+				<input type="text" luMultiSelectDisplayerInput />
+			}
 
 			@if (displayerCount() !== null) {
 				<div class="multipleSelect-displayer-filter">

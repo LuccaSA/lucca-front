@@ -27,7 +27,7 @@ export class TextInputComponent {
 	readonly intl = input(...intlInputOptions(LU_TEXTFIELD_TRANSLATIONS));
 	readonly ngControl = injectNgControl();
 
-	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+	readonly inputElementRef = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
 	readonly mask = input<string | null>(null);
 
@@ -49,7 +49,7 @@ export class TextInputComponent {
 	readonly maxlength = input<number>(0, { transform: luNumberAttribute });
 
 	/**
-	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
+	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'searchMagnifyingGlass'
 	 */
 	readonly searchIcon = input<LuccaIcon>('searchMagnifyingGlass');
 
@@ -78,7 +78,7 @@ export class TextInputComponent {
 
 	clearValue(): void {
 		this.ngControl.reset();
-		this.inputElementRef()?.nativeElement.focus();
+		this.inputElementRef().nativeElement.focus();
 	}
 
 	togglePasswordVisibility() {

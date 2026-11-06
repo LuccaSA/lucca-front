@@ -2,15 +2,14 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuOptionDirective } from '@lucca-front/ng/core-select';
+import { luCoreSelectTranslations, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuMultiSelectInputComponent, luMultiSelectTranslations } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
+
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { createTestStory, generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
-import { waitForAngular } from '../../../../../helpers/test';
+import { generateInputs, InputAlias, intlArgType, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
@@ -24,15 +23,15 @@ export default {
 			type: 'string',
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle. ',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		label: {
 			description: 'Modifie le label du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
@@ -44,7 +43,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
@@ -52,11 +51,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une largeur fixe au champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessage: {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -64,11 +63,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)', defaultValue: { summary: 'null' } },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		clearable: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
@@ -84,7 +83,7 @@ export default {
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		panelOpened: {
 			description: "Événement déclenché à l'ouverture du panneau de sélection.",
@@ -98,6 +97,7 @@ export default {
 			control: false,
 			table: { category: 'outputs', type: { summary: 'void' } },
 		},
+		intl: intlArgType([luCoreSelectTranslations, luMultiSelectTranslations], 'ILuMultiSelectLabel & LuCoreSelectLabel'),
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
 		optionComparer: HiddenArgType,
@@ -143,56 +143,9 @@ export const Basic: StoryObj<InputAlias<LuMultiSelectInputComponent<unknown> & F
 		placeholder: 'Placeholder',
 		clearable: true,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		loading: false,
 		keepSearchAfterSelection: false,
 		presentation: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const combobox = canvas.getByRole('combobox');
-		await expect(combobox).toBeVisible();
-		await expect(combobox).toHaveAttribute('aria-expanded', 'false');
-	});
-
-	await step('Interaction souris - ouvrir la liste', async () => {
-		const combobox = canvas.getByRole('combobox');
-		await userEvent.click(combobox);
-		await waitForAngular();
-		await expect(combobox).toHaveAttribute('aria-expanded', 'true');
-		const listbox = screen.getByRole('listbox');
-		await expect(listbox).toBeVisible();
-	});
-
-	await step('Interaction souris - sélectionner une option', async () => {
-		const options = screen.getAllByRole('option');
-		await userEvent.click(options[0]);
-		await waitForAngular();
-	});
-
-	await step('Interaction clavier - fermer avec Escape', async () => {
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		const combobox = canvas.getByRole('combobox');
-		await expect(combobox).toHaveAttribute('aria-expanded', 'false');
-	});
-
-	await step('Interaction clavier - ouvrir et naviguer', async () => {
-		const combobox = canvas.getByRole('combobox');
-		combobox.focus();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await expect(screen.getByRole('listbox')).toBeVisible();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-	});
-});

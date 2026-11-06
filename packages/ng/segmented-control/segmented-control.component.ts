@@ -16,11 +16,12 @@ let nextId = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [NoopValueAccessorDirective],
 	host: {
-		role: 'presentation',
+		role: 'radiogroup',
 		class: 'segmentedControl',
 		'[class.mod-S]': 'small()',
 		'[class.mod-vertical]': 'vertical()',
 		'[class.filterBar-segmentedControl]': '!!insideFilterBar',
+		'[attr.aria-label]': 'ariaLabel()',
 	},
 	providers: [
 		{
@@ -43,6 +44,11 @@ export class SegmentedControlComponent {
 	 * Display segmented control vertically
 	 */
 	readonly vertical = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Accessible name for the group of options, exposed to assistive technologies
+	 */
+	readonly ariaLabel = input<string | null>(null);
 
 	readonly id = `segmentedControl${nextId++}`;
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, linkedSignal, LOCALE_ID, output, signal } from '@angular/core';
 import { intlInputOptions, isNotNil, luBooleanAttribute, luNullableBooleanAttribute } from '@lucca-front/ng/core';
 import { addMonths, addYears, FirstWeekContainsDateOptions, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
 import { WEEK_INFO } from './calendar.token';
@@ -62,7 +62,10 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
-	readonly calendarMode = model<CalendarMode | null>(null);
+	readonly calendarModeInput = input<CalendarMode | null>(null, { alias: 'calendarMode' });
+	readonly calendarMode = linkedSignal<CalendarMode>(() => this.calendarModeInput() ?? this.mode());
+
+	readonly calendarModeChange = output<CalendarMode>();
 
 	readonly panelOpened = output<void>();
 
@@ -73,6 +76,13 @@ export abstract class AbstractDateComponent {
 	protected readonly currentDate = signal(new Date());
 
 	protected readonly tabbableDate = signal<Date | null>(null);
+
+	protected changeCalendarMode(calendarMode: CalendarMode | null): void {
+		if (calendarMode && calendarMode !== this.calendarMode()) {
+			this.calendarMode.set(calendarMode);
+			this.calendarModeChange.emit(calendarMode);
+		}
+	}
 
 	protected constructor() {
 		effect(() => {

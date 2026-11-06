@@ -6,6 +6,7 @@ import { LOCALE_ID } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Calendar2Component } from './calendar2.component';
 import { DateRange } from './date-range';
+import { OpenDateRange } from './open-date-range';
 
 registerLocaleData(localeFr, 'fr-FR');
 
@@ -20,14 +21,15 @@ class HostComponent {
 }
 
 describe(Calendar2Component.name, () => {
-	function createHost(ranges: readonly DateRange[]): ComponentFixture<HostComponent> {
+	function createHost(ranges: readonly OpenDateRange[]): ComponentFixture<HostComponent> {
 		TestBed.configureTestingModule({
 			imports: [HostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		});
 
 		const fixture = TestBed.createComponent(HostComponent);
-		fixture.componentInstance.ranges = ranges;
+		// The public input type still requires a start date, the date range input gives open ranges the same way
+		fixture.componentInstance.ranges = ranges as readonly DateRange[];
 		fixture.detectChanges();
 
 		return fixture;
@@ -141,5 +143,21 @@ describe(Calendar2Component.name, () => {
 		const calendar = getCalendar(createHost([{ scope: 'day' }]));
 
 		expect(calendar.getRangeInfo(new Date(2025, 5, 20), 'day')).toBeNull();
+	});
+
+	it('should emit dateClicked once when a day is picked with the space key', () => {
+		// Arrange
+		const fixture = createHost([]);
+		const calendar = getCalendar(fixture);
+		const emitted: Date[] = [];
+		calendar.dateClicked.subscribe((date) => emitted.push(date));
+		const dayButton = fixture.debugElement.queryAll(By.css('.calendar-table-body-row-cell-action')).find((button) => button.nativeElement.textContent.trim().startsWith('20'));
+
+		// Act: a native button fires its click on space, after the keydown
+		dayButton!.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+		dayButton!.nativeElement.click();
+
+		// Assert
+		expect(emitted).toEqual([new Date(2025, 5, 20)]);
 	});
 });

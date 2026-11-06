@@ -14,7 +14,7 @@ export default {
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
-	render: ({ argTypes }) => {
+	render: (_args, { argTypes }) => {
 		return {
 			props: {
 				date: new Date(),

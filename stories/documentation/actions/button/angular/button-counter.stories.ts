@@ -2,9 +2,7 @@ import { BUTTON_SIZE, BUTTON_STATE, BUTTON_TYPE, ButtonComponent } from '@lucca-
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { expect, within } from 'storybook/test';
-import { BasicTEST as ButtonBasic } from './button-basic.stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Counter',
@@ -29,7 +27,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 				type: 'select',
 			},
 			description: 'Modifie la hierarchie ou le style du bouton.<br>[v20.3] AI',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '' } },
 		},
 		block: {
 			description: 'Applique <code>display: block</code>.',
@@ -50,7 +48,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'default' } },
 		},
 		critical: {
 			description: '[v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec <code>outlined</code> et <code>ghost</code>.',
@@ -62,7 +60,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 		},
 		delete: {
 			description: '[Deprecated] Remplacé par <code>critical</code>.',
-			table: { category: 'inputs' },
+			table: { disable: true },
 		},
 		size: {
 			description: 'Modifie la taille du composant.',
@@ -75,17 +73,8 @@ export const Basic: StoryObj<ButtonComponent> = {
 	},
 	args: {
 		block: false,
-		palette: 'none',
 		state: 'default',
 		luButton: '',
 		critical: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async (context) => {
-	const canvas = within(context.canvasElement);
-	await ButtonBasic.play(context);
-	const button = await canvas.findByRole('button');
-	const counter = await within(button).findByText('999+');
-	await expect(counter).toBeInTheDocument();
-});

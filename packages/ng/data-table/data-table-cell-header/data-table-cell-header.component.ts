@@ -1,10 +1,11 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, forwardRef, inject, input, linkedSignal, output, viewChild, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { isNotNil } from '@lucca-front/ng/core';
+import { isNotNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ReplaySubject } from 'rxjs';
 import { BaseDataTableCell } from '../base-data-table-cell';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
@@ -26,14 +27,14 @@ const SORT_VALUES = ['none', 'ascending', 'descending'] as const;
 		'[class.mod-alignCenter]': 'align() === "center"',
 		'[class.mod-alignEnd]': 'align() === "end"',
 		'[class.mod-stickyColumn]': 'isStickyStart() || isStickyEnd()',
-		'[attr.aria-sort]': 'sort()',
+		'[attr.aria-sort]': 'currentSort()',
 		'[class.mod-editable]': 'editable()',
 		'[attr.scope]': 'bodyRef !== null ? "row" : "col"',
 		'[style.--dataTable-layoutFixed-width]': 'inlineSize() || fixedWidth()',
 		'[style.insetInlineStart]': 'insetInlineStart()',
 		'[style.insetInlineEnd]': 'insetInlineEnd()',
 	},
-	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule],
+	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, FormsModule, LuTooltipTriggerDirective],
 	providers: [
 		{
 			provide: LU_DATA_TABLE_CELL_INSTANCE,
@@ -46,9 +47,18 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	readonly elementRef = inject<ElementRef<HTMLTableCellElement>>(ElementRef);
 	#destroyRef = inject(DestroyRef);
 
-	readonly sort = model<DataTableSort | null>(null);
+	readonly sort = input<DataTableSort | null>(null);
+
+	readonly sortChange = output<DataTableSort>();
+
+	protected readonly currentSort = linkedSignal(() => this.sort());
 	readonly fixedWidth = input<string | null>(null);
 	readonly inlineSize = input<string | null>(null);
+	readonly sortWithEllipsis = input(false, { transform: luBooleanAttribute });
+
+	// #sortButton hosts the luButton component, so the template ref resolves to that component
+	// instance rather than the native element — read it explicitly as an ElementRef instead.
+	protected readonly sortButtonRef = viewChild<unknown, ElementRef<HTMLElement>>('sortButton', { read: ElementRef });
 
 	readonly insetInlineStart = computed(() => {
 		const isFirstOrLastCol = this.position() === 0 || this.position() === (this.rowRef?.cells().length ?? 0) - 1;
@@ -91,9 +101,11 @@ export class DataTableRowCellHeaderComponent extends BaseDataTableCell implement
 	}
 
 	toggleSort(): void {
-		const sort = this.sort();
+		const sort = this.currentSort();
 		if (isNotNil(sort)) {
-			this.sort.set(SORT_VALUES[(SORT_VALUES.indexOf(sort) + 1) % SORT_VALUES.length]);
+			const next = SORT_VALUES[(SORT_VALUES.indexOf(sort) + 1) % SORT_VALUES.length];
+			this.currentSort.set(next);
+			this.sortChange.emit(next);
 		}
 	}
 }

@@ -2,6 +2,7 @@ import { generateInputs } from '@/helpers/stories';
 import { ApprobationInboxDetailComponent, ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderComponent } from '@lucca-front/ng/approbation-inbox';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
+import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ButtonComponent } from '@lucca/prisme/button';
@@ -16,36 +17,52 @@ export default {
 			table: { category: 'inputs' },
 		},
 		label: {
-			description: 'Titre affiché dans l’en-tête du composant.',
-			table: { category: 'inputs' },
+			description: 'Titre affiché dans l’en-tête du composant. Requis.',
+			table: { category: 'inputs (approbation-inbox-detail-header)' },
 		},
 		illustration: {
 			description: 'Affiche une illustration au début de l’en-tête.',
+			table: { category: 'story' },
 		},
 		headerContent: {
 			description: 'Exemple d’informations complémentaires possibles sous le titre de l’en-tête.',
+			table: { category: 'story' },
 		},
 		delegatedBy: {
-			description: 'Nom de la personne à l’origine de la délégation si elle à lieu.',
-			table: { category: 'inputs' },
+			description: 'Nom de la personne à l’origine de la délégation si elle a lieu.',
+			table: { category: 'inputs (approbation-inbox-detail-header)' },
+		},
+		overdue: {
+			description: 'Affiche un badge de statut « En retard » à droite du titre. Ignoré si du contenu est projeté via `approbationInboxDetailTitleTrailing`.',
+			table: { category: 'inputs (approbation-inbox-detail-header)' },
+		},
+		titleTrailing: {
+			description: 'Exemple de contenu personnalisé projeté à droite du titre via `approbationInboxDetailTitleTrailing`. Remplace le badge `overdue`.',
+			table: { category: 'story' },
 		},
 		moreActions: {
 			description: 'Affiche un bouton d’actions tertaires sous forme de menu déroulant.',
+			table: { category: 'story' },
 		},
 		callout: {
 			description: 'Affiche un callout d’avertissement dans le contenu principal.',
+			table: { category: 'story' },
 		},
 		calloutLabel: {
 			name: '↳ calloutLabel',
 			description: 'Texte affiché dans le callout.',
 			if: { arg: 'callout', truthy: true },
+			table: { category: 'story' },
 		},
 		blockLabel: {
-			description: 'Titre des blocs de contenu supplémentaires.',
+			name: 'label',
+			description: 'Titre des blocs de contenu supplémentaires. Requis.',
+			table: { category: 'inputs (approbation-inbox-detail-main-block)' },
 		},
 		blockCount: {
 			description: 'Nombre de blocs affichés dans le contenu principal.',
 			control: { type: 'range', min: 0, max: 5 },
+			table: { category: 'story' },
 		},
 	},
 	decorators: [
@@ -57,6 +74,7 @@ export default {
 				ListingComponent,
 				ListingItemComponent,
 				CalloutComponent,
+				StatusBadgeComponent,
 				LuUserPictureComponent,
 				ButtonComponent,
 				IconComponent,
@@ -67,7 +85,7 @@ export default {
 			],
 		}),
 	],
-	render: ({ insideDialog, headerContent, callout, calloutLabel, blockLabel, blockCount, moreActions, illustration, ...args }, { argTypes }) => {
+	render: ({ insideDialog, headerContent, titleTrailing, callout, calloutLabel, blockLabel, blockCount, moreActions, illustration, ...args }, { argTypes }) => {
 		const insideDialogParam = insideDialog ? ` insideDialog` : ``;
 		const contentTpl = `
 	<lu-approbation-inbox-detail-main-block label="${blockLabel}">
@@ -85,6 +103,10 @@ export default {
 			<lu-listing-item>Lorem ipsum</lu-listing-item>
 			<lu-listing-item>Dolor sit amet</lu-listing-item>
 		</lu-listing>`
+			: ``;
+		const titleTrailingTpl = titleTrailing
+			? `
+		<lu-status-badge approbationInboxDetailTitleTrailing label="Urgent" palette="critical" />`
 			: ``;
 		const headerIllustrationTpl = illustration
 			? `
@@ -106,7 +128,7 @@ export default {
 		const headerTpl =
 			blockCount != 0
 				? `
-	<lu-approbation-inbox-detail-header approbationInboxDetailHeader${generateInputs(args, argTypes)}>${headerIllustrationTpl}${headerContentTpl}
+	<lu-approbation-inbox-detail-header approbationInboxDetailHeader${generateInputs(args, argTypes)}>${headerIllustrationTpl}${titleTrailingTpl}${headerContentTpl}
 		<ng-container approbationInboxDetailActions>
 			<button luButton type="button">Approve</button>
 			<button luButton type="button">Reject</button>${moreActionsTpl}
@@ -141,6 +163,7 @@ export const Basic: StoryObj<
 	ApprobationInboxHeaderComponent & {
 		insideDialog: boolean;
 		headerContent: boolean;
+		titleTrailing: boolean;
 		moreActions: boolean;
 		callout: boolean;
 		calloutLabel: string;
@@ -155,6 +178,8 @@ export const Basic: StoryObj<
 		illustration: false,
 		headerContent: false,
 		delegatedBy: '',
+		overdue: false,
+		titleTrailing: false,
 		moreActions: false,
 		callout: false,
 		calloutLabel: 'Callout feedback description. ',

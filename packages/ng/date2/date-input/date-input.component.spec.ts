@@ -1,8 +1,10 @@
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
-import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, LOCALE_ID, signal } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addDays } from 'date-fns';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { DATE_FORMAT, DateFormat } from '../date2.type';
@@ -32,6 +34,27 @@ class HostComponent {
 class WeekHostComponent {
 	formControl = new FormControl<Date | null>(null);
 	min: Date | null = null;
+}
+
+@Component({
+	template: `<lu-date-input [formControl]="formControl" [mode]="mode()" [calendarMode]="calendarMode()" />`,
+	imports: [ReactiveFormsModule, DateInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class CalendarModeHostComponent {
+	readonly formControl = new FormControl<Date | null>(null);
+	readonly mode = signal<CalendarMode>('day');
+	readonly calendarMode = signal<CalendarMode | null>(null);
+}
+
+@Component({
+	template: `<lu-date-input [formControl]="formControl" [(calendarMode)]="calendarMode" />`,
+	imports: [ReactiveFormsModule, DateInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class CalendarModeTwoWayHostComponent {
+	readonly formControl = new FormControl<Date | null>(null);
+	readonly calendarMode = signal<CalendarMode | null>(null);
 }
 
 describe('DateInputComponent', () => {
@@ -392,6 +415,197 @@ describe('DateInputComponent', () => {
 			createHost(formControl, null, null, { humanized: true });
 
 			expect(formControl.valid).toBe(true);
+		});
+	});
+
+	describe('touched state', () => {
+		function openCalendar(input: HTMLInputElement): void {
+			input.focus();
+			input.click();
+			fixture.detectChanges();
+		}
+
+		// The calendar is rendered in the overlay container, outside of the fixture
+		function getDayButton(): HTMLButtonElement {
+			return document.querySelector('.calendar-table-body-row-cell-action:not([aria-disabled])') as HTMLButtonElement;
+		}
+
+		it('should mark the control as touched when the focus leaves the input', () => {
+			const formControl = new FormControl<Date | null>(null, Validators.required);
+			const input = createHost(formControl);
+
+			input.focus();
+			input.blur();
+			fixture.detectChanges();
+
+			expect(formControl.touched).toBe(true);
+		});
+
+		it('should not mark the control as touched when the focus moves from the input to the calendar', () => {
+			const formControl = new FormControl<Date | null>(null, Validators.required);
+			const input = createHost(formControl);
+			openCalendar(input);
+
+			getDayButton().focus();
+			fixture.detectChanges();
+
+			expect(formControl.touched).toBe(false);
+		});
+
+		it('should mark the control as touched with the picked date once the calendar closes', () => {
+			const formControl = new FormControl<Date | null>(null, Validators.required);
+			const input = createHost(formControl);
+			openCalendar(input);
+			const dayButton = getDayButton();
+			dayButton.focus();
+			fixture.detectChanges();
+			dayButton.click();
+			fixture.detectChanges();
+
+			expect(formControl.touched).toBe(true);
+			expect(formControl.valid).toBe(true);
+		});
+
+		it('should mark the control as touched when the calendar closes without the focus going back to the input', () => {
+			const formControl = new FormControl<Date | null>(null, Validators.required);
+			const input = createHost(formControl);
+			openCalendar(input);
+			getDayButton().focus();
+			fixture.detectChanges();
+
+			fixture.debugElement.query(By.directive(PopoverDirective)).injector.get(PopoverDirective).close();
+			fixture.detectChanges();
+
+			expect(formControl.touched).toBe(true);
+		});
+
+		describe('while the calendar is open', () => {
+			let outsideField: HTMLInputElement;
+
+			beforeEach(() => {
+				outsideField = document.createElement('input');
+				document.body.appendChild(outsideField);
+			});
+
+			afterEach(() => outsideField.remove());
+
+			it('should mark the control as touched when the focus leaves the input with the keyboard', () => {
+				const formControl = new FormControl<Date | null>(null, Validators.required);
+				const input = createHost(formControl);
+				openCalendar(input);
+
+				input.dispatchEvent(new FocusEvent('blur', { relatedTarget: outsideField }));
+				fixture.detectChanges();
+
+				expect(formControl.touched).toBe(true);
+			});
+
+			it('should not mark the control as touched when the newly focused element is unknown', () => {
+				const formControl = new FormControl<Date | null>(null, Validators.required);
+				const input = createHost(formControl);
+				openCalendar(input);
+
+				// Safari does not focus clicked buttons, so clicking a day blurs the input without related target
+				input.dispatchEvent(new FocusEvent('blur', { relatedTarget: null }));
+				fixture.detectChanges();
+
+				expect(formControl.touched).toBe(false);
+			});
+
+			it('should update a blur-updated control when the focus leaves the input with the keyboard', () => {
+				const formControl = new FormControl<Date | null>(null, { updateOn: 'blur' });
+				const input = createHost(formControl);
+				openCalendar(input);
+				typeInElement('15/01/2024', input);
+
+				input.dispatchEvent(new FocusEvent('blur', { relatedTarget: outsideField }));
+				fixture.detectChanges();
+
+				expect(formControl.value).toEqual(new Date(2024, 0, 15));
+			});
+		});
+	});
+
+	describe('calendarMode', () => {
+		function createCalendarModeHost(): { host: ComponentFixture<CalendarModeHostComponent>; dateInput: DateInputComponent } {
+			TestBed.configureTestingModule({
+				imports: [CalendarModeHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+
+			const host = TestBed.createComponent(CalendarModeHostComponent);
+			host.detectChanges();
+
+			return { host, dateInput: host.debugElement.query(By.directive(DateInputComponent)).componentInstance as DateInputComponent };
+		}
+
+		it('should fall back to mode when calendarMode is not set', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			host.componentInstance.mode.set('month');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('month');
+		});
+
+		it('should follow mode when it changes after init', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			host.componentInstance.mode.set('year');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('year');
+		});
+
+		it('should give precedence to an explicit calendarMode over mode', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			host.componentInstance.calendarMode.set('year');
+			host.componentInstance.mode.set('month');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('year');
+		});
+
+		it('should fall back to mode when calendarMode is reset to null', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			host.componentInstance.calendarMode.set('year');
+			host.detectChanges();
+			host.componentInstance.calendarMode.set(null);
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('day');
+		});
+
+		it('should keep an internal navigation until its sources change', () => {
+			const { host, dateInput } = createCalendarModeHost();
+
+			dateInput.calendarMode.set('year');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('year');
+
+			host.componentInstance.mode.set('month');
+			host.detectChanges();
+
+			expect(dateInput.calendarMode()).toBe('month');
+		});
+
+		it('should write the calendar navigation back through [(calendarMode)]', () => {
+			TestBed.configureTestingModule({
+				imports: [CalendarModeTwoWayHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+			const host = TestBed.createComponent(CalendarModeTwoWayHostComponent);
+			host.detectChanges();
+			const dateInput = host.debugElement.query(By.directive(DateInputComponent)).componentInstance as DateInputComponent & { changeCalendarMode(calendarMode: CalendarMode | null): void };
+
+			dateInput.changeCalendarMode('year');
+			host.detectChanges();
+
+			expect(host.componentInstance.calendarMode()).toBe('year');
+			expect(dateInput.calendarMode()).toBe('year');
 		});
 	});
 });

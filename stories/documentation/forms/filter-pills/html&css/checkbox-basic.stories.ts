@@ -1,4 +1,4 @@
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface CheckboxBasicStory {
@@ -12,7 +12,7 @@ export default {
 	title: 'Documentation/Forms/FiltersPills/Checkbox/HTML&CSS',
 	decorators: [
 		moduleMetadata({
-			imports: [LuTooltipModule],
+			imports: [LuTooltipTriggerDirective],
 		}),
 	],
 	argTypes: {},
@@ -23,14 +23,14 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const disabledAttr = args.disabled ? ` disabled="disabled"` : ``;
 	const pressedAttr = args.pressed ? ` aria-pressed="true"` : ``;
 
-	return `<button type="button" class="filterPill mod-checkbox"${pressedAttr}${disabledAttr}>
+	return `<button type="button" class="filterPill mod-checkbox"${pressedAttr}${disabledAttr} #button>
 	<span class="filterPill-checkbox">
 		<span class="filterPill-checkbox-input"></span>
 		<span class="filterPill-checkbox-icon" aria-hidden="true">
 			<span class="filterPill-checkbox-icon-check"></span>
 		</span>
 	</span>
-	<span class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis>
+	<span class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis [luTooltipTriggerAnchor]="button">
 		${args.label}
 		<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="${args.label}"></span>
 	</span>

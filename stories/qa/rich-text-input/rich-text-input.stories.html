@@ -1,0 +1,162 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>No value</td>
+			<td>With value</td>
+		</tr>
+		<tr>
+			<td>Active</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" ngModel>
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value">
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Custom toolbar</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" ngModel luWithReducedMarkdownFormatter>
+						<div class="richTextField-toolbar-formatting">
+							<div class="richTextField-toolbar-col">
+								<lu-rich-text-plugin-text-style icon="formatTextItalic" tooltip="Italic" format="italic" />
+								<lu-rich-text-plugin-link />
+							</div>
+						</div>
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" luWithReducedMarkdownFormatter>
+						<div class="richTextField-toolbar-formatting">
+							<div class="richTextField-toolbar-col">
+								<lu-rich-text-plugin-text-style icon="formatTextItalic" tooltip="Italic" format="italic" />
+								<lu-rich-text-plugin-link />
+							</div>
+						</div>
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Tag plugin</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" ngModel luWithMarkdownTagsFormatter>
+						<lu-rich-text-input-toolbar />
+						<lu-rich-text-plugin-tag [tags]="tags" />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" luWithMarkdownTagsFormatter>
+						<lu-rich-text-input-toolbar />
+						<lu-rich-text-plugin-tag [tags]="tags" />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Spellcheck disabled</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" ngModel disableSpellcheck>
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" disableSpellcheck>
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Auto resize</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" ngModel autoResize>
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" autoResize>
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" ngModel [disabled]="true">
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" [disabled]="true">
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>No toolbar</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" ngModel hideToolbar>
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" hideToolbar>
+						<lu-rich-text-input-toolbar />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Presentation mode</td>
+			<td>
+				<lu-form-field presentation label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" ngModel luWithMarkdownTagsFormatter>
+						<lu-rich-text-input-toolbar />
+						<lu-rich-text-plugin-tag [tags]="tags" />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+			<td>
+				<lu-form-field presentation label="Label">
+					<lu-rich-text-input placeholder="Placeholder…" [ngModel]="value" luWithMarkdownTagsFormatter>
+						<lu-rich-text-input-toolbar />
+						<lu-rich-text-plugin-tag [tags]="tags" />
+					</lu-rich-text-input>
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

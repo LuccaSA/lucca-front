@@ -1,3 +1,9 @@
+### 19.3.0
+
+#### Added
+
+- `withTooltip` input to truncate the label and display it in a tooltip when it overflows.
+
 ### 18.2.4
 
 #### Fixed

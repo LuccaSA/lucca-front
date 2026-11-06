@@ -1,14 +1,23 @@
-import { Meta, StoryObj } from '@storybook/angular-vite';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface segmentedControlTabsStory {
 	S: boolean;
 	withNumericBadge: boolean;
 	vertical: boolean;
 	tabActive: number;
+	ariaLabel: string;
+	withIcon: boolean;
+	hiddenLabel: boolean;
 }
 
 export default {
 	title: 'Documentation/Navigation/segmentedControl/HTML&CSS/Tabs',
+	decorators: [
+		moduleMetadata({
+			imports: [LuTooltipTriggerDirective],
+		}),
+	],
 	argTypes: {
 		S: {
 			control: {
@@ -32,6 +41,26 @@ export default {
 				type: 'boolean',
 			},
 		},
+		ariaLabel: {
+			description: "Nom accessible du groupe d'onglets, restitué aux technologies d'assistance.",
+			control: {
+				type: 'text',
+			},
+		},
+		withIcon: {
+			description: 'Affiche une icône avant le libellé de chaque onglet.',
+			control: {
+				type: 'boolean',
+			},
+		},
+		hiddenLabel: {
+			name: '↳ hiddenLabel',
+			description: 'Masque le libellé de l’onglet (`pr-u-mask`), conservé pour les technologies d’assistance, et l’affiche en infobulle au survol et au focus.',
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'withIcon', truthy: true },
+		},
 	},
 } as Meta;
 
@@ -39,25 +68,33 @@ function getTemplate(args: segmentedControlTabsStory): string {
 	const size = args.S ? ` mod-S` : ``;
 	const vertical = args.vertical ? ` mod-vertical` : ``;
 	const numericBadge = args.withNumericBadge ? ` <span class="numericBadge">8</span>` : ``;
-	return `<ul class="segmentedControl${size}${vertical}" role="tablist">
+	const ariaLabel = args.ariaLabel ? ` [attr.aria-label]="ariaLabel"` : ``;
+	const hidden = args.withIcon && args.hiddenLabel;
+	const tooltip = (label: string) => (hidden ? ` luTooltip="${label}" luTooltipOnlyForDisplay` : ``);
+	const content = (label: string, icon: string, suffix = ``) => {
+		const iconSpan = args.withIcon ? `<span aria-hidden="true" class="lucca-icon icon-${icon}"></span> ` : ``;
+		const text = hidden ? `<span class="pr-u-mask">${label}${suffix}</span>` : `${label}${suffix}`;
+		return `${iconSpan}${text}`;
+	};
+	return `<ul class="segmentedControl${size}${vertical}" role="tablist"${ariaLabel}>
 	<li class="segmentedControl-item" role="presentation">
-		<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-controls="panel1" [attr.aria-selected]="tabActive === 1" [attr.tabindex]="tabActive === 1 ? null : '-1'">
-			Lorem
+		<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-controls="panel1" [attr.aria-selected]="tabActive === 1" [attr.tabindex]="tabActive === 1 ? null : '-1'"${tooltip('Lorem')}>
+			${content('Lorem', 'list')}
 		</button>
 	</li>
 	<li class="segmentedControl-item" role="presentation">
-		<button class="segmentedControl-item-action" type="button" role="tab" id="tab2" aria-controls="panel2" [attr.aria-selected]="tabActive === 2" [attr.tabindex]="tabActive === 2 ? null : '-1'">
-			Ipsum${numericBadge}
+		<button class="segmentedControl-item-action" type="button" role="tab" id="tab2" aria-controls="panel2" [attr.aria-selected]="tabActive === 2" [attr.tabindex]="tabActive === 2 ? null : '-1'"${tooltip('Ipsum')}>
+			${content('Ipsum', 'tiles', numericBadge)}
 		</button>
 	</li>
 	<li class="segmentedControl-item" role="presentation">
-		<button class="segmentedControl-item-action" type="button" role="tab" id="tab3" aria-controls="panel3" [attr.aria-selected]="tabActive === 3" [attr.tabindex]="tabActive === 3 ? null : '-1'">
-			Dolor sit amet
+		<button class="segmentedControl-item-action" type="button" role="tab" id="tab3" aria-controls="panel3" [attr.aria-selected]="tabActive === 3" [attr.tabindex]="tabActive === 3 ? null : '-1'"${tooltip('Dolor sit amet')}>
+			${content('Dolor sit amet', 'mapPlan')}
 		</button>
 	</li>
 	<li class="segmentedControl-item" role="presentation">
-		<button class="segmentedControl-item-action" type="button" role="tab" id="tab4" aria-controls="panel4" [attr.aria-selected]="tabActive === 4" [attr.tabindex]="tabActive === 4 ? null : '-1'">
-			Consectetur adipisicing elit
+		<button class="segmentedControl-item-action" type="button" role="tab" id="tab4" aria-controls="panel4" [attr.aria-selected]="tabActive === 4" [attr.tabindex]="tabActive === 4 ? null : '-1'"${tooltip('Consectetur adipisicing elit')}>
+			${content('Consectetur adipisicing elit', 'calendar')}
 		</button>
 	</li>
 </ul>
@@ -88,6 +125,9 @@ export const Tabs: StoryObj<segmentedControlTabsStory> = {
 		withNumericBadge: false,
 		vertical: false,
 		tabActive: 1,
+		ariaLabel: 'Lorem ipsum',
+		withIcon: false,
+		hiddenLabel: false,
 	},
 	render: Template,
 };

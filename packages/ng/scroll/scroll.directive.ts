@@ -27,14 +27,14 @@ export class LuScrollDirective implements ILuScrollable, OnInit {
 	#destroyRef = inject(DestroyRef);
 
 	#scrollSubject = new Subject<Event>();
-	readonly #scroll$ = this.#scrollSubject.asObservable().pipe(debounceTime(this.debounceTime()));
 
 	scroll(event: Event) {
 		this.#scrollSubject.next(event);
 	}
 
 	ngOnInit(): void {
-		this.#scroll$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((scrollEvent) => this.emitScrollEvents(scrollEvent));
+		// Built here rather than in a field initializer, so that `debounceTime` holds the consumer's value
+		this.#scrollSubject.pipe(debounceTime(this.debounceTime()), takeUntilDestroyed(this.#destroyRef)).subscribe((scrollEvent) => this.emitScrollEvents(scrollEvent));
 	}
 	private emitScrollEvents($event: Event) {
 		this.onScroll.emit($event);

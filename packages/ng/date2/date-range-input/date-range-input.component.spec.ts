@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, startOfDay } from 'date-fns';
 import { DateRange } from '../calendar2/date-range';
+import { OpenDateRange } from '../calendar2/open-date-range';
+import { getLocalizedDateFormat } from '../date-format';
 import { DateRangeInputComponent } from './date-range-input.component';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
@@ -23,7 +25,7 @@ class NgModelHostComponent {
 }
 
 @Component({
-	template: `<lu-date-range-input [formControl]="formControl" [min]="min" [max]="max" />`,
+	template: `<lu-date-range-input [formControl]="formControl" [min]="min" [max]="max" [placeholder]="placeholder" />`,
 	imports: [FormsModule, ReactiveFormsModule, DateRangeInputComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -31,6 +33,7 @@ class FormControlHostComponent {
 	formControl = new FormControl<DateRange | null>(null);
 	min: Date | null = null;
 	max: Date | null = null;
+	placeholder: string | undefined = undefined;
 }
 
 @Component({
@@ -49,7 +52,12 @@ describe('DateRangeInputComponent', () => {
 		fixture.detectChanges();
 	}
 
-	function createFormControlHost(formControl: FormControl<DateRange | null>, min: Date | null = null, max: Date | null = null): ComponentFixture<FormControlHostComponent> {
+	function createFormControlHost(
+		formControl: FormControl<DateRange | null>,
+		min: Date | null = null,
+		max: Date | null = null,
+		placeholder: string | undefined = undefined,
+	): ComponentFixture<FormControlHostComponent> {
 		TestBed.configureTestingModule({
 			imports: [FormControlHostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -59,6 +67,7 @@ describe('DateRangeInputComponent', () => {
 		fixture.componentInstance.formControl = formControl;
 		fixture.componentInstance.min = min;
 		fixture.componentInstance.max = max;
+		fixture.componentInstance.placeholder = placeholder;
 		fixture.detectChanges();
 
 		return fixture;
@@ -68,7 +77,7 @@ describe('DateRangeInputComponent', () => {
 		return (fixture.nativeElement as HTMLElement).querySelector(`.mod-${field} > input`) as HTMLInputElement;
 	}
 
-	function createFilterPillHost(value: DateRange | null = null): ComponentFixture<FilterPillHostComponent> {
+	function createFilterPillHost(value: OpenDateRange | null = null): ComponentFixture<FilterPillHostComponent> {
 		TestBed.configureTestingModule({
 			imports: [FilterPillHostComponent],
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -80,7 +89,8 @@ describe('DateRangeInputComponent', () => {
 		// input to register itself and provide the pill content
 		(fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>('.filterPill')!.click();
 		fixture.detectChanges();
-		fixture.componentInstance.formControl.setValue(value);
+		// The public type still requires a start date, consumers have to cast an open range the same way
+		fixture.componentInstance.formControl.setValue(value as DateRange | null);
 		fixture.detectChanges();
 
 		return fixture;
@@ -365,6 +375,27 @@ describe('DateRangeInputComponent', () => {
 		});
 	});
 
+	describe('placeholder', () => {
+		it('should set the custom placeholder on both native inputs', () => {
+			// Arrange
+			const fixture = createFormControlHost(new FormControl<DateRange | null>(null), null, null, 'jj-mm-aaaa');
+
+			// Assert
+			expect(getInput(fixture, 'start').placeholder).toBe('jj-mm-aaaa');
+			expect(getInput(fixture, 'end').placeholder).toBe('jj-mm-aaaa');
+		});
+
+		it('should fall back to the localized date format on both native inputs when no placeholder is set', () => {
+			// Arrange
+			const fixture = createFormControlHost(new FormControl<DateRange | null>(null));
+			const expectedPlaceholder = getLocalizedDateFormat('fr-FR', 'day');
+
+			// Assert
+			expect(getInput(fixture, 'start').placeholder).toBe(expectedPlaceholder);
+			expect(getInput(fixture, 'end').placeholder).toBe(expectedPlaceholder);
+		});
+	});
+
 	it('should anchor the calendar on the end bound when the written range has no start', () => {
 		const formControl = new FormControl<DateRange | null>(null);
 
@@ -508,6 +539,125 @@ describe('DateRangeInputComponent', () => {
 
 			// Assert
 			expect(formControl.value).toEqual({ end: new Date(2025, 5, 20), scope: 'day' });
+		});
+	});
+
+	describe('touched state', () => {
+		// The calendar is rendered in the overlay container, outside of the fixture
+		function getDayButton(): HTMLButtonElement {
+			return document.querySelector('.calendar-table-body-row-cell-action:not([aria-disabled])') as HTMLButtonElement;
+		}
+
+		it('should mark the control as touched when the focus leaves the inputs', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null, Validators.required);
+			const fixture = createFormControlHost(formControl);
+			const startInput = getInput(fixture, 'start');
+
+			// Act
+			startInput.focus();
+			startInput.blur();
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.touched).toBe(true);
+		});
+
+		it('should not mark the control as touched when the focus moves from the start input to the end input', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null, Validators.required);
+			const fixture = createFormControlHost(formControl);
+
+			// Act
+			getInput(fixture, 'start').focus();
+			getInput(fixture, 'end').focus();
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.touched).toBe(false);
+		});
+
+		it('should not mark the control as touched when the focus moves from the input to the calendar', () => {
+			// Arrange
+			const formControl = new FormControl<DateRange | null>(null, Validators.required);
+			const fixture = createFormControlHost(formControl);
+			const startInput = getInput(fixture, 'start');
+			startInput.focus();
+			startInput.click();
+			fixture.detectChanges();
+
+			// Act
+			getDayButton().focus();
+			fixture.detectChanges();
+
+			// Assert
+			expect(formControl.touched).toBe(false);
+		});
+
+		describe('while the calendar is open', () => {
+			let outsideField: HTMLInputElement;
+
+			beforeEach(() => {
+				outsideField = document.createElement('input');
+				document.body.appendChild(outsideField);
+			});
+
+			afterEach(() => outsideField.remove());
+
+			function openCalendar(fixture: ComponentFixture<unknown>): HTMLInputElement {
+				const startInput = getInput(fixture, 'start');
+				startInput.focus();
+				startInput.click();
+				fixture.detectChanges();
+				return startInput;
+			}
+
+			it('should mark the control as touched when the focus leaves the inputs with the keyboard', () => {
+				// Arrange
+				const formControl = new FormControl<DateRange | null>(null, Validators.required);
+				const fixture = createFormControlHost(formControl);
+				const startInput = openCalendar(fixture);
+
+				// Act
+				startInput.dispatchEvent(new FocusEvent('blur', { relatedTarget: outsideField }));
+				fixture.detectChanges();
+
+				// Assert
+				expect(formControl.touched).toBe(true);
+			});
+
+			it('should not mark the control as touched when the newly focused element is unknown', () => {
+				// Arrange
+				const formControl = new FormControl<DateRange | null>(null, Validators.required);
+				const fixture = createFormControlHost(formControl);
+				const startInput = openCalendar(fixture);
+
+				// Act
+				// Safari does not focus clicked buttons, so clicking a day blurs the input without related target
+				startInput.dispatchEvent(new FocusEvent('blur', { relatedTarget: null }));
+				fixture.detectChanges();
+
+				// Assert
+				expect(formControl.touched).toBe(false);
+			});
+
+			it('should mark the control as touched when the calendar closes, even though the focus is given back to an input', () => {
+				// Arrange
+				const formControl = new FormControl<DateRange | null>(null, Validators.required);
+				const fixture = createFormControlHost(formControl);
+				const startInput = openCalendar(fixture);
+				// An outside click on an element that does not take the focus blurs the input without related target
+				startInput.dispatchEvent(new FocusEvent('blur', { relatedTarget: null }));
+				fixture.detectChanges();
+
+				// Act
+				fixture.debugElement.query(By.directive(PopoverDirective)).injector.get(PopoverDirective).close();
+				fixture.detectChanges();
+
+				// Assert
+				expect(startInput).toBe(document.activeElement);
+				expect(formControl.touched).toBe(true);
+			});
 		});
 	});
 

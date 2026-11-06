@@ -1,8 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
+import { LuEstablishmentSelectInputComponent, luEstablishmentSelectInputTranslations } from '@lucca-front/ng/establishment';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { intlArgType } from '@/helpers/stories';
 @Component({
 	selector: 'establishment-select-stories',
 	imports: [LuEstablishmentSelectInputComponent],
@@ -24,6 +25,9 @@ class EstablishmentSelectStory {
 
 export default {
 	title: 'Documentation/Forms/EstablishmentSelect',
+	argTypes: {
+		intl: intlArgType(luEstablishmentSelectInputTranslations, 'ILuEstablishmentSelectInputLabel'),
+	},
 	component: EstablishmentSelectStory,
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;

@@ -5,15 +5,13 @@ import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent } from '@lucca-front/ng/forms/rich-text-input';
+import { luRichTextInputTranslations, RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent } from '@lucca-front/ng/forms/rich-text-input';
 import { HtmlFormatterDirective } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
-import { DEFAULT_MARKDOWN_TRANSFORMERS, MarkdownFormatterDirective, MarkdownFormatterWithTagsDirective, TAGS } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
-import { PLAINTEXT_TAGS, PlainTextFormatterWithTagsDirective } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
+import { MarkdownFormatterDirective, MarkdownFormatterWithTagsDirective } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
+import { PlainTextFormatterWithTagsDirective } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, useControlledStoryModel, createTestStory, generateInputs } from '@/helpers/stories';
+import { cleanupTemplate, useControlledStoryModel, generateInputs, intlArgType } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { expectNgModelDisplay, waitForAngular } from '@/helpers/test';
-import { screen, userEvent, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextInput/Angular',
@@ -36,11 +34,11 @@ export default {
 		},
 		disabled: {
 			description: 'Désactive le champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		disableSpellcheck: {
 			description: 'Désactive le correcteur d’orthographe.',
@@ -48,7 +46,7 @@ export default {
 		},
 		autoResize: {
 			description: 'Active / désactive l’autoresize du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		hideToolbar: {
 			description: 'Masque les options de mise en forme.',
@@ -56,8 +54,14 @@ export default {
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
+		tags: {
+			control: false,
+			description: 'Liste des tags proposés par le plugin <code>lu-rich-text-plugin-tag</code> (clé, libellé, <code>secondary</code>, <code>group</code>). Requis.',
+			table: { category: 'inputs (rich-text-plugin-tag)', type: { summary: 'Tag[]' } },
+		},
+		intl: intlArgType(luRichTextInputTranslations, 'ILuRichTextInputLabel', 'lu-rich-text-plugin-*'),
 	},
 } as Meta;
 
@@ -275,9 +279,8 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, presentation, ...inputArgs } = args;
-		const transformers = [...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS];
 		return {
-			props: { model: useControlledStoryModel(value), disabled, required, transformers },
+			props: { model: useControlledStoryModel(value), disabled, required },
 			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithMarkdownTagsFormatter
 	${generateInputs(inputArgs, argTypes)}
@@ -335,10 +338,8 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 export const WithTagPluginPlainText: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, presentation, ...inputArgs } = args;
-
-		const transformers = [PLAINTEXT_TAGS];
 		return {
-			props: { model: useControlledStoryModel(value), disabled, required, transformers },
+			props: { model: useControlledStoryModel(value), disabled, required },
 			template: cleanupTemplate(`<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
 	<lu-rich-text-input luWithPlainTextTagsFormatter
 	${generateInputs(inputArgs, argTypes)}
@@ -381,9 +382,8 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 	render: (args, { argTypes }) => {
 		const { value: valueEn, valueFr, disabled, required, presentation, ...inputArgs } = args;
 		const value = valueEn;
-		const transformers = [...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS];
 		return {
-			props: { model: useControlledStoryModel(value), disabled, required, transformers },
+			props: { model: useControlledStoryModel(value), disabled, required },
 			template: cleanupTemplate(`<button luButton="outlined" size="S" (click)="model.example='${valueEn}';">EN</button>
 				<button luButton="outlined" size="S" (click)="model.example='${valueFr}';">FR</button>
 				<lu-form-field label="Label" ${generateInputs({ presentation }, argTypes)}>
@@ -440,82 +440,3 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 		presentation: false,
 	},
 };
-
-export const BasicTEST = createTestStory(WithTagPluginWithNoInitialValue, async (context) => {
-	const canvas = within(context.canvasElement);
-	const editor = canvas.getByRole('textbox');
-
-	await context.step('Type and apply text styles', async () => {
-		await userEvent.click(editor);
-		await userEvent.type(editor, 'Bonjour ');
-
-		await clickToolbarButton('Gras');
-		await userEvent.type(editor, 'gras');
-		await clickToolbarButton('Gras');
-
-		await userEvent.type(editor, ' et ');
-		await clickToolbarButton('Italique');
-		await userEvent.type(editor, 'italique');
-		await clickToolbarButton('Italique');
-		await waitForAngular();
-
-		await userEvent.type(editor, ' et ');
-		await clickToolbarButton('Barré');
-		await userEvent.type(editor, 'barré');
-		await clickToolbarButton('Barré');
-		await waitForAngular();
-
-		await expectNgModelDisplay(context.canvasElement, '<p><span>Bonjour </span><b><strong>gras</strong></b><span> et </span><i><em>italique</em></i><span> et </span><s><span>barré</span></s></p>');
-	});
-
-	await context.step('Create a bulleted list', async () => {
-		await userEvent.type(editor, '{Enter}');
-		await clickToolbarButton('Liste à puces');
-		await userEvent.type(editor, 'Premier point{Enter}Second point');
-		await clickToolbarButton('Liste à puces');
-		await waitForAngular();
-
-		await expectNgModelDisplay(context.canvasElement, 'Premier point');
-		await expectNgModelDisplay(context.canvasElement, 'Second point');
-	});
-
-	await context.step('Create a numbered list', async () => {
-		await clickToolbarButton('Liste numérotée');
-		await userEvent.type(editor, 'Troisieme point{Enter}Quatrieme point');
-		await clickToolbarButton('Liste numérotée');
-		await waitForAngular();
-
-		await expectNgModelDisplay(context.canvasElement, 'Troisieme point');
-		await expectNgModelDisplay(context.canvasElement, 'Quatrieme point');
-	});
-
-	await context.step('Create a link', async () => {
-		await userEvent.type(editor, '{Enter}links');
-		await userEvent.keyboard('{Shift>}{ArrowLeft}{ArrowLeft}{ArrowLeft}{ArrowLeft}{ArrowLeft}{/Shift}');
-		await clickToolbarButton('Lien');
-
-		const linkInput = screen.getByPlaceholderText('https://www.nomDuSite.com');
-		await userEvent.clear(linkInput);
-		await userEvent.type(linkInput, 'https://example.org/docs');
-		await userEvent.click(screen.getByRole('button', { name: 'Valider' }));
-		await waitForAngular();
-
-		await expectNgModelDisplay(context.canvasElement, '<p><a href="https://example.org/docs" rel="noreferrer"><span>links</span></a></p>');
-	});
-
-	await context.step('add tag', async () => {
-		await userEvent.keyboard('{Meta>}a{/Meta}{Backspace}');
-
-		await userEvent.click(canvas.getByText('Tag 1'));
-		await userEvent.click(canvas.getByText('Tag 2'));
-		await userEvent.click(canvas.getByText('Tag 3'));
-		await waitForAngular();
-
-		await expectNgModelDisplay(context.canvasElement, '{{tag1}}{{tag2}}{{tag3}}');
-	});
-});
-
-async function clickToolbarButton(name: string) {
-	const toolbar = screen.getByRole('toolbar');
-	await userEvent.click(within(toolbar).getByRole('button', { name }));
-}

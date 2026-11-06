@@ -1,4 +1,4 @@
-﻿export const Translations = {
+export const Translations = {
 	'nl-BE': {
 		addOption: 'Een optie toevoegen',
 	},

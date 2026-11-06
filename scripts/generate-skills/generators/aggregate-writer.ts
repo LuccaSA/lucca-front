@@ -342,8 +342,9 @@ Si la version ne peut pas être déterminée → **s'arrêter et demander à l'u
 **Contrôle de cohérence (anti-péremption).** La version détectée doit être couverte par la liste ci-dessus. Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais, ne code pas :
 
 - la **majeure** détectée n'apparaît pas ci-dessus (ex: projet monté en majeure supérieure alors que la skill n'a pas été mise à jour) ;
-- la **mineure** détectée est plus récente que la base de sa majeure${hasTechMinors ? ' **et** n\'est pas une mineure technique listée ci-dessus' : ''} (mineure publiée après cette skill → non documentée) ;
-- le **patch** détecté est **postérieur** au dernier patch connu de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son \`_manifest.md\`${hasTechMinors ? ' ; le dernier patch listé en §1 pour une mineure technique' : ''} → skill périmée, l'API réelle peut différer).
+- la **mineure** détectée est plus récente que la base de sa majeure${hasTechMinors ? ' **et** n\'est pas une mineure technique listée ci-dessus' : ''} (mineure publiée après cette skill → non documentée).
+
+Si le **patch** détecté est **postérieur** au dernier patch documenté de sa mineure (le dernier patch de la base est indiqué ci-dessus ; celui d'une mineure antérieure dans son \`_manifest.md\`${hasTechMinors ? ' ; le dernier patch listé en §1 pour une mineure technique' : ''}), **signale-le en une ligne et continue** ; en cas de comportement inattendu, lis les notes de release des patchs postérieurs (\`gh release view v<patch> --repo LuccaSA/lucca-front\`) : le paquet \`@lucca-front/ng\` n'embarque pas de CHANGELOG.
 
 ## 2. Résolution des chemins
 

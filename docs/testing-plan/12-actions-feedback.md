@@ -58,8 +58,8 @@ Read more:
   content beyond the clamp is hidden from screen readers when collapsed if implemented.
 
 Impersonation:
-- There is an existing play-function story (`impersonation-basic.stories.ts` was cited as a
-  play-function example) — read it first. Cover its action affordances (stop impersonation
+- There is an existing play-function story (`stories/e2e/impersonation/impersonation-basic.stories.ts`)
+  — read it first. Cover its action affordances (stop impersonation
   button → output emitted) by mouse and keyboard if not already done.
 
 File dropzone / entry:

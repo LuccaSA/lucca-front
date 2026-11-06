@@ -11,7 +11,9 @@ export default {
 	title: 'Documentation/Texts/Code/Angular/Basic',
 	argTypes: {
 		block: {
-			type: 'boolean',
+			control: {
+				type: 'boolean',
+			},
 			description: 'Permet un affichage sur plusieurs lignes.',
 			table: { category: 'inputs' },
 		},

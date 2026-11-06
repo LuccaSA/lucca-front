@@ -4,7 +4,7 @@ import { ActivatedRoute, provideRouter, Route, Router, RouterFeatures, RouterOut
 import { injectDialogData, LuDialogRef } from '../model';
 
 import { By } from '@angular/platform-browser';
-import { Subject } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
 import { vi } from 'vitest';
 import { LuDialogService } from '../dialog.service';
 import { dialogLazyRouteFactory, dialogRouteFactory } from './dialog-routing.utils';
@@ -332,6 +332,162 @@ describe('dialog-routing.utils', () => {
 			// Assert
 			expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
 			expect($dialogRef().dismiss).not.toHaveBeenCalled();
+		});
+
+		describe.each([
+			{ trigger: 'header close button', dismissDialog: () => $dialogRef().dismiss() },
+			{ trigger: 'escape key', dismissDialog: () => document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })) },
+			{ trigger: 'backdrop click', dismissDialog: () => document.querySelector<HTMLElement>('.dialog_backdrop')!.click() },
+		])('when dismissed with the $trigger', ({ dismissDialog }) => {
+			async function openGuardedDialog(...canDeactivate: (() => boolean | Observable<boolean>)[]) {
+				const route = addTestRoute({
+					path: 'test/:name',
+					dataFactory: () => ({ foo: 'bar' }),
+					dialogRouteConfig: {
+						canDeactivate,
+					},
+				});
+				const { router, fixture } = initTest(route);
+
+				await router.navigateByUrl('/test/bar');
+				fixture.detectChanges();
+				await fixture.whenStable();
+				await vi.runAllTimersAsync();
+
+				// Use real timers to avoid infinite timer loop from router navigation
+				vi.useRealTimers();
+
+				return { router, fixture };
+			}
+
+			it('should keep dialog opened when canDeactivate return false', async () => {
+				// Arrange
+				const canDeactivateGuard = vi.fn(() => false);
+				const { router, fixture } = await openGuardedDialog(canDeactivateGuard);
+				const dismissed = vi.fn();
+				$dialogRef().dismissed$.subscribe(dismissed);
+
+				// Act
+				dismissDialog();
+				await fixture.whenStable();
+
+				// Assert
+				expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
+				expect(dismissed).not.toHaveBeenCalled();
+				expect(router.url).toBe('/test/bar');
+			});
+
+			it('should dismiss dialog when canDeactivate return true', async () => {
+				// Arrange
+				const canDeactivateGuard = vi.fn(() => true);
+				const { router, fixture } = await openGuardedDialog(canDeactivateGuard);
+				const dismissed = vi.fn();
+				$dialogRef().dismissed$.subscribe(dismissed);
+
+				// Act
+				dismissDialog();
+				await fixture.whenStable();
+
+				// Assert
+				await vi.waitFor(() => {
+					expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
+					expect(dismissed).toHaveBeenCalledTimes(1);
+					expect(router.url).toBe('/');
+				});
+			});
+
+			it('should keep dialog opened when a later canDeactivate return false', async () => {
+				// Arrange
+				const allowingGuard = vi.fn(() => true);
+				const vetoingGuard = vi.fn(() => false);
+				const { router, fixture } = await openGuardedDialog(allowingGuard, vetoingGuard);
+				const dismissed = vi.fn();
+				$dialogRef().dismissed$.subscribe(dismissed);
+
+				// Act
+				dismissDialog();
+				await fixture.whenStable();
+
+				// Assert
+				expect(allowingGuard).toHaveBeenCalledTimes(1);
+				expect(vetoingGuard).toHaveBeenCalledTimes(1);
+				expect(dismissed).not.toHaveBeenCalled();
+				expect(router.url).toBe('/test/bar');
+			});
+
+			it('should not call later canDeactivate guards once one return false', async () => {
+				// Arrange
+				const vetoingGuard = vi.fn(() => false);
+				const allowingGuard = vi.fn(() => true);
+				const { router, fixture } = await openGuardedDialog(vetoingGuard, allowingGuard);
+				const dismissed = vi.fn();
+				$dialogRef().dismissed$.subscribe(dismissed);
+
+				// Act
+				dismissDialog();
+				await fixture.whenStable();
+
+				// Assert
+				expect(vetoingGuard).toHaveBeenCalledTimes(1);
+				expect(allowingGuard).not.toHaveBeenCalled();
+				expect(dismissed).not.toHaveBeenCalled();
+				expect(router.url).toBe('/test/bar');
+			});
+
+			it('should keep dialog opened when canDeactivate completes without a value', async () => {
+				// Arrange
+				const emptyGuard = vi.fn(() => EMPTY);
+				const { router, fixture } = await openGuardedDialog(emptyGuard);
+				const dismissed = vi.fn();
+				$dialogRef().dismissed$.subscribe(dismissed);
+
+				// Act
+				dismissDialog();
+				await fixture.whenStable();
+
+				// Assert
+				expect(emptyGuard).toHaveBeenCalledTimes(1);
+				expect(dismissed).not.toHaveBeenCalled();
+				expect(router.url).toBe('/test/bar');
+			});
+
+			it('should keep dialog opened when one canDeactivate completes without a value and another return true', async () => {
+				// Arrange
+				const emptyGuard = vi.fn(() => EMPTY);
+				const allowingGuard = vi.fn(() => true);
+				const { router, fixture } = await openGuardedDialog(emptyGuard, allowingGuard);
+				const dismissed = vi.fn();
+				$dialogRef().dismissed$.subscribe(dismissed);
+
+				// Act
+				dismissDialog();
+				await fixture.whenStable();
+
+				// Assert
+				expect(dismissed).not.toHaveBeenCalled();
+				expect(router.url).toBe('/test/bar');
+			});
+
+			it('should dismiss dialog when every canDeactivate return true', async () => {
+				// Arrange
+				const firstGuard = vi.fn(() => true);
+				const secondGuard = vi.fn(() => true);
+				const { router, fixture } = await openGuardedDialog(firstGuard, secondGuard);
+				const dismissed = vi.fn();
+				$dialogRef().dismissed$.subscribe(dismissed);
+
+				// Act
+				dismissDialog();
+				await fixture.whenStable();
+
+				// Assert
+				await vi.waitFor(() => {
+					expect(firstGuard).toHaveBeenCalledTimes(1);
+					expect(secondGuard).toHaveBeenCalledTimes(1);
+					expect(dismissed).toHaveBeenCalledTimes(1);
+					expect(router.url).toBe('/');
+				});
+			});
 		});
 
 		it('should support children', async () => {

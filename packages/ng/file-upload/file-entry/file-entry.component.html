@@ -7,12 +7,16 @@
 			<dd class="fileEntry-inlineMessage">
 				<lu-inline-message withTooltip [label]="inlineMessageError() ?? ''" [state]="'error'" />
 			</dd>
-		} @else {
+		} @else if (fileTypeDisplay() || fileSizeDisplay()) {
 			<dd class="fileEntry-description">
-				<span class="fileEntry-description-format" luTooltip luTooltipWhenEllipsis>{{ fileTypeDisplay() }}</span>
+				@if (fileTypeDisplay(); as fileTypeDisplay) {
+					<span class="fileEntry-description-format" luTooltip luTooltipWhenEllipsis>{{ fileTypeDisplay }}</span>
+				}
 				@if (fileSizeDisplay(); as fileSizeDisplay) {
-					<span class="pr-u-mask"> – </span>
-					<lu-divider vertical class="fileEntry-description-divider" />
+					@if (fileTypeDisplay()) {
+						<span class="pr-u-mask"> – </span>
+						<lu-divider vertical class="fileEntry-description-divider" />
+					}
 					<span class="fileEntry-description-size">{{ fileSizeDisplay }}</span>
 				}
 			</dd>

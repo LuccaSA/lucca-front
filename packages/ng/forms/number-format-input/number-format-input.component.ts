@@ -3,8 +3,8 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, computed, DestroyRef
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
-import { intlInputOptions, luBooleanAttribute, luOptionalNumberAttribute } from '@lucca-front/ng/core';
-import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { intlInputOptions, luBooleanAttribute, luNullableNumberAttribute, luOptionalNumberAttribute } from '@lucca-front/ng/core';
+import { FormFieldWidth, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { NumberFormat, NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
 import { startWith } from 'rxjs/operators';
 import { FormFieldIdDirective } from '../form-field-id.directive';
@@ -56,6 +56,13 @@ export class NumberFormatInputComponent implements AfterViewInit {
 	readonly hasClearer = input(false, { transform: luBooleanAttribute });
 
 	readonly valueAlignRight = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Width of the input itself, using the same scale as the form field width
+	 */
+	readonly width = input(null, { transform: luNullableNumberAttribute<FormFieldWidth> });
+
+	protected readonly widthClass = computed(() => (this.width() ? `mod-width${this.width()}` : null));
 
 	readonly inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 

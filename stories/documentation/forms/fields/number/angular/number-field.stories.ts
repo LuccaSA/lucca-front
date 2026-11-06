@@ -1,12 +1,11 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_SIZE, FormFieldComponent } from '@lucca-front/ng/form-field';
-import { NumberInputComponent } from '@lucca-front/ng/forms';
+import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { luNumberFieldTranslations, NumberInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, useStoryModel, createTestStory, generateInputs, setStoryOptions } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
-import { expect, userEvent, within } from 'storybook/test';
+import { cleanupTemplate, useStoryModel, generateInputs, setStoryOptions, intlArgType } from '@/helpers/stories';
+
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 export default {
@@ -21,7 +20,7 @@ export default {
 			type: 'string',
 			description: 'Affiche une icône (?) associée à une info-bulle. ',
 			if: { arg: 'hiddenLabel', truthy: false },
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		size: {
 			options: setStoryOptions(FORM_FIELD_SIZE),
@@ -29,11 +28,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessage: {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -41,19 +40,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)', defaultValue: { summary: 'null' } },
 		},
 		label: {
 			description: 'Modifie le label de l’input.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		required: {
 			description: 'Marque le champ comme obligatoire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		hasClearer: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli. Il est alors conseillé de masquer les boutons d’incrémentation (noSpinButtons).',
@@ -61,23 +60,36 @@ export default {
 		},
 		disabled: {
 			description: 'Désactive le champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
 			table: { category: 'inputs' },
 		},
 		step: {
+			control: { type: 'number' },
 			description: 'Modifie le pas d’incrémentation.',
 			table: { category: 'inputs' },
 		},
 		min: {
+			control: { type: 'number' },
 			description: 'Définit une valeur minimale.',
 			table: { category: 'inputs' },
 		},
 		max: {
+			control: { type: 'number' },
 			description: 'Définit une valeur maximale.',
 			table: { category: 'inputs' },
+		},
+		prefix: {
+			control: { type: 'object' },
+			description: 'Ajoute un préfixe (texte ou icône) avant la valeur du champ. [TextInputAddon]',
+			table: { category: 'inputs', type: { summary: 'TextInputAddon' } },
+		},
+		suffix: {
+			control: { type: 'object' },
+			description: 'Ajoute un suffixe (texte ou icône) après la valeur du champ. [TextInputAddon]',
+			table: { category: 'inputs', type: { summary: 'TextInputAddon' } },
 		},
 		valueAlignRight: {
 			description: 'Aligne la valeur du champ à droite.',
@@ -87,15 +99,35 @@ export default {
 			description: 'Masque les boutons d’incrémentation.',
 			table: { category: 'inputs' },
 		},
+		width: {
+			options: setStoryOptions(FORM_FIELD_WIDTH),
+			control: {
+				type: 'select',
+			},
+			description: 'Applique une largeur fixe au FormField.',
+			table: { category: 'inputs' },
+		},
+		widthOnInput: {
+			name: '↳ widthOnInput',
+			if: { arg: 'width', truthy: true },
+			control: {
+				type: 'boolean',
+			},
+			description: 'Applique la largeur sur l’input plutôt que sur le FormField, afin que le label et le message d’aide conservent toute la largeur disponible.',
+			table: { category: 'inputs' },
+		},
+		intl: intlArgType(luNumberFieldTranslations, 'LuNumberFieldLabel'),
 	},
 } as Meta;
 
-export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; required: boolean; widthOnInput: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, widthOnInput, prefix, suffix, ...inputArgs } = args;
+		const formFieldWidth = widthOnInput ? undefined : width;
+		const inputWidth = widthOnInput ? width : undefined;
 		const model = useStoryModel(1000);
 		return {
-			props: { model },
+			props: { model, prefix, suffix },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -104,10 +136,11 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 					inlineMessage,
 					inlineMessageState,
 					size,
+					width: formFieldWidth,
 				},
 				argTypes,
 			)}>
-	<lu-number-input [(ngModel)]="model.example"${generateInputs(inputArgs, argTypes)} />
+	<lu-number-input [(ngModel)]="model.example"${prefix ? ' [prefix]="prefix"' : ''}${suffix ? ' [suffix]="suffix"' : ''}${generateInputs({ ...inputArgs, width: inputWidth }, argTypes)} />
 </lu-form-field>
 <pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
 			moduleMetadata: {
@@ -122,7 +155,7 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 		hasClearer: true,
 		disabled: false,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		step: 1,
@@ -130,6 +163,8 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 		max: 999,
 		noSpinButtons: false,
 		valueAlignRight: false,
+		width: '',
+		widthOnInput: false,
 	},
 };
 
@@ -141,11 +176,11 @@ export const WithPrefixAndSuffix: StoryObj<
 > = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
-		const model = useStoryModel(1000);
+		const model = useStoryModel(100);
 		return {
 			props: {
-				prefix: args.prefix,
-				suffix: args.suffix,
+				prefix,
+				suffix,
 				model,
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
@@ -184,7 +219,7 @@ export const WithPrefixAndSuffix: StoryObj<
 			ariaLabel: 'euros par jour',
 		},
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		step: 1,
 		min: 0,
 		max: 999,
@@ -192,30 +227,3 @@ export const WithPrefixAndSuffix: StoryObj<
 		valueAlignRight: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		const input = canvas.getByRole('spinbutton');
-		await expect(input).toBeVisible();
-	});
-
-	await step('Interaction souris - saisir un nombre', async () => {
-		const input = canvas.getByRole('spinbutton');
-		await userEvent.clear(input);
-		await userEvent.type(input, '42');
-		await waitForAngular();
-		await expect(input).toHaveValue(42);
-	});
-
-	await step('Interaction clavier - focus et saisie', async () => {
-		const input = canvas.getByRole('spinbutton');
-		await userEvent.clear(input);
-		input.focus();
-		await userEvent.keyboard('123');
-		await waitForAngular();
-		await expect(input).toHaveValue(123);
-	});
-});

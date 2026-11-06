@@ -1,4 +1,5 @@
-import type { Preview } from '@storybook/angular-vite';
+import { SELECT_RESPONSIVE_DIALOG } from '@lucca-front/ng/core-select';
+import { applicationConfig, type Preview } from '@storybook/angular-vite';
 import DocumentationTemplate from './DocumentationTemplate.mdx';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
@@ -10,6 +11,14 @@ MswPlugin.init();
 LocaleId.init();
 
 const preview: Preview = {
+  decorators: [
+    // The select's responsive dialog — button trigger and bottom sheet panel below the S breakpoint —
+    // is behind a flag defaulting to false, so Storybook turns it on to keep demoing it.
+    applicationConfig({
+      providers: [{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true }],
+    }),
+  ],
+
   parameters: {
     controls: {
       matchers: {

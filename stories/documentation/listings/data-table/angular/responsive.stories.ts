@@ -19,17 +19,19 @@ export default {
 	title: 'Documentation/Listings/Data table/Angular/Responsive',
 	argTypes: {
 		inlineSize: {
-			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé.',
-			table: { category: 'inputs' },
+			description: 'Modifie la largeur d’une colonne lorsque <code>layoutFixed</code> est activé. La valeur est définie par <code>inlineSizeValue</code> dans la story.',
+			table: { category: 'inputs (th[luDataTableCell])' },
 		},
 		inlineSizeValue: {
 			name: '↳ inlineSizeValue',
 			if: { arg: 'inlineSize', truthy: true },
-			table: { category: 'inputs' },
+			description: 'Valeur passée à l’input <code>inlineSize</code> (longueur CSS).',
+			table: { category: 'story' },
 		},
-		responsiveConfig: {
-			description: 'Applique une configuration responsive à LayoutFixed.',
-			table: { category: 'inputs' },
+		responsive: {
+			description:
+				'Déclaration <code>@let</code> insérée avant le tableau. Elle définit la configuration (<code>ResponsiveConfig&lt;\'layoutFixed\', true&gt;</code>, ex. <code>{ layoutFixedAtMediaMinS: true }</code>) liée à l’input <code>responsive</code> via <code>[responsive]="layoutfixed"</code>.',
+			table: { category: 'story', type: { summary: 'string' } },
 		},
 	},
 	decorators: [
@@ -75,7 +77,7 @@ export default {
 			selectable,
 			lines,
 			nested,
-			responsiveConfig,
+			responsive,
 			...inputArgs
 		} = args;
 
@@ -150,7 +152,7 @@ export default {
 		return {
 			styles: stickyHeader ? [`lu-data-table { max-block-size: 7.5rem }`] : [``],
 			props: { example: text },
-			template: `${responsiveConfig}
+			template: `${responsive}
 <lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr} [responsive]="layoutfixed">
 	<thead luDataTableHead${stickyHeaderAttr}>
 		<tr luDataTableRow>
@@ -177,7 +179,7 @@ export const Basic: StoryObj = {
 	args: {
 		inlineSize: false,
 		inlineSizeValue: '6rem',
-		responsiveConfig: `@let layoutfixed = {
+		responsive: `@let layoutfixed = {
 	layoutFixedAtMediaMinS: true
 };`,
 	},

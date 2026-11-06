@@ -68,7 +68,7 @@ export class FileEntryComponent {
 	}
 
 	readonly fileName = computed(() => this.entry().name);
-	readonly fileType = computed<string>(() => this.entry().type ?? '');
+	readonly fileType = computed(() => this.entry().type);
 	readonly fileSize = computed<number | null>(() => this.entry().size ?? null);
 
 	readonly fileSizeDisplay = computed(() => {
@@ -76,9 +76,15 @@ export class FileEntryComponent {
 		return isNotNil(fileSize) ? formatFileSize(this.#locale, fileSize) : null;
 	});
 	readonly fileTypeDisplay = computed(() => {
-		const fileExtension: string = extractFileExtension(this.fileName(), this.fileType());
+		const fileType = this.fileType();
+		// A null type means the format is unknown: it is not deduced from the file name
+		if (fileType === null) {
+			return null;
+		}
 
-		return this.intl().file.replace('{{fileTypeLastPart}}', fileExtension);
+		const fileExtension: string = extractFileExtension(this.fileName(), fileType);
+
+		return fileExtension ? this.intl().file.replace('{{fileTypeLastPart}}', fileExtension) : null;
 	});
 
 	readonly previewUrl = input<string>('');
@@ -107,12 +113,11 @@ export class FileEntryComponent {
 	});
 
 	readonly tooltip = computed(() => {
-		const fileSize = this.fileSizeDisplay() ? ` – ${this.fileSizeDisplay()}` : '';
 		if (this.state() === 'error') {
 			if (!this.media()) {
 				return null;
 			} else {
-				return this.fileName() + fileSize;
+				return joinTooltipParts(this.fileName(), this.fileSizeDisplay());
 			}
 		}
 
@@ -121,16 +126,20 @@ export class FileEntryComponent {
 		}
 
 		if (this.size() === null && !this.media()) {
-			return this.fileTypeDisplay() + fileSize;
+			return joinTooltipParts(this.fileTypeDisplay(), this.fileSizeDisplay()) || null;
 		}
 
-		return this.fileName() + ' – ' + this.fileTypeDisplay() + fileSize;
+		return joinTooltipParts(this.fileName(), this.fileTypeDisplay(), this.fileSizeDisplay());
 	});
 
 	readonly dlClasses = computed(() => ({
 		[`is-${this.state()}`]: !!this.state(),
 		[`mod-${this.size()}`]: !!this.size(),
 	}));
+}
+
+function joinTooltipParts(...parts: (string | null)[]): string {
+	return parts.filter(Boolean).join(' – ');
 }
 
 function extractFileExtension(fileName: string, type?: string): string {

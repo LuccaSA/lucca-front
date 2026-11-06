@@ -21,12 +21,13 @@
 	}
 
 	@at-root ($atRoot) {
-		.filterBar-divider.divider {
+		.filterBar-divider.divider,
+		.filterBar-scrollBox-divider.divider {
 			@include divider.vertical;
 
 			margin-inline: 0;
 
-			--components-divider-marginBlock: var(--pr-t-spacings-50);
+			--components-divider-marginBlock: var(--pr-t-spacings-75);
 
 			&:last-child {
 				display: none;
@@ -47,14 +48,34 @@
 			flex-wrap: var(--components-filterBar-scrollBox-group-flexWrap);
 			flex-grow: 1;
 			flex-shrink: 1 !important;
+
+			.button {
+				white-space: nowrap;
+			}
+		}
+
+		.filterBar-scrollBox-group-results {
+			align-self: center;
+			color: var(--pr-t-color-text-subtle);
+			white-space: nowrap;
 		}
 
 		.filterBar-scrollBox-export {
-			margin-inline-start: auto;
-			padding-inline-start: var(--pr-t-spacings-200);
+			margin-inline-start: var(--components-filterBar-scrollBox-export-marginInlineStart);
+			padding-inline-start: var(--components-filterBar-scrollBox-export-paddingInlineStart);
 			flex-shrink: 0;
 			display: flex;
 			gap: var(--pr-t-spacings-100);
+		}
+
+		.filterBar-scrollBox-tabs {
+			margin-inline-start: auto;
+			padding-inline-start: var(--pr-t-spacings-200);
+			flex-shrink: 0;
+
+			.segmentedControl {
+				@include segmentedControl.S;
+			}
 		}
 	}
 }

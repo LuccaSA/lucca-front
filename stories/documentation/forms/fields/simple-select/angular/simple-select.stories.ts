@@ -2,15 +2,14 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuOptionDirective } from '@lucca-front/ng/core-select';
+import { luCoreSelectTranslations, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuSimpleSelectInputComponent, luSimpleSelectTranslations } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { expect, screen, userEvent, within } from 'storybook/test';
+
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { createTestStory, generateInputs, InputAlias, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
-import { waitForAngular } from '../../../../../helpers/test';
+import { generateInputs, InputAlias, intlArgType, SelectCommonAliasInput, setStoryOptions, useStoryModel } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Simple Select/Angular',
@@ -24,11 +23,14 @@ export default {
 			type: 'string',
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle. ',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		label: {
 			description: 'Modifie le label du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
+		},
+		required: {
+			description: 'Marque le champ comme obligatoire.',
 		},
 		placeholder: {
 			description: 'Modifie le placeholder au champ.',
@@ -40,7 +42,7 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		width: {
 			options: setStoryOptions(FORM_FIELD_WIDTH),
@@ -48,11 +50,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Applique une largeur fixe au champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessage: {
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -60,11 +62,11 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)', defaultValue: { summary: 'null' } },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		clearable: {
 			description: 'Affiche un bouton pour vider le champ lorsque celui-ci est rempli.',
@@ -76,11 +78,11 @@ export default {
 		},
 		disabled: {
 			description: 'Désactive le champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (ngModel)' },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		panelOpened: {
 			description: "Événement déclenché à l'ouverture du panneau de sélection.",
@@ -101,6 +103,7 @@ export default {
 		valueTpl: HiddenArgType,
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
+		intl: intlArgType([luCoreSelectTranslations, luSimpleSelectTranslations], 'ILuSimpleSelectLabel & LuCoreSelectLabel'),
 	},
 } as Meta;
 
@@ -109,6 +112,7 @@ export const Basic: StoryObj<
 		LuSimpleSelectInputComponent<ILegume> &
 			FormFieldComponent & {
 				disabled: boolean;
+				required: boolean;
 			},
 		SelectCommonAliasInput
 	>
@@ -147,45 +151,13 @@ export const Basic: StoryObj<
 		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
+		required: false,
 		placeholder: 'Placeholder',
 		clearable: true,
 		inlineMessage: 'Helper text',
-		inlineMessageState: 'default',
+		inlineMessageState: null,
 		loading: false,
 		disabled: false,
 		presentation: false,
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	await waitForAngular();
-	const canvas = within(canvasElement);
-
-	await step('Vérifie le rendu initial', async () => {
-		await expect(canvas.getByRole('combobox')).toBeVisible();
-	});
-
-	await step('Interaction souris - ouverture du listbox', async () => {
-		const combobox = canvas.getByRole('combobox');
-		await userEvent.click(combobox);
-		await waitForAngular();
-		await expect(screen.getByRole('listbox')).toBeVisible();
-		const options = within(screen.getByRole('listbox')).getAllByRole('option');
-		await expect(options.length).toBeGreaterThan(0);
-		await userEvent.click(options[0]);
-		await waitForAngular();
-		await expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
-	});
-
-	await step('Interaction clavier', async () => {
-		const combobox = canvas.getByRole('combobox');
-		combobox.focus();
-		await expect(combobox).toHaveFocus();
-		await userEvent.keyboard('{ArrowDown}');
-		await waitForAngular();
-		await expect(screen.getByRole('listbox')).toBeVisible();
-		await userEvent.keyboard('{Escape}');
-		await waitForAngular();
-		await expect(combobox).toHaveFocus();
-	});
-});

@@ -3,12 +3,11 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
+import { configureLuPopover, luPopoverTranslations, PopoverDirective } from '@lucca-front/ng/popover2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { waitForAngular } from '@/helpers/test';
-import { expect, screen, userEvent, within } from 'storybook/test';
+
 import { HiddenArgType } from '../../../helpers/common-arg-types';
-import { cleanupTemplate, createTestStory, generateInputs } from '../../../helpers/stories';
+import { cleanupTemplate, generateInputs, intlArgType } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Overlays/Popover2/Angular',
@@ -23,6 +22,9 @@ export default {
 	],
 	argTypes: {
 		luPopover2: HiddenArgType,
+		// Property names of aliased inputs: only the aliases are bindable, hide the duplicates.
+		luPopoverDisabledInput: HiddenArgType,
+		luPopoverNoCloseButtonInput: HiddenArgType,
 		luPopoverTrigger: {
 			control: 'select',
 			options: ['click', 'click+hover', 'hover+focus'],
@@ -67,10 +69,17 @@ export default {
 			description: 'Modifie la largeur max de la popover.',
 			table: { category: 'inputs' },
 		},
+		intl: intlArgType(luPopoverTranslations, 'ILuPopover2Label'),
 	},
 } as Meta;
 
-export const Basic: StoryObj<PopoverDirective> = {
+// Args must be keyed on the template aliases, not on the `…Input` property names, for `generateInputs` to bind them.
+export type PopoverStoryArgs = Omit<PopoverDirective, 'luPopoverDisabledInput' | 'luPopoverNoCloseButtonInput'> & {
+	luPopoverDisabled: boolean;
+	luPopoverNoCloseButton: boolean;
+};
+
+export const Basic: StoryObj<PopoverStoryArgs> = {
 	render: (args, { argTypes }) => {
 		const action = args.luPopoverTrigger === 'click' ? 'Cliquez-moi' : 'Cliquez ou survolez-moi';
 		let openDelay = '';
@@ -122,14 +131,14 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverTrigger: 'click',
 		luPopoverCloseDelay: 300,
 		luPopoverOpenDelay: 300,
-		luPopoverDisabledInput: false,
+		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
-		luPopoverNoCloseButtonInput: false,
+		luPopoverNoCloseButton: false,
 		luPopoverMaxBlockSize: '',
 		luPopoverMaxInlineSize: '',
 	},
 };
-export const CustomPosition: StoryObj<PopoverDirective> = {
+export const CustomPosition: StoryObj<PopoverStoryArgs> = {
 	render: (_args, { argTypes }) => {
 		const { luPopoverPosition, ...args } = _args;
 		const action = args.luPopoverTrigger === 'click' ? 'Cliquez-moi' : 'Cliquez ou survolez-moi';
@@ -210,33 +219,9 @@ export const CustomPosition: StoryObj<PopoverDirective> = {
 		luPopoverTrigger: 'click',
 		luPopoverCloseDelay: 300,
 		luPopoverOpenDelay: 300,
-		luPopoverDisabledInput: false,
+		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
-		luPopoverNoCloseButtonInput: false,
+		luPopoverNoCloseButton: false,
 		overlayScrollStrategy: 'reposition',
 	},
 };
-
-export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) => {
-	const canvas = within(canvasElement);
-	const button = await canvas.findByRole('button');
-
-	await step('Mouse interaction', async () => {
-		await userEvent.click(button);
-		await waitForAngular();
-		await expect(screen.getByRole('list')).toBeVisible();
-		await userEvent.click(button);
-		await expect(screen.queryByText('list')).toBeNull();
-		await waitForAngular();
-	});
-
-	await step('Keyboard interactions', async () => {
-		button.focus();
-		await expect(button).toHaveFocus();
-		await userEvent.keyboard('{Enter}');
-		await waitForAngular();
-		await expect(screen.getByRole('list')).toBeVisible();
-		await userEvent.keyboard('{Escape}');
-		await expect(screen.queryByText('list')).toBeNull();
-	});
-});

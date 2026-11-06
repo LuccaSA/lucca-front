@@ -13,7 +13,6 @@ let nextId = 0;
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'segmentedControl-item',
-		role: 'listitem',
 	},
 })
 export class SegmentedControlFilterComponent<T = unknown> {

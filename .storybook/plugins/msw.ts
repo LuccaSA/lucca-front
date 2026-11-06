@@ -1,4 +1,5 @@
 import { worker } from '../msw/browser';
+import { isVitestBrowser } from '../msw/helpers';
 
 export default {
 	init() {
@@ -24,7 +25,16 @@ export default {
 						scope: `${pathname}/`,
 					},
 				},
-				onUnhandledRequest: 'bypass',
+				onUnhandledRequest(request, print) {
+					// Same-origin requests are Storybook's own assets, chunks and fonts: let them
+					// through silently. Under Vitest, anything external is a real network call, which
+					// is what makes the CI run flaky, so it has to be visible; the dev Storybook is
+					// expected to reach the CDN and stays quiet.
+					if (!isVitestBrowser() || new URL(request.url).origin === location.origin) {
+						return;
+					}
+					print.warning();
+				},
 			});
 		}
 	},

@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { BUBBLE_ILLUSTRATION } from '@lucca-front/ng/bubble-illustration';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EMPTY_STATE_HX, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HEADING_LEVEL, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 import { PaletteArgType } from '../../../../helpers/common-arg-types';
@@ -15,11 +15,11 @@ export default {
 		}),
 	],
 	render: (args) => {
-		const { heading, description, center, palette, hx, illustration, action } = args;
-		const paletteArg = palette !== 'none' ? ` palette="${palette}"` : ``;
+		const { heading, description, center, palette, headingLevel, illustration, action } = args;
+		const paletteArg = palette ? ` palette="${palette}"` : ``;
 		const actionArg = action ? ` action` : ``;
 		return {
-			template: `<lu-empty-state-section illustration="${illustration}" hx="${hx}" heading="${heading}" description="${description}"${actionArg}${paletteArg}${center ? ' center' : ''}>
+			template: `<lu-empty-state-section illustration="${illustration}" headingLevel="${headingLevel}" heading="${heading}" description="${description}"${actionArg}${paletteArg}${center ? ' center' : ''}>
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-section>`,
@@ -43,14 +43,19 @@ export default {
 			description: 'Modifie l’illustration.',
 			table: { category: 'inputs' },
 		},
-		hx: {
+		headingLevel: {
 			control: {
 				type: 'number',
-				min: EMPTY_STATE_HX.at(0),
-				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
+				min: EMPTY_STATE_HEADING_LEVEL.at(0),
+				max: EMPTY_STATE_HEADING_LEVEL.at(EMPTY_STATE_HEADING_LEVEL.length - 1),
 			},
 			description: 'Définit le niveau sémantique du titre.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '3' } },
+		},
+		hx: {
+			control: false,
+			description: '[Déprécié] Utiliser <code>headingLevel</code>.',
+			table: { category: 'inputs (deprecated)' },
 		},
 		heading: {
 			description: 'Titre de l’empty state.',
@@ -70,7 +75,6 @@ export const Section: StoryObj<EmptyStateSectionComponent> = {
 		heading: 'Empty state section',
 		description: 'Description can be a string or a ng-template',
 		center: false,
-		palette: 'none',
-		hx: 3,
+		headingLevel: 3,
 	},
 };

@@ -17,8 +17,9 @@ where applicable, the shared `runALuSelectInputComponentTestSuite` factory.
 1. Read both sources: tree-select builds on core-select — identify what is tree-specific
    (expand/collapse, parent/child selection propagation) vs inherited (already covered by
    task 01; do not re-test inherited basics beyond one smoke path).
-2. Read existing specs and stories (`stories/documentation/forms/tree-select*`,
-   `stories/documentation/listbox*`) — list play functions before writing.
+2. Read existing specs and stories (`stories/documentation/forms/select/tree-select.stories.ts`,
+   `stories/documentation/forms/listbox-option/`) and list the play functions in
+   `stories/e2e/tree-select/` and `stories/e2e/listbox-option/` before writing.
 3. Get the real roles from the templates (`tree`/`treeitem` with `aria-expanded`, or
    listbox/option with `aria-level` — assert whichever pattern is implemented).
 
