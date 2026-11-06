@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, contentChildren, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -7,6 +7,7 @@ import { IconComponent } from '@lucca/prisme/icon';
 import { ApprobationInboxItemComponent } from '../approbation-inbox-list-item/approbation-inbox-list-item.component';
 import { ApprobationInboxListComponent } from '../approbation-inbox-list/approbation-inbox-list.component';
 import { LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS } from './approbation-inbox-list-group.translate';
+import { APPROBATION_INBOX_LIST_GROUP_INSTANCE } from './token';
 
 @Component({
 	selector: 'lu-approbation-inbox-list-group',
@@ -17,6 +18,12 @@ import { LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS } from './approbation-inbo
 		class: 'approbationInbox-list-content-groupOptional',
 		role: 'listitem',
 	},
+	providers: [
+		{
+			provide: APPROBATION_INBOX_LIST_GROUP_INSTANCE,
+			useExisting: forwardRef(() => ApprobationInboxGroupComponent),
+		},
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxGroupComponent {

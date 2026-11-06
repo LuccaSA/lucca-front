@@ -2,7 +2,7 @@ import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, ɵRangeSelectableItem, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -26,7 +26,7 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 		'[class.mod-selectable]': 'tableRef?.selectable() ?? false',
 		'[class.mod-draggable]': 'tableRef?.drag() ?? false',
 	},
-	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet, IconComponent, CdkDragHandle],
+	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet, IconComponent, CdkDragHandle, ɵRangeSelectionDirective],
 	providers: [
 		{
 			provide: LU_DATA_TABLE_ROW_INSTANCE,
@@ -35,7 +35,7 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataTableRowComponent {
+export class DataTableRowComponent implements ɵRangeSelectableItem {
 	readonly intl = input(...intlInputOptions(LU_DATA_TABLE_TRANSLATIONS));
 	readonly bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
 	readonly headRef = inject(LU_DATA_TABLE_HEAD_INSTANCE, { optional: true });
@@ -51,4 +51,18 @@ export class DataTableRowComponent {
 	readonly selectedLabel = input<string | null>(null);
 	readonly mixed = input(false, { transform: luBooleanAttribute });
 	readonly disabled = input(false, { transform: luBooleanAttribute });
+
+	getRangeSelected() {
+		return this.selected;
+	}
+
+	getRangeElement(): Element {
+		return this.elementRef.nativeElement;
+	}
+
+	isRangeSelectable(): boolean {
+		const body = this.bodyRef;
+		const collapsed = !!body?.group() && !!body.groupButtonAlt() && !body.expanded();
+		return !!this.selectedLabel() && !this.disabled() && !collapsed;
+	}
 }
