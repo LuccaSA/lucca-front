@@ -1,0 +1,33 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin hover {
+	--components-card2-before-inset: calc(var(--pr-t-spacings-50) * -1);
+	--components-card2-before-boxShadow: var(--pr-t-elevation-shadow-overlay);
+}
+
+@mixin focusVisible {
+	.card2-heading-action {
+		&::after {
+			@include a11y.focusVisible;
+		}
+	}
+}
+
+@mixin active {
+	--components-card2-before-boxShadow: 0 0 0 1px var(--palettes-product-400);
+	--components-card2-heading-action-color: var(--palettes-product-700);
+}
+
+@mixin disabled {
+	--components-card2-before-boxShadow: 0 0 0 1px var(--palettes-neutral-50);
+	--components-card2-before-inset: 0;
+	--components-card2-color: var(--pr-t-color-text-disabled);
+	--components-card2-heading-action-color: inherit;
+	--components-card2-heading-action-cursor: default;
+	--components-card2-heading-color: var(--pr-t-color-text-disabled);
+
+	.bubbleIcon {
+		--components-bubbleIcon-color: var(--pr-t-color-input-icon-disabled);
+		--components-bubbleIcon-bubble-path-fill: var(--pr-t-color-input-background-disabled);
+	}
+}

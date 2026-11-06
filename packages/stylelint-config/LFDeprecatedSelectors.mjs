@@ -277,4 +277,9 @@ export default [
 		versionDeprecated: '22.1.0',
 		actions: `Le composant Highlight section (\`.highlightSection\` et \`<lu-highlight-section>\`) sera remplacé en 22.2 par une évolution du composant Box.`,
 	},
+	{
+		objectPattern: /\.card\b/,
+		versionDeprecated: '22.2.0',
+		actions: `Remplacer par le composant Card (\`<lu-card>\`, classe \`.card2\`) ; plusieurs cartes vont dans un \`<lu-card-wrapper>\` (\`.card2Wrapper\`).`,
+	},
 ];

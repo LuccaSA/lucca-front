@@ -1,0 +1,108 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	color: var(--components-card2-color);
+	display: grid;
+	grid-template: var(--components-card2-gridTemplate);
+	align-content: start;
+	align-items: var(--components-card2-alignItems);
+	row-gap: var(--components-card2-rowGap);
+	font: var(--pr-t-font-body-S);
+	position: relative;
+	isolation: isolate;
+	border-radius: var(--pr-t-border-radius-structure);
+	padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: var(--components-card2-before-inset);
+		z-index: -1;
+		background-color: var(--pr-t-elevation-surface-raised);
+		box-shadow: var(--components-card2-before-boxShadow);
+		border-radius: inherit;
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: inset, box-shadow;
+	}
+
+	@at-root ($atRoot) {
+		.card2-illustration {
+			grid-area: illustration;
+			display: flex;
+			padding-block: var(--components-card2-illustration-paddingBlock);
+			padding-inline-end: var(--pr-t-spacings-150);
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.card2-heading {
+			grid-area: heading;
+			color: var(--components-card2-heading-color);
+			font: var(--components-card2-heading-font);
+			overflow-wrap: anywhere;
+			margin-block: 0;
+			padding-block-start: var(--components-card2-heading-paddingBlockStart);
+		}
+
+		.card2-heading-action {
+			@include reset.button;
+
+			display: inline;
+			inline-size: auto;
+			color: var(--components-card2-heading-action-color);
+			cursor: var(--components-card2-heading-action-cursor);
+			text-decoration: none;
+			outline: none;
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-property: color;
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: var(--components-card2-before-inset);
+				border-radius: var(--pr-t-border-radius-structure);
+				transition-duration: var(--commons-animations-durations-fast);
+				transition-property: inset;
+				z-index: 1;
+			}
+		}
+
+		.card2-content {
+			grid-area: content;
+		}
+
+		.card2-content a,
+		.card2-content button,
+		.card2-content [tabindex] {
+			position: relative;
+			z-index: 2;
+		}
+
+		.card2Wrapper {
+			display: grid;
+			justify-items: start;
+			gap: var(--pr-t-spacings-100);
+			padding: var(--components-card2Wrapper-padding);
+			background-color: var(--components-card2Wrapper-backgroundColor);
+			border-radius: var(--pr-t-border-radius-structure);
+
+			&:not(:has(:not(.card2Wrapper-list:empty))) {
+				display: none;
+			}
+		}
+
+		.card2Wrapper-list {
+			display: grid;
+			grid-template-columns: var(--components-card2Wrapper-list-gridTemplateColumns);
+			gap: var(--pr-t-spacings-100);
+			justify-self: stretch;
+
+			&:empty {
+				display: none;
+			}
+		}
+	}
+}
