@@ -10,6 +10,7 @@ import {
 	IndexTableActionComponent,
 	IndexTableActionFileComponent,
 	IndexTableBodyComponent,
+	IndexTableBodyGroupDirective,
 	IndexTableComponent,
 	IndexTableFootComponent,
 	IndexTableHeadComponent,
@@ -93,7 +94,8 @@ export default {
 			table: { category: 'inputs (th[luIndexTableCell])', type: { summary: 'number' }, defaultValue: { summary: '0' } },
 		},
 		group: {
-			description: 'Regroupe des lignes de tableau en les rendant dépliables. Le contenu sert de libellé au groupe. [PortalContent]',
+			description:
+				'Regroupe des lignes de tableau en les rendant dépliables, avec un libellé affiché dans la ligne de groupe. Pour un texte simple, renseigner l’input <code>group</code> sur <code>tbody[luIndexTableBody]</code> [PortalContent]. Pour un contenu riche (mise en forme, badge…), projeter dans le <code>tbody</code> un élément portant la directive <code>luIndexTableBodyGroup</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs (tbody[luIndexTableBody])', type: { summary: 'PortalContent | null' }, defaultValue: { summary: 'null' } },
 		},
 		expanded: {
@@ -167,6 +169,7 @@ export default {
 			imports: [
 				IndexTableComponent,
 				IndexTableBodyComponent,
+				IndexTableBodyGroupDirective,
 				IndexTableRowComponent,
 				IndexTableRowCellComponent,
 				IndexTableRowCellHeaderComponent,
@@ -217,7 +220,6 @@ export default {
 		const mixedAttr = mixed ? ` mixed` : ``;
 		const selectableParam = selectable ? ` selectedLabel="Sélectionner cette ligne"` : ``;
 		const selectableAllParam = selectable ? ` selectedLabel="Sélectionner toutes les lignes"` : ``;
-		const groupAttr = group ? ` [group]="samplePortalContent"` : ``;
 		const allowTextSelectionAttr = allowTextSelection ? ` allowTextSelection` : ``;
 		const allowActionTpl = allowAction ? `<a href="#">Content</a>` : `Content`;
 		const tfootAttr = tfoot ? ` tfoot` : ``;
@@ -289,12 +291,9 @@ export default {
 			<td luIndexTableCell${allowTextSelectionAttr}>${allowActionTpl}</td>
 			<td luIndexTableCell>Content Content Content</td>
 		</tr>`;
-		const samplePortalContentTpl = group
+		const groupTpl = group
 			? `
-<ng-template #samplePortalContent>
-	Group label
-	<lu-numeric-badge [value]="8" />
-</ng-template>`
+		<ng-container luIndexTableBodyGroup>Group label <lu-numeric-badge [value]="8" /></ng-container>`
 			: ``;
 
 		return {
@@ -307,10 +306,10 @@ export default {
 			<th luIndexTableCell${alignAttr}${sortAttr}${sortWithEllipsisAttr}>Label</th>
 		</tr>
 	</thead>
-	<tbody luIndexTableBody${groupAttr}${groupButtonAltAttr}${groupExpandedAttr}>
+	<tbody luIndexTableBody${groupButtonAltAttr}${groupExpandedAttr}>${groupTpl}
 		${tbodyTpl}
 	</tbody>${footerTpl}${paginationTpl}
-</lu-index-table>${samplePortalContentTpl}
+</lu-index-table>
 `,
 		};
 	},
