@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	DataTableBodyComponent,
+	DataTableBodyGroupDirective,
 	DataTableComponent,
 	DataTableFootComponent,
 	DataTableHeadComponent,
@@ -31,6 +32,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 		DataTableComponent,
 		DataTableHeadComponent,
 		DataTableBodyComponent,
+		DataTableBodyGroupDirective,
 		DataTableFootComponent,
 		DataTableRowComponent,
 		DataTableRowCellComponent,

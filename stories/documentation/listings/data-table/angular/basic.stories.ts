@@ -5,6 +5,7 @@ import {
 	DATA_TABLE_SORT,
 	DATA_TABLE_VERTICAL_ALIGN,
 	DataTableBodyComponent,
+	DataTableBodyGroupDirective,
 	DataTableComponent,
 	DataTableFootComponent,
 	DataTableHeadComponent,
@@ -170,7 +171,8 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Présente un groupe de lignes dans la story, via l’input <code>group</code> (<code>PortalContent</code>) de <code>tbody[luDataTableBody]</code>.',
+			description:
+				'Présente un groupe de lignes dans la story, avec son libellé affiché dans la ligne de groupe. Pour un texte simple, renseigner l’input <code>group</code> sur <code>tbody[luDataTableBody]</code> [PortalContent]. Pour un contenu riche (mise en forme, badge…), projeter dans le <code>tbody</code> un élément portant la directive <code>luDataTableBodyGroup</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
 			table: { category: 'story' },
 		},
 		editable: {
@@ -210,6 +212,7 @@ export default {
 				DataTableComponent,
 				DataTableHeadComponent,
 				DataTableBodyComponent,
+				DataTableBodyGroupDirective,
 				DataTableFootComponent,
 				DataTableRowComponent,
 				DataTableRowCellComponent,
@@ -274,7 +277,7 @@ export default {
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
 		const mixedAttr = mixed ? ` mixed` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
-		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" [group]="samplePortalContent"` : ``;
+		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}"` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
 		const emptyAttr = empty ? ` empty` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
@@ -326,12 +329,9 @@ export default {
 				</lu-form-field>
 			`
 			: text;
-		const samplePortalContentTpl = group
+		const groupTpl = group
 			? `
-<ng-template #samplePortalContent>
-	Group
-	<lu-numeric-badge [value]="${lines}" />
-</ng-template>`
+		<ng-container luDataTableBodyGroup>Group <lu-numeric-badge [value]="${lines}" /></ng-container>`
 			: ``;
 		const tfootTpl = tfoot
 			? `
@@ -372,11 +372,11 @@ export default {
 			<th luDataTableCell${inlineSizeAttr}${sortAttr}${sortWithEllipsisAttr}${alignAttr}>${textHeader}</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody${groupAttr}${expandedAttr}>
+	<tbody luDataTableBody${groupAttr}${expandedAttr}>${groupTpl}
 		${tbodyTpl}
 	</tbody>${tfootTpl}${paginationTpl}
 </lu-data-table>
-${samplePortalContentTpl}${modelEditableDisplayer}`,
+${modelEditableDisplayer}`,
 		};
 	},
 } as Meta;
