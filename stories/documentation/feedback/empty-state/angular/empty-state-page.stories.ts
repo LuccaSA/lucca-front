@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EMPTY_STATE_HEADING_LEVEL, EMPTY_STATE_HEADING_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HEADING_LEVEL, EMPTY_STATE_HEADING_STYLE, EmptyStateDescriptionDirective, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { CDN_URL } from '@lucca-front/ng/core';
 
@@ -9,11 +9,15 @@ export default {
 	component: EmptyStatePageComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [EmptyStatePageComponent, ButtonComponent, HttpClientModule],
+			imports: [EmptyStatePageComponent, EmptyStateDescriptionDirective, ButtonComponent, HttpClientModule],
 		}),
 	],
 	render: (args) => {
-		const { heading, description, slotTop } = args;
+		const { heading, slotTop } = args;
+		const paramSlotTop = slotTop
+			? `
+	slotTop="${slotTop}"`
+			: ``;
 		const paramHeadingLevel =
 			args['headingLevel'] === 1
 				? ``
@@ -65,10 +69,9 @@ export default {
 `,
 			],
 			template: `<lu-empty-state-page
-	heading="${heading}"
-	slotTop="${slotTop}"
-	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramContentBackgroundColor}${paramHeadingLevel}${paramHeadingStyle}
+	heading="${heading}"${paramSlotTop}${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramContentBackgroundColor}${paramHeadingLevel}${paramHeadingStyle}
 >
+	<p luEmptyStateDescription>You have <strong>no pending request</strong> yet. New requests will appear here.</p>
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-page>`,
@@ -214,11 +217,14 @@ export default {
 			table: { category: 'inputs' },
 		},
 		description: {
-			description: 'Description du composant. [PortalContent]',
+			control: false,
+			description:
+				'Texte affiché sous le titre. Pour un texte simple, renseigner l’input <code>description</code> sur <code>lu-empty-state-page</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luEmptyStateDescription</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
 		},
 		slotTop: {
-			description: 'Ajout d’un slot au dessus du titre. [PortalContent]',
+			description:
+				'Contenu affiché au-dessus du titre. Pour un texte simple, renseigner l’input <code>slotTop</code> sur <code>lu-empty-state-page</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luEmptyStateSlotTop</code>. L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
 		},
 		illustration: {
@@ -232,7 +238,6 @@ export default {
 export const Page: StoryObj<EmptyStatePageComponent> = {
 	args: {
 		heading: 'Empty state page',
-		description: 'Description can be a string or a ng-template',
 		slotTop: '',
 		icon: '',
 		topRightBackground: 'poplee/bubbles-top-right-01',

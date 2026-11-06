@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
+import { EmptyStateDescriptionDirective, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { CDN_URL } from '@lucca-front/ng/core';
@@ -9,7 +9,7 @@ import { CDN_URL } from '@lucca-front/ng/core';
 @Component({
 	selector: 'empty-state-page-stories',
 	templateUrl: './empty-state-page.stories.html',
-	imports: [LuSafeExternalSvgPipe, EmptyStatePageComponent, ButtonComponent],
+	imports: [LuSafeExternalSvgPipe, EmptyStatePageComponent, EmptyStateDescriptionDirective, ButtonComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class EmptyStatePageStory {

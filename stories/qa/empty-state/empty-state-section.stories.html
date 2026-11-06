@@ -51,6 +51,49 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Description<br />(luEmptyStateDescription)</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<section class="emptyState">
+						<div class="emptyState-container">
+							<div class="emptyState-content">
+								<span
+									class="emptyState-content-icon bubbleIllustration mod-action mod-L"
+									aria-hidden="true"
+									[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/calendar.svg' | luSafeExternalSvg"
+								></span>
+								<div class="emptyState-content-text">
+									<h3 class="emptyState-content-heading">Empty State</h3>
+									<div class="emptyState-content-description">
+										<p>
+											Flatus obsequiorum potest inanes pomerium <strong>obsequiorum credi</strong> homines vero caelibes orbos potest vile
+											diversitate flatus.
+										</p>
+									</div>
+									<div class="emptyState-actions">
+										<button type="button" class="button">Button</button>
+										<button type="button" class="button mod-outlined">Button</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-empty-state-section illustration="calendar" action heading="Empty State">
+						<p luEmptyStateDescription>
+							Flatus obsequiorum potest inanes pomerium <strong>obsequiorum credi</strong> homines vero caelibes orbos potest vile
+							diversitate flatus.
+						</p>
+						<button type="button" luButton>Button</button>
+						<button type="button" luButton="outlined">Button</button>
+					</lu-empty-state-section>
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Center</td>
 			<td>
 				<div class="demo-QAtable-list">
