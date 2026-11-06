@@ -3,6 +3,7 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE } from '@lucca-front/ng/software-icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface SoftwareIconBasicStory {
 	icon: string;
@@ -45,7 +46,7 @@ export default {
 function getTemplate(args: SoftwareIconBasicStory): string {
 	const disabled = args.disabled ? ` is-disabled` : ``;
 	const size = args.size === '' ? `` : ` mod-${args.size}`;
-	const domain = 'https://cdn.lucca.fr';
+	const domain = CDN_URL;
 	const path = '/transverse/prisme/visuals/software-icon/';
 	const extension = '.svg';
 	const iconAlt = args.iconAlt

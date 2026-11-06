@@ -19,6 +19,7 @@
 
 import vm from 'vm';
 import * as ts from 'typescript';
+import { CDN_URL } from '../../../packages/ng/core/cdn';
 
 /** Strip a single layer of matching surrounding quotes from an AST default literal. */
 function unquote(value: string): string {
@@ -151,6 +152,11 @@ function evaluateModule(source: string, defaults: Map<string, string>): Evaluate
 					() =>
 					({ template }: any) => ({ render: (args: any) => ({ props: args, template }) }),
 			});
+		}
+		// Constants that stories interpolate into their markup resolve to their real value, so the
+		// published code keeps full URLs; every other export of the entrypoint stays an inert stub.
+		if (id === '@lucca-front/ng/core') {
+			return withStubFallback({ CDN_URL });
 		}
 		return makeStub();
 	};

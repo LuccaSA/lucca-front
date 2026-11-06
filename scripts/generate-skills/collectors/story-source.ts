@@ -402,6 +402,22 @@ const IMPORT_EXCLUDE_PATTERNS = [
 	/['"]@\/stories\//,          // alias-rooted story assets (e.g. '@/stories/icons-list')
 ];
 
+/** Constants the story evaluator inlines into the markup: their import is story plumbing once resolved. */
+const INLINED_CONSTANTS = new Set(['CDN_URL']);
+
+/** Drops inlined constants from an `@lucca-front/ng/core` import, and the whole line if nothing is left. */
+export function stripInlinedConstants(line: string): string | null {
+	const match = /^import\s*\{([^}]*)\}\s*from\s*(['"])@lucca-front\/ng\/core\2;?$/.exec(line.trim());
+	if (!match) return line;
+	const names = match[1]
+		.split(',')
+		.map((n) => n.trim())
+		.filter(Boolean);
+	const kept = names.filter((n) => !INLINED_CONSTANTS.has(n));
+	if (kept.length === names.length) return line;
+	return kept.length ? `import { ${kept.join(', ')} } from '@lucca-front/ng/core';` : null;
+}
+
 /** Start of an import statement — excludes `import(` and `import.meta`. */
 const IMPORT_START = /^import[\s{'"*]/;
 
@@ -467,7 +483,10 @@ interface StoryExtraction {
  */
 function extractStoryEssentials(content: string): StoryExtraction | null {
 	// 1. Imports — filter out storybook-related ones
-	const imports = collectImportStatements(content).filter((l) => !IMPORT_EXCLUDE_PATTERNS.some((p) => p.test(l)));
+	const imports = collectImportStatements(content)
+		.filter((l) => !IMPORT_EXCLUDE_PATTERNS.some((p) => p.test(l)))
+		.map(stripInlinedConstants)
+		.filter((l): l is string => l !== null);
 
 	// 2. HTML templates
 	const templates = extractTemplateLiterals(content);

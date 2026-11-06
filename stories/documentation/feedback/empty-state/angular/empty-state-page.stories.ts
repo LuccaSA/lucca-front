@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EMPTY_STATE_HX, EMPTY_STATE_HX_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 export default {
 	title: 'Documentation/Feedback/Empty State/Angular/Page',
@@ -32,27 +33,27 @@ export default {
 			args['icon'] === ''
 				? ``
 				: `
-	icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/${args['icon']}.svg"`;
+	icon="${CDN_URL}/lucca-front/assets/empty-states/message/${args['icon']}.svg"`;
 		const paramTopRightBackground =
 			args['topRightBackground'] === ''
 				? ``
 				: `
-	topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightBackground']}.svg"`;
+	topRightBackground="${CDN_URL}/lucca-front/assets/empty-states/${args['topRightBackground']}.svg"`;
 		const paramTopRightForeground =
 			args['topRightForeground'] === ''
 				? ``
 				: `
-	topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightForeground']}.svg"`;
+	topRightForeground="${CDN_URL}/lucca-front/assets/empty-states/${args['topRightForeground']}.svg"`;
 		const paramBottomLeftBackground =
 			args['bottomLeftBackground'] === ''
 				? ``
 				: `
-	bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftBackground']}.svg"`;
+	bottomLeftBackground="${CDN_URL}/lucca-front/assets/empty-states/${args['bottomLeftBackground']}.svg"`;
 		const paramBottomLeftForeground =
 			args['bottomLeftForeground'] === ''
 				? ``
 				: `
-	bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftForeground']}.svg"`;
+	bottomLeftForeground="${CDN_URL}/lucca-front/assets/empty-states/${args['bottomLeftForeground']}.svg"`;
 		return {
 			styles: [
 				`
