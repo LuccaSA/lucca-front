@@ -26,6 +26,8 @@ import { NumberFormatInputComponent } from '@lucca-front/ng/forms';
 | `unitDisplay` | `unitDisplay` | `NumberFormatUnitDisplay \| undefined` | `undefined` | — | — | — |
 | `min` | `min` | `unknown` | `undefined` | — | `luOptionalNumberAttribute` | — |
 | `max` | `max` | `unknown` | `undefined` | — | `luOptionalNumberAttribute` | — |
+| `minimumFractionDigits` | `minimumFractionDigits` | `unknown` | `undefined` | — | `luOptionalNumberAttribute` | — |
+| `maximumFractionDigits` | `maximumFractionDigits` | `unknown` | `undefined` | — | `luOptionalNumberAttribute` | — |
 | `placeholder` | `placeholder` | `string` | `''` | — | — | — |
 | `hasClearer` | `hasClearer` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `valueAlignRight` | `valueAlignRight` | `boolean` | `false` | — | `luBooleanAttribute` | — |

@@ -1,3 +1,11 @@
+### 22.1.2
+
+#### Fixed
+
+- Non-currency styles now apply `minimumFractionDigits` and `maximumFractionDigits` when they are given, instead of letting the default significant digits take over.
+- `minimumFractionDigits` no longer pads the integer part with leading zeroes.
+- `currency` style keeps on focus and while typing the fraction digits it displays on blur: `minimumFractionDigits` alone no longer loses decimals on focus, and the typed fraction is cut to the currency default (0 for JPY, 3 for KWD) instead of 2.
+
 ### 19.3.4
 
 #### Fixed

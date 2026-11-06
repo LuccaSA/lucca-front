@@ -51,6 +51,16 @@ export class NumberFormatInputComponent implements AfterViewInit {
 
 	readonly max = input(undefined, { transform: luOptionalNumberAttribute });
 
+	/**
+	 * Minimum fraction digits, overriding the default of the format style (and of the currency)
+	 */
+	readonly minimumFractionDigits = input(undefined, { transform: luOptionalNumberAttribute });
+
+	/**
+	 * Maximum fraction digits, displayed and kept while typing, overriding the default of the format style (and of the currency)
+	 */
+	readonly maximumFractionDigits = input(undefined, { transform: luOptionalNumberAttribute });
+
 	readonly placeholder = input<string>('');
 
 	readonly hasClearer = input(false, { transform: luBooleanAttribute });
@@ -107,6 +117,8 @@ export class NumberFormatInputComponent implements AfterViewInit {
 				currencyDisplay: this.currencyDisplay(),
 				unit: this.unit(),
 				unitDisplay: this.unitDisplay(),
+				minimumFractionDigits: this.minimumFractionDigits(),
+				maximumFractionDigits: this.maximumFractionDigits(),
 			}) satisfies NumberFormatOptions,
 	);
 
