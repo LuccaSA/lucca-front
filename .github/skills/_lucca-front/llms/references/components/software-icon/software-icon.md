@@ -38,7 +38,7 @@ import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 	'absences' \| 'timesheet' \| 'office' \| 'projects' \| 'shifts' \| // Talent Management
 	'performance' \| 'engagement' \| 'training' \| 'recruitment' \| 'mood' \| // Employee Administration
 	'analytics' \| 'employee-administration' \| 'shared-documents' \| 'faces' \| // Spend Management
-	'business-expenses' \| 'invoices' \| 'payment-methods' \| 'accounting-assistant' \| 'certified-einvoicing-platform' \| // Compensation and Benefits
+	'business-expenses' \| 'invoices' \| 'payment-methods' \| 'accounting-assistant' \| 'certified-einvoicing-platform' \| 'business-trips' \| // Compensation and Benefits
 	'compensation' \| 'payslip' \| 'benefits' \| 'payroll-assistant' \| // Lucca
 	'cloud-control' \| 'ask-lucca' \| 'ask-salesforce' \| 'calendar' \| 'administration' \| 'client-center' \| 'sandbox' \| 'store' \| 'integrations' \| 'lucca'` | — | ✅ | — | Modifie l’icône produit. |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Marque le produit comme inactif. |
