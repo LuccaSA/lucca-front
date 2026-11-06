@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { FormFieldComponent, INPUT_FRAMED_SIZE, InputFramedComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, INPUT_FRAMED_SIZE, InputFramedComponent, InputFramedContentDirective } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -34,6 +34,7 @@ export default {
 				CheckboxInputComponent,
 				FormsModule,
 				InputFramedComponent,
+				InputFramedContentDirective,
 				GridComponent,
 				GridColumnComponent,
 			],
@@ -41,7 +42,8 @@ export default {
 	],
 	argTypes: {
 		panel: {
-			description: 'Ajoute une section visible lorsque le champ est sélectionné.',
+			description:
+				'Ajoute une section affichée dans le cadre lorsque le champ est sélectionné. Pour un texte simple, renseigner l’input <code>framedPortal</code> sur <code>lu-input-framed</code> ou <code>lu-radio</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luInputFramedContent</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
 		},
 		illustration: {
@@ -88,7 +90,10 @@ export default {
 	},
 	render: (args: InputFramedBasicStory) => {
 		//const column = args.grid ? ` class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 1'"` : ``;
-		const panelTemplate = args.panel ? ` framedPortal="Lorem ipsum dolor"` : ``;
+		const panelContent = args.panel
+			? `
+				<ng-container luInputFramedContent>Additional details about <strong>this option</strong>.</ng-container>`
+			: ``;
 		const tagTemplate = args.tag ? ` tag="Tag"` : ``;
 		const infoTemplate = args.info
 			? `
@@ -118,90 +123,90 @@ export default {
 				</ng-container>`
 			: ``;
 		const templateCheckbox = `
-			<lu-input-framed${panelTemplate}${center}${size}>
+			<lu-input-framed${center}${size}>
 				<lu-form-field label="Option A"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input [(ngModel)]="exampleA" required />
-				</lu-form-field>${infoTemplate}${illustrationTemplate}
+				</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-input-framed>
-			<lu-input-framed${panelTemplate}${center}${size}>
+			<lu-input-framed${center}${size}>
 				<lu-form-field label="Option B"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input [(ngModel)]="exampleB" required />
-				</lu-form-field>${infoTemplate}${illustrationTemplate}
+				</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-input-framed>
-			<lu-input-framed${panelTemplate}${center}${size}>
+			<lu-input-framed${center}${size}>
 				<lu-form-field label="Option C"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
-				</lu-form-field>${infoTemplate}${illustrationTemplateDisabled}
+				</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplateDisabled}
 			</lu-input-framed>
-			<lu-input-framed${panelTemplate}${center}${size}>
+			<lu-input-framed${center}${size}>
 				<lu-form-field label="Option D"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input [(ngModel)]="exampleD" required />
-				</lu-form-field>${infoTemplate}${illustrationTemplate}
+				</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-input-framed>
 		`;
 		const templateGridCheckbox = `
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
-				<lu-input-framed${panelTemplate}${center}${size}>
+				<lu-input-framed${center}${size}>
 					<lu-form-field label="Option A"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input [(ngModel)]="exampleA" required />
-					</lu-form-field>${infoTemplate}${illustrationTemplate}
+					</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-input-framed>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
-				<lu-input-framed${panelTemplate}${center}${size}>
+				<lu-input-framed${center}${size}>
 					<lu-form-field label="Option B"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input [(ngModel)]="exampleB" required />
-					</lu-form-field>${infoTemplate}${illustrationTemplate}
+					</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-input-framed>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
-				<lu-input-framed${panelTemplate}${center}${size}>
+				<lu-input-framed${center}${size}>
 					<lu-form-field label="Option C"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
-					</lu-form-field>${infoTemplate}${illustrationTemplateDisabled}
+					</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplateDisabled}
 				</lu-input-framed>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
-				<lu-input-framed${panelTemplate}${center}${size}>
+				<lu-input-framed${center}${size}>
 					<lu-form-field label="Option D"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input [(ngModel)]="exampleD" required />
-					</lu-form-field>${infoTemplate}${illustrationTemplate}
+					</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-input-framed>
 			</lu-grid-column>
 		`;
 		const template = `
-			<lu-radio value="A"${panelTemplate}${tagTemplate}${inlineMessage}>
-				Option A${infoTemplate}${illustrationTemplate}
+			<lu-radio value="A"${tagTemplate}${inlineMessage}>
+				Option A${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-radio>
-			<lu-radio value="B"${panelTemplate}${tagTemplate}${inlineMessage}>
-				Option B${infoTemplate}${illustrationTemplate}
+			<lu-radio value="B"${tagTemplate}${inlineMessage}>
+				Option B${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-radio>
-			<lu-radio value="C"${panelTemplate}${tagTemplate}${inlineMessage} disabled>
-				Option C${infoTemplate}${illustrationTemplateDisabled}
+			<lu-radio value="C"${tagTemplate}${inlineMessage} disabled>
+				Option C${infoTemplate}${panelContent}${illustrationTemplateDisabled}
 			</lu-radio>
-			<lu-radio value="D"${panelTemplate}${tagTemplate}${inlineMessage}>
-				Option D${infoTemplate}${illustrationTemplate}
+			<lu-radio value="D"${tagTemplate}${inlineMessage}>
+				Option D${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-radio>
 		`;
 		const templateGrid = `
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
-				<lu-radio value="A"${panelTemplate}${tagTemplate}${inlineMessage}>
-					Option A${infoTemplate}${illustrationTemplate}
+				<lu-radio value="A"${tagTemplate}${inlineMessage}>
+					Option A${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-radio>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
-				<lu-radio value="B"${panelTemplate}${tagTemplate}${inlineMessage}>
-					Option B${infoTemplate}${illustrationTemplate}
+				<lu-radio value="B"${tagTemplate}${inlineMessage}>
+					Option B${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-radio>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
-				<lu-radio value="C"${panelTemplate}${tagTemplate}${inlineMessage} disabled>
-					Option C${infoTemplate}${illustrationTemplateDisabled}
+				<lu-radio value="C"${tagTemplate}${inlineMessage} disabled>
+					Option C${infoTemplate}${panelContent}${illustrationTemplateDisabled}
 				</lu-radio>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
-				<lu-radio value="D"${panelTemplate}${tagTemplate}${inlineMessage}>
-					Option D${infoTemplate}${illustrationTemplate}
+				<lu-radio value="D"${tagTemplate}${inlineMessage}>
+					Option D${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-radio>
 			</lu-grid-column>
 		`;

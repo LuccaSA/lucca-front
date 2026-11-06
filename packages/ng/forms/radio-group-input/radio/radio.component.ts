@@ -1,9 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, contentChild, inject, input, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { luBooleanAttribute, LuClass, PortalContent, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { InputDirective, InputFramedComponent, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, InputFramedComponent, InputFramedContentDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { FormLabelComponent } from '@lucca-front/ng/form-label';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { RADIO_GROUP_INSTANCE } from '../radio-group-token';
@@ -12,7 +12,7 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-radio',
-	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, InputFramedComponent, FormLabelComponent, ɵPresentationDisplayDefaultDirective],
+	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, InputFramedComponent, InputFramedContentDirective, FormLabelComponent, ɵPresentationDisplayDefaultDirective],
 	templateUrl: './radio.component.html',
 	styleUrl: './radio.component.scss',
 	host: {
@@ -37,6 +37,9 @@ export class RadioComponent<T = unknown> {
 	readonly tag = input<string>();
 
 	readonly framedPortal = input<PortalContent>();
+
+	// Detected here and set again on an ng-container in the template: lu-input-framed cannot see a directive re-projected from lu-radio.
+	protected readonly framedContentSlot = contentChild(InputFramedContentDirective, { descendants: false });
 
 	readonly arrow = computed(() => this.#parentGroup.arrow());
 	readonly framed = computed(() => this.#parentGroup.framed());

@@ -330,7 +330,7 @@
 								</span>
 							</div>
 						</div>
-						<div class="inputFramed-content">Lorem ipsum dolor sit amet</div>
+						<div class="inputFramed-content">Lorem ipsum <strong>dolor</strong> sit amet</div>
 					</div>
 					<div class="inputFramed">
 						<div class="inputFramed-header">
@@ -344,15 +344,21 @@
 								</span>
 							</div>
 						</div>
-						<div class="inputFramed-content">Lorem ipsum dolor sit amet</div>
+						<div class="inputFramed-content">Lorem ipsum <strong>dolor</strong> sit amet</div>
 					</div>
 				</div>
 			</td>
 			<td>
 				<lu-form-field label="Label" hiddenLabel>
 					<lu-radio-group-input [(ngModel)]="radioPanel" framed>
-						<lu-radio value="A" framedPortal="Lorem ipsum dolor sit amet">Option A</lu-radio>
-						<lu-radio value="B" framedPortal="Lorem ipsum dolor sit amet">Option B</lu-radio>
+						<lu-radio value="A">
+							Option A
+							<ng-container luInputFramedContent>Lorem ipsum <strong>dolor</strong> sit amet</ng-container>
+						</lu-radio>
+						<lu-radio value="B">
+							Option B
+							<ng-container luInputFramedContent>Lorem ipsum <strong>dolor</strong> sit amet</ng-container>
+						</lu-radio>
 					</lu-radio-group-input>
 				</lu-form-field>
 			</td>
