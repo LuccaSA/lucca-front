@@ -623,7 +623,11 @@
 					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-fancy-default" class="dialog mod-fancy">
 						<div
 							class="dialog-inside"
-							[attr.style]="'--components-dialog-inside-backgroundImage: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-dialog/foreground-welcome.svg)'"
+							[attr.style]="
+								'--components-dialog-inside-backgroundImage: url(' +
+								cdnUrl +
+								'/transverse/prisme/visuals/fancy-dialog/foreground-welcome.svg)'
+							"
 						>
 							<div class="dialog-inside-fancyIllustrations">
 								<svg width="224" height="288" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 224 288">
@@ -666,7 +670,11 @@
 					<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle-fancy-drawer" class="dialog mod-fancy mod-drawer">
 						<div
 							class="dialog-inside"
-							[attr.style]="'--components-dialog-inside-backgroundImage: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-dialog/foreground-welcome.svg)'"
+							[attr.style]="
+								'--components-dialog-inside-backgroundImage: url(' +
+								cdnUrl +
+								'/transverse/prisme/visuals/fancy-dialog/foreground-welcome.svg)'
+							"
 						>
 							<div class="dialog-inside-fancyIllustrations">
 								<svg width="224" height="288" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 224 288">

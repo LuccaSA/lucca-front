@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface OrnamentStory {}
 
@@ -16,8 +17,8 @@ export default {
 
 function getTemplate(args: OrnamentStory): string {
 	return `<div class="highlightSection mod-light">
-	<div class="highlightSection-bubbleStart" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
-	<div class="highlightSection-bubbleEnd" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleStart" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleEnd" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
 	<div class="highlightSection-content">
 		<div class="highlightSection-content-slot">
 			<p class="pr-u-fontWeightSemiBold">Both</p>
@@ -26,7 +27,7 @@ function getTemplate(args: OrnamentStory): string {
 </div>
 
 <div class="highlightSection mod-light">
-	<div class="highlightSection-bubbleStart" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleStart" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
 	<div class="highlightSection-content">
 		<div class="highlightSection-content-slot">
 			<p class="pr-u-fontWeightSemiBold">Start</p>
@@ -35,7 +36,7 @@ function getTemplate(args: OrnamentStory): string {
 </div>
 
 <div class="highlightSection mod-light">
-	<div class="highlightSection-bubbleEnd" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleEnd" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
 	<div class="highlightSection-content">
 		<div class="highlightSection-content-slot">
 			<p class="pr-u-fontWeightSemiBold">End</p>
