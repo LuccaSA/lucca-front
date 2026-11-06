@@ -45,6 +45,18 @@ class FilterPillHostComponent {
 	formControl = new FormControl<DateRange | null>(null);
 }
 
+const defaultRange: DateRange = { start: new Date(2025, 0, 1), end: new Date(2025, 0, 31) };
+
+@Component({
+	template: `<lu-filter-pill label="Période"><lu-date-range-input [formControl]="formControl" [defaultValue]="defaultValue" /></lu-filter-pill>`,
+	imports: [ReactiveFormsModule, DateRangeInputComponent, FilterPillComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class DefaultValueFilterPillHostComponent {
+	readonly defaultValue = { ...defaultRange };
+	readonly formControl = new FormControl<DateRange | null>({ ...defaultRange });
+}
+
 describe('DateRangeInputComponent', () => {
 	function typeInElement(value: string, input: HTMLInputElement, fixture: ComponentFixture<unknown>): void {
 		input.value = value;
@@ -727,6 +739,43 @@ describe('DateRangeInputComponent', () => {
 			const fixture = createFilterPillHost({ end: new Date(2025, 5, 20) });
 
 			expect(getPillValue(fixture)).toBe('jusqu’au 20/06/2025');
+		});
+	});
+
+	describe('defaultValue in a filter pill', () => {
+		function createDefaultValueHost(): { fixture: ComponentFixture<DefaultValueFilterPillHostComponent>; pill: FilterPillComponent; pillButton: HTMLElement } {
+			TestBed.configureTestingModule({
+				imports: [DefaultValueFilterPillHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+			const fixture = TestBed.createComponent(DefaultValueFilterPillHostComponent);
+			fixture.detectChanges();
+			return {
+				fixture,
+				pill: fixture.debugElement.query(By.directive(FilterPillComponent)).componentInstance as FilterPillComponent,
+				pillButton: (fixture.nativeElement as HTMLElement).querySelector('.filterPill') as HTMLElement,
+			};
+		}
+
+		it('should display the pill as neutral while it holds its default value', () => {
+			const { fixture, pillButton } = createDefaultValueHost();
+
+			expect(pillButton.classList).toContain('is-default');
+			expect((fixture.nativeElement as HTMLElement).querySelector('lu-clear')).toBeNull();
+		});
+
+		it('should restore the default value when clearing the pill', () => {
+			const { fixture, pill, pillButton } = createDefaultValueHost();
+			fixture.componentInstance.formControl.setValue({ start: new Date(2025, 5, 1), end: new Date(2025, 5, 30) });
+			fixture.detectChanges();
+
+			expect(pillButton.classList).not.toContain('is-default');
+
+			pill.clear();
+			fixture.detectChanges();
+
+			expect(fixture.componentInstance.formControl.value).toEqual(defaultRange);
+			expect(pillButton.classList).toContain('is-default');
 		});
 	});
 });

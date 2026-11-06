@@ -256,6 +256,41 @@ describe('LuSimpleSelectInputComponent', () => {
 		});
 	});
 
+	describe('defaultValue', () => {
+		beforeEach(() => {
+			fixture.componentRef.setInput('clearable', true);
+			// A copy, to check the default value is compared with the option comparer rather than by reference
+			fixture.componentRef.setInput('defaultValue', { ...options[0] });
+		});
+
+		it('should not offer to clear the default value', () => {
+			// Act
+			fixture.componentInstance.writeValue(options[0]);
+			fixture.detectChanges();
+
+			// Assert
+			expect(fixture.componentInstance.isFilterPillDefault()).toBe(true);
+			expect(clearer()).toBeNull();
+		});
+
+		it('should restore the default value when clearing', () => {
+			// Arrange
+			const onChange = vi.fn();
+			fixture.componentInstance.registerOnChange(onChange);
+			fixture.componentInstance.writeValue(options[1]);
+			fixture.detectChanges();
+
+			// Act
+			clearer()?.click();
+			fixture.detectChanges();
+
+			// Assert
+			expect(onChange).toHaveBeenCalledExactlyOnceWith(options[0]);
+			expect(fixture.componentInstance.isFilterPillDefault()).toBe(true);
+			expect(clearer()).toBeNull();
+		});
+	});
+
 	describe('disabled', () => {
 		it('should disable the input when disabled', async () => {
 			// Act

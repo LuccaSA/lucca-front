@@ -45,3 +45,27 @@ export default {
 export const Basic: StoryObj<FilterPillComponent> = {
 	args: {},
 };
+
+export const DefaultValue: StoryObj<FilterPillComponent> = {
+	render: () => {
+		return {
+			props: {
+				defaultDate: new Date(2025, 0, 1),
+				example: new Date(2025, 0, 1),
+				defaultPeriod: { start: new Date(2025, 0, 1), end: new Date(2025, 0, 31) },
+				examplePeriod: { start: new Date(2025, 0, 1), end: new Date(2025, 0, 31) },
+			},
+			template: `<lu-filter-pill label="Date de début" name="startDate">
+<lu-date-input [(ngModel)]="example" [defaultValue]="defaultDate" /></lu-filter-pill>
+
+<pr-story-model-display>{{ example }}</pr-story-model-display>
+
+<hr class="divider pr-u-marginBlock400" />
+
+<lu-filter-pill label="Période" name="periode"><lu-date-range-input [(ngModel)]="examplePeriod" [defaultValue]="defaultPeriod" /></lu-filter-pill>
+
+<pr-story-model-display>{{ examplePeriod | json }}</pr-story-model-display>
+`,
+		};
+	},
+};

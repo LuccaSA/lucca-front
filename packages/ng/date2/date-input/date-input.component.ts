@@ -91,6 +91,13 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly humanized = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Value restored by the clear button, which only shows once the value differs from it.
+	 * It isn't applied on init: the form control is expected to be initialized with it.
+	 * It isn't validated either: it must be a valid date between `min` and `max`, a warning being logged in dev mode otherwise.
+	 */
+	readonly defaultValue = input(null, { transform: transformDateInputToDate });
+
 	readonly filterPillDisabled = signal(false);
 
 	popoverPositions: ConnectionPositionPair[] = [
@@ -191,6 +198,15 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	readonly isFilterPillEmpty = computed(() => !this.selectedDate());
 	readonly isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	readonly isFilterPillDefault = computed(() => {
+		const defaultValue = this.#normalizedDefaultValue();
+		const selectedDate = this.selectedDate();
+		return isNotNil(defaultValue) && isNotNil(selectedDate) && defaultValue.getTime() === selectedDate.getTime();
+	});
+	readonly #normalizedDefaultValue = computed(() => {
+		const defaultValue = this.defaultValue();
+		return isNotNil(defaultValue) ? this.#normalizeDate(defaultValue) : null;
+	});
 	#defaultClearable = false;
 	readonly #defaultFilterPillClearable = signal<boolean | null>(null);
 
@@ -202,6 +218,8 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	constructor() {
 		super();
+
+		effect(() => this.warnOnUnselectableDefaultDate('Date Input', this.defaultValue()));
 
 		effect(() => {
 			const nativeElement = this.inputRef()?.nativeElement;
@@ -423,16 +441,20 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	}
 
 	reset(): Date | null {
-		const newValue = this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : null;
-		this.dateFromWriteValue.set(newValue);
-		this.selectedDate.set(newValue);
-		return newValue;
+		return this.#setSelectedDate(this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : null);
 	}
 
 	clear() {
-		const newValue = this.reset();
+		const defaultValue = this.#normalizedDefaultValue();
+		const newValue = isNotNil(defaultValue) ? this.#setSelectedDate(defaultValue) : this.reset();
 		this.#onChange?.(newValue);
 		this.onTouched?.();
+	}
+
+	#setSelectedDate(date: Date | null): Date | null {
+		this.dateFromWriteValue.set(date);
+		this.selectedDate.set(date);
+		return date;
 	}
 
 	currentDateChangeFromCalendar(date: Date): void {
