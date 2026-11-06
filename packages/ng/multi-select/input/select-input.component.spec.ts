@@ -171,6 +171,7 @@ describe('LuMultiSelectInputComponent', () => {
 			exampleValue: [{ id: 1, name: 'test' }],
 			emptyValue: [],
 			clearerSelector: '.multipleSelect-clear',
+			inputBoundToClue: false,
 		});
 	});
 
