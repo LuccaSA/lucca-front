@@ -1,3 +1,9 @@
+### 22.1.2
+
+#### Fixed
+
+- Tag chips of the toolbar show a pointer cursor on hover.
+
 ### 22.1.1
 
 #### Fixed

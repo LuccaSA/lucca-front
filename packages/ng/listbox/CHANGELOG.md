@@ -1,3 +1,9 @@
+### 22.1.2
+
+#### Changed
+
+- Tree options are indented by 12px per depth level instead of 8px.
+
 ### 22.1.0
 
 #### Added
