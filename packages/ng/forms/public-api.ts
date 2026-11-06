@@ -22,6 +22,7 @@ export * from './multilanguage-input/multilanguage-input.translate';
 export * from './number-format-input/number-format-input.translate';
 export * from './text-input/text-input.translate';
 
+export * from './fieldset/fieldset-action.directive';
 export * from './fieldset/fieldset.component';
 export * from './fieldset/fieldset.type';
 
