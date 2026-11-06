@@ -16,7 +16,7 @@
 			@if (hasInlineMessage()) {
 				<lu-inline-message
 					id="{{ id() }}-message"
-					[label]="(invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()) ?? ''"
+					[label]="(invalidStatus() && resolvedErrorInlineMessage() ? resolvedErrorInlineMessage() : resolvedInlineMessage()) ?? ''"
 					[state]="invalidStatus() ? 'error' : (inlineMessageState() ?? undefined)"
 				/>
 			}
@@ -71,7 +71,7 @@
 			@if (hasInlineMessage()) {
 				<lu-inline-message
 					id="{{ id() }}-message"
-					[label]="(invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()) ?? ''"
+					[label]="(invalidStatus() && resolvedErrorInlineMessage() ? resolvedErrorInlineMessage() : resolvedInlineMessage()) ?? ''"
 					[state]="invalidStatus() ? 'error' : (inlineMessageState() ?? undefined)"
 				/>
 			}
@@ -88,3 +88,7 @@
 		<ng-content />
 	}
 </ng-template>
+
+<ng-template #inlineMessageSlotTpl><ng-content select="[luFormFieldInlineMessage]" /></ng-template>
+
+<ng-template #errorInlineMessageSlotTpl><ng-content select="[luFormFieldErrorInlineMessage]" /></ng-template>

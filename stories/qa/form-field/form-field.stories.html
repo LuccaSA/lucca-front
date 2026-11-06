@@ -57,6 +57,11 @@
 						[(ngModel)]="example"
 					/>
 				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>Invalid<br />(hiddenLabel)</td>
+			<td>
 				<lu-form-field invalid hiddenLabel extraDescribedBy="extra-message" label="Label">
 					<lu-text-input
 						required
@@ -90,6 +95,25 @@
 						/>
 					</lu-form-field>
 				}
+			</td>
+		</tr>
+		<tr>
+			<td>InlineMessage<br />(luFormFieldInlineMessage)</td>
+			<td>
+				<lu-form-field extraDescribedBy="extra-message" label="Label">
+					<lu-text-input autocomplete="" searchIcon="searchMagnifyingGlass" type="text" placeholder="Placeholder" [(ngModel)]="example" />
+					<ng-container luFormFieldInlineMessage>Helper text with <strong>rich content</strong></ng-container>
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>ErrorInlineMessage<br />(luFormFieldErrorInlineMessage)</td>
+			<td>
+				<lu-form-field invalid extraDescribedBy="extra-message" label="Label">
+					<lu-text-input autocomplete="" searchIcon="searchMagnifyingGlass" type="text" placeholder="Placeholder" [(ngModel)]="example" />
+					<ng-container luFormFieldInlineMessage>Helper text with <strong>rich content</strong></ng-container>
+					<ng-container luFormFieldErrorInlineMessage>Error helper text with <strong>rich content</strong></ng-container>
+				</lu-form-field>
 			</td>
 		</tr>
 		<tr>

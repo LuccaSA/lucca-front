@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_LAYOUT, FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent, InputDirective, luFormFieldTranslations } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_LAYOUT, FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent, FormFieldInlineMessageDirective, InputDirective, luFormFieldTranslations } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { useStoryModel, generateInputs, setStoryOptions, intlArgType } from '../../../helpers/stories';
@@ -10,7 +10,7 @@ export default {
 	component: FormFieldComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [FormFieldComponent, InputDirective, BrowserAnimationsModule, FormsModule],
+			imports: [FormFieldComponent, FormFieldInlineMessageDirective, InputDirective, BrowserAnimationsModule, FormsModule],
 		}),
 	],
 	argTypes: {
@@ -33,10 +33,9 @@ export default {
 			table: { category: 'inputs' },
 		},
 		inlineMessage: {
-			control: {
-				type: 'text',
-			},
-			description: 'Ajoute un texte indicatif sous le champ de formulaire. [PortalContent]',
+			control: false,
+			description:
+				'Texte indicatif affiché sous le champ. Pour un texte simple, renseigner l’input <code>inlineMessage</code> sur <code>lu-form-field</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luFormFieldInlineMessage</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
@@ -48,7 +47,8 @@ export default {
 			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		errorInlineMessage: {
-			description: 'Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent]',
+			description:
+				'Texte d’erreur affiché sous le champ lorsque celui-ci est en erreur. Pour un texte simple, renseigner l’input <code>errorInlineMessage</code> sur <code>lu-form-field</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luFormFieldErrorInlineMessage</code>. L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
 		},
 		tooltip: {
@@ -162,6 +162,7 @@ export default {
 			</textarea>
 		</div>
 	</div>
+	<ng-container luFormFieldInlineMessage>Describe your request in <strong>a few lines</strong>.</ng-container>
 </lu-form-field>`,
 		};
 	},
@@ -172,7 +173,6 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
-		inlineMessage: 'Helper text',
 		errorInlineMessage: 'Error helper text',
 		inlineMessageState: null,
 		tooltip: 'You expected me to be helpful but this is a story!',
