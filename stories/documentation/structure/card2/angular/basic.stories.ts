@@ -1,7 +1,10 @@
 import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CARD_HEADING_LEVEL, CARD_SIZE, CardActionDirective, CardComponent, CardWrapperComponent } from '@lucca-front/ng/card';
+import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { useArgs } from 'storybook/preview-api';
+import { HiddenArgType } from '@/helpers/common-arg-types';
 import { generateInputs } from '@/helpers/stories';
 
 interface CardArgs {
@@ -17,6 +20,8 @@ interface CardBasicStory extends CardArgs {
 	illustration: boolean;
 	wrapper: boolean;
 	grid: boolean;
+	showGrid: boolean;
+	luGrid: boolean;
 	plain: boolean;
 	cards: number;
 	wrapperHeadingLevel: number | null;
@@ -92,6 +97,13 @@ export default {
 		grid: {
 			name: '↳ grid',
 			description: 'Affiche les cartes en colonnes au lieu de les empiler.',
+			if: { arg: 'showGrid' },
+			table: { category: 'lu-card-wrapper' },
+		},
+		showGrid: HiddenArgType,
+		luGrid: {
+			name: '↳ lu-grid',
+			description: 'Compose la grille avec un `lu-grid` : chaque carte est placée dans un `lu-grid-column`.',
 			if: { arg: 'wrapper' },
 			table: { category: 'lu-card-wrapper' },
 		},
@@ -130,10 +142,22 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [CardComponent, CardActionDirective, CardWrapperComponent, BubbleIconComponent, ButtonComponent],
+			imports: [CardComponent, CardActionDirective, CardWrapperComponent, BubbleIconComponent, ButtonComponent, GridComponent, GridColumnComponent],
 		}),
+		// Storybook `if` only tests a single value: `showGrid` hides the grid control when lu-grid is checked, since grid then has no effect
+		(story, { args }) => {
+			const [, updateArgs] = useArgs();
+			const showGrid = !!args['wrapper'] && !args['luGrid'];
+			if (args['showGrid'] !== showGrid) {
+				updateArgs({ showGrid });
+			}
+			return story();
+		},
 	],
-	render: ({ headingLevel, size, illustration, wrapper, grid, plain, cards, wrapperHeadingLevel, wrapperSize, wrapperAction, ...cardArgs }: CardBasicStory, { argTypes }) => {
+	render: (
+		{ headingLevel, size, illustration, wrapper, grid, showGrid: _showGrid, luGrid, plain, cards, wrapperHeadingLevel, wrapperSize, wrapperAction, ...cardArgs }: CardBasicStory,
+		{ argTypes },
+	) => {
 		const cardInputs = wrapper ? '' : generateInputs({ headingLevel: `${headingLevel}`, size }, argTypes);
 		const getCardTemplate = ({ heading, content, action, disabled }: CardArgs) => {
 			const illustrationTemplate = illustration
@@ -148,7 +172,8 @@ export default {
 	${content}
 </lu-card>`;
 		};
-		const gridAttr = grid ? ' grid' : '';
+		// grid has no effect with lu-grid: keep it out of the displayed code
+		const gridAttr = grid && !luGrid ? ' grid' : '';
 		const plainAttr = plain ? ' plain' : '';
 		const wrapperHeadingLevelAttr = wrapperHeadingLevel ? ` headingLevel="${wrapperHeadingLevel}"` : '';
 		const wrapperSizeAttr = wrapperSize ? ` size="${wrapperSize}"` : '';
@@ -156,12 +181,17 @@ export default {
 			? `
     <button type="button" luButton cardWrapperAction>Button</button>`
 			: '';
+		const indent = (template: string) => template.replace(/^/gm, '    ');
+		const cardTemplates = Array.from({ length: cards }, (_, index) => getCardTemplate(index === 0 ? cardArgs : defaultCardArgs));
+		const listTemplate = luGrid
+			? `<lu-grid columns="3">
+${cardTemplates.map((card, index) => indent(`<lu-grid-column${index === 0 ? ' colspan="2"' : ''}>\n${indent(card)}\n</lu-grid-column>`)).join('\n')}
+</lu-grid>`
+			: cardTemplates.join('\n');
 		return {
 			template: wrapper
 				? `<lu-card-wrapper${gridAttr}${plainAttr}${wrapperHeadingLevelAttr}${wrapperSizeAttr}>
-${Array.from({ length: cards }, (_, index) => getCardTemplate(index === 0 ? cardArgs : defaultCardArgs))
-	.map((card) => card.replace(/^/gm, '    '))
-	.join('\n')}${wrapperActionTemplate}
+${indent(listTemplate)}${wrapperActionTemplate}
 </lu-card-wrapper>`
 				: getCardTemplate(cardArgs),
 		};
@@ -177,6 +207,8 @@ export const Basic = {
 		wrapper: false,
 		cards: 3,
 		grid: false,
+		showGrid: false,
+		luGrid: false,
 		plain: false,
 		wrapperHeadingLevel: null,
 		wrapperSize: null,

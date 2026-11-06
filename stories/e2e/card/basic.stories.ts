@@ -11,8 +11,30 @@ export default {
 
 const InteractiveContent = { ...Basic, args: { ...Basic.args, content: '<a href="#content" class="link">Card content</a>' } };
 const Disabled = { ...Basic, args: { ...Basic.args, disabled: true } };
-const Wrapper = { ...Basic, args: { ...Basic.args, wrapper: true, cards: 3, wrapperAction: true } };
-const Grid = { ...Basic, args: { ...Basic.args, wrapper: true, grid: true, cards: 4, heading: 'A longer card title that wraps on two lines in a grid column' } };
+// showGrid is set to the value the story decorator derives, so that it does not re-render the story during the test
+const Wrapper = { ...Basic, args: { ...Basic.args, wrapper: true, showGrid: true, cards: 3, wrapperAction: true } };
+const Grid = { ...Basic, args: { ...Basic.args, wrapper: true, grid: true, showGrid: true, cards: 4, heading: 'A longer card title that wraps on two lines in a grid column' } };
+const LuGrid = { ...Basic, args: { ...Basic.args, wrapper: true, luGrid: true, illustration: true, cards: 3 } };
+// The grid input adds automatic columns to the list, which lu-grid must not be squeezed into.
+// The documentation story leaves grid out with lu-grid, so the template is written here.
+const LuGridWithGridInput = {
+	...LuGrid,
+	render: () => ({
+		template: `<lu-card-wrapper grid>
+	<lu-grid columns="3">
+		@for (card of [0, 1, 2]; track card) {
+			<lu-grid-column [colspan]="card === 0 ? 2 : null">
+				<lu-card>
+					<lu-bubble-icon cardIllustration icon="app" bubbleDirection="left" />
+					<a href="#" luCardAction>Title</a>
+					Card content
+				</lu-card>
+			</lu-grid-column>
+		}
+	</lu-grid>
+</lu-card-wrapper>`,
+	}),
+};
 
 // Clicks are recorded without following the link
 const spyClicks = (element: HTMLElement) => {
@@ -131,3 +153,35 @@ export const GridTEST = createTestStory(Grid, async ({ canvasElement, step }) =>
 		}
 	});
 });
+
+const luGridPlay = async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Keeps the list semantics through lu-grid', async () => {
+		const list = canvas.getByRole('list');
+		await expect(within(list).getAllByRole('listitem')).toHaveLength(3);
+	});
+
+	await step('Lets lu-grid take the whole width of the list', async () => {
+		const list = canvasElement.querySelector('.card2Wrapper-list')!;
+		const grid = canvasElement.querySelector('.grid')!;
+		await expect(grid.getBoundingClientRect().width).toBeCloseTo(list.getBoundingClientRect().width, 0);
+	});
+
+	await step('Gives the cards the grid layout, content below the illustration', async () => {
+		const card = canvasElement.querySelector('lu-card')!;
+		const illustration = card.querySelector('.card2-illustration')!.getBoundingClientRect();
+		const content = card.querySelector('.card2-content')!.getBoundingClientRect();
+		await expect(content.top).toBeGreaterThanOrEqual(illustration.bottom);
+	});
+
+	await step('Follows the columns of lu-grid', async () => {
+		const [wide, narrow] = canvas.getAllByRole('listitem').map((card) => card.getBoundingClientRect().width);
+		await expect(wide).toBeGreaterThan(narrow * 1.9);
+	});
+};
+
+export const LuGridTEST = createTestStory(LuGrid, luGridPlay);
+
+export const LuGridWithGridInputTEST = createTestStory(LuGridWithGridInput, luGridPlay);

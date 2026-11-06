@@ -21,7 +21,8 @@
 			@include S;
 		}
 
-		.card2Wrapper.mod-grid & {
+		.card2Wrapper.mod-grid &,
+		.card2Wrapper.mod-gridCustom & {
 			@include grid;
 
 			&:has(.card2-illustration:not(:empty)):not(:has(.card2-content:empty)) {
@@ -32,7 +33,7 @@
 		&:has(.card2-content:empty) {
 			@include contentEmpty;
 
-			&:has(.card2-illustration:not(:empty)):not(.card2Wrapper.mod-grid .card2) {
+			&:has(.card2-illustration:not(:empty)):not(.card2Wrapper.mod-grid .card2, .card2Wrapper.mod-gridCustom .card2) {
 				@include headingAlignedIllustration;
 
 				&.mod-S,
@@ -60,6 +61,11 @@
 	@layer mods {
 		&.mod-grid {
 			@include gridWrapper;
+		}
+
+		// Must stay after the grid mod, which has the same specificity
+		&.mod-gridCustom {
+			@include gridCustomWrapper;
 		}
 
 		&.mod-plain {

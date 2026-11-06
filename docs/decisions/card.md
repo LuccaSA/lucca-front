@@ -163,3 +163,19 @@ Status: accepted
 **Decision** — A single `CardActionDirective` on `a[luCardAction], button[luCardAction]`, which only sets the class.
 
 **Rejected options** — Two components like `resourceCard`: duplicated code, an empty template and an ESLint exception on the selector, for no difference in behavior.
+
+## 2026-11-06 — Automatic columns, or a projected lu-grid
+
+Status: accepted
+
+**Context** — The grid mode lays the cards out in automatic columns (`auto-fill`, 20rem minimum). Some layouts need a composed grid instead, with a card spanning several columns.
+
+**Decision** — The wrapper keeps its automatic columns, and accepts a `lu-grid` projected directly inside it, with each card in a `lu-grid-column`: it then adds `mod-gridCustom`, which hands the layout over to `lu-grid`.
+
+**Consequences** — The list semantics are kept: the elements of `lu-grid` have no role, so the cards stay listitems of the list (checked with axe, the Chrome accessibility tree and VoiceOver). The cards take the grid layout, so the `grid` input has no effect with a `lu-grid`. The card entrypoint depends on `grid`, and the gap of `lu-grid` defaults to the spacing between cards, which its `gap` input can still change.
+
+**Rejected options** — Three alternatives:
+
+- `lu-grid` only: it has no equivalent to `auto-fill`, so its columns depend on breakpoints set by hand around each card.
+- `lu-grid-column` as an attribute on `lu-card`: one element less, but it mixes the inputs of two components on the card.
+- Letting `grid` choose the card layout inside a `lu-grid`: a composed grid has no use for the stacked layout of the cards.
