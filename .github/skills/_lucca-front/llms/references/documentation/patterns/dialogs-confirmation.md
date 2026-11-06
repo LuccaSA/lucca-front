@@ -38,19 +38,19 @@ Le contenu s'adapte au niveau de criticité de l'action et de ses conséquences.
 ### Niveau 1 : impact faible
 
 * **Titre :** « Supprimer le/la {ressource} ? »
-* **Description :** « Si vous supprimez la/la {ressource}, {description des conséquences}. »
+* **Description :** « Si vous supprimez le/la {ressource}, {description des conséquences}. »
 * **Boutons :** « Supprimer le/la {ressource} »
 
 ### Niveau 2 : impact moyen
 
 * **Titre :** « Supprimer le/la {ressource} ? »
-* **Description :** « **La suppression est définitive.** Si vous supprimez la/la {ressource}, {description des conséquences}. »
+* **Description :** « **La suppression est définitive.** Si vous supprimez le/la {ressource}, {description des conséquences}. »
 * **Boutons :** « Supprimer le/la {ressource} »
 
 ### Niveau 3 : impact élevé
 
 * **Titre :** « Supprimer le/la {ressource} ? »
-* **Description :** « **La suppression est définitive.** Si vous supprimez la/la {ressource}, {description des conséquences}. »
+* **Description :** « **La suppression est définitive.** Si vous supprimez le/la {ressource}, {description des conséquences}. »
 * **Case à cocher :**  « J'ai bien compris les risques * »
 * **Boutons :** « Supprimer le/la {ressource} »
 

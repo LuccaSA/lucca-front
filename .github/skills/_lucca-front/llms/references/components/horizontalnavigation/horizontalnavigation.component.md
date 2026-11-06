@@ -22,9 +22,7 @@ Component selector : `lu-horizontal-navigation`
 ### Navigation basic
 
 ```js
-import { provideRouter, RouterLink } from '@angular/router';
-import { HORIZONTAL_NAVIGATION_SIZE, HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 ```
 
 ```html

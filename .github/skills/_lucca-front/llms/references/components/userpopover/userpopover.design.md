@@ -56,7 +56,7 @@ Cette ligne d’information n’est pas cliquable.
 
 ### **Affichage**
 
-L’affichage se fait au survol de l’avatar, du nom du collaborateur ou deux éléments. Le délai d’affichage est de **300ms** mais celui-ci peut être modifié en fonction du contexte et de l’interface.
+L’affichage se fait au survol de l’Avatar, du nom du collaborateur ou deux éléments. Le délai d’affichage est de **300ms** mais celui-ci peut être modifié en fonction du contexte et de l’interface.
 
 Un article sur [NNGroup](https://www.nngroup.com/articles/timing-exposing-content/) détaille la durée d’affichage des contenus masqués.
 
@@ -68,7 +68,7 @@ Lorsque le nom du collaborateur ou du site est long, il se trouve tronqué. L’
 
 ## **Exemples d'utilisation**
 
-- **Do** : Le User popover peut être utilisé dans un Index table ou Data table pour apporter plus de précision sur un collaborateur.
+- **Do** : Le UserPopover peut être utilisé dans un IndexTable ou DataTable pour apporter plus de précision sur un collaborateur.
 - **Do** : De la même manière, il est possible de l'utiliser sur le prénom/nom d'un collaborateur.
-- **Do** : Le User popover peut s'afficher sur le prénom/nom d'un collaborateur mais aussi directement sur un Avatar.
-- **Don't** : N'utilisons pas le User popover dans des composants comme le Select. Cela n'apporte pas une information utile au bon moment et perturbe l'expérience utilisateur.
+- **Do** : Le UserPopover peut s'afficher sur le prénom/nom d'un collaborateur mais aussi directement sur un Avatar.
+- **Don't** : N'utilisons pas le UserPopover dans des composants comme le Select. Cela n'apporte pas une information utile au bon moment et perturbe l'expérience utilisateur.

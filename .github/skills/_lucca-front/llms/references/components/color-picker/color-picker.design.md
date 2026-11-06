@@ -24,7 +24,7 @@ Idéale pour les interfaces où l’espace est limité, elle affiche uniquement 
 
 ### Couleurs décoratives par défaut
 
-Un Color picker doit utiliser **les couleurs décoratives**. Ce sont les palettes transverses à tous les logiciels Lucca, utilisées pour notamment pour le composant Tag.
+Un ColorPicker doit utiliser **les couleurs décoratives**. Ce sont les palettes transverses à tous les logiciels Lucca, utilisées pour notamment pour le composant Tag.
 
 Choisissez des nuances homogènes : toutes les nuances en 500, 400, 300. Les couleurs portent le nom des couleurs décoratives (Ananas, Citrouille, Lagon…).
 
@@ -36,7 +36,7 @@ Les couleurs sont rangées par lignes de six. Si le nombre de couleurs n’est p
 
 ### Bordures
 
-Les couleurs affichées dans le Color picker doivent correspondre à leur rendu réel dans l'interface. Si l'interface affiche des couleurs avec bordures, le Color picker doit présenter ces mêmes couleurs avec leurs bordures, permettant à l'utilisateur de voir précisément le résultat de sa sélection.
+Les couleurs affichées dans le ColorPicker doivent correspondre à leur rendu réel dans l'interface. Si l'interface affiche des couleurs avec bordures, le ColorPicker doit présenter ces mêmes couleurs avec leurs bordures, permettant à l'utilisateur de voir précisément le résultat de sa sélection.
 
 - **Don't** : Ne mélangeons pas les couleurs avec et sans bordures.
 - **Don't** : Ne mélangeons pas des nuances claires et sombres.
