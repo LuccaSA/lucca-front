@@ -8,5 +8,7 @@ export * from './input-framed/input-framed.component';
 export * from './input-framed/input-framed.token';
 export * from './input.directive';
 export * from './value-presentation/data-presentation/data-presentation.component';
+export * from './value-presentation/data-presentation-list/data-presentation-list.component';
+export * from './value-presentation/data-presentation-list/data-presentation-list.token';
 export * from './value-presentation/presentation-display-default.directive';
 export * from './value-presentation/presentation-display.directive';

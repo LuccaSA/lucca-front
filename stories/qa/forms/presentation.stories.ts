@@ -4,7 +4,7 @@ import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DateInputComponent } from '@lucca-front/ng/date2';
 import { FormComponent } from '@lucca-front/ng/form';
-import { DataPresentationComponent, FormFieldComponent } from '@lucca-front/ng/form-field';
+import { DataPresentationComponent, DataPresentationListComponent, FormFieldComponent } from '@lucca-front/ng/form-field';
 import {
 	CheckboxInputComponent,
 	MultilanguageInputComponent,
@@ -49,6 +49,7 @@ export default {
 				FormsModule,
 				FormComponent,
 				DataPresentationComponent,
+				DataPresentationListComponent,
 				RichTextInputComponent,
 				RichTextPluginTagComponent,
 				RichTextInputToolbarComponent,
@@ -423,6 +424,74 @@ export const StandaloneDataDisplay: StoryObj = {
 			<lu-data-presentation label="Data presentation">
 				Valeur à afficher.
 			</lu-data-presentation>
+			`),
+		};
+	},
+};
+
+export const DataDisplayList: StoryObj = {
+	render: () => {
+		return {
+			template: cleanupTemplate(`
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td><div class="demo-QAtable-list">HTML</div></td>
+			<td><div class="demo-QAtable-list">Angular</div></td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<dl class="presentationWrapper">
+						<div class="presentation">
+							<dt class="presentation-term">Prénom</dt>
+							<dd class="presentation-definition">Ada</dd>
+						</div>
+						<div class="presentation">
+							<dt class="presentation-term">Nom</dt>
+							<dd class="presentation-definition">Lovelace</dd>
+						</div>
+					</dl>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-data-presentation-list>
+						<div luDataPresentation label="Prénom">Ada</div>
+						<div luDataPresentation label="Nom">Lovelace</div>
+					</lu-data-presentation-list>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size S &amp; no value</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<dl class="presentationWrapper mod-S">
+						<div class="presentation mod-S">
+							<dt class="presentation-term">Prénom</dt>
+							<dd class="presentation-definition">Ada</dd>
+						</div>
+						<div class="presentation mod-S">
+							<dt class="presentation-term">Nom</dt>
+							<dd class="presentation-definition"><div aria-hidden="true" data-content-before="–"></div></dd>
+						</div>
+					</dl>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-data-presentation-list size="S">
+						<div luDataPresentation label="Prénom">Ada</div>
+						<div luDataPresentation label="Nom" noValue></div>
+					</lu-data-presentation-list>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 			`),
 		};
 	},

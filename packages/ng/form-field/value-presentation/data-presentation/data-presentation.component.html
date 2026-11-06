@@ -1,4 +1,12 @@
-<dl class="presentation" [class.mod-S]="size() === 'S'">
+@if (groupHost) {
+	<ng-container *ngTemplateOutlet="pairTpl" />
+} @else {
+	<dl class="presentation" [class.mod-S]="resolvedSize() === 'S'">
+		<ng-container *ngTemplateOutlet="pairTpl" />
+	</dl>
+}
+
+<ng-template #pairTpl>
 	<dt class="presentation-term">
 		<ng-container *luPortal="label()" />
 	</dt>
@@ -8,4 +16,4 @@
 		}
 		<ng-content />
 	</dd>
-</dl>
+</ng-template>
