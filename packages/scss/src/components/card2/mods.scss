@@ -41,14 +41,6 @@
 	--components-card2Wrapper-list-gridTemplateColumns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
 }
 
-@mixin gridCustomWrapper {
-	--components-card2Wrapper-list-gridTemplateColumns: none;
-
-	.grid:not(.card2 .grid) {
-		--grid-gap: var(--pr-t-spacings-100);
-	}
-}
-
 @mixin plainWrapper {
 	--components-card2Wrapper-backgroundColor: transparent;
 	--components-card2Wrapper-padding: 0;
