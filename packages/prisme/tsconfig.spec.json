@@ -6,5 +6,5 @@
 		"isolatedModules": false,
 		"strictNullChecks": true
 	},
-	"include": ["**/*.spec.ts", "**/*.spec.*.ts", "../../vitest.setup.ts", "../../vitest-matchers.d.ts"]
+	"include": ["**/*.spec.ts", "**/*.spec.*.ts", "**/*.spec-d.ts", "../../vitest.setup.ts", "../../vitest-matchers.d.ts"]
 }

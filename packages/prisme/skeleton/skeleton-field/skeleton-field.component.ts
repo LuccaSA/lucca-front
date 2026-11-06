@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
-import { ɵinjectRandomPercent } from '@lucca/prisme/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { luBooleanAttribute, luNumberAttribute, ɵinjectRandomPercent } from '@lucca/prisme/core';
 
 @Component({
 	selector: 'lu-skeleton-field,pr-skeleton-field',
@@ -11,12 +11,12 @@ export class SkeletonFieldComponent {
 	/**
 	 * Applies dark color for skeleton
 	 */
-	readonly dark = input(false, { transform: booleanAttribute });
+	readonly dark = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Hide the field label skeleton
 	 */
-	readonly hiddenLabel = input(false, { transform: booleanAttribute });
+	readonly hiddenLabel = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Changes the size of the skeleton field
@@ -26,7 +26,7 @@ export class SkeletonFieldComponent {
 	/**
 	 * Defines the number of row
 	 */
-	readonly rows = input(1, { transform: numberAttribute });
+	readonly rows = input(1, { transform: luNumberAttribute });
 
 	readonly lines = computed(() => Array.from({ length: this.rows() }));
 

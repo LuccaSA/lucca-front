@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, HostAttributeToken, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { PrClass, Palette, ɵeffectWithDeps } from '@lucca/prisme/core';
+import { ChangeDetectionStrategy, Component, computed, HostAttributeToken, inject, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute, luNumberAttribute, PrClass, Palette, ɵeffectWithDeps } from '@lucca/prisme/core';
 import { LuTooltipModule } from '@lucca/prisme/tooltip';
 import { NumericBadgeSize } from './numeric-badge.type';
 
@@ -38,17 +38,17 @@ export class NumericBadgeComponent {
 	/**
 	 * Applies the loading state
 	 */
-	readonly loading = input(false, { transform: booleanAttribute });
+	readonly loading = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Indicates the maximum value of number for the numeric badge
 	 */
-	readonly maxValue = input(999, { transform: numberAttribute });
+	readonly maxValue = input(999, { transform: luNumberAttribute });
 
 	/**
 	 * Disabled tooltip on numeric badge
 	 */
-	readonly disableTooltip = input(false, { transform: booleanAttribute });
+	readonly disableTooltip = input(false, { transform: luBooleanAttribute });
 
 	readonly #initialAriaHidden = inject(new HostAttributeToken('aria-hidden'), { optional: true });
 

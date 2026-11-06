@@ -10,7 +10,7 @@ export * from './route';
 export * from './signal';
 export * from './string';
 export * from './tools/class';
-export * from './transform/index';
+export * from './transform';
 export * from './translate/index';
 export * from './tree/index';
 export * from './type/index';
