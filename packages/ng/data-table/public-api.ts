@@ -1,3 +1,4 @@
+export * from './data-table-body/data-table-body-group.directive';
 export * from './data-table-body/data-table-body.component';
 export * from './data-table-cell-header/data-table-cell-header.component';
 export * from './data-table-cell/data-table-cell.component';

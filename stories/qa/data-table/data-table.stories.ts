@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	DataTableBodyComponent,
+	DataTableBodyGroupDirective,
 	DataTableComponent,
 	DataTableFootComponent,
 	DataTableHeadComponent,
@@ -32,6 +33,7 @@ import { CDN_URL } from '@lucca-front/ng/core';
 		DataTableComponent,
 		DataTableHeadComponent,
 		DataTableBodyComponent,
+		DataTableBodyGroupDirective,
 		DataTableFootComponent,
 		DataTableRowComponent,
 		DataTableRowCellComponent,
