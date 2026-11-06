@@ -90,4 +90,8 @@
 	.dialog.mod-select {
 		@include select;
 	}
+
+	.selectPanel.mod-noSearch {
+		@include selectNoSearch;
+	}
 }
