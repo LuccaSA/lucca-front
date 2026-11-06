@@ -4,7 +4,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RADIO_GROUP_INPUT_ARROW, RADIO_GROUP_INPUT_FRAMED_SIZE, RADIO_GROUP_INPUT_SIZE, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import { cleanupTemplate, useStoryModel, generateInputs, setStoryOptions } from '@/helpers/stories';
+import { useStoryModel, generateInputs, setStoryOptions } from '@/helpers/stories';
 
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
@@ -73,7 +73,8 @@ export default {
 		},
 		framedPortal: {
 			control: false,
-			description: 'Contenu additionnel affiché dans le cadre de l’option lorsque <code>framed</code> est actif. [PortalContent]',
+			description:
+				'Contenu additionnel affiché dans le cadre de l’option lorsque <code>framed</code> est actif. Pour un texte simple, renseigner l’input <code>framedPortal</code> sur <code>lu-radio</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans <code>lu-radio</code> un élément portant la directive <code>luInputFramedContent</code>. L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs (radio)' },
 		},
 		inlineMessageState: {
@@ -131,7 +132,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 		const model = useStoryModel(1);
 		return {
 			props: { model },
-			template: cleanupTemplate(`<lu-form-field${generateInputs(
+			template: `<lu-form-field${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -151,7 +152,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 	</lu-radio-group-input>
 </lu-form-field>
 
-<pr-story-model-display>{{ model.example }}</pr-story-model-display>`),
+<pr-story-model-display>{{ model.example }}</pr-story-model-display>`,
 		};
 	},
 	args: {

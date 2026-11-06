@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
 import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body.token';
+import { DataTableBodyGroupDirective } from './data-table-body-group.directive';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -27,6 +28,8 @@ export class DataTableBodyComponent {
 	readonly groupButtonAlt = input<string | null>(null);
 
 	readonly expanded = model(false);
+
+	protected readonly groupSlot = contentChild(DataTableBodyGroupDirective, { descendants: false });
 
 	expandedToggle() {
 		this.expanded.set(!this.expanded());

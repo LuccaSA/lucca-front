@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { BUBBLE_ILLUSTRATION } from '@lucca-front/ng/bubble-illustration';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EMPTY_STATE_HEADING_LEVEL, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HEADING_LEVEL, EmptyStateDescriptionDirective, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 import { PaletteArgType } from '../../../../helpers/common-arg-types';
@@ -11,15 +11,16 @@ export default {
 	component: EmptyStateSectionComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [EmptyStateSectionComponent, ButtonComponent, HttpClientModule],
+			imports: [EmptyStateSectionComponent, EmptyStateDescriptionDirective, ButtonComponent, HttpClientModule],
 		}),
 	],
 	render: (args) => {
-		const { heading, description, center, palette, headingLevel, illustration, action } = args;
+		const { heading, center, palette, headingLevel, illustration, action } = args;
 		const paletteArg = palette ? ` palette="${palette}"` : ``;
 		const actionArg = action ? ` action` : ``;
 		return {
-			template: `<lu-empty-state-section illustration="${illustration}" headingLevel="${headingLevel}" heading="${heading}" description="${description}"${actionArg}${paletteArg}${center ? ' center' : ''}>
+			template: `<lu-empty-state-section illustration="${illustration}" headingLevel="${headingLevel}" heading="${heading}"${actionArg}${paletteArg}${center ? ' center' : ''}>
+	<p luEmptyStateDescription>You have <strong>no pending request</strong> yet. New requests will appear here.</p>
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-section>`,
@@ -62,7 +63,9 @@ export default {
 			table: { category: 'inputs' },
 		},
 		description: {
-			description: 'Description de l’empty state. [PortalContent]',
+			control: false,
+			description:
+				'Texte affiché sous le titre. Pour un texte simple, renseigner l’input <code>description</code> sur <code>lu-empty-state-section</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luEmptyStateDescription</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
 		},
 	},
@@ -73,7 +76,6 @@ export const Section: StoryObj<EmptyStateSectionComponent> = {
 		illustration: 'rocket',
 		action: false,
 		heading: 'Empty state section',
-		description: 'Description can be a string or a ng-template',
 		center: false,
 		headingLevel: 3,
 	},

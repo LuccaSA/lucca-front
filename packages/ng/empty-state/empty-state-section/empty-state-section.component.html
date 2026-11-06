@@ -20,6 +20,10 @@
 							<ng-container *luPortal="description" />
 						</div>
 					}
+				} @else if (descriptionSlot()) {
+					<div class="emptyState-content-description">
+						<ng-content select="[luEmptyStateDescription]" />
+					</div>
 				}
 				<div class="emptyState-actions">
 					<ng-content />
