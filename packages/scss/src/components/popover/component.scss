@@ -44,11 +44,12 @@
 	@at-root ($atRoot) {
 		.popover-content {
 			overflow: auto;
+			border-radius: inherit;
 			max-block-size: min(var(--components-popover-content-maxBlockSize), calc(100dvb - (var(--pr-t-spacings-150) * 2)));
 			max-inline-size: min(var(--components-popover-content-maxInlineSize), calc(100dvi - (var(--pr-t-spacings-150) * 2) - var(--commons-pushPanel-inlineSize)));
 
 			&:focus-visible {
-				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
+				@include a11y.focusVisible;
 			}
 		}
 
