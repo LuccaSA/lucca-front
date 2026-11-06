@@ -24,6 +24,12 @@ _Aucun changement d'API entre v21.4.4 et v22.1.1._
 
 ### Notes de release (ZeroHeight)
 
+#### 22.0.6
+
+##### Fixed
+
+- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
+
 #### 21.1.0
 
 ##### Added

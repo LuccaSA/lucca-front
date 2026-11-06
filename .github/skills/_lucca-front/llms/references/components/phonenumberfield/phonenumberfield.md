@@ -61,6 +61,12 @@ import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-in
 
 ### Notes de release (ZeroHeight)
 
+#### 22.0.4
+
+##### Fixed
+
+- Control is now emptied when the typed number is erased.
+
 #### 21.1.3
 
 ##### Fixed

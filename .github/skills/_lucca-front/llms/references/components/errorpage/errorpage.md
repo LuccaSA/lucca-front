@@ -38,6 +38,12 @@ _Aucun changement d'API entre v21.4.4 et v22.1.1._
 
 ### Notes de release (ZeroHeight)
 
+#### 21.4.1
+
+##### Fixed
+
+- Layout when the error page is displayed inside a dialog.
+
 #### 21.3.0
 
 ##### Added

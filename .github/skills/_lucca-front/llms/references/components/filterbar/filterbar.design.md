@@ -14,79 +14,75 @@
 
 ## Comportement
 
+Le pattern Vues et affichages détaille le rôle des vues et des affichages, et la façon de choisir entre les deux.
+
 ### Vues avec compteur
 
-Lorsqu’un compteur est affiché dans le Segmented control utilisé pour les vues, il indique le nombre d’objets présent dans cette vue.
-
-Si des filtres sont appliqués, cela n’a pas d’impact sur le nombre indiqué dans le Numeric badge.
+Un compteur dans le SegmentedControl des vues indique le nombre d'objets de chaque vue. Les filtres appliqués ne changent pas ce nombre.
 
 ### Vues personnalisées
 
-Pour les cas d’usages nécessitant des filtrages récurrents, il est recommandé de permettre à l'utilisateur d'enregistrer ses configurations pour qu'elles soient persistées. Pour en savoir plus sur la gestion de ces états, référez-vous au pattern Enregistrer des vues.
+Quand l'utilisateur filtre souvent de la même façon, proposons-lui d'enregistrer sa configuration en vue personnalisée. Le pattern Vues et affichages détaille leur création et leur gestion.
 
 ### Ajout de filtres supplémentaires
 
-Des filtres supplémentaires, masqués derrière un bouton, peuvent être affichés si l’utilisateur souhaite affiner les résultats.
+Des filtres supplémentaires, masqués derrière un bouton, aident l'utilisateur à affiner les résultats. Les FilterPills ajoutées s'affichent au fur et à mesure qu'il les sélectionne. Si elles sont nombreuses, elles passent automatiquement à la ligne.
 
-Les Filter pills ajoutés s’affichent au fur et à mesure que l’utilisateur les sélectionne. Si la liste de filtres affichés est longue, les Filter pills passent automatiquement à la ligne.
+Un filtre affiché par défaut ne peut pas être masqué : il n'apparaît donc pas dans la liste des filtres supplémentaires. Si l'utilisateur masque un filtre actif, ce filtre est désactivé.
 
-Il n’est pas possible de masquer un filtre affiché par défaut. Ces derniers ne sont donc pas présent dans la liste des filtres.
+### **Tri et regroupement**
 
-Si l'utilisateur décide de masquer un filtre actif, ce dernier sera désactivé.
+Le tri et le regroupement du contenu s'affichent sous la forme d'une FilterPill, dont le label indique « Trier par » ou « Grouper par ». Cette FilterPill se place toujours en dernière position, après les autres FilterPills et juste avant la barre de recherche s'il y en a une, pour ne pas interférer avec les filtres.
+
+Quand la FilterBar propose les deux, « Trier par » vient avant « Grouper par ». Ces FilterPills ne font pas partie des réglages d'affichage, placés à droite de la FilterBar.
 
 ### Actions associées
 
-Les boutons d’action, typiquement pour exporter ou télécharger le contenu filtré sous un format spécifique, sont toujours placés à droite de la Filter bar.
-
-Ces actions sont ferrées à droite de l’interface, pour les détacher des filtres.
+Les boutons d'action, par exemple pour exporter ou télécharger le contenu filtré, se placent toujours à droite de la FilterBar, à l'écart des filtres. Quand la FilterBar propose des affichages, les actions se placent après eux, séparées par un Divider.
 
 ### Application des filtres
 
-Par défaut, les filtres **s’appliquent automatiquement** lorsque l’utilisateur les sélectionne/désélectionne. Un état de chargement au niveau du contenu indique à l’utilisateur que le calcul des résultats est en cours (skeleton, loader, etc.)
+Par défaut, les filtres s'appliquent automatiquement dès que l'utilisateur les sélectionne ou les désélectionne. Un état de chargement sur le contenu (Skeleton, Loader…) indique que les résultats sont en cours de calcul.
 
-Dans certains cas, en raison de contraintes techniques, les filtres nécessitent un bouton pour être appliqués. Ce bouton s’affiche à la toute fin de la FilterBar.
+Dans certains cas, des contraintes techniques imposent un bouton pour appliquer les filtres. Ce bouton se place à la toute fin de la FilterBar.
 
-### Affichage du nombre de résultats
+### Indicateur du nombre de résultats
 
-Lorsqu’il est intéressant d’indiquer à l’utilisateur le nombre de résultats, cette information peut être affichée à la toute fin de la Filter bar.
+Quand il est utile d'indiquer le nombre de résultats, cette information se place à la toute fin de la FilterBar.
 
-### Vues et filtres inactifs
+### **Affichages**
 
-Lorsqu’une vue représente un état prédéfini des données, basé sur un ensemble de filtres actifs. Lorsqu’une vue est sélectionnée, ces filtres sont affichés mais inactif. L’utilisateur ne peut pas les modifier.
+Un SegmentedControl placé à droite de la FilterBar propose des affichages : il présente le même jeu de ressources sous une autre forme, par exemple en IndexTable ou en CardWrapper.
 
-Une vue “Tous” doit être disponible pour que l’utilisateur puisse filtrer comme il l’entend parmi l’ensemble des données.
+Ce n'est pas un filtre. La vue sélectionnée et les FilterPills actives s'appliquent de la même façon quel que soit l'affichage, et chaque élément garde les mêmes actions d'un affichage à l'autre. Le pattern « Vues et affichages » détaille ces règles.
 
-### Filtres dépendants d’une vue
-
-Lorsque vues et Filter pills sont cumulés, les Filter pills sont, par défaut, visibles pour chacune des vues disponibles.
-
-Cependant, dans de rares cas, nous souhaitons restreindre les options de filtrages pour certaines vues. Dans ce cas, les Filter pills peuvent alors s’afficher ou se masquer en fonction de la vue sélectionnée par l’utilisateur.
+Une même FilterBar peut cumuler vues et affichages : les vues restent à gauche, les affichages à droite.
 
 ### Filtres, tableau, pagination et sélection
 
-Lorsque des filtres sont appliqués sur un tableau paginé, ils restent appliqués lorsque l’utilisateur navigue de page en page.
+Sur un tableau paginé, les filtres appliqués restent actifs quand l'utilisateur passe d'une page à l'autre.
 
-En revanche, comme mentionné dans les comportements des IndexTable, lorsque l’utilisateur a sélectionné plusieurs objets d’un même tableau et qu’il y applique des filtres, la sélection se réinitialise.
+En revanche, comme l'indiquent les comportements de l'IndexTable, quand l'utilisateur a sélectionné plusieurs objets d'un tableau puis applique des filtres, la sélection se réinitialise.
 
 ## Règles d'utilisation
 
-### La Filter bar doit être utilisée pour filtrer un Data table ou Index table
+### **Utilisons la FilterBar pour filtrer un DataTable ou un IndexTable**
 
-La Filter bar est le composant standard pour permettre aux utilisateurs de filtrer les données affichées dans un tableau. Elle se positionne toujours au-dessus du tableau, entre le titre et les en-têtes de colonnes.
+La FilterBar est le composant standard pour permettre aux utilisateurs de filtrer les données affichées dans un tableau. Elle se positionne toujours au-dessus du tableau, entre le titre et les en-têtes de colonnes.
 
 - **Do** : Positionnons les filtres dans une barre dédiée au-dessus du tableau.
 - **Don't** : N'intégrons pas des champs de filtrage directement dans les en-têtes de colonnes.
 
 ## Spécifications
 
-La Filter bar est positionnée sur une ligne dédiée. Elle peut se trouver :
+La FilterBar est positionnée sur une ligne dédiée. Elle peut se trouver :
 
 * Directement entre l’entête et le contenu de la page, son impact aura un effet sur l’ensemble de la page.
 * Dans une section spécifique de l’interface, auquel cas son impact sera restreint à cette section.
 
 ### Petits écrans et mobile
 
-L’affichage de la Filter bar s’adapte en fonction de l’espace disponible et du device.
+L’affichage de la FilterBar s’adapte en fonction de l’espace disponible et du device.
 
-* Sur un écran de petite taille, sans écran tactile, les Filter pills passent automatiquement à la ligne en fonction de l’espace disponible.
-* Lorsqu’il s’agit d’un écran tactile, les Filter pills restent affichées sur une seule et même ligne. L’utilisateur peut alors scroller horizontalement pour parcourir les filtres disponibles. Cela se rapproche d’un comportement plus commun de navigation sur téléphone.
+* Sur un écran de petite taille, sans écran tactile, les FilterPills passent automatiquement à la ligne en fonction de l’espace disponible.
+* Lorsqu’il s’agit d’un écran tactile, les FilterPills restent affichées sur une seule et même ligne. L’utilisateur peut alors scroller horizontalement pour parcourir les filtres disponibles. Cela se rapproche d’un comportement plus commun de navigation sur téléphone.

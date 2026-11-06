@@ -25,7 +25,7 @@ Assurer une **cohérence terminologique** dans tous nos contenus en s'appuyant s
 
 | Ressource | Utilité | À consulter pour |
 | --- | --- | --- |
-| **[Le Robert](https://dictionnaire.lerobert.com/)** | Référence standard, le plus contemporain. | Définitions contemporaines, combinaisons (verbes/adjectifs). |
+| **[Le Robert](https://dictionnaire.lerobert.com/)** | Référence standard, le plus contemporain. | Définitions contemporaines, combinaisons (verbes/adjectifs). **[Assistant](https://dictionnaire.lerobert.com/assistant)** (expérimental) : comparer des termes proches, avec liens vers les définitions. |
 | **[Larousse](https://www.larousse.fr/dictionnaires/francais-monolingue)** | Le plus pédagogique. | Vérifications alternatives, sens courants. |
 | **[CNRTL](https://www.cnrtl.fr/definition/)** | Analyses approfondies | Étymologie, sémantique, variations. |
 
