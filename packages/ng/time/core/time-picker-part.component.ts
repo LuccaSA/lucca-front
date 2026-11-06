@@ -58,16 +58,16 @@ export class TimePickerPartComponent {
 		if (this.hideValue()) {
 			return '  ';
 		}
-		if (this.display() !== undefined) {
-			return this.display();
+		const display = this.display();
+		if (display !== undefined) {
+			return display === '––' ? display : this.formatValue(display);
 		}
 		const value = this.value();
 		if (value === '––') {
 			return value;
 		}
 
-		// remove comma separator for display
-		const formattedNumber = formatNumber(value, this.locale, this.decimalConf()).replace(/,/g, '');
+		const formattedNumber = this.formatValue(value);
 		const label = this.isValueSet() ? formattedNumber : '';
 
 		// remove trailing 0 when value is not 0 or showZero is false
@@ -90,6 +90,11 @@ export class TimePickerPartComponent {
 				}
 			}
 		});
+	}
+
+	private formatValue(value: number): string {
+		// remove comma separator for display
+		return formatNumber(value, this.locale, this.decimalConf()).replace(/,/g, '');
 	}
 
 	arrowKeyPressed(event: KeyboardEvent, isUpArrow: boolean): void {
