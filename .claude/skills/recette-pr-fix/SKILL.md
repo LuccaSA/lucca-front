@@ -88,6 +88,8 @@ Si le verdict est ❌, ne pas ouvrir la PR : proposer les corrections et attendr
 
 ## 5. Preuve du fix (après ouverture de la PR)
 
+**Enchaîner sans demander.** Dans la même réponse que `gh pr create`, lancer l'attente de la preview (étape 1) en arrière-plan, et préparer les scénarios pendant le déploiement. Ne pas finir le tour sur une proposition (« je peux faire la preuve une fois la preview déployée ») : l'attente ne justifie pas de s'arrêter. Seule la publication du commentaire (étape 7) attend l'accord de l'utilisateur.
+
 Dans Chromium, sur les previews Storybook de la base et de la PR, un seul script prouve trois choses : **le fix change ce qu'il doit changer** (cas corrigé), **et rien d'autre** (cas témoin), **sans nouvelle violation d'accessibilité ni erreur console**. Il met la story dans l'état du bug, puis collecte toutes les preuves dans cet état — capture, valeurs observées, audit axe, erreurs console, vidéo sur demande — et dit lesquelles diffèrent. Quel que soit le fix (rendu, curseur, ARIA, focus, comportement), l'une d'elles peut le montrer.
 
 **Ne jamais s'arrêter sur un contrôle.** Chaque appel finit sur un verdict et sa cause. Un état qui échoue ou ne prouve rien va dans « Non vérifié » avec sa cause, et la recette passe au suivant ; le commentaire publie ce qui a abouti. Une capture identique n'est pas une impasse : c'est le signal d'observer autre chose (étape 4).
