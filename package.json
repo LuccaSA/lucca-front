@@ -33,7 +33,7 @@
     "start": "npm run typography:update-font-coverage & ng run ng:storybook",
     "test:eslint-plugin": "npm test -w @lucca-front/eslint-plugin",
     "jenkins-test": "vitest run --reporter=verbose",
-    "ci-test": "vitest run --reporter=verbose",
+    "ci-test": "vitest run --reporter=verbose && npm run test:eslint-plugin",
     "test": "vitest",
     "docs:llms": "node scripts/llms-skill/publish-skill.mjs storybook",
     "docs:llms-pack": "node scripts/llms-skill/publish-skill.mjs npm",

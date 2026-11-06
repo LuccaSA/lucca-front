@@ -233,6 +233,6 @@ function parseVersion(version) {
  * @param {DisallowedObject} objectData
  * @return {'warning'|'error'}
  */
-function getSeverity(objectData) {
+export function getSeverity(objectData) {
 	return isDeleted(objectData) ? 'error' : 'warning';
 }
