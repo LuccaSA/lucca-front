@@ -4,6 +4,8 @@
 
 ## Angular
 
+Component selector : `lu-priority-level`
+
 ### Level
 
 ```js

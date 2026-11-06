@@ -15,6 +15,9 @@
 	"app-layout": {
 		"zeroheightPagePath": "2615fa"
 	},
+	"approbation-inbox": {
+		"zeroheightPagePath": "70ecf7"
+	},
 	"avatar": {
 		"zeroheightPagePath": "42b330",
 		"ngPackageOverride": "user",
@@ -311,6 +314,9 @@
 	"highlight-data": {
 		"zeroheightPagePath": "1827fe"
 	},
+	"highlight-text": {
+		"zeroheightPagePath": "49e41f"
+	},
 	"horizontalnavigation": {
 		"zeroheightPagePath": "29aaef"
 	},
@@ -318,6 +324,9 @@
 		"zeroheightPagePath": "9826b3",
 		"ngPackageOverride": "icon",
 		"scssComponent": ""
+	},
+	"impersonation": {
+		"zeroheightPagePath": "76a264"
 	},
 	"index-table": {
 		"zeroheightPagePath": "24fc14"
@@ -331,6 +340,9 @@
 		"ngSelectors": [
 			"lu-input-framed"
 		]
+	},
+	"kbd": {
+		"zeroheightPagePath": "265738"
 	},
 	"link": {
 		"zeroheightPagePath": "95303b"
@@ -413,6 +425,9 @@
 	},
 	"popover": {
 		"zeroheightPagePath": "129fae"
+	},
+	"priority-level": {
+		"zeroheightPagePath": "33674d"
 	},
 	"progress-bar": {
 		"zeroheightPagePath": "916abd",
@@ -552,6 +567,13 @@
 		"ngPackageOverride": "time",
 		"ngSelectors": [
 			"lu-time-picker"
+		]
+	},
+	"time-range-picker": {
+		"zeroheightPagePath": "8547fa",
+		"ngPackageOverride": "time",
+		"ngSelectors": [
+			"lu-time-range-picker"
 		]
 	},
 	"timelines": {

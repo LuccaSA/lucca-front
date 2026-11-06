@@ -153,7 +153,7 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 ## Related files
 
 - 📝 [Code & implementation](./approbation-inbox.component.md)
-
+- 🎨 [Design guidelines](./approbation-inbox.design.md)
 - 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-approbation-inbox-angular-detail--docs)
 
 ## Changelog

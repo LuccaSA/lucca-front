@@ -175,6 +175,24 @@ describe('truncated-import', () => {
 		expect(auditGeneratedMarkdown(dir)).toEqual([]);
 	});
 
+	it('accepts an import wrapped over several lines', () => {
+		write(
+			'references/components/approbation-inbox/approbation-inbox.component.md',
+			"```ts\nimport {\n\tApprobationInboxDetailComponent, ApprobationInboxHeaderComponent,\n} from '@lucca-front/ng/approbation-inbox';\n```\n",
+		);
+
+		expect(auditGeneratedMarkdown(dir)).toEqual([]);
+	});
+
+	it('flags a bare import followed by another import', () => {
+		write('references/components/data-table/data-table.component.md', "```js\nimport {\nimport { A } from 'x';\n```\n");
+
+		const violations = auditGeneratedMarkdown(dir);
+
+		expect(violations).toHaveLength(1);
+		expect(violations[0].rule).toBe('truncated-import');
+	});
+
 	it('says nothing about html or css fences', () => {
 		write('references/components/x/x.component.md', '```html\n<p>import {</p>\n```\n');
 

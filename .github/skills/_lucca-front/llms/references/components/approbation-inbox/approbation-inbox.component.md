@@ -3,6 +3,8 @@
 **Sommaire**
 
 - Angular
+  - Structure
+  - Comportement responsive
   - Detail
   - List
 - HTML/CSS
@@ -35,7 +37,24 @@
 
 ## Angular
 
+### Structure
+
+Inbox de traitement associe deux composants  : une liste d'éléments à approuver (`lu-approbation-inbox-list`) et une vue détaillée de l'élément sélectionné (`lu-approbation-inbox-detail`).
+
+### Comportement responsive
+
+Chaque lien d'élément de liste (`a[lu-approbation-inbox-list-action]`, s'adapte tout seul selon le breakpoint `M` :
+
+* **≥ M** : le lien se comporte comme un lien de navigation classique. Le détail, affiché à droite de la liste se met à jour au fil de la navigation (routing applicatif).
+* **< M** : le clic est intercepté, le lien devient un bouton, et le composant ouvre automatiquement une fenêtre de dialogue qui projette les templates du même détail.
+
+De la même manière, les boutons d'actions présents dans le header du composant détail sont déplacés dans la fenêtre de dialogue. 
+
+Cette bascule est automatique et ne nécessite pas de développement particulier.
+
 ### Detail
+
+Component selectors : `lu-approbation-inbox-detail`
 
 ```js
 import { ApprobationInboxDetailComponent, ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderComponent } from '@lucca-front/ng/approbation-inbox';
@@ -46,6 +65,12 @@ import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing'
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
+```
+
+```ts
+import {
+	ApprobationInboxDetailComponent, ApprobationInboxHeaderComponent, ApprobationInboxDetailMainBlockComponent,
+} from '@lucca-front/ng/approbation-inbox';
 ```
 
 ```html
@@ -64,6 +89,8 @@ import { IconComponent } from '@lucca/prisme/icon';
 
 ### List
 
+Component selectors : `lu-approbation-inbox-list`
+
 ```js
 import { FormsModule } from '@angular/forms';
 import { ApprobationInboxDetailComponent, ApprobationInboxGroupComponent, ApprobationInboxIcon, ApprobationInboxIconsComponent, ApprobationInboxItemComponent, ApprobationInboxLinkComponent, ApprobationInboxListComponent, ApprobationInboxSubtleComponent, luApprobationInboxListGroupTranslations, luApprobationInboxListItemTranslations, luApprobationInboxListTranslations } from '@lucca-front/ng/approbation-inbox';
@@ -76,6 +103,12 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { IconComponent } from '@lucca/prisme/icon';
+```
+
+```ts
+import {
+	ApprobationInboxListComponent, ApprobationInboxGroupComponent, ApprobationInboxItemComponent, ApprobationInboxIconsComponent, ApprobationInboxSubtleComponent, ApprobationInboxLinkComponent,
+} from '@lucca-front/ng/approbation-inbox';
 ```
 
 ```html

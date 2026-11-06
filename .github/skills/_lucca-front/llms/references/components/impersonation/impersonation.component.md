@@ -4,6 +4,36 @@
 
 ## Angular
 
+Component selector : `lu-impersonation`
+
+### Imports et configuration
+
+Pour utiliser le composant `lu-impersonation`, vous devez l'importer dans votre composant :
+
+### Utilisation basique
+
+Le composant affiche un bouton avec le profil utilisateur actuellement actif. En cliquant dessus, une liste déroulante s'ouvre pour sélectionner un autre utilisateur.
+
+#### Entrées (inputs)
+
+- **`selectedUser`** (model `ILuUser`): L'utilisateur actuellement sélectionné pour l'impersonification. Peut être modifié via `[(selectedUser)]` ou `[selectedUser]`. **Attention: la valeur par défaut doit être l'utilisateur actuellement connecté, aucune valeur nullable n'est acceptée**
+
+- **`enableFormerEmployees`** (boolean, défaut: `false`): Permet d'inclure les anciens employés dans la liste de sélection lorsque la valeur est définie à `true`.
+
+- **`intl`** (object): Les traductions du composant. Accepte les clés suivantes:
+  - `switchProfile`: Texte du bouton principal (par défaut : "Changer de profil")
+  - `a11yNavigationDescription`: Description pour l'accessibilité (par défaut : "Utiliser les flèches haut/bas pour naviguer")
+  - `clear`: Libellé du bouton d'effacement (par défaut : "Effacer")
+  - Ainsi que toutes les traductions du sélecteur utilisateur (`luCoreSelectUserTranslations`)
+
+#### Sorties (outputs)
+
+- **`clear`**: Émis lorsque l'utilisateur clique sur le bouton d'effacement pour réinitialiser la sélection, il est recommandé de s'en servir pour effectuer un reset côté BU, en remplaçant `selectedUser` par l'utilisateur en cours.
+
+### Personnalisation des traductions
+
+Si vous souhaitez personnaliser les traductions, vous pouvez fournir vos propres valeurs :
+
 ### Basic
 
 ```js
@@ -20,6 +50,8 @@ import { ImpersonationComponent, luImpersonationTranslations } from '@lucca-fron
 ```
 
 ## HTML/CSS
+
+Classe CSS : `.impersonation`
 
 ### Basic
 
