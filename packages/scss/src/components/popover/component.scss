@@ -27,16 +27,25 @@
 		inset-block-start: calc(var(--pr-t-spacings-100) * -1);
 		z-index: 2;
 
-		&:not(:focus-visible) {
-			@include a11y.mask;
+		// extends the touch target to 24px without changing the visual size
+		&::before {
+			content: '';
+			position: absolute;
+			inset: calc(var(--pr-t-spacings-50) * -1);
+		}
+
+		@media (hover: hover) {
+			&:not(:focus-visible) {
+				@include a11y.mask;
+			}
 		}
 	}
 
 	@at-root ($atRoot) {
 		.popover-content {
 			overflow: auto;
-			max-block-size: min(var(--components-popover-content-maxBlockSize), calc(100dvb - var(--pr-t-spacings-200)));
-			max-inline-size: min(var(--components-popover-content-maxInlineSize), calc(100dvi - var(--pr-t-spacings-400) - var(--commons-pushPanel-inlineSize)));
+			max-block-size: min(var(--components-popover-content-maxBlockSize), calc(100dvb - (var(--pr-t-spacings-150) * 2)));
+			max-inline-size: min(var(--components-popover-content-maxInlineSize), calc(100dvi - (var(--pr-t-spacings-150) * 2) - var(--commons-pushPanel-inlineSize)));
 
 			&:focus-visible {
 				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
