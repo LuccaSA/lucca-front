@@ -17,7 +17,7 @@
 				[(ngModel)]="selected"
 				[disabled]="disabled()"
 				[mixed]="mixed()"
-				[luRangeSelection]="bodyRef ? tableRef.rangeSelection : null"
+				[luRangeSelection]="bodyRef && !headRef ? tableRef.rangeSelection : null"
 				[luRangeSelectionItem]="this"
 			/>
 		</lu-form-field>

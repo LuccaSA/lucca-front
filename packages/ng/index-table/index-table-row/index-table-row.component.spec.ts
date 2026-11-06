@@ -92,10 +92,11 @@ describe(IndexTableRowComponent.name, () => {
 		expect(announce).not.toHaveBeenCalled();
 	});
 
-	it('should unselect the range when the Shift + clicked row gets unchecked', () => {
+	it('should unselect the range when the Shift + clicked row gets unchecked', async () => {
 		// Arrange
 		host.rows.forEach((row) => row.selected.set(true));
 		fixture.detectChanges();
+		await fixture.whenStable();
 
 		// Act
 		click(4);
@@ -149,5 +150,67 @@ describe(IndexTableRowComponent.name, () => {
 		// Assert
 		expect(host.all()).toBe(true);
 		expect(bodyStates()).toEqual([false, true, false, false, false, false]);
+	});
+});
+
+@Component({
+	selector: 'lu-index-table-row-nested-test',
+	imports: [IndexTableComponent, IndexTableHeadComponent, IndexTableBodyComponent, IndexTableRowComponent],
+	template: `
+		<lu-index-table>
+			<tbody luIndexTableBody>
+				<tr luIndexTableRow>
+					<td>
+						<lu-index-table selectable>
+							<thead luIndexTableHead>
+								<tr luIndexTableRow selectedLabel="Select all" [(selected)]="all"></tr>
+							</thead>
+							<tbody luIndexTableBody>
+								@for (row of rows; track $index) {
+									<tr luIndexTableRow [selectedLabel]="'Row ' + $index" [(selected)]="row.selected"></tr>
+								}
+							</tbody>
+						</lu-index-table>
+					</td>
+				</tr>
+			</tbody>
+		</lu-index-table>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class NestedHostComponent {
+	readonly all = signal(false);
+	readonly rows = Array.from({ length: 3 }, () => ({ selected: signal(false) }));
+}
+
+describe('IndexTableRowComponent: nested table', () => {
+	let fixture: ComponentFixture<NestedHostComponent>;
+	let host: NestedHostComponent;
+
+	function click(index: number, shiftKey = false) {
+		const checkboxes = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+		checkboxes[index].dispatchEvent(new MouseEvent('click', { bubbles: true, shiftKey }));
+		fixture.detectChanges();
+	}
+
+	beforeEach(async () => {
+		TestBed.configureTestingModule({
+			imports: [NestedHostComponent],
+			providers: [{ provide: LiveAnnouncer, useValue: { announce: vi.fn().mockResolvedValue(undefined) } }],
+		});
+		fixture = TestBed.createComponent(NestedHostComponent);
+		host = fixture.componentInstance;
+		fixture.detectChanges();
+		await fixture.whenStable();
+	});
+
+	it('should not use the head row of the inner table as an anchor', () => {
+		// Act
+		click(0);
+		click(2, true);
+
+		// Assert
+		expect(host.all()).toBe(true);
+		expect(host.rows.map((row) => row.selected())).toEqual([false, true, false]);
 	});
 });
