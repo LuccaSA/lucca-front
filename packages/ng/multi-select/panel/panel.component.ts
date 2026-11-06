@@ -36,6 +36,7 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'selectPanel',
+		'[class.mod-noSearch]': '!searchable',
 		'[class.is-pointerNavigation]': 'pointerNavigation()',
 	},
 	imports: [
