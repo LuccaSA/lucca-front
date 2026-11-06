@@ -34,6 +34,7 @@ export const BUBBLE_ILLUSTRATION = [
 	'coffee',
 	'cup',
 	'diamond',
+	'earth',
 	'equity',
 	'error',
 	'export',
@@ -45,7 +46,6 @@ export const BUBBLE_ILLUSTRATION = [
 	'goldMedal',
 	'graduate',
 	'growth',
-	'heart',
 	'home',
 	'hourglass',
 	'import',
@@ -105,7 +105,7 @@ export const BUBBLE_ILLUSTRATION = [
 
 export type BubbleIllustration =
 	| (typeof BUBBLE_ILLUSTRATION)[number]
-	/** @deprecated use 'heart' instead */
+	/** @deprecated use 'earth' instead */
 	| 'hearth'
 	/** @deprecated use 'moodShocked' instead */
 	| 'moodShoked';
