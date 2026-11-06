@@ -2,6 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { EmptyStateDescriptionDirective } from '../empty-state-description.directive';
 import { EmptyStateSectionComponent } from './empty-state-section.component';
 
 @Component({
@@ -16,6 +17,24 @@ import { EmptyStateSectionComponent } from './empty-state-section.component';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {}
+
+@Component({
+	selector: 'lu-empty-state-section-description-test',
+	imports: [EmptyStateSectionComponent, EmptyStateDescriptionDirective],
+	template: `
+		<lu-empty-state-section class="input" heading="Title" description="Input description" />
+		<lu-empty-state-section class="projected" heading="Title">
+			<p luEmptyStateDescription>Projected description</p>
+			<button type="button">Action</button>
+		</lu-empty-state-section>
+		<lu-empty-state-section class="both" heading="Title" description="Input description">
+			<p luEmptyStateDescription>Projected description</p>
+		</lu-empty-state-section>
+		<lu-empty-state-section class="none" heading="Title" />
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class DescriptionHostComponent {}
 
 describe(EmptyStateSectionComponent.name, () => {
 	let element: HTMLElement;
@@ -43,5 +62,36 @@ describe(EmptyStateSectionComponent.name, () => {
 
 	it('should give headingLevel priority over hx', () => {
 		expect(ariaLevel('.both')).toBe('2');
+	});
+
+	describe('description', () => {
+		let descriptionElement: HTMLElement;
+
+		const description = (selector: string) => descriptionElement.querySelector(`${selector} .emptyState-content-description`);
+		const text = (node: Element | null | undefined) => node?.textContent?.trim();
+
+		beforeEach(() => {
+			const fixture = TestBed.createComponent(DescriptionHostComponent);
+			descriptionElement = fixture.nativeElement as HTMLElement;
+			fixture.detectChanges();
+		});
+
+		it('should render the description input', () => {
+			expect(text(description('.input'))).toBe('Input description');
+		});
+
+		it('should render the projected description, not in the actions', () => {
+			expect(text(description('.projected'))).toBe('Projected description');
+			expect(text(descriptionElement.querySelector('.projected .emptyState-actions'))).toBe('Action');
+		});
+
+		it('should give the description input priority over the projected element', () => {
+			expect(text(description('.both'))).toBe('Input description');
+			expect(descriptionElement.querySelector('.both')?.textContent).not.toContain('Projected');
+		});
+
+		it('should not render the description without content', () => {
+			expect(description('.none')).toBeNull();
+		});
 	});
 });
