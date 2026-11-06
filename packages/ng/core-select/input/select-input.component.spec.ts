@@ -60,6 +60,20 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		expect(clueChangeSpy).toHaveBeenCalledWith(key);
 	});
 
+	it('should prevent the browser from inserting the letter that opens the panel, as it is already used as clue', async () => {
+		// Arrange
+		const event = new KeyboardEvent('keydown', { key: 'a', cancelable: true });
+		component.clueChange$.subscribe(); // Emulate a `(clueChange)=""` binding
+
+		// Act
+		nativeElement.dispatchEvent(event);
+		await vi.runAllTimersAsync();
+
+		// Assert
+		expect(component.isPanelOpen).toBe(true);
+		expect(event.defaultPrevented).toBe(true);
+	});
+
 	it.each(['a', 'A', 'À'])('should openPanel and not emit clueChange when pressing %s and select is not searchable', async (key) => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key });

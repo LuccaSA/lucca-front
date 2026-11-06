@@ -432,6 +432,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);
 				} else if ($event.key?.length === 1) {
+					// openPanel synchronously writes the key into the clue: if the browser inserted it too,
+					// the first letter would show up twice.
+					$event.preventDefault();
 					this.openPanel($event.key);
 				}
 				break;
