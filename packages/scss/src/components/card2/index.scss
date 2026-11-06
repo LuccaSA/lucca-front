@@ -23,6 +23,10 @@
 
 		.card2Wrapper.mod-grid & {
 			@include grid;
+
+			&:has(.card2-illustration:not(:empty)):not(:has(.card2-content:empty)) {
+				@include gridIllustration;
+			}
 		}
 
 		&:has(.card2-content:empty) {

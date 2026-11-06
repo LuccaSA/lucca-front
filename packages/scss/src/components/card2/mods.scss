@@ -18,6 +18,9 @@
 		'content      content' auto
 		/ auto        1fr;
 	--components-card2-illustration-paddingBlock: 0;
+}
+
+@mixin gridIllustration {
 	--components-card2-rowGap: var(--pr-t-spacings-50);
 }
 
