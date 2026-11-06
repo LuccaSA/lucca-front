@@ -357,9 +357,8 @@ export default [
 		actions: `
 			Avec \`*\` = \`--commons-borderRadius\` :
 
-			* \`*-M\` => \`--pr-t-border-radius-50\`
-			* \`*-L\` => \`--pr-t-border-radius-100\`
-			* \`*-XL\` => \`--pr-t-border-radius-150\`
+			* \`*-(M|L)\` => \`--pr-t-border-radius-default\`
+			* \`*-XL\` => \`--pr-t-border-radius-structure\`
 			* \`*-full\` => \`--pr-t-border-radius-full\`
 		`,
 		urls: {
