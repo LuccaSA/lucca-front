@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { CDN_URL } from '@lucca-front/ng/core';
 import { TextFlowComponent } from '@lucca-front/ng/text-flow';
 import { ErrorPageIllustration } from './error-page.model';
 
@@ -18,6 +19,6 @@ export class ErrorPageComponent {
 	readonly illustration = input.required<ErrorPageIllustration>();
 
 	readonly illustrationSrc = computed(() => {
-		return `https://cdn.lucca.fr/assets/lucca/errors/${this.illustration()}.svg`;
+		return `${CDN_URL}/assets/lucca/errors/${this.illustration()}.svg`;
 	});
 }
