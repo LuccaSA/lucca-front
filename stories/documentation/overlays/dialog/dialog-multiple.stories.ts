@@ -15,8 +15,11 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from '@/helpers/common-arg-types';
+import { allLegumes } from '@/stories/forms/select/select.utils';
 
 export default {
 	title: 'Documentation/Overlays/Dialog/Angular/Multiple',
@@ -41,6 +44,8 @@ export default {
 				ReactiveFormsModule,
 				IconComponent,
 				DialogHeaderAction,
+				LuSimpleSelectInputComponent,
+				LuMultiSelectInputComponent,
 			],
 		}),
 	],
@@ -183,6 +188,65 @@ export const WithoutPopoverTopLayer: StoryObj = {
 			description: {
 				story:
 					'An app can opt out of the cdk popover top layer, for instance to keep its toasts above dialogs. The backdrop is then a sibling of the overlay wrapper instead of one of its children: the dialogs must stack all the same.',
+			},
+		},
+	},
+};
+
+export const WithSelect: StoryObj = {
+	...Basic,
+	name: 'With a select',
+	render: (args) => ({
+		props: {
+			config: args,
+			legumes: allLegumes,
+		},
+		template: `
+<button class="open" luButton="outlined" [luDialogOpen]="dialogTpl1" [luDialogConfig]="config">Open Dialog</button>
+
+<ng-template #dialogTpl1>
+	<lu-dialog stacked>
+		<lu-dialog-header>
+			<h1>Dialog 1</h1>
+		</lu-dialog-header>
+		<lu-dialog-content>
+			<lu-form-field label="Legume">
+				<lu-simple-select [(ngModel)]="legume" [options]="legumes" />
+			</lu-form-field>
+			<button class="open pr-u-marginBlockStart200" luButton="outlined" [luDialogOpen]="dialogTpl2" [luDialogConfig]="config">Open Dialog</button>
+		</lu-dialog-content>
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>
+
+<ng-template #dialogTpl2>
+	<lu-dialog stacked>
+		<lu-dialog-header>
+			<h1>Dialog 2</h1>
+		</lu-dialog-header>
+		<lu-dialog-content>
+			<lu-form-field label="Legumes">
+				<lu-multi-select [(ngModel)]="legumesSelection" [options]="legumes" />
+			</lu-form-field>
+		</lu-dialog-content>
+		<lu-dialog-footer>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>`,
+	}),
+	parameters: {
+		docs: {
+			description: {
+				story: 'Below the XS breakpoint, a select opens as a sheet. Over a `stacked` dialog, the sheet joins the stack: the dialogs below recede by one level each.',
 			},
 		},
 	},
