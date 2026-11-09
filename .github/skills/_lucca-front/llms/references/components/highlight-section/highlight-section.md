@@ -42,7 +42,11 @@ import { HighlightSectionComponent } from '@lucca-front/ng/highlight-section';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.1.2
+
+~ `HighlightSectionComponent` devient déprécié (since 22.1.1; an evolution of BoxComponent will replace it in 22.2.)
 
 ### 22.1.1
 

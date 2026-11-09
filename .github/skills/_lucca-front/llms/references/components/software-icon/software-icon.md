@@ -9,6 +9,7 @@
   - Injection tokens
 - Related files
 - Changelog
+  - 22.1.2
   - 22.0.0
   - Notes de release (ZeroHeight)
 
@@ -60,7 +61,23 @@ import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.1.2
+
+~ `icon` : // Time and Activities
+	'absences' | 'timesheet' | 'office' | 'projects' | 'shifts' | // Talent Management
+	'performance' | 'engagement' | 'training' | 'recruitment' | 'mood' | // Employee Administration
+	'analytics' | 'employee-administration' | 'shared-documents' | 'faces' | // Spend Management
+	'business-expenses' | 'invoices' | 'payment-methods' | 'accounting-assistant' | 'certified-einvoicing-platform' | // Compensation and Benefits
+	'compensation' | 'payslip' | 'benefits' | 'payroll-assistant' | // Lucca
+	'cloud-control' | 'ask-lucca' | 'ask-salesforce' | 'calendar' | 'administration' | 'client-center' | 'sandbox' | 'store' | 'lucca' → // Time and Activities
+	'absences' | 'timesheet' | 'office' | 'projects' | 'shifts' | // Talent Management
+	'performance' | 'engagement' | 'training' | 'recruitment' | 'mood' | // Employee Administration
+	'analytics' | 'employee-administration' | 'shared-documents' | 'faces' | // Spend Management
+	'business-expenses' | 'invoices' | 'payment-methods' | 'accounting-assistant' | 'certified-einvoicing-platform' | 'business-trips' | // Compensation and Benefits
+	'compensation' | 'payslip' | 'benefits' | 'payroll-assistant' | // Lucca
+	'cloud-control' | 'ask-lucca' | 'ask-salesforce' | 'calendar' | 'administration' | 'client-center' | 'sandbox' | 'store' | 'integrations' | 'lucca'
 
 ### 22.0.0
 
