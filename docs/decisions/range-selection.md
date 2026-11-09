@@ -38,3 +38,24 @@ Status: accepted · PR #5437
 **Rejected options** — A range across pagination: it would require the consumer’s data model (ids, order, pages not loaded), which the components do not have.
 
 **Revisit if** — The components handle pagination themselves.
+
+## 2026-11-09 — Groups are not part of the range
+
+Status: proposed · PR #5437
+
+**Context** — The three components group their items: grouped `tbody` in `lu-data-table` and `lu-index-table`, `lu-approbation-inbox-list-group` in `lu-approbation-inbox-list`. Only the latter has a checkbox per group, which checks or unchecks the whole group.
+
+**Decision** — Only items (rows, list items) take part in the range selection:
+
+- the range covers a flat list in document order and goes across groups; collapsed groups are skipped;
+- in `lu-approbation-inbox-list`, the group checkbox does not carry the directive: it is neither an anchor nor an end of the range, and clicking it does not move the anchor;
+- the state of the group checkboxes and of “Select all” is computed from the items.
+
+**Consequences** — After a click on a group checkbox, a ⇧ Shift + click starts from the last clicked *item*, which can be in another group. A ⇧ Shift + click on a group checkbox behaves like a plain click.
+
+**Rejected options** — Two ways to make the group checkbox part of the range:
+
+- The group checkbox as an anchor: it stands for several items, so the first or the last one would have to be picked depending on the direction of the range.
+- A ⇧ Shift + click on the group checkbox extending the range to the end of the group: `ɵRangeSelectableItem` would have to support composite items.
+
+**Revisit if** — Usage feedback shows that the anchor staying on an item after a group click confuses users.
