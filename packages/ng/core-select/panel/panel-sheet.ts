@@ -49,6 +49,17 @@ export function openSelectPanelSheet<TPanel>(dialogService: LuDialogService, pan
 
 	trackVisibleViewport(dialogRef);
 
+	// Over a `stacked` dialog, the sheet joins the stack so the dialogs below recede (see `cdk/_global.scss`).
+	// Backdrops are skipped: without the popover top layer, CDK inserts each one right before its wrapper.
+	const wrapper = dialogRef.cdkRef.overlayRef.hostElement;
+	let previousWrapper = wrapper.previousElementSibling;
+	while (previousWrapper && !previousWrapper.classList.contains('cdk-global-overlay-wrapper')) {
+		previousWrapper = previousWrapper.previousElementSibling;
+	}
+	if (previousWrapper?.classList.contains('mod-stacked')) {
+		wrapper.classList.add('mod-stacked');
+	}
+
 	return dialogRef;
 }
 
