@@ -6,6 +6,7 @@ import {
 	computed,
 	DestroyRef,
 	ElementRef,
+	forwardRef,
 	inject,
 	input,
 	model,
@@ -15,9 +16,10 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, ɵRANGE_SELECTABLE_ITEM, ɵRangeSelectableItem, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { APPROBATION_INBOX_LIST_GROUP_INSTANCE } from '../approbation-inbox-list-group/token';
 import { ApprobationInboxListComponent } from '../approbation-inbox-list/approbation-inbox-list.component';
 import { LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS } from './approbation-inbox-list-item.translate';
 
@@ -25,17 +27,24 @@ import { LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS } from './approbation-inbox
 	selector: 'lu-approbation-inbox-list-item',
 	templateUrl: './approbation-inbox-list-item.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [FormFieldComponent, CheckboxInputComponent, FormsModule, IntlParamsPipe],
+	imports: [FormFieldComponent, CheckboxInputComponent, FormsModule, IntlParamsPipe, ɵRangeSelectionDirective],
 	host: {
 		class: 'approbationInbox-list-content-items-item',
 		role: 'listitem',
 	},
+	providers: [
+		{
+			provide: ɵRANGE_SELECTABLE_ITEM,
+			useExisting: forwardRef(() => ApprobationInboxItemComponent),
+		},
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApprobationInboxItemComponent implements OnInit {
+export class ApprobationInboxItemComponent implements OnInit, ɵRangeSelectableItem {
 	readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS));
 
-	private readonly list = inject(ApprobationInboxListComponent, { optional: true });
+	protected readonly list = inject(ApprobationInboxListComponent, { optional: true });
+	private readonly group = inject(APPROBATION_INBOX_LIST_GROUP_INSTANCE, { optional: true });
 	private readonly destroyRef = inject(DestroyRef);
 
 	readonly selectable = computed(() => this.list?.selectable() ?? false);
@@ -49,6 +58,14 @@ export class ApprobationInboxItemComponent implements OnInit {
 		afterRenderEffect(() => {
 			this.title.set(this.titleSlot()?.nativeElement.textContent?.trim() ?? '');
 		});
+	}
+
+	getRangeSelected() {
+		return this.checked;
+	}
+
+	isRangeSelectable(): boolean {
+		return this.group?.expanded() ?? true;
 	}
 
 	ngOnInit(): void {

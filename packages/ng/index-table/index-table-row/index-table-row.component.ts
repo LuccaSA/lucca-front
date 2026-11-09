@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNumberAttribute, ɵRANGE_SELECTABLE_ITEM, ɵRangeSelectableItem, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LuTooltipAnchorRef } from '@lucca-front/ng/tooltip';
@@ -26,16 +26,20 @@ import { LU_INDEX_TABLE_ROW_INSTANCE } from './index-table-row.token';
 		'[class.mod-stack2]': 'stack() === 2',
 		'[class.mod-stack3]': 'stack() === 3',
 	},
-	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet],
+	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet, ɵRangeSelectionDirective],
 	providers: [
 		{
 			provide: LU_INDEX_TABLE_ROW_INSTANCE,
 			useExisting: forwardRef(() => IndexTableRowComponent),
 		},
+		{
+			provide: ɵRANGE_SELECTABLE_ITEM,
+			useExisting: forwardRef(() => IndexTableRowComponent),
+		},
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IndexTableRowComponent implements LuTooltipAnchorRef {
+export class IndexTableRowComponent implements LuTooltipAnchorRef, ɵRangeSelectableItem {
 	readonly #elementRef = inject<ElementRef<HTMLTableRowElement>>(ElementRef);
 
 	readonly bodyRef = inject(LU_INDEX_TABLE_BODY_INSTANCE, { optional: true });
@@ -55,4 +59,21 @@ export class IndexTableRowComponent implements LuTooltipAnchorRef {
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 	readonly mixed = input(false, { transform: luBooleanAttribute });
 	readonly stack = input(1, { transform: luNumberAttribute });
+
+	/** The "select all" checkbox of the head row acts on every row: the next Shift + click starts without anchor */
+	protected onSelectedChange(): void {
+		if (this.headRef) {
+			this.tableRef.rangeSelection.resetAnchor();
+		}
+	}
+
+	getRangeSelected() {
+		return this.selected;
+	}
+
+	isRangeSelectable(): boolean {
+		const body = this.bodyRef;
+		const collapsed = !!body?.group() && !!body.groupButtonAlt() && !body.expanded();
+		return !!this.selectedLabel() && !this.disabled() && !collapsed;
+	}
 }

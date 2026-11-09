@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
-import { generateId, getIntl, getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { generateId, getIntl, getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, PortalContent, PortalDirective, ɵRangeSelection } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -56,6 +56,8 @@ export class ApprobationInboxListComponent {
 
 	private readonly items = signal<SelectableItem[]>([]);
 
+	readonly rangeSelection = new ɵRangeSelection();
+
 	readonly checkedCount = computed(() => this.items().filter((item) => item.checked()).length);
 
 	readonly selectedCountLabel = computed(() => getIntlPluralLabel(this.pluralRules, this.intl().selectedCount, this.checkedCount()));
@@ -80,6 +82,7 @@ export class ApprobationInboxListComponent {
 	}
 
 	toggleSelectAll(): void {
+		this.rangeSelection.resetAnchor();
 		const newValue = this.selectAllState() !== true;
 		this.items().forEach((item) => item.checked.set(newValue));
 	}
