@@ -1,96 +1,96 @@
 ﻿export const Translations = {
 	'nl-BE': {
 		rangeSelected: {
-			one: '{{count}} item geselecteerd',
-			other: '{{count}} items geselecteerd',
+			one: 'Je hebt zojuist {{count}} item geselecteerd',
+			other: 'Je hebt zojuist {{count}} items geselecteerd',
 		},
 		rangeUnselected: {
-			one: '{{count}} item gedeselecteerd',
-			other: '{{count}} items gedeselecteerd',
+			one: 'Je hebt zojuist {{count}} item gedeselecteerd',
+			other: 'Je hebt zojuist {{count}} items gedeselecteerd',
 		},
 	},
 	fr: {
 		rangeSelected: {
-			one: '{{count}} élément sélectionné',
-			other: '{{count}} éléments sélectionnés',
+			one: 'Vous venez de sélectionner {{count}} élément',
+			other: 'Vous venez de sélectionner {{count}} éléments',
 		},
 		rangeUnselected: {
-			one: '{{count}} élément désélectionné',
-			other: '{{count}} éléments désélectionnés',
+			one: 'Vous venez de désélectionner {{count}} élément',
+			other: 'Vous venez de désélectionner {{count}} éléments',
 		},
 	},
 	de: {
 		rangeSelected: {
-			one: '{{count}} Element ausgewählt',
-			other: '{{count}} Elemente ausgewählt',
+			one: 'Sie haben gerade {{count}} Element ausgewählt',
+			other: 'Sie haben gerade {{count}} Elemente ausgewählt',
 		},
 		rangeUnselected: {
-			one: '{{count}} Element abgewählt',
-			other: '{{count}} Elemente abgewählt',
+			one: 'Sie haben gerade {{count}} Element abgewählt',
+			other: 'Sie haben gerade {{count}} Elemente abgewählt',
 		},
 	},
 	en: {
 		rangeSelected: {
-			one: '{{count}} item selected',
-			other: '{{count}} items selected',
+			one: 'You just selected {{count}} item',
+			other: 'You just selected {{count}} items',
 		},
 		rangeUnselected: {
-			one: '{{count}} item unselected',
-			other: '{{count}} items unselected',
+			one: 'You just unselected {{count}} item',
+			other: 'You just unselected {{count}} items',
 		},
 	},
 	es: {
 		rangeSelected: {
-			one: '{{count}} elemento seleccionado',
-			other: '{{count}} elementos seleccionados',
+			one: 'Acabas de seleccionar {{count}} elemento',
+			other: 'Acabas de seleccionar {{count}} elementos',
 		},
 		rangeUnselected: {
-			one: '{{count}} elemento deseleccionado',
-			other: '{{count}} elementos deseleccionados',
+			one: 'Acabas de deseleccionar {{count}} elemento',
+			other: 'Acabas de deseleccionar {{count}} elementos',
 		},
 	},
 	it: {
 		rangeSelected: {
-			one: '{{count}} elemento selezionato',
-			other: '{{count}} elementi selezionati',
+			one: 'Hai appena selezionato {{count}} elemento',
+			other: 'Hai appena selezionato {{count}} elementi',
 		},
 		rangeUnselected: {
-			one: '{{count}} elemento deselezionato',
-			other: '{{count}} elementi deselezionati',
+			one: 'Hai appena deselezionato {{count}} elemento',
+			other: 'Hai appena deselezionato {{count}} elementi',
 		},
 	},
 	nl: {
 		rangeSelected: {
-			one: '{{count}} item geselecteerd',
-			other: '{{count}} items geselecteerd',
+			one: 'Je hebt zojuist {{count}} item geselecteerd',
+			other: 'Je hebt zojuist {{count}} items geselecteerd',
 		},
 		rangeUnselected: {
-			one: '{{count}} item gedeselecteerd',
-			other: '{{count}} items gedeselecteerd',
+			one: 'Je hebt zojuist {{count}} item gedeselecteerd',
+			other: 'Je hebt zojuist {{count}} items gedeselecteerd',
 		},
 	},
 	pt: {
 		rangeSelected: {
-			one: '{{count}} item selecionado',
-			other: '{{count}} itens selecionados',
+			one: 'Acabou de selecionar {{count}} item',
+			other: 'Acabou de selecionar {{count}} itens',
 		},
 		rangeUnselected: {
-			one: '{{count}} item desselecionado',
-			other: '{{count}} itens desselecionados',
+			one: 'Acabou de desselecionar {{count}} item',
+			other: 'Acabou de desselecionar {{count}} itens',
 		},
 	},
 	pl: {
 		rangeSelected: {
-			one: '{{count}} element zaznaczony',
-			few: '{{count}} elementy zaznaczone',
-			many: '{{count}} elementów zaznaczonych',
-			other: '{{count}} elementu zaznaczonego',
+			one: 'Właśnie zaznaczono {{count}} element',
+			few: 'Właśnie zaznaczono {{count}} elementy',
+			many: 'Właśnie zaznaczono {{count}} elementów',
+			other: 'Właśnie zaznaczono {{count}} elementu',
 		},
 		rangeUnselected: {
-			one: '{{count}} element odznaczony',
-			few: '{{count}} elementy odznaczone',
-			many: '{{count}} elementów odznaczonych',
-			other: '{{count}} elementu odznaczonego',
+			one: 'Właśnie odznaczono {{count}} element',
+			few: 'Właśnie odznaczono {{count}} elementy',
+			many: 'Właśnie odznaczono {{count}} elementów',
+			other: 'Właśnie odznaczono {{count}} elementu',
 		},
 	},
 };

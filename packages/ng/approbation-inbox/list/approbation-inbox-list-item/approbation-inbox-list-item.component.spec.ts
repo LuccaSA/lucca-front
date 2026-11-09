@@ -74,7 +74,7 @@ describe(ApprobationInboxItemComponent.name, () => {
 
 		// Assert
 		expect(itemStates()).toEqual([false, true, true, true, true, false]);
-		expect(announce).toHaveBeenCalledExactlyOnceWith('4 items selected', 'polite');
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just selected 3 items', 'polite');
 	});
 
 	it('should select a range upwards', () => {

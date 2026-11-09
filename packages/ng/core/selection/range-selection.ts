@@ -42,7 +42,7 @@ export class ɵRangeSelection<T extends ɵRangeSelectableItem> {
 
 	/**
 	 * To call on the `click` event of the item checkbox: the checkbox state has already been toggled by the browser at this point.
-	 * Returns the number of items in the range (unselectable ones excluded), or 0 when the click only toggled the clicked item.
+	 * Returns the number of items whose state changed, the clicked one included, or 0 when the click only toggled the clicked item.
 	 */
 	handleClick(item: T, event: MouseEvent): number {
 		const target = event.target;
@@ -75,22 +75,21 @@ export class ɵRangeSelection<T extends ɵRangeSelectableItem> {
 		const selected = target.checked;
 		const [start, end] = anchorIndex < itemIndex ? [anchorIndex, itemIndex] : [itemIndex, anchorIndex];
 		// The clicked item is updated by its own checkbox
-		const rangeItems = items.slice(start, end + 1).filter((rangeItem) => rangeItem === item || rangeItem.isRangeSelectable());
-		let changed = false;
+		const rangeItems = items.slice(start, end + 1).filter((rangeItem) => rangeItem !== item && rangeItem.isRangeSelectable());
+		// The clicked item always changes, other items only when they are not already in its new state
+		let count = 1;
 
 		rangeItems.forEach((rangeItem) => {
 			const rangeItemSelected = rangeItem.getRangeSelected();
-			if (rangeItem !== item && rangeItemSelected() !== selected) {
+			if (rangeItemSelected() !== selected) {
 				rangeItemSelected.set(selected);
-				changed = true;
+				count++;
 			}
 		});
 
-		if (!changed) {
+		if (count === 1) {
 			return 0;
 		}
-
-		const count = rangeItems.length;
 
 		const label = getIntlPluralLabel(this.#pluralRules, selected ? this.#intl.rangeSelected : this.#intl.rangeUnselected, count);
 		void this.#liveAnnouncer.announce(this.#intlParams.transform(label, { count }), 'polite');

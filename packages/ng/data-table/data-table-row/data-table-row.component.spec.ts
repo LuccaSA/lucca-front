@@ -79,7 +79,7 @@ describe(DataTableRowComponent.name, () => {
 
 		// Assert
 		expect(bodyStates()).toEqual([true, true, true, false, false, false]);
-		expect(announce).toHaveBeenCalledExactlyOnceWith('3 items selected', 'polite');
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just selected 2 items', 'polite');
 	});
 
 	it('should only toggle the clicked row without Shift', () => {
@@ -104,7 +104,7 @@ describe(DataTableRowComponent.name, () => {
 
 		// Assert
 		expect(bodyStates()).toEqual([true, false, false, false, false, false]);
-		expect(announce).toHaveBeenCalledExactlyOnceWith('3 items unselected', 'polite');
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just unselected 2 items', 'polite');
 	});
 
 	it('should leave disabled rows unchanged', () => {

@@ -91,9 +91,9 @@ describe('ɵRangeSelection', () => {
 		const count = clickItem(rangeSelection, items[3], true);
 
 		// Assert
-		expect(count).toBe(3);
+		expect(count).toBe(2);
 		expect(items.map((item) => item.selected())).toEqual([false, true, true, true, false]);
-		expect(announce).toHaveBeenCalledExactlyOnceWith('3 items selected', 'polite');
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just selected 2 items', 'polite');
 	});
 
 	it('should select a range upwards', () => {
@@ -117,9 +117,9 @@ describe('ɵRangeSelection', () => {
 		const count = clickItem(rangeSelection, items[2], true);
 
 		// Assert
-		expect(count).toBe(3);
+		expect(count).toBe(2);
 		expect(items.map((item) => item.selected())).toEqual([false, false, false, true, true]);
-		expect(announce).toHaveBeenCalledExactlyOnceWith('3 items unselected', 'polite');
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just unselected 2 items', 'polite');
 	});
 
 	it('should leave unselectable items unchanged', () => {
@@ -131,8 +131,22 @@ describe('ɵRangeSelection', () => {
 		const count = clickItem(rangeSelection, items[4], true);
 
 		// Assert
-		expect(count).toBe(4);
+		expect(count).toBe(3);
 		expect(items.map((item) => item.selected())).toEqual([true, true, false, true, true]);
+	});
+
+	it('should only count the items whose state changed', () => {
+		// Arrange
+		items[2].selected.set(true);
+		clickItem(rangeSelection, items[0]);
+
+		// Act
+		const count = clickItem(rangeSelection, items[4], true);
+
+		// Assert
+		expect(count).toBe(3);
+		expect(items.map((item) => item.selected())).toEqual([true, true, true, true, true]);
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just selected 3 items', 'polite');
 	});
 
 	it('should use the last clicked item as the new anchor', () => {
@@ -214,7 +228,7 @@ describe('ɵRangeSelection', () => {
 		const count = rangeSelection.handleClick(items[2], event);
 
 		// Assert
-		expect(count).toBe(3);
+		expect(count).toBe(2);
 		expect(items.map((item) => item.selected())).toEqual([true, true, true, false, false]);
 	});
 

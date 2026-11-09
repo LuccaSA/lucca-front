@@ -59,3 +59,23 @@ Status: proposed · PR #5437
 - A ⇧ Shift + click on the group checkbox extending the range to the end of the group: `ɵRangeSelectableItem` would have to support composite items.
 
 **Revisit if** — Usage feedback shows that the anchor staying on an item after a group click confuses users.
+
+## 2026-11-09 — The announcement counts the items that changed
+
+Status: accepted · PR #5437
+
+**Context** — After a range selection, screen readers announce a number of items. Counting the whole range was misleading: items already in the clicked state were counted as if they had just changed.
+
+**Decision** — The announcement only counts the items whose state changed, the clicked one included, and describes an action, not a state:
+
+- “You just selected 3 items” / “You just unselected 3 items”, in the active voice;
+- no announcement when only the clicked item changed: its checkbox already announces it.
+
+**Consequences** — The anchor is usually already in the clicked state, so the number is often one less than the visible range. The total of selected items is not announced.
+
+**Rejected options** — Two other numbers to announce:
+
+- The size of the range: it counts items that did not change.
+- The total of selected items: the components only know the displayed page, so the total would be wrong when the consumer keeps the selection of other pages.
+
+**Revisit if** — A component needs to announce its total selection: it would do it itself, with its own wording (for instance “requests” in `lu-approbation-inbox-list`).
