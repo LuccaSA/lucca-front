@@ -41,6 +41,14 @@ export class ɵRangeSelection<T extends ɵRangeSelectableItem> {
 	}
 
 	/**
+	 * To call when a checkbox acting on several items at once is toggled ("select all", group…):
+	 * the next Shift + click only toggles the clicked item, instead of starting a range from an outdated anchor.
+	 */
+	resetAnchor(): void {
+		this.#anchor = null;
+	}
+
+	/**
 	 * To call on the `click` event of the item checkbox: the checkbox state has already been toggled by the browser at this point.
 	 * Returns the number of items whose state changed, the clicked one included, or 0 when the click only toggled the clicked item.
 	 */

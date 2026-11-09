@@ -15,6 +15,7 @@
 			<lu-checkbox-input
 				class="indexTable-head-row-cell-checkbox"
 				[(ngModel)]="selected"
+				(ngModelChange)="onSelectedChange()"
 				[disabled]="disabled()"
 				[mixed]="mixed()"
 				[luRangeSelection]="bodyRef && !headRef ? tableRef.rangeSelection : null"

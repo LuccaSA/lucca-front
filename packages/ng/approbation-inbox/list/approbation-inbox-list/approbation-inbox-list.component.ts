@@ -93,6 +93,7 @@ export class ApprobationInboxListComponent {
 	}
 
 	toggleSelectAll(): void {
+		this.rangeSelection.resetAnchor();
 		const newValue = this.selectAllState() !== true;
 		this.items().forEach((item) => item.checked.set(newValue));
 	}

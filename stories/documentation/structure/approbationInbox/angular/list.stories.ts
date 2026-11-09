@@ -40,7 +40,7 @@ export default {
 		},
 		selectable: {
 			description:
-				'Active la sélection multiple. <kbd>⇧ Shift</kbd> + clic (ou <kbd>⇧ Shift</kbd> + <kbd>Espace</kbd>) sur une checkbox coche ou décoche toutes les demandes depuis la dernière checkbox cliquée, hors groupes repliés. La plage est limitée à la page affichée : avec <code>@for (…; track $index)</code>, les éléments sont réutilisés d’une page à l’autre et la dernière checkbox cliquée reste mémorisée, préférer un <code>track</code> sur un identifiant.',
+				'Active la sélection multiple. <kbd>⇧ Shift</kbd> + clic (ou <kbd>⇧ Shift</kbd> + <kbd>Espace</kbd>) sur une checkbox coche ou décoche toutes les demandes depuis la dernière checkbox de demande cliquée (« Tout sélectionner » et les cases de groupe annulent ce point de départ), hors groupes repliés. La plage est limitée à la page affichée : avec <code>@for (…; track $index)</code>, les éléments sont réutilisés d’une page à l’autre et la dernière checkbox cliquée reste mémorisée, préférer un <code>track</code> sur un identifiant.',
 			table: { category: 'inputs' },
 		},
 		selected: {

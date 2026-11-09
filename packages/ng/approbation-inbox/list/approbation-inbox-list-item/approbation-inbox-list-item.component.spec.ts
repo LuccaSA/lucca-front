@@ -108,4 +108,30 @@ describe(ApprobationInboxItemComponent.name, () => {
 		expect(itemStates()).toEqual([true, true, true, true, false, false]);
 		expect(announce).not.toHaveBeenCalled();
 	});
+
+	it('should not start a range from an item clicked before a group checkbox', () => {
+		// Act
+		click(2);
+		click(5);
+		click(8, true);
+
+		// Assert
+		expect(itemStates()).toEqual([true, false, false, true, true, true]);
+		expect(announce).not.toHaveBeenCalled();
+	});
+
+	it('should not start a range from an item clicked before the "select all" checkbox', async () => {
+		// Act
+		click(2);
+		click(0);
+		await fixture.whenStable();
+		click(0);
+		// ngModel writes the new state of the item checkboxes asynchronously
+		await fixture.whenStable();
+		click(4, true);
+
+		// Assert
+		expect(itemStates()).toEqual([false, false, true, false, false, false]);
+		expect(announce).not.toHaveBeenCalled();
+	});
 });

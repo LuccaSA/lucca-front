@@ -159,6 +159,20 @@ describe('ɵRangeSelection', () => {
 		expect(items.map((item) => item.selected())).toEqual([true, true, true, true, false]);
 	});
 
+	it('should not select a range after the anchor has been reset', () => {
+		// Arrange
+		clickItem(rangeSelection, items[0]);
+		rangeSelection.resetAnchor();
+
+		// Act
+		const count = clickItem(rangeSelection, items[3], true);
+
+		// Assert
+		expect(count).toBe(0);
+		expect(items.map((item) => item.selected())).toEqual([true, false, false, true, false]);
+		expect(announce).not.toHaveBeenCalled();
+	});
+
 	it('should sort items in document order whatever the order of the list', () => {
 		// Arrange
 		const shuffled = [items[3], items[0], items[4], items[1], items[2]];

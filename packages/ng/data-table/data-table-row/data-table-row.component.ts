@@ -52,6 +52,13 @@ export class DataTableRowComponent implements ɵRangeSelectableItem {
 	readonly mixed = input(false, { transform: luBooleanAttribute });
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 
+	/** The "select all" checkbox of the head row acts on every row: the next Shift + click starts without anchor */
+	protected onSelectedChange(): void {
+		if (this.headRef) {
+			this.tableRef?.rangeSelection.resetAnchor();
+		}
+	}
+
 	getRangeSelected() {
 		return this.selected;
 	}

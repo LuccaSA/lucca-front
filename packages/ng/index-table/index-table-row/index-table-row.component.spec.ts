@@ -151,6 +151,17 @@ describe(IndexTableRowComponent.name, () => {
 		expect(host.all()).toBe(true);
 		expect(bodyStates()).toEqual([false, true, false, false, false, false]);
 	});
+
+	it('should not start a range from a row clicked before the "select all" checkbox', () => {
+		// Act
+		click(1);
+		click(0);
+		click(3, true);
+
+		// Assert
+		expect(bodyStates()).toEqual([true, false, true, false, false, false]);
+		expect(announce).not.toHaveBeenCalled();
+	});
 });
 
 @Component({

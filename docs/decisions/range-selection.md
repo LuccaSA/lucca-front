@@ -39,26 +39,26 @@ Status: accepted · PR #5437
 
 **Revisit if** — The components handle pagination themselves.
 
-## 2026-11-09 — Groups are not part of the range
+## 2026-11-09 — Groups and “Select all” reset the anchor
 
-Status: proposed · PR #5437
+Status: accepted · PR #5437
 
-**Context** — The three components group their items: grouped `tbody` in `lu-data-table` and `lu-index-table`, `lu-approbation-inbox-list-group` in `lu-approbation-inbox-list`. Only the latter has a checkbox per group, which checks or unchecks the whole group.
+**Context** — Some checkboxes act on several items at once: “Select all” in the three components, and the group checkboxes of `lu-approbation-inbox-list`. Groups of rows (`tbody`) in `lu-data-table` and `lu-index-table` have no checkbox.
 
-**Decision** — Only items (rows, list items) take part in the range selection:
+**Decision** — Only items (rows, list items) take part in the range selection, and a checkbox acting on several items resets the anchor:
 
 - the range covers a flat list in document order and goes across groups; collapsed groups are skipped;
-- in `lu-approbation-inbox-list`, the group checkbox does not carry the directive: it is neither an anchor nor an end of the range, and clicking it does not move the anchor;
-- the state of the group checkboxes and of “Select all” is computed from the items.
+- “Select all” and group checkboxes are neither an anchor nor an end of the range: clicking them resets the anchor, so the next ⇧ Shift + click is a plain click;
+- the state of these checkboxes follows the items.
 
-**Consequences** — After a click on a group checkbox, a ⇧ Shift + click starts from the last clicked *item*, which can be in another group. A ⇧ Shift + click on a group checkbox behaves like a plain click.
+**Consequences** — A range never starts from a click made before a global action, which could select many items the user did not expect. After such an action, one plain click is needed before the next range.
 
-**Rejected options** — Two ways to make the group checkbox part of the range:
+**Rejected options** — Two other behaviors after a click on a group or “Select all” checkbox:
 
-- The group checkbox as an anchor: it stands for several items, so the first or the last one would have to be picked depending on the direction of the range.
-- A ⇧ Shift + click on the group checkbox extending the range to the end of the group: `ɵRangeSelectableItem` would have to support composite items.
+- Keep the anchor on the last clicked item: the range then starts from a click the user has moved on from, possibly far away or in another group.
+- The group checkbox as an anchor (checking group A, then ⇧ Shift + clicking C2 selects from A to C2): more powerful, but the first or last item has to be picked depending on the direction, and “Select all” has no position.
 
-**Revisit if** — Usage feedback shows that the anchor staying on an item after a group click confuses users.
+**Revisit if** — Usage feedback asks for a range starting from a group.
 
 ## 2026-11-09 — The announcement counts the items that changed
 

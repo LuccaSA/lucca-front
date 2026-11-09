@@ -48,6 +48,7 @@ export class ApprobationInboxGroupComponent {
 	}
 
 	onGroupChange(value: boolean) {
+		this.list.rangeSelection.resetAnchor();
 		this.items().forEach((item) => item.checked.set(value));
 	}
 }
