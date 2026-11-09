@@ -49,7 +49,7 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -59,6 +59,12 @@ import { FooterComponent } from '@lucca-front/ng/footer';
 ~ `dialog` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 21.4.1
+
+##### Fixed
+
+- Empty footer content no longer takes space.
 
 #### 21.3.0
 

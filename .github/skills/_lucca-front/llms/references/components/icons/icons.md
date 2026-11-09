@@ -45,7 +45,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -53,6 +53,42 @@ import { IconComponent } from '@lucca-front/ng/icon';
 ~ `AI` : boolean → boolean, boolean | `${boolean}` | ''
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.6
+
+##### Added
+
+- `arrowDelete`, `arrowEnter`, `arrowLineRight`, `arrowPageDown`, `arrowPageUp`, `arrowShift`, `keyboardCommand` and `keyboardOption` icons.
+
+#### 22.0.4
+
+##### Fixed
+
+- Component styles now also apply to the `pr-icon` selector.
+
+#### 22.0.1
+
+##### Added
+
+- `chartTree` and `capCrownFilled` icons.
+
+#### 22.0.0
+
+##### Removed
+
+- `primary` and `secondary` values of the `color` input — use `product` instead.
+
+#### 21.4.1
+
+##### Added
+
+- `arrowUndo`, `arrowRedo` and `signShieldCancel` icons.
+
+#### 21.3.1
+
+##### Added
+
+- `window`, `windowAside`, `windowCornerBottom`, `windowCornerTop` and `windowAsideLarge` icons.
 
 #### 21.2.2
 

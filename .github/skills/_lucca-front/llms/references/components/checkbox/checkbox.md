@@ -27,7 +27,7 @@ import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -35,6 +35,24 @@ import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 ~ `mixed` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.6
+
+##### Fixed
+
+- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
+
+#### 21.4.1
+
+##### Fixed
+
+- Filter pill button now reflects programmatic changes of the control's value and disabled state, such as a form reset.
+
+#### 21.3.0
+
+##### Changed
+
+- In filter pill mode, the checkbox is now rendered as a toggle button exposing `aria-pressed`, instead of a labelled checkbox.
 
 #### 21.1.0
 

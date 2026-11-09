@@ -117,7 +117,7 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.1.0
 
@@ -147,6 +147,38 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 + token `LU_FILTER_BAR_INSTANCE` : FilterBarComponent
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- `grouping` input to group the pill with the ones sharing the same value in the optional filters list of the filter bar.
+- `iconOnly` input to display the pill as an icon-only button, its label being shown as a tooltip.
+- `backdrop` input to catch the click that closes the pill popover instead of letting it through to the page.
+- `@lucca-front/ng/filter-pills/core` entrypoint exposing the tokens and directives used by the inputs hosted in a pill (`FILTER_PILL_INPUT_COMPONENT`, `FILTER_PILL_HOST_COMPONENT`, `luFilterPillDisplayer`, `luFilterPillLabel`…), still re-exported by `@lucca-front/ng/filter-pills`.
+
+##### Changed
+
+- `FILTER_PILL_HOST_COMPONENT` token is now typed with the `FilterPillHostComponent` interface instead of `FilterPillComponent`.
+
+#### 22.0.6
+
+##### Fixed
+
+- A disabled filter pill no longer shows its clear button.
+
+#### 22.0.0
+
+##### Changed
+
+- Pill popover no longer opens with a blocking backdrop: the rest of the page stays interactive while it is open.
+
+#### 21.4.1
+
+##### Fixed
+
+- Non-breaking space before the colon is now applied to every French locale (`fr-BE`, `fr-CA`…), not only `fr`.
+- Margins of a clearable pill.
 
 #### 21.3.0
 

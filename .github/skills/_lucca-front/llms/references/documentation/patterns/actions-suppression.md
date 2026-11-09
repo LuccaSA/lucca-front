@@ -30,7 +30,7 @@ Une variante spécifique du bouton doit être utilisée pour toute action aux co
 
 Ce bouton critique est identifiable par sa couleur `Critical`.
 
-Dans certains contexte, il est préférable de mettre en retrait l’action de suppression. Pour cela il existe un `mod-delete` permettant de n’avoir l’aspect critique seulement au survol du composant. Ce mode est utilisable sur les boutons`Outlined`et `Ghost`en palette`Neutral`.
+Dans certains contexte, il est préférable de mettre en retrait l’action de suppression. Pour cela il existe un `mod-critical` permettant de n’avoir l’aspect critique seulement au survol du composant. Ce mode est utilisable sur les boutons`Outlined`et `Ghost`en palette`Neutral`.
 
 Dans un Footer, l’action de destruction doit être systématiquement isolée à l'extrême gauche. Cette rupture d'alignement sert de garde-fou visuel et physique (Fitts's Law) pour prévenir toute perte de donnée accidentelle.
 

@@ -93,7 +93,7 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.1.0
 
@@ -113,6 +113,33 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
   ~ `luUserPopoverDisabled` : défaut ∅ → false
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- The loading skeleton widths are drawn from the `LU_RANDOM` injection token (`@lucca-front/ng/core`).
+
+##### Changed
+
+- The user name and the work location links now open in a new tab, as external links (`luLink`).
+
+##### Removed
+
+- `USER_POPOVER_IS_ACTIVATED` token, deprecated since 21.1.2.
+
+#### 21.3.0
+
+##### Changed
+
+- Loading state of the popover now uses `lu-skeleton-user-popover`.
+
+#### 21.1.2
+
+##### Deprecated
+
+- `USER_POPOVER_IS_ACTIVATED` token — the popover is now always activated.
+- `provideLuUserPopover()` — no longer needed, the popover relies on `luPopover2`.
 
 #### 21.1.0
 

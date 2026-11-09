@@ -1,3 +1,10 @@
+### 22.1.2
+
+#### Deprecated
+
+- `hearth` value of the `illustration` input — use `earth` instead.
+- `moodShoked` value of the `illustration` input — use `moodShocked` instead.
+
 ### 22.0.0
 
 #### Removed

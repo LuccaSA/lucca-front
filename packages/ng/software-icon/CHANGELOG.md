@@ -1,3 +1,9 @@
+### 22.1.2
+
+#### Added
+
+- `integrations` and `business-trips` values for the `icon` input.
+
 ### 22.0.0
 
 #### Fixed

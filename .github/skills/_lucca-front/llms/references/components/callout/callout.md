@@ -105,7 +105,7 @@ import { CalloutActionsComponent, CalloutFeedbackItemDescriptionDirective, Callo
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -118,6 +118,17 @@ import { CalloutActionsComponent, CalloutFeedbackItemDescriptionDirective, Callo
   ~ `AI` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+##### Fixed
+
+- `mod-S` — actions placed in the description no longer add extra vertical spacing.
+- Outlined and ghost buttons in the actions now show a focus ring when focused with the keyboard.
 
 #### 21.3.0
 

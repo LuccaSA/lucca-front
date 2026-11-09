@@ -56,7 +56,7 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.1.0
 
@@ -71,6 +71,12 @@ import { LoadingComponent } from '@lucca-front/ng/loading';
 ~ `hiddenLabel` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- Default translated label ("Loading…") rendered when no content is projected, visually hidden unless `hiddenLabel` is set to `false`. It can be changed through the new `intl` input or the `LU_LOADING_TRANSLATIONS` token.
 
 #### 21.3.0
 

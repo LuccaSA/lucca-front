@@ -171,7 +171,7 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.5
 
@@ -206,6 +206,24 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
   ~ `displayFileName` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.6
+
+##### Fixed
+
+- `type` and `size` of a `FileEntry` now accept `null`, and `lu-file-entry` no longer displays them when they are `null`.
+
+#### 22.0.0
+
+##### Added
+
+- `lu-file-entry-wrapper` component to group several `lu-file-entry` in a single display block.
+- `structure` input on `lu-multi-file-upload`, to display the structured variant already available on `lu-single-file-upload`.
+
+##### Changed
+
+- `size` input of the file upload components and of `lu-file-entry` now accepts `L` instead of `S`: the compact variant became the default (unset) size and `L` is the large one. `FILE_UPLOAD_SIZE` and `FILE_ENTRY_SIZE` are updated accordingly.
+- `lu-single-file-upload` no longer renders the uploaded file itself; display a `lu-file-entry` next to it instead. Its former `entry`, `state`, `previewUrl`, `inlineMessageError` and `displayFileName` inputs and `deleteFile` output remain exposed but no longer affect rendering.
 
 #### 21.3.1
 

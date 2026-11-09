@@ -59,7 +59,7 @@ import { FormLabelComponent } from '@lucca-front/ng/form-label';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.5
 
@@ -73,6 +73,12 @@ import { FormLabelComponent } from '@lucca-front/ng/form-label';
 ~ `counterMax` : transform numberAttribute → luNumberAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Changed
+
+- `counterAlt` translation is now a plain string instead of plural forms: overriding it through `intl` no longer requires a `LuPluralForms` object.
 
 #### 21.3.1
 

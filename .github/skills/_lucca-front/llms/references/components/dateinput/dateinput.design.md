@@ -42,6 +42,19 @@ De la même manière que la sélection en mois, il peut être utile de sélectio
 
 Une option permet d’afficher un bouton sous forme de lien permettant à l’utilisateur de sélectionner la date du jour. Ce bouton reste visible même si l’utilisateur navigue de mois en mois dans le calendrier.
 
+### Affichage et format de date
+
+Par défaut, la date est affichée au format absolu (ex. « 10/09/2026 »).
+
+Pour améliorer la lisibilité et rendre l'interface plus naturelle, le composant propose une option `humanized` pour afficher la date au **format textuel ou relatif**.
+
+Lorsque cette option est activée, l'affichage s'adapte au contexte temporel :
+
+* En mode `day` les dates proches de la date du jour indiquent « Aujourd'hui », « Hier » et « Demain ».
+* En mode `month` les mois s'affichent au format textuel abrégé (ex. « sept. 2026 »).
+
+Lorsque l'utilisateur clic sur le champ, il bascule automatiquement vers le format absolu afin de faciliter la modification.
+
 ## Comportement
 
 ### Sélection d’une date loin dans le passé
@@ -52,21 +65,21 @@ Il est parfois demandé de sélectionner des dates lointaines dans le passé, pa
 
 ### Placeholder obligatoire
 
-Le placeholder est obligatoire. Il doit porter la mention “JJ/MM/AAAA”. Le format du placeholder s’adapte en fonction de la locale de l’utilisateur.
+Le Placeholder est obligatoire. Il doit porter la mention “JJ/MM/AAAA”. Le format du Placeholder s’adapte en fonction de la locale de l’utilisateur.
 
-- **Do** : La placeholder est obligatoire, il indique le format attendu.
-- **Don't** : Ne masquons jamais le placeholder dans un Date picker.
+- **Do** : La Placeholder est obligatoire, il indique le format attendu.
+- **Don't** : Ne masquons jamais le Placeholder dans un DatePicker.
 
 ### Sélection d’une période
 
-Si un besoin de sélection de période existe, le composant Date range picker doit être utilisé. Il ne faut pas utiliser deux DatePicker pour sélectionner une date de début et une date de fin.
+Si un besoin de sélection de période existe, le composant DateRangePicker doit être utilisé. Il ne faut pas utiliser deux DatePicker pour sélectionner une date de début et une date de fin.
 
-- **Do** : Utilisons le Date range picker pour sélectionner une période.
-- **Don't** : Ne cumulons pas deux Date picker pour sélectionner une date de début et une date de fin.
+- **Do** : Utilisons le DateRangePicker pour sélectionner une période.
+- **Don't** : Ne cumulons pas deux DatePicker pour sélectionner une date de début et une date de fin.
 
 ### Affichage des jours des mois précédents et suivants
 
-Le composant Calendar propose une option pour afficher ou non les jours des mois précédents et suivants. Dans le cas du Date picker, l'**affichage de ces jours est obligatoire**.
+Le composant Calendar propose une option pour afficher ou non les jours des mois précédents et suivants. Dans le cas du DatePicker, l'**affichage de ces jours est obligatoire**.
 
 - **Do** : L'affichage des jours des mois précédents et suivants est obligatoire. Cela permet d'y accéder plus rapidement.
 - **Don't** : Ne masquons pas les jours des mois précédents et suivants.

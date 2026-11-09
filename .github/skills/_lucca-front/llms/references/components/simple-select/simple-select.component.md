@@ -6,6 +6,8 @@
 
 Component selector : `lu-simple-select`
 
+Sur les petits écrans, la sélection peut s'ouvrir en bottom sheet plutôt qu'en popover. Ce comportement est désactivé par défaut. Pour l'activer, ajoutez ce *provider* global dans votre fichier `app.config.ts` :
+
 ### Appeler une API
 
 Pour un format de retour V3 ou V4 sans customisation de l'affichage (l'entité doit avoir une propriété `name`), il suffit de donner l'API à appeler :

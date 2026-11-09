@@ -1,6 +1,6 @@
 ---
-title: Skip links
-description: Skip links (Accès rapides) permet d'accéder aux contenus principaux plus rapidement lors d'une navigation clavier.
+title: SkipLinks
+description: SkipLinks (Accès rapides) permet d'accéder aux contenus principaux plus rapidement lors d'une navigation clavier.
 ---
 
 # Design et Angular
@@ -21,7 +21,7 @@ Le composant reste masqué visuellement tant qu'il n'a pas le focus : il n'appar
 
 </callout>
 
-[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-skiplinks-basic--basic)
+[Basic](https://lucca-front.lucca.io/master/storybook/iframe.html?id=documentation-navigation-skiplinks-angular-basic--basic)
 
 ## Mise en place
 
@@ -58,7 +58,7 @@ L'input `luSkipLinkLabel` est obligatoire : il renseigne l'intitulé du lien aff
 
 # Changelog
 
-## Skip links changelog
+## SkipLinks changelog
 
 ### 21.3.0
 

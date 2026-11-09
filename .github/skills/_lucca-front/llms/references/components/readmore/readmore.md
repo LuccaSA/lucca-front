@@ -1,5 +1,17 @@
 # readmore
 
+**Sommaire**
+
+- Import
+- API Reference
+  - ReadMoreComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
 ## Import
 
 ```typescript
@@ -38,7 +50,7 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.5
 
@@ -52,6 +64,16 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 ~ `textFlow` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Added
+
+- `plainText` input to display the line breaks of the content instead of collapsing them.
+
+##### Fixed
+
+- Read less label is now correctly quoted when built from a signal.
 
 #### 21.3.0
 

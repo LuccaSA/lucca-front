@@ -39,7 +39,7 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -51,6 +51,12 @@ import { GaugeComponent } from '@lucca-front/ng/gauge';
 ~ `size` : transform numberAttribute → luNumberAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
 
 #### 20.3.1
 

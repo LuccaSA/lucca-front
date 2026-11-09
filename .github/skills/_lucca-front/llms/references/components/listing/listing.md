@@ -72,7 +72,7 @@ import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing'
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.1.1
 
@@ -94,6 +94,18 @@ import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing'
   ~ `reversed` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.1
+
+##### Added
+
+- `S` value for the `size` input (`.listing.mod-S`) for smaller text, numbers and icons. Nested listings follow the size of their parent.
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
 
 #### 21.2.0
 

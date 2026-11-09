@@ -10,6 +10,7 @@
   - Modules dépréciés
 - Related files
 - Changelog
+  - 22.1.2
   - 22.0.0
   - Notes de release (ZeroHeight)
 
@@ -111,7 +112,16 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.1.2
+
+`LuPopoverPanelComponent` :
+  ~ `LuPopoverPanelComponent` devient déprécié (since 21.0.0; use PopoverDirective.)
+`LuPopoverTargetDirective` :
+  ~ `LuPopoverTargetDirective` devient déprécié (since 21.0.0; use PopoverDirective.)
+`LuPopoverTriggerDirective` :
+  ~ `LuPopoverTriggerDirective` devient déprécié (since 21.0.0; use PopoverDirective.)
 
 ### 22.0.0
 
@@ -158,6 +168,43 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
   - (output) `luPopoverOnClose`
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- `luPopoverBackdrop` input to render a transparent backdrop catching the outside click, for menu-like popovers.
+
+##### Fixed
+
+- `Escape` only closes the topmost overlay: a select panel or a dialog opened from a popover no longer closes the popover too.
+- Clicking inside an overlay opened from the popover content (select panel, dialog, date picker…) no longer closes the popover.
+
+#### 22.0.6
+
+##### Fixed
+
+- On touch devices, a popover with a `hover` trigger no longer reopens right after being closed from inside it.
+- Clicking the trigger of an open popover inside a shadow root now closes it instead of reopening it.
+
+#### 22.0.0
+
+##### Added
+
+- `luPopoverIgnoredOutsidePointerTargets` input to declare elements whose pointer events must not close the popover.
+- Options object on `openPopover({ disableCloseButtonFocus, disableInitialTriggerFocus })`.
+
+##### Changed
+
+- Popover no longer creates a blocking backdrop: it closes on outside pointer events and the rest of the page stays interactive.
+
+##### Deprecated
+
+- Positional signature `openPopover(withBackdrop, disableCloseButtonFocus, disableInitialTriggerFocus)` — `withBackdrop` is now ignored, use the options object instead.
+
+##### Fixed
+
+- Size recalculation when the popover content changes.
 
 #### 21.3.1
 

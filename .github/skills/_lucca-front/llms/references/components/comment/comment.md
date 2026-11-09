@@ -69,7 +69,7 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -82,6 +82,16 @@ import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@
   ~ `plainText` : transform booleanAttribute → luBooleanAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Added
+
+- `plainText` input to preserve the line breaks of the comment content.
+
+##### Fixed
+
+- Separator before the date is no longer displayed when the author name is empty.
 
 #### 21.3.0
 

@@ -31,7 +31,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.0.0
 
@@ -40,6 +40,12 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ~ `maxValue` : transform ∅ → numberAttribute
 
 ### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
 
 #### 21.3.0
 

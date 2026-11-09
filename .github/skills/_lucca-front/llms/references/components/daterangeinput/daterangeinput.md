@@ -70,7 +70,7 @@ import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.1.0
 
@@ -93,6 +93,30 @@ import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 ~ (model) `calendarMode` : CalendarMode → CalendarMode | null
 
 ### Notes de release (ZeroHeight)
+
+#### 22.1.1
+
+##### Fixed
+
+- An empty required field no longer briefly shows as invalid when a date is picked in the calendar: it is marked as touched only once the focus leaves both the inputs and the calendar.
+- The end date can be chosen with the Space key again, instead of both bounds receiving the same date.
+
+#### 22.1.0
+
+##### Added
+
+- Ranges with only a start or an end date are now supported: picking a date while the end field is focused fills the end bound, and such a range no longer makes the control invalid. As a filter pill, a partial range reads "from …" or "until …".
+
+##### Changed
+
+- `calendarMode` is no longer nullable: it defaults to `mode` and follows it when `mode` changes.
+
+#### 22.0.0
+
+##### Fixed
+
+- Calendar now opens on the end bound when the range has no start.
+- Calendar overlay is now exposed as a labelled dialog (`aria-haspopup="dialog"`, `aria-expanded` and `aria-controls` on the triggers).
 
 #### 21.3.0
 
