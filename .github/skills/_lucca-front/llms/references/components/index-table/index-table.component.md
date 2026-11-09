@@ -42,6 +42,11 @@
 
 Component selector : `lu-index-table`
 
+```ts
+import { IndexTableActionComponent, IndexTableActionFileComponent, IndexTableBodyComponent, IndexTableComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent,
+} from '@lucca-front/ng/index-table';
+```
+
 Le comportement *responsive* du composant n’est pas encore pris en charge dans sa version Angular.
 
 ### Lien vers un nouvelle page

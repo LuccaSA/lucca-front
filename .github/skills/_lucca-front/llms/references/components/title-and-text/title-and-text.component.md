@@ -6,6 +6,12 @@ Mots-clés : titres, texte, heading
 
 Il est possible de conserver ces spacings temporairement via un flag suivant :
 
+```css
+@use '@lucca-front/scss/src/commons/config' with (
+  $deprecatedSpacings: true,
+);
+```
+
 ### Accessibilité 
 
 * Pour faciliter le travail de construction de plans de documents de nos pages, la sémantique des titres et leurs styles graphiques peuvent être dissociés avec ces classes utilitaires : `.pr-u-h1, .pr-u-h2…`.

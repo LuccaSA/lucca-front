@@ -6,4 +6,8 @@ Component selector : `lu-dialog`
 
 La Fancy dialog s'active via un mode spécifique de `luDialogConfig` appliqué sur le déclencheur :
 
+```ts
+ [luDialogConfig]="{mode: 'fancy'}
+```
+
 Consultez la documentation complète sur la page Dialog.

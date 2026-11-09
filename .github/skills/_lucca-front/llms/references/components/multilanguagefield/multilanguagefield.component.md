@@ -1,5 +1,12 @@
 # multilanguagefield — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Paramétrage des langues
+  - Validateurs
+  - Field
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-fields-multilanguagefield-angular--docs)
 
 ## Angular
@@ -9,6 +16,27 @@ Component selector : `lu-multilanguage-input`
 ### Paramétrage des langues
 
 Pour qu'une locale apparaisse dans le panneau du composant, elles doivent être initialisées à vide dans le `ngModel`. Exemple : 
+
+```ts
+example: [
+	{
+		cultureCode: 'invariant',
+		value: '',
+	},
+	{
+		cultureCode: 'fr-FR',
+		value: '',
+	},
+	{
+		cultureCode: 'en-EN',
+		value: '',
+	},
+	{
+		cultureCode: 'de-DE',
+		value: '',
+	},
+]
+```
 
 ### Validateurs
 
@@ -23,6 +51,13 @@ Ils sont exportés depuis `@lucca-front/ng/forms`.
 
 Le composant manipule une valeur de type `MultilanguageTranslation[]` :
 
+```ts
+type MultilanguageTranslation = {
+  cultureCode: string;
+  value: string;
+};
+```
+
 Les validateurs retournent des clés d’erreur standard Angular sur le `FormControl`, que vous pouvez ensuite afficher dans le `lu-form-field` parent ou dans votre template.
 
 #### Valideur `allLanguagesRequired`
@@ -31,6 +66,11 @@ Ce valideur vérifie que **toutes** les lignes de traduction contiennent une val
 
 - **Succès**: `null`
 - **Erreur**: `{ missingLang: true }`
+
+```ts
+allLanguagesRequired(control) =>
+  areAllLanguagesFilled(control.value) ? null : { missingLang: true };
+```
 
 À utiliser quand chaque langue de votre modèle est obligatoire.
 
@@ -41,7 +81,49 @@ Ce valideur vérifie que la traduction `invariant` est renseignée.
 - **Succès**: `null`
 - **Erreur**: `{ missingInvariant: true }`
 
+```ts
+invariantRequired(control) =>
+  isInvariantFilled(control.value) ? null : { missingInvariant: true };
+```
+
 À utiliser quand seule la valeur principale (invariante) est obligatoire.
+
+#### Exemple (Reactive Forms)
+
+```ts
+import { FormControl } from '@angular/forms';
+import { MultiLanguageInputValidators, MultilanguageTranslation } from '@lucca-front/ng/forms';
+
+translationsControl = new FormControl<MultilanguageTranslation[]>(
+  [
+    { cultureCode: 'invariant', value: '' },
+    { cultureCode: 'fr-FR', value: '' },
+    { cultureCode: 'en-US', value: '' },
+  ],
+  {
+    validators: [
+      MultiLanguageInputValidators.invariantRequired,
+      // MultiLanguageInputValidators.allLanguagesRequired,
+    ],
+  },
+);
+```
+
+```html
+<lu-form-field label="Libellé" [errorInlineMessage]="errorMessage">
+  <lu-multilanguage-input [formControl]="translationsControl" />
+</lu-form-field>
+```
+
+```ts
+get errorMessage(): string {
+  const errors = this.translationsControl.errors;
+  if (!errors) return '';
+  if (errors['missingInvariant']) return 'La valeur principale est obligatoire.';
+  if (errors['missingLang']) return 'Toutes les traductions sont obligatoires.';
+  return '';
+}
+```
 
 #### Erreurs inline dans le popover
 

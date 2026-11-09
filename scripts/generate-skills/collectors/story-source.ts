@@ -102,6 +102,7 @@ export function readStorySourceFromGit(
 				framework: story.framework,
 				importPath: story.importPath,
 				imports: extracted.imports,
+				templateSymbols: extracted.templateSymbols,
 				templates,
 			});
 		} catch {
@@ -473,6 +474,25 @@ interface StoryExtraction {
 	imports: string[];
 	templates: string[];
 	descriptions: { name: string; description: string }[];
+	templateSymbols: string[];
+}
+
+/** App-level modules a story lists in `imports: [...]`, never part of a consumer component's imports. */
+const APP_LEVEL_SYMBOLS = new Set(['BrowserAnimationsModule', 'NoopAnimationsModule', 'BrowserModule', 'HttpClientModule']);
+
+/**
+ * Collects the symbols a story lists in its `imports: [...]` arrays (`moduleMetadata` or
+ * `@Component`): these are what its template actually compiles against. Everything else the story
+ * file imports is plumbing — argTypes constants, `provideRouter` in a decorator.
+ */
+export function collectTemplateSymbols(content: string): string[] {
+	const symbols = new Set<string>();
+	for (const match of content.matchAll(/\bimports\s*:\s*\[([^\]]*)\]/g)) {
+		for (const name of match[1].matchAll(/[A-Za-z_$][\w$]*/g)) {
+			if (!APP_LEVEL_SYMBOLS.has(name[0])) symbols.add(name[0]);
+		}
+	}
+	return [...symbols];
 }
 
 /**
@@ -494,9 +514,12 @@ function extractStoryEssentials(content: string): StoryExtraction | null {
 	// 3. argType descriptions
 	const descriptions = extractArgTypeDescriptions(content);
 
+	// 4. Symbols the template compiles against
+	const templateSymbols = collectTemplateSymbols(content);
+
 	if (imports.length === 0 && templates.length === 0 && descriptions.length === 0) return null;
 
-	return { imports, templates, descriptions };
+	return { imports, templates, descriptions, templateSymbols };
 }
 
 /** A helper call wrapping the template, e.g. `cleanupTemplate(` in `template: cleanupTemplate(`…`)`. */

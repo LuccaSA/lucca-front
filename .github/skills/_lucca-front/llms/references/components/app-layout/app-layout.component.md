@@ -26,9 +26,29 @@ Si seulement une section de la page doit scroller, il est possible d'utiliser pl
 
 Si App Layout importe des webComponents (comme Lucca Banner), il est nécessaire d'autoriser leur utilisation :
 
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+```
+
 ### Ancres et scroll
 
-Angular repose actuellement sur `window.scrollTo()` pour accéder au contenu cible d'une ancre. Le scroll d'App layout n'étant pas positionné sur le `body`, il est nécessaire de surcharger ce comportement pour retrouver le fonctionnement natif.
+Angular repose actuellement sur `window.scrollTo()` pour accéder au contenu cible d'une ancre. Le scroll d'App layout n'étant pas positionné sur le `body`, il est nécessaire de surcharger ce comportement pour retrouver le fonctionnement natif. 
+
+```ts
+readonly componentElement = viewChild(myComponent, { read: ElementRef });
+readonly componentNativeElement = computed(
+  () => this.componentElement()?.nativeElement,
+);
+
+scrollToComponent(): void {
+  this.componentNativeElement().scrollIntoView();
+}
+```
 
 ### Basic
 

@@ -21,7 +21,15 @@ Component selector : `luLink`
 
 On privilégiera l'utilisation du routing Angular pour la navigation **interne** à l'application. Dans ce cas, la route est à passer directement via `luLink`.
 
+```html
+<a luLink="./#example">…</a>
+```
+
 Dans le cas d'une navigation **externe** à l'application, l'URL est à renseigner via la propriété `href`.
+
+```html
+<a luLink href="https://www.lucca.fr">…</a>
+```
 
 Dans les deux cas, l'ouverture du lien peut se faire dans la même page ou dans une nouvelle page. Dans le second cas, on utilisera la propriété `external`.
 

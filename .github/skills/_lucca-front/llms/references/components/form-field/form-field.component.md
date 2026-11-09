@@ -44,3 +44,11 @@ import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 ## HTML/CSS
 
 Classe CSS : `.form-field`
+
+```html
+<div class="form-field">
+	<label class="formLabel" for="ID">Label</label>
+	<!-- Champs de formulaire --> 
+	<div class="inlineMessage" id="IDmessage">Helper text</div>
+</div>
+```

@@ -238,13 +238,16 @@ la dialog box a accès à tout ce que le composant expose au template, fonctions
 Dans le cas où vous souhaitez utiliser un formulaire au sein d’une [dialog box](https://prisme.lucca.io/94310e217/p/841b0b-dialogs), il vous suffit de placer la balise `form` avec un attribut `luForm` autour du contenu de votre dialog, que celle-ci soit template-driven ou non :
 
 ```js
-import { configureLuDialog } from '@lucca-front/ng/dialog';
+import { configureLuDialog, DialogCloseDirective, DialogComponent, DialogContentComponent, DialogDismissDirective, DialogFooterComponent, DialogHeaderComponent, DialogHeaderSubtitle, DialogOpenDirective } from '@lucca-front/ng/dialog';
 import { provideLuDialog } from '@lucca-front/ng/dialog';
 import {DialogHeaderAction} from '@lucca-front/ng/dialog';
 import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```ts

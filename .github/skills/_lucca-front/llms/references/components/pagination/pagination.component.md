@@ -40,6 +40,18 @@ La pagination en mode `default` est le mode par défaut si vous ne précisez rie
 
 Voici un exemple d'utilisation de `LuPagination` en mode `default` :
 
+```html
+<lu-pagination
+  [from]="1"
+  [to]="20"
+  [itemsCount]="27"
+  [isFirstPage]="true"
+  [isLastPage]="false"
+  (previousPage)="previouPage()"
+  (nextPage)="nextPage()"
+/>
+```
+
 ### Mod `compact`
 
 Le mode `compact` est une version plus simple de la pagination avec uniquement les boutons de navigation. Pour l'utiliser, vous devrez :
@@ -53,6 +65,16 @@ Le mode `compact` est une version plus simple de la pagination avec uniquement l
      * `nextPage` : émis lorsque l'utilisateur clique sur le bouton avec la flèche droite `>`, correspondant à "suivant"
 
 Voici un exemple d'utilisation de `LuPagination` en mode `compact` :
+
+```html
+<lu-pagination
+  mod="compact"
+  [isFirstPage]="true"
+  [isLastPage]="false"
+  (previousPage)="previousPage()"
+  (nextPage)="nextPage()"
+/>
+```
 
 ### Pagination
 

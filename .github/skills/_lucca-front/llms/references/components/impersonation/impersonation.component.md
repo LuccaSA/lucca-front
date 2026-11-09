@@ -1,5 +1,15 @@
 # impersonation — Code & Implementation
 
+**Sommaire**
+
+- Angular
+  - Imports et configuration
+  - Utilisation basique
+  - Personnalisation des traductions
+  - Basic
+- HTML/CSS
+  - Basic
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-impersonation-angular-basic--docs)
 
 ## Angular
@@ -10,9 +20,26 @@ Component selector : `lu-impersonation`
 
 Pour utiliser le composant `lu-impersonation`, vous devez l'importer dans votre composant :
 
+```tsx
+import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
+
+@Component({
+  selector: 'my-component',
+  imports: [ImpersonationComponent],
+  template: `...`
+})
+export class MyComponent {
+  // ...
+}
+```
+
 ### Utilisation basique
 
 Le composant affiche un bouton avec le profil utilisateur actuellement actif. En cliquant dessus, une liste déroulante s'ouvre pour sélectionner un autre utilisateur.
+
+```html
+<lu-impersonation [(selectedUser)]="selectedUser" />
+```
 
 #### Entrées (inputs)
 
@@ -33,6 +60,31 @@ Le composant affiche un bouton avec le profil utilisateur actuellement actif. En
 ### Personnalisation des traductions
 
 Si vous souhaitez personnaliser les traductions, vous pouvez fournir vos propres valeurs :
+
+```tsx
+import { ImpersonationComponent } from '@lucca-front/ng/impersonation';
+import { LU_IMPERSONATION_TRANSLATIONS } from '@lucca-front/ng/impersonation';
+
+@Component({
+  selector: 'app-user-menu',
+  imports: [ImpersonationComponent],
+  providers: [
+    {
+      provide: LU_IMPERSONATION_TRANSLATIONS,
+      useValue: {
+        switchProfile: 'Sélectionner un utilisateur',
+        a11yNavigationDescription: 'Naviguer avec les flèches',
+        clear: 'Réinitialiser',
+        // + autres traductions du sélecteur utilisateur
+      }
+    }
+  ],
+  template: `<lu-impersonation [(selectedUser)]="user" />`
+})
+export class MyComponent {
+  // ...
+}
+```
 
 ### Basic
 

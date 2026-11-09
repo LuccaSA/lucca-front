@@ -45,7 +45,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ### Navigation tabs
 
 ```js
-import { HorizontalNavigationComponent, HorizontalNavigationTabComponent } from '@lucca-front/ng/horizontal-navigation';
+import { HorizontalNavigationComponent, HorizontalNavigationTabComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 ```
 
 ```html
@@ -68,7 +68,26 @@ Classe CSS : `.horizontalNavigation`
 
 Ma navigation :
 
+```html
+<nav class="menu">
+  <ul class="menu-list">
+    <li class="menu-list-item">
+      <a class="menu-list-item-action">
+        Lorem ipsum
+        <span class="menu-list-item-action-placeholder" aria-hidden="true" data-content-after="Lorem ipsum"></span>
+      </a>
+    </li>
+  </ul>
+</nav>
+```
+
 Dans le composant :
+
+```html
+<h2 class="u-mask">
+	Lorem ipsum
+</h2>
+```
 
 ### Navigation basic
 

@@ -263,6 +263,51 @@ export function renderComponentPageMd(data: ComponentData, codeSections: DesignS
 }
 
 /**
+ * Adds to ZeroHeight's curated imports the story imports its template compiles against.
+ *
+ * ZeroHeight's imports are preferred because a story file also imports plumbing (argTypes
+ * constants, `provideRouter`). But a curated list can be incomplete: callout-disclosure's dropped
+ * `ButtonComponent` while the markup still uses `luButton`, box's dropped `FormsModule` under an
+ * `[(ngModel)]`. A story import is added back only for the names its `imports: [...]` lists.
+ */
+export function completeZhImports(zhImports: string[], storyImports: string[], templateSymbols: string[]): string[] {
+	const used = new Set(templateSymbols);
+	const imported = new Set(zhImports.flatMap(importedNames));
+	const result = [...zhImports];
+
+	for (const line of storyImports) {
+		const source = importSource(line);
+		if (!source) continue;
+		const missing = importedNames(line).filter((n) => used.has(n) && !imported.has(n));
+		if (!missing.length) continue;
+		missing.forEach((n) => imported.add(n));
+
+		// Same module already imported by ZeroHeight: extend that line rather than importing it twice.
+		const sameModule = result.findIndex((l) => importSource(l) === source && /\{[^}]*\}/.test(l));
+		if (sameModule >= 0) result[sameModule] = result[sameModule].replace(/\s*\}/, `, ${missing.join(', ')} }`);
+		else result.push(`import { ${missing.join(', ')} } from '${source}';`);
+	}
+
+	return result;
+}
+
+/** Module of a named import (`import { A } from 'x'` → `x`), or null for any other shape. */
+function importSource(line: string): string | null {
+	return /^import\s*\{[^}]*\}\s*from\s*['"]([^'"]+)['"];?$/.exec(line.trim())?.[1] ?? null;
+}
+
+/** Local names bound by a named import (`{ A, B as C }` → `A`, `C`). */
+function importedNames(line: string): string[] {
+	const braces = /\{([^}]*)\}/.exec(line);
+	if (!braces) return [];
+	// `B as C` binds `C`: keep the last word of each specifier.
+	return braces[1]
+		.split(',')
+		.map((s) => s.trim().split(/\s+/).at(-1) ?? '')
+		.filter(Boolean);
+}
+
+/**
  * Builds the rendering context of one story for the storyBody partial.
  */
 function buildStoryContext(slug: string, example: StoryExample, scssImport?: string): Record<string, unknown> {
@@ -275,7 +320,8 @@ function buildStoryContext(slug: string, example: StoryExample, scssImport?: str
 
 	// An HTML/CSS story's own imports are Storybook plumbing, never consumer imports — only
 	// ZeroHeight can supply TypeScript for one.
-	const tsLines = dedupe(example.zhTsImports?.length ? example.zhTsImports : isHtml ? [] : example.imports);
+	const storyImports = isHtml ? [] : example.imports;
+	const tsLines = dedupe(example.zhTsImports?.length ? completeZhImports(example.zhTsImports, storyImports, example.templateSymbols ?? []) : storyImports);
 
 	return {
 		slug,
@@ -554,19 +600,29 @@ function convertDoTables(md: string): string {
 	return result.join('\n');
 }
 
+/** True when every non-blank line of a code block is an import (TS or Sass) or a comment. */
+export function isImportOnlyBlock(code: string): boolean {
+	return code
+		.split('\n')
+		.filter((l) => l.trim())
+		.every((l) => TS_IMPORT_LINE.test(l) || SCSS_IMPORT_LINE.test(l) || /^\s*(\/\/|\/\*|\*)/.test(l));
+}
+
 /**
  * Cleans code section content for embedding in the component page.
  * Strips the leading H2 heading (redundant with the framework heading) and trailing rules.
- * Removes code blocks (imports are noise — already in stories and API).
+ * Removes import-only code blocks (already in stories and API).
  */
-function cleanCodeSectionForExamples(content: string): string {
+export function cleanCodeSectionForExamples(content: string): string {
 	let result = content;
 	// Remove leading H2 heading (e.g., "## Button Angular")
 	result = result.replace(/^##\s+.*\n+/, '');
 	// Remove trailing ---
 	result = result.replace(/\n---\s*$/, '');
-	// Remove markdown code blocks (```...```) — imports are already in stories/API
-	result = result.replace(/```[\s\S]*?```/g, '');
+	// Remove import-only code blocks — imports are already in stories/API. Any other block is
+	// content the prose relies on: stripping them all left "add this provider:" with nothing after
+	// the colon on simple-select and multi-select (SELECT_RESPONSIVE_DIALOG).
+	result = result.replace(/```[^\n]*\n([\s\S]*?)```/g, (block, code: string) => (isImportOnlyBlock(code) ? '' : block));
 	// Remove storybook iframe links that may remain outside tabs
 	result = result.replace(/\[[^\]]*\]\(https?:\/\/[^\s)]*storybook[^\s)]*\)/g, '');
 	// Clean up excessive blank lines left behind

@@ -1,5 +1,15 @@
 # fileupload — Code & Implementation
 
+**Sommaire**
+
+- Angular
+- Mise en place
+  - Utilisation
+  - Multiple File Upload
+  - Single File Upload
+  - Details
+  - Basic
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-file-fileupload-angular-basic--docs)
 
 ## Angular
@@ -26,6 +36,34 @@ Then, you'll just need to manage the upload of these files via LuccaFiles for mo
 
 Once the files are sent, the display management changes depending on the approach, single or multi.
 
+### Multiple File Upload
+
+```html
+
+<lu-form-field label="Label">
+  <lu-multi-file-upload [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+</lu-form-field>
+<div class="fileEntryDisplayWrapper">
+  @for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
+  <lu-file-entry [entry]="fileUpload | luFileEntry" [state]="fileUpload.state"
+                 [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+  }
+</div>
+```
+
+### Single File Upload
+
+```html
+
+<lu-form-field label="Label">
+  @let fileUpload = fileUploadFeature.fileUploads()[0];
+  <lu-single-file-upload [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
+                         [entry]="fileUpload | luFileEntry" [state]="fileUpload?.state"
+                         [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail"
+                         (deleteFile)="deleteFile(fileUpload)" />
+</lu-form-field>
+```
+
 ### Details
 
 In both cases, `fileUploadFeature` is simply the SignalStore provided by `@lucca/cdk` for interactions with LuccaFiles,
@@ -41,8 +79,13 @@ Component selector : `lu-single-file-upload`
 Component selector : `lu-multi-file-upload`
 
 ```js
-import { SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { SingleFileUploadComponent, FileEntryComponent, FileEntryWrapperComponent } from '@lucca-front/ng/file-upload';
 import { MultiFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { TextInputComponent } from '@lucca-front/ng/forms';
+import { LuInputDirective } from '@lucca-front/ng/input';
+import { TagComponent } from '@lucca-front/ng/tag';
 ```
 
 ```html

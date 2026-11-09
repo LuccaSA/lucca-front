@@ -22,6 +22,7 @@ Component selector : `lu-segmented-control`
 
 ```js
 import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmentedControlTabs';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ```
 
 ```html
@@ -46,6 +47,8 @@ import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } fro
 
 ```js
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
+import { FormsModule } from '@angular/forms';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 ```
 
 ```html

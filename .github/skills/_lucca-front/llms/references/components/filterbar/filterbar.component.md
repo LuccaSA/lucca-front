@@ -31,6 +31,15 @@ Deux directives structurelles permettent de projeter du contenu aux extrémités
 | --- | --- |
 | **`*`**`luFilterPillAddonAfter` | Placé **après** les pills, aligné à droite. Exemple : un bouton d'export. |
 
+```html
+<lu-filter-bar>
+	<lu-segmented-control *luFilterPillAddonBefore />
+	<lu-filter-pill />
+	<button *luFilterPillAddonAfter />
+</lu-filter-bar>
+
+```
+
 ### Bar segmented control tabs
 
 ```js

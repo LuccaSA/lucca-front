@@ -30,6 +30,15 @@ Popover2 est fait pour être simple à utiliser, il suffit de l'importer dans vo
 
 Pour utiliser `Popover2` dans un template, il suffit d'appliquer la directive `[luPopover2]` en renseignant en input une référence à un `ng-template`, exemple:
 
+```angular2html
+
+<button luButton [luPopover2]="popoverTpl"></button>
+<ng-template #popoverTpl>
+  Je suis le contenu du popover !
+  <button luButton>Et je suis un bouton accessible au clavier !</button>
+</ng-template>
+```
+
 ### Paramètres et position
 
 Seule la référence au `ng-template` est obligatoire, mais la directive propose des paramètres pour divers usages:
@@ -46,7 +55,35 @@ Les positions custom doivent être déclarées dans le `component.ts` sous forme
 
 component.ts:
 
+```typescript
+import { ConnectionPositionPair } from "@angular/cdk/overlay";
+
+export class ExampleComponent {
+  protected positions: ConnectionPositionPair[] = [
+    // En dessous, aligné à gauche
+    new ConnectionPositionPair(
+      { originX: "start", originY: "bottom" },
+      { overlayX: "start", overlayY: "top" }
+    ),
+    // Au dessus, aligné à gauche
+    new ConnectionPositionPair(
+      { originX: "start", originY: "top" },
+      { overlayX: "start", overlayY: "bottom" }
+    )
+  ]
+}
+```
+
 component.html:
+
+```angular2html
+
+<button luButton [luPopover2]="popoverTpl" [customPositions]="positions"></button>
+<ng-template #popoverTpl>
+  Je suis le contenu du popover !
+  <button luButton>Et je suis un bouton accessible au clavier !</button>
+</ng-template>
+```
 
 ### Overlays popover
 

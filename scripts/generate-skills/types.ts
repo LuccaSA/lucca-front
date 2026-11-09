@@ -307,6 +307,8 @@ export interface StoryExample {
 	importPath: string;
 	/** Non-storybook JS import lines from the story source file (fallback). */
 	imports: string[];
+	/** Symbols the story lists in its `imports: [...]` arrays — what its template compiles against. */
+	templateSymbols?: string[];
 	/** HTML template strings. */
 	templates: string[];
 	/**

@@ -48,6 +48,32 @@ Il est également possible, via l'input `getCellInfo`, de mettre des classes ou 
 
 La signature de cette méthode est `(day: Date, mode: CalendarMode) => CellStatus`, voici un exemple:
 
+```ts
+(date: Date, mode: CalendarMode) => {
+  // Si on est en vue jour et que nous sommes le 10 du mois en cours, la case est marquée sélectionnée
+  if (mode === 'day' && date.getDate() === 10 && date.getMonth() === new Date().getMonth()) {
+    return {
+      selected: true,
+    };
+  }
+  // Si on est en vue jour et que nous sommes le 17 du mois en cours, la case est désactivée
+  if (mode === 'day' && date.getDate() === 17 && date.getMonth() === new Date().getMonth()) {
+    return {
+      disabled: true,
+    };
+  }
+  // Si on est en vue année et que l'année est 2023, on marque comme sélectionné, on ajoute un label (affiché en tooltip) et on ajoute une palette mint
+  if (mode === 'year' && date.getFullYear() === 2023) {
+    return {
+      selected: true,
+      label: 'I am green',
+      classes: ['palette-mint'],
+    };
+  }
+  return { classes: [] };
+}
+```
+
 Enfin, il est possible de spécifier des `ranges` via l'input du même nom. Chaque range (de type `DateRange`) sera alors affiché dans le calendrier, au niveau spécifié par sa variable `scope`, ou, à défaut, en vue `day` uniquement.
 
 ### Input

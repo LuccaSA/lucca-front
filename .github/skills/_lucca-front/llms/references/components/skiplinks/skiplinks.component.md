@@ -1,5 +1,13 @@
 # skiplinks — Code & Implementation
 
+**Sommaire**
+
+- Angular
+- Mise en place
+  - Sections cibles intégrées
+  - Ajouter un accès rapide `v21.3`
+  - Links basic
+
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-skiplinks-angular-basic--docs)
 
 ## Angular
@@ -13,6 +21,15 @@ Le composant reste masqué visuellement tant qu'il n'a pas le focus : il n'appar
 ## Mise en place
 
 Le composant se déclare une seule fois, dans `app.component.html`, **avant** le menu principal et le menu secondaire. Il doit être le premier élément focusable de la page :
+
+```html
+<lu-skip-links />
+
+<lu-app-layout>
+  <!-- banner, navside, contenu… -->
+</lu-app-layout>
+
+```
 
 ### Sections cibles intégrées
 
@@ -29,6 +46,10 @@ Les trois liens intégrés s'appuient sur les identifiants suivants :
 La directive `luSkipLinkTarget` se pose sur l'élément à atteindre : le lien correspondant est alors ajouté automatiquement au composant SkipLinks. L'identifiant utilisé pour l'ancre est généré automatiquement si aucune valeur n'est passée à la directive.
 
 L'input `luSkipLinkLabel` est obligatoire : il renseigne l'intitulé du lien affiché dans SkipLinks.
+
+```html
+<div luSkipLinkTarget luSkipLinkLabel="Aller au tableau des collaborateurs">…</div> 
+```
 
 ### Links basic
 

@@ -52,6 +52,7 @@ import { LOCALE_ID } from '@angular/core';
 
 ```js
 import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
+import { LuUserPictureModule } from '@lucca-front/ng/user';
 ```
 
 ```html
@@ -80,6 +81,7 @@ import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment
 
 ```js
 import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@lucca-front/ng/comment';
+import { LuUserPictureModule } from '@lucca-front/ng/user';
 ```
 
 ```html

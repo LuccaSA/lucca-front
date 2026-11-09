@@ -109,8 +109,10 @@ import { IconComponent } from '@lucca-front/ng/icon';
 Component selector : `lu-callout`
 
 ```js
-import { CalloutComponent } from "@lucca-front/ng/callout";
+import { CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from "@lucca-front/ng/callout";
 import { CalloutActionsComponent } from '@lucca-front/ng/callout'; /* [v20.3] Si <lu-callout-action> est utilisé */
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { IconComponent } from '@lucca-front/ng/icon';
 ```
 
 ```html

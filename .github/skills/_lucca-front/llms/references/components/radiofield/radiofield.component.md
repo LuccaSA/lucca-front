@@ -27,6 +27,17 @@ Au sein de votre template, l'utilisation de l'input radio se fait via deux compo
 
 Exemple:
 
+```angular2html
+
+<lu-radio-group-input required [(ngModel)]="example">
+  <lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
+  <lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
+  <lu-radio [value]="3" inlineMessage="Option text" disabled>
+    Option C
+  </lu-radio>
+</lu-radio-group-input>
+```
+
 Comme tous les `lu-***-input`, il est recommandé de les utiliser dans un `lu-form-field` même si vous n'avez pas de label à afficher, afin d'assurer une bonne accessibilité (le label est obligatoire mais vous pouvez le rendre caché pour que seules les technologies d'assistance puissent le voir).
 
 #### lu-radio

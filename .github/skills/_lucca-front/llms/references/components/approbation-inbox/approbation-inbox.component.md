@@ -41,6 +41,21 @@
 
 Inbox de traitement associe deux composants  : une liste d'éléments à approuver (`lu-approbation-inbox-list`) et une vue détaillée de l'élément sélectionné (`lu-approbation-inbox-detail`).
 
+```html
+<lu-app-layout>
+  <lu-main-layout responsive="wideM" bubblesStartEnd>
+    <lu-approbation-inbox-list mainLayoutSidebar [detailsComponent]="detailRef">
+      <lu-approbation-inbox-list-item>
+        <a href="#" lu-approbation-inbox-list-action approbationInboxListItemTitle>Title</a>
+      </lu-approbation-inbox-list-item>
+    </lu-approbation-inbox-list>
+    <lu-approbation-inbox-detail #detailRef>
+    	<!-- contenu du détail -->
+    </lu-approbation-inbox-detail>
+  </lu-main-layout>
+</lu-app-layout>
+```
+
 ### Comportement responsive
 
 Chaque lien d'élément de liste (`a[lu-approbation-inbox-list-action]`, s'adapte tout seul selon le breakpoint `M` :
