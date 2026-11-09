@@ -1,0 +1,177 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Default / favorite</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="favorite">
+						<button type="button" class="favorite-button button" aria-pressed="false" luTooltip="Add to favorites" luTooltipOnlyForDisplay>
+							<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+					<span class="favorite">
+						<button
+							type="button"
+							class="favorite-button button"
+							aria-pressed="true"
+							luTooltip="Remove from favorites"
+							luTooltipOnlyForDisplay
+						>
+							<span aria-hidden="true" class="lucca-icon icon-starFilled"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-favorite />
+					<lu-favorite favorite />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size S</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="favorite mod-S">
+						<button type="button" class="favorite-button button" aria-pressed="false" luTooltip="Add to favorites" luTooltipOnlyForDisplay>
+							<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+					<span class="favorite mod-S">
+						<button
+							type="button"
+							class="favorite-button button"
+							aria-pressed="true"
+							luTooltip="Remove from favorites"
+							luTooltipOnlyForDisplay
+						>
+							<span aria-hidden="true" class="lucca-icon icon-starFilled"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-favorite size="S" />
+					<lu-favorite favorite size="S" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Size XS</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="favorite mod-XS">
+						<button type="button" class="favorite-button button" aria-pressed="false" luTooltip="Add to favorites" luTooltipOnlyForDisplay>
+							<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+					<span class="favorite mod-XS">
+						<button
+							type="button"
+							class="favorite-button button"
+							aria-pressed="true"
+							luTooltip="Remove from favorites"
+							luTooltipOnlyForDisplay
+						>
+							<span aria-hidden="true" class="lucca-icon icon-starFilled"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-favorite size="XS" />
+					<lu-favorite favorite size="XS" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="favorite">
+						<button
+							type="button"
+							class="favorite-button button"
+							aria-pressed="false"
+							aria-disabled="true"
+							luTooltip="Add to favorites"
+							luTooltipOnlyForDisplay
+						>
+							<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+					<span class="favorite">
+						<button
+							type="button"
+							class="favorite-button button"
+							aria-pressed="true"
+							aria-disabled="true"
+							luTooltip="Remove from favorites"
+							luTooltipOnlyForDisplay
+						>
+							<span aria-hidden="true" class="lucca-icon icon-starFilled"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-favorite disabled />
+					<lu-favorite favorite disabled />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled, size XS</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span class="favorite mod-XS">
+						<button
+							type="button"
+							class="favorite-button button"
+							aria-pressed="false"
+							aria-disabled="true"
+							luTooltip="Add to favorites"
+							luTooltipOnlyForDisplay
+						>
+							<span aria-hidden="true" class="lucca-icon icon-star"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+					<span class="favorite mod-XS">
+						<button
+							type="button"
+							class="favorite-button button"
+							aria-pressed="true"
+							aria-disabled="true"
+							luTooltip="Remove from favorites"
+							luTooltipOnlyForDisplay
+						>
+							<span aria-hidden="true" class="lucca-icon icon-starFilled"></span><span class="pr-u-mask">Favorite</span>
+						</button>
+					</span>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-favorite size="XS" disabled />
+					<lu-favorite favorite size="XS" disabled />
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
