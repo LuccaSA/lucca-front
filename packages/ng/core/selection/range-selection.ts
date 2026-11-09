@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { inject, WritableSignal } from '@angular/core';
+import { inject, InjectionToken, WritableSignal } from '@angular/core';
 import { IntlParamsPipe } from '../translate/intl-params.pipe';
 import { getIntl } from '../translate/intl.model';
 import { getIntlPluralLabel } from '../translate/translation.model';
@@ -9,11 +9,12 @@ import { LU_RANGE_SELECTION_TRANSLATIONS } from './range-selection.translate';
 export interface ɵRangeSelectableItem {
 	/** Selection state of the item, written when the item is part of a range. */
 	getRangeSelected(): WritableSignal<boolean>;
-	/** Element of the item, used to sort items in document order. */
-	getRangeElement(): Element;
 	/** Whether the item can be changed by a range: false when disabled, hidden in a collapsed group… */
 	isRangeSelectable(): boolean;
 }
+
+/** Item owning a checkbox wired with `luRangeSelection`: each selectable item component provides itself with this token. */
+export const ɵRANGE_SELECTABLE_ITEM = new InjectionToken<ɵRangeSelectableItem>('ɵRANGE_SELECTABLE_ITEM');
 
 /**
  * Range selection on checkboxes (Shift + click, or Shift + Space): every item between the last clicked one (the anchor)
@@ -21,16 +22,31 @@ export interface ɵRangeSelectableItem {
  *
  * Must be created in an injection context.
  */
-export class ɵRangeSelection<T extends ɵRangeSelectableItem> {
+export class ɵRangeSelection {
 	readonly #liveAnnouncer = inject(LiveAnnouncer);
 	readonly #pluralRules = inject(LOCALE_PLURAL_RULES);
 	readonly #intl = getIntl(LU_RANGE_SELECTION_TRANSLATIONS);
 	readonly #intlParams = new IntlParamsPipe();
 
-	#anchor: T | null = null;
+	/** Registered items, with the element used to sort them in document order */
+	readonly #items = new Map<ɵRangeSelectableItem, Element>();
+	#anchor: ɵRangeSelectableItem | null = null;
 	#keyboardShiftKey = false;
 
-	constructor(private readonly items: () => readonly T[]) {}
+	/**
+	 * Adds an item to the range selection, `element` giving its position in the document.
+	 * Returns the function removing it.
+	 */
+	register(item: ɵRangeSelectableItem, element: Element): () => void {
+		this.#items.set(item, element);
+
+		return () => {
+			this.#items.delete(item);
+			if (this.#anchor === item) {
+				this.#anchor = null;
+			}
+		};
+	}
 
 	/**
 	 * To call on the `keydown` and `keyup` events of the item checkbox: Firefox drops the modifiers
@@ -52,7 +68,7 @@ export class ɵRangeSelection<T extends ɵRangeSelectableItem> {
 	 * To call on the `click` event of the item checkbox: the checkbox state has already been toggled by the browser at this point.
 	 * Returns the number of items whose state changed, the clicked one included, or 0 when the click only toggled the clicked item.
 	 */
-	handleClick(item: T, event: MouseEvent): number {
+	handleClick(item: ɵRangeSelectableItem, event: MouseEvent): number {
 		const target = event.target;
 		if (!(target instanceof HTMLInputElement) || target.type !== 'checkbox') {
 			return 0;
@@ -69,7 +85,8 @@ export class ɵRangeSelection<T extends ɵRangeSelectableItem> {
 			return 0;
 		}
 
-		const items = [...this.items()].sort((a, b) => (a.getRangeElement().compareDocumentPosition(b.getRangeElement()) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+		// Registration order can differ from the displayed order (sorted or inserted items)
+		const items = [...this.#items.entries()].sort(([, a], [, b]) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1)).map(([rangeItem]) => rangeItem);
 		const anchorIndex = items.indexOf(anchor);
 		const itemIndex = items.indexOf(item);
 

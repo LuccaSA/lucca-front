@@ -7,6 +7,7 @@ import { ɵRangeSelectableItem, ɵRangeSelection } from './range-selection';
 interface FakeItem extends ɵRangeSelectableItem {
 	selected: WritableSignal<boolean>;
 	selectable: WritableSignal<boolean>;
+	element: HTMLElement;
 	checkbox: HTMLInputElement;
 }
 
@@ -26,16 +27,16 @@ function createItems(count: number): FakeItem[] {
 		return {
 			selected,
 			selectable,
+			element,
 			checkbox,
 			getRangeSelected: () => selected,
-			getRangeElement: () => element,
 			isRangeSelectable: () => selectable(),
 		};
 	});
 }
 
 /** Simulates the browser behaviour: the checkbox is toggled before the click event is dispatched. */
-function clickItem(rangeSelection: ɵRangeSelection<FakeItem>, item: FakeItem, shiftKey = false): number {
+function clickItem(rangeSelection: ɵRangeSelection, item: FakeItem, shiftKey = false): number {
 	item.checkbox.checked = !item.checkbox.checked;
 	item.selected.set(item.checkbox.checked);
 
@@ -48,7 +49,13 @@ function clickItem(rangeSelection: ɵRangeSelection<FakeItem>, item: FakeItem, s
 describe('ɵRangeSelection', () => {
 	let announce: ReturnType<typeof vi.fn>;
 	let items: FakeItem[];
-	let rangeSelection: ɵRangeSelection<FakeItem>;
+	let rangeSelection: ɵRangeSelection;
+
+	function createRangeSelection(registered: readonly FakeItem[]): ɵRangeSelection {
+		const created = TestBed.runInInjectionContext(() => new ɵRangeSelection());
+		registered.forEach((item) => created.register(item, item.element));
+		return created;
+	}
 
 	beforeEach(() => {
 		document.body.innerHTML = '';
@@ -62,7 +69,7 @@ describe('ɵRangeSelection', () => {
 		});
 
 		items = createItems(5);
-		rangeSelection = TestBed.runInInjectionContext(() => new ɵRangeSelection(() => items));
+		rangeSelection = createRangeSelection(items);
 	});
 
 	it('should only toggle the clicked item without Shift', () => {
@@ -173,10 +180,9 @@ describe('ɵRangeSelection', () => {
 		expect(announce).not.toHaveBeenCalled();
 	});
 
-	it('should sort items in document order whatever the order of the list', () => {
+	it('should sort items in document order whatever their registration order', () => {
 		// Arrange
-		const shuffled = [items[3], items[0], items[4], items[1], items[2]];
-		rangeSelection = TestBed.runInInjectionContext(() => new ɵRangeSelection(() => shuffled));
+		rangeSelection = createRangeSelection([items[3], items[0], items[4], items[1], items[2]]);
 
 		// Act
 		clickItem(rangeSelection, items[1]);
@@ -186,12 +192,13 @@ describe('ɵRangeSelection', () => {
 		expect(items.map((item) => item.selected())).toEqual([false, true, true, true, false]);
 	});
 
-	it('should ignore the range when the anchor is no longer in the list', () => {
+	it('should ignore the range when the anchor has been unregistered', () => {
 		// Arrange
-		const [removed, ...others] = items;
-		rangeSelection = TestBed.runInInjectionContext(() => new ɵRangeSelection(() => (removed.selectable() ? items : others)));
-		clickItem(rangeSelection, removed);
-		removed.selectable.set(false);
+		rangeSelection = TestBed.runInInjectionContext(() => new ɵRangeSelection());
+		const unregisterFirst = rangeSelection.register(items[0], items[0].element);
+		items.slice(1).forEach((item) => rangeSelection.register(item, item.element));
+		clickItem(rangeSelection, items[0]);
+		unregisterFirst();
 
 		// Act
 		const count = clickItem(rangeSelection, items[3], true);
@@ -205,7 +212,7 @@ describe('ɵRangeSelection', () => {
 		// Arrange
 		clickItem(rangeSelection, items[0]);
 		const event = new MouseEvent('click', { shiftKey: true });
-		Object.defineProperty(event, 'target', { value: items[3].getRangeElement() });
+		Object.defineProperty(event, 'target', { value: items[3].element });
 
 		// Act
 		const count = rangeSelection.handleClick(items[3], event);

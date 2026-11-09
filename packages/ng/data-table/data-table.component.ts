@@ -66,9 +66,7 @@ export class DataTableComponent implements OnInit {
 
 	readonly stickyHeader = computed(() => this.header()?.sticky());
 
-	readonly rangeSelection = new ɵRangeSelection(() =>
-		this.rows().filter((row) => row.bodyRef !== null && row.headRef === null && row.elementRef.nativeElement.closest('table') === this.tableRef()?.nativeElement),
-	);
+	readonly rangeSelection = new ɵRangeSelection();
 
 	readonly stickyColsStart = input(0, { transform: luNumberAttribute });
 	readonly stickyColsEnd = input(0, { transform: luNumberAttribute });

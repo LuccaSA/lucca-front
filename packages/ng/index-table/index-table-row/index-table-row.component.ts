@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { luBooleanAttribute, luNumberAttribute, ɵRangeSelectableItem, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNumberAttribute, ɵRANGE_SELECTABLE_ITEM, ɵRangeSelectableItem, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LuTooltipAnchorRef } from '@lucca-front/ng/tooltip';
@@ -30,6 +30,10 @@ import { LU_INDEX_TABLE_ROW_INSTANCE } from './index-table-row.token';
 	providers: [
 		{
 			provide: LU_INDEX_TABLE_ROW_INSTANCE,
+			useExisting: forwardRef(() => IndexTableRowComponent),
+		},
+		{
+			provide: ɵRANGE_SELECTABLE_ITEM,
 			useExisting: forwardRef(() => IndexTableRowComponent),
 		},
 	],
@@ -65,10 +69,6 @@ export class IndexTableRowComponent implements LuTooltipAnchorRef, ɵRangeSelect
 
 	getRangeSelected() {
 		return this.selected;
-	}
-
-	getRangeElement(): Element {
-		return this.#elementRef.nativeElement;
 	}
 
 	isRangeSelectable(): boolean {

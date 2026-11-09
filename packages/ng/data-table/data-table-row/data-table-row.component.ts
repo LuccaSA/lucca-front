@@ -2,7 +2,7 @@ import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { intlInputOptions, luBooleanAttribute, ɵRangeSelectableItem, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, ɵRANGE_SELECTABLE_ITEM, ɵRangeSelectableItem, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -30,6 +30,10 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 	providers: [
 		{
 			provide: LU_DATA_TABLE_ROW_INSTANCE,
+			useExisting: forwardRef(() => DataTableRowComponent),
+		},
+		{
+			provide: ɵRANGE_SELECTABLE_ITEM,
 			useExisting: forwardRef(() => DataTableRowComponent),
 		},
 	],
@@ -61,10 +65,6 @@ export class DataTableRowComponent implements ɵRangeSelectableItem {
 
 	getRangeSelected() {
 		return this.selected;
-	}
-
-	getRangeElement(): Element {
-		return this.elementRef.nativeElement;
 	}
 
 	isRangeSelectable(): boolean {

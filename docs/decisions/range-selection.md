@@ -9,8 +9,8 @@ Status: accepted · PR #5437
 **Decision** — A single implementation in `@lucca-front/ng/core`, exported with the `ɵ` prefix (internal):
 
 - `ɵRangeSelection` holds the logic: remember the last clicked checkbox, compute the range, announce the number of items to screen readers.
-- The `luRangeSelection` directive wires the checkbox of an item to the range selection of its container.
-- Each selectable item implements `ɵRangeSelectableItem` (state, DOM element, selectable or not).
+- The `luRangeSelection` directive wires the checkbox of an item to the range selection of its container. It gets the item by injection, not through a template input.
+- Each selectable item implements `ɵRangeSelectableItem` (state, selectable or not) and provides itself to its checkbox.
 
 **Consequences** — The three components behave the same way, but other teams cannot rely on this code: the `ɵ` prefix guarantees no stability.
 
@@ -31,11 +31,14 @@ Status: accepted · PR #5437
 
 - disabled items and items in collapsed groups are skipped;
 - the range stops at rendered items, so at the displayed page;
-- items are sorted in document order, whatever their declaration order.
+- items are sorted in document order, whatever their registration order: it is the displayed order, whatever the sort, the insertions or the components wrapping the items.
 
 **Consequences** — With `@for (…; track $index)`, items are reused from one page to the next and the last clicked checkbox stays remembered: after a page change, a range can start from the row at the same position, which now shows another item. The stories recommend tracking by id.
 
-**Rejected options** — A range across pagination: it would require the consumer’s data model (ids, order, pages not loaded), which the components do not have.
+**Rejected options** — Two other ways to define the range:
+
+- A range across pagination: it would require the consumer’s data model (ids, order, pages not loaded), which the components do not have.
+- The order of Angular queries instead of the document order: it misses the items wrapped in a component of the consumer.
 
 **Revisit if** — The components handle pagination themselves.
 

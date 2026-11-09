@@ -6,6 +6,7 @@ import {
 	computed,
 	DestroyRef,
 	ElementRef,
+	forwardRef,
 	inject,
 	input,
 	model,
@@ -15,7 +16,7 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { intlInputOptions, IntlParamsPipe, ɵRangeSelectableItem, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, ɵRANGE_SELECTABLE_ITEM, ɵRangeSelectableItem, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { APPROBATION_INBOX_LIST_GROUP_INSTANCE } from '../approbation-inbox-list-group/token';
@@ -31,6 +32,12 @@ import { LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS } from './approbation-inbox
 		class: 'approbationInbox-list-content-items-item',
 		role: 'listitem',
 	},
+	providers: [
+		{
+			provide: ɵRANGE_SELECTABLE_ITEM,
+			useExisting: forwardRef(() => ApprobationInboxItemComponent),
+		},
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApprobationInboxItemComponent implements OnInit, ɵRangeSelectableItem {
@@ -39,7 +46,6 @@ export class ApprobationInboxItemComponent implements OnInit, ɵRangeSelectableI
 	protected readonly list = inject(ApprobationInboxListComponent, { optional: true });
 	private readonly group = inject(APPROBATION_INBOX_LIST_GROUP_INSTANCE, { optional: true });
 	private readonly destroyRef = inject(DestroyRef);
-	private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	readonly selectable = computed(() => this.list?.selectable() ?? false);
 	readonly center = input(false, { transform: booleanAttribute });
@@ -56,10 +62,6 @@ export class ApprobationInboxItemComponent implements OnInit, ɵRangeSelectableI
 
 	getRangeSelected() {
 		return this.checked;
-	}
-
-	getRangeElement(): Element {
-		return this.elementRef.nativeElement;
 	}
 
 	isRangeSelectable(): boolean {
