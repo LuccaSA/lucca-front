@@ -43,7 +43,7 @@ function getTemplate(args: ArrowBasicStory): string {
 		<lu-radio [value]="3">Option C</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
-<lu-box withArrow${neutral}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</lu-box>`;
+<lu-box withArrow${neutral}>Custom content</lu-box>`;
 	} else if (args.field === 'checkbox') {
 		return `<div class="form-field mod-withArrow">
 	<label class="formLabel" for="CB">Label</label>
@@ -53,7 +53,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	</span>
 	<div class="form-field-arrow${modNeutral}"></div>
 </div>
-<lu-box withArrow${neutral}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</lu-box>`;
+<lu-box withArrow${neutral}>Custom content</lu-box>`;
 	} else {
 		return `<div class="form-field mod-withArrow">
 	<label class="formLabel" for="ID">Label</label>
@@ -63,7 +63,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	</span>
 	<div class="form-field-arrow${modNeutral}"></div>
 </div>
-<lu-box withArrow${neutral}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</lu-box>`;
+<lu-box withArrow${neutral}>Custom content</lu-box>`;
 	}
 }
 
