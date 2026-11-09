@@ -18,10 +18,6 @@
 			transition: box-shadow var(--commons-animations-durations-fast);
 			z-index: 1;
 
-			@media (prefers-reduced-motion: reduce) {
-				transition-property: none;
-			}
-
 			&:hover {
 				box-shadow: inset 0 0 0 1px var(--components-boxDisclosure-hover-borderColor);
 			}
