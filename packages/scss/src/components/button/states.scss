@@ -75,8 +75,6 @@
 	--components-button-userSelect: none;
 
 	&::after {
-		@include icon.generate('sign_confirm');
-
 		color: var(--palettes-neutral-0);
 		// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 		font-size: calc(1.5 * var(--components-button-font-size));
@@ -85,6 +83,8 @@
 		inset: 0;
 		margin: auto;
 		position: absolute;
+
+		@include icon.generate('sign_confirm');
 	}
 
 	.numericBadge {

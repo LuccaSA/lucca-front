@@ -76,9 +76,9 @@
 			}
 
 			&::before {
-				@include icon.generate('sign_close');
-
 				font-size: var(--pr-t-font-body-S-lineHeight);
+
+				@include icon.generate('sign_close');
 			}
 		}
 	}

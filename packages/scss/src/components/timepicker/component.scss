@@ -182,13 +182,13 @@
 
 			&:has(.timePicker-fieldset-meridiem-ante-input:checked) {
 				&::after {
-					content: 'AM' / '';
+					@include a11y.content('AM');
 				}
 			}
 
 			&:has(.timePicker-fieldset-meridiem-post-input:checked) {
 				&::after {
-					content: 'PM' / '';
+					@include a11y.content('PM');
 				}
 			}
 		}

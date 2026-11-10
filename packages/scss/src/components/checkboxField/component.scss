@@ -64,7 +64,8 @@
 				text-transform: none;
 				white-space: nowrap;
 				overflow-wrap: normal;
-				content: '\e97d' / '';
+
+				@include a11y.content('\e97d');
 			}
 		}
 

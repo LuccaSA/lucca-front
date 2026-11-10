@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin success {
 	--components-inlineMessage-icon-color: var(--palettes-success-700);
 	--components-inlineMessage-gap: var(--pr-t-spacings-50);
@@ -6,7 +8,7 @@
 	.inlineMessage-statusIcon,
 	& > .lucca-icon:first-child {
 		&::before {
-			content: '\e9ed' / '';
+			@include a11y.content('\e9ed');
 		}
 	}
 }
@@ -19,7 +21,7 @@
 	.inlineMessage-statusIcon,
 	& > .lucca-icon:first-child {
 		&::before {
-			content: '\e992' / '';
+			@include a11y.content('\e992');
 		}
 	}
 }
@@ -33,7 +35,7 @@
 	.inlineMessage-statusIcon,
 	& > .lucca-icon:first-child {
 		&::before {
-			content: '\e92c' / '';
+			@include a11y.content('\e92c');
 		}
 	}
 }

@@ -6,7 +6,7 @@
 	~ .checkboxField-icon {
 		.checkboxField-icon-check {
 			&::before {
-				content: '\e975' / '';
+				@include a11y.content('\e975');
 			}
 		}
 	}

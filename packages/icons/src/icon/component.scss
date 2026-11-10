@@ -1,5 +1,6 @@
 @use '@lucca-front/icons/src/commons/config';
 @use '@lucca-front/icons/src/commons/core';
+@use '@lucca-front/icons/src/commons/utils/a11y';
 
 $defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
 
@@ -20,7 +21,7 @@ $defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
 	overflow-wrap: normal;
 
 	&::before {
-		content: var(--icon-content) / '';
+		@include a11y.content(var(--icon-content));
 	}
 
 	@at-root ($atRoot) {

@@ -1,0 +1,9 @@
+@use 'sass:list';
+
+@mixin content($value, $alt: '', $suffix: '') {
+	content: list.slash($value, $alt) #{$suffix};
+
+	@supports not (content: '' / '') {
+		content: $value #{$suffix};
+	}
+}

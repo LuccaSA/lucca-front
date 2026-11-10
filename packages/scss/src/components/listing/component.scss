@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	padding: 0;
@@ -53,7 +54,7 @@
 			margin-block-start: calc(var(--pr-t-spacings-25) / 2);
 
 			&::before {
-				content: counter(listing) / '';
+				@include a11y.content(counter(listing));
 			}
 		}
 

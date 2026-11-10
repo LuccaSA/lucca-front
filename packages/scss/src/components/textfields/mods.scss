@@ -170,8 +170,6 @@
 
 @mixin search {
 	&::after {
-		@include icon.generate('search_magnifying_glass');
-
 		color: var(--palettes-neutral-600);
 		position: absolute;
 		pointer-events: none;
@@ -179,6 +177,8 @@
 		font-size: var(--pr-t-font-body-M-lineHeight);
 		line-height: var(--pr-t-font-body-M-lineHeight);
 		inset-inline-end: var(--pr-t-spacings-100);
+
+		@include icon.generate('search_magnifying_glass');
 	}
 
 	.textfield-input {

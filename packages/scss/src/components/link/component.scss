@@ -42,7 +42,7 @@
 			transition-duration: var(--commons-animations-durations-fast);
 
 			&::before {
-				content: ' ' / '';
+				@include a11y.content(' ');
 			}
 		}
 	}

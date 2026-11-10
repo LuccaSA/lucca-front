@@ -1,5 +1,7 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin ellipsis {
 	&::after {
-		content: '…' / '';
+		@include a11y.content('…');
 	}
 }

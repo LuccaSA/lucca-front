@@ -1,3 +1,5 @@
+@forward '@lucca-front/icons/src/commons/utils/a11y' show content;
+
 @mixin mask($suffix: '') {
 	border: 0 #{$suffix};
 	clip-path: rect(1px 1px 1px 1px) #{$suffix};
