@@ -95,8 +95,13 @@ export default {
 		},
 		group: {
 			description:
-				'Regroupe des lignes de tableau en les rendant dépliables, avec un libellé affiché dans la ligne de groupe. Pour un texte simple, renseigner l’input <code>group</code> sur <code>tbody[luIndexTableBody]</code> [PortalContent]. Pour un contenu riche (mise en forme, badge…), projeter dans le <code>tbody</code> un élément portant la directive <code>luIndexTableBodyGroup</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
+				'Regroupe des lignes de tableau en les rendant dépliables, avec un libellé affiché dans la ligne de groupe. Pour un texte simple, renseigner l’input <code>group</code> sur <code>tbody[luIndexTableBody]</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, badge…), projeter dans le <code>tbody</code> un élément portant la directive <code>luIndexTableBodyGroup</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs (tbody[luIndexTableBody])', type: { summary: 'PortalContent | null' }, defaultValue: { summary: 'null' } },
+		},
+		richContent: {
+			if: { arg: 'group', truthy: true },
+			description: 'Remplace l’input <code>group</code> par un contenu riche projeté avec la directive <code>luIndexTableBodyGroup</code>.',
+			table: { category: 'story' },
 		},
 		expanded: {
 			name: '↳ expanded',
@@ -197,6 +202,7 @@ export default {
 			mixed,
 			disabled,
 			group,
+			richContent,
 			allowAction,
 			allowTextSelection,
 			groupButtonAlt,
@@ -228,7 +234,7 @@ export default {
 		const sortWithEllipsisAttr = sortWithEllipsis ? ` sortWithEllipsis` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
 		const groupExpandedAttr = expanded && group ? ` [expanded]="true"` : ``;
-		const groupButtonAltAttr = group ? ` groupButtonAlt="${groupButtonAlt}"` : ``;
+		const groupButtonAltAttr = group ? ` groupButtonAlt="${groupButtonAlt}"${richContent ? `` : ` group="Group label"`}` : ``;
 		const layoutFixedAttr = layoutFixed ? ` layoutFixed` : ``;
 		const emptyAttr = empty ? ` empty` : ``;
 		const footerTpl = footer
@@ -291,10 +297,11 @@ export default {
 			<td luIndexTableCell${allowTextSelectionAttr}>${allowActionTpl}</td>
 			<td luIndexTableCell>Content Content Content</td>
 		</tr>`;
-		const groupTpl = group
-			? `
+		const groupTpl =
+			group && richContent
+				? `
 		<ng-container luIndexTableBodyGroup>Group label <lu-numeric-badge [value]="8" /></ng-container>`
-			: ``;
+				: ``;
 
 		return {
 			props: { sortChange },
@@ -332,6 +339,7 @@ export const Basic: StoryObj = {
 		stack: 1,
 
 		group: false,
+		richContent: false,
 		groupButtonAlt: 'Afficher X lignes supplémentaires',
 		expanded: false,
 
