@@ -301,17 +301,23 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/formLabel/vars.scss#L10.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/sortableList/vars.scss#L7.
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/tag/vars.scss#L9.
-		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/textField/vars.scss#L17.
 		objectPattern: [
 			/--components-button-(font-size|line-height)(?![\w-])/,
 			/--components-(callout|calloutFeedbackList|chip|comment-text|divider|formLabel|sortableList-description|tag)-(fontSize|lineHeight)(?![\w-])/,
-			/--component-textField-(fontSize|lineHeight)(?![\w-])/,
 		],
 		versionDeprecated: '20.1.0',
 		actions: `
 			* \`*-fontSize\` => \`*-font\`
 			* \`*-lineHeight\` => \`*-font\`
 		`,
+	},
+	{
+		// Text field font size and line height, split from the entry above to ship their deletion first
+		// SEE https://github.com/LuccaSA/lucca-front/blob/3e49b45abf16b48b54ecf6000a66aaf7a107bc7f/packages/scss/src/components/textField/vars.scss#L17.
+		objectPattern: /--component-textField-(fontSize|lineHeight)(?![\w-])/,
+		versionDeprecated: '20.1.0',
+		versionDeleted: '22.2.0',
+		actions: `Remplacer par \`--component-textField-font\`.`,
 	},
 	{
 		// Component font sizes and line heights deleted without deprecation, replaced by each component's `-font` shorthand
