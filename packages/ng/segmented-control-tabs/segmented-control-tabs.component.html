@@ -36,7 +36,7 @@
 							[luTooltipAnchor]="tabButton"
 							[luTooltipTriggerAnchor]="tabButton"
 						></span>
-					} @else if (panel.label(); as label) {
+					} @else if (panel.resolvedLabel(); as label) {
 						<ng-container *luPortal="label" />
 					}
 				</button>
