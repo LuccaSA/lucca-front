@@ -287,9 +287,9 @@
 
 	&::before,
 	&::after {
-		display: table;
-
 		@include a11y.content(' ');
+
+		display: table;
 	}
 
 	&::after {
@@ -370,11 +370,11 @@
 
 %isRequired {
 	@layer mods {
+		@include a11y.content('*');
+
 		color: var(--palettes-error-700);
 		display: inline-block;
 		margin-inline-start: 0.2em;
-
-		@include a11y.content('*');
 	}
 }
 

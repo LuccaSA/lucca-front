@@ -7,6 +7,8 @@
 	@if map.has-key(config.$icons, $name) {
 		--icon-content: '#{map.get(config.$icons, $name)}';
 
+		@include a11y.content(var(--icon-content));
+
 		font-weight: var(--pr-t-font-fontWeight-regular);
 		display: inline-block;
 		vertical-align: text-bottom;
@@ -14,8 +16,6 @@
 		font-family: var(--icon-fontFamily);
 		-webkit-font-smoothing: antialiased;
 		text-transform: none;
-
-		@include a11y.content(var(--icon-content));
 	} @else {
 		@error '“#{$name}” wasn’t found in “@lucca-front/icons config.$icons” map.';
 	}

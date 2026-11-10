@@ -18,6 +18,8 @@
 	color: var(--pr-t-color-text);
 
 	&::before {
+		@include a11y.content(' '); // Unbreakable space to avoid vertical alignment issues with inline-flex in some contexts like tables
+
 		background-color: var(--palettes-700, var(--palettes-product-700));
 		border-radius: var(--pr-t-border-radius-full);
 		display: block;
@@ -26,8 +28,6 @@
 		inline-size: var(--components-statusBadge-dot-size);
 		inset-block-start: var(--components-statusBadge-dot-top);
 		position: relative;
-
-		@include a11y.content(' '); // Unbreakable space to avoid vertical alignment issues with inline-flex in some contexts like tables
 	}
 
 	@at-root ($atRoot) {

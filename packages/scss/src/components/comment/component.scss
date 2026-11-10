@@ -55,10 +55,10 @@
 
 				& + .comment-infos-date {
 					&::before {
+						@include a11y.content(var(--components-comment-info-separator));
+
 						color: var(--palettes-neutral-400);
 						padding-inline: 1ch;
-
-						@include a11y.content(var(--components-comment-info-separator));
 					}
 				}
 			}

@@ -166,10 +166,10 @@
 			counter-increment: timeline;
 
 			&::before {
+				@include a11y.content(counter(timeline));
+
 				font-size: var(--pr-t-font-body-XS-fontSize);
 				line-height: 1;
-
-				@include a11y.content(counter(timeline));
 			}
 		}
 	}

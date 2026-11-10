@@ -1,11 +1,11 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin required {
+	@include a11y.content('*');
+
 	color: var(--palettes-error-700);
 	display: inline-block;
 	margin-inline-start: 0.2em;
-
-	@include a11y.content('*');
 }
 
 @function fakeBorderOverlay($fakeBorderOverlayColor: currentColor, $fakeBorderOverlayWidth: 1px) {

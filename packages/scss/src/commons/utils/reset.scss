@@ -35,9 +35,9 @@
 @mixin clearfix($suffix: '') {
 	&::before,
 	&::after {
-		display: table #{$suffix};
-
 		@include a11y.content(' ', $suffix: $suffix);
+
+		display: table #{$suffix};
 	}
 
 	&::after {

@@ -42,13 +42,13 @@
 		}
 
 		%after {
+			@include a11y.content(var(--components-readMore-content-lastChild-content));
+
 			visibility: hidden;
 			white-space: nowrap;
 			font: var(--pr-t-font-body-M);
 			font-weight: var(--pr-t-font-fontWeight-semibold);
 			padding-inline-start: var(--components-readMore-link-paddingInlineStart);
-
-			@include a11y.content(var(--components-readMore-content-lastChild-content));
 		}
 
 		.readMore-content {

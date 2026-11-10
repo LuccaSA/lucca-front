@@ -21,12 +21,12 @@
 
 			&:not(:first-child) {
 				&::before {
+					@include icon.generate('arrow_chevron_right');
+
 					color: var(--palettes-neutral-700);
 					font-size: var(--pr-t-font-body-XS-lineHeight);
 					padding-block: 0;
 					padding-inline: var(--pr-t-spacings-50);
-
-					@include icon.generate('arrow_chevron_right');
 				}
 			}
 		}

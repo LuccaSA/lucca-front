@@ -53,6 +53,8 @@
 			}
 
 			&::before {
+				@include a11y.content('\e97d');
+
 				font-weight: var(--pr-t-font-fontWeight-regular);
 				font-size: var(--component-checkboxField-icon-fontSize);
 				direction: ltr;
@@ -64,8 +66,6 @@
 				text-transform: none;
 				white-space: nowrap;
 				overflow-wrap: normal;
-
-				@include a11y.content('\e97d');
 			}
 		}
 
