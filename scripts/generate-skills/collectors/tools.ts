@@ -17,7 +17,7 @@ import { TransientFetchError, recordFailure } from './fetch-failures';
 import { readStoryTemplates } from './story-source';
 import { cleanZeroHeightMarkdown } from '../generators/template-renderer';
 import { writeToolsPage } from '../generators/skill-writer';
-import { fetchWithTimeout } from './http';
+import { loadStorybookIndexEntries } from './storybook';
 
 interface ToolEntry {
 	slug: string;
@@ -39,10 +39,8 @@ function loadToolsMap(): ToolEntry[] {
 async function buildStoryIdMap(version: VersionConfig): Promise<Map<string, string>> {
 	const map = new Map<string, string>();
 	try {
-		const res = await fetchWithTimeout(`${version.storybookBaseUrl}/index.json`);
-		if (!res.ok) return map;
-		const data = await res.json() as { entries?: Record<string, { importPath?: string }> };
-		for (const [id, entry] of Object.entries(data.entries ?? {})) {
+		const entries: Record<string, { importPath?: string }> = await loadStorybookIndexEntries(version);
+		for (const [id, entry] of Object.entries(entries)) {
 			if (entry.importPath) map.set(id, entry.importPath);
 		}
 	} catch {
@@ -152,7 +150,7 @@ export async function collectAllTools(
 			}
 
 			const content = `# ${tool.title}\n\n${cleaned}\n`;
-			const result = writeToolsPage(skillsDir, version, `${tool.slug}.md`, content);
+			const result = writeToolsPage(skillsDir, `${tool.slug}.md`, content);
 			console.log(`     ✅ ${tool.slug}.md — ${result.status}`);
 			written++;
 		} catch (err: any) {

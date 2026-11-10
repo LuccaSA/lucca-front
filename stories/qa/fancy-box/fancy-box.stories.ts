@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'fancy-box-stories',
@@ -17,7 +18,9 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 		`,
 	],
 })
-class FancyBoxStory {}
+class FancyBoxStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/FancyBox',

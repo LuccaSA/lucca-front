@@ -1,3 +1,9 @@
+### 22.1.2
+
+#### Changed
+
+- `LuUserDisplayInput` accepts a `null` or missing `firstName` or `lastName`, so `luUserDisplay` compiles with nullable names under `strictNullChecks`.
+
 ### 21.3.0
 
 #### Fixed

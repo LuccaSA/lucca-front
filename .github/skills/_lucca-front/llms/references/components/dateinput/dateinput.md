@@ -1,0 +1,250 @@
+# dateinput
+
+**Sommaire**
+
+- Import
+- API Reference
+  - DateInputComponent (component)
+  - Injection tokens
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
+## Import
+
+```typescript
+import { DateInputComponent } from '@lucca-front/ng/date2';
+```
+
+## API Reference
+
+### DateInputComponent (component)
+
+**Selector:** `lu-date-input`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `format` | `format` | `(typeof DATE_FORMAT)[keyof typeof DATE_FORMAT]` | `DATE_FORMAT.DATE` | — | — | Modifie le format de date. |
+| `ranges` | `ranges` | `unknown` | `[]` | — | — | — |
+| `hideToday` | `hideToday` | `boolean` | `false` | — | `luBooleanAttribute` | Retire la mise en valeur de la date du jour. |
+| `hasTodayButton` | `hasTodayButton` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute un bouton pour sélectionner la date du jour. |
+| `clearable` | `clearable` | `unknown` | `null` | — | `luNullableBooleanAttribute` | Ajoute un bouton de suppression lorsqu’une date est sélectionnée. |
+| `clearBehavior` | `clearBehavior` | `'clear' \| 'reset'` | `'clear'` | — | — | [v20.1] Change le comportement au clic sur la croix de suppression |
+| `hideWeekend` | `hideWeekend` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `mode` | `mode` | `'day' \| 'week' \| 'month' \| 'year'` | `'day'` | — | — | — |
+| `getCellInfo` | `getCellInfo` | `((day: Date, mode: CalendarMode) => CellStatus) \| null` | — | — | — | — |
+| `min` | `min` | `unknown` | `new Date('1/1/1000')` | — | `transformDateInputToDate` | Définit une date minimum de sélection. |
+| `max` | `max` | `unknown` | `null` | — | `transformDateInputToDate` | Définit une date maximum de sélection. |
+| `focusedDate` | `focusedDate` | `unknown` | `null` | — | `transformDateInputToDate` | — |
+| `calendarModeInput` | `calendarMode` | `CalendarMode \| null` | `null` | — | — | — |
+| `autocomplete` | `autocomplete` | `AutoFill` | `'off'` | — | — | — |
+| `placeholder` | `placeholder` | `string` | — | — | — | — |
+| `disableOverflow` | `disableOverflow` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `hideOverflow` | `hideOverflow` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `widthAuto` | `widthAuto` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `humanized` | `humanized` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `calendarModeChange` | `calendarModeChange` | `CalendarMode` | — |
+| `panelOpened` | `panelOpened` | `void` | — |
+| `panelClosed` | `panelClosed` | `void` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DATE2_TRANSLATIONS` | `unknown` | — |
+
+## Related files
+
+- 📝 [Code & implementation](./dateinput.component.md)
+- 🎨 [Design guidelines](./dateinput.design.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date2-dateinput--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
++ `calendarMode` : CalendarMode | null
++ `humanized` : boolean
++ (output) `calendarModeChange` : CalendarMode
+- (model) `calendarMode`
+
+### 22.0.5
+
++ token `LU_DATE2_TRANSLATIONS` : unknown
+
+### 22.0.0
+
+~ `hideToday` : transform booleanAttribute → luBooleanAttribute
+~ `hasTodayButton` : transform booleanAttribute → luBooleanAttribute
+~ `clearable` : transform booleanAttribute → luNullableBooleanAttribute
+~ `hideWeekend` : transform booleanAttribute → luBooleanAttribute
+~ `mode` : 'day' | 'month' | 'year' → 'day' | 'week' | 'month' | 'year'
+~ `disableOverflow` : transform booleanAttribute → luBooleanAttribute
+~ `hideOverflow` : transform booleanAttribute → luBooleanAttribute
+~ `widthAuto` : transform booleanAttribute → luBooleanAttribute
+~ (model) `calendarMode` : CalendarMode → CalendarMode | null
+
+### Notes de release (ZeroHeight)
+
+#### 22.1.1
+
+##### Fixed
+
+- An empty required field no longer briefly shows as invalid when a date is picked in the calendar: it is marked as touched only once the focus leaves both the input and the calendar.
+
+#### 22.1.0
+
+##### Added
+
+- `humanized` input to display the selected date in natural language while the field is not focused: "Yesterday", "Today" or "Tomorrow" in `day` mode, the month name and year in `month` mode. Other dates and modes keep the numeric format.
+
+##### Changed
+
+- `calendarMode` is no longer nullable: it defaults to `mode` and follows it when `mode` changes. `calendarModeChange` is only emitted when the calendar navigation actually changes the mode.
+
+#### 22.0.0
+
+##### Added
+
+- `week` mode: the input displays and parses a week as `<weekPrefix><week number>/<year>`, and the selected value is normalized to that week.
+
+##### Fixed
+
+- Calendar overlay is now exposed as a labelled dialog (`aria-haspopup="dialog"`, `aria-expanded` and `aria-controls` on the trigger).
+
+#### 21.2.3
+
+##### Fixed
+
+- `lu-date-input`: validation error state and value are now correctly triggered on write value.
+
+#### 21.2.0
+
+##### Fixed
+
+- `lu-date-input`: no longer marks the control as touched when the text input changes.
+
+#### 21.1.0
+
+##### Added
+
+- `intl`: new input on `lu-date-input` and `input[luDateInput]` to override component translations.
+- `*luPresentationDisplay`: `lu-date-input` now supports the form-field presentation display mode.
+
+##### Fixed
+
+- `lu-date-input`: parsing now uses the mode-specific date format (`dateFormatWithMode`) so values are read according to the current mode.
+
+#### 21.0.0
+
+##### Deprecated
+
+- `LuDatePickerModule`: deprecated, import the standalone `LuDatePickerComponent` directly instead.
+
+#### 20.3.1
+
+##### Fixed
+
+- `lu-date-input`: the calendar display mode is now kept in sync with the `mode` input.
+
+#### 20.3.0
+
+##### Added
+
+- `panelOpened` / `panelClosed`: new outputs on `lu-date-input` emitted when the calendar panel opens or closes.
+
+##### Fixed
+
+- `lu-date-input`: better handling of single-digit input in month and day segments.
+
+#### 20.1.0
+
+##### Added
+
+- `clearBehavior`: new input on `lu-date-input` (`'clear'` | `'reset'`) allowing the clear button to reset to the initial value instead of emptying the field, along with a public `reset()` method.
+
+#### 19.3.4
+
+##### Fixed
+
+- `lu-date-input`: invalid text input is now converted correctly to a date ISO value.
+
+#### 19.3.3
+
+##### Added
+
+- `widthAuto`: new boolean input on `lu-date-input` to size the field to its content.
+
+##### Fixed
+
+- `lu-date-input`: `writeValue` no longer calls `onChange`.
+
+#### 19.3.1
+
+##### Fixed
+
+- `lu-date-input`: selecting an initial value after a change is now reflected on the model.
+
+#### 19.2.6
+
+##### Fixed
+
+- `lu-date-input`: correct handling of `min`/`max` in month mode.
+- `lu-date-input`: disabled state now uses a signal so the view re-renders correctly.
+- `lu-date-input`: clearing now sends `null` on change and moves the calendar accordingly.
+
+#### 19.2.5
+
+##### Fixed
+
+- `lu-date-input`: the disabled state of the date picker panel is now updated correctly.
+
+#### 19.2.3
+
+##### Fixed
+
+- `lu-date-input`: a `null` value at initialisation is now handled correctly.
+
+#### 19.2.2
+
+##### Added
+
+- `inDateISOFormat`: `lu-date-input` can now emit and consume date ISO string values instead of `Date` objects.
+
+#### 18.3.3
+
+##### Fixed
+
+- `lu-date-input`: `min`/`max` are now handled properly in a month picker configuration.
+- `lu-date-input`: validators logic fixes for `min`/`max`.
+
+#### 18.3.2
+
+##### Fixed
+
+- `lu-date-input`: now accepts `null` as a value.
+
+#### 18.3.0
+
+##### Added
+
+- `lu-date-input`: new date input component built on the calendar2 stack. Exposes inputs such as `format`, `mode`, `min`, `max`, `ranges`, `clearable`, `hideToday`, `hasTodayButton`, `disableOverflow` and `hideOverflow`.
+
+#### 18.1.0
+
+##### Changed
+
+- `granularity`: on `lu-date-picker` and `input[luDateInput]`, the input now also accepts the `LuDateGranularity` string union type in addition to the `ELuDateGranularity` enum.

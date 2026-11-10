@@ -200,7 +200,8 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 /**
  * select input
  *
- * @deprecated prefer SimpleSelect or MultipleSelect
+ * @deprecated since 17.3.2; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-select',

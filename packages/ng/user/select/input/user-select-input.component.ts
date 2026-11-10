@@ -15,7 +15,9 @@ import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate
 
 /* eslint-disable @angular-eslint/prefer-signals */
 /**
- * @deprecated prefer SimpleSelect or MultipleSelect with luCustomUsers directive
+ * @deprecated since 17.3.2; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * Use the luCustomUsers directive.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-user-select',

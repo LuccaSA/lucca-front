@@ -51,6 +51,7 @@
 				}
 			}
 
+			// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .textfield.mod-search. Kept for consumer overrides.
 			.textfield.mod-search,
 			.form-field:has(.icon-searchMagnifyingGlass) {
 				@include media.max('XS') {

@@ -6,7 +6,8 @@
 	// for this component some variables are placed in root
 
 	// --components-container-max-width is deprecated
-	// --components-container-padding is deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-container-max-width: var(--commons-container-maxWidth);
 	--components-container-padding: var(--commons-container-padding);
+	// stylelint-enable property-disallowed-list
 }

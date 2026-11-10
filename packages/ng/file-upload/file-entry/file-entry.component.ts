@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID,
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { intlInputOptions, IntlParamsPipe, isNotNil, luBooleanAttribute } from '@lucca-front/ng/core';
+import { CDN_URL, intlInputOptions, IntlParamsPipe, isNotNil, luBooleanAttribute } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -91,7 +91,7 @@ export class FileEntryComponent {
 
 	readonly fileEntryIconSrc = computed(() => {
 		const fileExtension = this.fileName().split('.').pop();
-		const fileEntryIconRoot = 'https://cdn.lucca.fr/transverse/prisme/visuals/file-entry/';
+		const fileEntryIconRoot = `${CDN_URL}/transverse/prisme/visuals/file-entry/`;
 		const fileEntryIconExtension = '.svg';
 
 		switch (fileExtension) {

@@ -3,6 +3,7 @@ import currentLFVersion from './currentLFVersion.mjs';
 
 /**
  * @typedef {object} DisallowedObject - Object found in the list of disallowed objects
+ * @property {string} [name] - Component name, as listed on the Prisme life-cycle page: the entry deprecates a whole component
  * @property {(RegExp | string)[] | RegExp | string} [objectPattern] - Pattern(s) matching the deprecated element
  * @property {string} [versionDeprecated] - LF version deprecating the element
  * @property {string} [versionDeleted] - LF version deleting the element

@@ -285,6 +285,7 @@
 
 	// DEPRECATED COMPONENTS
 
+	// stylelint-disable selector-disallowed-list -- Deprecated.
 	.checkbox,
 	.switch,
 	.radio,
@@ -305,4 +306,5 @@
 		outline: 2px solid red;
 		outline-offset: 3px;
 	}
+	// stylelint-enable selector-disallowed-list
 }

@@ -7,7 +7,8 @@ import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 
 /* eslint-disable @angular-eslint/prefer-signals */
 /**
- * @deprecated
+ * @deprecated since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-tree-option',

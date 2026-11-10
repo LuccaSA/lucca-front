@@ -44,6 +44,7 @@
 
 // selectable selected rows
 @mixin selectableSelectedRow {
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .checkbox-input. Kept for consumer overrides.
 	.indexTable-body-row:has(.checkbox-input:checked, .checkboxField-input:checked) {
 		@include selectedCells;
 	}

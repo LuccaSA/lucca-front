@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DialogCloseDirective, DialogComponent, DialogContentComponent, DialogDismissDirective, DialogFooterComponent, DialogHeaderAction, DialogHeaderComponent } from '@lucca-front/ng/dialog';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'dialog-stories',
@@ -23,7 +24,9 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 		`,
 	],
 })
-class DialogStory {}
+class DialogStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/Dialog',

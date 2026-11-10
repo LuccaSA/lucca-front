@@ -1,0 +1,159 @@
+# segmentedcontrol
+
+**Sommaire**
+
+- Import
+- API Reference
+  - SegmentedControlFilterComponent (component)
+  - SegmentedControlComponent (component)
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
+## Import
+
+```typescript
+import { SegmentedControlFilterComponent, SegmentedControlComponent } from '@lucca-front/ng/segmented-control';
+```
+
+## API Reference
+
+### SegmentedControlFilterComponent (component)
+
+**Selector:** `lu-segmented-control-filter`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le filtre. |
+| `value` | `value` | `T` | — | ✅ | — | Valeur de l’onglet (obligatoire). |
+| `label` | `label` | `PortalContent` | — | — | — | Libellé de l’onglet. |
+
+### SegmentedControlComponent (component)
+
+**Selector:** `lu-segmented-control`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie la taille du composant. |
+| `vertical` | `vertical` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le composant en vue verticale. |
+| `ariaLabel` | `ariaLabel` | `string \| null` | `null` | — | — | Nom accessible du groupe d'onglets, restitué aux technologies d'assistance. |
+
+## Related files
+
+- 📝 [Code & implementation](./segmentedcontrol.component.md)
+
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-segmentedcontrol-angular-tabs--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
+`SegmentedControlComponent` :
+  + `ariaLabel` : string | null
+
+### 22.0.0
+
+`SegmentedControlFilterComponent` :
+  ~ `disabled` : transform booleanAttribute → luBooleanAttribute
+`SegmentedControlComponent` :
+  ~ `small` : transform booleanAttribute → luBooleanAttribute
+  ~ `vertical` : transform booleanAttribute → luBooleanAttribute
+
+### Notes de release (ZeroHeight)
+
+#### 22.1.1
+
+##### Changed
+
+- Item padding is now `8px 12px` by default and `6px 8px` in size `S`.
+
+#### 22.1.0
+
+##### Changed
+
+- Icons are displayed in small size in a `small` segmented control.
+
+#### 22.0.5
+
+##### Added
+
+- `ariaLabel` input to give the group of options an accessible name.
+
+##### Changed
+
+- `lu-segmented-control` now has the `radiogroup` role, and `lu-segmented-control-filter` no longer has the `listitem` role.
+
+#### 22.0.6
+
+##### Fixed
+
+- Form fields bound with `[formField]` (signal forms) are now marked dirty when the user changes the value.
+
+#### 22.0.0
+
+##### Changed
+
+- A segmented control nested in a `lu-filter-bar` now adapts its style to the filter bar.
+
+#### 21.3.0
+
+##### Added
+
+- `lu-segmented-control-tabs` now supports `Home` and `End` keys to move focus and selection to the first and last tab.
+
+#### 21.2.2
+
+##### Added
+
+- `palette` support: selected, hover and active states now read `--palettes-*` CSS variables (falling back to the product palette) so the component can inherit a surrounding palette.
+
+#### 20.3.0
+
+##### Added
+
+- `lu-segmented-control` Angular wrapper (`SegmentedControlComponent`), a `ControlValueAccessor` with `small` and `vertical` boolean inputs.
+- `lu-segmented-control-filter` (`SegmentedControlFilterComponent`) with `value` (required), `label` and `disabled` inputs.
+- `lu-segmented-control-tabs` (`SegmentedControlTabsComponent`) with `small` and `vertical` inputs, an `active` two-way model, and arrow-key navigation.
+- `lu-segmented-control-tabs-panel` (`SegmentedControlTabsPanelComponent`) with `value` (required) and `label` inputs.
+
+#### 20.1.2
+
+##### Added
+
+- `disabled` visual state for segmented control items.
+
+##### Fixed
+
+- Selected item `numericBadge` value no longer disappears when the item is not loading (loading styles now only apply to `is-loading` items).
+
+#### 20.1.1
+
+##### Fixed
+
+- `numericBadge` loading state color specificity inside selected items.
+
+#### 19.2.0
+
+##### Changed
+
+- Hover and active states restyled to use a raised shadow instead of a background pseudo-element; added `wrap` and `whiteSpace` CSS variables.
+
+#### 18.2.3
+
+##### Fixed
+
+- Hover and focus background rendering of segmented control items.
+
+#### 18.2.1
+
+##### Added
+
+- `segmentedControl` HTML/CSS component (`.segmentedControl`), with semantic and vertical variants.

@@ -13,7 +13,8 @@ import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 
 /* eslint-disable @angular-eslint/prefer-signals */
 /**
- * @deprecated
+ * @deprecated since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Directive()
 export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
@@ -117,7 +118,9 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 
 /**
  * advanced option picker panel
- * @deprecated
+ *
+ * @deprecated since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-tree-option-picker-advanced',

@@ -1,5 +1,40 @@
+import { parse } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
-import { humanizeDate } from './date-format';
+import { getDateFormat, humanizeDate } from './date-format';
+
+describe('getDateFormat', () => {
+	const locales = ['fr-FR', 'en', 'de', 'es', 'it', 'nl', 'nl-BE', 'pl', 'pt'];
+	const date = new Date(2025, 5, 18);
+	const displays: { mode: CalendarMode; options: Intl.DateTimeFormatOptions; expected: Date }[] = [
+		{ mode: 'day', options: {}, expected: date },
+		{ mode: 'month', options: { month: 'numeric', year: 'numeric' }, expected: new Date(2025, 5, 1) },
+		{ mode: 'year', options: { year: 'numeric' }, expected: new Date(2025, 0, 1) },
+	];
+
+	for (const locale of locales) {
+		for (const { mode, options, expected } of displays) {
+			it(`should parse back the ${mode} displayed in ${locale}`, () => {
+				const displayed = new Intl.DateTimeFormat(locale, options).format(date);
+
+				expect(parse(displayed, getDateFormat(locale, mode), new Date(2000, 0, 1))).toEqual(expected);
+			});
+		}
+	}
+
+	it('should keep the separator of the displayed month', () => {
+		expect(getDateFormat('fr-FR', 'month')).toBe('MM/yyyy');
+		expect(getDateFormat('en', 'month')).toBe('M/yyyy');
+		expect(getDateFormat('de', 'month')).toBe('M/yyyy');
+		expect(getDateFormat('nl', 'month')).toBe('M-yyyy');
+		expect(getDateFormat('pl', 'month')).toBe('MM.yyyy');
+		expect(getDateFormat('de', 'year')).toBe('yyyy');
+	});
+
+	it('should keep the full date format in day and week modes', () => {
+		expect(getDateFormat('fr-FR')).toBe('dd/MM/yyyy');
+		expect(getDateFormat('en', 'week')).toBe('M/d/yyyy');
+	});
+});
 
 describe('humanizeDate', () => {
 	const reference = new Date(2026, 2, 15, 12);

@@ -1,3 +1,9 @@
+### 22.1.2
+
+#### Fixed
+
+- `lu-callout-popover`: the button label uses the text color instead of the browser default, which showed it in blue on iOS.
+
 ### 22.0.0
 
 #### Removed

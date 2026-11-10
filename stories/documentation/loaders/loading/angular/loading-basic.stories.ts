@@ -1,11 +1,11 @@
-import { LoadingComponent, luLoadingTranslations } from '@lucca-front/ng/loading';
+import { LOADING_SIZE, LoadingComponent, luLoadingTranslations } from '@lucca-front/ng/loading';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
-import { cleanupTemplate, intlArgType } from '@/helpers/stories';
+import { cleanupTemplate, intlArgType, setStoryOptions } from '@/helpers/stories';
 
 interface LoadingsBasicStory {
 	label: string;
 	hiddenLabel: '' | 'true' | 'false';
-	L: boolean;
+	size: string;
 	block: boolean;
 	invert: boolean;
 	template: string;
@@ -17,7 +17,7 @@ export default {
 		label: {
 			description: '[Story] Modifie le texte affiché par le composant. Vide, le texte par défaut traduit est utilisé.',
 			control: 'text',
-			table: { category: 'inputs' },
+			table: { category: 'story' },
 		},
 		hiddenLabel: {
 			description:
@@ -27,20 +27,24 @@ export default {
 				type: 'select',
 				labels: { '': 'non défini', true: 'true', false: 'false' },
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs', type: { summary: 'boolean | null' }, defaultValue: { summary: 'null' } },
 		},
-		L: {
-			description: 'Applique la taille L au loading. Applique également automatiquement le mode block.',
-			table: { category: 'inputs' },
+		size: {
+			description: 'Modifie la taille du loading. La taille L applique également automatiquement le mode block.',
+			options: setStoryOptions(LOADING_SIZE),
+			control: {
+				type: 'select',
+			},
+			table: { category: 'inputs', type: { summary: 'LoadingSize | null' }, defaultValue: { summary: 'null' } },
 		},
 		block: {
 			description: 'Centre le loading dans son conteneur pour une utilisation en pleine page, dialog, section, etc.',
-			if: { arg: 'L', truthy: false },
-			table: { category: 'inputs' },
+			if: { arg: 'size', truthy: false },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		invert: {
 			description: 'Modifie les couleurs du loading pour un usage sur fond foncé.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		template: {
 			description: 'Applique une mise en forme adaptée à certains contextes (pleine page, dialog, etc.).',
@@ -48,7 +52,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		intl: intlArgType(luLoadingTranslations, 'LuLoadingLabel'),
 	},
@@ -58,18 +62,18 @@ export default {
 		}),
 	],
 	render: (args: LoadingsBasicStory) => {
-		const lParam = args.L ? ` size="L"` : ``;
+		const sizeParam = args.size ? ` size="${args.size}"` : ``;
 		const blockParam = args.block ? ` block` : ``;
 		const invertParam = args.invert ? ` invert` : ``;
 		const hiddenLabelParam = args.hiddenLabel === 'true' ? ` hiddenLabel` : args.hiddenLabel === 'false' ? ` [hiddenLabel]="false"` : ``;
 		const templateParam = args.template ? ` template="${args.template}"` : ``;
 		if (args.label) {
 			return {
-				template: cleanupTemplate(`<lu-loading${lParam}${hiddenLabelParam}${invertParam}${blockParam}${templateParam}>${args.label}</lu-loading>`),
+				template: cleanupTemplate(`<lu-loading${sizeParam}${hiddenLabelParam}${invertParam}${blockParam}${templateParam}>${args.label}</lu-loading>`),
 			};
 		} else {
 			return {
-				template: cleanupTemplate(`<lu-loading${lParam}${hiddenLabelParam}${invertParam}${blockParam}${templateParam} />`),
+				template: cleanupTemplate(`<lu-loading${sizeParam}${hiddenLabelParam}${invertParam}${blockParam}${templateParam} />`),
 			};
 		}
 	},
@@ -79,7 +83,7 @@ export const Basic = {
 	args: {
 		label: '',
 		hiddenLabel: '',
-		L: false,
+		size: '',
 		block: false,
 		invert: false,
 		template: '',

@@ -84,6 +84,39 @@ export default {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 			table: { category: 'inputs (form-field)' },
 		},
+		noClueIcon: {
+			description: 'Masque l’icône de recherche affichée lorsque le champ a le focus ou que le panneau est ouvert.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		inputTabindex: {
+			control: { type: 'number' },
+			description: 'Modifie le tabindex du champ de saisie.',
+			table: { category: 'inputs', defaultValue: { summary: '0' } },
+		},
+		ignorePresentation: {
+			description: 'Désactive l’affichage par défaut du mode présentation (`presentation` du `lu-form-field`), lorsqu’un composant parent fournit le sien.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		autocomplete: {
+			control: { type: 'text' },
+			description: 'Modifie l’attribut `autocomplete` du champ de saisie.',
+			table: { category: 'inputs', defaultValue: { summary: 'off' } },
+		},
+		optionKey: {
+			control: false,
+			description: 'Fonction retournant la clé unique d’une option, utilisée pour suivre les options affichées dans le panneau.',
+			table: { category: 'inputs', type: { summary: '(option: T) => unknown' }, defaultValue: { summary: '(option) => option' } },
+		},
+		panelFooterTpl: {
+			control: false,
+			description: 'Template affiché en pied du panneau de sélection.',
+			table: { category: 'models', type: { summary: 'TemplateRef<void> | Type<unknown>' } },
+		},
+		dataSource: {
+			control: false,
+			description: 'Source de données des options, utilisée à la place de l’input `options` (chargement, pagination, recherche).',
+			table: { category: 'models', type: { summary: 'SelectDataSource<T>' } },
+		},
 		panelOpened: {
 			description: "Événement déclenché à l'ouverture du panneau de sélection.",
 			action: 'panelOpened',
@@ -96,13 +129,35 @@ export default {
 			control: false,
 			table: { category: 'outputs', type: { summary: 'void' } },
 		},
+		clueChange: {
+			description: 'Événement déclenché lorsque la recherche saisie change. S’y abonner rend le champ recherchable.',
+			action: 'clueChange',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'string' } },
+		},
+		nextPage: {
+			description: 'Événement déclenché lorsque la fin de la liste d’options est atteinte, pour charger la page suivante.',
+			action: 'nextPage',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
+		},
+		highlightedOption: {
+			description: 'Événement déclenché lorsqu’une option est mise en surbrillance dans le panneau.',
+			action: 'highlightedOption',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'T' } },
+		},
+		addOption: {
+			description: 'Événement déclenché au clic sur le bouton d’ajout d’option (voir `addOptionStrategy`). Émet la recherche saisie.',
+			action: 'addOption',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'string' } },
+		},
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
 		optionTpl: HiddenArgType,
 		overlayConfig: HiddenArgType,
 		valueTpl: HiddenArgType,
-		clueChange: HiddenArgType,
-		nextPage: HiddenArgType,
 		intl: intlArgType([luCoreSelectTranslations, luSimpleSelectTranslations], 'ILuSimpleSelectLabel & LuCoreSelectLabel'),
 	},
 } as Meta;
@@ -136,8 +191,9 @@ export const Basic: StoryObj<
 				argTypes,
 			)}>
 	<lu-simple-select ${generateInputs(inputArgs, argTypes)} (panelOpened)="panelOpened()" (panelClosed)="panelClosed()"
+		(highlightedOption)="highlightedOption($event)" (nextPage)="nextPage()" (addOption)="addOption($event)"
 		[options]="legumes | filterLegumes:clue"
-		(clueChange)="clue = $event"
+		(clueChange)="clue = $event; clueChange($event)"
 		[(ngModel)]="model.example">
 	</lu-simple-select>
 </lu-form-field>
@@ -159,5 +215,9 @@ export const Basic: StoryObj<
 		loading: false,
 		disabled: false,
 		presentation: false,
+		noClueIcon: false,
+		inputTabindex: 0,
+		ignorePresentation: false,
+		autocomplete: 'off',
 	},
 };

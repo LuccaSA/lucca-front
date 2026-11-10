@@ -3,7 +3,8 @@ import { intlInputOptions } from '@lucca-front/ng/core';
 import { LU_OPTION_PLACEHOLDER_TRANSLATIONS } from './option-placeholder.translate';
 
 /**
- * @deprecated
+ * @deprecated since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-option-placeholder',

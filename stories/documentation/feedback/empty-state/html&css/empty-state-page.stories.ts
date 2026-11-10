@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface EmptyStatePageStory {}
 
@@ -21,7 +22,7 @@ function getTemplate(args: EmptyStatePageStory): string {
 			<div
 				class="emptyState-content-icon"
 				aria-hidden="true"
-				[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/message/medal-01.svg' | luSafeExternalSvg"
+				[innerHtml]="'${CDN_URL}/lucca-front/assets/empty-states/message/medal-01.svg' | luSafeExternalSvg"
 			></div>
 			<div class="emptyState-content-text">
 				<h1 class="emptyState-content-heading">Empty State</h1>

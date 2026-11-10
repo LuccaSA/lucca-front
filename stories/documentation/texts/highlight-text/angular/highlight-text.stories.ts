@@ -9,7 +9,7 @@ interface HighlightBasicStory {}
 export default {
 	title: 'Documentation/Texts/Highlight Text/Angular/Basic',
 	argTypes: {
-		palette: { ...PaletteAllArgType, table: { category: 'inputs' } },
+		palette: { ...PaletteAllArgType, table: { category: 'inputs', defaultValue: { summary: 'product' } } },
 	},
 	decorators: [
 		moduleMetadata({
@@ -17,7 +17,8 @@ export default {
 		}),
 	],
 	render: (args: HighlightBasicStory) => {
-		const paletteArg = args['palette'] !== 'product' ? ` palette="${args['palette']}"` : ``;
+		const palette = args['palette'];
+		const paletteArg = palette && palette !== 'product' ? ` palette="${palette}"` : ``;
 		return {
 			template: cleanupTemplate(`<h1>Lorem <lu-highlight-text${paletteArg}>ipsum</lu-highlight-text> dolor</h1>`),
 		};
