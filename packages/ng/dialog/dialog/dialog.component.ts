@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
-import { luBooleanAttribute } from '@lucca-front/ng/core';
+import { CDN_URL, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { DialogFancyIllustration } from '../dialog.type';
 import { LuDialogRef } from '../model';
@@ -23,7 +23,7 @@ export class DialogComponent implements AfterViewInit {
 	readonly fancyIllustration = input<DialogFancyIllustration>('welcome');
 	readonly fancyIllustrationUrl = input<string | null>(null);
 
-	readonly domain = 'https://cdn.lucca.fr';
+	readonly domain = CDN_URL;
 	readonly path = '/transverse/prisme/visuals/fancy-dialog/';
 	readonly prefix = 'foreground-';
 	readonly extension = '.svg';

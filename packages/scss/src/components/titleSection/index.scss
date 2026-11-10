@@ -34,11 +34,12 @@
 			@include title;
 		}
 
+		// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-h5, .pr-u-h6. Kept for consumer overrides.
 		:is(.pr-u-h2, .pr-u-h3, .pr-u-h4, .pr-u-h5, .pr-u-h6) ~ & {
 			@extend %titleImportant;
 		}
 
-		// Deprecated .u- utilities
+		// stylelint-disable selector-disallowed-list -- Deprecated .u- utilities.
 		@if config.$deprecatedUtilityPrefix {
 			:is(.u-h1, .u-h1.mod-XXXL) ~ & {
 				@extend %titleXXXL;
@@ -48,5 +49,6 @@
 				@extend %titleImportant;
 			}
 		}
+		// stylelint-enable selector-disallowed-list
 	}
 }

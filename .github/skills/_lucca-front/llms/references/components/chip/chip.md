@@ -1,0 +1,118 @@
+# chip
+
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - ChipComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
+## Import
+
+```typescript
+import { ChipComponent } from '@lucca-front/ng/chip';
+```
+
+## Basic Usage
+
+```html
+<lu-chip (kill)="kill($event)">Label</lu-chip>
+```
+
+## API Reference
+
+### ChipComponent (component)
+
+**Selectors:** `lu-chip`, `button[luChip]`, `a[luChip]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `withEllipsis` | `withEllipsis` | `boolean` | `false` | — | `luBooleanAttribute` | [20.1] Ellipse le texte et ajoute une tooltip lorsque le label est trop long. |
+| `unkillable` | `unkillable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend le chip non supprimable. |
+| `palette` | `palette` | `string` | — | — | — | Applique la palette product au composant. Seule la valeur product a un effet. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le composant. |
+| `size` | `size` | `ChipSize \| null` | `null` | — | — | Modifie la taille du composant. |
+| `state` | `state` | `ChipState \| null` | `null` | — | — | [20.1] Donne une information sur l'état du composant. |
+| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Ajoute une icône au chip. |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `kill` | `kill` | `Event` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CHIP_TRANSLATIONS` | `unknown` | — |
+
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+
+## Related files
+
+- 📝 [Code & implementation](./chip.component.md)
+
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-chip-angular-basic--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_CHIP_TRANSLATIONS` : unknown
+
+### 22.0.0
+
+~ `withEllipsis` : transform booleanAttribute → luBooleanAttribute
+~ `unkillable` : transform booleanAttribute → luBooleanAttribute
+~ `disabled` : transform booleanAttribute → luBooleanAttribute
+
+### Notes de release (ZeroHeight)
+
+#### 21.1.1
+
+##### Fixed
+
+- `palette` now correctly applies the `product` palette colors (background, text and kill button).
+
+#### 21.1.0
+
+##### Added
+
+- `intl` new input to override the component's translations.
+
+#### 21.0.0
+
+##### Added
+
+- `button[luChip], a[luChip]` new selectors to use the chip on `button` and `a` elements.
+- `icon` new input to display a `LuccaIcon` inside the chip.
+- `state` new input (`warning` | `critical`) that applies the recommended icon and palette.
+- `size` new input (`S`) to render a small chip.
+- `withEllipsis` new input to truncate the content with an ellipsis and show a tooltip when it overflows.
+
+#### 20.1.1
+
+##### Added
+
+- `kill` new output emitted when the delete button is clicked.
+
+#### 19.2.0
+
+##### Added
+
+- `lu-chip` new Angular component wrapping the chip, with `unkillable`, `palette` and `disabled` inputs.

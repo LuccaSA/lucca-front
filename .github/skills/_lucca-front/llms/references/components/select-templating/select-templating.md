@@ -1,0 +1,141 @@
+# select-templating
+
+**Sommaire**
+
+- Import
+- API Reference
+  - LuCoreSelectTotalCountDirective (directive)
+  - LuCoreSelectNoClueDirective (directive)
+  - LuDisabledOptionDirective (directive)
+  - LuOptionGroupDirective (directive)
+  - LuOptionDirective (directive)
+  - LuCoreSelectPanelHeaderDirective (directive)
+  - Providers
+  - Injection tokens
+  - Pipes
+  - Services
+- Related files
+- Changelog
+  - 22.1.0
+  - 22.0.0
+
+## Import
+
+```typescript
+import { LuCoreSelectTotalCountDirective, LuCoreSelectNoClueDirective, LuDisabledOptionDirective, LuOptionGroupDirective, LuOptionDirective, LuCoreSelectPanelHeaderDirective } from '@lucca-front/ng/core-select';
+```
+
+## API Reference
+
+### LuCoreSelectTotalCountDirective (directive)
+
+**Selectors:** `lu-simple-select[totalCount]`, `lu-multi-select[totalCount]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `totalCount` | `totalCount` | `number` | — | ✅ | — | — |
+
+### LuCoreSelectNoClueDirective (directive)
+
+**Selectors:** `lu-simple-select[noClue]`, `lu-multi-select[noClue]`
+
+### LuDisabledOptionDirective (directive)
+
+**Selector:** `[luDisabledOption]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `isDisabled` | `luDisabledOption` | `boolean` | `undefined` | — | — | — |
+
+### LuOptionGroupDirective (directive)
+
+**Selector:** `[luOptionGroup]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `select` | `luOptionGroupSelect` | `ALuSelectInputComponent<TOption, TValue>` | — | ✅ | — | — |
+| `selector` | `luOptionGroupBy` | `(option: TOption) => TGroup` | — | ✅ | — | — |
+
+### LuOptionDirective (directive)
+
+**Selector:** `[luOption]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `select` | `luOptionSelect` | `ALuSelectInputComponent<TOption, TValue>` | `undefined` | — | — | — |
+
+### LuCoreSelectPanelHeaderDirective (directive)
+
+**Selector:** `[luSelectPanelHeader]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `select` | `luSelectPanelHeader` | `ALuSelectInputComponent<unknown, unknown> \| ALuSelectInputComponent<unknown, unknown[]>` | — | ✅ | — | — |
+
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `provideLuSelectLabelsAndIds` | `(): Provider[]` | — |
+| `provideOptionContext` | `(): Provider` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_OPTION_CONTEXT` | `ILuOptionContext<unknown>` | — |
+| `SELECT_PANEL_INSTANCE` | `CoreSelectPanelInstance` | — |
+| `SELECT_RESPONSIVE_DIALOG` | `boolean` | Feature flag gating the responsive dialog system as a whole: below the `XS` breakpoint the select trigger becomes a button and its panel opens as a bottom sheet instead of a popover anchored to the field. It defaults to `false`, so a consumer that provides nothing keeps the anchored popover at every viewport size. Turn it on application-wide with `{ provide: SELECT_RESPONSIVE_DIALOG, useValue: true }`. |
+| `SELECT_ID` | `number` | — |
+| `SELECT_LABEL` | `HTMLLabelElement \| undefined` | — |
+| `SELECT_LABEL_ID` | `string` | — |
+| `CORE_SELECT_API_TOTAL_COUNT_PROVIDER` | `CoreSelectApiTotalCountProvider` | — |
+| `LU_CORE_SELECT_TRANSLATIONS` | `unknown` | — |
+
+### Pipes
+
+| Pipe | Classe | transform | Description |
+|------|--------|-----------|-------------|
+| `luTreeDisplay` | `TreeDisplayPipe` | `(items: T[], treeGenerator: TreeGenerator<T, TreeNode<T>>): TreeNode<T>[]` | — |
+| `luOptionGroup` | `LuOptionGroupPipe` | `(options: T[], selector: (option: T) => TGroup)` | — |
+| `luIsOptionSelected` | `LuIsOptionSelectedPipe` | `(option: T, comparer: LuOptionComparer<T>, selectedOptions: T[]): boolean` | — |
+
+### Services
+
+#### CoreSelectKeyManager
+
+- `init(options: CoreSelectKeyManagerOptions<T>): void`
+- `onKeydown(event: KeyboardEvent): void`
+- `setActiveItem(index: number): void`
+- `setActiveItemByElement(item: CoreSelectPanelElement<T>): void`
+- `highlightOption(option: T): void`
+
+## Related files
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.1.0
+
++ token `SELECT_RESPONSIVE_DIALOG` : boolean
+
+### 22.0.0
+
+`LuDisabledOptionDirective` :
+  ~ `luDisabledOption` : boolean | null → boolean, défaut ∅ → undefined
+`LuOptionGroupDirective` :
+  ~ `luOptionGroupSelect` : devient requis
+  ~ `luOptionGroupBy` : (option: TOption) → (option: TOption) => TGroup, devient requis, défaut > TGroup → ∅
+`LuOptionDirective` :
+  ~ `luOptionSelect` : défaut ∅ → undefined

@@ -4,6 +4,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'empty-state-section-stories',
@@ -11,7 +12,9 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 	imports: [LuSafeExternalSvgPipe, EmptyStateSectionComponent, ButtonComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class EmptyStateSectionStory {}
+class EmptyStateSectionStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/EmptyState/Section',

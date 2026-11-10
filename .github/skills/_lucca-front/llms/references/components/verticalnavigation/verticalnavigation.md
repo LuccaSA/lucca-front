@@ -1,0 +1,129 @@
+# verticalnavigation
+
+**Sommaire**
+
+- Import
+- API Reference
+  - VerticalNavigationLinkComponent (component)
+  - VerticalNavigationComponent (component)
+  - VerticalNavigationGroupComponent (component)
+  - VerticalNavigationItemComponent (component)
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
+## Import
+
+```typescript
+import { VerticalNavigationLinkComponent, VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent } from '@lucca-front/ng/vertical-navigation';
+```
+
+## API Reference
+
+### VerticalNavigationLinkComponent (component)
+
+**Selectors:** `span[luVerticalNavigationLink]`, `a[luVerticalNavigationLink]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Ajoute une icône au groupe. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive les liens (`luVerticalNavigationLink`) et le groupe (`lu-vertical-navigation-group`). |
+
+### VerticalNavigationComponent (component)
+
+**Selector:** `lu-vertical-navigation`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `heading` | `heading` | `PortalContent \| null` | `null` | — | — | Titre de la section. [PortalContent] |
+| `headingLevel` | `headingLevel` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
+| `level` | `level` | `number` | `3` | — | `luNumberAttribute` | ⚠️ **Déprécié** : use `headingLevel` instead Niveau sémantique (`aria-level`) du titre de la section. |
+
+### VerticalNavigationGroupComponent (component)
+
+**Selector:** `lu-vertical-navigation-group`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `label` | `label` | `PortalContent` | — | ✅ | — | Modifie le texte du groupe. [PortalContent] |
+| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Ajoute une icône au groupe. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive les liens (`luVerticalNavigationLink`) et le groupe (`lu-vertical-navigation-group`). |
+
+#### Models (two-way binding)
+
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
+
+### VerticalNavigationItemComponent (component)
+
+**Selector:** `lu-vertical-navigation-item`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `label` | `label` | `string \| null` | `null` | — | — | Modifie le texte du groupe. [PortalContent] |
+| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Ajoute une icône au groupe. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive les liens (`luVerticalNavigationLink`) et le groupe (`lu-vertical-navigation-group`). |
+
+#### Models (two-way binding)
+
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
+
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+
+## Related files
+
+- 📝 [Code & implementation](./verticalnavigation.component.md)
+
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-navigation-verticalnavigation-angular-disabled--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.0.0
+
+`VerticalNavigationLinkComponent` :
+  ~ `disabled` : transform booleanAttribute → luBooleanAttribute
+`VerticalNavigationComponent` :
+  ~ `level` : transform ∅ → luNumberAttribute
+`VerticalNavigationGroupComponent` :
+  ~ `disabled` : transform booleanAttribute → luBooleanAttribute
+`VerticalNavigationItemComponent` :
+  ~ `disabled` : transform booleanAttribute → luBooleanAttribute
+
+### Notes de release (ZeroHeight)
+
+#### 21.3.0
+
+##### Changed
+
+- `heading` input is now optional.
+
+#### 21.0.0
+
+##### Added
+
+- `lu-vertical-navigation` component (`verticalNavigation`) with the `heading` input.
+- `lu-vertical-navigation-group` and `lu-vertical-navigation-item` components, with the `label`, `icon`, `level`, `expanded` and `disabled` inputs.
+- `[luVerticalNavigationLink]` directive for `a` and `span` elements.
+
+#### 18.2.0
+
+##### Changed
+
+- Colors of the disabled entries.

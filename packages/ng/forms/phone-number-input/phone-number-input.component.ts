@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { luBooleanAttribute } from '@lucca-front/ng/core';
+import { CDN_URL, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -62,6 +62,8 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 	],
 })
 export class PhoneNumberInputComponent implements ControlValueAccessor, Validator {
+	protected readonly cdnUrl = CDN_URL;
+
 	#locale = inject(LOCALE_ID);
 
 	readonly label = input<string>();

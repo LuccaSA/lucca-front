@@ -1,3 +1,0 @@
-# animations
-
-## Related files

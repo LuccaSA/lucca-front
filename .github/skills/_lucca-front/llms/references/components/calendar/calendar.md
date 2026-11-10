@@ -1,0 +1,145 @@
+# calendar
+
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - LuCalendarInputComponent (component)
+  - Injection tokens
+  - Modules dépréciés
+- Related files
+- Changelog
+  - 22.0.5
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
+## Import
+
+```typescript
+import { LuCalendarInputComponent } from '@lucca-front/ng/date';
+```
+
+## Basic Usage
+
+```html
+<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [date]="currentMonth" mode="year" (dateClicked)="dateClicked($event)" (nextPage)="nextPage()" (previousPage)="previousPage()" />
+```
+
+## API Reference
+
+### LuCalendarInputComponent (component)
+
+**Selector:** `lu-calendar`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+| `min` | `min` | `D` | — | — | — | Date minimale sélectionnable. |
+| `max` | `max` | `D` | — | — | — | Date maximale sélectionnable. |
+| `granularity` | `granularity` | `LuDateGranularity` | `ELuDateGranularity.day` | — | — | Granularité de la valeur sélectionnée. |
+| `startOn` | `startOn` | `D` | — | — | — | Date affichée par le calendrier en l’absence de valeur. Par défaut : aujourd’hui. |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CALENDARINPUT_TRANSLATIONS` | `unknown` | — |
+
+### Modules dépréciés
+
+- ⚠️ `LuDateModule` — use `LuCalendarInputComponent, LuDatePickerComponent, LuDateInputDirective, LuDateAdapterPipe, LuDateSelectInputComponent` instead
+
+## Related files
+
+- 📝 [Code & implementation](./calendar.component.md)
+- 🎨 [Design guidelines](./calendar.design.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-forms-date-calendar--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.0.5
+
++ token `LU_CALENDARINPUT_TRANSLATIONS` : unknown
+
+### 22.0.0
+
+~ `min` : unknown → D
+~ `max` : unknown → D
+~ `startOn` : défaut this._adapter.forgeToday() → ∅
+
+### Notes de release (ZeroHeight)
+
+#### 22.1.1
+
+##### Fixed
+
+- Selecting a date with the Space key no longer selects it twice.
+
+#### 22.1.0
+
+##### Changed
+
+- `ranges` with a single bound are now rendered as open-ended when no date is hovered: every period from the start onwards (or up to the end) is highlighted, and only the known bound is selected.
+
+#### 22.0.0
+
+##### Added
+
+- `week` value on the `mode` input: the calendar displays week numbers, selects a whole week and emits its first day.
+
+#### 21.1.0
+
+##### Added
+
+- `intl`: added an `intl` input on `lu-calendar` and `lu-calendar2` to override the component's built-in translations.
+
+#### 21.0.3
+
+##### Fixed
+
+- `lu-calendar`: dates disabled by `min`/`max` now display a proper disabled style (dimmed color, strikethrough, non-interactive hover).
+
+#### 21.0.0
+
+##### Deprecated
+
+- `LuCalendarInputModule`: deprecated, import the standalone `LuCalendarInputComponent` instead.
+
+##### Fixed
+
+- `lu-calendar2`: the day grid now always renders a 6th week row so the calendar keeps a consistent height across months.
+
+#### 20.3.0
+
+##### Changed
+
+- `displayMode`: the `lu-calendar2` `displayMode` model now defaults to `null` and falls back to `mode`, letting consumers set the starting display mode without overriding the navigation mode.
+
+#### 20.2.0
+
+##### Fixed
+
+- `lu-calendar2`: improved weekday header accessibility, decorative day initials are now `aria-hidden` while the full day name stays available to screen readers.
+
+#### 19.2.0
+
+##### Added
+
+- `intl`: added translatable previous/next navigation labels on `lu-calendar`.
+
+#### 18.3.0
+
+##### Added
+
+- `lu-calendar2` (`Calendar2Component`): new standalone calendar component built on `date-fns`. Supports day/month/year modes, date ranges, keyboard navigation, overflow-day display and a "today" button. Inputs: `showOverflow`, `enableOverflow`, `hideToday`, `hasTodayButton`, `hideWeekend`, `ranges`, `getCellInfo`; models: `date` (required), `tabbableDate`, `mode`, `displayMode`; outputs: `nextPage`, `previousPage`, `dateClicked`.
+
+#### 18.1.0
+
+##### Changed
+
+- `granularity`: the `lu-calendar` `granularity` input now accepts the `LuDateGranularity` string union (e.g. `'day'`) in addition to the `ELuDateGranularity` enum.

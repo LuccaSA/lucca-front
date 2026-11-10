@@ -1,3 +1,9 @@
+### 22.1.2
+
+#### Fixed
+
+- `lu-time-picker`: hours are displayed with two digits (`03:12`) in locales that pad them, such as French.
+
 ### 21.3.1
 
 #### Changed

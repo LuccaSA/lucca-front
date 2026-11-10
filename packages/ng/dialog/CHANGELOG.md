@@ -1,3 +1,9 @@
+### 22.1.2
+
+#### Fixed
+
+- Leaving a routed dialog through the router (link, browser back button) no longer throws `EmptyError` when one of its `canDeactivate` guards completes without a value: the navigation is cancelled and the dialog stays open.
+
 ### 22.1.1
 
 #### Fixed

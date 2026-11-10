@@ -2,25 +2,25 @@ import { capitalize } from '@lucca-front/ng/core';
 import { differenceInCalendarDays } from 'date-fns';
 import { CalendarMode } from './public-api';
 
+const displayOptionsByMode: Partial<Record<CalendarMode, Intl.DateTimeFormatOptions>> = {
+	month: { month: 'numeric', year: 'numeric' },
+	year: { year: 'numeric' },
+};
+
 export function getDateFormat(locale: string, mode: CalendarMode = 'day'): string {
-	return new Intl.DateTimeFormat(locale)
-		.formatToParts(new Date('01/01/2024'))
-		.reduce((acc, part) => {
-			if (part.type === 'day' && (mode === 'day' || mode === 'week')) {
+	return new Intl.DateTimeFormat(locale, displayOptionsByMode[mode]).formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
+		switch (part.type) {
+			case 'day':
 				return `${acc}${'d'.repeat(part.value.length)}`;
-			}
-			if (part.type === 'month' && mode !== 'year') {
+			case 'month':
 				return `${acc}${'M'.repeat(part.value.length)}`;
-			}
-			if (part.type === 'year') {
+			case 'year':
 				return `${acc}${'y'.repeat(part.value.length)}`;
-			}
-			if (part.type === 'literal') {
+			case 'literal':
 				return `${acc}${part.value}`;
-			}
-			return acc;
-		}, '')
-		.replace(/^\/+/, '');
+		}
+		return acc;
+	}, '');
 }
 
 export function getSeparator(locale: string): string {

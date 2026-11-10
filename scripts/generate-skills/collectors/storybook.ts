@@ -1,5 +1,30 @@
+import fs from 'fs';
 import { StorybookDocsEntry, StorybookGroup, StorybookStory, VersionConfig } from '../types';
 import { fetchWithTimeout } from './http';
+
+let indexFile: string | null = null;
+
+/**
+ * Set by the CLI under `--offline`: the index is read from this file instead of the deployed
+ * Storybook. Links in the skill keep pointing at `storybookBaseUrl` either way.
+ */
+export function setStorybookIndexFile(file: string | null): void {
+	indexFile = file;
+}
+
+/** The raw `entries` of the Storybook index.json — the only Storybook read of the run. */
+export async function loadStorybookIndexEntries(version: VersionConfig): Promise<Record<string, any>> {
+	if (indexFile) {
+		return JSON.parse(fs.readFileSync(indexFile, 'utf-8')).entries ?? {};
+	}
+
+	const indexUrl = `${version.storybookBaseUrl}/index.json`;
+	const res = await fetchWithTimeout(indexUrl);
+	if (!res.ok) {
+		throw new Error(`Storybook index HTTP ${res.status}: ${indexUrl}`);
+	}
+	return (await res.json()).entries ?? {};
+}
 
 /**
  * Fetches the Storybook index.json for a specific version and groups stories by component.
@@ -7,16 +32,9 @@ import { fetchWithTimeout } from './http';
  * @param version — Resolved version config with storybookBaseUrl
  */
 export async function fetchStorybookIndex(version: VersionConfig): Promise<Map<string, StorybookGroup>> {
-	const indexUrl = `${version.storybookBaseUrl}/index.json`;
-	console.log(`📚 Fetching Storybook index for ${version.tag}...`);
+	console.log(`📚 Storybook index for ${version.tag} (${indexFile ?? `${version.storybookBaseUrl}/index.json`})...`);
 
-	const res = await fetchWithTimeout(indexUrl);
-	if (!res.ok) {
-		throw new Error(`Storybook index HTTP ${res.status}: ${indexUrl}`);
-	}
-
-	const data = await res.json();
-	const entries: any[] = Object.values(data.entries || {});
+	const entries: any[] = Object.values(await loadStorybookIndexEntries(version));
 
 	console.log(`  ${entries.length} Storybook entries found`);
 

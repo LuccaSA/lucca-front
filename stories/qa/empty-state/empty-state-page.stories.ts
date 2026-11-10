@@ -4,6 +4,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'empty-state-page-stories',
@@ -11,7 +12,9 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 	imports: [LuSafeExternalSvgPipe, EmptyStatePageComponent, ButtonComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class EmptyStatePageStory {}
+class EmptyStatePageStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/Empty State/Page',

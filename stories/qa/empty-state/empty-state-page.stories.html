@@ -5,7 +5,7 @@
 			<div
 				class="emptyState-content-icon"
 				aria-hidden="true"
-				[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/message/medal-01.svg' | luSafeExternalSvg"
+				[innerHtml]="cdnUrl + '/lucca-front/assets/empty-states/message/medal-01.svg' | luSafeExternalSvg"
 			></div>
 			<div class="emptyState-content-text">
 				<h1 class="emptyState-content-heading">Empty State</h1>
@@ -24,11 +24,11 @@
 <lu-empty-state-page
 	heading="Empty State"
 	description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."
-	icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/medal-01.svg"
-	topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg"
-	topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg"
-	bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg"
-	bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg"
+	icon="{{ cdnUrl }}/lucca-front/assets/empty-states/message/medal-01.svg"
+	topRightBackground="{{ cdnUrl }}/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg"
+	topRightForeground="{{ cdnUrl }}/lucca-front/assets/empty-states/generic/coffee-01.svg"
+	bottomLeftBackground="{{ cdnUrl }}/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg"
+	bottomLeftForeground="{{ cdnUrl }}/lucca-front/assets/empty-states/poplee/core-hr-01.svg"
 >
 	<button type="button" luButton>Button</button>
 	<button type="button" luButton="outlined">Button</button>

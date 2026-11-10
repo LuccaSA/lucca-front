@@ -4,7 +4,8 @@ import { ALuClearer, ILuClearer } from './clearer.model';
 import { LU_CLEARER_TRANSLATIONS } from './clearer.translate';
 
 /**
- * @deprecated use `ClearComponent` instead
+ * @deprecated since 21.0.0; use ClearComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-input-clearer',

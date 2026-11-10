@@ -1,3 +1,9 @@
+### 22.1.2
+
+#### Added
+
+- `minimumFractionDigits` and `maximumFractionDigits` inputs to override the default number of fraction digits, for instance a currency that `Intl` rounds to 0 digits.
+
 ### 22.1.0
 
 #### Added

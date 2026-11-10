@@ -13,12 +13,14 @@
 @mixin stickyHeaderVertical {
 	--components-mainLayout-content-inside-header-position: sticky;
 	--components-mainLayout-content-inside-header-insetBlockStart: 0;
+	// stylelint-disable-next-line declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 	--components-mainLayout-content-inside-header-backgroundColor: var(--commons-background-base);
 }
 
 @mixin stickyFooterVertical {
 	--components-mainLayout-content-inside-footer-position: sticky;
 	--components-mainLayout-content-inside-footer-insetBlockEnd: 0;
+	// stylelint-disable-next-line declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 	--components-mainLayout-content-inside-footer-backgroundColor: var(--commons-background-base);
 }
 

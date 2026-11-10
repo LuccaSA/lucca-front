@@ -11,7 +11,8 @@
 	--components-callout-content-description-action-marginBlockEnd: 0;
 	--components-callout-content-description-action-paddingBlock: var(--pr-t-spacings-50);
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-callout-fontSize: inherit;
 	--components-callout-lineHeight: inherit;
+	// stylelint-enable property-disallowed-list
 }

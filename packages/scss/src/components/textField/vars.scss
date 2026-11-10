@@ -17,7 +17,8 @@
 	--component-textField-width: auto;
 	--component-textField-prefix-lang-minInlineSize: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--component-textField-fontSize: var(--pr-t-font-body-M-fontSize);
 	--component-textField-lineHeight: var(--pr-t-font-body-M-lineHeight);
+	// stylelint-enable property-disallowed-list
 }

@@ -1,6 +1,6 @@
 @mixin nested($level: 1) {
 	--components-listboxOptionWrapper-level: #{$level};
-	--components-listboxOptionWrapper-childrenPaddingInlineStart: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-100) * var(--components-listboxOptionWrapper-level));
+	--components-listboxOptionWrapper-childrenPaddingInlineStart: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-150) * var(--components-listboxOptionWrapper-level));
 }
 
 @mixin nestedWrapper {

@@ -1,0 +1,128 @@
+# fancy-dialog
+
+**Sommaire**
+
+- Import
+- API Reference
+  - DialogContentComponent (component)
+  - DialogFooterComponent (component)
+  - DialogHeaderAction (directive)
+  - DialogHeaderSubtitle (directive)
+  - DialogHeaderComponent (component)
+  - DialogRoutingContainerComponent (component)
+  - DialogComponent (component)
+  - DialogCloseDirective (directive)
+  - DialogDismissDirective (directive)
+  - DialogOpenDirective (directive)
+  - Providers
+  - Injection tokens
+  - Services
+- Related files
+- Changelog
+  - 22.0.0
+
+## Import
+
+```typescript
+import { DialogContentComponent, DialogFooterComponent, DialogHeaderAction, DialogHeaderSubtitle, DialogHeaderComponent, DialogRoutingContainerComponent, DialogComponent, DialogCloseDirective, DialogDismissDirective, DialogOpenDirective } from '@lucca-front/ng/dialog';
+```
+
+## API Reference
+
+### DialogContentComponent (component)
+
+**Selector:** `lu-dialog-content`
+
+### DialogFooterComponent (component)
+
+**Selector:** `lu-dialog-footer`
+
+### DialogHeaderAction (directive)
+
+**Selector:** `[dialogHeaderAction]`
+
+### DialogHeaderSubtitle (directive)
+
+**Selector:** `[dialogHeaderSubtitle]`
+
+### DialogHeaderComponent (component)
+
+**Selector:** `lu-dialog-header`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `intl` | `intl` | `unknown` | — | — | — | — |
+
+### DialogRoutingContainerComponent (component)
+
+**Selector:** `lu-dialog-routing-container`
+
+### DialogComponent (component)
+
+**Selector:** `lu-dialog`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `stacked` | `stacked` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `fancyIllustration` | `fancyIllustration` | `'approval' \| 'checklist' \| 'email' \| 'install' \| 'mapping' \| 'save' \| 'users' \| 'welcome' \| 'payment-card'` | `'welcome'` | — | — | — |
+| `fancyIllustrationUrl` | `fancyIllustrationUrl` | `string \| null` | `null` | — | — | — |
+
+### DialogCloseDirective (directive)
+
+**Selector:** `[luDialogClose]`
+
+### DialogDismissDirective (directive)
+
+**Selector:** `[luDialogDismiss]`
+
+### DialogOpenDirective (directive)
+
+**Selector:** `[luDialogOpen]`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `dialog` | `luDialogOpen` | `TemplateRef<void>` | — | ✅ | — | — |
+| `luDialogConfig` | `luDialogConfig` | `LuDialogConfig<unknown>` | — | — | — | — |
+
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `provideDialogRoutingReuseStrategy` | `(): EnvironmentProviders` | — |
+| `configureLuDialog` | `(): EnvironmentProviders` | — |
+| `provideLuDialog` | `(): Provider` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_DIALOG_HEADER_TRANSLATIONS` | `unknown` | — |
+| `DIALOG_ROUTE_CLOSE_TRIGGER` | `DialogRouteCloseTrigger` | — |
+| `DIALOG_ROUTE_DISMISS_TRIGGER` | `DialogRouteDismissTrigger` | — |
+| `DIALOG_ROUTE_CONFIG` | `DialogRouteConfig<unknown>` | — |
+
+### Services
+
+#### LuDialogService
+
+- `open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData>`
+
+## Related files
+
+- 📝 [Code & implementation](./fancy-dialog.component.md)
+- 🎨 [Design guidelines](./fancy-dialog.design.md)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.0.0
+
+`DialogComponent` :
+  ~ `stacked` : transform booleanAttribute → luBooleanAttribute

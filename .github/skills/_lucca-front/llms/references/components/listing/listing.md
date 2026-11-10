@@ -1,0 +1,136 @@
+# listing
+
+**Sommaire**
+
+- Import
+- Basic Usage
+- API Reference
+  - ListingItemComponent (component)
+  - ListingComponent (component)
+- Type definitions
+- Related files
+- Changelog
+  - 22.1.1
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
+## Import
+
+```typescript
+import { ListingItemComponent, ListingComponent } from '@lucca-front/ng/listing';
+```
+
+## Basic Usage
+
+```html
+<lu-listing> <lu-listing-item>item</lu-listing-item> <lu-listing-item>item</lu-listing-item> <lu-listing-item> item <lu-listing> <lu-listing-item>item</lu-listing-item> <lu-listing-item>item</lu-listing-item> <lu-listing-item critical>item</lu-listing-item> </lu-listing> </lu-listing-item> <lu-listing-item>item</lu-listing-item>
+</lu-listing>
+```
+
+## API Reference
+
+### ListingItemComponent (component)
+
+**Selector:** `lu-listing-item`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Modifie l’icône d’un élément de la liste. |
+| `critical` | `critical` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+
+### ListingComponent (component)
+
+**Selector:** `lu-listing`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `ordered` | `ordered` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste sous forme ordonnée (piloté par le contrôle type). |
+| `orderedFancy` | `orderedFancy` | `boolean` | `false` | — | `luBooleanAttribute` | [v21.2] Présente la liste sous forme ordonnée stylisée (piloté par le contrôle type). |
+| `checklist` | `checklist` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste sous forme de checklist (piloté par le contrôle type). |
+| `icons` | `icons` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste avec des icônes (piloté par le contrôle type). |
+| `defaultIcon` | `defaultIcon` | `LuccaIcon` | `'signConfirm'` | — | — | Modifie l’icône par défaut. |
+| `palette` | `palette` | `Palette` | `'none'` | — | — | Modifie la couleur des icônes. |
+| `start` | `start` | `number` | `1` | — | `luNumberAttribute` | Modifie la valeur initiale de la liste. |
+| `inline` | `inline` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `divider` | `divider` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute un séparateur vertical entre les éléments. |
+| `reversed` | `reversed` | `boolean` | `false` | — | `luBooleanAttribute` | Présente la liste sous forme décroissante. |
+| `size` | `size` | `ListingSize \| null` | `null` | — | — | Modifie la taille du composant. |
+
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+
+## Related files
+
+- 📝 [Code & implementation](./listing.component.md)
+- 🎨 [Design guidelines](./listing.design.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-listings-listing-angular-basic--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.1.1
+
+`ListingComponent` :
+  + `size` : ListingSize | null
+
+### 22.0.0
+
+`ListingItemComponent` :
+  ~ `critical` : transform booleanAttribute → luBooleanAttribute
+`ListingComponent` :
+  ~ `ordered` : transform booleanAttribute → luBooleanAttribute
+  ~ `orderedFancy` : transform booleanAttribute → luBooleanAttribute
+  ~ `checklist` : transform booleanAttribute → luBooleanAttribute
+  ~ `icons` : transform booleanAttribute → luBooleanAttribute
+  ~ `start` : transform numberAttribute → luNumberAttribute
+  ~ `inline` : transform booleanAttribute → luBooleanAttribute
+  ~ `divider` : transform booleanAttribute → luBooleanAttribute
+  ~ `reversed` : transform booleanAttribute → luBooleanAttribute
+
+### Notes de release (ZeroHeight)
+
+#### 22.1.1
+
+##### Added
+
+- `S` value for the `size` input (`.listing.mod-S`) for smaller text, numbers and icons. Nested listings follow the size of their parent.
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+#### 21.2.0
+
+##### Added
+
+- `critical` input to render an item with the critical styling.
+- `orderedFancy` input, replacing `fancy`, to render an ordered list with fancy numbers.
+
+##### Removed
+
+- `fancy` input — use `orderedFancy` instead.
+
+#### 21.0.0
+
+##### Added
+
+- `inline` input to lay out the items on a single line.
+- `divider`, `reversed` and `start` inputs.
+
+#### 20.1.0
+
+##### Added
+
+- `lu-listing` component (`listing`) and `lu-listing-item`, with the `ordered`, `checklist`, `palette`, `icons` and `defaultIcon` inputs, the item-level `icon` input and the `LU_LISTING_INSTANCE` injection token.
+
+##### Fixed
+
+- Default icon of the items.

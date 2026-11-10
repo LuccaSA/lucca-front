@@ -14,7 +14,8 @@ import { ALuOptionPickerComponent } from './option-picker.component';
 
 /* eslint-disable @angular-eslint/prefer-signals */
 /**
- * @deprecated
+ * @deprecated since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Directive()
 export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
@@ -123,7 +124,9 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 
 /**
  * advanced option picker panel
- * @deprecated
+ *
+ * @deprecated since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-option-picker-advanced',

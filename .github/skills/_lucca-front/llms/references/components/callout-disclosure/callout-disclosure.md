@@ -1,0 +1,218 @@
+# callout-disclosure
+
+**Sommaire**
+
+- Import
+- API Reference
+  - CalloutDisclosureComponent (component)
+  - Injection tokens
+- Type definitions
+- Related files
+- Changelog
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
+## Import
+
+```typescript
+import { CalloutDisclosureComponent } from '@lucca-front/ng/callout';
+```
+
+## API Reference
+
+### CalloutDisclosureComponent (component)
+
+**Selector:** `lu-callout-disclosure`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `heading` | `heading` | `PortalContent` | — | ✅ | — | Titre du callout. [PortalContent] |
+| `icon` | `icon` | `LuccaIcon` | — | — | — | Ajoute une icône au callout. |
+| `palette` | `palette` | `Palette` | `'none'` | — | — | Applique une palette de couleurs au callout. |
+| `size` | `size` | `'M' \| 'S'` | `'M'` | — | — | Modifie la taille du callout. |
+| `state` | `state` | `'success' \| 'warning' \| 'error'` | — | — | — | État du callout. |
+| `open` | `open` | `boolean` | `false` | — | `luBooleanAttribute` | Place le callout dans son état déplié. |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `openChange` | `openChange` | `boolean` | — |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CALLOUT_TRANSLATIONS` | `unknown` | — |
+
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+
+## Related files
+
+- 📝 [Code & implementation](./callout-disclosure.component.md)
+- 🎨 [Design guidelines](./callout-disclosure.design.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-feedback-callout-disclosure-angular-basic--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.0.0
+
+~ `open` : transform booleanAttribute → luBooleanAttribute
+
+### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+##### Fixed
+
+- `mod-S` — actions placed in the description no longer add extra vertical spacing.
+- Outlined and ghost buttons in the actions now show a focus ring when focused with the keyboard.
+
+#### 21.3.0
+
+##### Added
+
+- `CALLOUT_SIZE`, `CALLOUT_POPOVER_SIZE` and `CALLOUT_HX` constants, together with the `CalloutSize`, `CalloutPopoverSize` and `CalloutHx` types, are now publicly exported and used to type the `size` and `hx` inputs.
+- `AI` palette support for the AI callout styling.
+
+#### 21.2.4
+
+##### Added
+
+- `buttonLabel` on `lu-callout-popover` now also accepts a `number`.
+
+#### 21.2.2
+
+##### Added
+
+- `popoverDisabled` input on `lu-callout-popover` to render the trigger without opening a popover.
+
+##### Fixed
+
+- The callout margin no longer remains visible once the callout has been removed.
+
+#### 21.2.1
+
+##### Fixed
+
+- Button alignment inside a `size="S"` callout.
+
+#### 21.2.0
+
+##### Added
+
+- `popoverPosition` input on `lu-callout-popover` (`above` by default) and `customPopoverPositions` to provide your own connected positions.
+
+#### 21.1.4
+
+##### Added
+
+- `hx` input to set the heading level used by the callout heading.
+- `popoverTrigger` input on `lu-callout-popover` (`click`, `click+hover`, `hover+focus`).
+
+##### Fixed
+
+- Status of the actions displayed inside a callout.
+
+#### 21.1.0
+
+##### Changed
+
+- `intl` input now accepts partial overrides that are merged with the default translations.
+
+#### 21.0.3
+
+##### Fixed
+
+- Callout descriptions are now rendered inside paragraphs to keep a valid DOM structure with inline actions.
+
+#### 21.0.0
+
+##### Added
+
+- `buttonAlt` and `heading` inputs on `lu-callout-popover`, plus `headingHiddenIfSingleItem` on `lu-callout-feedback-list`.
+
+##### Changed
+
+- `lu-callout-popover` is now based on the `popover2` directives.
+
+##### Removed
+
+- Elements deprecated in 18.1.
+
+#### 20.3.0
+
+##### Added
+
+- `AI` input to render the callout with the AI styling (`mod-AI`).
+- `iconAlt` input to provide an alternative text for the callout icon.
+
+#### 20.2.3
+
+##### Fixed
+
+- Padding and font size of the `size="S"` callout.
+
+#### 20.1.3
+
+##### Fixed
+
+- Size of the `XS` callout popover.
+
+#### 20.1.2
+
+##### Fixed
+
+- `lu-callout-popover` no longer loses the icon deduced from its `state` when no `icon` is provided.
+
+#### 20.1.1
+
+##### Added
+
+- `CalloutState` type is now publicly exported.
+
+#### 19.1.0
+
+##### Changed
+
+- Callout actions now use the `neutral` palette by default.
+
+#### 18.3.2
+
+##### Fixed
+
+- Disclosure icon of `lu-callout-disclosure`.
+
+#### 18.2.3
+
+##### Fixed
+
+- `state` input is now taken into account when set several times.
+
+#### 18.1.4
+
+##### Fixed
+
+- `size` no longer produces an invalid `mod-undefined` CSS class when left unset.
+
+#### 18.1.1
+
+##### Fixed
+
+- Close icon size and position.
+
+#### 18.1.0
+
+##### Changed
+
+- Actions are now wrapped in a dedicated container.

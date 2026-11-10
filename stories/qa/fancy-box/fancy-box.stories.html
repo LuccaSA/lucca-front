@@ -15,9 +15,9 @@
 				<div
 					class="fancyBox"
 					[attr.style]="`
-						--components-fancyBox-background-left: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg);
-						--components-fancyBox-background-right: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg);
-						--components-fancyBox-foreground: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg);
+						--components-fancyBox-background-left: url(${cdnUrl}/transverse/prisme/visuals/fancy-box/background-left-plant.svg);
+						--components-fancyBox-background-right: url(${cdnUrl}/transverse/prisme/visuals/fancy-box/background-right-candies.svg);
+						--components-fancyBox-foreground: url(${cdnUrl}/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg);
 					`"
 				>
 					<div class="fancyBox-content">
@@ -28,9 +28,9 @@
 			</td>
 			<td>
 				<lu-fancy-box
-					backgroundLeft="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg"
-					backgroundRight="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg"
-					foreground="https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg"
+					backgroundLeft="{{ cdnUrl }}/transverse/prisme/visuals/fancy-box/background-left-plant.svg"
+					backgroundRight="{{ cdnUrl }}/transverse/prisme/visuals/fancy-box/background-right-candies.svg"
+					foreground="{{ cdnUrl }}/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg"
 					>Lorem ipsum dolor<br />sit amet consectetur<br />adipisicing elit. <br />Lorem ipsum dolor.</lu-fancy-box
 				>
 			</td>
@@ -42,11 +42,11 @@
 					<div class="fancyBox-content">
 						<div
 							class="fancyBox-content-backgroundEndStart"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-end-start-bubbles.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/background-end-start-bubbles.svg' | luSafeExternalSvg"
 						></div>
 						<div
 							class="fancyBox-content-backgroundStartEnd"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-start-end-bubbles.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/background-start-end-bubbles.svg' | luSafeExternalSvg"
 						></div>
 						Lorem ipsum dolor<br />sit amet consectetur<br />adipisicing elit. <br />Lorem ipsum dolor.
 					</div>
@@ -63,19 +63,19 @@
 					<div class="fancyBox-content">
 						<div
 							class="fancyBox-content-backgroundEndStart"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-end-start-plant.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/background-end-start-plant.svg' | luSafeExternalSvg"
 						></div>
 						<div
 							class="fancyBox-content-backgroundStartEnd"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-start-end-candies.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/background-start-end-candies.svg' | luSafeExternalSvg"
 						></div>
 						<div
 							class="fancyBox-content-foregroundStartEnd"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-start-end-pizza.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/foreground-start-end-pizza.svg' | luSafeExternalSvg"
 						></div>
 						<div
 							class="fancyBox-content-foregroundEndStart"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-end-start-clips.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/foreground-end-start-clips.svg' | luSafeExternalSvg"
 						></div>
 						Lorem ipsum dolor<br />sit amet consectetur<br />adipisicing elit. <br />Lorem ipsum dolor.
 					</div>
@@ -94,19 +94,19 @@
 					<div class="fancyBox-content">
 						<div
 							class="fancyBox-content-backgroundEndStart"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-end-start-plant.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/background-end-start-plant.svg' | luSafeExternalSvg"
 						></div>
 						<div
 							class="fancyBox-content-backgroundStartEnd"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-start-end-candies.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/background-start-end-candies.svg' | luSafeExternalSvg"
 						></div>
 						<div
 							class="fancyBox-content-foregroundStartEnd"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-start-end-pizza.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/foreground-start-end-pizza.svg' | luSafeExternalSvg"
 						></div>
 						<div
 							class="fancyBox-content-foregroundEndStart"
-							[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-end-start-clips.svg' | luSafeExternalSvg"
+							[innerHtml]="cdnUrl + '/transverse/prisme/visuals/fancy-box/foreground-end-start-clips.svg' | luSafeExternalSvg"
 						></div>
 						Lorem ipsum dolor<br />sit amet consectetur<br />adipisicing elit. <br />Lorem ipsum dolor.
 					</div>

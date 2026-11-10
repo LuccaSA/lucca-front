@@ -40,6 +40,7 @@ import {
 } from '@lucca-front/ng/skeleton';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'skeleton-components',
@@ -88,7 +89,9 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class SkeletonComponentsStory {}
+class SkeletonComponentsStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/Skeleton Components',

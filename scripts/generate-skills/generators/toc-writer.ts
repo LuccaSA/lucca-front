@@ -1,25 +1,25 @@
 import fs from 'fs';
 import path from 'path';
 import { DocumentationMap, VersionConfig } from '../types';
-import { TechnicalMinorPatches } from '../version-config';
-import { versionRoot, versionFolder } from './skill-writer';
+import { TechnicalMinorPatches, followsCode } from '../version-config';
+import { skillRoot, SKILL_NAME } from './skill-writer';
 
 /**
- * Writes the per-minor SKILL.md — the entry point of a single self-contained minor skill.
+ * Writes the SKILL.md — the entry point of the skill.
  *
- * Output: lucca-front/lucca-front-<M>-<m>/SKILL.md
+ * Output: _lucca-front/llms/SKILL.md
  *
- * The minor is implicit (one minor per installed skill): no package.json detection, no version
- * guardrail. references/ documents the minor's LATEST published patch; fixes/ carries the
- * per-patch deltas. All paths are flat and relative to this folder. The component list (§6) is
+ * The minor is implicit (the npm package of that minor ships it). references/ documents the
+ * minor's LATEST published patch; fixes/ carries the per-patch deltas. Docs that follow the code
+ * (`--ref`) name no version at all: the package that ships them is their version, and the installed one only fills in
+ * the Storybook links. All paths are flat and relative to this folder. The component list (§5) is
  * sourced from the generated folders on disk — the single source of truth, so every listed slug
  * is a navigable path.
  */
 export function writeToc(skillsDir: string, version: VersionConfig, patchTags: string[], technicalMinors: TechnicalMinorPatches[] = []): string {
-	const root = versionRoot(skillsDir, version);
+	const root = skillRoot(skillsDir);
 	const minorVersion = `${version.major}.${version.minor}`;
 	const latestPatch = `${version.major}.${version.minor}.${version.patch}`;
-	const skillName = versionFolder(version);
 	const patchList = patchTags.map((t) => t.replace(/^v/, ''));
 	const fixPatches = patchList.slice(1); // every published patch > x.y.0 has a fix file
 
@@ -81,6 +81,52 @@ export function writeToc(skillsDir: string, version: VersionConfig, patchTags: s
 			.map((d) => d.name)
 			.sort((a, b) => a.localeCompare(b));
 	}
+	const codeSkill = followsCode(version);
+	const versionSection = codeSkill
+		? `## 1. Version
+
+Cette documentation ne porte pas de numéro de version : elle est régénérée à chaque modification du code de lucca-front, et chaque version de \`@lucca-front/ng\` la livre dans \`node_modules/@lucca-front/ng/llms/\`. Elle décrit le code de cette version : l'API d'un composant est à jour, mais sa section \`## Changelog\` s'arrête au tag précédent (dans le package \`X.Y.0\`, elle ne liste pas encore \`X.Y.0\`).
+
+**Détecte la version de \`@lucca-front/ng\` installée** (ne la suppose jamais) :
+
+1. en priorité \`node_modules/@lucca-front/ng/package.json\` → champ \`version\` ;
+2. à défaut, la dépendance \`@lucca-front/ng\` (ou \`@lucca-front/scss\`) dans le \`package.json\` du projet.
+
+Elle sert à ouvrir le Storybook : les liens sont écrits \`${version.storybookBaseUrl}/…\`. Remplace \`{version}\` par la version détectée avant de les suivre.
+
+Lue dans le \`node_modules\` du projet, elle correspond toujours au package installé. Lue ailleurs (dépôt lucca-front, Storybook d'une autre version), signale en une ligne si la mineure installée diffère et continue : la documentation peut décrire une API que le projet n'a pas encore, ou plus.
+`
+		: `## 1. Version
+
+Cette skill couvre **Lucca Front ${minorVersion}.x** (patchs publiés : ${patchList.join(', ')}). La **mineure** est celle installée sur le projet — tous les chemins ci-dessous lui sont relatifs, il n'y a pas de mineure à résoudre.
+
+**Détecte le patch installé** (obligatoire, ne le suppose jamais) :
+
+1. en priorité \`node_modules/@lucca-front/ng/package.json\` → champ \`version\` (version résolue exacte, ex: \`${latestPatch}\`) ;
+2. à défaut, la dépendance \`@lucca-front/ng\` (ou \`@lucca-front/scss\`) dans le \`package.json\` du projet (ex: \`^${latestPatch}\` → \`${latestPatch}\`).
+
+La documentation \`references/\` reflète le **dernier patch publié : ${latestPatch}**. Si le patch du projet est **antérieur**, les correctifs livrés après sa version sont décrits dans \`fixes/\` (voir §2) — ils ne sont **pas** dans son code : consulte tous les \`fixes/<M-m-p>.md\` de version **strictement supérieure** au patch installé et ignore ces changements.
+${techBlock}
+**Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
+
+- la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: cette documentation est lue ailleurs que dans le \`node_modules/@lucca-front/ng/llms/\` du projet, qui correspond toujours au package installé) ;
+- le patch (ou la version \`@lucca-front/ng\`) **ne peut pas être déterminé**.
+
+Si le **patch** détecté est **postérieur** à ${latestPatch}${techPatchGuardSuffix}, **signale-le en une ligne et continue** ; en cas de comportement inattendu, lis les notes de release des patchs postérieurs (\`gh release view v<patch> --repo LuccaSA/lucca-front\`) : le paquet \`@lucca-front/ng\` n'embarque pas de CHANGELOG.
+`;
+	const fixesSection = codeSkill
+		? ''
+		: `
+### Correctifs de patch (fixes/)
+
+\`./fixes/<M-m-p>.md\` — un fichier par patch publié de la mineure (delta vs le patch précédent : API, types partagés, codemods, sources de stories).${fixPatches.length > 0 ? ` Fichiers : ${fixPatches.map((p) => `\`${p.replace(/\./g, '-')}.md\``).join(', ')}.` : ' _(aucun patch publié après le .0 pour l\'instant)_'}${techFixesLine}
+
+À consulter quand : le projet est sur un patch **antérieur** à ${latestPatch} (les fixes postérieurs à sa version décrivent des correctifs absents de son code), ou pour comprendre ce qu'un patch précis a changé.
+`;
+	const fixesUsageRow = codeSkill ? '' : `\n| Projet sur un patch antérieur à ${latestPatch} / comportement inattendu sur un patch | \`./fixes/<M-m-p>.md\` |${techUsageRow}`;
+	const versionLabel = codeSkill ? '' : ` ${minorVersion}`;
+	const descriptionVersion = codeSkill ? '' : `, versions ${minorVersion}.x${techDescription}`;
+
 	const compactComponentLines = componentSlugs.map((slug) => `- ${slug}`).join('\n') + '\n';
 
 	// ── Load documentation map (category listing, version-independent) ──────────
@@ -114,37 +160,21 @@ export function writeToc(skillsDir: string, version: VersionConfig, patchTags: s
 	// ── Build the SKILL.md content ─────────────────────────────────────────
 
 	const content = `---
-name: ${skillName}
+name: ${SKILL_NAME}
 description: >
-  Design system Lucca Front / Prisme (Angular), versions ${minorVersion}.x${techDescription}. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
-  ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm).
+  Design system Lucca Front / Prisme (Angular)${descriptionVersion} : API et exemples des composants, changelog, codemods de migration,
+  tokens CSS, guidelines de design et de rédaction. À charger pour tout fichier d'un projet qui dépend de @lucca-front/ng ou @lucca-front/scss,
+  ou contenant des sélecteurs lu-*, pr-* ou des directives commençant par 'lu' (ex: luButton, luTooltip, luForm), et pour intégrer ou créer une maquette Figma Prisme.
 ---
 
-# Design System Prisme — Lucca Front ${minorVersion}
+# Design System Prisme — Lucca Front${versionLabel}
 
 **RÈGLE** : Avant toute génération ou modification de code impliquant \`lu-*\`, \`luX\` ou \`pr-*\`, consulte la documentation du composant ci-dessous. Sans cette consultation, toute réponse est invalide.
 
-## 1. Version
-
-Cette skill couvre **Lucca Front ${minorVersion}.x** (patchs publiés : ${patchList.join(', ')}). La **mineure** est celle installée sur le projet — tous les chemins ci-dessous lui sont relatifs, il n'y a pas de mineure à résoudre.
-
-**Détecte le patch installé** (obligatoire, ne le suppose jamais) :
-
-1. en priorité \`node_modules/@lucca-front/ng/package.json\` → champ \`version\` (version résolue exacte, ex: \`${latestPatch}\`) ;
-2. à défaut, la dépendance \`@lucca-front/ng\` (ou \`@lucca-front/scss\`) dans le \`package.json\` du projet (ex: \`^${latestPatch}\` → \`${latestPatch}\`).
-
-La documentation \`references/\` reflète le **dernier patch publié : ${latestPatch}**. Si le patch du projet est **antérieur**, les correctifs livrés après sa version sont décrits dans \`fixes/\` (voir §2) — ils ne sont **pas** dans son code : consulte tous les \`fixes/<M-m-p>.md\` de version **strictement supérieure** au patch installé et ignore ces changements.
-${techBlock}
-**Vérifie la cohérence entre la version détectée et cette skill avant de coder.** Dans chacun de ces cas, **arrête-toi et demande à l'utilisateur** — ne suppose jamais une version, ne code pas :
-
-- la **mineure** détectée n'est pas \`${minorVersion}\`${techGuardSuffix} (ex: le projet est monté de version mais la skill n'a pas été mise à jour, ou la mauvaise skill est chargée) ;
-- le patch (ou la version \`@lucca-front/ng\`) **ne peut pas être déterminé**.
-
-Si le **patch** détecté est **postérieur** à ${latestPatch}${techPatchGuardSuffix}, **signale-le en une ligne et continue** ; en cas de comportement inattendu, lis les notes de release des patchs postérieurs (\`gh release view v<patch> --repo LuccaSA/lucca-front\`) : le paquet \`@lucca-front/ng\` n'embarque pas de CHANGELOG.
-
+${versionSection}
 ## 2. Chemins
 
-Compose le chemin du fichier à partir du slug du composant. **Ne devine jamais un chemin** : seuls les fichiers réellement présents font foi. Si un chemin composé n'existe pas, ne le remplace pas par une supposition — vérifie le slug dans la liste §6.
+Compose le chemin du fichier à partir du slug du composant. **Ne devine jamais un chemin** : seuls les fichiers réellement présents font foi. Si un chemin composé n'existe pas, ne le remplace pas par une supposition — vérifie le slug dans la liste §5.
 
 ### Composant \`<slug>\`
 
@@ -153,7 +183,6 @@ Compose le chemin du fichier à partir du slug du composant. **Ne devine jamais 
 | API Angular + Changelog | \`./references/components/<slug>/<slug>.md\` |
 | Exemples (Angular + HTML, stories incluses) | \`./references/components/<slug>/<slug>.component.md\` |
 | Design (do/don't, usage) | \`./references/components/<slug>/<slug>.design.md\` |
-| Figma (variantes, node IDs) | \`./references/components/<slug>/<slug>.figma.md\` |
 
 Le changelog du composant est la **dernière section \`## Changelog\`** du fichier API \`<slug>.md\` (diff structurel cumulatif + notes de release).
 
@@ -176,33 +205,26 @@ Slugs : animations, mixins, numbers, scrollbox, utilitaires, angular-api (provid
 
 ### Migrations (montée de version)
 
-\`./references/migrations.md\` — codemods de migration (\`ng generate @lucca-front/ng:<nom>\`) cumulatifs jusqu'à cette version, avec leur version d'introduction.
-
-### Correctifs de patch (fixes/)
-
-\`./fixes/<M-m-p>.md\` — un fichier par patch publié de la mineure (delta vs le patch précédent : API, types partagés, codemods, sources de stories).${fixPatches.length > 0 ? ` Fichiers : ${fixPatches.map((p) => `\`${p.replace(/\./g, '-')}.md\``).join(', ')}.` : ' _(aucun patch publié après le .0 pour l\'instant)_'}${techFixesLine}
-
-À consulter quand : le projet est sur un patch **antérieur** à ${latestPatch} (les fixes postérieurs à sa version décrivent des correctifs absents de son code), ou pour comprendre ce qu'un patch précis a changé.
-
+\`./references/migrations.md\` — codemods de migration (\`ng generate @lucca-front/ng:<nom>\`) cumulatifs${codeSkill ? '' : ' jusqu\'à cette version'}, avec leur version d'introduction.
+${fixesSection}
 ### Exemple
 
-Bouton → API : \`./references/components/button/button.md\`, Figma : \`./references/components/button/button.figma.md\`
+Bouton → API : \`./references/components/button/button.md\`, Design : \`./references/components/button/button.design.md\`
 
 ## 3. Quand consulter quoi
 
 | Cas d'usage | Consulter |
 |-------------|-----------|
 | Écrire du code Angular | API (.md) → Exemples (.component.md) → section \`## Changelog\` du .md |
-| Intégrer depuis maquette Figma | Figma (.figma.md) → Tokens → Guidelines dev UI |
-| Créer une maquette Figma (Code → Figma) | Figma (.figma.md) → Design (\`<slug>.design.md\`) |
+| Intégrer depuis maquette Figma | La maquette avec le MCP Figma (accès du développeur), puis Tokens → Guidelines dev UI |
+| Créer une maquette Figma (Code → Figma) | Design (\`<slug>.design.md\`), puis le MCP Figma pour l'écrire |
 | Review de code | API → Guidelines dev UI → Contenu (si textes) → Patterns (si UX) |
 | Conventions de rédaction | Contenu (dossier \`content/\`) |
 | Design patterns | Patterns (dossier \`patterns/\`) |
 | Tokens CSS | Tokens (dossier \`tokens/\`) |
 | Mixins / animations SCSS | Outils (dossier \`tools/\`) |
 | Composant déprécié | \`./references/documentation/deprecated/deprecated.md\` |
-| Monter de version | \`./references/migrations.md\` + la section \`## Changelog\` du \`<slug>.md\` de chaque composant touché |
-| Projet sur un patch antérieur à ${latestPatch} / comportement inattendu sur un patch | \`./fixes/<M-m-p>.md\` |${techUsageRow}
+| Monter de version | \`./references/migrations.md\` + la section \`## Changelog\` du \`<slug>.md\` de chaque composant touché |${fixesUsageRow}
 
 ## 4. Workflow Code
 
@@ -212,21 +234,13 @@ Bouton → API : \`./references/components/button/button.md\`, Figma : \`./refer
 
 ⚠️ Ne te fie **jamais** à ta mémoire pour les noms de propriétés ou types. Seul le \`.md\` fait foi.
 
-## 5. Workflow Code → Figma
-
-1. Lis le fichier Figma (\`<slug>.figma.md\`) — variantes, node IDs, liens Figma.
-2. Utilise les **noms Figma** (pas Angular) pour les propriétés. Ils peuvent différer.
-3. Pour les guidelines visuelles → \`<slug>.design.md\`.
-
-⚠️ Les \`.figma.md\` reflètent l'état actuel de Figma.
-
-## 6. Composants
+## 5. Composants
 
 ${compactComponentLines}
-## 7. Documentation transverse
+## 6. Documentation transverse
 
 ${compactDocLines || '_(aucune documentation générée)_'}
-## 8. Composants dépréciés
+## 7. Composants dépréciés
 
 Consulte \`./references/documentation/deprecated/deprecated.md\` avant d'utiliser un composant inconnu.
 Ne génère **jamais** de code utilisant un composant déprécié — propose son remplacement.

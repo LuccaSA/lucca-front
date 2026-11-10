@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { collectImportStatements } from './story-source';
+import { collectImportStatements, stripInlinedConstants } from './story-source';
 
 /**
  * Imports used to be collected line by line, so prettier wrapping a long specifier list published
@@ -33,5 +33,20 @@ describe('collectImportStatements', () => {
 
 	it('does not run past the end of the file on an unterminated statement', () => {
 		expect(collectImportStatements('import {\n\tA,\n\tB,\n')).toEqual(['import { A, B,']);
+	});
+});
+
+describe('stripInlinedConstants', () => {
+	// CDN_URL is resolved into the markup by the evaluator: its import would be unused in the published example.
+	it('drops an import of CDN_URL alone', () => {
+		expect(stripInlinedConstants("import { CDN_URL } from '@lucca-front/ng/core';")).toBeNull();
+	});
+
+	it('keeps the other names of the same import', () => {
+		expect(stripInlinedConstants("import { CDN_URL, luBooleanAttribute } from '@lucca-front/ng/core';")).toBe("import { luBooleanAttribute } from '@lucca-front/ng/core';");
+	});
+
+	it('leaves other entrypoints untouched', () => {
+		expect(stripInlinedConstants("import { CDN_URL } from '@lucca-front/ng/other';")).toBe("import { CDN_URL } from '@lucca-front/ng/other';");
 	});
 });

@@ -3,6 +3,7 @@ import os from 'os';
 import path from 'path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { auditGeneratedMarkdown, auditStoryExamples, clearOutputViolations, reportOutputViolations } from './output-guard';
+import { skillRoot } from './skill-writer';
 
 let dir: string;
 
@@ -76,6 +77,15 @@ describe('auditGeneratedMarkdown', () => {
 		write('lucca-front-21-0/references/components/dialog/dialog.component.md', "```css\nimport { A } from 'x';\n```\n");
 
 		expect(reportOutputViolations(dir, ['lucca-front-21-3'])).toEqual([]);
+	});
+
+	it('blocks on the generated docs and not on the hand-written pointer beside them', () => {
+		write('_lucca-front/llms/references/components/dialog/dialog.component.md', "```css\nimport { A } from 'x';\n```\n");
+		write('lucca-front/SKILL.md', "```css\nimport { B } from 'y';\n```\n");
+
+		const blocking = reportOutputViolations(dir, [path.relative(dir, skillRoot(dir))]);
+
+		expect(blocking.map((v) => v.where.split(path.sep).slice(0, 2).join('/'))).toEqual(['_lucca-front/llms']);
 	});
 });
 
@@ -163,6 +173,24 @@ describe('truncated-import', () => {
 		);
 
 		expect(auditGeneratedMarkdown(dir)).toEqual([]);
+	});
+
+	it('accepts an import wrapped over several lines', () => {
+		write(
+			'references/components/approbation-inbox/approbation-inbox.component.md',
+			"```ts\nimport {\n\tApprobationInboxDetailComponent, ApprobationInboxHeaderComponent,\n} from '@lucca-front/ng/approbation-inbox';\n```\n",
+		);
+
+		expect(auditGeneratedMarkdown(dir)).toEqual([]);
+	});
+
+	it('flags a bare import followed by another import', () => {
+		write('references/components/data-table/data-table.component.md', "```js\nimport {\nimport { A } from 'x';\n```\n");
+
+		const violations = auditGeneratedMarkdown(dir);
+
+		expect(violations).toHaveLength(1);
+		expect(violations[0].rule).toBe('truncated-import');
 	});
 
 	it('says nothing about html or css fences', () => {

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { luBooleanAttribute } from '@lucca-front/ng/core';
+import { CDN_URL, luBooleanAttribute } from '@lucca-front/ng/core';
 import { Palette } from '@lucca/prisme/core';
 import { LU_MAIN_LAYOUT_INSTANCE } from './main-layout.token';
 import { MainLayoutIllustrationEndStart, MainLayoutIllustrationStartEnd } from './main-layout.type';
@@ -32,7 +32,7 @@ function bubblesCountAttribute(value: unknown): 1 | 2 | 3 | null {
 	],
 })
 export class MainLayoutComponent {
-	readonly domain = 'https://cdn.lucca.fr';
+	readonly domain = CDN_URL;
 	readonly path = '/transverse/prisme/visuals/main-layout/';
 	readonly extension = '.svg';
 

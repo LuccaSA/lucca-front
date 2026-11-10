@@ -104,4 +104,16 @@ describe(LuCoreSelectJobQualificationsDirective.name, () => {
 		req.flush([jobQualification(1, 7)]);
 		tick();
 	}));
+
+	it('should keep only the requested job when the url ignores `job.id`', fakeAsync(() => {
+		const options = getGroupOptions(1);
+
+		// A full page mixing groups: paging must go on even though a single option matches
+		expectGroupPage(1, 1).flush([jobQualification(1, 1), jobQualification(2, 2)]);
+		tick();
+		expectGroupPage(1, 2).flush([jobQualification(3, 1)]);
+		tick();
+
+		expect(options.map((option) => option.id)).toEqual([1, 3]);
+	}));
 });

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'file-upload-stories',
@@ -22,7 +23,9 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 		`,
 	],
 })
-class FileUploadStory {}
+class FileUploadStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/FileUpload',

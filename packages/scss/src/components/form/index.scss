@@ -116,7 +116,7 @@
 	}
 }
 
-// deprecated
+// stylelint-disable selector-disallowed-list -- Deprecated form layout.
 .form {
 	@layer components {
 		@include vars;
@@ -193,3 +193,4 @@
 		}
 	}
 }
+// stylelint-enable selector-disallowed-list

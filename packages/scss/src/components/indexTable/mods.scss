@@ -96,6 +96,7 @@
 		}
 
 		&::before {
+			// stylelint-disable-next-line declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 			background-color: var(--commons-background-base);
 		}
 

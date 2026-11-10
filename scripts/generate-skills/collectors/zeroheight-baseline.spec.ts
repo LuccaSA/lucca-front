@@ -59,3 +59,19 @@ describe('fetchZeroHeightPageGuarded — transient failure', () => {
 		await expect(fetchZeroHeightPageGuarded(PAGE, null, { scope: 'component', slug: 'x', version: '22.0.0' })).rejects.toThrow();
 	}, 30_000);
 });
+
+/**
+ * A Windows checkout with `core.autocrlf` turned every `# Title` into `# Title\r`: no H1 matched, and an
+ * offline run deleted all 70 `.design.md` files.
+ */
+describe('fetchZeroHeightPageGuarded — offline', () => {
+	it('reads a baseline checked out with CRLF line endings as LF', async () => {
+		fs.writeFileSync(baselineDir, BASELINE.replace(/\n/g, '\r\n'));
+		const { fetchZeroHeightPageGuarded, setOffline } = await import('./zeroheight-fetch');
+		setOffline(true);
+
+		const data = await fetchZeroHeightPageGuarded(PAGE, null, { scope: 'component', slug: 'x', version: '22.0.0' });
+
+		expect(data?.raw).toBe(BASELINE);
+	}, 30_000);
+});

@@ -1,3 +1,4 @@
+export * from './cdn';
 export * from './date/index';
 export * from './event/index';
 export * from './group/index';

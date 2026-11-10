@@ -4,35 +4,46 @@ import { dirname, join, posix, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(import.meta.url), '..', '..', '..');
-const skillsRoot = join(root, '.github/skills/lucca-front');
+const skillDir = join(root, '.github/skills/_lucca-front/llms');
+const manifestPath = join(root, '.github/skills/_lucca-front/versions.json');
 
 export const STORYBOOK_URL = 'https://lucca-front.lucca.io';
 export const PRISME_URL = 'https://prisme.lucca.io';
 
 const TARGETS = {
 	storybook: { outDir: '.storybook/public', pack: false, linkRemoteOnly: false },
-	npm: { outDir: 'dist/ng', pack: true, linkRemoteOnly: true },
+	npm: { outDir: 'dist/ng', pack: true, linkRemoteOnly: false },
 };
 
-/** Documented minor whose skill covers `version` (a technical minor resolves to the minor covering it), or null. */
-export function resolveSkillMinor(manifest, version) {
+/**
+ * Whether the committed skill covers `version`: a skill that follows the code covers whatever this
+ * commit is tagged, a minor's skill its own minor or a technical minor it covers.
+ */
+export function skillCovers(manifest, version) {
+	if (manifest.followsCode) return true;
 	const minor = /^v?(\d+\.\d+)\./.exec(version)?.[1];
-	if (!minor) {
-		return null;
-	}
-	if (manifest.minors[minor]) {
-		return minor;
-	}
-	return Object.keys(manifest.minors).find((key) => manifest.minors[key].technicalMinors?.[minor]) ?? null;
+	return !!minor && (manifest.minor === minor || !!manifest.technicalMinors?.[minor]);
 }
 
-export function skillDirName(minor) {
-	return `lucca-front-${minor.replace('.', '-')}`;
+/**
+ * Null when the committed skill can ship for `version`. Otherwise a tagged build, which the publish workflow
+ * runs, throws so the release fails instead of going out without its docs; an untagged build gets a warning.
+ */
+export function checkShippable(manifest, { version, tag, skillPresent }) {
+	let gap = null;
+	if (!skillPresent) {
+		gap = `.github/skills/_lucca-front/llms has no SKILL.md`;
+	} else if (!skillCovers(manifest, version)) {
+		gap = `the committed skill documents ${manifest.minor}, not ${version} (.github/skills/_lucca-front/versions.json)`;
+	}
+	if (!gap) return null;
+	if (tag) throw new Error(`[llms] ${gap}: ${tag} would ship no LLM documentation`);
+	return `::warning::[llms] ${gap}: this build ships no LLM documentation.`;
 }
 
-/** Design, Figma and UX-writing content follows ZeroHeight and Figma, not the code version: the npm package links it on the deploy. */
+/** Design and UX-writing content follows ZeroHeight, not the code version: a target with `linkRemoteOnly` links it on the deploy instead of shipping it. */
 export function isRemoteOnly(path) {
-	return /\.(design|figma)\.md$/.test(path) || path.startsWith('references/documentation/');
+	return /\.design\.md$/.test(path) || path.startsWith('references/documentation/');
 }
 
 export function deployedSkillUrl(ref) {
@@ -135,16 +146,13 @@ function publish(targetName) {
 	rmSync(join(outDir, 'llms.txt'), { force: true });
 	rmSync(join(outDir, 'llms'), { recursive: true, force: true });
 
-	const manifest = JSON.parse(readFileSync(join(skillsRoot, '_versions.json'), 'utf8'));
+	const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
 	const tag = currentTag();
 	const ref = tag ?? 'master';
-	const version = tag ?? `${manifest.latest}.0`;
-	const minor = resolveSkillMinor(manifest, version);
-	const skillDir = minor && join(skillsRoot, skillDirName(minor));
-	if (!skillDir || !existsSync(join(skillDir, 'SKILL.md'))) {
-		console.log(
-			`::warning::[llms] no generated skill covers ${version} (.github/skills/lucca-front/_versions.json): ${target.outDir} ships no LLM documentation.`,
-		);
+	const version = tag ?? `${manifest.minor}.0`;
+	const warning = checkShippable(manifest, { version, tag, skillPresent: existsSync(join(skillDir, 'SKILL.md')) });
+	if (warning) {
+		console.log(warning);
 		return;
 	}
 
@@ -156,7 +164,8 @@ function publish(targetName) {
 	} else {
 		cpSync(skillDir, join(outDir, 'llms'), { recursive: true });
 	}
-	writeFileSync(join(outDir, 'llms.txt'), renderIndex(minor, files, { ref, linkRemoteOnly: target.linkRemoteOnly }));
+	const documented = manifest.followsCode ? ref.replace(/^v/, '') : manifest.minor;
+	writeFileSync(join(outDir, 'llms.txt'), renderIndex(documented, files, { ref, linkRemoteOnly: target.linkRemoteOnly }));
 
 	if (target.pack) {
 		const packed = packedFiles(outDir);
@@ -165,9 +174,7 @@ function publish(targetName) {
 			throw new Error(`${missing.join(', ')} written to ${target.outDir} but absent from the npm tarball, check "files" / .npmignore`);
 		}
 	}
-	console.log(
-		`[llms] ${version} → skill ${skillDirName(minor)} (${shipped}/${files.length} files shipped) → ${target.outDir}/llms.txt + llms/`,
-	);
+	console.log(`[llms] ${version} → skill ${documented} (${shipped}/${files.length} files shipped) → ${target.outDir}/llms.txt + llms/`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
