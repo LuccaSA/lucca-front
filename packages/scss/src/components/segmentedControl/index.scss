@@ -1,8 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
 
-// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .viewTabs.
-.viewTabs,
 .segmentedControl {
 	@layer components {
 		@include vars;
@@ -25,8 +23,6 @@
 }
 
 @layer mods {
-	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .viewTabs-item-tab.
-	.viewTabs-item-tab,
 	.segmentedControl-item-action {
 		.segmentedControl-item-input:checked + &,
 		&[aria-selected='true'] {
@@ -39,8 +35,6 @@
 		@include disabled;
 	}
 
-	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .viewTabs_panel.
-	.viewTabs_panel,
 	.segmentedControl_panel {
 		// .active is deprecated
 		&:not(.is-active, .active) {

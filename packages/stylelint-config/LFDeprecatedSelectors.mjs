@@ -525,6 +525,7 @@ export default [
 		name: 'View tabs',
 		objectPattern: /\.viewTabs(-item(-tab)?|_panel)?(?![\w-])/,
 		versionDeprecated: '18.2.1',
+		versionDeleted: '22.2.0',
 		actions: `
 			Segmented control :
 
