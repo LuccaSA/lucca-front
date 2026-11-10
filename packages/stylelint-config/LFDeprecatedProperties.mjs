@@ -177,6 +177,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/3ab3c0fa9d635cb9ddaa00ad7187398e0cf3d300/packages/scss/src/components/toast/vars.scss#L11.
 		objectPattern: /--components-toasts-(background|padding)(?![\w-])/,
 		versionDeprecated: '18.1.0',
+		versionDeleted: '22.2.0',
 		actions: `Retirer la variable, sans remplacement.`,
 	},
 	{
