@@ -720,8 +720,8 @@ export default [
 		objectPattern: [
 			// Coins : pas d’utilitaire logique, utiliser les tokens `--pr-t-border-radius-*`
 			/\.pr-u-border(TopLeft|TopRight|BottomLeft|BottomRight)Radius[A-Z]\w*(?![\w-])/,
-			// Alignement, float & clear : `Left` => `Start` / `InlineStart`, `Right` => `End` / `InlineEnd`
-			/\.pr-u-(textAlign|float|clear)(Left|Right)(?![\w-])/,
+			// Alignement & float : `Left` => `Start` / `InlineStart`, `Right` => `End` / `InlineEnd`
+			/\.pr-u-(textAlign|float)(Left|Right)(?![\w-])/,
 		],
 		versionDeprecated: '20.2.0',
 		actions: `
@@ -731,9 +731,18 @@ export default [
 			* \`.pr-u-textAlignRight\` => \`.pr-u-textAlignEnd\`
 			* \`.pr-u-floatLeft\` => \`.pr-u-floatInlineStart\`
 			* \`.pr-u-floatRight\` => \`.pr-u-floatInlineEnd\`
-			* \`.pr-u-clearLeft\` => \`.pr-u-clearInlineStart\`
-			* \`.pr-u-clearRight\` => \`.pr-u-clearInlineEnd\`
 			* Coins physiques => tokens \`--pr-t-border-radius-*\`.
+		`,
+	},
+	{
+		// Physical clear utilities, split from the entry above to ship their deletion first
+		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/utils/index.scss#L311.
+		objectPattern: /\.pr-u-clear(Left|Right)(?![\w-])/,
+		versionDeprecated: '20.2.0',
+		versionDeleted: '22.2.0',
+		actions: `
+			* \`*Left\` => \`*InlineStart\`
+			* \`*Right\` => \`*InlineEnd\`
 		`,
 	},
 	{

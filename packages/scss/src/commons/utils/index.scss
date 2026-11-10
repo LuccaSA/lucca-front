@@ -412,14 +412,10 @@
 		@extend %clearBoth;
 	}
 
-	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-clearLeft.
-	.pr-u-clearLeft,
 	.pr-u-clearInlineStart {
 		@extend %clearInlineStart;
 	}
 
-	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-clearRight.
-	.pr-u-clearRight,
 	.pr-u-clearInlineEnd {
 		@extend %clearInlineEnd;
 	}
@@ -683,15 +679,11 @@
 			@extend %clearBoth;
 		}
 
-		// clearLeft is deprecated
-		.u-clearInlineStart,
-		.u-clearLeft {
+		.u-clearInlineStart {
 			@extend %clearInlineStart;
 		}
 
-		// clearRight is deprecated
-		.u-clearInlineEnd,
-		.u-clearRight {
+		.u-clearInlineEnd {
 			@extend %clearInlineEnd;
 		}
 
