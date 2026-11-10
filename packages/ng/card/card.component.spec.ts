@@ -32,6 +32,24 @@ class WrapperHostComponent {
 	wrapperHeadingLevel = input<CardHeadingLevel | null>(null);
 }
 
+@Component({
+	selector: 'lu-card-illustration-test',
+	imports: [CardComponent, CardActionDirective],
+	template: `
+		<lu-card class="none"><a href="#" luCardAction>Title</a></lu-card>
+		<lu-card class="bubble" bubbleIcon="app">
+			<span cardHeaderStartSlot class="custom">Custom</span>
+			<a href="#" luCardAction>Title</a>
+		</lu-card>
+		<lu-card class="slot">
+			<span cardHeaderStartSlot class="custom">Custom</span>
+			<a href="#" luCardAction>Title</a>
+		</lu-card>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class IllustrationHostComponent {}
+
 const heading = (card: Element) => card.querySelector('[role="heading"]');
 
 describe(CardComponent.name, () => {
@@ -97,6 +115,39 @@ describe(CardComponent.name, () => {
 			fixture.detectChanges();
 			// Assert
 			expect(heading(element.querySelector('lu-card')!)?.getAttribute('aria-level')).toBe('2');
+		});
+	});
+
+	describe('illustration', () => {
+		let element: HTMLElement;
+
+		const illustration = (selector: string) => element.querySelector(`lu-card.${selector} .card2-illustration`)!;
+
+		beforeEach(() => {
+			TestBed.configureTestingModule({ imports: [IllustrationHostComponent] });
+			const fixture = TestBed.createComponent(IllustrationHostComponent);
+			element = fixture.nativeElement as HTMLElement;
+			fixture.detectChanges();
+		});
+
+		it('should leave the illustration empty without bubbleIcon nor projected content', () => {
+			// Assert
+			expect(illustration('none').children).toHaveLength(0);
+			expect(illustration('none').textContent?.trim()).toBe('');
+		});
+
+		it('should display a decorative bubble icon from bubbleIcon, instead of the projected content', () => {
+			// Assert
+			const bubble = illustration('bubble').querySelector('lu-bubble-icon');
+			expect(bubble).not.toBeNull();
+			expect(bubble?.querySelector('.lucca-icon')?.classList.contains('icon-app')).toBe(true);
+			expect(illustration('bubble').querySelector('.custom')).toBeNull();
+		});
+
+		it('should project the cardHeaderStartSlot content without bubbleIcon', () => {
+			// Assert
+			expect(illustration('slot').querySelector('.custom')).not.toBeNull();
+			expect(illustration('slot').querySelector('lu-bubble-icon')).toBeNull();
 		});
 	});
 });

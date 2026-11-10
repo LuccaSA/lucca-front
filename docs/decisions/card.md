@@ -175,3 +175,17 @@ Status: accepted
 **Rejected options** — A `lu-grid` projected in the wrapper, which hands the layout over to it: it worked, list semantics included, but the expected uses do not need it.
 
 **Revisit if** — A use of `card` or `box` calls for another layout: both components can evolve then.
+
+## 2026-11-10 — Bubble icon input, like box
+
+Status: accepted
+
+**Context** — The card shows a bubble icon before the title, like `box`, which exposes a `bubbleIcon` input and a `boxHeaderStartSlot` fallback (`box.md`).
+
+**Decision** — `card` follows the same API: a `bubbleIcon` input displays a decorative `lu-bubble-icon`, and an element with the `cardHeaderStartSlot` attribute is projected instead when the input is not set.
+
+**Consequences** — The common case takes one attribute, and the bubble size follows the card size. `bubbleIcon` is the only value forwarded to `lu-bubble-icon`: any other need (direction, palette, another visual) goes through the fallback slot, with no new pass-through input, and the illustration is then no longer guaranteed to be centered on the title and content.
+
+**Rejected options** — A projected slot only: the whole `lu-bubble-icon` API would stay available with no pass-through input, but `card` and `box` would offer two APIs for the same pattern.
+
+**Revisit if** — More components show a bubble before their title, or one needs another bubble option: the bubble inputs could then be declared once and shared, instead of being forwarded by each component.

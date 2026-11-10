@@ -1,8 +1,8 @@
-import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CARD_HEADING_LEVEL, CARD_SIZE, CardActionDirective, CardComponent, CardWrapperComponent } from '@lucca-front/ng/card';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
-import { generateInputs } from '@/helpers/stories';
+import { generateInputs, setStoryOptions } from '@/helpers/stories';
+import { IconsList } from '@/stories/icons-list';
 
 interface CardArgs {
 	heading: string;
@@ -14,7 +14,7 @@ interface CardArgs {
 interface CardBasicStory extends CardArgs {
 	headingLevel: number;
 	size: string | null;
-	illustration: boolean;
+	bubbleIcon: string;
 	wrapper: boolean;
 	grid: boolean;
 	plain: boolean;
@@ -70,8 +70,11 @@ export default {
 		disabled: {
 			description: 'Désactive l’action : retire le `href` du lien, ou ajoute l’attribut natif `disabled` au bouton.',
 		},
-		illustration: {
-			description: 'Ajoute une `lu-bubble-icon` dans le slot `cardIllustration`.',
+		bubbleIcon: {
+			options: setStoryOptions(IconsList.filter((i) => !i.deprecated).map((i) => i.icon)),
+			control: { type: 'select' },
+			description: 'Icône décorative affichée dans une bulle avant le titre. Pour un autre contenu, projeter un élément portant l’attribut `cardHeaderStartSlot`.',
+			table: { category: 'inputs' },
 		},
 		wrapper: {
 			description: 'Place plusieurs cartes dans un `lu-card-wrapper`.',
@@ -130,20 +133,17 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [CardComponent, CardActionDirective, CardWrapperComponent, BubbleIconComponent, ButtonComponent],
+			imports: [CardComponent, CardActionDirective, CardWrapperComponent, ButtonComponent],
 		}),
 	],
-	render: ({ headingLevel, size, illustration, wrapper, grid, plain, cards, wrapperHeadingLevel, wrapperSize, wrapperAction, ...cardArgs }: CardBasicStory, { argTypes }) => {
+	render: ({ headingLevel, size, bubbleIcon, wrapper, grid, plain, cards, wrapperHeadingLevel, wrapperSize, wrapperAction, ...cardArgs }: CardBasicStory, { argTypes }) => {
 		const cardInputs = wrapper ? '' : generateInputs({ headingLevel: `${headingLevel}`, size }, argTypes);
 		const getCardTemplate = ({ heading, content, action, disabled }: CardArgs) => {
-			const illustrationTemplate = illustration
-				? `
-	<lu-bubble-icon cardIllustration icon="app" bubbleDirection="left" />`
-				: '';
+			const bubbleIconAttr = bubbleIcon ? ` bubbleIcon="${bubbleIcon}"` : '';
 			const hrefAttr = disabled ? '' : ' href="#"';
 			const disabledAttr = disabled ? ' disabled' : '';
 			const actionTemplate = action === 'button' ? `<button type="button" luCardAction${disabledAttr}>${heading}</button>` : `<a${hrefAttr} luCardAction>${heading}</a>`;
-			return `<lu-card${cardInputs}>${illustrationTemplate}
+			return `<lu-card${cardInputs}${bubbleIconAttr}>
 	${actionTemplate}
 	${content}
 </lu-card>`;
@@ -173,7 +173,7 @@ export const Basic = {
 		...defaultCardArgs,
 		headingLevel: 3,
 		size: null,
-		illustration: false,
+		bubbleIcon: '',
 		wrapper: false,
 		cards: 3,
 		grid: false,
