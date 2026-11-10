@@ -172,7 +172,13 @@ export default {
 				type: 'boolean',
 			},
 			description:
-				'Présente un groupe de lignes dans la story, avec son libellé affiché dans la ligne de groupe. Pour un texte simple, renseigner l’input <code>group</code> sur <code>tbody[luDataTableBody]</code> [PortalContent]. Pour un contenu riche (mise en forme, badge…), projeter dans le <code>tbody</code> un élément portant la directive <code>luDataTableBodyGroup</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
+				'Présente un groupe de lignes dans la story, avec son libellé affiché dans la ligne de groupe. Pour un texte simple, renseigner l’input <code>group</code> sur <code>tbody[luDataTableBody]</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, badge…), projeter dans le <code>tbody</code> un élément portant la directive <code>luDataTableBodyGroup</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
+			table: { category: 'story' },
+		},
+		richContent: {
+			name: '↳ richContent',
+			if: { arg: 'group', truthy: true },
+			description: 'Remplace l’input <code>group</code> par un contenu riche projeté avec la directive <code>luDataTableBodyGroup</code>.',
 			table: { category: 'story' },
 		},
 		editable: {
@@ -238,6 +244,7 @@ export default {
 			verticalAlign,
 			align,
 			group,
+			richContent,
 			expanded,
 			groupButtonAlt,
 			tfoot,
@@ -277,7 +284,7 @@ export default {
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
 		const mixedAttr = mixed ? ` mixed` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
-		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}"` : ``;
+		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}"${richContent ? `` : ` group="Group"`}` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
 		const emptyAttr = empty ? ` empty` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
@@ -329,10 +336,11 @@ export default {
 				</lu-form-field>
 			`
 			: text;
-		const groupTpl = group
-			? `
+		const groupTpl =
+			group && richContent
+				? `
 		<ng-container luDataTableBodyGroup>Group <lu-numeric-badge [value]="${lines}" /></ng-container>`
-			: ``;
+				: ``;
 		const tfootTpl = tfoot
 			? `
 	<tfoot luDataTableFoot>
@@ -403,6 +411,7 @@ export const Basic: StoryObj = {
 		selectedLabel: 'Sélectionner cette ligne',
 		selectedLabelHead: 'Sélectionner toutes les lignes',
 		group: false,
+		richContent: false,
 		groupButtonAlt: 'Afficher X lignes supplémentaires',
 		expanded: false,
 		editable: false,

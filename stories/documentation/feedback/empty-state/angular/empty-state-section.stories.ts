@@ -15,12 +15,14 @@ export default {
 		}),
 	],
 	render: (args) => {
-		const { heading, center, palette, headingLevel, illustration, action } = args;
+		const { heading, description, center, palette, headingLevel, illustration, action } = args;
+		const richContent = args['richContent'];
+		const descriptionArg = richContent ? `` : ` description="${description}"`;
+		const projectedDescription = richContent ? `\n\t<p luEmptyStateDescription>You have <strong>no pending request</strong> yet. New requests will appear here.</p>` : ``;
 		const paletteArg = palette ? ` palette="${palette}"` : ``;
 		const actionArg = action ? ` action` : ``;
 		return {
-			template: `<lu-empty-state-section illustration="${illustration}" headingLevel="${headingLevel}" heading="${heading}"${actionArg}${paletteArg}${center ? ' center' : ''}>
-	<p luEmptyStateDescription>You have <strong>no pending request</strong> yet. New requests will appear here.</p>
+			template: `<lu-empty-state-section illustration="${illustration}" headingLevel="${headingLevel}" heading="${heading}"${descriptionArg}${actionArg}${paletteArg}${center ? ' center' : ''}>${projectedDescription}
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-section>`,
@@ -63,20 +65,26 @@ export default {
 			table: { category: 'inputs' },
 		},
 		description: {
-			control: false,
+			if: { arg: 'richContent', truthy: false },
 			description:
-				'Texte affiché sous le titre. Pour un texte simple, renseigner l’input <code>description</code> sur <code>lu-empty-state-section</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luEmptyStateDescription</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
+				'Texte affiché sous le titre. Pour un texte simple, renseigner l’input <code>description</code> sur <code>lu-empty-state-section</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luEmptyStateDescription</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
+		},
+		richContent: {
+			description: 'Remplace l’input <code>description</code> par un contenu riche projeté avec la directive <code>luEmptyStateDescription</code>.',
+			table: { category: 'story' },
 		},
 	},
 } as Meta;
 
-export const Section: StoryObj<EmptyStateSectionComponent> = {
+export const Section: StoryObj<EmptyStateSectionComponent & { richContent: boolean }> = {
 	args: {
 		illustration: 'rocket',
 		action: false,
 		heading: 'Empty state section',
+		description: 'You have no pending request yet. New requests will appear here.',
 		center: false,
 		headingLevel: 3,
+		richContent: false,
 	},
 };

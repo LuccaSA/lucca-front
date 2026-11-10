@@ -1,6 +1,15 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FORM_FIELD_LAYOUT, FORM_FIELD_SIZE, FORM_FIELD_WIDTH, FormFieldComponent, FormFieldInlineMessageDirective, InputDirective, luFormFieldTranslations } from '@lucca-front/ng/form-field';
+import {
+	FORM_FIELD_LAYOUT,
+	FORM_FIELD_SIZE,
+	FORM_FIELD_WIDTH,
+	FormFieldComponent,
+	FormFieldErrorInlineMessageDirective,
+	FormFieldInlineMessageDirective,
+	InputDirective,
+	luFormFieldTranslations,
+} from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { useStoryModel, generateInputs, setStoryOptions, intlArgType } from '../../../helpers/stories';
@@ -10,7 +19,7 @@ export default {
 	component: FormFieldComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [FormFieldComponent, FormFieldInlineMessageDirective, InputDirective, BrowserAnimationsModule, FormsModule],
+			imports: [FormFieldComponent, FormFieldInlineMessageDirective, FormFieldErrorInlineMessageDirective, InputDirective, BrowserAnimationsModule, FormsModule],
 		}),
 	],
 	argTypes: {
@@ -33,9 +42,12 @@ export default {
 			table: { category: 'inputs' },
 		},
 		inlineMessage: {
-			control: false,
+			if: { arg: 'richContent', truthy: false },
+			control: {
+				type: 'text',
+			},
 			description:
-				'Texte indicatif affiché sous le champ. Pour un texte simple, renseigner l’input <code>inlineMessage</code> sur <code>lu-form-field</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luFormFieldInlineMessage</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
+				'Texte indicatif affiché sous le champ. Pour un texte simple, renseigner l’input <code>inlineMessage</code> sur <code>lu-form-field</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luFormFieldInlineMessage</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
@@ -47,9 +59,15 @@ export default {
 			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		errorInlineMessage: {
+			if: { arg: 'richContent', truthy: false },
 			description:
-				'Texte d’erreur affiché sous le champ lorsque celui-ci est en erreur. Pour un texte simple, renseigner l’input <code>errorInlineMessage</code> sur <code>lu-form-field</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luFormFieldErrorInlineMessage</code>. L’input prévaut si les deux sont fournis.',
+				'Texte d’erreur affiché sous le champ lorsque celui-ci est en erreur. Pour un texte simple, renseigner l’input <code>errorInlineMessage</code> sur <code>lu-form-field</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luFormFieldErrorInlineMessage</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
+		},
+		richContent: {
+			description:
+				'Remplace les inputs <code>inlineMessage</code> et <code>errorInlineMessage</code> par des contenus riches projetés avec les directives <code>luFormFieldInlineMessage</code> et <code>luFormFieldErrorInlineMessage</code>.',
+			table: { category: 'story' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
@@ -145,31 +163,38 @@ export default {
 		intl: intlArgType(luFormFieldTranslations, 'LuFormFieldTranslations'),
 	},
 	render: (args, { argTypes }) => {
-		const { required, ...fieldArgs } = args;
+		const { required, richContent, ...allFieldArgs } = args as typeof args & { richContent: boolean };
+		const { inlineMessage, errorInlineMessage, ...otherFieldArgs } = allFieldArgs;
+		const fieldArgs = richContent ? otherFieldArgs : allFieldArgs;
+		const projectedMessages = richContent
+			? `
+	<ng-container luFormFieldInlineMessage>Describe your request in <strong>a few lines</strong>.</ng-container>
+	<ng-container luFormFieldErrorInlineMessage>This field is <strong>required</strong>.</ng-container>`
+			: ``;
+		const requiredAttr = required ? `\n\t\t\t\trequired` : ``;
 		const model = useStoryModel('');
 		return {
 			props: { model },
-			template: `<lu-form-field ${generateInputs(fieldArgs, argTypes)}>
+			template: `<lu-form-field${generateInputs(fieldArgs, argTypes)}>
 	<div class="textField">
 		<div class="textField-input">
 			<textarea
 				type="text"
 				luInput
-				class="textField-input-value"
-				${required ? 'required' : ''}
+				class="textField-input-value"${requiredAttr}
 				[(ngModel)]="model.example"
 				placeholder="Placeholder">
 			</textarea>
 		</div>
-	</div>
-	<ng-container luFormFieldInlineMessage>Describe your request in <strong>a few lines</strong>.</ng-container>
+	</div>${projectedMessages}
 </lu-form-field>`,
 		};
 	},
 } as Meta;
 
-export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
+export const Template: StoryObj<FormFieldComponent & { required: boolean; richContent: boolean }> = {
 	args: {
+		inlineMessage: 'Helper text',
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
@@ -188,5 +213,6 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		presentation: false,
 		extraDescribedBy: '',
 		layout: 'default',
+		richContent: false,
 	},
 };

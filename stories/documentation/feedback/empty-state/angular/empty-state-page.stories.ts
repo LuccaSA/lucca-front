@@ -13,7 +13,13 @@ export default {
 		}),
 	],
 	render: (args) => {
-		const { heading, slotTop } = args;
+		const { heading, slotTop, description } = args;
+		const richContent = args['richContent'];
+		const paramDescription = richContent
+			? ``
+			: `
+	description="${description}"`;
+		const projectedDescription = richContent ? `\n\t<p luEmptyStateDescription>You have <strong>no pending request</strong> yet. New requests will appear here.</p>` : ``;
 		const paramSlotTop = slotTop
 			? `
 	slotTop="${slotTop}"`
@@ -69,9 +75,8 @@ export default {
 `,
 			],
 			template: `<lu-empty-state-page
-	heading="${heading}"${paramSlotTop}${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramContentBackgroundColor}${paramHeadingLevel}${paramHeadingStyle}
->
-	<p luEmptyStateDescription>You have <strong>no pending request</strong> yet. New requests will appear here.</p>
+	heading="${heading}"${paramDescription}${paramSlotTop}${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramContentBackgroundColor}${paramHeadingLevel}${paramHeadingStyle}
+>${projectedDescription}
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-page>`,
@@ -217,10 +222,14 @@ export default {
 			table: { category: 'inputs' },
 		},
 		description: {
-			control: false,
+			if: { arg: 'richContent', truthy: false },
 			description:
-				'Texte affiché sous le titre. Pour un texte simple, renseigner l’input <code>description</code> sur <code>lu-empty-state-page</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luEmptyStateDescription</code>, comme dans cet exemple. L’input prévaut si les deux sont fournis.',
+				'Texte affiché sous le titre. Pour un texte simple, renseigner l’input <code>description</code> sur <code>lu-empty-state-page</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luEmptyStateDescription</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
 			table: { category: 'inputs' },
+		},
+		richContent: {
+			description: 'Remplace l’input <code>description</code> par un contenu riche projeté avec la directive <code>luEmptyStateDescription</code>.',
+			table: { category: 'story' },
 		},
 		slotTop: {
 			description:
@@ -235,9 +244,10 @@ export default {
 	},
 } as Meta;
 
-export const Page: StoryObj<EmptyStatePageComponent> = {
+export const Page: StoryObj<EmptyStatePageComponent & { richContent: boolean }> = {
 	args: {
 		heading: 'Empty state page',
+		description: 'You have no pending request yet. New requests will appear here.',
 		slotTop: '',
 		icon: '',
 		topRightBackground: 'poplee/bubbles-top-right-01',
@@ -247,5 +257,6 @@ export const Page: StoryObj<EmptyStatePageComponent> = {
 		contentBackgroundColor: 'var(--pr-t-elevation-surface-default)',
 		headingLevel: 1,
 		headingStyle: 1,
+		richContent: false,
 	},
 };
