@@ -689,6 +689,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/blob/bf00a13340eaea7a433a3e64100204381d193676/packages/scss/src/commons/utils/index.scss#L497.
 		objectPattern: /\.pr-u-(inset|top|bottom|left|right)Reset(?![\w-])/,
 		versionDeprecated: '20.2.0',
+		versionDeleted: '22.2.0',
 		actions: `\`*Reset\` => \`*0\``,
 	},
 	{
