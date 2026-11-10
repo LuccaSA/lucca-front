@@ -19,6 +19,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { isNil, isNotNil, luBooleanAttribute, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills/core';
@@ -41,7 +42,7 @@ export type DateInputValidatorErrorType = {
 
 @Component({
 	selector: 'lu-date-input',
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent, PresentationDisplayDirective],
+	imports: [PopoverDirective, ButtonComponent, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent, PresentationDisplayDirective],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	host: {
@@ -177,9 +178,9 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		};
 	};
 
-	readonly previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
+	readonly previousButton = viewChild<unknown, ElementRef<Element>>('previousButtonRef', { read: ElementRef });
 
-	readonly nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
+	readonly nextButton = viewChild<unknown, ElementRef<Element>>('nextButtonRef', { read: ElementRef });
 
 	readonly calendarDialog = viewChild<ElementRef<HTMLElement>>('calendarDialog');
 
