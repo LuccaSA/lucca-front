@@ -435,6 +435,7 @@ export default [
 		name: 'User picture',
 		objectPattern: /\.lu-user-picture(?![\w-])/,
 		versionDeprecated: '18.2.0',
+		versionDeleted: '22.2.0',
 		actions: `Remplacer par le composant [Avatar](https://prisme.lucca.io/94310e217/p/42b330-avatar) et sa classe \`.avatar\`.`,
 	},
 	{
