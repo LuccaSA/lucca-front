@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin list($suffix: '', $list: 'ul') {
 	margin: 0 #{$suffix};
 
@@ -33,7 +35,8 @@
 @mixin clearfix($suffix: '') {
 	&::before,
 	&::after {
-		content: ' ' / '' #{$suffix};
+		@include a11y.content(' ', $suffix: $suffix);
+
 		display: table #{$suffix};
 	}
 

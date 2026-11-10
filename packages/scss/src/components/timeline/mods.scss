@@ -166,7 +166,8 @@
 			counter-increment: timeline;
 
 			&::before {
-				content: counter(timeline) / '';
+				@include a11y.content(counter(timeline));
+
 				font-size: var(--pr-t-font-body-XS-fontSize);
 				line-height: 1;
 			}

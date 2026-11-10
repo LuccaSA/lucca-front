@@ -42,7 +42,8 @@
 		}
 
 		%after {
-			content: var(--components-readMore-content-lastChild-content) / '';
+			@include a11y.content(var(--components-readMore-content-lastChild-content));
+
 			visibility: hidden;
 			white-space: nowrap;
 			font: var(--pr-t-font-body-M);

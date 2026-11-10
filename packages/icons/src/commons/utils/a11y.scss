@@ -1,0 +1,12 @@
+@use 'sass:list';
+
+// Generated content with an alternative text (empty by default: decorative content, ignored by assistive technologies).
+// Browsers without support for the alternative syntax (Safari < 17.4, Firefox < 128) drop the whole declaration,
+// so they fall back on the content alone.
+@mixin content($value, $alt: '', $suffix: '') {
+	content: list.slash($value, $alt) #{$suffix};
+
+	@supports not (content: '' / '') {
+		content: $value #{$suffix};
+	}
+}

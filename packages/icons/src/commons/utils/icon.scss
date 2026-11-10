@@ -1,17 +1,19 @@
 @use 'sass:map';
 
 @use '@lucca-front/icons/src/commons/config';
+@use '@lucca-front/icons/src/commons/utils/a11y';
 
 @mixin generate($name) {
 	@if map.has-key(config.$icons, $name) {
 		--icon-content: '#{map.get(config.$icons, $name)}';
+
+		@include a11y.content(var(--icon-content));
 
 		font-weight: var(--pr-t-font-fontWeight-regular);
 		display: inline-block;
 		vertical-align: text-bottom;
 		font-style: normal;
 		font-family: var(--icon-fontFamily);
-		content: var(--icon-content) / '';
 		-webkit-font-smoothing: antialiased;
 		text-transform: none;
 	} @else {
