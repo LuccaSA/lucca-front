@@ -1,5 +1,5 @@
 import { isNil } from '@lucca-front/ng/core';
-import { Day, FirstWeekContainsDate, format, isSameDay, isSameMonth, isSameWeek, isSameYear, parse, startOfDecade, startOfMonth, startOfYear, WeekOptions } from 'date-fns';
+import { Day, FirstWeekContainsDate, isSameDay, isSameMonth, isSameWeek, isSameYear, lightFormat, parse, startOfDecade, startOfMonth, startOfYear, WeekOptions } from 'date-fns';
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { OpenDateRange, OpenDateRangeInput } from './calendar2/open-date-range';
@@ -83,7 +83,7 @@ export function transformDateToDateISO(value: Date | null): string | null {
 		return null;
 	}
 
-	return format(value, DATE_ISO_FORMAT);
+	return lightFormat(value, DATE_ISO_FORMAT);
 }
 
 function isDateRangeInput(value: OpenDateRangeInput | OpenDateRange): value is OpenDateRangeInput {
