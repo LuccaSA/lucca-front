@@ -44,7 +44,7 @@ class FakePluginGroupComponent implements RichTextPluginComponent {
 	selector: 'lu-rich-text-input-host',
 	imports: [ReactiveFormsModule, FormFieldComponent, RichTextInputComponent, PlainTextFormatterWithTagsDirective, FakePluginComponent, FakePluginGroupComponent],
 	template: `
-		<lu-form-field label="Description">
+		<lu-form-field label="Description" [presentation]="presentation()">
 			<lu-rich-text-input luWithPlainTextTagsFormatter placeholder="Write here" [formControl]="formControl">
 				<lu-fake-plugin name="a" />
 				<lu-fake-plugin-group />
@@ -55,6 +55,7 @@ class FakePluginGroupComponent implements RichTextPluginComponent {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class RichTextInputHostComponent {
+	readonly presentation = signal(false);
 	readonly formControl = new FormControl<string | null>('Hello world');
 }
 
@@ -144,6 +145,42 @@ describe(RichTextInputComponent.name, () => {
 				expect(getTextbox().getAttribute('aria-placeholder')).toBe('Write here');
 			});
 			expect(placeholder()?.textContent).toBe('Write here');
+		});
+	});
+
+	describe('presentation mode', () => {
+		it('should move the tools out of the toolbar in presentation mode and back when leaving it', () => {
+			// Arrange
+			const plugin = (fixture.nativeElement as HTMLElement).querySelector('lu-fake-plugin')!;
+
+			// Act
+			host.presentation.set(true);
+			fixture.detectChanges();
+
+			// Assert
+			expect(plugin.closest('.presentation-definition')).not.toBeNull();
+
+			// Act
+			host.presentation.set(false);
+			fixture.detectChanges();
+
+			// Assert
+			expect(getToolbar().contains(plugin)).toBe(true);
+		});
+	});
+
+	describe('destroy', () => {
+		it('should keep the tools in the toolbar once destroyed, as the host may stay rendered during a leave animation', () => {
+			// Arrange
+			const toolbar = getToolbar();
+			const plugin = (fixture.nativeElement as HTMLElement).querySelector('lu-fake-plugin')!;
+			expect(toolbar.contains(plugin)).toBe(true);
+
+			// Act
+			fixture.destroy();
+
+			// Assert
+			expect(toolbar.contains(plugin)).toBe(true);
 		});
 	});
 
