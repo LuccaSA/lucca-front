@@ -1,0 +1,73 @@
+@use 'exports' as *;
+
+.card2 {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&:hover {
+			@include hover;
+		}
+
+		&:has(.card2-heading-action:focus-visible) {
+			@include focusVisible;
+		}
+
+		// Must stay before the empty content rule, which has the same specificity
+		&.mod-S,
+		.card2Wrapper.mod-S & {
+			@include S;
+		}
+
+		.card2Wrapper.mod-grid & {
+			@include grid;
+
+			&:has(.card2-illustration:not(:empty)):not(:has(.card2-content:empty)) {
+				@include gridIllustration;
+			}
+		}
+
+		&:has(.card2-content:empty) {
+			@include contentEmpty;
+
+			&:has(.card2-illustration:not(:empty)):not(.card2Wrapper.mod-grid .card2) {
+				@include headingAlignedIllustration;
+
+				&.mod-S,
+				.card2Wrapper.mod-S & {
+					@include headingAlignedIllustrationS;
+				}
+			}
+		}
+
+		&:has(.card2-heading-action:active) {
+			@include active;
+		}
+
+		&:has(.card2-heading-action:is(a:not([href]), button:disabled)) {
+			@include disabled;
+		}
+	}
+}
+
+.card2Wrapper {
+	@layer components {
+		@include varsWrapper;
+	}
+
+	@layer mods {
+		&.mod-grid {
+			@include gridWrapper;
+		}
+
+		&.mod-plain {
+			@include plainWrapper;
+		}
+
+		&:has(> .button) {
+			@include add;
+		}
+	}
+}

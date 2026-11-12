@@ -30,6 +30,7 @@ Sources : [LFDeprecatedSelectors.mjs](https://github.com/LuccaSA/lucca-front/bl
 | Filters, [`.filters`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29filters%28-%28sectionRight%7CsectionLeft%29%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | **21.1.2**<br>– | – |
 | Notch box, [`.notchBox`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29notchBox%28-%28wrapper%7Cbadge%29%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | **21.1.2**<br>– | – |
 | Highlight section, [`.highlightSection`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29highlightSection%28-%28content-illustration%7Ccontent-slot%7CbubbleStart%7CbubbleEnd%7Ccontent%29%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | **22.1.1**<br>– | Le composant Highlight section (`.highlightSection` et `<lu-highlight-section>`) sera remplacé en 22.2 par une évolution du composant Box. |
+| Card, [`.card`](https://github.com/search?q=%2F%28%5C.%7Cclass%3D%22%28%5B%5E%22%5D*%5Cs%29%3F%29card%28-%28footer-right%7Caction%7Ccontent%7Cfooter%7Ctitle%29%29%3F%28%5B%5E%5Cw-%5D%7C%24%29%2F%20org%3ALuccaSA%20NOT%20repo%3ALuccaSA%2Flucca-front&type=code) | **22.2.0**<br>– | Remplacer par le composant Card (`<lu-card>`, classe `.card2`) ; plusieurs cartes vont dans un `<lu-card-wrapper>` (`.card2Wrapper`). |
 
 ### Classes
 
