@@ -96,3 +96,24 @@ export function applyV3Fields<T>(count: number): (items: T[], params: { fields?:
 export function isVitestBrowser(): boolean {
 	return '__vitest_browser__' in globalThis;
 }
+
+export function publicApiHandler<T>(items: T[], matchesSearch: (item: T, search: string) => boolean): Parameters<typeof http.get>[1] {
+	return async ({ request }) => {
+		await delay(300);
+		const url = new URL(request.url);
+		const search = url.searchParams.get('search')?.toLowerCase();
+		const limit = parseInt(url.searchParams.get('limit') ?? '25');
+		const offset = parseInt(url.searchParams.get('page')?.slice(1) ?? '0');
+		const include = url.searchParams.get('include')?.split(',') ?? [];
+		const filtered = search ? items.filter((item) => matchesSearch(item, search)) : items;
+		const nextOffset = offset + limit;
+		const nextUrl = new URL(url);
+		nextUrl.searchParams.set('page', `!${nextOffset}`);
+
+		return HttpResponse.json({
+			items: filtered.slice(offset, nextOffset),
+			...(include.includes('totalCount') ? { totalCount: filtered.length } : {}),
+			...(include.includes('links') ? { links: { next: nextOffset < filtered.length ? { href: nextUrl.toString(), cursor: `!${nextOffset}` } : null } } : {}),
+		});
+	};
+}

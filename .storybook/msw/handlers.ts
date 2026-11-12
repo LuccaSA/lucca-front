@@ -1,5 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
-import { applyFilter, applyV3Fields, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot, isVitestBrowser } from './helpers';
+import { applyFilter, applyV3Fields, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot, isVitestBrowser, publicApiHandler } from './helpers';
 import {
 	mockAxisSectionsV3,
 	mockDepartmentsTree,
@@ -41,6 +41,14 @@ const usersSearchHandler = genericHandler(
 		};
 	},
 );
+
+type MockDepartmentNode = { node: { id: number; name: string }; children?: MockDepartmentNode[] };
+const flattenDepartments = (nodes: MockDepartmentNode[]): { id: string; name: string }[] =>
+	nodes.flatMap(({ node, children }) => [{ id: `${node.id}`, name: node.name }, ...flattenDepartments(children ?? [])]);
+
+const publicApiEmployees = mockUsers.map(({ id, firstName, lastName }) => ({ id: `${id}`, givenName: firstName, familyName: lastName })).sort((a, b) => a.familyName.localeCompare(b.familyName));
+const publicApiDepartments = flattenDepartments(mockDepartmentsTree).sort((a, b) => a.name.localeCompare(b.name));
+const publicApiEstablishments = mockEstablishments.map(({ id, name }) => ({ id: `${id}`, name }));
 
 const PLACEHOLDER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" viewBox="0 0 1 1"></svg>';
 
@@ -313,5 +321,21 @@ export const handlers = [
 			},
 			(items) => ({ items }),
 		),
+	),
+	http.get(
+		'/lucca-api/employees',
+		publicApiHandler(publicApiEmployees, (employee, search) => `${employee.givenName} ${employee.familyName}`.toLowerCase().includes(search)),
+	),
+	http.get(
+		'/api/v5/departments',
+		publicApiHandler(publicApiDepartments, (department, search) => department.name.toLowerCase().includes(search)),
+	),
+	http.get(
+		'/lucca-api/departments',
+		publicApiHandler(publicApiDepartments, (department, search) => department.name.toLowerCase().includes(search)),
+	),
+	http.get(
+		'/lucca-api/business-establishments',
+		publicApiHandler(publicApiEstablishments, (establishment, search) => establishment.name.toLowerCase().includes(search)),
 	),
 ];
