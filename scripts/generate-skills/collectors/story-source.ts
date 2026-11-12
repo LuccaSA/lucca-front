@@ -720,7 +720,8 @@ export function extractArgTypeDescriptions(content: string): { name: string; des
 		const raw = descMatch[1] ?? descMatch[2] ?? '';
 		const description = raw
 			.replace(/<[^>]+>/g, '')
-			.replace(/\\n/g, ' ')
+			// One pass, so an escaped backslash (`\\n`, the text `\n`) is not read as a line break.
+			.replace(/\\(.)/g, (_, char: string) => (char === 'n' ? ' ' : char))
 			.trim();
 		if (!description) continue;
 

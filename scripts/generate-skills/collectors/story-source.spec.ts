@@ -92,6 +92,18 @@ describe('extractArgTypeDescriptions', () => {
 		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Wrapped label.' }]);
 	});
 
+	it('unescapes escaped quotes', () => {
+		const content = story("\t\tlabel: {\n\t\t\tdescription: 'Type <code>Config&lt;\\'fixed\\'&gt;</code>.',\n\t\t},");
+
+		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: "Type Config&lt;'fixed'&gt;." }]);
+	});
+
+	it('keeps an escaped backslash apart from a line break', () => {
+		const content = story("\t\tlabel: {\n\t\t\tdescription: 'Keeps `\\\\n` as text.\\nNext line.',\n\t\t},");
+
+		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Keeps `\\n` as text. Next line.' }]);
+	});
+
 	it('ignores a description key not followed by a string', () => {
 		const content = story('\t\tlabel: {\n\t\t\tdescription:\n\t\t\t\tgetDescription(),\n\t\t},');
 

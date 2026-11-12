@@ -78,8 +78,8 @@ import { DialogContentComponent, DialogFooterComponent, DialogHeaderAction, Dial
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `stacked` | `stacked` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `fancyIllustration` | `fancyIllustration` | `'approval' \| 'checklist' \| 'email' \| 'install' \| 'mapping' \| 'save' \| 'users' \| 'welcome' \| 'payment-card'` | `'welcome'` | — | — | Modifie l’illustration affichée dans la Fancy dialog. |
-| `fancyIllustrationUrl` | `fancyIllustrationUrl` | `string \| null` | `null` | — | — | Surcharge l’illustration avec une URL personnalisée. |
+| `fancyIllustration` | `fancyIllustration` | `'approval' \| 'checklist' \| 'email' \| 'install' \| 'mapping' \| 'save' \| 'users' \| 'welcome' \| 'payment-card'` | `'welcome'` | — | — | — |
+| `fancyIllustrationUrl` | `fancyIllustrationUrl` | `string \| null` | `null` | — | — | — |
 
 ### DialogCloseDirective (directive)
 

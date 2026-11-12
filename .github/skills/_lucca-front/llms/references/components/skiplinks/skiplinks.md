@@ -23,7 +23,7 @@ import { SkipLinkDirective, LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `luSkipLinkLabel` | `luSkipLinkLabel` | `string` | — | ✅ | — | Libellé du lien d’évitement affiché dans `lu-skip-links`. |
-| `luSkipLinkTarget` | `luSkipLinkTarget` | `string` | `''` | — | — | — |
+| `luSkipLinkTarget` | `luSkipLinkTarget` | `string` | `''` | — | — | Id de l’élément cible. Vide par défaut : l’id existant de l’élément est utilisé, ou un id est généré s’il n’en a pas. Un… |
 
 ### LuSkipLinksComponent (component)
 

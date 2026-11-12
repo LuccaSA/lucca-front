@@ -28,7 +28,7 @@ import { ContainerComponent } from '@lucca-front/ng/container';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `center` | `center` | `boolean` | `false` | — | `luBooleanAttribute` | Centre horizontalement le container. |
-| `overflow` | `overflow` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `overflow` | `overflow` | `boolean` | `false` | — | `luBooleanAttribute` | Permet au container de s’élargir selon son contenu (min-inline-size: fit-content) au lieu de se réduire à l’espace dispo… |
 | `max` | `max` | `ContainerSize \| null` | `null` | — | — | Définit la largeur maximale du container. |
 
 ## Related files

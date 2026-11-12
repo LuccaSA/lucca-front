@@ -40,7 +40,7 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 | `prTooltipInput` | `prTooltip` | `string \| SafeHtml` | `''` | — | — | — |
 | `luTooltipEnterDelay` | `luTooltipEnterDelay` | `number` | `0` | — | `numberAttribute` | Délai d’apparition du tooltip (en ms). La valeur `0` (valeur par défaut de l’input) applique le délai par défaut de 300 … |
 | `prTooltipEnterDelay` | `prTooltipEnterDelay` | `number` | `300` | — | `numberAttribute` | — |
-| `luTooltipLeaveDelay` | `luTooltipLeaveDelay` | `number` | `0` | — | `numberAttribute` | — |
+| `luTooltipLeaveDelay` | `luTooltipLeaveDelay` | `number` | `0` | — | `numberAttribute` | Délai de disparition du tooltip après la fin du survol (en ms). La valeur `0` (valeur par défaut de l’input) applique le… |
 | `prTooltipLeaveDelay` | `prTooltipLeaveDelay` | `number` | `100` | — | `numberAttribute` | — |
 | `luTooltipDisabled` | `luTooltipDisabled` | `boolean` | `false` | — | `booleanAttribute` | Désactive le tooltip. |
 | `prTooltipDisabled` | `prTooltipDisabled` | `boolean` | `false` | — | `booleanAttribute` | — |
@@ -54,7 +54,7 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 | `prTooltipAnchor` | `prTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `this.#host` | — | — | — |
 | `luTooltipTriggerAnchor` | `luTooltipTriggerAnchor` | `ElementRef<HTMLElement> \| HTMLElement \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | Élément dont le survol et le focus déclenchent le tooltip, à la place de l’élément portant la directive. |
 | `prTooltipTriggerAnchor` | `prTooltipTriggerAnchor` | `ElementRef<HTMLElement> \| HTMLElement \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | — |
-| `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`` | — | — | Identifiant de l’élément déclencheur, utilisé pour construire l’identifiant du tooltip référencé par `aria-describedby`.… |
+| `id` | `id` | `string` | ``${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`` | — | — | — |
 
 ### Modules dépréciés
 

@@ -36,7 +36,7 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `name` | `name` | `string` | — | — | — | Dans le cas d’un filtre optionnel, permet de faire le lien entre la liste de filtres disponibles et l’affichage du filtr… |
-| `optional` | `optional` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `optional` | `optional` | `boolean` | `false` | — | `luBooleanAttribute` | Rend disponible le filtre via le bouton d’ajout de filtre. Celui-ci est masqué par défaut. Lorsqu’un filtre est optionne… |
 | `grouping` | `grouping` | `string` | `''` | — | — | — |
 | `iconOnly` | `iconOnly` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `backdrop` | `backdrop` | `boolean` | `false` | — | `luBooleanAttribute` | — |

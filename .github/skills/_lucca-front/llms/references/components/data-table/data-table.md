@@ -135,8 +135,8 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 | `nested` | `nested` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `drag` | `drag` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `noOverflow` | `noOverflow` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le défilement horizontal du tableau. Celui-ci prendra alors la place nécessaire pour afficher tout son contenu… |
-| `empty` | `empty` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | — |
+| `empty` | `empty` | `boolean` | `false` | — | `luBooleanAttribute` | Indique que le tableau est vide : la table passe en role="presentation" et l’en-tête devient inert. L’empty state lui-mê… |
+| `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | Déclaration @let insérée avant le tableau. Elle définit la configuration (ResponsiveConfig&lt;'layoutFixed', true&gt;, e… |
 | `verticalAlign` | `verticalAlign` | `DataTableVerticalAlign \| null` | `null` | — | — | Aligne le contenu des cellules verticalement. |
 | `stickyColsStart` | `stickyColsStart` | `number` | `0` | — | `luNumberAttribute` | Nombre de colonnes figées depuis la gauche. Limité à 1 avec l’usage de colspan. |
 | `stickyColsEnd` | `stickyColsEnd` | `number` | `0` | — | `luNumberAttribute` | Nombre de colonnes figées depuis la droite. Non compatible avec l’usage de colspan. |

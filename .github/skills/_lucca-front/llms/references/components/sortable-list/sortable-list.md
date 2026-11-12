@@ -28,7 +28,7 @@ import { SortableListItemComponent, SortableListComponent } from '@lucca-front/n
 | `clickable` | `clickable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes cliquables. |
 | `unclearable` | `unclearable` | `boolean` | `false` | — | `luBooleanAttribute` | Masque la croix de suppression. |
 | `drag` | `drag` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche la poignée de déplacement de l’élément de liste. À combiner avec la directive `cdkDrag`. |
-| `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie la taille du composant. |
+| `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie la taille de tous les éléments de la liste. L’input `small` de `lu-sortable-list-item` applique la même taille à… |
 
 #### Outputs
 
@@ -44,7 +44,7 @@ import { SortableListItemComponent, SortableListComponent } from '@lucca-front/n
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie la taille du composant. |
+| `small` | `small` | `boolean` | `false` | — | `luBooleanAttribute` | Modifie la taille de tous les éléments de la liste. L’input `small` de `lu-sortable-list-item` applique la même taille à… |
 
 ## Related files
 
