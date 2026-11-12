@@ -2,9 +2,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
-import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, SelectDataSource } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, SelectDataSource, TreeNode } from '@lucca-front/ng/core-select';
 import { BehaviorSubject, firstValueFrom, Subject } from 'rxjs';
-import { LuCoreSelectPublicDepartmentsDirective } from './public-departments.directive';
+import { LuCoreSelectPublicDepartment, LuCoreSelectPublicDepartmentsDirective } from './public-departments.directive';
 
 @Component({
 	selector: 'lu-simple-select',
@@ -20,10 +20,22 @@ class MockSelectComponent {}
 })
 class HostComponent {}
 
+const departments: LuCoreSelectPublicDepartment[] = [
+	{ id: '1', name: 'Production', parent: null, sortOrder: 1 },
+	{ id: '2', name: 'Administration', parent: null, sortOrder: 0 },
+	{ id: '3', name: 'Comptabilité', parent: { id: '2' }, sortOrder: 0 },
+	{ id: '4', name: 'Orphan', parent: { id: '99' }, sortOrder: 2 },
+];
+
+function toNames(branches: readonly TreeNode<LuCoreSelectPublicDepartment>[]): unknown[] {
+	return branches.map(({ node, children }) => (children?.length ? { [node.name]: toNames(children) } : node.name));
+}
+
 describe(LuCoreSelectPublicDepartmentsDirective.name, () => {
-	it('should search the non archived departments sorted by name', fakeAsync(async () => {
-		// Arrange
-		let dataSource: SelectDataSource<unknown> | undefined;
+	let dataSource: SelectDataSource<TreeNode<LuCoreSelectPublicDepartment>> | undefined;
+	let httpTesting: HttpTestingController;
+
+	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [HostComponent],
 			providers: [
@@ -35,8 +47,7 @@ describe(LuCoreSelectPublicDepartmentsDirective.name, () => {
 						clueChange$: new Subject<string>(),
 						optionComparer: coreSelectDefaultOptionComparer,
 						optionKey: coreSelectDefaultOptionKey,
-						optionTpl: { set: () => {} },
-						dataSource: { set: (ds: SelectDataSource<unknown>) => (dataSource = ds) },
+						dataSource: { set: (ds: SelectDataSource<TreeNode<LuCoreSelectPublicDepartment>>) => (dataSource = ds) },
 						loading: { set: () => {} },
 					},
 				},
@@ -45,15 +56,31 @@ describe(LuCoreSelectPublicDepartmentsDirective.name, () => {
 			],
 		});
 		TestBed.createComponent(HostComponent).detectChanges();
-		const httpTesting = TestBed.inject(HttpTestingController);
+		httpTesting = TestBed.inject(HttpTestingController);
+	});
 
+	it('should build the tree of every non archived department, ordered by sort order', fakeAsync(async () => {
 		// Act
-		const options = firstValueFrom(dataSource!.getOptions({ clue: 'bob', page: 0 }));
-		const req = httpTesting.expectOne((r) => r.urlWithParams === '/lucca-api/departments?isArchived=false&sort=name&search=bob&limit=20&include=links');
-		req.flush({ items: [{ id: '1' }], links: { next: null } });
+		const options = firstValueFrom(dataSource!.getOptions({ clue: '', page: 0 }));
+		const req = httpTesting.expectOne('/lucca-api/departments?isArchived=false&limit=100&include=links');
+		req.flush({ items: departments, links: { next: null } });
 
 		// Assert
-		expect(await options).toEqual([{ id: '1' }]);
+		expect(toNames(await options)).toEqual([{ Administration: ['Comptabilité'] }, 'Production', 'Orphan']);
 		expect(req.request.headers.get('Api-Version')).toBe('2024-11-01');
+	}));
+
+	it('should keep the ancestors of the departments matching the clue without fetching again', fakeAsync(async () => {
+		// Arrange
+		const options = firstValueFrom(dataSource!.getOptions({ clue: '', page: 0 }));
+		httpTesting.expectOne('/lucca-api/departments?isArchived=false&limit=100&include=links').flush({ items: departments, links: { next: null } });
+		await options;
+
+		// Act
+		const searched = await firstValueFrom(dataSource!.getOptions({ clue: 'compta', page: 0 }));
+
+		// Assert
+		expect(toNames(searched)).toEqual([{ Administration: ['Comptabilité'] }]);
+		httpTesting.verify();
 	}));
 });
