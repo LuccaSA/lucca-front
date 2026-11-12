@@ -48,13 +48,13 @@
 	@if (startValue() && startValue() !== DEFAULT_TIME_VALUE) {
 		{{ startValue() }}
 	} @else {
-		<span aria-hidden="true" data-content-before="–"></span>
+		<lu-presentation-no-value />
 	}
 	{{ intl().timeRangePickerAt }}
 	<span class="pr-u-mask">{{ endLabel }}</span>
 	@if (endValue() && endValue() !== DEFAULT_TIME_VALUE) {
 		{{ endValue() }}
 	} @else {
-		<span aria-hidden="true" data-content-before="–"></span>
+		<lu-presentation-no-value />
 	}
 </ng-container>

@@ -62,6 +62,22 @@ class SimpleSelectFormFieldHostComponent {
 	options: TestEntity[] = options;
 }
 
+@Component({
+	selector: 'lu-simple-select-presentation-host',
+	imports: [ReactiveFormsModule, FormFieldComponent, LuSimpleSelectInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-form-field label="Answer" presentation>
+			<lu-simple-select [formControl]="formControl" [options]="options" />
+		</lu-form-field>
+	`,
+})
+class SimpleSelectPresentationHostComponent {
+	formControl = new FormControl<boolean | number | null>(null);
+
+	options = [true, false, 0, 1];
+}
+
 describe('LuSimpleSelectInputComponent', () => {
 	let fixture: ComponentFixture<LuSimpleSelectInputComponent<Entity>>;
 
@@ -321,6 +337,30 @@ describe('LuSimpleSelectInputComponent', () => {
 			const combobox = element.querySelector('input');
 			expect(combobox?.getAttribute('aria-labelledby')).toBe(`${combobox?.id}-label ${valueId(element)}`);
 			expect(element.querySelector(`#${valueId(element)}`)?.textContent).toContain('test 1');
+		});
+	});
+	describe('presentation mode', () => {
+		function renderPresentation(value: boolean | number | null): HTMLElement {
+			const hostFixture = TestBed.createComponent(SimpleSelectPresentationHostComponent);
+			hostFixture.componentInstance.formControl.setValue(value);
+			hostFixture.detectChanges();
+			return hostFixture.nativeElement as HTMLElement;
+		}
+
+		it.each([false, 0])('should display a falsy selected option (%s) as a value', (value) => {
+			// Act
+			const host = renderPresentation(value);
+
+			// Assert
+			expect(host.querySelector('lu-presentation-no-value')).toBeNull();
+		});
+
+		it('should display the empty value when no option is selected', () => {
+			// Act
+			const host = renderPresentation(null);
+
+			// Assert
+			expect(host.querySelector('lu-presentation-no-value')).not.toBeNull();
 		});
 	});
 });

@@ -42,6 +42,6 @@
 			<lu-color [borderColor]="color.borderColor ?? null" [value]="color.background">{{ color.name }}</lu-color>
 		}
 	} @else {
-		<span aria-hidden="true" data-content-before="–"></span>
+		<lu-presentation-no-value />
 	}
 </ng-container>

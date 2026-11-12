@@ -72,10 +72,10 @@
 
 @if (!ignorePresentation()) {
 	<ng-container *luPresentationDisplayDefault>
-		@if (value) {
+		@if (hasValue()) {
 			<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 		} @else {
-			<span aria-hidden="true" data-content-before="–"></span>
+			<lu-presentation-no-value />
 		}
 	</ng-container>
 }

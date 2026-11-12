@@ -7,7 +7,7 @@ import { intlInputOptions, isNotNil, luBooleanAttribute, PortalDirective } from 
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { provideLuDialog } from '@lucca-front/ng/dialog';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills/core';
-import { InputDirective, PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, PresentationDisplayDirective, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
@@ -36,6 +36,7 @@ let nextID = 0;
 		ClearComponent,
 		PortalDirective,
 		PresentationDisplayDirective,
+		ɵPresentationNoValueComponent,
 		ɵPresentationDisplayDefaultDirective,
 	],
 	providers: [

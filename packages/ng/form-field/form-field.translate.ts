@@ -8,6 +8,7 @@ export const LU_FORM_FIELD_TRANSLATIONS = new InjectionToken('LuFormFieldTransla
 
 export interface LuFormFieldTranslations {
 	counter: string;
+	noValue: string;
 }
 
 export const luFormFieldTranslations: LuTranslation<LuFormFieldTranslations> = Translations;

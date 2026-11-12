@@ -104,6 +104,6 @@
 	@if (presentationValue()) {
 		<span [attr.lang]="hasNoInvariant() ? displayCultureCode() : null" translate="no">{{ presentationValue() }}</span>
 	} @else {
-		<span aria-hidden="true" data-content-before="–"></span>
+		<lu-presentation-no-value />
 	}
 </ng-container>

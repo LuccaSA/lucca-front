@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, isNotNil, luBooleanAttribute, luNullableNumberAttribute, luNumberAttribute, PortalDirective } from '@lucca-front/ng/core';
-import { FormFieldWidth, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { FormFieldWidth, InputDirective, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
@@ -16,7 +16,17 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 
 @Component({
 	selector: 'lu-text-input',
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent, ɵPresentationDisplayDefaultDirective, PortalDirective],
+	imports: [
+		InputDirective,
+		ReactiveFormsModule,
+		FormFieldIdDirective,
+		NgTemplateOutlet,
+		NgxMaskDirective,
+		ClearComponent,
+		ɵPresentationNoValueComponent,
+		ɵPresentationDisplayDefaultDirective,
+		PortalDirective,
+	],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
