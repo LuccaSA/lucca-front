@@ -60,7 +60,7 @@
 </div>
 
 <ng-container *luPresentationDisplayDefault>
-	@if (ngControl.value) {
+	@if (ngControl.value !== null && ngControl.value !== undefined && ngControl.value !== "") {
 		{{ ngControl.value }}
 	} @else {
 		<lu-presentation-no-value />
