@@ -23,7 +23,7 @@ import { DataPresentationComponent } from '@lucca-front/ng/form-field';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `label` | `label` | `PortalContent` | — | ✅ | — | Libellé de la donnée. La valeur correspond au contenu projeté. [PortalContent] |
-| `noValue` | `noValue` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche un tiret lorsqu’aucune valeur n’est renseignée. |
+| `noValue` | `noValue` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche un tiret lorsqu’aucune valeur n’est renseignée, accompagné d’un texte masqué pour les lecteurs d’écran. |
 | `size` | `size` | `'S' \| null` | `null` | — | — | Taille du composant. |
 
 ### Injection tokens

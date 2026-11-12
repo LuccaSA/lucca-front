@@ -24,7 +24,7 @@ import { getIntlPluralLabel, intlInputOptions, LOCALE_PLURAL_RULES, luBooleanAtt
 import { ALuSelectInputComponent, LU_CORE_SELECT_TRANSLATIONS, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { provideLuDialog } from '@lucca-front/ng/dialog';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills/core';
-import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { IconComponent } from '@lucca/prisme/icon';
 import { Subject } from 'rxjs';
@@ -47,6 +47,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 		FilterPillLabelDirective,
 		ClearComponent,
 		CommonModule,
+		ɵPresentationNoValueComponent,
 		ɵPresentationDisplayDefaultDirective,
 		IconComponent,
 	],

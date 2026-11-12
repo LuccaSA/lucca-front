@@ -17,7 +17,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		noValue: {
-			description: 'Affiche un tiret lorsqu’aucune valeur n’est renseignée.',
+			description: 'Affiche un tiret lorsqu’aucune valeur n’est renseignée, accompagné d’un texte masqué pour les lecteurs d’écran.',
 			table: { category: 'inputs' },
 		},
 	},

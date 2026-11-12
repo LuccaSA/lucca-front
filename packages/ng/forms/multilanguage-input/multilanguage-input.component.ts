@@ -2,7 +2,7 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, computed, effect, forwardRef, inject, input, LOCALE_ID, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { intlInputOptions, IntlParamsPipe, luBooleanAttribute } from '@lucca-front/ng/core';
-import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { ButtonComponent } from '@lucca/prisme/button';
@@ -23,6 +23,7 @@ import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.trans
 		InputDirective,
 		IntlParamsPipe,
 		LuTooltipTriggerDirective,
+		ɵPresentationNoValueComponent,
 		ɵPresentationDisplayDefaultDirective,
 		IconComponent,
 		ButtonComponent,

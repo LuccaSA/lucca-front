@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { CDN_URL, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
-import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/mobile/examples';
@@ -43,7 +43,7 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 
 @Component({
 	selector: 'lu-phone-number-input',
-	imports: [LuSimpleSelectInputComponent, FormsModule, LuDisplayerDirective, LuOptionDirective, InputDirective, ɵPresentationDisplayDefaultDirective],
+	imports: [LuSimpleSelectInputComponent, FormsModule, LuDisplayerDirective, LuOptionDirective, InputDirective, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent],
 	templateUrl: './phone-number-input.component.html',
 	styleUrl: './phone-number-input.component.scss',
 	encapsulation: ViewEncapsulation.None,

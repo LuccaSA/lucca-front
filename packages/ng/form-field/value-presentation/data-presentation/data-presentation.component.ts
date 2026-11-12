@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { ɵPresentationNoValueComponent } from '../presentation-no-value/presentation-no-value.component';
 
 @Component({
 	selector: 'lu-data-presentation',
-	imports: [PortalDirective],
+	imports: [PortalDirective, ɵPresentationNoValueComponent],
 	templateUrl: './data-presentation.component.html',
 	styleUrl: './data-presentation.component.scss',
 	encapsulation: ViewEncapsulation.None,

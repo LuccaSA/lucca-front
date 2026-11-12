@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ColorComponent } from '@lucca-front/ng/color';
 import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuCoreSelectNoClueDirective, LuDisplayerDirective, LuOptionDirective, ɵinjectPointerNavigation } from '@lucca-front/ng/core-select';
-import { ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { startWith } from 'rxjs';
 import { injectNgControl } from '../inject-ng-control';
@@ -14,7 +14,16 @@ import { LU_COLOR_TRANSLATIONS } from './color.translate';
 
 @Component({
 	selector: 'lu-color-input',
-	imports: [ReactiveFormsModule, LuSimpleSelectInputComponent, LuDisplayerDirective, LuOptionDirective, ColorComponent, LuCoreSelectNoClueDirective, ɵPresentationDisplayDefaultDirective],
+	imports: [
+		ReactiveFormsModule,
+		LuSimpleSelectInputComponent,
+		LuDisplayerDirective,
+		LuOptionDirective,
+		ColorComponent,
+		LuCoreSelectNoClueDirective,
+		ɵPresentationNoValueComponent,
+		ɵPresentationDisplayDefaultDirective,
+	],
 	hostDirectives: [NoopValueAccessorDirective],
 	templateUrl: './color-input.component.html',
 	styleUrl: './color-input.component.scss',

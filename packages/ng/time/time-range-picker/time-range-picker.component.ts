@@ -1,7 +1,7 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Injector, input, LOCALE_ID, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { intlInputOptions, isNil, luBooleanAttribute } from '@lucca-front/ng/core';
-import { FORM_FIELD_INSTANCE, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca/prisme/icon';
 import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
 import { DEFAULT_TIME_VALUE, isValidTimeRangePicker, MAX_TIME } from '../core/duration.utils';
@@ -17,7 +17,7 @@ import { TimeRangePickerSize } from './time-range-picker.type';
 	styleUrl: './time-range-picker.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, TimePickerComponent, ɵPresentationDisplayDefaultDirective],
+	imports: [IconComponent, TimePickerComponent, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent],
 	host: {
 		'(focusin)': 'onFocusIn()',
 		'(focusout)': 'onFocusOut()',

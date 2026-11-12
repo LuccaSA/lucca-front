@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, Elem
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { luBooleanAttribute, luNumberAttribute } from '@lucca-front/ng/core';
-import { InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { InputDirective, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
 import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { startWith } from 'rxjs';
 import { injectNgControl } from '../inject-ng-control';
@@ -10,7 +10,7 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 
 @Component({
 	selector: 'lu-textarea-input',
-	imports: [InputDirective, ReactiveFormsModule, ReadMoreComponent, ɵPresentationDisplayDefaultDirective],
+	imports: [InputDirective, ReactiveFormsModule, ReadMoreComponent, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent],
 	templateUrl: './textarea-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,

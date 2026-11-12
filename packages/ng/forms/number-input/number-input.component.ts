@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, ElementRef, input, viewCh
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, luBooleanAttribute, luNullableNumberAttribute, luNumberAttribute, luOptionalNumberAttribute } from '@lucca-front/ng/core';
-import { FormFieldWidth, InputDirective, ɵPresentationDisplayDefaultDirective } from '@lucca-front/ng/form-field';
+import { FormFieldWidth, InputDirective, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -12,7 +12,7 @@ import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
 
 @Component({
 	selector: 'lu-number-input',
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, ClearComponent, ɵPresentationDisplayDefaultDirective],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, ClearComponent, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent],
 	templateUrl: './number-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,

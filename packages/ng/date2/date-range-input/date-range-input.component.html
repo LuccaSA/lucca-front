@@ -186,12 +186,12 @@
 	@if (startLabel()) {
 		{{ startLabel() }}
 	} @else {
-		<span aria-hidden="true" data-content-before="–"></span>
+		<lu-presentation-no-value />
 	}
 	{{ intl().to }}
 	@if (endLabel()) {
 		{{ endLabel() }}
 	} @else {
-		<span aria-hidden="true" data-content-before="–"></span>
+		<lu-presentation-no-value />
 	}
 </ng-container>
