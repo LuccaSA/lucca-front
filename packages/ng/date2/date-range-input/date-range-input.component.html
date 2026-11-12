@@ -80,7 +80,8 @@
 					(luPopoverOpened)="panelOpen.set(true); panelOpened.emit()"
 					tabindex="-1"
 					type="button"
-					class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
+					luButton="ghost"
+					class="textField-input-affix-toggle"
 					(click)="editedField.set(0)"
 					aria-hidden="true"
 				>
@@ -102,7 +103,7 @@
 			>
 				@for (shortcut of shortcuts(); track $index) {
 					<li class="calendarShortcutsButton-item">
-						<button type="button" class="calendarShortcutsButton-item-button button" (click)="selectShortcut(shortcut, popoverRef)">
+						<button type="button" luButton class="calendarShortcutsButton-item-button" (click)="selectShortcut(shortcut, popoverRef)">
 							{{ shortcut.label }}
 						</button>
 					</li>
@@ -111,12 +112,12 @@
 		}
 		<div class="calendarWrapper">
 			<div class="calendarWrapper-navigation pr-u-left0">
-				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(mode())" #previousButtonRef>
+				<button luButton class="calendarWrapper-navigation-button" type="button" (click)="prev(mode())" #previousButtonRef>
 					<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">{{ intl().previous }}</span>
 				</button>
 			</div>
 			<div class="calendarWrapper-navigation pr-u-right0">
-				<button class="calendarWrapper-navigation-button button" type="button" (click)="next(mode())" #nextButtonRef>
+				<button luButton class="calendarWrapper-navigation-button" type="button" (click)="next(mode())" #nextButtonRef>
 					<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask"> {{ intl().next }}</span>
 				</button>
 			</div>

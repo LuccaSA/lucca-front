@@ -22,6 +22,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { isNil, isNotNil, luBooleanAttribute, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills/core';
@@ -45,6 +46,7 @@ let nextId = 0;
 	selector: 'lu-date-range-input',
 	imports: [
 		PopoverDirective,
+		ButtonComponent,
 		Calendar2Component,
 		IconComponent,
 		InputDirective,
@@ -217,9 +219,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		return '';
 	});
 
-	readonly previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
+	readonly previousButton = viewChild<unknown, ElementRef<Element>>('previousButtonRef', { read: ElementRef });
 
-	readonly nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
+	readonly nextButton = viewChild<unknown, ElementRef<Element>>('nextButtonRef', { read: ElementRef });
 
 	readonly calendarDialog = viewChild<ElementRef<HTMLElement>>('calendarDialog');
 
