@@ -1,6 +1,5 @@
 @use 'exports' as *;
 
-// stylelint-disable-next-line selector-disallowed-list -- .label is deprecated
 .label {
 	@layer components {
 		@include vars;

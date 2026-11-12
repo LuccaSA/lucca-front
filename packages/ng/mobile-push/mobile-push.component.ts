@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
-import { intlInputOptions } from '@lucca-front/ng/core';
+import { CDN_URL, intlInputOptions } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
@@ -14,6 +14,8 @@ import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class MobilePushComponent {
+	protected readonly cdnUrl = CDN_URL;
+
 	readonly intl = input(...intlInputOptions(LU_MOBILE_PUSH_TRANSLATIONS));
 
 	/**

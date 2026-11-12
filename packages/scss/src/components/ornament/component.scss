@@ -1,0 +1,14 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: grid;
+
+	@at-root ($atRoot) {
+		.ornament-back,
+		.ornament-front {
+			block-size: var(--components-ornament-blockSize);
+			grid-area: 1 / 1;
+			inline-size: var(--components-ornament-inlineSize);
+		}
+	}
+}

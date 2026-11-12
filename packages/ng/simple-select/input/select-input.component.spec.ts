@@ -79,6 +79,7 @@ describe('LuSimpleSelectInputComponent', () => {
 		exampleValue: { id: 1, name: 'test' },
 		emptyValue: null,
 		clearerSelector: '.simpleSelect-field-clear',
+		inputBoundToClue: true,
 	});
 
 	function nativeElement(): HTMLElement {

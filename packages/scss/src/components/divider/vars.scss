@@ -10,7 +10,8 @@
 	--components-divider-alignSelf: '';
 	--components-divider-display: block;
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-divider-fontSize: var(--pr-t-font-body-M-fontSize);
 	--components-divider-lineHeight: var(--pr-t-font-body-M-lineHeight);
+	// stylelint-enable property-disallowed-list
 }

@@ -8,37 +8,44 @@
  * - AST extraction → Angular API (inputs, selectors, types)
  * - ZeroHeight .md → Design guidelines
  * - Storybook index.json → Story links + source code
- * - Figma REST API → Design variant tokens (optional)
  *
  * Usage:
  *   npx ts-node --project scripts/generate-skills/tsconfig.json scripts/generate-skills/index.ts [options]
  *
  * Options:
- *   --version <M.m>      Minor(s) to generate (e.g. "21.2"), repeatable, required.
+ *   --version <M.m>      Minor to generate (e.g. "22.1"), required. The docs are a single folder:
+ *                        a branch carries one minor of it, the npm package of that minor ships it.
  *                        references/ = latest published patch, fixes/ = per-patch deltas.
  *   --component <slug>   Generate only the specified component
- *   --skip-figma         Skip Figma data collection
  *   --skip-zeroheight    Skip ZeroHeight data collection
  *   --dry-run            Print what would be generated without writing files
  *   --validate           Validate ZH coverage of component-map.json (no generation)
- *   --retry-failed       Replay only the units whose ZH/Figma fetch failed in a previous run
+ *   --retry-failed       Replay only the units whose ZH fetch failed in a previous run
  *   --accept-shrink      Accept content regressions vs the baselines (legitimate deletions)
  *   --accept-output-violations
  *                        Do not fail the run on output-guard violations (see generators/output-guard.ts)
- *   --aggregate-only     Rebuild lucca-front-all from the minors already on disk, nothing else
+ *   --offline            No network: ZeroHeight is read from the committed baselines,
+ *                        the Storybook index from --storybook-index, and no pre-flight runs.
+ *   --storybook-index <file>
+ *                        Storybook index.json to read instead of the deployed one (required by --offline
+ *                        without --ref)
+ *   --minor <M.m>        With --ref: the minor the branch prepares, before its `.0` tag exists. Kept in the
+ *                        committed manifest, so later runs keep it until the tag catches up.
+ *   --ref <git ref>      Read the code and stories from this ref (HEAD, or a tree from `git write-tree`)
+ *                        instead of the minor's tag. The skill keeps the name, links and changelogs of
+ *                        the last published tag the ref contains, and builds its Storybook index locally.
  */
 
+import { execFileSync } from 'child_process';
+import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import { extractPackageAPI } from './collectors/ast-extractor';
-import {
-	fetchFigmaDesignTokensMerged,
-	prefetchFigmaNodes,
-	setAcceptShrink as setFigmaAcceptShrink,
-} from './collectors/figma-connect';
-import { fetchStorybookIndex, restrictToStoryFamily } from './collectors/storybook';
+import { promoteEagerly } from './collectors/git-snapshot';
+import { fetchStorybookIndex, restrictToStoryFamily, setStorybookIndexFile } from './collectors/storybook';
 import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates, resolveScssComponentName, listScssComponentNames, sanitizeScssForwards } from './collectors/story-source';
 import { buildInputDefaults } from './collectors/story-eval';
-import { fetchZeroHeightPageGuarded, setAcceptShrink as setZhAcceptShrink } from './collectors/zeroheight-fetch';
+import { fetchZeroHeightPageGuarded, setAcceptShrink as setZhAcceptShrink, setOffline as setZhOffline } from './collectors/zeroheight-fetch';
 import {
 	FetchFailure,
 	TransientFetchError,
@@ -56,31 +63,30 @@ import {
 	renderDesignMd,
 	renderComponentPageMd,
 	renderChangelogMd,
-	renderFigmaMd,
 	collectSharedTypeDefs,
 	renderSharedTypeMd,
 } from './generators/template-renderer';
 import {
-	writeVersionedSkill,
-	cleanVersionDirectory,
+	writeComponentApi,
+	cleanComponentDirectory,
 	writeDesign,
 	writeComponentPage,
-	writeFigmaSkill,
-	figmaSkillExists,
-	writeVersionManifest,
+	writeSkillManifest,
+	clearSkillContent,
+	cleanFixesDirectory,
 	writeSharedType,
-	versionFolder,
+	skillRoot,
+	readSkillManifest,
 } from './generators/skill-writer';
 import { writeToc } from './generators/toc-writer';
 import { writeAngularApiPage } from './generators/angular-api-writer';
 import { buildComponentChangelog } from './generators/changelog-writer';
 import { writeFixes } from './generators/fixes-writer';
-import { writeVersionChangelog } from './generators/version-diff-writer';
-import { writeAggregateSkill, listGeneratedVersionStrings } from './generators/aggregate-writer';
+import { snapshotSkill, writeReviewChangelog } from './generators/version-diff-writer';
 import { auditStoryExamples, clearOutputViolations, reportOutputViolations } from './generators/output-guard';
 import { ensureZhReleaseIds } from './zh-release-guard';
-import { PreflightAbort, ensureFigmaAccess, ensureReleasesExist } from './preflight';
-import { MinorResolution, getTechnicalMinor, parseVersion, resolveMinorVersion } from './version-config';
+import { PreflightAbort, ensureReleasesExist, isNewMinor, refuseMinorForThisBranch, refuseOfflineRunOnNewMinor, refusePartialRunOnNewMinor } from './preflight';
+import { MinorResolution, followsCode, getTechnicalMinor, parseVersion, resolveMinorVersion, resolveSourceVersion } from './version-config';
 import { collectAllDocumentation } from './collectors/documentation';
 import { collectDeprecated } from './collectors/deprecated';
 import { collectSchematics } from './collectors/schematics';
@@ -112,19 +118,20 @@ function getFlags(name: string): string[] {
 const flags = {
 	versions: getFlags('version'),
 	component: getFlag('component'),
-	skipFigma: args.includes('--skip-figma'),
 	skipZeroheight: args.includes('--skip-zeroheight'),
 	skipDocumentation: args.includes('--skip-documentation'),
 	skipTools: args.includes('--skip-tools'),
 	skipSchematics: args.includes('--skip-schematics'),
-	skipAggregate: args.includes('--skip-aggregate'),
 	documentationOnly: args.includes('--documentation-only'),
 	dryRun: args.includes('--dry-run'),
 	validate: args.includes('--validate'),
 	retryFailed: args.includes('--retry-failed'),
 	acceptShrink: args.includes('--accept-shrink'),
 	acceptOutputViolations: args.includes('--accept-output-violations'),
-	aggregateOnly: args.includes('--aggregate-only'),
+	offline: args.includes('--offline'),
+	storybookIndex: getFlag('storybook-index'),
+	ref: getFlag('ref'),
+	minor: getFlag('minor'),
 	// ZeroHeight release-ID guard: supply IDs / assert "latest" non-interactively (CI).
 	zhIds: Object.fromEntries(
 		getFlags('zh-id')
@@ -134,6 +141,27 @@ const flags = {
 	) as Record<string, number>,
 	zhLatest: new Set(getFlags('zh-latest')),
 };
+
+/** With --ref: the minor the branch prepares (`--minor`, or the committed manifest's), if newer than its last tag. */
+let preparedMinor: string | null = null;
+
+function resolveTarget(minor: string): MinorResolution {
+	return flags.ref ? resolveSourceVersion(flags.ref, preparedMinor) : resolveMinorVersion(minor);
+}
+
+/** Builds the Storybook index of a git tree into a temp file, removed when the run exits. */
+function buildStorybookIndex(source: string): string {
+	const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'lf-skills-index-'));
+	process.on('exit', () => fs.rmSync(dir, { recursive: true, force: true }));
+	const file = path.join(dir, 'index.json');
+	try {
+		execFileSync('node', [path.join(__dirname, 'build-storybook-index.mjs'), source, file], { stdio: ['ignore', 'pipe', 'pipe'] });
+	} catch (err: any) {
+		console.error(`❌ Index Storybook impossible à construire depuis ${source} :\n${err.stderr ?? err.message}`);
+		process.exit(1);
+	}
+	return file;
+}
 
 // ─── Concurrency helper ────────────────────────────────────────────────────────
 
@@ -310,20 +338,49 @@ async function main(): Promise<void> {
 	// Shrink policy: with --accept-shrink, a content regression vs the baseline is taken as a
 	// legitimate deletion (fresh content written, baselines updated) instead of being held back.
 	setZhAcceptShrink(flags.acceptShrink);
-	setFigmaAcceptShrink(flags.acceptShrink);
 
-	// Rebuild the aggregate alone. It is a pure copy of the per-minor folders, so refreshing it
-	// needed no network and no extraction — yet the only way to trigger it was a full generation of
-	// a minor, which rewrites every one of its files. That made a targeted fix impossible: correcting
-	// three components left the aggregate's copies of them stale.
-	if (flags.aggregateOnly) {
-		const bundled = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
-		const { skillPath, versionCount } = writeAggregateSkill(config.output.skillsDir, bundled);
-		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} mineure·s)`);
-		const violations = reportOutputViolations(config.output.skillsDir);
-		if (violations.length > 0 && !flags.acceptOutputViolations) process.exitCode = 1;
-		return;
+	if (flags.offline) {
+		const refused = [flags.retryFailed && '--retry-failed', flags.acceptShrink && '--accept-shrink'].filter(Boolean);
+		if (refused.length > 0) {
+			console.error(`❌ --offline ne fetch rien : ${refused.join(', ')} n'a pas de sens ici.`);
+			process.exit(1);
+		}
+		if (!flags.storybookIndex && !flags.ref) {
+			console.error('❌ --offline exige --storybook-index <fichier> ou --ref : la liste des composants est construite à partir de l\'index.');
+			process.exit(1);
+		}
+		setZhOffline(true);
 	}
+	if (flags.minor && !/^\d+\.\d+$/.test(flags.minor)) {
+		console.error(`❌ --minor ${flags.minor} : attendu une mineure « M.m » (ex : 22.2).`);
+		process.exit(1);
+	}
+	if (flags.minor && !flags.ref) {
+		console.error('❌ --minor déclare la mineure que prépare une branche qui suit le code : il exige --ref.');
+		process.exit(1);
+	}
+	if (flags.ref) {
+		let resolved: MinorResolution;
+		preparedMinor = flags.minor ?? readSkillManifest(config.output.skillsDir)?.minor ?? null;
+		try {
+			resolved = resolveSourceVersion(flags.ref, preparedMinor);
+		} catch (err: any) {
+			console.error(`❌ ${err.message}`);
+			process.exit(1);
+		}
+		if (flags.minor && resolved.minorKey !== flags.minor) {
+			console.error(`❌ --minor ${flags.minor} : ${flags.ref} porte déjà le tag ${resolved.version.tag}, d'une mineure plus récente.`);
+			process.exit(1);
+		}
+		if (flags.versions.some((v) => v !== resolved.minorKey)) {
+			console.error(`❌ --ref ${flags.ref} porte la mineure ${resolved.minorKey} (dernier tag publié : ${resolved.version.tag}) : omets --version, ou passe ${resolved.minorKey}.`);
+			process.exit(1);
+		}
+		flags.versions.splice(0, flags.versions.length, resolved.minorKey);
+		if (!flags.storybookIndex) flags.storybookIndex = buildStorybookIndex(resolved.version.source);
+		if (!flags.component) promoteEagerly();
+	}
+	setStorybookIndexFile(flags.storybookIndex);
 
 	// Replay only the fetches that failed in a previous run (from the manifest).
 	if (flags.retryFailed) {
@@ -335,8 +392,8 @@ async function main(): Promise<void> {
 		return;
 	}
 
-	if (flags.versions.length === 0) {
-		console.error('❌ --version is required (e.g. --version 21.2 --version 21.1)');
+	if (flags.versions.length !== 1) {
+		console.error('❌ --version est requis, une seule fois (ex: --version 22.1) : la skill est un dossier unique, une branche porte une seule mineure.');
 		process.exit(1);
 	}
 
@@ -348,7 +405,8 @@ async function main(): Promise<void> {
 			console.error(`❌ --version ${v} : le pipeline génère par mineure. Utilise --version ${v.split('.').slice(0, 2).join('.')} (le contenu reflète le dernier patch publié, les patchs sont couverts par fixes/).`);
 			process.exit(1);
 		}
-		const tech = getTechnicalMinor(v.replace(/^v/, ''));
+		// --ref documents the code of a tag, technical or not: there is no minor-wide skill to point at.
+		const tech = flags.ref ? null : getTechnicalMinor(v.replace(/^v/, ''));
 		if (tech) {
 			console.error(
 				`❌ --version ${v} : mineure technique (${tech.reason}) couverte par la skill ${tech.coveredBy} — aucune skill dédiée (cf. TECHNICAL_MINORS dans version-config.ts) ; ses patchs > .0 sont documentés par les fixes/ de la skill ${tech.coveredBy}. Utilise --version ${tech.coveredBy}. Si cette mineure a désormais sa propre release ZeroHeight et de vrais changements de doc, retire-la de la table avant de la générer.`,
@@ -361,26 +419,49 @@ async function main(): Promise<void> {
 	const resolutions = new Map<string, MinorResolution>();
 	for (const v of flags.versions) {
 		try {
-			resolutions.set(v, resolveMinorVersion(v));
+			resolutions.set(v, resolveTarget(v));
 		} catch (err: any) {
 			console.error(`❌ ${err.message}`);
 			process.exit(1);
 		}
 	}
 
+	const committed = readSkillManifest(config.output.skillsDir);
+	const refusal = refuseMinorForThisBranch(flags.versions[0], committed?.minor ?? null);
+	if (refusal) {
+		console.error(`❌ ${refusal}`);
+		process.exit(1);
+	}
+	const partialFlags = [
+		flags.skipDocumentation && '--skip-documentation',
+		flags.skipTools && '--skip-tools',
+		flags.skipSchematics && '--skip-schematics',
+		flags.documentationOnly && '--documentation-only',
+		flags.component && `--component ${flags.component}`,
+	].filter((flag): flag is string => !!flag);
+	const partialRefusal = flags.dryRun ? null : refusePartialRunOnNewMinor(flags.versions[0], committed?.minor ?? null, partialFlags);
+	if (partialRefusal) {
+		console.error(`❌ ${partialRefusal}`);
+		process.exit(1);
+	}
+	// --ref takes its minor from the commit: the hook after a new tag, and a release PR's --minor, move it offline on purpose.
+	const offlineRefusal = flags.offline && !flags.ref ? refuseOfflineRunOnNewMinor(flags.versions[0], committed?.minor ?? null) : null;
+	if (offlineRefusal) {
+		console.error(`❌ ${offlineRefusal}`);
+		process.exit(1);
+	}
+
 	// ── Pre-flight ────────────────────────────────────────────────────────────
-	// Three phases, ordered so that no question is asked while a check can still stop the run, and
-	// so nothing is persisted before the last abort door (the ZeroHeight prompt writes an ID to
-	// zh-release-ids.json the instant it is typed — see preflight.ts).
+	// Two phases, ordered so that no question is asked while a check can still stop the run.
 
 	// Phase 1 — the release exists: tag, clone up to date, npm publication, deployed Storybook.
 	// Read-only, so it runs under --dry-run too: learning that the release is not ready is exactly
 	// what a dry run is for.
-	// Phase 2 — a usable Figma token, or a deliberate yes to generate without one. A question, so it
-	// is skipped when nothing will be written, like the ZeroHeight guard below.
+	// Offline, every check here is a network call with nothing to ask: the tag itself is already
+	// proven by resolveMinorVersion.
 	try {
-		await ensureReleasesExist([...resolutions.values()]);
-		if (!flags.dryRun) await ensureFigmaAccess(config.figma, { skipFigma: flags.skipFigma });
+		// --ref reads a commit, not the release: its tag is long published, its Storybook built locally.
+		if (!flags.offline && !flags.ref) await ensureReleasesExist([...resolutions.values()]);
 	} catch (err: any) {
 		if (!(err instanceof PreflightAbort)) throw err;
 		// A refusal is a decision, not a crash — but nothing was generated, so it still exits 1,
@@ -389,19 +470,34 @@ async function main(): Promise<void> {
 		process.exit(1);
 	}
 
-	clearFailures();
-	clearOutputViolations();
-
-	// Phase 3 — every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
+	// Phase 2 — every minor that will fetch ZeroHeight must have a pinned release ID, unless it is
 	// the confirmed latest online. Aborts before any heavy work if an unpinned, superseded minor is
 	// unresolved (would otherwise pull "latest" = a newer version and corrupt its design sections).
-	if (!flags.skipZeroheight && !flags.dryRun) {
+	if (!flags.skipZeroheight && !flags.dryRun && !flags.offline) {
 		try {
-			await ensureZhReleaseIds(flags.versions, config.output.skillsDir, { zhIds: flags.zhIds, zhLatest: flags.zhLatest });
+			// Only --ref reaches here with a technical minor: it reads its covering minor's release.
+			const zhMinors = flags.versions.map((v) => getTechnicalMinor(v)?.coveredBy ?? v);
+			await ensureZhReleaseIds(zhMinors, config.output.skillsDir, { zhIds: flags.zhIds, zhLatest: flags.zhLatest });
 		} catch (err: any) {
 			console.error(`\n❌ Garde-fou ZeroHeight : ${err.message}`);
 			process.exit(1);
 		}
+		// The resolutions above were taken before the guard could pin an ID (--zh-id or the prompt):
+		// left as is, they keep zhReleaseId null and the run fetches "latest", a newer minor.
+		for (const v of flags.versions) {
+			resolutions.set(v, resolveTarget(v));
+		}
+	}
+
+	clearFailures();
+	clearOutputViolations();
+
+	// Taken before anything is written: the review changelog diffs the run's output against it.
+	const previousSkill = flags.dryRun || flags.component ? null : snapshotSkill(config.output.skillsDir, committed);
+	// The writers only clean what they regenerate: on a new minor, a page the minor no longer emits
+	// would survive with the previous minor's content, and SKILL.md §5 would still list it.
+	if (previousSkill && isNewMinor(flags.versions[0], committed?.minor ?? null)) {
+		clearSkillContent(config.output.skillsDir);
 	}
 
 	let totalSuccess = 0;
@@ -489,8 +585,11 @@ async function main(): Promise<void> {
 		}
 
 		// Per-patch fixes (delta vs previous published patch) — deterministic, git-sourced.
-		// Needs the discovered component list, so it follows the component pass.
-		if (!flags.dryRun && !flags.component && !flags.documentationOnly) {
+		// Needs the discovered component list, so it follows the component pass. A skill that follows
+		// the code has one version per tag, so no patch delta to carry.
+		if (!flags.dryRun && !flags.component && !flags.documentationOnly && followsCode(version)) {
+			cleanFixesDirectory(config.output.skillsDir);
+		} else if (!flags.dryRun && !flags.component && !flags.documentationOnly) {
 			const { written } = writeFixes(config.output.skillsDir, {
 				version,
 				patchTags: resolution.patchTags,
@@ -512,31 +611,18 @@ async function main(): Promise<void> {
 		}
 	}
 
-	// Minor-level review changelog (human PR-aid, not consumed by the skill) — run after the
-	// loop so every target minor's folder is on disk to diff against its predecessor.
-	if (!flags.dryRun && !flags.component) {
-		for (const versionStr of flags.versions) {
-			const clPath = writeVersionChangelog(config.output.skillsDir, resolutions.get(versionStr)!.version);
-			if (clPath) console.log(`📝 Review changelog: ${path.relative(config.output.skillsDir, clPath)}`);
-		}
+	// Review changelog (human PR-aid, not consumed by the skill): the skill after the run vs before it.
+	// Offline runs regenerate on every commit, whose own diff already shows what changed.
+	if (!flags.dryRun && !flags.component && !flags.offline) {
+		const clPath = writeReviewChangelog(config.output.skillsDir, resolutions.get(flags.versions[0])!.version, previousSkill);
+		console.log(`📝 Review changelog: ${path.relative(config.output.skillsDir, clPath)}`);
 	}
 
-	// Aggregate "all versions" skill (lucca-front-all): one content folder per MAJOR (base = the
-	// major's newest minor, older minors as override folders) + a router SKILL.md. Built after all
-	// per-minor folders are on disk. Skipped for single-component or partial runs.
-	if (!flags.dryRun && !flags.component && !flags.skipAggregate) {
-		// Bundle EVERY minor present on disk, not just this run's — writeAggregateSkill wipes the
-		// aggregate before rebuilding, so passing only flags.versions would drop the other minors
-		// (a single-minor run must not nuke the others from lucca-front-all).
-		const bundled = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
-		const { skillPath, versionCount } = writeAggregateSkill(config.output.skillsDir, bundled);
-		console.log(`📦 Aggregate: ${path.relative(config.output.skillsDir, skillPath)} (${versionCount} mineure·s)`);
-	}
-
-	// Surface ZH/Figma fetch failures (content missing) and persist them for replay.
+	// Surface ZH fetch failures (content missing) and persist them for replay. Offline fetches
+	// nothing, so it leaves the manifest of the last online run alone.
 	if (!flags.dryRun && !flags.component) {
 		reportFailures();
-		writeFailureManifest(FAILURES_MANIFEST);
+		if (!flags.offline) writeFailureManifest(FAILURES_MANIFEST);
 	}
 
 	console.log(`\n🎉 All done! ${flags.versions.length} version(s), ${totalSuccess} generated, ${totalErrors} errors`);
@@ -552,16 +638,11 @@ async function main(): Promise<void> {
 	// Output guard: assert the emitted markdown is coherent. A violation is a generator bug, so it
 	// fails the run — but only after everything is written, so the offending output can be read.
 	if (!flags.dryRun) {
-		// Only this run's own minor folders are blocking: violations left in minors it did not rebuild
-		// are pre-existing and get reported, not thrown at whoever targeted a single version. The
-		// aggregate is deliberately out of scope — it is a copy, so every violation it holds is already
-		// reported against the minor folder it came from.
-		const scope = flags.versions.map((v) => versionFolder(resolutions.get(v)!.version));
-		// Rule 4 needs the SCSS folders that actually exist at the tag being generated. Only one
-		// listing is threaded through — the last target's — and the rule is scoped to `scope`
-		// anyway, so an older folder is never judged against a newer listing.
-		const lastTarget = resolutions.get(flags.versions[flags.versions.length - 1])!.version;
-		const violations = reportOutputViolations(config.output.skillsDir, scope, listScssComponentNames(lastTarget.tag));
+		// Only the generated skill is blocking: the hand-written skills beside it (the lucca-front
+		// pointer, lucca-front-scss…) are reported, not thrown at whoever runs the generator.
+		const target = resolutions.get(flags.versions[0])!.version;
+		const generatedScope = path.relative(config.output.skillsDir, skillRoot(config.output.skillsDir));
+		const violations = reportOutputViolations(config.output.skillsDir, [generatedScope], listScssComponentNames(target.source));
 		if (violations.length > 0 && !flags.acceptOutputViolations) {
 			console.error('\n❌ Génération refusée : corrige le générateur (jamais les .md), ou relance avec --accept-output-violations si tu assumes ces écarts.');
 			process.exitCode = 1;
@@ -570,9 +651,9 @@ async function main(): Promise<void> {
 }
 
 /**
- * Replays only the units whose ZH/Figma fetch failed in a previous run (read from the manifest):
+ * Replays only the units whose ZH fetch failed in a previous run (read from the manifest):
  * components, documentation pages, tool pages and the deprecated page — each through its own
- * collector. Then refreshes the per-version SKILL.md of the touched versions and the aggregate.
+ * collector. Then refreshes the SKILL.md.
  * Rewrites the manifest with whatever still fails — so it can be replayed again until empty.
  */
 async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPath: string): Promise<void> {
@@ -610,6 +691,11 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 
 	const touched: MinorResolution[] = [];
 	for (const [minorKey, items] of byVersion) {
+		const refusal = refuseMinorForThisBranch(minorKey, readSkillManifest(config.output.skillsDir)?.minor ?? null);
+		if (refusal) {
+			console.error(`❌ ${refusal}`);
+			process.exit(1);
+		}
 		const resolution = resolveMinorVersion(minorKey);
 		const version = resolution.version;
 		const componentSlugs = new Set(items.filter((f) => (f.scope ?? 'component') === 'component').map((f) => f.slug));
@@ -637,16 +723,10 @@ async function retryFailedRun(config: ReturnType<typeof loadConfig>, manifestPat
 		touched.push(resolution);
 	}
 
-	// Refresh the touched minors' SKILL.md, then rebuild the aggregate from all on-disk minors.
-	// fixes/ are NOT rewritten here: they are git-sourced only, unaffected by ZH/Figma retries.
+	// fixes/ are NOT rewritten here: they are git-sourced only, unaffected by ZH retries.
 	if (!flags.dryRun) {
 		for (const resolution of touched) {
 			writeToc(config.output.skillsDir, resolution.version, resolution.patchTags, resolution.technicalMinors);
-		}
-		if (!flags.skipAggregate) {
-			const all = listGeneratedVersionStrings(config.output.skillsDir).map((m) => resolveMinorVersion(m));
-			const { versionCount } = writeAggregateSkill(config.output.skillsDir, all);
-			console.log(`\n📦 Agrégat reconstruit (${versionCount} mineure·s)`);
 		}
 	}
 
@@ -716,15 +796,6 @@ async function processVersion(
 
 	// Process each component
 	const entries: [string, ComponentEntry][] = discovered.map(c => [c.slug, c.entry]);
-
-	// Batched Figma prefetch: all node ids in a handful of Tier-1 requests, filling the process
-	// cache so the per-component fetches below are network no-ops (cache persists across versions).
-	if (!flags.skipFigma && config.figma.token) {
-		const allNodeIds = entries.flatMap(([, entry]) => entry.figmaNodeIds ?? []);
-		if (allNodeIds.length > 0) {
-			await prefetchFigmaNodes(config.figma.fileKey, allNodeIds, config.figma.token);
-		}
-	}
 
 	console.log(`\n⚙️  Processing ${entries.length} components...\n`);
 
@@ -833,7 +904,7 @@ async function processVersion(
 					// Only the Sass side gates this: ZH curating TypeScript imports says nothing about
 					// which stylesheets the markup needs.
 					if (ex.zhScssImports && ex.zhScssImports.length > 0) continue;
-					const extraScss = inferScssImports(ex.templates, entry.ngPackage, version.tag);
+					const extraScss = inferScssImports(ex.templates, entry.ngPackage, version.source);
 					if (extraScss.length > 0) {
 						ex.zhScssImports = extraScss;
 					}
@@ -846,7 +917,7 @@ async function processVersion(
 			if (storyExamples) {
 				for (const ex of storyExamples) {
 					if (!ex.zhScssImports?.length) continue;
-					const { kept, dropped } = sanitizeScssForwards(ex.zhScssImports, version.tag);
+					const { kept, dropped } = sanitizeScssForwards(ex.zhScssImports, version.source);
 					if (dropped.length > 0) {
 						console.warn(`   ⚠️  ${slug} → ${ex.fileSlug} : ${dropped.length} import Sass vers un dossier inexistant, retiré(s) — ${dropped.join(', ')}`);
 						ex.zhScssImports = kept;
@@ -865,26 +936,6 @@ async function processVersion(
 				await formatStoryTemplates(storyExamples);
 			}
 
-			// 5. Figma tokens (optional, unversioned) — ALL node ids merged (aliases, split sets)
-			let figmaTokens = null;
-			if (!flags.skipFigma && entry.figmaNodeIds && entry.figmaNodeIds.length > 0 && config.figma.token) {
-				try {
-					figmaTokens = await fetchFigmaDesignTokensMerged(config.figma.fileKey, entry.figmaNodeIds, config.figma.token);
-				} catch (err: any) {
-					if (err instanceof TransientFetchError) {
-						recordFailure({
-							source: 'figma',
-							slug,
-							version: `${version.major}.${version.minor}.${version.patch}`,
-							ref: entry.figmaNodeIds.join(','),
-							status: err.status,
-							reason: err.message,
-						});
-					}
-					console.warn(`     ⚠️  Figma: ${err.message}`);
-				}
-			}
-
 			// Build component data
 			const data: ComponentData = {
 				slug,
@@ -895,7 +946,6 @@ async function processVersion(
 				storybook: sbGroup,
 				storyExamples,
 				basicUsage,
-				figma: figmaTokens,
 			};
 
 			if (flags.dryRun) {
@@ -906,7 +956,7 @@ async function processVersion(
 			// ── Write all files ──────────────────────────────────────────
 
 			// Clean previous design/ and examples/ to avoid stale files
-			cleanVersionDirectory(config.output.skillsDir, slug, version);
+			cleanComponentDirectory(config.output.skillsDir, slug);
 
 			// Pre-compute design split + changelog so the API file links only to files actually
 			// written (avoids dead ./design/_index.md and ./<slug>.changelog.md).
@@ -920,24 +970,20 @@ async function processVersion(
 				zhProse: renderChangelogMd(data),
 			});
 
-			// Main API reference — the changelog (structural API diff + ZH prose layer) is embedded
-			// as its trailing ## Changelog section. hasFigma: tokens fetched this run, or a .figma.md
-			// kept from a previous run (figma skipped/unavailable) — the link must survive either way.
-			const hasFigma = figmaTokens !== null || figmaSkillExists(config.output.skillsDir, slug, version);
 			// Design guidelines, merged into a single <slug>.design.md (designResult computed above)
 			let codeSections: DesignSection[] = [];
 			if (designResult) {
 				codeSections = designResult.codeSections;
 				if (designResult.designSections.length > 0) {
 					const designMd = renderDesignMd(slug, designResult.designSections, designResult.overviewContent, entry.zeroheightPagePath ?? '');
-					writeDesign(config.output.skillsDir, slug, version, designMd);
+					writeDesign(config.output.skillsDir, slug, designMd);
 				}
 			}
 
 			// `ngPackage` is the kebab-case Angular entrypoint; the SCSS folders are camelCase.
 			// Interpolating it verbatim emitted paths that do not exist — resolve it instead, and
 			// emit nothing when it cannot be resolved (see resolveScssComponentName).
-			const scssComponent = resolveScssComponentName([entry.scssComponent, entry.ngPackage, slug], version.tag);
+			const scssComponent = resolveScssComponentName([entry.scssComponent, entry.ngPackage, slug], version.source);
 			// Only worth saying when the page actually has an HTML/CSS story to carry the import:
 			// most Angular-only components (the selects, `api`, `scroll`…) have no SCSS counterpart
 			// at all, and warning on those buries the one case that matters.
@@ -952,23 +998,17 @@ async function processVersion(
 			// code section ended up with a page nobody linked to.
 			const componentPageMd = renderComponentPageMd(data, codeSections, scssImport);
 
-			const mdContent = renderComponentMd(data, { hasDesign, changelog: clMd, hasFigma, hasComponentPage: componentPageMd !== null });
-			const result = writeVersionedSkill(config.output.skillsDir, slug, version, mdContent);
+			const mdContent = renderComponentMd(data, { hasDesign, changelog: clMd, hasComponentPage: componentPageMd !== null });
+			const result = writeComponentApi(config.output.skillsDir, slug, mdContent);
 
 			if (componentPageMd) {
-				writeComponentPage(config.output.skillsDir, slug, version, componentPageMd);
-			}
-
-			// Figma skill
-			if (figmaTokens) {
-				const figmaMd = renderFigmaMd(slug, [figmaTokens], config.figma.fileKey);
-				writeFigmaSkill(config.output.skillsDir, slug, version, figmaMd);
+				writeComponentPage(config.output.skillsDir, slug, componentPageMd);
 			}
 
 			const nDesign = hasDesign && designResult ? designResult.designSections.length : 0;
 			const nStories = storyExamples?.length ?? 0;
 			processed++;
-			console.log(`  [${processed}/${totalComponents}] ✅ ${slug} — ${nStories} stories, ${nDesign} design${figmaTokens ? ', figma' : ''}`);
+			console.log(`  [${processed}/${totalComponents}] ✅ ${slug} — ${nStories} stories, ${nDesign} design`);
 			successCount++;
 			return { slug, status: result.status, data };
 		} catch (err: any) {
@@ -987,7 +1027,7 @@ async function processVersion(
 		const sharedTypes = collectSharedTypeDefs(allData);
 		for (const typeDef of sharedTypes) {
 			const typeMd = renderSharedTypeMd(typeDef);
-			const typeResult = writeSharedType(config.output.skillsDir, version, typeDef.typeName, typeMd);
+			const typeResult = writeSharedType(config.output.skillsDir, typeDef.typeName, typeMd);
 			console.log(`  📎 ${typeDef.typeName}.md — ${typeResult.status} (${typeDef.values.length} values)`);
 		}
 	}
@@ -995,8 +1035,8 @@ async function processVersion(
 	// Write version manifest — full runs only: a component-scoped run (--component or replay)
 	// would overwrite componentCount with the partial count of this run.
 	if (!flags.dryRun && !componentScoped) {
-		writeVersionManifest(config.output.skillsDir, version, successCount, resolution.patchTags, resolution.technicalMinors);
-		console.log(`\n📋 Version manifest updated`);
+		writeSkillManifest(config.output.skillsDir, version, successCount, resolution.patchTags, resolution.technicalMinors);
+		console.log(`\n📋 Skill manifest updated`);
 	}
 
 	console.log(`\n✅ ${version.tag}: ${successCount} generated, ${errorCount} errors`);

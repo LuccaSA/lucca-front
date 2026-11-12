@@ -1,7 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-// stylelint-disable selector-disallowed-list -- Selectors are all deprecated.
-
 @mixin neutral {
 	--components-card-background: var(--pr-t-elevation-surface-sunken);
 }

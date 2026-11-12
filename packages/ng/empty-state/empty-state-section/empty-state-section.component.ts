@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
-import { luBooleanAttribute, luNumberAttribute, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { Hx, ICON_TO_ILLUSTRATION } from '../empty-state.type';
+import { luBooleanAttribute, luNullableNumberAttribute, luNumberAttribute, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { EmptyStateHeadingLevel, ICON_TO_ILLUSTRATION } from '../empty-state.type';
 
 @Component({
 	selector: 'lu-empty-state-section',
@@ -55,9 +55,16 @@ export class EmptyStateSectionComponent {
 	readonly description = input<PortalContent>();
 
 	/**
-	 * Define the aria level of the title
+	 * Aria level of the title. Defaults to 3.
 	 */
-	readonly hx = input(3, { transform: luNumberAttribute<Hx> });
+	readonly headingLevel = input(null, { transform: luNullableNumberAttribute<EmptyStateHeadingLevel> });
+
+	/**
+	 * @deprecated use `headingLevel` instead
+	 */
+	readonly hx = input(3, { transform: luNumberAttribute<EmptyStateHeadingLevel> });
+
+	readonly headingLevelValue = computed(() => this.headingLevel() ?? this.hx());
 
 	readonly emptyStateClasses = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 

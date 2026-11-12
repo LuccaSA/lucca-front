@@ -4,7 +4,8 @@
 	--components-sortableList-description-font: var(--pr-t-font-body-M);
 	--components-sortableList-helper-font: var(--pr-t-font-body-S);
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-sortableList-description-fontSize: var(--pr-t-font-body-M-fontSize);
 	--components-sortableList-description-lineHeight: var(--pr-t-font-body-M-lineHeight);
+	// stylelint-enable property-disallowed-list
 }

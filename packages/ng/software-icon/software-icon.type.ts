@@ -29,6 +29,7 @@ export const SOFTWARE_ICON = [
 	'payment-methods',
 	'accounting-assistant',
 	'certified-einvoicing-platform',
+	'business-trips',
 	// Compensation and Benefits
 	'compensation',
 	'payslip',
@@ -43,6 +44,7 @@ export const SOFTWARE_ICON = [
 	'client-center',
 	'sandbox',
 	'store',
+	'integrations',
 	'lucca',
 ] as const;
 

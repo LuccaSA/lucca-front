@@ -29,9 +29,10 @@
 		@include icons.XXS;
 	}
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-tag-fontSize: var(--pr-t-font-body-XS-fontSize);
 	--components-tag-lineHeight: var(--pr-t-font-body-XS-lineHeight);
+	// stylelint-enable property-disallowed-list
 }
 
 @mixin L {
@@ -41,9 +42,10 @@
 		@include icons.S;
 	}
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-tag-fontSize: var(--pr-t-font-body-M-fontSize);
 	--components-tag-lineHeight: var(--pr-t-font-body-M-lineHeight);
+	// stylelint-enable property-disallowed-list
 }
 
 @mixin outlined {

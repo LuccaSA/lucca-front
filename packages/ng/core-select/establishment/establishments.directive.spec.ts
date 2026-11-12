@@ -116,4 +116,16 @@ describe(LuCoreSelectEstablishmentsDirective.name, () => {
 		req.flush([establishment(1, 7)]);
 		tick();
 	}));
+
+	it('should keep only the requested legal unit when the url ignores `legalUnitId`', fakeAsync(() => {
+		const options = getGroupOptions(1);
+
+		// A full page mixing groups: paging must go on even though a single option matches
+		expectGroupPage(1, 1).flush([establishment(1, 1), establishment(2, 2)]);
+		tick();
+		expectGroupPage(1, 2).flush([establishment(3, 1)]);
+		tick();
+
+		expect(options.map((option) => option.id)).toEqual([1, 3]);
+	}));
 });

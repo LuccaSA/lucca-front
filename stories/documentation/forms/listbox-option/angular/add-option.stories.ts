@@ -14,7 +14,12 @@ export default {
 			imports: [ListboxComponent, OptionComponent, IconComponent],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		multiple: {
+			description: 'Ajoute une checkbox aux options.',
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+	},
 	render: (args: OptionBasicStory) => {
 		const multiple = args.multiple ? ` multiple` : ``;
 		return {

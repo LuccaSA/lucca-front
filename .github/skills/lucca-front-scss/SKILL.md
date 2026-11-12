@@ -47,8 +47,8 @@ Un `.mod-*` ou `.is-*` ne vit **jamais seul** : il est toujours rattaché à un 
 
 **Composants frères sans parent — `_` d'adjacence** : `-` décrit la descendance, `_` l'adjacence. Nom du composant en tête et fonction en fin obligatoires.
 
-- ✅ `.dialog_backdrop` (frère de `.dialog`), `.viewTabs_panel`
-- ❌ `.panel`, `.viewTabs-panel`, `.viewTabsPanel`
+- ✅ `.dialog_backdrop` (frère de `.dialog`), `.segmentedControl_panel`
+- ❌ `.panel`, `.segmentedControl-panel`, `.segmentedControlPanel`
 
 **Sous-composants optionnels — suffixe `Optional`** : `.dialog-formOptional` (sous-composant facultatif dans l'imbrication HTML). Les enfants d'un sous-composant optionnel ne reprennent **pas** son nom : `.dialog-footer`, pas `.dialog-formOptional-footer`.
 

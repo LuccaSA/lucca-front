@@ -6,9 +6,10 @@
 	--components-formLabel-help-fontSize: var(--pr-t-font-body-XS-lineHeight);
 	--components-formLabel-help-lineHeight: var(--pr-t-font-body-S-lineHeight);
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-formLabel-fontSize: var(--pr-t-font-body-S-fontSize);
 	--components-formLabel-lineHeight: var(--pr-t-font-body-S-lineHeight);
+	// stylelint-enable property-disallowed-list
 
 	.tag {
 		@include tag.S;
@@ -20,9 +21,10 @@
 	--components-formLabel-help-fontSize: 0.75rem;
 	--components-formLabel-help-lineHeight: var(--pr-t-font-body-XS-lineHeight);
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-formLabel-fontSize: var(--pr-t-font-body-XS-fontSize);
 	--components-formLabel-lineHeight: var(--pr-t-font-body-XS-lineHeight);
+	// stylelint-enable property-disallowed-list
 
 	.tag {
 		@include tag.S;

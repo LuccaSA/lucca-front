@@ -1,0 +1,300 @@
+# popover
+
+**Sommaire**
+
+- Import
+- API Reference
+  - LuPopoverPanelComponent (component)
+  - LuPopoverTargetDirective (directive)
+  - LuPopoverTriggerDirective (directive)
+  - Modules dépréciés
+- Related files
+- Changelog
+  - 22.1.2
+  - 22.0.0
+  - Notes de release (ZeroHeight)
+
+## Import
+
+```typescript
+import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDirective } from '@lucca-front/ng/popover';
+```
+
+## API Reference
+
+### LuPopoverPanelComponent (component)
+
+**Selector:** `lu-popover`
+
+> ⚠️ **Déprécié** : since 21.0.0; use PopoverDirective.
+
+**exportAs:** `LuPopoverPanel`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `template` | `template` | `TemplateRef<unknown>` | — | — | — | — |
+| `templateContext` | `templateContext` | `unknown` | `undefined` | — | — | — |
+| `inputCloseOnClick` | `inputCloseOnClick` | `boolean` | `false` | — | — | — |
+| `inputTrapFocus` | `inputTrapFocus` | `boolean` | `false` | — | — | — |
+| `inputScrollStrategy` | `inputScrollStrategy` | `'reposition' \| 'block' \| 'close'` | `'reposition'` | — | — | — |
+| `inputPanelClasses` | `inputPanelClasses` | `string` | `''` | — | — | — |
+| `inputContentClasses` | `inputContentClasses` | `string` | `''` | — | — | — |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `closeOutput` | `closeOutput` | `void` | — |
+| `openOutput` | `openOutput` | `void` | — |
+| `hoveredOutput` | `hoveredOutput` | `void` | — |
+
+### LuPopoverTargetDirective (directive)
+
+**Selector:** `[luPopoverTarget]`
+
+> ⚠️ **Déprécié** : since 21.0.0; use PopoverDirective.
+
+**exportAs:** `LuPopoverTarget`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `inputPosition` | `luPopoverPosition` | `'above' \| 'below' \| 'before' \| 'after'` | `undefined` | — | — | Position du popover par rapport à son déclencheur. |
+| `inputAlignment` | `luPopoverAlignment` | `'top' \| 'bottom' \| 'left' \| 'right' \| 'center'` | `undefined` | — | — | Alignement du popover par rapport à son déclencheur. |
+| `inputOverlap` | `luPopoverOverlap` | `boolean` | `undefined` | — | — | Affiche le popover par-dessus son déclencheur. |
+| `inputOffsetX` | `luPopoverOffsetX` | `number` | `undefined` | — | — | — |
+| `inputOffsetY` | `luPopoverOffsetY` | `number` | `undefined` | — | — | — |
+
+### LuPopoverTriggerDirective (directive)
+
+**Selector:** `[luPopover]`
+
+> ⚠️ **Déprécié** : since 21.0.0; use PopoverDirective.
+
+**exportAs:** `LuPopoverTrigger`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `inputPanel` | `luPopover` | `TPanel` | `undefined` | — | — | — |
+| `inputTarget` | `luPopoverTarget` | `TTarget` | `undefined` | — | — | — |
+| `inputTriggerEvent` | `luPopoverTrigger` | `'click' \| 'hover' \| 'none' \| 'focus'` | `undefined` | — | — | Événement déclenchant l’ouverture du popover. |
+| `inputPosition` | `luPopoverPosition` | `LuPopoverPosition` | `undefined` | — | — | Position du popover par rapport à son déclencheur. |
+| `inputAlignment` | `luPopoverAlignment` | `LuPopoverAlignment` | `undefined` | — | — | Alignement du popover par rapport à son déclencheur. |
+| `inputEnterDelay` | `luPopoverEnterDelay` | `number` | `undefined` | — | — | Délai en millisecondes avant l’ouverture du popover, lorsque `luPopoverTrigger` vaut `hover`. |
+| `inputLeaveDelay` | `luPopoverLeaveDelay` | `number` | `undefined` | — | — | Délai en millisecondes avant la fermeture du popover, lorsque `luPopoverTrigger` vaut `hover`. |
+| `inputDisabled` | `luPopoverDisabled` | `boolean` | `undefined` | — | — | Empêche l’ouverture du popover. |
+| `inputOverlap` | `luPopoverOverlap` | `boolean` | `undefined` | — | — | Affiche le popover par-dessus son déclencheur. |
+| `inputOffsetX` | `luPopoverOffsetX` | `number` | `undefined` | — | — | — |
+| `inputOffsetY` | `luPopoverOffsetY` | `number` | `undefined` | — | — | — |
+
+#### Outputs
+
+| Property | Binding name | Type | Notes |
+|----------|-------------|------|-------|
+| `onCloseOutput` | `onCloseOutput` | `void` | — |
+| `onOpenOutput` | `onOpenOutput` | `void` | — |
+
+### Modules dépréciés
+
+- ⚠️ `LuPopoverPanelModule` — use `LuPopoverPanelComponent` instead
+- ⚠️ `LuPopoverModule` — use `LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDirective` instead
+
+## Related files
+
+- 📝 [Code & implementation](./popover.component.md)
+
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover-angular--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.1.2
+
+`LuPopoverPanelComponent` :
+  ~ `LuPopoverPanelComponent` devient déprécié (since 21.0.0; use PopoverDirective.)
+`LuPopoverTargetDirective` :
+  ~ `LuPopoverTargetDirective` devient déprécié (since 21.0.0; use PopoverDirective.)
+`LuPopoverTriggerDirective` :
+  ~ `LuPopoverTriggerDirective` devient déprécié (since 21.0.0; use PopoverDirective.)
+
+### 22.0.0
+
+`LuPopoverPanelComponent` :
+  + `templateContext` : unknown
+  + `inputCloseOnClick` : boolean
+  + `inputTrapFocus` : boolean
+  + `inputScrollStrategy` : 'reposition' | 'block' | 'close'
+  + `inputPanelClasses` : string
+  + `inputContentClasses` : string
+  - `template-context`
+  - `close-on-click`
+  - `trap-focus`
+  - `scroll-strategy`
+  - `panel-classes`
+  - `content-classes`
+  + (output) `closeOutput` : void
+  + (output) `openOutput` : void
+  + (output) `hoveredOutput` : void
+  - (output) `close`
+  - (output) `open`
+  - (output) `hovered`
+`LuPopoverTargetDirective` :
+  ~ `luPopoverPosition` : LuPopoverPosition → 'above' | 'below' | 'before' | 'after', défaut ∅ → undefined
+  ~ `luPopoverAlignment` : LuPopoverAlignment → 'top' | 'bottom' | 'left' | 'right' | 'center', défaut ∅ → undefined
+  ~ `luPopoverOverlap` : défaut ∅ → undefined
+  ~ `luPopoverOffsetX` : défaut ∅ → undefined
+  ~ `luPopoverOffsetY` : défaut ∅ → undefined
+`LuPopoverTriggerDirective` :
+  ~ `luPopover` : défaut ∅ → undefined
+  ~ `luPopoverTarget` : défaut ∅ → undefined
+  ~ `luPopoverTrigger` : LuPopoverTriggerEvent → 'click' | 'hover' | 'none' | 'focus', défaut ∅ → undefined
+  ~ `luPopoverPosition` : défaut ∅ → undefined
+  ~ `luPopoverAlignment` : défaut ∅ → undefined
+  ~ `luPopoverEnterDelay` : défaut ∅ → undefined
+  ~ `luPopoverLeaveDelay` : défaut ∅ → undefined
+  ~ `luPopoverDisabled` : défaut ∅ → undefined
+  ~ `luPopoverOverlap` : défaut ∅ → undefined
+  ~ `luPopoverOffsetX` : défaut ∅ → undefined
+  ~ `luPopoverOffsetY` : défaut ∅ → undefined
+  + (output) `onCloseOutput` : void
+  + (output) `onOpenOutput` : void
+  - (output) `luPopoverOnOpen`
+  - (output) `luPopoverOnClose`
+
+### Notes de release (ZeroHeight)
+
+#### 22.1.0
+
+##### Added
+
+- `luPopoverBackdrop` input to render a transparent backdrop catching the outside click, for menu-like popovers.
+
+##### Fixed
+
+- `Escape` only closes the topmost overlay: a select panel or a dialog opened from a popover no longer closes the popover too.
+- Clicking inside an overlay opened from the popover content (select panel, dialog, date picker…) no longer closes the popover.
+
+#### 22.0.6
+
+##### Fixed
+
+- On touch devices, a popover with a `hover` trigger no longer reopens right after being closed from inside it.
+- Clicking the trigger of an open popover inside a shadow root now closes it instead of reopening it.
+
+#### 22.0.0
+
+##### Added
+
+- `luPopoverIgnoredOutsidePointerTargets` input to declare elements whose pointer events must not close the popover.
+- Options object on `openPopover({ disableCloseButtonFocus, disableInitialTriggerFocus })`.
+
+##### Changed
+
+- Popover no longer creates a blocking backdrop: it closes on outside pointer events and the rest of the page stays interactive.
+
+##### Deprecated
+
+- Positional signature `openPopover(withBackdrop, disableCloseButtonFocus, disableInitialTriggerFocus)` — `withBackdrop` is now ignored, use the options object instead.
+
+##### Fixed
+
+- Size recalculation when the popover content changes.
+
+#### 21.3.1
+
+##### Fixed
+
+- Connected overlays are kept out of the push panel zone, so a popover is no longer clipped by it.
+
+#### 21.3.0
+
+##### Added
+
+- `luPopoverMaxInlineSize` and `luPopoverMaxBlockSize` inputs to cap the size of the popover panel.
+
+#### 21.1.4
+
+##### Fixed
+
+- The popover no longer opens when its content is `null` or `undefined`.
+
+#### 21.1.0
+
+##### Changed
+
+- `intl` input now accepts partial overrides that are merged with the default translations.
+
+#### 21.0.4
+
+##### Fixed
+
+- Opening position of the panel when the trigger is close to the viewport edge.
+
+#### 21.0.3
+
+##### Added
+
+- The overlay scroll strategy can now be customized.
+
+#### 20.1.1
+
+##### Fixed
+
+- Focus is brought back to the trigger when the popover closes in focus mode.
+
+#### 19.2.4
+
+##### Added
+
+- `luPopoverOpened` output.
+
+#### 19.1.0
+
+##### Added
+
+- `luPopoverAnchor` input to position the popover against another element, and the `luPopoverClosed` output.
+
+#### 18.2.1
+
+##### Added
+
+- The directive is exported as `luPopover2` and exposes a `close()` method.
+
+#### 18.2.0
+
+##### Added
+
+- Option to remove the keyboard close button.
+- `hover+focus` trigger mode.
+
+##### Fixed
+
+- The popover is repositioned after its content changes.
+
+#### 18.1.5
+
+##### Fixed
+
+- Focus trap of the popover panel.
+
+#### 18.1.2
+
+##### Changed
+
+- Scroll is no longer blocked while a popover is open.
+
+##### Fixed
+
+- `OverlayRef` recycling, to avoid piling up bounding boxes in the DOM.
+
+#### 18.1.0
+
+##### Added
+
+- `[luPopover2]` directive and `lu-popover-content` component, with the `luPopoverTrigger`, `luPopoverPosition` and `intl` inputs.

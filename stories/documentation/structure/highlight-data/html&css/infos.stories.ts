@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface ValueFirstStory {}
 
@@ -21,11 +22,11 @@ function getTemplate(args: ValueFirstStory): string {
 		<dd class="highlightData-content-value">Content</dd>
 	</dl>
 	<div class="highlightData-illustrations">
-		<div class="highlightData-illustrations-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
+		<div class="highlightData-illustrations-back" aria-hidden="true" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
 		<img
 			alt=""
 			class="highlightData-illustrations-front"
-			src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
+			src="${CDN_URL}/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
 		/>
 	</div>
 </div>`;

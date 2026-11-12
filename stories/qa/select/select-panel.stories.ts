@@ -3,6 +3,7 @@ import { LuSelectPanelLayoutComponent } from '@lucca-front/ng/core-select';
 import { ListboxComponent, OptionComponent, Treeitem } from '@lucca-front/ng/listbox';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { Meta } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'select-panel-stories',
@@ -10,7 +11,9 @@ import { Meta } from '@storybook/angular-vite';
 	imports: [LuSelectPanelLayoutComponent, ListboxComponent, OptionComponent, Treeitem, LuUserPictureComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class SelectPanelStory {}
+class SelectPanelStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/Select/Panel',

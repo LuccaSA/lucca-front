@@ -1,0 +1,86 @@
+# bubble-illustration
+
+## Import
+
+```typescript
+import { BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
+```
+
+## Basic Usage
+
+```html
+<lu-bubble-illustration illustration="anniversary" />
+```
+
+## API Reference
+
+### BubbleIllustrationComponent (component)
+
+**Selector:** `lu-bubble-illustration`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `illustration` | `illustration` | `BubbleIllustration \| string` | — | ✅ | — | Modifie l’illustration. Accepte aussi l’URL d’un SVG personnalisé, commençant par https:// ou /. Requis. |
+| `palette` | `palette` | `Palette \| DecorativePalette` | `'product'` | — | — | Applique une palette de couleurs au composant. |
+| `size` | `size` | `'S' \| 'M' \| 'L'` | `'M'` | — | — | Modifie la taille du composant. |
+| `action` | `action` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute une icône d’action (+) à l’illustration. |
+
+## Type definitions
+
+- [`BubbleIllustration`](../../types/BubbleIllustration.md) — 102 available values
+
+## Related files
+
+- 📝 [Code & implementation](./bubble-illustration.component.md)
+- 🎨 [Design guidelines](./bubble-illustration.design.md)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-bubble-illustration-angular-basic--docs)
+
+## Changelog
+
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
+
+### 22.0.0
+
+~ `action` : transform booleanAttribute → luBooleanAttribute
+
+### Notes de release (ZeroHeight)
+
+#### 22.0.0
+
+##### Removed
+
+- `grey` and `primary` values of the `palette` input — use `neutral` and `product` instead.
+
+##### Fixed
+
+- Component now renders a `span` instead of a `div`, so it can be nested inside a button without producing invalid markup.
+
+#### 21.3.0
+
+##### Added
+
+- `BUBBLE_ILLUSTRATION_SIZE` constant and `BubbleIllustrationSize` type are now publicly exported and used to type the `size` input.
+
+#### 21.1.4
+
+##### Changed
+
+- `size` no longer accepts an empty string and now defaults to `M`.
+
+##### Fixed
+
+- `illustration` now also accepts a root-relative path (starting with `/`) so locally hosted illustrations are resolved correctly.
+
+#### 21.1.1
+
+##### Added
+
+- `illustration` now accepts an absolute URL in addition to the built-in illustration names.
+
+#### 21.1.0
+
+##### Added
+
+- `lu-bubble-illustration` component (`bubbleIllustration`) with the required `illustration` input plus `palette`, `size` and `action` inputs.

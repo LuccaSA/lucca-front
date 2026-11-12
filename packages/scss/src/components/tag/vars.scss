@@ -12,7 +12,8 @@
 	--components-tag-display: inline-flex;
 	--components-tag-padding-inline: var(--pr-t-spacings-50);
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-tag-fontSize: var(--pr-t-font-body-S-fontSize);
 	--components-tag-lineHeight: var(--pr-t-font-body-S-lineHeight);
+	// stylelint-enable property-disallowed-list
 }

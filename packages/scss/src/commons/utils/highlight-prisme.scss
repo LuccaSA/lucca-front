@@ -11,6 +11,7 @@
 	// Icons
 	.bubbleIllustration,
 	.bubbleIcon,
+	.ornament,
 	.softwareIcon,
 	.lucca-icon,
 
@@ -91,6 +92,7 @@
 
 	// Structure
 	.box,
+	.boxDisclosure,
 	.card2,
 	.card2Wrapper,
 	.container,
@@ -149,6 +151,7 @@
 	// Icons
 	lu-bubble-illustration .bubbleIllustration,
 	lu-bubble-icon,
+	lu-ornament,
 	lu-software-icon .softwareIcon,
 	lu-icon .lucca-icon,
 
@@ -230,6 +233,7 @@
 
 	// Structure
 	lu-box,
+	lu-box-disclosure,
 	lu-container,
 	lu-divider,
 	lu-empty-state-page,
@@ -282,6 +286,7 @@
 
 	// DEPRECATED COMPONENTS
 
+	// stylelint-disable selector-disallowed-list -- Deprecated.
 	.checkbox,
 	.switch,
 	.radio,
@@ -303,4 +308,5 @@
 		outline: 2px solid red;
 		outline-offset: 3px;
 	}
+	// stylelint-enable selector-disallowed-list
 }

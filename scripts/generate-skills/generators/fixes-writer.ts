@@ -72,7 +72,7 @@ interface TechnicalFixContext {
  */
 export function writeFixes(skillsDir: string, input: FixesInput): { written: number } {
 	const { version, patchTags, components, technicalMinors = [] } = input;
-	cleanFixesDirectory(skillsDir, version);
+	cleanFixesDirectory(skillsDir);
 
 	let written = 0;
 	for (let i = 1; i < patchTags.length; i++) {
@@ -80,7 +80,7 @@ export function writeFixes(skillsDir: string, input: FixesInput): { written: num
 		const currTag = patchTags[i];
 		const md = buildFixMd(prevTag, currTag, components);
 		const patchVersion = currTag.replace(/^v/, '');
-		writeFixFile(skillsDir, version, patchVersion, md);
+		writeFixFile(skillsDir, patchVersion, md);
 		written++;
 	}
 
@@ -98,7 +98,7 @@ export function writeFixes(skillsDir: string, input: FixesInput): { written: num
 			const prevTag = tech.patchTags[i - 1];
 			const currTag = tech.patchTags[i];
 			const md = buildFixMd(prevTag, currTag, components, ctx);
-			writeFixFile(skillsDir, version, currTag.replace(/^v/, ''), md);
+			writeFixFile(skillsDir, currTag.replace(/^v/, ''), md);
 			written++;
 		}
 	}

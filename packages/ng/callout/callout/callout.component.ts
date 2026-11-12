@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { intlInputOptions, luBooleanAttribute, luNumberAttribute, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, luBooleanAttribute, luNullableNumberAttribute, luNumberAttribute, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
-import { CalloutHx, CalloutSize, CalloutState } from '../callout.type';
+import { CalloutHeadingLevel, CalloutSize, CalloutState } from '../callout.type';
 import { getCalloutPalette } from '../callout.utils';
 
 @Component({
@@ -27,9 +27,16 @@ export class CalloutComponent {
 	readonly heading = input<PortalContent>();
 
 	/**
-	 * Define the aria level of the title
+	 * Aria level of the title. Defaults to none: the title is not exposed as a heading.
 	 */
-	readonly hx = input(null, { transform: luNumberAttribute<CalloutHx> });
+	readonly headingLevel = input(null, { transform: luNullableNumberAttribute<CalloutHeadingLevel> });
+
+	/**
+	 * @deprecated use `headingLevel` instead
+	 */
+	readonly hx = input(null, { transform: luNumberAttribute<CalloutHeadingLevel> });
+
+	readonly headingLevelValue = computed(() => this.headingLevel() ?? this.hx());
 
 	/**
 	 * Which palette should be used for the entire callout.

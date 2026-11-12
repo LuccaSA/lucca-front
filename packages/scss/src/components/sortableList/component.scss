@@ -40,8 +40,10 @@
 		.sortableList-item-content-description {
 			margin: 0;
 			font: var(--components-sortableList-description-font);
-			font-size: var(--components-sortableList-description-fontSize); // Deprecated
-			line-height: var(--components-sortableList-description-lineHeight); // Deprecated
+			// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
+			font-size: var(--components-sortableList-description-fontSize);
+			line-height: var(--components-sortableList-description-lineHeight);
+			// stylelint-enable declaration-property-value-disallowed-list
 		}
 
 		.sortableList-item-content-helper {

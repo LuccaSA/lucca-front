@@ -61,6 +61,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected abstract intl: Signal<LuCoreSelectLabel>;
 
 	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
+
+	/**
+	 * Whether the search input displays the clue through a binding. If so, the key that opens the panel
+	 * becomes the clue synchronously, and the browser must not insert it a second time.
+	 */
+	protected readonly inputBoundToClue: boolean = false;
+
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
 
@@ -432,6 +439,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);
 				} else if ($event.key?.length === 1) {
+					if (this.inputBoundToClue) {
+						$event.preventDefault();
+					}
 					this.openPanel($event.key);
 				}
 				break;

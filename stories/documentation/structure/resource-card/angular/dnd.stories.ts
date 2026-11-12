@@ -11,10 +11,7 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 import { setStoryOptions } from '@/helpers/stories';
 
 interface ResourceCardAngularBasicStory {
-	wrapperDraggable: boolean;
 	wrapperSize: string;
-	draggable: boolean;
-	actionType: string;
 	content: boolean;
 	illustration: boolean;
 	infos: boolean;

@@ -1,7 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EMPTY_STATE_HX, EMPTY_STATE_HX_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HEADING_LEVEL, EMPTY_STATE_HEADING_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 export default {
 	title: 'Documentation/Feedback/Empty State/Angular/Page',
@@ -13,16 +14,16 @@ export default {
 	],
 	render: (args) => {
 		const { heading, description, slotTop } = args;
-		const paramHx =
-			args['hx'] === 1
+		const paramHeadingLevel =
+			args['headingLevel'] === 1
 				? ``
 				: `
-	hx="${args['hx']}"`;
-		const paramHxStyle =
-			args['hxStyle'] === 1
+	headingLevel="${args['headingLevel']}"`;
+		const paramHeadingStyle =
+			args['headingStyle'] === 1
 				? ``
 				: `
-	hxStyle="${args['hxStyle']}"`;
+	headingStyle="${args['headingStyle']}"`;
 		const paramContentBackgroundColor =
 			!args['contentBackgroundColor'] || args['contentBackgroundColor'] === 'var(--pr-t-elevation-surface-default)'
 				? ``
@@ -32,27 +33,27 @@ export default {
 			args['icon'] === ''
 				? ``
 				: `
-	icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/${args['icon']}.svg"`;
+	icon="${CDN_URL}/lucca-front/assets/empty-states/message/${args['icon']}.svg"`;
 		const paramTopRightBackground =
 			args['topRightBackground'] === ''
 				? ``
 				: `
-	topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightBackground']}.svg"`;
+	topRightBackground="${CDN_URL}/lucca-front/assets/empty-states/${args['topRightBackground']}.svg"`;
 		const paramTopRightForeground =
 			args['topRightForeground'] === ''
 				? ``
 				: `
-	topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightForeground']}.svg"`;
+	topRightForeground="${CDN_URL}/lucca-front/assets/empty-states/${args['topRightForeground']}.svg"`;
 		const paramBottomLeftBackground =
 			args['bottomLeftBackground'] === ''
 				? ``
 				: `
-	bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftBackground']}.svg"`;
+	bottomLeftBackground="${CDN_URL}/lucca-front/assets/empty-states/${args['bottomLeftBackground']}.svg"`;
 		const paramBottomLeftForeground =
 			args['bottomLeftForeground'] === ''
 				? ``
 				: `
-	bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftForeground']}.svg"`;
+	bottomLeftForeground="${CDN_URL}/lucca-front/assets/empty-states/${args['bottomLeftForeground']}.svg"`;
 		return {
 			styles: [
 				`
@@ -66,7 +67,7 @@ export default {
 			template: `<lu-empty-state-page
 	heading="${heading}"
 	slotTop="${slotTop}"
-	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramContentBackgroundColor}${paramHx}${paramHxStyle}
+	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramContentBackgroundColor}${paramHeadingLevel}${paramHeadingStyle}
 >
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
@@ -180,23 +181,33 @@ export default {
 			description: 'Modifie la couleur de fond du contenu (variable CSS, couleur hexadécimale, etc.).',
 			table: { category: 'inputs', defaultValue: { summary: 'var(--pr-t-elevation-surface-default)' } },
 		},
-		hx: {
+		headingLevel: {
 			control: {
 				type: 'number',
-				min: EMPTY_STATE_HX.at(0),
-				max: EMPTY_STATE_HX.at(EMPTY_STATE_HX.length - 1),
+				min: EMPTY_STATE_HEADING_LEVEL.at(0),
+				max: EMPTY_STATE_HEADING_LEVEL.at(EMPTY_STATE_HEADING_LEVEL.length - 1),
 			},
 			description: 'Niveau de titre (sémantique).',
 			table: { category: 'inputs', defaultValue: { summary: '1' } },
 		},
-		hxStyle: {
+		headingStyle: {
 			control: {
 				type: 'number',
-				min: EMPTY_STATE_HX_STYLE.at(0),
-				max: EMPTY_STATE_HX_STYLE.at(EMPTY_STATE_HX_STYLE.length - 1),
+				min: EMPTY_STATE_HEADING_STYLE.at(0),
+				max: EMPTY_STATE_HEADING_STYLE.at(EMPTY_STATE_HEADING_STYLE.length - 1),
 			},
-			description: '[v21.2] Niveau du titre (style).',
+			description: 'Niveau du titre (style).',
 			table: { category: 'inputs', defaultValue: { summary: '1' } },
+		},
+		hx: {
+			control: false,
+			description: '[Déprécié] Utiliser <code>headingLevel</code>.',
+			table: { category: 'inputs (deprecated)' },
+		},
+		hxStyle: {
+			control: false,
+			description: '[Déprécié] Utiliser <code>headingStyle</code>.',
+			table: { category: 'inputs (deprecated)' },
 		},
 		heading: {
 			description: 'Titre du composant.',
@@ -229,7 +240,7 @@ export const Page: StoryObj<EmptyStatePageComponent> = {
 		bottomLeftBackground: 'poplee/bubbles-bottom-left-01',
 		bottomLeftForeground: 'poplee/core-hr-01',
 		contentBackgroundColor: 'var(--pr-t-elevation-surface-default)',
-		hx: 1,
-		hxStyle: 1,
+		headingLevel: 1,
+		headingStyle: 1,
 	},
 };

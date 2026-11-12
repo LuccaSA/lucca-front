@@ -1,0 +1,6 @@
+@if (bubbleSrc(); as bubbleSrc) {
+	<div class="ornament-back" aria-hidden="true" [innerHtml]="bubbleSrc | luSafeExternalSvg"></div>
+}
+@if (illustrationSrc(); as illustrationSrc) {
+	<img alt="" class="ornament-front" [attr.src]="illustrationSrc" />
+}

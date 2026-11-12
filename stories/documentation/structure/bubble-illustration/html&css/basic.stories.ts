@@ -4,6 +4,7 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { DECORATIVE_PALETTE, PALETTE } from '@lucca/prisme/core';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface BubbleIllustrationBasicStory {
 	illustration: string;
@@ -51,7 +52,7 @@ function getTemplate(args: BubbleIllustrationBasicStory): string {
 	const palette = args.palette === 'product' ? `` : ` palette-${args.palette}`;
 	const size = args.size === '' ? `` : ` mod-${args.size}`;
 	const action = args.action ? ` mod-action` : ``;
-	const domain = 'https://cdn.lucca.fr';
+	const domain = CDN_URL;
 	const path = '/transverse/prisme/visuals/bubble-illustration/';
 	const extension = '.svg';
 	return `<span class="bubbleIllustration${palette}${size}${action}" aria-hidden="true" [innerHtml]="'${domain}${path}${args.illustration}${extension}' | luSafeExternalSvg"></span>`;

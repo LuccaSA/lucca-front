@@ -41,6 +41,7 @@ npm run build:web-components   # → dist/web-components/bundle.{js,css}
 - Nested elements work as in a template (`lu-grid-column` in `lu-grid`, an input in `lu-filter-pill`), and classes set by the page (`pr-u-*`…) are kept.
 - Directives and formatters keep their Angular attribute: `luWithMarkdownFormatter` on `lu-rich-text-input`, `luUserPopover` on any element (see below).
 - `<html lang>` sets the locale (translations, date formats).
+- `<html data-product>` sets the product range: `pagga`, `poplee`, `coreHR`, `timmi`, `cleemy` or `cc` (the Lucca brand without it). It replaces the product palette (`--palettes-product-*`) and the illustration colors, as the `$product` SCSS setting does at build time. It only works on the root element.
 - `window.Prisme` lists the available elements, the bundle `version`, and the `dialog` and `toasts` services.
 
 ## Dialogs and toasts

@@ -72,6 +72,8 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 
 	protected panelRefFactory = inject(LuSimpleSelectPanelRefFactory);
 
+	protected override readonly inputBoundToClue = true;
+
 	protected buildPanelRef(): LuSelectPanelRef<T, T> {
 		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig());
 	}

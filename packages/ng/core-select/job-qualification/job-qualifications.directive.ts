@@ -60,7 +60,11 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 	#getJobOptions(jobId: number, page: number): Observable<T[]> {
 		const params = { ...this.filters(), 'job.id': jobId, sort: 'level.position' };
 		return this.getOptions(params, page).pipe(
-			switchMap((options) => (options.length < this.pageSize ? of(options) : this.#getJobOptions(jobId, page + 1).pipe(map((nextOptions) => [...options, ...nextOptions])))),
+			switchMap((options) => {
+				// A custom `url` may ignore `job.id`: keep this job only, but page on the raw size
+				const jobOptions = options.filter((option) => option.job.id === jobId);
+				return options.length < this.pageSize ? of(jobOptions) : this.#getJobOptions(jobId, page + 1).pipe(map((nextOptions) => [...jobOptions, ...nextOptions]));
+			}),
 		);
 	}
 

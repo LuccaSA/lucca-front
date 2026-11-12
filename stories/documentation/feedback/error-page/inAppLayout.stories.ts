@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface ErrorBasicStory {}
 
@@ -27,7 +28,7 @@ function getTemplate(args: ErrorBasicStory): string {
 													<p><a href="#" class="errorPage-section-info-link">Revenir à la page précédente</a></p>
 												</div>
 											</div>
-											<img src="https://cdn.lucca.fr/errors/svg/403-lucca.svg" alt="Erreur 403" class="errorPage-section-image">
+											<img src="${CDN_URL}/errors/svg/403-lucca.svg" alt="Erreur 403" class="errorPage-section-image">
 										</section>
 									</div>
 							</div>

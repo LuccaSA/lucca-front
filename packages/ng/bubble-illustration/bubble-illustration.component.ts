@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { DecorativePalette, luBooleanAttribute, Palette } from '@lucca-front/ng/core';
+import { CDN_URL, DecorativePalette, luBooleanAttribute, Palette } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { BubbleIllustration } from './bubble-illustration';
 import { BubbleIllustrationSize } from './bubble-illustration.type';
@@ -13,7 +13,7 @@ import { BubbleIllustrationSize } from './bubble-illustration.type';
 	imports: [LuSafeExternalSvgPipe],
 })
 export class BubbleIllustrationComponent {
-	readonly domain = 'https://cdn.lucca.fr';
+	readonly domain = CDN_URL;
 	readonly path = '/transverse/prisme/visuals/bubble-illustration/';
 	readonly extension = '.svg';
 

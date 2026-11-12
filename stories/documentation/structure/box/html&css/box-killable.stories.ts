@@ -23,7 +23,7 @@ function getTemplate(args: BoxKillableStory): string {
 						<span class="pr-u-mask">Close</span>
 				</button>
 		</div>
-		Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
+		Custom content
 </div>`;
 }
 

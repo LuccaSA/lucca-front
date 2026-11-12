@@ -5,4 +5,26 @@
 		</button>
 	</div>
 }
-<ng-content />
+@if (heading(); as heading) {
+	<div class="box-header">
+		@if (bubbleIcon(); as bubbleIcon) {
+			<lu-bubble-icon [icon]="bubbleIcon" />
+		} @else {
+			<ng-content select="[boxHeaderStartSlot]" />
+		}
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" [attr.aria-level]="headingLevel()">
+				<ng-container *luPortal="heading" />
+			</div>
+			@if (subheading(); as subheading) {
+				<p class="box-header-text-subheading"><ng-container *luPortal="subheading" /></p>
+			}
+		</div>
+	</div>
+}
+<div class="box-slot"><ng-content /></div>
+@if (isFancy() && (bubble() || illustration())) {
+	<div class="box-illustrations">
+		<lu-ornament [bubble]="bubble()" [illustration]="illustration()" />
+	</div>
+}

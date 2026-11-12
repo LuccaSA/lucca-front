@@ -12,6 +12,8 @@ type LuSelectInputComponentTestSuiteConfig<TValue> = {
 	exampleValue: TValue;
 	emptyValue: TValue | null;
 	clearerSelector: string;
+	/** Whether the input displays the clue through a binding, so the browser must not insert the opening key itself */
+	inputBoundToClue: boolean;
 };
 
 /**
@@ -58,6 +60,20 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		// Assert
 		expect(component.isPanelOpen).toBe(true);
 		expect(clueChangeSpy).toHaveBeenCalledWith(key);
+	});
+
+	it(`should ${config.inputBoundToClue ? '' : 'not '}prevent the browser from inserting the letter that opens the panel`, async () => {
+		// Arrange
+		const event = new KeyboardEvent('keydown', { key: 'a', cancelable: true });
+		component.clueChange$.subscribe(); // Emulate a `(clueChange)=""` binding
+
+		// Act
+		nativeElement.dispatchEvent(event);
+		await vi.runAllTimersAsync();
+
+		// Assert
+		expect(component.isPanelOpen).toBe(true);
+		expect(event.defaultPrevented).toBe(config.inputBoundToClue);
 	});
 
 	it.each(['a', 'A', 'À'])('should openPanel and not emit clueChange when pressing %s and select is not searchable', async (key) => {

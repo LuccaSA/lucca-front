@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 export default {
 	title: 'Documentation/Users/Avatar/HTML&CSS/Basic',
@@ -7,7 +8,7 @@ export default {
 
 function getTemplate(): string {
 	return `<div class="avatar">
-	<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+	<img alt="" class="avatar-picture" loading="lazy" src="${CDN_URL}/lucca-front/avatars/finn.png" />
 </div>`;
 }
 

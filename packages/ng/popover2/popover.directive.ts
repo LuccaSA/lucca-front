@@ -274,11 +274,14 @@ export class PopoverDirective implements OnDestroy {
 		if (!this.opened() && !this.luPopoverDisabled() && isNotNil(content)) {
 			this.opened.set(true);
 			this.luPopoverOpened.emit();
+			// The CDK pushes an overlay back from the bottom / end edge by the sum of both margins,
+			// so these sides get 0 to end up with the same 12px gap as the top / start ones.
+			const viewportMargin = getPushPanelViewportMargin(this.elementRef.nativeElement, 12);
 			this.#overlayRef = this.overlay.create({
 				positionStrategy: this.overlay
 					.position()
 					.flexibleConnectedTo(this.luPopoverAnchor())
-					.withViewportMargin(getPushPanelViewportMargin(this.elementRef.nativeElement))
+					.withViewportMargin({ ...viewportMargin, bottom: 0, end: viewportMargin.end - 12 })
 					.withPositions(this.customPositions() || this.#buildPositions())
 					.withGrowAfterOpen(true),
 				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy() ?? 'reposition'](),
