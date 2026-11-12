@@ -1,7 +1,5 @@
 @use 'exports' as *;
 
-// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .lu-user-picture.
-.lu-user-picture,
 .avatar {
 	@layer components {
 		@include vars;
