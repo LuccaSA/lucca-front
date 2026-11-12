@@ -24,7 +24,7 @@
 		me: 'Yo:',
 	},
 	de: {
-		users: 'Benutzer',
+		users: 'Benutzer:innen',
 		me: 'Ich:',
 	},
 	en: {

@@ -1,18 +1,33 @@
-export const Translations = {
-	en: {
-		low: 'Low',
-		medium: 'Medium',
-		high: 'High',
+﻿export const Translations = {
+	pl: {
+		low: 'Niski',
+		medium: 'Średni',
+		high: 'Wysoki',
+	},
+	'nl-BE': {
+		low: 'Laag',
+		medium: 'Gemiddeld',
+		high: 'Hoog',
+	},
+	fr: {
+		low: 'Basse',
+		medium: 'Moyenne',
+		high: 'Haute',
 	},
 	de: {
 		low: 'Niedrig',
 		medium: 'Mittel',
 		high: 'Hoch',
 	},
-	fr: {
-		low: 'Basse',
-		medium: 'Moyenne',
-		high: 'Haute',
+	en: {
+		low: 'Low',
+		medium: 'Medium',
+		high: 'High',
+	},
+	es: {
+		low: 'Baja',
+		medium: 'Media',
+		high: 'Alta',
 	},
 	it: {
 		low: 'Bassa',
@@ -24,24 +39,9 @@ export const Translations = {
 		medium: 'Gemiddeld',
 		high: 'Hoog',
 	},
-	'nl-BE': {
-		low: 'Laag',
-		medium: 'Gemiddeld',
-		high: 'Hoog',
-	},
-	es: {
-		low: 'Baja',
-		medium: 'Media',
-		high: 'Alta',
-	},
 	pt: {
 		low: 'Baixa',
 		medium: 'Média',
 		high: 'Alta',
-	},
-	pl: {
-		low: 'Niski',
-		medium: 'Średni',
-		high: 'Wysoki',
 	},
 };

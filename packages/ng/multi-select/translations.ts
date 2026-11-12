@@ -127,7 +127,7 @@
 		emptyResults: 'Wyszukiwanie nie przyniosło żadnych rezultatów.',
 		emptySelection: 'Wybierz elementy z listy po lewej stronie, aby rozpocząć',
 		expand: 'Rozwiń',
-		reduce: 'Zmniejsz',
+		reduce: 'Pomniejsz',
 		selectAll: 'Zaznacz wszystko',
 		unselectAll: 'Odznacz wszystko',
 		loading: 'Trwa ładowanie…',

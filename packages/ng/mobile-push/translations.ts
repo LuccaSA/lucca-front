@@ -47,8 +47,8 @@
 	'nl-BE': {
 		urlAppStore: 'https://apps.apple.com/nl/app/lucca-hr/id1575212411',
 		urlGooglePlay: 'https://play.google.com/store/apps/details/Timmi?id=net.ilucca.timmi_pwa.twa',
-		altGooglePlay: 'Ontdk het op Google Play',
-		altAppStore: 'Download in de App Store',
+		altGooglePlay: 'Beschikbaar op Google Play',
+		altAppStore: 'Downloaden in de App Store',
 		srcAppStore: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-nl.svg',
 		srcGooglePlay: 'https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-nl.svg',
 		newTab: 'Openen in een nieuw tabblad',
