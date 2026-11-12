@@ -1,12 +1,22 @@
 ### Appeler une API
 
-Pour un format de retour V3 ou V4 sans customisation de l'affichage (l'entité doit avoir une propriété `name`), il suffit de donner l'API à appeler :
+Pour un format de retour V3, V4 ou V5 sans customisation de l'affichage (l'entité doit avoir une propriété `name`), il suffit de donner l'API à appeler :
 
 ```html
 <lu-simple-select apiV3="/api/v3/axisSections" />
 
 <lu-simple-select apiV4="/api/legumes" />
+
+<lu-simple-select apiV5="/api/legumes" sort="name" />
 ```
+
+Pour l'API publique Lucca, la directive `publicApi` envoie en plus la version demandée dans l'en-tête `Api-Version` :
+
+```html
+<lu-simple-select publicApi="/lucca-api/departments" apiVersion="2024-11-01" sort="name" />
+```
+
+Les directives `publicEmployees`, `publicEstablishments` et `publicDepartments` appellent directement les collections correspondantes de l'API publique.
 
 ### Personnaliser l'affichage
 
