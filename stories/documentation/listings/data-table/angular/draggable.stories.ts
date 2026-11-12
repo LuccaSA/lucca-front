@@ -1,5 +1,5 @@
-import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ChangeDetectionStrategy, Component, input, LOCALE_ID } from '@angular/core';
 import {
 	DataTableBodyComponent,
 	DataTableComponent,
@@ -9,7 +9,8 @@ import {
 	DataTableRowCellHeaderComponent,
 	DataTableRowComponent,
 } from '@lucca-front/ng/data-table';
-import { Meta, StoryObj } from '@storybook/angular-vite';
+import { ReorderDirective, ReorderEvent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { HiddenArgType } from '@/helpers/common-arg-types';
 
 @Component({
@@ -24,6 +25,8 @@ import { HiddenArgType } from '@/helpers/common-arg-types';
 		DataTableRowCellHeaderComponent,
 		CdkDropList,
 		CdkDrag,
+		ReorderDirective,
+		ReorderItemLabelDirective,
 	],
 	templateUrl: './draggable.stories.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,34 +41,36 @@ class DataTableDraggableStory {
 	];
 
 	// Remplacé par l'action Storybook déclarée dans `argTypes`, d'où le typage en fonction optionnelle.
-	drop?: (event: CdkDragDrop<string[]>) => void;
+	luReorder?: (event: ReorderEvent) => void;
 
-	onDrop(event: CdkDragDrop<string[]>) {
+	onReorder(event: ReorderEvent) {
 		moveItemInArray(this.listItem, event.previousIndex, event.currentIndex);
-		this.drop?.(event);
+		this.luReorder?.(event);
 	}
 }
 
 export default {
 	title: 'Documentation/Listings/Data table/Angular/Draggable',
 	component: DataTableDraggableStory,
+	decorators: [applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }] })],
 	argTypes: {
 		selectable: {
 			control: 'boolean',
 			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
 			table: { category: 'inputs' },
 		},
-		drop: {
-			description: 'Evénement déclenché au drop.',
-			action: 'drop',
+		luReorder: {
+			description: 'Événement déclenché lorsqu’une ligne est déplacée, à la souris, depuis le menu de sa poignée ou au clavier.',
+			action: 'luReorder',
 			control: false,
-			table: { category: 'outputs', type: { summary: 'CdkDragDrop<string[]>' } },
+			table: { category: 'outputs', type: { summary: 'ReorderEvent' } },
 		},
 		listItem: HiddenArgType,
 	},
 } as Meta;
 
 export const Basic: StoryObj<DataTableDraggableStory> = {
+	name: 'Reorder',
 	args: {
 		selectable: false,
 	},
@@ -78,12 +83,12 @@ const code = `<lu-data-table drag>
 			<th luDataTableCell>Cell</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="drop($event)">
-		<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag>
+	<tbody luDataTableBody cdkDropList luReorder (luReorder)="onReorder($event)">
+		<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag luReorderItemLabel="Header 1">
 			<th luDataTableCell>Header 1</th>
 			<td luDataTableCell>cell 1</td>
 		</tr>
-		<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag>
+		<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag luReorderItemLabel="Header 2">
 			<th luDataTableCell>Header 2</th>
 			<td luDataTableCell>cell 2</td>
 		</tr>
