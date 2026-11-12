@@ -388,6 +388,7 @@ bind to a string with iso 26001 format YYYY-MM-DD
 | Pipe | Classe | transform | Description |
 |------|--------|-----------|-------------|
 | `luUserDisplay` | `LuUserDisplayPipe` | `(user: T, options?: Partial<LuUserDisplaySingleOptions>)` | Displays a user name according to specified format. Supported formats: f for first name, F for first initial, l for last name, L for last initial. |
+| `luEmployeeDisplay` | `LuEmployeeDisplayPipe` | `(employee: LuEmployeeDisplayInput \| null \| undefined, options?: LuUserDisplaySingleOptions): string` | Displays the name of an employee of the Lucca v5 API according to specified format. Supported formats: f for given name, F for given name initial, l for family name, L for family name initial. |
 
 ### Services
 

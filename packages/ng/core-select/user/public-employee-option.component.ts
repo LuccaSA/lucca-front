@@ -1,15 +1,15 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
-import { LuUserDisplayPipe } from '@lucca-front/ng/user';
+import { LuEmployeeDisplayPipe } from '@lucca-front/ng/user';
 import { LuCoreSelectPublicEmployee, LuCoreSelectPublicEmployeesDirective } from './public-employees.directive';
 
 @Component({
 	selector: 'lu-public-employee-option',
-	imports: [AsyncPipe, LuUserDisplayPipe],
+	imports: [AsyncPipe, LuEmployeeDisplayPipe],
 	template: `
 		@if (context.option$ | async; as employee) {
-			<span translate="no">{{ { firstName: employee.givenName, lastName: employee.familyName } | luUserDisplay: employeesDirective.displayFormat() }}</span>
+			<span translate="no">{{ employee | luEmployeeDisplay: employeesDirective.displayFormat() }}</span>
 		}
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
