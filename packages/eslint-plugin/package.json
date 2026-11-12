@@ -23,8 +23,16 @@
   "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
   "license": "MIT",
   "peerDependencies": {
+    "@angular-eslint/bundled-angular-compiler": ">=21.0.0",
+    "@angular-eslint/template-parser": ">=21.0.0",
+    "@angular-eslint/utils": ">=21.0.0",
     "@typescript-eslint/utils": ">=8.0.0",
     "eslint": ">=9.0.0",
     "typescript": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@angular-eslint/template-parser": {
+      "optional": true
+    }
   }
 }
