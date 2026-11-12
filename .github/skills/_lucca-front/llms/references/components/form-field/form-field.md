@@ -40,12 +40,12 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 | `AI` | `AI` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `iconAItooltip` | `iconAItooltip` | `string \| null` | `null` | — | — | — |
 | `iconAIalt` | `iconAIalt` | `string \| null` | `null` | — | — | — |
-| `width` | `width` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
+| `width` | `width` | `unknown` | `null` | — | `luNullableNumberAttribute` | Applique une largeur fixe au champ. À n’utiliser que lorsque la grille de formulaire n’est pas adaptée. |
 | `invalid` | `invalid` | `unknown` | `null` | — | `luNullableBooleanAttribute` | Applique l’état invalide au champ. |
-| `inlineMessage` | `inlineMessage` | `PortalContent \| null` | `null` | — | — | Ajoute un texte indicatif sous le champ de formulaire. [PortalContent] |
-| `errorInlineMessage` | `errorInlineMessage` | `PortalContent \| null` | `null` | — | — | Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent] |
+| `inlineMessage` | `inlineMessage` | `PortalContent \| null` | `null` | — | — | — |
+| `errorInlineMessage` | `errorInlineMessage` | `PortalContent \| null` | `null` | — | — | — |
 | `inlineMessageState` | `inlineMessageState` | `InlineMessageState \| null` | `null` | — | — | Modifie l’état de l’inline message. |
-| `size` | `size` | `FormFieldSize \| null` | `null` | — | — | — |
+| `size` | `size` | `FormFieldSize \| null` | `null` | — | — | Modifie la taille du champ. |
 | `extraDescribedBy` | `extraDescribedBy` | `string` | `''` | — | — | — |
 | `counter` | `counter` | `number` | `0` | — | `luNumberAttribute` | — |
 | `presentation` | `presentation` | `boolean` | `false` | — | `luBooleanAttribute` | — |
