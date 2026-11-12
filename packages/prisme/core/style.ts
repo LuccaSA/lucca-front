@@ -6,7 +6,24 @@
 export const PALETTE = ['success', 'warning', 'error', 'product', 'neutral', 'none', 'brand'] as const;
 export type Palette = (typeof PALETTE)[number];
 
-export const DECORATIVE_PALETTE = ['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'dragonfruit', 'raspberry', 'watermelon', 'coral', 'cacao', 'pumpkin', 'pineapple'] as const;
+export const DECORATIVE_PALETTE = [
+	'kiwi',
+	'lime',
+	'cucumber',
+	'mint',
+	'glacier',
+	'lagoon',
+	'blueberry',
+	'lavender',
+	'grape',
+	'dragonfruit',
+	'raspberry',
+	'watermelon',
+	'coral',
+	'cacao',
+	'pumpkin',
+	'pineapple',
+] as const;
 export type DecorativePalette = (typeof DECORATIVE_PALETTE)[number];
 
 export const PRODUCT_PALETTE = ['pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc'] as const;
