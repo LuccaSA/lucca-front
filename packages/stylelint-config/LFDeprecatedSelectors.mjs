@@ -1339,4 +1339,13 @@ export default [
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/class-prefix',
 		},
 	},
+	{
+		// Orchid palette, replaced by the reworked Grape palette
+		objectPattern: [/\.palette-orchid(?![\w-])/, /\.pr-u-colorTextOrchid(?![\w-])/],
+		versionDeprecated: '22.2.0',
+		actions: `
+			* \`.palette-orchid\` => \`.palette-grape\`
+			* \`.pr-u-colorTextOrchid\` => \`.pr-u-colorTextGrape\`
+		`,
+	},
 ];

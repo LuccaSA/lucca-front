@@ -138,7 +138,7 @@ $borderRadiusTokens: (
 	'input': var(--pr-t-border-radius-default),
 );
 
-$colorAI: orchid, brand;
+$colorAI: grape, brand;
 
 $paletteAI: (
 	angle: 'to bottom right',
@@ -158,7 +158,7 @@ $palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted',
 $palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'orchid';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
-$palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'watermelon', 'pumpkin' !default;
+$palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'dragonfruit', 'raspberry', 'watermelon', 'coral', 'cacao', 'pumpkin' !default;
 $palettesDecorativeMandatory: 'pineapple', 'lime', 'grape', 'glacier', 'pineappleContrasted';
 
 @if $palettesOtherProduct == 'all' {
@@ -187,19 +187,6 @@ $palettesAssets: (
 $fieldsWidth: 10, 20, 30, 40, 50, 60 !default;
 
 // Palettes
-
-$orchid: (
-	50: #f9ebff,
-	100: #f3d6ff,
-	200: #edc2ff,
-	300: #de9ff9,
-	400: #cc7ded,
-	500: #b95ae2,
-	600: #a440cf,
-	700: #8133a3,
-	800: #680094,
-	900: #4c006b,
-);
 
 $brand: (
 	// text is deprecated
@@ -439,146 +426,198 @@ $critical: (
 // Colors: Decoratives
 
 $kiwi: (
-	50: #ecf7de,
-	100: #d7eeb9,
-	200: #c7e79c,
-	300: #aed57c,
-	400: #96c856,
-	500: #7cbb2a,
-	600: #68a716,
-	700: #4f840b,
-	800: #3e6808,
-	900: #2d4b06,
+	50: #ecf7dd,
+	100: #daedc1,
+	200: #c9e6a5,
+	300: #add578,
+	400: #96c855,
+	500: #7ebb33,
+	600: #66a700,
+	700: #4e8400,
+	800: #3d6800,
+	900: #2c4b00,
 ) !default;
 
 $lime: (
-	50: #e2f7df,
-	100: #c5eebe,
-	200: #a7e69e,
-	300: #88d57c,
-	400: #74cb67,
-	500: #54ba45,
-	600: #45a437,
-	700: #1c7c0e,
-	800: #16600b,
-	900: #104508,
+	50: #e3f7e0,
+	100: #cbecc6,
+	200: #b2e3ab,
+	300: #8fd384,
+	400: #77ca6a,
+	500: #59b94a,
+	600: #2ca714,
+	700: #147c00,
+	800: #0d6100,
+	900: #084600,
 ) !default;
 
 $cucumber: (
-	50: #ddf9eb,
+	50: #dbf9ea,
 	100: #c0f2d9,
-	200: #98ecc2,
-	300: #71daa6,
-	400: #54c98f,
-	500: #2db973,
-	600: #12a55c,
+	200: #a0eac4,
+	300: #6ddba5,
+	400: #3bcc89,
+	500: #00bb6e,
+	600: #00a65a,
 	700: #008a45,
 	800: #006b36,
 	900: #005229,
 ) !default;
 
 $mint: (
-	50: #d9f7f1,
-	100: #bbf2e7,
-	200: #99ebda,
-	300: #68d9c3,
-	400: #31c4a6,
-	500: #0fb392,
-	600: #089b7e,
+	50: #d3f5ee,
+	100: #b7f3e7,
+	200: #92ecda,
+	300: #4bdcc2,
+	400: #00c6a5,
+	500: #00b492,
+	600: #009b7e,
 	700: #008a6e,
 	800: #006b56,
 	900: #004d3d,
 ) !default;
 
 $glacier: (
-	50: #e0f6f6,
-	100: #c4eded,
-	200: #a1e3e3,
-	300: #73d3d3,
-	400: #4dc7c7,
-	500: #20b6b6,
-	600: #08a0a0,
+	50: #d1f5f5,
+	100: #b3f0f1,
+	200: #87e7e7,
+	300: #32d8d9,
+	400: #00caca,
+	500: #00b7b7,
+	600: #00a0a0,
 	700: #008a8a,
 	800: #006b6b,
 	900: #005252,
 ) !default;
 
 $lagoon: (
-	50: #dff3fb,
-	100: #bfe7f8,
-	200: #9fdaf4,
-	300: #75c7ea,
-	400: #49b5e4,
-	500: #28a3d7,
-	600: #148ec2,
-	700: #086c96,
-	800: #065374,
-	900: #05425c,
+	50: #d5f3ff,
+	100: #b4e9ff,
+	200: #8dddfe,
+	300: #4dcafa,
+	400: #00b7f1,
+	500: #00a4dc,
+	600: #008ec4,
+	700: #006c97,
+	800: #005375,
+	900: #00425d,
 ) !default;
 
 $blueberry: (
-	50: #dfe8fb,
-	100: #c8d8f9,
-	200: #b1c8f6,
-	300: #98b4eb,
-	400: #769be5,
-	500: #628cdf,
-	600: #4777d7,
+	50: #dde8ff,
+	100: #c5d8ff,
+	200: #adc8ff,
+	300: #8eb3ff,
+	400: #6999fc,
+	500: #5489f8,
+	600: #3573f2,
 	700: #295cc2,
-	800: #1b4498,
-	900: #153575,
+	800: #1c4496,
+	900: #163573,
 ) !default;
 
 $lavender: (
-	50: #eadffb,
+	50: #eadffa,
 	100: #dfcdf9,
-	200: #d3bbf7,
-	300: #c3a8eb,
-	400: #b493e6,
-	500: #a17cda,
-	600: #9165d2,
-	700: #7647bd,
-	800: #5f369b,
-	900: #24075a,
+	200: #d3baf9,
+	300: #c8a3fc,
+	400: #b98df8,
+	500: #a775ec,
+	600: #975ce7,
+	700: #7549b9,
+	800: #5d3a94,
+	900: #482d72,
 ) !default;
 
 $grape: (
-	50: #f5e3fc,
-	100: #eed0fb,
-	200: #e9c2f9,
-	300: #d4a6e8,
-	400: #ba84d2,
-	500: #ad71c6,
-	600: #9a57b7,
-	700: #8133a3,
-	800: #620f85,
-	900: #470b60,
+	50: #f9ebff,
+	100: #f3d6ff,
+	200: #edc2ff,
+	300: #de9ff9,
+	400: #cc7ded,
+	500: #b95ae2,
+	600: #a440cf,
+	700: #891eb8,
+	800: #680094,
+	900: #4c006b,
+) !default;
+
+$dragonfruit: (
+	50: #ffe5f7,
+	100: #ffd8f3,
+	200: #ffc5ee,
+	300: #fda7e6,
+	400: #f38cd9,
+	500: #e976cd,
+	600: #d559bb,
+	700: #ac4195,
+	800: #863174,
+	900: #652457,
+) !default;
+
+$raspberry: (
+	50: #ffe5ec,
+	100: #ffd6e2,
+	200: #ffc2d4,
+	300: #ffabc5,
+	400: #ff8bb3,
+	500: #fa70a3,
+	600: #e7518f,
+	700: #ba3a6f,
+	800: #922b56,
+	900: #6e2040,
 ) !default;
 
 $watermelon: (
-	50: #f7dee4,
-	100: #f1c1cd,
-	200: #eaa4b5,
-	300: #e48ba1,
-	400: #db6683,
-	500: #d4496c,
-	600: #be2d51,
-	700: #a7163a,
-	800: #8d0729,
-	900: #6f0620,
+	50: #ffedec,
+	100: #ffdbd9,
+	200: #ffc9c7,
+	300: #ffadab,
+	400: #ff8f8e,
+	500: #ff7275,
+	600: #ef515c,
+	700: #c03a43,
+	800: #972b33,
+	900: #712025,
+) !default;
+
+$coral: (
+	50: #ffede8,
+	100: #ffdcd1,
+	200: #ffcbba,
+	300: #ffb197,
+	400: #ff9471,
+	500: #fd7a4d,
+	600: #ec5e27,
+	700: #c33e00,
+	800: #973001,
+	900: #732301,
+) !default;
+
+$cacao: (
+	50: #fceee5,
+	100: #f7decd,
+	200: #f4cfb6,
+	300: #ecb895,
+	400: #e4a072,
+	500: #d98d56,
+	600: #c4763d,
+	700: #9e5a24,
+	800: #7d4417,
+	900: #5d3212,
 ) !default;
 
 $pumpkin: (
-	50: #fdecd8,
-	100: #fbddbc,
-	200: #f9cf9f,
-	300: #f4b771,
-	400: #ef9c3e,
-	500: #eb8e24,
-	600: #db7500,
-	700: #c26700,
-	800: #8f4c00,
-	900: #5c3100,
+	50: #ffeedf,
+	100: #ffddbe,
+	200: #ffcd9e,
+	300: #ffb267,
+	400: #f59a33,
+	500: #e68800,
+	600: #d17c00,
+	700: #bd6f00,
+	800: #9a5900,
+	900: #784400,
 ) !default;
 
 $pineapple: (
@@ -624,7 +663,8 @@ $palettesInterpolation: (
 	'neutral': $neutral,
 	'product': map.get($productsInterpolation, $product),
 	'navigation': $navigation,
-	'orchid': $orchid,
+	// Deprecated: replaced by grape
+	'orchid': $grape,
 	'success': $success,
 	'successContrasted': $successContrasted,
 	'error': $critical,
@@ -640,7 +680,11 @@ $palettesInterpolation: (
 	'blueberry': $blueberry,
 	'lavender': $lavender,
 	'grape': $grape,
+	'dragonfruit': $dragonfruit,
+	'raspberry': $raspberry,
 	'watermelon': $watermelon,
+	'coral': $coral,
+	'cacao': $cacao,
 	'pumpkin': $pumpkin,
 	'pineapple': $pineapple,
 	'pineappleContrasted': $pineappleContrasted,
