@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deriveFullName, disambiguateNames } from './story-source';
+import { deriveFullName, disambiguateNames, extractArgTypeDescriptions } from './story-source';
 
 /**
  * Two stories in one section must not end up under the same `###`: the page then shows two
@@ -37,8 +37,7 @@ describe('deriveFullName', () => {
  * every test would still pass. This exercises the pass itself.
  */
 describe('disambiguateNames', () => {
-	const example = (importPath: string, name: string, framework: 'angular' | 'html-css' = 'html-css') =>
-		({ importPath, name, framework, fileSlug: importPath, imports: [], templates: [] }) as never;
+	const example = (importPath: string, name: string, framework: 'angular' | 'html-css' = 'html-css') => ({ importPath, name, framework, fileSlug: importPath, imports: [], templates: [] }) as never;
 
 	it('leaves a unique title alone', () => {
 		const examples = [example('./s/x/html&css/a-basic.stories.ts', 'Basic'), example('./s/x/html&css/a-other.stories.ts', 'Other')];
@@ -49,10 +48,7 @@ describe('disambiguateNames', () => {
 	});
 
 	it('expands both sides of a collision', () => {
-		const examples = [
-			example('./s/x/html&css/detail-basic.stories.ts', 'Basic'),
-			example('./s/x/html&css/list-basic.stories.ts', 'Basic'),
-		];
+		const examples = [example('./s/x/html&css/detail-basic.stories.ts', 'Basic'), example('./s/x/html&css/list-basic.stories.ts', 'Basic')];
 
 		disambiguateNames(examples);
 
@@ -61,10 +57,7 @@ describe('disambiguateNames', () => {
 
 	it('does not touch a title shared across two sections', () => {
 		// One under ## Angular and one under ## HTML/CSS never collide on the page.
-		const examples = [
-			example('./s/x/angular/basic.stories.ts', 'Basic', 'angular'),
-			example('./s/x/html&css/basic.stories.ts', 'Basic', 'html-css'),
-		];
+		const examples = [example('./s/x/angular/basic.stories.ts', 'Basic', 'angular'), example('./s/x/html&css/basic.stories.ts', 'Basic', 'html-css')];
 
 		disambiguateNames(examples);
 
@@ -72,13 +65,36 @@ describe('disambiguateNames', () => {
 	});
 
 	it('adds folder context when the file names are identical', () => {
-		const examples = [
-			example('./s/users/avatars/html&css/basic.stories.ts', 'Basic'),
-			example('./s/users/avatars/html&css/group/basic.stories.ts', 'Basic'),
-		];
+		const examples = [example('./s/users/avatars/html&css/basic.stories.ts', 'Basic'), example('./s/users/avatars/html&css/group/basic.stories.ts', 'Basic')];
 
 		disambiguateNames(examples);
 
 		expect(new Set(examples.map((e: { name: string }) => e.name)).size).toBe(2);
+	});
+});
+
+/**
+ * Prettier moves a description that does not fit within the print width to the next line. Those
+ * descriptions were skipped, leaving the input without description in the generated docs.
+ */
+describe('extractArgTypeDescriptions', () => {
+	const story = (argTypes: string) => `export default {\n\targTypes: {\n${argTypes}\n\t},\n};`;
+
+	it('reads a description on the same line', () => {
+		const content = story("\t\tlabel: {\n\t\t\tdescription: 'Short label.',\n\t\t\ttable: { category: 'inputs' },\n\t\t},");
+
+		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Short label.' }]);
+	});
+
+	it('reads a description wrapped onto the next line', () => {
+		const content = story("\t\tlabel: {\n\t\t\tdescription:\n\t\t\t\t'Wrapped <code>label</code>.',\n\t\t\ttable: { category: 'inputs' },\n\t\t},");
+
+		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Wrapped label.' }]);
+	});
+
+	it('ignores a description key not followed by a string', () => {
+		const content = story('\t\tlabel: {\n\t\t\tdescription:\n\t\t\t\tgetDescription(),\n\t\t},');
+
+		expect(extractArgTypeDescriptions(content)).toEqual([]);
 	});
 });

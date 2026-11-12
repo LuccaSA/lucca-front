@@ -111,9 +111,7 @@ export function readStorySourceFromGit(
 
 	disambiguateNames(examples);
 
-	return examples.length > 0 || inputDescriptions.size > 0
-		? { examples, inputDescriptions }
-		: null;
+	return examples.length > 0 || inputDescriptions.size > 0 ? { examples, inputDescriptions } : null;
 }
 
 /**
@@ -198,9 +196,7 @@ export function deriveFullName(importPath: string, depth = 0): string {
 
 	// A folder repeating the file name adds nothing ("Popover popover"), so it is skipped rather
 	// than kept and deduplicated — otherwise one level of context buys nothing at all.
-	const meaningful = segments.filter(
-		(s) => !NOISE_SEGMENTS.has(s) && !/^html\s*&\s*css$/i.test(s) && s.toLowerCase() !== base.toLowerCase(),
-	);
+	const meaningful = segments.filter((s) => !NOISE_SEGMENTS.has(s) && !/^html\s*&\s*css$/i.test(s) && s.toLowerCase() !== base.toLowerCase());
 	const context = depth > 0 ? meaningful.slice(-depth) : [];
 
 	const words = [...context, ...base.split('-')]
@@ -390,16 +386,16 @@ export function resolveStoryFrameworks(stories: StorybookStory[], version: Versi
 
 /** Import lines to exclude from story output. */
 const IMPORT_EXCLUDE_PATTERNS = [
-	/['"]@storybook\//,          // @storybook/angular, @storybook/test, etc.
-	/['"]storybook\//,           // storybook/test, etc.
-	/['"]stories\/helpers/,      // shared test helpers
-	/\.stories['"]/,             // cross-story imports (e.g., './button-basic.stories')
+	/['"]@storybook\//, // @storybook/angular, @storybook/test, etc.
+	/['"]storybook\//, // storybook/test, etc.
+	/['"]stories\/helpers/, // shared test helpers
+	/\.stories['"]/, // cross-story imports (e.g., './button-basic.stories')
 	// Story helpers reached by a relative path — `'../../../helpers/stories'`,
 	// `'../helpers/story-model-display.component'`, `'@/helpers/test'`. The pattern above only
 	// matched the `stories/helpers` spelling, so these leaked into the published import block of
 	// 17 components at v21.3.1; they are story plumbing, never consumer API.
 	/['"][@./][^'"]*\/helpers(\/|['"])/,
-	/['"]@\/stories\//,          // alias-rooted story assets (e.g. '@/stories/icons-list')
+	/['"]@\/stories\//, // alias-rooted story assets (e.g. '@/stories/icons-list')
 ];
 
 /** Constants the story evaluator inlines into the markup: their import is story plumbing once resolved. */
@@ -592,12 +588,14 @@ export function extractTemplateLiterals(content: string): string[] {
 
 	// Deduplicate (same template may match both patterns)
 	const seen = new Set<string>();
-	return results.filter((t) => {
-		const key = t.trim();
-		if (seen.has(key)) return false;
-		seen.add(key);
-		return true;
-	}).slice(0, 5);
+	return results
+		.filter((t) => {
+			const key = t.trim();
+			if (seen.has(key)) return false;
+			seen.add(key);
+			return true;
+		})
+		.slice(0, 5);
 }
 
 function readTemplateLiteral(content: string, startPos: number): { text: string; endPos: number } {
@@ -656,17 +654,11 @@ function skipInterpolation(content: string, startPos: number): number {
  * template literal, then strips Storybook interpolations (`${…}`) to produce
  * a clean, working HTML snippet.
  */
-export function extractBasicUsage(
-	storybook: StorybookGroup | null,
-	version: VersionConfig,
-	componentDefaults: Map<string, string> = new Map(),
-): string | null {
+export function extractBasicUsage(storybook: StorybookGroup | null, version: VersionConfig, componentDefaults: Map<string, string> = new Map()): string | null {
 	if (!storybook) return null;
 
 	// Find the "basic" angular story
-	const basicStory = storybook.stories.find(
-		(s) => s.framework === 'angular' && s.importPath && /\bbasic\b/i.test(s.importPath)
-	);
+	const basicStory = storybook.stories.find((s) => s.framework === 'angular' && s.importPath && /\bbasic\b/i.test(s.importPath));
 	if (!basicStory?.importPath) return null;
 
 	const normalizedImport = basicStory.importPath.replace(/^[./\\]+/, '');
@@ -700,11 +692,11 @@ export function extractBasicUsage(
  */
 function cleanBasicTemplate(raw: string): string | null {
 	let cleaned = raw
-		.replace(/\$\{…\}/g, '')           // strip interpolation placeholders
-		.replace(/\s+(?==)/g, '')           // fix `attr ="val"` → `attr="val"`
-		.replace(/\s*=""\s*/g, ' ')         // remove empty attributes `=""`
-		.replace(/\s{2,}/g, ' ')            // collapse multiple spaces
-		.replace(/\n\s*\n/g, '\n')          // collapse blank lines
+		.replace(/\$\{…\}/g, '') // strip interpolation placeholders
+		.replace(/\s+(?==)/g, '') // fix `attr ="val"` → `attr="val"`
+		.replace(/\s*=""\s*/g, ' ') // remove empty attributes `=""`
+		.replace(/\s{2,}/g, ' ') // collapse multiple spaces
+		.replace(/\n\s*\n/g, '\n') // collapse blank lines
 		.trim();
 
 	// If nothing meaningful is left, skip
@@ -713,14 +705,16 @@ function cleanBasicTemplate(raw: string): string | null {
 	return cleaned;
 }
 
-function extractArgTypeDescriptions(content: string): { name: string; description: string }[] {
+export function extractArgTypeDescriptions(content: string): { name: string; description: string }[] {
 	const results: { name: string; description: string }[] = [];
 	const seen = new Set<string>();
 	const lines = content.split('\n');
 
 	for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
 		const line = lines[lineIdx];
-		const descMatch = line.match(/^\s+description\s*:\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")/);
+		// Prettier moves a description that does not fit on the line to the next one: `description:\n\t'…'`.
+		const nextLine = /^\s+description\s*:\s*$/.test(line) ? (lines[lineIdx + 1] ?? '') : null;
+		const descMatch = nextLine === null ? line.match(/^\s+description\s*:\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")/) : nextLine.match(/^\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")/);
 		if (!descMatch) continue;
 
 		const raw = descMatch[1] ?? descMatch[2] ?? '';
@@ -773,7 +767,7 @@ function getScssComponentNames(tag: string): Set<string> {
 		const names = new Set(
 			listDirsAtTag(tag, 'packages/scss/src/components')
 				.map((name) => name.trim())
-				.filter((n) => n && !n.startsWith('_'))
+				.filter((n) => n && !n.startsWith('_')),
 		);
 		scssComponentsCache.set(tag, names);
 		return names;
@@ -913,9 +907,7 @@ export function inferScssImports(templates: string[], mainNgPackage: string, tag
 
 	if (matchedComponents.size === 0) return [];
 
-	return [...matchedComponents]
-		.sort()
-		.map((name) => `@forward '@lucca-front/scss/src/components/${name}';`);
+	return [...matchedComponents].sort().map((name) => `@forward '@lucca-front/scss/src/components/${name}';`);
 }
 
 // ─── HTML template formatting ─────────────────────────────────────────────────
@@ -962,7 +954,7 @@ async function formatHtml(prettier: typeof import('prettier'), html: string, isA
 /** Simple fallback formatter when prettier fails. */
 function basicHtmlCleanup(html: string): string {
 	return html
-		.replace(/\n\s*>/g, '>')       // Fix dangling ">" on new line
-		.replace(/\n{3,}/g, '\n\n')    // Collapse excessive blank lines
+		.replace(/\n\s*>/g, '>') // Fix dangling ">" on new line
+		.replace(/\n{3,}/g, '\n\n') // Collapse excessive blank lines
 		.trim();
 }
