@@ -35,7 +35,7 @@ import { FieldsetComponent } from '@lucca-front/ng/forms';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `heading` | `heading` | `PortalContent \| null` | `null` | — | — | Titre du fieldset. [PortalContent] |
-| `helper` | `helper` | `PortalContent \| null` | `null` | — | — | Ajoute un sous-titre au fieldset. |
+| `helper` | `helper` | `PortalContent \| null` | `null` | — | — | Ajoute un sous-titre au fieldset. [PortalContent] |
 | `action` | `action` | `PortalContent \| null` | `null` | — | — | — |
 | `size` | `size` | `FieldsetSize \| null` | `null` | — | — | Modifie la taille du fieldset. |
 | `horizontal` | `horizontal` | `boolean` | `false` | — | `luBooleanAttribute` | Place le titre du fieldset à gauche des champs. |
