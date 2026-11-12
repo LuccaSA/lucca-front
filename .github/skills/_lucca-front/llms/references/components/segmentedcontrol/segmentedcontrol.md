@@ -35,7 +35,7 @@ import { SegmentedControlFilterLabelDirective, SegmentedControlFilterComponent, 
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le filtre. |
 | `value` | `value` | `T` | — | ✅ | — | Valeur de l’onglet (obligatoire). |
-| `label` | `label` | `PortalContent` | — | — | — | — |
+| `label` | `label` | `PortalContent` | — | — | — | Libellé de l’onglet. Contenu riche : directive luSegmentedControlTabsPanelLabel (l’input prévaut). |
 
 ### SegmentedControlComponent (component)
 
