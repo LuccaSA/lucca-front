@@ -6,6 +6,7 @@ import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDef
 import { BehaviorSubject, firstValueFrom, Subject } from 'rxjs';
 import { LuCoreSelectApiV5Directive, LuCoreSelectApiV5Item } from './api-v5.directive';
 import { LU_SELECT_MAGIC_PAGE_SIZE, MAGIC_DEBOUNCE_DURATION } from './api.directive';
+import { ɵluPublicApiTitle } from './public-api-title';
 import { LuCoreSelectPublicApiDirective } from './public-api.directive';
 
 const items = Array.from({ length: LU_SELECT_MAGIC_PAGE_SIZE + 5 }, (_, i) => ({ id: `${i}`, name: `item ${i}` }));
@@ -23,6 +24,13 @@ class MockSelectComponent {}
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ApiV5HostComponent {}
+
+@Component({
+	template: `<lu-simple-select apiV5="/my-app/api/items" apiVersion="2025-01-01" />`,
+	imports: [MockSelectComponent, LuCoreSelectApiV5Directive],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class VersionedApiV5HostComponent {}
 
 @Component({
 	template: `<lu-simple-select publicApi="/lucca-api/departments" apiVersion="2024-11-01" />`,
@@ -141,6 +149,34 @@ describe(LuCoreSelectApiV5Directive.name, () => {
 		// Assert
 		expect(await totalCount).toBe(42);
 	}));
+});
+
+describe('LuCoreSelectApiV5Directive with an apiVersion', () => {
+	it('should send the given version as the Api-Version header', fakeAsync(async () => {
+		// Arrange
+		const { httpTesting, getOptions } = setup(VersionedApiV5HostComponent);
+
+		// Act
+		const options = getOptions('', 0);
+		const req = expectGet(httpTesting, '/my-app/api/items?limit=20&include=links');
+		req.flush({ items: [] });
+		await options;
+
+		// Assert
+		expect(req.request.headers.get('Api-Version')).toBe('2025-01-01');
+	}));
+});
+
+describe('ɵluPublicApiTitle', () => {
+	const resource = { title: 'Developer', t9n: { title: { 'fr-FR': 'Développeur', de: 'Entwickler' } } };
+
+	it('should prefer the exact culture, then the language, then the invariant title', () => {
+		expect(ɵluPublicApiTitle(resource, 'fr-FR')).toBe('Développeur');
+		expect(ɵluPublicApiTitle(resource, 'fr')).toBe('Développeur');
+		expect(ɵluPublicApiTitle(resource, 'de-CH')).toBe('Entwickler');
+		expect(ɵluPublicApiTitle(resource, 'es')).toBe('Developer');
+		expect(ɵluPublicApiTitle({ title: 'Developer' }, 'fr-FR')).toBe('Developer');
+	});
 });
 
 describe(LuCoreSelectPublicApiDirective.name, () => {
