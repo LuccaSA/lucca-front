@@ -44,11 +44,11 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateItemComponent, ActivityFee
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `label` | `label` | `PortalContent \| null` | `null` | — | — | Description de l’étape. [PortalContent] |
 | `user` | `user` | `ILuUser \| null` | `null` | — | — | Permet de définir l’utilisateur présenté dans l’avatar (masqué pour les statuts `success` et `critical`). |
-| `avatarPlaceholder` | `avatarPlaceholder` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `status` | `status` | `ActivityFeedStepStatus \| null` | `null` | — | — | — |
+| `avatarPlaceholder` | `avatarPlaceholder` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche un avatar placeholder à la place de celui du `user` (ex. auteur anonyme). |
+| `status` | `status` | `ActivityFeedStepStatus \| null` | `null` | — | — | Statut de l’étape : `success` et `critical` remplacent l’avatar par un indicateur d’état. |
 | `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Étape identifiée par une icône. |
-| `date` | `date` | `Date \| string \| null` | `null` | — | — | — |
-| `datePipeFormat` | `datePipeFormat` | `string` | — | — | — | — |
+| `date` | `date` | `Date \| string \| null` | `null` | — | — | Date de l’étape, affichée par défaut sous forme de date et heure complètes. |
+| `datePipeFormat` | `datePipeFormat` | `string` | — | — | — | Format passé au `DatePipe` pour afficher la date (ex. `dd/MM/yyyy`). Voir les options de format. |
 
 ### ActivityFeedUpdateItemComponent (component)
 
@@ -59,7 +59,7 @@ import { ActivityFeedStepComponent, ActivityFeedUpdateItemComponent, ActivityFee
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `label` | `label` | `string` | — | ✅ | — | Description de l’étape. [PortalContent] |
+| `label` | `label` | `string` | — | ✅ | — | — |
 
 ### ActivityFeedUpdateComponent (component)
 

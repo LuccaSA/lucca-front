@@ -63,8 +63,8 @@ import { ResourceCardButtonComponent, ResourceCardLinkComponent, ResourceCardCom
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `grid` | `grid` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `draggable` | `draggable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend la carte déplaçable. |
-| `size` | `size` | `ResourceCardSize \| null` | `null` | — | — | Modifie la taille de la carte. |
+| `draggable` | `draggable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `size` | `size` | `ResourceCardSize \| null` | `null` | — | — | — |
 
 ## Related files
 

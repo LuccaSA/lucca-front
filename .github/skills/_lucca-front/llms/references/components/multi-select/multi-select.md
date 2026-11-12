@@ -38,7 +38,7 @@ import { LuMultiSelectContentDisplayerComponent, LuMultiSelectCounterDisplayerCo
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `selected` | `selected` | `T[]` | `[]` | — | — | — |
-| `label` | `label` | `string` | — | ✅ | — | Modifie le label du champ. |
+| `label` | `label` | `string` | — | ✅ | — | — |
 
 ### LuMultiSelectDefaultDisplayerComponent (component)
 

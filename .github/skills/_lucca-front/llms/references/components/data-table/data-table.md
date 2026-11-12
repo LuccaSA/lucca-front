@@ -45,7 +45,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `group` | `group` | `PortalContent \| null` | `null` | — | — | Présente un groupe de lignes dans la story. |
+| `group` | `group` | `PortalContent \| null` | `null` | — | — | — |
 | `groupButtonAlt` | `groupButtonAlt` | `string \| null` | `null` | — | — | — |
 
 #### Models (two-way binding)
@@ -84,7 +84,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `editable` | `editable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `align` | `align` | `DataTableAlign \| null` | `null` | — | — | Aligne le contenu des cellules horizontalement. Posé sur une cellule d’en-tête, il s’applique à toute la colonne. |
+| `align` | `align` | `DataTableAlign \| null` | `null` | — | — | — |
 | `actions` | `actions` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 ### DataTableFootComponent (component)
@@ -135,7 +135,7 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 | `nested` | `nested` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `drag` | `drag` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `noOverflow` | `noOverflow` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le défilement horizontal du tableau. Celui-ci prendra alors la place nécessaire pour afficher tout son contenu… |
-| `empty` | `empty` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `empty` | `empty` | `boolean` | `false` | — | `luBooleanAttribute` | Indique que le tableau est vide : la table passe en role="presentation" et l’en-tête devient inert. L’empty state lui-mê… |
 | `responsive` | `responsive` | `ResponsiveConfig<'layoutFixed', true>` | — | — | — | — |
 | `verticalAlign` | `verticalAlign` | `DataTableVerticalAlign \| null` | `null` | — | — | Aligne le contenu des cellules verticalement. |
 | `stickyColsStart` | `stickyColsStart` | `number` | `0` | — | `luNumberAttribute` | Nombre de colonnes figées depuis la gauche. Limité à 1 avec l’usage de colspan. |

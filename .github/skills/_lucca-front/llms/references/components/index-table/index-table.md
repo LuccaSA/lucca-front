@@ -72,7 +72,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `align` | `align` | `IndexTableAlign \| null` | `null` | — | — | — |
 | `sort` | `sort` | `IndexTableSort \| null` | `null` | — | — | — |
-| `selectable` | `selectable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend les lignes du tableau sélectionnables via des checkbox. |
+| `selectable` | `selectable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `actions` | `actions` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `inlineSize` | `inlineSize` | `number` | `0` | — | `luNumberAttribute` | — |

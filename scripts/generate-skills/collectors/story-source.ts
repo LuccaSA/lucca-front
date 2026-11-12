@@ -7,7 +7,7 @@
  */
 
 import path from 'path';
-import { StorybookGroup, StorybookStory, StoryExample, StoryCollectionResult, VersionConfig } from '../types';
+import { ArgTypeDescription, ExtractedAPI, ExtractedInput, StorybookGroup, StorybookStory, StoryExample, StoryCollectionResult, VersionConfig } from '../types';
 import { renderStoryTemplates, renderBasicStoryTemplate } from './story-eval';
 import { listDirsAtTag, readAtTag } from './git-snapshot';
 
@@ -31,7 +31,7 @@ export function readStorySourceFromGit(
 
 	const seen = new Set<string>();
 	const examples: StoryExample[] = [];
-	const inputDescriptions = new Map<string, string>();
+	const inputDescriptions: ArgTypeDescription[] = [];
 
 	const allStories = allGroups.flatMap((g) => g.stories);
 
@@ -56,12 +56,8 @@ export function readStorySourceFromGit(
 			const extracted = extractStoryEssentials(content);
 			if (!extracted) continue;
 
-			// Collect input descriptions (deduplicated, first-seen wins)
-			for (const { name, description } of extracted.descriptions) {
-				if (!inputDescriptions.has(name)) {
-					inputDescriptions.set(name, description);
-				}
-			}
+			// Collect input descriptions, in reading order (first match wins in findInputDescription)
+			inputDescriptions.push(...extracted.descriptions);
 
 			// Resolve interpolations by evaluating the story's render() at default args.
 			// Static extraction can only leave an opaque `${…}` placeholder; only fall back to it
@@ -111,9 +107,7 @@ export function readStorySourceFromGit(
 
 	disambiguateNames(examples);
 
-	return examples.length > 0 || inputDescriptions.size > 0
-		? { examples, inputDescriptions }
-		: null;
+	return examples.length > 0 || inputDescriptions.length > 0 ? { examples, inputDescriptions } : null;
 }
 
 /**
@@ -198,9 +192,7 @@ export function deriveFullName(importPath: string, depth = 0): string {
 
 	// A folder repeating the file name adds nothing ("Popover popover"), so it is skipped rather
 	// than kept and deduplicated — otherwise one level of context buys nothing at all.
-	const meaningful = segments.filter(
-		(s) => !NOISE_SEGMENTS.has(s) && !/^html\s*&\s*css$/i.test(s) && s.toLowerCase() !== base.toLowerCase(),
-	);
+	const meaningful = segments.filter((s) => !NOISE_SEGMENTS.has(s) && !/^html\s*&\s*css$/i.test(s) && s.toLowerCase() !== base.toLowerCase());
 	const context = depth > 0 ? meaningful.slice(-depth) : [];
 
 	const words = [...context, ...base.split('-')]
@@ -390,16 +382,16 @@ export function resolveStoryFrameworks(stories: StorybookStory[], version: Versi
 
 /** Import lines to exclude from story output. */
 const IMPORT_EXCLUDE_PATTERNS = [
-	/['"]@storybook\//,          // @storybook/angular, @storybook/test, etc.
-	/['"]storybook\//,           // storybook/test, etc.
-	/['"]stories\/helpers/,      // shared test helpers
-	/\.stories['"]/,             // cross-story imports (e.g., './button-basic.stories')
+	/['"]@storybook\//, // @storybook/angular, @storybook/test, etc.
+	/['"]storybook\//, // storybook/test, etc.
+	/['"]stories\/helpers/, // shared test helpers
+	/\.stories['"]/, // cross-story imports (e.g., './button-basic.stories')
 	// Story helpers reached by a relative path — `'../../../helpers/stories'`,
 	// `'../helpers/story-model-display.component'`, `'@/helpers/test'`. The pattern above only
 	// matched the `stories/helpers` spelling, so these leaked into the published import block of
 	// 17 components at v21.3.1; they are story plumbing, never consumer API.
 	/['"][@./][^'"]*\/helpers(\/|['"])/,
-	/['"]@\/stories\//,          // alias-rooted story assets (e.g. '@/stories/icons-list')
+	/['"]@\/stories\//, // alias-rooted story assets (e.g. '@/stories/icons-list')
 ];
 
 /** Constants the story evaluator inlines into the markup: their import is story plumbing once resolved. */
@@ -472,7 +464,7 @@ function isCompleteImport(statement: string): boolean {
 interface StoryExtraction {
 	imports: string[];
 	templates: string[];
-	descriptions: { name: string; description: string }[];
+	descriptions: ArgTypeDescription[];
 }
 
 /**
@@ -592,12 +584,14 @@ export function extractTemplateLiterals(content: string): string[] {
 
 	// Deduplicate (same template may match both patterns)
 	const seen = new Set<string>();
-	return results.filter((t) => {
-		const key = t.trim();
-		if (seen.has(key)) return false;
-		seen.add(key);
-		return true;
-	}).slice(0, 5);
+	return results
+		.filter((t) => {
+			const key = t.trim();
+			if (seen.has(key)) return false;
+			seen.add(key);
+			return true;
+		})
+		.slice(0, 5);
 }
 
 function readTemplateLiteral(content: string, startPos: number): { text: string; endPos: number } {
@@ -656,17 +650,11 @@ function skipInterpolation(content: string, startPos: number): number {
  * template literal, then strips Storybook interpolations (`${…}`) to produce
  * a clean, working HTML snippet.
  */
-export function extractBasicUsage(
-	storybook: StorybookGroup | null,
-	version: VersionConfig,
-	componentDefaults: Map<string, string> = new Map(),
-): string | null {
+export function extractBasicUsage(storybook: StorybookGroup | null, version: VersionConfig, componentDefaults: Map<string, string> = new Map()): string | null {
 	if (!storybook) return null;
 
 	// Find the "basic" angular story
-	const basicStory = storybook.stories.find(
-		(s) => s.framework === 'angular' && s.importPath && /\bbasic\b/i.test(s.importPath)
-	);
+	const basicStory = storybook.stories.find((s) => s.framework === 'angular' && s.importPath && /\bbasic\b/i.test(s.importPath));
 	if (!basicStory?.importPath) return null;
 
 	const normalizedImport = basicStory.importPath.replace(/^[./\\]+/, '');
@@ -700,11 +688,11 @@ export function extractBasicUsage(
  */
 function cleanBasicTemplate(raw: string): string | null {
 	let cleaned = raw
-		.replace(/\$\{…\}/g, '')           // strip interpolation placeholders
-		.replace(/\s+(?==)/g, '')           // fix `attr ="val"` → `attr="val"`
-		.replace(/\s*=""\s*/g, ' ')         // remove empty attributes `=""`
-		.replace(/\s{2,}/g, ' ')            // collapse multiple spaces
-		.replace(/\n\s*\n/g, '\n')          // collapse blank lines
+		.replace(/\$\{…\}/g, '') // strip interpolation placeholders
+		.replace(/\s+(?==)/g, '') // fix `attr ="val"` → `attr="val"`
+		.replace(/\s*=""\s*/g, ' ') // remove empty attributes `=""`
+		.replace(/\s{2,}/g, ' ') // collapse multiple spaces
+		.replace(/\n\s*\n/g, '\n') // collapse blank lines
 		.trim();
 
 	// If nothing meaningful is left, skip
@@ -713,25 +701,47 @@ function cleanBasicTemplate(raw: string): string | null {
 	return cleaned;
 }
 
-function extractArgTypeDescriptions(content: string): { name: string; description: string }[] {
-	const results: { name: string; description: string }[] = [];
+/** Host named by a per-host argType category: `inputs (form-field)` → `form-field`. */
+const HOST_CATEGORY = /^(?:inputs|models) \((.+)\)$/;
+
+const indentOf = (line: string): number => (line.match(/^(\s+)/)?.[1] ?? '').length;
+
+/** Reads `table: { category: '…' }` in the argType block opening at `blockIdx`. */
+function readArgTypeCategory(lines: string[], blockIdx: number): string | null {
+	const blockIndent = indentOf(lines[blockIdx]);
+	for (let i = blockIdx + 1; i < lines.length; i++) {
+		const line = lines[i];
+		if (line.trim() && indentOf(line) <= blockIndent) return null;
+		const match = line.match(/\bcategory\s*:\s*['"]([^'"]+)['"]/);
+		if (match) return match[1];
+	}
+	return null;
+}
+
+export function extractArgTypeDescriptions(content: string): ArgTypeDescription[] {
+	const results: ArgTypeDescription[] = [];
 	const seen = new Set<string>();
 	const lines = content.split('\n');
+	const scopedHosts = [...new Set([...content.matchAll(/\bcategory\s*:\s*['"]([^'"]+)['"]/g)].map((m) => m[1].match(HOST_CATEGORY)?.[1]).filter((h): h is string => !!h))];
 
 	for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
 		const line = lines[lineIdx];
-		const descMatch = line.match(/^\s+description\s*:\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")/);
+		// Prettier moves a description that does not fit on the line to the next one: `description:\n\t'…'`.
+		const nextLine = /^\s+description\s*:\s*$/.test(line) ? (lines[lineIdx + 1] ?? '') : null;
+		const descMatch = nextLine === null ? line.match(/^\s+description\s*:\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")/) : nextLine.match(/^\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")/);
 		if (!descMatch) continue;
 
 		const raw = descMatch[1] ?? descMatch[2] ?? '';
 		const description = raw
 			.replace(/<[^>]+>/g, '')
-			.replace(/\\n/g, ' ')
+			// One pass, so an escaped backslash (`\\n`, the text `\n`) is not read as a line break.
+			.replace(/\\(.)/g, (_, char: string) => (char === 'n' ? ' ' : char))
 			.trim();
 		if (!description) continue;
 
 		const descIndent = (line.match(/^(\s+)/)?.[1] ?? '').length;
 		let propName: string | null = null;
+		let propIdx = -1;
 		for (let j = lineIdx - 1; j >= 0 && j >= lineIdx - 15; j--) {
 			const prev = lines[j];
 			const prevIndent = (prev.match(/^(\s+)/)?.[1] ?? '').length;
@@ -739,21 +749,43 @@ function extractArgTypeDescriptions(content: string): { name: string; descriptio
 				const nameMatch = prev.match(/^\s+(\w+)\s*:\s*\{/);
 				if (nameMatch) {
 					propName = nameMatch[1];
+					propIdx = j;
 					break;
 				}
 			}
 		}
 
+		// A `story` control drives the demo only (an `@let`, a wrapper option…): it documents no input.
+		const category = propName ? readArgTypeCategory(lines, propIdx) : null;
+		if (category === 'story') continue;
+
 		const SKIP = new Set(['type', 'control', 'table', 'if', 'mapping']);
 		if (propName && !seen.has(propName) && !SKIP.has(propName)) {
 			seen.add(propName);
 			const truncated = description.length > 120 ? description.slice(0, 120) + '…' : description;
-			results.push({ name: propName, description: truncated });
+			results.push({ name: propName, description: truncated, host: category?.match(HOST_CATEGORY)?.[1] ?? null, scopedHosts });
 			if (results.length >= 8) break;
 		}
 	}
 
 	return results;
+}
+
+/** Whether a per-host category (`form-field`, `th[luDataTableCell]`, `luSkipLinkTarget`) names this class. */
+function isHostOf(api: ExtractedAPI, host: string): boolean {
+	return api.selectors.some((selector) => selector === host || selector === `lu-${host}` || selector.includes(`[${host}]`) || selector.includes(`[lu-${host}]`));
+}
+
+/**
+ * Finds the story description of an input, for the class that declares it.
+ *
+ * A description under a per-host category (`inputs (sortable-list-item)`) belongs to that host only.
+ * One under plain `inputs` belongs to the story's main host: it is not applied to a class that the same
+ * story file documents under a host of its own, which may declare an input of the same name.
+ */
+export function findInputDescription(descriptions: ArgTypeDescription[], api: ExtractedAPI, input: Pick<ExtractedInput, 'bindingName' | 'propName'>): string | undefined {
+	const documents = (d: ArgTypeDescription) => (d.host ? isHostOf(api, d.host) : !d.scopedHosts.some((host) => isHostOf(api, host)));
+	return (descriptions.find((d) => d.name === input.bindingName && documents(d)) ?? descriptions.find((d) => d.name === input.propName && documents(d)))?.description;
 }
 
 // ─── SCSS import inference for HTML stories ───────────────────────────────────
@@ -773,7 +805,7 @@ function getScssComponentNames(tag: string): Set<string> {
 		const names = new Set(
 			listDirsAtTag(tag, 'packages/scss/src/components')
 				.map((name) => name.trim())
-				.filter((n) => n && !n.startsWith('_'))
+				.filter((n) => n && !n.startsWith('_')),
 		);
 		scssComponentsCache.set(tag, names);
 		return names;
@@ -913,9 +945,7 @@ export function inferScssImports(templates: string[], mainNgPackage: string, tag
 
 	if (matchedComponents.size === 0) return [];
 
-	return [...matchedComponents]
-		.sort()
-		.map((name) => `@forward '@lucca-front/scss/src/components/${name}';`);
+	return [...matchedComponents].sort().map((name) => `@forward '@lucca-front/scss/src/components/${name}';`);
 }
 
 // ─── HTML template formatting ─────────────────────────────────────────────────
@@ -962,7 +992,7 @@ async function formatHtml(prettier: typeof import('prettier'), html: string, isA
 /** Simple fallback formatter when prettier fails. */
 function basicHtmlCleanup(html: string): string {
 	return html
-		.replace(/\n\s*>/g, '>')       // Fix dangling ">" on new line
-		.replace(/\n{3,}/g, '\n\n')    // Collapse excessive blank lines
+		.replace(/\n\s*>/g, '>') // Fix dangling ">" on new line
+		.replace(/\n{3,}/g, '\n\n') // Collapse excessive blank lines
 		.trim();
 }

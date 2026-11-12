@@ -36,7 +36,7 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `name` | `name` | `string` | — | — | — | Dans le cas d’un filtre optionnel, permet de faire le lien entre la liste de filtres disponibles et l’affichage du filtr… |
-| `optional` | `optional` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `optional` | `optional` | `boolean` | `false` | — | `luBooleanAttribute` | Rend disponible le filtre via le bouton d’ajout de filtre. Celui-ci est masqué par défaut. Lorsqu’un filtre est optionne… |
 | `grouping` | `grouping` | `string` | `''` | — | — | — |
 | `iconOnly` | `iconOnly` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `backdrop` | `backdrop` | `boolean` | `false` | — | `luBooleanAttribute` | — |
@@ -59,9 +59,9 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `manualApply` | `manualApply` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `manualApply` | `manualApply` | `boolean` | `false` | — | `luBooleanAttribute` | Indique que les résultats ne se mettent à jour qu’après une action explicite (ici un bouton « Appliquer les filtres »), … |
 | `segmentedControlTabs` | `segmentedControlTabs` | `FilterBarSegmentedControlTabs \| null` | `null` | — | — | — |
-| `resultsCount` | `resultsCount` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
+| `resultsCount` | `resultsCount` | `unknown` | `null` | — | `luNullableNumberAttribute` | Nombre de résultats correspondant aux filtres, affiché à la fin de la FilterBar (avant l’addon `luFilterPillAddonAfter`)… |
 
 ### FilterViewSelectorComponent (component)
 
@@ -72,7 +72,7 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `views` | `views` | `T[]` | — | ✅ | — | [Story] Affiche les vues via SegmentedControl. |
+| `views` | `views` | `T[]` | — | ✅ | — | — |
 | `viewLabel` | `viewLabel` | `(view: T) => string` | `(view) => (view as { name: string }).name` | — | — | — |
 | `optionComparer` | `optionComparer` | `(a: T, b: T) => boolean` | `filterViewDefaultOptionComparer` | — | — | — |
 | `optionKey` | `optionKey` | `(view: T) => unknown` | `filterViewDefaultOptionKey` | — | — | — |

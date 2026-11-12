@@ -16,7 +16,7 @@ import { TreeSelectDirective, TreeBranchComponent } from '@lucca-front/ng/tree-s
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `groupingFnInput` | `treeSelect` | `TreeGroupingFn<T>` | — | ✅ | — | — |
+| `groupingFnInput` | `treeSelect` | `TreeGroupingFn<T>` | — | ✅ | — | Fonction de regroupement appelée pour chaque option avec la liste de toutes les options : elle retourne l’option parente… |
 
 ### TreeBranchComponent (component)
 

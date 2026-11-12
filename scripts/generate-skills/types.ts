@@ -338,8 +338,18 @@ export interface StorySnippet {
 export interface StoryCollectionResult {
 	/** Individual story examples. */
 	examples: StoryExample[];
-	/** Merged input descriptions from argTypes across all stories (inputName → description). */
-	inputDescriptions: Map<string, string>;
+	/** Input descriptions from argTypes across all stories, in reading order (first match wins). */
+	inputDescriptions: ArgTypeDescription[];
+}
+
+/** An argType description, with the host it documents. */
+export interface ArgTypeDescription {
+	name: string;
+	description: string;
+	/** Host named by a per-host category (`inputs (form-field)` → `form-field`), null for the main host. */
+	host: string | null;
+	/** Every host named by a per-host category in the same story file: the main host is none of them. */
+	scopedHosts: string[];
 }
 
 // ─── ZeroHeight ──────────────────────────────────────────────────────────────

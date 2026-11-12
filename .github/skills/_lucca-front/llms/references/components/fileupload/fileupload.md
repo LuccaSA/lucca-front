@@ -73,10 +73,10 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `state` | `state` | `'success' \| 'loading' \| 'error' \| 'default'` | `'default'` | — | — | — |
 | `displayFileName` | `displayFileName` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le nom des fichiers importés sous l’image en vue media. |
-| `structure` | `structure` | `boolean` | `false` | — | `luBooleanAttribute` | Augmente le border-radius du champ pour l’utiliser en élément de structure. |
+| `structure` | `structure` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `inlineMessageError` | `inlineMessageError` | `string \| null` | `null` | — | — | — |
 | `entry` | `entry` | `FileEntry` | — | ✅ | — | — |
-| `size` | `size` | `FileEntrySize \| null` | `null` | — | — | Modifie la taille du composant. |
+| `size` | `size` | `FileEntrySize \| null` | `null` | — | — | — |
 | `iconOverride` | `iconOverride` | `string` | `''` | — | — | — |
 | `downloadURL` | `downloadURL` | `string` | `''` | — | — | — |
 | `openInNewTab` | `openInNewTab` | `boolean` | `false` | — | `luBooleanAttribute` | — |
@@ -148,7 +148,7 @@ import { FileDropzoneComponent, FileEntryComponent, FileEntryWrapperComponent, M
 | `state` | `state` | `'loading' \| 'success' \| 'error' \| 'default'` | `'default'` | — | — | — |
 | `inlineMessageError` | `inlineMessageError` | `string \| null` | `null` | — | — | — |
 | `previewUrl` | `previewUrl` | `string \| null` | `null` | — | — | — |
-| `displayFileName` | `displayFileName` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche le nom des fichiers importés sous l’image en vue media. |
+| `displayFileName` | `displayFileName` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 #### Outputs
 
