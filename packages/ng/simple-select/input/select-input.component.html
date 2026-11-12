@@ -72,7 +72,7 @@
 
 @if (!ignorePresentation()) {
 	<ng-container *luPresentationDisplayDefault>
-		@if (value) {
+		@if (hasValue()) {
 			<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 		} @else {
 			<lu-presentation-no-value />
