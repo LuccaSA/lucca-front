@@ -1051,14 +1051,14 @@ export default [
 		`,
 	},
 	{
-		// AI palette, renamed Orchid
+		// AI palette, renamed Orchid, then replaced by Grape
 		// SEE https://regex101.com/r/LqKsYf.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/f0b73e151f73e805500788cdaac6e65fcff20b7a.
 		objectPattern: [/\.palette-AI(?![\w-])/, /\.pr-u-colorTextAI(?![\w-])/],
 		versionDeleted: '21.3.0',
 		actions: `
-			* \`.palette-AI\` => \`.palette-orchid\`
-			* \`.pr-u-colorTextAI\` => \`.pr-u-colorTextOrchid\`
+			* \`.palette-AI\` => \`.palette-grape\`
+			* \`.pr-u-colorTextAI\` => \`.pr-u-colorTextGrape\`
 		`,
 	},
 	{

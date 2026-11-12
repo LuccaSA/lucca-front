@@ -542,6 +542,9 @@ $grape: (
 	900: #4c006b,
 ) !default;
 
+// Deprecated: replaced by grape, to be removed in 23.0
+$orchid: $grape;
+
 $dragonfruit: (
 	50: #ffe5f7,
 	100: #ffd8f3,
@@ -663,8 +666,8 @@ $palettesInterpolation: (
 	'neutral': $neutral,
 	'product': map.get($productsInterpolation, $product),
 	'navigation': $navigation,
-	// Deprecated: replaced by grape
-	'orchid': $grape,
+	// Deprecated: replaced by grape, to be removed in 23.0
+	'orchid': $orchid,
 	'success': $success,
 	'successContrasted': $successContrasted,
 	'error': $critical,
