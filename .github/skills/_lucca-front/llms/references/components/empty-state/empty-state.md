@@ -36,7 +36,7 @@ import { EmptyStatePageIllustration, EmptyStatePageComponent } from '@lucca-fron
 | `slotTop` | `slotTop` | `PortalContent` | — | — | — | — |
 | `illustration` | `illustration` | `PortalContent` | — | — | — | Modifie l’illustration. |
 | `heading` | `heading` | `string` | — | — | — | Titre de l’empty state. |
-| `description` | `description` | `PortalContent` | — | — | — | — |
+| `description` | `description` | `PortalContent` | — | — | — | Texte affiché sous le titre. Contenu riche : directive luEmptyStateDescription (l’input prévaut). |
 | `headingLevel` | `headingLevel` | `unknown` | `null` | — | `luNullableNumberAttribute` | Définit le niveau sémantique du titre. |
 | `headingStyle` | `headingStyle` | `unknown` | `null` | — | `luNullableNumberAttribute` | Niveau du titre (style). |
 | `hx` | `hx` | `number` | `1` | — | `luNumberAttribute` | ⚠️ **Déprécié** : use `headingLevel` instead [Déprécié] Utiliser headingLevel. |
