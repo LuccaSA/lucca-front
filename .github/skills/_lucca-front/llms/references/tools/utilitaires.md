@@ -104,7 +104,11 @@ Les utilitaires de tailles sont basés sur les tokens "Shorthands" et agissent d
 	<div class="pr-u-colorTextBlueberry demo-utility"><code class="code">pr-u-colorTextBlueberry</code> Lorem ipsum</div>
 	<div class="pr-u-colorTextLavender demo-utility"><code class="code">pr-u-colorTextLavender</code> Lorem ipsum</div>
 	<div class="pr-u-colorTextGrape demo-utility"><code class="code">pr-u-colorTextGrape</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextDragonfruit demo-utility"><code class="code">pr-u-colorTextDragonfruit</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextRaspberry demo-utility"><code class="code">pr-u-colorTextRaspberry</code> Lorem ipsum</div>
 	<div class="pr-u-colorTextWatermelon demo-utility"><code class="code">pr-u-colorTextWatermelon</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextCoral demo-utility"><code class="code">pr-u-colorTextCoral</code> Lorem ipsum</div>
+	<div class="pr-u-colorTextCacao demo-utility"><code class="code">pr-u-colorTextCacao</code> Lorem ipsum</div>
 	<div class="pr-u-colorTextPumpkin demo-utility"><code class="code">pr-u-colorTextPumpkin</code> Lorem ipsum</div>
 	<div class="pr-u-colorTextPineapple demo-utility"><code class="code">pr-u-colorTextPineapple</code> Lorem ipsum</div>
 </div>

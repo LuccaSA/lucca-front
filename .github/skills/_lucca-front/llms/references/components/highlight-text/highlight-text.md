@@ -20,7 +20,7 @@ import { HighlightTextComponent } from '@lucca-front/ng/highlight-text';
 
 ## Type definitions
 
-- [`DecorativePalette`](../../types/DecorativePalette.md) — 12 available values
+- [`DecorativePalette`](../../types/DecorativePalette.md) — 16 available values
 
 ## Related files
 
