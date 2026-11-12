@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { FIELDSET_SIZE, FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { FIELDSET_SIZE, FieldsetActionDirective, FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 ```
 

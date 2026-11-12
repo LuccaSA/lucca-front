@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, input, ViewEncapsulation } from '@angular/core';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
 import { luBooleanAttribute, luNullableNumberAttribute, luNumberAttribute, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { EmptyStateDescriptionDirective } from '../empty-state-description.directive';
 import { EmptyStateHeadingLevel, ICON_TO_ILLUSTRATION } from '../empty-state.type';
 
 @Component({
@@ -65,6 +66,8 @@ export class EmptyStateSectionComponent {
 	readonly hx = input(3, { transform: luNumberAttribute<EmptyStateHeadingLevel> });
 
 	readonly headingLevelValue = computed(() => this.headingLevel() ?? this.hx());
+
+	protected readonly descriptionSlot = contentChild(EmptyStateDescriptionDirective, { descendants: false });
 
 	readonly emptyStateClasses = computed(() => ({ [`palette-${this.palette()}`]: !!this.palette() }));
 

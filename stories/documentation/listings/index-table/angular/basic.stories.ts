@@ -10,6 +10,7 @@ import {
 	IndexTableActionComponent,
 	IndexTableActionFileComponent,
 	IndexTableBodyComponent,
+	IndexTableBodyGroupDirective,
 	IndexTableComponent,
 	IndexTableFootComponent,
 	IndexTableHeadComponent,
@@ -93,8 +94,13 @@ export default {
 			table: { category: 'inputs (th[luIndexTableCell])', type: { summary: 'number' }, defaultValue: { summary: '0' } },
 		},
 		group: {
-			description: 'Regroupe des lignes de tableau en les rendant dépliables. Le contenu sert de libellé au groupe. [PortalContent]',
+			description: 'Libellé d’un groupe de lignes dépliables. Contenu riche : directive <code>luIndexTableBodyGroup</code> (l’input prévaut).',
 			table: { category: 'inputs (tbody[luIndexTableBody])', type: { summary: 'PortalContent | null' }, defaultValue: { summary: 'null' } },
+		},
+		richContent: {
+			if: { arg: 'group', truthy: true },
+			description: 'Remplace l’input <code>group</code> par un contenu riche projeté avec la directive <code>luIndexTableBodyGroup</code>.',
+			table: { category: 'story' },
 		},
 		expanded: {
 			name: '↳ expanded',
@@ -167,6 +173,7 @@ export default {
 			imports: [
 				IndexTableComponent,
 				IndexTableBodyComponent,
+				IndexTableBodyGroupDirective,
 				IndexTableRowComponent,
 				IndexTableRowCellComponent,
 				IndexTableRowCellHeaderComponent,
@@ -194,6 +201,7 @@ export default {
 			mixed,
 			disabled,
 			group,
+			richContent,
 			allowAction,
 			allowTextSelection,
 			groupButtonAlt,
@@ -217,7 +225,6 @@ export default {
 		const mixedAttr = mixed ? ` mixed` : ``;
 		const selectableParam = selectable ? ` selectedLabel="Sélectionner cette ligne"` : ``;
 		const selectableAllParam = selectable ? ` selectedLabel="Sélectionner toutes les lignes"` : ``;
-		const groupAttr = group ? ` [group]="samplePortalContent"` : ``;
 		const allowTextSelectionAttr = allowTextSelection ? ` allowTextSelection` : ``;
 		const allowActionTpl = allowAction ? `<a href="#">Content</a>` : `Content`;
 		const tfootAttr = tfoot ? ` tfoot` : ``;
@@ -226,7 +233,7 @@ export default {
 		const sortWithEllipsisAttr = sortWithEllipsis ? ` sortWithEllipsis` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
 		const groupExpandedAttr = expanded && group ? ` [expanded]="true"` : ``;
-		const groupButtonAltAttr = group ? ` groupButtonAlt="${groupButtonAlt}"` : ``;
+		const groupButtonAltAttr = group ? ` groupButtonAlt="${groupButtonAlt}"${richContent ? `` : ` group="Group label"`}` : ``;
 		const layoutFixedAttr = layoutFixed ? ` layoutFixed` : ``;
 		const emptyAttr = empty ? ` empty` : ``;
 		const footerTpl = footer
@@ -289,13 +296,11 @@ export default {
 			<td luIndexTableCell${allowTextSelectionAttr}>${allowActionTpl}</td>
 			<td luIndexTableCell>Content Content Content</td>
 		</tr>`;
-		const samplePortalContentTpl = group
-			? `
-<ng-template #samplePortalContent>
-	Group label
-	<lu-numeric-badge [value]="8" />
-</ng-template>`
-			: ``;
+		const groupTpl =
+			group && richContent
+				? `
+		<ng-container luIndexTableBodyGroup>Group label <lu-numeric-badge [value]="8" /></ng-container>`
+				: ``;
 
 		return {
 			props: { sortChange },
@@ -307,10 +312,10 @@ export default {
 			<th luIndexTableCell${alignAttr}${sortAttr}${sortWithEllipsisAttr}>Label</th>
 		</tr>
 	</thead>
-	<tbody luIndexTableBody${groupAttr}${groupButtonAltAttr}${groupExpandedAttr}>
+	<tbody luIndexTableBody${groupButtonAltAttr}${groupExpandedAttr}>${groupTpl}
 		${tbodyTpl}
 	</tbody>${footerTpl}${paginationTpl}
-</lu-index-table>${samplePortalContentTpl}
+</lu-index-table>
 `,
 		};
 	},
@@ -333,6 +338,7 @@ export const Basic: StoryObj = {
 		stack: 1,
 
 		group: false,
+		richContent: false,
 		groupButtonAlt: 'Afficher X lignes supplémentaires',
 		expanded: false,
 

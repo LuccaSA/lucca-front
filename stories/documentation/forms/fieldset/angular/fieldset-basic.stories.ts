@@ -2,7 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FormComponent } from '@lucca-front/ng/form';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { FIELDSET_SIZE, FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { FIELDSET_SIZE, FieldsetActionDirective, FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, setStoryOptions } from '@/helpers/stories';
@@ -28,7 +28,7 @@ export default {
 		},
 		withAction: {
 			if: { arg: 'expandable', eq: false },
-			description: 'Renseigne l’input <code>action</code> [PortalContent] avec un bouton d’exemple, affiché à droite du titre. Ignoré lorsque <code>expandable</code> est actif.',
+			description: 'Ajoute une action à droite du titre, via la directive <code>luFieldsetAction</code> (ignorée si <code>expandable</code>).',
 			table: { category: 'story' },
 		},
 		expanded: {
@@ -90,22 +90,18 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [FieldsetComponent, GridComponent, GridColumnComponent, FormFieldComponent, TextInputComponent, FormsModule, ButtonComponent, FormComponent],
+			imports: [FieldsetComponent, FieldsetActionDirective, GridComponent, GridColumnComponent, FormFieldComponent, TextInputComponent, FormsModule, ButtonComponent, FormComponent],
 		}),
 	],
 	render: ({ expanded, expandedChange, size, helper, action, withAction, presentation, horizontal, maxWidth, ...args }, { argTypes }) => {
 		const expandedParam = args['expandable'] ? ` [(expanded)]="expanded" (expandedChange)="onExpandedChange($event)"` : ``;
 		const helperParam = helper ? ` helper="${helper}"` : ``;
 		const sizeParam = size ? ` size="S"` : ``;
-		const actionParam = withAction ? ` [action]="portalSample"` : ``;
 		const maxWidthParam = maxWidth ? ` maxWidth` : ``;
 		const horizontalParam = horizontal ? ` horizontal` : ``;
-		const portalSample = withAction
+		const actionSample = withAction
 			? `
-
-	<ng-template #portalSample>
-		<button luButton>button</button>
-	</ng-template>`
+		<button type="button" luButton luFieldsetAction>button</button>`
 			: ``;
 		return {
 			props: {
@@ -113,7 +109,7 @@ export default {
 				onExpandedChange: (value: boolean) => expandedChange?.(value),
 			},
 			template: `<form luForm${maxWidthParam}>
-	<lu-fieldset${horizontalParam}${helperParam}${expandedParam}${sizeParam}${actionParam}${generateInputs(args, argTypes)}>
+	<lu-fieldset${horizontalParam}${helperParam}${expandedParam}${sizeParam}${generateInputs(args, argTypes)}>${actionSample}
 		<lu-grid mode="form">
 			<lu-grid-column colspan="2">
 				<lu-form-field label="Label"${generateInputs({ presentation }, argTypes)}>
@@ -126,7 +122,7 @@ export default {
 				</lu-form-field>
 			</lu-grid-column>
 		</lu-grid>
-	</lu-fieldset>${portalSample}
+	</lu-fieldset>
 </form>`,
 		};
 	},

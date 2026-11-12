@@ -58,7 +58,7 @@ Dans un tableau, privilégiez l'attribut `external` sur vos liens. L'icône asso
 ```js
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { DATA_TABLE_ALIGN, DATA_TABLE_SORT, DATA_TABLE_VERTICAL_ALIGN, DataTableBodyComponent, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent, luDataTableTranslations } from '@lucca-front/ng/data-table';
+import { DATA_TABLE_ALIGN, DATA_TABLE_SORT, DATA_TABLE_VERTICAL_ALIGN, DataTableBodyComponent, DataTableBodyGroupDirective, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent, luDataTableTranslations } from '@lucca-front/ng/data-table';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';

@@ -1,10 +1,10 @@
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } from '@lucca-front/ng/segmented-control-tabs';
+import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent, SegmentedControlTabsPanelLabelDirective } from '@lucca-front/ng/segmented-control-tabs';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 interface segmentedControlBasicStory {
 	small: boolean;
-	withNumericBadge: boolean;
+	richContent: boolean;
 	vertical: boolean;
 	ariaLabel: string;
 	withIcon: boolean;
@@ -15,7 +15,7 @@ interface segmentedControlBasicStory {
 export default {
 	decorators: [
 		moduleMetadata({
-			imports: [NumericBadgeComponent, SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent],
+			imports: [NumericBadgeComponent, SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent, SegmentedControlTabsPanelLabelDirective],
 		}),
 	],
 	argTypes: {
@@ -23,8 +23,8 @@ export default {
 			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
-		withNumericBadge: {
-			description: 'Présente un exemple avec un Numeric Badge.',
+		richContent: {
+			description: 'Remplace l’input <code>label</code> du premier onglet par un contenu riche (avec un Numeric Badge).',
 			if: { arg: 'hiddenLabel', truthy: false },
 			table: { category: 'story' },
 		},
@@ -44,7 +44,7 @@ export default {
 		},
 		label: {
 			control: false,
-			description: 'Libellé de l’onglet.',
+			description: 'Libellé de l’onglet. Contenu riche : directive <code>luSegmentedControlTabsPanelLabel</code> (l’input prévaut).',
 			table: { category: 'inputs (segmented-control-tabs-panel)', type: { summary: 'PortalContent' } },
 		},
 		value: {
@@ -58,8 +58,7 @@ export default {
 		},
 		hiddenLabel: {
 			name: '↳ hiddenLabel',
-			description:
-				'Masque le libellé de l’onglet, conservé pour les technologies d’assistance et affiché en infobulle au survol et au focus. Nécessite un libellé texte (ignoré pour un libellé template).',
+			description: 'Masque le libellé, affiché en infobulle et conservé pour les lecteurs d’écran. Nécessite un <code>label</code> texte.',
 			if: { arg: 'withIcon', truthy: true },
 			table: { category: 'inputs (segmented-control-tabs-panel)' },
 		},
@@ -71,19 +70,16 @@ function getTemplate(args: segmentedControlBasicStory): string {
 	const size = args.small ? ` small` : ``;
 	const vertical = args.vertical ? ` vertical` : ``;
 	const ariaLabel = args.ariaLabel ? ` [ariaLabel]="ariaLabel"` : ``;
-	const numericBadgeComponent = args.withNumericBadge ? ` <lu-numeric-badge value="8" />` : ``;
-	// A hidden label requires a text label: the template label (with its numeric badge) is only used when the label is displayed
-	const hiddenLabel = args.withIcon && args.hiddenLabel;
-	const firstLabel = hiddenLabel ? `label="Lorem"` : `[label]="label"`;
-	const labelTemplate = hiddenLabel
-		? ``
-		: `<ng-template #label>
-	Lorem${numericBadgeComponent}
-</ng-template>
-`;
+	// A hidden label requires a text label: the projected label (with its numeric badge) is only used when the label is displayed
+	const richContent = args.richContent && !(args.withIcon && args.hiddenLabel);
+	const firstLabel = richContent ? `` : ` label="Lorem"`;
+	const projectedLabel = richContent
+		? `
+		<ng-container luSegmentedControlTabsPanelLabel>Lorem <lu-numeric-badge value="8" /></ng-container>`
+		: ``;
 	const icons = ['list', 'tiles', 'mapPlan', 'calendar'].map((icon) => (args.withIcon ? ` icon="${icon}"${args.hiddenLabel ? ' hiddenLabel' : ''}` : ``));
-	return `${labelTemplate}<lu-segmented-control-tabs${size}${vertical}${ariaLabel} [(active)]="active">
-	<lu-segmented-control-tabs-panel ${firstLabel}${icons[0]} value="0">
+	return `<lu-segmented-control-tabs${size}${vertical}${ariaLabel} [(active)]="active">
+	<lu-segmented-control-tabs-panel${firstLabel}${icons[0]} value="0">${projectedLabel}
 		<div class="demo">Content Lorem</div>
 	</lu-segmented-control-tabs-panel>
 	<lu-segmented-control-tabs-panel label="Ipsum"${icons[1]} value="1">
@@ -108,12 +104,12 @@ const Template = (args: segmentedControlBasicStory) => ({
 export const Basic: StoryObj<segmentedControlBasicStory> = {
 	args: {
 		small: false,
-		withNumericBadge: false,
 		vertical: false,
 		ariaLabel: 'Lorem ipsum',
 		withIcon: false,
 		hiddenLabel: false,
 		active: '0',
+		richContent: false,
 	},
 	render: Template,
 };

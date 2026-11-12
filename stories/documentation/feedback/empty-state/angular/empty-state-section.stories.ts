@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { BUBBLE_ILLUSTRATION } from '@lucca-front/ng/bubble-illustration';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EMPTY_STATE_HEADING_LEVEL, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HEADING_LEVEL, EmptyStateDescriptionDirective, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
 import { PaletteArgType } from '../../../../helpers/common-arg-types';
@@ -11,15 +11,18 @@ export default {
 	component: EmptyStateSectionComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [EmptyStateSectionComponent, ButtonComponent, HttpClientModule],
+			imports: [EmptyStateSectionComponent, EmptyStateDescriptionDirective, ButtonComponent, HttpClientModule],
 		}),
 	],
 	render: (args) => {
 		const { heading, description, center, palette, headingLevel, illustration, action } = args;
+		const richContent = args['richContent'];
+		const descriptionArg = richContent ? `` : ` description="${description}"`;
+		const projectedDescription = richContent ? `\n\t<p luEmptyStateDescription>You have <strong>no pending request</strong> yet. New requests will appear here.</p>` : ``;
 		const paletteArg = palette ? ` palette="${palette}"` : ``;
 		const actionArg = action ? ` action` : ``;
 		return {
-			template: `<lu-empty-state-section illustration="${illustration}" headingLevel="${headingLevel}" heading="${heading}" description="${description}"${actionArg}${paletteArg}${center ? ' center' : ''}>
+			template: `<lu-empty-state-section illustration="${illustration}" headingLevel="${headingLevel}" heading="${heading}"${descriptionArg}${actionArg}${paletteArg}${center ? ' center' : ''}>${projectedDescription}
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-section>`,
@@ -62,19 +65,25 @@ export default {
 			table: { category: 'inputs' },
 		},
 		description: {
-			description: 'Description de l’empty state. [PortalContent]',
+			if: { arg: 'richContent', truthy: false },
+			description: 'Texte affiché sous le titre. Contenu riche : directive <code>luEmptyStateDescription</code> (l’input prévaut).',
 			table: { category: 'inputs' },
+		},
+		richContent: {
+			description: 'Remplace l’input <code>description</code> par un contenu riche projeté avec la directive <code>luEmptyStateDescription</code>.',
+			table: { category: 'story' },
 		},
 	},
 } as Meta;
 
-export const Section: StoryObj<EmptyStateSectionComponent> = {
+export const Section: StoryObj<EmptyStateSectionComponent & { richContent: boolean }> = {
 	args: {
 		illustration: 'rocket',
 		action: false,
 		heading: 'Empty state section',
-		description: 'Description can be a string or a ng-template',
+		description: 'You have no pending request yet. New requests will appear here.',
 		center: false,
 		headingLevel: 3,
+		richContent: false,
 	},
 };

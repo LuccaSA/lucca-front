@@ -34,6 +34,9 @@
 		<ng-container *ngTemplateOutlet="radioContent" />
 		<ng-container illustration><ng-content select="[illustration]" /></ng-container>
 		<ng-container info><ng-content select="[info]" /></ng-container>
+		@if (framedContentSlot()) {
+			<ng-container luInputFramedContent><ng-content select="[luInputFramedContent]" /></ng-container>
+		}
 	</lu-input-framed>
 } @else {
 	<ng-container *ngTemplateOutlet="radioContent" />

@@ -6,6 +6,7 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	computed,
+	contentChild,
 	contentChildren,
 	DoCheck,
 	effect,
@@ -18,6 +19,7 @@ import {
 	Renderer2,
 	signal,
 	TemplateRef,
+	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
@@ -41,6 +43,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
+import { FormFieldErrorInlineMessageDirective } from './form-field-error-inline-message.directive';
+import { FormFieldInlineMessageDirective } from './form-field-inline-message.directive';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
@@ -163,7 +167,22 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly presentationDisplayTpl = signal<TemplateRef<unknown> | null>(null);
 
-	readonly hasInlineMessage = computed(() => !this.presentationMode() && !!(this.inlineMessage() || (this.invalidStatus() ? this.errorInlineMessage() : false)));
+	private readonly inlineMessageSlot = contentChild(FormFieldInlineMessageDirective, { descendants: false });
+	private readonly errorInlineMessageSlot = contentChild(FormFieldErrorInlineMessageDirective, { descendants: false });
+	private readonly inlineMessageSlotTpl = viewChild<TemplateRef<unknown>>('inlineMessageSlotTpl');
+	private readonly errorInlineMessageSlotTpl = viewChild<TemplateRef<unknown>>('errorInlineMessageSlotTpl');
+
+	/**
+	 * The inline message input, or else the projected `luFormFieldInlineMessage` element
+	 */
+	readonly resolvedInlineMessage = computed(() => this.inlineMessage() || (this.inlineMessageSlot() ? (this.inlineMessageSlotTpl() ?? null) : null));
+
+	/**
+	 * The error inline message input, or else the projected `luFormFieldErrorInlineMessage` element
+	 */
+	readonly resolvedErrorInlineMessage = computed(() => this.errorInlineMessage() || (this.errorInlineMessageSlot() ? (this.errorInlineMessageSlotTpl() ?? null) : null));
+
+	readonly hasInlineMessage = computed(() => !this.presentationMode() && !!(this.resolvedInlineMessage() || (this.invalidStatus() ? this.resolvedErrorInlineMessage() : false)));
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);

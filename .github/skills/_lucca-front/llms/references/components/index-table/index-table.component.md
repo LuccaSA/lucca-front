@@ -96,7 +96,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
-import { INDEX_TABLE_ALIGN, INDEX_TABLE_SORT, IndexTableActionComponent, IndexTableActionFileComponent, IndexTableBodyComponent, IndexTableComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent } from '@lucca-front/ng/index-table';
+import { INDEX_TABLE_ALIGN, INDEX_TABLE_SORT, IndexTableActionComponent, IndexTableActionFileComponent, IndexTableBodyComponent, IndexTableBodyGroupDirective, IndexTableComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowCellComponent, IndexTableRowCellHeaderComponent, IndexTableRowComponent } from '@lucca-front/ng/index-table';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { PaginationComponent } from '@lucca-front/ng/pagination';
 import { LuUserDisplayModule } from '@lucca-front/ng/user';

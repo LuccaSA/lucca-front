@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, FormFieldErrorInlineMessageDirective, FormFieldInlineMessageDirective, InputDirective } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { stateArgType } from '@/helpers/common-arg-types';
@@ -8,7 +8,7 @@ import { stateArgType } from '@/helpers/common-arg-types';
 @Component({
 	selector: 'form-field-stories',
 	templateUrl: './form-field.stories.html',
-	imports: [FormFieldComponent, InputDirective, TextInputComponent, FormsModule],
+	imports: [FormFieldComponent, FormFieldInlineMessageDirective, FormFieldErrorInlineMessageDirective, InputDirective, TextInputComponent, FormsModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FormFieldStory {

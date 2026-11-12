@@ -7,6 +7,8 @@ import { InlineMessageState } from '@lucca-front/ng/inline-message';
 import { firstValueFrom } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { vi } from 'vitest';
+import { FormFieldErrorInlineMessageDirective } from './form-field-error-inline-message.directive';
+import { FormFieldInlineMessageDirective } from './form-field-inline-message.directive';
 import { FormFieldComponent } from './form-field.component';
 import { FormFieldLayout } from './form-field.type';
 import { InputDirective } from './input.directive';
@@ -101,6 +103,33 @@ class FormFieldSwapTestComponent {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FormFieldMultipleInputsTestComponent {}
+
+@Component({
+	selector: 'lu-form-field-projected-messages-test',
+	imports: [FormFieldComponent, FormFieldInlineMessageDirective, FormFieldErrorInlineMessageDirective, InputDirective],
+	template: `
+		<lu-form-field class="projected" label="Projected" [invalid]="invalid()">
+			<input luInput />
+			<ng-container luFormFieldInlineMessage>Helper <strong>text</strong></ng-container>
+			<ng-container luFormFieldErrorInlineMessage>Error <strong>text</strong></ng-container>
+		</lu-form-field>
+		<lu-form-field class="both" label="Both" inlineMessage="Input helper" [invalid]="invalid()" errorInlineMessage="Input error">
+			<input luInput />
+			<ng-container luFormFieldInlineMessage>Projected helper</ng-container>
+			<ng-container luFormFieldErrorInlineMessage>Projected error</ng-container>
+		</lu-form-field>
+		<lu-form-field class="parent" label="Parent" layout="fieldset">
+			<lu-form-field class="child" label="Child">
+				<input luInput />
+				<ng-container luFormFieldInlineMessage>Child helper</ng-container>
+			</lu-form-field>
+		</lu-form-field>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FormFieldProjectedMessagesTestComponent {
+	invalid = input(false);
+}
 
 describe('FormFieldComponent', () => {
 	let fixture: ComponentFixture<FormFieldComponentTestComponent>;
@@ -396,6 +425,64 @@ describe('FormFieldComponent', () => {
 
 			// Act & Assert
 			expect(() => appRef.destroy()).not.toThrow();
+		});
+	});
+
+	describe('projected inline messages', () => {
+		let messagesFixture: ComponentFixture<FormFieldProjectedMessagesTestComponent>;
+		let element: HTMLElement;
+
+		// The message of a field, excluding the ones of nested fields.
+		const message = (selector: string) => element.querySelector(`lu-form-field.${selector} > lu-inline-message, lu-form-field.${selector} > fieldset > lu-inline-message`);
+		const text = (node: Element | null | undefined) => node?.textContent?.replace(/\s+/g, ' ').trim();
+
+		beforeEach(async () => {
+			messagesFixture = TestBed.createComponent(FormFieldProjectedMessagesTestComponent);
+			element = messagesFixture.nativeElement as HTMLElement;
+			messagesFixture.detectChanges();
+			const formFields = messagesFixture.debugElement.queryAll(By.directive(FormFieldComponent)).map((debugElement) => debugElement.componentInstance as FormFieldComponent);
+			// A form field without its own input (the fieldset parent) never becomes ready.
+			const formFieldsWithInput = formFields.filter((formField) => formField.inputs.length > 0);
+			await Promise.all(formFieldsWithInput.map((formField) => firstValueFrom(formField.ready$.pipe(filter(Boolean)))));
+			messagesFixture.detectChanges();
+		});
+
+		it('should render the projected rich message', () => {
+			expect(text(message('projected'))).toBe('Helper text');
+			expect(message('projected')?.querySelector('strong')).not.toBeNull();
+		});
+
+		it('should reference the projected message from the input', () => {
+			const field = element.querySelector('lu-form-field.projected input') as HTMLInputElement;
+
+			expect(field.getAttribute('aria-describedby')).toContain(message('projected')?.id);
+		});
+
+		it('should switch to the projected error message when invalid, and back', () => {
+			messagesFixture.componentRef.setInput('invalid', true);
+			messagesFixture.detectChanges();
+
+			expect(text(message('projected'))).toBe('Error text');
+
+			messagesFixture.componentRef.setInput('invalid', false);
+			messagesFixture.detectChanges();
+
+			expect(text(message('projected'))).toBe('Helper text');
+		});
+
+		it('should give the inputs priority over the projected messages', () => {
+			expect(text(message('both'))).toBe('Input helper');
+
+			messagesFixture.componentRef.setInput('invalid', true);
+			messagesFixture.detectChanges();
+
+			expect(text(message('both'))).toBe('Input error');
+			expect(element.querySelector('lu-form-field.both')?.textContent).not.toContain('Projected');
+		});
+
+		it('should ignore the message of a nested form field', () => {
+			expect(message('parent')).toBeNull();
+			expect(text(message('child'))).toBe('Child helper');
 		});
 	});
 });
