@@ -39,7 +39,7 @@ import { FAVORITE_BUTTON_SIZE, FavoriteComponent, luFavoriteTranslations } from 
 		type="button"
 		class="favorite-button button"
 		aria-pressed="false"
-		luTooltip="Add to favorites"
+		luTooltip="Add to Favorites"
 		luTooltipOnlyForDisplay
 	>
 		<span aria-hidden="true" class="lucca-icon icon-star"></span>
@@ -62,7 +62,7 @@ import { FAVORITE_BUTTON_SIZE, FavoriteComponent, luFavoriteTranslations } from 
 		class="favorite-button button"
 		aria-pressed="false"
 		aria-disabled="true"
-		luTooltip="Add to favorites"
+		luTooltip="Add to Favorites"
 		luTooltipOnlyForDisplay
 	>
 		<span aria-hidden="true" class="lucca-icon icon-star"></span>
@@ -75,7 +75,7 @@ import { FAVORITE_BUTTON_SIZE, FavoriteComponent, luFavoriteTranslations } from 
 		class="favorite-button button"
 		aria-pressed="true"
 		aria-disabled="true"
-		luTooltip="Remove from favorites"
+		luTooltip="Remove from Favorites"
 		luTooltipOnlyForDisplay
 	>
 		<span aria-hidden="true" class="lucca-icon icon-starFilled"></span>
@@ -97,7 +97,7 @@ import { FAVORITE_BUTTON_SIZE, FavoriteComponent, luFavoriteTranslations } from 
 		type="button"
 		class="favorite-button button"
 		aria-pressed="true"
-		luTooltip="Remove from favorites"
+		luTooltip="Remove from Favorites"
 		luTooltipOnlyForDisplay
 	>
 		<span aria-hidden="true" class="lucca-icon icon-starFilled"></span>
@@ -119,7 +119,7 @@ import { FAVORITE_BUTTON_SIZE, FavoriteComponent, luFavoriteTranslations } from 
 		type="button"
 		class="favorite-button button"
 		aria-pressed="false"
-		luTooltip="Add to favorites"
+		luTooltip="Add to Favorites"
 		luTooltipOnlyForDisplay
 	>
 		<span aria-hidden="true" class="lucca-icon icon-star"></span>
@@ -131,7 +131,7 @@ import { FAVORITE_BUTTON_SIZE, FavoriteComponent, luFavoriteTranslations } from 
 		type="button"
 		class="favorite-button button"
 		aria-pressed="false"
-		luTooltip="Add to favorites"
+		luTooltip="Add to Favorites"
 		luTooltipOnlyForDisplay
 	>
 		<span aria-hidden="true" class="lucca-icon icon-star"></span>

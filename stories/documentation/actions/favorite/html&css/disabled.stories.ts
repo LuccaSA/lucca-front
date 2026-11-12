@@ -10,13 +10,13 @@ export default {
 	],
 	render: () => ({
 		template: `<span class="favorite">
-	<button type="button" class="favorite-button button" aria-pressed="false" aria-disabled="true" luTooltip="Add to favorites" luTooltipOnlyForDisplay>
+	<button type="button" class="favorite-button button" aria-pressed="false" aria-disabled="true" luTooltip="Add to Favorites" luTooltipOnlyForDisplay>
 		<span aria-hidden="true" class="lucca-icon icon-star"></span>
 		<span class="pr-u-mask">Favorite</span>
 	</button>
 </span>
 <span class="favorite">
-	<button type="button" class="favorite-button button" aria-pressed="true" aria-disabled="true" luTooltip="Remove from favorites" luTooltipOnlyForDisplay>
+	<button type="button" class="favorite-button button" aria-pressed="true" aria-disabled="true" luTooltip="Remove from Favorites" luTooltipOnlyForDisplay>
 		<span aria-hidden="true" class="lucca-icon icon-starFilled"></span>
 		<span class="pr-u-mask">Favorite</span>
 	</button>

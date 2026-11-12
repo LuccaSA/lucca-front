@@ -10,7 +10,7 @@ export default {
 	],
 	render: () => ({
 		template: `<span class="favorite">
-	<button type="button" class="favorite-button button" aria-pressed="true" luTooltip="Remove from favorites" luTooltipOnlyForDisplay>
+	<button type="button" class="favorite-button button" aria-pressed="true" luTooltip="Remove from Favorites" luTooltipOnlyForDisplay>
 		<span aria-hidden="true" class="lucca-icon icon-starFilled"></span>
 		<span class="pr-u-mask">Favorite</span>
 	</button>

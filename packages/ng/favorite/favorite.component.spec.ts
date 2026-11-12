@@ -110,14 +110,14 @@ describe(FavoriteComponent.name, () => {
 
 		// Assert: the closing tooltip keeps its label
 		expect(requestClose).toHaveBeenCalledOnce();
-		expect(tooltip.tooltipContent()).toBe('Add to favorites');
+		expect(tooltip.tooltipContent()).toBe('Add to Favorites');
 
 		// Act: next hover
 		getButton(fixture).dispatchEvent(new MouseEvent('mouseenter'));
 		fixture.detectChanges();
 
 		// Assert
-		expect(tooltip.tooltipContent()).toBe('Remove from favorites');
+		expect(tooltip.tooltipContent()).toBe('Remove from Favorites');
 
 		// Act
 		fixture.componentInstance.disabled.set(true);
@@ -139,14 +139,14 @@ describe(FavoriteComponent.name, () => {
 		fixture.detectChanges();
 
 		// Assert: frozen while closing
-		expect(tooltip.tooltipContent()).toBe('Add to favorites');
+		expect(tooltip.tooltipContent()).toBe('Add to Favorites');
 
 		// Act: the close delay is over, without any new hover of the button
 		vi.advanceTimersByTime(tooltip.tooltipLeaveDelay());
 		fixture.detectChanges();
 
 		// Assert
-		expect(tooltip.tooltipContent()).toBe('Remove from favorites');
+		expect(tooltip.tooltipContent()).toBe('Remove from Favorites');
 		vi.useRealTimers();
 	});
 
