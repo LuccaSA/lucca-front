@@ -43,7 +43,7 @@ import path from 'path';
 import { extractPackageAPI } from './collectors/ast-extractor';
 import { promoteEagerly } from './collectors/git-snapshot';
 import { fetchStorybookIndex, restrictToStoryFamily, setStorybookIndexFile } from './collectors/storybook';
-import { readStorySourceFromGit, extractBasicUsage, inferScssImports, formatStoryTemplates, resolveScssComponentName, listScssComponentNames, sanitizeScssForwards } from './collectors/story-source';
+import { readStorySourceFromGit, findInputDescription, extractBasicUsage, inferScssImports, formatStoryTemplates, resolveScssComponentName, listScssComponentNames, sanitizeScssForwards } from './collectors/story-source';
 import { buildInputDefaults } from './collectors/story-eval';
 import { fetchZeroHeightPageGuarded, setAcceptShrink as setZhAcceptShrink, setOffline as setZhOffline } from './collectors/zeroheight-fetch';
 import {
@@ -849,8 +849,7 @@ async function processVersion(
 			if (storyResult?.inputDescriptions && api) {
 				for (const apiClass of api.apis) {
 					for (const inp of apiClass.inputs) {
-						const desc = storyResult.inputDescriptions.get(inp.bindingName)
-							?? storyResult.inputDescriptions.get(inp.propName);
+						const desc = findInputDescription(storyResult.inputDescriptions, apiClass, inp);
 						if (desc) inp.description = desc;
 					}
 				}

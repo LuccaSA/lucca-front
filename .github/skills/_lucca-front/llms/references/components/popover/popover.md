@@ -65,7 +65,7 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 | `inputPosition` | `luPopoverPosition` | `'above' \| 'below' \| 'before' \| 'after'` | `undefined` | — | — | Position du popover par rapport à son déclencheur. |
 | `inputAlignment` | `luPopoverAlignment` | `'top' \| 'bottom' \| 'left' \| 'right' \| 'center'` | `undefined` | — | — | Alignement du popover par rapport à son déclencheur. |
 | `inputOverlap` | `luPopoverOverlap` | `boolean` | `undefined` | — | — | Affiche le popover par-dessus son déclencheur. |
-| `inputOffsetX` | `luPopoverOffsetX` | `number` | `undefined` | — | — | — |
+| `inputOffsetX` | `luPopoverOffsetX` | `number` | `undefined` | — | — | Décalage horizontal du popover, en pixels. |
 | `inputOffsetY` | `luPopoverOffsetY` | `number` | `undefined` | — | — | — |
 
 ### LuPopoverTriggerDirective (directive)
@@ -89,7 +89,7 @@ import { LuPopoverPanelComponent, LuPopoverTargetDirective, LuPopoverTriggerDire
 | `inputLeaveDelay` | `luPopoverLeaveDelay` | `number` | `undefined` | — | — | Délai en millisecondes avant la fermeture du popover, lorsque `luPopoverTrigger` vaut `hover`. |
 | `inputDisabled` | `luPopoverDisabled` | `boolean` | `undefined` | — | — | Empêche l’ouverture du popover. |
 | `inputOverlap` | `luPopoverOverlap` | `boolean` | `undefined` | — | — | Affiche le popover par-dessus son déclencheur. |
-| `inputOffsetX` | `luPopoverOffsetX` | `number` | `undefined` | — | — | — |
+| `inputOffsetX` | `luPopoverOffsetX` | `number` | `undefined` | — | — | Décalage horizontal du popover, en pixels. |
 | `inputOffsetY` | `luPopoverOffsetY` | `number` | `undefined` | — | — | — |
 
 #### Outputs

@@ -36,7 +36,7 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `string` | — | ✅ | — | Titre affiché dans l’en-tête du composant. Requis. |
+| `label` | `label` | `string` | — | ✅ | — | Titre de la liste. Par défaut, le libellé traduit « Demandes à approuver ». [PortalContent] |
 
 ### ApprobationInboxHeaderComponent (component)
 
@@ -80,7 +80,7 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `label` | `label` | `string` | — | ✅ | — | Titre affiché dans l’en-tête du composant. Requis. |
+| `label` | `label` | `string` | — | ✅ | — | — |
 
 #### Models (two-way binding)
 
@@ -128,7 +128,7 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `label` | `label` | `PortalContent` | `getIntl(LU_APPROBATION_INBOX_LIST_TRANSLATIONS).label` | — | — | Titre affiché dans l’en-tête du composant. Requis. |
+| `label` | `label` | `PortalContent` | `getIntl(LU_APPROBATION_INBOX_LIST_TRANSLATIONS).label` | — | — | Titre de la liste. Par défaut, le libellé traduit « Demandes à approuver ». [PortalContent] |
 | `selectable` | `selectable` | `boolean` | `false` | — | `booleanAttribute` | Active la sélection multiple |
 | `detailsComponent` | `detailsComponent` | `ApprobationInboxDetailComponent` | — | ✅ | — | Référence du composant lu-approbation-inbox-detail associé, affiché dans une modale lorsqu’un élément est ouvert sous le… |
 | `emptyIllustration` | `emptyIllustration` | `BubbleIllustration \| string` | `'magnifyingGlass'` | — | — | Illustration affichée lorsque la liste est vide. |

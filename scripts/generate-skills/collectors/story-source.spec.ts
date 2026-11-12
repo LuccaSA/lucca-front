@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deriveFullName, disambiguateNames, extractArgTypeDescriptions } from './story-source';
+import { deriveFullName, disambiguateNames, extractArgTypeDescriptions, findInputDescription } from './story-source';
 
 /**
  * Two stories in one section must not end up under the same `###`: the page then shows two
@@ -83,30 +83,90 @@ describe('extractArgTypeDescriptions', () => {
 	it('reads a description on the same line', () => {
 		const content = story("\t\tlabel: {\n\t\t\tdescription: 'Short label.',\n\t\t\ttable: { category: 'inputs' },\n\t\t},");
 
-		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Short label.' }]);
+		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Short label.', host: null, scopedHosts: [] }]);
 	});
 
 	it('reads a description wrapped onto the next line', () => {
 		const content = story("\t\tlabel: {\n\t\t\tdescription:\n\t\t\t\t'Wrapped <code>label</code>.',\n\t\t\ttable: { category: 'inputs' },\n\t\t},");
 
-		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Wrapped label.' }]);
+		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Wrapped label.', host: null, scopedHosts: [] }]);
 	});
 
 	it('unescapes escaped quotes', () => {
 		const content = story("\t\tlabel: {\n\t\t\tdescription: 'Type <code>Config&lt;\\'fixed\\'&gt;</code>.',\n\t\t},");
 
-		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: "Type Config&lt;'fixed'&gt;." }]);
+		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: "Type Config&lt;'fixed'&gt;.", host: null, scopedHosts: [] }]);
 	});
 
 	it('keeps an escaped backslash apart from a line break', () => {
 		const content = story("\t\tlabel: {\n\t\t\tdescription: 'Keeps `\\\\n` as text.\\nNext line.',\n\t\t},");
 
-		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Keeps `\\n` as text. Next line.' }]);
+		expect(extractArgTypeDescriptions(content)).toEqual([{ name: 'label', description: 'Keeps `\\n` as text. Next line.', host: null, scopedHosts: [] }]);
+	});
+
+	it('ignores a control of the story itself', () => {
+		const content = story("\t\tresponsive: {\n\t\t\tdescription: 'Story-only @let.',\n\t\t\ttable: { category: 'story' },\n\t\t},");
+
+		expect(extractArgTypeDescriptions(content)).toEqual([]);
+	});
+
+	it('records the host of a per-host category', () => {
+		const content = story(
+			"\t\tsmall: {\n\t\t\tdescription: 'List size.',\n\t\t\ttable: { category: 'inputs' },\n\t\t},\n\t\tclickable: {\n\t\t\tdescription: 'Item click.',\n\t\t\ttable: { category: 'inputs (sortable-list-item)' },\n\t\t},",
+		);
+
+		expect(extractArgTypeDescriptions(content)).toEqual([
+			{ name: 'small', description: 'List size.', host: null, scopedHosts: ['sortable-list-item'] },
+			{ name: 'clickable', description: 'Item click.', host: 'sortable-list-item', scopedHosts: ['sortable-list-item'] },
+		]);
 	});
 
 	it('ignores a description key not followed by a string', () => {
 		const content = story('\t\tlabel: {\n\t\t\tdescription:\n\t\t\t\tgetDescription(),\n\t\t},');
 
 		expect(extractArgTypeDescriptions(content)).toEqual([]);
+	});
+});
+
+/**
+ * Inputs are matched by name across every class of the entrypoint: without the host, a list's
+ * `small` documented the item's `small` too.
+ */
+describe('findInputDescription', () => {
+	const api = (...selectors: string[]) => ({ selectors }) as never;
+	const input = { bindingName: 'small', propName: 'small' };
+	const scopedHosts = ['sortable-list-item', 'th[luDataTableCell]', 'luSkipLinkTarget'];
+	const main = { name: 'small', description: 'List size.', host: null, scopedHosts };
+
+	it('gives a plain description to the main host', () => {
+		expect(findInputDescription([main], api('lu-sortable-list'), input)).toBe('List size.');
+	});
+
+	it('keeps a plain description away from a host documented on its own', () => {
+		expect(findInputDescription([main], api('lu-sortable-list-item'), input)).toBeUndefined();
+	});
+
+	it('gives a per-host description to that host only', () => {
+		const item = { name: 'small', description: 'Item size.', host: 'sortable-list-item', scopedHosts };
+
+		expect(findInputDescription([item, main], api('lu-sortable-list-item'), input)).toBe('Item size.');
+		expect(findInputDescription([item, main], api('lu-sortable-list'), input)).toBe('List size.');
+	});
+
+	it('matches attribute and directive selectors', () => {
+		const cell = { name: 'small', description: 'Cell.', host: 'th[luDataTableCell]', scopedHosts };
+		const target = { name: 'small', description: 'Target.', host: 'luSkipLinkTarget', scopedHosts };
+
+		expect(findInputDescription([cell], api('th[luDataTableCell]'), input)).toBe('Cell.');
+		expect(findInputDescription([target], api('[luSkipLinkTarget]'), input)).toBe('Target.');
+
+		const action = { name: 'small', description: 'Action.', host: 'list-action', scopedHosts: ['list-action'] };
+		expect(findInputDescription([action], api('a[lu-list-action]'), input)).toBe('Action.');
+	});
+
+	it('applies no description of a host that is not a class', () => {
+		const ngModel = { name: 'small', description: 'Form control.', host: 'ngModel', scopedHosts: ['ngModel'] };
+
+		expect(findInputDescription([ngModel], api('lu-sortable-list'), input)).toBeUndefined();
 	});
 });

@@ -47,7 +47,7 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 | `inlineMessageState` | `inlineMessageState` | `InlineMessageState \| null` | `null` | — | — | Modifie l’état de l’inline message. |
 | `size` | `size` | `FormFieldSize \| null` | `null` | — | — | — |
 | `extraDescribedBy` | `extraDescribedBy` | `string` | `''` | — | — | — |
-| `counter` | `counter` | `number` | `0` | — | `luNumberAttribute` | — |
+| `counter` | `counter` | `number` | `0` | — | `luNumberAttribute` | Nombre de caractères maximum autorisés pour un champ de type texte. A seulement un impact sur l’interface et doit être c… |
 | `presentation` | `presentation` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 #### Models (two-way binding)

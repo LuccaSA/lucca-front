@@ -27,7 +27,7 @@ import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-in
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `string` | — | — | — | Modifie le label du champ. Également transmis à l’input label de lu-phone-number-input, qui en a besoin pour l’accessibi… |
+| `label` | `label` | `string` | — | — | — | — |
 | `autocomplete` | `autocomplete` | `'off' \| 'tel'` | — | — | — | — |
 | `allowedCountries` | `allowedCountries` | `ReadonlyArray<CountryCode \| string>` | `[]` | — | — | — |
 | `noAutoPlaceholder` | `noAutoPlaceholder` | `boolean` | `false` | — | `luBooleanAttribute` | — |

@@ -34,7 +34,7 @@ import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 | `plainText` | `plainText` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche les retours à la ligne (`\n`) du contenu au lieu de les fusionner en espaces. Destiné à du texte brut, comme la … |
 | `textFlow` | `textFlow` | `boolean` | `false` | — | `luBooleanAttribute` | Applique les espacements du composant Text flow |
 | `surface` | `surface` | `ReadMoreSurface \| string \| null` | `null` | — | — | Modifie la couleur de fond sous le bouton "Lire plus / moins" |
-| `innerContent` | `innerContent` | `null \| string` | `null` | — | — | Passe le contenu de l’exemple via l’input `innerContent` (`string | null`, injecté en innerHTML) au lieu de le projeter … |
+| `innerContent` | `innerContent` | `null \| string` | `null` | — | — | — |
 
 ### Injection tokens
 

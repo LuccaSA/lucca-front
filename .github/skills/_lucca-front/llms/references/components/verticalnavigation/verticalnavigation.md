@@ -30,7 +30,7 @@ import { VerticalNavigationLinkComponent, VerticalNavigationComponent, VerticalN
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Ajoute une icône au groupe. |
+| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | — |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive les liens (`luVerticalNavigationLink`) et le groupe (`lu-vertical-navigation-group`). |
 
 ### VerticalNavigationComponent (component)
@@ -70,8 +70,8 @@ import { VerticalNavigationLinkComponent, VerticalNavigationComponent, VerticalN
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `label` | `label` | `string \| null` | `null` | — | — | Modifie le texte du groupe. [PortalContent] |
-| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | Ajoute une icône au groupe. |
+| `label` | `label` | `string \| null` | `null` | — | — | — |
+| `icon` | `icon` | `LuccaIcon \| null` | `null` | — | — | — |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive les liens (`luVerticalNavigationLink`) et le groupe (`lu-vertical-navigation-group`). |
 
 #### Models (two-way binding)

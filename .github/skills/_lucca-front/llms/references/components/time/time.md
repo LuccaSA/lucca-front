@@ -37,7 +37,7 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `step` | `step` | `ISO8601Duration \| null` | `null` | — | — | — |
-| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ. |
+| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ (appliquée à `lu-form-field` et à `lu-time-range-picker`). |
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `max` | `max` | ``${string}P${string}`` | `'PT99H'` | — | — | — |
 | `displayArrows` | `displayArrows` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche les boutons d’incrémentation. |
@@ -66,7 +66,7 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `step` | `step` | `ISO8601Duration \| null` | `null` | — | — | — |
-| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ. |
+| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ (appliquée à `lu-form-field` et à `lu-time-range-picker`). |
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `max` | `max` | ``${string}:${string}:${string}`` | `MAX_TIME` | — | — | — |
 | `displayArrows` | `displayArrows` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche les boutons d’incrémentation. |
@@ -102,7 +102,7 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 | `displayArrows` | `displayArrows` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche les boutons d’incrémentation. |
 | `forceMeridiemDisplay` | `forceMeridiemDisplay` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ. |
+| `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ (appliquée à `lu-form-field` et à `lu-time-range-picker`). |
 | `max` | `max` | ``${string}:${string}:${string}`` | `MAX_TIME` | — | — | — |
 | `step` | `step` | `ISO8601Duration \| null` | `null` | — | — | — |
 

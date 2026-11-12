@@ -32,7 +32,7 @@ import { CalloutPopoverComponent } from '@lucca-front/ng/callout';
 | `closeDelay` | `closeDelay` | `number` | `500` | — | `luNumberAttribute` | — |
 | `buttonLabel` | `buttonLabel` | `string \| number` | — | — | — | Label du bouton. |
 | `buttonAlt` | `buttonAlt` | `string` | `''` | — | — | Information restituée par le bouton. |
-| `headingHiddenIfSingleItem` | `headingHiddenIfSingleItem` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `headingHiddenIfSingleItem` | `headingHiddenIfSingleItem` | `boolean` | `false` | — | `luBooleanAttribute` | Masque le titre si le popover ne contient qu’un élément. |
 | `popoverTrigger` | `popoverTrigger` | `'click' \| 'click+hover' \| 'hover+focus'` | `'click+hover'` | — | — | — |
 | `palette` | `palette` | `Palette` | `'none'` | — | — | — |
 | `size` | `size` | `'M' \| 'S' \| 'XS'` | — | — | — | — |
