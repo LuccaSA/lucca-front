@@ -2,9 +2,11 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, isNotNil, luBooleanAttribute, luNullableNumberAttribute, luNumberAttribute, PortalDirective } from '@lucca-front/ng/core';
 import { FormFieldWidth, InputDirective, ɵPresentationDisplayDefaultDirective, ɵPresentationNoValueComponent } from '@lucca-front/ng/form-field';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
@@ -18,6 +20,8 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 	selector: 'lu-text-input',
 	imports: [
 		InputDirective,
+		ButtonComponent,
+		IconComponent,
 		ReactiveFormsModule,
 		FormFieldIdDirective,
 		NgTemplateOutlet,
