@@ -97,23 +97,37 @@ export function isVitestBrowser(): boolean {
 	return '__vitest_browser__' in globalThis;
 }
 
-export function publicApiHandler<T>(items: T[], matchesSearch: (item: T, search: string) => boolean): Parameters<typeof http.get>[1] {
+export interface PublicApiHandlerOptions<T> {
+	filters?: Record<string, (item: T, values: string[]) => boolean>;
+	sort?: (items: T[], sort: string) => T[];
+	embedded?: (items: T[]) => Record<string, Record<string, unknown>>;
+}
+
+export function publicApiHandler<T>(items: T[], matchesSearch: (item: T, search: string) => boolean, options: PublicApiHandlerOptions<T> = {}): Parameters<typeof http.get>[1] {
 	return async ({ request }) => {
 		await delay(300);
 		const url = new URL(request.url);
 		const search = url.searchParams.get('search')?.toLowerCase();
+		const sort = url.searchParams.get('sort');
 		const limit = parseInt(url.searchParams.get('limit') ?? '25');
 		const offset = parseInt(url.searchParams.get('page')?.slice(1) ?? '0');
 		const include = url.searchParams.get('include')?.split(',') ?? [];
-		const filtered = search ? items.filter((item) => matchesSearch(item, search)) : items;
+		let filtered = search ? items.filter((item) => matchesSearch(item, search)) : items;
+		for (const [param, matches] of Object.entries(options.filters ?? {})) {
+			const values = url.searchParams.get(param)?.split(',');
+			filtered = values ? filtered.filter((item) => matches(item, values)) : filtered;
+		}
+		filtered = sort && options.sort ? options.sort(filtered, sort) : filtered;
+		const page = filtered.slice(offset, offset + limit);
 		const nextOffset = offset + limit;
 		const nextUrl = new URL(url);
 		nextUrl.searchParams.set('page', `!${nextOffset}`);
 
 		return HttpResponse.json({
-			items: filtered.slice(offset, nextOffset),
+			items: page,
 			...(include.includes('totalCount') ? { totalCount: filtered.length } : {}),
 			...(include.includes('links') ? { links: { next: nextOffset < filtered.length ? { href: nextUrl.toString(), cursor: `!${nextOffset}` } : null } } : {}),
+			...(include.includes('embedded') && options.embedded ? { embedded: options.embedded(page) } : {}),
 		});
 	};
 }

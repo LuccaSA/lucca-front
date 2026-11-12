@@ -8,15 +8,17 @@ Pour un format de retour V3, V4 ou V5 sans customisation de l'affichage (l'entit
 <lu-simple-select apiV4="/api/legumes" />
 
 <lu-simple-select apiV5="/api/legumes" sort="name" />
+
+<lu-simple-select apiV5="/api/legumes" apiVersion="2025-01-01" />
 ```
 
-Pour l'API publique Lucca, la directive `publicApi` envoie en plus la version demandée dans l'en-tête `Api-Version` :
+`apiVersion` est facultatif sur `apiV5` : il est envoyé dans l'en-tête `Api-Version` quand il est renseigné. Pour l'API publique Lucca, la directive `publicApi` rend cet input obligatoire :
 
 ```html
 <lu-simple-select publicApi="/lucca-api/departments" apiVersion="2024-11-01" sort="name" />
 ```
 
-Les directives `publicEmployees`, `publicEstablishments` et `publicDepartments` appellent directement les collections correspondantes de l'API publique.
+Les directives `publicEmployees`, `publicEstablishments`, `publicDepartments`, `publicJobQualifications` et `publicOccupationCategories` appellent directement les collections correspondantes de l'API publique.
 
 ### Personnaliser l'affichage
 

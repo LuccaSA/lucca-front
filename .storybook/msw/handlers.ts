@@ -43,12 +43,22 @@ const usersSearchHandler = genericHandler(
 );
 
 type MockDepartmentNode = { node: { id: number; name: string }; children?: MockDepartmentNode[] };
-const flattenDepartments = (nodes: MockDepartmentNode[]): { id: string; name: string }[] =>
-	nodes.flatMap(({ node, children }) => [{ id: `${node.id}`, name: node.name }, ...flattenDepartments(children ?? [])]);
+type PublicApiDepartment = { id: string; name: string; parent: { id: string } | null; sortOrder: number };
+const flattenDepartments = (nodes: MockDepartmentNode[], parent: { id: string } | null = null): PublicApiDepartment[] =>
+	nodes.flatMap(({ node, children }, sortOrder) => [{ id: `${node.id}`, name: node.name, parent, sortOrder }, ...flattenDepartments(children ?? [], { id: `${node.id}` })]);
 
 const publicApiEmployees = mockUsers.map(({ id, firstName, lastName }) => ({ id: `${id}`, givenName: firstName, familyName: lastName })).sort((a, b) => a.familyName.localeCompare(b.familyName));
 const publicApiDepartments = flattenDepartments(mockDepartmentsTree).sort((a, b) => a.name.localeCompare(b.name));
-const publicApiEstablishments = mockEstablishments.map(({ id, name }) => ({ id: `${id}`, name }));
+const publicApiEstablishments = mockEstablishments.map(({ id, name, legalUnit }) => ({ id: `${id}`, name, legalEntity: { id: `${legalUnit.id}`, type: 'legal-entity' } }));
+const publicApiLegalEntities = Object.fromEntries(mockLegalUnits.map(({ id, name }) => [`${id}`, { id: `${id}`, type: 'legal-entity', legalName: name }]));
+const publicApiProfessions = [...new Map(mockJobQualifications.map(({ job }) => [job.id, { id: `${job.id}`, title: job.name }])).values()];
+const publicApiJobQualifications = mockJobQualifications.map(({ id, name, job, level }) => ({ id: `${id}`, title: name, profession: { id: `${job.id}` }, rank: level.position }));
+const publicApiOccupationCategories = mockOccupationCategories.map(({ id, name }) => ({ id: `${id}`, title: name }));
+const professionTitle = (id: string) => publicApiProfessions.find((profession) => profession.id === id)?.title ?? '';
+const sortJobQualifications = (items: typeof publicApiJobQualifications, sort: string) =>
+	[...items].sort((a, b) =>
+		sort === 'name' ? a.title.localeCompare(b.title) : sort === 'rank' ? a.rank - b.rank : professionTitle(a.profession.id).localeCompare(professionTitle(b.profession.id)) || a.rank - b.rank,
+	);
 
 const PLACEHOLDER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" viewBox="0 0 1 1"></svg>';
 
@@ -336,6 +346,26 @@ export const handlers = [
 	),
 	http.get(
 		'/lucca-api/business-establishments',
-		publicApiHandler(publicApiEstablishments, (establishment, search) => establishment.name.toLowerCase().includes(search)),
+		publicApiHandler(publicApiEstablishments, (establishment, search) => establishment.name.toLowerCase().includes(search), {
+			filters: { 'legalEntity.id': (establishment, ids) => ids.includes(establishment.legalEntity.id) },
+			embedded: (establishments) => ({
+				'legal-entity': Object.fromEntries(establishments.map(({ legalEntity }) => [legalEntity.id, publicApiLegalEntities[legalEntity.id]])),
+			}),
+		}),
+	),
+	http.get(
+		'/lucca-api/professions',
+		publicApiHandler(publicApiProfessions, (profession, search) => profession.title.toLowerCase().includes(search)),
+	),
+	http.get(
+		'/lucca-api/job-qualifications',
+		publicApiHandler(publicApiJobQualifications, (jobQualification, search) => jobQualification.title.toLowerCase().includes(search), {
+			filters: { 'profession.id': (jobQualification, ids) => ids.includes(jobQualification.profession.id) },
+			sort: sortJobQualifications,
+		}),
+	),
+	http.get(
+		'/lucca-api/occupation-categories',
+		publicApiHandler(publicApiOccupationCategories, (occupationCategory, search) => occupationCategory.title.toLowerCase().includes(search)),
 	),
 ];

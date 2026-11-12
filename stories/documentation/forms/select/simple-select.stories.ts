@@ -17,9 +17,9 @@ import {
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive, LuCoreSelectApiV5Directive, LuCoreSelectPublicApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective, LuCoreSelectPublicDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective, LuCoreSelectPublicEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
-import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectJobQualificationsDirective, LuCoreSelectPublicJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
-import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
+import { LuCoreSelectOccupationCategoriesDirective, LuCoreSelectPublicOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectPublicEmployeesDirective, LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -640,7 +640,8 @@ export const PublicEmployee = generateStory({
 
 export const PublicEstablishment = generateStory({
 	name: 'Public Establishment Select',
-	description: 'Pour saisir un établissement depuis l’API publique Lucca, il suffit d’utiliser la directive `publicEstablishments`. Seuls les établissements non archivés sont proposés par défaut.',
+	description:
+		'Pour saisir un établissement depuis l’API publique Lucca, il suffit d’utiliser la directive `publicEstablishments`. Seuls les établissements non archivés sont proposés par défaut, groupés par entité légale quand il y en a plusieurs.',
 	template: `<lu-simple-select
 	publicEstablishments
 	[(ngModel)]="selectedEstablishment"
@@ -656,7 +657,7 @@ export const PublicEstablishment = generateStory({
 
 export const PublicDepartment = generateStory({
 	name: 'Public Department Select',
-	description: 'Pour saisir un département depuis l’API publique Lucca, il suffit d’utiliser la directive `publicDepartments`. Les départements non archivés sont proposés à plat, triés par nom.',
+	description: 'Pour saisir un département depuis l’API publique Lucca, il suffit d’utiliser la directive `publicDepartments`. Les départements non archivés sont proposés en arbre.',
 	template: `<lu-simple-select
 	publicDepartments
 	[(ngModel)]="selectedDepartment"
@@ -664,6 +665,38 @@ export const PublicDepartment = generateStory({
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/department': ['LuCoreSelectPublicDepartmentsDirective'],
+	},
+	storyPartial: {
+		play: null,
+	},
+});
+
+export const PublicJobQualification = generateStory({
+	name: 'Public JobQualification Select',
+	description: 'Pour saisir une qualification depuis l’API publique Lucca, il suffit d’utiliser la directive `publicJobQualifications`. Les qualifications sont groupées par métier.',
+	template: `<lu-simple-select
+	publicJobQualifications
+	[(ngModel)]="selectedJobQualifications"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/job-qualification': ['LuCoreSelectPublicJobQualificationsDirective'],
+	},
+	storyPartial: {
+		play: null,
+	},
+});
+
+export const PublicOccupationCategory = generateStory({
+	name: 'Public OccupationCategory Select',
+	description: 'Pour saisir une catégorie socioprofessionnelle (CSP) depuis l’API publique Lucca, il suffit d’utiliser la directive `publicOccupationCategories`.',
+	template: `<lu-simple-select
+	publicOccupationCategories
+	[(ngModel)]="selectedOccupationCategory"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/occupation-category': ['LuCoreSelectPublicOccupationCategoriesDirective'],
 	},
 	storyPartial: {
 		play: null,
@@ -907,6 +940,8 @@ const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAlias
 				LuCoreSelectPublicEmployeesDirective,
 				LuCoreSelectPublicEstablishmentsDirective,
 				LuCoreSelectPublicDepartmentsDirective,
+				LuCoreSelectPublicJobQualificationsDirective,
+				LuCoreSelectPublicOccupationCategoriesDirective,
 				LuCoreSelectNoClueDirective,
 				LuCoreSelectEstablishmentsDirective,
 				LuCoreSelectCustomEstablishmentsDirective,
