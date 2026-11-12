@@ -14,8 +14,13 @@ export type CalloutPopoverSize = (typeof CALLOUT_POPOVER_SIZE)[number];
 export const CalloutStates = ['success', 'warning', 'error'] as const;
 export type CalloutState = (typeof CalloutStates)[number];
 
-export const CALLOUT_HX = [1, 2, 3, 4, 5, 6] as const;
-export type CalloutHx = (typeof CALLOUT_HX)[number];
+export const CALLOUT_HEADING_LEVEL = [1, 2, 3, 4, 5, 6] as const;
+export type CalloutHeadingLevel = (typeof CALLOUT_HEADING_LEVEL)[number];
+
+/** @deprecated use `CALLOUT_HEADING_LEVEL` instead */
+export const CALLOUT_HX = CALLOUT_HEADING_LEVEL;
+/** @deprecated use `CalloutHeadingLevel` instead */
+export type CalloutHx = CalloutHeadingLevel;
 
 export const CalloutStateMap: Record<CalloutState, { icon: LuccaIcon; palette: Palette }> = {
 	success: {

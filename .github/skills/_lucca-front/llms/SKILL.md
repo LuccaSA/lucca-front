@@ -174,6 +174,7 @@ Bouton → API : `./references/components/button/button.md`, Design : `./referen
 - numbers
 - numericbadge
 - onboarding-empty-state
+- ornament
 - pageheader
 - pagination
 - phonenumberfield

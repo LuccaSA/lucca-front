@@ -2,7 +2,7 @@ import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories'
 
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
-	CALLOUT_HX,
+	CALLOUT_HEADING_LEVEL,
 	CALLOUT_SIZE,
 	CalloutActionsComponent,
 	CalloutComponent,
@@ -24,10 +24,10 @@ export default {
 		}),
 	],
 	render: (args, context) => {
-		const { palette, heading, hx, actions, actionsInline, ...inputs } = args;
+		const { palette, heading, headingLevel, actions, actionsInline, ...inputs } = args;
 		const paletteArg = palette ? ` palette="${palette}"` : '';
 		const headingArg = heading ? ` heading="${heading}"` : ``;
-		const hxArg = heading && hx ? ` hx="${hx}"` : ``;
+		const headingLevelArg = heading && headingLevel ? ` headingLevel="${headingLevel}"` : ``;
 
 		const actionsInlineArg = actionsInline ? ` inline` : ``;
 		const actionsTemplate = actions
@@ -42,7 +42,7 @@ export default {
 			props: {
 				...args,
 			},
-			template: `<lu-callout${headingArg}${hxArg}${paletteArg}${generateInputs(inputs, context.argTypes)} (removedChange)="removedChange($event)">
+			template: `<lu-callout${headingArg}${headingLevelArg}${paletteArg}${generateInputs(inputs, context.argTypes)} (removedChange)="removedChange($event)">
 	<p>Feedback description</p>${actionsTemplate}
 </lu-callout>`,
 		};
@@ -100,15 +100,20 @@ export default {
 			description: 'Ajoute un titre au callout. [PortalContent]',
 			table: { category: 'inputs' },
 		},
-		hx: {
-			name: '↳ hx',
-			options: setStoryOptions(CALLOUT_HX),
+		headingLevel: {
+			name: '↳ headingLevel',
+			options: setStoryOptions(CALLOUT_HEADING_LEVEL),
 			control: {
 				type: 'select',
 			},
-			description: '[v21.4] Applique un niveau sémantique au titre.',
+			description: '[v22.2] Applique un niveau sémantique au titre.',
 			if: { arg: 'heading', truthy: true },
 			table: { category: 'inputs' },
+		},
+		hx: {
+			control: false,
+			description: '[Déprécié] Utiliser <code>headingLevel</code>.',
+			table: { category: 'inputs (deprecated)' },
 		},
 		removedChange: {
 			description: 'Événement déclenché lors de l’activation du bouton de suppression.',

@@ -15,7 +15,7 @@ export default {
 		}),
 	],
 	render: (args) => {
-		const { heading, hx } = args;
+		const { heading, headingLevel } = args;
 		const paramIllustrationUrl = args['src'] === '' ? `` : ` src="${args['src']}"`;
 		const paramIllustrationAlt = args['alt'] === '' ? `` : ` alt="${args['alt']}"`;
 		return {
@@ -48,7 +48,7 @@ lu-empty-state-page {
 	[slotTop]="slotTop"
 	[illustration]="illustration"
 	[description]="description"
-	hx="${hx}"
+	headingLevel="${headingLevel}"
 >
 	<button luButton type="button">Créer une campagne</button>
 </lu-empty-state-page>
@@ -71,7 +71,7 @@ lu-empty-state-page {
 			description: 'Titre de l’empty state.',
 			table: { category: 'inputs' },
 		},
-		hx: {
+		headingLevel: {
 			control: {
 				type: 'number',
 				min: 1,
@@ -79,6 +79,11 @@ lu-empty-state-page {
 			},
 			description: 'Définit le niveau sémantique du titre.',
 			table: { category: 'inputs', defaultValue: { summary: '1' } },
+		},
+		hx: {
+			control: false,
+			description: '[Déprécié] Utiliser <code>headingLevel</code>.',
+			table: { category: 'inputs (deprecated)' },
 		},
 		src: {
 			description: 'URL de l’illustration.',
@@ -96,6 +101,6 @@ export const Page: StoryObj<EmptyStatePageComponent & { src: string; alt: string
 		heading: 'Augmentez vos collaborateurs en 3 étapes',
 		src: `${CDN_URL}/transverse/prisme/visuals/empty-states/pagga/mealvoucher-icecream.svg`,
 		alt: '',
-		hx: 1,
+		headingLevel: 1,
 	},
 };

@@ -71,7 +71,8 @@ import { CalloutActionsComponent, CalloutFeedbackItemDescriptionDirective, Callo
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `heading` | `heading` | `PortalContent` | — | — | — | Ajoute un titre au callout. [PortalContent] |
-| `hx` | `hx` | `unknown` | `null` | — | `luNumberAttribute` | — |
+| `headingLevel` | `headingLevel` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
+| `hx` | `hx` | `unknown` | `null` | — | `luNumberAttribute` | ⚠️ **Déprécié** : use `headingLevel` instead  |
 | `palette` | `palette` | `Palette` | `'none'` | — | — | Applique une palette de couleurs au callout. |
 | `size` | `size` | `'M' \| 'S'` | — | — | — | Modifie la taille du callout. |
 | `state` | `state` | `'success' \| 'warning' \| 'error'` | — | — | — | État du callout. |

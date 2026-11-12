@@ -23,7 +23,8 @@ import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 | `center` | `center` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `heading` | `heading` | `string` | — | — | — | — |
 | `description` | `description` | `PortalContent` | — | — | — | — |
-| `hx` | `hx` | `number` | `3` | — | `luNumberAttribute` | — |
+| `headingLevel` | `headingLevel` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
+| `hx` | `hx` | `number` | `3` | — | `luNumberAttribute` | ⚠️ **Déprécié** : use `headingLevel` instead  |
 
 ## Related files
 

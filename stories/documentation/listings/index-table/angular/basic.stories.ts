@@ -269,7 +269,7 @@ export default {
 			? `<tr luIndexTableRow>
 			<th luIndexTableCell colspan="3">
 				<lu-empty-state-section
-					hx="3"
+					headingLevel="3"
 					illustration="magnifyingGlass"
 					heading="Empty State"
 					description="Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus."

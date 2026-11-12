@@ -51,7 +51,7 @@ import { ResourceCardButtonComponent, ResourceCardLinkComponent, ResourceCardCom
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `draggable` | `draggable` | `boolean` | `false` | — | `luBooleanAttribute` | Rend la carte déplaçable. |
 | `grid` | `grid` | `boolean` | `false` | — | `luBooleanAttribute` | — |
-| `headingLevel` | `headingLevel` | `'1' \| '2' \| '3' \| '4' \| '5' \| '6'` | `'3'` | — | — | Niveau sémantique du titre de la carte. |
+| `headingLevel` | `headingLevel` | `number` | `3` | — | `luNumberAttribute` | Niveau sémantique du titre de la carte. |
 | `size` | `size` | `ResourceCardSize \| null` | `null` | — | — | Modifie la taille de la carte. |
 
 ### ResourceCardWrapperComponent (component)

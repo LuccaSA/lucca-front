@@ -36,7 +36,7 @@ import { TagComponent } from '@lucca-front/ng/tag';
 	[slotTop]="slotTop"
 	[illustration]="illustration"
 	[description]="description"
-	hx="1"
+	headingLevel="1"
 >
 	<button luButton type="button">Créer une campagne</button>
 </lu-empty-state-page>
@@ -61,7 +61,7 @@ import { TagComponent } from '@lucca-front/ng/tag';
 ```js
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EMPTY_STATE_HX, EMPTY_STATE_HX_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HEADING_LEVEL, EMPTY_STATE_HEADING_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 ```
 
 ```html
@@ -85,13 +85,13 @@ import { EMPTY_STATE_HX, EMPTY_STATE_HX_STYLE, EmptyStatePageComponent } from '@
 import { HttpClientModule } from '@angular/common/http';
 import { BUBBLE_ILLUSTRATION } from '@lucca-front/ng/bubble-illustration';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EMPTY_STATE_HX, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HEADING_LEVEL, EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 ```
 
 ```html
 <lu-empty-state-section
 	illustration="rocket"
-	hx="3"
+	headingLevel="3"
 	heading="Empty state section"
 	description="Description can be a string or a ng-template"
 >

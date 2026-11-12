@@ -1,37 +1,22 @@
+import { finn } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { ILuUser } from '@lucca-front/ng/user';
+import { ILuUser, LuUserDisplayModule } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
-@Component({
-	selector: 'user-popover-story',
-	template: `<button
-		type="button"
-		class="userPopover_trigger"
-		[luUserPopover]="luUserPopover()"
-		[luUserPopoverDisabled]="luUserPopoverDisabled()"
-		[luPopoverOpenDelay]="luPopoverOpenDelay()"
-		[luPopoverCloseDelay]="luPopoverCloseDelay()"
-	>
-		Survolez-moi !
-	</button>`,
-	imports: [LuUserPopoverDirective],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class UserPopoverStory {
-	luUserPopover = input<ILuUser>();
-	luUserPopoverDisabled = input<boolean>(false);
-	luPopoverOpenDelay = input<number>(300);
-	luPopoverCloseDelay = input<number>(100);
+interface UserPopoverStory {
+	luUserPopover: ILuUser;
+	luUserPopoverDisabled: boolean;
+	luPopoverOpenDelay: number;
+	luPopoverCloseDelay: number;
 }
 
 export default {
-	title: 'Documentation/Users/Popover/Angular',
-	component: UserPopoverStory,
-	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient(), provideRouter([])] })],
+	title: 'Documentation/Users/UserPopover/Angular',
+	component: LuUserPopoverDirective,
+	decorators: [moduleMetadata({ imports: [LuUserPopoverDirective, LuUserDisplayModule] }), applicationConfig({ providers: [provideAnimations(), provideHttpClient(), provideRouter([])] })],
 	argTypes: {
 		luUserPopover: {
 			control: { type: 'object' },
@@ -56,17 +41,29 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<UserPopoverStory> = {
+const triggerAttributes = `type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover" [luUserPopoverDisabled]="luUserPopoverDisabled" [luPopoverOpenDelay]="luPopoverOpenDelay" [luPopoverCloseDelay]="luPopoverCloseDelay" translate="no"`;
+
+export const Basic: StoryObj<UserPopoverStory & { customContent: string }> = {
+	render: ({ customContent, ...args }) => ({
+		props: args,
+		template: customContent
+			? `<button ${triggerAttributes} [luUserPopoverCustomContent]="customContent">{{ luUserPopover | luUserDisplay: 'lf' }}</button>
+<ng-template #customContent let-user>${customContent}</ng-template>`
+			: `<button ${triggerAttributes}>{{ luUserPopover | luUserDisplay: 'lf' }}</button>`,
+	}),
+	argTypes: {
+		customContent: { control: { type: 'text' }, description: 'Template content, `user` is available in the template context.' },
+	},
 	args: {
-		luUserPopover: { id: 1, firstName: 'Chloe', lastName: 'Alibert' },
+		luUserPopover: finn,
 		luUserPopoverDisabled: false,
 		luPopoverOpenDelay: 300,
 		luPopoverCloseDelay: 100,
+		customContent: '',
 	},
-};
-
-Basic.parameters = {
-	controls: {
-		include: ['luUserPopover', 'luUserPopoverDisabled', 'luPopoverOpenDelay', 'luPopoverCloseDelay'],
+	parameters: {
+		controls: {
+			include: ['luUserPopover', 'luUserPopoverDisabled', 'luPopoverOpenDelay', 'luPopoverCloseDelay', 'customContent'],
+		},
 	},
 };

@@ -33,12 +33,14 @@ import { EmptyStatePageIllustration, EmptyStatePageComponent } from '@lucca-fron
 | `bottomLeftBackground` | `bottomLeftBackground` | `string \| null` | — | — | — | — |
 | `bottomLeftForeground` | `bottomLeftForeground` | `string \| null` | — | — | — | — |
 | `contentBackgroundColor` | `contentBackgroundColor` | `string` | `'var(--pr-t-elevation-surface-default)'` | — | — | Modifie la couleur de fond du contenu (variable CSS, couleur hexadécimale, etc.). |
-| `slotTop` | `slotTop` | `PortalContent` | — | — | — | Ajout d’un slot au dessus du titre. [PortalContent] |
+| `slotTop` | `slotTop` | `PortalContent` | — | — | — | — |
 | `illustration` | `illustration` | `PortalContent` | — | — | — | Modifie l’illustration. |
 | `heading` | `heading` | `string` | — | — | — | Titre de l’empty state. |
-| `description` | `description` | `PortalContent` | — | — | — | Description du composant. [PortalContent] |
-| `hx` | `hx` | `number` | `1` | — | `luNumberAttribute` | Définit le niveau sémantique du titre. |
-| `hxStyle` | `hxStyle` | `number` | `1` | — | `luNumberAttribute` | [v21.2] Niveau du titre (style). |
+| `description` | `description` | `PortalContent` | — | — | — | Description de l’empty state. [PortalContent] |
+| `headingLevel` | `headingLevel` | `unknown` | `null` | — | `luNullableNumberAttribute` | Définit le niveau sémantique du titre. |
+| `headingStyle` | `headingStyle` | `unknown` | `null` | — | `luNullableNumberAttribute` | Niveau du titre (style). |
+| `hx` | `hx` | `number` | `1` | — | `luNumberAttribute` | ⚠️ **Déprécié** : use `headingLevel` instead [Déprécié] Utiliser headingLevel. |
+| `hxStyle` | `hxStyle` | `number` | `1` | — | `luNumberAttribute` | ⚠️ **Déprécié** : use `headingStyle` instead [Déprécié] Utiliser headingStyle. |
 
 ## Related files
 

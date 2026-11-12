@@ -4,15 +4,63 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--components-box-borderRadius);
 	padding: var(--components-box-padding);
-	background-color: var(--components-box-background, var(--pr-t-elevation-surface-raised));
-	display: block;
+	background-color: var(--components-box-background, var(--components-box-backgroundColor));
+	display: var(--components-box-display);
+	flex-direction: var(--components-box-flexDirection);
+	gap: var(--components-box-gap);
 	position: relative;
 
 	@if config.$deprecatedCardBoxMargin {
 		margin: var(--components-box-margin);
 	}
 
+	// Raw HTML boxes without slot keep their block layout
+	&:has(.box-slot) {
+		--components-box-display: flex;
+	}
+
 	@at-root ($atRoot) {
+		.box-header {
+			align-items: center;
+			display: flex;
+			gap: var(--components-box-header-gap);
+		}
+
+		.box-header-text {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			min-inline-size: 0;
+		}
+
+		.box-header-text-heading {
+			color: var(--pr-t-color-text-heading);
+			font: var(--components-box-heading-font);
+		}
+
+		.box-header-text-subheading {
+			color: var(--pr-t-color-text-subtle);
+			font: var(--components-box-description-font);
+			margin: 0;
+		}
+
+		.box-slot {
+			&:empty {
+				display: none;
+			}
+		}
+
+		.box-illustrations {
+			inset-block-end: 0;
+			inset-inline-end: 0;
+			position: absolute;
+
+			.ornament {
+				--components-ornament-blockSize: var(--components-box-illustrations-height);
+				--components-ornament-inlineSize: var(--components-box-illustrations-width);
+			}
+		}
+
 		.box-close {
 			position: absolute;
 			font-size: var(--pr-t-font-body-M-fontSize);

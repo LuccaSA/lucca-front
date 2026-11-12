@@ -77,7 +77,7 @@ description: Regenerate docs/life-cycle.md and docs/life-cycle-deleted.md from t
 	* A deprecated section of a live file takes a block disable, a single line a `next-line` one.
 		* Stylelint ignores a comment inside a selector list: put the deprecated selector first.
 	* The reason reads `Deprecated.` on deprecated code, `Deprecated. Kept for consumer overrides.` on a live usage of it.
-		* A selector mixing live and deprecated tokens names the deprecated ones: `Deprecated: .viewTabs.`.
+		* A selector mixing live and deprecated tokens names the deprecated ones: `Deprecated: .pr-u-clear.`.
 	* A live reference to a deprecated token outside those cases stays visible: it is residual usage to migrate.
 * A class emitted by LF HTML for structural consistency without SCSS is not a deprecation.
 	* Its rule may not exist while the component template emits it.

@@ -5,8 +5,10 @@
 - Import
 - Basic Usage
 - API Reference
+  - BoxDisclosureComponent (component)
   - BoxComponent (component)
   - Injection tokens
+- Type definitions
 - Related files
 - Changelog
   - 22.0.5
@@ -16,16 +18,35 @@
 ## Import
 
 ```typescript
-import { BoxComponent } from '@lucca-front/ng/box';
+import { BoxDisclosureComponent, BoxComponent } from '@lucca-front/ng/box';
 ```
 
 ## Basic Usage
 
 ```html
-<lu-box (killed)="onKilled()">Lorem ipsum dolor sit amet</lu-box>
+<lu-box headingLevel="3" heading="Title" subheading="Subheading">Custom content</lu-box>
 ```
 
 ## API Reference
+
+### BoxDisclosureComponent (component)
+
+**Selector:** `lu-box-disclosure`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `theme` | `theme` | `'white' \| 'neutral' \| 'sunken' \| 'fancyWhite' \| 'fancyLight' \| 'fancyDark'` | `'white'` | — | — | Couleur de fond de la box. Les thèmes fancy* mettent la box en avant. |
+| `heading` | `heading` | `PortalContent` | — | ✅ | — | Titre de la box. [PortalContent] |
+| `subheading` | `subheading` | `PortalContent` | — | — | — | Sous-titre affiché sous le titre. [PortalContent] |
+| `metadata` | `metadata` | `string[] \| PortalContent` | — | — | — | — |
+
+#### Models (two-way binding)
+
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `open` | `unknown` | — | — |
 
 ### BoxComponent (component)
 
@@ -36,22 +57,34 @@ import { BoxComponent } from '@lucca-front/ng/box';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `toggle` | `toggle` | `boolean` | `false` | — | `luBooleanAttribute` | Applique le style « toggle » (classe mod-toggle, dépréciée). Préférer withArrow. |
-| `neutral` | `neutral` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un fond gris. |
-| `killable` | `killable` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute un bouton de fermeture. |
-| `withArrow` | `withArrow` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute une flèche pointant vers le champ placé au-dessus de la box (voir la story Arrow). |
+| `theme` | `theme` | `'white' \| 'neutral' \| 'sunken' \| 'fancyWhite' \| 'fancyLight' \| 'fancyDark'` | `'white'` | — | — | Couleur de fond de la box. Les thèmes fancy* mettent la box en avant. |
+| `size` | `size` | `'M' \| 'S'` | `'M'` | — | — | Taille de la box. La taille S réduit le titre, le sous-titre et l’illustration. |
+| `heading` | `heading` | `PortalContent` | — | — | — | Titre de la box. [PortalContent] |
+| `subheading` | `subheading` | `PortalContent` | — | — | — | Sous-titre affiché sous le titre. [PortalContent] |
+| `bubbleIcon` | `bubbleIcon` | `LuccaIcon` | — | — | — | Icône décorative affichée dans une bulle avant le titre. Pour un autre contenu, projeter un élément portant l’attribut b… |
+| `headingLevel` | `headingLevel` | `number` | `3` | — | `luNumberAttribute` | Niveau sémantique du titre, exposé comme un titre (role="heading"). Vaut 3 par défaut : à définir si le titre de la box … |
+| `bubble` | `bubble` | `OrnamentBubble \| number` | `undefined` | — | `luOptionalNumberAttribute` | Bulle décorative affichée à droite. Disponible uniquement sur les thèmes fancy*. |
+| `illustration` | `illustration` | `OrnamentIllustration \| string` | — | — | — | Illustration affichée à droite. Disponible uniquement sur les thèmes fancy*. Il est également possible de renseigner une… |
+| `neutral` | `neutral` | `boolean` | `false` | — | `luBooleanAttribute` | ⚠️ **Déprécié** : use `theme="neutral"` instead Applique un fond gris. |
+| `toggle` | `toggle` | `boolean` | `false` | — | `luBooleanAttribute` | ⚠️ **Déprécié** : the box is not interactive anymore  |
+| `killable` | `killable` | `boolean` | `false` | — | `luBooleanAttribute` | ⚠️ **Déprécié** : the box is not interactive anymore  |
+| `withArrow` | `withArrow` | `boolean` | `false` | — | `luBooleanAttribute` | ⚠️ **Déprécié** : the box doesn't point to another element anymore  |
 
 #### Outputs
 
 | Property | Binding name | Type | Notes |
 |----------|-------------|------|-------|
-| `killed` | `killed` | `void` | — |
+| `killed` | `killed` | `void` | ⚠️ **Déprécié** : the box is not interactive anymore |
 
 ### Injection tokens
 
 | Token | Type | Description |
 |-------|------|-------------|
 | `LU_BOX_TRANSLATIONS` | `unknown` | — |
+
+## Type definitions
+
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
 
 ## Related files
 

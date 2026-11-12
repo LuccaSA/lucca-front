@@ -412,14 +412,10 @@
 		@extend %clearBoth;
 	}
 
-	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-clearLeft.
-	.pr-u-clearLeft,
 	.pr-u-clearInlineStart {
 		@extend %clearInlineStart;
 	}
 
-	// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-clearRight.
-	.pr-u-clearRight,
 	.pr-u-clearInlineEnd {
 		@extend %clearInlineEnd;
 	}
@@ -642,15 +638,11 @@
 
 	@each $direction in core.$boxDirection {
 		@if $direction == '' {
-			// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .pr-u-insetReset.
-			.pr-u-insetReset,
 			.pr-u-inset0 {
 				@extend %inset0;
 			}
 		} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
-			// Reset is deprecated
-			.pr-u-#{$direction}0,
-			.pr-u-#{$direction}Reset {
+			.pr-u-#{$direction}0 {
 				#{$direction}: 0 !important;
 			}
 		}
@@ -687,15 +679,11 @@
 			@extend %clearBoth;
 		}
 
-		// clearLeft is deprecated
-		.u-clearInlineStart,
-		.u-clearLeft {
+		.u-clearInlineStart {
 			@extend %clearInlineStart;
 		}
 
-		// clearRight is deprecated
-		.u-clearInlineEnd,
-		.u-clearRight {
+		.u-clearInlineEnd {
 			@extend %clearInlineEnd;
 		}
 
@@ -815,15 +803,11 @@
 
 		@each $direction in core.$boxDirection {
 			@if $direction == '' {
-				// insetReset is deprecated
-				.u-inset0,
-				.u-insetReset {
+				.u-inset0 {
 					@extend %inset0;
 				}
 			} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
-				// Reset is deprecated
-				.u-#{$direction}0,
-				.u-#{$direction}Reset {
+				.u-#{$direction}0 {
 					#{$direction}: 0 !important;
 				}
 			} @else {

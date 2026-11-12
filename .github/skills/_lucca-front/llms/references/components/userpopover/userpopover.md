@@ -54,10 +54,11 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 | `luPopoverAnchor` | `luPopoverAnchor` | `FlexibleConnectedPositionStrategyOrigin` | `this.elementRef` | — | — | — |
 | `luPopoverBackdrop` | `luPopoverBackdrop` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `luPopoverIgnoredOutsidePointerTargets` | `luPopoverIgnoredOutsidePointerTargets` | `HTMLElement \| HTMLElement[] \| null` | `null` | — | — | — |
-| `luPopoverOpenDelay` | `luPopoverOpenDelay` | `number` | `300` | — | `luNumberAttribute` | — |
-| `luPopoverCloseDelay` | `luPopoverCloseDelay` | `number` | `100` | — | `luNumberAttribute` | — |
-| `luUserPopover` | `luUserPopover` | `ILuUser` | — | ✅ | — | — |
-| `luUserPopoverDisabled` | `luUserPopoverDisabled` | `boolean` | `false` | — | — | — |
+| `luPopoverOpenDelay` | `luPopoverOpenDelay` | `number` | `300` | — | `luNumberAttribute` | Délai d’ouverture de la popover (en ms). |
+| `luPopoverCloseDelay` | `luPopoverCloseDelay` | `number` | `100` | — | `luNumberAttribute` | Délai de fermeture de la popover (en ms). |
+| `luUserPopover` | `luUserPopover` | `ILuUser` | — | ✅ | — | Utilisateur dont la fiche est affichée au survol ou au focus. |
+| `luUserPopoverDisabled` | `luUserPopoverDisabled` | `boolean` | `false` | — | — | Désactive l’ouverture de la popover. |
+| `luUserPopoverCustomContent` | `luUserPopoverCustomContent` | `TemplateRef<LuUserPopoverCustomContentContext> \| null` | `null` | — | — | — |
 
 #### Outputs
 
@@ -84,12 +85,13 @@ import { LuUserPopoverComponent, LuUserPopoverDirective } from '@lucca-front/ng/
 |-------|------|-------------|
 | `LU_POPUP_EMPLOYEE_TRANSLATIONS` | `unknown` | — |
 | `LU_USER_POPOVER_USER` | `Signal<ILuUser>` | — |
+| `LU_USER_POPOVER_CUSTOM_CONTENT` | `Signal<TemplateRef<LuUserPopoverCustomContentContext> \| null>` | — |
 
 ## Related files
 
 - 📝 [Code & implementation](./userpopover.component.md)
 - 🎨 [Design guidelines](./userpopover.design.md)
-- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-users-display-userpopover--docs)
+- 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-users-userpopover-angular--docs)
 
 ## Changelog
 

@@ -8,7 +8,10 @@
 - HTML/CSS
   - Arrow
   - Basic
+  - Bubble icon
   - Killable
+  - Size s
+  - Themes
   - Toggle
 
 📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-box-angular-arrow--docs)
@@ -35,11 +38,7 @@ import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms'
 		<lu-radio [value]="3">Option C</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
-<lu-box withArrow neutral>
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi
-	excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam!
-	Vitae!
-</lu-box>
+<lu-box withArrow neutral>Custom content</lu-box>
 ```
 
 ### Basic
@@ -49,7 +48,7 @@ import { BoxComponent } from '@lucca-front/ng/box';
 ```
 
 ```html
-<lu-box (killed)="onKilled()">Lorem ipsum dolor sit amet</lu-box>
+<lu-box headingLevel="3" heading="Title" subheading="Subheading">Custom content</lu-box>
 ```
 
 ## HTML/CSS
@@ -91,11 +90,7 @@ Classe CSS : `.box`
 		<div class="form-field-arrow mod-neutral"></div>
 	</div>
 </fieldset>
-<div class="box mod-withArrow mod-neutral">
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi
-	excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam!
-	Vitae!
-</div>
+<div class="box mod-withArrow mod-neutral">Custom content</div>
 ```
 
 ### Basic
@@ -106,9 +101,32 @@ Classe CSS : `.box`
 
 ```html
 <div class="box">
-	Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot
-	cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread
-	pastry.
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
+</div>
+```
+
+### Bubble icon
+
+```css
+@forward '@lucca-front/scss/src/components/box';
+```
+
+```html
+<div class="box">
+	<div class="box-header">
+		<lu-bubble-icon icon="fileCopy" />
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
 </div>
 ```
 
@@ -127,9 +145,131 @@ Classe CSS : `.box`
 			<span class="pr-u-mask">Close</span>
 		</button>
 	</div>
-	Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot
-	cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread
-	pastry.
+	Custom content
+</div>
+```
+
+### Size s
+
+```css
+@forward '@lucca-front/scss/src/components/box';
+```
+
+```html
+<div class="box mod-S">
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
+</div>
+```
+
+### Themes
+
+```css
+@forward '@lucca-front/scss/src/components/box';
+@forward '@lucca-front/scss/src/components/ornament';
+```
+
+```html
+<div class="box">
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
+</div>
+<div class="box mod-neutral">
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
+</div>
+<div class="box mod-sunken">
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
+</div>
+<div class="box">
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
+	<div class="box-illustrations">
+		<div class="ornament">
+			<div
+				class="ornament-back"
+				aria-hidden="true"
+				[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/ornament/bubbles/1.svg' | luSafeExternalSvg"
+			></div>
+			<img
+				alt=""
+				class="ornament-front"
+				src="https://cdn.lucca.fr/transverse/prisme/visuals/ornament/generic/piggy-bank.svg"
+			/>
+		</div>
+	</div>
+</div>
+<div class="box mod-fancyLight">
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
+	<div class="box-illustrations">
+		<div class="ornament">
+			<div
+				class="ornament-back"
+				aria-hidden="true"
+				[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/ornament/bubbles/1.svg' | luSafeExternalSvg"
+			></div>
+			<img
+				alt=""
+				class="ornament-front"
+				src="https://cdn.lucca.fr/transverse/prisme/visuals/ornament/generic/piggy-bank.svg"
+			/>
+		</div>
+	</div>
+</div>
+<div class="box mod-fancyDark">
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
+	<div class="box-illustrations">
+		<div class="ornament">
+			<div
+				class="ornament-back"
+				aria-hidden="true"
+				[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/ornament/bubbles/1.svg' | luSafeExternalSvg"
+			></div>
+			<img
+				alt=""
+				class="ornament-front"
+				src="https://cdn.lucca.fr/transverse/prisme/visuals/ornament/generic/piggy-bank.svg"
+			/>
+		</div>
+	</div>
 </div>
 ```
 
@@ -145,9 +285,5 @@ Classe CSS : `.box`
 	<input class="switch-input" type="checkbox" id="boxSwitch" checked disabled />
 	<label class="switch-label" for="boxSwitch">Switch</label>
 </div>
-<div class="box mod-toggle">
-	Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot
-	cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread
-	pastry.
-</div>
+<div class="box mod-toggle">Custom content</div>
 ```

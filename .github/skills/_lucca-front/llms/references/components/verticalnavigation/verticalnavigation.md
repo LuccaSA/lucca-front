@@ -42,7 +42,8 @@ import { VerticalNavigationLinkComponent, VerticalNavigationComponent, VerticalN
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `heading` | `heading` | `PortalContent \| null` | `null` | — | — | Titre de la section. [PortalContent] |
-| `level` | `level` | `number` | `3` | — | `luNumberAttribute` | Niveau sémantique (`aria-level`) du titre de la section. |
+| `headingLevel` | `headingLevel` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
+| `level` | `level` | `number` | `3` | — | `luNumberAttribute` | ⚠️ **Déprécié** : use `headingLevel` instead Niveau sémantique (`aria-level`) du titre de la section. |
 
 ### VerticalNavigationGroupComponent (component)
 

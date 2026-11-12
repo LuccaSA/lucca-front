@@ -26,8 +26,10 @@ import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 | `illustration` | `illustration` | `PortalContent` | — | — | — | — |
 | `heading` | `heading` | `string` | — | — | — | — |
 | `description` | `description` | `PortalContent` | — | — | — | — |
-| `hx` | `hx` | `number` | `1` | — | `luNumberAttribute` | — |
-| `hxStyle` | `hxStyle` | `number` | `1` | — | `luNumberAttribute` | — |
+| `headingLevel` | `headingLevel` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
+| `headingStyle` | `headingStyle` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
+| `hx` | `hx` | `number` | `1` | — | `luNumberAttribute` | ⚠️ **Déprécié** : use `headingLevel` instead  |
+| `hxStyle` | `hxStyle` | `number` | `1` | — | `luNumberAttribute` | ⚠️ **Déprécié** : use `headingStyle` instead  |
 
 ## Related files
 

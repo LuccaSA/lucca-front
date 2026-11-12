@@ -38,8 +38,6 @@
 			}
 		}
 
-		// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .viewTabs-item.
-		.viewTabs-item,
 		.segmentedControl-item {
 			flex-grow: 1;
 			position: relative;
@@ -68,8 +66,6 @@
 			}
 		}
 
-		// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .viewTabs-item-tab.
-		.viewTabs-item-tab,
 		.segmentedControl-item-action {
 			inline-size: 100%;
 			border: 0;
@@ -114,8 +110,6 @@
 			display: contents;
 		}
 
-		// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .viewTabs_panel.
-		.viewTabs_panel,
 		.segmentedControl_panel {
 			display: var(--components-segmentedControl-display, block);
 			border-radius: var(--pr-t-border-radius-default);

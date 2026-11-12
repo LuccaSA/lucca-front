@@ -47,6 +47,7 @@ Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss �
 - Host bindings via la métadonnée `host: {}` : classe CSS de base posée directement (`class: 'numericBadge'`), conditionnels via `[class.is-X]` (voir `numeric-badge` pour la forme canonique).
 - Garder les composants design system « dumb » ; les connecter aux APIs Lucca via des directives séparées (ex. `simple-select`/`multi-select` + directives API). L'accessibilité clavier est une priorité.
 - Règles DX de contributing.md : utiliser les transforms `booleanAttribute`/`numberAttribute`, éviter les noms d'inputs génériques (`config`, `param`), typer les inputs avec des unions de strings pour l'autocomplétion, ne jamais entrer en collision avec un input natif de l'hôte, un input booléen est à `false` par défaut (le nommer d'après le comportement qu'il active, ex. `hiddenLabel`). Les contrats d'inputs/outputs publiés sont des breaking changes.
+- Avant de nommer un input, consulter l'annuaire [docs/property-names.md](docs/property-names.md) : réutiliser le nom, le type et la description existants pour un même concept (`size`, `heading`, `headingLevel`…) et éviter les noms listés comme à proscrire (`hx`, `small`…). Un concept absent s'y ajoute dans la PR qui l'introduit.
 - L'anglais est la langue par défaut pour les discussions, commentaires et commits.
 
 ### Règles CSS / SCSS
