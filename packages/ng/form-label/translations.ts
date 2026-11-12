@@ -1,10 +1,10 @@
 ﻿export const Translations = {
 	en: {
-		counterAlt: '{{counterStatus}} of {{counterMax}} allowed characters. ',
+		counterAlt: '{{counterStatus}} of {{counterMax}} allowed characters.',
 		tooltipAlt: 'Additional info',
 	},
 	de: {
-		counterAlt: '{{counterStatus}} von {{counterMax}} zulässigen Zeichen. ',
+		counterAlt: '{{counterStatus}} von {{counterMax}} zulässigen Zeichen.',
 		tooltipAlt: 'Zusätzliche Informationen',
 	},
 	fr: {
@@ -12,19 +12,19 @@
 		tooltipAlt: 'Info supplémentaire',
 	},
 	it: {
-		counterAlt: '{{counterStatus}} su {{counterMax}} caratteri consentiti. ',
+		counterAlt: '{{counterStatus}} caratteri su {{counterMax}} consentiti.',
 		tooltipAlt: 'Informazione supplementare',
 	},
 	nl: {
-		counterAlt: '{{counterStatus}} van de {{counterMax}} toegelaten tekens. ',
+		counterAlt: '{{counterStatus}} van de {{counterMax}} toegelaten tekens.',
 		tooltipAlt: 'Aanvullende informatie',
 	},
 	'nl-BE': {
-		counterAlt: '{{counterStatus}} van de {{counterMax}} toegelaten tekens. ',
+		counterAlt: '{{counterStatus}} van de {{counterMax}} toegelaten tekens.',
 		tooltipAlt: 'Aanvullende informatie',
 	},
 	es: {
-		counterAlt: '{{counterStatus}} de un {{counterMax}} o de caracteres permitidos. ',
+		counterAlt: '{{counterStatus}} de {{counterMax}} caracteres permitidos.',
 		tooltipAlt: 'Información adicional',
 	},
 	pt: {
@@ -32,7 +32,7 @@
 		tooltipAlt: 'Informações adicionais',
 	},
 	pl: {
-		counterAlt: '{{counterStatus}} z {{counterMax}} dozwolonych znaków. ',
+		counterAlt: '{{counterStatus}} z {{counterMax}} dozwolonych znaków.',
 		tooltipAlt: 'Dodatkowe informacje',
 	},
 };

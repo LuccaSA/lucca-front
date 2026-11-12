@@ -19,7 +19,10 @@
 	de: {
 		acceptedFormat: { one: 'Akzeptiertes Format:', other: 'Akzeptierte Formate:' },
 		selectFile: { one: 'Eine Datei auswählen', other: 'Dateien auswählen' },
-		dropOrClick: { one: 'Datei hier ablegen oder <span>zum Auswählen klicken</span>.', other: 'Dateien hier ablegen oder <span>zum Auswählen klicken</span>.' },
+		dropOrClick: {
+			one: 'Hinterlegen Sie die Datei hier oder <span>klicken Sie, um sie auszuwählen</span>.',
+			other: 'Hinterlegen Sie die Dateien hier oder <span>klicken Sie, um sie auszuwählen</span>.',
+		},
 		maxWeight: { one: 'Maximale Größe: {{maxSizeDisplay}}. ', other: 'Maximale Größe für eine Datei: {{maxSizeDisplay}}. ' },
 		fileUploadedListed: { one: 'Die bereits abgelegte Datei ist hier aufgeführt.', other: 'Die bereits abgelegten Dateien sind hier aufgeführt.' },
 		all: 'alle',
@@ -87,7 +90,7 @@
 	'nl-BE': {
 		acceptedFormat: { one: 'Goedgekeurd formaat:', other: 'Goedgekeurde formaten:' },
 		selectFile: { one: 'Een bestand selecteren', other: 'Bestanden selecteren' },
-		dropOrClick: { one: 'Sleep het bestand hierheen of <span>klik om het te selecteren</span>.', other: 'Sleep de bestanden hierheen of <span>klik om ze te selecteren</span>.' },
+		dropOrClick: { one: 'Kies het bestand hier of <span>klik om te selecteren</span>.', other: 'Kies de bestanden hier of <span>klik om te selecteren</span>.' },
 		maxWeight: { one: 'Maximale grootte: {{maxSizeDisplay}}. ', other: 'Maximale bestandsgrootte: {{maxSizeDisplay}}. ' },
 		fileUploadedListed: { one: 'Het reeds ingediende bestand wordt naderhand gedetailleerd.', other: 'Reeds ingediende bestanden worden naderhand gedetailleerd.' },
 		all: 'alle',

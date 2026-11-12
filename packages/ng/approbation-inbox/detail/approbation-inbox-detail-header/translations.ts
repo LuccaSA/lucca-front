@@ -1,10 +1,10 @@
-export const Translations = {
+﻿export const Translations = {
 	pl: {
-		delegation: 'Delegated by {{name}}',
-		overdue: 'Overdue',
+		delegation: 'Delegowane przez {{name}}',
+		overdue: 'Po terminie',
 	},
 	'nl-BE': {
-		delegation: 'Afgevaardigd door {{name}}',
+		delegation: 'Gedelegeerd door {{name}}',
 		overdue: 'Te laat',
 	},
 	fr: {
@@ -12,7 +12,7 @@ export const Translations = {
 		overdue: 'En retard',
 	},
 	de: {
-		delegation: 'Beauftragt von {{name}}',
+		delegation: 'Delegiert von {{name}}',
 		overdue: 'Verspätet',
 	},
 	en: {
@@ -24,11 +24,11 @@ export const Translations = {
 		overdue: 'Con retraso',
 	},
 	it: {
-		delegation: 'Incaricato da {{name}}',
+		delegation: 'Delegato da {{name}}',
 		overdue: 'In ritardo',
 	},
 	nl: {
-		delegation: 'Afgevaardigd door {{name}}',
+		delegation: 'Gedelegeerd door {{name}}',
 		overdue: 'Te laat',
 	},
 	pt: {

@@ -21,7 +21,7 @@
 		qualifications: 'cualificaciones',
 	},
 	en: {
-		qualifications: 'qualifications',
+		qualifications: 'classifications',
 	},
 	pl: {
 		qualifications: 'kwalifikacje',
