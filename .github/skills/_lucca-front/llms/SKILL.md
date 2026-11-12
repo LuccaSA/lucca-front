@@ -133,6 +133,7 @@ Bouton → API : `./references/components/button/button.md`, Design : `./referen
 - establishmentselect
 - fancy-dialog
 - fancybox
+- favorite
 - fieldset
 - filedropzone
 - fileentry

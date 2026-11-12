@@ -1,0 +1,86 @@
+@use 'sass:math';
+@use 'sass:list';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+$sparksCount: 6;
+$sparksOddRatio: 0.8;
+
+@function sparks($progress, $blur, $spread) {
+	$shadows: ();
+
+	@for $index from 0 to $sparksCount {
+		$angle: math.div(360deg, $sparksCount) * $index - 90deg;
+		$ratio: $progress;
+
+		@if $index % 2 == 1 {
+			$ratio: $ratio * $sparksOddRatio;
+		}
+
+		$x: math.div(math.round(math.cos($angle) * $ratio * 1000), 1000);
+		$y: math.div(math.round(math.sin($angle) * $ratio * 1000), 1000);
+
+		$shadows: list.append(
+			$shadows,
+			calc(var(--components-favorite-sparks-distance) * #{$x}) calc(var(--components-favorite-sparks-distance) * #{$y}) $blur $spread,
+			$separator: comma
+		);
+	}
+
+	@return $shadows;
+}
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	color: var(--components-favorite-color);
+	display: inline-flex;
+	position: relative;
+
+	&::after {
+		animation-duration: calc(var(--commons-animations-durations-slow) * 2);
+		animation-name: var(--components-favorite-sparks-animationName);
+		animation-timing-function: ease-out;
+		border-radius: var(--pr-t-border-radius-full);
+		content: '';
+		inset: calc(50% - var(--pr-t-spacings-25) / 2);
+		opacity: 0;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	.favorite-button.button {
+		@include button.onlyIcon;
+		@include button.ghost;
+	}
+
+	.lucca-icon {
+		animation-duration: var(--commons-animations-durations-slow);
+		animation-name: var(--components-favorite-icon-animationName);
+		animation-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
+		color: var(--components-favorite-icon-color);
+	}
+
+	@at-root ($atRoot) {
+		@keyframes favoriteAdd {
+			40% {
+				transform: scale(1.25);
+			}
+		}
+
+		@keyframes favoriteSparks {
+			0% {
+				box-shadow: sparks(0, 0.5px, 0);
+				opacity: 0.75;
+			}
+
+			50% {
+				box-shadow: sparks(0.75, 1px, -0.25px);
+				opacity: 0.5;
+			}
+
+			100% {
+				box-shadow: sparks(1, 2px, -0.5px);
+				opacity: 0;
+			}
+		}
+	}
+}
