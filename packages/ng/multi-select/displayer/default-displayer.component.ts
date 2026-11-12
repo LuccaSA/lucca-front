@@ -55,7 +55,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	readonly select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
 	readonly intl = input(...intlInputOptions(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS));
 
-	valueID = `value-${++nextID}`;
+	valueID = `multi-select-value-${++nextID}`;
 
 	protected destroyRef = inject(DestroyRef);
 	readonly #injector = inject(Injector);
