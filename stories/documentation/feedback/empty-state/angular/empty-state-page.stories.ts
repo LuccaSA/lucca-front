@@ -223,8 +223,7 @@ export default {
 		},
 		description: {
 			if: { arg: 'richContent', truthy: false },
-			description:
-				'Texte affiché sous le titre. Pour un texte simple, renseigner l’input <code>description</code> sur <code>lu-empty-state-page</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luEmptyStateDescription</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
+			description: 'Texte affiché sous le titre. Contenu riche : directive <code>luEmptyStateDescription</code> (l’input prévaut).',
 			table: { category: 'inputs' },
 		},
 		richContent: {
@@ -232,8 +231,7 @@ export default {
 			table: { category: 'story' },
 		},
 		slotTop: {
-			description:
-				'Contenu affiché au-dessus du titre. Pour un texte simple, renseigner l’input <code>slotTop</code> sur <code>lu-empty-state-page</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luEmptyStateSlotTop</code>. L’input prévaut si les deux sont fournis.',
+			description: 'Contenu affiché au-dessus du titre. Contenu riche : directive <code>luEmptyStateSlotTop</code> (l’input prévaut).',
 			table: { category: 'inputs' },
 		},
 		illustration: {

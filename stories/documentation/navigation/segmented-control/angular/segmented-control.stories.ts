@@ -24,7 +24,7 @@ export default {
 			table: { category: 'inputs' },
 		},
 		richContent: {
-			description: 'Remplace l’input <code>label</code> de la première option par un contenu riche, ici avec un Numeric Badge, projeté avec la directive <code>luSegmentedControlFilterLabel</code>.',
+			description: 'Remplace l’input <code>label</code> de la première option par un contenu riche (avec un Numeric Badge).',
 			table: { category: 'story' },
 		},
 		vertical: {
@@ -37,8 +37,7 @@ export default {
 		},
 		label: {
 			control: false,
-			description:
-				'Libellé du filtre. Pour un texte simple, renseigner l’input <code>label</code> sur <code>lu-segmented-control-filter</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, badge…), projeter dans le composant un élément portant la directive <code>luSegmentedControlFilterLabel</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
+			description: 'Libellé du filtre. Contenu riche : directive <code>luSegmentedControlFilterLabel</code> (l’input prévaut).',
 			table: { category: 'inputs (segmented-control-filter)', type: { summary: 'PortalContent' } },
 		},
 		value: {

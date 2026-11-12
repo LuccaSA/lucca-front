@@ -94,8 +94,7 @@ export default {
 			table: { category: 'inputs (th[luIndexTableCell])', type: { summary: 'number' }, defaultValue: { summary: '0' } },
 		},
 		group: {
-			description:
-				'Regroupe des lignes de tableau en les rendant dépliables, avec un libellé affiché dans la ligne de groupe. Pour un texte simple, renseigner l’input <code>group</code> sur <code>tbody[luIndexTableBody]</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, badge…), projeter dans le <code>tbody</code> un élément portant la directive <code>luIndexTableBodyGroup</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
+			description: 'Libellé d’un groupe de lignes dépliables. Contenu riche : directive <code>luIndexTableBodyGroup</code> (l’input prévaut).',
 			table: { category: 'inputs (tbody[luIndexTableBody])', type: { summary: 'PortalContent | null' }, defaultValue: { summary: 'null' } },
 		},
 		richContent: {

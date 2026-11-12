@@ -73,8 +73,7 @@ export default {
 		},
 		framedPortal: {
 			control: false,
-			description:
-				'Contenu additionnel affiché dans le cadre de l’option lorsque <code>framed</code> est actif. Pour un texte simple, renseigner l’input <code>framedPortal</code> sur <code>lu-radio</code> [PortalContent]. Pour un contenu riche (mise en forme, lien…), projeter dans <code>lu-radio</code> un élément portant la directive <code>luInputFramedContent</code>. L’input prévaut si les deux sont fournis.',
+			description: 'Contenu affiché dans le cadre de l’option. Contenu riche : directive <code>luInputFramedContent</code> (l’input prévaut).',
 			table: { category: 'inputs (radio)' },
 		},
 		inlineMessageState: {
