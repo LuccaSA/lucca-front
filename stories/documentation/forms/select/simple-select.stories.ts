@@ -624,14 +624,16 @@ export const EstablishmentCustom = generateStory({
 
 export const PublicEmployee = generateStory({
 	name: 'Public Employee Select',
-	description: 'Pour saisir un collaborateur depuis l’API publique Lucca, il suffit d’utiliser la directive `publicEmployees`. Seuls les collaborateurs actifs sont proposés par défaut.',
+	description:
+		'Pour saisir un collaborateur depuis l’API publique Lucca, il suffit d’utiliser la directive `publicEmployees`. Seuls les collaborateurs actifs sont proposés par défaut, avec le collaborateur connecté en premier (`provideCoreSelectCurrentUserId`). `enableFormerEmployees` permet d’inclure les collaborateurs partis, et les homonymes sont distingués par leur département.',
 	template: `<lu-simple-select
 	publicEmployees
+	enableFormerEmployees
 	[(ngModel)]="selectedUser"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
-		'@lucca-front/ng/core-select/user': ['LuCoreSelectPublicEmployeesDirective'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectPublicEmployeesDirective', 'provideCoreSelectCurrentUserId'],
 	},
 	storyPartial: {
 		play: null,

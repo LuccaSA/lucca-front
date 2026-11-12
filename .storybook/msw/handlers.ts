@@ -47,7 +47,22 @@ type PublicApiDepartment = { id: string; name: string; parent: { id: string } | 
 const flattenDepartments = (nodes: MockDepartmentNode[], parent: { id: string } | null = null): PublicApiDepartment[] =>
 	nodes.flatMap(({ node, children }, sortOrder) => [{ id: `${node.id}`, name: node.name, parent, sortOrder }, ...flattenDepartments(children ?? [], { id: `${node.id}` })]);
 
-const publicApiEmployees = mockUsers.map(({ id, firstName, lastName }) => ({ id: `${id}`, givenName: firstName, familyName: lastName })).sort((a, b) => a.familyName.localeCompare(b.familyName));
+const publicApiEmployees = mockUsers
+	.map(({ id, firstName, lastName }) => ({
+		id: `${id}`,
+		givenName: firstName,
+		familyName: lastName,
+		status: id % 7 === 0 ? 'deactivated' : 'active',
+		applicableJobPosition: { id: `${id}`, type: 'job-position' },
+	}))
+	.sort((a, b) => a.familyName.localeCompare(b.familyName));
+const publicApiEmployeesEmbedded = (employees: typeof publicApiEmployees) => {
+	const users = employees.map(({ id }) => mockUsers.find((user) => `${user.id}` === id));
+	return {
+		'job-position': Object.fromEntries(users.map((user) => [`${user.id}`, { id: `${user.id}`, department: { id: `${user.department.id}` } }])),
+		department: Object.fromEntries(users.map(({ department }) => [`${department.id}`, { id: `${department.id}`, name: department.name }])),
+	};
+};
 const publicApiDepartments = flattenDepartments(mockDepartmentsTree).sort((a, b) => a.name.localeCompare(b.name));
 const publicApiEstablishments = mockEstablishments.map(({ id, name, legalUnit }) => ({ id: `${id}`, name, legalEntity: { id: `${legalUnit.id}`, type: 'legal-entity' } }));
 const publicApiLegalEntities = Object.fromEntries(mockLegalUnits.map(({ id, name }) => [`${id}`, { id: `${id}`, type: 'legal-entity', legalName: name }]));
@@ -334,7 +349,13 @@ export const handlers = [
 	),
 	http.get(
 		'/lucca-api/employees',
-		publicApiHandler(publicApiEmployees, (employee, search) => `${employee.givenName} ${employee.familyName}`.toLowerCase().includes(search)),
+		publicApiHandler(publicApiEmployees, (employee, search) => `${employee.givenName} ${employee.familyName}`.toLowerCase().includes(search), {
+			filters: {
+				id: (employee, ids) => ids.includes(employee.id),
+				status: (employee, statuses) => statuses.includes(employee.status),
+			},
+			embedded: publicApiEmployeesEmbedded,
+		}),
 	),
 	http.get(
 		'/api/v5/departments',

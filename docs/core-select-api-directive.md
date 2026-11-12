@@ -20,6 +20,8 @@ Pour un format de retour V3, V4 ou V5 sans customisation de l'affichage (l'entit
 
 Les directives `publicEmployees`, `publicEstablishments`, `publicDepartments`, `publicJobQualifications` et `publicOccupationCategories` appellent directement les collections correspondantes de l'API publique.
 
+`publicEmployees` reprend les options de `users` : le collaborateur connecté en premier (`displayMeOption`, avec `provideCoreSelectCurrentUserId`), l'inclusion des collaborateurs partis (`enableFormerEmployees`) et le département des homonymes. Chaque option expose `picture.href`, le lien de téléchargement de son portrait.
+
 ### Personnaliser l'affichage
 
 Dans le cas d'une personnalisation de l'option et/ou de la valeur affichée, il est nécessaire de créer votre propre directive en s'aidant de `LuCoreSelectApiV4Directive` ou de `LuCoreSelectApiV3Directive` :
