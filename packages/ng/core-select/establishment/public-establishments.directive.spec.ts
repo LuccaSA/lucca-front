@@ -59,73 +59,78 @@ function setup() {
 	};
 }
 
+const countUrl = (url: string) => `${url}?isArchived=false&limit=0&include=totalCount`;
+
 describe(LuCoreSelectPublicEstablishmentsDirective.name, () => {
-	it('should search the non archived establishments with their embedded legal entity', fakeAsync(async () => {
+	it('should search the non archived establishments sorted by legal entity, with their embedded legal entity', fakeAsync(async () => {
 		// Arrange
 		const { httpTesting, dataSource } = setup();
 
 		// Act
 		const options = firstValueFrom(dataSource().getOptions({ clue: 'bob', page: 0 }));
-		const req = httpTesting.expectOne((r) => r.urlWithParams === '/lucca-api/business-establishments?isArchived=false&search=bob&limit=20&include=links,embedded');
-		req.flush({ items: [{ id: '10', name: 'Bobigny', legalEntity: { id: '2' } }], embedded, links: { next: null } });
+		const req = httpTesting.expectOne('/lucca-api/business-establishments?isArchived=false&sort=legalEntity.name&search=bob&limit=20&include=links,embedded');
+		req.flush({
+			items: [
+				{ id: '10', name: 'Bobigny', legalEntity: { id: '2' } },
+				{ id: '11', name: 'Bobby', legalEntity: { id: '3' } },
+			],
+			embedded,
+			links: { next: null },
+		});
 
 		// Assert
-		expect(await options).toEqual([{ id: '10', name: 'Bobigny', legalEntity: { id: '2', legalName: 'Lucca FR' } }]);
+		expect(await options).toEqual([
+			{ id: '10', name: 'Bobigny', legalEntity: { id: '2', legalName: 'Lucca FR' } },
+			{ id: '11', name: 'Bobby', legalEntity: { id: '3' } },
+		]);
 		expect(req.request.headers.get('Api-Version')).toBe('2024-11-01');
 	}));
 
-	it('should load every establishment sorted by legal entity and group them without a clue', fakeAsync(async () => {
+	it('should group by legal entity when there are several legal entities and establishments', fakeAsync(() => {
 		// Arrange
-		const { httpTesting, dataSource, grouping } = setup();
+		const { httpTesting, grouping } = setup();
 
 		// Act
-		const options = firstValueFrom(dataSource().getOptions({ clue: '', page: 0 }));
-		httpTesting.expectOne('/lucca-api/business-establishments?isArchived=false&limit=100&include=links,embedded').flush({
-			items: [
-				{ id: '10', name: 'Paris', legalEntity: { id: '2' } },
-				{ id: '11', name: 'London', legalEntity: { id: '1' } },
-			],
-			embedded,
-			links: { next: { href: '', cursor: '!next' } },
-		});
-		httpTesting.expectOne('/lucca-api/business-establishments?isArchived=false&limit=100&include=links,embedded&page=!next').flush({
-			items: [
-				{ id: '12', name: 'Lyon', legalEntity: { id: '2' } },
-				{ id: '13', name: 'Hidden', legalEntity: { id: '3' } },
-			],
-			embedded: {},
-			links: { next: null },
-		});
+		httpTesting.expectOne(countUrl('/lucca-api/legal-entities')).flush({ items: [], totalCount: 2 });
+		httpTesting.expectOne(countUrl('/lucca-api/business-establishments')).flush({ items: [], totalCount: 3 });
 
 		// Assert
-		expect((await options).map(({ id, legalEntity }) => [id, legalEntity.legalName])).toEqual([
-			['13', undefined],
-			['12', 'Lucca FR'],
-			['10', 'Lucca FR'],
-			['11', 'Lucca UK'],
-		]);
 		expect(grouping()?.selector({ id: '12', name: 'Lyon', legalEntity: { id: '2' } })).toBe('2');
 	}));
 
-	it('should select a whole legal entity from the loaded establishments', fakeAsync(async () => {
+	it('should not group with a single legal entity', fakeAsync(() => {
+		// Arrange
+		const { httpTesting, grouping } = setup();
+
+		// Act
+		httpTesting.expectOne(countUrl('/lucca-api/legal-entities')).flush({ items: [], totalCount: 1 });
+		httpTesting.expectOne(countUrl('/lucca-api/business-establishments')).flush({ items: [], totalCount: 3 });
+
+		// Assert
+		expect(grouping()).toBeUndefined();
+	}));
+
+	it('should load every establishment of a legal entity to select it as a whole', fakeAsync(async () => {
 		// Arrange
 		const { httpTesting, dataSource } = setup();
-		const options = firstValueFrom(dataSource().getOptions({ clue: '', page: 0 }));
-		httpTesting.expectOne('/lucca-api/business-establishments?isArchived=false&limit=100&include=links,embedded').flush({
-			items: [
-				{ id: '10', name: 'Paris', legalEntity: { id: '2' } },
-				{ id: '11', name: 'London', legalEntity: { id: '1' } },
-			],
+
+		// Act
+		const groupOptions = firstValueFrom(dataSource().getGroupOptions!('1'));
+		httpTesting.expectOne('/lucca-api/business-establishments?isArchived=false&sort=legalEntity.name&legalEntity.id=1&limit=100&include=links,embedded').flush({
+			items: [{ id: '11', name: 'London', legalEntity: { id: '1' } }],
+			embedded,
+			links: { next: { href: '', cursor: '!next' } },
+		});
+		httpTesting.expectOne('/lucca-api/business-establishments?isArchived=false&sort=legalEntity.name&legalEntity.id=1&limit=100&include=links,embedded&page=!next').flush({
+			items: [{ id: '12', name: 'Manchester', legalEntity: { id: '1' } }],
 			embedded,
 			links: { next: null },
 		});
-		await options;
-
-		// Act
-		const groupOptions = await firstValueFrom(dataSource().getGroupOptions!('1'));
 
 		// Assert
-		expect(groupOptions.map(({ id }) => id)).toEqual(['11']);
-		httpTesting.verify();
+		expect((await groupOptions).map(({ id, legalEntity }) => [id, legalEntity.legalName])).toEqual([
+			['11', 'Lucca UK'],
+			['12', 'Lucca UK'],
+		]);
 	}));
 });

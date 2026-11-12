@@ -63,13 +63,7 @@ export abstract class ALuCoreSelectApiV5Directive<TItem extends LuCoreSelectApiV
 
 	public override readonly totalCount$ = toObservable(computed(() => ({ url: this.url(), params: this.queryParams() }))).pipe(
 		debounceTime(250),
-		switchMap(({ url, params }) =>
-			this.httpClient.get<LuCoreSelectApiV5Collection<TItem>>(url, {
-				params: { ...params, limit: 0, include: 'totalCount' },
-				headers: this.#headers(),
-			}),
-		),
-		map((res) => res.totalCount ?? 0),
+		switchMap(({ url, params }) => this.fetchTotalCount(params, url)),
 	);
 
 	protected override getOptionsPage(params: ApiV5Params, page: number): Observable<{ items: TOption[]; isLastPage: boolean }> {
@@ -106,6 +100,15 @@ export abstract class ALuCoreSelectApiV5Directive<TItem extends LuCoreSelectApiV
 			},
 			headers: this.#headers(),
 		});
+	}
+
+	protected fetchTotalCount(params: ApiV5Params, url = this.url()): Observable<number> {
+		return this.httpClient
+			.get<LuCoreSelectApiV5Collection<unknown>>(url, {
+				params: { ...params, limit: 0, include: 'totalCount' },
+				headers: this.#headers(),
+			})
+			.pipe(map((res) => res.totalCount ?? 0));
 	}
 
 	protected fetchAll<TResource = TItem>(params: ApiV5Params, url = this.url()): Observable<LuCoreSelectApiV5Collection<TResource>> {

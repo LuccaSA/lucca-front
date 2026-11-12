@@ -348,10 +348,15 @@ export const handlers = [
 		'/lucca-api/business-establishments',
 		publicApiHandler(publicApiEstablishments, (establishment, search) => establishment.name.toLowerCase().includes(search), {
 			filters: { 'legalEntity.id': (establishment, ids) => ids.includes(establishment.legalEntity.id) },
+			sort: (establishments) => [...establishments].sort((a, b) => publicApiLegalEntities[a.legalEntity.id].legalName.localeCompare(publicApiLegalEntities[b.legalEntity.id].legalName)),
 			embedded: (establishments) => ({
 				'legal-entity': Object.fromEntries(establishments.map(({ legalEntity }) => [legalEntity.id, publicApiLegalEntities[legalEntity.id]])),
 			}),
 		}),
+	),
+	http.get(
+		'/lucca-api/legal-entities',
+		publicApiHandler(Object.values(publicApiLegalEntities), (legalEntity, search) => legalEntity.legalName.toLowerCase().includes(search)),
 	),
 	http.get(
 		'/lucca-api/professions',
