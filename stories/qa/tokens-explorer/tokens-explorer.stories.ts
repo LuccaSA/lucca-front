@@ -26,7 +26,7 @@ interface TokenEntry {
 const PALETTE_SHADES = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'] as const;
 const PALETTES_FULL = ['brand', 'brandContrasted', 'neutral', 'product', 'success', 'successContrasted', 'warning', 'warningContrasted', 'critical'] as const;
 const PALETTES_NAVIGATION = ['700', '800', '900'] as const;
-const PALETTES_DECORATIVE = ['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin', 'pineapple', 'pineappleContrasted'] as const;
+const PALETTES_DECORATIVE = ['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'dragonfruit', 'raspberry', 'watermelon', 'coral', 'cacao', 'pumpkin', 'pineapple', 'pineappleContrasted'] as const;
 
 function buildPaletteTokens(): TokenEntry[] {
 	const out: TokenEntry[] = [];

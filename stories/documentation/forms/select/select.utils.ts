@@ -70,9 +70,13 @@ export const colorDecoratives500: ColorOption[] = [
 	{ name: 'Myrtille', index: 6, background: 'var(--palettes-blueberry-500)' },
 	{ name: 'Lavande', index: 7, background: 'var(--palettes-lavender-500)' },
 	{ name: 'Raisin', index: 8, background: 'var(--palettes-grape-500)' },
-	{ name: 'Pastèque', index: 9, background: 'var(--palettes-watermelon-500)' },
-	{ name: 'Citrouille', index: 10, background: 'var(--palettes-pumpkin-500)' },
-	{ name: 'Ananas', index: 11, background: 'var(--palettes-pineapple-500)' },
+	{ name: 'Pitaya', index: 9, background: 'var(--palettes-dragonfruit-500)' },
+	{ name: 'Framboise', index: 10, background: 'var(--palettes-raspberry-500)' },
+	{ name: 'Pastèque', index: 11, background: 'var(--palettes-watermelon-500)' },
+	{ name: 'Corail', index: 12, background: 'var(--palettes-coral-500)' },
+	{ name: 'Cacao', index: 13, background: 'var(--palettes-cacao-500)' },
+	{ name: 'Citrouille', index: 14, background: 'var(--palettes-pumpkin-500)' },
+	{ name: 'Ananas', index: 15, background: 'var(--palettes-pineapple-500)' },
 ];
 
 export const colorDecoratives50: ColorOption[] = [
@@ -85,9 +89,13 @@ export const colorDecoratives50: ColorOption[] = [
 	{ name: 'Myrtille 50', index: 6, background: 'var(--palettes-blueberry-50)', borderColor: 'var(--palettes-blueberry-500)' },
 	{ name: 'Lavande 50', index: 7, background: 'var(--palettes-lavender-50)', borderColor: 'var(--palettes-lavender-500)' },
 	{ name: 'Raisin 50', index: 8, background: 'var(--palettes-grape-50)', borderColor: 'var(--palettes-grape-500)' },
-	{ name: 'Pastèque 50', index: 9, background: 'var(--palettes-watermelon-50)', borderColor: 'var(--palettes-watermelon-500)' },
-	{ name: 'Citrouille 50', index: 10, background: 'var(--palettes-pumpkin-50)', borderColor: 'var(--palettes-pumpkin-500)' },
-	{ name: 'Ananas 50', index: 11, background: 'var(--palettes-pineapple-50)', borderColor: 'var(--palettes-pineapple-500)' },
+	{ name: 'Pitaya 50', index: 9, background: 'var(--palettes-dragonfruit-50)', borderColor: 'var(--palettes-dragonfruit-500)' },
+	{ name: 'Framboise 50', index: 10, background: 'var(--palettes-raspberry-50)', borderColor: 'var(--palettes-raspberry-500)' },
+	{ name: 'Pastèque 50', index: 11, background: 'var(--palettes-watermelon-50)', borderColor: 'var(--palettes-watermelon-500)' },
+	{ name: 'Corail 50', index: 12, background: 'var(--palettes-coral-50)', borderColor: 'var(--palettes-coral-500)' },
+	{ name: 'Cacao 50', index: 13, background: 'var(--palettes-cacao-50)', borderColor: 'var(--palettes-cacao-500)' },
+	{ name: 'Citrouille 50', index: 14, background: 'var(--palettes-pumpkin-50)', borderColor: 'var(--palettes-pumpkin-500)' },
+	{ name: 'Ananas 50', index: 15, background: 'var(--palettes-pineapple-50)', borderColor: 'var(--palettes-pineapple-500)' },
 ];
 
 export const colorNeutral: ColorOption[] = [

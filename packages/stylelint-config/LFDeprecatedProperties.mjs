@@ -581,4 +581,10 @@ export default [
 		versionDeleted: '22.1.1',
 		actions: `Remplacer par \`--components-priorityLevel-*\`.`,
 	},
+	{
+		// Orchid palette, replaced by the reworked Grape palette
+		objectPattern: /--palettes-orchid-(50|[1-9]00)(?![\w-])/,
+		versionDeprecated: '22.2.0',
+		actions: `\`--palettes-orchid-*\` => \`--palettes-grape-*\``,
+	},
 ];
