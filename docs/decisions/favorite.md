@@ -102,7 +102,7 @@ Status: accepted
 
 **Context** — The tooltip describes the action the button offers: “Add to favorites” or “Remove from favorites”. Left open after a click, it would switch to the opposite action under the pointer, which reads like a failure.
 
-**Decision** — The component closes the tooltip when the user toggles the favorite. The tooltip fades out, so its label is frozen on the previous state until the next hover or focus, when it shows again with the new label. A click on a disabled favorite does not close it, since the tooltip is then the only explanation.
+**Decision** — The component closes the tooltip when the user toggles the favorite. The tooltip closes after a short delay, so its label is frozen on the previous state while it closes. It is released once the delay is over, since hovering the tooltip meanwhile cancels the closing, or on the next hover or focus of the button. A click on a disabled favorite does not close it, since the tooltip is then the only explanation.
 
 **Consequences** — Screen reader users lose nothing: the tooltip is display-only, and `aria-pressed` announces the new state.
 

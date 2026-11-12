@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input, linkedSignal, output, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { intlInputOptions, luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -58,6 +58,12 @@ export class FavoriteComponent {
 
 	private readonly tooltip = viewChild.required(LuTooltipTriggerDirective);
 
+	#releaseTooltipTimeout?: ReturnType<typeof setTimeout>;
+
+	constructor() {
+		inject(DestroyRef).onDestroy(() => clearTimeout(this.#releaseTooltipTimeout));
+	}
+
 	protected toggle(event: MouseEvent): void {
 		if (this.disabled()) {
 			// aria-disabled keeps the button focusable for its tooltip, so the click has to be blocked like a native disabled button
@@ -71,6 +77,9 @@ export class FavoriteComponent {
 		this.animated.set(this.isFavorite());
 		// The label would switch to the opposite action under the pointer right after the click, which reads like a failure
 		this.tooltip().requestClose();
+		// Hovering the tooltip panel during the close delay cancels the closing: the label must not stay frozen then
+		clearTimeout(this.#releaseTooltipTimeout);
+		this.#releaseTooltipTimeout = setTimeout(() => this.syncTooltip(), this.tooltip().tooltipLeaveDelay());
 	}
 
 	protected syncTooltip(): void {

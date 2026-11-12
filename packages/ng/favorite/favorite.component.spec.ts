@@ -128,6 +128,28 @@ describe(FavoriteComponent.name, () => {
 		expect(requestClose).toHaveBeenCalledOnce();
 	});
 
+	it('should release the tooltip label once the close delay is over, in case hovering the tooltip cancelled the closing', () => {
+		// Arrange
+		vi.useFakeTimers();
+		const fixture = render();
+		const tooltip = fixture.debugElement.query(By.directive(LuTooltipTriggerDirective)).injector.get(LuTooltipTriggerDirective);
+
+		// Act
+		getButton(fixture).click();
+		fixture.detectChanges();
+
+		// Assert: frozen while closing
+		expect(tooltip.tooltipContent()).toBe('Add to favorites');
+
+		// Act: the close delay is over, without any new hover of the button
+		vi.advanceTimersByTime(tooltip.tooltipLeaveDelay());
+		fixture.detectChanges();
+
+		// Assert
+		expect(tooltip.tooltipContent()).toBe('Remove from favorites');
+		vi.useRealTimers();
+	});
+
 	it('should not toggle when disabled, while keeping the button focusable', () => {
 		// Arrange
 		const fixture = render();
