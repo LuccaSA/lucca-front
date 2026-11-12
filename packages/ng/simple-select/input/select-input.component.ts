@@ -63,7 +63,7 @@ let nextID = 0;
 export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> implements ControlValueAccessor {
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS, LU_SIMPLE_SELECT_TRANSLATIONS));
 
-	valueID = `value-${++nextID}`;
+	valueID = `simple-select-value-${++nextID}`;
 
 	readonly autocomplete = input<AutoFill | null>('off');
 
