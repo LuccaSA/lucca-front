@@ -134,7 +134,11 @@ Classe CSS : `.tag`
 <span class="tag palette-blueberry">Text</span>
 <span class="tag palette-lavender">Text</span>
 <span class="tag palette-grape">Text</span>
+<span class="tag palette-dragonfruit">Text</span>
+<span class="tag palette-raspberry">Text</span>
 <span class="tag palette-watermelon">Text</span>
+<span class="tag palette-coral">Text</span>
+<span class="tag palette-cacao">Text</span>
 <span class="tag palette-pumpkin">Text</span>
 <span class="tag palette-pineapple">Text</span>
 ```
