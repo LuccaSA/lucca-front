@@ -28,8 +28,7 @@ export default {
 		},
 		withAction: {
 			if: { arg: 'expandable', eq: false },
-			description:
-				'Ajoute une action affichée à droite du titre, ignorée lorsque <code>expandable</code> est actif. Projeter dans le composant l’élément d’action portant la directive <code>luFieldsetAction</code>, comme dans cet exemple, ou renseigner l’input <code>action</code> sur <code>lu-fieldset</code> [PortalContent]. L’input prévaut si les deux sont fournis.',
+			description: 'Ajoute une action à droite du titre, via la directive <code>luFieldsetAction</code> (ignorée si <code>expandable</code>).',
 			table: { category: 'story' },
 		},
 		expanded: {

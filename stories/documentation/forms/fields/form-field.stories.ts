@@ -46,8 +46,7 @@ export default {
 			control: {
 				type: 'text',
 			},
-			description:
-				'Texte indicatif affiché sous le champ. Pour un texte simple, renseigner l’input <code>inlineMessage</code> sur <code>lu-form-field</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luFormFieldInlineMessage</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
+			description: 'Texte indicatif sous le champ. Contenu riche : directive <code>luFormFieldInlineMessage</code> (l’input prévaut).',
 			table: { category: 'inputs' },
 		},
 		inlineMessageState: {
@@ -60,13 +59,11 @@ export default {
 		},
 		errorInlineMessage: {
 			if: { arg: 'richContent', truthy: false },
-			description:
-				'Texte d’erreur affiché sous le champ lorsque celui-ci est en erreur. Pour un texte simple, renseigner l’input <code>errorInlineMessage</code> sur <code>lu-form-field</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luFormFieldErrorInlineMessage</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
+			description: 'Texte d’erreur sous le champ invalide. Contenu riche : directive <code>luFormFieldErrorInlineMessage</code> (l’input prévaut).',
 			table: { category: 'inputs' },
 		},
 		richContent: {
-			description:
-				'Remplace les inputs <code>inlineMessage</code> et <code>errorInlineMessage</code> par des contenus riches projetés avec les directives <code>luFormFieldInlineMessage</code> et <code>luFormFieldErrorInlineMessage</code>.',
+			description: 'Remplace les deux messages par des contenus riches, projetés avec leurs directives.',
 			table: { category: 'story' },
 		},
 		tooltip: {

@@ -24,7 +24,7 @@ export default {
 			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		richContent: {
-			description: 'Remplace l’input <code>label</code> du premier onglet par un contenu riche, ici avec un Numeric Badge, projeté avec la directive <code>luSegmentedControlTabsPanelLabel</code>.',
+			description: 'Remplace l’input <code>label</code> du premier onglet par un contenu riche (avec un Numeric Badge).',
 			if: { arg: 'hiddenLabel', truthy: false },
 			table: { category: 'story' },
 		},
@@ -44,8 +44,7 @@ export default {
 		},
 		label: {
 			control: false,
-			description:
-				'Libellé de l’onglet. Pour un texte simple, renseigner l’input <code>label</code> sur <code>lu-segmented-control-tabs-panel</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, badge…), projeter dans le composant un élément portant la directive <code>luSegmentedControlTabsPanelLabel</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
+			description: 'Libellé de l’onglet. Contenu riche : directive <code>luSegmentedControlTabsPanelLabel</code> (l’input prévaut).',
 			table: { category: 'inputs (segmented-control-tabs-panel)', type: { summary: 'PortalContent' } },
 		},
 		value: {
@@ -59,8 +58,7 @@ export default {
 		},
 		hiddenLabel: {
 			name: '↳ hiddenLabel',
-			description:
-				'Masque le libellé de l’onglet, conservé pour les technologies d’assistance et affiché en infobulle au survol et au focus. Nécessite un libellé texte passé par l’input <code>label</code> (ignoré pour un libellé template ou projeté).',
+			description: 'Masque le libellé, affiché en infobulle et conservé pour les lecteurs d’écran. Nécessite un <code>label</code> texte.',
 			if: { arg: 'withIcon', truthy: true },
 			table: { category: 'inputs (segmented-control-tabs-panel)' },
 		},

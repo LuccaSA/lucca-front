@@ -171,8 +171,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description:
-				'Présente un groupe de lignes dans la story, avec son libellé affiché dans la ligne de groupe. Pour un texte simple, renseigner l’input <code>group</code> sur <code>tbody[luDataTableBody]</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, badge…), projeter dans le <code>tbody</code> un élément portant la directive <code>luDataTableBodyGroup</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
+			description: 'Présente un groupe de lignes dans la story, avec son libellé passé par l’input <code>group</code>.',
 			table: { category: 'story' },
 		},
 		richContent: {

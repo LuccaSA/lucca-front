@@ -43,8 +43,7 @@ export default {
 	],
 	argTypes: {
 		panel: {
-			description:
-				'Ajoute une section affichée dans le cadre lorsque le champ est sélectionné. Pour un texte simple, renseigner l’input <code>framedPortal</code> sur <code>lu-input-framed</code> ou <code>lu-radio</code> [PortalContent], comme dans cet exemple. Pour un contenu riche (mise en forme, lien…), projeter dans le composant un élément portant la directive <code>luInputFramedContent</code> (voir l’option <code>richContent</code>). L’input prévaut si les deux sont fournis.',
+			description: 'Ajoute une section dans le cadre de l’option sélectionnée, via l’input <code>framedPortal</code>.',
 			table: { category: 'story' },
 		},
 		richContent: {
