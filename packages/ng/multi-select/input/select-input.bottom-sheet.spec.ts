@@ -1,4 +1,5 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { Platform } from '@angular/cdk/platform';
 import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -466,6 +467,38 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 			expect(sheet()).toBeNull();
 		});
 	});
+
+	describe('back navigation', () => {
+		beforeEach(() => {
+			TestBed.inject(Platform).ANDROID = true;
+		});
+
+		afterEach(() => {
+			vi.unstubAllGlobals();
+		});
+
+		it('should close only the sheet on the Android back button and keep the options picked so far, as the close button does', () => {
+			// Arrange
+			let onNavigate: ((event: NavigateEvent) => void) | undefined;
+			vi.stubGlobal('navigation', {
+				addEventListener: (_type: string, listener: (event: NavigateEvent) => void) => (onNavigate = listener),
+				removeEventListener: () => (onNavigate = undefined),
+			});
+			const { select } = createSelect(true);
+			select.openPanel();
+			select.panelRef?.emitValue(options);
+			const event = { navigationType: 'traverse', cancelable: true, preventDefault: vi.fn() } as unknown as NavigateEvent;
+
+			// Act
+			onNavigate?.(event);
+
+			// Assert
+			expect(event.preventDefault).toHaveBeenCalled();
+			expect(select.isPanelOpen).toBe(false);
+			expect(select.value).toEqual(options);
+		});
+	});
+
 	describe('pagination', () => {
 		function createPaginatedSelect(belowExtraSmallBreakpoint: boolean): { fixture: ComponentFixture<PaginatedHostComponent>; select: LuMultiSelectInputComponent<Entity> } {
 			breakpointObserver.belowExtraSmallBreakpoint.next(belowExtraSmallBreakpoint);

@@ -1,4 +1,5 @@
 import { ComponentType } from '@angular/cdk/overlay';
+import { Platform } from '@angular/cdk/platform';
 import { ApplicationRef, Injector } from '@angular/core';
 import { LuDialogConfig, LuDialogRef, LuDialogService } from '@lucca-front/ng/dialog';
 import { take } from 'rxjs';
@@ -48,8 +49,33 @@ export function openSelectPanelSheet<TPanel>(dialogService: LuDialogService, pan
 	searchInput?.focus();
 
 	trackVisibleViewport(dialogRef);
+	closeOnBackButton(dialogRef, injector.get(Platform));
 
 	return dialogRef;
+}
+
+/**
+ * On Android, cancels any cancelable history traversal while the sheet is open (the back button) and closes the sheet alone.
+ * A traversal that can't be cancelled (no user activation, no Navigation API, another document), or any traversal off Android,
+ * closes the sheet on `popstate` as before.
+ */
+function closeOnBackButton<TPanel>(dialogRef: LuDialogRef<TPanel, never>, platform: Platform): void {
+	// Safari cancels the traversal too, but then leaves its back button disabled on the page
+	// (https://bugs.webkit.org/show_bug.cgi?id=330902).
+	if (!platform.ANDROID || !('navigation' in window)) {
+		return;
+	}
+
+	const navigation = window.navigation;
+	const onNavigate = (event: NavigateEvent): void => {
+		if (event.navigationType === 'traverse' && event.cancelable) {
+			event.preventDefault();
+			dialogRef.dismiss();
+		}
+	};
+	navigation.addEventListener('navigate', onNavigate);
+
+	dialogRef.closed$.pipe(take(1)).subscribe(() => navigation.removeEventListener('navigate', onNavigate));
 }
 
 /**
