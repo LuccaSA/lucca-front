@@ -24,14 +24,16 @@
 		}
 
 		&.is-filled {
-			@include filled;
+			&:where(:not(.is-default)) {
+				@include filled;
 
-			&:hover {
-				@include filledHover;
-			}
+				&:hover {
+					@include filledHover;
+				}
 
-			&:active {
-				@include filledActive;
+				&:active {
+					@include filledActive;
+				}
 			}
 
 			&:has(~ .filterPill_clear) {

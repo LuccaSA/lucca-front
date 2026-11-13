@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClearComponent } from '@lucca-front/ng/clear';
 import { intlInputOptions, isNotNil, luBooleanAttribute, PortalDirective } from '@lucca-front/ng/core';
@@ -69,6 +69,12 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	readonly impersonation = input(false, { transform: luBooleanAttribute });
 
 	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
+
+	readonly isFilterPillDefault = computed(() => {
+		const defaultValue = this.defaultValue();
+		const value = this.valueSignal();
+		return isNotNil(defaultValue) && isNotNil(value) && this.optionComparer()(value, defaultValue);
+	});
 
 	protected panelRefFactory = inject(LuSimpleSelectPanelRefFactory);
 

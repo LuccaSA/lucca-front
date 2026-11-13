@@ -253,6 +253,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public readonly valueSignal = signal<TValue | null>(null);
 	readonly isFilterPillEmpty = computed(() => this.valueSignal() === null);
 	readonly isFilterPillClearable = computed(() => this.isClearable());
+	abstract readonly isFilterPillDefault: Signal<boolean>;
+
+	/**
+	 * Value restored by the clear button, which only shows once the value differs from it.
+	 * It isn't applied on init: the form control is expected to be initialized with it.
+	 * It isn't checked against the options either: it must be a complete option, matching the selected one through `optionComparer`
+	 * (the default comparer compares serialized options, so `{ id: 1 }` never matches `{ id: 1, name: 'Carrot' }`).
+	 */
+	readonly defaultValue = input<TValue | null>(null);
 
 	public get value(): TValue | null {
 		return this._value;
@@ -475,7 +484,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (event) {
 			event.stopPropagation();
 		}
-		this.updateValue(null, true);
+		this.updateValue(this.defaultValue(), true);
 		this.inputElementRef()?.nativeElement.focus();
 	}
 
