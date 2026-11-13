@@ -1,4 +1,7 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementRef, input, signal, viewChild } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, signal, viewChild } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
 export type Grid = 'neutralOnColor' | 'colorOnColor' | 'neutralOnNeutral';
 type State = 'pass' | 'contrastedOnly' | 'fail';
@@ -6,12 +9,37 @@ type State = 'pass' | 'contrastedOnly' | 'fail';
 const SHADES = ['900', '800', '700', '600', '500', '400', '300', '200', '100', '50'];
 const NEUTRALS = ['900', '800', '700', '600', '500', '400', '300', '200', '100', '50', '25', '0'].map((n) => `N${n}`);
 
-// Every color palette: a cell passes only if all of them pass
-const PALETTES = [
-	...['brand', 'cleemy', 'timmi', 'poplee', 'coreHR', 'pagga', 'cc'],
-	...['success', 'warning', 'critical'],
-	...['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'dragonfruit', 'raspberry', 'watermelon', 'coral', 'cacao', 'pumpkin', 'pineapple'],
-];
+// Palettes that are not color palettes to check: the neutral axis, technical palettes and deprecated aliases.
+// Contrasted variants are excluded too, they are read through the enhanced-contrast probe.
+const EXCLUDED = ['neutral', 'navigation', 'product', 'ai', 'error', 'orchid'];
+
+// Every color palette loaded in the page, read from the --palettes-<name>-700 variables of its style sheets
+const detectPalettes = () => {
+	const names = new Set<string>();
+	const walk = (rules: CSSRuleList) => {
+		for (const rule of Array.from(rules)) {
+			if (rule instanceof CSSStyleRule) {
+				for (const property of Array.from(rule.style)) {
+					const name = /^--palettes-([a-zA-Z0-9]+)-700$/.exec(property)?.[1];
+					if (name && !name.endsWith('Contrasted') && !EXCLUDED.includes(name)) {
+						names.add(name);
+					}
+				}
+			}
+			if ('cssRules' in rule) {
+				walk((rule as CSSGroupingRule).cssRules);
+			}
+		}
+	};
+	for (const sheet of Array.from(document.styleSheets)) {
+		try {
+			walk(sheet.cssRules);
+		} catch {
+			// Cross-origin style sheets cannot be read
+		}
+	}
+	return [...names];
+};
 
 // Guaranteed pairs (foreground|background, symmetric), 4.5:1 unless listed in NON_TEXT
 const pairs = (list: [string, string[]][]) => list.flatMap(([a, bs]) => bs.flatMap((b) => [`${a}|${b}`, `${b}|${a}`]));
@@ -63,10 +91,15 @@ interface Cell {
 	threshold: number;
 	state: State;
 	contrastedOnly: string[];
+	// Palettes that fail even in the enhanced-contrast mode
+	failing: string[];
+	// Palettes below the threshold in the default mode, with their ratio, split by outcome
+	details: SafeHtml | null;
 }
 
 @Component({
 	selector: 'contrast-grid-story',
+	imports: [LuTooltipTriggerDirective, NgTemplateOutlet],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div #normal hidden></div>
@@ -115,12 +148,18 @@ interface Cell {
 								[class.is-failing]="cell.threshold && cell.state === 'fail'"
 							>
 								@if (cell.threshold) {
-									<span aria-hidden="true">{{ cell.state === 'fail' ? '✗' : '✓' }}</span>
-									<span class="pr-u-mask">
-										{{ cell.state === 'fail' ? 'Insufficient' : 'Sufficient' }} contrast ({{ cell.threshold === 3 ? '3:1' : '4.5:1' }}){{
-											cell.state === 'contrastedOnly' ? ', in enhanced-contrast mode for ' + cell.contrastedOnly.join(', ') : ''
-										}}
-									</span>
+									<ng-template #mark>
+										<span aria-hidden="true">{{ cell.state === 'fail' ? '✗' : '✓' }}</span>
+										<span class="pr-u-mask"> {{ cell.state === 'fail' ? 'Insufficient' : 'Sufficient' }} contrast ({{ cell.threshold === 3 ? '3:1' : '4.5:1' }}) </span>
+									</ng-template>
+									<!-- The tooltip goes on an inner element: on the cell, its button role would break the table -->
+									@if (cell.details) {
+										<span class="contrastGrid-mark" [luTooltip]="cell.details!">
+											<ng-container [ngTemplateOutlet]="mark" />
+										</span>
+									} @else {
+										<ng-container [ngTemplateOutlet]="mark" />
+									}
 								}
 							</td>
 						}
@@ -128,6 +167,9 @@ interface Cell {
 				}
 			</tbody>
 		</table>
+		@if (failing().length) {
+			<p class="contrastGrid-legend is-failing">✗ Fails for {{ failing().join(', ') }}.</p>
+		}
 		@if (contrastedOnly().length) {
 			<p class="contrastGrid-legend">Hatched: only in enhanced-contrast mode for {{ contrastedOnly().join(', ') }}.</p>
 		}
@@ -216,6 +258,15 @@ interface Cell {
 			}
 		}
 
+		.contrastGrid-mark {
+			cursor: help;
+			padding-inline: var(--pr-t-spacings-100);
+		}
+
+		.contrastGrid-legend.is-failing {
+			color: var(--palettes-critical-800);
+		}
+
 		.contrastGrid-legend {
 			color: var(--pr-t-color-text-subtle);
 			font: var(--pr-t-font-body-S);
@@ -231,6 +282,7 @@ export class ContrastGridComponent {
 	readonly normal = viewChild<ElementRef<HTMLElement>>('normal');
 	readonly contrast = viewChild<ElementRef<HTMLElement>>('contrast');
 	readonly #rendered = signal(false);
+	readonly #sanitizer = inject(DomSanitizer);
 
 	constructor() {
 		afterNextRender(() => this.#rendered.set(true));
@@ -240,6 +292,8 @@ export class ContrastGridComponent {
 	readonly columns = computed(() => (this.grid() === 'neutralOnNeutral' ? NEUTRALS : SHADES));
 	readonly caption = computed(() => `Contrast grid: ${{ neutralOnColor: 'neutral on color', colorOnColor: 'color on color', neutralOnNeutral: 'neutral on neutral' }[this.grid()]}`);
 
+	readonly palettes = computed(() => (this.#rendered() ? detectPalettes() : []));
+
 	readonly cells = computed<Cell[][]>(() => {
 		const normal = this.normal()?.nativeElement;
 		const contrast = this.contrast()?.nativeElement;
@@ -247,33 +301,47 @@ export class ContrastGridComponent {
 			return [];
 		}
 		const styles = { normal: getComputedStyle(normal), contrast: getComputedStyle(contrast) };
-		const palettes = this.grid() === 'neutralOnNeutral' ? ['neutral'] : PALETTES;
+		const palettes = this.grid() === 'neutralOnNeutral' ? ['neutral'] : this.palettes();
 		const shape = this.grid() === 'neutralOnColor' ? NEUTRAL_ON_COLOR : this.grid() === 'colorOnColor' ? COLOR_ON_COLOR : NEUTRAL_ON_NEUTRAL;
 		const color = (style: CSSStyleDeclaration, palette: string, key: string) =>
 			style.getPropertyValue(key.startsWith('N') ? `--palettes-neutral-${key.slice(1)}` : `--palettes-${palette}-${key}`).trim();
-		const passes = (style: CSSStyleDeclaration, palette: string, row: string, column: string, threshold: number) => {
+		const contrastOf = (style: CSSStyleDeclaration, palette: string, row: string, column: string) => {
 			const foreground = color(style, palette, row);
 			const background = color(style, palette, column);
-			return isHex(foreground) && isHex(background) && ratio(foreground, background) >= threshold;
+			return isHex(foreground) && isHex(background) ? ratio(foreground, background) : 0;
 		};
+		const passes = (style: CSSStyleDeclaration, palette: string, row: string, column: string, threshold: number) => contrastOf(style, palette, row, column) >= threshold;
 		return this.rows().map((row) =>
 			this.columns().map((column) => {
 				const key = `${row}|${column}`;
 				const threshold = shape.has(key) ? 4.5 : NON_TEXT.has(key) && this.grid() === 'neutralOnColor' ? 3 : 0;
 				if (!threshold) {
-					return { key, threshold, state: 'pass', contrastedOnly: [] };
+					return { key, threshold, state: 'pass', contrastedOnly: [], failing: [], details: null };
 				}
 				const failing = palettes.filter((palette) => !passes(styles.normal, palette, row, column, threshold));
 				const contrastedOnly = failing.filter((palette) => passes(styles.contrast, palette, row, column, threshold));
 				const state: State = !failing.length ? 'pass' : contrastedOnly.length === failing.length ? 'contrastedOnly' : 'fail';
-				return { key, threshold, state, contrastedOnly };
+				const lost = failing.filter((palette) => !contrastedOnly.includes(palette));
+				// Failing palettes with their ratio, to size the fix; the others by name only
+				const fails = lost.map((palette) => `${palette} · ${contrastOf(styles.normal, palette, row, column).toFixed(2)}:1`).join('<br>');
+				const html = [lost.length ? `<strong>Fails</strong><br>${fails}` : '', contrastedOnly.length ? `<strong>Enhanced contrast only</strong><br>${contrastedOnly.join(', ')}` : '']
+					.filter(Boolean)
+					.join('<br><br>');
+				// Palette names come from the page style sheets, not from user input
+				const details = html ? this.#sanitizer.bypassSecurityTrustHtml(html) : null;
+				return { key, threshold, state, contrastedOnly, failing: lost, details };
 			}),
 		);
 	});
 
+	readonly failing = computed(() => {
+		const names = new Set(this.cells().flatMap((row) => row.flatMap((cell) => cell.failing)));
+		return this.palettes().filter((palette) => names.has(palette));
+	});
+
 	readonly contrastedOnly = computed(() => {
 		const names = new Set(this.cells().flatMap((row) => row.flatMap((cell) => cell.contrastedOnly)));
-		return PALETTES.filter((palette) => names.has(palette));
+		return this.palettes().filter((palette) => names.has(palette));
 	});
 
 	label(key: string) {
