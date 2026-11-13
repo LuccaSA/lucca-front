@@ -72,7 +72,6 @@ import { BASE_PICKER_SIZE, DURATION_PICKER_UNIT, DurationPickerComponent, luDura
 	<lu-duration-picker
 		label="Label"
 		required
-		displayArrows
 		unit="days"
 		step="P0.5D"
 		max="P99D"
