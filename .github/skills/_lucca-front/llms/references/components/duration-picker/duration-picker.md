@@ -30,7 +30,8 @@ import { DurationPickerComponent } from '@lucca-front/ng/time';
 | `step` | `step` | `ISO8601Duration \| null` | `null` | — | — | — |
 | `size` | `size` | `'S' \| 'M'` | — | — | — | — |
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `max` | `max` | ``${string}P${string}`` | `'PT99H'` | — | — | — |
+| `max` | `max` | ``${string}P${string}`` | — | — | — | — |
+| `unit` | `unit` | `'hoursMinutes' \| 'days'` | `'hoursMinutes'` | — | — | — |
 | `displayArrows` | `displayArrows` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `label` | `label` | `string` | — | — | — | — |
 | `hideZeroValue` | `hideZeroValue` | `boolean` | `false` | — | `luBooleanAttribute` | — |

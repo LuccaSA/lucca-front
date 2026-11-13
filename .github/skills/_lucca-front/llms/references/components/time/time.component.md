@@ -49,7 +49,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { BASE_PICKER_SIZE, DurationPickerComponent, luDurationPickerTranslations } from '@lucca-front/ng/time';
+import { BASE_PICKER_SIZE, DURATION_PICKER_UNIT, DurationPickerComponent, luDurationPickerTranslations } from '@lucca-front/ng/time';
 ```
 
 ```html
@@ -59,6 +59,23 @@ import { BASE_PICKER_SIZE, DurationPickerComponent, luDurationPickerTranslations
 		required
 		step="PT1M"
 		max="PT99H"
+		[(ngModel)]="example"
+		(durationChange)="onDurationChange($event)"
+	/>
+</lu-form-field>
+
+<pr-story-model-display>{{ example }}</pr-story-model-display>
+```
+
+```html
+<lu-form-field [rolePresentationLabel]="true" label="Label">
+	<lu-duration-picker
+		label="Label"
+		required
+		displayArrows
+		unit="days"
+		step="P0.5D"
+		max="P99D"
 		[(ngModel)]="example"
 		(durationChange)="onDurationChange($event)"
 	/>
