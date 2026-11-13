@@ -5,8 +5,10 @@
 			font-size: var(--pr-t-font-body-S-fontSize);
 			outline: none;
 
-			&:hover {
-				color: var(--palettes-neutral-800);
+			@media (hover: hover) {
+				&:hover {
+					color: var(--palettes-neutral-800);
+				}
 			}
 		}
 	}

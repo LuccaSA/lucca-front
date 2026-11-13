@@ -18,13 +18,23 @@
 	// panel-element host directive), not on an ancestor `.optionItem`, so the shared
 	// `:host-context(.optionItem.is-highlighted)` rule from `optionItemStyle` no longer matches.
 	.optionItem-value {
-		&:hover,
+		@media (hover: hover) {
+			&:hover {
+				background-color: var(--palettes-neutral-50);
+			}
+		}
+
 		:host(.is-highlighted) & {
 			background-color: var(--palettes-neutral-50);
 		}
 
 		&.is-selected {
-			&:hover,
+			@media (hover: hover) {
+				&:hover {
+					background-color: var(--palettes-100, var(--palettes-product-100));
+				}
+			}
+
 			:host(.is-highlighted) & {
 				background-color: var(--palettes-100, var(--palettes-product-100));
 			}

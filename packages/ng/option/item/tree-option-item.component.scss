@@ -31,13 +31,15 @@
 			margin-block-end: var(--pr-t-spacings-50);
 		}
 
-		&:hover {
-			.optionItem-value {
-				background: var(--palettes-neutral-50);
-			}
+		@media (hover: hover) {
+			&:hover {
+				.optionItem-value {
+					background: var(--palettes-neutral-50);
+				}
 
-			.optionItem-icons {
-				opacity: 1;
+				.optionItem-icons {
+					opacity: 1;
+				}
 			}
 		}
 	}
@@ -62,8 +64,10 @@
 		margin-inline-start: var(--pr-t-spacings-100);
 		transition: all var(--commons-animations-durations-fast) ease;
 
-		&:hover {
-			opacity: 1;
+		@media (hover: hover) {
+			&:hover {
+				opacity: 1;
+			}
 		}
 	}
 
