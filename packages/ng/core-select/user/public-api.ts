@@ -2,3 +2,4 @@ export { provideCoreSelectCurrentUserId, LU_CORE_SELECT_CURRENT_USER_ID as ɵLU_
 export * from './user-option.model';
 export * from './user.translate';
 export * from './users.directive';
+export * from './public-employees.directive';

@@ -1,5 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
-import { applyFilter, applyV3Fields, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot, isVitestBrowser } from './helpers';
+import { applyFilter, applyV3Fields, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot, isVitestBrowser, publicApiHandler } from './helpers';
 import {
 	mockAxisSectionsV3,
 	mockDepartmentsTree,
@@ -41,6 +41,39 @@ const usersSearchHandler = genericHandler(
 		};
 	},
 );
+
+type MockDepartmentNode = { node: { id: number; name: string }; children?: MockDepartmentNode[] };
+type PublicApiDepartment = { id: string; name: string; parent: { id: string } | null; sortOrder: number };
+const flattenDepartments = (nodes: MockDepartmentNode[], parent: { id: string } | null = null): PublicApiDepartment[] =>
+	nodes.flatMap(({ node, children }, sortOrder) => [{ id: `${node.id}`, name: node.name, parent, sortOrder }, ...flattenDepartments(children ?? [], { id: `${node.id}` })]);
+
+const publicApiEmployees = mockUsers
+	.map(({ id, firstName, lastName }) => ({
+		id: `${id}`,
+		givenName: firstName,
+		familyName: lastName,
+		status: id % 7 === 0 ? 'deactivated' : 'active',
+		applicableJobPosition: { id: `${id}`, type: 'job-position' },
+	}))
+	.sort((a, b) => a.familyName.localeCompare(b.familyName));
+const publicApiEmployeesEmbedded = (employees: typeof publicApiEmployees) => {
+	const users = employees.map(({ id }) => mockUsers.find((user) => `${user.id}` === id));
+	return {
+		'job-position': Object.fromEntries(users.map((user) => [`${user.id}`, { id: `${user.id}`, department: { id: `${user.department.id}` } }])),
+		department: Object.fromEntries(users.map(({ department }) => [`${department.id}`, { id: `${department.id}`, name: department.name }])),
+	};
+};
+const publicApiDepartments = flattenDepartments(mockDepartmentsTree).sort((a, b) => a.name.localeCompare(b.name));
+const publicApiEstablishments = mockEstablishments.map(({ id, name, legalUnit }) => ({ id: `${id}`, name, legalEntity: { id: `${legalUnit.id}`, type: 'legal-entity' } }));
+const publicApiLegalEntities = Object.fromEntries(mockLegalUnits.map(({ id, name }) => [`${id}`, { id: `${id}`, type: 'legal-entity', legalName: name }]));
+const publicApiProfessions = [...new Map(mockJobQualifications.map(({ job }) => [job.id, { id: `${job.id}`, title: job.name }])).values()];
+const publicApiJobQualifications = mockJobQualifications.map(({ id, name, job, level }) => ({ id: `${id}`, title: name, profession: { id: `${job.id}` }, rank: level.position }));
+const publicApiOccupationCategories = mockOccupationCategories.map(({ id, name }) => ({ id: `${id}`, title: name }));
+const professionTitle = (id: string) => publicApiProfessions.find((profession) => profession.id === id)?.title ?? '';
+const sortJobQualifications = (items: typeof publicApiJobQualifications, sort: string) =>
+	[...items].sort((a, b) =>
+		sort === 'name' ? a.title.localeCompare(b.title) : sort === 'rank' ? a.rank - b.rank : professionTitle(a.profession.id).localeCompare(professionTitle(b.profession.id)) || a.rank - b.rank,
+	);
 
 const PLACEHOLDER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" viewBox="0 0 1 1"></svg>';
 
@@ -313,5 +346,52 @@ export const handlers = [
 			},
 			(items) => ({ items }),
 		),
+	),
+	http.get(
+		'/lucca-api/employees',
+		publicApiHandler(publicApiEmployees, (employee, search) => `${employee.givenName} ${employee.familyName}`.toLowerCase().includes(search), {
+			filters: {
+				id: (employee, ids) => ids.includes(employee.id),
+				status: (employee, statuses) => statuses.includes(employee.status),
+			},
+			embedded: publicApiEmployeesEmbedded,
+		}),
+	),
+	http.get(
+		'/api/v5/departments',
+		publicApiHandler(publicApiDepartments, (department, search) => department.name.toLowerCase().includes(search)),
+	),
+	http.get(
+		'/lucca-api/departments',
+		publicApiHandler(publicApiDepartments, (department, search) => department.name.toLowerCase().includes(search)),
+	),
+	http.get(
+		'/lucca-api/business-establishments',
+		publicApiHandler(publicApiEstablishments, (establishment, search) => establishment.name.toLowerCase().includes(search), {
+			filters: { 'legalEntity.id': (establishment, ids) => ids.includes(establishment.legalEntity.id) },
+			sort: (establishments) => [...establishments].sort((a, b) => publicApiLegalEntities[a.legalEntity.id].legalName.localeCompare(publicApiLegalEntities[b.legalEntity.id].legalName)),
+			embedded: (establishments) => ({
+				'legal-entity': Object.fromEntries(establishments.map(({ legalEntity }) => [legalEntity.id, publicApiLegalEntities[legalEntity.id]])),
+			}),
+		}),
+	),
+	http.get(
+		'/lucca-api/legal-entities',
+		publicApiHandler(Object.values(publicApiLegalEntities), (legalEntity, search) => legalEntity.legalName.toLowerCase().includes(search)),
+	),
+	http.get(
+		'/lucca-api/professions',
+		publicApiHandler(publicApiProfessions, (profession, search) => profession.title.toLowerCase().includes(search)),
+	),
+	http.get(
+		'/lucca-api/job-qualifications',
+		publicApiHandler(publicApiJobQualifications, (jobQualification, search) => jobQualification.title.toLowerCase().includes(search), {
+			filters: { 'profession.id': (jobQualification, ids) => ids.includes(jobQualification.profession.id) },
+			sort: sortJobQualifications,
+		}),
+	),
+	http.get(
+		'/lucca-api/occupation-categories',
+		publicApiHandler(publicApiOccupationCategories, (occupationCategory, search) => occupationCategory.title.toLowerCase().includes(search)),
 	),
 ];

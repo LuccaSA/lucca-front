@@ -1,12 +1,26 @@
 ### Appeler une API
 
-Pour un format de retour V3 ou V4 sans customisation de l'affichage (l'entité doit avoir une propriété `name`), il suffit de donner l'API à appeler :
+Pour un format de retour V3, V4 ou V5 sans customisation de l'affichage (l'entité doit avoir une propriété `name`), il suffit de donner l'API à appeler :
 
 ```html
 <lu-simple-select apiV3="/api/v3/axisSections" />
 
 <lu-simple-select apiV4="/api/legumes" />
+
+<lu-simple-select apiV5="/api/legumes" sort="name" />
+
+<lu-simple-select apiV5="/api/legumes" apiVersion="2025-01-01" />
 ```
+
+`apiVersion` est facultatif sur `apiV5` : il est envoyé dans l'en-tête `Api-Version` quand il est renseigné. Pour l'API publique Lucca, la directive `publicApi` rend cet input obligatoire :
+
+```html
+<lu-simple-select publicApi="/lucca-api/departments" apiVersion="2024-11-01" sort="name" />
+```
+
+Les directives `publicEmployees`, `publicEstablishments`, `publicDepartments`, `publicJobQualifications` et `publicOccupationCategories` appellent directement les collections correspondantes de l'API publique.
+
+`publicEmployees` reprend les options de `users` : le collaborateur connecté en premier (`displayMeOption`, avec `provideCoreSelectCurrentUserId`), l'inclusion des collaborateurs partis (`enableFormerEmployees`) et le département des homonymes. Chaque option expose `picture.href`, le lien de téléchargement de son portrait.
 
 ### Personnaliser l'affichage
 
