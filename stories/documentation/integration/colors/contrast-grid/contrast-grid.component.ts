@@ -154,7 +154,7 @@ interface Cell {
 									</ng-template>
 									<!-- The tooltip goes on an inner element: on the cell, its button role would break the table -->
 									@if (cell.details) {
-										<span class="contrastGrid-mark" [luTooltip]="cell.details!">
+										<span class="contrastGrid-mark pr-u-focusVisible pr-u-borderRadiusSmall" [luTooltip]="cell.details!">
 											<ng-container [ngTemplateOutlet]="mark" />
 										</span>
 									} @else {
@@ -194,7 +194,7 @@ interface Cell {
 				}
 			</p>
 			<details class="contrastGrid-legend">
-				<summary class="contrastGrid-summary">{{ palettes().length }} palettes checked</summary>
+				<summary class="contrastGrid-summary pr-u-focusVisible pr-u-borderRadiusSmall">{{ palettes().length }} palettes checked</summary>
 				<!-- HTML tags rather than lu-tag: its palette input does not cover product palettes -->
 				<!-- Palettes grouped by outcome, with the same samples as the legend -->
 				@for (group of groups(); track group.mod) {
