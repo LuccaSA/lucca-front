@@ -1,0 +1,53 @@
+.horizontalNavigation .horizontalNavigation-list-item-action {
+	margin: 0;
+}
+
+.horizontalNavigation.mod-S {
+	padding: 0;
+}
+
+.horizontalNavigation {
+	max-width: 100%;
+
+	.horizontalNavigation-list {
+		gap: 0;
+	}
+}
+
+// Ambiguous: reported, left untouched
+.page-content,
+.menu {
+	padding-inline: 0;
+}
+
+.pageHeader.mod-withHorizontalNavigation {
+	padding: 0;
+}
+
+.pageHeader {
+	&.mod-withHorizontalNavigation {
+		margin: 0;
+	}
+}
+
+// Another, unrelated .mod-withMenu
+.main.mod-withMenu {
+	margin: 0;
+}
+
+// lucca-ui
+.lui.menu > .item {
+	color: red;
+}
+
+.menu:not(.vertical) > .item {
+	color: red;
+}
+
+.horizontalNavigation-containerOptional {
+	padding: 0;
+}
+
+.horizontalNavigation {
+	gap: 0;
+}

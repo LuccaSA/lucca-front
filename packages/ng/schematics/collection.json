@@ -105,6 +105,11 @@
       "description": "Migrate file upload usages: size default, FileEntry rendering and fileEntryDisplayWrapper",
       "factory": "./file-upload/index",
       "schema": "./file-upload/schema.json"
+    },
+    "menu": {
+      "description": "Migrate the deprecated .menu classes to .horizontalNavigation.",
+      "factory": "./menu/index",
+      "schema": "./menu/schema.json"
     }
   }
 }

@@ -619,7 +619,7 @@ export default [
 		name: 'Menu',
 		objectPattern: /\.menu(-(containerOptional|link-placeholder|list-item-action|link|list))?(?![\w-])/,
 		versionDeprecated: '19.3.0',
-		actions: `Remplacer par [Horizontal navigation](https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation).`,
+		actions: `Remplacer par [Horizontal navigation](https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation), automatiquement avec \`ng g @lucca-front/ng:menu\`.`,
 	},
 	{
 		// Misspelt class, renamed `.horizontalNavigation-containerOptional` in 19.3.0 without a deprecation.
@@ -628,7 +628,7 @@ export default [
 		// SEE https://github.com/LuccaSA/lucca-front/commit/63324c9df3d6955360f0d0e2843ea441d9f8f92f.
 		objectPattern: /\.menu-containerOptionnal(?![\w-])/,
 		versionDeleted: '19.3.0',
-		actions: `Remplacer par \`.horizontalNavigation-containerOptional\` du composant [Horizontal navigation](https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation).`,
+		actions: `Remplacer par \`.horizontalNavigation-containerOptional\` du composant [Horizontal navigation](https://prisme.lucca.io/94310e217/p/29aaef-horizontal-navigation), automatiquement avec \`ng g @lucca-front/ng:menu\`.`,
 	},
 	{
 		// Page header layout for the deprecated `.menu`
@@ -638,7 +638,7 @@ export default [
 		objectPattern: /(?=[^\s>+~]*\.pageHeader(?![\w-]))(?=[^\s>+~]*\.mod-withMenu(?![\w-]))[^\s>+~]*/,
 		versionDeprecated: '19.3.0',
 		actions: `
-			* remplacement : \`*withHorizontalNavigation\`
+			* remplacement : \`*withHorizontalNavigation\`, automatiquement avec \`ng g @lucca-front/ng:menu\`
 			* suppression : \`.pageHeader\` détecte automatiquement \`.horizontalNavigation\`
 		`,
 	},

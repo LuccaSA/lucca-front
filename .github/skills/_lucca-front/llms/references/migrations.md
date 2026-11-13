@@ -4,6 +4,14 @@
 > Source : `packages/ng/schematics/collection.json`. Liste cumulative.
 > Guidance prose (étapes manuelles, contexte) : `./documentation/deprecated/deprecated.md`.
 
+## 🆕 Nouveaux codemods depuis v22.1.2
+
+À envisager en montant **vers** cette version :
+
+| Codemod | Commande | Effet |
+|---------|----------|-------|
+| menu | `ng generate @lucca-front/ng:menu` | Migrate the deprecated .menu classes to .horizontalNavigation. |
+
 ## Catalogue complet (cumulatif)
 
 | Codemod | Commande | Effet | Introduit |
@@ -23,6 +31,7 @@
 | lu-loading | `ng generate @lucca-front/ng:lu-loading` | Migrate HTML loading to the new lu-loading component | — |
 | lu-select | `ng generate @lucca-front/ng:lu-select` | Migrate lu-select into lu-simple-select and lu-multiple-select where possible. | — |
 | lu-text-input | `ng generate @lucca-front/ng:lu-text-input` | Migrate deprecated textfield into lu-text-input where possible. | — |
+| menu | `ng generate @lucca-front/ng:menu` | Migrate the deprecated .menu classes to .horizontalNavigation. | — |
 | new-icons | `ng generate @lucca-front/ng:new-icons` | Replace old icon names with new ones. | — |
 | palettes | `ng generate @lucca-front/ng:palettes` | Replace palettes with new names. | — |
 | tokens-radius | `ng generate @lucca-front/ng:tokens-radius` | Replace radius tokens with new names. | — |
