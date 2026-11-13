@@ -1,24 +1,21 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementRef, input, signal, viewChild } from '@angular/core';
 
-export type Grid = 'neutralOnGroup' | 'groupOnGroup' | 'neutralOnNeutral';
-export type Group = 'products' | 'decoratives' | 'semantics';
+export type Grid = 'neutralOnColor' | 'colorOnColor' | 'neutralOnNeutral';
 type State = 'pass' | 'contrastedOnly' | 'fail';
 
 const SHADES = ['900', '800', '700', '600', '500', '400', '300', '200', '100', '50'];
 const NEUTRALS = ['900', '800', '700', '600', '500', '400', '300', '200', '100', '50', '25', '0'].map((n) => `N${n}`);
 
-const GROUPS: Record<Group, { label: string; palettes: string[] }> = {
-	products: { label: 'Product', palettes: ['brand', 'cleemy', 'timmi', 'poplee', 'coreHR', 'pagga', 'cc'] },
-	decoratives: {
-		label: 'Decorative',
-		palettes: ['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'dragonfruit', 'raspberry', 'watermelon', 'coral', 'cacao', 'pumpkin', 'pineapple'],
-	},
-	semantics: { label: 'Semantic', palettes: ['success', 'warning', 'critical'] },
-};
+// Every color palette: a cell passes only if all of them pass
+const PALETTES = [
+	...['brand', 'cleemy', 'timmi', 'poplee', 'coreHR', 'pagga', 'cc'],
+	...['success', 'warning', 'critical'],
+	...['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'dragonfruit', 'raspberry', 'watermelon', 'coral', 'cacao', 'pumpkin', 'pineapple'],
+];
 
 // Guaranteed pairs (foreground|background, symmetric), 4.5:1 unless listed in NON_TEXT
 const pairs = (list: [string, string[]][]) => list.flatMap(([a, bs]) => bs.flatMap((b) => [`${a}|${b}`, `${b}|${a}`]));
-const NEUTRAL_ON_GROUP = new Set(
+const NEUTRAL_ON_COLOR = new Set(
 	pairs([
 		['N900', ['500', '400', '300', '200', '100', '50']],
 		['N800', ['400', '300', '200', '100', '50']],
@@ -33,7 +30,7 @@ const NEUTRAL_ON_GROUP = new Set(
 		['N0', ['900', '800', '700']],
 	]),
 );
-const GROUP_ON_GROUP = new Set(
+const COLOR_ON_COLOR = new Set(
 	pairs([
 		['900', ['400', '300', '200', '100', '50']],
 		['800', ['300', '200', '100', '50']],
@@ -134,7 +131,7 @@ interface Cell {
 		@if (contrastedOnly().length) {
 			<p class="contrastGrid-legend">Hatched: only in enhanced-contrast mode for {{ contrastedOnly().join(', ') }}.</p>
 		}
-		@if (grid() === 'neutralOnGroup') {
+		@if (grid() === 'neutralOnColor') {
 			<p class="contrastGrid-legend">Dashed: 3:1 contrast, for icons and borders only.</p>
 		}
 	`,
@@ -228,10 +225,7 @@ interface Cell {
 })
 export class ContrastGridComponent {
 	/** Grid to display */
-	readonly grid = input<Grid>('neutralOnGroup');
-
-	/** Group of palettes summarized in the grid */
-	readonly group = input<Group>('products');
+	readonly grid = input<Grid>('neutralOnColor');
 
 	// Probes always rendered, so the colors of both modes can be read at any time
 	readonly normal = viewChild<ElementRef<HTMLElement>>('normal');
@@ -242,13 +236,9 @@ export class ContrastGridComponent {
 		afterNextRender(() => this.#rendered.set(true));
 	}
 
-	readonly rows = computed(() => (this.grid() === 'groupOnGroup' ? SHADES : NEUTRALS));
+	readonly rows = computed(() => (this.grid() === 'colorOnColor' ? SHADES : NEUTRALS));
 	readonly columns = computed(() => (this.grid() === 'neutralOnNeutral' ? NEUTRALS : SHADES));
-	readonly caption = computed(() =>
-		this.grid() === 'neutralOnNeutral'
-			? 'Contrast grid: neutral on neutral'
-			: `Contrast grid: ${this.grid() === 'neutralOnGroup' ? 'neutral' : GROUPS[this.group()].label.toLowerCase()} on ${GROUPS[this.group()].label.toLowerCase()} palettes`,
-	);
+	readonly caption = computed(() => `Contrast grid: ${{ neutralOnColor: 'neutral on color', colorOnColor: 'color on color', neutralOnNeutral: 'neutral on neutral' }[this.grid()]}`);
 
 	readonly cells = computed<Cell[][]>(() => {
 		const normal = this.normal()?.nativeElement;
@@ -257,8 +247,8 @@ export class ContrastGridComponent {
 			return [];
 		}
 		const styles = { normal: getComputedStyle(normal), contrast: getComputedStyle(contrast) };
-		const palettes = this.grid() === 'neutralOnNeutral' ? ['neutral'] : GROUPS[this.group()].palettes;
-		const shape = this.grid() === 'neutralOnGroup' ? NEUTRAL_ON_GROUP : this.grid() === 'groupOnGroup' ? GROUP_ON_GROUP : NEUTRAL_ON_NEUTRAL;
+		const palettes = this.grid() === 'neutralOnNeutral' ? ['neutral'] : PALETTES;
+		const shape = this.grid() === 'neutralOnColor' ? NEUTRAL_ON_COLOR : this.grid() === 'colorOnColor' ? COLOR_ON_COLOR : NEUTRAL_ON_NEUTRAL;
 		const color = (style: CSSStyleDeclaration, palette: string, key: string) =>
 			style.getPropertyValue(key.startsWith('N') ? `--palettes-neutral-${key.slice(1)}` : `--palettes-${palette}-${key}`).trim();
 		const passes = (style: CSSStyleDeclaration, palette: string, row: string, column: string, threshold: number) => {
@@ -269,7 +259,7 @@ export class ContrastGridComponent {
 		return this.rows().map((row) =>
 			this.columns().map((column) => {
 				const key = `${row}|${column}`;
-				const threshold = shape.has(key) ? 4.5 : NON_TEXT.has(key) && this.grid() === 'neutralOnGroup' ? 3 : 0;
+				const threshold = shape.has(key) ? 4.5 : NON_TEXT.has(key) && this.grid() === 'neutralOnColor' ? 3 : 0;
 				if (!threshold) {
 					return { key, threshold, state: 'pass', contrastedOnly: [] };
 				}
@@ -283,7 +273,7 @@ export class ContrastGridComponent {
 
 	readonly contrastedOnly = computed(() => {
 		const names = new Set(this.cells().flatMap((row) => row.flatMap((cell) => cell.contrastedOnly)));
-		return GROUPS[this.group()].palettes.filter((palette) => names.has(palette));
+		return PALETTES.filter((palette) => names.has(palette));
 	});
 
 	label(key: string) {
