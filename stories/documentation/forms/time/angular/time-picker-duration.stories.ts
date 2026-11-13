@@ -2,13 +2,25 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { INLINE_MESSAGE_STATE } from '@lucca-front/ng/inline-message';
-import { BASE_PICKER_SIZE, DurationPickerComponent, luDurationPickerTranslations } from '@lucca-front/ng/time';
+import { BASE_PICKER_SIZE, DURATION_PICKER_UNIT, DurationPickerComponent, luDurationPickerTranslations } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 // `DurationChangeEvent` is not exported by `@lucca-front/ng/time`.
 type DurationChangeEvent = Parameters<DurationPickerComponent['durationChange']['emit']>[0];
+
+const DAYS_STEPS = ['P1D', 'P0.5D', 'P0.25D', 'P0.125D', 'P0.1D'] as const;
+
+type DurationStoryArgs = DurationPickerComponent &
+	FormFieldComponent & {
+		required: boolean;
+		presentation: boolean;
+		stepHoursMinutes: string;
+		stepDays: string;
+		maxHoursMinutes: string;
+		maxDays: string;
+	};
 
 export default {
 	title: 'Documentation/Forms/Time/Angular/Duration',
@@ -85,18 +97,50 @@ export default {
 			description: 'Désactive le composant.',
 			table: { category: 'models' },
 		},
-		step: {
+		unit: {
+			options: setStoryOptions(DURATION_PICKER_UNIT),
 			control: {
-				type: 'text',
+				type: 'select',
 			},
-			description: 'Modifie le pas d’incrémentation.',
+			description: '[v22.2] Bascule le champ entre heures/minutes et un unique champ comptant des jours.',
 			table: { category: 'inputs' },
 		},
-		max: {
+		// `step` and `max` depend on `unit`: one control per unit, only the one of the selected unit is displayed.
+		stepHoursMinutes: {
+			name: '↳ step',
+			if: { arg: 'unit', neq: 'days' },
 			control: {
 				type: 'text',
 			},
-			description: '[v21.1] Définit une valeur maximale.',
+			description: 'Modifie le pas d’incrémentation. Dépend de `unit` : en `hoursMinutes`, une durée en heures et minutes (`PT1M`, `PT15M`, `PT1H`…).',
+			table: { category: 'inputs' },
+		},
+		stepDays: {
+			name: '↳ step',
+			if: { arg: 'unit', eq: 'days' },
+			options: setStoryOptions(DAYS_STEPS),
+			control: {
+				type: 'select',
+			},
+			description: 'Modifie le pas d’incrémentation. Dépend de `unit` : en `days`, un pas parmi `P1D` (par défaut), `P0.5D`, `P0.25D`, `P0.125D` et `P0.1D`.',
+			table: { category: 'inputs' },
+		},
+		maxHoursMinutes: {
+			name: '↳ max',
+			if: { arg: 'unit', neq: 'days' },
+			control: {
+				type: 'text',
+			},
+			description: '[v21.1] Définit une valeur maximale. Dépend de `unit` : en `hoursMinutes`, `PT99H` par défaut.',
+			table: { category: 'inputs' },
+		},
+		maxDays: {
+			name: '↳ max',
+			if: { arg: 'unit', eq: 'days' },
+			control: {
+				type: 'text',
+			},
+			description: '[v21.1] Définit une valeur maximale. Dépend de `unit` : en `days`, `P99D` par défaut.',
 			table: { category: 'inputs' },
 		},
 		presentation: {
@@ -113,9 +157,17 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
+export const Basic: StoryObj<DurationStoryArgs> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, durationChange, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation, durationChange, stepHoursMinutes, stepDays, maxHoursMinutes, maxDays, ...pickerArgs } = args;
+		// Only the `step` and `max` controls of the selected unit are rendered, under their input name
+		const isDays = pickerArgs.unit === 'days';
+		const inputArgs = { ...pickerArgs, step: isDays ? stepDays : stepHoursMinutes, max: isDays ? maxDays : maxHoursMinutes };
+		const inputArgTypes = {
+			...argTypes,
+			step: argTypes[isDays ? 'stepDays' : 'stepHoursMinutes'],
+			max: argTypes[isDays ? 'maxDays' : 'maxHoursMinutes'],
+		};
 		return {
 			props: {
 				onDurationChange: (event: DurationChangeEvent) => durationChange?.(event),
@@ -132,7 +184,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 				},
 				argTypes,
 			)}>
-	<lu-duration-picker label="${label}"${generateInputs(inputArgs, argTypes)} [(ngModel)]="example" (durationChange)="onDurationChange($event)" />
+	<lu-duration-picker label="${label}"${generateInputs(inputArgs, inputArgTypes)} [(ngModel)]="example" (durationChange)="onDurationChange($event)" />
 </lu-form-field>
 
 <pr-story-model-display>{{ example }}</pr-story-model-display>`,
@@ -149,7 +201,18 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 		displayArrows: false,
 		disabled: false,
 		presentation: false,
-		step: 'PT1M',
-		max: 'PT99H',
+		unit: 'hoursMinutes',
+		stepHoursMinutes: 'PT1M',
+		maxHoursMinutes: 'PT99H',
+		maxDays: 'P99D',
+	},
+};
+
+export const Days: StoryObj<DurationStoryArgs> = {
+	...Basic,
+	args: {
+		...Basic.args,
+		unit: 'days',
+		stepDays: 'P0.5D',
 	},
 };

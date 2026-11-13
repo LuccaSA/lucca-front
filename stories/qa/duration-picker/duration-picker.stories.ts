@@ -16,6 +16,8 @@ class DurationPickerStory {
 	emptyDurationControl = new FormControl(null);
 	filledDurationControl = new FormControl('PT1H');
 	filledDuration1000hControl = new FormControl('PT1000H');
+	emptyDaysControl = new FormControl(null);
+	filledDaysControl = new FormControl('P0.5D');
 }
 
 export default {

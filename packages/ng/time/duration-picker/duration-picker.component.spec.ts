@@ -60,6 +60,18 @@ class DurationPickerConfigurableTestComponent {
 	step: ISO8601Duration | null = null;
 }
 
+@Component({
+	selector: 'lu-duration-picker-days-test',
+	imports: [DurationPickerComponent, ReactiveFormsModule],
+	template: `<lu-duration-picker [formControl]="control" unit="days" [max]="max" [step]="step" displayArrows />`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class DurationPickerDaysTestComponent {
+	control = new FormControl<string | null>(null);
+	max: ISO8601Duration | undefined = undefined;
+	step: ISO8601Duration | null = null;
+}
+
 const classSpan = '.timePicker-fieldset-group-textfield-display';
 const classInput = '.timePicker-fieldset-group-textfield-input';
 
@@ -96,6 +108,24 @@ function createConfigurableHost(value: string | null, options: { max?: ISO8601Du
 	fixture.componentInstance.step = options.step ?? null;
 	fixture.detectChanges();
 	return fixture;
+}
+
+function createDaysHost(value: string | null, options: { max?: ISO8601Duration; step?: ISO8601Duration } = {}): ComponentFixture<DurationPickerDaysTestComponent> {
+	TestBed.configureTestingModule({ imports: [DurationPickerDaysTestComponent] });
+	const fixture = TestBed.createComponent(DurationPickerDaysTestComponent);
+	fixture.componentInstance.control = new FormControl(value);
+	fixture.componentInstance.max = options.max;
+	fixture.componentInstance.step = options.step ?? null;
+	fixture.detectChanges();
+	return fixture;
+}
+
+function getDaysInput(fixture: ComponentFixture<unknown>): HTMLInputElement {
+	return (fixture.nativeElement as HTMLElement).querySelector<HTMLInputElement>(classInput)!;
+}
+
+function getDaysDisplay(fixture: ComponentFixture<unknown>): string {
+	return (fixture.nativeElement as HTMLElement).querySelector(classSpan)!.getAttribute('data-content-before')!;
 }
 
 describe('DurationPickerComponent', () => {
@@ -201,6 +231,153 @@ describe('DurationPickerComponent', () => {
 				previousValue: 'PT1H0M',
 				value: 'PT1H30M',
 				source: 'input',
+			});
+		});
+	});
+
+	describe('days unit', () => {
+		it('should render a single field with the day unit', () => {
+			// Arrange & Act
+			const fixture = createDaysHost('P0.5D', { step: 'P0.5D' });
+
+			// Assert
+			expect((fixture.nativeElement as HTMLElement).querySelectorAll(classInput)).toHaveLength(1);
+			expect(getDaysDisplay(fixture)).toBe('0.5');
+			expect((fixture.nativeElement as HTMLElement).querySelector('.timePicker-fieldset-unit')?.getAttribute('data-content-before')).toBe('d');
+		});
+
+		it('should render an empty field with an empty form control', () => {
+			// Arrange & Act
+			const fixture = createDaysHost(null, { step: 'P0.5D' });
+
+			// Assert
+			expect(getDaysDisplay(fixture)).toBe('');
+		});
+
+		it('should display a duration expressed in hours as a number of days', () => {
+			// Arrange & Act
+			const fixture = createDaysHost('PT12H', { step: 'P0.5D' });
+
+			// Assert
+			expect(getDaysDisplay(fixture)).toBe('0.5');
+		});
+
+		it('should emit the ISO duration in days when typing', () => {
+			// Arrange
+			const fixture = createDaysHost(null, { step: 'P0.5D' });
+
+			// Act
+			typeInPart('0.5', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P0.5D');
+		});
+
+		it('should keep a typed value that is off the step', () => {
+			// Arrange
+			const fixture = createDaysHost(null, { step: 'P0.25D' });
+
+			// Act
+			typeInPart('0.3', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P0.3D');
+		});
+
+		it('should drop the decimals the step does not allow', () => {
+			// Arrange
+			const fixture = createDaysHost(null, { step: 'P0.5D' });
+
+			// Act
+			typeInPart('0.25', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P0.2D');
+		});
+
+		it('should increment by the step', () => {
+			// Arrange
+			const fixture = createDaysHost('P0.5D', { step: 'P0.25D' });
+
+			// Act
+			pressKey('ArrowUp', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P0.75D');
+		});
+
+		it('should snap to the step when the current value is off-step', () => {
+			// Arrange
+			const fixture = createDaysHost('P0.3D', { step: 'P0.25D' });
+
+			// Act
+			pressKey('ArrowUp', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P0.5D');
+		});
+
+		it('should increment by a whole day when no step is set', () => {
+			// Arrange
+			const fixture = createDaysHost('P1D');
+
+			// Act
+			pressKey('ArrowUp', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P2D');
+		});
+
+		it('should clamp to zero when decrementing below zero', () => {
+			// Arrange
+			const fixture = createDaysHost('P0D', { step: 'P0.25D' });
+
+			// Act
+			pressKey('ArrowDown', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P0D');
+		});
+
+		it('should clamp to max when incrementing past it', () => {
+			// Arrange
+			const fixture = createDaysHost('P2D', { max: 'P2D', step: 'P0.5D' });
+
+			// Act
+			pressKey('ArrowUp', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P2D');
+		});
+
+		it('should clamp to max when typing a greater value', () => {
+			// Arrange
+			const fixture = createDaysHost(null, { max: 'P10D' });
+
+			// Act
+			typeInPart('99', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P10D');
+		});
+
+		it('should emit a durationChange event for the days part', () => {
+			// Arrange
+			const fixture = createDaysHost('P1D', { step: 'P1D' });
+			const picker = fixture.debugElement.query(By.directive(DurationPickerComponent)).componentInstance as DurationPickerComponent;
+			const durationChange = vi.fn();
+			picker.durationChange.subscribe((event) => durationChange(event));
+
+			// Act
+			pressKey('ArrowUp', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(durationChange).toHaveBeenCalledExactlyOnceWith({
+				previousValue: 'P1D',
+				value: 'P2D',
+				source: 'control',
+				part: 'days',
+				direction: 'up',
 			});
 		});
 	});

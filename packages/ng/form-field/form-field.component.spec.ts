@@ -1,4 +1,4 @@
-import { ApplicationRef, ChangeDetectionStrategy, Component, computed, createComponent, input, viewChild } from '@angular/core';
+import { ApplicationRef, ChangeDetectionStrategy, Component, computed, createComponent, createEnvironmentInjector, EnvironmentInjector, input, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormFieldIdDirective, TextInputComponent } from '@lucca-front/ng/forms';
@@ -396,6 +396,23 @@ describe('FormFieldComponent', () => {
 
 			// Act & Assert
 			expect(() => appRef.destroy()).not.toThrow();
+		});
+	});
+
+	describe('when the injector is destroyed before the views it created', () => {
+		// Mirrors a Storybook story switching templates: the environment injector goes away first, then the
+		// views are torn down — anything scheduled from a destroy hook then injects from a dead injector.
+		it('should not schedule work while the inputs are unregistering', () => {
+			// Arrange
+			const environmentInjector = createEnvironmentInjector([], TestBed.inject(EnvironmentInjector));
+			const componentRef = createComponent(FormFieldMultipleInputsTestComponent, { environmentInjector });
+			componentRef.changeDetectorRef.detectChanges();
+
+			// Act
+			environmentInjector.destroy();
+
+			// Assert
+			expect(() => componentRef.destroy()).not.toThrow();
 		});
 	});
 });
