@@ -1,5 +1,6 @@
 import { createTestStory } from '@/helpers/stories';
 import { pickDay, waitForAngular } from '@/helpers/test';
+import { StoryObj } from '@storybook/angular-vite';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import meta, { Basic } from '@/stories/forms/filter-pills/angular/filter-bar.stories';
 
@@ -112,5 +113,50 @@ export const OptionalFilterTEST = createTestStory({ ...Basic, name: 'Optional fi
 		await expect(queryPeriodPill()).not.toBeInTheDocument();
 		await closeAdditionalFilters();
 		await expect(getAddFiltersButton()).toHaveFocus();
+	});
+});
+
+const ConditionalAddons: StoryObj = {
+	name: 'Conditional addons',
+	render: () => ({
+		props: { withAddons: true },
+		template: `<button type="button" luButton="outlined" (click)="withAddons = !withAddons">Afficher les addons</button>
+<lu-filter-bar>
+	@if (withAddons) {
+		<span *luFilterPillAddonBefore>Addon avant</span>
+		<button *luFilterPillAddonAfter type="button" luButton="outlined">Exporter</button>
+	}
+	<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
+		<lu-checkbox-input [ngModel]="false" />
+	</lu-filter-pill>
+</lu-filter-bar>`,
+	}),
+};
+
+export const ConditionalAddonsTEST = createTestStory(ConditionalAddons, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const toggle = canvas.getByRole('button', { name: 'Afficher les addons' });
+
+	await step('The addons are displayed while their condition is true', async () => {
+		await expect(canvas.getByText('Addon avant')).toBeVisible();
+		await expect(canvas.getByRole('button', { name: 'Exporter' })).toBeVisible();
+	});
+
+	await step('The addons are removed when their condition turns false', async () => {
+		await userEvent.click(toggle);
+		await waitForAngular();
+
+		await expect(canvas.queryByText('Addon avant')).not.toBeInTheDocument();
+		await expect(canvas.queryByRole('button', { name: 'Exporter' })).not.toBeInTheDocument();
+	});
+
+	await step('The addons are displayed again when their condition turns true', async () => {
+		await userEvent.click(toggle);
+		await waitForAngular();
+
+		await expect(canvas.getByText('Addon avant')).toBeVisible();
+		await expect(canvas.getByRole('button', { name: 'Exporter' })).toBeVisible();
 	});
 });
