@@ -11,7 +11,6 @@ import { registerFormatSelectionChange } from './text-style.command';
 	selector: 'lu-rich-text-plugin-text-style',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './text-style.component.html',
-	styleUrl: './text-style.component.scss',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
 	host: {
 		class: 'richTextField-toolbar-col-group',
