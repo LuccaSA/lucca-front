@@ -1,0 +1,53 @@
+.menu .menu-link {
+	margin: 0;
+}
+
+.menu.mod-S {
+	padding: 0;
+}
+
+.menu {
+	max-width: 100%;
+
+	.menu-list {
+		gap: 0;
+	}
+}
+
+// Ambiguous: reported, left untouched
+.page-content,
+.menu {
+	padding-inline: 0;
+}
+
+.pageHeader.mod-withMenu {
+	padding: 0;
+}
+
+.pageHeader {
+	&.mod-withMenu {
+		margin: 0;
+	}
+}
+
+// Another, unrelated .mod-withMenu
+.main.mod-withMenu {
+	margin: 0;
+}
+
+// lucca-ui
+.lui.menu > .item {
+	color: red;
+}
+
+.menu:not(.vertical) > .item {
+	color: red;
+}
+
+.menu-containerOptional {
+	padding: 0;
+}
+
+.menu.horizontalNavigation {
+	gap: 0;
+}
