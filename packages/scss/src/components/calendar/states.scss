@@ -106,7 +106,16 @@
 }
 
 @mixin startInProgress {
-	&:not(:hover) {
+	// With a mouse, the hovered bound is only a preview: keep it lighter than the picked one.
+	@media (hover: hover) {
+		&:not(:hover) {
+			@include extremity;
+		}
+	}
+
+	// On touch devices, there is no preview and a tap leaves a sticky :hover on the date
+	// just picked: always style it as an extremity so the first tap is visibly taken into account.
+	@media not (hover: hover) {
 		@include extremity;
 	}
 
@@ -135,7 +144,16 @@
 }
 
 @mixin endInProgress {
-	&:not(:hover) {
+	// With a mouse, the hovered bound is only a preview: keep it lighter than the picked one.
+	@media (hover: hover) {
+		&:not(:hover) {
+			@include extremity;
+		}
+	}
+
+	// On touch devices, there is no preview and a tap leaves a sticky :hover on the date
+	// just picked: always style it as an extremity so the first tap is visibly taken into account.
+	@media not (hover: hover) {
 		@include extremity;
 	}
 

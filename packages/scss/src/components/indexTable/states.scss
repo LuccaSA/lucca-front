@@ -37,8 +37,11 @@
 }
 
 @mixin hoveredRow {
-	.indexTable-body-row:hover {
-		@include hoveredCells;
+	// Visual feedback only (shadow, offset, z-index): it must not stick after a tap on touch devices.
+	@media (hover: hover) {
+		.indexTable-body-row:hover {
+			@include hoveredCells;
+		}
 	}
 }
 

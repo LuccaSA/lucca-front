@@ -36,9 +36,13 @@
 }
 
 @mixin stepperHover {
-	&:not(:hover, :focus-within) {
-		.timePicker-fieldset-group-stepper {
-			opacity: 0;
+	// Steppers are only hidden on hover-capable devices: touch devices cannot hover to reveal
+	// them, so they stay visible there instead of depending on a sticky :hover after a tap.
+	@media (hover: hover) {
+		&:not(:hover, :focus-within) {
+			.timePicker-fieldset-group-stepper {
+				opacity: 0;
+			}
 		}
 	}
 }

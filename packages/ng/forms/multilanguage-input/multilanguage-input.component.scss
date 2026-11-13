@@ -10,9 +10,13 @@
 			padding: var(--pr-t-spacings-50);
 		}
 
-		.textField:not(:focus-within, :hover) {
-			.multilanguage_popover-content-button {
-				@include a11y.mask;
+		// The button is only hidden on hover-capable devices: touch devices cannot hover to reveal it,
+		// so it stays visible there instead of depending on a sticky :hover after a tap.
+		@media (hover: hover) {
+			.textField:not(:focus-within, :hover) {
+				.multilanguage_popover-content-button {
+					@include a11y.mask;
+				}
 			}
 		}
 	}

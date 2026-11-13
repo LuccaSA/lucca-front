@@ -2,8 +2,12 @@
 	lu-tree-branch {
 		// The onlyParent/onlyChildren affordances stay hidden until the row is hovered or
 		// keyboard-highlighted. Indentation is handled by the listbox wrapper level, not here.
-		.optionItem-icons {
-			opacity: 0;
+		// They are only hidden on hover-capable devices: touch devices cannot hover to reveal them,
+		// so they stay visible there instead of depending on a sticky :hover after a tap.
+		@media (hover: hover) {
+			.optionItem-icons {
+				opacity: 0;
+			}
 		}
 
 		.listboxOption-content {
