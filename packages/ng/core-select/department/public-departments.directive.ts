@@ -38,7 +38,7 @@ export class LuCoreSelectPublicDepartmentsDirective<T extends LuCoreSelectPublic
 		...this.filters(),
 	}));
 
-	#tree?: { key: string; tree$: Observable<TreeNode<T>[]> };
+	#tree?: { key: string; tree$: Observable<Branch<T>[]> };
 
 	protected override getOptionsPage(params: Record<string, string | number | boolean>, page: number): Observable<{ items: TreeNode<T>[]; isLastPage: boolean }> {
 		if (page > 0) {
@@ -53,7 +53,7 @@ export class LuCoreSelectPublicDepartmentsDirective<T extends LuCoreSelectPublic
 
 	protected override optionKey = (option: TreeNode<T> | T) => ('node' in option ? option.node.id : option.id);
 
-	#getTree(params: Record<string, string | number | boolean>): Observable<TreeNode<T>[]> {
+	#getTree(params: Record<string, string | number | boolean>): Observable<Branch<T>[]> {
 		const key = JSON.stringify(params);
 		if (this.#tree?.key !== key) {
 			this.#tree = {
@@ -68,9 +68,13 @@ export class LuCoreSelectPublicDepartmentsDirective<T extends LuCoreSelectPublic
 	}
 }
 
-function buildTree<T extends LuCoreSelectPublicDepartment>(departments: T[]): TreeNode<T>[] {
-	const branches = new Map(departments.map((department) => [department.id, { node: department, children: [] as TreeNode<T>[] }]));
-	const roots: TreeNode<T>[] = [];
+interface Branch<T> extends TreeNode<T> {
+	children: Branch<T>[];
+}
+
+function buildTree<T extends LuCoreSelectPublicDepartment>(departments: T[]): Branch<T>[] {
+	const branches = new Map<string, Branch<T>>(departments.map((department) => [department.id, { node: department, children: [] }]));
+	const roots: Branch<T>[] = [];
 	for (const branch of branches.values()) {
 		const parent = branch.node.parent ? branches.get(branch.node.parent.id) : undefined;
 		(parent?.children ?? roots).push(branch);
@@ -78,13 +82,11 @@ function buildTree<T extends LuCoreSelectPublicDepartment>(departments: T[]): Tr
 	return sortBranches(roots);
 }
 
-function sortBranches<T extends LuCoreSelectPublicDepartment>(branches: TreeNode<T>[]): TreeNode<T>[] {
-	return branches
-		.sort((a, b) => (a.node.sortOrder ?? 0) - (b.node.sortOrder ?? 0) || a.node.name.localeCompare(b.node.name))
-		.map((branch) => ({ ...branch, children: sortBranches(branch.children ?? []) }));
+function sortBranches<T extends LuCoreSelectPublicDepartment>(branches: Branch<T>[]): Branch<T>[] {
+	return branches.sort((a, b) => (a.node.sortOrder ?? 0) - (b.node.sortOrder ?? 0) || a.node.name.localeCompare(b.node.name)).map((branch) => ({ ...branch, children: sortBranches(branch.children) }));
 }
 
-function trim<T extends LuCoreSelectPublicDepartment>(branches: TreeNode<T>[], clue: string): TreeNode<T>[] {
+function trim<T extends LuCoreSelectPublicDepartment>(branches: Branch<T>[], clue: string): Branch<T>[] {
 	if (!clue) {
 		return branches;
 	}
@@ -92,7 +94,7 @@ function trim<T extends LuCoreSelectPublicDepartment>(branches: TreeNode<T>[], c
 		if (branch.node.name.toLowerCase().includes(clue)) {
 			return [branch];
 		}
-		const children = trim(branch.children ?? [], clue);
+		const children = trim(branch.children, clue);
 		return children.length ? [{ ...branch, children }] : [];
 	});
 }
