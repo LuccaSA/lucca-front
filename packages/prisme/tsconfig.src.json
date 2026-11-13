@@ -10,7 +10,7 @@
 		// Also applies to the build, so published types model nullability
 		"strictNullChecks": true
 	},
-	"exclude": ["**/*.spec.ts", "**/*.spec.*.ts"],
+	"exclude": ["**/*.spec.ts", "**/*.spec.*.ts", "**/*.spec-d.ts"],
 	"angularCompilerOptions": {
 		"preserveSymlinks": true,
 		"annotateForClosureCompiler": false,
