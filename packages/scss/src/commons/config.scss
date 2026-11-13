@@ -154,15 +154,28 @@ $tokenAI: (
 
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
-$palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted', 'warningContrasted';
+$palettesStates: 'critical', 'criticalContrasted', 'error', 'warning', 'success', 'successContrasted', 'warningContrasted';
 $palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'orchid';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
 $palettesDecorative: 'kiwi', 'cucumber', 'mint', 'lagoon', 'blueberry', 'lavender', 'dragonfruit', 'raspberry', 'watermelon', 'coral', 'cacao', 'pumpkin' !default;
-$palettesDecorativeMandatory: 'pineapple', 'lime', 'grape', 'glacier', 'pineappleContrasted';
+$palettesDecorativeMandatory: 'pineapple', 'lime', 'grape', 'glacier';
+
+// Decorative palettes with a contrasted variant: the variant is loaded only with its palette
+$palettesDecorativeWithContrasted: 'cucumber', 'mint', 'glacier', 'pumpkin', 'pineapple';
 
 @if $palettesOtherProduct == 'all' {
 	$palettesOtherProduct: ('pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc');
+}
+
+$palettesDecorativeContrasted: ();
+$palettesDecorativeContrastedVariants: ();
+
+@each $palette in function.flatMap($palettesDecorative, $palettesDecorativeMandatory) {
+	@if list.index($palettesDecorativeWithContrasted, $palette) {
+		$palettesDecorativeContrasted: list.append($palettesDecorativeContrasted, $palette);
+		$palettesDecorativeContrastedVariants: list.append($palettesDecorativeContrastedVariants, '#{$palette}Contrasted');
+	}
 }
 
 $palettesAll: function.flatMap(
@@ -172,6 +185,7 @@ $palettesAll: function.flatMap(
 	$palettesOtherProduct,
 	$palettesDecorative,
 	$palettesDecorativeMandatory,
+	$palettesDecorativeContrastedVariants,
 );
 
 $palettesAssets: (
@@ -279,7 +293,7 @@ $poplee: (
 	400: #7bc3ea,
 	500: #48abe0,
 	600: #2b8fc5,
-	700: #0b77b1,
+	700: #0775af,
 	800: #005685,
 	900: #003c5c
 ) !default;
@@ -403,7 +417,7 @@ $warningContrasted: (
 	500: #ffb13d,
 	600: #d97e26,
 	700: #b34b0f,
-	800: #9a3b08,
+	800: #953701,
 	900: #802a00
 );
 
@@ -418,8 +432,24 @@ $critical: (
 	400: #fa8989,
 	500: #f76e6e,
 	600: #f15050,
-	700: #da2f2f,
+	700: #d22629,
 	800: #aa0e0e,
+	900: #630303
+);
+
+$criticalContrasted: (
+	// text is deprecated
+	text: #ffffff,
+	0: #ffffff,
+	50: #ffebec,
+	100: #ffd2d4,
+	200: #fdbebe,
+	300: #faa3a3,
+	400: #fa8989,
+	500: #f76e6e,
+	600: #f15050,
+	700: #d22629,
+	800: #9b0005,
 	900: #630303
 );
 
@@ -429,12 +459,12 @@ $kiwi: (
 	50: #ecf7dd,
 	100: #daedc1,
 	200: #c9e6a5,
-	300: #add578,
+	300: #afd87a,
 	400: #96c855,
 	500: #7ebb33,
-	600: #66a700,
-	700: #4e8400,
-	800: #3d6800,
+	600: #65a502,
+	700: #4a7c01,
+	800: #386002,
 	900: #2c4b00,
 ) !default;
 
@@ -447,7 +477,7 @@ $lime: (
 	500: #59b94a,
 	600: #2ca714,
 	700: #147c00,
-	800: #0d6100,
+	800: #0d5d01,
 	900: #084600,
 ) !default;
 
@@ -464,6 +494,19 @@ $cucumber: (
 	900: #005229,
 ) !default;
 
+$cucumberContrasted: (
+	50: #dbf9ea,
+	100: #c0f2d9,
+	200: #a0eac4,
+	300: #6ddba5,
+	400: #3bcc89,
+	500: #00bb6e,
+	600: #00a65a,
+	700: #037f40,
+	800: #016031,
+	900: #004823,
+) !default;
+
 $mint: (
 	50: #d3f5ee,
 	100: #b7f3e7,
@@ -474,6 +517,19 @@ $mint: (
 	600: #009b7e,
 	700: #008a6e,
 	800: #006b56,
+	900: #004d3d,
+) !default;
+
+$mintContrasted: (
+	50: #d3f5ee,
+	100: #b7f3e7,
+	200: #92ecda,
+	300: #4bdcc2,
+	400: #00c6a5,
+	500: #00b492,
+	600: #009b7e,
+	700: #057a62,
+	800: #025e4c,
 	900: #004d3d,
 ) !default;
 
@@ -490,6 +546,19 @@ $glacier: (
 	900: #005252,
 ) !default;
 
+$glacierContrasted: (
+	50: #d1f5f5,
+	100: #b3f0f1,
+	200: #87e7e7,
+	300: #32d8d9,
+	400: #00caca,
+	500: #00b7b7,
+	600: #00a0a0,
+	700: #047878,
+	800: #015a5b,
+	900: #014242,
+) !default;
+
 $lagoon: (
 	50: #d5f3ff,
 	100: #b4e9ff,
@@ -499,34 +568,34 @@ $lagoon: (
 	500: #00a4dc,
 	600: #008ec4,
 	700: #006c97,
-	800: #005375,
+	800: #015274,
 	900: #00425d,
 ) !default;
 
 $blueberry: (
-	50: #dde8ff,
+	50: #e1ebff,
 	100: #c5d8ff,
 	200: #adc8ff,
 	300: #8eb3ff,
-	400: #6999fc,
+	400: #6b9cff,
 	500: #5489f8,
 	600: #3573f2,
 	700: #295cc2,
-	800: #1c4496,
-	900: #163573,
+	800: #1a4193,
+	900: #143270,
 ) !default;
 
 $lavender: (
-	50: #eadffa,
+	50: #f0e6ff,
 	100: #dfcdf9,
-	200: #d3baf9,
+	200: #d6bdfc,
 	300: #c8a3fc,
 	400: #b98df8,
 	500: #a775ec,
 	600: #975ce7,
 	700: #7549b9,
-	800: #5d3a94,
-	900: #482d72,
+	800: #56328c,
+	900: #452a6f,
 ) !default;
 
 $grape: (
@@ -534,7 +603,7 @@ $grape: (
 	100: #f3d6ff,
 	200: #edc2ff,
 	300: #de9ff9,
-	400: #cc7ded,
+	400: #cd7eee,
 	500: #b95ae2,
 	600: #a440cf,
 	700: #891eb8,
@@ -554,7 +623,7 @@ $dragonfruit: (
 	500: #e976cd,
 	600: #d559bb,
 	700: #ac4195,
-	800: #863174,
+	800: #832f72,
 	900: #652457,
 ) !default;
 
@@ -567,7 +636,7 @@ $raspberry: (
 	500: #fa70a3,
 	600: #e7518f,
 	700: #ba3a6f,
-	800: #922b56,
+	800: #8f2954,
 	900: #6e2040,
 ) !default;
 
@@ -580,7 +649,7 @@ $watermelon: (
 	500: #ff7275,
 	600: #ef515c,
 	700: #c03a43,
-	800: #972b33,
+	800: #942831,
 	900: #712025,
 ) !default;
 
@@ -593,7 +662,7 @@ $coral: (
 	500: #fd7a4d,
 	600: #ec5e27,
 	700: #c33e00,
-	800: #973001,
+	800: #932f02,
 	900: #732301,
 ) !default;
 
@@ -606,7 +675,7 @@ $cacao: (
 	500: #d98d56,
 	600: #c4763d,
 	700: #9e5a24,
-	800: #7d4417,
+	800: #7a4214,
 	900: #5d3212,
 ) !default;
 
@@ -621,6 +690,19 @@ $pumpkin: (
 	700: #bd6f00,
 	800: #935500,
 	900: #784400,
+) !default;
+
+$pumpkinContrasted: (
+	50: #ffeedf,
+	100: #ffddbe,
+	200: #ffcd9e,
+	300: #ffb267,
+	400: #f59a33,
+	500: #e68800,
+	600: #d17c00,
+	700: #a15d02,
+	800: #774401,
+	900: #643800,
 ) !default;
 
 $pineapple: (
@@ -643,10 +725,10 @@ $pineappleContrasted: (
 	300: #f9e16c,
 	400: #f8dc4f,
 	500: #e7c623,
-	600: #b89600,
-	700: #8f7500,
-	800: #7b6500,
-	900: #665400,
+	600: #af9202,
+	700: #896e01,
+	800: #685301,
+	900: #504001,
 ) !default;
 
 // https://sass-lang.com/documentation/variables/#advanced-variable-functions
@@ -672,13 +754,17 @@ $palettesInterpolation: (
 	'successContrasted': $successContrasted,
 	'error': $critical,
 	'critical': $critical,
+	'criticalContrasted': $criticalContrasted,
 	'warning': $warning,
 	'warningContrasted': $warningContrasted,
 	'kiwi': $kiwi,
 	'lime': $lime,
 	'cucumber': $cucumber,
+	'cucumberContrasted': $cucumberContrasted,
 	'mint': $mint,
+	'mintContrasted': $mintContrasted,
 	'glacier': $glacier,
+	'glacierContrasted': $glacierContrasted,
 	'lagoon': $lagoon,
 	'blueberry': $blueberry,
 	'lavender': $lavender,
@@ -689,6 +775,7 @@ $palettesInterpolation: (
 	'coral': $coral,
 	'cacao': $cacao,
 	'pumpkin': $pumpkin,
+	'pumpkinContrasted': $pumpkinContrasted,
 	'pineapple': $pineapple,
 	'pineappleContrasted': $pineappleContrasted,
 	'pagga': $pagga,
