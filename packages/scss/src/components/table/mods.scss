@@ -32,7 +32,12 @@
 		color: var(--palettes-neutral-800);
 		text-decoration: none;
 
-		&:hover,
+		@media (hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
 		&:focus {
 			text-decoration: underline;
 		}
@@ -42,7 +47,14 @@
 	.table-foot-row {
 		cursor: pointer;
 
-		&:hover,
+		@media (hover: hover) {
+			&:hover {
+				.table-body-row-cell {
+					background-color: var(--components-table-hover-background);
+				}
+			}
+		}
+
 		&:focus-within {
 			.table-body-row-cell {
 				background-color: var(--components-table-hover-background);
@@ -160,11 +172,11 @@
 		@media (hover: hover) {
 			&:hover {
 				outline: none;
+				text-decoration: underline;
 			}
 		}
 
-		&:focus-visible,
-		&:hover {
+		&:focus-visible {
 			outline: none;
 			text-decoration: underline;
 		}

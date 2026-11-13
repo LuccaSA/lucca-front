@@ -11,8 +11,14 @@
 		outline: none;
 	}
 
-	&:focus-visible,
-	&:hover {
+	@media (hover: hover) {
+		&:hover {
+			outline: none;
+			background-color: var(--components-list-hover-background);
+		}
+	}
+
+	&:focus-visible {
 		outline: none;
 		background-color: var(--components-list-hover-background);
 	}

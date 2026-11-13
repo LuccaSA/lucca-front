@@ -62,7 +62,12 @@
 			transform: scale(var(--components-avatarWrapper-scale));
 			color: currentColor;
 
-			&:hover,
+			@media (hover: hover) {
+				&:hover {
+					--components-avatarWrapper-scale: 1.1;
+				}
+			}
+
 			&:focus {
 				--components-avatarWrapper-scale: 1.1;
 			}

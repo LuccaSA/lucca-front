@@ -72,7 +72,14 @@
 			inline-size: auto;
 
 			&:not([disabled]) {
-				&:hover,
+				@media (hover: hover) {
+					&:hover {
+						color: currentColor;
+						text-decoration: underline;
+						cursor: pointer;
+					}
+				}
+
 				&:focus {
 					color: currentColor;
 					text-decoration: underline;

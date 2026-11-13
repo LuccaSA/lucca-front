@@ -4,13 +4,27 @@
 @mixin clickable {
 	--components-tag-cursor: pointer;
 
-	&:hover,
+	@media (hover: hover) {
+		&:hover {
+			--components-tag-decoration: underline;
+		}
+	}
+
 	&:focus {
 		--components-tag-decoration: underline;
 	}
 
 	&:has(.tag-content) {
-		&:hover,
+		@media (hover: hover) {
+			&:hover {
+				--components-tag-decoration: none;
+
+				.tag-content {
+					--components-tag-decoration: underline;
+				}
+			}
+		}
+
 		&:focus {
 			--components-tag-decoration: none;
 

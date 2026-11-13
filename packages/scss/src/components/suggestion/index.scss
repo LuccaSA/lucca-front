@@ -4,12 +4,22 @@
 	@include vars;
 	@include component;
 
-	&:has(.suggestion-callout-accept:hover),
+	@media (hover: hover) {
+		&:has(.suggestion-callout-accept:hover) {
+			@include accept;
+		}
+	}
+
 	&:has(.suggestion-callout-accept:focus-visible) {
 		@include accept;
 	}
 
-	&:has(.suggestion-callout-reject:hover),
+	@media (hover: hover) {
+		&:has(.suggestion-callout-reject:hover) {
+			@include reject;
+		}
+	}
+
 	&:has(.suggestion-callout-reject:focus-visible) {
 		@include reject;
 	}

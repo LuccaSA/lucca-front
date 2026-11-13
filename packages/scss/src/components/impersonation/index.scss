@@ -11,8 +11,10 @@
 			@include triggerActive;
 		}
 
-		&:has(.impersonation-trigger:hover) {
-			@include triggerHover;
+		@media (hover: hover) {
+			&:has(.impersonation-trigger:hover) {
+				@include triggerHover;
+			}
 		}
 
 		&:has(.impersonation-trigger[aria-expanded='true']) {

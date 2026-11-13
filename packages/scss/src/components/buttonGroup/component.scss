@@ -32,7 +32,12 @@
 		}
 
 		&:not([disabled], .is-disabled) {
-			&:hover,
+			@media (hover: hover) {
+				&:hover {
+					z-index: 1;
+				}
+			}
+
 			&:focus-visible {
 				z-index: 1;
 			}

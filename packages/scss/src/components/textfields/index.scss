@@ -273,7 +273,13 @@
 	}
 
 	.textfield-options-entry {
-		&:is(:hover, .is-focus, .focus) {
+		@media (hover: hover) {
+			&:hover {
+				@include entryHover;
+			}
+		}
+
+		&:is(.is-focus, .focus) {
 			@include entryHover;
 		}
 	}
@@ -303,7 +309,13 @@
 		&:is(.is-error, .error) {
 			@include framedState('error');
 
-			&:is(:focus-within, :hover) {
+			@media (hover: hover) {
+				&:hover {
+					@include framedErrorHover;
+				}
+			}
+
+			&:focus-within {
 				@include framedErrorHover;
 			}
 

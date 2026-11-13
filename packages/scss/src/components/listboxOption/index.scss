@@ -10,7 +10,12 @@
 		&.mod-add {
 			@include add;
 
-			&:hover,
+			@media (hover: hover) {
+				&:hover {
+					@include addHover;
+				}
+			}
+
 			&:has(> .listboxOption-content.is-hovered) {
 				@include addHover;
 			}
@@ -186,7 +191,12 @@
 				@include multiple;
 
 				.listboxOption {
-					&:hover,
+					@media (hover: hover) {
+						&:hover {
+							@include multipleHover;
+						}
+					}
+
 					&.is-hovered,
 					&:has(> .listboxOption-content.is-hovered) {
 						@include multipleHover;
@@ -202,7 +212,12 @@
 						> .listboxOption-content {
 							@include multipleSelected;
 
-							&:hover,
+							@media (hover: hover) {
+								&:hover {
+									@include multipleSelectedHover;
+								}
+							}
+
 							&.is-hovered {
 								@include multipleSelectedHover;
 							}
@@ -217,7 +232,12 @@
 						> .listboxOption-content {
 							@include multipleMixed;
 
-							&:hover,
+							@media (hover: hover) {
+								&:hover {
+									@include multipleMixedHover;
+								}
+							}
+
 							&.is-hovered {
 								@include multipleMixedHover;
 							}

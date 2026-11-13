@@ -47,7 +47,12 @@
 		.softwareIconWrapper-action {
 			@include insideWrapper;
 
-			&:hover,
+			@media (hover: hover) {
+				&:hover {
+					@include insideWrapperHover;
+				}
+			}
+
 			&:focus {
 				@include insideWrapperHover;
 			}
@@ -65,7 +70,12 @@
 		.softwareIconWrapper-action {
 			@include block;
 
-			&:hover,
+			@media (hover: hover) {
+				&:hover {
+					@include insideWrapperHover;
+				}
+			}
+
 			&:focus {
 				@include insideWrapperHover;
 			}

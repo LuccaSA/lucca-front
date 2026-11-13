@@ -303,7 +303,15 @@
 	}
 
 	&:not(.is-disabled, :disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
-		&:hover,
+		@media (hover: hover) {
+			&:hover {
+				position: relative;
+				z-index: 1;
+				background-color: var(--palettes-neutral-0);
+				box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-600));
+			}
+		}
+
 		&:focus {
 			position: relative;
 			z-index: 1;

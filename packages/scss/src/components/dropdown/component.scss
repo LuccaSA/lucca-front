@@ -86,7 +86,13 @@
 				padding-inline-start: var(--pr-t-spacings-100);
 			}
 
-			&:is(:hover, :focus-visible) .kbd {
+			@media (hover: hover) {
+				&:hover .kbd {
+					@include kbd.play;
+				}
+			}
+
+			&:focus-visible .kbd {
 				@include kbd.play;
 			}
 
@@ -95,7 +101,12 @@
 				color: var(--components-dropdown-list-option-action-color);
 			}
 
-			&:hover,
+			@media (hover: hover) {
+				&:hover {
+					--components-dropdown-list-option-action-backgroundColor: var(--palettes-neutral-50);
+				}
+			}
+
 			&:focus-visible {
 				--components-dropdown-list-option-action-backgroundColor: var(--palettes-neutral-50);
 			}

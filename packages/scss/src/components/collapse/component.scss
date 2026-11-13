@@ -15,8 +15,13 @@
 				display: none;
 			}
 
-			&:focus-within,
-			&:hover {
+			@media (hover: hover) {
+				&:hover {
+					color: var(--palettes-neutral-900);
+				}
+			}
+
+			&:focus-within {
 				color: var(--palettes-neutral-900);
 			}
 

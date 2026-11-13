@@ -39,7 +39,13 @@
 				margin: 0;
 			}
 
-			&:hover,
+			@media (hover: hover) {
+				&:hover {
+					background-color: var(--palettes-100, var(--palettes-product-100));
+					outline: none;
+				}
+			}
+
 			&:focus,
 			&:focus-visible {
 				background-color: var(--palettes-100, var(--palettes-product-100));
