@@ -3,7 +3,7 @@ import { afterNextRender, ChangeDetectionStrategy, Component, computed, ElementR
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
-export type Grid = 'neutralOnColor' | 'colorOnColor' | 'neutralOnNeutral';
+export type Grid = 'neutralVsPalette' | 'withinPalette' | 'withinNeutral';
 type State = 'pass' | 'contrastedOnly' | 'fail';
 
 const SHADES = ['900', '800', '700', '600', '500', '400', '300', '200', '100', '50'];
@@ -43,7 +43,7 @@ const detectPalettes = () => {
 
 // Guaranteed pairs (foreground|background, symmetric), 4.5:1 unless listed in NON_TEXT
 const pairs = (list: [string, string[]][]) => list.flatMap(([a, bs]) => bs.flatMap((b) => [`${a}|${b}`, `${b}|${a}`]));
-const NEUTRAL_ON_COLOR = new Set(
+const NEUTRAL_VS_PALETTE = new Set(
 	pairs([
 		['N900', ['500', '400', '300', '200', '100', '50']],
 		['N800', ['400', '300', '200', '100', '50']],
@@ -58,14 +58,14 @@ const NEUTRAL_ON_COLOR = new Set(
 		['N0', ['900', '800', '700']],
 	]),
 );
-const COLOR_ON_COLOR = new Set(
+const WITHIN_PALETTE = new Set(
 	pairs([
 		['900', ['400', '300', '200', '100', '50']],
 		['800', ['300', '200', '100', '50']],
 		['700', ['50']],
 	]),
 );
-const NEUTRAL_ON_NEUTRAL = new Set(
+const WITHIN_NEUTRAL = new Set(
 	pairs([
 		['N900', ['N500', 'N400', 'N300', 'N200', 'N100', 'N50', 'N25', 'N0']],
 		['N800', ['N400', 'N300', 'N200', 'N100', 'N50', 'N25', 'N0']],
@@ -121,7 +121,7 @@ interface Cell {
 				<tr>
 					<td class="contrastGrid-corner" colspan="2"></td>
 					<td class="contrastGrid-axis" [attr.colspan]="columns().length">
-						<span class="contrastGrid-label" aria-hidden="true">Background</span>
+						<span class="contrastGrid-label" aria-hidden="true">{{ columnAxis() }}</span>
 					</td>
 				</tr>
 				<tr>
@@ -136,7 +136,7 @@ interface Cell {
 					<tr>
 						@if (i === 0) {
 							<td class="contrastGrid-axis" [attr.rowspan]="rows().length">
-								<span class="contrastGrid-label mod-vertical" aria-hidden="true">Foreground</span>
+								<span class="contrastGrid-label mod-vertical" aria-hidden="true">{{ rowAxis() }}</span>
 							</td>
 						}
 						<th scope="row">{{ label(row) }}</th>
@@ -167,15 +167,52 @@ interface Cell {
 				}
 			</tbody>
 		</table>
-		@if (failing().length) {
-			<p class="contrastGrid-legend is-failing">✗ Fails for {{ failing().join(', ') }}.</p>
+		<!-- Legend: a sample of each mark used in the grid, then its meaning; long lists go in tooltips -->
+		@if (grid() !== 'withinNeutral') {
+			<p class="contrastGrid-legend contrastGrid-key">
+				@if (failing().length) {
+					<span class="contrastGrid-keyItem contrastGrid-failing">
+						<span class="contrastGrid-swatch mod-failing" aria-hidden="true">✗</span>
+						Fails: {{ failing().join(', ') }}
+					</span>
+				}
+				<span class="contrastGrid-keyItem">
+					<span class="contrastGrid-swatch" aria-hidden="true">✓</span>
+					Text (4.5:1)
+				</span>
+				@if (contrastedOnly().length) {
+					<span class="contrastGrid-keyItem">
+						<span class="contrastGrid-swatch mod-hatched" aria-hidden="true">✓</span>
+						Enhanced contrast only
+					</span>
+				}
+				@if (grid() === 'neutralVsPalette') {
+					<span class="contrastGrid-keyItem">
+						<span class="contrastGrid-swatch mod-dashed" aria-hidden="true">✓</span>
+						Icons and borders only (3:1)
+					</span>
+				}
+			</p>
+			<details class="contrastGrid-legend">
+				<summary class="contrastGrid-summary">{{ palettes().length }} palettes checked</summary>
+				<!-- HTML tags rather than lu-tag: its palette input does not cover product palettes -->
+				<!-- Palettes grouped by outcome, with the same samples as the legend -->
+				@for (group of groups(); track group.mod) {
+					@if (group.palettes.length) {
+						<span class="contrastGrid-tags">
+							<span class="contrastGrid-swatch {{ group.mod }}" aria-hidden="true">{{ group.mark }}</span>
+							<span class="pr-u-mask">{{ group.label }}:</span>
+							<span class="contrastGrid-tagList">
+								@for (palette of group.palettes; track palette) {
+									<span class="tag palette-{{ palette }}">{{ palette }}</span>
+								}
+							</span>
+						</span>
+					}
+				}
+			</details>
 		}
-		@if (contrastedOnly().length) {
-			<p class="contrastGrid-legend">Hatched: only in enhanced-contrast mode for {{ contrastedOnly().join(', ') }}.</p>
-		}
-		@if (grid() === 'neutralOnColor') {
-			<p class="contrastGrid-legend">Dashed: 3:1 contrast, for icons and borders only.</p>
-		}
+		<p class="contrastGrid-legend">This grid is computed live from the Lucca Front color variables, and each cell works both ways.</p>
 	`,
 	styles: `
 		.contrastGrid {
@@ -263,8 +300,77 @@ interface Cell {
 			padding-inline: var(--pr-t-spacings-100);
 		}
 
-		.contrastGrid-legend.is-failing {
+		.contrastGrid-failing {
 			color: var(--palettes-critical-800);
+		}
+
+		/* First line under the grid: more room than between the notes */
+		.contrastGrid-legend.contrastGrid-key {
+			margin-block-start: var(--pr-t-spacings-200);
+		}
+
+		.contrastGrid-key {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
+		}
+
+		.contrastGrid-keyItem {
+			align-items: center;
+			display: inline-flex;
+			gap: var(--pr-t-spacings-50);
+		}
+
+		/* Same look as the grid cells, at a smaller size */
+		.contrastGrid-swatch {
+			background-color: var(--palettes-success-50);
+			block-size: 1.5rem;
+			border: 1px solid var(--palettes-neutral-100);
+			color: var(--palettes-success-700);
+			display: inline-grid;
+			font: var(--pr-t-font-body-XS);
+			inline-size: 2.25rem;
+			place-items: center;
+
+			&.mod-hatched {
+				background-image: repeating-linear-gradient(-45deg, transparent 0 4px, var(--palettes-success-100) 4px 8px);
+			}
+
+			&.mod-dashed {
+				background-color: var(--palettes-neutral-50);
+				color: var(--palettes-neutral-800);
+				outline: 2px dashed var(--palettes-neutral-600);
+				outline-offset: -3px;
+			}
+
+			&.mod-failing {
+				background-color: var(--palettes-critical-50);
+				color: var(--palettes-critical-800);
+			}
+		}
+
+		.contrastGrid-tags {
+			align-items: start;
+			display: flex;
+			gap: var(--pr-t-spacings-50);
+			margin-block-start: var(--pr-t-spacings-100);
+		}
+
+		/* First row of tags centered on the sample (24px sample, 20px tags) */
+		.contrastGrid-tagList {
+			display: flex;
+			margin-block-start: 0.125rem;
+			flex-wrap: wrap;
+			gap: var(--pr-t-spacings-50);
+		}
+
+		.contrastGrid-summary {
+			cursor: pointer;
+		}
+
+		.contrastGrid-checked {
+			cursor: help;
+			text-decoration: underline dotted;
 		}
 
 		.contrastGrid-legend {
@@ -276,7 +382,7 @@ interface Cell {
 })
 export class ContrastGridComponent {
 	/** Grid to display */
-	readonly grid = input<Grid>('neutralOnColor');
+	readonly grid = input<Grid>('neutralVsPalette');
 
 	// Probes always rendered, so the colors of both modes can be read at any time
 	readonly normal = viewChild<ElementRef<HTMLElement>>('normal');
@@ -288,9 +394,12 @@ export class ContrastGridComponent {
 		afterNextRender(() => this.#rendered.set(true));
 	}
 
-	readonly rows = computed(() => (this.grid() === 'colorOnColor' ? SHADES : NEUTRALS));
-	readonly columns = computed(() => (this.grid() === 'neutralOnNeutral' ? NEUTRALS : SHADES));
-	readonly caption = computed(() => `Contrast grid: ${{ neutralOnColor: 'neutral on color', colorOnColor: 'color on color', neutralOnNeutral: 'neutral on neutral' }[this.grid()]}`);
+	readonly rows = computed(() => (this.grid() === 'withinPalette' ? SHADES : NEUTRALS));
+	// The contrast ratio is symmetric: axes name what they hold, not foreground and background
+	readonly rowAxis = computed(() => (this.grid() === 'withinPalette' ? 'Palette' : 'Neutral'));
+	readonly columnAxis = computed(() => (this.grid() === 'withinNeutral' ? 'Neutral' : 'Palette'));
+	readonly columns = computed(() => (this.grid() === 'withinNeutral' ? NEUTRALS : SHADES));
+	readonly caption = computed(() => `Contrast grid: ${{ neutralVsPalette: 'neutral vs palette', withinPalette: 'within a palette', withinNeutral: 'within the neutral palette' }[this.grid()]}`);
 
 	readonly palettes = computed(() => (this.#rendered() ? detectPalettes() : []));
 
@@ -301,8 +410,8 @@ export class ContrastGridComponent {
 			return [];
 		}
 		const styles = { normal: getComputedStyle(normal), contrast: getComputedStyle(contrast) };
-		const palettes = this.grid() === 'neutralOnNeutral' ? ['neutral'] : this.palettes();
-		const shape = this.grid() === 'neutralOnColor' ? NEUTRAL_ON_COLOR : this.grid() === 'colorOnColor' ? COLOR_ON_COLOR : NEUTRAL_ON_NEUTRAL;
+		const palettes = this.grid() === 'withinNeutral' ? ['neutral'] : this.palettes();
+		const shape = this.grid() === 'neutralVsPalette' ? NEUTRAL_VS_PALETTE : this.grid() === 'withinPalette' ? WITHIN_PALETTE : WITHIN_NEUTRAL;
 		const color = (style: CSSStyleDeclaration, palette: string, key: string) =>
 			style.getPropertyValue(key.startsWith('N') ? `--palettes-neutral-${key.slice(1)}` : `--palettes-${palette}-${key}`).trim();
 		const contrastOf = (style: CSSStyleDeclaration, palette: string, row: string, column: string) => {
@@ -314,7 +423,7 @@ export class ContrastGridComponent {
 		return this.rows().map((row) =>
 			this.columns().map((column) => {
 				const key = `${row}|${column}`;
-				const threshold = shape.has(key) ? 4.5 : NON_TEXT.has(key) && this.grid() === 'neutralOnColor' ? 3 : 0;
+				const threshold = shape.has(key) ? 4.5 : NON_TEXT.has(key) && this.grid() === 'neutralVsPalette' ? 3 : 0;
 				if (!threshold) {
 					return { key, threshold, state: 'pass', contrastedOnly: [], failing: [], details: null };
 				}
@@ -337,6 +446,17 @@ export class ContrastGridComponent {
 	readonly failing = computed(() => {
 		const names = new Set(this.cells().flatMap((row) => row.flatMap((cell) => cell.failing)));
 		return this.palettes().filter((palette) => names.has(palette));
+	});
+
+	// Each palette in its worst outcome across the grid
+	readonly groups = computed(() => {
+		const failing = this.failing();
+		const contrasted = this.contrastedOnly().filter((palette) => !failing.includes(palette));
+		return [
+			{ mod: '', mark: '✓', label: 'Default mode', palettes: this.palettes().filter((palette) => !failing.includes(palette) && !contrasted.includes(palette)) },
+			{ mod: 'mod-hatched', mark: '✓', label: 'Enhanced contrast only', palettes: contrasted },
+			{ mod: 'mod-failing', mark: '✗', label: 'Fails', palettes: failing },
+		];
 	});
 
 	readonly contrastedOnly = computed(() => {
