@@ -23,17 +23,21 @@
 		&.mod-select {
 			@include select;
 
-			&:hover {
-				@include selectHover;
+			@media (hover: hover) {
+				&:hover {
+					@include selectHover;
+				}
 			}
 		}
 
 		&[role='group'] {
 			@include group;
 
-			&:hover {
-				.selectPanel.is-pointerNavigation & {
-					@include groupHover;
+			@media (hover: hover) {
+				&:hover {
+					.selectPanel.is-pointerNavigation & {
+						@include groupHover;
+					}
 				}
 			}
 
@@ -45,9 +49,11 @@
 			}
 
 			> .listboxOption-content:has(.link) {
-				&:hover {
-					.selectPanel.is-pointerNavigation & {
-						@include hover;
+				@media (hover: hover) {
+					&:hover {
+						.selectPanel.is-pointerNavigation & {
+							@include hover;
+						}
 					}
 				}
 
@@ -76,9 +82,11 @@
 			> .listboxOption-content {
 				@include selected;
 
-				&:hover {
-					.selectPanel.is-pointerNavigation & {
-						@include selectedHover;
+				@media (hover: hover) {
+					&:hover {
+						.selectPanel.is-pointerNavigation & {
+							@include selectedHover;
+						}
 					}
 				}
 
@@ -99,8 +107,10 @@
 			> .listboxOption-content {
 				@include disabled;
 
-				&:hover {
-					@include disabledHover;
+				@media (hover: hover) {
+					&:hover {
+						@include disabledHover;
+					}
 				}
 			}
 
@@ -121,9 +131,11 @@
 	}
 
 	@layer mods {
-		&:hover {
-			.selectPanel.is-pointerNavigation & {
-				@include hover;
+		@media (hover: hover) {
+			&:hover {
+				.selectPanel.is-pointerNavigation & {
+					@include hover;
+				}
 			}
 		}
 

@@ -26,8 +26,10 @@
 			z-index: 1;
 			position: relative;
 
-			&:hover {
-				background-color: var(--palettes-100, var(--palettes-neutral-100));
+			@media (hover: hover) {
+				&:hover {
+					background-color: var(--palettes-100, var(--palettes-neutral-100));
+				}
 			}
 
 			&:focus-visible {

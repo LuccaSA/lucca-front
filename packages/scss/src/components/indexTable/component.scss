@@ -292,9 +292,11 @@
 		display: inline-flex;
 	}
 
-	.tableSortable.button:hover {
-		--components-button-backgroundColor: var(--palettes-neutral-100);
+	@media (hover: hover) {
+		.tableSortable.button:hover {
+			--components-button-backgroundColor: var(--palettes-neutral-100);
 
-		color: var(--palettes-neutral-700);
+			color: var(--palettes-neutral-700);
+		}
 	}
 }

@@ -2,8 +2,10 @@
 	--components-clear-cross-color: var(--palettes-neutral-0);
 	--components-clear-background: var(--palettes-product-800);
 
-	&:hover {
-		--components-clear-background: var(--palettes-product-700);
+	@media (hover: hover) {
+		&:hover {
+			--components-clear-background: var(--palettes-product-700);
+		}
 	}
 
 	&:active {
@@ -20,8 +22,10 @@
 	--components-clear-cross-color: var(--palettes-800, var(--palettes-neutral-800));
 	--components-clear-background: var(--palettes-0, var(--palettes-neutral-0));
 
-	&:hover {
-		--components-clear-background: var(--palettes-50, var(--palettes-neutral-50));
+	@media (hover: hover) {
+		&:hover {
+			--components-clear-background: var(--palettes-50, var(--palettes-neutral-50));
+		}
 	}
 
 	&:active {

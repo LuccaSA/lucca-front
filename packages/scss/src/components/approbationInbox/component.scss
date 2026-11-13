@@ -268,9 +268,11 @@
 				transition-duration: var(--commons-animations-durations-fast);
 			}
 
-			&:hover {
-				&::before {
-					inset: calc(var(--pr-t-spacings-50) * -1);
+			@media (hover: hover) {
+				&:hover {
+					&::before {
+						inset: calc(var(--pr-t-spacings-50) * -1);
+					}
 				}
 			}
 		}
@@ -423,9 +425,11 @@
 			border-radius: var(--pr-t-border-radius-small);
 			align-items: center;
 
-			&:hover {
-				.approbationInbox-list-content-groupOptional-header-action-icon {
-					--components-approbationInbox-list-content-groupOptional-header-action-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+			@media (hover: hover) {
+				&:hover {
+					.approbationInbox-list-content-groupOptional-header-action-icon {
+						--components-approbationInbox-list-content-groupOptional-header-action-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+					}
 				}
 			}
 

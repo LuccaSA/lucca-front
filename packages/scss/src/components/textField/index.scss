@@ -9,8 +9,10 @@
 	}
 
 	@layer mods {
-		&:hover {
-			@include hover;
+		@media (hover: hover) {
+			&:hover {
+				@include hover;
+			}
 		}
 
 		&.mod-S {
@@ -43,8 +45,10 @@
 		&:has(.textField-input-value[aria-invalid='true']) {
 			@include invalid;
 
-			&:hover {
-				@include invalidHover;
+			@media (hover: hover) {
+				&:hover {
+					@include invalidHover;
+				}
 			}
 		}
 

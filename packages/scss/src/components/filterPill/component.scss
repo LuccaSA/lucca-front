@@ -69,27 +69,35 @@
 				@include a11y.mask;
 			}
 
-			&:hover {
-				--components-filterPill-option-backgroundColor: var(--palettes-neutral-50);
+			@media (hover: hover) {
+				&:hover {
+					--components-filterPill-option-backgroundColor: var(--palettes-neutral-50);
+				}
 			}
 
 			&:has(:checked) {
 				--components-filterPill-option-backgroundColor: var(--palettes-product-50);
 
 				.filterPill_popover-content-option-actions {
-					&:hover {
-						background-color: var(--palettes-product-200);
+					@media (hover: hover) {
+						&:hover {
+							background-color: var(--palettes-product-200);
+						}
 					}
 				}
 
-				&:hover {
-					--components-filterPill-option-backgroundColor: var(--palettes-product-100);
+				@media (hover: hover) {
+					&:hover {
+						--components-filterPill-option-backgroundColor: var(--palettes-product-100);
+					}
 				}
 			}
 
 			.filterPill_popover-content-option-actions {
-				&:hover {
-					background-color: var(--palettes-neutral-100);
+				@media (hover: hover) {
+					&:hover {
+						background-color: var(--palettes-neutral-100);
+					}
 				}
 			}
 		}

@@ -18,8 +18,10 @@
 			outline: none;
 			cursor: pointer;
 
-			&:hover {
-				--components-simpleSelect-border-color: var(--pr-t-color-input-border-hover);
+			@media (hover: hover) {
+				&:hover {
+					--components-simpleSelect-border-color: var(--pr-t-color-input-border-hover);
+				}
 			}
 		}
 

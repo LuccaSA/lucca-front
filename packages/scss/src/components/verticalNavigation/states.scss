@@ -3,8 +3,10 @@
 
 	color: var(--components-verticalNavigation-link-color);
 
-	&:hover {
-		--components-verticalNavigation-link-background: var(--palettes-product-200);
+	@media (hover: hover) {
+		&:hover {
+			--components-verticalNavigation-link-background: var(--palettes-product-200);
+		}
 	}
 
 	&:active {

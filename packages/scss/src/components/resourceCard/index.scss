@@ -7,8 +7,10 @@
 	}
 
 	@layer mods {
-		&:hover {
-			@include hover;
+		@media (hover: hover) {
+			&:hover {
+				@include hover;
+			}
 		}
 
 		&:has(.resourceCard-layout-header-title-action:focus-visible) {

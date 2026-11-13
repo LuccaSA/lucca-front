@@ -11,15 +11,19 @@
 			@include focusVisible;
 		}
 
-		&:hover {
-			@include hover;
+		@media (hover: hover) {
+			&:hover {
+				@include hover;
+			}
 		}
 
 		&:has(.richTextField-content[aria-invalid='true']) {
 			@include error;
 
-			&:hover {
-				@include errorHover;
+			@media (hover: hover) {
+				&:hover {
+					@include errorHover;
+				}
 			}
 		}
 
@@ -38,8 +42,10 @@
 		&[aria-pressed='true'] {
 			@include buttonPressed;
 
-			&:hover {
-				@include buttonPressedHover;
+			@media (hover: hover) {
+				&:hover {
+					@include buttonPressedHover;
+				}
 			}
 
 			&:active {

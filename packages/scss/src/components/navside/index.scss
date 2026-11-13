@@ -30,8 +30,10 @@
 				@include compact;
 
 				.navSide-item-link {
-					&:hover {
-						@include compactHover;
+					@media (hover: hover) {
+						&:hover {
+							@include compactHover;
+						}
 					}
 
 					// .active is deprecated
@@ -90,8 +92,10 @@
 			@include expanded;
 
 			.navSide-item-subMenu-link {
-				&:is(:hover) {
-					@include sublinkHover;
+				@media (hover: hover) {
+					&:is(:hover) {
+						@include sublinkHover;
+					}
 				}
 
 				// .active is deprecated

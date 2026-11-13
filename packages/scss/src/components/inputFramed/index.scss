@@ -8,15 +8,19 @@
 	}
 
 	@layer mods {
-		&:hover {
-			@include hover;
+		@media (hover: hover) {
+			&:hover {
+				@include hover;
+			}
 		}
 
 		&:has(.inputFramed-header-input:checked) {
 			@include checked;
 
-			&:hover {
-				@include checkedHover;
+			@media (hover: hover) {
+				&:hover {
+					@include checkedHover;
+				}
 			}
 		}
 
@@ -29,8 +33,10 @@
 		&:has(.inputFramed-header-input[aria-invalid='true']) {
 			@include critical;
 
-			&:hover {
-				@include criticalHover;
+			@media (hover: hover) {
+				&:hover {
+					@include criticalHover;
+				}
 			}
 		}
 

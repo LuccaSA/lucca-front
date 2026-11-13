@@ -21,8 +21,10 @@
 			position: relative;
 			cursor: text;
 
-			&:hover {
-				--components-timepicker-border: var(--pr-t-color-input-border-hover);
+			@media (hover: hover) {
+				&:hover {
+					--components-timepicker-border: var(--pr-t-color-input-border-hover);
+				}
 			}
 
 			&:focus-within {
@@ -134,9 +136,11 @@
 			transition-duration: var(--commons-animations-durations-fast);
 			cursor: pointer;
 
-			&:hover {
-				background-color: var(--palettes-neutral-50);
-				color: var(--palettes-neutral-800);
+			@media (hover: hover) {
+				&:hover {
+					background-color: var(--palettes-neutral-50);
+					color: var(--palettes-neutral-800);
+				}
 			}
 
 			&:disabled {

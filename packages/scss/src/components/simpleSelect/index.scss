@@ -29,8 +29,10 @@
 		&:has(.simpleSelect-field-input[aria-invalid='true']) {
 			@include invalid;
 
-			.simpleSelect-field:hover {
-				@include invalidHover;
+			@media (hover: hover) {
+				.simpleSelect-field:hover {
+					@include invalidHover;
+				}
 			}
 		}
 

@@ -13,8 +13,10 @@
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
 	cursor: pointer;
 
-	&:hover {
-		background-color: var(--palettes-100, var(--palettes-neutral-100));
+	@media (hover: hover) {
+		&:hover {
+			background-color: var(--palettes-100, var(--palettes-neutral-100));
+		}
 	}
 
 	&:focus-visible {

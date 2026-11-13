@@ -45,8 +45,10 @@
 			text-decoration-thickness: 0.75px;
 			text-underline-offset: 3px;
 
-			&:hover {
-				text-decoration-thickness: 1.5px;
+			@media (hover: hover) {
+				&:hover {
+					text-decoration-thickness: 1.5px;
+				}
 			}
 
 			&.link {

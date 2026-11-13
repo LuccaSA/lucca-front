@@ -11,11 +11,13 @@
 		&.mod-decorationHover {
 			@include decorationHover;
 
-			&:hover {
-				@include decorationHoverHovered;
+			@media (hover: hover) {
+				&:hover {
+					@include decorationHoverHovered;
 
-				&:not(:has(.link-text)) {
-					@include decorationHoverHoveredLegacy;
+					&:not(:has(.link-text)) {
+						@include decorationHoverHoveredLegacy;
+					}
 				}
 			}
 		}

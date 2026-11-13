@@ -6,8 +6,10 @@
 	text-decoration: none;
 	cursor: pointer;
 
-	&:hover {
-		background-color: var(--palettes-neutral-50);
+	@media (hover: hover) {
+		&:hover {
+			background-color: var(--palettes-neutral-50);
+		}
 	}
 }
 

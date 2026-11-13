@@ -157,8 +157,10 @@
 		cursor: pointer;
 		text-decoration: none;
 
-		&:hover {
-			outline: none;
+		@media (hover: hover) {
+			&:hover {
+				outline: none;
+			}
 		}
 
 		&:focus-visible,
@@ -251,12 +253,14 @@
 }
 
 @mixin clickableSelectable {
-	&:hover {
-		&:has(input[type='checkbox']:checked) {
-			.table-head-row-cell,
-			.table-body-row-cell,
-			.table-foot-row-cell {
-				background-color: var(--palettes-product-100);
+	@media (hover: hover) {
+		&:hover {
+			&:has(input[type='checkbox']:checked) {
+				.table-head-row-cell,
+				.table-body-row-cell,
+				.table-foot-row-cell {
+					background-color: var(--palettes-product-100);
+				}
 			}
 		}
 	}

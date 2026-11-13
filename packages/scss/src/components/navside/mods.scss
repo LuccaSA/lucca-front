@@ -76,9 +76,11 @@
 			background-color: var(--components-navSide-bottom-section-palette-bg-color);
 			color: var(--components-navSide-bottom-section-palette-text);
 
-			&:hover {
-				background-color: var(--components-navSide-bottom-section-palette-hovered-bg);
-				color: var(--components-navSide-bottom-section-palette-hovered-text);
+			@media (hover: hover) {
+				&:hover {
+					background-color: var(--components-navSide-bottom-section-palette-hovered-bg);
+					color: var(--components-navSide-bottom-section-palette-hovered-text);
+				}
 			}
 		}
 	}

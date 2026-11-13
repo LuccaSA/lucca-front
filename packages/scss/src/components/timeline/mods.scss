@@ -334,9 +334,11 @@
 
 		inline-size: auto;
 
-		&:hover {
-			.timeline-step-title-icon::before {
-				background-color: var(--palettes-600, var(--palettes-product-600));
+		@media (hover: hover) {
+			&:hover {
+				.timeline-step-title-icon::before {
+					background-color: var(--palettes-600, var(--palettes-product-600));
+				}
 			}
 		}
 

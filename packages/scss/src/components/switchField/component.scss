@@ -72,10 +72,12 @@
 			opacity: 0.0001;
 			cursor: pointer;
 
-			&:hover {
-				~ .switchField-icon {
-					border-color: var(--palettes-neutral-600);
-					background-color: var(--palettes-neutral-600);
+			@media (hover: hover) {
+				&:hover {
+					~ .switchField-icon {
+						border-color: var(--palettes-neutral-600);
+						background-color: var(--palettes-neutral-600);
+					}
 				}
 			}
 

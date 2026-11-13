@@ -61,14 +61,18 @@
 		// .mod-hover is deprecated
 		&.mod-hover {
 			:is(.mod-selectable, .dataTable-body-row:not(.mod-group)) {
-				&:hover {
-					@include hover;
+				@media (hover: hover) {
+					&:hover {
+						@include hover;
+					}
 				}
 
 				&.mod-selectable {
 					&:has(input:checked) {
-						&:hover {
-							@include selectedHover;
+						@media (hover: hover) {
+							&:hover {
+								@include selectedHover;
+							}
 						}
 					}
 				}

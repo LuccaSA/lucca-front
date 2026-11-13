@@ -110,8 +110,10 @@
 			cursor: pointer;
 			text-decoration: underline;
 
-			&:hover {
-				color: var(--commons-text-link-hover);
+			@media (hover: hover) {
+				&:hover {
+					color: var(--commons-text-link-hover);
+				}
 			}
 
 			&:focus-visible {

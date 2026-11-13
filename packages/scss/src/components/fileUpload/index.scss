@@ -19,8 +19,10 @@
 			@include L;
 		}
 
-		&:hover {
-			@include hover;
+		@media (hover: hover) {
+			&:hover {
+				@include hover;
+			}
 		}
 
 		&.is-hidden {
@@ -34,8 +36,10 @@
 		&.is-error {
 			@include error;
 
-			&:hover {
-				@include errorHover;
+			@media (hover: hover) {
+				&:hover {
+					@include errorHover;
+				}
 			}
 		}
 

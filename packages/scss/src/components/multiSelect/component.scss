@@ -17,8 +17,10 @@
 	gap: var(--components-multiSelect-gap);
 	cursor: pointer;
 
-	&:hover {
-		--components-multiSelect-border-color: var(--pr-t-color-input-border-hover);
+	@media (hover: hover) {
+		&:hover {
+			--components-multiSelect-border-color: var(--pr-t-color-input-border-hover);
+		}
 	}
 
 	&:has(.multipleSelect-displayer-search:focus-visible) {

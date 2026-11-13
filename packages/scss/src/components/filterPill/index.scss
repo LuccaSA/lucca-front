@@ -11,8 +11,10 @@
 			@include notFilled;
 		}
 
-		&:hover {
-			@include hover;
+		@media (hover: hover) {
+			&:hover {
+				@include hover;
+			}
 		}
 
 		&:active {
@@ -26,8 +28,10 @@
 		&.is-filled {
 			@include filled;
 
-			&:hover {
-				@include filledHover;
+			@media (hover: hover) {
+				&:hover {
+					@include filledHover;
+				}
 			}
 
 			&:active {
@@ -50,8 +54,10 @@
 			&:has(.filterPill-checkbox-input:checked) {
 				@include checkboxChecked;
 
-				&:hover {
-					@include filledHover;
+				@media (hover: hover) {
+					&:hover {
+						@include filledHover;
+					}
 				}
 
 				&:active {

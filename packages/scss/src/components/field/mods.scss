@@ -212,8 +212,10 @@
 	}
 
 	.textfield-input {
-		&:hover {
-			background-color: var(--palettes-#{$state}-50) !important;
+		@media (hover: hover) {
+			&:hover {
+				background-color: var(--palettes-#{$state}-50) !important;
+			}
 		}
 
 		&:focus {
@@ -235,8 +237,10 @@
 				color: var(--palettes-#{$state}-400);
 			}
 
-			&:hover {
-				background-color: var(--palettes-#{$state}-100) !important;
+			@media (hover: hover) {
+				&:hover {
+					background-color: var(--palettes-#{$state}-100) !important;
+				}
 			}
 
 			&:focus {
@@ -248,13 +252,15 @@
 		}
 	}
 
-	&:hover {
-		background-color: var(--palettes-#{$state}-50);
+	@media (hover: hover) {
+		&:hover {
+			background-color: var(--palettes-#{$state}-50);
 
-		.textfield-messages,
-		.radiosfield-messages,
-		.checkboxesfield-messages {
-			transform: translateY(100%);
+			.textfield-messages,
+			.radiosfield-messages,
+			.checkboxesfield-messages {
+				transform: translateY(100%);
+			}
 		}
 	}
 
@@ -302,12 +308,14 @@
 				color: var(--palettes-error-700);
 			}
 
-			&:hover {
-				z-index: 4;
-				background-color: var(--palettes-error-100);
+			@media (hover: hover) {
+				&:hover {
+					z-index: 4;
+					background-color: var(--palettes-error-100);
 
-				~ .textfield-messages {
-					transform: translateY(100%);
+					~ .textfield-messages {
+						transform: translateY(100%);
+					}
 				}
 			}
 

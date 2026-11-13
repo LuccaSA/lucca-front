@@ -8,9 +8,11 @@
 		@include a11y.mask;
 
 		&:not(:disabled) ~ .radio-label {
-			&:hover {
-				&::before {
-					border-color: var(--palettes-neutral-600);
+			@media (hover: hover) {
+				&:hover {
+					&::before {
+						border-color: var(--palettes-neutral-600);
+					}
 				}
 			}
 
@@ -33,13 +35,15 @@
 		}
 
 		&:not(:disabled):checked ~ .radio-label {
-			&:hover {
-				&::before {
-					border-color: var(--palettes-700, var(--palettes-product-700));
-				}
+			@media (hover: hover) {
+				&:hover {
+					&::before {
+						border-color: var(--palettes-700, var(--palettes-product-700));
+					}
 
-				&::after {
-					background-color: var(--palettes-700, var(--palettes-product-700));
+					&::after {
+						background-color: var(--palettes-700, var(--palettes-product-700));
+					}
 				}
 			}
 		}

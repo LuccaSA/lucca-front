@@ -156,8 +156,10 @@
 			padding: var(--pr-t-spacings-50);
 			margin-block: calc(var(--pr-t-spacings-50) * -1);
 
-			&:hover {
-				color: var(--palettes-700, var(--palettes-product-700));
+			@media (hover: hover) {
+				&:hover {
+					color: var(--palettes-700, var(--palettes-product-700));
+				}
 			}
 
 			&:active {
@@ -227,8 +229,10 @@
 				cursor: var(--components-calendar-table-body-row-cell-actionCursor);
 
 				&:not(:disabled, [aria-disabled='true']) {
-					&:hover {
-						@include a11y.focusVisible($offset: var(--components-calendar-table-body-row-cell-actionOutlineOffset), $color: var(--palettes-700, var(--palettes-product-700)), $width: var(--components-calendar-table-body-row-cell-actionOutlineWidth));
+					@media (hover: hover) {
+						&:hover {
+							@include a11y.focusVisible($offset: var(--components-calendar-table-body-row-cell-actionOutlineOffset), $color: var(--palettes-700, var(--palettes-product-700)), $width: var(--components-calendar-table-body-row-cell-actionOutlineWidth));
+						}
 					}
 
 					&:active {

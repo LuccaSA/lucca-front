@@ -4,8 +4,10 @@
 	--components-timepicker-background: var(--pr-t-color-input-background-critical);
 	--components-timepicker-border: var(--pr-t-color-input-border-critical);
 
-	&:hover {
-		--components-timepicker-border: var(--pr-t-color-input-border-critical-hover);
+	@media (hover: hover) {
+		&:hover {
+			--components-timepicker-border: var(--pr-t-color-input-border-critical-hover);
+		}
 	}
 }
 

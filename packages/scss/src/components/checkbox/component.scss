@@ -40,9 +40,11 @@
 				text-indent: calc(var(--components-checkbox-input-border-width) * -1);
 			}
 
-			&:hover {
-				&::before {
-					border-color: var(--palettes-neutral-600);
+			@media (hover: hover) {
+				&:hover {
+					&::before {
+						border-color: var(--palettes-neutral-600);
+					}
 				}
 			}
 
@@ -71,10 +73,12 @@
 			}
 
 			&:not(:disabled):checked ~ .checkbox-label {
-				&:hover {
-					&::before {
-						background-color: var(--palettes-800, var(--palettes-product-800));
-						border-color: var(--palettes-800, var(--palettes-product-800));
+				@media (hover: hover) {
+					&:hover {
+						&::before {
+							background-color: var(--palettes-800, var(--palettes-product-800));
+							border-color: var(--palettes-800, var(--palettes-product-800));
+						}
 					}
 				}
 

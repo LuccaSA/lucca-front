@@ -12,8 +12,10 @@
 .tableOfContent-list-item > a {
 	@layer mods {
 		&:not(.disabled, .is-disabled, [disabled]) {
-			&:is(:hover) {
-				@include hover;
+			@media (hover: hover) {
+				&:is(:hover) {
+					@include hover;
+				}
 			}
 
 			&:is(:focus) {
@@ -27,8 +29,10 @@
 			&.is-active {
 				@include isActive;
 
-				&:is(:hover) {
-					@include isActiveHover;
+				@media (hover: hover) {
+					&:is(:hover) {
+						@include isActiveHover;
+					}
 				}
 
 				&:is(:focus) {

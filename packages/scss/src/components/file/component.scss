@@ -98,15 +98,17 @@
 			}
 		}
 
-		&:hover {
-			&:not(:disabled) {
-				~ .file-content {
-					&::before {
-						border: 1px dashed var(--palettes-product-400);
-					}
+		@media (hover: hover) {
+			&:hover {
+				&:not(:disabled) {
+					~ .file-content {
+						&::before {
+							border: 1px dashed var(--palettes-product-400);
+						}
 
-					.file-button {
-						background-color: var(--palettes-100, var(--palettes-neutral-100));
+						.file-button {
+							background-color: var(--palettes-100, var(--palettes-neutral-100));
+						}
 					}
 				}
 			}

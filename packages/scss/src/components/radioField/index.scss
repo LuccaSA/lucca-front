@@ -19,8 +19,10 @@
 			@include focusVisible;
 		}
 
-		&:hover {
-			@include hover;
+		@media (hover: hover) {
+			&:hover {
+				@include hover;
+			}
 		}
 
 		&:active {
@@ -30,8 +32,10 @@
 		&[aria-invalid='true'] {
 			@include invalid;
 
-			&:hover {
-				@include invalidHover;
+			@media (hover: hover) {
+				&:hover {
+					@include invalidHover;
+				}
 			}
 
 			&:active {
@@ -49,8 +53,10 @@
 		&:checked {
 			@include checked;
 
-			&:hover {
-				@include checkedHover;
+			@media (hover: hover) {
+				&:hover {
+					@include checkedHover;
+				}
 			}
 
 			&:active {
@@ -64,8 +70,10 @@
 			&[aria-invalid='true'] {
 				@include checkedInvalid;
 
-				&:hover {
-					@include checkedInvalidHover;
+				@media (hover: hover) {
+					&:hover {
+						@include checkedInvalidHover;
+					}
 				}
 
 				&:active {

@@ -94,9 +94,11 @@
 				@include a11y.focusVisible;
 			}
 
-			&:hover {
-				background-color: var(--components-navSide-fullwidth-palette-hovered-bg);
-				color: var(--components-navSide-fullwidth-palette-hovered-text);
+			@media (hover: hover) {
+				&:hover {
+					background-color: var(--components-navSide-fullwidth-palette-hovered-bg);
+					color: var(--components-navSide-fullwidth-palette-hovered-text);
+				}
 			}
 
 			&:active {
@@ -192,9 +194,11 @@
 				box-sizing: border-box;
 				cursor: pointer;
 
-				&:hover {
-					background-color: var(--components-navSide-bottom-section-palette-hovered-bg);
-					color: var(--components-navSide-bottom-section-palette-hovered-text);
+				@media (hover: hover) {
+					&:hover {
+						background-color: var(--components-navSide-bottom-section-palette-hovered-bg);
+						color: var(--components-navSide-bottom-section-palette-hovered-text);
+					}
 				}
 			}
 

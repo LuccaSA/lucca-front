@@ -33,9 +33,11 @@
 		background-color: var(--components-clear-cross-color);
 	}
 
-	&:hover {
-		--components-clear-cross-color: var(--palettes-0, var(--palettes-neutral-0));
-		--components-clear-background: var(--palettes-700, var(--palettes-neutral-700));
+	@media (hover: hover) {
+		&:hover {
+			--components-clear-cross-color: var(--palettes-0, var(--palettes-neutral-0));
+			--components-clear-background: var(--palettes-700, var(--palettes-neutral-700));
+		}
 	}
 
 	&:focus-visible {

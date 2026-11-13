@@ -6,8 +6,10 @@
 		&:is(.mod-ghost, .mod-text, .mod-link) {
 			box-shadow: none;
 
-			&:hover {
-				box-shadow: none;
+			@media (hover: hover) {
+				&:hover {
+					box-shadow: none;
+				}
 			}
 
 			&:focus-within {

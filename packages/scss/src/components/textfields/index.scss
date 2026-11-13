@@ -99,8 +99,10 @@
 		&.mod-filter {
 			@include filter;
 
-			&:is(:hover) {
-				@include filterHover;
+			@media (hover: hover) {
+				&:is(:hover) {
+					@include filterHover;
+				}
 			}
 		}
 
@@ -259,8 +261,10 @@
 
 @layer mods {
 	.textfield-input {
-		&:is(:hover) {
-			@include inputHover;
+		@media (hover: hover) {
+			&:is(:hover) {
+				@include inputHover;
+			}
 		}
 
 		&:is(:focus-visible, .is-focused, .focused) {
@@ -303,8 +307,10 @@
 				@include framedErrorHover;
 			}
 
-			&:is(:hover) {
-				@include framedStateHover('error');
+			@media (hover: hover) {
+				&:is(:hover) {
+					@include framedStateHover('error');
+				}
 			}
 
 			&:is(:focus-within) {
@@ -312,8 +318,10 @@
 			}
 
 			.textfield-input {
-				&:hover {
-					@include framedStateInputHover('error');
+				@media (hover: hover) {
+					&:hover {
+						@include framedStateInputHover('error');
+					}
 				}
 
 				&:focus {
@@ -335,8 +343,10 @@
 		&:is(.is-warning, .warning) {
 			@include framedState('warning');
 
-			&:is(:hover) {
-				@include framedStateHover('warning');
+			@media (hover: hover) {
+				&:is(:hover) {
+					@include framedStateHover('warning');
+				}
 			}
 
 			&:is(:focus-within) {
@@ -344,8 +354,10 @@
 			}
 
 			.textfield-input {
-				&:hover {
-					@include framedStateInputHover('warning');
+				@media (hover: hover) {
+					&:hover {
+						@include framedStateInputHover('warning');
+					}
 				}
 
 				&:focus {
@@ -363,8 +375,10 @@
 		&:is(.is-success, .is-valid, .valid, .success) {
 			@include framedState('success');
 
-			&:is(:hover) {
-				@include framedStateHover('success');
+			@media (hover: hover) {
+				&:is(:hover) {
+					@include framedStateHover('success');
+				}
 			}
 
 			&:is(:focus-within) {
@@ -372,8 +386,10 @@
 			}
 
 			.textfield-input {
-				&:hover {
-					@include framedStateInputHover('success');
+				@media (hover: hover) {
+					&:hover {
+						@include framedStateInputHover('success');
+					}
 				}
 
 				&:focus {
@@ -389,8 +405,10 @@
 		}
 
 		.textfield-input {
-			&:is(:hover) {
-				@include inputFramedHover;
+			@media (hover: hover) {
+				&:is(:hover) {
+					@include inputFramedHover;
+				}
 			}
 
 			&:is(:focus) {

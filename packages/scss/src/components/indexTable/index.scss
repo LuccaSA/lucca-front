@@ -108,8 +108,10 @@
 
 .indexTableWrapper {
 	@layer mods {
-		.pagination-scrolling .button:hover {
-			@include paginationHover;
+		@media (hover: hover) {
+			.pagination-scrolling .button:hover {
+				@include paginationHover;
+			}
 		}
 	}
 }

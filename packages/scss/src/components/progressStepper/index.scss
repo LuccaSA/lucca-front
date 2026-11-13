@@ -48,8 +48,10 @@
 
 .progressStepper-list-step-linkOptional {
 	@layer mods {
-		&:hover {
-			@include hover;
+		@media (hover: hover) {
+			&:hover {
+				@include hover;
+			}
 		}
 	}
 }

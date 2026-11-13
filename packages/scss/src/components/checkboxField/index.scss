@@ -15,8 +15,10 @@
 			@include checklist;
 
 			.checkboxField-input {
-				&:hover {
-					@include checklistHover;
+				@media (hover: hover) {
+					&:hover {
+						@include checklistHover;
+					}
 				}
 
 				&:active {
@@ -30,8 +32,10 @@
 				&:checked {
 					@include checklistChecked;
 
-					&:hover {
-						@include checklistCheckedHover;
+					@media (hover: hover) {
+						&:hover {
+							@include checklistCheckedHover;
+						}
 					}
 
 					&:active {
@@ -68,11 +72,13 @@
 			@include focusVisible;
 		}
 
-		&:hover {
-			@include hover;
+		@media (hover: hover) {
+			&:hover {
+				@include hover;
 
-			&[aria-checked='mixed'] {
-				@include checkedHover;
+				&[aria-checked='mixed'] {
+					@include checkedHover;
+				}
 			}
 		}
 
@@ -99,11 +105,13 @@
 				@include checkedInvalid;
 			}
 
-			&:hover {
-				@include invalidHover;
+			@media (hover: hover) {
+				&:hover {
+					@include invalidHover;
 
-				&[aria-checked='mixed'] {
-					@include checkedInvalidHover;
+					&[aria-checked='mixed'] {
+						@include checkedInvalidHover;
+					}
 				}
 			}
 
@@ -119,8 +127,10 @@
 		&:checked {
 			@include checked;
 
-			&:hover {
-				@include checkedHover;
+			@media (hover: hover) {
+				&:hover {
+					@include checkedHover;
+				}
 			}
 
 			&:active {
@@ -134,8 +144,10 @@
 			&[aria-invalid='true'] {
 				@include checkedInvalid;
 
-				&:hover {
-					@include checkedInvalidHover;
+				@media (hover: hover) {
+					&:hover {
+						@include checkedInvalidHover;
+					}
 				}
 
 				&:active {

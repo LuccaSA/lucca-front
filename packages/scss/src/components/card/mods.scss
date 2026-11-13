@@ -9,10 +9,12 @@
 	text-decoration: none;
 	cursor: pointer;
 
-	&:hover {
-		border-color: var(--components-card-hover-border);
-		background-color: var(--components-card-hover-background);
-		outline: none;
+	@media (hover: hover) {
+		&:hover {
+			border-color: var(--components-card-hover-border);
+			background-color: var(--components-card-hover-background);
+			outline: none;
+		}
 	}
 
 	&:focus-visible {
@@ -34,8 +36,10 @@
 	flex-direction: row;
 	row-gap: var(--pr-t-spacings-200);
 
-	&:hover {
-		box-shadow: var(--pr-t-elevation-shadow-overlay);
+	@media (hover: hover) {
+		&:hover {
+			box-shadow: var(--pr-t-elevation-shadow-overlay);
+		}
 	}
 
 	&:has(.card-action .button:focus-visible) {
@@ -77,12 +81,14 @@
 		transition-property: inset, box-shadow;
 	}
 
-	&:hover {
-		box-shadow: none;
+	@media (hover: hover) {
+		&:hover {
+			box-shadow: none;
 
-		&::before {
-			inset: -2px -6px;
-			box-shadow: var(--pr-t-elevation-shadow-overlay);
+			&::before {
+				inset: -2px -6px;
+				box-shadow: var(--pr-t-elevation-shadow-overlay);
+			}
 		}
 	}
 

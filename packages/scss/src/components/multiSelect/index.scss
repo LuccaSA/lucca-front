@@ -50,8 +50,10 @@
 		&:has(.multipleSelect-displayer-search[aria-invalid='true']) {
 			@include invalid;
 
-			&:hover {
-				@include invalidHover;
+			@media (hover: hover) {
+				&:hover {
+					@include invalidHover;
+				}
 			}
 		}
 

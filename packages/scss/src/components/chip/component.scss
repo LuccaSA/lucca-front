@@ -63,8 +63,10 @@
 				background-color: var(--components-chip-kill-cross-color);
 			}
 
-			&:hover {
-				--components-chip-kill-disk-color: var(--palettes-700, var(--palettes-neutral-700));
+			@media (hover: hover) {
+				&:hover {
+					--components-chip-kill-disk-color: var(--palettes-700, var(--palettes-neutral-700));
+				}
 			}
 
 			&:focus-visible {

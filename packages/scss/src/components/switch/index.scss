@@ -22,8 +22,10 @@
 		&:is(:checked) {
 			@include checked;
 
-			&:hover {
-				@include checkedHover;
+			@media (hover: hover) {
+				&:hover {
+					@include checkedHover;
+				}
 			}
 
 			&:active {
@@ -31,8 +33,10 @@
 			}
 		}
 
-		&:is(:hover) {
-			@include hover;
+		@media (hover: hover) {
+			&:is(:hover) {
+				@include hover;
+			}
 		}
 
 		&:is(:focus-visible) {

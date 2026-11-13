@@ -80,9 +80,11 @@
 
 		&,
 		&[aria-current='page'] {
-			&:hover {
-				&::after {
-					--components-horizontalNavigation-listItemActionTransform: scale(1, 0.75);
+			@media (hover: hover) {
+				&:hover {
+					&::after {
+						--components-horizontalNavigation-listItemActionTransform: scale(1, 0.75);
+					}
 				}
 			}
 		}

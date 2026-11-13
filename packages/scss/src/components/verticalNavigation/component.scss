@@ -38,10 +38,12 @@
 			transition: background-color var(--commons-animations-durations-fast) ease;
 			font-weight: var(--pr-t-font-fontWeight-semibold);
 
-			&:hover {
-				--components-verticalNavigation-link-background: var(--palettes-neutral-50);
+			@media (hover: hover) {
+				&:hover {
+					--components-verticalNavigation-link-background: var(--palettes-neutral-50);
 
-				color: var(--components-verticalNavigation-link-color);
+					color: var(--components-verticalNavigation-link-color);
+				}
 			}
 
 			&:focus-visible {

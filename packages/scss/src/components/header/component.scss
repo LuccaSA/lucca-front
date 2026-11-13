@@ -49,9 +49,11 @@
 			text-align: center;
 			text-decoration: none;
 
-			&:hover {
-				background-color: var(--palettes-neutral-25);
-				color: var(--palettes-neutral-800);
+			@media (hover: hover) {
+				&:hover {
+					background-color: var(--palettes-neutral-25);
+					color: var(--palettes-neutral-800);
+				}
 			}
 
 			&::before {

@@ -3,8 +3,10 @@
 	text-decoration: none;
 	cursor: default;
 
-	&:hover {
-		outline: none;
+	@media (hover: hover) {
+		&:hover {
+			outline: none;
+		}
 	}
 
 	&,

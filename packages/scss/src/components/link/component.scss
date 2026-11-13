@@ -12,8 +12,10 @@
 	text-decoration: var(--components-link-textDecoration);
 
 	&:not(:disabled, .is-disabled) {
-		&:hover {
-			color: var(--components-link-color-hover);
+		@media (hover: hover) {
+			&:hover {
+				color: var(--components-link-color-hover);
+			}
 		}
 
 		&:focus-visible {
