@@ -194,3 +194,49 @@ describe('FilterBarComponent: resultsCount', () => {
 		expect((staticFixture.nativeElement as HTMLElement).querySelector('.filterBar-scrollBox-group-results')?.textContent?.trim()).toBe('Aucun résultat');
 	});
 });
+
+@Component({
+	template: `
+		<lu-filter-bar>
+			@if (withAddons()) {
+				<span class="addonBefore" *luFilterPillAddonBefore>Before</span>
+				<button class="addonAfter" *luFilterPillAddonAfter type="button">Export</button>
+			}
+		</lu-filter-bar>
+	`,
+	imports: [FilterBarComponent, FilterPillAddonBeforeDirective, FilterPillAddonAfterDirective],
+})
+class HostWithConditionalAddonsComponent {
+	readonly withAddons = signal(true);
+}
+
+describe('FilterBarComponent: addons', () => {
+	let fixture: ComponentFixture<HostWithConditionalAddonsComponent>;
+
+	const filterBar = () => fixture.nativeElement.querySelector('lu-filter-bar') as HTMLElement;
+
+	beforeEach(() => {
+		TestBed.configureTestingModule({ imports: [HostWithConditionalAddonsComponent] });
+		fixture = TestBed.createComponent(HostWithConditionalAddonsComponent);
+		fixture.detectChanges();
+	});
+
+	it('removes the addons when their directives are destroyed', () => {
+		fixture.componentInstance.withAddons.set(false);
+		fixture.detectChanges();
+
+		expect(filterBar().querySelector('.addonBefore')).toBeNull();
+		expect(filterBar().querySelector('.addonAfter')).toBeNull();
+		expect(filterBar().querySelector('.filterBar-scrollBox-export')).toBeNull();
+	});
+
+	it('displays the addons again when their directives are recreated', () => {
+		fixture.componentInstance.withAddons.set(false);
+		fixture.detectChanges();
+		fixture.componentInstance.withAddons.set(true);
+		fixture.detectChanges();
+
+		expect(filterBar().querySelector('.addonBefore')).not.toBeNull();
+		expect(filterBar().querySelector('.filterBar-scrollBox-export .addonAfter')).not.toBeNull();
+	});
+});
