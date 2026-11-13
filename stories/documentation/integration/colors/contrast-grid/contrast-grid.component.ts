@@ -328,6 +328,7 @@ interface Cell {
 			border: 1px solid var(--palettes-neutral-100);
 			color: var(--palettes-success-700);
 			display: inline-grid;
+			flex-shrink: 0;
 			font: var(--pr-t-font-body-XS);
 			inline-size: 2.25rem;
 			place-items: center;
