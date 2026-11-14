@@ -74,7 +74,14 @@ const WITHIN_NEUTRAL = new Set(
 	]),
 );
 // Non-text elements (icons, borders): 3:1
-const NON_TEXT = new Set(pairs([['N0', ['600']]]));
+// Borders and icons of components in shade 600: on white, on the default surface, and on shade 50 of their palette
+const NON_TEXT = new Set(
+	pairs([
+		['N0', ['600']],
+		['N25', ['600']],
+		['600', ['50']],
+	]),
+);
 
 const luminance = (hex: string) => {
 	const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
@@ -421,7 +428,7 @@ export class ContrastGridComponent {
 		return this.rows().map((row) =>
 			this.columns().map((column) => {
 				const key = `${row}|${column}`;
-				const threshold = shape.has(key) ? 4.5 : NON_TEXT.has(key) && this.grid() === 'neutralVsPalette' ? 3 : 0;
+				const threshold = shape.has(key) ? 4.5 : NON_TEXT.has(key) && this.grid() !== 'withinNeutral' ? 3 : 0;
 				if (!threshold) {
 					return { key, threshold, state: 'pass', contrastedOnly: [], failing: [], details: null };
 				}
