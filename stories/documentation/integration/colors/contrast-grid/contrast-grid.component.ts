@@ -167,32 +167,29 @@ interface Cell {
 				}
 			</tbody>
 		</table>
-		<!-- Legend: a sample of each mark used in the grid, then its meaning; long lists go in tooltips -->
-		@if (grid() !== 'withinNeutral') {
-			<p class="contrastGrid-legend contrastGrid-key">
+		<!-- Legend: always every mark, whatever the grid shows -->
+		<p class="contrastGrid-legend contrastGrid-key">
+			<span class="contrastGrid-keyItem">
+				<span class="contrastGrid-swatch" aria-hidden="true">✓</span>
+				Text (≥ 4.5:1)
+			</span>
+			<span class="contrastGrid-keyItem">
+				<span class="contrastGrid-swatch mod-hatched" aria-hidden="true">✓</span>
+				Enhanced contrast mode
+			</span>
+			<span class="contrastGrid-keyItem">
+				<span class="contrastGrid-swatch mod-dashed" aria-hidden="true">✓</span>
+				Icons and borders (≥ 3:1)
+			</span>
+			<span class="contrastGrid-keyItem">
+				<span class="contrastGrid-swatch mod-failing" aria-hidden="true">✗</span>
+				Fails (&lt; 4.5:1, or &lt; 3:1 when dashed){{ failing().length ? ':' : '' }}
 				@if (failing().length) {
-					<span class="contrastGrid-keyItem contrastGrid-failing">
-						<span class="contrastGrid-swatch mod-failing" aria-hidden="true">✗</span>
-						Fails: {{ failing().join(', ') }}
-					</span>
+					<span class="contrastGrid-failing">{{ failing().join(', ') }}</span>
 				}
-				<span class="contrastGrid-keyItem">
-					<span class="contrastGrid-swatch" aria-hidden="true">✓</span>
-					Text (4.5:1)
-				</span>
-				@if (contrastedOnly().length) {
-					<span class="contrastGrid-keyItem">
-						<span class="contrastGrid-swatch mod-hatched" aria-hidden="true">✓</span>
-						Enhanced contrast only
-					</span>
-				}
-				@if (grid() === 'neutralVsPalette') {
-					<span class="contrastGrid-keyItem">
-						<span class="contrastGrid-swatch mod-dashed" aria-hidden="true">✓</span>
-						Icons and borders only (3:1)
-					</span>
-				}
-			</p>
+			</span>
+		</p>
+		@if (grid() !== 'withinNeutral') {
 			<details class="contrastGrid-legend">
 				<summary class="contrastGrid-summary pr-u-focusVisible pr-u-borderRadiusSmall">{{ palettes().length }} palettes checked</summary>
 				<!-- HTML tags rather than lu-tag: its palette input does not cover product palettes -->
@@ -434,7 +431,7 @@ export class ContrastGridComponent {
 				const lost = failing.filter((palette) => !contrastedOnly.includes(palette));
 				// Failing palettes with their ratio, to size the fix; the others by name only
 				const fails = lost.map((palette) => `${palette} · ${contrastOf(styles.normal, palette, row, column).toFixed(2)}:1`).join('<br>');
-				const html = [lost.length ? `<strong>Fails</strong><br>${fails}` : '', contrastedOnly.length ? `<strong>Enhanced contrast only</strong><br>${contrastedOnly.join(', ')}` : '']
+				const html = [lost.length ? `<strong>Fails</strong><br>${fails}` : '', contrastedOnly.length ? `<strong>Enhanced contrast mode</strong><br>${contrastedOnly.join(', ')}` : '']
 					.filter(Boolean)
 					.join('<br><br>');
 				// Palette names come from the page style sheets, not from user input
@@ -455,7 +452,7 @@ export class ContrastGridComponent {
 		const contrasted = this.contrastedOnly().filter((palette) => !failing.includes(palette));
 		return [
 			{ mod: '', mark: '✓', label: 'Default mode', palettes: this.palettes().filter((palette) => !failing.includes(palette) && !contrasted.includes(palette)) },
-			{ mod: 'mod-hatched', mark: '✓', label: 'Enhanced contrast only', palettes: contrasted },
+			{ mod: 'mod-hatched', mark: '✓', label: 'Enhanced contrast mode', palettes: contrasted },
 			{ mod: 'mod-failing', mark: '✗', label: 'Fails', palettes: failing },
 		];
 	});
