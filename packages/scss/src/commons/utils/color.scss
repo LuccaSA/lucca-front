@@ -33,7 +33,13 @@
 	@include core.rosetta('--palettes-brand', '--palettes-brandContrasted', config.$palettesShades);
 	@include core.rosetta('--palettes-success', '--palettes-successContrasted', config.$palettesShades);
 	@include core.rosetta('--palettes-warning', '--palettes-warningContrasted', config.$palettesShades);
-	@include core.rosetta('--palettes-pineapple', '--palettes-pineappleContrasted', config.$palettesShades);
+	@include core.rosetta('--palettes-critical', '--palettes-criticalContrasted', config.$palettesShades);
+	@include core.rosetta('--palettes-error', '--palettes-criticalContrasted', config.$palettesShades);
+
+	// Decorative palettes: only those loaded, with their variant
+	@each $palette in config.$palettesDecorativeContrasted {
+		@include core.rosetta('--palettes-#{$palette}', '--palettes-#{$palette}Contrasted', config.$palettesShades);
+	}
 }
 
 @mixin borderGradient(
