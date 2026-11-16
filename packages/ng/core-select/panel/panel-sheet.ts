@@ -46,7 +46,8 @@ export function openSelectPanelSheet<TPanel>(dialogService: LuDialogService, pan
 
 	injector.get(ApplicationRef).tick();
 	const searchInput = dialogRef.cdkRef.overlayRef.overlayElement.querySelector<HTMLInputElement>('.textField-input-value');
-	searchInput?.focus({ preventScroll: true });
+	// TEMP device comparison, to drop before review: `?noprevent` replays the page scroll.
+	searchInput?.focus(location.search.includes('noprevent') ? undefined : { preventScroll: true });
 
 	trackVisibleViewport(dialogRef);
 

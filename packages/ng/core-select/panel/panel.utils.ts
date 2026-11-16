@@ -48,6 +48,11 @@ export function scrollIntoViewOnceReady(element: HTMLElement, injector: Injector
  * Scrolls only the closest scrollable ancestor, never the page, so a sheet still sliding in does not drag the viewport.
  */
 export function scrollIntoViewWithinList(element: HTMLElement, options?: ScrollIntoViewOptions): void {
+	// TEMP device comparison, to drop before review: `?noscrollfix` replays the native scrollIntoView.
+	if (location.search.includes('noscrollfix')) {
+		element.scrollIntoView(options);
+		return;
+	}
 	let list = element.parentElement;
 	while (list && !/(auto|scroll)/.test(getComputedStyle(list).overflowY)) {
 		list = list.parentElement;
