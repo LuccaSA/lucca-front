@@ -1,0 +1,34 @@
+<table class="demo-QAtable">
+	<thead>
+		<tr>
+			<th>Component</th>
+			<th>Required, error shown once touched</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>lu-text-input</td>
+			<td>
+				<lu-form-field label="Recipe title" errorInlineMessage="The title is required">
+					<lu-text-input placeholder="e.g. Ratatouille" [formField]="recipeForm.title" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>lu-textarea-input</td>
+			<td>
+				<lu-form-field label="Chef's notes" errorInlineMessage="Notes are required">
+					<lu-textarea-input placeholder="Add any extra tips…" [formField]="recipeForm.notes" />
+				</lu-form-field>
+			</td>
+		</tr>
+		<tr>
+			<td>lu-number-input</td>
+			<td>
+				<lu-form-field label="Servings" errorInlineMessage="Servings are required">
+					<lu-number-input [formField]="recipeForm.servings" />
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>
