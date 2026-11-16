@@ -211,7 +211,7 @@ export const WithSelect: StoryObj = {
 		</lu-dialog-header>
 		<lu-dialog-content>
 			<lu-form-field label="Legume">
-				<lu-simple-select [(ngModel)]="legume" [options]="legumes" />
+				<lu-simple-select [(ngModel)]="legume" [options]="legumes" (clueChange)="0" />
 			</lu-form-field>
 			<button class="open pr-u-marginBlockStart200" luButton="outlined" [luDialogOpen]="dialogTpl2" [luDialogConfig]="config">Open Dialog</button>
 		</lu-dialog-content>
@@ -231,7 +231,7 @@ export const WithSelect: StoryObj = {
 		</lu-dialog-header>
 		<lu-dialog-content>
 			<lu-form-field label="Legumes">
-				<lu-multi-select [(ngModel)]="legumesSelection" [options]="legumes" />
+				<lu-multi-select [(ngModel)]="legumesSelection" [options]="legumes" (clueChange)="0" />
 			</lu-form-field>
 		</lu-dialog-content>
 		<lu-dialog-footer>
