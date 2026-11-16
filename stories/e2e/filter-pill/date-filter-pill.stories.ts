@@ -1,7 +1,7 @@
 import { createTestStory } from '@/helpers/stories';
 import { pickDay, waitForAngular } from '@/helpers/test';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
-import meta, { Basic } from '@/stories/forms/filter-pills/angular/date-filter-pill.stories';
+import meta, { Basic, DefaultValue } from '@/stories/forms/filter-pills/angular/date-filter-pill.stories';
 import { DateRange } from '@lucca-front/ng/date2';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { StoryObj } from '@storybook/angular-vite';
@@ -138,5 +138,78 @@ export const PeriodEndDateOnlyTEST = createTestStory(periodWithSelection({ start
 		await waitForAngular();
 		await expect(screen.queryAllByRole('grid')).toHaveLength(0);
 		await expect(getPillValue(canvasElement)).toMatch(/20\/06\/2025.*25\/06\/2025/);
+	});
+});
+
+export const DefaultValueTEST = createTestStory(DefaultValue, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const datePill = canvas.getByRole('button', { name: /Date de début/ });
+	const periodPill = canvas.getByRole('button', { name: /Période/ });
+	const getModelDisplay = (index: number) => canvas.getAllByTestId('pr-ng-model')[index];
+	const queryClearer = (pill: HTMLElement) => within(pill.closest('.filterPillWrapper') as HTMLElement).queryByRole('button', { name: /Vider ce champ/ });
+	// Dates are serialized in the time zone of the browser: compare the model with its initial display
+	const defaultDateModel = getModelDisplay(0).textContent?.trim();
+	const defaultPeriodModel = getModelDisplay(1).textContent?.trim();
+
+	await step('Pills holding their default value display it as neutral, without clear button', async () => {
+		await expect(datePill).toHaveTextContent('01/01/2025');
+		await expect(datePill).toHaveClass('is-default');
+		await expect(queryClearer(datePill)).not.toBeInTheDocument();
+
+		await expect(periodPill).toHaveTextContent(/01\/01\/2025.*31\/01\/2025/);
+		await expect(periodPill).toHaveClass('is-default');
+		await expect(queryClearer(periodPill)).not.toBeInTheDocument();
+	});
+
+	await step('Picking another date makes the pill active', async () => {
+		await userEvent.click(datePill);
+		await waitForAngular();
+		await pickDay(screen.getByTestId('lu-date-input'), 15);
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(datePill).toHaveAttribute('aria-expanded', 'false'));
+
+		await expect(datePill).toHaveTextContent('15/01/2025');
+		await expect(datePill).not.toHaveClass('is-default');
+		await expect(getModelDisplay(0).textContent?.trim()).not.toBe(defaultDateModel);
+		await expect(queryClearer(datePill)).toBeInTheDocument();
+	});
+
+	await step('Clearing the date restores its default value', async () => {
+		await userEvent.click(queryClearer(datePill) as HTMLElement);
+		await waitForAngular();
+
+		await expect(datePill).toHaveTextContent('01/01/2025');
+		await expect(datePill).toHaveClass('is-default');
+		await expect(getModelDisplay(0).textContent?.trim()).toBe(defaultDateModel);
+		await expect(queryClearer(datePill)).not.toBeInTheDocument();
+		await expect(datePill).toHaveFocus();
+	});
+
+	await step('Picking another period makes the pill active', async () => {
+		await userEvent.click(periodPill);
+		await waitForAngular();
+		await pickDay(screen.getByLabelText('Start'), 10, true);
+		await pickDay(screen.getByLabelText('End'), 20, true);
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(periodPill).toHaveAttribute('aria-expanded', 'false'));
+
+		await expect(periodPill).toHaveTextContent(/10\/01\/2025.*20\/01\/2025/);
+		await expect(periodPill).not.toHaveClass('is-default');
+		await expect(getModelDisplay(1).textContent?.trim()).not.toBe(defaultPeriodModel);
+		await expect(queryClearer(periodPill)).toBeInTheDocument();
+	});
+
+	await step('Clearing the period restores its default value', async () => {
+		await userEvent.click(queryClearer(periodPill) as HTMLElement);
+		await waitForAngular();
+
+		await expect(periodPill).toHaveTextContent(/01\/01\/2025.*31\/01\/2025/);
+		await expect(periodPill).toHaveClass('is-default');
+		await expect(getModelDisplay(1).textContent?.trim()).toBe(defaultPeriodModel);
+		await expect(queryClearer(periodPill)).not.toBeInTheDocument();
 	});
 });
