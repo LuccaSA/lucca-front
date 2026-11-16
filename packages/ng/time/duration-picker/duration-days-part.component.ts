@@ -167,6 +167,9 @@ export class DurationDaysPartComponent {
 					if (decimalPart.length < this.decimals()) {
 						decimalPart += char;
 					}
+				} else if (integerPart === '0') {
+					// A zero is only significant as the whole integer part: typing a digit next to it replaces it.
+					integerPart = char;
 				} else if (integerPart.length < this.maxDigits()) {
 					integerPart += char;
 				}

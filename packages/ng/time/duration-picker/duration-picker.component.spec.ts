@@ -295,6 +295,29 @@ describe('DurationPickerComponent', () => {
 			expect(fixture.componentInstance.control.value).toBe('P0.2D');
 		});
 
+		it('should not prepend the leading zero of the current value when typing a digit', () => {
+			// Arrange
+			const fixture = createDaysHost('P0D');
+
+			// Act: the field already shows 0 and the caret sits after it
+			typeInPart('03', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(getDaysDisplay(fixture)).toBe('3');
+			expect(fixture.componentInstance.control.value).toBe('P3D');
+		});
+
+		it('should keep a lone zero while a decimal value is being typed', () => {
+			// Arrange
+			const fixture = createDaysHost(null, { step: 'P0.5D' });
+
+			// Act
+			typeInPart('0.5', getDaysInput(fixture), fixture);
+
+			// Assert
+			expect(getDaysDisplay(fixture)).toBe('0.5');
+		});
+
 		it('should increment by the step', () => {
 			// Arrange
 			const fixture = createDaysHost('P0.5D', { step: 'P0.25D' });
