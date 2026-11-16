@@ -22,12 +22,24 @@ Les lignes commentées ne comptent pas. Sans aucun de ces imports, les `.label` 
 | Label | Cible |
 |---|---|
 | porte `mod-number` | `lu-numeric-badge` |
+| contenu numérique (chiffres ou une seule interpolation) dans un bouton ou une navigation | `lu-numeric-badge` |
 | palette sémantique (`success`, `warning`, `error`, `critical`) **et** signal de statut | `lu-status-badge` |
 | palette `product`, `neutral`, décorative ou aucune | `lu-tag outlined` |
 | palette sémantique sans signal de statut | non converti |
 | handler ou lien sur le Label lui-même (`(click)`, `routerLink`, `href`) | non converti |
 
 Un **signal de statut** est le mot entier `status`, `state`, `statut` ou `approval`, dans un identifiant ou un texte de l'élément (contenu, expression de palette, `i18nSelect`, `ngClass`…), hors attribut `class`. `approvalState` et `STATUS_PENDING` en sont, `statementTooltip` et « estate » non. Un Label *placé dans* un bouton ou un lien n'est pas interactif : il est converti normalement.
+
+### Contexte
+
+Le contexte du Label complète ces règles, d'après les guidelines du NumericBadge (« associé à un Button, une navigation secondaire ») et du StatusBadge (colonne d'un tableau, à côté du nom de la ressource) :
+
+| Contexte | Détection | Effet |
+|---|---|---|
+| bouton | ancêtre `button`, `[luButton]` ou `.button` | contenu numérique → NumericBadge |
+| navigation | ancêtre `lu-horizontal-navigation*`, `lu-vertical-navigation*`, `lu-segmented-control*`, `[luHorizontalNavigationLink]`, `[luVerticalNavigationLink]`, ou classe `tabs-*`, `horizontalNavigation-*`, `verticalNavigation-*`, `mobileNavigation-*`, `segmentedControl-*`, `menu-*` | contenu numérique → NumericBadge |
+| tableau | ancêtre `table`, `tr`, `td`, `th`, `lu-data-table`, `lu-index-table`, ou classe `table-*`, `indexTable-*`, `dataTable-*` | vaut signal de statut ; un NumericBadge hors bouton passe en `low` (du texte brut conviendrait peut-être mieux) |
+| titre | ancêtre ou frère précédent `h1`–`h4`, `.pageHeader-title`, `.pr-u-h1`–`.pr-u-h4` | vaut signal de statut ; StatusBadge en `size="L"` à côté d'un `h1` / `h2` / `.pageHeader-title` |
 
 Ces règles suivent les guidelines Prisme : le Tag est toujours `outlined` et n'accepte pas de palette sémantique ; le StatusBadge porte le statut d'une ressource ; aucune cible n'est interactive. La Chip n'est jamais une cible.
 
@@ -84,8 +96,8 @@ La console affiche un résumé : conversions par cible, Labels non convertis par
 
 | Confiance | Cas |
 |---|---|
-| `high` | `mod-number`, StatusBadge avec signal de statut, Tag avec palette statique `neutral` ou décorative |
-| `low` | Tag issu de `product` ou sans palette (peut être un statut « en cours »), fallback HTML, icône retirée, composant `standalone: false` |
+| `high` | `mod-number` ou compteur dans un bouton / une navigation, StatusBadge avec signal de statut (mot, tableau ou titre), Tag avec palette statique `neutral` ou décorative |
+| `low` | Tag issu de `product` ou sans palette (peut être un statut « en cours »), compteur dans un tableau, fallback HTML, icône retirée, composant `standalone: false` |
 | `not converted` | tous les cas « non converti » ci-dessus |
 
 ## Fixtures
@@ -103,5 +115,6 @@ La console affiche un résumé : conversions par cible, Labels non convertis par
 9. `template-url` + `imports` — template externe, import TS ajouté une seule fois
 10. `review-cases` — `translate="no"` natif, `i18n`, faux signal de statut (`statementTooltip`), `[ngClass]="{ label: … }"`
 11. `legacy-module` — composant `standalone: false` : template migré, `imports` inchangés
+12. `context` — compteur dans un bouton et dans une navigation, texte dans un bouton, compteur et statut dans un tableau, statut à côté d'un `h1` et dans un `h3`
 
 Plus un test séparé : un projet sans import du CSS du Label reste inchangé.

@@ -18,6 +18,7 @@ import {
 	removeAngularImport,
 	removeAttributeUpdate,
 	removeTSImport,
+	TemplateNode,
 	updateContent,
 } from '../lib';
 
@@ -178,12 +179,18 @@ function usesTranslateDirective(template: string): boolean {
 
 function migrateTemplate(template: string, context: TemplateContext): string {
 	return updateContent(template, (updates) => {
-		new HtmlAst(template).visitNodes((node) => {
+		const parents = new Map<TemplateNode, TemplateNode | undefined>();
+		const htmlAst = new HtmlAst(template);
+
+		htmlAst.visitNodes((node, parent) => {
+			// Parents are visited first: the whole ancestor chain is known when a label is reached.
+			parents.set(node, parent);
+
 			if (!isInterestingNode(node)) {
 				return;
 			}
 
-			const update = migrateElement(template, node, context);
+			const update = migrateElement(template, node, context, getSurroundings(node, parents, htmlAst.nodes));
 
 			if (update) {
 				updates.push(update);
@@ -192,7 +199,86 @@ function migrateTemplate(template: string, context: TemplateContext): string {
 	});
 }
 
-function migrateElement(template: string, element: TmplAstElement, context: TemplateContext): FileUpdate | null {
+/** Where the label sits: some Prisme contexts tell which component it should become. */
+interface Surroundings {
+	/** Inside a table: a status column, rarely a count. */
+	table: boolean;
+	/** Inside a button or a navigation item, where the NumericBadge guideline puts counts. */
+	counterHost: 'button' | 'navigation' | null;
+	/** Next to or inside a heading, where the StatusBadge guideline puts the status of a resource. */
+	heading: 'large' | 'small' | null;
+}
+
+const tableElements = ['table', 'tr', 'td', 'th', 'lu-data-table', 'lu-index-table'];
+const tableClass = /^(table|indexTable|dataTable)(-|$)/;
+const navigationClass = /^(tabs|horizontalNavigation|verticalNavigation|mobileNavigation|segmentedControl|menu)(-|$)/;
+const navigationElement = /^lu-(horizontal-navigation|vertical-navigation|segmented-control)/;
+const navigationAttributes = ['luHorizontalNavigationLink', 'luVerticalNavigationLink'];
+
+function getSurroundings(element: TmplAstElement, parents: Map<TemplateNode, TemplateNode | undefined>, rootNodes: TemplateNode[]): Surroundings {
+	const surroundings: Surroundings = { table: false, counterHost: null, heading: null };
+
+	for (let ancestor = parents.get(element); ancestor; ancestor = parents.get(ancestor)) {
+		if (!isInterestingNode(ancestor)) {
+			continue;
+		}
+		const classes = getClasses(ancestor);
+		const attributes = [...ancestor.attributes, ...ancestor.inputs].map((attribute) => attribute.name);
+
+		surroundings.table ||= tableElements.includes(ancestor.name) || classes.some((cls) => tableClass.test(cls));
+		surroundings.heading ??= getHeading(ancestor);
+
+		if (!surroundings.counterHost) {
+			if (ancestor.name === 'button' || attributes.includes('luButton') || classes.includes('button')) {
+				surroundings.counterHost = 'button';
+			} else if (navigationElement.test(ancestor.name) || attributes.some((name) => navigationAttributes.includes(name)) || classes.some((cls) => navigationClass.test(cls))) {
+				surroundings.counterHost = 'navigation';
+			}
+		}
+	}
+
+	// A label right after a heading, like `<h1>Title</h1><span class="label">`.
+	const siblings = getSiblings(element, parents.get(element), rootNodes).filter(isInterestingNode);
+	const previous = siblings[siblings.indexOf(element) - 1];
+	surroundings.heading ??= previous ? getHeading(previous) : null;
+
+	return surroundings;
+}
+
+function getClasses(element: TmplAstElement): string[] {
+	return element.attributes.find((attribute) => attribute.name === 'class')?.value.split(/\s+/).filter(Boolean) ?? [];
+}
+
+/** The StatusBadge guideline asks for the large size next to a level 1 or 2 heading. */
+function getHeading(element: TmplAstElement): 'large' | 'small' | null {
+	const classes = getClasses(element);
+
+	if (['h1', 'h2'].includes(element.name) || classes.some((cls) => ['pageHeader-title', 'pr-u-h1', 'pr-u-h2'].includes(cls))) {
+		return 'large';
+	}
+
+	return ['h3', 'h4'].includes(element.name) || classes.some((cls) => ['pr-u-h3', 'pr-u-h4'].includes(cls)) ? 'small' : null;
+}
+
+function getSiblings(element: TmplAstElement, parent: TemplateNode | undefined, rootNodes: TemplateNode[]): TemplateNode[] {
+	if (!parent) {
+		return rootNodes;
+	}
+
+	const compiler = currentSchematicContext.angularCompiler;
+
+	if (parent instanceof compiler.TmplAstIfBlock) {
+		return parent.branches.find((branch) => branch.children.includes(element))?.children ?? [];
+	}
+
+	if (parent instanceof compiler.TmplAstForLoopBlock && parent.empty?.children.includes(element)) {
+		return parent.empty.children;
+	}
+
+	return 'children' in parent && Array.isArray(parent.children) ? parent.children : [];
+}
+
+function migrateElement(template: string, element: TmplAstElement, context: TemplateContext, surroundings: Surroundings): FileUpdate | null {
 	const classAttribute = element.attributes.find((attribute) => attribute.name === 'class');
 	const classes = classAttribute?.value.split(/\s+/).filter(Boolean) ?? [];
 	const report = (target: string, confidence: LabelConfidence, reason: string) => {
@@ -228,11 +314,22 @@ function migrateElement(template: string, element: TmplAstElement, context: Temp
 	const semantic = values.find((value) => semanticPalettes.includes(value));
 
 	let target: Target;
+	// The StatusBadge guideline puts the status of a resource in a table column and next to its name.
+	const statusSignal = hasStatusSignal(withoutAttribute(template, element, classAttribute))
+		? 'status signal'
+		: surroundings.table
+			? 'in a table'
+			: surroundings.heading
+				? 'next to a heading'
+				: null;
+	// Digits or a single interpolation: what a count looks like in a button or a navigation item.
+	const numericContent = content.kind === 'text' && content.icons.length === 0 && !content.translateKey && /^value="(\d[\d\s.,]*|\{\{[\s\S]*\}\})"$/.test(content.single ?? '');
+	const counterHost = surroundings.counterHost && numericContent ? surroundings.counterHost : null;
 
-	if (isNumber) {
+	if (isNumber || counterHost) {
 		target = 'numericBadge';
 	} else if (semantic) {
-		if (!hasStatusSignal(withoutAttribute(template, element, classAttribute))) {
+		if (!statusSignal) {
 			report('—', 'not converted', `semantic palette (${semantic}) without status signal`);
 			return null;
 		}
@@ -273,6 +370,9 @@ function migrateElement(template: string, element: TmplAstElement, context: Temp
 		}
 	} else {
 		inputs.push(content.label!);
+		if (target === 'statusBadge' && surroundings.heading === 'large') {
+			inputs.push('size="L"');
+		}
 		if (content.icons.length > 0) {
 			if (target === 'tag') {
 				inputs.push(`icon="${content.icons[0]}"`);
@@ -294,18 +394,24 @@ function migrateElement(template: string, element: TmplAstElement, context: Temp
 
 	context.symbols.add(targetSymbols[target]);
 
+	// The NumericBadge goes with a button or a navigation item: in a table cell, the count is more likely plain data.
+	if (target === 'numericBadge' && surroundings.table && !surroundings.counterHost) {
+		notes.push('count in a table, plain text may fit better');
+	}
+
 	const confidence: LabelConfidence = notes.length > 0 || (target === 'tag' && values.includes('product')) ? 'low' : 'high';
-	report(targetTags[target], confidence, [describeTarget(target, palette, semantic), ...notes].join('; '));
+	const description = target === 'numericBadge' && !isNumber ? `count in a ${counterHost}` : describeTarget(target, palette, semantic, statusSignal);
+	report(targetTags[target], confidence, [description, ...notes].join('; '));
 
 	return buildComponent(template, element, classAttribute, classes, targetTags[target], inputs, palette, content.translateAttribute);
 }
 
-function describeTarget(target: Target, palette: Palette, semantic?: string): string {
+function describeTarget(target: Target, palette: Palette, semantic?: string, statusSignal?: string | null): string {
 	switch (target) {
 		case 'numericBadge':
 			return 'mod-number';
 		case 'statusBadge':
-			return `semantic palette (${semantic}) + status signal`;
+			return `semantic palette (${semantic}) + ${statusSignal}`;
 		case 'tag':
 			if (palette.condition) {
 				return 'conditional palette, may be an ongoing status';
