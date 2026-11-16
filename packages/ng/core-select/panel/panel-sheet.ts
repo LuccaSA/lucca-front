@@ -46,7 +46,7 @@ export function openSelectPanelSheet<TPanel>(dialogService: LuDialogService, pan
 
 	injector.get(ApplicationRef).tick();
 	const searchInput = dialogRef.cdkRef.overlayRef.overlayElement.querySelector<HTMLInputElement>('.textField-input-value');
-	searchInput?.focus();
+	searchInput?.focus({ preventScroll: true });
 
 	trackVisibleViewport(dialogRef);
 

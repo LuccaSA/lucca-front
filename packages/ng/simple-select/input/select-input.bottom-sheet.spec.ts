@@ -570,6 +570,17 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(document.activeElement).toBe(searchInput);
 		});
 
+		it('should focus its search input without scrolling the page, which Safari iOS would otherwise keep behind the keyboard once the sheet has slid in', () => {
+			// Arrange
+			const focus = vi.spyOn(HTMLElement.prototype, 'focus');
+
+			// Act
+			openSheet();
+
+			// Assert
+			expect(focus).toHaveBeenCalledWith({ preventScroll: true });
+		});
+
 		it('should mask its search field when the select has no search, there being nothing to type into', () => {
 			// Act
 			openSheet();
