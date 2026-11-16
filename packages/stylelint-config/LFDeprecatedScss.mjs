@@ -38,4 +38,10 @@ export default [
 		versionDeleted: '20.1.0',
 		actions: `Remplacer par \`@forward '@lucca-front/scss/src/components/avatar'\`.`,
 	},
+	{
+		// Orchid palette, replaced by the reworked Grape palette
+		objectPattern: /\$orchid(?![\w-])/,
+		versionDeprecated: '22.2.0',
+		actions: `\`$orchid\` => \`$grape\``,
+	},
 ];

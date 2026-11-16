@@ -1,5 +1,5 @@
 # `DecorativePalette`
 
-Available values (12 total):
+Available values (16 total):
 
-kiwi, lime, cucumber, mint, glacier, lagoon, blueberry, lavender, grape, watermelon, pumpkin, pineapple
+kiwi, lime, cucumber, mint, glacier, lagoon, blueberry, lavender, grape, dragonfruit, raspberry, watermelon, coral, cacao, pumpkin, pineapple
