@@ -1,7 +1,10 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Directive, DoCheck, ElementRef, Injector, OnDestroy, Renderer2, Type, viewChild, ViewContainerRef } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { isObservable, Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
 import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
@@ -105,7 +108,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	}
 }
 
-const panelImports = [A11yModule, AsyncPipe, LuTooltipModule, NgClass];
+const panelImports = [A11yModule, AsyncPipe, ButtonComponent, IconComponent, LuTooltipModule, NgClass, NumericBadgeComponent];
 
 @Component({
 	selector: 'lu-modal-panel',
