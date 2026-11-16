@@ -24,7 +24,9 @@
 		[attr.aria-labelledby]="formFieldId() + '-label'"
 		[attr.aria-controls]="formFieldId()"
 	>
-		<ng-container *cdkPortalOutlet="toolsPortal()" />
+		<span #toolsProjection>
+			<ng-content />
+		</span>
 	</div>
 </div>
 
@@ -34,7 +36,3 @@
 	</span>
 	<div #contentPresentation class="textFlow"></div>
 </ng-container>
-
-<span #toolsProjection>
-	<ng-content />
-</span>
