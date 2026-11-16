@@ -25,7 +25,7 @@ export function scrollIntoViewOnceReady(element: HTMLElement, injector: Injector
 				}
 				const { height } = element.getBoundingClientRect();
 				if (height > 0 && height === lastHeight) {
-					element.scrollIntoView(options?.());
+					scrollIntoViewWithinList(element, options?.());
 				} else {
 					lastHeight = height;
 					rafId = requestAnimationFrame(tryScroll);
@@ -42,6 +42,38 @@ export function scrollIntoViewOnceReady(element: HTMLElement, injector: Injector
 			cancelAnimationFrame(rafId);
 		}
 	};
+}
+
+/**
+ * Scrolls only the closest scrollable ancestor, never the page, so a sheet still sliding in does not drag the viewport.
+ */
+export function scrollIntoViewWithinList(element: HTMLElement, options?: ScrollIntoViewOptions): void {
+	// TEMP device comparison, to drop before review: `?noscrollfix` replays the native scrollIntoView.
+	if (location.search.includes('noscrollfix')) {
+		element.scrollIntoView(options);
+		return;
+	}
+	let list = element.parentElement;
+	while (list && !/(auto|scroll)/.test(getComputedStyle(list).overflowY)) {
+		list = list.parentElement;
+	}
+	if (!list) {
+		return;
+	}
+	const listRect = list.getBoundingClientRect();
+	const rect = element.getBoundingClientRect();
+	const block = options?.block ?? 'start';
+	if (block === 'start') {
+		list.scrollTop += rect.top - listRect.top;
+	} else if (block === 'end') {
+		list.scrollTop += rect.bottom - listRect.bottom;
+	} else if (block === 'center') {
+		list.scrollTop += (rect.top + rect.bottom - listRect.top - listRect.bottom) / 2;
+	} else if (rect.top < listRect.top) {
+		list.scrollTop -= listRect.top - rect.top;
+	} else if (rect.bottom > listRect.bottom) {
+		list.scrollTop += rect.bottom - listRect.bottom;
+	}
 }
 
 export type GroupTemplateLocation = 'group-header' | 'option' | 'none';

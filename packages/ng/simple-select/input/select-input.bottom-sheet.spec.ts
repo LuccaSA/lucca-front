@@ -570,6 +570,17 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(document.activeElement).toBe(searchInput);
 		});
 
+		it('should focus its search input without scrolling the page, which Safari iOS would otherwise keep behind the keyboard once the sheet has slid in', () => {
+			// Arrange
+			const focus = vi.spyOn(HTMLElement.prototype, 'focus');
+
+			// Act
+			openSheet();
+
+			// Assert
+			expect(focus).toHaveBeenCalledWith({ preventScroll: true });
+		});
+
 		it('should mask its search field when the select has no search, there being nothing to type into', () => {
 			// Act
 			openSheet();
@@ -724,7 +735,7 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			vi.unstubAllGlobals();
 		});
 
-		it('should re-scroll the highlighted option into view once the visual viewport settles, since resizing the sheet down for the keyboard can scroll it back out of view', () => {
+		it('should re-scroll the highlighted option into view within its list once the visual viewport settles, since resizing the sheet down for the keyboard can scroll it back out of view', () => {
 			// Arrange
 			const listeners = new Set<() => void>();
 			const viewport = {
@@ -740,14 +751,20 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			selectOf(fixture).writeValue(options[1]);
 			fixture.detectChanges();
 
-			// Act
 			selectOf(fixture).openPanel();
-			scrollIntoView.mockClear(); // ignore whatever scrolled synchronously while the sheet was opening
+			const highlighted = document.querySelector('.is-highlighted') as HTMLElement;
+			const list = highlighted.parentElement as HTMLElement;
+			list.style.overflowY = 'auto';
+			vi.spyOn(list, 'getBoundingClientRect').mockReturnValue({ top: 0, bottom: 300 } as DOMRect);
+			vi.spyOn(highlighted, 'getBoundingClientRect').mockReturnValue({ top: 350, bottom: 390 } as DOMRect);
+
+			// Act
 			viewport.height = 400; // the keyboard just finished opening
 			listeners.forEach((listener) => listener());
 
 			// Assert
-			expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest' });
+			expect(list.scrollTop).toBe(90);
+			expect(scrollIntoView).not.toHaveBeenCalled();
 		});
 	});
 	describe('pagination', () => {

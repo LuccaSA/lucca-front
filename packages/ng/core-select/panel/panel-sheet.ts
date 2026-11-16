@@ -2,6 +2,7 @@ import { ComponentType } from '@angular/cdk/overlay';
 import { ApplicationRef, Injector } from '@angular/core';
 import { LuDialogConfig, LuDialogRef, LuDialogService } from '@lucca-front/ng/dialog';
 import { take } from 'rxjs';
+import { scrollIntoViewWithinList } from './panel.utils';
 
 /**
  * Opens a select panel as a bottom sheet.
@@ -45,7 +46,8 @@ export function openSelectPanelSheet<TPanel>(dialogService: LuDialogService, pan
 
 	injector.get(ApplicationRef).tick();
 	const searchInput = dialogRef.cdkRef.overlayRef.overlayElement.querySelector<HTMLInputElement>('.textField-input-value');
-	searchInput?.focus();
+	// TEMP device comparison, to drop before review: `?noprevent` replays the page scroll.
+	searchInput?.focus(location.search.includes('noprevent') ? undefined : { preventScroll: true });
 
 	trackVisibleViewport(dialogRef);
 
@@ -94,7 +96,10 @@ function trackVisibleViewport<TPanel>(dialogRef: LuDialogRef<TPanel, never>): vo
 		// final size. That earlier scroll position is stale once the sheet's own geometry has changed
 		// size underneath it, so it's redone here on every viewport update, landing correctly once the
 		// keyboard settles.
-		dialogRef.cdkRef.overlayRef.overlayElement.querySelector('.is-highlighted')?.scrollIntoView({ block: 'nearest' });
+		const highlighted = dialogRef.cdkRef.overlayRef.overlayElement.querySelector<HTMLElement>('.is-highlighted');
+		if (highlighted) {
+			scrollIntoViewWithinList(highlighted, { block: 'nearest' });
+		}
 	};
 	update();
 	viewport.addEventListener('resize', update);
