@@ -105,6 +105,11 @@
       "description": "Migrate file upload usages: size default, FileEntry rendering and fileEntryDisplayWrapper",
       "factory": "./file-upload/index",
       "schema": "./file-upload/schema.json"
+    },
+    "lu-label": {
+      "description": "Replace the deprecated .label with lu-numeric-badge, lu-status-badge or lu-tag, and write a migration report",
+      "factory": "./lu-label/index",
+      "schema": "./lu-label/schema.json"
     }
   }
 }

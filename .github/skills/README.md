@@ -24,6 +24,7 @@ Install them when you need them, and remove them once the migration is done.
 | [`lucca-front-deprecated-resolver`](lucca-front-deprecated-resolver/SKILL.md) | Finds the APIs marked `@deprecated` in your project (NgModules, components, inputs, services, tokens) and migrates them. |
 | [`lf-select-migration`](lf-select-migration/SKILL.md) | Moves your app off the deprecated selects (`lu-select`, `lu-api-select`, `lu-user-select`…) to `lu-simple-select` / `lu-multi-select`, without changing what the back end receives. |
 | [`textfield`](deprecated-components/textfield/SKILL.md) | Migrates the deprecated textfield to the modern Angular textfield, with an anti-regression strategy. Path: `.github/skills/deprecated-components/textfield`. |
+| [`label`](deprecated-components/label/SKILL.md) | Replaces the deprecated label (`.label`) with `lu-numeric-badge`, `lu-status-badge` or `lu-tag`, following the Prisme guidelines: runs the `lu-label` schematic (LF 22.2+), then reviews its report and the SCSS overrides. Path: `.github/skills/deprecated-components/label`. |
 
 ## Not for consumer projects
 
