@@ -2,9 +2,9 @@
 // Heavily modified to handle ngModel properly
 import { DestroyRef, effect, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, FormControlDirective, FormControlName, NgControl, NgModel, PristineChangeEvent, type ValidationErrors } from '@angular/forms';
+import { FormControl, FormControlDirective, FormControlName, NgControl, NgModel, PristineChangeEvent, TouchedChangeEvent, type ValidationErrors } from '@angular/forms';
 import { FormField, type ValidationError } from '@angular/forms/signals';
-import { distinctUntilChanged, filter, map } from 'rxjs';
+import { filter } from 'rxjs';
 
 export function injectNgControl() {
 	const ngControl = inject(NgControl, { self: true, optional: true });
@@ -66,13 +66,12 @@ function generateMirrorControl(_ngControl: NgControl, field: FormField<unknown>)
 	control.valueChanges.pipe(takeUntilDestroyed()).subscribe((v) => field.state().value.set(v));
 
 	// Touched | Control -> Field
-	control.statusChanges
+	control.events
 		.pipe(
-			map(() => control.touched),
-			distinctUntilChanged(),
+			filter((event) => event instanceof TouchedChangeEvent && event.touched),
 			takeUntilDestroyed(),
 		)
-		.subscribe((touched) => touched && field.state().markAsTouched());
+		.subscribe(() => field.state().markAsTouched());
 
 	// Dirty | Control -> Field
 	control.events

@@ -271,6 +271,30 @@ describe('injectNgControl', () => {
 		expect(host.form().dirty()).toBe(true);
 	});
 
+	it('should mark the field touched when the user leaves the input when using formField', () => {
+		// Arrange
+		@Component({
+			selector: 'lu-form-field-touched-host',
+			imports: [CustomControl, FormField],
+			template: `<lu-custom-control [formField]="form" />`,
+			changeDetection: ChangeDetectionStrategy.OnPush,
+		})
+		class FormFieldTouchedHost {
+			readonly value = signal('Initial');
+			readonly form = form(this.value);
+			readonly customControl = viewChild(CustomControl);
+		}
+
+		const { fixture, host, nativeInput } = createHost(FormFieldTouchedHost);
+
+		// Act
+		nativeInput().dispatchEvent(new Event('blur'));
+		fixture.detectChanges();
+
+		// Assert
+		expect(host.form().touched()).toBe(true);
+	});
+
 	it('should mirror field validity into the control when using formField', () => {
 		// Arrange: field starts with a valid (non-empty) value
 		@Component({
