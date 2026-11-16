@@ -105,6 +105,11 @@
       "description": "Migrate file upload usages: size default, FileEntry rendering and fileEntryDisplayWrapper",
       "factory": "./file-upload/index",
       "schema": "./file-upload/schema.json"
+    },
+    "text-size": {
+      "description": "Replace the deprecated .(pr-)u-textXS~XXXL utilities with the body and heading utilities, and write a migration report",
+      "factory": "./text-size/index",
+      "schema": "./text-size/schema.json"
     }
   }
 }
