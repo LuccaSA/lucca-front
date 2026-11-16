@@ -83,7 +83,9 @@
 }
 
 @mixin select {
-	--components-dialog-animationDuration: 0s;
+	// max-block-size too, so the sheet shrinks as smoothly as its bottom rises with the keyboard.
+	transition-property: scale, translate, inline-size, block-size, inset, max-block-size;
+
 	--components-dialog-insideHeaderTitleAlign: center;
 	--components-dialog-insideHeaderTitleFont: var(--pr-t-font-heading-4);
 	--components-dialog-insideHeaderColumns: 1fr auto 1fr;
