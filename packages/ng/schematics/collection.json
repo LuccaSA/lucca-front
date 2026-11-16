@@ -121,7 +121,7 @@
       "factory": "./lu-icon/index",
       "schema": "./lu-icon/schema.json",
       "documentation": {
-        "description": "Remplacement des icônes HTML par [<lu-icon>](https://prisme.lucca.io/94310e217/p/9826b3-icons/b/3790bd)."
+        "description": "Remplacement des icônes HTML par [`<lu-icon>`](https://prisme.lucca.io/94310e217/p/9826b3-icons/b/3790bd)."
       }
     },
     "lu-loading": {

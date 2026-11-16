@@ -22,7 +22,7 @@ new_tag() {
 # docs/schematics.md (synced to zeroheight from master) follows the `documentation` field of the schematics collection,
 # and the release tags: a new tag turns its "Prochaine version" rows into that version.
 if git diff --cached --name-only | grep -Eq '^(packages/ng/schematics/collection\.json|scripts/schematics-doc\.mjs)$' || new_tag; then
-	node scripts/schematics-doc.mjs
+	node scripts/schematics-doc.mjs --staged
 	git add docs/schematics.md
 fi
 

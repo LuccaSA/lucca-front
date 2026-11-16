@@ -13,7 +13,7 @@
 | Remplacement des préfixes des classes utilitaires `.u` → `.pr-u`. | 20.2+ | `ng g @lucca-front/ng:class-prefix` |
 | Remplacement des variables border radius par les tokens. | 20.2+ | `ng g @lucca-front/ng:tokens-radius` |
 | Remplacement des boutons HTML par [luButton](https://prisme.lucca.io/94310e217/p/098404-button/b/50af19). | 20.1+ | `ng g @lucca-front/ng:lu-button` |
-| Remplacement des icônes HTML par [<lu-icon>](https://prisme.lucca.io/94310e217/p/9826b3-icons/b/3790bd). | 20.1+ | `ng g @lucca-front/ng:lu-icon` |
+| Remplacement des icônes HTML par [`<lu-icon>`](https://prisme.lucca.io/94310e217/p/9826b3-icons/b/3790bd). | 20.1+ | `ng g @lucca-front/ng:lu-icon` |
 | Remplacement des variables CSS "sizes" par les tokens Font. | 20.1+ | `ng g @lucca-front/ng:tokens-typo` |
 | Mise à jour des URL du CDN. | 19.2+ | `ng g @lucca-front/ng:cdn-urls` |
 | Remplacement des Selects par Simple & Multi Select. | 19.2+ | `ng g @lucca-front/ng:lu-select` |

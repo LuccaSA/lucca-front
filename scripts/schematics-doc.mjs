@@ -9,7 +9,8 @@
  * Without `since`, the version is the first release tag containing the schematic, so that a schematic
  * shipped in a patch from master gets its patch version; until it is tagged, it shows "Prochaine version".
  *
- * Usage: node scripts/schematics-doc.mjs [--check]
+ * Usage: node scripts/schematics-doc.mjs [--check] [--staged]
+ *   --staged reads the collection from the git index (pre-commit hook)
  *   --check  fails if docs/schematics.md is not up to date or a schematic has no documentation, without writing it
  *
  * Without --check (pre-commit hook), a schematic without documentation only raises a warning: /release completes it.
@@ -27,7 +28,12 @@ const UNRELEASED = 'Prochaine version';
 /** Not a migration: installs Lucca Front. */
 const NOT_A_MIGRATION = new Set(['ng-add']);
 
-const { schematics } = JSON.parse(readFileSync(COLLECTION, 'utf8'));
+// --staged (pre-commit hook): the collection being committed, not the working tree, so that unstaged
+// changes do not enter the commit through the generated table.
+const collection = process.argv.includes('--staged')
+	? execFileSync('git', ['show', ':packages/ng/schematics/collection.json'], { cwd: ROOT, encoding: 'utf8' })
+	: readFileSync(COLLECTION, 'utf8');
+const { schematics } = JSON.parse(collection);
 const rows = [];
 const missing = [];
 
