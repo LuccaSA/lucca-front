@@ -11,13 +11,15 @@
  * a codemod *executes* the fix across the whole project. The update skill (separate) consumes this.
  *
  * Source: packages/ng/schematics/collection.json, read via `git show <tag>:<path>` — layout-
- * agnostic, no AI. Codemods carry no version field, so the **introduction version** is derived by
- * diffing the codemod set across consecutive stable 21.x tags (first tag where a name appears).
+ * agnostic, no AI. The **introduction version** is the `documentation.since` field of the codemod, or
+ * the first release tag containing the commit that added it (same rule as `scripts/schematics-doc.mjs`),
+ * or, without git history, the first stable tag of the major where its name appears.
  *
  * NB: `migrations.json` (the `ng update` auto-migration list) is intentionally ignored — LF ships
  * almost none (a single pre-21 entry), so it added no value. Prose guidance lives in deprecated.md.
  */
 
+import { execFileSync } from 'child_process';
 import { readAtTag } from './git-snapshot';
 import { VersionConfig } from '../types';
 import { writeMigrationsPage } from '../generators/skill-writer';
@@ -55,6 +57,45 @@ export function collectionAt(tag: string): Map<string, string> {
 
 	collectionCache.set(tag, map);
 	return map;
+}
+
+/**
+ * Introduction version of each codemod at a tag: its `documentation.since` when declared, otherwise the
+ * first release tag containing the commit that added it to the collection (same rule as
+ * `scripts/schematics-doc.mjs`, which publishes the table on zeroheight). Absent when not released yet.
+ */
+function introductionVersionsAt(tag: string): Map<string, string> {
+	const versions = new Map<string, string>();
+	const raw = readAtTag(tag, COLLECTION_PATH);
+	if (raw === null) return versions;
+
+	let schematics: Record<string, { documentation?: false | { since?: string } }> = {};
+	try {
+		schematics = (JSON.parse(raw) as { schematics?: typeof schematics }).schematics ?? {};
+	} catch {
+		return versions;
+	}
+
+	const git = (...args: string[]) => execFileSync('git', args, { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
+
+	for (const [name, e] of Object.entries(schematics)) {
+		if (e.documentation && e.documentation.since) {
+			versions.set(name, e.documentation.since);
+			continue;
+		}
+		try {
+			const [added] = git('log', '--reverse', '--format=%H', `-S"${name}": {`, '--', COLLECTION_PATH).split('\n');
+			if (!added) continue;
+			const [first] = git('tag', '--contains', added, '--list', 'v*')
+				.split('\n')
+				.filter((t) => /^v\d+\.\d+\.\d+$/.test(t))
+				.sort(compareTags);
+			if (first) versions.set(name, first.slice(1).replace(/\.0$/, ''));
+		} catch {
+			// no git history (tarball): fall back on the tag diff
+		}
+	}
+	return versions;
 }
 
 export function collectSchematics(skillsDir: string, version: VersionConfig): { written: number; errors: number } {
@@ -113,9 +154,11 @@ export function collectSchematics(skillsDir: string, version: VersionConfig): { 
 
 	md += followsCode(version) ? `## Catalogue complet (cumulatif)\n\n` : `## Catalogue complet (cumulatif ≤ ${version.tag})\n\n`;
 	md += `| Codemod | Commande | Effet | Introduit |\n|---------|----------|-------|-----------|\n`;
+	// Declared or git-derived version first; the tag diff of the major covers what git cannot date.
+	const introductionVersions = introductionVersionsAt(version.source);
 	for (const n of names) {
-		const intro = introTag(n);
-		md += `| ${n} | ${cmd(n)} | ${target.get(n) || '_(pas de description)_'} | ${intro ? intro.replace(/^v/, '') : '—'} |\n`;
+		const intro = introductionVersions.get(n) ?? introTag(n)?.replace(/^v/, '');
+		md += `| ${n} | ${cmd(n)} | ${target.get(n) || '_(pas de description)_'} | ${intro ?? '—'} |\n`;
 	}
 	md += `\n`;
 

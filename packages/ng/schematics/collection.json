@@ -9,102 +9,160 @@
     "new-icons": {
       "description": "Replace old icon names with new ones.",
       "factory": "./new-icons/index",
-      "schema": "./new-icons/schema.json"
+      "schema": "./new-icons/schema.json",
+      "documentation": {
+        "description": "Application de la nouvelle nomenclature des icônes."
+      }
     },
     "lu-select": {
       "description": "Migrate lu-select into lu-simple-select and lu-multiple-select where possible.",
       "factory": "./lu-select/index",
-      "schema": "./lu-select/schema.json"
+      "schema": "./lu-select/schema.json",
+      "documentation": {
+        "description": "Remplacement des Selects par Simple & Multi Select."
+      }
     },
     "lu-text-input": {
       "description": "Migrate deprecated textfield into lu-text-input where possible.",
       "factory": "./lu-text-input/index",
-      "schema": "./lu-text-input/schema.json"
+      "schema": "./lu-text-input/schema.json",
+      "documentation": false
     },
     "tokens-spacings": {
       "description": "Replace spacing tokens with new names.",
       "factory": "./tokens-spacing/index",
-      "schema": "./tokens-spacing/schema.json"
+      "schema": "./tokens-spacing/schema.json",
+      "documentation": {
+        "description": "Application des nouveaux tokens spacings (ex. `.pr-u-margin100`, `--pr-t-spacings-100`, etc.)"
+      }
     },
     "tokens-radius": {
       "description": "Replace radius tokens with new names.",
       "factory": "./tokens-radius/index",
-      "schema": "./tokens-radius/schema.json"
+      "schema": "./tokens-radius/schema.json",
+      "documentation": {
+        "description": "Remplacement des variables border radius par les tokens."
+      }
     },
     "class-prefix": {
       "description": "Add pr- prefix to all utility classes",
       "factory": "./class-prefix/index",
-      "schema": "./class-prefix/schema.json"
+      "schema": "./class-prefix/schema.json",
+      "documentation": {
+        "description": "Remplacement des préfixes des classes utilitaires `.u` → `.pr-u`."
+      }
     },
     "component-path": {
       "description": "Update path component import",
       "factory": "./component-path/index",
-      "schema": "./component-path/schema.json"
+      "schema": "./component-path/schema.json",
+      "documentation": {
+        "description": "Remplacement des imports pour Scrollbox, Segmented control et Status badge (homogénéisation des noms)"
+      }
     },
     "deprecated-resolver": {
       "description": "Migrate deprecated NgModules, types and input output.",
       "factory": "./deprecated-resolver/index",
-      "schema": "./deprecated-resolver/schema.json"
+      "schema": "./deprecated-resolver/schema.json",
+      "documentation": {
+        "description": "Migration des NgModules, types et inputs/outputs dépréciés vers leurs équivalents standalone."
+      }
     },
     "tokens-typo": {
       "description": "Replace typography tokens with new names.",
       "factory": "./tokens-typo/index",
-      "schema": "./tokens-typo/schema.json"
+      "schema": "./tokens-typo/schema.json",
+      "documentation": {
+        "description": "Remplacement des variables CSS \"sizes\" par les tokens Font."
+      }
     },
     "color-text": {
       "description": "Replace color text tokens.",
       "factory": "./color-text/index",
-      "schema": "./color-text/schema.json"
+      "schema": "./color-text/schema.json",
+      "documentation": {
+        "description": "Mise à jour des utilitaires de couleur de texte. Exemple : `.pr-u-textLight` → `.pr-u-colorTextSubtle`"
+      }
     },
     "palettes": {
       "description": "Replace palettes with new names.",
       "factory": "./palettes/index",
-      "schema": "./palettes/schema.json"
+      "schema": "./palettes/schema.json",
+      "documentation": {
+        "description": "Remplacement des palettes `grey`, `primary`, `secondary` et `lucca` par `neutral`, `product` et `brand`."
+      }
     },
     "alignment-utilities": {
       "description": "Replace alignment utilities tokens.",
       "factory": "./alignment-utilities/index",
-      "schema": "./alignment-utilities/schema.json"
+      "schema": "./alignment-utilities/schema.json",
+      "documentation": {
+        "description": "Remplacement des utilitaires d’alignement type `.pr-u-textRight` (physical) par `.pr-u-textAlignEnd` (logical)"
+      }
     },
     "action-icon": {
       "description": "Replace actionIcon usages with button mod-onlyIcon",
       "factory": "./action-icon/index",
-      "schema": "./action-icon/schema.json"
+      "schema": "./action-icon/schema.json",
+      "documentation": {
+        "description": "Remplacement de `.actionIcon` par un bouton `.mod-onlyIcon`."
+      }
     },
     "cdn-urls": {
       "description": "Replace cdn urls with their new location",
       "factory": "./cdn-urls/index",
-      "schema": "./cdn-urls/schema.json"
+      "schema": "./cdn-urls/schema.json",
+      "documentation": {
+        "description": "Mise à jour des URL du CDN."
+      }
     },
     "lu-icon": {
       "description": "Migrate HTML icons to the new lu-icon component",
       "factory": "./lu-icon/index",
-      "schema": "./lu-icon/schema.json"
+      "schema": "./lu-icon/schema.json",
+      "documentation": {
+        "description": "Remplacement des icônes HTML par [<lu-icon>](https://prisme.lucca.io/94310e217/p/9826b3-icons/b/3790bd)."
+      }
     },
     "lu-loading": {
       "description": "Migrate HTML loading to the new lu-loading component",
       "factory": "./lu-loading/index",
-      "schema": "./lu-loading/schema.json"
+      "schema": "./lu-loading/schema.json",
+      "documentation": {
+        "description": "Remplacement des loading HTML par `<lu-loading>`"
+      }
     },
     "lu-container": {
       "description": "Migrate HTML container to the new lu-container component",
       "factory": "./lu-container/index",
-      "schema": "./lu-container/schema.json"
+      "schema": "./lu-container/schema.json",
+      "documentation": {
+        "description": "Remplacement des containers HTML par `<lu-container>`"
+      }
     },
     "lu-grid": {
       "description": "Migrate HTML grid to the new lu-grid component",
       "factory": "./lu-grid/index",
-      "schema": "./lu-grid/schema.json"
+      "schema": "./lu-grid/schema.json",
+      "documentation": {
+        "description": "Remplacement des Grid HTML par `<lu-grid>`"
+      }
     },
     "lu-button": {
       "description": "Migrate CSS-only buttons to the new luButton component",
       "factory": "./lu-button/index",
-      "schema": "./lu-button/schema.json"
+      "schema": "./lu-button/schema.json",
+      "documentation": {
+        "description": "Remplacement des boutons HTML par [luButton](https://prisme.lucca.io/94310e217/p/098404-button/b/50af19)."
+      }
     },
     "file-upload": {
       "description": "Migrate file upload usages: size default, FileEntry rendering and fileEntryDisplayWrapper",
       "factory": "./file-upload/index",
-      "schema": "./file-upload/schema.json"
+      "schema": "./file-upload/schema.json",
+      "documentation": {
+        "description": "Migration du file upload : taille par défaut, affichage du `FileEntry` et `.fileEntryDisplayWrapper`."
+      }
     }
   }
 }
