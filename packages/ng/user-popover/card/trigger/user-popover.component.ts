@@ -6,7 +6,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
 import { SkeletonUserPopoverComponent } from '@lucca-front/ng/skeleton';
-import { ILuUser } from '@lucca-front/ng/user';
+import { ILuUser, LuDisplayFullname, LuDisplayInitials, luUserDisplay } from '@lucca-front/ng/user';
 import { ɵinjectRandomPercent } from '@lucca/prisme/core';
 import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -60,9 +60,9 @@ export class LuUserPopoverComponent {
 		map(([employee, isError]) => {
 			if (employee.pictureHref && !isError) {
 				return 'img';
-			} else {
-				return 'initials';
 			}
+			// Without picture nor name (e.g. 404 on a user we only know the id of), display a placeholder
+			return luUserDisplay(employee, LuDisplayInitials.firstlast) ? 'initials' : 'placeholder';
 		}),
 	);
 
@@ -70,11 +70,14 @@ export class LuUserPopoverComponent {
 
 	public readonly userInitials$ = this.employee$.pipe(
 		map((employee) => {
-			const initials = `${employee.firstName[0]}${employee.lastName[0]}`;
+			const initials = luUserDisplay(employee, LuDisplayInitials.firstlast);
 
 			return {
 				initials,
-				color: `${employee.firstName} ${employee.lastName}`.split('').reduce((sum, a) => sum + a.charCodeAt(0), 0) % 360,
+				color:
+					luUserDisplay(employee, LuDisplayFullname.firstlast)
+						.split('')
+						.reduce((sum, a) => sum + a.charCodeAt(0), 0) % 360,
 			};
 		}),
 	);

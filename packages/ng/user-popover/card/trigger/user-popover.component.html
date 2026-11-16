@@ -1,8 +1,9 @@
 @if (employee$ | async; as employee) {
 	<div class="userPopover pr-u-animatedFadeIn">
 		<section class="userPopover-details">
-			<div class="userPopover-details-avatar avatar">
-				@switch (userPictureDisplay$ | async) {
+			@let userPictureDisplay = userPictureDisplay$ | async;
+			<div class="userPopover-details-avatar avatar" [class.mod-placeholder]="userPictureDisplay === 'placeholder'">
+				@switch (userPictureDisplay) {
 					@case ("img") {
 						<img
 							class="avatar-picture"
@@ -18,6 +19,9 @@
 								<span class="avatar-picture-initials" translate="no">{{ initials.initials }}</span>
 							</div>
 						}
+					}
+					@case ("placeholder") {
+						<div class="avatar-picture"></div>
 					}
 				}
 			</div>

@@ -283,8 +283,12 @@ export const handlers = [
 	),
 
 	http.get('/api/v3/users/search', usersSearchHandler),
-	http.get('/work-locations/api/employee-profile-card/:id', async () => {
+	http.get('/work-locations/api/employee-profile-card/:id', async ({ params }) => {
 		await delay(300);
+		// Simulates a user the current user has no access to
+		if (params['id'] === '404') {
+			return new HttpResponse(null, { status: 404 });
+		}
 		return HttpResponse.json(mockUserPopover);
 	}),
 
