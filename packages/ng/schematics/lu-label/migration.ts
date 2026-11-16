@@ -140,7 +140,8 @@ export function migrateComponent(path: string, content: string, tree: Tree, stat
 	// A converted `translate` directive may have been the last one of the component.
 	const removeTranslateDirective = symbols.has('TranslatePipe') && componentImports.includes('TranslateDirective') && !migratedTemplates.some(usesTranslateDirective);
 
-	if (componentImports.includes('TranslateModule')) {
+	// TranslateModule brings the pipe, and a `TranslatePipe` imported from elsewhere (a project pipe) would clash with a second one.
+	if (componentImports.includes('TranslateModule') || componentImports.includes('TranslatePipe')) {
 		symbols.delete('TranslatePipe');
 	}
 

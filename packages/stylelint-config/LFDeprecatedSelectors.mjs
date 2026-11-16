@@ -134,7 +134,7 @@ export default [
 			/\.(menu|horizontalNavigation)(-[\w-]+)?\s(.*\s)?\.label(?![\w-])/,
 		],
 		versionDeprecated: '16.3.0',
-		actions: `Remplacer par [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge).`,
+		actions: `Remplacer par [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge), automatiquement avec \`ng g @lucca-front/ng:lu-label\`.`,
 	},
 	{
 		// Legacy form layout, including its children (`.form-group-line-col`…)
@@ -1270,11 +1270,11 @@ export default [
 		objectPattern: /\.label(-(icon))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `
-			Remplacer par :
+			Remplacer, automatiquement avec \`ng g @lucca-front/ng:lu-label\`, par :
 
-			* [Chip](https://prisme.lucca.io/94310e217/p/3960bc-chip)
-			* [Tag](https://prisme.lucca.io/94310e217/p/6036ad-tag)
 			* [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge)
+			* [Status badge](https://prisme.lucca.io/94310e217/p/425d98-statusbadge)
+			* [Tag](https://prisme.lucca.io/94310e217/p/6036ad-tag)
 		`,
 		urls: {
 			prisme: 'https://prisme.lucca.io/94310e217/p/640fae-label',
