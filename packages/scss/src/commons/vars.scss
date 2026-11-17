@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
+@use 'sass:string';
 
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
@@ -110,6 +111,13 @@
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
 	--commons-pushPanel-inlineSize: 0px;
+
+	// The space reserved by a docked panel belongs to the page: a shadow root takes it from its host
+	@if string.index('#{&}', ':host') {
+		@at-root :host {
+			--commons-pushPanel-inlineSize: inherit;
+		}
+	}
 
 	// stylelint-disable property-disallowed-list -- Deprecated.
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
