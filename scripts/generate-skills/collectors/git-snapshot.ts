@@ -155,7 +155,12 @@ function extractInto(dir: string, tag: string, pathspec: string): void {
 		fs.mkdirSync(partial, { recursive: true });
 		// `git archive` applies `core.autocrlf` where `git show` does not: both must return the blob as committed.
 		git(['-c', 'core.autocrlf=false', '-c', 'core.eol=lf', 'archive', '--format=tar', '-o', tarball, tag, '--', pathspec]);
-		execFileSync('tar', ['-xf', tarball, '-C', partial], { stdio: ['pipe', 'pipe', 'pipe'] });
+		// Relative paths, run from the parent: GNU tar (what `tar` resolves to under Git Bash, and so
+		// under the pre-commit hook) reads the `C:` of an absolute `-f` as a remote host.
+		execFileSync('tar', ['-xf', path.basename(tarball), '-C', path.basename(partial)], {
+			cwd: path.dirname(partial),
+			stdio: ['pipe', 'pipe', 'pipe'],
+		});
 		fs.renameSync(partial, dir);
 	} catch (err) {
 		// Another run renamed the same snapshot into place first.

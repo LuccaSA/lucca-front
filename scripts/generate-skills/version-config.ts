@@ -7,7 +7,7 @@
  * - Git tags for source code access
  */
 
-import { execFileSync, execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { VersionConfig } from './types';
@@ -333,7 +333,7 @@ export function listStableTags(major: number): string[] {
 
 	let tags: string[] = [];
 	try {
-		const out = execSync(`git tag -l 'v${major}.*'`, { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
+		const out = execFileSync('git', ['tag', '-l', `v${major}.*`], { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
 		tags = out
 			.split('\n')
 			.map((t) => t.trim())
@@ -356,7 +356,7 @@ function listStableMajors(): number[] {
 
 	let majors: number[] = [];
 	try {
-		const out = execSync(`git tag -l 'v*'`, { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
+		const out = execFileSync('git', ['tag', '-l', 'v*'], { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
 		majors = [
 			...new Set(
 				out
