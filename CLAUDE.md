@@ -71,7 +71,7 @@ Chaque entrypoint qui affiche du texte a un `translations.ts` indexé par locale
 
 ## Storybook
 
-`stories/` est découpé en `documentation/` (docs publiques, groupées par thème : forms, overlays, navigation…), `qa/` (pages QA par composant), `e2e/` (tests d'interaction `play`) et `helpers/`. Le lint est fortement assoupli pour `stories/**`. Storybook build avec compodoc pour la doc d'API.
+`stories/` est découpé en `documentation/` (docs publiques, groupées par thème : forms, overlays, navigation…), `qa/` (pages QA par composant), `e2e/` (tests d'interaction `play`) et `helpers/`. Le lint est fortement assoupli pour `stories/**`. La doc d’API (tables d’inputs) est extraite des sources TypeScript par le docgen de `@storybook/angular-vite`.
 
 - **Stories QA** (`stories/qa/<composant>/`) : un `@Component` wrapper dans `<composant>.stories.ts` avec `templateUrl` pointant vers `<composant>.stories.html`, qui contient une `<table class="demo-QAtable">` comparant côte à côte la version HTML (classes CSS pures) et la version Angular (composants `<lu-*>`). La colonne Angular doit utiliser de vrais composants `lu-*`, jamais du HTML brut avec des classes.
 - **Stories de documentation** (`stories/documentation/<catégorie>/<composant>/`) : `Meta`/`StoryObj` standards sur la classe du composant, titre reflétant l'arborescence (`Documentation/<Catégorie>/<Composant>/Angular/<Variante>`) ; les variantes Angular et HTML vivent dans des dossiers frères `angular/` et `html&css/`. Utiliser `generateInputs(inputs, argTypes)` de `stories/helpers/stories`. Aucune story de test (`play`, `*TEST`) dans ce dossier : elles vont dans `stories/e2e/`.

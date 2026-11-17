@@ -26,8 +26,6 @@ demo/scss
 demo/ng
 
 # storybook
-.storybook/documentation.json
-documentation.json
 storybook-static
 
 # copied from .github/skills by `npm run docs:llms`
