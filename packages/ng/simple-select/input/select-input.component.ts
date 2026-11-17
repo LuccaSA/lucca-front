@@ -70,7 +70,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 
 	readonly filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
-	readonly isFilterPillDefault = computed(() => {
+	override readonly isFilterPillDefault = computed(() => {
 		const defaultValue = this.defaultValue();
 		const value = this.valueSignal();
 		return isNotNil(defaultValue) && isNotNil(value) && this.optionComparer()(value, defaultValue);

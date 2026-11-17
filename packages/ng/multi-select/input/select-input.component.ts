@@ -125,7 +125,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	});
 
 	// Not readonly: `withSelectAll` replaces it, the default value not being supported in that mode
-	isFilterPillDefault: Signal<boolean> = computed(() => {
+	override isFilterPillDefault: Signal<boolean> = computed(() => {
 		const defaultValue = this.defaultValue();
 		const value = this.valueSignal();
 		if (!defaultValue || !value || defaultValue.length !== value.length) {
@@ -139,6 +139,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 			return index !== -1 && unmatchedDefaults.splice(index, 1).length > 0;
 		});
 	});
+
+	// Not readonly: `withSelectAll` replaces it, the default value not being supported in that mode
+	getClearedValue: () => T[] = () => this.defaultValue() ?? [];
 
 	// eslint-disable-next-line @angular-eslint/prefer-signals
 	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
@@ -231,7 +234,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	override clearValue(event?: Event): void {
 		event?.stopPropagation();
-		const value = this.defaultValue() ?? [];
+		const value = this.getClearedValue();
 		this.onChange?.(value);
 		this.value = value;
 		this.focusInput$.next({ keepClue: true });

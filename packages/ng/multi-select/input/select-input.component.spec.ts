@@ -424,6 +424,27 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'none' }]);
 			});
 
+			it('should ignore the default value when clearing, as it is not supported with select all', async () => {
+				// Arrange
+				const { componentInstance } = fixture;
+				fixture.componentRef.setInput('defaultValue', [options[0]]);
+				componentInstance.openPanel();
+				await waitForPanel(componentInstance);
+				componentInstance.panelRef?.changeDetectorRef?.detectChanges();
+
+				// Act
+				selectAllDirective.setSelectAll(true);
+				TestBed.flushEffects();
+				selectAllDirective.clearValue({
+					stopPropagation: () => {},
+				} as Event);
+				TestBed.flushEffects();
+
+				// Assert
+				expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'none' }]);
+				expect(componentInstance.isFilterPillDefault()).toBe(false);
+			});
+
 			it('should emit "none" selection when clicking on select all then unselect each option', async () => {
 				// Arrange
 				const { componentInstance } = fixture;

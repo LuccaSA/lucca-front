@@ -115,7 +115,9 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
 		this.select.hasValue = () => this.#hasValue();
 		this.select.isFilterPillEmpty = computed(() => !this.#hasValue());
+		// The default value isn't supported with select all: clearing keeps emptying the selection
 		this.select.isFilterPillDefault = signal(false);
+		this.select.getClearedValue = () => [];
 		this.select.useSingleOptionDisplayer = computed(() => this.#mode() === 'include' || this.singleRemainingOption() !== undefined);
 		this.select.singleOptionForDisplay = computed(() => (this.#mode() === 'include' && this.#valuesCount() === 1 ? this.select.valueSignal()?.[0] : this.singleRemainingOption()));
 		this.select.valueLength = computed(() => this.displayerCount() ?? 0);
