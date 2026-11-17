@@ -11,7 +11,7 @@ Ce skill guide la migration d'un projet **consommateur** de `@lucca-front/ng` de
 
 Principe directeur : **les schematics font le mécanique, ce skill fait le résiduel contextuel.** Ne jamais réimplémenter à la main ce qu'un schematic couvre déjà — lancer le schematic, puis traiter uniquement ce qu'il laisse.
 
-**Ce skill s'exécute dans le dépôt du projet consommateur**, pas dans `lucca-front` : le voir listé signifie qu'il a été rapatrié (voir « Installation » plus bas). Toutes les commandes ci-dessous (`ng g`, `ng build`, lint, tests) s'appliquent au projet à migrer.
+**Ce skill s'exécute dans le dépôt du projet consommateur**, pas dans `lucca-front` : le voir listé signifie qu'il y a été installé (voir « Installation » plus bas). Toutes les commandes ci-dessous (`ng g`, `ng build`, lint, tests) s'appliquent au projet à migrer.
 
 ## Fichiers de référence
 
@@ -194,12 +194,12 @@ Produire un rapport structuré :
 
 ## Installation dans un projet consommateur
 
-Ce skill vit dans [`lucca-front/.claude/skills/`](https://github.com/LuccaSA/lucca-front/tree/master/.claude/skills). Pour l'utiliser sur un projet à migrer, le rapatrier tel quel — dossier complet, `SKILL.md` **et** `references/` :
+Ce skill vit dans [`lucca-front/.github/skills/`](https://github.com/LuccaSA/lucca-front/tree/master/.github/skills). L'installer avec [APM](https://microsoft.github.io/apm/) en ajoutant son chemin à l'`apm.yml` du projet à migrer, puis `apm install` :
 
-```bash
-# depuis la racine du projet à migrer, avec un clone de lucca-front à côté
-mkdir -p .claude/skills
-cp -r <chemin>/lucca-front/.claude/skills/lucca-front-migrate-22 .claude/skills/
+```yaml
+dependencies:
+  apm:
+    - LuccaSA/lucca-front/.github/skills/lucca-front-migrate-22
 ```
 
-Le poser dans `.claude/skills/` du projet le versionne et le partage avec l'équipe ; le poser dans `~/.claude/skills/` le réserve à un poste. Claude Code le charge ensuite automatiquement quand une migration LF 22 est demandée, ou explicitement via `/lucca-front-migrate-22`.
+Claude Code le charge ensuite automatiquement quand une migration LF 22 est demandée, ou explicitement via `/lucca-front-migrate-22`. Le retirer une fois la migration terminée.

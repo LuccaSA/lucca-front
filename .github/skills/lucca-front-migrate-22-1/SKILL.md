@@ -99,12 +99,12 @@ Ne jamais mélanger anciens et nouveaux inputs sur un même `lu-fancy-box` : une
 
 ## Installation dans un projet consommateur
 
-Ce skill vit dans [`lucca-front/.claude/skills/`](https://github.com/LuccaSA/lucca-front/tree/master/.claude/skills). Le rapatrier tel quel, `SKILL.md` **et** `references/` :
+Ce skill vit dans [`lucca-front/.github/skills/`](https://github.com/LuccaSA/lucca-front/tree/master/.github/skills). L'installer avec [APM](https://microsoft.github.io/apm/) en ajoutant son chemin à l'`apm.yml` du projet à migrer, puis `apm install` :
 
-```bash
-# depuis la racine du projet à migrer, avec un clone de lucca-front à côté
-mkdir -p .claude/skills
-cp -r <chemin>/lucca-front/.claude/skills/lucca-front-migrate-22-1 .claude/skills/
+```yaml
+dependencies:
+  apm:
+    - LuccaSA/lucca-front/.github/skills/lucca-front-migrate-22-1
 ```
 
-Le poser dans `.claude/skills/` du projet le partage avec l'équipe ; dans `~/.claude/skills/`, il reste sur un poste. Claude Code le charge quand une migration LF 22.1 est demandée, ou via `/lucca-front-migrate-22-1`.
+Claude Code le charge ensuite quand une migration LF 22.1 est demandée, ou via `/lucca-front-migrate-22-1`. Le retirer une fois la migration terminée.

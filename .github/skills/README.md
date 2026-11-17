@@ -21,6 +21,8 @@ Install them when you need them, and remove them once the migration is done.
 
 | Skill | What it does |
 |---|---|
+| [`lucca-front-migrate-22`](lucca-front-migrate-22/SKILL.md) | Migrates your project from Lucca Front 21.x to 22.x (breaking release): runs the official schematics, then handles what they leave (palettes, file upload, activity feed, select panel, strict/readonly/signals). |
+| [`lucca-front-migrate-22-1`](lucca-front-migrate-22-1/SKILL.md) | Migrates your project from Lucca Front 22.0.x to 22.1.x (fancy box SVG rendering and renamed inputs, removed `USER_POPOVER_IS_ACTIVATED`). |
 | [`lucca-front-deprecated-resolver`](lucca-front-deprecated-resolver/SKILL.md) | Finds the APIs marked `@deprecated` in your project (NgModules, components, inputs, services, tokens) and migrates them. |
 | [`lf-select-migration`](lf-select-migration/SKILL.md) | Moves your app off the deprecated selects (`lu-select`, `lu-api-select`, `lu-user-select`…) to `lu-simple-select` / `lu-multi-select`, without changing what the back end receives. |
 | [`textfield`](deprecated-components/textfield/SKILL.md) | Migrates the deprecated textfield to the modern Angular textfield, with an anti-regression strategy. Path: `.github/skills/deprecated-components/textfield`. |
