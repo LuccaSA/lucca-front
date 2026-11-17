@@ -14,6 +14,8 @@ import { SegmentedControlFilterComponent } from './filter.component';
 			<lu-segmented-control-filter class="projected" value="projected">
 				<ng-container luSegmentedControlFilterLabel>Projected <strong>label</strong></ng-container>
 			</lu-segmented-control-filter>
+			<lu-segmented-control-filter class="badge" label="Badge" value="badge" [numericBadge]="8" />
+			<lu-segmented-control-filter class="zero" label="Zero" value="zero" [numericBadge]="0" />
 			<lu-segmented-control-filter class="both" label="Input" value="both">
 				<ng-container luSegmentedControlFilterLabel>Projected label</ng-container>
 			</lu-segmented-control-filter>
@@ -50,6 +52,20 @@ describe(SegmentedControlFilterComponent.name, () => {
 		it('should give the label input priority over the projected element', () => {
 			expect(text(label('both'))).toBe('Input');
 			expect(element.querySelector('lu-segmented-control-filter.both')?.textContent).not.toContain('Projected');
+		});
+	});
+
+	describe('numericBadge', () => {
+		it('should display the numeric badge after the label', () => {
+			expect(label('badge')?.querySelector('lu-numeric-badge')?.textContent?.trim()).toBe('8');
+		});
+
+		it('should display a zero counter', () => {
+			expect(label('zero')?.querySelector('lu-numeric-badge')?.textContent?.trim()).toBe('0');
+		});
+
+		it('should not display a numeric badge by default', () => {
+			expect(label('input')?.querySelector('lu-numeric-badge')).toBeNull();
 		});
 	});
 });

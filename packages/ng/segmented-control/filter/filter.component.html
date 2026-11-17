@@ -14,4 +14,7 @@
 	} @else {
 		<ng-content select="[luSegmentedControlFilterLabel]" />
 	}
+	@if (numericBadge() !== null) {
+		<lu-numeric-badge [value]="numericBadge()!" />
+	}
 </label>

@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { SegmentedControlComponent, SegmentedControlFilterComponent, SegmentedControlFilterLabelDirective } from '@lucca-front/ng/segmented-control';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
@@ -7,6 +6,7 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 
 interface segmentedControlBasicStory {
 	small: boolean;
+	withNumericBadge: boolean;
 	richContent: boolean;
 	vertical: boolean;
 	ariaLabel: string;
@@ -15,7 +15,7 @@ interface segmentedControlBasicStory {
 export default {
 	decorators: [
 		moduleMetadata({
-			imports: [NumericBadgeComponent, SegmentedControlComponent, SegmentedControlFilterComponent, SegmentedControlFilterLabelDirective, FormsModule, StoryModelDisplayComponent],
+			imports: [SegmentedControlComponent, SegmentedControlFilterComponent, SegmentedControlFilterLabelDirective, FormsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -23,8 +23,12 @@ export default {
 			description: 'Modifie la taille du composant.',
 			table: { category: 'inputs' },
 		},
+		withNumericBadge: {
+			description: 'Ajoute un compteur à la première option, via l’input <code>numericBadge</code>.',
+			table: { category: 'story' },
+		},
 		richContent: {
-			description: 'Remplace l’input <code>label</code> de la première option par un contenu riche (avec un Numeric Badge).',
+			description: 'Remplace l’input <code>label</code> de la première option par un contenu riche.',
 			table: { category: 'story' },
 		},
 		vertical: {
@@ -39,6 +43,11 @@ export default {
 			control: false,
 			description: 'Libellé du filtre. Contenu riche : directive <code>luSegmentedControlFilterLabel</code> (l’input prévaut).',
 			table: { category: 'inputs (segmented-control-filter)', type: { summary: 'PortalContent' } },
+		},
+		numericBadge: {
+			control: false,
+			description: 'Affiche un Numeric Badge après le libellé, généralement un compteur.',
+			table: { category: 'inputs (segmented-control-filter)', type: { summary: 'number | null' }, defaultValue: { summary: 'null' } },
 		},
 		value: {
 			control: false,
@@ -58,11 +67,12 @@ function getTemplate(args: segmentedControlBasicStory): string {
 	const size = args.small ? ` small` : ``;
 	const vertical = args.vertical ? ` vertical` : ``;
 	const ariaLabel = args.ariaLabel ? ` [ariaLabel]="ariaLabel"` : ``;
+	const numericBadge = args.withNumericBadge ? ` [numericBadge]="8"` : ``;
 	const firstFilter = args.richContent
-		? `<lu-segmented-control-filter value="0">
-		<ng-container luSegmentedControlFilterLabel>Lorem <lu-numeric-badge value="8" /></ng-container>
+		? `<lu-segmented-control-filter value="0"${numericBadge}>
+		<span luSegmentedControlFilterLabel><strong>Lorem</strong> ipsum</span>
 	</lu-segmented-control-filter>`
-		: `<lu-segmented-control-filter label="Lorem" value="0" />`;
+		: `<lu-segmented-control-filter label="Lorem" value="0"${numericBadge} />`;
 
 	return `<lu-segmented-control${size}${vertical}${ariaLabel} [(ngModel)]="sample">
 	${firstFilter}
@@ -82,6 +92,7 @@ const Template = (args: segmentedControlBasicStory) => ({
 export const Basic: StoryObj<segmentedControlBasicStory> = {
 	args: {
 		small: false,
+		withNumericBadge: false,
 		vertical: false,
 		ariaLabel: 'Lorem ipsum',
 		richContent: false,

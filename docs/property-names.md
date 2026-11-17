@@ -24,17 +24,18 @@ Directory of the names shared across components. Before naming a new input, chec
 
 ### Content
 
-| Input          | Type                        | Description                                                                                                                   | Avoid                                   |
-| -------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| `label`        | `string` or `PortalContent` | Changes the text displayed by the `<component>`.                                                                              | `text`, `content`                       |
-| `heading`      | `string` or `PortalContent` | Changes the title displayed by the `<component>`.                                                                             | `title` (native attribute)              |
-| `headingLevel` | number union (`1` … `6`)    | Aria level of the title, exposed as a heading. Defaults to `<n>`: set it when the title is not an `h<n>` in the page outline. | `hx`, `level`, `titleLevel`             |
-| `headingStyle` | number union (`1`, `2`…)    | Applies the visual style of an `h<n>` to the title, regardless of its `headingLevel`.                                         | `hxStyle`, `titleStyle`                 |
-| `hiddenLabel`  | `boolean`                   | Hides the label while keeping it in the DOM for screen readers.                                                               | `showLabel`, `hideLabel`, `labelHidden` |
-| `icon`         | `LuccaIcon`                 | Adds an icon to the `<component>`.                                                                                            | `iconName`, `glyph`                     |
-| `alt`          | `string`                    | Information conveyed by the screen reader.                                                                                    | `ariaLabel`, `altText`                  |
-| `tooltip`      | `string` or `SafeHtml`      | Displays an icon (?) associated with a tooltip.                                                                               | `help`, `hint`                          |
-| `withTooltip`  | `boolean`                   | Displays the label in a tooltip on hover.                                                                                     | `tooltip` (holds the tooltip content)   |
+| Input          | Type                        | Description                                                                                                                   | Avoid                                      |
+| -------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `label`        | `string` or `PortalContent` | Changes the text displayed by the `<component>`.                                                                              | `text`, `content`                          |
+| `heading`      | `string` or `PortalContent` | Changes the title displayed by the `<component>`.                                                                             | `title` (native attribute)                 |
+| `headingLevel` | number union (`1` … `6`)    | Aria level of the title, exposed as a heading. Defaults to `<n>`: set it when the title is not an `h<n>` in the page outline. | `hx`, `level`, `titleLevel`                |
+| `headingStyle` | number union (`1`, `2`…)    | Applies the visual style of an `h<n>` to the title, regardless of its `headingLevel`.                                         | `hxStyle`, `titleStyle`                    |
+| `hiddenLabel`  | `boolean`                   | Hides the label while keeping it in the DOM for screen readers.                                                               | `showLabel`, `hideLabel`, `labelHidden`    |
+| `icon`         | `LuccaIcon`                 | Adds an icon to the `<component>`.                                                                                            | `iconName`, `glyph`                        |
+| `numericBadge` | `number`                    | Displays a numeric badge after the label of the `<component>`, typically a counter.                                           | `count`, `counter` (field length), `badge` |
+| `alt`          | `string`                    | Information conveyed by the screen reader.                                                                                    | `ariaLabel`, `altText`                     |
+| `tooltip`      | `string` or `SafeHtml`      | Displays an icon (?) associated with a tooltip.                                                                               | `help`, `hint`                             |
+| `withTooltip`  | `boolean`                   | Displays the label in a tooltip on hover.                                                                                     | `tooltip` (holds the tooltip content)      |
 
 ### Behavior
 

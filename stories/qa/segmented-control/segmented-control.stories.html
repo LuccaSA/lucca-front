@@ -70,18 +70,10 @@
 			</td>
 			<td>
 				<lu-segmented-control [ariaLabel]="'Lorem ipsum'" [(ngModel)]="filtersNumericValue">
-					<lu-segmented-control-filter value="0">
-						<ng-container luSegmentedControlFilterLabel>Lorem <lu-numeric-badge value="1" /></ng-container>
-					</lu-segmented-control-filter>
-					<lu-segmented-control-filter value="1">
-						<ng-container luSegmentedControlFilterLabel>Ipsum <lu-numeric-badge value="2" /></ng-container>
-					</lu-segmented-control-filter>
-					<lu-segmented-control-filter value="2">
-						<ng-container luSegmentedControlFilterLabel>Dolor sit <lu-numeric-badge value="34" /></ng-container>
-					</lu-segmented-control-filter>
-					<lu-segmented-control-filter value="3" disabled>
-						<ng-container luSegmentedControlFilterLabel>Lorem Consectetur <lu-numeric-badge value="567" /></ng-container>
-					</lu-segmented-control-filter>
+					<lu-segmented-control-filter label="Lorem" value="0" [numericBadge]="1" />
+					<lu-segmented-control-filter label="Ipsum" value="1" [numericBadge]="2" />
+					<lu-segmented-control-filter label="Dolor sit" value="2" [numericBadge]="34" />
+					<lu-segmented-control-filter label="Lorem Consectetur" value="3" disabled [numericBadge]="567" />
 				</lu-segmented-control>
 			</td>
 		</tr>
@@ -162,18 +154,12 @@
 			</td>
 			<td>
 				<lu-segmented-control small [ariaLabel]="'Lorem ipsum'" [(ngModel)]="filtersSmallValue">
-					<lu-segmented-control-filter value="0">
-						<ng-container luSegmentedControlFilterLabel>Lorem <lu-numeric-badge value="1" /></ng-container>
-					</lu-segmented-control-filter>
-					<lu-segmented-control-filter value="1">
-						<ng-container luSegmentedControlFilterLabel>Ipsum <lu-numeric-badge value="2" /></ng-container>
-					</lu-segmented-control-filter>
+					<lu-segmented-control-filter label="Lorem" value="0" [numericBadge]="1" />
+					<lu-segmented-control-filter label="Ipsum" value="1" [numericBadge]="2" />
 					<lu-segmented-control-filter value="2">
 						<ng-container luSegmentedControlFilterLabel>Dolor sit <lu-numeric-badge value="34" loading /></ng-container>
 					</lu-segmented-control-filter>
-					<lu-segmented-control-filter value="3" disabled>
-						<ng-container luSegmentedControlFilterLabel>Lorem Consectetur <lu-numeric-badge value="567" /></ng-container>
-					</lu-segmented-control-filter>
+					<lu-segmented-control-filter label="Lorem Consectetur" value="3" disabled [numericBadge]="567" />
 				</lu-segmented-control>
 			</td>
 		</tr>
