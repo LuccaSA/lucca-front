@@ -1,0 +1,6 @@
+@use '@lucca-front/scss/src/commons';
+// @forward '@lucca-front/scss/src/main-all';
+@use '@lucca-front/scss/src/components/label' as label;
+@use '@lucca-front/scss/src/components/statusBadge';
+@use '@lucca-front/scss/src/components/tag';
+@forward '@lucca-front/scss/src/components/button';
