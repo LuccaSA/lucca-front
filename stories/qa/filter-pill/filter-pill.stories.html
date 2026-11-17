@@ -11,6 +11,9 @@
 			<td>
 				<div class="demo-QAtable-list">Angular selected clearable</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular default value</div>
+			</td>
 		</tr>
 		<tr>
 			<td>Checkbox</td>
@@ -27,6 +30,7 @@
 				</lu-filter-pill>
 			</td>
 			<td></td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Checkbox / Ellipsis</td>
@@ -42,6 +46,7 @@
 					<lu-checkbox-input [ngModel]="true" [disabled]="disabled()" />
 				</lu-filter-pill>
 			</td>
+			<td></td>
 			<td></td>
 		</tr>
 		<tr>
@@ -64,6 +69,13 @@
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Légume">
 						<lu-simple-select [ngModel]="'Artichaut'" [disabled]="disabled()" [options]="legumes" />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légume">
+						<lu-simple-select [ngModel]="'Artichaut'" [defaultValue]="'Artichaut'" [disabled]="disabled()" [options]="legumes" />
 					</lu-filter-pill>
 				</div>
 			</td>
@@ -91,6 +103,7 @@
 					</lu-filter-pill>
 				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Select multi</td>
@@ -142,6 +155,19 @@
 					<lu-filter-pill label="Légumes">
 						<lu-multi-select
 							[ngModel]="['Artichaut', 'Asperge']"
+							[disabled]="disabled()"
+							[filterPillLabelPluralFn]="legumesPluralFn"
+							[options]="legumes"
+						/>
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Légumes">
+						<lu-multi-select
+							[ngModel]="['Artichaut', 'Asperge']"
+							[defaultValue]="['Artichaut', 'Asperge']"
 							[disabled]="disabled()"
 							[filterPillLabelPluralFn]="legumesPluralFn"
 							[options]="legumes"
@@ -215,6 +241,7 @@
 					</lu-filter-pill>
 				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Tree select simple</td>
@@ -245,6 +272,7 @@
 					</lu-filter-pill>
 				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Tree select multi</td>
@@ -308,6 +336,7 @@
 					</lu-filter-pill>
 				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Departement simple</td>
@@ -332,6 +361,7 @@
 					</lu-filter-pill>
 				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Departement multi</td>
@@ -390,6 +420,7 @@
 					</lu-filter-pill>
 				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Date</td>
@@ -411,6 +442,13 @@
 				<div class="demo-QAtable-list">
 					<lu-filter-pill label="Date de plantation">
 						<lu-date-input [ngModel]="selectedDate" [disabled]="disabled()" />
+					</lu-filter-pill>
+				</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Date de plantation">
+						<lu-date-input [ngModel]="selectedDate" [defaultValue]="selectedDate" [disabled]="disabled()" />
 					</lu-filter-pill>
 				</div>
 			</td>
@@ -438,10 +476,17 @@
 					</lu-filter-pill>
 				</div>
 			</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<lu-filter-pill label="Période de récolte">
+						<lu-date-range-input [ngModel]="selectedDateRange" [defaultValue]="selectedDateRange" [disabled]="disabled()" />
+					</lu-filter-pill>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>FilterViewSelector</td>
-			<td colspan="3">
+			<td colspan="4">
 				<div class="demo-QAtable-list">
 					<lu-filter-view-selector [views]="views" [(selectedView)]="selectedView" />
 					<lu-filter-pill label="Arroser">

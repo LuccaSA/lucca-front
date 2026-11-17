@@ -1,7 +1,7 @@
 import { createTestStory } from '@/helpers/stories';
 import { findPanelOptions, waitForAngular } from '@/helpers/test';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
-import meta, { Basic } from '@/stories/forms/filter-pills/angular/select-filter-pill.stories';
+import meta, { Basic, DefaultValue } from '@/stories/forms/filter-pills/angular/select-filter-pill.stories';
 
 export default {
 	...meta,
@@ -64,5 +64,74 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await waitForAngular();
 		await expect(multiPill).toHaveTextContent('Aucune valeur sélectionnée');
 		await expect(getModelDisplay(1)).toHaveTextContent('[]');
+	});
+});
+
+export const DefaultValueTEST = createTestStory(DefaultValue, async ({ canvasElement, step }) => {
+	await waitForAngular();
+
+	const canvas = within(canvasElement);
+	const [simplePill, multiPill] = canvas.getAllByRole('button', { name: /légume/i });
+	const getModelDisplay = (index: number) => canvas.getAllByTestId('pr-ng-model')[index];
+	const queryClearer = (pill: HTMLElement) => within(pill.closest('.filterPillWrapper') as HTMLElement).queryByRole('button', { name: /Vider ce champ/ });
+
+	await step('Pills holding their default value display it as neutral, without clear button', async () => {
+		await expect(simplePill).toHaveTextContent('Artichaut');
+		await expect(simplePill).toHaveClass('is-default');
+		await expect(queryClearer(simplePill)).not.toBeInTheDocument();
+
+		await expect(multiPill).toHaveTextContent('2 légumes');
+		await expect(multiPill).toHaveClass('is-default');
+		await expect(queryClearer(multiPill)).not.toBeInTheDocument();
+	});
+
+	await step('Selecting another option makes the simple select pill active', async () => {
+		await userEvent.click(simplePill);
+		await waitForAngular();
+		const options = await findPanelOptions();
+		await userEvent.click(options[1]);
+		await waitForAngular();
+		await waitFor(() => expect(simplePill).toHaveAttribute('aria-expanded', 'false'));
+
+		await expect(simplePill).toHaveTextContent('Asperge');
+		await expect(simplePill).not.toHaveClass('is-default');
+		await expect(getModelDisplay(0)).toHaveTextContent('Asperge');
+		await expect(queryClearer(simplePill)).toBeInTheDocument();
+	});
+
+	await step('Clearing the simple select pill restores its default value', async () => {
+		await userEvent.click(queryClearer(simplePill) as HTMLElement);
+		await waitForAngular();
+
+		await expect(simplePill).toHaveTextContent('Artichaut');
+		await expect(simplePill).toHaveClass('is-default');
+		await expect(getModelDisplay(0)).toHaveTextContent('Artichaut');
+		await expect(queryClearer(simplePill)).not.toBeInTheDocument();
+	});
+
+	await step('Unselecting a default option makes the multi select pill active', async () => {
+		await userEvent.click(multiPill);
+		await waitForAngular();
+		const [firstOption] = await findPanelOptions();
+		await userEvent.click(firstOption);
+		await waitForAngular();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(multiPill).toHaveAttribute('aria-expanded', 'false'));
+
+		await expect(multiPill).not.toHaveClass('is-default');
+		await expect(getModelDisplay(1)).not.toHaveTextContent('Artichaut');
+		await expect(queryClearer(multiPill)).toBeInTheDocument();
+	});
+
+	await step('Clearing the multi select pill restores its default value', async () => {
+		await userEvent.click(queryClearer(multiPill) as HTMLElement);
+		await waitForAngular();
+
+		await expect(multiPill).toHaveTextContent('2 légumes');
+		await expect(multiPill).toHaveClass('is-default');
+		await expect(getModelDisplay(1)).toHaveTextContent('Artichaut');
+		await expect(getModelDisplay(1)).toHaveTextContent('Asperge');
+		await expect(queryClearer(multiPill)).not.toBeInTheDocument();
 	});
 });

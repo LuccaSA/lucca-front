@@ -137,6 +137,10 @@ export class FilterPillComponent implements FilterPillHostComponent {
 
 	readonly inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty() ?? true);
 	readonly inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable() ?? false);
+	readonly inputIsDefault = computed(() => this.inputComponentRef()?.isFilterPillDefault?.() ?? false);
+
+	// A pill holding its default value is displayed as neutral, like an empty one
+	readonly isActive = computed(() => !this.inputIsEmpty() && !this.inputIsDefault());
 
 	readonly shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
 
@@ -157,7 +161,7 @@ export class FilterPillComponent implements FilterPillHostComponent {
 	}
 
 	get isFilled() {
-		return !this.inputIsEmpty();
+		return this.isActive();
 	}
 
 	get hideCombobox() {
@@ -177,15 +181,15 @@ export class FilterPillComponent implements FilterPillHostComponent {
 		});
 
 		effect(() => {
-			// When an optional filter pill has a value, it must be displayed
-			if (this.optional() && !this.inputIsEmpty() && !untracked(this.displayed)) {
+			// When an optional filter pill has a value other than its default one, it must be displayed
+			if (this.optional() && this.isActive() && !untracked(this.displayed)) {
 				this.displayed.set(true);
 			}
 		});
 
 		effect(() => {
-			// When an optional filter pill is hidden, its value must be clear
-			if (this.optional() && !this.displayed() && !untracked(this.inputIsEmpty)) {
+			// When an optional filter pill is hidden, its value must be cleared (back to its default one, if any)
+			if (this.optional() && !this.displayed() && untracked(this.isActive)) {
 				this.clear();
 			}
 		});

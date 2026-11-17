@@ -116,6 +116,13 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	readonly widthAuto = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Range restored by the clear button, which only shows once the range differs from it.
+	 * It isn't applied on init: the form control is expected to be initialized with it.
+	 * It isn't validated either: its dates must be valid and between `min` and `max`, a warning being logged in dev mode otherwise.
+	 */
+	readonly defaultValue = input(null, { transform: (value: DateRange | DateRangeInput | null) => transformDateRangeInputToDateRange(value) });
+
 	readonly label: Signal<PortalContent | undefined> = signal('');
 
 	popoverPositions: ConnectionPositionPair[] = [
@@ -234,6 +241,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	readonly isFilterPillEmpty = computed(() => this.selectedRange() === null);
+	readonly isFilterPillDefault = computed(() => {
+		const defaultValue = this.defaultValue();
+		const selectedRange = this.selectedRange();
+		return isNotNil(defaultValue) && isNotNil(selectedRange) && defaultValue.start?.getTime() === selectedRange.start?.getTime() && defaultValue.end?.getTime() === selectedRange.end?.getTime();
+	});
 
 	/**
 	 * The field of the missing bound when a single date is selected, null otherwise.
@@ -263,6 +275,12 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	constructor() {
 		super();
+
+		effect(() => {
+			const defaultValue = this.defaultValue();
+			this.warnOnUnselectableDefaultDate('Date Range Input', defaultValue?.start);
+			this.warnOnUnselectableDefaultDate('Date Range Input', defaultValue?.end);
+		});
 
 		if (this.#formFieldRef) {
 			this.#formFieldRef.rolePresentationLabel.set(true);
@@ -513,7 +531,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	clear() {
-		const newValue = this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : null;
+		const newValue = this.defaultValue() ?? (this.clearBehavior() === 'reset' ? (this.initialValue() ?? null) : null);
 		this.selectedRange.set(newValue);
 		this.#onChange?.(this.selectedRange());
 		this.onTouched?.();

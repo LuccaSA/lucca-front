@@ -7,6 +7,7 @@ interface SelectBasicStory {
 	value: string;
 	expanded: boolean;
 	disabled: boolean;
+	isDefault: boolean;
 }
 
 export default {
@@ -21,18 +22,19 @@ export default {
 
 function getTemplate(args: SelectBasicStory): string {
 	const isFilled = args.value !== `` ? ` is-filled` : ``;
+	const isDefault = args.isDefault ? ` is-default` : ``;
 	const tooltip = args.value !== `` ? ` luTooltip="${args.value}"` : ``;
 	const labelDisplayed = args.value ? args.label + ': ' : args.label;
 	const disabled = args.disabled ? ` disabled="disabled"` : ``;
 	return `<div class="filterPillWrapper">
-	<button${disabled} type="button" class="filterPill${isFilled}" aria-expanded="${args.expanded}" aria-controls="panel">
+	<button${disabled} type="button" class="filterPill${isFilled}${isDefault}" aria-expanded="${args.expanded}" aria-controls="panel">
 		<span class="filterPill-label">${labelDisplayed}</span>
 		<span class="filterPill-value">${args.value ? args.value : 'Aucune valeur sélectionnée'}</span>
 		<span class="filterPill-toggle">
 			<span class="lucca-icon icon-arrowChevronBottom mod-S"></span>
 		</span>
 	</button>
-	<button${disabled} type="button" class="filterPill_clear clear"><span class="pr-u-mask">Vider ce champ</span></button>
+	${args.isDefault ? `` : `<button${disabled} type="button" class="filterPill_clear clear"><span class="pr-u-mask">Vider ce champ</span></button>`}
 </div>`;
 }
 
@@ -47,6 +49,7 @@ export const Basic: StoryObj<SelectBasicStory> = {
 		value: 'Lorem ipsum',
 		expanded: false,
 		disabled: false,
+		isDefault: false,
 	},
 	render: Template,
 };

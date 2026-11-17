@@ -26,6 +26,7 @@ class TestFilterPillInputComponent implements FilterPillInputComponent {
 
 	isFilterPillEmpty = signal(true);
 	isFilterPillClearable = signal(false);
+	isFilterPillDefault = signal(false);
 	filterPillDisabled = signal(false);
 
 	closePopover?: () => void;
@@ -112,6 +113,27 @@ describe(FilterPillComponent.name, () => {
 		input.filterPillDisabled.set(true);
 		fixture.detectChanges();
 
+		expect(fixture.nativeElement.querySelector('lu-clear')).toBeNull();
+	});
+
+	it('should display a pill holding its default value as neutral, without offering to clear it', () => {
+		const input = openPopover();
+		pill.popoverRef()?.close();
+
+		input.isFilterPillEmpty.set(false);
+		input.isFilterPillClearable.set(true);
+		fixture.detectChanges();
+
+		const pillButton = fixture.nativeElement.querySelector('.filterPill') as HTMLElement;
+		expect(pillButton.classList).toContain('is-filled');
+		expect(fixture.nativeElement.querySelector('lu-clear')).not.toBeNull();
+
+		input.isFilterPillDefault.set(true);
+		fixture.detectChanges();
+
+		// Still filled so the value stays visible, the default state only neutralizes the colors
+		expect(pillButton.classList).toContain('is-filled');
+		expect(pillButton.classList).toContain('is-default');
 		expect(fixture.nativeElement.querySelector('lu-clear')).toBeNull();
 	});
 });

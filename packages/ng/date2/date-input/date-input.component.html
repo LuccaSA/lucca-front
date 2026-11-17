@@ -27,10 +27,15 @@
 		/>
 
 		<div class="textField-input-affix">
-			@if (clearable() && !disabled() && (clearBehavior() === "clear" ? date.value !== "" : selectedDate() !== initialValue())) {
+			@if (
+				clearable() &&
+				!disabled() &&
+				!isFilterPillDefault() &&
+				(clearBehavior() === "clear" ? date.value !== "" : selectedDate() !== initialValue())
+			) {
 				<lu-clear class="textField-input-affix-clear" (onClear)="clear(); date.focus()">{{ intl().clear }}</lu-clear>
 			}
-			@if (isFilterPill && !isFilterPillEmpty()) {
+			@if (isFilterPill && !isFilterPillEmpty() && !isFilterPillDefault()) {
 				<lu-clear class="textField-input-affix-clear" (onClear)="clear(); date.focus()">{{ intl().clear }}</lu-clear>
 			}
 			<button

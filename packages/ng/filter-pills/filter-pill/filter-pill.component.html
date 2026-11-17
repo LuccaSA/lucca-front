@@ -25,7 +25,8 @@
 			type="button"
 			class="filterPill"
 			[attr.disabled]="disabled() ? 'disabled' : null"
-			[class.is-filled]="!this.inputIsEmpty()"
+			[class.is-filled]="!inputIsEmpty()"
+			[class.is-default]="inputIsDefault()"
 			[attr.aria-expanded]="popoverRef.opened()"
 			(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"
 			(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover(true)"
@@ -63,7 +64,7 @@
 				<lu-icon [icon]="displayedIcon()" size="S" />
 			</span>
 		</button>
-		@if (inputIsClearable() && !disabled()) {
+		@if (inputIsClearable() && !disabled() && !inputIsDefault()) {
 			<lu-clear class="filterPill_clear" (onClear)="clear(); popoverRef.opened() ? null : filterPillRef.focus()">{{
 				intl().clear
 			}}</lu-clear>
