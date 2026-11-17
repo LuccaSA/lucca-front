@@ -44,6 +44,7 @@ const scssConfig = `${generatedWarning}// to test locally (without the CDN)
 $font-path: '//cdn.lucca.fr/transverse/prisme/icons/font/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
 $isNamespaced: false !default;
+$isEmbedded: false !default;
 $layers: 'reset, base, components, mods, product, utils' !default;
 
 $icons: (

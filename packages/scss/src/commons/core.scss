@@ -176,7 +176,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 		@each $style in $styles {
 			@if $style == 'normal' {
 				@font-face {
-					font-family: '#{$family}';
+					font-family: '#{config.$fontFamilyPrefix}#{$family}';
 					src: url('#{$familyPath}/#{$keyword}#{$filenameSuffix}.woff2') format('woff2');
 					font-weight: #{$number};
 					font-style: #{$style};
@@ -188,7 +188,7 @@ $cursor: 'pointer', 'auto', 'default', 'text';
 				}
 			} @else {
 				@font-face {
-					font-family: '#{$family}';
+					font-family: '#{config.$fontFamilyPrefix}#{$family}';
 					src: url('#{$familyPath}/#{$keyword}#{$filenameSuffix}-#{$style}.woff2') format('woff2');
 					font-weight: #{$number};
 					font-style: #{$style};

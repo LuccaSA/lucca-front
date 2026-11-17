@@ -22,36 +22,38 @@
 	block-size: -webkit-fill-available;
 }
 
+@mixin fontFaces {
+	@if config.$fontFamily {
+		@include core.fontFace(config.$fontFamily, config.$fontWeights, config.$fontStyles, $unicodeRange: config.$fontCoreRange);
+		@include core.fontFace(
+			config.$fontFamily,
+			config.$fontWeights,
+			config.$fontStyles,
+			$unicodeRange: config.$fontExtendedRange,
+			$filenameSuffix: '-extended'
+		);
+	}
+
+	@if config.$fontFamilyBrand {
+		@include core.fontFace(
+			config.$fontFamilyBrand,
+			config.$fontWeightsBrand,
+			config.$fontStylesBrand,
+			$path: config.$fontPathBrand,
+			$unicodeRangeFolder: config.$fontUnicodeRangeFolderBrand
+		);
+	}
+
+	@if config.$fontFamilyCursive {
+		@include core.fontFace(config.$fontFamilyCursive, config.$fontWeightsCursive, config.$fontStylesCursive);
+	}
+}
+
 @mixin base($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
-		@if config.$fontFamily {
-			@include core.fontFace(
-				config.$fontFamily,
-				config.$fontWeights,
-				config.$fontStyles,
-				$unicodeRange: config.$fontCoreRange
-			);
-			@include core.fontFace(
-				config.$fontFamily,
-				config.$fontWeights,
-				config.$fontStyles,
-				$unicodeRange: config.$fontExtendedRange,
-				$filenameSuffix: '-extended'
-			);
-		}
-
-		@if config.$fontFamilyBrand {
-			@include core.fontFace(
-				config.$fontFamilyBrand,
-				config.$fontWeightsBrand,
-				config.$fontStylesBrand,
-				$path: config.$fontPathBrand,
-				$unicodeRangeFolder: config.$fontUnicodeRangeFolderBrand
-			);
-		}
-
-		@if config.$fontFamilyCursive {
-			@include core.fontFace(config.$fontFamilyCursive, config.$fontWeightsCursive, config.$fontStylesCursive);
+		// A shadow root ignores @font-face: an embedded application declares its fonts in the page (ng/src/embedded-document)
+		@if not config.$isEmbedded {
+			@include fontFaces;
 		}
 
 		*,
@@ -70,6 +72,13 @@
 			& {
 				@include body;
 				@include html;
+			}
+		} @else if config.$isEmbedded {
+			// The host element sits in the page layout: it only takes the typography of the body
+			:host {
+				color: var(--pr-t-color-text);
+				font: var(--pr-t-font-body-M);
+				text-rendering: geometricPrecision;
 			}
 		} @else {
 			html {

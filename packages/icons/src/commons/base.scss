@@ -1,4 +1,5 @@
 @use '@lucca-front/icons/src/commons/config';
+@use '@lucca-front/icons/src/commons/core';
 
 // stylelint-disable-next-line layer-name-pattern
 @layer #{config.$layers};
@@ -7,6 +8,14 @@
 	@layer base {
 		// stylelint-disable-next-line block-no-redundant-nested-style-rules, nesting-selector-no-missing-scoping-root -- & references the selector calling this mixin.
 		& {
+			-moz-osx-font-smoothing: grayscale;
+
+			--icon-fontFamily: '#{config.$font-name}';
+		}
+	}
+} @else if config.$isEmbedded {
+	@layer base {
+		:host {
 			-moz-osx-font-smoothing: grayscale;
 
 			--icon-fontFamily: '#{config.$font-name}';
@@ -22,18 +31,10 @@
 	}
 }
 
-@at-root {
-	@layer base {
-		@font-face {
-			font-family: config.$font-name;
-			font-style: normal;
-			font-weight: 400;
-			src:
-				url('#{config.$font-path}.woff2') format('woff2'),
-				url('#{config.$font-path}.woff') format('woff');
-			letter-spacing: normal;
-			font-feature-settings: 'liga';
-			font-variant-ligatures: discretionary-ligatures;
+@if not config.$isEmbedded {
+	@at-root {
+		@layer base {
+			@include core.fontFace;
 		}
 	}
 }

@@ -6,6 +6,7 @@
 $layers: 'reset, base, components, mods, product, utils';
 
 $isNamespaced: false !default;
+$isEmbedded: false !default;
 $deprecatedSpacings: false !default;
 $deprecatedCardBoxMargin: false !default;
 $deprecatedUtilityPrefix: false !default;
@@ -13,6 +14,9 @@ $deprecatedUtilityPrefix: false !default;
 $prefersContrast: 'no-preference' !default;
 
 $fontFamily: 'SourceSans' !default;
+
+// Prepended to the declared font family names, not to the font file paths: keeps the faces of an embedded application apart from the host page ones.
+$fontFamilyPrefix: '' !default;
 
 $fontPath: '//cdn.lucca.fr/transverse/fonts' !default;
 

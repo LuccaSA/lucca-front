@@ -1,5 +1,6 @@
 @use 'sass:string';
 @use 'sass:list';
+@use '@lucca-front/icons/src/commons/config';
 
 @function capitalize($string) {
 	@return string.to-upper-case(string.slice($string, 1, 1)) + string.slice($string, 2);
@@ -33,4 +34,18 @@
 	}
 
 	@return $string;
+}
+
+@mixin fontFace {
+	@font-face {
+		font-family: config.$font-name;
+		font-style: normal;
+		font-weight: 400;
+		src:
+			url('#{config.$font-path}.woff2') format('woff2'),
+			url('#{config.$font-path}.woff') format('woff');
+		letter-spacing: normal;
+		font-feature-settings: 'liga';
+		font-variant-ligatures: discretionary-ligatures;
+	}
 }

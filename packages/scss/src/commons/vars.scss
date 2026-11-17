@@ -11,7 +11,7 @@
 @mixin vars {
 	// TOKENS : TYPO
 
-	--pr-t-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+	--pr-t-font-family: '#{config.$fontFamilyPrefix}#{config.$fontFamily}', Tahoma, sans-serif;
 	--pr-t-font-family-brand: var(--pr-t-font-family);
 
 	&:lang(fr),
@@ -21,11 +21,18 @@
 	&:lang(it),
 	&:lang(pt),
 	&:lang(es) {
-		--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', Tahoma, sans-serif;
+		--pr-t-font-family-brand: '#{config.$fontFamilyPrefix}#{config.$fontFamilyBrand}', Tahoma, sans-serif;
+	}
+
+	// A shadow host is featureless: `:host:lang()` never matches, the language test goes inside `:host()`
+	@if string.index('#{&}', ':host') {
+		@at-root :host(:is(:lang(fr), :lang(en), :lang(de), :lang(nl), :lang(it), :lang(pt), :lang(es))) {
+			--pr-t-font-family-brand: '#{config.$fontFamilyPrefix}#{config.$fontFamilyBrand}', Tahoma, sans-serif;
+		}
 	}
 
 	@if (config.$fontFamilyCursive) {
-		--pr-t-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+		--pr-t-font-family-cursive: '#{config.$fontFamilyPrefix}#{config.$fontFamilyCursive}', cursive;
 	}
 
 	@include core.cssvars('pr-t-font-fontSize', config.$fontSizeVars);
@@ -120,8 +127,8 @@
 	}
 
 	// stylelint-disable property-disallowed-list -- Deprecated.
-	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-	--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
+	--commons-font-family: '#{config.$fontFamilyPrefix}#{config.$fontFamily}', Tahoma, sans-serif;
+	--commons-font-family-brand: '#{config.$fontFamilyPrefix}#{config.$fontFamilyBrand}', sans-serif;
 
 	--commons-background-base: var(--pr-t-elevation-surface-default);
 	// stylelint-enable property-disallowed-list
@@ -140,7 +147,7 @@
 
 	@if (config.$fontFamilyCursive) {
 		// stylelint-disable-next-line property-disallowed-list -- Deprecated.
-		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+		--commons-font-family-cursive: '#{config.$fontFamilyPrefix}#{config.$fontFamilyCursive}', cursive;
 	}
 
 	@each $key, $map in config.$sizes {
