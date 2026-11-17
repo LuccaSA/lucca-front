@@ -62,6 +62,8 @@ export const Basic: StoryObj<FilterPillComponent> = {
 	args: {},
 };
 
+const defaultUser = { id: 1, firstName: 'Chloe', lastName: 'Alibert', picture: null, department: { id: 1, name: 'Direction' } };
+
 export const DefaultValue: StoryObj<FilterPillComponent> = {
 	render: () => {
 		return {
@@ -72,6 +74,9 @@ export const DefaultValue: StoryObj<FilterPillComponent> = {
 				defaultLegumes: allLegumes.slice(0, 2),
 				examples: allLegumes.slice(0, 2),
 				legumesPluralFn: (count: number) => ({ one: `${count} légume`, other: `${count} légumes` }),
+				// With an API select, use the whole option returned by the API for both the form and the default value, not only its id
+				defaultUser,
+				user: defaultUser,
 			},
 			template: `<lu-filter-pill label="Légume" name="legume">
 	<lu-simple-select [(ngModel)]="example" [defaultValue]="defaultLegume" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
@@ -86,6 +91,14 @@ export const DefaultValue: StoryObj<FilterPillComponent> = {
 </lu-filter-pill>
 
 <pr-story-model-display>{{ examples | json }}</pr-story-model-display>
+
+<hr class="divider pr-u-marginBlock400" />
+
+<lu-filter-pill label="Utilisateur" name="user">
+	<lu-simple-select [(ngModel)]="user" [defaultValue]="defaultUser" users />
+</lu-filter-pill>
+
+<pr-story-model-display>{{ user | json }}</pr-story-model-display>
 `,
 		};
 	},

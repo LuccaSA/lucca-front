@@ -250,9 +250,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	/**
 	 * Value restored by the clear button, which only shows once the value differs from it.
-	 * It isn't applied on init: the form control is expected to be initialized with it.
-	 * It isn't checked against the options either: it must be a complete option, matching the selected one through `optionComparer`
-	 * (the default comparer compares serialized options, so `{ id: 1 }` never matches `{ id: 1, name: 'Carrot' }`).
+	 * It isn't applied on init: initialize the form control with the same value.
+	 * Clearing writes it as is in the form, so it must have the same shape as the form value: with an API select
+	 * (`users`, `departments`, `apiV3`…), the whole option returned by the API, not only its id, or the pill displays it wrong.
+	 * It isn't checked against the options, and matches the selected option through `optionComparer`.
 	 */
 	readonly defaultValue = input<TValue | null>(null);
 
