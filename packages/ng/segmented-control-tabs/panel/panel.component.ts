@@ -35,6 +35,11 @@ export class SegmentedControlTabsPanelComponent<T = unknown> {
 	readonly resolvedLabel = computed(() => this.label() || (this.labelSlot() ? (this.labelSlotTpl() ?? null) : null));
 
 	/**
+	 * Displays a numeric badge after the tab label, typically a counter
+	 */
+	readonly numericBadge = input<number | null>(null);
+
+	/**
 	 * Icon displayed before the tab label
 	 */
 	readonly icon = input<LuccaIcon>();

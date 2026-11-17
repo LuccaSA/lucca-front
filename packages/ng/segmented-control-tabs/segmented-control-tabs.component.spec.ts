@@ -29,6 +29,7 @@ class HostComponent {
 				<ng-container luSegmentedControlTabsPanelLabel>Projected <strong>label</strong></ng-container>
 				Projected content
 			</lu-segmented-control-tabs-panel>
+			<lu-segmented-control-tabs-panel label="Badge" value="badge" [numericBadge]="0">Badge content</lu-segmented-control-tabs-panel>
 			<lu-segmented-control-tabs-panel label="Input" value="both">
 				<ng-container luSegmentedControlTabsPanelLabel>Projected label</ng-container>
 				Both content
@@ -157,8 +158,14 @@ describe(SegmentedControlTabsComponent.name, () => {
 		});
 
 		it('gives the label input priority over the projected element', () => {
-			expect(text(tabs()[2])).toBe('Input');
-			expect(text(panels()[2])).toBe('Both content');
+			expect(text(tabs()[3])).toBe('Input');
+			expect(text(panels()[3])).toBe('Both content');
+		});
+
+		it('displays the numeric badge in the tab, including a zero counter', () => {
+			expect(tabs()[2].querySelector('lu-numeric-badge')?.textContent?.trim()).toBe('0');
+			expect(panels()[2].querySelector('lu-numeric-badge')).toBeNull();
+			expect(tabs()[0].querySelector('lu-numeric-badge')).toBeNull();
 		});
 	});
 });

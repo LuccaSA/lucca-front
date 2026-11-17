@@ -39,6 +39,9 @@
 					} @else if (panel.resolvedLabel(); as label) {
 						<ng-container *luPortal="label" />
 					}
+					@if (panel.numericBadge() !== null) {
+						<lu-numeric-badge [value]="panel.numericBadge()!" />
+					}
 				</button>
 			</li>
 		}
