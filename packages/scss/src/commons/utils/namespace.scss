@@ -14,7 +14,9 @@ $defaultAtRoot: 'without: rule';
 			@content;
 		}
 	} @else {
-		:root {
+		// :host applies the variables inside a shadow root, where :root matches nothing
+		:root,
+		:host {
 			@content;
 		}
 	}

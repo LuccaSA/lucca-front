@@ -2,7 +2,7 @@
 
 @mixin vars($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
-		:root {
+		@include namespace.appendRootVars {
 			--components-calloutPopover-width: 30rem;
 		}
 	}
