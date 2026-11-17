@@ -45,8 +45,11 @@ export class TreeBranchComponent<T> {
 	/** A row covered by a rule was unchecked: reported upward until the branch holding that rule. */
 	coveredUnselect = output<T>();
 
-	/** The rule this branch stood for is broken: it leaves the selection, its children take its place. */
-	parentSelectionBroken = output<{ select: T[]; unselect: T[] }>();
+	/**
+	 * The rule this branch stands for and the rows it covers trade places in the selection: either
+	 * the rule comes in and absorbs them, or it leaves and they take its place.
+	 */
+	parentSelectionSwapped = output<{ select: T[]; unselect: T[] }>();
 
 	readonly simpleMode = input(false, { transform: luBooleanAttribute });
 
@@ -129,6 +132,9 @@ export class TreeBranchComponent<T> {
 			this.coveredUnselect.emit(branchData.node);
 			return;
 		}
+		if (this.parentStandsForChildren() && this.#absorbCoveredRows(branchData)) {
+			return;
+		}
 		if (this.simpleMode() || this.parentStandsForChildren() || !branchData.children?.length) {
 			this.toggleOne.emit(branchData.node);
 		} else {
@@ -146,13 +152,32 @@ export class TreeBranchComponent<T> {
 	 * A descendant covered by a rule was unchecked. Only the branch actually holding that rule can
 	 * break it, since it alone knows what the rule stood for; a branch in between just passes it on.
 	 */
+	/**
+	 * Selecting a rule takes in what it covers: the rows picked one by one underneath it are
+	 * redundant once it applies, so they leave the selection as it enters. Reaches the rows this
+	 * branch holds, which is every row the user could have picked — one only shows up once loaded.
+	 */
+	#absorbCoveredRows(branchData: TreeNode<T>): boolean {
+		if (this.#isSelectedInOwnRight()) {
+			return false;
+		}
+		const selectedOptions = this.selectedOptions();
+		const optionComparer = this.optionComparer();
+		const covered = this.flattenTree(branchData, true).filter((option) => this.#selectionStrategy.isSelected(option, selectedOptions, optionComparer));
+		if (!covered.length) {
+			return false;
+		}
+		this.parentSelectionSwapped.emit({ select: [branchData.node], unselect: covered });
+		return true;
+	}
+
 	protected onCoveredUnselect(node: T): void {
 		if (!this.#isSelectedInOwnRight()) {
 			this.coveredUnselect.emit(node);
 			return;
 		}
 		const optionComparer = this.optionComparer();
-		this.parentSelectionBroken.emit({
+		this.parentSelectionSwapped.emit({
 			select: this.flattenTree(this.branch(), true).filter((option) => !optionComparer(option, node)),
 			unselect: [this.branch().node],
 		});

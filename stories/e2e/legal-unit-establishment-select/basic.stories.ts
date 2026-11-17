@@ -66,11 +66,8 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await expect(chipIcons(canvasElement)).toHaveLength(0);
 	});
 
-	await step('Selecting the legal unit publishes a rule, not its establishments', async () => {
-		// Drop the establishment picked above, so what follows is about the rule alone
-		await userEvent.click(panel.getByText('Lucca Paris'));
-		await waitForAngular();
-
+	await step('Selecting the legal unit absorbs the establishment picked under it', async () => {
+		// Lucca Paris is still selected from the step above: the rule takes it in rather than sit next to it
 		await userEvent.click(panel.getByText('Lucca FR'));
 		await waitForAngular();
 

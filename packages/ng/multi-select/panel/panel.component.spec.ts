@@ -362,6 +362,22 @@ describe('LuMultiSelectPanelComponent (tree mode)', () => {
 		expect(fixture.componentInstance.value).toEqual([red]);
 	}));
 
+	it('should absorb the rows it covers when the rule is selected after them', fakeAsync(() => {
+		fixture.componentInstance.parentStandsForChildren = true;
+		openPanel();
+
+		// Tomato first, on its own, then the branch that stands for it
+		overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option')[1].click();
+		fixture.detectChanges();
+		tick();
+		expect(fixture.componentInstance.value).toEqual([tomato]);
+
+		clickBranchRoot();
+
+		// The rule covers it, so listing it next to the rule would say the same thing twice
+		expect(fixture.componentInstance.value).toEqual([red]);
+	}));
+
 	it('should break the rule apart when one of the rows it covers is unchecked', fakeAsync(() => {
 		fixture.componentInstance.parentStandsForChildren = true;
 		openPanel();
