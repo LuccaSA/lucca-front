@@ -44,10 +44,10 @@ export class DurationDaysPartComponent {
 
 	readonly isValueSet = model<boolean>(false);
 
-	valueChange = output<number>();
-	nonDigitKeyPressed = output<void>();
-	inputControlClick = output<PickerControlDirection>();
-	touched = output<void>();
+	readonly valueChange = output<number>();
+	readonly nonDigitKeyPressed = output<void>();
+	readonly inputControlClick = output<PickerControlDirection>();
+	readonly touched = output<void>();
 
 	readonly daysInput = viewChild<ElementRef<HTMLInputElement>>('daysInput');
 
@@ -78,7 +78,12 @@ export class DurationDaysPartComponent {
 		return this.isValueSet() ? this.formattedValue() : '';
 	});
 
-	protected readonly inputValue = computed(() => (this.hideValue() || !this.isValueSet() ? null : this.formattedValue()));
+	/**
+	 * What the real input holds. It follows the draft rather than the parsed value: erasing the decimal of
+	 * `2,5` leaves `2,`, which the host parses back to `2` — writing that here would rewrite the field under
+	 * the caret, and the next digit would read `25`.
+	 */
+	protected readonly inputValue = computed(() => (this.hideValue() || !this.isValueSet() ? null : (this.draft() ?? this.formattedValue())));
 
 	/**
 	 * Width reserved for the longest value the field accepts (integer digits, separator and decimals),

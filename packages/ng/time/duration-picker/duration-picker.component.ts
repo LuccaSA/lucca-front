@@ -15,7 +15,7 @@ import {
 	isoDurationToSeconds,
 	MILLI_DAYS_IN_DAY,
 } from '../core/duration.utils';
-import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
+import { ceilToNearest, floorToNearest, roundToNearest } from '../core/math.utils';
 
 import { PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
@@ -254,7 +254,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 	}
 
 	/**
-	 * Unlike the hours/minutes unit, which wraps around `max`, a number of days is clamped between 0 and `max`.
+	 * A number of days is clamped between 0 and `max`, like the hours/minutes unit.
 	 */
 	private setDays(milliDays: number, origin: DurationChangeOrigin): void {
 		const previousValue = this.value();
@@ -271,33 +271,22 @@ export class DurationPickerComponent extends BasePickerComponent {
 		});
 	}
 
+	/**
+	 * A duration does not wrap the way a time of day does: a value pushed below zero or past `max` is clamped
+	 * to the boundary it crossed. Borrowing still applies — a minute taken off `PT1H0M` is `PT0H59M`, which is
+	 * a subtraction on the whole duration, not a wrap.
+	 */
 	private setTime(protoEvent: DurationChangeEvent): void {
-		let hoursPart = getHoursPartFromDuration(protoEvent.value);
-		const minutesPart = getMinutesPartFromDuration(protoEvent.value);
-
 		this.isValueSet.set(true);
 
-		if (hoursPart < 0) {
-			if (hoursPart === -1) {
-				hoursPart = getHoursPartFromDuration(this.resolvedMax());
-			}
-			if (isoDurationToSeconds(createDurationFromHoursAndMinutes(hoursPart, minutesPart)) > isoDurationToSeconds(this.resolvedMax())) {
-				// If current value with minutes is > max, decrement hours again
-				hoursPart--;
-			}
-		} else if (hoursPart > getHoursPartFromDuration(this.resolvedMax())) {
-			hoursPart = 0;
-		}
-
 		const max = isoDurationToSeconds(this.resolvedMax());
+		// Read as a whole rather than recombined from its parts: a candidate below zero floors its hours AND its
+		// minutes, so `PT0H-1M` would read as -1h01 instead of the -1 minute it is.
+		const candidateTimeAsSeconds = roundToNearest(isoDurationToSeconds(protoEvent.value), 60);
 
-		const candidateTimeAsSeconds = hoursPart * 3600 + minutesPart * 60;
+		const seconds = Math.min(Math.max(candidateTimeAsSeconds, 0), max);
 
-		const seconds = roundToNearest(circularize(candidateTimeAsSeconds, max), 60);
-
-		const minutes = Math.floor((seconds % 3600) / 60);
-
-		const result = createDurationFromHoursAndMinutes(hoursPart, minutes);
+		const result = createDurationFromHoursAndMinutes(Math.floor(seconds / 3600), Math.floor((seconds % 3600) / 60));
 
 		this.value.set(result);
 		this.onChange?.(result);

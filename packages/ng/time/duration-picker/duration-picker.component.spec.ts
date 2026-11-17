@@ -95,6 +95,13 @@ function typeInPart(value: string, input: HTMLInputElement, fixture: ComponentFi
 	fixture.detectChanges();
 }
 
+/** Types one more character onto whatever the field currently holds, as a keystroke would. */
+function appendToPart(char: string, input: HTMLInputElement, fixture: ComponentFixture<unknown>): void {
+	input.value += char;
+	input.dispatchEvent(new InputEvent('input', { data: char, inputType: 'insertText', bubbles: true }));
+	fixture.detectChanges();
+}
+
 function pressKey(key: string, input: HTMLInputElement, fixture: ComponentFixture<unknown>): void {
 	input.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
 	fixture.detectChanges();
@@ -318,6 +325,20 @@ describe('DurationPickerComponent', () => {
 			expect(getDaysDisplay(fixture)).toBe('0.5');
 		});
 
+		it('should complete the value when a decimal is retyped after being erased', () => {
+			// Arrange
+			const fixture = createDaysHost(null, { step: 'P0.5D' });
+			const input = getDaysInput(fixture);
+			typeInPart('2.5', input, fixture);
+
+			// Act: erasing the decimal leaves `2.`, which parses back to 2 — the next digit must still land on `2.`
+			typeInPart('2.', input, fixture);
+			appendToPart('5', input, fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('P2.5D');
+		});
+
 		it('should increment by the step', () => {
 			// Arrange
 			const fixture = createDaysHost('P0.5D', { step: 'P0.25D' });
@@ -406,7 +427,7 @@ describe('DurationPickerComponent', () => {
 	});
 
 	describe('max boundary', () => {
-		it('should reset the hours to 0 when typing more hours than max allows', () => {
+		it('should clamp to max when typing more hours than max allows', () => {
 			// Arrange
 			const fixture = createConfigurableHost('PT1H30M', { max: 'PT9H' });
 
@@ -414,10 +435,10 @@ describe('DurationPickerComponent', () => {
 			typeInPart('10', getInputs(fixture).hours, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT0H30M');
+			expect(fixture.componentInstance.control.value).toBe('PT9H0M');
 		});
 
-		it('should wrap back to 0 when incrementing the hours past max', () => {
+		it('should clamp to max when incrementing the hours past it', () => {
 			// Arrange
 			const fixture = createConfigurableHost('PT9H0M', { max: 'PT9H' });
 
@@ -425,7 +446,7 @@ describe('DurationPickerComponent', () => {
 			pressKey('ArrowUp', getInputs(fixture).hours, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT0H0M');
+			expect(fixture.componentInstance.control.value).toBe('PT9H0M');
 		});
 
 		it('should keep a value equal to max untouched', () => {
@@ -439,7 +460,7 @@ describe('DurationPickerComponent', () => {
 	});
 
 	describe('min boundary', () => {
-		it('should wrap to max when decrementing the hours below zero', () => {
+		it('should clamp to zero when decrementing the hours below it', () => {
 			// Arrange
 			const fixture = createConfigurableHost('PT0H0M', { max: 'PT9H' });
 
@@ -447,7 +468,18 @@ describe('DurationPickerComponent', () => {
 			pressKey('ArrowDown', getInputs(fixture).hours, fixture);
 
 			// Assert
-			expect(fixture.componentInstance.control.value).toBe('PT9H0M');
+			expect(fixture.componentInstance.control.value).toBe('PT0H0M');
+		});
+
+		it('should clamp to zero when decrementing the minutes below it', () => {
+			// Arrange
+			const fixture = createConfigurableHost('PT0H0M', { max: 'PT9H' });
+
+			// Act
+			pressKey('ArrowDown', getInputs(fixture).minutes, fixture);
+
+			// Assert
+			expect(fixture.componentInstance.control.value).toBe('PT0H0M');
 		});
 
 		it('should borrow from the hours when decrementing the minutes below zero', () => {
