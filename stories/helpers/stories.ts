@@ -109,11 +109,11 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 		// A category prefixed with `inputs`/`models` is still an input: multi-component stories split them
 		// per host (`inputs`, `inputs (form-field)`…) so the Controls panel groups them separately.
 		const category = argType?.['table']?.category as string | undefined;
-		if (!argType || (argType['table'] && !category?.startsWith('inputs') && !category?.startsWith('models'))) {
+		if (argType?.['table'] && !category?.startsWith('inputs') && !category?.startsWith('models')) {
 			return acc;
 		}
 
-		const defaultValue: unknown = argType['table']?.defaultValue?.summary;
+		const defaultValue: unknown = argType?.['table']?.defaultValue?.summary;
 		if (value === defaultValue || value === null || value === undefined || (typeof value === 'string' && !value.length)) {
 			return acc;
 		}
