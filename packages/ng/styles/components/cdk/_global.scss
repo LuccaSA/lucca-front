@@ -1,5 +1,5 @@
-@use '@lucca-front/scss/src/commons/utils/overflow';
 @use '@lucca-front/scss/src/commons/utils/media';
+@use 'scrollblock';
 
 @mixin stacked($level) {
 	$selector: '';
@@ -35,11 +35,4 @@
 			@include stacked($i);
 		}
 	}
-}
-
-.cdk-global-scrollblock {
-	position: static !important;
-	inline-size: auto !important;
-
-	@include overflow.scrollblock('!important');
 }

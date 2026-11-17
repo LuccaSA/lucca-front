@@ -1,0 +1,10 @@
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/icons/src/commons/config' as iconsConfig;
+
+@forward '@lucca-front/icons/src/main';
+@forward '@lucca-front/scss/src/main';
+@forward 'main';
+
+@if not config.$isEmbedded or not iconsConfig.$isEmbedded {
+	@error 'Configure `$isEmbedded: true` on both `@lucca-front/scss/src/commons/config` and `@lucca-front/icons/src/commons/config` before loading `@lucca-front/ng/src/embedded`.';
+}

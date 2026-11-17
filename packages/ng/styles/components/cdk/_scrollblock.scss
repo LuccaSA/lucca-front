@@ -1,0 +1,8 @@
+@use '@lucca-front/scss/src/commons/utils/overflow';
+
+.cdk-global-scrollblock {
+	position: static !important;
+	inline-size: auto !important;
+
+	@include overflow.scrollblock('!important');
+}

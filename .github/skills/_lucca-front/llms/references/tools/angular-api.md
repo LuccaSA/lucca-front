@@ -15,6 +15,8 @@
   - Services
 - dialog/testing (`@lucca-front/ng/dialog/testing`)
   - Providers
+- embedded (`@lucca-front/ng/embedded`)
+  - Providers
 - establishment (`@lucca-front/ng/establishment`)
   - Services
 - filter-pills/core (`@lucca-front/ng/filter-pills/core`)
@@ -172,6 +174,14 @@ bind to a string with iso 26001 format YYYY-MM-DD
 | Fonction | Signature | Description |
 |----------|-----------|-------------|
 | `provideLuDialogDataTesting` | `<T = unknown>(data: LuDialogData<T>)` | — |
+
+## embedded (`@lucca-front/ng/embedded`)
+
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `provideLuEmbedded` | `({ documentStylesheet }: LuEmbeddedOptions = {}): EnvironmentProviders` | Configures an application embedded in pages that run their own Angular and Lucca Front versions, such as a custom element built with `createCustomElement` from `@angular/elements`. Its root component uses `ViewEncapsulation.ShadowDom`: the styles of the application, its overlays and its dialogs stay in that shadow root, and the page only receives `documentStylesheet`. |
 
 ## establishment (`@lucca-front/ng/establishment`)
 

@@ -1,0 +1,12 @@
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/base';
+@use '@lucca-front/icons/src/commons/config' as iconsConfig;
+@use '@lucca-front/icons/src/commons/core' as icons;
+@use 'components/cdk/scrollblock';
+
+@if not config.$isEmbedded or not iconsConfig.$isEmbedded {
+	@error 'Configure `$isEmbedded: true` on both `@lucca-front/scss/src/commons/config` and `@lucca-front/icons/src/commons/config` before loading `@lucca-front/ng/src/embedded-document`.';
+}
+
+@include base.fontFaces;
+@include icons.fontFace;
