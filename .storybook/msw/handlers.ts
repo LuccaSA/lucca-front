@@ -2,9 +2,11 @@ import { delay, http, HttpResponse } from 'msw';
 import { applyFilter, applyV3Fields, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot, isVitestBrowser } from './helpers';
 import {
 	mockAxisSectionsV3,
+	mockBusinessEstablishments,
 	mockDepartmentsTree,
 	mockEstablishments,
 	mockJobQualifications,
+	mockLegalEntities,
 	mockLegalUnits,
 	mockMe,
 	mockOccupationCategories,
@@ -12,6 +14,37 @@ import {
 	mockUserPopover,
 	mockUsers,
 } from './mocks';
+
+/**
+ * A collection of the v5 API: cursor pagination, an `include` deciding what travels alongside,
+ * and the whole thing wrapped in the envelope every one of its resources answers in. The cursor is
+ * simply the offset of the next item, which is opaque enough for a mock.
+ */
+function v5Collection<T>(type: string, all: T[], filter: (items: T[], params: URLSearchParams) => T[], embed?: (items: T[]) => Record<string, unknown>) {
+	return async ({ request }: { request: Request }) => {
+		await delay(300);
+		const { searchParams, pathname } = new URL(request.url);
+		const limit = parseInt(searchParams.get('limit') ?? '25');
+		const offset = parseInt(searchParams.get('page') ?? '0');
+		const include = (searchParams.get('include') ?? '').split(',');
+
+		const items = filter(all, searchParams);
+		const page = items.slice(offset, offset + limit);
+		const nextOffset = offset + limit;
+
+		return HttpResponse.json({
+			type,
+			url: pathname,
+			...(include.includes('totalCount') ? { totalCount: items.length } : {}),
+			items: page,
+			embedded: include.includes('embedded') && embed ? embed(page) : {},
+			links: {
+				prev: null,
+				next: nextOffset < items.length ? { href: `${pathname}?page=${nextOffset}`, cursor: `${nextOffset}` } : null,
+			},
+		});
+	};
+}
 
 const usersSearchHandler = genericHandler(
 	mockUsers,
@@ -312,6 +345,30 @@ export const handlers = [
 				limit: (items, { limit }) => items.slice(0, limit),
 			},
 			(items) => ({ items }),
+		),
+	),
+
+	http.get(
+		'/lucca-api/legal-entities',
+		v5Collection('legal-entities', mockLegalEntities, (items) => items),
+	),
+
+	http.get(
+		'/lucca-api/business-establishments',
+		v5Collection(
+			'business-establishments',
+			mockBusinessEstablishments,
+			(items, params) => {
+				const legalEntityId = params.get('legalEntity.id');
+				const search = params.get('search')?.toLowerCase();
+				return items
+					.filter((establishment) => !legalEntityId || establishment.legalEntity.id === legalEntityId)
+					.filter((establishment) => !search || establishment.name.toLowerCase().includes(search));
+			},
+			// Each establishment carries only a reference to its legal unit: the full one travels here
+			(items) => ({
+				'legal-entity': Object.fromEntries(mockLegalEntities.filter((entity) => items.some((establishment) => establishment.legalEntity.id === entity.id)).map((entity) => [entity.id, entity])),
+			}),
 		),
 	),
 ];

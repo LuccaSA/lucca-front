@@ -3,6 +3,8 @@ export const mockEstablishmentsCount = { items: [], count: 4 };
 
 const usCities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Philadelphia', 'Phoenix', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'];
 const frCities = ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Montpellier', 'Bordeaux', 'Lille'];
+// Fewer than the other two, so the fixture shows legal units of different sizes
+const ukCities = ['London', 'Manchester', 'Birmingham', 'Edinburgh', 'Glasgow'];
 
 export const mockUserPopover = {
 	id: 6,
@@ -63,6 +65,21 @@ export const mockEstablishments = [
 		address: null,
 		timeZoneId: 'America/New_York',
 		usersCount: 0,
+		createdAt: '2020-08-13T22:23:09.59',
+		isArchived: false,
+	})),
+	...ukCities.map((city, index) => ({
+		id: index + frCities.length + usCities.length + 1,
+		name: `Lucca ${city}`,
+		code: `LUCCA_${city.toUpperCase()}`,
+		legalUnitId: 3,
+		legalUnit: { id: 3, name: 'Lucca UK', code: 'LUCCA_UK' },
+		legalIdentificationNumber: null,
+		activityCode: null,
+		calendarId: null,
+		address: null,
+		timeZoneId: 'Europe/London',
+		usersCount: 12,
 		createdAt: '2020-08-13T22:23:09.59',
 		isArchived: false,
 	})),
@@ -504,3 +521,31 @@ export const mockMe = {
 		code: 'fr-FR',
 	},
 };
+
+/**
+ * The v5 shape of the same organisation, served under /lucca-api. It lives next to the v4 fixtures
+ * rather than replacing them: only the legal-unit-establishment select speaks v5, every other story
+ * still goes through /organization/structure/api.
+ */
+export const mockLegalEntities = [
+	{ id: 'le-1', type: 'legal-entity', legalName: 'Lucca FR', countryCode: 'FRA', currencyCode: 'EUR', isArchived: false },
+	{ id: 'le-2', type: 'legal-entity', legalName: 'Lucca US', countryCode: 'USA', currencyCode: 'USD', isArchived: false },
+	{ id: 'le-3', type: 'legal-entity', legalName: 'Lucca UK', countryCode: 'GBR', currencyCode: 'GBP', isArchived: false },
+];
+
+const businessEstablishmentsOf = (legalEntityId: string, cities: string[], offset: number) =>
+	cities.map((city, index) => ({
+		id: `be-${offset + index + 1}`,
+		type: 'business-establishment',
+		name: `Lucca ${city}`,
+		remoteId: null,
+		isArchived: false,
+		isHeadquarters: index === 0,
+		legalEntity: { id: legalEntityId, type: 'legal-entity' },
+	}));
+
+export const mockBusinessEstablishments = [
+	...businessEstablishmentsOf('le-1', frCities, 0),
+	...businessEstablishmentsOf('le-2', usCities, frCities.length),
+	...businessEstablishmentsOf('le-3', ukCities, frCities.length + usCities.length),
+];

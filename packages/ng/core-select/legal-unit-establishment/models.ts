@@ -2,19 +2,22 @@
  * A legal unit row. Selecting it is a rule: it covers the establishments it holds today and those
  * created later, which is why it is published as the legal unit itself and never expanded into its
  * establishments.
+ *
+ * `id` is a string: the API calls this resource a legal-entity and identifies it with an opaque
+ * string, which this field carries unchanged.
  */
 export interface LuLegalUnitOption {
 	kind: 'legalUnit';
-	id: number;
+	id: string;
 	name: string;
 }
 
 /** An establishment row. Selecting it covers only itself, so the selection is a fixed list. */
 export interface LuEstablishmentOption {
 	kind: 'establishment';
-	id: number;
+	id: string;
 	name: string;
-	legalUnitId: number;
+	legalUnitId: string;
 }
 
 /**
@@ -24,11 +27,11 @@ export interface LuEstablishmentOption {
  */
 export type LuLegalUnitEstablishmentOption = LuLegalUnitOption | LuEstablishmentOption;
 
-export function luLegalUnitOption(legalUnit: { id: number; name: string }): LuLegalUnitOption {
+export function luLegalUnitOption(legalUnit: { id: string; name: string }): LuLegalUnitOption {
 	return { kind: 'legalUnit', id: legalUnit.id, name: legalUnit.name };
 }
 
-export function luEstablishmentOption(establishment: { id: number; name: string; legalUnitId: number }): LuEstablishmentOption {
+export function luEstablishmentOption(establishment: { id: string; name: string; legalUnitId: string }): LuEstablishmentOption {
 	return { kind: 'establishment', id: establishment.id, name: establishment.name, legalUnitId: establishment.legalUnitId };
 }
 

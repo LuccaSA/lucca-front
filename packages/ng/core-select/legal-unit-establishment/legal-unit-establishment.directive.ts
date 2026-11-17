@@ -1,35 +1,58 @@
 import { HttpClient } from '@angular/common/http';
 import { Directive, OnInit, computed, inject, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { getIntl } from '@lucca-front/ng/core';
 import { TreeGenerator, TreeNode, applySearchDelimiter, luAccumulatePages } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { getIntl } from '@lucca-front/ng/core';
-import { LU_CORE_SELECT_LEGAL_UNIT_ESTABLISHMENT_TRANSLATIONS } from './legal-unit-establishment.translate';
-import { BehaviorSubject, Observable, forkJoin, map, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, takeUntil } from 'rxjs';
 import { LuLegalUnitEstablishmentDisplayerComponent } from './legal-unit-establishment-displayer.component';
+import { LU_CORE_SELECT_LEGAL_UNIT_ESTABLISHMENT_TRANSLATIONS } from './legal-unit-establishment.translate';
 import {
 	LuEstablishmentOption,
 	LuLegalUnitEstablishmentOption,
-	LuLegalUnitOption,
 	LuLegalUnitEstablishmentSelection,
+	LuLegalUnitOption,
 	luEstablishmentOption,
 	luLegalUnitEstablishmentOptions,
 	luLegalUnitEstablishmentSelection,
 	luLegalUnitOption,
 } from './models';
 
-type ApiResponse<T> = T[] | { items: T[] };
+/** Pinned by the API, which rejects a request without it. */
+const API_VERSION = '2024-11-01';
 
-type MatchedEstablishment = { id: number; name: string; legalUnitId: number; legalUnit?: { id: number; name: string } };
+/** Every collection of the API answers in this shape. */
+interface ApiCollection<T> {
+	items?: T[];
+	links?: { prev?: { cursor: string } | null; next?: { cursor: string } | null } | null;
+	embedded?: Record<string, Record<string, unknown>> | null;
+}
 
-function itemsOf<T>(response: ApiResponse<T>): T[] {
-	return (Array.isArray(response) ? response : response?.items) ?? [];
+interface ApiLegalEntity {
+	id: string;
+	legalName: string;
+}
+
+interface ApiEstablishment {
+	id: string;
+	name: string;
+	legalEntity: { id: string };
+}
+
+/** One page, flattened: what it holds, and the cursor that reaches the next one. */
+interface Page<T> {
+	items: T[];
+	nextCursor: string | null;
 }
 
 /**
  * Lists legal units and their establishments in a single multi-select, so a setting can target
  * either level. There is no endpoint serving both, so the two collections are combined here: the
  * legal units drive the list, and a legal unit fetches its establishments when it is unfolded.
+ *
+ * The API calls a legal unit a legal-entity. That name is kept at the edge only: everything the
+ * consumer sees — the published value, the option kinds, the labels — speaks the language of the
+ * interface, which is the one the guideline uses.
  *
  * The field shows up to 20 values before grouping the rest behind a "+ N" chip, which the
  * consumer sets with `[maxValuesShown]="20"`: a directive cannot give an Angular input a
@@ -51,8 +74,8 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 {
 	protected httpClient = inject(HttpClient);
 
-	readonly legalUnitsUrl = input<string>('/organization/structure/api/legal-units');
-	readonly establishmentsUrl = input<string>('/organization/structure/api/establishments');
+	readonly legalUnitsUrl = input<string>('/lucca-api/legal-entities');
+	readonly establishmentsUrl = input<string>('/lucca-api/business-establishments');
 	readonly searchDelimiter = input<string>(' ');
 
 	/**
@@ -80,32 +103,41 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 	 * with the children spliced in, which is how rows fetched after the fact reach a pipeline that
 	 * otherwise only grows one page at a time.
 	 */
-	readonly #renderedChildren$ = new BehaviorSubject<ReadonlyMap<number, LuEstablishmentOption[]>>(new Map());
+	readonly #renderedChildren$ = new BehaviorSubject<ReadonlyMap<string, LuEstablishmentOption[]>>(new Map());
 
 	/** Everything a legal unit holds, kept across searches so clearing one costs no refetch. */
-	readonly #allChildren = new Map<number, LuEstablishmentOption[]>();
+	readonly #allChildren = new Map<string, LuEstablishmentOption[]>();
 
 	/** What the current clue matched, per legal unit. A search shows these alone. */
-	readonly #matchedChildren = new Map<number, LuEstablishmentOption[]>();
+	readonly #matchedChildren = new Map<string, LuEstablishmentOption[]>();
 
 	/**
 	 * Which legal units are unfolded. Held here rather than in the branches, which die with the
 	 * panel: this is what makes an unfolded row still unfolded the next time the panel opens, and
 	 * what lets a row folded by hand during a search stay folded until the clue changes.
 	 */
-	readonly #expandedLegalUnitIds = new Set<number>();
+	readonly #expandedLegalUnitIds = new Set<string>();
 
 	/** The unfolded rows as they were before the current search, restored when it is cleared. */
-	#expandedBeforeSearch: Set<number> | null = null;
+	#expandedBeforeSearch: Set<string> | null = null;
+
+	/**
+	 * Cursor opening each page of the list, learned from the page before it. Pages are asked for
+	 * strictly in order and never two at a time, so remembering them by index is enough to walk a
+	 * cursor-paginated collection through an accumulator that only counts.
+	 */
+	readonly #cursorByPage = new Map<number, string>();
 
 	protected readonly clue = toSignal(this.clue$);
 
 	protected override readonly paramsSignal = computed<Record<string, string | number | boolean>>(() => {
 		const clue = this.clue();
-		return {
-			...(clue ? { search: applySearchDelimiter(clue, this.searchDelimiter()) } : {}),
-			sort: 'name',
-		};
+		// Neither collection takes a sort, so the order is the one the API returns.
+		const params: Record<string, string | number | boolean> = {};
+		if (clue) {
+			params['search'] = applySearchDelimiter(clue, this.searchDelimiter());
+		}
+		return params;
 	});
 
 	protected override readonly params$: Observable<Record<string, string | number | boolean>> = toObservable(this.paramsSignal);
@@ -146,6 +178,7 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 		super.clearLastPageByClue();
 		const clue = this.clue() ?? '';
 		this.#matchedChildren.clear();
+		this.#cursorByPage.clear();
 
 		if (clue && this.#expandedBeforeSearch === null) {
 			// Entering a search: what the user had unfolded is put aside, to be given back after
@@ -165,24 +198,69 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 	}
 
 	/**
-	 * The list is the legal units; establishments only join it once their row is unfolded. A search is
-	 * the exception: an establishment can match while its legal unit does not, so the first page of a
-	 * search looks the establishments up too and brings their legal unit along, unfolded.
+	 * The end of the collection is told by the API — a missing `next` link — rather than guessed from
+	 * a short page, which is wrong whenever the total is an exact multiple of the page size.
 	 */
-	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<LuLegalUnitEstablishmentOption[]> {
-		const legalUnits$ = this.#fetchLegalUnits(params, page);
-		if (!this.clue() || page > 0) {
-			return legalUnits$;
-		}
-		return forkJoin([legalUnits$, this.#fetchMatchingEstablishments(params)]).pipe(map(([byName, byEstablishment]) => this.#mergeLegalUnits(byName, byEstablishment)));
+	protected override getOptionsPage(params: Record<string, string | number | boolean> | null, page: number): Observable<{ items: LuLegalUnitEstablishmentOption[]; isLastPage: boolean }> {
+		return this.#loadListPage(params, page).pipe(map(({ items, nextCursor }) => ({ items, isLastPage: nextCursor === null })));
 	}
 
-	#fetchLegalUnits(params: Record<string, string | number | boolean> | null, page: number): Observable<LuLegalUnitOption[]> {
-		return this.httpClient
-			.get<ApiResponse<{ id: number; name: string }>>(this.legalUnitsUrl(), {
-				params: { ...params, page: page + 1, limit: this.pageSize },
-			})
-			.pipe(map((response) => itemsOf(response).map(luLegalUnitOption)));
+	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<LuLegalUnitEstablishmentOption[]> {
+		return this.#loadListPage(params, page).pipe(map(({ items }) => items));
+	}
+
+	/**
+	 * Without a clue the list is the legal units. With one it is built from the establishments
+	 * instead: only their collection can be searched, so a legal unit shows up when it holds a match
+	 * and stays out otherwise — which is also what the guideline asks for.
+	 */
+	#loadListPage(params: Record<string, string | number | boolean> | null, page: number): Observable<Page<LuLegalUnitOption>> {
+		return this.clue() ? this.#searchLegalUnits(params, page) : this.#fetchLegalUnits(params, page);
+	}
+
+	#fetchLegalUnits(params: Record<string, string | number | boolean> | null, page: number): Observable<Page<LuLegalUnitOption>> {
+		return this.#fetchCollection<ApiLegalEntity>(this.legalUnitsUrl(), params, page).pipe(
+			map((body) => ({
+				items: (body.items ?? []).map((entity) => luLegalUnitOption({ id: entity.id, name: entity.legalName })),
+				nextCursor: body.links?.next?.cursor ?? null,
+			})),
+		);
+	}
+
+	/**
+	 * The legal units holding an establishment the clue matched. An establishment carries only a
+	 * reference to its legal unit, the full one arriving in `embedded` — that dictionary is the only
+	 * join the two collections have. Matches are recorded on the way, so the rows are already in
+	 * place when the branch unfolds.
+	 */
+	#searchLegalUnits(params: Record<string, string | number | boolean> | null, page: number): Observable<Page<LuLegalUnitOption>> {
+		return this.#fetchCollection<ApiEstablishment>(this.establishmentsUrl(), { ...params, include: 'embedded,links' }, page).pipe(
+			map((body) => {
+				const legalEntities = (body.embedded?.['legal-entity'] ?? {}) as Record<string, ApiLegalEntity | undefined>;
+				const byId = new Map<string, LuLegalUnitOption>();
+
+				for (const establishment of body.items ?? []) {
+					const legalUnitId = establishment.legalEntity.id;
+					const legalEntity = legalEntities[legalUnitId];
+					if (legalEntity && !byId.has(legalUnitId)) {
+						byId.set(legalUnitId, luLegalUnitOption({ id: legalEntity.id, name: legalEntity.legalName }));
+					}
+					this.#recordMatch(establishment);
+				}
+
+				this.#publishChildren();
+				return { items: [...byId.values()], nextCursor: body.links?.next?.cursor ?? null };
+			}),
+		);
+	}
+
+	#recordMatch(establishment: ApiEstablishment): void {
+		const legalUnitId = establishment.legalEntity.id;
+		// Unfolded so the match is visible. A row folded by hand afterwards leaves this set and
+		// stays folded, until the next clue brings it back.
+		this.#expandedLegalUnitIds.add(legalUnitId);
+		const option = luEstablishmentOption({ id: establishment.id, name: establishment.name, legalUnitId });
+		this.#matchedChildren.set(legalUnitId, [...(this.#matchedChildren.get(legalUnitId) ?? []), option]);
 	}
 
 	/**
@@ -195,7 +273,7 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 	}
 
 	generateTrees(items: LuLegalUnitEstablishmentOption[]): TreeNode<LuLegalUnitEstablishmentOption>[] {
-		const branchByLegalUnit = new Map<number, TreeNode<LuLegalUnitEstablishmentOption>>();
+		const branchByLegalUnit = new Map<string, TreeNode<LuLegalUnitEstablishmentOption>>();
 		const trees: TreeNode<LuLegalUnitEstablishmentOption>[] = [];
 
 		for (const item of items) {
@@ -223,44 +301,6 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 		return trees;
 	}
 
-	/**
-	 * The establishments a clue matched, each with the legal unit it hangs from — the DTO carries it,
-	 * the only join the two collections have. They are recorded on the way, so the matching rows are
-	 * already in place when the branch unfolds.
-	 */
-	#fetchMatchingEstablishments(params: Record<string, string | number | boolean> | null): Observable<LuLegalUnitOption[]> {
-		return this.httpClient
-			.get<ApiResponse<MatchedEstablishment>>(this.establishmentsUrl(), {
-				params: { ...params, page: 1, limit: this.pageSize },
-			})
-			.pipe(
-				map((response) => itemsOf(response)),
-				tap((establishments) => this.#recordMatches(establishments)),
-				map((establishments) => establishments.flatMap((establishment) => (establishment.legalUnit ? [luLegalUnitOption(establishment.legalUnit)] : []))),
-			);
-	}
-
-	#recordMatches(establishments: MatchedEstablishment[]): void {
-		for (const establishment of establishments) {
-			// Unfolded so the match is visible. A row folded by hand afterwards leaves this set and
-			// stays folded, until the next clue brings it back.
-			this.#expandedLegalUnitIds.add(establishment.legalUnitId);
-			this.#matchedChildren.set(establishment.legalUnitId, [...(this.#matchedChildren.get(establishment.legalUnitId) ?? []), luEstablishmentOption(establishment)]);
-		}
-		this.#publishChildren();
-	}
-
-	/** A legal unit reached by both routes stays a single row. */
-	#mergeLegalUnits(byName: LuLegalUnitOption[], byEstablishment: LuLegalUnitOption[]): LuLegalUnitOption[] {
-		const byId = new Map(byName.map((legalUnit) => [legalUnit.id, legalUnit]));
-		for (const legalUnit of byEstablishment) {
-			if (!byId.has(legalUnit.id)) {
-				byId.set(legalUnit.id, legalUnit);
-			}
-		}
-		return [...byId.values()];
-	}
-
 	#onExpandedChange(option: LuLegalUnitEstablishmentOption, expanded: boolean): void {
 		if (option.kind !== 'legalUnit') {
 			return;
@@ -279,7 +319,7 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 			return;
 		}
 
-		this.#fetchEstablishments(option.id, 0)
+		this.#fetchEstablishmentsOf(option.id)
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((establishments) => {
 				this.#allChildren.set(option.id, establishments);
@@ -287,13 +327,50 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 			});
 	}
 
-	#fetchEstablishments(legalUnitId: number, page: number): Observable<LuEstablishmentOption[]> {
-		return luAccumulatePages((nextPage) => {
-			const params = { legalUnitId, sort: 'name', page: nextPage + 1, limit: this.pageSize };
-			return this.httpClient.get<ApiResponse<{ id: number; name: string; legalUnitId: number }>>(this.establishmentsUrl(), { params }).pipe(
-				map((response) => itemsOf(response)),
-				map((items) => ({ items: items.map(luEstablishmentOption), isLastPage: items.length < this.pageSize })),
+	/**
+	 * Every establishment of one legal unit, walked to the end. The cursor is held in the closure
+	 * rather than by page index: the accumulator asks for pages one after another and never two at a
+	 * time, so the last answer always holds the way into the next.
+	 */
+	#fetchEstablishmentsOf(legalUnitId: string): Observable<LuEstablishmentOption[]> {
+		let cursor: string | null = null;
+		return luAccumulatePages(() =>
+			this.#fetchCollection<ApiEstablishment>(this.establishmentsUrl(), { ['legalEntity.id']: legalUnitId }, 0, cursor).pipe(
+				map((body) => {
+					cursor = body.links?.next?.cursor ?? null;
+					return {
+						items: (body.items ?? []).map((establishment) => luEstablishmentOption({ id: establishment.id, name: establishment.name, legalUnitId })),
+						isLastPage: cursor === null,
+					};
+				}),
+			),
+		);
+	}
+
+	/**
+	 * One request to a collection. `page` is a cursor, not an index: the first page is asked for
+	 * without it, and every next one with the cursor the page before handed back.
+	 */
+	#fetchCollection<T>(url: string, params: Record<string, string | number | boolean> | null, page: number, cursor?: string | null): Observable<ApiCollection<T>> {
+		const pageCursor = cursor === undefined ? (page === 0 ? null : (this.#cursorByPage.get(page) ?? null)) : cursor;
+		return this.httpClient
+			.get<ApiCollection<T>>(url, {
+				headers: { 'Api-Version': API_VERSION },
+				params: {
+					include: 'links',
+					...params,
+					limit: this.pageSize,
+					...(pageCursor ? { page: pageCursor } : {}),
+				},
+			})
+			.pipe(
+				map((body) => {
+					const next = body?.links?.next?.cursor;
+					if (cursor === undefined && next) {
+						this.#cursorByPage.set(page + 1, next);
+					}
+					return body ?? {};
+				}),
 			);
-		}, page);
 	}
 }
