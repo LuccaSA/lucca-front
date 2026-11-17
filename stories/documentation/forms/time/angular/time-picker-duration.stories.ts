@@ -143,14 +143,6 @@ export default {
 			description: '[v21.1] Définit une valeur maximale. Par défaut `PT99H` en unité `hoursMinutes`, `P99D` en unité `days`.',
 			table: { category: 'inputs' },
 		},
-		unit: {
-			options: setStoryOptions(DURATION_PICKER_UNIT),
-			control: {
-				type: 'select',
-			},
-			description: '[v22.2] Bascule le champ entre heures/minutes et un unique champ comptant des jours.',
-			table: { category: 'inputs' },
-		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
 			table: { category: 'inputs (form-field)' },
@@ -210,9 +202,6 @@ export const Basic: StoryObj<DurationStoryArgs> = {
 		disabled: false,
 		presentation: false,
 		unit: 'hoursMinutes',
-		step: 'PT1M',
-		max: 'PT99H',
-		unit: 'hoursMinutes',
 		stepHoursMinutes: 'PT1M',
 		maxHoursMinutes: 'PT99H',
 		maxDays: 'P99D',
@@ -225,16 +214,5 @@ export const Days: StoryObj<DurationStoryArgs> = {
 		...Basic.args,
 		unit: 'days',
 		stepDays: 'P0.5D',
-	},
-};
-
-export const Days: StoryObj<DurationPickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
-	...Basic,
-	args: {
-		...Basic.args,
-		unit: 'days',
-		step: 'P0.5D',
-		max: 'P99D',
-		displayArrows: true,
 	},
 };
