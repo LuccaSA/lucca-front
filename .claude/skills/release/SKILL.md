@@ -1,6 +1,6 @@
 ---
 name: release
-description: 'Prépare la sortie d’une version Lucca Front (`/release 22.1`, `/release 22.0.6`) : changelog GitHub, CHANGELOG.md des composants, contenu ZeroHeight de la skill lucca-front, PR de sync vers les releases en cours pour un patch et, pour une mineure ou une majeure, PR release → master, utilitaire highlight-prisme et propositions de migrations.'
+description: 'Prépare la sortie d’une version Lucca Front (`/release 22.1`, `/release 22.0.6`) : changelog GitHub, CHANGELOG.md des composants, contenu ZeroHeight de la skill lucca-front, PR de sync vers les releases en cours pour un patch et, pour une mineure ou une majeure, PR release → master, utilitaire highlight-prisme, glossaire des inputs et propositions de migrations.'
 argument-hint: '<version> (ex. 22.1, 23.0, 22.0.6)'
 disable-model-invocation: true
 ---
@@ -276,7 +276,7 @@ Croiser avec les entrées `New component` et `💀 Deprecated` du changelog de l
 - **Composant déprécié** : le retirer de ses blocs et l'ajouter à `DEPRECATED COMPONENTS`.
 - **Composant supprimé** : le retirer partout, `DEPRECATED COMPONENTS` compris.
 
-Lancer `npx stylelint packages/scss/src/commons/utils/highlight-prisme.scss`. S'il n'y a rien à changer, le dire et passer à l'étape 5.
+Lancer `npx stylelint packages/scss/src/commons/utils/highlight-prisme.scss`. S'il n'y a rien à changer, le dire et passer à l'étape 4 bis.
 
 ### PR
 
@@ -285,6 +285,42 @@ Même déroulé que l'étape 2, sur une branche dédiée partant de `origin/rele
 - branche `chore/highlight-prisme-X.Y`
 - titre `chore(scss): update the highlight-prisme utility for X.Y`
 - base `release/X.Y`, milestone `X.Y`, labels `:hammer: Technical` et `🤖 Produced by AI`.
+
+---
+
+## Étape 4 bis — Glossaire des inputs (mineure / majeure)
+
+Fichier : `docs/property-names.md`. Il doit être mis à jour dans la PR qui introduit un input, et cette étape sert de filet de rattrapage. C'est aussi le dernier moment où renommer un input ne coûte rien : ceux ajoutés pendant le cycle ne sont pas encore publiés. Après le tag, un renommage demande une dépréciation.
+
+### Détecter les inputs ajoutés depuis `PREV_TAG`
+
+```bash
+bash .claude/skills/release/scripts/new-inputs.sh <PREV_TAG> origin/release/X.Y
+```
+
+Le script liste `nom<TAB>fichier` pour chaque `input()` / `model()` absent du même fichier à `PREV_TAG`. Il ne voit pas les décorateurs `@Input` ni les `alias:` : pour ces derniers, c'est l'alias qui fait foi. Un input simplement déplacé dans un autre fichier ressort comme nouveau : l'écarter. Écarter aussi `intl`, l'override de traductions commun à tous les composants.
+
+### Croiser avec le glossaire
+
+Pour chaque input :
+
+1. **Nom à éviter.** Le nom figure dans la colonne « Avoid » d'un concept et l'input porte bien ce concept (ex. `open` pour un état déplié → `expanded`). Proposer de le renommer avant le tag, sans rien renommer sans accord. Un nom de la colonne « Avoid » reste valable pour un autre concept (`level` sur `lu-priority-level`).
+2. **Concept partagé absent.** Le concept est transverse (même nom sur plusieurs composants, ou concept visiblement réutilisable) et le glossaire ne l'a pas : proposer une ligne avec le type, la description et les noms à éviter. Les inputs propres à un composant (`minimumFractionDigits`) restent hors du glossaire.
+3. **Même nom, autre contrat.** Le nom est dans le glossaire, mais avec un type différent (ex. `headingLevel` typé en string) : proposer d'aligner le type, ou d'ajouter l'écart à « Known deviations ».
+
+Revérifier ensuite chaque ligne de « Known deviations » sur `origin/release/X.Y`. Si le bon nom existe désormais sur le composant (l'ancien étant déprécié), l'écart est résolu : retirer le composant de la ligne, et retirer la ligne quand elle n'en cite plus aucun.
+
+### PR
+
+Montrer les propositions sous forme de tableau (input, composant, cas 1/2/3 ou écart résolu, proposition) et demander lesquelles appliquer. Les renommages touchent du code : chacun a sa propre PR `refactor(<scope>)` sur `release/X.Y`, à ouvrir seulement si l'utilisateur le demande.
+
+Les modifications du glossaire suivent le même déroulé que l'étape 2, sur une branche dédiée partant de `origin/release/X.Y` :
+
+- branche `docs/property-names-X.Y`
+- titre `docs: update the input names directory for X.Y`
+- base `release/X.Y`, milestone `X.Y`, labels `:book: Documentation changes` et `🤖 Produced by AI`.
+
+S'il n'y a rien à changer, le dire et passer à l'étape 5.
 
 ---
 
@@ -319,8 +355,8 @@ Un tableau, une ligne par changement : composant, changement, PR, proposition (s
 Court, dans cet ordre :
 
 1. Le changelog GitHub en bloc markdown à copier-coller (étape 1), avec le compte de PRs et les PRs encore ouvertes.
-2. Les liens des PR ouvertes ou existantes : changelog des composants et contenu ZeroHeight, sync vers les releases en cours, release → master, highlight-prisme.
+2. Les liens des PR ouvertes ou existantes : changelog des composants et contenu ZeroHeight, sync vers les releases en cours, release → master, highlight-prisme, glossaire des inputs.
 3. Les écarts relevés : composants sans CHANGELOG.md, divergences changelog GitHub / CHANGELOG des composants, étapes sautées et pourquoi.
-4. Mineure / majeure : le tableau des migrations proposées, en attente de décision, et les nouveaux schematics de la version (`docs/schematics.md`), ou l'échec de `schematics:doc -- --check`.
+4. Mineure / majeure : le tableau des migrations proposées et les renommages d'inputs proposés avant le tag (étape 4 bis), en attente de décision, puis les nouveaux schematics de la version (`docs/schematics.md`), ou l'échec de `schematics:doc -- --check`.
 5. Le rafraîchissement ZeroHeight de la skill : l'option utilisée (`--zh-latest` ou `--zh-id`), les pages modifiées, ou pourquoi il a été sauté. Le tag coupé après le merge de la PR est celui dont le package npm livre ce contenu.
 6. Mineure / majeure : la mineure déclarée pour la documentation LLM (`--minor X.Y`, étape 2), ou pourquoi elle ne l'a pas été. Sans elle, le package `.0` livre une documentation nommée d'après la mineure précédente (cf. `scripts/generate-skills/README.md`, « Une documentation qui suit le code »).
