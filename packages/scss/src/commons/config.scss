@@ -655,7 +655,7 @@ $palettesInterpolation: (
 // Tokens : Elevation
 $elevation: (
 	surface: (
-		'sunken': var(--palettes-neutral-50),
+		'sunken': var(--palettes-neutral-0),
 		'default': var(--palettes-neutral-25),
 		'raised': var(--palettes-neutral-0),
 		'backdrop': color-mix(in srgb, var(--palettes-neutral-400) 40%, transparent),
