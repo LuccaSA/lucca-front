@@ -165,8 +165,8 @@ export default {
 		const fieldArgs = richContent ? otherFieldArgs : allFieldArgs;
 		const projectedMessages = richContent
 			? `
-	<ng-container luFormFieldInlineMessage>Describe your request in <strong>a few lines</strong>.</ng-container>
-	<ng-container luFormFieldErrorInlineMessage>This field is <strong>required</strong>.</ng-container>`
+	<span luFormFieldInlineMessage>Describe your request in <strong>a few lines</strong>.</span>
+	<span luFormFieldErrorInlineMessage>This field is <strong>required</strong>.</span>`
 			: ``;
 		const requiredAttr = required ? `\n\t\t\t\trequired` : ``;
 		const model = useStoryModel('');

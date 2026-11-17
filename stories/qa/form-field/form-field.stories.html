@@ -102,7 +102,7 @@
 			<td>
 				<lu-form-field extraDescribedBy="extra-message" label="Label">
 					<lu-text-input autocomplete="" searchIcon="searchMagnifyingGlass" type="text" placeholder="Placeholder" [(ngModel)]="example" />
-					<ng-container luFormFieldInlineMessage>Helper text with <strong>rich content</strong></ng-container>
+					<span luFormFieldInlineMessage>Helper text with <strong>rich content</strong></span>
 				</lu-form-field>
 			</td>
 		</tr>
@@ -111,8 +111,8 @@
 			<td>
 				<lu-form-field invalid extraDescribedBy="extra-message" label="Label">
 					<lu-text-input autocomplete="" searchIcon="searchMagnifyingGlass" type="text" placeholder="Placeholder" [(ngModel)]="example" />
-					<ng-container luFormFieldInlineMessage>Helper text with <strong>rich content</strong></ng-container>
-					<ng-container luFormFieldErrorInlineMessage>Error helper text with <strong>rich content</strong></ng-container>
+					<span luFormFieldInlineMessage>Helper text with <strong>rich content</strong></span>
+					<span luFormFieldErrorInlineMessage>Error helper text with <strong>rich content</strong></span>
 				</lu-form-field>
 			</td>
 		</tr>
