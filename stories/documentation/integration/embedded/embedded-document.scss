@@ -1,0 +1,10 @@
+@use '@lucca-front/scss/src/commons/config' with (
+	$isEmbedded: true,
+	$fontFamilyPrefix: 'Embedded ',
+	$product: 'cleemy',
+);
+@use '@lucca-front/icons/src/commons/config' as icons with (
+	$isEmbedded: true,
+	$font-name: 'Embedded Lucca icons',
+);
+@use '../../../../packages/ng/styles/embedded-document';

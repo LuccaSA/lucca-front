@@ -128,6 +128,7 @@ Bouton → API : `./references/components/button/button.md`, Design : `./referen
 - divider
 - dropdown
 - duration-picker
+- embedded
 - empty-state
 - errorpage
 - establishmentselect
