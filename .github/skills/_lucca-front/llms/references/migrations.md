@@ -11,6 +11,7 @@
 | Codemod | Commande | Effet |
 |---------|----------|-------|
 | lu-label | `ng generate @lucca-front/ng:lu-label` | Replace the deprecated .label with lu-numeric-badge, lu-status-badge or lu-tag, and write a migration report |
+| menu | `ng generate @lucca-front/ng:menu` | Migrate the deprecated .menu classes to .horizontalNavigation. |
 | text-size | `ng generate @lucca-front/ng:text-size` | Replace the deprecated .(pr-)u-textXS~XXXL utilities with the body and heading utilities, and write a migration report |
 
 ## Catalogue complet (cumulatif)
@@ -33,6 +34,7 @@
 | lu-loading | `ng generate @lucca-front/ng:lu-loading` | Migrate HTML loading to the new lu-loading component | — |
 | lu-select | `ng generate @lucca-front/ng:lu-select` | Migrate lu-select into lu-simple-select and lu-multiple-select where possible. | — |
 | lu-text-input | `ng generate @lucca-front/ng:lu-text-input` | Migrate deprecated textfield into lu-text-input where possible. | — |
+| menu | `ng generate @lucca-front/ng:menu` | Migrate the deprecated .menu classes to .horizontalNavigation. | — |
 | new-icons | `ng generate @lucca-front/ng:new-icons` | Replace old icon names with new ones. | — |
 | palettes | `ng generate @lucca-front/ng:palettes` | Replace palettes with new names. | — |
 | text-size | `ng generate @lucca-front/ng:text-size` | Replace the deprecated .(pr-)u-textXS~XXXL utilities with the body and heading utilities, and write a migration report | — |
