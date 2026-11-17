@@ -84,6 +84,8 @@
 				align-self: center;
 				margin-inline-start: auto;
 				padding-inline-start: var(--pr-t-spacings-100);
+				opacity: var(--components-dropdown-list-option-action-kbdWrapper-opacity);
+				transition: opacity var(--commons-animations-durations-fast);
 			}
 
 			&:is(:hover, :focus-visible) .kbd {
@@ -98,6 +100,7 @@
 			&:hover,
 			&:focus-visible {
 				--components-dropdown-list-option-action-backgroundColor: var(--palettes-neutral-50);
+				--components-dropdown-list-option-action-kbdWrapper-opacity: 1;
 			}
 
 			&:active {

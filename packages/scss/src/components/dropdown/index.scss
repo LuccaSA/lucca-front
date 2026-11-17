@@ -7,6 +7,13 @@
 		@include vars;
 		@include component;
 	}
+
+	@layer mods {
+		// shortcuts are revealed on hover and focus, but stay visible on touch screens
+		@media (hover: hover) {
+			@include hoverCapable;
+		}
+	}
 }
 
 // stylelint-disable-next-line selector-disallowed-list -- .lu-dropdown-options-item-action is deprecated
