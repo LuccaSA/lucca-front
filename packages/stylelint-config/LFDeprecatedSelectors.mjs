@@ -134,7 +134,7 @@ export default [
 			/\.(menu|horizontalNavigation)(-[\w-]+)?\s(.*\s)?\.label(?![\w-])/,
 		],
 		versionDeprecated: '16.3.0',
-		actions: `Remplacer par [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge).`,
+		actions: `Remplacer par [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge), automatiquement avec \`ng g @lucca-front/ng:lu-label\`.`,
 	},
 	{
 		// Legacy form layout, including its children (`.form-group-line-col`…)
@@ -1051,14 +1051,14 @@ export default [
 		`,
 	},
 	{
-		// AI palette, renamed Orchid
+		// AI palette, renamed Orchid, then replaced by Grape
 		// SEE https://regex101.com/r/LqKsYf.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/f0b73e151f73e805500788cdaac6e65fcff20b7a.
 		objectPattern: [/\.palette-AI(?![\w-])/, /\.pr-u-colorTextAI(?![\w-])/],
 		versionDeleted: '21.3.0',
 		actions: `
-			* \`.palette-AI\` => \`.palette-orchid\`
-			* \`.pr-u-colorTextAI\` => \`.pr-u-colorTextOrchid\`
+			* \`.palette-AI\` => \`.palette-grape\`
+			* \`.pr-u-colorTextAI\` => \`.pr-u-colorTextGrape\`
 		`,
 	},
 	{
@@ -1270,11 +1270,11 @@ export default [
 		objectPattern: /\.label(-(icon))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 		actions: `
-			Remplacer par :
+			Remplacer, automatiquement avec \`ng g @lucca-front/ng:lu-label\`, par :
 
-			* [Chip](https://prisme.lucca.io/94310e217/p/3960bc-chip)
-			* [Tag](https://prisme.lucca.io/94310e217/p/6036ad-tag)
 			* [Numeric badge](https://prisme.lucca.io/94310e217/p/0548ef-numeric-badge)
+			* [Status badge](https://prisme.lucca.io/94310e217/p/425d98-statusbadge)
+			* [Tag](https://prisme.lucca.io/94310e217/p/6036ad-tag)
 		`,
 		urls: {
 			prisme: 'https://prisme.lucca.io/94310e217/p/640fae-label',
@@ -1338,5 +1338,14 @@ export default [
 		urls: {
 			schematics: 'https://github.com/LuccaSA/lucca-front/tree/master/packages/ng/schematics/class-prefix',
 		},
+	},
+	{
+		// Orchid palette, replaced by the reworked Grape palette
+		objectPattern: [/\.palette-orchid(?![\w-])/, /\.pr-u-colorTextOrchid(?![\w-])/],
+		versionDeprecated: '22.2.0',
+		actions: `
+			* \`.palette-orchid\` => \`.palette-grape\`
+			* \`.pr-u-colorTextOrchid\` => \`.pr-u-colorTextGrape\`
+		`,
 	},
 ];

@@ -1,6 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { intlInputOptions, isNotNil, luBooleanAttribute, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { merge, Observable } from 'rxjs';
 import { LuToast, LuToastInput, LuToastType } from './toasts.model';
 import { LuToastsService } from './toasts.service';
@@ -11,7 +13,7 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 	templateUrl: './toasts.component.html',
 	styleUrl: './toasts.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [AsyncPipe, PortalDirective],
+	imports: [AsyncPipe, ButtonComponent, IconComponent, PortalDirective],
 })
 export class LuToastsComponent {
 	readonly #toastsService = inject(LuToastsService);

@@ -480,7 +480,7 @@ export default [
 		versionDeleted: '21.2.0',
 	},
 	{
-		// AI palette, renamed Orchid; `--palettes-ai-*` (lower case) is the AI gradient
+		// AI palette, renamed Orchid, then replaced by Grape; `--palettes-ai-*` (lower case) is the AI gradient
 		// The palette only ever defined 500 and 600
 		// SEE https://regex101.com/r/IFX5bZ.
 		// SEE https://github.com/LuccaSA/lucca-front/commit/f0b73e151f73e805500788cdaac6e65fcff20b7a.
@@ -489,7 +489,7 @@ export default [
 		actions: `
 			Avec \`*\` = 50-900 :
 
-			* couleur : \`--palettes-orchid-*\`
+			* couleur : \`--palettes-grape-*\`
 			* dégradé : \`--palettes-ai-*\`
 		`,
 	},
@@ -580,5 +580,11 @@ export default [
 		objectPattern: /--components-priorityLevels-(font|gap|minBlockSize|icon-color[1-3])(?![\w-])/,
 		versionDeleted: '22.1.1',
 		actions: `Remplacer par \`--components-priorityLevel-*\`.`,
+	},
+	{
+		// Orchid palette, replaced by the reworked Grape palette
+		objectPattern: /--palettes-orchid-(50|[1-9]00)(?![\w-])/,
+		versionDeprecated: '22.2.0',
+		actions: `\`--palettes-orchid-*\` => \`--palettes-grape-*\``,
 	},
 ];

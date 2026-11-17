@@ -10,7 +10,7 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 })
 class BubbleIconStory {
 	softwarePalettes = ['product', 'pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc', 'brand'];
-	decorativePalettes = ['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin', 'pineapple'];
+	decorativePalettes = ['kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'dragonfruit', 'raspberry', 'watermelon', 'coral', 'cacao', 'pumpkin', 'pineapple'];
 	feedbackPalettes = ['neutral', 'success', 'warning', 'critical'];
 }
 
