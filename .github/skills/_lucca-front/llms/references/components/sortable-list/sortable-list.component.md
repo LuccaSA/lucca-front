@@ -36,15 +36,23 @@ import { SortableListComponent, SortableListItemComponent } from '@lucca-front/n
 ### Draggable
 
 ```js
-import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { LOCALE_ID } from '@angular/core';
+import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ReorderDirective, ReorderEvent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
 import { SortableListComponent, SortableListItemComponent } from '@lucca-front/ng/sortable-list';
 ```
 
 ```html
-<lu-sortable-list cdkDropList (cdkDropListDropped)="drop($event)">
-	<lu-sortable-list-item label="Label" helperMessage="Helper message" drag cdkDrag />
-	<lu-sortable-list-item label="Label" helperMessage="Helper message" drag cdkDrag />
-	<lu-sortable-list-item label="Label" helperMessage="Helper message" drag cdkDrag />
+<lu-sortable-list cdkDropList luReorder (luReorder)="onReorder($event)">
+	@for (item of listItem; track item.id) {
+		<lu-sortable-list-item
+			label="Label {{ item.id }}"
+			helperMessage="Helper message"
+			drag
+			cdkDrag
+			luReorderItemLabel="Label {{ item.id }}"
+		/>
+	}
 </lu-sortable-list>
 ```
 
