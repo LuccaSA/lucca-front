@@ -298,7 +298,7 @@ Fichier : `docs/property-names.md`. Il doit être mis à jour dans la PR qui int
 bash .claude/skills/release/scripts/new-inputs.sh <PREV_TAG> origin/release/X.Y
 ```
 
-Le script liste `nom<TAB>fichier` pour chaque `input()` / `model()` absent du même fichier à `PREV_TAG`. Il ne voit pas les décorateurs `@Input` ni les `alias:` : pour ces derniers, c'est l'alias qui fait foi. Un input simplement déplacé dans un autre fichier ressort comme nouveau : l'écarter. Écarter aussi `intl`, l'override de traductions commun à tous les composants.
+Le script liste `nom<TAB>fichier` pour chaque `input()` / `model()`, typé ou non, absent du même fichier à `PREV_TAG`. Un `@Input()` de même nom à `PREV_TAG` compte comme déjà présent : une conversion décorateur → signal garde le binding déjà publié, ce n'est pas un nouvel input. Le script ne lit pas les `alias:` : pour ceux-là, c'est l'alias qui fait foi, et un alias qui reprend un `@Input()` existant n'est pas nouveau. Un input simplement déplacé dans un autre fichier ressort comme nouveau : l'écarter. Écarter aussi `intl`, l'override de traductions commun à tous les composants.
 
 ### Croiser avec le glossaire
 
