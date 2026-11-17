@@ -33,9 +33,10 @@ import { SegmentedControlFilterLabelDirective, SegmentedControlFilterComponent, 
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le filtre. |
-| `value` | `value` | `T` | — | ✅ | — | Valeur de l’onglet (obligatoire). |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `value` | `value` | `T` | — | ✅ | — | Valeur du filtre (obligatoire). |
 | `label` | `label` | `PortalContent` | — | — | — | Libellé de l’onglet. Contenu riche : directive luSegmentedControlTabsPanelLabel (l’input prévaut). |
+| `numericBadge` | `numericBadge` | `number \| null` | `null` | — | — | Affiche un Numeric Badge après le libellé, généralement un compteur. |
 
 ### SegmentedControlComponent (component)
 
