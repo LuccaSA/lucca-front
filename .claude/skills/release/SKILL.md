@@ -296,6 +296,7 @@ Analyse et proposition seulement : **ne rien implémenter sans accord explicite.
 
 1. Les entrées `✅ Actions required to update`, `💥` et `💀 Deprecated` du changelog de l'étape 1. Ouvrir chaque PR concernée (`gh pr view <N> --json body,files`) pour connaître l'avant/après exact.
 2. Ce qui existe déjà : `packages/ng/schematics/collection.json`, la section `🤖 Schematics` du changelog, et pour une majeure le skill `lucca-front-migrate-<X-1 → X>` s'il a été amorcé (`.claude/skills/lucca-front-migrate-*`).
+3. La table des schematics publiée sur zeroheight (`docs/schematics.md`) : `npm run schematics:doc -- --check` sur la branche de release. Le hook pre-commit la régénère à chaque modification de `collection.json` et après chaque nouveau tag, mais laisse passer un schematic sans `documentation`. Si `--check` en signale : rédiger pour chacun, dans `collection.json`, `"documentation": { "description": "…" }` en français, sur le modèle des descriptions existantes (à partir de sa `description` anglaise et de sa PR), ou `"documentation": false` s'il ne doit pas être publié, puis `npm run schematics:doc`. Cette mise à jour part avec la PR du contenu ZeroHeight de l'étape 2. Lister au rapport final les lignes « Prochaine version » : elles prendront le numéro de la version livrée au premier commit qui suit le tag, puis apparaîtront sur zeroheight (synchronisé depuis `master`).
 
 ### Classer chaque changement
 
@@ -320,6 +321,6 @@ Court, dans cet ordre :
 1. Le changelog GitHub en bloc markdown à copier-coller (étape 1), avec le compte de PRs et les PRs encore ouvertes.
 2. Les liens des PR ouvertes ou existantes : changelog des composants et contenu ZeroHeight, sync vers les releases en cours, release → master, highlight-prisme.
 3. Les écarts relevés : composants sans CHANGELOG.md, divergences changelog GitHub / CHANGELOG des composants, étapes sautées et pourquoi.
-4. Mineure / majeure : le tableau des migrations proposées, en attente de décision.
+4. Mineure / majeure : le tableau des migrations proposées, en attente de décision, et les nouveaux schematics de la version (`docs/schematics.md`), ou l'échec de `schematics:doc -- --check`.
 5. Le rafraîchissement ZeroHeight de la skill : l'option utilisée (`--zh-latest` ou `--zh-id`), les pages modifiées, ou pourquoi il a été sauté. Le tag coupé après le merge de la PR est celui dont le package npm livre ce contenu.
 6. Mineure / majeure : la mineure déclarée pour la documentation LLM (`--minor X.Y`, étape 2), ou pourquoi elle ne l'a pas été. Sans elle, le package `.0` livre une documentation nommée d'après la mineure précédente (cf. `scripts/generate-skills/README.md`, « Une documentation qui suit le code »).
