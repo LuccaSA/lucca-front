@@ -9,3 +9,7 @@ packages/ng/**/translations.ts linguist-generated
 packages/prisme/icon/icons.ts linguist-generated
 packages/icons/src/commons/config.scss linguist-generated
 stories/documentation/icons-list.ts linguist-generated
+
+# Déployés par `apm install` depuis .apm/ : ne pas éditer à la main.
+.claude/rules/** linguist-generated
+.github/instructions/** linguist-generated

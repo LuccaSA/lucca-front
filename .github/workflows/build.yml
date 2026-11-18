@@ -38,3 +38,15 @@ jobs:
           node-version: 24.22.2
       - run: npm install
       - run: npm run skills:check
+  apm:
+    # Fails when .claude/rules/ or .github/instructions/ no longer match .apm/ (a deployed file edited by hand,
+    # or a source edited without `apm install`). apm.yml declares no dependency, so the audit needs no token.
+    name: APM audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
+      - uses: microsoft/apm-action@d723bb64ed70c135bbaf87d126b721dd2dae0439  # v1.10.0
+        with:
+          setup-only: true
+          apm-version: 0.36.1
+      - run: apm audit --ci

@@ -1,0 +1,12 @@
+name: lucca-front
+version: 1.0.0
+description: AI environment for lucca-front (Copilot, Claude)
+author: Prisme
+targets:
+  - claude
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
