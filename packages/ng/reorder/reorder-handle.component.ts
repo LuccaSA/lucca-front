@@ -47,11 +47,10 @@ interface ReorderMenuList {
 	keys: string[];
 }
 
-interface ReorderMenu {
-	index: number;
-	count: number;
-	/** Actions the item can perform from its position: the menu only displays these ones */
-	entries: { previous: boolean; next: boolean; first: boolean; last: boolean };
+/**
+ * Keyboard shortcuts of the handle: they do not depend on the item position, so they are computed without sorting the items
+ */
+interface ReorderKeys {
 	/** Optional actions offered by the list, whose keyboard shortcuts are declared */
 	actions: { first: boolean; last: boolean };
 	/** Shortcuts displayed in the menu, on the axis of the list */
@@ -67,12 +66,19 @@ interface ReorderMenu {
 	crossEdgeKeys: string[];
 	/** Every key moving the item within its list: a list on a single axis also accepts the arrows of the other one */
 	keys: { previous: ArrowKey[]; next: ArrowKey[] };
-	labels: { previous: string; next: string; first: string; last: string };
-	lists: ReorderMenuList[];
 	/** Keys moving the item to the closest connected lists, on the cross axis of the list */
 	listKeys: { previous: ArrowKey | null; next: ArrowKey | null };
 	/** Cross axis keys of a list with connected lists, handled even when there is no list in that direction */
 	crossKeys: ArrowKey[];
+}
+
+interface ReorderMenu extends ReorderKeys {
+	index: number;
+	count: number;
+	/** Actions the item can perform from its position: the menu only displays these ones */
+	entries: { previous: boolean; next: boolean; first: boolean; last: boolean };
+	labels: { previous: string; next: string; first: string; last: string };
+	lists: ReorderMenuList[];
 }
 
 /**
@@ -136,20 +142,20 @@ export class ReorderHandleComponent implements DoCheck {
 	/**
 	 * Not a computed signal: the list orientation is not a signal
 	 */
-	keyShortcuts(): string | null {
-		const menu = this.#getMenu(false);
-		if (!menu || this.cannotMove()) {
+	keyShortcuts(cannotMove: boolean): string | null {
+		const keys = cannotMove ? null : this.#getKeys()?.keys;
+		if (!keys) {
 			return null;
 		}
 		return [
-			...menu.keys.previous,
-			...menu.keys.next,
-			menu.listKeys.previous,
-			menu.listKeys.next,
-			...(menu.actions.first ? menu.firstKeys : []),
-			...(menu.actions.last ? menu.lastKeys : []),
-			menu.listEdgeKeys.first,
-			menu.listEdgeKeys.last,
+			...keys.keys.previous,
+			...keys.keys.next,
+			keys.listKeys.previous,
+			keys.listKeys.next,
+			...(keys.actions.first ? keys.firstKeys : []),
+			...(keys.actions.last ? keys.lastKeys : []),
+			keys.listEdgeKeys.first,
+			keys.listEdgeKeys.last,
 		]
 			.filter(Boolean)
 			.map((key) => `Alt+${key}`)
@@ -158,14 +164,15 @@ export class ReorderHandleComponent implements DoCheck {
 
 	/**
 	 * Whether its item cannot be moved anywhere, even when dragging it: its button is disabled.
-	 * Not a computed signal: the items and the connected lists are not signals
+	 * Not a computed signal: the items and the connected lists are not signals.
+	 * The items are only counted when no other list can receive the item, as counting them sorts them
 	 */
 	cannotMove(): boolean {
 		const reorder = this.#reorder;
 		if (!reorder) {
 			return false;
 		}
-		return this.#drag.disabled || (reorder.items().length <= 1 && reorder.connectedLists(this.#drag).length === 0);
+		return this.#drag.disabled || (reorder.connectedLists(this.#drag).length === 0 && reorder.items().length <= 1);
 	}
 
 	/**
@@ -301,14 +308,42 @@ export class ReorderHandleComponent implements DoCheck {
 	 */
 	#getMenu(withListLabels = true): ReorderMenu | null {
 		const reorder = this.#reorder;
+		const context = this.#getKeys();
+		if (!reorder || !context) {
+			return null;
+		}
+		const { keys, vertical, rtl, connectedLists, keysOf } = context;
+		const intl = this.intl();
+		const items = reorder.items();
+		const index = items.indexOf(this.#drag);
+		const { first, last } = keys.actions;
+
+		return {
+			...keys,
+			index,
+			count: items.length,
+			entries: { previous: index > 0, next: index < items.length - 1, first: first && index > 0, last: last && index < items.length - 1 },
+			labels: vertical
+				? { previous: intl.moveUp, next: intl.moveDown, first: intl.moveFirst, last: intl.moveLast }
+				: { previous: rtl ? intl.moveRight : intl.moveLeft, next: rtl ? intl.moveLeft : intl.moveRight, first: intl.moveStart, last: intl.moveEnd },
+			lists: connectedLists.map((list) => ({
+				list,
+				label: withListLabels ? intlParams.transform(intl.moveToList, { list: reorder.listLabel(list, connectedLists) }) : '',
+				index: Math.min(index, list.items().length),
+				// The arrow is displayed rather than the edge key when the list is both the closest and the first / last one
+				shortcut: keysOf(list)[0] ?? null,
+				keys: keysOf(list),
+			})),
+		};
+	}
+
+	#getKeys(): { keys: ReorderKeys; vertical: boolean; rtl: boolean; connectedLists: ReorderDirective[]; keysOf: (list: ReorderDirective) => string[] } | null {
+		const reorder = this.#reorder;
 		if (!reorder || this.#drag.disabled) {
 			return null;
 		}
-		const intl = this.intl();
-		const items = reorder.items();
 		const first = !reorder.luReorderEdgesExcluded();
 		const last = first;
-		const index = items.indexOf(this.#drag);
 		const orientation = reorder.dropList.orientation;
 		// A mixed list flowing along columns is ordered vertically, like a vertical list
 		const vertical = orientation === 'vertical' || (orientation === 'mixed' && reorder.luReorderFlow() === 'column');
@@ -332,34 +367,26 @@ export class ReorderHandleComponent implements DoCheck {
 		const [axisEdge, crossEdge] = vertical ? [BLOCK_EDGE_KEYS, INLINE_EDGE_KEYS] : [INLINE_EDGE_KEYS, BLOCK_EDGE_KEYS];
 		const firstList = twoDimensions ? connectedLists.find((list) => list.element.compareDocumentPosition(reorder.element) & Node.DOCUMENT_POSITION_FOLLOWING) : undefined;
 		const lastList = twoDimensions ? connectedLists.filter((list) => list.element.compareDocumentPosition(reorder.element) & Node.DOCUMENT_POSITION_PRECEDING).at(-1) : undefined;
-		const listKeys = (list: ReorderDirective): string[] =>
+		const keysOf = (list: ReorderDirective): string[] =>
 			[list === previousList && crossPrevious, list === nextList && crossNext, list === firstList && crossEdge.first, list === lastList && crossEdge.last].filter((key): key is string => !!key);
 
 		return {
-			index,
-			count: items.length,
-			entries: { previous: index > 0, next: index < items.length - 1, first: first && index > 0, last: last && index < items.length - 1 },
-			actions: { first, last },
-			shortcuts: { previous: axisPrevious, next: axisNext },
-			edgeKeys: axisEdge,
-			firstKeys: twoDimensions ? [axisEdge.first] : [INLINE_EDGE_KEYS.first, BLOCK_EDGE_KEYS.first],
-			lastKeys: twoDimensions ? [axisEdge.last] : [INLINE_EDGE_KEYS.last, BLOCK_EDGE_KEYS.last],
-			listEdgeKeys: { first: firstList ? crossEdge.first : null, last: lastList ? crossEdge.last : null },
-			crossEdgeKeys: twoDimensions ? [crossEdge.first, crossEdge.last] : [],
-			keys: { previous: [axisPrevious, ...crossKeys.previous], next: [axisNext, ...crossKeys.next] },
-			labels: vertical
-				? { previous: intl.moveUp, next: intl.moveDown, first: intl.moveFirst, last: intl.moveLast }
-				: { previous: rtl ? intl.moveRight : intl.moveLeft, next: rtl ? intl.moveLeft : intl.moveRight, first: intl.moveStart, last: intl.moveEnd },
-			lists: connectedLists.map((list) => ({
-				list,
-				label: withListLabels ? intlParams.transform(intl.moveToList, { list: reorder.listLabel(list, connectedLists) }) : '',
-				index: Math.min(index, list.items().length),
-				// The arrow is displayed rather than the edge key when the list is both the closest and the first / last one
-				shortcut: listKeys(list)[0] ?? null,
-				keys: listKeys(list),
-			})),
-			listKeys: { previous: previousList ? crossPrevious : null, next: nextList ? crossNext : null },
-			crossKeys: twoDimensions ? [crossPrevious, crossNext] : [],
+			keys: {
+				actions: { first, last },
+				shortcuts: { previous: axisPrevious, next: axisNext },
+				edgeKeys: axisEdge,
+				firstKeys: twoDimensions ? [axisEdge.first] : [INLINE_EDGE_KEYS.first, BLOCK_EDGE_KEYS.first],
+				lastKeys: twoDimensions ? [axisEdge.last] : [INLINE_EDGE_KEYS.last, BLOCK_EDGE_KEYS.last],
+				listEdgeKeys: { first: firstList ? crossEdge.first : null, last: lastList ? crossEdge.last : null },
+				crossEdgeKeys: twoDimensions ? [crossEdge.first, crossEdge.last] : [],
+				keys: { previous: [axisPrevious, ...crossKeys.previous], next: [axisNext, ...crossKeys.next] },
+				listKeys: { previous: previousList ? crossPrevious : null, next: nextList ? crossNext : null },
+				crossKeys: twoDimensions ? [crossPrevious, crossNext] : [],
+			},
+			vertical,
+			rtl,
+			connectedLists,
+			keysOf,
 		};
 	}
 }

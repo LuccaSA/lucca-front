@@ -1,17 +1,18 @@
+@let disabled = cannotMove();
 <button
 	#button
 	type="button"
 	luButton="ghost"
 	cdkDragHandle
-	[cdkDragHandleDisabled]="cannotMove()"
+	[cdkDragHandleDisabled]="disabled"
 	[size]="size()"
 	[luPopover2]="menuTemplate"
 	luPopoverPosition="below"
 	[customPositions]="menuPositions"
 	luPopoverNoCloseButton
 	[luPopoverDisabled]="!reorderAvailable"
-	[attr.aria-keyshortcuts]="keyShortcuts()"
-	[disabled]="cannotMove()"
+	[attr.aria-keyshortcuts]="keyShortcuts(disabled)"
+	[disabled]="disabled"
 	(keydown)="onKeydown($event)"
 	(pointerdown)="updateMenuAvailability()"
 >

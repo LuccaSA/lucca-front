@@ -580,6 +580,19 @@ describe(ReorderHandleComponent.name, () => {
 			expect(handle.getAttribute('aria-keyshortcuts')).toBe('Alt+ArrowUp Alt+ArrowDown Alt+ArrowRight Alt+PageUp Alt+PageDown Alt+End');
 		});
 
+		it('should not sort the items of its list on change detection, as its shortcuts do not depend on its position', () => {
+			// Arrange
+			const items = vi.spyOn(ReorderDirective.prototype, 'items');
+
+			// Act
+			fixture.componentInstance.columns.update((columns) => [...columns]);
+			fixture.detectChanges();
+
+			// Assert
+			expect(items).not.toHaveBeenCalled();
+			items.mockRestore();
+		});
+
 		it('should move its item down within its list with Alt + ArrowDown', () => {
 			// Act
 			pressKey(getHandles(fixture)[0], 'ArrowDown');
