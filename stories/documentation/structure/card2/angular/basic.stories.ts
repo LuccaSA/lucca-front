@@ -1,3 +1,4 @@
+import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CARD_HEADING_LEVEL, CARD_SIZE, CardActionDirective, CardComponent, CardWrapperComponent } from '@lucca-front/ng/card';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
@@ -13,14 +14,15 @@ interface CardArgs {
 
 interface CardBasicStory extends CardArgs {
 	headingLevel: number;
-	size: string | null;
+	size: string;
 	bubbleIcon: string;
+	richContent: boolean;
 	wrapper: boolean;
 	grid: boolean;
 	plain: boolean;
 	cards: number;
-	wrapperHeadingLevel: number | null;
-	wrapperSize: string | null;
+	wrapperHeadingLevel: number;
+	wrapperSize: string;
 	wrapperAction: boolean;
 }
 
@@ -60,12 +62,12 @@ export default {
 		},
 		size: {
 			description: 'Taille de la carte.',
-			options: [null, ...CARD_SIZE],
+			options: ['M', ...CARD_SIZE],
 			control: {
 				type: 'select',
 			},
 			if: { arg: 'wrapper', truthy: false },
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'M' } },
 		},
 		disabled: {
 			description: 'Désactive l’action : retire le `href` du lien, ou ajoute l’attribut natif `disabled` au bouton.',
@@ -74,6 +76,7 @@ export default {
 			options: setStoryOptions(IconsList.filter((i) => !i.deprecated).map((i) => i.icon)),
 			control: { type: 'select' },
 			description: 'Icône décorative affichée dans une bulle avant le titre. Pour un autre contenu, projeter un élément portant l’attribut `cardHeaderStartSlot`.',
+			if: { arg: 'richContent', truthy: false },
 			table: { category: 'inputs' },
 		},
 		wrapper: {
@@ -107,7 +110,7 @@ export default {
 		wrapperHeadingLevel: {
 			name: '↳ headingLevel',
 			description: 'Niveau de titre de toutes les cartes, prioritaire sur celui de chaque carte.',
-			options: [null, ...CARD_HEADING_LEVEL],
+			options: CARD_HEADING_LEVEL,
 			control: {
 				type: 'select',
 			},
@@ -117,7 +120,7 @@ export default {
 		wrapperSize: {
 			name: '↳ size',
 			description: 'Taille de toutes les cartes, prioritaire sur celle de chaque carte.',
-			options: [null, ...CARD_SIZE],
+			options: ['M', ...CARD_SIZE],
 			control: {
 				type: 'select',
 			},
@@ -130,28 +133,40 @@ export default {
 			if: { arg: 'wrapper' },
 			table: { category: 'lu-card-wrapper' },
 		},
+		richContent: {
+			description: 'Remplace l’input `bubbleIcon` par un contenu projeté avec l’attribut `cardHeaderStartSlot` : une bulle avec une autre direction, ou un autre visuel.',
+			table: { category: 'story' },
+		},
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [CardComponent, CardActionDirective, CardWrapperComponent, ButtonComponent],
+			imports: [CardComponent, CardActionDirective, CardWrapperComponent, BubbleIconComponent, ButtonComponent],
 		}),
 	],
-	render: ({ headingLevel, size, bubbleIcon, wrapper, grid, plain, cards, wrapperHeadingLevel, wrapperSize, wrapperAction, ...cardArgs }: CardBasicStory, { argTypes }) => {
+	render: ({ headingLevel, size, bubbleIcon, richContent, wrapper, grid, plain, cards, wrapperHeadingLevel, wrapperSize, wrapperAction, ...cardArgs }: CardBasicStory, { argTypes }) => {
 		const cardInputs = wrapper ? '' : generateInputs({ headingLevel: `${headingLevel}`, size }, argTypes);
 		const getCardTemplate = ({ heading, content, action, disabled }: CardArgs) => {
-			const bubbleIconAttr = bubbleIcon ? ` bubbleIcon="${bubbleIcon}"` : '';
+			const bubbleIconAttr = !richContent && bubbleIcon ? ` bubbleIcon="${bubbleIcon}"` : '';
+			const headerStartTemplate = richContent
+				? `
+	<lu-bubble-icon cardHeaderStartSlot icon="app" bubbleDirection="left" />`
+				: '';
 			const hrefAttr = disabled ? '' : ' href="#"';
 			const disabledAttr = disabled ? ' disabled' : '';
 			const actionTemplate = action === 'button' ? `<button type="button" luCardAction${disabledAttr}>${heading}</button>` : `<a${hrefAttr} luCardAction>${heading}</a>`;
-			return `<lu-card${cardInputs}${bubbleIconAttr}>
-	${actionTemplate}
-	${content}
+			const contentTemplate = content
+				? `
+	${content}`
+				: '';
+			return `<lu-card${cardInputs}${bubbleIconAttr}>${headerStartTemplate}
+	${actionTemplate}${contentTemplate}
 </lu-card>`;
 		};
 		const gridAttr = grid ? ' grid' : '';
 		const plainAttr = plain ? ' plain' : '';
-		const wrapperHeadingLevelAttr = wrapperHeadingLevel ? ` headingLevel="${wrapperHeadingLevel}"` : '';
-		const wrapperSizeAttr = wrapperSize ? ` size="${wrapperSize}"` : '';
+		// The defaults (level 3, size M) render like a wrapper without these inputs
+		const wrapperHeadingLevelAttr = wrapperHeadingLevel !== 3 ? ` headingLevel="${wrapperHeadingLevel}"` : '';
+		const wrapperSizeAttr = wrapperSize !== 'M' ? ` size="${wrapperSize}"` : '';
 		const wrapperActionTemplate = wrapperAction
 			? `
     <button type="button" luButton cardWrapperAction>Button</button>`
@@ -172,14 +187,15 @@ export const Basic = {
 	args: {
 		...defaultCardArgs,
 		headingLevel: 3,
-		size: null,
+		size: 'M',
 		bubbleIcon: '',
 		wrapper: false,
 		cards: 3,
 		grid: false,
 		plain: false,
-		wrapperHeadingLevel: null,
-		wrapperSize: null,
+		wrapperHeadingLevel: 3,
+		wrapperSize: 'M',
 		wrapperAction: false,
+		richContent: false,
 	},
 };
