@@ -17,7 +17,7 @@
 			(click)="clickHandler($event)"
 			(keydown)="keydownHandler($event)"
 			(blur)="blurHandler()"
-			(focus)="daysInput.select()"
+			(focus)="focusHandler()"
 			[style]="'--components-timepicker-input-digits:' + digitNumber()"
 		/>
 		<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display" [attr.data-content-before]="valueLabel()"></span>

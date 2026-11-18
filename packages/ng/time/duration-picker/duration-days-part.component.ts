@@ -61,6 +61,13 @@ export class DurationDaysPartComponent {
 	 */
 	private readonly draft = signal<string | null>(null);
 
+	/**
+	 * Raised by a focus, cleared by the first input that follows it: the first digit typed after a
+	 * focus replaces the value instead of landing next to it. `select()` alone does not do it, since
+	 * the mouse-up that follows a click collapses the selection it had just made.
+	 */
+	private firstInputAfterFocus = false;
+
 	private readonly decimalSeparator = computed(() => new Intl.NumberFormat(this.locale).formatToParts(1.1).find((part) => part.type === 'decimal')?.value ?? '.');
 
 	protected readonly formattedValue = computed(() => new Intl.NumberFormat(this.locale, { useGrouping: false, maximumFractionDigits: this.decimals() }).format(this.value()));
@@ -100,10 +107,14 @@ export class DurationDaysPartComponent {
 			return;
 		}
 
-		const rawValue = event.target.value;
-		const sanitized = this.sanitize(rawValue);
+		const typedDigit = this.firstInputAfterFocus && event instanceof InputEvent && event.data !== null && /^[0-9]$/.test(event.data) ? event.data : null;
+		this.firstInputAfterFocus = false;
 
-		if (sanitized !== rawValue) {
+		// Only a digit starts the value over: a separator or a deletion keeps editing what is there.
+		const rawValue = typedDigit ?? event.target.value;
+		const { value: sanitized, rejected } = this.sanitize(rawValue);
+
+		if (rejected) {
 			this.nonDigitKeyPressed.emit();
 		}
 
@@ -111,6 +122,11 @@ export class DurationDaysPartComponent {
 		this.draft.set(sanitized);
 		this.isValueSet.set(true);
 		this.valueChange.emit(this.parse(sanitized));
+	}
+
+	protected focusHandler(): void {
+		this.firstInputAfterFocus = true;
+		this.daysInput()?.nativeElement.select();
 	}
 
 	protected keydownHandler(event: KeyboardEvent): void {
@@ -131,6 +147,7 @@ export class DurationDaysPartComponent {
 	}
 
 	protected blurHandler(): void {
+		this.firstInputAfterFocus = false;
 		this.draft.set(null);
 
 		const input = this.daysInput()?.nativeElement;
@@ -159,31 +176,41 @@ export class DurationDaysPartComponent {
 
 	/**
 	 * Keeps digits and at most one decimal separator, within the allowed number of digits.
+	 * `rejected` tells a character the field refused apart from a mere rewrite — writing the typed
+	 * `.` as the locale separator, or dropping a leading zero, is not something to shake about.
 	 */
-	private sanitize(rawValue: string): string {
+	private sanitize(rawValue: string): { value: string; rejected: boolean } {
 		const separators = new Set(['.', ',', this.decimalSeparator()]);
 		let integerPart = '';
 		let decimalPart = '';
 		let hasSeparator = false;
+		let rejected = false;
 
 		for (const char of rawValue) {
 			if (char >= '0' && char <= '9') {
 				if (hasSeparator) {
 					if (decimalPart.length < this.decimals()) {
 						decimalPart += char;
+					} else {
+						rejected = true;
 					}
 				} else if (integerPart === '0') {
-					// A zero is only significant as the whole integer part: typing a digit next to it replaces it.
+					// A zero is only significant as the whole integer part: a digit next to it takes its place.
 					integerPart = char;
 				} else if (integerPart.length < this.maxDigits()) {
 					integerPart += char;
+				} else {
+					rejected = true;
 				}
 			} else if (separators.has(char) && !hasSeparator && this.decimals() > 0) {
 				hasSeparator = true;
+			} else {
+				// Any other character, a second separator, or a separator in a field that takes no decimals.
+				rejected = true;
 			}
 		}
 
-		return hasSeparator ? `${integerPart}${this.decimalSeparator()}${decimalPart}` : integerPart;
+		return { value: hasSeparator ? `${integerPart}${this.decimalSeparator()}${decimalPart}` : integerPart, rejected };
 	}
 
 	private parse(value: string): number {

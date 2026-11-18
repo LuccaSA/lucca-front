@@ -107,6 +107,17 @@ function pressKey(key: string, input: HTMLInputElement, fixture: ComponentFixtur
 	fixture.detectChanges();
 }
 
+/** Focuses the field the way a click does: the caret lands in it, its content is not left selected. */
+function focusPart(input: HTMLInputElement, fixture: ComponentFixture<unknown>): void {
+	input.dispatchEvent(new FocusEvent('focus'));
+	fixture.detectChanges();
+}
+
+/** The picker shakes to tell a keystroke it refused. */
+function isShaking(fixture: ComponentFixture<unknown>): boolean {
+	return (fixture.nativeElement as HTMLElement).querySelector('.timePicker')!.classList.contains('pr-u-animatedShake');
+}
+
 function createConfigurableHost(value: string | null, options: { max?: ISO8601Duration; step?: ISO8601Duration } = {}): ComponentFixture<DurationPickerConfigurableTestComponent> {
 	TestBed.configureTestingModule({ imports: [DurationPickerConfigurableTestComponent] });
 	const fixture = TestBed.createComponent(DurationPickerConfigurableTestComponent);
@@ -337,6 +348,77 @@ describe('DurationPickerComponent', () => {
 
 			// Assert
 			expect(fixture.componentInstance.control.value).toBe('P2.5D');
+		});
+
+		it('should start the value over on the first digit typed after a focus', () => {
+			// Arrange
+			const fixture = createDaysHost('P3D');
+			const input = getDaysInput(fixture);
+
+			// Act: the caret lands after the `3`, where the browser would otherwise make it `30`
+			focusPart(input, fixture);
+			appendToPart('0', input, fixture);
+
+			// Assert
+			expect(getDaysDisplay(fixture)).toBe('0');
+			expect(fixture.componentInstance.control.value).toBe('P0D');
+		});
+
+		it('should append the digits typed after the first one', () => {
+			// Arrange
+			const fixture = createDaysHost('P3D');
+			const input = getDaysInput(fixture);
+
+			// Act
+			focusPart(input, fixture);
+			appendToPart('1', input, fixture);
+			appendToPart('2', input, fixture);
+
+			// Assert
+			expect(getDaysDisplay(fixture)).toBe('12');
+			expect(fixture.componentInstance.control.value).toBe('P12D');
+		});
+
+		it('should not shake when the typed digit is accepted', () => {
+			// Arrange
+			const fixture = createDaysHost('P0D');
+			const input = getDaysInput(fixture);
+
+			// Act
+			focusPart(input, fixture);
+			appendToPart('3', input, fixture);
+
+			// Assert
+			expect(getDaysDisplay(fixture)).toBe('3');
+			expect(isShaking(fixture)).toBe(false);
+		});
+
+		it('should not shake when the typed decimal separator is the other one', () => {
+			// Arrange
+			const fixture = createDaysHost('P0D', { step: 'P0.5D' });
+			const input = getDaysInput(fixture);
+
+			// Act: `,` is accepted and written as the separator of the locale
+			focusPart(input, fixture);
+			appendToPart('0', input, fixture);
+			appendToPart(',', input, fixture);
+
+			// Assert
+			expect(getDaysDisplay(fixture)).toBe('0.');
+			expect(isShaking(fixture)).toBe(false);
+		});
+
+		it('should shake and keep the value when a character the field refuses is typed', () => {
+			// Arrange
+			const fixture = createDaysHost('P3D');
+			const input = getDaysInput(fixture);
+
+			// Act
+			appendToPart('a', input, fixture);
+
+			// Assert
+			expect(getDaysDisplay(fixture)).toBe('3');
+			expect(isShaking(fixture)).toBe(true);
 		});
 
 		it('should increment by the step', () => {
