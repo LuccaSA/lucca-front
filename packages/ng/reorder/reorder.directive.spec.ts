@@ -15,7 +15,7 @@ import { ReorderEvent } from './reorder.type';
 		<ul cdkDropList luReorder (luReorder)="onReorder($event)">
 			@for (item of items(); track item) {
 				<li cdkDrag [luReorderItemLabel]="item">
-					<button type="button" lu-reorder-handle class="button">handle</button>
+					<lu-reorder-handle />
 					{{ item }}
 				</li>
 			}
@@ -54,7 +54,7 @@ class SingleListHostComponent {
 				>
 					@for (item of column.items; track item) {
 						<li cdkDrag [luReorderItemLabel]="item">
-							<button type="button" lu-reorder-handle class="button">handle</button>
+							<lu-reorder-handle />
 							{{ item }}
 						</li>
 					}
@@ -62,7 +62,7 @@ class SingleListHostComponent {
 			}
 		</div>
 		<ul cdkDropList luReorder luReorderLabel="Unrelated">
-			<li cdkDrag luReorderItemLabel="Z"><button type="button" lu-reorder-handle class="button">handle</button></li>
+			<li cdkDrag luReorderItemLabel="Z"><lu-reorder-handle /></li>
 		</ul>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -151,7 +151,7 @@ describe(ReorderDirective.name, () => {
 			await fixture.whenStable();
 
 			// Assert
-			const handles = (fixture.nativeElement as HTMLElement).querySelectorAll('[lu-reorder-handle]');
+			const handles = (fixture.nativeElement as HTMLElement).querySelectorAll('lu-reorder-handle button');
 			expect(document.activeElement).toBe(handles[2]);
 			expect(announce).toHaveBeenCalledExactlyOnceWith('"A": position 3 of 3');
 		});

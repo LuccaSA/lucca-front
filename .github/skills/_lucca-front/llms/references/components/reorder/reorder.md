@@ -9,7 +9,7 @@ import { ReorderHandleComponent, ReorderItemLabelDirective, ReorderDirective } f
 ## Basic Usage
 
 ```html
-<ul class="reorderDemo" cdkDropList luReorder [luReorderActionsExcluded] [luReorderShortcutsHidden] (luReorder)="onReorder($event)"> @for (item of items; track item) { <li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item"> <button type="button" lu-reorder-handle class="button mod-ghost mod-onlyIcon mod-S"> <lu-icon icon="dotsDrag" /> </button> {{ item }} </li> }
+<ul class="reorderDemo" cdkDropList luReorder [luReorderActionsExcluded] (luReorder)="onReorder($event)"> @for (item of items; track item) { <li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item"> <lu-reorder-handle /> {{ item }} </li> }
 </ul>
 <pr-story-model-display heading="(luReorder)">{{ lastEvent() }}</pr-story-model-display>
 ```
@@ -18,7 +18,13 @@ import { ReorderHandleComponent, ReorderItemLabelDirective, ReorderDirective } f
 
 ### ReorderHandleComponent (component)
 
-**Selector:** `[lu-reorder-handle]`
+**Selector:** `lu-reorder-handle`
+
+#### Inputs
+
+| Property | Binding name | Type | Default | Required | Transform | Description |
+|----------|-------------|------|---------|----------|-----------|-------------|
+| `size` | `size` | `'S' \| 'XS'` | `'S'` | — | — | — |
 
 ### ReorderItemLabelDirective (directive)
 
@@ -43,7 +49,6 @@ import { ReorderHandleComponent, ReorderItemLabelDirective, ReorderDirective } f
 | `luReorderLabel` | `luReorderLabel` | `string \| null` | `null` | — | — | — |
 | `luReorderFlow` | `luReorderFlow` | `'row' \| 'column'` | `'row'` | — | — | Sens d’écoulement d’une liste `mixed` : en lignes (Alt + ← / →) ou en colonnes (Alt + ↑ / ↓). |
 | `luReorderActionsExcluded` | `luReorderActionsExcluded` | `readonly ReorderOptionalAction[]` | `[]` | — | — | — |
-| `luReorderShortcutsHidden` | `luReorderShortcutsHidden` | `readonly ReorderMenuEntry[], boolean \| '' \| readonly ReorderMenuEntry[]` | `[]` | — | — | — |
 | `luReorderIntl` | `luReorderIntl` | `unknown` | — | — | — | — |
 
 #### Outputs

@@ -12,12 +12,6 @@ export type ReorderFlow = 'row' | 'column';
 export type ReorderOptionalAction = 'first' | 'last';
 
 /**
- * Entry of the handle menu: moving the item by one position (`previous` / `next`), to the start / end of its list (`first` / `last`),
- * or to a connected list (`lists`)
- */
-export type ReorderMenuEntry = 'previous' | 'next' | 'first' | 'last' | 'lists';
-
-/**
  * Emitted by `luReorder` whenever an item is moved, whether it was dragged with a pointer
  * or moved with the handle menu or keyboard shortcuts.
  * Its properties share their names with `CdkDragDrop` so the usual `moveItemInArray` / `transferArrayItem` handlers keep working.
@@ -28,3 +22,10 @@ export interface ReorderEvent<T = unknown, O = T> {
 	previousContainer: CdkDropList<O>;
 	container: CdkDropList<T>;
 }
+
+export const REORDER_HANDLE_SIZE = ['S', 'XS'] as const;
+
+/**
+ * Size of the handle button
+ */
+export type ReorderHandleSize = (typeof REORDER_HANDLE_SIZE)[number];

@@ -146,16 +146,19 @@
 			}
 		}
 
-		.dataTable-body-row-cell-drag.button {
-			@include button.S;
-			@include button.onlyIcon;
-			@include button.ghost;
-
-			--components-button-padding: var(--pr-t-spacings-50);
-			--components-button-color: var(--palettes-neutral-700);
-
-			cursor: move;
+		.dataTable-body-row-cell-drag {
 			vertical-align: top;
+
+			&.button {
+				@include button.S;
+				@include button.onlyIcon;
+				@include button.ghost;
+
+				--components-button-padding: var(--pr-t-spacings-50);
+				--components-button-color: var(--palettes-neutral-700);
+
+				cursor: move;
+			}
 		}
 	}
 

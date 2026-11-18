@@ -1,8 +1,6 @@
 @if (drag()) {
 	@if (reorder) {
-		<button type="button" lu-reorder-handle class="sortableList-item-handler button">
-			<lu-icon icon="drag" />
-		</button>
+		<lu-reorder-handle size="XS" class="sortableList-item-handler" />
 	} @else {
 		<span class="sortableList-item-handler button" cdkDragHandle>
 			<lu-icon icon="drag" />

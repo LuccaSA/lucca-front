@@ -1,16 +1,14 @@
 import { CdkDrag, CdkDropList, DropListOrientation, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LOCALE_ID, signal } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { ReorderDirective, ReorderEvent, ReorderFlow, ReorderHandleComponent, ReorderItemLabelDirective, ReorderMenuEntry, ReorderOptionalAction } from '@lucca-front/ng/reorder';
+import { ReorderDirective, ReorderEvent, ReorderFlow, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent, shortcutsHiddenArgType, shortcutsHiddenValue } from './connected-lists.helpers';
+import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent } from './connected-lists.helpers';
 
 interface ReorderOrientationStory {
 	cdkDropListOrientation: DropListOrientation;
 	luReorderFlow: ReorderFlow;
 	luReorderActionsExcluded: ReorderOptionalAction[];
-	luReorderShortcutsHidden: ReorderMenuEntry[];
 	luReorder?: (event: ReorderEvent<string[]>) => void;
 }
 
@@ -18,7 +16,7 @@ export default {
 	title: 'Documentation/Listings/Reorder/Angular/Orientation',
 	decorators: [
 		moduleMetadata({
-			imports: [CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective, ReorderHandleComponent, IconComponent, StoryModelDisplayComponent],
+			imports: [CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective, ReorderHandleComponent, StoryModelDisplayComponent],
 		}),
 		applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }] }),
 	],
@@ -38,7 +36,6 @@ export default {
 			table: { category: 'inputs', type: { summary: 'ReorderFlow' }, defaultValue: { summary: 'row' } },
 		},
 		luReorderActionsExcluded: ACTIONS_EXCLUDED_ARG_TYPE,
-		luReorderShortcutsHidden: shortcutsHiddenArgType(['previous', 'next', 'first', 'last']),
 		luReorder: {
 			description: 'Événement déclenché lorsqu’un élément est déplacé, à la souris, depuis le menu de sa poignée ou au clavier.',
 			action: 'luReorder',
@@ -46,9 +43,8 @@ export default {
 			table: { category: 'outputs', type: { summary: 'ReorderEvent' } },
 		},
 	},
-	render: ({ cdkDropListOrientation, luReorderFlow, luReorderActionsExcluded, luReorderShortcutsHidden, luReorder }: ReorderOrientationStory) => {
+	render: ({ cdkDropListOrientation, luReorderFlow, luReorderActionsExcluded, luReorder }: ReorderOrientationStory) => {
 		const excluded = actionsExcludedValue(luReorderActionsExcluded);
-		const hidden = shortcutsHiddenValue(luReorderShortcutsHidden, luReorderActionsExcluded);
 		const items = ['Carotte', 'Poireau', 'Navet', 'Courgette', 'Potiron', 'Radis'];
 		const mixed = cdkDropListOrientation === 'mixed';
 		const column = cdkDropListOrientation === 'vertical' || (mixed && luReorderFlow === 'column');
@@ -61,10 +57,6 @@ export default {
 		const actions = excluded
 			? `
 	[luReorderActionsExcluded]="${excluded}"`
-			: '';
-		const shortcutsHidden = hidden
-			? `
-	[luReorderShortcutsHidden]="${hidden}"`
 			: '';
 		const flow =
 			mixed && luReorderFlow !== 'row'
@@ -87,14 +79,12 @@ export default {
 			template: `<ul
 	class="reorderDemo${column ? ' mod-column' : ''}${mixed ? ' mod-wrap' : ''}"
 	cdkDropList${orientation}
-	luReorder${flow}${actions}${shortcutsHidden}
+	luReorder${flow}${actions}
 	(luReorder)="onReorder($event)"
 >
 	@for (item of items; track item) {
 		<li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item">
-			<button type="button" lu-reorder-handle class="button mod-ghost mod-onlyIcon mod-S">
-				<lu-icon icon="dotsDrag" />
-			</button>
+			<lu-reorder-handle />
 			{{ item }}
 		</li>
 	}
@@ -152,6 +142,5 @@ export const Orientation: StoryObj<ReorderOrientationStory> = {
 		cdkDropListOrientation: 'horizontal',
 		luReorderFlow: 'row',
 		luReorderActionsExcluded: [],
-		luReorderShortcutsHidden: [],
 	},
 };

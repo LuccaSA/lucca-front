@@ -2,9 +2,7 @@
 	<td class="dataTable-body-row-cell" [attr.aria-hidden]="tableRef?.reorderable() ? null : 'true'">
 		@if (bodyRef) {
 			@if (reorder) {
-				<button type="button" lu-reorder-handle class="button dataTable-body-row-cell-drag">
-					<lu-icon icon="dotsDrag" />
-				</button>
+				<lu-reorder-handle size="XS" class="dataTable-body-row-cell-drag" />
 			} @else {
 				<span class="button dataTable-body-row-cell-drag" cdkDragHandle>
 					<lu-icon icon="dotsDrag" [alt]="intl().move" />

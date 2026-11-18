@@ -1,6 +1,7 @@
 import { signal } from '@angular/core';
 import { ReorderEvent } from '@lucca-front/ng/reorder';
-import { Meta, StoryObj } from '@storybook/angular-vite';
+import { TagComponent } from '@lucca-front/ng/tag';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import {
 	acceptAll,
 	CONNECTED_LISTS_ARG_TYPES,
@@ -8,7 +9,6 @@ import {
 	refuseAll,
 	formatReorderEvent,
 	reorder,
-	shortcutsHiddenValue,
 	actionsExcludedValue,
 	ReorderConnectedListsStory,
 	STYLES,
@@ -20,19 +20,14 @@ import {
  */
 export default {
 	title: 'Documentation/Listings/Reorder/Angular/Connected lists restricted',
-	decorators: CONNECTED_LISTS_DECORATORS,
+	decorators: [...CONNECTED_LISTS_DECORATORS, moduleMetadata({ imports: [TagComponent] })],
 	argTypes: CONNECTED_LISTS_ARG_TYPES,
-	render: ({ luReorder, luReorderActionsExcluded, luReorderShortcutsHidden }: ReorderConnectedListsStory) => {
+	render: ({ luReorder, luReorderActionsExcluded }: ReorderConnectedListsStory) => {
 		const excluded = actionsExcludedValue(luReorderActionsExcluded);
-		const hidden = shortcutsHiddenValue(luReorderShortcutsHidden, luReorderActionsExcluded);
 		// Written on their own line in the template, so their indentation is displayed like the other attributes
 		const actions = excluded
 			? `
 				[luReorderActionsExcluded]="${excluded}"`
-			: '';
-		const shortcutsHidden = hidden
-			? `
-				[luReorderShortcutsHidden]="${hidden}"`
 			: '';
 		const columns = [
 			{ id: 'semis', label: 'Semis', items: ['Carotte', 'Poireau', 'Navet'], connectedTo: ['serre', 'en-pousse'], closed: false },
@@ -62,7 +57,7 @@ export default {
 			<h3 class="reorderDemo-column-title" [class.is-disabled]="column.closed">
 				{{ column.label }}
 				@if (column.closed) {
-					<span class="tag mod-disabled">Fermée</span>
+					<lu-tag label="Fermée" />
 				}
 			</h3>
 			<ul
@@ -74,14 +69,12 @@ export default {
 				[cdkDropListConnectedTo]="column.connectedTo"
 				[cdkDropListEnterPredicate]="column.closed ? refuseAll : acceptAll"
 				luReorder
-				[luReorderLabel]="column.label"${actions}${shortcutsHidden}
+				[luReorderLabel]="column.label"${actions}
 				(luReorder)="onReorder($event)"
 			>
 				@for (item of column.items; track item) {
 					<li class="reorderDemo-list-item" cdkDrag [luReorderItemLabel]="item">
-						<button type="button" lu-reorder-handle class="button mod-ghost mod-onlyIcon mod-S">
-							<lu-icon icon="dotsDrag" />
-						</button>
+						<lu-reorder-handle />
 						{{ item }}
 					</li>
 				}
@@ -98,6 +91,5 @@ export default {
 export const ConnectedListsRestricted: StoryObj<ReorderConnectedListsStory> = {
 	args: {
 		luReorderActionsExcluded: [],
-		luReorderShortcutsHidden: [],
 	},
 };

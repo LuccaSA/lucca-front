@@ -6,11 +6,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
 import { ReorderRegistry } from './reorder.registry';
 import { LU_REORDER_TRANSLATIONS } from './reorder.translate';
-import { ReorderEvent, ReorderFlow, ReorderMenuEntry, ReorderOptionalAction } from './reorder.type';
+import { ReorderEvent, ReorderFlow, ReorderOptionalAction } from './reorder.type';
 
 const intlParams = new IntlParamsPipe();
-
-const ALL_MENU_ENTRIES: readonly ReorderMenuEntry[] = ['previous', 'next', 'first', 'last', 'lists'];
 
 @Directive({
 	selector: '[luReorder]',
@@ -47,14 +45,6 @@ export class ReorderDirective<T = unknown> {
 	 * The other actions are always offered, as they are the only way to reach every position and every list without a pointer
 	 */
 	readonly luReorderActionsExcluded = input<readonly ReorderOptionalAction[]>([]);
-
-	/**
-	 * Menu entries whose keyboard shortcut is not displayed, or `true` for every entry. The shortcuts still work
-	 * and are still declared to assistive technologies: hiding them only lightens the menu
-	 */
-	readonly luReorderShortcutsHidden = input<readonly ReorderMenuEntry[], boolean | '' | readonly ReorderMenuEntry[]>([], {
-		transform: (value) => (value === true || value === '' ? ALL_MENU_ENTRIES : value || []),
-	});
 
 	/**
 	 * Overrides the default labels of the handles' menu and announcements

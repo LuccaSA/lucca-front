@@ -17,25 +17,15 @@
 ```js
 import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LOCALE_ID, signal } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective, ReorderMenuEntry, ReorderOptionalAction } from '@lucca-front/ng/reorder';
-import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent, shortcutsHiddenArgType, shortcutsHiddenValue } from './connected-lists.helpers';
+import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
+import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent } from './connected-lists.helpers';
 ```
 
 ```html
-<ul
-	class="reorderDemo"
-	cdkDropList
-	luReorder
-	[luReorderActionsExcluded]=""
-	[luReorderShortcutsHidden]=""
-	(luReorder)="onReorder($event)"
->
+<ul class="reorderDemo" cdkDropList luReorder [luReorderActionsExcluded]="" (luReorder)="onReorder($event)">
 	@for (item of items; track item) {
 		<li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item">
-			<button type="button" lu-reorder-handle class="button mod-ghost mod-onlyIcon mod-S">
-				<lu-icon icon="dotsDrag" />
-			</button>
+			<lu-reorder-handle />
 			{{ item }}
 		</li>
 	}
@@ -48,7 +38,8 @@ import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent, sh
 ```js
 import { signal } from '@angular/core';
 import { ReorderEvent } from '@lucca-front/ng/reorder';
-import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refuseAll, formatReorderEvent, reorder, shortcutsHiddenValue, actionsExcludedValue, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
+import { TagComponent } from '@lucca-front/ng/tag';
+import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refuseAll, formatReorderEvent, reorder, actionsExcludedValue, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
 ```
 
 ```html
@@ -58,7 +49,7 @@ import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refus
 			<h3 class="reorderDemo-column-title" [class.is-disabled]="column.closed">
 				{{ column.label }}
 				@if (column.closed) {
-					<span class="tag mod-disabled">Fermée</span>
+					<lu-tag label="Fermée" />
 				}
 			</h3>
 			<ul
@@ -72,14 +63,11 @@ import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refus
 				luReorder
 				[luReorderLabel]="column.label"
 				[luReorderActionsExcluded]=""
-				[luReorderShortcutsHidden]=""
 				(luReorder)="onReorder($event)"
 			>
 				@for (item of column.items; track item) {
 					<li class="reorderDemo-list-item" cdkDrag [luReorderItemLabel]="item">
-						<button type="button" lu-reorder-handle class="button mod-ghost mod-onlyIcon mod-S">
-							<lu-icon icon="dotsDrag" />
-						</button>
+						<lu-reorder-handle />
 						{{ item }}
 					</li>
 				}
@@ -95,7 +83,7 @@ import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refus
 ```js
 import { signal } from '@angular/core';
 import { ReorderEvent } from '@lucca-front/ng/reorder';
-import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEvent, reorder, shortcutsHiddenValue, actionsExcludedValue, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
+import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEvent, reorder, actionsExcludedValue, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
 ```
 
 ```html
@@ -110,14 +98,11 @@ import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEve
 				luReorder
 				[luReorderLabel]="column.label"
 				[luReorderActionsExcluded]=""
-				[luReorderShortcutsHidden]=""
 				(luReorder)="onReorder($event)"
 			>
 				@for (item of column.items; track item) {
 					<li class="reorderDemo-list-item" cdkDrag [luReorderItemLabel]="item">
-						<button type="button" lu-reorder-handle class="button mod-ghost mod-onlyIcon mod-S">
-							<lu-icon icon="dotsDrag" />
-						</button>
+						<lu-reorder-handle />
 						{{ item }}
 					</li>
 				}
@@ -133,9 +118,8 @@ import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEve
 ```js
 import { CdkDrag, CdkDropList, DropListOrientation, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LOCALE_ID, signal } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { ReorderDirective, ReorderEvent, ReorderFlow, ReorderHandleComponent, ReorderItemLabelDirective, ReorderMenuEntry, ReorderOptionalAction } from '@lucca-front/ng/reorder';
-import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent, shortcutsHiddenArgType, shortcutsHiddenValue } from './connected-lists.helpers';
+import { ReorderDirective, ReorderEvent, ReorderFlow, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
+import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent } from './connected-lists.helpers';
 ```
 
 ```html
@@ -145,14 +129,11 @@ import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent, sh
 	cdkDropListOrientation="horizontal"
 	luReorder
 	[luReorderActionsExcluded]=""
-	[luReorderShortcutsHidden]=""
 	(luReorder)="onReorder($event)"
 >
 	@for (item of items; track item) {
 		<li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item">
-			<button type="button" lu-reorder-handle class="button mod-ghost mod-onlyIcon mod-S">
-				<lu-icon icon="dotsDrag" />
-			</button>
+			<lu-reorder-handle />
 			{{ item }}
 		</li>
 	}

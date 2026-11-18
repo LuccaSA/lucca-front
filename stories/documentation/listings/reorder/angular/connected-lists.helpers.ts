@@ -1,16 +1,6 @@
 import { CdkDrag, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { LOCALE_ID } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
-import {
-	LuReorderTranslations,
-	luReorderTranslations,
-	ReorderDirective,
-	ReorderEvent,
-	ReorderHandleComponent,
-	ReorderItemLabelDirective,
-	ReorderMenuEntry,
-	ReorderOptionalAction,
-} from '@lucca-front/ng/reorder';
+import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
 import { applicationConfig, ArgTypes, moduleMetadata } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { intlArgType } from '@/helpers/stories';
@@ -21,7 +11,6 @@ import { intlArgType } from '@/helpers/stories';
 
 export interface ReorderConnectedListsStory {
 	luReorderActionsExcluded: ReorderOptionalAction[];
-	luReorderShortcutsHidden: ReorderMenuEntry[];
 	luReorderIntl?: Partial<LuReorderTranslations>;
 	luReorder?: (event: ReorderEvent<string[]>) => void;
 }
@@ -118,27 +107,6 @@ export function actionsExcludedValue(excluded: ReorderOptionalAction[] = []): st
 }
 
 /**
- * `luReorderShortcutsHidden` control: the menu entries of a single list, or of connected lists
- */
-export function shortcutsHiddenArgType(entries: ReorderMenuEntry[]): ArgTypes[string] {
-	return {
-		control: 'check',
-		options: entries,
-		description: 'Lignes du menu dont le raccourci clavier n’est pas affiché (`true` pour toutes). Les raccourcis restent actifs. Sans effet sur une action retirée par `luReorderActionsExcluded`.',
-		table: { category: 'inputs', type: { summary: 'boolean | ReorderMenuEntry[]' }, defaultValue: { summary: '[]' } },
-	};
-}
-
-/**
- * Value of `luReorderShortcutsHidden` in the template, or `null` when no entry is hidden (its default value).
- * The entries of the actions excluded by `luReorderActionsExcluded` are ignored, as they are not in the menu
- */
-export function shortcutsHiddenValue(entries: ReorderMenuEntry[] = [], excluded: ReorderOptionalAction[] = []): string | null {
-	const shown = entries.filter((entry) => !excluded.includes(entry as ReorderOptionalAction));
-	return shown.length ? `[${shown.map((entry) => `'${entry}'`).join(', ')}]` : null;
-}
-
-/**
  * Displays a reorder event in `pr-story-model-display`: its lists are `CdkDropList` instances, replaced by their name
  * when the event comes from connected lists, and left out when the item stays in its list
  */
@@ -152,14 +120,13 @@ export function formatReorderEvent(event: ReorderEvent<string[]>, listName?: (da
 
 export const CONNECTED_LISTS_DECORATORS = [
 	moduleMetadata({
-		imports: [CdkDropListGroup, CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective, ReorderHandleComponent, IconComponent, StoryModelDisplayComponent],
+		imports: [CdkDropListGroup, CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective, ReorderHandleComponent, StoryModelDisplayComponent],
 	}),
 	applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }] }),
 ];
 
 export const CONNECTED_LISTS_ARG_TYPES: ArgTypes<ReorderConnectedListsStory> = {
 	luReorderActionsExcluded: ACTIONS_EXCLUDED_ARG_TYPE,
-	luReorderShortcutsHidden: shortcutsHiddenArgType(['previous', 'next', 'first', 'last', 'lists']),
 	luReorderIntl: { ...intlArgType(luReorderTranslations, 'LuReorderTranslations'), name: 'luReorderIntl' },
 	luReorder: {
 		description: 'Événement déclenché lorsqu’un élément est déplacé, dans sa liste ou vers une autre.',

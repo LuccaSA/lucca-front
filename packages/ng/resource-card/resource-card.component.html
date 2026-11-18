@@ -3,9 +3,7 @@
 		@let hasHandle = wrapperRef ? !wrapperRef.grid() && wrapperRef.draggable() : !grid() && draggable();
 		@if (hasHandle) {
 			@if (reorder) {
-				<button type="button" lu-reorder-handle class="button mod-ghost mod-S mod-onlyIcon resourceCard-layout-before-button">
-					<lu-icon icon="dotsDrag" class="resourceCard-layout-before-button-icon" />
-				</button>
+				<lu-reorder-handle class="resourceCard-layout-before-button" />
 			} @else {
 				<span luButton="ghost" size="S" class="cdk-drag-handle resourceCard-layout-before-button" cdkDragHandle>
 					<lu-icon icon="dotsDrag" class="resourceCard-layout-before-button-icon" />

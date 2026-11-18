@@ -1,30 +1,23 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Dir } from '@angular/cdk/bidi';
-import { CdkDrag, CdkDropList, CdkDropListGroup, DropListOrientation, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragHandle, CdkDropList, CdkDropListGroup, DropListOrientation, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { vi } from 'vitest';
 import { ReorderHandleComponent } from './reorder-handle.component';
 import { ReorderItemLabelDirective } from './reorder-item-label.directive';
 import { ReorderDirective } from './reorder.directive';
-import { ReorderEvent, ReorderFlow, ReorderMenuEntry, ReorderOptionalAction } from './reorder.type';
+import { ReorderEvent, ReorderFlow, ReorderOptionalAction } from './reorder.type';
 
 @Component({
 	selector: 'lu-reorder-handle-test',
 	imports: [CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective, ReorderHandleComponent],
 	template: `
-		<ul
-			cdkDropList
-			luReorder
-			[cdkDropListOrientation]="orientation()"
-			[luReorderFlow]="flow()"
-			[luReorderShortcutsHidden]="shortcutsHidden()"
-			[luReorderActionsExcluded]="actionsExcluded()"
-			(luReorder)="onReorder($event)"
-		>
+		<ul cdkDropList luReorder [cdkDropListOrientation]="orientation()" [luReorderFlow]="flow()" [luReorderActionsExcluded]="actionsExcluded()" (luReorder)="onReorder($event)">
 			@for (item of items(); track item) {
 				<li cdkDrag [luReorderItemLabel]="item">
-					<button type="button" lu-reorder-handle class="button">handle</button>
+					<lu-reorder-handle />
 					{{ item }}
 				</li>
 			}
@@ -35,7 +28,6 @@ import { ReorderEvent, ReorderFlow, ReorderMenuEntry, ReorderOptionalAction } fr
 class HostComponent {
 	readonly orientation = input<DropListOrientation>('vertical');
 	readonly flow = input<ReorderFlow>('row');
-	readonly shortcutsHidden = input<boolean | readonly ReorderMenuEntry[]>([]);
 	readonly actionsExcluded = input<readonly ReorderOptionalAction[]>([]);
 	readonly items = signal(['A', 'B', 'C']);
 	readonly events: ReorderEvent[] = [];
@@ -64,7 +56,7 @@ class HostComponent {
 					(luReorder)="onReorder($event)"
 				>
 					@for (item of column.items; track item) {
-						<li cdkDrag [luReorderItemLabel]="item"><button type="button" lu-reorder-handle class="button">handle</button></li>
+						<li cdkDrag [luReorderItemLabel]="item"><lu-reorder-handle /></li>
 					}
 				</ul>
 			}
@@ -98,7 +90,7 @@ class KanbanHostComponent {
 		<div dir="rtl">
 			<ul cdkDropList cdkDropListOrientation="horizontal" luReorder (luReorder)="onReorder($event)">
 				@for (item of items(); track item) {
-					<li cdkDrag [luReorderItemLabel]="item"><button type="button" lu-reorder-handle class="button">handle</button></li>
+					<li cdkDrag [luReorderItemLabel]="item"><lu-reorder-handle /></li>
 				}
 			</ul>
 		</div>
@@ -120,8 +112,8 @@ class RtlHostComponent {
 	imports: [CdkDropList, CdkDrag, ReorderDirective, ReorderHandleComponent],
 	template: `
 		<ul cdkDropList luReorder>
-			<li cdkDrag><button type="button" lu-reorder-handle class="button">handle</button></li>
-			<li cdkDrag><button type="button" lu-reorder-handle class="button">handle</button></li>
+			<li cdkDrag><lu-reorder-handle /></li>
+			<li cdkDrag><lu-reorder-handle /></li>
 		</ul>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -133,7 +125,7 @@ class WithoutItemLabelHostComponent {}
 	imports: [CdkDropList, CdkDrag, ReorderHandleComponent],
 	template: `
 		<ul cdkDropList>
-			<li cdkDrag><button type="button" lu-reorder-handle class="button">handle</button></li>
+			<li cdkDrag><lu-reorder-handle /></li>
 		</ul>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -141,7 +133,7 @@ class WithoutItemLabelHostComponent {}
 class WithoutReorderHostComponent {}
 
 function getHandles(fixture: ComponentFixture<unknown>): HTMLButtonElement[] {
-	return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('[lu-reorder-handle]'));
+	return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('lu-reorder-handle button'));
 }
 
 function pressKey(element: HTMLElement, key: string, init: KeyboardEventInit = { altKey: true }): void {
@@ -305,38 +297,6 @@ describe(ReorderHandleComponent.name, () => {
 				expect(listener).not.toHaveBeenCalled();
 				document.removeEventListener('keydown', listener);
 			});
-		});
-
-		it('should hide the shortcuts of the given menu entries only', async () => {
-			// Arrange
-			fixture.componentRef.setInput('shortcutsHidden', ['first', 'last']);
-			fixture.detectChanges();
-
-			// Act
-			getHandles(fixture)[1].click();
-			fixture.detectChanges();
-
-			// Assert
-			await vi.waitFor(() => expect(getMenuActions().length).toBe(4));
-			expect(getMenuActions().map((action) => action.querySelector('.kbdWrapper') !== null)).toEqual([true, true, false, false]);
-		});
-
-		it('should hide every shortcut with true, while keeping them working and declared', async () => {
-			// Arrange
-			fixture.componentRef.setInput('shortcutsHidden', true);
-			fixture.detectChanges();
-			const [, handle] = getHandles(fixture);
-
-			// Act
-			handle.click();
-			fixture.detectChanges();
-			await vi.waitFor(() => expect(getMenuActions().length).toBe(4));
-
-			// Assert
-			expect(document.querySelectorAll('.dropdown-list-option-action .kbdWrapper').length).toBe(0);
-			expect(handle.getAttribute('aria-keyshortcuts')).toContain('Alt+ArrowDown');
-			pressKey(getMenuActions()[0], 'ArrowDown');
-			expect(host.items()).toEqual(['A', 'C', 'B']);
 		});
 
 		it('should move its item to the start with Alt + Home and Alt + PageUp', () => {
@@ -524,7 +484,7 @@ describe(ReorderHandleComponent.name, () => {
 			host.items.set(['A']);
 			fixture.detectChanges();
 			const [handle] = getHandles(fixture);
-			expect(handle.getAttribute('aria-disabled')).toBe('true');
+			expect(handle.disabled).toBe(true);
 
 			// Act
 			handle.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
@@ -667,7 +627,7 @@ describe(ReorderHandleComponent.name, () => {
 			expect(getItems()).toEqual([['B'], ['A', 'C'], ['D']]);
 		});
 
-		it('should be disabled, yet focusable, when its item is alone and no other list accepts it', () => {
+		it('should be disabled when its item is alone and no other list accepts it', () => {
 			// Arrange
 			fixture.componentInstance.columns.update(([todo, doing, done]) => [{ ...todo, closed: true }, { ...doing, closed: true }, done]);
 
@@ -676,9 +636,8 @@ describe(ReorderHandleComponent.name, () => {
 
 			// Assert
 			const handles = getHandles(fixture);
-			expect(handles[3].getAttribute('aria-disabled')).toBe('true');
-			expect(handles[3].disabled).toBe(false);
-			expect(handles.slice(0, 3).map((handle) => handle.hasAttribute('aria-disabled'))).toEqual([false, false, false]);
+			expect(handles.map((handle) => handle.disabled)).toEqual([false, false, false, true]);
+			expect(fixture.debugElement.queryAll(By.directive(CdkDragHandle)).map((handle) => handle.injector.get(CdkDragHandle).disabled)).toEqual([false, false, false, true]);
 		});
 
 		it('should be disabled when its item cannot be dragged', () => {
@@ -689,7 +648,7 @@ describe(ReorderHandleComponent.name, () => {
 			fixture.detectChanges();
 
 			// Assert
-			expect(getHandles(fixture).map((handle) => handle.getAttribute('aria-disabled'))).toEqual([null, null, 'true', null]);
+			expect(getHandles(fixture).map((handle) => handle.disabled)).toEqual([false, false, true, false]);
 		});
 
 		it('should neither move an item that cannot be dragged nor open its menu', async () => {

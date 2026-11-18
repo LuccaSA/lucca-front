@@ -1,5 +1,22 @@
-<ng-content />
-<span class="pr-u-mask">{{ label() }}</span>
+<button
+	#button
+	type="button"
+	luButton="ghost"
+	cdkDragHandle
+	[cdkDragHandleDisabled]="cannotMove()"
+	[size]="size()"
+	[luPopover2]="menuTemplate"
+	luPopoverPosition="below"
+	[customPositions]="menuPositions"
+	luPopoverNoCloseButton
+	[luPopoverDisabled]="!reorderAvailable"
+	[attr.aria-keyshortcuts]="keyShortcuts()"
+	[disabled]="cannotMove()"
+	(keydown)="onKeydown($event)"
+	(pointerdown)="updateMenuAvailability()"
+>
+	<lu-icon icon="dotsDrag" [alt]="label()" />
+</button>
 
 <ng-template #menuTemplate>
 	@if (menu(); as state) {
@@ -9,9 +26,7 @@
 					<lu-dropdown-item>
 						<button type="button" lu-dropdown-action (click)="moveTo(state.index - 1)">
 							{{ state.labels.previous }}
-							@if (shortcutDisplayed("previous")) {
-								<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.shortcuts.previous }" />
-							}
+							<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.shortcuts.previous }" />
 						</button>
 					</lu-dropdown-item>
 				}
@@ -19,9 +34,7 @@
 					<lu-dropdown-item>
 						<button type="button" lu-dropdown-action (click)="moveTo(state.index + 1)">
 							{{ state.labels.next }}
-							@if (shortcutDisplayed("next")) {
-								<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.shortcuts.next }" />
-							}
+							<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.shortcuts.next }" />
 						</button>
 					</lu-dropdown-item>
 				}
@@ -32,9 +45,7 @@
 					<lu-dropdown-item>
 						<button type="button" lu-dropdown-action (click)="moveTo(0)">
 							{{ state.labels.first }}
-							@if (shortcutDisplayed("first")) {
-								<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.edgeKeys.first }" />
-							}
+							<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.edgeKeys.first }" />
 						</button>
 					</lu-dropdown-item>
 				}
@@ -42,9 +53,7 @@
 					<lu-dropdown-item>
 						<button type="button" lu-dropdown-action (click)="moveTo(state.count - 1)">
 							{{ state.labels.last }}
-							@if (shortcutDisplayed("last")) {
-								<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.edgeKeys.last }" />
-							}
+							<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: state.edgeKeys.last }" />
 						</button>
 					</lu-dropdown-item>
 				}
@@ -56,7 +65,7 @@
 						<lu-dropdown-item>
 							<button type="button" lu-dropdown-action (click)="moveTo(target.index, target.list)">
 								{{ target.label }}
-								@if (target.shortcut && shortcutDisplayed("lists")) {
+								@if (target.shortcut) {
 									<ng-container *ngTemplateOutlet="shortcut; context: { $implicit: target.shortcut }" />
 								}
 							</button>

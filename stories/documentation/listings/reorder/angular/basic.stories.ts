@@ -1,24 +1,13 @@
 import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LOCALE_ID, signal } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
-import {
-	LuReorderTranslations,
-	luReorderTranslations,
-	ReorderDirective,
-	ReorderEvent,
-	ReorderHandleComponent,
-	ReorderItemLabelDirective,
-	ReorderMenuEntry,
-	ReorderOptionalAction,
-} from '@lucca-front/ng/reorder';
+import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent, shortcutsHiddenArgType, shortcutsHiddenValue } from './connected-lists.helpers';
+import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent } from './connected-lists.helpers';
 import { intlArgType } from '@/helpers/stories';
 
 interface ReorderBasicStory {
 	luReorderActionsExcluded: ReorderOptionalAction[];
-	luReorderShortcutsHidden: ReorderMenuEntry[];
 	luReorderIntl?: Partial<LuReorderTranslations>;
 	luReorder?: (event: ReorderEvent<string[]>) => void;
 }
@@ -27,13 +16,12 @@ export default {
 	title: 'Documentation/Listings/Reorder/Angular/Basic',
 	decorators: [
 		moduleMetadata({
-			imports: [CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective, ReorderHandleComponent, IconComponent, StoryModelDisplayComponent],
+			imports: [CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective, ReorderHandleComponent, StoryModelDisplayComponent],
 		}),
 		applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }] }),
 	],
 	argTypes: {
 		luReorderActionsExcluded: ACTIONS_EXCLUDED_ARG_TYPE,
-		luReorderShortcutsHidden: shortcutsHiddenArgType(['previous', 'next', 'first', 'last']),
 		luReorderIntl: { ...intlArgType(luReorderTranslations, 'LuReorderTranslations'), name: 'luReorderIntl' },
 		luReorder: {
 			description: 'Événement déclenché lorsqu’un élément est déplacé, à la souris, depuis le menu de sa poignée ou au clavier.',
@@ -42,9 +30,8 @@ export default {
 			table: { category: 'outputs', type: { summary: 'ReorderEvent' } },
 		},
 	},
-	render: ({ luReorder, luReorderActionsExcluded, luReorderShortcutsHidden }: ReorderBasicStory) => {
+	render: ({ luReorder, luReorderActionsExcluded }: ReorderBasicStory) => {
 		const excluded = actionsExcludedValue(luReorderActionsExcluded);
-		const hidden = shortcutsHiddenValue(luReorderShortcutsHidden, luReorderActionsExcluded);
 		const items = ['Carotte', 'Poireau', 'Navet', 'Courgette'];
 
 		const lastEvent = signal('');
@@ -59,12 +46,10 @@ export default {
 					luReorder?.(event);
 				},
 			},
-			template: `<ul class="reorderDemo" cdkDropList luReorder${excluded ? ` [luReorderActionsExcluded]="${excluded}"` : ''}${hidden ? ` [luReorderShortcutsHidden]="${hidden}"` : ''} (luReorder)="onReorder($event)">
+			template: `<ul class="reorderDemo" cdkDropList luReorder${excluded ? ` [luReorderActionsExcluded]="${excluded}"` : ''} (luReorder)="onReorder($event)">
 	@for (item of items; track item) {
 		<li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item">
-			<button type="button" lu-reorder-handle class="button mod-ghost mod-onlyIcon mod-S">
-				<lu-icon icon="dotsDrag" />
-			</button>
+			<lu-reorder-handle />
 			{{ item }}
 		</li>
 	}
@@ -102,6 +87,5 @@ export default {
 export const Basic: StoryObj<ReorderBasicStory> = {
 	args: {
 		luReorderActionsExcluded: [],
-		luReorderShortcutsHidden: [],
 	},
 };

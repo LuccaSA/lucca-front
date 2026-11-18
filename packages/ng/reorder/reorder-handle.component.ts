@@ -1,16 +1,18 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, ElementRef, inject, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, DestroyRef, DoCheck, ElementRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { KbdComponent } from '@lucca-front/ng/kbd';
 import { DropdownActionComponent, DropdownDividerComponent, DropdownItemComponent, DropdownMenuComponent } from '@lucca-front/ng/dropdown';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ReorderItemLabelDirective } from './reorder-item-label.directive';
 import { ReorderDirective } from './reorder.directive';
 import { ReorderRegistry } from './reorder.registry';
-import { ReorderMenuEntry } from './reorder.type';
+import { ReorderHandleSize } from './reorder.type';
 import { LU_REORDER_TRANSLATIONS } from './reorder.translate';
 
 const intlParams = new IntlParamsPipe();
@@ -73,25 +75,34 @@ interface ReorderMenu {
 	crossKeys: ArrowKey[];
 }
 
+/**
+ * Handle of a `cdkDrag` item: dragging it moves the item, and its button opens a menu of moves, with keyboard shortcuts.
+ * The button lives inside the component, so it can be a `luButton`.
+ */
 @Component({
-	selector: '[lu-reorder-handle]',
+	selector: 'lu-reorder-handle',
 	templateUrl: './reorder-handle.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [DropdownMenuComponent, DropdownItemComponent, DropdownActionComponent, DropdownDividerComponent, KbdComponent, NgTemplateOutlet],
-	hostDirectives: [CdkDragHandle, PopoverDirective],
-	host: {
-		type: 'button',
-		'[attr.aria-keyshortcuts]': 'keyShortcuts()',
-		'[attr.aria-disabled]': 'cannotMove() ? "true" : null',
-		'(keydown)': 'onKeydown($event)',
-		'(pointerdown)': 'updateMenuAvailability()',
-	},
+	imports: [
+		ButtonComponent,
+		CdkDragHandle,
+		IconComponent,
+		PopoverDirective,
+		DropdownMenuComponent,
+		DropdownItemComponent,
+		DropdownActionComponent,
+		DropdownDividerComponent,
+		KbdComponent,
+		NgTemplateOutlet,
+	],
 })
-export class ReorderHandleComponent {
-	readonly #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+export class ReorderHandleComponent implements DoCheck {
+	private readonly button = viewChild.required<string, ElementRef<HTMLButtonElement>>('button', { read: ElementRef });
 
-	readonly #popover = inject(PopoverDirective);
+	private readonly popover = viewChild.required(PopoverDirective);
+
+	readonly #cdr = inject(ChangeDetectorRef);
 
 	readonly #drag = inject(CdkDrag);
 
@@ -103,7 +114,17 @@ export class ReorderHandleComponent {
 
 	readonly #defaultIntl = getIntl(LU_REORDER_TRANSLATIONS);
 
-	readonly menuTemplate = viewChild.required<TemplateRef<unknown>>('menuTemplate');
+	/**
+	 * Size of the handle button
+	 */
+	readonly size = input<ReorderHandleSize>('S');
+
+	readonly menuPositions = menuPositions;
+
+	/**
+	 * Without `luReorder` on its list, the handle can only be dragged
+	 */
+	readonly reorderAvailable = !!this.#reorder;
 
 	readonly intl = computed(() => this.#reorder?.luReorderIntl() ?? this.#defaultIntl);
 
@@ -136,7 +157,7 @@ export class ReorderHandleComponent {
 	}
 
 	/**
-	 * Whether its item cannot be moved anywhere, even when dragging it: the handle stays focusable, but is announced and displayed as disabled.
+	 * Whether its item cannot be moved anywhere, even when dragging it: its button is disabled.
 	 * Not a computed signal: the items and the connected lists are not signals
 	 */
 	cannotMove(): boolean {
@@ -150,15 +171,8 @@ export class ReorderHandleComponent {
 	/**
 	 * Recomputed each time the menu opens, as the item position changes with every move
 	 */
-	/**
-	 * Whether the shortcut of a menu entry is displayed
-	 */
-	shortcutDisplayed(entry: ReorderMenuEntry): boolean {
-		return !this.#reorder?.luReorderShortcutsHidden().includes(entry);
-	}
-
 	readonly menu = computed<ReorderMenu | null>(() => {
-		if (!this.#popover.opened()) {
+		if (!this.popover().opened()) {
 			return null;
 		}
 		return this.#getMenu();
@@ -174,20 +188,22 @@ export class ReorderHandleComponent {
 		});
 
 		if (!this.#reorder) {
-			this.#popover.luPopoverDisabled.set(true);
 			console.warn('[LuReorder] `lu-reorder-handle` is used in a cdkDropList without `luReorder`: its move menu and keyboard shortcuts are disabled.');
 		} else if (!this.#itemLabel) {
 			this.#reorder.warnMissingItemLabel();
 		}
+	}
 
-		this.#popover.luPopoverNoCloseButton.set(true);
-		this.#popover.luPopoverPositionRef.set('below');
-		this.#popover.customPositions.set(menuPositions);
-		effect(() => this.#popover.content.set(this.menuTemplate()));
+	/**
+	 * The button state (`aria-keyshortcuts`, `disabled`) depends on the list orientation and items, which are not signals:
+	 * it is refreshed with its parent, as host bindings would be
+	 */
+	ngDoCheck(): void {
+		this.#cdr.markForCheck();
 	}
 
 	focus(): void {
-		this.#elementRef.nativeElement.focus();
+		this.button().nativeElement.focus();
 	}
 
 	/**
@@ -207,7 +223,7 @@ export class ReorderHandleComponent {
 	 */
 	updateMenuAvailability(): void {
 		const menu = this.#getMenu(false);
-		this.#popover.luPopoverDisabled.set(!menu || !(menu.entries.previous || menu.entries.next || menu.lists.length));
+		this.popover().luPopoverDisabled.set(!menu || !(menu.entries.previous || menu.entries.next || menu.lists.length));
 	}
 
 	onKeydown(event: KeyboardEvent): void {
@@ -221,7 +237,7 @@ export class ReorderHandleComponent {
 	 */
 	onMenuKeydown(event: KeyboardEvent): void {
 		if (this.#handleShortcut(event)) {
-			this.#popover.close();
+			this.popover().close();
 		}
 	}
 

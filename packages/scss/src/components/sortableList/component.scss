@@ -70,10 +70,15 @@
 
 			color: var(--palettes-neutral-600);
 			font-size: var(--components-sortableList-handler-size);
-			cursor: move;
+			cursor: var(--components-sortableList-handler-cursor);
 			inline-size: auto;
 			border-radius: var(--pr-t-border-radius-small);
 			align-self: center;
+
+			// lu-reorder-handle whose item cannot be moved
+			&:has(> .button:disabled) {
+				--components-sortableList-handler-cursor: default;
+			}
 
 			&:not(:has(.lucca-icon)) {
 				&::before {
