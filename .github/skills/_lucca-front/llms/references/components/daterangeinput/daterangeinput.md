@@ -45,6 +45,7 @@ import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 | `calendarModeInput` | `calendarMode` | `CalendarMode \| null` | `null` | — | — | Vue affichée par le calendrier à l’ouverture (jour, mois ou année), indépendamment du mode de sélection. Vaut `mode` par… |
 | `placeholder` | `placeholder` | `string` | — | — | — | — |
 | `widthAuto` | `widthAuto` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `defaultValue` | `defaultValue` | `unknown` | `null` | — | — | — |
 | `shortcuts` | `shortcuts` | `readonly CalendarShortcut[]` | — | — | — | — |
 | `autocomplete` | `autocomplete` | `AutoFill` | `'off'` | — | — | — |
 
