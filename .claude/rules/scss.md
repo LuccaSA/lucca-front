@@ -1,6 +1,6 @@
 ---
-name: lucca-front-scss
-description: 'Règles d’écriture du SCSS Lucca Front : nommage type BEM à plat, modifiers/états, layers, tokens, propriétés logiques, structure de fichiers et enregistrement highlight-prisme. À utiliser pour écrire ou modifier du SCSS dans packages/scss, packages/ng ou les stories.'
+paths:
+  - "**/*.scss"
 ---
 
 Ces règles garantissent la maintenabilité du design Lucca. Source de vérité : [Guidelines dev UI](https://prisme.lucca.io/94310e217/p/929c63-guidelines-dev-ui) sur Prisme. Le formatage est vérifié par Stylelint (`@lucca/stylelint-config-prisme`) via `npm run lint:style`.

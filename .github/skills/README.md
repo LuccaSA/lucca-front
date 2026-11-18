@@ -29,7 +29,6 @@ Install them when you need them, and remove them once the migration is done.
 
 ## Not for consumer projects
 
-- [`lucca-front-scss`](lucca-front-scss/SKILL.md) — SCSS writing rules for contributors to this repo.
 - `_lucca-front/` — generated documentation, shipped in the npm package. Never install it with APM. See [scripts/generate-skills](../../scripts/generate-skills/README.md).
 
 ## Questions or ideas

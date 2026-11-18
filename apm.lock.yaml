@@ -1,3 +1,27 @@
 lockfile_version: '1'
 dependencies: []
-deployments: []
+deployments:
+- kind: project-relative
+  target: claude
+  value: .claude/rules/scss.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b69b0fa1cd3ecd28dbd5c0b54313c925e6c4e15b097d0481d1d065e287d58eb9
+- kind: project-relative
+  target: copilot
+  value: .github/instructions/scss.instructions.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:f2e4f1daf0d679f5819229ed1d02fcb3bb32da3de23d16909fca6e4449e2e2a4
+local_deployed_files:
+- .claude/rules/scss.md
+- .github/instructions/scss.instructions.md
+local_deployed_file_hashes:
+  .claude/rules/scss.md: sha256:b69b0fa1cd3ecd28dbd5c0b54313c925e6c4e15b097d0481d1d065e287d58eb9
+  .github/instructions/scss.instructions.md: sha256:f2e4f1daf0d679f5819229ed1d02fcb3bb32da3de23d16909fca6e4449e2e2a4

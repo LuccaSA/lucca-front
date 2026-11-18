@@ -53,7 +53,7 @@ Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss �
 
 ### Règles CSS / SCSS
 
-**Avant d'écrire ou de modifier du SCSS, lire le skill `lucca-front-scss` (`.github/skills/lucca-front-scss/SKILL.md`)** — il contient l'ensemble des règles de nommage, la structure de fichiers et les exemples. Invariants non négociables :
+Les règles complètes (nommage, structure de fichiers, exemples) vivent dans `.apm/instructions/scss.instructions.md` : Claude Code les charge dès qu'il touche un `.scss` (via `.claude/rules/scss.md`), la relecture Copilot les applique aux `.scss` d'une PR (via `.github/instructions/`). Invariants non négociables :
 
 - Nommage BEM à plat : `.composant-descendant` (camelCase pour les noms à plusieurs mots), pas d'ID, pas de sélecteur d'élément HTML, pas d'imbrication de nom de classe via `&-`.
 - `.mod-*` / `.is-*` / `.palette-*` sont toujours rattachés à une classe de composant, jamais isolés.
@@ -99,7 +99,8 @@ Attentes détaillées côté relecture : [contributing.md](contributing.md#pull-
 - `docs/*.md` — documents de conception internes de certains composants.
 - **Où ranger un skill** — selon qui s'en sert :
   - `.claude/skills/` — outillage de l'équipe Prisme dans Claude Code (recette, stories, tests, release). C'est le seul dossier que Claude Code charge.
-  - `.github/skills/` — ce qui sert hors de l'équipe ou hors de Claude Code : les skills des projets consommateurs, qu'ils installent avec APM, et les règles du repo que la relecture Copilot doit appliquer (elle lit ce dossier, pas `.claude/skills/`). Une règle dont Claude a aussi besoin vit ici, et est exposée à Claude par un lien symbolique depuis `.claude/skills/` (ex. `lucca-front-scss`) — pas de copie.
+  - `.github/skills/` — les skills des projets consommateurs, qu'ils installent avec APM depuis ce chemin.
+- **Où ranger une règle du repo** (convention de code que Claude doit suivre en écrivant et que la relecture Copilot doit appliquer) : `.apm/instructions/<sujet>.instructions.md`, avec un `applyTo` qui borne les fichiers visés. `apm install` la déploie dans `.claude/rules/` et `.github/instructions/` ; ces deux copies sont commitées et ne s'éditent pas à la main. Après toute modification sous `.apm/`, relancer `apm install` (CLI : `brew install apm`) et commiter le diff ; le job CI `APM audit` échoue sinon. Le repo étant public, `apm.yml` ne déclare aucune dépendance vers un dépôt privé.
 - `.github/skills/lucca-front/` — skill agent du Design System, écrite à la main, que les projets consommateurs installent avec APM : un pointeur vers la documentation livrée dans `@lucca-front/ng` (`node_modules/@lucca-front/ng/llms.txt`). Cette documentation est générée depuis `scripts/generate-skills/` dans `.github/skills/_lucca-front/llms/`, et régénérée par le hook pre-commit à chaque commit qui touche le code (`npm run skills:update`) (avec les métadonnées du générateur dans `.github/skills/_lucca-front/`), puis copiée dans le package par `scripts/llms-skill`. Les autres dossiers de `.github/skills/` sont écrits à la main.
 - La référence du Design System vit sur zeroheight (Prisme).
 - **Scripts de skills** — tout script embarqué ou appelé par un skill est écrit en **Node** (JS/TS), en **C#/.NET** ou en **shell** — jamais en Python ou autre langage, pour garder une cohérence globale entre les dépôts.
