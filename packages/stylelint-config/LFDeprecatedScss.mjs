@@ -53,4 +53,11 @@ export default [
 		versionDeprecated: '22.2.0',
 		actions: `\`$orchid\` => \`$grape\``,
 	},
+	{
+		// Mass selection row of the index table, removed without replacement
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1a140ec515e5a903e06e55106a7eb4a536279bd1/packages/scss/src/components/indexTable/mods.scss#L349.
+		objectPattern: /(?<![\w-])massSelection(?![\w-])/,
+		versionDeprecated: '22.2.0',
+		actions: `Retirer l’appel au mixin \`massSelection\` de l’Index table, sans remplacement.`,
+	},
 ];
