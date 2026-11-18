@@ -11,8 +11,6 @@
       "input": "./styles",
       "output": "src"
     },
-    "material/style/**/*.scss",
-    "formly/src/**/*.scss",
-    "formly/style/**/*.scss"
+    "material/style/**/*.scss"
   ]
 }
