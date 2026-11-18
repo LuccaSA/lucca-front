@@ -1,0 +1,129 @@
+import { CdkDrag, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { LOCALE_ID } from '@angular/core';
+import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
+import { applicationConfig, ArgTypes, moduleMetadata } from '@storybook/angular-vite';
+import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { intlArgType } from '@/helpers/stories';
+
+/**
+ * Shared by the connected lists stories, kept out of a `.stories.ts` file where every named export would be a story
+ */
+
+export interface ReorderConnectedListsStory {
+	luReorderEdgesExcluded: boolean;
+	luReorderIntl?: Partial<LuReorderTranslations>;
+	luReorder?: (event: ReorderEvent<string[]>) => void;
+}
+
+export const STYLES = `
+	.reorderDemo {
+		display: grid;
+		grid-auto-columns: minmax(0, 1fr);
+		grid-auto-flow: column;
+		gap: var(--pr-t-spacings-200);
+	}
+
+	.reorderDemo-column {
+		display: flex;
+		flex-direction: column;
+		gap: var(--pr-t-spacings-100);
+	}
+
+	.reorderDemo-column-title {
+		display: flex;
+		align-items: center;
+		gap: var(--pr-t-spacings-100);
+		margin: 0;
+		padding-inline: var(--pr-t-spacings-100);
+
+		&.is-disabled {
+			color: var(--pr-t-color-text-disabled);
+		}
+	}
+
+	.reorderDemo-list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--pr-t-spacings-100);
+		flex-grow: 1;
+		min-block-size: 3rem;
+		margin: 0;
+		padding: var(--pr-t-spacings-100);
+		list-style: none;
+		background-color: var(--pr-t-elevation-surface-default);
+		border-radius: var(--pr-t-border-radius-default);
+
+		&.is-disabled {
+			background-color: var(--pr-t-color-input-background-disabled);
+		}
+	}
+
+	.reorderDemo-list-item {
+		display: flex;
+		align-items: center;
+		gap: var(--pr-t-spacings-100);
+		padding: var(--pr-t-spacings-50);
+		border-radius: var(--pr-t-border-radius-default);
+
+		// The drag preview and placeholder keep their global CDK styles
+		&:not(.cdk-drag-preview, .cdk-drag-placeholder) {
+			background-color: var(--pr-t-elevation-surface-raised);
+		}
+	}`;
+
+/**
+ * A closed column refuses every item, from its menu as when dragging it
+ */
+export const refuseAll = (): boolean => false;
+
+export const acceptAll = (): boolean => true;
+
+/**
+ * Moves the item in its list or to another one, as the CDK documentation does
+ */
+export function reorder(event: ReorderEvent<string[]>): void {
+	if (event.previousContainer === event.container) {
+		moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+	} else {
+		transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+	}
+}
+
+/**
+ * `luReorderEdgesExcluded` control
+ */
+export const EDGES_EXCLUDED_ARG_TYPE: ArgTypes[string] = {
+	control: 'boolean',
+	description: 'Retire des poignées, du menu comme du clavier, les déplacements au début et à la fin de la liste.',
+	table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+};
+
+/**
+ * Displays a reorder event in `pr-story-model-display`: its lists are `CdkDropList` instances, replaced by their name
+ * when the event comes from connected lists, and left out when the item stays in its list
+ */
+export function formatReorderEvent(event: ReorderEvent<string[]>, listName?: (data: string[]) => string): string {
+	const { previousIndex, currentIndex } = event;
+	if (!listName) {
+		return JSON.stringify({ previousIndex, currentIndex }, null, 2);
+	}
+	return JSON.stringify({ previousIndex, currentIndex, previousContainer: listName(event.previousContainer.data), container: listName(event.container.data) }, null, 2);
+}
+
+export const CONNECTED_LISTS_DECORATORS = [
+	moduleMetadata({
+		imports: [CdkDropListGroup, CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective, ReorderHandleComponent, StoryModelDisplayComponent],
+	}),
+	applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }] }),
+];
+
+export const CONNECTED_LISTS_ARG_TYPES: ArgTypes<ReorderConnectedListsStory> = {
+	luReorderEdgesExcluded: EDGES_EXCLUDED_ARG_TYPE,
+	luReorderIntl: { ...intlArgType(luReorderTranslations, 'LuReorderTranslations'), name: 'luReorderIntl' },
+	luReorder: {
+		description: 'Événement déclenché lorsqu’un élément est déplacé, dans sa liste ou vers une autre.',
+		action: 'luReorder',
+		control: false,
+		table: { category: 'outputs', type: { summary: 'ReorderEvent' } },
+	},
+};

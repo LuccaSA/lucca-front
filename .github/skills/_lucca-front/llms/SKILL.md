@@ -186,6 +186,7 @@ Bouton → API : `./references/components/button/button.md`, Design : `./referen
 - progress-stepper
 - radiofield
 - readmore
+- reorder
 - resource-card
 - richtextinput
 - scroll

@@ -93,9 +93,10 @@ import { PaginationComponent } from '@lucca-front/ng/pagination';
 Le drag and drop est porté par Angular CDK [drag-drop](https://angular.dev/guide/drag-drop).
 
 ```js
-import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ChangeDetectionStrategy, Component, input, LOCALE_ID } from '@angular/core';
 import { DataTableBodyComponent, DataTableComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
+import { ReorderDirective, ReorderEvent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
 ```
 
 ```html
@@ -106,9 +107,9 @@ import { DataTableBodyComponent, DataTableComponent, DataTableFootComponent, Dat
 			<th luDataTableCell>Cell</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody cdkDropList (cdkDropListDropped)="onDrop($event)">
+	<tbody luDataTableBody cdkDropList luReorder (luReorder)="onReorder($event)">
 		@for (item of listItem; track $index) {
-			<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag>
+			<tr luDataTableRow selectedLabel="selectable" draggable cdkDrag [luReorderItemLabel]="item.header">
 				<th luDataTableCell>{{ item.header }}</th>
 				<td luDataTableCell>{{ item.cell }}</td>
 			</tr>

@@ -39,11 +39,13 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 ### Dnd
 
 ```js
-import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { LOCALE_ID } from '@angular/core';
+import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LinkComponent } from '@lucca-front/ng/link';
+import { ReorderDirective, ReorderEvent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
 import { RESOURCE_CARD_SIZE, ResourceCardButtonComponent, ResourceCardComponent, ResourceCardLinkComponent, ResourceCardWrapperComponent } from '@lucca-front/ng/resource-card';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
@@ -51,70 +53,30 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 ```
 
 ```html
-<lu-resource-card-wrapper cdkDropList draggable>
-	<lu-resource-card cdkDrag>
-		<a href="#" luResourceCardAction>Lorem ipsum dolor</a>
-		<ng-container resourceCardInfos>
-			<lu-status-badge label="Status" />
-			<lu-status-badge label="Status" />
-		</ng-container>
-		<ng-container resourceCardIllustration>
-			<div
-				class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault"
-				style="background-color: var(--palettes-lavender-100)"
-			></div>
-		</ng-container>
-		<ng-container resourceCardAction>
-			<button type="button" luButton>Lorem ipsum</button>
-		</ng-container>
-		<ng-container resourceCardContent>
-			Lorem
-			<a href="#" luLink>ipsum</a>
-			dolor sit amet, consectetur adipiscing elit, sed do.
-		</ng-container>
-	</lu-resource-card>
-	<lu-resource-card cdkDrag>
-		<a href="#" luResourceCardAction>Lorem ipsum dolor</a>
-		<ng-container resourceCardInfos>
-			<lu-status-badge label="Status" />
-			<lu-status-badge label="Status" />
-		</ng-container>
-		<ng-container resourceCardIllustration>
-			<div
-				class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault"
-				style="background-color: var(--palettes-lavender-100)"
-			></div>
-		</ng-container>
-		<ng-container resourceCardAction>
-			<button type="button" luButton>Lorem ipsum</button>
-		</ng-container>
-		<ng-container resourceCardContent>
-			Lorem
-			<a href="#" luLink>ipsum</a>
-			dolor sit amet, consectetur adipiscing elit, sed do.
-		</ng-container>
-	</lu-resource-card>
-	<lu-resource-card cdkDrag>
-		<a href="#" luResourceCardAction>Lorem ipsum dolor</a>
-		<ng-container resourceCardInfos>
-			<lu-status-badge label="Status" />
-			<lu-status-badge label="Status" />
-		</ng-container>
-		<ng-container resourceCardIllustration>
-			<div
-				class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault"
-				style="background-color: var(--palettes-lavender-100)"
-			></div>
-		</ng-container>
-		<ng-container resourceCardAction>
-			<button type="button" luButton>Lorem ipsum</button>
-		</ng-container>
-		<ng-container resourceCardContent>
-			Lorem
-			<a href="#" luLink>ipsum</a>
-			dolor sit amet, consectetur adipiscing elit, sed do.
-		</ng-container>
-	</lu-resource-card>
+<lu-resource-card-wrapper cdkDropList luReorder (luReorder)="onReorder($event)" draggable>
+	@for (card of cards; track card) {
+		<lu-resource-card cdkDrag [luReorderItemLabel]="card">
+			<a href="#" luResourceCardAction>{{ card }}</a>
+			<ng-container resourceCardInfos>
+				<lu-status-badge label="Status" />
+				<lu-status-badge label="Status" />
+			</ng-container>
+			<ng-container resourceCardIllustration>
+				<div
+					class="pr-u-inlineSize100% pr-u-blockSize100% pr-u-borderRadiusDefault"
+					style="background-color: var(--palettes-lavender-100)"
+				></div>
+			</ng-container>
+			<ng-container resourceCardAction>
+				<button type="button" luButton>Lorem ipsum</button>
+			</ng-container>
+			<ng-container resourceCardContent>
+				Lorem
+				<a href="#" luLink>ipsum</a>
+				dolor sit amet, consectetur adipiscing elit, sed do.
+			</ng-container>
+		</lu-resource-card>
+	}
 </lu-resource-card-wrapper>
 ```
 
@@ -158,9 +120,15 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	<section class="resourceCard" #resourceCard1>
 		<div class="resourceCard-layout">
 			<div class="resourceCard-layout-before">
-				<div class="button resourceCard-layout-before-button">
+				<button
+					type="button"
+					class="button resourceCard-layout-before-button"
+					aria-expanded="false"
+					aria-keyshortcuts="Alt+ArrowUp Alt+ArrowLeft Alt+ArrowDown Alt+ArrowRight"
+				>
 					<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
-				</div>
+					<span class="pr-u-mask">Déplacer « Lorem ipsum dolor »</span>
+				</button>
 			</div>
 			<header class="resourceCard-layout-header">
 				<h3 class="resourceCard-layout-header-title">
@@ -180,9 +148,15 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	<section class="resourceCard cdk-drag-preview" #resourceCard1>
 		<div class="resourceCard-layout">
 			<div class="resourceCard-layout-before">
-				<div class="button resourceCard-layout-before-button">
+				<button
+					type="button"
+					class="button resourceCard-layout-before-button"
+					aria-expanded="false"
+					aria-keyshortcuts="Alt+ArrowUp Alt+ArrowLeft Alt+ArrowDown Alt+ArrowRight"
+				>
 					<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
-				</div>
+					<span class="pr-u-mask">Déplacer « Lorem ipsum dolor »</span>
+				</button>
 			</div>
 			<header class="resourceCard-layout-header">
 				<h3 class="resourceCard-layout-header-title">
@@ -202,9 +176,15 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	<section class="resourceCard cdk-drag-placeholder" #resourceCard1>
 		<div class="resourceCard-layout">
 			<div class="resourceCard-layout-before">
-				<div class="button resourceCard-layout-before-button">
+				<button
+					type="button"
+					class="button resourceCard-layout-before-button"
+					aria-expanded="false"
+					aria-keyshortcuts="Alt+ArrowUp Alt+ArrowLeft Alt+ArrowDown Alt+ArrowRight"
+				>
 					<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span>
-				</div>
+					<span class="pr-u-mask">Déplacer « Lorem ipsum dolor »</span>
+				</button>
 			</div>
 			<header class="resourceCard-layout-header">
 				<h3 class="resourceCard-layout-header-title">
