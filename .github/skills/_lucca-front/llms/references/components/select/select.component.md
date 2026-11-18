@@ -158,6 +158,41 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 <pr-story-model-display>{{ user | json }}</pr-story-model-display>
 ```
 
+```html
+<lu-filter-pill label="Légume" name="legume">
+	<lu-simple-select
+		[(ngModel)]="example"
+		[defaultValue]="defaultLegume"
+		[options]="legumes | filterLegumes: clue"
+		(clueChange)="clue = $event"
+	/>
+</lu-filter-pill>
+
+<pr-story-model-display>{{ example | json }}</pr-story-model-display>
+
+<hr class="divider pr-u-marginBlock400" />
+
+<lu-filter-pill label="Légumes" name="legumes">
+	<lu-multi-select
+		[(ngModel)]="examples"
+		[defaultValue]="defaultLegumes"
+		[options]="legumes | filterLegumes: clue"
+		(clueChange)="clue = $event"
+		[filterPillLabelPluralFn]="legumesPluralFn"
+	/>
+</lu-filter-pill>
+
+<pr-story-model-display>{{ examples | json }}</pr-story-model-display>
+
+<hr class="divider pr-u-marginBlock400" />
+
+<lu-filter-pill label="Utilisateur" name="user">
+	<lu-simple-select [(ngModel)]="user" [defaultValue]="defaultUser" users />
+</lu-filter-pill>
+
+<pr-story-model-display>{{ user | json }}</pr-story-model-display>
+```
+
 ### Select
 
 ```js
