@@ -16,6 +16,7 @@ import { SegmentedControlFilterComponent } from './filter.component';
 			</lu-segmented-control-filter>
 			<lu-segmented-control-filter class="badge" label="Badge" value="badge" [numericBadge]="8" />
 			<lu-segmented-control-filter class="zero" label="Zero" value="zero" [numericBadge]="0" />
+			<lu-segmented-control-filter class="static" label="Static" value="static" numericBadge="12" />
 			<lu-segmented-control-filter class="both" label="Input" value="both">
 				<ng-container luSegmentedControlFilterLabel>Projected label</ng-container>
 			</lu-segmented-control-filter>
@@ -58,6 +59,10 @@ describe(SegmentedControlFilterComponent.name, () => {
 	describe('numericBadge', () => {
 		it('should display the numeric badge after the label', () => {
 			expect(label('badge')?.querySelector('lu-numeric-badge')?.textContent?.trim()).toBe('8');
+		});
+
+		it('should accept a static attribute', () => {
+			expect(label('static')?.querySelector('lu-numeric-badge')?.textContent?.trim()).toBe('12');
 		});
 
 		it('should display a zero counter', () => {

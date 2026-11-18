@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { luBooleanAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNullableNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LU_SEGMENTEDCONTROL_INSTANCE } from '../segmented-control.token';
 
@@ -37,7 +37,7 @@ export class SegmentedControlFilterComponent<T = unknown> {
 	/**
 	 * Displays a numeric badge after the filter label, typically a counter
 	 */
-	readonly numericBadge = input<number | null>(null);
+	readonly numericBadge = input(null, { transform: luNullableNumberAttribute });
 
 	readonly id = `${this.segmentedControlRef.id}item${nextId++}`;
 	readonly name = this.segmentedControlRef.id;
