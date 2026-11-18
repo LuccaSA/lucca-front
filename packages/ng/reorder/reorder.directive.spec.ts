@@ -28,9 +28,14 @@ class SingleListHostComponent {
 	readonly events: ReorderEvent[] = [];
 	readonly reorder = viewChild.required(ReorderDirective);
 	readonly drags = viewChildren(CdkDrag);
+	/** Whether the handler applies the moves, or refuses them */
+	readonly applying = signal(true);
 
 	onReorder(event: ReorderEvent) {
 		this.events.push(event);
+		if (!this.applying()) {
+			return;
+		}
 		const items = [...this.items()];
 		moveItemInArray(items, event.previousIndex, event.currentIndex);
 		this.items.set(items);
@@ -78,9 +83,14 @@ class ConnectedListsHostComponent {
 	readonly events: ReorderEvent<string[]>[] = [];
 	readonly lists = viewChildren(ReorderDirective);
 	readonly drags = viewChildren(CdkDrag);
+	/** Whether the handler applies the moves, or refuses them */
+	readonly applying = signal(true);
 
 	onReorder(event: ReorderEvent<string[]>) {
 		this.events.push(event);
+		if (!this.applying()) {
+			return;
+		}
 		transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
 		this.columns.set([...this.columns()]);
 	}
@@ -154,6 +164,37 @@ describe(ReorderDirective.name, () => {
 			const handles = (fixture.nativeElement as HTMLElement).querySelectorAll('lu-reorder-handle button');
 			expect(document.activeElement).toBe(handles[2]);
 			expect(announce).toHaveBeenCalledExactlyOnceWith('"A": position 3 of 3');
+		});
+
+		it('should neither focus nor announce a move its handler does not apply', async () => {
+			// Arrange
+			host.applying.set(false);
+			const handles = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('lu-reorder-handle button');
+			handles[0].focus();
+
+			// Act
+			host.reorder().move(host.drags()[0], 2, 'A');
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(host.events.length).toBe(1);
+			expect(document.activeElement).toBe(handles[0]);
+			expect(announce).not.toHaveBeenCalled();
+		});
+
+		it('should not announce a pointer drop its handler does not apply', async () => {
+			// Arrange
+			host.applying.set(false);
+			const dropList = host.reorder().dropList;
+
+			// Act
+			dropList.dropped.emit({ item: host.drags()[0], previousIndex: 0, currentIndex: 2, previousContainer: dropList, container: dropList } as CdkDragDrop<unknown>);
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(announce).not.toHaveBeenCalled();
 		});
 
 		it('should announce the new position of an item dropped with a pointer', async () => {
@@ -280,6 +321,21 @@ describe(ReorderDirective.name, () => {
 
 			// Assert
 			expect(announce).toHaveBeenCalledExactlyOnceWith('"A": "Doing", position 2 of 2');
+		});
+
+		it('should not announce a move to another list its handler does not apply', async () => {
+			// Arrange
+			host.applying.set(false);
+			const [todo, doing] = host.lists();
+
+			// Act
+			todo.move(host.drags()[0], 1, 'A', doing);
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(host.columns().map((column) => column.items)).toEqual([['A', 'B'], ['C'], []]);
+			expect(announce).not.toHaveBeenCalled();
 		});
 
 		it('should announce the target list of an item dropped with a pointer in another list', async () => {

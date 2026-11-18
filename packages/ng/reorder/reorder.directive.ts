@@ -69,7 +69,14 @@ export class ReorderDirective<T = unknown> {
 			if (previousContainer !== container || previousIndex !== currentIndex) {
 				const origin = [...this.#registry.lists].find((list) => list.dropList === previousContainer) ?? this;
 				const itemLabel = this.#registry.handles.get(item)?.itemLabel() ?? this.luReorderIntl().itemFallback;
-				afterNextRender(() => origin.#announce(item, currentIndex, itemLabel, this), { injector: this.#injector });
+				afterNextRender(
+					() => {
+						if (origin.#isApplied(item, currentIndex, this)) {
+							origin.#announce(item, currentIndex, itemLabel, this);
+						}
+					},
+					{ injector: this.#injector },
+				);
 			}
 		});
 	}
@@ -126,7 +133,8 @@ export class ReorderDirective<T = unknown> {
 	}
 
 	/**
-	 * Moves an item of this list to `currentIndex` in `target`, then focuses its handle and announces its new position
+	 * Moves an item of this list to `currentIndex` in `target`, then focuses its handle and announces its new position,
+	 * once the `luReorder` handler has applied the move
 	 */
 	move(drag: CdkDrag, currentIndex: number, itemLabel: string, target: ReorderDirective = this): void {
 		const previousIndex = this.items().indexOf(drag);
@@ -138,8 +146,10 @@ export class ReorderDirective<T = unknown> {
 
 		afterNextRender(
 			() => {
-				const items = target.items();
-				const moved = items[currentIndex];
+				if (!this.#isApplied(drag, currentIndex, target)) {
+					return;
+				}
+				const moved = target.items()[currentIndex];
 				if (moved) {
 					this.#registry.handles.get(moved)?.focus();
 				}
@@ -147,6 +157,16 @@ export class ReorderDirective<T = unknown> {
 			},
 			{ injector: this.#injector },
 		);
+	}
+
+	/**
+	 * Whether the `luReorder` handler has applied the move of an item from this list, by the next render: it may refuse it,
+	 * or apply it later (after an API call). Within a list, the item is then at its new position. Moved to another list,
+	 * the item is rendered again there: it is only checked that it left this list.
+	 * Focusing and announcing an unapplied move would mislead, so nothing happens then
+	 */
+	#isApplied(drag: CdkDrag, currentIndex: number, target: ReorderDirective): boolean {
+		return target === this ? this.items()[currentIndex] === drag : !this.items().includes(drag);
 	}
 
 	/**
