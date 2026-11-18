@@ -1,0 +1,320 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td></td>
+			<td style="inline-size: 50%">HTML</td>
+			<td style="inline-size: 50%">Angular</td>
+		</tr>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="card2">
+					<h3 class="card2-heading"><a href="#" class="card2-heading-action">Title</a></h3>
+					<div class="card2-content">Card content</div>
+				</div>
+			</td>
+			<td>
+				<lu-card>
+					<a href="#" luCardAction>Title</a>
+					Card content
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Button</td>
+			<td>
+				<div class="card2">
+					<h3 class="card2-heading"><button type="button" class="card2-heading-action">Title</button></h3>
+					<div class="card2-content">Card content</div>
+				</div>
+			</td>
+			<td>
+				<lu-card>
+					<button type="button" luCardAction>Title</button>
+					Card content
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>S</td>
+			<td>
+				<div class="card2 mod-S">
+					<h3 class="card2-heading"><a href="#" class="card2-heading-action">Title</a></h3>
+					<div class="card2-content">Card content</div>
+				</div>
+			</td>
+			<td>
+				<lu-card size="S">
+					<a href="#" luCardAction>Title</a>
+					Card content
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<div class="card2">
+					<h3 class="card2-heading"><a class="card2-heading-action">Title</a></h3>
+					<div class="card2-content">Card content</div>
+				</div>
+			</td>
+			<td>
+				<lu-card>
+					<a luCardAction>Title</a>
+					Card content
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Empty content</td>
+			<td>
+				<div class="card2">
+					<h3 class="card2-heading"><a href="#" class="card2-heading-action">Title</a></h3>
+					<div class="card2-content"></div>
+				</div>
+			</td>
+			<td>
+				<lu-card>
+					<a href="#" luCardAction>Title</a>
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Long content</td>
+			<td>
+				<div class="card2">
+					<h3 class="card2-heading">
+						<a href="#" class="card2-heading-action"
+							>Long title with Supercalifragilisticexpialidocious_supercalifragilisticexpialidocious</a
+						>
+					</h3>
+					<div class="card2-content">
+						Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-card>
+					<a href="#" luCardAction>Long title with Supercalifragilisticexpialidocious_supercalifragilisticexpialidocious</a>
+					Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Interactive content</td>
+			<td>
+				<div class="card2">
+					<h3 class="card2-heading"><a href="#" class="card2-heading-action" luTooltip="Tooltip content">Title</a></h3>
+					<div class="card2-content"><a href="#" class="link">Card content</a></div>
+				</div>
+			</td>
+			<td>
+				<lu-card>
+					<a href="#" luCardAction luTooltip="Tooltip content">Title</a>
+					<a href="#" class="link">Card content</a>
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Illustration</td>
+			<td>
+				<div class="card2">
+					<div class="card2-illustration">
+						<span class="bubbleIcon mod-left">
+							<svg class="bubbleIcon-bubble" xmlns="http://www.w3.org/2000/svg" fill="none" width="40" height="40" viewBox="0 0 40 40">
+								<path
+									class="bubbleIcon-bubble-pathInline"
+									d="M8.02234 5.62248C18.6681.122 39.722-6.44995 39.9931 13.4051c.146 10.9657-1.8566 32.8782-21.3314 24.8746C-1.892 29.8346-5.51213 12.491 8.02234 5.62248"
+								/>
+								<path
+									class="bubbleIcon-bubble-pathBlock"
+									d="M2.25264 16.3895C8.11117 6.4042 21.9332-9.59108 32.4637 7.57789c5.8129 9.48391 15.5505 29.55471-4.5465 32.07901C6.70786 42.3228-5.2602 28.9757 2.25264 16.3895"
+								/>
+							</svg>
+							<span class="bubbleIcon-icon">
+								<span aria-hidden="true" class="lucca-icon icon-app"></span>
+							</span>
+						</span>
+					</div>
+					<h3 class="card2-heading"><a href="#" class="card2-heading-action">Title</a></h3>
+					<div class="card2-content">Card content</div>
+				</div>
+			</td>
+			<td>
+				<lu-card bubbleIcon="app">
+					<a href="#" luCardAction>Title</a>
+					Card content
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Header start slot</td>
+			<td>
+				<div class="card2">
+					<div class="card2-illustration">
+						<span class="bubbleIcon mod-left">
+							<svg class="bubbleIcon-bubble" xmlns="http://www.w3.org/2000/svg" fill="none" width="40" height="40" viewBox="0 0 40 40">
+								<path
+									class="bubbleIcon-bubble-pathInline"
+									d="M8.02234 5.62248C18.6681.122 39.722-6.44995 39.9931 13.4051c.146 10.9657-1.8566 32.8782-21.3314 24.8746C-1.892 29.8346-5.51213 12.491 8.02234 5.62248"
+								/>
+								<path
+									class="bubbleIcon-bubble-pathBlock"
+									d="M2.25264 16.3895C8.11117 6.4042 21.9332-9.59108 32.4637 7.57789c5.8129 9.48391 15.5505 29.55471-4.5465 32.07901C6.70786 42.3228-5.2602 28.9757 2.25264 16.3895"
+								/>
+							</svg>
+							<span class="bubbleIcon-icon">
+								<span aria-hidden="true" class="lucca-icon icon-app"></span>
+							</span>
+						</span>
+					</div>
+					<h3 class="card2-heading"><a href="#" class="card2-heading-action">Title</a></h3>
+					<div class="card2-content">Card content</div>
+				</div>
+			</td>
+			<td>
+				<lu-card>
+					<lu-bubble-icon cardHeaderStartSlot icon="app" bubbleDirection="left" />
+					<a href="#" luCardAction>Title</a>
+					Card content
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Illustration S</td>
+			<td>
+				<div class="card2 mod-S">
+					<div class="card2-illustration">
+						<span class="bubbleIcon mod-left">
+							<svg class="bubbleIcon-bubble" xmlns="http://www.w3.org/2000/svg" fill="none" width="40" height="40" viewBox="0 0 40 40">
+								<path
+									class="bubbleIcon-bubble-pathInline"
+									d="M8.02234 5.62248C18.6681.122 39.722-6.44995 39.9931 13.4051c.146 10.9657-1.8566 32.8782-21.3314 24.8746C-1.892 29.8346-5.51213 12.491 8.02234 5.62248"
+								/>
+								<path
+									class="bubbleIcon-bubble-pathBlock"
+									d="M2.25264 16.3895C8.11117 6.4042 21.9332-9.59108 32.4637 7.57789c5.8129 9.48391 15.5505 29.55471-4.5465 32.07901C6.70786 42.3228-5.2602 28.9757 2.25264 16.3895"
+								/>
+							</svg>
+							<span class="bubbleIcon-icon">
+								<span aria-hidden="true" class="lucca-icon icon-app"></span>
+							</span>
+						</span>
+					</div>
+					<h3 class="card2-heading"><a href="#" class="card2-heading-action">Title</a></h3>
+					<div class="card2-content">Card content</div>
+				</div>
+			</td>
+			<td>
+				<lu-card size="S" bubbleIcon="app">
+					<a href="#" luCardAction>Title</a>
+					Card content
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Illustration disabled</td>
+			<td>
+				<div class="card2">
+					<div class="card2-illustration">
+						<span class="bubbleIcon mod-left">
+							<svg class="bubbleIcon-bubble" xmlns="http://www.w3.org/2000/svg" fill="none" width="40" height="40" viewBox="0 0 40 40">
+								<path
+									class="bubbleIcon-bubble-pathInline"
+									d="M8.02234 5.62248C18.6681.122 39.722-6.44995 39.9931 13.4051c.146 10.9657-1.8566 32.8782-21.3314 24.8746C-1.892 29.8346-5.51213 12.491 8.02234 5.62248"
+								/>
+								<path
+									class="bubbleIcon-bubble-pathBlock"
+									d="M2.25264 16.3895C8.11117 6.4042 21.9332-9.59108 32.4637 7.57789c5.8129 9.48391 15.5505 29.55471-4.5465 32.07901C6.70786 42.3228-5.2602 28.9757 2.25264 16.3895"
+								/>
+							</svg>
+							<span class="bubbleIcon-icon">
+								<span aria-hidden="true" class="lucca-icon icon-app"></span>
+							</span>
+						</span>
+					</div>
+					<h3 class="card2-heading"><a class="card2-heading-action">Title</a></h3>
+					<div class="card2-content">Card content</div>
+				</div>
+			</td>
+			<td>
+				<lu-card bubbleIcon="app">
+					<a luCardAction>Title</a>
+					Card content
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Illustration empty content</td>
+			<td>
+				<div class="card2">
+					<div class="card2-illustration">
+						<span class="bubbleIcon mod-left">
+							<svg class="bubbleIcon-bubble" xmlns="http://www.w3.org/2000/svg" fill="none" width="40" height="40" viewBox="0 0 40 40">
+								<path
+									class="bubbleIcon-bubble-pathInline"
+									d="M8.02234 5.62248C18.6681.122 39.722-6.44995 39.9931 13.4051c.146 10.9657-1.8566 32.8782-21.3314 24.8746C-1.892 29.8346-5.51213 12.491 8.02234 5.62248"
+								/>
+								<path
+									class="bubbleIcon-bubble-pathBlock"
+									d="M2.25264 16.3895C8.11117 6.4042 21.9332-9.59108 32.4637 7.57789c5.8129 9.48391 15.5505 29.55471-4.5465 32.07901C6.70786 42.3228-5.2602 28.9757 2.25264 16.3895"
+								/>
+							</svg>
+							<span class="bubbleIcon-icon">
+								<span aria-hidden="true" class="lucca-icon icon-app"></span>
+							</span>
+						</span>
+					</div>
+					<h3 class="card2-heading"><a href="#" class="card2-heading-action">Title</a></h3>
+					<div class="card2-content"></div>
+				</div>
+			</td>
+			<td>
+				<lu-card bubbleIcon="app">
+					<a href="#" luCardAction>Title</a>
+				</lu-card>
+			</td>
+		</tr>
+		<tr>
+			<td>Illustration long content</td>
+			<td>
+				<div class="card2">
+					<div class="card2-illustration">
+						<span class="bubbleIcon mod-left">
+							<svg class="bubbleIcon-bubble" xmlns="http://www.w3.org/2000/svg" fill="none" width="40" height="40" viewBox="0 0 40 40">
+								<path
+									class="bubbleIcon-bubble-pathInline"
+									d="M8.02234 5.62248C18.6681.122 39.722-6.44995 39.9931 13.4051c.146 10.9657-1.8566 32.8782-21.3314 24.8746C-1.892 29.8346-5.51213 12.491 8.02234 5.62248"
+								/>
+								<path
+									class="bubbleIcon-bubble-pathBlock"
+									d="M2.25264 16.3895C8.11117 6.4042 21.9332-9.59108 32.4637 7.57789c5.8129 9.48391 15.5505 29.55471-4.5465 32.07901C6.70786 42.3228-5.2602 28.9757 2.25264 16.3895"
+								/>
+							</svg>
+							<span class="bubbleIcon-icon">
+								<span aria-hidden="true" class="lucca-icon icon-app"></span>
+							</span>
+						</span>
+					</div>
+					<h3 class="card2-heading">
+						<a href="#" class="card2-heading-action"
+							>Long title with Supercalifragilisticexpialidocious_supercalifragilisticexpialidocious</a
+						>
+					</h3>
+					<div class="card2-content">
+						Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.
+					</div>
+				</div>
+			</td>
+			<td>
+				<lu-card bubbleIcon="app">
+					<a href="#" luCardAction>Long title with Supercalifragilisticexpialidocious_supercalifragilisticexpialidocious</a>
+					Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.
+				</lu-card>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

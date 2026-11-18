@@ -1321,6 +1321,12 @@ export default [
 		objectPattern: /\.notchBox(-(wrapper|badge))?(?![\w-])/,
 		versionDeprecated: '21.1.2',
 	},
+	{
+		name: 'Card',
+		objectPattern: /\.card(-(footer-right|action|content|footer|title))?(?![\w-])/,
+		versionDeprecated: '22.2.0',
+		actions: `Remplacer par le composant Card (\`<lu-card>\`, classe \`.card2\`) ; plusieurs cartes vont dans un \`<lu-card-wrapper>\` (\`.card2Wrapper\`).`,
+	},
 
 	// Catch-all, keep last
 	// ==============================================================================================
