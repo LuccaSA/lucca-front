@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormlyModule } from '@ngx-formly/core';
 import { Meta, StoryObj } from '@storybook/angular-vite';
 
 @Component({
 	selector: 'forms-framed-stories',
 	templateUrl: './framed.stories.html',
-	imports: [FormlyModule],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FramedStory {}

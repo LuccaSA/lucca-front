@@ -22,7 +22,6 @@ This package contains specialized components organized by domain:
 **Form Components**
 - **Inputs**: `text-input`, `number-input`, `date-input`, `date2`, `multilanguage-input`, `file-upload`
 - **Selects**: `simple-select`, `multi-select`, `tree-select`, `core-select`
-- **Complex forms**: `formly` integration, form validation
 
 **Layout & Navigation**
 - **Layouts**: `app-layout`, `main-layout`, `page-header`
