@@ -71,6 +71,30 @@
 			min-inline-size: 0;
 		}
 
+		.listboxOption-content-treeActions {
+			position: var(--components-listboxOption-content-treeActions-position);
+			display: flex;
+			inset-block-start: var(--pr-t-spacings-50);
+			inset-inline-end: var(--pr-t-spacings-100);
+			margin-inline-start: auto;
+			opacity: var(--components-listboxOption-content-treeActions-opacity);
+			transition: all var(--commons-animations-durations-fast) ease;
+		}
+
+		.listboxOption-content-treeActions-action {
+			display: flex;
+			cursor: pointer;
+			opacity: var(--components-listboxOption-content-treeActions-action-opacity);
+			margin-inline-start: var(--pr-t-spacings-100);
+			transition: all var(--commons-animations-durations-fast) ease;
+		}
+
+		.listboxOption-content-treeActions-action-icon {
+			fill: var(--palettes-neutral-800);
+			inline-size: 1.4rem;
+			block-size: 1.4rem;
+		}
+
 		.listboxOption-content-checkboxField.checkboxField {
 			margin-block-start: var(--pr-t-spacings-25);
 			display: var(--components-listboxOption-content-checkboxField-display);

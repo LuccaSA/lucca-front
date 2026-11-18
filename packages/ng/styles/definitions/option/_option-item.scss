@@ -23,16 +23,6 @@
 
 			display: block;
 			scroll-margin: var(--pr-t-spacings-50);
-
-			.listboxOption[role='group'] & {
-				scroll-margin-block-start: var(--pr-t-spacings-400);
-			}
-		}
-
-		@layer mods {
-			&.withAddOption {
-				scroll-margin-block-end: var(--pr-t-spacings-600);
-			}
 		}
 	}
 
@@ -114,9 +104,7 @@
 		}
 	}
 
-	:host-context(.mod-multiple),
-	.formerEmployeeDisplayer,
-	.archivedLegalUnitsDisplayer {
+	:host-context(.mod-multiple) {
 		.optionItem-value {
 			@layer mods {
 				position: relative;

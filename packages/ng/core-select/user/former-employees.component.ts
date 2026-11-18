@@ -17,9 +17,14 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 	imports: [FormsModule],
 	hostDirectives: [ɵCoreSelectPanelElement],
 	template: `
-		<div class="formerEmployeeDisplayer optionItem">
-			<div class="optionItem-value" [class.is-selected]="context.includeFormerEmployees()" (mousedown)="onMouseDown($event)">
-				{{ intl().includeFormerEmployees }}
+		<!-- Rendered as a listbox option but not exposed as one: the checkbox is purely visual -->
+		<div class="listboxOption mod-checkbox" [class.is-selected]="context.includeFormerEmployees()">
+			<div class="listboxOption-content" [class.is-hovered]="selectableItem.isHighlighted()" (mousedown)="onMouseDown($event)">
+				<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
+					<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
+					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
+				</span>
+				<span class="listboxOption-content-value">{{ intl().includeFormerEmployees }}</span>
 			</div>
 		</div>
 	`,
@@ -28,11 +33,11 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 export class LuCoreSelectFormerEmployeesComponent {
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
 	readonly context = inject(FORMER_EMPLOYEES_CONTEXT);
-	readonly #selectableItem = inject(ɵCoreSelectPanelElement);
+	protected readonly selectableItem = inject(ɵCoreSelectPanelElement);
 
 	constructor() {
-		this.#selectableItem.id.set('select-former-employees');
-		outputToObservable(this.#selectableItem.selected)
+		this.selectableItem.id.set('select-former-employees');
+		outputToObservable(this.selectableItem.selected)
 			.pipe(takeUntilDestroyed())
 			.subscribe(() => {
 				this.context.includeFormerEmployees.set(!this.context.includeFormerEmployees());

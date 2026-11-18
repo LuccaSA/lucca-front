@@ -1,53 +1,22 @@
-@use '../../styles/definitions';
+// The keyboard highlight scrolls this host into view (see `scrollIntoViewOnceReady`): its scroll
+// margins keep the option clear of a sticky group header above it and of the sticky add option below it.
+:host {
+	@layer components {
+		--components-selectOption-scrollMarginBlockStart: var(--pr-t-spacings-50);
+		--components-selectOption-scrollMarginBlockEnd: var(--pr-t-spacings-50);
 
-@include definitions.optionItemStyle;
+		display: block;
+		scroll-margin-inline: var(--pr-t-spacings-50);
+		scroll-margin-block: var(--components-selectOption-scrollMarginBlockStart) var(--components-selectOption-scrollMarginBlockEnd);
 
-@layer components {
-	.optionItem {
-		&:not(:last-child) {
-			margin-block-end: var(--pr-t-spacings-50);
-		}
-
-		&:hover {
-			.optionItem-value {
-				background: var(--palettes-neutral-50);
-			}
-
-			.optionItem-icons {
-				opacity: 1;
-			}
+		.listboxOption[role='group'] & {
+			--components-selectOption-scrollMarginBlockStart: var(--pr-t-spacings-400);
 		}
 	}
 
-	.optionItem-value {
-		padding-block: var(--components-options-item-padding-vertical);
-		padding-inline: var(--components-options-item-padding-horizontal);
-	}
-
-	.optionItem-icons {
-		position: absolute;
-		display: flex;
-		inset-block-start: var(--pr-t-spacings-50);
-		inset-inline-end: var(--pr-t-spacings-100);
-		opacity: 0;
-		transition: all var(--commons-animations-durations-fast) ease;
-	}
-
-	.optionItem-icon {
-		display: flex;
-		cursor: pointer;
-		opacity: 0.66;
-		margin-inline-start: var(--pr-t-spacings-100);
-		transition: all var(--commons-animations-durations-fast) ease;
-
-		&:hover {
-			opacity: 1;
+	@layer mods {
+		&.withAddOption {
+			--components-selectOption-scrollMarginBlockEnd: var(--pr-t-spacings-600);
 		}
-	}
-
-	.optionItem-icon-shape {
-		fill: var(--components-options-item-icon-color);
-		inline-size: 1.4rem;
-		block-size: 1.4rem;
 	}
 }

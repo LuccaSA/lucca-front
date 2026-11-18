@@ -17,8 +17,15 @@ export const ARCHIVED_LEGAL_UNITS_CONTEXT = new InjectionToken<ArchivedLegalUnit
 	imports: [FormsModule],
 	hostDirectives: [ɵCoreSelectPanelElement],
 	template: `
-		<div class="archivedLegalUnitsDisplayer optionItem">
-			<div class="optionItem-value" [class.is-selected]="context.includeArchivedLegalUnits()" (mousedown)="onMouseDown($event)">{{ intl().includeArchivedLegalUnits }}</div>
+		<!-- Rendered as a listbox option but not exposed as one: the checkbox is purely visual -->
+		<div class="listboxOption mod-checkbox" [class.is-selected]="context.includeArchivedLegalUnits()">
+			<div class="listboxOption-content" [class.is-hovered]="selectableItem.isHighlighted()" (mousedown)="onMouseDown($event)">
+				<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
+					<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
+					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
+				</span>
+				<span class="listboxOption-content-value">{{ intl().includeArchivedLegalUnits }}</span>
+			</div>
 		</div>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,11 +33,11 @@ export const ARCHIVED_LEGAL_UNITS_CONTEXT = new InjectionToken<ArchivedLegalUnit
 export class LuCoreSelectArchivedLegalUnitsComponent {
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_LEGAL_UNITS_TRANSLATIONS));
 	readonly context = inject(ARCHIVED_LEGAL_UNITS_CONTEXT);
-	readonly #selectableItem = inject(ɵCoreSelectPanelElement);
+	protected readonly selectableItem = inject(ɵCoreSelectPanelElement);
 
 	constructor() {
-		this.#selectableItem.id.set('select-archived-legal-units');
-		outputToObservable(this.#selectableItem.selected)
+		this.selectableItem.id.set('select-archived-legal-units');
+		outputToObservable(this.selectableItem.selected)
 			.pipe(takeUntilDestroyed())
 			.subscribe(() => {
 				this.context.includeArchivedLegalUnits.set(!this.context.includeArchivedLegalUnits());
