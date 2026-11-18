@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, contentChild, inject, input, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { luBooleanAttribute, PortalContent } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNullableNumberAttribute, PortalContent } from '@lucca-front/ng/core';
 import { LU_SEGMENTEDCONTROLTABS_INSTANCE } from '../segmented-control-tabs.token';
 import { SegmentedControlTabsPanelLabelDirective } from './panel-label.directive';
 
@@ -37,7 +37,7 @@ export class SegmentedControlTabsPanelComponent<T = unknown> {
 	/**
 	 * Displays a numeric badge after the tab label, typically a counter
 	 */
-	readonly numericBadge = input<number | null>(null);
+	readonly numericBadge = input(null, { transform: luNullableNumberAttribute });
 
 	/**
 	 * Icon displayed before the tab label
