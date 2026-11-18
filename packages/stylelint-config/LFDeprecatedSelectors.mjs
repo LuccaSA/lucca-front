@@ -1142,6 +1142,17 @@ export default [
 		versionDeleted: '22.1.1',
 		actions: `Remplacer par \`.priorityLevel\` et \`.priorityLevel-icon\`.`,
 	},
+	{
+		// Mass selection row of the index table, removed without replacement
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1a140ec515e5a903e06e55106a7eb4a536279bd1/packages/scss/src/components/indexTable/index.scss#L31.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1a140ec515e5a903e06e55106a7eb4a536279bd1/packages/scss/src/components/indexTable/mods.scss#L354.
+		objectPattern: [
+			/(?=[^\s>+~]*\.indexTable-head-row(?![\w-]))(?=[^\s>+~]*\.mod-massSelection(?![\w-]))[^\s>+~]*/,
+			/\.indexTable-head-row-cell-massSelection(?![\w-])/,
+		],
+		versionDeprecated: '22.2.0',
+		actions: `Retirer la ligne \`.indexTable-head-row.mod-massSelection\` et sa cellule \`.indexTable-head-row-cell-massSelection\`, sans remplacement.`,
+	},
 
 	// Deprecated components, including their children (`.textfield-input`…)
 	// Keep them after the entries targeting their children, so those messages win.

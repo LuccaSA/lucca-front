@@ -49,6 +49,7 @@ import { DateInputComponent } from '@lucca-front/ng/date2';
 | `hideOverflow` | `hideOverflow` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `widthAuto` | `widthAuto` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `humanized` | `humanized` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `defaultValue` | `defaultValue` | `unknown` | `null` | — | `transformDateInputToDate` | — |
 
 #### Outputs
 
