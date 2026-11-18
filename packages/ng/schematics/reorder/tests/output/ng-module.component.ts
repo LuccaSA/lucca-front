@@ -8,6 +8,7 @@ import { ReorderEvent } from '@lucca-front/ng/reorder';
 	template: `
 		<ul cdkDropList luReorder (luReorder)="drop($event)">
 			@for (item of items; track item) {
+				<!-- TODO: add <lu-reorder-handle /> -->
 				<li cdkDrag [luReorderItemLabel]="item">{{ item }}</li>
 			}
 		</ul>

@@ -7,9 +7,11 @@ import { ReorderDirective, ReorderEvent, ReorderItemLabelDirective } from '@lucc
 	imports: [CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective],
 	template: `
 		<ul cdkDropList luReorder (luReorder)="reorder($event, 'first')">
-			<li cdkDrag luReorderItemLabel="First">First</li><!-- TODO: add luReorderItemLabel --> <li cdkDrag>Second</li>
+			<!-- TODO: add <lu-reorder-handle /> -->
+			<li cdkDrag luReorderItemLabel="First">First</li><!-- TODO: add luReorderItemLabel --> <!-- TODO: add <lu-reorder-handle /> --> <li cdkDrag>Second</li>
 		</ul>
 		<ul cdkDropList luReorder (luReorder)="save()">
+			<!-- TODO: add <lu-reorder-handle /> -->
 			<li cdkDrag luReorderItemLabel="Third">Third</li>
 		</ul>
 	`,

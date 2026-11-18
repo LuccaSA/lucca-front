@@ -9,6 +9,7 @@ import {
 	createSourceFile,
 	FunctionExpression,
 	getDecorators,
+	isArrayLiteralExpression,
 	isArrowFunction,
 	isBindingElement,
 	isCallExpression,
@@ -50,6 +51,16 @@ const cdkDragDropEntrypoint = '@angular/cdk/drag-drop';
 
 const todoComment = '<!-- TODO: add luReorderItemLabel -->';
 
+const handleTodoComment = '<!-- TODO: add <lu-reorder-handle /> -->';
+
+/** Classes of the former handle that would style `lu-reorder-handle` as a button, whereas it renders its own `luButton`. */
+const buttonClassPattern = /^(button|mod-.+|is-.+|palette-.+)$/;
+
+/** Lucca Front items that already render a `lu-reorder-handle` once their list has `luReorder`. */
+function hasBuiltInHandle(item: TmplAstElement): boolean {
+	return ['lu-resource-card', 'lu-sortable-list-item'].includes(item.name) || hasAttribute(item, 'luDataTableRow');
+}
+
 /** Properties of `CdkDragDrop` that `ReorderEvent` also provides: a handler reading anything else cannot be migrated. */
 const reorderEventProperties = ['previousIndex', 'currentIndex', 'previousContainer', 'container'];
 
@@ -66,6 +77,8 @@ interface MigrationState {
 	/** Handlers whose `CdkDragDrop` parameter becomes a `ReorderEvent`, by method name. */
 	retypedHandlers: Map<string, number>;
 	symbolsToImport: Set<string>;
+	/** Whether a `cdkDragHandle` element was replaced with `lu-reorder-handle`, so `CdkDragHandle` may no longer be used. */
+	handlesReplaced: boolean;
 }
 
 export function migrateComponent(path: string, content: string, tree: Tree): string {
@@ -85,7 +98,7 @@ export function migrateComponent(path: string, content: string, tree: Tree): str
 	}
 
 	const component = components[0];
-	const state: MigrationState = { retypedHandlers: new Map(), symbolsToImport: new Set() };
+	const state: MigrationState = { retypedHandlers: new Map(), symbolsToImport: new Set(), handlesReplaced: false };
 
 	// External templates are rewritten in place, they are not part of the component file.
 	templates
@@ -106,18 +119,30 @@ export function migrateComponent(path: string, content: string, tree: Tree): str
 
 	if (state.retypedHandlers.size > 0) {
 		result = retypeHandlers(path, result, state.retypedHandlers);
-		result = removeUnusedCdkDragDropImport(path, result);
+		result = removeUnusedCdkImport(path, result, 'CdkDragDrop');
 		state.symbolsToImport.add('ReorderEvent');
+	}
+
+	const standalone = !isStandaloneFalse(component);
+
+	// `lu-reorder-handle` replaces `cdkDragHandle`: its import goes away once no template of the component uses it.
+	if (state.handlesReplaced) {
+		const migratedTemplates = extractNgTemplatesIncludingHtml(createSourceFile(path, result, ScriptTarget.ESNext, true), tree, path);
+
+		if (!migratedTemplates.some((template) => template.content.includes('cdkDragHandle'))) {
+			if (standalone) {
+				result = removeComponentImport(path, result, 'CdkDragHandle');
+			}
+			result = removeUnusedCdkImport(path, result, 'CdkDragHandle');
+		}
 	}
 
 	// Imports are inserted one symbol at a time: every insertion shifts the offsets the next one relies on.
 	tree.overwrite(path, result);
 
-	const standalone = !isStandaloneFalse(component);
-
 	// Each TS import is inserted before the existing ones: going backwards keeps them sorted.
 	// The directives of a non-standalone component are imported by its NgModule, not by the component file.
-	['ReorderItemLabelDirective', 'ReorderEvent', 'ReorderDirective']
+	['ReorderItemLabelDirective', 'ReorderHandleComponent', 'ReorderEvent', 'ReorderDirective']
 		.filter((symbol) => state.symbolsToImport.has(symbol) && (standalone || symbol === 'ReorderEvent'))
 		.forEach((symbol) => {
 			const updatedSourceFile = createSourceFile(path, tree.readText(path), ScriptTarget.ESNext, true);
@@ -126,10 +151,11 @@ export function migrateComponent(path: string, content: string, tree: Tree): str
 			tree.commitUpdate(recorder);
 		});
 
-	const angularSymbols = ['ReorderDirective', 'ReorderItemLabelDirective'].filter((symbol) => state.symbolsToImport.has(symbol));
+	const angularSymbols = ['ReorderDirective', 'ReorderItemLabelDirective', 'ReorderHandleComponent'].filter((symbol) => state.symbolsToImport.has(symbol));
 
 	if (!standalone) {
-		currentSchematicContext.warn(`${path}: this component is not standalone, add ${angularSymbols.join(' and ')} to the imports of its NgModule.`);
+		const symbolList = angularSymbols.length > 1 ? `${angularSymbols.slice(0, -1).join(', ')} and ${angularSymbols.at(-1)}` : angularSymbols[0];
+		currentSchematicContext.warn(`${path}: this component is not standalone, add ${symbolList} to the imports of its NgModule.`);
 	} else {
 		angularSymbols.forEach((symbol) => {
 			const updatedSourceFile = createSourceFile(path, tree.readText(path), ScriptTarget.ESNext, true);
@@ -217,11 +243,23 @@ function migrateTemplate(path: string, template: string, component: ClassDeclara
 			state.symbolsToImport.add('ReorderDirective');
 			currentSchematicContext.logSuccess(`Adding luReorder on ${listSnippet} in ${path}`);
 
-			const unlabelledItems = migrateItems(template, list, lists, updates, commentedItems, state);
+			const { unlabelledItems, replacedHandles, itemsWithoutHandle } = migrateItems(template, list, lists, updates, commentedItems, state);
 
 			if (unlabelledItems.length > 0) {
 				currentSchematicContext.warn(
 					`${path}: give an accessible name to the items of ${listSnippet} with luReorderItemLabel (and import ReorderItemLabelDirective), they are marked with a TODO comment: ${unlabelledItems.join(', ')}`,
+				);
+			}
+
+			if (replacedHandles.length > 0) {
+				currentSchematicContext.warn(
+					`${path}: the drag handles of ${listSnippet} were replaced with <lu-reorder-handle />, which renders its own button and icon: check that nothing was lost from their content or bindings: ${replacedHandles.join(', ')}`,
+				);
+			}
+
+			if (itemsWithoutHandle.length > 0) {
+				currentSchematicContext.warn(
+					`${path}: add a <lu-reorder-handle /> to the items of ${listSnippet} (and import ReorderHandleComponent), so they can be moved without dragging, they are marked with a TODO comment: ${itemsWithoutHandle.join(', ')}`,
 				);
 			}
 		});
@@ -230,20 +268,26 @@ function migrateTemplate(path: string, template: string, component: ClassDeclara
 
 /**
  * Items have no generic way to get a label: the ones without `luReorderItemLabel` are marked with a TODO comment.
- * Returns the snippets of these items, for the log.
+ * Their `cdkDragHandle` elements are replaced with `lu-reorder-handle`, and the items without a handle are marked with a TODO comment,
+ * unless they are Lucca Front items that render their own handle.
+ * Returns the snippets of the items and handles to check, for the log.
  */
-function migrateItems(template: string, list: TmplAstElement, lists: TmplAstElement[], updates: FileUpdate[], commentedItems: Set<number>, state: MigrationState): string[] {
+function migrateItems(
+	template: string,
+	list: TmplAstElement,
+	lists: TmplAstElement[],
+	updates: FileUpdate[],
+	commentedItems: Set<number>,
+	state: MigrationState,
+): { unlabelledItems: string[]; replacedHandles: string[]; itemsWithoutHandle: string[] } {
 	const nestedLists = lists.filter((other) => other !== list && isWithin(other, list));
 	const unlabelledItems: string[] = [];
+	const replacedHandles: string[] = [];
+	const itemsWithoutHandle: string[] = [];
 
 	new HtmlAstVisitor(list.children).visitElements(/.*/, (item) => {
 		// Items of a nested list belong to that list, which is migrated on its own.
 		if (!hasAttribute(item, 'cdkDrag') || nestedLists.some((nested) => isWithin(item, nested))) {
-			return;
-		}
-
-		if (hasBinding(item, 'luReorderItemLabel')) {
-			state.symbolsToImport.add('ReorderItemLabelDirective');
 			return;
 		}
 
@@ -254,11 +298,59 @@ function migrateItems(template: string, list: TmplAstElement, lists: TmplAstElem
 		}
 
 		commentedItems.add(position);
-		unlabelledItems.push(getOpeningTagSnippet(template, item));
-		updates.push({ position, oldContent: '', newContent: `${todoComment}${getLineBreak(template, position)}` });
+		const todos: string[] = [];
+
+		if (hasBinding(item, 'luReorderItemLabel')) {
+			state.symbolsToImport.add('ReorderItemLabelDirective');
+		} else {
+			todos.push(todoComment);
+			unlabelledItems.push(getOpeningTagSnippet(template, item));
+		}
+
+		const handles: TmplAstElement[] = [];
+		let hasReorderHandle = false;
+
+		new HtmlAstVisitor(item.children).visitElements(/.*/, (element) => {
+			if (nestedLists.some((nested) => isWithin(element, nested))) {
+				return;
+			}
+
+			if (element.name === 'lu-reorder-handle') {
+				hasReorderHandle = true;
+			} else if (hasAttribute(element, 'cdkDragHandle') && !handles.some((handle) => isWithin(element, handle))) {
+				handles.push(element);
+			}
+		});
+
+		handles.forEach((handle) => {
+			replacedHandles.push(getOpeningTagSnippet(template, handle));
+			updates.push({ position: handle.sourceSpan.start.offset, oldContent: template.slice(handle.sourceSpan.start.offset, getEnd(handle)), newContent: getReorderHandle(handle) });
+		});
+
+		if (handles.length > 0) {
+			state.symbolsToImport.add('ReorderHandleComponent');
+			state.handlesReplaced = true;
+		} else if (!hasReorderHandle && !hasBuiltInHandle(item)) {
+			todos.push(handleTodoComment);
+			itemsWithoutHandle.push(getOpeningTagSnippet(template, item));
+		}
+
+		if (todos.length > 0) {
+			const lineBreak = getLineBreak(template, position);
+			updates.push({ position, oldContent: '', newContent: todos.map((todo) => `${todo}${lineBreak}`).join('') });
+		}
 	});
 
-	return unlabelledItems;
+	return { unlabelledItems, replacedHandles, itemsWithoutHandle };
+}
+
+/** `lu-reorder-handle` keeps the static classes of the former handle, except the button ones: it renders its own `luButton`. */
+function getReorderHandle(handle: TmplAstElement): string {
+	const classes = (handle.attributes.find((attribute) => attribute.name === 'class')?.value ?? '')
+		.split(/\s+/)
+		.filter((className) => className && className !== 'cdk-drag-handle' && !buttonClassPattern.test(className));
+
+	return classes.length > 0 ? `<lu-reorder-handle class="${classes.join(' ')}" />` : '<lu-reorder-handle />';
 }
 
 /**
@@ -403,7 +495,8 @@ function retypeHandlers(path: string, content: string, handlers: Map<string, num
 	});
 }
 
-function removeUnusedCdkDragDropImport(path: string, content: string): string {
+/** Removes a symbol of `@angular/cdk/drag-drop` from the TS imports once nothing else in the file refers to it. */
+function removeUnusedCdkImport(path: string, content: string, symbol: string): string {
 	const sourceFile = createSourceFile(path, content, ScriptTarget.ESNext, true);
 	let isUsed = false;
 
@@ -412,7 +505,7 @@ function removeUnusedCdkDragDropImport(path: string, content: string): string {
 			return;
 		}
 
-		if (isIdentifier(node) && node.text === 'CdkDragDrop') {
+		if (isIdentifier(node) && node.text === symbol) {
 			isUsed = true;
 		}
 
@@ -433,27 +526,55 @@ function removeUnusedCdkDragDropImport(path: string, content: string): string {
 	}
 
 	const elements = namedBindings.elements;
-	const index = elements.findIndex((element) => !element.propertyName && element.name.text === 'CdkDragDrop');
+	const index = elements.findIndex((element) => !element.propertyName && element.name.text === symbol);
 
 	if (index === -1) {
 		return content;
 	}
 
-	let start: number;
-	let end: number;
-
 	if (elements.length === 1 && !declaration.importClause?.name) {
-		start = declaration.getStart(sourceFile);
-		end = declaration.getEnd();
+		const start = declaration.getStart(sourceFile);
+		let end = declaration.getEnd();
 		end += content.startsWith('\r\n', end) ? 2 : content.startsWith('\n', end) ? 1 : 0;
-	} else if (index < elements.length - 1) {
-		start = elements[index].getStart(sourceFile);
-		end = elements[index + 1].getStart(sourceFile);
-	} else {
-		start = elements[index - 1].getEnd();
-		end = elements[index].getEnd();
+		return removeRange(content, start, end);
 	}
 
+	return removeListElement(content, sourceFile, elements, index);
+}
+
+/** Removes a symbol from the `imports` of the `@Component` decorator. */
+function removeComponentImport(path: string, content: string, symbol: string): string {
+	const sourceFile = createSourceFile(path, content, ScriptTarget.ESNext, true);
+	const [component] = getComponentClasses(sourceFile);
+	const argument = component ? getComponentDecoratorArgument(component) : undefined;
+
+	if (!argument || !isObjectLiteralExpression(argument)) {
+		return content;
+	}
+
+	const imports = argument.properties.filter(isPropertyAssignment).find((property) => isIdentifier(property.name) && property.name.text === 'imports')?.initializer;
+
+	if (!imports || !isArrayLiteralExpression(imports)) {
+		return content;
+	}
+
+	const index = imports.elements.findIndex((element) => isIdentifier(element) && element.text === symbol);
+
+	return index === -1 ? content : removeListElement(content, sourceFile, imports.elements, index);
+}
+
+/** Removes an element of a comma-separated list, with the separator that goes with it. */
+function removeListElement(content: string, sourceFile: SourceFile, elements: readonly TsNode[], index: number): string {
+	if (elements.length === 1) {
+		return removeRange(content, elements[0].getStart(sourceFile), elements[0].getEnd());
+	}
+
+	return index < elements.length - 1
+		? removeRange(content, elements[index].getStart(sourceFile), elements[index + 1].getStart(sourceFile))
+		: removeRange(content, elements[index - 1].getEnd(), elements[index].getEnd());
+}
+
+function removeRange(content: string, start: number, end: number): string {
 	return updateContent(content, (updates) => updates.push({ position: start, oldContent: content.slice(start, end), newContent: '' }));
 }
 
