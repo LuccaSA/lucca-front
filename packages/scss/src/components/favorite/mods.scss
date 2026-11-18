@@ -1,0 +1,19 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin S {
+	--components-favorite-sparks-distance: var(--pr-t-spacings-200);
+
+	.favorite-button.button {
+		@include button.S;
+		@include button.onlyIconS;
+	}
+}
+
+@mixin XS {
+	--components-favorite-sparks-distance: var(--pr-t-spacings-150);
+
+	.favorite-button.button {
+		@include button.XS;
+		@include button.onlyIconXS;
+	}
+}
