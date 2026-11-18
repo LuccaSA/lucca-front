@@ -35,13 +35,7 @@ import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `icon` | `icon` | `// Time and Activities
-	'absences' \| 'timesheet' \| 'office' \| 'projects' \| 'shifts' \| // Talent Management
-	'performance' \| 'engagement' \| 'training' \| 'recruitment' \| 'mood' \| // Employee Administration
-	'analytics' \| 'employee-administration' \| 'shared-documents' \| 'faces' \| // Spend Management
-	'business-expenses' \| 'invoices' \| 'payment-methods' \| 'accounting-assistant' \| 'certified-einvoicing-platform' \| 'business-trips' \| // Compensation and Benefits
-	'compensation' \| 'payslip' \| 'benefits' \| 'payroll-assistant' \| // Lucca
-	'cloud-control' \| 'ask-lucca' \| 'ask-salesforce' \| 'calendar' \| 'administration' \| 'client-center' \| 'sandbox' \| 'store' \| 'integrations' \| 'lucca'` | — | ✅ | — | Modifie l’icône produit. |
+| `icon` | `icon` | `SoftwareIcon \| SoftwareIconModuleId` | — | ✅ | — | Modifie l’icône produit. |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Marque le produit comme inactif. |
 | `withTooltip` | `withTooltip` | `boolean` | `false` | — | `luBooleanAttribute` | Ajoute une info-bulle qui reprend l’alternative textuelle de l’icône. (Ce paramètre est automatiquement activé quand l’i… |
 | `iconAlt` | `iconAlt` | `string` | `''` | — | — | Texte alternatif de l’illustration restitué par les lecteurs d’écran. |

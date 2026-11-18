@@ -3,6 +3,7 @@ import { CDN_URL, luBooleanAttribute } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LU_SOFTWARE_ICON_WRAPPER } from './software-icon-wrapper.token';
+import { getSoftwareIconFromModuleId, SoftwareIconModuleId } from './software-icon-module-id';
 import { SoftwareIcon, SoftwareIconSize } from './software-icon.type';
 
 @Component({
@@ -20,11 +21,14 @@ export class SoftwareIconComponent {
 	readonly path = '/transverse/prisme/visuals/software-icon/';
 	readonly extension = '.svg';
 
-	readonly icon = input.required<SoftwareIcon>();
+	/**
+	 * Icon to display: a software icon name (`absences`) or the module id of a Lucca application (`timmi-absences`).
+	 */
+	readonly icon = input.required<SoftwareIcon | SoftwareIconModuleId>();
 
 	readonly disabled = input(false, { transform: luBooleanAttribute });
 	readonly withTooltip = input(false, { transform: luBooleanAttribute });
 	readonly iconAlt = input<string>('');
 	readonly size = input<SoftwareIconSize | ''>('');
-	readonly iconUrl = computed(() => `${this.domain}${this.path}${this.icon()}${this.extension}`);
+	readonly iconUrl = computed(() => `${this.domain}${this.path}${getSoftwareIconFromModuleId(this.icon()) ?? this.icon()}${this.extension}`);
 }

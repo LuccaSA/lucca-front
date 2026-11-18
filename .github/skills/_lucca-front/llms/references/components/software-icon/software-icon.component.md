@@ -16,6 +16,16 @@ import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE, SoftwareIconComponent } from '@lucca
 <lu-software-icon icon="absences" iconAlt="Absences" />
 ```
 
+### Id
+
+```js
+import { SOFTWARE_ICON_BY_MODULE_ID, SoftwareIconComponent, SoftwareIconModuleId } from '@lucca-front/ng/software-icon';
+```
+
+```html
+<lu-software-icon [icon]="moduleId" [iconAlt]="moduleId" />
+```
+
 ### Wrapper
 
 ```js
