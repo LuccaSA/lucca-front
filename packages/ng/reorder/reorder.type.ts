@@ -6,12 +6,6 @@ import { CdkDropList } from '@angular/cdk/drag-drop';
 export type ReorderFlow = 'row' | 'column';
 
 /**
- * Action of the handles that can be left out: moving the item to the start / end of its list is also done by moving it
- * one position at a time, so leaving it out never prevents a move
- */
-export type ReorderOptionalAction = 'first' | 'last';
-
-/**
  * Emitted by `luReorder` whenever an item is moved, whether it was dragged with a pointer
  * or moved with the handle menu or keyboard shortcuts.
  * Its properties share their names with `CdkDragDrop` so the usual `moveItemInArray` / `transferArrayItem` handlers keep working.

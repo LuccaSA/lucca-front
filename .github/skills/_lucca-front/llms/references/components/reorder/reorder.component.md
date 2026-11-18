@@ -17,12 +17,12 @@
 ```js
 import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LOCALE_ID, signal } from '@angular/core';
-import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
-import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent } from './connected-lists.helpers';
+import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
+import { EDGES_EXCLUDED_ARG_TYPE, formatReorderEvent } from './connected-lists.helpers';
 ```
 
 ```html
-<ul class="reorderDemo" cdkDropList luReorder [luReorderActionsExcluded]="" (luReorder)="onReorder($event)">
+<ul class="reorderDemo" cdkDropList luReorder (luReorder)="onReorder($event)">
 	@for (item of items; track item) {
 		<li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item">
 			<lu-reorder-handle />
@@ -39,7 +39,7 @@ import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent } f
 import { signal } from '@angular/core';
 import { ReorderEvent } from '@lucca-front/ng/reorder';
 import { TagComponent } from '@lucca-front/ng/tag';
-import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refuseAll, formatReorderEvent, reorder, actionsExcludedValue, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
+import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refuseAll, formatReorderEvent, reorder, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
 ```
 
 ```html
@@ -62,7 +62,6 @@ import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refus
 				[cdkDropListEnterPredicate]="column.closed ? refuseAll : acceptAll"
 				luReorder
 				[luReorderLabel]="column.label"
-				[luReorderActionsExcluded]=""
 				(luReorder)="onReorder($event)"
 			>
 				@for (item of column.items; track item) {
@@ -83,7 +82,7 @@ import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refus
 ```js
 import { signal } from '@angular/core';
 import { ReorderEvent } from '@lucca-front/ng/reorder';
-import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEvent, reorder, actionsExcludedValue, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
+import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEvent, reorder, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
 ```
 
 ```html
@@ -97,7 +96,6 @@ import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEve
 				[cdkDropListData]="column.items"
 				luReorder
 				[luReorderLabel]="column.label"
-				[luReorderActionsExcluded]=""
 				(luReorder)="onReorder($event)"
 			>
 				@for (item of column.items; track item) {
@@ -118,19 +116,12 @@ import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEve
 ```js
 import { CdkDrag, CdkDropList, DropListOrientation, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LOCALE_ID, signal } from '@angular/core';
-import { ReorderDirective, ReorderEvent, ReorderFlow, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
-import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent } from './connected-lists.helpers';
+import { ReorderDirective, ReorderEvent, ReorderFlow, ReorderHandleComponent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
+import { EDGES_EXCLUDED_ARG_TYPE, formatReorderEvent } from './connected-lists.helpers';
 ```
 
 ```html
-<ul
-	class="reorderDemo"
-	cdkDropList
-	cdkDropListOrientation="horizontal"
-	luReorder
-	[luReorderActionsExcluded]=""
-	(luReorder)="onReorder($event)"
->
+<ul class="reorderDemo" cdkDropList cdkDropListOrientation="horizontal" luReorder (luReorder)="onReorder($event)">
 	@for (item of items; track item) {
 		<li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item">
 			<lu-reorder-handle />

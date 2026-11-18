@@ -3,10 +3,10 @@ import { coerceArray } from '@angular/cdk/coercion';
 import { CDK_DROP_LIST_GROUP, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { afterNextRender, DestroyRef, Directive, inject, Injector, input, output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, luBooleanAttribute } from '@lucca-front/ng/core';
 import { ReorderRegistry } from './reorder.registry';
 import { LU_REORDER_TRANSLATIONS } from './reorder.translate';
-import { ReorderEvent, ReorderFlow, ReorderOptionalAction } from './reorder.type';
+import { ReorderEvent, ReorderFlow } from './reorder.type';
 
 const intlParams = new IntlParamsPipe();
 
@@ -41,10 +41,10 @@ export class ReorderDirective<T = unknown> {
 	readonly luReorderFlow = input<ReorderFlow>('row');
 
 	/**
-	 * Optional actions left out of the handles, from their menu and their keyboard shortcuts: moving the item to the start / end of its list.
-	 * The other actions are always offered, as they are the only way to reach every position and every list without a pointer
+	 * Leaves the moves to the start / end of the list out of the handles, from their menu and their keyboard shortcuts.
+	 * The other moves are always offered, as they are the only way to reach every position and every list without a pointer
 	 */
-	readonly luReorderActionsExcluded = input<readonly ReorderOptionalAction[]>([]);
+	readonly luReorderEdgesExcluded = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Overrides the default labels of the handles' menu and announcements

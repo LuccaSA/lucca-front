@@ -1,13 +1,13 @@
 import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LOCALE_ID, signal } from '@angular/core';
-import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
+import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent } from './connected-lists.helpers';
+import { EDGES_EXCLUDED_ARG_TYPE, formatReorderEvent } from './connected-lists.helpers';
 import { intlArgType } from '@/helpers/stories';
 
 interface ReorderBasicStory {
-	luReorderActionsExcluded: ReorderOptionalAction[];
+	luReorderEdgesExcluded: boolean;
 	luReorderIntl?: Partial<LuReorderTranslations>;
 	luReorder?: (event: ReorderEvent<string[]>) => void;
 }
@@ -21,7 +21,7 @@ export default {
 		applicationConfig({ providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }] }),
 	],
 	argTypes: {
-		luReorderActionsExcluded: ACTIONS_EXCLUDED_ARG_TYPE,
+		luReorderEdgesExcluded: EDGES_EXCLUDED_ARG_TYPE,
 		luReorderIntl: { ...intlArgType(luReorderTranslations, 'LuReorderTranslations'), name: 'luReorderIntl' },
 		luReorder: {
 			description: 'Événement déclenché lorsqu’un élément est déplacé, à la souris, depuis le menu de sa poignée ou au clavier.',
@@ -30,8 +30,7 @@ export default {
 			table: { category: 'outputs', type: { summary: 'ReorderEvent' } },
 		},
 	},
-	render: ({ luReorder, luReorderActionsExcluded }: ReorderBasicStory) => {
-		const excluded = actionsExcludedValue(luReorderActionsExcluded);
+	render: ({ luReorder, luReorderEdgesExcluded }: ReorderBasicStory) => {
 		const items = ['Carotte', 'Poireau', 'Navet', 'Courgette'];
 
 		const lastEvent = signal('');
@@ -46,7 +45,7 @@ export default {
 					luReorder?.(event);
 				},
 			},
-			template: `<ul class="reorderDemo" cdkDropList luReorder${excluded ? ` [luReorderActionsExcluded]="${excluded}"` : ''} (luReorder)="onReorder($event)">
+			template: `<ul class="reorderDemo" cdkDropList luReorder${luReorderEdgesExcluded ? ' luReorderEdgesExcluded' : ''} (luReorder)="onReorder($event)">
 	@for (item of items; track item) {
 		<li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item">
 			<lu-reorder-handle />
@@ -86,6 +85,6 @@ export default {
 
 export const Basic: StoryObj<ReorderBasicStory> = {
 	args: {
-		luReorderActionsExcluded: [],
+		luReorderEdgesExcluded: false,
 	},
 };

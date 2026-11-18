@@ -9,7 +9,7 @@ import { ReorderHandleComponent, ReorderItemLabelDirective, ReorderDirective } f
 ## Basic Usage
 
 ```html
-<ul class="reorderDemo" cdkDropList luReorder [luReorderActionsExcluded] (luReorder)="onReorder($event)"> @for (item of items; track item) { <li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item"> <lu-reorder-handle /> {{ item }} </li> }
+<ul class="reorderDemo" cdkDropList luReorder (luReorder)="onReorder($event)"> @for (item of items; track item) { <li class="reorderDemo-item" cdkDrag [luReorderItemLabel]="item"> <lu-reorder-handle /> {{ item }} </li> }
 </ul>
 <pr-story-model-display heading="(luReorder)">{{ lastEvent() }}</pr-story-model-display>
 ```
@@ -48,7 +48,7 @@ import { ReorderHandleComponent, ReorderItemLabelDirective, ReorderDirective } f
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `luReorderLabel` | `luReorderLabel` | `string \| null` | `null` | — | — | — |
 | `luReorderFlow` | `luReorderFlow` | `'row' \| 'column'` | `'row'` | — | — | Sens d’écoulement d’une liste `mixed` : en lignes (Alt + ← / →) ou en colonnes (Alt + ↑ / ↓). |
-| `luReorderActionsExcluded` | `luReorderActionsExcluded` | `readonly ReorderOptionalAction[]` | `[]` | — | — | — |
+| `luReorderEdgesExcluded` | `luReorderEdgesExcluded` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `luReorderIntl` | `luReorderIntl` | `unknown` | — | — | — | — |
 
 #### Outputs

@@ -1,14 +1,14 @@
 import { CdkDrag, CdkDropList, DropListOrientation, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LOCALE_ID, signal } from '@angular/core';
-import { ReorderDirective, ReorderEvent, ReorderFlow, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
+import { ReorderDirective, ReorderEvent, ReorderFlow, ReorderHandleComponent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
-import { ACTIONS_EXCLUDED_ARG_TYPE, actionsExcludedValue, formatReorderEvent } from './connected-lists.helpers';
+import { EDGES_EXCLUDED_ARG_TYPE, formatReorderEvent } from './connected-lists.helpers';
 
 interface ReorderOrientationStory {
 	cdkDropListOrientation: DropListOrientation;
 	luReorderFlow: ReorderFlow;
-	luReorderActionsExcluded: ReorderOptionalAction[];
+	luReorderEdgesExcluded: boolean;
 	luReorder?: (event: ReorderEvent<string[]>) => void;
 }
 
@@ -35,7 +35,7 @@ export default {
 			description: 'Sens d’écoulement d’une liste `mixed` : en lignes (Alt + ← / →) ou en colonnes (Alt + ↑ / ↓).',
 			table: { category: 'inputs', type: { summary: 'ReorderFlow' }, defaultValue: { summary: 'row' } },
 		},
-		luReorderActionsExcluded: ACTIONS_EXCLUDED_ARG_TYPE,
+		luReorderEdgesExcluded: EDGES_EXCLUDED_ARG_TYPE,
 		luReorder: {
 			description: 'Événement déclenché lorsqu’un élément est déplacé, à la souris, depuis le menu de sa poignée ou au clavier.',
 			action: 'luReorder',
@@ -43,8 +43,7 @@ export default {
 			table: { category: 'outputs', type: { summary: 'ReorderEvent' } },
 		},
 	},
-	render: ({ cdkDropListOrientation, luReorderFlow, luReorderActionsExcluded, luReorder }: ReorderOrientationStory) => {
-		const excluded = actionsExcludedValue(luReorderActionsExcluded);
+	render: ({ cdkDropListOrientation, luReorderFlow, luReorderEdgesExcluded, luReorder }: ReorderOrientationStory) => {
 		const items = ['Carotte', 'Poireau', 'Navet', 'Courgette', 'Potiron', 'Radis'];
 		const mixed = cdkDropListOrientation === 'mixed';
 		const column = cdkDropListOrientation === 'vertical' || (mixed && luReorderFlow === 'column');
@@ -54,9 +53,9 @@ export default {
 				? `
 	cdkDropListOrientation="${cdkDropListOrientation}"`
 				: '';
-		const actions = excluded
+		const actions = luReorderEdgesExcluded
 			? `
-	[luReorderActionsExcluded]="${excluded}"`
+	luReorderEdgesExcluded`
 			: '';
 		const flow =
 			mixed && luReorderFlow !== 'row'
@@ -141,6 +140,6 @@ export const Orientation: StoryObj<ReorderOrientationStory> = {
 	args: {
 		cdkDropListOrientation: 'horizontal',
 		luReorderFlow: 'row',
-		luReorderActionsExcluded: [],
+		luReorderEdgesExcluded: false,
 	},
 };

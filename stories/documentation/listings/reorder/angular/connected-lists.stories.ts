@@ -1,18 +1,17 @@
 import { signal } from '@angular/core';
 import { ReorderEvent } from '@lucca-front/ng/reorder';
 import { Meta, StoryObj } from '@storybook/angular-vite';
-import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEvent, reorder, actionsExcludedValue, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
+import { CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, formatReorderEvent, reorder, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
 
 export default {
 	title: 'Documentation/Listings/Reorder/Angular/Connected lists',
 	decorators: CONNECTED_LISTS_DECORATORS,
 	argTypes: CONNECTED_LISTS_ARG_TYPES,
-	render: ({ luReorder, luReorderActionsExcluded }: ReorderConnectedListsStory) => {
-		const excluded = actionsExcludedValue(luReorderActionsExcluded);
+	render: ({ luReorder, luReorderEdgesExcluded }: ReorderConnectedListsStory) => {
 		// Written on their own line in the template, so their indentation is displayed like the other attributes
-		const actions = excluded
+		const actions = luReorderEdgesExcluded
 			? `
-				[luReorderActionsExcluded]="${excluded}"`
+				luReorderEdgesExcluded`
 			: '';
 		const columns = [
 			{ label: 'Semis', items: ['Carotte', 'Poireau', 'Navet'] },
@@ -64,6 +63,6 @@ export default {
 
 export const ConnectedLists: StoryObj<ReorderConnectedListsStory> = {
 	args: {
-		luReorderActionsExcluded: [],
+		luReorderEdgesExcluded: false,
 	},
 };

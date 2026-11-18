@@ -8,13 +8,13 @@ import { vi } from 'vitest';
 import { ReorderHandleComponent } from './reorder-handle.component';
 import { ReorderItemLabelDirective } from './reorder-item-label.directive';
 import { ReorderDirective } from './reorder.directive';
-import { ReorderEvent, ReorderFlow, ReorderOptionalAction } from './reorder.type';
+import { ReorderEvent, ReorderFlow } from './reorder.type';
 
 @Component({
 	selector: 'lu-reorder-handle-test',
 	imports: [CdkDropList, CdkDrag, ReorderDirective, ReorderItemLabelDirective, ReorderHandleComponent],
 	template: `
-		<ul cdkDropList luReorder [cdkDropListOrientation]="orientation()" [luReorderFlow]="flow()" [luReorderActionsExcluded]="actionsExcluded()" (luReorder)="onReorder($event)">
+		<ul cdkDropList luReorder [cdkDropListOrientation]="orientation()" [luReorderFlow]="flow()" [luReorderEdgesExcluded]="edgesExcluded()" (luReorder)="onReorder($event)">
 			@for (item of items(); track item) {
 				<li cdkDrag [luReorderItemLabel]="item">
 					<lu-reorder-handle />
@@ -28,7 +28,7 @@ import { ReorderEvent, ReorderFlow, ReorderOptionalAction } from './reorder.type
 class HostComponent {
 	readonly orientation = input<DropListOrientation>('vertical');
 	readonly flow = input<ReorderFlow>('row');
-	readonly actionsExcluded = input<readonly ReorderOptionalAction[]>([]);
+	readonly edgesExcluded = input(false);
 	readonly items = signal(['A', 'B', 'C']);
 	readonly events: ReorderEvent[] = [];
 
@@ -265,23 +265,23 @@ describe(ReorderHandleComponent.name, () => {
 			userAgent.mockRestore();
 		});
 
-		describe('without the first action', () => {
+		describe('without the edge moves', () => {
 			beforeEach(() => {
-				fixture.componentRef.setInput('actionsExcluded', ['first']);
+				fixture.componentRef.setInput('edgesExcluded', true);
 				fixture.detectChanges();
 			});
 
-			it('should not offer it in the menu', async () => {
+			it('should not offer them in the menu', async () => {
 				// Act
 				getHandles(fixture)[1].click();
 				fixture.detectChanges();
 
 				// Assert
-				await vi.waitFor(() => expect(getMenuActions().length).toBe(3));
-				expect(getMenuActions().map((action) => action.firstChild?.textContent?.trim())).toEqual(['Move up', 'Move down', 'Move to bottom']);
+				await vi.waitFor(() => expect(getMenuActions().length).toBe(2));
+				expect(getMenuActions().map((action) => action.firstChild?.textContent?.trim())).toEqual(['Move up', 'Move down']);
 			});
 
-			it('should neither declare nor perform its shortcuts, but still stop them', () => {
+			it('should neither declare nor perform their shortcuts, but still stop them', () => {
 				// Arrange
 				const [, , handle] = getHandles(fixture);
 				const listener = vi.fn();
@@ -289,10 +289,11 @@ describe(ReorderHandleComponent.name, () => {
 
 				// Act
 				pressKey(handle, 'Home');
+				pressKey(handle, 'End');
 
 				// Assert
 				expect(handle.getAttribute('aria-keyshortcuts')).not.toContain('Alt+Home');
-				expect(handle.getAttribute('aria-keyshortcuts')).toContain('Alt+End');
+				expect(handle.getAttribute('aria-keyshortcuts')).not.toContain('Alt+End');
 				expect(host.items()).toEqual(['A', 'B', 'C']);
 				expect(listener).not.toHaveBeenCalled();
 				document.removeEventListener('keydown', listener);

@@ -306,9 +306,8 @@ export class ReorderHandleComponent implements DoCheck {
 		}
 		const intl = this.intl();
 		const items = reorder.items();
-		const excluded = reorder.luReorderActionsExcluded();
-		const first = !excluded.includes('first');
-		const last = !excluded.includes('last');
+		const first = !reorder.luReorderEdgesExcluded();
+		const last = first;
 		const index = items.indexOf(this.#drag);
 		const orientation = reorder.dropList.orientation;
 		// A mixed list flowing along columns is ordered vertically, like a vertical list

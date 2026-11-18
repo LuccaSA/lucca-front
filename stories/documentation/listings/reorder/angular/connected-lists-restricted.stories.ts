@@ -2,17 +2,7 @@ import { signal } from '@angular/core';
 import { ReorderEvent } from '@lucca-front/ng/reorder';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
-import {
-	acceptAll,
-	CONNECTED_LISTS_ARG_TYPES,
-	CONNECTED_LISTS_DECORATORS,
-	refuseAll,
-	formatReorderEvent,
-	reorder,
-	actionsExcludedValue,
-	ReorderConnectedListsStory,
-	STYLES,
-} from './connected-lists.helpers';
+import { acceptAll, CONNECTED_LISTS_ARG_TYPES, CONNECTED_LISTS_DECORATORS, refuseAll, formatReorderEvent, reorder, ReorderConnectedListsStory, STYLES } from './connected-lists.helpers';
 
 /**
  * The lists offered in the move menu follow the CDK connections: here, a one-way workflow where an item only moves to the next step,
@@ -22,12 +12,11 @@ export default {
 	title: 'Documentation/Listings/Reorder/Angular/Connected lists restricted',
 	decorators: [...CONNECTED_LISTS_DECORATORS, moduleMetadata({ imports: [TagComponent] })],
 	argTypes: CONNECTED_LISTS_ARG_TYPES,
-	render: ({ luReorder, luReorderActionsExcluded }: ReorderConnectedListsStory) => {
-		const excluded = actionsExcludedValue(luReorderActionsExcluded);
+	render: ({ luReorder, luReorderEdgesExcluded }: ReorderConnectedListsStory) => {
 		// Written on their own line in the template, so their indentation is displayed like the other attributes
-		const actions = excluded
+		const actions = luReorderEdgesExcluded
 			? `
-				[luReorderActionsExcluded]="${excluded}"`
+				luReorderEdgesExcluded`
 			: '';
 		const columns = [
 			{ id: 'semis', label: 'Semis', items: ['Carotte', 'Poireau', 'Navet'], connectedTo: ['serre', 'en-pousse'], closed: false },
@@ -90,6 +79,6 @@ export default {
 
 export const ConnectedListsRestricted: StoryObj<ReorderConnectedListsStory> = {
 	args: {
-		luReorderActionsExcluded: [],
+		luReorderEdgesExcluded: false,
 	},
 };

@@ -1,6 +1,6 @@
 import { CdkDrag, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { LOCALE_ID } from '@angular/core';
-import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective, ReorderOptionalAction } from '@lucca-front/ng/reorder';
+import { LuReorderTranslations, luReorderTranslations, ReorderDirective, ReorderEvent, ReorderHandleComponent, ReorderItemLabelDirective } from '@lucca-front/ng/reorder';
 import { applicationConfig, ArgTypes, moduleMetadata } from '@storybook/angular-vite';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 import { intlArgType } from '@/helpers/stories';
@@ -10,7 +10,7 @@ import { intlArgType } from '@/helpers/stories';
  */
 
 export interface ReorderConnectedListsStory {
-	luReorderActionsExcluded: ReorderOptionalAction[];
+	luReorderEdgesExcluded: boolean;
 	luReorderIntl?: Partial<LuReorderTranslations>;
 	luReorder?: (event: ReorderEvent<string[]>) => void;
 }
@@ -90,21 +90,13 @@ export function reorder(event: ReorderEvent<string[]>): void {
 }
 
 /**
- * `luReorderActionsExcluded` control: only the actions that can be left out
+ * `luReorderEdgesExcluded` control
  */
-export const ACTIONS_EXCLUDED_ARG_TYPE: ArgTypes[string] = {
-	control: 'check',
-	options: ['first', 'last'],
-	description: 'Actions retirées des poignées, du menu comme du clavier : « Déplacer en premier / en dernier ».',
-	table: { category: 'inputs', type: { summary: 'ReorderOptionalAction[]' }, defaultValue: { summary: '[]' } },
+export const EDGES_EXCLUDED_ARG_TYPE: ArgTypes[string] = {
+	control: 'boolean',
+	description: 'Retire des poignées, du menu comme du clavier, les déplacements au début et à la fin de la liste.',
+	table: { category: 'inputs', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
 };
-
-/**
- * Value of `luReorderActionsExcluded` in the template, or `null` when no action is excluded (its default value)
- */
-export function actionsExcludedValue(excluded: ReorderOptionalAction[] = []): string | null {
-	return excluded.length ? `[${excluded.map((action) => `'${action}'`).join(', ')}]` : null;
-}
 
 /**
  * Displays a reorder event in `pr-story-model-display`: its lists are `CdkDropList` instances, replaced by their name
@@ -126,7 +118,7 @@ export const CONNECTED_LISTS_DECORATORS = [
 ];
 
 export const CONNECTED_LISTS_ARG_TYPES: ArgTypes<ReorderConnectedListsStory> = {
-	luReorderActionsExcluded: ACTIONS_EXCLUDED_ARG_TYPE,
+	luReorderEdgesExcluded: EDGES_EXCLUDED_ARG_TYPE,
 	luReorderIntl: { ...intlArgType(luReorderTranslations, 'LuReorderTranslations'), name: 'luReorderIntl' },
 	luReorder: {
 		description: 'Événement déclenché lorsqu’un élément est déplacé, dans sa liste ou vers une autre.',
