@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Lucca Front est le framework front-end de Lucca : un monorepo npm workspaces avec versioning unifié aligné sur les majeures Angular (LF 22.x ↔ Angular 22). La version de Node est fixée via Volta (`volta.node` dans package.json).
 
+**Le repo est public** : ne pas y mettre d'information interne à Lucca.
+
 La branche par défaut est **`master`** : elle reçoit principalement les PR de fix. Les features d'un cycle ciblent la branche de release correspondante (`release/vX.X`).
 
 ## Commandes
