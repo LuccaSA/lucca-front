@@ -39,9 +39,25 @@ export default [
 		actions: `Remplacer par \`@forward '@lucca-front/scss/src/components/avatar'\`.`,
 	},
 	{
+		// SEE https://github.com/LuccaSA/lucca-front/pull/3927.
+		// SEE https://github.com/LuccaSA/lucca-front/blob/3de46e94c/packages/ng/formly/style/main.scss#L1.
+		name: 'Formly',
+		objectPattern: /@lucca-front\/ng\/formly(?![\w-])/,
+		versionDeprecated: '20.2.3',
+		versionDeleted: '22.2.0',
+		actions: `Retirer l’import : ces feuilles de style ne ciblent que les balises \`formly-*\` de \`@ngx-formly/core\`, que LF n’intègre plus.`,
+	},
+	{
 		// Orchid palette, replaced by the reworked Grape palette
 		objectPattern: /\$orchid(?![\w-])/,
 		versionDeprecated: '22.2.0',
 		actions: `\`$orchid\` => \`$grape\``,
+	},
+	{
+		// Mass selection row of the index table, removed without replacement
+		// SEE https://github.com/LuccaSA/lucca-front/blob/1a140ec515e5a903e06e55106a7eb4a536279bd1/packages/scss/src/components/indexTable/mods.scss#L349.
+		objectPattern: /(?<![\w-])massSelection(?![\w-])/,
+		versionDeprecated: '22.2.0',
+		actions: `Retirer l’appel au mixin \`massSelection\` de l’Index table, sans remplacement.`,
 	},
 ];

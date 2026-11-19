@@ -1,0 +1,54 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/components/bubbleIcon/exports' as bubbleIcon;
+
+@mixin S {
+	--components-card2-heading-font: var(--pr-t-font-heading-4);
+	--components-card2-illustration-paddingBlock: calc((var(--pr-t-font-heading-4-lineHeight) + var(--pr-t-font-body-S-lineHeight) - var(--pr-t-spacings-400)) / 2);
+
+	.bubbleIcon {
+		@include bubbleIcon.S;
+	}
+}
+
+@mixin grid {
+	--components-card2-alignItems: center;
+	--components-card2-gridTemplate:
+		'illustration heading' auto
+		'content      content' auto
+		/ auto        1fr;
+	--components-card2-illustration-paddingBlock: 0;
+}
+
+@mixin gridIllustration {
+	--components-card2-rowGap: var(--pr-t-spacings-50);
+}
+
+@mixin headingAlignedIllustration {
+	--components-card2-heading-paddingBlockStart: calc((var(--pr-t-spacings-500) - var(--pr-t-font-heading-3-lineHeight)) / 2);
+}
+
+@mixin headingAlignedIllustrationS {
+	--components-card2-heading-paddingBlockStart: calc((var(--pr-t-spacings-400) - var(--pr-t-font-heading-4-lineHeight)) / 2);
+}
+
+@mixin contentEmpty {
+	--components-card2-illustration-paddingBlock: 0;
+	--components-card2-rowGap: 0;
+}
+
+@mixin gridWrapper {
+	--components-card2Wrapper-list-gridTemplateColumns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
+}
+
+@mixin plainWrapper {
+	--components-card2Wrapper-backgroundColor: transparent;
+	--components-card2Wrapper-padding: 0;
+}
+
+@mixin add {
+	> .button {
+		@include button.outlined;
+		@include color.palette('product');
+	}
+}

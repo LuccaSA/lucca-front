@@ -28,6 +28,7 @@
 			@include layoutFixed;
 		}
 
+		// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 		.indexTable-head-row.mod-massSelection {
 			@include massSelection;
 		}

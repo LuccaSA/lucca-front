@@ -20,7 +20,7 @@ coding agent (including smaller models) as a single task.
 **Excluded as deprecated/legacy** (do not write tests for these entry points):
 `api`*, `core`, `core-select` (tested indirectly via selects), `date`, `department`,
 `dialog` legacy `LuModal*`, `divider`, `dropdown` (panel component is `@deprecated`,
-replaced by the new menu approach), `empty-state`, `establishment`, `formly`, `input`,
+replaced by the new menu approach), `empty-state`, `establishment`, `input`,
 `modal`, `number` (module), `option` (all of it), `popover` (v1), `popup`, `safe-content`,
 `scroll`, `select` (legacy `lu-select`), `sidepanel`, `simple-select/api` directive aliases,
 `title`, `toast` module (the `LuToastsComponent` itself is active), `tooltip` NgModules

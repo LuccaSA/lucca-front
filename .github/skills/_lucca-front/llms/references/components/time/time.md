@@ -39,7 +39,8 @@ import { DurationPickerComponent, TimePickerComponent, TimeRangePickerComponent 
 | `step` | `step` | `ISO8601Duration \| null` | `null` | — | — | — |
 | `size` | `size` | `'S' \| 'M'` | — | — | — | Modifie la taille du champ. |
 | `intl` | `intl` | `unknown` | — | — | — | — |
-| `max` | `max` | ``${string}P${string}`` | `'PT99H'` | — | — | — |
+| `max` | `max` | ``${string}P${string}`` | — | — | — | — |
+| `unit` | `unit` | `'hoursMinutes' \| 'days'` | `'hoursMinutes'` | — | — | — |
 | `displayArrows` | `displayArrows` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche les boutons d’incrémentation. |
 | `label` | `label` | `string` | — | — | — | Modifie le label de l’input. |
 | `hideZeroValue` | `hideZeroValue` | `boolean` | `false` | — | `luBooleanAttribute` | Masque le contenu du champ lorsque sa valeur est nulle. |

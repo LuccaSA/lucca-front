@@ -6,6 +6,7 @@
 	// Actions
 	.button,
 	.buttonGroup,
+	.favorite,
 	.link,
 
 	// Icons
@@ -93,7 +94,8 @@
 	// Structure
 	.box,
 	.boxDisclosure,
-	.card,
+	.card2,
+	.card2Wrapper,
 	.container,
 	.divider,
 	.emptyState,
@@ -145,6 +147,7 @@
 	// ANGULAR COMPONENTS OUTSIDE
 
 	[luButton],
+	lu-favorite,
 	[luLink],
 
 	// Icons
@@ -176,6 +179,7 @@
 	lu-index-table,
 	[luindextablerow],
 	lu-sortable-list .sortableList,
+	lu-reorder-handle,
 	lu-listing-item,
 	lu-activity-feed,
 	lu-activity-feed-step,
@@ -302,6 +306,7 @@
 	.header,
 	.filterBarDeprecated,
 	.highlightSection,
+	.card,
 	lu-skeleton-table {
 		outline: 2px solid red;
 		outline-offset: 3px;

@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
-	ApplicationRef,
+	afterRenderEffect,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
@@ -19,6 +19,7 @@ import {
 	Renderer2,
 	signal,
 	TemplateRef,
+	untracked,
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
@@ -77,7 +78,6 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
-	#appRef = inject(ApplicationRef);
 	#renderer = inject(Renderer2);
 	protected parentForm = inject(LU_FORM_INSTANCE, { optional: true });
 
@@ -154,6 +154,12 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	#inputs: InputDirective[] = [];
 
+	// Bumped on every registration/unregistration, read by the `afterRenderEffect` set up in the constructor:
+	// the ids can only be wired once the inputs are in the DOM, and the effect being registered up front means
+	// neither `addInput` nor `removeInput` has to schedule anything — `removeInput` runs while the view is being
+	// torn down, where the injector `afterNextRender` needs may already be destroyed (NG0205).
+	readonly #inputsRevision = signal(0);
+
 	/**
 	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
 	 */
@@ -186,12 +192,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
-		afterNextRender(
-			() => {
-				this.prepareInput();
-			},
-			{ injector: this.#injector },
-		);
+		this.#inputsRevision.update((revision) => revision + 1);
 	}
 
 	/**
@@ -202,16 +203,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	public removeInput(input: InputDirective): void {
 		this.#inputs = this.#inputs.filter((existing) => existing !== input);
-		// When the whole application is being torn down, its injector is destroyed before the views: there is
-		// nothing left to update, and scheduling a render would throw (NG0205).
-		if (this.#inputs.length > 0 && !this.#appRef.injector.destroyed) {
-			afterNextRender(
-				() => {
-					this.prepareInput();
-				},
-				{ injector: this.#injector },
-			);
-		}
+		this.#inputsRevision.update((revision) => revision + 1);
 	}
 
 	public get inputs(): InputDirective[] {
@@ -250,6 +242,17 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#selfLabelledById: string | null = null;
 
 	constructor() {
+		// `prepareInput` reads the inputs back from the DOM and writes signals the template depends on, so it
+		// runs after render, and untracked: its own reads must not subscribe the effect to the field state.
+		afterRenderEffect(() => {
+			this.#inputsRevision();
+			untracked(() => {
+				if (this.#inputs.length > 0) {
+					this.prepareInput();
+				}
+			});
+		});
+
 		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus], () => {
 			this.updateAria();
 		});

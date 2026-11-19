@@ -264,7 +264,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	 * It isn't checked against the options, and matches the selected option through `optionComparer`.
 	 * It isn't supported by a multi-select with `withSelectAll`, which keeps clearing to an empty selection.
 	 */
-	readonly defaultValue = input<TValue | null>(null);
+	readonly defaultValue = input<NoInfer<TValue> | null>(null);
 
 	public get value(): TValue | null {
 		return this._value;

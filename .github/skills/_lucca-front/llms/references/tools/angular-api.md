@@ -19,9 +19,6 @@
   - Services
 - filter-pills/core (`@lucca-front/ng/filter-pills/core`)
   - Injection tokens
-- formly (`@lucca-front/ng/formly`)
-  - Providers
-  - Modules dépréciés
 - forms/rich-text-input/formatters/html (`@lucca-front/ng/forms/rich-text-input/formatters/html`)
   - Providers
 - forms/rich-text-input/formatters/markdown (`@lucca-front/ng/forms/rich-text-input/formatters/markdown`)
@@ -192,18 +189,6 @@ bind to a string with iso 26001 format YYYY-MM-DD
 |-------|------|-------------|
 | `FILTER_PILL_INPUT_COMPONENT` | `FilterPillInputComponent` | — |
 | `FILTER_PILL_HOST_COMPONENT` | `FilterPillHostComponent` | — |
-
-## formly (`@lucca-front/ng/formly`)
-
-### Providers
-
-| Fonction | Signature | Description |
-|----------|-----------|-------------|
-| `provideLuFormly` | `(): EnvironmentProviders` | — |
-
-### Modules dépréciés
-
-- ⚠️ `LuFormlyModule` — use provideLuFormly() in a lazy loaded route (and stop using formly please)
 
 ## forms/rich-text-input/formatters/html (`@lucca-front/ng/forms/rich-text-input/formatters/html`)
 

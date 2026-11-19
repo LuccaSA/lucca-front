@@ -1,0 +1,17 @@
+@mixin favorite {
+	--components-favorite-color: var(--palettes-warning-600);
+}
+
+@mixin favoriteAnimated {
+	--components-favorite-icon-animationName: favoriteAdd;
+	--components-favorite-sparks-animationName: favoriteSparks;
+}
+
+@mixin disabled {
+	--components-favorite-color: var(--pr-t-color-text-disabled);
+
+	.favorite-button.button {
+		--components-button-backgroundColor: transparent;
+		--components-button-pointerEvents: auto;
+	}
+}

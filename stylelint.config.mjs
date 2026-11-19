@@ -26,10 +26,10 @@ export default {
 		{
 			// Disable deprecation linting on deprecated elements.
 			files: [
-				'packages/ng/formly/**/*.scss',
 				'packages/ng/styles/components/_input.scss',
 				'packages/ng/styles/components/_picker.scss',
 				'packages/ng/styles/definitions/**/*.scss',
+				'packages/scss/src/components/card/**/*.scss',
 				'packages/scss/src/components/checkbox/**/*.scss',
 				'packages/scss/src/components/field/**/*.scss',
 				'packages/scss/src/components/file/**/*.scss',

@@ -73,6 +73,7 @@
 	.dataTable-foot-row-cell {
 		&:first-child {
 			--components-dataTable-cellFirst-width: 2.5rem;
+			--components-dataTable-cellFirst-userSelect: none;
 
 			padding-inline: var(--pr-t-spacings-75);
 		}

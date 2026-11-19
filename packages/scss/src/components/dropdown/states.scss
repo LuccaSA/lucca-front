@@ -7,3 +7,7 @@
 		--components-dropdown-list-option-action-backgroundColor: var(--palettes-neutral-0);
 	}
 }
+
+@mixin hoverCapable {
+	--components-dropdown-list-option-action-kbdWrapper-opacity: 0;
+}

@@ -12,6 +12,7 @@
 |---------|----------|-------|
 | lu-label | `ng generate @lucca-front/ng:lu-label` | Replace the deprecated .label with lu-numeric-badge, lu-status-badge or lu-tag, and write a migration report |
 | menu | `ng generate @lucca-front/ng:menu` | Migrate the deprecated .menu classes to .horizontalNavigation. |
+| reorder | `ng generate @lucca-front/ng:reorder` | Make cdkDropList lists accessible with luReorder: keyboard and menu moves, announcements |
 | text-size | `ng generate @lucca-front/ng:text-size` | Replace the deprecated .(pr-)u-textXS~XXXL utilities with the body and heading utilities, and write a migration report |
 
 ## Catalogue complet (cumulatif)
@@ -37,6 +38,7 @@
 | menu | `ng generate @lucca-front/ng:menu` | Migrate the deprecated .menu classes to .horizontalNavigation. | — |
 | new-icons | `ng generate @lucca-front/ng:new-icons` | Replace old icon names with new ones. | — |
 | palettes | `ng generate @lucca-front/ng:palettes` | Replace palettes with new names. | — |
+| reorder | `ng generate @lucca-front/ng:reorder` | Make cdkDropList lists accessible with luReorder: keyboard and menu moves, announcements | — |
 | text-size | `ng generate @lucca-front/ng:text-size` | Replace the deprecated .(pr-)u-textXS~XXXL utilities with the body and heading utilities, and write a migration report | — |
 | tokens-radius | `ng generate @lucca-front/ng:tokens-radius` | Replace radius tokens with new names. | — |
 | tokens-spacings | `ng generate @lucca-front/ng:tokens-spacings` | Replace spacing tokens with new names. | — |

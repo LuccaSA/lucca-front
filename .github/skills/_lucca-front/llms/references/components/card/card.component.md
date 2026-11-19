@@ -8,6 +8,7 @@
 
 ```css
 @forward '@lucca-front/scss/src/components/card';
+@forward '@lucca-front/scss/src/components/table';
 ```
 
 ```html
