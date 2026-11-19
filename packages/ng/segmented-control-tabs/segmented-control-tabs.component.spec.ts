@@ -1,6 +1,7 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { SegmentedControlTabsPanelLabelDirective } from './panel/panel-label.directive';
 import { SegmentedControlTabsPanelComponent } from './panel/panel.component';
 import { SegmentedControlTabsComponent } from './segmented-control-tabs.component';
 
@@ -19,6 +20,25 @@ import { SegmentedControlTabsComponent } from './segmented-control-tabs.componen
 class HostComponent {
 	readonly active = signal<string | null>(null);
 }
+
+@Component({
+	template: `
+		<lu-segmented-control-tabs>
+			<lu-segmented-control-tabs-panel label="Input" value="input">Input content</lu-segmented-control-tabs-panel>
+			<lu-segmented-control-tabs-panel value="projected">
+				<ng-container luSegmentedControlTabsPanelLabel>Projected <strong>label</strong></ng-container>
+				Projected content
+			</lu-segmented-control-tabs-panel>
+			<lu-segmented-control-tabs-panel label="Badge" value="badge" numericBadge="0">Badge content</lu-segmented-control-tabs-panel>
+			<lu-segmented-control-tabs-panel label="Input" value="both">
+				<ng-container luSegmentedControlTabsPanelLabel>Projected label</ng-container>
+				Both content
+			</lu-segmented-control-tabs-panel>
+		</lu-segmented-control-tabs>
+	`,
+	imports: [SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent, SegmentedControlTabsPanelLabelDirective],
+})
+class ProjectedLabelHostComponent {}
 
 describe(SegmentedControlTabsComponent.name, () => {
 	let fixture: ComponentFixture<HostComponent>;
@@ -113,5 +133,39 @@ describe(SegmentedControlTabsComponent.name, () => {
 
 			expect(tooltipPanel()?.textContent).toContain('Grid view');
 		}));
+	});
+
+	describe('projected label', () => {
+		let labelFixture: ComponentFixture<ProjectedLabelHostComponent>;
+
+		const tabs = () => Array.from((labelFixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+		const panels = () => Array.from((labelFixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('[role="tabpanel"]'));
+		const text = (node: Element | undefined) => node?.textContent?.replace(/\s+/g, ' ').trim();
+
+		beforeEach(() => {
+			labelFixture = TestBed.createComponent(ProjectedLabelHostComponent);
+			labelFixture.detectChanges();
+		});
+
+		it('renders the label input in the tab', () => {
+			expect(text(tabs()[0])).toBe('Input');
+		});
+
+		it('renders the luSegmentedControlTabsPanelLabel element in the tab, not in the panel', () => {
+			expect(text(tabs()[1])).toBe('Projected label');
+			expect(tabs()[1].querySelector('strong')).not.toBeNull();
+			expect(text(panels()[1])).toBe('Projected content');
+		});
+
+		it('gives the label input priority over the projected element', () => {
+			expect(text(tabs()[3])).toBe('Input');
+			expect(text(panels()[3])).toBe('Both content');
+		});
+
+		it('displays the numeric badge in the tab, including a zero counter set as a static attribute', () => {
+			expect(tabs()[2].querySelector('lu-numeric-badge')?.textContent?.trim()).toBe('0');
+			expect(panels()[2].querySelector('lu-numeric-badge')).toBeNull();
+			expect(tabs()[0].querySelector('lu-numeric-badge')).toBeNull();
+		});
 	});
 });

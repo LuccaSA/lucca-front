@@ -17,6 +17,7 @@ import { SegmentedControlTabsPanelComponent, SegmentedControlTabsComponent } fro
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `label` | `label` | `PortalContent` | — | — | — | — |
+| `numericBadge` | `numericBadge` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
 | `icon` | `icon` | `LuccaIcon` | — | — | — | — |
 | `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `value` | `value` | `T` | — | ✅ | — | — |

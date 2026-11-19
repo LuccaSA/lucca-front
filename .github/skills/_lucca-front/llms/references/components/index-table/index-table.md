@@ -7,6 +7,7 @@
 - API Reference
   - IndexTableActionFileComponent (component)
   - IndexTableActionComponent (component)
+  - IndexTableBodyGroupDirective (directive)
   - IndexTableBodyComponent (component)
   - IndexTableRowCellHeaderComponent (component)
   - IndexTableRowCellComponent (component)
@@ -25,7 +26,7 @@
 ## Import
 
 ```typescript
-import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBodyComponent, IndexTableRowCellHeaderComponent, IndexTableRowCellComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowComponent, IndexTableComponent } from '@lucca-front/ng/index-table';
+import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBodyGroupDirective, IndexTableBodyComponent, IndexTableRowCellHeaderComponent, IndexTableRowCellComponent, IndexTableFootComponent, IndexTableHeadComponent, IndexTableRowComponent, IndexTableComponent } from '@lucca-front/ng/index-table';
 ```
 
 ## Basic Usage
@@ -44,6 +45,10 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 ### IndexTableActionComponent (component)
 
 **Selectors:** `button[luIndexTableAction]`, `a[luIndexTableAction]`, `label[luIndexTableAction]`
+
+### IndexTableBodyGroupDirective (directive)
+
+**Selector:** `[luIndexTableBodyGroup]`
 
 ### IndexTableBodyComponent (component)
 

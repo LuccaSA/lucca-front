@@ -1,4 +1,4 @@
-@if (group(); as group) {
+@if (group() || groupSlot()) {
 	@if (groupButtonAlt(); as groupButtonAlt) {
 		<tr class="dataTable-body-row mod-group">
 			<td class="dataTable-body-row-cell" [attr.colspan]="colspan()">
@@ -13,7 +13,11 @@
 					>
 						<lu-icon icon="arrowChevronTop" [alt]="groupButtonAlt" />
 					</button>
-					<ng-container *luPortal="group" />
+					@if (group(); as group) {
+						<ng-container *luPortal="group" />
+					} @else {
+						<ng-content select="[luDataTableBodyGroup]" />
+					}
 				</div>
 			</td>
 		</tr>

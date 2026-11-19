@@ -25,9 +25,8 @@ import { SegmentedControlTabsComponent, SegmentedControlTabsPanelComponent } fro
 ```
 
 ```html
-<ng-template #label>Lorem</ng-template>
 <lu-segmented-control-tabs [ariaLabel]="ariaLabel" [(active)]="active">
-	<lu-segmented-control-tabs-panel [label]="label" value="0">
+	<lu-segmented-control-tabs-panel label="Lorem" value="0">
 		<div class="demo">Content Lorem</div>
 	</lu-segmented-control-tabs-panel>
 	<lu-segmented-control-tabs-panel label="Ipsum" value="1">
@@ -49,9 +48,8 @@ import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@luc
 ```
 
 ```html
-<ng-template #label>Lorem</ng-template>
 <lu-segmented-control [ariaLabel]="ariaLabel" [(ngModel)]="sample">
-	<lu-segmented-control-filter [label]="label" value="0" />
+	<lu-segmented-control-filter label="Lorem" value="0" />
 	<lu-segmented-control-filter label="Ipsum" value="1" />
 	<lu-segmented-control-filter label="Dolor sit amet" value="2" />
 	<lu-segmented-control-filter label="Consectetur adipisicing elit" value="3" />

@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { luBooleanAttribute, PortalDirective } from '@lucca-front/ng/core';
 import { NoopValueAccessorDirective } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { SegmentedControlTabsPanelComponent } from './public-api';
 import { LU_SEGMENTEDCONTROLTABS_INSTANCE } from './segmented-control-tabs.token';
@@ -30,7 +31,7 @@ let nextId = 0;
 	templateUrl: './segmented-control-tabs.component.html',
 	styleUrl: './segmented-control-tabs.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [ReactiveFormsModule, PortalDirective, NgTemplateOutlet, LuTooltipTriggerDirective, IconComponent],
+	imports: [ReactiveFormsModule, PortalDirective, NgTemplateOutlet, LuTooltipTriggerDirective, IconComponent, NumericBadgeComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [NoopValueAccessorDirective],
 	providers: [

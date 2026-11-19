@@ -5,6 +5,7 @@
 - Import
 - Basic Usage
 - API Reference
+  - DataTableBodyGroupDirective (directive)
   - DataTableBodyComponent (component)
   - DataTableRowCellHeaderComponent (component)
   - DataTableRowCellComponent (component)
@@ -25,7 +26,7 @@
 ## Import
 
 ```typescript
-import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCellComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowComponent, DataTableComponent } from '@lucca-front/ng/data-table';
+import { DataTableBodyGroupDirective, DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCellComponent, DataTableFootComponent, DataTableHeadComponent, DataTableRowComponent, DataTableComponent } from '@lucca-front/ng/data-table';
 ```
 
 ## Basic Usage
@@ -36,6 +37,10 @@ import { DataTableBodyComponent, DataTableRowCellHeaderComponent, DataTableRowCe
 ```
 
 ## API Reference
+
+### DataTableBodyGroupDirective (directive)
+
+**Selector:** `[luDataTableBodyGroup]`
 
 ### DataTableBodyComponent (component)
 

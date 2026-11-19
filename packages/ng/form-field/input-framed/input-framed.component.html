@@ -8,5 +8,7 @@
 	</div>
 	@if (framedPortal(); as framedPortal) {
 		<div class="inputFramed-content"><ng-container *luPortal="framedPortal" /></div>
+	} @else if (contentSlot()) {
+		<div class="inputFramed-content"><ng-content select="[luInputFramedContent]" /></div>
 	}
 </div>

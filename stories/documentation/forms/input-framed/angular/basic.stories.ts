@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { FormFieldComponent, INPUT_FRAMED_SIZE, InputFramedComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, INPUT_FRAMED_SIZE, InputFramedComponent, InputFramedContentDirective } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -11,6 +11,7 @@ interface InputFramedBasicStory {
 	illustration: boolean;
 	info: boolean;
 	panel: boolean;
+	richContent: boolean;
 	tag: boolean;
 	checkbox: boolean;
 	center: boolean;
@@ -34,6 +35,7 @@ export default {
 				CheckboxInputComponent,
 				FormsModule,
 				InputFramedComponent,
+				InputFramedContentDirective,
 				GridComponent,
 				GridColumnComponent,
 			],
@@ -41,8 +43,14 @@ export default {
 	],
 	argTypes: {
 		panel: {
-			description: 'Ajoute une section visible lorsque le champ est sélectionné.',
-			table: { category: 'inputs' },
+			description: 'Ajoute une section dans le cadre de l’option sélectionnée, via l’input <code>framedPortal</code>.',
+			table: { category: 'story' },
+		},
+		richContent: {
+			name: '↳ richContent',
+			if: { arg: 'panel', truthy: true },
+			description: 'Remplace l’input <code>framedPortal</code> par un contenu riche projeté avec la directive <code>luInputFramedContent</code>.',
+			table: { category: 'story' },
 		},
 		illustration: {
 			description: 'Slot dédié à l’ajout d’illustrations.',
@@ -88,7 +96,12 @@ export default {
 	},
 	render: (args: InputFramedBasicStory) => {
 		//const column = args.grid ? ` class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 1'"` : ``;
-		const panelTemplate = args.panel ? ` framedPortal="Lorem ipsum dolor"` : ``;
+		const panelTemplate = args.panel && !args.richContent ? ` framedPortal="Additional details about this option."` : ``;
+		const panelContent =
+			args.panel && args.richContent
+				? `
+				<ng-container luInputFramedContent>Additional details about <strong>this option</strong>.</ng-container>`
+				: ``;
 		const tagTemplate = args.tag ? ` tag="Tag"` : ``;
 		const infoTemplate = args.info
 			? `
@@ -121,22 +134,22 @@ export default {
 			<lu-input-framed${panelTemplate}${center}${size}>
 				<lu-form-field label="Option A"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input [(ngModel)]="exampleA" required />
-				</lu-form-field>${infoTemplate}${illustrationTemplate}
+				</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-input-framed>
 			<lu-input-framed${panelTemplate}${center}${size}>
 				<lu-form-field label="Option B"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input [(ngModel)]="exampleB" required />
-				</lu-form-field>${infoTemplate}${illustrationTemplate}
+				</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-input-framed>
 			<lu-input-framed${panelTemplate}${center}${size}>
 				<lu-form-field label="Option C"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
-				</lu-form-field>${infoTemplate}${illustrationTemplateDisabled}
+				</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplateDisabled}
 			</lu-input-framed>
 			<lu-input-framed${panelTemplate}${center}${size}>
 				<lu-form-field label="Option D"${inlineMessage}${tagTemplate}${presentation}>
 					<lu-checkbox-input [(ngModel)]="exampleD" required />
-				</lu-form-field>${infoTemplate}${illustrationTemplate}
+				</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-input-framed>
 		`;
 		const templateGridCheckbox = `
@@ -144,64 +157,64 @@ export default {
 				<lu-input-framed${panelTemplate}${center}${size}>
 					<lu-form-field label="Option A"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input [(ngModel)]="exampleA" required />
-					</lu-form-field>${infoTemplate}${illustrationTemplate}
+					</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-input-framed>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-input-framed${panelTemplate}${center}${size}>
 					<lu-form-field label="Option B"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input [(ngModel)]="exampleB" required />
-					</lu-form-field>${infoTemplate}${illustrationTemplate}
+					</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-input-framed>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-input-framed${panelTemplate}${center}${size}>
 					<lu-form-field label="Option C"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
-					</lu-form-field>${infoTemplate}${illustrationTemplateDisabled}
+					</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplateDisabled}
 				</lu-input-framed>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-input-framed${panelTemplate}${center}${size}>
 					<lu-form-field label="Option D"${inlineMessage}${tagTemplate}${presentation}>
 						<lu-checkbox-input [(ngModel)]="exampleD" required />
-					</lu-form-field>${infoTemplate}${illustrationTemplate}
+					</lu-form-field>${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-input-framed>
 			</lu-grid-column>
 		`;
 		const template = `
 			<lu-radio value="A"${panelTemplate}${tagTemplate}${inlineMessage}>
-				Option A${infoTemplate}${illustrationTemplate}
+				Option A${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-radio>
 			<lu-radio value="B"${panelTemplate}${tagTemplate}${inlineMessage}>
-				Option B${infoTemplate}${illustrationTemplate}
+				Option B${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-radio>
 			<lu-radio value="C"${panelTemplate}${tagTemplate}${inlineMessage} disabled>
-				Option C${infoTemplate}${illustrationTemplateDisabled}
+				Option C${infoTemplate}${panelContent}${illustrationTemplateDisabled}
 			</lu-radio>
 			<lu-radio value="D"${panelTemplate}${tagTemplate}${inlineMessage}>
-				Option D${infoTemplate}${illustrationTemplate}
+				Option D${infoTemplate}${panelContent}${illustrationTemplate}
 			</lu-radio>
 		`;
 		const templateGrid = `
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-radio value="A"${panelTemplate}${tagTemplate}${inlineMessage}>
-					Option A${infoTemplate}${illustrationTemplate}
+					Option A${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-radio>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-radio value="B"${panelTemplate}${tagTemplate}${inlineMessage}>
-					Option B${infoTemplate}${illustrationTemplate}
+					Option B${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-radio>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-radio value="C"${panelTemplate}${tagTemplate}${inlineMessage} disabled>
-					Option C${infoTemplate}${illustrationTemplateDisabled}
+					Option C${infoTemplate}${panelContent}${illustrationTemplateDisabled}
 				</lu-radio>
 			</lu-grid-column>
 			<lu-grid-column colspan="2" [responsive]="{ colspanAtMediaMinXS: 1 }">
 				<lu-radio value="D"${panelTemplate}${tagTemplate}${inlineMessage}>
-					Option D${infoTemplate}${illustrationTemplate}
+					Option D${infoTemplate}${panelContent}${illustrationTemplate}
 				</lu-radio>
 			</lu-grid-column>
 		`;
@@ -254,6 +267,7 @@ export default {
 export const Basic = {
 	args: {
 		panel: false,
+		richContent: false,
 		grid: false,
 		illustration: false,
 		center: false,

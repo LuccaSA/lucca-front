@@ -41,9 +41,9 @@ import { FormFieldComponent, InputDirective, PresentationDisplayDirective } from
 | `iconAItooltip` | `iconAItooltip` | `string \| null` | `null` | — | — | — |
 | `iconAIalt` | `iconAIalt` | `string \| null` | `null` | — | — | — |
 | `width` | `width` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
-| `invalid` | `invalid` | `unknown` | `null` | — | `luNullableBooleanAttribute` | Applique l’état invalide au champ. |
-| `inlineMessage` | `inlineMessage` | `PortalContent \| null` | `null` | — | — | Ajoute un texte indicatif sous le champ de formulaire. [PortalContent] |
-| `errorInlineMessage` | `errorInlineMessage` | `PortalContent \| null` | `null` | — | — | Ajoute un texte d’erreur sous le champ de formulaire lorsque celui-ci est en erreur. [PortalContent] |
+| `invalid` | `invalid` | `unknown` | `null` | — | `luNullableBooleanAttribute` | — |
+| `inlineMessage` | `inlineMessage` | `PortalContent \| null` | `null` | — | — | Texte indicatif sous le champ. Contenu riche : directive luFormFieldInlineMessage (l’input prévaut). |
+| `errorInlineMessage` | `errorInlineMessage` | `PortalContent \| null` | `null` | — | — | Texte d’erreur sous le champ invalide. Contenu riche : directive luFormFieldErrorInlineMessage (l’input prévaut). |
 | `inlineMessageState` | `inlineMessageState` | `InlineMessageState \| null` | `null` | — | — | Modifie l’état de l’inline message. |
 | `size` | `size` | `FormFieldSize \| null` | `null` | — | — | — |
 | `extraDescribedBy` | `extraDescribedBy` | `string` | `''` | — | — | — |
