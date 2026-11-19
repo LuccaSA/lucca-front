@@ -6,7 +6,18 @@ import { chmodSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
-import { bumpPackageJson, classify, declaredPackages, dropFromLock, isQaTrigger, isVersion, major, qaRunId } from './lib.mjs';
+import {
+	bumpPackageJson,
+	classify,
+	declaredPackages,
+	dropFromLock,
+	isQaTrigger,
+	isVersion,
+	lockedVersions,
+	major,
+	owningLockFolder,
+	qaRunId,
+} from './lib.mjs';
 
 const SCRIPT = path.join(import.meta.dirname, 'bump-qa.mjs');
 
@@ -14,10 +25,10 @@ describe('bumpPackageJson', () => {
 	const procurement =
 		'{\n\t"dependencies": {\n\t\t"@lucca-front/icons": "~22.1.1",\n\t\t"@lucca-front/ng": "~22.1.1",\n\t\t"@lucca/cdk": "^10.9.2"\n\t}\n}\n';
 
-	it('keeps the range prefix of each package and every other byte', () => {
+	it('pins each package to the exact version and keeps every other byte', () => {
 		const { text, changed } = bumpPackageJson(procurement, '22.2.0');
 		assert.equal(changed, true);
-		assert.equal(text, procurement.replaceAll('~22.1.1', '~22.2.0'));
+		assert.equal(text, procurement.replaceAll('~22.1.1', '22.2.0'));
 	});
 
 	it('bumps exact versions and @lucca/prisme', () => {
@@ -31,13 +42,62 @@ describe('bumpPackageJson', () => {
 		assert.equal(text, engagement.replace('"20.2.0"', '"20.3.0"'));
 	});
 
-	it('reports no change when the file is already on the version', () => {
-		assert.equal(bumpPackageJson('{ "@lucca-front/ng": "~22.2.0" }', '22.2.0').changed, false);
+	it('reports no change when the file is already pinned to the version', () => {
+		assert.equal(bumpPackageJson('{ "@lucca-front/ng": "22.2.0" }', '22.2.0').changed, false);
+	});
+
+	it('pins a range already on the version, which npm could resolve to a later release', () => {
+		assert.deepEqual(bumpPackageJson('{ "@lucca-front/ng": "~22.2.0" }', '22.2.0'), {
+			text: '{ "@lucca-front/ng": "22.2.0" }',
+			changed: true,
+		});
 	});
 
 	it('does not touch a package whose name only starts like a Lucca Front one', () => {
 		const text = '{ "@lucca-front/ng-extra": "1.0.0", "@lucca/prisme-tokens": "1.0.0" }';
 		assert.equal(bumpPackageJson(text, '22.2.0').changed, false);
+	});
+});
+
+describe('lockedVersions', () => {
+	it('lists every version of the Lucca Front packages at any depth, and nothing else', () => {
+		const lock = JSON.stringify({
+			packages: {
+				'': { dependencies: { '@lucca-front/ng': '22.2.0' } },
+				'node_modules/@lucca-front/ng': { version: '22.2.0' },
+				'node_modules/@lucca/prisme': { version: '22.2.0' },
+				'node_modules/foo/node_modules/@lucca/prisme': { version: '22.2.1' },
+				'node_modules/@lucca/cdk': { version: '10.9.2' },
+			},
+		});
+		assert.deepEqual(lockedVersions(lock), { '@lucca-front/ng': ['22.2.0'], '@lucca/prisme': ['22.2.0', '22.2.1'] });
+	});
+});
+
+describe('owningLockFolder', () => {
+	const locks =
+		(...folders) =>
+		(folder) =>
+			folders.includes(folder);
+
+	it('takes the lockfile next to the manifest', () => {
+		assert.equal(
+			owningLockFolder('front/integrations/pdf/package.json', locks('front', 'front/integrations/pdf')),
+			'front/integrations/pdf',
+		);
+	});
+
+	it('takes the lockfile of an ancestor for a workspace manifest', () => {
+		assert.equal(owningLockFolder('packages/app/package.json', locks('.')), '.');
+		assert.equal(owningLockFolder('front/libs/ui/package.json', locks('front')), 'front');
+	});
+
+	it('finds a lockfile at the repo root for a root manifest', () => {
+		assert.equal(owningLockFolder('package.json', locks('.')), '.');
+	});
+
+	it('answers undefined when no lockfile governs the manifest', () => {
+		assert.equal(owningLockFolder('front/package.json', locks()), undefined);
 	});
 });
 

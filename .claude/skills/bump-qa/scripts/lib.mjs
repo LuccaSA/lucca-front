@@ -22,17 +22,19 @@ export function declaredPackages(text) {
 }
 
 /**
- * Sets every Lucca Front package of a package.json to `version`, keeping the range prefix each one has
- * (`~`, `^` or none) and the rest of the file byte for byte.
+ * Pins every Lucca Front package of a package.json to exactly `version`, keeping the rest of the file byte for byte.
+ * The range prefix (`~`, `^`) is dropped on purpose: with it, npm may resolve a later release (`~22.2.0` allows
+ * `22.2.1`) and the QA would test another version than the one the pull request names. These pull requests are
+ * closed after the QA, never merged, so the repo's own prefix does not need to survive.
  */
 export function bumpPackageJson(text, version) {
 	let changed = false;
 	let next = text;
 	for (const name of LF_PACKAGES) {
 		next = next.replace(declaration(name), (whole, open, prefix, current, close) => {
-			if (current === version) return whole;
+			if (!prefix && current === version) return whole;
 			changed = true;
-			return `${open}${prefix}${version}${close}`;
+			return `${open}${version}${close}`;
 		});
 	}
 	return { text: next, changed };
@@ -54,6 +56,28 @@ export function dropFromLock(lockText) {
 		}
 	}
 	return { text: JSON.stringify(lock, null, 2) + '\n', removed };
+}
+
+/** Every version of the Lucca Front packages a package-lock.json resolves, at any depth: `{ '@lucca/prisme': ['22.1.2'] }`. */
+export function lockedVersions(lockText) {
+	const versions = {};
+	for (const [key, entry] of Object.entries(JSON.parse(lockText).packages ?? {})) {
+		const name = LF_PACKAGES.find((n) => key === `node_modules/${n}` || key.endsWith(`/node_modules/${n}`));
+		if (name) versions[name] = [...new Set([...(versions[name] ?? []), entry.version])];
+	}
+	return versions;
+}
+
+/**
+ * The folder of the package-lock.json that governs `file`: the nearest one in its folder or above, up to the repo root,
+ * since a workspace manifest is locked by its root's lockfile. `undefined` when none does.
+ */
+export function owningLockFolder(file, hasLock) {
+	for (let dir = file.split('/').slice(0, -1); ; dir = dir.slice(0, -1)) {
+		const folder = dir.join('/') || '.';
+		if (hasLock(folder)) return folder;
+		if (!dir.length) return undefined;
+	}
 }
 
 /** The dd run id in the link of a `QA Webservice` check: https://dd.lucca.tech/qa/run/82348/e2e. */

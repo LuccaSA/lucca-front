@@ -16,7 +16,18 @@ import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'no
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
-import { branchName, bumpPackageJson, classify, declaredPackages, DEFAULT_REPOS, dropFromLock, isVersion, major } from './lib.mjs';
+import {
+	DEFAULT_REPOS,
+	branchName,
+	bumpPackageJson,
+	classify,
+	declaredPackages,
+	dropFromLock,
+	isVersion,
+	lockedVersions,
+	major,
+	owningLockFolder,
+} from './lib.mjs';
 
 const ORG = 'LuccaSA';
 const LABEL = ':hammer: Technical';
@@ -110,12 +121,21 @@ function openOne(repo) {
 			if (!hasChanged) continue;
 			writeFileSync(path.join(dir, file), text);
 			changed.push(file);
-			const folder = path.join(dir, path.dirname(file));
-			const lock = path.join(folder, 'package-lock.json');
-			if (existsSync(lock)) {
-				writeFileSync(lock, dropFromLock(readFileSync(lock, 'utf8')).text);
-				// Peer conflicts with the repo's other dependencies surface here, before anything is pushed.
-				run('npm', ['install', '--package-lock-only', '--ignore-scripts', '--no-audit', '--no-fund'], { cwd: folder });
+		}
+		// Every manifest is bumped before any lockfile is resolved, and each lockfile is resolved once, even when it
+		// governs several manifests (workspaces) or sits above the one that changed.
+		const hasLock = (folder) => existsSync(path.join(dir, folder, 'package-lock.json'));
+		const lockFolders = new Set(changed.map((file) => owningLockFolder(file, hasLock)).filter(Boolean));
+		for (const folder of lockFolders) {
+			const lock = path.join(dir, folder, 'package-lock.json');
+			writeFileSync(lock, dropFromLock(readFileSync(lock, 'utf8')).text);
+			// Peer conflicts with the repo's other dependencies surface here, before anything is pushed.
+			run('npm', ['install', '--package-lock-only', '--ignore-scripts', '--no-audit', '--no-fund'], { cwd: path.join(dir, folder) });
+			const wrong = Object.entries(lockedVersions(readFileSync(lock, 'utf8'))).filter(([, versions]) =>
+				versions.some((v) => v !== version),
+			);
+			if (wrong.length) {
+				throw new Error(`${folder}/package-lock.json resolves ${wrong.map(([n, v]) => `${n}@${v.join('|')}`).join(', ')}, not ${version}`);
 			}
 		}
 		if (!changed.length) return `⏭️  already on ${version}`;
