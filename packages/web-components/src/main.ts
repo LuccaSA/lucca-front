@@ -33,6 +33,7 @@ import { createDialogApi, DialogHeaderElementComponent } from './dialog';
 import { createToastsApi } from './toasts';
 import { imagesInterceptor, resolveImages } from './images';
 import { activateUserPopovers, userPopoverInterceptor } from './user-popover';
+import { impersonationInterceptor, ImpersonationElementComponent } from './impersonation';
 
 /**
  * Components rendered by Angular at runtime, keyed by the name used in `window.Prisme`.
@@ -74,6 +75,8 @@ const ELEMENTS: Record<string, { tagName: string; component: Type<unknown> }> = 
 	DialogFooter: { tagName: 'lu-dialog-footer', component: DialogFooterComponent },
 	DialogHeader: { tagName: 'lu-dialog-header', component: DialogHeaderElementComponent },
 	Toasts: { tagName: 'lu-toasts', component: LuToastsComponent },
+	// Navigation: users and current user given by the page, see `impersonation.ts`
+	Impersonation: { tagName: 'lu-impersonation', component: ImpersonationElementComponent },
 };
 
 declare global {
@@ -93,7 +96,7 @@ createApplication({
 		{ provide: LOCALE_ID, useFactory: () => document.documentElement.lang || 'fr-FR' },
 		configureLuDialog(),
 		provideLuDialog(),
-		provideHttpClient(withInterceptors([imagesInterceptor, userPopoverInterceptor])),
+		provideHttpClient(withInterceptors([imagesInterceptor, userPopoverInterceptor, impersonationInterceptor])),
 	],
 })
 	.then(({ injector }) => {
