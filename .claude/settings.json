@@ -32,5 +32,18 @@
       "Bash(gh pr checks:*)",
       "Bash(gh pr diff:*)"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/skills/recette-pr-fix/scripts/gate.mjs\" --check"
+          }
+        ]
+      }
+    ]
   }
 }

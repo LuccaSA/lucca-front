@@ -84,6 +84,14 @@ Attendre la fin de l'étape 2, puis répondre en français, court, sans préambu
 
 Verdict, en un mot : **✅ Prête** (aucun ❌, aucun 🔴), **⚠️ À vérifier** (des ⚠️ ou 🟡 seulement), **❌ À corriger** (au moins un ❌ ou 🔴).
 
+Enregistrer le verdict dès le rapport rendu, avec `ready`, `check` ou `fix` :
+
+```bash
+node .claude/skills/recette-pr-fix/scripts/gate.mjs --mark <ready|check|fix>
+```
+
+Un hook (`.claude/settings.json`) refuse `gh pr create` sur une branche de fix tant qu'aucun verdict n'est enregistré pour elle, quand il est ❌, ou quand des commits ont touché `packages/` depuis. Si l'utilisateur renonce explicitement à la recette (hotfix urgent, CI cassée…), enregistrer `--mark skip --reason "<pourquoi>"`, jamais de soi-même.
+
 Si le verdict est ❌, ne pas ouvrir la PR : proposer les corrections et attendre l'accord de l'utilisateur. Sinon, la PR peut être ouverte (template `bugfix.md`), en traduisant « Comment tester » en anglais dans sa section `### How to test` (second bloc). Dans la checklist « Recette », ne cocher qu'une case, et seulement si elle est prouvée : « A test fails without the fix, or a before/after visual proof is posted » — `regression-check` en ✅, ou une fois publié le commentaire « Visual proof » d'un cas corrigé en ✅ (étape 5). Les autres cases (cause identifiée, bug non reproductible sur la preview, absence de régression et UI diff) sont des constats de l'auteur : les lui laisser.
 
 ## 5. Preuve du fix (après ouverture de la PR)
