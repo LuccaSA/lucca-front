@@ -3,9 +3,9 @@ import { Tree } from '@angular-devkit/schematics';
 // @ts-ignore
 import type { TmplAstBoundAttribute, TmplAstElement, TmplAstTextAttribute } from '@angular/compiler';
 import { createSourceFile, ScriptTarget } from 'typescript';
-import { applyUpdates, extractNgTemplatesIncludingHtml, FileUpdate, HtmlAst, isInterestingNode, TemplateNode, updateContent } from '../lib';
+import { applyUpdates, currentSchematicContext, extractNgTemplatesIncludingHtml, FileUpdate, HtmlAst, isInterestingNode, TemplateNode, updateContent } from '../lib';
 
-export type TextSizeConfidence = 'high' | 'low' | 'not converted';
+export type TextSizeConfidence = 'high' | 'not converted';
 
 export interface TextSizeReportEntry {
 	file: string;
@@ -120,8 +120,23 @@ function migrateTemplate(template: string, context: TemplateContext): string {
 			}
 		});
 
-		// Anything else (an input of a custom component, a computed class, a `@defer` placeholder…) is only listed.
-		reportOccurrences(context.file, template, context.entries, 'unsupported place in the template', [], handled, context.offset, context.fileContent);
+		// What the visit did not reach is only listed, with the most telling reason first.
+		const comments = [...template.matchAll(/<!--[\s\S]*?(-->|$)/g)].map((match): [number, number] => [match.index, match.index + match[0].length]);
+		comments.forEach(([start, end]) => {
+			reportOccurrences(context.file, template.slice(0, end), context.entries, 'commented-out code', [[0, start]], handled, context.offset, context.fileContent);
+		});
+		const hasParseErrors = (currentSchematicContext.angularCompiler.parseTemplate(template, 'migration.html', { preserveWhitespaces: true, enableBlockSyntax: true }).errors?.length ?? 0) > 0;
+		reportOccurrences(
+			context.file,
+			template,
+			context.entries,
+			// Elements after an HTML error (unclosed tag…) may not be reached: the template has to be fixed first.
+			hasParseErrors ? 'template with HTML errors' : 'outside the class of an element (component input, @defer sub-block…)',
+			comments,
+			handled,
+			context.offset,
+			context.fileContent,
+		);
 	});
 }
 
@@ -200,7 +215,7 @@ function judge(element: TmplAstElement, ancestors: TmplAstElement[], classes: st
 		if (element.name === 'a' || classes.includes('link')) {
 			return { confidence: 'not converted', reason: 'link colour (headings set their own colour)' };
 		}
-		return hasWeightUtility || boldElements.includes(element.name) || boldAncestor ? { confidence: 'high', reason: '' } : { confidence: 'low', reason: 'becomes bold' };
+		return hasWeightUtility || boldElements.includes(element.name) || boldAncestor ? { confidence: 'high', reason: '' } : { confidence: 'not converted', reason: 'regular text (headings are bold)' };
 	}
 
 	if (hasWeightUtility) {
