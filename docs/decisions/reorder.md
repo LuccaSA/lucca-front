@@ -40,3 +40,20 @@ Status: accepted · PR #5497
 **Rejected options** — Waiting for the list to change to announce an asynchronous move: the list would have to be watched for an unknown time, with a point at which to give up.
 
 **Revisit if** — Apps move their items after an API call and need the announcement.
+
+## 2026-11-19 — Keyboard shortcuts only from the handle and its menu
+
+Status: accepted · PR #PR_NUMBER
+
+**Context** — Moving an item with the keyboard requires knowing which item to move. A handle belongs to a single item and declares its shortcuts with `aria-keyshortcuts`.
+
+**Decision** — Shortcuts are only handled when the focus is on a handle or in its open menu. Elsewhere in the page, Alt + arrows keep their native behavior.
+
+**Consequences** — A keyboard user on the content of an item, such as its link, goes to its handle to move it.
+
+**Rejected options** — None of the other ways to find the item fits:
+
+- The item containing the focus: its content can use the same keys (Option + arrows move the caret by word or paragraph on Mac, Alt + ← goes back in the browser history), and nothing declares the shortcuts on that content.
+- The item under the pointer: it changes as soon as the item moves or the page scrolls, it is neither visible nor announced, and it does not exist on touch screens.
+
+**Revisit if** — A product needs to move items from another focusable element, such as the link of a card: a directive that the consumer sets on that element could declare the shortcuts and forward them to the handle.
