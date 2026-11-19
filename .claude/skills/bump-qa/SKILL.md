@@ -22,7 +22,7 @@ Le travail se fait en trois temps, séparés par l'attente de la CI et de la QA.
 - `gh` authentifié, avec les droits de push sur les cinq dépôts.
 - `git` configuré pour signer les commits (LuccaSA impose les commits signés).
 - npm : le lockfile de chaque projet est recalculé avec `npm install --package-lock-only`. Les paquets déjà verrouillés ne sont pas retéléchargés, mais si npm doit relire un paquet privé `@lucca/*`, un `E404` veut dire que le token npm de `~/.npmrc` n'y donne pas accès.
-- Pour le rapport : `lucca dd api` (devtools ≥ 5.35.0) et WARP.
+- Pour le rapport : `lucca dd api` (devtools ≥ 5.35.0) et WARP. Les devtools s'installent dans `~/.dotnet/tools`, que le shell de l'agent n'a pas toujours dans son `PATH` : si le rapport répond `cannot run lucca` alors que `lucca --version` marche dans un terminal, préfixer la commande par `PATH="$HOME/.dotnet/tools:$PATH"`.
 
 ## 1. Ouvrir les PR (`open`)
 
