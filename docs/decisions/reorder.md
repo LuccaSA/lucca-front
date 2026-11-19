@@ -43,7 +43,7 @@ Status: accepted · PR #5497
 
 ## 2026-11-19 — Keyboard shortcuts only from the handle and its menu
 
-Status: accepted · PR #PR_NUMBER
+Status: accepted · PR #5753
 
 **Context** — Moving an item with the keyboard requires knowing which item to move. A handle belongs to a single item and declares its shortcuts with `aria-keyshortcuts`.
 
