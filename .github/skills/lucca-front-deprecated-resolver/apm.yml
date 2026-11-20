@@ -1,0 +1,4 @@
+name: lucca-front-deprecated-resolver
+version: 1.0.0
+description: Finds the deprecated Lucca Front APIs used in a project and migrates them
+author: Prisme

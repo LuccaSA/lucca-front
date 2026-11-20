@@ -27,8 +27,11 @@ Install them when you need them, and remove them once the migration is done.
 | [`lf-select-migration`](lf-select-migration/SKILL.md) | Moves your app off the deprecated selects (`lu-select`, `lu-api-select`, `lu-user-select`…) to `lu-simple-select` / `lu-multi-select`, without changing what the back end receives. |
 | [`textfield`](deprecated-components/textfield/SKILL.md) | Migrates the deprecated textfield to the modern Angular textfield, with an anti-regression strategy. Path: `.github/skills/deprecated-components/textfield`. |
 
+Each skill folder has an `apm.yml`, so `apm deps list` shows its version and description.
+
 ## Not for consumer projects
 
+- The repository root (`LuccaSA/lucca-front` without a path) — the internal AI setup of this repo: SCSS rules and contributor skills. Install only `.github/skills/<name>` paths.
 - `_lucca-front/` — generated documentation, shipped in the npm package. Never install it with APM. See [scripts/generate-skills](../../scripts/generate-skills/README.md).
 
 ## Questions or ideas

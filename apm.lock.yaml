@@ -306,7 +306,7 @@ deployments:
   owners:
   - .
   active_owner: .
-  content_hash: sha256:0de4e77c57683b7d93631028f3c8fd543ad4b6e9fc4f4d0f0b8e3429d2f1c251
+  content_hash: sha256:e8bba88c7078d78cc394f0ac68fd67341cc338588f220205eb5eacda043ddc28
 - kind: project-relative
   target: claude
   value: .claude/skills/release/scripts/new-inputs.sh
@@ -684,7 +684,7 @@ deployments:
   owners:
   - .
   active_owner: .
-  content_hash: sha256:0de4e77c57683b7d93631028f3c8fd543ad4b6e9fc4f4d0f0b8e3429d2f1c251
+  content_hash: sha256:e8bba88c7078d78cc394f0ac68fd67341cc338588f220205eb5eacda043ddc28
 - kind: project-relative
   target: copilot
   value: .agents/skills/release/scripts/new-inputs.sh
@@ -884,7 +884,7 @@ local_deployed_file_hashes:
   .agents/skills/recette-pr-fix/scripts/lib/storybook.mjs: sha256:f219550af5f5c0888b50865b79f032dfdb5bfc4c29342855d3a0d6ed6ad6217c
   .agents/skills/recette-pr-fix/scripts/prove.mjs: sha256:90b2bcbdfb09d9b6bf3d3a2f52f7afd1d3505cf38a81db166ce8d2c87b50a0b3
   .agents/skills/recette-pr-fix/scripts/regression-check.mjs: sha256:c46ade835b6e405b63eb353f02a3c80507e085a0234ac98a97830d153a908719
-  .agents/skills/release/SKILL.md: sha256:0de4e77c57683b7d93631028f3c8fd543ad4b6e9fc4f4d0f0b8e3429d2f1c251
+  .agents/skills/release/SKILL.md: sha256:e8bba88c7078d78cc394f0ac68fd67341cc338588f220205eb5eacda043ddc28
   .agents/skills/release/scripts/new-inputs.sh: sha256:983cc2e1c193267d15f70d49258eaa6ba2e809ae1c4cee8bf673abf59573f893
   .agents/skills/update-components-changelog/SKILL.md: sha256:971c3dcdfa5f190f25cf17e105e099a76c13335b955823f2008613f98d245592
   .agents/skills/update-deprecated-doc/SKILL.md: sha256:058ac806f85d1a20f09fd542c5c038c42de5258993f90d540e672526763461a0
@@ -914,7 +914,7 @@ local_deployed_file_hashes:
   .claude/skills/recette-pr-fix/scripts/lib/storybook.mjs: sha256:f219550af5f5c0888b50865b79f032dfdb5bfc4c29342855d3a0d6ed6ad6217c
   .claude/skills/recette-pr-fix/scripts/prove.mjs: sha256:90b2bcbdfb09d9b6bf3d3a2f52f7afd1d3505cf38a81db166ce8d2c87b50a0b3
   .claude/skills/recette-pr-fix/scripts/regression-check.mjs: sha256:c46ade835b6e405b63eb353f02a3c80507e085a0234ac98a97830d153a908719
-  .claude/skills/release/SKILL.md: sha256:0de4e77c57683b7d93631028f3c8fd543ad4b6e9fc4f4d0f0b8e3429d2f1c251
+  .claude/skills/release/SKILL.md: sha256:e8bba88c7078d78cc394f0ac68fd67341cc338588f220205eb5eacda043ddc28
   .claude/skills/release/scripts/new-inputs.sh: sha256:983cc2e1c193267d15f70d49258eaa6ba2e809ae1c4cee8bf673abf59573f893
   .claude/skills/update-components-changelog/SKILL.md: sha256:971c3dcdfa5f190f25cf17e105e099a76c13335b955823f2008613f98d245592
   .claude/skills/update-deprecated-doc/SKILL.md: sha256:058ac806f85d1a20f09fd542c5c038c42de5258993f90d540e672526763461a0
