@@ -23,6 +23,7 @@
 			"@lucca-front/ng/*": ["./packages/ng/*/public-api.ts"],
 			"@lucca/prisme/*": ["./packages/prisme/*/public-api.ts"],
 			"@/stories/*": ["./stories/documentation/*"],
+			"@/scenarios/*": ["./stories/scenarios/*"],
 			"@/helpers/*": ["./stories/helpers/*"]
 		}
 	},

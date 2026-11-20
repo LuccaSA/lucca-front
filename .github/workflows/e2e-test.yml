@@ -42,4 +42,5 @@ jobs:
             "npx wait-on tcp:127.0.0.1:6006 \
               && npm run test-storybook -- --shard=1/3 \
               && npm run test-storybook -- --shard=2/3 \
-              && npm run test-storybook -- --shard=3/3"
+              && npm run test-storybook -- --shard=3/3 \
+              && npm run test-scenarios"
