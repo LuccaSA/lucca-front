@@ -27,6 +27,27 @@ export async function waitForAngular() {
 	await sleep(10);
 }
 
+/**
+ * Resizes the story frame below the XS breakpoint, where a select opens as a sheet, through Vitest's browser mode.
+ * Returns `null` anywhere else (the Storybook UI, most notably), where the frame cannot be resized.
+ */
+export async function resizeBelowExtraSmallBreakpoint(): Promise<(() => Promise<void>) | null> {
+	let page: typeof import('vitest/browser').page;
+	try {
+		({ page } = await import('vitest/browser'));
+	} catch {
+		return null;
+	}
+	const { innerWidth, innerHeight } = window;
+	await page.viewport(390, 844);
+	return () => page.viewport(innerWidth, innerHeight);
+}
+
+// Vitest does not load the global styles that turn these classes into levels: only the classes are checked.
+export function isStacked(dialog: HTMLElement): boolean {
+	return dialog.closest('.cdk-global-overlay-wrapper')?.classList.contains('mod-stacked') ?? false;
+}
+
 export async function expectNgModelDisplay(canvas: HTMLElement, expectedValue: string) {
 	const canvasElement = within(canvas);
 	const modelDisplay = canvasElement.getByTestId('pr-ng-model');

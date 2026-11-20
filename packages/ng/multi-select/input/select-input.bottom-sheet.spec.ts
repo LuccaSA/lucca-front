@@ -1,10 +1,11 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { ApplicationRef, ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { SELECT_RESPONSIVE_DIALOG } from '@lucca-front/ng/core-select';
+import { DialogComponent, LuDialogService } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { vi } from 'vitest';
@@ -125,6 +126,24 @@ class PaginatedHostComponent {
 		this.nextPageCount++;
 		this.options = this.allOptions.slice(0, this.options.length + 10);
 	}
+}
+
+@Component({
+	selector: 'lu-multi-select-stacked-dialog-host',
+	imports: [FormsModule, LuMultiSelectInputComponent, DialogComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-dialog stacked>
+			<lu-multi-select [ngModel]="selected" [options]="options" />
+		</lu-dialog>
+	`,
+})
+class StackedDialogHostComponent {
+	readonly select = viewChild.required(LuMultiSelectInputComponent<Entity>);
+
+	selected: Entity[] = [];
+
+	options: Entity[] = options;
 }
 
 describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
@@ -516,6 +535,21 @@ describe(`${LuMultiSelectInputComponent.name} bottom sheet`, () => {
 
 			// Assert: the popover caps its content at 20rem, which a page of options always overflows.
 			expect(fixture.componentInstance.nextPageCount).toBe(0);
+		});
+	});
+	describe('stacked dialog underneath', () => {
+		it('should join the stack when the dialog underneath is stacked', () => {
+			// Arrange
+			breakpointObserver.belowExtraSmallBreakpoint.next(true);
+			TestBed.configureTestingModule({ providers: [LuDialogService] });
+			const dialogRef = TestBed.inject(LuDialogService).open({ content: StackedDialogHostComponent });
+			TestBed.inject(ApplicationRef).tick();
+
+			// Act
+			dialogRef.instance!.select().openPanel();
+
+			// Assert
+			expect(document.querySelector('.dialog.mod-select')?.closest('.cdk-global-overlay-wrapper')).toHaveClass('mod-stacked');
 		});
 	});
 });
